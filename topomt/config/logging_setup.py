@@ -15,16 +15,16 @@ def setup_logging(
     stream: IO | None = None,
     capture_warnings: bool = True,
     simplify_warning_format: bool = True,
-    logger_name: str = "pocketmt",
+    logger_name: str = "topomt",
 ) -> logging.Logger:
     """
-    Configure ElasNetMT logging and (optionally) capture Python warnings.
+    Configure TopoMT logging and (optionally) capture Python warnings.
 
     Effects
     -------
-    - Creates/gets logger `logger_name` (default: "pocketmt")
+    - Creates/gets logger `logger_name` (default: "topomt")
     - Attaches a StreamHandler if not present, with formatter:
-          "POCKETMT %(levelname)s | %(message)s"
+          "TOPOMT %(levelname)s | %(message)s"
     - If capture_warnings is True:
         - logging.captureWarnings(True)
         - The "py.warnings" logger reuses the same handler/formatter
@@ -50,9 +50,9 @@ def setup_logging(
     if stream_handler is None:
         stream_handler = logging.StreamHandler(stream)  # None -> sys.stderr
         # EXACT desired format for warnings:
-        # "POCKETMT WARNING | <Category>: <message>"
+        # "TOPOMT WARNING | <Category>: <message>"
         # (For normal logs, <Category> won't appear, but the prefix still matches.)
-        formatter = logging.Formatter("POCKETMT %(levelname)s | %(message)s")
+        formatter = logging.Formatter("TOPOMT %(levelname)s | %(message)s")
         stream_handler.setFormatter(formatter)
         logger.addHandler(stream_handler)
 

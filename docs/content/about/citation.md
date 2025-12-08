@@ -1,8 +1,8 @@
 # Citation
 
-Citing the [Zenodo DOI of PocketMT](https://doi.org/10.5281/zenodo.8092688) in
-addition to the scientific paper is a way to ensure that others can reproduce
-your results, as they will know exactly which version of the software you used.
+Citing the Zenodo DOI of TopoMT (coming soon) in addition to the scientific
+paper is a way to ensure that others can reproduce your results, as they will
+know exactly which version of the software you used.
 
 <br/>
 
@@ -15,11 +15,11 @@ Coming soon...
 ```
 ```{tab} Software
 
-Diego Prada-Gracia & Liliana M. Moreno-Vargas. (2023). uibcdf/PocketMT: 0.8.1 (0.8.1). Zenodo. https://doi.org/10.5281/zenodo.8092688
+Diego Prada-Gracia & Liliana M. Moreno-Vargas. (2023). uibcdf/TopoMT.
+Zenodo entry in preparation.
 
 [BibTeX](../../_bibtex/software.bib)
 
 ```
 
 ````
-
