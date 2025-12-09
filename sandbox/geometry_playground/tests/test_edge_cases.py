@@ -30,7 +30,12 @@ def test_asymmetric_triangle():
     p3 = np.array([2, 1, 0])
     r = 0.4
         
+    # Analytic solve
     passable, r_gate = check_face_permeability(p1, p2, p3, r, r, r, 0.01) # Test with a small probe
+    print(f"Analytic R_gate: {r_gate:.4f} (Expected ~0.718)")
+    
+    # Verify with MC around the threshold
+
         
     mc_pass = check_face_permeability_mc(p1, p2, p3, r, r, r, r_gate - 0.01, n_samples=1000000, epsilon=1e-9)
     mc_fail = check_face_permeability_mc(p1, p2, p3, r, r, r, r_gate + 0.01, n_samples=1000000, epsilon=1e-9)

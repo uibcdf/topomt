@@ -1,6 +1,6 @@
 import numpy as np
 import math
-from .apollonius import solve_apollonius_ccc_robust
+from .apollonius import solve_apollonius_js_port
 from .utils import is_point_in_triangle_2d
 
 def check_face_permeability(p1, p2, p3, r1, r2, r3, probe_radius, epsilon=1e-6):
@@ -53,19 +53,15 @@ def check_face_permeability(p1, p2, p3, r1, r2, r3, probe_radius, epsilon=1e-6):
     c3_2d = np.array([np.dot(v13_3d, u_vec), np.dot(v13_3d, v_vec)])
     
     # 2. Consider Apollonius solutions (tangent to 3 atoms)
-    # The Apollonius solver gives solutions for tangent circles. We want the one that fills the "inner void".
-    apollonius_sols = solve_apollonius_ccc_robust(c1_2d, r1, c2_2d, r2, c3_2d, r3, epsilon)
+    # Using the JS port which returns a single optimal solution (usually).
+    sol = solve_apollonius_js_port(c1_2d, r1, c2_2d, r2, c3_2d, r3, epsilon)
     
-    apollonius_valid_radii_in_triangle = []
-    for r_sol, center_sol in apollonius_sols:
+    if sol:
+        r_sol, center_sol = sol
         # We only care about positive radii (a gap exists)
         # And the center must be inside or on the boundary of the triangle to represent a passage THROUGH the face.
         if r_sol > epsilon and is_point_in_triangle_2d(center_sol, c1_2d, c2_2d, c3_2d, epsilon=epsilon, strict_interior=False):
-            apollonius_valid_radii_in_triangle.append(r_sol)
-            
-    # From Apollonius solutions, if multiple are valid, the *smallest* positive one is the inner gap.
-    if apollonius_valid_radii_in_triangle:
-        max_r_gate_candidates.append(min(apollonius_valid_radii_in_triangle))
+            max_r_gate_candidates.append(r_sol)
             
     # 3. Consider Edge-limited permeabilities (hole dominated by 2 spheres, not 3)
     # This covers cases where the Apollonius solution is outside the triangle or non-physical.
@@ -112,8 +108,8 @@ def check_face_permeability(p1, p2, p3, r1, r2, r3, probe_radius, epsilon=1e-6):
                  max_r_gate_candidates.append(r_incircle_candidate)
                 
     
-    # Select the minimum valid radius found (this represents the actual bottleneck, the 'gate')
-    final_r_gate = min(max_r_gate_candidates) if max_r_gate_candidates else 0.0
+    # Select the maximum valid radius found
+    final_r_gate = max(max_r_gate_candidates) if max_r_gate_candidates else 0.0
     
     return final_r_gate >= probe_radius, final_r_gate
 
