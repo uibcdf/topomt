@@ -1,12 +1,18 @@
+"""
+Geometry and analysis utilities for pocket characterization.
+"""
+
+from __future__ import annotations
+
 import math
-from typing import Iterable, Sequence
+from typing import Iterable, Sequence, Dict, List, Union, Tuple, Set
 
 import numpy as np
+import molsysmt as msm
 from scipy.spatial import ConvexHull
 from skimage.measure import marching_cubes
-from scipy.spatial.distance import cdist
+from scipy.spatial.distance import cdist, distance_matrix
 from scipy.cluster.hierarchy import fcluster, linkage
-from scipy.spatial import distance_matrix
 import py3Dmol
 
 
@@ -484,14 +490,80 @@ def thickness_profile(
 # ---------------------------------------------------------------------------
 
 
-def analytic_tetra_volume(tetra_positions: np.ndarray, indices: Sequence[int]) -> float:
-    """Sum of tetrahedron volumes for a group of indices."""
-    if len(indices) == 0:
-        return 0.0
+def analytic_tetra_volume(tetra_positions: np.ndarray, indices: Sequence[int] | Sequence[Sequence[int]]) -> float:
+    """
+    Compute the exact volume of a set of tetrahedra.
+
+    This function calculates the volume of the Delaunay tetrahedra that make up
+    the topological void of the pocket. This is consistent with CASTp's analytical
+    method for determining the 'Dual Complex Volume'.
+
+    Parameters
+    ----------
+    tetra_positions : ndarray
+        Coordinates of the vertices.
+        Can be (N_atoms, 3) if indices are lists of 4 ints.
+        Can be (N_tet, 4, 3) if indices are just linear indices to select from N_tet.
+    indices : Sequence[int] or Sequence[Sequence[int]]
+        Indices defining the tetrahedra to sum.
+        
+    Returns
+    -------
+    float
+        The total volume of the selected tetrahedra.
+    """
+    # Case 1: indices are a list of tetrahedra definitions (list of 4 ints) pointing to tetra_positions (N_atoms, 3)
+    # Case 2: tetra_positions are already (N_tet, 4, 3) and indices are just selection indices (M,)
+    
     tets = tetra_positions[np.asarray(indices, dtype=int)]
+    
+    if tets.ndim != 3 or tets.shape[1] != 4 or tets.shape[2] != 3:
+         # Attempt to reshape or validate
+         # If user passed (N_atoms, 3) and indices (M, 4), numpy fancy indexing produces (M, 4, 3) -> CORRECT
+         # If user passed (N_tet, 4, 3) and indices (M,), numpy fancy indexing produces (M, 4, 3) -> CORRECT
+         # So we just check if result is (M, 4, 3)
+         if tets.ndim != 3 or tets.shape[-2:] != (4, 3):
+             raise ValueError(f"Invalid shape for tetrahedra: {tets.shape}. Expected (N, 4, 3).")
+
     a, b, c, d = tets[:, 0], tets[:, 1], tets[:, 2], tets[:, 3]
-    vol = np.abs(np.einsum('ij,ij->i', a, np.cross(b - d, c - d))) / 6.0
+    # Scalar triple product: dot(a-d, cross(b-d, c-d))
+    # Volume = 1/6 * | det |
+    vol = np.abs(np.einsum('ij,ij->i', a - d, np.cross(b - d, c - d))) / 6.0
     return float(vol.sum())
+
+
+def mouth_area_from_faces(
+    faces: Sequence[Tuple[int, int, int]],
+    atom_coords: np.ndarray,
+) -> float:
+    """
+    Compute the total area of specific triangular faces.
+    
+    This is used to calculate the exact area of the 'Mouths' of pockets,
+    where a mouth is defined as the set of Delaunay triangles connecting 
+    the pocket tetrahedra to the outside (bulk solvent) or forbidden region.
+
+    Parameters
+    ----------
+    faces : Sequence[Tuple[int, int, int]]
+        List of triangles, where each triangle is a tuple of 3 atom indices.
+    atom_coords : ndarray (N, 3)
+        Coordinates of the atoms.
+
+    Returns
+    -------
+    float
+        Total area of the faces.
+    """
+    total_area = 0.0
+    if not faces:
+        return 0.0
+        
+    for face in faces:
+        pts = atom_coords[list(face)] # (3, 3)
+        total_area += _triangle_area(pts)
+        
+    return float(total_area)
 
 
 def mouth_metrics_from_tetrahedra(
@@ -499,7 +571,7 @@ def mouth_metrics_from_tetrahedra(
     simplices: np.ndarray,
     atom_coords: np.ndarray,
 ) -> dict:
-    """Compute mouth area/perimeter and rim atoms from pocket boundary faces."""
+    """Compute mouth area/perimeter and rim atoms from pocket boundary faces (heuristic)."""
     face_count = {}
     for idx in pocket_indices:
         atoms = simplices[idx]
@@ -512,14 +584,15 @@ def mouth_metrics_from_tetrahedra(
         for face in faces:
             face_count[face] = face_count.get(face, 0) + 1
     boundary_faces = [face for face, count in face_count.items() if count == 1]
-    total_area = 0.0
+    
+    # Use the specific function for area
+    total_area = mouth_area_from_faces(boundary_faces, atom_coords)
+    
     total_perim = 0.0
     rim_atoms: set[int] = set()
     centroids = []
     for face in boundary_faces:
         pts = atom_coords[list(face)]
-        area = _triangle_area(pts)
-        total_area += area
         centroids.append(pts.mean(axis=0))
         edges = [(face[i], face[j]) for i, j in [(0, 1), (1, 2), (2, 0)]]
         total_perim += sum(np.linalg.norm(atom_coords[e[0]] - atom_coords[e[1]]) for e in edges)
@@ -798,3 +871,92 @@ def _element_color(element_symbol: str) -> str:
         'P': 'rgb(255,150,0)',
     }
     return palette.get(element_symbol, 'rgb(180,180,180)')
+
+
+# ---------------------------------------------------------------------------
+# Physicochemical characterization
+# ---------------------------------------------------------------------------
+
+def get_physicochemical_properties(
+    molecular_system,
+    atom_indices: List[int],
+    structure_indices: int = 0,
+    syntax: str = "MolSysMT"
+) -> Dict[str, Union[float, int]]:
+    """
+    Compute physicochemical properties for a set of atoms (usually lining a pocket).
+
+    Parameters
+    ----------
+    molecular_system : molecular system
+        The system containing the atoms.
+    atom_indices : list of int
+        Indices of the atoms to characterize.
+    structure_indices : int, optional
+        Structure index (default 0).
+    syntax : str, optional
+        Selection syntax (default 'MolSysMT').
+
+    Returns
+    -------
+    dict
+        Dictionary containing properties like:
+        - 'charge': Total net charge (sum of partial charges if available, else residue based proxy).
+        - 'hydrophobicity': Mean hydrophobicity (Kyte-Doolittle scale).
+        - 'polarity_ratio': Fraction of polar residues/atoms.
+        - 'n_residues': Number of unique residues involved.
+    """
+    if not atom_indices:
+        return {
+            'net_charge': 0.0,
+            'mean_hydrophobicity': 0.0,
+            'polarity_ratio': 0.0,
+            'n_residues': 0,
+            'n_atoms': 0
+        }
+
+    # Kyte-Doolittle Hydrophobicity Scale
+    kd_scale = {
+        'ILE': 4.5, 'VAL': 4.2, 'LEU': 3.8, 'PHE': 2.8, 'CYS': 2.5,
+        'MET': 1.9, 'ALA': 1.8, 'GLY': -0.4, 'THR': -0.7, 'SER': -0.8,
+        'TRP': -0.9, 'TYR': -1.3, 'PRO': -1.6, 'HIS': -3.2, 'GLU': -3.5,
+        'GLN': -3.5, 'ASP': -3.5, 'ASN': -3.5, 'LYS': -3.9, 'ARG': -4.5
+    }
+
+    # Charge at pH 7
+    charge_scale = {
+        'ARG': 1.0, 'LYS': 1.0, 'HIS': 0.1, 
+        'ASP': -1.0, 'GLU': -1.0
+    }
+
+    polar_residues = {'ARG', 'LYS', 'HIS', 'GLU', 'ASP', 'ASN', 'GLN', 'SER', 'THR', 'TYR'}
+    
+    res_names = msm.get(molecular_system, element='atom', selection=atom_indices, residue_name=True)
+    res_indices = msm.get(molecular_system, element='atom', selection=atom_indices, residue_index=True)
+    
+    unique_res_map = {} # index -> name
+    
+    # Get names for unique residues
+    for idx, name in zip(res_indices, res_names):
+        unique_res_map[idx] = name
+
+    hyd_sum = 0.0
+    charge_sum = 0.0
+    polar_count = 0
+    
+    for ridx, rname in unique_res_map.items():
+        rname = rname.upper()
+        hyd_sum += kd_scale.get(rname, 0.0)
+        charge_sum += charge_scale.get(rname, 0.0)
+        if rname in polar_residues:
+            polar_count += 1
+            
+    n_unique = len(unique_res_map)
+    
+    return {
+        'net_charge': float(charge_sum),
+        'mean_hydrophobicity': float(hyd_sum / n_unique) if n_unique > 0 else 0.0,
+        'polarity_ratio': float(polar_count / n_unique) if n_unique > 0 else 0.0,
+        'n_residues': n_unique,
+        'n_atoms': len(atom_indices)
+    }
