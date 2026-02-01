@@ -29,9 +29,11 @@ body:
       label: Resource Category
       description: "Select the themes that define this resource."
       options:
-        - Cavities Software and Servers
-        - Cavities Algorithms, Models and Methods
-        - Criptic Pockets
+        - label: Cavities Software & Libraries
+        - label: Cavities Servers
+        - label: Cavities Algorithms & Methods
+        - label: Cavities Research & Benchmarks
+        - label: Cryptic Pockets
     validations:
       required: true
 
@@ -40,7 +42,7 @@ body:
     attributes:
       label: Why is this relevant to our project?
       description: "Briefly explain how this helps us solve a current problem or improve a specific module."
-      placeholder: "This paper describes a better way to handle XYZ which could improve our RAG performance..."
+      placeholder: "This paper describes a better way to handle XYZ..."
     validations:
       required: true
 
