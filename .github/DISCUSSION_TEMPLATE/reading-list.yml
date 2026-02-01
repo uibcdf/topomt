@@ -1,18 +1,58 @@
+title: "[Paper/Resource]: "
 body:
   - type: markdown
     attributes:
-      value: "Essential papers and technical resources to guide our research, development, and architectural decisions."
+      value: |
+        ## 📚 Research & Technical Reference
+        *Use this form to suggest literature that impacts our architectural decisions, AI models, or molecular toolkits.*
+  
+  - type: input
+    id: full_title
+    attributes:
+      label: Full Resource Title
+      description: "The original name of the paper, blog post, or documentation."
+      placeholder: "e.g., Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
+    validations:
+      required: true
+
   - type: input
     id: link
     attributes:
       label: Link or DOI
-      placeholder: "e.g., https://doi.org/10.1038/..."
+      placeholder: "https://doi.org/10.1038/..."
     validations:
       required: true
+
+  - type: dropdown
+    id: impact_area
+    attributes:
+      label: Primary Impact Area
+      description: "Where does this resource provide the most value?"
+      options:
+        - AI & LLM Training (Fine-tuning/RAG)
+        - Molecular Systems & Formats (Interconversion)
+        - Molecular Dynamics & Simulation
+        - Software Architecture & Design Patterns
+        - Tooling & Workflow (Neovim, CLI, etc.)
+    validations:
+      required: true
+
   - type: textarea
     id: relevance
     attributes:
-      label: Why is this relevant?
-      placeholder: "Explain how this affects our research, development, or architectural decisions."
+      label: Why is this relevant to our project?
+      description: "Briefly explain how this helps us solve a current problem or improve a specific module."
+      placeholder: "This paper describes a better way to handle XYZ which could improve our RAG performance..."
+    validations:
+      required: true
+
+  - type: dropdown
+    id: reading_priority
+    attributes:
+      label: Reading Priority
+      options:
+        - "🔴 Critical: Read ASAP for current sprint"
+        - "🟡 Important: Relevant for upcoming features"
+        - "🔵 Informational: Background knowledge / State of the art"
     validations:
       required: true
