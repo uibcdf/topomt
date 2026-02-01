@@ -4,8 +4,8 @@ body:
     attributes:
       value: |
         ## 📚 Research & Technical Reference
-        *Use this form to suggest literature that impacts our architectural decisions, AI models, or molecular toolkits.*
-  
+        *Use this form to suggest literature or resources that impact the research conducted with this library or its core development.*
+
   - type: input
     id: full_title
     attributes:
@@ -23,17 +23,15 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    id: impact_area
+  - type: checkboxes
+    id: resource_category
     attributes:
-      label: Primary Impact Area
-      description: "Where does this resource provide the most value?"
+      label: Resource Category
+      description: "Select the themes that define this resource."
       options:
-        - AI & LLM Training (Fine-tuning/RAG)
-        - Molecular Systems & Formats (Interconversion)
-        - Molecular Dynamics & Simulation
-        - Software Architecture & Design Patterns
-        - Tooling & Workflow (Neovim, CLI, etc.)
+        - Cavities Software and Servers
+        - Cavities Algorithms, Models and Methods
+        - Criptic Pockets
     validations:
       required: true
 
