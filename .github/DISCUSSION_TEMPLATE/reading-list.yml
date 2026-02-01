@@ -1,13 +1,7 @@
-name: Reading List
-description: Essential papers and technical resources to guide our research, development, and architectural decisions.
-title: "[Resource]: "
-category: Reading List
 body:
   - type: markdown
     attributes:
-      value: |
-        ### 📖 New Resource Proposal
-        Please share the details of the paper or resource that could impact our project's direction.
+      value: "Essential papers and technical resources to guide our research, development, and architectural decisions."
   - type: input
     id: link
     attributes:
