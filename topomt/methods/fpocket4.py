@@ -3,6 +3,7 @@ import numpy as np
 import molsysmt as msm
 from scipy.spatial.distance import pdist, squareform
 from scipy.cluster.hierarchy import linkage, fcluster
+from scipy.spatial import ConvexHull
 
 from topomt import Topography
 from topomt.alpha_spheres import AlphaSpheres
@@ -42,6 +43,7 @@ def fpocket4(
     # Filtros finales
     min_pock_nb_asph: int = 15,      # -i 15
     apolar_min_ratio: float | None = None,  # FP4 por defecto desactiva filtro (0.0 en help => keep all)
+    min_density: float | None = 0.7,  # ~M_MIN_AS_DENSITY
     # Varios
     pbc: bool = False,
     syntax: str = 'MolSysMT',
@@ -121,33 +123,115 @@ def fpocket4(
     labels = fcluster(Z, t=cut_val, criterion='distance')
 
     # Agrupar índices por etiqueta
-    pockets = []
+    pockets_dict: dict[int, list[int]] = {}
     for lab in np.unique(labels):
         comp = np.where(labels == lab)[0].tolist()
-        pockets.append(comp)
+        # aplicar fusión estilo apply_clustering: si el mismo label aparece, se acumula
+        pockets_dict.setdefault(int(lab), []).extend(comp)
 
-    # --- Filtro tamaño mínimo ---
-    pockets = [p for p in pockets if len(p) >= min_pock_nb_asph]
+    # fusionar duplicados y normalizar
+    pockets = []
+    for comp in pockets_dict.values():
+        merged = sorted(set(comp))
+        pockets.append(merged)
 
-    # --- Filtro apolar opcional (desactivado por defecto) ---
-    if apolar_min_ratio is not None:
-        ap_mask = getattr(alpha, 'is_apolar', None)
-        types = getattr(alpha, 'types', None) if ap_mask is None else None
-        out = []
-        if ap_mask is None and types is None:
-            warnings.warn("AlphaSpheres no expone tipado apolar; se omite filtro apolar.")
-            return pockets
-        for comp in pockets:
-            if len(comp) == 0:
-                continue
-            if ap_mask is not None:
-                nap = int(np.sum(ap_mask[np.array(comp, int)]))
-            else:
-                # Ajusta si tu codificación de 'types' marca apolar de otra forma
-                nap = int(np.sum((types[np.array(comp, int)] == 1)))
-            if (nap / len(comp)) >= apolar_min_ratio:
-                out.append(comp)
-        pockets = out
+    # --- Calcular descriptores y aplicar filtros (tamaño, densidad, apolaridad) ---
+    descriptors = _compute_descriptors_for_pockets(alpha, pockets, apolar_min_ratio)
+    pockets, descriptors = _filter_pockets(
+        pockets,
+        descriptors,
+        min_pock_nb_asph=min_pock_nb_asph,
+        min_density=min_density,
+        apolar_min_ratio=apolar_min_ratio,
+    )
+
+    # --- Reindexar/ordenar por score (aproxima el reIndex + sort de FPocket) ---
+    pockets_with_scores = list(zip(pockets, descriptors))
+    pockets_with_scores.sort(key=lambda x: x[1]['score'], reverse=True)
+    pockets = [p for p, _ in pockets_with_scores]
 
     return pockets
 
+
+def _compute_descriptors_for_pockets(alpha: AlphaSpheres, pockets: list[list[int]], apolar_min_ratio: float | None):
+    """Compute simple geometric and apolar descriptors for each pocket."""
+    descriptors: list[dict[str, float]] = []
+    ap_mask = getattr(alpha, 'is_apolar', None)
+    types = getattr(alpha, 'types', None) if ap_mask is None else None
+
+    for comp in pockets:
+        centers = puw.get_value(alpha.centers[np.array(comp, int)])
+        radii_vals = puw.get_value(alpha.radii[np.array(comp, int)])
+        n_as = len(comp)
+
+        volume = None
+        surface = None
+        density = 0.0
+        if n_as >= 4:
+            try:
+                hull = ConvexHull(centers)
+                volume = float(hull.volume)
+                surface = float(hull.area)
+                if volume > 0:
+                    density = n_as / volume
+            except Exception:
+                volume = None
+                surface = None
+                density = 0.0
+
+        mean_radius = float(np.mean(radii_vals)) if n_as > 0 else 0.0
+        max_radius = float(np.max(radii_vals)) if n_as > 0 else 0.0
+
+        apolar_ratio = None
+        if apolar_min_ratio is not None:
+            if ap_mask is not None:
+                apolar_ratio = float(np.sum(ap_mask[np.array(comp, int)])) / n_as
+            elif types is not None:
+                apolar_ratio = float(np.sum(types[np.array(comp, int)] == 1)) / n_as
+
+        # Proxy de score: tamaño ponderado por densidad (similar a ordenar por tamaño y densidad)
+        score = n_as * (density if density > 0 else 1.0)
+
+        descriptors.append(
+            {
+                'n_alpha_spheres': n_as,
+                'mean_radius': mean_radius,
+                'max_radius': max_radius,
+                'volume': volume,
+                'surface': surface,
+                'density': density,
+                'apolar_ratio': apolar_ratio,
+                'score': score,
+            }
+        )
+
+    return descriptors
+
+
+def _filter_pockets(
+    pockets: list[list[int]],
+    descriptors: list[dict[str, float]],
+    *,
+    min_pock_nb_asph: int,
+    min_density: float | None,
+    apolar_min_ratio: float | None,
+):
+    """Apply size, density, and apolar filters akin to FPocket refine step."""
+    filtered_pockets: list[list[int]] = []
+    filtered_desc: list[dict[str, float]] = []
+
+    for comp, desc in zip(pockets, descriptors):
+        if desc['n_alpha_spheres'] < min_pock_nb_asph:
+            continue
+        if min_density is not None and desc['density'] < min_density:
+            continue
+        if apolar_min_ratio is not None:
+            if desc['apolar_ratio'] is None:
+                warnings.warn('AlphaSpheres no expone tipado apolar; se omite filtro apolar.')
+            else:
+                if desc['apolar_ratio'] < apolar_min_ratio:
+                    continue
+        filtered_pockets.append(comp)
+        filtered_desc.append(desc)
+
+    return filtered_pockets, filtered_desc
