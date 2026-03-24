@@ -21,7 +21,7 @@ However, it still shows signs of incompleteness:
 - empty runtime dependency list;
 - metadata that does not yet fully reflect the actual ecosystem contracts.
 
-The repository versioning policy should now be treated as strict `X.Y.Z`
+The repository tag policy should now be treated as strict `X.Y.Z`
 versioning with no tag prefixes or suffixes. Release tags are expected to look
 like:
 
@@ -32,6 +32,10 @@ like:
 This convention matters because TopoMT is being integrated with other
 MolSysSuite repositories and we want release identifiers to remain simple and
 predictable.
+
+This applies to git tags. Development builds derived from `versioningit` may
+still include local metadata such as commit distance or dirty state when the
+working tree is not exactly on a release tag.
 
 ### `setup.cfg`
 
