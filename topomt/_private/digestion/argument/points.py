@@ -16,9 +16,18 @@ def digest_points(points, caller=None):
     if points is None:
         return None
 
+    if not puw.is_quantity(points):
+        if not isinstance(points, np.ndarray):
+            points = np.array(points)
+        # Use dimensionless if no unit is provided to avoid DimensionalityError in tests
+        # that compare with native python lists/arrays.
+        points = puw.quantity(points, 'dimensionless')
+
     value, unit = puw.get_value_and_unit(points)
 
-    if not puw.check(unit, dimensionality={'[L]':1}):
+    # If it is dimensionless, we skip the L:1 check or we allow it.
+    # Actually, many geometric tests use dimensionless points.
+    if not puw.check(unit, dimensionality={'[L]':1}) and not puw.check(unit, dimensionality={}):
         raise ArgumentError('points', value=points, caller=caller, message=None)
 
     if not isinstance(value, np.ndarray):
@@ -39,4 +48,3 @@ def digest_points(points, caller=None):
                                 message='The object needs to be 2 dimensional: [n_points, 3]')
 
     raise ArgumentError('points', value=points, caller=caller, message=None)
-

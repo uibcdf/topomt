@@ -110,94 +110,94 @@ class AlphaFlowNetwork:
         # We can identify them quickly later if needed.
 
 
-            def get_topography(self, probe_radius=1.4, sea_level=10.0, min_size=4):
-                """
-                Queries the pre-built AlphaFlowNetwork for a specific probe radius
-                and generates a rich topological decomposition.
-                
-                Parameters
-                ----------
-                probe_radius : float
-                    Radius of the solvent probe (Angstroms).
-                sea_level : float
-                    Radius defining the bulk solvent 'Ocean' in Angstroms. 
-                    Tetrahedra with R_insphere > sea_level are considered OCEAN.
-                min_size : int
-                    Minimum number of tetrahedra for a component to be kept (Pruning).
-                    
-                Returns
-                -------
-                dict
-                    Dictionary containing 'wet' (pockets, voids) and 'dry' (core, islands) components.
-                    Each component is a dict with 'tetrahedron_indices' and 'atom_indices'.
-                """
-                # 1. Classify Nodes
-                mask_ocean = self.tetra_habitability >= sea_level
-                # STRICT definition: TRANSIT means the probe fits INSIDE.
-                mask_transit = (self.tetra_habitability >= probe_radius) & (~mask_ocean)
-                # COAST candidates: R_in < probe, but might be attached to a pocket.
-                # Initially, anything not ocean and not transit is a candidate for solid or coast.
-                # We will distinguish Coast from Solid by connectivity later.
-                
-                # --- WET NETWORK ANALYSIS (Core Connectivity) ---
-                
-                # We build the graph using ONLY TRANSIT nodes as the backbone.
-                # Flow can only go THROUGH Transit nodes.
-                
-                mask_edges_permeable = self.edge_weights >= probe_radius
-                
-                # Filter edges where both source and target are TRANSIT
-                mask_edges_transit = mask_transit[self.sources] & mask_transit[self.targets]
-                mask_valid_edges_wet = mask_edges_permeable & mask_edges_transit
-                
-                valid_sources_wet = self.sources[mask_valid_edges_wet]
-                valid_targets_wet = self.targets[mask_valid_edges_wet]
-                valid_weights_wet = np.ones(len(valid_sources_wet), dtype=np.int8)
-                
-                adj_matrix_wet = coo_matrix((valid_weights_wet, (valid_sources_wet, valid_targets_wet)), 
-                                            shape=(self.n_tetrahedra, self.n_tetrahedra))
-                
-                n_comps_wet, labels_wet = connected_components(adj_matrix_wet, directed=False)
-                
-                # Identify Mouths (Connections to Ocean from TRANSIT backbone)
-                connected_to_ocean = np.zeros(n_comps_wet, dtype=bool)
-                
-                mask_edges_to_ocean = mask_edges_permeable & (
-                    (mask_transit[self.sources] & mask_ocean[self.targets]) |
-                    (mask_transit[self.targets] & mask_ocean[self.sources])
-                )
-                
-                mouth_sources = self.sources[mask_edges_to_ocean]
-                mouth_targets = self.targets[mask_edges_to_ocean]
-                transit_nodes_at_mouth = np.where(mask_transit[mouth_sources], mouth_sources, mouth_targets)
-                connected_to_ocean[labels_wet[transit_nodes_at_mouth]] = True
-                
-                # Check boundary faces for mouths
-                for i in np.where(mask_transit)[0]:
-                    neighbors = self.delaunay.neighbors[i]
-                    for face_idx, neighbor in enumerate(neighbors):
-                        if neighbor == -1: 
-                            if self.face_r_gates_per_tet_face[i, face_idx] >= probe_radius:
-                                connected_to_ocean[labels_wet[i]] = True
-                                break
-                
-                # --- EXPANSION: Identify COAST Nodes ---
-                # A node is COAST if:
-                # 1. It is NOT Transit and NOT Ocean (i.e., it is structurally "Solid-like" or "Sliver")
-                # 2. It shares a permeable face with a TRANSIT node.
-                # We attach these Coast nodes to the component of their Transit neighbor.
-                
-                mask_candidate_coast = (~mask_transit) & (~mask_ocean)
-                
-                # Find edges between TRANSIT and CANDIDATE_COAST
-                mask_edges_to_coast = mask_edges_permeable & (
-                    (mask_transit[self.sources] & mask_candidate_coast[self.targets]) |
-                    (mask_transit[self.targets] & mask_candidate_coast[self.sources])
-                )
-                
-                coast_sources = self.sources[mask_edges_to_coast]
-                coast_targets = self.targets[mask_edges_to_coast]
-                
+    def get_topography(self, probe_radius=1.4, sea_level=10.0, min_size=4):
+        """
+        Queries the pre-built AlphaFlowNetwork for a specific probe radius
+        and generates a rich topological decomposition.
+        
+        Parameters
+        ----------
+        probe_radius : float
+            Radius of the solvent probe (Angstroms).
+        sea_level : float
+            Radius defining the bulk solvent 'Ocean' in Angstroms. 
+            Tetrahedra with R_insphere > sea_level are considered OCEAN.
+        min_size : int
+            Minimum number of tetrahedra for a component to be kept (Pruning).
+            
+        Returns
+        -------
+        dict
+            Dictionary containing 'wet' (pockets, voids) and 'dry' (core, islands) components.
+            Each component is a dict with 'tetrahedron_indices' and 'atom_indices'.
+        """
+        # 1. Classify Nodes
+        mask_ocean = self.tetra_habitability >= sea_level
+        # STRICT definition: TRANSIT means the probe fits INSIDE.
+        mask_transit = (self.tetra_habitability >= probe_radius) & (~mask_ocean)
+        # COAST candidates: R_in < probe, but might be attached to a pocket.
+        # Initially, anything not ocean and not transit is a candidate for solid or coast.
+        # We will distinguish Coast from Solid by connectivity later.
+        
+        # --- WET NETWORK ANALYSIS (Core Connectivity) ---
+        
+        # We build the graph using ONLY TRANSIT nodes as the backbone.
+        # Flow can only go THROUGH Transit nodes.
+        
+        mask_edges_permeable = self.edge_weights >= probe_radius
+        
+        # Filter edges where both source and target are TRANSIT
+        mask_edges_transit = mask_transit[self.sources] & mask_transit[self.targets]
+            mask_valid_edges_wet = mask_edges_permeable & mask_edges_transit
+            
+            valid_sources_wet = self.sources[mask_valid_edges_wet]
+            valid_targets_wet = self.targets[mask_valid_edges_wet]
+            valid_weights_wet = np.ones(len(valid_sources_wet), dtype=np.int8)
+            
+            adj_matrix_wet = coo_matrix((valid_weights_wet, (valid_sources_wet, valid_targets_wet)), 
+                                        shape=(self.n_tetrahedra, self.n_tetrahedra))
+            
+            n_comps_wet, labels_wet = connected_components(adj_matrix_wet, directed=False)
+            
+            # Identify Mouths (Connections to Ocean from TRANSIT backbone)
+            connected_to_ocean = np.zeros(n_comps_wet, dtype=bool)
+            
+            mask_edges_to_ocean = mask_edges_permeable & (
+                (mask_transit[self.sources] & mask_ocean[self.targets]) |
+                (mask_transit[self.targets] & mask_ocean[self.sources])
+            )
+            
+            mouth_sources = self.sources[mask_edges_to_ocean]
+            mouth_targets = self.targets[mask_edges_to_ocean]
+            transit_nodes_at_mouth = np.where(mask_transit[mouth_sources], mouth_sources, mouth_targets)
+            connected_to_ocean[labels_wet[transit_nodes_at_mouth]] = True
+            
+            # Check boundary faces for mouths
+            for i in np.where(mask_transit)[0]:
+                neighbors = self.delaunay.neighbors[i]
+                for face_idx, neighbor in enumerate(neighbors):
+                    if neighbor == -1: 
+                        if self.face_r_gates_per_tet_face[i, face_idx] >= probe_radius:
+                            connected_to_ocean[labels_wet[i]] = True
+                            break
+            
+            # --- EXPANSION: Identify COAST Nodes ---
+            # A node is COAST if:
+            # 1. It is NOT Transit and NOT Ocean (i.e., it is structurally "Solid-like" or "Sliver")
+            # 2. It shares a permeable face with a TRANSIT node.
+            # We attach these Coast nodes to the component of their Transit neighbor.
+            
+            mask_candidate_coast = (~mask_transit) & (~mask_ocean)
+            
+            # Find edges between TRANSIT and CANDIDATE_COAST
+            mask_edges_to_coast = mask_edges_permeable & (
+                (mask_transit[self.sources] & mask_candidate_coast[self.targets]) |
+                (mask_transit[self.targets] & mask_candidate_coast[self.sources])
+            )
+            
+            coast_sources = self.sources[mask_edges_to_coast]
+            coast_targets = self.targets[mask_edges_to_coast]
+            
                 # Map: Coast Node Index -> Component Label
                 # Note: A coast node might touch multiple components. We assign it to one (first found) or duplicate?
                 # Standard: Assign to one.

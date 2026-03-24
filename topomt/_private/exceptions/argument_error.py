@@ -20,10 +20,10 @@ class ArgumentError(Exception):
 
     Examples
     --------
-    >>> from molsysmt._private.exceptions import BadCallError
+    >>> from molsysmt import ArgumentError
     >>> def method_name(item, a=True):
     ...    if type(a) not in [int, float]:
-    ...       raise BadCallError('a')
+    ...       raise ArgumentError('a')
     ...    pass
 
     .. admonition:: See Also

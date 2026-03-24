@@ -9,14 +9,14 @@ demo = {}
 # TcTIM
 
 demo['TcTIM'] = {}
-demo['TcTIM']['1TCD.pdb'] = path('topomt.data.TcTIM.CASTp_1tcd', '1tcd.pdb')
+demo['TcTIM']['1tcd.pdb'] = path('topomt.data.TcTIM.CASTp_1tcd', '1tcd.pdb')
 demo['TcTIM']['CASTp_1tcd'] = path('topomt.data.TcTIM', 'CASTp_1tcd')
 
 # HIV-1 Protease
 
 demo['HIV-1 Protease'] = {}
-demo['HIV-1 Protease']['1HIV.pdb'] = path('topomt.data.HIV-1-Protease.CASTp_1hiv', '1hiv.pdb')
-demo['HIV-1 Protease']['CASTp_1HIV'] = path('topomt.data.HIV-1-Protease', 'CASTp_1hiv')
+demo['HIV-1 Protease']['1hiv.pdb'] = path('topomt.data.HIV-1-Protease.CASTp_1hiv', '1hiv.pdb')
+demo['HIV-1 Protease']['CASTp_1hiv'] = path('topomt.data.HIV-1-Protease', 'CASTp_1hiv')
 
 # FPocket2
 

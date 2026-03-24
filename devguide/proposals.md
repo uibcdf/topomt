@@ -6,7 +6,7 @@
   - Pocketeer flow (burial filter)
   - PyCASTA/AlphaSpace nonpolar ratio
   - `pocket_geometry` descriptors (contact validation)
-- **Unified interface**: wrapper to run `fpocket4`, `pycasta`, `alphaspace2`, or `pocketeer` behind a single API with harmonized outputs (ids, volumes, scores, mouths, contacts).
+- [DONE] **Unified interface**: wrapper to run `fpocket4`, `pycasta`, `alphaspace2`, or `pocketeer` behind a single API with harmonized outputs (ids, volumes, scores, mouths, contacts). Implementation: `topomt.get_topography()`.
 - **Advanced descriptors**:
   - Energy/probe grids (simple interaction maps)
   - Refined bottleneck profiling for channels

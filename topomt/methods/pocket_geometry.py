@@ -9,11 +9,12 @@ from typing import Iterable, Sequence, Dict, List, Union, Tuple, Set
 
 import numpy as np
 import molsysmt as msm
-from scipy.spatial import ConvexHull
-from skimage.measure import marching_cubes
-from scipy.spatial.distance import cdist, distance_matrix
+from scipy.spatial import ConvexHull, distance_matrix
+# from skimage.measure import marching_cubes  <-- moved to function
+from scipy.spatial.distance import cdist
 from scipy.cluster.hierarchy import fcluster, linkage
-import py3Dmol
+# import py3Dmol <-- moved to function
+from depdigest import dep_digest
 
 
 def _to_numpy(array: Iterable) -> np.ndarray:
@@ -222,6 +223,7 @@ def min_cross_section_radius(
     return float(radial[radial > 0].min()) if np.any(radial > 0) else 0.0
 
 
+@dep_digest('skimage')
 def marching_cubes_union(
     centers: Sequence[Sequence[float]],
     radii: Sequence[float],
@@ -249,6 +251,8 @@ def marching_cubes_union(
     for ci, ri in zip(c, r):
         d = np.linalg.norm(grid - ci, axis=-1) - ri
         dist = np.minimum(dist, d)
+
+    from skimage.measure import marching_cubes
 
     verts, faces, _, _ = marching_cubes(dist, level=iso_level, spacing=(grid_spacing,) * 3)
     # marching_cubes coords are in grid index space times spacing; shift origin:
@@ -813,6 +817,11 @@ def view_pockets_py3dmol(
     color_scheme: str = 'rainbow',
 ) -> 'py3Dmol.view':
     """Minimal py3Dmol viewer for alpha-sphere pockets (for quick inspection)."""
+    try:
+        import py3Dmol
+    except ImportError:
+        raise ImportError("The 'py3Dmol' package is required for this viewer.")
+
     v = py3Dmol.view()
     # add atoms as spheres
     for coord, elem in zip(atom_coords, atom_elements or ['C'] * len(atom_coords)):

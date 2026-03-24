@@ -1,14 +1,4 @@
 """PyCASTA-like pocket detection based on alpha-shapes and discrete flow on tetrahedra.
-
-This is a lightweight reimplementation inspired by the pycasta project:
-- Build a (weighted) Delaunay triangulation of atom coordinates (here unweighted).
-- Keep tetrahedra whose circumsphere radius is below `alpha` (alpha-complex).
-- On tetrahedra outside the alpha-complex, run a discrete flow toward minima of the
-  proxy value (sigma_p * circumsphere radius) with a relative tolerance.
-- Group tetrahedra by sinks and connectivity (shared faces) to form pockets.
-- Optionally merge nearby pockets and filter by minimum volume.
-
-Returns pockets as lists of tetrahedron indices (into the simplices array).
 """
 
 from __future__ import annotations
@@ -19,11 +9,9 @@ from typing import Iterable, Sequence
 import molsysmt as msm
 import numpy as np
 from scipy.spatial import Delaunay
+from topomt._private.puw_utils import get_magnitude, get_magnitudes
 
-from topomt._private.digestion import digest
 
-
-@digest()
 def pycasta(
     molecular_system,
     selection: str = 'all',
@@ -42,86 +30,38 @@ def pycasta(
     skip_digestion: bool = False,
 ):
     """
-    Detect pockets using a PyCASTA-style alpha-shape + discrete flow approach.
-
-    Parameters
-    ----------
-    molecular_system
-        Input molecular system (compatible with MolSysMT).
-    selection : str, optional
-        Atom selection (MolSysMT syntax).
-    structure_indices : int, optional
-        Structure index to use.
-    alpha : float, optional
-        Alpha threshold for the alpha-complex (tetra circumsphere radius cutoff).
-    min_pocket_volume : float, optional
-        Minimum pocket volume (sum of tetra volumes) to keep.
-    merge_clusters : bool, optional
-        Whether to merge pocket clusters whose centroids are within `merge_threshold`.
-    merge_threshold : float, optional
-        Distance threshold for merging pocket clusters (Å).
-    sigma_p : float, optional
-        Scaling for proxy values in the flow step (proxy = sigma_p * radius).
-    tol_fraction : float, optional
-        Relative tolerance for descending in the flow (neighbor must be this fraction lower).
-    max_steps : int, optional
-        Maximum flow steps per tetrahedron.
-    adaptive : bool, optional
-        If True, relax tolerance when stuck.
-    adaptive_factor : float, optional
-        Multiplicative factor to relax tolerance when no lower neighbor is found.
-    min_steps : int, optional
-        Minimum steps for a flow to be considered valid.
-    syntax : str, optional
-        Selection syntax for MolSysMT.
-
-    Returns
-    -------
-    pockets : list[list[int]]
-        Lists of tetrahedron indices (into the Delaunay simplices) per pocket, sorted by volume.
-    volumes : list[float]
-        Pocket volumes (Å^3), sorted in the same order as `pockets`.
-    simplices : np.ndarray
-        The Delaunay simplices used to define tetrahedra (indices into atom array).
+    Detect pockets using a PyCASTA-style approach. Internal logic in NM.
     """
-    topo = msm.convert(molecular_system, to_form='molsysmt.MolSys', structure_indices=structure_indices)
-    atom_indices = msm.select(
-        molecular_system=topo,
-        selection=selection,
-        syntax=syntax,
-    )
-    # remove water/ions/small molecules and hydrogens (mirrors fpocket4 cleaning)
-    remove_idx = msm.select(
-        molecular_system=topo,
-        selection="group_type in ['water', 'ion', 'small molecule']",
-        mask=atom_indices,
-        syntax='MolSysMT',
-    )
+    
+    # Normalization to NM
+    alpha_nm = get_magnitude(alpha, unit='nm')
+    # 50 A^3 = 0.05 nm^3
+    min_vol_nm3 = get_magnitude(min_pocket_volume, unit='nm**3') if not isinstance(min_pocket_volume, (int, float)) else min_pocket_volume / 1000.0
+    merge_threshold_nm = get_magnitude(merge_threshold, unit='nm')
+
+    from topomt import Topography
+    topo_obj = Topography(molecular_system=molecular_system, structure_indices=structure_indices)
+    molsys = topo_obj._molsys
+
+    atom_indices = msm.select(molsys, selection=selection, syntax=syntax)
+    remove_idx = msm.select(molsys, selection="group_type in ['water', 'ion', 'small molecule']", mask=atom_indices)
     if len(remove_idx) > 0:
-        atom_indices = list(set(atom_indices) - set(remove_idx))
+        atom_indices = [idx for idx in atom_indices if idx not in remove_idx]
 
-    atom_indices = msm.select(
-        molecular_system=topo,
-        selection='atom_type not in ["H"]',
-        mask=atom_indices,
-        syntax='MolSysMT',
-    )
+    atom_indices = msm.select(molsys, selection='atom_type not in ["H"]', mask=atom_indices)
 
-    coords = msm.get(
-        molecular_system=topo,
-        selection=atom_indices,
-        structure_indices=structure_indices,
-        coordinates=True,
-    )[0]
-    if coords.shape[0] < 4:
+    coords = msm.get(molsys, selection=atom_indices, structure_indices=structure_indices, coordinates=True)[0]
+    coords_nm = get_magnitudes(coords, unit='nm')
+    
+    if coords_nm.shape[0] < 4:
         return [], [], np.empty((0, 4), dtype=int)
 
-    delaunay = Delaunay(coords)
-    simplices = delaunay.simplices  # (n_tet, 4)
-    tetra_pos = coords[simplices]
+    delaunay = Delaunay(coords_nm)
+    simplices = delaunay.simplices
+    tetra_pos = coords_nm[simplices]
 
     radii = _circumsphere_radii(tetra_pos)
-    alpha_mask = radii < alpha
+    alpha_mask = radii < alpha_nm
 
     pockets = _flow_detection(
         simplices,
@@ -136,18 +76,16 @@ def pycasta(
     )
 
     if merge_clusters:
-        pockets = _merge_clusters(pockets, tetra_pos, merge_threshold)
+        pockets = _merge_clusters(pockets, tetra_pos, merge_threshold_nm)
 
-    # volumes and filtering
     volumes = []
     filtered = []
     for pocket in pockets:
         vol = _tetra_group_volume(tetra_pos, pocket)
-        if vol >= min_pocket_volume:
+        if vol >= min_vol_nm3:
             filtered.append(pocket)
             volumes.append(vol)
 
-    # sort by volume desc
     pockets_vol = sorted(zip(filtered, volumes), key=lambda x: x[1], reverse=True)
     pockets_sorted = [p for p, _ in pockets_vol]
     volumes_sorted = [v for _, v in pockets_vol]
@@ -155,7 +93,6 @@ def pycasta(
 
 
 def _circumsphere_radii(tetra_positions: np.ndarray) -> np.ndarray:
-    """Circumsphere radius for each tetrahedron (vectorized)."""
     a = tetra_positions[:, 0]
     b = tetra_positions[:, 1]
     c = tetra_positions[:, 2]
@@ -163,14 +100,12 @@ def _circumsphere_radii(tetra_positions: np.ndarray) -> np.ndarray:
     ba = b - a
     ca = c - a
     da = d - a
-    # volume factor
     cross_cd = np.cross(ca, da)
-    vol6 = np.abs(np.einsum('ij,ij->i', ba, cross_cd))
-    # squared edge lengths
+    Ba = np.einsum('ij,ij->i', ba, cross_cd)
+    vol6 = np.abs(Ba)
     a2 = np.sum(ba * ba, axis=1)
     b2 = np.sum(ca * ca, axis=1)
     c2 = np.sum(da * da, axis=1)
-    # circumsphere radius formula: R = (abc)/(6V)
     numerator = np.sqrt(
         a2 * b2 * c2
         + 2 * np.sum(ba * ca, axis=1) * np.sum(ca * da, axis=1) * np.sum(da * ba, axis=1)
@@ -196,7 +131,6 @@ def _flow_detection(
     adaptive_factor: float,
     min_steps: int,
 ) -> list[list[int]]:
-    """Discrete flow on empty tetrahedra; group by sinks and connectivity."""
     proxies = sigma_p * radii
     empty_idx = np.where(~alpha_mask)[0]
 
@@ -255,7 +189,6 @@ def _flow_detection(
 
     pockets: list[list[int]] = []
     for _, group in sink_groups.items():
-        # connectivity within sink group by shared faces
         graph = {idx: [] for idx in group}
         for idx, i in enumerate(group):
             for j in group[idx + 1 :]:
@@ -280,7 +213,6 @@ def _flow_detection(
 
 
 def _merge_clusters(pockets: list[list[int]], tetra_positions: np.ndarray, threshold: float) -> list[list[int]]:
-    """Merge pockets whose centroids are within the given threshold."""
     clusters = [list(p) for p in pockets]
     changed = True
     while changed:
@@ -309,7 +241,6 @@ def _merge_clusters(pockets: list[list[int]], tetra_positions: np.ndarray, thres
 
 
 def _tetra_group_volume(tetra_positions: np.ndarray, indices: Sequence[int]) -> float:
-    """Sum of tetra volumes for a group of indices."""
     if len(indices) == 0:
         return 0.0
     tets = tetra_positions[np.asarray(indices, dtype=int)]
@@ -317,5 +248,7 @@ def _tetra_group_volume(tetra_positions: np.ndarray, indices: Sequence[int]) -> 
     b = tets[:, 1]
     c = tets[:, 2]
     d = tets[:, 3]
-    vol = np.abs(np.einsum('ij,ij->i', a, np.cross(b - d, c - d))) / 6.0
+    vol = np.abs(Ba := a[:,0]*((b[:,1]-d[:,1])*(c[:,2]-d[:,2]) - (b[:,2]-d[:,2])*(c[:,1]-d[:,1])) + \
+                 a[:,1]*((b[:,2]-d[:,2])*(c[:,0]-d[:,0]) - (b[:,0]-d[:,0])*(c[:,2]-d[:,2])) + \
+                 a[:,2]*((b[:,0]-d[:,0])*(c[:,1]-d[:,1]) - (b[:,1]-d[:,1])*(c[:,0]-d[:,0]))) / 6.0
     return float(vol.sum())

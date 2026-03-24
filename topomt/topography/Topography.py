@@ -389,6 +389,23 @@ class Topography(Mapping[str, BaseFeature]):
             })
         return records
 
+    def show(self, **kwargs):
+        """
+        Visualize the topography using molsysmt.view.
+        """
+        from molsysmt import view as msm_view
+
+        view = msm_view(self._molecular_system, standard=True, **kwargs)
+
+        for fid, feature in self._features.items():
+            if feature.feature_type == 'pocket':
+                if feature.atom_indices is not None:
+                    sel = '@' + ','.join(map(str, feature.atom_indices))
+                    # Assign a color per pocket or a default one
+                    view.add_surface(sel, opacity='0.3', color='red')
+
+        return view
+
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     # auxiliary functions
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

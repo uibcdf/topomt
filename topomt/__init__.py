@@ -9,10 +9,15 @@ from ._version import __version__
 def __print_version__():
     print("TopoMT version " + __version__)
 
+from ._pyunitwizard import pyunitwizard
+
 from . import config
 config.setup_logging(level="WARNING", capture_warnings=True, simplify_warning_format=True)
 
-from ._pyunitwizard import pyunitwizard
+from smonitor.integrations import ensure_configured
+from ._private.smonitor import PACKAGE_ROOT
+
+ensure_configured(PACKAGE_ROOT)
 
 from .demo import demo
 
@@ -21,6 +26,7 @@ from .topography.Topography import Topography
 from . import alpha_spheres
 
 from .get_alpha_spheres import get_alpha_spheres
+from .get_topography import get_topography
 from .get_pockets import get_pockets, show_pockets
 
 from . import io

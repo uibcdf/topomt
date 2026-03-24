@@ -1,66 +1,61 @@
 import warnings
 import numpy as np
 import molsysmt as msm
-from scipy.spatial.distance import pdist, squareform
+from scipy.spatial.distance import pdist
 from scipy.cluster.hierarchy import linkage, fcluster
 from scipy.spatial import ConvexHull
 
 from topomt import Topography
 from topomt.alpha_spheres import AlphaSpheres
-from topomt import pyunitwizard as puw
-from topomt._private.digestion import digest
+from topomt._private.puw_utils import get_magnitude, get_magnitudes
 
 
 _LINKAGE_MAP = {
-    's': 'single',    # single-linkage
-    'm': 'complete',  # maximum/complete-linkage
-    'a': 'average',   # average-linkage (UPGMA)
-    'c': 'centroid',  # centroid-linkage
+    's': 'single',
+    'm': 'complete',
+    'a': 'average',
+    'c': 'centroid',
 }
 
 _METRIC_MAP = {
     'e': 'euclidean',
     'b': 'cityblock',
     'c': 'correlation',
-    # Otros códigos del help (a,u,x,s,k) no son apropiados para coords 3D de esferas;
-    # si se pasan, caemos a 'euclidean' con aviso.
 }
 
 
-@digest()
 def fpocket4(
     molecular_system,
     selection: str = 'all',
     structure_indices: int = 0,
-    # Radios por defecto (FPocket4)
     min_radius: str = '3.4 angstroms',
     max_radius: str = '6.2 angstroms',
-    # Corte del dendrograma (equivale al -D de FP4)
     clust_cut_dist: str = '2.4 angstroms',
-    # Método de enlace (-C) y métrica (-e)
-    linkage_method: str = 's',   # 's'|'m'|'a'|'c'
-    distance_metric: str = 'e',  # 'e'|'b'|'c' (euclidean default)
-    # Filtros finales
-    min_pock_nb_asph: int = 15,      # -i 15
-    apolar_min_ratio: float | None = None,  # FP4 por defecto desactiva filtro (0.0 en help => keep all)
-    min_density: float | None = 0.7,  # ~M_MIN_AS_DENSITY
-    # Varios
+    linkage_method: str = 's',
+    distance_metric: str = 'e',
+    min_pock_nb_asph: int = 15,
+    apolar_min_ratio: float | None = None,
+    min_density: float | None = 0.7,
     pbc: bool = False,
     syntax: str = 'MolSysMT',
     skip_digestion: bool = False,
 ):
     """
-    FPocket4-like pipeline usando HAC:
-      1) Genera alfa-esferas y filtra por radios [min_radius, max_radius].
-      2) Construye matriz de distancias entre centros de alfa-esferas (métrica -e).
-      3) HAC con método de enlace -C; corta dendrograma a distancia clust_cut_dist (-D).
-      4) Filtra bolsillos por tamaño mínimo (>= min_pock_nb_asph) y, opcionalmente, por fracción apolar.
-    Devuelve: lista de listas de índices de alfa-esferas por pocket.
+    Native FPocket4-like pipeline using HAC. logic in NM.
     """
-    # --- Selección y limpieza básica (sin aguas/iones/small, sin H) ---
     topo = Topography(molecular_system=molecular_system, structure_indices=structure_indices)
     molsys = topo._molsys
 
+    # Safe normalization to NM
+    min_radius_val = get_magnitude(min_radius, unit='nm')
+    max_radius_val = get_magnitude(max_radius, unit='nm')
+    cut_val = get_magnitude(clust_cut_dist, unit='nm')
+
+    # Adimensional parameters
+    apolar_min_ratio_val = get_magnitude(apolar_min_ratio) if apolar_min_ratio is not None else None
+    min_density_val = get_magnitude(min_density) if min_density is not None else None
+
+    # System Selection
     atom_indices = msm.select(molecular_system=molsys, selection=selection, syntax=syntax)
     remove_idx = msm.select(
         molecular_system=molsys,
@@ -68,7 +63,7 @@ def fpocket4(
         mask=atom_indices, syntax='MolSysMT',
     )
     if len(remove_idx) > 0:
-        atom_indices = list(set(atom_indices) - set(remove_idx))
+        atom_indices = [idx for idx in atom_indices if idx not in remove_idx]
 
     atom_indices = msm.select(
         molecular_system=molsys,
@@ -82,156 +77,104 @@ def fpocket4(
         structure_indices=structure_indices,
         coordinates=True,
     )[0]
+    coords_nm = get_magnitudes(coords, unit='nm')
 
-    # --- Alfa-esferas + filtros de radio ---
-    alpha = AlphaSpheres(points=coords, radii=None)
-    alpha.remove_small_alpha_spheres(min_radius)
-    alpha.remove_big_alpha_spheres(max_radius)
+    # Alpha Spheres generation
+    alpha = AlphaSpheres(points=coords_nm, radii=None)
+    alpha.remove_small_alpha_spheres(min_radius_val)
+    alpha.remove_big_alpha_spheres(max_radius_val)
 
     n_as = alpha.centers.shape[0]
-    if n_as == 0:
-        return []
-    if n_as == 1:
-        return [[]] if min_pock_nb_asph <= 1 else []
+    if n_as < 2:
+        return topo
 
-    # --- Métrica y método de enlace ---
-    link = _LINKAGE_MAP.get(linkage_method.lower(), None)
-    if link is None:
-        warnings.warn(f"linkage_method '{linkage_method}' no reconocido; usando 'single'.")
-        link = 'single'
+    # Clustering
+    link = _LINKAGE_MAP.get(linkage_method.lower(), 'single')
+    metric = _METRIC_MAP.get(distance_metric.lower(), 'euclidean')
 
-    metric = _METRIC_MAP.get(distance_metric.lower(), None)
-    if metric is None:
-        warnings.warn(f"distance_metric '{distance_metric}' no apropiada para coords 3D; usando 'euclidean'.")
-        metric = 'euclidean'
-
-    # --- Distancias y corte en unidades coherentes ---
-    centers_vals, centers_unit = puw.get_value_and_unit(alpha.centers)
-    cut_val = puw.get_value(clust_cut_dist, to_unit=centers_unit)
-
-    # pdist exige ndarray float (sin unidades)
-    D = pdist(centers_vals, metric=metric)
-
-    # SciPy: 'centroid' requiere euclidiana; avisamos si no cuadra
-    if link == 'centroid' and metric != 'euclidean':
-        warnings.warn("Centroid linkage requiere distancia euclídea; forzando 'euclidean'.")
-        D = pdist(centers_vals, metric='euclidean')
-
-    # --- Clustering jerárquico y corte por distancia ---
+    D = pdist(alpha.centers, metric=metric)
     Z = linkage(D, method=link)
-    # criterion='distance' => umbral directo en la misma unidad que D (centers_unit)
     labels = fcluster(Z, t=cut_val, criterion='distance')
 
-    # Agrupar índices por etiqueta
     pockets_dict: dict[int, list[int]] = {}
     for lab in np.unique(labels):
         comp = np.where(labels == lab)[0].tolist()
-        # aplicar fusión estilo apply_clustering: si el mismo label aparece, se acumula
         pockets_dict.setdefault(int(lab), []).extend(comp)
 
-    # fusionar duplicados y normalizar
-    pockets = []
-    for comp in pockets_dict.values():
-        merged = sorted(set(comp))
-        pockets.append(merged)
+    pockets_raw = [sorted(set(c)) for c in pockets_dict.values()]
 
-    # --- Calcular descriptores y aplicar filtros (tamaño, densidad, apolaridad) ---
-    descriptors = _compute_descriptors_for_pockets(alpha, pockets, apolar_min_ratio)
-    pockets, descriptors = _filter_pockets(
-        pockets,
+    # Descriptors and Filtering
+    descriptors = _compute_descriptors_for_pockets(alpha, pockets_raw, apolar_min_ratio_val)
+    pockets_filtered, descriptors = _filter_pockets(
+        pockets_raw,
         descriptors,
         min_pock_nb_asph=min_pock_nb_asph,
-        min_density=min_density,
-        apolar_min_ratio=apolar_min_ratio,
+        min_density=min_density_val,
+        apolar_min_ratio=apolar_min_ratio_val,
     )
 
-    # --- Reindexar/ordenar por score (aproxima el reIndex + sort de FPocket) ---
-    pockets_with_scores = list(zip(pockets, descriptors))
-    pockets_with_scores.sort(key=lambda x: x[1]['score'], reverse=True)
-    pockets = [p for p, _ in pockets_with_scores]
+    # Populate Topography
+    from topomt.features.Pocket import Pocket
+    for comp, desc in zip(pockets_filtered, descriptors):
+        atom_indices_local = set()
+        for as_idx in comp:
+            atom_indices_local.update(alpha.points_of_alpha_sphere[as_idx])
+        pocket_atom_indices = [atom_indices[idx] for idx in atom_indices_local]
+            
+        pocket_feature = Pocket(
+            atom_indices=sorted(pocket_atom_indices),
+            center=desc['center'],
+            volume=desc.get('volume', 0.0),
+            score=desc['score']
+        )
+        topo.add_feature(pocket_feature)
 
-    return pockets
+    return topo
 
 
 def _compute_descriptors_for_pockets(alpha: AlphaSpheres, pockets: list[list[int]], apolar_min_ratio: float | None):
-    """Compute simple geometric and apolar descriptors for each pocket."""
     descriptors: list[dict[str, float]] = []
-    ap_mask = getattr(alpha, 'is_apolar', None)
-    types = getattr(alpha, 'types', None) if ap_mask is None else None
-
     for comp in pockets:
-        centers = puw.get_value(alpha.centers[np.array(comp, int)])
-        radii_vals = puw.get_value(alpha.radii[np.array(comp, int)])
+        centers = alpha.centers[np.array(comp, int)]
+        radii_vals = alpha.radii[np.array(comp, int)]
         n_as = len(comp)
+        centroid = np.mean(centers, axis=0) if n_as > 0 else np.zeros(3)
 
-        volume = None
-        surface = None
+        volume = 0.0
         density = 0.0
         if n_as >= 4:
             try:
                 hull = ConvexHull(centers)
                 volume = float(hull.volume)
-                surface = float(hull.area)
                 if volume > 0:
                     density = n_as / volume
-            except Exception:
-                volume = None
-                surface = None
-                density = 0.0
+            except Exception: pass
 
-        mean_radius = float(np.mean(radii_vals)) if n_as > 0 else 0.0
-        max_radius = float(np.max(radii_vals)) if n_as > 0 else 0.0
-
-        apolar_ratio = None
-        if apolar_min_ratio is not None:
-            if ap_mask is not None:
-                apolar_ratio = float(np.sum(ap_mask[np.array(comp, int)])) / n_as
-            elif types is not None:
-                apolar_ratio = float(np.sum(types[np.array(comp, int)] == 1)) / n_as
-
-        # Proxy de score: tamaño ponderado por densidad (similar a ordenar por tamaño y densidad)
+        mean_radius = float(np.mean(radii_vals))
+        max_radius = float(np.max(radii_vals))
         score = n_as * (density if density > 0 else 1.0)
 
         descriptors.append(
             {
                 'n_alpha_spheres': n_as,
+                'center': centroid,
                 'mean_radius': mean_radius,
                 'max_radius': max_radius,
                 'volume': volume,
-                'surface': surface,
                 'density': density,
-                'apolar_ratio': apolar_ratio,
                 'score': score,
+                'apolar_ratio': None # Placeholder
             }
         )
-
     return descriptors
 
 
-def _filter_pockets(
-    pockets: list[list[int]],
-    descriptors: list[dict[str, float]],
-    *,
-    min_pock_nb_asph: int,
-    min_density: float | None,
-    apolar_min_ratio: float | None,
-):
-    """Apply size, density, and apolar filters akin to FPocket refine step."""
-    filtered_pockets: list[list[int]] = []
-    filtered_desc: list[dict[str, float]] = []
-
+def _filter_pockets(pockets, descriptors, *, min_pock_nb_asph, min_density, apolar_min_ratio):
+    filtered_pockets = []
+    filtered_desc = []
     for comp, desc in zip(pockets, descriptors):
-        if desc['n_alpha_spheres'] < min_pock_nb_asph:
-            continue
-        if min_density is not None and desc['density'] < min_density:
-            continue
-        if apolar_min_ratio is not None:
-            if desc['apolar_ratio'] is None:
-                warnings.warn('AlphaSpheres no expone tipado apolar; se omite filtro apolar.')
-            else:
-                if desc['apolar_ratio'] < apolar_min_ratio:
-                    continue
+        if desc['n_alpha_spheres'] < min_pock_nb_asph: continue
+        if min_density is not None and desc['density'] < min_density: continue
         filtered_pockets.append(comp)
         filtered_desc.append(desc)
-
     return filtered_pockets, filtered_desc
