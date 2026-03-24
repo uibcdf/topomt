@@ -26,9 +26,8 @@ Wrap Fpocket from Python: call the fpocket/mdpocket binaries via subprocess or u
 biobb-vs.readthedocs.io
 +1
 
-MDpocket utilities: the fpocket2 manual ships a small Python script (createMDPocketInputFile.py) to prep trajectory snapshots; MDpocket also reads common MD formats (XTC/DCD/NetCDF). 
+MDpocket utilities: the fpocket/MDpocket manual ships a small Python script (createMDPocketInputFile.py) to prep trajectory snapshots; MDpocket also reads common MD formats (XTC/DCD/NetCDF). 
 fpocket.sourceforge.net
 +1
 
 PockDrug: https://pockdrug.rpbs.univ-paris-diderot.fr/cgi-bin/index.py?page=home
-

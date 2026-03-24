@@ -1,10 +1,12 @@
 from __future__ import annotations
+
+import copy
+from typing import Any, Literal
+
 from topomt.config import atom_label_format as default_atom_label_format
 from topomt._private.atom_label import parse_list_of_atom_labels
-from typing import Any, Literal
 from ._feature_constants import _FEATURE_TYPE_TO_CLASS_NAME, _DIMENSIONALITY_BY_FEATURE_TYPE, \
         _SHAPE_TYPE_BY_FEATURE_TYPE
-import copy
 
 FeatureID = str
 FeatureIndex = int
@@ -107,8 +109,8 @@ class BaseFeature():
 
     def info(self):
         return {
-            "feature_id": self.feature_index,
-            "feature_type": self.shape_type,
+            'feature_id': self.feature_id,
+            'feature_type': self.feature_type,
             "shape_type": self.shape_type,
         }
 
@@ -159,4 +161,3 @@ class BaseFeature():
         atom_indices = self._topography._molsys.topology.get_atom_indices(**dict_of_lists)
 
         return atom_indices
-

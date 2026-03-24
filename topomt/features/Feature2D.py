@@ -4,13 +4,14 @@ import copy
 class Feature2D(BaseFeature):
 
     def __init__(self, feature_id=None, feature_type='feature_2d', atom_indices=None,
-                 atom_labels=None, atom_label_format=None, topography=None, source=None, source_id=None, **kwargs):
+                 atom_labels=None, atom_label_format=None, topography=None, source=None, source_id=None,
+                 boundaries=None, points=None, **kwargs):
         super().__init__(feature_id=feature_id, feature_type=feature_type, atom_indices=atom_indices,
-                         atom_labels=atom_labels, atom_label_format=atom_label_format, source=None, source_id=None,
+                         atom_labels=atom_labels, atom_label_format=atom_label_format, source=source, source_id=source_id,
                          topography=topography)
 
-        self.boundaries = set()
-        self.points = set()
+        self.boundaries = set() if boundaries is None else set(boundaries)
+        self.points = set() if points is None else set(points)
 
         self.solvent_accessible_area = None
         self.solvent_accessible_volume = None
@@ -62,17 +63,17 @@ class Feature2D(BaseFeature):
 
     def add_connected_boundary(self, feature_or_id: 'BaseFeature | str'):
 
-        if self._topograpy is None:
+        if self._topography is None:
             raise ValueError('Topography is not set for this feature. Cannot add connected boundary.')
 
-        self._topograpy.connect_features(feature_or_id, self.feature_id)
+        self._topography.connect_features(feature_or_id, self.feature_id)
 
     def add_connected_point(self, feature_or_id: 'BaseFeature | str'):
 
-        if self._topograpy is None:
+        if self._topography is None:
             raise ValueError('Topography is not set for this feature. Cannot add connected boundary.')
 
-        self._topograpy.connect_features(feature_or_id, self.feature_id)
+        self._topography.connect_features(feature_or_id, self.feature_id)
 
     def _add_boundary_id(self, boundary_id: str):
 

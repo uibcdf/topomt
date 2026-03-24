@@ -52,19 +52,26 @@ def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
     from .methods.pocketeer import pocketeer
     from .features.Pocket import Pocket
     
-    pockets_data, spheres = pocketeer(topo.molecular_system, selection=topo.selection, 
-                                      structure_indices=topo.structure_indices, **kwargs)
+    pockets_data, spheres, atom_indices = pocketeer(
+        topo.molecular_system,
+        selection=topo.selection,
+        structure_indices=topo.structure_indices,
+        return_atom_indices=True,
+        **kwargs,
+    )
     
     for p in pockets_data:
         all_atom_indices = set()
         for s in p.spheres:
-            all_atom_indices.update(s.atom_indices)
+            all_atom_indices.update(atom_indices[idx] for idx in s.atom_indices)
         
         pocket_feature = Pocket(
             atom_indices=sorted(list(all_atom_indices)),
             center=p.centroid,
             volume=p.volume,
-            score=p.score
+            score=p.score,
+            source='pocketeer',
+            source_id=f'pocketeer:{p.pocket_id}',
         )
         topo.add_feature(pocket_feature)
         
@@ -75,10 +82,14 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
     from .features.Pocket import Pocket
     from ._pyunitwizard import pyunitwizard as puw
     
-    clusters, vertices, radii, contacts = alphaspace2(topo.molecular_system, selection=topo.selection,
-                                                      structure_indices=topo.structure_indices, **kwargs)
+    clusters, vertices, radii, contacts, atom_indices = alphaspace2(
+        topo.molecular_system,
+        selection=topo.selection,
+        structure_indices=topo.structure_indices,
+        return_atom_indices=True,
+        **kwargs,
+    )
     
-    atom_indices = msm.select(topo.molecular_system, selection=topo.selection)
     atom_coords = msm.get(topo.molecular_system, selection=atom_indices, coordinates=True)[0]
     atom_coords = puw.get_value(atom_coords, to_unit='nm')
     tree = cKDTree(atom_coords)
@@ -102,6 +113,8 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
         pocket_feature = Pocket(
             atom_indices=sorted(list(involved_atoms)),
             center=centroid,
+            source='alphaspace2',
+            source_id=f'alphaspace2:{i}',
         )
         try:
             from .methods.pocket_geometry import marching_cubes_union
@@ -150,12 +163,15 @@ def _run_pycasta(topo: Topography, **kwargs) -> Topography:
     if 'alpha' not in kwargs:
         kwargs['alpha'] = 0.4 # 4.0 A
         
-    pockets_tet, volumes, simplices = pycasta(topo.molecular_system, selection=topo.selection,
-                                              structure_indices=topo.structure_indices, **kwargs)
+    pockets_tet, volumes, simplices, atom_indices = pycasta(
+        topo.molecular_system,
+        selection=topo.selection,
+        structure_indices=topo.structure_indices,
+        return_atom_indices=True,
+        **kwargs,
+    )
     
-    atom_indices = msm.select(topo.molecular_system, selection=topo.selection)
-    
-    for p_tet, vol in zip(pockets_tet, volumes):
+    for pocket_index, (p_tet, vol) in enumerate(zip(pockets_tet, volumes)):
         involved_local_indices = set()
         for tet_idx in p_tet:
             involved_local_indices.update(simplices[tet_idx])
@@ -171,7 +187,9 @@ def _run_pycasta(topo: Topography, **kwargs) -> Topography:
             atom_indices=sorted(involved_global_indices),
             center=center,
             volume=vol,
-            score=vol
+            score=vol,
+            source='pycasta',
+            source_id=f'pycasta:{pocket_index}',
         )
         topo.add_feature(pocket_feature)
         

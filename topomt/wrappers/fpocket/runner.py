@@ -1,4 +1,3 @@
-from __future__ import annotations
 import subprocess
 from pathlib import Path
 from typing import Sequence
@@ -11,7 +10,7 @@ class FpocketError(RuntimeError):
 def run_fpocket(
     pdb_file: str | Path,
     *,
-    fpocket_cmd: str = "fpocket",
+    fpocket_cmd: str = 'fpocket',
     workdir: str | Path | None = None,
     extra_args: Sequence[str] | None = None,
 ) -> Path:
@@ -46,4 +45,3 @@ def run_fpocket(
         raise FpocketError(f"Expected fpocket output dir not found: {out_dir}")
 
     return out_dir
-

@@ -28,6 +28,7 @@ def pycasta(
     min_steps: int = 3,
     syntax: str = 'MolSysMT',
     skip_digestion: bool = False,
+    return_atom_indices: bool = False,
 ):
     """
     Detect pockets using a PyCASTA-style approach. Internal logic in NM.
@@ -54,6 +55,8 @@ def pycasta(
     coords_nm = get_magnitudes(coords, unit='nm')
     
     if coords_nm.shape[0] < 4:
+        if return_atom_indices:
+            return [], [], np.empty((0, 4), dtype=int), atom_indices
         return [], [], np.empty((0, 4), dtype=int)
 
     delaunay = Delaunay(coords_nm)
@@ -89,6 +92,8 @@ def pycasta(
     pockets_vol = sorted(zip(filtered, volumes), key=lambda x: x[1], reverse=True)
     pockets_sorted = [p for p, _ in pockets_vol]
     volumes_sorted = [v for _, v in pockets_vol]
+    if return_atom_indices:
+        return pockets_sorted, volumes_sorted, simplices, atom_indices
     return pockets_sorted, volumes_sorted, simplices
 
 

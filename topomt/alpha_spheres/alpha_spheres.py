@@ -56,7 +56,7 @@ class AlphaSpheres():
                 if len(self.points_of_alpha_sphere[ii]) > 0:
                     self.radii[ii] = euclidean(voronoi.vertices[ii], points_value[self.points_of_alpha_sphere[ii][0]])
 
-            self.points_of_alpha_sphere = np.array(self.points_of_alpha_sphere, dtype=object)
+            self.points_of_alpha_sphere = np.asarray(self.points_of_alpha_sphere, dtype=int)
 
             from scipy.spatial import Delaunay
             tri = Delaunay(points_value)
@@ -87,4 +87,4 @@ class AlphaSpheres():
         self.remove_alpha_spheres(indices_to_remove)
 
     def get_points_of_alpha_spheres(self, indices):
-        return self.points_of_alpha_sphere[indices]
+        return np.unique(self.points_of_alpha_sphere[indices].reshape(-1))

@@ -7,7 +7,7 @@ class Channel(Feature2D):
                  atom_labels=None, atom_label_format=None, source=None, source_id=None, topography=None):
         super().__init__(feature_id=feature_id, feature_type='channel', atom_indices=atom_indices,
                         boundaries=boundaries, points=points, atom_labels=atom_labels,
-                        atom_label_format=atom_label_format, source=None, source_id=None, topography=topography)
+                        atom_label_format=atom_label_format, source=source, source_id=source_id, topography=topography)
 
     def copy(self, deep: bool = True) -> 'Channel':
         """Return a copy of the Topography object.

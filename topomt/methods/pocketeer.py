@@ -50,6 +50,7 @@ def pocketeer(
     min_spheres: int = 35,
     syntax: str = 'MolSysMT',
     skip_digestion: bool = False,
+    return_atom_indices: bool = False,
 ):
     """
     Detect pockets via alpha-spheres with SASA burial and graph clustering.
@@ -85,6 +86,8 @@ def pocketeer(
     merge_dist_nm = get_magnitude(merge_distance, unit='nm')
 
     if coords_nm.shape[0] < 4:
+        if return_atom_indices:
+            return [], [], atom_indices
         return [], []
 
     # Delaunay -> circumspheres
@@ -92,6 +95,8 @@ def pocketeer(
         tri = Delaunay(coords_nm)
     except Exception as e:
         warnings.warn(f'Delaunay tessellation failed: {e}')
+        if return_atom_indices:
+            return [], [], atom_indices
         return [], []
 
     tree = cKDTree(coords_nm)
@@ -106,6 +111,8 @@ def pocketeer(
         spheres.append(PocketeerSphere(sphere_id=sid, center=center, radius=float(radius), atom_indices=simplex.tolist()))
 
     if not spheres:
+        if return_atom_indices:
+            return [], [], atom_indices
         return [], []
 
     # SASA mean for defining atoms
@@ -115,6 +122,8 @@ def pocketeer(
 
     buried = [s for s in spheres if s.mean_sasa < sasa_threshold]
     if not buried:
+        if return_atom_indices:
+            return [], spheres, atom_indices
         return [], spheres
 
     # clustering via graph connectivity
@@ -139,6 +148,8 @@ def pocketeer(
         pockets.append(PocketeerPocket(pocket_id=pid, spheres=pocket_spheres, centroid=centroid, volume=vol, score=score))
 
     pockets.sort(key=lambda p: p.score, reverse=True)
+    if return_atom_indices:
+        return pockets, buried, atom_indices
     return pockets, buried
 
 

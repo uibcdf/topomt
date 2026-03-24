@@ -5,7 +5,7 @@ def digest_method(method: str, caller: str | None = None) -> str | Any:
     """
     Digest the 'method' argument for topography detection.
     """
-    valid_methods = {'pocketeer', 'fpocket', 'alphaspace2', 'afnd', 'castp', 'pycasta'}
+    valid_methods = {'pocketeer', 'fpocket', 'fpocket4', 'alphaspace2', 'afnd', 'castp', 'pycasta'}
     
     if isinstance(method, str):
         method_lower = method.lower()

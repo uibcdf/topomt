@@ -1,10 +1,13 @@
 from __future__ import annotations
-from ..features.BaseFeature import BaseFeature, FeatureID, FeatureIndex, FeatureType, ShapeType, Dimensionality
+
+import copy
 from collections.abc import Mapping, Iterator
 from typing import Any
+
 import molsysmt as msm
+
 from topomt.features import _FEATURE_TYPE_REGISTRY, _FEATURE_PREFIXES
-import copy
+from ..features.BaseFeature import BaseFeature, FeatureID, FeatureIndex, FeatureType, ShapeType, Dimensionality
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Main class
@@ -256,7 +259,7 @@ class Topography(Mapping[str, BaseFeature]):
         parent = self._features[parent_id]
 
         # external validators
-        _validate_parent_child_compat(child, parent)
+        _validate_child_parent_compat(child, parent)
 
         # register relations
         self._children_of[parent.feature_id].add(child_id)
@@ -264,11 +267,11 @@ class Topography(Mapping[str, BaseFeature]):
 
         # sync connections in feature objects
         if parent.dimensionality == 2:
-            child._add_surface(parent_id)
+            child._add_surface_id(parent_id)
             if child.dimensionality == 0:
-                parent._add_point(child_id)
+                parent._add_point_id(child_id)
             elif child.dimensionality == 1:
-                parent._add_boundary(child_id)
+                parent._add_boundary_id(child_id)
         else:
             raise ValueError('Parent feature must be 2D (Feature2D)')
 
@@ -423,20 +426,14 @@ class Topography(Mapping[str, BaseFeature]):
 
 def _validate_child_parent_compat(child: BaseFeature, parent: BaseFeature) -> None:
 
-    if child.dimensionality == 0 and parent.dimensionality == 2:
-        pass
-    elif child.dimensionality == 1 and parent.dimensionality == 2:
-        pass
-    elif parent.dimensionality == 2:
+    if parent.dimensionality != 2:
         raise ValueError('Parent must be 2D (Feature2D)')
+
     if child.dimensionality not in (0, 1):
         raise ValueError('Child must be 0D or 1D')
-    else:
-        raise ValueError(f"{getattr(child, 'feature_type', '?')} does not apply to {getattr(parent, 'shape_type', '?')}")
 
     if child.feature_type == 'mouth' and parent.shape_type != 'concavity':
         raise ValueError('Mouth must attach to a concavity feature')
 
     if child.feature_type == 'base_rim' and parent.shape_type != 'convexity':
         raise ValueError('BaseRim must attach to a convexity')
-

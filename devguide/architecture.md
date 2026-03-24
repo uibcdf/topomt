@@ -1,0 +1,153 @@
+# TopoMT Architecture
+
+## Purpose
+
+TopoMT provides a common representation for molecular surface topography.
+
+The goal is not only to detect cavities or pockets with one particular method,
+but to express heterogeneous geometric findings in a shared hierarchy that can
+be analyzed, compared, and visualized consistently.
+
+## Core objects
+
+### `Topography`
+
+`Topography` is the central registry for detected features associated with a
+molecular system and an optional atom selection.
+
+Its responsibilities are:
+
+- store the detected features;
+- assign feature identifiers;
+- maintain feature lookup indexes by type, shape, and dimensionality;
+- maintain parent/child relations between features;
+- preserve the link to the input molecular system.
+
+### `Feature`
+
+Features are the semantic building blocks of the model.
+
+The base hierarchy is:
+
+- `Feature0D`
+- `Feature1D`
+- `Feature2D`
+
+Topography-specific types currently include:
+
+- `Pocket`
+- `Void`
+- `Channel`
+- `BranchedChannel`
+- `Mouth`
+
+Each feature is expected to carry, when available:
+
+- `feature_id`
+- `feature_type`
+- `shape_type`
+- `atom_indices`
+- `source`
+- `source_id`
+
+Engine-specific metadata may also be attached, such as:
+
+- `center`
+- `volume`
+- `score`
+- `mouth_area`
+- alpha-sphere or probe-sphere data
+
+## Detection engines
+
+TopoMT currently exposes a public orchestrator:
+
+- `topomt.get_topography()`
+
+This function dispatches to different engines and converts their outputs into a
+common `Topography` object.
+
+The relevant non-AFND engines are:
+
+- `pocketeer`
+- `fpocket4`
+- `alphaspace2`
+- `castp`
+- `pycasta`
+
+In addition, `pocket_geometry` acts as a geometry utility layer used by some
+engines and is likely to become a more explicit part of the production path.
+
+## AFND within the architecture
+
+AFND should be understood as a separate architectural track inside TopoMT, not
+as the definition of the whole library.
+
+Its role is to explore a richer alpha-flow interpretation of molecular
+topography, with more explicit network semantics for pockets, voids, channels,
+and dry components.
+
+Relevant design references are:
+
+- [AFND/Overview.md](AFND/Overview.md)
+- [AFND/Algorithm.md](AFND/Algorithm.md)
+- [AFND/Technical_Design.md](AFND/Technical_Design.md)
+
+For the time being, AFND is best treated as:
+
+- a documented experimental subsystem;
+- a source of conceptual guidance for future feature semantics;
+- a postponed implementation priority.
+
+## Current internal contract
+
+The practical internal contract for engine wrappers should be:
+
+1. Work on a well-defined atom selection.
+2. Filter atoms explicitly when needed.
+3. Keep a reliable mapping between local indices and original atom indices.
+4. Return or build `Pocket`-like features with canonical atom ownership.
+5. Store geometric metadata without breaking the common feature API.
+
+This local-to-global atom-index mapping is critical for both analysis and
+future visualization.
+
+## Units
+
+TopoMT should follow MolSysSuite conventions:
+
+- coordinates in nanometers;
+- time in picoseconds;
+- temperatures in kelvin;
+- angles in radians when derived;
+- user inputs and outputs managed via PyUnitWizard.
+
+Internal geometric kernels should operate on raw NumPy magnitudes in canonical
+units whenever possible.
+
+## Dependencies
+
+TopoMT is expected to follow the same dependency model used in MolSysSuite:
+
+- hard dependencies imported normally;
+- soft dependencies imported lazily;
+- dependency checks mediated by `depdigest`.
+
+Optional scientific tools must not leak through top-level imports.
+
+## Architectural direction
+
+The short-term architectural direction is:
+
+1. stabilize `Topography` and feature invariants;
+2. normalize engine outputs;
+3. strengthen tests around those normalized outputs;
+4. expose a viewer-friendly representation for pockets and related features;
+5. build the MolSysViewer addon on top of that stable surface.
+
+Longer term, once the non-AFND path is stable, AFND may enrich the architecture
+with:
+
+- stronger channel and void semantics;
+- dry/wet network decomposition;
+- richer topological relations between features.

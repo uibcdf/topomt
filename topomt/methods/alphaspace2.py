@@ -23,6 +23,7 @@ def alphaspace2(
     cluster_method: str = 'average',
     syntax: str = 'MolSysMT',
     skip_digestion: bool = False,
+    return_atom_indices: bool = False,
 ):
     """
     Detect pockets using AlphaSpace2 workflow. Internal logic in NM.
@@ -60,6 +61,8 @@ def alphaspace2(
     cut_nm = get_magnitude(cluster_cutoff, unit='nm')
 
     if coords_nm.shape[0] < 4:
+        if return_atom_indices:
+            return [], np.zeros((0, 3)), np.zeros(0), None, atom_indices
         return [], np.zeros((0, 3)), np.zeros(0), None
 
     vor = Voronoi(coords_nm)
@@ -76,6 +79,8 @@ def alphaspace2(
     filtered_radii = radii[mask]
     
     if len(filtered_vertices) < 2:
+        if return_atom_indices:
+            return [], vertices, radii, None, atom_indices
         return [], vertices, radii, None
         
     # Clustering
@@ -90,4 +95,6 @@ def alphaspace2(
         comp = real_indices[np.where(labels == lab)[0]].tolist()
         clusters.append(comp)
         
+    if return_atom_indices:
+        return clusters, vertices, radii, None, atom_indices
     return clusters, vertices, radii, None
