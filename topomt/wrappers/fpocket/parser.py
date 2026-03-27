@@ -161,7 +161,8 @@ def _parse_pocket_vert(pocket_vert: Path) -> dict[str, object]:
                         float(line[46:54]),
                     ]
                 )
-                radii.append(float(line[62:70]))
+                _, radius = _parse_pqr_charge_and_radius(line)
+                radii.append(radius)
                 types.append(line[13:16].strip())
 
     if len(centers) == 0:
@@ -180,6 +181,14 @@ def _parse_pocket_vert(pocket_vert: Path) -> dict[str, object]:
         'alpha_sphere_types': types,
         'raw': props,
     }
+
+
+def _parse_pqr_charge_and_radius(line: str) -> tuple[float, float]:
+    fields = line[54:].split()
+    if len(fields) < 2:
+        raise ValueError(f'Could not parse PQR charge/radius from line: {line!r}')
+
+    return float(fields[0]), float(fields[1])
 
 
 def _parse_global_info(info_file: Path) -> dict[str, dict[str, float | int | str]]:

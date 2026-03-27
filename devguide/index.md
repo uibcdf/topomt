@@ -22,6 +22,22 @@ and the next engineering steps.
   Contracts and expectations for integration with `molsysmt`,
   `pyunitwizard`, `argdigest`, `depdigest`, and `smonitor`.
 
+- [what_should_move_to_molsysmt.md](what_should_move_to_molsysmt.md)
+  Criteria and candidate primitives that should live in `molsysmt` rather
+  than in TopoMT.
+
+- [gpu_opportunities.md](gpu_opportunities.md)
+  Notes on which parts of TopoMT and its ecosystem dependencies are plausible
+  GPU targets and why.
+
+- [engine_acceleration_plan.md](engine_acceleration_plan.md)
+  Cross-cutting future plan for CPU-pool parallelization, distributed
+  execution, and GPU evaluation across pocket engines.
+
+- [fpocket4_scalable_options.md](fpocket4_scalable_options.md)
+  Specific design options for a future `fpocket4`
+  `implementation='topomt-scalable'` path.
+
 - [viewer_addon_plan.md](viewer_addon_plan.md)
   Initial plan for the future `molsysviewer_topomt` addon.
 
@@ -31,6 +47,22 @@ and the next engineering steps.
 - [api_surface.md](api_surface.md)
   Description of the current public surface, legacy pieces, and experimental
   areas.
+
+- [engine_references.md](engine_references.md)
+  External repositories, binaries, packages, and validation targets used as
+  reference points for the supported engines.
+
+- [native_methods_plan.md](native_methods_plan.md)
+  Native reimplementation plan for the prioritized engines and the intended
+  separation between `methods/` and `wrappers/`.
+
+- [fpocket4_native_checkpoint.md](fpocket4_native_checkpoint.md)
+  Current detailed checkpoint for the native `fpocket4` diagnostic and parity
+  work against upstream `fpocket`.
+
+- [pocket_algorithm_issues.md](pocket_algorithm_issues.md)
+  Repository of known anomalies, ambiguity cases, residual non-parity issues,
+  and other algorithmic problems detected while auditing pocket engines.
 
 - [data_io_and_demos.md](data_io_and_demos.md)
   Notes on bundled data, demo systems, and external-result loaders.

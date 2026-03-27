@@ -52,13 +52,16 @@ The current validated systems are:
 - `3LKF.pdb`
 - `E15ALA.pdb`
 
-The following historical reference PDBs remain outside this checkpoint because
-they currently fail upstream parsing in `molsysmt`:
+That original `0.1.0` wrapper-backed checkpoint should now be read as a
+historical milestone rather than as the full current `fpocket4` state.
 
-- `1ATP.pdb`
-- `1CEN.pdb`
-- `1YCR.pdb`
-- `2HGR.pdb`
+Since then:
+
+- the native `fpocket4` path has reached exact final parity against the audited
+  local fpocket source build on the full currently audited PDB set, including
+  `1ATP.pdb`, `1CEN.pdb`, `1YCR.pdb`, and the large-system case `2HGR.pdb`;
+- and wrapper-based parity claims are now known to depend on which fpocket
+  binary/build is actually used.
 
 ### Scope
 
@@ -76,6 +79,26 @@ they currently fail upstream parsing in `molsysmt`:
 - advanced scoring models
 - frontend-heavy visualization work
 
+### Cross-cutting future note
+
+In parallel with stabilization, TopoMT should keep a future-oriented record of
+which pocket engines may later support:
+
+- CPU-pool parallelization;
+- distributed execution;
+- GPU offloading.
+
+This should be evaluated for:
+
+- native implementations;
+- wrapper-backed third-party engines;
+- and future algorithms that enter the repository later.
+
+This note is intentionally broader than `fpocket4`: `alphaspace2` and future
+engines should also be reviewed under the same scalability lens.
+
+See [engine_acceleration_plan.md](engine_acceleration_plan.md).
+
 ## Phase 3
 
 Next phase after stabilization: reference-driven review of the prioritized
@@ -85,14 +108,17 @@ engines.
 
 - inspect the upstream or reference repositories for the selected tools;
 - compare TopoMT behavior against those references;
-- refine wrappers and output semantics where needed;
-- identify missing descriptors and missing tests.
+- separate wrapper-backed integrations from native method targets;
+- define native reimplementation plans for the prioritized methods;
+- identify missing descriptors and missing tests;
 - verify that `fpocket4` produces the same results from canonical `bcif.gz`
   inputs as from the corresponding original `pdb` inputs.
 
 ### Expected output
 
-- a more faithful integration layer;
+- a clearer split between `methods/` and `wrappers/`;
+- native implementation plans for `fpocket4` and `alphaspace2`;
+- a more faithful long-term integration layer;
 - clearer documentation of engine-specific assumptions;
 - stronger regression tests.
 
