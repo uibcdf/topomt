@@ -41,6 +41,10 @@ and the next engineering steps.
 - [viewer_addon_plan.md](viewer_addon_plan.md)
   Initial plan for the future `molsysviewer_topomt` addon.
 
+- [molsysviewer_topomt_checkpoint.md](molsysviewer_topomt_checkpoint.md)
+  Checkpoint for the first real `molsysviewer_topomt` addon slice and the
+  reasons for pausing the previous priority to start it now.
+
 - [repository_map.md](repository_map.md)
   Practical map of the repository and the role of each major directory.
 

@@ -75,6 +75,9 @@ This includes:
   between native `fpocket4` and the upstream embedded-Qhull path, especially on
   `1GG0.pdb` and `3LKF.pdb`, together with fpocket build-drift checks on
   `1GG0.pdb`, `3LKF.pdb`, and `E15ALA.pdb`.
+- The start of a real `molsysviewer_topomt` addon scaffold, with the previous
+  engine-only priority now paused long enough to establish a visible ecosystem
+  integration point and a documented restart position.
 
 ## What is currently weak
 
@@ -151,6 +154,25 @@ This includes:
   (documented in `devguide/proposal_smonitor_improvement.md`), and a scoring
   bonus tuned to stay within the 2.5-point tolerance requested by the parity
   tests.
+- The first `molsysviewer_topomt` scaffold now exists as a package-level addon
+  checkpoint: it exports a valid `AddonSpec`, lifecycle hooks, and a minimal
+  TopoMT-to-viewer payload adapter that can be used as the restart point for
+  later rendering work.
+- That viewer checkpoint is now slightly beyond pure scaffold status: the
+  addon can register with `molsysviewer`, overlay pocket blobs or fallback
+  marker spheres on an existing view, build a loaded view and render a
+  `Topography` in one step, or render only selected feature/pocket ids
+  through `attach_features(...)` and `attach_pockets(...)`.
+- The same addon checkpoint now also has a first standalone-oriented utility
+  layer: `molsysviewer_topomt.standalone` can build or launch a MolSysViewer
+  standalone host with a pre-rendered TopoMT overlay, either from an explicit
+  `Topography` or from an on-the-fly `get_topography(...)` call.
+- While implementing those selective helpers, we also confirmed a local core
+  caveat: the current generic `BaseFeature.copy()` path does not preserve
+  dynamic geometry attributes attached by native methods. The addon currently
+  works around that by cloning full feature state for temporary subset
+  topographies, and that should be treated as a broader core-cleanup
+  candidate if similar needs appear outside the viewer path.
 - The remaining `molsysmt` integration debt is now more local and deliberate:
   mostly method-specific logic such as the explicit heavy-atom selection still
   present in `alphaspace2`, rather than repeated repository-wide manual

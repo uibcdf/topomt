@@ -95,6 +95,51 @@ The first addon version should be conservative:
 - reuse existing MolSysViewer shapes for pockets;
 - avoid new frontend complexity unless strictly necessary.
 
+## Current checkpoint
+
+This line of work has now started.
+
+What currently exists:
+
+- a local addon package scaffold:
+  - `molsysviewer_topomt`
+- a valid exported addon contract:
+  - `addon`
+  - `ADDON`
+  - `get_addon()`
+- a minimal lifecycle implementation for view-local runtime state;
+- a first viewer-oriented payload adapter:
+  - `molsysviewer_topomt.payloads.topography_payload(...)`
+- a first Python-side rendering helper:
+  - `molsysviewer_topomt.render.render_topography_pockets(...)`
+- first convenience integration helpers:
+  - `molsysviewer_topomt.register_with_molsysviewer(...)`
+  - `molsysviewer_topomt.attach_topography(...)`
+  - `molsysviewer_topomt.build_view_with_topography(...)`
+  - `molsysviewer_topomt.attach_features(...)`
+  - `molsysviewer_topomt.attach_pockets(...)`
+- tests validating registration-level behavior and payload normalization.
+
+What has already been clarified during implementation:
+
+- selective rendering is useful enough to support from the Python helper layer
+  now, before a richer panel UI exists;
+- the current TopoMT feature copy semantics are not yet sufficient for that
+  use case, because the generic copy path drops dynamic geometry attributes
+  such as centers and alpha-sphere arrays;
+- the addon currently works around that by cloning the full feature state when
+  building filtered temporary topographies for rendering.
+
+What still does not exist:
+
+- real panel/workbench UI content;
+- context actions wired to actual scene operations.
+- richer rendering modes beyond the current blob/marker fallback.
+
+For continuity details, see:
+
+- [molsysviewer_topomt_checkpoint.md](molsysviewer_topomt_checkpoint.md)
+
 ## Short-term dependency on current work
 
 Before starting the addon, TopoMT should complete:

@@ -132,6 +132,17 @@ MolSysViewer integration.
 - implement the first version of `molsysviewer_topomt`;
 - reuse existing MolSysViewer shapes for pocket surfaces and pocket blobs.
 
+Current note:
+
+- the `molsysviewer_topomt` package is now beyond scaffold level:
+  it already provides addon registration, payload normalization, conservative
+  pocket rendering through existing MolSysViewer shapes, selective pocket
+  attachment helpers, and a first standalone-oriented helper layer for
+  exporting or launching a MolSysViewer host with a pre-rendered TopoMT
+  overlay;
+- richer panel/workbench UI and tighter interactive scene operations are still
+  pending.
+
 ### Constraint
 
 The addon should come after the topographic data model is stable enough to be a
