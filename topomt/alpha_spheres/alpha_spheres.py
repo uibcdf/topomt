@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.spatial import Delaunay, Voronoi
 
-from topomt._private.puw_utils import get_magnitudes, get_magnitude
+from topomt import pyunitwizard as puw
 
 
 def _tetrahedron_volumes(points_of_alpha_sphere, points):
@@ -85,8 +85,10 @@ class AlphaSpheres:
 
         if points is not None:
 
-            # Safe magnitude extraction to NM
-            points_value = get_magnitudes(points, unit='nm')
+            if puw.is_quantity(points):
+                points_value = np.asarray(puw.get_value(points, to_unit='nm'), dtype=float)
+            else:
+                points_value = np.asarray(points, dtype=float)
 
             self.points = points_value
             self.n_points = points_value.shape[0]
@@ -152,12 +154,18 @@ class AlphaSpheres:
         self.n_alpha_spheres = np.count_nonzero(mask)
 
     def remove_small_alpha_spheres(self, minimum_radius):
-        min_val = get_magnitude(minimum_radius, unit='nm')
+        if puw.is_quantity(minimum_radius):
+            min_val = float(puw.get_value(minimum_radius, to_unit='nm'))
+        else:
+            min_val = float(minimum_radius)
         indices_to_remove = np.where(self.radii < min_val)[0]
         self.remove_alpha_spheres(indices_to_remove)
 
     def remove_big_alpha_spheres(self, maximum_radius):
-        max_val = get_magnitude(maximum_radius, unit='nm')
+        if puw.is_quantity(maximum_radius):
+            max_val = float(puw.get_value(maximum_radius, to_unit='nm'))
+        else:
+            max_val = float(maximum_radius)
         indices_to_remove = np.where(self.radii > max_val)[0]
         self.remove_alpha_spheres(indices_to_remove)
 
@@ -183,7 +191,10 @@ class AlphaSpheres:
             `near_cospherical_count`.
         """
 
-        tolerance = get_magnitude(cospherical_tolerance, unit='nm')
+        if puw.is_quantity(cospherical_tolerance):
+            tolerance = float(puw.get_value(cospherical_tolerance, to_unit='nm'))
+        else:
+            tolerance = float(cospherical_tolerance)
         normalized_volumes = np.divide(
             self.volumes,
             np.power(self._min_edges, 3),

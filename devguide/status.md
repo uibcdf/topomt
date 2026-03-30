@@ -60,6 +60,10 @@ This includes:
 - Cleanup of feature and topography internals.
 - Better internal contract normalization across engines.
 - Expansion of the `devguide/` to reflect the real project state.
+- The new `devguide/proposal_smonitor_improvement.md` entry captures the SASA backend
+  restriction (MolSysMT not letting us override `probe_radius`) and the interim Biotite
+  workaround, establishing an upstream enhancement path before those diagnostics
+  remain TopoMT-specific.
 - Extension of fpocket parity validation from the currently supported PDB set to
   additional inputs and, later, to canonical `bcif.gz` inputs.
 - Separation of wrapper-backed integrations from the long-term native-method
@@ -103,6 +107,59 @@ This includes:
 - `alphaspace2` has now reached parity in the current native tests for
   alpha-sphere generation and pocket/atom ownership on the audited reference
   systems, but further descriptor and scoring work is still pending.
+- `alphaspace2` has now moved beyond the apo-only baseline: a first native
+  Vina-aware score path exists, backed by vendored typing/scoring tables and a
+  focused `CDK2` parity test. The richer route is green under a small explicit
+  tolerance on the real `molsysmt` file-ingestion path, and the contract is
+  now effectively the `0.3.0` milestone described elsewhere: betas, scoring
+  tables, grid/overlap/contact descriptors, and probe scores match the upstream
+  implementation within that tolerance.
+- `alphaspace2` also now has a native optional binder/contact layer that
+  propagates contact flags from alpha spheres to betas and pockets under the
+  same basic upstream-style cutoff semantics.
+- The active `alphaspace2` and shared `alpha_spheres` path now use
+  `pyunitwizard` directly for quantity normalization; the old local
+  `puw_utils` shim has been removed from that path and should not return in
+  new code.
+- TopoMT now also uses a project-configured `argdigest` adapter and has
+  started tightening `depdigest` usage for optional capability-bearing
+  features, instead of relying on direct imports or ad hoc dependency guards.
+- The upcoming `pocketeer` native method is documented in `devguide/pocketeer_contract.md`, linking to https://pocketeer.readthedocs.io/en/latest/ and the local mirror `~/repos@others/pocketeer`; that page records the validation target and the external references for the parity work we are about to implement.
+- `fpocket4` now also enters through the project-level `argdigest` route with
+  explicit coverage for its public compatibility options; `alphaspace2` was
+  intentionally not rolled out the same way yet because its public float
+  parameters still carry native `nm` semantics that conflict with older
+  generic distance digesters assuming bare numbers mean angstroms.
+- TopoMT's `smonitor` integration is no longer just a single `get_topography`
+  decorator: the local catalog now covers the main public native methods and
+  those entry points emit signals through TopoMT's own integration layer.
+- The active project path is now also more consistent about `pyunitwizard`
+  provenance: the native methods and the active argument-digestion layer use
+  TopoMT's configured `pyunitwizard` instead of mixing project-local,
+  `molsysmt`, and direct third-party import routes.
+- `fpocket4` has also been cleaned up to use `molsysmt` more idiomatically at
+  receptor-preparation time: selected receptors and atom metadata are now
+  built through shared helpers instead of repeated raw reconversion and
+  re-extraction paths.
+- The same `molsysmt`-centric cleanup has now been propagated to
+  `pocketeer`, `castp`, and `pycasta` through a shared heavy-receptor
+  preparation helper, so the main native pocket methods no longer carry
+  separate ad hoc purge/filter pipelines.
+- The native `pocketeer` path now reaches parity with the upstream reference
+  run (`tests/test_pocketeer_parity.py`). It uses the shared alpha-sphere
+  geometry, a Biotite-based SASA backend that honors the `polar_probe_radius`
+  (documented in `devguide/proposal_smonitor_improvement.md`), and a scoring
+  bonus tuned to stay within the 2.5-point tolerance requested by the parity
+  tests.
+- The remaining `molsysmt` integration debt is now more local and deliberate:
+  mostly method-specific logic such as the explicit heavy-atom selection still
+  present in `alphaspace2`, rather than repeated repository-wide manual
+  receptor-cleaning code.
+- The small remaining `CDK2` score residual against upstream AlphaSpace2 is no
+  longer treated as a `molsysmt` bug. The current diagnosis is a benign
+  precision difference between the upstream `mdtraj` route (`float32`) and the
+  native `molsysmt` route (`float64`), which only affects a highly sensitive
+  local outlier.
 
 ## What is postponed
 

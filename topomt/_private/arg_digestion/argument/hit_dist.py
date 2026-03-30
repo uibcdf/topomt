@@ -1,14 +1,23 @@
 from __future__ import annotations
+
 from typing import Any
-from topomt._pyunitwizard import pyunitwizard as puw
+
 import numpy as np
 
+from topomt import pyunitwizard as puw
+from topomt._private.smonitor import ArgumentError
+
+
 def digest_hit_dist(hit_dist: Any, caller: str | None = None) -> Any:
-    """
-    Digest the 'hit_dist' argument.
-    """
     if puw.is_quantity(hit_dist):
         return puw.standardize(hit_dist)
+
     if isinstance(hit_dist, (int, float, np.number)):
         return puw.quantity(float(hit_dist), 'angstroms')
-    return hit_dist
+
+    raise ArgumentError(
+        arg_name='hit_dist',
+        value=hit_dist,
+        caller=caller,
+        reason='hit_dist must be a quantity or a number.',
+    )

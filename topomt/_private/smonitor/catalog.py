@@ -1,4 +1,8 @@
-# SMonitor signal catalog for TopoMT
+from pathlib import Path
+
+from .meta import META
+
+PACKAGE_ROOT = Path(__file__).resolve().parents[2]
 
 CATALOG = {
     "signals": {
@@ -6,11 +10,20 @@ CATALOG = {
             "tags": ["api", "topography"],
             "extra_required": ["method"],
         },
-        "topomt.pocketeer": {
-            "tags": ["method", "pocketeer"],
+        "topomt.alphaspace2": {
+            "tags": ["method", "alphaspace2", "native"],
         },
-        "topomt.fpocket": {
-            "tags": ["wrapper", "fpocket"],
+        "topomt.castp": {
+            "tags": ["method", "castp", "native"],
+        },
+        "topomt.fpocket4": {
+            "tags": ["method", "fpocket4", "native"],
+        },
+        "topomt.pocketeer": {
+            "tags": ["method", "pocketeer", "native"],
+        },
+        "topomt.pycasta": {
+            "tags": ["method", "pycasta", "native"],
         },
     },
     "errors": {
@@ -32,6 +45,14 @@ CATALOG = {
             "template": "The argument '{argument}' in '{caller}' was not digested.",
             "category": "validation",
         },
+        "PocketeerDelaunayWarning": {
+            "template": "Pocketeer Delaunay tessellation failed: {reason}",
+            "category": "algorithm",
+        },
+        "PocketeerSasaBackendWarning": {
+            "template": "Pocketeer SASA backend could not run ({reason}); mean_sasa is set to 0.0 for all spheres.",
+            "category": "dependency",
+        },
     },
 }
 
@@ -40,3 +61,5 @@ CODES = {
     "ERRORS": CATALOG["errors"],
     "WARNINGS": CATALOG["warnings"],
 }
+
+SIGNALS = CATALOG["signals"]

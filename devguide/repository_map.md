@@ -24,8 +24,8 @@ Important subareas:
   related objects.
 
 - `topomt/methods/`
-  Detection engines and geometry-related production code. This includes both
-  current priorities and older or more experimental paths.
+  Detection engines and geometry-related production code. This package should
+  converge toward native TopoMT implementations of the supported methods.
 
 - `topomt/io/`
   Input/output helpers. Right now this mainly includes loading external CASTp
@@ -35,8 +35,9 @@ Important subareas:
   Internal alpha-sphere object model and related helper logic.
 
 - `topomt/wrappers/`
-  External wrapper-oriented code, currently focused on fpocket artifacts and
-  parsing helpers.
+  External wrapper-oriented code. This area should host binary/package
+  integrations, output parsers, and parity helpers used for auditing native
+  methods rather than defining the final runtime behavior of `topomt/methods/`.
 
 - `topomt/_private/`
   Internal support code: digestion helpers, optional import handling, unit

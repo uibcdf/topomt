@@ -33,6 +33,10 @@ For the current development cycle, the important engines are:
 These engines matter both because of functionality and because they define the
 feature payloads that later need to be consumed by MolSysViewer.
 
+For those payloads, `atom_indices` should be understood as the receptor atoms
+that delimit the feature geometrically, i.e. lining or tangential atoms of the
+cavity/topographic object.
+
 ## Legacy or transitional areas
 
 ### `get_pockets()`

@@ -50,6 +50,11 @@ Each feature is expected to carry, when available:
 - `source`
 - `source_id`
 
+For topographic features such as pockets, `atom_indices` should be interpreted
+as the atoms that geometrically delimit the feature: lining, tangent, or
+osculating atoms of the receptor. They should not be interpreted as arbitrary
+nearby atoms selected by a loose distance heuristic.
+
 Engine-specific metadata may also be attached, such as:
 
 - `center`
@@ -78,6 +83,53 @@ The relevant non-AFND engines are:
 In addition, `pocket_geometry` acts as a geometry utility layer used by some
 engines and is likely to become a more explicit part of the production path.
 
+## `methods/` versus `wrappers/`
+
+TopoMT needs a strict architectural distinction between native methods and
+external integrations.
+
+### `topomt/methods/`
+
+This package should contain TopoMT's own implementations of the supported
+engines.
+
+That means:
+
+- methods should be runnable without requiring the original upstream package or
+  binary at runtime;
+- methods may be inspired by, validated against, or benchmarked against the
+  original engine;
+- but the production implementation should belong to TopoMT itself.
+- a faithful reimplementation does not mean copying upstream code line by line;
+- instead, TopoMT should reproduce the algorithmic semantics while using its
+  own code, data model, and ecosystem tools such as `molsysmt`,
+  `pyunitwizard`, and the common feature contracts.
+
+### `topomt/wrappers/`
+
+This package should contain helper integrations with external tools.
+
+Typical responsibilities include:
+
+- invoking an external binary or package;
+- parsing or normalizing the external output;
+- loading third-party result folders;
+- and supporting parity testing or import workflows.
+
+Wrappers are useful and should remain available, but they are not the target
+architectural endpoint for `topomt.methods`.
+
+### Practical reading for the current codebase
+
+At the moment, the repository contains a mix of native methods and
+wrapper-backed transitional paths.
+
+The intended end state is:
+
+- `topomt.methods.*`: native TopoMT implementations;
+- `topomt.wrappers.*`: external-tool integrations used for comparison, testing,
+  import, or auxiliary workflows.
+
 ## AFND within the architecture
 
 AFND should be understood as a separate architectural track inside TopoMT, not
@@ -101,7 +153,7 @@ For the time being, AFND is best treated as:
 
 ## Current internal contract
 
-The practical internal contract for engine wrappers should be:
+The practical internal contract for native engine methods should be:
 
 1. Work on a well-defined atom selection.
 2. Filter atoms explicitly when needed.
@@ -111,6 +163,13 @@ The practical internal contract for engine wrappers should be:
 
 This local-to-global atom-index mapping is critical for both analysis and
 future visualization.
+
+For wrapper layers, the internal contract is different:
+
+1. preserve the upstream semantics as faithfully as possible;
+2. parse external identifiers and descriptors without lossy remapping;
+3. expose enough information to compare TopoMT against the reference engine;
+4. support import and regression testing.
 
 ## Units
 

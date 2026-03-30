@@ -1,12 +1,13 @@
-# SMonitor initialization for TopoMT
-from pathlib import Path
-from .catalog import CATALOG
-from .meta import META
-from typing import Any, Optional
-
-PACKAGE_ROOT = Path(__file__).parents[2]
-
+from .catalog import CATALOG, CODES, META, PACKAGE_ROOT, SIGNALS
+from smonitor import signal
 from smonitor.integrations import CatalogException, CatalogWarning
+from .emitter import resolve, warn, warn_once
+from .warnings import (
+    NotDigestedArgumentWarning,
+    PocketeerDelaunayWarning,
+    PocketeerSasaBackendWarning,
+    UserTopoMTWarning,
+)
 
 class TopoMTException(CatalogException):
     def __init__(self, **kwargs):
@@ -60,5 +61,22 @@ class LibraryNotFoundError(TopoMTException):
 class ArgumentError(TopoMTException):
     catalog_key = "ArgumentError"
 
-class NotDigestedArgumentWarning(TopoMTWarning):
-    catalog_key = "NotDigestedArgumentWarning"
+__all__ = [
+    'CATALOG',
+    'CODES',
+    'SIGNALS',
+    'META',
+    'PACKAGE_ROOT',
+    'signal',
+    'warn',
+    'warn_once',
+    'resolve',
+    'TopoMTException',
+    'TopoMTWarning',
+    'UserTopoMTWarning',
+    'LibraryNotFoundError',
+    'ArgumentError',
+    'NotDigestedArgumentWarning',
+    'PocketeerDelaunayWarning',
+    'PocketeerSasaBackendWarning',
+]

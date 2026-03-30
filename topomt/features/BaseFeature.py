@@ -20,6 +20,11 @@ class BaseFeature():
     def __init__(self, feature_id=None, feature_type=None, atom_indices=None, atom_labels=None,
                  atom_label_format=None, feature_label=None, source=None, source_id=None, topography=None):
         """
+            atom_indices : sequence of int, optional
+            For topographic features, these indices are expected to identify the
+            atoms that geometrically delimit the feature, i.e. lining or
+            tangential/osculating atoms of the receptor.
+
             atom_label_format : str, optional
             Format string for atom labels, e.g. `"{atom_name}-{atom_id}"`.
         """

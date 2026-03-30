@@ -51,6 +51,8 @@ and the next engineering steps.
 - [engine_references.md](engine_references.md)
   External repositories, binaries, packages, and validation targets used as
   reference points for the supported engines.
+- [pocketeer_contract.md](pocketeer_contract.md)
+  Scope note for the upcoming `pocketeer` parity implementation, linking to the upstream documentation and the local mirror repository.
 
 - [native_methods_plan.md](native_methods_plan.md)
   Native reimplementation plan for the prioritized engines and the intended
@@ -59,6 +61,10 @@ and the next engineering steps.
 - [fpocket4_native_checkpoint.md](fpocket4_native_checkpoint.md)
   Current detailed checkpoint for the native `fpocket4` diagnostic and parity
   work against upstream `fpocket`.
+
+- [alphaspace2_native_checkpoint.md](alphaspace2_native_checkpoint.md)
+  Current checkpoint for the native `alphaspace2` work and the remaining
+  semantic layers needed for the `0.3.0` milestone.
 
 - [pocket_algorithm_issues.md](pocket_algorithm_issues.md)
   Repository of known anomalies, ambiguity cases, residual non-parity issues,

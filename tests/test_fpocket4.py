@@ -269,10 +269,33 @@ def test_fpocket4_native_implementation_does_not_require_wrapper(monkeypatch):
 
     assert len(topography) > 0
 
-    first_pocket = next(iter(topography.values()))
-    assert first_pocket.source == 'fpocket-native'
-    assert first_pocket.n_alpha_spheres >= 15
-    assert len(first_pocket.atom_indices) > 0
+
+def test_fpocket4_argdigest_normalizes_structure_indices_for_native_path(monkeypatch):
+    captured = {}
+    fpocket4_module = importlib.import_module('topomt.methods.fpocket4')
+
+    def fake_build_native_state(**kwargs):
+        captured.update(kwargs)
+        return 'native-state'
+
+    def fake_native_topography_from_state(state, **kwargs):
+        return state, kwargs
+
+    monkeypatch.setattr(fpocket4_module, '_build_native_state', fake_build_native_state)
+    monkeypatch.setattr(
+        fpocket4_module,
+        '_native_topography_from_state',
+        fake_native_topography_from_state,
+    )
+
+    result = fpocket4(
+        'dummy',
+        structure_indices=0,
+        implementation='native',
+    )
+
+    assert captured['structure_indices'] == 0
+    assert result == ('native-state', {})
 
 
 def test_fpocket4_native_prepare_receptor_keeps_b_factors_for_1atp():

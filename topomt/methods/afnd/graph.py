@@ -3,8 +3,8 @@ import molsysmt as msm
 from scipy.spatial import Delaunay
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
-import pyunitwizard as puw
 import math
+from topomt import pyunitwizard as puw
 
 # Import functions from the newly created core module
 from .core.apollonius import solve_apollonius_3d

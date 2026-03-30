@@ -1,6 +1,6 @@
 from typing import Union, List, Dict
 import molsysmt as msm
-import pyunitwizard as puw
+from topomt import pyunitwizard as puw
 from .graph import AlphaFlowNetwork
 from ...features import Pocket, Void, Channel
 

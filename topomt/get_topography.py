@@ -2,19 +2,27 @@ from __future__ import annotations
 from typing import Any
 import numpy as np
 import molsysmt as msm
+from . import pyunitwizard as puw
 from .topography.Topography import Topography
-from argdigest import arg_digest
-from smonitor import signal
+from ._private.arg_digestion import arg_digest
+from ._private.smonitor import signal
 from scipy.spatial import cKDTree
 
 @signal(tags=["api", "topography"])
 @arg_digest()
 def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: str = 'all',
-                   structure_indices: int | list[int] = 0, syntax: str = 'MolSysMT', 
+                   structure_indices: int | list[int] = 0, syntax: str = 'MolSysMT',
+                   engine: str | None = None, structure_index: int | list[int] | None = None,
                    skip_digestion: bool = False, **kwargs) -> Topography:
     """
     Generate a Topography object from a molecular system using a specified method.
     """
+
+    if engine is not None:
+        method = engine
+
+    if structure_index is not None:
+        structure_indices = structure_index
 
     method_lower = method.lower()
     
@@ -80,16 +88,49 @@ def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
 def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topography:
     from .methods.alphaspace2 import alphaspace2
     from .features.Pocket import Pocket
-    from ._pyunitwizard import pyunitwizard as puw
-    
-    clusters, vertices, radii, contacts, atom_indices = alphaspace2(
+
+    result = alphaspace2(
         topo.molecular_system,
         selection=topo.selection,
         structure_indices=topo.structure_indices,
         return_atom_indices=True,
+        return_state=True,
         **kwargs,
     )
-    
+
+    if len(result) == 6:
+        clusters, vertices, radii, contacts, atom_indices, state = result
+    else:
+        clusters, vertices, radii, contacts, atom_indices = result
+        state = None
+
+    if state is not None:
+        from .methods.alphaspace2 import _state_to_pocket_records
+
+        pocket_records = _state_to_pocket_records(state)
+        for pocket_record in pocket_records:
+            if len(pocket_record['alpha_sphere_centers']) < min_vertices:
+                continue
+
+            pocket_feature = Pocket(
+                atom_indices=pocket_record['atom_indices'],
+                center=pocket_record['center'],
+                volume=pocket_record['volume'],
+                score=pocket_record['score'],
+                source='alphaspace2',
+                source_id=f"alphaspace2:{pocket_record['pocket_index']}",
+                alpha_sphere_centers=pocket_record['alpha_sphere_centers'],
+                alpha_sphere_radii=pocket_record['alpha_sphere_radii'],
+                beta_centers=pocket_record['beta_centers'],
+                beta_scores=pocket_record['beta_scores'],
+                nonpolar_volume=pocket_record['nonpolar_volume'],
+                is_contact=pocket_record['is_contact'],
+            )
+
+            topo.add_feature(pocket_feature)
+
+        return topo
+
     atom_coords = msm.get(topo.molecular_system, selection=atom_indices, coordinates=True)[0]
     atom_coords = puw.get_value(atom_coords, to_unit='nm')
     tree = cKDTree(atom_coords)
@@ -97,14 +138,14 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
     for i, cluster in enumerate(clusters):
         if len(cluster) < min_vertices:
             continue
-            
+
         cluster_vertices = vertices[cluster]
         cluster_radii = radii[cluster]
         centroid = np.mean(cluster_vertices, axis=0) if len(cluster_vertices) > 0 else None
-        
+
         involved_atoms = set()
-        for v, r in zip(cluster_vertices, cluster_radii):
-            near_atoms = tree.query_ball_point(v, r + 0.02) # tolerance in nm (0.2 A)
+        for vertex, radius in zip(cluster_vertices, cluster_radii):
+            near_atoms = tree.query_ball_point(vertex, radius + 0.02)
             involved_atoms.update([atom_indices[idx] for idx in near_atoms])
 
         if not involved_atoms:
@@ -116,15 +157,9 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
             source='alphaspace2',
             source_id=f'alphaspace2:{i}',
         )
-        try:
-            from .methods.pocket_geometry import marching_cubes_union
-            _, _, vol, _ = marching_cubes_union(cluster_vertices, cluster_radii, grid_spacing=0.05)
-            pocket_feature.volume = vol
-        except Exception:
-            pass
 
         topo.add_feature(pocket_feature)
-        
+
     return topo
 
 def _run_castp(topo: Topography, **kwargs) -> Topography:
@@ -180,7 +215,6 @@ def _run_pycasta(topo: Topography, **kwargs) -> Topography:
         
         # Calculate center manually since pycasta doesn't return it
         atom_coords = msm.get(topo.molecular_system, selection=involved_global_indices, coordinates=True)[0]
-        from ._pyunitwizard import pyunitwizard as puw
         center = np.mean(puw.get_value(atom_coords, to_unit='nm'), axis=0)
         
         pocket_feature = Pocket(

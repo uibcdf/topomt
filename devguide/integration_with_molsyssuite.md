@@ -23,6 +23,8 @@ For TopoMT, this means:
 - use `molsysmt` for atom selection;
 - preserve correct atom indices after internal filtering;
 - avoid reimplementing system-conversion logic locally.
+- when TopoMT discovers a reusable molecular-system primitive, propose it to
+  `molsysmt` instead of letting TopoMT accumulate a parallel systems layer.
 
 ## `pyunitwizard`
 
@@ -122,3 +124,11 @@ architectural material in:
 Whenever a TopoMT implementation decision conflicts with an established
 MolSysSuite convention, the default should be to follow the ecosystem contract
 unless there is a strong and documented reason not to.
+
+Related project rule:
+
+- reusable molecular-system primitives discovered during TopoMT development
+  should be documented and proposed upstream to `molsysmt`;
+- TopoMT should keep only the temporary local implementation needed to avoid
+  blocking engine work, and should prefer replacing it later with the
+  ecosystem implementation.

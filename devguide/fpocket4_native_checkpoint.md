@@ -290,6 +290,35 @@ fpocket-oriented strategy.
 It should **not** silently replace the clean default behavior of
 `topomt.alpha_spheres.AlphaSpheres`.
 
+## Pending cleanup: replace local atom-purge logic with better MolSysMT use
+
+One important cleanup item remains explicitly pending for the `fpocket4`
+family (`native`, `topomt`, and later `topomt-scalable`).
+
+Current status:
+
+- the input atom-selection semantics are now validated against the audited
+  upstream source behavior;
+- but part of that logic is still expressed locally in `topomt.methods.fpocket4`
+  through explicit masking and local filtering helpers;
+- this was acceptable during the audit phase because it made upstream-fidelity
+  debugging easier.
+
+What still needs to happen later:
+
+- replace as much of that local purge/filter logic as possible with more
+  idiomatic `molsysmt` selection and filtering routes;
+- keep the already validated semantics exactly the same while improving the
+  implementation style;
+- and avoid letting TopoMT keep a permanently parallel atom-selection layer for
+  things that should ultimately be delegated to MolSysMT.
+
+Important constraint:
+
+- this is a cleanup/refactor task, not a semantics-change task;
+- the validated final pocket results for `native` and `topomt` must remain the
+  same after that refactor.
+
 ## Recommended next diagnostic steps
 
 When work resumes, the preferred order is:

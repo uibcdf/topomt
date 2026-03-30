@@ -3,8 +3,10 @@
 
 import topomt as tmt
 import importlib
+import warnings
 from molsysmt.native.molsys import MolSys
 from topomt.features import Mouth, Pocket
+from topomt.get_topography import get_topography
 from topomt.get_topography import _run_alphaspace2, _run_pocketeer, _run_pycasta
 import pytest
 import numpy as np
@@ -196,3 +198,37 @@ def test_run_pycasta_maps_local_indices_to_global(topography_empty_1tcd, monkeyp
     assert pocket.atom_indices == [11, 12, 14, 18]
     assert pocket.source == 'pycasta'
     assert pocket.source_id == 'pycasta:0'
+
+
+def test_get_topography_argdigest_standardizes_engine_and_structure_index(monkeypatch):
+    get_topography_module = importlib.import_module('topomt.get_topography')
+
+    called = {}
+
+    def fake_run_pycasta(topo, **kwargs):
+        called['method'] = 'pycasta'
+        called['structure_indices'] = topo.structure_indices
+        return topo
+
+    monkeypatch.setattr(get_topography_module, '_run_pycasta', fake_run_pycasta)
+
+    topo = get_topography(
+        tmt.demo['TcTIM']['1tcd.pdb'],
+        engine='pycasta',
+        structure_index=0,
+    )
+
+    assert called['method'] == 'pycasta'
+
+
+def test_pocketeer_sasa_warning_uses_topomt_catalog_warning():
+    pocketeer_module = importlib.import_module('topomt.methods.pocketeer')
+    smonitor_module = importlib.import_module('topomt._private.smonitor')
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter('always')
+        result = pocketeer_module._sasa_molsysmt(None, atom_indices=[0, 1, 2])
+
+    assert result.shape == (3,)
+    assert len(caught) == 1
+    assert isinstance(caught[0].message, smonitor_module.PocketeerSasaBackendWarning)

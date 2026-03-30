@@ -4,8 +4,9 @@ CASTp-like pocket detection using Alpha Spheres and flow logic.
 
 from typing import List, Dict, Union, Tuple, Set
 import numpy as np
-import molsysmt as msm
 from topomt.alpha_spheres import AlphaSpheres
+from topomt._private.molsysmt_preparation import build_heavy_receptor_view
+from topomt._private.smonitor import signal
 from topomt.methods.pocket_geometry import (
     analytic_tetra_volume,
     mouth_area_from_faces,
@@ -14,6 +15,7 @@ from topomt.methods.pocket_geometry import (
 from topomt import pyunitwizard as puw
 
 
+@signal(tags=['method', 'castp', 'native'])
 def castp(
     molecular_system,
     selection: str = 'all',
@@ -38,27 +40,12 @@ def castp(
     probe_r_nm = _to_nm(probe_radius)
 
     # 2. Prepare Molecular System
-    # We use Topography to handle the system consistently
-    from topomt import Topography
-    topo_obj = Topography(molecular_system=molecular_system, structure_indices=structure_indices)
-    molsys = topo_obj._molsys
-    
-    atom_indices = msm.select(molsys, selection=selection, syntax=syntax)
-    
-    # Clean selection
-    solvent_idx = msm.select(molsys, selection="group_type in ['water', 'ion', 'small molecule']", mask=atom_indices)
-    if len(solvent_idx) > 0:
-        atom_indices = [idx for idx in atom_indices if idx not in solvent_idx]
-    
-    h_idx = msm.select(molsys, selection="atom_type == 'H'", mask=atom_indices)
-    if len(h_idx) > 0:
-        atom_indices = [idx for idx in atom_indices if idx not in h_idx]
-        
-    atom_indices = sorted(atom_indices)
-    
-    # Coordinates in NM
-    coords = msm.get(molsys, selection=atom_indices, coordinates=True)[0]
-    coords_nm = puw.get_value(coords, to_unit='nm')
+    molsys, _, atom_indices, coords_nm = build_heavy_receptor_view(
+        molecular_system=molecular_system,
+        selection=selection,
+        structure_indices=structure_indices,
+        syntax=syntax,
+    )
     
     # 3. Generate Alpha Spheres (Voronoi/Delaunay) - Results in NM
     alpha = AlphaSpheres(points=coords_nm)

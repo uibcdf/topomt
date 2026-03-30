@@ -7,6 +7,9 @@ from scipy.cluster.hierarchy import fcluster, linkage
 from scipy.spatial import ConvexHull
 
 from topomt import Topography
+from topomt import pyunitwizard as puw
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.smonitor import signal
 from topomt.alpha_spheres import AlphaSpheres
 from topomt.features import Pocket
 from topomt.wrappers.fpocket.integration import get_topography_with_fpocket
@@ -110,9 +113,8 @@ def _get_upstream_like_bfactor_statistics(
     include_group_names: list[str] | tuple[str, ...] | set[str] | None = None,
     exclude_group_names: list[str] | tuple[str, ...] | set[str] | None = None,
 ) -> tuple[float, float, float] | None:
-    receptor = msm.convert(
-        molecular_system,
-        to_form='molsysmt.MolSys',
+    full_molsys, receptor, selected_atom_indices, _ = _build_selected_receptor(
+        molecular_system=molecular_system,
         selection=selection,
         syntax=syntax,
     )
@@ -128,31 +130,16 @@ def _get_upstream_like_bfactor_statistics(
     if len(keep_local_indices) == 0:
         return None
 
-    b_factors = msm.get(receptor, b_factor=True)
-    if b_factors is None:
+    selected_b_factors = _get_selected_b_factors(full_molsys, selected_atom_indices)
+    if selected_b_factors is None:
         return None
 
-    b_factors_value = np.asarray(msm.pyunitwizard.get_value(b_factors), dtype=float)
-    if b_factors_value.ndim == 2:
-        if b_factors_value.shape[0] == 0:
-            return None
-        b_factors_value = b_factors_value[0]
-    elif b_factors_value.ndim != 1:
-        return None
-
-    kept_b_factors = b_factors_value[np.asarray(keep_local_indices, dtype=int)]
+    kept_b_factors = selected_b_factors[np.asarray(keep_local_indices, dtype=int)]
     if kept_b_factors.size == 0:
         return None
 
-    raw_atom_types = np.array(msm.get(receptor, element='atom', atom_type=True), dtype=object)
-    atom_names = np.array(msm.get(receptor, element='atom', atom_name=True), dtype=object)
-    kept_atom_types = np.array(
-        [
-            _get_atom_element(atom_type, atom_name)
-            for atom_type, atom_name in zip(raw_atom_types, atom_names)
-        ],
-        dtype=object,
-    )[np.asarray(keep_local_indices, dtype=int)]
+    metadata = _get_receptor_atom_metadata(receptor)
+    kept_atom_types = metadata['atom_types'][np.asarray(keep_local_indices, dtype=int)]
     heavy_atom_count = int(np.sum(np.char.upper(kept_atom_types.astype(str)) != 'H'))
     if heavy_atom_count <= 0:
         return None
@@ -179,6 +166,77 @@ def _group_labels(labels: np.ndarray) -> list[list[int]]:
     return groups
 
 
+def _normalize_structure_indices(structure_indices):
+    if isinstance(structure_indices, np.ndarray):
+        if structure_indices.ndim == 1 and structure_indices.size == 1:
+            return int(structure_indices[0])
+        return structure_indices.tolist()
+    return structure_indices
+
+
+def _build_selected_receptor(
+    molecular_system,
+    selection: str,
+    syntax: str,
+):
+    full_molsys = msm.convert(
+        molecular_system,
+        to_form='molsysmt.MolSys',
+    )
+    selected_atom_indices = np.array(
+        msm.select(full_molsys, selection=selection, syntax=syntax),
+        dtype=int,
+    )
+    receptor = msm.convert(
+        full_molsys,
+        to_form='molsysmt.MolSys',
+        selection=selected_atom_indices,
+        syntax='MolSysMT',
+    )
+    selected_b_factors = _get_selected_b_factors(full_molsys, selected_atom_indices)
+    return full_molsys, receptor, selected_atom_indices, selected_b_factors
+
+
+def _get_receptor_atom_metadata(receptor) -> dict[str, np.ndarray]:
+    raw_atom_types = np.array(
+        msm.get(receptor, element='atom', atom_type=True),
+        dtype=object,
+    )
+    atom_names = np.array(
+        msm.get(receptor, element='atom', atom_name=True),
+        dtype=object,
+    )
+    molecule_types = np.char.lower(
+        np.array(
+            msm.get(receptor, element='atom', molecule_type=True),
+            dtype=object,
+        ).astype(str)
+    )
+    group_names = np.char.upper(
+        np.array(
+            msm.get(receptor, element='atom', group_name=True),
+            dtype=object,
+        ).astype(str)
+    )
+    atom_types = np.char.upper(
+        np.array(
+            [
+                _get_atom_element(atom_type, atom_name)
+                for atom_type, atom_name in zip(raw_atom_types, atom_names)
+            ],
+            dtype=object,
+        ).astype(str)
+    )
+
+    return {
+        'raw_atom_types': raw_atom_types,
+        'atom_names': atom_names,
+        'atom_types': atom_types,
+        'molecule_types': molecule_types,
+        'group_names': group_names,
+    }
+
+
 def _prepare_receptor(
     molecular_system,
     selection: str,
@@ -190,19 +248,8 @@ def _prepare_receptor(
     include_group_names: list[str] | tuple[str, ...] | set[str] | None = None,
     exclude_group_names: list[str] | tuple[str, ...] | set[str] | None = None,
 ) -> tuple[object, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray | None]:
-    full_molsys = msm.convert(
-        molecular_system,
-        to_form='molsysmt.MolSys',
-    )
-    selected_atom_indices = np.array(
-        msm.select(full_molsys, selection=selection, syntax=syntax),
-        dtype=int,
-    )
-    selected_b_factors = _get_selected_b_factors(full_molsys, selected_atom_indices)
-
-    receptor = msm.convert(
-        molecular_system,
-        to_form='molsysmt.MolSys',
+    _, receptor, selected_atom_indices, selected_b_factors = _build_selected_receptor(
+        molecular_system=molecular_system,
         selection=selection,
         syntax=syntax,
     )
@@ -229,13 +276,9 @@ def _prepare_receptor(
         coordinates=True,
         structure_indices=0 if structure_indices == 0 else structure_indices,
     )[0]
-    coordinates_nm = np.asarray(msm.pyunitwizard.get_value(coordinates, to_unit='nm'))
-    atom_names = np.array(msm.get(filtered_receptor, element='atom', atom_name=True), dtype=object)
-    raw_atom_types = np.array(msm.get(filtered_receptor, element='atom', atom_type=True), dtype=object)
-    atom_types = np.array(
-        [_get_atom_element(atom_type, atom_name) for atom_type, atom_name in zip(raw_atom_types, atom_names)],
-        dtype=object,
-    )
+    coordinates_nm = np.asarray(puw.get_value(coordinates, to_unit='nm'))
+    metadata = _get_receptor_atom_metadata(filtered_receptor)
+    atom_types = metadata['atom_types']
     atom_radii_nm = _get_atomic_radii_nm(filtered_receptor, atom_types)
     atom_electronegativities = np.array(
         [_get_atom_electronegativity(atom_type) for atom_type in atom_types],
@@ -265,18 +308,11 @@ def _get_fpocket_native_keep_local_indices(
     include_group_names: list[str] | tuple[str, ...] | set[str] | None = None,
     exclude_group_names: list[str] | tuple[str, ...] | set[str] | None = None,
 ) -> np.ndarray:
-    raw_atom_types = np.array(msm.get(receptor, element='atom', atom_type=True), dtype=object)
-    atom_names = np.array(msm.get(receptor, element='atom', atom_name=True), dtype=object)
-    molecule_types = np.array(msm.get(receptor, element='atom', molecule_type=True), dtype=object)
-    group_names = np.array(msm.get(receptor, element='atom', group_name=True), dtype=object)
-
-    atom_types = np.array(
-        [_get_atom_element(atom_type, atom_name) for atom_type, atom_name in zip(raw_atom_types, atom_names)],
-        dtype=object,
-    )
-    atom_types = np.char.upper(atom_types.astype(str))
-    molecule_types = np.char.lower(molecule_types.astype(str))
-    group_names = np.char.upper(group_names.astype(str))
+    metadata = _get_receptor_atom_metadata(receptor)
+    atom_types = metadata['atom_types']
+    atom_names = metadata['atom_names']
+    molecule_types = metadata['molecule_types']
+    group_names = metadata['group_names']
 
     include_group_name_set = {
         str(group_name).strip().upper() for group_name in (include_group_names or [])
@@ -371,18 +407,10 @@ def _is_excluded_as_hydrogen_for_fpocket(
 
 
 def _get_fpocket_descriptor_occluder_local_indices(receptor) -> np.ndarray:
-    raw_atom_types = np.array(msm.get(receptor, element='atom', atom_type=True), dtype=object)
-    atom_names = np.array(msm.get(receptor, element='atom', atom_name=True), dtype=object)
-    molecule_types = np.array(msm.get(receptor, element='atom', molecule_type=True), dtype=object)
-    group_names = np.array(msm.get(receptor, element='atom', group_name=True), dtype=object)
-
-    atom_types = np.array(
-        [_get_atom_element(atom_type, atom_name) for atom_type, atom_name in zip(raw_atom_types, atom_names)],
-        dtype=object,
-    )
-    atom_types = np.char.upper(atom_types.astype(str))
-    molecule_types = np.char.lower(molecule_types.astype(str))
-    group_names = np.char.upper(group_names.astype(str))
+    metadata = _get_receptor_atom_metadata(receptor)
+    atom_types = metadata['atom_types']
+    molecule_types = metadata['molecule_types']
+    group_names = metadata['group_names']
 
     keep_mask = atom_types != 'H'
     keep_mask &= ~np.isin(group_names, list(WATER_GROUP_NAMES))
@@ -436,7 +464,7 @@ def _get_atomic_radii_nm(receptor, atom_types: np.ndarray) -> np.ndarray:
             definition='vdw',
             syntax='MolSysMT',
         )
-        return np.asarray(msm.pyunitwizard.get_value(radii, to_unit='nm'), dtype=float)
+        return np.asarray(puw.get_value(radii, to_unit='nm'), dtype=float)
     except Exception:
         from molsysmt.physchem.atoms.radius import vdw as vdw_radii
 
@@ -453,7 +481,7 @@ def _get_selected_b_factors(molecular_system, atom_indices: np.ndarray) -> np.nd
     if b_factors is None:
         return None
 
-    b_factors_value = np.asarray(msm.pyunitwizard.get_value(b_factors), dtype=float)
+    b_factors_value = np.asarray(puw.get_value(b_factors), dtype=float)
     if b_factors_value.ndim == 2:
         if b_factors_value.shape[0] == 0:
             return None
@@ -510,7 +538,7 @@ def _build_native_state(
         structure_indices=0 if structure_indices == 0 else structure_indices,
     )[0]
     descriptor_occluder_coordinates_nm = np.asarray(
-        msm.pyunitwizard.get_value(descriptor_coordinates, to_unit='nm'),
+        puw.get_value(descriptor_coordinates, to_unit='nm'),
         dtype=float,
     )
     descriptor_raw_atom_types = np.array(
@@ -1099,6 +1127,8 @@ def _native_topography_from_state(
     return topography
 
 
+@signal(tags=['method', 'fpocket4', 'native'])
+@arg_digest()
 def fpocket4(
     molecular_system,
     selection: str = 'all',
@@ -1124,6 +1154,8 @@ def fpocket4(
     allowing corrected semantics where TopoMT intentionally diverges from the
     original method.
     """
+
+    structure_indices = _normalize_structure_indices(structure_indices)
 
     if implementation == 'wrapper':
         return get_topography_with_fpocket(

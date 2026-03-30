@@ -805,6 +805,7 @@ def probe_scoring(
 # ---------------------------------------------------------------------------
 
 
+@dep_digest('py3Dmol')
 def view_pockets_py3dmol(
     atom_coords: np.ndarray,
     atom_elements: Sequence[str] | None,
@@ -817,10 +818,7 @@ def view_pockets_py3dmol(
     color_scheme: str = 'rainbow',
 ) -> 'py3Dmol.view':
     """Minimal py3Dmol viewer for alpha-sphere pockets (for quick inspection)."""
-    try:
-        import py3Dmol
-    except ImportError:
-        raise ImportError("The 'py3Dmol' package is required for this viewer.")
+    import py3Dmol
 
     v = py3Dmol.view()
     # add atoms as spheres

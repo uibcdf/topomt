@@ -24,10 +24,55 @@ For native reimplementations of external engines:
 - keep all coordinates and derived geometry in TopoMT canonical units;
 - use `molsysmt` for structure loading, atom selection, format conversion, and
   atom-index mapping;
-- use `pyunitwizard` for unit normalization at the API boundary;
+- use `pyunitwizard` directly for unit normalization at the API boundary and
+  before numeric kernels;
+- use `argdigest` and `depdigest` through TopoMT project-level adapters and
+  configuration, not by importing those libraries directly in public API
+  modules;
+- use `smonitor` through TopoMT's local integration and catalog, so public
+  API entry points and public native method entry points emit project-owned
+  signals instead of isolated third-party decorators;
 - expose results through `Topography` and `Feature` objects rather than through
   engine-specific containers;
 - use wrappers and upstream runs only for parity tests and regression audits.
+
+Implication:
+
+- native methods should not grow local `value + unit` helper layers when
+  `pyunitwizard` already covers the use case;
+- if a needed quantity operation is missing, the gap should be addressed in
+  `pyunitwizard` rather than worked around indefinitely inside TopoMT.
+- if a function depends on an optional third-party library to provide its real
+  behavior, that dependency should normally be declared with `depdigest`
+  instead of ad hoc `try/except ImportError` handling;
+- lightweight internal no-op fallbacks may still use `optional_import` when the
+  intent is explicitly to keep a non-essential integration silent and inert
+  rather than to expose a capability-gated public function.
+
+Implication for dependency handling:
+
+- `depdigest` should guard capability-bearing optional features such as
+  visualization helpers, geometry backends, and wrapper-backed adapters;
+- `optional_import` should be reserved for soft internal integrations whose
+  absence should not present as a user-facing capability contract;
+- `smonitor` should be treated as project infrastructure in the same sense:
+  signals, warnings, and exceptions should be catalogued under TopoMT rather
+  than attached ad hoc only where someone remembered to add a decorator;
+- and quantity handling should consistently use TopoMT's configured
+  `pyunitwizard`, not a mixture of project-local, `molsysmt`, and direct
+  third-party import routes across different modules.
+- and the project should keep a real `_depdigest.py` inventory aligned with the
+  capabilities it exposes.
+
+Practical note:
+
+- extending `@arg_digest()` from `get_topography()` to public native methods
+  should only be done once the public float-parameter semantics are explicit
+  and consistent;
+- `fpocket4` is now compatible with that rollout;
+- `alphaspace2` is not yet, because its public bare-float cutoffs currently
+  mean `nm`, while some older generic distance digesters still interpret bare
+  numbers as angstroms.
 
 ## Shared future acceleration note
 
@@ -153,6 +198,33 @@ Useful TopoMT-side tools for the native implementation include:
 - `pocket_geometry` for geometry support where it matches fpocket semantics;
 - `pyunitwizard` for unit-normalized boundaries around the method.
 
+### Cleanup after parity work
+
+The native pocket methods should progressively express receptor preparation
+through `molsysmt` selection/filtering helpers rather than through repeated
+local purge pipelines.
+
+Progress note:
+
+- `fpocket4` now centralizes selected-receptor construction and atom-metadata
+  extraction around shared `molsysmt` helpers;
+- `pocketeer`, `castp`, and `pycasta` now also reuse a common heavy-receptor
+  preparation helper instead of maintaining their own manual filtering code;
+- the remaining debt is now narrower and method-specific, rather than the same
+  preparation logic duplicated across several native engines.
+
+Constraint:
+
+- keep the validated method semantics unchanged;
+- and treat this as implementation cleanup, not as an opportunity to retune the
+  algorithms.
+
+This should apply later to:
+
+- `implementation='native'`
+- `implementation='topomt'`
+- and, when it exists, `implementation='topomt-scalable'`
+
 ## `alphaspace2`
 
 ### Current state
@@ -167,6 +239,12 @@ on the current reference systems.
 
 What remains is the higher semantic layer: descriptors, nonpolar-space details,
 beta scores, and the rest of the scoring semantics.
+
+The native path now also already includes the basic optional contact layer:
+
+- alpha contact masks from binder coordinates;
+- beta contact propagation from child alpha spheres;
+- pocket contact propagation and export through `Pocket.is_contact`.
 
 ### Upstream semantics that must be preserved
 

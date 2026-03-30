@@ -6,12 +6,15 @@ from __future__ import annotations
 import warnings
 from typing import Iterable, Sequence
 
-import molsysmt as msm
 import numpy as np
 from scipy.spatial import Delaunay
-from topomt._private.puw_utils import get_magnitude, get_magnitudes
+
+from topomt._private.molsysmt_preparation import build_heavy_receptor_view
+from topomt._private.smonitor import signal
+from topomt import pyunitwizard as puw
 
 
+@signal(tags=['method', 'pycasta', 'native'])
 def pycasta(
     molecular_system,
     selection: str = 'all',
@@ -34,25 +37,23 @@ def pycasta(
     Detect pockets using a PyCASTA-style approach. Internal logic in NM.
     """
     
-    # Normalization to NM
-    alpha_nm = get_magnitude(alpha, unit='nm')
-    # 50 A^3 = 0.05 nm^3
-    min_vol_nm3 = get_magnitude(min_pocket_volume, unit='nm**3') if not isinstance(min_pocket_volume, (int, float)) else min_pocket_volume / 1000.0
-    merge_threshold_nm = get_magnitude(merge_threshold, unit='nm')
-
-    from topomt import Topography
-    topo_obj = Topography(molecular_system=molecular_system, structure_indices=structure_indices)
-    molsys = topo_obj._molsys
-
-    atom_indices = msm.select(molsys, selection=selection, syntax=syntax)
-    remove_idx = msm.select(molsys, selection="group_type in ['water', 'ion', 'small molecule']", mask=atom_indices)
-    if len(remove_idx) > 0:
-        atom_indices = [idx for idx in atom_indices if idx not in remove_idx]
-
-    atom_indices = msm.select(molsys, selection='atom_type not in ["H"]', mask=atom_indices)
-
-    coords = msm.get(molsys, selection=atom_indices, structure_indices=structure_indices, coordinates=True)[0]
-    coords_nm = get_magnitudes(coords, unit='nm')
+    alpha_nm = float(puw.get_value(alpha, to_unit='nm')) if puw.is_quantity(alpha) else float(alpha)
+    min_vol_nm3 = (
+        float(puw.get_value(min_pocket_volume, to_unit='nm**3'))
+        if puw.is_quantity(min_pocket_volume)
+        else float(min_pocket_volume) / 1000.0
+    )
+    merge_threshold_nm = (
+        float(puw.get_value(merge_threshold, to_unit='nm'))
+        if puw.is_quantity(merge_threshold)
+        else float(merge_threshold)
+    )
+    _, _, atom_indices, coords_nm = build_heavy_receptor_view(
+        molecular_system=molecular_system,
+        selection=selection,
+        structure_indices=structure_indices,
+        syntax=syntax,
+    )
     
     if coords_nm.shape[0] < 4:
         if return_atom_indices:
