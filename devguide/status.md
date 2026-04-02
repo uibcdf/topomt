@@ -140,6 +140,11 @@ This includes:
   provenance: the native methods and the active argument-digestion layer use
   TopoMT's configured `pyunitwizard` instead of mixing project-local,
   `molsysmt`, and direct third-party import routes.
+- The current quantity policy is now clearer and should remain stable:
+  TopoMT core features and native method outputs preserve physical quantities
+  on geometry-bearing fields, while consumer boundaries such as
+  `molsysviewer_topomt` normalize those values to canonical magnitudes only at
+  the serialization/render edge.
 - `fpocket4` has also been cleaned up to use `molsysmt` more idiomatically at
   receptor-preparation time: selected receptors and atom metadata are now
   built through shared helpers instead of repeated raw reconversion and

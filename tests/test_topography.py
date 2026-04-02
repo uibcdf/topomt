@@ -6,6 +6,7 @@ import importlib
 import warnings
 from molsysmt.native.molsys import MolSys
 from topomt.features import Mouth, Pocket
+from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
 from topomt.get_topography import _run_alphaspace2, _run_pocketeer, _run_pycasta
 import pytest
@@ -150,6 +151,10 @@ def test_run_pocketeer_maps_local_indices_to_global(topography_empty_1tcd, monke
     assert pocket.atom_indices == [10, 30, 40, 50]
     assert pocket.source == 'pocketeer'
     assert pocket.source_id == 'pocketeer:3'
+    assert puw.is_quantity(pocket.center)
+    assert puw.is_quantity(pocket.volume)
+    assert np.allclose(puw.get_value(pocket.center, to_unit='nm'), [0.1, 0.2, 0.3])
+    assert puw.get_value(pocket.volume, to_unit='nm**3') == pytest.approx(0.5)
 
 
 def test_run_alphaspace2_uses_filtered_atom_index_mapping(topography_empty_1tcd, monkeypatch):
@@ -179,6 +184,46 @@ def test_run_alphaspace2_uses_filtered_atom_index_mapping(topography_empty_1tcd,
     assert pocket.atom_indices == [5, 13]
     assert pocket.source == 'alphaspace2'
     assert pocket.source_id == 'alphaspace2:0'
+
+
+def test_run_alphaspace2_state_path_returns_quantities(topography_empty_1tcd, monkeypatch):
+    alphaspace2_module = importlib.import_module('topomt.methods.alphaspace2')
+
+    def fake_alphaspace2(*args, **kwargs):
+        state = object()
+        return [], np.empty((0, 3)), np.empty((0,)), None, [5, 8, 13, 21], state
+
+    def fake_state_to_pocket_records(state):
+        return [
+            {
+                'pocket_index': 0,
+                'atom_indices': [5, 13],
+                'center': np.array([0.1, 0.2, 0.3]),
+                'volume': 0.5,
+                'score': 1.0,
+                'alpha_sphere_centers': np.array([[0.1, 0.2, 0.3]]),
+                'alpha_sphere_radii': np.array([0.2]),
+                'beta_centers': np.array([[0.15, 0.25, 0.35]]),
+                'beta_scores': [0.8],
+                'nonpolar_volume': 0.2,
+                'is_contact': False,
+            }
+        ]
+
+    monkeypatch.setattr(alphaspace2_module, 'alphaspace2', fake_alphaspace2)
+    monkeypatch.setattr(alphaspace2_module, '_state_to_pocket_records', fake_state_to_pocket_records)
+
+    topo = _run_alphaspace2(topography_empty_1tcd.copy(deep=True), min_vertices=1)
+
+    pocket = next(iter(topo.get_features(by='type', value='pocket')))
+    assert puw.is_quantity(pocket.center)
+    assert puw.is_quantity(pocket.volume)
+    assert puw.is_quantity(pocket.alpha_sphere_centers)
+    assert puw.is_quantity(pocket.alpha_sphere_radii)
+    assert puw.is_quantity(pocket.beta_centers)
+    assert puw.is_quantity(pocket.nonpolar_volume)
+    assert np.allclose(puw.get_value(pocket.center, to_unit='nm'), [0.1, 0.2, 0.3])
+    assert puw.get_value(pocket.volume, to_unit='nm**3') == pytest.approx(0.5)
 
 
 def test_run_pycasta_maps_local_indices_to_global(topography_empty_1tcd, monkeypatch):
@@ -224,10 +269,15 @@ def test_get_topography_argdigest_standardizes_engine_and_structure_index(monkey
 def test_pocketeer_sasa_warning_uses_topomt_catalog_warning():
     pocketeer_module = importlib.import_module('topomt.methods.pocketeer')
     smonitor_module = importlib.import_module('topomt._private.smonitor')
+    coords_nm = np.zeros((3, 3), dtype=float)
 
     with warnings.catch_warnings(record=True) as caught:
         warnings.simplefilter('always')
-        result = pocketeer_module._sasa_molsysmt(None, atom_indices=[0, 1, 2])
+        result = pocketeer_module._sasa_molsysmt(
+            None,
+            coords_nm=coords_nm,
+            polar_probe_radius_nm=0.14,
+        )
 
     assert result.shape == (3,)
     assert len(caught) == 1

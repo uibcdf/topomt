@@ -55,6 +55,7 @@ zip-safe = false
 # recursively because of its __init__.py file, but the data subdirectory is excluded
 # with include-package-data = false and namespaces = false.
 include-package-data = false
+
 [tool.setuptools.packages.find]
 namespaces = true
 where = ["."]

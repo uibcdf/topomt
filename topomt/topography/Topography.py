@@ -9,6 +9,7 @@ import molsysmt as msm
 from topomt.features import _FEATURE_TYPE_REGISTRY, _FEATURE_PREFIXES
 from ..features.BaseFeature import BaseFeature, FeatureID, FeatureIndex, FeatureType, ShapeType, Dimensionality
 
+
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Main class
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

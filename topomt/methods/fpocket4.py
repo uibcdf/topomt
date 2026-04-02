@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Any
 
 import molsysmt as msm
 import numpy as np
@@ -1082,11 +1083,12 @@ def _keep_native_pocket(descriptor: Fpocket4NativePocketDescriptor) -> bool:
 
 def _native_topography_from_state(
     state: Fpocket4NativeState,
+    molecular_system: Any = None,
     *,
     source: str = 'fpocket-native',
     source_prefix: str = 'fpocket-native',
 ) -> Topography:
-    topography = Topography()
+    topography = Topography(molecular_system=molecular_system)
 
     descriptors = [
         _build_native_pocket_descriptor(state, pocket_index)
@@ -1105,20 +1107,20 @@ def _native_topography_from_state(
         alpha_radii = state.alpha_spheres.radii[alpha_indices_array]
         pocket = Pocket(
             atom_indices=descriptor.atom_indices,
-            center=descriptor.center_nm,
-            volume=descriptor.volume_nm3,
-            convex_hull_volume=descriptor.convex_hull_volume_nm3,
+            center=puw.quantity(descriptor.center_nm, 'nm'),
+            volume=puw.quantity(descriptor.volume_nm3, 'nm**3'),
+            convex_hull_volume=puw.quantity(descriptor.convex_hull_volume_nm3, 'nm**3'),
             score=descriptor.score,
             n_alpha_spheres=descriptor.n_alpha_spheres,
-            mean_alpha_sphere_radius=descriptor.mean_alpha_sphere_radius_nm,
+            mean_alpha_sphere_radius=puw.quantity(descriptor.mean_alpha_sphere_radius_nm, 'nm'),
             n_apolar_alpha_spheres=descriptor.n_apolar_alpha_spheres,
             apolar_alpha_sphere_ratio=descriptor.apolar_alpha_sphere_ratio,
             local_hydrophobic_density_score=descriptor.local_hydrophobic_density,
             as_density=descriptor.as_density_angstrom,
             as_max_dst=descriptor.as_max_dst_angstrom,
             druggability_score=descriptor.druggability_score,
-            alpha_sphere_centers=alpha_centers,
-            alpha_sphere_radii=alpha_radii,
+            alpha_sphere_centers=puw.quantity(alpha_centers, 'nm'),
+            alpha_sphere_radii=puw.quantity(alpha_radii, 'nm'),
             source=source,
             source_id=f'{source_prefix}:{pocket_index}',
         )
@@ -1184,10 +1186,11 @@ def fpocket4(
     )
 
     if implementation == 'native':
-        return _native_topography_from_state(state)
+        return _native_topography_from_state(state, molecular_system=molecular_system)
 
     return _native_topography_from_state(
         state,
+        molecular_system=molecular_system,
         source='fpocket-topomt',
         source_prefix='fpocket-topomt',
     )

@@ -7,6 +7,7 @@ import numpy as np
 import pytest
 import topomt as tmt
 import molsysmt as msm
+from topomt import pyunitwizard as puw
 
 from topomt.methods.fpocket4 import (
     ASPH_MAX_SIZE_NM,
@@ -467,6 +468,21 @@ def test_fpocket4_native_matches_audited_count_for_3lkf():
     native_topography = fpocket4(FP_3LKF_PDB, implementation='native')
 
     assert len(native_topography) == 18
+
+
+def test_fpocket4_native_exports_geometric_fields_as_quantities_for_3lkf():
+
+    native_topography = fpocket4(FP_3LKF_PDB, implementation='native')
+    pocket = native_topography['POC-1']
+
+    assert puw.is_quantity(pocket.center)
+    assert puw.is_quantity(pocket.volume)
+    assert puw.is_quantity(pocket.convex_hull_volume)
+    assert puw.is_quantity(pocket.mean_alpha_sphere_radius)
+    assert puw.is_quantity(pocket.alpha_sphere_centers)
+    assert puw.is_quantity(pocket.alpha_sphere_radii)
+    assert puw.get_value(pocket.center, to_unit='nm').shape == (3,)
+    assert puw.get_value(pocket.alpha_sphere_centers, to_unit='nm').shape[1] == 3
 
 
 @pytest.mark.parametrize(

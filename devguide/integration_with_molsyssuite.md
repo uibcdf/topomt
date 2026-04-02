@@ -44,6 +44,20 @@ For TopoMT, this means:
 - configure the library-level standard units explicitly;
 - use raw magnitudes internally when performance matters.
 
+Practical boundary rule:
+
+- TopoMT core objects and native method outputs should preserve physical
+  quantities on geometry-bearing feature fields such as centers, radii, and
+  volumes;
+- consumer boundaries that serialize or forward those values into other tools
+  should normalize to canonical magnitudes only at that boundary layer.
+
+Current example:
+
+- `molsysviewer_topomt` keeps TopoMT features quantity-backed in the core, but
+  normalizes viewer payloads to canonical `nm` / `nm**3` magnitudes and then
+  rewraps those values as needed by MolSysViewer shape helpers.
+
 ## `argdigest`
 
 `argdigest` provides input normalization for public functions.

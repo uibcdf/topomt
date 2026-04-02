@@ -4,8 +4,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import molsysviewer
+import numpy as np
+import pytest
 import topomt as tmt
 from molsysviewer.shapes import ShapesManager
+from topomt import pyunitwizard as puw
 
 from molsysviewer_topomt import get_addon
 from molsysviewer_topomt.addon import lifecycle
@@ -92,6 +95,27 @@ def test_topography_payload_normalizes_current_topomt_features():
     assert payload['features'][0]['source'] == 'pocketeer'
 
 
+def test_topography_payload_converts_quantities_to_canonical_magnitudes():
+    topo = tmt.Topography()
+    topo.add_new_feature(
+        feature_type='pocket',
+        feature_id='POC-1',
+        atom_indices=[1, 2, 3],
+        center=puw.quantity([1.0, 2.0, 3.0], 'angstrom'),
+        volume=puw.quantity(1000.0, 'angstrom**3'),
+        alpha_sphere_centers=puw.quantity([[1.0, 2.0, 3.0]], 'angstrom'),
+        alpha_sphere_radii=puw.quantity([2.0], 'angstrom'),
+    )
+
+    payload = topography_payload(topo)
+    feature = payload['features'][0]
+
+    assert feature['center'] == pytest.approx([0.1, 0.2, 0.3])
+    assert feature['volume'] == pytest.approx(1.0)
+    assert np.allclose(feature['sphere_centers'], [[0.1, 0.2, 0.3]])
+    assert feature['sphere_radii'] == pytest.approx([0.2])
+
+
 class DummyView:
     def __init__(self):
         self.messages = []
@@ -152,6 +176,27 @@ def test_render_topography_pockets_uses_blob_and_marker_modes():
     assert result['rendered'][1]['mode'] == 'marker'
     assert view.messages[0]['op'] == 'add_pocket_blob'
     assert view.messages[1]['op'] == 'add_sphere'
+
+
+def test_render_topography_pockets_accepts_quantity_backed_features():
+    topo = tmt.Topography()
+    topo.add_new_feature(
+        feature_type='pocket',
+        feature_id='POC-1',
+        atom_indices=[1, 2, 3],
+        center=puw.quantity([1.0, 2.0, 3.0], 'angstrom'),
+        volume=puw.quantity(1000.0, 'angstrom**3'),
+        alpha_sphere_centers=puw.quantity([[1.0, 2.0, 3.0]], 'angstrom'),
+        alpha_sphere_radii=puw.quantity([2.0], 'angstrom'),
+    )
+
+    view = DummyView()
+    result = render_topography_pockets(view, topo)
+
+    assert result['n_rendered'] == 1
+    assert view.messages[0]['op'] == 'add_pocket_blob'
+    assert np.allclose(view.messages[0]['options']['centers'], [[0.1, 0.2, 0.3]])
+    assert view.messages[0]['options']['radii'] == pytest.approx([0.2])
 
 
 def test_pocket_blob_provider_renders_when_view_is_available():

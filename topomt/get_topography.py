@@ -75,8 +75,8 @@ def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
         
         pocket_feature = Pocket(
             atom_indices=sorted(list(all_atom_indices)),
-            center=p.centroid,
-            volume=p.volume,
+            center=puw.quantity(p.centroid, 'nm'),
+            volume=puw.quantity(p.volume, 'nm**3'),
             score=p.score,
             source='pocketeer',
             source_id=f'pocketeer:{p.pocket_id}',
@@ -114,16 +114,16 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
 
             pocket_feature = Pocket(
                 atom_indices=pocket_record['atom_indices'],
-                center=pocket_record['center'],
-                volume=pocket_record['volume'],
+                center=puw.quantity(pocket_record['center'], 'nm'),
+                volume=puw.quantity(pocket_record['volume'], 'nm**3'),
                 score=pocket_record['score'],
                 source='alphaspace2',
                 source_id=f"alphaspace2:{pocket_record['pocket_index']}",
-                alpha_sphere_centers=pocket_record['alpha_sphere_centers'],
-                alpha_sphere_radii=pocket_record['alpha_sphere_radii'],
-                beta_centers=pocket_record['beta_centers'],
+                alpha_sphere_centers=puw.quantity(pocket_record['alpha_sphere_centers'], 'nm'),
+                alpha_sphere_radii=puw.quantity(pocket_record['alpha_sphere_radii'], 'nm'),
+                beta_centers=puw.quantity(pocket_record['beta_centers'], 'nm'),
                 beta_scores=pocket_record['beta_scores'],
-                nonpolar_volume=pocket_record['nonpolar_volume'],
+                nonpolar_volume=puw.quantity(pocket_record['nonpolar_volume'], 'nm**3'),
                 is_contact=pocket_record['is_contact'],
             )
 

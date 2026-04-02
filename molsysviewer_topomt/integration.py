@@ -125,6 +125,7 @@ def build_view_with_topography(
     molecular_system,
     topography,
     *,
+    feature_ids=None,
     selection='all',
     structure_indices='all',
     syntax='MolSysMT',
@@ -137,6 +138,10 @@ def build_view_with_topography(
 ):
     """Create or reuse a view, load a molecular system, and overlay a TopoMT topography."""
     register_with_molsysviewer()
+
+    if feature_ids is not None:
+        topography = subset_topography(topography, feature_ids)
+
     view = molsysviewer.new_view(
         molecular_system,
         selection=selection,

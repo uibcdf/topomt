@@ -1,9 +1,9 @@
 """Python-side rendering helpers for the first TopoMT MolSysViewer addon slice."""
 
-from __future__ import annotations
-
 import math
 from typing import Any
+
+from topomt import pyunitwizard as puw
 
 from .payloads import topography_payload
 
@@ -59,8 +59,8 @@ def render_topography_pockets(
             if isinstance(score, (int, float)):
                 values = [float(score)] * n_spheres
             layer = view.shapes.add_pocket_blob(
-                centers=sphere_centers,
-                radii=sphere_radii,
+                centers=puw.quantity(sphere_centers, 'nm'),
+                radii=puw.quantity(sphere_radii, 'nm'),
                 values=values,
                 color_map=color_map,
                 alpha=alpha,
@@ -73,8 +73,8 @@ def render_topography_pockets(
 
         if center is not None:
             layer = view.shapes.add_sphere(
-                center=center,
-                radius=_marker_radius_from_feature(feature),
+                center=puw.quantity(center, 'nm'),
+                radius=puw.quantity(_marker_radius_from_feature(feature), 'nm'),
                 color=marker_color,
                 alpha=marker_alpha,
                 tag=tag,
