@@ -127,7 +127,11 @@ This includes:
 - TopoMT now also uses a project-configured `argdigest` adapter and has
   started tightening `depdigest` usage for optional capability-bearing
   features, instead of relying on direct imports or ad hoc dependency guards.
-- The upcoming `pocketeer` native method is documented in `devguide/pocketeer_contract.md`, linking to https://pocketeer.readthedocs.io/en/latest/ and the local mirror `~/repos@others/pocketeer`; that page records the validation target and the external references for the parity work we are about to implement.
+- The native `pocketeer` method is documented in
+  `devguide/pocketeer_contract.md`, linking to
+  https://pocketeer.readthedocs.io/en/latest/ and the local mirror
+  `~/repos@others/pocketeer`; that page records the implemented parity target,
+  the upstream reference, and the current regression-test anchor.
 - `fpocket4` now also enters through the project-level `argdigest` route with
   explicit coverage for its public compatibility options; `alphaspace2` was
   intentionally not rolled out the same way yet because its public float
@@ -154,7 +158,7 @@ This includes:
   preparation helper, so the main native pocket methods no longer carry
   separate ad hoc purge/filter pipelines.
 - The native `pocketeer` path now reaches parity with the upstream reference
-  run (`tests/test_pocketeer_parity.py`). It uses the shared alpha-sphere
+  run (`tests/methods/pocketeer/test_parity.py`). It uses the shared alpha-sphere
   geometry, a Biotite-based SASA backend that honors the `polar_probe_radius`
   (documented in `devguide/proposal_smonitor_improvement.md`), and a scoring
   bonus tuned to stay within the 2.5-point tolerance requested by the parity

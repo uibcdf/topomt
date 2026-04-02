@@ -69,7 +69,7 @@ At the end of this work session:
   alpha spheres to betas and pockets;
 - that `CDK2` test is now green under a small explicit absolute tolerance on
   the real `molsysmt` file-ingestion path;
-- and the full current `tests/test_alphaspace2.py` suite is green again.
+- and the full current `tests/methods/alphaspace2/test_parity.py` suite is green again.
 
 So the current reading is no longer "the richer score route is still missing".
 It is:

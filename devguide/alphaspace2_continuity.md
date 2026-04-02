@@ -13,7 +13,7 @@ Purpose: record what is already implemented for scoring/contact and what the nex
    - Revisit `argdigest` rollout once we decide whether bare floats should stay as `nm` defaults for scoring arguments.
 
 3. **Scheduled checks**
-   - Run `python -m pytest tests/test_alphaspace2.py -k "beta_probe or cdk2"` after any scoring, table or contact change.
+   - Run `python -m pytest tests/methods/alphaspace2/test_parity.py -k "beta_probe or cdk2"` after any scoring, table or contact change.
    - Review contract doc if new descriptors or tables are added.
 
 With this log we can pick up the thread later without losing track of the parity goal we just met.

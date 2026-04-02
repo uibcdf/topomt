@@ -23,7 +23,7 @@ from topomt.wrappers.fpocket.parser import _parse_pqr_charge_and_radius, parse_f
 from topomt.wrappers.fpocket.runner import run_fpocket
 
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 FP_3LKF_PDB = REPO_ROOT / 'topomt' / 'data' / 'fpocket4' / 'sample' / '3LKF.pdb'
 FP_3LKF_OUT = REPO_ROOT / 'topomt' / 'data' / 'fpocket4' / 'sample' / '3LKF_out'
 FP_1TCD_PDB = REPO_ROOT / 'topomt' / 'wrappers' / 'fpocket' / '1tcd.pdb'
@@ -296,7 +296,7 @@ def test_fpocket4_argdigest_normalizes_structure_indices_for_native_path(monkeyp
     )
 
     assert captured['structure_indices'] == 0
-    assert result == ('native-state', {})
+    assert result == ('native-state', {'molecular_system': 'dummy'})
 
 
 def test_fpocket4_native_prepare_receptor_keeps_b_factors_for_1atp():

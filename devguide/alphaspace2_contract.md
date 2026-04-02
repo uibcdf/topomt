@@ -6,15 +6,15 @@ attention before the `0.3.0` milestone.
 
 **Parity Coverage**
 
-- `tests/test_alphaspace2.py` already asserts native state ≃ upstream `Snapshot`
+- `tests/methods/alphaspace2/test_parity.py` already asserts native state ≃ upstream `Snapshot`
   for alpha counts, pocket memberships, pocket volumes, beta groups, beta
   centers, beta spaces, and beta/pocket scores on reference systems
-  (`1GG0`, `3LKF`, protease examples, CDK2)【tests/test_alphaspace2.py:122】.
+  (`1GG0`, `3LKF`, protease examples, CDK2).
 - The same file also checks binder/contact propagation and Vina-aware scoring
   residuals through `_native_pocket_scores_from_state` and the `CDK2` parity
   regression, ensuring the scoring tables and filtered beta probe handling
   remain aligned with the upstream `genBScore`/`annotateVinaAtomTypes`
-  semantics【tests/test_alphaspace2.py:274】.
+  semantics.
 
 **Mechanics We Guarantee**
 
@@ -89,7 +89,7 @@ attention before the `0.3.0` milestone.
 
 **Verification Steps**
 
-1. Run `python -m pytest tests/test_alphaspace2.py -k cdk2` to keep the Vina
+1. Run `python -m pytest tests/methods/alphaspace2/test_parity.py -k cdk2` to keep the Vina
    scoring parity guard green.
 2. Re-run `tests/test_topography.py` subsets that mutate `alphaspace2` inputs
    when you change binder/contact flags or state-to-pocket conversions.
