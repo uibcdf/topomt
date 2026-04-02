@@ -8,6 +8,26 @@ from topomt.features import Pocket
 from topomt.wrappers._common import import_upstream_module, prepare_wrapper_input_pdb
 
 
+def _normalize_upstream_pocketeer_kwargs(kwargs):
+    normalized = dict(kwargs)
+
+    distance_keys = ('r_min', 'r_max', 'polar_probe_radius', 'merge_distance')
+    for key in distance_keys:
+        value = normalized.get(key, None)
+        if value is not None and puw.is_quantity(value):
+            normalized[key] = float(puw.get_value(value, to_unit='angstroms'))
+
+    sasa_threshold = normalized.get('sasa_threshold', None)
+    if sasa_threshold is not None and puw.is_quantity(sasa_threshold):
+        normalized['sasa_threshold'] = float(puw.get_value(sasa_threshold, to_unit='angstroms**2'))
+
+    min_spheres = normalized.get('min_spheres', None)
+    if min_spheres is not None:
+        normalized['min_spheres'] = int(min_spheres)
+
+    return normalized
+
+
 def get_topography_with_pocketeer(
     molecular_system,
     *,
@@ -34,7 +54,10 @@ def get_topography_with_pocketeer(
 
         upstream = import_upstream_module('pocketeer', upstream_root=upstream_root)
         atomarray = upstream.load_structure(str(input_pdb))
-        pockets = upstream.find_pockets(atomarray, **kwargs)
+        pockets = upstream.find_pockets(
+            atomarray,
+            **_normalize_upstream_pocketeer_kwargs(kwargs),
+        )
 
         topography = Topography(
             molecular_system=molecular_system,

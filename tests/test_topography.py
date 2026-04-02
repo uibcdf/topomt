@@ -358,6 +358,41 @@ def test_run_pycasta_wrapper_routes_to_wrapper_integration(topography_empty_1tcd
     assert called['kwargs']['upstream_root'] == '/tmp/pycasta'
 
 
+def test_get_topography_wrapper_kwargs_do_not_emit_digest_not_digested_warning(monkeypatch):
+    get_topography_module = importlib.import_module('topomt.get_topography')
+
+    def fake_wrapper(molecular_system, **kwargs):
+        return tmt.Topography(
+            molecular_system=molecular_system,
+            selection=kwargs['selection'],
+            structure_indices=kwargs['structure_indices'],
+        )
+
+    monkeypatch.setattr(
+        importlib.import_module('topomt.wrappers.pocketeer.integration'),
+        'get_topography_with_pocketeer',
+        fake_wrapper,
+    )
+
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter('always')
+        topo = get_topography(
+            tmt.demo['TcTIM']['1tcd.pdb'],
+            method='pocketeer',
+            implementation='wrapper',
+            upstream_root='/tmp/pocketeer',
+            r_min=3.0,
+            r_max=6.0,
+            polar_probe_radius=1.4,
+            sasa_threshold=20.0,
+            merge_distance=1.75,
+            min_spheres=35,
+        )
+
+    assert isinstance(topo, tmt.Topography)
+    assert not any(type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught)
+
+
 def test_pocketeer_sasa_warning_uses_topomt_catalog_warning():
     pocketeer_module = importlib.import_module('topomt.methods.pocketeer')
     smonitor_module = importlib.import_module('topomt._private.smonitor')
