@@ -46,9 +46,16 @@ def test_pycasta_matches_upstream_for_2pk4():
 @pytest.mark.parametrize(
     ('pdb_name', 'expected_sizes'),
     [
+        ('1a4j.pdb', None),
+        ('1acj.pdb', None),
+        ('1bid.pdb', None),
+        ('1byb.pdb', None),
         ('1stp.pdb', [80, 55]),
         ('2ifb.pdb', [93, 38, 9]),
         ('1hew.pdb', [57, 61]),
+        ('1a6w.pdb', None),
+        ('1okm.pdb', None),
+        ('1gca.pdb', None),
     ],
 )
 def test_pycasta_matches_upstream_counts_and_volumes_for_small_bounded_examples(
@@ -64,7 +71,11 @@ def test_pycasta_matches_upstream_counts_and_volumes_for_small_bounded_examples(
         return_atom_indices=True,
     )
 
+    upstream_sizes = [len(pocket) for pocket in upstream['ranked_pockets']]
+    if expected_sizes is None:
+        expected_sizes = upstream_sizes
+
     assert len(pockets) == len(expected_sizes) == len(upstream['ranked_pockets'])
     assert [len(pocket) for pocket in pockets] == expected_sizes
-    assert [len(pocket) for pocket in upstream['ranked_pockets']] == expected_sizes
+    assert upstream_sizes == expected_sizes
     assert volumes == pytest.approx([value / 1000.0 for value in upstream['pocket_volumes']])

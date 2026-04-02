@@ -69,14 +69,15 @@ Practical implication:
 
 ## What TopoMT must reproduce first
 
-1. Receptor preparation semantics equivalent to the upstream run, but using
-   `molsysmt` instead of Biopandas.
+1. Receptor preparation semantics defined through `molsysmt` molecular
+   selection, not through literal PDB record classes such as `ATOM` versus
+   `HETATM`.
 2. Per-atom radii assignment compatible with the upstream `atomic_radii.py`
    table.
 3. The repository's effective tetrahedral workflow:
-   standard Delaunay over receptor heavy atoms, alpha-complex filtering by
-   circumsphere radii, empty-tetrahedra selection, discrete flow grouping, and
-   centroid-distance cluster merging.
+   standard Delaunay over the selected receptor coordinates,
+   alpha-complex filtering by circumsphere radii, empty-tetrahedra selection,
+   discrete flow grouping, and centroid-distance cluster merging.
 4. Pocket descriptors that are part of the core geometric output:
    tetrahedra per pocket, representative point, pocket volume, pocket depth,
    ranking score, mouth area/perimeter, and pocket atom ownership.
@@ -145,6 +146,47 @@ The current small audited bounded subset is:
 These are the first repository-parity cases now used to anchor the local
 TopoMT battery because they are relatively small and already reproduce pocket
 counts, top-pocket/group sizes, and pocket volumes consistently.
+
+The current green audited bounded battery has now expanded to:
+
+- `1a4j`
+- `1acj`
+- `1bid`
+- `1byb`
+- `2pk4`
+- `1stp`
+- `2ifb`
+- `1hew`
+- `1a6w`
+- `1okm`
+- `1gca`
+
+## Deliberate semantic boundary
+
+The current public repository appears to split receptor versus ligand by PDB
+record type (`ATOM` versus `HETATM`) during preprocessing.
+
+TopoMT should not copy that rule into the native method contract:
+
+- it is a format convention, not a stable molecular/topological category;
+- it does not generalize cleanly across formats;
+- and it conflicts with the project-wide use of `molsysmt` molecular
+  semantics.
+
+Practical consequence:
+
+- native `pycasta` in TopoMT uses `molsysmt`-driven molecular selection;
+- wrapper mode remains the place to reproduce the public upstream package more
+  literally;
+- and any residual native-versus-upstream mismatch caused specifically by
+  `ATOM/HETATM` preprocessing drift should be documented explicitly rather than
+  imitated silently.
+
+Current known example:
+
+- `1apu` remains outside the green native parity battery because the public
+  upstream run still separates receptor/ligand in a way that depends on PDB
+  record typing, while the native TopoMT contract intentionally does not.
 
 ## Upstream dataset inventory
 

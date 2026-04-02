@@ -29,8 +29,8 @@ The current tests live mainly in:
 - basic pocket feature behavior;
 - alpha-sphere behavior;
 - basic CASTp path checks;
-- focused upstream parity for `pocketeer`, `alphaspace2`, `fpocket4`, and an
-  initial `pycasta` case;
+- focused upstream parity for `pocketeer`, `alphaspace2`, `fpocket4`, and a
+  growing `pycasta` bounded battery;
 - first wrapper smoke/parity coverage for `pocketeer`, `alphaspace2`, and
   `pycasta`, validating the real wrapper-backed execution path in addition to
   the native-method parity suites;
@@ -77,8 +77,12 @@ Practical implication:
 - [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py) is
   effectively empty and should become a real regression suite for the loader.
 - There is still limited direct coverage for `pocket_geometry`, and `pycasta`
-  still only has a first small repository-parity case rather than a broader
-  audited battery.
+  still does not yet cover the full upstream benchmark inventory even though
+  its audited bounded battery has already grown beyond the original single-case
+  checkpoint.
+- The remaining `pycasta` audited outlier is currently `1apu`, as a deliberate
+  native-versus-upstream semantic residual (`molsysmt` molecular selection
+  versus upstream `ATOM/HETATM` preprocessing).
 - `pocketeer` and `fpocket4` now have dedicated focused tests, but their
   heavier parity and deep-validation paths should still be expanded and better
   categorized.

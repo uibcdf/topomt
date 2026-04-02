@@ -145,14 +145,18 @@ This includes:
   standard SciPy Delaunay plus config-driven alpha thresholds. This should be
   treated as a repository-versus-paper drift to clarify, not yet as an
   established upstream error.
-- The native `pycasta` path now has a first real repository-parity checkpoint:
+- The native `pycasta` path now has a stronger repository-parity checkpoint:
   `tests/methods/pycasta/test_parity.py` confirms the current TopoMT method
-  reproduces the public upstream `2pk4` top-pocket result at the geometric
-  detector level (same top-pocket tetrahedron membership and matching top-pocket
-  volume after unit conversion). That small audited battery has now expanded to
-  additional bounded examples (`1stp`, `2ifb`, `1hew`) for pocket-count,
-  pocket-size, and volume parity, while the broader full benchmark inventory is
-  documented but not yet copied wholesale into TopoMT.
+  reproduces the public upstream geometric detector on the current audited
+  bounded battery (`1a4j`, `1acj`, `1bid`, `1byb`, `2pk4`, `1stp`, `2ifb`,
+  `1hew`, `1a6w`, `1okm`, and `1gca`) in terms of pocket counts,
+  pocket/group sizes, and pocket volumes. The broader full benchmark
+  inventory is documented but not yet copied wholesale into TopoMT.
+- A residual `pycasta` open point remains on `1apu`: the public upstream path
+  still appears to rely on PDB record typing (`ATOM` versus `HETATM`) during
+  receptor preprocessing, while the TopoMT native contract deliberately stays
+  with `molsysmt` molecular selection semantics instead of imitating that
+  format-dependent split.
 - `fpocket4` now also enters through the project-level `argdigest` route with
   explicit coverage for its public compatibility options; `alphaspace2` was
   intentionally not rolled out the same way yet because its public float
@@ -175,9 +179,10 @@ This includes:
   built through shared helpers instead of repeated raw reconversion and
   re-extraction paths.
 - The same `molsysmt`-centric cleanup has now been propagated to
-  `pocketeer`, `castp`, and `pycasta` through a shared heavy-receptor
-  preparation helper, so the main native pocket methods no longer carry
-  separate ad hoc purge/filter pipelines.
+  `pocketeer` and `castp` through a shared heavy-receptor preparation helper,
+  while `pycasta` now uses its own `molsysmt`-driven receptor-preparation path
+  because its native contract should follow molecular selection semantics
+  rather than PDB-record (`ATOM/HETATM`) preprocessing rules.
 - The native `pocketeer` path now reaches parity with the upstream reference
   run (`tests/methods/pocketeer/test_parity.py`). It uses the shared alpha-sphere
   geometry, a Biotite-based SASA backend that honors the `polar_probe_radius`

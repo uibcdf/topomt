@@ -2,10 +2,10 @@
 
 from typing import Sequence
 
+import molsysmt as msm
 import numpy as np
 from scipy.spatial import Delaunay
 
-from topomt._private.molsysmt_preparation import build_heavy_receptor_view
 from topomt._private.smonitor import signal
 from topomt import pyunitwizard as puw
 
@@ -50,7 +50,7 @@ def pycasta(
         if puw.is_quantity(merge_threshold)
         else float(merge_threshold)
     )
-    _, _, atom_indices, coords_nm = build_heavy_receptor_view(
+    atom_indices, coords_nm = _prepare_pycasta_receptor(
         molecular_system=molecular_system,
         selection=selection,
         structure_indices=structure_indices,
@@ -105,6 +105,39 @@ def pycasta(
     if return_atom_indices:
         return pockets_sorted, volumes_sorted, simplices, atom_indices
     return pockets_sorted, volumes_sorted, simplices
+
+
+def _prepare_pycasta_receptor(
+    molecular_system,
+    *,
+    selection: str,
+    structure_indices: int | list[int],
+    syntax: str,
+) -> tuple[np.ndarray, np.ndarray]:
+    full_molsys = msm.convert(
+        molecular_system,
+        to_form='molsysmt.MolSys',
+        structure_indices=structure_indices,
+    )
+    selected_atom_indices = np.array(
+        msm.select(full_molsys, selection=selection, syntax=syntax),
+        dtype=int,
+    )
+
+    receptor = msm.convert(
+        full_molsys,
+        to_form='molsysmt.MolSys',
+        selection=selected_atom_indices,
+        syntax='MolSysMT',
+    )
+    coordinates = msm.get(
+        molecular_system=receptor,
+        coordinates=True,
+        structure_indices=0 if structure_indices == 0 else structure_indices,
+    )[0]
+    coordinates_nm = np.asarray(puw.get_value(coordinates, to_unit='nm'), dtype=float)
+
+    return selected_atom_indices, coordinates_nm
 
 
 def _circumsphere_radii(tetra_positions: np.ndarray) -> np.ndarray:

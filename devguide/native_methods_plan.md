@@ -226,8 +226,11 @@ Progress note:
 
 - `fpocket4` now centralizes selected-receptor construction and atom-metadata
   extraction around shared `molsysmt` helpers;
-- `pocketeer`, `castp`, and `pycasta` now also reuse a common heavy-receptor
-  preparation helper instead of maintaining their own manual filtering code;
+- `pocketeer` and `castp` now also reuse a common heavy-receptor preparation
+  helper instead of maintaining their own manual filtering code;
+- `pycasta` now uses a dedicated `molsysmt` receptor-preparation path because
+  its native contract should stay aligned with molecular selection semantics,
+  not with upstream PDB-record (`ATOM/HETATM`) preprocessing quirks;
 - the remaining debt is now narrower and method-specific, rather than the same
   preparation logic duplicated across several native engines.
 
