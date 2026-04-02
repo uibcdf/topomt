@@ -21,7 +21,7 @@ should know:
 | `castp` | CASTp methodology and CASTp exported files | CASTp precomputed outputs | Imported external results, not a local package dependency | Faithful loading and normalization of CASTp pockets/mouths | Partial, loader-oriented |
 | `alphaspace2` | AlphaSpace2 by Redesign Science | `alphaspace2` Python package | `pip install alphaspace2` from upstream/PyPI-style distribution | Comparable alpha-space generation, pocket clustering, and lining-atom semantics | Reference formalized, parity not yet validated |
 | `pocketeer` | Pocketeer project/method <https://pocketeer.readthedocs.io/en/latest/>, <https://github.com/cch1999/pocketeer> | `pocketeer` Python package (upstream) | Local mirror `/home/diego/repos@others/pocketeer` for source comparison | Implement the `find_pockets` workflow, map pocket scores and atom masks, compare key numerics | Contract and tests now under active development (see `devguide/pocketeer_contract.md`) |
-| `pycasta` | PyCasta project | `pycasta` Python package | Python package from upstream project | Comparable tetrahedral/void decomposition semantics | Reference partially identified |
+| `pycasta` | pyCAST / pycasta project and paper | `pycasta` Python package | Upstream repository <https://github.com/giorgioluciano/pycasta>, local mirror `/home/diego/repos@others/pycasta`, paper DOI <https://doi.org/10.1016/j.csbj.2025.07.054> | Comparable tetrahedral cavity decomposition, pocket ranking, mouth geometry, and pocket atom ownership | Sources reviewed; contract being formalized, with paper/repository drift noted |
 | `pocket_geometry` | No single external engine; internal geometry layer | Not applicable | Not applicable | Stable geometry primitives and measurements used by other engines | Internal layer, not wrapper parity |
 
 ## `fpocket4`
@@ -218,6 +218,92 @@ reference information is not yet normalized in the documentation.
 ### Current status
 
 We still need to record explicitly:
+
+## `pycasta`
+
+### Upstream code and paper references
+
+- Repository: <https://github.com/giorgioluciano/pycasta>
+- Local source mirror: `/home/diego/repos@others/pycasta`
+- Paper: <https://doi.org/10.1016/j.csbj.2025.07.054>
+- Public article mirror: <https://pmc.ncbi.nlm.nih.gov/articles/PMC12357058/>
+
+### Practical package reference
+
+- Package: `pycasta`
+- Current practical reference: direct inspection of the upstream repository and
+  paper, not a wrapper integration already validated inside TopoMT
+
+### Current technical reading
+
+The repository currently exposes a script-centered workflow rather than a small
+clean public API.
+
+The effective algorithmic core appears to be:
+
+- receptor/ligand extraction from a PDB;
+- atomic-radius assignment;
+- Delaunay tetrahedralization of receptor coordinates;
+- alpha-complex filtering by circumsphere radius;
+- discrete flow over empty tetrahedra;
+- sink-based pocket grouping;
+- centroid-distance cluster merging;
+- pocket ranking, volume/depth estimation, and mouth/dual-set derivation.
+
+### Important repository-versus-paper drift
+
+The paper describes pyCAST in stronger terms than the current public
+repository currently implements.
+
+In particular, the paper describes:
+
+- weighted Delaunay triangulation;
+- alpha-threshold determination via persistent homology;
+- and a CAST-faithful flow description phrased around lower-edge-length
+  descent.
+
+The current repository, however, currently appears to use:
+
+- standard `scipy.spatial.Delaunay` in practice, because
+  `cgal_wdelaunay.py` is a placeholder fallback;
+- a mutable config-driven alpha threshold (`MANUAL_ALPHA` / `set_alpha`) rather
+  than an implemented persistent-homology alpha selector;
+- and a discrete-flow proxy driven by circumsphere-radius-derived values.
+
+This means TopoMT should treat two validation questions separately:
+
+- parity against the effective repository behavior;
+- and consistency with the stronger paper-level claims.
+
+### Validation target
+
+The first native validation target should be repository parity for the core
+geometric detector, not for the whole benchmark script stack.
+
+That means comparing at least:
+
+- pocket count and ranking;
+- tetrahedra-per-pocket grouping;
+- pocket atom ownership;
+- representative points;
+- pocket volumes/depths within explicit tolerances;
+- and mouth/dual-set outputs where deterministic.
+
+Current concrete checkpoint:
+
+- `tests/methods/pycasta/test_parity.py` now covers the public upstream
+  bounded examples `2pk4`, `1stp`, `2ifb`, and `1hew`.
+- `2pk4` currently anchors the strongest check, confirming parity of the top
+  pocket at the tetrahedron-membership and top-pocket-volume level.
+- the other three currently extend the small audited battery at the
+  pocket-count, pocket-size, and pocket-volume level.
+
+The longer-term audit should then decide whether the paper-described weighted
+Delaunay and persistent-homology pieces require:
+
+- an additional TopoMT mode;
+- or an upstream clarification/report if the repository is intentionally using
+  a simpler practical approximation.
 
 - the upstream repository;
 - the practical package/distribution reference;

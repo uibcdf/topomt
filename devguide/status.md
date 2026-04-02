@@ -60,7 +60,7 @@ This includes:
 - Cleanup of feature and topography internals.
 - Better internal contract normalization across engines.
 - Expansion of the `devguide/` to reflect the real project state.
-- The new `devguide/proposal_smonitor_improvement.md` entry captures the SASA backend
+- The new `devguide/proposal_improvement/proposal_smonitor_improvement.md` entry captures the SASA backend
   restriction (MolSysMT not letting us override `probe_radius`) and the interim Biotite
   workaround, establishing an upstream enhancement path before those diagnostics
   remain TopoMT-specific.
@@ -132,6 +132,24 @@ This includes:
   https://pocketeer.readthedocs.io/en/latest/ and the local mirror
   `~/repos@others/pocketeer`; that page records the implemented parity target,
   the upstream reference, and the current regression-test anchor.
+- `pycasta` is no longer only a vague placeholder in the engine set. The
+  upstream repository, local mirror, and paper reference are now recorded in
+  `devguide/engine_references.md`, and the first implementation scope note now
+  exists in `devguide/pycasta/contract.md`.
+- The current `pycasta` reading includes an explicit open audit question:
+  the paper describes weighted Delaunay triangulation and persistent-homology
+  alpha selection, while the current public repository appears to rely on
+  standard SciPy Delaunay plus config-driven alpha thresholds. This should be
+  treated as a repository-versus-paper drift to clarify, not yet as an
+  established upstream error.
+- The native `pycasta` path now has a first real repository-parity checkpoint:
+  `tests/methods/pycasta/test_parity.py` confirms the current TopoMT method
+  reproduces the public upstream `2pk4` top-pocket result at the geometric
+  detector level (same top-pocket tetrahedron membership and matching top-pocket
+  volume after unit conversion). That small audited battery has now expanded to
+  additional bounded examples (`1stp`, `2ifb`, `1hew`) for pocket-count,
+  pocket-size, and volume parity, while the broader full benchmark inventory is
+  documented but not yet copied wholesale into TopoMT.
 - `fpocket4` now also enters through the project-level `argdigest` route with
   explicit coverage for its public compatibility options; `alphaspace2` was
   intentionally not rolled out the same way yet because its public float
@@ -160,7 +178,7 @@ This includes:
 - The native `pocketeer` path now reaches parity with the upstream reference
   run (`tests/methods/pocketeer/test_parity.py`). It uses the shared alpha-sphere
   geometry, a Biotite-based SASA backend that honors the `polar_probe_radius`
-  (documented in `devguide/proposal_smonitor_improvement.md`), and a scoring
+  (documented in `devguide/proposal_improvement/proposal_smonitor_improvement.md`), and a scoring
   bonus tuned to stay within the 2.5-point tolerance requested by the parity
   tests.
 - The first `molsysviewer_topomt` scaffold now exists as a package-level addon

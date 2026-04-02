@@ -34,7 +34,7 @@ and the next engineering steps.
   Cross-cutting future plan for CPU-pool parallelization, distributed
   execution, and GPU evaluation across pocket engines.
 
-- [fpocket4_scalable_options.md](fpocket4_scalable_options.md)
+- [fpocket4/scalable_options.md](fpocket4/scalable_options.md)
   Specific design options for a future `fpocket4`
   `implementation='topomt-scalable'` path.
 
@@ -57,16 +57,23 @@ and the next engineering steps.
   reference points for the supported engines.
 - [pocketeer_contract.md](pocketeer_contract.md)
   Scope note for the upcoming `pocketeer` parity implementation, linking to the upstream documentation and the local mirror repository.
+- [pycasta/contract.md](pycasta/contract.md)
+  Active contract for the upcoming native `pycasta` implementation, including
+  the upstream repository, the paper source, and the current
+  repository-versus-paper audit notes.
+- [proposal_improvement/](proposal_improvement/)
+  Collected cross-repository improvement proposals for MolSysSuite sibling
+  packages identified while implementing TopoMT.
 
 - [native_methods_plan.md](native_methods_plan.md)
   Native reimplementation plan for the prioritized engines and the intended
   separation between `methods/` and `wrappers/`.
 
-- [fpocket4_native_checkpoint.md](fpocket4_native_checkpoint.md)
+- [fpocket4/native_checkpoint.md](fpocket4/native_checkpoint.md)
   Current detailed checkpoint for the native `fpocket4` diagnostic and parity
   work against upstream `fpocket`.
 
-- [alphaspace2_native_checkpoint.md](alphaspace2_native_checkpoint.md)
+- [alphaspace2/native_checkpoint.md](alphaspace2/native_checkpoint.md)
   Current checkpoint for the native `alphaspace2` work and the remaining
   semantic layers needed for the `0.3.0` milestone.
 
@@ -82,6 +89,27 @@ and the next engineering steps.
 
 - [packaging_and_environments.md](packaging_and_environments.md)
   Current packaging state, dependency metadata, and development environments.
+
+## Engine directories
+
+Engine-specific notes are now grouped in dedicated subdirectories when a topic
+has multiple related checkpoint or contract documents:
+
+- [fpocket4/](fpocket4/)
+  Native checkpoint, parity matrix, scalable-path notes, and upstream
+  correction drafts.
+- [alphaspace2/](alphaspace2/)
+  Native checkpoint, continuity notes, and method contract material.
+- [pycasta/](pycasta/)
+  Contract notes, benchmark inventory, and repository-versus-paper audit work.
+
+## Proposal directories
+
+Cross-project improvement proposals are grouped separately from engine notes:
+
+- [proposal_improvement/](proposal_improvement/)
+  Draft proposals for `molsysmt`, `molsysviewer`, `smonitor`,
+  `pyunitwizard`, `argdigest`, `depdigest`, and related sibling libraries.
 
 ## AFND
 

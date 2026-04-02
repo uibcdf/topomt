@@ -67,6 +67,6 @@ The remaining audited work is now mostly:
 
 ## Related documents
 
-- [fpocket4_native_checkpoint.md](fpocket4_native_checkpoint.md)
-- [pocket_algorithm_issues.md](pocket_algorithm_issues.md)
-- [fpocket_corrections/README.md](fpocket_corrections/README.md)
+- [native_checkpoint.md](native_checkpoint.md)
+- [../pocket_algorithm_issues.md](../pocket_algorithm_issues.md)
+- [corrections/README.md](corrections/README.md)

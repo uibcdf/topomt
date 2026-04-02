@@ -111,6 +111,9 @@ engines.
 - separate wrapper-backed integrations from native method targets;
 - define native reimplementation plans for the prioritized methods;
 - identify missing descriptors and missing tests;
+- when a paper and the public repository diverge, document explicitly whether
+  the first TopoMT target is repository parity, paper parity, or both in
+  staged form;
 - verify that `fpocket4` produces the same results from canonical `bcif.gz`
   inputs as from the corresponding original `pdb` inputs.
 
@@ -118,6 +121,8 @@ engines.
 
 - a clearer split between `methods/` and `wrappers/`;
 - native implementation plans for `fpocket4` and `alphaspace2`;
+- a formalized native contract for `pycasta`, including the current audit of
+  repository-versus-paper drift;
 - a more faithful long-term integration layer;
 - clearer documentation of engine-specific assumptions;
 - stronger regression tests.

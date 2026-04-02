@@ -26,5 +26,6 @@
 *   **Volume Calculation:** The `volume` field in the returned feature dictionaries is currently a placeholder (`0.0`). Integration of volume calculation (e.g., from tetrahedra geometry) is a next step for feature enrichment.
 *   **Performance Optimization:** For very large systems, `numba` or C/C++ extensions may be needed for geometric calculations (`check_face_permeability`, `solve_apollonius_3d`).
 *   **Advanced Features (v0.2+):** Further development of channel characterization (bottlenecks), topological distances, and integration of physicochemical properties, as detailed in `Future_Ideas.md`.
+*   **Weighted Delaunay Audit:** At some point, AFND should also be tested with a weighted-Delaunay variant and compared against the current standard-Delaunay route to determine whether the added complexity changes the topological segmentation materially or only the numerical cost.
 
 The core framework for AFND is now in place, providing a powerful new tool for molecular topography analysis within the TopoMT library.

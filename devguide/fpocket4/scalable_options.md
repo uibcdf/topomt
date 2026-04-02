@@ -1041,7 +1041,7 @@ For this document, the working rule is the opposite:
 
 ## Related documents
 
-- [fpocket4_native_checkpoint.md](fpocket4_native_checkpoint.md)
-- [fpocket4_parity_matrix.md](fpocket4_parity_matrix.md)
-- [pocket_algorithm_issues.md](pocket_algorithm_issues.md)
-- [gpu_opportunities.md](gpu_opportunities.md)
+- [native_checkpoint.md](native_checkpoint.md)
+- [parity_matrix.md](parity_matrix.md)
+- [../pocket_algorithm_issues.md](../pocket_algorithm_issues.md)
+- [../gpu_opportunities.md](../gpu_opportunities.md)

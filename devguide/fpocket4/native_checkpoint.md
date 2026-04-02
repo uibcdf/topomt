@@ -339,10 +339,10 @@ When work resumes, the preferred order is:
 6. Only after that, return to the protein cases to see which toy behavior best
    explains the residual real-system mismatch.
 7. Keep documenting anomaly systems and diagnostic evidence in
-   [pocket_algorithm_issues.md](pocket_algorithm_issues.md).
+   [../pocket_algorithm_issues.md](../pocket_algorithm_issues.md).
 
 ## Related documents
 
-- [native_methods_plan.md](native_methods_plan.md)
-- [pocket_algorithm_issues.md](pocket_algorithm_issues.md)
-- [status.md](status.md)
+- [../native_methods_plan.md](../native_methods_plan.md)
+- [../pocket_algorithm_issues.md](../pocket_algorithm_issues.md)
+- [../status.md](../status.md)

@@ -182,7 +182,7 @@ silently ignored.
 - extend the issue log with any new deterministic local mismatch found in other
   systems;
 - maintain the larger running checkpoint in
-  [fpocket4_native_checkpoint.md](fpocket4_native_checkpoint.md).
+  [fpocket4/native_checkpoint.md](fpocket4/native_checkpoint.md).
 
 ### `fpocket4`: final-pocket discrepancies between fpocket builds/binaries
 
@@ -223,7 +223,7 @@ These are not currently treated as native/source mismatches.
 They are treated as fpocket build-drift cases, likely connected to the
 temporary-output synchronization problem documented in:
 
-- [fpocket_corrections/report_truncation.md](fpocket_corrections/report_truncation.md)
+- [fpocket4/corrections/report_truncation.md](fpocket4/corrections/report_truncation.md)
 
 #### Why this matters
 
@@ -301,7 +301,7 @@ different `fpocket` builds or binaries, not as a discrepancy between:
 This build-level discrepancy is likely related to the upstream temporary-output
 truncation problem already documented in:
 
-- [fpocket_corrections/report_truncation.md](fpocket_corrections/report_truncation.md)
+- [fpocket4/corrections/report_truncation.md](fpocket4/corrections/report_truncation.md)
   
 
 but that causal link is not yet fully locked down in a clean unpatched local

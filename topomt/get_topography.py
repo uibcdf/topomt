@@ -193,11 +193,7 @@ def _run_castp(topo: Topography, **kwargs) -> Topography:
 def _run_pycasta(topo: Topography, **kwargs) -> Topography:
     from .methods.pycasta import pycasta
     from .features.Pocket import Pocket
-    
-    # Use larger alpha for pycasta to find empty space in nm
-    if 'alpha' not in kwargs:
-        kwargs['alpha'] = 0.4 # 4.0 A
-        
+
     pockets_tet, volumes, simplices, atom_indices = pycasta(
         topo.molecular_system,
         selection=topo.selection,

@@ -5,7 +5,7 @@ Purpose: record what is already implemented for scoring/contact and what the nex
 1. **Completed in `0.3.0`**
    - Full alpha/beta pipeline with grid volumes, overlap matrices, and contact matrix; all stored in `AlphaSpace2State`.
    - Beta probe scores computed with `_compute_beta_scores` use the vendored tables and match the helper computation; CDK2 is the parity guard.
-   - Documentation captures the Vina tables used and the descriptor guarantees (devguide/alphaspace2_contract.md).
+   - Documentation captures the Vina tables used and the descriptor guarantees ([contract.md](contract.md)).
 
 2. **Next incremental work**
    - Expand tests to compare pocket/pocket contact (still optional).  

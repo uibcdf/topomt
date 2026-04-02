@@ -175,7 +175,7 @@ This should not be treated as an acceptable end state. Instead:
   [pocket_algorithm_issues.md](pocket_algorithm_issues.md).
 
 The current working checkpoint for this diagnosis is recorded in
-[fpocket4_native_checkpoint.md](fpocket4_native_checkpoint.md).
+[fpocket4/native_checkpoint.md](fpocket4/native_checkpoint.md).
 
 ### Current anomaly note
 
@@ -301,6 +301,94 @@ Useful TopoMT-side tools for the native implementation include:
 - `pyunitwizard` for all unit normalization;
 - `Topography` and `Pocket` for normalized output.
 
+## `pycasta`
+
+### Current state
+
+`pycasta` is now a reviewed prioritized engine, but not yet an implemented
+native method in TopoMT.
+
+The current upstream material consists of:
+
+- a public repository at <https://github.com/giorgioluciano/pycasta>;
+- a local mirror at `/home/diego/repos@others/pycasta`;
+- and the 2025 pyCAST paper at
+  <https://doi.org/10.1016/j.csbj.2025.07.054>.
+
+The important current reading is that the paper and the repository do not yet
+look fully identical in the strongest methodological claims. The repository
+appears to expose a simpler practical workflow than the paper text suggests.
+
+### First validation target
+
+The first TopoMT target should be parity against the effective public
+repository workflow, because that is the auditable implementation we can run
+and compare directly.
+
+That first target should cover:
+
+- receptor preparation;
+- per-atom radii assignment;
+- tetrahedralization;
+- alpha-complex filtering;
+- discrete-flow pocket grouping;
+- cluster merging;
+- pocket ranking and geometry;
+- pocket atom ownership;
+- and mouth/dual-set outputs where deterministic.
+
+The stronger paper-level claims should remain a second audit question until we
+know whether the missing pieces are:
+
+- implemented elsewhere;
+- omitted from the public repository;
+- or only described conceptually in the paper.
+
+### Upstream semantics that must be preserved first
+
+The native reimplementation should reproduce at least the repository-observed
+semantics of:
+
+- Delaunay-based tetrahedral decomposition of the receptor;
+- alpha-complex filtering by circumsphere-radius threshold;
+- discrete flow over empty tetrahedra;
+- sink-based grouping of tetrahedra into pockets;
+- centroid-distance cluster merging;
+- volume, depth, representative-point, and ranking calculations;
+- mouth geometry and dual-set boundary derivation;
+- and pocket atom mapping back to receptor atoms.
+
+### What TopoMT should replace intentionally
+
+The native `pycasta` path should use:
+
+- `molsysmt` for structure loading, receptor/ligand selection, and atom-index
+  mapping;
+- `pyunitwizard` for all quantity normalization;
+- TopoMT project-owned dependency handling and warnings infrastructure.
+
+In particular:
+
+- TopoMT should not depend on Biopandas for the native path;
+- and SASA or ligand-validation helpers, when needed later, should be routed
+  through `molsysmt`-compatible infrastructure rather than PyMOL-specific
+  runtime assumptions.
+
+### Open upstream-audit question
+
+The current repository appears to differ from the paper in at least these
+points:
+
+- weighted Delaunay triangulation is described in the paper, but the current
+  repository appears to fall back to standard SciPy Delaunay;
+- alpha selection via persistent homology is described in the paper, but the
+  current repository appears to use config-driven manual alpha values;
+- and the public flow proxy appears to be circumsphere-radius-based rather
+  than the exact wording used in the paper.
+
+This should be tracked as an explicit audit question, not as an established
+claim that the paper is wrong.
+
 ## Validation strategy
 
 The validation path should differ from the runtime path.
@@ -323,5 +411,8 @@ The validation path should differ from the runtime path.
    semantics.
 3. Start a native `alphaspace2` plan around `genAlphas()` and exact lining
    atoms.
-4. Extend tests so both methods can be measured continuously against their
-   upstream references.
+4. Formalize the initial `pycasta` native contract around repository parity
+   before deciding whether a second paper-faithful mode or an upstream report
+   is needed.
+5. Extend tests so all prioritized native methods can be measured continuously
+   against their upstream references.

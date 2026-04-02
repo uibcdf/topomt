@@ -1,10 +1,6 @@
-"""PyCASTA-like pocket detection based on alpha-shapes and discrete flow on tetrahedra.
-"""
+"""PyCASTA-like pocket detection based on alpha-shapes and discrete flow."""
 
-from __future__ import annotations
-
-import warnings
-from typing import Iterable, Sequence
+from typing import Sequence
 
 import numpy as np
 from scipy.spatial import Delaunay
@@ -17,12 +13,12 @@ from topomt import pyunitwizard as puw
 @signal(tags=['method', 'pycasta', 'native'])
 def pycasta(
     molecular_system,
-    selection: str = 'all',
+    selection: str = 'molecule_type == "protein"',
     structure_indices: int = 0,
-    alpha: float = 2.0,
-    min_pocket_volume: float = 50.0,
+    alpha: float = 0.2,
+    min_pocket_volume: float = 0.05,
     merge_clusters: bool = True,
-    merge_threshold: float = 18.0,
+    merge_threshold: float = 1.8,
     sigma_p: float = 1.4,
     tol_fraction: float = 0.01,
     max_steps: int = 100,
@@ -34,14 +30,20 @@ def pycasta(
     return_atom_indices: bool = False,
 ):
     """
-    Detect pockets using a PyCASTA-style approach. Internal logic in NM.
+    Detect pockets using a PyCASTA-style approach.
+
+    Bare-float defaults follow TopoMT canonical units:
+
+    - `alpha=0.2` means `0.2 nm` (upstream default `2.0 Å`)
+    - `min_pocket_volume=0.05` means `0.05 nm**3` (upstream default `50 Å^3`)
+    - `merge_threshold=1.8` means `1.8 nm` (upstream default `18 Å`)
     """
     
     alpha_nm = float(puw.get_value(alpha, to_unit='nm')) if puw.is_quantity(alpha) else float(alpha)
     min_vol_nm3 = (
         float(puw.get_value(min_pocket_volume, to_unit='nm**3'))
         if puw.is_quantity(min_pocket_volume)
-        else float(min_pocket_volume) / 1000.0
+        else float(min_pocket_volume)
     )
     merge_threshold_nm = (
         float(puw.get_value(merge_threshold, to_unit='nm'))
@@ -79,6 +81,13 @@ def pycasta(
         min_steps=min_steps,
     )
 
+    max_index = coords_nm.shape[0] - 1
+    pockets = [
+        pocket
+        for pocket in pockets
+        if all(0 <= tetra_index <= max_index for tetra_index in pocket)
+    ]
+
     if merge_clusters:
         pockets = _merge_clusters(pockets, tetra_pos, merge_threshold_nm)
 
@@ -99,30 +108,33 @@ def pycasta(
 
 
 def _circumsphere_radii(tetra_positions: np.ndarray) -> np.ndarray:
-    a = tetra_positions[:, 0]
-    b = tetra_positions[:, 1]
-    c = tetra_positions[:, 2]
-    d = tetra_positions[:, 3]
-    ba = b - a
-    ca = c - a
-    da = d - a
-    cross_cd = np.cross(ca, da)
-    Ba = np.einsum('ij,ij->i', ba, cross_cd)
-    vol6 = np.abs(Ba)
-    a2 = np.sum(ba * ba, axis=1)
-    b2 = np.sum(ca * ca, axis=1)
-    c2 = np.sum(da * da, axis=1)
-    numerator = np.sqrt(
-        a2 * b2 * c2
-        + 2 * np.sum(ba * ca, axis=1) * np.sum(ca * da, axis=1) * np.sum(da * ba, axis=1)
-        - a2 * (np.sum(ca * da, axis=1) ** 2)
-        - b2 * (np.sum(da * ba, axis=1) ** 2)
-        - c2 * (np.sum(ba * ca, axis=1) ** 2)
-    )
-    with np.errstate(divide='ignore', invalid='ignore'):
-        r = numerator / (2.0 * vol6)
-    r[~np.isfinite(r)] = np.inf
-    return r
+    radii = np.empty(tetra_positions.shape[0], dtype=float)
+
+    for index, tetra in enumerate(tetra_positions):
+        if tetra.shape[0] != 4:
+            radii[index] = np.inf
+            continue
+
+        atom_a, atom_b, atom_c, atom_d = tetra
+        vector_ab = atom_b - atom_a
+        vector_ac = atom_c - atom_a
+        vector_ad = atom_d - atom_a
+        matrix = np.vstack([vector_ab, vector_ac, vector_ad]).T
+
+        try:
+            rhs = 0.5 * np.array(
+                [
+                    np.dot(vector_ab, vector_ab),
+                    np.dot(vector_ac, vector_ac),
+                    np.dot(vector_ad, vector_ad),
+                ]
+            )
+            solution = np.linalg.solve(matrix, rhs)
+            radii[index] = np.linalg.norm(solution)
+        except np.linalg.LinAlgError:
+            radii[index] = np.inf
+
+    return radii
 
 
 def _flow_detection(
@@ -165,20 +177,19 @@ def _flow_detection(
         current = i
         steps = 0
         current_proxy = proxies[current]
-        cur_tol = tol_fraction
         while steps < max_steps:
             lower = [
                 j
                 for j in neighbors[current]
-                if (current_proxy - proxies[j]) > cur_tol * current_proxy
+                if (current_proxy - proxies[j]) > tol_fraction * current_proxy
             ]
             if not lower:
                 if adaptive:
-                    cur_tol *= adaptive_factor
+                    tol_fraction *= adaptive_factor
                     lower = [
                         j
                         for j in neighbors[current]
-                        if (current_proxy - proxies[j]) > cur_tol * current_proxy
+                        if (current_proxy - proxies[j]) > tol_fraction * current_proxy
                     ]
                 if not lower:
                     break
@@ -250,11 +261,15 @@ def _tetra_group_volume(tetra_positions: np.ndarray, indices: Sequence[int]) -> 
     if len(indices) == 0:
         return 0.0
     tets = tetra_positions[np.asarray(indices, dtype=int)]
-    a = tets[:, 0]
-    b = tets[:, 1]
-    c = tets[:, 2]
-    d = tets[:, 3]
-    vol = np.abs(Ba := a[:,0]*((b[:,1]-d[:,1])*(c[:,2]-d[:,2]) - (b[:,2]-d[:,2])*(c[:,1]-d[:,1])) + \
-                 a[:,1]*((b[:,2]-d[:,2])*(c[:,0]-d[:,0]) - (b[:,0]-d[:,0])*(c[:,2]-d[:,2])) + \
-                 a[:,2]*((b[:,0]-d[:,0])*(c[:,1]-d[:,1]) - (b[:,1]-d[:,1])*(c[:,0]-d[:,0]))) / 6.0
-    return float(vol.sum())
+    atom_a = tets[:, 0]
+    atom_b = tets[:, 1]
+    atom_c = tets[:, 2]
+    atom_d = tets[:, 3]
+    volumes = np.abs(
+        np.einsum(
+            'ij,ij->i',
+            atom_a - atom_d,
+            np.cross(atom_b - atom_d, atom_c - atom_d),
+        )
+    ) / 6.0
+    return float(volumes.sum())

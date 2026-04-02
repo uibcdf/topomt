@@ -97,4 +97,4 @@ In particular:
 - [roadmap.md](roadmap.md)
 - [native_methods_plan.md](native_methods_plan.md)
 - [gpu_opportunities.md](gpu_opportunities.md)
-- [fpocket4_scalable_options.md](fpocket4_scalable_options.md)
+- [fpocket4/scalable_options.md](fpocket4/scalable_options.md)

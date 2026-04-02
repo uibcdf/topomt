@@ -17,6 +17,7 @@ The current tests live mainly in:
 - [tests/methods/pocketeer/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_parity.py)
 - [tests/methods/alphaspace2/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/alphaspace2/test_parity.py)
 - [tests/methods/fpocket4/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/fpocket4/test_parity.py)
+- [tests/methods/pycasta/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/pycasta/test_parity.py)
 - [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py)
 
 ## What is currently covered reasonably
@@ -25,7 +26,8 @@ The current tests live mainly in:
 - basic pocket feature behavior;
 - alpha-sphere behavior;
 - basic CASTp path checks;
-- focused upstream parity for `pocketeer`, `alphaspace2`, and `fpocket4`;
+- focused upstream parity for `pocketeer`, `alphaspace2`, `fpocket4`, and an
+  initial `pycasta` case;
 - import smoke tests;
 - AFND smoke-like integration checks.
 
@@ -40,8 +42,9 @@ The current tests live mainly in:
 
 - [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py) is
   effectively empty and should become a real regression suite for the loader.
-- There is still limited direct coverage for `alphaspace2`,
-  `pocket_geometry`, and `pycasta`.
+- There is still limited direct coverage for `pocket_geometry`, and `pycasta`
+  still only has a first small repository-parity case rather than a broader
+  audited battery.
 - `pocketeer` and `fpocket4` now have dedicated focused tests, but their
   heavier parity and deep-validation paths should still be expanded and better
   categorized.
