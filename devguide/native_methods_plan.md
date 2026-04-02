@@ -36,6 +36,24 @@ For native reimplementations of external engines:
   engine-specific containers;
 - use wrappers and upstream runs only for parity tests and regression audits.
 
+Progress note:
+
+- `fpocket4` already had an explicit wrapper-backed `Topography` path;
+- `pocketeer`, `alphaspace2`, and `pycasta` now also have first wrapper-backed
+  `Topography` adapters under `topomt.wrappers.*`, intended for users who want
+  upstream execution semantics without leaving the TopoMT object model;
+- those wrapper adapters should remain clearly separated from
+  `topomt.methods.*`, whose role is still the native TopoMT implementation.
+
+Validation note:
+
+- wrapper smoke/parity tests are required even after native parity exists;
+- they validate the actual distributed binary/package route that users may run,
+  not only the TopoMT-native reimplementation;
+- and they can expose package/build/environment drift, as already happened in
+  the broader `fpocket4` audit where wrapper-level behavior depended on which
+  fpocket build was being exercised.
+
 Implication:
 
 - native methods should not grow local `value + unit` helper layers when

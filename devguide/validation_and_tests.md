@@ -15,9 +15,12 @@ The current tests live mainly in:
 - [tests/test_import.py](/home/diego/repos@uibcdf/topomt/tests/test_import.py)
 - [tests/test_afnd_pockets.py](/home/diego/repos@uibcdf/topomt/tests/test_afnd_pockets.py)
 - [tests/methods/pocketeer/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_parity.py)
+- [tests/methods/pocketeer/test_wrapper.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_wrapper.py)
 - [tests/methods/alphaspace2/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/alphaspace2/test_parity.py)
+- [tests/methods/alphaspace2/test_wrapper.py](/home/diego/repos@uibcdf/topomt/tests/methods/alphaspace2/test_wrapper.py)
 - [tests/methods/fpocket4/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/fpocket4/test_parity.py)
 - [tests/methods/pycasta/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/pycasta/test_parity.py)
+- [tests/methods/pycasta/test_wrapper.py](/home/diego/repos@uibcdf/topomt/tests/methods/pycasta/test_wrapper.py)
 - [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py)
 
 ## What is currently covered reasonably
@@ -28,6 +31,9 @@ The current tests live mainly in:
 - basic CASTp path checks;
 - focused upstream parity for `pocketeer`, `alphaspace2`, `fpocket4`, and an
   initial `pycasta` case;
+- first wrapper smoke/parity coverage for `pocketeer`, `alphaspace2`, and
+  `pycasta`, validating the real wrapper-backed execution path in addition to
+  the native-method parity suites;
 - import smoke tests;
 - AFND smoke-like integration checks.
 
@@ -37,6 +43,34 @@ The current tests live mainly in:
 - geometry-heavy behavior is not deeply validated;
 - cross-engine contract consistency is not tested enough;
 - environment-sensitive behavior is not clearly separated from code bugs.
+
+## Why wrapper tests are not redundant
+
+Wrapper smoke/parity tests should be treated as a distinct validation layer,
+not as duplicates of the native parity suites.
+
+Reason:
+
+- native parity tells us whether `topomt.methods.*` reproduces the algorithmic
+  semantics we intend to preserve;
+- wrapper parity tells us whether the actual external package or binary, as
+  installed or mirrored in a given environment, still behaves as expected when
+  routed through TopoMT;
+- those are not the same question.
+
+This matters because the wrapper route can surface upstream-environment drift
+that native parity alone would miss. The `fpocket4` work already exposed this
+kind of problem: different fpocket builds or distributions can disagree at the
+final-pocket level even when the audited upstream source build and the native
+TopoMT reimplementation agree with each other.
+
+Practical implication:
+
+- keep native parity as the primary algorithmic validation target;
+- keep wrapper smoke/parity as the integration validation target for the real
+  external executable or package path;
+- and document wrapper failures explicitly as possible build/package/environment
+  drift before treating them as native-method regressions.
 
 ## Known gaps
 

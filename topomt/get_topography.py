@@ -57,6 +57,20 @@ def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: 
     return topo
 
 def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
+    implementation = kwargs.pop('implementation', 'native').lower()
+    if implementation == 'wrapper':
+        from .wrappers.pocketeer.integration import get_topography_with_pocketeer
+
+        return get_topography_with_pocketeer(
+            topo.molecular_system,
+            selection=topo.selection,
+            structure_indices=topo.structure_indices,
+            **kwargs,
+        )
+
+    if implementation not in {'native', 'topomt'}:
+        raise ValueError("implementation must be 'wrapper', 'native' or 'topomt'")
+
     from .methods.pocketeer import pocketeer
     from .features.Pocket import Pocket
     
@@ -86,6 +100,21 @@ def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
     return topo
 
 def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topography:
+    implementation = kwargs.pop('implementation', 'native').lower()
+    if implementation == 'wrapper':
+        from .wrappers.alphaspace2.integration import get_topography_with_alphaspace2
+
+        return get_topography_with_alphaspace2(
+            topo.molecular_system,
+            selection=topo.selection,
+            structure_indices=topo.structure_indices,
+            min_vertices=min_vertices,
+            **kwargs,
+        )
+
+    if implementation not in {'native', 'topomt'}:
+        raise ValueError("implementation must be 'wrapper', 'native' or 'topomt'")
+
     from .methods.alphaspace2 import alphaspace2
     from .features.Pocket import Pocket
 
@@ -191,6 +220,20 @@ def _run_castp(topo: Topography, **kwargs) -> Topography:
     return topo
 
 def _run_pycasta(topo: Topography, **kwargs) -> Topography:
+    implementation = kwargs.pop('implementation', 'native').lower()
+    if implementation == 'wrapper':
+        from .wrappers.pycasta.integration import get_topography_with_pycasta
+
+        return get_topography_with_pycasta(
+            topo.molecular_system,
+            selection=topo.selection,
+            structure_indices=topo.structure_indices,
+            **kwargs,
+        )
+
+    if implementation not in {'native', 'topomt'}:
+        raise ValueError("implementation must be 'wrapper', 'native' or 'topomt'")
+
     from .methods.pycasta import pycasta
     from .features.Pocket import Pocket
 

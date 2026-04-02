@@ -68,6 +68,9 @@ This includes:
   additional inputs and, later, to canonical `bcif.gz` inputs.
 - Separation of wrapper-backed integrations from the long-term native-method
   targets in `topomt.methods`.
+- First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
+  but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
+  upstream execution paths while still receiving TopoMT feature objects.
 - Study of `2HGR.pdb` as a large-system deep-validation case for `fpocket4`.
   Final native/source parity is now confirmed there too, but it remains outside
   the default parity battery because of cost.
@@ -181,6 +184,15 @@ This includes:
   (documented in `devguide/proposal_improvement/proposal_smonitor_improvement.md`), and a scoring
   bonus tuned to stay within the 2.5-point tolerance requested by the parity
   tests.
+- `pocketeer`, `alphaspace2`, and `pycasta` now also have initial
+  wrapper-backed `Topography` routes in `topomt.wrappers.*`, reachable through
+  `get_topography(..., implementation='wrapper')`. These are currently
+  intended as integration paths rather than parity-certified primary routes.
+- The new `alphaspace2` wrapper path already required local compatibility
+  shims for modern dependencies: current upstream code assumes an older
+  `mdtraj` SASA call shape and still uses the removed `np.float` alias. Those
+  shims are intentionally confined to the wrapper layer and should be treated
+  as upstream-environment drift, not as native-method design precedent.
 - The first `molsysviewer_topomt` scaffold now exists as a package-level addon
   checkpoint: it exports a valid `AddonSpec`, lifecycle hooks, and a minimal
   TopoMT-to-viewer payload adapter that can be used as the restart point for

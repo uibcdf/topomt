@@ -266,6 +266,98 @@ def test_get_topography_argdigest_standardizes_engine_and_structure_index(monkey
     assert called['method'] == 'pycasta'
 
 
+def test_run_pocketeer_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
+    integration_module = importlib.import_module('topomt.wrappers.pocketeer.integration')
+    get_topography_module = importlib.import_module('topomt.get_topography')
+
+    called = {}
+
+    def fake_wrapper(molecular_system, **kwargs):
+        called['molecular_system'] = molecular_system
+        called['kwargs'] = kwargs
+        return tmt.Topography(
+            molecular_system=molecular_system,
+            selection=kwargs['selection'],
+            structure_indices=kwargs['structure_indices'],
+        )
+
+    monkeypatch.setattr(integration_module, 'get_topography_with_pocketeer', fake_wrapper)
+
+    topo = get_topography_module._run_pocketeer(
+        topography_empty_1tcd.copy(deep=True),
+        implementation='wrapper',
+        upstream_root='/tmp/pocketeer',
+    )
+
+    assert isinstance(topo, tmt.Topography)
+    assert called['molecular_system'] == topography_empty_1tcd.molecular_system
+    assert called['kwargs']['selection'] == topography_empty_1tcd.selection
+    assert called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    assert called['kwargs']['upstream_root'] == '/tmp/pocketeer'
+
+
+def test_run_alphaspace2_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
+    integration_module = importlib.import_module('topomt.wrappers.alphaspace2.integration')
+    get_topography_module = importlib.import_module('topomt.get_topography')
+
+    called = {}
+
+    def fake_wrapper(molecular_system, **kwargs):
+        called['molecular_system'] = molecular_system
+        called['kwargs'] = kwargs
+        return tmt.Topography(
+            molecular_system=molecular_system,
+            selection=kwargs['selection'],
+            structure_indices=kwargs['structure_indices'],
+        )
+
+    monkeypatch.setattr(integration_module, 'get_topography_with_alphaspace2', fake_wrapper)
+
+    topo = get_topography_module._run_alphaspace2(
+        topography_empty_1tcd.copy(deep=True),
+        implementation='wrapper',
+        min_vertices=12,
+        upstream_root='/tmp/alphaspace2',
+    )
+
+    assert isinstance(topo, tmt.Topography)
+    assert called['molecular_system'] == topography_empty_1tcd.molecular_system
+    assert called['kwargs']['selection'] == topography_empty_1tcd.selection
+    assert called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    assert called['kwargs']['min_vertices'] == 12
+    assert called['kwargs']['upstream_root'] == '/tmp/alphaspace2'
+
+
+def test_run_pycasta_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
+    integration_module = importlib.import_module('topomt.wrappers.pycasta.integration')
+    get_topography_module = importlib.import_module('topomt.get_topography')
+
+    called = {}
+
+    def fake_wrapper(molecular_system, **kwargs):
+        called['molecular_system'] = molecular_system
+        called['kwargs'] = kwargs
+        return tmt.Topography(
+            molecular_system=molecular_system,
+            selection=kwargs['selection'],
+            structure_indices=kwargs['structure_indices'],
+        )
+
+    monkeypatch.setattr(integration_module, 'get_topography_with_pycasta', fake_wrapper)
+
+    topo = get_topography_module._run_pycasta(
+        topography_empty_1tcd.copy(deep=True),
+        implementation='wrapper',
+        upstream_root='/tmp/pycasta',
+    )
+
+    assert isinstance(topo, tmt.Topography)
+    assert called['molecular_system'] == topography_empty_1tcd.molecular_system
+    assert called['kwargs']['selection'] == topography_empty_1tcd.selection
+    assert called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    assert called['kwargs']['upstream_root'] == '/tmp/pycasta'
+
+
 def test_pocketeer_sasa_warning_uses_topomt_catalog_warning():
     pocketeer_module = importlib.import_module('topomt.methods.pocketeer')
     smonitor_module = importlib.import_module('topomt._private.smonitor')
