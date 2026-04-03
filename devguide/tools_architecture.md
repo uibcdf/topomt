@@ -279,12 +279,14 @@ The following slices are now already materialized in the repository:
 - `topomt.tools.features.pockets.contacts`
   as the first extracted pocket-ligand contact helper module;
 - `topomt.tools.features.channels.profiles`
-  as the first extracted channel/profile helper module.
+  as the first extracted channel/profile helper module;
+- `topomt.tools.features.mouths.descriptors`
+  as the first extracted mouth descriptor helper module.
 
 At the moment, `castp` already consumes the new pocket physicochemistry module
 directly, while `pocket_geometry.py` still re-exports the migrated functions as
 a compatibility bridge during the larger refactor. The same compatibility
-bridge now also covers the migrated channel/profile helpers.
+bridge now also covers the migrated channel/profile and mouth helpers.
 
 ### Domain-specific characterization helpers
 
@@ -299,6 +301,7 @@ bridge now also covers the migrated channel/profile helpers.
 - `min_cross_section_radius`
 - `shortest_path_length`
 - `thickness_profile`
+- `mouth_area_on_plane`
 - `jaccard_overlap_clusters`
 
 ## Practical migration rule

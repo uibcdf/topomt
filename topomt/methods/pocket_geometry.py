@@ -25,6 +25,7 @@ from topomt.tools.features.channels import (
     shortest_path_length,
     thickness_profile,
 )
+from topomt.tools.features.mouths import mouth_area_on_plane
 from topomt.tools.features.pockets import (
     apolar_ratio,
     get_physicochemical_properties,
@@ -117,64 +118,6 @@ def convex_hull_metrics(points: Sequence[Sequence[float]]) -> tuple[float | None
         return float(hull.volume), float(hull.area)
     except Exception:
         return None, None
-
-
-def mouth_area_on_plane(
-    mouth_points: Sequence[Sequence[float]],
-    plane_point: Sequence[float],
-    plane_normal: Sequence[float],
-) -> float:
-    """Estimate mouth area by projecting boundary points onto a plane and taking their convex hull.
-
-    Parameters
-    ----------
-    mouth_points : array-like, shape (n, 3)
-        Points defining the mouth rim (atoms or sphere centers near the opening).
-    plane_point : array-like, shape (3,)
-        A point on the mouth plane.
-    plane_normal : array-like, shape (3,)
-        Normal vector of the mouth plane.
-
-    Returns
-    -------
-    area : float
-        Area of the projected convex hull. Returns 0.0 if fewer than 3 points.
-    """
-    pts = _to_numpy(mouth_points)
-    if pts.shape[0] < 3:
-        return 0.0
-
-    p0 = _to_numpy(plane_point)
-    n = _to_numpy(plane_normal)
-    norm = np.linalg.norm(n)
-    if norm == 0:
-        return 0.0
-    n_unit = n / norm
-
-    # Build an orthonormal basis (u, v) on the plane
-    # Choose a vector not colinear with n_unit
-    ref = np.array([1.0, 0.0, 0.0]) if abs(n_unit[0]) < 0.9 else np.array([0.0, 1.0, 0.0])
-    u = np.cross(n_unit, ref)
-    u /= np.linalg.norm(u)
-    v = np.cross(n_unit, u)
-
-    # Project points to 2D coordinates in the plane basis
-    rel = pts - p0
-    x = rel.dot(u)
-    y = rel.dot(v)
-    proj = np.stack([x, y], axis=1)
-
-    if proj.shape[0] < 3:
-        return 0.0
-    try:
-        hull = ConvexHull(proj)
-        return float(hull.area)
-    except Exception:
-        # fallback to shoelace on all points if hull fails
-        order = np.argsort(np.arctan2(proj[:, 1], proj[:, 0]))
-        poly = proj[order]
-        area = 0.5 * abs(np.dot(poly[:, 0], np.roll(poly[:, 1], 1)) - np.dot(poly[:, 1], np.roll(poly[:, 0], 1)))
-        return float(area)
 
 
 @dep_digest('skimage')
