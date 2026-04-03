@@ -34,6 +34,11 @@ and the next engineering steps.
   Cross-cutting future plan for CPU-pool parallelization, distributed
   execution, and GPU evaluation across pocket engines.
 
+- [tools_architecture.md](tools_architecture.md)
+  Proposed internal architecture for `topomt.tools`, including the separation
+  between general geometry, tessellation-specific helpers, feature-oriented
+  characterization, and lightweight visualization utilities.
+
 - [fpocket4/scalable_options.md](fpocket4/scalable_options.md)
   Specific design options for a future `fpocket4`
   `implementation='topomt-scalable'` path.
@@ -111,19 +116,19 @@ Cross-project improvement proposals are grouped separately from engine notes:
   Draft proposals for `molsysmt`, `molsysviewer`, `smonitor`,
   `pyunitwizard`, `argdigest`, `depdigest`, and related sibling libraries.
 
-## AFND
+## DFND
 
-The AFND material is intentionally kept in its own subdirectory:
+The DFND material is grouped under the dedicated `DFND/` subdirectory:
 
-- [AFND/Overview.md](AFND/Overview.md)
-- [AFND/checkpoint.md](AFND/checkpoint.md)
-- [AFND/Technical_Design.md](AFND/Technical_Design.md)
-- [AFND/Algorithm.md](AFND/Algorithm.md)
+- [DFND/Overview.md](DFND/Overview.md)
+- [DFND/checkpoint.md](DFND/checkpoint.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/Algorithm.md](DFND/Algorithm.md)
 
-AFND remains relevant, but it is not the current priority. The main
-`devguide/` should describe the whole project, not only AFND.
+DFND remains relevant, but it is not the current priority. The main
+`devguide/` should describe the whole project, not only DFND.
 
-When AFND is mentioned from the main developer guide, it should normally be in
+When DFND is mentioned from the main developer guide, it should normally be in
 one of these roles:
 
 - as a postponed architecture track;

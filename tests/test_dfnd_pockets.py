@@ -1,6 +1,6 @@
 import numpy as np
 import molsysmt as msm
-from topomt.methods.afnd import afnd
+from topomt.methods.dfnd import dfnd
 from topomt.features import Pocket, Void
 import topomt as tmt # Assuming topomt is installed and demo data is accessible
 
@@ -10,14 +10,14 @@ def get_sample_molecular_system():
     pdb_file = tmt.demo['HIV-1 Protease']['1HIV.pdb']
     return pdb_file
 
-def test_afnd_returns_expected_structure():
+def test_dfnd_returns_expected_structure():
     """
-    Test that afnd function runs and returns a dictionary with the expected 'wet' and 'dry' keys
+    Test that dfnd runs and returns a dictionary with the expected 'wet' and 'dry' keys
     and that their contents are lists of topomt.features.Pocket/Void or dicts for dry.
     """
     sample_molecular_system = get_sample_molecular_system()
-    # Run AFND with default parameters
-    result = afnd(sample_molecular_system)
+    # Run DFND with default parameters
+    result = dfnd(sample_molecular_system)
 
     # Assert top-level structure
     assert isinstance(result, dict)
@@ -55,19 +55,19 @@ def test_afnd_returns_expected_structure():
         assert isinstance(result['dry']['islands'][0], dict)
 
 
-def test_afnd_parameters_affect_output():
+def test_dfnd_parameters_affect_output():
     """
     Test that changing probe_radius affects the number of pockets/voids found.
     """
     sample_molecular_system = get_sample_molecular_system()
 
     # Run with default probe_radius (1.4)
-    result_default = afnd(sample_molecular_system)
+    result_default = dfnd(sample_molecular_system)
     n_pockets_default = len(result_default['wet']['pockets'])
     n_voids_default = len(result_default['wet']['voids'])
 
     # Run with a larger probe_radius (should yield fewer/smaller features)
-    result_larger_probe = afnd(sample_molecular_system, probe_radius=2.0)
+    result_larger_probe = dfnd(sample_molecular_system, probe_radius=2.0)
     n_pockets_larger = len(result_larger_probe['wet']['pockets'])
     n_voids_larger = len(result_larger_probe['wet']['voids'])
 
@@ -78,7 +78,7 @@ def test_afnd_parameters_affect_output():
     assert n_voids_larger <= n_voids_default
 
     # Run with a very large probe_radius (should yield very few or zero features)
-    result_very_large_probe = afnd(sample_molecular_system, probe_radius=5.0)
+    result_very_large_probe = dfnd(sample_molecular_system, probe_radius=5.0)
     n_pockets_very_large = len(result_very_large_probe['wet']['pockets'])
     n_voids_very_large = len(result_very_large_probe['wet']['voids'])
 

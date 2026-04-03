@@ -1,8 +1,11 @@
-# Alpha-Flow Network Decomposition (AFND): Justification and Novelty
+# Delaunay Flow Network Decomposition (DFND): Justification and Novelty
+
+Historical note: the preferred method name is now `DFND`; older mentions of
+`DFND` in this subdirectory should be read as the previous provisional label.
 
 ## 1. The Landscape of Current Methods
 
-To justify the development of AFND, we must critically evaluate the current state-of-the-art in molecular topography analysis. The field is broadly divided into two families:
+To justify the development of DFND, we must critically evaluate the current state-of-the-art in molecular topography analysis. The field is broadly divided into two families:
 
 ### 1.1. Pure Geometric Methods (e.g., CASTp, Alpha Shapes)
 *   **Mechanism:** Construct the Delaunay triangulation and filter tetrahedra based on the radius of the associated Alpha Sphere ($R_{\alpha}$). Adjacent empty tetrahedra are merged into pockets.
@@ -23,34 +26,34 @@ To justify the development of AFND, we must critically evaluate the current stat
 
 ---
 
-## 2. The AFND Innovation: "Topological Hydraulics"
+## 2. The DFND Innovation: "Topological Hydraulics"
 
-AFND is novel because it **unifies** these approaches into a single, physically consistent model. It is neither just a volume calculator (CASTp) nor just a pathfinder (MOLE).
+DFND is novel because it **unifies** these approaches into a single, physically consistent model. It is neither just a volume calculator (CASTp) nor just a pathfinder (MOLE).
 
 ### 2.1. Decoupling Volume from Connectivity
 This is the single most significant innovation.
 *   **CASTp:** $Volume \iff Connectivity$. If it fits, it connects.
-*   **AFND:** $Volume \neq Connectivity$.
+*   **DFND:** $Volume \neq Connectivity$.
     *   **Volume** is defined by the tetrahedron's habitability ($R_{insphere}$). 
     *   **Connectivity** is defined by the face's permeability ($R_{gate}$). 
 
-**Why this matters:** This allows AFND to identify a "Dumbbell Pocket" (two large volumes connected by a narrow neck) as a single topological object with two distinct sub-domains separated by a constriction. Traditional methods see either "One Blob" or "Two Blobs" depending on the probe radius. AFND sees "Two Chambers connected by a Gate."
+**Why this matters:** This allows DFND to identify a "Dumbbell Pocket" (two large volumes connected by a narrow neck) as a single topological object with two distinct sub-domains separated by a constriction. Traditional methods see either "One Blob" or "Two Blobs" depending on the probe radius. DFND sees "Two Chambers connected by a Gate."
 
 ### 2.2. The "Coast" Concept
 Geometric methods often suffer from "sliver tetrahedra"—flat, unphysical artifacts of Delaunay triangulation that have large Alpha radii but zero volume.
-*   **Novelty:** AFND introduces the explicit topological category **`COAST`** (accessible but not transitable). This acts as a robust filter for geometric noise, preserving the surface atoms without allowing false flow paths through non-physical slivers.
+*   **Novelty:** DFND introduces the explicit topological category **`COAST`** (accessible but not transitable). This acts as a robust filter for geometric noise, preserving the surface atoms without allowing false flow paths through non-physical slivers.
 
 ### 2.3. The "Sea Level" Reference
-By introducing the `OCEAN` concept (defined by a large "Beach Ball" Alpha Shape), AFND solves the boundary condition problem.
-*   **Novelty:** Instead of using the Convex Hull (too loose) or a tight probe wrap (too noisy), AFND uses a **multi-scale definition of the exterior**. The "Pocket" is rigorously defined as the volume between the "Molecular Surface" (inner limit) and the "Beach Ball Surface" (outer limit).
+By introducing the `OCEAN` concept (defined by a large "Beach Ball" Alpha Shape), DFND solves the boundary condition problem.
+*   **Novelty:** Instead of using the Convex Hull (too loose) or a tight probe wrap (too noisy), DFND uses a **multi-scale definition of the exterior**. The "Pocket" is rigorously defined as the volume between the "Molecular Surface" (inner limit) and the "Beach Ball Surface" (outer limit).
 
 ### 2.4. Symmetric Wet/Dry Analysis
-Most tools focus 100% on the empty space. AFND treats the solid space (`SOLID` network) with the same mathematical rigor.
+Most tools focus 100% on the empty space. DFND treats the solid space (`SOLID` network) with the same mathematical rigor.
 *   **Novelty:** This enables "Inverse Pocket Detection" (i.e., Protrusion Detection) using the exact same code, providing a holistic view of surface complementarity for PPI analysis.
 
 ## 3. Summary of Advantages
 
-| Feature | CASTp | Fpocket | MOLE | **AFND** |
+| Feature | CASTp | Fpocket | MOLE | **DFND** |
 | :--- | :---: | :---: | :---: | :---: |
 | **Exact Volume** | ✅ | ❌ | ❌ | ✅ |
 | **Bottleneck Detection** | ❌ | ❌ | ✅ | ✅ |
@@ -59,4 +62,4 @@ Most tools focus 100% on the empty space. AFND treats the solid space (`SOLID` n
 | **Wet/Dry Symmetry** | ❌ | ❌ | ❌ | ✅ |
 | **Physical Interpretability** | High | Medium | High | **Very High** |
 
-AFND is not just an incremental improvement; it is a **structural generalization** that contains CASTp and MOLE as special limit cases, offering a richer grammar for describing molecular shape.
+DFND is not just an incremental improvement; it is a **structural generalization** that contains CASTp and MOLE as special limit cases, offering a richer grammar for describing molecular shape.

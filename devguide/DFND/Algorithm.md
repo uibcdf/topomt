@@ -1,8 +1,10 @@
-# Alpha-Flow Network Decomposition (AFND): Algorithm Description
+# Delaunay Flow Network Decomposition (DFND): Algorithm Description
 
 ## 1. Geometric Foundations
 
-The AFND algorithm is built upon the Delaunay triangulation of the atomic centers of the molecular system. This tessellation provides a mathematically rigorous partition of the 3D space into a set of non-overlapping tetrahedra.
+The DFND algorithm is built upon the Delaunay triangulation of the atomic
+centers of the molecular system. This tessellation provides a mathematically
+rigorous partition of the 3D space into a set of non-overlapping tetrahedra.
 
 Let $S$ be the set of atomic centers $\{a_1, a_2, ..., a_N\}$ with associated van der Waals radii $\{r_1, r_2, ..., r_N\}$.
 Let $DT(S)$ be the Delaunay triangulation of $S$.
@@ -14,8 +16,9 @@ Each face $F$ of a tetrahedron is defined by 3 atoms.
 
 To construct the flow network, we compute two critical metrics for every element in the mesh:
 
-1.  **Tetrahedron Habitability ($R_{insphere}$ or $R_{\alpha}$):**
-    The radius of the largest sphere that can fit inside the tetrahedron without intersecting the van der Waals spheres of its 4 defining atoms. In the context of Alpha Shapes, this is related to the radius of the orthogonal sphere ($R_{\alpha}$).
+1.  **Tetrahedron Habitability ($R_{insphere}$):**
+    The radius of the largest sphere that can fit inside the tetrahedron
+    without intersecting the van der Waals spheres of its 4 defining atoms.
     *   *Significance:* Determines if a probe of radius $R_{probe}$ can physically "reside" inside the tetrahedron.
 
 2.  **Face Permeability ($R_{gate}$):**
@@ -54,7 +57,8 @@ We classify every tetrahedron in the mesh into one of four distinct topological 
 
 ## 3. Network Construction and Flow
 
-The Alpha-Flow Network is a dual graph $G = (V, E)$ where nodes $V$ are tetrahedra and edges $E$ are shared faces.
+The Delaunay Flow Network is a dual graph $G = (V, E)$ where nodes $V$ are
+tetrahedra and edges $E$ are shared faces.
 
 ### 3.1. Edge Permeability Rule
 An edge exists between two tetrahedra $T_i$ and $T_j$ sharing face $F_{ij}$ if and only if:
@@ -89,4 +93,25 @@ To ensure robustness against surface roughness (atomic noise):
 1.  **Volume Pruning:** Small, isolated branches of `TRANSIT` nodes with volume $< V_{min}$ are merged into the bulk or discarded as surface roughness.
 2.  **Depth Pruning:** `TRANSIT` chains that do not penetrate deeper than a threshold $D_{min}$ from the "Sea Level" (Alpha Shape boundary) are considered surface rugosity, not pockets.
 
-This algorithmic structure ensures that AFND identifies features that are both **geometrically exact** and **topologically significant**.
+### 4.1. Why standard Delaunay is the preferred default
+
+In DFND, atomic radii already enter the method in the physically meaningful
+places:
+
+- in tetrahedron habitability (`R_insphere`);
+- and in face permeability (`R_gate`).
+
+That means the tessellation itself can remain a neutral Delaunay partition of
+atomic centers while the physical model of excluded volume and probe flow is
+applied explicitly afterward.
+
+This separation is conceptually useful:
+
+- geometry defines the cells and adjacencies;
+- physics defines what is habitable and what is permeable.
+
+Weighted Delaunay remains a valid future audit direction, but the standard
+Delaunay route is the cleaner default for the DFND physical narrative.
+
+This algorithmic structure ensures that DFND identifies features that are both
+**geometrically exact** and **topologically significant**.

@@ -123,15 +123,15 @@ In practical terms, TopoMT should aim to provide viewer-friendly feature data:
 - stable feature identifiers and source metadata;
 - feature typing compatible with grouped layer visualization.
 
-This also matters for AFND, even if AFND is postponed.
+This also matters for DFND, even if DFND is postponed.
 
-If AFND later returns richer channel, void, or dry-network structures, those
+If DFND later returns richer channel, void, or dry-network structures, those
 outputs should still be normalized in a way that remains compatible with the
-same ecosystem contracts described in `devguide/AFND/`, especially the
+same ecosystem contracts described in `devguide/DFND/`, especially the
 architectural material in:
 
-- [AFND/Overview.md](AFND/Overview.md)
-- [AFND/Technical_Design.md](AFND/Technical_Design.md)
+- [DFND/Overview.md](DFND/Overview.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md)
 
 ## Practical design rule
 

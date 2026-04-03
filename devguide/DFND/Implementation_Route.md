@@ -1,6 +1,6 @@
-# Alpha-Flow Network Decomposition (AFND): Implementation Route
+# Delaunay Flow Network Decomposition (DFND): Implementation Route
 
-This document outlines the step-by-step roadmap to build the AFND module in `topomt`.
+This document outlines the step-by-step roadmap to build the DFND module in `topomt`.
 
 ## Phase 1: The Physics Engine (The Valve)
 
@@ -17,7 +17,7 @@ This document outlines the step-by-step roadmap to build the AFND module in `top
 
 **Goal:** Build the dual graph from atomic coordinates.
 
-*   [ ] **Task 2.1:** Create `topomt/methods/afnd/graph_builder.py`.
+*   [ ] **Task 2.1:** Create `topomt/methods/dfnd/graph_builder.py`.
 *   [ ] **Task 2.2:** Implement Delaunay triangulation wrapper (`scipy.spatial`).
 *   [ ] **Task 2.3:** Calculate Tetrahedron Metrics ($R_{insphere}$, $R_{\alpha}$).
     *   Classify nodes: `SOLID`, `TRANSIT`, `COAST`, `OCEAN` (based on initial thresholds).
@@ -28,7 +28,7 @@ This document outlines the step-by-step roadmap to build the AFND module in `top
 
 **Goal:** Traverse the graph to identify features.
 
-*   [ ] **Task 3.1:** Create `topomt/methods/afnd/traversal.py`.
+*   [ ] **Task 3.1:** Create `topomt/methods/dfnd/traversal.py`.
 *   [ ] **Task 3.2:** Implement `identify_components(graph, root_nodes)`.
     *   BFS/DFS implementation.
     *   Separate Pockets (connected to Root) from Voids (isolated).
@@ -38,21 +38,21 @@ This document outlines the step-by-step roadmap to build the AFND module in `top
 
 ## Phase 4: Integration & API
 
-**Goal:** Expose AFND as a user-friendly tool in `topomt`.
+**Goal:** Expose DFND as a user-friendly tool in `topomt`.
 
-*   [ ] **Task 4.1:** Create `topomt/methods/afnd/__init__.py`.
-*   [ ] **Task 4.2:** Define the main function `afnd(molecular_system, probe_radius, ...)`.
+*   [ ] **Task 4.1:** Create `topomt/methods/dfnd/__init__.py`.
+*   [ ] **Task 4.2:** Define the main function `dfnd(molecular_system, probe_radius, ...)`.
 *   [ ] **Task 4.3:** Output formatting. Return structured dictionaries (like `castp.py` does) but with richer graph data.
-*   [ ] **Task 4.4:** Visualization helper (`view_afnd_network`) to draw the tetrahedra/edges in NGLView/Py3Dmol.
+*   [ ] **Task 4.4:** Visualization helper (`view_dfnd_network`) to draw the tetrahedra/edges in NGLView/Py3Dmol.
 
 ## Phase 5: Validation & Testing
 
 **Goal:** Ensure scientific correctness.
 
-*   [ ] **Task 5.1:** Unit Tests (`tests/test_afnd_math.py`) for geometry.
-*   [ ] **Task 5.2:** Integration Test (`tests/test_afnd_pockets.py`) on a standard protein (e.g., T4 Lysozyme or HIV Protease).
+*   [ ] **Task 5.1:** Unit Tests (`tests/test_dfnd_math.py`) for geometry.
+*   [ ] **Task 5.2:** Integration Test (`tests/test_dfnd_pockets.py`) on a standard protein (e.g., T4 Lysozyme or HIV Protease).
 *   [ ] **Task 5.3:** Comparison Benchmark. Compare results with `fpocket` and `castp` on the same PDB. Do we find the same active site?
-*   [ ] **Task 5.4:** Write tutorial notebook in `sandbox/AFND_tutorial.ipynb`.
+*   [ ] **Task 5.4:** Write tutorial notebook in `sandbox/DFND_tutorial.ipynb`.
 
 ## Milestones
 

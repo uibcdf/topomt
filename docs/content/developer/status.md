@@ -14,7 +14,7 @@ What it does not yet have is a fully consolidated release-quality surface.
 
 ## Current priority
 
-The current priority is the non-AFND stabilization path:
+The current priority is the non-DFND stabilization path:
 
 - `pocketeer`
 - `alphaspace2`
@@ -29,9 +29,9 @@ This work includes:
 - stronger tests;
 - preparation for future MolSysViewer integration.
 
-## AFND
+## DFND
 
-AFND remains part of the project vision, but it is currently a postponed track.
+DFND remains part of the project vision, but it is currently a postponed track.
 
 Its design material is richer than most other historical developer documents,
 but it is not the current execution priority.

@@ -72,7 +72,7 @@ The following are explicitly postponed to the next slice:
 - true pocket rendering through MolSysViewer shape APIs;
 - synchronized selection/focus actions tied to rendered pockets;
 - export-quality scene composition;
-- dedicated AFND visualization support.
+- dedicated DFND visualization support.
 
 ## Current implementation direction
 

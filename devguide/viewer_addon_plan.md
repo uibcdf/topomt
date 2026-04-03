@@ -2,7 +2,7 @@
 
 ## Objective
 
-After the non-AFND core of TopoMT is stable, the next major integration target
+After the non-DFND core of TopoMT is stable, the next major integration target
 is a MolSysViewer addon capable of rendering pockets and related topographic
 features on molecular systems.
 
@@ -71,8 +71,8 @@ fields whenever possible:
 This payload does not need to be public yet, but it should guide internal
 normalization work.
 
-This payload is designed around the current non-AFND priority, but it should
-also be compatible with future AFND work. In particular, AFND may later need
+This payload is designed around the current non-DFND priority, but it should
+also be compatible with future DFND work. In particular, DFND may later need
 viewer support for:
 
 - channels;
@@ -82,9 +82,9 @@ viewer support for:
 
 For conceptual background on those richer semantics, see:
 
-- [AFND/Overview.md](AFND/Overview.md)
-- [AFND/Interpretation.md](AFND/Interpretation.md)
-- [AFND/Technical_Design.md](AFND/Technical_Design.md)
+- [DFND/Overview.md](DFND/Overview.md)
+- [DFND/Interpretation.md](DFND/Interpretation.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md)
 
 ## First implementation strategy
 
@@ -149,9 +149,9 @@ Before starting the addon, TopoMT should complete:
 - enough tests to trust engine outputs;
 - a viewer-oriented normalization layer.
 
-AFND should not block the first addon version. The addon should start from the
-stable pocket-oriented payload and only later expand toward richer AFND-driven
-representations if and when the AFND implementation becomes production-ready.
+DFND should not block the first addon version. The addon should start from the
+stable pocket-oriented payload and only later expand toward richer DFND-driven
+representations if and when the DFND implementation becomes production-ready.
 
 ## Documentation dependency
 

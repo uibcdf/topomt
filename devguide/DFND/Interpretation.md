@@ -1,11 +1,14 @@
-# Alpha-Flow Network Decomposition (AFND): Interpretation and Use Cases
+# Delaunay Flow Network Decomposition (DFND): Interpretation and Use Cases
 
-The power of AFND lies not just in finding "holes," but in providing a rich, semantically meaningful decomposition of molecular topography. This document outlines how to interpret the results of AFND in various biological and pharmacological contexts.
+Historical note: the preferred method name is now `DFND`; older mentions of
+`DFND` in this subdirectory should be read as the previous provisional label.
+
+The power of DFND lies not just in finding "holes," but in providing a rich, semantically meaningful decomposition of molecular topography. This document outlines how to interpret the results of DFND in various biological and pharmacological contexts.
 
 ## 1. Drug Discovery and Binding Site Analysis
 
 ### 1.1. Pocket Characterization
-AFND decomposes a binding site into a structured graph of sub-pockets.
+DFND decomposes a binding site into a structured graph of sub-pockets.
 *   **Transit Volumes:** Represent the "habitable zones" where a ligand can reside comfortably. Large `TRANSIT` clusters indicate potential binding hotspots.
 *   **Bottlenecks (Gates):** The edges between sub-pockets define the accessibility. A narrow $R_{gate}$ implies that a ligand might need conformational flexibility to pass.
     *   *Interpretation:* "The binding site consists of a main chamber A and a sub-pocket B, connected by a 2.1 Å constriction. Ligands targeting B must be able to squeeze through this gate."
@@ -13,20 +16,20 @@ AFND decomposes a binding site into a structured graph of sub-pockets.
     *   *Interpretation:* "While the ligand resides in the `TRANSIT` volume, its binding affinity is driven by interactions with the atoms lining the `COAST` tetrahedra."
 
 ### 1.2. Cryptic Pockets
-AFND is uniquely suited to detect cryptic pockets (sites that open only upon dynamic fluctuation).
+DFND is uniquely suited to detect cryptic pockets (sites that open only upon dynamic fluctuation).
 *   **Analysis Strategy:** By analyzing the Dry Network (SOLID) surrounding a pocket, one can identify "weak walls" (thin layers of `SOLID` tetrahedra separating a `VOID` from the surface).
 *   *Interpretation:* "A `VOID` of 150 Å³ exists just 1.5 Å behind the active site wall. A side-chain rotation could merge this void with the main pocket, creating a cryptic binding sub-site."
 
 ### 1.3. Channels and Tunnels
 For enzymes with buried active sites (e.g., Cytochrome P450), the path to the surface is critical.
-*   **Interpretation:** AFND identifies channels as cycles in the flow graph (Root $\to$ Mouth A $\to$ Active Site $\to$ Mouth B $\to$ Root).
+*   **Interpretation:** DFND identifies channels as cycles in the flow graph (Root $\to$ Mouth A $\to$ Active Site $\to$ Mouth B $\to$ Root).
 *   **Metrics:** The "Bottleneck Radius" of the channel is simply the minimum $R_{gate}$ along the path. The "Channel Profile" is the sequence of $R_{insphere}$ and $R_{gate}$ values from mouth to depth.
 
 ---
 
 ## 2. Protein-Protein Interfaces (PPI)
 
-AFND naturally handles multi-chain systems by carrying atom metadata (Chain ID) into the tetrahedra.
+DFND naturally handles multi-chain systems by carrying atom metadata (Chain ID) into the tetrahedra.
 
 ### 2.1. Interface Topography
 *   **Mixed Tetrahedra:** Tetrahedra whose vertices belong to different chains define the **Contact Layer**.
@@ -56,7 +59,7 @@ The Dry Network provides a topological definition of the protein core.
 
 ## 4. Summary of Topo-Biological Descriptors
 
-| Descriptor | AFND Component | Biological Relevance |
+| Descriptor | DFND Component | Biological Relevance |
 | :--- | :--- | :--- |
 | **Pocket Volume** | $\sum Vol(TRANSIT) + \sum Vol(COAST)$ | Binding capacity (Stoichiometry/Size). |
 | **Mouth Area** | Area of Faces connecting to `OCEAN` | Access kinetics ($k_{on}$). |

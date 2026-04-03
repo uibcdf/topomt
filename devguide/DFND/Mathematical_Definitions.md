@@ -1,6 +1,9 @@
-# Alpha-Flow Network Decomposition (AFND): Mathematical Definitions
+# Delaunay Flow Network Decomposition (DFND): Mathematical Definitions
 
-This document provides the formal mathematical specifications for the geometric primitives used in AFND. It serves as the definitive reference for implementation, ensuring that concepts like "permeability" and "habitability" are calculated consistently.
+Historical note: the preferred method name is now `DFND`; older mentions of
+`DFND` in this subdirectory should be read as the previous provisional label.
+
+This document provides the formal mathematical specifications for the geometric primitives used in DFND. It serves as the definitive reference for implementation, ensuring that concepts like "permeability" and "habitability" are calculated consistently.
 
 ## 1. Preliminaries
 
@@ -79,7 +82,7 @@ $$ ||\mathbf{p}_{\alpha} - \mathbf{c}_i||^2 - r_i^2 = R_{\alpha}^2 $$
 This is a linear system (simpler to solve).
 *   **Relationship:** $R_{insphere}$ is the "true" physical limit. $R_{\alpha}$ is the "topological" limit used by Delaunay.
 *   **Approximation:** For atoms of similar size ($r_i \approx r_j$), $R_{insphere} \approx R_{\alpha}$.
-*   **AFND Policy:** We prefer $R_{insphere}$ for physical correctness (Habitability), but we may use $R_{\alpha}$ for topological indexing since it is native to the Delaunay dual.
+*   **DFND Policy:** We prefer $R_{insphere}$ for physical correctness (Habitability), but we may use $R_{\alpha}$ for topological indexing since it is native to the Delaunay dual.
 
 ---
 
@@ -114,4 +117,4 @@ $$ Vol(P) = \sum_{T \in P} Vol(T) $$
 *   *Note:* This is the volume of the Delaunay tetrahedra (Topological Volume).
 *   *Correction:* To get the "True Solvent Accessible Volume", one would subtract the volume of the atomic caps inside each tetrahedron.
     $$ Vol_{net}(P) = Vol(P) - \sum_{i \in Atoms(P)} Vol(Sphere_i \cap P) $$
-    AFND focuses on $Vol(P)$ for speed and topological robustness, unless "high precision" mode is requested.
+    DFND focuses on $Vol(P)$ for speed and topological robustness, unless "high precision" mode is requested.

@@ -55,7 +55,7 @@ Current test suite.
 The coverage is still uneven:
 
 - there are basic tests for `Topography`, pockets, alpha-spheres, and CASTp;
-- AFND has a dedicated test file of its own;
+- DFND has a dedicated test file of its own;
 - some areas, such as loaders and several engines, are still lightly covered.
 
 ## Documentation
@@ -85,12 +85,12 @@ This is where the project should describe:
 - internal engineering decisions;
 - integration plans with the rest of MolSysSuite.
 
-### `devguide/AFND/`
+### `devguide/DFND/`
 
-Dedicated design and planning area for AFND.
+Dedicated design and planning area for DFND.
 
 This subdirectory is much richer than the rest of the historical `devguide`
-and remains the main reference for the AFND track.
+and remains the main reference for the DFND track.
 
 ## Development tooling
 

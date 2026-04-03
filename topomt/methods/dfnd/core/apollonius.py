@@ -15,7 +15,9 @@ def solve_apollonius_js_port(c1, r1, c2, r2, c3, r3, epsilon=1e-9):
     dx = D * c1[0] - a; dy = D * c1[1] - c; dr = D * r1
     P = b*b + d*d - D*D; Q = b*dx + d*dy + D*dr; R = dx*dx + dy*dy - dr*dr
     if abs(P) < epsilon: return None
-    disc = Q*Q - P*R; if abs(disc) < epsilon: disc = 0
+    disc = Q * Q - P * R
+    if abs(disc) < epsilon:
+        disc = 0
     if disc < 0: return None
     r = (Q - math.sqrt(disc)) / P
     x = (a + b * r) / D; y = (c + d * r) / D

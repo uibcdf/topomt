@@ -1,4 +1,4 @@
-# Alpha-Flow Network Decomposition (AFND): Technical Design
+# Delaunay Flow Network Decomposition (DFND): Technical Design
 
 This document bridges the gap between the mathematical definitions and the actual Python code. It defines the data structures, algorithms, and architectural choices to ensure performance and maintainability.
 
@@ -6,8 +6,9 @@ This document bridges the gap between the mathematical definitions and the actua
 
 To avoid the overhead of Python objects for millions of tetrahedra, we will use a **Structure of Arrays (SoA)** approach powered by NumPy.
 
-### 1.1. The Mesh Object (`AlphaFlowMesh`)
-This internal class holds the static geometry derived from Delaunay. It does **not** depend on $R_{probe}$.
+### 1.1. The Mesh Object (`DelaunayMesh`)
+This internal class holds the static geometry derived from Delaunay. It does
+**not** depend on $R_{probe}$.
 
 *   **`vertices`**: `ndarray (N_atoms, 3) float32` - Atom coordinates.
 *   **`atom_radii`**: `ndarray (N_atoms,) float32` - vdW radii.
@@ -31,9 +32,15 @@ We pre-calculate and store the limiting radii. This allows the "Master Graph" fu
 ## 2. Dependencies and Libraries
 
 ### 2.1. Triangulation: `scipy.spatial.Delaunay`
-*   **Choice:** We will use standard Delaunay triangulation initially.
-*   **Justification:** While Regular Triangulation (Power Diagram) is theoretically more correct for atoms of different sizes, standard Delaunay is natively available in SciPy, extremely fast, and sufficiently accurate for "fuzzy" biological systems where atomic radii are approximate anyway.
-*   **Mitigation:** If accuracy becomes an issue for mixed-ion systems, we can swap this module later for a wrapper around `CGAL` or a custom Power Diagram implementation.
+*   **Choice:** Use standard Delaunay triangulation initially.
+*   **Justification:** DFND is conceptually cleaner when the tessellation is a
+    neutral geometric partition of atomic centers and the atomic radii enter
+    later through `R_insphere` and `R_gate`. This keeps the physical discourse
+    of "habitability" and "permeability" explicit rather than embedding too
+    much of it into the tessellation itself.
+*   **Weighted-Delaunay note:** Regular/weighted triangulation remains a valid
+    future audit path, but in DFND it should be treated as an optional
+    alternative tessellation, not as the default conceptual model.
 
 ### 2.2. Graph Algorithms: `scipy.sparse.csgraph`
 *   **Choice:** We will use `scipy.sparse.csgraph` instead of `networkx` for the core traversal.
@@ -50,9 +57,9 @@ We pre-calculate and store the limiting radii. This allows the "Master Graph" fu
 The module will expose a main class that encapsulates the state.
 
 ```python
-class AlphaFlowNetwork:
+class DelaunayFlowNetwork:
     """
-    The main container for the AFND analysis.
+    The main container for the DFND analysis.
     Built once per structure; queried multiple times for different probes.
     """
     
@@ -85,7 +92,8 @@ class AlphaFlowNetwork:
 ## 4. Algorithmic Optimization Strategy
 
 ### 4.1. The Bottleneck: $R_{gate}$ Calculation
-Calculating Apollonius for $N_{tet} \times 4$ faces (~200k faces) is the heavy step.
+Calculating Apollonius for $N_{tet} \times 4$ faces (~200k faces) is the heavy
+step.
 
 *   **Strategy:**
     1.  **Broad Phase:** Calculate the gap between atom pairs in the face. If $Gap_{ij} < -0.5$ Å (deep overlap), $R_{gate} \approx 0$. If $Gap_{ij} > 10$ Å, it's open.
@@ -113,6 +121,14 @@ The `get_pockets` method should return a clean, JSON-serializable structure (sim
 }
 ```
 
-This design ensures that `topomt` remains a high-performance library suitable for high-throughput screening, not just single-structure analysis.
+This design keeps the intended layering explicit:
+
+- `DelaunayMesh` as the geometric base;
+- `DelaunayFlowNetwork` as the flow-analysis structure built on that mesh;
+- feature objects (`Pocket`, `Void`, `Channel`, `Mouth`, etc.) as the semantic
+  outputs of a specific query over that persistent network.
+
+This design ensures that `topomt` remains a high-performance library suitable
+for high-throughput screening, not just single-structure analysis.
 
 ```

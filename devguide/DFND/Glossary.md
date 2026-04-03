@@ -1,6 +1,9 @@
-# Alpha-Flow Network Decomposition (AFND): Glossary
+# Delaunay Flow Network Decomposition (DFND): Glossary
 
-A quick reference for the terminology used in the AFND module.
+Historical note: the preferred method name is now `DFND`; older mentions of
+`DFND` in this subdirectory should be read as the previous provisional label.
+
+A quick reference for the terminology used in the DFND module.
 
 ## Graph Elements
 

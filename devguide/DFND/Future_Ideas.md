@@ -1,6 +1,9 @@
-# Alpha-Flow Network Decomposition (AFND): Future Ideas
+# Delaunay Flow Network Decomposition (DFND): Future Ideas
 
-Once the core geometric engine is stable, AFND offers a fertile ground for advanced extensions. Here are the strategic directions for future development.
+Historical note: the preferred method name is now `DFND`; older mentions of
+`DFND` in this subdirectory should be read as the previous provisional label.
+
+Once the core geometric engine is stable, DFND offers a fertile ground for advanced extensions. Here are the strategic directions for future development.
 
 ## 1. Physicochemical Graph Overlay (Chemo-Topology)
 
@@ -16,7 +19,7 @@ Currently, the graph nodes carry geometric data ($Volume, R_{insphere}$). We sho
 
 ## 2. Dynamic Trajectory Analysis (4D Topography)
 
-AFND is fast enough to run on MD frames.
+DFND is fast enough to run on MD frames.
 
 *   **The "Breathing" Graph:**
     *   Track a specific pocket ID across time.

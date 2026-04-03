@@ -3,4 +3,4 @@ from .pycasta import pycasta
 from .alphaspace2 import alphaspace2
 from .pocketeer import pocketeer
 from .castp import castp
-# from .afnd import afnd
+# from .dfnd import dfnd

@@ -13,7 +13,7 @@ The current tests live mainly in:
 - [tests/test_alphaspheres.py](/home/diego/repos@uibcdf/topomt/tests/test_alphaspheres.py)
 - [tests/test_castp.py](/home/diego/repos@uibcdf/topomt/tests/test_castp.py)
 - [tests/test_import.py](/home/diego/repos@uibcdf/topomt/tests/test_import.py)
-- [tests/test_afnd_pockets.py](/home/diego/repos@uibcdf/topomt/tests/test_afnd_pockets.py)
+- [tests/test_dfnd_pockets.py](/home/diego/repos@uibcdf/topomt/tests/test_dfnd_pockets.py)
 - [tests/methods/pocketeer/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_parity.py)
 - [tests/methods/pocketeer/test_wrapper.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_wrapper.py)
 - [tests/methods/alphaspace2/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/alphaspace2/test_parity.py)
@@ -35,7 +35,7 @@ The current tests live mainly in:
   `pycasta`, validating the real wrapper-backed execution path in addition to
   the native-method parity suites;
 - import smoke tests;
-- AFND smoke-like integration checks.
+- DFND smoke-like integration checks.
 
 ## What is currently weak
 
@@ -93,11 +93,11 @@ Practical implication:
 
 For the current roadmap, the next validation steps should be:
 
-1. strengthen direct tests for the prioritized non-AFND engines;
+1. strengthen direct tests for the prioritized non-DFND engines;
 2. test local-to-global atom-index mapping explicitly;
 3. test feature metadata consistency across engines;
 4. expand loader tests for CASTp;
-5. keep AFND separate until it returns to active priority.
+5. keep DFND separate until it returns to active priority.
 
 ## Environment caveat
 

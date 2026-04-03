@@ -12,7 +12,7 @@ There is meaningful coverage for:
 - CASTp integration paths
 - import smoke tests
 
-There is also a separate AFND-oriented test file, but AFND is not the current
+There is also a separate DFND-oriented test file, but DFND is not the current
 stabilization priority.
 
 ## What is still weak
@@ -24,5 +24,5 @@ stabilization priority.
 
 ## Current testing priority
 
-The current priority is to strengthen tests around the non-AFND engine path and
+The current priority is to strengthen tests around the non-DFND engine path and
 the common `Topography` contract.

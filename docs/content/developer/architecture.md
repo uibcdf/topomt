@@ -28,7 +28,7 @@ The main public orchestration path is `get_topography()`, which dispatches to
 different engines and converts their outputs into a common `Topography`
 representation.
 
-The currently relevant non-AFND engines are:
+The currently relevant non-DFND engines are:
 
 - `pocketeer`
 - `fpocket4`
@@ -45,9 +45,9 @@ The practical design principles are:
 - use canonical MolSysSuite units and conventions internally;
 - keep the representation suitable for later visualization and analysis.
 
-## Relationship to AFND
+## Relationship to DFND
 
-AFND is a separate architectural track inside TopoMT.
+DFND is a separate architectural track inside TopoMT.
 
 It is relevant for the long-term evolution of richer topographic semantics, but
 it should not be confused with the current public stabilization path.

@@ -1,10 +1,9 @@
-from typing import Union, List, Dict
-import molsysmt as msm
-from topomt import pyunitwizard as puw
-from .graph import AlphaFlowNetwork
+from typing import Dict, List
+
+from .graph import DelaunayFlowNetwork
 from ...features import Pocket, Void, Channel
 
-def afnd(
+def dfnd(
     molecular_system,
     selection: str = 'all',
     structure_indices: int = 0,
@@ -14,7 +13,7 @@ def afnd(
     epsilon: float = 1e-6
 ) -> Dict[str, Dict[str, List]]:
     """
-    Alpha-Flow Network Decomposition (AFND) method for pocket detection.
+    Delaunay Flow Network Decomposition (DFND) method for pocket detection.
 
     Decomposes the molecular surface into pockets, voids, and solid structures based on 
     the flow of a spherical probe through the Delaunay triangulation network.
@@ -45,7 +44,7 @@ def afnd(
     """
     
     # 1. Initialize the Network Engine
-    network = AlphaFlowNetwork(
+    network = DelaunayFlowNetwork(
         molecular_system, 
         selection=selection, 
         structure_indices=structure_indices,

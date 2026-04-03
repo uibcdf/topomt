@@ -26,14 +26,14 @@ However, it is not yet in a polished or stable product state.
   PDB systems. For the validated systems, TopoMT reproduces the direct fpocket
   binary output in terms of detected pockets, atom membership, pocket ranking,
   `Pocket Score`, and `Drug Score`.
-- The AFND design and documentation package in `devguide/AFND/`.
+- The DFND design and documentation package in `devguide/DFND/`.
 
-For AFND specifically, what is solid today is mostly the design and the
+For DFND specifically, what is solid today is mostly the design and the
 documentation set, especially:
 
-- [AFND/Overview.md](AFND/Overview.md)
-- [AFND/Technical_Design.md](AFND/Technical_Design.md)
-- [AFND/checkpoint.md](AFND/checkpoint.md)
+- [DFND/Overview.md](DFND/Overview.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/checkpoint.md](DFND/checkpoint.md)
 
 ## What is currently the priority
 
@@ -51,12 +51,12 @@ This includes:
 - reliable atom-index mapping;
 - consistent internal units;
 - stable feature contracts for `Topography`;
-- tests for non-AFND workflows;
+- tests for non-DFND workflows;
 - preparation for future visualization in MolSysViewer.
 
 ## What is currently in progress
 
-- Stabilization of the non-AFND surface of the library.
+- Stabilization of the non-DFND surface of the library.
 - Cleanup of feature and topography internals.
 - Better internal contract normalization across engines.
 - Expansion of the `devguide/` to reflect the real project state.
@@ -229,17 +229,17 @@ This includes:
 
 ## What is postponed
 
-AFND is postponed for now.
+DFND is postponed for now.
 
-This does not mean AFND is unimportant. It means the project should first
+This does not mean DFND is unimportant. It means the project should first
 consolidate the conventional engine path and the common `Topography` surface
-before resuming work on the experimental alpha-flow network.
+before resuming work on the experimental Delaunay-flow network.
 
 The practical reading is:
 
-- AFND remains part of the project vision;
-- AFND documentation should keep being referenced from the main guide;
-- AFND implementation work should not drive current priorities.
+- DFND remains part of the project vision;
+- DFND documentation should keep being referenced from the main guide;
+- DFND implementation work should not drive current priorities.
 
 ## Working interpretation of project maturity
 

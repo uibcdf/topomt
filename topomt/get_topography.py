@@ -46,13 +46,16 @@ def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: 
         topo = Topography(molecular_system=molecular_system, selection=selection, structure_indices=structure_indices)
         topo = _run_pycasta(topo, **kwargs)
 
-    elif method_lower == 'afnd':
+    elif method_lower == 'dfnd':
         topo = Topography(molecular_system=molecular_system, selection=selection, structure_indices=structure_indices)
-        from .methods.afnd.api import afnd
-        topo = afnd(topo, **kwargs)
+        from .methods.dfnd.api import dfnd
+        topo = dfnd(topo, **kwargs)
 
     else:
-        raise ValueError(f"Unknown method {method!r}. Supported: 'pocketeer', 'fpocket', 'alphaspace2', 'castp', 'pycasta'.")
+        raise ValueError(
+            f"Unknown method {method!r}. Supported: 'pocketeer', 'fpocket', "
+            "'alphaspace2', 'castp', 'pycasta', 'dfnd'."
+        )
 
     return topo
 

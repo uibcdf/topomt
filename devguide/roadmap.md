@@ -19,7 +19,7 @@ The conceptual result of Phase 1 is valid:
 
 ## Phase 2
 
-Current phase: stabilize the non-AFND core.
+Current phase: stabilize the non-DFND core.
 
 ### Goals
 
@@ -75,7 +75,7 @@ Since then:
 
 ### Non-goals
 
-- AFND productionization
+- DFND productionization
 - advanced scoring models
 - frontend-heavy visualization work
 
@@ -155,13 +155,13 @@ safe dependency.
 
 ## Postponed track
 
-AFND remains a dedicated postponed track.
+DFND remains a dedicated postponed track.
 
-This track already has substantial design documentation under `devguide/AFND/`,
-but it should not block the stabilization of the main non-AFND library path.
+This track already has substantial design documentation under `devguide/DFND/`,
+but it should not block the stabilization of the main non-DFND library path.
 
 The current reference entry points for that track are:
 
-- [AFND/Overview.md](AFND/Overview.md)
-- [AFND/Technical_Design.md](AFND/Technical_Design.md)
-- [AFND/checkpoint.md](AFND/checkpoint.md)
+- [DFND/Overview.md](DFND/Overview.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/checkpoint.md](DFND/checkpoint.md)

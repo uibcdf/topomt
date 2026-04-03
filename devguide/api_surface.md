@@ -69,15 +69,15 @@ some more exploratory pieces.
 
 It should be treated as a mixed stable/experimental area.
 
-### AFND
+### DFND
 
-AFND is an explicit experimental track with rich design documentation in:
+DFND is an explicit experimental track with rich design documentation in:
 
-- [AFND/Overview.md](AFND/Overview.md)
-- [AFND/Technical_Design.md](AFND/Technical_Design.md)
-- [AFND/checkpoint.md](AFND/checkpoint.md)
+- [DFND/Overview.md](DFND/Overview.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/checkpoint.md](DFND/checkpoint.md)
 
-AFND is part of the project vision, but not part of the immediate stabilization
+DFND is part of the project vision, but not part of the immediate stabilization
 priority.
 
 ## Practical rule for contributors

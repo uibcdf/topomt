@@ -1,6 +1,9 @@
-# Alpha-Flow Network Decomposition (AFND): Possible Points of Failure
+# Delaunay Flow Network Decomposition (DFND): Possible Points of Failure
 
-An honest engineering approach requires anticipating failure modes. Here we analyze the potential weaknesses of AFND and propose mitigation strategies.
+Historical note: the preferred method name is now `DFND`; older mentions of
+`DFND` in this subdirectory should be read as the previous provisional label.
+
+An honest engineering approach requires anticipating failure modes. Here we analyze the potential weaknesses of DFND and propose mitigation strategies.
 
 ## 1. Geometric & Numerical Risks
 
@@ -49,7 +52,7 @@ An honest engineering approach requires anticipating failure modes. Here we anal
 ## 4. Biological Validity
 
 ### 4.1. Static vs. Dynamic
-*   **Risk:** AFND (like CASTp) analyzes a static PDB snapshot. Proteins breathe. A "closed" gate ($R_{gate} = 1.3 Å$) might open to 1.5 Å frequently.
+*   **Risk:** DFND (like CASTp) analyzes a static PDB snapshot. Proteins breathe. A "closed" gate ($R_{gate} = 1.3 Å$) might open to 1.5 Å frequently.
 *   **Failure Mode:** False negatives (missing a cryptic pocket).
 *   **Mitigation:**
     *   **Soft Gates:** Instead of binary Open/Closed, report the $R_{gate}$ value.

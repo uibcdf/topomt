@@ -1,12 +1,15 @@
-# Alpha-Flow Network Decomposition (AFND): 4D Topography and Dynamic Pharmacophores
+# Delaunay Flow Network Decomposition (DFND): 4D Topography and Dynamic Pharmacophores
 
-This document details the vision for extending AFND to the temporal dimension (Molecular Dynamics) and integrating it with pharmacophore modeling. This represents the high-end strategic potential of the AFND architecture.
+Historical note: the preferred method name is now `DFND`; older mentions of
+`DFND` in this subdirectory should be read as the previous provisional label.
+
+This document details the vision for extending DFND to the temporal dimension (Molecular Dynamics) and integrating it with pharmacophore modeling. This represents the high-end strategic potential of the DFND architecture.
 
 ## 1. 4D Topography: Explicit Topological Tracking
 
 Conventional dynamic pocket analysis often relies on grid occupancy (voxel frequency), which loses topological identity, requires structural alignment, and depends on arbitrary grid spacing.
 
-AFND enables **Explicit Topological Tracking** because the fundamental units—tetrahedra defined by atomic quadruplets—are intrinsic to the molecular graph and persistent across time.
+DFND enables **Explicit Topological Tracking** because the fundamental units—tetrahedra defined by atomic quadruplets—are intrinsic to the molecular graph and persistent across time.
 
 ### 1.1. Persistent vs. Instantaneous Graph
 *   **Tetrahedron Identity:** A tetrahedron is uniquely defined by 4 atom indices $(A_1, A_2, A_3, A_4)$. These indices are constant throughout the trajectory (assuming covalent topology is preserved).
@@ -81,7 +84,7 @@ We can cross-reference the theoretical `TRANSIT` volume with explicit water occu
 
 ## 4. Dynamic Pharmacophores (Dyn-Pharmacophores)
 
-AFND offers a unique platform for this because, unlike grid methods (which yield diffuse interaction clouds), AFND provides **discrete, semantic anchor points** via the `TRANSIT` and `COAST` nodes.
+DFND offers a unique platform for this because, unlike grid methods (which yield diffuse interaction clouds), DFND provides **discrete, semantic anchor points** via the `TRANSIT` and `COAST` nodes.
 
 ### 4.1. The Idea: Nodes as Pharmacophoric Anchors
 Each node (tetrahedron) is defined by 4 atoms. We can assign a pharmacophoric label to the node based on the chemical nature of those atoms.
@@ -104,7 +107,7 @@ By aggregating the topological tensor with these labels over the trajectory ($F 
     *   **Result:** A 3D pharmacophore model (spheres and vectors) directly exportable to VS tools like **RDKit**, **Pharmer**, or **LigandScout**.
 
 ### 4.3. The "Internal Frame" Advantage
-This is a massive technical advantage of AFND over grid methods.
+This is a massive technical advantage of DFND over grid methods.
 *   **Grid Methods:** Require perfect structural alignment. If the protein domain moves or rotates, the grid blurs.
-*   **AFND:** Uses **Internal Definition**. The node is defined relative to atoms $A_1..A_4$. If the domain moves, the tetrahedron moves with it. The pharmacophore point travels with the protein.
+*   **DFND:** Uses **Internal Definition**. The node is defined relative to atoms $A_1..A_4$. If the domain moves, the tetrahedron moves with it. The pharmacophore point travels with the protein.
 *   **Implication:** **No Alignment Required.** The resulting model inherently captures the **conformational selection** of the pocket, fitting the ensemble of accessible shapes rather than a single static snapshot.

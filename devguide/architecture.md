@@ -72,7 +72,7 @@ TopoMT currently exposes a public orchestrator:
 This function dispatches to different engines and converts their outputs into a
 common `Topography` object.
 
-The relevant non-AFND engines are:
+The relevant non-DFND engines are:
 
 - `pocketeer`
 - `fpocket4`
@@ -130,22 +130,22 @@ The intended end state is:
 - `topomt.wrappers.*`: external-tool integrations used for comparison, testing,
   import, or auxiliary workflows.
 
-## AFND within the architecture
+## DFND within the architecture
 
-AFND should be understood as a separate architectural track inside TopoMT, not
+DFND should be understood as a separate architectural track inside TopoMT, not
 as the definition of the whole library.
 
-Its role is to explore a richer alpha-flow interpretation of molecular
-topography, with more explicit network semantics for pockets, voids, channels,
-and dry components.
+Its role is to explore a richer Delaunay-flow interpretation of molecular
+topography, with more explicit network semantics for pockets, voids,
+channels, and dry components.
 
 Relevant design references are:
 
-- [AFND/Overview.md](AFND/Overview.md)
-- [AFND/Algorithm.md](AFND/Algorithm.md)
-- [AFND/Technical_Design.md](AFND/Technical_Design.md)
+- [DFND/Overview.md](DFND/Overview.md)
+- [DFND/Algorithm.md](DFND/Algorithm.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md)
 
-For the time being, AFND is best treated as:
+For the time being, DFND is best treated as:
 
 - a documented experimental subsystem;
 - a source of conceptual guidance for future feature semantics;
@@ -204,7 +204,7 @@ The short-term architectural direction is:
 4. expose a viewer-friendly representation for pockets and related features;
 5. build the MolSysViewer addon on top of that stable surface.
 
-Longer term, once the non-AFND path is stable, AFND may enrich the architecture
+Longer term, once the non-DFND path is stable, DFND may enrich the architecture
 with:
 
 - stronger channel and void semantics;
