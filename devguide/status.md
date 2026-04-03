@@ -73,6 +73,11 @@ This includes:
   `topomt.tools.tessellation`, and the first shared geometry helpers have
   moved into `topomt.tools.geometry` without yet forcing a full engine
   rewrite.
+- The next convergence slice is now also active: `DFND` has started to use
+  shared face access through `DelaunayMesh`, and `pycasta` now shares the
+  mesh triangulation while deliberately keeping its upstream-compatible
+  tetrahedral radius proxy and oriented simplex ordering where parity depends
+  on that legacy public behavior.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.

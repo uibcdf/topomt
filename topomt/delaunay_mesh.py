@@ -6,6 +6,14 @@ from scipy.spatial import Delaunay
 from topomt import pyunitwizard as puw
 
 
+_SIMPLEX_FACE_LOCAL_INDICES = (
+    (0, 1, 2),
+    (0, 1, 3),
+    (0, 2, 3),
+    (1, 2, 3),
+)
+
+
 def _tetrahedron_volumes(points_of_alpha_sphere, points):
     volumes = np.empty(len(points_of_alpha_sphere), dtype=float)
     for index, tetrahedron_indices in enumerate(points_of_alpha_sphere):
@@ -118,6 +126,7 @@ class DelaunayMesh:
         self.atom_radii = None
 
         self.simplices = None
+        self.oriented_simplices = None
         self.neighbors = None
 
         self.alpha_sphere_centers = None
@@ -131,6 +140,8 @@ class DelaunayMesh:
         self._min_edges = None
         self._max_edges = None
         self._condition_numbers = None
+        self._simplex_faces = None
+        self._boundary_face_records = None
 
         if points is None:
             return
@@ -162,7 +173,8 @@ class DelaunayMesh:
 
         triangulation = Delaunay(points_value)
 
-        self.simplices = np.sort(np.asarray(triangulation.simplices, dtype=int), axis=1)
+        self.oriented_simplices = np.asarray(triangulation.simplices, dtype=int)
+        self.simplices = np.sort(self.oriented_simplices.copy(), axis=1)
         self.neighbors = np.asarray(triangulation.neighbors, dtype=int)
 
         self.alpha_sphere_atom_indices = self.simplices.copy()
@@ -202,6 +214,43 @@ class DelaunayMesh:
         """Return alpha-sphere adjacency as unique index pairs."""
 
         return self._alpha_sphere_neighbor_pairs.copy()
+
+    def get_simplex_faces(self) -> np.ndarray:
+        """Return the sorted atom triples for each simplex face."""
+
+        if self._simplex_faces is None:
+            simplex_faces = np.empty((self.simplices.shape[0], 4, 3), dtype=int)
+            for face_index, local_indices in enumerate(_SIMPLEX_FACE_LOCAL_INDICES):
+                simplex_faces[:, face_index, :] = np.sort(
+                    self.simplices[:, local_indices],
+                    axis=1,
+                )
+            self._simplex_faces = simplex_faces
+        return self._simplex_faces.copy()
+
+    def get_face_atoms(self, simplex_index: int, face_index: int) -> tuple[int, int, int]:
+        """Return the atom indices of a simplex face as a sorted triple."""
+
+        local_indices = _SIMPLEX_FACE_LOCAL_INDICES[int(face_index)]
+        return tuple(sorted(int(atom_index) for atom_index in self.simplices[int(simplex_index), local_indices]))
+
+    def get_boundary_face_records(self) -> list[tuple[int, int, tuple[int, int, int]]]:
+        """Return boundary faces as ``(simplex_index, face_index, face_atoms)`` records."""
+
+        if self._boundary_face_records is None:
+            records = []
+            for simplex_index, simplex_neighbors in enumerate(self.neighbors):
+                for face_index, neighbor in enumerate(simplex_neighbors):
+                    if neighbor == -1:
+                        records.append(
+                            (
+                                int(simplex_index),
+                                int(face_index),
+                                self.get_face_atoms(simplex_index, face_index),
+                            )
+                        )
+            self._boundary_face_records = records
+        return list(self._boundary_face_records)
 
     def filter_alpha_spheres(
         self,
@@ -258,6 +307,8 @@ class DelaunayMesh:
         self.neighbors = neighbors
         self.alpha_sphere_atom_indices = simplices
         self.n_alpha_spheres = simplices.shape[0]
+        self._simplex_faces = None
+        self._boundary_face_records = None
         self._alpha_sphere_neighbor_map = {
             int(index): sorted(int(neighbor) for neighbor in simplex_neighbors if neighbor != -1)
             for index, simplex_neighbors in enumerate(neighbors)
@@ -299,6 +350,8 @@ class DelaunayMesh:
                 if source < target:
                     pairs.append((source, target))
         self._alpha_sphere_neighbor_pairs = np.asarray(pairs, dtype=int)
+        self._simplex_faces = None
+        self._boundary_face_records = None
 
         self.alpha_sphere_centers = self.alpha_sphere_centers[mask]
         self.alpha_sphere_radii = self.alpha_sphere_radii[mask]

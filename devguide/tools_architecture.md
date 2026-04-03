@@ -36,9 +36,12 @@ store the Delaunay simplices and the main derived geometric fields needed by
 multiple engines:
 
 - atom coordinates and atom radii;
-- simplices and simplex neighbors;
+- simplices, oriented simplices when method parity depends on simplex-local
+  ordering, and simplex neighbors;
 - simplex-centered geometric descriptors such as circumcenters, circumsphere
   radii, and insphere-derived metrics when needed;
+- face-level helpers such as simplex-face atom triples and boundary-face
+  records;
 - alpha-sphere-derived arrays as a secondary view over the same mesh.
 
 `DelaunayFlowNetwork` should sit above that mesh and provide the

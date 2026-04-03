@@ -268,14 +268,7 @@ class DelaunayFlowNetwork:
                                 is_mouth = True
                         
                         if is_mouth:
-                            # Get atoms of this face
-                            # face_idx 0: (0,1,2), 1: (0,1,3), 2: (0,2,3), 3: (1,2,3)
-                            tet_atoms = self.tetra_atoms[tet_idx]
-                            if face_idx == 0:   face_atoms = (tet_atoms[0], tet_atoms[1], tet_atoms[2])
-                            elif face_idx == 1: face_atoms = (tet_atoms[0], tet_atoms[1], tet_atoms[3])
-                            elif face_idx == 2: face_atoms = (tet_atoms[0], tet_atoms[2], tet_atoms[3])
-                            elif face_idx == 3: face_atoms = (tet_atoms[1], tet_atoms[2], tet_atoms[3])
-                            mouth_faces.append(tuple(sorted(face_atoms)))
+                            mouth_faces.append(self.mesh.get_face_atoms(tet_idx, face_idx))
                 
                 # 2. Build Face Adjacency Graph
                 # Two faces are connected if they share 2 atoms (an edge)

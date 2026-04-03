@@ -6,7 +6,7 @@ from dataclasses import dataclass
 import warnings
 import molsysmt as msm
 import numpy as np
-from scipy.spatial import Delaunay, cKDTree
+from scipy.spatial import cKDTree
 
 from topomt._private.molsysmt_preparation import build_heavy_receptor_view
 from topomt._private.smonitor import (

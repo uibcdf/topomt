@@ -4,9 +4,9 @@ from typing import Sequence
 
 import molsysmt as msm
 import numpy as np
-from scipy.spatial import Delaunay
 
 from topomt._private.smonitor import signal
+from topomt.delaunay_mesh import DelaunayMesh
 from topomt import pyunitwizard as puw
 
 
@@ -62,11 +62,11 @@ def pycasta(
             return [], [], np.empty((0, 4), dtype=int), atom_indices
         return [], [], np.empty((0, 4), dtype=int)
 
-    delaunay = Delaunay(coords_nm)
-    simplices = delaunay.simplices
+    mesh = DelaunayMesh(points=coords_nm)
+    simplices = mesh.oriented_simplices
     tetra_pos = coords_nm[simplices]
 
-    radii = _circumsphere_radii(tetra_pos)
+    radii = _pycasta_proxy_radii(tetra_pos)
     alpha_mask = radii < alpha_nm
 
     pockets = _flow_detection(
@@ -107,6 +107,38 @@ def pycasta(
     return pockets_sorted, volumes_sorted, simplices
 
 
+def _pycasta_proxy_radii(tetra_positions: np.ndarray) -> np.ndarray:
+    """Return the tetrahedral radius proxy used by the upstream public code."""
+
+    radii = np.empty(tetra_positions.shape[0], dtype=float)
+
+    for index, tetra in enumerate(tetra_positions):
+        if tetra.shape[0] != 4:
+            radii[index] = np.inf
+            continue
+
+        atom_a, atom_b, atom_c, atom_d = tetra
+        vector_ab = atom_b - atom_a
+        vector_ac = atom_c - atom_a
+        vector_ad = atom_d - atom_a
+        matrix = np.vstack([vector_ab, vector_ac, vector_ad]).T
+
+        try:
+            rhs = 0.5 * np.array(
+                [
+                    np.dot(vector_ab, vector_ab),
+                    np.dot(vector_ac, vector_ac),
+                    np.dot(vector_ad, vector_ad),
+                ]
+            )
+            solution = np.linalg.solve(matrix, rhs)
+            radii[index] = np.linalg.norm(solution)
+        except np.linalg.LinAlgError:
+            radii[index] = np.inf
+
+    return radii
+
+
 def _prepare_pycasta_receptor(
     molecular_system,
     *,
@@ -138,37 +170,6 @@ def _prepare_pycasta_receptor(
     coordinates_nm = np.asarray(puw.get_value(coordinates, to_unit='nm'), dtype=float)
 
     return selected_atom_indices, coordinates_nm
-
-
-def _circumsphere_radii(tetra_positions: np.ndarray) -> np.ndarray:
-    radii = np.empty(tetra_positions.shape[0], dtype=float)
-
-    for index, tetra in enumerate(tetra_positions):
-        if tetra.shape[0] != 4:
-            radii[index] = np.inf
-            continue
-
-        atom_a, atom_b, atom_c, atom_d = tetra
-        vector_ab = atom_b - atom_a
-        vector_ac = atom_c - atom_a
-        vector_ad = atom_d - atom_a
-        matrix = np.vstack([vector_ab, vector_ac, vector_ad]).T
-
-        try:
-            rhs = 0.5 * np.array(
-                [
-                    np.dot(vector_ab, vector_ab),
-                    np.dot(vector_ac, vector_ac),
-                    np.dot(vector_ad, vector_ad),
-                ]
-            )
-            solution = np.linalg.solve(matrix, rhs)
-            radii[index] = np.linalg.norm(solution)
-        except np.linalg.LinAlgError:
-            radii[index] = np.inf
-
-    return radii
-
 
 def _flow_detection(
     simplices: np.ndarray,
