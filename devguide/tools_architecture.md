@@ -269,7 +269,7 @@ This architecture is no longer purely aspirational.
 The following slices are now already materialized in the repository:
 
 - `topomt.tools.geometry`
-  with the first shared mesh and hull helpers;
+  with the first shared hull, mesh, plane, and sampling helpers;
 - `topomt.tools.tessellation`
   with tetrahedral, mouth, and representative-point helpers;
 - `topomt.tools.features.common.descriptors`
@@ -289,7 +289,8 @@ At the moment, `castp` already consumes the new pocket physicochemistry module
 directly, while `pocket_geometry.py` still re-exports the migrated functions as
 a compatibility bridge during the larger refactor. The same compatibility
 bridge now also covers the migrated channel/profile, mouth, and overlap
-helpers.
+helpers. The same pattern now also covers the remaining geometry helpers that
+were duplicated locally inside `pocket_geometry.py`.
 
 ### Domain-specific characterization helpers
 

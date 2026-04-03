@@ -105,6 +105,10 @@ This includes:
 - `topomt.tools.features.common.overlap` is now also real, hosting the first
   shared overlap helper (`jaccard_overlap_clusters`) while
   `pocket_geometry.py` keeps a compatibility re-export.
+- `topomt.tools.geometry.planes` and `topomt.tools.geometry.sampling` are now
+  also real, hosting `clip_mesh_with_plane` and
+  `union_volume_monte_carlo`, while the duplicated geometry copies in
+  `pocket_geometry.py` have been replaced by compatibility re-exports.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.

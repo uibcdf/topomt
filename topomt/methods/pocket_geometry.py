@@ -9,12 +9,14 @@ from typing import Iterable, Sequence, Dict, List, Union, Tuple, Set
 
 import numpy as np
 import molsysmt as msm
-from scipy.spatial import ConvexHull, distance_matrix
-# from skimage.measure import marching_cubes  <-- moved to function
 from scipy.spatial.distance import cdist
-from scipy.cluster.hierarchy import fcluster, linkage
-# import py3Dmol <-- moved to function
 from depdigest import dep_digest
+from topomt.tools.geometry import (
+    clip_mesh_with_plane,
+    convex_hull_metrics,
+    marching_cubes_union,
+    union_volume_monte_carlo,
+)
 from topomt.tools.features.common import (
     bounding_metrics,
     effective_center_radius,
@@ -40,194 +42,6 @@ from topomt.tools.features.pockets import (
 
 def _to_numpy(array: Iterable) -> np.ndarray:
     return np.asarray(array, dtype=float)
-
-
-def union_volume_monte_carlo(
-    centers: Sequence[Sequence[float]],
-    radii: Sequence[float],
-    n_samples: int = 200_000,
-    rng: np.random.Generator | None = None,
-) -> float:
-    """Estimate the volume of the union of spheres by Monte Carlo sampling.
-
-    Parameters
-    ----------
-    centers : array-like, shape (n, 3)
-        Sphere centers (alpha-sphere centers).
-    radii : array-like, shape (n,)
-        Sphere radii (same length as centers).
-    n_samples : int, optional
-        Number of random points to sample inside the bounding box.
-    rng : np.random.Generator, optional
-        Random generator for reproducibility.
-
-    Returns
-    -------
-    volume : float
-        Estimated volume in the same units as the input coordinates cubed.
-    """
-    if rng is None:
-        rng = np.random.default_rng()
-
-    c = _to_numpy(centers)
-    r = _to_numpy(radii).reshape(-1, 1)
-    if c.shape[0] == 0:
-        return 0.0
-
-    mins = np.min(c - r, axis=0)
-    maxs = np.max(c + r, axis=0)
-    box_vol = float(np.prod(maxs - mins))
-
-    pts = rng.uniform(low=mins, high=maxs, size=(n_samples, 3))
-
-    # chunked evaluation to keep memory reasonable
-    inside = 0
-    chunk = 50_000
-    r2 = (r.squeeze()) ** 2
-    for start in range(0, n_samples, chunk):
-        stop = min(start + chunk, n_samples)
-        sub = pts[start:stop]
-        # dist^2 to all centers
-        d2 = ((sub[:, None, :] - c[None, :, :]) ** 2).sum(axis=2)
-        mask = np.any(d2 <= r2, axis=1)
-        inside += int(np.sum(mask))
-
-    frac = inside / n_samples
-    return box_vol * frac
-
-
-def convex_hull_metrics(points: Sequence[Sequence[float]]) -> tuple[float | None, float | None]:
-    """Compute volume and area from the convex hull of input points.
-
-    Parameters
-    ----------
-    points : array-like, shape (n, 3)
-        Points defining the pocket boundary (e.g., atoms touching alpha-spheres).
-
-    Returns
-    -------
-    volume : float or None
-        Convex hull volume. None if hull cannot be built (fewer than 4 non-coplanar points).
-    area : float or None
-        Convex hull surface area. None if hull cannot be built.
-    """
-    pts = _to_numpy(points)
-    if pts.shape[0] < 4:
-        return None, None
-    try:
-        hull = ConvexHull(pts)
-        return float(hull.volume), float(hull.area)
-    except Exception:
-        return None, None
-
-
-@dep_digest('skimage')
-def marching_cubes_union(
-    centers: Sequence[Sequence[float]],
-    radii: Sequence[float],
-    grid_spacing: float = 0.5,
-    iso_level: float = 0.0,
-) -> tuple[np.ndarray, np.ndarray, float, float]:
-    """Build a mesh of the union of spheres via marching cubes and return vertices, faces, volume, area."""
-    c = _to_numpy(centers)
-    r = _to_numpy(radii)
-    if c.shape[0] == 0:
-        return np.zeros((0, 3)), np.zeros((0, 3), dtype=int), 0.0, 0.0
-
-    mins = np.min(c - r[:, None], axis=0) - 1.0
-    maxs = np.max(c + r[:, None], axis=0) + 1.0
-    grid_shape = np.ceil((maxs - mins) / grid_spacing).astype(int) + 1
-
-    xs = np.linspace(mins[0], maxs[0], grid_shape[0])
-    ys = np.linspace(mins[1], maxs[1], grid_shape[1])
-    zs = np.linspace(mins[2], maxs[2], grid_shape[2])
-    X, Y, Z = np.meshgrid(xs, ys, zs, indexing='ij')
-    grid = np.stack([X, Y, Z], axis=-1)
-
-    # signed distance: min over spheres of (|p-c| - r)
-    dist = np.full(grid_shape, np.inf, dtype=float)
-    for ci, ri in zip(c, r):
-        d = np.linalg.norm(grid - ci, axis=-1) - ri
-        dist = np.minimum(dist, d)
-
-    from skimage.measure import marching_cubes
-
-    verts, faces, _, _ = marching_cubes(dist, level=iso_level, spacing=(grid_spacing,) * 3)
-    # marching_cubes coords are in grid index space times spacing; shift origin:
-    verts = verts + np.array([mins[0], mins[1], mins[2]])
-
-    # volume/area from faces
-    volume, area = _mesh_volume_area(verts, faces)
-    return verts, faces, volume, area
-
-
-def _mesh_volume_area(vertices: np.ndarray, faces: np.ndarray) -> tuple[float, float]:
-    """Compute volume and area of a triangular mesh."""
-    v = vertices
-    f = faces
-    if len(f) == 0:
-        return 0.0, 0.0
-    tris = v[f]  # (n, 3, 3)
-    # area
-    cross = np.cross(tris[:, 1] - tris[:, 0], tris[:, 2] - tris[:, 0])
-    area = 0.5 * np.linalg.norm(cross, axis=1).sum()
-    # volume (signed)
-    volume = (np.einsum('ij,ij->i', tris[:, 0], cross)).sum() / 6.0
-    return float(abs(volume)), float(area)
-
-
-def clip_mesh_with_plane(
-    vertices: np.ndarray,
-    faces: np.ndarray,
-    plane_point: Sequence[float],
-    plane_normal: Sequence[float],
-) -> tuple[np.ndarray, float, float]:
-    """Intersect a mesh with a plane and return the intersection polygon, its area and perimeter."""
-    p0 = _to_numpy(plane_point)
-    n = _to_numpy(plane_normal)
-    n_norm = np.linalg.norm(n)
-    if n_norm == 0:
-        return np.zeros((0, 3)), 0.0, 0.0
-    n_unit = n / n_norm
-
-    # signed distances of vertices to plane
-    d = (vertices - p0) @ n_unit
-    poly_pts = []
-
-    for tri in faces:
-        idx = tri
-        v_tri = vertices[idx]
-        d_tri = d[idx]
-        # edges: (0,1), (1,2), (2,0)
-        for (i, j) in ((0, 1), (1, 2), (2, 0)):
-            di, dj = d_tri[i], d_tri[j]
-            if di * dj < 0 or di == 0 or dj == 0:
-                t = di / (di - dj) if (di - dj) != 0 else 0.0
-                pt = v_tri[i] + t * (v_tri[j] - v_tri[i])
-                poly_pts.append(pt)
-
-    if len(poly_pts) < 3:
-        return np.zeros((0, 3)), 0.0, 0.0
-
-    poly = np.unique(np.round(poly_pts, decimals=6), axis=0)
-    if poly.shape[0] < 3:
-        return np.zeros((0, 3)), 0.0, 0.0
-
-    # project to 2D basis on plane for area/perimeter
-    ref = np.array([1.0, 0.0, 0.0]) if abs(n_unit[0]) < 0.9 else np.array([0.0, 1.0, 0.0])
-    u = np.cross(n_unit, ref)
-    u /= np.linalg.norm(u)
-    v = np.cross(n_unit, u)
-
-    rel = poly - p0
-    x = rel.dot(u)
-    y = rel.dot(v)
-    proj = np.stack([x, y], axis=1)
-    hull = ConvexHull(proj)
-    perim = 0.0
-    verts2d = proj[hull.vertices]
-    perim = float(np.sum(np.linalg.norm(np.diff(np.vstack([verts2d, verts2d[0]]), axis=0), axis=1)))
-    return poly, float(hull.area), perim
 
 
 # ---------------------------------------------------------------------------
