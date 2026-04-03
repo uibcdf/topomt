@@ -19,6 +19,12 @@ from topomt.tools.features.common import (
     bounding_metrics,
     effective_center_radius,
 )
+from topomt.tools.features.channels import (
+    cross_section_profile,
+    min_cross_section_radius,
+    shortest_path_length,
+    thickness_profile,
+)
 from topomt.tools.features.pockets import (
     apolar_ratio,
     get_physicochemical_properties,
@@ -171,71 +177,6 @@ def mouth_area_on_plane(
         return float(area)
 
 
-def cross_section_profile(
-    centers: Sequence[Sequence[float]],
-    axis: Sequence[float],
-    n_bins: int = 20,
-) -> tuple[np.ndarray, np.ndarray]:
-    """Compute a radial profile along a given axis (useful for channels/bottlenecks).
-
-    Parameters
-    ----------
-    centers : array-like, shape (n, 3)
-        Points sampling the cavity (alpha-sphere centers).
-    axis : array-like, shape (3,)
-        Direction vector defining the axis.
-    n_bins : int, optional
-        Number of slices along the axis.
-
-    Returns
-    -------
-    bin_centers : ndarray, shape (n_bins,)
-        Positions along the axis (projected coordinate).
-    radial_max : ndarray, shape (n_bins,)
-        Maximum radial distance to the axis per slice.
-    """
-    pts = _to_numpy(centers)
-    a = _to_numpy(axis)
-    norm = np.linalg.norm(a)
-    if norm == 0:
-        raise ValueError('Axis vector cannot be zero.')
-    a_unit = a / norm
-
-    # projections along axis
-    t = pts.dot(a_unit)
-    t_min, t_max = t.min(), t.max()
-    bins = np.linspace(t_min, t_max, n_bins + 1)
-    bin_centers = 0.5 * (bins[:-1] + bins[1:])
-    radial_max = np.zeros(n_bins, dtype=float)
-
-    # perpendicular distances
-    # distance from point p to axis: |p - (p·â)â|
-    proj = np.outer(t, a_unit)
-    perp = pts - proj
-    r = np.linalg.norm(perp, axis=1)
-
-    digit = np.digitize(t, bins) - 1
-    for i in range(n_bins):
-        mask = digit == i
-        if np.any(mask):
-            radial_max[i] = r[mask].max()
-        else:
-            radial_max[i] = 0.0
-    return bin_centers, radial_max
-
-
-def min_cross_section_radius(
-    centers: Sequence[Sequence[float]],
-    axis: Sequence[float],
-    n_bins: int = 20,
-) -> float:
-    """Return the minimum cross-section radius along an axis (bottleneck estimate)."""
-    _, radial = cross_section_profile(centers, axis, n_bins=n_bins)
-    if radial.size == 0:
-        return 0.0
-    return float(radial[radial > 0].min()) if np.any(radial > 0) else 0.0
-
-
 @dep_digest('skimage')
 def marching_cubes_union(
     centers: Sequence[Sequence[float]],
@@ -343,106 +284,6 @@ def clip_mesh_with_plane(
     verts2d = proj[hull.vertices]
     perim = float(np.sum(np.linalg.norm(np.diff(np.vstack([verts2d, verts2d[0]]), axis=0), axis=1)))
     return poly, float(hull.area), perim
-
-
-def shortest_path_length(
-    centers: Sequence[Sequence[float]],
-    neighbor_pairs: Sequence[Sequence[int]],
-    start_indices: Sequence[int],
-    end_indices: Sequence[int],
-) -> float:
-    """Compute shortest path length over a graph of alpha-sphere centers.
-
-    Parameters
-    ----------
-    centers : array-like, shape (n, 3)
-        Node coordinates.
-    neighbor_pairs : iterable of (i, j)
-        Edges between alpha-spheres (e.g., sharing >= k atoms).
-    start_indices : iterable of int
-        Source nodes (e.g., mouth A).
-    end_indices : iterable of int
-        Target nodes (e.g., mouth B).
-    """
-    import heapq
-
-    pts = _to_numpy(centers)
-    n = pts.shape[0]
-    adj: list[list[tuple[int, float]]] = [[] for _ in range(n)]
-    for i, j in neighbor_pairs:
-        i = int(i)
-        j = int(j)
-        w = float(np.linalg.norm(pts[i] - pts[j]))
-        adj[i].append((j, w))
-        adj[j].append((i, w))
-
-    targets = set(int(i) for i in end_indices)
-    dist = [math.inf] * n
-    pq: list[tuple[float, int]] = []
-    for s in start_indices:
-        dist[int(s)] = 0.0
-        heapq.heappush(pq, (0.0, int(s)))
-
-    while pq:
-        d, u = heapq.heappop(pq)
-        if d > dist[u]:
-            continue
-        if u in targets:
-            return d
-        for v, w in adj[u]:
-            nd = d + w
-            if nd < dist[v]:
-                dist[v] = nd
-                heapq.heappush(pq, (nd, v))
-    return math.inf
-
-
-def thickness_profile(
-    centers: Sequence[Sequence[float]],
-    axis: Sequence[float],
-    neighbor_pairs: Sequence[Sequence[int]] | None = None,
-    n_bins: int = 20,
-) -> tuple[np.ndarray, np.ndarray]:
-    """Continuous thickness profile along axis, averaging local radii from distances to neighbors."""
-    pts = _to_numpy(centers)
-    a = _to_numpy(axis)
-    norm = np.linalg.norm(a)
-    if norm == 0:
-        raise ValueError('Axis vector cannot be zero.')
-    a_unit = a / norm
-    t = pts.dot(a_unit)
-    t_min, t_max = t.min(), t.max()
-    bins = np.linspace(t_min, t_max, n_bins + 1)
-    bin_centers = 0.5 * (bins[:-1] + bins[1:])
-
-    # local radius proxy: min distance to any neighbor (or overall)
-    if neighbor_pairs is not None:
-        adj = [[] for _ in range(len(pts))]
-        for i, j in neighbor_pairs:
-            i = int(i)
-            j = int(j)
-            d = np.linalg.norm(pts[i] - pts[j])
-            adj[i].append(d)
-            adj[j].append(d)
-        local_r = np.array([min(nei) / 2 if nei else 0.0 for nei in adj])
-    else:
-        # fallback: distance to 2nd nearest neighbor as diameter estimate
-        from sklearn.neighbors import NearestNeighbors
-
-        nn = NearestNeighbors(n_neighbors=min(3, len(pts)), algorithm='auto').fit(pts)
-        dists, _ = nn.kneighbors(pts)
-        # exclude self (0)
-        local_r = dists[:, 1] / 2.0 if dists.shape[1] > 1 else np.zeros(len(pts))
-
-    profile = np.zeros(n_bins, dtype=float)
-    counts = np.zeros(n_bins, dtype=int)
-    digit = np.digitize(t, bins) - 1
-    for i in range(n_bins):
-        mask = digit == i
-        if np.any(mask):
-            profile[i] = local_r[mask].mean()
-            counts[i] = mask.sum()
-    return bin_centers, profile
 
 
 # ---------------------------------------------------------------------------

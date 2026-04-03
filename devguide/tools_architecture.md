@@ -277,11 +277,14 @@ The following slices are now already materialized in the repository:
 - `topomt.tools.features.pockets.physicochemistry`
   as the first feature-oriented extraction from `pocket_geometry.py`;
 - `topomt.tools.features.pockets.contacts`
-  as the first extracted pocket-ligand contact helper module.
+  as the first extracted pocket-ligand contact helper module;
+- `topomt.tools.features.channels.profiles`
+  as the first extracted channel/profile helper module.
 
 At the moment, `castp` already consumes the new pocket physicochemistry module
 directly, while `pocket_geometry.py` still re-exports the migrated functions as
-a compatibility bridge during the larger refactor.
+a compatibility bridge during the larger refactor. The same compatibility
+bridge now also covers the migrated channel/profile helpers.
 
 ### Domain-specific characterization helpers
 
@@ -292,6 +295,10 @@ a compatibility bridge during the larger refactor.
 - `ligand_contact_mask`
 - `sasa_contact_validation`
 - `probe_scoring`
+- `cross_section_profile`
+- `min_cross_section_radius`
+- `shortest_path_length`
+- `thickness_profile`
 - `jaccard_overlap_clusters`
 
 ## Practical migration rule
