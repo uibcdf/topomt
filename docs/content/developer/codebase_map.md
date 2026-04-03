@@ -16,8 +16,8 @@ This page gives a short map of the repository from a developer perspective.
 - `topomt/io/`
   Loaders for external results, currently centered on CASTp.
 
-- `topomt/alpha_spheres/`
-  Internal alpha-sphere representation and utilities.
+- `topomt/delaunay_mesh.py`
+  Shared Delaunay substrate and alpha-sphere-derived geometric view.
 
 - `topomt/wrappers/`
   Wrapper-oriented code, especially around fpocket artifacts.

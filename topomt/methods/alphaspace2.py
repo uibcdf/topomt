@@ -11,7 +11,7 @@ from scipy.spatial.distance import cdist
 
 from topomt import pyunitwizard as puw
 from topomt._private.smonitor import signal
-from topomt.alpha_spheres import AlphaSpheres
+from topomt.delaunay_mesh import DelaunayMesh
 from topomt._private.arg_digestion.argument.binder_coords import digest_binder_coords
 
 
@@ -197,7 +197,7 @@ def _compute_alpha_layer(
         structure_indices=0 if structure_indices == 0 else structure_indices,
     )[0]
     coordinates_nm = np.asarray(puw.get_value(coordinates, to_unit='nm'), dtype=float)
-    alpha_spheres = AlphaSpheres(points=coordinates_nm)
+    alpha_spheres = DelaunayMesh(points=coordinates_nm)
     alpha_spheres.remove_small_alpha_spheres(min_radius_nm)
     alpha_spheres.remove_big_alpha_spheres(max_radius_nm)
 

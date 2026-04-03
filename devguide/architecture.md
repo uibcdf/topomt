@@ -151,6 +151,36 @@ For the time being, DFND is best treated as:
 - a source of conceptual guidance for future feature semantics;
 - a postponed implementation priority.
 
+## Internal geometric keystone
+
+The internal geometric keystone should be `DelaunayMesh`.
+
+The intended architectural reading is:
+
+- `DelaunayMesh`: primary persistent geometric representation;
+- `DelaunayFlowNetwork`: flow-based interpretation of that mesh for DFND-like
+  queries;
+- feature objects (`Pocket`, `Void`, `Channel`, `Mouth`, etc.): semantic
+  outputs built from method-specific queries over those lower layers.
+
+In this model, alpha-spheres remain important but are no longer a keystone
+class. They should be understood as a derived view of `DelaunayMesh`, useful
+for engines such as `fpocket4`, `pocketeer`, and `alphaspace2`, rather than as
+the main architectural ontology.
+
+This keeps the shared geometry infrastructure aligned across:
+
+- `fpocket4`
+- `pocketeer`
+- `alphaspace2`
+- `DFND`
+
+while preserving a clean distinction between:
+
+- geometric substrate;
+- flow/topology interpretation;
+- feature-level semantics.
+
 ## Current internal contract
 
 The practical internal contract for native engine methods should be:

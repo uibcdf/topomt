@@ -15,7 +15,7 @@ The practical public core is centered on:
 - [topomt/get_topography.py](/home/diego/repos@uibcdf/topomt/topomt/get_topography.py)
 - [topomt/topography/Topography.py](/home/diego/repos@uibcdf/topomt/topomt/topography/Topography.py)
 - [topomt/features/](/home/diego/repos@uibcdf/topomt/topomt/features)
-- [topomt/alpha_spheres/alpha_spheres.py](/home/diego/repos@uibcdf/topomt/topomt/alpha_spheres/alpha_spheres.py)
+- [topomt/delaunay_mesh.py](/home/diego/repos@uibcdf/topomt/topomt/delaunay_mesh.py)
 - [topomt/io/load_CASTp.py](/home/diego/repos@uibcdf/topomt/topomt/io/load_CASTp.py)
 
 This is the surface that should be stabilized first.

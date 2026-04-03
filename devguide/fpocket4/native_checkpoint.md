@@ -13,7 +13,7 @@ the current understanding from terminal history.
 This checkpoint is about the native path in:
 
 - `topomt.methods.fpocket4`
-- `topomt.alpha_spheres`
+- `topomt.delaunay_mesh`
 
 and its parity relationship with the upstream `fpocket` binary.
 
@@ -66,7 +66,7 @@ comparison became much cleaner.
 The dominant pattern is now:
 
 - upstream raw tetrahedra are almost entirely contained in the native raw
-  `AlphaSpheres` result;
+  DelaunayMesh alpha-sphere-derived result;
 - the native route still generates a small but systematic super-set of extra
   tetrahedra.
 
@@ -276,7 +276,8 @@ The following claims should **not** be treated as established:
 - that the mismatch is purely caused by near-coplanarity;
 - that the mismatch can be eliminated by adding the "right" visible
   `qhull_options` to SciPy;
-- that the default `AlphaSpheres` implementation should be changed globally;
+- that the default `DelaunayMesh` behavior should be changed globally for all
+  methods;
 - that wrapper-vs-native disagreement automatically implies a native/source
   mismatch;
 - that the residual raw mismatch is acceptable and can just be ignored.
@@ -288,7 +289,7 @@ should remain isolated to the `fpocket4` method path or to an explicitly
 fpocket-oriented strategy.
 
 It should **not** silently replace the clean default behavior of
-`topomt.alpha_spheres.AlphaSpheres`.
+`topomt.delaunay_mesh.DelaunayMesh`.
 
 ## Pending cleanup: replace local atom-purge logic with better MolSysMT use
 

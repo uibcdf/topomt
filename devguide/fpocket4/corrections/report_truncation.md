@@ -129,7 +129,7 @@ Observed consequence after the temporary flush patch:
 
 In our diagnostic environment, after that explicit synchronization step, the
 raw tetrahedral geometry exported by upstream matched the native
-SciPy/AlphaSpheres reconstruction exactly in the audited systems.
+SciPy/DelaunayMesh reconstruction exactly in the audited systems.
 
 ## Minimal reasoning behind the diagnosis
 

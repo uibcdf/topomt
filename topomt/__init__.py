@@ -23,9 +23,8 @@ from .demo import demo
 
 from . import features
 from .topography.Topography import Topography
-from . import alpha_spheres
-
-from .get_alpha_spheres import get_alpha_spheres
+from .delaunay_mesh import DelaunayMesh
+from .get_delaunay_mesh import get_delaunay_mesh
 from .get_topography import get_topography
 from .get_pockets import get_pockets, show_pockets
 
@@ -33,6 +32,6 @@ from . import io
 
 from . import methods
 from . import wrappers
+from . import tools
 
-__all__ = ["Topography",]
-
+__all__ = ['Topography', 'DelaunayMesh', 'get_delaunay_mesh']

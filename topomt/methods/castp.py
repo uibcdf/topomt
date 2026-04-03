@@ -4,13 +4,15 @@ CASTp-like pocket detection using Alpha Spheres and flow logic.
 
 from typing import List, Dict, Union, Tuple, Set
 import numpy as np
-from topomt.alpha_spheres import AlphaSpheres
+from topomt.delaunay_mesh import DelaunayMesh
 from topomt._private.molsysmt_preparation import build_heavy_receptor_view
 from topomt._private.smonitor import signal
-from topomt.methods.pocket_geometry import (
+from topomt.tools.tessellation import (
     analytic_tetra_volume,
     mouth_area_from_faces,
-    get_physicochemical_properties
+)
+from topomt.methods.pocket_geometry import (
+    get_physicochemical_properties,
 )
 from topomt import pyunitwizard as puw
 
@@ -24,7 +26,7 @@ def castp(
     min_spheres_per_pocket: int = 5,
     syntax: str = 'MolSysMT',
     skip_digestion: bool = False,
-) -> Tuple[List[Dict], AlphaSpheres]:
+) -> Tuple[List[Dict], DelaunayMesh]:
     """
     Detect pockets using a CASTp-inspired algorithm based on Alpha Spheres and Flow.
     """
@@ -48,7 +50,7 @@ def castp(
     )
     
     # 3. Generate Alpha Spheres (Voronoi/Delaunay) - Results in NM
-    alpha = AlphaSpheres(points=coords_nm)
+    alpha = DelaunayMesh(points=coords_nm)
     
     # 4. Identify Accessible Space
     valid_sphere_indices = np.where(alpha.radii >= probe_r_nm)[0]

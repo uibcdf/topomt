@@ -212,7 +212,8 @@ Current reading:
 Useful TopoMT-side tools for the native implementation include:
 
 - `molsysmt` for input handling and atom identity mapping;
-- `topomt.alpha_spheres` for alpha-sphere object support where appropriate;
+- `topomt.delaunay_mesh` for the shared Delaunay substrate and its
+  alpha-sphere-derived view where appropriate;
 - `pocket_geometry` for geometry support where it matches fpocket semantics;
 - `pyunitwizard` for unit-normalized boundaries around the method.
 
@@ -254,9 +255,10 @@ This should apply later to:
 state.
 
 The geometry and pocket-membership layers have already been reworked around the
-shared `topomt.alpha_spheres` layer, and the current audited tests reach
-upstream parity for alpha generation, pocket counts, and pocket atom ownership
-on the current reference systems.
+shared `topomt.delaunay_mesh.DelaunayMesh` substrate and its alpha-sphere
+derived view, and the current audited tests reach upstream parity for alpha
+generation, pocket counts, and pocket atom ownership on the current reference
+systems.
 
 What remains is the higher semantic layer: descriptors, nonpolar-space details,
 beta scores, and the rest of the scoring semantics.

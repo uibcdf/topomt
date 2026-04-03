@@ -15,6 +15,23 @@ This internal class holds the static geometry derived from Delaunay. It does
 *   **`simplices`**: `ndarray (N_tet, 4) int32` - Indices of atoms forming each tetrahedron (from `scipy.spatial.Delaunay`).
 *   **`neighbors`**: `ndarray (N_tet, 4) int32` - Indices of neighboring tetrahedra (-1 for boundary).
 
+This object should also be the place where alpha-sphere-derived data is
+materialized when needed. In DFND, alpha-spheres are no longer treated as a
+separate architectural center. They are a derived view of the Delaunay mesh.
+
+That means `DelaunayMesh` may also expose or cache:
+
+*   alpha-sphere centers;
+*   alpha-sphere radii;
+*   tetrahedron-to-alpha-sphere mappings;
+*   face-adjacency-derived alpha-sphere neighbor relations.
+
+This keeps the representation hierarchy explicit:
+
+*   **primary representation:** tetrahedra and shared faces;
+*   **derived view:** alpha-sphere-centered arrays for methods that find that
+    representation convenient.
+
 ### 1.2. The Persistent Graph Attributes
 We pre-calculate and store the limiting radii. This allows the "Master Graph" functionality (querying different probes instantly).
 
@@ -88,6 +105,15 @@ class DelaunayFlowNetwork:
         """
         pass
 ```
+
+Conceptually, the layering should be read as:
+
+- `DelaunayMesh`: persistent geometric substrate;
+- `DelaunayFlowNetwork`: probe-dependent flow interpretation built on that
+  substrate.
+
+Methods such as `fpocket4`, `pocketeer`, and `alphaspace2` should be able to
+reuse the same `DelaunayMesh` while consuming its alpha-sphere-derived view.
 
 ## 4. Algorithmic Optimization Strategy
 

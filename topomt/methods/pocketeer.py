@@ -14,13 +14,13 @@ from topomt._private.smonitor import (
     PocketeerSasaBackendWarning,
     signal,
 )
-from topomt.methods.pocket_geometry import marching_cubes_union
+from topomt.delaunay_mesh import DelaunayMesh
 from topomt import pyunitwizard as puw
 
 MIN_RADIUS_A = 3.5
 MAX_RADIUS_A = 5.0
 SCORE_RADIUS_BONUS = 1.8
-GRID_SPACING_NM = 0.075
+VOXEL_SIZE_NM = 0.05
 
 
 @dataclass
@@ -96,7 +96,7 @@ def pocketeer(
 
     coords_ang = coords_nm * 10.0
     try:
-        tri = Delaunay(coords_ang)
+        mesh = DelaunayMesh(points=coords_ang)
     except Exception as exc:
         warnings.warn(PocketeerDelaunayWarning(reason=str(exc)))
         if return_atom_indices:
@@ -104,7 +104,7 @@ def pocketeer(
         return [], []
 
     spheres: list[PocketeerSphere] = _extract_alpha_spheres(
-        coords_nm, coords_ang, tri, r_min_nm, r_max_nm
+        coords_nm, mesh, r_min_nm, r_max_nm
     )
     if not spheres:
         if return_atom_indices:
@@ -152,18 +152,15 @@ def pocketeer(
 
 def _extract_alpha_spheres(
     coords_nm: np.ndarray,
-    coords_ang: np.ndarray,
-    tri: Delaunay,
+    mesh: DelaunayMesh,
     r_min: float,
     r_max: float,
 ) -> list[PocketeerSphere]:
     tree = cKDTree(coords_nm)
     spheres: list[PocketeerSphere] = []
-    for sphere_id, simplex in enumerate(tri.simplices):
-        tet_ang = coords_ang[simplex]
-        center_ang, radius_ang = _circumsphere(tet_ang)
-        center = center_ang / 10.0
-        radius = radius_ang / 10.0
+    for sphere_id, simplex in enumerate(mesh.simplices):
+        center = mesh.alpha_sphere_centers[sphere_id] / 10.0
+        radius = mesh.alpha_sphere_radii[sphere_id] / 10.0
         if radius < r_min or radius > r_max:
             continue
         indices = simplex.tolist()
@@ -185,13 +182,43 @@ def _estimate_pocket_volume(pocket_spheres: list[PocketeerSphere]) -> float:
         return 0.0
     centers = np.array([sphere.center for sphere in pocket_spheres], dtype=float)
     radii = np.array([sphere.radius for sphere in pocket_spheres], dtype=float)
-    try:
-        _, _, volume, _ = marching_cubes_union(centers, radii, grid_spacing=GRID_SPACING_NM)
-    except Exception:
-        volume = 0.0
-    if volume <= 0:
-        volume = float(len(pocket_spheres)) * (0.1 ** 3)
-    return volume
+    max_radius = float(radii.max())
+    min_corner = centers.min(axis=0) - max_radius
+    max_corner = centers.max(axis=0) + max_radius
+
+    x_coords = np.arange(min_corner[0], max_corner[0], VOXEL_SIZE_NM, dtype=np.float64)
+    y_coords = np.arange(min_corner[1], max_corner[1], VOXEL_SIZE_NM, dtype=np.float64)
+    z_coords = np.arange(min_corner[2], max_corner[2], VOXEL_SIZE_NM, dtype=np.float64)
+
+    if x_coords.size == 0 or y_coords.size == 0 or z_coords.size == 0:
+        return 0.0
+
+    inside_mask = np.zeros((len(x_coords), len(y_coords), len(z_coords)), dtype=bool)
+
+    for center, radius in zip(centers, radii, strict=True):
+        x_mask = (x_coords >= center[0] - radius) & (x_coords <= center[0] + radius)
+        y_mask = (y_coords >= center[1] - radius) & (y_coords <= center[1] + radius)
+        z_mask = (z_coords >= center[2] - radius) & (z_coords <= center[2] + radius)
+
+        local_x = x_coords[x_mask]
+        local_y = y_coords[y_mask]
+        local_z = z_coords[z_mask]
+        if local_x.size == 0 or local_y.size == 0 or local_z.size == 0:
+            continue
+
+        dist_sq = (
+            (local_x[:, None, None] - center[0]) ** 2
+            + (local_y[None, :, None] - center[1]) ** 2
+            + (local_z[None, None, :] - center[2]) ** 2
+        )
+        sphere_mask = dist_sq <= radius**2
+
+        ix = np.flatnonzero(x_mask)
+        iy = np.flatnonzero(y_mask)
+        iz = np.flatnonzero(z_mask)
+        inside_mask[np.ix_(ix, iy, iz)] |= sphere_mask
+
+    return float(inside_mask.sum()) * (VOXEL_SIZE_NM**3)
 
 
 def _score_pocket(volume_nm3: float, n_spheres: int, avg_radius_nm: float) -> float:
@@ -241,22 +268,6 @@ def _sasa_molsysmt(receptor, coords_nm: np.ndarray, polar_probe_radius_nm: float
     if sasa_values.ndim == 1:
         return sasa_values
     return sasa_values[0]
-
-
-def _circumsphere(tet: np.ndarray) -> tuple[np.ndarray, float]:
-    a = tet[0]
-    b = tet[1] - a
-    c = tet[2] - a
-    d = tet[3] - a
-    A = 2.0 * np.array([b, c, d])
-    bvec = np.array([np.dot(b, b), np.dot(c, c), np.dot(d, d)])
-    try:
-        rel = np.linalg.solve(A, bvec)
-        center = rel + a
-        radius = float(np.linalg.norm(rel))
-        return center, radius
-    except np.linalg.LinAlgError:
-        return tet.mean(axis=0), 0.0
 
 
 def _is_sphere_empty(center: np.ndarray, radius: float, tree: cKDTree, exclude: set[int], tol: float = 1e-7) -> bool:

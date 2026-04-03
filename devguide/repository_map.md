@@ -31,8 +31,9 @@ Important subareas:
   Input/output helpers. Right now this mainly includes loading external CASTp
   results through [topomt/io/load_CASTp.py](/home/diego/repos@uibcdf/topomt/topomt/io/load_CASTp.py).
 
-- `topomt/alpha_spheres/`
-  Internal alpha-sphere object model and related helper logic.
+- `topomt/delaunay_mesh.py`
+  Shared Delaunay substrate used by DFND and by the alpha-sphere-derived views
+  needed by several pocket engines.
 
 - `topomt/wrappers/`
   External wrapper-oriented code. This area should host binary/package

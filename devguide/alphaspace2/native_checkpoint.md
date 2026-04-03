@@ -16,7 +16,8 @@ The native `alphaspace2` work is no longer at the geometry-bootstrap stage.
 It already has:
 
 - a native state builder in `topomt.methods.alphaspace2`;
-- shared geometry through `topomt.alpha_spheres.AlphaSpheres`;
+- shared geometry through the new `topomt.delaunay_mesh.DelaunayMesh`
+  substrate and its alpha-sphere-derived view;
 - native alpha filtering by radius;
 - native alpha-space volume calculation;
 - native pocket clustering;
@@ -252,7 +253,7 @@ Interpretation:
 
 ## Unit-handling note
 
-The active native `alphaspace2` and shared `alpha_spheres` path no longer rely
+The active native `alphaspace2` and shared `DelaunayMesh` path no longer rely
 on the old local `get_magnitude(...)` / `get_magnitudes(...)` helpers.
 
 The current policy is:

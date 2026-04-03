@@ -11,7 +11,7 @@ from topomt import Topography
 from topomt import pyunitwizard as puw
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.smonitor import signal
-from topomt.alpha_spheres import AlphaSpheres
+from topomt.delaunay_mesh import DelaunayMesh
 from topomt.features import Pocket
 from topomt.wrappers.fpocket.integration import get_topography_with_fpocket
 
@@ -69,7 +69,7 @@ class Fpocket4NativeState:
     atom_b_factors: np.ndarray | None
     descriptor_occluder_coordinates_nm: np.ndarray
     descriptor_occluder_radii_nm: np.ndarray
-    alpha_spheres: AlphaSpheres
+    alpha_spheres: DelaunayMesh
     alpha_is_apolar: np.ndarray
     alpha_local_hydrophobic_density: np.ndarray
     pocket_alpha_index_list: list[list[int]]
@@ -562,7 +562,7 @@ def _build_native_state(
         descriptor_atom_types,
     )
 
-    alpha_spheres = AlphaSpheres(points=coordinates_nm)
+    alpha_spheres = DelaunayMesh(points=coordinates_nm)
     if implementation == 'native':
         min_alpha_radius_nm = ASPH_MIN_SIZE_NM - PRECISION_TOLERANCE_NM
         max_alpha_radius_nm = ASPH_MAX_SIZE_NM + PRECISION_TOLERANCE_NM
@@ -656,7 +656,7 @@ def _build_native_state(
 
 
 def _apply_fpocket_candidate_filter(
-    alpha_spheres: AlphaSpheres,
+    alpha_spheres: DelaunayMesh,
     coordinates_nm: np.ndarray,
     atom_b_factors: np.ndarray | None,
     upstream_bfactor_statistics: tuple[float, float, float] | None = None,
@@ -709,7 +709,7 @@ def _apply_fpocket_candidate_filter(
 
 
 def _classify_apolar_alpha_spheres(
-    alpha_spheres: AlphaSpheres,
+    alpha_spheres: DelaunayMesh,
     atom_electronegativities: np.ndarray,
 ) -> np.ndarray:
     is_apolar_atom = atom_electronegativities < 2.8
@@ -718,7 +718,7 @@ def _classify_apolar_alpha_spheres(
 
 
 def _compute_local_hydrophobic_density(
-    alpha_spheres: AlphaSpheres,
+    alpha_spheres: DelaunayMesh,
     alpha_is_apolar: np.ndarray,
 ) -> np.ndarray:
     local_density = np.zeros(alpha_spheres.n_alpha_spheres, dtype=float)

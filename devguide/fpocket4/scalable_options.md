@@ -58,7 +58,8 @@ justifies a future scalable path.
 
 The main large-system cost currently appears to come from:
 
-1. building `AlphaSpheres` for very large point sets;
+1. building the DelaunayMesh alpha-sphere-derived view for very large point
+   sets;
 2. handling very large raw alpha-sphere populations;
 3. global clustering over many accepted alpha-spheres;
 4. downstream descriptor work if the pocket candidate set remains large.

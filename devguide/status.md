@@ -68,6 +68,11 @@ This includes:
   additional inputs and, later, to canonical `bcif.gz` inputs.
 - Separation of wrapper-backed integrations from the long-term native-method
   targets in `topomt.methods`.
+- Start of the first `DelaunayMesh` migration slice: a new mesh keystone now
+  exists, the first stable tessellation helpers have moved into
+  `topomt.tools.tessellation`, and the first shared geometry helpers have
+  moved into `topomt.tools.geometry` without yet forcing a full engine
+  rewrite.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.
@@ -123,7 +128,7 @@ This includes:
 - `alphaspace2` also now has a native optional binder/contact layer that
   propagates contact flags from alpha spheres to betas and pockets under the
   same basic upstream-style cutoff semantics.
-- The active `alphaspace2` and shared `alpha_spheres` path now use
+- The active `alphaspace2` and shared `DelaunayMesh` path now use
   `pyunitwizard` directly for quantity normalization; the old local
   `puw_utils` shim has been removed from that path and should not return in
   new code.

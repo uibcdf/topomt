@@ -1,17 +1,13 @@
 import numpy as np
 import molsysmt as msm
-from scipy.spatial import Delaunay
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
-import math
 from topomt import pyunitwizard as puw
+from topomt.delaunay_mesh import DelaunayMesh
 
 # Import functions from the newly created core module
 from .core.apollonius import solve_apollonius_3d
 from .core.permeability import check_face_permeability
-
-# Import Feature classes
-from ...features import Pocket, Void, Mouth
 
 class DelaunayFlowNetwork:
     """
@@ -52,9 +48,10 @@ class DelaunayFlowNetwork:
         if self.atom_coords.shape[0] < 4:
             raise ValueError("Not enough atoms to build Delaunay triangulation (min 4).")
 
-        # 2. Build Delaunay triangulation
-        self.delaunay = Delaunay(self.atom_coords)
-        self.tetra_atoms = self.delaunay.simplices # N_tet x 4 atom indices
+        # 2. Build the shared Delaunay substrate
+        self.mesh = DelaunayMesh(points=self.atom_coords, atom_radii=self.atom_radii)
+        self.tetra_atoms = self.mesh.simplices
+        self.simplex_neighbors = self.mesh.neighbors
         self.n_tetrahedra = self.tetra_atoms.shape[0]
 
         # 3. Pre-calculate tetrahedron metrics (R_insphere)
@@ -98,7 +95,7 @@ class DelaunayFlowNetwork:
                 else:
                     unique_face_r_gates[unique_face_key] = min(unique_face_r_gates[unique_face_key], r_gate)
                     
-                neighbor_tet_idx = self.delaunay.neighbors[i, face_idx_in_tet]
+                neighbor_tet_idx = self.simplex_neighbors[i, face_idx_in_tet]
                 if neighbor_tet_idx != -1: # Internal face
                     self.adjacency_list[i].append((neighbor_tet_idx, r_gate))
                     
@@ -184,7 +181,7 @@ class DelaunayFlowNetwork:
 
         # Check boundary faces for mouths.
         for i in np.where(mask_transit)[0]:
-            neighbors = self.delaunay.neighbors[i]
+            neighbors = self.simplex_neighbors[i]
             for face_idx, neighbor in enumerate(neighbors):
                 if neighbor == -1:
                     if self.face_r_gates_per_tet_face[i, face_idx] >= probe_radius:
@@ -260,7 +257,7 @@ class DelaunayFlowNetwork:
                 # Optimization: iterate over nodes in component
                 for tet_idx in nodes:
                     # Check internal neighbors
-                    neighbors = self.delaunay.neighbors[tet_idx]
+                    neighbors = self.simplex_neighbors[tet_idx]
                     for face_idx, neighbor in enumerate(neighbors):
                         is_mouth = False
                         if neighbor == -1: # Boundary
