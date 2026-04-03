@@ -262,6 +262,23 @@ The current material should not be treated as equally mature.
 - `marching_cubes_union`
 - `view_pockets_py3dmol`
 
+## Current implementation checkpoint
+
+This architecture is no longer purely aspirational.
+
+The following slices are now already materialized in the repository:
+
+- `topomt.tools.geometry`
+  with the first shared mesh and hull helpers;
+- `topomt.tools.tessellation`
+  with tetrahedral, mouth, and representative-point helpers;
+- `topomt.tools.features.pockets.physicochemistry`
+  as the first feature-oriented extraction from `pocket_geometry.py`.
+
+At the moment, `castp` already consumes the new pocket physicochemistry module
+directly, while `pocket_geometry.py` still re-exports the migrated functions as
+a compatibility bridge during the larger refactor.
+
 ### Domain-specific characterization helpers
 
 - `get_physicochemical_properties`

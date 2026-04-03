@@ -11,7 +11,7 @@ from topomt.tools.tessellation import (
     analytic_tetra_volume,
     mouth_area_from_faces,
 )
-from topomt.methods.pocket_geometry import (
+from topomt.tools.features.pockets import (
     get_physicochemical_properties,
 )
 from topomt import pyunitwizard as puw

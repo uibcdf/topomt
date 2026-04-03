@@ -15,6 +15,11 @@ from scipy.spatial.distance import cdist
 from scipy.cluster.hierarchy import fcluster, linkage
 # import py3Dmol <-- moved to function
 from depdigest import dep_digest
+from topomt.tools.features.pockets import (
+    apolar_ratio,
+    get_physicochemical_properties,
+    nonpolar_ratio_from_sasa,
+)
 
 
 def _to_numpy(array: Iterable) -> np.ndarray:
@@ -332,22 +337,6 @@ def clip_mesh_with_plane(
     return poly, float(hull.area), perim
 
 
-def apolar_ratio(
-    indices: Sequence[int],
-    apolar_mask: Sequence[bool] | None = None,
-    types: Sequence[int] | None = None,
-) -> float | None:
-    """Compute apolar fraction given a mask or types (1 == apolar)."""
-    if apolar_mask is None and types is None:
-        return None
-    idx = np.asarray(indices, dtype=int)
-    if apolar_mask is not None:
-        mask = np.asarray(apolar_mask, dtype=bool)
-        return float(mask[idx].sum()) / len(idx) if len(idx) else 0.0
-    types_arr = np.asarray(types)
-    return float((types_arr[idx] == 1).sum()) / len(idx) if len(idx) else 0.0
-
-
 def bounding_metrics(points: Sequence[Sequence[float]]) -> dict[str, float | np.ndarray]:
     """Compute oriented bounding box (via PCA) and axis lengths for elongation/orientation."""
     pts = _to_numpy(points)
@@ -657,23 +646,6 @@ def ligand_contact_distances(
 # ---------------------------------------------------------------------------
 
 
-def nonpolar_ratio_from_sasa(
-    sasa: np.ndarray,
-    atom_elements: Sequence[str],
-    lining_indices: Sequence[int],
-) -> float:
-    """Nonpolar SASA ratio for lining atoms (elements not in O, N, S considered nonpolar)."""
-    if len(lining_indices) == 0 or len(sasa) == 0:
-        return 0.0
-    elements = np.array(atom_elements)
-    lining_sasa = np.asarray(sasa)[np.asarray(lining_indices, dtype=int)]
-    lining_elements = elements[np.asarray(lining_indices, dtype=int)]
-    nonpolar_mask = ~np.isin(lining_elements, ['O', 'N', 'S'])
-    nonpolar_sasa = lining_sasa[nonpolar_mask].sum()
-    total_sasa = lining_sasa.sum() + 1e-5
-    return float(nonpolar_sasa / total_sasa)
-
-
 def jaccard_overlap_clusters(
     lining_lists: list[list[int]],
     overlap_cutoff: float,
@@ -879,91 +851,3 @@ def _element_color(element_symbol: str) -> str:
     }
     return palette.get(element_symbol, 'rgb(180,180,180)')
 
-
-# ---------------------------------------------------------------------------
-# Physicochemical characterization
-# ---------------------------------------------------------------------------
-
-def get_physicochemical_properties(
-    molecular_system,
-    atom_indices: List[int],
-    structure_indices: int = 0,
-    syntax: str = "MolSysMT"
-) -> Dict[str, Union[float, int]]:
-    """
-    Compute physicochemical properties for a set of atoms (usually lining a pocket).
-
-    Parameters
-    ----------
-    molecular_system : molecular system
-        The system containing the atoms.
-    atom_indices : list of int
-        Indices of the atoms to characterize.
-    structure_indices : int, optional
-        Structure index (default 0).
-    syntax : str, optional
-        Selection syntax (default 'MolSysMT').
-
-    Returns
-    -------
-    dict
-        Dictionary containing properties like:
-        - 'charge': Total net charge (sum of partial charges if available, else residue based proxy).
-        - 'hydrophobicity': Mean hydrophobicity (Kyte-Doolittle scale).
-        - 'polarity_ratio': Fraction of polar residues/atoms.
-        - 'n_residues': Number of unique residues involved.
-    """
-    if not atom_indices:
-        return {
-            'net_charge': 0.0,
-            'mean_hydrophobicity': 0.0,
-            'polarity_ratio': 0.0,
-            'n_residues': 0,
-            'n_atoms': 0
-        }
-
-    # Kyte-Doolittle Hydrophobicity Scale
-    kd_scale = {
-        'ILE': 4.5, 'VAL': 4.2, 'LEU': 3.8, 'PHE': 2.8, 'CYS': 2.5,
-        'MET': 1.9, 'ALA': 1.8, 'GLY': -0.4, 'THR': -0.7, 'SER': -0.8,
-        'TRP': -0.9, 'TYR': -1.3, 'PRO': -1.6, 'HIS': -3.2, 'GLU': -3.5,
-        'GLN': -3.5, 'ASP': -3.5, 'ASN': -3.5, 'LYS': -3.9, 'ARG': -4.5
-    }
-
-    # Charge at pH 7
-    charge_scale = {
-        'ARG': 1.0, 'LYS': 1.0, 'HIS': 0.1, 
-        'ASP': -1.0, 'GLU': -1.0
-    }
-
-    polar_residues = {'ARG', 'LYS', 'HIS', 'GLU', 'ASP', 'ASN', 'GLN', 'SER', 'THR', 'TYR'}
-    
-    res_names = msm.get(molecular_system, element='atom', selection=atom_indices, residue_name=True)
-    res_indices = msm.get(molecular_system, element='atom', selection=atom_indices, residue_index=True)
-    
-    unique_res_map = {} # index -> name
-    
-    # Get names for unique residues
-    for idx, name in zip(res_indices, res_names):
-        unique_res_map[idx] = name
-
-    hyd_sum = 0.0
-    charge_sum = 0.0
-    polar_count = 0
-    
-    for ridx, rname in unique_res_map.items():
-        rname = rname.upper()
-        hyd_sum += kd_scale.get(rname, 0.0)
-        charge_sum += charge_scale.get(rname, 0.0)
-        if rname in polar_residues:
-            polar_count += 1
-            
-    n_unique = len(unique_res_map)
-    
-    return {
-        'net_charge': float(charge_sum),
-        'mean_hydrophobicity': float(hyd_sum / n_unique) if n_unique > 0 else 0.0,
-        'polarity_ratio': float(polar_count / n_unique) if n_unique > 0 else 0.0,
-        'n_residues': n_unique,
-        'n_atoms': len(atom_indices)
-    }
