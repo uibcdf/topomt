@@ -18,6 +18,7 @@ from depdigest import dep_digest
 from topomt.tools.features.common import (
     bounding_metrics,
     effective_center_radius,
+    jaccard_overlap_clusters,
 )
 from topomt.tools.features.channels import (
     cross_section_profile,
@@ -380,34 +381,6 @@ def simple_ranking(volumes: Sequence[float], pockets: Sequence[Sequence[int]], a
 # ---------------------------------------------------------------------------
 # AlphaSpace-inspired extras
 # ---------------------------------------------------------------------------
-
-
-def jaccard_overlap_clusters(
-    lining_lists: list[list[int]],
-    overlap_cutoff: float,
-    total_index: int | None = None,
-) -> dict[int, list[int]]:
-    """Cluster pockets by Jaccard distance of lining-atom sets (AlphaSpace-like overlap clustering)."""
-    if total_index is None:
-        total_index = max((max(lst) for lst in lining_lists if lst), default=0) + 1
-    if total_index <= 0 or not lining_lists:
-        return {}
-
-    # build binary vectors
-    mat = np.zeros((len(lining_lists), total_index), dtype=int)
-    for i, lst in enumerate(lining_lists):
-        mat[i, np.asarray(lst, int)] = 1
-    intersection = mat @ mat.T
-    union = np.add.outer(mat.sum(axis=1), mat.sum(axis=1)) - intersection
-    with np.errstate(divide='ignore', invalid='ignore'):
-        jaccard = 1.0 - intersection / union
-    jaccard[np.isnan(jaccard)] = 1.0
-    z = linkage(distance_matrix(jaccard, jaccard), method='average')
-    labels = fcluster(z, t=overlap_cutoff, criterion='distance') - 1
-    clusters: dict[int, list[int]] = {}
-    for idx, lab in enumerate(labels):
-        clusters.setdefault(int(lab), []).append(idx)
-    return clusters
 
 
 # ---------------------------------------------------------------------------

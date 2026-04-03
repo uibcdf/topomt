@@ -102,6 +102,9 @@ This includes:
 - `topomt.tools.features.mouths` is now also real, hosting the first
   mouth-specific descriptor helper (`mouth_area_on_plane`) while
   `pocket_geometry.py` keeps a compatibility re-export.
+- `topomt.tools.features.common.overlap` is now also real, hosting the first
+  shared overlap helper (`jaccard_overlap_clusters`) while
+  `pocket_geometry.py` keeps a compatibility re-export.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.
