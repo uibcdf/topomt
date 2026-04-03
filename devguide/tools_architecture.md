@@ -275,7 +275,9 @@ The following slices are now already materialized in the repository:
 - `topomt.tools.features.common.descriptors`
   with the first shared feature-level geometry descriptors;
 - `topomt.tools.features.pockets.physicochemistry`
-  as the first feature-oriented extraction from `pocket_geometry.py`.
+  as the first feature-oriented extraction from `pocket_geometry.py`;
+- `topomt.tools.features.pockets.contacts`
+  as the first extracted pocket-ligand contact helper module.
 
 At the moment, `castp` already consumes the new pocket physicochemistry module
 directly, while `pocket_geometry.py` still re-exports the migrated functions as

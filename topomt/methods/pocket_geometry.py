@@ -22,7 +22,11 @@ from topomt.tools.features.common import (
 from topomt.tools.features.pockets import (
     apolar_ratio,
     get_physicochemical_properties,
+    ligand_contact_distances,
+    ligand_contact_mask,
     nonpolar_ratio_from_sasa,
+    probe_scoring,
+    sasa_contact_validation,
 )
 
 
@@ -589,21 +593,6 @@ def simple_ranking(volumes: Sequence[float], pockets: Sequence[Sequence[int]], a
     return scores
 
 
-def ligand_contact_distances(
-    pocket_points: np.ndarray,
-    ligand_coords: np.ndarray,
-) -> dict[str, float | None]:
-    """Min/mean/max distances between pocket points and ligand coords."""
-    if pocket_points.size == 0 or ligand_coords.size == 0:
-        return {'min': None, 'mean': None, 'max': None}
-    dist = cdist(pocket_points, ligand_coords)
-    return {
-        'min': float(dist.min()),
-        'mean': float(dist.mean()),
-        'max': float(dist.max()),
-    }
-
-
 # ---------------------------------------------------------------------------
 # AlphaSpace-inspired extras
 # ---------------------------------------------------------------------------
@@ -635,104 +624,6 @@ def jaccard_overlap_clusters(
     for idx, lab in enumerate(labels):
         clusters.setdefault(int(lab), []).append(idx)
     return clusters
-
-
-def ligand_contact_mask(vertices: np.ndarray, ligand_coords: np.ndarray, hit_dist: float) -> np.ndarray:
-    """Return boolean mask of vertices closer than hit_dist to any ligand atom."""
-    if len(vertices) == 0 or len(ligand_coords) == 0:
-        return np.zeros(len(vertices), dtype=bool)
-    dist = cdist(vertices, ligand_coords)
-    return (np.min(dist, axis=1) < hit_dist)
-
-
-def sasa_contact_validation(
-    pocket_coords: np.ndarray,
-    ligand_coords: np.ndarray,
-    atom_radii: np.ndarray | float | None = None,
-    probe_radius: float = 1.4,
-    contact_threshold: float = 1.0,
-) -> dict[str, float]:
-    """
-    Distance-based proxy for SASA contact: counts pocket atoms whose spheres (r+probe) overlap ligand atoms.
-
-    Parameters
-    ----------
-    pocket_coords : ndarray, shape (n, 3)
-        Coordinates of pocket atoms.
-    ligand_coords : ndarray, shape (m, 3)
-        Coordinates of ligand atoms.
-    atom_radii : ndarray or float, optional
-        Atomic radii for pocket atoms. If float, applied to all; if None, uses 0.0.
-    probe_radius : float, optional
-        Solvent probe radius (Å).
-    contact_threshold : float, optional
-        Extra slack distance to count contact.
-
-    Returns
-    -------
-    dict
-        {'n_contact': int, 'fraction': float}
-    """
-    if pocket_coords.size == 0 or ligand_coords.size == 0:
-        return {'n_contact': 0, 'fraction': 0.0}
-    pocket_coords = np.asarray(pocket_coords, float)
-    ligand_coords = np.asarray(ligand_coords, float)
-    n_atoms = pocket_coords.shape[0]
-    if atom_radii is None:
-        radii = np.zeros(n_atoms, dtype=float)
-    elif np.isscalar(atom_radii):
-        radii = np.full(n_atoms, float(atom_radii))
-    else:
-        radii = np.asarray(atom_radii, float)
-        if radii.shape[0] != n_atoms:
-            raise ValueError('atom_radii length must match pocket_coords')
-    dist = cdist(pocket_coords, ligand_coords)
-    # min distance per pocket atom
-    dmin = dist.min(axis=1)
-    contact_mask = dmin < (radii + probe_radius + contact_threshold)
-    n_contact = int(contact_mask.sum())
-    frac = float(n_contact / n_atoms) if n_atoms else 0.0
-    return {'n_contact': n_contact, 'fraction': frac}
-
-
-def probe_scoring(
-    vertices: np.ndarray,
-    ligand_coords: np.ndarray,
-    probe_weights: dict[str, float] | None = None,
-    cutoff: float = 6.0,
-    power: float = 2.0,
-) -> dict[str, float]:
-    """
-    Simple distance-based probe scoring: sum_{v,l} w_probe * (cutoff / max(d, eps))^power.
-
-    Parameters
-    ----------
-    vertices : ndarray, shape (n, 3)
-        Alpha-sphere centers or pocket sample points.
-    ligand_coords : ndarray, shape (m, 3)
-        Ligand atom coordinates.
-    probe_weights : dict, optional
-        Map probe name -> weight. Defaults to {'C':1.0, 'N':0.8, 'O':0.7, 'X':1.0}.
-    cutoff : float, optional
-        Distance cutoff; beyond this, contribution decays strongly.
-    power : float, optional
-        Exponent for distance decay.
-
-    Returns
-    -------
-    dict
-        Scores per probe key.
-    """
-    if probe_weights is None:
-        probe_weights = {'C': 1.0, 'N': 0.8, 'O': 0.7, 'X': 1.0}
-    if vertices.size == 0 or ligand_coords.size == 0:
-        return {k: 0.0 for k in probe_weights}
-    dist = cdist(vertices, ligand_coords)
-    eps = 1e-6
-    inv = (cutoff / np.maximum(dist, eps)) ** power
-    inv[dist > cutoff] = 0.0
-    base = inv.sum()
-    return {k: float(w * base) for k, w in probe_weights.items()}
 
 
 # ---------------------------------------------------------------------------

@@ -90,6 +90,10 @@ This includes:
   `topomt.tools.features.common.descriptors`, covering the first shared
   geometry descriptors (`bounding_metrics` and
   `effective_center_radius`) with the same compatibility-bridge strategy.
+- `topomt.tools.features.pockets.contacts` is now also real, hosting the first
+  pocket-ligand contact helpers (`ligand_contact_distances`,
+  `ligand_contact_mask`, `sasa_contact_validation`, and `probe_scoring`) while
+  `pocket_geometry.py` keeps a compatibility re-export.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.
