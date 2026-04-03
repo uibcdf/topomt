@@ -69,7 +69,7 @@ class Fpocket4NativeState:
     atom_b_factors: np.ndarray | None
     descriptor_occluder_coordinates_nm: np.ndarray
     descriptor_occluder_radii_nm: np.ndarray
-    alpha_spheres: DelaunayMesh
+    mesh: DelaunayMesh
     alpha_is_apolar: np.ndarray
     alpha_local_hydrophobic_density: np.ndarray
     pocket_alpha_index_list: list[list[int]]
@@ -562,7 +562,7 @@ def _build_native_state(
         descriptor_atom_types,
     )
 
-    alpha_spheres = DelaunayMesh(points=coordinates_nm)
+    mesh = DelaunayMesh(points=coordinates_nm)
     if implementation == 'native':
         min_alpha_radius_nm = ASPH_MIN_SIZE_NM - PRECISION_TOLERANCE_NM
         max_alpha_radius_nm = ASPH_MAX_SIZE_NM + PRECISION_TOLERANCE_NM
@@ -581,26 +581,26 @@ def _build_native_state(
         max_alpha_radius_nm = ASPH_MAX_SIZE_NM
         upstream_bfactor_statistics = None
 
-    alpha_spheres.keep_alpha_spheres(
-        alpha_spheres.filter_alpha_spheres(
+    mesh.keep_alpha_spheres(
+        mesh.filter_alpha_spheres(
             min_radius=min_alpha_radius_nm,
             max_radius=max_alpha_radius_nm,
         )
     )
     _apply_fpocket_candidate_filter(
-        alpha_spheres=alpha_spheres,
+        mesh=mesh,
         coordinates_nm=coordinates_nm,
         atom_b_factors=atom_b_factors,
         upstream_bfactor_statistics=upstream_bfactor_statistics,
     )
 
-    alpha_is_apolar = _classify_apolar_alpha_spheres(alpha_spheres, atom_electronegativities)
+    alpha_is_apolar = _classify_apolar_alpha_spheres(mesh, atom_electronegativities)
     alpha_local_hydrophobic_density = _compute_local_hydrophobic_density(
-        alpha_spheres=alpha_spheres,
+        mesh=mesh,
         alpha_is_apolar=alpha_is_apolar,
     )
 
-    if alpha_spheres.n_alpha_spheres == 0:
+    if mesh.n_alpha_spheres == 0:
         return Fpocket4NativeState(
             atom_indices=atom_indices,
             coordinates_nm=coordinates_nm,
@@ -610,7 +610,7 @@ def _build_native_state(
             atom_b_factors=atom_b_factors,
             descriptor_occluder_coordinates_nm=descriptor_occluder_coordinates_nm,
             descriptor_occluder_radii_nm=descriptor_occluder_radii_nm,
-            alpha_spheres=alpha_spheres,
+            mesh=mesh,
             alpha_is_apolar=alpha_is_apolar,
             alpha_local_hydrophobic_density=alpha_local_hydrophobic_density,
             pocket_alpha_index_list=[],
@@ -618,10 +618,10 @@ def _build_native_state(
             pocket_atom_index_list=[],
         )
 
-    if alpha_spheres.n_alpha_spheres == 1:
+    if mesh.n_alpha_spheres == 1:
         pocket_alpha_index_list = [[0]]
     else:
-        linkage_matrix = linkage(alpha_spheres.centers, method='single', metric='euclidean')
+        linkage_matrix = linkage(mesh.centers, method='single', metric='euclidean')
         labels = fcluster(linkage_matrix, CLUST_MAX_DIST_NM, criterion='distance') - 1
         pocket_alpha_index_list = _group_labels(labels)
 
@@ -632,12 +632,12 @@ def _build_native_state(
     ]
 
     pocket_centers_nm = np.array(
-        [np.mean(alpha_spheres.centers[pocket_indices], axis=0) for pocket_indices in pocket_alpha_index_list],
+        [np.mean(mesh.centers[pocket_indices], axis=0) for pocket_indices in pocket_alpha_index_list],
         dtype=float,
     ) if pocket_alpha_index_list else np.zeros((0, 3))
 
     pocket_atom_index_list = [
-        np.unique(atom_indices[alpha_spheres.points_of_alpha_sphere[pocket_indices]].reshape(-1)).astype(int).tolist()
+        np.unique(atom_indices[mesh.points_of_alpha_sphere[pocket_indices]].reshape(-1)).astype(int).tolist()
         for pocket_indices in pocket_alpha_index_list
     ]
 
@@ -650,7 +650,7 @@ def _build_native_state(
         atom_b_factors=atom_b_factors,
         descriptor_occluder_coordinates_nm=descriptor_occluder_coordinates_nm,
         descriptor_occluder_radii_nm=descriptor_occluder_radii_nm,
-        alpha_spheres=alpha_spheres,
+        mesh=mesh,
         alpha_is_apolar=alpha_is_apolar,
         alpha_local_hydrophobic_density=alpha_local_hydrophobic_density,
         pocket_alpha_index_list=pocket_alpha_index_list,
@@ -660,17 +660,17 @@ def _build_native_state(
 
 
 def _apply_fpocket_candidate_filter(
-    alpha_spheres: DelaunayMesh,
+    mesh: DelaunayMesh,
     coordinates_nm: np.ndarray,
     atom_b_factors: np.ndarray | None,
     upstream_bfactor_statistics: tuple[float, float, float] | None = None,
 ) -> None:
-    if alpha_spheres.n_alpha_spheres == 0:
+    if mesh.n_alpha_spheres == 0:
         return
 
-    tetrahedron_points = coordinates_nm[alpha_spheres.points_of_alpha_sphere]
+    tetrahedron_points = coordinates_nm[mesh.points_of_alpha_sphere]
     distances = np.linalg.norm(
-        tetrahedron_points - alpha_spheres.centers[:, None, :],
+        tetrahedron_points - mesh.centers[:, None, :],
         axis=2,
     )
     first_distances = distances[:, [0]]
@@ -680,16 +680,16 @@ def _apply_fpocket_candidate_filter(
     )
 
     barycenters = np.mean(tetrahedron_points, axis=1)
-    barycenter_distances = np.linalg.norm(alpha_spheres.centers - barycenters, axis=1)
+    barycenter_distances = np.linalg.norm(mesh.centers - barycenters, axis=1)
     barycenter_mask = ~(
         (barycenter_distances > MAX_BARYCENTER_DISTANCE_NM)
-        & (alpha_spheres.radii > LARGE_ALPHA_RADIUS_NM)
+        & (mesh.radii > LARGE_ALPHA_RADIUS_NM)
     )
 
     keep_mask = equidistant_mask & barycenter_mask
 
     if atom_b_factors is not None:
-        tetra_b_factors = atom_b_factors[alpha_spheres.points_of_alpha_sphere]
+        tetra_b_factors = atom_b_factors[mesh.points_of_alpha_sphere]
         barycenter_b_factors = np.mean(tetra_b_factors, axis=1)
         if upstream_bfactor_statistics is None:
             average_b_factor = float(np.mean(atom_b_factors))
@@ -709,29 +709,29 @@ def _apply_fpocket_candidate_filter(
         keep_mask &= b_factor_mask
 
     if not np.all(keep_mask):
-        alpha_spheres.remove_alpha_spheres(np.where(~keep_mask)[0])
+        mesh.remove_alpha_spheres(np.where(~keep_mask)[0])
 
 
 def _classify_apolar_alpha_spheres(
-    alpha_spheres: DelaunayMesh,
+    mesh: DelaunayMesh,
     atom_electronegativities: np.ndarray,
 ) -> np.ndarray:
     is_apolar_atom = atom_electronegativities < 2.8
-    apolar_neighbor_counts = np.sum(is_apolar_atom[alpha_spheres.points_of_alpha_sphere], axis=1)
+    apolar_neighbor_counts = np.sum(is_apolar_atom[mesh.points_of_alpha_sphere], axis=1)
     return apolar_neighbor_counts >= MIN_APOLAR_NEIGHBORS
 
 
 def _compute_local_hydrophobic_density(
-    alpha_spheres: DelaunayMesh,
+    mesh: DelaunayMesh,
     alpha_is_apolar: np.ndarray,
 ) -> np.ndarray:
-    local_density = np.zeros(alpha_spheres.n_alpha_spheres, dtype=float)
-    if alpha_spheres.n_alpha_spheres == 0:
+    local_density = np.zeros(mesh.n_alpha_spheres, dtype=float)
+    if mesh.n_alpha_spheres == 0:
         return local_density
 
-    centers = alpha_spheres.centers
-    radii = alpha_spheres.radii
-    for alpha_index in range(alpha_spheres.n_alpha_spheres):
+    centers = mesh.centers
+    radii = mesh.radii
+    for alpha_index in range(mesh.n_alpha_spheres):
         if not alpha_is_apolar[alpha_index]:
             continue
         distances = np.linalg.norm(centers - centers[alpha_index], axis=1)
@@ -803,9 +803,9 @@ def _compute_native_surface_descriptors(
     if alpha_indices_array.size == 0:
         return 0.0, 0.0, 0.0, 0.0, 0
 
-    pocket_alpha_centers = state.alpha_spheres.centers[alpha_indices_array]
-    pocket_alpha_radii = state.alpha_spheres.radii[alpha_indices_array]
-    pocket_alpha_points = state.alpha_spheres.points_of_alpha_sphere[alpha_indices_array]
+    pocket_alpha_centers = state.mesh.centers[alpha_indices_array]
+    pocket_alpha_radii = state.mesh.radii[alpha_indices_array]
+    pocket_alpha_points = state.mesh.points_of_alpha_sphere[alpha_indices_array]
     unique_local_atom_indices = np.unique(pocket_alpha_points.reshape(-1))
 
     distances_to_centers = np.linalg.norm(
@@ -925,10 +925,10 @@ def _build_native_pocket_descriptor(
 ) -> Fpocket4NativePocketDescriptor:
     alpha_indices = list(state.pocket_alpha_index_list[pocket_index])
     alpha_indices_array = np.asarray(alpha_indices, dtype=int)
-    alpha_centers = state.alpha_spheres.centers[alpha_indices_array]
-    alpha_radii = state.alpha_spheres.radii[alpha_indices_array]
+    alpha_centers = state.mesh.centers[alpha_indices_array]
+    alpha_radii = state.mesh.radii[alpha_indices_array]
     n_alpha_spheres = len(alpha_indices)
-    volume_nm3 = float(np.sum(state.alpha_spheres.get_volumes()[alpha_indices_array]))
+    volume_nm3 = float(np.sum(state.mesh.get_volumes()[alpha_indices_array]))
     mean_alpha_sphere_radius_nm = float(np.mean(alpha_radii))
     n_apolar_alpha_spheres = int(np.sum(state.alpha_is_apolar[alpha_indices_array]))
     apolar_alpha_sphere_ratio = (
@@ -1107,8 +1107,8 @@ def _native_topography_from_state(
 
     for pocket_index, descriptor in enumerate(descriptors, start=1):
         alpha_indices_array = np.asarray(descriptor.alpha_indices, dtype=int)
-        alpha_centers = state.alpha_spheres.centers[alpha_indices_array]
-        alpha_radii = state.alpha_spheres.radii[alpha_indices_array]
+        alpha_centers = state.mesh.centers[alpha_indices_array]
+        alpha_radii = state.mesh.radii[alpha_indices_array]
         pocket = Pocket(
             atom_indices=descriptor.atom_indices,
             center=puw.quantity(descriptor.center_nm, 'nm'),

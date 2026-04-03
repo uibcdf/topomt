@@ -197,19 +197,19 @@ def _compute_alpha_layer(
         structure_indices=0 if structure_indices == 0 else structure_indices,
     )[0]
     coordinates_nm = np.asarray(puw.get_value(coordinates, to_unit='nm'), dtype=float)
-    alpha_spheres = DelaunayMesh(points=coordinates_nm)
-    alpha_spheres.keep_alpha_spheres(
-        alpha_spheres.filter_alpha_spheres(
+    mesh = DelaunayMesh(points=coordinates_nm)
+    mesh.keep_alpha_spheres(
+        mesh.filter_alpha_spheres(
             min_radius=min_radius_nm,
             max_radius=max_radius_nm,
         )
     )
 
-    alpha_lining_local = alpha_spheres.points_of_alpha_sphere
+    alpha_lining_local = mesh.points_of_alpha_sphere
     alpha_lining_atom_indices = atom_indices[alpha_lining_local]
-    alpha_centers_nm = alpha_spheres.centers
-    alpha_radii_nm = alpha_spheres.radii
-    alpha_space_nm3 = alpha_spheres.get_volumes()
+    alpha_centers_nm = mesh.centers
+    alpha_radii_nm = mesh.radii
+    alpha_space_nm3 = mesh.get_volumes()
 
     sasa = msm.physchem.get_sasa(receptor, element='atom', engine='mdtraj')
     atom_sasa_nm2 = np.asarray(puw.get_value(sasa, to_unit='nm**2'))[0]
