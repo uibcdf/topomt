@@ -105,6 +105,13 @@ This includes:
 - The old `topomt.methods.pocket_geometry` bridge module has now been removed.
   Its stable contents were redistributed into `topomt.tools.geometry`,
   `topomt.tools.tessellation`, and `topomt.tools.features`.
+- `DelaunayMesh` now also exposes an explicit simplex-facing view
+  (`n_simplices`, `simplex_centers`, `simplex_radii`,
+  `simplex_atom_indices`, `simplex_volumes`, and simplex-neighbor helpers)
+  in addition to the legacy alpha-sphere-derived aliases.
+- `topomt.tools` now exposes its three main public subpackages explicitly at
+  the package root (`geometry`, `tessellation`, and `features`), and that
+  surface is now covered by direct regression tests.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.

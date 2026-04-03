@@ -44,6 +44,10 @@ multiple engines:
   records;
 - alpha-sphere-derived arrays as a secondary view over the same mesh.
 
+The active implementation now also exposes a simplex-facing convenience view
+explicitly, so consumers do not need to speak only in alpha-sphere-derived
+terms when the simplex interpretation is the primary one.
+
 `DelaunayFlowNetwork` should sit above that mesh and provide the
 probe-dependent flow interpretation:
 

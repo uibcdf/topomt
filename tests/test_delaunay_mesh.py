@@ -59,6 +59,32 @@ def test_delaunay_mesh_exposes_simplex_faces_and_boundary_faces():
     assert {record[2] for record in boundary_faces} == expected_faces
 
 
+def test_delaunay_mesh_exposes_simplex_view_aliases():
+
+    points = np.array(
+        [
+            [0.0, 0.0, 0.0],
+            [1.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 1.0],
+        ],
+        dtype=float,
+    )
+
+    mesh = DelaunayMesh(points=points)
+
+    assert mesh.n_simplices == mesh.n_alpha_spheres
+    assert np.array_equal(mesh.simplex_atom_indices, mesh.alpha_sphere_atom_indices)
+    assert np.allclose(mesh.simplex_centers, mesh.alpha_sphere_centers)
+    assert np.allclose(mesh.simplex_radii, mesh.alpha_sphere_radii)
+    assert np.allclose(mesh.simplex_volumes, mesh.alpha_sphere_volumes)
+    assert mesh.get_simplex_neighbors() == mesh.get_alpha_sphere_neighbors()
+    assert np.array_equal(
+        mesh.get_simplex_neighbor_pairs(),
+        mesh.get_alpha_sphere_neighbor_pairs(),
+    )
+
+
 def test_delaunay_mesh_alpha_sphere_radius_filter_returns_mask():
 
     points = np.array(
@@ -101,7 +127,10 @@ def test_delaunay_mesh_keep_alpha_spheres_accepts_boolean_mask():
     mesh.keep_alpha_spheres(mask)
 
     assert mesh.n_alpha_spheres == 1
+    assert mesh.n_simplices == 1
     assert mesh.alpha_sphere_centers.shape == (1, 3)
+    assert mesh.simplices.shape == (1, 4)
+    assert mesh.oriented_simplices.shape == (1, 4)
 
 
 def test_get_delaunay_mesh_returns_mesh_for_demo_system():

@@ -205,6 +205,36 @@ class DelaunayMesh:
                     pairs.append((source, target))
         self._alpha_sphere_neighbor_pairs = np.asarray(pairs, dtype=int)
 
+    @property
+    def n_simplices(self):
+        """Return the number of simplices currently exposed by the mesh."""
+
+        return self.n_alpha_spheres
+
+    @property
+    def simplex_centers(self):
+        """Return simplex-associated circumcenters."""
+
+        return self.alpha_sphere_centers
+
+    @property
+    def simplex_radii(self):
+        """Return simplex-associated circumradii."""
+
+        return self.alpha_sphere_radii
+
+    @property
+    def simplex_atom_indices(self):
+        """Return simplex-to-atom membership."""
+
+        return self.alpha_sphere_atom_indices
+
+    @property
+    def simplex_volumes(self):
+        """Return simplex volumes."""
+
+        return self.alpha_sphere_volumes
+
     def get_alpha_sphere_neighbors(self) -> dict[int, list[int]]:
         """Return alpha-sphere adjacency induced by simplex face sharing."""
 
@@ -214,6 +244,16 @@ class DelaunayMesh:
         """Return alpha-sphere adjacency as unique index pairs."""
 
         return self._alpha_sphere_neighbor_pairs.copy()
+
+    def get_simplex_neighbors(self) -> dict[int, list[int]]:
+        """Return simplex adjacency induced by shared faces."""
+
+        return self.get_alpha_sphere_neighbors()
+
+    def get_simplex_neighbor_pairs(self) -> np.ndarray:
+        """Return simplex adjacency as unique index pairs."""
+
+        return self.get_alpha_sphere_neighbor_pairs()
 
     def get_simplex_faces(self) -> np.ndarray:
         """Return the sorted atom triples for each simplex face."""
@@ -357,6 +397,8 @@ class DelaunayMesh:
         self.alpha_sphere_radii = self.alpha_sphere_radii[mask]
         self.alpha_sphere_atom_indices = self.alpha_sphere_atom_indices[mask]
         self.alpha_sphere_volumes = self.alpha_sphere_volumes[mask]
+        self.simplices = self.simplices[mask]
+        self.oriented_simplices = self.oriented_simplices[mask]
         self._min_edges = self._min_edges[mask]
         self._max_edges = self._max_edges[mask]
         self._condition_numbers = self._condition_numbers[mask]
@@ -367,6 +409,8 @@ class DelaunayMesh:
             self.alpha_sphere_radii = np.zeros(0, dtype=float)
             self.alpha_sphere_atom_indices = np.zeros((0, 4), dtype=int)
             self.alpha_sphere_volumes = np.zeros(0, dtype=float)
+            self.simplices = np.zeros((0, 4), dtype=int)
+            self.oriented_simplices = np.zeros((0, 4), dtype=int)
             self._min_edges = np.zeros(0, dtype=float)
             self._max_edges = np.zeros(0, dtype=float)
             self._condition_numbers = np.zeros(0, dtype=float)
