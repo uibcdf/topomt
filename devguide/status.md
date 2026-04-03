@@ -86,6 +86,10 @@ This includes:
   `topomt.tools.features.pockets.physicochemistry`, and `castp` already uses
   that new module directly while `pocket_geometry.py` keeps a compatibility
   re-export.
+- A second stable extraction now also exists under
+  `topomt.tools.features.common.descriptors`, covering the first shared
+  geometry descriptors (`bounding_metrics` and
+  `effective_center_radius`) with the same compatibility-bridge strategy.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.

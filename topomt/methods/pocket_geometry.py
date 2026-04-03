@@ -15,6 +15,10 @@ from scipy.spatial.distance import cdist
 from scipy.cluster.hierarchy import fcluster, linkage
 # import py3Dmol <-- moved to function
 from depdigest import dep_digest
+from topomt.tools.features.common import (
+    bounding_metrics,
+    effective_center_radius,
+)
 from topomt.tools.features.pockets import (
     apolar_ratio,
     get_physicochemical_properties,
@@ -335,47 +339,6 @@ def clip_mesh_with_plane(
     verts2d = proj[hull.vertices]
     perim = float(np.sum(np.linalg.norm(np.diff(np.vstack([verts2d, verts2d[0]]), axis=0), axis=1)))
     return poly, float(hull.area), perim
-
-
-def bounding_metrics(points: Sequence[Sequence[float]]) -> dict[str, float | np.ndarray]:
-    """Compute oriented bounding box (via PCA) and axis lengths for elongation/orientation."""
-    pts = _to_numpy(points)
-    if pts.shape[0] == 0:
-        return {
-            'centroid': np.zeros(3),
-            'axes': np.zeros((3, 3)),
-            'lengths': np.zeros(3),
-            'elongation': 0.0,
-        }
-    centroid = pts.mean(axis=0)
-    centered = pts - centroid
-    cov = centered.T @ centered / max(1, pts.shape[0] - 1)
-    vals, vecs = np.linalg.eigh(cov)
-    order = np.argsort(vals)[::-1]
-    vals = vals[order]
-    vecs = vecs[:, order]
-    # project points and get extents
-    proj = centered @ vecs
-    mins = proj.min(axis=0)
-    maxs = proj.max(axis=0)
-    lengths = maxs - mins
-    elong = lengths[0] / lengths[1] if lengths[1] > 0 else math.inf
-    return {
-        'centroid': centroid,
-        'axes': vecs,
-        'lengths': lengths,
-        'elongation': float(elong),
-    }
-
-
-def effective_center_radius(points: Sequence[Sequence[float]]) -> tuple[np.ndarray, float, float]:
-    """Return centroid, mean radial distance, and max radial distance (effective radius)."""
-    pts = _to_numpy(points)
-    if pts.shape[0] == 0:
-        return np.zeros(3), 0.0, 0.0
-    centroid = pts.mean(axis=0)
-    dists = np.linalg.norm(pts - centroid, axis=1)
-    return centroid, float(dists.mean()), float(dists.max())
 
 
 def shortest_path_length(
@@ -850,4 +813,3 @@ def _element_color(element_symbol: str) -> str:
         'P': 'rgb(255,150,0)',
     }
     return palette.get(element_symbol, 'rgb(180,180,180)')
-

@@ -272,6 +272,8 @@ The following slices are now already materialized in the repository:
   with the first shared mesh and hull helpers;
 - `topomt.tools.tessellation`
   with tetrahedral, mouth, and representative-point helpers;
+- `topomt.tools.features.common.descriptors`
+  with the first shared feature-level geometry descriptors;
 - `topomt.tools.features.pockets.physicochemistry`
   as the first feature-oriented extraction from `pocket_geometry.py`.
 
