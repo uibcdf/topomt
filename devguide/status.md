@@ -78,6 +78,9 @@ This includes:
   mesh triangulation while deliberately keeping its upstream-compatible
   tetrahedral radius proxy and oriented simplex ordering where parity depends
   on that legacy public behavior.
+- `alphaspace2` and `fpocket4` have also started to consume the new explicit
+  `DelaunayMesh` filter/keep API instead of expressing their main radius
+  window through the older pair of destructive helper calls.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.

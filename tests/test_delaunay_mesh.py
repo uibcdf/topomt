@@ -79,6 +79,31 @@ def test_delaunay_mesh_alpha_sphere_radius_filter_returns_mask():
     assert bool(mask[0]) is True
 
 
+def test_delaunay_mesh_keep_alpha_spheres_accepts_boolean_mask():
+
+    points = np.array(
+        [
+            [0.0, 0.0, 0.0],
+            [1.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 1.0],
+            [1.0, 1.0, 1.0],
+        ],
+        dtype=float,
+    )
+
+    mesh = DelaunayMesh(points=points)
+    initial_count = mesh.n_alpha_spheres
+    assert initial_count > 1
+
+    mask = np.zeros(initial_count, dtype=bool)
+    mask[0] = True
+    mesh.keep_alpha_spheres(mask)
+
+    assert mesh.n_alpha_spheres == 1
+    assert mesh.alpha_sphere_centers.shape == (1, 3)
+
+
 def test_get_delaunay_mesh_returns_mesh_for_demo_system():
 
     molecular_system = tmt.demo['HIV-1 Protease']['1HIV.pdb']

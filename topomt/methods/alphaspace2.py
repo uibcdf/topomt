@@ -198,8 +198,12 @@ def _compute_alpha_layer(
     )[0]
     coordinates_nm = np.asarray(puw.get_value(coordinates, to_unit='nm'), dtype=float)
     alpha_spheres = DelaunayMesh(points=coordinates_nm)
-    alpha_spheres.remove_small_alpha_spheres(min_radius_nm)
-    alpha_spheres.remove_big_alpha_spheres(max_radius_nm)
+    alpha_spheres.keep_alpha_spheres(
+        alpha_spheres.filter_alpha_spheres(
+            min_radius=min_radius_nm,
+            max_radius=max_radius_nm,
+        )
+    )
 
     alpha_lining_local = alpha_spheres.points_of_alpha_sphere
     alpha_lining_atom_indices = atom_indices[alpha_lining_local]

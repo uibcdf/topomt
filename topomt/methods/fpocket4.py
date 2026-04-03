@@ -581,8 +581,12 @@ def _build_native_state(
         max_alpha_radius_nm = ASPH_MAX_SIZE_NM
         upstream_bfactor_statistics = None
 
-    alpha_spheres.remove_small_alpha_spheres(min_alpha_radius_nm)
-    alpha_spheres.remove_big_alpha_spheres(max_alpha_radius_nm)
+    alpha_spheres.keep_alpha_spheres(
+        alpha_spheres.filter_alpha_spheres(
+            min_radius=min_alpha_radius_nm,
+            max_radius=max_alpha_radius_nm,
+        )
+    )
     _apply_fpocket_candidate_filter(
         alpha_spheres=alpha_spheres,
         coordinates_nm=coordinates_nm,

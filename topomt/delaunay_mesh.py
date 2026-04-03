@@ -373,6 +373,16 @@ class DelaunayMesh:
             self._alpha_sphere_neighbor_map = {}
             self._alpha_sphere_neighbor_pairs = np.zeros((0, 2), dtype=int)
 
+    def keep_alpha_spheres(self, mask):
+        """Keep only the alpha-sphere-derived entries selected by a boolean mask."""
+
+        boolean_mask = np.asarray(mask, dtype=bool)
+        if boolean_mask.shape != (self.n_alpha_spheres,):
+            raise ValueError('mask must have shape (n_alpha_spheres,)')
+        if np.all(boolean_mask):
+            return
+        self.remove_alpha_spheres(np.where(~boolean_mask)[0])
+
     def remove_small_alpha_spheres(self, minimum_radius):
         """Remove alpha-sphere entries below a radius threshold."""
 
@@ -380,8 +390,7 @@ class DelaunayMesh:
             minimum_radius_value = float(puw.get_value(minimum_radius, to_unit='nm'))
         else:
             minimum_radius_value = float(minimum_radius)
-        indices = np.where(self.alpha_sphere_radii < minimum_radius_value)[0]
-        self.remove_alpha_spheres(indices)
+        self.keep_alpha_spheres(self.alpha_sphere_radii >= minimum_radius_value)
 
     def remove_big_alpha_spheres(self, maximum_radius):
         """Remove alpha-sphere entries above a radius threshold."""
@@ -390,8 +399,7 @@ class DelaunayMesh:
             maximum_radius_value = float(puw.get_value(maximum_radius, to_unit='nm'))
         else:
             maximum_radius_value = float(maximum_radius)
-        indices = np.where(self.alpha_sphere_radii > maximum_radius_value)[0]
-        self.remove_alpha_spheres(indices)
+        self.keep_alpha_spheres(self.alpha_sphere_radii <= maximum_radius_value)
 
     def get_points_of_alpha_spheres(self, indices):
         """Return unique point indices touching a set of alpha-sphere entries."""
