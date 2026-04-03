@@ -1,8 +1,8 @@
-# Tools Architecture Proposal
+# Tools Architecture
 
 ## Purpose
 
-This document proposes an internal organization for `topomt.tools` so that
+This document records the internal organization of `topomt.tools` so that
 geometry, tessellation logic, feature-specific characterization, and lightweight
 visualization helpers stop accumulating inside `topomt/methods/pocket_geometry.py`
 as a mixed-responsibility module.
@@ -60,7 +60,7 @@ As a consequence, `AlphaSpheres` should no longer be treated as a keystone
 class. The alpha-sphere representation remains important, but as a derived
 view of `DelaunayMesh`, not as the primary architectural ontology.
 
-## Proposed top-level layout
+## Top-level layout
 
 ```text
 topomt/tools/
@@ -157,7 +157,7 @@ Only lightweight helper utilities for inspection or simple conversions.
 The main interactive visualization path for TopoMT should remain in
 `molsysviewer_topomt`, not in the core library.
 
-## Mapping from the current `pocket_geometry.py`
+## Historical mapping from `pocket_geometry.py`
 
 ### `tools/geometry/primitives.py`
 
@@ -484,12 +484,11 @@ Scope:
 
 ### Slice 4: migrate the remaining feature-characterization helpers
 
-Goals:
+Outcome:
 
-- finish moving the remaining `pocket_geometry.py` content to
-  `tools/features` and `tools/geometry`;
-- remove the transitional bridge module once the remaining helpers are
-  relocated or intentionally retired.
+- the remaining `pocket_geometry.py` content was moved to `tools/features`
+  and `tools/geometry`;
+- the transitional bridge module was removed.
 
 Scope:
 

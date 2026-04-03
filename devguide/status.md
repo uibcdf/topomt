@@ -67,17 +67,13 @@ This includes:
   additional inputs and, later, to canonical `bcif.gz` inputs.
 - Separation of wrapper-backed integrations from the long-term native-method
   targets in `topomt.methods`.
-- Start of the first `DelaunayMesh` migration slice: a new mesh keystone now
-  exists, the first stable tessellation helpers have moved into
-  `topomt.tools.tessellation`, and the first shared geometry helpers have
-  moved into `topomt.tools.geometry` without yet forcing a full engine
-  rewrite.
-- The next convergence slice is now also active: `DFND` has started to use
-  shared face access through `DelaunayMesh`, and `pycasta` now shares the
-  mesh triangulation while deliberately keeping its upstream-compatible
-  tetrahedral radius proxy and oriented simplex ordering where parity depends
-  on that legacy public behavior.
-- `alphaspace2` and `fpocket4` have also started to consume the new explicit
+- `DelaunayMesh` is now the active geometric keystone for the shared
+  Delaunay/tetrahedral substrate.
+- `DFND` already uses shared face access through `DelaunayMesh`, and
+  `pycasta` already shares the mesh triangulation while deliberately keeping
+  its upstream-compatible tetrahedral radius proxy and oriented simplex
+  ordering where parity depends on that legacy public behavior.
+- `alphaspace2` and `fpocket4` already consume the explicit
   `DelaunayMesh` filter/keep API instead of expressing their main radius
   window through the older pair of destructive helper calls.
 - The first real `tools/features/` extraction is now in place:
@@ -102,8 +98,8 @@ This includes:
 - `topomt.tools.geometry.planes` and `topomt.tools.geometry.sampling` are now
   also real, hosting `clip_mesh_with_plane` and
   `union_volume_monte_carlo`.
-- The old `topomt.methods.pocket_geometry` bridge module has now been removed.
-  Its stable contents were redistributed into `topomt.tools.geometry`,
+- The old `topomt.methods.pocket_geometry` bridge module has been removed.
+  Its stable contents now live under `topomt.tools.geometry`,
   `topomt.tools.tessellation`, and `topomt.tools.features`.
 - `DelaunayMesh` now also exposes an explicit simplex-facing view
   (`n_simplices`, `simplex_centers`, `simplex_radii`,
@@ -132,7 +128,8 @@ This includes:
 - Packaging metadata is still incomplete.
 - The developer guide is still being built.
 - Tests are unevenly distributed across engines.
-- Some geometry utilities still mix stable and experimental behavior.
+- Some geometry and feature-characterization utilities still mix stable and
+  heuristic behavior even after the `topomt.tools` split.
 - Native `fpocket4` is no longer only a first experimental stage at the final
   pocket-output level. It now reaches exact final-pocket parity against the
   current audited local fpocket source build on the full audited PDB set:

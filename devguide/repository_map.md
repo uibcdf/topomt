@@ -24,8 +24,14 @@ Important subareas:
   related objects.
 
 - `topomt/methods/`
-  Detection engines and geometry-related production code. This package should
-  converge toward native TopoMT implementations of the supported methods.
+  Detection engines. This package should contain the native TopoMT
+  implementations of the supported methods rather than shared geometry or
+  characterization helpers.
+
+- `topomt/tools/`
+  Shared geometry, tessellation, and feature-characterization helpers used by
+  several methods. This is now the active home for the stable content that was
+  previously concentrated in transitional geometry utility modules.
 
 - `topomt/io/`
   Input/output helpers. Right now this mainly includes loading external CASTp
@@ -55,7 +61,7 @@ Current test suite.
 
 The coverage is still uneven:
 
-- there are basic tests for `Topography`, pockets, alpha-spheres, and CASTp;
+- there are basic tests for `Topography`, `DelaunayMesh`, `topomt.tools`, and CASTp;
 - DFND has a dedicated test file of its own;
 - some areas, such as loaders and several engines, are still lightly covered.
 
