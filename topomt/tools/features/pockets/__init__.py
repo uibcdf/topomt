@@ -11,6 +11,7 @@ from .physicochemistry import (
     get_physicochemical_properties,
     nonpolar_ratio_from_sasa,
 )
+from .ranking import simple_ranking
 
 __all__ = [
     'apolar_ratio',
@@ -20,4 +21,5 @@ __all__ = [
     'nonpolar_ratio_from_sasa',
     'probe_scoring',
     'sasa_contact_validation',
+    'simple_ranking',
 ]

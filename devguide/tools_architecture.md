@@ -285,12 +285,10 @@ The following slices are now already materialized in the repository:
 - `topomt.tools.features.common.overlap`
   as the first extracted shared overlap helper module.
 
-At the moment, `castp` already consumes the new pocket physicochemistry module
-directly, while `pocket_geometry.py` still re-exports the migrated functions as
-a compatibility bridge during the larger refactor. The same compatibility
-bridge now also covers the migrated channel/profile, mouth, and overlap
-helpers. The same pattern now also covers the remaining geometry helpers that
-were duplicated locally inside `pocket_geometry.py`.
+This migration is now complete enough that the old
+`topomt.methods.pocket_geometry` bridge module has been removed. `castp` and
+the other geometry-consuming code paths are expected to import directly from
+`topomt.tools`.
 
 ### Domain-specific characterization helpers
 
@@ -486,7 +484,8 @@ Goals:
 
 - finish moving the remaining `pocket_geometry.py` content to
   `tools/features` and `tools/geometry`;
-- leave only compatibility re-exports or a very thin transitional module.
+- remove the transitional bridge module once the remaining helpers are
+  relocated or intentionally retired.
 
 Scope:
 
@@ -496,10 +495,10 @@ Scope:
 
 ## Immediate consequence for contributors
 
-New utilities should not be added to `topomt/methods/pocket_geometry.py`.
+New utilities should be added directly under `topomt.tools`, not under the old
+`methods` namespace.
 
-Until the refactor happens, contributors should already think in terms of the
-future `tools/` hierarchy:
+Contributors should think in terms of the `tools/` hierarchy:
 
 - general geometry;
 - tessellation-specific helpers;

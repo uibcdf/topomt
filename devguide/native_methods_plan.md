@@ -214,7 +214,8 @@ Useful TopoMT-side tools for the native implementation include:
 - `molsysmt` for input handling and atom identity mapping;
 - `topomt.delaunay_mesh` for the shared Delaunay substrate and its
   alpha-sphere-derived view where appropriate;
-- `pocket_geometry` for geometry support where it matches fpocket semantics;
+- `topomt.tools` for shared geometry and characterization support where it
+  matches fpocket semantics;
 - `pyunitwizard` for unit-normalized boundaries around the method.
 
 ### Cleanup after parity work

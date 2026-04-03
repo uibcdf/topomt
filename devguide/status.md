@@ -43,7 +43,6 @@ engines:
 - `pocketeer`
 - `alphaspace2`
 - `fpocket4`
-- `pocket_geometry`
 - `pycasta`
 
 This includes:
@@ -84,31 +83,28 @@ This includes:
 - The first real `tools/features/` extraction is now in place:
   pocket physicochemistry helpers live under
   `topomt.tools.features.pockets.physicochemistry`, and `castp` already uses
-  that new module directly while `pocket_geometry.py` keeps a compatibility
-  re-export.
+  that new module directly.
 - A second stable extraction now also exists under
   `topomt.tools.features.common.descriptors`, covering the first shared
   geometry descriptors (`bounding_metrics` and
-  `effective_center_radius`) with the same compatibility-bridge strategy.
+  `effective_center_radius`).
 - `topomt.tools.features.pockets.contacts` is now also real, hosting the first
   pocket-ligand contact helpers (`ligand_contact_distances`,
-  `ligand_contact_mask`, `sasa_contact_validation`, and `probe_scoring`) while
-  `pocket_geometry.py` keeps a compatibility re-export.
+  `ligand_contact_mask`, `sasa_contact_validation`, and `probe_scoring`).
 - `topomt.tools.features.channels` is now also real, hosting the first
   channel/profile helpers (`cross_section_profile`,
   `min_cross_section_radius`, `shortest_path_length`, and
-  `thickness_profile`) while `pocket_geometry.py` keeps a compatibility
-  re-export.
+  `thickness_profile`).
 - `topomt.tools.features.mouths` is now also real, hosting the first
-  mouth-specific descriptor helper (`mouth_area_on_plane`) while
-  `pocket_geometry.py` keeps a compatibility re-export.
+  mouth-specific descriptor helper (`mouth_area_on_plane`).
 - `topomt.tools.features.common.overlap` is now also real, hosting the first
-  shared overlap helper (`jaccard_overlap_clusters`) while
-  `pocket_geometry.py` keeps a compatibility re-export.
+  shared overlap helper (`jaccard_overlap_clusters`).
 - `topomt.tools.geometry.planes` and `topomt.tools.geometry.sampling` are now
   also real, hosting `clip_mesh_with_plane` and
-  `union_volume_monte_carlo`, while the duplicated geometry copies in
-  `pocket_geometry.py` have been replaced by compatibility re-exports.
+  `union_volume_monte_carlo`.
+- The old `topomt.methods.pocket_geometry` bridge module has now been removed.
+  Its stable contents were redistributed into `topomt.tools.geometry`,
+  `topomt.tools.tessellation`, and `topomt.tools.features`.
 - First wrapper-backed `Topography` adapters now exist not only for `fpocket4`
   but also for `pocketeer`, `alphaspace2`, and `pycasta`, so users can choose
   upstream execution paths while still receiving TopoMT feature objects.

@@ -24,7 +24,6 @@ packaging
 ```{toctree}
 :maxdepth: 1
 
-pocket_geometry_methods
 string_style
 type_annotations_guidelines
 ```
@@ -36,5 +35,4 @@ type_annotations_guidelines
 
 future/index
 ```
-
 

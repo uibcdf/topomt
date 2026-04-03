@@ -76,10 +76,10 @@ Practical implication:
 
 - [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py) is
   effectively empty and should become a real regression suite for the loader.
-- There is still limited direct coverage for `pocket_geometry`, and `pycasta`
-  still does not yet cover the full upstream benchmark inventory even though
-  its audited bounded battery has already grown beyond the original single-case
-  checkpoint.
+- There is still uneven direct coverage across the newer `topomt.tools`
+  subpackages, and `pycasta` still does not yet cover the full upstream
+  benchmark inventory even though its audited bounded battery has already
+  grown beyond the original single-case checkpoint.
 - The remaining `pycasta` audited outlier is currently `1apu`, as a deliberate
   native-versus-upstream semantic residual (`molsysmt` molecular selection
   versus upstream `ATOM/HETATM` preprocessing).

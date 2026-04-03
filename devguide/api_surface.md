@@ -27,7 +27,6 @@ For the current development cycle, the important engines are:
 - `pocketeer`
 - `alphaspace2`
 - `fpocket4`
-- `pocket_geometry`
 - `pycasta`
 
 These engines matter both because of functionality and because they define the
@@ -61,13 +60,14 @@ explicitly.
 
 ## Experimental areas
 
-### `pocket_geometry`
+### `tools/`
 
-[topomt/methods/pocket_geometry.py](/home/diego/repos@uibcdf/topomt/topomt/methods/pocket_geometry.py)
-contains useful geometry helpers, but also mixes several responsibilities and
-some more exploratory pieces.
+[topomt/tools/](/home/diego/repos@uibcdf/topomt/topomt/tools) now contains the
+shared geometry, tessellation, and feature-characterization helpers that were
+previously concentrated in the transitional `pocket_geometry.py` module.
 
-It should be treated as a mixed stable/experimental area.
+This area should now be treated as the active shared utility layer for
+non-engine-specific geometry and characterization code.
 
 ### DFND
 

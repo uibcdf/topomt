@@ -80,8 +80,8 @@ The relevant non-DFND engines are:
 - `castp`
 - `pycasta`
 
-In addition, `pocket_geometry` acts as a geometry utility layer used by some
-engines and is likely to become a more explicit part of the production path.
+In addition, `topomt.tools` now acts as the shared geometry, tessellation, and
+feature-characterization layer used by those engines.
 
 ## `methods/` versus `wrappers/`
 

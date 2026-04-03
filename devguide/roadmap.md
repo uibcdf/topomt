@@ -70,7 +70,6 @@ Since then:
 - `pocketeer`
 - `alphaspace2`
 - `fpocket4`
-- `pocket_geometry`
 - `pycasta`
 
 ### Non-goals

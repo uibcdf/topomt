@@ -19,7 +19,6 @@ The current priority is the non-DFND stabilization path:
 - `pocketeer`
 - `alphaspace2`
 - `fpocket4`
-- `pocket_geometry`
 - `pycasta`
 
 This work includes:

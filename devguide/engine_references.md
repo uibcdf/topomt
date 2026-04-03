@@ -22,7 +22,6 @@ should know:
 | `alphaspace2` | AlphaSpace2 by Redesign Science | `alphaspace2` Python package | `pip install alphaspace2` from upstream/PyPI-style distribution | Comparable alpha-space generation, pocket clustering, and lining-atom semantics | Reference formalized, parity not yet validated |
 | `pocketeer` | Pocketeer project/method <https://pocketeer.readthedocs.io/en/latest/>, <https://github.com/cch1999/pocketeer> | `pocketeer` Python package (upstream) | Local mirror `/home/diego/repos@others/pocketeer` for source comparison | Implement the `find_pockets` workflow, map pocket scores and atom masks, compare key numerics | Contract and tests now under active development (see `devguide/pocketeer_contract.md`) |
 | `pycasta` | pyCAST / pycasta project and paper | `pycasta` Python package | Upstream repository <https://github.com/giorgioluciano/pycasta>, local mirror `/home/diego/repos@others/pycasta`, paper DOI <https://doi.org/10.1016/j.csbj.2025.07.054> | Comparable tetrahedral cavity decomposition, pocket ranking, mouth geometry, and pocket atom ownership | Sources reviewed; contract being formalized, with paper/repository drift noted |
-| `pocket_geometry` | No single external engine; internal geometry layer | Not applicable | Not applicable | Stable geometry primitives and measurements used by other engines | Internal layer, not wrapper parity |
 
 ## `fpocket4`
 
@@ -328,10 +327,10 @@ We still need to record explicitly:
 - the practical installation source used for validation;
 - the expected parity/comparison target in TopoMT.
 
-## `pocket_geometry`
+## `topomt.tools`
 
-`pocket_geometry` is not a wrapper around one single external tool. It is an
-internal geometry utility layer used by multiple methods.
+`topomt.tools` is not a wrapper around one single external tool. It is the
+internal shared utility layer used by multiple methods.
 
 This means it should not be documented in terms of executable parity to one
 upstream package in the same way as `fpocket4`.
@@ -340,7 +339,8 @@ The right reference strategy here is:
 
 - cite the concrete geometry algorithms or papers where relevant;
 - document internal measurement conventions clearly;
-- validate behavior through geometry-focused regression tests.
+- validate behavior through focused geometry and feature-helper regression
+  tests.
 
 ## Practical rule
 
