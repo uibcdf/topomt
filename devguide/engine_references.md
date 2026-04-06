@@ -128,6 +128,28 @@ results rather than parity against a local binary/package run.
 This means CASTp is currently a loader/integration reference, not yet a fully
 specified executable parity target like `fpocket4`.
 
+The active contract for making it a real parity target now lives in:
+
+- [castp/contract.md](/home/diego/repos@uibcdf/topomt/devguide/castp/contract.md)
+- [CASTp/implementation.md](/home/diego/repos@uibcdf/topomt/devguide/CASTp/implementation.md)
+
+### Role of `pyCAST`
+
+`pyCAST` is currently useful as a secondary methodological reference for the
+classical CAST workflow, but it should not be treated as the parity oracle for
+TopoMT's `castp` work.
+
+Reason:
+
+- its paper is useful for interpreting the classical workflow;
+- but the audited public repository does not currently justify treating it as a
+  fully authoritative executable reference for CASTp fidelity.
+
+For TopoMT, the practical oracle remains:
+
+- CAST/CASTp literature;
+- CASTp 3.0 server outputs.
+
 ## `alphaspace2`
 
 ### Upstream code and documentation references

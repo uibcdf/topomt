@@ -24,6 +24,7 @@ from .demo import demo
 from . import features
 from .topography.Topography import Topography
 from .delaunay_mesh import DelaunayMesh
+from .weighted_delaunay_mesh import WeightedDelaunayMesh
 from .get_delaunay_mesh import get_delaunay_mesh
 from .get_topography import get_topography
 from .get_pockets import get_pockets, show_pockets
@@ -34,4 +35,4 @@ from . import methods
 from . import wrappers
 from . import tools
 
-__all__ = ['Topography', 'DelaunayMesh', 'get_delaunay_mesh']
+__all__ = ['Topography', 'DelaunayMesh', 'WeightedDelaunayMesh', 'get_delaunay_mesh']

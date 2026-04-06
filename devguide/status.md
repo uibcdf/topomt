@@ -76,6 +76,13 @@ This includes:
 - `alphaspace2` and `fpocket4` already consume the explicit
   `DelaunayMesh` filter/keep API instead of expressing their main radius
   window through the older pair of destructive helper calls.
+- CASTp fidelity work now has an explicit contract under
+  `devguide/castp/contract.md`, with the CASTp server export files treated as
+  the practical oracle and the canonical probe default fixed at `1.4 Å`.
+- The first real CASTp 3.0 zip-fixture battery is now in progress. Five of the
+  downloaded server cases are already usable as loader-parity fixtures, while
+  `3ptb` currently exposes a separate `molsysmt` PDB-parser bug and should be
+  treated as an ecosystem blocker rather than silently skipped.
 - The first real `tools/features/` extraction is now in place:
   pocket physicochemistry helpers live under
   `topomt.tools.features.pockets.physicochemistry`, and `castp` already uses
@@ -130,6 +137,9 @@ This includes:
 - Tests are unevenly distributed across engines.
 - Some geometry and feature-characterization utilities still mix stable and
   heuristic behavior even after the `topomt.tools` split.
+- The current native `castp` path is still a `CASTp-like` prototype rather
+  than a faithful reimplementation of CASTp's outside/pocket/cavity/channel
+  delineation semantics.
 - Native `fpocket4` is no longer only a first experimental stage at the final
   pocket-output level. It now reaches exact final-pocket parity against the
   current audited local fpocket source build on the full audited PDB set:

@@ -10,10 +10,10 @@ the main testing priorities.
 The current tests live mainly in:
 
 - [tests/test_topography.py](/home/diego/repos@uibcdf/topomt/tests/test_topography.py)
-- [tests/test_alphaspheres.py](/home/diego/repos@uibcdf/topomt/tests/test_alphaspheres.py)
 - [tests/test_castp.py](/home/diego/repos@uibcdf/topomt/tests/test_castp.py)
 - [tests/test_import.py](/home/diego/repos@uibcdf/topomt/tests/test_import.py)
 - [tests/test_dfnd_pockets.py](/home/diego/repos@uibcdf/topomt/tests/test_dfnd_pockets.py)
+- [tests/test_delaunay_mesh.py](/home/diego/repos@uibcdf/topomt/tests/test_delaunay_mesh.py)
 - [tests/methods/pocketeer/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_parity.py)
 - [tests/methods/pocketeer/test_wrapper.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_wrapper.py)
 - [tests/methods/alphaspace2/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/alphaspace2/test_parity.py)
@@ -27,7 +27,7 @@ The current tests live mainly in:
 
 - basic `Topography` behavior;
 - basic pocket feature behavior;
-- alpha-sphere behavior;
+- `DelaunayMesh` behavior, including its alpha-sphere-derived view;
 - basic CASTp path checks;
 - focused upstream parity for `pocketeer`, `alphaspace2`, `fpocket4`, and a
   growing `pycasta` bounded battery;
@@ -74,8 +74,16 @@ Practical implication:
 
 ## Known gaps
 
-- [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py) is
-  effectively empty and should become a real regression suite for the loader.
+- [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py) should
+  become the first real CASTp parity-import suite, using bundled CASTp server
+  outputs as the oracle.
+- The new `CASTp_3.0_server` zip battery is currently green for the parseable
+  cases and exposes a real external parser blocker on `3ptb.pdb` in
+  `molsysmt`, which should be treated as an ecosystem bug rather than hidden by
+  loader fallbacks.
+- [tests/test_castp.py](/home/diego/repos@uibcdf/topomt/tests/test_castp.py) is still a smoke suite
+  for a `CASTp-like` native prototype, not a parity suite for faithful CASTp
+  semantics.
 - There is still uneven direct coverage across the newer `topomt.tools`
   subpackages, and `pycasta` still does not yet cover the full upstream
   benchmark inventory even though its audited bounded battery has already
@@ -96,7 +104,8 @@ For the current roadmap, the next validation steps should be:
 1. strengthen direct tests for the prioritized non-DFND engines;
 2. test local-to-global atom-index mapping explicitly;
 3. test feature metadata consistency across engines;
-4. expand loader tests for CASTp;
+4. expand loader tests for CASTp and turn bundled exported files into a real
+   parity-import battery;
 5. keep DFND separate until it returns to active priority.
 
 ## Environment caveat

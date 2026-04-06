@@ -66,6 +66,13 @@ and the next engineering steps.
   Active contract for the upcoming native `pycasta` implementation, including
   the upstream repository, the paper source, and the current
   repository-versus-paper audit notes.
+- [castp/contract.md](castp/contract.md)
+  Contract for CASTp fidelity work, including the canonical `1.4 Å` probe
+  default, the server-export oracle, and the requirements for future native
+  parity.
+- [CASTp/implementation.md](CASTp/implementation.md)
+  From-scratch technical implementation plan for a faithful native CASTp path,
+  explicitly separated from DFND semantics and from the current prototype.
 - [proposal_improvement/](proposal_improvement/)
   Collected cross-repository improvement proposals for MolSysSuite sibling
   packages identified while implementing TopoMT.
@@ -107,6 +114,12 @@ has multiple related checkpoint or contract documents:
   Native checkpoint, continuity notes, and method contract material.
 - [pycasta/](pycasta/)
   Contract notes, benchmark inventory, and repository-versus-paper audit work.
+- [castp/](castp/)
+  Contract notes for CASTp fidelity, exported-file parity, and the native
+  reimplementation target.
+- [CASTp/](CASTp/)
+  Technical implementation notes for rebuilding the native CASTp method from
+  the classical discrete-flow workflow.
 
 ## Proposal directories
 

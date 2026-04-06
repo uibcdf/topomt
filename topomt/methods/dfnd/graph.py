@@ -4,6 +4,7 @@ from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 from topomt import pyunitwizard as puw
 from topomt.delaunay_mesh import DelaunayMesh
+from topomt.tools.tessellation import analytic_tetra_volume, mouth_area_from_faces
 
 # Import functions from the newly created core module
 from .core.apollonius import solve_apollonius_3d
@@ -242,7 +243,8 @@ class DelaunayFlowNetwork:
                 'transit_indices': transit_subset,
                 'coast_indices': coast_subset,
                 'atom_indices': sorted(list(atom_indices_global)),
-                'volume': 0.0 # Placeholder
+                'center': np.mean(self.mesh.simplex_centers[nodes], axis=0) if nodes else np.zeros(3),
+                'volume': float(np.sum(self.mesh.simplex_volumes[nodes])) if nodes else 0.0,
             }
             
             # --- CHANNEL DETECTION (Mouth Clustering) ---
@@ -304,22 +306,47 @@ class DelaunayFlowNetwork:
                     # Connected components of faces
                     # Simple BFS/DFS
                     visited_faces = [False] * n_faces
+                    mouth_face_clusters = []
                     n_mouths = 0
                     for f in range(n_faces):
                         if not visited_faces[f]:
                             n_mouths += 1
                             stack = [f]
                             visited_faces[f] = True
+                            cluster = []
                             while stack:
                                 curr = stack.pop()
+                                cluster.append(mouth_faces[curr])
                                 for neighbor in face_adj[curr]:
                                     if not visited_faces[neighbor]:
                                         visited_faces[neighbor] = True
                                         stack.append(neighbor)
+                            mouth_face_clusters.append(cluster)
                 else:
                     n_mouths = 0 # Should not happen if connected_to_ocean is true, unless only via corner?
+                    mouth_face_clusters = []
                 
                 feature_data['n_mouths'] = n_mouths
+                feature_data['mouth_face_clusters'] = mouth_face_clusters
+                feature_data['mouth_area'] = sum(
+                    mouth_area_from_faces(cluster, self.atom_coords)
+                    for cluster in mouth_face_clusters
+                )
+                feature_data['mouths'] = [
+                    {
+                        'id': mouth_index,
+                        'faces': cluster,
+                        'atom_indices': sorted(
+                            {
+                                int(self.atom_indices_map[atom_index])
+                                for face in cluster
+                                for atom_index in face
+                            }
+                        ),
+                        'area': mouth_area_from_faces(cluster, self.atom_coords),
+                    }
+                    for mouth_index, cluster in enumerate(mouth_face_clusters, start=1)
+                ]
                 
                 if n_mouths > 1:
                     channels.append(feature_data)
@@ -328,6 +355,9 @@ class DelaunayFlowNetwork:
             else:
                 # Void (0 mouths)
                 feature_data['n_mouths'] = 0
+                feature_data['mouth_face_clusters'] = []
+                feature_data['mouth_area'] = 0.0
+                feature_data['mouths'] = []
                 voids.append(feature_data)
 
         # --- DRY NETWORK ANALYSIS ---

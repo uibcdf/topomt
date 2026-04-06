@@ -1,161 +1,113 @@
-"""
-CASTp-like pocket detection using Alpha Spheres and flow logic.
-"""
+"""Native CASTp implementation scaffold built from the classical workflow."""
 
-from typing import List, Dict, Union, Tuple, Set
-import numpy as np
-from topomt.delaunay_mesh import DelaunayMesh
-from topomt._private.molsysmt_preparation import build_heavy_receptor_view
-from topomt._private.smonitor import signal
-from topomt.tools.tessellation import (
-    analytic_tetra_volume,
-    mouth_area_from_faces,
-)
-from topomt.tools.features.pockets import (
-    get_physicochemical_properties,
-)
+from typing import Dict, List, Tuple
+
 from topomt import pyunitwizard as puw
+from topomt._private.smonitor import signal
+from topomt.methods.castp_core import build_castp_feature_records, build_castp_geometry
+from topomt.tools.features.pockets import get_physicochemical_properties
+
+
+def _to_angstroms(value) -> float:
+    if puw.is_quantity(value):
+        return float(puw.get_value(value, to_unit='angstroms'))
+
+    try:
+        quantity = puw.quantity(value, 'angstroms')
+        return float(puw.get_value(quantity, to_unit='angstroms'))
+    except Exception:
+        return float(value)
+
+
+def _component_to_record(
+    component: Dict,
+    molsys,
+    feature_type: str,
+    component_index: int,
+) -> Dict:
+    atom_indices = sorted(int(atom_index) for atom_index in component.get('atom_indices', []))
+
+    try:
+        properties = get_physicochemical_properties(molsys, atom_indices)
+    except Exception:
+        properties = {}
+
+    mouths = []
+    for mouth in component.get('mouths', []):
+        mouths.append(
+            {
+                'id': int(mouth['id']),
+                'atom_indices': sorted(int(atom_index) for atom_index in mouth.get('atom_indices', [])),
+                'area': float(mouth.get('area', 0.0)),
+                'faces': list(mouth.get('faces', [])),
+            }
+        )
+
+    return {
+        'id': component_index,
+        'feature_type': feature_type,
+        'type': feature_type.capitalize(),
+        'source': 'castp',
+        'source_id': f'castp:{feature_type}:{component_index}',
+        'tetrahedron_indices': list(component.get('tetrahedron_indices', [])),
+        'atom_indices': atom_indices,
+        'boundary_atom_indices': sorted(
+            int(atom_index) for atom_index in component.get('boundary_atom_indices', [])
+        ),
+        'component_atom_indices': sorted(
+            int(atom_index) for atom_index in component.get('component_atom_indices', [])
+        ),
+        'center': component.get('center'),
+        'volume': float(component.get('volume', 0.0)),
+        'score': float(component.get('score', component.get('volume', 0.0))),
+        'n_mouths': int(component.get('n_mouths', 0)),
+        'mouth_area': float(component.get('mouth_area', 0.0)),
+        'mouths': mouths,
+        'properties': properties,
+    }
 
 
 @signal(tags=['method', 'castp', 'native'])
 def castp(
     molecular_system,
-    selection: str = 'all',
+    selection: str = 'molecule_type == "protein"',
     structure_indices: int = 0,
     probe_radius: float = 1.4,
-    min_spheres_per_pocket: int = 5,
+    radii_model: str = 'protor',
     syntax: str = 'MolSysMT',
     skip_digestion: bool = False,
-) -> Tuple[List[Dict], DelaunayMesh]:
-    """
-    Detect pockets using a CASTp-inspired algorithm based on Alpha Spheres and Flow.
-    """
-    
-    # 1. Infrastructure and Normalization (Forced to NM for internal logic)
-    def _to_nm(val):
-        if puw.is_quantity(val):
-            try: return float(puw.get_value(val, to_unit='nm'))
-            except Exception: return float(puw.get_value(val))
-        try: return float(puw.get_value(puw.quantity(val), to_unit='nm'))
-        except Exception: return float(val) / 10.0 # Assume Angstroms if float
+    sea_level: float = 10.0,
+    epsilon: float = 1e-6,
+) -> Tuple[List[Dict], object]:
+    """Detect topographic features through the native CASTp workflow scaffold."""
 
-    probe_r_nm = _to_nm(probe_radius)
+    del syntax, skip_digestion, sea_level, epsilon
 
-    # 2. Prepare Molecular System
-    molsys, _, atom_indices, coords_nm = build_heavy_receptor_view(
-        molecular_system=molecular_system,
+    probe_radius_angstroms = _to_angstroms(probe_radius)
+
+    geometry = build_castp_geometry(
+        molecular_system,
         selection=selection,
         structure_indices=structure_indices,
-        syntax=syntax,
+        solvent_radius=probe_radius_angstroms,
+        radii_model=radii_model,
     )
-    
-    # 3. Generate Alpha Spheres (Voronoi/Delaunay) - Results in NM
-    alpha = DelaunayMesh(points=coords_nm)
-    
-    # 4. Identify Accessible Space
-    valid_sphere_indices = np.where(alpha.radii >= probe_r_nm)[0]
-    
-    if len(valid_sphere_indices) == 0:
-        return [], alpha
 
-    # 5. Connectivity and Flow Analysis
-    all_neighbors = alpha.get_neighbors(criterion='face')
-    valid_set = set(valid_sphere_indices)
-    adj_list = {}
-    
-    for idx in valid_sphere_indices:
-        neighbors = all_neighbors.get(idx, [])
-        valid_neighbors = [n for n in neighbors if n in valid_set]
-        adj_list[idx] = valid_neighbors
-        
-    # Find Connected Components
-    visited = set()
-    components = []
-    
-    for idx in valid_sphere_indices:
-        if idx not in visited:
-            component = []
-            stack = [idx]
-            visited.add(idx)
-            while stack:
-                curr = stack.pop()
-                component.append(curr)
-                for n in adj_list.get(curr, []):
-                    if n not in visited:
-                        visited.add(n)
-                        stack.append(n)
-            components.append(component)
-            
-    pockets_data = []
-    
-    for i, comp_indices in enumerate(components):
-        if len(comp_indices) < min_spheres_per_pocket:
-            continue
-            
-        # 5a. Volume (Topological)
-        valid_tets_indices = [alpha.points_of_alpha_sphere[s_idx] for s_idx in comp_indices]
-        vol = analytic_tetra_volume(coords_nm, valid_tets_indices)
-        
-        # 5b. Mouth Detection
-        mouth_faces = []
-        wall_faces = []
-        pocket_set = set(comp_indices)
-        
-        for s_idx in comp_indices:
-            neighbors = all_neighbors.get(s_idx, [])
-            s_atoms = set(alpha.points_of_alpha_sphere[s_idx])
-            found_faces = set()
-            
-            for n_idx in neighbors:
-                n_atoms = set(alpha.points_of_alpha_sphere[n_idx])
-                shared = tuple(sorted(list(s_atoms.intersection(n_atoms))))
-                if len(shared) == 3:
-                    found_faces.add(shared)
-                    if n_idx not in pocket_set:
-                        # Neighbor is protein or other pocket
-                        wall_faces.append(shared)
-            
-            # Boundary faces of triangulation are Mouths
-            atoms_list = sorted(list(s_atoms))
-            all_4_faces = [
-                tuple(sorted((atoms_list[0], atoms_list[1], atoms_list[2]))),
-                tuple(sorted((atoms_list[0], atoms_list[1], atoms_list[3]))),
-                tuple(sorted((atoms_list[0], atoms_list[2], atoms_list[3]))),
-                tuple(sorted((atoms_list[1], atoms_list[2], atoms_list[3])))
-            ]
-            for f in all_4_faces:
-                if f not in found_faces:
-                    mouth_faces.append(f)
+    raw_feature_records = build_castp_feature_records(
+        geometry,
+        probe_radius=probe_radius_angstroms,
+    )
 
-        # Calculate Areas (NM^2)
-        mouth_area = mouth_area_from_faces(mouth_faces, coords_nm)
-        wall_area = mouth_area_from_faces(wall_faces, coords_nm) 
-        
-        lining_atoms_local = set()
-        for s_idx in comp_indices:
-            lining_atoms_local.update(alpha.points_of_alpha_sphere[s_idx])
-        lining_atoms_global = [atom_indices[k] for k in lining_atoms_local]
-        
-        # Props calculation
-        try:
-            props = get_physicochemical_properties(molsys, lining_atoms_global)
-        except Exception:
-            props = {}
-        
-        pockets_data.append({
-            'id': i + 1,
-            'alpha_sphere_indices': comp_indices,
-            'atom_indices': lining_atoms_global,
-            'volume': vol,
-            'mouth_area': mouth_area,
-            'surface_area': wall_area + mouth_area,
-            'properties': props,
-            'score': vol,
-            'type': 'Void' if mouth_area == 0 else 'Pocket'
-        })
-        
-    pockets_data.sort(key=lambda x: x['volume'], reverse=True)
-    for i, p in enumerate(pockets_data):
-        p['id'] = i + 1
-        
-    return pockets_data, alpha
+    feature_records = []
+    for component in raw_feature_records:
+        feature_records.append(
+            _component_to_record(
+                component,
+                molecular_system,
+                feature_type=component['feature_type'],
+                component_index=int(component['id']),
+            )
+        )
+    feature_records.sort(key=lambda record: record['volume'], reverse=True)
+
+    return feature_records, geometry.mesh

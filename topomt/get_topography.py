@@ -196,30 +196,53 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
 
 def _run_castp(topo: Topography, **kwargs) -> Topography:
     from .methods.castp import castp
-    from .features.Pocket import Pocket
-    
-    # CASTp can be very memory intensive if probe is small
-    pockets_data, alpha = castp(topo.molecular_system, selection=topo.selection,
-                                 structure_indices=topo.structure_indices, **kwargs)
-    
-    # Skip the bulk solvent (usually the one with thousands of atoms)
-    # But keep it if it's the only one? No, usually users want real pockets.
-    for p in pockets_data:
-        atom_indices = p['atom_indices']
-        if len(atom_indices) > 1000: # Heuristic for bulk solvent in typical protein
-            continue
 
-        pocket_feature = Pocket(
-            atom_indices=sorted(atom_indices),
-            center=p.get('center'),
-            volume=p.get('volume', 0.0),
-            score=p.get('score', 0.0)
+    feature_records, mesh = castp(
+        topo.molecular_system,
+        selection=topo.selection,
+        structure_indices=topo.structure_indices,
+        **kwargs,
+    )
+
+    del mesh
+
+    for feature_index, record in enumerate(feature_records, start=1):
+        feature_type = record.get('feature_type', 'pocket')
+        source_id = record.get('source_id', f'castp:{feature_type}:{feature_index}')
+
+        parent_feature_id = topo.add_new_feature(
+            feature_type=feature_type,
+            atom_indices=sorted(record.get('atom_indices', [])),
+            source='castp',
+            source_id=source_id,
         )
-        if 'mouth_area' in p:
-            pocket_feature.mouth_area = p['mouth_area']
-            
-        topo.add_feature(pocket_feature)
-        
+        parent_feature = topo[parent_feature_id]
+
+        if 'center' in record and record['center'] is not None:
+            parent_feature.center = puw.quantity(record['center'], 'angstroms')
+        if 'volume' in record and record['volume'] is not None:
+            parent_feature.volume = puw.quantity(record['volume'], 'angstroms**3')
+        if 'mouth_area' in record and record['mouth_area'] is not None:
+            parent_feature.mouth_area = puw.quantity(record['mouth_area'], 'angstroms**2')
+        if 'n_mouths' in record:
+            parent_feature.n_mouths = record['n_mouths']
+        if 'tetrahedron_indices' in record:
+            parent_feature.tetrahedron_indices = record['tetrahedron_indices']
+        if 'properties' in record:
+            parent_feature.properties = record['properties']
+        if 'score' in record:
+            parent_feature.score = record['score']
+
+        for mouth in record.get('mouths', []):
+            mouth_feature_id = topo.add_new_feature(
+                feature_type='mouth',
+                atom_indices=sorted(mouth.get('atom_indices', [])),
+                source='castp',
+                source_id=f'{source_id}:mouth:{mouth["id"]}',
+                area=puw.quantity(mouth.get('area', 0.0), 'angstroms**2'),
+            )
+            topo.connect_features(mouth_feature_id, parent_feature_id)
+
     return topo
 
 def _run_pycasta(topo: Topography, **kwargs) -> Topography:

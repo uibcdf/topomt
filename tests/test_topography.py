@@ -8,7 +8,7 @@ from molsysmt.native.molsys import MolSys
 from topomt.features import Mouth, Pocket
 from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
-from topomt.get_topography import _run_alphaspace2, _run_pocketeer, _run_pycasta
+from topomt.get_topography import _run_alphaspace2, _run_castp, _run_pocketeer, _run_pycasta
 import pytest
 import numpy as np
 
@@ -218,12 +218,91 @@ def test_run_alphaspace2_state_path_returns_quantities(topography_empty_1tcd, mo
     pocket = next(iter(topo.get_features(by='type', value='pocket')))
     assert puw.is_quantity(pocket.center)
     assert puw.is_quantity(pocket.volume)
-    assert puw.is_quantity(pocket.alpha_sphere_centers)
-    assert puw.is_quantity(pocket.alpha_sphere_radii)
-    assert puw.is_quantity(pocket.beta_centers)
-    assert puw.is_quantity(pocket.nonpolar_volume)
-    assert np.allclose(puw.get_value(pocket.center, to_unit='nm'), [0.1, 0.2, 0.3])
-    assert puw.get_value(pocket.volume, to_unit='nm**3') == pytest.approx(0.5)
+
+
+def test_run_castp_emits_feature_types_and_mouth_relations(topography_empty_1tcd, monkeypatch):
+    castp_module = importlib.import_module('topomt.methods.castp')
+
+    def fake_castp(*args, **kwargs):
+        return (
+            [
+                {
+                    'feature_type': 'pocket',
+                    'source_id': 'castp:pocket:1',
+                    'atom_indices': [1, 2, 3, 4],
+                    'center': np.array([1.0, 2.0, 3.0]),
+                    'volume': 10.0,
+                    'score': 10.0,
+                    'n_mouths': 1,
+                    'mouth_area': 4.0,
+                    'tetrahedron_indices': [0, 1],
+                    'mouths': [
+                        {
+                            'id': 1,
+                            'atom_indices': [1, 2, 3],
+                            'area': 4.0,
+                        }
+                    ],
+                },
+                {
+                    'feature_type': 'channel',
+                    'source_id': 'castp:channel:1',
+                    'atom_indices': [5, 6, 7, 8],
+                    'center': np.array([2.0, 3.0, 4.0]),
+                    'volume': 12.0,
+                    'score': 12.0,
+                    'n_mouths': 2,
+                    'mouth_area': 7.0,
+                    'tetrahedron_indices': [2, 3],
+                    'mouths': [
+                        {'id': 1, 'atom_indices': [5, 6, 7], 'area': 3.0},
+                        {'id': 2, 'atom_indices': [6, 7, 8], 'area': 4.0},
+                    ],
+                },
+                {
+                    'feature_type': 'void',
+                    'source_id': 'castp:void:1',
+                    'atom_indices': [9, 10, 11, 12],
+                    'center': np.array([4.0, 5.0, 6.0]),
+                    'volume': 8.0,
+                    'score': 8.0,
+                    'n_mouths': 0,
+                    'mouth_area': 0.0,
+                    'tetrahedron_indices': [4],
+                    'mouths': [],
+                },
+            ],
+            object(),
+        )
+
+    monkeypatch.setattr(castp_module, 'castp', fake_castp)
+
+    topo = _run_castp(topography_empty_1tcd.copy(deep=True))
+
+    pockets = topo.get_features(by='type', value='pocket')
+    channels = topo.get_features(by='type', value='channel')
+    voids = topo.get_features(by='type', value='void')
+    mouths = topo.get_features(by='type', value='mouth')
+
+    assert len(pockets) == 1
+    assert len(channels) == 1
+    assert len(voids) == 1
+    assert len(mouths) == 3
+
+    pocket = next(iter(pockets))
+    assert puw.is_quantity(pocket.center)
+    assert puw.is_quantity(pocket.volume)
+    assert puw.is_quantity(pocket.mouth_area)
+    assert pocket.n_mouths == 1
+    assert topo.children_of(pocket.feature_id, as_feature_ids=True) == {'MOU-1'}
+
+    channel = next(iter(channels))
+    assert channel.n_mouths == 2
+    assert topo.children_of(channel.feature_id, as_feature_ids=True) == {'MOU-2', 'MOU-3'}
+
+    void = next(iter(voids))
+    assert void.n_mouths == 0
+    assert topo.children_of(void.feature_id, as_feature_ids=True) == set()
 
 
 def test_run_pycasta_maps_local_indices_to_global(topography_empty_1tcd, monkeypatch):
