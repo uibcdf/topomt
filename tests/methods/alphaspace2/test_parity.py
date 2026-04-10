@@ -6,7 +6,7 @@ import mdtraj as md
 import numpy as np
 import pytest
 
-from topomt.methods.alphaspace2 import (
+from topomt.third_party.alphaspace2.native import (
     _build_state,
     _compute_beta_scores,
     _contact_matrix,

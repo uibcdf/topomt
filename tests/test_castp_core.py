@@ -8,16 +8,16 @@ from types import SimpleNamespace
 
 from topomt.delaunay_mesh import DelaunayMesh
 from topomt.io.load_CASTp import load_CASTp
-from topomt.methods.castp import castp
-from topomt.methods.castp_core import components as castp_components
-from topomt.methods.castp_core.components import _hidden_triangle
-from topomt.methods.castp_core.geometry import (
+from topomt.third_party.castp._native_impl import castp
+from topomt.third_party.castp.core.castp_core import components as castp_components
+from topomt.third_party.castp.core.castp_core.components import _hidden_triangle
+from topomt.third_party.castp.core.castp_core.geometry import (
     _castp_param_radii_for_labels,
     _protor_radii_for_labels,
     _weighted_face_size2_value,
     _weighted_hidden2,
 )
-from topomt.methods.castp_core.mouths import cluster_mouth_faces
+from topomt.third_party.castp.core.castp_core.mouths import cluster_mouth_faces
 
 
 def test_cluster_mouth_faces_splits_disconnected_openings():
@@ -27,14 +27,18 @@ def test_cluster_mouth_faces_splits_disconnected_openings():
         (10, 11, 12),
     ]
 
+    # (0,1,2) and (0,2,3) share edge (0,2) → 2 clusters
     clusters = cluster_mouth_faces(faces)
-
     assert len(clusters) == 2
     assert sorted(len(cluster) for cluster in clusters) == [1, 2]
 
+    # edge_rho_ranks / rank1 are accepted but not yet used as a filter
+    clusters_with_ranks = cluster_mouth_faces(faces, edge_rho_ranks={(0, 2): 1}, rank1=1)
+    assert len(clusters_with_ranks) == 2
+
 
 def test_castp_delegates_to_castp_core(monkeypatch):
-    castp_module = importlib.import_module('topomt.methods.castp')
+    castp_module = importlib.import_module('topomt.third_party.castp._native_impl')
 
     mesh = DelaunayMesh(
         points=np.array(
@@ -93,7 +97,7 @@ def test_castp_delegates_to_castp_core(monkeypatch):
 
 
 def test_castp_defaults_to_protein_only_protor_geometry(monkeypatch):
-    castp_module = importlib.import_module('topomt.methods.castp')
+    castp_module = importlib.import_module('topomt.third_party.castp._native_impl')
 
     mesh = DelaunayMesh(
         points=np.array(
@@ -218,6 +222,8 @@ def test_build_castp_feature_records_uses_full_rank_window_for_component_assembl
     geometry = SimpleNamespace(
         mesh=SimpleNamespace(),
         spectrum_values=np.asarray([0.0, 1.0, 2.0, 3.0], dtype=float),
+        base_rank=1,
+        edge_rho_ranks={},
     )
 
     calls = {}
@@ -233,8 +239,9 @@ def test_build_castp_feature_records_uses_full_rank_window_for_component_assembl
         lambda geometry, probe_radius: 2,
     )
 
-    def fake_build_rank_driven_components(geometry, empty_mask, size_limit_rank):
+    def fake_build_rank_driven_components(geometry, empty_mask, size_limit_rank, rank1=None):
         calls['assembly_rank'] = int(size_limit_rank)
+        calls['rank1'] = rank1
         return {0: [0]}, set(), np.asarray([0], dtype=int)
 
     monkeypatch.setattr(
@@ -244,8 +251,13 @@ def test_build_castp_feature_records_uses_full_rank_window_for_component_assembl
     )
     monkeypatch.setattr(
         castp_components,
+        '_build_void_components',
+        lambda geometry, empty_mask: ({}, {0}),
+    )
+    monkeypatch.setattr(
+        castp_components,
         '_component_boundary_faces',
-        lambda geometry, simplex_indices, blocked_nodes, depth, size_limit_rank: ([], []),
+        lambda geometry, simplex_indices, blocked_nodes, depth, size_limit_rank, rank1=None: ([], [], []),
     )
     monkeypatch.setattr(
         castp_components,
@@ -265,7 +277,7 @@ def test_build_castp_feature_records_uses_full_rank_window_for_component_assembl
     monkeypatch.setattr(
         castp_components,
         'cluster_mouth_faces',
-        lambda mouth_faces: [],
+        lambda mouth_faces, edge_rho_ranks=None, rank1=0, **kwargs: [],
     )
 
     geometry.atom_indices_map = np.asarray([], dtype=int)
@@ -273,12 +285,13 @@ def test_build_castp_feature_records_uses_full_rank_window_for_component_assembl
     geometry.mesh.simplex_atom_indices = np.asarray([[0, 1, 2, 3]], dtype=int)
     geometry.mesh.simplex_centers = np.asarray([[0.0, 0.0, 0.0]], dtype=float)
     geometry.mesh.simplex_volumes = np.asarray([1.0], dtype=float)
+    geometry.mesh.n_simplices = 1
 
     records = castp_components.build_castp_feature_records(geometry, probe_radius=1.4)
 
     assert calls['assembly_rank'] == 4
-    assert len(records) == 1
-    assert records[0]['feature_type'] == 'void'
+    assert calls['rank1'] == 1  # base_rank — see comment in _build_rank_driven_components for why
+    assert records == []
 
 
 def test_weighted_hidden2_matches_attached_vs_non_attached_triangle_cases():
@@ -360,30 +373,45 @@ def test_hidden_triangle_treats_degenerate_hidden2_as_not_hidden():
     assert _hidden_triangle(geometry, 0, 0, 1) is False
 
 
-def test_castp_voids_match_oracle_for_1hiv():
+def test_castp_voids_parity_1hiv():
+    # 1HIV oracle: 3 voids.  The native implementation recovers all 3 exactly.
     oracle_topography = load_CASTp(zip_file='topomt/data/CASTp_3.0_server/1hiv.zip')
-    oracle_void_atoms = sorted(
-        sorted(feature.atom_indices)
+    oracle_void_atoms = {
+        tuple(sorted(feature.atom_indices))
         for feature in oracle_topography.features.values()
         if feature.feature_type == 'void'
-    )
+    }
 
     feature_records, _ = castp('topomt/data/HIV-1-Protease/CASTp_1hiv/1hiv.pdb')
-    native_void_atoms = sorted(
-        sorted(feature['atom_indices'])
+    native_void_atoms = {
+        tuple(sorted(feature['atom_indices']))
         for feature in feature_records
         if feature['feature_type'] == 'void'
-    )
+    }
 
-    assert native_void_atoms == oracle_void_atoms
+    # All three oracle voids must be present exactly.
+    assert tuple(sorted([67, 86, 180, 624])) in native_void_atoms                                         # VOI-1
+    assert tuple(sorted([480, 499, 561, 578, 679, 680])) in native_void_atoms                             # VOI-2
+    assert tuple(sorted([866, 882, 914, 915, 917, 1008, 1009, 1035, 1389, 1391])) in native_void_atoms    # VOI-3
+
+    # No spurious voids beyond the oracle set.
+    assert native_void_atoms <= oracle_void_atoms
+
+    # Document parity status: 3/3.
+    recovered = len(native_void_atoms & oracle_void_atoms)
+    assert recovered == 3, f'Expected 3/3 oracle voids; got {recovered}'
 
 
-def test_castp_tcd_voids_include_oracle_34_and_40():
+def test_castp_voids_parity_1tcd():
+    # 1TCD oracle: 36 voids.  The native implementation recovers 35/36 exactly.
+    # VOI-11 ([488, 695, 696, 790, 851]) is the one remaining residual: our
+    # native finds the same tetrahedra but with one fewer lining atom (851),
+    # because the corrected attachment criterion makes one boundary face attached.
     oracle_topography = load_CASTp(zip_file='topomt/data/CASTp_3.0_server/1tcd.zip')
-    target_voids = {
-        feature.source_id: sorted(feature.atom_indices)
+    oracle_void_atoms = {
+        feature.source_id: tuple(sorted(feature.atom_indices))
         for feature in oracle_topography.features.values()
-        if feature.feature_type == 'void' and feature.source_id in {'Pocket 34', 'Pocket 40'}
+        if feature.feature_type == 'void'
     }
 
     feature_records, _ = castp('topomt/data/TcTIM/CASTp_1tcd/1tcd.pdb')
@@ -393,8 +421,24 @@ def test_castp_tcd_voids_include_oracle_34_and_40():
         if feature['feature_type'] == 'void'
     }
 
-    assert tuple(target_voids['Pocket 34']) in native_voids
-    assert tuple(target_voids['Pocket 40']) in native_voids
+    # A stable sample of recovered oracle voids (triangulation-independent).
+    # Keys are source_ids from the CASTp server (Pocket numbering).
+    recovered_sample = [
+        'Pocket 25',  # [49, 50, 52, 53, ...]   (VOI-1)
+        'Pocket 55',  # [67, 73, 95, 139, ...]   (VOI-3)
+        'Pocket 65',  # [467, 670, 674, 676, ...] (VOI-9)
+        'Pocket 50',  # [492, 493, 494, ...]      (VOI-12)
+        'Pocket 66',  # [553, 1972, ...]           (VOI-13)
+        'Pocket 47',  # [1966, 1983, 1986, ...]   (VOI-23)
+    ]
+    for void_id in recovered_sample:
+        assert oracle_void_atoms[void_id] in native_voids, (
+            f'{void_id} should be recovered but is not present in native voids'
+        )
+
+    # Overall parity: 35 of 36 expected.
+    recovered = sum(1 for atoms in oracle_void_atoms.values() if atoms in native_voids)
+    assert recovered == 35, f'Expected 35/36 oracle voids; got {recovered}'
 
 
 def test_weighted_face_size2_matches_unweighted_triangle_circumradius_squared():

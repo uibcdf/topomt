@@ -7,7 +7,7 @@ import pytest
 
 from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
-from topomt.wrappers.alphaspace2.integration import (
+from topomt.third_party.alphaspace2.library import (
     _patch_alphaspace2_mdtraj_sasa,
     _patch_alphaspace2_numpy_compatibility,
 )

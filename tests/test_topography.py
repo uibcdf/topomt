@@ -119,7 +119,7 @@ def test_demo_supports_uppercase_castp_keys():
 
 
 def test_run_pocketeer_maps_local_indices_to_global(topography_empty_1tcd, monkeypatch):
-    pocketeer_module = importlib.import_module('topomt.methods.pocketeer')
+    pocketeer_module = importlib.import_module('topomt.third_party.pocketeer._native_impl')
     PocketeerPocket = pocketeer_module.PocketeerPocket
     PocketeerSphere = pocketeer_module.PocketeerSphere
 
@@ -158,7 +158,7 @@ def test_run_pocketeer_maps_local_indices_to_global(topography_empty_1tcd, monke
 
 
 def test_run_alphaspace2_uses_filtered_atom_index_mapping(topography_empty_1tcd, monkeypatch):
-    alphaspace2_module = importlib.import_module('topomt.methods.alphaspace2')
+    alphaspace2_module = importlib.import_module('topomt.third_party.alphaspace2.native')
     get_topography_module = importlib.import_module('topomt.get_topography')
 
     class FakeKDTree:
@@ -187,7 +187,7 @@ def test_run_alphaspace2_uses_filtered_atom_index_mapping(topography_empty_1tcd,
 
 
 def test_run_alphaspace2_state_path_returns_quantities(topography_empty_1tcd, monkeypatch):
-    alphaspace2_module = importlib.import_module('topomt.methods.alphaspace2')
+    alphaspace2_module = importlib.import_module('topomt.third_party.alphaspace2.native')
 
     def fake_alphaspace2(*args, **kwargs):
         state = object()
@@ -221,7 +221,7 @@ def test_run_alphaspace2_state_path_returns_quantities(topography_empty_1tcd, mo
 
 
 def test_run_castp_emits_feature_types_and_mouth_relations(topography_empty_1tcd, monkeypatch):
-    castp_module = importlib.import_module('topomt.methods.castp')
+    castp_module = importlib.import_module('topomt.third_party.castp._native_impl')
 
     def fake_castp(*args, **kwargs):
         return (
@@ -306,7 +306,7 @@ def test_run_castp_emits_feature_types_and_mouth_relations(topography_empty_1tcd
 
 
 def test_run_pycasta_maps_local_indices_to_global(topography_empty_1tcd, monkeypatch):
-    pycasta_module = importlib.import_module('topomt.methods.pycasta')
+    pycasta_module = importlib.import_module('topomt.third_party.pycasta._native_impl')
 
     def fake_pycasta(*args, **kwargs):
         pockets_tet = [[0]]
@@ -346,7 +346,7 @@ def test_get_topography_argdigest_standardizes_engine_and_structure_index(monkey
 
 
 def test_run_pocketeer_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
-    integration_module = importlib.import_module('topomt.wrappers.pocketeer.integration')
+    provider_module = importlib.import_module('topomt.third_party.pocketeer.api')
     get_topography_module = importlib.import_module('topomt.get_topography')
 
     called = {}
@@ -360,7 +360,7 @@ def test_run_pocketeer_wrapper_routes_to_wrapper_integration(topography_empty_1t
             structure_indices=kwargs['structure_indices'],
         )
 
-    monkeypatch.setattr(integration_module, 'get_topography_with_pocketeer', fake_wrapper)
+    monkeypatch.setattr(provider_module, 'get_topography', fake_wrapper)
 
     topo = get_topography_module._run_pocketeer(
         topography_empty_1tcd.copy(deep=True),
@@ -376,7 +376,7 @@ def test_run_pocketeer_wrapper_routes_to_wrapper_integration(topography_empty_1t
 
 
 def test_run_alphaspace2_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
-    integration_module = importlib.import_module('topomt.wrappers.alphaspace2.integration')
+    integration_module = importlib.import_module('topomt.third_party.alphaspace2.library')
     get_topography_module = importlib.import_module('topomt.get_topography')
 
     called = {}
@@ -390,7 +390,7 @@ def test_run_alphaspace2_wrapper_routes_to_wrapper_integration(topography_empty_
             structure_indices=kwargs['structure_indices'],
         )
 
-    monkeypatch.setattr(integration_module, 'get_topography_with_alphaspace2', fake_wrapper)
+    monkeypatch.setattr(integration_module, 'get_topography', fake_wrapper)
 
     topo = get_topography_module._run_alphaspace2(
         topography_empty_1tcd.copy(deep=True),
@@ -408,7 +408,7 @@ def test_run_alphaspace2_wrapper_routes_to_wrapper_integration(topography_empty_
 
 
 def test_run_pycasta_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
-    integration_module = importlib.import_module('topomt.wrappers.pycasta.integration')
+    provider_module = importlib.import_module('topomt.third_party.pycasta.api')
     get_topography_module = importlib.import_module('topomt.get_topography')
 
     called = {}
@@ -422,7 +422,7 @@ def test_run_pycasta_wrapper_routes_to_wrapper_integration(topography_empty_1tcd
             structure_indices=kwargs['structure_indices'],
         )
 
-    monkeypatch.setattr(integration_module, 'get_topography_with_pycasta', fake_wrapper)
+    monkeypatch.setattr(provider_module, 'get_topography', fake_wrapper)
 
     topo = get_topography_module._run_pycasta(
         topography_empty_1tcd.copy(deep=True),
@@ -448,8 +448,8 @@ def test_get_topography_wrapper_kwargs_do_not_emit_digest_not_digested_warning(m
         )
 
     monkeypatch.setattr(
-        importlib.import_module('topomt.wrappers.pocketeer.integration'),
-        'get_topography_with_pocketeer',
+        importlib.import_module('topomt.third_party.pocketeer.api'),
+        'get_topography',
         fake_wrapper,
     )
 
@@ -473,7 +473,7 @@ def test_get_topography_wrapper_kwargs_do_not_emit_digest_not_digested_warning(m
 
 
 def test_pocketeer_sasa_warning_uses_topomt_catalog_warning():
-    pocketeer_module = importlib.import_module('topomt.methods.pocketeer')
+    pocketeer_module = importlib.import_module('topomt.third_party.pocketeer._native_impl')
     smonitor_module = importlib.import_module('topomt._private.smonitor')
     coords_nm = np.zeros((3, 3), dtype=float)
 

@@ -31,8 +31,8 @@ from .get_pockets import get_pockets, show_pockets
 
 from . import io
 
-from . import methods
-from . import wrappers
+from . import third_party
+from . import dfnd
 from . import tools
 
 __all__ = ['Topography', 'DelaunayMesh', 'WeightedDelaunayMesh', 'get_delaunay_mesh']

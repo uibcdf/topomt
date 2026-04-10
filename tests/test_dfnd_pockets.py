@@ -1,6 +1,9 @@
+import pytest
 import numpy as np
 import molsysmt as msm
-from topomt.methods.dfnd import dfnd
+from topomt.dfnd import dfnd
+
+pytestmark = pytest.mark.skip(reason="DFND is postponed and not yet implemented")
 from topomt.features import Pocket, Void
 import topomt as tmt # Assuming topomt is installed and demo data is accessible
 

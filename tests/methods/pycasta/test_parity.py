@@ -3,7 +3,7 @@ import sys
 
 import pytest
 
-from topomt.methods.pycasta import pycasta
+from topomt.third_party.pycasta._native_impl import pycasta
 
 
 UPSTREAM_ROOT = Path('/home/diego/repos@others/pycasta/src/pycasta')

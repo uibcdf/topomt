@@ -9,7 +9,7 @@ import topomt as tmt
 import molsysmt as msm
 from topomt import pyunitwizard as puw
 
-from topomt.methods.fpocket4 import (
+from topomt.third_party.fpocket._native_impl import (
     ASPH_MAX_SIZE_NM,
     ASPH_MIN_SIZE_NM,
     PRECISION_TOLERANCE_NM,
@@ -18,16 +18,16 @@ from topomt.methods.fpocket4 import (
     _prepare_receptor,
     fpocket4,
 )
-from topomt.wrappers.fpocket.integration import load_topography_from_fpocket_output
-from topomt.wrappers.fpocket.parser import _parse_pqr_charge_and_radius, parse_fpocket_output
-from topomt.wrappers.fpocket.runner import run_fpocket
+from topomt.third_party.fpocket._legacy_cli import load_topography_from_fpocket_output
+from topomt.third_party.fpocket.parser import _parse_pqr_charge_and_radius, parse_fpocket_output
+from topomt.third_party.fpocket.runner import run_fpocket
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 FP_3LKF_PDB = REPO_ROOT / 'topomt' / 'data' / 'fpocket4' / 'sample' / '3LKF.pdb'
 FP_3LKF_OUT = REPO_ROOT / 'topomt' / 'data' / 'fpocket4' / 'sample' / '3LKF_out'
-FP_1TCD_PDB = REPO_ROOT / 'topomt' / 'wrappers' / 'fpocket' / '1tcd.pdb'
-FP_1TCD_OUT = REPO_ROOT / 'topomt' / 'wrappers' / 'fpocket' / '1tcd_out'
+FP_1TCD_PDB = REPO_ROOT / 'topomt' / 'third_party' / 'fpocket' / 'testdata' / '1tcd.pdb'
+FP_1TCD_OUT = REPO_ROOT / 'topomt' / 'third_party' / 'fpocket' / 'testdata' / '1tcd_out'
 
 PDB_PARITY_SYSTEMS = [
     ('1TCD.pdb', Path(tmt.demo['TcTIM']['1TCD.pdb'])),
@@ -259,7 +259,7 @@ def test_fpocket4_deep_validation_cases(label, source_pdb):
 
 
 def test_fpocket4_native_implementation_does_not_require_wrapper(monkeypatch):
-    fpocket4_module = importlib.import_module('topomt.methods.fpocket4')
+    fpocket4_module = importlib.import_module('topomt.third_party.fpocket._native_impl')
 
     def fail_if_called(*args, **kwargs):
         raise AssertionError('wrapper path should not be used by the native implementation')
@@ -273,7 +273,7 @@ def test_fpocket4_native_implementation_does_not_require_wrapper(monkeypatch):
 
 def test_fpocket4_argdigest_normalizes_structure_indices_for_native_path(monkeypatch):
     captured = {}
-    fpocket4_module = importlib.import_module('topomt.methods.fpocket4')
+    fpocket4_module = importlib.import_module('topomt.third_party.fpocket._native_impl')
 
     def fake_build_native_state(**kwargs):
         captured.update(kwargs)

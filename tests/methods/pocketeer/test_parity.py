@@ -6,7 +6,7 @@ import molsysmt as msm
 import numpy as np
 import pytest
 
-from topomt.methods.pocketeer import pocketeer
+from topomt.third_party.pocketeer._native_impl import pocketeer
 
 POCKETEER_REPO = Path.home() / 'repos@others' / 'pocketeer'
 

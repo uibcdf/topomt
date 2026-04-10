@@ -6,7 +6,7 @@ import inspect
 
 import pytest
 import topomt as tmt
-from topomt.methods.castp import castp
+from topomt.third_party.castp._native_impl import castp
 
 
 def test_castp_signature_keeps_canonical_probe_default():
