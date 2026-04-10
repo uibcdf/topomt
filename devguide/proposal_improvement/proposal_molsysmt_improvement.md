@@ -27,7 +27,7 @@ centralized.
   overlap/count statistics.
 
 If MolSysMT accepts the proposal, TopoMT would import these helpers instead of
-keeping a local copy in `topomt/methods/alphaspace2.py`. This is the right place to
+keeping a local copy in `topomt/third_party/alphaspace2/native.py`. This is the right place to
 record the idea so we can follow up with a PR or issue in MolSysMT when the need
 arises.
 
@@ -166,3 +166,76 @@ Related context:
 - it is separate from a different `pycasta` parity residual on `1apu.pdb`,
   which is about upstream `ATOM/HETATM` preprocessing semantics rather than a
   MolSysMT parser failure.
+
+## Proposal: Fix PDB parsing failure on CASTp server `3ptb.pdb`
+
+Status: open. This is currently blocking full CASTp 3.0 zip-fixture coverage in
+TopoMT.
+
+During the new CASTp parity-import work, the CASTp 3.0 server export for
+`3PTB` exposed another MolSysMT PDB-ingestion failure.
+
+### Symptom
+
+The CASTp zip file:
+
+- `topomt/data/CASTp_3.0_server/3ptb.zip`
+
+contains a `3ptb.pdb` that should be parseable by MolSysMT, but currently
+fails during:
+
+```python
+msm.convert(pdb_path, to_form='molsysmt.MolSys')
+```
+
+Observed exception:
+
+```python
+AttributeError: 'NoneType' object has no attribute 'append'
+```
+
+### Minimal reproduction
+
+```python
+from pathlib import Path
+import tempfile
+import zipfile
+import molsysmt as msm
+
+zip_path = Path('topomt/data/CASTp_3.0_server/3ptb.zip')
+
+with tempfile.TemporaryDirectory(prefix='topomt_castp_') as tmp:
+    with zipfile.ZipFile(zip_path) as zf:
+        zf.extractall(tmp)
+    pdb_path = Path(tmp) / '3ptb.pdb'
+    msm.convert(pdb_path, to_form='molsysmt.MolSys')
+```
+
+### Current traceback reading
+
+The traceback currently points to:
+
+- `molsysmt.native.pdb_file_handler.parse_format33(...)`
+
+and specifically to:
+
+- `pdb.title.sprsde.append(superseded)`
+
+which suggests another uninitialized title/subrecord accumulator path, this
+time for `SPRSDE`.
+
+### Why this matters
+
+- it blocks the CASTp parity-import battery from covering all downloaded CASTp
+  3.0 server cases;
+- it is not a CASTp algorithm problem;
+- and it means MolSysMT still rejects practically relevant PDB files that come
+  directly from a widely used structural-biology server workflow.
+
+### Expected fix direction
+
+- initialize the `SPRSDE` accumulator or container path robustly before
+  appending;
+- add a regression test using `3ptb.pdb` or a reduced reproducer containing
+  the same `SPRSDE` pattern;
+- verify that the fix does not regress already supported PDB files.

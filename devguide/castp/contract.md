@@ -99,9 +99,9 @@ Important import semantics:
 In particular, `mouthInfo` may contain rows with `N_mth = 0`, but only mouths
 present in `.mouth` should materialize as `Mouth` features in `Topography`.
 
-## Current status of `topomt.methods.castp`
+## Current status of `topomt.third_party.castp._native_impl`
 
-The current [topomt/methods/castp.py](/home/diego/repos@uibcdf/topomt/topomt/methods/castp.py)
+The current [topomt/third_party/castp/_native_impl.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/_native_impl.py)
 implementation should be treated as a preliminary `CASTp-like` prototype, not
 as a faithful CASTp implementation.
 
@@ -151,7 +151,7 @@ This is already a real, testable target.
 
 ### 2. Native-method parity
 
-`topomt.methods.castp.castp()` should eventually be validated against CASTp
+`topomt.third_party.castp._native_impl.castp()` should eventually be validated against CASTp
 server exports for a curated battery of PDB systems.
 
 The first requested expansion set is:

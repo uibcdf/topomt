@@ -49,14 +49,14 @@ It should be treated as legacy until it is either:
 - deprecated explicitly;
 - or rebuilt on top of the current public model.
 
-### `wrappers/`
+### `third_party/`
 
-[topomt/wrappers/](/home/diego/repos@uibcdf/topomt/topomt/wrappers) contains useful code and
-reference material, especially around fpocket, but it is not yet clearly
-positioned relative to the higher-level method API.
+[topomt/third_party/](/home/diego/repos@uibcdf/topomt/topomt/third_party) now contains the
+provider integrations and backend-specific adapters that previously lived under
+legacy wrapper paths.
 
-This area should be treated as transitional until its role is described more
-explicitly.
+This area is part of the active runtime surface, but most provider internals
+should still be treated as integration code rather than long-term stable API.
 
 ## Experimental areas
 

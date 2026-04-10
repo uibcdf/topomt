@@ -66,7 +66,7 @@ This includes:
 - Extension of fpocket parity validation from the currently supported PDB set to
   additional inputs and, later, to canonical `bcif.gz` inputs.
 - Separation of wrapper-backed integrations from the long-term native-method
-  targets in `topomt.methods`.
+  targets in the old native-method namespace.
 - `DelaunayMesh` is now the active geometric keystone for the shared
   Delaunay/tetrahedral substrate.
 - `DFND` already uses shared face access through `DelaunayMesh`, and
@@ -105,7 +105,7 @@ This includes:
 - `topomt.tools.geometry.planes` and `topomt.tools.geometry.sampling` are now
   also real, hosting `clip_mesh_with_plane` and
   `union_volume_monte_carlo`.
-- The old `topomt.methods.pocket_geometry` bridge module has been removed.
+- The old `pocket_geometry` bridge module has been removed.
   Its stable contents now live under `topomt.tools.geometry`,
   `topomt.tools.tessellation`, and `topomt.tools.features`.
 - `DelaunayMesh` now also exposes an explicit simplex-facing view
@@ -241,7 +241,7 @@ This includes:
   bonus tuned to stay within the 2.5-point tolerance requested by the parity
   tests.
 - `pocketeer`, `alphaspace2`, and `pycasta` now also have initial
-  wrapper-backed `Topography` routes in `topomt.wrappers.*`, reachable through
+  wrapper-backed `Topography` routes now organized under `topomt.third_party.*`, reachable through
   `get_topography(..., implementation='wrapper')`. These are currently
   intended as integration paths rather than parity-certified primary routes.
 - The new `alphaspace2` wrapper path already required local compatibility

@@ -2,7 +2,7 @@
 
 ## Purpose
 
-This document records the current parity status of `topomt.methods.fpocket4`
+This document records the current parity status of `topomt.third_party.fpocket._native_impl`
 against the audited local source build compiled from:
 
 - `../../repos@others/fpocket`

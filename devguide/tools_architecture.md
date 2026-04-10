@@ -4,7 +4,8 @@
 
 This document records the internal organization of `topomt.tools` so that
 geometry, tessellation logic, feature-specific characterization, and lightweight
-visualization helpers stop accumulating inside `topomt/methods/pocket_geometry.py`
+visualization helpers stop accumulating inside the removed legacy
+`pocket_geometry.py` bridge module
 as a mixed-responsibility module.
 
 The goal is not to remove useful functionality. The goal is to classify it,
@@ -14,7 +15,8 @@ define its semantic scope, and place it under a clearer architectural contract.
 
 TopoMT needs a distinction between:
 
-- `topomt.methods`: algorithms that detect or construct topographical features
+- `topomt.dfnd`: native TopoMT algorithm line
+- `topomt.third_party`: provider-backed methods and adapters
   from a molecular system;
 - `topomt.tools`: reusable analysis and characterization utilities that operate
   on geometry, tessellation data, or already detected features.
@@ -290,7 +292,7 @@ The following slices are now already materialized in the repository:
   as the first extracted shared overlap helper module.
 
 This migration is now complete enough that the old
-`topomt.methods.pocket_geometry` bridge module has been removed. `castp` and
+The legacy `pocket_geometry` bridge module has been removed. `castp` and
 the other geometry-consuming code paths are expected to import directly from
 `topomt.tools`.
 
@@ -365,7 +367,7 @@ block. They should be split according to whether they describe:
 
 Those responsibilities belong in:
 
-- `topomt.methods.*`
+- `topomt.dfnd.*`
 - `topomt.tools.features.*`
 - `topomt.tools.tessellation.*`
 - `DelaunayFlowNetwork` when they are part of DFND flow semantics
@@ -386,7 +388,7 @@ Typical examples:
 
 ## Migration table: `pocket_geometry.py` -> `topomt.tools`
 
-The current `topomt/methods/pocket_geometry.py` mixes general geometry,
+The removed `pocket_geometry.py` bridge module mixed general geometry,
 tessellation logic, feature characterization, and lightweight visualization.
 The migration should split those responsibilities as follows.
 

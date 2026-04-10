@@ -5,7 +5,12 @@
 This document describes a from-scratch implementation plan for a faithful
 native `castp` path in TopoMT.
 
-It is intentionally separated from the current `topomt.methods.castp` prototype
+Latest restart checkpoint:
+
+- [../castp/checkpoint_2026_04_07.md](../castp/checkpoint_2026_04_07.md)
+- [../castp/checkpoint_2026_04_05.md](../castp/checkpoint_2026_04_05.md) (previous)
+
+It is intentionally separated from the current `topomt.third_party.castp._native_impl` prototype
 and from the DFND line of work.
 
 The goal is to implement the classical CAST/CASTp workflow, not a
@@ -53,7 +58,7 @@ The canonical default probe radius remains:
 This plan is **not**:
 
 - a continuation of the current connected-components prototype in
-  [topomt/methods/castp.py](/home/diego/repos@uibcdf/topomt/topomt/methods/castp.py);
+  [topomt/third_party/castp/_native_impl.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/_native_impl.py);
 - a DFND implementation under another name;
 - or a proposal to base CASTp primarily on `R_insphere` / `R_gate` semantics.
 
@@ -162,7 +167,7 @@ resolved against:
 
 The implementation should be split into small pieces.
 
-### `topomt/methods/castp.py`
+### `topomt/third_party/castp/_native_impl.py`
 
 Public method entry point.
 
@@ -176,7 +181,7 @@ Responsibilities:
 
 This file should stay thin.
 
-### `topomt/methods/castp_core/geometry.py`
+### `topomt/third_party/castp/core/castp_core/geometry.py`
 
 Responsibilities:
 
@@ -193,7 +198,7 @@ Important note:
 - but the geometry choice must stay explicit and testable instead of being
   hidden.
 
-### `topomt/methods/castp_core/discrete_flow.py`
+### `topomt/third_party/castp/core/castp_core/discrete_flow.py`
 
 Responsibilities:
 
@@ -204,7 +209,7 @@ Responsibilities:
 
 This is the heart of the classical CAST workflow.
 
-### `topomt/methods/castp_core/components.py`
+### `topomt/third_party/castp/core/castp_core/components.py`
 
 Responsibilities:
 
@@ -212,7 +217,7 @@ Responsibilities:
 - classify components as pocket / cavity / channel;
 - compute mouth counts.
 
-### `topomt/methods/castp_core/mouths.py`
+### `topomt/third_party/castp/core/castp_core/mouths.py`
 
 Responsibilities:
 
@@ -221,7 +226,7 @@ Responsibilities:
 - identify rim atoms;
 - compute mouth areas and lengths/circumferences.
 
-### `topomt/methods/castp_core/metrics.py`
+### `topomt/third_party/castp/core/castp_core/metrics.py`
 
 Responsibilities:
 

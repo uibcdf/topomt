@@ -15,7 +15,7 @@ The native `alphaspace2` work is no longer at the geometry-bootstrap stage.
 
 It already has:
 
-- a native state builder in `topomt.methods.alphaspace2`;
+- a native state builder in `topomt.third_party.alphaspace2.native`;
 - shared geometry through the new `topomt.delaunay_mesh.DelaunayMesh`
   substrate and its alpha-sphere-derived view;
 - native alpha filtering by radius;
@@ -43,7 +43,7 @@ It is:
 The work now has a second concrete stage beyond the apo baseline:
 
 - a first native Vina-aware score path is already implemented in
-  `topomt.methods.alphaspace2`;
+  `topomt.third_party.alphaspace2.native`;
 - the small upstream typing/scoring tables are now vendored under
   `topomt/data/alphaspace2/`;
 - the native path now accepts either `adv_atom_types` or `pdbqt_file` to

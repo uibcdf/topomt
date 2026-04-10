@@ -83,21 +83,20 @@ The relevant non-DFND engines are:
 In addition, `topomt.tools` now acts as the shared geometry, tessellation, and
 feature-characterization layer used by those engines.
 
-## `methods/` versus `wrappers/`
+## `dfnd/` versus `third_party/`
 
 TopoMT needs a strict architectural distinction between native methods and
 external integrations.
 
-### `topomt/methods/`
+### `topomt/dfnd/`
 
-This package should contain TopoMT's own implementations of the supported
-engines.
+This package is the current home of TopoMT's own native method line.
 
 That means:
 
-- methods should be runnable without requiring the original upstream package or
+- native methods should be runnable without requiring the original upstream package or
   binary at runtime;
-- methods may be inspired by, validated against, or benchmarked against the
+- native methods may be inspired by, validated against, or benchmarked against the
   original engine;
 - but the production implementation should belong to TopoMT itself.
 - a faithful reimplementation does not mean copying upstream code line by line;
@@ -105,9 +104,9 @@ That means:
   own code, data model, and ecosystem tools such as `molsysmt`,
   `pyunitwizard`, and the common feature contracts.
 
-### `topomt/wrappers/`
+### `topomt/third_party/`
 
-This package should contain helper integrations with external tools.
+This package now contains provider-organized integrations with external tools.
 
 Typical responsibilities include:
 
@@ -116,19 +115,19 @@ Typical responsibilities include:
 - loading third-party result folders;
 - and supporting parity testing or import workflows.
 
-Wrappers are useful and should remain available, but they are not the target
-architectural endpoint for `topomt.methods`.
+These integrations are part of the runtime surface, but they are no longer
+split into a separate top-level `wrappers/` tree.
 
 ### Practical reading for the current codebase
 
-At the moment, the repository contains a mix of native methods and
-wrapper-backed transitional paths.
+The repository now separates native TopoMT code from provider integrations more
+explicitly.
 
 The intended end state is:
 
-- `topomt.methods.*`: native TopoMT implementations;
-- `topomt.wrappers.*`: external-tool integrations used for comparison, testing,
-  import, or auxiliary workflows.
+- `topomt.dfnd.*`: native TopoMT implementation work;
+- `topomt.third_party.*`: external-provider integrations and backend-specific
+  access paths.
 
 ## DFND within the architecture
 

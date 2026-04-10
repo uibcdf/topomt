@@ -12,7 +12,7 @@ the current understanding from terminal history.
 
 This checkpoint is about the native path in:
 
-- `topomt.methods.fpocket4`
+- `topomt.third_party.fpocket._native_impl`
 - `topomt.delaunay_mesh`
 
 and its parity relationship with the upstream `fpocket` binary.
@@ -300,7 +300,7 @@ Current status:
 
 - the input atom-selection semantics are now validated against the audited
   upstream source behavior;
-- but part of that logic is still expressed locally in `topomt.methods.fpocket4`
+- but part of that logic is still expressed locally in `topomt.third_party.fpocket._native_impl`
   through explicit masking and local filtering helpers;
 - this was acceptable during the audit phase because it made upstream-fidelity
   debugging easier.

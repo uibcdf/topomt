@@ -18,7 +18,7 @@ The evaluation should eventually cover:
 
 - native TopoMT implementations;
 - wrapper-backed third-party engines;
-- future engines added to `topomt.methods.*` or `topomt.wrappers.*`.
+- future engines added to `topomt.dfnd.*` or `topomt.third_party.*`.
 
 The question is not only whether an engine can run faster. The question is also
 which parts of its workflow can be parallelized or offloaded without breaking

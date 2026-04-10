@@ -10,17 +10,17 @@ This page gives a short map of the repository from a developer perspective.
 - `topomt/features/`
   Feature hierarchy and concrete feature classes.
 
-- `topomt/methods/`
-  Detection engines and geometry-related production logic.
+- `topomt/dfnd/`
+  Native TopoMT method line.
+
+- `topomt/third_party/`
+  Third-party provider integrations and backend adapters.
 
 - `topomt/io/`
   Loaders for external results, currently centered on CASTp.
 
 - `topomt/delaunay_mesh.py`
   Shared Delaunay substrate and alpha-sphere-derived geometric view.
-
-- `topomt/wrappers/`
-  Wrapper-oriented code, especially around fpocket artifacts.
 
 - `topomt/_private/`
   Internal utilities, digestion helpers, diagnostics metadata, and support

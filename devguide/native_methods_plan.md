@@ -5,11 +5,11 @@
 This document defines how TopoMT should evolve its engine implementations under
 the following rule:
 
-- `topomt.methods.*` should contain native TopoMT implementations;
-- `topomt.wrappers.*` may integrate external binaries or libraries for import,
-  auditing, and parity testing;
+- `topomt.dfnd.*` is the current native TopoMT method line;
+- `topomt.third_party.*` integrates external binaries, libraries, servers,
+  persisted outputs, and parity helpers;
 - parity against upstream tools is required for validation, but upstream code is
-  not a runtime dependency target for `topomt.methods`.
+  not a runtime dependency target for native TopoMT methods.
 
 The goal is not to copy upstream source code. The goal is to reproduce the
 algorithmic semantics while using TopoMT and MolSysSuite building blocks where
@@ -40,10 +40,10 @@ Progress note:
 
 - `fpocket4` already had an explicit wrapper-backed `Topography` path;
 - `pocketeer`, `alphaspace2`, and `pycasta` now also have first wrapper-backed
-  `Topography` adapters under `topomt.wrappers.*`, intended for users who want
+  `Topography` adapters under `topomt.third_party.*`, intended for users who want
   upstream execution semantics without leaving the TopoMT object model;
 - those wrapper adapters should remain clearly separated from
-  `topomt.methods.*`, whose role is still the native TopoMT implementation.
+  `topomt.dfnd.*`, whose role is still the native TopoMT implementation.
 
 Validation note:
 
@@ -119,7 +119,7 @@ See [engine_acceleration_plan.md](engine_acceleration_plan.md).
 
 ### Current state
 
-`topomt.methods.fpocket4` is currently wrapper-backed.
+`topomt.third_party.fpocket._native_impl` is currently wrapper-backed.
 
 It preserves fpocket semantics well for the validated systems, but it does so
 through:
@@ -129,7 +129,7 @@ through:
 - and a wrapper-to-`Topography` adaptation layer.
 
 This is useful and should remain available, but it is not the final target for
-`topomt.methods.fpocket4`.
+`topomt.third_party.fpocket._native_impl`.
 
 ### Upstream semantics that must be preserved
 
@@ -252,7 +252,7 @@ This should apply later to:
 
 ### Current state
 
-`topomt.methods.alphaspace2` is now in an intermediate native-reimplementation
+`topomt.third_party.alphaspace2.native` is now in an intermediate native-reimplementation
 state.
 
 The geometry and pocket-membership layers have already been reworked around the
@@ -419,18 +419,18 @@ The validation path should differ from the runtime path.
 
 ### Runtime path
 
-- `topomt.methods.*` uses only TopoMT and MolSysSuite dependencies.
+- `topomt.dfnd.*` uses only TopoMT and MolSysSuite dependencies.
 
 ### Validation path
 
-- `topomt.wrappers.*` or audit scripts can run upstream binaries or packages;
+- `topomt.third_party.*` or audit scripts can run upstream binaries or packages;
 - parity tests compare native TopoMT outputs against those upstream references;
 - failures should be interpreted as semantic gaps in the reimplementation, not
   as evidence that TopoMT should import the upstream code at runtime.
 
 ## Immediate next steps
 
-1. Keep `fpocket4` documented as wrapper-backed and transitory in `methods/`.
+1. Keep `fpocket4` documented as transitional while its provider structure is refined.
 2. Start a native `fpocket4` plan around alpha-sphere generation and refine
    semantics.
 3. Start a native `alphaspace2` plan around `genAlphas()` and exact lining

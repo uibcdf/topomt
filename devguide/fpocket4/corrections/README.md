@@ -7,7 +7,7 @@ reference code.
 
 The purpose of these notes is to keep three concerns separated:
 
-1. Upstream fidelity in `topomt.methods.fpocket4` native mode.
+1. Upstream fidelity in `topomt.third_party.fpocket._native_impl` native mode.
 2. Potential fixes or pull requests to the original `fpocket` project.
 3. Possible TopoMT-specific improvements that should live in a different mode
    such as `implementation='topomt'`.

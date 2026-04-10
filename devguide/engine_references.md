@@ -183,7 +183,7 @@ step". Its core workflow is centered on a `Snapshot` object that:
 - and optionally annotates contact and beta scores.
 
 This is an important distinction for TopoMT because the current native
-`topomt.methods.alphaspace2` implementation is still a simplified
+`topomt.third_party.alphaspace2.native` implementation is still a simplified
 AlphaSpace2-like detector rather than a faithful reproduction of the upstream
 package semantics.
 

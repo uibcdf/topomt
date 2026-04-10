@@ -23,10 +23,12 @@ Important subareas:
   Feature hierarchy used to represent pockets, mouths, channels, voids, and
   related objects.
 
-- `topomt/methods/`
-  Detection engines. This package should contain the native TopoMT
-  implementations of the supported methods rather than shared geometry or
-  characterization helpers.
+- `topomt/dfnd/`
+  Native TopoMT method line. DFND now lives directly under `topomt/`.
+
+- `topomt/third_party/`
+  Provider-organized integrations for external technologies such as CASTp,
+  fpocket, AlphaSpace2, Pocketeer, and pyCASTA.
 
 - `topomt/tools/`
   Shared geometry, tessellation, and feature-characterization helpers used by
@@ -40,11 +42,6 @@ Important subareas:
 - `topomt/delaunay_mesh.py`
   Shared Delaunay substrate used by DFND and by the alpha-sphere-derived views
   needed by several pocket engines.
-
-- `topomt/wrappers/`
-  External wrapper-oriented code. This area should host binary/package
-  integrations, output parsers, and parity helpers used for auditing native
-  methods rather than defining the final runtime behavior of `topomt/methods/`.
 
 - `topomt/_private/`
   Internal support code: digestion helpers, optional import handling, unit

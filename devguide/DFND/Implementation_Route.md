@@ -17,7 +17,7 @@ This document outlines the step-by-step roadmap to build the DFND module in `top
 
 **Goal:** Build the dual graph from atomic coordinates.
 
-*   [ ] **Task 2.1:** Create `topomt/methods/dfnd/graph_builder.py`.
+*   [ ] **Task 2.1:** Create `topomt/dfnd/graph_builder.py`.
 *   [ ] **Task 2.2:** Implement Delaunay triangulation wrapper (`scipy.spatial`).
 *   [ ] **Task 2.3:** Calculate Tetrahedron Metrics ($R_{insphere}$, $R_{\alpha}$).
     *   Classify nodes: `SOLID`, `TRANSIT`, `COAST`, `OCEAN` (based on initial thresholds).
@@ -28,7 +28,7 @@ This document outlines the step-by-step roadmap to build the DFND module in `top
 
 **Goal:** Traverse the graph to identify features.
 
-*   [ ] **Task 3.1:** Create `topomt/methods/dfnd/traversal.py`.
+*   [ ] **Task 3.1:** Create `topomt/dfnd/traversal.py`.
 *   [ ] **Task 3.2:** Implement `identify_components(graph, root_nodes)`.
     *   BFS/DFS implementation.
     *   Separate Pockets (connected to Root) from Voids (isolated).
@@ -40,7 +40,7 @@ This document outlines the step-by-step roadmap to build the DFND module in `top
 
 **Goal:** Expose DFND as a user-friendly tool in `topomt`.
 
-*   [ ] **Task 4.1:** Create `topomt/methods/dfnd/__init__.py`.
+*   [ ] **Task 4.1:** Create `topomt/dfnd/__init__.py`.
 *   [ ] **Task 4.2:** Define the main function `dfnd(molecular_system, probe_radius, ...)`.
 *   [ ] **Task 4.3:** Output formatting. Return structured dictionaries (like `castp.py` does) but with richer graph data.
 *   [ ] **Task 4.4:** Visualization helper (`view_dfnd_network`) to draw the tetrahedra/edges in NGLView/Py3Dmol.

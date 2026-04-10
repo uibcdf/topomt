@@ -51,7 +51,7 @@ not as duplicates of the native parity suites.
 
 Reason:
 
-- native parity tells us whether `topomt.methods.*` reproduces the algorithmic
+- native parity tells us whether TopoMT native/provider implementations reproduce the algorithmic
   semantics we intend to preserve;
 - wrapper parity tells us whether the actual external package or binary, as
   installed or mirrored in a given environment, still behaves as expected when

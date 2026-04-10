@@ -70,7 +70,7 @@ engineering concerns:
 ## Wrappers and external artifacts
 
 The fpocket material under
-[topomt/wrappers/fpocket/](/home/diego/repos@uibcdf/topomt/topomt/wrappers/fpocket) shows that the
+[topomt/third_party/fpocket/testdata/](/home/diego/repos@uibcdf/topomt/topomt/third_party/fpocket/testdata) shows that the
 repository also acts as a bridge to external tools and their artifacts.
 
 This wrapper-oriented layer is currently under-documented and should be made
