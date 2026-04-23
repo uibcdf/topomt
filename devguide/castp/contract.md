@@ -28,6 +28,13 @@ From those sources, the important points are:
 This means a faithful TopoMT `castp` path is not merely a connected-components
 clusterer over filtered alpha spheres or filtered tetrahedra.
 
+Important clarification from the current audit:
+
+- MKALF 4.1 is a crucial historical reference implementation;
+- but MKALF 4.1 is **not identical** to CASTp 3.0;
+- therefore "faithful to CASTp" means parity against CASTp 3.0 server outputs,
+  using MKALF as a secondary algorithmic reference, not as the final oracle.
+
 ## Canonical default
 
 Unless a test or fixture explicitly states otherwise, the canonical CASTp probe
@@ -48,8 +55,9 @@ reproduce the following classes of output from CASTp exported results:
 
 1. feature classification
 - `pocket`
-- `cavity`
 - `channel`
+- `branched_channel`
+- `cavity` / `void`
 
 2. feature delineation
 - atoms lining each feature;
@@ -102,36 +110,44 @@ present in `.mouth` should materialize as `Mouth` features in `Topography`.
 ## Current status of `topomt.third_party.castp._native_impl`
 
 The current [topomt/third_party/castp/_native_impl.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/_native_impl.py)
-implementation should be treated as a preliminary `CASTp-like` prototype, not
-as a faithful CASTp implementation.
+implementation should be treated as a serious but still incomplete native
+reconstruction, not yet as a faithful CASTp 3.0 implementation.
 
 What it currently does:
 
-- builds a `DelaunayMesh`;
-- filters alpha-sphere/tetrahedral void proxies by a probe threshold;
-- clusters connected components;
-- estimates mouths from unshared local faces;
-- computes a partial geometric summary
+- builds a weighted geometric substrate;
+- computes alpha-style ranks and weighted simplex geometry;
+- separates `void` construction from pocket/channel construction;
+- implements wrapping-depth-style pocket flow;
+- materializes `pocket`, `channel`, `branched_channel`, and `void` records;
+- performs mouth clustering through an `Fnext`-style walk over open edges;
+- computes a partial geometric summary suitable for parity testing
 
 What it does **not** yet reproduce faithfully:
 
-- explicit exterior/bulk-solvent classification;
-- robust pocket vs cavity vs channel separation;
-- CAST-style mouth delineation;
-- direct parity against CASTp exported files;
+- CASTp 3.0 mouth counts in all audited cases;
+- CASTp 3.0 channel vs branched-channel separation in all audited cases;
+- direct full parity against CASTp exported files on the expanded battery;
 - analytical solvent-accessible vs molecular-surface contracts aligned with
-  CASTp server outputs
+  CASTp server outputs;
+- the CASTp 3.0-specific algorithmic differences relative to MKALF 4.1
 
 ## Implementation target for the native path
 
-The future native `castp` path should be rebuilt around:
+The native `castp` path is already being rebuilt around:
 
-- `DelaunayMesh` as the geometric substrate;
-- an explicit CAST-style outside/exterior classification step;
+- a weighted Delaunay / regular-triangulation substrate;
 - topological delineation of pocket, cavity, and channel regions;
 - explicit mouth detection;
 - and output dictionaries or features that can be matched directly against
   CASTp exported files.
+
+The next implementation target is narrower and more precise:
+
+- preserve the current gains in void and pocket delineation;
+- finish the mouth-connectivity audit against CASTp 3.0;
+- and identify exactly which residuals are still MKALF-vs-CASTp-3.0 evolution
+  effects rather than TopoMT implementation defects.
 
 ## Validation target
 
@@ -169,5 +185,7 @@ The first requested expansion set is:
 2. treat bundled CASTp exports as the oracle;
 3. rewrite the native method against that oracle instead of evolving the
    current clustering prototype ad hoc;
-4. only then promote `castp` from `CASTp-like` to faithful native method
+4. treat MKALF 4.1 and the 1998 papers as the historical algorithmic basis,
+   but resolve final parity disputes against CASTp 3.0 exports;
+5. only then promote `castp` from `CASTp-like` to faithful native method
    status.
