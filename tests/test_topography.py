@@ -231,10 +231,13 @@ def test_run_castp_emits_feature_types_and_mouth_relations(topography_empty_1tcd
                     'source_id': 'castp:pocket:1',
                     'atom_indices': [1, 2, 3, 4],
                     'center': np.array([1.0, 2.0, 3.0]),
+                    'area': 16.0,
                     'volume': 10.0,
                     'score': 10.0,
                     'n_mouths': 1,
                     'mouth_area': 4.0,
+                    'mouth_perimeter': 6.0,
+                    'iT': [0, 1],
                     'tetrahedron_indices': [0, 1],
                     'mouths': [
                         {
@@ -291,8 +294,11 @@ def test_run_castp_emits_feature_types_and_mouth_relations(topography_empty_1tcd
 
     pocket = next(iter(pockets))
     assert puw.is_quantity(pocket.center)
+    assert puw.is_quantity(pocket.area)
     assert puw.is_quantity(pocket.volume)
     assert puw.is_quantity(pocket.mouth_area)
+    assert puw.is_quantity(pocket.mouth_perimeter)
+    assert pocket.iT == [0, 1]
     assert pocket.n_mouths == 1
     assert topo.children_of(pocket.feature_id, as_feature_ids=True) == {'MOU-1'}
 

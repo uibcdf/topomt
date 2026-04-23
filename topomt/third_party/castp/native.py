@@ -25,12 +25,18 @@ def get_topography(molecular_system, **kwargs):
 
         if 'center' in record and record['center'] is not None:
             parent_feature.center = puw.quantity(record['center'], 'angstroms')
+        if 'area' in record and record['area'] is not None:
+            parent_feature.area = puw.quantity(record['area'], 'angstroms**2')
         if 'volume' in record and record['volume'] is not None:
             parent_feature.volume = puw.quantity(record['volume'], 'angstroms**3')
         if 'mouth_area' in record and record['mouth_area'] is not None:
             parent_feature.mouth_area = puw.quantity(record['mouth_area'], 'angstroms**2')
+        if 'mouth_perimeter' in record and record['mouth_perimeter'] is not None:
+            parent_feature.mouth_perimeter = puw.quantity(record['mouth_perimeter'], 'angstroms')
         if 'n_mouths' in record:
             parent_feature.n_mouths = record['n_mouths']
+        if 'iT' in record:
+            parent_feature.iT = record['iT']
         if 'tetrahedron_indices' in record:
             parent_feature.tetrahedron_indices = record['tetrahedron_indices']
         if 'properties' in record:
