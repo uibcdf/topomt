@@ -7,10 +7,10 @@ from topomt import pyunitwizard as puw
 
 
 _SIMPLEX_FACE_LOCAL_INDICES = (
-    (0, 1, 2),
-    (0, 1, 3),
-    (0, 2, 3),
-    (1, 2, 3),
+    (1, 2, 3),  # face opposite vertex 0 → matches neighbors[s, 0]
+    (0, 2, 3),  # face opposite vertex 1 → matches neighbors[s, 1]
+    (0, 1, 3),  # face opposite vertex 2 → matches neighbors[s, 2]
+    (0, 1, 2),  # face opposite vertex 3 → matches neighbors[s, 3]
 )
 
 
@@ -142,6 +142,8 @@ class DelaunayMesh:
         self._condition_numbers = None
         self._simplex_faces = None
         self._boundary_face_records = None
+        self._face_index_by_atoms = None
+        self._face_index_by_owner = None
 
         if points is None:
             return
@@ -268,11 +270,57 @@ class DelaunayMesh:
             self._simplex_faces = simplex_faces
         return self._simplex_faces.copy()
 
+    def _ensure_face_index_cache(self) -> None:
+        """Build global triangle indices from unique face atom triples."""
+
+        if self._face_index_by_atoms is not None and self._face_index_by_owner is not None:
+            return
+
+        face_index_by_atoms = {}
+        face_index_by_owner = {}
+
+        next_face_index = 1
+        for simplex_index in range(self.simplices.shape[0]):
+            for face_index in range(4):
+                face_atoms = self.get_face_atoms(simplex_index, face_index)
+                global_face_index = face_index_by_atoms.get(face_atoms)
+                if global_face_index is None:
+                    global_face_index = next_face_index
+                    face_index_by_atoms[face_atoms] = global_face_index
+                    next_face_index += 1
+                face_index_by_owner[(int(simplex_index), int(face_index))] = int(global_face_index)
+
+        self._face_index_by_atoms = face_index_by_atoms
+        self._face_index_by_owner = face_index_by_owner
+
     def get_face_atoms(self, simplex_index: int, face_index: int) -> tuple[int, int, int]:
         """Return the atom indices of a simplex face as a sorted triple."""
 
         local_indices = _SIMPLEX_FACE_LOCAL_INDICES[int(face_index)]
         return tuple(sorted(int(atom_index) for atom_index in self.simplices[int(simplex_index), local_indices]))
+
+    def get_face_index(self, simplex_index: int, face_index: int) -> int:
+        """Return the global triangle index analogous to historical `TrIndex`."""
+
+        self._ensure_face_index_cache()
+        return int(self._face_index_by_owner[(int(simplex_index), int(face_index))])
+
+    def get_face_index_from_atoms(self, face_atoms: tuple[int, int, int]) -> int | None:
+        """Return the global triangle index for a sorted face triple if present."""
+
+        self._ensure_face_index_cache()
+        return self._face_index_by_atoms.get(tuple(sorted(int(atom_index) for atom_index in face_atoms)))
+
+    def get_face_owner_indices(self, simplex_index: int, face_index: int) -> tuple[int, int]:
+        """Return the two tetrahedron owners of one face.
+
+        The first owner is always the supplied local owner. The second owner is
+        the neighboring tetrahedron index, or ``-1`` for hull faces.
+        """
+
+        simplex_index = int(simplex_index)
+        face_index = int(face_index)
+        return (simplex_index, int(self.neighbors[simplex_index, face_index]))
 
     def get_boundary_face_records(self) -> list[tuple[int, int, tuple[int, int, int]]]:
         """Return boundary faces as ``(simplex_index, face_index, face_atoms)`` records."""
@@ -349,6 +397,8 @@ class DelaunayMesh:
         self.n_alpha_spheres = simplices.shape[0]
         self._simplex_faces = None
         self._boundary_face_records = None
+        self._face_index_by_atoms = None
+        self._face_index_by_owner = None
         self._alpha_sphere_neighbor_map = {
             int(index): sorted(int(neighbor) for neighbor in simplex_neighbors if neighbor != -1)
             for index, simplex_neighbors in enumerate(neighbors)
@@ -392,6 +442,8 @@ class DelaunayMesh:
         self._alpha_sphere_neighbor_pairs = np.asarray(pairs, dtype=int)
         self._simplex_faces = None
         self._boundary_face_records = None
+        self._face_index_by_atoms = None
+        self._face_index_by_owner = None
 
         self.alpha_sphere_centers = self.alpha_sphere_centers[mask]
         self.alpha_sphere_radii = self.alpha_sphere_radii[mask]

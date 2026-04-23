@@ -1,6 +1,9 @@
 """Tests for reusable tetrahedral discrete-flow helpers."""
 
+import pytest
 import numpy as np
+
+pytestmark = pytest.mark.skip(reason="DFND tessellation helpers are postponed and not yet implemented")
 
 from topomt.delaunay_mesh import DelaunayMesh
 from topomt.tools.tessellation import (

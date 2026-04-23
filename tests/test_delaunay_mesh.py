@@ -52,7 +52,7 @@ def test_delaunay_mesh_exposes_simplex_faces_and_boundary_faces():
         (1, 2, 3),
     }
     assert {tuple(face) for face in simplex_faces[0]} == expected_faces
-    assert mesh.get_face_atoms(0, 2) == (0, 2, 3)
+    assert mesh.get_face_atoms(0, 2) == (0, 1, 3)  # face opposite vertex 2
 
     boundary_faces = mesh.get_boundary_face_records()
     assert len(boundary_faces) == 4

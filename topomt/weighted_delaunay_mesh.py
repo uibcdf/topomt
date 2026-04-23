@@ -33,6 +33,48 @@ def _build_neighbors_from_simplices(simplices: np.ndarray) -> np.ndarray:
     return neighbors
 
 
+def _orient_simplex_vertices(simplex: np.ndarray, points: np.ndarray) -> np.ndarray:
+    """Return a positively oriented tetrahedron vertex order."""
+
+    oriented_simplex = np.asarray(simplex, dtype=int).copy()
+    tetrahedron_points = points[oriented_simplex]
+    orientation = np.linalg.det(
+        np.vstack(
+            (
+                tetrahedron_points[1] - tetrahedron_points[0],
+                tetrahedron_points[2] - tetrahedron_points[0],
+                tetrahedron_points[3] - tetrahedron_points[0],
+            )
+        )
+    )
+
+    if orientation < 0.0:
+        oriented_simplex[[0, 1]] = oriented_simplex[[1, 0]]
+
+    return oriented_simplex
+
+
+def _oriented_face_local_indices(face_index: int) -> tuple[int, int, int]:
+    """Return the outward-oriented local vertex order of a tetrahedron face.
+
+    For a positively oriented tetrahedron ``[v0, v1, v2, v3]``, the boundary
+    orientation is:
+
+    - opposite ``v0``: ``(v1, v2, v3)``
+    - opposite ``v1``: ``(v0, v3, v2)``
+    - opposite ``v2``: ``(v0, v1, v3)``
+    - opposite ``v3``: ``(v0, v2, v1)``
+
+    This matches the alternating-sign boundary of an oriented 3-simplex and is
+    the local face orientation needed to mimic MKALF edge-facet walks.
+    """
+
+    local_indices = _SIMPLEX_FACE_LOCAL_INDICES[int(face_index)]
+    if int(face_index) % 2 == 1:
+        return (local_indices[0], local_indices[2], local_indices[1])
+    return local_indices
+
+
 def _weighted_simplex_centers_power_values(
     simplices: np.ndarray,
     points: np.ndarray,
@@ -76,11 +118,15 @@ def _weighted_simplex_centers_power_values(
     return centers, power_values
 
 
-def _regular_triangulation_simplices(points: np.ndarray, weights: np.ndarray) -> np.ndarray:
-    """Return weighted Delaunay simplices via the lower hull of the lifted points."""
+def _regular_triangulation_simplices(
+    points: np.ndarray,
+    weights: np.ndarray,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Return oriented and sorted regular-triangulation simplices."""
 
     if points.shape[0] == 4:
-        return np.asarray([[0, 1, 2, 3]], dtype=int)
+        oriented = np.asarray([_orient_simplex_vertices(np.asarray([0, 1, 2, 3]), points)], dtype=int)
+        return oriented, np.sort(oriented.copy(), axis=1)
 
     if points.shape[0] < 4:
         raise ValueError('At least 4 weighted points are required to build a 3D regular triangulation.')
@@ -94,6 +140,7 @@ def _regular_triangulation_simplices(points: np.ndarray, weights: np.ndarray) ->
     )
     hull = ConvexHull(lifted_points)
 
+    oriented_simplices = []
     simplices = []
     seen = set()
 
@@ -106,12 +153,13 @@ def _regular_triangulation_simplices(points: np.ndarray, weights: np.ndarray) ->
             continue
 
         seen.add(simplex)
+        oriented_simplices.append(_orient_simplex_vertices(np.asarray(simplex_vertices, dtype=int), points))
         simplices.append(simplex)
 
     if not simplices:
         raise ValueError('Regular triangulation produced no tetrahedra for the given weighted points.')
 
-    return np.asarray(simplices, dtype=int)
+    return np.asarray(oriented_simplices, dtype=int), np.asarray(simplices, dtype=int)
 
 
 class WeightedDelaunayMesh:
@@ -148,6 +196,8 @@ class WeightedDelaunayMesh:
         self._simplex_neighbor_pairs = None
         self._simplex_faces = None
         self._boundary_face_records = None
+        self._face_index_by_atoms = None
+        self._face_index_by_owner = None
         self._min_edges = None
         self._max_edges = None
         self._condition_numbers = None
@@ -189,23 +239,23 @@ class WeightedDelaunayMesh:
 
             self.atom_radii = atom_radii_value
 
-        simplices = _regular_triangulation_simplices(points_value, weights_value)
-        neighbors = _build_neighbors_from_simplices(simplices)
+        oriented_simplices, simplices = _regular_triangulation_simplices(points_value, weights_value)
+        neighbors = _build_neighbors_from_simplices(oriented_simplices)
         simplex_centers, simplex_power_values = _weighted_simplex_centers_power_values(
-            simplices,
+            oriented_simplices,
             points_value,
             weights_value,
         )
 
-        self.oriented_simplices = simplices.copy()
+        self.oriented_simplices = oriented_simplices.copy()
         self.simplices = simplices.copy()
         self.neighbors = neighbors
-        self.simplex_atom_indices = simplices.copy()
+        self.simplex_atom_indices = oriented_simplices.copy()
         self.simplex_centers = simplex_centers
         self.simplex_power_values = simplex_power_values
-        self.simplex_volumes = _tetrahedron_volumes(simplices, points_value)
-        self._min_edges, self._max_edges = _tetrahedron_edge_extrema(simplices, points_value)
-        self._condition_numbers = _tetrahedron_condition_numbers(simplices, points_value)
+        self.simplex_volumes = _tetrahedron_volumes(oriented_simplices, points_value)
+        self._min_edges, self._max_edges = _tetrahedron_edge_extrema(oriented_simplices, points_value)
+        self._condition_numbers = _tetrahedron_condition_numbers(oriented_simplices, points_value)
 
         self._simplex_neighbor_map = {
             int(index): sorted(int(neighbor) for neighbor in simplex_neighbors if neighbor != -1)
@@ -257,17 +307,77 @@ class WeightedDelaunayMesh:
             simplex_faces = np.empty((self.simplices.shape[0], 4, 3), dtype=int)
             for face_index, local_indices in enumerate(_SIMPLEX_FACE_LOCAL_INDICES):
                 simplex_faces[:, face_index, :] = np.sort(
-                    self.simplices[:, local_indices],
+                    self.oriented_simplices[:, local_indices],
                     axis=1,
                 )
             self._simplex_faces = simplex_faces
         return self._simplex_faces.copy()
 
+    def _ensure_face_index_cache(self) -> None:
+        """Build global triangle indices from unique face atom triples."""
+
+        if self._face_index_by_atoms is not None and self._face_index_by_owner is not None:
+            return
+
+        face_index_by_atoms = {}
+        face_index_by_owner = {}
+
+        next_face_index = 1
+        for simplex_index in range(self.simplices.shape[0]):
+            for face_index in range(4):
+                face_atoms = self.get_face_atoms(simplex_index, face_index)
+                global_face_index = face_index_by_atoms.get(face_atoms)
+                if global_face_index is None:
+                    global_face_index = next_face_index
+                    face_index_by_atoms[face_atoms] = global_face_index
+                    next_face_index += 1
+                face_index_by_owner[(int(simplex_index), int(face_index))] = int(global_face_index)
+
+        self._face_index_by_atoms = face_index_by_atoms
+        self._face_index_by_owner = face_index_by_owner
+
     def get_face_atoms(self, simplex_index: int, face_index: int) -> tuple[int, int, int]:
         """Return the atom indices of a simplex face as a sorted triple."""
 
         local_indices = _SIMPLEX_FACE_LOCAL_INDICES[int(face_index)]
-        return tuple(sorted(int(atom_index) for atom_index in self.simplices[int(simplex_index), local_indices]))
+        return tuple(
+            sorted(
+                int(atom_index)
+                for atom_index in self.oriented_simplices[int(simplex_index), local_indices]
+            )
+        )
+
+    def get_face_index(self, simplex_index: int, face_index: int) -> int:
+        """Return the global triangle index analogous to historical `TrIndex`."""
+
+        self._ensure_face_index_cache()
+        return int(self._face_index_by_owner[(int(simplex_index), int(face_index))])
+
+    def get_face_index_from_atoms(self, face_atoms: tuple[int, int, int]) -> int | None:
+        """Return the global triangle index for a sorted face triple if present."""
+
+        self._ensure_face_index_cache()
+        return self._face_index_by_atoms.get(tuple(sorted(int(atom_index) for atom_index in face_atoms)))
+
+    def get_face_owner_indices(self, simplex_index: int, face_index: int) -> tuple[int, int]:
+        """Return the two tetrahedron owners of one face.
+
+        The first owner is always the supplied local owner. The second owner is
+        the neighboring tetrahedron index, or ``-1`` for hull faces.
+        """
+
+        simplex_index = int(simplex_index)
+        face_index = int(face_index)
+        return (simplex_index, int(self.neighbors[simplex_index, face_index]))
+
+    def get_oriented_face_atoms(self, simplex_index: int, face_index: int) -> tuple[int, int, int]:
+        """Return the outward-oriented atom order of a simplex face."""
+
+        local_indices = _oriented_face_local_indices(int(face_index))
+        return tuple(
+            int(self.oriented_simplices[int(simplex_index), local_index])
+            for local_index in local_indices
+        )
 
     def get_boundary_face_records(self) -> list[tuple[int, int, tuple[int, int, int]]]:
         """Return boundary faces as ``(simplex_index, face_index, face_atoms)`` records."""
