@@ -18,9 +18,12 @@ Original upstream-style source tree used for audit:
 
 - `/home/diego/repos@uibcdf/Alphashape/castp/alpha-4.1-src`
 
-Local working copy used for rebuilds and instrumentation:
+TopoMT-maintained reproducible copy with the minimal `pdb2alf.c` cleanup:
 
-- `/home/diego/repos@uibcdf/topomt/sandbox/castp_alpha_4_1_src_local`
+- `/home/diego/repos@uibcdf/Alphashape/castp/topomt_version`
+
+This `topomt_version` tree is now the preferred reproducible local reference
+copy for CASTp1 rebuilds.
 
 The top-level Makefile in the local copy already exposes the relevant targets:
 
@@ -55,11 +58,18 @@ as the intended CASTp1 radii policy.
 
 ## Minimal `pdb2alf` cleanup used in the audit
 
-The cleaned audit copy was created outside the repository at:
+The essential fix set now preserved in
+`/home/diego/repos@uibcdf/Alphashape/castp/topomt_version/volbl/pdb2alf.c` is:
 
-- `/tmp/topomt_castp_radii_audit/pdb2alf_clean.c`
+1. widen `resName` from `3+1` to `4+1`
+2. allocate the parameter table with `calloc(...)`
+3. force null termination after fixed-width `strncpy(..., 4)` reads in the
+   `param.dat` loader
+4. replace the fragile `bsearch(...)` lookup with an explicit stripped-label
+   lookup helper
+5. widen the temporary residue buffer `temp2` from `4` to `5`
 
-The essential fix was minimal and local:
+The most critical string-handling part is:
 
 ```c
 strncpy(temp, buffer, 4);
@@ -71,31 +81,26 @@ temp[4] = '\0';
 stripout(temp2, temp);
 ```
 
-This was applied in the parameter-table loader of `pdb2alf.c`, so the lookup
-against `param.dat` works as intended.
-
-This cleaned binary was used only as an oracle aid during the CASTp1 audit. The
-native CASTp1 path does not depend on executing it.
+These fixes recover the intended `param.dat` lookup behavior and avoid the
+historical fallback-to-`3.20` artifact caused by broken parsing.
 
 ## Rebuilding the original CASTp1 programs locally
 
-From the local source copy:
+From the TopoMT-maintained reference copy:
 
 ```bash
-cd /home/diego/repos@uibcdf/topomt/sandbox/castp_alpha_4_1_src_local
-make delcx_new
-make mkalf_new
+bash /home/diego/repos@uibcdf/Alphashape/castp/topomt_version/build_topomt_version.sh
 ```
 
-This rebuilds the triangulation and alpha-shape programs through the original
-Makefile structure.
+This script is stored next to the copied source tree and is the intended entry
+point for rebuilding the CASTp1 reference binaries.
 
 Important note:
 
-- this rebuild path does not itself fix the historical `pdb2alf.c` issue
-- `delcx`, `mkalf`, and `volbl` are rebuilt from the local tree
-- the cleaned `pdb2alf` used for audit was compiled separately from a patched
-  temporary C file
+- the original alpha-4.1 build system invokes `/bin/csh` directly
+- therefore the host system must provide `csh`/`tcsh` at `/bin/csh`
+- if `/bin/csh` is missing, the helper script exits with an explicit error
+- `pdb2alf_topomt` is compiled directly from the patched `volbl/pdb2alf.c`
 
 ## Clean CASTp1 oracle generation workflow
 
@@ -105,7 +110,7 @@ The clean oracle used during the CASTp1 parity phase was generated under:
 
 Per system, the workflow was:
 
-1. run cleaned `pdb2alf` on the input PDB
+1. run `pdb2alf_topomt` on the input PDB
 2. run `delcx` on the weighted ASCII output
 3. run `mkalf` on the resulting triangulation
 4. run `volbl -s 4`
@@ -114,7 +119,7 @@ Per system, the workflow was:
 Conceptually:
 
 ```bash
-pdb2alf_clean input.pdb > system_ascii
+/home/diego/repos@uibcdf/Alphashape/castp/topomt_version/bin/pdb2alf_topomt input.pdb > system_ascii
 delcx system_ascii
 mkalf system_ascii
 volbl -s 4 system_ascii
@@ -148,5 +153,7 @@ The intended CASTp1 reference for this repository is:
 
 - cleaned-oracle CASTp1 semantics
 - native `castp1_pdb2alf` radii policy
+- source copy:
+  - `/home/diego/repos@uibcdf/Alphashape/castp/topomt_version`
 - the functional parity closure recorded in:
   - `devguide/castp/checkpoint_2026_04_23_castp1_functional_parity_closure.md`

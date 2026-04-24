@@ -132,3 +132,7 @@ The original-build and clean-oracle recipe used to establish this CASTp1 phase
 is recorded in:
 
 - `devguide/castp/castp1_original_build.md`
+
+The reproducible local CASTp1 source copy preserved for this phase is:
+
+- `/home/diego/repos@uibcdf/Alphashape/castp/topomt_version`
