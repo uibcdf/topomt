@@ -7,6 +7,7 @@ import molsysviewer
 
 from .addon import get_addon, lifecycle
 from .render import render_topography_pockets
+from .runtime import ensure_runtime
 
 
 def _clone_feature_preserving_state(feature):
@@ -53,6 +54,11 @@ def attach_topography(
     if enable_addon:
         view.addons.enable('topomt')
         lifecycle.on_enable(view)
+
+    runtime = ensure_runtime(view)
+    runtime.topography = topography
+    if tag_prefix:
+        runtime.tag_prefix = tag_prefix
 
     rendered = None
     if render:

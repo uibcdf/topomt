@@ -47,14 +47,14 @@ def test_lifecycle_records_runtime_on_view():
     view = molsysviewer.MolSysView()
 
     lifecycle.on_enable(view)
-    assert view._topomt_addon_runtime['enabled'] is True
-    assert view._topomt_addon_runtime['workspace'] == 'topomt'
+    assert view._topomt_addon_runtime.enabled is True
+    assert view._topomt_addon_runtime.workspace == 'topomt'
 
     lifecycle.on_context_action(view, 'focus-topography-feature', {'feature_id': 'POC-1'})
-    assert view._topomt_addon_runtime['last_context_action']['action_id'] == 'focus-topography-feature'
+    assert view._topomt_addon_runtime.last_context_action['action_id'] == 'focus-topography-feature'
 
     lifecycle.on_disable(view)
-    assert view._topomt_addon_runtime['enabled'] is False
+    assert view._topomt_addon_runtime.enabled is False
 
 
 def test_addon_registers_with_molsysviewer_host_registry():
@@ -195,8 +195,8 @@ def test_render_topography_pockets_accepts_quantity_backed_features():
 
     assert result['n_rendered'] == 1
     assert view.messages[0]['op'] == 'add_pocket_blob'
-    assert np.allclose(view.messages[0]['options']['centers'], [[0.1, 0.2, 0.3]])
-    assert view.messages[0]['options']['radii'] == pytest.approx([0.2])
+    assert np.allclose(view.messages[0]['options']['centers'], [[1.0, 2.0, 3.0]])
+    assert view.messages[0]['options']['radii'] == pytest.approx([2.0])
 
 
 def test_pocket_blob_provider_renders_when_view_is_available():
@@ -240,7 +240,7 @@ def test_attach_topography_enables_addon_and_renders():
 
     assert result['addon_enabled'] is True
     assert result['rendered']['n_rendered'] == 1
-    assert view._topomt_addon_runtime['enabled'] is True
+    assert view._topomt_addon_runtime.enabled is True
 
 
 def test_build_view_with_topography_uses_molsysviewer_factory(monkeypatch):
