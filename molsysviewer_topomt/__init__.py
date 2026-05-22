@@ -1,6 +1,6 @@
 """MolSysViewer addon for TopoMT — topography and pocket analysis."""
 
-from .addon import ADDON, addon, get_addon, lifecycle
+from .addon import ADDON, addon, get_addon, lifecycle, on_enable, on_disable, on_context_action
 from .integration import (
     attach_features,
     attach_pockets,
@@ -20,6 +20,9 @@ __all__ = [
     "addon",
     "get_addon",
     "lifecycle",
+    "on_enable",
+    "on_disable",
+    "on_context_action",
     "register_with_molsysviewer",
     "subset_topography",
     "attach_features",
