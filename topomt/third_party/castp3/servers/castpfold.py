@@ -11,7 +11,7 @@ import zipfile
 import molsysmt as msm
 
 from topomt import pyunitwizard as puw
-from topomt.third_party.castp.files import load_topography as load_castp_topography
+from topomt.third_party.castp3.files import load_topography as load_castp_topography
 from topomt.topography.Topography import Topography
 from topomt.third_party._common import prepare_wrapper_input_pdb
 

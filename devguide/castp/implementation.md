@@ -7,6 +7,11 @@ native `castp` path in TopoMT.
 
 Current closure / restart checkpoints:
 
+- [../castp/checkpoint_2026_05_19_castp3_reproducibility_boundary.md](../castp/checkpoint_2026_05_19_castp3_reproducibility_boundary.md)
+- [../castp/checkpoint_2026_04_28_castp3_oracle_parity_harness.md](../castp/checkpoint_2026_04_28_castp3_oracle_parity_harness.md)
+- [../castp/checkpoint_2026_04_28_castp3_pycast_second_batch.md](../castp/checkpoint_2026_04_28_castp3_pycast_second_batch.md)
+- [../castp/checkpoint_2026_04_28_castp3_pycast_small_batch.md](../castp/checkpoint_2026_04_28_castp3_pycast_small_batch.md)
+- [../castp/checkpoint_2026_04_26_castp3_probe_limited_depth_audit.md](../castp/checkpoint_2026_04_26_castp3_probe_limited_depth_audit.md)
 - [../castp/checkpoint_2026_04_23_castp1_functional_parity_closure.md](../castp/checkpoint_2026_04_23_castp1_functional_parity_closure.md)
 - [../castp/castp1_original_build.md](../castp/castp1_original_build.md)
 
@@ -16,6 +21,75 @@ Current closure / restart checkpoints:
 - [../castp/checkpoint_2026_04_09.md](../castp/checkpoint_2026_04_09.md)
 - [../castp/checkpoint_2026_04_07.md](../castp/checkpoint_2026_04_07.md)
 - [../castp/checkpoint_2026_04_05.md](../castp/checkpoint_2026_04_05.md) (previous)
+
+## CASTpFold Oracle Downloads
+
+As of 2026-04-28, the server providers accept `output_zip_file`:
+
+```python
+topomt.third_party.castp.get_topography(
+    pdb_path,
+    backend='server',
+    server='castpfold',
+    probe_radius=1.4,
+    wait=20,
+    extra_wait=30,
+    retries=3,
+    output_zip_file='topomt/data/CASTpFold_server/1gcg.zip',
+)
+```
+
+Use `CASTpFold` as the preferred oracle-download server while CASTp3 and
+CASTpFold exports remain equivalent for the benchmark systems. The ZIP should
+be persisted through `output_zip_file`; the older default path only loaded the
+result from a temporary ZIP that was deleted at the end of the call.
+
+Mouth parity must compare the same exported object. CASTpFold reports
+`N_mth` as the number of topological mouths in `.pocInfo`, but `.mouth` records
+are grouped by parent pocket/channel feature. The native `castp3` path therefore
+keeps individual `topological_mouths` internally while exporting one aggregated
+server-comparable mouth per parent feature in `mouths`.
+
+Use `devtools/castp/compare_castp3_oracles.py` for native-vs-oracle CASTp3
+parity checks. It compares stable PDB atom serials read from the oracle PDB
+rather than raw Topography, MolSysMT-normalized, or geometry-local atom
+indices. The CASTp3 native default selection is protein plus peptide molecules:
+`molecule_type in ["protein", "peptide"]`.
+
+## Current Code Split
+
+As of 2026-04-24, the native CAST work is intentionally split into two code
+paths:
+
+- `topomt.third_party.castp`
+- `topomt.third_party.castp3`
+
+The purpose of this split is to protect the closed CASTp1 baseline while
+allowing aggressive CASTp3/CASTpFold experimentation without contaminating the
+stable path.
+
+Current interpretation:
+
+- `topomt.third_party.castp`
+  - frozen reference implementation for the CASTp1-native line;
+  - aligned with the CASTp1 closure documented in
+    [../castp/checkpoint_2026_04_23_castp1_functional_parity_closure.md](../castp/checkpoint_2026_04_23_castp1_functional_parity_closure.md);
+  - should not absorb speculative CASTp3 changes.
+
+- `topomt.third_party.castp3`
+  - isolated working copy created from `topomt.third_party.castp`;
+  - dedicated to the CASTp3.0 / CASTpFold parity investigation;
+  - safe place for experiments involving modern radii policy, input filtering,
+    mouth/open-feature behavior, and any deeper geometry or flow changes that
+    may diverge from CASTp1.
+
+Implementation note:
+
+- the `castp3` package is a real namespace copy with its internal imports
+  rewritten to `topomt.third_party.castp3.*`;
+- it is not a thin alias to `castp`;
+- this separation is deliberate so that CASTp1 and CASTp3 can evolve
+  independently from this point on.
 
 It is intentionally separated from the current `topomt.third_party.castp._native_impl` prototype
 and from the DFND line of work.

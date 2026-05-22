@@ -1698,7 +1698,7 @@ def test_build_castp_feature_records_uses_canonical_base_rank_for_component_asse
     assert calls['assembly_rank'] == 4
     assert calls['rank1'] == 1
     assert len(records) == 1
-    assert records[0]['feature_type'] == 'pocket'
+    assert records[0]['feature_type'] == 'void'
     assert records[0]['n_mouths'] == 0
 
 
@@ -2049,6 +2049,113 @@ def test_build_castp_feature_records_classifies_branched_channels(monkeypatch):
     assert records[0]['rE'] == [(10, 13)]
     assert records[0]['iV'] == [11]
     assert records[0]['rV'] == [10, 12]
+
+
+def test_build_castp_feature_records_does_not_duplicate_closed_voids(monkeypatch):
+    geometry = SimpleNamespace(
+        mesh=SimpleNamespace(),
+        spectrum_values=np.asarray([0.0, 1.0], dtype=float),
+        spectrum_ratios=(ExactRatio(0, 1), ExactRatio(1, 1)),
+        spectrum_decimals=1,
+        base_rank=1,
+        edge_rho_ranks={},
+        simplex_rho_ranks=np.asarray([2], dtype=int),
+        atom_indices_map=np.asarray([10, 11, 12, 13], dtype=int),
+        atom_coordinates=np.asarray(
+            [
+                [0.0, 0.0, 0.0],
+                [1.0, 0.0, 0.0],
+                [0.0, 1.0, 0.0],
+                [0.0, 0.0, 1.0],
+            ],
+            dtype=float,
+        ),
+    )
+    geometry.mesh.simplex_atom_indices = np.asarray([[0, 1, 2, 3]], dtype=int)
+    geometry.mesh.simplex_centers = np.asarray([[0.0, 0.0, 0.0]], dtype=float)
+    geometry.mesh.simplex_volumes = np.asarray([1.0], dtype=float)
+    geometry.mesh.n_simplices = 1
+
+    monkeypatch.setattr(
+        castp_components,
+        '_build_empty_simplex_mask',
+        lambda geometry, probe_radius: np.asarray([True], dtype=bool),
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_build_void_components',
+        lambda geometry, empty_mask: ({0: [0]}, set()),
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_build_rank_driven_components',
+        lambda geometry, size_limit_rank, rank1=None: ({0: [0]}, set(), np.asarray([0], dtype=int)),
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_component_boundary_faces_void',
+        lambda geometry, simplex_indices: [],
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_component_boundary_faces',
+        lambda geometry, simplex_indices, blocked_nodes, depth, size_limit_rank, rank1=None, active_pocket_nodes=None: (
+            [],
+            [],
+        ),
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_component_atom_indices',
+        lambda mesh, atom_indices_map, simplex_indices: [10, 11, 12, 13],
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_component_regular_vertex_indices',
+        lambda geometry, simplex_indices, touched_simplex_indices, rank2: [10, 11, 12, 13],
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_component_face_partitions',
+        lambda geometry, simplex_indices, rank1, active_pocket_nodes=None: ([], []),
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_component_edge_partitions',
+        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: ([], []),
+    )
+    monkeypatch.setattr(
+        castp_components,
+        '_component_vertex_partitions',
+        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: ([], []),
+    )
+    monkeypatch.setattr(
+        castp_components,
+        'component_center',
+        lambda centers, simplex_indices: np.zeros(3, dtype=float),
+    )
+    monkeypatch.setattr(
+        castp_components,
+        'component_volume',
+        lambda simplex_volumes, simplex_indices: 1.0,
+    )
+    monkeypatch.setattr(
+        castp_components,
+        'component_area',
+        lambda coordinates, faces: 0.0,
+    )
+    monkeypatch.setattr(
+        castp_components,
+        'cluster_mouth_faces',
+        lambda mouth_faces, edge_rho_ranks=None, edge_mu1_ranks=None, rank1=0, **kwargs: [],
+    )
+
+    records = castp_components.build_castp_feature_records(geometry, probe_radius=1.4)
+
+    assert len(records) == 1
+    assert records[0]['feature_type'] == 'void'
+    assert records[0]['n_mouths'] == 0
+    assert records[0]['tetrahedron_indices'] == [0]
 
 
 def test_probe_rank_prefers_exact_ratios_over_float_spectrum_values():

@@ -25,7 +25,7 @@ def test_castp_provider_load_topography_reads_server_zip():
     assert len(topography.get_features(by='type', value='mouth')) == 42
 
 
-def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch):
+def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch, tmp_path):
     server_module = __import__(
         'topomt.third_party.castp.servers.castpfold',
         fromlist=['CastpFoldClient'],
@@ -59,10 +59,12 @@ def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch):
         wait=0,
         extra_wait=0,
         retries=0,
+        output_zip_file=tmp_path / 'castpfold.zip',
     )
 
     assert submitted['pdb_path'].suffix == '.pdb'
     assert submitted['kwargs']['email'] == 'N/A'
+    assert (tmp_path / 'castpfold.zip').read_bytes() == SERVER_ZIP.read_bytes()
     assert len(_castp_surface_features(topography)) == 78
     assert len(topography.get_features(by='type', value='mouth')) == 42
 
@@ -125,7 +127,7 @@ def test_get_topography_castpfold_kept_as_compatibility_alias(monkeypatch):
     assert called['kwargs']['server'] == 'castpfold'
 
 
-def test_castp_provider_server_castp3_loads_server_zip(monkeypatch):
+def test_castp_provider_server_castp3_loads_server_zip(monkeypatch, tmp_path):
     server_module = __import__(
         'topomt.third_party.castp.servers.castp3',
         fromlist=['Castp3Client'],
@@ -159,10 +161,12 @@ def test_castp_provider_server_castp3_loads_server_zip(monkeypatch):
         wait=0,
         extra_wait=0,
         retries=0,
+        output_zip_file=tmp_path / 'castp3.zip',
     )
 
     assert submitted['pdb_path'].suffix == '.pdb'
     assert submitted['kwargs']['email'] == 'null'
+    assert (tmp_path / 'castp3.zip').read_bytes() == SERVER_ZIP.read_bytes()
     assert len(_castp_surface_features(topography)) == 78
     assert len(topography.get_features(by='type', value='mouth')) == 42
 

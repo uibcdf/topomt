@@ -1,6 +1,7 @@
 """Component assembly for the native CASTp implementation."""
 
 from collections import defaultdict
+from collections import deque
 
 import numpy as np
 
@@ -361,6 +362,81 @@ def _compute_pocket_depths(geometry) -> np.ndarray:
     return depth
 
 
+def _compute_probe_limited_pocket_depths(
+    geometry,
+    size_limit_rank: int,
+) -> np.ndarray:
+    """Compute an experimental pocket depth restricted to probe-surviving tetrahedra.
+
+    This is a CASTp3-only exploratory variant. The flow graph is truncated to
+    tetrahedra with ``rho_rank <= size_limit_rank`` before selecting sinks, so a
+    tetrahedron can terminate at the deepest sink that still survives the probe
+    cutoff instead of inheriting a deeper global sink outside the cutoff.
+    """
+
+    mesh = geometry.mesh
+    n_simplices = mesh.n_simplices
+    infinity_marker = n_simplices
+    infinity_rank = int(np.max(geometry.simplex_rho_ranks)) + 1
+    depth = np.full(n_simplices, -1, dtype=int)
+    visiting = np.zeros(n_simplices, dtype=bool)
+    allowed_mask = np.asarray(geometry.simplex_rho_ranks, dtype=int) <= int(size_limit_rank)
+
+    def compute(simplex_index: int) -> int:
+        simplex_index = int(simplex_index)
+        if depth[simplex_index] != -1:
+            return int(depth[simplex_index])
+        if visiting[simplex_index]:
+            return simplex_index
+
+        visiting[simplex_index] = True
+        max_ix = simplex_index
+        max_rho = int(geometry.simplex_rho_ranks[simplex_index])
+
+        for face_index, neighbor in enumerate(mesh.neighbors[simplex_index]):
+            if geometry.face_is_on_hull[simplex_index, face_index]:
+                if _triangle_is_attached(geometry, simplex_index, face_index):
+                    max_ix = infinity_marker
+                    max_rho = infinity_rank + 1
+                continue
+
+            if neighbor == -1:
+                continue
+            neighbor = int(neighbor)
+            if not bool(allowed_mask[neighbor]):
+                continue
+            if not _hidden_triangle(geometry, simplex_index, face_index, neighbor):
+                continue
+
+            neighbor_depth = compute(neighbor)
+            new_rho = (
+                infinity_rank + 1
+                if neighbor_depth == infinity_marker
+                else int(geometry.simplex_rho_ranks[int(neighbor_depth)])
+            )
+            if new_rho >= max_rho:
+                max_rho = new_rho
+                max_ix = neighbor_depth
+
+        visiting[simplex_index] = False
+        depth[simplex_index] = int(max_ix)
+        return int(depth[simplex_index])
+
+    for simplex_index in _iter_master_tetra_rho_indices(
+        geometry,
+        descending=True,
+        rank_start=1,
+        rank_end=int(size_limit_rank),
+    ):
+        simplex_index = int(simplex_index)
+        if not bool(allowed_mask[simplex_index]):
+            continue
+        if depth[simplex_index] == -1:
+            compute(simplex_index)
+
+    return depth
+
+
 def _union_find_root(parents: dict[int, int], node: int) -> int:
     """Return the representative of a node in a union-find dictionary."""
 
@@ -411,6 +487,28 @@ def _triangle_in_complex_at(geometry, simplex_index: int, face_index: int, rank:
     """Return canonical triangle membership at the given alpha rank."""
 
     return _face_is_in_complex_at(geometry, simplex_index, face_index, int(rank))
+
+
+def _triangle_in_complex_at_with_face_epsilon(
+    geometry,
+    simplex_index: int,
+    face_index: int,
+    rank: int,
+    face_epsilon_rank: int = 0,
+) -> bool:
+    """Return triangle membership with an experimental near-boundary face opening."""
+
+    in_complex = _triangle_in_complex_at(geometry, simplex_index, face_index, int(rank))
+    face_epsilon_rank = int(face_epsilon_rank)
+    if not in_complex or face_epsilon_rank <= 0:
+        return bool(in_complex)
+
+    face_rho_rank = int(geometry.face_rho_ranks[int(simplex_index), int(face_index)])
+    if face_rho_rank == 0:
+        return True
+    if 0 <= int(rank) - face_rho_rank <= face_epsilon_rank:
+        return False
+    return True
 
 
 def _canonical_face_owner_indices(geometry, simplex_index: int, face_index: int) -> tuple[int, int]:
@@ -526,6 +624,7 @@ def _build_rank_driven_components(
     size_limit_rank: int,
     rank1: int | None = None,
     event_hook=None,
+    probe_limited_depth: bool = False,
 ) -> tuple[dict[int, list[int]], set[int], np.ndarray]:
     """Build pockets using the original depth-and-delay construction.
 
@@ -549,7 +648,13 @@ def _build_rank_driven_components(
     if mesh.n_simplices == 0:
         return {}, set(), np.full(mesh.n_simplices, -1, dtype=int)
 
-    depth = _compute_pocket_depths(geometry)
+    if bool(probe_limited_depth):
+        depth = _compute_probe_limited_pocket_depths(
+            geometry,
+            int(size_limit_rank),
+        )
+    else:
+        depth = _compute_pocket_depths(geometry)
     infinity_marker = mesh.n_simplices
     delayed_by_sink: dict[int, list[int]] = defaultdict(list)
     parents: dict[int, int] = {exterior: exterior}
@@ -748,6 +853,7 @@ def _component_boundary_faces(
     size_limit_rank: int,
     rank1: int | None = None,
     active_pocket_nodes: set[int] | None = None,
+    face_epsilon_rank: int = 0,
 ) -> tuple[list[tuple[int, int, int]], list[MouthFaceRecord]]:
     """Return pocket boundary faces and regular mouth seeds.
 
@@ -779,7 +885,13 @@ def _component_boundary_faces(
     for simplex_index in simplex_indices:
         simplex_index = int(simplex_index)
         for face_index, neighbor in enumerate(mesh.neighbors[simplex_index]):
-            if _triangle_in_complex_at(geometry, simplex_index, face_index, int(rank1)):
+            if _triangle_in_complex_at_with_face_epsilon(
+                geometry,
+                simplex_index,
+                face_index,
+                int(rank1),
+                int(face_epsilon_rank),
+            ):
                 continue
 
             face_atoms = mesh.get_face_atoms(simplex_index, face_index)
@@ -823,6 +935,7 @@ def _component_boundary_faces(
 def _component_boundary_faces_void(
     geometry,
     simplex_indices: list[int],
+    face_epsilon_rank: int = 0,
 ) -> list[tuple[int, int, int]]:
     """Return complement-boundary faces for a void component."""
 
@@ -833,7 +946,13 @@ def _component_boundary_faces_void(
     for simplex_index in simplex_indices:
         simplex_index = int(simplex_index)
         for face_index, neighbor in enumerate(mesh.neighbors[simplex_index]):
-            if _base_triangle_in_complex(geometry, simplex_index, face_index):
+            if _triangle_in_complex_at_with_face_epsilon(
+                geometry,
+                simplex_index,
+                face_index,
+                int(geometry.base_rank),
+                int(face_epsilon_rank),
+            ):
                 continue
 
             if neighbor != -1 and int(neighbor) in simplex_index_set:
@@ -842,6 +961,84 @@ def _component_boundary_faces_void(
             boundary_faces.append(mesh.get_face_atoms(simplex_index, face_index))
 
     return boundary_faces
+
+
+def _attached_mouth_exterior_opposite_atom_indices(
+    geometry,
+    mouth_clusters: list[list[MouthFaceRecord]],
+    active_pocket_nodes: set[int],
+) -> set[int]:
+    """Return exterior-side atoms opposite attached mouth faces."""
+
+    mesh = geometry.mesh
+    exterior_atom_indices = set()
+    active_pocket_nodes = {int(simplex_index) for simplex_index in active_pocket_nodes}
+
+    for mouth_cluster in mouth_clusters:
+        for face in mouth_cluster:
+            if not isinstance(face, MouthFaceRecord):
+                continue
+            if int(face.face_index) < 0:
+                continue
+
+            simplex_index = int(face.simplex_index)
+            face_index = int(face.face_index)
+            if int(geometry.face_rho_ranks[simplex_index, face_index]) != 0:
+                continue
+
+            neighbor = int(mesh.neighbors[simplex_index, face_index])
+            if neighbor == -1 or neighbor in active_pocket_nodes:
+                continue
+
+            face_atoms = {int(atom_index) for atom_index in face.face_atoms}
+            for atom_index in mesh.simplex_atom_indices[neighbor]:
+                atom_index = int(atom_index)
+                if atom_index not in face_atoms:
+                    exterior_atom_indices.add(atom_index)
+
+    return exterior_atom_indices
+
+
+def _mouth_cluster_atom_indices_for_reporting(
+    geometry,
+    mouth_cluster: list[MouthFaceRecord],
+    active_pocket_nodes: set[int],
+) -> set[int]:
+    """Return local atom indices reported for one CASTp3 mouth cluster."""
+
+    mesh = geometry.mesh
+    active_pocket_nodes = {int(simplex_index) for simplex_index in active_pocket_nodes}
+    non_attached_atoms = set()
+    attached_exterior_atoms = set()
+
+    for face in mouth_cluster:
+        if not isinstance(face, MouthFaceRecord):
+            non_attached_atoms.update(int(atom_index) for atom_index in face)
+            continue
+        if int(face.face_index) < 0:
+            non_attached_atoms.update(int(atom_index) for atom_index in face.face_atoms)
+            continue
+
+        simplex_index = int(face.simplex_index)
+        face_index = int(face.face_index)
+        face_atoms = {int(atom_index) for atom_index in face.face_atoms}
+        if int(geometry.face_rho_ranks[simplex_index, face_index]) != 0:
+            non_attached_atoms.update(face_atoms)
+            continue
+
+        neighbor = int(mesh.neighbors[simplex_index, face_index])
+        if neighbor == -1 or neighbor in active_pocket_nodes:
+            non_attached_atoms.update(face_atoms)
+            continue
+
+        for atom_index in mesh.simplex_atom_indices[neighbor]:
+            atom_index = int(atom_index)
+            if atom_index not in face_atoms:
+                attached_exterior_atoms.add(atom_index)
+
+    if non_attached_atoms:
+        return non_attached_atoms | attached_exterior_atoms
+    return attached_exterior_atoms
 
 
 def _map_local_atom_indices(atom_indices_map: np.ndarray, local_atom_indices: set[int]) -> list[int]:
@@ -882,6 +1079,54 @@ def _component_atom_indices(mesh, atom_indices_map: np.ndarray, simplex_indices:
     return _map_local_atom_indices(atom_indices_map, local_atom_indices)
 
 
+def _component_peripheral_atom_indices(
+    mesh,
+    atom_indices_map: np.ndarray,
+    simplex_indices: list[int],
+    expansion_steps: int,
+    excluded_simplex_indices: set[int] | None = None,
+) -> list[int]:
+    """Return atoms from neighboring tetrahedra for experimental reporting.
+
+    This is a temporary CASTp3 parity probe. It expands only the reported atom
+    set; it does not modify pocket topology, mouth topology, areas, or volumes.
+    """
+
+    expansion_steps = int(expansion_steps)
+    if expansion_steps <= 0:
+        return []
+
+    component_simplex_indices = {int(index) for index in simplex_indices}
+    excluded_simplex_indices = set() if excluded_simplex_indices is None else {
+        int(index) for index in excluded_simplex_indices
+    }
+    visited = set(component_simplex_indices)
+    queue = deque((simplex_index, 0) for simplex_index in component_simplex_indices)
+    peripheral_simplex_indices = set()
+
+    while queue:
+        simplex_index, distance = queue.popleft()
+        if int(distance) >= expansion_steps:
+            continue
+
+        for neighbor in mesh.neighbors[int(simplex_index)]:
+            neighbor = int(neighbor)
+            if neighbor < 0:
+                continue
+            if neighbor in visited or neighbor in excluded_simplex_indices:
+                continue
+            visited.add(neighbor)
+            peripheral_simplex_indices.add(neighbor)
+            queue.append((neighbor, int(distance) + 1))
+
+    local_atom_indices = {
+        int(atom_index)
+        for simplex_index in peripheral_simplex_indices
+        for atom_index in mesh.simplex_atom_indices[int(simplex_index)]
+    }
+    return _map_local_atom_indices(atom_indices_map, local_atom_indices)
+
+
 def _vertex_is_interior_at(geometry, vertex_index: int, rank: int) -> bool:
     """Return whether a vertex is interior at the given rank, following MKALF."""
 
@@ -893,6 +1138,7 @@ def _component_face_partitions(
     simplex_indices: list[int],
     rank1: int,
     active_pocket_nodes: set[int] | None = None,
+    face_epsilon_rank: int = 0,
 ) -> tuple[list[tuple[int, int, int]], list[tuple[int, int, int]]]:
     """Return the canonical pocket/void face partition (`iF`, `rF`)."""
 
@@ -911,7 +1157,13 @@ def _component_face_partitions(
     for simplex_index in simplex_indices:
         simplex_index = int(simplex_index)
         for face_index, neighbor in enumerate(mesh.neighbors[simplex_index]):
-            if _triangle_in_complex_at(geometry, simplex_index, face_index, int(rank1)):
+            if _triangle_in_complex_at_with_face_epsilon(
+                geometry,
+                simplex_index,
+                face_index,
+                int(rank1),
+                int(face_epsilon_rank),
+            ):
                 continue
 
             triangle_index = None
@@ -1077,13 +1329,22 @@ def build_castp_feature_records(
     probe_radius: float,
     alpha_rank: int | None = None,
     beta_rank: int | None = None,
+    probe_limited_depth: bool = False,
+    peripheral_atom_expansion_steps: int = 0,
+    alpha_boundary_face_epsilon_rank: int = 0,
 ) -> list[dict]:
     """Build CASTp-like feature records from the weighted tetrahedral substrate."""
 
     mesh = geometry.mesh
     original_base_rank = int(geometry.base_rank)
     effective_base_rank = original_base_rank if alpha_rank is None else int(alpha_rank)
-    size_limit_rank = _probe_rank(geometry, probe_radius) if beta_rank is None else int(beta_rank)
+    if beta_rank is None:
+        # CASTp3/CASTpFold reports pocket bulbs beyond the 1.4 A probe rank.
+        # The probe defines the molecular surface/mouth context; it is not the
+        # default upper bound for pocket depth.
+        size_limit_rank = _geometry_max_rank(geometry)
+    else:
+        size_limit_rank = int(beta_rank)
     geometry.base_rank = int(effective_base_rank)
     try:
         return _build_castp_feature_records_at_ranks(
@@ -1091,6 +1352,9 @@ def build_castp_feature_records(
             probe_radius,
             int(effective_base_rank),
             int(size_limit_rank),
+            probe_limited_depth=bool(probe_limited_depth),
+            peripheral_atom_expansion_steps=int(peripheral_atom_expansion_steps),
+            alpha_boundary_face_epsilon_rank=int(alpha_boundary_face_epsilon_rank),
         )
     finally:
         geometry.base_rank = int(original_base_rank)
@@ -1101,6 +1365,9 @@ def _build_castp_feature_records_at_ranks(
     probe_radius: float,
     alpha_rank: int,
     beta_rank: int,
+    probe_limited_depth: bool = False,
+    peripheral_atom_expansion_steps: int = 0,
+    alpha_boundary_face_epsilon_rank: int = 0,
 ) -> list[dict]:
     """Build feature records using explicit CASTp rank cutoffs."""
 
@@ -1111,6 +1378,7 @@ def _build_castp_feature_records_at_ranks(
         geometry,
         size_limit_rank,
         rank1=int(alpha_rank),
+        probe_limited_depth=bool(probe_limited_depth),
     )
     void_components, _void_blocked_nodes = _build_void_components(
         geometry,
@@ -1131,12 +1399,16 @@ def _build_castp_feature_records_at_ranks(
         boundary_faces = _component_boundary_faces_void(
             geometry,
             simplex_indices,
+            face_epsilon_rank=int(alpha_boundary_face_epsilon_rank),
         )
+        if boundary_faces and int(alpha_boundary_face_epsilon_rank) > 0:
+            continue
         max_rank = _geometry_max_rank(geometry)
         interior_faces, _regular_faces = _component_face_partitions(
             geometry,
             simplex_indices,
             rank1=int(geometry.base_rank),
+            face_epsilon_rank=int(alpha_boundary_face_epsilon_rank),
         )
         interior_edges, _regular_edges = _component_edge_partitions(
             geometry,
@@ -1223,6 +1495,7 @@ def _build_castp_feature_records_at_ranks(
             size_limit_rank,
             rank1=geometry.base_rank,
             active_pocket_nodes=active_pocket_nodes,
+            face_epsilon_rank=int(alpha_boundary_face_epsilon_rank),
         )
         component_entries.append(
             {
@@ -1247,6 +1520,7 @@ def _build_castp_feature_records_at_ranks(
         infinity_marker=mesh.n_simplices,
         simplex_rho_ranks=geometry.simplex_rho_ranks,
         rank2=size_limit_rank,
+        pocket_simplex_indices=active_pocket_nodes,
     )
     mouth_clusters_by_component: dict[int, list[list[MouthFaceRecord]]] = defaultdict(list)
 
@@ -1292,7 +1566,13 @@ def _build_castp_feature_records_at_ranks(
                 face.face_atoms if isinstance(face, MouthFaceRecord) else face
                 for face in cluster_faces
             ]
-            mouth_atom_indices_local = sorted({atom for face in cluster_face_atoms for atom in face})
+            mouth_atom_indices_local = sorted(
+                _mouth_cluster_atom_indices_for_reporting(
+                    geometry,
+                    cluster_faces,
+                    active_pocket_nodes,
+                )
+            )
             mouth_atom_indices = [
                 int(geometry.atom_indices_map[atom_index]) for atom_index in mouth_atom_indices_local
             ]
@@ -1330,6 +1610,7 @@ def _build_castp_feature_records_at_ranks(
             simplex_indices,
             rank1=int(geometry.base_rank),
             active_pocket_nodes=active_pocket_nodes,
+            face_epsilon_rank=int(alpha_boundary_face_epsilon_rank),
         )
         interior_edges, regular_edges = _component_edge_partitions(
             geometry,
@@ -1355,6 +1636,26 @@ def _build_castp_feature_records_at_ranks(
         )
         volume = component_volume(mesh.simplex_volumes, simplex_indices)
         area = component_area(geometry.atom_coordinates, boundary_faces)
+        component_atom_indices = _component_atom_indices(
+            mesh,
+            geometry.atom_indices_map,
+            simplex_indices,
+        )
+        peripheral_atom_indices = _component_peripheral_atom_indices(
+            mesh,
+            geometry.atom_indices_map,
+            simplex_indices,
+            int(peripheral_atom_expansion_steps),
+            excluded_simplex_indices=active_pocket_nodes - set(simplex_indices),
+        )
+        attached_mouth_atom_indices = _map_local_atom_indices(
+            geometry.atom_indices_map,
+            _attached_mouth_exterior_opposite_atom_indices(
+                geometry,
+                mouth_clusters,
+                active_pocket_nodes,
+            ),
+        )
         feature_records.append(
             {
                 'id': counters[feature_type],
@@ -1364,17 +1665,14 @@ def _build_castp_feature_records_at_ranks(
                 'source_id': f'castp:{feature_type}:{counters[feature_type]}',
                 'iT': list(simplex_indices),
                 'tetrahedron_indices': list(simplex_indices),
-                'atom_indices': _component_atom_indices(
-                    mesh,
-                    geometry.atom_indices_map,
-                    simplex_indices,
+                'atom_indices': sorted(
+                    set(component_atom_indices)
+                    | set(attached_mouth_atom_indices)
+                    | set(peripheral_atom_indices)
                 ),
                 'boundary_atom_indices': list(regular_vertex_indices),
-                'component_atom_indices': _component_atom_indices(
-                    mesh,
-                    geometry.atom_indices_map,
-                    simplex_indices,
-                ),
+                'component_atom_indices': component_atom_indices,
+                'experimental_peripheral_atom_indices': peripheral_atom_indices,
                 'center': component_center(mesh.simplex_centers, simplex_indices),
                 'area': area,
                 'volume': volume,

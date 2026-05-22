@@ -149,6 +149,7 @@ def get_topography(
     extra_wait: int = 30,
     retries: int = 1,
     timeout: int = 30,
+    output_zip_file: str | Path | None = None,
 ) -> Topography:
     """Submit a structure to CASTp 3.0 and return the resulting Topography."""
 
@@ -182,7 +183,11 @@ def get_topography(
             retries=retries,
         )
 
-        zip_path = tmpdir / f'{jobid}.zip'
+        if output_zip_file is None:
+            zip_path = tmpdir / f'{jobid}.zip'
+        else:
+            zip_path = Path(output_zip_file).expanduser()
+            zip_path.parent.mkdir(parents=True, exist_ok=True)
         zip_path.write_bytes(zip_bytes)
 
         return load_castp_topography(

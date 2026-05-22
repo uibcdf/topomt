@@ -1,4 +1,3 @@
-import json
 import tempfile
 import time
 from io import BytesIO
@@ -11,19 +10,19 @@ import zipfile
 import molsysmt as msm
 
 from topomt import pyunitwizard as puw
-from topomt.third_party.castp.files import load_topography as load_castp_topography
+from topomt.third_party.castp3.files import load_topography as load_castp_topography
 from topomt.topography.Topography import Topography
 from topomt.third_party._common import prepare_wrapper_input_pdb
 
 
-SUBMIT_URL = 'https://cfold.bme.uic.edu/castpfold/submit_calc.php'
+SUBMIT_URL = 'http://sts.bioe.uic.edu/castp/submit_calc.php'
 DOWNLOAD_URL_TEMPLATE = (
-    'https://cfold.bme.uic.edu/castpfold/data/tmppdb/{jobid}/processed/{jobid}.zip'
+    'http://sts.bioe.uic.edu/castp/data/tmppdb/{jobid}/processed/{jobid}.zip'
 )
 
 
-class CastpFoldClient:
-    """Minimal client for the CASTpFold CASTp-family server."""
+class Castp3Client:
+    """Client for the CASTp 3.0 public server."""
 
     def __init__(
         self,
@@ -39,8 +38,8 @@ class CastpFoldClient:
             'User-Agent': 'TopoMT CASTp provider',
             'Accept': '*/*',
             'X-Requested-With': 'XMLHttpRequest',
-            'Origin': 'https://cfold.bme.uic.edu',
-            'Referer': 'https://cfold.bme.uic.edu/castpfold/compute',
+            'Origin': 'http://sts.bioe.uic.edu',
+            'Referer': 'http://sts.bioe.uic.edu/castp/calculation.html',
         }
 
     def submit(
@@ -48,23 +47,23 @@ class CastpFoldClient:
         pdb_path: str | Path,
         *,
         probe_radius: float = 1.4,
-        email: str = 'N/A',
+        email: str = 'null',
     ) -> str:
         pdb_path = Path(pdb_path)
         if not pdb_path.exists():
             raise FileNotFoundError(f'PDB file not found: {pdb_path}')
 
         probe_radius_value = _probe_radius_to_angstroms(probe_radius)
-        if not (0.0 <= probe_radius_value <= 5.0):
-            raise ValueError('probe_radius must be between 0.0 and 5.0 angstroms.')
+        if not (0.0 <= probe_radius_value <= 10.0):
+            raise ValueError('probe_radius must be between 0.0 and 10.0 angstroms.')
 
-        if pdb_path.stat().st_size > 2 * 1024 * 1024:
-            raise ValueError('CASTpFold only accepts uploads up to 2 MB.')
+        if pdb_path.stat().st_size > 5 * 1024 * 1024:
+            raise ValueError('CASTp 3.0 only accepts uploads up to 5 MB.')
 
         body, boundary = _encode_multipart_form_data(
             fields={
                 'probe': str(probe_radius_value),
-                'email': email,
+                'email': email or 'null',
             },
             file_field='file',
             file_path=pdb_path,
@@ -80,13 +79,12 @@ class CastpFoldClient:
             method='POST',
         )
         with urlopen(request, timeout=self.timeout) as response:
-            payload = json.loads(response.read().decode('utf-8'))
+            payload = response.read().decode('utf-8').strip()
 
-        jobid = payload.get('jobid', None)
-        if not isinstance(jobid, str) or jobid == '':
-            raise RuntimeError(f'Invalid CASTpFold submission response: {payload!r}')
+        if not payload.startswith('j_'):
+            raise RuntimeError(f'Invalid CASTp 3.0 submission response: {payload!r}')
 
-        return jobid
+        return payload
 
     def download_result_zip_bytes(
         self,
@@ -114,7 +112,7 @@ class CastpFoldClient:
             if zip_bytes is not None:
                 return zip_bytes
 
-        raise RuntimeError(f'CASTpFold result ZIP is not ready for job {jobid}.')
+        raise RuntimeError(f'CASTp 3.0 result ZIP is not ready for job {jobid}.')
 
     def _try_download_zip(self, jobid: str) -> bytes | None:
         request = Request(
@@ -146,16 +144,16 @@ def get_topography(
     structure_indices: int | list[int] = 0,
     syntax: str = 'MolSysMT',
     probe_radius: float = 1.4,
-    email: str = 'N/A',
+    email: str = 'null',
     wait: int = 20,
     extra_wait: int = 30,
     retries: int = 1,
     timeout: int = 30,
     output_zip_file: str | Path | None = None,
 ) -> Topography:
-    """Submit a structure to CASTpFold and return the resulting Topography."""
+    """Submit a structure to CASTp 3.0 and return the resulting Topography."""
 
-    client = CastpFoldClient(timeout=timeout)
+    client = Castp3Client(timeout=timeout)
     selected_molecular_system = msm.convert(
         molecular_system,
         to_form='molsysmt.MolSys',
@@ -164,7 +162,7 @@ def get_topography(
         syntax=syntax,
     )
 
-    with tempfile.TemporaryDirectory(prefix='topomt_castpfold_') as tmpdir_name:
+    with tempfile.TemporaryDirectory(prefix='topomt_castp3_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
         input_pdb, _ = prepare_wrapper_input_pdb(
             molecular_system,
