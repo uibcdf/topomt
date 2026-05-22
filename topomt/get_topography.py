@@ -85,9 +85,14 @@ def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: 
         topo = _run_pycasta(topo, **kwargs)
 
     elif method_lower == 'dfnd':
-        topo = Topography(molecular_system=molecular_system, selection=selection, structure_indices=structure_indices)
-        from .dfnd.api import dfnd
-        topo = dfnd(topo, **kwargs)
+        from .dfnd.api import dfnd_to_topography
+
+        topo = dfnd_to_topography(
+            molecular_system,
+            selection=selection,
+            structure_indices=structure_indices,
+            **kwargs,
+        )
 
     else:
         raise ValueError(

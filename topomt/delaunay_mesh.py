@@ -264,7 +264,7 @@ class DelaunayMesh:
             simplex_faces = np.empty((self.simplices.shape[0], 4, 3), dtype=int)
             for face_index, local_indices in enumerate(_SIMPLEX_FACE_LOCAL_INDICES):
                 simplex_faces[:, face_index, :] = np.sort(
-                    self.simplices[:, local_indices],
+                    self.oriented_simplices[:, local_indices],
                     axis=1,
                 )
             self._simplex_faces = simplex_faces
@@ -297,7 +297,12 @@ class DelaunayMesh:
         """Return the atom indices of a simplex face as a sorted triple."""
 
         local_indices = _SIMPLEX_FACE_LOCAL_INDICES[int(face_index)]
-        return tuple(sorted(int(atom_index) for atom_index in self.simplices[int(simplex_index), local_indices]))
+        return tuple(
+            sorted(
+                int(atom_index)
+                for atom_index in self.oriented_simplices[int(simplex_index), local_indices]
+            )
+        )
 
     def get_face_index(self, simplex_index: int, face_index: int) -> int:
         """Return the global triangle index analogous to historical `TrIndex`."""
