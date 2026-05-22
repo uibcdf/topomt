@@ -36,8 +36,8 @@ This keeps the representation hierarchy explicit:
 We pre-calculate and store the limiting radii. This allows the "Master Graph" functionality (querying different probes instantly).
 
 *   **`node_habitability`**: `ndarray (N_tet,) float32`
-    *   Stores $R_{insphere}$ for each tetrahedron.
-    *   *Usage:* To check if node $i$ is `TRANSIT` or `SOLID` for a given probe, we just check `node_habitability[i] >= R_probe`.
+    *   Stores $R_{residence}$ for each tetrahedron.
+    *   *Usage:* To check if node $i$ is `wet` or `dry` for a given probe, we just check `node_habitability[i] >= R_probe`.
 
 *   **`edge_permeability`**: `scipy.sparse.dok_matrix` or distinct arrays.
     *   Stores $R_{gate}$ for the interface between tetrahedra.
@@ -52,12 +52,10 @@ We pre-calculate and store the limiting radii. This allows the "Master Graph" fu
 *   **Choice:** Use standard Delaunay triangulation initially.
 *   **Justification:** DFND is conceptually cleaner when the tessellation is a
     neutral geometric partition of atomic centers and the atomic radii enter
-    later through `R_insphere` and `R_gate`. This keeps the physical discourse
+    later through `R_residence` and `R_gate`. This keeps the physical discourse
     of "habitability" and "permeability" explicit rather than embedding too
     much of it into the tessellation itself.
-*   **Weighted-Delaunay note:** Regular/weighted triangulation remains a valid
-    future audit path, but in DFND it should be treated as an optional
-    alternative tessellation, not as the default conceptual model.
+*   **Weighted-Delaunay note:** Weighted or regular triangulation is not part of the baseline DFND method. It should only be reconsidered if standard Delaunay plus explicit habitability and permeability cannot explain a concrete validated failure mode.
 
 ### 2.2. Graph Algorithms: `scipy.sparse.csgraph`
 *   **Choice:** We will use `scipy.sparse.csgraph` instead of `networkx` for the core traversal.
@@ -83,25 +81,25 @@ class DelaunayFlowNetwork:
     def __init__(self, molecular_system, selection='all', ...):
         # 1. Extract coords
         # 2. Run Delaunay
-        # 3. Pre-calculate R_insphere for all tets (Vectorized)
+        # 3. Pre-calculate R_residence for all tets (Vectorized)
         # 4. Pre-calculate R_gate for all internal faces (Vectorized/Parallel)
         pass
 
-    def get_pockets(self, probe_radius=1.4, min_volume=50.0, sea_level=10.0):
+    def get_pockets(self, probe_radius=1.4, min_volume=50.0, sea_level=None):
         """
-        Returns a list of Pocket dictionaries.
+        Returns raw DFND pocket/domain records or converted Pocket objects, depending on the output layer.
         This method is fast because it only filters pre-calculated arrays.
         """
-        # 1. Define Node States (Boolean masks based on R_insphere vs probe_radius)
+        # 1. Define Node States (Boolean masks based on R_residence vs probe_radius)
         # 2. Build Adjacency Matrix (Filter edges by R_gate >= probe_radius)
-        # 3. Run csgraph.connected_components on TRANSIT nodes
+        # 3. Run csgraph.connected_components on finite wet nodes
         # 4. Aggregate volumes and identifying surface atoms
         # 5. Return structured data
         pass
         
     def get_dry_network(self, probe_radius=1.4):
         """
-        Returns the complementary Solid/Protrusion network.
+        Returns the complementary dry graph records and candidate dry descriptors.
         """
         pass
 ```
@@ -118,7 +116,7 @@ reuse the same `DelaunayMesh` while consuming its alpha-sphere-derived view.
 ## 4. Algorithmic Optimization Strategy
 
 ### 4.1. The Bottleneck: $R_{gate}$ Calculation
-Calculating Apollonius for $N_{tet} \times 4$ faces (~200k faces) is the heavy
+Calculating face-gate clearance for $N_{tet} \times 4$ faces (~200k faces) is the heavy
 step.
 
 *   **Strategy:**
@@ -137,9 +135,9 @@ The `get_pockets` method should return a clean, JSON-serializable structure (sim
 ```python
 {
     'id': 1,
-    'type': 'Pocket', # or 'Void', 'Channel'
+    'type': 'Pocket', # or 'Void', 'SurfaceConcavity', 'Channel'
     'volume': 150.4,
-    'mouth_area': 25.2,
+    'external_link_area': 25.2,
     'transit_tetrahedra': [10, 11, 12...], # Indices into the mesh
     'coast_tetrahedra': [101, 102...],
     'lining_atoms': [5, 6, 20...],
@@ -151,8 +149,9 @@ This design keeps the intended layering explicit:
 
 - `DelaunayMesh` as the geometric base;
 - `DelaunayFlowNetwork` as the flow-analysis structure built on that mesh;
-- feature objects (`Pocket`, `Void`, `Channel`, `Mouth`, etc.) as the semantic
-  outputs of a specific query over that persistent network.
+- feature objects (`Void`, `SurfaceConcavity`, `Pocket`, `Channel`, etc.) as the semantic
+  outputs of a specific query over that persistent network, with `ExternalLink`
+  and derived `Mouth` descriptors attached when requested.
 
 This design ensures that `topomt` remains a high-performance library suitable
 for high-throughput screening, not just single-structure analysis.

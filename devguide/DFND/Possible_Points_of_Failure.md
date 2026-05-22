@@ -1,25 +1,22 @@
 # Delaunay Flow Network Decomposition (DFND): Possible Points of Failure
 
-Historical note: the preferred method name is now `DFND`; older mentions of
-`DFND` in this subdirectory should be read as the previous provisional label.
-
 An honest engineering approach requires anticipating failure modes. Here we analyze the potential weaknesses of DFND and propose mitigation strategies.
 
 ## 1. Geometric & Numerical Risks
 
 ### 1.1. The "Sliver" Problem (Degenerate Geometry)
 *   **Risk:** Delaunay triangulation often produces "slivers" (nearly flat tetrahedra formed by 4 almost coplanar atoms). These have a near-zero volume but can have a huge circumradius ($R_{\alpha} \to \infty$).
-*   **Failure Mode:** A naive algorithm might classify a sliver as `OCEAN` or `TRANSIT` (huge radius), creating a false "wormhole" tunnel through the protein surface where no physical space exists.
+*   **Failure Mode:** A naive algorithm might classify a sliver as `OCEAN` or `wet` (huge radius), creating a false "wormhole" tunnel through the protein surface where no physical space exists.
 *   **Mitigation (Implemented):**
     *   The **`COAST`** classification logic.
-    *   Strict check of **$R_{insphere}$** (inscribed sphere) vs. $R_{probe}$. A sliver has a tiny $R_{insphere}$ even if $R_{\alpha}$ is huge. By requiring `TRANSIT` nodes to have $R_{insphere} \ge R_{probe}$, we physically filter out slivers from the flow path.
+    *   Strict check of **`R_residence`** (residence clearance) vs. $R_{probe}$. A sliver has a tiny $R_{residence}$ even if $R_{\alpha}$ is huge. By requiring `wet` nodes to have `R_residence >= R_probe`, we physically filter out slivers from the flow path.
 
-### 1.2. The "Apollonius" Numerical Instability
-*   **Risk:** Calculating $R_{gate}$ (the gap between 3 circles) involves solving a quadratic equation (Apollonius Problem). In degenerate cases (tangent atoms, collinear centers), floating-point errors can occur.
+### 1.2. Clearance Candidate Numerical Instability
+*   **Risk:** Calculating `R_gate` and `R_residence` involves active-set candidate generation, including tangent-circle and tangent-sphere equations. In degenerate cases (tangent atoms, collinear centers, coplanar or near-coplanar tetrahedra), floating-point errors can occur.
 *   **Failure Mode:** False positives (gate opens when it should be closed) or crashes.
 *   **Mitigation:**
     *   **Pre-filtering:** Check pairwise gaps ($d_{ij} - r_i - r_j$) first. If any pair is too close, the triplet cannot be permeable.
-    *   **Robust Math:** Use a stable implementation of the Apollonius solver, handling edge cases (e.g., negative roots) gracefully.
+    *   **Robust Math:** Use stable clearance candidate solvers, validate candidate centers, recompute actual clearance, and handle edge cases gracefully.
     *   **Tolerance:** Apply a small $\epsilon$ tolerance (e.g., $10^{-5}$ Å) for tangency checks.
 
 ## 2. Topological & Algorithmic Risks

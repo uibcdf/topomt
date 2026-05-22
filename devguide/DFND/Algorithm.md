@@ -16,89 +16,111 @@ Each face $F$ of a tetrahedron is defined by 3 atoms.
 
 To construct the flow network, we compute two critical metrics for every element in the mesh:
 
-1.  **Tetrahedron Habitability ($R_{insphere}$):**
+1.  **Tetrahedron Habitability ($R_{residence}$):**
     The radius of the largest sphere that can fit inside the tetrahedron
     without intersecting the van der Waals spheres of its 4 defining atoms.
     *   *Significance:* Determines if a probe of radius $R_{probe}$ can physically "reside" inside the tetrahedron.
 
 2.  **Face Permeability ($R_{gate}$):**
-    The radius of the largest circle that can pass through the triangular face defined by 3 atoms, tangent to their van der Waals radii. This is the solution to a constrained Apollonius problem on the face plane.
+    The largest local clearance available to a probe center crossing the triangular face defined by 3 atoms. It is computed from active-set clearance candidates and validated in the face domain.
     *   *Significance:* Determines if a probe of radius $R_{probe}$ can "flow" from one tetrahedron to its neighbor.
 
 ---
 
 ## 2. Topological Classification (The Ontology)
 
-We classify every tetrahedron in the mesh into one of four distinct topological states relative to a given probe radius $R_{probe}$ and a reference "Sea Level" radius $R_{sea\_level}$ (typically a large value, e.g., 10-12 Å, representing the bulk solvent curvature).
+DFND first separates residence, face permeability, and transit for a selected
+probe radius $R_{probe}$. Exterior contact is then detected from boundary or
+hull faces. `COAST` is derived from face permeability, but the movement graph is
+built from transit states.
 
-### 2.1. SOLID (The Structure)
-*   **Condition:** $R_{insphere} < R_{probe}$
-*   **Physical Meaning:** The space is too cramped for the probe. It represents the atoms and their immediate excluded volume.
-*   **Role:** These nodes act as **Walls** in the Wet Network and as **Nodes** in the Dry Network.
+### 2.1. Dry Tetrahedra
+*   **Condition:** `R_residence < R_probe`
+*   **Physical Meaning:** The probe cannot reside inside the tetrahedron. It represents excluded or blocked local volume.
+*   **Role:** These nodes cannot contribute resident volume. If they have two or more permeable contacts, they can still act as transit connectors; otherwise they are terminal contacts or non-transit dry nodes.
 
-### 2.2. TRANSIT (The Volume)
-*   **Condition:** $R_{probe} \le R_{insphere} < R_{sea\_level}$
-*   **Physical Meaning:** The probe fits comfortably inside. This is the "habitable volume" of pockets, channels, or clefts.
-*   **Role:** These are the **Hubs** of the Wet Network. Flow can enter and exit these nodes, forming paths.
+### 2.2. Wet Tetrahedra
+*   **Condition:** `R_residence >= R_probe`
+*   **Physical Meaning:** The probe can reside inside the tetrahedron. This is the habitable volume of pockets, channels, or clefts.
+*   **Role:** Wet tetrahedra are resident-transit nodes. They contribute resident volume and participate in the transit graph through permeable contacts.
 
-### 2.3. COAST (The Interface/Beach)
-*   **Condition:** Technically $R_{insphere} \ge R_{probe}$ (geometrically valid), but topological or heuristic criteria mark it as a "dead end" or "shallow water".
-    *   *Scenario A (Slivers):* Flat tetrahedra with large $R_{\alpha}$ but negligible physical volume or height.
-    *   *Scenario B (Periphery):* Tetrahedra that connect to `SOLID` walls but do not lead to other `TRANSIT` nodes via permeable faces.
-*   **Physical Meaning:** The "shoreline" of the pocket. Accessible but not traversable. The probe can "poke its nose" in but cannot fully lodge or pass through.
-*   **Role:** These nodes contribute to the **Volume** and **Surface Area** of a pocket but are **pruned** from the graph traversal to prevent false connectivity.
+### 2.3. COAST (The Mixed Boundary)
+*   **Condition:** A tetrahedron has at least one permeable face and at least one non-permeable face.
+*   **Physical Meaning:** COAST marks a local boundary between passable and blocked directions. It is a tetrahedron-level contact or lining label, not a separate flow state.
+*   **Wet subtype:** `wet_coast` is habitable (`R_residence >= R_probe`) and belongs to the wet-flow graph if connected through permeable faces.
+*   **Dry subtype:** `dry_coast` is not habitable (`R_residence < R_probe`) but still touches at least one permeable face, so it can help identify lining atoms, contact regions, and pharmacophore-relevant boundary geometry.
+*   **Role:** COAST is attached after computing the primary wet connectivity. It must not create additional connectivity by itself. Whether it contributes to reported feature volume is left to the metrics contract.
 
-### 2.4. OCEAN (The Infinite Bulk)
-*   **Condition:** $R_{insphere} \ge R_{sea\_level}$
-*   **Physical Meaning:** The bulk solvent far from the protein surface.
-*   **Role:** All `OCEAN` tetrahedra are collapsed into a single virtual **Root Node (-1)** or "Infinity". Any connection between `TRANSIT`/`COAST` and `OCEAN` constitutes a **Mouth**.
+### 2.4. OCEAN / Exterior Root
+*   **Condition:** `OCEAN` is the virtual exterior node of the DFND graph. It is wet by definition and does not require an `R_residence` test.
+*   **Physical Meaning:** The infinite solvent region outside the convex hull.
+*   **Geometry:** `OCEAN` is not a finite Delaunay tetrahedron. It has no finite geometry, no volume, no `R_residence`, and cannot be `COAST`.
+*   **Role:** A finite wet tetrahedron connects to `OCEAN` only through a boundary or hull face that is permeable to the selected probe. Connected clusters of those exterior contacts are `external_links`; geometric mouths can be derived later from them.
 
 ---
 
 ## 3. Network Construction and Flow
 
-The Delaunay Flow Network is a dual graph $G = (V, E)$ where nodes $V$ are
-tetrahedra and edges $E$ are shared faces.
+The Delaunay Flow Network (`DFN`) is the probe-specific movement graph built on top of the Delaunay triangulation. Finite transit nodes include resident tetrahedra and non-resident transit connectors. Permeable shared faces create transit edges, and `OCEAN` is added as a virtual exterior node.
 
 ### 3.1. Edge Permeability Rule
 An edge exists between two tetrahedra $T_i$ and $T_j$ sharing face $F_{ij}$ if and only if:
 1.  **Geometric Permeability:** $R_{gate}(F_{ij}) \ge R_{probe}$.
-2.  **Topological Validity:** Both $T_i$ and $T_j$ are "compatible" for flow (e.g., typically flow is tracked between `TRANSIT` nodes, or from `OCEAN` to `TRANSIT`).
+2.  **Topological Validity:** Flow is tracked between transit nodes. A non-resident tetrahedron with two or more permeable contacts can be a transit connector; a non-resident tetrahedron with one permeable contact is only a terminal contact.
 
-### 3.2. The Flow Algorithm (Wet Network)
+### 3.2. The Flow Algorithm (DFN)
 
-1.  **Initialization:** Identify the **Root Node** (the collection of all `OCEAN` tetrahedra).
-2.  **Breadth-First Search (BFS):** Start a traversal from the Root Node into the mesh.
-    *   Flow can pass through faces where $R_{gate} \ge R_{probe}$.
-    *   Flow enters `TRANSIT` nodes.
-    *   Flow *stops* at `SOLID` nodes (walls).
-    *   Flow *accumulates* at `COAST` nodes (dead ends) but does not continue through them.
-3.  **Component Identification:**
-    *   **Pockets:** Connected components of `TRANSIT` + `COAST` nodes that are reachable from the Root but are geometrically distinct (e.g., separated by a bottleneck).
-    *   **Voids:** Connected components of `TRANSIT` + `COAST` nodes that are **NOT** reachable from the Root (no permeable path to infinity).
-    *   **Channels:** Paths within a component that connect two distinct Mouths (cycles involving the Root).
+1.  **Initialization:** Add the virtual **OCEAN / Root Node (-1)** as the wet exterior reference.
+2.  **Transit Backbone:** Build the finite transit graph from resident-transit nodes and non-resident transit connectors connected through permeable shared faces.
+3.  **Transit Domains:** After removing `OCEAN`, each finite transit component is a `TransitDomain`.
+4.  **Residence Regions:** Record resident-node subsets inside each `TransitDomain`; transit connectors contribute connectivity but not resident volume.
+5.  **External Links:** For each transit domain, group connected permeable boundary or hull contacts into `external_links` to `OCEAN`.
+6.  **Component Identification:**
+    *   Compute `n_external_links`, `n_resident_nodes`, `has_residence`, and `has_open_interior` for each `TransitDomain`.
+    *   **Void domain:** zero `external_links` and at least one resident node.
+    *   **Degenerate subprobe domain:** zero `external_links` and no resident nodes; raw/filter label, not a void.
+    *   **Pocket domain:** exactly one `external_link` and at least one resident node.
+    *   **Surface concavity domain:** exactly one `external_link` and no resident nodes.
+    *   **Multi-external-link domain:** two or more `external_links` and at least one resident node. `Channel` is a public shorthand only after path or morphology interpretation.
+    *   **Nonresident passage domain:** two or more `external_links` and no resident nodes; provisional raw label.
+    *   **Local labels:** `open`, `coast`, and `sealed` remain local metadata and do not create connectivity by themselves. `wet_open` is reported as `has_open_interior`, not used as the family gate.
 
-### 3.3. The Structure Algorithm (Dry Network)
 
-Symmetrically, we can analyze the `SOLID` nodes:
-1.  **Core Definition:** The largest connected component of `SOLID` tetrahedra.
-2.  **Protrusions:** Branches of the `SOLID` network that extend deeply into `OCEAN` territory.
-3.  **Dry/Wet Interface:** `SOLID` tetrahedra that share a face with `TRANSIT` or `OCEAN` nodes are defined as the **Surface Shell**.
+### 3.3. The Dry Network
+
+The dry network is the complementary probe-blocking graph. It is not a direct
+public-feature classifier in v1.
+
+1. **Dry nodes:** finite tetrahedra with `R_residence < R_probe`.
+2. **Dry edges:** connections between two dry nodes through a shared finite face
+   with `R_gate < R_probe`.
+3. **Dry components:** connected components of the dry graph.
+4. **Dry interfaces:** records where dry components contact wet domains,
+   external links, `OCEAN`, or hull/exterior context.
+5. **Dry depth:** unweighted graph distance from dry-interface boundary nodes
+   into a dry component.
+
+Dry motifs such as protrusions, ridges, rims, walls, separators, lining regions,
+and dry cores remain candidate descriptors until validated.
 
 ---
 
-## 4. Pruning and Refinement
+## 4. Reporting Filters and Refinement
 
-To ensure robustness against surface roughness (atomic noise):
-1.  **Volume Pruning:** Small, isolated branches of `TRANSIT` nodes with volume $< V_{min}$ are merged into the bulk or discarded as surface roughness.
-2.  **Depth Pruning:** `TRANSIT` chains that do not penetrate deeper than a threshold $D_{min}$ from the "Sea Level" (Alpha Shape boundary) are considered surface rugosity, not pockets.
+Core graph construction should not silently prune components. Small domains,
+dry singletons, marginal gates, and near-zero-volume records must first appear
+in raw output with flags.
+
+Optional reporting filters may later hide or group records using criteria such
+as minimum volume, minimum depth, persistence, or confidence. These filters are
+not part of the primary decomposition rule.
 
 ### 4.1. Why standard Delaunay is the preferred default
 
 In DFND, atomic radii already enter the method in the physically meaningful
 places:
 
-- in tetrahedron habitability (`R_insphere`);
+- in tetrahedron habitability (`R_residence`);
 - and in face permeability (`R_gate`).
 
 That means the tessellation itself can remain a neutral Delaunay partition of
@@ -110,8 +132,7 @@ This separation is conceptually useful:
 - geometry defines the cells and adjacencies;
 - physics defines what is habitable and what is permeable.
 
-Weighted Delaunay remains a valid future audit direction, but the standard
-Delaunay route is the cleaner default for the DFND physical narrative.
+Weighted Delaunay is not part of the baseline DFND method. The standard Delaunay route is the canonical default because atomic radii already enter explicitly through habitability and permeability.
 
 This algorithmic structure ensures that DFND identifies features that are both
-**geometrically exact** and **topologically significant**.
+explicitly traceable and topologically significant.

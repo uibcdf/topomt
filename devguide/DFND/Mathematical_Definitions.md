@@ -1,15 +1,12 @@
 # Delaunay Flow Network Decomposition (DFND): Mathematical Definitions
 
-Historical note: the preferred method name is now `DFND`; older mentions of
-`DFND` in this subdirectory should be read as the previous provisional label.
-
 This document provides the formal mathematical specifications for the geometric primitives used in DFND. It serves as the definitive reference for implementation, ensuring that concepts like "permeability" and "habitability" are calculated consistently.
 
 ## 1. Preliminaries
 
 Let the molecular system be represented by a set of $N$ atoms, where the $i$-th atom $A_i$ is defined by its center coordinates $\mathbf{c}_i \in \mathbb{R}^3$ and its van der Waals radius $r_i \in \mathbb{R}^+$.
 
-We construct the weighted Delaunay triangulation (or regular triangulation) of these atoms.
+DFND constructs the standard Delaunay triangulation of atomic centers. Atomic radii are not used as tessellation weights in the baseline method; they enter explicitly through tetrahedron habitability and face permeability.
 Let $T$ be a tetrahedron defined by four atoms {$A_1, A_2, A_3, A_4$}.
 Let $F$ be a triangular face defined by three atoms {$A_1, A_2, A_3$}.
 
@@ -17,104 +14,267 @@ The probe is a sphere of radius $R_{probe}$.
 
 ---
 
-## 2. Face Permeability ($R_{gate}$)
+## 2. Face Permeability (`R_gate`)
 
-**Objective:** Determine the radius of the largest probe that can pass through the face $F$.
+**Objective:** determine the maximum probe radius whose center can cross a
+Delaunay face under the adopted local face model.
 
-This is equivalent to finding the radius $R_{gate}$ of the largest circle that can be placed in the plane of the face such that it is tangent to (or disjoint from) the three circular cross-sections of the atoms, without overlapping them.
+`R_gate` is a clearance primitive, not a raw tangency root. The implementation
+builds candidate centers from active constraints and then validates each
+candidate against the closed triangular face before selecting the largest actual
+clearance.
 
-### 2.1. Projection to 2D
-First, we define the plane $\mathcal{P}$ passing through the centers $\mathbf{c}_1, \mathbf{c}_2, \mathbf{c}_3$.
-Since the probe passes *through* the face, the critical constriction is in this plane. However, the atoms are spheres, so their intersection with the plane are circles.
-*   The center of the atom circle $i$ in the plane is simply $\mathbf{c}_i$ (since the plane passes through the centers).
-*   The radius of the atom circle $i$ in the plane is the full van der Waals radius $r_i$.
+### 2.1. Face Plane Model
 
-Thus, the problem reduces to the **Problem of Apollonius** in 2D: Find a circle of radius $R$ and center $\mathbf{p}$ that is externally tangent to three given circles $C_1(\mathbf{c}_1, r_1)$, $C_2(\mathbf{c}_2, r_2)$, $C_3(\mathbf{c}_3, r_3)$.
+For a face `F = (A1, A2, A3)`, DFND works in the plane of the three atom centers.
+The three atoms are represented by disks with the assigned atomic radii. Under
+this v1 local model:
 
-### 2.2. The Apollonius Equation
-Let the solution circle have center $(x, y)$ and radius $R$. The condition of external tangency to circle $i$ is:
-$$ (x - x_i)^2 + (y - y_i)^2 = (r_i + R)^2 $$
+```text
+R_gate(F) = max clearance(x)
+            over probe-center positions x in the closed triangular face
+```
 
-For 3 circles, we have a system of 3 quadratic equations.
-Subtracting equations pairwise (e.g., Eq 1 - Eq 2) eliminates the quadratic terms $x^2, y^2, R^2$, resulting in linear equations describing the "radical axes".
+where:
 
-However, we specifically seek the **Smallest Enclosing Circle of the Void** (which corresponds to one of the 8 Apollonius solutions: the one that touches all 3 circles externally, often called the inner Soddy circle if the atoms were touching).
+```text
+clearance(x) = min_i(||x - c_i|| - r_i), for i in the three face atoms
+```
 
-**Constraint:** The probe must pass *between* the atoms.
-Therefore, the valid solution must have $R > 0$ and the center $\mathbf{p}$ must lie within the triangle (or reasonably close to the gap, not enclosing the atoms).
+A face is permeable to a probe of radius `R_probe` when:
 
-### 2.3. Pre-Checks (The Gaps)
-Before solving the quadratic system, we define the pairwise gaps:
-$$ g_{ij} = ||\mathbf{c}_i - \mathbf{c}_j|| - (r_i + r_j) $$
-*   If any $g_{ij} < 0$, the atoms overlap. The "gate" might still exist if the overlap is small, but if the atoms block the path, $R_{gate} = 0$.
-*   **Upper Bound:** $R_{gate} \le \min(g_{12}, g_{23}, g_{13})$. Actually, this is loose. A tighter bound is related to the incircle of the triangle formed by the centers.
+```text
+R_gate(F) >= R_probe
+```
+
+### 2.2. Active-Set Candidates
+
+The candidate set includes:
+
+- `face3`: three-atom tangent candidates generated from the 2D tangency
+  construction;
+- `pair2`: two-atom-limited candidates on face edges or boundary strata;
+- explicit validation that the candidate center lies in the face domain;
+- actual-clearance recomputation against the three face atoms.
+
+The tangency construction is therefore an internal candidate generator. It is
+not the public DFND gate contract by itself.
+
+### 2.3. Scope and Diagnostics
+
+`R_gate` is a local face-gate radius. It does not prove global continuous-space
+reachability, and it does not automatically include atoms outside the three face
+atoms. Contextual intrusion flags and path-level analysis must be reported
+separately when needed.
 
 ---
 
-## 3. Tetrahedron Habitability ($R_{insphere}$)
+## 3. Tetrahedron Residence (`R_residence`)
 
-**Objective:** Determine the radius of the largest probe that can fit inside the tetrahedron $T$.
+**Objective:** determine the maximum probe radius whose center can reside in the
+closed Delaunay tetrahedron under the adopted local cell model.
 
-This is the 3D generalization of the face permeability problem. It is the **Problem of Apollonius in 3D** (finding a sphere tangent to 4 spheres).
+`R_residence` is the residence clearance primitive. It should not be equated
+with a single four-atom tangent sphere unless that candidate is admissible and
+optimal.
 
 ### 3.1. Formal Definition
-We seek a sphere with center $\mathbf{p} \in \mathbb{R}^3$ and radius $R$ such that:
-$$ ||\mathbf{p} - \mathbf{c}_i|| = r_i + R \quad \forall i \in \{1, 2, 3, 4\} $$
 
-This represents a sphere "kissing" the 4 atomic spheres from the outside (empty space).
+For a tetrahedron `T = (A1, A2, A3, A4)`:
 
-### 3.2. Solution Strategy
-This system can be linearized. By squaring the distances:
-$$ ||\mathbf{p}||^2 - 2\mathbf{p}\cdot\mathbf{c}_i + ||\mathbf{c}_i||^2 = r_i^2 + 2r_iR + R^2 $$
-Subtracting equation $j$ from equation $i$:
-$$ 2\mathbf{p}\cdot(\mathbf{c}_j - \mathbf{c}_i) + 2R(r_i - r_j) = ||\mathbf{c}_j||^2 - ||\mathbf{c}_i||^2 - r_j^2 + r_i^2 $$
-This gives 3 linear equations relating $\mathbf{p}$ and $R$.
-We can express $\mathbf{p}$ as a linear function of $R$: $\mathbf{p}(R) = \mathbf{A} + \mathbf{B}R$.
-Substituting back into the first sphere equation yields a quadratic equation for $R$:
-$$ aR^2 + bR + c = 0 $$
-We solve for $R$.
-*   The **Habitability Radius** $R_{insphere}$ is the largest positive real root of this equation.
-*   If no positive real root exists, the void is virtual or blocked.
+```text
+R_residence(T) = max clearance(x)
+                 over probe-center positions x in the closed tetrahedron
+```
 
-### 3.3. Difference from Orthogonal Radius ($R_{\alpha}$)
-Standard Alpha Shapes use the **Orthogonal Center**, which is the point equidistant to the surface of the atoms in terms of *power distance* ($d^2 - r^2$).
-$$ ||\mathbf{p}_{\alpha} - \mathbf{c}_i||^2 - r_i^2 = R_{\alpha}^2 $$
-This is a linear system (simpler to solve).
-*   **Relationship:** $R_{insphere}$ is the "true" physical limit. $R_{\alpha}$ is the "topological" limit used by Delaunay.
-*   **Approximation:** For atoms of similar size ($r_i \approx r_j$), $R_{insphere} \approx R_{\alpha}$.
-*   **DFND Policy:** We prefer $R_{insphere}$ for physical correctness (Habitability), but we may use $R_{\alpha}$ for topological indexing since it is native to the Delaunay dual.
+where:
+
+```text
+clearance(x) = min_i(||x - c_i|| - r_i), for i in the four tetrahedron atoms
+```
+
+A tetrahedron is resident for a probe of radius `R_probe` when:
+
+```text
+R_residence(T) >= R_probe
+```
+
+### 3.2. Active-Set Candidates
+
+The candidate set includes:
+
+- `interior4`: four-atom tangent candidates generated from the 3D tangency
+  construction;
+- `face3`: three-atom tangent candidates constrained to tetrahedron faces;
+- `edge2`: two-atom tangent candidates constrained to tetrahedron edges;
+- explicit validation that the candidate center lies in the tetrahedron;
+- actual-clearance recomputation against the four tetrahedron atoms.
+
+The four-atom tangency value is retained as `R_apollonius4` for diagnostics,
+but the DFND residence primitive is `R_residence`.
+
+### 3.3. Difference from Orthogonal Radius (`R_alpha`)
+
+Standard alpha-shape machinery uses an orthogonal or power-distance radius. DFND
+uses standard Delaunay as the neutral substrate and applies atomic radii through
+`R_residence` and `R_gate` afterward.
+
+`R_residence` can be compared with `R_alpha` diagnostically, but it is not an
+alpha-shape radius and should not be described as equivalent to one.
+
+## 3.4. Room-Window Asymmetry
+
+`R_residence` and `R_gate` do not have a universal ordering. Compact
+tetrahedra can have resident capacity larger than any face gate, while
+sliver-like tetrahedra can have small resident capacity but large permeable
+faces.
+
+This motivates the separation:
+
+```text
+residence = controlled by R_residence
+transit   = controlled by permeable contacts from R_gate
+contact   = one-sided access without through-transit
+```
+
+A resident sealed tetrahedron is physically interpretable: the probe can reside
+inside the local cell but cannot exit through any face at the selected probe
+radius. A non-resident open tetrahedron is also physically interpretable: the
+probe cannot reside there, but it may pass through if at least two contacts are
+permeable.
 
 ---
 
 ## 4. Geometric Classifications
 
-### 4.1. Coast Condition (The Sliver)
-A tetrahedron is classified as `COAST` (Sliver) if it is topologically open but physically flat.
-Metric: **Aspect Ratio ($\rho$)**
-$$ \rho = \frac{R_{insphere}}{R_{circum}} $$
-Or more specifically for our purpose:
-$$ \rho_{flatness} = \frac{R_{insphere}}{\max(L_{edges})} $$
-If $R_{\alpha} > R_{probe}$ (Topologically Open) **BUT** $R_{insphere} < R_{probe}$ (Physically Closed), it is a **COAST** node.
+### 4.1. Local Permeability Class
+DFND separates volumetric habitability from face permeability. A tetrahedron is
+classified as wet or dry from its habitability radius, while each face is
+classified as permeable or non-permeable from its gate radius.
 
-### 4.2. Sea Level
-Let $\mathcal{K}_{\infty}$ be the Alpha Complex for $\alpha = \infty$ (The Convex Hull).
-Let $\mathcal{K}_{sea}$ be the Alpha Complex for $\alpha = R_{sea\_level}$.
-A tetrahedron $T$ belongs to `OCEAN` if $T 
-otin \mathcal{K}_{sea}$.
-Ideally, $R_{sea\_level} \approx 10$ Å.
+```text
+tetrahedron_wet(T) = R_residence(T) >= R_probe
+tetrahedron_dry(T) = R_residence(T) < R_probe
+
+face_permeable(F) = R_gate(F) >= R_probe
+face_non_permeable(F) = R_gate(F) < R_probe
+```
+
+The local permeability class of a finite tetrahedron is:
+
+```text
+open(T) = all finite faces of T are permeable
+
+coast(T) = at least one finite face of T is permeable
+           and at least one finite face of T is non-permeable
+
+sealed(T) = all finite faces of T are non-permeable
+```
+
+`non-coast` is only a derived complement, not a primary label:
+
+```text
+non_coast(T) = open(T) or sealed(T)
+```
+
+Combining habitability and local permeability gives:
+
+```text
+wet_open(T) = tetrahedron_wet(T) and open(T)
+wet_coast(T) = tetrahedron_wet(T) and coast(T)
+wet_sealed(T) = tetrahedron_wet(T) and sealed(T)
+
+dry_open(T) = tetrahedron_dry(T) and open(T)
+dry_coast(T) = tetrahedron_dry(T) and coast(T)
+dry_sealed(T) = tetrahedron_dry(T) and sealed(T)
+```
+
+These labels do not create flow connectivity by themselves. Primary movement
+connectivity is the transit graph: resident tetrahedra plus non-resident
+transit connectors connected through permeable faces. Local class labels are
+retained as boundary, lining, pharmacophore, and diagnostic metadata. Whether
+any local class contributes to a reported feature volume is a metric-policy
+decision, not part of the topological classification itself.
+
+### 4.2. Sea Level and Exterior
+The baseline DFND exterior is probe-dependent. A wet component contacts the
+exterior when it has one or more permeable boundary or hull faces connected to
+the outside root.
+
+`OCEAN` is the virtual exterior node of the DFND graph. Geometrically, it
+represents the unbounded region outside the convex hull. It is wet by
+definition because the probe is assumed to fit freely in the exterior. It is
+not a finite Delaunay tetrahedron, has no `R_residence`, has no volume, and
+cannot be `COAST`.
+
+The default sea-level scale is therefore tied to `R_probe`, with 1.4 Å as the
+water-probe default.
+
+Larger sea-level values may be introduced later as an optional macro-surface
+mode, but they are not part of the first canonical DFND contract.
 
 ---
 
-## 5. Flow Logic
+## 5. DFN and Concavity Domains
 
-### 5.1. Adjacency Matrix
-Let $\mathbf{A}$ be the adjacency matrix of the dual graph.
-$$ A_{ij} = 1 \iff (T_i \cap T_j \neq \emptyset) \land (R_{gate}(T_i \cap T_j) \ge R_{probe}) $$
+### 5.1. Delaunay Flow Network
+Let `DFN` be the probe-specific graph built over the Delaunay triangulation.
+Finite transit tetrahedra are graph nodes. Resident tetrahedra are transit nodes. Non-resident tetrahedra with at least two permeable contacts are transit connectors. Two finite transit tetrahedra are connected when they share a permeable face.
 
-### 5.2. Component Volume
-The volume of a pocket $P$ is the sum of the volumes of its constituent tetrahedra.
-$$ Vol(P) = \sum_{T \in P} Vol(T) $$
-*   *Note:* This is the volume of the Delaunay tetrahedra (Topological Volume).
-*   *Correction:* To get the "True Solvent Accessible Volume", one would subtract the volume of the atomic caps inside each tetrahedron.
-    $$ Vol_{net}(P) = Vol(P) - \sum_{i \in Atoms(P)} Vol(Sphere_i \cap P) $$
-    DFND focuses on $Vol(P)$ for speed and topological robustness, unless "high precision" mode is requested.
+Let `OCEAN` be the virtual wet exterior root. It is connected to a finite transit tetrahedron only through a permeable boundary or hull face.
+
+### 5.2. External Links
+An `external_link` of a concavity domain is a connected cluster of
+permeable boundary or hull contacts between that domain and `OCEAN`.
+
+A single wide exterior opening may contain many boundary faces, but it should
+count as one `external_link` if those faces form one connected cluster.
+
+`mouth` is a geometric descriptor that may be derived from an `external_link`;
+it is not the primitive used to define primary DFN feature families.
+
+### 5.3. Primary Domain Families
+Remove `OCEAN` and its incident edges from the transit graph. Each connected component of the remaining finite transit graph is a `TransitDomain`; interpreted topographically with its residence regions and external links, it is a `concavity_domain` `D`.
+
+Define:
+
+```text
+L(D) = n_external_links(D)
+has_residence(D) = n_resident_nodes(D) >= 1
+has_open_interior(D) = exists t in D such that t is wet_open
+```
+
+Primary family classification uses access and residence:
+
+```text
+void_domain(D) = L(D) == 0 and has_residence(D)
+degenerate_subprobe_domain(D) = L(D) == 0 and not has_residence(D)
+
+surface_concavity_domain(D) = L(D) == 1 and not has_residence(D)
+pocket_domain(D) = L(D) == 1 and has_residence(D)
+
+nonresident_passage_domain(D) = L(D) >= 2 and not has_residence(D)
+multi_external_link_domain(D) = L(D) >= 2 and has_residence(D)
+```
+
+`has_open_interior(D)` is a descriptor, not the classifier. `channel_domain` may be used as a public shorthand for resident `multi_external_link_domain`, but biological channel, tunnel, or pore labels should be assigned only after additional path, depth, geometry, or morphology analysis.
+
+`surface_concavity_domain` remains provisional until explicit toy systems or
+geometric sweeps demonstrate the realizability and utility of accessible
+wet domains without wet-open tetrahedra under the current `R_residence` and
+`R_gate` definitions.
+
+### 5.4. Component Volume
+The topological volume of a concavity domain `D` is the sum of the Euclidean
+volumes of its constituent finite Delaunay tetrahedra.
+
+$$ Vol_{topological}(D) = \sum_{T \in D} Vol(T) $$
+
+This quantity includes portions of tetrahedra occupied by the atomic balls,
+because Delaunay tetrahedra extend to atom centers. It is useful for graph
+debugging and coarse internal comparisons, but it is not a physical solvent
+volume and should not be compared directly with CASTp-like pocket volumes.
+
+A physical or publication-facing volume must be represented separately, for
+example as `volume_solvent` or `volume_solvent_estimate`, and should subtract or
+otherwise correct atom-occupied portions according to an explicit metric policy.

@@ -1,8 +1,5 @@
 # Delaunay Flow Network Decomposition (DFND): Pertinence and Integration Analysis within TopoMT
 
-Historical note: the preferred method name is now `DFND`; older mentions of
-`DFND` in this subdirectory should be read as the previous provisional label.
-
 This document analyzes the strategic fit of the DFND module within the existing architecture and philosophy of the TopoMT library. It validates that DFND is not merely an add-on, but a core engine that aligns with and empowers the library's hierarchical design.
 
 ## 1. Philosophical Alignment
@@ -18,8 +15,8 @@ This document analyzes the strategic fit of the DFND module within the existing 
 The relationship between DFND and the existing codebase should follow a **Generator/Product** pattern.
 
 *   **The Generator (DFND):** The `DelaunayFlowNetwork` class acts as the computational engine. It ingests atomic coordinates and builds the persistent, parameter-independent dual graph (Delaunay + Permeability Map).
-*   **The Configuration:** The user supplies specific query parameters ($R_{probe}$, $R_{sea\_level}$).
-*   **The Product (`Topography`):** The result of querying the DFND engine is a populated `Topography` object containing instances of `Pocket`, `Channel`, `Mouth`, etc.
+*   **The Configuration:** The user supplies specific query parameters such as $R_{probe}$ and optional exterior or sea-level policy settings.
+*   **The Product (`Topography`):** The result of querying the DFND engine is a populated `Topography` object containing instances of `Void`, `SurfaceConcavity`, `Pocket`, `Channel`, and derived exterior-link descriptors.
 
 **Implication:**
 DFND does not replace `topomt.topography.Topography`; it populates it. The `Topography` class becomes the container for the specific "instance" of the topography at a given resolution, derived from the underlying DFND model.
@@ -29,10 +26,11 @@ TopoMT already defines a rich ontology in `topomt/features/`. DFND provides a di
 
 | DFND Concept | TopoMT Class | Mapping Logic |
 | :--- | :--- | :--- |
-| **Pocket Component** | `topomt.features.Pocket` | Connected component of `TRANSIT` + `COAST` nodes. |
-| **Flow Cycle** | `topomt.features.Channel` | Cycle in the flow graph connecting two `Mouths`. |
-| **Ocean Connection** | `topomt.features.Mouth` | Faces connecting `TRANSIT` to `OCEAN`. |
-| **Buried Component** | `topomt.features.Void` | Isolated component disconnected from Root. |
+| **Void** | `topomt.features.Void` | Transit domain with zero `external_links` and at least one resident node. |
+| **Surface Concavity** | New feature class or pocket-family subtype | Transit domain with exactly one `external_link` and no resident nodes. |
+| **Pocket** | `topomt.features.Pocket` | Transit domain with exactly one `external_link` and at least one resident node. |
+| **Channel** | `topomt.features.Channel` | Resident `multi_external_link_domain`; channel remains shorthand until morphology/path analysis. |
+| **External Link** | New descriptor class or `Mouth` precursor | DFN-level exterior connection. A geometric `Mouth` can be derived from it. |
 | **Solid Component** | *New Feature Class* | (Proposed) `topomt.features.Protrusion` or `Core`. |
 
 **Verdict:** High architectural compatibility. DFND will act as a factory that instantiates these existing classes, giving them rigorous geometric definitions.

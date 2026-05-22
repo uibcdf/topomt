@@ -131,20 +131,47 @@ Cross-project improvement proposals are grouped separately from engine notes:
 
 ## DFND
 
-The DFND material is grouped under the dedicated `DFND/` subdirectory:
+The DFND material is grouped under the dedicated `DFND/` subdirectory. The most useful entry point is `Overview.md`; the canonical abstract contract is `abstract_contract.md`:
 
 - [DFND/Overview.md](DFND/Overview.md)
 - [DFND/checkpoint.md](DFND/checkpoint.md)
+- [DFND/implementation_status.md](DFND/implementation_status.md)
+- [DFND/api_contract_v1.md](DFND/api_contract_v1.md)
 - [DFND/Technical_Design.md](DFND/Technical_Design.md)
 - [DFND/Algorithm.md](DFND/Algorithm.md)
+- [DFND/feature_definitions.md](DFND/feature_definitions.md)
+- [DFND/abstract_contract.md](DFND/abstract_contract.md)
+- [DFND/data_model_v1.md](DFND/data_model_v1.md)
+- [DFND/toy_systems_v1.md](DFND/toy_systems_v1.md)
+- [DFND/validation_plan.md](DFND/validation_plan.md)
+- [DFND/residence_radius_audit.md](DFND/residence_radius_audit.md)
+- [DFND/gate_radius_audit.md](DFND/gate_radius_audit.md)
+- [DFND/known_limitations.md](DFND/known_limitations.md)
+- [DFND/checkpoint_external_feedback_2026_05_20.md](DFND/checkpoint_external_feedback_2026_05_20.md)
+- [DFND/checkpoint_real_system_stability.md](DFND/checkpoint_real_system_stability.md)
+- [DFND/checkpoint_input_policy_hardening.md](DFND/checkpoint_input_policy_hardening.md)
+- [DFND/checkpoint_face_identity_external_links.md](DFND/checkpoint_face_identity_external_links.md)
+- [DFND/checkpoint_numerical_threshold_policy.md](DFND/checkpoint_numerical_threshold_policy.md)
+- [DFND/checkpoint_dry_graph_basics.md](DFND/checkpoint_dry_graph_basics.md)
+- [DFND/checkpoint_dry_interfaces_depth.md](DFND/checkpoint_dry_interfaces_depth.md)
+- [DFND/checkpoint_probe_radius_sweep.md](DFND/checkpoint_probe_radius_sweep.md)
+- [DFND/checkpoint_quality_snapshot.md](DFND/checkpoint_quality_snapshot.md)
+- [DFND/checkpoint_dfnd_hardening_stint.md](DFND/checkpoint_dfnd_hardening_stint.md)
+- [DFND/domain_motifs.md](DFND/domain_motifs.md)
+- [DFND/dry_network_and_convexity.md](DFND/dry_network_and_convexity.md)
+- [DFND/residence_transit_contract.md](DFND/residence_transit_contract.md)
+- [DFND/numerical_policy.md](DFND/numerical_policy.md)
+- [DFND/metrics_contract.md](DFND/metrics_contract.md)
+- [DFND/input_policy.md](DFND/input_policy.md)
+- [DFND/Implementation_Route.md](DFND/Implementation_Route.md)
+- [DFND/dynamic_topology.md](DFND/dynamic_topology.md)
+- [DFND/4D_and_pharmacophores.md](DFND/4D_and_pharmacophores.md)
 
-DFND remains relevant, but it is not the current priority. The main
-`devguide/` should describe the whole project, not only DFND.
+DFND is the native TopoMT method direction and is now an active implementation-hardening track. It is not production-ready yet, but it has executable code, raw records, `Topography` integration, real-system smoke/monotonicity checks, and first dry-motif candidate records. The main `devguide/` should describe the whole project, not only DFND.
 
 When DFND is mentioned from the main developer guide, it should normally be in
 one of these roles:
 
-- as a postponed architecture track;
-- as a documented experimental line of work;
-- as a future source of richer feature semantics once the conventional path is
-  stable.
+- as the native TopoMT method direction;
+- as an implementation-hardening track;
+- as a source of richer domain and feature semantics for voids, surface concavities, pockets, channels, external links, derived mouths, dry networks, motifs, and dynamics.

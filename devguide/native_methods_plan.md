@@ -5,7 +5,7 @@
 This document defines how TopoMT should evolve its engine implementations under
 the following rule:
 
-- `topomt.dfnd.*` is the current native TopoMT method line;
+- `topomt.dfnd.*` is the native TopoMT method line and DFND is the native TopoMT pocket/topography method;
 - `topomt.third_party.*` integrates external binaries, libraries, servers,
   persisted outputs, and parity helpers;
 - parity against upstream tools is required for validation, but upstream code is
@@ -14,6 +14,17 @@ the following rule:
 The goal is not to copy upstream source code. The goal is to reproduce the
 algorithmic semantics while using TopoMT and MolSysSuite building blocks where
 they improve integration and maintainability.
+
+
+## DFND native pocket algorithm
+
+The CASTp1/CASTp3 audit established that exact CASTp3/CASTpFold reproduction is not currently a reliable primary target without server internals. The native TopoMT method line is DFND: a TopoMT-owned pocket and topography algorithm with explicit rules and diagnostics.
+
+Initial design checkpoint:
+
+- [topomt_native_pockets_initial_design_2026_05_19.md](topomt_native_pockets_initial_design_2026_05_19.md)
+
+The previous idea of a separate native pocket method outside `topomt.dfnd.*` is superseded. DFND is the native method; CASTp1, CASTp3/CASTpFold, fpocket, and AlphaSpace2 remain benchmarks and references, not hidden specifications.
 
 ## Shared implementation principles
 

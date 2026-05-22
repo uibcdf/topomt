@@ -33,13 +33,21 @@ The base hierarchy is:
 - `Feature1D`
 - `Feature2D`
 
-Topography-specific types currently include:
+`TopographyFeature` should be read as the broad semantic feature umbrella.
+The current and planned topography-specific families include:
 
-- `Pocket`
-- `Void`
-- `Channel`
-- `BranchedChannel`
-- `Mouth`
+- `ConcavityFeature`: `Void`, `SurfaceConcavity`, `Pocket`, `Channel`, and
+  later morphology-specific subtypes such as `BranchedChannel`;
+- `ConvexityFeature`: future dry-derived features such as `Protrusion`,
+  `Ridge`, or `Core`;
+- `BoundaryFeature`: boundary descriptors such as `Mouth`, `Rim`, or `Neck`;
+- `MixedFeature`: transition or interface features such as `Wall`,
+  `Separator`, `LiningRegion`, or `Interface`.
+
+Not every raw engine object should become a public feature. DFND, for example,
+uses raw objects such as `ConcavityDomain`, `ExternalLink`, `DryComponent`,
+`DryInterface`, `DomainMotif`, and `DryMotif` before building semantic
+Topography features.
 
 Each feature is expected to carry, when available:
 
@@ -131,8 +139,7 @@ The intended end state is:
 
 ## DFND within the architecture
 
-DFND should be understood as a separate architectural track inside TopoMT, not
-as the definition of the whole library.
+DFND should be understood as the native TopoMT method track for pocket and topography detection, while still not being the definition of the whole library.
 
 Its role is to explore a richer Delaunay-flow interpretation of molecular
 topography, with more explicit network semantics for pockets, voids,
@@ -143,12 +150,20 @@ Relevant design references are:
 - [DFND/Overview.md](DFND/Overview.md)
 - [DFND/Algorithm.md](DFND/Algorithm.md)
 - [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/feature_definitions.md](DFND/feature_definitions.md)
+- [DFND/abstract_contract.md](DFND/abstract_contract.md)
+- [DFND/domain_motifs.md](DFND/domain_motifs.md)
+- [DFND/numerical_policy.md](DFND/numerical_policy.md)
+- [DFND/metrics_contract.md](DFND/metrics_contract.md)
+- [DFND/input_policy.md](DFND/input_policy.md)
+- [DFND/implementation_status.md](DFND/implementation_status.md)
+- [DFND/Implementation_Route.md](DFND/Implementation_Route.md)
 
 For the time being, DFND is best treated as:
 
 - a documented experimental subsystem;
 - a source of conceptual guidance for future feature semantics;
-- a postponed implementation priority.
+- an active native-method direction whose implementation still needs hardening.
 
 ## Internal geometric keystone
 
@@ -159,8 +174,14 @@ The intended architectural reading is:
 - `DelaunayMesh`: primary persistent geometric representation;
 - `DelaunayFlowNetwork`: flow-based interpretation of that mesh for DFND-like
   queries;
-- feature objects (`Pocket`, `Void`, `Channel`, `Mouth`, etc.): semantic
-  outputs built from method-specific queries over those lower layers.
+- `ConcavityDomain`: DFND decomposition object built from finite wet DFN components;
+- `DryComponent`: dry-graph decomposition object built from probe-excluded
+  tetrahedra connected through non-permeable faces;
+- `ExternalLink` and `DryInterface`: raw boundary/interface records used before
+  semantic feature construction;
+- feature objects (`Void`, `SurfaceConcavity`, `Pocket`, `Channel`,
+  `Protrusion`, `Rim`, `Wall`, etc.): semantic outputs built from domains, dry
+  motifs, boundary descriptors, and interface records.
 
 In this model, alpha-spheres remain important but are no longer a keystone
 class. They should be understood as a derived view of `DelaunayMesh`, useful

@@ -1,166 +1,92 @@
 # TopoMT Roadmap
 
-## Guiding principle
+## Guiding Principle
 
-The project should first become reliable for the conventional engines and the
-shared `Topography` API. Experimental directions should not define the whole
-repository roadmap.
+TopoMT should converge toward a reliable native topography framework. External engines remain important references and integration targets, but the native method direction is now DFND.
 
-## Phase 1
+## Phase 1: Unified API and Conventional Engine Integration
 
-Phase 1 was the initial integration of conventional algorithms under a unified
-API.
+Phase 1 established the shared API direction:
 
-The conceptual result of Phase 1 is valid:
-
-- a shared `get_topography()` entry point;
+- `get_topography()` as the main entry point;
 - multiple engines behind a common interface;
-- feature-oriented output through `Topography`.
+- feature-oriented output through `Topography`;
+- wrapper-backed and native paths for several external methods.
 
-## Phase 2
+This phase is historically valid and remains part of the project foundation.
 
-Current phase: stabilize the non-DFND core.
+## Phase 2: DFND Hardening and Topography Integration
 
-### Goals
-
-- repair structural inconsistencies in feature and topography classes;
-- normalize engine contracts;
-- ensure reliable local-to-global atom-index mapping;
-- improve test coverage for the prioritized engines;
-- align units and dependency behavior with MolSysSuite.
-
-### Recorded checkpoint
-
-The `0.1.0` checkpoint is the first milestone where TopoMT reproduces the
-direct fpocket binary output for the currently supported reference PDB systems.
-
-For the validated systems, parity has been confirmed for:
-
-- pocket count;
-- pocket ranking and ids;
-- atom membership per pocket;
-- `Pocket Score`;
-- `Drug Score`.
-
-The current validated systems are:
-
-- `1TCD.pdb`
-- `1GG0.pdb`
-- `1N57.pdb`
-- `2GI9.pdb`
-- `2H05.pdb`
-- `3LKF.pdb`
-- `E15ALA.pdb`
-
-That original `0.1.0` wrapper-backed checkpoint should now be read as a
-historical milestone rather than as the full current `fpocket4` state.
-
-Since then:
-
-- the native `fpocket4` path has reached exact final parity against the audited
-  local fpocket source build on the full currently audited PDB set, including
-  `1ATP.pdb`, `1CEN.pdb`, `1YCR.pdb`, and the large-system case `2HGR.pdb`;
-- and wrapper-based parity claims are now known to depend on which fpocket
-  binary/build is actually used.
-
-### Scope
-
-- `Topography`
-- `Pocket`, `Mouth`, and related feature classes
-- `pocketeer`
-- `alphaspace2`
-- `fpocket4`
-- `pycasta`
-
-### Non-goals
-
-- DFND productionization
-- advanced scoring models
-- frontend-heavy visualization work
-
-### Cross-cutting future note
-
-In parallel with stabilization, TopoMT should keep a future-oriented record of
-which pocket engines may later support:
-
-- CPU-pool parallelization;
-- distributed execution;
-- GPU offloading.
-
-This should be evaluated for:
-
-- native implementations;
-- wrapper-backed third-party engines;
-- and future algorithms that enter the repository later.
-
-This note is intentionally broader than `fpocket4`: `alphaspace2` and future
-engines should also be reviewed under the same scalability lens.
-
-See [engine_acceleration_plan.md](engine_acceleration_plan.md).
-
-## Phase 3
-
-Next phase after stabilization: reference-driven review of the prioritized
-engines.
+Current phase.
 
 ### Goals
 
-- inspect the upstream or reference repositories for the selected tools;
-- compare TopoMT behavior against those references;
-- separate wrapper-backed integrations from native method targets;
-- define native reimplementation plans for the prioritized methods;
-- identify missing descriptors and missing tests;
-- when a paper and the public repository diverge, document explicitly whether
-  the first TopoMT target is repository parity, paper parity, or both in
-  staged form;
-- verify that `fpocket4` produces the same results from canonical `bcif.gz`
-  inputs as from the corresponding original `pdb` inputs.
+- harden DFND as the native TopoMT method;
+- keep conventional engines available as references, comparison targets, and wrappers;
+- preserve clean `Topography` output for stable feature families;
+- preserve full DFND raw records for method development and diagnostics;
+- keep geometry, units, atom indices, and input policy explicit;
+- improve performance enough for repeated probe-radius sweeps and larger systems.
 
-### Expected output
+### Current DFND State
 
-- a clearer split between `methods/` and `wrappers/`;
-- native implementation plans for `fpocket4` and `alphaspace2`;
-- a formalized native contract for `pycasta`, including the current audit of
-  repository-versus-paper drift;
-- a more faithful long-term integration layer;
-- clearer documentation of engine-specific assumptions;
-- stronger regression tests.
+DFND now has:
 
-## Phase 4
+- active `DelaunayFlowNetwork` construction;
+- build-once/query-many probe-radius workflows;
+- tested `R_residence` and `R_gate` primitives;
+- tested face identity and external-link tracing;
+- tested access-by-residence domain classification;
+- raw records for tetrahedra, faces, transit/concavity domains, residence regions, external links, dry components, dry interfaces, and dry motifs;
+- `get_topography(method='dfnd')` integration;
+- public compatibility features for voids, pockets, and multi-link domains;
+- deterministic `volume_solvent_estimate` with unit tests;
+- small real-system stability and monotonicity sweeps.
 
-MolSysViewer integration.
+### Immediate Work
+
+1. Profile and optimize residual query/build costs.
+2. Inspect qualitative cavity behavior on the small systems already used for CASTp/CASTpFold work.
+3. Decide reporting/filter policy for tiny voids and near-threshold domains.
+4. Validate whether provisional families and dry motifs are useful enough for public exposure.
+5. Expand real-system benchmarks without forcing strict parity with external engines.
+
+## Phase 3: Validation and Benchmarking
+
+Next phase after the current hardening pass.
 
 ### Goals
 
-- define a stable viewer-facing serialization for topographic features;
-- implement the first version of `molsysviewer_topomt`;
-- reuse existing MolSysViewer shapes for pocket surfaces and pocket blobs.
+- build a stable small-system benchmark battery;
+- compare DFND against CASTp/CASTpFold, fpocket/fpocket4, AlphaSpace2, Pocketeer, and pycasta;
+- categorize differences as bugs, parameter effects, reporting/filter effects, or intended semantic differences;
+- evaluate atom ownership, external links, domain counts, dominant-site localization, and volume estimates;
+- establish performance envelopes and optional acceleration paths.
+
+## Phase 4: Dynamic Topology
+
+DFND's long-term differentiator is tracking topography through trajectories.
+
+### Goals
+
+- run DFND frame by frame on small trajectories;
+- match domains/features across frames;
+- report persistence, gate events, external-link changes, volume series, dry/wet transitions, and candidate dynamic pharmacophores.
+
+## Phase 5: MolSysViewer Integration
+
+MolSysViewer integration should become production-facing only after the topographic data model is stable enough.
 
 Current note:
 
-- the `molsysviewer_topomt` package is now beyond scaffold level:
-  it already provides addon registration, payload normalization, conservative
-  pocket rendering through existing MolSysViewer shapes, selective pocket
-  attachment helpers, and a first standalone-oriented helper layer for
-  exporting or launching a MolSysViewer host with a pre-rendered TopoMT
-  overlay;
-- richer panel/workbench UI and tighter interactive scene operations are still
-  pending.
+- the `molsysviewer_topomt` scaffold exists and has initial rendering/export helper work;
+- richer panel/workbench UI and interactive scene operations remain pending.
 
-### Constraint
+## Conventional Engine Maintenance Track
 
-The addon should come after the topographic data model is stable enough to be a
-safe dependency.
+The conventional engines remain maintained in parallel:
 
-## Postponed track
-
-DFND remains a dedicated postponed track.
-
-This track already has substantial design documentation under `devguide/DFND/`,
-but it should not block the stabilization of the main non-DFND library path.
-
-The current reference entry points for that track are:
-
-- [DFND/Overview.md](DFND/Overview.md)
-- [DFND/Technical_Design.md](DFND/Technical_Design.md)
-- [DFND/checkpoint.md](DFND/checkpoint.md)
+- keep wrapper-backed integrations working;
+- keep native parity tests for audited reference sets;
+- document upstream repository-versus-paper drift explicitly;
+- keep CASTp work as reference material and historical algorithmic context, not as the active native-method target.

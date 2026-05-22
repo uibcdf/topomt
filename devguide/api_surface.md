@@ -4,11 +4,9 @@
 
 This document describes the practical status of the TopoMT API surface.
 
-The repository currently contains public entry points, legacy helpers, and
-experimental or transitional modules. This should be made explicit so that
-developers know which areas to build on and which areas to treat with caution.
+The repository contains public entry points, active native methods, wrapper-backed integrations, and experimental/provisional records. Contributors should distinguish stable user-facing feature APIs from raw diagnostic records.
 
-## Current public core
+## Current Public Core
 
 The practical public core is centered on:
 
@@ -16,75 +14,75 @@ The practical public core is centered on:
 - [topomt/topography/Topography.py](/home/diego/repos@uibcdf/topomt/topomt/topography/Topography.py)
 - [topomt/features/](/home/diego/repos@uibcdf/topomt/topomt/features)
 - [topomt/delaunay_mesh.py](/home/diego/repos@uibcdf/topomt/topomt/delaunay_mesh.py)
-- [topomt/io/load_CASTp.py](/home/diego/repos@uibcdf/topomt/topomt/io/load_CASTp.py)
+- [topomt/tools/](/home/diego/repos@uibcdf/topomt/topomt/tools)
 
-This is the surface that should be stabilized first.
+This is the surface new code should normally build on.
 
-## Priority engines
+## DFND API Status
 
-For the current development cycle, the important engines are:
+DFND is the native TopoMT method direction and is now an active hardening track.
 
-- `pocketeer`
-- `alphaspace2`
-- `fpocket4`
-- `pycasta`
+Public entry points:
 
-These engines matter both because of functionality and because they define the
-feature payloads that later need to be consumed by MolSysViewer.
+- `topomt.dfnd.dfnd(...)`: raw-first development/diagnostic API;
+- `topomt.get_topography(..., method='dfnd')`: normal `Topography` integration.
 
-For those payloads, `atom_indices` should be understood as the receptor atoms
-that delimit the feature geometrically, i.e. lining or tangential atoms of the
-cavity/topographic object.
+The `Topography` view currently promotes only stable compatibility domain families to public feature objects:
 
-## Legacy or transitional areas
+- `void_domain` -> `Void`;
+- `pocket_domain` -> `Pocket`;
+- `multi_external_link_domain` -> `Channel` shorthand.
+
+The returned `Topography` object also exposes DFND raw/provisional records through convenience attributes:
+
+- `dfnd_records`;
+- `dfnd_result`;
+- `dfnd_concavity_domains`;
+- `dfnd_external_links`;
+- `dfnd_dry_components`;
+- `dfnd_dry_interfaces`;
+- `dfnd_dry_motifs`;
+- `dfnd_surface_concavities`;
+- `dfnd_nonresident_passages`;
+- `dfnd_degenerate_subprobe_domains`.
+
+Those convenience attributes are not independent public feature APIs. They expose records for method development, diagnostics, and validation.
+
+## Conventional Engine API Status
+
+The current conventional engine surface includes:
+
+- `pocketeer`;
+- `alphaspace2`;
+- `fpocket4` / `fpocket`;
+- `pycasta`;
+- `castp`, `castp3`, and `castpfold` paths for historical/reference/server work.
+
+These engines remain useful as references, wrappers, and comparison baselines. They should not define DFND semantics.
+
+## Legacy or Transitional Areas
 
 ### `get_pockets()`
 
-[topomt/get_pockets.py](/home/diego/repos@uibcdf/topomt/topomt/get_pockets.py) does not fit the
-current `Topography`-centric architecture.
+[topomt/get_pockets.py](/home/diego/repos@uibcdf/topomt/topomt/get_pockets.py) does not fit the current `Topography`-centric architecture.
 
-It should be treated as legacy until it is either:
-
-- removed;
-- deprecated explicitly;
-- or rebuilt on top of the current public model.
+It should be treated as legacy until it is removed, deprecated explicitly, or rebuilt on top of the current public model.
 
 ### `third_party/`
 
-[topomt/third_party/](/home/diego/repos@uibcdf/topomt/topomt/third_party) now contains the
-provider integrations and backend-specific adapters that previously lived under
-legacy wrapper paths.
+[topomt/third_party/](/home/diego/repos@uibcdf/topomt/topomt/third_party) contains provider integrations and backend-specific adapters.
 
-This area is part of the active runtime surface, but most provider internals
-should still be treated as integration code rather than long-term stable API.
+This area is part of the active runtime surface, but provider internals should still be treated as integration code rather than stable user-facing API.
 
-## Experimental areas
+## Shared Utilities
 
-### `tools/`
+[topomt/tools/](/home/diego/repos@uibcdf/topomt/topomt/tools) contains shared geometry, tessellation, and feature-characterization helpers.
 
-[topomt/tools/](/home/diego/repos@uibcdf/topomt/topomt/tools) now contains the
-shared geometry, tessellation, and feature-characterization helpers that were
-previously concentrated in the transitional `pocket_geometry.py` module.
+This layer is active and reusable, but individual helpers may still be promoted or reorganized as DFND and the conventional engines converge on shared contracts.
 
-This area should now be treated as the active shared utility layer for
-non-engine-specific geometry and characterization code.
+## Practical Rule for Contributors
 
-### DFND
-
-DFND is an explicit experimental track with rich design documentation in:
-
-- [DFND/Overview.md](DFND/Overview.md)
-- [DFND/Technical_Design.md](DFND/Technical_Design.md)
-- [DFND/checkpoint.md](DFND/checkpoint.md)
-
-DFND is part of the project vision, but not part of the immediate stabilization
-priority.
-
-## Practical rule for contributors
-
-When making new changes:
-
-- prefer building on `get_topography()`, `Topography`, and the feature model;
-- avoid extending legacy helpers unless there is a strong reason;
-- document clearly when a module is experimental, transitional, or part of the
-  intended stable surface.
+- Prefer `get_topography()`, `Topography`, `DelaunayMesh`, `topomt.tools`, and DFND raw records for new work.
+- Keep stable feature objects separate from provisional records.
+- Do not expose provisional DFND families or dry motifs as public features until validation supports that decision.
+- Document clearly when a module is experimental, transitional, or stable.

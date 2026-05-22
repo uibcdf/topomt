@@ -1,9 +1,11 @@
 # Delaunay Flow Network Decomposition (DFND): 4D Topography and Dynamic Pharmacophores
 
-Historical note: the preferred method name is now `DFND`; older mentions of
-`DFND` in this subdirectory should be read as the previous provisional label.
+This document details the vision for extending DFND to the temporal dimension
+(Molecular Dynamics) and integrating it with pharmacophore modeling.
 
-This document details the vision for extending DFND to the temporal dimension (Molecular Dynamics) and integrating it with pharmacophore modeling. This represents the high-end strategic potential of the DFND architecture.
+The DFND-native dynamic topology model is described in more detail in
+[`dynamic_topology.md`](dynamic_topology.md). This document keeps the broader
+4D and pharmacophore-oriented perspective.
 
 ## 1. 4D Topography: Explicit Topological Tracking
 
@@ -15,7 +17,7 @@ DFND enables **Explicit Topological Tracking** because the fundamental units—t
 *   **Tetrahedron Identity:** A tetrahedron is uniquely defined by 4 atom indices $(A_1, A_2, A_3, A_4)$. These indices are constant throughout the trajectory (assuming covalent topology is preserved).
 *   **Face Identity:** A face is uniquely defined by 3 atom indices $(A_1, A_2, A_3)$.
 *   **Result:** The **Base Topology** (Potential Nodes and Edges) is invariant. What changes frame-to-frame are the **Numerical Properties** of these elements:
-    *   $R_{insphere}(t)$ (Habitability over time)
+    *   `R_residence(t)` (Habitability over time)
     *   $R_{gate}(t)$ (Permeability over time)
 
 This allows us to track features by their *atomic definition* rather than their spatial position.
@@ -28,7 +30,7 @@ $$ \mathcal{T} \in \mathbb{R}^{F \times N_{tet} \times P} $$
 Where:
 *   $F$ is the number of frames.
 *   $N_{tet}$ is the number of tetrahedra.
-*   $P$ are the properties ($R_{insphere}$, $R_{gate}$ of max face, etc.).
+*   $P$ are the properties ($R_{residence}$, $R_{gate}$ of max face, etc.).
 
 **Computational Advantage:** Queries like "Calculate the average volume" or "Find when the gate opens" become instantaneous matrix operations (e.g., `numpy.mean(axis=0)`, `numpy.where(...)`), avoiding the need to re-loop over geometry for every frame.
 
@@ -43,9 +45,9 @@ Using this tensor framework, we can detect discrete topological events that are 
 ### 2.1. Pocket Breathing (Integrity Profile)
 Instead of re-clustering pockets every frame and solving the "Correspondence Problem" (Is this pocket A or B?), we simply monitor the state of the constituent tetrahedra of a reference pocket.
 
-1.  **Definition:** Define Pocket $P_0$ in the reference frame (e.g., crystal structure). Get its list of `TRANSIT` tetrahedra.
+1.  **Definition:** Define Pocket $P_0$ in the reference frame (e.g., crystal structure). Get its list of `wet` tetrahedra.
 2.  **Monitoring:** For each frame $t$, check the state of *these specific tetrahedra*.
-    *   **Collapse:** How many have become `SOLID`? (Volume contraction).
+    *   **Collapse:** How many have become `dry`? (Volume contraction).
     *   **Breach:** Have any boundary faces become `MOUTH`s? (Opening to solvent).
 3.  **Result:** A time-series profile of "Pocket Integrity." This unambiguously tracks the *same* physical cavity, regardless of how much it moves or deforms.
 
@@ -73,18 +75,23 @@ By injecting chemical information (Residue ID, Polarity) into the topological gr
 
 ### 3.1. Mechanism of Closure
 We can explain *why* a pocket closes:
-*   *Example:* "The pocket volume drops not because the whole cavity collapses, but because the **Entry Tetrahedron** (defined by hydrophilic residues Arg/Asp) becomes `SOLID`, while the **Hydrophobic Interior** remains `TRANSIT`."
+*   *Example:* "The pocket volume drops not because the whole cavity collapses, but because the **Entry Tetrahedron** (defined by hydrophilic residues Arg/Asp) becomes `dry`, while the **Hydrophobic Interior** remains `wet`."
 *   This distinguishes "Occlusion" (gate closure) from "Collapse" (volume loss).
 
 ### 3.2. Water Tracking Validation
-We can cross-reference the theoretical `TRANSIT` volume with explicit water occupancy from the MD simulation.
-*   *Discrepancy:* If a region is theoretically `TRANSIT` (geometric void) but has low water density, it indicates an **Entropic or Hydrophobic Exclusion** effect that geometry alone misses. This highlights "Dry Pockets" potentially favorable for high-affinity lipophilic ligands.
+We can cross-reference the theoretical `wet` volume with explicit water occupancy from the MD simulation.
+*   *Discrepancy:* If a region is theoretically `wet` (geometric void) but has low water density, it indicates an **Entropic or Hydrophobic Exclusion** effect that geometry alone misses. This highlights "Dry Pockets" potentially favorable for high-affinity lipophilic ligands.
 
 ---
 
 ## 4. Dynamic Pharmacophores (Dyn-Pharmacophores)
 
-DFND offers a unique platform for this because, unlike grid methods (which yield diffuse interaction clouds), DFND provides **discrete, semantic anchor points** via the `TRANSIT` and `COAST` nodes.
+Dynamic pharmacophores should be treated as a downstream semantic overlay on
+top of the dynamic DFND graph, not as the foundation of the tracking model.
+The core tracking units are tetrahedra, faces, gates, external links, pockets, voids,
+and channels.
+
+DFND offers a unique platform for this because, unlike grid methods (which yield diffuse interaction clouds), DFND provides **discrete, semantic anchor points** via the `wet` and `COAST` nodes.
 
 ### 4.1. The Idea: Nodes as Pharmacophoric Anchors
 Each node (tetrahedron) is defined by 4 atoms. We can assign a pharmacophoric label to the node based on the chemical nature of those atoms.
@@ -92,17 +99,17 @@ Each node (tetrahedron) is defined by 4 atoms. We can assign a pharmacophoric la
 *   **Interaction Points (`COAST`):** If a `COAST` node touches a specific atom type:
     *   Touches Lys (Nζ) $\to$ **H-Bond Donor / Positive Charge**.
     *   Touches Backbone Carbonyl $\to$ **H-Bond Acceptor**.
-*   **Volume Constraints (`TRANSIT`):**
+*   **Volume Constraints (`wet`):**
     *   Surrounded by Leu/Val $\to$ **Hydrophobic Volume**.
 
 ### 4.2. Consensus Dynamic Pharmacophore
 By aggregating the topological tensor with these labels over the trajectory ($F \times N_{tet}$):
 
-1.  **Persistence Filter:** Identify nodes that remain Topologically Stable (`TRANSIT` or `COAST`) for $> X\%$ of the simulation time.
+1.  **Persistence Filter:** Identify nodes that remain Topologically Stable (`wet` or `COAST`) for $> X\%$ of the simulation time.
 2.  **Feature Stability:** Among persistent nodes, select those that **Chemically Stable** (consistently present the same pharmacophoric feature, e.g., "Always Hydrophobic").
     *   *Noise Filtering:* A point that appears and disappears in 1 ns is irrelevant noise. One that persists 80% of the time is a **Pharmacophoric Hotspot**.
 3.  **3D Model Generation:**
-    *   Cluster centroids of stable `TRANSIT` nodes define the **Ligand Volume**.
+    *   Cluster centroids of stable `wet` nodes define the **Ligand Volume**.
     *   Stable `COAST` nodes define the **Interaction Points** (vectors/arrows).
     *   **Result:** A 3D pharmacophore model (spheres and vectors) directly exportable to VS tools like **RDKit**, **Pharmer**, or **LigandScout**.
 

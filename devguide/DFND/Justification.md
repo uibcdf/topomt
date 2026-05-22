@@ -1,65 +1,120 @@
-# Delaunay Flow Network Decomposition (DFND): Justification and Novelty
+# DFND Justification and Novelty
 
-Historical note: the preferred method name is now `DFND`; older mentions of
-`DFND` in this subdirectory should be read as the previous provisional label.
+This document explains why DFND is worth implementing as a native TopoMT method
+and how its claims should be framed responsibly.
 
-## 1. The Landscape of Current Methods
+DFND should not be presented as a formal limiting case or superset of CASTp,
+fpocket, MOLE, Caver, or other tools. It shares concepts with several of them,
+especially Delaunay/Voronoi geometry and probe-based accessibility, but it uses
+its own graph semantics and deliberately keeps standard Delaunay as the baseline
+substrate.
 
-To justify the development of DFND, we must critically evaluate the current state-of-the-art in molecular topography analysis. The field is broadly divided into two families:
+## 1. Current Landscape
 
-### 1.1. Pure Geometric Methods (e.g., CASTp, Alpha Shapes)
-*   **Mechanism:** Construct the Delaunay triangulation and filter tetrahedra based on the radius of the associated Alpha Sphere ($R_{\alpha}$). Adjacent empty tetrahedra are merged into pockets.
-*   **Limitation:** They rely on a binary "Exist/Don't Exist" classification based on a single parameter ($R_{probe}$). 
-    *   *The Fusion Problem:* If two large pockets are connected by a tiny, biologically irrelevant neck (slightly larger than $R_{probe}$), they are merged into a giant, meaningless cluster.
-    *   *The Separation Problem:* If the probe is slightly increased, the neck breaks, and the pockets are totally separated, losing the information that they are proximal.
-    *   *Lack of Hierarchy:* They do not inherently capture the "structure" of the empty space (chambers, bottlenecks, mouths).
+Molecular topography tools differ in substrate, objective, and output:
 
-### 1.2. Scanning/Grid Methods (e.g., Fpocket, LIGSITE, PockDrug)
-*   **Mechanism:** Use grids, rays, or Voronoi vertices (without full tessellation logic) to scan for void points and cluster them.
-*   **Limitation:** 
-    *   *Approximation:* Grid methods suffer from discretization errors (voxel size dependency) and orientation dependence.
-    *   *Heuristic Connectivity:* The clustering of "alpha spheres" in Fpocket is based on distance heuristics ($D_{max}$), not physical connectivity. It works well for simple pockets but struggles with complex, branching tunnel systems.
+- CASTp-style alpha-shape methods provide analytically grounded pockets,
+  cavities, mouth areas, and volumes, with strong historical validation.
+- fpocket-style alpha-sphere clustering methods are practical and efficient for
+  binding-site detection and ranking, but use heuristic clustering choices.
+- MOLE/Caver-style tunnel methods focus on centerlines and transport paths,
+  which is powerful for tunnels and channels but less direct for irregular
+  volumetric binding regions.
+- Grid and surface scanning methods are flexible but can depend on sampling,
+  orientation, and resolution choices.
 
-### 1.3. Tunnel Finders (e.g., MOLE, Caver)
-*   **Mechanism:** Construct a Voronoi diagram and find optimal paths (centerlines) from a user-defined start point to the surface.
-*   **Limitation:** They reduce the 3D volume of a pocket to a 1D line. They are excellent for ion channels but poor for large, irregular binding clefts where "volume" matters more than "path."
+DFND is motivated by a different internal separation:
 
----
+```text
+tetrahedron habitability -> can the probe reside here?
+face permeability        -> can the probe pass through this gate?
+graph connectivity       -> what domains and access relations result?
+```
 
-## 2. The DFND Innovation: "Topological Hydraulics"
+## 2. Core Contribution
 
-DFND is novel because it **unifies** these approaches into a single, physically consistent model. It is neither just a volume calculator (CASTp) nor just a pathfinder (MOLE).
+The main DFND contribution is the explicit decoupling of local volume
+habitability from connectivity.
 
-### 2.1. Decoupling Volume from Connectivity
-This is the single most significant innovation.
-*   **CASTp:** $Volume \iff Connectivity$. If it fits, it connects.
-*   **DFND:** $Volume \neq Connectivity$.
-    *   **Volume** is defined by the tetrahedron's habitability ($R_{insphere}$). 
-    *   **Connectivity** is defined by the face's permeability ($R_{gate}$). 
+```text
+R_residence: node-level resident-probe capacity
+R_gate:     face-level passage capacity
+```
 
-**Why this matters:** This allows DFND to identify a "Dumbbell Pocket" (two large volumes connected by a narrow neck) as a single topological object with two distinct sub-domains separated by a constriction. Traditional methods see either "One Blob" or "Two Blobs" depending on the probe radius. DFND sees "Two Chambers connected by a Gate."
+This allows a domain to keep information about chambers, gates, bottlenecks,
+and access without forcing every decision into a single alpha-radius or cluster
+threshold.
 
-### 2.2. The "Coast" Concept
-Geometric methods often suffer from "sliver tetrahedra"—flat, unphysical artifacts of Delaunay triangulation that have large Alpha radii but zero volume.
-*   **Novelty:** DFND introduces the explicit topological category **`COAST`** (accessible but not transitable). This acts as a robust filter for geometric noise, preserving the surface atoms without allowing false flow paths through non-physical slivers.
+The second contribution is traceability. DFND is designed so that every domain,
+external link, dry component, and interface can be traced back to exact atoms,
+tetrahedra, faces, thresholds, and marginal decisions.
 
-### 2.3. The "Sea Level" Reference
-By introducing the `OCEAN` concept (defined by a large "Beach Ball" Alpha Shape), DFND solves the boundary condition problem.
-*   **Novelty:** Instead of using the Convex Hull (too loose) or a tight probe wrap (too noisy), DFND uses a **multi-scale definition of the exterior**. The "Pocket" is rigorously defined as the volume between the "Molecular Surface" (inner limit) and the "Beach Ball Surface" (outer limit).
+The third contribution is future dynamic use. Tetrahedron and face identities
+provide a natural basis for tracking topographic objects through molecular
+dynamics frames without relying only on shape fitting.
 
-### 2.4. Symmetric Wet/Dry Analysis
-Most tools focus 100% on the empty space. DFND treats the solid space (`SOLID` network) with the same mathematical rigor.
-*   **Novelty:** This enables "Inverse Pocket Detection" (i.e., Protrusion Detection) using the exact same code, providing a holistic view of surface complementarity for PPI analysis.
+## 3. Wet and Dry Views
 
-## 3. Summary of Advantages
+DFND uses two complementary graph views over the same Delaunay mesh:
 
-| Feature | CASTp | Fpocket | MOLE | **DFND** |
-| :--- | :---: | :---: | :---: | :---: |
-| **Exact Volume** | ✅ | ❌ | ❌ | ✅ |
-| **Bottleneck Detection** | ❌ | ❌ | ✅ | ✅ |
-| **Multi-Chamber Topology** | ❌ | ❌ | ❌ | ✅ |
-| **Noise Robustness** | ⚠️ | ✅ | ✅ | ✅ (**Coast**) |
-| **Wet/Dry Symmetry** | ❌ | ❌ | ❌ | ✅ |
-| **Physical Interpretability** | High | Medium | High | **Very High** |
+- the wet graph, where the probe can reside and pass;
+- the dry graph, where the probe cannot reside and where faces block passage.
 
-DFND is not just an incremental improvement; it is a **structural generalization** that contains CASTp and MOLE as special limit cases, offering a richer grammar for describing molecular shape.
+The wet side supports concavity domains such as voids, pockets, and
+multi-opening domains. The dry side supports raw dry components, dry interfaces,
+dry depth, and future candidate motifs such as walls, rims, ridges, protrusions,
+separators, and dry cores.
+
+The dry side is not claimed as a validated public feature system yet. It is a
+raw and candidate-descriptor layer in the v1 plan.
+
+## 4. Responsible Comparison
+
+DFND should be compared to existing tools on measurable outputs, not on broad
+superiority claims.
+
+Initial comparison dimensions:
+
+| Dimension | CASTp-style | fpocket-style | tunnel tools | DFND target |
+|---|---|---|---|---|
+| Analytical geometry | strong | partial | strong for paths | strong for mesh/graph primitives |
+| Binding-site ranking | not primary | strong | not primary | future |
+| Mouth/exterior access | strong | indirect | path exits | explicit `ExternalLink` |
+| Chamber/gate descriptors | partial/tool-dependent | heuristic | path bottlenecks | explicit graph descriptors |
+| Dynamic tracking | not primary | MD variants exist | path tracking possible | atom/tetrahedron/face identity |
+| Dry-side descriptors | not primary | not primary | not primary | candidate/future |
+
+This table is a design-orientation summary, not a benchmark result. Publication
+or adoption claims require quantitative validation.
+
+## 5. Claims to Avoid
+
+Avoid these claims unless future work proves them precisely:
+
+- DFND contains CASTp as a formal limiting case.
+- DFND contains MOLE or Caver as formal limiting cases.
+- DFND is categorically more exact than existing tools.
+- `volume_topological` is a physical pocket volume.
+- `channel_domain` necessarily means a biological tunnel or pore.
+- dry motifs are validated public feature families.
+
+## 6. Claims That Are Currently Defensible
+
+Current defensible claims:
+
+- DFND is a native TopoMT method based on standard Delaunay geometry,
+  tetrahedron habitability, face permeability, and graph decomposition.
+- DFND explicitly separates resident capacity (`R_residence`) from passage
+  capacity (`R_gate`).
+- DFND keeps `OCEAN` and `ExternalLink` as first-class graph objects for
+  exterior access.
+- DFND records marginal and degenerate decisions explicitly rather than hiding
+  them behind silent thresholds.
+- DFND provides a natural raw-record substrate for later trajectory tracking,
+  dry/wet interface analysis, and feature enrichment.
+
+## 7. Validation Requirement
+
+DFND should not be promoted as a competitive detector until it has been tested
+against real systems using explicit metrics. A first validation plan is defined
+in [`validation_plan.md`](validation_plan.md).

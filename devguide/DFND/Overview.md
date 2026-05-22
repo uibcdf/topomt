@@ -1,96 +1,248 @@
 # Delaunay Flow Network Decomposition (DFND): Overview
 
-## 1. Introduction
+DFND is the native TopoMT method direction for molecular topography. It is a
+Delaunay-flow method: the molecular system is first represented by a standard
+Delaunay tessellation of atomic centers, and pocket-like structures are then
+defined by probe habitability, face permeability, and graph connectivity.
 
-Delaunay Flow Network Decomposition (DFND) represents a paradigm shift in the
-computational analysis of molecular topography. Traditionally, the
-characterization of molecular surfaces identifying pockets, channels, and
-protrusions has been approached through either purely geometric methods (like
-Alpha Shapes in CASTp) or heuristic scanning methods (like grid-based probes
-in LIGSITE or Fpocket). While successful, these methods often struggle to
-decouple the *existence* of a volume from its *accessibility*, leading to
-ambiguities in defining what constitutes a distinct functional cavity versus a
-mere geometric void.
+DFND is not a CASTp clone, not an fpocket variant, and not an alpha-sphere-first
+method. CASTp, fpocket, AlphaSpace2, and related engines remain useful
+references and validation pressure, but DFND owns its own semantics.
 
-DFND introduces a hybrid framework that fuses **rigorous computational
-geometry** (Delaunay/Voronoi tessellation) with **topological flow logic**
-(network analysis). Instead of asking "Where is the empty space?", DFND asks
-"How does a probe flow through the empty space?".
+## 1. Central Question
 
-By modeling the molecular volume as a **hydraulic network of discrete cells
-(tetrahedra)** connected by **valves (triangular faces)**, DFND provides a
-unified, multi-scale description of both the concave (pockets/channels) and
-convex (core/protrusions) features of a molecule within a single mathematical
-object: the **Delaunay Flow Network**.
+DFND asks:
 
-## 2. Core Philosophy: Topological Hydraulics
+```text
+How can a probe move through the empty space induced by the molecular geometry?
+```
 
-The central metaphor of DFND is "Topological Hydraulics". We treat the
-molecular structure not as a static sculpture, but as a porous medium defined
-by a continuous mesh of tetrahedral cells derived from the Delaunay
-triangulation of atomic centers.
+Rather than starting from a pre-defined molecular surface, DFND builds a flow
+network over Delaunay tetrahedra:
 
-In this framework:
-*   **The Mesh:** The Delaunay triangulation partitions the entire 3D space (both inside and outside the protein) into elementary volumetric units (tetrahedra).
-*   **The Flow:** We simulate the potential movement of a spherical probe of radius $R_{probe}$ through this mesh.
-*   **The Dual Network:** We construct a graph where nodes are tetrahedra and edges are the shared faces between them. Connectivity is not binary; it is determined by the physical permeability of the face ($R_{gate}$) relative to the probe size.
+- tetrahedra are finite volumetric cells;
+- faces are possible gates between cells;
+- atomic radii define whether a probe can reside in a tetrahedron;
+- face geometry defines whether a probe can pass between tetrahedra;
+- transit state separates movement from residence;
+- graph connectivity defines transit domains, residence regions, concavity
+  domains, and their relation to the exterior.
 
-This approach allows DFND to naturally handle complex topological features that
-confuse other algorithms, such as:
-*   **Bottlenecks:** Large cavities connected by narrow passages are recognized as distinct topological clusters rather than arbitrarily merged or separated.
-*   **Buried Voids vs. Pockets:** Internal cavities (Voids) are naturally identified as subgraphs disconnected from the external solvent ("The Ocean").
-*   **Channels:** Tunnels passing through the protein are identified as cycles in the flow network connecting two distinct surface mouths.
+## 2. Core Layers
 
-## 3. The Unified Dual View (Wet & Dry)
+DFND is easiest to understand as a layered method.
 
-A key innovation of DFND is its ability to characterize the "Negative Space"
-(Solvent) and the "Positive Space" (Protein Structure) using symmetric logic.
+### 2.1. Delaunay Geometry
 
-*   **The Wet Network (Concavity):** Analyzes the flow of solvent through the empty spaces. It characterizes pockets, tunnels, and clefts.
-*   **The Dry Network (Convexity):** Analyzes the "flow of structure" or structural continuity. It characterizes the protein core, domain interfaces, and protruding loops.
+The baseline substrate is the standard Delaunay triangulation of atomic centers.
+Atomic radii are not used as tessellation weights in the baseline method.
+Instead, they enter explicitly in physical quantities:
 
-By inverting the condition of "habitability" (where the probe fits vs. where
-it doesn't), DFND seamlessly transitions from identifying a drug-binding
-pocket to analyzing the stability of the hydrophobic core surrounding it.
+- `R_residence`: tetrahedron habitability;
+- `R_gate`: face permeability.
 
-## 3.1. Primary representation versus derived view
+This keeps geometry and probe physics separate.
 
-DFND should be understood primarily as a **tetrahedron-centered** method, not
-as an alpha-sphere-centered one.
+### 2.2. Wet and Dry Interpretation
 
-- the primary representation is a Delaunay mesh of tetrahedra and shared faces;
-- physical meaning enters through tetrahedron habitability and face
-  permeability;
-- alpha-spheres remain useful as a derived or visualization-friendly view, but
-  they are not the core structural ontology of the method.
+For a selected probe radius, the same Delaunay mesh supports two complementary
+network views:
 
-## 3.2. Tetrahedron-network view versus alpha-sphere-network view
+- the residence layer, where the probe can reside;
+- the transit graph, where the probe can move through permeable contacts;
+- the dry graph, where the probe cannot reside and where faces block passage.
 
-The same local empty space can often be described either as a graph of
-tetrahedra or as a graph of alpha-spheres derived from those tetrahedra.
+The transit side defines transit domains and concavity domains. The residence
+layer defines resident content and volume-bearing regions inside those domains.
+The dry side defines dry components, dry interfaces, dry depth, and candidate
+dry motifs that may later support convexity, boundary, and mixed features.
 
-| Aspect | Tetrahedron network | Alpha-sphere network |
-|---|---|---|
-| Node meaning | Volumetric cell of the Delaunay tessellation | Derived local empty-space sphere |
-| Edge meaning | Shared triangular face / geometric gate | Adjacency inherited from neighboring tetrahedra |
-| Natural quantities | Volume, boundary faces, gates, mouths, connectivity | Centers, radii, sphere clustering, visual intuitiveness |
-| Best suited for | Flow logic, permeability, wet/dry decomposition, exact topology | Sphere-centric heuristics, visualization, some clustering workflows |
-| Role in DFND | Primary representation | Useful derived view |
+### 2.3. DFN
 
-Practical reading:
+`DFN` means **Delaunay Flow Network**.
 
-- many methods can be described in either representation;
-- connectivity can be close to isomorphic in simple cases;
-- but DFND is physically and conceptually cleaner when formulated on the
-  tetrahedral network and only later exposing alpha-sphere-derived views when
-  useful.
+For a selected probe radius, DFN contains:
 
-## 4. Objectives
+- resident-transit tetrahedron nodes;
+- non-resident transit connectors with at least two permeable contacts;
+- transit edges through permeable shared faces;
+- the virtual exterior node `OCEAN`, wet by definition;
+- external edges from finite transit nodes to `OCEAN` through permeable hull
+  faces.
 
-The primary objectives of the DFND implementation in `topomt` are:
+`OCEAN` is not a tetrahedron. It has no `R_residence`, no volume, and no local
+permeability class.
 
-1.  **Interpretability:** To provide results that map directly to physical intuition (e.g., "This pocket is a chamber of volume V connected to the surface by a gate of radius R").
-2.  **Robustness:** To mitigate common artifacts of geometric methods, such as "sliver tetrahedra" (flat, non-physical volumes), through explicit topological classification (e.g., the COAST concept).
-3.  **Persistency:** To allow efficient querying of the topography at different probe radii without re-computing the underlying geometry, by storing permeability thresholds in the network edges.
-4.  **Universality:** To serve as a general-purpose engine for analyzing
-    monomers, protein-protein interfaces (PPIs), and dynamic trajectories.
+### 2.4. DFND Decomposition
+
+DFND decomposes the finite transit graph into `TransitDomain` objects and then
+interprets them as `concavity_domains` after adding residence regions, external
+links, and metadata.
+
+```text
+remove OCEAN from DFN
+compute connected components of the remaining finite transit graph
+each component is a TransitDomain
+interpret TransitDomain + ResidenceRegions as a concavity_domain
+```
+
+This is the core decomposition step of Delaunay Flow Network Decomposition.
+
+### 2.5. External Links
+
+An `external_link` is the DFN-level contact between a `concavity_domain` and
+`OCEAN`.
+
+It is a connected cluster of permeable boundary or hull contacts. A geometric
+`mouth` can be derived later from an `external_link`, but `mouth` is not the
+primitive used to classify domains.
+
+### 2.6. Domain Motifs and Features
+
+After primary decomposition, DFND can analyze internal domain motifs:
+
+- topological depth;
+- paths;
+- reduced domain graphs;
+- throat candidates;
+- bottlenecks;
+- chamber candidates;
+- geometric mouth descriptors.
+
+These motifs do not change the primary domain family. They enrich the domain
+and support later Topography features.
+
+A `ConcavityDomain` is derived from a transit graph object. A `DryComponent` is a dry graph
+object. A `ConcavityFeature`, `ConvexityFeature`, `BoundaryFeature`, or
+`MixedFeature` is an enriched Topography object derived later after adding
+metrics, atoms, residues, geometry, motifs, dynamics, and annotations.
+
+## 3. Primary Domain Families
+
+DFND classifies finite transit domains by two independent axes.
+
+- Access: the number of direct external links to `OCEAN`.
+- Residence: whether the domain contains at least one resident node, i.e. a
+  tetrahedron where the full probe can reside.
+
+The v1 classifier is:
+
+| External links | Has residence | Raw domain label | Public interpretation |
+|---:|---|---|---|
+| 0 | yes | `void_domain` | closed cavity where the probe fits |
+| 0 | no | `degenerate_subprobe_domain` | raw/filter label, not a public feature |
+| 1 | yes | `pocket_domain` | one-mouth resident concavity |
+| 1 | no | `surface_concavity_domain` | one-mouth non-resident surface contact/dent |
+| >=2 | yes | `multi_external_link_domain` | multi-mouth domain; `channel` is shorthand |
+| >=2 | no | `nonresident_passage_domain` | provisional raw label for pass-through contact |
+
+`wet_open` is retained as a quality descriptor, not as a family gate:
+
+```text
+has_open_interior(D) = any resident node in D is wet_open
+```
+
+This distinction matters because compact resident cells can be `wet_coast`: the
+probe fits in the room even when one or more windows are narrow. Such a domain
+should still be classified as a pocket if it has one external link and
+residence.
+
+Public feature names may be simplified to `Void`, `SurfaceConcavity`, `Pocket`,
+and `Channel`, but raw records should preserve the domain-level provenance.
+
+## 4. Local Cell Semantics
+
+DFND separates several concepts that are often conflated.
+
+Tetrahedron habitability:
+
+```text
+wet: R_residence >= R_probe
+dry: R_residence < R_probe
+```
+
+Face permeability:
+
+```text
+permeable: R_gate >= R_probe
+non-permeable: R_gate < R_probe
+```
+
+Local finite-tetrahedron class:
+
+```text
+open: all finite faces are permeable
+coast: mixed permeable and non-permeable finite faces
+sealed: all finite faces are non-permeable
+```
+
+This gives combined labels such as `wet_open`, `wet_coast`, and `wet_sealed`.
+The primary transit graph is built from resident-transit nodes and
+non-resident transit connectors connected through permeable faces; local class
+labels do not create connectivity by themselves.
+
+## 5. Outputs
+
+A mature DFND run should be able to report:
+
+- `TransitDomain` records;
+- `ResidenceRegion` records;
+- `ConcavityDomain` records;
+- domain family: void, surface concavity, pocket, or channel;
+- `ExternalLink` records;
+- `DryComponent` records;
+- `DryInterface` records;
+- dry depth and dry interface signatures;
+- derived mouth geometry when requested;
+- candidate rim, protrusion, ridge, wall, separator, lining, and dry-core motifs;
+- topological volume and other metrics;
+- atoms and residues supporting domains, links, and dry interfaces;
+- local wet/dry and open/coast/sealed labels;
+- topological depth and capacity profiles;
+- candidate motifs such as bottlenecks, throats, chambers, and paths;
+- confidence flags for marginal, degenerate, low-confidence, experimental, or
+  derived records.
+
+## 6. Why DFND Is Useful
+
+DFND is designed to make molecular topography explicit and traceable:
+
+- volume and connectivity are separated;
+- exterior access is represented by `OCEAN` and `external_links`;
+- shallow exposed concavities are not forced to be pockets;
+- channels are defined by multiple external links, not by ad-hoc path guesses;
+- domain motifs can be derived after decomposition without changing the primary
+  domain family;
+- dynamic tracking can use atom-defined tetrahedra and faces rather than shape
+  fitting alone;
+- dry topology can later be correlated with B-factors, RMSF, GNM/ANM modes,
+  hinges, allosteric paths, and mutation-sensitive buried regions.
+
+This makes DFND suitable not only for static pocket detection, but also for
+trajectory analysis, cryptic-site tracking, channel gating, domain motif
+analysis, dry/wet boundary analysis, future pharmacophore annotation, and future
+mechanical coupling.
+
+## 7. Reading Order
+
+For the current abstract corpus, read:
+
+1. [`abstract_contract.md`](abstract_contract.md): object layers, invariants,
+   pipeline, edge cases, and terminology boundaries.
+2. [`feature_definitions.md`](feature_definitions.md): DFN, external links,
+   concavity domains, and domain families.
+3. [`domain_motifs.md`](domain_motifs.md): depth, paths, motifs, reduced domain
+   graphs, and geometric realizations.
+4. [`dry_network_and_convexity.md`](dry_network_and_convexity.md): dry nodes, dry edges, dry components, dry interfaces, and candidate dry motifs.
+5. [`residence_transit_contract.md`](residence_transit_contract.md): separation of residence, transit, and contact.
+6. [`data_model_v1.md`](data_model_v1.md): minimal raw records and semantic feature boundary for the first implementation.
+7. [`toy_systems_v1.md`](toy_systems_v1.md): synthetic systems required before real benchmarks.
+8. [`numerical_policy.md`](numerical_policy.md): thresholds, tolerances, and
+   marginal states.
+9. [`metrics_contract.md`](metrics_contract.md): metric naming and layer-specific
+   quantities.
+10. [`validation_plan.md`](validation_plan.md): validation layers and credibility boundary before external claims.
+11. [`Implementation_Route.md`](Implementation_Route.md): engineering route from
+   prototype to hardening.
+
+The implementation is not production-ready yet, but it is no longer only a design corpus. The current code builds a DFND substrate, produces raw records, integrates with `Topography`, runs small real-system stability checks, supports build-once/query-many probe sweeps, and reports first dry-motif candidates. The documentation remains the canonical contract for deciding what should become stable public API.

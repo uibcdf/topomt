@@ -1,15 +1,12 @@
 # Delaunay Flow Network Decomposition (DFND): Future Ideas
 
-Historical note: the preferred method name is now `DFND`; older mentions of
-`DFND` in this subdirectory should be read as the previous provisional label.
-
 Once the core geometric engine is stable, DFND offers a fertile ground for advanced extensions. Here are the strategic directions for future development.
 
 ## 1. Physicochemical Graph Overlay (Chemo-Topology)
 
-Currently, the graph nodes carry geometric data ($Volume, R_{insphere}$). We should augment them with chemical data.
+Currently, the graph nodes carry geometric data (volume and `R_residence`). We should augment them with chemical data.
 
-*   **Node Coloring:** Assign properties to `TRANSIT` and `COAST` nodes based on the atoms defining them.
+*   **Node Coloring:** Assign properties to `wet` and `COAST` nodes based on the atoms defining them.
     *   **Hydrophobicity Score:** Average Kyte-Doolittle index of the 4 defining atoms.
     *   **Electrostatic Potential:** Poisson-Boltzmann potential at the circumcenter.
     *   **Evolutionary Conservation:** Map conservation scores (e.g., ConSurf) to the graph.
@@ -21,6 +18,12 @@ Currently, the graph nodes carry geometric data ($Volume, R_{insphere}$). We sho
 
 DFND is fast enough to run on MD frames.
 
+The dedicated design note for this track is
+[`dynamic_topology.md`](dynamic_topology.md). The key point is that DFND can
+track topography through the evolution of the flow network itself: tetrahedra,
+faces, `R_residence(t)`, `R_gate(t)`, external links, connected components, and their
+events over time.
+
 *   **The "Breathing" Graph:**
     *   Track a specific pocket ID across time.
     *   Plot $Volume(t)$ and $Max\_Bottleneck(t)$.
@@ -28,7 +31,7 @@ DFND is fast enough to run on MD frames.
     *   Identify the specific face (triplet of atoms) that acts as the "Gatekeeper" (highest variance in permeability).
     *   Correlate gate opening with backbone dihedral angles (allostery).
 *   **Water Residence Time:**
-    *   Correlate `TRANSIT` volumes with explicit water occupancy from simulations.
+    *   Correlate `wet` volumes with explicit water occupancy from simulations.
 
 ## 3. Advanced Graph Theory Applications
 
@@ -52,7 +55,7 @@ Since edge permeability is stored as a continuous value ($R_{gate}$), we can eff
 
 ## 5. Geometric Hashing for Docking
 
-*   **Concept:** Use the `TRANSIT` node centers as a sparse cloud of "ideal ligand atom positions."
+*   **Concept:** Use the `wet` node centers as a sparse cloud of "ideal ligand atom positions."
 *   **Application:** Generate a pharmacophore model directly from the graph centers (e.g., "Ideally, place a hydrophobic carbon at node X and a hydrogen bond donor at node Y").
 
 ## 6. Visualization Enhancements

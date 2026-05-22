@@ -2,18 +2,20 @@
 
 ## Purpose
 
-This document summarizes the current validation surface of the repository and
-the main testing priorities.
+This document summarizes the current validation surface of the repository and the main testing priorities.
 
-## Current test tree
+## Current Test Tree
 
-The current tests live mainly in:
+The current tests include conventional engine tests and an active DFND suite:
 
-- [tests/test_topography.py](/home/diego/repos@uibcdf/topomt/tests/test_topography.py)
-- [tests/test_castp.py](/home/diego/repos@uibcdf/topomt/tests/test_castp.py)
-- [tests/test_import.py](/home/diego/repos@uibcdf/topomt/tests/test_import.py)
+- [tests/test_dfnd_geometry_primitives.py](/home/diego/repos@uibcdf/topomt/tests/test_dfnd_geometry_primitives.py)
+- [tests/test_dfnd_graph_contract.py](/home/diego/repos@uibcdf/topomt/tests/test_dfnd_graph_contract.py)
+- [tests/test_dfnd_input_policy.py](/home/diego/repos@uibcdf/topomt/tests/test_dfnd_input_policy.py)
 - [tests/test_dfnd_pockets.py](/home/diego/repos@uibcdf/topomt/tests/test_dfnd_pockets.py)
+- [tests/test_dfnd_real_system_stability.py](/home/diego/repos@uibcdf/topomt/tests/test_dfnd_real_system_stability.py)
+- [tests/test_dfnd_solvent_volume.py](/home/diego/repos@uibcdf/topomt/tests/test_dfnd_solvent_volume.py)
 - [tests/test_delaunay_mesh.py](/home/diego/repos@uibcdf/topomt/tests/test_delaunay_mesh.py)
+- [tests/test_weighted_delaunay_mesh.py](/home/diego/repos@uibcdf/topomt/tests/test_weighted_delaunay_mesh.py)
 - [tests/methods/pocketeer/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_parity.py)
 - [tests/methods/pocketeer/test_wrapper.py](/home/diego/repos@uibcdf/topomt/tests/methods/pocketeer/test_wrapper.py)
 - [tests/methods/alphaspace2/test_parity.py](/home/diego/repos@uibcdf/topomt/tests/methods/alphaspace2/test_parity.py)
@@ -23,101 +25,55 @@ The current tests live mainly in:
 - [tests/methods/pycasta/test_wrapper.py](/home/diego/repos@uibcdf/topomt/tests/methods/pycasta/test_wrapper.py)
 - [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py)
 
-## What is currently covered reasonably
+## What Is Currently Covered Reasonably
 
-- basic `Topography` behavior;
-- basic pocket feature behavior;
-- `DelaunayMesh` behavior, including its alpha-sphere-derived view;
-- basic CASTp path checks;
-- focused upstream parity for `pocketeer`, `alphaspace2`, `fpocket4`, and a
-  growing `pycasta` bounded battery;
-- first wrapper smoke/parity coverage for `pocketeer`, `alphaspace2`, and
-  `pycasta`, validating the real wrapper-backed execution path in addition to
-  the native-method parity suites;
-- import smoke tests;
-- DFND smoke-like integration checks.
+- `Topography` smoke behavior and DFND feature conversion;
+- DFND geometry primitives (`R_residence`, `R_gate`);
+- DFND graph contract, face identity, external links, dry components, dry interfaces, dry depth, and dry motifs;
+- DFND input-policy failures before triangulation;
+- DFND deterministic `volume_solvent_estimate` bounds and batch/scalar consistency;
+- DFND small real-system stability and multi-radius monotonicity;
+- `DelaunayMesh` behavior;
+- focused upstream/native parity for `pocketeer`, `alphaspace2`, `fpocket4`, and `pycasta` on audited bounded batteries;
+- first wrapper smoke/parity coverage for `pocketeer`, `alphaspace2`, and `pycasta`;
+- import and loader smoke tests.
 
-## What is currently weak
+## What Is Still Weak
 
-- there are no dedicated tests for several prioritized engines;
-- geometry-heavy behavior is not deeply validated;
-- cross-engine contract consistency is not tested enough;
-- environment-sensitive behavior is not clearly separated from code bugs.
+- DFND cavity quality is not yet validated biologically or against a benchmark.
+- DFND tiny-domain reporting/filter policy is not settled.
+- DFND dynamic topology is documented but not implemented.
+- `volume_solvent_estimate` is tested as an estimator, not as a publication-grade analytic volume.
+- Cross-engine comparison reports are not yet organized into a stable benchmark battery.
+- Some conventional-engine deep-validation paths remain environment/build sensitive.
 
-## Why wrapper tests are not redundant
+## DFND Validation Interpretation
 
-Wrapper smoke/parity tests should be treated as a distinct validation layer,
-not as duplicates of the native parity suites.
+Current DFND tests establish engineering correctness of the substrate and raw records. They do not yet establish that DFND detects biologically preferred pockets better than existing methods.
 
-Reason:
+The current validated engineering invariants include:
 
-- native parity tells us whether TopoMT native/provider implementations reproduce the algorithmic
-  semantics we intend to preserve;
-- wrapper parity tells us whether the actual external package or binary, as
-  installed or mirrored in a given environment, still behaves as expected when
-  routed through TopoMT;
-- those are not the same question.
+- finite raw records on small real systems;
+- stable `Topography` integration;
+- monotonic non-increase of resident tetrahedra, permeable face slots, and resident solvent-volume estimate as probe radius increases;
+- traceability of faces, external links, dry interfaces, and dry motifs.
 
-This matters because the wrapper route can surface upstream-environment drift
-that native parity alone would miss. The `fpocket4` work already exposed this
-kind of problem: different fpocket builds or distributions can disagree at the
-final-pocket level even when the audited upstream source build and the native
-TopoMT reimplementation agree with each other.
+## Why Wrapper Tests Are Not Redundant
 
-Practical implication:
+Wrapper smoke/parity tests remain distinct from native parity suites.
 
-- keep native parity as the primary algorithmic validation target;
-- keep wrapper smoke/parity as the integration validation target for the real
-  external executable or package path;
-- and document wrapper failures explicitly as possible build/package/environment
-  drift before treating them as native-method regressions.
+- Native parity checks whether TopoMT native/provider implementations reproduce intended algorithmic semantics.
+- Wrapper parity checks whether the actual external package or binary behaves as expected when routed through TopoMT.
+- Build/package/environment drift can affect wrappers without implying native-method regressions.
 
-## Known gaps
+## Practical Testing Priority
 
-- [tests/io/test_load_castp.py](/home/diego/repos@uibcdf/topomt/tests/io/test_load_castp.py) should
-  become the first real CASTp parity-import suite, using bundled CASTp server
-  outputs as the oracle.
-- The new `CASTp_3.0_server` zip battery is currently green for the parseable
-  cases and exposes a real external parser blocker on `3ptb.pdb` in
-  `molsysmt`, which should be treated as an ecosystem bug rather than hidden by
-  loader fallbacks.
-- [tests/test_castp.py](/home/diego/repos@uibcdf/topomt/tests/test_castp.py) is still a smoke suite
-  for a `CASTp-like` native prototype, not a parity suite for faithful CASTp
-  semantics.
-- There is still uneven direct coverage across the newer `topomt.tools`
-  subpackages, and `pycasta` still does not yet cover the full upstream
-  benchmark inventory even though its audited bounded battery has already
-  grown beyond the original single-case checkpoint.
-- The remaining `pycasta` audited outlier is currently `1apu`, as a deliberate
-  native-versus-upstream semantic residual (`molsysmt` molecular selection
-  versus upstream `ATOM/HETATM` preprocessing).
-- `pocketeer` and `fpocket4` now have dedicated focused tests, but their
-  heavier parity and deep-validation paths should still be expanded and better
-  categorized.
-- The repository does not yet expose a clear benchmark battery for comparing
-  engines across the same systems.
+1. Keep expanding DFND hardening tests and qualitative reports.
+2. Add reporting/filter-policy tests for tiny voids and near-threshold domains.
+3. Build a stable small-system comparison battery across DFND and external methods.
+4. Keep conventional engine parity/wrapper tests alive as reference checks.
+5. Add performance regression checks once DFND build/query costs are better bounded.
 
-## Practical testing priority
+## Environment Caveat
 
-For the current roadmap, the next validation steps should be:
-
-1. strengthen direct tests for the prioritized non-DFND engines;
-2. test local-to-global atom-index mapping explicitly;
-3. test feature metadata consistency across engines;
-4. expand loader tests for CASTp and turn bundled exported files into a real
-   parity-import battery;
-5. keep DFND separate until it returns to active priority.
-
-## Environment caveat
-
-Test results should be interpreted carefully with respect to the declared
-supported Python versions.
-
-The repository targets Python 3.10, 3.11, and 3.12. Results obtained in newer
-interpreters can still be useful, but they should not be confused with the
-official support story.
-
-## Practical interpretation
-
-The test suite is useful enough for iterative development, but not yet broad
-enough to serve as a strong release-quality validation envelope.
+The repository targets Python 3.10, 3.11, and 3.12. Results obtained in newer interpreters can be useful for development, but they should not be confused with the official support story.
