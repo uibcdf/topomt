@@ -1,4 +1,5 @@
 import sys
+import types
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -16,7 +17,7 @@ from molsysviewer_topomt.integration import (
     attach_features,
     attach_pockets,
     attach_topography,
-    build_view_with_topography,
+    new_view,
     register_with_molsysviewer,
     subset_topography,
 )
@@ -243,8 +244,9 @@ def test_attach_topography_enables_addon_and_renders():
     assert view._topomt_addon_runtime.enabled is True
 
 
-def test_build_view_with_topography_uses_molsysviewer_factory(monkeypatch):
+def test_new_view_uses_molsysviewer_factory(monkeypatch):
     topo = tmt.Topography()
+    topo._molsys = 'system'
     topo.add_new_feature(
         feature_type='pocket',
         feature_id='POC-1',
@@ -263,7 +265,7 @@ def test_build_view_with_topography_uses_molsysviewer_factory(monkeypatch):
 
     monkeypatch.setattr(molsysviewer, 'new_view', fake_new_view)
 
-    result_view = build_view_with_topography('system', topo, selection='all')
+    result_view = new_view(topo, selection='all')
 
     assert result_view is view
     assert view.load_calls[0]['molecular_system'] == 'system'
@@ -315,13 +317,13 @@ def test_build_topography_standalone0_html_uses_viewer_host_and_registers_addon(
     view = DummyView()
     captured = {}
 
-    def fake_build_view_with_topography(molecular_system, topography, **kwargs):
+    def fake_new_view(topography, **kwargs):
         captured['build_view'] = {
-            'molecular_system': molecular_system,
+            'molecular_system': getattr(topography, '_molsys', 'system'),
             'topography': topography,
             'kwargs': kwargs,
         }
-        view.load(molecular_system, **kwargs)
+        view.load(getattr(topography, '_molsys', 'system'), **kwargs)
         return view
 
     def fake_build_standalone0_html(view_arg, output_filename, **kwargs):
@@ -332,7 +334,7 @@ def test_build_topography_standalone0_html_uses_viewer_host_and_registers_addon(
         }
         return str(Path(output_filename).resolve())
 
-    monkeypatch.setattr('molsysviewer_topomt.standalone.build_view_with_topography', fake_build_view_with_topography)
+    monkeypatch.setattr('molsysviewer_topomt.standalone.new_view', fake_new_view)
     monkeypatch.setattr(molsysviewer, 'build_standalone0_html', fake_build_standalone0_html)
 
     outfile = tmp_path / 'topomt-standalone.html'
@@ -353,7 +355,7 @@ def test_build_topography_standalone0_html_can_render_only_selected_features(mon
     view = DummyView()
     captured = {}
 
-    def fake_build_view_with_topography(molecular_system, topography, **kwargs):
+    def fake_new_view(topography, **kwargs):
         captured['build_view'] = kwargs
         return view
 
@@ -370,7 +372,7 @@ def test_build_topography_standalone0_html_can_render_only_selected_features(mon
         captured['build_html'] = kwargs
         return str(Path(output_filename).resolve())
 
-    monkeypatch.setattr('molsysviewer_topomt.standalone.build_view_with_topography', fake_build_view_with_topography)
+    monkeypatch.setattr('molsysviewer_topomt.standalone.new_view', fake_new_view)
     monkeypatch.setattr('molsysviewer_topomt.standalone.attach_features', fake_attach_features)
     monkeypatch.setattr(molsysviewer, 'build_standalone0_html', fake_build_standalone0_html)
 
@@ -397,9 +399,9 @@ def test_launch_topography_standalone0_can_compute_topography_and_open_host(monk
         }
         return topo
 
-    def fake_build_view_with_topography(molecular_system, topography, **kwargs):
+    def fake_new_view(topography, **kwargs):
         captured['build_view'] = {
-            'molecular_system': molecular_system,
+            'molecular_system': getattr(topography, '_molsys', None),
             'topography': topography,
             'kwargs': kwargs,
         }
@@ -414,7 +416,7 @@ def test_launch_topography_standalone0_can_compute_topography_and_open_host(monk
         return '/tmp/topomt-launch.html'
 
     monkeypatch.setattr(tmt, 'get_topography', fake_get_topography)
-    monkeypatch.setattr('molsysviewer_topomt.standalone.build_view_with_topography', fake_build_view_with_topography)
+    monkeypatch.setattr('molsysviewer_topomt.standalone.new_view', fake_new_view)
     monkeypatch.setattr(molsysviewer, 'launch_standalone0', fake_launch_standalone0)
 
     result = launch_topography_standalone0('system', method='pocketeer', open_browser=False)
@@ -425,3 +427,220 @@ def test_launch_topography_standalone0_can_compute_topography_and_open_host(monk
     assert captured['launch']['view'] is view
     assert captured['launch']['kwargs']['addon_modules'][0] == 'molsysviewer_topomt'
     assert captured['launch']['kwargs']['open_browser'] is False
+
+
+def test_render_dfnd_tetrahedra_creates_shapes():
+    # Build simulated dfnd_records
+    dfnd_records = {
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 0,
+                'local_atom_indices': [10, 11, 12, 13],
+                'combined_class': 'wet_sealed',
+                'transit_role': 'resident_transit',
+                'R_residence': 2.15,
+                'residence_state': 'resident',
+            },
+            {
+                'tetrahedron_id': 1,
+                'local_atom_indices': [20, 21, 22, 23],
+                'combined_class': 'dry_open',
+                'transit_role': 'non_transit',
+                'R_residence': 0.0,
+                'residence_state': 'non_resident',
+            }
+        ]
+    }
+
+    view = DummyView()
+
+    # Test default mode (combined_class)
+    from molsysviewer_topomt.render import render_dfnd_tetrahedra
+    layer = render_dfnd_tetrahedra(view, dfnd_records)
+
+    assert layer is not None
+    assert len(view.messages) == 2
+    assert view.messages[0]['op'] == 'clear_shapes_by_tag'
+    assert view.messages[0]['tag'] == 'dfnd-tetra'
+    msg = view.messages[1]
+    assert msg['op'] == 'add_tetrahedra'
+    assert msg['options']['atom_quads'] == [[10, 11, 12, 13], [20, 21, 22, 23]]
+    # wet_sealed is 0x14B8A6, dry_open is 0x64748B
+    assert msg['options']['colors'] == [0x14B8A6, 0x64748B]
+    assert msg['options']['alphas'] == [0.5, 0.1]
+    assert "combined_class=wet_sealed" in msg['options']['labels'][0]
+    assert "R_res=2.15 Å" in msg['options']['labels'][0]
+
+
+def test_attach_dfnd_tetrahedra_integration():
+    dfnd_records = {
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 0,
+                'local_atom_indices': [10, 11, 12, 13],
+                'combined_class': 'wet_sealed',
+                'transit_role': 'resident_transit',
+                'R_residence': 2.15,
+                'residence_state': 'resident',
+            }
+        ]
+    }
+
+    view = DummyView()
+    register_with_molsysviewer()
+
+    from molsysviewer_topomt.integration import attach_dfnd_tetrahedra
+    result = attach_dfnd_tetrahedra(view, dfnd_records, color_mode='transit_role')
+
+    assert result['addon_enabled'] is True
+    assert result['layer'] is not None
+    assert result['tag'] == 'dfnd-tetra'
+    assert view._topomt_addon_runtime.enabled is True
+
+    assert len(view.messages) == 2
+    assert view.messages[0]['op'] == 'clear_shapes_by_tag'
+    assert view.messages[0]['tag'] == 'dfnd-tetra'
+    msg = view.messages[1]
+    # resident_transit is 0x6366F1
+    assert msg['options']['colors'] == [0x6366F1]
+
+
+def test_attach_topography_with_tetrahedra():
+    # A complete topography with pockets and tetrahedra
+    topo = tmt.Topography()
+    topo.add_new_feature(
+        feature_type='pocket',
+        feature_id='POC-1',
+        atom_indices=[1, 2, 3],
+        center=[0.1, 0.2, 0.3],
+        volume=0.5,
+        source='manual',
+        source_id='manual:1',
+    )
+    topo.dfnd = types.SimpleNamespace(raw={
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 0,
+                'local_atom_indices': [10, 11, 12, 13],
+                'combined_class': 'wet_sealed',
+                'transit_role': 'resident_transit',
+                'R_residence': 2.15,
+                'residence_state': 'resident',
+            }
+        ]
+    })
+
+    view = DummyView()
+    register_with_molsysviewer()
+
+    # Renders pockets but NOT tetrahedra by default
+    res = attach_topography(view, topo)
+    assert res['rendered'] is not None
+    assert res['rendered_tetrahedra'] is None
+
+    # Renders BOTH pockets and tetrahedra when render_tetrahedra=True
+    view = DummyView()
+    res = attach_topography(view, topo, render_tetrahedra=True)
+    assert res['rendered'] is not None
+    assert res['rendered_tetrahedra'] is not None
+    assert len(view.messages) == 3
+    # First is pocket sphere
+    assert view.messages[0]['op'] == 'add_sphere'
+    # Second is clear tetrahedra tag
+    assert view.messages[1]['op'] == 'clear_shapes_by_tag'
+    assert view.messages[1]['tag'] == 'dfnd-tetra'
+    # Third is tetrahedra
+    assert view.messages[2]['op'] == 'add_tetrahedra'
+
+
+def test_topography_panel_actions_with_tetrahedra():
+    from molsysviewer_topomt.panels.topography import TopoMTTopographyPanel
+    topo = tmt.Topography()
+    topo.add_new_feature(
+        feature_type='pocket',
+        feature_id='POC-1',
+        atom_indices=[1, 2, 3],
+        center=[0.1, 0.2, 0.3],
+        volume=0.5,
+        source='manual',
+        source_id='manual:1',
+    )
+    topo.dfnd = types.SimpleNamespace(raw={
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 0,
+                'local_atom_indices': [10, 11, 12, 13],
+                'combined_class': 'wet_sealed',
+                'transit_role': 'resident_transit',
+                'R_residence': 2.15,
+                'residence_state': 'resident',
+            }
+        ]
+    })
+
+    view = DummyView()
+    register_with_molsysviewer()
+
+    # Enable addon lifecycle to initialize runtime
+    view.addons.enable('topomt')
+    lifecycle.on_enable(view)
+
+    panel = TopoMTTopographyPanel()
+    panel.on_mount(view)
+
+    # Attach topography first
+    view._topomt_addon_runtime.topography = topo
+
+    # 1. Action: render_pockets
+    panel.handle_action(view, 'render_pockets', {})
+    assert len(view.messages) == 1
+    assert view.messages[0]['op'] == 'add_sphere'
+
+    # 2. Action: render_tetrahedra
+    panel.handle_action(view, 'render_tetrahedra', {})
+    assert len(view.messages) == 3
+    assert view.messages[1]['op'] == 'clear_shapes_by_tag'
+    assert view.messages[2]['op'] == 'add_tetrahedra'
+
+    # 3. Action: clear_pockets (clears both pockets and tetrahedra)
+    panel.handle_action(view, 'clear_pockets', {})
+    clear_ops = [msg for msg in view.messages if msg.get('op') == 'clear_shapes_by_tag']
+    # There should be clear operations for pocket tag and dfnd-tetra tag
+    assert len(clear_ops) == 3
+    tags_cleared = {msg['tag'] for msg in clear_ops}
+    assert 'topomt-pocket:POC-1' in tags_cleared
+    assert 'dfnd-tetra' in tags_cleared
+
+
+def test_new_view_resolves_molsys(monkeypatch):
+    class MockTopography:
+        def __init__(self, molsys):
+            self._molsys = molsys
+            self.features = {}
+
+        def __iter__(self):
+            return iter(self.features)
+
+    view = DummyView()
+
+    def fake_molsysviewer_new_view(molecular_system, **kwargs):
+        view.load(molecular_system, **kwargs)
+        return view
+
+    monkeypatch.setattr(molsysviewer, 'new_view', fake_molsysviewer_new_view)
+    monkeypatch.setattr('molsysviewer_topomt.integration.attach_topography', lambda *args, **kwargs: {'rendered': None})
+
+    topo = MockTopography('real-molsys')
+
+    res_view = new_view(topo)
+    assert res_view is view
+    assert view.load_calls[-1]['molecular_system'] == 'real-molsys'
+
+    # Topography with no _molsys raises ValueError
+    class BadTopography:
+        pass
+
+    with pytest.raises(ValueError, match="topography does not have a '_molsys' attribute"):
+        new_view(BadTopography())
+
+

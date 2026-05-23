@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from molsysviewer import AddonPanelWidget
+from molsysviewer.addons import AddonPanelWidget
 
 from ..runtime import ensure_runtime, record_event
 
@@ -25,13 +25,15 @@ export function render({ model, el }) {
         <span class="tmt-empty">No topography loaded.</span>
       </div>
       <button class="tmt-btn tmt-btn--primary" id="tmt-render">Render Pockets</button>
-      <button class="tmt-btn tmt-btn--secondary" id="tmt-clear">Clear</button>
+      <button class="tmt-btn tmt-btn--primary" id="tmt-render-tetra" style="margin-top: 4px; background: #651fff;">Render Tetrahedra</button>
+      <button class="tmt-btn tmt-btn--secondary" id="tmt-clear" style="margin-top: 4px;">Clear All</button>
       <div class="tmt-status" id="tmt-status"></div>
     </div>
   `;
 
   const summaryEl = el.querySelector("#tmt-summary");
   const renderBtn = el.querySelector("#tmt-render");
+  const renderTetraBtn = el.querySelector("#tmt-render-tetra");
   const clearBtn  = el.querySelector("#tmt-clear");
   const statusEl  = el.querySelector("#tmt-status");
 
@@ -53,6 +55,9 @@ export function render({ model, el }) {
     renderBtn.disabled = state.status === "rendering" || state.n_features === 0;
     renderBtn.textContent = state.status === "rendering" ? "Rendering…" : "Render Pockets";
 
+    renderTetraBtn.disabled = state.status === "rendering" || state.n_features === 0;
+    renderTetraBtn.textContent = state.status === "rendering" ? "Rendering…" : "Render Tetrahedra";
+
     if (state.status === "done") {
       statusEl.textContent = "Rendered.";
       statusEl.className = "tmt-status tmt-status--ok";
@@ -70,6 +75,10 @@ export function render({ model, el }) {
 
   renderBtn.addEventListener("click", () => {
     model.send({ type: "action", id: "render_pockets", payload: {} });
+  });
+
+  renderTetraBtn.addEventListener("click", () => {
+    model.send({ type: "action", id: "render_tetrahedra", payload: {} });
   });
 
   clearBtn.addEventListener("click", () => {
@@ -173,9 +182,38 @@ class TopoMTTopographyPanel(AddonPanelWidget):
             except Exception as exc:
                 self.push_state({**self._build_state(runtime), "status": "error", "error": str(exc)})
 
-        elif action_id == "clear_pockets":
+        elif action_id == "render_tetrahedra":
+            if runtime.topography is None:
+                self.push_state({**self._build_state(runtime), "status": "error", "error": "No topography attached."})
+                return
+            self.push_state({**self._build_state(runtime), "status": "rendering"})
             try:
-                view.shapes.clear(tag_prefix=runtime.tag_prefix, skip_digestion=True)
+                from ..render import render_dfnd_tetrahedra
+                layer = render_dfnd_tetrahedra(
+                    view, runtime.topography, tag_prefix="dfnd-tetra", skip_digestion=True
+                )
+                record_event(view, "panel_render_tetrahedra")
+                self.push_state({**self._build_state(runtime), "status": "done"})
+            except Exception as exc:
+                self.push_state({**self._build_state(runtime), "status": "error", "error": str(exc)})
+
+        elif action_id == "clear_pockets":
+            if runtime.topography is not None:
+                try:
+                    feature_ids = []
+                    if hasattr(runtime.topography, 'features'):
+                        feature_ids = list(runtime.topography.features.keys())
+                    elif isinstance(runtime.topography, dict):
+                        if 'features' in runtime.topography:
+                            feature_ids = [f['feature_id'] for f in runtime.topography['features'] if 'feature_id' in f]
+                        else:
+                            feature_ids = list(runtime.topography.keys())
+                    for feature_id in feature_ids:
+                        view.shapes.clear(tag=f"{runtime.tag_prefix}:{feature_id}", skip_digestion=True)
+                except Exception:
+                    pass
+            try:
+                view.shapes.clear(tag="dfnd-tetra", skip_digestion=True)
             except Exception:
                 pass
             record_event(view, "panel_clear_pockets")

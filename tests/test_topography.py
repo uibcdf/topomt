@@ -118,6 +118,14 @@ def test_demo_supports_uppercase_castp_keys():
     assert tmt.demo['HIV-1 Protease']['1HIV.pdb'] == tmt.demo['HIV-1 Protease']['1hiv.pdb']
 
 
+def test_demo_synthetic_systems():
+    assert 'synthetic' in tmt.demo
+    assert 'hollow_sphere_pocket.pdb' in tmt.demo['synthetic']
+    path = tmt.demo['synthetic']['hollow_sphere_pocket.pdb']
+    assert path.is_file()
+    assert 'argon_cube.pdb' in tmt.demo['synthetic']
+
+
 def test_run_pocketeer_maps_local_indices_to_global(topography_empty_1tcd, monkeypatch):
     pocketeer_module = importlib.import_module('topomt.third_party.pocketeer._native_impl')
     PocketeerPocket = pocketeer_module.PocketeerPocket

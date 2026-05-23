@@ -1,10 +1,4 @@
-"""Standalone convenience helpers for MolSysViewer + TopoMT."""
-
-from typing import Any
-
-import molsysviewer
-
-from .integration import attach_features, attach_topography, build_view_with_topography
+from .integration import attach_features, attach_topography, new_view
 
 
 def _resolve_topography(
@@ -17,6 +11,8 @@ def _resolve_topography(
 ):
     """Return an explicit or freshly computed TopoMT topography."""
     if topography is not None:
+        if getattr(topography, '_molsys', None) is None and molecular_system is not None:
+            topography._molsys = molecular_system
         return topography
 
     import topomt as tmt
@@ -59,8 +55,7 @@ def build_topography_standalone0_html(
         skip_digestion=True,
         **topography_kwargs,
     )
-    view = build_view_with_topography(
-        molecular_system,
+    view = new_view(
         resolved_topography,
         selection=selection,
         structure_indices=structure_indices,
@@ -84,6 +79,7 @@ def build_topography_standalone0_html(
         if module_name not in resolved_addon_modules:
             resolved_addon_modules.append(module_name)
 
+    import molsysviewer
     return molsysviewer.build_standalone0_html(
         view,
         output_filename,
@@ -127,8 +123,7 @@ def launch_topography_standalone0(
         skip_digestion=True,
         **topography_kwargs,
     )
-    view = build_view_with_topography(
-        molecular_system,
+    view = new_view(
         resolved_topography,
         selection=selection,
         structure_indices=structure_indices,
@@ -152,6 +147,7 @@ def launch_topography_standalone0(
         if module_name not in resolved_addon_modules:
             resolved_addon_modules.append(module_name)
 
+    import molsysviewer
     return molsysviewer.launch_standalone0(
         view,
         output_filename=output_filename,

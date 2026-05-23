@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from molsysviewer import AddonPanelWidget
+from molsysviewer.addons import AddonPanelWidget
 
 from ..runtime import ensure_runtime, record_event
 
@@ -216,8 +216,22 @@ class TopoMTPocketsPanel(AddonPanelWidget):
                 self.push_state({**self._build_state(runtime), "status": "error", "error": str(exc)})
 
         elif action_id == "clear_pockets":
+            if runtime.topography is not None:
+                try:
+                    feature_ids = []
+                    if hasattr(runtime.topography, 'features'):
+                        feature_ids = list(runtime.topography.features.keys())
+                    elif isinstance(runtime.topography, dict):
+                        if 'features' in runtime.topography:
+                            feature_ids = [f['feature_id'] for f in runtime.topography['features'] if 'feature_id' in f]
+                        else:
+                            feature_ids = list(runtime.topography.keys())
+                    for feature_id in feature_ids:
+                        view.shapes.clear(tag=f"{runtime.tag_prefix}:{feature_id}", skip_digestion=True)
+                except Exception:
+                    pass
             try:
-                view.shapes.clear(tag_prefix=runtime.tag_prefix, skip_digestion=True)
+                view.shapes.clear(tag="dfnd-tetra", skip_digestion=True)
             except Exception:
                 pass
             record_event(view, "panel_clear_pockets")

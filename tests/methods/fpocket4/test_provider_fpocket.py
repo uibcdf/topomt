@@ -32,7 +32,10 @@ def test_fpocket_provider_cli_matches_direct_wrapper_path():
         FP_3LKF_PDB,
         backend='cli',
     )
-    wrapper_topography = tmt.methods.fpocket4(FP_3LKF_PDB, implementation='wrapper')
+    wrapper_topography = tmt.third_party.fpocket.get_topography(
+        FP_3LKF_PDB,
+        backend='wrapper',
+    )
 
     assert list(provider_topography) == list(wrapper_topography)
     assert len(provider_topography) == len(wrapper_topography)

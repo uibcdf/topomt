@@ -50,3 +50,10 @@ demo['fpocket']['2HGR.pdb'] = first_existing_path('topomt.data.fpocket4.sample',
 demo['fpocket']['3LKF.pdb'] = first_existing_path('topomt.data.fpocket4.sample', '3LKF.bcif.gz', '3LKF.pdb')
 demo['fpocket']['3LKF_out'] = path('topomt.data.fpocket4.sample', '3LKF_out')
 demo['fpocket']['E15ALA.pdb'] = first_existing_path('topomt.data.fpocket4.sample', 'E15ALA.bcif.gz', 'E15ALA.pdb')
+
+# Synthetic systems
+
+demo['synthetic'] = {}
+for entry in files('topomt.data.synthetic').iterdir():
+    if entry.name.endswith('.pdb'):
+        demo['synthetic'][entry.name] = path('topomt.data.synthetic', entry.name)

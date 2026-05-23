@@ -78,37 +78,24 @@ class BaseFeature():
 
     def __copy__(self):
 
-        new_feature = BaseFeature()
-        new_feature.feature_id = copy.copy(self.feature_id)
-        new_feature.feature_type = copy.copy(self.feature_type)
-        new_feature.feature_label = copy.copy(self.feature_label)
-        new_feature.source = copy.copy(self.source)
-        new_feature.source_id = copy.copy(self.source_id)
-        new_feature.atom_indices = copy.copy(self.atom_indices)
-        new_feature.atom_labels = copy.copy(self.atom_labels)
-        new_feature.atom_label_format = copy.copy(self.atom_label_format)
-        new_feature.shape_type = copy.copy(self.shape_type)
-        new_feature.dimensionality = copy.copy(self.dimensionality)
-        new_feature._topography = None
-
+        new_feature = self.__class__.__new__(self.__class__)
+        for k, v in self.__dict__.items():
+            if k == '_topography':
+                new_feature._topography = None
+            else:
+                setattr(new_feature, k, copy.copy(v))
         return new_feature
 
 
     def __deepcopy__(self, memo):
 
-        new_feature = BaseFeature()
-        new_feature.feature_id = copy.deepcopy(self.feature_id, memo)
-        new_feature.feature_type = copy.deepcopy(self.feature_type, memo)
-        new_feature.feature_label = copy.deepcopy(self.feature_label, memo)
-        new_feature.source = copy.deepcopy(self.source, memo)
-        new_feature.source_id = copy.deepcopy(self.source_id, memo)
-        new_feature.atom_indices = copy.deepcopy(self.atom_indices, memo)
-        new_feature.atom_labels = copy.deepcopy(self.atom_labels, memo)
-        new_feature.atom_label_format = copy.deepcopy(self.atom_label_format, memo)
-        new_feature.shape_type = copy.deepcopy(self.shape_type, memo)
-        new_feature.dimensionality = copy.deepcopy(self.dimensionality, memo)
-        new_feature._topography = None
-
+        new_feature = self.__class__.__new__(self.__class__)
+        memo[id(self)] = new_feature
+        for k, v in self.__dict__.items():
+            if k == '_topography':
+                new_feature._topography = None
+            else:
+                setattr(new_feature, k, copy.deepcopy(v, memo))
         return new_feature
 
 
