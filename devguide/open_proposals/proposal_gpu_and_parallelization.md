@@ -82,3 +82,13 @@ Extracting pocket boundaries over large molecular systems currently requires dee
 Leverage `molsysmt`'s zero-copy architecture:
 1. **Zero-Copy Trajectory Slicing**: Ensure `topomt` direct solvers consume the write-protected read-only NumPy coordinate views returned by `molsysmt` native structures.
 2. **Immutable Boundary Checks**: Perform all boundary geometric measurements directly on the read-only coordinate views without writing to or copying the coordinate array buffers, ensuring maximum memory efficiency and speed.
+
+---
+
+## 5. OpenCL-Driven Pocket Voxelizers & Alpha Shape Solvers (SPIR-V)
+
+Because Delaunay triangulation, alpha shape determination, and cavity grid voxelization are massive parallel sorting and distance-checking tasks:
+1. **SPIR-V OpenCL Kernels**: Compile geometric pocket boundary solver routines into standard SPIR-V intermediate binaries.
+2. **Hardware-Agnostic GPU Acceleration**: Using `pyopencl`, `topomt` can execute these pre-compiled pocket voxelization kernels on any client GPU or CPU platform (such as AMD cards, integrated Intel HD graphics, or Apple Silicon GPUs). This ensures massive acceleration factors (up to **50x**) compared to standard CPU single-threaded execution while maintaining 100% open-source, vendor-independent software pipelines.
+3. **OpenGL Sharing Interoperability**: Share the voxel grid and alpha shape index buffers directly from the PyOpenCL compute context to `molsysviewer` WebGL rendering VBOs, eliminating expensive Device-to-Host (GPU to CPU) and Host-to-Device (CPU to GPU) memory transfers.
+
