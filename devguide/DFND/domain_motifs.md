@@ -68,22 +68,36 @@ purpose is to support paths, motifs, and geometric realizations.
 
 ## 2. Canonical and Experimental Parts
 
-Canonical now:
+Canonical now (**implemented** on each `WetComponent`, see
+`topomt/dfnd/components.py`):
 
-- DFND decomposition into `TransitDomain` and `concavity_domain` records;
-- external-link clustering;
-- unweighted topological depth from exterior-boundary nodes.
+- DFND decomposition into components (a `component` is the graph object; its
+  `domain` is its atoms — see [`object_model.md`](object_model.md));
+- external-link clustering, realized per component as `external_mouth` motifs;
+- unweighted topological depth from exterior-boundary nodes
+  (`component.topological_depth`) plus its depth regions
+  (`component.depth_regions`, also emitted as `depth_region` motifs).
 
 Candidate or experimental:
 
-- weighted depth;
-- capacity-based lumping;
-- chamber detection;
-- throat detection;
-- bottleneck ranking;
-- reduced motif graph construction.
+- **chamber detection, throat detection, bottleneck ranking** — a **first attempt
+  is implemented** (`_attach_capacity_motifs` in `topomt/dfnd/components.py`):
+  a capacity merge tree over a component's internal faces (`R_gate`, descending)
+  yields `throat_candidates` (join saddles), `chamber_candidates` (the joined
+  basins) and a `bottleneck`, each scored by **topological persistence** (peak
+  `R_residence` minus join `R_gate`) and gated by `min_persistence`. Validated on
+  the dumbbell (one throat at the neck, two chambers; none on a plain void).
+  These remain **ranked descriptors**, not a hard classifier, until the scoring /
+  persistence policy is validated on real systems.
+- weighted depth; capacity-based lumping beyond the above; reduced motif graph.
 
-Candidate operations must be reported as descriptors or diagnostics until their
+The same capacity merge tree is the natural seed for the multi-scale segmentation
+fix (the "Disease 1" over-segmentation in
+[`pathological_systems.md`](pathological_systems.md)): merging basins separated by
+low-persistence saddles is exactly the watershed-merge that reunifies
+over-segmented domains.
+
+Candidate operations are reported as descriptors or diagnostics until their
 scoring and stability policies are fixed.
 
 ## 3. Topological Depth

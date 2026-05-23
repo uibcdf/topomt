@@ -222,13 +222,13 @@ class DelaunayFlowNetwork:
                 ] = self._gate_intrusion_suspect(tetrahedron_index, face_index)
 
     @staticmethod
-    def _classify_domain(n_external_links, n_resident_nodes):
+    def _classify_component(n_external_links, n_resident_nodes):
         has_residence = n_resident_nodes >= 1
         if n_external_links == 0:
-            return 'void_domain' if has_residence else 'degenerate_subprobe_domain'
+            return 'void' if has_residence else 'degenerate_subprobe'
         if n_external_links == 1:
-            return 'pocket_domain' if has_residence else 'surface_concavity_domain'
-        return 'multi_external_link_domain' if has_residence else 'nonresident_passage_domain'
+            return 'pocket' if has_residence else 'surface_concavity'
+        return 'multi_external_link' if has_residence else 'nonresident_passage'
 
     def _state_from_delta(self, value, threshold):
         delta = float(value) - float(threshold)
@@ -408,7 +408,7 @@ class DelaunayFlowNetwork:
                     }
                 )
 
-        concavity_domains = []
+        wet_components = []
         residence_regions = []
         external_links = []
         pockets = []
@@ -416,7 +416,7 @@ class DelaunayFlowNetwork:
         channels = []
         surface_concavities = []
         nonresident_passages = []
-        degenerate_subprobe_domains = []
+        degenerate_subprobes = []
 
         for domain_index, (_label, nodes) in enumerate(sorted(nodes_by_label.items()), start=1):
             node_set = set(nodes)
@@ -454,7 +454,7 @@ class DelaunayFlowNetwork:
                 external_links.append(
                     {
                         'external_link_id': link_id,
-                        'domain_id': domain_index,
+                        'component_id': domain_index,
                         'local_link_id': link_offset,
                         'face_ids': [record['face_id'] for record in cluster],
                         'tetrahedron_ids': sorted({record['tetrahedron_id'] for record in cluster}),
@@ -468,7 +468,7 @@ class DelaunayFlowNetwork:
                 )
 
             n_external_links = len(domain_external_link_ids)
-            domain_family = self._classify_domain(n_external_links, len(resident_nodes))
+            family = self._classify_component(n_external_links, len(resident_nodes))
             atom_indices = sorted(
                 {
                     int(self.atom_indices_map[atom_index])
@@ -495,8 +495,8 @@ class DelaunayFlowNetwork:
             path_capacity_min = min(edge_capacities) if edge_capacities else None
 
             domain_record = {
-                'domain_id': domain_index,
-                'domain_family': domain_family,
+                'id': domain_index,
+                'family': family,
                 'tetrahedron_ids': nodes,
                 'resident_tetrahedron_ids': resident_nodes,
                 'transit_connector_tetrahedron_ids': connector_nodes,
@@ -516,18 +516,18 @@ class DelaunayFlowNetwork:
                 'center': np.mean(self.mesh.simplex_centers[nodes], axis=0).tolist(),
                 'flags': [],
             }
-            if domain_family in {'surface_concavity_domain', 'nonresident_passage_domain', 'degenerate_subprobe_domain'}:
+            if family in {'surface_concavity', 'nonresident_passage', 'degenerate_subprobe'}:
                 domain_record['flags'].append('provisional')
             if connector_nodes:
                 domain_record['flags'].append('contains_transit_connector')
 
-            concavity_domains.append(domain_record)
+            wet_components.append(domain_record)
 
             if resident_nodes:
                 residence_regions.append(
                     {
                         'residence_region_id': len(residence_regions) + 1,
-                        'domain_id': domain_index,
+                        'component_id': domain_index,
                         'tetrahedron_ids': resident_nodes,
                         'transit_connector_tetrahedron_ids': connector_nodes,
                         'volume_topological_resident': volume_topological_resident,
@@ -538,7 +538,7 @@ class DelaunayFlowNetwork:
 
             compatibility_record = {
                 'id': domain_index,
-                'domain_family': domain_family,
+                'family': family,
                 'tetrahedron_indices': nodes,
                 'transit_indices': nodes,
                 'resident_tetrahedron_indices': resident_nodes,
@@ -556,18 +556,18 @@ class DelaunayFlowNetwork:
 
             include_in_compatibility_view = not min_size or len(nodes) >= min_size
             if include_in_compatibility_view:
-                if domain_family == 'void_domain':
+                if family == 'void':
                     voids.append(compatibility_record)
-                elif domain_family == 'pocket_domain':
+                elif family == 'pocket':
                     pockets.append(compatibility_record)
-                elif domain_family == 'multi_external_link_domain':
+                elif family == 'multi_external_link':
                     channels.append(compatibility_record)
-                elif domain_family == 'surface_concavity_domain':
+                elif family == 'surface_concavity':
                     surface_concavities.append(compatibility_record)
-                elif domain_family == 'nonresident_passage_domain':
+                elif family == 'nonresident_passage':
                     nonresident_passages.append(compatibility_record)
                 else:
-                    degenerate_subprobe_domains.append(compatibility_record)
+                    degenerate_subprobes.append(compatibility_record)
 
         dry_mask = ~resident
         dry_components = self._build_dry_components(dry_mask, face_permeable, min_size)
@@ -590,9 +590,8 @@ class DelaunayFlowNetwork:
                 },
                 'tetrahedra': tetrahedron_records,
                 'faces': face_records,
-                'transit_domains': concavity_domains,
+                'wet_components': wet_components,
                 'residence_regions': residence_regions,
-                'concavity_domains': concavity_domains,
                 'external_links': external_links,
                 'dry_interfaces': dry_interfaces,
                 'dry_motifs': dry_motifs,
@@ -604,7 +603,7 @@ class DelaunayFlowNetwork:
                 'channels': channels,
                 'surface_concavities': surface_concavities,
                 'nonresident_passages': nonresident_passages,
-                'degenerate_subprobe_domains': degenerate_subprobe_domains,
+                'degenerate_subprobes': degenerate_subprobes,
             },
             'dry': {
                 'core': dry_components[0] if dry_components else None,

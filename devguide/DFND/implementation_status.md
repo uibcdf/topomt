@@ -15,11 +15,23 @@ not as definitions of DFND semantics.
 
 Current code lives under `topomt/dfnd/`:
 
-- `api.py` exposes `dfnd(...)` and returns raw DFND records as the authoritative output;
-- `graph.py` defines `DelaunayFlowNetwork`;
+- `api.py` exposes `dfnd(...)` (raw-first dict) and `dfnd_to_topography(...)`;
+- `graph.py` defines `DelaunayFlowNetwork` (the engine; emits `wet_components`,
+  `family`, etc. — the zero-legacy contract per [`object_model.md`](object_model.md));
+- `data.py` defines `DFNDData`, the single `topography.dfnd` container
+  (`raw / mesh / dfn{ parameters, graph, components }`, mesh/dfn split, and the
+  `at_probe(...)` probe re-query that reuses the cached mesh);
+- `components.py` defines the typed `Component` / `WetComponent` / `DryComponent`
+  and the `Components` registry (mirrors `Topography`), plus the wet motif layer
+  (`topological_depth`, `depth_regions`, and experimental
+  `throat_candidates` / `chamber_candidates` / `bottleneck`);
 - `core/clearance.py` contains the face-gate and tetrahedron-residence clearance solvers;
 - `core/permeability.py` contains face permeability logic;
-- `core/utils.py` contains geometric helpers.
+- `core/utils.py` contains geometric helpers;
+- `synthetic.py` generates dummy-atom (argon / noble-gas) benchmark shapes with
+  topography known by construction;
+- `interfaces.py` prototypes interface-feature extraction from raw records
+  (the multi-body-lining rule; see [`interfaces.md`](interfaces.md)).
 
 The active implementation now covers the first v1 substrate:
 
@@ -32,10 +44,15 @@ The active implementation now covers the first v1 substrate:
 - build a finite transit graph for a selected probe radius;
 - expose `transit_policy = resident_only | with_connectors`;
 - expose `gate_intrusion_policy = flag_only | block_suspect`;
-- classify finite transit domains by `n_external_links x has_residence`;
+- classify finite components by `n_external_links x has_residence` into a `family`
+  (`void` / `pocket` / `channel` / `surface_concavity` / `nonresident_passage` /
+  `degenerate_subprobe`); no `_domain` suffix (zero-legacy contract);
 - keep `wet_open` only as `has_open_interior`;
-- report `TransitDomain`, `ResidenceRegion`, `ConcavityDomain`, and `ExternalLink` raw records;
-- keep compatibility wet views for pockets, voids, and channels;
+- emit `wet_components`, `residence_regions`, `external_links` raw records;
+- organize all DFND output under the single `topography.dfnd` (`DFNDData`); the
+  public `Topography` top level holds only the promoted features (no `dfnd_*`
+  attributes). Wet domains promote to `Pocket`/`Void`/`Channel` with mouths as
+  child `Mouth` features (provenance `component_id`);
 - build a dry complement with dry-edge face records, dry interfaces, dry depth, and first candidate dry motifs.
 
 Validated by active tests so far:
@@ -70,6 +87,20 @@ Validated by active tests so far:
 - Dry interfaces and dry-depth propagation are implemented and tested; see checkpoint_dry_interfaces_depth.md.
 - Probe-radius monotonicity sweeps on five small real systems are green using one cached `DelaunayFlowNetwork` per system; see checkpoint_probe_radius_sweep.md.
 - Query-time thresholding/edge filtering, Topography raw accessors, solvent-volume tests, quality snapshots, and first internal dry motifs are covered; see checkpoint_dfnd_hardening_stint.md and checkpoint_quality_snapshot.md.
+- A synthetic-shape battery (65 catalogued dummy-atom PDBs across success,
+  interface, and pathological tiers) validates known-ground-truth topography; see
+  tests/test_dfnd_synthetic_benchmarks.py, tests/test_dfnd_pathological.py,
+  tests/test_dfnd_interface_features.py, and the catalog builder
+  devtools/dfnd/build_synthetic_catalog.py.
+- ~25 pathological systems pin current failure modes as regression markers
+  (segmentation fragmentation, sampling/packing sensitivity, threshold
+  instability, quantification/radius/bodies); see
+  [`pathological_systems.md`](pathological_systems.md) and
+  [`synthetic_review_guide.md`](synthetic_review_guide.md).
+- the `topography.dfnd` container, typed `Components` registry, probe re-query
+  (`at_probe`), the canonical wet motif layer (topological depth / depth regions),
+  and the experimental throat/chamber/bottleneck descriptors are covered by
+  tests/test_dfnd_data.py and tests/test_dfnd_pockets.py.
 
 ## 3. What Is Not Yet Production-Ready
 
@@ -101,7 +132,13 @@ The DFND documentation now covers:
 - input policy;
 - dynamic topology;
 - pharmacophore extensions;
-- risks and future ideas.
+- risks and future ideas;
+- synthetic benchmark design ([`synthetic_benchmarks.md`](synthetic_benchmarks.md))
+  and the per-case review playbook ([`synthetic_review_guide.md`](synthetic_review_guide.md));
+- known failure modes on synthetic ground truth ([`pathological_systems.md`](pathological_systems.md));
+- the interface model and extraction prototype ([`interfaces.md`](interfaces.md));
+- the authoritative object model and `component → domain → feature` terminology
+  ([`object_model.md`](object_model.md)).
 
 The remaining documentation work is to keep the design documents consistent with the active implementation as validation, reporting policy, and performance work continue.
 
@@ -114,7 +151,8 @@ consistent with the documented semantics:
 
 - standard Delaunay substrate;
 - explicit `R_residence` and `R_gate` physics;
-- unambiguous DFN, external-link, concavity-domain, and void/surface-concavity/pocket/channel domain definitions;
+- unambiguous DFN, external-link, and component definitions with the `family`
+  axis (`void` / `pocket` / `channel` / `surface_concavity` / …);
 - conservative handling of `COAST` as boundary/contact metadata until metric behavior is validated;
-- clean `Topography` integration and raw-record accessors;
+- clean `Topography` integration via the single `topography.dfnd` container and the typed `Components` registry;
 - active tests and focused checkpoints rather than skipped placeholders.

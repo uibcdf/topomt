@@ -1,0 +1,9 @@
+HETATM    1 AR   DUM A   1      -1.894  -1.894  -1.894  1.00  0.00          AR
+HETATM    2 AR   DUM A   2      -1.894  -1.894   1.894  1.00  0.00          AR
+HETATM    3 AR   DUM A   3      -1.894   1.894  -1.894  1.00  0.00          AR
+HETATM    4 AR   DUM A   4      -1.894   1.894   1.894  1.00  0.00          AR
+HETATM    5 AR   DUM A   5       1.894  -1.894  -1.894  1.00  0.00          AR
+HETATM    6 AR   DUM A   6       1.894  -1.894   1.894  1.00  0.00          AR
+HETATM    7 AR   DUM A   7       1.894   1.894  -1.894  1.00  0.00          AR
+HETATM    8 AR   DUM A   8       1.894   1.894   1.894  1.00  0.00          AR
+END

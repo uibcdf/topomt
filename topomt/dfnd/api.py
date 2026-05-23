@@ -1,8 +1,9 @@
 from typing import Any
 
 from .graph import DelaunayFlowNetwork
+from .data import DFNDData
 from .. import pyunitwizard as puw
-from ..features import Channel, Pocket, Void
+from ..features import Channel, Mouth, Pocket, Void
 from ..topography.Topography import Topography
 
 
@@ -24,9 +25,9 @@ def _feature_from_domain_record(record: dict[str, Any], feature_class, source: s
     feature = feature_class(
         atom_indices=record['atom_indices'],
         source=source,
-        source_id=f"{source}:{record['domain_family']}:{record['id']}",
+        source_id=f"{source}:{record['family']}:{record['id']}",
     )
-    feature.domain_family = record['domain_family']
+    feature.family = record['family']
     feature.tetrahedron_indices = record['tetrahedron_indices']
     feature.resident_tetrahedron_indices = record['resident_tetrahedron_indices']
     feature.transit_connector_tetrahedron_indices = record[
@@ -50,49 +51,90 @@ def _feature_from_domain_record(record: dict[str, Any], feature_class, source: s
     return feature
 
 
+def _run_dfnd(
+    molecular_system,
+    selection: str,
+    structure_indices: int,
+    probe_radius: float,
+    sea_level: float | None,
+    min_size: int,
+    epsilon: float,
+    hydrogen_policy: str,
+    radii_model: str,
+    transit_policy: str,
+    gate_intrusion_policy: str,
+) -> tuple[DelaunayFlowNetwork, dict[str, Any]]:
+    """Build the network and run the decomposition. Shared by the public entry points."""
+    network = DelaunayFlowNetwork(
+        molecular_system,
+        selection=selection,
+        structure_indices=structure_indices,
+        epsilon=epsilon,
+        hydrogen_policy=hydrogen_policy,
+        radii_model=radii_model,
+    )
+    result = network.get_topography(
+        probe_radius=_as_angstrom_float(probe_radius),
+        sea_level=sea_level,
+        min_size=min_size,
+        transit_policy=transit_policy,
+        gate_intrusion_policy=gate_intrusion_policy,
+    )
+    return network, result
+
+
 def dfnd_to_topography(
     molecular_system,
     selection: str = 'all',
     structure_indices: int = 0,
-    **kwargs,
+    probe_radius: float = 1.4,
+    sea_level: float | None = None,
+    min_size: int = 0,
+    epsilon: float = 1e-6,
+    hydrogen_policy: str = 'exclude',
+    radii_model: str = 'vdw',
+    transit_policy: str = 'with_connectors',
+    gate_intrusion_policy: str = 'flag_only',
 ) -> Topography:
-    """Run DFND and convert compatibility domains into a Topography object.
+    """Run DFND and promote compatibility domains into a ``Topography`` object.
 
-    The raw DFND records remain attached to the returned object as dfnd_records.
-    Direct calls to dfnd still return the raw-first dictionary used for method
-    development and validation.
+    All DFND substrate (mesh, network, components) is attached to the single
+    ``topography.dfnd`` object (see ``devguide/DFND/object_model.md``); the public
+    top level holds only the promoted features. Direct calls to ``dfnd`` still
+    return the raw-first dictionary used for method development and validation.
     """
-    result = dfnd(
-        molecular_system,
-        selection=selection,
-        structure_indices=structure_indices,
-        **kwargs,
+    network, result = _run_dfnd(
+        molecular_system, selection, structure_indices, probe_radius, sea_level,
+        min_size, epsilon, hydrogen_policy, radii_model, transit_policy,
+        gate_intrusion_policy,
     )
     topography = Topography(
         molecular_system=molecular_system,
         selection=selection,
         structure_indices=structure_indices,
     )
-    topography.dfnd_records = result['raw']
-    topography.dfnd_result = result
-    topography.dfnd_concavity_domains = result['raw']['concavity_domains']
-    topography.dfnd_external_links = result['raw']['external_links']
-    topography.dfnd_dry_components = result['dry']['components']
-    topography.dfnd_dry_interfaces = result['raw']['dry_interfaces']
-    topography.dfnd_dry_motifs = result['raw']['dry_motifs']
-    topography.dfnd_surface_concavities = result['wet']['surface_concavities']
-    topography.dfnd_nonresident_passages = result['wet']['nonresident_passages']
-    topography.dfnd_degenerate_subprobe_domains = result['wet'][
-        'degenerate_subprobe_domains'
-    ]
+    topography.dfnd = DFNDData(network, result)
 
+    # Promote each wet domain to a concavity feature, and each of its mouth motifs
+    # (external links) to a child Mouth feature. Provenance: feature.component_id /
+    # source_id point back to the dfnd component. See object_model.md sections 7.
     for family_key, feature_class in _FEATURE_CLASS_BY_FAMILY.items():
-        for feature_or_record in result['wet'][family_key]:
-            if isinstance(feature_or_record, dict):
-                feature = _feature_from_domain_record(feature_or_record, feature_class)
-            else:
-                feature = feature_or_record
+        for record in result['wet'][family_key]:
+            feature = _feature_from_domain_record(record, feature_class)
+            feature.component_id = f"WET-{record['id']}"
+            feature.source_id = feature.component_id
             topography.add_feature(feature)
+            for link in record['mouths']:
+                mouth = Mouth(
+                    atom_indices=list(link['atom_indices']),
+                    source='dfnd',
+                    source_id=f"dfnd:mouth:{link['external_link_id']}",
+                )
+                mouth.component_id = feature.component_id
+                mouth.external_link_id = link['external_link_id']
+                mouth.area = puw.quantity(link['area_geometric'], 'angstroms**2')
+                topography.add_feature(mouth)
+                topography.connect_features(mouth, feature)
 
     return topography
 
@@ -110,23 +152,11 @@ def dfnd(
     transit_policy: str = 'with_connectors',
     gate_intrusion_policy: str = 'flag_only',
 ) -> dict[str, dict[str, Any]]:
-    """Run the DFND topography decomposition."""
-    probe_radius = _as_angstrom_float(probe_radius)
-
-    network = DelaunayFlowNetwork(
-        molecular_system,
-        selection=selection,
-        structure_indices=structure_indices,
-        epsilon=epsilon,
-        hydrogen_policy=hydrogen_policy,
-        radii_model=radii_model,
-    )
-    raw_topography = network.get_topography(
-        probe_radius=probe_radius,
-        sea_level=sea_level,
-        min_size=min_size,
-        transit_policy=transit_policy,
-        gate_intrusion_policy=gate_intrusion_policy,
+    """Run the DFND topography decomposition (raw-first dictionary)."""
+    _network, raw_topography = _run_dfnd(
+        molecular_system, selection, structure_indices, probe_radius, sea_level,
+        min_size, epsilon, hydrogen_policy, radii_model, transit_policy,
+        gate_intrusion_policy,
     )
 
     pockets = [
@@ -150,8 +180,8 @@ def dfnd(
             'channels': channels,
             'surface_concavities': raw_topography['wet']['surface_concavities'],
             'nonresident_passages': raw_topography['wet']['nonresident_passages'],
-            'degenerate_subprobe_domains': raw_topography['wet'][
-                'degenerate_subprobe_domains'
+            'degenerate_subprobes': raw_topography['wet'][
+                'degenerate_subprobes'
             ],
         },
         'dry': raw_topography['dry'],

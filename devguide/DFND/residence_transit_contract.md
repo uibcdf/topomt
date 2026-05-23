@@ -4,6 +4,11 @@ This document records the core correction introduced after the external
 geometric review: DFND must separate probe residence, probe transit, and probe
 contact.
 
+> **Terminology.** A connected component of the transit graph is a `component`
+> (the legacy term "TransitDomain" is now `component`); its atoms are its
+> `domain`; the public object is a `feature`. See
+> [`object_model.md`](object_model.md).
+
 The previous simplified reading treated wet tetrahedra as the only nodes of the
 flow graph. That can over-segment pockets when a non-resident tetrahedron has
 multiple permeable faces and therefore acts as a transit throat.
@@ -129,22 +134,22 @@ external_transit_edge(T, OCEAN) =
 This prevents `dry_open` slivers from acting as artificial cuts when they have
 at least two permeable contacts.
 
-## 5. TransitDomain
+## 5. Component
 
-A `TransitDomain` is a connected component of the transit graph after removing
+A `Component` is a connected component of the transit graph after removing
 `OCEAN` and its incident edges.
 
 ```text
-TransitDomain = connected component of finite transit nodes
+Component = connected component of finite transit nodes
 ```
 
-A `TransitDomain` can contain both resident and non-resident transit nodes.
+A `Component` can contain both resident and non-resident transit nodes.
 Non-resident transit nodes contribute to connectivity, not to resident volume.
 
 ## 6. ResidenceRegion
 
 A `ResidenceRegion` is a connected subset of resident nodes inside one
-`TransitDomain`. Connectivity between resident nodes may be direct or may be
+`Component`. Connectivity between resident nodes may be direct or may be
 mediated by transit connectors, depending on the analysis view.
 
 For v1, store both:
@@ -162,9 +167,9 @@ volume_topological_resident
 volume_solvent_estimate_resident
 ```
 
-## 7. ConcavityDomain
+## 7. Component
 
-A `ConcavityDomain` is the topographic interpretation of one `TransitDomain`
+A `Component` is the topographic interpretation of one `Component`
 plus its resident content, external links, and metadata.
 
 The primary classifier must use two axes: access and residence.
@@ -177,15 +182,15 @@ has_open_interior = any resident node is wet_open
 
 | Access | Residence | Raw label | v1 interpretation |
 |---:|---|---|---|
-| 0 | yes | `void_domain` | closed resident cavity |
-| 0 | no | `degenerate_subprobe_domain` | raw/filter label |
-| 1 | yes | `pocket_domain` | one-mouth resident concavity |
-| 1 | no | `surface_concavity_domain` | one-mouth non-resident contact/dent |
-| >=2 | yes | `multi_external_link_domain` | multi-mouth resident domain; `channel` shorthand |
-| >=2 | no | `nonresident_passage_domain` | provisional pass-through contact |
+| 0 | yes | `void` | closed resident cavity |
+| 0 | no | `degenerate_subprobe` | raw/filter label |
+| 1 | yes | `pocket` | one-mouth resident concavity |
+| 1 | no | `surface_concavity` | one-mouth non-resident contact/dent |
+| >=2 | yes | `multi_external_link` | multi-mouth resident domain; `channel` shorthand |
+| >=2 | no | `nonresident_passage` | provisional pass-through contact |
 
 `has_open_interior` is a descriptor, not the family gate. The graph substrate must no longer be restricted to resident nodes only.
-The exact `surface_concavity_domain` and pocket boundary remains a validation
+The exact `surface_concavity` and pocket boundary remains a validation
 item, but the graph substrate should no longer be restricted to resident nodes
 only.
 

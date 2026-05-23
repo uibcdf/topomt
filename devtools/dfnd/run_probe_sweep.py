@@ -53,7 +53,7 @@ def _resolve_input(system_id: str, data_dirs: list[Path], output_dir: Path) -> P
 def _family_counts(domains: list[dict]) -> dict[str, int]:
     counts = {}
     for domain in domains:
-        family = domain['domain_family']
+        family = domain['family']
         counts[family] = counts.get(family, 0) + 1
     return counts
 
@@ -75,7 +75,7 @@ def _summarize(
     records = result['raw']
     tetrahedra = records['tetrahedra']
     faces = records['faces']
-    domains = records['concavity_domains']
+    domains = records['wet_components']
     resident_count = sum(
         1 for record in tetrahedra if record['residence_state'] == 'resident'
     )

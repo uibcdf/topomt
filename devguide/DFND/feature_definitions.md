@@ -7,6 +7,14 @@ DFND is the native TopoMT method. It is not a CASTp clone, not an fpocket
 variant, and not a wrapper around an external detector. Other engines remain
 useful as references and validation targets, but DFND owns its own semantics.
 
+> **Object model & terminology.** How these objects are organized
+> (`raw / mesh / dfn{ …, components }`) and the `component → domain → feature`
+> ladder (with `feature` reserved for the public Topography level and `motif` for
+> sub-structures of a domain) are defined authoritatively in
+> [`object_model.md`](object_model.md). The `component` / `feature`
+> wording below is being aligned to that ladder (graph `component` → atom `domain`
+> → public `feature`).
+
 The object-layer invariants and edge-case policies are defined in [`abstract_contract.md`](abstract_contract.md).
 
 ## 1. Tessellation Policy
@@ -125,14 +133,14 @@ records. Non-resident tetrahedra with two or more permeable contacts are
 
 ## 4. External Links
 
-`external_link` is the DFN-level contact between a finite transit domain and
+`external_link` is the DFN-level contact between a finite component and
 `OCEAN`.
 
 It is defined without using `mouth` as a primitive:
 
 ```text
 external_link(C) = a connected cluster of permeable boundary or hull contacts
-                   between transit domain C and OCEAN
+                   between component C and OCEAN
 ```
 
 Operationally:
@@ -140,7 +148,7 @@ Operationally:
 - a boundary or hull face is a finite face whose Delaunay neighbor is `-1`;
 - the face contributes to exterior contact only if `R_gate(F) >= R_probe` under
   the selected tolerance policy;
-- adjacent permeable boundary faces incident to the same transit domain are
+- adjacent permeable boundary faces incident to the same component are
   grouped into one `external_link`;
 - a single wide opening made of many boundary faces should count as one
   `external_link`, not many.
@@ -152,84 +160,85 @@ families.
 Domain-internal motifs such as depth regions, throats, bottlenecks, chambers,
 and reduced motif graphs are discussed in [`domain_motifs.md`](domain_motifs.md).
 
-## 5. Concavity Domains
+## 5. Components
 
-A `TransitDomain` is the connected component obtained after removing `OCEAN`
-and its incident edges from the transit graph. This is the mathematical
-movement-domain object.
+A `component` is the connected component obtained after removing `OCEAN` and its
+incident edges from the transit graph — the mathematical **graph** object (a set
+of tetrahedron nodes). This is what the DFND *decomposition* produces; wet ones
+are emitted in the raw field `wet_components`, dry ones as dry components.
 
-A `ResidenceRegion` is the resident-node content inside a `TransitDomain`.
+A `ResidenceRegion` is the resident-node content inside a component.
 
-A `concavity_domain` is a `TransitDomain` interpreted as one spatial concavity
-domain after adding residence regions, external links, and metadata. This is
-the canonical DFND term for the topographic decomposition object.
+The **`domain`** of a component is its realization in the molecular system: its
+lining atoms, volume, and centre.
 
-A `concavity_feature` is a later Topography object derived from a
-`concavity_domain` after adding metrics, atoms, residues, derived mouth
-geometry, morphology, dynamics, and functional annotations.
+A **`feature`** is the public `Topography` object promoted from a domain
+(`Pocket` / `Void` / `Channel` / `Mouth` / …) after adding metrics, atoms,
+residues, derived mouth geometry, morphology, dynamics, and functional
+annotations.
 
 DFND avoids using `cavity` as the hypernym because in the broader pocket
 community `cavity` often means a buried inaccessible cavity, close to `void`.
-The neutral DFND hypernym at the decomposition layer is therefore
-`concavity_domain`.
+See [`object_model.md`](object_model.md) for the full `component → domain →
+feature` ladder.
 
-Primary DFND domain families:
+Primary DFND component families:
 
 ```text
-void_domain
-surface_concavity_domain
-pocket_domain
-channel_domain
+void
+surface_concavity
+pocket
+channel
 ```
 
 ### 5.1. Void Domain
 
-A `void_domain` is a finite transit domain with no external links to `OCEAN` and at least one resident node.
+A `void` is a finite component with no external links to `OCEAN` and at least one resident node.
 
 ```text
-void_domain(D) = n_external_links(D) == 0 and has_residence(D)
+void(D) = n_external_links(D) == 0 and has_residence(D)
 ```
 
 Interpretation: an enclosed domain where the selected probe can reside but cannot reach the exterior.
 
-A no-link domain without residence is not a void in v1. It is reported as a raw `degenerate_subprobe_domain` and can be filtered.
+A no-link domain without residence is not a void in v1. It is reported as a raw `degenerate_subprobe` and can be filtered.
 
 ### 5.2. Pocket Domain
 
-A `pocket_domain` is a finite transit domain with exactly one external link and at least one resident node.
+A `pocket` is a finite component with exactly one external link and at least one resident node.
 
 ```text
-pocket_domain(D) = n_external_links(D) == 1 and has_residence(D)
+pocket(D) = n_external_links(D) == 1 and has_residence(D)
 ```
 
 Interpretation: a one-mouth resident concavity. The domain may or may not contain a `wet_open` node. A compact one-mouth domain made only of `wet_coast` resident nodes is still a pocket because the probe can reside inside it.
 
-### 5.3. Surface Concavity Domain
+### 5.3. Surface Component
 
-A `surface_concavity_domain` is a finite transit domain with exactly one external link and no resident nodes.
+A `surface_concavity` is a finite component with exactly one external link and no resident nodes.
 
 ```text
-surface_concavity_domain(D) = n_external_links(D) == 1 and not has_residence(D)
+surface_concavity(D) = n_external_links(D) == 1 and not has_residence(D)
 ```
 
 Interpretation: a one-mouth non-resident contact or dent. This family is topologically well-defined, but its practical value remains a validation item. It should not be described simply as a shallow pocket.
 
 ### 5.4. Multi-External-Link Domain
 
-A `multi_external_link_domain` is a finite transit domain with two or more external links and at least one resident node.
+A `multi_external_link` is a finite component with two or more external links and at least one resident node.
 
 ```text
-multi_external_link_domain(D) = n_external_links(D) >= 2 and has_residence(D)
+multi_external_link(D) = n_external_links(D) >= 2 and has_residence(D)
 ```
 
 Interpretation: a multi-mouth resident domain. `Channel` is a public shorthand, but tunnel, pore, branched channel, or cleft labels require later morphology, path, and geometric analysis.
 
 ### 5.5. Nonresident Passage Domain
 
-A `nonresident_passage_domain` is a finite transit domain with two or more external links and no resident nodes.
+A `nonresident_passage` is a finite component with two or more external links and no resident nodes.
 
 ```text
-nonresident_passage_domain(D) = n_external_links(D) >= 2 and not has_residence(D)
+nonresident_passage(D) = n_external_links(D) >= 2 and not has_residence(D)
 ```
 
 Interpretation: a provisional raw pass-through contact. It should not be promoted to a biological channel without additional evidence.
@@ -241,14 +250,14 @@ The dry/probe-blocking side of DFND is defined separately in [`dry_network_and_c
 
 ## 6. Secondary Classification Axes
 
-The primary DFND domain family should be kept separate from secondary labels.
+The primary DFND component family should be kept separate from secondary labels.
 
-Topological DFND domain family:
+Topological DFND component family:
 
-- `void_domain`;
-- `surface_concavity_domain`;
-- `pocket_domain`;
-- `channel_domain`.
+- `void`;
+- `surface_concavity`;
+- `pocket`;
+- `channel`.
 
 Morphology:
 
@@ -279,7 +288,7 @@ Function or annotation:
 - `ion_conducting`.
 
 These axes should be reported as descriptors or annotations, not as mutually
-exclusive replacements for the primary DFND domain family.
+exclusive replacements for the primary DFND component family.
 
 ## 7. Compatibility With Community Terminology
 
@@ -290,17 +299,17 @@ DFND keeps community-compatible names where their meaning is stable:
 - `channel` remains an accessible concavity with multiple exterior
   connections.
 
-DFND introduces `surface_concavity_domain` as a neutral family for accessible concavity domains without a wet-open interior. This avoids overusing `pocket` for
+DFND introduces `surface_concavity` as a neutral family for accessible components without a wet-open interior. This avoids overusing `pocket` for
 very shallow depressions and avoids using `groove` as a topological class when
 elongation has not yet been measured.
 
 `mouth` remains available as a geometric realization of an `external_link`, but
-it is not part of the primary DFND domain-family definition.
+it is not part of the primary DFND component-family definition.
 
 ## 8. Dynamic Interpretation
 
 The same definitions apply per frame in a trajectory. Events are then defined
-by changes in concavity domains and external links:
+by changes in components and external links:
 
 - void to pocket: `n_external_links` changes from 0 to 1 while `has_residence` remains true;
 - pocket to void: `n_external_links` changes from 1 to 0 while `has_residence` remains true;

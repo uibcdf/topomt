@@ -19,9 +19,9 @@ def test_regular_tetrahedron_is_wet_sealed_void_domain():
     network = DelaunayFlowNetwork.from_arrays(coords, radii)
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
-    assert len(result['raw']['concavity_domains']) == 1
-    domain = result['raw']['concavity_domains'][0]
-    assert domain['domain_family'] == 'void_domain'
+    assert len(result['raw']['wet_components']) == 1
+    domain = result['raw']['wet_components'][0]
+    assert domain['family'] == 'void'
     assert domain['n_external_links'] == 0
     assert domain['has_residence'] is True
     assert domain['has_open_interior'] is False
@@ -35,12 +35,12 @@ def test_regular_tetrahedron_is_wet_sealed_void_domain():
 def test_access_residence_classifier_does_not_require_open_interior():
     network = DelaunayFlowNetwork.__new__(DelaunayFlowNetwork)
 
-    assert network._classify_domain(0, 1) == 'void_domain'
-    assert network._classify_domain(0, 0) == 'degenerate_subprobe_domain'
-    assert network._classify_domain(1, 1) == 'pocket_domain'
-    assert network._classify_domain(1, 0) == 'surface_concavity_domain'
-    assert network._classify_domain(2, 1) == 'multi_external_link_domain'
-    assert network._classify_domain(2, 0) == 'nonresident_passage_domain'
+    assert network._classify_component(0, 1) == 'void'
+    assert network._classify_component(0, 0) == 'degenerate_subprobe'
+    assert network._classify_component(1, 1) == 'pocket'
+    assert network._classify_component(1, 0) == 'surface_concavity'
+    assert network._classify_component(2, 1) == 'multi_external_link'
+    assert network._classify_component(2, 0) == 'nonresident_passage'
 
 
 def test_threshold_state_policy_is_deterministic_at_epsilon_boundary():
@@ -74,7 +74,7 @@ def test_marginal_residence_is_flagged_in_raw_tetrahedron_records():
     assert tetrahedron['residence_state'] == 'non_resident'
     assert tetrahedron['residence_margin'] == pytest.approx(0.0, abs=1e-12)
     assert 'marginal' in tetrahedron['flags']
-    assert result['raw']['concavity_domains'] == []
+    assert result['raw']['wet_components'] == []
 
 
 def test_marginal_gate_is_flagged_in_raw_face_and_owner_tetrahedron_records():
@@ -181,7 +181,7 @@ def test_dry_open_cut_connector_policy_can_merge_resident_regions():
 
     connector_domains = [
         domain
-        for domain in with_connectors['raw']['concavity_domains']
+        for domain in with_connectors['raw']['wet_components']
         if domain['n_transit_connector_nodes'] >= 1 and domain['n_resident_nodes'] >= 2
     ]
     assert connector_domains
@@ -194,7 +194,7 @@ def test_dry_open_cut_connector_policy_can_merge_resident_regions():
     # the connector is what bridges them.
     resident_only_domains = [
         set(domain['resident_tetrahedron_ids'])
-        for domain in resident_only['raw']['concavity_domains']
+        for domain in resident_only['raw']['wet_components']
     ]
     assert not any(merged_residents <= domain for domain in resident_only_domains)
 
@@ -214,8 +214,8 @@ def test_wet_coast_one_link_domain_is_pocket_not_surface_concavity():
     network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-8)
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
-    assert len(result['raw']['concavity_domains']) == 1
-    domain = result['raw']['concavity_domains'][0]
+    assert len(result['raw']['wet_components']) == 1
+    domain = result['raw']['wet_components'][0]
     tetrahedron = result['raw']['tetrahedra'][0]
 
     assert tetrahedron['combined_class'] == 'wet_coast'
@@ -223,7 +223,7 @@ def test_wet_coast_one_link_domain_is_pocket_not_surface_concavity():
     assert domain['n_external_links'] == 1
     assert domain['has_residence'] is True
     assert domain['has_open_interior'] is False
-    assert domain['domain_family'] == 'pocket_domain'
+    assert domain['family'] == 'pocket'
     assert result['wet']['surface_concavities'] == []
 
 
@@ -385,8 +385,8 @@ def test_multi_external_link_domain_has_distinct_external_links():
     network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
-    domains = result['raw']['concavity_domains']
-    multi_domains = [domain for domain in domains if domain['domain_family'] == 'multi_external_link_domain']
+    domains = result['raw']['wet_components']
+    multi_domains = [domain for domain in domains if domain['family'] == 'multi_external_link']
     assert len(multi_domains) == 1
 
     domain = multi_domains[0]
@@ -423,8 +423,8 @@ def test_surface_dent_one_link_has_no_residence():
 
     dents = [
         domain
-        for domain in result['raw']['concavity_domains']
-        if domain['domain_family'] == 'surface_concavity_domain'
+        for domain in result['raw']['wet_components']
+        if domain['family'] == 'surface_concavity'
     ]
     assert len(dents) == 1
 
@@ -438,7 +438,7 @@ def test_surface_dent_one_link_has_no_residence():
 
 @pytest.mark.skip(
     reason="The nonresident_passage family (>=2 external links, no residence) is "
-    "covered directly by the classifier unit test (_classify_domain(2, 0)) and the "
+    "covered directly by the classifier unit test (_classify_component(2, 0)) and the "
     "non-resident transit-connector machinery is exercised end-to-end by the "
     "surface_dent and degenerate toys. A stable two-mouth, fully non-resident "
     "fixture is hard to construct (the two openings tend to merge into one link "
@@ -450,7 +450,7 @@ def test_nonresident_passage_two_links_has_no_residence():
 
 @pytest.mark.skip(
     reason="The degenerate_subprobe family (0 external links, no residence) is "
-    "covered directly by the classifier unit test (_classify_domain(0, 0)). A "
+    "covered directly by the classifier unit test (_classify_component(0, 0)). A "
     "stable end-to-end fixture needs a fully buried non-resident transit cluster "
     "(no permeable hull face), which is hard to construct robustly and is fragile "
     "to mesh face/neighbor conventions; deferred like nonresident_passage."
@@ -474,8 +474,8 @@ def test_min_size_filters_compatibility_views_not_raw_domains():
     network = DelaunayFlowNetwork.from_arrays(coords, radii)
     result = network.get_topography(probe_radius=1.4, min_size=2)
 
-    assert len(result['raw']['concavity_domains']) == 1
-    assert result['raw']['concavity_domains'][0]['domain_family'] == 'void_domain'
+    assert len(result['raw']['wet_components']) == 1
+    assert result['raw']['wet_components'][0]['family'] == 'void'
     assert result['wet']['voids'] == []
 
 

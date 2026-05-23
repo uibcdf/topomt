@@ -9,9 +9,9 @@ from topomt.dfnd.graph import DelaunayFlowNetwork
 
 SMALL_CASTPFOLD_SYSTEMS = ('1crn', '1rop')
 PUBLIC_DOMAIN_FAMILIES = {
-    'void_domain',
-    'pocket_domain',
-    'multi_external_link_domain',
+    'void',
+    'pocket',
+    'multi_external_link',
 }
 
 
@@ -43,24 +43,26 @@ def test_dfnd_real_small_system_stability_smoke(pdb_id, tmp_path):
     )
 
     assert isinstance(topography, Topography)
-    assert hasattr(topography, 'dfnd_records')
-    records = topography.dfnd_records
+    assert topography.dfnd is not None
+    records = topography.dfnd.raw
     assert records['parameters']['selection'] == "molecule_type in ['protein', 'peptide']"
     assert records['parameters']['transit_policy'] == 'with_connectors'
     assert len(records['tetrahedra']) > 0
     assert len(records['faces']) == 4 * len(records['tetrahedra'])
-    assert len(records['concavity_domains']) >= 1
+    assert len(records['wet_components']) >= 1
 
     expected_public_count = sum(
         1
-        for domain in records['concavity_domains']
-        if domain['domain_family'] in PUBLIC_DOMAIN_FAMILIES
+        for domain in records['wet_components']
+        if domain['family'] in PUBLIC_DOMAIN_FAMILIES
     )
     public_features = topography.get_features(by='shape', value='concavity')
-    assert len(topography) == expected_public_count
     assert len(public_features) == expected_public_count
+    # Phase 3 promotes each mouth to a child Mouth feature, so the total feature
+    # count includes those boundary features in addition to the concavities.
+    assert len(topography) >= expected_public_count
 
-    for domain in records['concavity_domains']:
+    for domain in records['wet_components']:
         assert domain['volume_solvent_estimate'] >= 0.0
         assert domain['volume_solvent_estimate'] <= domain['volume_topological_resident']
         assert domain['n_nodes'] == len(domain['tetrahedron_ids'])
@@ -93,8 +95,8 @@ def test_dfnd_selection_all_vs_protein_only_composition_smoke(pdb_id, tmp_path):
         transit_policy='with_connectors',
     )
 
-    protein_records = protein_topography.dfnd_records
-    all_records = all_topography.dfnd_records
+    protein_records = protein_topography.dfnd.raw
+    all_records = all_topography.dfnd.raw
     assert (
         protein_records['parameters']['selection']
         == "molecule_type in ['protein', 'peptide']"
@@ -117,7 +119,7 @@ def test_dfnd_selection_all_vs_protein_only_composition_smoke(pdb_id, tmp_path):
     assert len(protein_records['faces']) == 4 * len(protein_records['tetrahedra'])
 
     for records in (protein_records, all_records):
-        for domain in records['concavity_domains']:
+        for domain in records['wet_components']:
             assert domain['volume_solvent_estimate'] >= 0.0
             assert (
                 domain['volume_solvent_estimate']
@@ -168,11 +170,11 @@ def test_dfnd_network_can_be_reused_for_multiple_probe_radii(pdb_id, tmp_path):
     )
     low_volume = sum(
         domain['volume_solvent_estimate']
-        for domain in low_probe['raw']['concavity_domains']
+        for domain in low_probe['raw']['wet_components']
     )
     high_volume = sum(
         domain['volume_solvent_estimate']
-        for domain in high_probe['raw']['concavity_domains']
+        for domain in high_probe['raw']['wet_components']
     )
 
     assert low_resident >= high_resident

@@ -1,5 +1,10 @@
 # Delaunay Flow Network Decomposition (DFND): Algorithm Description
 
+> **Terminology.** Connected components of the graph are `components` (wet ones in
+> the raw field `wet_components`; the legacy "Transit Domains" wording is now
+> `components`); a component's atoms are its `domain`; the public object is a
+> `feature`. See [`object_model.md`](object_model.md).
+
 ## 1. Geometric Foundations
 
 The DFND algorithm is built upon the Delaunay triangulation of the atomic
@@ -72,15 +77,15 @@ An edge exists between two tetrahedra $T_i$ and $T_j$ sharing face $F_{ij}$ if a
 
 1.  **Initialization:** Add the virtual **OCEAN / Root Node (-1)** as the wet exterior reference.
 2.  **Transit Backbone:** Build the finite transit graph from resident-transit nodes and non-resident transit connectors connected through permeable shared faces.
-3.  **Transit Domains:** After removing `OCEAN`, each finite transit component is a `TransitDomain`.
-4.  **Residence Regions:** Record resident-node subsets inside each `TransitDomain`; transit connectors contribute connectivity but not resident volume.
-5.  **External Links:** For each transit domain, group connected permeable boundary or hull contacts into `external_links` to `OCEAN`.
+3.  **Components:** After removing `OCEAN`, each finite transit component is a `Component`.
+4.  **Residence Regions:** Record resident-node subsets inside each `Component`; transit connectors contribute connectivity but not resident volume.
+5.  **External Links:** For each component, group connected permeable boundary or hull contacts into `external_links` to `OCEAN`.
 6.  **Component Identification:**
-    *   Compute `n_external_links`, `n_resident_nodes`, `has_residence`, and `has_open_interior` for each `TransitDomain`.
+    *   Compute `n_external_links`, `n_resident_nodes`, `has_residence`, and `has_open_interior` for each `Component`.
     *   **Void domain:** zero `external_links` and at least one resident node.
     *   **Degenerate subprobe domain:** zero `external_links` and no resident nodes; raw/filter label, not a void.
     *   **Pocket domain:** exactly one `external_link` and at least one resident node.
-    *   **Surface concavity domain:** exactly one `external_link` and no resident nodes.
+    *   **Surface concavity** (`surface_concavity`): exactly one `external_link` and no resident nodes.
     *   **Multi-external-link domain:** two or more `external_links` and at least one resident node. `Channel` is a public shorthand only after path or morphology interpretation.
     *   **Nonresident passage domain:** two or more `external_links` and no resident nodes; provisional raw label.
     *   **Local labels:** `open`, `coast`, and `sealed` remain local metadata and do not create connectivity by themselves. `wet_open` is reported as `has_open_interior`, not used as the family gate.

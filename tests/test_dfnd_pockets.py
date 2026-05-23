@@ -36,8 +36,8 @@ def test_dfnd_public_api_smoke_with_molsysmt_input(tmp_path):
     assert result['raw']['parameters']['hydrogen_policy'] == 'exclude'
     assert result['raw']['parameters']['transit_policy'] == 'resident_only'
     assert len(result['raw']['tetrahedra']) == 1
-    assert len(result['raw']['concavity_domains']) == 1
-    assert result['raw']['concavity_domains'][0]['domain_family'] == 'void_domain'
+    assert len(result['raw']['wet_components']) == 1
+    assert result['raw']['wet_components'][0]['family'] == 'void'
 
 
 def test_get_topography_dfnd_returns_topography_with_raw_records(tmp_path):
@@ -55,33 +55,32 @@ def test_get_topography_dfnd_returns_topography_with_raw_records(tmp_path):
         transit_policy='resident_only',
     )
 
+    from topomt.dfnd.components import WetComponent, DryComponent
+
     assert isinstance(topography, Topography)
-    assert hasattr(topography, 'dfnd_records')
-    assert hasattr(topography, 'dfnd_result')
-    assert topography.dfnd_concavity_domains is topography.dfnd_records['concavity_domains']
-    assert topography.dfnd_external_links is topography.dfnd_records['external_links']
-    assert topography.dfnd_dry_components is topography.dfnd_result['dry']['components']
-    assert topography.dfnd_dry_interfaces is topography.dfnd_records['dry_interfaces']
-    assert topography.dfnd_dry_motifs is topography.dfnd_records['dry_motifs']
-    assert (
-        topography.dfnd_surface_concavities
-        is topography.dfnd_result['wet']['surface_concavities']
-    )
-    assert (
-        topography.dfnd_nonresident_passages
-        is topography.dfnd_result['wet']['nonresident_passages']
-    )
-    assert (
-        topography.dfnd_degenerate_subprobe_domains
-        is topography.dfnd_result['wet']['degenerate_subprobe_domains']
-    )
-    assert topography.dfnd_records['parameters']['transit_policy'] == 'resident_only'
+    assert topography.dfnd is not None
+    dfnd_data = topography.dfnd
+    components = dfnd_data.dfn.components
+    # the typed registry mirrors Topography; components are typed objects
+    assert len(components.wet) == len(dfnd_data.raw['wet_components'])
+    assert all(isinstance(c, WetComponent) for c in components.wet)
+    assert all(isinstance(c, DryComponent) for c in components.dry)
+    assert components.by_family('void')                        # void domain promoted below
+    # graph-level relations still reference the raw records
+    assert dfnd_data.dfn.graph.external_links is dfnd_data.raw['external_links']
+    assert components.interfaces is dfnd_data.raw['dry_interfaces']
+    assert components.motifs is dfnd_data.raw['dry_motifs']
+    assert isinstance(components.surface_concavities, list)
+    assert isinstance(components.nonresident_passages, list)
+    assert isinstance(components.degenerate_subprobes, list)
+    assert dfnd_data.dfn.parameters['transit_policy'] == 'resident_only'
+    assert len(dfnd_data.mesh.faces) == 4 * len(dfnd_data.mesh.tetrahedra)
     voids = topography.get_features(by='type', value='void')
     assert len(voids) == 1
     void = next(iter(voids))
     assert void.source == 'dfnd'
-    assert void.domain_family == 'void_domain'
-    assert void.raw_record['domain_family'] == 'void_domain'
+    assert void.family == 'void'
+    assert void.raw_record['family'] == 'void'
 
 
 def test_get_topography_dfnd_smoke_with_real_small_pdb():
@@ -101,35 +100,37 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
     )
 
     assert isinstance(topography, Topography)
-    assert hasattr(topography, 'dfnd_records')
-    records = topography.dfnd_records
+    assert topography.dfnd is not None
+    records = topography.dfnd.raw
     assert records['parameters']['selection'] == "molecule_type in ['protein', 'peptide']"
     assert records['parameters']['transit_policy'] == 'with_connectors'
     assert len(records['tetrahedra']) > 0
     assert len(records['faces']) == 4 * len(records['tetrahedra'])
-    assert len(records['concavity_domains']) >= 1
+    assert len(records['wet_components']) >= 1
 
     n_public_domains = sum(
         1
-        for domain in records['concavity_domains']
-        if domain['domain_family'] in {
-            'void_domain',
-            'pocket_domain',
-            'multi_external_link_domain',
+        for domain in records['wet_components']
+        if domain['family'] in {
+            'void',
+            'pocket',
+            'multi_external_link',
         }
     )
-    assert len(topography) == n_public_domains
     assert len(topography.get_features(by='shape', value='concavity')) == n_public_domains
+    # Phase 3 also promotes each mouth (external link) to a child Mouth feature,
+    # so the total feature count includes those boundary features as well.
+    assert len(topography) >= n_public_domains
 
     public_families = {
-        'void_domain',
-        'pocket_domain',
-        'multi_external_link_domain',
+        'void',
+        'pocket',
+        'multi_external_link',
     }
     required_fields = {
         'atom_indices',
         'center',
-        'domain_family',
+        'family',
         'flags',
         'mouth_area',
         'mouth_face_clusters',
@@ -148,8 +149,8 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
         for field in required_fields:
             assert hasattr(feature, field)
         assert feature.source == 'dfnd'
-        assert feature.domain_family in public_families
-        assert feature.raw_record['domain_family'] == feature.domain_family
+        assert feature.family in public_families
+        assert feature.raw_record['family'] == feature.family
         assert feature.raw_record['atom_indices'] == feature.atom_indices
         assert feature.raw_record['tetrahedron_indices'] == feature.tetrahedron_indices
         assert feature.raw_record['volume_solvent_estimate'] >= 0.0

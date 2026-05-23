@@ -1,0 +1,5 @@
+HETATM    1 AR   DUM A   1       2.121   2.121   2.121  1.00  0.00          AR
+HETATM    2 AR   DUM A   2       2.121  -2.121  -2.121  1.00  0.00          AR
+HETATM    3 AR   DUM A   3      -2.121   2.121  -2.121  1.00  0.00          AR
+HETATM    4 AR   DUM A   4      -2.121  -2.121   2.121  1.00  0.00          AR
+END

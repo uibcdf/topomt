@@ -164,6 +164,12 @@ The DFND material is grouped under the dedicated `DFND/` subdirectory. The most 
 - [DFND/metrics_contract.md](DFND/metrics_contract.md)
 - [DFND/input_policy.md](DFND/input_policy.md)
 - [DFND/Implementation_Route.md](DFND/Implementation_Route.md)
+- [DFND/object_model.md](DFND/object_model.md)
+- [DFND/roadmap.md](DFND/roadmap.md)
+- [DFND/synthetic_benchmarks.md](DFND/synthetic_benchmarks.md)
+- [DFND/synthetic_review_guide.md](DFND/synthetic_review_guide.md)
+- [DFND/pathological_systems.md](DFND/pathological_systems.md)
+- [DFND/interfaces.md](DFND/interfaces.md)
 - [DFND/dynamic_topology.md](DFND/dynamic_topology.md)
 - [DFND/4D_and_pharmacophores.md](DFND/4D_and_pharmacophores.md)
 

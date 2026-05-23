@@ -15,7 +15,7 @@ from devtools.dfnd.run_probe_sweep import DEFAULT_DATA_DIRS, DEFAULT_SYSTEMS, _r
 def _family_counts(domains):
     counts = {}
     for domain in domains:
-        family = domain['domain_family']
+        family = domain['family']
         counts[family] = counts.get(family, 0) + 1
     return counts
 
@@ -58,7 +58,7 @@ def run_snapshot(systems, data_dirs, selection, probe_radius, top_n):
                 transit_policy='with_connectors',
             )
             query_elapsed = time.perf_counter() - query_start
-            domains = result['raw']['concavity_domains']
+            domains = result['raw']['wet_components']
             records.append(
                 {
                     'system_id': system_id,
@@ -105,7 +105,7 @@ def write_markdown(records, output_path, selection, probe_radius):
             [
                 f"### {record['system_id']}",
                 '',
-                '| rank | domain_id | family | nodes | resident | connectors | external_links | atoms | volume_solvent_estimate | path_capacity_min | flags |',
+                '| rank | id | family | nodes | resident | connectors | external_links | atoms | volume_solvent_estimate | path_capacity_min | flags |',
                 '| ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |',
             ]
         )
@@ -114,7 +114,7 @@ def write_markdown(records, output_path, selection, probe_radius):
             path_capacity_text = '-' if path_capacity is None else f'{path_capacity:.3f}'
             flags = ','.join(domain['flags']) if domain['flags'] else '-'
             lines.append(
-                '| {rank} | {domain_id} | {domain_family} | {n_nodes} | {n_resident_nodes} | {n_transit_connector_nodes} | {n_external_links} | {n_atoms} | {volume_solvent_estimate:.3f} | {path_capacity} | {flags_text} |'.format(
+                '| {rank} | {id} | {family} | {n_nodes} | {n_resident_nodes} | {n_transit_connector_nodes} | {n_external_links} | {n_atoms} | {volume_solvent_estimate:.3f} | {path_capacity} | {flags_text} |'.format(
                     rank=rank,
                     n_atoms=len(domain['atom_indices']),
                     path_capacity=path_capacity_text,

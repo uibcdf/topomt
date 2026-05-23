@@ -2,6 +2,37 @@
 
 A quick reference for the terminology used in the DFND module.
 
+> **Terminology authority.** The `component → domain → feature` ladder and the
+> two reserved-word rules (`feature` never inside dfnd; `motif` never at the
+> Topography level) are defined authoritatively in
+> [`object_model.md`](object_model.md). Some entries below still use the legacy
+> wording (wet "transit/concavity domain" vs "dry component"); per the object
+> model these are unified as **`component`** (the graph object) with its
+> **`domain`** (the atoms). When in doubt, `object_model.md` wins.
+
+## Object Model Terms (component → domain → feature)
+
+The current first-class vocabulary (see [`object_model.md`](object_model.md)):
+
+*   **Component:** the **graph** object — a connected component of the DFN graph,
+    i.e. a set of tetrahedron nodes (plus their faces/edges). The output of the
+    DFND *decomposition*. Probe-dependent. Lives in `dfn.components` as a typed
+    `WetComponent` / `DryComponent`.
+*   **Domain:** that component **realized in the molecular system** — its lining
+    atoms, volume, centre, spatial footprint. A facet of the component
+    (`component.atom_indices`, `component.volume_solvent_estimate`, …), not a
+    separate object. *"The domain of the component."*
+*   **Motif:** a named sub-structure **of a domain** — throat/bottleneck, chamber,
+    depth-region, mouth (`external_mouth`). Promotes to a child feature.
+*   **Feature:** the **public** `Topography` object promoted from a domain
+    (`Pocket`/`Void`/`Channel`/`Mouth`/…). The word *feature* is reserved for the
+    public level; *motif* is reserved for dfnd.
+
+The raw engine dictionary (`topography.dfnd.raw`) keeps its original field names
+(`concavity_domains`, `transit_domains`, `residence_regions`, family strings like
+`pocket_domain`, …) as the **legacy provenance layer**; the object-model layer
+(`topography.dfnd` and the `Topography` features) is what speaks the ladder above.
+
 ## Graph Elements
 
 *   **Node (Tetrahedron):** The elementary volumetric unit of the mesh, defined by 4 atoms.
@@ -71,17 +102,18 @@ Faces should be called permeable or non-permeable. Wet and dry are reserved for 
 *   **DFN:** The Delaunay Flow Network. It is the probe-specific movement graph built from finite transit tetrahedra, permeable faces, and the virtual wet `OCEAN` root. Transit tetrahedra include resident nodes and non-resident transit connectors.
 *   **External link:** A connected cluster of permeable boundary or hull contacts linking one finite transit domain to `OCEAN`. It is a DFN primitive.
 *   **Mouth:** A geometric descriptor that can be derived from an `external_link`. It is not the primitive used for primary DFN feature classification.
-*   **Transit domain:** A connected component obtained after removing `OCEAN` and its incident edges from the DFN. This is the mathematical graph object.
-*   **Concavity domain:** A transit domain interpreted as one spatial concavity domain after adding residence regions, external links, and metadata. This is the canonical DFND decomposition object.
-*   **Concavity feature:** A Topography object derived from a concavity domain after adding metrics, atoms, residues, derived mouth geometry, morphology, dynamics, and annotations.
-*   **Void domain:** A transit domain with zero `external_links` and at least one resident node.
-*   **Surface concavity domain:** A transit domain with exactly one `external_link` and no resident nodes. It is a one-mouth non-resident contact or dent, not simply a shallow pocket.
-*   **Pocket domain:** A transit domain with exactly one `external_link` and at least one resident node.
-*   **Multi-external-link domain / channel domain:** A transit domain with two or more `external_links` and at least one resident node. `Channel` is a public shorthand; tunnel or pore interpretation requires additional path or morphology evidence.
-*   **Nonresident passage domain:** A transit domain with two or more `external_links` and no resident nodes; provisional raw label, not a biological channel by default.
-*   **Degenerate subprobe domain:** A transit domain with zero `external_links` and no resident nodes; raw/filter label, not a void.
-*   **Has open interior:** Domain descriptor indicating that at least one resident node is `wet_open`; not a family discriminator.
-*   **Dry component:** A connected component of dry tetrahedra connected through non-permeable faces. It is a raw dry-graph object, not automatically a public feature.
+*   **Wet component:** A connected component obtained after removing `OCEAN` and its incident edges from the DFN. The mathematical graph object (a set of tetrahedron nodes); the raw field is `wet_components`. Each carries a `family`.
+*   **Domain:** A component realized in the system — its lining atoms, volume, centre. A facet of the component, not a separate object.
+*   **Feature:** The public `Topography` object promoted from a domain (`Pocket`/`Void`/`Channel`/`Mouth`/…), after adding metrics, atoms, residues, mouth geometry, morphology, dynamics, and annotations.
+*   **Component family** (`family`): the classification of a wet component by `n_external_links` × `has_residence`:
+    *   `void` — zero `external_links`, at least one resident node.
+    *   `pocket` — exactly one `external_link`, at least one resident node.
+    *   `channel` (raw `multi_external_link`) — two or more `external_links`, at least one resident node. `Channel` is a public shorthand; tunnel/pore needs path/morphology evidence.
+    *   `surface_concavity` — exactly one `external_link`, no resident nodes (a one-mouth non-resident contact/dent, not simply a shallow pocket).
+    *   `nonresident_passage` — two or more `external_links`, no resident nodes; provisional raw label, not a biological channel by default.
+    *   `degenerate_subprobe` — zero `external_links`, no resident nodes; raw/filter label, not a void.
+*   **Has open interior:** Component descriptor indicating that at least one resident node is `wet_open`; not a family discriminator.
+*   **Dry component:** A connected component of dry tetrahedra connected through non-permeable faces (family `dry_bank`). A raw dry-graph object, not automatically a public feature.
 *   **Dry interface:** A contact record between a dry component and wet domains, external links, `OCEAN`, or the hull/exterior context.
 *   **Dry depth:** Unweighted graph distance from dry-interface boundary nodes into a dry component. It describes topographic dry burial, not Euclidean depth or mechanical rigidity.
 *   **Dry motif:** A candidate descriptor derived from dry components and dry interfaces, such as a dry core, protrusion, ridge, rim, wall, separator, or lining region.

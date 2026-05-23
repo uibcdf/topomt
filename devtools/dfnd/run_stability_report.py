@@ -16,9 +16,9 @@ from topomt import get_topography
 
 DEFAULT_SYSTEMS = ('1crn', '1rop', '2pk4', '3phv', '8rat', '1stp')
 PUBLIC_DOMAIN_FAMILIES = {
-    'void_domain',
-    'pocket_domain',
-    'multi_external_link_domain',
+    'void',
+    'pocket',
+    'multi_external_link',
 }
 
 
@@ -54,10 +54,10 @@ def _summarize_topography(
     elapsed: float,
     topography,
 ) -> dict:
-    records = topography.dfnd_records
+    records = topography.dfnd.raw
     family_counts = {}
-    for domain in records['concavity_domains']:
-        family = domain['domain_family']
+    for domain in records['wet_components']:
+        family = domain['family']
         family_counts[family] = family_counts.get(family, 0) + 1
 
     public_features = topography.get_features(by='shape', value='concavity')
@@ -68,11 +68,11 @@ def _summarize_topography(
         if family in PUBLIC_DOMAIN_FAMILIES
     )
     volume_topological = sum(
-        domain['volume_topological_resident'] for domain in records['concavity_domains']
+        domain['volume_topological_resident'] for domain in records['wet_components']
     )
     volume_solvent = sum(
         domain['volume_solvent_estimate']
-        for domain in records['concavity_domains']
+        for domain in records['wet_components']
     )
     return {
         'system_id': system_id,
@@ -80,7 +80,7 @@ def _summarize_topography(
         'elapsed_s': elapsed,
         'n_tetrahedra': len(records['tetrahedra']),
         'n_faces': len(records['faces']),
-        'n_domains': len(records['concavity_domains']),
+        'n_domains': len(records['wet_components']),
         'n_public_features': public_count,
         'expected_public_features': expected_public_count,
         'family_counts': family_counts,

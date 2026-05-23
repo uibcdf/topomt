@@ -1,0 +1,25 @@
+HETATM    1 AR   DUM A   1       2.013  -0.013  -7.936  1.00  0.00          AR
+HETATM    2 AR   DUM A   2       0.010   1.946  -7.964  1.00  0.00          AR
+HETATM    3 AR   DUM A   3      -1.870   0.095  -8.070  1.00  0.00          AR
+HETATM    4 AR   DUM A   4      -0.127  -2.062  -7.996  1.00  0.00          AR
+HETATM    5 AR   DUM A   5       1.767  -0.022  -4.925  1.00  0.00          AR
+HETATM    6 AR   DUM A   6      -0.073   1.946  -4.832  1.00  0.00          AR
+HETATM    7 AR   DUM A   7      -1.959   0.104  -4.813  1.00  0.00          AR
+HETATM    8 AR   DUM A   8       0.137  -2.067  -4.765  1.00  0.00          AR
+HETATM    9 AR   DUM A   9       2.090   0.009  -1.674  1.00  0.00          AR
+HETATM   10 AR   DUM A  10      -0.092   1.954  -1.578  1.00  0.00          AR
+HETATM   11 AR   DUM A  11      -2.101  -0.021  -1.616  1.00  0.00          AR
+HETATM   12 AR   DUM A  12       0.054  -1.979  -1.564  1.00  0.00          AR
+HETATM   13 AR   DUM A  13       1.935  -0.013   1.678  1.00  0.00          AR
+HETATM   14 AR   DUM A  14       0.149   1.874   1.751  1.00  0.00          AR
+HETATM   15 AR   DUM A  15      -1.865   0.078   1.626  1.00  0.00          AR
+HETATM   16 AR   DUM A  16      -0.031  -1.854   1.796  1.00  0.00          AR
+HETATM   17 AR   DUM A  17       2.180   0.132   4.836  1.00  0.00          AR
+HETATM   18 AR   DUM A  18      -0.121   2.000   4.866  1.00  0.00          AR
+HETATM   19 AR   DUM A  19      -2.129   0.040   4.843  1.00  0.00          AR
+HETATM   20 AR   DUM A  20       0.070  -2.118   4.734  1.00  0.00          AR
+HETATM   21 AR   DUM A  21       1.956  -0.117   8.174  1.00  0.00          AR
+HETATM   22 AR   DUM A  22      -0.050   2.033   7.974  1.00  0.00          AR
+HETATM   23 AR   DUM A  23      -1.842   0.132   8.063  1.00  0.00          AR
+HETATM   24 AR   DUM A  24      -0.220  -1.995   8.068  1.00  0.00          AR
+END
