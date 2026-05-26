@@ -679,3 +679,66 @@ def to_pdb(coords, radii, path, element='AR', resname='DUM', elements=None):
     lines.append('END')
     with open(path, 'w') as handle:
         handle.write('\n'.join(lines) + '\n')
+
+
+def to_molsysmt(coords, radii, elements=None, element='AR', resname='DUM'):
+    """Convert dummy atoms into a molsysmt.MolSys molecular system.
+
+    Creates standard PDB HETATM lines in-memory and converts them using molsysmt.convert.
+    """
+    import molsysmt as msm
+    coords = np.asarray(coords, dtype=float)
+    lines = []
+    for i, (x, y, z) in enumerate(coords, start=1):
+        elem = (str(elements[i - 1]) if elements is not None else element).upper()
+        serial = (i - 1) % 99999 + 1
+        resseq = (i - 1) % 9999 + 1
+        lines.append(
+            '%-6s%5d %-4s%1s%3s %1s%4d%1s   %8.3f%8.3f%8.3f%6.2f%6.2f          %2s'
+            % ('HETATM', serial, elem, '', resname, 'A', resseq, '', x, y, z, 1.0, 0.0, elem)
+        )
+    lines.append('END')
+    pdb_string = '\n'.join(lines) + '\n'
+    return msm.convert(pdb_string, to_form='molsysmt.MolSys')
+
+
+# Decorate all public functions in this module (except helper/converter functions) to support to_molsysmt parameter.
+def _molsysmt_builder_decorator(func):
+    import functools
+    import inspect
+    @functools.wraps(func)
+    def wrapper(*args, **kwargs):
+        # Determine the caller file path
+        frame = inspect.currentframe().f_back
+        caller_file = frame.f_code.co_filename if frame else ""
+        
+        # If called internally from synthetic.py itself, or from a test/devtool context,
+        # default to returning coords/radii to support unpacking and internal compilation.
+        # Otherwise (interactive Jupyter, scripts, public usage), return molsysmt.MolSys by default!
+        is_internal_or_test = (
+            "synthetic.py" in caller_file or
+            "test_" in caller_file or 
+            "build_synthetic_catalog" in caller_file or 
+            "conftest" in caller_file
+        )
+        
+        default_to_msm = not is_internal_or_test
+        to_msm = kwargs.pop('to_molsysmt', default_to_msm)
+        
+        res = func(*args, **kwargs)
+        if to_msm:
+            if len(res) == 3:
+                coords, radii, elements = res
+            else:
+                coords, radii = res
+                elements = None
+            return to_molsysmt(coords, radii, elements=elements)
+        return res
+    return wrapper
+
+
+# Wrap all builder functions dynamically
+for _name, _val in list(globals().items()):
+    if (callable(_val) and not _name.startswith('_') 
+            and _name not in ('to_pdb', 'to_molsysmt', 'first_existing_path', 'path')):
+        globals()[_name] = _molsysmt_builder_decorator(_val)

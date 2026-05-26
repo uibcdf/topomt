@@ -28,7 +28,7 @@ separate effort).
 | `np.unique` face dedup | Medium | GPU sort exists (cupy/thrust); the inverse/first-appearance mapping is fiddly but doable. |
 | Delaunay triangulation | Low (separate) | scipy/QHull is CPU-only. GPU Delaunay libraries exist (e.g. gDel3D / GPU-DT) but are a large separate integration. |
 | graph decomposition (`connected_components`) | Medium | cuGraph exists; small part, irregular. |
-| `get_topography` per-domain loops | Low | Control-heavy, irregular, but small (over #domains ≪ T). Keep on CPU. |
+| `get_topography` per-component loops | Low | Control-heavy, irregular, but small (over #components ≪ T). Keep on CPU. |
 
 ## Why the Kernels Fit So Well
 

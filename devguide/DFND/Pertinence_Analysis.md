@@ -26,10 +26,10 @@ TopoMT already defines a rich ontology in `topomt/features/`. DFND provides a di
 
 | DFND Concept | TopoMT Class | Mapping Logic |
 | :--- | :--- | :--- |
-| **Void** | `topomt.features.Void` | Transit domain with zero `external_links` and at least one resident node. |
-| **Surface Concavity** | New feature class or pocket-family subtype | Transit domain with exactly one `external_link` and no resident nodes. |
-| **Pocket** | `topomt.features.Pocket` | Transit domain with exactly one `external_link` and at least one resident node. |
-| **Channel** | `topomt.features.Channel` | Resident `multi_external_link_domain`; channel remains shorthand until morphology/path analysis. |
+| **Void** | `topomt.features.Void` | Transit component with zero `external_links` and at least one resident node. |
+| **Surface Concavity** | New feature class or pocket-family subtype | Transit component with exactly one `external_link` and no resident nodes. |
+| **Pocket** | `topomt.features.Pocket` | Transit component with exactly one `external_link` and at least one resident node. |
+| **Channel** | `topomt.features.Channel` | Resident `multi_external_link`; channel remains shorthand until morphology/path analysis. |
 | **External Link** | New descriptor class or `Mouth` precursor | DFN-level exterior connection. A geometric `Mouth` can be derived from it. |
 | **Solid Component** | *New Feature Class* | (Proposed) `topomt.features.Protrusion` or `Core`. |
 

@@ -87,7 +87,7 @@ class DelaunayFlowNetwork:
 
     def get_pockets(self, probe_radius=1.4, min_volume=50.0, sea_level=None):
         """
-        Returns raw DFND pocket/domain records or converted Pocket objects, depending on the output layer.
+        Returns raw DFND pocket/component records or converted Pocket objects, depending on the output layer.
         This method is fast because it only filters pre-calculated arrays.
         """
         # 1. Define Node States (Boolean masks based on R_residence vs probe_radius)

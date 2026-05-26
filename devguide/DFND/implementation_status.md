@@ -51,7 +51,7 @@ The active implementation now covers the first v1 substrate:
 - emit `wet_components`, `residence_regions`, `external_links` raw records;
 - organize all DFND output under the single `topography.dfnd` (`DFNDData`); the
   public `Topography` top level holds only the promoted features (no `dfnd_*`
-  attributes). Wet domains promote to `Pocket`/`Void`/`Channel` with mouths as
+  attributes). Wet components promote to `Pocket`/`Void`/`Channel` with mouths as
   child `Mouth` features (provenance `component_id`);
 - build a dry complement with dry-edge face records, dry interfaces, dry depth, and first candidate dry motifs.
 
@@ -66,9 +66,9 @@ Validated by active tests so far:
 - wet-sealed regular tetrahedron toy;
 - `dry_open_cut` / transit-connector policy divergence.
 - `wet_coast_pocket_1link` classifier regression.
-- `multi_external_link_domain` end-to-end fixture.
+- `multi_external_link` end-to-end fixture.
 - `nonresident_passage_2links` non-resident multi-link classifier regression.
-- `degenerate_subprobe_domain` no-link/no-residence classifier regression.
+- `degenerate_subprobe` no-link/no-residence classifier regression.
 - public dfnd(...) smoke test exercises MolSysMT file input and input-policy recording.
 - get_topography(method=dfnd) now returns a normal Topography object with DFND raw records attached as dfnd_records.
 - get_topography(method=dfnd) has a real-system smoke test on topomt/data/CASTp_3.0_server/3ptb.pdb.
@@ -79,7 +79,7 @@ Validated by active tests so far:
 - devguide/DFND/checkpoint_input_policy_hardening.md records the current MolSysMT-backed input policy.
 - the naked `volume` field is intentionally not exposed; `volume_topological_resident` and `volume_solvent_estimate` remain explicitly named.
 - `intrusion_suspect` flag and `block_suspect` policy are covered by a toy test.
-- `min_size` filtering now applies to compatibility/reporting views, not raw domain decomposition.
+- `min_size` filtering now applies to compatibility/reporting views, not raw component decomposition.
 - `surface_dent_1link` non-resident one-link classifier regression.
 - external-link edge-connectivity clustering.
 - Delaunay face identity is tested against oriented-simplex neighbor semantics; see checkpoint_face_identity_external_links.md.
@@ -110,8 +110,8 @@ Known gaps:
 
 - `tests/test_dfnd_pockets.py` is now an active public-API smoke test through MolSysMT input.
 - Direct dfnd(...) calls still return the raw-first nested dictionary used for method development and validation.
-- get_topography(method=dfnd) currently converts only compatibility void, pocket, and channel domains into Topography features; provisional surface-concavity, nonresident-passage, degenerate-subprobe, and dry records remain available through dfnd_records.
-- Feature objects receive atom indices, tetrahedron indices, centers, topological resident volume, deterministic local solvent-volume estimate, mouth counts, mouth area, flags, and the raw domain record.
+- get_topography(method=dfnd) currently converts only compatibility void, pocket, and channel components into Topography features; provisional surface-concavity, nonresident-passage, degenerate-subprobe, and dry records remain available through dfnd_records.
+- Feature objects receive atom indices, tetrahedron indices, centers, topological resident volume, deterministic local solvent-volume estimate, mouth counts, mouth area, flags, and the raw component record.
 - The working `COAST` rule is defined, but its contribution to reported metrics remains a policy decision.
 - Face-index, gate identity, shared-face consistency, and external-link clustering have graph-contract coverage; more pathological near-threshold cases still need expansion.
 - Basic near-threshold residence and gate cases are covered; broader degenerate and molecular near-threshold sweeps still need expansion.
@@ -137,7 +137,7 @@ The DFND documentation now covers:
   and the per-case review playbook ([`synthetic_review_guide.md`](synthetic_review_guide.md));
 - known failure modes on synthetic ground truth ([`pathological_systems.md`](pathological_systems.md));
 - the interface model and extraction prototype ([`interfaces.md`](interfaces.md));
-- the authoritative object model and `component → domain → feature` terminology
+- the authoritative object model and `component → component → feature` terminology
   ([`object_model.md`](object_model.md)).
 
 The remaining documentation work is to keep the design documents consistent with the active implementation as validation, reporting policy, and performance work continue.

@@ -26,7 +26,7 @@ robustness checks that DFND passes.
 A deep, narrow blind well is segmented into a stack of pockets along its depth
 instead of one pocket. The single-scale residence/transit decomposition cannot
 keep a long narrow concavity whole: local residence maxima along the lumen become
-separate domains. Real impact: deep grooves and narrow tunnels will be
+separate components. Real impact: deep grooves and narrow tunnels will be
 over-counted and their volume split.
 
 ## F2 — Long thin channels lose through-connectivity
@@ -36,7 +36,7 @@ be **1 channel** with 2 mouths).
 
 A long thin pore is not recognised as a single through-channel. The resident
 chain through the narrow lumen does not stay connected end to end, so instead of
-one `multi_external_link_domain` joining both faces, DFND reports two separate
+one `multi_external_link` joining both faces, DFND reports two separate
 one-mouth pockets. Real impact: long pores/tunnels (ion channels, transport
 pathways) may be missed as channels — the most worrying failure for the
 "connectivity" story that is supposed to be DFND's strength.
@@ -121,7 +121,7 @@ solvent-accessible inner ball; it needs calibration against analytic shapes.)
 channel**); at `tube_radius=3.0` it even produces a spurious void. Distinct from
 F2 (which is about *length*): here it is *thinness*. A lumen near the residence
 threshold cannot hold a connected resident chain, so the channel collapses into
-pockets. Worse, the `nonresident_passage_domain` family — defined precisely for a
+pockets. Worse, the `nonresident_passage` family — defined precisely for a
 passable-but-not-residable lumen — never appears, so there is no fallback class.
 The radius family is catalogued as distinct PDBs (`pathological_thin_tube_r20`
 → nothing, `_r25` → pockets, `_r30` → a spurious void, `thin_tube_r35` →
@@ -167,7 +167,7 @@ a few are handled (see the next section). Pinned in `test_dfnd_pathological.py`.
   6/10 seeds). The cavity exists or not depending on noise.
 - **Marginal gate flicker.** A sphere whose wall gate sits at the probe threshold
   (spacing 4.2) is classified void / pocket / channel depending only on the seed.
-- **Non-monotone probe response.** The dumbbell yields 2 significant domains at
+- **Non-monotone probe response.** The dumbbell yields 2 significant components at
   probe 1.4 but **5 at probe 2.0** — a *larger* probe finds *more* features
   (spurious over-fragmentation grows with probe).
 
@@ -209,10 +209,10 @@ Pinned as passing tests, so a regression that breaks them is caught:
 
 ## Watch list (not yet pinned as clean failures)
 
-- **`surface_concavity_domain` unreachable.** Every shallow dent tried so far
+- **`surface_concavity` unreachable.** Every shallow dent tried so far
   classifies as a `pocket` (a resident ball always fits); the provisional family
   has no synthetic ground-truth case yet.
-- **`degenerate_subprobe_domain` unreachable.** Like `nonresident_passage`
+- **`degenerate_subprobe` unreachable.** Like `nonresident_passage`
   (see F9), this raw family has no end-to-end synthetic case that produces it.
 - **A direct `R_gate` mixed-radius probe.** F11 shows radius sensitivity at the
   system level; a 3-atom gate with very unequal radii compared against a

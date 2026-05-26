@@ -1,5 +1,9 @@
 # DFND Data Model v1
 
+> [!NOTE]
+> **Terminology Authority**: Per [`object_model.md`](object_model.md), this data model has been fully migrated to the zero-legacy **`component`** $\rightarrow$ **`component`** $\rightarrow$ **`feature`** ladder.
+> The wet graph-decomposition records are unified under **`wet_components`** (represented by the Python-side `WetComponent` class) and use simplified family names (`void`, `pocket`, `multi_external_link`) without the `_domain` suffix. Legacy terms like `ConcavityDomain` or `TransitDomain` are obsolete.
+
 This document defines the minimal DFND data model to implement before adding
 higher-level heuristics, visualizations, or production Topography conversion.
 
@@ -39,11 +43,10 @@ DFNDMeshRecord
 TetrahedronRecord
 FaceRecord
 DelaunayFlowNetwork
-TransitDomain
+Component
 ResidenceRegion
-ConcavityDomain
 ExternalLink
-DomainMotif
+Motif
 DryComponent
 DryInterface
 DryMotif
@@ -249,15 +252,15 @@ Invariants:
 - external edges connect finite transit nodes to `OCEAN` through permeable hull
   faces.
 
-### 5.2. TransitDomain
+### 5.2. Component
 
-A `TransitDomain` is a connected component after removing `OCEAN` and its
+A `Component` is a connected component after removing `OCEAN` and its
 incident edges from the transit graph.
 
 Required fields:
 
 ```text
-transit_domain_id
+component_id
 transit_node_ids
 resident_node_ids
 transit_connector_node_ids
@@ -271,13 +274,13 @@ flags
 
 ### 5.3. ResidenceRegion
 
-A `ResidenceRegion` is resident-node content inside one `TransitDomain`.
+A `ResidenceRegion` is resident-node content inside one `Component`.
 
 Required fields:
 
 ```text
 residence_region_id
-transit_domain_id
+component_id
 resident_tetrahedron_ids
 atom_ids
 residue_ids
@@ -289,17 +292,16 @@ R_residence_max
 flags
 ```
 
-### 5.4. ConcavityDomain
+### 5.4. WetComponent
 
-A `ConcavityDomain` is the topographic interpretation of a `TransitDomain`, its
-resident regions, external links, and metadata.
+A `WetComponent` is the topographic connected component representing a wet flow region, its
+resident sub-graphs, external links, and physical metrics.
 
 Required fields:
 
 ```text
-domain_id
-domain_family
-transit_domain_id
+id
+family
 residence_region_ids
 tetrahedron_ids
 resident_tetrahedron_ids
@@ -324,33 +326,33 @@ topological_depth_max
 flags
 ```
 
-Allowed `domain_family` values:
+Allowed `family` values:
 
 ```text
-void_domain
-surface_concavity_domain
-pocket_domain
-multi_external_link_domain
-channel_domain  # optional public shorthand after morphology policy
+void
+surface_concavity
+pocket
+multi_external_link
+channel  # optional public shorthand after morphology policy
 ```
 
-The domain family is decided before motif analysis.
-`surface_concavity_domain` is provisional until validated by toy systems or
-geometric sweeps. `channel_domain` should not imply a biological tunnel or pore
+The component family is decided before motif analysis.
+`surface_concavity` is provisional until validated by toy systems or
+geometric sweeps. `channel` should not imply a biological tunnel or pore
 without additional path or morphology evidence.
 
 ### 5.5. ExternalLink
 
-An `ExternalLink` is the DFN primitive connecting one transit domain or
-concavity domain to `OCEAN` through a connected cluster of permeable boundary
+An `ExternalLink` is the DFN primitive connecting one transit component or
+concavity component to `OCEAN` through a connected cluster of permeable boundary
 contacts.
 
 Required fields:
 
 ```text
 external_link_id
-domain_id
-transit_domain_id
+id
+component_id
 face_ids
 tetrahedron_ids
 atom_ids
@@ -367,7 +369,7 @@ Initial clustering policy:
 
 ```text
 Two external boundary faces belong to the same ExternalLink if they share an
-edge and belong to the same ConcavityDomain.
+edge and belong to the same Component.
 ```
 
 `Mouth` is not required in v1. A mouth descriptor may be derived from an
@@ -406,7 +408,7 @@ filtered during graph construction.
 
 ### 6.2. DryInterface
 
-A `DryInterface` records contact between a dry component and wet domains,
+A `DryInterface` records contact between a dry component and wet components,
 external links, `OCEAN`, or hull/exterior context.
 
 Required fields:
@@ -419,7 +421,7 @@ wet_tetrahedron_ids
 face_ids
 atom_ids
 residue_ids
-adjacent_domain_ids
+adjacent_component_ids
 adjacent_external_link_ids
 touches_ocean
 touches_hull
@@ -447,15 +449,15 @@ A dry boundary node is any dry node incident to a `DryInterface`.
 
 ## 7. Motif Records
 
-### 7.1. DomainMotif
+### 7.1. Motif
 
-`DomainMotif` is a candidate or derived descriptor inside a concavity domain.
+`Motif` is a candidate or derived descriptor inside a concavity component.
 
 Required fields:
 
 ```text
 motif_id
-domain_id
+id
 motif_type
 supporting_tetrahedron_ids
 supporting_face_ids
@@ -488,7 +490,7 @@ motif_type
 supporting_tetrahedron_ids
 supporting_face_ids
 supporting_dry_interface_ids
-adjacent_domain_ids
+adjacent_component_ids
 adjacent_external_link_ids
 metrics
 flags
@@ -522,9 +524,9 @@ mesh_record
 tetrahedra
 faces
 wet_network
-concavity_domains
+wet_components
 external_links
-domain_motifs
+component_motifs
 dry_components
 dry_interfaces
 dry_motifs
@@ -541,14 +543,14 @@ The conversion layer is intentionally downstream.
 Initial mapping:
 
 ```text
-void_domain -> Void
-surface_concavity_domain -> SurfaceConcavity, once the class exists
-pocket_domain -> Pocket
-multi_external_link_domain -> Channel or BranchedChannel only after morphology/path analysis
-nonresident_passage_domain -> raw/provisional record, not public Channel by default
-degenerate_subprobe_domain -> raw/filter record, not public Void
+void -> Void
+surface_concavity -> SurfaceConcavity, once the class exists
+pocket -> Pocket
+multi_external_link -> Channel or BranchedChannel only after morphology/path analysis
+nonresident_passage -> raw/provisional record, not public Channel by default
+degenerate_subprobe -> raw/filter record, not public Void
 ExternalLink -> descriptor attached to the parent feature
-Mouth -> optional descriptor derived from ExternalLink
+Mouth -> Mouth child feature promoted from external_mouth motif
 DryMotif -> candidate annotation, not public feature by default
 ```
 
@@ -562,7 +564,7 @@ Must implement first:
 - primitive tetrahedron and face records;
 - wet/dry and permeable/non-permeable/marginal states;
 - transit DFN;
-- concavity-domain decomposition;
+- concavity-component decomposition;
 - external-link clustering;
 - dry graph;
 - dry components;
@@ -582,15 +584,15 @@ Can be postponed:
 - ElastNetMT coupling.
 
 
-## 11. Access x Residence Domain Fields
+## 11. Access x Residence Component Fields
 
-Every `ConcavityDomainRecord` must include the classification fields below:
+Every `WetComponentRecord` must include the classification fields below:
 
 - `n_external_links`: integer count of direct contacts to `OCEAN`.
 - `n_resident_nodes`: number of nodes with `R_residence >= probe_radius`.
 - `has_residence`: derived boolean, `n_resident_nodes >= 1`.
 - `n_open_resident_nodes`: number of resident nodes with all finite faces permeable.
 - `has_open_interior`: derived boolean, `n_open_resident_nodes >= 1`; descriptor only.
-- `domain_family`: one of `void_domain`, `degenerate_subprobe_domain`, `pocket_domain`, `surface_concavity_domain`, `multi_external_link_domain`, or `nonresident_passage_domain`.
+- `family`: one of `void`, `degenerate_subprobe`, `pocket`, `surface_concavity`, `multi_external_link`, or `nonresident_passage`.
 
-`domain_family` must be derived from `n_external_links` and `has_residence`. It must not be independently assigned from `has_open_interior`.
+`family` must be derived from `n_external_links` and `has_residence`. It must not be independently assigned from `has_open_interior`.

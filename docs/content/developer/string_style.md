@@ -17,4 +17,4 @@ Use these conventions for strings and docstrings across the repository.
 ## Formatting tools
 
 Contributors are expected to rely on the repository formatting and linting
-workflow, including tools such as `black`, `isort`, and `flake8`.
+workflow, using `ruff format` and `ruff check` as the canonical tools.

@@ -4,7 +4,16 @@ Recorded on 2026-05-23. This is the **authoritative** reference for how DFND
 output is organized and for the words we use. Where any other DFND document or
 code field disagrees with this one, this document is the target and the other is
 either legacy (pending migration) or wrong. Its purpose is to remove, once and
-for all, the confusion between *component*, *domain*, *motif*, and *feature*.
+for all, the confusion between *component*, *motif*, and *feature*.
+
+> **2026-05-26 — `domain` retired.** The earlier ladder had a middle rung,
+> *domain* ("the component realized in atoms"). It is gone: a component and its
+> realization are a single, 1:1, inseparable object, "domain" collides with the
+> biological sense of the word, and "component" is the graph/alpha-complex term of
+> art and the only implemented class. The realization (atoms, volume, center) is
+> now simply the **spatial representation of the component**, not a named rung. The ladder
+> is **`component → feature`**. Wherever older prose still says "domain", read
+> "component".
 
 ## 1. Two levels, one dividing principle
 
@@ -16,7 +25,7 @@ There are exactly two levels, and they must not leak into each other:
   AlphaSpace2, pycasta, DFND) fills this same level. A user of `Topography` must
   be able to work without knowing anything about DFND.
 - **`topography.dfnd`** — the **DFND-specific substrate**. It holds the Delaunay
-  mesh, the flow network, and its decomposition into components/domains/motifs.
+  mesh, the flow network, and its decomposition into components/motifs.
 
 > **Dividing principle.** Ask: *"would a user who knows nothing about DFND need
 > this — no graphs, no wet/dry, no connected components, no OCEAN?"* If **no**, it
@@ -25,45 +34,47 @@ There are exactly two levels, and they must not leak into each other:
 This is why there are no `dfnd_*` attributes at the `Topography` top level: all
 DFND material lives under the single `topography.dfnd` object.
 
-## 2. The terminology ladder: component → domain → feature
+## 2. The terminology ladder: component → feature
 
-A single connected piece of empty space is described at three rungs. Use the
+A single connected piece of empty space is described at two rungs. Use the
 right word for the right rung:
 
 ```
-component            →   domain                →   feature
-(the graph)              (the atoms)               (the public object)
+component                              →   feature
+(the private dfnd object)                  (the public object)
 
-a connected component    that component realized   a Topography object
-of the DFN graph:        in the molecular system:  promoted from a domain:
-a set of tetrahedron      its lining atoms,         + units, residues,
-NODES (+ their faces      volume, center, the       morphology, dynamics,
-and edges)                region of space it        annotations
-                          occupies
-"the decomposition"      "the atoms of the         method-agnostic
-produces components       component"
+a connected component of the DFN           a Topography object
+graph — a set of tetrahedron NODES         promoted from a component:
+(+ their faces and edges) together         + units, residues, morphology,
+with its spatial representation: the lining        dynamics, annotations
+atoms, volume, center, footprint           method-agnostic
+
+"the decomposition produces components"
 ```
 
-- **component** — the pure **graph** object. The output of the *decomposition*
-  (the **D** in DFND). A set of tetrahedron nodes plus the faces/edges among them.
-  Probe-dependent.
-- **domain** — that component **realized in the system**: its atoms (lining),
-  volume, center, spatial footprint. A **facet of the component**
-  (`component.domain`), not a separate registry. *"The domain of the component."*
-- **feature** — the **public** `Topography` object promoted from a domain.
+- **component** — the dfnd object. It has two **facets** of the same thing, not
+  two objects:
+  - a **graph facet** — the output of the *decomposition* (the **D** in DFND): a
+    set of tetrahedron nodes plus the faces/edges among them;
+  - a **spatial representation** — that component realized in the system: its lining
+    atoms, volume, center, spatial footprint.
+  Probe-dependent. (There is no separate "domain": a component and its
+  realization are one inseparable, 1:1 object — see the 2026-05-26 note above.)
+- **feature** — the **public** `Topography` object promoted from a component.
 
 ### Two reserved-word rules (the heart of the convention)
 
 1. **The word `feature` is NEVER used inside `dfnd`.** Inside dfnd there are
-   components, domains, and motifs — never features.
+   components and motifs — never features.
 2. **The word `motif` is NEVER used at the `Topography` level.** A motif is a
    dfnd object; when it surfaces publicly it has become a feature.
 
-## 3. motif — sub-structure of a domain
+## 3. motif — sub-structure of a component
 
-A **motif** is a named sub-structure *of a domain* (it lives in the domain, the
-atoms rung): a **throat/bottleneck**, a **chamber**, a **depth-region**, a
-**mouth**. Motifs are how a single domain has internal parts.
+A **motif** is a named sub-structure *of a component* (a geometric motif over the
+component's atomic structure): a **throat/bottleneck**, a **chamber**, a
+**depth-region**, a **mouth**. Motifs are how a single component has internal
+parts.
 
 The mouth illustrates the full ladder cleanly:
 
@@ -111,7 +122,10 @@ there is one mental model for both levels.
 
 - `_by_side`: `wet` / `dry`.
 - `_by_family`: `void`, `pocket`, `channel`, `surface_concavity`,
-  `nonresident_passage`, `degenerate_subprobe` (wet) and `dry_bank` (dry).
+  `nonresident_passage`, `degenerate_subprobe`, `percolating` (wet) and
+  `dry_bank` (dry). `percolating` is the wall-less resident override
+  (`n_wall_faces == 0`); it promotes to a `Percolating` feature with `shape_type`
+  `neutral` and gets no `Mouth` child.
 - **wet and dry are unified under `component`.** `side` is **derived from
   `family`** via a `_SIDE_BY_FAMILY` registry, mirroring how `BaseFeature` derives
   `shape_type`/`dimensionality` from `feature_type`.
@@ -120,9 +134,9 @@ there is one mental model for both levels.
 
 **`Component`** (base, ≡ `BaseFeature`):
 - `component_id`, `family`, `side` (derived), `flags`, `_dfn` back-ref;
-- **component facet (graph)**: `node_indices` (tetrahedra), `boundary_face_ids`;
-- **domain facet (atoms)**: `atom_indices`, `volume`, `center`;
-- **motifs**: the domain's sub-structures.
+- **graph facet**: `node_indices` (tetrahedra), `boundary_face_ids`;
+- **spatial representation (atoms)**: `atom_indices`, `volume`, `center`;
+- **motifs**: the component's sub-structures.
 
 **`WetComponent`** (≡ concavity classes): `resident_node_indices`,
 `transit_connector_node_indices`, `external_link_ids`, `n_mouths`, `mouth_area`,
@@ -133,9 +147,10 @@ there is one mental model for both levels.
 `dry_depth_{min,max,mean}` (+ per-node), `motif_ids`.
 
 Two subclasses (not one per family) because the wet families differ only by the
-`family` label, not by structure. Motif slots exist on both sides; today only dry
-motifs are built (wet-domain motifs are designed in
-[`domain_motifs.md`](domain_motifs.md) but not yet implemented).
+`family` label, not by structure. Motif slots and registries exist on both sides;
+both wet-component motifs (such as canonical mouths and depth regions) and
+dry-component motifs are fully built and supported (see
+[`component_motifs.md`](component_motifs.md)).
 
 ## 7. Promotion: dfnd → Topography (not 1:1)
 
@@ -148,13 +163,12 @@ WetComponent(family='pocket', id='WET-3')   ──▶  Pocket   (feature.source_
    └── chamber motif                        ──▶  sub-Pocket (nested child)
 ```
 
-- The **domain** promotes to the concavity **feature** (`Void`/`Pocket`/`Channel`).
-- The domain's **motifs** promote to **child features** (`Mouth`, throat→`Neck`,
+- The **component** promotes to the concavity **feature** (`Void`/`Pocket`/`Channel`).
+- The component's **motifs** promote to **child features** (`Mouth`, throat→`Neck`,
   chamber→sub-`Pocket`), wired with `connect_features`. The feature parenthood
   *is* the component's motif structure.
 - Each feature carries `source_id = component_id` (and, for child features, the
-  motif id) as provenance → traceable feature → domain → component → tetrahedra →
-  atoms.
+  motif id) as provenance → traceable feature → component → tetrahedra → atoms.
 - Provisional families (`surface_concavity`, `nonresident_passage`,
   `degenerate_subprobe`) and the dry interfaces are **not** promoted yet (no
   feature class for them); they remain available under `topography.dfnd`.
@@ -165,10 +179,10 @@ This model **supersedes** the older, inconsistent wording in which the wet
 graph-component was a *"transit/concavity domain"* and the dry one a *"dry
 component"*. Going forward:
 
-- the **graph object** (either side) is a **`component`**;
-- its **atoms** are its **`domain`**;
+- the dfnd object (either side) is a **`component`**, with a graph facet and a
+  geometry/atoms facet (no separate "domain" — see §2);
 - the **public** object is a **`feature`**;
-- sub-structures of a domain are **`motifs`**.
+- sub-structures of a component are **`motifs`**.
 
 The rename is **complete — zero legacy** (done while the project is early, before
 the contract spread further):
@@ -178,7 +192,8 @@ the contract spread further):
 | `dfnd_*` attributes on `Topography` | single `topography.dfnd` |
 | wet "transit/concavity domain" | `component` (`WetComponent`) |
 | "dry component" | `component` (`DryComponent`, family `dry_bank`) |
-| atoms of a domain | `component` domain facet (`atom_indices`, …) |
+| the middle rung "domain" (component realized in atoms) | retired — the **spatial representation** of the `component` (`atom_indices`, `volume`, `center`) |
+| atoms of a domain | `component` spatial representation (`atom_indices`, …) |
 | raw field `concavity_domains` / `transit_domains` | `wet_components` (single key) |
 | record field `domain_family` | `family` |
 | family strings `void_domain` / `pocket_domain` / `multi_external_link_domain` / … | `void` / `pocket` / `multi_external_link` / … (no `_domain` suffix) |
@@ -229,7 +244,7 @@ Beyond the four phases (also done):
   network. Realizes the mesh-once / dfn-per-probe lifecycle.
 - **Wet motifs (canonical layer).** Each `WetComponent` carries its topological
   depth (`topological_depth`), `depth_regions`, and `motifs` (`external_mouth` +
-  `depth_region`), per [`domain_motifs.md`](domain_motifs.md) §3.
+  `depth_region`), per [`component_motifs.md`](component_motifs.md) §3.
 - **Throat/chamber/bottleneck (experimental).** A first attempt is implemented via
   a capacity merge tree scored by persistence: `WetComponent.throat_candidates`,
   `chamber_candidates`, `bottleneck` (validated on the dumbbell — one throat at

@@ -28,7 +28,7 @@ DFND is motivated by a different internal separation:
 ```text
 tetrahedron habitability -> can the probe reside here?
 face permeability        -> can the probe pass through this gate?
-graph connectivity       -> what domains and access relations result?
+graph connectivity       -> what components and access relations result?
 ```
 
 ## 2. Core Contribution
@@ -41,11 +41,11 @@ R_residence: node-level resident-probe capacity
 R_gate:     face-level passage capacity
 ```
 
-This allows a domain to keep information about chambers, gates, bottlenecks,
+This allows a component to keep information about chambers, gates, bottlenecks,
 and access without forcing every decision into a single alpha-radius or cluster
 threshold.
 
-The second contribution is traceability. DFND is designed so that every domain,
+The second contribution is traceability. DFND is designed so that every component,
 external link, dry component, and interface can be traced back to exact atoms,
 tetrahedra, faces, thresholds, and marginal decisions.
 
@@ -60,8 +60,8 @@ DFND uses two complementary graph views over the same Delaunay mesh:
 - the wet graph, where the probe can reside and pass;
 - the dry graph, where the probe cannot reside and where faces block passage.
 
-The wet side supports concavity domains such as voids, pockets, and
-multi-opening domains. The dry side supports raw dry components, dry interfaces,
+The wet side supports concavity components such as voids, pockets, and
+multi-opening components. The dry side supports raw dry components, dry interfaces,
 dry depth, and future candidate motifs such as walls, rims, ridges, protrusions,
 separators, and dry cores.
 
@@ -95,7 +95,7 @@ Avoid these claims unless future work proves them precisely:
 - DFND contains MOLE or Caver as formal limiting cases.
 - DFND is categorically more exact than existing tools.
 - `volume_topological` is a physical pocket volume.
-- `channel_domain` necessarily means a biological tunnel or pore.
+- `channel` necessarily means a biological tunnel or pore.
 - dry motifs are validated public feature families.
 
 ## 6. Claims That Are Currently Defensible

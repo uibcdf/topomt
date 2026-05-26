@@ -1,9 +1,9 @@
 """Typed components of the DFN decomposition, mirroring ``Topography``.
 
 See ``devguide/DFND/object_model.md``. A *component* is the graph object (a set of
-tetrahedron nodes); its *domain* is the atoms that realize it; *motifs* are
-sub-structures of a domain. The word *feature* is reserved for the public
-``Topography`` level and never appears here.
+tetrahedron nodes) together with its *spatial representation* (the atoms that
+realize it, volume, center); *motifs* are sub-structures of a component. The word
+*feature* is reserved for the public ``Topography`` level and never appears here.
 
 `Component` mirrors `BaseFeature` (a `side` derived from `family`, just as a
 feature's `shape_type`/`dimensionality` are derived from `feature_type`).
@@ -26,6 +26,7 @@ _SIDE_BY_FAMILY = {
     'surface_concavity': 'wet',
     'nonresident_passage': 'wet',
     'degenerate_subprobe': 'wet',
+    'percolating': 'wet',
     'dry_bank': 'dry',
 }
 _COMPONENT_PREFIX_BY_SIDE = {'wet': 'WET', 'dry': 'DRY'}
@@ -34,18 +35,34 @@ _COMPONENT_PREFIX_BY_SIDE = {'wet': 'WET', 'dry': 'DRY'}
 class Component:
     """A connected component of the DFN graph (mirrors ``BaseFeature``)."""
 
-    def __init__(self, component_id=None, family=None, node_indices=None,
-                 atom_indices=None, boundary_face_ids=None, center=None, flags=None):
+    def __init__(
+        self,
+        component_id=None,
+        family=None,
+        node_indices=None,
+        atom_indices=None,
+        boundary_face_ids=None,
+        center=None,
+        flags=None,
+        component_index=None,
+        size_rank=None,
+        graph_label=None,
+    ):
         self.component_id = component_id
+        self.component_index = component_index
+        self.size_rank = size_rank
+        self.graph_label = graph_label
         self.family = family
-        self.side = _SIDE_BY_FAMILY.get(family)            # derived from family
+        self.side = _SIDE_BY_FAMILY.get(family)  # derived from family
         # component facet (the graph object)
         self.node_indices = list(node_indices) if node_indices is not None else []
-        self.boundary_face_ids = list(boundary_face_ids) if boundary_face_ids is not None else []
-        # domain facet (the atoms that realize it)
+        self.boundary_face_ids = (
+            list(boundary_face_ids) if boundary_face_ids is not None else []
+        )
+        # spatial representation (the atoms that realize it)
         self.atom_indices = list(atom_indices) if atom_indices is not None else []
         self.center = center
-        # sub-structures of the domain
+        # sub-structures of the component
         self.motifs: list[Any] = []
         self.flags = list(flags) if flags is not None else []
         self.raw_record: dict[str, Any] | None = None
@@ -56,8 +73,10 @@ class Component:
         return len(self.node_indices)
 
     def __repr__(self) -> str:
-        return (f"<{type(self).__name__} {self.component_id} "
-                f"family={self.family} nodes={self.size} atoms={len(self.atom_indices)}>")
+        return (
+            f'<{type(self).__name__} {self.component_id} '
+            f'family={self.family} nodes={self.size} atoms={len(self.atom_indices)}>'
+        )
 
 
 class WetComponent(Component):
@@ -69,14 +88,15 @@ class WetComponent(Component):
         self.transit_connector_node_indices: list[int] = []
         self.external_link_ids: list[int] = []
         self.n_mouths = 0
+        self.n_wall_faces = 0
         self.has_residence = False
         self.has_open_interior = False
         self.volume_topological_resident = None
         self.volume_solvent_estimate = None
-        # canonical motif layer (domain_motifs.md section 3): topological depth
+        # canonical motif layer (component_motifs.md section 3): topological depth
         self.topological_depth: dict[int, int] = {}
         self.depth_regions: list[dict[str, Any]] = []
-        # experimental capacity-persistence motifs (domain_motifs.md sections 4/6):
+        # experimental capacity-persistence motifs (component_motifs.md sections 4/6):
         # throats are low-capacity saddles, chambers are high-capacity basins,
         # ranked by topological persistence. Descriptors, not a hard classifier.
         self.throat_candidates: list[dict[str, Any]] = []
@@ -107,9 +127,9 @@ class Components(Mapping):
         self._by_family: dict[str, set[str]] = {}
         self._neighbors_of: dict[str, set[str]] = {}
         # boundary relations (raw records; components reference them by id)
-        self.external_links: list[dict[str, Any]] = []   # wet component -> OCEAN
-        self.interfaces: list[dict[str, Any]] = []        # dry <-> dry
-        self.motifs: list[dict[str, Any]] = []            # dry-side motifs (wet pending)
+        self.external_links: list[dict[str, Any]] = []  # wet component -> OCEAN
+        self.interfaces: list[dict[str, Any]] = []  # dry <-> dry
+        self.motifs: list[dict[str, Any]] = []  # dry-side motifs (wet pending)
 
     # -- Mapping interface (≡ Topography) --
     def __getitem__(self, component_id: str) -> Component:
@@ -122,8 +142,10 @@ class Components(Mapping):
         return len(self._components)
 
     def __repr__(self) -> str:
-        return (f"<dfnd.dfn.components wet={len(self._by_side['wet'])} "
-                f"dry={len(self._by_side['dry'])}>")
+        return (
+            f'<dfnd.dfn.components wet={len(self._by_side["wet"])} '
+            f'dry={len(self._by_side["dry"])}>'
+        )
 
     # -- registration --
     def add(self, component: Component) -> str:
@@ -169,9 +191,13 @@ class Components(Mapping):
         return self._components[component_id]
 
     def neighbors_of(self, component_id: str) -> set[Component]:
-        return {self._components[c] for c in self._neighbors_of.get(component_id, set())}
+        return {
+            self._components[c] for c in self._neighbors_of.get(component_id, set())
+        }
 
-    def get_components(self, *, by: str | None = None, value=None, grouped_by: str | None = None):
+    def get_components(
+        self, *, by: str | None = None, value=None, grouped_by: str | None = None
+    ):
         if by is None:
             ids = set(self._components)
         elif by == 'side':
@@ -179,8 +205,11 @@ class Components(Mapping):
         elif by == 'family':
             ids = set(self._by_family.get(value, ()))
         elif by == 'id':
-            ids = {value} & set(self._components) if isinstance(value, str) else {
-                v for v in value if v in self._components}
+            ids = (
+                {value} & set(self._components)
+                if isinstance(value, str)
+                else {v for v in value if v in self._components}
+            )
         else:
             raise ValueError(f"Unknown 'by' criterion: {by!r}")
 
@@ -212,17 +241,23 @@ def build_components(result: dict[str, Any]) -> Components:
 
     for record in raw['wet_components']:
         component = WetComponent(
-            component_id=f"WET-{record['id']}",
+            component_id=f'WET-{record["id"]}',
             family=record['family'],
             node_indices=record['tetrahedron_ids'],
             atom_indices=record['atom_indices'],
             center=record['center'],
             flags=record['flags'],
+            component_index=record.get('component_index'),
+            size_rank=record.get('size_rank'),
+            graph_label=record.get('graph_label'),
         )
         component.resident_node_indices = record['resident_tetrahedron_ids']
-        component.transit_connector_node_indices = record['transit_connector_tetrahedron_ids']
+        component.transit_connector_node_indices = record[
+            'transit_connector_tetrahedron_ids'
+        ]
         component.external_link_ids = record['external_link_ids']
         component.n_mouths = record['n_external_links']
+        component.n_wall_faces = record.get('n_wall_faces', 0)
         component.has_residence = record['has_residence']
         component.has_open_interior = record['has_open_interior']
         component.volume_topological_resident = record['volume_topological_resident']
@@ -232,10 +267,13 @@ def build_components(result: dict[str, Any]) -> Components:
 
     for record in dry['components']:
         component = DryComponent(
-            component_id=f"DRY-{record['id']}",
+            component_id=f'DRY-{record["id"]}',
             node_indices=record['tetrahedron_indices'],
             atom_indices=record['atom_indices'],
             flags=record.get('flags', []),
+            component_index=record.get('component_index'),
+            size_rank=record.get('size_rank'),
+            graph_label=record.get('graph_label'),
         )
         component.interface_ids = record.get('dry_interface_ids', [])
         component.dry_depth_min = record.get('dry_depth_min')
@@ -262,7 +300,9 @@ def _permeable_adjacency(faces: list[dict[str, Any]]) -> dict[int, set[int]]:
     return adjacency
 
 
-def _connected_components(nodes: set[int], adjacency: dict[int, set[int]]) -> list[list[int]]:
+def _connected_components(
+    nodes: set[int], adjacency: dict[int, set[int]]
+) -> list[list[int]]:
     """Connected components of ``nodes`` under ``adjacency`` (restricted to nodes)."""
     seen: set[int] = set()
     components = []
@@ -283,7 +323,7 @@ def _connected_components(nodes: set[int], adjacency: dict[int, set[int]]) -> li
 
 
 def _attach_wet_motifs(components: Components, result: dict[str, Any]) -> None:
-    """Attach the canonical motif layer to each wet component (domain_motifs.md S3):
+    """Attach the canonical motif layer to each wet component (component_motifs.md S3):
     topological depth from the external-boundary nodes, depth regions, and the
     ``external_mouth`` realization of each external link. Throat/chamber motifs are
     experimental (need a scoring/persistence policy) and are intentionally omitted.
@@ -301,7 +341,7 @@ def _attach_wet_motifs(components: Components, result: dict[str, Any]) -> None:
         boundary &= node_set
 
         depth: dict[int, int] = {}
-        if boundary:                                   # BFS from the exterior boundary
+        if boundary:  # BFS from the exterior boundary
             queue = deque((node, 0) for node in boundary)
             for node in boundary:
                 depth[node] = 0
@@ -311,7 +351,7 @@ def _attach_wet_motifs(components: Components, result: dict[str, Any]) -> None:
                     if neighbor in node_set and neighbor not in depth:
                         depth[neighbor] = dist + 1
                         queue.append((neighbor, dist + 1))
-        else:                                          # a void: no exterior reference
+        else:  # a void: no exterior reference
             depth = {node: 0 for node in node_set}
         component.topological_depth = depth
 
@@ -321,24 +361,34 @@ def _attach_wet_motifs(components: Components, result: dict[str, Any]) -> None:
         regions = []
         for dist in sorted(layers):
             for region_nodes in _connected_components(layers[dist], adjacency):
-                atom_ids = sorted({a for node in region_nodes for a in atoms_by_node[node]})
-                regions.append({
-                    'motif_type': 'depth_region', 'depth': dist,
-                    'node_ids': region_nodes, 'atom_indices': atom_ids,
-                })
+                atom_ids = sorted(
+                    {a for node in region_nodes for a in atoms_by_node[node]}
+                )
+                regions.append(
+                    {
+                        'motif_type': 'depth_region',
+                        'depth': dist,
+                        'node_ids': region_nodes,
+                        'atom_indices': atom_ids,
+                    }
+                )
         component.depth_regions = regions
 
-        motifs = [{
-            'motif_type': 'external_mouth',
-            'external_link_id': link_id,
-            'atom_indices': external_links[link_id]['atom_indices'],
-        } for link_id in component.external_link_ids]
+        motifs = [
+            {
+                'motif_type': 'external_mouth',
+                'external_link_id': link_id,
+                'atom_indices': external_links[link_id]['atom_indices'],
+            }
+            for link_id in component.external_link_ids
+        ]
         motifs.extend(regions)
         component.motifs = motifs
 
 
-def _attach_capacity_motifs(components: Components, result: dict[str, Any],
-                            min_persistence: float = 1.0) -> None:
+def _attach_capacity_motifs(
+    components: Components, result: dict[str, Any], min_persistence: float = 1.0
+) -> None:
     """Attach experimental throat/chamber/bottleneck descriptors to wet components.
 
     A merge tree is built over the component's internal faces ordered by capacity
@@ -347,7 +397,7 @@ def _attach_capacity_motifs(components: Components, result: dict[str, Any],
     basin (its peak ``R_residence`` minus the join capacity). The two basins are
     ``chamber_candidate``s. Throats/chambers are ranked descriptors gated by
     ``min_persistence`` (geometric prominence, in length units); they are NOT a
-    probe threshold and NOT a hard classifier (domain_motifs.md sections 2/4/6).
+    probe threshold and NOT a hard classifier (component_motifs.md sections 2/4/6).
     """
     raw = result['raw']
     node_capacity = {t['tetrahedron_id']: t['R_residence'] for t in raw['tetrahedra']}
@@ -390,13 +440,17 @@ def _attach_capacity_motifs(components: Components, result: dict[str, Any],
                 continue
             persistence = min(peak[ra], peak[rb]) - capacity
             if persistence >= min_persistence:
-                throats.append({
-                    'motif_type': 'throat_candidate',
-                    'face_atoms': sorted(set(atoms_by_node[a]) & set(atoms_by_node[b])),
-                    'R_gate': capacity,
-                    'persistence': persistence,
-                    'flags': ['experimental'],
-                })
+                throats.append(
+                    {
+                        'motif_type': 'throat_candidate',
+                        'face_atoms': sorted(
+                            set(atoms_by_node[a]) & set(atoms_by_node[b])
+                        ),
+                        'R_gate': capacity,
+                        'persistence': persistence,
+                        'flags': ['experimental'],
+                    }
+                )
                 for root in (ra, rb):
                     nodes = members[root]
                     chambers_by_peak[max(nodes, key=lambda n: node_capacity[n])] = {
@@ -404,7 +458,9 @@ def _attach_capacity_motifs(components: Components, result: dict[str, Any],
                         'peak_R_residence': peak[root],
                         'persistence': persistence,
                         'node_ids': sorted(nodes),
-                        'atom_indices': sorted({at for n in nodes for at in atoms_by_node[n]}),
+                        'atom_indices': sorted(
+                            {at for n in nodes for at in atoms_by_node[n]}
+                        ),
                         'flags': ['experimental'],
                     }
             big, small = (ra, rb) if peak[ra] >= peak[rb] else (rb, ra)

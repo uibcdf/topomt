@@ -8,6 +8,7 @@ _FEATURE_PREFIXES = {
     'mouth': 'MOU',
     'channel': 'CHA',
     'branched_channel': 'BCH',
+    'percolating': 'PRC',
 }
 
 _FEATURE_TYPE_ALIASES = {
@@ -20,6 +21,7 @@ _FEATURE_TYPE_ALIASES = {
     'Mouth': 'mouth',
     'Channel': 'channel',
     'BranchedChannel': 'branched_channel',
+    'Percolating': 'percolating',
 }
 
 _FEATURE_TYPE_TO_CLASS_NAME = {
@@ -32,6 +34,7 @@ _FEATURE_TYPE_TO_CLASS_NAME = {
     'mouth': 'Mouth',
     'channel': 'Channel',
     'branched_channel': 'BranchedChannel',
+    'percolating': 'Percolating',
 }
 
 _FEATURE_TYPES_BY_SHAPE_TYPE = {
@@ -42,6 +45,9 @@ _FEATURE_TYPES_BY_SHAPE_TYPE = {
                   "alcove"],
     "convexity": ["protrusion", "dome", "ridge", "spine", "bulge", "ridge_cap", "knob", "buttress", "pinnacle"],
     "mixed": ["feature2d", "interface", "patch", "joint", "saddle", "trench"],
+    # neutral: neither concave, convex nor mixed -- a fully permeable/exposed region.
+    # Added for completeness; rarely encountered when analysing real proteins.
+    "neutral": ["percolating"],
 }
 
 _SHAPE_TYPE_BY_FEATURE_TYPE = {}
@@ -53,6 +59,6 @@ for shape_type, feature_types in _FEATURE_TYPES_BY_SHAPE_TYPE.items():
             _DIMENSIONALITY_BY_FEATURE_TYPE[feature_type] = 0
         elif shape_type in ["boundary"]:
             _DIMENSIONALITY_BY_FEATURE_TYPE[feature_type] = 1
-        elif shape_type in ["concavity", "convexity", "mixed"]:
+        elif shape_type in ["concavity", "convexity", "mixed", "neutral"]:
             _DIMENSIONALITY_BY_FEATURE_TYPE[feature_type] = 2
 

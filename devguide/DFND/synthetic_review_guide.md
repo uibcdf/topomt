@@ -13,13 +13,13 @@ from topomt.dfnd.graph import DelaunayFlowNetwork
 coords, radii = syn.<generator>(...)                 # or read the .pdb
 net = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
 topo = net.get_topography(probe_radius=<probe>, min_size=0)
-domains = topo['raw']['concavity_domains']           # wet features
+components = topo['raw']['wet_components']           # wet features
 dry = topo['dry']['components']                       # dry banks (interfaces)
 ```
 
 Conventions used throughout:
-- **significant** domain = `n_resident_nodes >= 5` (filters sub-probe texture).
-- **dominant** domain = the one with the most resident nodes.
+- **significant** component = `n_resident_nodes >= 5` (filters sub-probe texture).
+- **dominant** component = the one with the most resident nodes.
 - families: `void` (0 mouths), `pocket` (1), `multi_external_link`/channel (>=2),
   `surface_concavity` (1 mouth, no residence).
 - The PDBs are dummy **argon** (1.88 Å); mixed-radii PDBs use other noble gases
@@ -50,7 +50,7 @@ Each table is `PDB | case (what it is) | probe | check | expected`.
 | PDB | case | probe | check | expected |
 |---|---|---|---|---|
 | `argon_cube` | 8 argon at cube vertices; body diagonal = 2·(r_Ar+r_probe) | 1.3 (and 1.4) | family at 1.3 vs exactly 1.4 | 1 void at probe<1.4; **empty at exactly 1.4** (marginal knife-edge) |
-| `tetrahedron_void` | minimal 4-atom cell | 1.4 | runs; sanity | runs; no significant domain |
+| `tetrahedron_void` | minimal 4-atom cell | 1.4 | runs; sanity | runs; no significant component |
 | `hollow_sphere_void` | sealed Fibonacci sphere | 1.4 | family, links, volume | 1 void, 0 links, 1000<vol<5000 |
 | `hollow_sphere_pocket` | sphere with one polar cap removed | 1.4 | family, links | 1 pocket, 1 mouth |
 | `hollow_sphere_leaky` | sphere whose wall leaks small probes | 1.0 & 1.8 | probe sweep | 1.0 leaks (0 voids); 1.8 sealed (>=1 void) |
@@ -85,7 +85,7 @@ Each table is `PDB | case (what it is) | probe | check | expected`.
 | PDB | case | probe | check | expected |
 |---|---|---|---|---|
 | `two_blocks_fused` | two blocks, narrow gap | 1.4 | dry bodies | 1 dry body (gap fuses) |
-| `two_blocks_interface` | two blocks, solvent-wide gap | 1.4 | dry bodies + lining | 2 dry banks (>=50) + dominant wet domain lined by both |
+| `two_blocks_interface` | two blocks, solvent-wide gap | 1.4 | dry bodies + lining | 2 dry banks (>=50) + dominant wet component lined by both |
 | `three_blocks_interface` | three blocks in a row | 1.4 | dry bodies | 3 dry banks |
 | `interface_pocket` | cavity carved at the contact plane | 1.4 | lining bodies | dominant cavity lined by both bodies (minority fraction >0.3) |
 | `interface_pocket_open` | interface cavity with a mouth | 1.4 | family + lining | dominant 1-mouth pocket lined by both bodies |
@@ -94,7 +94,7 @@ Each table is `PDB | case (what it is) | probe | check | expected`.
 | `pocket_intruder_open` | sphere with a 3-atom wall mouth | 1.4 | family | dominant pocket |
 | `pocket_intruder_sealed` | same + one atom in the mouth | 1.4 | family | dominant void (4th-atom intrusion seals it) |
 | `flask_cryptic` | gated chamber | 1.4 & 1.0 | probe sweep | void @1.4 (0 links) -> pocket @1.0 (>=1 link) |
-| `rough_surface` | slab with sub-probe bumps | 1.4 | over-reporting | >15 tiny domains, max <40 residents (none real) |
+| `rough_surface` | slab with sub-probe bumps | 1.4 | over-reporting | >15 tiny components, max <40 residents (none real) |
 
 Interface body labels: use `topomt.dfnd.interfaces.annotate_interfaces`. The
 native (dry-component) route only resolves bodies when a wet layer separates them
@@ -157,7 +157,7 @@ documented tolerance band around the threshold instead of a hard `>=`.
 | `pathological_mixed_radii_shell` | noble-gas mixed-radii wall | 1.4 | differs from uniform argon (same coords) | stable |
 | `pathological_two_balls` | two convex balls with a gap | 1.4 | phantom inter-body pocket | 0 (label bodies first) |
 | volume accuracy (`hollow_sphere_void`) | void volume vs analytic | 1.4 | estimate ~+40% vs analytic | within a few % |
-| isolated outlier (`hollow_sphere` + far atom) | one atom 100 Å away | 1.4 | adds a phantom domain | unchanged |
+| isolated outlier (`hollow_sphere` + far atom) | one atom 100 Å away | 1.4 | adds a phantom component | unchanged |
 | genus (`void_with_island`) | void wrapping an island | 1.4 | reports 1 simple void | track the handle |
 
 ---

@@ -94,7 +94,7 @@ Taking advantage of the latest language features and type hinting improvements f
 ### 4.2 Code Style
 
 - Follow **PEP 8**.  
-- Tools: `black` (formatting), `isort` (imports), `flake8` (linting), `mypy` (type checking).  
+- Tools: `ruff format` (formatting), `ruff check` (linting/import sorting), `mypy` (type checking).  
 - Prefer short, modular functions.  
 - Use explicit, descriptive names.  
 - Run linting and type checks before committing.
@@ -315,22 +315,13 @@ To be extended in future versions, it may include:
 
 ## 10. Formatting Tools
 
-- All repositories are formatted automatically with **Black** using:
-
-  ```toml
-  [tool.black]
-  line-length = 88
-  skip-string-normalization = false
-  ```
-
-  This configuration enforces **single quotes** by default and ensures consistent formatting across the ecosystem.
+- All repositories are formatted and linted with **Ruff**. The canonical configuration lives in `pyproject.toml` under `[tool.ruff]`, `[tool.ruff.lint]`, and `[tool.ruff.format]`.
 
 - Contributors should run:
 
   ```bash
-  black .
-  isort .
-  flake8
+  ruff format .
+  ruff check .
   ```
 
   before submitting any pull request.

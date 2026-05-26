@@ -107,7 +107,7 @@ Current v1 policy:
 
 - compute `volume_solvent_estimate` per tetrahedron by deterministic barycentric
   sampling;
-- aggregate domain `volume_solvent_estimate` over resident tetrahedra only;
+- aggregate component `volume_solvent_estimate` over resident tetrahedra only;
 - do not include transit connectors as resident solvent volume;
 - do not include non-local atom intrusions yet.
 
@@ -181,8 +181,8 @@ records should preserve precise metric names.
 
 The first DFND implementation should report:
 
-- topological volume for void, surface-concavity, pocket, and channel domains;
-- deterministic local `volume_solvent_estimate` for resident tetrahedra and domains;
+- topological volume for void, surface-concavity, pocket, and channel components;
+- deterministic local `volume_solvent_estimate` for resident tetrahedra and components;
 - geometric external-link area for each external link;
 - total external-link area per feature;
 - derived mouth area when requested;

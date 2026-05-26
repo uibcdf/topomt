@@ -21,9 +21,9 @@ Required checks:
 - primitive wet/dry and permeable/non-permeable states;
 - marginal-state policy;
 - external-link clustering;
-- transit-domain extraction;
+- transit-component extraction;
 - residence-region extraction;
-- concavity-domain classification;
+- concavity-component classification;
 - transit-connector and terminal-contact policies;
 - dry-component extraction;
 - dry-interface extraction;
@@ -32,7 +32,7 @@ Required checks:
 
 ### 1.2. Geometric Feasibility Validation
 
-Before relying on `surface_concavity_domain`, `wet_coast`, or `wet_sealed`, run
+Before relying on `surface_concavity`, `wet_coast`, or `wet_sealed`, run
 explicit feasibility checks:
 
 - construct or search for tetrahedra with `wet_coast`;
@@ -75,7 +75,7 @@ Candidate metrics:
 - distance from predicted site center to ligand center;
 - top-N success rate for known binding sites;
 - atom/residue overlap with known ligand-contact residues;
-- overlap between predicted domain atoms and reference pockets;
+- overlap between predicted component atoms and reference pockets;
 - external-link count and mouth/rim descriptors as diagnostic, not primary
   success metrics;
 - volume comparisons may use `volume_solvent_estimate` for early engineering checks, while publication-level comparisons still require a higher-precision `volume_solvent` metric.
@@ -93,7 +93,7 @@ The current validation strategy for the radius primitives uses Monte Carlo
 checks, where applicable, as an independent reference for `R_gate` and
 `R_residence`. This is useful during
 algorithm design because it tests the physical question directly: maximize
-clearance over the admissible face or tetrahedron domain without trusting the
+clearance over the admissible face or tetrahedron component without trusting the
 same active-set solver being validated.
 
 However, Monte Carlo reference calculations are expensive if repeated in every
@@ -106,7 +106,7 @@ fixture database:
 - store the generated coordinates, radii, reference radii, tolerances, and
   random seeds in a versioned test-data fixture;
 - use those stored values as a regression oracle in normal unit tests;
-- regenerate the fixture only when the reference policy, admissible domain, or
+- regenerate the fixture only when the reference policy, admissible component, or
   tolerance contract intentionally changes.
 
 This keeps the Monte Carlo calculation as an external sanity check while making
@@ -132,5 +132,5 @@ The first implementation can be considered internally successful when:
 - `R_gate` two-atom and three-atom active restrictions are tested;
 - transit-connector and terminal-contact behavior is tested;
 - 5-10 small real systems can be processed without crashes;
-- reported domains are visually and atomically traceable;
+- reported components are visually and atomically traceable;
 - topological volume is clearly separated from physical solvent volume.

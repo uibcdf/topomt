@@ -25,8 +25,8 @@ network over Delaunay tetrahedra:
 - atomic radii define whether a probe can reside in a tetrahedron;
 - face geometry defines whether a probe can pass between tetrahedra;
 - transit state separates movement from residence;
-- graph connectivity defines transit domains, residence regions, concavity
-  domains, and their relation to the exterior.
+- graph connectivity defines transit components, residence regions, concavity
+  components, and their relation to the exterior.
 
 ## 2. Core Layers
 
@@ -52,8 +52,8 @@ network views:
 - the transit graph, where the probe can move through permeable contacts;
 - the dry graph, where the probe cannot reside and where faces block passage.
 
-The transit side defines transit domains and concavity domains. The residence
-layer defines resident content and volume-bearing regions inside those domains.
+The transit side defines transit components and concavity components. The residence
+layer defines resident content and volume-bearing regions inside those components.
 The dry side defines dry components, dry interfaces, dry depth, and candidate
 dry motifs that may later support convexity, boundary, and mixed features.
 
@@ -75,66 +75,65 @@ permeability class.
 
 ### 2.4. DFND Decomposition
 
-DFND decomposes the finite transit graph into `TransitDomain` objects and then
-interprets them as `concavity_domains` after adding residence regions, external
-links, and metadata.
+DFND decomposes the finite transit graph into `Component` objects, then enriches
+each with its residence regions, external links, and metadata (the `wet_components`).
 
 ```text
 remove OCEAN from DFN
 compute connected components of the remaining finite transit graph
-each component is a TransitDomain
-interpret TransitDomain + ResidenceRegions as a concavity_domain
+each connected component is a Component
+enrich the Component with its ResidenceRegions and external links
 ```
 
 This is the core decomposition step of Delaunay Flow Network Decomposition.
 
 ### 2.5. External Links
 
-An `external_link` is the DFN-level contact between a `concavity_domain` and
+An `external_link` is the DFN-level contact between a `component` and
 `OCEAN`.
 
 It is a connected cluster of permeable boundary or hull contacts. A geometric
 `mouth` can be derived later from an `external_link`, but `mouth` is not the
-primitive used to classify domains.
+primitive used to classify components.
 
-### 2.6. Domain Motifs and Features
+### 2.6. Component Motifs and Features
 
-After primary decomposition, DFND can analyze internal domain motifs:
+After primary decomposition, DFND can analyze internal component motifs:
 
 - topological depth;
 - paths;
-- reduced domain graphs;
+- reduced component graphs;
 - throat candidates;
 - bottlenecks;
 - chamber candidates;
 - geometric mouth descriptors.
 
-These motifs do not change the primary domain family. They enrich the domain
+These motifs do not change the primary component family. They enrich the component
 and support later Topography features.
 
-A `ConcavityDomain` is derived from a transit graph object. A `DryComponent` is a dry graph
+A `Component` is derived from a transit graph object. A `DryComponent` is a dry graph
 object. A `ConcavityFeature`, `ConvexityFeature`, `BoundaryFeature`, or
 `MixedFeature` is an enriched Topography object derived later after adding
 metrics, atoms, residues, geometry, motifs, dynamics, and annotations.
 
-## 3. Primary Domain Families
+## 3. Primary Component Families
 
-DFND classifies finite transit domains by two independent axes.
+DFND classifies finite transit components by two independent axes.
 
 - Access: the number of direct external links to `OCEAN`.
-- Residence: whether the domain contains at least one resident node, i.e. a
+- Residence: whether the component contains at least one resident node, i.e. a
   tetrahedron where the full probe can reside.
 
 The v1 classifier is:
 
-| External links | Has residence | Raw domain label | Public interpretation |
+| External links | Has residence | Raw label | Public interpretation |
 |---:|---|---|---|
-| 0 | yes | `void_domain` | closed cavity where the probe fits |
-| 0 | no | `degenerate_subprobe_domain` | raw/filter label, not a public feature |
-| 1 | yes | `pocket_domain` | one-mouth resident concavity |
-| 1 | no | `surface_concavity_domain` | one-mouth non-resident surface contact/dent |
-| >=2 | yes | `multi_external_link_domain` | multi-mouth domain; `channel` is shorthand |
-| >=2 | no | `nonresident_passage_domain` | provisional raw label for pass-through contact |
+| 0 | yes | `void` | closed cavity where the probe fits |
+| 0 | no | `degenerate_subprobe` | raw/filter label, not a public feature |
+| 1 | yes | `pocket` | one-mouth resident concavity |
+| 1 | no | `surface_concavity` | one-mouth non-resident surface contact/dent |
+| >=2 | yes | `multi_external_link` | multi-mouth component; `channel` is shorthand |
+| >=2 | no | `nonresident_passage` | provisional raw label for pass-through contact |
 
 `wet_open` is retained as a quality descriptor, not as a family gate:
 
@@ -143,12 +142,12 @@ has_open_interior(D) = any resident node in D is wet_open
 ```
 
 This distinction matters because compact resident cells can be `wet_coast`: the
-probe fits in the room even when one or more windows are narrow. Such a domain
+probe fits in the room even when one or more windows are narrow. Such a component
 should still be classified as a pocket if it has one external link and
 residence.
 
 Public feature names may be simplified to `Void`, `SurfaceConcavity`, `Pocket`,
-and `Channel`, but raw records should preserve the domain-level provenance.
+and `Channel`, but raw records should preserve the component-level provenance.
 
 ## 4. Local Cell Semantics
 
@@ -185,10 +184,9 @@ labels do not create connectivity by themselves.
 
 A mature DFND run should be able to report:
 
-- `TransitDomain` records;
+- `Component` records;
 - `ResidenceRegion` records;
-- `ConcavityDomain` records;
-- domain family: void, surface concavity, pocket, or channel;
+- component family: void, surface concavity, pocket, or channel;
 - `ExternalLink` records;
 - `DryComponent` records;
 - `DryInterface` records;
@@ -196,7 +194,7 @@ A mature DFND run should be able to report:
 - derived mouth geometry when requested;
 - candidate rim, protrusion, ridge, wall, separator, lining, and dry-core motifs;
 - topological volume and other metrics;
-- atoms and residues supporting domains, links, and dry interfaces;
+- atoms and residues supporting components, links, and dry interfaces;
 - local wet/dry and open/coast/sealed labels;
 - topological depth and capacity profiles;
 - candidate motifs such as bottlenecks, throats, chambers, and paths;
@@ -211,15 +209,15 @@ DFND is designed to make molecular topography explicit and traceable:
 - exterior access is represented by `OCEAN` and `external_links`;
 - shallow exposed concavities are not forced to be pockets;
 - channels are defined by multiple external links, not by ad-hoc path guesses;
-- domain motifs can be derived after decomposition without changing the primary
-  domain family;
+- component motifs can be derived after decomposition without changing the primary
+  component family;
 - dynamic tracking can use atom-defined tetrahedra and faces rather than shape
   fitting alone;
 - dry topology can later be correlated with B-factors, RMSF, GNM/ANM modes,
   hinges, allosteric paths, and mutation-sensitive buried regions.
 
 This makes DFND suitable not only for static pocket detection, but also for
-trajectory analysis, cryptic-site tracking, channel gating, domain motif
+trajectory analysis, cryptic-site tracking, channel gating, component motif
 analysis, dry/wet boundary analysis, future pharmacophore annotation, and future
 mechanical coupling.
 
@@ -230,9 +228,9 @@ For the current abstract corpus, read:
 1. [`abstract_contract.md`](abstract_contract.md): object layers, invariants,
    pipeline, edge cases, and terminology boundaries.
 2. [`feature_definitions.md`](feature_definitions.md): DFN, external links,
-   concavity domains, and domain families.
-3. [`domain_motifs.md`](domain_motifs.md): depth, paths, motifs, reduced domain
-   graphs, and geometric realizations.
+   concavity components, and component families.
+3. [`component_motifs.md`](component_motifs.md): depth, paths, motifs, reduced
+   component graphs, and geometric realizations.
 4. [`dry_network_and_convexity.md`](dry_network_and_convexity.md): dry nodes, dry edges, dry components, dry interfaces, and candidate dry motifs.
 5. [`residence_transit_contract.md`](residence_transit_contract.md): separation of residence, transit, and contact.
 6. [`data_model_v1.md`](data_model_v1.md): minimal raw records and semantic feature boundary for the first implementation.

@@ -5,8 +5,8 @@ geometric review: DFND must separate probe residence, probe transit, and probe
 contact.
 
 > **Terminology.** A connected component of the transit graph is a `component`
-> (the legacy term "TransitDomain" is now `component`); its atoms are its
-> `domain`; the public object is a `feature`. See
+> (the legacy terms "TransitDomain" and "domain" are now `component`; its atoms are
+> its spatial representation); the public object is a `feature`. See
 > [`object_model.md`](object_model.md).
 
 The previous simplified reading treated wet tetrahedra as the only nodes of the
@@ -42,24 +42,31 @@ descriptor. They must not be collapsed into one state.
 ### 2.1. Residence State
 
 ```text
-resident(T)     = R_residence(T) >= R_probe
-non_resident(T) = R_residence(T) < R_probe
-marginal_residence(T) = abs(R_residence(T) - R_probe) <= eps
+resident(T)     = R_residence(T) >= R_probe - epsilon - residence_tolerance
+non_resident(T) = not resident(T)
+marginal_residence(T) = abs(R_residence(T) - R_probe) <= epsilon + residence_tolerance
 ```
 
-Under the conservative marginal policy, marginal residence is treated as
-non-resident for graph construction and flagged in raw records.
+Policy is **generous toward residence**. The numerical `epsilon` is applied in
+favour of resident, so the `>=` equality is robust to floating-point error.
+`residence_tolerance` (physical, default `0.0`, user-controllable) widens the
+threshold further to absorb structural flexibility / coordinate imprecision.
+Marginal tetrahedra (within the slack of the threshold) are counted resident but
+still flagged in raw records.
 
 ### 2.2. Face State
 
 ```text
-permeable(F)     = R_gate(F) >= R_probe
-non_permeable(F) = R_gate(F) < R_probe
-marginal_face(F) = abs(R_gate(F) - R_probe) <= eps
+permeable(F)     = R_gate(F) >= R_probe - epsilon - permeability_tolerance
+non_permeable(F) = not permeable(F)
+marginal_face(F) = abs(R_gate(F) - R_probe) <= epsilon + permeability_tolerance
 ```
 
-Under the conservative marginal policy, marginal faces are treated as
-non-permeable for graph construction and flagged in raw records.
+Policy is **generous toward permeability** (same rationale as residence): the
+numerical `epsilon` favours permeable, and `permeability_tolerance` (physical,
+default `0.0`, user-controllable) widens it further. Marginal faces are counted
+permeable but still flagged. Both tolerances are query parameters of
+`get_topography(...)` / `dfnd(...)` and are recorded in `raw['parameters']`.
 
 ### 2.3. Permeable Contacts
 
@@ -167,32 +174,43 @@ volume_topological_resident
 volume_solvent_estimate_resident
 ```
 
-## 7. Component
+## 7. Component and Feature Classification
 
-A `Component` is the topographic interpretation of one `Component`
-plus its resident content, external links, and metadata.
+A `component` bundles its resident content, external links, lining atoms, and
+volume metrics (its graph and spatial representations — there is no separate "domain"; see
+[`object_model.md`](object_model.md) §2). A `feature` is the public `Topography`
+object (Pocket, Void, Channel) derived from one or more components.
 
-The primary classifier must use two axes: access and residence.
+The primary classifier uses two axes (access and residence) plus an **enclosure
+override**.
 
 ```text
 access = n_external_links in {0, 1, >=2}
 has_residence = n_resident_nodes >= 1
 has_open_interior = any resident node is wet_open
+n_wall_faces = non-permeable boundary faces of the component (to OCEAN or another component)
 ```
+
+**Enclosure override (checked first):** a resident component with **`n_wall_faces == 0`**
+is fully permeable / exposed (porous) — not a concavity — and is classified
+`percolating`, regardless of access. (Mathematically such a component always has
+exactly one external link, but that is a consequence, not the criterion.) Voids
+always have walls (0 mouths => all boundary non-permeable), so they are never
+percolating. Otherwise the access × residence table applies:
 
 | Access | Residence | Raw label | v1 interpretation |
 |---:|---|---|---|
 | 0 | yes | `void` | closed resident cavity |
 | 0 | no | `degenerate_subprobe` | raw/filter label |
-| 1 | yes | `pocket` | one-mouth resident concavity |
+| 1 | yes | `pocket` | one-mouth resident concavity (with walls) |
 | 1 | no | `surface_concavity` | one-mouth non-resident contact/dent |
-| >=2 | yes | `multi_external_link` | multi-mouth resident domain; `channel` shorthand |
+| >=2 | yes | `multi_external_link` | multi-mouth resident component; `channel` shorthand |
 | >=2 | no | `nonresident_passage` | provisional pass-through contact |
+| any | yes, **0 walls** | `percolating` | fully permeable/exposed resident region (shape_type `neutral`) |
 
-`has_open_interior` is a descriptor, not the family gate. The graph substrate must no longer be restricted to resident nodes only.
-The exact `surface_concavity` and pocket boundary remains a validation
-item, but the graph substrate should no longer be restricted to resident nodes
-only.
+`has_open_interior` is a descriptor, not the family gate. The graph substrate
+must no longer be restricted to resident nodes only. The exact
+`surface_concavity` and pocket boundary remains a validation item.
 
 ## 8. Dry Components After Transit Separation
 
@@ -207,7 +225,7 @@ non_resident non_transit nodes
 non_resident transit_connector nodes
 ```
 
-`transit_connector` nodes may appear both in transit-domain provenance and in
+`transit_connector` nodes may appear both in transit-component provenance and in
 dry diagnostics. They should be marked clearly so that dry components do not
 hide movement connectivity.
 

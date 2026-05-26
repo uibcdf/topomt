@@ -48,13 +48,13 @@ ten unrelated problems.
 |---|---|---|---|---|
 | L0.1 | Input chemistry / radii / preprocessing controls the geometry | Input policy | new | mitigate |
 | L1.0 | Cell complex is a skeleton of `S`, not `S` | Discretization | WP1 | flag |
-| L1.1 | `nonresident_passage_domain` physically ambiguous | Discretization | WP1 | flag |
+| L1.1 | `nonresident_passage` physically ambiguous | Discretization | WP1 | flag |
 | L1.2 | Gate connectivity over-connects via slivers | Discretization | WP1 + WP2 | flag + mitigate |
 | L1.3 | Nested concavities / single-scale `OCEAN` | Discretization | WP3 | defer |
 | L2.1 | `R_gate` locality, active-set branches, and external-atom intrusion | Primitive geometry | WP2 + new | mitigate + flag |
 | L2.1b | `R_residence` active-set completeness and degeneracy | Primitive geometry | new | mitigate |
 | L2.2 | Delaunay non-uniqueness / stability | Primitive geometry | WP4 | flag |
-| L3.1 | `surface_concavity_domain` is a negation-defined catch-all | Classification | new | flag / provisional |
+| L3.1 | `surface_concavity` is a negation-defined catch-all | Classification | new | flag / provisional |
 | L3.2 | `has_residence` may be too lax | Classification | new | mitigate (report filters) |
 | L4.1 | `external_link` clustering policy is decisive | Access / links | WP3 | mitigate (tests) |
 | L5.1 | Physical solvent volume is a critical debt | Metrics | new | mitigate (v1) |
@@ -103,9 +103,9 @@ ten unrelated problems.
   discretization error in connectivity and volume.
 - **Origin.** WP1 (umbrella).
 
-### L1.1 — `nonresident_passage_domain` is physically ambiguous
+### L1.1 — `nonresident_passage` is physically ambiguous
 
-- **Statement.** A domain of non-resident transit connectors (>= 2 links, no
+- **Statement.** A component of non-resident transit connectors (>= 2 links, no
   residence) describes a region the probe center may thread through gates but
   cannot reside in. If no cell can host the center with clearance, this may be a
   geometric contact rather than a stable physical passage. The real question is
@@ -124,34 +124,34 @@ ten unrelated problems.
 ### L1.2 — Gate connectivity can over-connect via slivers
 
 - **Statement.** Accepting non-resident transit connectors as bridges avoids
-  artificially cutting pockets, but can create the opposite problem: domains
+  artificially cutting pockets, but can create the opposite problem: components
   joined by extremely thin or numerically unstable passages. This is a
   precision/recall trade-off, not a bug in either model. (Historical note: the
   wet-only graph under-connects; it was a conservative choice, not an error.)
-- **Why it matters.** Spurious merges change domain identity and family counts
+- **Why it matters.** Spurious merges change component identity and family counts
   as much as spurious splits do.
 - **v1 policy.** `flag` + `mitigate`. Mark transit-connector edges as heuristic.
-  Compute and report a minimum path capacity / bottleneck per domain so thin
+  Compute and report a minimum path capacity / bottleneck per component so thin
   bridges are visible and can be filtered downstream. Coupled with L2.1: the
   slivers that over-connect here are exactly where the gate is least reliable.
 - **Validation hook.** Adversarial sliver-bridge toy; bottleneck metric on the
-  merged vs. unmerged domains.
+  merged vs. unmerged components.
 - **Origin.** WP1 + WP2.
 
 ### L1.3 — Nested concavities and single-scale `OCEAN`
 
 - **Statement.** With `sea_level = R_probe`, a pocket at the bottom of a wide
-  bowl that also admits the probe merges with the bowl into one domain. The
+  bowl that also admits the probe merges with the bowl into one component. The
   topographic hierarchy (sub-pocket inside a larger concavity) is not
   represented in v1. This is the dual of over-segmentation: large concave
   regions can be under-segmented.
 - **Why it matters.** Real surfaces are hierarchical; flattening them can hide
   functionally distinct sub-sites.
 - **v1 policy.** `defer`. Separating nested features needs depth/motif analysis
-  ([`domain_motifs.md`](domain_motifs.md)) or a macro-surface mode. State
+  ([`component_motifs.md`](component_motifs.md)) or a macro-surface mode. State
   explicitly that v1 does not hierarchize.
 - **Validation hook.** Toy with a small pocket inside a shallow bowl; document
-  that v1 reports one domain.
+  that v1 reports one component.
 - **Origin.** WP3 (scale/nesting half).
 
 ---
@@ -182,7 +182,7 @@ ten unrelated problems.
 ### L2.1b — `R_residence` active-set completeness and degeneracy
 
 - **Statement.** The current DFND implementation treats four-atom tangency as an interior candidate and also evaluates face- and edge-limited active-set candidates. This is the correct direction, but near-degenerate tetrahedra can still stress candidate enumeration, validation, and numerical tolerance choices.
-- **Why it matters.** Residence is part of the primary access x residence classifier. Underestimating residence can demote pockets, voids, or multi-link domains into non-resident families; overestimating residence can promote sliver contacts into resident features.
+- **Why it matters.** Residence is part of the primary access x residence classifier. Underestimating residence can demote pockets, voids, or multi-link components into non-resident families; overestimating residence can promote sliver contacts into resident features.
 - **v1 policy.** `mitigate`. Use active-set `R_residence` as the residence primitive, retain `R_apollonius4` only as a diagnostic field, and keep the detailed rationale in [`residence_radius_audit.md`](residence_radius_audit.md).
 - **Validation hook.** Maintain residence active-set toys covering interior4, face-limited, edge-limited, invalid four-atom candidate, and comparison with CASTp tetrahedron `rho`.
 - **Origin.** new.
@@ -191,21 +191,21 @@ ten unrelated problems.
 
 - **Statement.** Under cosphericity (common in regular protein arrangements) the
   Delaunay triangulation is not unique. A tiny coordinate perturbation can flip
-  tetrahedra and change domains and link counts. The method is built on the
+  tetrahedra and change components and link counts. The method is built on the
   specific triangulation, and atom-quadruplet identities assume it is stable.
 - **Why it matters.** Output reproducibility and dynamic identity across frames
   depend on triangulation stability.
 - **v1 policy.** `flag`. Record the triangulation backend/options; surface
   near-degenerate simplices in raw diagnostics.
 - **Validation hook.** Stability toy: a symmetric arrangement, perturbed, with an
-  assertion on family/domain stability (or a documented sensitivity bound).
+  assertion on family/component stability (or a documented sensitivity bound).
 - **Origin.** WP4.
 
 ---
 
 ## 3. Classification Layer
 
-### L3.1 — `surface_concavity_domain` is a negation-defined catch-all
+### L3.1 — `surface_concavity` is a negation-defined catch-all
 
 - **Statement.** It is the only family defined by negation (accessible, no
   residence). Negation classes are inherently heterogeneous: surface noise,
@@ -224,15 +224,16 @@ ten unrelated problems.
 
 ### L3.2 — `has_residence` may be too lax
 
-- **Statement.** A single marginally resident tetrahedron can turn a whole domain
+- **Statement.** A single marginally resident tetrahedron can turn a whole component
   into a pocket/channel. Conceptually fine for primary topological
   classification, but weak for public reporting.
 - **Why it matters.** Trivial one-cell "pockets" would flood the output and
   weaken credibility.
-- **Mitigating context.** The conservative marginal policy already treats a tetra
-  exactly at threshold (`|R_residence - R_probe| <= eps`) as non-resident, so the
-  knife-edge case is covered. What remains uncovered is the clearly-resident but
-  tiny (single-node) case.
+- **Mitigating context.** The marginal policy is now **generous** (a tetra at the
+  threshold counts as resident; `residence_tolerance` can widen it further), so
+  the knife-edge no longer auto-excludes — the trivial one-cell case is **not**
+  mitigated by the threshold policy. It must be handled downstream by `min_size`
+  / persistence filtering instead.
 - **v1 policy.** `mitigate`. Keep classification topological/binary; add
   secondary report filters (minimum resident volume, margin over probe radius,
   minimum resident-node count, epsilon stability). Principle: classification is
@@ -267,7 +268,7 @@ ten unrelated problems.
 
 - **Statement.** `volume_topological` includes atom-occupied portions and is not
   a physical pocket volume. To compare with the community, it is insufficient.
-- **Why it matters.** Without a physical volume, DFND can classify domains but
+- **Why it matters.** Without a physical volume, DFND can classify components but
   its headline metric is weak against CASTp/fpocket from day one.
 - **Feasibility.** `volume_solvent_estimate` per tetra = tetra volume minus the
   sum of (atom sphere intersected with the tetra). Sphere-tetrahedron

@@ -19,7 +19,7 @@ DFND is uniquely suited to detect cryptic pockets (sites that open only upon dyn
 
 ### 1.3. Channels and Tunnels
 For enzymes with buried active sites (e.g., Cytochrome P450), the path to the surface is critical.
-*   **Interpretation:** DFND identifies multi-opening transit domains as finite transit domains with two or more external links to `OCEAN`; channel, tunnel, or pore labels require later path and morphology analysis.
+*   **Interpretation:** DFND identifies multi-opening transit components as finite transit components with two or more external links to `OCEAN`; channel, tunnel, or pore labels require later path and morphology analysis.
 *   **Metrics:** The "Bottleneck Radius" of the channel is simply the minimum $R_{gate}$ along the path. The "Channel Profile" is the sequence of $R_{residence}$ and $R_{gate}$ values along paths between external-link regions.
 
 ---

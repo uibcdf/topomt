@@ -56,17 +56,17 @@ OCEAN), but whose multi-body lining marks it an interface.
 DFND needs **no new substrate family**. The interface is *derived* from records
 `get_topography` already returns:
 
-> A wet `concavity_domain` is an **interface region** when its `atom_indices`
+> A wet `component` is an **interface region** when its `atom_indices`
 > (its lining) receive a substantial contribution from **≥2 distinct bodies**.
 
 The pieces are all present:
-- `concavity_domain['atom_indices']` — the lining atoms of each wet domain;
+- `component['atom_indices']` — the lining atoms of each wet component;
 - `dry['components']` — the dry banks (and their atoms/tetrahedra);
 - `dry_interfaces[...]['target_dry_component_id']` — which two banks touch.
 
-A buried interface cavity is a `pocket`/`void` domain whose lining spans two
+A buried interface cavity is a `pocket`/`void` component whose lining spans two
 banks; a bare interface (e.g. two flat blocks across an open slab) has no bounded
-wet domain at all — it is captured purely by the dry banks facing each other.
+wet component at all — it is captured purely by the dry banks facing each other.
 
 ## 4. The body-definition question (decisive)
 
@@ -117,12 +117,12 @@ touch the `R_residence` / `R_gate` substrate). Tests:
 
 - `body_labels_from_dry_components(topography, n_atoms)` — native route: assign
   each atom to its dry bank (largest component wins shared atoms).
-- `classify_interface_domains(domains, body_labels, ...)` — tag each wet domain
+- `classify_interface_components(components, body_labels, ...)` — tag each wet component
   with `n_lining_bodies`, the per-body `lining_body_split`, `minority_fraction`,
   and `is_interface` / `interface_family` (interface_void / interface_pocket /
   interface_channelway / bare_interface).
 - `annotate_interfaces(topography, n_atoms, body_labels=None)` — convenience
-  wrapper returning only interface domains; derives bodies from the dry network
+  wrapper returning only interface components; derives bodies from the dry network
   when `body_labels` is None, or accepts explicit chain-like labels.
 
 Validated on the synthetic battery: the native route flags the wet gap of two
@@ -134,8 +134,8 @@ section 4 analysis end to end.
 
 ## 7. Still to build (full feature layer)
 
-The prototype classifies domains; promoting them to first-class `Topography`
+The prototype classifies components; promoting them to first-class `Topography`
 features (roadmap Priority 2) still needs: ingesting input chain/`molecule`
 labels as a body source, carrying bank ids + lining split onto `Interface`
-feature objects, and realizing the **bare** interface (no wet domain) from the
+feature objects, and realizing the **bare** interface (no wet component) from the
 `dry_permeable_contact` faces between two banks (area, normal, `R_gate`).

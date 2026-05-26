@@ -46,7 +46,12 @@ from .integration import (
 )
 from .panels import TopoMTTopographyPanel, TopoMTPocketsPanel
 from .payloads import feature_record_from_feature, topography_payload
-from .render import render_topography_pockets, render_dfnd_tetrahedra
+from .render import (
+    render_topography_pockets,
+    render_dfnd_tetrahedra,
+    render_dfn_graph,
+    render_dfn_dry_components,
+)
 from .runtime import TopoMTAddonRuntime, ensure_runtime, record_event
 from .standalone import build_topography_standalone0_html, launch_topography_standalone0
 
@@ -74,6 +79,8 @@ __all__ = [
     "topography_payload",
     "render_topography_pockets",
     "render_dfnd_tetrahedra",
+    "render_dfn_graph",
+    "render_dfn_dry_components",
     "build_topography_standalone0_html",
     "launch_topography_standalone0",
 ]

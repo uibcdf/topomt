@@ -37,43 +37,42 @@ DFND separates objects by layer.
 
 ### 1.4. Decomposition Layer
 
-- `TransitDomain`: connected component after removing `OCEAN` and its incident
-  edges from the transit graph.
-- `ResidenceRegion`: resident-node subset inside one `TransitDomain`.
-- `ConcavityDomain`: topographic interpretation of a `TransitDomain`, its
-  residence regions, external links, and metadata.
+- `Component`: connected component after removing `OCEAN` and its incident
+  edges from the transit graph, enriched with its residence regions, external
+  links, and metadata (its topographic interpretation).
+- `ResidenceRegion`: resident-node subset inside one `Component`.
 - `ExternalLink`: connected cluster of external contacts between one
-  `ConcavityDomain` and `OCEAN`.
+  `Component` and `OCEAN`.
 
 ### 1.5. Dry Layer
 
 - `DryNode`: finite dry tetrahedron where the probe cannot reside.
 - `DryEdge`: connection between two dry nodes through a non-permeable face.
 - `DryComponent`: connected component of the dry graph.
-- `DryInterface`: contact record between a dry component and wet domains,
+- `DryInterface`: contact record between a dry component and wet components,
   external links, `OCEAN`, or the hull/exterior context.
 
 ### 1.6. Motif Layer
 
-- `DomainMotif`: derived internal structure inside or around a
-  `ConcavityDomain`.
+- `Motif`: derived internal structure inside or around a
+  `Component`.
 - `DryMotif`: candidate motif derived from dry components and dry interfaces.
-- `ReducedDomainGraph`: graph produced by domain lumping.
-- `DomainMotifGraph`: semantically annotated reduced graph for paths and
+- `ReducedComponentGraph`: graph produced by component lumping.
+- `ComponentMotifGraph`: semantically annotated reduced graph for paths and
   motifs.
 
 ### 1.7. Topography Layer
 
 - `TopographyFeature`: general semantic output object.
 - `ConcavityFeature`: enriched Topography object derived from a
-  `ConcavityDomain`.
+  `Component`.
 - `ConvexityFeature`: future enriched object derived mainly from dry motifs.
 - `BoundaryFeature`: future enriched object derived from boundary or interface
   descriptors such as mouths, rims, or necks.
 - `MixedFeature`: future enriched object for walls, separators, lining regions,
   and other features that are neither purely concave nor purely convex.
 - `Void`, `SurfaceConcavity`, `Pocket`, and `Channel`: public feature families
-  derived from the corresponding domain families.
+  derived from the corresponding component families.
 - `Mouth`: geometric descriptor derived from an `ExternalLink`, not a primary
   DFND decomposition object.
 
@@ -88,11 +87,10 @@ molecular system
 -> R_residence and R_gate
 -> residence, face, and transit states
 -> transit graph and dry graph
--> TransitDomain and ResidenceRegion decomposition
--> ConcavityDomain interpretation
+-> Component and ResidenceRegion decomposition
 -> ExternalLink clustering
 -> DryComponent and DryInterface extraction
--> domain and dry motif analysis
+-> component and dry motif analysis
 -> geometric realization
 -> Topography features
 ```
@@ -100,17 +98,16 @@ molecular system
 The primary decomposition must happen before motif analysis and before feature
 annotation.
 
-## 3. Canonical Domain Families
+## 3. Canonical Component Families
 
 Remove `OCEAN` and its incident edges from the transit graph. Each connected
-component of the remaining finite transit graph is a `TransitDomain`. A
-`ConcavityDomain` is the topographic interpretation of a `TransitDomain` plus
-its residence regions and external links.
+component of the remaining finite transit graph is a `Component`, interpreted
+topographically together with its residence regions and external links.
 
 Let:
 
 ```text
-L(D) = number of external links from domain D to OCEAN
+L(D) = number of external links from component D to OCEAN
 has_residence(D) = n_resident_nodes(D) >= 1
 has_open_interior(D) = any resident node in D has local class wet_open
 ```
@@ -118,25 +115,25 @@ has_open_interior(D) = any resident node in D has local class wet_open
 The primary family classifier uses `L(D) x has_residence(D)`:
 
 ```text
-void_domain(D) = L(D) == 0 and has_residence(D)
-degenerate_subprobe_domain(D) = L(D) == 0 and not has_residence(D)
+void(D) = L(D) == 0 and has_residence(D)
+degenerate_subprobe(D) = L(D) == 0 and not has_residence(D)
 
-surface_concavity_domain(D) = L(D) == 1 and not has_residence(D)
-pocket_domain(D) = L(D) == 1 and has_residence(D)
+surface_concavity(D) = L(D) == 1 and not has_residence(D)
+pocket(D) = L(D) == 1 and has_residence(D)
 
-nonresident_passage_domain(D) = L(D) >= 2 and not has_residence(D)
-multi_external_link_domain(D) = L(D) >= 2 and has_residence(D)
+nonresident_passage(D) = L(D) >= 2 and not has_residence(D)
+multi_external_link(D) = L(D) >= 2 and has_residence(D)
 ```
 
-`degenerate_subprobe_domain` and `nonresident_passage_domain` are raw/reporting
+`degenerate_subprobe` and `nonresident_passage` are raw/reporting
 labels in v1, not promoted biological feature names. `channel` may be used as a
-convenient public shorthand for a resident `multi_external_link_domain`, but the
+convenient public shorthand for a resident `multi_external_link`, but the
 raw topological label should remain explicit.
 
 `has_open_interior(D)` must be reported as a descriptor because it captures how
 open the resident part is, but it must not decide the family.
 
-The domain family is determined before morphology, dynamics, function, or motif
+The component family is determined before morphology, dynamics, function, or motif
 analysis.
 
 ## 4. Raw Objects to Features
@@ -145,20 +142,16 @@ Raw DFND objects are graph or interface objects. Features are enriched
 topographic objects.
 
 ```text
-TransitDomain
+Component
     transit nodes
     transit edges
     external links
+    residence regions
+    family
 
 ResidenceRegion
     resident nodes
     resident volume metrics
-
-ConcavityDomain
-    transit domain
-    residence regions
-    external links
-    domain family
 
 DryComponent
     dry nodes
@@ -168,7 +161,7 @@ DryComponent
     dry interface signatures
 
 ConcavityFeature
-    domain
+    component
     atoms and residues
     metrics
     geometric realizations
@@ -189,11 +182,11 @@ ConvexityFeature / BoundaryFeature / MixedFeature
 ```
 
 The public API may expose simplified feature objects, but raw records must
-preserve domain-level, dry-component-level, and interface-level provenance.
+preserve component-level, dry-component-level, and interface-level provenance.
 
 ## 5. Mouth Status
 
-`Mouth` is not a primitive for primary domain classification.
+`Mouth` is not a primitive for primary component classification.
 
 ```text
 ExternalLink = DFN primitive
@@ -205,7 +198,7 @@ Possible API choices:
 - expose `ExternalLink` as the primary record and derive `Mouth` when geometry
   is requested;
 - expose `Mouth` as a descriptor object attached to an `ExternalLink`;
-- keep `Mouth` as a compatibility alias only after the domain semantics are
+- keep `Mouth` as a compatibility alias only after the component semantics are
   stable.
 
 The first implementation should prioritize `ExternalLink` records.
@@ -226,13 +219,13 @@ Only `gate` is canonical at the geometric primitive level. `bottleneck` and
 
 ## 7. Chamber Status
 
-`Chamber` is not a primary domain family.
+`Chamber` is not a primary component family.
 
 Current status:
 
 ```text
 chamber_candidate = deeper, relatively high-habitability region derived after
-                    domain lumping or capacity analysis
+                    component lumping or capacity analysis
 ```
 
 A chamber becomes canonical only after scoring and stability rules are defined.
@@ -261,9 +254,9 @@ The first dry-network contract is defined in [`dry_network_and_convexity.md`](dr
 - marginal-contact flags;
 - derived mouth descriptors when requested.
 
-### 8.3. ConcavityDomain Metrics
+### 8.3. Component Metrics
 
-- domain family;
+- component family;
 - node and edge counts;
 - topological volume;
 - atom and residue ownership;
@@ -272,7 +265,7 @@ The first dry-network contract is defined in [`dry_network_and_convexity.md`](dr
 - capacity profiles;
 - confidence flags.
 
-### 8.4. DomainMotif Metrics
+### 8.4. Motif Metrics
 
 - supporting nodes and edges;
 - supporting faces;
@@ -287,7 +280,7 @@ The first dry-network contract is defined in [`dry_network_and_convexity.md`](dr
 - dry node and edge counts;
 - dry interface ids;
 - minimum, mean, and maximum `dry_depth`;
-- adjacent concavity domain ids;
+- adjacent concavity component ids;
 - adjacent external link ids;
 - OCEAN exposure descriptors;
 - local class composition;
@@ -295,7 +288,7 @@ The first dry-network contract is defined in [`dry_network_and_convexity.md`](dr
 
 ### 8.6. TopographyFeature Metrics
 
-- domain or dry-motif metrics;
+- component or dry-motif metrics;
 - geometric metrics;
 - derived mouth or rim geometry;
 - morphology descriptors;
@@ -320,12 +313,12 @@ Flags should be additive, not mutually exclusive.
 
 ## 10. Edge Cases
 
-### 10.1. Wet-Sealed Domains
+### 10.1. Wet-Sealed Components
 
 A `wet_sealed` node is resident and has no permeable finite faces. Under the v1 local DFN contract it cannot have direct external links and cannot participate in an accessible transit path.
 
 ```text
-wet_sealed + zero external links -> void_domain singleton
+wet_sealed + zero external links -> void singleton
 wet_sealed + external links -> invalid state under v1 local rules
 ```
 
@@ -339,9 +332,9 @@ one permeable contact, they are `terminal_contact` records. They should be
 retained in raw diagnostics because they can mark thin passages, contact-only
 regions, or numerical edge cases.
 
-### 10.3. Tiny Domains
+### 10.3. Tiny Components
 
-One-node and near-zero-volume domains should not be silently discarded by core
+One-node and near-zero-volume components should not be silently discarded by core
 classification. They should be emitted with size and confidence flags. Filtering
 is a reporting policy, not a decomposition rule.
 
@@ -365,9 +358,9 @@ Recommended identities:
 
 - tetrahedron id: sorted atom quadruplet;
 - face id: sorted atom triplet;
-- domain id: stable hash of sorted tetrahedron ids plus frame/context;
-- external-link id: stable hash of sorted boundary face ids plus domain id;
-- motif id: stable hash of supporting domain id, node ids, edge ids, and motif
+- component id: stable hash of sorted tetrahedron ids plus frame/context;
+- external-link id: stable hash of sorted boundary face ids plus component id;
+- motif id: stable hash of supporting component id, node ids, edge ids, and motif
   type.
 
 Dynamic identity should be based on overlap and persistence:
@@ -386,8 +379,8 @@ Rules:
 
 - `OCEAN` is wet by definition;
 - `OCEAN` has no `R_residence`, volume, or local permeability class;
-- `OCEAN` is removed before `ConcavityDomain` decomposition;
-- all external links connect exactly one domain to `OCEAN`;
+- `OCEAN` is removed before `Component` decomposition;
+- all external links connect exactly one component to `OCEAN`;
 - multi-fragment systems initially share the same `OCEAN` unless a future
   policy explicitly creates fragment-specific exterior contexts.
 
@@ -399,11 +392,11 @@ Tolerances must be attached to the objects they affect.
 - permeable/non-permeable: `R_gate` versus `probe_radius`;
 - external-link clustering: marginal boundary faces and face-connectivity
   policy;
-- domain family: `n_external_links` and wet-open presence after marginal
+- component family: `n_external_links` and wet-open presence after marginal
   resolution;
 - motif candidates: capacity, depth, and persistence scores.
 
-No hidden tolerance should silently change a domain family without appearing in
+No hidden tolerance should silently change a component family without appearing in
 raw diagnostics.
 
 ## 14. Invariants
@@ -413,37 +406,37 @@ Every implementation must preserve these invariants:
 - `OCEAN` has no volume.
 - `OCEAN` is not a Delaunay tetrahedron.
 - `OCEAN` is wet by definition.
-- `ConcavityDomain` objects never include `OCEAN`.
-- Every finite transit node belongs to exactly one `TransitDomain`.
-- Every `ExternalLink` belongs to exactly one `ConcavityDomain`.
+- `Component` objects never include `OCEAN`.
+- Every finite transit node belongs to exactly one `Component`.
+- Every `ExternalLink` belongs to exactly one `Component`.
 - A single connected exterior opening should be one `ExternalLink`, not one per
   boundary face.
 - `Mouth` descriptors derive from `ExternalLink` objects.
 - Every dry node belongs to exactly one `DryComponent` under the selected dry-connectivity policy.
-- `DryInterface` records preserve adjacency between dry components and wet domains, external links, `OCEAN`, or hull context.
-- `DryMotif` descriptors do not change concavity-domain classification.
+- `DryInterface` records preserve adjacency between dry components and wet components, external links, `OCEAN`, or hull context.
+- `DryMotif` descriptors do not change concavity-component classification.
 - Transit connectors contribute to movement connectivity but not to resident volume.
-- Domain family is determined before motif analysis.
-- Domain lumping must not change the primary domain family.
-- Filtering tiny domains is a reporting step, not a decomposition step.
+- Component family is determined before motif analysis.
+- Component lumping must not change the primary component family.
+- Filtering tiny components is a reporting step, not a decomposition step.
 - Raw records must preserve marginal and degenerate decisions.
 
 ## 15. Community Terminology
 
 DFND keeps common terms where their meaning is stable:
 
-- `void`: enclosed inaccessible domain;
-- `pocket`: accessible domain with one external link and an interior wet-open
+- `void`: enclosed inaccessible component;
+- `pocket`: accessible component with one external link and an interior wet-open
   region;
-- `channel`: public shorthand for an accessible multi-external-link domain;
+- `channel`: public shorthand for an accessible multi-external-link component;
   tunnel or pore interpretation requires extra morphology/path evidence.
 
-DFND keeps `surface_concavity_domain` as a provisional family for exposed
-domains without a wet-open interior. This avoids prematurely calling every
+DFND keeps `surface_concavity` as a provisional family for exposed
+components without a wet-open interior. This avoids prematurely calling every
 shallow coastal depression a pocket, but the family must be validated with toy
 systems or geometric sweeps before it is treated as strongly canonical.
 
 DFND avoids `cavity` as a hypernym because the community often uses cavity for
-buried inaccessible cavities. The method uses `concavity_domain` at the
+buried inaccessible cavities. The method uses `component` at the
 network-decomposition layer and `concavity_feature` only for enriched
 Topography objects.

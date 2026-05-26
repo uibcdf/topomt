@@ -3,7 +3,7 @@ from typing import Any
 from .graph import DelaunayFlowNetwork
 from .data import DFNDData
 from .. import pyunitwizard as puw
-from ..features import Channel, Mouth, Pocket, Void
+from ..features import Channel, Mouth, Percolating, Pocket, Void
 from ..topography.Topography import Topography
 
 
@@ -11,7 +11,13 @@ _FEATURE_CLASS_BY_FAMILY = {
     'pockets': Pocket,
     'voids': Void,
     'channels': Channel,
+    'percolatings': Percolating,
 }
+
+# Families whose external links are promoted to child Mouth features. Voids have
+# no mouths; percolating regions are fully open (their single external link is the
+# whole boundary, not a real mouth), so neither gets Mouth children.
+_FAMILIES_WITH_MOUTHS = {'pockets', 'channels'}
 
 
 def _as_angstrom_float(value) -> float:
@@ -21,7 +27,7 @@ def _as_angstrom_float(value) -> float:
         return float(value)
 
 
-def _feature_from_domain_record(record: dict[str, Any], feature_class, source: str = 'dfnd'):
+def _feature_from_component_record(record: dict[str, Any], feature_class, source: str = 'dfnd'):
     feature = feature_class(
         atom_indices=record['atom_indices'],
         source=source,
@@ -63,6 +69,8 @@ def _run_dfnd(
     radii_model: str,
     transit_policy: str,
     gate_intrusion_policy: str,
+    residence_tolerance: float,
+    permeability_tolerance: float,
 ) -> tuple[DelaunayFlowNetwork, dict[str, Any]]:
     """Build the network and run the decomposition. Shared by the public entry points."""
     network = DelaunayFlowNetwork(
@@ -79,6 +87,8 @@ def _run_dfnd(
         min_size=min_size,
         transit_policy=transit_policy,
         gate_intrusion_policy=gate_intrusion_policy,
+        residence_tolerance=residence_tolerance,
+        permeability_tolerance=permeability_tolerance,
     )
     return network, result
 
@@ -95,8 +105,10 @@ def dfnd_to_topography(
     radii_model: str = 'vdw',
     transit_policy: str = 'with_connectors',
     gate_intrusion_policy: str = 'flag_only',
+    residence_tolerance: float = 0.0,
+    permeability_tolerance: float = 0.0,
 ) -> Topography:
-    """Run DFND and promote compatibility domains into a ``Topography`` object.
+    """Run DFND and promote compatibility components into a ``Topography`` object.
 
     All DFND substrate (mesh, network, components) is attached to the single
     ``topography.dfnd`` object (see ``devguide/DFND/object_model.md``); the public
@@ -106,7 +118,7 @@ def dfnd_to_topography(
     network, result = _run_dfnd(
         molecular_system, selection, structure_indices, probe_radius, sea_level,
         min_size, epsilon, hydrogen_policy, radii_model, transit_policy,
-        gate_intrusion_policy,
+        gate_intrusion_policy, residence_tolerance, permeability_tolerance,
     )
     topography = Topography(
         molecular_system=molecular_system,
@@ -115,15 +127,17 @@ def dfnd_to_topography(
     )
     topography.dfnd = DFNDData(network, result)
 
-    # Promote each wet domain to a concavity feature, and each of its mouth motifs
+    # Promote each wet component to a concavity feature, and each of its mouth motifs
     # (external links) to a child Mouth feature. Provenance: feature.component_id /
     # source_id point back to the dfnd component. See object_model.md sections 7.
     for family_key, feature_class in _FEATURE_CLASS_BY_FAMILY.items():
         for record in result['wet'][family_key]:
-            feature = _feature_from_domain_record(record, feature_class)
+            feature = _feature_from_component_record(record, feature_class)
             feature.component_id = f"WET-{record['id']}"
             feature.source_id = feature.component_id
             topography.add_feature(feature)
+            if family_key not in _FAMILIES_WITH_MOUTHS:
+                continue
             for link in record['mouths']:
                 mouth = Mouth(
                     atom_indices=list(link['atom_indices']),
@@ -151,25 +165,31 @@ def dfnd(
     radii_model: str = 'vdw',
     transit_policy: str = 'with_connectors',
     gate_intrusion_policy: str = 'flag_only',
+    residence_tolerance: float = 0.0,
+    permeability_tolerance: float = 0.0,
 ) -> dict[str, dict[str, Any]]:
     """Run the DFND topography decomposition (raw-first dictionary)."""
     _network, raw_topography = _run_dfnd(
         molecular_system, selection, structure_indices, probe_radius, sea_level,
         min_size, epsilon, hydrogen_policy, radii_model, transit_policy,
-        gate_intrusion_policy,
+        gate_intrusion_policy, residence_tolerance, permeability_tolerance,
     )
 
     pockets = [
-        _feature_from_domain_record(pocket_data, Pocket)
+        _feature_from_component_record(pocket_data, Pocket)
         for pocket_data in raw_topography['wet']['pockets']
     ]
     voids = [
-        _feature_from_domain_record(void_data, Void)
+        _feature_from_component_record(void_data, Void)
         for void_data in raw_topography['wet']['voids']
     ]
     channels = [
-        _feature_from_domain_record(channel_data, Channel)
+        _feature_from_component_record(channel_data, Channel)
         for channel_data in raw_topography['wet']['channels']
+    ]
+    percolatings = [
+        _feature_from_component_record(percolating_data, Percolating)
+        for percolating_data in raw_topography['wet']['percolatings']
     ]
 
     return {
@@ -178,6 +198,7 @@ def dfnd(
             'pockets': pockets,
             'voids': voids,
             'channels': channels,
+            'percolatings': percolatings,
             'surface_concavities': raw_topography['wet']['surface_concavities'],
             'nonresident_passages': raw_topography['wet']['nonresident_passages'],
             'degenerate_subprobes': raw_topography['wet'][

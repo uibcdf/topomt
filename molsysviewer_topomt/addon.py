@@ -6,19 +6,56 @@ from .runtime import ensure_runtime, record_event
 def on_enable(view) -> None:
     runtime = ensure_runtime(view)
     runtime.enabled = True
-    record_event(view, "enable", workspace=runtime.workspace)
+    record_event(view, 'enable', workspace=runtime.workspace)
 
 
 def on_disable(view) -> None:
     runtime = ensure_runtime(view)
     runtime.enabled = False
-    record_event(view, "disable", workspace=runtime.workspace)
+    record_event(view, 'disable', workspace=runtime.workspace)
 
 
 def on_context_action(view, action_id: str, payload: dict) -> None:
     runtime = ensure_runtime(view)
-    runtime.last_context_action = {"action_id": action_id, "payload": dict(payload)}
-    record_event(view, "context_action", action_id=action_id)
+    runtime.last_context_action = {'action_id': action_id, 'payload': dict(payload)}
+    record_event(view, 'context_action', action_id=action_id)
+
+    if action_id == 'dfnd-tetrahedron-info':
+        import re
+
+        tetra_ids = []
+
+        def collect_tetrahedron_ids(label: str) -> None:
+            for match in re.finditer(r'Tetrahedron\s+(\d+)', label):
+                tid = int(match.group(1))
+                if tid not in tetra_ids:
+                    tetra_ids.append(tid)
+            face_match = re.search(r'tetrahedra\s+(\d+)-(\d+|OCEAN|unknown)', label)
+            if face_match:
+                for value in face_match.groups():
+                    if value.isdigit():
+                        tid = int(value)
+                        if tid not in tetra_ids:
+                            tetra_ids.append(tid)
+
+        # 1. Check right-clicked/hovered shape label.
+        context = payload.get('context', {})
+        collect_tetrahedron_ids(context.get('shape_name', ''))
+
+        # 2. Also check selected shape items.
+        if hasattr(view, 'active_selection') and view.active_selection:
+            try:
+                for item in view.active_selection.items:
+                    if item.get('source_kind') != 'shape':
+                        continue
+                    collect_tetrahedron_ids(item.get('shape_name', ''))
+            except Exception:
+                pass
+
+        if tetra_ids:
+            topo = getattr(runtime, 'topography', None)
+            if topo is not None and getattr(topo, 'dfnd', None) is not None:
+                topo.dfnd.info(tetra_ids)
 
 
 _addon_instance = None
@@ -51,91 +88,99 @@ def get_addon():
         AddonPanelSpec,
         AddonShapeProviderSpec,
         AddonSpec,
-        AddonWorkspaceSpec,
         AddonWorkbenchSectionSpec,
+        AddonWorkspaceSpec,
     )
 
     _addon_instance = AddonSpec(
-        name="topomt",
-        package="molsysviewer-topomt",
-        version="0.1.0",
-        description="TopoMT workspace for pocket and topography analysis in MolSysViewer.",
+        name='topomt',
+        package='molsysviewer-topomt',
+        version='0.1.0',
+        description='TopoMT workspace for pocket and topography analysis in MolSysViewer.',
         workspaces=(
             AddonWorkspaceSpec(
-                id="topomt",
-                title="TopoMT",
-                entry_panel="topography",
-                description="Topography-focused workspace for pocket analysis workflows.",
+                id='topomt',
+                title='TopoMT',
+                entry_panel='topography',
+                description='Topography-focused workspace for pocket analysis workflows.',
                 order=20,
             ),
         ),
         panels=(
             AddonPanelSpec(
-                id="topography",
-                title="Topography",
-                entry="molsysviewer_topomt.panels.topography_panel",
-                description="Summary panel with pocket render controls.",
+                id='topography',
+                title='Topography',
+                entry='molsysviewer_topomt.panels.topography_panel',
+                description='Summary panel with pocket render controls.',
                 order=10,
-                widget_class="molsysviewer_topomt.panels.topography.TopoMTTopographyPanel",
+                widget_class='molsysviewer_topomt.panels.topography.TopoMTTopographyPanel',
             ),
             AddonPanelSpec(
-                id="pockets",
-                title="Pockets",
-                entry="molsysviewer_topomt.panels.pockets_panel",
-                description="Per-pocket list with individual show/hide controls.",
+                id='pockets',
+                title='Pockets',
+                entry='molsysviewer_topomt.panels.pockets_panel',
+                description='Per-pocket list with individual show/hide controls.',
                 order=20,
-                widget_class="molsysviewer_topomt.panels.pockets.TopoMTPocketsPanel",
+                widget_class='molsysviewer_topomt.panels.pockets.TopoMTPocketsPanel',
             ),
         ),
         context_actions=(
             AddonContextActionSpec(
-                id="focus-topography-feature",
-                title="Focus Topography Feature",
-                entry="molsysviewer_topomt.context.focus_topography_feature",
-                target_kinds=("structure", "shape"),
-                group="topography",
+                id='focus-topography-feature',
+                title='Focus Topography Feature',
+                entry='molsysviewer_topomt.context.focus_topography_feature',
+                target_kinds=('structure', 'shape'),
+                group='topography',
                 order=10,
+            ),
+            AddonContextActionSpec(
+                id='dfnd-tetrahedron-info',
+                title='Ficha de diagnóstico (consola)',
+                entry='molsysviewer_topomt.context.focus_topography_feature',
+                target_kinds=('shape',),
+                group='topography',
+                order=20,
             ),
         ),
         workbench_sections=(
             AddonWorkbenchSectionSpec(
-                id="topography-summary",
-                title="Topography Summary",
-                entry="molsysviewer_topomt.workbench.topography_summary",
-                target_panel="workbench",
+                id='topography-summary',
+                title='Topography Summary',
+                entry='molsysviewer_topomt.workbench.topography_summary',
+                target_panel='workbench',
                 order=10,
             ),
         ),
         shape_providers=(
             AddonShapeProviderSpec(
-                id="topography-pocket-blob",
-                title="TopoMT Pocket Blob",
-                entry="molsysviewer_topomt.shapes.pocket_blob_provider",
-                kinds=("pocket", "blob", "surface"),
+                id='topography-pocket-blob',
+                title='TopoMT Pocket Blob',
+                entry='molsysviewer_topomt.shapes.pocket_blob_provider',
+                kinds=('pocket', 'blob', 'surface'),
                 order=10,
             ),
         ),
         export_helpers=(
             AddonExportHelperSpec(
-                id="topography-summary-export",
-                title="TopoMT Summary Export",
-                entry="molsysviewer_topomt.exports.export_topography_summary",
-                formats=("json", "html"),
+                id='topography-summary-export',
+                title='TopoMT Summary Export',
+                entry='molsysviewer_topomt.exports.export_topography_summary',
+                formats=('json', 'html'),
                 order=10,
             ),
         ),
         meta={
-            "domain": "topography",
-            "checkpoint": True,
-            "rendering_ready": True,
+            'domain': 'topography',
+            'checkpoint': True,
+            'rendering_ready': True,
         },
     )
     return _addon_instance
 
 
 def __getattr__(name: str):
-    if name == "addon" or name == "ADDON":
+    if name == 'addon' or name == 'ADDON':
         return get_addon()
-    if name == "lifecycle":
+    if name == 'lifecycle':
         return get_lifecycle()
     raise AttributeError(f"module '{__name__}' has no attribute '{name}'")

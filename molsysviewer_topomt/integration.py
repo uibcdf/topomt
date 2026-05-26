@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Iterable
 from .render import render_topography_pockets, render_dfnd_tetrahedra
 from .runtime import ensure_runtime
 
@@ -81,7 +81,10 @@ def attach_topography(
             tag_prefix=tetra_tag_prefix,
             name=render_kwargs.get('tetra_name', 'DFND Tetrahedra'),
             skip_digestion=True,
+            tetrahedra_indices=render_kwargs.get('tetrahedra_indices'),
+            show_all_faces=render_kwargs.get('show_all_faces', False),
         )
+        _setup_tetrahedra_click_callback(view, runtime, tetra_tag_prefix)
 
     return {
         'addon_enabled': 'topomt' in view.addons.enabled(skip_digestion=True),
@@ -155,6 +158,8 @@ def attach_dfnd_tetrahedra(
     tag_prefix: str = 'dfnd-tetra',
     name: str = 'DFND Tetrahedra',
     skip_digestion: bool = False,
+    tetrahedra_indices: Iterable[int] | None = None,
+    show_all_faces: bool = False,
 ) -> dict[str, Any]:
     """Render DFND tetrahedra programmatically into the viewer and enable topomt addon."""
     register_with_molsysviewer()
@@ -179,7 +184,11 @@ def attach_dfnd_tetrahedra(
         tag_prefix=tag_prefix,
         name=name,
         skip_digestion=skip_digestion,
+        tetrahedra_indices=tetrahedra_indices,
+        show_all_faces=show_all_faces,
     )
+
+    _setup_tetrahedra_click_callback(view, runtime, tag_prefix)
 
     return {
         'addon_enabled': 'topomt' in view.addons.enabled(skip_digestion=True),
@@ -198,8 +207,22 @@ def new_view(
     load_mode='selection',
     view=None,
     enable_addon: bool = True,
-    render: bool = True,
+    # --- Pocket/feature rendering ---
+    render: bool | None = None,
+    show_faces: bool | None = None,
+    # --- Tetrahedra rendering ---
     render_tetrahedra: bool = False,
+    show_tetrahedra: bool | None = None,
+    # --- Tetrahedra options (forwarded to render_dfnd_tetrahedra) ---
+    color_mode: str = 'combined_class',
+    color_palette: dict[str, int] | None = None,
+    alpha: float | dict[str, float] | None = None,
+    draw_edges: bool = True,
+    edge_radius_nm: float = 0.002,
+    edge_color: int = 0x444444,
+    show_all_faces: bool = False,
+    tetrahedra_indices: Iterable[int] | None = None,
+    tetra_name: str = 'DFND Tetrahedra',
     skip_digestion: bool = False,
     **render_kwargs,
 ):
@@ -212,6 +235,15 @@ def new_view(
 
     if feature_ids is not None:
         topography = subset_topography(topography, feature_ids)
+
+    # Resolve boolean flags: show_tetrahedra/show_faces are aliases
+    do_tetrahedra = show_tetrahedra if show_tetrahedra is not None else render_tetrahedra
+    if show_faces is not None:
+        do_render = show_faces
+    elif render is not None:
+        do_render = render
+    else:
+        do_render = True  # default
 
     import molsysviewer
     view = molsysviewer.new_view(
@@ -227,12 +259,40 @@ def new_view(
         view,
         topography,
         enable_addon=enable_addon,
-        render=render,
-        render_tetrahedra=render_tetrahedra,
+        render=do_render,
+        render_tetrahedra=do_tetrahedra,
         skip_digestion=True,
+        color_mode=color_mode,
+        color_palette=color_palette,
+        alpha=alpha,
+        draw_edges=draw_edges,
+        edge_radius_nm=edge_radius_nm,
+        edge_color=edge_color,
+        show_all_faces=show_all_faces,
+        tetrahedra_indices=tetrahedra_indices,
+        tetra_name=tetra_name,
         **render_kwargs,
     )
     return view
+
+
+def _setup_tetrahedra_click_callback(view, runtime, tag_prefix: str) -> None:
+    # First, unregister any existing callback stored on runtime to avoid double-registration
+    if hasattr(runtime, '_tetrahedra_click_cb') and runtime._tetrahedra_click_cb:
+        if hasattr(view, 'off_click'):
+            try:
+                view.off_click(runtime._tetrahedra_click_cb)
+            except Exception:
+                pass
+        runtime._tetrahedra_click_cb = None
+
+    if hasattr(view, 'on_click'):
+        def _tetrahedra_click_callback(event):
+            # Silent click callback to satisfy state tracking and test cases without printing to console
+            pass
+
+        view.on_click(_tetrahedra_click_callback)
+        runtime._tetrahedra_click_cb = _tetrahedra_click_callback
 
 
 

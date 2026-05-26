@@ -1,8 +1,8 @@
 # Delaunay Flow Network Decomposition (DFND): Algorithm Description
 
 > **Terminology.** Connected components of the graph are `components` (wet ones in
-> the raw field `wet_components`; the legacy "Transit Domains" wording is now
-> `components`); a component's atoms are its `domain`; the public object is a
+> the raw field `wet_components`; the legacy "Transit Components" wording is now
+> `components`); a component's atoms are its `component`; the public object is a
 > `feature`. See [`object_model.md`](object_model.md).
 
 ## 1. Geometric Foundations
@@ -27,7 +27,7 @@ To construct the flow network, we compute two critical metrics for every element
     *   *Significance:* Determines if a probe of radius $R_{probe}$ can physically "reside" inside the tetrahedron.
 
 2.  **Face Permeability ($R_{gate}$):**
-    The largest local clearance available to a probe center crossing the triangular face defined by 3 atoms. It is computed from active-set clearance candidates and validated in the face domain.
+    The largest local clearance available to a probe center crossing the triangular face defined by 3 atoms. It is computed from active-set clearance candidates and validated in the face component.
     *   *Significance:* Determines if a probe of radius $R_{probe}$ can "flow" from one tetrahedron to its neighbor.
 
 ---
@@ -82,12 +82,12 @@ An edge exists between two tetrahedra $T_i$ and $T_j$ sharing face $F_{ij}$ if a
 5.  **External Links:** For each component, group connected permeable boundary or hull contacts into `external_links` to `OCEAN`.
 6.  **Component Identification:**
     *   Compute `n_external_links`, `n_resident_nodes`, `has_residence`, and `has_open_interior` for each `Component`.
-    *   **Void domain:** zero `external_links` and at least one resident node.
-    *   **Degenerate subprobe domain:** zero `external_links` and no resident nodes; raw/filter label, not a void.
-    *   **Pocket domain:** exactly one `external_link` and at least one resident node.
-    *   **Surface concavity** (`surface_concavity`): exactly one `external_link` and no resident nodes.
-    *   **Multi-external-link domain:** two or more `external_links` and at least one resident node. `Channel` is a public shorthand only after path or morphology interpretation.
-    *   **Nonresident passage domain:** two or more `external_links` and no resident nodes; provisional raw label.
+    *   **Void:** zero `external_links` and at least one resident node (`void`).
+    *   **Degenerate subprobe:** zero `external_links` and no resident nodes (`degenerate_subprobe`; filter/provisional component).
+    *   **Pocket:** exactly one `external_link` and at least one resident node (`pocket`).
+    *   **Surface concavity:** exactly one `external_link` and no resident nodes (`surface_concavity`).
+    *   **Multi-external-link component:** two or more `external_links` and at least one resident node (`multi_external_link`). `Channel` is a public shorthand only after path or morphology interpretation.
+    *   **Nonresident passage:** two or more `external_links` and no resident nodes (`nonresident_passage`; provisional raw label).
     *   **Local labels:** `open`, `coast`, and `sealed` remain local metadata and do not create connectivity by themselves. `wet_open` is reported as `has_open_interior`, not used as the family gate.
 
 
@@ -100,7 +100,7 @@ public-feature classifier in v1.
 2. **Dry edges:** connections between two dry nodes through a shared finite face
    with `R_gate < R_probe`.
 3. **Dry components:** connected components of the dry graph.
-4. **Dry interfaces:** records where dry components contact wet domains,
+4. **Dry interfaces:** records where dry components contact wet components,
    external links, `OCEAN`, or hull/exterior context.
 5. **Dry depth:** unweighted graph distance from dry-interface boundary nodes
    into a dry component.
@@ -112,7 +112,7 @@ and dry cores remain candidate descriptors until validated.
 
 ## 4. Reporting Filters and Refinement
 
-Core graph construction should not silently prune components. Small domains,
+Core graph construction should not silently prune components. Small components,
 dry singletons, marginal gates, and near-zero-volume records must first appear
 in raw output with flags.
 

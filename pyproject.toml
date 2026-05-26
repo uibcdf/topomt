@@ -33,6 +33,9 @@ test = [
   "pytest>=6.1.2",
   "pytest-runner"
 ]
+dev = [
+  "ruff>=0.15",
+]
 
 [tool.setuptools]
 # This subkey is a beta stage development and keys may change in the future, see https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html for more details
@@ -87,3 +90,24 @@ file = "topomt/_version.py"
 
 #[tool.flit.external-data]
 #directory = "data"
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "F",
+  "I",
+  "UP",
+]
+ignore = [
+  "E203",
+  "E501",
+]
+
+[tool.ruff.format]
+quote-style = "single"
+indent-style = "space"
+line-ending = "auto"

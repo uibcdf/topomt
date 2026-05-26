@@ -37,21 +37,24 @@ There are two exterior signals in a finite Delaunay mesh:
 - hull or boundary faces of finite tetrahedra whose neighbor index is `-1`;
 - components that can reach those boundary faces through probe-permeable faces.
 
-First working policy:
+First working policy (Access x Residence):
 
 1. Boundary faces are candidate exterior contacts.
 2. A wet component contacts `OCEAN` only through a boundary face whose
    `R_gate >= probe_radius` under the selected tolerance policy.
 3. Connected open exterior contacts are grouped into `external_links`.
-4. A component with zero `external_links` is a void.
-5. A component with one or more `external_links` and only `wet_coast` nodes is
-   a surface concavity.
-6. A component with one `external_link` and at least one `wet_open` node is a
-   pocket.
-7. A component with two or more `external_links` and at least one `wet_open`
-   node is a channel.
+4. A component is classified according to its **Access** (number of direct external links to `OCEAN`) and its **Residence** (whether it contains at least one node where `R_residence >= probe_radius`):
+   - **0 external links**:
+     - *Has residence*: `void` (closed cavity where the probe fits).
+     - *No residence*: `degenerate_subprobe` (filter/provisional component).
+   - **1 external link**:
+     - *Has residence*: `pocket` (one-mouth resident concavity).
+     - *No residence*: `surface_concavity` (one-mouth non-resident surface dent).
+   - **>= 2 external links**:
+     - *Has residence*: `multi_external_link` (multi-mouth resident channel).
+     - *No residence*: `nonresident_passage` (provisional pass-through contact).
 
-Open discussion:
+`wet_open` is used purely as a quality and accessibility descriptor, not as a classification gate.
 
 - whether a large-box or padding construction is needed for systems with very
   sparse exterior geometry;
@@ -77,9 +80,12 @@ Applied to DFND:
 - `external_link` openness uses face permeability at the component boundary;
 - dynamic gating uses threshold crossing of `R_gate(t)` around `probe_radius`.
 
-Marginal states should be reported in raw records. The stable public
-classification can choose a deterministic side, but the diagnostic must retain
-that the decision was near-threshold.
+Marginal states should be reported in raw records. The deterministic side is
+**generous**: `epsilon` is applied in favour of open/permeable/resident (so the
+`>=` threshold holds inclusively), and physical tolerances
+(`residence_tolerance`, `permeability_tolerance`, default `0.0`,
+user-controllable) widen it further for structural flexibility / coordinate
+imprecision. The diagnostic must retain that the decision was near-threshold.
 
 ## 4. Tolerance Types
 

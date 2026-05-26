@@ -84,7 +84,7 @@ else below is absolute-time tuning.
 1. **scipy / QHull Delaunay.** Handles millions of points but is heavy: memory
    `O(N)` (6M tetra × 8 ints ≈ 400 MB of simplices + neighbors is fine), time on
    the order of minutes. For tens of millions of points it may need a different
-   Delaunay backend or an out-of-core / domain-decomposed approach.
+   Delaunay backend or an out-of-core / component-decomposed approach.
 2. **Absolute time.** ~0.12 ms/tetra (residence) → 6M tetra ≈ 12 min for residence
    alone, linear. The **volume batch (512 samples/tetra) is the heaviest** term.
    Total capsid build: tens of minutes to hours. Mitigations: chunking +
@@ -99,8 +99,8 @@ else below is absolute-time tuning.
    reproducing the mesh's 1-based first-appearance numbering. Keep it that way; the
    dict is only exercised by a traceability unit test on tiny fixtures.
 5. **`get_topography` (query side).** `connected_components` over a sparse graph of
-   `T` nodes scales well (scipy sparse). The remaining per-domain Python loops run
-   over the number of domains (≪ T), likely fine, but should be profiled at scale.
+   `T` nodes scales well (scipy sparse). The remaining per-component Python loops run
+   over the number of components (≪ T), likely fine, but should be profiled at scale.
 
 ## 6. What Is NOT Worth Doing (already analyzed)
 

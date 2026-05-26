@@ -157,7 +157,7 @@ The DFND material is grouped under the dedicated `DFND/` subdirectory. The most 
 - [DFND/checkpoint_probe_radius_sweep.md](DFND/checkpoint_probe_radius_sweep.md)
 - [DFND/checkpoint_quality_snapshot.md](DFND/checkpoint_quality_snapshot.md)
 - [DFND/checkpoint_dfnd_hardening_stint.md](DFND/checkpoint_dfnd_hardening_stint.md)
-- [DFND/domain_motifs.md](DFND/domain_motifs.md)
+- [DFND/component_motifs.md](DFND/component_motifs.md)
 - [DFND/dry_network_and_convexity.md](DFND/dry_network_and_convexity.md)
 - [DFND/residence_transit_contract.md](DFND/residence_transit_contract.md)
 - [DFND/numerical_policy.md](DFND/numerical_policy.md)

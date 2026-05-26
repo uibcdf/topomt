@@ -1,17 +1,21 @@
-# DFND Domain Motifs
+# DFND Component Motifs
 
-This document defines the internal motif layer of DFND concavity domains.
+This document defines the internal motif layer of DFND wet (concavity) components.
+
+> **Terminology.** A motif is a sub-structure *of a component* (a geometric motif
+> over its atomic structure / spatial representation); see
+> [`object_model.md`](object_model.md) §2.
 
 The goal is to keep the conceptual layering explicit:
 
 1. Delaunay triangulation provides finite tetrahedra, faces, and hull faces.
 2. DFN provides wet nodes, permeable edges, `OCEAN`, and `external_links`.
-3. DFND decomposition produces `concavity_domains`.
-4. Domain analysis derives internal paths, motifs, and geometric descriptors.
+3. DFND decomposition produces wet `components`.
+4. Component analysis derives internal paths, motifs, and geometric descriptors.
 
 `mouth`, `throat`, `bottleneck`, `chamber`, and related terms should not be
-used as primary domain-family definitions. They are derived motifs or geometric
-realizations inside or around a `concavity_domain`.
+used as primary `family` definitions. They are derived motifs or geometric
+realizations inside or around a wet `component`.
 
 ## 1. Operations
 
@@ -24,8 +28,8 @@ Decomposition is the primary operation of DFND.
 ```text
 remove OCEAN from DFN
 compute connected components of the remaining finite transit graph
-each component is a TransitDomain
-interpret TransitDomain plus ResidenceRegions as a concavity_domain
+each connected component is a Component
+enrich the Component with its ResidenceRegions and external links
 ```
 
 This is not treated as auxiliary lumping. It is the core decomposition in
@@ -33,11 +37,11 @@ Delaunay Flow Network Decomposition.
 
 ### 1.2. External-Link Clustering
 
-External-link clustering groups exterior contacts of one `concavity_domain`.
+External-link clustering groups exterior contacts of one `component`.
 
 ```text
 external_link = connected cluster of permeable boundary or hull contacts
-                between a concavity_domain and OCEAN
+                between a component and OCEAN
 ```
 
 Default connectivity should be face-edge connectivity. Face-vertex connectivity
@@ -45,11 +49,11 @@ may be tested later, but it can merge openings that touch only at one atom and
 should not be the first policy.
 
 A geometric `mouth` can be derived from an `external_link`, but `mouth` is not
-the primitive used for domain-family classification.
+the primitive used for component-family classification.
 
-### 1.3. Domain Lumping
+### 1.3. Component Lumping
 
-Domain lumping is a secondary operation inside a `concavity_domain`.
+Component lumping is a secondary operation inside a `component`.
 
 It aggregates nodes, edges, or paths into coarser structures so that internal
 motifs can be described robustly.
@@ -60,10 +64,10 @@ Possible outputs:
 - `capacity_regions`;
 - `chambers`;
 - `throat_candidates`;
-- `reduced_domain_graph`;
-- `domain_motif_graph`.
+- `reduced_component_graph`;
+- `component_motif_graph`.
 
-The purpose of domain lumping is not to replace the primary domain family. Its
+The purpose of component lumping is not to replace the primary component family. Its
 purpose is to support paths, motifs, and geometric realizations.
 
 ## 2. Canonical and Experimental Parts
@@ -72,7 +76,7 @@ Canonical now (**implemented** on each `WetComponent`, see
 `topomt/dfnd/components.py`):
 
 - DFND decomposition into components (a `component` is the graph object; its
-  `domain` is its atoms — see [`object_model.md`](object_model.md));
+  spatial representation is its atoms — see [`object_model.md`](object_model.md));
 - external-link clustering, realized per component as `external_mouth` motifs;
 - unweighted topological depth from exterior-boundary nodes
   (`component.topological_depth`) plus its depth regions
@@ -95,14 +99,14 @@ The same capacity merge tree is the natural seed for the multi-scale segmentatio
 fix (the "Disease 1" over-segmentation in
 [`pathological_systems.md`](pathological_systems.md)): merging basins separated by
 low-persistence saddles is exactly the watershed-merge that reunifies
-over-segmented domains.
+over-segmented components.
 
 Candidate operations are reported as descriptors or diagnostics until their
 scoring and stability policies are fixed.
 
 ## 3. Topological Depth
 
-For a concavity domain `D`, define exterior-boundary nodes as nodes incident to
+For a concavity component `D`, define exterior-boundary nodes as nodes incident to
 at least one `external_link`.
 
 ```text
@@ -152,8 +156,8 @@ This should first be reported as a profile or ranking. Hard thresholding beyond
 
 ## 5. Paths
 
-A path is an ordered sequence of DFN nodes and edges inside a concavity domain
-or inside a reduced domain graph.
+A path is an ordered sequence of DFN nodes and edges inside a concavity component
+or inside a reduced component graph.
 
 Useful path anchors include:
 
@@ -168,14 +172,14 @@ Examples:
 
 - external-link to deepest-region path;
 - external-link to chamber path;
-- external-link to external-link path in a channel domain;
+- external-link to external-link path in a channel component;
 - chamber to chamber path through a throat candidate.
 
 Paths should keep both graph identifiers and geometric realizations.
 
 ## 6. Motifs
 
-A motif is an interpretable substructure derived from a `concavity_domain`.
+A motif is an interpretable substructure derived from a `component`.
 
 Candidate motif types:
 
@@ -184,17 +188,17 @@ Candidate motif types:
   and a deeper region;
 - `bottleneck`: lowest-capacity element on a path or between two regions;
 - `chamber_candidate`: deeper, relatively high-habitability region;
-- `subchamber`: chamber-like region inside a larger domain;
+- `subchamber`: chamber-like region inside a larger component;
 - `branch_region`: node or region where multiple internal paths diverge;
-- `dead_end`: terminal branch inside a domain.
+- `dead_end`: terminal branch inside a component.
 
 Only `external_link` is currently canonical. The other motif names are useful
 but should remain candidate descriptors until exact scoring and persistence
 rules are validated.
 
-## 7. Reduced Domain Graph
+## 7. Reduced Component Graph
 
-A `reduced_domain_graph` is a graph produced by domain lumping.
+A `reduced_component_graph` is a graph produced by component lumping.
 
 Possible nodes:
 
@@ -211,7 +215,7 @@ Possible edges:
 - capacity-limited connection;
 - depth progression relation.
 
-A `domain_motif_graph` is a semantically annotated reduced domain graph. It is
+A `component_motif_graph` is a semantically annotated reduced component graph. It is
 the preferred representation for high-level paths and motifs once the lumping
 policy is selected.
 
@@ -229,7 +233,7 @@ Every graph motif should be traceable back to geometry:
 The intended workflow is:
 
 ```text
-DFN-domain motif first
+DFN-component motif first
 geometric realization second
 ```
 
@@ -245,16 +249,16 @@ In trajectories, motif time series can report:
 - throat opening or closure;
 - chamber persistence;
 - branch birth or death;
-- domain family transitions.
+- component family transitions.
 
 Examples:
 
 ```text
 external_link persists but throat candidate narrows
-=> gated or breathing pocket domain
+=> gated or breathing pocket component
 
 new external_link appears
-=> pocket_domain to channel_domain transition
+=> pocket to channel transition
 
 deep chamber persists while external link flickers
 => cryptic or transient accessibility

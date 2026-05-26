@@ -1,5 +1,5 @@
-import numpy as np
 import molsysmt as msm
+import numpy as np
 from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 
@@ -124,15 +124,17 @@ class DelaunayFlowNetwork:
         if np.any(self.atom_radii <= 0.0):
             raise ValueError('DFND input atomic radii must be positive.')
         if self.atom_coords.shape[0] < 4:
-            raise ValueError('Not enough atoms to build Delaunay triangulation (min 4).')
+            raise ValueError(
+                'Not enough atoms to build Delaunay triangulation (min 4).'
+            )
 
         self.mesh = DelaunayMesh(points=self.atom_coords, atom_radii=self.atom_radii)
         self.tetra_atoms = self.mesh.simplices
         self.simplex_neighbors = self.mesh.neighbors
         self.n_tetrahedra = int(self.tetra_atoms.shape[0])
 
-        tetra_coords = self.atom_coords[self.tetra_atoms]      # (T, 4, 3)
-        tetra_radii = self.atom_radii[self.tetra_atoms]        # (T, 4)
+        tetra_coords = self.atom_coords[self.tetra_atoms]  # (T, 4, 3)
+        tetra_radii = self.atom_radii[self.tetra_atoms]  # (T, 4)
         radius, centers, kind_code, r_apollonius4, apollonius4_valid = (
             tetrahedron_residence_radius_batch(tetra_coords, tetra_radii, self.epsilon)
         )
@@ -164,8 +166,10 @@ class DelaunayFlowNetwork:
         # order-invariant, so sorting the triple is safe.
         face_local_indices = np.array(((1, 2, 3), (0, 2, 3), (0, 1, 3), (0, 1, 2)))
         face_atom_indices = self.mesh.oriented_simplices[:, face_local_indices]
-        self.face_atom_keys_per_tet_face = np.sort(face_atom_indices, axis=2)   # (T, 4, 3)
-        flat_keys = self.face_atom_keys_per_tet_face.reshape(-1, 3)             # (4T, 3)
+        self.face_atom_keys_per_tet_face = np.sort(
+            face_atom_indices, axis=2
+        )  # (T, 4, 3)
+        flat_keys = self.face_atom_keys_per_tet_face.reshape(-1, 3)  # (4T, 3)
         unique_faces, first_index, inverse = np.unique(
             flat_keys, axis=0, return_index=True, return_inverse=True
         )
@@ -177,14 +181,18 @@ class DelaunayFlowNetwork:
         unique_gates, _gate_centers, _gate_kinds = face_gate_radius_batch(
             self.atom_coords[unique_faces], self.atom_radii[unique_faces], self.epsilon
         )
-        self.face_r_gates_per_tet_face = unique_gates[inverse].reshape(self.n_tetrahedra, 4)
+        self.face_r_gates_per_tet_face = unique_gates[inverse].reshape(
+            self.n_tetrahedra, 4
+        )
 
         # Reproduce the mesh's global face id: 1-based, in first-appearance order
         # over the (simplex, face) iteration (row index == tetrahedron * 4 + face).
         appearance_order = np.argsort(first_index, kind='stable')
         appearance_rank = np.empty(unique_faces.shape[0], dtype=int)
         appearance_rank[appearance_order] = np.arange(unique_faces.shape[0])
-        self.face_ids_per_tet_face = (appearance_rank[inverse] + 1).reshape(self.n_tetrahedra, 4)
+        self.face_ids_per_tet_face = (appearance_rank[inverse] + 1).reshape(
+            self.n_tetrahedra, 4
+        )
 
         # Gate per unique face (vestigial map kept for compatibility).
         self.unique_face_r_gates_map = {
@@ -209,7 +217,11 @@ class DelaunayFlowNetwork:
             dtype=int,
         )
         self.edge_faces = [
-            (int(r), int(c), tuple(int(a) for a in self.face_atom_keys_per_tet_face[r, c]))
+            (
+                int(r),
+                int(c),
+                tuple(int(a) for a in self.face_atom_keys_per_tet_face[r, c]),
+            )
             for r, c in zip(rows.tolist(), cols.tolist())
         ]
         self.face_intrusion_suspect_per_tet_face = np.zeros(
@@ -256,7 +268,7 @@ class DelaunayFlowNetwork:
         adjacency = [[] for _ in external_faces]
         for face_indices in edge_to_faces.values():
             for left_index, left in enumerate(face_indices):
-                for right in face_indices[left_index + 1:]:
+                for right in face_indices[left_index + 1 :]:
                     adjacency[left].append(right)
                     adjacency[right].append(left)
 
@@ -285,21 +297,42 @@ class DelaunayFlowNetwork:
         min_size=0,
         transit_policy='with_connectors',
         gate_intrusion_policy='flag_only',
+        residence_tolerance=0.0,
+        permeability_tolerance=0.0,
     ):
-        """Return DFND raw records and compatibility feature dictionaries."""
+        """Return DFND raw records and compatibility feature dictionaries.
+
+        Residence and permeability use an inclusive ``>=`` threshold, with the
+        numerical ``epsilon`` applied *in favour of* resident/permeable so the
+        equality case is robust to floating-point error. Physical tolerances
+        (default 0.0, user-controllable) widen the threshold further to absorb
+        structural flexibility / coordinate imprecision:
+
+            permeable(F) = R_gate(F)      >= R_probe - epsilon - permeability_tolerance
+            resident(T)  = R_residence(T) >= R_probe - epsilon - residence_tolerance
+        """
         probe_radius = float(probe_radius)
+        residence_tolerance = float(residence_tolerance)
+        permeability_tolerance = float(permeability_tolerance)
         if transit_policy not in {'resident_only', 'with_connectors'}:
-            raise ValueError("transit_policy must be 'resident_only' or 'with_connectors'")
+            raise ValueError(
+                "transit_policy must be 'resident_only' or 'with_connectors'"
+            )
         if gate_intrusion_policy not in {'flag_only', 'block_suspect'}:
-            raise ValueError("gate_intrusion_policy must be 'flag_only' or 'block_suspect'")
+            raise ValueError(
+                "gate_intrusion_policy must be 'flag_only' or 'block_suspect'"
+            )
+
+        residence_slack = self.epsilon + residence_tolerance
+        permeability_slack = self.epsilon + permeability_tolerance
 
         residence_delta = self.tetra_residence - probe_radius
-        resident = residence_delta > self.epsilon
-        marginal_residence = np.abs(residence_delta) <= self.epsilon
+        resident = residence_delta >= -residence_slack
+        marginal_residence = np.abs(residence_delta) <= residence_slack
 
         face_delta = self.face_r_gates_per_tet_face - probe_radius
-        face_permeable = face_delta > self.epsilon
-        face_marginal = np.abs(face_delta) <= self.epsilon
+        face_permeable = face_delta >= -permeability_slack
+        face_marginal = np.abs(face_delta) <= permeability_slack
         intrusion_suspect = self.face_intrusion_suspect_per_tet_face
         if gate_intrusion_policy == 'block_suspect':
             face_permeable = face_permeable & ~intrusion_suspect
@@ -364,47 +397,91 @@ class DelaunayFlowNetwork:
                 transit_role = 'non_transit'
 
             flags = []
-            if marginal_residence[tetrahedron_index] or np.any(face_marginal[tetrahedron_index]):
+            if marginal_residence[tetrahedron_index] or np.any(
+                face_marginal[tetrahedron_index]
+            ):
                 flags.append('marginal')
 
             tetrahedron_records.append(
                 {
                     'tetrahedron_id': int(tetrahedron_index),
-                    'atom_indices': [int(self.atom_indices_map[index]) for index in self.tetra_atoms[tetrahedron_index]],
-                    'local_atom_indices': [int(index) for index in self.tetra_atoms[tetrahedron_index]],
+                    'atom_indices': [
+                        int(self.atom_indices_map[index])
+                        for index in self.tetra_atoms[tetrahedron_index]
+                    ],
+                    'local_atom_indices': [
+                        int(index) for index in self.tetra_atoms[tetrahedron_index]
+                    ],
                     'R_residence': float(self.tetra_residence[tetrahedron_index]),
-                    'residence_candidate_kind': self.tetra_residence_kind[tetrahedron_index],
+                    'residence_candidate_kind': self.tetra_residence_kind[
+                        tetrahedron_index
+                    ],
                     'R_apollonius4': float(self.tetra_r_apollonius4[tetrahedron_index]),
-                    'apollonius4_valid': bool(self.tetra_apollonius4_valid[tetrahedron_index]),
-                    'residence_margin': float(self.tetra_residence[tetrahedron_index] - probe_radius),
+                    'apollonius4_valid': bool(
+                        self.tetra_apollonius4_valid[tetrahedron_index]
+                    ),
+                    'residence_margin': float(
+                        self.tetra_residence[tetrahedron_index] - probe_radius
+                    ),
                     'center': self.tetra_residence_centers[tetrahedron_index].tolist(),
-                    'volume_topological': float(self.mesh.simplex_volumes[tetrahedron_index]),
-                    'volume_solvent_estimate': float(self.tetra_volume_solvent_estimate[tetrahedron_index]),
-                    'solvent_empty_fraction_estimate': float(self.tetra_solvent_empty_fraction[tetrahedron_index]),
-                    'solvent_occupied_fraction_estimate': float(self.tetra_solvent_occupied_fraction[tetrahedron_index]),
-                    'solvent_volume_n_samples': int(self.tetra_solvent_n_samples[tetrahedron_index]),
+                    'volume_topological': float(
+                        self.mesh.simplex_volumes[tetrahedron_index]
+                    ),
+                    'volume_solvent_estimate': float(
+                        self.tetra_volume_solvent_estimate[tetrahedron_index]
+                    ),
+                    'solvent_empty_fraction_estimate': float(
+                        self.tetra_solvent_empty_fraction[tetrahedron_index]
+                    ),
+                    'solvent_occupied_fraction_estimate': float(
+                        self.tetra_solvent_occupied_fraction[tetrahedron_index]
+                    ),
+                    'solvent_volume_n_samples': int(
+                        self.tetra_solvent_n_samples[tetrahedron_index]
+                    ),
                     'residence_state': residence_state,
                     'transit_role': transit_role,
                     'n_permeable_contacts': permeable_count,
                     'local_class': local_class,
-                    'combined_class': f"{'wet' if resident[tetrahedron_index] else 'dry'}_{local_class}",
+                    'combined_class': f'{"wet" if resident[tetrahedron_index] else "dry"}_{local_class}',
                     'flags': flags,
                 }
             )
 
             for face_index in range(4):
-                face_atoms_local = self.face_atom_keys_per_tet_face[tetrahedron_index][face_index]
+                face_atoms_local = self.face_atom_keys_per_tet_face[tetrahedron_index][
+                    face_index
+                ]
                 face_records.append(
                     {
-                        'face_id': int(self.face_ids_per_tet_face[tetrahedron_index, face_index]),
+                        'face_id': int(
+                            self.face_ids_per_tet_face[tetrahedron_index, face_index]
+                        ),
                         'owner_tetrahedron_id': int(tetrahedron_index),
-                        'neighbor_tetrahedron_id': int(self.simplex_neighbors[tetrahedron_index, face_index]),
+                        'neighbor_tetrahedron_id': int(
+                            self.simplex_neighbors[tetrahedron_index, face_index]
+                        ),
                         'face_index': int(face_index),
                         'face_atoms_local': [int(index) for index in face_atoms_local],
-                        'atom_indices': [int(self.atom_indices_map[index]) for index in face_atoms_local],
-                        'R_gate': float(self.face_r_gates_per_tet_face[tetrahedron_index, face_index]),
-                        'permeability_state': 'permeable' if face_permeable[tetrahedron_index, face_index] else 'non_permeable',
-                        'flags': self._face_flags(tetrahedron_index, face_index, face_marginal, intrusion_suspect, gate_intrusion_policy),
+                        'atom_indices': [
+                            int(self.atom_indices_map[index])
+                            for index in face_atoms_local
+                        ],
+                        'R_gate': float(
+                            self.face_r_gates_per_tet_face[
+                                tetrahedron_index, face_index
+                            ]
+                        ),
+                        'permeability_state': 'permeable'
+                        if face_permeable[tetrahedron_index, face_index]
+                        else 'non_permeable',
+                        'flags': self._face_flags(
+                            tetrahedron_index,
+                            face_index,
+                            face_marginal,
+                            intrusion_suspect,
+                            gate_intrusion_policy,
+                        ),
                     }
                 )
 
@@ -417,58 +494,105 @@ class DelaunayFlowNetwork:
         surface_concavities = []
         nonresident_passages = []
         degenerate_subprobes = []
+        percolatings = []
+        compatibility_records = []
 
-        for domain_index, (_label, nodes) in enumerate(sorted(nodes_by_label.items()), start=1):
+        for component_index, (_label, nodes) in enumerate(
+            sorted(nodes_by_label.items()), start=1
+        ):
+            graph_label = int(_label)
             node_set = set(nodes)
             resident_nodes = [node for node in nodes if resident[node]]
             connector_nodes = [node for node in nodes if transit_connector[node]]
-            open_resident_nodes = [node for node in resident_nodes if int(n_permeable_contacts[node]) == 4]
+            open_resident_nodes = [
+                node for node in resident_nodes if int(n_permeable_contacts[node]) == 4
+            ]
 
             external_face_records = []
             seen_external_face_ids = set()
             for node in nodes:
                 for face_index in range(4):
-                    if int(self.simplex_neighbors[node, face_index]) == -1 and face_permeable[node, face_index]:
+                    if (
+                        int(self.simplex_neighbors[node, face_index]) == -1
+                        and face_permeable[node, face_index]
+                    ):
                         face_id = int(self.face_ids_per_tet_face[node, face_index])
                         if face_id in seen_external_face_ids:
                             continue
                         seen_external_face_ids.add(face_id)
-                        face_atoms_local = self.face_atom_keys_per_tet_face[node][face_index]
+                        face_atoms_local = self.face_atom_keys_per_tet_face[node][
+                            face_index
+                        ]
                         external_face_records.append(
                             {
                                 'tetrahedron_id': int(node),
                                 'face_index': int(face_index),
                                 'face_id': face_id,
-                                'face_atoms_local': tuple(int(index) for index in face_atoms_local),
-                                'atom_indices': [int(self.atom_indices_map[index]) for index in face_atoms_local],
-                                'R_gate': float(self.face_r_gates_per_tet_face[node, face_index]),
+                                'face_atoms_local': tuple(
+                                    int(index) for index in face_atoms_local
+                                ),
+                                'atom_indices': [
+                                    int(self.atom_indices_map[index])
+                                    for index in face_atoms_local
+                                ],
+                                'R_gate': float(
+                                    self.face_r_gates_per_tet_face[node, face_index]
+                                ),
                             }
                         )
 
             external_face_clusters = self._cluster_external_faces(external_face_records)
-            domain_external_link_ids = []
+            component_external_link_ids = []
             for link_offset, cluster in enumerate(external_face_clusters, start=1):
                 link_id = len(external_links) + 1
-                domain_external_link_ids.append(link_id)
+                component_external_link_ids.append(link_id)
                 cluster_faces = [record['face_atoms_local'] for record in cluster]
                 external_links.append(
                     {
                         'external_link_id': link_id,
-                        'component_id': domain_index,
+                        'component_id': component_index,
                         'local_link_id': link_offset,
                         'face_ids': [record['face_id'] for record in cluster],
-                        'tetrahedron_ids': sorted({record['tetrahedron_id'] for record in cluster}),
-                        'faces': [list(record['face_atoms_local']) for record in cluster],
-                        'atom_indices': sorted({atom for record in cluster for atom in record['atom_indices']}),
-                        'area_geometric': mouth_area_from_faces(cluster_faces, self.atom_coords),
-                        'R_gate_min': float(min(record['R_gate'] for record in cluster)),
-                        'R_gate_max': float(max(record['R_gate'] for record in cluster)),
+                        'tetrahedron_ids': sorted(
+                            {record['tetrahedron_id'] for record in cluster}
+                        ),
+                        'faces': [
+                            list(record['face_atoms_local']) for record in cluster
+                        ],
+                        'atom_indices': sorted(
+                            {
+                                atom
+                                for record in cluster
+                                for atom in record['atom_indices']
+                            }
+                        ),
+                        'area_geometric': mouth_area_from_faces(
+                            cluster_faces, self.atom_coords
+                        ),
+                        'R_gate_min': float(
+                            min(record['R_gate'] for record in cluster)
+                        ),
+                        'R_gate_max': float(
+                            max(record['R_gate'] for record in cluster)
+                        ),
                         'flags': [],
                     }
                 )
 
-            n_external_links = len(domain_external_link_ids)
+            n_external_links = len(component_external_link_ids)
+            # Walls = non-permeable boundary faces of the component (faces whose other
+            # side is OCEAN or another component). A resident component with zero walls
+            # is fully permeable/exposed (porous), not a concavity -> percolating.
+            n_wall_faces = 0
+            for node in nodes:
+                for face_index in range(4):
+                    neighbor = int(self.simplex_neighbors[node, face_index])
+                    is_boundary = neighbor == -1 or neighbor not in node_set
+                    if is_boundary and not face_permeable[node, face_index]:
+                        n_wall_faces += 1
             family = self._classify_component(n_external_links, len(resident_nodes))
+            if resident_nodes and n_wall_faces == 0:
+                family = 'percolating'
             atom_indices = sorted(
                 {
                     int(self.atom_indices_map[atom_index])
@@ -477,14 +601,32 @@ class DelaunayFlowNetwork:
                 }
             )
             volume_topological_transit = float(np.sum(self.mesh.simplex_volumes[nodes]))
-            volume_topological_resident = float(np.sum(self.mesh.simplex_volumes[resident_nodes])) if resident_nodes else 0.0
-            volume_solvent_estimate = float(np.sum(self.tetra_volume_solvent_estimate[resident_nodes])) if resident_nodes else 0.0
+            volume_topological_resident = (
+                float(np.sum(self.mesh.simplex_volumes[resident_nodes]))
+                if resident_nodes
+                else 0.0
+            )
+            volume_solvent_estimate = (
+                float(np.sum(self.tetra_volume_solvent_estimate[resident_nodes]))
+                if resident_nodes
+                else 0.0
+            )
             edge_capacities = []
-            for source, target, weight, edge_face in zip(self.sources, self.targets, self.edge_weights, self.edge_faces):
+            for source, target, weight, edge_face in zip(
+                self.sources, self.targets, self.edge_weights, self.edge_faces
+            ):
                 owner, face_index, _face_key = edge_face
-                target_face_indices = np.where(self.simplex_neighbors[target] == source)[0]
-                target_face_permeable = bool(face_permeable[target, target_face_indices[0]]) if len(target_face_indices) else True
-                shared_face_permeable = bool(face_permeable[owner, face_index]) and target_face_permeable
+                target_face_indices = np.where(
+                    self.simplex_neighbors[target] == source
+                )[0]
+                target_face_permeable = (
+                    bool(face_permeable[target, target_face_indices[0]])
+                    if len(target_face_indices)
+                    else True
+                )
+                shared_face_permeable = (
+                    bool(face_permeable[owner, face_index]) and target_face_permeable
+                )
                 if (
                     int(source) in node_set
                     and int(target) in node_set
@@ -494,8 +636,9 @@ class DelaunayFlowNetwork:
                     edge_capacities.append(float(weight - probe_radius))
             path_capacity_min = min(edge_capacities) if edge_capacities else None
 
-            domain_record = {
-                'id': domain_index,
+            component_record = {
+                'id': component_index,
+                'graph_label': graph_label,
                 'family': family,
                 'tetrahedron_ids': nodes,
                 'resident_tetrahedron_ids': resident_nodes,
@@ -505,7 +648,8 @@ class DelaunayFlowNetwork:
                 'n_resident_nodes': len(resident_nodes),
                 'n_transit_connector_nodes': len(connector_nodes),
                 'n_external_links': n_external_links,
-                'external_link_ids': domain_external_link_ids,
+                'external_link_ids': component_external_link_ids,
+                'n_wall_faces': n_wall_faces,
                 'has_residence': bool(resident_nodes),
                 'n_open_resident_nodes': len(open_resident_nodes),
                 'has_open_interior': bool(open_resident_nodes),
@@ -516,18 +660,22 @@ class DelaunayFlowNetwork:
                 'center': np.mean(self.mesh.simplex_centers[nodes], axis=0).tolist(),
                 'flags': [],
             }
-            if family in {'surface_concavity', 'nonresident_passage', 'degenerate_subprobe'}:
-                domain_record['flags'].append('provisional')
+            if family in {
+                'surface_concavity',
+                'nonresident_passage',
+                'degenerate_subprobe',
+            }:
+                component_record['flags'].append('provisional')
             if connector_nodes:
-                domain_record['flags'].append('contains_transit_connector')
+                component_record['flags'].append('contains_transit_connector')
 
-            wet_components.append(domain_record)
+            wet_components.append(component_record)
 
             if resident_nodes:
                 residence_regions.append(
                     {
                         'residence_region_id': len(residence_regions) + 1,
-                        'component_id': domain_index,
+                        'component_id': component_index,
                         'tetrahedron_ids': resident_nodes,
                         'transit_connector_tetrahedron_ids': connector_nodes,
                         'volume_topological_resident': volume_topological_resident,
@@ -537,22 +685,37 @@ class DelaunayFlowNetwork:
                 )
 
             compatibility_record = {
-                'id': domain_index,
+                'id': component_index,
+                'graph_label': graph_label,
                 'family': family,
                 'tetrahedron_indices': nodes,
                 'transit_indices': nodes,
                 'resident_tetrahedron_indices': resident_nodes,
                 'transit_connector_tetrahedron_indices': connector_nodes,
                 'atom_indices': atom_indices,
-                'center': np.asarray(domain_record['center'], dtype=float),
+                'center': np.asarray(component_record['center'], dtype=float),
+                'n_wall_faces': n_wall_faces,
                 'volume_topological_resident': volume_topological_resident,
                 'volume_solvent_estimate': volume_solvent_estimate,
                 'n_mouths': n_external_links,
-                'mouth_area': float(sum(external_links[link_id - 1]['area_geometric'] for link_id in domain_external_link_ids)),
-                'mouths': [external_links[link_id - 1] for link_id in domain_external_link_ids],
-                'mouth_face_clusters': [external_links[link_id - 1]['faces'] for link_id in domain_external_link_ids],
-                'flags': list(domain_record['flags']),
+                'mouth_area': float(
+                    sum(
+                        external_links[link_id - 1]['area_geometric']
+                        for link_id in component_external_link_ids
+                    )
+                ),
+                'mouths': [
+                    external_links[link_id - 1]
+                    for link_id in component_external_link_ids
+                ],
+                'mouth_face_clusters': [
+                    external_links[link_id - 1]['faces']
+                    for link_id in component_external_link_ids
+                ],
+                'flags': list(component_record['flags']),
             }
+
+            compatibility_records.append(compatibility_record)
 
             include_in_compatibility_view = not min_size or len(nodes) >= min_size
             if include_in_compatibility_view:
@@ -566,21 +729,71 @@ class DelaunayFlowNetwork:
                     surface_concavities.append(compatibility_record)
                 elif family == 'nonresident_passage':
                     nonresident_passages.append(compatibility_record)
+                elif family == 'percolating':
+                    percolatings.append(compatibility_record)
                 else:
                     degenerate_subprobes.append(compatibility_record)
 
+        wet_components.sort(
+            key=lambda record: (-record['n_nodes'], record['graph_label'])
+        )
+        wet_id_map = {}
+        for component_index, record in enumerate(wet_components):
+            old_id = int(record['id'])
+            new_id = component_index + 1
+            wet_id_map[old_id] = new_id
+            record['id'] = new_id
+            record['component_index'] = component_index
+            record['size_rank'] = new_id
+
+        for link in external_links:
+            link['component_id'] = wet_id_map[int(link['component_id'])]
+        for region in residence_regions:
+            region['component_id'] = wet_id_map[int(region['component_id'])]
+        for record in compatibility_records:
+            old_id = int(record['id'])
+            new_id = wet_id_map[old_id]
+            record['id'] = new_id
+            record['component_index'] = new_id - 1
+            record['size_rank'] = new_id
+
+        for family_records in (
+            pockets,
+            voids,
+            channels,
+            surface_concavities,
+            nonresident_passages,
+            percolatings,
+            degenerate_subprobes,
+        ):
+            family_records.sort(
+                key=lambda record: (
+                    -len(record['tetrahedron_indices']),
+                    record['graph_label'],
+                )
+            )
+
         dry_mask = ~resident
         dry_components = self._build_dry_components(dry_mask, face_permeable, min_size)
-        dry_interfaces = self._build_dry_interfaces(dry_components, dry_mask, face_permeable)
+        dry_components.sort(key=lambda record: (-record['size'], record['graph_label']))
+        for component_index, record in enumerate(dry_components):
+            new_id = component_index + 1
+            record['id'] = new_id
+            record['component_index'] = component_index
+            record['size_rank'] = new_id
+        dry_interfaces = self._build_dry_interfaces(
+            dry_components, dry_mask, face_permeable
+        )
         self._assign_dry_depths(dry_components, dry_interfaces)
         dry_motifs = self._build_dry_motifs(dry_components, dry_interfaces)
-        dry_components.sort(key=lambda record: record['size'], reverse=True)
 
         return {
             'raw': {
                 'parameters': {
                     'probe_radius': probe_radius,
                     'epsilon_length': self.epsilon,
+                    'residence_tolerance': residence_tolerance,
+                    'permeability_tolerance': permeability_tolerance,
                     'sea_level': sea_level,
                     'radii_model': self.radii_model,
                     'selection': self.selection,
@@ -604,6 +817,7 @@ class DelaunayFlowNetwork:
                 'surface_concavities': surface_concavities,
                 'nonresident_passages': nonresident_passages,
                 'degenerate_subprobes': degenerate_subprobes,
+                'percolatings': percolatings,
             },
             'dry': {
                 'core': dry_components[0] if dry_components else None,
@@ -614,7 +828,14 @@ class DelaunayFlowNetwork:
             },
         }
 
-    def _face_flags(self, tetrahedron_index, face_index, face_marginal, intrusion_suspect, gate_intrusion_policy):
+    def _face_flags(
+        self,
+        tetrahedron_index,
+        face_index,
+        face_marginal,
+        intrusion_suspect,
+        gate_intrusion_policy,
+    ):
         flags = []
         if face_marginal[tetrahedron_index, face_index]:
             flags.append('marginal')
@@ -625,7 +846,9 @@ class DelaunayFlowNetwork:
         return flags
 
     def _gate_intrusion_suspect(self, tetrahedron_index, face_index):
-        face_atoms = set(self.face_atom_keys_per_tet_face[tetrahedron_index][face_index])
+        face_atoms = set(
+            self.face_atom_keys_per_tet_face[tetrahedron_index][face_index]
+        )
         tetra_atoms = set(int(index) for index in self.tetra_atoms[tetrahedron_index])
         opposite_atoms = list(tetra_atoms - face_atoms)
         if not opposite_atoms:
@@ -637,7 +860,9 @@ class DelaunayFlowNetwork:
         norm = np.linalg.norm(normal)
         if norm <= self.epsilon:
             return True
-        distance = abs(float(np.dot(self.atom_coords[opposite_atom] - p0, normal / norm)))
+        distance = abs(
+            float(np.dot(self.atom_coords[opposite_atom] - p0, normal / norm))
+        )
         return distance <= float(self.atom_radii[opposite_atom]) + self.epsilon
 
     def _build_dry_interfaces(self, dry_components, dry_mask, face_permeable):
@@ -679,9 +904,9 @@ class DelaunayFlowNetwork:
                         target_residence_state = 'resident'
                         interface_kind = 'resident_wall'
 
-                face_atoms_local = self.face_atom_keys_per_tet_face[
-                    tetrahedron_index
-                ][face_index]
+                face_atoms_local = self.face_atom_keys_per_tet_face[tetrahedron_index][
+                    face_index
+                ]
                 dry_interfaces.append(
                     {
                         'dry_interface_id': len(dry_interfaces) + 1,
@@ -694,9 +919,7 @@ class DelaunayFlowNetwork:
                                 face_index,
                             ]
                         ),
-                        'face_atoms_local': [
-                            int(atom) for atom in face_atoms_local
-                        ],
+                        'face_atoms_local': [int(atom) for atom in face_atoms_local],
                         'atom_indices': [
                             int(self.atom_indices_map[atom])
                             for atom in face_atoms_local
@@ -740,10 +963,7 @@ class DelaunayFlowNetwork:
 
             component_interfaces = interfaces_by_component.get(int(component['id']), [])
             boundary_nodes = sorted(
-                {
-                    int(interface['tetrahedron_id'])
-                    for interface in component_interfaces
-                }
+                {int(interface['tetrahedron_id']) for interface in component_interfaces}
             )
             depths = {node: None for node in nodes}
             queue = list(boundary_nodes)
@@ -759,12 +979,9 @@ class DelaunayFlowNetwork:
                         depths[neighbor] = depths[node] + 1
                         queue.append(neighbor)
 
-            finite_depths = [
-                depth for depth in depths.values() if depth is not None
-            ]
+            finite_depths = [depth for depth in depths.values() if depth is not None]
             component['dry_interface_ids'] = [
-                int(interface['dry_interface_id'])
-                for interface in component_interfaces
+                int(interface['dry_interface_id']) for interface in component_interfaces
             ]
             component['dry_boundary_tetrahedron_ids'] = boundary_nodes
             component['dry_depth_by_tetrahedron'] = depths
@@ -783,7 +1000,6 @@ class DelaunayFlowNetwork:
         dry_motifs = []
         for component in dry_components:
             component_id = int(component['id'])
-            nodes = [int(node) for node in component['tetrahedron_indices']]
             depth_by_node = {
                 int(node): depth
                 for node, depth in component['dry_depth_by_tetrahedron'].items()
@@ -791,10 +1007,7 @@ class DelaunayFlowNetwork:
             component_interfaces = interfaces_by_component.get(component_id, [])
 
             boundary_nodes = sorted(
-                {
-                    int(interface['tetrahedron_id'])
-                    for interface in component_interfaces
-                }
+                {int(interface['tetrahedron_id']) for interface in component_interfaces}
             )
             if boundary_nodes:
                 dry_motifs.append(
@@ -848,12 +1061,16 @@ class DelaunayFlowNetwork:
                     )
                 )
 
-            finite_depths = [depth for depth in depth_by_node.values() if depth is not None]
+            finite_depths = [
+                depth for depth in depth_by_node.values() if depth is not None
+            ]
             if finite_depths:
                 max_depth = max(finite_depths)
                 if max_depth > 0:
                     core_nodes = sorted(
-                        node for node, depth in depth_by_node.items() if depth == max_depth
+                        node
+                        for node, depth in depth_by_node.items()
+                        if depth == max_depth
                     )
                     dry_motifs.append(
                         self._dry_motif_record(
@@ -912,7 +1129,9 @@ class DelaunayFlowNetwork:
                 target_face_indices = np.where(
                     self.simplex_neighbors[neighbor] == tetrahedron_index
                 )[0]
-                target_face_index = int(target_face_indices[0]) if len(target_face_indices) else -1
+                target_face_index = (
+                    int(target_face_indices[0]) if len(target_face_indices) else -1
+                )
                 shared_face_non_permeable = not bool(
                     face_permeable[tetrahedron_index, face_index]
                 )
@@ -930,7 +1149,9 @@ class DelaunayFlowNetwork:
                             'source_face_index': int(face_index),
                             'target_face_index': target_face_index,
                             'face_id': int(
-                                self.face_ids_per_tet_face[tetrahedron_index, face_index]
+                                self.face_ids_per_tet_face[
+                                    tetrahedron_index, face_index
+                                ]
                             ),
                             'face_atoms_local': [
                                 int(atom)
@@ -975,6 +1196,7 @@ class DelaunayFlowNetwork:
             dry_components.append(
                 {
                     'id': int(label),
+                    'graph_label': int(label),
                     'tetrahedron_indices': nodes,
                     'atom_indices': atom_indices,
                     'size': len(nodes),

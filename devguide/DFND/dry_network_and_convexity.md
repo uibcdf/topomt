@@ -3,12 +3,12 @@
 This document defines the first DFND contract for the dry side of the method.
 
 The wet side of DFND decomposes the probe-habitable space into
-`concavity_domains`. The dry side characterizes the complementary
+`wet_components`. The dry side characterizes the complementary
 probe-excluded and probe-blocking structure. It is the starting point for future
 convexity, boundary, and mixed features such as cores, protrusions, ridges,
 rims, walls, separators, and lining regions.
 
-This document is intentionally less mature than the wet-domain contract. The
+This document is intentionally less mature than the wet-component contract. The
 canonical first step is the dry graph definition. Higher-order dry motifs remain
 candidates until implemented and validated.
 
@@ -110,7 +110,7 @@ Only faces with `R_gate < R_probe` create dry graph edges. Permeable faces belon
 ## 5. Dry Interface
 
 The `dry_interface` is where dry graph objects meet residence regions, transit
-domains, `ExternalLink` records, `OCEAN`, or the hull/exterior context.
+components, `ExternalLink` records, `OCEAN`, or the hull/exterior context.
 
 Interface records should preserve:
 
@@ -119,16 +119,16 @@ Interface records should preserve:
 - resident or transit tetrahedron ids when present;
 - shared face ids;
 - face permeability state;
-- adjacent transit-domain or concavity-domain ids when present;
+- adjacent transit-component or concavity-component ids when present;
 - adjacent `ExternalLink` ids when present;
 - adjacent `OCEAN` or hull context when present;
 - atom and residue ids supporting the interface.
 
 The interface is expected to be important for:
 
-- lining atoms of concavity domains;
+- lining atoms of concavity components;
 - walls of pockets and channels;
-- separators between wet domains;
+- separators between wet components;
 - protrusions into accessible regions;
 - rim candidates around exterior openings;
 - future pharmacophore descriptors.
@@ -173,7 +173,7 @@ correlated with those quantities.
 Each dry node, dry region, or dry motif can carry an interface signature:
 
 ```text
-touched_concavity_domain_ids
+touched_component_ids
 touched_external_link_ids
 touches_ocean
 touches_hull
@@ -188,10 +188,10 @@ topographic objects.
 Examples:
 
 ```text
-touches one concavity_domain mostly
+touches one component mostly
     -> lining_region or wall_candidate
 
-touches two or more concavity_domains
+touches two or more wet_components
     -> separator_candidate or ridge_candidate
 
 touches OCEAN strongly
@@ -210,9 +210,9 @@ Candidate motifs derived from dry components and interfaces include:
 
 - `dry_core_candidate`: large or deeply connected dry component;
 - `dry_island_candidate`: smaller isolated dry component;
-- `lining_region`: dry or dry-coast region adjacent to one concavity domain;
-- `wall_candidate`: dry region forming a boundary of one concavity domain;
-- `separator_candidate`: dry region adjacent to two or more wet domains whose
+- `lining_region`: dry or dry-coast region adjacent to one concavity component;
+- `wall_candidate`: dry region forming a boundary of one concavity component;
+- `separator_candidate`: dry region adjacent to two or more wet components whose
   removal or erosion could connect them;
 - `ridge_candidate`: elongated dry/interface region separating wet regions or
   exterior-accessible regions;
@@ -243,7 +243,7 @@ Recommended first descriptors:
 - supporting dry node ids;
 - supporting dry edge ids;
 - supporting interface ids;
-- adjacent concavity domain ids;
+- adjacent concavity component ids;
 - adjacent external link ids;
 - `touches_ocean`;
 - `exposure_to_ocean`;
@@ -257,7 +257,7 @@ Possible dry-lumping signals:
 - dry-depth layers;
 - interface signature;
 - OCEAN exposure;
-- adjacency to one or more concavity domains;
+- adjacency to one or more concavity components;
 - adjacency to one or more external links;
 - graph bottlenecks or min-cut candidates;
 - geometric shape descriptors.
@@ -342,7 +342,7 @@ The first dry-network implementation should preserve these invariants:
 - dry edges require non-permeable shared faces;
 - every dry node belongs to exactly one `dry_component` under the selected dry
   connectivity policy;
-- dry components do not replace concavity domains;
+- dry components do not replace concavity components;
 - dry motifs are derived from dry components and dry interfaces;
 - filtering tiny dry components is a reporting step, not a graph-construction
   rule;

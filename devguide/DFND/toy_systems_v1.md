@@ -16,7 +16,7 @@ n_resident_nodes
 n_external_links
 has_residence
 has_open_interior
-domain_family
+family
 flags
 ```
 
@@ -24,14 +24,14 @@ flags
 
 ## 2. Toy Void
 
-Purpose: validate an enclosed resident domain with no external access.
+Purpose: validate an enclosed resident component with no external access.
 
 Expected result:
 
 ```text
 n_external_links = 0
 has_residence = true
-domain_family = void_domain
+family = void
 ```
 
 Required checks:
@@ -68,7 +68,7 @@ local_class = wet_sealed
 n_external_links = 0
 has_residence = true
 has_open_interior = false
-domain_family = void_domain
+family = void
 ```
 
 A `wet_sealed` node with external links is invalid under the v1 local DFN contract because sealed means no permeable finite faces.
@@ -85,20 +85,20 @@ Expected result:
 n_external_links = 1
 has_residence = true
 has_open_interior = false
-domain_family = pocket_domain
+family = pocket
 ```
 
 Required checks:
 
 - resident content is sufficient for pocket classification;
-- lack of `wet_open` does not force `surface_concavity_domain`;
+- lack of `wet_open` does not force `surface_concavity`;
 - local `wet_coast` composition is preserved in raw records.
 
 ## 5. Toy Surface Dent With One Link
 
 Implementation status: covered by `tests/test_dfnd_graph_contract.py::test_surface_dent_one_link_has_no_residence`.
 
-Purpose: validate a one-mouth non-resident contact/dent domain.
+Purpose: validate a one-mouth non-resident contact/dent component.
 
 Expected result:
 
@@ -106,7 +106,7 @@ Expected result:
 n_external_links = 1
 has_residence = false
 has_open_interior = false
-domain_family = surface_concavity_domain
+family = surface_concavity
 ```
 
 Required checks:
@@ -124,7 +124,7 @@ Expected result:
 ```text
 n_external_links = 1
 has_residence = true
-domain_family = pocket_domain
+family = pocket
 ```
 
 Required checks:
@@ -133,18 +133,18 @@ Required checks:
 - topological depth increases from external-boundary nodes inward;
 - dry interfaces support wall or lining candidates without changing the pocket family.
 
-## 7. Toy Multi-External-Link Domain
+## 7. Toy Multi-External-Link Component
 
 Implementation status: covered by `tests/test_dfnd_graph_contract.py::test_multi_external_link_domain_has_distinct_external_links`.
 
-Purpose: validate a multi-opening resident domain.
+Purpose: validate a multi-opening resident component.
 
 Expected result:
 
 ```text
 n_external_links >= 2
 has_residence = true
-domain_family = multi_external_link_domain
+family = multi_external_link
 ```
 
 Required checks:
@@ -157,23 +157,23 @@ Required checks:
 
 Implementation status: covered by `tests/test_dfnd_graph_contract.py::test_nonresident_passage_two_links_has_no_residence`.
 
-Purpose: validate a pass-through non-resident transit domain.
+Purpose: validate a pass-through non-resident transit component.
 
 Expected result:
 
 ```text
 n_external_links >= 2
 has_residence = false
-domain_family = nonresident_passage_domain
+family = nonresident_passage
 ```
 
 Required checks:
 
-- the domain is not promoted to public `Channel` by default;
+- the component is not promoted to public `Channel` by default;
 - transit connectors are retained in raw records;
 - path descriptors can be computed later without changing the primary label.
 
-## 9. Toy Subprobe Buried No-Residence Domain
+## 9. Toy Subprobe Buried No-Residence Component
 
 Implementation status: covered by `tests/test_dfnd_graph_contract.py::test_degenerate_subprobe_domain_has_no_links_and_no_residence`.
 
@@ -184,12 +184,12 @@ Expected result:
 ```text
 n_external_links = 0
 has_residence = false
-domain_family = degenerate_subprobe_domain
+family = degenerate_subprobe
 ```
 
 Required checks:
 
-- the domain is not classified as `void_domain`;
+- the component is not classified as `void`;
 - default reporting may filter it from public features while preserving raw records.
 
 ## 10. Toy Dry-Open Cut
@@ -202,12 +202,12 @@ Expected result:
 
 ```text
 two resident regions connected only through one dry_open transit connector
-n_transit_domains = 1
+n_components = 1
 ```
 
 Required checks:
 
-- dropping the connector would split the domain;
+- dropping the connector would split the component;
 - retaining the connector preserves physical transit;
 - connector contributes connectivity but not resident volume.
 

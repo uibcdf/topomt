@@ -8,12 +8,11 @@ variant, and not a wrapper around an external detector. Other engines remain
 useful as references and validation targets, but DFND owns its own semantics.
 
 > **Object model & terminology.** How these objects are organized
-> (`raw / mesh / dfn{ …, components }`) and the `component → domain → feature`
+> (`raw / mesh / dfn{ …, components }`) and the `component → feature`
 > ladder (with `feature` reserved for the public Topography level and `motif` for
-> sub-structures of a domain) are defined authoritatively in
-> [`object_model.md`](object_model.md). The `component` / `feature`
-> wording below is being aligned to that ladder (graph `component` → atom `domain`
-> → public `feature`).
+> sub-structures of a component) are defined authoritatively in
+> [`object_model.md`](object_model.md). The "domain" rung was retired on
+> 2026-05-26 — read any "domain" below as `component` (its spatial representation).
 
 The object-layer invariants and edge-case policies are defined in [`abstract_contract.md`](abstract_contract.md).
 
@@ -157,8 +156,8 @@ Operationally:
 `external_link`. It should not be the primitive used to classify DFN feature
 families.
 
-Domain-internal motifs such as depth regions, throats, bottlenecks, chambers,
-and reduced motif graphs are discussed in [`domain_motifs.md`](domain_motifs.md).
+Component-internal motifs such as depth regions, throats, bottlenecks, chambers,
+and reduced motif graphs are discussed in [`component_motifs.md`](component_motifs.md).
 
 ## 5. Components
 
@@ -169,18 +168,18 @@ are emitted in the raw field `wet_components`, dry ones as dry components.
 
 A `ResidenceRegion` is the resident-node content inside a component.
 
-The **`domain`** of a component is its realization in the molecular system: its
-lining atoms, volume, and centre.
+The **spatial representation** of a component is its realization in the molecular
+system: its lining atoms, volume, and centre.
 
-A **`feature`** is the public `Topography` object promoted from a domain
+A **`feature`** is the public `Topography` object promoted from a component
 (`Pocket` / `Void` / `Channel` / `Mouth` / …) after adding metrics, atoms,
 residues, derived mouth geometry, morphology, dynamics, and functional
 annotations.
 
 DFND avoids using `cavity` as the hypernym because in the broader pocket
 community `cavity` often means a buried inaccessible cavity, close to `void`.
-See [`object_model.md`](object_model.md) for the full `component → domain →
-feature` ladder.
+See [`object_model.md`](object_model.md) for the full `component → feature`
+ladder.
 
 Primary DFND component families:
 
@@ -189,9 +188,10 @@ void
 surface_concavity
 pocket
 channel
+percolating
 ```
 
-### 5.1. Void Domain
+### 5.1. Void Component
 
 A `void` is a finite component with no external links to `OCEAN` and at least one resident node.
 
@@ -199,11 +199,11 @@ A `void` is a finite component with no external links to `OCEAN` and at least on
 void(D) = n_external_links(D) == 0 and has_residence(D)
 ```
 
-Interpretation: an enclosed domain where the selected probe can reside but cannot reach the exterior.
+Interpretation: an enclosed component where the selected probe can reside but cannot reach the exterior.
 
-A no-link domain without residence is not a void in v1. It is reported as a raw `degenerate_subprobe` and can be filtered.
+A no-link component without residence is not a void in v1. It is reported as a raw `degenerate_subprobe` and can be filtered.
 
-### 5.2. Pocket Domain
+### 5.2. Pocket Component
 
 A `pocket` is a finite component with exactly one external link and at least one resident node.
 
@@ -211,7 +211,7 @@ A `pocket` is a finite component with exactly one external link and at least one
 pocket(D) = n_external_links(D) == 1 and has_residence(D)
 ```
 
-Interpretation: a one-mouth resident concavity. The domain may or may not contain a `wet_open` node. A compact one-mouth domain made only of `wet_coast` resident nodes is still a pocket because the probe can reside inside it.
+Interpretation: a one-mouth resident concavity. The component may or may not contain a `wet_open` node. A compact one-mouth component made only of `wet_coast` resident nodes is still a pocket because the probe can reside inside it.
 
 ### 5.3. Surface Component
 
@@ -223,7 +223,7 @@ surface_concavity(D) = n_external_links(D) == 1 and not has_residence(D)
 
 Interpretation: a one-mouth non-resident contact or dent. This family is topologically well-defined, but its practical value remains a validation item. It should not be described simply as a shallow pocket.
 
-### 5.4. Multi-External-Link Domain
+### 5.4. Multi-External-Link Component
 
 A `multi_external_link` is a finite component with two or more external links and at least one resident node.
 
@@ -231,9 +231,9 @@ A `multi_external_link` is a finite component with two or more external links an
 multi_external_link(D) = n_external_links(D) >= 2 and has_residence(D)
 ```
 
-Interpretation: a multi-mouth resident domain. `Channel` is a public shorthand, but tunnel, pore, branched channel, or cleft labels require later morphology, path, and geometric analysis.
+Interpretation: a multi-mouth resident component. `Channel` is a public shorthand, but tunnel, pore, branched channel, or cleft labels require later morphology, path, and geometric analysis.
 
-### 5.5. Nonresident Passage Domain
+### 5.5. Nonresident Passage Component
 
 A `nonresident_passage` is a finite component with two or more external links and no resident nodes.
 
@@ -243,9 +243,18 @@ nonresident_passage(D) = n_external_links(D) >= 2 and not has_residence(D)
 
 Interpretation: a provisional raw pass-through contact. It should not be promoted to a biological channel without additional evidence.
 
+### 5.6. Percolating Component
+
+A `percolating` component is a resident component with **zero walls**: every boundary face is permeable (`n_wall_faces == 0`). This enclosure override takes precedence over the access × residence table.
+
+```text
+percolating(D) = has_residence(D) and n_wall_faces(D) == 0
+```
+
+Interpretation: a fully solvent-permeable / exposed wet region — porous, not a concavity. The selected probe resides but the boundary offers no enclosing wall. Mathematically such a component always presents exactly one external link, but that is a consequence, not the criterion, so no `Mouth` child is promoted. At the `Topography` level it becomes a `Percolating` feature with `shape_type` `neutral` (neither concave, convex nor mixed). Added for completeness; rarely encountered when analysing real proteins.
+
 `wet_open` is retained as `has_open_interior`, a descriptor of open resident interior. It must not be used as the primary family discriminator.
 
-The dry/probe-blocking side of DFND is defined separately in [`dry_network_and_convexity.md`](dry_network_and_convexity.md).
 The dry/probe-blocking side of DFND is defined separately in [`dry_network_and_convexity.md`](dry_network_and_convexity.md).
 
 ## 6. Secondary Classification Axes
@@ -313,11 +322,11 @@ by changes in components and external links:
 
 - void to pocket: `n_external_links` changes from 0 to 1 while `has_residence` remains true;
 - pocket to void: `n_external_links` changes from 1 to 0 while `has_residence` remains true;
-- surface concavity to pocket: `has_residence` appears in a one-link domain;
-- pocket to surface concavity: residence disappears in a one-link domain;
-- pocket to multi-external-link domain: `n_external_links` changes from 1 to 2 or more while residence persists;
-- multi-external-link domain to pocket: `n_external_links` drops to 1 while residence persists;
-- nonresident passage to multi-external-link domain: residence appears in a multi-link domain;
+- surface concavity to pocket: `has_residence` appears in a one-link component;
+- pocket to surface concavity: residence disappears in a one-link component;
+- pocket to multi-external-link component: `n_external_links` changes from 1 to 2 or more while residence persists;
+- multi-external-link component to pocket: `n_external_links` drops to 1 while residence persists;
+- nonresident passage to multi-external-link component: residence appears in a multi-link component;
 - split or merge: connected components change their correspondence across frames.
 
 See [`dynamic_topology.md`](dynamic_topology.md) for the temporal model.

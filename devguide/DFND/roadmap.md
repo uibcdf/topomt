@@ -65,8 +65,8 @@ the same PDBs.
 
 First tasks:
 - Run DFND on `3ptb` (known benzamidine site) and a few small structures.
-- Check whether a `pocket`/`channel` domain lands on the known site: distance
-  from domain center to ligand center (DCC), overlap with ligand-contact
+- Check whether a `pocket`/`channel` component lands on the known site: distance
+  from component center to ligand center (DCC), overlap with ligand-contact
   residues, top-N success.
 - Use `volume_solvent_estimate`, not `volume_topological`, for any volume claim.
 
@@ -83,7 +83,7 @@ a documented, understood failure mode). Unlocks Priorities 2 and 3.
 `Pocket`/`Channel`/`Void` features.
 
 First tasks:
-- Map raw concavity-domain records to the `topomt.features` classes.
+- Map raw concavity-component records to the `topomt.features` classes.
 - Propagate metrics (residence margins, volume estimate, external links/mouths,
   atoms/residues) into the feature objects.
 - Resolve the `get_topography(method=dfnd)` call-shape mismatch.
@@ -110,12 +110,12 @@ volume-detectors miss (e.g. a non-resident gating throat across an MD ensemble).
 
 ## Priority 4 — Hardening and coverage (lower leverage)
 
-- Validate the provisional `surface_concavity_domain` family on real systems
+- Validate the provisional `surface_concavity` family on real systems
   (real shallow dents vs surface noise/slivers).
 - Deterministically construct the two skipped end-to-end toys
   (`nonresident_passage`, `degenerate_subprobe`) if full end-to-end coverage is
   wanted.
-- Profile the `get_topography` per-domain loops at scale.
+- Profile the `get_topography` per-component loops at scale.
 
 ## Deferred / Out of Scope for Now (documented elsewhere)
 

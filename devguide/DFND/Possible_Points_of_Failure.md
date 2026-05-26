@@ -34,7 +34,7 @@ An honest engineering approach requires anticipating failure modes. Here we anal
 *   **Failure Mode:** All internal voids merge into one giant "Swiss Cheese" component, losing the distinction between specific sites.
 *   **Mitigation:**
     *   This is physically real (if the protein is porous).
-    *   **Graph Partitioning:** If a giant component is detected, apply "bottleneck cutting" (e.g., community detection algorithms or max-flow min-cut) to sub-segment the mega-cluster into logical domains based on the narrowest constrictions.
+    *   **Graph Partitioning:** If a giant component is detected, apply "bottleneck cutting" (e.g., community detection algorithms or max-flow min-cut) to sub-segment the mega-cluster into logical components based on the narrowest constrictions.
 
 ## 3. Computational Performance
 

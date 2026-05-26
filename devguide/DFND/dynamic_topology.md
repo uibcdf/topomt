@@ -43,7 +43,7 @@ An instantaneous feature is the result of one frame:
 - `Channel(frame=k)`.
 
 `ExternalLink(frame=k)` and derived `Mouth(frame=k)` descriptors can be
-attached to these domains/features, but they are not primary concavity-domain
+attached to these components/features, but they are not primary concavity-component
 families.
 
 A dynamic feature is an object that links instantaneous features across frames:
@@ -276,7 +276,7 @@ dynamic DFND model.
 The foundation is the dynamic graph:
 
 - nodes and faces tracked over time;
-- void, surface-concavity, pocket, and channel domains tracked as dynamic features;
+- void, surface-concavity, pocket, and channel components tracked as dynamic features;
 - events and metrics extracted from graph evolution.
 
 Once this graph is available, pharmacophoric labels can be overlaid on stable

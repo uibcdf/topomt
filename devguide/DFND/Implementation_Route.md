@@ -15,7 +15,7 @@ Tasks:
 1. Keep standard Delaunay as the baseline substrate.
 2. Keep atomic radii in `R_residence` and `R_gate`, not in a weighted triangulation.
 3. Adopt feature_definitions.md as the canonical DFN, external-link,
-   concavity-domain, and feature-construction contract.
+   concavity-component, and feature-construction contract.
 4. Treat COAST as a mixed-boundary metadata label: at least one permeable face and at least one non-permeable face.
 5. Record every non-default tolerance as an explicit parameter.
 6. Follow abstract_contract.md, numerical_policy.md, metrics_contract.md, and input_policy.md while those policies are refined.
@@ -35,7 +35,7 @@ Goal: create the minimal records needed before feature-level integration.
 Tasks:
 
 1. Add raw records for parameters, tetrahedra, faces, wet network,
-   concavity domains, external links, dry components, dry interfaces, and raw
+   concavity components, external links, dry components, dry interfaces, and raw
    DFND output.
 2. Keep semantic `TopographyFeature` conversion downstream.
 3. Preserve atom ids, atom indices, tetrahedron ids, face ids, thresholds,
@@ -105,23 +105,23 @@ Exit criteria:
 - each unique Delaunay face has one canonical `R_gate` record;
 - internal shared faces do not trigger redundant `R_gate` calculations.
 
-## 5. Implement Domain Classification Cleanly
+## 5. Implement Component Classification Cleanly
 
-Goal: classify concavity domains according to the canonical contract.
+Goal: classify concavity components according to the canonical contract.
 
 Tasks:
 
 1. Build the transit backbone from resident-transit nodes and non-resident transit connectors connected by permeable faces.
-2. Identify residence regions inside each transit domain.
-3. Identify permeable boundary or hull contacts from transit domains to `OCEAN`.
+2. Identify residence regions inside each transit component.
+3. Identify permeable boundary or hull contacts from transit components to `OCEAN`.
 4. Cluster those contacts into `external_links` by boundary-face connectivity.
 5. Classify components as:
-   - Void domain: zero external links and at least one resident node;
-   - Degenerate subprobe domain: zero external links and no resident nodes; raw/filter label;
-   - Pocket domain: exactly one external link and at least one resident node;
-   - Surface concavity domain: exactly one external link and no resident nodes;
-   - Multi-external-link domain: two or more external links and at least one resident node; `Channel` remains a public shorthand only after morphology/path interpretation;
-   - Nonresident passage domain: two or more external links and no resident nodes; provisional raw label.
+   - Void component: zero external links and at least one resident node;
+   - Degenerate subprobe component: zero external links and no resident nodes; raw/filter label;
+   - Pocket component: exactly one external link and at least one resident node;
+   - Surface concavity component: exactly one external link and no resident nodes;
+   - Multi-external-link component: two or more external links and at least one resident node; `Channel` remains a public shorthand only after morphology/path interpretation;
+   - Nonresident passage component: two or more external links and no resident nodes; provisional raw label.
 6. Keep local labels (`open`, `coast`, `sealed`) as metadata and do not let
    them alter backbone connectivity by themselves. Transit state is derived
    separately from residence and permeable-contact count.
@@ -130,7 +130,7 @@ Tasks:
 8. Build the dry graph from finite non-resident tetrahedra connected through
    non-permeable faces.
 9. Extract dry components, dry interfaces, terminal contacts, transit connectors, and dry depth as raw records.
-10. Keep domain-motif and dry-motif analysis separate from primary
+10. Keep component-motif and dry-motif analysis separate from primary
    classification. Start with topological depth, external-link paths, and dry
    interface signatures before enabling capacity-based chamber, throat, rim, or
    protrusion candidates.
@@ -138,7 +138,7 @@ Tasks:
 Exit criteria:
 
 - feature classification is deterministic;
-- every void, provisional surface-concavity, pocket, and multi-external-link domain has enough metadata
+- every void, provisional surface-concavity, pocket, and multi-external-link component has enough metadata
   for debugging and comparison.
 
 ## 6. Integrate with Topography
@@ -171,8 +171,8 @@ Tasks:
    correct.
 2. Implement the toy systems listed in toy_systems_v1.md before real-system
    smoke tests.
-3. Add small synthetic tests where expected transit domains, residence regions,
-   voids, surface concavities, pockets, multi-external-link domains, external
+3. Add small synthetic tests where expected transit components, residence regions,
+   voids, surface concavities, pockets, multi-external-link components, external
    links, dry components, dry interfaces, terminal contacts, transit connectors,
    and dry depth are known by construction.
 4. Add small real-system smoke tests.
@@ -225,4 +225,4 @@ Exit criteria:
 - topological events are reported explicitly.
 
 
-Implementation note: `wet_open` must be exposed as `has_open_interior`, but it must not decide the primary domain family.
+Implementation note: `wet_open` must be exposed as `has_open_interior`, but it must not decide the primary component family.

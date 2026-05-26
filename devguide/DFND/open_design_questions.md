@@ -18,7 +18,7 @@ Canonical policy:
 
 ```text
 Two boundary/hull permeable faces belong to the same external_link if they
-share an edge and belong to the same concavity_domain.
+share an edge and belong to the same component.
 ```
 
 Use `face-edge connectivity` by default. Do not use `face-vertex connectivity`
@@ -56,7 +56,7 @@ These refinements must be explicit policy parameters, not hidden behavior.
 Decision: a `wet_sealed` node has no permeable finite faces. It therefore cannot have direct external links and cannot participate in an accessible transit path under v1 local rules.
 
 ```text
-wet_sealed + has_residence + zero external links -> void_domain singleton
+wet_sealed + has_residence + zero external links -> void singleton
 wet_sealed + external_links -> invalid under the local DFN contract
 ```
 
@@ -67,13 +67,13 @@ If future non-local merging changes this, it must be introduced as an explicit o
 Decide whether `dry_open` remains only in raw diagnostics or feeds candidate
 motifs such as thin passages or inconsistency markers.
 
-## 5. Minimal Domains
+## 5. Minimal Components
 
 Define reporting policy for:
 
 ```text
-one-node domains
-near-zero-volume domains
+one-node components
+near-zero-volume components
 single-face external links
 tiny dry components
 ```
@@ -85,12 +85,12 @@ Core classification should preserve them; filtering should be reporting-only.
 Decide when one global `OCEAN` is sufficient and when fragment-specific exterior
 contexts may be needed.
 
-## 7. Domain Identity
+## 7. Component Identity
 
 Define stable identifiers:
 
 ```text
-domain_id
+id
 external_link_id
 motif_id
 ```
@@ -106,15 +106,15 @@ Core/raw model:
 ```text
 DelaunayMesh
 DelaunayFlowNetwork
-ConcavityDomain
+Component
 ExternalLink
-DomainMotif
+Motif
 DryComponent
 RawDFNDRecord
 ```
 
-`DomainMotif` is included from the start as a record type, even if most motif
-instances are experimental. This does not block the canonical domain pipeline.
+`Motif` is included from the start as a record type, even if most motif
+instances are experimental. This does not block the canonical component pipeline.
 
 `TopographyFeature` belongs to the output/enrichment layer rather than the core
 DFN construction layer.
@@ -137,7 +137,7 @@ visualization, and compatibility with community terminology.
 First implementation should prioritize `ExternalLink` records and attach mouth
 descriptors only when geometric realization is requested.
 
-## 10. Minimal Domain Motifs
+## 10. Minimal Component Motifs
 
 Decide whether the first implementation reports only:
 
@@ -149,9 +149,9 @@ external-link paths
 
 or also `throat_candidate` and `chamber_candidate`.
 
-## 11. Topological Depth in Void Domains
+## 11. Topological Depth in Void Components
 
-For `void_domain`, there is no `external_link`. Decide whether depth is:
+For `void`, there is no `external_link`. Decide whether depth is:
 
 ```text
 not_applicable
@@ -224,7 +224,7 @@ Currently only dry graph and dry/wet interface are canonical.
 Define ownership of atoms/residues for:
 
 ```text
-domain lining
+component lining
 external_link lining
 dry wall
 separator
@@ -234,11 +234,11 @@ separator
 
 Status: **decided for the first implementation**.
 
-Minimal domain metrics:
+Minimal component metrics:
 
 ```text
-domain_id
-domain_family
+id
+family
 n_nodes
 n_edges
 n_external_links
@@ -281,15 +281,15 @@ Status: **decided for the first implementation**.
 Core/raw names:
 
 ```text
-ConcavityDomain
-VoidDomain
-SurfaceConcavityDomain
-PocketDomain
-ChannelDomain
+Component
+Void
+SurfaceConcavity
+Pocket
+Channel
 ExternalLink
 DryComponent
 DryInterface
-DomainMotif
+Motif
 DryMotif
 ```
 
@@ -310,7 +310,7 @@ RimDescriptor
 ```
 
 Use `ExternalLink`, not `ExteriorLink`, because the concept is already defined
-as a link between a domain and `OCEAN`.
+as a link between a component and `OCEAN`.
 
 ## 21. Compatibility With Current topomt.features
 
@@ -345,8 +345,8 @@ R_gate
 wet/dry
 permeable/non-permeable/marginal
 local_class
-domain_id
-domain_family
+id
+family
 external_link_id
 dry_component_id
 dry_interface_id
@@ -410,8 +410,8 @@ Required before relying on the affected classifications:
 ```text
 validate wet_coast / wet_sealed realizability
 audit unequal-radii R_gate model
-keep surface_concavity_domain provisional until validated
-separate multi_external_link_domain from biological channel/tunnel/pore labels
+keep surface_concavity provisional until validated
+separate multi_external_link from biological channel/tunnel/pore labels
 keep volume_topological as raw/debug, not physical solvent volume
 add volume_solvent_estimate before serious volume comparison
 ```
@@ -430,14 +430,14 @@ non_resident + 1 permeable contact -> transit_state = terminal_contact
 non_resident + 0 permeable contacts -> transit_state = non_transit
 ```
 
-Primary movement domains are `TransitDomain` records. Resident content inside
-those domains is stored separately as `ResidenceRegion` records.
-`ConcavityDomain` is the topographic interpretation of a transit domain plus
-its residence regions, external links, and metadata.
+Primary movement components are `Component` records. Resident content inside
+those components is stored separately as `ResidenceRegion` records. A `Component`
+is the connected transit graph piece together with its residence regions,
+external links, and metadata (its topographic interpretation).
 
 
 ## Access x Residence Classifier
 
 Decision: the primary family classifier is `n_external_links x has_residence`. `wet_open` is retired as a family gate and reported only as `has_open_interior`.
 
-Open validation items: practical utility of `surface_concavity_domain`, reporting policy for `nonresident_passage_domain`, and morphology criteria before promoting `multi_external_link_domain` to tunnel or pore terminology.
+Open validation items: practical utility of `surface_concavity`, reporting policy for `nonresident_passage`, and morphology criteria before promoting `multi_external_link` to tunnel or pore terminology.

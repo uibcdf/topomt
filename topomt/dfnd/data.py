@@ -12,9 +12,9 @@ The organization follows ``devguide/DFND/object_model.md``:
         └── components   # the decomposition (wet + dry)
 
 Terminology (object_model.md): a *component* is the graph object (set of
-tetrahedron nodes); its *domain* is the atoms that realize it; *motifs* are
-sub-structures of a domain. The word *feature* is reserved for the public
-``Topography`` level and never appears here.
+tetrahedron nodes) together with its *spatial representation* (the atoms that
+realize it, volume, center); *motifs* are sub-structures of a component. The word
+*feature* is reserved for the public ``Topography`` level and never appears here.
 
 ``dfn.components`` is the typed ``Components`` registry (see ``components.py``),
 mirroring ``Topography``: a ``Mapping[ComponentID, Component]`` with ``_by_side`` /
@@ -32,23 +32,46 @@ from .components import build_components
 # state. We split it so `mesh` exposes only geometry (built once, in principle)
 # and `dfn.graph` exposes only the per-probe state. `raw` keeps the full records.
 _TETRA_GEOMETRY_KEYS = (
-    'tetrahedron_id', 'atom_indices', 'local_atom_indices',
-    'R_residence', 'residence_candidate_kind', 'R_apollonius4', 'apollonius4_valid',
-    'center', 'volume_topological', 'volume_solvent_estimate',
-    'solvent_empty_fraction_estimate', 'solvent_occupied_fraction_estimate',
+    'tetrahedron_id',
+    'atom_indices',
+    'local_atom_indices',
+    'R_residence',
+    'residence_candidate_kind',
+    'R_apollonius4',
+    'apollonius4_valid',
+    'center',
+    'volume_topological',
+    'volume_solvent_estimate',
+    'solvent_empty_fraction_estimate',
+    'solvent_occupied_fraction_estimate',
     'solvent_volume_n_samples',
 )
 _TETRA_STATE_KEYS = (
-    'tetrahedron_id', 'residence_margin', 'residence_state', 'transit_role',
-    'n_permeable_contacts', 'local_class', 'combined_class', 'flags',
+    'tetrahedron_id',
+    'residence_margin',
+    'residence_state',
+    'transit_role',
+    'n_permeable_contacts',
+    'local_class',
+    'combined_class',
+    'flags',
 )
 _FACE_GEOMETRY_KEYS = (
-    'face_id', 'owner_tetrahedron_id', 'neighbor_tetrahedron_id', 'face_index',
-    'face_atoms_local', 'atom_indices', 'R_gate',
+    'face_id',
+    'owner_tetrahedron_id',
+    'neighbor_tetrahedron_id',
+    'face_index',
+    'face_atoms_local',
+    'atom_indices',
+    'R_gate',
 )
 _FACE_STATE_KEYS = (
-    'face_id', 'owner_tetrahedron_id', 'neighbor_tetrahedron_id', 'face_index',
-    'permeability_state', 'flags',
+    'face_id',
+    'owner_tetrahedron_id',
+    'neighbor_tetrahedron_id',
+    'face_index',
+    'permeability_state',
+    'flags',
 )
 
 
@@ -60,9 +83,9 @@ class MeshAtoms:
     """Vertices of the Delaunay mesh (the dummy/real atoms used by DFND)."""
 
     def __init__(self, network: Any) -> None:
-        self.coords = network.atom_coords            # (N, 3) selected-atom coordinates
-        self.radii = network.atom_radii              # (N,)
-        self.index_map = network.atom_indices_map    # local index -> global atom index
+        self.coords = network.atom_coords  # (N, 3) selected-atom coordinates
+        self.radii = network.atom_radii  # (N,)
+        self.index_map = network.atom_indices_map  # local index -> global atom index
 
 
 class Mesh:
@@ -77,11 +100,13 @@ class Mesh:
         self.atoms = MeshAtoms(network)
         self.tetrahedra = _project(raw['tetrahedra'], _TETRA_GEOMETRY_KEYS)
         self.faces = _project(raw['faces'], _FACE_GEOMETRY_KEYS)
-        self.delaunay = network.mesh                 # the underlying DelaunayMesh object
+        self.delaunay = network.mesh  # the underlying DelaunayMesh object
 
     def __repr__(self) -> str:
-        return (f"<dfnd.mesh atoms={len(self.atoms.radii)} "
-                f"tetrahedra={len(self.tetrahedra)} faces={len(self.faces)}>")
+        return (
+            f'<dfnd.mesh atoms={len(self.atoms.radii)} '
+            f'tetrahedra={len(self.tetrahedra)} faces={len(self.faces)}>'
+        )
 
 
 class Graph:
@@ -109,15 +134,17 @@ class DFN:
         self.components = build_components(result)
 
     def __repr__(self) -> str:
-        return (f"<dfnd.dfn probe={self.parameters.get('probe_radius')} "
-                f"{self.components!r}>")
+        return (
+            f'<dfnd.dfn probe={self.parameters.get("probe_radius")} '
+            f'{self.components!r}>'
+        )
 
 
 class DFNDData:
     """Single ``topography.dfnd`` object holding all DFND substrate."""
 
     def __init__(self, network: Any, result: dict[str, Any]) -> None:
-        self._network = network          # holds the cached, probe-independent mesh
+        self._network = network  # holds the cached, probe-independent mesh
         self.raw = result['raw']
         self.mesh = Mesh(network, result['raw'])
         self.dfn = DFN(result)
@@ -126,7 +153,26 @@ class DFNDData:
     def network(self) -> Any:
         return self._network
 
-    def at_probe(self, probe_radius: float, **overrides) -> 'DFNDData':
+    def get_tetrahedra(
+        self, tetrahedron_ids: Any = None, **filters
+    ) -> list[dict[str, Any]]:
+        """Return raw tetrahedron records matching ids and optional filters."""
+        from .selectors import select_tetrahedra
+
+        return select_tetrahedra(
+            self,
+            tetrahedron_ids=tetrahedron_ids,
+            **filters,
+        )
+
+    def get_tetrahedron(self, tetrahedron_id: int) -> dict[str, Any]:
+        """Return one raw tetrahedron record by ``tetrahedron_id``."""
+        records = self.get_tetrahedra(tetrahedron_id)
+        if not records:
+            raise KeyError(f'Tetrahedron ID {tetrahedron_id} not found.')
+        return records[0]
+
+    def at_probe(self, probe_radius: float, **overrides) -> DFNDData:
         """Recompute the DFN and components at a new probe, **reusing the mesh**.
 
         The expensive Delaunay triangulation and the probe-independent clearances
@@ -140,11 +186,108 @@ class DFNDData:
             probe_radius=probe_radius,
             sea_level=overrides.get('sea_level', parameters.get('sea_level')),
             min_size=overrides.get('min_size', 0),
-            transit_policy=overrides.get('transit_policy', parameters['transit_policy']),
+            transit_policy=overrides.get(
+                'transit_policy', parameters['transit_policy']
+            ),
             gate_intrusion_policy=overrides.get(
-                'gate_intrusion_policy', parameters['gate_intrusion_policy']),
+                'gate_intrusion_policy', parameters['gate_intrusion_policy']
+            ),
+            residence_tolerance=overrides.get(
+                'residence_tolerance', parameters.get('residence_tolerance', 0.0)
+            ),
+            permeability_tolerance=overrides.get(
+                'permeability_tolerance', parameters.get('permeability_tolerance', 0.0)
+            ),
         )
         return DFNDData(self._network, result)
 
+    def info(self, tetrahedron_id: Any = None) -> None:
+        """Print a premium scientific diagnostic card for one or several Delaunay tetrahedra."""
+        import molsysmt as msm
+        import numpy as np
+
+        tetrahedra_list = self.raw.get('tetrahedra', [])
+        if not tetrahedra_list:
+            print('No Delaunay tetrahedra found in this topography.')
+            return
+
+        if tetrahedron_id is None:
+            print(f'Topography has {len(tetrahedra_list)} Delaunay tetrahedra.')
+            print(
+                'Please specify a tetrahedron_id (e.g., topography.dfnd.info(0)) to see its detailed diagnostic card.'
+            )
+            return
+
+        if isinstance(tetrahedron_id, (int, np.integer)):
+            target_ids = [int(tetrahedron_id)]
+        else:
+            try:
+                target_ids = [int(x) for x in tetrahedron_id]
+            except Exception:
+                target_ids = [int(tetrahedron_id)]
+
+        mol_sys = getattr(self._network, 'molecular_system', None)
+
+        for tid in target_ids:
+            tet_rec = None
+            for idx, t in enumerate(tetrahedra_list):
+                if t.get('tetrahedron_id', idx) == tid:
+                    tet_rec = t
+                    break
+
+            if not tet_rec:
+                print(f'Error: Tetrahedron ID {tid} not found.')
+                continue
+
+            orig_atoms = tet_rec.get('local_atom_indices', [])
+            residue_details = []
+            if mol_sys is not None:
+                try:
+                    atom_names = msm.get(mol_sys, selection=orig_atoms, atom_name=True)
+                    res_names = msm.get(
+                        mol_sys, selection=orig_atoms, residue_name=True
+                    )
+                    res_ids = msm.get(mol_sys, selection=orig_atoms, residue_id=True)
+
+                    if not isinstance(atom_names, (list, tuple, np.ndarray)):
+                        atom_names = [atom_names]
+                    if not isinstance(res_names, (list, tuple, np.ndarray)):
+                        res_names = [res_names]
+                    if not isinstance(res_ids, (list, tuple, np.ndarray)):
+                        res_ids = [res_ids]
+
+                    for a_idx, a_name, r_name, r_id in zip(
+                        orig_atoms, atom_names, res_names, res_ids
+                    ):
+                        residue_details.append(
+                            f'Atom {a_idx} ({a_name}) inside Residue {r_name} (ID: {r_id})'
+                        )
+                except Exception:
+                    residue_details = [f'Atom index: {a}' for a in orig_atoms]
+            else:
+                residue_details = [f'Atom index: {a}' for a in orig_atoms]
+
+            print('=' * 60)
+            print('🔬 TOPOMT DELAUNAY TETRAHEDRON DIAGNOSTIC CARD')
+            print('-' * 60)
+            print(f'  • Tetrahedron ID   : {tid}')
+            print(f'  • Combined Class   : {tet_rec.get("combined_class", "N/A")}')
+            print(f'  • Transit Role     : {tet_rec.get("transit_role", "N/A")}')
+            print(f'  • Residence State  : {tet_rec.get("residence_state", "N/A")}')
+            print('-' * 60)
+            print(
+                f'  • Topological Vol  : {tet_rec.get("volume_topological", "N/A")} Å³'
+            )
+            print(
+                f'  • Solvent Est. Vol : {tet_rec.get("volume_solvent_estimate", "N/A")} Å³'
+            )
+            print(f'  • Clearance (R_res): {tet_rec.get("R_residence", 0.0):.3f} Å')
+            print('-' * 60)
+            print('  • Atomic Lining composition:')
+            for detail in residue_details:
+                print(f'      - {detail}')
+            print('=' * 60)
+            print()
+
     def __repr__(self) -> str:
-        return f"<DFNDData {self.mesh!r} {self.dfn!r}>"
+        return f'<DFNDData {self.mesh!r} {self.dfn!r}>'

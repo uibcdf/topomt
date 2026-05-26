@@ -21,6 +21,10 @@ def test_regular_tetrahedron_is_wet_sealed_void_domain():
 
     assert len(result['raw']['wet_components']) == 1
     domain = result['raw']['wet_components'][0]
+    assert domain['id'] == 1
+    assert domain['component_index'] == 0
+    assert domain['size_rank'] == 1
+    assert 'graph_label' in domain
     assert domain['family'] == 'void'
     assert domain['n_external_links'] == 0
     assert domain['has_residence'] is True
@@ -71,10 +75,12 @@ def test_marginal_residence_is_flagged_in_raw_tetrahedron_records():
     result = network.get_topography(probe_radius=probe_radius, min_size=0)
     tetrahedron = result['raw']['tetrahedra'][0]
 
-    assert tetrahedron['residence_state'] == 'non_resident'
+    # Generous policy: at exactly R_probe the numerical epsilon favours resident,
+    # while the borderline case is still flagged 'marginal'.
+    assert tetrahedron['residence_state'] == 'resident'
     assert tetrahedron['residence_margin'] == pytest.approx(0.0, abs=1e-12)
     assert 'marginal' in tetrahedron['flags']
-    assert result['raw']['wet_components'] == []
+    assert result['raw']['wet_components'] != []
 
 
 def test_marginal_gate_is_flagged_in_raw_face_and_owner_tetrahedron_records():
@@ -100,7 +106,9 @@ def test_marginal_gate_is_flagged_in_raw_face_and_owner_tetrahedron_records():
     ]
     assert marginal_faces
     assert all('marginal' in face['flags'] for face in marginal_faces)
-    assert all(face['permeability_state'] == 'non_permeable' for face in marginal_faces)
+    # Generous policy: at exactly R_probe the numerical epsilon favours permeable,
+    # while the marginal faces are still flagged.
+    assert all(face['permeability_state'] == 'permeable' for face in marginal_faces)
 
     marginal_owner_ids = {face['owner_tetrahedron_id'] for face in marginal_faces}
     owner_tetrahedra = [
@@ -353,7 +361,9 @@ def test_external_links_reference_existing_boundary_faces_and_atoms():
         assert external_link['area_geometric'] >= 0.0
         assert external_link['R_gate_min'] <= external_link['R_gate_max']
 
-        for face_id, face_atoms in zip(external_link['face_ids'], external_link['faces']):
+        for face_id, face_atoms in zip(
+            external_link['face_ids'], external_link['faces']
+        ):
             face = face_by_id[face_id]
             assert face['neighbor_tetrahedron_id'] == -1
             assert face['permeability_state'] == 'permeable'
@@ -386,7 +396,9 @@ def test_multi_external_link_domain_has_distinct_external_links():
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
     domains = result['raw']['wet_components']
-    multi_domains = [domain for domain in domains if domain['family'] == 'multi_external_link']
+    multi_domains = [
+        domain for domain in domains if domain['family'] == 'multi_external_link'
+    ]
     assert len(multi_domains) == 1
 
     domain = multi_domains[0]
@@ -419,7 +431,9 @@ def test_surface_dent_one_link_has_no_residence():
     radii = np.array([1.7, 1.49, 1.85, 1.39, 1.4, 1.81, 1.57, 1.64], dtype=float)
 
     network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
-    result = network.get_topography(probe_radius=1.4, min_size=0, transit_policy='with_connectors')
+    result = network.get_topography(
+        probe_radius=1.4, min_size=0, transit_policy='with_connectors'
+    )
 
     dents = [
         domain
@@ -437,23 +451,23 @@ def test_surface_dent_one_link_has_no_residence():
 
 
 @pytest.mark.skip(
-    reason="The nonresident_passage family (>=2 external links, no residence) is "
-    "covered directly by the classifier unit test (_classify_component(2, 0)) and the "
-    "non-resident transit-connector machinery is exercised end-to-end by the "
-    "surface_dent and degenerate toys. A stable two-mouth, fully non-resident "
-    "fixture is hard to construct (the two openings tend to merge into one link "
-    "or pick up residence); deferred until a deterministic construction is found."
+    reason='The nonresident_passage family (>=2 external links, no residence) is '
+    'covered directly by the classifier unit test (_classify_component(2, 0)) and the '
+    'non-resident transit-connector machinery is exercised end-to-end by the '
+    'surface_dent and degenerate toys. A stable two-mouth, fully non-resident '
+    'fixture is hard to construct (the two openings tend to merge into one link '
+    'or pick up residence); deferred until a deterministic construction is found.'
 )
 def test_nonresident_passage_two_links_has_no_residence():
     raise NotImplementedError
 
 
 @pytest.mark.skip(
-    reason="The degenerate_subprobe family (0 external links, no residence) is "
-    "covered directly by the classifier unit test (_classify_component(0, 0)). A "
-    "stable end-to-end fixture needs a fully buried non-resident transit cluster "
-    "(no permeable hull face), which is hard to construct robustly and is fragile "
-    "to mesh face/neighbor conventions; deferred like nonresident_passage."
+    reason='The degenerate_subprobe family (0 external links, no residence) is '
+    'covered directly by the classifier unit test (_classify_component(0, 0)). A '
+    'stable end-to-end fixture needs a fully buried non-resident transit cluster '
+    '(no permeable hull face), which is hard to construct robustly and is fragile '
+    'to mesh face/neighbor conventions; deferred like nonresident_passage.'
 )
 def test_degenerate_subprobe_domain_has_no_links_and_no_residence():
     raise NotImplementedError
@@ -477,7 +491,6 @@ def test_min_size_filters_compatibility_views_not_raw_domains():
     assert len(result['raw']['wet_components']) == 1
     assert result['raw']['wet_components'][0]['family'] == 'void'
     assert result['wet']['voids'] == []
-
 
 
 def _dry_record_maps(result):
@@ -511,6 +524,22 @@ def test_dry_components_cover_all_and_only_non_resident_tetrahedra():
     assert component_nodes == dry_nodes
     assert result['dry']['core'] == result['dry']['components'][0]
     assert result['dry']['islands'] == result['dry']['components'][1:]
+
+    dry_components = result['dry']['components']
+    assert [component['id'] for component in dry_components] == list(
+        range(1, len(dry_components) + 1)
+    )
+    assert [component['component_index'] for component in dry_components] == list(
+        range(len(dry_components))
+    )
+    assert [component['size_rank'] for component in dry_components] == list(
+        range(1, len(dry_components) + 1)
+    )
+    assert all('graph_label' in component for component in dry_components)
+    assert [component['size'] for component in dry_components] == sorted(
+        [component['size'] for component in dry_components],
+        reverse=True,
+    )
 
 
 def test_dry_component_edges_use_only_non_permeable_shared_faces():
@@ -596,7 +625,6 @@ def test_permeable_shared_faces_do_not_create_dry_edges():
     )
 
 
-
 def test_dry_interfaces_reference_existing_components_and_faces():
     network = _two_tetrahedra_fixture()
     result = network.get_topography(probe_radius=10.0, min_size=0)
@@ -631,7 +659,9 @@ def test_dry_depth_is_zero_on_boundary_nodes_and_consistent_with_dry_edges():
         finite_depths = [depth for depth in depths.values() if depth is not None]
         assert component['dry_depth_min'] == min(finite_depths)
         assert component['dry_depth_max'] == max(finite_depths)
-        assert component['dry_depth_mean'] == pytest.approx(float(np.mean(finite_depths)))
+        assert component['dry_depth_mean'] == pytest.approx(
+            float(np.mean(finite_depths))
+        )
 
         for edge in component['dry_edges']:
             left = edge['source_tetrahedron_id']
@@ -664,6 +694,7 @@ def test_singleton_dry_component_with_interface_has_depth_zero():
     assert component['dry_depth_max'] == 0
     assert component['dry_depth_mean'] == 0.0
 
+
 def test_dry_motifs_reference_existing_components_interfaces_and_dry_nodes():
     network = _network_from_random_points(seed=4, n_atoms=20)
     result = network.get_topography(probe_radius=1.4, min_size=0)
@@ -690,7 +721,9 @@ def test_dry_core_candidate_uses_component_maximum_dry_depth():
     network = _network_from_random_points(seed=5, n_atoms=24)
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
-    components = {component['id']: component for component in result['dry']['components']}
+    components = {
+        component['id']: component for component in result['dry']['components']
+    }
     core_motifs = [
         motif
         for motif in result['dry']['motifs']
@@ -700,7 +733,10 @@ def test_dry_core_candidate_uses_component_maximum_dry_depth():
         component = components[motif['dry_component_id']]
         assert motif['dry_depth'] == component['dry_depth_max']
         for tetrahedron_id in motif['tetrahedron_ids']:
-            assert component['dry_depth_by_tetrahedron'][tetrahedron_id] == motif['dry_depth']
+            assert (
+                component['dry_depth_by_tetrahedron'][tetrahedron_id]
+                == motif['dry_depth']
+            )
 
 
 def test_gate_intrusion_suspect_is_flagged_and_can_block_face():
@@ -728,9 +764,7 @@ def test_gate_intrusion_suspect_is_flagged_and_can_block_face():
     )
 
     flagged_faces = [
-        face
-        for face in flagged['raw']['faces']
-        if 'intrusion_suspect' in face['flags']
+        face for face in flagged['raw']['faces'] if 'intrusion_suspect' in face['flags']
     ]
     blocked_faces = [
         face

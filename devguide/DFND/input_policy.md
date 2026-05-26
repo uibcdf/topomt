@@ -144,9 +144,9 @@ Current v1 policy:
 - the complete raw-first result is attached as `topography.dfnd_result` while
   the method is being hardened.
 
-Only stable compatibility domain families are converted to public `Topography`
-features in v1: `void_domain`, `pocket_domain`, and
-`multi_external_link_domain`. Provisional domain families remain available in
+Only stable compatibility component families are converted to public `Topography`
+features in v1: `void`, `pocket`, and
+`multi_external_link`. Provisional component families remain available in
 raw records until their public semantics are validated.
 
 The detailed public contract is `api_contract_v1.md`.

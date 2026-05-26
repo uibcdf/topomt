@@ -10,43 +10,43 @@ DFND currently has two intentionally different API layers.
 `dfnd(...)` is the raw-first development and validation API. It returns the full
 DFND result as a nested dictionary with `raw`, `wet`, and `dry` sections. This is
 the authoritative output for auditing the algorithm, inspecting provisional
-domain families, and validating internal records.
+component families, and validating internal records.
 
 `get_topography(method='dfnd')` is the TopoMT integration API. It returns a
-normal `Topography` object and converts only the domain families that already
+normal `Topography` object and converts only the wet components that already
 have stable TopoMT feature counterparts.
 
-The returned `Topography` object also keeps the raw DFND records attached as
-`topography.dfnd_records`. The full raw-first result is attached as
-`topography.dfnd_result` for debugging and development.
+The returned `Topography` object also encapsulates the entire DFND substrate
+under a single `topography.dfnd` object (which exposes `raw`, `mesh`, and
+`dfn` sections for debugging, re-querying, and visual rendering). There are
+no `dfnd_*` attributes at the `Topography` top level.
 
 ## 2. Public Feature Mapping
 
-The v1 public `Topography` view exposes only compatibility concavity domains:
+The v1 public `Topography` view exposes only compatibility concavity features:
 
-| DFND domain family | Public TopoMT feature |
+| DFND family | Public TopoMT feature |
 | --- | --- |
-| `void_domain` | `Void` |
-| `pocket_domain` | `Pocket` |
-| `multi_external_link_domain` | `Channel` |
+| `void` | `Void` |
+| `pocket` | `Pocket` |
+| `multi_external_link` | `Channel` |
 
-`multi_external_link_domain` is the raw topological name. `Channel` is the
+`multi_external_link` is the raw topological name. `Channel` is the
 current public shorthand used by the compatibility TopoMT view.
 
 ## 3. Provisional Records
 
-The following DFND records remain raw/provisional in v1 and are not converted to
+The following DFND wet components remain raw/provisional in v1 and are not converted to
 public `Topography` features yet:
 
-- `surface_concavity_domain`
-- `nonresident_passage_domain`
-- `degenerate_subprobe_domain`
+- `surface_concavity`
+- `nonresident_passage`
+- `degenerate_subprobe`
 - dry components and dry motifs
 
-The `Topography` object may expose these records through `dfnd_*` convenience attributes, but this does not make them public feature classes.
-
-They are still available through `topography.dfnd_records` and direct
-`dfnd(...)` output.
+These raw records are not exposed as direct properties on `Topography` but
+are fully accessible through `topography.dfnd.raw['wet_components']` and the direct
+`dfnd(...)` output dictionary.
 
 This avoids promoting names whose biological or geometric interpretation is
 still under validation, while preserving the complete audit trail.
@@ -57,7 +57,7 @@ Every DFND feature exposed through `get_topography(method='dfnd')` must provide:
 
 - `source`
 - `source_id`
-- `domain_family`
+- `family`
 - `atom_indices`
 - `tetrahedron_indices`
 - `resident_tetrahedron_indices`
@@ -73,7 +73,7 @@ Every DFND feature exposed through `get_topography(method='dfnd')` must provide:
 - `raw_record`
 
 `source` is always `dfnd`. `source_id` is stable within one DFND run and encodes
-the source, domain family, and raw domain identifier.
+the source, family, and raw identifier.
 
 ## 5. Metrics Contract
 
@@ -106,5 +106,5 @@ reproducibility.
 
 The public feature mapping and guaranteed fields above are the current v1
 contract. Raw records may contain more fields than listed here, but downstream
-code should not treat provisional raw-only domain families as stable public
+code should not treat provisional raw-only component families as stable public
 features until they are promoted explicitly.

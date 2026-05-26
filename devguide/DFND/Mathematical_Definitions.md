@@ -54,7 +54,7 @@ The candidate set includes:
 - `face3`: three-atom tangent candidates generated from the 2D tangency
   construction;
 - `pair2`: two-atom-limited candidates on face edges or boundary strata;
-- explicit validation that the candidate center lies in the face domain;
+- explicit validation that the candidate center lies in the face component;
 - actual-clearance recomputation against the three face atoms.
 
 The tangency construction is therefore an internal candidate generator. It is
@@ -215,7 +215,7 @@ mode, but they are not part of the first canonical DFND contract.
 
 ---
 
-## 5. DFN and Concavity Domains
+## 5. DFN and Concavity Components
 
 ### 5.1. Delaunay Flow Network
 Let `DFN` be the probe-specific graph built over the Delaunay triangulation.
@@ -224,8 +224,8 @@ Finite transit tetrahedra are graph nodes. Resident tetrahedra are transit nodes
 Let `OCEAN` be the virtual wet exterior root. It is connected to a finite transit tetrahedron only through a permeable boundary or hull face.
 
 ### 5.2. External Links
-An `external_link` of a concavity domain is a connected cluster of
-permeable boundary or hull contacts between that domain and `OCEAN`.
+An `external_link` of a concavity component is a connected cluster of
+permeable boundary or hull contacts between that component and `OCEAN`.
 
 A single wide exterior opening may contain many boundary faces, but it should
 count as one `external_link` if those faces form one connected cluster.
@@ -233,8 +233,8 @@ count as one `external_link` if those faces form one connected cluster.
 `mouth` is a geometric descriptor that may be derived from an `external_link`;
 it is not the primitive used to define primary DFN feature families.
 
-### 5.3. Primary Domain Families
-Remove `OCEAN` and its incident edges from the transit graph. Each connected component of the remaining finite transit graph is a `TransitDomain`; interpreted topographically with its residence regions and external links, it is a `concavity_domain` `D`.
+### 5.3. Primary Component Families
+Remove `OCEAN` and its incident edges from the transit graph. Each connected component of the remaining finite transit graph is a `Component` `D`, interpreted topographically with its residence regions and external links.
 
 Define:
 
@@ -247,25 +247,25 @@ has_open_interior(D) = exists t in D such that t is wet_open
 Primary family classification uses access and residence:
 
 ```text
-void_domain(D) = L(D) == 0 and has_residence(D)
-degenerate_subprobe_domain(D) = L(D) == 0 and not has_residence(D)
+void(D) = L(D) == 0 and has_residence(D)
+degenerate_subprobe(D) = L(D) == 0 and not has_residence(D)
 
-surface_concavity_domain(D) = L(D) == 1 and not has_residence(D)
-pocket_domain(D) = L(D) == 1 and has_residence(D)
+surface_concavity(D) = L(D) == 1 and not has_residence(D)
+pocket(D) = L(D) == 1 and has_residence(D)
 
-nonresident_passage_domain(D) = L(D) >= 2 and not has_residence(D)
-multi_external_link_domain(D) = L(D) >= 2 and has_residence(D)
+nonresident_passage(D) = L(D) >= 2 and not has_residence(D)
+multi_external_link(D) = L(D) >= 2 and has_residence(D)
 ```
 
-`has_open_interior(D)` is a descriptor, not the classifier. `channel_domain` may be used as a public shorthand for resident `multi_external_link_domain`, but biological channel, tunnel, or pore labels should be assigned only after additional path, depth, geometry, or morphology analysis.
+`has_open_interior(D)` is a descriptor, not the classifier. `channel` may be used as a public shorthand for resident `multi_external_link`, but biological channel, tunnel, or pore labels should be assigned only after additional path, depth, geometry, or morphology analysis.
 
-`surface_concavity_domain` remains provisional until explicit toy systems or
+`surface_concavity` remains provisional until explicit toy systems or
 geometric sweeps demonstrate the realizability and utility of accessible
-wet domains without wet-open tetrahedra under the current `R_residence` and
+wet components without wet-open tetrahedra under the current `R_residence` and
 `R_gate` definitions.
 
 ### 5.4. Component Volume
-The topological volume of a concavity domain `D` is the sum of the Euclidean
+The topological volume of a concavity component `D` is the sum of the Euclidean
 volumes of its constituent finite Delaunay tetrahedra.
 
 $$ Vol_{topological}(D) = \sum_{T \in D} Vol(T) $$

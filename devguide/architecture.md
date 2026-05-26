@@ -152,7 +152,7 @@ Relevant design references are:
 - [DFND/Technical_Design.md](DFND/Technical_Design.md)
 - [DFND/feature_definitions.md](DFND/feature_definitions.md)
 - [DFND/abstract_contract.md](DFND/abstract_contract.md)
-- [DFND/domain_motifs.md](DFND/domain_motifs.md)
+- [DFND/component_motifs.md](DFND/component_motifs.md)
 - [DFND/numerical_policy.md](DFND/numerical_policy.md)
 - [DFND/metrics_contract.md](DFND/metrics_contract.md)
 - [DFND/input_policy.md](DFND/input_policy.md)
