@@ -50,7 +50,7 @@ DEFAULT_CASTP1_DIRS = {
 _DFND_FAMILY_TO_CASTP = {
     'pocket': 'pocket',
     'void': 'void',
-    'multi_external_link': 'channel',
+    'channel': 'channel',
 }
 
 
@@ -416,7 +416,7 @@ def write_markdown(
             '## Reading Notes',
             '',
             '- CASTp1, CASTp3.0, and CASTpFold are kept as distinct oracle sources; CASTp3.0 and CASTpFold are not collapsed even when their files agree.',
-            '- channel in this report merges CASTp channel and branched_channel because DFND currently exposes multi_external_link_domain as the topological channel-compatible family.',
+            '- channel in this report merges CASTp channel and branched_channel because DFND currently exposes channel_domain as the topological channel-compatible family.',
             '- Exact matches compare full feature atom sets using PDB serial numbers. Count agreement without exact matches means the feature inventory is numerically similar but not atom-identical.',
             '- Mouth comparison is provisional because DFND external links are graph-derived geometric apertures, not CASTp alpha-shape mouth triangles.',
             '- This report is intended to select cases for fine inspection before algorithmic changes.',

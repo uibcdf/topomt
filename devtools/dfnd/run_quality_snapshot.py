@@ -130,7 +130,7 @@ def write_markdown(records, output_path, selection, probe_radius):
             '',
             '- The table is sorted by resident solvent-volume estimate, then resident nodes, then total nodes.',
             '- Large numbers of small voids are expected at this stage and should be evaluated later with reporting filters, not by changing the core decomposition.',
-            '- `multi_external_link_domain` is still a topological multi-link label; biological channel/tunnel interpretation remains a later morphology step.',
+            '- `channel_domain` is still a topological multi-link label; biological channel/tunnel interpretation remains a later morphology step.',
         ]
     )
     output_path.write_text('\n'.join(lines) + '\n')

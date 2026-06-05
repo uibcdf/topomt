@@ -18,7 +18,7 @@ DEFAULT_SYSTEMS = ('1crn', '1rop', '2pk4', '3phv', '8rat', '1stp')
 PUBLIC_DOMAIN_FAMILIES = {
     'void',
     'pocket',
-    'multi_external_link',
+    'channel',
 }
 
 

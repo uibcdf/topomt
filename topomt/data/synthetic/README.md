@@ -20,28 +20,29 @@ the DFND family summary at the listed probe (significant = >= 5 resident nodes).
 | `hollow_sphere_void.pdb` | 103 | 1.4 | one enclosed void (0 mouths) | 1x void |
 | `hollow_sphere_pocket.pdb` | 96 | 1.4 | one polar opening -> pocket (1 mouth) | 1x pocket |
 | `hollow_sphere_leaky.pdb` | 89 | 1.8 | wall seals a 1.8 A probe, leaks a 1.0 A probe (sweep) | 1x void |
-| `tube_channel.pdb` | 77 | 1.4 | open tube -> channel (>=2 mouths) | 1x multi_external_link, 2x pocket |
+| `tube_channel.pdb` | 77 | 1.4 | open tube -> channel (>=2 mouths) | 1x channel, 2x pocket |
+| `tube_channel_clean.pdb` | 81 | 1.4 | narrow, densely-walled tube -> single clean channel (2 mouths) with minimal side-pocket noise; canonical two-mouth-channel fixture | 1x channel, 1x pocket |
 | `dumbbell.pdb` | 94 | 1.4 | two chambers + throat: 1 void @1.4, 2 voids @2.2 (volume != connectivity) | 1x pocket, 1x void |
 | `solid_ball_control.pdb` | 56 | 1.4 | negative control: no cavity | (none significant) |
 | `blind_well_d6_r6.pdb` | 135 | 1.4 | shallow bored well -> pocket (1 mouth) | 3x pocket |
 | `blind_well_d8_r6.pdb` | 172 | 1.4 | deep bored well -> pocket (1 mouth) | 1x pocket |
 | `blind_well_d12_r6.pdb` | 209 | 1.4 | very deep bored well -> pocket (depth layers) | 1x pocket |
-| `slab_pore_r4_t6.pdb` | 66 | 1.4 | pore through a slab -> channel (2 mouths) | 1x multi_external_link, 2x pocket |
+| `slab_pore_r4_t6.pdb` | 66 | 1.4 | pore through a slab -> channel (2 mouths) | 1x channel, 2x pocket |
 | `two_voids_gap14.pdb` | 132 | 1.4 | two disjoint hollow spheres -> two separate voids (counting) | 1x pocket, 2x void |
 | `surface_bowl_shallow_d2.pdb` | 92 | 1.4 | shallow dent -> open pocket + surface texture | 1x pocket |
 | `surface_bowl_deep_d6.pdb` | 220 | 1.4 | deeper bowl -> dominant open pocket + surface texture | 1x pocket |
-| `branched_tube_y.pdb` | 88 | 1.4 | Y junction of three tubes -> channel with 3 mouths | 1x multi_external_link, 1x pocket |
+| `branched_tube_y.pdb` | 88 | 1.4 | Y junction of three tubes -> channel with 3 mouths | 1x channel, 1x pocket |
 | `nested_spheres.pdb` | 251 | 1.4 | sphere inside a sphere -> core void + shell-gap void (2 voids) | 2x void |
-| `curved_tube_120.pdb` | 144 | 1.4 | bent tube -> channel (2 mouths), curvature-independent | 1x multi_external_link, 1x pocket |
+| `curved_tube_120.pdb` | 144 | 1.4 | bent tube -> channel (2 mouths), curvature-independent | 1x channel, 1x pocket |
 | `flask_neck_narrow.pdb` | 94 | 1.4 | narrow neck seals chamber -> void + neck pocket (throat gating) | 1x pocket, 1x void |
 | `flask_neck_wide.pdb` | 114 | 1.4 | wide neck -> open pocket (throat open, no void) | 2x pocket |
 | `two_openings_pinhole.pdb` | 93 | 1.4 | pinhole second mouth does not register -> pocket (marginal mouth) | 1x pocket, 2 dry bodies |
-| `two_openings_open.pdb` | 89 | 1.4 | both mouths register -> channel (2 mouths) | 1x multi_external_link, 2 dry bodies |
+| `two_openings_open.pdb` | 89 | 1.4 | both mouths register -> channel (2 mouths) | 1x channel, 2 dry bodies |
 | `asymmetric_dumbbell.pdb` | 86 | 1.4 | unequal chambers + offset throat: 1 void @1.4, 2 voids @2.2 | 2x pocket, 1x void |
 | `swiss_cheese_percolating.pdb` | 152 | 1.4 | overlapping carved voids percolate -> one connected mega-cluster | 1x pocket |
 | `swiss_cheese_sparse.pdb` | 261 | 1.4 | wider-spaced voids -> partially separated cavities | 5x pocket, 1x void |
 | `void_with_island.pdb` | 131 | 1.4 | solid island inside a void -> still one void (genus not tracked) | 1x void |
-| `helical_tube.pdb` | 384 | 1.4 | helical channel -> 1 channel (2 mouths), complex 3D path | 1x multi_external_link, 2x pocket |
+| `helical_tube.pdb` | 384 | 1.4 | helical channel -> 1 channel (2 mouths), complex 3D path | 1x channel, 2x pocket |
 | `onion_shells_3.pdb` | 517 | 1.4 | three concentric shells -> three nested voids | 3x void |
 | `sliver_sheet.pdb` | 36 | 1.4 | flat sheet: no false tunnel/void (alpha-shape sliver trap) | 2x pocket |
 | `pocket_intruder_open.pdb` | 81 | 1.4 | 3-atom wall mouth open -> pocket | 1x pocket |
@@ -50,6 +51,8 @@ the DFND family summary at the listed probe (significant = >= 5 resident nodes).
 | `rough_surface.pdb` | 75 | 1.4 | sub-probe roughness -> spray of tiny spurious features (over-reporting study) | 3x pocket, 14x void |
 | `two_blocks_fused.pdb` | 250 | 1.4 | narrow gap -> dry network bridges -> one body (interface fuses) | 5x pocket |
 | `two_blocks_interface.pdb` | 250 | 1.4 | solvent-wide gap -> two dry banks + a wet interface lined by both | 3x pocket, 2 dry bodies |
+| `two_blocks_interface_wide_gap.pdb` | 250 | 1.4 | wide solvent gap (>=3.4 A vdW clearance) -> two dry banks + a wet interface lined by both | 3x pocket, 2 dry bodies |
+| `two_blocks_interface_slabs.pdb` | 100 | 1.4 | local interface fragment: only the two facing x-layers from each block | 1x channel, 2x pocket, 2 dry bodies |
 | `three_blocks_interface.pdb` | 192 | 1.4 | three bodies in a row -> two interfaces | 2x pocket, 3 dry bodies |
 | `interface_pocket.pdb` | 400 | 1.4 | cavity at the contact plane -> buried pocket lined by both bodies | 5x pocket, 1x void |
 | `interface_pocket_open.pdb` | 396 | 1.4 | interface cavity with a mouth -> one-mouth pocket lined by both bodies | 3x pocket |
@@ -61,14 +64,14 @@ the DFND family summary at the listed probe (significant = >= 5 resident nodes).
 | `pathological_jittered_cube.pdb` | 61 | 1.4 | reference: same cube with 0.1 A jitter gives a different answer | 3x pocket |
 | `pathological_two_balls.pdb` | 54 | 1.4 | FAIL: two convex bodies make a phantom inter-body pocket (ideal: 0) | 1x pocket, 2 dry bodies |
 | `pathological_parallel_plates.pdb` | 98 | 1.4 | FAIL: thin gap between plates fragments into spurious voids (ideal: 0) | 5x pocket, 4x void |
-| `pathological_undersampled_sphere.pdb` | 59 | 1.4 | FAIL: same R=10 cavity reads as channel when wall is sparsely sampled (sampling sensitivity) | 1x multi_external_link |
+| `pathological_undersampled_sphere.pdb` | 59 | 1.4 | FAIL: same R=10 cavity reads as channel when wall is sparsely sampled (sampling sensitivity) | 1x channel |
 | `pathological_thin_tube_r20.pdb` | 24 | 1.4 | FAIL: very thin tube -> no significant feature (ideal: 1 channel) | (none significant) |
 | `pathological_thin_tube_r25.pdb` | 30 | 1.4 | FAIL: thin tube fragments into pockets (ideal: 1 channel) | 2x pocket |
 | `pathological_thin_tube_r30.pdb` | 36 | 1.4 | FAIL: thin tube produces a spurious void (ideal: 1 channel) | 3x pocket, 1x void |
-| `thin_tube_r35.pdb` | 42 | 1.4 | reference: at r=3.5 the tube is finally recognised as a channel | 1x multi_external_link, 1x pocket |
-| `pathological_patchy_sphere.pdb` | 98 | 1.4 | FAIL: closed sphere with a sparsely-sampled hemisphere reads as open (ideal: void) | 1x multi_external_link |
-| `pathological_mixed_radii_shell.pdb` | 68 | 1.4 | FAIL: noble-gas mixed-radii wall reclassifies vs uniform argon (radius model; He/Ne/Ar/Kr/Xe) | 1x multi_external_link |
-| `pathological_marginal_gate_sphere.pdb` | 86 | 1.4 | FAIL: wall gate at the probe threshold -> void/pocket/channel flickers with the seed | 1x multi_external_link |
+| `thin_tube_r35.pdb` | 42 | 1.4 | reference: at r=3.5 the tube is finally recognised as a channel | 1x channel, 1x pocket |
+| `pathological_patchy_sphere.pdb` | 98 | 1.4 | FAIL: closed sphere with a sparsely-sampled hemisphere reads as open (ideal: void) | 1x channel |
+| `pathological_mixed_radii_shell.pdb` | 68 | 1.4 | FAIL: noble-gas mixed-radii wall reclassifies vs uniform argon (radius model; He/Ne/Ar/Kr/Xe) | 1x channel |
+| `pathological_marginal_gate_sphere.pdb` | 86 | 1.4 | FAIL: wall gate at the probe threshold -> void/pocket/channel flickers with the seed | 1x channel |
 | `pathological_oblate_void.pdb` | 183 | 1.4 | FAIL: thin slit-shaped void fragments into two voids (ideal: 1) | 5x pocket, 2x void |
 | `pathological_conical_channel.pdb` | 48 | 1.4 | FAIL: tapering channel fragments into pockets, no channel (ideal: 1 channel) | 4x pocket |
 | `pathological_star_void.pdb` | 500 | 1.4 | FAIL: star/branched void fragments; core void not even dominant (ideal: 1 void) | 6x pocket, 1x void |
@@ -76,6 +79,6 @@ the DFND family summary at the listed probe (significant = >= 5 resident nodes).
 | `pathological_pocket_in_pocket.pdb` | 442 | 1.4 | FAIL: nested pocket+sub-pocket over-segments, no hierarchy (ideal: ~2 nested) | 5x pocket |
 | `pathological_u_channel.pdb` | 178 | 1.4 | FAIL: U-tunnel not connected as a channel + spurious void (ideal: 1 channel) | 4x pocket, 1x void |
 | `pathological_edge_cavity.pdb` | 208 | 1.4 | FAIL: cavity at the block corner fragments into pockets (ideal: 1) | 5x pocket |
-| `pathological_packed_blob_loose.pdb` | 104 | 1.4 | FAIL: loosely packed solid blob sprays phantom voids (ideal: 0) | 2x multi_external_link, 6x pocket, 4x void |
+| `pathological_packed_blob_loose.pdb` | 104 | 1.4 | FAIL: loosely packed solid blob sprays phantom voids (ideal: 0) | 2x channel, 6x pocket, 4x void |
 | `packed_blob_dense.pdb` | 202 | 1.4 | reference: at vdW contact the same blob has zero phantom features (clean) | (none significant) |
 | `two_chambers_septum.pdb` | 313 | 1.4 | reference: a 1 A septum correctly keeps two chambers as two voids | 5x pocket, 2x void |
