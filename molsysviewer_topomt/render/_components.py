@@ -8,7 +8,7 @@ from topomt import pyunitwizard as puw
 from topomt.dfnd import families as fam
 from topomt.dfnd.selectors import select_faces
 
-from ._common import _resolve_topography, _dfnd_edge_meta
+from ._common import _dfnd_edge_meta, _resolve_topography
 
 _TYPE_PALETTE = {
     fam.POCKET: 0x3B82F6,  # Blue
@@ -290,11 +290,11 @@ def show_dfnd_components(
         )
         return layer
 
+
     elif representation == 'cloud':
         # Render a separate volumetric pocket blob layer per component
         for comp in selected_components:
             comp_id = comp.component_id
-            color = resolved_colors[comp_id]
             centers, radii = _component_spheres(
                 comp, tetra_map, mesh, use_resident_nodes=use_resident_nodes
             )
@@ -305,9 +305,9 @@ def show_dfnd_components(
             layer = view.shapes.add_pocket_blob(
                 centers=puw.quantity(centers, 'angstroms'),
                 radii=puw.quantity(radii, 'angstroms'),
-                color_map=[color, color],
                 alpha=alpha,
                 tag=tag,
+                layer_tag=tag_prefix,
                 name=f'{name} {comp_id}',
                 resolution=resolution,
                 smoothing=smoothing,

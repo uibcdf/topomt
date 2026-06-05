@@ -1109,7 +1109,10 @@ def test_show_dfnd_components_creates_shapes():
     view = DummyView()
     layer = show_dfnd_components(view, topo, representation='cloud')
     assert layer is not None
-    assert any(msg['op'] == 'add_pocket_blob' for msg in view.messages)
+    blob_messages = [msg for msg in view.messages if msg['op'] == 'add_pocket_blob']
+    assert blob_messages
+    assert blob_messages[0]['options']['layer_tag'] == 'dfnd-comp'
+    assert 'color_map' not in blob_messages[0]['options']
 
     # Test surface mode
     view = DummyView()
