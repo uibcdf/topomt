@@ -191,14 +191,14 @@ Then:
 ```text
 0 links + residence    -> void_domain
 1 link  + residence    -> pocket_domain
->=2 links + residence  -> multi_external_link_domain
+>=2 links + residence  -> channel_domain
 ```
 
 The historical four-atom-only shortcut could underestimate real residence and falsely turn a resident domain into a non-resident one:
 
 ```text
 pocket_domain                 -> surface_concavity_domain
-multi_external_link_domain    -> nonresident_passage_domain
+channel_domain    -> nonresident_passage_domain
 void_domain                   -> degenerate_subprobe_domain
 ```
 
@@ -206,7 +206,7 @@ The historical four-atom-only shortcut could also overestimate real residence an
 
 ```text
 surface_concavity_domain      -> pocket_domain
-nonresident_passage_domain    -> multi_external_link_domain
+nonresident_passage_domain    -> channel_domain
 degenerate_subprobe_domain    -> void_domain
 ```
 

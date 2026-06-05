@@ -66,7 +66,7 @@ Validated by active tests so far:
 - wet-sealed regular tetrahedron toy;
 - `dry_open_cut` / transit-connector policy divergence.
 - `wet_coast_pocket_1link` classifier regression.
-- `multi_external_link` end-to-end fixture.
+- `channel` end-to-end fixture.
 - `nonresident_passage_2links` non-resident multi-link classifier regression.
 - `degenerate_subprobe` no-link/no-residence classifier regression.
 - public dfnd(...) smoke test exercises MolSysMT file input and input-policy recording.

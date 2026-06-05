@@ -411,7 +411,7 @@ Required before relying on the affected classifications:
 validate wet_coast / wet_sealed realizability
 audit unequal-radii R_gate model
 keep surface_concavity provisional until validated
-separate multi_external_link from biological channel/tunnel/pore labels
+separate channel from biological channel/tunnel/pore labels
 keep volume_topological as raw/debug, not physical solvent volume
 add volume_solvent_estimate before serious volume comparison
 ```
@@ -440,4 +440,4 @@ external links, and metadata (its topographic interpretation).
 
 Decision: the primary family classifier is `n_external_links x has_residence`. `wet_open` is retired as a family gate and reported only as `has_open_interior`.
 
-Open validation items: practical utility of `surface_concavity`, reporting policy for `nonresident_passage`, and morphology criteria before promoting `multi_external_link` to tunnel or pore terminology.
+Open validation items: practical utility of `surface_concavity`, reporting policy for `nonresident_passage`, and morphology criteria before promoting `channel` to tunnel or pore terminology.

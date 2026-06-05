@@ -225,10 +225,10 @@ Interpretation: a one-mouth non-resident contact or dent. This family is topolog
 
 ### 5.4. Multi-External-Link Component
 
-A `multi_external_link` is a finite component with two or more external links and at least one resident node.
+A `channel` is a finite component with two or more external links and at least one resident node.
 
 ```text
-multi_external_link(D) = n_external_links(D) >= 2 and has_residence(D)
+channel(D) = n_external_links(D) >= 2 and has_residence(D)
 ```
 
 Interpretation: a multi-mouth resident component. `Channel` is a public shorthand, but tunnel, pore, branched channel, or cleft labels require later morphology, path, and geometric analysis.

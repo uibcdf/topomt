@@ -33,7 +33,7 @@ This is the wet/dry symmetry of DFND applied to the contact between bodies.
 
 ## 2. Interface is an orthogonal axis, not a new wet family
 
-The wet family axis (`void` / `pocket` / `multi_external_link` /
+The wet family axis (`void` / `pocket` / `channel` /
 `surface_concavity`) counts **mouths to OCEAN**. Whether a region is an interface
 is a **separate axis** that counts **how many bodies line it**. They are
 independent, so the cross-product is meaningful (consistent with the secondary
@@ -132,10 +132,51 @@ recovered with explicit labels as an interface pocket + a buried interface void;
 the three-body junction cavity reports three lining bodies — confirming the
 section 4 analysis end to end.
 
-## 7. Still to build (full feature layer)
+## 7. Feature-layer status (updated 2026-06-05)
 
-The prototype classifies components; promoting them to first-class `Topography`
-features (roadmap Priority 2) still needs: ingesting input chain/`molecule`
-labels as a body source, carrying bank ids + lining split onto `Interface`
-feature objects, and realizing the **bare** interface (no wet component) from the
-`dry_permeable_contact` faces between two banks (area, normal, `R_gate`).
+**Done.** The native (dry-bank) interface classification is now wired into the
+promotion path (`api.py::dfnd_to_topography`): every typed wet component carries
+`is_interface` / `interface_family` / `lining_bodies` / `lining_body_split`
+(`components.py::_attach_interface_labels`), and those flags are copied onto the
+public concavity features. `components.wet_interfaces` lists the flagged ones.
+The wet↔dry contact is materialized too (the *coast* and per-component *lining*,
+see object_model.md §10): `WetComponent.dry_lining`, `DryComponent.wet_lining`,
+and `DryComponent.interface_walls` (the dry banks' wall against a wet interface),
+which closes the symmetry of §1.
+
+**Still to build.** Ingesting input chain/`molecule` labels as a body source for
+the promotion path (today it uses the native dry-bank route, so it inherits the
+fusion limit of §4); and realizing the **bare** interface (no wet component) from
+the `dry_permeable_contact` faces between two banks (area, normal, `R_gate`).
+
+## 8. Session notes (2026-06-04): mouth signal, localization, catalog gap
+
+Findings from a `two_blocks_interface` walkthrough, recorded so they are not
+re-derived:
+
+- **Catalog gap — now closed (see §7).** This was the gap: `dfnd_to_topography`
+  used not to call the classification, so the gap region was promoted as a plain
+  `Pocket` with no `is_interface` flag and its interface identity was invisible.
+  It is now wired in (the orthogonal-axis approach of §2 was kept — the mouth
+  family is untouched, the interface descriptor rides alongside it). On
+  `two_blocks_interface` the gap component (`WET-1`) comes out
+  `is_interface=True`, `interface_family='interface_pocket'`,
+  `lining_bodies=['DRY-1','DRY-2']`, and those flags reach the public feature.
+
+- **Mouth signal (sharper, but narrower than lining).** The external link of the
+  gap component is itself split across both banks (rim atoms ~18 in DRY-1 / ~19
+  in DRY-2). So "a mouth whose rim spans >=2 dry banks" is a clean, localized
+  interface signal. It is a *complement*, not a replacement, for the §3 lining
+  criterion: lining also catches buried interfaces (no mouth), which the mouth
+  signal misses. Good fit for the **bare interface / open slab** row of §2.
+
+- **Why the gap component wraps everything.** In a finite system (no sea level)
+  the single wet component spans the whole exterior of both bodies *plus* the
+  gap: it is the interface slab (a hub) with ~18 shallow surface rafts hanging
+  off it. Removing the slab shatters the rest into those rafts.
+
+- **Localization is only partial (experimental).** `topomt/dfnd/experimental.py`
+  (`localize_interface_core` via betweenness; `peel_surface_rafts` via pendant
+  peeling) localizes the slab vs the rafts, but neither gives a crisp boundary:
+  the slab **grades into the exterior at the gap rim**, so there is no clean
+  graph cut. Exploratory only; not wired into `get_topography`.

@@ -254,10 +254,10 @@ surface_concavity(D) = L(D) == 1 and not has_residence(D)
 pocket(D) = L(D) == 1 and has_residence(D)
 
 nonresident_passage(D) = L(D) >= 2 and not has_residence(D)
-multi_external_link(D) = L(D) >= 2 and has_residence(D)
+channel(D) = L(D) >= 2 and has_residence(D)
 ```
 
-`has_open_interior(D)` is a descriptor, not the classifier. `channel` may be used as a public shorthand for resident `multi_external_link`, but biological channel, tunnel, or pore labels should be assigned only after additional path, depth, geometry, or morphology analysis.
+`has_open_interior(D)` is a descriptor, not the classifier. The resident multi-mouth family is named `channel` (mapping to the public `Channel` feature), but biological channel, tunnel, or pore labels should be assigned only after additional path, depth, geometry, or morphology analysis.
 
 `surface_concavity` remains provisional until explicit toy systems or
 geometric sweeps demonstrate the realizability and utility of accessible

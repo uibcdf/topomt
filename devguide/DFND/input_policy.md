@@ -146,7 +146,7 @@ Current v1 policy:
 
 Only stable compatibility component families are converted to public `Topography`
 features in v1: `void`, `pocket`, and
-`multi_external_link`. Provisional component families remain available in
+`channel`. Provisional component families remain available in
 raw records until their public semantics are validated.
 
 The detailed public contract is `api_contract_v1.md`.

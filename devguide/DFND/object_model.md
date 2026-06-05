@@ -97,8 +97,13 @@ topography.dfnd
     ├── parameters      # probe_radius, transit_policy, gate_intrusion_policy, epsilon, radii_model
     ├── graph           # nodes (wet/dry state, transit_role, flags; ref mesh tetra),
     │                   #   edges (permeable faces, transit edges), OCEAN
+    │                   #   .neighbors(node_id, side=None|'wet'|'dry')   ← §10
     └── components       # the decomposition registry (see §5)
+                        #   .coast_faces  (wet↔dry contact faces)         ← §10
 ```
+
+`mesh.neighbors(tetra_id)` gives the bare (probe-independent) face-adjacency;
+`dfn.graph.neighbors` adds the wet/dry filter (probe-dependent). See §10.
 
 **Lifecycle = the reason mesh and dfn are siblings.** `mesh` is probe-independent
 (the clearances `R_residence`, `R_gate` are geometric, computed once). `dfn`
@@ -141,16 +146,26 @@ there is one mental model for both levels.
 **`WetComponent`** (≡ concavity classes): `resident_node_indices`,
 `transit_connector_node_indices`, `external_link_ids`, `n_mouths`, `mouth_area`,
 `has_residence`, `has_open_interior`, `volume_topological_resident`,
-`volume_solvent_estimate`.
+`volume_solvent_estimate`; the interface descriptor `is_interface` /
+`interface_family` / `lining_bodies` / `lining_body_split` (§10,
+[`interfaces.md`](interfaces.md)); and the wet→dry adjacency `dry_lining` (§10).
 
 **`DryComponent`**: `interface_ids`, `neighbor_component_ids`,
-`dry_depth_{min,max,mean}` (+ per-node), `motif_ids`.
+`dry_depth_{min,max,mean}` (+ per-node), `motif_ids`; and the dry→wet adjacency
+`wet_lining` + the named view `interface_walls` (§10).
 
 Two subclasses (not one per family) because the wet families differ only by the
 `family` label, not by structure. Motif slots and registries exist on both sides;
 both wet-component motifs (such as canonical mouths and depth regions) and
 dry-component motifs are fully built and supported (see
 [`component_motifs.md`](component_motifs.md)).
+
+The canonical **family-name strings** (`void` / `pocket` / `channel` / … /
+`dry_bank`) and the `side` they map to live in one place — `topomt/dfnd/families.py`
+— and every consumer (the classifier in `graph.py`, `components._SIDE_BY_FAMILY`,
+`interfaces.py`, the viewer palette/filters) imports them from there rather than
+re-typing literals, so renaming a family is a one-line change. (The `channel`
+family was named `multi_external_link` until 2026-06.)
 
 ## 7. Promotion: dfnd → Topography (not 1:1)
 
@@ -196,7 +211,7 @@ the contract spread further):
 | atoms of a domain | `component` spatial representation (`atom_indices`, …) |
 | raw field `concavity_domains` / `transit_domains` | `wet_components` (single key) |
 | record field `domain_family` | `family` |
-| family strings `void_domain` / `pocket_domain` / `multi_external_link_domain` / … | `void` / `pocket` / `multi_external_link` / … (no `_domain` suffix) |
+| family strings `void_domain` / `pocket_domain` / `channel_domain` / … | `void` / `pocket` / `channel` / … (no `_domain` suffix) |
 | record field `domain_id` (component's own) | `id` |
 | `domain_id` referencing the parent (external links, residence regions) | `component_id` |
 | method `_classify_domain` | `_classify_component` |
@@ -257,3 +272,55 @@ Beyond the four phases (also done):
   remain in code (§8). A few design docs (`feature_definitions.md`,
   `residence_transit_contract.md`, `Algorithm.md`) still use the older spellings
   in prose and point here as the authority — a pure-prose sweep that can follow.
+
+## 10. Wet↔dry adjacency (neighbors, coast, lining)
+
+The wet and dry sides touch along a shared boundary. Navigating it — *which dry
+tetrahedra border this wet one; which dry bank lines this pocket; what is the dry
+wall of an interface* — is exposed in four layers, each reusing the one below.
+The topology (who borders whom) is probe-independent and lives on `mesh`; the
+wet/dry split is probe-dependent and lives on `dfn`. Nothing is duplicated per
+record: the single `(N, 4)` Delaunay adjacency array backs all of it.
+
+**Layer 0 — tetrahedron neighbors (the primitive).**
+
+- `mesh.neighbors(tetra_id, include_ocean=False) -> list[int]` — bare face-
+  neighbors (probe-independent topology; `-1` = OCEAN / convex hull).
+- `dfn.graph.neighbors(node_id, side=None|'wet'|'dry') -> list[int]` — the same,
+  filtered by the neighbor's residence side. Answers, in one call, *which dry
+  tetrahedra border this wet one* (`side='dry'`) and the reverse (`side='wet'`).
+
+No `Tetrahedron`/`Node` class and no stored `neighbors` attribute: tetrahedra are
+records, and the accessor reads the shared adjacency array (O(1)). Storing
+neighbors per record would duplicate that array and mis-level the wet/dry split
+(it is per-probe, not geometry).
+
+**Layer 1 — coast faces.** `dfn.components.coast_faces` is the materialized
+wet↔dry contact: every internal face whose two tetrahedra sit in components of
+opposite `side`. Each record carries `wet_tetrahedron_id` / `dry_tetrahedron_id`,
+`wet_component_id` / `dry_component_id`, `atom_indices`, `area`, `R_gate` and
+`permeability_state`. This is the real *wall surface* (the per-face area, summed,
+is the contact area).
+
+**Layer 2 — per-component lining (bidirectional, symmetric).** Built from the
+coast and attached to the typed components:
+
+- `WetComponent.dry_lining` → `{DRY-id: {tetrahedron_ids, contact_face_ids,
+  area}}` — the dry banks (and their wall tetrahedra) that line this wet region.
+- `DryComponent.wet_lining` → `{WET-id: {tetrahedron_ids, contact_face_ids,
+  area}}` — the symmetric reverse: the wet regions this bank lines.
+
+So any wet component reaches its dry detail and any dry bank reaches its wet
+regions, both in O(1), with the contact area shared and consistent on both sides.
+
+**Layer 3 — `interface_wall` (a named view).** `DryComponent.interface_walls` is
+`wet_lining` restricted to the wet components that are interfaces (`is_interface`,
+§ [`interfaces.md`](interfaces.md)). No extra computation — it closes the wet/dry
+symmetry of an interface: the wet half is the channelway
+(`WetComponent.lining_bodies` → its banks), the dry half is each bank's wall
+against it (`DryComponent.interface_walls` → the wet interface).
+
+Implementation: `mesh.neighbors` / `graph.neighbors` in `data.py`;
+`coast_faces` + `*_lining` + `interface_walls` in `components.py`
+(`_attach_coast_and_lining`); areas use `tools.tessellation` triangle area and
+need coordinates (the `network`, threaded into `build_components`).

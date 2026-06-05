@@ -15,7 +15,7 @@ harden the primitives" route, now largely accomplished) and
   [`residence_radius_audit.md`](residence_radius_audit.md),
   [`gate_radius_audit.md`](gate_radius_audit.md).
 - **Classifier**: residence × access two-axis families (void / pocket /
-  surface_concavity / multi_external_link(channel) / nonresident_passage /
+  surface_concavity / channel(channel) / nonresident_passage /
   degenerate_subprobe), unit-tested.
 - **Pipeline**: `DelaunayFlowNetwork` builds the mesh, residence/gate/volume
   (all vectorized), face dedup, the wet/dry edge graph, and `get_topography`

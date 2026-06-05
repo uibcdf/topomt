@@ -20,7 +20,7 @@ dry = topo['dry']['components']                       # dry banks (interfaces)
 Conventions used throughout:
 - **significant** component = `n_resident_nodes >= 5` (filters sub-probe texture).
 - **dominant** component = the one with the most resident nodes.
-- families: `void` (0 mouths), `pocket` (1), `multi_external_link`/channel (>=2),
+- families: `void` (0 mouths), `pocket` (1), `channel`/channel (>=2),
   `surface_concavity` (1 mouth, no residence).
 - The PDBs are dummy **argon** (1.88 Å); mixed-radii PDBs use other noble gases
   (radius encoded by element). Build/refresh with

@@ -66,7 +66,7 @@ multi-opening wet domain without proving a community-level tunnel or pore.
 Project position:
 
 ```text
-multi_external_link_domain = primary topological condition
+channel_domain = primary topological condition
 channel / tunnel / pore    = morphology or feature interpretation after extra
                              geometric/path analysis
 ```
@@ -206,7 +206,7 @@ Consequences:
 
 - one-mouth resident domains are `pocket_domain` even if all resident nodes are `wet_coast`;
 - `surface_concavity_domain` is reserved for one-mouth non-resident contact/dent domains;
-- resident domains with two or more external links are raw `multi_external_link_domain`; `channel` remains a shorthand pending morphology;
+- resident domains with two or more external links are raw `channel_domain`; `channel` remains a shorthand pending morphology;
 - non-resident domains with two or more external links are `nonresident_passage_domain`, a provisional raw label;
 - no-link non-resident domains are raw/filter `degenerate_subprobe_domain`, not voids;
 - `wet_open` is reported as `has_open_interior`, a descriptor of openness, not a classifier.

@@ -122,12 +122,12 @@ surface_concavity(D) = L(D) == 1 and not has_residence(D)
 pocket(D) = L(D) == 1 and has_residence(D)
 
 nonresident_passage(D) = L(D) >= 2 and not has_residence(D)
-multi_external_link(D) = L(D) >= 2 and has_residence(D)
+channel(D) = L(D) >= 2 and has_residence(D)
 ```
 
 `degenerate_subprobe` and `nonresident_passage` are raw/reporting
 labels in v1, not promoted biological feature names. `channel` may be used as a
-convenient public shorthand for a resident `multi_external_link`, but the
+convenient public shorthand for a resident `channel`, but the
 raw topological label should remain explicit.
 
 `has_open_interior(D)` must be reported as a descriptor because it captures how

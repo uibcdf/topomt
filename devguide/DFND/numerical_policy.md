@@ -51,7 +51,7 @@ First working policy (Access x Residence):
      - *Has residence*: `pocket` (one-mouth resident concavity).
      - *No residence*: `surface_concavity` (one-mouth non-resident surface dent).
    - **>= 2 external links**:
-     - *Has residence*: `multi_external_link` (multi-mouth resident channel).
+     - *Has residence*: `channel` (multi-mouth resident channel).
      - *No residence*: `nonresident_passage` (provisional pass-through contact).
 
 `wet_open` is used purely as a quality and accessibility descriptor, not as a classification gate.

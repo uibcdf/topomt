@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > **Terminology Authority**: Per [`object_model.md`](object_model.md), this data model has been fully migrated to the zero-legacy **`component`** $\rightarrow$ **`component`** $\rightarrow$ **`feature`** ladder.
-> The wet graph-decomposition records are unified under **`wet_components`** (represented by the Python-side `WetComponent` class) and use simplified family names (`void`, `pocket`, `multi_external_link`) without the `_domain` suffix. Legacy terms like `ConcavityDomain` or `TransitDomain` are obsolete.
+> The wet graph-decomposition records are unified under **`wet_components`** (represented by the Python-side `WetComponent` class) and use simplified family names (`void`, `pocket`, `channel`) without the `_domain` suffix. Legacy terms like `ConcavityDomain` or `TransitDomain` are obsolete.
 
 This document defines the minimal DFND data model to implement before adding
 higher-level heuristics, visualizations, or production Topography conversion.
@@ -332,7 +332,7 @@ Allowed `family` values:
 void
 surface_concavity
 pocket
-multi_external_link
+channel
 channel  # optional public shorthand after morphology policy
 ```
 
@@ -546,7 +546,7 @@ Initial mapping:
 void -> Void
 surface_concavity -> SurfaceConcavity, once the class exists
 pocket -> Pocket
-multi_external_link -> Channel or BranchedChannel only after morphology/path analysis
+channel -> Channel or BranchedChannel only after morphology/path analysis
 nonresident_passage -> raw/provisional record, not public Channel by default
 degenerate_subprobe -> raw/filter record, not public Void
 ExternalLink -> descriptor attached to the parent feature
@@ -593,6 +593,6 @@ Every `WetComponentRecord` must include the classification fields below:
 - `has_residence`: derived boolean, `n_resident_nodes >= 1`.
 - `n_open_resident_nodes`: number of resident nodes with all finite faces permeable.
 - `has_open_interior`: derived boolean, `n_open_resident_nodes >= 1`; descriptor only.
-- `family`: one of `void`, `degenerate_subprobe`, `pocket`, `surface_concavity`, `multi_external_link`, or `nonresident_passage`.
+- `family`: one of `void`, `degenerate_subprobe`, `pocket`, `surface_concavity`, `channel`, or `nonresident_passage`.
 
 `family` must be derived from `n_external_links` and `has_residence`. It must not be independently assigned from `has_open_interior`.

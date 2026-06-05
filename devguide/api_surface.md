@@ -31,7 +31,7 @@ The `Topography` view currently promotes only stable compatibility domain famili
 
 - `void_domain` -> `Void`;
 - `pocket_domain` -> `Pocket`;
-- `multi_external_link_domain` -> `Channel` shorthand.
+- `channel_domain` -> `Channel` shorthand.
 
 The returned `Topography` object also exposes DFND raw/provisional records through convenience attributes:
 

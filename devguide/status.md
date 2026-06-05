@@ -38,7 +38,7 @@ The immediate DFND work is:
 - DFND supports the build-once/query-many workflow through `DelaunayFlowNetwork`.
 - `R_residence` and `R_gate` are implemented as clearance primitives with active tests.
 - DFND raw records separate topological/debug volumes from `volume_solvent_estimate`.
-- DFND exposes stable compatibility features for `void_domain`, `pocket_domain`, and `multi_external_link_domain`, while provisional families remain available through raw records.
+- DFND exposes stable compatibility features for `void_domain`, `pocket_domain`, and `channel_domain`, while provisional families remain available through raw records.
 - Dry-side records now include dry components, dry edges, dry interfaces, dry depth, and first candidate dry motifs.
 - Probe-radius sweeps on five small real systems obey the expected monotonicity invariants.
 

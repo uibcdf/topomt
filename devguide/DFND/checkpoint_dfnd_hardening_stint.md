@@ -58,7 +58,7 @@ families to public features:
 
 - `void_domain` -> `Void`;
 - `pocket_domain` -> `Pocket`;
-- `multi_external_link_domain` -> `Channel` shorthand.
+- `channel_domain` -> `Channel` shorthand.
 
 The returned `Topography` object now also exposes convenience references to raw
 and provisional DFND records:

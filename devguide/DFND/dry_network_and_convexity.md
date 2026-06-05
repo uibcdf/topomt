@@ -80,6 +80,22 @@ the probe-excluded body of the molecule. This is not a failure of the
 definition. The useful information is expected to come from dry interfaces,
 dry depth, exposure, and motif analysis rather than from component counts alone.
 
+**`dry_adjacency` (what counts as "connected").** `get_topography` takes a
+`dry_adjacency` parameter that chooses the connectivity relation used to group
+dry nodes into components:
+
+- `'face'` (default) — share a **face**. This keeps the transit filter above:
+  two dry tetrahedra are connected only through a *non-permeable* shared face, so
+  the relation preserves the probe-blocking-barrier meaning.
+- `'edge'` — share an **edge** (a pair of atoms). Purely topological; the transit
+  filter does not apply (an edge has no single permeability state).
+- `'vertex'` — share a **vertex** (one atom). The coarsest, most permissive
+  grouping; also purely topological.
+
+Edge/vertex modes fuse banks that the face mode keeps apart (they ignore whether
+the bridging face is permeable), which is why `'face'` is the default and the
+only mode that carries a physical barrier interpretation.
+
 ## 4. Relation to Local Classes
 
 The local class `open`, `coast`, or `sealed` is still defined by face

@@ -107,7 +107,7 @@ Faces should be called permeable or non-permeable. Wet and dry are reserved for 
 *   **Component family** (`family`): the classification of a wet component. A resident component with **zero walls** (`n_wall_faces == 0`) is `percolating` (enclosure override, checked first); otherwise it is classified by `n_external_links` × `has_residence`:
     *   `void` — zero `external_links`, at least one resident node.
     *   `pocket` — exactly one `external_link`, at least one resident node (with walls).
-    *   `channel` (raw `multi_external_link`) — two or more `external_links`, at least one resident node. `Channel` is a public shorthand; tunnel/pore needs path/morphology evidence.
+    *   `channel` — two or more `external_links`, at least one resident node. The raw family `channel` maps to the public `Channel` feature; a biological tunnel/pore label needs further path/morphology evidence. (Until 2026-06 this family was named `multi_external_link`.)
     *   `surface_concavity` — exactly one `external_link`, no resident nodes (a one-mouth non-resident contact/dent, not simply a shallow pocket).
     *   `nonresident_passage` — two or more `external_links`, no resident nodes; provisional raw label, not a biological channel by default.
     *   `degenerate_subprobe` — zero `external_links`, no resident nodes; raw/filter label, not a void.

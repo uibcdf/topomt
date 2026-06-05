@@ -86,7 +86,7 @@ An edge exists between two tetrahedra $T_i$ and $T_j$ sharing face $F_{ij}$ if a
     *   **Degenerate subprobe:** zero `external_links` and no resident nodes (`degenerate_subprobe`; filter/provisional component).
     *   **Pocket:** exactly one `external_link` and at least one resident node (`pocket`).
     *   **Surface concavity:** exactly one `external_link` and no resident nodes (`surface_concavity`).
-    *   **Multi-external-link component:** two or more `external_links` and at least one resident node (`multi_external_link`). `Channel` is a public shorthand only after path or morphology interpretation.
+    *   **Multi-external-link component:** two or more `external_links` and at least one resident node (`channel`). `Channel` is a public shorthand only after path or morphology interpretation.
     *   **Nonresident passage:** two or more `external_links` and no resident nodes (`nonresident_passage`; provisional raw label).
     *   **Local labels:** `open`, `coast`, and `sealed` remain local metadata and do not create connectivity by themselves. `wet_open` is reported as `has_open_interior`, not used as the family gate.
 

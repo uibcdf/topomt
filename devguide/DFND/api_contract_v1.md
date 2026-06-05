@@ -29,9 +29,9 @@ The v1 public `Topography` view exposes only compatibility concavity features:
 | --- | --- |
 | `void` | `Void` |
 | `pocket` | `Pocket` |
-| `multi_external_link` | `Channel` |
+| `channel` | `Channel` |
 
-`multi_external_link` is the raw topological name. `Channel` is the
+`channel` is the raw topological name. `Channel` is the
 current public shorthand used by the compatibility TopoMT view.
 
 ## 3. Provisional Records

@@ -36,7 +36,7 @@ be **1 channel** with 2 mouths).
 
 A long thin pore is not recognised as a single through-channel. The resident
 chain through the narrow lumen does not stay connected end to end, so instead of
-one `multi_external_link` joining both faces, DFND reports two separate
+one `channel` joining both faces, DFND reports two separate
 one-mouth pockets. Real impact: long pores/tunnels (ion channels, transport
 pathways) may be missed as channels — the most worrying failure for the
 "connectivity" story that is supposed to be DFND's strength.

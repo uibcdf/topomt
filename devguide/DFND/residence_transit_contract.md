@@ -204,7 +204,7 @@ percolating. Otherwise the access × residence table applies:
 | 0 | no | `degenerate_subprobe` | raw/filter label |
 | 1 | yes | `pocket` | one-mouth resident concavity (with walls) |
 | 1 | no | `surface_concavity` | one-mouth non-resident contact/dent |
-| >=2 | yes | `multi_external_link` | multi-mouth resident component; `channel` shorthand |
+| >=2 | yes | `channel` | multi-mouth resident component (maps to the public `Channel`) |
 | >=2 | no | `nonresident_passage` | provisional pass-through contact |
 | any | yes, **0 walls** | `percolating` | fully permeable/exposed resident region (shape_type `neutral`) |
 

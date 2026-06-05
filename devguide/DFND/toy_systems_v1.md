@@ -135,7 +135,7 @@ Required checks:
 
 ## 7. Toy Multi-External-Link Component
 
-Implementation status: covered by `tests/test_dfnd_graph_contract.py::test_multi_external_link_domain_has_distinct_external_links`.
+Implementation status: covered by `tests/test_dfnd_graph_contract.py::test_channel_domain_has_distinct_external_links`.
 
 Purpose: validate a multi-opening resident component.
 
@@ -144,7 +144,7 @@ Expected result:
 ```text
 n_external_links >= 2
 has_residence = true
-family = multi_external_link
+family = channel
 ```
 
 Required checks:

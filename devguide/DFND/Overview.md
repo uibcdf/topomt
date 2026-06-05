@@ -132,7 +132,7 @@ The v1 classifier is:
 | 0 | no | `degenerate_subprobe` | raw/filter label, not a public feature |
 | 1 | yes | `pocket` | one-mouth resident concavity |
 | 1 | no | `surface_concavity` | one-mouth non-resident surface contact/dent |
-| >=2 | yes | `multi_external_link` | multi-mouth component; `channel` is shorthand |
+| >=2 | yes | `channel` | multi-mouth resident component (maps to the public `Channel`) |
 | >=2 | no | `nonresident_passage` | provisional raw label for pass-through contact |
 
 `wet_open` is retained as a quality descriptor, not as a family gate:
