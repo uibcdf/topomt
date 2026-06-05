@@ -188,8 +188,8 @@ class TopoMTPocketsPanel(AddonPanelWidget):
                 return
             self.push_state({**self._build_state(runtime), "status": "rendering"})
             try:
-                from ..render import render_topography_pockets
-                result = render_topography_pockets(
+                from ..render import show_topography_pockets
+                result = show_topography_pockets(
                     view, runtime.topography, tag_prefix=runtime.tag_prefix, skip_digestion=True
                 )
                 record_event(view, "panel_show_all_pockets", n_rendered=result["n_rendered"])
@@ -206,7 +206,7 @@ class TopoMTPocketsPanel(AddonPanelWidget):
                 attach_features(
                     view, runtime.topography,
                     feature_ids=[feature_id],
-                    enable_addon=False, render=True,
+                    enable_addon=False, show=True,
                     tag_prefix=runtime.tag_prefix,
                     skip_digestion=True,
                 )

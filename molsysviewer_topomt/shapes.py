@@ -5,7 +5,7 @@ from __future__ import annotations
 from typing import Any
 
 from .payloads import topography_payload
-from .render import render_topography_pockets
+from .render import show_topography_pockets
 
 
 def pocket_blob_provider(view=None, topography=None, **kwargs) -> dict[str, Any]:
@@ -13,7 +13,7 @@ def pocket_blob_provider(view=None, topography=None, **kwargs) -> dict[str, Any]
     payload = topography_payload(topography) if topography is not None else {'n_features': 0, 'feature_counts': {}, 'features': []}
     rendered = None
     if view is not None and topography is not None:
-        rendered = render_topography_pockets(view, topography, **kwargs)
+        rendered = show_topography_pockets(view, topography, **kwargs)
     return {
         'provider': 'topography-pocket-blob',
         'addon': 'topomt',

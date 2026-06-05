@@ -47,12 +47,13 @@ from .integration import (
 from .panels import TopoMTTopographyPanel, TopoMTPocketsPanel
 from .payloads import feature_record_from_feature, topography_payload
 from .render import (
-    render_topography_pockets,
-    render_dfnd_tetrahedra,
-    render_dfn_graph,
-    render_dfn_dry_components,
+    show_topography_pockets,
+    show_dfnd_tetrahedra,
+    show_dfn_graph,
+    show_dfnd_components,
 )
 from .runtime import TopoMTAddonRuntime, ensure_runtime, record_event
+from .simplex_selection import simplex_selection_info
 from .standalone import build_topography_standalone0_html, launch_topography_standalone0
 
 __all__ = [
@@ -77,10 +78,12 @@ __all__ = [
     "record_event",
     "feature_record_from_feature",
     "topography_payload",
-    "render_topography_pockets",
-    "render_dfnd_tetrahedra",
-    "render_dfn_graph",
-    "render_dfn_dry_components",
+    "show_topography_pockets",
+    "show_dfnd_tetrahedra",
+    "show_dfn_graph",
+    "show_dfnd_components",
+    "simplex_selection_info",
+    "new_view",
     "build_topography_standalone0_html",
     "launch_topography_standalone0",
 ]

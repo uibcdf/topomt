@@ -1,6 +1,7 @@
 """Addon definition for the TopoMT MolSysViewer integration."""
 
 from .runtime import ensure_runtime, record_event
+from .simplex_selection import ACTION_ID as _SIMPLEX_ACTION_ID
 
 
 def on_enable(view) -> None:
@@ -57,6 +58,85 @@ def on_context_action(view, action_id: str, payload: dict) -> None:
             if topo is not None and getattr(topo, 'dfnd', None) is not None:
                 topo.dfnd.info(tetra_ids)
 
+    elif action_id == _SIMPLEX_ACTION_ID:
+        # Dynamic-item clicks carry the resolved simplex under addon_action_payload.
+        simplex = payload.get('addon_action_payload') or {}
+        _handle_simplex_selection(view, runtime, dict(simplex))
+
+
+def on_active_selection_changed(view, selection):
+    """Push hook: map the current atom selection to DFND simplices and return the
+    context-menu items the host should show (under the add-on's section). Also
+    populates ``runtime.active_simplex_selection`` when the selection IS exactly an
+    edge/face/tetrahedron, so direct shape clicks are inspectable too (not only
+    menu-driven selections)."""
+    from .simplex_selection import resolve_simplices
+
+    runtime = ensure_runtime(view)
+    topo = getattr(runtime, 'topography', None)
+    if topo is None or getattr(topo, 'dfnd', None) is None:
+        return []
+    atom_indices = (selection or {}).get('atom_indices') or []
+    try:
+        items = resolve_simplices(topo, atom_indices)
+    except Exception:
+        items = []
+
+    # Inspect API: remember the unique exact simplex if there is one; clear when
+    # the selection no longer forms a single simplex.
+    exact = next(
+        (
+            item['payload']
+            for item in items
+            if item.get('payload', {}).get('kind') in ('edge', 'face', 'tetrahedron')
+        ),
+        None,
+    )
+    runtime.active_simplex_selection = dict(exact) if exact else None
+    return items
+
+
+def _handle_simplex_selection(view, runtime, payload):
+    """Select the simplex's atoms in the *native* active selection (so it highlights
+    exactly like clicking that simplex) and remember it for inspection."""
+    # Remember the resolved simplex so the inspection API can report it.
+    runtime.active_simplex_selection = dict(payload)
+
+    atoms = [int(a) for a in payload.get('atom_indices', [])]
+    if not atoms:
+        return
+
+    # The op expects frontend-local atom indices; remap when the view does.
+    local = atoms
+    mapper = getattr(view, '_index_mapper', None)
+    if mapper is not None:
+        try:
+            local = list(mapper.to_local_atoms(atoms))
+        except Exception:
+            local = atoms
+
+    try:
+        view._send({'op': 'set_active_selection', 'atom_indices': list(local)})
+        view._last_active_selection_event = {
+            'event': 'interaction_active_selection_changed',
+            'source_kind': 'element',
+            'element_level': 'atom',
+            'target_level': 'none',
+            'items': [],
+            'atom_indices': list(atoms),
+            'group_indices': [],
+            'component_indices': [],
+            'chain_indices': [],
+            'molecule_indices': [],
+            'entity_indices': [],
+            'count_atoms': len(atoms),
+            'count_groups': 0,
+            'count_shapes': 0,
+            'count_annotations': 0,
+        }
+    except Exception:
+        pass
+
 
 _addon_instance = None
 _lifecycle_instance = None
@@ -73,6 +153,7 @@ def get_lifecycle():
         on_enable=on_enable,
         on_disable=on_disable,
         on_context_action=on_context_action,
+        on_active_selection_changed=on_active_selection_changed,
     )
     return _lifecycle_instance
 
@@ -92,11 +173,14 @@ def get_addon():
         AddonWorkspaceSpec,
     )
 
+    from .runtime import create_topomt_state
+
     _addon_instance = AddonSpec(
         name='topomt',
         package='molsysviewer-topomt',
         version='0.1.0',
         description='TopoMT workspace for pocket and topography analysis in MolSysViewer.',
+        state_factory=create_topomt_state,
         workspaces=(
             AddonWorkspaceSpec(
                 id='topomt',

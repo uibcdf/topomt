@@ -1,5 +1,5 @@
 from typing import Any, Iterable
-from .render import render_topography_pockets, render_dfnd_tetrahedra
+from .render import show_topography_pockets, show_dfnd_tetrahedra
 from .runtime import ensure_runtime
 
 
@@ -31,8 +31,8 @@ def attach_topography(
     topography,
     *,
     enable_addon: bool = True,
-    render: bool = True,
-    render_tetrahedra: bool = False,
+    show: bool = True,
+    show_tetrahedra: bool = False,
     tag_prefix: str = 'topomt-pocket',
     tetra_tag_prefix: str = 'dfnd-tetra',
     skip_digestion: bool = False,
@@ -47,18 +47,24 @@ def attach_topography(
 
     runtime = ensure_runtime(view)
     runtime.topography = topography
+    # Also expose the topography as an attribute on the view itself so callers can
+    # ``msv_tmt.show_dfnd_tetrahedra(view)`` without re-passing it.
+    try:
+        view.topography = topography
+    except Exception:
+        pass
     if tag_prefix:
         runtime.tag_prefix = tag_prefix
 
     rendered = None
-    if render:
+    if show:
         # Separate pocket kwargs and tetrahedra kwargs
         pocket_kwargs = {
             k: render_kwargs[k]
             for k in ['color_map', 'alpha', 'marker_color', 'marker_alpha']
             if k in render_kwargs
         }
-        rendered = render_topography_pockets(
+        rendered = show_topography_pockets(
             view,
             topography,
             tag_prefix=tag_prefix,
@@ -67,9 +73,9 @@ def attach_topography(
         )
 
     rendered_tetrahedra = None
-    if render_tetrahedra:
+    if show_tetrahedra:
         tetra_alpha = render_kwargs.get('tetra_alpha', render_kwargs.get('alpha', 0.4))
-        rendered_tetrahedra = render_dfnd_tetrahedra(
+        rendered_tetrahedra = show_dfnd_tetrahedra(
             view,
             topography,
             color_mode=render_kwargs.get('color_mode', 'combined_class'),
@@ -82,7 +88,7 @@ def attach_topography(
             name=render_kwargs.get('tetra_name', 'DFND Tetrahedra'),
             skip_digestion=True,
             tetrahedra_indices=render_kwargs.get('tetrahedra_indices'),
-            show_all_faces=render_kwargs.get('show_all_faces', False),
+            exterior_only=render_kwargs.get('exterior_only', False),
         )
         _setup_tetrahedra_click_callback(view, runtime, tetra_tag_prefix)
 
@@ -100,7 +106,7 @@ def attach_features(
     *,
     feature_ids,
     enable_addon: bool = True,
-    render: bool = True,
+    show: bool = True,
     tag_prefix: str = 'topomt-pocket',
     skip_digestion: bool = False,
     **render_kwargs,
@@ -111,7 +117,7 @@ def attach_features(
         view,
         selected_topography,
         enable_addon=enable_addon,
-        render=render,
+        show=show,
         tag_prefix=tag_prefix,
         skip_digestion=True,
         **render_kwargs,
@@ -126,7 +132,7 @@ def attach_pockets(
     *,
     pocket_ids,
     enable_addon: bool = True,
-    render: bool = True,
+    show: bool = True,
     tag_prefix: str = 'topomt-pocket',
     skip_digestion: bool = False,
     **render_kwargs,
@@ -137,7 +143,7 @@ def attach_pockets(
         topography,
         feature_ids=pocket_ids,
         enable_addon=enable_addon,
-        render=render,
+        show=show,
         tag_prefix=tag_prefix,
         skip_digestion=True,
         **render_kwargs,
@@ -159,7 +165,7 @@ def attach_dfnd_tetrahedra(
     name: str = 'DFND Tetrahedra',
     skip_digestion: bool = False,
     tetrahedra_indices: Iterable[int] | None = None,
-    show_all_faces: bool = False,
+    exterior_only: bool = False,
 ) -> dict[str, Any]:
     """Render DFND tetrahedra programmatically into the viewer and enable topomt addon."""
     register_with_molsysviewer()
@@ -171,8 +177,12 @@ def attach_dfnd_tetrahedra(
     # Note: store topography on runtime to allow UI synchronization / clear actions
     runtime = ensure_runtime(view)
     runtime.topography = topography
+    try:
+        view.topography = topography
+    except Exception:
+        pass
 
-    layer = render_dfnd_tetrahedra(
+    layer = show_dfnd_tetrahedra(
         view,
         topography,
         color_mode=color_mode,
@@ -185,7 +195,7 @@ def attach_dfnd_tetrahedra(
         name=name,
         skip_digestion=skip_digestion,
         tetrahedra_indices=tetrahedra_indices,
-        show_all_faces=show_all_faces,
+        exterior_only=exterior_only,
     )
 
     _setup_tetrahedra_click_callback(view, runtime, tag_prefix)
@@ -207,43 +217,38 @@ def new_view(
     load_mode='selection',
     view=None,
     enable_addon: bool = True,
-    # --- Pocket/feature rendering ---
-    render: bool | None = None,
-    show_faces: bool | None = None,
-    # --- Tetrahedra rendering ---
-    render_tetrahedra: bool = False,
-    show_tetrahedra: bool | None = None,
-    # --- Tetrahedra options (forwarded to render_dfnd_tetrahedra) ---
+    # --- Pocket/feature display ---
+    show: bool = True,
+    # --- Tetrahedra display ---
+    show_tetrahedra: bool = False,
+    # --- Tetrahedra options (forwarded to show_dfnd_tetrahedra) ---
     color_mode: str = 'combined_class',
     color_palette: dict[str, int] | None = None,
     alpha: float | dict[str, float] | None = None,
     draw_edges: bool = True,
     edge_radius_nm: float = 0.002,
     edge_color: int = 0x444444,
-    show_all_faces: bool = False,
+    exterior_only: bool = False,
     tetrahedra_indices: Iterable[int] | None = None,
     tetra_name: str = 'DFND Tetrahedra',
     skip_digestion: bool = False,
     **render_kwargs,
 ):
-    if hasattr(topography, '_molsys'):
-        molecular_system = topography._molsys
-    else:
-        raise ValueError("topography does not have a '_molsys' attribute.")
+    # Prefer the *original* molecular system the user attached to the topography
+    # (``topography.molecular_system``); fall back to the internal ``_molsys``
+    # copy. For PDB-derived inputs the copy can fail to render correctly while the
+    # original loads fine -- this is also what ``msm.view(molecular_system)`` uses.
+    molecular_system = getattr(topography, 'molecular_system', None)
+    if molecular_system is None:
+        if hasattr(topography, '_molsys'):
+            molecular_system = topography._molsys
+        else:
+            raise ValueError("topography does not expose a molecular_system.")
 
     register_with_molsysviewer()
 
     if feature_ids is not None:
         topography = subset_topography(topography, feature_ids)
-
-    # Resolve boolean flags: show_tetrahedra/show_faces are aliases
-    do_tetrahedra = show_tetrahedra if show_tetrahedra is not None else render_tetrahedra
-    if show_faces is not None:
-        do_render = show_faces
-    elif render is not None:
-        do_render = render
-    else:
-        do_render = True  # default
 
     import molsysviewer
     view = molsysviewer.new_view(
@@ -259,8 +264,8 @@ def new_view(
         view,
         topography,
         enable_addon=enable_addon,
-        render=do_render,
-        render_tetrahedra=do_tetrahedra,
+        show=show,
+        show_tetrahedra=show_tetrahedra,
         skip_digestion=True,
         color_mode=color_mode,
         color_palette=color_palette,
@@ -268,7 +273,7 @@ def new_view(
         draw_edges=draw_edges,
         edge_radius_nm=edge_radius_nm,
         edge_color=edge_color,
-        show_all_faces=show_all_faces,
+        exterior_only=exterior_only,
         tetrahedra_indices=tetrahedra_indices,
         tetra_name=tetra_name,
         **render_kwargs,
