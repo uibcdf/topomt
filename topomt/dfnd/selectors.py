@@ -482,3 +482,41 @@ def select_face_atom_indices(
         )
         if len(face.get('face_atoms_local', [])) == 3
     ]
+
+
+def select_edges(
+    source: Any,
+    *,
+    tetrahedron_ids: int | Iterable[int] | None = None,
+    atoms_subset: Iterable[int] | None = None,
+    atoms_exact: Iterable[int] | None = None,
+) -> list[dict[str, Any]]:
+    """Return DFND edge records (id + two atoms + incident tetrahedra).
+
+    Filters (all by global atom indices):
+    - ``tetrahedron_ids``: edges incident to any of these tetrahedra.
+    - ``atoms_subset``: edges whose *both* atoms lie in this set (used to collect
+      all edges contained in an atom selection).
+    - ``atoms_exact``: the edge whose two atoms are exactly this pair.
+    """
+    raw = _raw_from_source(source)
+    tet_filter = tetrahedron_ids
+    subset = set(int(a) for a in atoms_subset) if atoms_subset is not None else None
+    exact = (
+        frozenset(int(a) for a in atoms_exact) if atoms_exact is not None else None
+    )
+
+    selected = []
+    for edge in raw.get('edges', []):
+        atoms = [int(a) for a in edge.get('atom_indices', [])]
+        if tet_filter is not None and not any(
+            _matches_value(tid, tet_filter) for tid in edge.get('tetrahedron_ids', [])
+        ):
+            continue
+        if subset is not None and not set(atoms).issubset(subset):
+            continue
+        if exact is not None and frozenset(atoms) != exact:
+            continue
+        selected.append(edge)
+
+    return selected

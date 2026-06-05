@@ -13,6 +13,29 @@ from .core.clearance import (
     tetrahedron_residence_radius_batch,
 )
 from .core.solvent_volume import tetrahedron_solvent_volume_estimate_batch
+from . import families as fam
+
+
+def _component_center(
+    atom_coords: np.ndarray,
+    tetra_atoms: np.ndarray,
+    simplex_volumes: np.ndarray,
+    nodes: list[int],
+) -> np.ndarray:
+    """Volume-weighted geometric centroid of the union of tetrahedra in ``nodes``.
+
+    Why not ``mean(simplex_centers[nodes])``: ``simplex_centers`` are weighted
+    circumcenters; for sliver tetrahedra on the convex-hull periphery they can
+    sit thousands of angstroms away from the molecule, blowing up the average
+    centroid (the bug that hid the structure in the viewer for any pocket
+    touching the OCEAN).
+    """
+    barycenters = atom_coords[tetra_atoms[nodes]].mean(axis=1)
+    volumes = np.asarray(simplex_volumes[nodes], dtype=float)
+    total = float(volumes.sum())
+    if total > 0.0:
+        return np.average(barycenters, axis=0, weights=volumes)
+    return barycenters.mean(axis=0)
 
 
 class DelaunayFlowNetwork:
@@ -200,6 +223,29 @@ class DelaunayFlowNetwork:
             for i in range(unique_faces.shape[0])
         }
 
+        # Unique mesh edges (1-simplices) with stable 1-based ids, in
+        # first-appearance order. Edges are probe-independent geometry, used for
+        # selection and for labelling the wireframe (an edge has no gate; it is
+        # identified by its id and its two atoms).
+        edge_local_indices = np.array(((0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3)))
+        edge_atom_pairs = np.sort(
+            self.tetra_atoms[:, edge_local_indices], axis=2
+        )  # (T, 6, 2) local atom indices
+        flat_edges = edge_atom_pairs.reshape(-1, 2)  # (6T, 2)
+        unique_edges, edge_first_index, edge_inverse = np.unique(
+            flat_edges, axis=0, return_index=True, return_inverse=True
+        )
+        edge_inverse = np.ravel(edge_inverse)
+        edge_appearance_order = np.argsort(edge_first_index, kind='stable')
+        edge_appearance_rank = np.empty(unique_edges.shape[0], dtype=int)
+        edge_appearance_rank[edge_appearance_order] = np.arange(unique_edges.shape[0])
+        self.edge_ids_per_tet_edge = (edge_appearance_rank[edge_inverse] + 1).reshape(
+            self.n_tetrahedra, 6
+        )
+        # Per unique edge: its two LOCAL atom indices (indexed by edge_id - 1).
+        self.unique_edge_atoms_local = unique_edges
+        self.n_edges = int(unique_edges.shape[0])
+
         # Wet/dry edge graph: one undirected edge per internal face (ti < neighbor).
         neighbors = self.simplex_neighbors
         owner_index = np.arange(self.n_tetrahedra)[:, None]
@@ -237,10 +283,10 @@ class DelaunayFlowNetwork:
     def _classify_component(n_external_links, n_resident_nodes):
         has_residence = n_resident_nodes >= 1
         if n_external_links == 0:
-            return 'void' if has_residence else 'degenerate_subprobe'
+            return fam.VOID if has_residence else fam.DEGENERATE_SUBPROBE
         if n_external_links == 1:
-            return 'pocket' if has_residence else 'surface_concavity'
-        return 'multi_external_link' if has_residence else 'nonresident_passage'
+            return fam.POCKET if has_residence else fam.SURFACE_CONCAVITY
+        return fam.CHANNEL if has_residence else fam.NONRESIDENT_PASSAGE
 
     def _state_from_delta(self, value, threshold):
         delta = float(value) - float(threshold)
@@ -299,6 +345,7 @@ class DelaunayFlowNetwork:
         gate_intrusion_policy='flag_only',
         residence_tolerance=0.0,
         permeability_tolerance=0.0,
+        dry_adjacency='face',
     ):
         """Return DFND raw records and compatibility feature dictionaries.
 
@@ -592,7 +639,7 @@ class DelaunayFlowNetwork:
                         n_wall_faces += 1
             family = self._classify_component(n_external_links, len(resident_nodes))
             if resident_nodes and n_wall_faces == 0:
-                family = 'percolating'
+                family = fam.PERCOLATING
             atom_indices = sorted(
                 {
                     int(self.atom_indices_map[atom_index])
@@ -657,13 +704,18 @@ class DelaunayFlowNetwork:
                 'volume_topological_resident': volume_topological_resident,
                 'volume_solvent_estimate': volume_solvent_estimate,
                 'path_capacity_min': path_capacity_min,
-                'center': np.mean(self.mesh.simplex_centers[nodes], axis=0).tolist(),
+                'center': _component_center(
+                    self.atom_coords,
+                    self.tetra_atoms,
+                    self.mesh.simplex_volumes,
+                    nodes,
+                ).tolist(),
                 'flags': [],
             }
             if family in {
-                'surface_concavity',
-                'nonresident_passage',
-                'degenerate_subprobe',
+                fam.SURFACE_CONCAVITY,
+                fam.NONRESIDENT_PASSAGE,
+                fam.DEGENERATE_SUBPROBE,
             }:
                 component_record['flags'].append('provisional')
             if connector_nodes:
@@ -719,17 +771,17 @@ class DelaunayFlowNetwork:
 
             include_in_compatibility_view = not min_size or len(nodes) >= min_size
             if include_in_compatibility_view:
-                if family == 'void':
+                if family == fam.VOID:
                     voids.append(compatibility_record)
-                elif family == 'pocket':
+                elif family == fam.POCKET:
                     pockets.append(compatibility_record)
-                elif family == 'multi_external_link':
+                elif family == fam.CHANNEL:
                     channels.append(compatibility_record)
-                elif family == 'surface_concavity':
+                elif family == fam.SURFACE_CONCAVITY:
                     surface_concavities.append(compatibility_record)
-                elif family == 'nonresident_passage':
+                elif family == fam.NONRESIDENT_PASSAGE:
                     nonresident_passages.append(compatibility_record)
-                elif family == 'percolating':
+                elif family == fam.PERCOLATING:
                     percolatings.append(compatibility_record)
                 else:
                     degenerate_subprobes.append(compatibility_record)
@@ -774,7 +826,9 @@ class DelaunayFlowNetwork:
             )
 
         dry_mask = ~resident
-        dry_components = self._build_dry_components(dry_mask, face_permeable, min_size)
+        dry_components = self._build_dry_components(
+            dry_mask, face_permeable, min_size, dry_adjacency=dry_adjacency
+        )
         dry_components.sort(key=lambda record: (-record['size'], record['graph_label']))
         for component_index, record in enumerate(dry_components):
             new_id = component_index + 1
@@ -786,6 +840,35 @@ class DelaunayFlowNetwork:
         )
         self._assign_dry_depths(dry_components, dry_interfaces)
         dry_motifs = self._build_dry_motifs(dry_components, dry_interfaces)
+
+        # Edge records (probe-independent): stable id + the two atoms + incident
+        # tetrahedra. An edge has no gate; it is identified by id and atoms.
+        edge_tetrahedra: dict[int, set] = {}
+        for tetrahedron_index in range(self.n_tetrahedra):
+            for local_edge in range(6):
+                edge_id = int(self.edge_ids_per_tet_edge[tetrahedron_index, local_edge])
+                edge_tetrahedra.setdefault(edge_id, set()).add(tetrahedron_index)
+        edge_records = []
+        for edge_id in range(1, self.n_edges + 1):
+            a_local, b_local = self.unique_edge_atoms_local[edge_id - 1]
+            a_local = int(a_local)
+            b_local = int(b_local)
+            edge_records.append(
+                {
+                    'edge_id': edge_id,
+                    'atom_indices': [
+                        int(self.atom_indices_map[a_local]),
+                        int(self.atom_indices_map[b_local]),
+                    ],
+                    'local_atom_indices': [a_local, b_local],
+                    'tetrahedron_ids': sorted(edge_tetrahedra.get(edge_id, set())),
+                    'length': float(
+                        np.linalg.norm(
+                            self.atom_coords[a_local] - self.atom_coords[b_local]
+                        )
+                    ),
+                }
+            )
 
         return {
             'raw': {
@@ -803,6 +886,7 @@ class DelaunayFlowNetwork:
                 },
                 'tetrahedra': tetrahedron_records,
                 'faces': face_records,
+                'edges': edge_records,
                 'wet_components': wet_components,
                 'residence_regions': residence_regions,
                 'external_links': external_links,
@@ -1113,10 +1197,20 @@ class DelaunayFlowNetwork:
             'flags': ['candidate'],
         }
 
-    def _build_dry_components(self, dry_mask, face_permeable, min_size):
-        sources = []
-        targets = []
-        dry_edges = []
+    def _build_dry_components(
+        self, dry_mask, face_permeable, min_size, dry_adjacency='face'
+    ):
+        if dry_adjacency not in {'face', 'edge', 'vertex'}:
+            raise ValueError(
+                "dry_adjacency must be 'face', 'edge' or 'vertex'"
+            )
+
+        # Always collect dry-dry non-permeable face records as metadata
+        # (independent of which connectivity criterion is active). They tag
+        # which inter-tetrahedral walls bound the cluster.
+        face_sources: list[int] = []
+        face_targets: list[int] = []
+        dry_edges: list[dict[str, Any]] = []
         for tetrahedron_index in range(self.n_tetrahedra):
             if not dry_mask[tetrahedron_index]:
                 continue
@@ -1140,8 +1234,8 @@ class DelaunayFlowNetwork:
                         face_permeable[neighbor, target_face_index]
                     )
                 if dry_mask[neighbor] and shared_face_non_permeable:
-                    sources.append(tetrahedron_index)
-                    targets.append(neighbor)
+                    face_sources.append(tetrahedron_index)
+                    face_targets.append(neighbor)
                     dry_edges.append(
                         {
                             'source_tetrahedron_id': int(tetrahedron_index),
@@ -1162,6 +1256,45 @@ class DelaunayFlowNetwork:
                             ],
                         }
                     )
+
+        # Edges of the dry-tetrahedron graph driving connected-components.
+        # 'face': only non-permeable shared faces -- the transit filter.
+        # 'edge': any pair of dry tetrahedra sharing a Delaunay edge (atoms a-b).
+        # 'vertex': any pair sharing a single atom.
+        # No permeability filter on edge/vertex (DFND has no edge/vertex
+        # permeability defined); each mode is strictly looser than the previous.
+        sources = list(face_sources)
+        targets = list(face_targets)
+
+        if dry_adjacency in {'edge', 'vertex'}:
+            buckets: dict[int, list[int]] = {}
+            if dry_adjacency == 'edge':
+                for tetrahedron_index in range(self.n_tetrahedra):
+                    if not dry_mask[tetrahedron_index]:
+                        continue
+                    for local_edge in range(self.edge_ids_per_tet_edge.shape[1]):
+                        eid = int(
+                            self.edge_ids_per_tet_edge[tetrahedron_index, local_edge]
+                        )
+                        buckets.setdefault(eid, []).append(int(tetrahedron_index))
+            else:  # vertex
+                for tetrahedron_index in range(self.n_tetrahedra):
+                    if not dry_mask[tetrahedron_index]:
+                        continue
+                    for atom_local in self.tetra_atoms[tetrahedron_index]:
+                        buckets.setdefault(int(atom_local), []).append(
+                            int(tetrahedron_index)
+                        )
+            # Star edges from the bucket's anchor: enough to make connected-components
+            # see every member as connected (O(n) per bucket instead of O(n^2)).
+            for tetras in buckets.values():
+                unique = list(dict.fromkeys(tetras))
+                if len(unique) < 2:
+                    continue
+                anchor = unique[0]
+                for other in unique[1:]:
+                    sources.append(anchor)
+                    targets.append(other)
 
         adjacency = coo_matrix(
             (

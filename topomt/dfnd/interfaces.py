@@ -18,11 +18,13 @@ from collections import Counter
 
 import numpy as np
 
+from . import families as fam
+
 _INTERFACE_FAMILY_BY_FAMILY = {
-    'void': 'interface_void',
-    'pocket': 'interface_pocket',
-    'multi_external_link': 'interface_channelway',
-    'surface_concavity': 'bare_interface',
+    fam.VOID: 'interface_void',
+    fam.POCKET: 'interface_pocket',
+    fam.CHANNEL: 'interface_channelway',
+    fam.SURFACE_CONCAVITY: 'bare_interface',
 }
 
 

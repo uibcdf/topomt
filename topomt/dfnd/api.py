@@ -71,6 +71,7 @@ def _run_dfnd(
     gate_intrusion_policy: str,
     residence_tolerance: float,
     permeability_tolerance: float,
+    dry_adjacency: str,
 ) -> tuple[DelaunayFlowNetwork, dict[str, Any]]:
     """Build the network and run the decomposition. Shared by the public entry points."""
     network = DelaunayFlowNetwork(
@@ -89,6 +90,7 @@ def _run_dfnd(
         gate_intrusion_policy=gate_intrusion_policy,
         residence_tolerance=residence_tolerance,
         permeability_tolerance=permeability_tolerance,
+        dry_adjacency=dry_adjacency,
     )
     return network, result
 
@@ -107,6 +109,7 @@ def dfnd_to_topography(
     gate_intrusion_policy: str = 'flag_only',
     residence_tolerance: float = 0.0,
     permeability_tolerance: float = 0.0,
+    dry_adjacency: str = 'face',
 ) -> Topography:
     """Run DFND and promote compatibility components into a ``Topography`` object.
 
@@ -119,6 +122,7 @@ def dfnd_to_topography(
         molecular_system, selection, structure_indices, probe_radius, sea_level,
         min_size, epsilon, hydrogen_policy, radii_model, transit_policy,
         gate_intrusion_policy, residence_tolerance, permeability_tolerance,
+        dry_adjacency,
     )
     topography = Topography(
         molecular_system=molecular_system,
@@ -130,11 +134,20 @@ def dfnd_to_topography(
     # Promote each wet component to a concavity feature, and each of its mouth motifs
     # (external links) to a child Mouth feature. Provenance: feature.component_id /
     # source_id point back to the dfnd component. See object_model.md sections 7.
+    components = topography.dfnd.dfn.components
     for family_key, feature_class in _FEATURE_CLASS_BY_FAMILY.items():
         for record in result['wet'][family_key]:
             feature = _feature_from_component_record(record, feature_class)
             feature.component_id = f"WET-{record['id']}"
             feature.source_id = feature.component_id
+            # Carry the interface descriptor (orthogonal axis) from the typed
+            # component onto the public feature, so an interface is catalogued as
+            # one. See devguide/DFND/interfaces.md.
+            component = components.get(feature.component_id)
+            if component is not None:
+                feature.is_interface = bool(getattr(component, 'is_interface', False))
+                feature.interface_family = getattr(component, 'interface_family', None)
+                feature.lining_bodies = list(getattr(component, 'lining_bodies', []))
             topography.add_feature(feature)
             if family_key not in _FAMILIES_WITH_MOUTHS:
                 continue
@@ -167,12 +180,14 @@ def dfnd(
     gate_intrusion_policy: str = 'flag_only',
     residence_tolerance: float = 0.0,
     permeability_tolerance: float = 0.0,
+    dry_adjacency: str = 'face',
 ) -> dict[str, dict[str, Any]]:
     """Run the DFND topography decomposition (raw-first dictionary)."""
     _network, raw_topography = _run_dfnd(
         molecular_system, selection, structure_indices, probe_radius, sea_level,
         min_size, epsilon, hydrogen_policy, radii_model, transit_policy,
         gate_intrusion_policy, residence_tolerance, permeability_tolerance,
+        dry_adjacency,
     )
 
     pockets = [

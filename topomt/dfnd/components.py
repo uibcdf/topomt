@@ -17,18 +17,11 @@ from collections import defaultdict, deque
 from collections.abc import Iterator, Mapping
 from typing import Any
 
-# side is derived from family, exactly as feature shape/dimensionality are derived
-# from feature_type in features/_feature_constants.py
-_SIDE_BY_FAMILY = {
-    'void': 'wet',
-    'pocket': 'wet',
-    'channel': 'wet',
-    'surface_concavity': 'wet',
-    'nonresident_passage': 'wet',
-    'degenerate_subprobe': 'wet',
-    'percolating': 'wet',
-    'dry_bank': 'dry',
-}
+# side is derived from family (single source of truth in families.py), exactly as
+# feature shape/dimensionality are derived from feature_type in _feature_constants.
+from . import families as fam
+
+_SIDE_BY_FAMILY = fam.SIDE_BY_FAMILY
 _COMPONENT_PREFIX_BY_SIDE = {'wet': 'WET', 'dry': 'DRY'}
 
 
@@ -93,6 +86,27 @@ class WetComponent(Component):
         self.has_open_interior = False
         self.volume_topological_resident = None
         self.volume_solvent_estimate = None
+        # interface descriptor (orthogonal axis, see devguide/DFND/interfaces.md):
+        # set when the component's lining is contributed by >=2 dry banks. ``family``
+        # stays the mouth-topology family; ``interface_family`` is the cross-product
+        # label (interface_pocket / interface_void / …). ``lining_bodies`` names the
+        # dry banks (DRY-ids) that line it.
+        self.is_interface = False
+        self.interface_family: str | None = None
+        self.lining_bodies: list[str] = []
+        self.lining_body_split: dict[int, int] = {}
+        # wet/dry adjacency (layer 2): the dry banks that line this wet component,
+        # keyed by DRY-id -> {tetrahedron_ids (the dry wall tetrahedra),
+        # contact_face_ids (the coast faces), area}. See devguide/DFND/interfaces.md.
+        self.dry_lining: dict[str, dict[str, Any]] = {}
+
+    def __repr__(self) -> str:
+        tag = f' {self.interface_family}' if self.is_interface else ''
+        return (
+            f'<{type(self).__name__} {self.component_id} '
+            f'family={self.family}{tag} nodes={self.size} '
+            f'atoms={len(self.atom_indices)}>'
+        )
         # canonical motif layer (component_motifs.md section 3): topological depth
         self.topological_depth: dict[int, int] = {}
         self.depth_regions: list[dict[str, Any]] = []
@@ -109,13 +123,34 @@ class DryComponent(Component):
 
     def __init__(self, **kwargs):
         kwargs.pop('family', None)
-        super().__init__(family='dry_bank', **kwargs)
+        super().__init__(family=fam.DRY_BANK, **kwargs)
         self.interface_ids: list[int] = []
         self.neighbor_component_ids: list[str] = []
         self.dry_depth_min = None
         self.dry_depth_max = None
         self.dry_depth_mean = None
         self.motif_ids: list[int] = []
+        # wet/dry adjacency (layer 2): the wet components this bank lines, keyed by
+        # WET-id -> {tetrahedron_ids (the wet tetrahedra it borders),
+        # contact_face_ids, area}. The symmetric counterpart of
+        # ``WetComponent.dry_lining``.
+        self.wet_lining: dict[str, dict[str, Any]] = {}
+
+    @property
+    def interface_walls(self) -> dict[str, dict[str, Any]]:
+        """The subset of ``wet_lining`` facing wet *interface* components (layer 3).
+
+        Named view, no extra computation: the bank's wall against each wet region
+        that is itself an interface. Closes the symmetry with
+        ``WetComponent.lining_bodies``.
+        """
+        if self._components is None:
+            return {}
+        return {
+            wet_id: wall
+            for wet_id, wall in self.wet_lining.items()
+            if getattr(self._components.get(wet_id), 'is_interface', False)
+        }
 
 
 class Components(Mapping):
@@ -130,6 +165,7 @@ class Components(Mapping):
         self.external_links: list[dict[str, Any]] = []  # wet component -> OCEAN
         self.interfaces: list[dict[str, Any]] = []  # dry <-> dry
         self.motifs: list[dict[str, Any]] = []  # dry-side motifs (wet pending)
+        self.coast_faces: list[dict[str, Any]] = []  # wet<->dry contact faces (layer 1)
 
     # -- Mapping interface (≡ Topography) --
     def __getitem__(self, component_id: str) -> Component:
@@ -171,20 +207,25 @@ class Components(Mapping):
     def dry(self) -> list[Component]:
         return [c for c in self._components.values() if c.side == 'dry']
 
+    @property
+    def wet_interfaces(self) -> list[Component]:
+        """Wet components flagged as interfaces (lining spans >=2 dry banks)."""
+        return [c for c in self.wet if getattr(c, 'is_interface', False)]
+
     def by_family(self, family: str) -> list[Component]:
         return [c for c in self._components.values() if c.family == family]
 
     @property
     def surface_concavities(self) -> list[Component]:
-        return self.by_family('surface_concavity')
+        return self.by_family(fam.SURFACE_CONCAVITY)
 
     @property
     def nonresident_passages(self) -> list[Component]:
-        return self.by_family('nonresident_passage')
+        return self.by_family(fam.NONRESIDENT_PASSAGE)
 
     @property
     def degenerate_subprobes(self) -> list[Component]:
-        return self.by_family('degenerate_subprobe')
+        return self.by_family(fam.DEGENERATE_SUBPROBE)
 
     # -- lookups (≡ Topography) --
     def get_component_by_id(self, component_id: str) -> Component:
@@ -231,7 +272,7 @@ class Components(Mapping):
         }
 
 
-def build_components(result: dict[str, Any]) -> Components:
+def build_components(result: dict[str, Any], network: Any = None) -> Components:
     """Build the typed registry from a ``get_topography`` result dict."""
     raw, dry = result['raw'], result['dry']
     components = Components()
@@ -282,9 +323,159 @@ def build_components(result: dict[str, Any]) -> Components:
         component.raw_record = record
         components.add(component)
 
+    _attach_interface_labels(components, result)
+    _attach_coast_and_lining(components, result, network)
     _attach_wet_motifs(components, result)
     _attach_capacity_motifs(components, result)
     return components
+
+
+def _attach_coast_and_lining(
+    components: Components, result: dict[str, Any], network: Any
+) -> None:
+    """Materialize the wet<->dry contact and the per-component lining (layers 1-2).
+
+    A *coast face* is an internal face whose two tetrahedra belong to components of
+    opposite side (one wet, one dry). From the coast we fill, symmetrically, each
+    ``WetComponent.dry_lining`` (the dry banks lining it) and each
+    ``DryComponent.wet_lining`` (the wet regions it lines), each carrying the
+    bordering tetrahedra, the contact face ids and the contact area. Areas need
+    coordinates; with ``network is None`` they are left at 0.0.
+    """
+    raw = result['raw']
+    atom_coords = getattr(network, 'atom_coords', None)
+    triangle_area = None
+    if atom_coords is not None:
+        from topomt.tools.tessellation.mouths import triangle_area as _triangle_area
+
+        triangle_area = _triangle_area
+
+    node_to_component: dict[int, str] = {}
+    for component in components.wet:
+        for node in component.node_indices:
+            node_to_component[node] = component.component_id
+    for component in components.dry:
+        for node in component.node_indices:
+            node_to_component[node] = component.component_id
+
+    def _slot(store: dict[str, dict[str, Any]], key: str) -> dict[str, Any]:
+        return store.setdefault(
+            key,
+            {'tetrahedron_ids': set(), 'contact_face_ids': set(), 'area': 0.0},
+        )
+
+    coast: list[dict[str, Any]] = []
+    seen_faces: set[int] = set()
+    for face in raw['faces']:
+        owner = face['owner_tetrahedron_id']
+        neighbor = face['neighbor_tetrahedron_id']
+        if neighbor is None or neighbor < 0:
+            continue
+        # each internal face is listed in both orientations (same face_id); keep one
+        # so the coast and the lining areas are not double-counted.
+        if face['face_id'] in seen_faces:
+            continue
+        seen_faces.add(face['face_id'])
+        owner_cid = node_to_component.get(owner)
+        neighbor_cid = node_to_component.get(neighbor)
+        if owner_cid is None or neighbor_cid is None:
+            continue
+        owner_side = components[owner_cid].side
+        if owner_side == components[neighbor_cid].side:
+            continue  # same side -> not a coast face
+        if owner_side == 'wet':
+            wet_t, dry_t, wet_cid, dry_cid = owner, neighbor, owner_cid, neighbor_cid
+        else:
+            wet_t, dry_t, wet_cid, dry_cid = neighbor, owner, neighbor_cid, owner_cid
+
+        area = 0.0
+        if triangle_area is not None and face.get('face_atoms_local'):
+            area = float(triangle_area(atom_coords[face['face_atoms_local']]))
+
+        coast.append(
+            {
+                'face_id': face['face_id'],
+                'wet_tetrahedron_id': wet_t,
+                'dry_tetrahedron_id': dry_t,
+                'wet_component_id': wet_cid,
+                'dry_component_id': dry_cid,
+                'atom_indices': face['atom_indices'],
+                'area': area,
+                'R_gate': face.get('R_gate'),
+                'permeability_state': face.get('permeability_state'),
+            }
+        )
+
+        wall = _slot(components[wet_cid].dry_lining, dry_cid)
+        wall['tetrahedron_ids'].add(dry_t)
+        wall['contact_face_ids'].add(face['face_id'])
+        wall['area'] += area
+
+        lining = _slot(components[dry_cid].wet_lining, wet_cid)
+        lining['tetrahedron_ids'].add(wet_t)
+        lining['contact_face_ids'].add(face['face_id'])
+        lining['area'] += area
+
+    for component in components.wet:
+        for entry in component.dry_lining.values():
+            entry['tetrahedron_ids'] = sorted(entry['tetrahedron_ids'])
+            entry['contact_face_ids'] = sorted(entry['contact_face_ids'])
+    for component in components.dry:
+        for entry in component.wet_lining.values():
+            entry['tetrahedron_ids'] = sorted(entry['tetrahedron_ids'])
+            entry['contact_face_ids'] = sorted(entry['contact_face_ids'])
+    components.coast_faces = coast
+
+
+def _attach_interface_labels(components: Components, result: dict[str, Any]) -> None:
+    """Tag each wet component as an interface when its lining spans >=2 dry banks.
+
+    Native (label-free) route of ``interfaces.py``: bodies are the dry banks. The
+    ``family`` (mouth topology) is untouched; this only adds the orthogonal
+    interface descriptor (``is_interface`` / ``interface_family`` / lining split /
+    the DRY banks it interfaces). See devguide/DFND/interfaces.md §2-3.
+    """
+    from . import interfaces as ifc
+
+    dry_components = result['dry']['components']
+    if len(dry_components) < 2:
+        return  # an interface needs at least two banks
+
+    max_atom = -1
+    for record in dry_components:
+        if record['atom_indices']:
+            max_atom = max(max_atom, max(record['atom_indices']))
+    for record in result['raw']['wet_components']:
+        if record['atom_indices']:
+            max_atom = max(max_atom, max(record['atom_indices']))
+    if max_atom < 0:
+        return
+
+    body_labels = ifc.body_labels_from_dry_components(result, max_atom + 1)
+    classified = ifc.classify_interface_components(
+        result['raw']['wet_components'], body_labels
+    )
+    # body ids are dry banks ranked by size (mirrors body_labels_from_dry_components)
+    ranked = sorted(
+        (c for c in dry_components if c['size'] >= 1),
+        key=lambda c: c['size'],
+        reverse=True,
+    )
+    body_to_bank = {i: f"DRY-{record['id']}" for i, record in enumerate(ranked)}
+    by_wet_id = {record['component_id']: record for record in classified}
+
+    for component in components.wet:
+        wet_id = int(component.component_id.split('-')[1])
+        record = by_wet_id.get(wet_id)
+        if record is None:
+            continue
+        component.is_interface = bool(record['is_interface'])
+        component.lining_body_split = dict(record['lining_body_split'])
+        if component.is_interface:
+            component.interface_family = record['interface_family']
+            component.lining_bodies = sorted(
+                body_to_bank[b] for b in record['lining_body_split'] if b in body_to_bank
+            )
 
 
 def _permeable_adjacency(faces: list[dict[str, Any]]) -> dict[int, set[int]]:

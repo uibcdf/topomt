@@ -102,6 +102,17 @@ class Mesh:
         self.faces = _project(raw['faces'], _FACE_GEOMETRY_KEYS)
         self.delaunay = network.mesh  # the underlying DelaunayMesh object
 
+    def neighbors(self, tetrahedron_id: int, *, include_ocean: bool = False) -> list[int]:
+        """Bare face-neighbors of a tetrahedron (probe-independent topology).
+
+        Each tetrahedron borders up to four others across its faces; ``-1`` marks a
+        face on the convex hull (the OCEAN side). Reads the single shared adjacency
+        array (``delaunay.neighbors``) -- the topology is not duplicated per record.
+        The probe-dependent wet/dry split lives in ``dfn.graph.neighbors``.
+        """
+        row = self.delaunay.neighbors[int(tetrahedron_id)]
+        return [int(n) for n in row if include_ocean or int(n) != -1]
+
     def __repr__(self) -> str:
         return (
             f'<dfnd.mesh atoms={len(self.atoms.radii)} '
@@ -119,19 +130,49 @@ class Graph:
 
     OCEAN = -1
 
-    def __init__(self, raw: dict[str, Any]) -> None:
+    _WET_STATE = 'resident'
+    _DRY_STATE = 'non_resident'
+
+    def __init__(self, raw: dict[str, Any], adjacency: Any = None) -> None:
         self.nodes = _project(raw['tetrahedra'], _TETRA_STATE_KEYS)
         self.faces = _project(raw['faces'], _FACE_STATE_KEYS)
         self.external_links = raw['external_links']  # component -> OCEAN contacts
+        # Shared (N, 4) face-adjacency array (probe-independent), kept by reference
+        # so the wet/dry-aware neighbor query does not duplicate the topology.
+        self._adjacency = adjacency
+        self._state_by_id = {
+            node['tetrahedron_id']: node.get('residence_state') for node in self.nodes
+        }
+
+    def neighbors(self, node_id: int, side: str | None = None) -> list[int]:
+        """Face-neighbors of a node, optionally filtered by ``side``.
+
+        ``side=None`` returns every (non-OCEAN) neighbor; ``side='wet'`` keeps only
+        resident neighbors and ``side='dry'`` only non-resident ones. This is the
+        probe-dependent counterpart of ``mesh.neighbors`` -- it answers "which dry
+        tetrahedra border this wet one" (and vice versa) in one call.
+        """
+        if self._adjacency is None:
+            raise RuntimeError(
+                "Graph has no adjacency; build it via DFN(result, network)."
+            )
+        if side not in (None, 'wet', 'dry'):
+            raise ValueError("side must be None, 'wet' or 'dry'")
+        ids = [int(n) for n in self._adjacency[int(node_id)] if int(n) != self.OCEAN]
+        if side is None:
+            return ids
+        want = self._WET_STATE if side == 'wet' else self._DRY_STATE
+        return [i for i in ids if self._state_by_id.get(i) == want]
 
 
 class DFN:
     """The probe-dependent network for one probe radius."""
 
-    def __init__(self, result: dict[str, Any]) -> None:
+    def __init__(self, result: dict[str, Any], network: Any = None) -> None:
         self.parameters = result['raw']['parameters']
-        self.graph = Graph(result['raw'])
-        self.components = build_components(result)
+        adjacency = getattr(network, 'simplex_neighbors', None)
+        self.graph = Graph(result['raw'], adjacency=adjacency)
+        self.components = build_components(result, network)
 
     def __repr__(self) -> str:
         return (
@@ -147,7 +188,7 @@ class DFNDData:
         self._network = network  # holds the cached, probe-independent mesh
         self.raw = result['raw']
         self.mesh = Mesh(network, result['raw'])
-        self.dfn = DFN(result)
+        self.dfn = DFN(result, network)
 
     @property
     def network(self) -> Any:
