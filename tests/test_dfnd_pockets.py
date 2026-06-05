@@ -114,7 +114,7 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
         if domain['family'] in {
             'void',
             'pocket',
-            'multi_external_link',
+            'channel',
         }
     )
     assert len(topography.get_features(by='shape', value='concavity')) == n_public_domains
@@ -125,7 +125,7 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
     public_families = {
         'void',
         'pocket',
-        'multi_external_link',
+        'channel',
     }
     required_fields = {
         'atom_indices',

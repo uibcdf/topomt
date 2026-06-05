@@ -38,13 +38,13 @@ def test_known_failure_deep_narrow_well_fragments_into_a_stack_of_pockets():
 
 
 def test_known_failure_long_pore_loses_through_connectivity():
-    # SHOULD BE: one channel (multi_external_link) joining both faces.
+    # SHOULD BE: one channel (channel) joining both faces.
     # CURRENTLY: the long thin lumen does not stay connected, so no through-channel
     # is found -- it collapses into separate one-mouth pockets at each end.
     coords, radii = syn.slab_with_pore(pore_radius=3.0, thickness=14.0, seed=0)
     families = _significant_families(_domains(coords, radii))
 
-    assert families['multi_external_link'] == 0   # connectivity lost (ideal: 1)
+    assert families['channel'] == 0   # connectivity lost (ideal: 1)
     assert families['pocket'] >= 2
 
 
@@ -122,7 +122,7 @@ def test_known_failure_thin_tube_is_not_recognized_as_a_channel():
     coords, radii = syn.cylinder_tube(length=16.0, tube_radius=2.5, wall_spacing=3.0, jitter=0.1, seed=0)
     families = _significant_families(_domains(coords, radii))
 
-    assert families['multi_external_link'] == 0   # no channel (ideal: 1)
+    assert families['channel'] == 0   # no channel (ideal: 1)
     assert families['pocket'] >= 2
 
 
@@ -136,7 +136,7 @@ def test_known_failure_nonuniform_sampling_flips_a_closed_cavity_open():
 
     assert dense['void'] == 1                     # dense wall -> closed void
     assert patchy['void'] == 0                    # sparse wall -> not a void
-    assert patchy['multi_external_link'] >= 1     # leaks open (ideal: still a void)
+    assert patchy['channel'] >= 1     # leaks open (ideal: still a void)
 
 
 def test_known_failure_radius_distribution_changes_classification():
@@ -244,7 +244,7 @@ def test_known_failure_tapering_cone_is_not_one_channel():
     # SHOULD BE: one channel/pocket. CURRENTLY: the lumen crosses the residence
     # threshold along the taper and fragments into pockets, with no channel.
     families = _significant_families(_domains(*syn.conical_channel(6.0, 1.5, 16.0, seed=0)))
-    assert families['multi_external_link'] == 0
+    assert families['channel'] == 0
     assert families['pocket'] >= 2
 
 
@@ -268,7 +268,7 @@ def test_known_failure_u_channel_is_not_connected_as_a_channel():
     # SHOULD BE: one channel with two mouths on the same face. CURRENTLY: the
     # U-tunnel is not recognised as a channel and even yields a spurious void.
     families = _significant_families(_domains(*syn.u_channel(seed=0)))
-    assert families['multi_external_link'] == 0   # connectivity lost (ideal: 1)
+    assert families['channel'] == 0   # connectivity lost (ideal: 1)
 
 
 def test_known_failure_pocket_in_pocket_has_no_hierarchy():

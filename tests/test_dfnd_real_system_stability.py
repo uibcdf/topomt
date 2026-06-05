@@ -11,7 +11,7 @@ SMALL_CASTPFOLD_SYSTEMS = ('1crn', '1rop')
 PUBLIC_DOMAIN_FAMILIES = {
     'void',
     'pocket',
-    'multi_external_link',
+    'channel',
 }
 
 

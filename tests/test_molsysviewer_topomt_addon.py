@@ -21,7 +21,7 @@ from molsysviewer_topomt.integration import (
     subset_topography,
 )
 from molsysviewer_topomt.payloads import feature_record_from_feature, topography_payload
-from molsysviewer_topomt.render import render_topography_pockets
+from molsysviewer_topomt.render import show_topography_pockets
 from molsysviewer_topomt.shapes import pocket_blob_provider
 from molsysviewer_topomt.standalone import (
     build_topography_standalone0_html,
@@ -99,7 +99,7 @@ def test_tetrahedron_context_action_accepts_dry_face_shape_selection():
             {
                 'source_kind': 'shape',
                 'tag': 'dfn-dry-faces',
-                'shape_name': 'Face 1: tetrahedra 0-1; permeability=permeable',
+                'shape_name': 'Face id 1: tetrahedra 0-1; permeability=permeable',
             }
         ]
     )
@@ -205,7 +205,7 @@ class DummyView:
         )
 
 
-def test_render_topography_pockets_uses_blob_and_marker_modes():
+def test_show_topography_pockets_uses_blob_and_marker_modes():
     topo = tmt.Topography()
     topo.add_new_feature(
         feature_type='pocket',
@@ -230,7 +230,7 @@ def test_render_topography_pockets_uses_blob_and_marker_modes():
     )
 
     view = DummyView()
-    result = render_topography_pockets(view, topo)
+    result = show_topography_pockets(view, topo)
 
     assert result['n_rendered'] == 2
     assert result['rendered'][0]['mode'] == 'blob'
@@ -239,7 +239,7 @@ def test_render_topography_pockets_uses_blob_and_marker_modes():
     assert view.messages[1]['op'] == 'add_sphere'
 
 
-def test_render_topography_pockets_accepts_quantity_backed_features():
+def test_show_topography_pockets_accepts_quantity_backed_features():
     topo = tmt.Topography()
     topo.add_new_feature(
         feature_type='pocket',
@@ -252,7 +252,7 @@ def test_render_topography_pockets_accepts_quantity_backed_features():
     )
 
     view = DummyView()
-    result = render_topography_pockets(view, topo)
+    result = show_topography_pockets(view, topo)
 
     assert result['n_rendered'] == 1
     assert view.messages[0]['op'] == 'add_pocket_blob'
@@ -555,7 +555,7 @@ def test_launch_topography_standalone0_can_compute_topography_and_open_host(
     assert captured['launch']['kwargs']['open_browser'] is False
 
 
-def test_render_dfnd_tetrahedra_creates_shapes():
+def test_show_dfnd_tetrahedra_creates_shapes():
     # Build simulated dfnd_records
     dfnd_records = {
         'tetrahedra': [
@@ -581,9 +581,9 @@ def test_render_dfnd_tetrahedra_creates_shapes():
     view = DummyView()
 
     # Test default mode (combined_class)
-    from molsysviewer_topomt.render import render_dfnd_tetrahedra
+    from molsysviewer_topomt.render import show_dfnd_tetrahedra
 
-    layer = render_dfnd_tetrahedra(view, dfnd_records)
+    layer = show_dfnd_tetrahedra(view, dfnd_records)
 
     assert layer is not None
     assert len(view.messages) == 2
@@ -597,6 +597,152 @@ def test_render_dfnd_tetrahedra_creates_shapes():
     assert msg['options']['alphas'] == [0.5, 0.1]
     assert 'combined_class=wet_sealed' in msg['options']['labels'][0]
     assert 'R_res=2.15 Å' in msg['options']['labels'][0]
+
+
+def test_simplex_menu_selection_sets_native_selection_and_is_inspectable():
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from molsysviewer_topomt.addon import on_enable, on_context_action
+    from molsysviewer_topomt.simplex_selection import ACTION_ID, simplex_selection_info
+
+    net = DelaunayFlowNetwork(
+        'topomt/data/synthetic/tetrahedron_void.pdb', selection='all'
+    )
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+
+    view = DummyView()
+    on_enable(view)
+    view._topomt_addon_runtime.topography = result
+
+    # Click on the "face" dynamic menu item -> should set the native atom selection
+    # to the face's atoms (same highlight as clicking the face) and be inspectable.
+    on_context_action(
+        view,
+        ACTION_ID,
+        {
+            'addon_action_payload': {
+                'kind': 'face',
+                'face_id': 1,
+                'atom_indices': [0, 1, 2],
+                'tetrahedron_ids': [0],
+            }
+        },
+    )
+
+    sel = [m for m in view.messages if m.get('op') == 'set_active_selection']
+    assert sel and sel[-1]['atom_indices'] == [0, 1, 2]
+    info = simplex_selection_info(view)
+    assert info['kind'] == 'face'
+    assert info['atom_indices'] == [0, 1, 2]
+
+
+def test_show_dfnd_tetrahedra_edges_carry_edge_metadata():
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from molsysviewer_topomt.render import show_dfnd_tetrahedra
+
+    net = DelaunayFlowNetwork(
+        'topomt/data/synthetic/tetrahedron_void.pdb', selection='all'
+    )
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+
+    view = DummyView()
+    # edges-only mode forces the wireframe; edge_meta must accompany it.
+    show_dfnd_tetrahedra(view, result, draw_faces=False)
+
+    msg = view.messages[-1]
+    assert msg['op'] == 'add_tetrahedra'
+    assert msg['options']['draw_edges'] is True
+    edge_meta = msg['options']['edge_meta']
+    assert len(edge_meta) == 6  # single tetra -> 6 edges
+    entry = edge_meta[0]
+    assert 'edge_id' in entry and len(entry['atoms']) == 2
+
+
+def test_resolve_simplices_maps_atom_selection_to_dfnd_simplices():
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from molsysviewer_topomt.simplex_selection import resolve_simplices
+
+    net = DelaunayFlowNetwork(
+        'topomt/data/synthetic/tetrahedron_void.pdb', selection='all'
+    )
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+
+    # 2 atoms forming an edge -> a single edge item.
+    edge_items = resolve_simplices(result, [0, 1])
+    edge = next(i for i in edge_items if i['payload']['kind'] == 'edge')
+    assert edge['payload']['atom_indices'] == [0, 1]
+    assert 'arista id' in edge['title']
+    assert edge['group'] == 'Selección actual'
+
+    # 3 atoms forming a face -> a single face item.
+    face_items = resolve_simplices(result, [0, 1, 2])
+    assert any(i['payload']['kind'] == 'face' for i in face_items)
+
+    # 4 atoms forming the tetrahedron -> a single tetrahedron item.
+    tet_items = resolve_simplices(result, [0, 1, 2, 3])
+    tet = next(i for i in tet_items if i['payload']['kind'] == 'tetrahedron')
+    assert tet['payload']['tetrahedron_id'] == 0
+
+    # Fewer than 2 atoms -> nothing.
+    assert resolve_simplices(result, [0]) == []
+
+
+def test_show_dfnd_tetrahedra_faces_are_pickable_with_metadata():
+    # Two tetrahedra sharing one internal face plus face records: the emitted
+    # add_tetrahedra message must request face-addressed picking (faces_pickable)
+    # and carry per-face metadata so the frontend can label each face with its id,
+    # permeability and both owning tetrahedra.
+    dfnd_records = {
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 0,
+                'local_atom_indices': [10, 11, 12, 13],
+                'combined_class': 'wet_sealed',
+                'transit_role': 'resident_transit',
+                'R_residence': 2.15,
+                'residence_state': 'resident',
+            },
+            {
+                'tetrahedron_id': 1,
+                'local_atom_indices': [11, 12, 13, 14],
+                'combined_class': 'dry_open',
+                'transit_role': 'non_transit',
+                'R_residence': 0.0,
+                'residence_state': 'non_resident',
+            },
+        ],
+        'faces': [
+            {
+                'face_id': 7,
+                'owner_tetrahedron_id': 0,
+                'neighbor_tetrahedron_id': 1,
+                'face_atoms_local': [11, 12, 13],
+                'permeability_state': 'permeable',
+            },
+            {
+                'face_id': 8,
+                'owner_tetrahedron_id': 0,
+                'neighbor_tetrahedron_id': -1,
+                'face_atoms_local': [10, 11, 12],
+                'permeability_state': 'non_permeable',
+            },
+        ],
+    }
+
+    view = DummyView()
+    from molsysviewer_topomt.render import show_dfnd_tetrahedra
+
+    show_dfnd_tetrahedra(view, dfnd_records)
+
+    msg = view.messages[-1]
+    assert msg['op'] == 'add_tetrahedra'
+    assert msg['options']['faces_pickable'] is True
+    meta = {entry['face_id']: entry for entry in msg['options']['face_meta']}
+    assert meta[7]['atoms'] == [11, 12, 13]
+    assert meta[7]['permeability'] == 'permeable'
+    assert meta[7]['owner_id'] == 0
+    assert meta[7]['neighbor_id'] == 1
+    # exterior face -> neighbor reported as OCEAN
+    assert meta[8]['neighbor_id'] == 'OCEAN'
 
 
 def test_attach_dfnd_tetrahedra_integration():
@@ -633,7 +779,7 @@ def test_attach_dfnd_tetrahedra_integration():
     assert msg['options']['colors'] == [0x6366F1]
 
 
-def test_render_dfnd_tetrahedra_with_custom_indices():
+def test_show_dfnd_tetrahedra_with_custom_indices():
     # Build simulated dfnd_records with three tetrahedra
     dfnd_records = {
         'tetrahedra': [
@@ -667,9 +813,9 @@ def test_render_dfnd_tetrahedra_with_custom_indices():
     view = DummyView()
 
     # Test filtering to keep only tetrahedron 0 and 2
-    from molsysviewer_topomt.render import render_dfnd_tetrahedra
+    from molsysviewer_topomt.render import show_dfnd_tetrahedra
 
-    layer = render_dfnd_tetrahedra(view, dfnd_records, tetrahedra_indices=[0, 2])
+    layer = show_dfnd_tetrahedra(view, dfnd_records, tetrahedra_indices=[0, 2])
 
     assert layer is not None
     assert len(view.messages) == 2
@@ -732,218 +878,6 @@ def test_attach_dfnd_tetrahedra_with_click_callback():
     )
 
 
-def test_render_dfn_dry_components_filters_dry_faces_by_permeability():
-    dfnd_records = {
-        'tetrahedra': [
-            {
-                'tetrahedron_id': 0,
-                'local_atom_indices': [10, 11, 12, 13],
-                'residence_state': 'non_resident',
-            },
-            {
-                'tetrahedron_id': 1,
-                'local_atom_indices': [20, 21, 22, 23],
-                'residence_state': 'resident',
-            },
-        ],
-        'faces': [
-            {
-                'face_id': 1,
-                'owner_tetrahedron_id': 0,
-                'neighbor_tetrahedron_id': 1,
-                'face_index': 2,
-                'face_atoms_local': [10, 11, 12],
-                'permeability_state': 'permeable',
-                'R_gate': 1.8,
-            },
-            {
-                'face_id': 2,
-                'owner_tetrahedron_id': 0,
-                'face_atoms_local': [10, 11, 13],
-                'permeability_state': 'non_permeable',
-                'R_gate': 0.8,
-            },
-            {
-                'face_id': 3,
-                'owner_tetrahedron_id': 1,
-                'face_atoms_local': [20, 21, 22],
-                'permeability_state': 'permeable',
-                'R_gate': 2.0,
-            },
-        ],
-    }
-
-    view = DummyView()
-    from molsysviewer_topomt.render import render_dfn_dry_components
-
-    result = render_dfn_dry_components(
-        view,
-        dfnd_records,
-        draw_faces=True,
-        draw_edges=True,
-        draw_impermeable_faces=False,
-        draw_permeable_faces=True,
-    )
-
-    assert result['n_tetrahedra'] == 1
-    assert result['n_faces'] == 1
-    assert [msg['op'] for msg in view.messages] == [
-        'clear_shapes_by_tag',
-        'clear_shapes_by_tag',
-        'clear_shapes_by_tag',
-        'add_tetrahedra',
-        'add_triangle_faces',
-    ]
-    assert [msg['tag'] for msg in view.messages[:3]] == [
-        'dfn-dry',
-        'dfn-dry-edges',
-        'dfn-dry-faces',
-    ]
-
-    edge_msg = view.messages[3]
-    assert edge_msg['options']['atom_quads'] == [[10, 11, 12, 13]]
-    assert edge_msg['options']['draw_faces'] is False
-    assert edge_msg['options']['draw_edges'] is True
-    assert 'Tetrahedron 0' in edge_msg['options']['labels'][0]
-
-    face_msg = view.messages[4]
-    assert face_msg['options']['atom_triplets'] == [[10, 11, 12]]
-    label = face_msg['options']['labels'][0]
-    assert 'Face 1' in label
-    assert 'tetrahedra 0-1' in label
-    assert 'owner_face_index=2' in label
-    assert 'permeability=permeable' in label
-    assert 'R_gate=1.80 Å' in label
-
-
-def test_render_dfn_dry_components_uses_explicit_face_vertices_when_available():
-    raw = {
-        'tetrahedra': [
-            {
-                'tetrahedron_id': 0,
-                'local_atom_indices': [0, 1, 2, 3],
-                'residence_state': 'non_resident',
-            },
-        ],
-        'faces': [
-            {
-                'face_id': 1,
-                'owner_tetrahedron_id': 0,
-                'neighbor_tetrahedron_id': -1,
-                'face_index': 0,
-                'face_atoms_local': [0, 1, 2],
-                'permeability_state': 'permeable',
-                'R_gate': 1.8,
-            },
-        ],
-    }
-    dfnd = types.SimpleNamespace(
-        raw=raw,
-        mesh=types.SimpleNamespace(
-            atoms=types.SimpleNamespace(
-                coords=np.asarray(
-                    [
-                        [0.0, 0.0, 0.0],
-                        [1.0, 0.0, 0.0],
-                        [0.0, 1.0, 0.0],
-                        [0.0, 0.0, 1.0],
-                    ],
-                    dtype=float,
-                )
-            )
-        ),
-    )
-    topography = types.SimpleNamespace(dfnd=dfnd)
-
-    view = DummyView()
-    from molsysviewer_topomt.render import render_dfn_dry_components
-
-    result = render_dfn_dry_components(
-        view,
-        topography,
-        draw_faces=True,
-        draw_edges=False,
-        draw_permeable_faces=True,
-        draw_impermeable_faces=False,
-    )
-
-    assert result is not None
-    face_msg = view.messages[3]
-    assert face_msg['op'] == 'add_triangle_faces'
-    assert 'vertices' in face_msg['options']
-    assert 'atom_triplets' not in face_msg['options']
-    assert face_msg['options']['vertices'] == [
-        [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0]]
-    ]
-    assert 'tetrahedra 0-OCEAN' in face_msg['options']['labels'][0]
-
-
-def test_render_dfn_dry_components_can_select_dry_components():
-    dfnd_result = {
-        'raw': {
-            'tetrahedra': [
-                {
-                    'tetrahedron_id': 0,
-                    'local_atom_indices': [10, 11, 12, 13],
-                    'residence_state': 'non_resident',
-                },
-                {
-                    'tetrahedron_id': 1,
-                    'local_atom_indices': [20, 21, 22, 23],
-                    'residence_state': 'non_resident',
-                },
-            ],
-            'faces': [
-                {
-                    'face_id': 1,
-                    'owner_tetrahedron_id': 0,
-                    'face_atoms_local': [10, 11, 12],
-                    'permeability_state': 'permeable',
-                    'R_gate': 1.8,
-                },
-                {
-                    'face_id': 2,
-                    'owner_tetrahedron_id': 1,
-                    'face_atoms_local': [20, 21, 22],
-                    'permeability_state': 'permeable',
-                    'R_gate': 2.0,
-                },
-            ],
-        },
-        'dry': {
-            'components': [
-                {
-                    'id': 1,
-                    'tetrahedron_indices': [0],
-                    'atom_indices': [10, 11, 12, 13],
-                },
-                {
-                    'id': 2,
-                    'tetrahedron_indices': [1],
-                    'atom_indices': [20, 21, 22, 23],
-                },
-            ],
-        },
-    }
-
-    view = DummyView()
-    from molsysviewer_topomt.render import render_dfn_dry_components
-
-    result = render_dfn_dry_components(
-        view,
-        dfnd_result,
-        component_ids='DRY-2',
-        draw_faces=True,
-        draw_edges=True,
-        draw_permeable_faces=True,
-    )
-
-    assert result['n_tetrahedra'] == 1
-    assert result['n_faces'] == 1
-    assert view.messages[3]['options']['atom_quads'] == [[20, 21, 22, 23]]
-    assert view.messages[4]['options']['atom_triplets'] == [[20, 21, 22]]
-
-
 def test_attach_topography_with_tetrahedra():
     # A complete topography with pockets and tetrahedra
     topo = tmt.Topography()
@@ -979,9 +913,9 @@ def test_attach_topography_with_tetrahedra():
     assert res['rendered'] is not None
     assert res['rendered_tetrahedra'] is None
 
-    # Renders BOTH pockets and tetrahedra when render_tetrahedra=True
+    # Renders BOTH pockets and tetrahedra when show_tetrahedra=True
     view = DummyView()
-    res = attach_topography(view, topo, render_tetrahedra=True)
+    res = attach_topography(view, topo, show_tetrahedra=True)
     assert res['rendered'] is not None
     assert res['rendered_tetrahedra'] is not None
     assert len(view.messages) == 3
@@ -1088,6 +1022,97 @@ def test_new_view_resolves_molsys(monkeypatch):
         pass
 
     with pytest.raises(
-        ValueError, match="topography does not have a '_molsys' attribute"
+        ValueError, match='topography does not expose a molecular_system'
     ):
         new_view(BadTopography())
+
+
+def test_show_dfnd_components_creates_shapes():
+    class MockMesh:
+        def __init__(self):
+            self.atoms = types.SimpleNamespace(
+                coords=np.array(
+                    [[0.0, 0.0, 0.0], [1.0, 1.0, 1.0], [2.0, 2.0, 2.0], [3.0, 3.0, 3.0]]
+                )
+            )
+            self.tetrahedra = [
+                {'tetrahedron_id': 0, 'local_atom_indices': [0, 1, 2, 3]}
+            ]
+            self.faces = []
+
+            class FakeDelaunay:
+                def __init__(self):
+                    self.alpha_sphere_centers = np.array([[0.0, 0.0, 0.0]])
+                    self.alpha_sphere_radii = np.array([1.5])
+
+            self.delaunay = FakeDelaunay()
+
+    class MockComponent:
+        def __init__(
+            self,
+            component_id,
+            family,
+            side,
+            node_indices,
+            resident_node_indices,
+            atom_indices,
+        ):
+            self.component_id = component_id
+            self.family = family
+            self.side = side
+            self.node_indices = node_indices
+            self.resident_node_indices = resident_node_indices
+            self.atom_indices = atom_indices
+            self.volume = 10.0
+
+    class MockDFN:
+        def __init__(self):
+            self.components = types.SimpleNamespace(
+                wet=[MockComponent('WET-1', 'pocket', 'wet', [0], [0], [0, 1, 2, 3])],
+                dry=[],
+            )
+            self.faces = []
+
+    class MockTopography:
+        def __init__(self):
+            self.dfnd = types.SimpleNamespace(
+                mesh=MockMesh(), dfn=MockDFN(), raw={'faces': [], 'tetrahedra': []}
+            )
+
+            self.features = {}
+
+        def __getitem__(self, item):
+            return self.features[item]
+
+        def __iter__(self):
+            return iter(self.features)
+
+        def __len__(self):
+            return len(self.features)
+
+    topo = MockTopography()
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    # Test tetrahedra mode
+    view = DummyView()
+    layer = show_dfnd_components(view, topo, representation='tetrahedra')
+    assert layer is not None
+    assert any(msg['op'] == 'add_tetrahedra' for msg in view.messages)
+
+    # Test spheres mode
+    view = DummyView()
+    layer = show_dfnd_components(view, topo, representation='spheres')
+    assert layer is not None
+    assert any(msg['op'] == 'add_alpha_sphere_set' for msg in view.messages)
+
+    # Test cloud mode
+    view = DummyView()
+    layer = show_dfnd_components(view, topo, representation='cloud')
+    assert layer is not None
+    assert any(msg['op'] == 'add_pocket_blob' for msg in view.messages)
+
+    # Test surface mode
+    view = DummyView()
+    layer = show_dfnd_components(view, topo, representation='surface')
+    assert layer is not None
+    assert any(msg['op'] == 'add_pocket_surface' for msg in view.messages)

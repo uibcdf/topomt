@@ -43,7 +43,7 @@ def test_access_residence_classifier_does_not_require_open_interior():
     assert network._classify_component(0, 0) == 'degenerate_subprobe'
     assert network._classify_component(1, 1) == 'pocket'
     assert network._classify_component(1, 0) == 'surface_concavity'
-    assert network._classify_component(2, 1) == 'multi_external_link'
+    assert network._classify_component(2, 1) == 'channel'
     assert network._classify_component(2, 0) == 'nonresident_passage'
 
 
@@ -371,7 +371,7 @@ def test_external_links_reference_existing_boundary_faces_and_atoms():
             assert set(face['atom_indices']) <= link_atoms
 
 
-def test_multi_external_link_domain_has_distinct_external_links():
+def test_channel_domain_has_distinct_external_links():
     coords = np.array(
         [
             [2.86, 0.57, 5.29],
@@ -397,7 +397,7 @@ def test_multi_external_link_domain_has_distinct_external_links():
 
     domains = result['raw']['wet_components']
     multi_domains = [
-        domain for domain in domains if domain['family'] == 'multi_external_link'
+        domain for domain in domains if domain['family'] == 'channel'
     ]
     assert len(multi_domains) == 1
 

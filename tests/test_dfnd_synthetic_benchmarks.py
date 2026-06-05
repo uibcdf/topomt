@@ -36,7 +36,7 @@ def test_hollow_tube_is_a_multi_mouth_channel():
     coords, radii = syn.cylinder_tube(length=20.0, tube_radius=6.0, wall_spacing=3.5, jitter=0.1, seed=0)
     domains = _domains(coords, radii)
 
-    channels = [d for d in domains if d['family'] == 'multi_external_link']
+    channels = [d for d in domains if d['family'] == 'channel']
     assert channels
 
     main = max(channels, key=lambda d: d['n_resident_nodes'])
@@ -117,7 +117,7 @@ def test_slab_pore_is_a_through_channel():
     coords, radii = syn.slab_with_pore(pore_radius=4.0, thickness=6.0, seed=0)
     domains = _domains(coords, radii)
 
-    channels = [d for d in domains if d['family'] == 'multi_external_link']
+    channels = [d for d in domains if d['family'] == 'channel']
     assert len(channels) == 1
     assert channels[0]['n_external_links'] >= 2
     assert channels[0] is max(domains, key=lambda d: d['n_resident_nodes'])
@@ -155,7 +155,7 @@ def test_branched_tube_is_a_three_mouth_channel():
     coords, radii = syn.branched_tube(arm_length=11.0, tube_radius=5.0, seed=0)
     domains = _domains(coords, radii)
 
-    channels = [d for d in domains if d['family'] == 'multi_external_link']
+    channels = [d for d in domains if d['family'] == 'channel']
     assert len(channels) == 1
     assert channels[0]['n_external_links'] == 3
     assert channels[0] is max(domains, key=lambda d: d['n_resident_nodes'])
@@ -177,7 +177,7 @@ def test_curved_tube_is_a_two_mouth_channel():
     coords, radii = syn.curved_tube(bend_radius=12.0, arc_deg=120.0, tube_radius=5.0, seed=0)
     domains = _domains(coords, radii)
 
-    channels = [d for d in domains if d['family'] == 'multi_external_link']
+    channels = [d for d in domains if d['family'] == 'channel']
     assert len(channels) == 1
     assert channels[0]['n_external_links'] >= 2
     assert channels[0] is max(domains, key=lambda d: d['n_resident_nodes'])
@@ -207,7 +207,7 @@ def test_second_mouth_must_exceed_a_size_threshold_to_count():
     open2_dom = max(_domains(open2, open2_r), key=lambda d: d['n_resident_nodes'])
     assert pinhole_dom['family'] == 'pocket'
     assert pinhole_dom['n_external_links'] == 1
-    assert open2_dom['family'] == 'multi_external_link'
+    assert open2_dom['family'] == 'channel'
     assert open2_dom['n_external_links'] >= 2
 
 
@@ -228,7 +228,7 @@ def test_swiss_cheese_percolates_into_one_cluster():
     assert len(_significant_voids(domains)) == 0          # not a set of isolated voids
     dominant = max(domains, key=lambda d: d['n_resident_nodes'])
     assert dominant['n_resident_nodes'] > 300
-    assert dominant['family'] in {'pocket', 'multi_external_link'}
+    assert dominant['family'] in {'pocket', 'channel'}
 
 
 def test_void_with_island_is_still_one_void():
@@ -245,7 +245,7 @@ def test_helical_tube_is_a_two_mouth_channel():
     coords, radii = syn.helical_tube(turns=1.5, helix_radius=8.0, pitch=10.0, tube_radius=4.5, seed=0)
     domains = _domains(coords, radii)
 
-    channels = [d for d in domains if d['family'] == 'multi_external_link']
+    channels = [d for d in domains if d['family'] == 'channel']
     assert len(channels) == 1
     assert channels[0]['n_external_links'] >= 2
     assert channels[0] is max(domains, key=lambda d: d['n_resident_nodes'])
@@ -268,7 +268,7 @@ def test_flat_sheet_has_no_false_tunnel_or_void():
 
     assert all(d['family'] != 'void' for d in domains)
     significant_channels = [d for d in domains
-                            if d['family'] == 'multi_external_link'
+                            if d['family'] == 'channel'
                             and d['n_resident_nodes'] >= 5]
     assert significant_channels == []
 
