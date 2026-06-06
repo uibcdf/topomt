@@ -27,18 +27,20 @@ Done and on `main`:
 - **Phase 4** — `rings`: HOLE-style clearance profile (green/amber/red @ 1.15 Å).
 - **Phase 5** — `carve_voids` (focus-with-fade), `show_dfnd_labels`,
   `affinity_spheres` (via `molsysmt.physchem`), `top_n` visibility.
-- **§7** — `scaffold`: dry-core MST spine.
+- **§7** — `scaffold`: dry-core MST spine; `show_dfnd_convexity`: convexity
+  heatmap on the molecular surface (uses `whole.set_color_by_values`, already in
+  molsysviewer — no new primitive needed).
 - **molsysviewer** — `add_rings` shape, `focus_with_fade` primitive (both pushed).
 
 Remaining:
 
 - **Legend** primitive (molsysviewer) → the colour legend of Phase 5.
-- **Curvature surface coloring** primitive (molsysviewer) → convexity heatmap (§7).
-- **Clipping-plane**, **2D–3D synced widget** primitives (molsysviewer).
+- **Clipping-plane**, **2D–3D synced widget** primitives (molsysviewer) — the
+  widget also depends on the (blocked) dynamic axis.
 - **Pharmacophore interaction-site map** (§9) — topomt, via the `pharmacophore`
   shape + `physchem` (trackable now, not yet built).
 - **Dynamic topology** (§8) — **blocked on DFND core**: no cross-frame component
-  identity exists yet.
+  identity exists yet (see the component-identity contract work).
 - **molsysmt** — `physchem` should treat `DUM` dummy atoms/groups as neutral
   (proposal filed) so affinity typing works on dummy systems too.
 
@@ -281,12 +283,13 @@ These are not pure rendering tasks; they wait on DFND core or new viewer support
 | 4 | HOLE rings + scalar gradient | `rings` | ✅ done |
 | 5 | carving, labels, affinity, visibility | `affinity_spheres`, `carve_voids`, `show_dfnd_labels`, `top_n` | ✅ done (legend pending, upstream) |
 | 6 | dry-core scaffold | `scaffold` | ✅ done |
-| 6 | convexity heatmap | `heatmap` | ⏳ needs curvature-coloring primitive (upstream) |
+| 6 | convexity heatmap | `show_dfnd_convexity` | ✅ done (`whole.set_color_by_values`, no new primitive) |
 | 6 | pharmacophore map | — | ⏳ trackable now (`pharmacophore` shape + `physchem`) |
 | 6 | dynamic topology | — | ⛔ blocked on DFND core (cross-frame identity) |
 
 Upstream primitives (molsysviewer): `add_rings` ✅, `focus_with_fade` ✅ (both
-pushed); `legend`, `curvature coloring`, `clipping-plane`, `2D–3D widget` ⏳.
+pushed); scalar surface colouring (`set_color_by_values`) already existed.
+Still new: `legend`, `clipping-plane`, `2D–3D widget` ⏳.
 
 ## 13. Cross-references
 
