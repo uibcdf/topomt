@@ -102,3 +102,89 @@ def match_results(
                 })
 
     return matches
+
+
+def assign_tracks(
+    frames: Iterable[Iterable[Any]],
+    *,
+    min_jaccard: float = 0.2,
+) -> dict[str, Any]:
+    """Chain pairwise matches across an ordered list of frames into tracks.
+
+    Parameters
+    ----------
+    frames
+        Ordered iterable of per-frame component iterables (one list per frame).
+    min_jaccard
+        Overlap threshold passed to :func:`match_results`.
+
+    Returns
+    -------
+    dict with:
+
+    - ``track_of``: ``{(frame_index, component_key): track_id}`` — a ``track_id``
+      follows clean one-to-one correspondences; births, splits and merges fork or
+      start new tracks.
+    - ``events``: list of ``{'type', 'frame', ...}`` with ``type`` in
+      ``birth | death | split | merge`` (one-to-one continuations emit no event).
+    """
+    frame_list = [list(frame) for frame in frames]
+    track_of: dict[tuple[int, Any], str] = {}
+    events: list[dict[str, Any]] = []
+    counter = [0]
+
+    def _new_track() -> str:
+        track = f'track-{counter[0]}'
+        counter[0] += 1
+        return track
+
+    if not frame_list:
+        return {'track_of': track_of, 'events': events}
+
+    for comp in frame_list[0]:
+        key = _get(comp, 'component_key')
+        track_of[(0, key)] = _new_track()
+        events.append({'type': 'birth', 'frame': 0, 'component': key,
+                       'track': track_of[(0, key)]})
+
+    for i in range(len(frame_list) - 1):
+        matches = match_results(frame_list[i], frame_list[i + 1],
+                                min_jaccard=min_jaccard)
+        succ: dict[Any, list[Any]] = {}
+        pred: dict[Any, list[Any]] = {}
+        for m in matches:
+            succ.setdefault(m['a'], []).append(m['b'])
+            pred.setdefault(m['b'], []).append(m['a'])
+
+        keys_a = [_get(c, 'component_key') for c in frame_list[i]]
+        keys_b = [_get(c, 'component_key') for c in frame_list[i + 1]]
+
+        for key_a in keys_a:
+            outgoing = succ.get(key_a, [])
+            if not outgoing:
+                events.append({'type': 'death', 'frame': i, 'component': key_a,
+                               'track': track_of.get((i, key_a))})
+            elif len(outgoing) >= 2:
+                events.append({'type': 'split', 'frame': i, 'component': key_a,
+                               'into': outgoing, 'track': track_of.get((i, key_a))})
+
+        for key_b in keys_b:
+            incoming = pred.get(key_b, [])
+            if not incoming:
+                track_of[(i + 1, key_b)] = _new_track()
+                events.append({'type': 'birth', 'frame': i + 1, 'component': key_b,
+                               'track': track_of[(i + 1, key_b)]})
+            elif len(incoming) == 1 and len(succ.get(incoming[0], [])) == 1:
+                # clean one-to-one: continue the predecessor's track
+                track_of[(i + 1, key_b)] = (
+                    track_of.get((i, incoming[0])) or _new_track()
+                )
+            elif len(incoming) >= 2:
+                track_of[(i + 1, key_b)] = _new_track()
+                events.append({'type': 'merge', 'frame': i + 1, 'component': key_b,
+                               'from': incoming, 'track': track_of[(i + 1, key_b)]})
+            else:
+                # one branch of a predecessor that split: start a fresh track
+                track_of[(i + 1, key_b)] = _new_track()
+
+    return {'track_of': track_of, 'events': events}

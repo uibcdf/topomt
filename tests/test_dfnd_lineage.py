@@ -68,3 +68,40 @@ def test_match_accepts_dict_records():
     # exact support match wins for A -> B1
     exact = [m for m in matches if m['exact']]
     assert exact == [{'a': 'A', 'b': 'B1', 'jaccard': 1.0, 'exact': True}]
+
+
+def test_assign_tracks_continues_identical_frames():
+    from topomt.dfnd.lineage import assign_tracks
+    comps = _wet_components('tube_channel_clean.pdb')
+    result = assign_tracks([comps, comps, comps])  # three identical frames
+    track_of = result['track_of']
+    # each component keeps the same track across all three frames (1:1 exact)
+    for c in comps:
+        t0 = track_of[(0, c.component_key)]
+        assert track_of[(1, c.component_key)] == t0
+        assert track_of[(2, c.component_key)] == t0
+    # no splits/merges/deaths between identical frames; births only in frame 0
+    kinds = {e['type'] for e in result['events']}
+    assert kinds == {'birth'}
+    assert all(e['frame'] == 0 for e in result['events'] if e['type'] == 'birth')
+
+
+def test_assign_tracks_detects_split_and_merge():
+    from topomt.dfnd.lineage import assign_tracks
+    # synthetic dict frames: A splits into B1+B2, then B1+B2 merge back into C
+    frame0 = [{'component_key': 'A', 'support_key': 'sA',
+               'atom_indices': [1, 2, 3, 4, 5, 6]}]
+    frame1 = [
+        {'component_key': 'B1', 'support_key': 'sB1', 'atom_indices': [1, 2, 3]},
+        {'component_key': 'B2', 'support_key': 'sB2', 'atom_indices': [4, 5, 6]},
+    ]
+    frame2 = [{'component_key': 'C', 'support_key': 'sC',
+               'atom_indices': [1, 2, 3, 4, 5, 6]}]
+    result = assign_tracks([frame0, frame1, frame2], min_jaccard=0.2)
+    types = [e['type'] for e in result['events']]
+    assert 'split' in types   # A -> B1, B2
+    assert 'merge' in types   # B1, B2 -> C
+    split = next(e for e in result['events'] if e['type'] == 'split')
+    assert set(split['into']) == {'B1', 'B2'}
+    merge = next(e for e in result['events'] if e['type'] == 'merge')
+    assert set(merge['from']) == {'B1', 'B2'}
