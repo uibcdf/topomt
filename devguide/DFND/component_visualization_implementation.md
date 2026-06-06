@@ -26,17 +26,20 @@ Done and on `main`:
 - **Phase 3** — `contact_sheet`: interface lining split per body.
 - **Phase 4** — `rings`: HOLE-style clearance profile (green/amber/red @ 1.15 Å).
 - **Phase 5** — `carve_voids` (focus-with-fade), `show_dfnd_labels`,
-  `affinity_spheres` (via `molsysmt.physchem`), `top_n` visibility.
+  `affinity_spheres` (via `molsysmt.physchem`), `top_n` visibility,
+  `show_dfnd_legend` (via the new `scene.set_legend` overlay). **Complete.**
 - **§7** — `scaffold`: dry-core MST spine; `show_dfnd_convexity`: convexity
   heatmap on the molecular surface (uses `whole.set_color_by_values`, already in
   molsysviewer — no new primitive needed).
-- **molsysviewer** — `add_rings` shape, `focus_with_fade` primitive (both pushed).
+- **molsysviewer** — `add_rings` shape, `focus_with_fade` primitive, and the
+  `scene.set_legend` overlay (all pushed). Note: `set_color_by_values`
+  (curvature/scalar surface colouring) and `scene.set_clip_planes`/`add_section`
+  (clipping-plane, with gizmos) **already existed** — no new primitive needed.
 
 Remaining:
 
-- **Legend** primitive (molsysviewer) → the colour legend of Phase 5.
-- **Clipping-plane**, **2D–3D synced widget** primitives (molsysviewer) — the
-  widget also depends on the (blocked) dynamic axis.
+- **2D–3D synced widget** primitive (molsysviewer) — the only generic primitive
+  still missing; also depends on the (blocked) dynamic axis.
 - **Pharmacophore interaction-site map** (§9) — topomt, via the `pharmacophore`
   shape + `physchem` (trackable now, not yet built).
 - **Dynamic topology** (§8) — **blocked on DFND core**: no cross-frame component
