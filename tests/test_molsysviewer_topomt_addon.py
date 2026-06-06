@@ -1868,3 +1868,18 @@ def test_show_dfnd_labels_annotates_each_component():
     chan_label = next(a for a in captured if a['tag'].endswith(channel.component_id))
     assert 'channel' in chan_label['text']
     assert 'mouth' in chan_label['text']
+
+
+def test_scaffold_draws_dry_core_spine():
+    """§7: scaffold renders each dry component's MST as links (the dry spine)."""
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('two_blocks_interface.pdb')
+    assert len(list(topo.dfnd.dfn.components.dry)) >= 2  # two dry banks
+
+    view = DummyView()
+    layer = show_dfnd_components(view, topo, representation='scaffold')
+    assert layer is not None
+    link_msgs = [m for m in view.messages
+                 if m['op'] in ('add_network_links', 'add_links')]
+    assert link_msgs  # the dry spine cylinders

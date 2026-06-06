@@ -75,6 +75,7 @@ _COMPONENT_REPRESENTATIONS = {
     'probe_centers',
     'surface',
     'contact_sheet',
+    'scaffold',
     'coast_faces',
     'graph',
 }
@@ -216,6 +217,21 @@ def _mouth_gate_rings(comp, raw, coords):
         normals.append(normal.tolist())
         radii.append(float(link.get('R_gate_min', 1.0)))
     return centers, normals, radii
+
+
+def _dry_scaffold_edges(comp, coords):
+    """Minimum spanning tree over a dry component's atoms — the mechanical
+    'spine' / scaffold. Returns a list of ``[[x,y,z],[x,y,z]]`` coordinate pairs.
+    """
+    atoms = [a for a in (getattr(comp, 'atom_indices', None) or []) if 0 <= a < len(coords)]
+    if len(atoms) < 2:
+        return []
+    from scipy.sparse.csgraph import minimum_spanning_tree
+    from scipy.spatial.distance import pdist, squareform
+
+    pts = coords[atoms]
+    mst = minimum_spanning_tree(squareform(pdist(pts))).tocoo()
+    return [[pts[i].tolist(), pts[j].tolist()] for i, j in zip(mst.row, mst.col)]
 
 
 def _mouth_cap_triangles(comp, raw):
@@ -381,6 +397,8 @@ def show_dfnd_components(
         - 'surface': Molecular pocket surface based on lining atom indices.
         - 'contact_sheet': Interface lining surface split by body (one colour per
           body), for wet components lined by two or more bodies.
+        - 'scaffold': Dry-core 'spine' — the minimum spanning tree of each dry
+          component's atoms as thick cylinders.
         - 'coast_faces': Boundary faces touching between wet and dry sides.
         - 'graph': DFN connectivity graph connecting tetrahedron barycenters.
     interfaces_only : bool, default False
@@ -829,6 +847,32 @@ def show_dfnd_components(
                         skip_digestion=True,
                     )
                 )
+
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'scaffold':
+        # Dry-core 'spine': the minimum spanning tree of each dry component's
+        # atoms drawn as thick cylinders (the mechanical scaffold). See
+        # devguide/DFND/component_visualization.md §7.
+        for comp in dfnd_data.dfn.components.dry:
+            comp_id = comp.component_id
+            if component_ids is not None and comp_id not in component_ids:
+                continue
+            pairs = _dry_scaffold_edges(comp, coords)
+            if not pairs:
+                continue
+            layers.append(
+                view.shapes.add_links(
+                    coordinate_pairs=puw.quantity(np.array(pairs), 'angstroms'),
+                    radius=puw.quantity(0.4, 'angstroms'),
+                    color=_TYPE_PALETTE[fam.DRY_BANK],
+                    tag=f'{tag_prefix}:{comp_id}',
+                    layer_tag=tag_prefix,
+                    skip_digestion=True,
+                )
+            )
 
         if not layers:
             return None
