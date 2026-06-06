@@ -274,9 +274,14 @@ def show_dfnd_components(
         # exact tag, so the groups do not clobber each other's layers.
         groups: dict[str, list[str]] = {}
         for comp in selected_components:
-            mode = _DEFAULT_REPRESENTATION_BY_FAMILY.get(
-                comp.family, _AUTO_FALLBACK_REPRESENTATION
-            )
+            # the interface axis is orthogonal to the mouth-topology family: an
+            # interface (whatever its family) reads best as a body-split surface.
+            if getattr(comp, 'is_interface', False):
+                mode = 'contact_sheet'
+            else:
+                mode = _DEFAULT_REPRESENTATION_BY_FAMILY.get(
+                    comp.family, _AUTO_FALLBACK_REPRESENTATION
+                )
             groups.setdefault(mode, []).append(comp.component_id)
         results = []
         for mode, ids in groups.items():

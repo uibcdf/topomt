@@ -1522,3 +1522,37 @@ def test_top_n_limits_rendered_components():
 
     assert n_all >= 2
     assert n_top == 1
+
+
+def test_auto_renders_interfaces_as_contact_sheet():
+    """auto recognizes the interface axis: an interface wet component renders as
+    a body-split contact_sheet (add_pocket_surface), not a plain blob.
+    """
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from topomt.dfnd.data import DFNDData
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    pdb = (
+        Path(__file__).resolve().parents[1]
+        / 'topomt' / 'data' / 'synthetic' / 'two_blocks_interface.pdb'
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+    dfnd = DFNDData(net, result)
+    assert dfnd.dfn.components.wet_interfaces  # the fixture has an interface
+    topo = SimpleNamespace(dfnd=dfnd)
+
+    view = DummyView()
+    show_dfnd_components(view, topo, representation='auto')
+    # the interface lining is drawn as a (body-split) surface
+    assert any(m['op'] == 'add_pocket_surface' for m in view.messages)
