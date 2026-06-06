@@ -3,7 +3,7 @@
 <!-- AUTO:build_synthetic_catalog -->
 - **PDB:** `tube_channel_clean.pdb`
 - **Atoms:** 81 · **Probe:** 1.4 Å
-- **Expected by construction:** narrow, densely-walled tube -> single clean channel (2 mouths) with minimal side-pocket noise; canonical two-mouth-channel fixture
+- **Expected by construction:** narrow, densely-walled tube -> a single clean channel (channel, 2 mouths) with minimal side-pocket noise; the canonical two-mouth-channel fixture.
 - **DFND families (significant):** 1x channel, 1x pocket
 <!-- /AUTO -->
 

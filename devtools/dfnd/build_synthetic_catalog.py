@@ -14,11 +14,25 @@ import re
 from collections import Counter
 from pathlib import Path
 
+import numpy as np
+
 from topomt.dfnd import synthetic as syn
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
 OUTPUT_DIR = Path('topomt/data/synthetic')
 SIGNIFICANT_RESIDENTS = 5
+
+
+def _argon_points(points):
+    """Hand-placed argon coordinates -> ``(coords, radii)``.
+
+    For the convexity/protrusion probes, whose few atoms are positioned by hand
+    rather than produced by a parametric generator in ``synthetic``.
+    """
+    coords = np.asarray(points, dtype=float)
+    radii = np.full(len(coords), syn.ARGON_VDW_RADIUS)
+    return coords, radii
+
 
 # (name, builder -> (coords, radii), probe_radius, expected-by-construction note)
 CATALOG = [
@@ -443,6 +457,32 @@ CATALOG = [
         lambda: syn.two_chambers_septum(4.5, 1.0, seed=0),
         1.4,
         'reference: a 1 A septum correctly keeps two chambers as two voids',
+    ),
+    # --- convexity / protrusion probes (hand-placed; a spike sticks out of a
+    #     small base -- a positive/knob feature, not a cavity; no wet family) ---
+    (
+        'tetrahedron_spike',
+        lambda: _argon_points([
+            (2.170, 0.000, 0.000),
+            (-1.085, 1.880, 0.000),
+            (-1.085, -1.880, 0.000),
+            (0.000, 0.000, 10.000),
+        ]),
+        1.4,
+        'convexity probe: equilateral triangular base (r=2.17) + a long axial spike '
+        'at z=10 (a protrusion/knob, not a cavity); no significant wet family',
+    ),
+    (
+        'tetrahedron_spike_2',
+        lambda: _argon_points([
+            (0.600, 0.000, 0.000),
+            (-1.000, 3.000, 0.000),
+            (-1.000, -3.000, 0.000),
+            (0.200, 0.000, 10.000),
+        ]),
+        1.4,
+        'convexity probe: narrow elongated base + a slightly off-axis spike at z=10 '
+        '(asymmetric protrusion variant); no significant wet family',
     ),
 ]
 
