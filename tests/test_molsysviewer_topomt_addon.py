@@ -1978,3 +1978,45 @@ def test_show_dfnd_legend_lists_present_families():
     by_label = {it['label']: it['color'] for it in items}
     assert by_label['channel'] == c._TYPE_PALETTE[c.fam.CHANNEL]
     assert by_label['pocket'] == c._TYPE_PALETTE[c.fam.POCKET]
+
+
+def test_pharmacophore_kind_typing():
+    """§9: the pharmacophore classifier maps (hydrophobicity, charge) to kinds."""
+    from molsysviewer_topomt.render._components import _pharmacophore_kind_for_scalars as k
+    assert k(2.0, 1.0) == 'positive'
+    assert k(2.0, -1.0) == 'negative'
+    assert k(1.5, 0.0) == 'hydrophobic'
+    assert k(-1.5, 0.0) == 'acceptor'
+    assert k(None, None) is None
+
+
+def test_pharmacophore_map_places_typed_sites(monkeypatch):
+    """§9: show_dfnd_pharmacophore places a typed interaction site per cavity."""
+    from types import SimpleNamespace
+    import numpy as _np
+    from molsysviewer_topomt.render import show_dfnd_pharmacophore
+    from molsysviewer_topomt.render import _components as c
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    n_atoms = len(topo.dfnd.mesh.atoms.coords)
+    # pretend every atom is hydrophobic (chemistry available)
+    monkeypatch.setattr(c, '_atom_pharmacophore_kinds',
+                        lambda molsys: ['hydrophobic'] * n_atoms)
+
+    view = DummyView()
+    view._molsys = object()  # non-None so the function proceeds
+    layer = show_dfnd_pharmacophore(view, topo)
+    assert layer is not None
+    site_msgs = [m for m in view.messages if m['op'] == 'add_pharmacophore_features']
+    assert site_msgs
+    opts = site_msgs[0]['options']
+    assert len(opts['centers']) == len(opts['kinds'])
+    assert all(kind == 'hydrophobic' for kind in opts['kinds'])
+
+
+def test_pharmacophore_map_none_on_dummy_system():
+    """No chemistry (dummy) -> no sites, no crash."""
+    from molsysviewer_topomt.render import show_dfnd_pharmacophore
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    view = DummyView()  # no _molsys
+    assert show_dfnd_pharmacophore(view, topo) is None

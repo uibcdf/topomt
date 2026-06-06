@@ -13,6 +13,7 @@ from ._components import (
     show_dfnd_labels,
     show_dfnd_convexity,
     show_dfnd_legend,
+    show_dfnd_pharmacophore,
 )
 
 __all__ = [
@@ -24,4 +25,5 @@ __all__ = [
     'show_dfnd_labels',
     'show_dfnd_convexity',
     'show_dfnd_legend',
+    'show_dfnd_pharmacophore',
 ]

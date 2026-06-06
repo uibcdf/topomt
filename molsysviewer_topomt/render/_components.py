@@ -246,6 +246,61 @@ def show_dfnd_legend(view, topography=None, *, families=None):
     return items
 
 
+def show_dfnd_pharmacophore(view, topography=None, *, component_ids=None,
+                            component_types=fam.PRIMARY_WET_FAMILIES,
+                            tag_prefix='dfnd-pharm'):
+    """Place an interaction-site glyph at each cavity's centre, typed by the
+    dominant physicochemical character of its lining (positive/negative/
+    hydrophobic/acceptor) via ``molsysmt.physchem`` + ``view.shapes.add_interaction_sites``
+    — a pharmacophore/druggability map (see component_visualization.md §9). Skips
+    components with no chemistry (dummy systems). Returns the layer, or ``None``.
+    """
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    dfnd_data = getattr(topography, 'dfnd', None)
+    if dfnd_data is None:
+        raise ValueError('Topography has no DFND data attached')
+
+    coords = np.asarray(dfnd_data.mesh.atoms.coords, dtype=float)
+    index_map = np.asarray(
+        getattr(dfnd_data.mesh.atoms, 'index_map', np.arange(len(coords)))
+    )
+    atom_kinds = _atom_pharmacophore_kinds(getattr(view, '_molsys', None))
+    if atom_kinds is None:
+        return None  # no chemistry (dummy system)
+
+    from collections import Counter
+    centers, kinds = [], []
+    for comp in dfnd_data.dfn.components.wet:
+        if component_types and comp.family not in component_types:
+            continue
+        if component_ids is not None and comp.component_id not in component_ids:
+            continue
+        if getattr(comp, 'center', None) is None:
+            continue
+        lining = []
+        for a in (getattr(comp, 'atom_indices', None) or []):
+            if 0 <= a < len(index_map):
+                m = int(index_map[a])
+                if 0 <= m < len(atom_kinds) and atom_kinds[m] is not None:
+                    lining.append(atom_kinds[m])
+        if not lining:
+            continue
+        centers.append(list(comp.center))
+        kinds.append(Counter(lining).most_common(1)[0][0])
+
+    if not centers:
+        return None
+    return view.shapes.add_interaction_sites(
+        centers=puw.quantity(np.array(centers, dtype=float), 'angstroms'),
+        kinds=kinds,
+        tag=tag_prefix,
+        layer_tag=tag_prefix,
+        skip_digestion=True,
+    )
+
+
 def show_dfnd_convexity(view, topography=None, *, radius=8.0, palette='coolwarm'):
     """Colour the molecular surface by local convexity (ridges hot, valleys cold)
     via ``view.whole.set_color_by_values``. Convexity is computed per atom from the
@@ -323,6 +378,51 @@ def _atom_affinity_colors(molsys):
         c = charge[g] if 0 <= g < len(charge) else None
         colors.append(_affinity_color_for_scalars(h, c))
     return colors
+
+
+def _pharmacophore_kind_for_scalars(hydrophobicity, charge):
+    """Classify a residue's (hydrophobicity, charge) into an interaction-site kind
+    (positive / negative / hydrophobic / acceptor), or ``None`` if unknown."""
+    if charge is not None and charge > 0.5:
+        return 'positive'
+    if charge is not None and charge < -0.5:
+        return 'negative'
+    if hydrophobicity is None:
+        return None
+    return 'hydrophobic' if hydrophobicity > 0 else 'acceptor'
+
+
+def _atom_pharmacophore_kinds(molsys):
+    """Per-(molsys)atom interaction-site kind from ``molsysmt.physchem``, or
+    ``None`` if chemistry is unavailable (dummy systems). Mirrors
+    ``_atom_affinity_colors`` but yields pharmacophore kinds."""
+    if molsys is None:
+        return None
+    try:
+        import molsysmt as msm
+        from molsysmt import physchem
+        from topomt import pyunitwizard as _puw
+
+        def _mags(q):
+            try:
+                return np.asarray(_puw.get_value(q), dtype=float)
+            except Exception:
+                return np.asarray(q, dtype=float)
+
+        hydro = _mags(physchem.get_hydrophobicity(molsys, element='group'))
+        charge = _mags(physchem.get_charge(molsys, element='group'))
+        group_of_atom = np.asarray(
+            msm.get(molsys, element='atom', group_index=True), dtype=int
+        )
+    except Exception:
+        return None
+
+    kinds = []
+    for g in group_of_atom:
+        h = hydro[g] if 0 <= g < len(hydro) else None
+        c = charge[g] if 0 <= g < len(charge) else None
+        kinds.append(_pharmacophore_kind_for_scalars(h, c))
+    return kinds
 
 
 def _mouth_gate_rings(comp, raw, coords):
