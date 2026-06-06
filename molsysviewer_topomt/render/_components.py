@@ -268,6 +268,62 @@ def carve_voids(view, topography=None, *, component_ids=None,
     return ordered
 
 
+def show_dfnd_labels(view, topography=None, *, component_ids=None,
+                     component_types=fam.PRIMARY_WET_FAMILIES,
+                     tag_prefix='dfnd-label'):
+    """Label each component in the scene with its id, family, mouth count and
+    solvent volume, anchored at its lining-atom centroid via ``view.annotations``.
+
+    A scene legend per component (see
+    devguide/DFND/component_visualization_implementation.md, Phase 5). Returns the
+    created annotation layers, or ``None`` if no component matched.
+    """
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    dfnd_data = getattr(topography, 'dfnd', None)
+    if dfnd_data is None:
+        raise ValueError('Topography has no DFND data attached')
+
+    try:
+        view.annotations.delete(tag_prefix, skip_digestion=True)
+    except Exception:
+        pass
+
+    layers = []
+    for comp in dfnd_data.dfn.components.wet:
+        if component_types and comp.family not in component_types:
+            continue
+        if component_ids is not None and comp.component_id not in component_ids:
+            continue
+        atoms = getattr(comp, 'atom_indices', None)
+        if not atoms:
+            continue
+
+        n_mouths = int(getattr(comp, 'n_mouths', 0) or 0)
+        volume = getattr(comp, 'volume_solvent_estimate', None)
+        parts = [str(comp.component_id), str(comp.family)]
+        if n_mouths:
+            parts.append(f"{n_mouths} mouth" + ('s' if n_mouths != 1 else ''))
+        if volume:
+            parts.append(f"{float(volume):.0f} Å³")
+        text = ' · '.join(parts)
+
+        layer = view.annotations.add_annotation(
+            text=text,
+            kind='label',
+            atom_indices=list(atoms),
+            tag=f'{tag_prefix}:{comp.component_id}',
+            layer_tag=tag_prefix,
+            skip_digestion=True,
+        )
+        layers.append(layer)
+
+    if not layers:
+        return None
+    return layers[0] if len(layers) == 1 else layers
+
+
 def show_dfnd_components(
     view,
     topography=None,

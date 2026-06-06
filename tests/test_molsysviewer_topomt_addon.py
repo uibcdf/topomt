@@ -1829,3 +1829,42 @@ def test_envelope_void_has_blob_and_no_mouth_ring():
     ops = [m['op'] for m in view.messages]
     assert 'add_pocket_blob' in ops  # the volume
     assert 'add_rings' not in ops  # a void has no mouths
+
+
+def test_show_dfnd_labels_annotates_each_component():
+    """Phase 5: show_dfnd_labels puts an id/family/mouths/volume label per
+    component via view.annotations.add_annotation."""
+    from types import SimpleNamespace
+    from molsysviewer_topomt.render import show_dfnd_labels
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+
+    captured = []
+
+    class FakeAnnotations:
+        def add_annotation(self, *, text, kind, atom_indices, tag, layer_tag, skip_digestion=False):
+            layer = SimpleNamespace(tag=tag)
+            captured.append({'text': text, 'kind': kind, 'atom_indices': atom_indices,
+                             'tag': tag, 'layer_tag': layer_tag})
+            return layer
+
+        def delete(self, *a, **k):
+            pass
+
+    view = SimpleNamespace(annotations=FakeAnnotations())
+    layer = show_dfnd_labels(view, topo)
+    assert layer is not None
+
+    # one label per primary wet component, anchored to its lining atoms
+    wet = [c for c in topo.dfnd.dfn.components.wet
+           if c.family in ('pocket', 'void', 'channel')]
+    assert len(captured) == len(wet)
+    for ann in captured:
+        assert ann['kind'] == 'label'
+        assert ann['layer_tag'] == 'dfnd-label'
+        assert ann['atom_indices']  # anchored to atoms
+    # the channel label mentions its family and mouth count
+    channel = next(c for c in wet if c.family == 'channel')
+    chan_label = next(a for a in captured if a['tag'].endswith(channel.component_id))
+    assert 'channel' in chan_label['text']
+    assert 'mouth' in chan_label['text']
