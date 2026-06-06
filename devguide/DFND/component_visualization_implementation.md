@@ -36,14 +36,18 @@ Done and on `main`:
   (curvature/scalar surface colouring) and `scene.set_clip_planes`/`add_section`
   (clipping-plane, with gizmos) **already existed** — no new primitive needed.
 
-Remaining:
+- **§9** — `show_dfnd_pharmacophore`: typed interaction-site map per cavity
+  (positive/negative/hydrophobic/acceptor) via `physchem` + `add_interaction_sites`.
 
-- **2D–3D synced widget** primitive (molsysviewer) — the only generic primitive
-  still missing; also depends on the (blocked) dynamic axis.
-- **Pharmacophore interaction-site map** (§9) — topomt, via the `pharmacophore`
-  shape + `physchem` (trackable now, not yet built).
+Remaining (all blocked on DFND core, not on rendering):
+
 - **Dynamic topology** (§8) — **blocked on DFND core**: no cross-frame component
-  identity exists yet (see the component-identity contract work).
+  identity exists yet (see the component-identity contract: `component_key` /
+  `lineage_id`). Persistence, events and the **2D–3D synced widget** all wait on it.
+
+**Everything renderable without core changes is done.** The remaining work is the
+dynamic axis, which is a DFND-core problem (component identity across frames),
+not a visualization one.
 - **molsysmt** — `physchem` should treat `DUM` dummy atoms/groups as neutral
   (proposal filed) so affinity typing works on dummy systems too.
 
@@ -287,7 +291,7 @@ These are not pure rendering tasks; they wait on DFND core or new viewer support
 | 5 | carving, labels, affinity, visibility | `affinity_spheres`, `carve_voids`, `show_dfnd_labels`, `top_n` | ✅ done (legend pending, upstream) |
 | 6 | dry-core scaffold | `scaffold` | ✅ done |
 | 6 | convexity heatmap | `show_dfnd_convexity` | ✅ done (`whole.set_color_by_values`, no new primitive) |
-| 6 | pharmacophore map | — | ⏳ trackable now (`pharmacophore` shape + `physchem`) |
+| 6 | pharmacophore map | `show_dfnd_pharmacophore` | ✅ done (`physchem` + `add_interaction_sites`) |
 | 6 | dynamic topology | — | ⛔ blocked on DFND core (cross-frame identity) |
 
 Upstream primitives (molsysviewer): `add_rings` ✅, `focus_with_fade` ✅ (both
