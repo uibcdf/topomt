@@ -1955,3 +1955,26 @@ def test_show_dfnd_convexity_colours_whole_surface():
     n_atoms = len(topo.dfnd.mesh.atoms.coords)
     assert len(captured['values']) == n_atoms
     assert np.allclose(captured['values'], values)
+
+
+def test_show_dfnd_legend_lists_present_families():
+    """Phase 5 legend: show_dfnd_legend feeds family->Okabe-Ito items to scene.set_legend."""
+    from types import SimpleNamespace
+    from molsysviewer_topomt.render import show_dfnd_legend
+    from molsysviewer_topomt.render import _components as c
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')  # channel + pocket
+    captured = {}
+
+    class FakeScene:
+        def set_legend(self, items, position='top-right'):
+            captured['items'] = items
+
+    view = SimpleNamespace(scene=FakeScene())
+    items = show_dfnd_legend(view, topo)
+    assert captured['items'] == items
+    labels = {it['label'] for it in items}
+    assert 'channel' in labels and 'pocket' in labels
+    by_label = {it['label']: it['color'] for it in items}
+    assert by_label['channel'] == c._TYPE_PALETTE[c.fam.CHANNEL]
+    assert by_label['pocket'] == c._TYPE_PALETTE[c.fam.POCKET]

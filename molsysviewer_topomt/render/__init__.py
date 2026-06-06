@@ -12,6 +12,7 @@ from ._components import (
     carve_voids,
     show_dfnd_labels,
     show_dfnd_convexity,
+    show_dfnd_legend,
 )
 
 __all__ = [
@@ -22,4 +23,5 @@ __all__ = [
     'carve_voids',
     'show_dfnd_labels',
     'show_dfnd_convexity',
+    'show_dfnd_legend',
 ]

@@ -224,6 +224,28 @@ def _atom_convexity(coords, radius=8.0):
     return conv
 
 
+def show_dfnd_legend(view, topography=None, *, families=None):
+    """Show a colour legend for the DFND component families (Okabe-Ito palette)
+    via ``view.scene.set_legend``. Defaults to the families present in the result,
+    in canonical order. Returns the legend items.
+    """
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    dfnd_data = getattr(topography, 'dfnd', None)
+    if dfnd_data is None:
+        raise ValueError('Topography has no DFND data attached')
+
+    if families is None:
+        present = {c.family for c in dfnd_data.dfn.components.wet}
+        order = (fam.POCKET, fam.VOID, fam.CHANNEL, fam.PERCOLATING)
+        families = [f for f in order if f in present]
+
+    items = [{'label': str(f), 'color': _TYPE_PALETTE.get(f, 0x888888)} for f in families]
+    view.scene.set_legend(items)
+    return items
+
+
 def show_dfnd_convexity(view, topography=None, *, radius=8.0, palette='coolwarm'):
     """Colour the molecular surface by local convexity (ridges hot, valleys cold)
     via ``view.whole.set_color_by_values``. Convexity is computed per atom from the
