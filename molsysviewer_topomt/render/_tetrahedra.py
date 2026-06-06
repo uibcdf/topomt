@@ -4,14 +4,8 @@ from collections.abc import Iterable
 from typing import Any
 
 from topomt import pyunitwizard as puw
-from topomt.dfnd.selectors import select_faces
 
-from ._common import _resolve_topography, _dfnd_edge_meta
-
-_FACE_PERMEABILITY_COLORS = {
-    'permeable': 0x93C5FD,  # light blue
-    'non_permeable': 0xE3C98A,  # sand yellow
-}
+from ._common import _dfnd_edge_meta, _dfnd_face_meta, _resolve_topography
 
 
 def show_dfnd_tetrahedra(
@@ -208,26 +202,11 @@ def show_dfnd_tetrahedra(
 
     face_meta = []
     if draw_faces and allowed_permeability:
-        for face in select_faces(
+        face_meta = _dfnd_face_meta(
             topography,
-            owner_tetrahedron_ids=selected_tetra_ids,
-            permeability_state=allowed_permeability,
-        ):
-            atoms = face.get('face_atoms_local')
-            if not atoms or len(atoms) != 3:
-                continue
-            neighbor = face.get('neighbor_tetrahedron_id', -1)
-            permeability = face.get('permeability_state', 'unknown')
-            face_meta.append(
-                {
-                    'atoms': [int(atom) for atom in atoms],
-                    'face_id': face.get('face_id'),
-                    'permeability': permeability,
-                    'owner_id': face.get('owner_tetrahedron_id'),
-                    'neighbor_id': 'OCEAN' if neighbor == -1 else neighbor,
-                    'color': _FACE_PERMEABILITY_COLORS.get(permeability, 0x888888),
-                }
-            )
+            selected_tetra_ids,
+            permeability_states=allowed_permeability,
+        )
 
     # Clear existing tetrahedra layer if it exists to allow clean overwriting / re-runs
     try:

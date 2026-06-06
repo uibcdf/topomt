@@ -4,12 +4,17 @@ from typing import Any
 
 import numpy as np
 
-from topomt.dfnd.selectors import select_edges
+from topomt.dfnd.selectors import select_edges, select_faces
 
 DEFAULT_BLOB_ALPHA = 0.35
 DEFAULT_MARKER_ALPHA = 0.55
 DEFAULT_MARKER_COLOR = 0xD95F02
 DEFAULT_MARKER_RADIUS_NM = 0.12
+
+_FACE_PERMEABILITY_COLORS = {
+    'permeable': 0x93C5FD,
+    'non_permeable': 0xE3C98A,
+}
 
 
 def _resolve_topography(view, topography):
@@ -34,6 +39,49 @@ def _dfnd_edge_meta(topography, tetrahedron_ids):
         {'atoms': list(edge['local_atom_indices']), 'edge_id': edge['edge_id']}
         for edge in select_edges(topography, tetrahedron_ids=tetrahedron_ids)
     ]
+
+
+def _dfnd_face_meta(
+    topography,
+    tetrahedron_ids,
+    *,
+    permeability_states=None,
+    colors_by_tetrahedron=None,
+):
+    """Build pickable DFND face metadata for faces touching selected tetrahedra."""
+    selected_ids = set(tetrahedron_ids)
+    face_meta = []
+
+    for face in select_faces(topography, permeability_state=permeability_states):
+        owner = face.get('owner_tetrahedron_id')
+        neighbor = face.get('neighbor_tetrahedron_id', -1)
+        if owner not in selected_ids and neighbor not in selected_ids:
+            continue
+
+        atoms = face.get('face_atoms_local')
+        if not atoms or len(atoms) != 3:
+            continue
+
+        permeability = face.get('permeability_state', 'unknown')
+        color = _FACE_PERMEABILITY_COLORS.get(permeability, 0x888888)
+        if colors_by_tetrahedron:
+            color = colors_by_tetrahedron.get(
+                owner,
+                colors_by_tetrahedron.get(neighbor, color),
+            )
+
+        face_meta.append(
+            {
+                'atoms': [int(atom) for atom in atoms],
+                'face_id': face.get('face_id'),
+                'permeability': permeability,
+                'owner_id': owner,
+                'neighbor_id': 'OCEAN' if neighbor == -1 else neighbor,
+                'color': color,
+            }
+        )
+
+    return face_meta
 
 
 def _dfnd_atom_coords(source: Any) -> np.ndarray | None:
