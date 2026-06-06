@@ -45,6 +45,14 @@ _INTERFACE_BODY_COLORS = [
 # Reserved high-contrast accent for mouths/gates (not used by any family).
 _MOUTH_ACCENT = _OKABE_ITO['yellow']
 
+# HOLE-style clearance colours for the 'rings' channel profile (CVD-safe traffic
+# light). The 1.15 Å water radius is the key threshold (see
+# devguide/DFND/component_visualization.md §6).
+_WATER_RADIUS = 1.15
+_HOLE_OPEN = _OKABE_ITO['bluish_green']   # R >= 1.5: admits water freely
+_HOLE_TIGHT = _OKABE_ITO['orange']        # 1.15 <= R < 1.5: tight constriction
+_HOLE_CLOSED = _OKABE_ITO['vermillion']   # R < 1.15: closed to water
+
 # Per-family default representation for representation='auto' (the per-family
 # visual language). Channels become tubes; pockets/voids stay volumetric blobs
 # until the 'envelope' mode (mouth caps) lands. See
@@ -55,6 +63,20 @@ _DEFAULT_REPRESENTATION_BY_FAMILY = {
     fam.VOID: 'cloud',
 }
 _AUTO_FALLBACK_REPRESENTATION = 'cloud'
+_COMPONENT_REPRESENTATIONS = {
+    'auto',
+    'tetrahedra',
+    'cloud',
+    'pipe',
+    'rings',
+    'residence_spheres',
+    'alpha_spheres',
+    'probe_centers',
+    'surface',
+    'contact_sheet',
+    'coast_faces',
+    'graph',
+}
 
 _DISTINCT_PALETTE_LIST = [
     _OKABE_ITO['blue'],
@@ -137,6 +159,67 @@ def _rank_by_volume(components, top_n):
     )[:top_n]
 
 
+def _centerline_normals(centers):
+    """Per-station tangent of an ordered centerline (the local axis a ring is
+    drawn perpendicular to). Central difference inside, one-sided at the ends."""
+    n = len(centers)
+    normals = []
+    for i in range(n):
+        if i == 0:
+            tangent = centers[1] - centers[0]
+        elif i == n - 1:
+            tangent = centers[-1] - centers[-2]
+        else:
+            tangent = centers[i + 1] - centers[i - 1]
+        if not np.any(tangent):
+            tangent = np.array([0.0, 0.0, 1.0])
+        normals.append(tangent.tolist())
+    return normals
+
+
+def _hole_clearance_color(radius):
+    """HOLE traffic-light colour for a free radius (Å)."""
+    if radius < _WATER_RADIUS:
+        return _HOLE_CLOSED
+    if radius < 1.5:
+        return _HOLE_TIGHT
+    return _HOLE_OPEN
+
+
+def carve_voids(view, topography=None, *, component_ids=None,
+                component_types=(fam.VOID,), fade=0.85):
+    """Expose buried components by fading the rest of the protein (void carving).
+
+    Soft-focuses the molecular representation on the lining atoms of the selected
+    components via ``view.focus_with_fade`` — everything outside fades to ``fade``
+    transparency, so a buried void becomes visible without a clipping plane (see
+    devguide/DFND/component_visualization_implementation.md, Phase 5). By default
+    targets all voids. Call ``view.focus_with_fade('all')`` to clear.
+
+    Returns the sorted lining atom indices kept opaque, or ``None`` if none match.
+    """
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    dfnd_data = getattr(topography, 'dfnd', None)
+    if dfnd_data is None:
+        raise ValueError('Topography has no DFND data attached')
+
+    focus_atoms: set[int] = set()
+    for comp in dfnd_data.dfn.components.wet:
+        if component_types and comp.family not in component_types:
+            continue
+        if component_ids is not None and comp.component_id not in component_ids:
+            continue
+        focus_atoms.update(int(a) for a in (getattr(comp, 'atom_indices', None) or []))
+
+    if not focus_atoms:
+        return None
+    ordered = sorted(focus_atoms)
+    view.focus_with_fade(ordered, fade=fade)
+    return ordered
+
+
 def show_dfnd_components(
     view,
     topography=None,
@@ -184,6 +267,8 @@ def show_dfnd_components(
         - 'pipe': Channels as a variable-radius tube along their through-path
           (centerline + R_residence) with a bottleneck marker; non-channels fall
           back to a blob.
+        - 'rings': HOLE-style clearance profile of a channel — a ring per
+          centerline station coloured by free-radius threshold (green/amber/red).
         - 'residence_spheres': Maximum-clearance spheres inside resident tetrahedra.
         - 'alpha_spheres': Geometric Delaunay circumspheres for diagnostics.
         - 'probe_centers': Probe-sized spheres at maximum-clearance centers.
@@ -240,6 +325,11 @@ def show_dfnd_components(
         'spheres': 'residence_spheres',
         'skeleton': 'graph',
     }.get(representation, representation)
+    if representation not in _COMPONENT_REPRESENTATIONS:
+        supported = ', '.join(sorted(_COMPONENT_REPRESENTATIONS))
+        raise ValueError(
+            f'Unknown representation {representation!r}. Supported: {supported}.'
+        )
 
     # Gather matching components
     selected_components = []
@@ -517,19 +607,61 @@ def show_dfnd_components(
             )
             layers.append(tube)
 
-            # Bottleneck marker (a dedicated ring shape is the upstream-molsysviewer
-            # follow-up; an accent alpha-sphere stands in for now).
+            # Bottleneck ring: a flat ring at the narrowest station, perpendicular
+            # to the local channel axis, radius = the free radius there. Drawn with
+            # the dedicated molsysviewer ring shape in the reserved gate accent.
             neck = centerline['bottleneck_index']
-            marker = view.shapes.add_set_alpha_spheres(
+            if neck == 0:
+                tangent = centers[1] - centers[0]
+            elif neck == len(centers) - 1:
+                tangent = centers[-1] - centers[-2]
+            else:
+                tangent = centers[neck + 1] - centers[neck - 1]
+            if not np.any(tangent):
+                tangent = np.array([0.0, 0.0, 1.0])
+            marker = view.shapes.add_rings(
                 centers=puw.quantity(centers[neck:neck + 1], 'angstroms'),
+                normals=[tangent.tolist()],
                 radii=puw.quantity(radii[neck:neck + 1], 'angstroms'),
-                color_alpha_spheres=_MOUTH_ACCENT,
-                alpha_alpha_spheres=min(1.0, alpha + 0.3),
+                colors=[_MOUTH_ACCENT],
+                alpha=min(1.0, alpha + 0.3),
                 tag=f'{tag_prefix}:{comp_id}-bottleneck',
                 layer_tag=tag_prefix,
                 skip_digestion=True,
             )
             layers.append(marker)
+
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'rings':
+        # HOLE-style clearance profile: one ring per centerline station,
+        # perpendicular to the local channel axis, coloured by free-radius
+        # threshold (green/amber/red). Channels only. See
+        # devguide/DFND/component_visualization_implementation.md (Phase 4).
+        raw = dfnd_data.raw
+        for comp in selected_components:
+            comp_id = comp.component_id
+            if comp.family != fam.CHANNEL or comp.raw_record is None:
+                continue
+            centerline = channel_centerline(raw, comp.raw_record)
+            if centerline is None:
+                continue
+            centers = centerline['centers']
+            radii = centerline['radii']
+            layer = view.shapes.add_rings(
+                centers=puw.quantity(centers, 'angstroms'),
+                normals=_centerline_normals(centers),
+                radii=puw.quantity(radii, 'angstroms'),
+                colors=[_hole_clearance_color(float(r)) for r in radii],
+                alpha=alpha,
+                tag=f'{tag_prefix}:{comp_id}',
+                layer_tag=tag_prefix,
+                name=f'{name} {comp_id}',
+                skip_digestion=True,
+            )
+            layers.append(layer)
 
         if not layers:
             return None
@@ -569,7 +701,7 @@ def show_dfnd_components(
         return layers[0] if len(layers) == 1 else layers
 
     elif representation == 'probe_centers':
-        parameters = getattr(dfnd_data, 'parameters', {})
+        parameters = getattr(dfnd_data.dfn, 'parameters', {})
         probe_radius = parameters.get('probe_radius')
         if probe_radius is None:
             raise ValueError(
@@ -745,8 +877,9 @@ def show_dfnd_components(
                 selected_nodes.add(tid)
                 node_to_comp[tid] = comp.component_id
 
-        centers_list = [barycenter[tid].tolist() for tid in selected_nodes]
-        colors_list = [resolved_colors[node_to_comp[tid]] for tid in selected_nodes]
+        ordered_nodes = sorted(selected_nodes)
+        centers_list = [barycenter[tid].tolist() for tid in ordered_nodes]
+        colors_list = [resolved_colors[node_to_comp[tid]] for tid in ordered_nodes]
 
         if not centers_list:
             return None

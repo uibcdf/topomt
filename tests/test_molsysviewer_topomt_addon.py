@@ -441,7 +441,7 @@ def test_build_topography_standalone0_html_uses_viewer_host_and_registers_addon(
 
     assert result == str(outfile.resolve())
     assert captured['build_view']['molecular_system'] == 'system'
-    assert captured['build_view']['kwargs']['render'] is True
+    assert captured['build_view']['kwargs']['show'] is True
     assert captured['build_html']['view'] is view
     assert captured['build_html']['kwargs']['addon_modules'][0] == 'molsysviewer_topomt'
 
@@ -497,7 +497,7 @@ def test_build_topography_standalone0_html_can_render_only_selected_features(
     )
 
     assert result == str(outfile.resolve())
-    assert captured['build_view']['render'] is False
+    assert captured['build_view']['show'] is False
     assert captured['attach_features']['view'] is view
     assert captured['attach_features']['feature_ids'] == ['POC-2']
 
@@ -1300,9 +1300,9 @@ def test_show_dfnd_components_explicit_sphere_modes_and_graph_alias():
             dfn=types.SimpleNamespace(
                 components=types.SimpleNamespace(wet=[component], dry=[]),
                 graph=types.SimpleNamespace(faces=[]),
+                parameters={'probe_radius': 1.4},
             ),
             raw={'faces': [], 'tetrahedra': []},
-            parameters={'probe_radius': 1.4},
         )
     )
     from molsysviewer_topomt.render import show_dfnd_components
@@ -1373,7 +1373,10 @@ def test_pipe_renders_channel_as_variable_radius_tube():
     assert layer is not None
     ops = [m['op'] for m in view.messages]
     assert 'add_channel_tube' in ops  # the tube
-    assert 'add_alpha_sphere_set' in ops  # the bottleneck marker
+    assert 'add_rings' in ops  # the bottleneck ring
+    ring_msg = next(m for m in view.messages if m['op'] == 'add_rings')
+    assert len(ring_msg['options']['centers']) == 1
+    assert len(ring_msg['options']['normals']) == 1
 
 
 def test_contact_sheet_splits_interface_lining_by_body():
@@ -1556,3 +1559,224 @@ def test_auto_renders_interfaces_as_contact_sheet():
     show_dfnd_components(view, topo, representation='auto')
     # the interface lining is drawn as a (body-split) surface
     assert any(m['op'] == 'add_pocket_surface' for m in view.messages)
+
+
+def test_rings_renders_hole_clearance_profile():
+    """Phase 4: a channel renders as a HOLE-style ring profile coloured by clearance."""
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from topomt.dfnd.data import DFNDData
+    from molsysviewer_topomt.render import show_dfnd_components
+    from molsysviewer_topomt.render import _components as comp_mod
+
+    pdb = (
+        Path(__file__).resolve().parents[1]
+        / 'topomt' / 'data' / 'synthetic' / 'tube_channel_clean.pdb'
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+    topo = SimpleNamespace(dfnd=DFNDData(net, result))
+
+    view = DummyView()
+    layer = show_dfnd_components(view, topo, representation='rings', component_types=('channel',))
+    assert layer is not None
+    ring_msgs = [m for m in view.messages if m['op'] == 'add_rings']
+    assert ring_msgs
+    opts = ring_msgs[0]['options']
+    # a ring per centerline station: centers, normals, radii, colors aligned
+    n = len(opts['centers'])
+    assert n >= 2
+    assert len(opts['normals']) == n
+    assert len(opts['radii']) == n
+    assert len(opts['colors']) == n
+    # colours come from the HOLE traffic-light set
+    hole = {comp_mod._HOLE_OPEN, comp_mod._HOLE_TIGHT, comp_mod._HOLE_CLOSED}
+    assert set(opts['colors']) <= hole
+
+
+def test_hole_clearance_color_thresholds():
+    from molsysviewer_topomt.render import _components as comp_mod
+    assert comp_mod._hole_clearance_color(0.9) == comp_mod._HOLE_CLOSED  # < 1.15
+    assert comp_mod._hole_clearance_color(1.3) == comp_mod._HOLE_TIGHT   # 1.15..1.5
+    assert comp_mod._hole_clearance_color(2.0) == comp_mod._HOLE_OPEN    # >= 1.5
+
+
+def test_carve_voids_focuses_on_void_lining():
+    """Phase 5: carve_voids fades the protein outside a void's lining via
+    view.focus_with_fade (the new molsysviewer focus-with-fade primitive)."""
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from topomt.dfnd.data import DFNDData
+    from molsysviewer_topomt.render import carve_voids
+
+    pdb = (
+        Path(__file__).resolve().parents[1]
+        / 'topomt' / 'data' / 'synthetic' / 'hollow_sphere_void.pdb'
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+    dfnd = DFNDData(net, result)
+    # the fixture has a void
+    assert any(c.family == 'void' for c in dfnd.dfn.components.wet)
+
+    captured = {}
+
+    def fake_focus_with_fade(atom_indices, fade=0.85):
+        captured['atoms'] = atom_indices
+        captured['fade'] = fade
+
+    view = SimpleNamespace(focus_with_fade=fake_focus_with_fade)
+    topo = SimpleNamespace(dfnd=dfnd)
+
+    kept = carve_voids(view, topo, fade=0.8)
+    assert kept  # some lining atoms
+    assert captured['atoms'] == kept  # passed straight to focus_with_fade
+    assert captured['fade'] == 0.8
+    # the kept atoms are exactly the void components' lining atoms
+    void_atoms = set()
+    for c in dfnd.dfn.components.wet:
+        if c.family == 'void':
+            void_atoms.update(c.atom_indices)
+    assert set(kept) == void_atoms
+
+
+def test_show_dfnd_components_rejects_unknown_representation():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    component = types.SimpleNamespace(
+        component_id="WET-1", family="void", side="wet", node_indices=[0]
+    )
+    topography = types.SimpleNamespace(
+        dfnd=types.SimpleNamespace(
+            dfn=types.SimpleNamespace(
+                components=types.SimpleNamespace(wet=[component], dry=[])
+            )
+        )
+    )
+
+    with pytest.raises(ValueError, match="Unknown representation"):
+        show_dfnd_components(DummyView(), topography, representation="unknown")
+
+
+def test_probe_centers_uses_parameters_from_real_dfnd_data():
+    from types import SimpleNamespace
+
+    from molsysviewer_topomt.render import show_dfnd_components
+    from topomt.dfnd.data import DFNDData
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+
+    coords = np.array(
+        [
+            [1.874, 1.874, 1.874],
+            [1.874, -1.874, -1.874],
+            [-1.874, 1.874, -1.874],
+            [-1.874, -1.874, 1.874],
+        ]
+    )
+    network = DelaunayFlowNetwork.from_arrays(coords, np.full(4, 1.88), epsilon=1e-7)
+    result = network.get_topography(probe_radius=1.0, min_size=0)
+    topography = SimpleNamespace(dfnd=DFNDData(network, result))
+
+    view = DummyView()
+    layer = show_dfnd_components(
+        view, topography, representation="probe_centers", component_types=None
+    )
+
+    assert layer is not None
+    assert view.messages[-1]["options"]["radius"] == pytest.approx(1.0)
+
+
+def _graph_render_topography():
+    tetrahedron_ids = [0, 1, 3, 10]
+    coords = []
+    tetrahedra = []
+    for tetrahedron_id in tetrahedron_ids:
+        start = len(coords)
+        coords.extend([[float(tetrahedron_id), 0.0, 0.0]] * 4)
+        tetrahedra.append(
+            {
+                "tetrahedron_id": tetrahedron_id,
+                "local_atom_indices": list(range(start, start + 4)),
+            }
+        )
+    component = types.SimpleNamespace(
+        component_id="WET-1",
+        family="void",
+        side="wet",
+        node_indices=tetrahedron_ids,
+        resident_node_indices=tetrahedron_ids,
+        volume=1.0,
+    )
+    nodes = [
+        {
+            "tetrahedron_id": tetrahedron_id,
+            "residence_state": "resident",
+            "n_permeable_contacts": 0,
+            "combined_class": "wet_sealed",
+        }
+        for tetrahedron_id in tetrahedron_ids
+    ]
+    return types.SimpleNamespace(
+        dfnd=types.SimpleNamespace(
+            mesh=types.SimpleNamespace(
+                atoms=types.SimpleNamespace(coords=np.asarray(coords)),
+                tetrahedra=tetrahedra,
+                faces=[],
+            ),
+            dfn=types.SimpleNamespace(
+                components=types.SimpleNamespace(wet=[component], dry=[]),
+                graph=types.SimpleNamespace(nodes=nodes, faces=[]),
+            ),
+            raw={"faces": [], "tetrahedra": []},
+        )
+    )
+
+
+def test_component_graph_emits_nodes_in_tetrahedron_id_order():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    view = DummyView()
+    show_dfnd_components(view, _graph_render_topography(), representation="graph")
+
+    centers = [
+        message["options"]["center"]
+        for message in view.messages
+        if message["op"] == "add_sphere"
+    ]
+    assert np.asarray(centers)[:, 0].tolist() == [0.0, 1.0, 3.0, 10.0]
+
+
+def test_show_dfn_graph_can_render_twice_with_same_tag_prefix():
+    from molsysviewer_topomt.render import show_dfn_graph
+
+    view = DummyView()
+    topography = _graph_render_topography()
+
+    first = show_dfn_graph(view, topography, tag_prefix="repeat-graph")
+    second = show_dfn_graph(view, topography, tag_prefix="repeat-graph")
+
+    assert first["n_nodes"] == second["n_nodes"] == 4
+    cleared_tags = {
+        message["tag"]
+        for message in view.messages
+        if message["op"] == "clear_shapes_by_tag"
+    }
+    assert {"repeat-graph-node", "repeat-graph-edges", "repeat-graph-mouths"} <= cleared_tags
