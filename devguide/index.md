@@ -166,6 +166,7 @@ The DFND material is grouped under the dedicated `DFND/` subdirectory. The most 
 - [DFND/Implementation_Route.md](DFND/Implementation_Route.md)
 - [DFND/object_model.md](DFND/object_model.md)
 - [DFND/component_visualization.md](DFND/component_visualization.md)
+- [DFND/component_visualization_implementation.md](DFND/component_visualization_implementation.md)
 - [DFND/roadmap.md](DFND/roadmap.md)
 - [DFND/synthetic_benchmarks.md](DFND/synthetic_benchmarks.md)
 - [DFND/synthetic_review_guide.md](DFND/synthetic_review_guide.md)
