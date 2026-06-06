@@ -1883,3 +1883,30 @@ def test_scaffold_draws_dry_core_spine():
     link_msgs = [m for m in view.messages
                  if m['op'] in ('add_network_links', 'add_links')]
     assert link_msgs  # the dry spine cylinders
+
+
+def test_affinity_color_typing_from_scalars():
+    """Phase 5: the affinity classifier maps (hydrophobicity, charge) to colours."""
+    from molsysviewer_topomt.render import _components as c
+    assert c._affinity_color_for_scalars(2.0, 1.0) == c._AFFINITY_POSITIVE   # +charge wins
+    assert c._affinity_color_for_scalars(2.0, -1.0) == c._AFFINITY_NEGATIVE  # -charge wins
+    assert c._affinity_color_for_scalars(1.5, 0.0) == c._AFFINITY_HYDROPHOBIC
+    assert c._affinity_color_for_scalars(-1.5, 0.0) == c._AFFINITY_POLAR
+    assert c._affinity_color_for_scalars(None, None) == c._AFFINITY_NEUTRAL
+
+
+def test_affinity_spheres_neutral_on_dummy_system():
+    """affinity_spheres must not crash on dummy (argon/DUM) systems: physchem has
+    no DUM entry, so the lining falls back to the neutral colour."""
+    from molsysviewer_topomt.render import show_dfnd_components
+    from molsysviewer_topomt.render import _components as c
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    view = DummyView()  # DummyView has no _molsys -> chemistry unavailable
+    layer = show_dfnd_components(view, topo, representation='affinity_spheres')
+    assert layer is not None
+    sphere_msgs = [m for m in view.messages if m['op'] == 'add_alpha_sphere_set']
+    assert sphere_msgs
+    # no chemistry -> every sphere set is the neutral colour
+    for m in sphere_msgs:
+        assert m['options']['alpha_spheres']['color'] == c._AFFINITY_NEUTRAL

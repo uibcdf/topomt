@@ -53,6 +53,14 @@ _HOLE_OPEN = _OKABE_ITO['bluish_green']   # R >= 1.5: admits water freely
 _HOLE_TIGHT = _OKABE_ITO['orange']        # 1.15 <= R < 1.5: tight constriction
 _HOLE_CLOSED = _OKABE_ITO['vermillion']   # R < 1.15: closed to water
 
+# Affinity (physicochemical) colours for the 'affinity_spheres' druggability map,
+# derived from molsysmt.physchem hydrophobicity (Eisenberg) + charge (pH7).
+_AFFINITY_HYDROPHOBIC = _OKABE_ITO['orange']      # drug-favourable nonpolar
+_AFFINITY_POLAR = _OKABE_ITO['sky_blue']          # polar / H-bonding
+_AFFINITY_POSITIVE = _OKABE_ITO['blue']           # positively charged
+_AFFINITY_NEGATIVE = _OKABE_ITO['vermillion']     # negatively charged
+_AFFINITY_NEUTRAL = _OKABE_ITO['grey']            # unknown / dummy (e.g. DUM)
+
 # Per-family default representation for representation='auto' (the per-family
 # visual language). Channels become tubes; pockets/voids stay volumetric blobs
 # until the 'envelope' mode (mouth caps) lands. See
@@ -76,6 +84,7 @@ _COMPONENT_REPRESENTATIONS = {
     'surface',
     'contact_sheet',
     'scaffold',
+    'affinity_spheres',
     'coast_faces',
     'graph',
 }
@@ -186,6 +195,52 @@ def _hole_clearance_color(radius):
     if radius < 1.5:
         return _HOLE_TIGHT
     return _HOLE_OPEN
+
+
+def _affinity_color_for_scalars(hydrophobicity, charge):
+    """Classify a residue's (hydrophobicity, charge) into an affinity colour."""
+    if charge is not None and charge > 0.5:
+        return _AFFINITY_POSITIVE
+    if charge is not None and charge < -0.5:
+        return _AFFINITY_NEGATIVE
+    if hydrophobicity is None:
+        return _AFFINITY_NEUTRAL
+    return _AFFINITY_HYDROPHOBIC if hydrophobicity > 0 else _AFFINITY_POLAR
+
+
+def _atom_affinity_colors(molsys):
+    """Per-(molsys)atom affinity colour from ``molsysmt.physchem`` (hydrophobicity
+    + charge by residue). Returns a list indexed by molsys atom index, or ``None``
+    if the chemistry is unavailable (e.g. dummy-atom systems where physchem has no
+    DUM entry — see molsysmt pending proposal physchem_support_dummy_atoms).
+    """
+    if molsys is None:
+        return None
+    try:
+        import molsysmt as msm
+        from molsysmt import physchem
+        from topomt import pyunitwizard as _puw
+
+        def _mags(q):
+            try:
+                return np.asarray(_puw.get_value(q), dtype=float)
+            except Exception:
+                return np.asarray(q, dtype=float)
+
+        hydro = _mags(physchem.get_hydrophobicity(molsys, element='group'))
+        charge = _mags(physchem.get_charge(molsys, element='group'))
+        group_of_atom = np.asarray(
+            msm.get(molsys, element='atom', group_index=True), dtype=int
+        )
+    except Exception:
+        return None
+
+    colors = []
+    for g in group_of_atom:
+        h = hydro[g] if 0 <= g < len(hydro) else None
+        c = charge[g] if 0 <= g < len(charge) else None
+        colors.append(_affinity_color_for_scalars(h, c))
+    return colors
 
 
 def _mouth_gate_rings(comp, raw, coords):
@@ -399,6 +454,9 @@ def show_dfnd_components(
           body), for wet components lined by two or more bodies.
         - 'scaffold': Dry-core 'spine' — the minimum spanning tree of each dry
           component's atoms as thick cylinders.
+        - 'affinity_spheres': Residence spheres coloured by the dominant
+          physicochemical affinity of the lining (hydrophobic/polar/charged),
+          from molsysmt.physchem; neutral for dummy systems.
         - 'coast_faces': Boundary faces touching between wet and dry sides.
         - 'graph': DFN connectivity graph connecting tetrahedron barycenters.
     interfaces_only : bool, default False
@@ -868,6 +926,53 @@ def show_dfnd_components(
                     coordinate_pairs=puw.quantity(np.array(pairs), 'angstroms'),
                     radius=puw.quantity(0.4, 'angstroms'),
                     color=_TYPE_PALETTE[fam.DRY_BANK],
+                    tag=f'{tag_prefix}:{comp_id}',
+                    layer_tag=tag_prefix,
+                    skip_digestion=True,
+                )
+            )
+
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'affinity_spheres':
+        # Residence spheres coloured by the dominant physicochemical affinity of
+        # the component's lining (hydrophobic / polar / charged) — a druggability
+        # map inside the cavity. Chemistry from molsysmt.physchem via the view's
+        # molecular system; falls back to neutral for dummy systems (no DUM in
+        # physchem). See component_visualization.md §9.
+        molsys = getattr(view, '_molsys', None)
+        atom_colors = _atom_affinity_colors(molsys)
+        index_map = np.asarray(
+            getattr(mesh.atoms, 'index_map', np.arange(len(coords)))
+        )
+        for comp in selected_components:
+            comp_id = comp.component_id
+            comp_centers, comp_radii = _component_residence_spheres(
+                comp, tetra_map, use_resident_nodes=use_resident_nodes
+            )
+            if comp_centers is None:
+                continue
+
+            color = _AFFINITY_NEUTRAL
+            if atom_colors is not None:
+                from collections import Counter
+                lining = []
+                for a in (getattr(comp, 'atom_indices', None) or []):
+                    if 0 <= a < len(index_map):
+                        m = int(index_map[a])
+                        if 0 <= m < len(atom_colors):
+                            lining.append(atom_colors[m])
+                if lining:
+                    color = Counter(lining).most_common(1)[0][0]
+
+            layers.append(
+                view.shapes.add_set_alpha_spheres(
+                    centers=puw.quantity(comp_centers, 'angstroms'),
+                    radii=puw.quantity(comp_radii, 'angstroms'),
+                    color_alpha_spheres=color,
+                    alpha_alpha_spheres=alpha,
                     tag=f'{tag_prefix}:{comp_id}',
                     layer_tag=tag_prefix,
                     skip_digestion=True,
