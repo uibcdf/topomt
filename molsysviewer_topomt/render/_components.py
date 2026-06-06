@@ -124,6 +124,19 @@ def _body_labels_from_dry(dry_components, n_atoms):
     return labels
 
 
+def _rank_by_volume(components, top_n):
+    """Keep the ``top_n`` components by solvent volume (largest first), the
+    default-visibility-by-relevance rule. ``top_n=None`` keeps all.
+    """
+    if top_n is None or top_n >= len(components):
+        return components
+    return sorted(
+        components,
+        key=lambda c: (getattr(c, 'volume_solvent_estimate', None) or 0.0),
+        reverse=True,
+    )[:top_n]
+
+
 def show_dfnd_components(
     view,
     topography=None,
@@ -149,6 +162,7 @@ def show_dfnd_components(
     smoothing: float | None = None,
     iso_level: float | None = None,
     radius_scale: float | None = None,
+    top_n: int | None = None,
 ) -> Any:
     """Render DFND components into the viewer using multiple representation modes.
 
@@ -210,6 +224,9 @@ def show_dfnd_components(
         Bypass ArgDigest argument verification.
     radius_scale : float, optional
         For 'cloud': scales alpha-sphere radii before building the Gaussian field.
+    top_n : int, optional
+        If given, render only the ``top_n`` components by solvent volume
+        (default-visibility-by-relevance); the rest are dropped from this call.
     """
     topography = _resolve_topography(view, topography)
     if topography is None:
@@ -247,6 +264,8 @@ def show_dfnd_components(
 
     if not selected_components:
         return None
+
+    selected_components = _rank_by_volume(selected_components, top_n)
 
     if representation == 'auto':
         # Per-family visual language: group the selection by each component's

@@ -1463,3 +1463,62 @@ def test_auto_renders_each_family_with_its_mode():
     ops = [m['op'] for m in view.messages]
     assert 'add_channel_tube' in ops  # channel -> pipe
     assert 'add_pocket_blob' in ops  # pocket -> cloud
+
+
+def test_rank_by_volume_keeps_largest_components():
+    """Phase 5: default-visibility-by-relevance keeps the top_n largest."""
+    from types import SimpleNamespace
+    from molsysviewer_topomt.render import _components as comp_mod
+
+    comps = [
+        SimpleNamespace(component_id='A', volume_solvent_estimate=1.0),
+        SimpleNamespace(component_id='B', volume_solvent_estimate=3.0),
+        SimpleNamespace(component_id='C', volume_solvent_estimate=2.0),
+    ]
+    assert [c.component_id for c in comp_mod._rank_by_volume(comps, None)] == ['A', 'B', 'C']
+    assert [c.component_id for c in comp_mod._rank_by_volume(comps, 2)] == ['B', 'C']
+    assert [c.component_id for c in comp_mod._rank_by_volume(comps, 1)] == ['B']
+
+    # None volume sorts as zero (does not crash, ranked last)
+    mixed = [
+        SimpleNamespace(component_id='X', volume_solvent_estimate=None),
+        SimpleNamespace(component_id='Y', volume_solvent_estimate=5.0),
+    ]
+    assert [c.component_id for c in comp_mod._rank_by_volume(mixed, 1)] == ['Y']
+
+
+def test_top_n_limits_rendered_components():
+    """Phase 5: top_n renders only the most voluminous components."""
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from topomt.dfnd.data import DFNDData
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    pdb = (
+        Path(__file__).resolve().parents[1]
+        / 'topomt' / 'data' / 'synthetic' / 'tube_channel_clean.pdb'
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+    topo = SimpleNamespace(dfnd=DFNDData(net, result))
+
+    # surface draws one layer per component; top_n=1 keeps a single one
+    view_all = DummyView()
+    show_dfnd_components(view_all, topo, representation='surface')
+    n_all = sum(1 for m in view_all.messages if m['op'] == 'add_pocket_surface')
+
+    view_top = DummyView()
+    show_dfnd_components(view_top, topo, representation='surface', top_n=1)
+    n_top = sum(1 for m in view_top.messages if m['op'] == 'add_pocket_surface')
+
+    assert n_all >= 2
+    assert n_top == 1
