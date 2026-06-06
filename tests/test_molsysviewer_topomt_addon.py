@@ -1374,3 +1374,56 @@ def test_pipe_renders_channel_as_variable_radius_tube():
     ops = [m['op'] for m in view.messages]
     assert 'add_channel_tube' in ops  # the tube
     assert 'add_alpha_sphere_set' in ops  # the bottleneck marker
+
+
+def test_contact_sheet_splits_interface_lining_by_body():
+    """Phase 3: an interface renders its lining surface split per body.
+
+    Uses the committed two-block interface fixture (two dry banks + a wet
+    interface lined by both). See devguide/DFND/component_visualization_implementation.md
+    (Phase 3).
+    """
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from topomt.dfnd.data import DFNDData
+    from molsysviewer_topomt.render import show_dfnd_components
+    from molsysviewer_topomt.render import _components as comp_mod
+
+    pdb = (
+        Path(__file__).resolve().parents[1]
+        / 'topomt' / 'data' / 'synthetic' / 'two_blocks_interface.pdb'
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+    dfnd = DFNDData(net, result)
+    topo = SimpleNamespace(dfnd=dfnd)
+
+    # there must be an interface wet component lined by two dry bodies
+    assert dfnd.dfn.components.wet_interfaces
+
+    view = DummyView()
+    layer = show_dfnd_components(
+        view, topo, representation='contact_sheet', interfaces_only=True,
+        component_types=None,
+    )
+    assert layer is not None
+    surfaces = [m for m in view.messages if m['op'] == 'add_pocket_surface']
+    # at least two body surfaces, coloured from the interface body palette
+    assert len(surfaces) >= 2
+    used_colors = set()
+    for m in surfaces:
+        cmap = m['options'].get('color_map') or []
+        used_colors.update(cmap)
+    assert used_colors & set(comp_mod._INTERFACE_BODY_COLORS)
+    # the two leading body colours (vermillion, bluish green) both appear
+    assert comp_mod._INTERFACE_BODY_COLORS[0] in used_colors
+    assert comp_mod._INTERFACE_BODY_COLORS[1] in used_colors

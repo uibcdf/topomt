@@ -94,6 +94,25 @@ def _component_alpha_spheres(comp, mesh, *, use_resident_nodes):
     return centers, radii
 
 
+def _body_labels_from_dry(dry_components, n_atoms):
+    """Per-atom body id from the dry components (largest dry body wins shared
+    atoms), mirroring ``interfaces.body_labels_from_dry_components`` but consuming
+    the typed dry ``Component`` objects the renderer already holds. ``-1`` means
+    no body. Used by the ``contact_sheet`` (interface) representation.
+    """
+    labels = np.full(int(n_atoms), -1, dtype=int)
+    ordered = sorted(
+        dry_components,
+        key=lambda c: len(getattr(c, 'atom_indices', []) or []),
+        reverse=True,
+    )
+    for body_id, comp in enumerate(ordered):
+        for atom in getattr(comp, 'atom_indices', []) or []:
+            if 0 <= atom < n_atoms and labels[atom] == -1:
+                labels[atom] = body_id
+    return labels
+
+
 def show_dfnd_components(
     view,
     topography=None,
@@ -142,6 +161,8 @@ def show_dfnd_components(
         - 'alpha_spheres': Geometric Delaunay circumspheres for diagnostics.
         - 'probe_centers': Probe-sized spheres at maximum-clearance centers.
         - 'surface': Molecular pocket surface based on lining atom indices.
+        - 'contact_sheet': Interface lining surface split by body (one colour per
+          body), for wet components lined by two or more bodies.
         - 'coast_faces': Boundary faces touching between wet and dry sides.
         - 'graph': DFN connectivity graph connecting tetrahedron barycenters.
     interfaces_only : bool, default False
@@ -523,6 +544,60 @@ def show_dfnd_components(
                 skip_digestion=True,
             )
             layers.append(layer)
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'contact_sheet':
+        # Interface lining surface split by body: bicolor for two banks, one
+        # colour per body for N-body junctions. Body labels are derived from the
+        # dry network (the per-atom mapping the component only stores as counts).
+        # See devguide/DFND/component_visualization_implementation.md (Phase 3).
+        n_atoms = len(coords)
+        body_labels = _body_labels_from_dry(
+            list(dfnd_data.dfn.components.dry), n_atoms
+        )
+        for comp in selected_components:
+            comp_id = comp.component_id
+            atom_indices = getattr(comp, 'atom_indices', None)
+            if not atom_indices:
+                continue
+
+            by_body = {}
+            for atom in atom_indices:
+                body = int(body_labels[atom]) if 0 <= atom < n_atoms else -1
+                if body < 0:
+                    continue
+                by_body.setdefault(body, []).append(atom)
+
+            if not by_body:
+                # not a multi-body lining: single-colour fallback surface
+                color = resolved_colors[comp_id]
+                layers.append(
+                    view.shapes.add_pocket_surface(
+                        atom_indices=atom_indices,
+                        color_map=[color, color],
+                        alpha=alpha,
+                        tag=f'{tag_prefix}:{comp_id}',
+                        layer_tag=tag_prefix,
+                        skip_digestion=True,
+                    )
+                )
+                continue
+
+            for body in sorted(by_body):
+                body_color = _INTERFACE_BODY_COLORS[body % len(_INTERFACE_BODY_COLORS)]
+                layers.append(
+                    view.shapes.add_pocket_surface(
+                        atom_indices=by_body[body],
+                        color_map=[body_color, body_color],
+                        alpha=alpha,
+                        tag=f'{tag_prefix}:{comp_id}-body{body}',
+                        layer_tag=tag_prefix,
+                        skip_digestion=True,
+                    )
+                )
+
+        if not layers:
+            return None
         return layers[0] if len(layers) == 1 else layers
 
     elif representation == 'coast_faces':
