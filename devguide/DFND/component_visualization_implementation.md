@@ -39,15 +39,22 @@ Done and on `main`:
 - **§9** — `show_dfnd_pharmacophore`: typed interaction-site map per cavity
   (positive/negative/hydrophobic/acceptor) via `physchem` + `add_interaction_sites`.
 
-Remaining (all blocked on DFND core, not on rendering):
+Remaining (dynamic axis — most of the core identity now exists):
 
-- **Dynamic topology** (§8) — **blocked on DFND core**: no cross-frame component
-  identity exists yet (see the component-identity contract: `component_key` /
-  `lineage_id`). Persistence, events and the **2D–3D synced widget** all wait on it.
+- **Static identity** — done: `support_key` / `component_key` / `result_key`
+  (`topomt/dfnd/identity.py`), generated per component and used for ranking
+  (`component_sort_key`).
+- **Dynamic identity (core)** — done: `topomt/dfnd/lineage.py` matches components
+  across frames (`match_results`, exact `support_key` + lining Jaccard) and
+  assigns `track_id`s with birth/death/split/merge events (`assign_tracks`).
+- **Still to do**: (a) a trajectory driver that runs DFND per frame and applies
+  `assign_tracks`; (b) the dynamic **visualization** — colour/`layer_tag` keyed
+  on `track_id` (so a cavity keeps its colour) and an event timeline, which needs
+  the **2D–3D synced widget** primitive (molsysviewer).
 
-**Everything renderable without core changes is done.** The remaining work is the
-dynamic axis, which is a DFND-core problem (component identity across frames),
-not a visualization one.
+**Everything renderable on a single frame is done.** What remains is the
+trajectory driver and the dynamic visualization on top of the now-existing
+`track_id`.
 - **molsysmt** — `physchem` should treat `DUM` dummy atoms/groups as neutral
   (proposal filed) so affinity typing works on dummy systems too.
 
