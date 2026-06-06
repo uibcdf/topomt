@@ -45,6 +45,17 @@ _INTERFACE_BODY_COLORS = [
 # Reserved high-contrast accent for mouths/gates (not used by any family).
 _MOUTH_ACCENT = _OKABE_ITO['yellow']
 
+# Per-family default representation for representation='auto' (the per-family
+# visual language). Channels become tubes; pockets/voids stay volumetric blobs
+# until the 'envelope' mode (mouth caps) lands. See
+# devguide/DFND/component_visualization_implementation.md.
+_DEFAULT_REPRESENTATION_BY_FAMILY = {
+    fam.CHANNEL: 'pipe',
+    fam.POCKET: 'cloud',
+    fam.VOID: 'cloud',
+}
+_AUTO_FALLBACK_REPRESENTATION = 'cloud'
+
 _DISTINCT_PALETTE_LIST = [
     _OKABE_ITO['blue'],
     _OKABE_ITO['orange'],
@@ -151,7 +162,9 @@ def show_dfnd_components(
         Render wet components (pockets, voids, channels).
     show_dry : bool, default False
         Render dry components (hydrophobic core, dry banks).
-    representation : {'tetrahedra', 'cloud', 'pipe', 'residence_spheres', 'alpha_spheres', 'probe_centers', 'surface', 'coast_faces', 'graph'}, default 'tetrahedra'
+    representation : {'auto', 'tetrahedra', 'cloud', 'pipe', 'contact_sheet', 'residence_spheres', 'alpha_spheres', 'probe_centers', 'surface', 'coast_faces', 'graph'}, default 'tetrahedra'
+        - 'auto': Per-family visual language — each component is drawn with its
+          family's default mode (channel->pipe, pocket/void->cloud).
         - 'tetrahedra': Volumetric Delaunay tetrahedra.
         - 'cloud': Approximate iso-surface from residence spheres.
         - 'pipe': Channels as a variable-radius tube along their through-path
@@ -234,6 +247,52 @@ def show_dfnd_components(
 
     if not selected_components:
         return None
+
+    if representation == 'auto':
+        # Per-family visual language: group the selection by each component's
+        # default representation and delegate to the concrete mode per group, so a
+        # void and a channel in the same call render differently. clear() is by
+        # exact tag, so the groups do not clobber each other's layers.
+        groups: dict[str, list[str]] = {}
+        for comp in selected_components:
+            mode = _DEFAULT_REPRESENTATION_BY_FAMILY.get(
+                comp.family, _AUTO_FALLBACK_REPRESENTATION
+            )
+            groups.setdefault(mode, []).append(comp.component_id)
+        results = []
+        for mode, ids in groups.items():
+            res = show_dfnd_components(
+                view,
+                topography,
+                show_wet=show_wet,
+                show_dry=show_dry,
+                representation=mode,
+                interfaces_only=interfaces_only,
+                component_ids=ids,
+                component_types=None,
+                color_mode=color_mode,
+                color_palette=color_palette,
+                alpha=alpha,
+                draw_faces=draw_faces,
+                draw_edges=draw_edges,
+                edge_radius_nm=edge_radius_nm,
+                edge_color=edge_color,
+                use_resident_nodes=use_resident_nodes,
+                tag_prefix=tag_prefix,
+                name=name,
+                skip_digestion=skip_digestion,
+                resolution=resolution,
+                smoothing=smoothing,
+                iso_level=iso_level,
+                radius_scale=radius_scale,
+            )
+            if isinstance(res, list):
+                results.extend(res)
+            elif res is not None:
+                results.append(res)
+        if not results:
+            return None
+        return results[0] if len(results) == 1 else results
 
     mesh = dfnd_data.mesh
     coords = np.asarray(mesh.atoms.coords, dtype=float)

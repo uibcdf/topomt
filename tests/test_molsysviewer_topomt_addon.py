@@ -1427,3 +1427,39 @@ def test_contact_sheet_splits_interface_lining_by_body():
     # the two leading body colours (vermillion, bluish green) both appear
     assert comp_mod._INTERFACE_BODY_COLORS[0] in used_colors
     assert comp_mod._INTERFACE_BODY_COLORS[1] in used_colors
+
+
+def test_auto_renders_each_family_with_its_mode():
+    """Phase 0/2: representation='auto' draws each family with its default mode.
+
+    tube_channel_clean has a channel (-> pipe / add_channel_tube) and a pocket
+    (-> cloud / add_pocket_blob); both must appear in one 'auto' call.
+    """
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from topomt.dfnd.data import DFNDData
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    pdb = (
+        Path(__file__).resolve().parents[1]
+        / 'topomt' / 'data' / 'synthetic' / 'tube_channel_clean.pdb'
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+    topo = SimpleNamespace(dfnd=DFNDData(net, result))
+
+    view = DummyView()
+    layer = show_dfnd_components(view, topo, representation='auto')
+    assert layer is not None
+    ops = [m['op'] for m in view.messages]
+    assert 'add_channel_tube' in ops  # channel -> pipe
+    assert 'add_pocket_blob' in ops  # pocket -> cloud
