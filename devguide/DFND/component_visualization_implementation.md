@@ -5,9 +5,42 @@ The *how* for [component_visualization.md](component_visualization.md) (the
 current `molsysviewer_topomt.render` code, the real `molsysviewer.shapes`
 primitives, and the DFND data already on the `Component`/`raw` records.
 
-Status: proposal (2026-06-06). No code yet. Phasing follows
+Status: **in progress** (updated 2026-06-06). Phases 0–5 are implemented and
+pushed (topomt `main`); Phase 6 is partial (dry-core scaffold done). The two
+generic upstream primitives this plan needed — `add_rings` and `focus_with_fade`
+— are implemented and pushed in `molsysviewer`. Remaining work is upstream
+(more molsysviewer primitives) or core (dynamic identity). Per-phase status in
+the build-order table (§12); phasing follows
 [component_visualization.md §14](component_visualization.md) and its gap list
 (§13).
+
+## Implementation status (2026-06-06)
+
+Done and on `main`:
+
+- **Phase 0** — Okabe–Ito CVD-safe palette + `representation='auto'` per-family
+  dispatch (channel→pipe, pocket/void→envelope; interface→contact_sheet).
+- **Phase 1** — `envelope`: blob + per-mouth gate ring + translucent mouth cap.
+- **Phase 2** — `pipe`: channel centerline tube (`topomt/dfnd/centerline.py`) +
+  real bottleneck ring.
+- **Phase 3** — `contact_sheet`: interface lining split per body.
+- **Phase 4** — `rings`: HOLE-style clearance profile (green/amber/red @ 1.15 Å).
+- **Phase 5** — `carve_voids` (focus-with-fade), `show_dfnd_labels`,
+  `affinity_spheres` (via `molsysmt.physchem`), `top_n` visibility.
+- **§7** — `scaffold`: dry-core MST spine.
+- **molsysviewer** — `add_rings` shape, `focus_with_fade` primitive (both pushed).
+
+Remaining:
+
+- **Legend** primitive (molsysviewer) → the colour legend of Phase 5.
+- **Curvature surface coloring** primitive (molsysviewer) → convexity heatmap (§7).
+- **Clipping-plane**, **2D–3D synced widget** primitives (molsysviewer).
+- **Pharmacophore interaction-site map** (§9) — topomt, via the `pharmacophore`
+  shape + `physchem` (trackable now, not yet built).
+- **Dynamic topology** (§8) — **blocked on DFND core**: no cross-frame component
+  identity exists yet.
+- **molsysmt** — `physchem` should treat `DUM` dummy atoms/groups as neutral
+  (proposal filed) so affinity typing works on dummy systems too.
 
 ---
 
@@ -81,8 +114,9 @@ Viewer primitives (confirmed): `add_pocket_blob`, `add_pocket_surface`,
   `molsysviewer_topomt`. This already holds — `add_channel_tube` and the
   `pharmacophore` shape live in `molsysviewer`; topomt only feeds them. New
   generic primitives this plan needs should first be proposed in
-  [proposal_molsysviewer_improvement.md](../proposal_improvement/proposal_molsysviewer_improvement.md)
-  and built there, not hardcoded here.
+  MolSysViewer's
+  `devguide/pending_proposals/topomt_requested_visualization_primitives.md` and
+  built there, not hardcoded here.
 
   | Piece | Lives in | Why |
   |---|---|---|
@@ -238,15 +272,21 @@ These are not pure rendering tasks; they wait on DFND core or new viewer support
 
 ## 12. Build order (summary)
 
-| Phase | Deliverable | New `representation` | Primitive | Upstream (molsysviewer) prereq | Blocked? |
-|---|---|---|---|---|---|
-| 0 | palette + per-family resolver | `auto` | — | palette catalog (Okabe–Ito) | no |
-| 1 | mouth caps + envelope | `envelope` | `add_triangle_faces`, `add_links` | ring shape | no |
-| 2 | channel tube + bottleneck | `pipe` | `add_channel_tube` | — (exists) | no |
-| 3 | interface body-split | `contact_sheet` | `add_pocket_surface` | — (exists) | no |
-| 4 | HOLE rings + scalar gradient | `rings` | `add_links` / `color_by` | stacked-ring shape | no |
-| 5 | carving, labels, affinity, visibility | `affinity_spheres` | selection/`set_alpha`, annotations | focus-with-fade, legend | no |
-| 6 | dynamic / pharmacophore / convexity | `heatmap`, `scaffold` | various | curvature coloring, clipping, 2D–3D widget | core / viewer |
+| Phase | Deliverable | New `representation` | Status |
+|---|---|---|---|
+| 0 | palette + per-family resolver | `auto` | ✅ done |
+| 1 | mouth caps + envelope | `envelope` | ✅ done (blob + gate ring + cap) |
+| 2 | channel tube + bottleneck | `pipe` | ✅ done (centerline + real bottleneck ring) |
+| 3 | interface body-split | `contact_sheet` | ✅ done |
+| 4 | HOLE rings + scalar gradient | `rings` | ✅ done |
+| 5 | carving, labels, affinity, visibility | `affinity_spheres`, `carve_voids`, `show_dfnd_labels`, `top_n` | ✅ done (legend pending, upstream) |
+| 6 | dry-core scaffold | `scaffold` | ✅ done |
+| 6 | convexity heatmap | `heatmap` | ⏳ needs curvature-coloring primitive (upstream) |
+| 6 | pharmacophore map | — | ⏳ trackable now (`pharmacophore` shape + `physchem`) |
+| 6 | dynamic topology | — | ⛔ blocked on DFND core (cross-frame identity) |
+
+Upstream primitives (molsysviewer): `add_rings` ✅, `focus_with_fade` ✅ (both
+pushed); `legend`, `curvature coloring`, `clipping-plane`, `2D–3D widget` ⏳.
 
 ## 13. Cross-references
 
@@ -258,7 +298,7 @@ These are not pure rendering tasks; they wait on DFND core or new viewer support
 - Dynamic / pharmacophores: [dynamic_topology.md](dynamic_topology.md),
   [4D_and_pharmacophores.md](4D_and_pharmacophores.md).
 - Where general vs specific code belongs:
-  [../what_should_move_to_molsysmt.md](../what_should_move_to_molsysmt.md),
-  [../proposal_improvement/proposal_molsysviewer_improvement.md](../proposal_improvement/proposal_molsysviewer_improvement.md)
-  (the upstream primitives in §2 D6 are logged there).
+  [../what_should_move_to_molsysmt.md](../what_should_move_to_molsysmt.md).
+  The upstream primitives in §2 D6 are logged in MolSysViewer's own
+  `devguide/pending_proposals/topomt_requested_visualization_primitives.md`.
 - Current renderer: `molsysviewer_topomt/render/_components.py`.
