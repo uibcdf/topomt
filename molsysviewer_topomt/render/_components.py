@@ -6,6 +6,7 @@ import numpy as np
 
 from topomt import pyunitwizard as puw
 from topomt.dfnd import families as fam
+from topomt.dfnd.centerline import channel_centerline
 
 from ._common import _dfnd_edge_meta, _dfnd_face_meta, _resolve_topography
 
@@ -131,9 +132,12 @@ def show_dfnd_components(
         Render wet components (pockets, voids, channels).
     show_dry : bool, default False
         Render dry components (hydrophobic core, dry banks).
-    representation : {'tetrahedra', 'cloud', 'residence_spheres', 'alpha_spheres', 'probe_centers', 'surface', 'coast_faces', 'graph'}, default 'tetrahedra'
+    representation : {'tetrahedra', 'cloud', 'pipe', 'residence_spheres', 'alpha_spheres', 'probe_centers', 'surface', 'coast_faces', 'graph'}, default 'tetrahedra'
         - 'tetrahedra': Volumetric Delaunay tetrahedra.
         - 'cloud': Approximate iso-surface from residence spheres.
+        - 'pipe': Channels as a variable-radius tube along their through-path
+          (centerline + R_residence) with a bottleneck marker; non-channels fall
+          back to a blob.
         - 'residence_spheres': Maximum-clearance spheres inside resident tetrahedra.
         - 'alpha_spheres': Geometric Delaunay circumspheres for diagnostics.
         - 'probe_centers': Probe-sized spheres at maximum-clearance centers.
@@ -356,6 +360,75 @@ def show_dfnd_components(
                 skip_digestion=True,
             )
             layers.append(layer)
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'pipe':
+        # Channels as variable-radius tubes along their through-path (CAVER-style),
+        # radius = local R_residence, with a bottleneck marker at the narrowest
+        # station. Non-channels (or channels with no through-path) fall back to a
+        # volumetric blob. See
+        # devguide/DFND/component_visualization_implementation.md (Phase 2).
+        raw = dfnd_data.raw
+        for comp in selected_components:
+            comp_id = comp.component_id
+            color = resolved_colors[comp_id]
+
+            centerline = None
+            if comp.family == fam.CHANNEL and comp.raw_record is not None:
+                centerline = channel_centerline(raw, comp.raw_record)
+
+            if centerline is None:
+                centers, radii = _component_residence_spheres(
+                    comp, tetra_map, use_resident_nodes=use_resident_nodes
+                )
+                if centers is None:
+                    continue
+                layer = view.shapes.add_pocket_blob(
+                    centers=puw.quantity(centers, 'angstroms'),
+                    radii=puw.quantity(radii, 'angstroms'),
+                    alpha=alpha,
+                    tag=f'{tag_prefix}:{comp_id}',
+                    layer_tag=tag_prefix,
+                    name=f'{name} {comp_id}',
+                    resolution=0.5 if resolution is None else resolution,
+                    smoothing=0.5 if smoothing is None else smoothing,
+                    iso_level=0.5 if iso_level is None else iso_level,
+                    radius_scale=0.6 if radius_scale is None else radius_scale,
+                    skip_digestion=True,
+                )
+                layers.append(layer)
+                continue
+
+            centers = centerline['centers']
+            radii = centerline['radii']
+            tube = view.shapes.add_channel_tube(
+                centers=puw.quantity(centers, 'angstroms'),
+                radii=puw.quantity(radii, 'angstroms'),
+                color_map=[color, color],
+                alpha=alpha,
+                tag=f'{tag_prefix}:{comp_id}',
+                layer_tag=tag_prefix,
+                name=f'{name} {comp_id}',
+                skip_digestion=True,
+            )
+            layers.append(tube)
+
+            # Bottleneck marker (a dedicated ring shape is the upstream-molsysviewer
+            # follow-up; an accent alpha-sphere stands in for now).
+            neck = centerline['bottleneck_index']
+            marker = view.shapes.add_set_alpha_spheres(
+                centers=puw.quantity(centers[neck:neck + 1], 'angstroms'),
+                radii=puw.quantity(radii[neck:neck + 1], 'angstroms'),
+                color_alpha_spheres=_MOUTH_ACCENT,
+                alpha_alpha_spheres=min(1.0, alpha + 0.3),
+                tag=f'{tag_prefix}:{comp_id}-bottleneck',
+                layer_tag=tag_prefix,
+                skip_digestion=True,
+            )
+            layers.append(marker)
+
+        if not layers:
+            return None
         return layers[0] if len(layers) == 1 else layers
 
     elif representation in {'residence_spheres', 'alpha_spheres'}:

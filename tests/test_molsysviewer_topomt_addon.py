@@ -1335,3 +1335,42 @@ def test_show_dfnd_components_explicit_sphere_modes_and_graph_alias():
     graph = show_dfnd_components(DummyView(), topo, representation='graph')
     skeleton = show_dfnd_components(DummyView(), topo, representation='skeleton')
     assert graph['n_nodes'] == skeleton['n_nodes'] == 1
+
+
+def test_pipe_renders_channel_as_variable_radius_tube():
+    """Phase 2: a channel renders as add_channel_tube + a bottleneck marker.
+
+    Uses a real DFND substrate from the committed two-mouth-channel fixture (no
+    synthetic.py dependency). See topomt/dfnd/centerline.py and
+    devguide/DFND/component_visualization_implementation.md (Phase 2).
+    """
+    from pathlib import Path
+    from types import SimpleNamespace
+
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from topomt.dfnd.data import DFNDData
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    pdb = (
+        Path(__file__).resolve().parents[1]
+        / 'topomt' / 'data' / 'synthetic' / 'tube_channel_clean.pdb'
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    result = net.get_topography(probe_radius=1.4, min_size=0)
+    topo = SimpleNamespace(dfnd=DFNDData(net, result))
+
+    view = DummyView()
+    layer = show_dfnd_components(
+        view, topo, representation='pipe', component_types=('channel',)
+    )
+    assert layer is not None
+    ops = [m['op'] for m in view.messages]
+    assert 'add_channel_tube' in ops  # the tube
+    assert 'add_alpha_sphere_set' in ops  # the bottleneck marker
