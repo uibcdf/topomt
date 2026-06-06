@@ -1910,3 +1910,48 @@ def test_affinity_spheres_neutral_on_dummy_system():
     # no chemistry -> every sphere set is the neutral colour
     for m in sphere_msgs:
         assert m['options']['alpha_spheres']['color'] == c._AFFINITY_NEUTRAL
+
+
+def test_atom_convexity_spike_is_most_convex():
+    """§7: the convexity scalar flags a protrusion as the most convex atom."""
+    from pathlib import Path
+    from molsysviewer_topomt.render._components import _atom_convexity
+
+    pdb = (
+        Path(__file__).resolve().parents[1]
+        / 'topomt' / 'data' / 'synthetic' / 'tetrahedron_spike.pdb'
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    # the spike is the 4th atom at z=10; use a radius large enough to see the base
+    conv = _atom_convexity(coords, radius=15.0)
+    assert np.argmax(conv) == 3  # the spike atom is the most convex
+    assert conv[3] > 0  # it is a protrusion (positive)
+
+
+def test_show_dfnd_convexity_colours_whole_surface():
+    """§7: show_dfnd_convexity feeds per-atom convexity to whole.set_color_by_values."""
+    from types import SimpleNamespace
+    from molsysviewer_topomt.render import show_dfnd_convexity
+
+    topo = _build_dfnd_topo('hollow_sphere_void.pdb')
+    captured = {}
+
+    class FakeWhole:
+        def set_color_by_values(self, values, element='atom', palette='viridis',
+                                value_range=None, skip_digestion=False):
+            captured['values'] = np.asarray(values)
+            captured['element'] = element
+            captured['palette'] = palette
+
+    view = SimpleNamespace(whole=FakeWhole())  # no _molsys -> DFND order
+    values = show_dfnd_convexity(view, topo, radius=6.0)
+    assert captured['element'] == 'atom'
+    n_atoms = len(topo.dfnd.mesh.atoms.coords)
+    assert len(captured['values']) == n_atoms
+    assert np.allclose(captured['values'], values)

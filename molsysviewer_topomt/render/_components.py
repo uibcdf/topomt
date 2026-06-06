@@ -197,6 +197,66 @@ def _hole_clearance_color(radius):
     return _HOLE_OPEN
 
 
+def _atom_convexity(coords, radius=8.0):
+    """Per-atom local convexity scalar: positive on ridges/protrusions, negative
+    in valleys/pockets. For each atom, the displacement from the centroid of its
+    neighbours within ``radius``, signed by whether it points outward (convex) or
+    inward (concave) relative to the global centre.
+    """
+    coords = np.asarray(coords, dtype=float)
+    n = len(coords)
+    if n < 2:
+        return np.zeros(n)
+    from scipy.spatial import cKDTree
+
+    global_center = coords.mean(axis=0)
+    tree = cKDTree(coords)
+    conv = np.zeros(n)
+    for i in range(n):
+        nbrs = [j for j in tree.query_ball_point(coords[i], radius) if j != i]
+        if not nbrs:
+            continue
+        v = coords[i] - coords[nbrs].mean(axis=0)
+        out = coords[i] - global_center
+        out_norm = float(np.linalg.norm(out))
+        sign = np.sign(float(np.dot(v, out))) if out_norm > 1e-9 else 1.0
+        conv[i] = float(np.linalg.norm(v)) * (sign if sign != 0 else 1.0)
+    return conv
+
+
+def show_dfnd_convexity(view, topography=None, *, radius=8.0, palette='coolwarm'):
+    """Colour the molecular surface by local convexity (ridges hot, valleys cold)
+    via ``view.whole.set_color_by_values``. Convexity is computed per atom from the
+    DFND coordinates; a convexity/protrusion heatmap (see
+    devguide/DFND/component_visualization.md §7). Returns the per-atom values.
+    """
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    dfnd_data = getattr(topography, 'dfnd', None)
+    if dfnd_data is None:
+        raise ValueError('Topography has no DFND data attached')
+
+    coords = np.asarray(dfnd_data.mesh.atoms.coords, dtype=float)
+    convexity = _atom_convexity(coords, radius=radius)
+    index_map = np.asarray(
+        getattr(dfnd_data.mesh.atoms, 'index_map', np.arange(len(coords)))
+    )
+
+    molsys = getattr(view, '_molsys', None)
+    if molsys is not None:
+        import molsysmt as msm
+        n_atoms = int(msm.get(molsys, n_atoms=True))
+        values = np.zeros(n_atoms)
+        valid = index_map < n_atoms
+        values[index_map[valid]] = convexity[valid]
+    else:
+        values = convexity  # assume DFND atom order == molecular-system order
+
+    view.whole.set_color_by_values(values, element='atom', palette=palette)
+    return values
+
+
 def _affinity_color_for_scalars(hydrophobicity, charge):
     """Classify a residue's (hydrophobicity, charge) into an affinity colour."""
     if charge is not None and charge > 0.5:
