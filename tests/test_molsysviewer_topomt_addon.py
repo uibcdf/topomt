@@ -1780,3 +1780,51 @@ def test_show_dfn_graph_can_render_twice_with_same_tag_prefix():
         if message["op"] == "clear_shapes_by_tag"
     }
     assert {"repeat-graph-node", "repeat-graph-edges", "repeat-graph-mouths"} <= cleared_tags
+
+
+def _build_dfnd_topo(pdb_name, probe=1.4):
+    from pathlib import Path
+    from types import SimpleNamespace
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+    from topomt.dfnd.data import DFNDData
+
+    pdb = (
+        Path(__file__).resolve().parents[1] / 'topomt' / 'data' / 'synthetic' / pdb_name
+    )
+    coords = np.array(
+        [
+            [float(line[30:38]), float(line[38:46]), float(line[46:54])]
+            for line in pdb.read_text().splitlines()
+            if line.startswith(('ATOM', 'HETATM'))
+        ]
+    )
+    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    result = net.get_topography(probe_radius=probe, min_size=0)
+    return SimpleNamespace(dfnd=DFNDData(net, result))
+
+
+def test_envelope_pocket_has_blob_and_one_mouth_ring():
+    """Phase 1: a pocket renders a blob + one gate ring; a void only the blob."""
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    pocket_topo = _build_dfnd_topo('hollow_sphere_pocket.pdb')
+    view = DummyView()
+    show_dfnd_components(view, pocket_topo, representation='envelope',
+                         component_types=('pocket',))
+    ops = [m['op'] for m in view.messages]
+    assert 'add_pocket_blob' in ops  # the volume
+    ring_msgs = [m for m in view.messages if m['op'] == 'add_rings']
+    assert ring_msgs  # the pocket's mouth ring
+    assert len(ring_msgs[0]['options']['centers']) == 1  # exactly one mouth
+
+
+def test_envelope_void_has_blob_and_no_mouth_ring():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    void_topo = _build_dfnd_topo('hollow_sphere_void.pdb')
+    view = DummyView()
+    show_dfnd_components(view, void_topo, representation='envelope',
+                         component_types=('void',))
+    ops = [m['op'] for m in view.messages]
+    assert 'add_pocket_blob' in ops  # the volume
+    assert 'add_rings' not in ops  # a void has no mouths

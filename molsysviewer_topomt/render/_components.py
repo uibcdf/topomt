@@ -59,14 +59,15 @@ _HOLE_CLOSED = _OKABE_ITO['vermillion']   # R < 1.15: closed to water
 # devguide/DFND/component_visualization_implementation.md.
 _DEFAULT_REPRESENTATION_BY_FAMILY = {
     fam.CHANNEL: 'pipe',
-    fam.POCKET: 'cloud',
-    fam.VOID: 'cloud',
+    fam.POCKET: 'envelope',
+    fam.VOID: 'envelope',
 }
 _AUTO_FALLBACK_REPRESENTATION = 'cloud'
 _COMPONENT_REPRESENTATIONS = {
     'auto',
     'tetrahedra',
     'cloud',
+    'envelope',
     'pipe',
     'rings',
     'residence_spheres',
@@ -186,6 +187,37 @@ def _hole_clearance_color(radius):
     return _HOLE_OPEN
 
 
+def _mouth_gate_rings(comp, raw, coords):
+    """Gate rings for each mouth of a component: ``(centers, normals, radii)``.
+
+    One ring per external link (mouth): centred on the mouth's lining atoms,
+    axis pointing out of the component, radius = the gate's ``R_gate_min``. A
+    void has no mouths (empty); a pocket has one. Used by the ``envelope`` mode.
+    """
+    external_links = {e['external_link_id']: e for e in raw.get('external_links', [])}
+    comp_center = (
+        np.asarray(comp.center, dtype=float) if getattr(comp, 'center', None) is not None
+        else None
+    )
+    centers, normals, radii = [], [], []
+    for link_id in getattr(comp, 'external_link_ids', None) or []:
+        link = external_links.get(link_id)
+        if link is None:
+            continue
+        atoms = link.get('atom_indices') or []
+        atoms = [a for a in atoms if 0 <= a < len(coords)]
+        if not atoms:
+            continue
+        mouth_center = coords[atoms].mean(axis=0)
+        normal = (mouth_center - comp_center) if comp_center is not None else None
+        if normal is None or not np.any(normal):
+            normal = np.array([0.0, 0.0, 1.0])
+        centers.append(mouth_center.tolist())
+        normals.append(normal.tolist())
+        radii.append(float(link.get('R_gate_min', 1.0)))
+    return centers, normals, radii
+
+
 def carve_voids(view, topography=None, *, component_ids=None,
                 component_types=(fam.VOID,), fade=0.85):
     """Expose buried components by fading the rest of the protein (void carving).
@@ -261,9 +293,11 @@ def show_dfnd_components(
         Render dry components (hydrophobic core, dry banks).
     representation : {'auto', 'tetrahedra', 'cloud', 'pipe', 'contact_sheet', 'residence_spheres', 'alpha_spheres', 'probe_centers', 'surface', 'coast_faces', 'graph'}, default 'tetrahedra'
         - 'auto': Per-family visual language — each component is drawn with its
-          family's default mode (channel->pipe, pocket/void->cloud).
+          family's default mode (channel->pipe, pocket/void->envelope).
         - 'tetrahedra': Volumetric Delaunay tetrahedra.
         - 'cloud': Approximate iso-surface from residence spheres.
+        - 'envelope': Volumetric blob plus a gate ring at each mouth (a void
+          shows only the blob, a pocket adds its single mouth ring).
         - 'pipe': Channels as a variable-radius tube along their through-path
           (centerline + R_residence) with a bottleneck marker; non-channels fall
           back to a blob.
@@ -662,6 +696,53 @@ def show_dfnd_components(
                 skip_digestion=True,
             )
             layers.append(layer)
+
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'envelope':
+        # Volumetric blob + a gate ring at each mouth: a void shows just the blob
+        # (0 mouths), a pocket adds its single mouth ring, making them
+        # distinguishable. See implementation plan (Phase 1).
+        raw = dfnd_data.raw
+        for comp in selected_components:
+            comp_id = comp.component_id
+            comp_centers, comp_radii = _component_residence_spheres(
+                comp, tetra_map, use_resident_nodes=use_resident_nodes
+            )
+            if comp_centers is not None:
+                layers.append(
+                    view.shapes.add_pocket_blob(
+                        centers=puw.quantity(comp_centers, 'angstroms'),
+                        radii=puw.quantity(comp_radii, 'angstroms'),
+                        alpha=alpha,
+                        tag=f'{tag_prefix}:{comp_id}',
+                        layer_tag=tag_prefix,
+                        name=f'{name} {comp_id}',
+                        resolution=0.5 if resolution is None else resolution,
+                        smoothing=0.5 if smoothing is None else smoothing,
+                        iso_level=0.5 if iso_level is None else iso_level,
+                        radius_scale=0.6 if radius_scale is None else radius_scale,
+                        skip_digestion=True,
+                    )
+                )
+
+            g_centers, g_normals, g_radii = _mouth_gate_rings(comp, raw, coords)
+            if g_centers:
+                layers.append(
+                    view.shapes.add_rings(
+                        centers=puw.quantity(np.array(g_centers), 'angstroms'),
+                        normals=g_normals,
+                        radii=puw.quantity(np.array(g_radii), 'angstroms'),
+                        colors=[_MOUTH_ACCENT] * len(g_centers),
+                        alpha=min(1.0, alpha + 0.3),
+                        tag=f'{tag_prefix}:{comp_id}-mouths',
+                        layer_tag=tag_prefix,
+                        name=f'{name} {comp_id} mouths',
+                        skip_digestion=True,
+                    )
+                )
 
         if not layers:
             return None
