@@ -1816,6 +1816,7 @@ def test_envelope_pocket_has_blob_and_one_mouth_ring():
     ring_msgs = [m for m in view.messages if m['op'] == 'add_rings']
     assert ring_msgs  # the pocket's mouth ring
     assert len(ring_msgs[0]['options']['centers']) == 1  # exactly one mouth
+    assert 'add_triangle_faces' in ops  # the translucent mouth cap
 
 
 def test_envelope_void_has_blob_and_no_mouth_ring():

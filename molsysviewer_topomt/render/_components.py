@@ -218,6 +218,22 @@ def _mouth_gate_rings(comp, raw, coords):
     return centers, normals, radii
 
 
+def _mouth_cap_triangles(comp, raw):
+    """Triangles (atom triplets) of each mouth's face cluster — the translucent
+    portal cap closing the chamber. Same atom-triplet format as ``coast_faces``.
+    """
+    external_links = {e['external_link_id']: e for e in raw.get('external_links', [])}
+    triplets = []
+    for link_id in getattr(comp, 'external_link_ids', None) or []:
+        link = external_links.get(link_id)
+        if link is None:
+            continue
+        for face in link.get('faces', []):
+            if len(face) == 3:
+                triplets.append([int(a) for a in face])
+    return triplets
+
+
 def carve_voids(view, topography=None, *, component_ids=None,
                 component_types=(fam.VOID,), fade=0.85):
     """Expose buried components by fading the rest of the protein (void carving).
@@ -740,6 +756,20 @@ def show_dfnd_components(
                         tag=f'{tag_prefix}:{comp_id}-mouths',
                         layer_tag=tag_prefix,
                         name=f'{name} {comp_id} mouths',
+                        skip_digestion=True,
+                    )
+                )
+
+            # Translucent portal cap over the mouth face cluster.
+            cap_triplets = _mouth_cap_triangles(comp, raw)
+            if cap_triplets:
+                layers.append(
+                    view.shapes.add_triangle_faces(
+                        atom_triplets=cap_triplets,
+                        colors=[_MOUTH_ACCENT] * len(cap_triplets),
+                        alpha=min(0.4, alpha),
+                        tag=f'{tag_prefix}:{comp_id}-cap',
+                        layer_tag=tag_prefix,
                         skip_digestion=True,
                     )
                 )
