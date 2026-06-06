@@ -6,29 +6,53 @@ import numpy as np
 
 from topomt import pyunitwizard as puw
 from topomt.dfnd import families as fam
-from topomt.dfnd.selectors import select_faces
 
-from ._common import _dfnd_edge_meta, _resolve_topography
+from ._common import _dfnd_edge_meta, _dfnd_face_meta, _resolve_topography
 
-_TYPE_PALETTE = {
-    fam.POCKET: 0x3B82F6,  # Blue
-    fam.VOID: 0x10B981,  # Green
-    fam.CHANNEL: 0xF59E0B,  # Amber
-    fam.PERCOLATING: 0x8B5CF6,  # Purple
-    fam.DRY_BANK: 0x64748B,  # Slate
+# Colour-blind-safe (Okabe-Ito) palette, per devguide/DFND/component_visualization.md
+# §11. These eight hexes are a *generic* CVD-safe catalog that should ultimately
+# live upstream in molsysviewer (see proposal_molsysviewer_improvement.md, D6);
+# the family->colour *mapping* below is the DFND-specific part that stays here.
+_OKABE_ITO = {
+    'orange': 0xE69F00,
+    'sky_blue': 0x56B4E9,
+    'bluish_green': 0x009E73,
+    'yellow': 0xF0E442,
+    'blue': 0x0072B2,
+    'vermillion': 0xD55E00,
+    'reddish_purple': 0xCC79A7,
+    'grey': 0x999999,
 }
 
+_TYPE_PALETTE = {
+    fam.POCKET: _OKABE_ITO['blue'],          # 0x0072B2
+    fam.VOID: _OKABE_ITO['sky_blue'],        # 0x56B4E9 (pocket = void + one mouth)
+    fam.CHANNEL: _OKABE_ITO['orange'],       # 0xE69F00
+    fam.PERCOLATING: _OKABE_ITO['reddish_purple'],  # 0xCC79A7
+    fam.DRY_BANK: _OKABE_ITO['grey'],        # 0x999999
+}
+
+# Two-colour pair for the common bipartite interface; extend with the remaining
+# hues for 3+-body junctions (yellow is reserved for the mouth/gate accent).
+_INTERFACE_BODY_COLORS = [
+    _OKABE_ITO['vermillion'],
+    _OKABE_ITO['bluish_green'],
+    _OKABE_ITO['blue'],
+    _OKABE_ITO['orange'],
+]
+
+# Reserved high-contrast accent for mouths/gates (not used by any family).
+_MOUTH_ACCENT = _OKABE_ITO['yellow']
+
 _DISTINCT_PALETTE_LIST = [
-    0x3B82F6,
-    0x10B981,
-    0xF59E0B,
-    0x8B5CF6,
-    0xEF4444,
-    0x06B6D4,
-    0xEC4899,
-    0xF97316,
-    0x14B8A6,
-    0x64748B,
+    _OKABE_ITO['blue'],
+    _OKABE_ITO['orange'],
+    _OKABE_ITO['bluish_green'],
+    _OKABE_ITO['sky_blue'],
+    _OKABE_ITO['vermillion'],
+    _OKABE_ITO['reddish_purple'],
+    _OKABE_ITO['yellow'],
+    _OKABE_ITO['grey'],
 ]
 
 
@@ -39,13 +63,8 @@ def _component_node_indices(comp, *, use_resident_nodes):
     return comp.node_indices
 
 
-def _component_spheres(comp, tetra_map, mesh, *, use_resident_nodes):
-    """Alpha-sphere ``(centers, radii)`` arrays for a component's tetrahedra.
-
-    Prefers the per-tetra record (``center`` / ``R_residence``) and falls back to
-    the raw Delaunay alpha-spheres. Returns ``(None, None)`` when the component has
-    no usable tetrahedra. Shared by the ``cloud`` and ``spheres`` representations.
-    """
+def _component_residence_spheres(comp, tetra_map, *, use_resident_nodes):
+    """Return maximum-clearance residence spheres for a component."""
     centers_list = []
     radii_list = []
     for tid in _component_node_indices(comp, use_resident_nodes=use_resident_nodes):
@@ -55,12 +74,23 @@ def _component_spheres(comp, tetra_map, mesh, *, use_resident_nodes):
         if 'center' in t and 'R_residence' in t:
             centers_list.append(t['center'])
             radii_list.append(t['R_residence'])
-        else:
-            centers_list.append(mesh.delaunay.alpha_sphere_centers[tid])
-            radii_list.append(mesh.delaunay.alpha_sphere_radii[tid])
     if not centers_list:
         return None, None
     return np.array(centers_list, dtype=float), np.array(radii_list, dtype=float)
+
+
+def _component_alpha_spheres(comp, mesh, *, use_resident_nodes):
+    """Return geometric Delaunay circumspheres for a component."""
+    tetrahedron_ids = list(
+        _component_node_indices(comp, use_resident_nodes=use_resident_nodes)
+    )
+    if not tetrahedron_ids:
+        return None, None
+    centers = np.asarray(mesh.delaunay.alpha_sphere_centers, dtype=float)[
+        tetrahedron_ids
+    ]
+    radii = np.asarray(mesh.delaunay.alpha_sphere_radii, dtype=float)[tetrahedron_ids]
+    return centers, radii
 
 
 def show_dfnd_components(
@@ -87,6 +117,7 @@ def show_dfnd_components(
     resolution: float | None = None,
     smoothing: float | None = None,
     iso_level: float | None = None,
+    radius_scale: float | None = None,
 ) -> Any:
     """Render DFND components into the viewer using multiple representation modes.
 
@@ -100,13 +131,15 @@ def show_dfnd_components(
         Render wet components (pockets, voids, channels).
     show_dry : bool, default False
         Render dry components (hydrophobic core, dry banks).
-    representation : {'tetrahedra', 'cloud', 'spheres', 'surface', 'coast_faces', 'skeleton'}, default 'tetrahedra'
+    representation : {'tetrahedra', 'cloud', 'residence_spheres', 'alpha_spheres', 'probe_centers', 'surface', 'coast_faces', 'graph'}, default 'tetrahedra'
         - 'tetrahedra': Volumetric Delaunay tetrahedra.
-        - 'cloud': Volumetric blob (iso-surface) from alpha-spheres.
-        - 'spheres': Sphere cloud of empty space spheres.
+        - 'cloud': Approximate iso-surface from residence spheres.
+        - 'residence_spheres': Maximum-clearance spheres inside resident tetrahedra.
+        - 'alpha_spheres': Geometric Delaunay circumspheres for diagnostics.
+        - 'probe_centers': Probe-sized spheres at maximum-clearance centers.
         - 'surface': Molecular pocket surface based on lining atom indices.
         - 'coast_faces': Boundary faces touching between wet and dry sides.
-        - 'skeleton': Simplification graph connecting barycenters.
+        - 'graph': DFN connectivity graph connecting tetrahedron barycenters.
     interfaces_only : bool, default False
         If True, only show components flagged as interfaces (wet_interfaces).
     component_ids : list of str, optional
@@ -137,6 +170,8 @@ def show_dfnd_components(
         Visual name of the layer.
     skip_digestion : bool, default False
         Bypass ArgDigest argument verification.
+    radius_scale : float, optional
+        For 'cloud': scales alpha-sphere radii before building the Gaussian field.
     """
     topography = _resolve_topography(view, topography)
     if topography is None:
@@ -145,6 +180,11 @@ def show_dfnd_components(
     dfnd_data = getattr(topography, 'dfnd', None)
     if dfnd_data is None:
         raise ValueError('Topography has no DFND data attached')
+
+    representation = {
+        'spheres': 'residence_spheres',
+        'skeleton': 'graph',
+    }.get(representation, representation)
 
     # Gather matching components
     selected_components = []
@@ -182,6 +222,14 @@ def show_dfnd_components(
     for mode in ('', '-nodes', '-edges', '-mouths', '-faces'):
         try:
             view.shapes.clear(tag=f'{tag_prefix}{mode}', skip_digestion=True)
+        except Exception:
+            pass
+
+    for comp in selected_components:
+        try:
+            view.shapes.clear(
+                tag=f'{tag_prefix}:{comp.component_id}', skip_digestion=True
+            )
         except Exception:
             pass
 
@@ -244,29 +292,15 @@ def show_dfnd_components(
         if not atom_quads:
             return None
 
-        # Build faces
-        face_meta = []
-        if draw_faces:
-            for face in select_faces(
-                topography, owner_tetrahedron_ids=selected_tetra_ids
-            ):
-                atoms = face.get('face_atoms_local')
-                if not atoms or len(atoms) != 3:
-                    continue
-                neighbor = face.get('neighbor_tetrahedron_id', -1)
-                permeability = face.get('permeability_state', 'unknown')
-                owner_tid = face.get('owner_tetrahedron_id')
-                color = tetra_to_color.get(owner_tid, 0x888888)
-                face_meta.append(
-                    {
-                        'atoms': [int(atom) for atom in atoms],
-                        'face_id': face.get('face_id'),
-                        'permeability': permeability,
-                        'owner_id': owner_tid,
-                        'neighbor_id': 'OCEAN' if neighbor == -1 else neighbor,
-                        'color': color,
-                    }
-                )
+        face_meta = (
+            _dfnd_face_meta(
+                topography,
+                selected_tetra_ids,
+                colors_by_tetrahedron=tetra_to_color,
+            )
+            if draw_faces
+            else []
+        )
 
         layer = view.shapes.add_tetrahedra(
             atom_quads=atom_quads,
@@ -290,13 +324,19 @@ def show_dfnd_components(
         )
         return layer
 
-
     elif representation == 'cloud':
-        # Render a separate volumetric pocket blob layer per component
+        # Render a separate volumetric pocket blob layer per component. The
+        # MolSysViewer blob defaults are broad for DFND residence spheres, so use
+        # conservative defaults unless the caller provides explicit values.
+        blob_resolution = 0.5 if resolution is None else resolution
+        blob_smoothing = 0.5 if smoothing is None else smoothing
+        blob_iso_level = 0.5 if iso_level is None else iso_level
+        blob_radius_scale = 0.6 if radius_scale is None else radius_scale
+
         for comp in selected_components:
             comp_id = comp.component_id
-            centers, radii = _component_spheres(
-                comp, tetra_map, mesh, use_resident_nodes=use_resident_nodes
+            centers, radii = _component_residence_spheres(
+                comp, tetra_map, use_resident_nodes=use_resident_nodes
             )
             if centers is None:
                 continue
@@ -309,23 +349,29 @@ def show_dfnd_components(
                 tag=tag,
                 layer_tag=tag_prefix,
                 name=f'{name} {comp_id}',
-                resolution=resolution,
-                smoothing=smoothing,
-                iso_level=iso_level,
+                resolution=blob_resolution,
+                smoothing=blob_smoothing,
+                iso_level=blob_iso_level,
+                radius_scale=blob_radius_scale,
                 skip_digestion=True,
             )
             layers.append(layer)
         return layers[0] if len(layers) == 1 else layers
 
-    elif representation == 'spheres':
-        # Render spheres cloud representing empty space using bulk shape sets
+    elif representation in {'residence_spheres', 'alpha_spheres'}:
+        # Residence spheres describe clearance; alpha-spheres describe geometry.
         layers = []
         for comp in selected_components:
             comp_id = comp.component_id
             color = resolved_colors[comp_id]
-            comp_centers, comp_radii = _component_spheres(
-                comp, tetra_map, mesh, use_resident_nodes=use_resident_nodes
-            )
+            if representation == 'residence_spheres':
+                comp_centers, comp_radii = _component_residence_spheres(
+                    comp, tetra_map, use_resident_nodes=use_resident_nodes
+                )
+            else:
+                comp_centers, comp_radii = _component_alpha_spheres(
+                    comp, mesh, use_resident_nodes=use_resident_nodes
+                )
             if comp_centers is None:
                 continue
 
@@ -335,6 +381,46 @@ def show_dfnd_components(
                 radii=puw.quantity(comp_radii, 'angstroms'),
                 color_alpha_spheres=color,
                 alpha_alpha_spheres=alpha,
+                tag=tag,
+                layer_tag=tag_prefix,
+                skip_digestion=True,
+            )
+            layers.append(layer)
+
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'probe_centers':
+        parameters = getattr(dfnd_data, 'parameters', {})
+        probe_radius = parameters.get('probe_radius')
+        if probe_radius is None:
+            raise ValueError(
+                "DFND data must provide parameters['probe_radius'] for probe_centers"
+            )
+        if puw.is_quantity(probe_radius):
+            probe_radius = float(puw.get_value(probe_radius, to_unit='angstroms'))
+        else:
+            probe_radius = float(probe_radius)
+
+        for comp in selected_components:
+            comp_id = comp.component_id
+            color = resolved_colors[comp_id]
+            centers, residence_radii = _component_residence_spheres(
+                comp, tetra_map, use_resident_nodes=use_resident_nodes
+            )
+            if centers is None:
+                continue
+            valid_centers = residence_radii >= probe_radius
+            centers = centers[valid_centers]
+            if not len(centers):
+                continue
+            tag = f'{tag_prefix}:{comp_id}'
+            layer = view.shapes.add_sphere(
+                center=puw.quantity(centers, 'angstroms'),
+                radius=puw.quantity(probe_radius, 'angstroms'),
+                color=color,
+                alpha=alpha,
                 tag=tag,
                 layer_tag=tag_prefix,
                 skip_digestion=True,
@@ -412,8 +498,8 @@ def show_dfnd_components(
         )
         return layer
 
-    elif representation == 'skeleton':
-        # Render DFN graph simplified skeleton
+    elif representation == 'graph':
+        # Render the component-filtered DFN connectivity graph.
         barycenter = {
             tet['tetrahedron_id']: coords[tet['local_atom_indices']].mean(axis=0)
             for tet in mesh.tetrahedra
@@ -476,4 +562,3 @@ def show_dfnd_components(
             'n_nodes': len(centers_list),
             'n_edges': len(edge_pairs),
         }
-

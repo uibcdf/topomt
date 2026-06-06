@@ -600,9 +600,9 @@ def test_show_dfnd_tetrahedra_creates_shapes():
 
 
 def test_simplex_menu_selection_sets_native_selection_and_is_inspectable():
-    from topomt.dfnd.graph import DelaunayFlowNetwork
-    from molsysviewer_topomt.addon import on_enable, on_context_action
+    from molsysviewer_topomt.addon import on_context_action, on_enable
     from molsysviewer_topomt.simplex_selection import ACTION_ID, simplex_selection_info
+    from topomt.dfnd.graph import DelaunayFlowNetwork
 
     net = DelaunayFlowNetwork(
         'topomt/data/synthetic/tetrahedron_void.pdb', selection='all'
@@ -636,8 +636,8 @@ def test_simplex_menu_selection_sets_native_selection_and_is_inspectable():
 
 
 def test_show_dfnd_tetrahedra_edges_carry_edge_metadata():
-    from topomt.dfnd.graph import DelaunayFlowNetwork
     from molsysviewer_topomt.render import show_dfnd_tetrahedra
+    from topomt.dfnd.graph import DelaunayFlowNetwork
 
     net = DelaunayFlowNetwork(
         'topomt/data/synthetic/tetrahedron_void.pdb', selection='all'
@@ -658,8 +658,8 @@ def test_show_dfnd_tetrahedra_edges_carry_edge_metadata():
 
 
 def test_resolve_simplices_maps_atom_selection_to_dfnd_simplices():
-    from topomt.dfnd.graph import DelaunayFlowNetwork
     from molsysviewer_topomt.simplex_selection import resolve_simplices
+    from topomt.dfnd.graph import DelaunayFlowNetwork
 
     net = DelaunayFlowNetwork(
         'topomt/data/synthetic/tetrahedron_void.pdb', selection='all'
@@ -1036,7 +1036,12 @@ def test_show_dfnd_components_creates_shapes():
                 )
             )
             self.tetrahedra = [
-                {'tetrahedron_id': 0, 'local_atom_indices': [0, 1, 2, 3]}
+                {
+                    'tetrahedron_id': 0,
+                    'local_atom_indices': [0, 1, 2, 3],
+                    'center': [0.5, 0.5, 0.5],
+                    'R_residence': 1.5,
+                }
             ]
             self.faces = []
 
@@ -1113,9 +1118,220 @@ def test_show_dfnd_components_creates_shapes():
     assert blob_messages
     assert blob_messages[0]['options']['layer_tag'] == 'dfnd-comp'
     assert 'color_map' not in blob_messages[0]['options']
+    assert blob_messages[0]['options']['iso_level'] == 0.5
+    assert blob_messages[0]['options']['smoothing'] == 0.5
+    assert blob_messages[0]['options']['resolution'] == 0.5
+    assert blob_messages[0]['options']['radius_scale'] == 0.6
 
     # Test surface mode
     view = DummyView()
     layer = show_dfnd_components(view, topo, representation='surface')
     assert layer is not None
     assert any(msg['op'] == 'add_pocket_surface' for msg in view.messages)
+
+
+def test_dfnd_component_palette_is_okabe_ito_colour_blind_safe():
+    """Phase 0: the family palette is the fixed Okabe-Ito assignment.
+
+    See devguide/DFND/component_visualization.md §11 and
+    component_visualization_implementation.md (Phase 0).
+    """
+    from topomt.dfnd import families as fam
+    from molsysviewer_topomt.render import _components as comp
+
+    # Fixed family -> Okabe-Ito hexes (no arbitrary choices).
+    assert comp._TYPE_PALETTE[fam.POCKET] == 0x0072B2  # blue
+    assert comp._TYPE_PALETTE[fam.VOID] == 0x56B4E9  # sky blue
+    assert comp._TYPE_PALETTE[fam.CHANNEL] == 0xE69F00  # orange
+    assert comp._TYPE_PALETTE[fam.PERCOLATING] == 0xCC79A7  # reddish purple
+    assert comp._TYPE_PALETTE[fam.DRY_BANK] == 0x999999  # grey
+
+    # pocket (blue) and void (sky blue) are deliberately two blues: a pocket is a
+    # void with one opening, separated by luminance + the mouth primitive.
+    assert comp._TYPE_PALETTE[fam.POCKET] != comp._TYPE_PALETTE[fam.VOID]
+
+    # Mouth/gate accent is the reserved yellow, used by no family.
+    assert comp._MOUTH_ACCENT == 0xF0E442
+    assert comp._MOUTH_ACCENT not in comp._TYPE_PALETTE.values()
+
+    # Interface bodies: bipartite pair is vermillion + bluish green.
+    assert comp._INTERFACE_BODY_COLORS[0] == 0xD55E00
+    assert comp._INTERFACE_BODY_COLORS[1] == 0x009E73
+
+    # Every palette colour comes from the Okabe-Ito catalog.
+    okabe = set(comp._OKABE_ITO.values())
+    assert set(comp._TYPE_PALETTE.values()) <= okabe
+    assert comp._MOUTH_ACCENT in okabe
+    assert set(comp._INTERFACE_BODY_COLORS) <= okabe
+    assert set(comp._DISTINCT_PALETTE_LIST) <= okabe
+
+
+def test_show_dfnd_components_replaces_component_tag_between_representations():
+    class MockMesh:
+        def __init__(self):
+            self.atoms = types.SimpleNamespace(
+                coords=np.array(
+                    [[0.0, 0.0, 0.0], [1.0, 1.0, 1.0], [2.0, 2.0, 2.0], [3.0, 3.0, 3.0]]
+                )
+            )
+            self.tetrahedra = [
+                {
+                    'tetrahedron_id': 0,
+                    'local_atom_indices': [0, 1, 2, 3],
+                    'center': [0.5, 0.5, 0.5],
+                    'R_residence': 1.5,
+                }
+            ]
+            self.faces = []
+
+            class FakeDelaunay:
+                alpha_sphere_centers = np.array([[0.5, 0.5, 0.5]])
+                alpha_sphere_radii = np.array([1.5])
+
+            self.delaunay = FakeDelaunay()
+
+    component = types.SimpleNamespace(
+        component_id='WET-2',
+        family='pocket',
+        side='wet',
+        node_indices=[0],
+        resident_node_indices=[0],
+        atom_indices=[0, 1, 2, 3],
+        volume=10.0,
+    )
+    topo = types.SimpleNamespace(
+        dfnd=types.SimpleNamespace(
+            mesh=MockMesh(),
+            dfn=types.SimpleNamespace(
+                components=types.SimpleNamespace(wet=[component], dry=[])
+            ),
+            raw={'faces': [], 'tetrahedra': []},
+        )
+    )
+
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    view = DummyView()
+    cloud_layer = show_dfnd_components(
+        view, topo, representation='cloud', component_ids=['WET-2']
+    )
+    assert cloud_layer is not None
+
+    spheres_layer = show_dfnd_components(
+        view, topo, representation='spheres', component_ids=['WET-2']
+    )
+    assert spheres_layer is not None
+    assert getattr(spheres_layer, 'tag') == 'dfnd-comp:WET-2'
+
+
+def test_dfnd_face_meta_includes_faces_touching_selected_tetrahedra():
+    from molsysviewer_topomt.render._common import _dfnd_face_meta
+
+    raw = {
+        'faces': [
+            {
+                'face_id': 7,
+                'owner_tetrahedron_id': 0,
+                'neighbor_tetrahedron_id': 1,
+                'face_atoms_local': [10, 11, 12],
+                'permeability_state': 'permeable',
+            },
+            {
+                'face_id': 8,
+                'owner_tetrahedron_id': 2,
+                'neighbor_tetrahedron_id': 1,
+                'face_atoms_local': [11, 12, 13],
+                'permeability_state': 'non_permeable',
+            },
+        ]
+    }
+
+    face_meta = _dfnd_face_meta(raw, {1}, colors_by_tetrahedron={1: 0x123456})
+
+    assert [entry['face_id'] for entry in face_meta] == [7, 8]
+    assert face_meta[0]['color'] == 0x123456
+    assert face_meta[1]['permeability'] == 'non_permeable'
+
+
+def test_show_dfnd_components_explicit_sphere_modes_and_graph_alias():
+    class MockMesh:
+        atoms = types.SimpleNamespace(
+            coords=np.array(
+                [
+                    [0.0, 0.0, 0.0],
+                    [1.0, 0.0, 0.0],
+                    [0.0, 1.0, 0.0],
+                    [0.0, 0.0, 1.0],
+                ]
+            )
+        )
+        tetrahedra = [
+            {
+                'tetrahedron_id': 0,
+                'local_atom_indices': [0, 1, 2, 3],
+                'center': [0.25, 0.25, 0.25],
+                'R_residence': 2.5,
+            },
+            {
+                'tetrahedron_id': 1,
+                'local_atom_indices': [0, 1, 2, 3],
+                'center': [0.75, 0.75, 0.75],
+                'R_residence': 1.0,
+            },
+        ]
+        faces = []
+        delaunay = types.SimpleNamespace(
+            alpha_sphere_centers=np.array([[0.5, 0.5, 0.5]]),
+            alpha_sphere_radii=np.array([7.5]),
+        )
+
+    component = types.SimpleNamespace(
+        component_id='WET-1',
+        family='pocket',
+        side='wet',
+        node_indices=[0, 1],
+        resident_node_indices=[0],
+        atom_indices=[0, 1, 2, 3],
+        volume=10.0,
+    )
+    topo = types.SimpleNamespace(
+        dfnd=types.SimpleNamespace(
+            mesh=MockMesh(),
+            dfn=types.SimpleNamespace(
+                components=types.SimpleNamespace(wet=[component], dry=[]),
+                graph=types.SimpleNamespace(faces=[]),
+            ),
+            raw={'faces': [], 'tetrahedra': []},
+            parameters={'probe_radius': 1.4},
+        )
+    )
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    residence_view = DummyView()
+    show_dfnd_components(residence_view, topo, representation='residence_spheres')
+    assert residence_view.messages[-1]['options']['alpha_spheres'][
+        'radii'
+    ] == pytest.approx([2.5])
+
+    alpha_view = DummyView()
+    show_dfnd_components(alpha_view, topo, representation='alpha_spheres')
+    assert alpha_view.messages[-1]['options']['alpha_spheres'][
+        'radii'
+    ] == pytest.approx([7.5])
+
+    probe_view = DummyView()
+    show_dfnd_components(
+        probe_view,
+        topo,
+        representation='probe_centers',
+        use_resident_nodes=False,
+    )
+    assert probe_view.messages[-1]['op'] == 'add_sphere'
+    assert probe_view.messages[-1]['options']['radius'] == pytest.approx(1.4)
+    assert probe_view.messages[-1]['options']['center'] == pytest.approx(
+        [0.25, 0.25, 0.25]
+    )
+
+    graph = show_dfnd_components(DummyView(), topo, representation='graph')
+    skeleton = show_dfnd_components(DummyView(), topo, representation='skeleton')
+    assert graph['n_nodes'] == skeleton['n_nodes'] == 1
