@@ -1281,7 +1281,6 @@ def _edge_mu_rank_maps(
     hull_edges: set[tuple[int, int]] = set()
 
     for simplex_index in range(mesh.n_simplices):
-        simplex = [int(atom_index) for atom_index in mesh.simplex_atom_indices[simplex_index]]
         for face_index in range(4):
             face_atoms = mesh.get_face_atoms(simplex_index, face_index)
             face_rho_rank = int(face_rho_ranks[simplex_index, face_index])
@@ -1340,7 +1339,6 @@ def _vertex_mu_rank_arrays(
                 vertex_mu2_ranks[vertex_index] = int(edge_mu2_rank)
 
     for simplex_index in range(mesh.n_simplices):
-        simplex = [int(atom_index) for atom_index in mesh.simplex_atom_indices[simplex_index]]
         for face_index in range(4):
             if not bool(face_is_on_hull[simplex_index, face_index]):
                 continue

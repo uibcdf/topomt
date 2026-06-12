@@ -412,3 +412,7 @@ def test_probe_sweep_wall_seals_the_larger_probe():
     n_void_large = sum(1 for d in large if d['family'] == 'void')
     assert n_void_small == 0          # small probe leaks through the wall gaps
     assert n_void_large >= 1          # larger probe cannot pass -> enclosed void
+
+
+def test_rotate_is_not_wrapped_as_a_synthetic_system_builder():
+    assert not hasattr(syn.rotate, "__wrapped__")

@@ -83,7 +83,6 @@ __all__ = [
     "show_dfn_graph",
     "show_dfnd_components",
     "simplex_selection_info",
-    "new_view",
     "build_topography_standalone0_html",
     "launch_topography_standalone0",
 ]

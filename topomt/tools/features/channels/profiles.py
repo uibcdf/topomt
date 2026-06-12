@@ -9,6 +9,15 @@ def _to_numpy(array: np.ndarray | list | tuple) -> np.ndarray:
     return np.asarray(array, dtype=float)
 
 
+def _validate_profile_inputs(points: np.ndarray, axis: np.ndarray, n_bins: int) -> None:
+    if points.ndim != 2 or points.shape[1] != 3 or len(points) == 0:
+        raise ValueError('centers must contain at least one point with shape (n, 3)')
+    if axis.shape != (3,):
+        raise ValueError('axis must have shape (3,)')
+    if not isinstance(n_bins, int) or isinstance(n_bins, bool) or n_bins <= 0:
+        raise ValueError('n_bins must be a positive integer')
+
+
 def cross_section_profile(
     centers: np.ndarray,
     axis: np.ndarray,
@@ -33,6 +42,7 @@ def cross_section_profile(
 
     points = _to_numpy(centers)
     axis = _to_numpy(axis)
+    _validate_profile_inputs(points, axis, n_bins)
     norm = np.linalg.norm(axis)
     if norm == 0:
         raise ValueError('Axis vector cannot be zero.')
@@ -48,7 +58,7 @@ def cross_section_profile(
     perpendicular = points - axis_projection
     radial_distances = np.linalg.norm(perpendicular, axis=1)
 
-    indices = np.digitize(projection, bins) - 1
+    indices = np.clip(np.digitize(projection, bins) - 1, 0, n_bins - 1)
     for bin_index in range(n_bins):
         mask = indices == bin_index
         if np.any(mask):
@@ -131,6 +141,7 @@ def thickness_profile(
 
     points = _to_numpy(centers)
     axis = _to_numpy(axis)
+    _validate_profile_inputs(points, axis, n_bins)
     norm = np.linalg.norm(axis)
     if norm == 0:
         raise ValueError('Axis vector cannot be zero.')
@@ -161,7 +172,7 @@ def thickness_profile(
             local_radii = np.zeros(len(points))
 
     profile = np.zeros(n_bins, dtype=float)
-    indices = np.digitize(projection, bins) - 1
+    indices = np.clip(np.digitize(projection, bins) - 1, 0, n_bins - 1)
     for bin_index in range(n_bins):
         mask = indices == bin_index
         if np.any(mask):

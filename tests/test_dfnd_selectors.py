@@ -171,3 +171,23 @@ def test_select_components_returns_component_ids_tetrahedra_and_atoms():
         side='wet',
         family='pocket',
     ) == ['WET-1']
+
+
+def test_select_face_ids_fallback_preserves_original_raw_position_after_filtering():
+    raw = _raw_records()
+    raw['faces'][2].pop('face_id')
+
+    assert select_face_ids(
+        {'raw': raw},
+        permeability_state='non_permeable',
+    ) == [2]
+
+
+def test_select_components_accepts_contextual_and_support_keys():
+    result = _dfnd_result()
+    wet = result['raw']['wet_components'][0]
+    wet['component_key'] = 'component-wet-1'
+    wet['support_key'] = 'support-wet-1'
+
+    assert select_components(result, component_keys='component-wet-1') == [wet]
+    assert select_components(result, support_keys='support-wet-1') == [wet]

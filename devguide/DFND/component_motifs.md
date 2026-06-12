@@ -104,6 +104,33 @@ over-segmented components.
 Candidate operations are reported as descriptors or diagnostics until their
 scoring and stability policies are fixed.
 
+### 2.1. Three distinct persistence axes
+
+DFND uses the word *persistence* in three related but non-interchangeable senses.
+They must remain separate in APIs, records, and validation:
+
+1. **Capacity persistence within one query.** A fixed mesh and probe query are
+   analyzed across capacity thresholds such as `R_gate`. This supports chamber,
+   throat, bottleneck, and watershed-like motif ranking inside one component.
+2. **Probe-radius persistence across queries.** Components and motifs are matched
+   across a sweep of `R_probe`. This measures scale robustness and can reveal
+   events such as birth, split, merge, family change, or disappearance as probe
+   size changes. It does not by itself guarantee a correct segmentation of
+   subpockets within one component.
+3. **Temporal persistence across trajectory frames.** Instantaneous results are
+   matched across changing coordinates. This measures lifetime, breathing, and
+   dynamic events and is defined in [`dynamic_topology.md`](dynamic_topology.md).
+
+A future hierarchical representation should store the axis and query context of
+every relation. Capacity, probe-scale, and temporal trees must not be collapsed
+into one generic `TopographicTree` before identity and typed-relation contracts
+are fixed.
+
+For segmentation, capacity persistence is the primary within-component tool. A
+probe-radius sweep is complementary evidence about robustness and accessibility
+at different scales. Temporal persistence is a separate collection-level
+analysis.
+
 ## 3. Topological Depth
 
 For a concavity component `D`, define exterior-boundary nodes as nodes incident to
@@ -196,7 +223,17 @@ Only `external_link` is currently canonical. The other motif names are useful
 but should remain candidate descriptors until exact scoring and persistence
 rules are validated.
 
-## 7. Reduced Component Graph
+## 7. Motif identity
+
+Every emitted motif carries `parent_component_key`, `motif_support_key`, and
+`motif_key`. The support key describes its exact atom-defined face or tetrahedron
+support; the contextual key combines that support with the parent component and
+`motif_type`. External-mouth motifs additionally carry the source
+`external_link_key`. Local motif and external-link IDs remain available for
+inspection and compatibility, but are not structural or temporal identity. See
+[`component_identity_contract.md`](component_identity_contract.md).
+
+## 8. Reduced Component Graph
 
 A `reduced_component_graph` is a graph produced by component lumping.
 
@@ -219,7 +256,7 @@ A `component_motif_graph` is a semantically annotated reduced component graph. I
 the preferred representation for high-level paths and motifs once the lumping
 policy is selected.
 
-## 8. Geometric Realization
+## 9. Geometric Realization
 
 Every graph motif should be traceable back to geometry:
 
@@ -239,7 +276,7 @@ geometric realization second
 
 This avoids forcing ambiguous molecular-surface geometry to define topology.
 
-## 9. Dynamic Interpretation
+## 10. Dynamic Interpretation
 
 In trajectories, motif time series can report:
 

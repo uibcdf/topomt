@@ -1,38 +1,54 @@
 from __future__ import annotations
 
 import copy
-from typing import Any, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
-from topomt.config import atom_label_format as default_atom_label_format
 from topomt._private.atom_label import parse_list_of_atom_labels
-from ._feature_constants import _FEATURE_TYPE_TO_CLASS_NAME, _DIMENSIONALITY_BY_FEATURE_TYPE, \
-        _SHAPE_TYPE_BY_FEATURE_TYPE
+from topomt.config import atom_label_format as default_atom_label_format
+
+from ._feature_constants import (
+    _DIMENSIONALITY_BY_FEATURE_TYPE,
+    _FEATURE_TYPE_TO_CLASS_NAME,
+    _SHAPE_TYPE_BY_FEATURE_TYPE,
+)
 
 FeatureID = str
 FeatureIndex = int
 FeatureType = str
-ShapeType = Literal["concavity", "convexity", "mixed", "boundary", "point"]
+ShapeType = Literal['concavity', 'convexity', 'mixed', 'boundary', 'point']
 Dimensionality = Literal[0, 1, 2, None]
 
+if TYPE_CHECKING:
+    from topomt.topography import Topography
 
-class BaseFeature():
 
-    def __init__(self, feature_id=None, feature_type=None, atom_indices=None, atom_labels=None,
-                 atom_label_format=None, feature_label=None, source=None, source_id=None, topography=None):
+class BaseFeature:
+    def __init__(
+        self,
+        feature_id=None,
+        feature_type=None,
+        atom_indices=None,
+        atom_labels=None,
+        atom_label_format=None,
+        feature_label=None,
+        source=None,
+        source_id=None,
+        topography=None,
+    ):
         """
-            atom_indices : sequence of int, optional
-            For topographic features, these indices are expected to identify the
-            atoms that geometrically delimit the feature, i.e. lining or
-            tangential/osculating atoms of the receptor.
+        atom_indices : sequence of int, optional
+        For topographic features, these indices are expected to identify the
+        atoms that geometrically delimit the feature, i.e. lining or
+        tangential/osculating atoms of the receptor.
 
-            atom_label_format : str, optional
-            Format string for atom labels, e.g. `"{atom_name}-{atom_id}"`.
+        atom_label_format : str, optional
+        Format string for atom labels, e.g. `"{atom_name}-{atom_id}"`.
         """
 
         if atom_label_format is None:
             atom_label_format = default_atom_label_format
 
-        self.feature_id = feature_id
+        self._feature_id = feature_id
         self.feature_type = feature_type
         self.feature_label = feature_label
         self.source = source
@@ -53,18 +69,21 @@ class BaseFeature():
             feature_id = self._topography.add_feature(self)
 
         if source is None:
-            self.source = "TopoMT"
+            self.source = 'TopoMT'
             self.source_id = self.feature_id
 
-        if (self.atom_indices is None) and (self.atom_labels is not None) and (self._topography is not None):
+        if (
+            (self.atom_indices is None)
+            and (self.atom_labels is not None)
+            and (self._topography is not None)
+        ):
             self.atom_indices = self._get_atom_indices_from_atom_labels()
 
     def __repr__(self):
         class_name = _FEATURE_TYPE_TO_CLASS_NAME.get(self.feature_type)
-        return f"<TopoMT {class_name} with feature_id={self.feature_id}>"
+        return f'<TopoMT {class_name} with feature_id={self.feature_id}>'
 
-
-    def copy(self, deep: bool = True) -> 'BaseFeature':
+    def copy(self, deep: bool = True) -> BaseFeature:
         """Return a copy of the Topography object.
 
         Parameters
@@ -75,7 +94,6 @@ class BaseFeature():
         """
         return copy.deepcopy(self) if deep else copy.copy(self)
 
-
     def __copy__(self):
 
         new_feature = self.__class__.__new__(self.__class__)
@@ -85,7 +103,6 @@ class BaseFeature():
             else:
                 setattr(new_feature, k, copy.copy(v))
         return new_feature
-
 
     def __deepcopy__(self, memo):
 
@@ -98,13 +115,27 @@ class BaseFeature():
                 setattr(new_feature, k, copy.deepcopy(v, memo))
         return new_feature
 
-
     def info(self):
         return {
             'feature_id': self.feature_id,
             'feature_type': self.feature_type,
-            "shape_type": self.shape_type,
+            'shape_type': self.shape_type,
         }
+
+    @property
+    def feature_id(self):
+        return self._feature_id
+
+    @feature_id.setter
+    def feature_id(self, value):
+        if self._topography is not None and value != self._feature_id:
+            raise AttributeError(
+                'feature_id is immutable while registered; use Topography.rename_feature().'
+            )
+        self._feature_id = value
+
+    def _set_registered_feature_id(self, value: str) -> None:
+        self._feature_id = value
 
     @property
     def id(self):
@@ -143,13 +174,17 @@ class BaseFeature():
     def _get_atom_indices_from_atom_labels(self):
 
         if self._topography is None:
-            raise ValueError("Topography is not set for this feature.")
+            raise ValueError('Topography is not set for this feature.')
 
-        dict_of_lists = parse_list_of_atom_labels(self.atom_labels, self.atom_label_format, output_type='dict of lists')
+        dict_of_lists = parse_list_of_atom_labels(
+            self.atom_labels, self.atom_label_format, output_type='dict of lists'
+        )
         if 'atom_id' in dict_of_lists:
             dict_of_lists['atom_id'] = [int(x) for x in dict_of_lists['atom_id']]
         if 'group_id' in dict_of_lists:
             dict_of_lists['group_id'] = [int(x) for x in dict_of_lists['group_id']]
-        atom_indices = self._topography._molsys.topology.get_atom_indices(**dict_of_lists)
+        atom_indices = self._topography._molsys.topology.get_atom_indices(
+            **dict_of_lists
+        )
 
         return atom_indices

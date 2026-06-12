@@ -114,10 +114,47 @@ Current v1 policy:
 Open discussion:
 
 - whether a later high-precision mode should use analytic sphere-tetrahedron
-  intersections;
+  intersections, deterministic adaptive integration, or another validated route;
 - whether accessible volume should be approximated by transit tetrahedra only;
 - whether COAST candidates contribute;
 - whether marginal gates should be included, excluded, or reported separately.
+
+#### High-precision physical-volume evaluation plan
+
+The current estimator is deterministic barycentric sampling, not Monte Carlo. A
+higher-precision implementation must therefore be justified by accuracy, physical
+meaning, and measured performance rather than by reproducibility alone.
+
+Before selecting an algorithm, define the target quantity precisely. At minimum,
+distinguish local empty volume inside resident tetrahedra from the physically
+accessible union of empty space for the complete component. A robust method must
+consider:
+
+- the **union** of atom-excluded regions, avoiding double subtraction where atomic
+  spheres overlap inside a tetrahedron;
+- unequal atomic radii, tolerances, degenerate intersections, and sliver
+  tetrahedra;
+- possible intrusion by atoms that are not vertices of the local tetrahedron;
+- whether the quantity is local empty volume, probe-center-accessible volume, or
+  a CASTp-like solvent/molecular-surface metric;
+- uncertainty or error bounds for any approximate integration route.
+
+Candidate routes include exact or semi-analytic sphere-polyhedron union formulas,
+deterministic adaptive integration, and accelerated bounded approximations. No
+route should be called exact or preferred until validated.
+
+Validation must include:
+
+1. zero-radius and fully occupied tetrahedra;
+2. single-sphere intersections with known references;
+3. overlapping spheres where independent subtraction would fail;
+4. unequal radii, near-tangent cases, and slivers;
+5. synthetic cavities with analytic empty volume;
+6. comparison against trusted CASTp/VOLBL-style references where semantics match;
+7. measured accuracy and runtime on representative proteins.
+
+A future publication-grade metric should use a new explicit name and preserve the
+current estimate for provenance and comparison.
 
 ### 2.4. External-link and derived mouth area
 

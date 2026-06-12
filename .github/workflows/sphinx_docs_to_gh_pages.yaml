@@ -62,7 +62,7 @@ jobs:
           echo "::group::Importing module from home directory"
           cd
           pwd
-          echo 'import pocketmt; print("Version of the package: {}".format(pocketmt.__version__))' | python
+          echo 'import topomt; print("Version of the package: {}".format(topomt.__version__))' | python
           echo "::endgroup::"
 
       - name: Running the Sphinx to gh-pages Action

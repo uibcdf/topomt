@@ -72,8 +72,12 @@ Every DFND feature exposed through `get_topography(method='dfnd')` must provide:
 - `flags`
 - `raw_record`
 
-`source` is always `dfnd`. `source_id` is stable within one DFND run and encodes
-the source, family, and raw identifier.
+`source` is always `dfnd`. For promoted parent concavity features, `source_id`
+is the contextual `component_key` defined in
+[`component_identity_contract.md`](component_identity_contract.md). A promoted
+mouth uses its contextual `external_link_key` as its own `source_id` and carries
+`parent_component_key` to identify its parent component context. Neither field is
+temporal identity.
 
 ## 5. Metrics Contract
 

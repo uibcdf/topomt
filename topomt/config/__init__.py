@@ -20,8 +20,8 @@ def set_default_quantities_parser(form='pint'):
     from topomt import pyunitwizard as puw
     puw.configure.set_default_parser(form)
 
-def set_default_standard_units(standards=['nm', 'ps', 'K', 'mole', 'amu', 'e',
-    'kJ/mol', 'kJ/(mol*nm**2)', 'N', 'degrees']):
+def set_default_standard_units(standards=('nm', 'ps', 'K', 'mole', 'amu', 'e',
+    'kJ/mol', 'kJ/(mol*nm**2)', 'N', 'degrees')):
 
     from topomt import pyunitwizard as puw
     puw.configure.set_standard_units(standards)

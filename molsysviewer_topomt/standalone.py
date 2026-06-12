@@ -61,7 +61,7 @@ def build_topography_standalone0_html(
         structure_indices=structure_indices,
         syntax=syntax,
         load_mode=load_mode,
-        render=feature_ids is None,
+        show=feature_ids is None,
         tag_prefix=tag_prefix,
         skip_digestion=True,
     )
@@ -129,7 +129,7 @@ def launch_topography_standalone0(
         structure_indices=structure_indices,
         syntax=syntax,
         load_mode=load_mode,
-        render=feature_ids is None,
+        show=feature_ids is None,
         tag_prefix=tag_prefix,
         skip_digestion=True,
     )

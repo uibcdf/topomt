@@ -261,6 +261,10 @@ Required fields:
 
 ```text
 component_id
+component_index
+node_count_rank
+support_key
+component_key
 transit_node_ids
 resident_node_ids
 transit_connector_node_ids
@@ -271,6 +275,10 @@ n_resident_nodes
 n_transit_connectors
 flags
 ```
+
+The identity semantics and migration from the currently implemented
+`size_rank` field are defined in
+[`component_identity_contract.md`](component_identity_contract.md).
 
 ### 5.3. ResidenceRegion
 

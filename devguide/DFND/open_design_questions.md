@@ -7,8 +7,12 @@ while the abstract corpus is being stabilized.
 Priority for the next discussion round:
 
 ```text
-1, 2, 8, 9, 18, 20, 22, 23
+7 (dynamic part), 17, 19, 24, 25
 ```
+
+Questions 1, 2, 8, 9, 18, and 20 have first-implementation decisions. Static
+identity and contextual provenance in question 7 are implemented; only dynamic
+matching/lineage and cross-system identity remain open there.
 
 ## 1. External-Link Connectivity
 
@@ -87,15 +91,23 @@ contexts may be needed.
 
 ## 7. Component Identity
 
-Define stable identifiers:
+Status: **static component identity and contextual provenance implemented on
+2026-06-06; dynamic tracking pending**.
 
-```text
-id
-external_link_id
-motif_id
-```
+The authoritative decision is recorded in
+[`component_identity_contract.md`](component_identity_contract.md):
 
-Likely based on atom quadruplets/triplets and frame/context.
+- `component_id` remains a local human-readable rank label;
+- canonical ranking uses `n_nodes`, exposed as `node_count_rank`;
+- `support_key` identifies exact atom-defined tetrahedral support;
+- `component_key` identifies the classified component in one result context;
+- external links and motifs expose exact support and contextual keys;
+- dynamic continuity uses unbranched `track_id` segments and a lineage graph.
+
+Still open:
+
+- cross-system atom identity beyond a stable atom-index substrate;
+- temporal matching thresholds and confidence policy.
 
 ## 8. Data Model
 

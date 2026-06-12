@@ -73,9 +73,9 @@ and the next engineering steps.
 - [CASTp/implementation.md](CASTp/implementation.md)
   From-scratch technical implementation plan for a faithful native CASTp path,
   explicitly separated from DFND semantics and from the current prototype.
-- [proposal_improvement/](proposal_improvement/)
-  Collected cross-repository improvement proposals for MolSysSuite sibling
-  packages identified while implementing TopoMT.
+- [pending_proposals/](pending_proposals/)
+  Intake area for unevaluated proposals that may change TopoMT or
+  `molsysviewer_topomt`.
 
 - [native_methods_plan.md](native_methods_plan.md)
   Native reimplementation plan for the prioritized engines and the intended
@@ -102,6 +102,16 @@ and the next engineering steps.
 - [packaging_and_environments.md](packaging_and_environments.md)
   Current packaging state, dependency metadata, and development environments.
 
+- [code_review_2026_06_06.md](code_review_2026_06_06.md)
+  Consolidated review of `topomt` and `molsysviewer_topomt`, with confirmed
+  defects, architectural risks, correction work packages, and acceptance
+  criteria.
+
+- [architecture_review_2026_06_06.md](architecture_review_2026_06_06.md)
+  Scientific and software-architecture assessment of TopoMT, DFND, and
+  `molsysviewer_topomt`, including strengths, conceptual tensions, target
+  directions, and decisions required before structural refactoring.
+
 ## Engine directories
 
 Engine-specific notes are now grouped in dedicated subdirectories when a topic
@@ -123,11 +133,13 @@ has multiple related checkpoint or contract documents:
 
 ## Proposal directories
 
-Cross-project improvement proposals are grouped separately from engine notes:
+Proposal intake is separated by ownership:
 
-- [proposal_improvement/](proposal_improvement/)
-  Draft proposals for `molsysmt`, `molsysviewer`, `smonitor`,
-  `pyunitwizard`, `argdigest`, `depdigest`, and related sibling libraries.
+- [pending_proposals/](pending_proposals/)
+  Pending proposals whose implementation would change TopoMT or
+  `molsysviewer_topomt`.
+Requests owned by another MolSysSuite library must be written in that
+repository's own `devguide/pending_proposals/` directory.
 
 ## DFND
 
@@ -136,6 +148,7 @@ The DFND material is grouped under the dedicated `DFND/` subdirectory. The most 
 - [DFND/Overview.md](DFND/Overview.md)
 - [DFND/checkpoint.md](DFND/checkpoint.md)
 - [DFND/implementation_status.md](DFND/implementation_status.md)
+- [DFND/checkpoint_identity_provenance_registries_2026_06_06.md](DFND/checkpoint_identity_provenance_registries_2026_06_06.md)
 - [DFND/api_contract_v1.md](DFND/api_contract_v1.md)
 - [DFND/Technical_Design.md](DFND/Technical_Design.md)
 - [DFND/Algorithm.md](DFND/Algorithm.md)
@@ -175,7 +188,13 @@ The DFND material is grouped under the dedicated `DFND/` subdirectory. The most 
 - [DFND/dynamic_topology.md](DFND/dynamic_topology.md)
 - [DFND/4D_and_pharmacophores.md](DFND/4D_and_pharmacophores.md)
 
-DFND is the native TopoMT method direction and is now an active implementation-hardening track. It is not production-ready yet, but it has executable code, raw records, `Topography` integration, real-system smoke/monotonicity checks, and first dry-motif candidate records. The main `devguide/` should describe the whole project, not only DFND.
+DFND is the native TopoMT method direction and is now an active
+implementation-hardening track. It is not production-ready yet, but it has
+executable code, deterministic static identity and contextual provenance, atomic
+feature/component registries, `Topography` integration, real-system
+smoke/monotonicity checks, and wet/dry motif records. Dynamic lineage, canonical
+traversability hardening, reporting policy, and biological validation remain.
+The main `devguide/` should describe the whole project, not only DFND.
 
 When DFND is mentioned from the main developer guide, it should normally be in
 one of these roles:

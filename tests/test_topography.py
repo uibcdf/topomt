@@ -55,7 +55,6 @@ def test_empty_Topography_with_molecular_system(topography_empty_1tcd):
 
 def test_Topography_new_pocket(topography_empty_1tcd):
 
-    pdb_file = tmt.demo['TcTIM']['1tcd.pdb']
     topography = topography_empty_1tcd
 
     feature_id = topography.add_new_feature(feature_type='pocket', atom_indices=[1,2,3])    
@@ -350,7 +349,7 @@ def test_get_topography_argdigest_standardizes_engine_and_structure_index(monkey
 
     monkeypatch.setattr(get_topography_module, '_run_pycasta', fake_run_pycasta)
 
-    topo = get_topography(
+    get_topography(
         tmt.demo['TcTIM']['1tcd.pdb'],
         engine='pycasta',
         structure_index=0,
@@ -452,8 +451,6 @@ def test_run_pycasta_wrapper_routes_to_wrapper_integration(topography_empty_1tcd
 
 
 def test_get_topography_wrapper_kwargs_do_not_emit_digest_not_digested_warning(monkeypatch):
-    get_topography_module = importlib.import_module('topomt.get_topography')
-
     def fake_wrapper(molecular_system, **kwargs):
         return tmt.Topography(
             molecular_system=molecular_system,
@@ -502,3 +499,14 @@ def test_pocketeer_sasa_warning_uses_topomt_catalog_warning():
     assert result.shape == (3,)
     assert len(caught) == 1
     assert isinstance(caught[0].message, smonitor_module.PocketeerSasaBackendWarning)
+
+def test_connect_features_rejects_unsupported_argument_types():
+
+    topography = tmt.Topography()
+    pocket = Pocket(feature_id='POC-1', atom_indices=[1, 2, 3])
+
+    with pytest.raises(TypeError, match='child_feature_or_id'):
+        topography.connect_features(123, pocket)
+
+    with pytest.raises(TypeError, match='parent_feature_or_id'):
+        topography.connect_features(pocket, object())

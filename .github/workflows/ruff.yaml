@@ -1,0 +1,38 @@
+name: Ruff
+
+on:
+  push:
+    branches: ["main"]
+    paths:
+      - "topomt/**/*.py"
+      - "molsysviewer_topomt/**/*.py"
+      - "pyproject.toml"
+      - ".github/workflows/ruff.yaml"
+  pull_request:
+    branches: ["main"]
+    paths:
+      - "topomt/**/*.py"
+      - "molsysviewer_topomt/**/*.py"
+      - "pyproject.toml"
+      - ".github/workflows/ruff.yaml"
+  workflow_dispatch:
+
+jobs:
+  critical-lint:
+    name: Critical lint rules
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install Ruff
+        run: python -m pip install "ruff>=0.15,<0.16"
+
+      - name: Run critical Ruff checks
+        run: ruff check topomt molsysviewer_topomt --select F821,F822,F823,F841,B006,B023

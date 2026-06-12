@@ -13,6 +13,7 @@ feature's `shape_type`/`dimensionality` are derived from `feature_type`).
 
 from __future__ import annotations
 
+import copy
 from collections import defaultdict, deque
 from collections.abc import Iterator, Mapping
 from typing import Any
@@ -20,6 +21,7 @@ from typing import Any
 # side is derived from family (single source of truth in families.py), exactly as
 # feature shape/dimensionality are derived from feature_type in _feature_constants.
 from . import families as fam
+from .identity import external_link_support_key, motif_key, support_key
 
 _SIDE_BY_FAMILY = fam.SIDE_BY_FAMILY
 _COMPONENT_PREFIX_BY_SIDE = {'wet': 'WET', 'dry': 'DRY'}
@@ -38,13 +40,25 @@ class Component:
         center=None,
         flags=None,
         component_index=None,
+        node_count_rank=None,
         size_rank=None,
         graph_label=None,
+        support_key=None,
+        component_key=None,
+        tetrahedron_support=None,
     ):
-        self.component_id = component_id
+        self._component_id = component_id
         self.component_index = component_index
+        self.node_count_rank = node_count_rank
         self.size_rank = size_rank
         self.graph_label = graph_label
+        self.support_key = support_key
+        self.component_key = component_key
+        self.tetrahedron_support = (
+            [tuple(item) for item in tetrahedron_support]
+            if tetrahedron_support is not None
+            else []
+        )
         self.family = family
         self.side = _SIDE_BY_FAMILY.get(family)  # derived from family
         # component facet (the graph object)
@@ -60,6 +74,21 @@ class Component:
         self.flags = list(flags) if flags is not None else []
         self.raw_record: dict[str, Any] | None = None
         self._components: Components | None = None
+
+    @property
+    def component_id(self):
+        return self._component_id
+
+    @component_id.setter
+    def component_id(self, value):
+        if self._components is not None and value != self._component_id:
+            raise AttributeError(
+                'component_id is immutable while registered; use Components.rename().'
+            )
+        self._component_id = value
+
+    def _set_registered_component_id(self, value: str) -> None:
+        self._component_id = value
 
     @property
     def size(self) -> int:
@@ -80,6 +109,7 @@ class WetComponent(Component):
         self.resident_node_indices: list[int] = []
         self.transit_connector_node_indices: list[int] = []
         self.external_link_ids: list[int] = []
+        self.external_link_keys: list[str] = []
         self.n_mouths = 0
         self.n_wall_faces = 0
         self.has_residence = False
@@ -99,6 +129,12 @@ class WetComponent(Component):
         # keyed by DRY-id -> {tetrahedron_ids (the dry wall tetrahedra),
         # contact_face_ids (the coast faces), area}. See devguide/DFND/interfaces.md.
         self.dry_lining: dict[str, dict[str, Any]] = {}
+        # Canonical and experimental wet-component motifs.
+        self.topological_depth: dict[int, int] = {}
+        self.depth_regions: list[dict[str, Any]] = []
+        self.throat_candidates: list[dict[str, Any]] = []
+        self.chamber_candidates: list[dict[str, Any]] = []
+        self.bottleneck: dict[str, Any] | None = None
 
     def __repr__(self) -> str:
         tag = f' {self.interface_family}' if self.is_interface else ''
@@ -107,15 +143,6 @@ class WetComponent(Component):
             f'family={self.family}{tag} nodes={self.size} '
             f'atoms={len(self.atom_indices)}>'
         )
-        # canonical motif layer (component_motifs.md section 3): topological depth
-        self.topological_depth: dict[int, int] = {}
-        self.depth_regions: list[dict[str, Any]] = []
-        # experimental capacity-persistence motifs (component_motifs.md sections 4/6):
-        # throats are low-capacity saddles, chambers are high-capacity basins,
-        # ranked by topological persistence. Descriptors, not a hard classifier.
-        self.throat_candidates: list[dict[str, Any]] = []
-        self.chamber_candidates: list[dict[str, Any]] = []
-        self.bottleneck: dict[str, Any] | None = None
 
 
 class DryComponent(Component):
@@ -130,6 +157,7 @@ class DryComponent(Component):
         self.dry_depth_max = None
         self.dry_depth_mean = None
         self.motif_ids: list[int] = []
+        self.motif_keys: list[str] = []
         # wet/dry adjacency (layer 2): the wet components this bank lines, keyed by
         # WET-id -> {tetrahedron_ids (the wet tetrahedra it borders),
         # contact_face_ids, area}. The symmetric counterpart of
@@ -160,6 +188,7 @@ class Components(Mapping):
         self._components: dict[str, Component] = {}
         self._by_side: dict[str, set[str]] = {'wet': set(), 'dry': set()}
         self._by_family: dict[str, set[str]] = {}
+        self._by_key: dict[str, str] = {}
         self._neighbors_of: dict[str, set[str]] = {}
         # boundary relations (raw records; components reference them by id)
         self.external_links: list[dict[str, Any]] = []  # wet component -> OCEAN
@@ -184,19 +213,196 @@ class Components(Mapping):
         )
 
     # -- registration --
-    def add(self, component: Component) -> str:
+    @staticmethod
+    def _validate_component_id(component_id: str) -> None:
+        if not isinstance(component_id, str):
+            raise TypeError('component_id must be a string')
+        if not component_id:
+            raise ValueError('component_id must not be empty')
+
+    def _validate_new_component(
+        self, component: Component, *, allowed_id: str | None = None
+    ) -> str:
+        if not isinstance(component, Component):
+            raise TypeError('component must be a Component')
         component_id = component.component_id
+        self._validate_component_id(component_id)
+        if component.side not in {'wet', 'dry'}:
+            raise ValueError(f'Unknown component family: {component.family!r}')
+        if component._components is not None and component._components is not self:
+            raise ValueError('Component belongs to a different Components registry.')
+        if component_id in self._components and component_id != allowed_id:
+            raise ValueError(f"Component ID '{component_id}' is already registered.")
+        if component.component_key is not None:
+            owner_id = self._by_key.get(component.component_key)
+            if owner_id is not None and owner_id != allowed_id:
+                raise ValueError(
+                    f"Component key '{component.component_key}' is already registered."
+                )
+        return component_id
+
+    def _add_to_indexes(self, component: Component) -> None:
+        self._by_side.setdefault(component.side, set()).add(component.component_id)
+        self._by_family.setdefault(component.family, set()).add(component.component_id)
+        if component.component_key is not None:
+            self._by_key[component.component_key] = component.component_id
+
+    def _remove_from_indexes(self, component: Component) -> None:
+        self._by_side.get(component.side, set()).discard(component.component_id)
+        self._by_family.get(component.family, set()).discard(component.component_id)
+        if component.component_key is not None:
+            self._by_key.pop(component.component_key, None)
+
+    def add(self, component: Component) -> str:
+        if (
+            isinstance(component, Component)
+            and component.component_id in self._components
+            and self._components[component.component_id] is component
+        ):
+            return component.component_id
+        component_id = self._validate_new_component(component)
         self._components[component_id] = component
         component._components = self
-        self._by_side.setdefault(component.side, set()).add(component_id)
-        self._by_family.setdefault(component.family, set()).add(component_id)
+        self._add_to_indexes(component)
         self._neighbors_of.setdefault(component_id, set())
         return component_id
 
+    def replace(self, component_id: str, component: Component) -> Component:
+        """Atomically replace one component while preserving its relations."""
+        self._validate_component_id(component_id)
+        if component_id not in self._components:
+            raise KeyError(component_id)
+        replacement_id = self._validate_new_component(
+            component, allowed_id=component_id
+        )
+        if replacement_id != component_id:
+            raise ValueError('Replacement component_id must match the registered ID.')
+        previous = self._components[component_id]
+        if component is previous:
+            return previous
+        self._remove_from_indexes(previous)
+        self._components[component_id] = component
+        component._components = self
+        self._add_to_indexes(component)
+        previous._components = None
+        return previous
+
+    def rename(self, component_id: str, new_component_id: str) -> None:
+        """Atomically rename a registered component and registry references."""
+        self._validate_component_id(component_id)
+        self._validate_component_id(new_component_id)
+        if component_id not in self._components:
+            raise KeyError(component_id)
+        if new_component_id in self._components:
+            raise ValueError(
+                f"Component ID '{new_component_id}' is already registered."
+            )
+        if component_id == new_component_id:
+            return
+        component = self._components[component_id]
+        self._components = {
+            (new_component_id if key == component_id else key): value
+            for key, value in self._components.items()
+        }
+        for ids in (*self._by_side.values(), *self._by_family.values()):
+            if component_id in ids:
+                ids.remove(component_id)
+                ids.add(new_component_id)
+        self._neighbors_of = {
+            (new_component_id if key == component_id else key): {
+                new_component_id if neighbor == component_id else neighbor
+                for neighbor in neighbors
+            }
+            for key, neighbors in self._neighbors_of.items()
+        }
+        component._set_registered_component_id(new_component_id)
+        if component.component_key is not None:
+            self._by_key[component.component_key] = new_component_id
+        self._rename_references(component_id, new_component_id)
+
+    def remove(self, component_id: str) -> Component:
+        """Atomically remove a component and clean registry-owned relations."""
+        self._validate_component_id(component_id)
+        if component_id not in self._components:
+            raise KeyError(component_id)
+        component = self._components.pop(component_id)
+        self._remove_from_indexes(component)
+        self._neighbors_of.pop(component_id, None)
+        for neighbors in self._neighbors_of.values():
+            neighbors.discard(component_id)
+        self._remove_references(component_id)
+        component._components = None
+        return component
+
+    def copy(self, deep: bool = True):
+        """Return a semantic registry copy with correctly rebound components."""
+        if deep:
+            return copy.deepcopy(self)
+        copied = copy.copy(self)
+        copied._components = {}
+        for component_id, component in self._components.items():
+            new_component = copy.copy(component)
+            new_component._components = copied
+            copied._components[component_id] = new_component
+        copied._by_side = {key: set(value) for key, value in self._by_side.items()}
+        copied._by_family = {key: set(value) for key, value in self._by_family.items()}
+        copied._by_key = dict(self._by_key)
+        copied._neighbors_of = {
+            key: set(value) for key, value in self._neighbors_of.items()
+        }
+        return copied
+
     def connect(self, component_id_a: str, component_id_b: str) -> None:
-        """Record a boundary adjacency between two components (e.g. dry interface)."""
-        self._neighbors_of.setdefault(component_id_a, set()).add(component_id_b)
-        self._neighbors_of.setdefault(component_id_b, set()).add(component_id_a)
+        """Record a boundary adjacency between two registered components."""
+        self._validate_component_id(component_id_a)
+        self._validate_component_id(component_id_b)
+        for component_id in (component_id_a, component_id_b):
+            if component_id not in self._components:
+                raise KeyError(component_id)
+        self._neighbors_of[component_id_a].add(component_id_b)
+        self._neighbors_of[component_id_b].add(component_id_a)
+
+    def _rename_references(self, old_id: str, new_id: str) -> None:
+        for component in self._components.values():
+            if isinstance(component, WetComponent):
+                if old_id in component.dry_lining:
+                    component.dry_lining[new_id] = component.dry_lining.pop(old_id)
+                component.lining_bodies = [
+                    new_id if value == old_id else value
+                    for value in component.lining_bodies
+                ]
+            if isinstance(component, DryComponent):
+                if old_id in component.wet_lining:
+                    component.wet_lining[new_id] = component.wet_lining.pop(old_id)
+                component.neighbor_component_ids = [
+                    new_id if value == old_id else value
+                    for value in component.neighbor_component_ids
+                ]
+        for face in self.coast_faces:
+            for field in ('wet_component_id', 'dry_component_id'):
+                if face.get(field) == old_id:
+                    face[field] = new_id
+
+    def _remove_references(self, component_id: str) -> None:
+        for component in self._components.values():
+            if isinstance(component, WetComponent):
+                component.dry_lining.pop(component_id, None)
+                component.lining_bodies = [
+                    value for value in component.lining_bodies if value != component_id
+                ]
+            if isinstance(component, DryComponent):
+                component.wet_lining.pop(component_id, None)
+                component.neighbor_component_ids = [
+                    value
+                    for value in component.neighbor_component_ids
+                    if value != component_id
+                ]
+        self.coast_faces = [
+            face
+            for face in self.coast_faces
+            if face.get('wet_component_id') != component_id
+            and face.get('dry_component_id') != component_id
+        ]
 
     # -- views (insertion order) --
     @property
@@ -231,6 +437,9 @@ class Components(Mapping):
     def get_component_by_id(self, component_id: str) -> Component:
         return self._components[component_id]
 
+    def get_component_by_key(self, component_key: str) -> Component:
+        return self._components[self._by_key[component_key]]
+
     def neighbors_of(self, component_id: str) -> set[Component]:
         return {
             self._components[c] for c in self._neighbors_of.get(component_id, set())
@@ -245,6 +454,9 @@ class Components(Mapping):
             ids = set(self._by_side.get(value, ()))
         elif by == 'family':
             ids = set(self._by_family.get(value, ()))
+        elif by == 'key':
+            values = {value} if isinstance(value, str) else set(value)
+            ids = {self._by_key[key] for key in values if key in self._by_key}
         elif by == 'id':
             ids = (
                 {value} & set(self._components)
@@ -289,14 +501,19 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
             center=record['center'],
             flags=record['flags'],
             component_index=record.get('component_index'),
+            node_count_rank=record.get('node_count_rank'),
             size_rank=record.get('size_rank'),
             graph_label=record.get('graph_label'),
+            support_key=record.get('support_key'),
+            component_key=record.get('component_key'),
+            tetrahedron_support=record.get('tetrahedron_support'),
         )
         component.resident_node_indices = record['resident_tetrahedron_ids']
         component.transit_connector_node_indices = record[
             'transit_connector_tetrahedron_ids'
         ]
         component.external_link_ids = record['external_link_ids']
+        component.external_link_keys = record.get('external_link_keys', [])
         component.n_mouths = record['n_external_links']
         component.n_wall_faces = record.get('n_wall_faces', 0)
         component.has_residence = record['has_residence']
@@ -313,10 +530,16 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
             atom_indices=record['atom_indices'],
             flags=record.get('flags', []),
             component_index=record.get('component_index'),
+            node_count_rank=record.get('node_count_rank'),
             size_rank=record.get('size_rank'),
             graph_label=record.get('graph_label'),
+            support_key=record.get('support_key'),
+            component_key=record.get('component_key'),
+            tetrahedron_support=record.get('tetrahedron_support'),
         )
         component.interface_ids = record.get('dry_interface_ids', [])
+        component.motif_ids = record.get('dry_motif_ids', [])
+        component.motif_keys = record.get('motif_keys', [])
         component.dry_depth_min = record.get('dry_depth_min')
         component.dry_depth_max = record.get('dry_depth_max')
         component.dry_depth_mean = record.get('dry_depth_mean')
@@ -398,7 +621,9 @@ def _attach_coast_and_lining(
                 'wet_tetrahedron_id': wet_t,
                 'dry_tetrahedron_id': dry_t,
                 'wet_component_id': wet_cid,
+                'wet_component_key': components[wet_cid].component_key,
                 'dry_component_id': dry_cid,
+                'dry_component_key': components[dry_cid].component_key,
                 'atom_indices': face['atom_indices'],
                 'area': area,
                 'R_gate': face.get('R_gate'),
@@ -407,11 +632,13 @@ def _attach_coast_and_lining(
         )
 
         wall = _slot(components[wet_cid].dry_lining, dry_cid)
+        wall['component_key'] = components[dry_cid].component_key
         wall['tetrahedron_ids'].add(dry_t)
         wall['contact_face_ids'].add(face['face_id'])
         wall['area'] += area
 
         lining = _slot(components[dry_cid].wet_lining, wet_cid)
+        lining['component_key'] = components[wet_cid].component_key
         lining['tetrahedron_ids'].add(wet_t)
         lining['contact_face_ids'].add(face['face_id'])
         lining['area'] += area
@@ -461,7 +688,7 @@ def _attach_interface_labels(components: Components, result: dict[str, Any]) -> 
         key=lambda c: c['size'],
         reverse=True,
     )
-    body_to_bank = {i: f"DRY-{record['id']}" for i, record in enumerate(ranked)}
+    body_to_bank = {i: f'DRY-{record["id"]}' for i, record in enumerate(ranked)}
     by_wet_id = {record['component_id']: record for record in classified}
 
     for component in components.wet:
@@ -474,7 +701,9 @@ def _attach_interface_labels(components: Components, result: dict[str, Any]) -> 
         if component.is_interface:
             component.interface_family = record['interface_family']
             component.lining_bodies = sorted(
-                body_to_bank[b] for b in record['lining_body_split'] if b in body_to_bank
+                body_to_bank[b]
+                for b in record['lining_body_split']
+                if b in body_to_bank
             )
 
 
@@ -555,9 +784,17 @@ def _attach_wet_motifs(components: Components, result: dict[str, Any]) -> None:
                 atom_ids = sorted(
                     {a for node in region_nodes for a in atoms_by_node[node]}
                 )
+                motif_support = support_key(
+                    [atoms_by_node[node] for node in region_nodes]
+                )
                 regions.append(
                     {
                         'motif_type': 'depth_region',
+                        'parent_component_key': component.component_key,
+                        'motif_support_key': motif_support,
+                        'motif_key': motif_key(
+                            component.component_key, 'depth_region', motif_support
+                        ),
                         'depth': dist,
                         'node_ids': region_nodes,
                         'atom_indices': atom_ids,
@@ -568,13 +805,30 @@ def _attach_wet_motifs(components: Components, result: dict[str, Any]) -> None:
         motifs = [
             {
                 'motif_type': 'external_mouth',
+                'parent_component_key': component.component_key,
+                'motif_support_key': external_links[link_id][
+                    'external_link_support_key'
+                ],
+                'motif_key': motif_key(
+                    component.component_key,
+                    'external_mouth',
+                    external_links[link_id]['external_link_support_key'],
+                ),
                 'external_link_id': link_id,
+                'external_link_key': external_links[link_id]['external_link_key'],
                 'atom_indices': external_links[link_id]['atom_indices'],
             }
             for link_id in component.external_link_ids
         ]
         motifs.extend(regions)
         component.motifs = motifs
+
+
+def _union_find_root(parent: dict[int, int], node: int) -> int:
+    while parent[node] != node:
+        parent[node] = parent[parent[node]]
+        node = parent[node]
+    return node
 
 
 def _attach_capacity_motifs(
@@ -617,26 +871,27 @@ def _attach_capacity_motifs(
         peak = {v: node_capacity[v] for v in component.node_indices}
         members = {v: {v} for v in component.node_indices}
 
-        def find(x):
-            while parent[x] != x:
-                parent[x] = parent[parent[x]]
-                x = parent[x]
-            return x
-
         throats = []
         chambers_by_peak: dict[int, dict[str, Any]] = {}
         for (a, b), capacity in sorted(edges.items(), key=lambda kv: -kv[1]):
-            ra, rb = find(a), find(b)
+            ra, rb = _union_find_root(parent, a), _union_find_root(parent, b)
             if ra == rb:
                 continue
             persistence = min(peak[ra], peak[rb]) - capacity
             if persistence >= min_persistence:
+                face_atoms = sorted(set(atoms_by_node[a]) & set(atoms_by_node[b]))
+                throat_support = external_link_support_key([face_atoms])
                 throats.append(
                     {
                         'motif_type': 'throat_candidate',
-                        'face_atoms': sorted(
-                            set(atoms_by_node[a]) & set(atoms_by_node[b])
+                        'parent_component_key': component.component_key,
+                        'motif_support_key': throat_support,
+                        'motif_key': motif_key(
+                            component.component_key,
+                            'throat_candidate',
+                            throat_support,
                         ),
+                        'face_atoms': face_atoms,
                         'R_gate': capacity,
                         'persistence': persistence,
                         'flags': ['experimental'],
@@ -644,8 +899,18 @@ def _attach_capacity_motifs(
                 )
                 for root in (ra, rb):
                     nodes = members[root]
+                    chamber_support = support_key(
+                        [atoms_by_node[node] for node in nodes]
+                    )
                     chambers_by_peak[max(nodes, key=lambda n: node_capacity[n])] = {
                         'motif_type': 'chamber_candidate',
+                        'parent_component_key': component.component_key,
+                        'motif_support_key': chamber_support,
+                        'motif_key': motif_key(
+                            component.component_key,
+                            'chamber_candidate',
+                            chamber_support,
+                        ),
                         'peak_R_residence': peak[root],
                         'persistence': persistence,
                         'node_ids': sorted(nodes),

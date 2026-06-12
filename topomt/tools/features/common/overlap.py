@@ -16,6 +16,8 @@ def jaccard_overlap_clusters(
         total_index = max((max(item) for item in lining_lists if item), default=0) + 1
     if total_index <= 0 or not lining_lists:
         return {}
+    if len(lining_lists) == 1:
+        return {0: [0]}
 
     matrix = np.zeros((len(lining_lists), total_index), dtype=int)
     for row_index, lining in enumerate(lining_lists):

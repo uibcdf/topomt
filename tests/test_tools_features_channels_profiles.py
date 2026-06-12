@@ -123,4 +123,34 @@ def test_thickness_profile_averages_local_radii_per_bin():
     )
 
     assert bin_centers.shape == (2,)
-    assert np.allclose(profile, np.array([1.0, 2.0]))
+    assert np.allclose(profile, np.array([1.0, 4.0 / 3.0]))
+
+def test_cross_section_profile_rejects_empty_points():
+
+    with pytest.raises(ValueError, match='centers must contain at least one point'):
+        cross_section_profile(np.empty((0, 3)), axis=np.array([1.0, 0.0, 0.0]))
+
+
+def test_cross_section_profile_includes_point_at_final_bin_edge():
+
+    centers = np.array(
+        [
+            [0.0, 1.0, 0.0],
+            [1.0, 3.0, 0.0],
+        ],
+        dtype=float,
+    )
+
+    _, radial_max = cross_section_profile(
+        centers,
+        axis=np.array([1.0, 0.0, 0.0]),
+        n_bins=1,
+    )
+
+    assert radial_max == pytest.approx([3.0])
+
+
+def test_thickness_profile_rejects_empty_points():
+
+    with pytest.raises(ValueError, match='centers must contain at least one point'):
+        thickness_profile(np.empty((0, 3)), axis=np.array([1.0, 0.0, 0.0]))

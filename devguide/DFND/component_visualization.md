@@ -5,11 +5,11 @@ components according to what they **mean** — a void is not drawn like a channe
 a channel is not drawn like a pocket, an interface is not drawn like either, and
 a static snapshot is not drawn like a trajectory.
 
-Status: proposal (2026-06-06). This document **merges** the implementation-anchored
-plan with the richer representation catalog from
-[../pending_proposals/visualization_representations_roadmap.md](../pending_proposals/visualization_representations_roadmap.md)
-(kept until this is ratified). Ideas adopted from it are tagged `(roadmap §N)`.
-The primitives in [§3](#3-what-exists-today) already exist in
+Status: proposal (2026-06-06). This document consolidates the
+implementation-anchored plan with the broader representation catalog previously
+kept as a separate draft. References tagged `(roadmap §N)` identify the original
+idea grouping retained during consolidation. The primitives in
+[§3](#3-what-exists-today) already exist in
 `molsysviewer`/`molsysviewer_topomt`; the per-family language, the dynamic and
 pharmacophoric axes, and the gaps in [§13](#13-gaps-versus-the-current-implementation)
 are not yet wired.
@@ -113,7 +113,7 @@ reach even though a molecular-surface curvature projection is not.
 Each `Component` (`topomt/dfnd/components.py`) already carries the fields a richer
 rendering needs:
 
-- identity/topology: `component_id`, `family`, `side`, `node_indices`,
+- local label/topology: `component_id`, `family`, `side`, `node_indices`,
   `resident_node_indices`, `boundary_face_ids`, `atom_indices`, `center`.
 - mouths/gates: `n_mouths`, `external_link_ids`, and (in the graph records)
   per-mouth `mouths` / `mouth_face_clusters` with `area_geometric`,
@@ -236,10 +236,12 @@ half the story. AlphaSpace2's *d-pockets* (`write_trajectory`) are the reference
 the viewer already has dynamic overlays (`displacements`, `anisotropy_ellipsoids`,
 `signal`).
 
-**Data precondition.** Every reading below assumes the DFND *core* emits
-components with **persistent identity across frames** (the d-pocket equivalent:
-the same cavity keeps the same id as it breathes, opens, merges or splits). That
-tracking is core work, not rendering — it is currently a *design*
+**Data precondition.** Every reading below assumes the DFND dynamic layer emits
+components with `track_id` segments and a lineage graph across frames. A
+continuous cavity keeps the same track identity as it breathes or changes
+accessibility; merges and splits connect different tracks through lineage
+events. `component_id` remains a local per-result rank label and must not drive
+temporal color. That tracking is core work, not rendering — it is currently a *design*
 ([dynamic_topology.md](dynamic_topology.md)), not an implemented output. The
 viewer can only render persistence/events once the model produces them; until
 then this section is a target, not a wiring task.
@@ -248,7 +250,7 @@ Target readings:
 
 - **Persistence as opacity/color** — a component surviving most frames is solid;
   a transient one is faint (d-pocket occupancy → alpha or a ramp).
-- **Identity tracking across frames** — a component keeps its color/id over time
+- **Identity tracking across frames** — a track keeps its color/id over time
   so the eye follows the same cavity; mouth opening/closing shows as the gate
   accent appearing/disappearing.
 - **Volume pulsation** — the blob/tube breathes with `volume_solvent_estimate`
@@ -473,8 +475,6 @@ Order that maximizes value per unit of work:
 - Numerical / triangulation policy: [numerical_policy.md](numerical_policy.md).
 - Dynamic / 4D / pharmacophores: [dynamic_topology.md](dynamic_topology.md),
   [4D_and_pharmacophores.md](4D_and_pharmacophores.md).
-- Source proposal being merged here:
-  [../pending_proposals/visualization_representations_roadmap.md](../pending_proposals/visualization_representations_roadmap.md).
 - Addon plan and checkpoint: [../viewer_addon_plan.md](../viewer_addon_plan.md),
   [../molsysviewer_topomt_checkpoint.md](../molsysviewer_topomt_checkpoint.md).
 - Reference tools studied: `~/repos@others/{AlphaSpace2,fpocket,pocketeer,pycasta}`,

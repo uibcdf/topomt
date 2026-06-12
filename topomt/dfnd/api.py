@@ -1,11 +1,10 @@
 from typing import Any
 
-from .graph import DelaunayFlowNetwork
-from .data import DFNDData
 from .. import pyunitwizard as puw
 from ..features import Channel, Mouth, Percolating, Pocket, Void
 from ..topography.Topography import Topography
-
+from .data import DFNDData
+from .graph import DelaunayFlowNetwork
 
 _FEATURE_CLASS_BY_FAMILY = {
     'pockets': Pocket,
@@ -27,13 +26,20 @@ def _as_angstrom_float(value) -> float:
         return float(value)
 
 
-def _feature_from_component_record(record: dict[str, Any], feature_class, source: str = 'dfnd'):
+def _feature_from_component_record(
+    record: dict[str, Any], feature_class, source: str = 'dfnd'
+):
     feature = feature_class(
         atom_indices=record['atom_indices'],
         source=source,
-        source_id=f"{source}:{record['family']}:{record['id']}",
+        source_id=f'{source}:{record["family"]}:{record["id"]}',
     )
     feature.family = record['family']
+    feature.component_key = record.get('component_key')
+    feature.support_key = record.get('support_key')
+    feature.component_index = record.get('component_index')
+    feature.node_count_rank = record.get('node_count_rank')
+    feature.size_rank = record.get('size_rank')
     feature.tetrahedron_indices = record['tetrahedron_indices']
     feature.resident_tetrahedron_indices = record['resident_tetrahedron_indices']
     feature.transit_connector_tetrahedron_indices = record[
@@ -119,9 +125,19 @@ def dfnd_to_topography(
     return the raw-first dictionary used for method development and validation.
     """
     network, result = _run_dfnd(
-        molecular_system, selection, structure_indices, probe_radius, sea_level,
-        min_size, epsilon, hydrogen_policy, radii_model, transit_policy,
-        gate_intrusion_policy, residence_tolerance, permeability_tolerance,
+        molecular_system,
+        selection,
+        structure_indices,
+        probe_radius,
+        sea_level,
+        min_size,
+        epsilon,
+        hydrogen_policy,
+        radii_model,
+        transit_policy,
+        gate_intrusion_policy,
+        residence_tolerance,
+        permeability_tolerance,
         dry_adjacency,
     )
     topography = Topography(
@@ -132,14 +148,14 @@ def dfnd_to_topography(
     topography.dfnd = DFNDData(network, result)
 
     # Promote each wet component to a concavity feature, and each of its mouth motifs
-    # (external links) to a child Mouth feature. Provenance: feature.component_id /
-    # source_id point back to the dfnd component. See object_model.md sections 7.
+    # (external links) to a child Mouth feature. The local component_id remains a
+    # display selector; contextual provenance uses component_key.
     components = topography.dfnd.dfn.components
     for family_key, feature_class in _FEATURE_CLASS_BY_FAMILY.items():
         for record in result['wet'][family_key]:
             feature = _feature_from_component_record(record, feature_class)
-            feature.component_id = f"WET-{record['id']}"
-            feature.source_id = feature.component_id
+            feature.component_id = f'WET-{record["id"]}'
+            feature.source_id = feature.component_key
             # Carry the interface descriptor (orthogonal axis) from the typed
             # component onto the public feature, so an interface is catalogued as
             # one. See devguide/DFND/interfaces.md.
@@ -155,10 +171,14 @@ def dfnd_to_topography(
                 mouth = Mouth(
                     atom_indices=list(link['atom_indices']),
                     source='dfnd',
-                    source_id=f"dfnd:mouth:{link['external_link_id']}",
+                    source_id=link['external_link_key'],
                 )
                 mouth.component_id = feature.component_id
+                mouth.component_key = feature.component_key
+                mouth.parent_component_key = feature.component_key
                 mouth.external_link_id = link['external_link_id']
+                mouth.external_link_support_key = link['external_link_support_key']
+                mouth.external_link_key = link['external_link_key']
                 mouth.area = puw.quantity(link['area_geometric'], 'angstroms**2')
                 topography.add_feature(mouth)
                 topography.connect_features(mouth, feature)
@@ -184,9 +204,19 @@ def dfnd(
 ) -> dict[str, dict[str, Any]]:
     """Run the DFND topography decomposition (raw-first dictionary)."""
     _network, raw_topography = _run_dfnd(
-        molecular_system, selection, structure_indices, probe_radius, sea_level,
-        min_size, epsilon, hydrogen_policy, radii_model, transit_policy,
-        gate_intrusion_policy, residence_tolerance, permeability_tolerance,
+        molecular_system,
+        selection,
+        structure_indices,
+        probe_radius,
+        sea_level,
+        min_size,
+        epsilon,
+        hydrogen_policy,
+        radii_model,
+        transit_policy,
+        gate_intrusion_policy,
+        residence_tolerance,
+        permeability_tolerance,
         dry_adjacency,
     )
 
@@ -216,9 +246,7 @@ def dfnd(
             'percolatings': percolatings,
             'surface_concavities': raw_topography['wet']['surface_concavities'],
             'nonresident_passages': raw_topography['wet']['nonresident_passages'],
-            'degenerate_subprobes': raw_topography['wet'][
-                'degenerate_subprobes'
-            ],
+            'degenerate_subprobes': raw_topography['wet']['degenerate_subprobes'],
         },
         'dry': raw_topography['dry'],
     }

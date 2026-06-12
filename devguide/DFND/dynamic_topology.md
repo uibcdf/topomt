@@ -69,8 +69,12 @@ DynamicFeature(
 )
 ```
 
-The static feature remains the per-frame result. The dynamic feature is the
-temporal identity that collects instances, events, and time series.
+The static feature remains the per-frame result. Dynamic identity follows
+[`component_identity_contract.md`](component_identity_contract.md): an
+unbranched `track_id` identifies a continuous temporal segment, while a
+`lineage` graph relates tracks through births, deaths, splits, and merges.
+`component_id`, `component_key`, and exact support equality are not temporal
+identity.
 
 ## 3. Preferred Tracking Hierarchy
 
@@ -102,6 +106,12 @@ Their frame-to-frame identity should be inferred from a composite score:
 
 Coordinates should help resolve ambiguity, but they should not be the primary
 identity model when graph identifiers are available.
+
+Exact `support_key` equality is strong continuation evidence, but is not
+required. `component_key` is contextual to one result and must not be compared
+as a track identifier. A split ends one track and starts multiple child tracks;
+a merge ends multiple parent tracks and starts one child track. The lineage
+graph preserves those N:M relations.
 
 ### 3.3. Fallback When the Triangulation Changes
 
@@ -289,7 +299,8 @@ It should provide:
 
 - per-frame DFND execution;
 - stable identifiers for tetrahedra and faces;
-- feature matching between consecutive frames;
+- component/feature matching between consecutive frames;
+- unbranched `track_id` segments and lineage events;
 - `DynamicFeature` records;
 - lifetime and persistence metrics;
 - volume and external-link time series;

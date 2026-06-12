@@ -19,9 +19,9 @@ banks emerge and the wet gap is an interface pocket lined by both banks.
 
 import numpy as np
 
-from topomt.dfnd.graph import DelaunayFlowNetwork
-from topomt.dfnd.data import DFNDData
 from topomt.dfnd import synthetic as syn
+from topomt.dfnd.data import DFNDData
+from topomt.dfnd.graph import DelaunayFlowNetwork
 
 
 def _dfnd(coords, radii, probe_radius=1.4):
@@ -37,6 +37,7 @@ def _two_blocks_dfnd():
 
 # -- typed family mapping: channels must not be dropped ---------------------------
 
+
 def test_two_mouth_channel_appears_in_typed_components():
     # Regression: a multi-mouth component (family 'channel', formerly the raw name
     # 'multi_external_link') must be mapped to side='wet' in
@@ -50,12 +51,13 @@ def test_two_mouth_channel_appears_in_typed_components():
     channels = [w for w in components.wet if w.family == 'channel']
     assert len(channels) == 1
     channel = channels[0]
-    assert channel.side == 'wet'          # not None -> it survives the wet view
-    assert channel.n_mouths == 2          # the two open ends of the tube
+    assert channel.side == 'wet'  # not None -> it survives the wet view
+    assert channel.n_mouths == 2  # the two open ends of the tube
     assert channel in components.wet
 
 
 # -- interface labelling on the typed components ----------------------------------
+
 
 def test_two_blocks_wet_component_is_flagged_interface_pocket():
     components = _two_blocks_dfnd().dfn.components
@@ -84,6 +86,7 @@ def test_single_body_system_has_no_wet_interface():
 
 
 # -- Layer 0: mesh.neighbors / dfn.graph.neighbors --------------------------------
+
 
 def test_mesh_neighbors_is_probe_independent_topology():
     dfnd = _two_blocks_dfnd()
@@ -138,6 +141,7 @@ def test_graph_neighbors_wet_dry_relation_is_symmetric():
 
 # -- Layer 1: coast faces ---------------------------------------------------------
 
+
 def test_coast_faces_connect_opposite_sides():
     components = _two_blocks_dfnd().dfn.components
 
@@ -148,10 +152,19 @@ def test_coast_faces_connect_opposite_sides():
     for face in coast:
         assert components[face['wet_component_id']].side == 'wet'
         assert components[face['dry_component_id']].side == 'dry'
+        assert (
+            face['wet_component_key']
+            == components[face['wet_component_id']].component_key
+        )
+        assert (
+            face['dry_component_key']
+            == components[face['dry_component_id']].component_key
+        )
         assert face['area'] >= 0.0
 
 
 # -- Layer 2: dry_lining / wet_lining symmetry ------------------------------------
+
 
 def test_dry_lining_and_wet_lining_are_symmetric():
     components = _two_blocks_dfnd().dfn.components
@@ -191,6 +204,7 @@ def test_interface_pocket_lining_area_is_substantial():
 
 
 # -- Layer 3: interface walls -----------------------------------------------------
+
 
 def test_interface_walls_mirror_the_wet_interface_banks():
     components = _two_blocks_dfnd().dfn.components

@@ -559,9 +559,9 @@ def _handle_tetra_seq(
             else int(face_index)
         )
         if hasattr(mesh, 'get_face_owner_indices'):
-            owner_left, owner_right = mesh.get_face_owner_indices(simplex_index, face_index)
+            _, owner_right = mesh.get_face_owner_indices(simplex_index, face_index)
         else:
-            owner_left, owner_right = simplex_index, int(neighbor)
+            owner_right = int(neighbor)
         canonical_owner_left, canonical_owner_right = _canonical_face_owner_indices(
             geometry,
             simplex_index,
@@ -1335,7 +1335,6 @@ def build_castp_feature_records(
 ) -> list[dict]:
     """Build CASTp-like feature records from the weighted tetrahedral substrate."""
 
-    mesh = geometry.mesh
     original_base_rank = int(geometry.base_rank)
     effective_base_rank = original_base_rank if alpha_rank is None else int(alpha_rank)
     if beta_rank is None:

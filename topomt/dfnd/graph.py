@@ -1,3 +1,5 @@
+from typing import Any
+
 import molsysmt as msm
 import numpy as np
 from scipy.sparse import coo_matrix
@@ -7,13 +9,24 @@ from topomt import pyunitwizard as puw
 from topomt.delaunay_mesh import DelaunayMesh
 from topomt.tools.tessellation import mouth_area_from_faces
 
+from . import families as fam
 from .core.clearance import (
     _KIND_BY_CODE,
     face_gate_radius_batch,
     tetrahedron_residence_radius_batch,
 )
 from .core.solvent_volume import tetrahedron_solvent_volume_estimate_batch
-from . import families as fam
+from .identity import (
+    canonical_tetrahedron_support,
+    component_key,
+    component_sort_key,
+    external_link_key,
+    external_link_support_key,
+    motif_key,
+    result_key,
+    substrate_key,
+    support_key,
+)
 
 
 def _component_center(
@@ -151,6 +164,13 @@ class DelaunayFlowNetwork:
                 'Not enough atoms to build Delaunay triangulation (min 4).'
             )
 
+        self.substrate_key = substrate_key(
+            {
+                'atom_indices': self.atom_indices_map,
+                'atom_coordinates': self.atom_coords,
+                'atom_radii': self.atom_radii,
+            }
+        )
         self.mesh = DelaunayMesh(points=self.atom_coords, atom_radii=self.atom_radii)
         self.tetra_atoms = self.mesh.simplices
         self.simplex_neighbors = self.mesh.neighbors
@@ -361,6 +381,20 @@ class DelaunayFlowNetwork:
         probe_radius = float(probe_radius)
         residence_tolerance = float(residence_tolerance)
         permeability_tolerance = float(permeability_tolerance)
+        for name, value in (
+            ('probe_radius', probe_radius),
+            ('residence_tolerance', residence_tolerance),
+            ('permeability_tolerance', permeability_tolerance),
+        ):
+            if not np.isfinite(value) or value < 0.0:
+                raise ValueError(f'{name} must be a finite non-negative number')
+        if (
+            isinstance(min_size, (bool, np.bool_))
+            or not isinstance(min_size, (int, np.integer))
+            or min_size < 0
+        ):
+            raise ValueError('min_size must be a non-negative integer')
+        min_size = int(min_size)
         if transit_policy not in {'resident_only', 'with_connectors'}:
             raise ValueError(
                 "transit_policy must be 'resident_only' or 'with_connectors'"
@@ -369,6 +403,27 @@ class DelaunayFlowNetwork:
             raise ValueError(
                 "gate_intrusion_policy must be 'flag_only' or 'block_suspect'"
             )
+
+        parameters = {
+            'probe_radius': probe_radius,
+            'epsilon_length': self.epsilon,
+            'residence_tolerance': residence_tolerance,
+            'permeability_tolerance': permeability_tolerance,
+            'sea_level': sea_level,
+            'radii_model': self.radii_model,
+            'selection': self.selection,
+            'structure_indices': self.structure_indices,
+            'hydrogen_policy': self.hydrogen_policy,
+            'transit_policy': transit_policy,
+            'gate_intrusion_policy': gate_intrusion_policy,
+            'dry_adjacency': dry_adjacency,
+            'min_size': min_size,
+            'substrate_key': self.substrate_key,
+        }
+        parameters['result_key'] = result_key(
+            {'substrate_key': self.substrate_key},
+            parameters,
+        )
 
         residence_slack = self.epsilon + residence_tolerance
         permeability_slack = self.epsilon + permeability_tolerance
@@ -606,6 +661,9 @@ class DelaunayFlowNetwork:
                         'faces': [
                             list(record['face_atoms_local']) for record in cluster
                         ],
+                        'external_link_support_key': external_link_support_key(
+                            [record['atom_indices'] for record in cluster]
+                        ),
                         'atom_indices': sorted(
                             {
                                 atom
@@ -647,6 +705,13 @@ class DelaunayFlowNetwork:
                     for atom_index in self.tetra_atoms[node]
                 }
             )
+            tetrahedron_support = canonical_tetrahedron_support(
+                [self.atom_indices_map[self.tetra_atoms[node]] for node in nodes]
+            )
+            component_support_key = support_key(tetrahedron_support)
+            component_context_key = component_key(
+                parameters['result_key'], 'wet', component_support_key
+            )
             volume_topological_transit = float(np.sum(self.mesh.simplex_volumes[nodes]))
             volume_topological_resident = (
                 float(np.sum(self.mesh.simplex_volumes[resident_nodes]))
@@ -686,6 +751,9 @@ class DelaunayFlowNetwork:
             component_record = {
                 'id': component_index,
                 'graph_label': graph_label,
+                'support_key': component_support_key,
+                'component_key': component_context_key,
+                'tetrahedron_support': tetrahedron_support,
                 'family': family,
                 'tetrahedron_ids': nodes,
                 'resident_tetrahedron_ids': resident_nodes,
@@ -739,6 +807,9 @@ class DelaunayFlowNetwork:
             compatibility_record = {
                 'id': component_index,
                 'graph_label': graph_label,
+                'support_key': component_support_key,
+                'component_key': component_context_key,
+                'tetrahedron_support': tetrahedron_support,
                 'family': family,
                 'tetrahedron_indices': nodes,
                 'transit_indices': nodes,
@@ -786,9 +857,7 @@ class DelaunayFlowNetwork:
                 else:
                     degenerate_subprobes.append(compatibility_record)
 
-        wet_components.sort(
-            key=lambda record: (-record['n_nodes'], record['graph_label'])
-        )
+        wet_components.sort(key=component_sort_key)
         wet_id_map = {}
         for component_index, record in enumerate(wet_components):
             old_id = int(record['id'])
@@ -796,17 +865,36 @@ class DelaunayFlowNetwork:
             wet_id_map[old_id] = new_id
             record['id'] = new_id
             record['component_index'] = component_index
+            record['node_count_rank'] = new_id
             record['size_rank'] = new_id
 
+        wet_key_by_id = {
+            record['id']: record['component_key'] for record in wet_components
+        }
         for link in external_links:
             link['component_id'] = wet_id_map[int(link['component_id'])]
+            link['component_key'] = wet_key_by_id[link['component_id']]
+            link['external_link_key'] = external_link_key(
+                link['component_key'], link['external_link_support_key']
+            )
         for region in residence_regions:
             region['component_id'] = wet_id_map[int(region['component_id'])]
+            region['component_key'] = wet_key_by_id[region['component_id']]
+        external_link_keys_by_component = {
+            record['id']: [] for record in wet_components
+        }
+        for link in external_links:
+            external_link_keys_by_component[link['component_id']].append(
+                link['external_link_key']
+            )
+        for record in wet_components:
+            record['external_link_keys'] = external_link_keys_by_component[record['id']]
         for record in compatibility_records:
             old_id = int(record['id'])
             new_id = wet_id_map[old_id]
             record['id'] = new_id
             record['component_index'] = new_id - 1
+            record['node_count_rank'] = new_id
             record['size_rank'] = new_id
 
         for family_records in (
@@ -821,7 +909,7 @@ class DelaunayFlowNetwork:
             family_records.sort(
                 key=lambda record: (
                     -len(record['tetrahedron_indices']),
-                    record['graph_label'],
+                    record['support_key'],
                 )
             )
 
@@ -829,17 +917,49 @@ class DelaunayFlowNetwork:
         dry_components = self._build_dry_components(
             dry_mask, face_permeable, min_size, dry_adjacency=dry_adjacency
         )
-        dry_components.sort(key=lambda record: (-record['size'], record['graph_label']))
+        for record in dry_components:
+            record['component_key'] = component_key(
+                parameters['result_key'], 'dry', record['support_key']
+            )
+        dry_components.sort(key=component_sort_key)
         for component_index, record in enumerate(dry_components):
             new_id = component_index + 1
             record['id'] = new_id
             record['component_index'] = component_index
+            record['node_count_rank'] = new_id
             record['size_rank'] = new_id
+        dry_key_by_id = {
+            record['id']: record['component_key'] for record in dry_components
+        }
         dry_interfaces = self._build_dry_interfaces(
             dry_components, dry_mask, face_permeable
         )
+        for interface in dry_interfaces:
+            interface['dry_component_key'] = dry_key_by_id[
+                interface['dry_component_id']
+            ]
+            target_id = interface['target_dry_component_id']
+            interface['target_dry_component_key'] = (
+                dry_key_by_id[target_id] if target_id is not None else None
+            )
         self._assign_dry_depths(dry_components, dry_interfaces)
         dry_motifs = self._build_dry_motifs(dry_components, dry_interfaces)
+        for motif in dry_motifs:
+            motif['dry_component_key'] = dry_key_by_id[motif['dry_component_id']]
+            motif['motif_key'] = motif_key(
+                motif['dry_component_key'],
+                motif['motif_type'],
+                motif['motif_support_key'],
+            )
+        dry_motifs_by_component = {record['id']: [] for record in dry_components}
+        for motif in dry_motifs:
+            dry_motifs_by_component[motif['dry_component_id']].append(motif)
+        for record in dry_components:
+            component_motifs = dry_motifs_by_component[record['id']]
+            record['dry_motif_ids'] = [
+                motif['dry_motif_id'] for motif in component_motifs
+            ]
+            record['motif_keys'] = [motif['motif_key'] for motif in component_motifs]
 
         # Edge records (probe-independent): stable id + the two atoms + incident
         # tetrahedra. An edge has no gate; it is identified by id and atoms.
@@ -872,18 +992,7 @@ class DelaunayFlowNetwork:
 
         return {
             'raw': {
-                'parameters': {
-                    'probe_radius': probe_radius,
-                    'epsilon_length': self.epsilon,
-                    'residence_tolerance': residence_tolerance,
-                    'permeability_tolerance': permeability_tolerance,
-                    'sea_level': sea_level,
-                    'radii_model': self.radii_model,
-                    'selection': self.selection,
-                    'hydrogen_policy': self.hydrogen_policy,
-                    'transit_policy': transit_policy,
-                    'gate_intrusion_policy': gate_intrusion_policy,
-                },
+                'parameters': parameters,
                 'tetrahedra': tetrahedron_records,
                 'faces': face_records,
                 'edges': edge_records,
@@ -1184,10 +1293,15 @@ class DelaunayFlowNetwork:
                 for atom_index in self.tetra_atoms[node]
             }
         )
+        tetrahedron_support = canonical_tetrahedron_support(
+            [self.atom_indices_map[self.tetra_atoms[node]] for node in tetrahedron_ids]
+        )
         return {
             'dry_motif_id': len(dry_motifs) + 1,
             'dry_component_id': int(component_id),
             'motif_type': motif_type,
+            'motif_support_key': support_key(tetrahedron_support),
+            'tetrahedron_support': tetrahedron_support,
             'tetrahedron_ids': [int(node) for node in tetrahedron_ids],
             'atom_indices': atom_indices,
             'dry_interface_ids': [
@@ -1201,9 +1315,7 @@ class DelaunayFlowNetwork:
         self, dry_mask, face_permeable, min_size, dry_adjacency='face'
     ):
         if dry_adjacency not in {'face', 'edge', 'vertex'}:
-            raise ValueError(
-                "dry_adjacency must be 'face', 'edge' or 'vertex'"
-            )
+            raise ValueError("dry_adjacency must be 'face', 'edge' or 'vertex'")
 
         # Always collect dry-dry non-permeable face records as metadata
         # (independent of which connectivity criterion is active). They tag
@@ -1326,10 +1438,15 @@ class DelaunayFlowNetwork:
                 }
             )
             component_edges = edges_by_label.get(label, [])
+            tetrahedron_support = canonical_tetrahedron_support(
+                [self.atom_indices_map[self.tetra_atoms[node]] for node in nodes]
+            )
             dry_components.append(
                 {
                     'id': int(label),
                     'graph_label': int(label),
+                    'support_key': support_key(tetrahedron_support),
+                    'tetrahedron_support': tetrahedron_support,
                     'tetrahedron_indices': nodes,
                     'atom_indices': atom_indices,
                     'size': len(nodes),

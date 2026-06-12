@@ -270,15 +270,19 @@ ten unrelated problems.
   a physical pocket volume. To compare with the community, it is insufficient.
 - **Why it matters.** Without a physical volume, DFND can classify components but
   its headline metric is weak against CASTp/fpocket from day one.
-- **Feasibility.** `volume_solvent_estimate` per tetra = tetra volume minus the
-  sum of (atom sphere intersected with the tetra). Sphere-tetrahedron
-  intersection has known analytical solutions (vertex/edge/face cases), but a
-  robust implementation with unequal radii, tolerances, and slivers is
-  geometrically delicate. Bounded effort, but not a throwaway helper.
-- **v1 policy.** `mitigate`. Implement `volume_solvent_estimate` in v1; keep
-  `volume_topological` only as an internal/debug proxy.
-- **Validation hook.** Compare `volume_solvent_estimate` against a reference on a
-  small known cavity.
+- **Feasibility.** The current `volume_solvent_estimate` uses deterministic
+  barycentric sampling against the four local atomic spheres. A higher-precision
+  physical metric is geometrically delicate: independent sphere-tetrahedron
+  subtraction can double-count overlapping excluded regions, and local vertices
+  do not capture every possible non-local atom intrusion. Unequal radii,
+  tolerances, tangencies, and slivers must also be handled explicitly.
+- **v1 policy.** `mitigate`. Keep the deterministic estimate clearly named and
+  keep `volume_topological` only as an internal/debug proxy. Evaluate analytical,
+  semi-analytical, and deterministic adaptive-integration routes before selecting
+  a publication-grade metric.
+- **Validation hook.** Use known sphere-tetrahedron cases, overlapping spheres,
+  unequal radii, slivers, analytic synthetic cavities, and trusted external
+  references whose metric semantics match. See [`metrics_contract.md`](metrics_contract.md).
 - **Origin.** new.
 
 ---

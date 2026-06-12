@@ -23,10 +23,14 @@ DFND is the native TopoMT method direction. It should not be forced into strict 
 
 The immediate DFND work is:
 
-- keep the raw data model traceable and stable;
-- keep `get_topography(method='dfnd')` integrated with `Topography`;
-- validate `R_residence`, `R_gate`, transit domains, external links, dry components, dry interfaces, dry motifs, and solvent-volume estimates;
-- inspect qualitative behavior on small real systems;
+- unify face permeability and wet-graph traversability under one canonical
+  predicate;
+- define a typed immutable DFND query contract and resolve inert/incomplete
+  query options;
+- keep the raw data model traceable and `get_topography(method='dfnd')`
+  integrated with `Topography`;
+- validate wet/dry components, links, motifs, metrics, and qualitative behavior
+  on controlled and real systems;
 - add reporting/filter policy before judging cavity quality;
 - profile and optimize query/build performance for larger systems.
 
@@ -36,15 +40,20 @@ The immediate DFND work is:
 - `DelaunayMesh` is the shared geometric substrate for Delaunay/tetrahedral work.
 - DFND now has active geometry, graph-contract, input-policy, Topography, solvent-volume, and real-system stability tests.
 - DFND supports the build-once/query-many workflow through `DelaunayFlowNetwork`.
+- Static component, external-link, and motif identity is deterministic and
+  separates local labels, exact support, and contextual provenance.
+- `Topography` and DFND `Components` registries enforce atomic mutation,
+  immutable registered IDs, coherent relations, and semantic copies.
 - `R_residence` and `R_gate` are implemented as clearance primitives with active tests.
 - DFND raw records separate topological/debug volumes from `volume_solvent_estimate`.
-- DFND exposes stable compatibility features for `void_domain`, `pocket_domain`, and `channel_domain`, while provisional families remain available through raw records.
+- DFND promotes stable void, pocket, and channel component families while provisional families remain available through `topography.dfnd`.
 - Dry-side records now include dry components, dry edges, dry interfaces, dry depth, and first candidate dry motifs.
 - Probe-radius sweeps on five small real systems obey the expected monotonicity invariants.
 
 Key DFND checkpoints:
 
 - [DFND/implementation_status.md](DFND/implementation_status.md)
+- [DFND/checkpoint_identity_provenance_registries_2026_06_06.md](DFND/checkpoint_identity_provenance_registries_2026_06_06.md)
 - [DFND/checkpoint_dfnd_hardening_stint.md](DFND/checkpoint_dfnd_hardening_stint.md)
 - [DFND/checkpoint_probe_radius_sweep.md](DFND/checkpoint_probe_radius_sweep.md)
 - [DFND/checkpoint_quality_snapshot.md](DFND/checkpoint_quality_snapshot.md)
@@ -73,7 +82,10 @@ The conventional engines remain important, but they are no longer the only activ
 - `volume_solvent_estimate` is deterministic and tested, but it is still an estimator, not a publication-grade CASTp-like analytic volume.
 - Tiny void/domain reporting policy is not settled.
 - Surface-concavity, nonresident-passage, and dry motif utility must be validated before becoming public feature families.
-- Dynamic topology is documented but not implemented.
+- Dynamic topology is documented but not implemented; matching thresholds,
+  confidence, and split/merge lineage policy must be decided first.
+- Canonical face permeability and wet-graph traversability still need to be
+  unified under one predicate.
 - Cross-engine benchmarks are not yet organized into a stable comparison battery.
 
 ## Practical Development Rule

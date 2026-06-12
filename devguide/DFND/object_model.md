@@ -134,24 +134,42 @@ there is one mental model for both levels.
 - **wet and dry are unified under `component`.** `side` is **derived from
   `family`** via a `_SIDE_BY_FAMILY` registry, mirroring how `BaseFeature` derives
   `shape_type`/`dimensionality` from `feature_type`.
+- The `Components` registry is atomic: component IDs are unique and immutable
+  while registered; re-adding the same object is idempotent; duplicate objects
+  are rejected; and explicit `replace`, `rename`, and `remove` operations keep
+  indexes, adjacency, wet/dry lining references, and coast-face references
+  coherent. `copy(deep=True)` produces an independent semantic registry copy.
 
 ## 6. The `Component` object — mirrors `BaseFeature` + `Pocket`/`Void`/`Channel`
 
 **`Component`** (base, ≡ `BaseFeature`):
-- `component_id`, `family`, `side` (derived), `flags`, `_dfn` back-ref;
+- `component_id` (local rank label), `component_index` (local collection
+  position), `node_count_rank`, deprecated compatibility alias `size_rank`,
+  `family`, `side` (derived), `flags`, `_dfn` back-ref;
+- exact/contextual identity: `support_key`, `component_key`;
+- internal implementation label: `graph_label`;
 - **graph facet**: `node_indices` (tetrahedra), `boundary_face_ids`;
 - **spatial representation (atoms)**: `atom_indices`, `volume`, `center`;
 - **motifs**: the component's sub-structures.
 
+The fields above follow the authoritative
+[`component_identity_contract.md`](component_identity_contract.md):
+`component_id`, `component_index`, and ranks are local to one result;
+`support_key` identifies exact tetrahedral support; `component_key` identifies
+that support and classification in one result context; temporal continuity uses
+`track_id` and a lineage graph in a separate dynamic layer.
+
 **`WetComponent`** (≡ concavity classes): `resident_node_indices`,
-`transit_connector_node_indices`, `external_link_ids`, `n_mouths`, `mouth_area`,
+`transit_connector_node_indices`, `external_link_ids`, `external_link_keys`,
+`n_mouths`, `mouth_area`,
 `has_residence`, `has_open_interior`, `volume_topological_resident`,
 `volume_solvent_estimate`; the interface descriptor `is_interface` /
 `interface_family` / `lining_bodies` / `lining_body_split` (§10,
 [`interfaces.md`](interfaces.md)); and the wet→dry adjacency `dry_lining` (§10).
 
 **`DryComponent`**: `interface_ids`, `neighbor_component_ids`,
-`dry_depth_{min,max,mean}` (+ per-node), `motif_ids`; and the dry→wet adjacency
+`dry_depth_{min,max,mean}` (+ per-node), `motif_ids`, `motif_keys`; and the
+dry→wet adjacency
 `wet_lining` + the named view `interface_walls` (§10).
 
 Two subclasses (not one per family) because the wet families differ only by the
@@ -172,7 +190,7 @@ family was named `multi_external_link` until 2026-06.)
 A single component yields a **feature subgraph**, not one feature:
 
 ```
-WetComponent(family='pocket', id='WET-3')   ──▶  Pocket   (feature.source_id = 'WET-3')
+WetComponent(family='pocket', id='WET-3')   ──▶  Pocket   (feature.source_id = component_key)
    ├── external_mouth motif                 ──▶  Mouth    (child via connect_features)
    ├── throat motif                         ──▶  Neck     (child)
    └── chamber motif                        ──▶  sub-Pocket (nested child)
@@ -182,8 +200,11 @@ WetComponent(family='pocket', id='WET-3')   ──▶  Pocket   (feature.source_
 - The component's **motifs** promote to **child features** (`Mouth`, throat→`Neck`,
   chamber→sub-`Pocket`), wired with `connect_features`. The feature parenthood
   *is* the component's motif structure.
-- Each feature carries `source_id = component_id` (and, for child features, the
-  motif id) as provenance → traceable feature → component → tetrahedra → atoms.
+- A promoted parent feature carries `source_id = component_key`. A promoted
+  child keeps its own contextual source identity (`external_link_key` for a
+  mouth) and carries `parent_component_key`, making feature → component →
+  tetrahedra → atoms traceable without treating a local
+  rank label as structural identity.
 - Provisional families (`surface_concavity`, `nonresident_passage`,
   `degenerate_subprobe`) and the dry interfaces are **not** promoted yet (no
   feature class for them); they remain available under `topography.dfnd`.
@@ -213,7 +234,7 @@ the contract spread further):
 | record field `domain_family` | `family` |
 | family strings `void_domain` / `pocket_domain` / `channel_domain` / … | `void` / `pocket` / `channel` / … (no `_domain` suffix) |
 | record field `domain_id` (component's own) | `id` |
-| `domain_id` referencing the parent (external links, residence regions) | `component_id` |
+| `domain_id` referencing the parent (external links, residence regions) | `component_id` (local compatibility) + `component_key` (contextual provenance) |
 | method `_classify_domain` | `_classify_component` |
 | view key `degenerate_subprobe_domains` | `degenerate_subprobes` |
 
@@ -246,8 +267,8 @@ ladder).
   component carries its graph facet (`node_indices`) and domain facet
   (`atom_indices`, `volume`, `center`). §5–§6.
 - **Phase 3 — DONE (mouths).** A wet domain promotes to its concavity feature
-  (`Pocket`/`Void`/`Channel`) with `feature.component_id` / `source_id` pointing
-  to the dfnd component, and each mouth motif (external link) promotes to a child
+  (`Pocket`/`Void`/`Channel`) with local `feature.component_id` and contextual
+  `source_id = component_key`; each mouth motif (external link) promotes to a child
   `Mouth` feature wired via `connect_features` (parent concavity → child mouth).
   §7.
 
@@ -298,7 +319,8 @@ neighbors per record would duplicate that array and mis-level the wet/dry split
 **Layer 1 — coast faces.** `dfn.components.coast_faces` is the materialized
 wet↔dry contact: every internal face whose two tetrahedra sit in components of
 opposite `side`. Each record carries `wet_tetrahedron_id` / `dry_tetrahedron_id`,
-`wet_component_id` / `dry_component_id`, `atom_indices`, `area`, `R_gate` and
+`wet_component_id` / `dry_component_id`, their contextual
+`wet_component_key` / `dry_component_key`, `atom_indices`, `area`, `R_gate` and
 `permeability_state`. This is the real *wall surface* (the per-face area, summed,
 is the contact area).
 

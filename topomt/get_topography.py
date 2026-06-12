@@ -97,7 +97,8 @@ def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: 
     else:
         raise ValueError(
             f"Unknown method {method!r}. Supported: 'pocketeer', 'fpocket', "
-            "'alphaspace2', 'castp', 'castpfold', 'pycasta', 'dfnd'."
+            "'fpocket4', 'alphaspace2', 'castp', 'castpfold', 'castp3', "
+            "'pycasta', 'dfnd'."
         )
 
     return topo

@@ -111,10 +111,11 @@ def show_dfn_graph(
             tip = face_centroid + normal * mouth_stub_angstrom
             mouth_pairs.append([origin.tolist(), tip.tolist()])
 
-    try:
-        view.shapes.clear(tag=tag_prefix, skip_digestion=True)
-    except Exception:
-        pass
+    for tag in (tag_prefix, f'{tag_prefix}-node', f'{tag_prefix}-edges', f'{tag_prefix}-mouths'):
+        try:
+            view.shapes.clear(tag=tag, skip_digestion=True)
+        except Exception:
+            pass
 
     node_layer = view.shapes.add_sphere(
         center=puw.quantity(np.asarray(centers), 'angstroms'),

@@ -1,5 +1,14 @@
 # Proposal: High-Performance GPU and Parallelization Roadmaps for Spatial Topology & Pocket Analysis
 
+**Status:** pending; requires profiling and dependency evaluation  
+**Created:** 2026-06-06  
+**Last reviewed:** 2026-06-06
+
+> This document is an exploratory option catalog. Proposed backends, complexity
+> claims, and speedups are hypotheses until measured against representative
+> TopoMT workloads. No dependency or execution model is approved by this
+> proposal.
+
 ## Abstract
 
 We propose a comprehensive parallelization and GPU-acceleration design system for `topomt`. Because topological pocket characterizations (such as AlphaSpace2 cavity voxelization, CASTp alpha shape triangulation, and pycasta pocket search) are extremely compute-intensive spatial solvers, implementing Numba JIT multi-threading, GPU-accelerated spatial indexing, and zero-copy data views will significantly accelerate pocket-detection pipelines, unlocking high-throughput dynamic trajectory pocket monitoring.
@@ -91,4 +100,39 @@ Because Delaunay triangulation, alpha shape determination, and cavity grid voxel
 1. **SPIR-V OpenCL Kernels**: Compile geometric pocket boundary solver routines into standard SPIR-V intermediate binaries.
 2. **Hardware-Agnostic GPU Acceleration**: Using `pyopencl`, `topomt` can execute these pre-compiled pocket voxelization kernels on any client GPU or CPU platform (such as AMD cards, integrated Intel HD graphics, or Apple Silicon GPUs). This ensures massive acceleration factors (up to **50x**) compared to standard CPU single-threaded execution while maintaining 100% open-source, vendor-independent software pipelines.
 3. **OpenGL Sharing Interoperability**: Share the voxel grid and alpha shape index buffers directly from the PyOpenCL compute context to `molsysviewer` WebGL rendering VBOs, eliminating expensive Device-to-Host (GPU to CPU) and Host-to-Device (CPU to GPU) memory transfers.
+---
+
+## 6. Evaluation Gates
+
+This proposal remains pending until it answers the following questions with
+measurements and small prototypes:
+
+1. Which first-party TopoMT kernels dominate runtime and memory on representative
+   static systems, probe sweeps, and trajectories?
+2. Which bottlenecks are already implemented in optimized NumPy/SciPy or external
+   libraries, and therefore unlikely to benefit from Python-level JIT work?
+3. What is the smallest useful CPU-parallel contract before adding GPU backends?
+4. Which optional dependency strategy preserves a lightweight, installable core?
+5. How are numerical parity, determinism, units, and index mapping validated across
+   CPU and accelerator implementations?
+6. Which configuration belongs to TopoMT and which requires a separate proposal in
+   MolSysMT's own `devguide/pending_proposals/`?
+
+The following claims are explicitly unapproved until demonstrated:
+
+- fixed speedup ranges such as 10x to 50x;
+- one transparent backend covering Numba, CuPy, CUDA, and OpenCL;
+- direct sharing between Python OpenCL buffers and browser WebGL buffers;
+- zero-copy ingestion without an explicit molecular-system ownership and
+  invalidation contract.
+
+### Required evidence before acceptance
+
+- reproducible profiler reports and benchmark datasets;
+- one prioritized kernel with CPU baseline and correctness tests;
+- measured crossover sizes for serial, multicore, and accelerator execution;
+- dependency, packaging, and CI impact;
+- fallback behavior on machines without accelerator support;
+- a decision on whether the work belongs in TopoMT, MolSysMT, or a lower-level
+  shared numerical package.
 

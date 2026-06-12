@@ -55,7 +55,7 @@ def test_get_topography_dfnd_returns_topography_with_raw_records(tmp_path):
         transit_policy='resident_only',
     )
 
-    from topomt.dfnd.components import WetComponent, DryComponent
+    from topomt.dfnd.components import DryComponent, WetComponent
 
     assert isinstance(topography, Topography)
     assert topography.dfnd is not None
@@ -65,7 +65,7 @@ def test_get_topography_dfnd_returns_topography_with_raw_records(tmp_path):
     assert len(components.wet) == len(dfnd_data.raw['wet_components'])
     assert all(isinstance(c, WetComponent) for c in components.wet)
     assert all(isinstance(c, DryComponent) for c in components.dry)
-    assert components.by_family('void')                        # void domain promoted below
+    assert components.by_family('void')  # void domain promoted below
     # graph-level relations still reference the raw records
     assert dfnd_data.dfn.graph.external_links is dfnd_data.raw['external_links']
     assert components.interfaces is dfnd_data.raw['dry_interfaces']
@@ -81,6 +81,10 @@ def test_get_topography_dfnd_returns_topography_with_raw_records(tmp_path):
     assert void.source == 'dfnd'
     assert void.family == 'void'
     assert void.raw_record['family'] == 'void'
+    assert void.support_key == void.raw_record['support_key']
+    assert void.component_key == void.raw_record['component_key']
+    assert void.node_count_rank == void.raw_record['node_count_rank']
+    assert void.source_id == void.component_key
 
 
 def test_get_topography_dfnd_smoke_with_real_small_pdb():
@@ -102,7 +106,9 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
     assert isinstance(topography, Topography)
     assert topography.dfnd is not None
     records = topography.dfnd.raw
-    assert records['parameters']['selection'] == "molecule_type in ['protein', 'peptide']"
+    assert (
+        records['parameters']['selection'] == "molecule_type in ['protein', 'peptide']"
+    )
     assert records['parameters']['transit_policy'] == 'with_connectors'
     assert len(records['tetrahedra']) > 0
     assert len(records['faces']) == 4 * len(records['tetrahedra'])
@@ -111,13 +117,16 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
     n_public_domains = sum(
         1
         for domain in records['wet_components']
-        if domain['family'] in {
+        if domain['family']
+        in {
             'void',
             'pocket',
             'channel',
         }
     )
-    assert len(topography.get_features(by='shape', value='concavity')) == n_public_domains
+    assert (
+        len(topography.get_features(by='shape', value='concavity')) == n_public_domains
+    )
     # Phase 3 also promotes each mouth (external link) to a child Mouth feature,
     # so the total feature count includes those boundary features as well.
     assert len(topography) >= n_public_domains
@@ -154,6 +163,15 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
         assert feature.raw_record['atom_indices'] == feature.atom_indices
         assert feature.raw_record['tetrahedron_indices'] == feature.tetrahedron_indices
         assert feature.raw_record['volume_solvent_estimate'] >= 0.0
-        assert feature.raw_record['volume_solvent_estimate'] <= feature.raw_record[
-            'volume_topological_resident'
-        ]
+        assert (
+            feature.raw_record['volume_solvent_estimate']
+            <= feature.raw_record['volume_topological_resident']
+        )
+        assert feature.source_id == feature.component_key
+
+    for mouth in topography.get_features(by='type', value='mouth'):
+        parent = next(iter(topography.parents_of(mouth.feature_id)))
+        assert mouth.component_key == parent.component_key
+        assert mouth.parent_component_key == parent.component_key
+        assert mouth.external_link_key
+        assert mouth.source_id == mouth.external_link_key

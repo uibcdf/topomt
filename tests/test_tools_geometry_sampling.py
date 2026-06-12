@@ -1,6 +1,7 @@
 """Tests for sampling-based geometry helpers in topomt.tools.geometry."""
 
 import numpy as np
+import pytest
 
 from topomt.tools.geometry.sampling import union_volume_monte_carlo
 
@@ -30,3 +31,12 @@ def test_union_volume_monte_carlo_estimates_single_sphere_volume():
     )
 
     assert np.isclose(volume, expected, rtol=0.05)
+
+def test_union_volume_monte_carlo_rejects_non_positive_sample_count():
+
+    with pytest.raises(ValueError, match='n_samples must be a positive integer'):
+        union_volume_monte_carlo(
+            centers=np.array([[0.0, 0.0, 0.0]], dtype=float),
+            radii=np.array([1.0], dtype=float),
+            n_samples=0,
+        )

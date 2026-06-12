@@ -13,6 +13,9 @@ def union_volume_monte_carlo(
 ) -> float:
     """Estimate the volume of the union of spheres by Monte Carlo sampling."""
 
+    if not isinstance(n_samples, int) or isinstance(n_samples, bool) or n_samples <= 0:
+        raise ValueError('n_samples must be a positive integer')
+
     if rng is None:
         rng = np.random.default_rng()
 

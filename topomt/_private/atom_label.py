@@ -35,7 +35,9 @@ def parse_atom_label(atom_label: str, format: str) -> dict[str, str]:
     pattern = format_to_regex(format)
     m = pattern.match(atom_label)
     if not m:
-        raise ValueError(f"String {text!r} does not match template {template!r}")
+        raise ValueError(
+            f'String {atom_label!r} does not match template {format!r}'
+        )
     return m.groupdict()
 
 def parse_list_of_atom_labels(list_of_atom_labels: list[str], format: str, output_type: str = 'list of dicts'):

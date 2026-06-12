@@ -109,6 +109,18 @@ def _component_id_matches(
     return bool(values & expected_values)
 
 
+def _component_key(component: Any) -> Any:
+    if isinstance(component, dict):
+        return component.get('component_key')
+    return getattr(component, 'component_key', None)
+
+
+def _component_support_key(component: Any) -> Any:
+    if isinstance(component, dict):
+        return component.get('support_key')
+    return getattr(component, 'support_key', None)
+
+
 def _component_flags(component: Any) -> list[Any]:
     if isinstance(component, dict):
         return list(component.get('flags', []))
@@ -182,6 +194,8 @@ def select_components(
     side: str | Iterable[str] | None = None,
     family: str | Iterable[str] | None = None,
     component_ids: str | int | Iterable[str | int] | None = None,
+    component_keys: str | Iterable[str] | None = None,
+    support_keys: str | Iterable[str] | None = None,
     min_size: int | None = None,
     flags_has: str | Iterable[str] | None = None,
 ) -> list[Any]:
@@ -193,6 +207,10 @@ def select_components(
         if not _matches_value(_component_family(component, inferred_side), family):
             continue
         if not _component_id_matches(component, inferred_side, component_ids):
+            continue
+        if not _matches_value(_component_key(component), component_keys):
+            continue
+        if not _matches_value(_component_support_key(component), support_keys):
             continue
         if min_size is not None and _component_size(component) < min_size:
             continue
@@ -208,6 +226,8 @@ def select_component_ids(
     side: str | Iterable[str] | None = None,
     family: str | Iterable[str] | None = None,
     component_ids: str | int | Iterable[str | int] | None = None,
+    component_keys: str | Iterable[str] | None = None,
+    support_keys: str | Iterable[str] | None = None,
     min_size: int | None = None,
     flags_has: str | Iterable[str] | None = None,
 ) -> list[str]:
@@ -219,6 +239,10 @@ def select_component_ids(
         if not _matches_value(_component_family(component, inferred_side), family):
             continue
         if not _component_id_matches(component, inferred_side, component_ids):
+            continue
+        if not _matches_value(_component_key(component), component_keys):
+            continue
+        if not _matches_value(_component_support_key(component), support_keys):
             continue
         if min_size is not None and _component_size(component) < min_size:
             continue
@@ -234,6 +258,8 @@ def select_component_tetrahedron_ids(
     side: str | Iterable[str] | None = None,
     family: str | Iterable[str] | None = None,
     component_ids: str | int | Iterable[str | int] | None = None,
+    component_keys: str | Iterable[str] | None = None,
+    support_keys: str | Iterable[str] | None = None,
     min_size: int | None = None,
     flags_has: str | Iterable[str] | None = None,
 ) -> list[int]:
@@ -244,6 +270,8 @@ def select_component_tetrahedron_ids(
         side=side,
         family=family,
         component_ids=component_ids,
+        component_keys=component_keys,
+        support_keys=support_keys,
         min_size=min_size,
         flags_has=flags_has,
     ):
@@ -257,6 +285,8 @@ def select_component_atom_indices(
     side: str | Iterable[str] | None = None,
     family: str | Iterable[str] | None = None,
     component_ids: str | int | Iterable[str | int] | None = None,
+    component_keys: str | Iterable[str] | None = None,
+    support_keys: str | Iterable[str] | None = None,
     min_size: int | None = None,
     flags_has: str | Iterable[str] | None = None,
 ) -> list[int]:
@@ -268,6 +298,8 @@ def select_component_atom_indices(
         side=side,
         family=family,
         component_ids=component_ids,
+        component_keys=component_keys,
+        support_keys=support_keys,
         min_size=min_size,
         flags_has=flags_has,
     ):
@@ -445,19 +477,23 @@ def select_face_ids(
     unique_by: str | None = 'face_id',
 ) -> list[int]:
     """Return ``face_id`` values for matching DFND face records."""
-    return [
-        int(face.get('face_id', index))
-        for index, face in enumerate(
-            select_faces(
-                source,
-                owner_tetrahedron_ids=owner_tetrahedron_ids,
-                neighbor_tetrahedron_ids=neighbor_tetrahedron_ids,
-                permeability_state=permeability_state,
-                flags_has=flags_has,
-                unique_by=unique_by,
-            )
-        )
-    ]
+    raw = _raw_from_source(source)
+    selected_face_ids = []
+    selected_faces = select_faces(
+        source,
+        owner_tetrahedron_ids=owner_tetrahedron_ids,
+        neighbor_tetrahedron_ids=neighbor_tetrahedron_ids,
+        permeability_state=permeability_state,
+        flags_has=flags_has,
+        unique_by=unique_by,
+    )
+    raw_position_by_identity = {
+        id(face): index for index, face in enumerate(raw.get('faces', []))
+    }
+    for face in selected_faces:
+        fallback_id = raw_position_by_identity[id(face)]
+        selected_face_ids.append(int(face.get('face_id', fallback_id)))
+    return selected_face_ids
 
 
 def select_face_atom_indices(
@@ -502,9 +538,7 @@ def select_edges(
     raw = _raw_from_source(source)
     tet_filter = tetrahedron_ids
     subset = set(int(a) for a in atoms_subset) if atoms_subset is not None else None
-    exact = (
-        frozenset(int(a) for a in atoms_exact) if atoms_exact is not None else None
-    )
+    exact = frozenset(int(a) for a in atoms_exact) if atoms_exact is not None else None
 
     selected = []
     for edge in raw.get('edges', []):

@@ -36,20 +36,30 @@ DFND now has:
 - build-once/query-many probe-radius workflows;
 - tested `R_residence` and `R_gate` primitives;
 - tested face identity and external-link tracing;
-- tested access-by-residence domain classification;
-- raw records for tetrahedra, faces, transit/concavity domains, residence regions, external links, dry components, dry interfaces, and dry motifs;
+- deterministic component, external-link, and motif support/context keys;
+- contextual provenance across raw records, typed relations, and promoted features;
+- atomic feature and component registries;
+- tested access-by-residence component classification;
+- raw records for tetrahedra, faces, wet components, residence regions, external links, dry components, dry interfaces, and dry motifs;
 - `get_topography(method='dfnd')` integration;
-- public compatibility features for voids, pockets, and multi-link domains;
+- public features for stable void, pocket, and channel component families;
 - deterministic `volume_solvent_estimate` with unit tests;
 - small real-system stability and monotonicity sweeps.
 
 ### Immediate Work
 
-1. Profile and optimize residual query/build costs.
-2. Inspect qualitative cavity behavior on the small systems already used for CASTp/CASTpFold work.
-3. Decide reporting/filter policy for tiny voids and near-threshold domains.
-4. Validate whether provisional families and dry motifs are useful enough for public exposure.
-5. Expand real-system benchmarks without forcing strict parity with external engines.
+1. Unify face permeability and wet-graph traversability under one canonical
+   predicate.
+2. Define a typed immutable DFND query contract and resolve inert/incomplete
+   query options.
+3. Continue viewer atom-index, runtime ownership, repeated-render, and geometry
+   boundary hardening.
+4. Decide reporting/filter policy for tiny and near-threshold components.
+5. Expand real-system and external-method comparison batteries without forcing
+   strict semantic parity.
+
+The completed static-identity/provenance milestone is recorded in
+[`DFND/checkpoint_identity_provenance_registries_2026_06_06.md`](DFND/checkpoint_identity_provenance_registries_2026_06_06.md).
 
 ## Phase 3: Validation and Benchmarking
 
@@ -67,10 +77,17 @@ Next phase after the current hardening pass.
 
 DFND's long-term differentiator is tracking topography through trajectories.
 
+### Decision Gate
+
+Before implementation, decide matching evidence and thresholds, confidence
+policy, split/merge semantics, and lineage event contracts. Exact contextual
+keys are evidence for matching, not temporal identity.
+
 ### Goals
 
 - run DFND frame by frame on small trajectories;
-- match domains/features across frames;
+- match components/features across frames into unbranched `track_id` segments;
+- represent births, deaths, splits, and merges in a lineage graph;
 - report persistence, gate events, external-link changes, volume series, dry/wet transitions, and candidate dynamic pharmacophores.
 
 ## Phase 5: MolSysViewer Integration

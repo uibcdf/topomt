@@ -52,8 +52,20 @@ The active implementation now covers the first v1 substrate:
 - organize all DFND output under the single `topography.dfnd` (`DFNDData`); the
   public `Topography` top level holds only the promoted features (no `dfnd_*`
   attributes). Wet components promote to `Pocket`/`Void`/`Channel` with mouths as
-  child `Mouth` features (provenance `component_id`);
+  child `Mouth` features (contextual component provenance via `component_key`);
 - build a dry complement with dry-edge face records, dry interfaces, dry depth, and first candidate dry motifs.
+
+Static component identity now exposes local rank-derived `component_id`,
+`component_index`, `node_count_rank`, the compatibility alias `size_rank`, exact
+`support_key`, contextual `component_key`, and recoverable tetrahedron support.
+Equal-size ordering uses `support_key`, while `graph_label` remains internal.
+Promoted wet parent features use `component_key` as `source_id`; promoted
+mouths use `external_link_key` as `source_id` and carry `parent_component_key`.
+External links and wet/dry motifs expose exact support keys and contextual keys.
+Raw and typed relations expose contextual component keys additively while
+retaining local component IDs for display and compatibility. The dynamic
+`track_id`/lineage layer remains pending; see
+[`component_identity_contract.md`](component_identity_contract.md).
 
 Validated by active tests so far:
 
@@ -70,7 +82,7 @@ Validated by active tests so far:
 - `nonresident_passage_2links` non-resident multi-link classifier regression.
 - `degenerate_subprobe` no-link/no-residence classifier regression.
 - public dfnd(...) smoke test exercises MolSysMT file input and input-policy recording.
-- get_topography(method=dfnd) now returns a normal Topography object with DFND raw records attached as dfnd_records.
+- `get_topography(method="dfnd")` returns a normal `Topography` object with the complete method-specific result under `topography.dfnd`.
 - get_topography(method=dfnd) has a real-system smoke test on topomt/data/CASTp_3.0_server/3ptb.pdb.
 - tests/test_dfnd_real_system_stability.py checks engineering stability on small CASTpFold real systems without judging cavity-detection quality, including `selection='all'` versus protein-only composition smoke tests.
 - tests/test_dfnd_input_policy.py covers defensive input-policy errors before triangulation.
@@ -110,7 +122,7 @@ Known gaps:
 
 - `tests/test_dfnd_pockets.py` is now an active public-API smoke test through MolSysMT input.
 - Direct dfnd(...) calls still return the raw-first nested dictionary used for method development and validation.
-- get_topography(method=dfnd) currently converts only compatibility void, pocket, and channel components into Topography features; provisional surface-concavity, nonresident-passage, degenerate-subprobe, and dry records remain available through dfnd_records.
+- `get_topography(method="dfnd")` currently promotes only void, pocket, and channel components into public `Topography` features; provisional surface-concavity, nonresident-passage, degenerate-subprobe, and dry records remain available through `topography.dfnd`.
 - Feature objects receive atom indices, tetrahedron indices, centers, topological resident volume, deterministic local solvent-volume estimate, mouth counts, mouth area, flags, and the raw component record.
 - The working `COAST` rule is defined, but its contribution to reported metrics remains a policy decision.
 - Face-index, gate identity, shared-face consistency, and external-link clustering have graph-contract coverage; more pathological near-threshold cases still need expansion.
@@ -140,19 +152,58 @@ The DFND documentation now covers:
 - the authoritative object model and `component → component → feature` terminology
   ([`object_model.md`](object_model.md)).
 
-The remaining documentation work is to keep the design documents consistent with the active implementation as validation, reporting policy, and performance work continue.
+The documentation must continue distinguishing authoritative contracts, current
+implementation snapshots, historical checkpoints, and proposals. The current
+identity/provenance checkpoint is
+[`checkpoint_identity_provenance_registries_2026_06_06.md`](checkpoint_identity_provenance_registries_2026_06_06.md).
 
-## 5. Immediate Engineering Interpretation
+## 5. Completed Hardening Milestone: 2026-06-06
 
-The next DFND phase should continue implementation hardening, not new method invention.
+The static identity, contextual provenance, and registry-integrity milestone is
+implemented and verified:
 
-The main objective is to make the existing DFND idea executable, testable, and
-consistent with the documented semantics:
+- deterministic component, external-link, and motif support/context keys;
+- additive contextual provenance across raw records, typed components, relations,
+  and promoted features;
+- component selection and registry lookup by contextual or support keys;
+- atomic `Topography` and `Components` mutation and semantic copy behavior;
+- synchronized authoritative identity, object-model, API, and motif contracts.
 
-- standard Delaunay substrate;
-- explicit `R_residence` and `R_gate` physics;
-- unambiguous DFN, external-link, and component definitions with the `family`
-  axis (`void` / `pocket` / `channel` / `surface_concavity` / …);
-- conservative handling of `COAST` as boundary/contact metadata until metric behavior is validated;
-- clean `Topography` integration via the single `topography.dfnd` container and the typed `Components` registry;
-- active tests and focused checkpoints rather than skipped placeholders.
+This milestone does **not** implement temporal identity. `component_key`,
+`external_link_key`, and `motif_key` are exact contextual keys, not trajectory
+tracks.
+
+## 6. What Remains
+
+### Immediate engineering corrections
+
+- unify face permeability and wet-graph traversability under one canonical
+  predicate (`DFND-001`);
+- resolve inert/incomplete query options and define a typed immutable DFND query
+  contract;
+- continue viewer atom-index, runtime ownership, repeated-render, and geometry
+  boundary hardening;
+- complete packaging, isolated-import, documentation-CI, and quality enforcement.
+
+### Decisions required
+
+- dynamic matching thresholds, confidence, split/merge semantics, and lineage;
+- residence-state versus transit-membership ownership;
+- typed scientific relations beyond parent/child convenience views;
+- cross-system atom identity and invalidation ownership;
+- quantitative centerline, public metric, and unit contracts.
+
+### Scientific validation required
+
+- reporting/filter policy for tiny and marginal components;
+- biological cavity-quality and external-method comparison batteries;
+- physical interpretation of mouth and volume metrics;
+- utility and stability of experimental wet/dry motifs.
+
+## 7. Immediate Engineering Interpretation
+
+The next DFND phase should continue implementation hardening, not new method
+invention. Static identity and provenance are now adequate for exact comparison
+within a contextual result. The next implementation package should correct
+canonical traversability and query contracts while the dynamic-lineage decisions
+are discussed separately.

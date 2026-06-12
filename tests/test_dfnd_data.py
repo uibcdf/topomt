@@ -3,6 +3,7 @@
 import types
 
 import numpy as np
+import pytest
 
 from topomt.dfnd import synthetic as syn
 from topomt.dfnd.data import DFNDData
@@ -174,3 +175,34 @@ def test_tolerances_recorded_and_inherited_by_at_probe():
     reprobed = data.at_probe(1.4)  # tolerances inherited unless overridden
     assert reprobed.dfn.parameters['residence_tolerance'] == 0.1
     assert reprobed.dfn.parameters['permeability_tolerance'] == 0.2
+
+
+def test_wet_component_initializes_motif_descriptors():
+    from topomt.dfnd.components import WetComponent
+
+    component = WetComponent(component_id="WET-1", family="void")
+
+    assert component.topological_depth == {}
+    assert component.depth_regions == []
+    assert component.throat_candidates == []
+    assert component.chamber_candidates == []
+    assert component.bottleneck is None
+
+
+@pytest.mark.parametrize(
+    "kwargs, message",
+    [
+        ({"probe_radius": -0.1}, "probe_radius"),
+        ({"residence_tolerance": -0.1}, "residence_tolerance"),
+        ({"permeability_tolerance": -0.1}, "permeability_tolerance"),
+        ({"min_size": -1}, "min_size"),
+        ({"min_size": 1.5}, "min_size"),
+        ({"min_size": True}, "min_size"),
+    ],
+)
+def test_get_topography_rejects_invalid_physical_query_parameters(kwargs, message):
+    coords, radii = _argon_cube_arrays()
+    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+
+    with pytest.raises(ValueError, match=message):
+        network.get_topography(**kwargs)

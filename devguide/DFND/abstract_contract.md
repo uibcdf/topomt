@@ -352,18 +352,23 @@ clear ambiguity.
 
 ## 11. Identity and Persistence
 
-Stable identifiers should be based on atom-defined primitives.
+The authoritative component-identity rules are defined in
+[`component_identity_contract.md`](component_identity_contract.md).
 
-Recommended identities:
+Stable primitive support should be based on atom-defined identities:
 
-- tetrahedron id: sorted atom quadruplet;
-- face id: sorted atom triplet;
-- component id: stable hash of sorted tetrahedron ids plus frame/context;
-- external-link id: stable hash of sorted boundary face ids plus component id;
-- motif id: stable hash of supporting component id, node ids, edge ids, and motif
-  type.
+- tetrahedron support: sorted atom quadruplet;
+- face support: sorted atom triplet;
+- component `support_key`: exact sorted tetrahedron support;
+- contextual `component_key`: result context, side, and `support_key`;
+- external-link and motif structural keys: exact supporting face/node identities
+  plus their contextual parent key.
 
-Dynamic identity should be based on overlap and persistence:
+`component_id` is not a stable structural identifier. It is a local,
+human-readable rank label such as `WET-1` or `DRY-1`.
+
+Dynamic component identity is represented by unbranched `track_id` segments and
+a lineage graph. Matching should be based on overlap and persistence:
 
 - tetrahedron overlap;
 - face/external-link overlap;

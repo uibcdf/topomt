@@ -189,7 +189,7 @@ class TopoMTTopographyPanel(AddonPanelWidget):
             self.push_state({**self._build_state(runtime), "status": "rendering"})
             try:
                 from ..render import show_dfnd_tetrahedra
-                layer = show_dfnd_tetrahedra(
+                show_dfnd_tetrahedra(
                     view, runtime.topography, tag_prefix="dfnd-tetra", skip_digestion=True
                 )
                 record_event(view, "panel_render_tetrahedra")
