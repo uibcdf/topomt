@@ -1,8 +1,11 @@
 from typing import Any
 
+import numpy as np
+
 from .. import pyunitwizard as puw
 from ..features import Channel, Mouth, Percolating, Pocket, Void
 from ..topography.Topography import Topography
+from .config import DFNDMeshConfig, DFNDQuery
 from .data import DFNDData
 from .graph import DelaunayFlowNetwork
 
@@ -45,17 +48,17 @@ def _feature_from_component_record(
     feature.transit_connector_tetrahedron_indices = record[
         'transit_connector_tetrahedron_indices'
     ]
-    feature.center = puw.quantity(record['center'], 'angstroms')
-    feature.volume_topological_resident = puw.quantity(
-        record['volume_topological_resident'],
-        'angstroms**3',
+    feature.center = puw.standardize(puw.quantity(record['center'], 'angstroms'))
+    feature.volume_topological_resident = puw.standardize(
+        puw.quantity(record['volume_topological_resident'], 'angstroms**3')
     )
-    feature.volume_solvent_estimate = puw.quantity(
-        record['volume_solvent_estimate'],
-        'angstroms**3',
+    feature.volume_solvent_estimate = puw.standardize(
+        puw.quantity(record['volume_solvent_estimate'], 'angstroms**3')
     )
     feature.n_mouths = record['n_mouths']
-    feature.mouth_area = puw.quantity(record['mouth_area'], 'angstroms**2')
+    feature.mouth_area = puw.standardize(
+        puw.quantity(record['mouth_area'], 'angstroms**2')
+    )
     feature.mouths = record['mouths']
     feature.mouth_face_clusters = record['mouth_face_clusters']
     feature.flags = record['flags']
@@ -63,12 +66,34 @@ def _feature_from_component_record(
     return feature
 
 
+def _reject_conflicting_legacy_values(
+    object_name: str,
+    values: dict[str, Any],
+    defaults: dict[str, Any],
+    configured: dict[str, Any],
+) -> None:
+    def equal(left: Any, right: Any) -> bool:
+        try:
+            return bool(np.array_equal(left, right))
+        except Exception:
+            return left == right
+
+    conflicts = [
+        name
+        for name, value in values.items()
+        if not equal(value, defaults[name]) and not equal(value, configured[name])
+    ]
+    if conflicts:
+        raise ValueError(
+            f'{object_name} conflicts with explicit arguments: ' + ', '.join(conflicts)
+        )
+
+
 def _run_dfnd(
     molecular_system,
     selection: str,
     structure_indices: int,
     probe_radius: float,
-    sea_level: float | None,
     min_size: int,
     epsilon: float,
     hydrogen_policy: str,
@@ -78,25 +103,58 @@ def _run_dfnd(
     residence_tolerance: float,
     permeability_tolerance: float,
     dry_adjacency: str,
+    mesh_config: DFNDMeshConfig | None = None,
+    query: DFNDQuery | None = None,
 ) -> tuple[DelaunayFlowNetwork, dict[str, Any]]:
     """Build the network and run the decomposition. Shared by the public entry points."""
+    mesh_values = {
+        'selection': selection,
+        'structure_indices': structure_indices,
+        'epsilon': epsilon,
+        'hydrogen_policy': hydrogen_policy,
+        'radii_model': radii_model,
+    }
+    mesh_defaults = {
+        'selection': 'all',
+        'structure_indices': 0,
+        'epsilon': 1e-6,
+        'hydrogen_policy': 'exclude',
+        'radii_model': 'vdw',
+    }
+    if mesh_config is None:
+        mesh_config = DFNDMeshConfig(**mesh_values)
+    elif not isinstance(mesh_config, DFNDMeshConfig):
+        raise TypeError('mesh_config must be a DFNDMeshConfig')
+    else:
+        _reject_conflicting_legacy_values(
+            'mesh_config', mesh_values, mesh_defaults, mesh_config.to_dict()
+        )
+
+    query_values = {
+        'probe_radius': _as_angstrom_float(probe_radius),
+        'residence_tolerance': residence_tolerance,
+        'permeability_tolerance': permeability_tolerance,
+        'transit_policy': transit_policy,
+        'gate_intrusion_policy': gate_intrusion_policy,
+        'dry_adjacency': dry_adjacency,
+    }
+    query_defaults = DFNDQuery().to_dict()
+    if query is None:
+        query = DFNDQuery(**query_values)
+    elif not isinstance(query, DFNDQuery):
+        raise TypeError('query must be a DFNDQuery')
+    else:
+        _reject_conflicting_legacy_values(
+            'query', query_values, query_defaults, query.to_dict()
+        )
+
     network = DelaunayFlowNetwork(
         molecular_system,
-        selection=selection,
-        structure_indices=structure_indices,
-        epsilon=epsilon,
-        hydrogen_policy=hydrogen_policy,
-        radii_model=radii_model,
+        **mesh_config.to_dict(),
     )
     result = network.get_topography(
-        probe_radius=_as_angstrom_float(probe_radius),
-        sea_level=sea_level,
+        query=query,
         min_size=min_size,
-        transit_policy=transit_policy,
-        gate_intrusion_policy=gate_intrusion_policy,
-        residence_tolerance=residence_tolerance,
-        permeability_tolerance=permeability_tolerance,
-        dry_adjacency=dry_adjacency,
     )
     return network, result
 
@@ -106,7 +164,6 @@ def dfnd_to_topography(
     selection: str = 'all',
     structure_indices: int = 0,
     probe_radius: float = 1.4,
-    sea_level: float | None = None,
     min_size: int = 0,
     epsilon: float = 1e-6,
     hydrogen_policy: str = 'exclude',
@@ -116,6 +173,8 @@ def dfnd_to_topography(
     residence_tolerance: float = 0.0,
     permeability_tolerance: float = 0.0,
     dry_adjacency: str = 'face',
+    mesh_config: DFNDMeshConfig | None = None,
+    query: DFNDQuery | None = None,
 ) -> Topography:
     """Run DFND and promote compatibility components into a ``Topography`` object.
 
@@ -129,7 +188,6 @@ def dfnd_to_topography(
         selection,
         structure_indices,
         probe_radius,
-        sea_level,
         min_size,
         epsilon,
         hydrogen_policy,
@@ -139,11 +197,13 @@ def dfnd_to_topography(
         residence_tolerance,
         permeability_tolerance,
         dry_adjacency,
+        mesh_config,
+        query,
     )
     topography = Topography(
         molecular_system=molecular_system,
-        selection=selection,
-        structure_indices=structure_indices,
+        selection=network.mesh_config.selection,
+        structure_indices=network.mesh_config.structure_indices,
     )
     topography.dfnd = DFNDData(network, result)
 
@@ -179,7 +239,9 @@ def dfnd_to_topography(
                 mouth.external_link_id = link['external_link_id']
                 mouth.external_link_support_key = link['external_link_support_key']
                 mouth.external_link_key = link['external_link_key']
-                mouth.area = puw.quantity(link['area_geometric'], 'angstroms**2')
+                mouth.area = puw.standardize(
+                    puw.quantity(link['area_geometric'], 'angstroms**2')
+                )
                 topography.add_feature(mouth)
                 topography.connect_features(mouth, feature)
 
@@ -191,7 +253,6 @@ def dfnd(
     selection: str = 'all',
     structure_indices: int = 0,
     probe_radius: float = 1.4,
-    sea_level: float | None = None,
     min_size: int = 0,
     epsilon: float = 1e-6,
     hydrogen_policy: str = 'exclude',
@@ -201,6 +262,8 @@ def dfnd(
     residence_tolerance: float = 0.0,
     permeability_tolerance: float = 0.0,
     dry_adjacency: str = 'face',
+    mesh_config: DFNDMeshConfig | None = None,
+    query: DFNDQuery | None = None,
 ) -> dict[str, dict[str, Any]]:
     """Run the DFND topography decomposition (raw-first dictionary)."""
     _network, raw_topography = _run_dfnd(
@@ -208,7 +271,6 @@ def dfnd(
         selection,
         structure_indices,
         probe_radius,
-        sea_level,
         min_size,
         epsilon,
         hydrogen_policy,
@@ -218,6 +280,8 @@ def dfnd(
         residence_tolerance,
         permeability_tolerance,
         dry_adjacency,
+        mesh_config,
+        query,
     )
 
     pockets = [

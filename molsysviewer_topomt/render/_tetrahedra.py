@@ -1,14 +1,24 @@
 """show_dfnd_tetrahedra: Delaunay tetrahedra / face rendering."""
 
 from collections.abc import Iterable
+from functools import wraps
+from inspect import signature
 from typing import Any
 
 from topomt import pyunitwizard as puw
 
+from ..geometry import tetrahedra_geometry
 from ._common import _dfnd_edge_meta, _dfnd_face_meta, _resolve_topography
+from .adapters import add_tetrahedra
+from .result import (
+    RenderResult,
+    clear_previous_render_result,
+    remember_render_result,
+    render_result,
+)
 
 
-def show_dfnd_tetrahedra(
+def _show_dfnd_tetrahedra_legacy(
     view,
     topography=None,
     *,
@@ -132,18 +142,19 @@ def show_dfnd_tetrahedra(
     else:
         alpha_resolved = None  # Single float value to be used directly
 
-    atom_quads = []
     colors = []
     alphas = []
     labels = []
     selected_tetra_ids = set()
+    selected_tetra_order = []
 
     for idx, tet in enumerate(tetrahedra):
         quad = tet.get('local_atom_indices')
         if not quad or len(quad) != 4:
             continue
-        atom_quads.append(quad)
-        selected_tetra_ids.add(tet.get('tetrahedron_id', idx))
+        tetrahedron_id = tet.get('tetrahedron_id', idx)
+        selected_tetra_ids.add(tetrahedron_id)
+        selected_tetra_order.append(tetrahedron_id)
 
         # Retrieve value based on selected color mode
         if color_mode == 'combined_class':
@@ -174,7 +185,8 @@ def show_dfnd_tetrahedra(
         )
         labels.append(lbl)
 
-    if not atom_quads:
+    geometry = tetrahedra_geometry(topography, selected_tetra_order)
+    if not geometry.atom_quads:
         return None
 
     # Disabling both permeability classes is the same as draw_faces=False.
@@ -215,8 +227,9 @@ def show_dfnd_tetrahedra(
         pass
 
     # Call view.shapes.add_tetrahedra directly
-    layer = view.shapes.add_tetrahedra(
-        atom_quads=atom_quads,
+    layer = add_tetrahedra(
+        view,
+        geometry,
         colors=colors,
         alphas=alphas,
         labels=labels,
@@ -240,3 +253,33 @@ def show_dfnd_tetrahedra(
 
 
 # Node-class colors (combined_class), shared with render_dfnd_tetrahedra.
+
+
+@wraps(_show_dfnd_tetrahedra_legacy)
+def show_dfnd_tetrahedra(view, topography=None, **kwargs):
+    """Render tetrahedra and return a uniform ``RenderResult``."""
+    resolved = _resolve_topography(view, topography)
+    operation_key = f'tetrahedra:{kwargs.get("tag_prefix", "dfnd-tetra")}'
+    clear_previous_render_result(view, operation_key)
+    raw = _show_dfnd_tetrahedra_legacy(view, resolved, **kwargs)
+    selected_ids = kwargs.get('tetrahedra_indices')
+    if selected_ids is None:
+        if getattr(resolved, 'dfnd', None) is not None:
+            records = resolved.dfnd.raw.get('tetrahedra', [])
+        elif isinstance(resolved, dict):
+            records = resolved.get('raw', resolved).get('tetrahedra', [])
+        else:
+            records = []
+        selected_ids = tuple(
+            record.get('tetrahedron_id', index)
+            for index, record in enumerate(records)
+            if len(record.get('local_atom_indices', ())) == 4
+        )
+    result = render_result('tetrahedra', raw, selected_ids=selected_ids)
+    return remember_render_result(view, operation_key, result)
+
+
+show_dfnd_tetrahedra.__signature__ = signature(_show_dfnd_tetrahedra_legacy).replace(
+    return_annotation=RenderResult
+)
+show_dfnd_tetrahedra.__annotations__['return'] = RenderResult

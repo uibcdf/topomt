@@ -85,14 +85,12 @@ registry, promotion, graph-contract, and wet/dry-adjacency tests. On 2026-06-06:
 
 ### Engineering work that does not depend on temporal identity
 
-1. Correct the canonical face-permeability versus graph-traversability mismatch
-   (`DFND-001`).
-2. Resolve inert or incomplete query parameters and provenance through a typed,
+1. Resolve inert or incomplete query parameters and provenance through a typed,
    immutable DFND query contract (`DFND-002`, `DFND-006`, `DFND-007`).
-3. Continue viewer runtime, repeated-render, atom-index, and geometry-boundary
+2. Continue viewer runtime, repeated-render, atom-index, and geometry-boundary
    hardening.
-4. Complete packaging, isolated-import, documentation-CI, and quality gates.
-5. Expand pathological, near-threshold, real-system, and comparison validation.
+3. Complete packaging, isolated-import, documentation-CI, and quality gates.
+4. Expand pathological, near-threshold, real-system, and comparison validation.
 
 ### Scientific validation still required
 

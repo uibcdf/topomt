@@ -85,7 +85,7 @@ class DelaunayFlowNetwork:
         # 4. Pre-calculate R_gate for all internal faces (Vectorized/Parallel)
         pass
 
-    def get_pockets(self, probe_radius=1.4, min_volume=50.0, sea_level=None):
+    def get_pockets(self, probe_radius=1.4, min_volume=50.0):
         """
         Returns raw DFND pocket/component records or converted Pocket objects, depending on the output layer.
         This method is fast because it only filters pre-calculated arrays.

@@ -1,12 +1,20 @@
 """show_dfn_graph: DFN flow-graph nodes/edges."""
 
+from functools import wraps
+from inspect import signature
 from typing import Any
-
-import numpy as np
 
 from topomt import pyunitwizard as puw
 
+from ..geometry import dfn_graph_segments, tetrahedron_centers
 from ._common import _resolve_topography
+from .adapters import add_point_spheres, add_segments
+from .result import (
+    RenderResult,
+    clear_previous_render_result,
+    remember_render_result,
+    render_result,
+)
 
 _DFN_NODE_PALETTE = {
     'wet_sealed': 0x14B8A6,
@@ -18,7 +26,7 @@ _DFN_NODE_PALETTE = {
 }
 
 
-def show_dfn_graph(
+def _show_dfn_graph_legacy(
     view,
     topography=None,
     *,
@@ -53,21 +61,21 @@ def show_dfn_graph(
     if data is None:
         data = topography  # accept a DFNDData passed directly
     mesh = data.mesh
-    coords = np.asarray(mesh.atoms.coords, dtype=float)
 
     palette = dict(_DFN_NODE_PALETTE)
     if color_palette:
         palette.update(color_palette)
 
-    barycenter = {
-        tet['tetrahedron_id']: coords[tet['local_atom_indices']].mean(axis=0)
-        for tet in mesh.tetrahedra
-    }
     state = {node['tetrahedron_id']: node for node in data.dfn.graph.nodes}
 
     def _is_node(tid: int) -> bool:
-        s = state[tid]
-        return s['residence_state'] == 'resident' or s['n_permeable_contacts'] >= 1
+        node = state[tid]
+        transit_role = node.get('transit_role')
+        if transit_role is not None:
+            return transit_role in {'resident_transit', 'transit_connector'}
+        return (
+            node['residence_state'] == 'resident' or node['n_permeable_contacts'] >= 1
+        )
 
     node_ids = [
         tet['tetrahedron_id']
@@ -76,49 +84,27 @@ def show_dfn_graph(
     ]
     if not node_ids:
         return None
-    node_set = set(node_ids)
-
-    centers = [barycenter[tid].tolist() for tid in node_ids]
+    node_geometry = tetrahedron_centers(topography, node_ids)
     colors = [palette.get(state[tid]['combined_class'], 0x888888) for tid in node_ids]
 
-    edge_pairs: list[list[list[float]]] = []
-    mouth_pairs: list[list[list[float]]] = []
-    for face_state, face_geom in zip(data.dfn.graph.faces, mesh.faces):
-        if face_state['permeability_state'] != 'permeable':
-            continue
-        owner = face_state['owner_tetrahedron_id']
-        neighbor = face_state['neighbor_tetrahedron_id']
-        if owner not in node_set:
-            continue
-        if neighbor >= 0:
-            if (
-                neighbor in node_set and owner < neighbor
-            ):  # one cylinder per shared face
-                edge_pairs.append(
-                    [barycenter[owner].tolist(), barycenter[neighbor].tolist()]
-                )
-        else:  # boundary face -> mouth stub
-            triangle = coords[face_geom['face_atoms_local']]
-            normal = np.cross(triangle[1] - triangle[0], triangle[2] - triangle[0])
-            length = np.linalg.norm(normal)
-            if length < 1e-9:
-                continue
-            normal = normal / length
-            origin = barycenter[owner]
-            face_centroid = triangle.mean(axis=0)
-            if np.dot(normal, face_centroid - origin) < 0:  # orient outward
-                normal = -normal
-            tip = face_centroid + normal * mouth_stub_angstrom
-            mouth_pairs.append([origin.tolist(), tip.tolist()])
+    edge_geometry, mouth_geometry = dfn_graph_segments(
+        topography, node_ids, mouth_stub_angstrom=mouth_stub_angstrom
+    )
 
-    for tag in (tag_prefix, f'{tag_prefix}-node', f'{tag_prefix}-edges', f'{tag_prefix}-mouths'):
+    for tag in (
+        tag_prefix,
+        f'{tag_prefix}-node',
+        f'{tag_prefix}-edges',
+        f'{tag_prefix}-mouths',
+    ):
         try:
             view.shapes.clear(tag=tag, skip_digestion=True)
         except Exception:
             pass
 
-    node_layer = view.shapes.add_sphere(
-        center=puw.quantity(np.asarray(centers), 'angstroms'),
+    node_layer = add_point_spheres(
+        view,
+        node_geometry,
         radius=puw.quantity(node_radius_nm, 'nm'),
         color=colors,
         alpha=node_alpha,
@@ -127,9 +113,10 @@ def show_dfn_graph(
         skip_digestion=skip_digestion,
     )
     edge_layer = None
-    if edge_pairs:
-        edge_layer = view.shapes.add_links(
-            coordinate_pairs=puw.quantity(np.asarray(edge_pairs), 'angstroms'),
+    if edge_geometry.refs:
+        edge_layer = add_segments(
+            view,
+            edge_geometry,
             radius=puw.quantity(edge_radius_nm, 'nm'),
             color=edge_color,
             tag=f'{tag_prefix}-edges',
@@ -137,9 +124,10 @@ def show_dfn_graph(
             skip_digestion=skip_digestion,
         )
     mouth_layer = None
-    if mouth_pairs:
-        mouth_layer = view.shapes.add_links(
-            coordinate_pairs=puw.quantity(np.asarray(mouth_pairs), 'angstroms'),
+    if mouth_geometry.refs:
+        mouth_layer = add_segments(
+            view,
+            mouth_geometry,
             radius=puw.quantity(edge_radius_nm, 'nm'),
             color=mouth_color,
             tag=f'{tag_prefix}-mouths',
@@ -149,11 +137,30 @@ def show_dfn_graph(
 
     return {
         'nodes': node_layer,
+        'node_geometry': node_geometry,
         'edges': edge_layer,
+        'edge_geometry': edge_geometry,
         'mouths': mouth_layer,
+        'mouth_geometry': mouth_geometry,
+        'node_ids': tuple(node_ids),
         'n_nodes': len(node_ids),
-        'n_edges': len(edge_pairs),
-        'n_mouths': len(mouth_pairs),
+        'n_edges': len(edge_geometry.refs),
+        'n_mouths': len(mouth_geometry.refs),
     }
 
 
+@wraps(_show_dfn_graph_legacy)
+def show_dfn_graph(view, topography=None, **kwargs):
+    """Render the DFN graph and return a uniform ``RenderResult``."""
+    operation_key = f'graph:{kwargs.get("tag_prefix", "dfn-graph")}'
+    clear_previous_render_result(view, operation_key)
+    raw = _show_dfn_graph_legacy(view, topography, **kwargs)
+    selected_ids = raw.get('node_ids', ()) if isinstance(raw, dict) else ()
+    result = render_result('graph', raw, selected_ids=selected_ids)
+    return remember_render_result(view, operation_key, result)
+
+
+show_dfn_graph.__signature__ = signature(_show_dfn_graph_legacy).replace(
+    return_annotation=RenderResult
+)
+show_dfn_graph.__annotations__['return'] = RenderResult

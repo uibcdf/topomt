@@ -94,7 +94,7 @@ topography.dfnd
 │   ├── tetrahedra      # geometry + R_residence + per-tet solvent volume
 │   └── faces           # geometry (atom triple, area, face id) + R_gate
 └── dfn                 # probe-DEPENDENT network for one probe
-    ├── parameters      # probe_radius, transit_policy, gate_intrusion_policy, epsilon, radii_model
+    ├── parameters      # mesh_config + query + reporting + identity keys
     ├── graph           # nodes (wet/dry state, transit_role, flags; ref mesh tetra),
     │                   #   edges (permeable faces, transit edges), OCEAN
     │                   #   .neighbors(node_id, side=None|'wet'|'dry')   ← §10
@@ -151,6 +151,14 @@ there is one mental model for both levels.
 - **graph facet**: `node_indices` (tetrahedra), `boundary_face_ids`;
 - **spatial representation (atoms)**: `atom_indices`, `volume`, `center`;
 - **motifs**: the component's sub-structures.
+
+Atom-index fields follow the authoritative two-space contract:
+`atom_indices` always refers to the original molecular system, while
+`local_atom_indices` and `face_atoms_local` index the selected DFND mesh and its
+coordinate arrays. Public APIs and MolSysMT queries use the former; kernels and
+geometry use the latter. Generic addon-owned payloads declare
+`atom_index_space` explicitly. See
+[`checkpoint_atom_index_spaces_2026_06_14.md`](checkpoint_atom_index_spaces_2026_06_14.md).
 
 The fields above follow the authoritative
 [`component_identity_contract.md`](component_identity_contract.md):

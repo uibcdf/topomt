@@ -1,6 +1,29 @@
 import pytest
+
 import topomt as tmt
-from molsysmt.native.molsys import MolSys
+
+
+def pytest_configure(config):
+    """Pre-warm MolSysMT's numba cache once, in the xdist *controller*, before any
+    worker is forked.
+
+    MolSysMT compiles many kernels with ``@njit(cache=True)`` (on-disk cache).
+    Under ``-n 12`` the workers otherwise hit a cold cache simultaneously and race
+    to compile/write it, which surfaces as intermittent failures in the heavy
+    real-system tests (see ``devguide/test_parallel_flakiness_2026_06_14.md``).
+    The controller runs ``pytest_configure`` to completion *before* spawning
+    workers, so warming here populates the disk cache race-free; workers then load
+    the compiled functions instead of recompiling. Best-effort: never fail
+    collection if warmup is unavailable.
+    """
+    if hasattr(config, "workerinput"):
+        return  # xdist worker: only the controller pre-warms
+    try:
+        import molsysmt as msm
+
+        msm.warmup()
+    except Exception:
+        pass
 
 @pytest.fixture(scope="session")
 def seed_topography_empty_1tcd():

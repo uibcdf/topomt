@@ -180,7 +180,7 @@ def test_tolerances_recorded_and_inherited_by_at_probe():
 def test_wet_component_initializes_motif_descriptors():
     from topomt.dfnd.components import WetComponent
 
-    component = WetComponent(component_id="WET-1", family="void")
+    component = WetComponent(component_id='WET-1', family='void')
 
     assert component.topological_depth == {}
     assert component.depth_regions == []
@@ -190,14 +190,14 @@ def test_wet_component_initializes_motif_descriptors():
 
 
 @pytest.mark.parametrize(
-    "kwargs, message",
+    'kwargs, message',
     [
-        ({"probe_radius": -0.1}, "probe_radius"),
-        ({"residence_tolerance": -0.1}, "residence_tolerance"),
-        ({"permeability_tolerance": -0.1}, "permeability_tolerance"),
-        ({"min_size": -1}, "min_size"),
-        ({"min_size": 1.5}, "min_size"),
-        ({"min_size": True}, "min_size"),
+        ({'probe_radius': -0.1}, 'probe_radius'),
+        ({'residence_tolerance': -0.1}, 'residence_tolerance'),
+        ({'permeability_tolerance': -0.1}, 'permeability_tolerance'),
+        ({'min_size': -1}, 'min_size'),
+        ({'min_size': 1.5}, 'min_size'),
+        ({'min_size': True}, 'min_size'),
     ],
 )
 def test_get_topography_rejects_invalid_physical_query_parameters(kwargs, message):
@@ -206,3 +206,79 @@ def test_get_topography_rejects_invalid_physical_query_parameters(kwargs, messag
 
     with pytest.raises(ValueError, match=message):
         network.get_topography(**kwargs)
+
+
+def test_info_queries_original_molecular_system_with_global_atom_indices(monkeypatch):
+    import molsysmt as msm
+
+    calls = []
+
+    def fake_get(system, *, selection, **kwargs):
+        calls.append((system, list(selection), kwargs))
+        if kwargs.get('atom_name'):
+            return ['A10', 'A20', 'A30', 'A40']
+        if kwargs.get('residue_name'):
+            return ['RES'] * 4
+        if kwargs.get('residue_id'):
+            return [1] * 4
+        raise AssertionError(kwargs)
+
+    monkeypatch.setattr(msm, 'get', fake_get)
+    data = object.__new__(DFNDData)
+    data._network = types.SimpleNamespace(molecular_system='original-system')
+    data.raw = {
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 7,
+                'local_atom_indices': [0, 1, 2, 3],
+                'atom_indices': [10, 20, 30, 40],
+            }
+        ]
+    }
+
+    data.info(7)
+
+    assert calls
+    assert all(system == 'original-system' for system, _selection, _kwargs in calls)
+    assert all(selection == [10, 20, 30, 40] for _system, selection, _kwargs in calls)
+
+
+def test_info_uses_global_indices_after_hydrogen_exclusion(tmp_path, monkeypatch):
+    import molsysmt as msm
+
+    pdb = tmp_path / 'hydrogen_first.pdb'
+    pdb.write_text(
+        '\n'.join(
+            [
+                'ATOM      1  H1  GLY A   1       9.000   9.000   9.000  1.00  0.00           H',
+                'ATOM      2  C1  GLY A   1       0.000   0.000   0.000  1.00  0.00           C',
+                'ATOM      3  C2  GLY A   1       4.000   0.000   0.000  1.00  0.00           C',
+                'ATOM      4  C3  GLY A   1       0.000   4.000   0.000  1.00  0.00           C',
+                'ATOM      5  C4  GLY A   1       0.000   0.000   4.000  1.00  0.00           C',
+                'END',
+                '',
+            ]
+        )
+    )
+    network = DelaunayFlowNetwork(str(pdb), hydrogen_policy='exclude')
+    result = network.get_topography()
+    record = result['raw']['tetrahedra'][0]
+    assert record['local_atom_indices'] == [0, 1, 2, 3]
+    assert record['atom_indices'] == [1, 2, 3, 4]
+
+    selections = []
+
+    def fake_get(_system, *, selection, **kwargs):
+        selections.append(list(selection))
+        if kwargs.get('atom_name'):
+            return ['C1', 'C2', 'C3', 'C4']
+        if kwargs.get('residue_name'):
+            return ['GLY'] * 4
+        if kwargs.get('residue_id'):
+            return [1] * 4
+        raise AssertionError(kwargs)
+
+    monkeypatch.setattr(msm, 'get', fake_get)
+    DFNDData(network, result).info(record['tetrahedron_id'])
+
+    assert selections and all(selection == [1, 2, 3, 4] for selection in selections)

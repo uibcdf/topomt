@@ -120,6 +120,54 @@ def test_marginal_gate_is_flagged_in_raw_face_and_owner_tetrahedron_records():
     assert all('marginal' in tetrahedron['flags'] for tetrahedron in owner_tetrahedra)
 
 
+def test_permeable_shared_faces_between_transit_nodes_are_transit_edges():
+    network = _two_tetrahedra_fixture()
+    probe_radius = float(network.edge_weights[0])
+
+    result = network.get_topography(probe_radius=probe_radius, min_size=0)
+    components = result['raw']['wet_components']
+    faces = [
+        face for face in result['raw']['faces'] if face['neighbor_tetrahedron_id'] >= 0
+    ]
+
+    assert len(components) == 1
+    assert set(components[0]['tetrahedron_ids']) == set(range(network.n_tetrahedra))
+    assert all(face['permeability_state'] == 'permeable' for face in faces)
+    assert all(face['transit_edge'] is True for face in faces)
+    assert all(face['gate_margin'] == pytest.approx(0.0, abs=1e-12) for face in faces)
+    assert all(face['effective_gate_margin'] >= 0.0 for face in faces)
+    assert components[0]['path_capacity_min'] == pytest.approx(0.0, abs=1e-12)
+    assert components[0]['path_gate_margin_min'] == pytest.approx(0.0, abs=1e-12)
+    assert components[0]['path_effective_gate_margin_min'] >= 0.0
+
+
+def test_permeability_tolerance_changes_connectivity_and_preserves_both_margins():
+    network = _two_tetrahedra_fixture()
+    gate = float(network.edge_weights[0])
+    tolerance = 0.05
+    probe_radius = gate + tolerance / 2.0
+
+    result = network.get_topography(
+        probe_radius=probe_radius,
+        permeability_tolerance=tolerance,
+        transit_policy='with_connectors',
+        min_size=0,
+    )
+    component = result['raw']['wet_components'][0]
+    shared_faces = [
+        face for face in result['raw']['faces'] if face['neighbor_tetrahedron_id'] >= 0
+    ]
+
+    assert len(result['raw']['wet_components']) == 1
+    assert all(face['permeability_state'] == 'permeable' for face in shared_faces)
+    assert all(face['transit_edge'] is True for face in shared_faces)
+    assert all(face['gate_margin'] < 0.0 for face in shared_faces)
+    assert all(face['effective_gate_margin'] > 0.0 for face in shared_faces)
+    assert component['path_capacity_min'] < 0.0
+    assert component['path_gate_margin_min'] == component['path_capacity_min']
+    assert component['path_effective_gate_margin_min'] > 0.0
+
+
 def test_transit_policy_is_recorded_and_validated():
     coords = np.array(
         [
@@ -326,6 +374,36 @@ def test_shared_faces_have_one_gate_value_and_one_global_face_id():
         assert left['face_atoms_local'] == right['face_atoms_local']
         assert left['R_gate'] == pytest.approx(right['R_gate'], abs=1e-12)
         assert left['permeability_state'] == right['permeability_state']
+        assert left['transit_edge'] == right['transit_edge']
+        assert left['gate_margin'] == pytest.approx(right['gate_margin'], abs=1e-12)
+        assert left['effective_gate_margin'] == pytest.approx(
+            right['effective_gate_margin'], abs=1e-12
+        )
+
+
+def test_transit_edges_are_exactly_permeable_shared_faces_between_transit_nodes():
+    network = _network_from_random_points(seed=14, n_atoms=24)
+    result = network.get_topography(
+        probe_radius=1.4,
+        permeability_tolerance=0.05,
+        transit_policy='with_connectors',
+        min_size=0,
+    )
+    transit_nodes = {
+        tetrahedron['tetrahedron_id']
+        for tetrahedron in result['raw']['tetrahedra']
+        if tetrahedron['transit_role'] in {'resident_transit', 'transit_connector'}
+    }
+
+    for face in result['raw']['faces']:
+        neighbor = face['neighbor_tetrahedron_id']
+        expected = (
+            neighbor >= 0
+            and face['owner_tetrahedron_id'] in transit_nodes
+            and neighbor in transit_nodes
+            and face['permeability_state'] == 'permeable'
+        )
+        assert face['transit_edge'] is expected
 
 
 def test_external_links_reference_existing_boundary_faces_and_atoms():
@@ -396,9 +474,7 @@ def test_channel_domain_has_distinct_external_links():
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
     domains = result['raw']['wet_components']
-    multi_domains = [
-        domain for domain in domains if domain['family'] == 'channel'
-    ]
+    multi_domains = [domain for domain in domains if domain['family'] == 'channel']
     assert len(multi_domains) == 1
 
     domain = multi_domains[0]

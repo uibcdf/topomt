@@ -4,7 +4,9 @@ from typing import Any
 
 import numpy as np
 
-from topomt.dfnd.selectors import select_edges, select_faces
+from topomt.dfnd.selectors import select_faces
+
+from ..geometry import edge_geometry, entity_ref_payload, face_geometry
 
 DEFAULT_BLOB_ALPHA = 0.35
 DEFAULT_MARKER_ALPHA = 0.55
@@ -35,9 +37,15 @@ def _dfnd_edge_meta(topography, tetrahedron_ids):
     """Per-edge metadata for the wireframe: keyed by the edge's LOCAL atom pair
     (the space ``atom_quads`` uses) so the frontend can label edges by ``edge_id``.
     """
+    geometry = edge_geometry(topography, tetrahedron_ids)
     return [
-        {'atoms': list(edge['local_atom_indices']), 'edge_id': edge['edge_id']}
-        for edge in select_edges(topography, tetrahedron_ids=tetrahedron_ids)
+        {
+            'atoms': list(pair),
+            'atom_index_space': geometry.atom_index_space,
+            'edge_id': ref.entity_id,
+            'entity_ref': entity_ref_payload(ref),
+        }
+        for pair, ref in zip(geometry.atom_pairs, geometry.refs, strict=True)
     ]
 
 
@@ -49,18 +57,19 @@ def _dfnd_face_meta(
     colors_by_tetrahedron=None,
 ):
     """Build pickable DFND face metadata for faces touching selected tetrahedra."""
-    selected_ids = set(tetrahedron_ids)
+    geometry = face_geometry(
+        topography, tetrahedron_ids, permeability_states=permeability_states
+    )
+    face_by_id = {
+        face.get('face_id'): face
+        for face in select_faces(topography, permeability_state=permeability_states)
+    }
     face_meta = []
 
-    for face in select_faces(topography, permeability_state=permeability_states):
+    for atoms, ref in zip(geometry.atom_triplets, geometry.refs, strict=True):
+        face = face_by_id.get(ref.entity_id, {})
         owner = face.get('owner_tetrahedron_id')
         neighbor = face.get('neighbor_tetrahedron_id', -1)
-        if owner not in selected_ids and neighbor not in selected_ids:
-            continue
-
-        atoms = face.get('face_atoms_local')
-        if not atoms or len(atoms) != 3:
-            continue
 
         permeability = face.get('permeability_state', 'unknown')
         color = _FACE_PERMEABILITY_COLORS.get(permeability, 0x888888)
@@ -72,8 +81,10 @@ def _dfnd_face_meta(
 
         face_meta.append(
             {
-                'atoms': [int(atom) for atom in atoms],
-                'face_id': face.get('face_id'),
+                'atoms': list(atoms),
+                'atom_index_space': geometry.atom_index_space,
+                'face_id': ref.entity_id,
+                'entity_ref': entity_ref_payload(ref),
                 'permeability': permeability,
                 'owner_id': owner,
                 'neighbor_id': 'OCEAN' if neighbor == -1 else neighbor,

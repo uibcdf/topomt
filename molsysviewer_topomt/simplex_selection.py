@@ -16,6 +16,8 @@ from typing import Any
 
 from topomt.dfnd.selectors import select_edges, select_faces, select_tetrahedra
 
+from .index_spaces import MOLECULAR_SYSTEM, atom_index_payload
+
 ACTION_ID = 'dfnd-select-simplex'
 SELECTION_GROUP = 'Selección actual'
 HIGHLIGHT_TAG = 'dfn-highlight'
@@ -38,7 +40,11 @@ def simplex_selection_info(view) -> dict[str, Any] | None:
             namespace = None
     if namespace is None:
         namespace = getattr(view, '_topomt_addon_runtime', None)
-    info = getattr(namespace, 'active_simplex_selection', None) if namespace is not None else None
+    info = (
+        getattr(namespace, 'active_simplex_selection', None)
+        if namespace is not None
+        else None
+    )
     return dict(info) if info else None
 
 
@@ -63,12 +69,14 @@ def resolve_simplices(topography, atom_indices) -> list[dict[str, Any]]:
     faces = [
         face
         for face in select_faces(topography)
-        if set(face.get('atom_indices', ())) and set(face['atom_indices']).issubset(atom_set)
+        if set(face.get('atom_indices', ()))
+        and set(face['atom_indices']).issubset(atom_set)
     ]
     tetrahedra = [
         tet
         for tet in select_tetrahedra(topography)
-        if set(tet.get('atom_indices', ())) and set(tet['atom_indices']).issubset(atom_set)
+        if set(tet.get('atom_indices', ()))
+        and set(tet['atom_indices']).issubset(atom_set)
     ]
 
     items: list[dict[str, Any]] = []
@@ -82,9 +90,15 @@ def resolve_simplices(topography, atom_indices) -> list[dict[str, Any]]:
         items.append(item)
 
     # Exact single simplex: the whole selection IS one edge / face / tetra.
-    exact_edge = next((e for e in edges if frozenset(e['atom_indices']) == atom_set), None)
-    exact_face = next((f for f in faces if frozenset(f['atom_indices']) == atom_set), None)
-    exact_tet = next((t for t in tetrahedra if frozenset(t['atom_indices']) == atom_set), None)
+    exact_edge = next(
+        (e for e in edges if frozenset(e['atom_indices']) == atom_set), None
+    )
+    exact_face = next(
+        (f for f in faces if frozenset(f['atom_indices']) == atom_set), None
+    )
+    exact_tet = next(
+        (t for t in tetrahedra if frozenset(t['atom_indices']) == atom_set), None
+    )
 
     if n == 2 and exact_edge is not None:
         add(_edge_item(exact_edge))
@@ -109,11 +123,11 @@ def _edge_item(edge: dict[str, Any]) -> dict[str, Any]:
     a, b = edge['atom_indices']
     return {
         'id': ACTION_ID,
-        'title': f"Seleccionar arista id {edge['edge_id']}: atoms {a}-{b}",
+        'title': f'Seleccionar arista id {edge["edge_id"]}: atoms {a}-{b}',
         'payload': {
             'kind': 'edge',
             'edge_id': edge['edge_id'],
-            'atom_indices': list(edge['atom_indices']),
+            **atom_index_payload(edge['atom_indices'], MOLECULAR_SYSTEM),
             'tetrahedron_ids': list(edge.get('tetrahedron_ids', [])),
         },
     }
@@ -127,15 +141,17 @@ def _face_item(face: dict[str, Any]) -> dict[str, Any]:
     return {
         'id': ACTION_ID,
         'title': (
-            f"Seleccionar cara id {face['face_id']}: "
-            f"tetrahedra {owner}-{neighbor_label}; {perm}"
+            f'Seleccionar cara id {face["face_id"]}: '
+            f'tetrahedra {owner}-{neighbor_label}; {perm}'
         ),
         'payload': {
             'kind': 'face',
             'face_id': face['face_id'],
-            'atom_indices': list(face['atom_indices']),
+            **atom_index_payload(face['atom_indices'], MOLECULAR_SYSTEM),
             'tetrahedron_ids': [
-                tid for tid in (owner, neighbor if neighbor != -1 else None) if tid is not None
+                tid
+                for tid in (owner, neighbor if neighbor != -1 else None)
+                if tid is not None
             ],
         },
     }
@@ -145,11 +161,11 @@ def _tetra_item(tet: dict[str, Any]) -> dict[str, Any]:
     tid = tet.get('tetrahedron_id')
     return {
         'id': ACTION_ID,
-        'title': f"Seleccionar tetraedro {tid}: {tet.get('combined_class', 'unknown')}",
+        'title': f'Seleccionar tetraedro {tid}: {tet.get("combined_class", "unknown")}',
         'payload': {
             'kind': 'tetrahedron',
             'tetrahedron_id': tid,
-            'atom_indices': list(tet['atom_indices']),
+            **atom_index_payload(tet['atom_indices'], MOLECULAR_SYSTEM),
             'tetrahedron_ids': [tid],
         },
     }
@@ -163,7 +179,11 @@ def _bulk_item(kind: str, records, id_key: str, label_es: str) -> dict[str, Any]
             for rec in records
             for tid in (
                 rec.get('tetrahedron_ids')
-                or ([rec.get('tetrahedron_id')] if rec.get('tetrahedron_id') is not None else [])
+                or (
+                    [rec.get('tetrahedron_id')]
+                    if rec.get('tetrahedron_id') is not None
+                    else []
+                )
             )
         }
     )
@@ -172,11 +192,11 @@ def _bulk_item(kind: str, records, id_key: str, label_es: str) -> dict[str, Any]
     )
     return {
         'id': ACTION_ID,
-        'title': f"Seleccionar todas las {label_es} contenidas ({len(records)})",
+        'title': f'Seleccionar todas las {label_es} contenidas ({len(records)})',
         'payload': {
             'kind': kind,
             'ids': ids,
-            'atom_indices': atom_indices,
+            **atom_index_payload(atom_indices, MOLECULAR_SYSTEM),
             'tetrahedron_ids': tetra_ids,
         },
     }

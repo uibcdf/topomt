@@ -42,7 +42,7 @@ def _resident_permeable_graph(raw: dict[str, Any], resident_ids: set[int]):
     graph = nx.Graph()
     graph.add_nodes_from(resident_ids)
     for face in raw['faces']:
-        if face.get('permeability_state') != 'permeable':
+        if not face.get('transit_edge', face.get('permeability_state') == 'permeable'):
             continue
         owner = face.get('owner_tetrahedron_id')
         neighbor = face.get('neighbor_tetrahedron_id')
@@ -88,14 +88,14 @@ def localize_interface_core(
     import networkx as nx
 
     if not 0.0 <= quantile < 1.0:
-        raise ValueError("quantile must be in [0, 1)")
+        raise ValueError('quantile must be in [0, 1)')
 
     raw = topography.dfnd.raw
     component = next(
         (c for c in raw['wet_components'] if c['id'] == component_id), None
     )
     if component is None:
-        raise ValueError(f"no wet component with id {component_id!r}")
+        raise ValueError(f'no wet component with id {component_id!r}')
 
     resident_ids = {int(t) for t in (component.get('resident_tetrahedron_ids') or [])}
     if len(resident_ids) < 3:
@@ -119,7 +119,9 @@ def localize_interface_core(
         core = {max(graph.nodes, key=lambda t: betweenness[t])}
 
     rest = graph.subgraph(set(graph.nodes) - core)
-    raft_fragments = [sorted(component_nodes) for component_nodes in nx.connected_components(rest)]
+    raft_fragments = [
+        sorted(component_nodes) for component_nodes in nx.connected_components(rest)
+    ]
     raft_fragments.sort(key=len, reverse=True)
 
     result = {
@@ -151,14 +153,13 @@ def peel_surface_rafts(
     Returns a dict with ``core_tetrahedron_ids`` (the survivors) and
     ``raft_tetrahedron_ids`` (the peeled pendants).
     """
-    import networkx as nx
 
     raw = topography.dfnd.raw
     component = next(
         (c for c in raw['wet_components'] if c['id'] == component_id), None
     )
     if component is None:
-        raise ValueError(f"no wet component with id {component_id!r}")
+        raise ValueError(f'no wet component with id {component_id!r}')
 
     resident_ids = {int(t) for t in (component.get('resident_tetrahedron_ids') or [])}
     graph = _resident_permeable_graph(raw, resident_ids)

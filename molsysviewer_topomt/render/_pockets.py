@@ -13,6 +13,7 @@ from ._common import (
     DEFAULT_MARKER_RADIUS_NM,
     _resolve_topography,
 )
+from .result import RenderResult, clear_previous_render_result, remember_render_result
 
 
 def _marker_radius_from_feature(feature_record: dict[str, Any]) -> float:
@@ -29,13 +30,14 @@ def show_topography_pockets(
     view,
     topography=None,
     *,
+    feature_ids=None,
     tag_prefix: str = 'topomt-pocket',
     color_map: str = 'viridis',
     alpha: float = DEFAULT_BLOB_ALPHA,
     marker_color: int = DEFAULT_MARKER_COLOR,
     marker_alpha: float = DEFAULT_MARKER_ALPHA,
     skip_digestion: bool = False,
-) -> dict[str, Any]:
+) -> RenderResult:
     """Render current TopoMT pocket features into an existing MolSysViewer view.
 
     Pockets with `sphere_centers` and `sphere_radii` are rendered as pocket blobs.
@@ -46,10 +48,17 @@ def show_topography_pockets(
         raise ValueError(
             'topography is required (pass it explicitly or attach via attach_topography(view, topography))'
         )
+    operation_key = f'pockets:{tag_prefix}'
+    clear_previous_render_result(view, operation_key)
     payload = topography_payload(topography)
+    selected_ids = (
+        None if feature_ids is None else {str(value) for value in feature_ids}
+    )
     rendered: list[dict[str, Any]] = []
 
     for feature in payload['features']:
+        if selected_ids is not None and feature.get('feature_id') not in selected_ids:
+            continue
         if feature.get('feature_type') != 'pocket':
             continue
 
@@ -93,10 +102,15 @@ def show_topography_pockets(
                 {'feature_id': feature_id, 'tag': tag, 'mode': 'marker', 'layer': layer}
             )
 
-    return {
-        'n_rendered': len(rendered),
-        'rendered': rendered,
-        'feature_counts': payload['feature_counts'],
-    }
-
-
+    return remember_render_result(
+        view,
+        operation_key,
+        RenderResult(
+            representation='pockets',
+            selected_ids=tuple(item['feature_id'] for item in rendered),
+            layers=tuple(item['layer'] for item in rendered),
+            tags=tuple(item['tag'] for item in rendered),
+            counts={'n_rendered': len(rendered)},
+            details={'rendered': rendered, 'feature_counts': payload['feature_counts']},
+        ),
+    )

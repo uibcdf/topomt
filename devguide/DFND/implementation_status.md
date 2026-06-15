@@ -159,15 +159,23 @@ identity/provenance checkpoint is
 
 ## 5. Completed Hardening Milestone: 2026-06-06
 
-The static identity, contextual provenance, and registry-integrity milestone is
-implemented and verified:
+The static identity, contextual provenance, registry-integrity, and canonical
+transit-edge milestones are implemented and verified:
 
 - deterministic component, external-link, and motif support/context keys;
 - additive contextual provenance across raw records, typed components, relations,
   and promoted features;
 - component selection and registry lookup by contextual or support keys;
 - atomic `Topography` and `Components` mutation and semantic copy behavior;
-- synchronized authoritative identity, object-model, API, and motif contracts.
+- synchronized authoritative identity, object-model, API, and motif contracts;
+- frozen mesh/query configuration, complete `at_probe()` inheritance, and
+  reporting-independent component identity;
+- explicit mesh-local versus molecular-system atom-index boundaries across
+  DFND diagnostics and the TopoMT viewer addon;
+- complete-source viewer runtime ownership with separate feature filters and
+  render groups;
+- common primary-render `RenderResult` and exact repeated-render lifecycle.
+- first viewer-neutral geometry boundary slice for canonical tetrahedron barycentres and structured diagnostic identity.
 
 This milestone does **not** implement temporal identity. `component_key`,
 `external_link_key`, and `motif_key` are exact contextual keys, not trajectory
@@ -177,12 +185,9 @@ tracks.
 
 ### Immediate engineering corrections
 
-- unify face permeability and wet-graph traversability under one canonical
-  predicate (`DFND-001`);
-- resolve inert/incomplete query options and define a typed immutable DFND query
-  contract;
-- continue viewer atom-index, runtime ownership, repeated-render, and geometry
-  boundary hardening;
+- apply the completed typed mesh/query contract to future reporting and temporal
+  comparability work;
+- continue viewer geometry-boundary hardening;
 - complete packaging, isolated-import, documentation-CI, and quality enforcement.
 
 ### Decisions required
@@ -204,6 +209,6 @@ tracks.
 
 The next DFND phase should continue implementation hardening, not new method
 invention. Static identity and provenance are now adequate for exact comparison
-within a contextual result. The next implementation package should correct
-canonical traversability and query contracts while the dynamic-lineage decisions
-are discussed separately.
+within a contextual result. Canonical traversability and the typed mesh/query contract are implemented and
+verified. Viewer atom-index mapping is also explicit and verified. The next
+implementation package should address the viewer geometry boundary while dynamic-lineage decisions are discussed separately.

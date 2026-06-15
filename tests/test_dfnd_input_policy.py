@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-from topomt.dfnd import dfnd
+from topomt.dfnd import DFNDMeshConfig, DFNDQuery, dfnd
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
 
@@ -68,3 +68,17 @@ def test_dfnd_from_arrays_rejects_invalid_radii():
             _minimal_coordinates(),
             np.array([1.7, 1.7, np.nan, 1.7]),
         )
+
+
+def test_dfnd_public_facade_accepts_typed_mesh_and_query_configuration(tmp_path):
+    pdb_path = tmp_path / 'minimal.pdb'
+    _write_minimal_pdb(pdb_path)
+    mesh_config = DFNDMeshConfig(epsilon=1e-5, hydrogen_policy='include')
+    query = DFNDQuery(probe_radius=1.2, transit_policy='resident_only')
+
+    result = dfnd(str(pdb_path), mesh_config=mesh_config, query=query)
+    parameters = result['raw']['parameters']
+
+    assert parameters['mesh_config'] == mesh_config.to_dict()
+    assert parameters['query'] == query.to_dict()
+    assert 'sea_level' not in parameters

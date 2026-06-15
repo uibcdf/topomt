@@ -27,7 +27,7 @@ An honest engineering approach requires anticipating failure modes. Here we anal
 *   **Mitigation:**
     *   **Volume Pruning:** Discard pockets with Volume < $V_{min}$ (e.g., 50 Å³).
     *   **Depth Pruning:** Discard pockets that are "shallow" (geodesic depth from Root < $D_{min}$).
-    *   **Sea Level Tuning:** Allow the user to adjust the `OCEAN` definition radius.
+    *   **Exterior-envelope mode:** Evaluate whether a separate macro-surface definition is scientifically useful.
 
 ### 2.2. The "Mega-Cluster" (Percolation Threshold)
 *   **Risk:** At a certain probe radius, the internal void network might percolate.

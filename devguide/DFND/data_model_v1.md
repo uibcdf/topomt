@@ -108,6 +108,21 @@ terminal_contact_policy = non_resident_with_one_permeable_contact
 No hidden tolerance or input-filtering decision should affect graph construction
 without being represented here.
 
+### 3.1. Atom-index spaces
+
+DFND records may carry both atom-index spaces, and their names are contractual:
+
+- `local_atom_indices` and `face_atoms_local` are `mesh_local`: positions in the
+  selected atom/coordinate arrays used to build the Delaunay mesh;
+- `atom_indices` is `molecular_system`: indices in the original molecular
+  system.
+
+Mesh kernels and geometry index local coordinate arrays with `mesh_local`
+indices. Public records, MolSysMT queries, and payloads consumed by a view of
+the original molecular system use `molecular_system` indices. Any generic
+addon-owned payload carrying atom indices must also carry an explicit
+`atom_index_space`; consumers must not infer the space from the values.
+
 ## 4. Primitive Records
 
 ### 4.1. TetrahedronRecord
@@ -121,6 +136,7 @@ tetrahedron_id
 simplex_index
 atom_ids
 atom_indices
+local_atom_indices
 center
 volume
 R_residence
@@ -195,12 +211,15 @@ Required fields:
 face_id
 atom_ids
 atom_indices
+face_atoms_local
 owner_tetrahedron_ids
 neighbor_tetrahedron_ids
 is_hull_face
 R_gate
+gate_margin
+effective_gate_margin
 permeability_state
-marginal_R_gate
+transit_edge
 area_geometric
 flags
 ```
@@ -211,13 +230,12 @@ Recommended identity:
 face_id = stable key from sorted atom ids plus frame/context
 ```
 
-`permeability_state` values:
-
-```text
-permeable
-non_permeable
-marginal
-```
+`permeability_state` values are `permeable` and `non_permeable` under the
+selected numerical policy. Marginality remains an auditable flag rather than a
+third connectivity decision. `transit_edge` is true exactly when an internal
+permeable face connects two transit nodes. `gate_margin` is the physical
+`R_gate - R_probe`; `effective_gate_margin` is measured against the tolerance-
+adjusted threshold.
 
 A hull face has one finite owner and exterior neighbor context. It does not
 create a finite tetrahedron on the other side.

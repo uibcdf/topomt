@@ -45,6 +45,7 @@ def _raw_records():
                 'neighbor_tetrahedron_id': 30,
                 'face_atoms_local': [4, 5, 6],
                 'permeability_state': 'permeable',
+                'transit_edge': True,
             },
             {
                 'face_id': 100,
@@ -52,6 +53,7 @@ def _raw_records():
                 'neighbor_tetrahedron_id': 20,
                 'face_atoms_local': [4, 5, 6],
                 'permeability_state': 'permeable',
+                'transit_edge': True,
             },
             {
                 'face_id': 101,
@@ -59,6 +61,7 @@ def _raw_records():
                 'neighbor_tetrahedron_id': 10,
                 'face_atoms_local': [4, 5, 7],
                 'permeability_state': 'non_permeable',
+                'transit_edge': False,
             },
             {
                 'face_id': 102,
@@ -66,6 +69,7 @@ def _raw_records():
                 'neighbor_tetrahedron_id': 20,
                 'face_atoms_local': [0, 1, 2],
                 'permeability_state': 'permeable',
+                'transit_edge': False,
             },
         ],
     }
@@ -147,6 +151,17 @@ def test_select_faces_filters_by_owner_permeability_and_deduplicates_face_ids():
         owner_tetrahedron_ids=dry_ids,
         permeability_state='permeable',
     ) == [[4, 5, 6]]
+
+
+def test_select_faces_filters_canonical_transit_edges_separately_from_permeability():
+    wrapped_raw = {'raw': _raw_records()}
+
+    assert [
+        face['face_id'] for face in select_faces(wrapped_raw, transit_edge=True)
+    ] == [100]
+    assert select_face_ids(
+        wrapped_raw, permeability_state='permeable', transit_edge=False
+    ) == [102]
 
 
 def test_select_components_returns_component_ids_tetrahedra_and_atoms():

@@ -38,6 +38,13 @@ DFND now has:
 - tested face identity and external-link tracing;
 - deterministic component, external-link, and motif support/context keys;
 - contextual provenance across raw records, typed relations, and promoted features;
+- canonical transit edges derived directly from shared-face permeability;
+- typed immutable mesh/query configuration with complete re-probing and explicit
+  reporting separation;
+- explicit and tested mesh-local versus molecular-system atom-index boundaries;
+- complete-source viewer runtime ownership with separate feature filters and
+  render groups;
+- common primary-render `RenderResult` and exact repeated-render lifecycle;
 - atomic feature and component registries;
 - tested access-by-residence component classification;
 - raw records for tetrahedra, faces, wet components, residence regions, external links, dry components, dry interfaces, and dry motifs;
@@ -48,14 +55,9 @@ DFND now has:
 
 ### Immediate Work
 
-1. Unify face permeability and wet-graph traversability under one canonical
-   predicate.
-2. Define a typed immutable DFND query contract and resolve inert/incomplete
-   query options.
-3. Continue viewer atom-index, runtime ownership, repeated-render, and geometry
-   boundary hardening.
-4. Decide reporting/filter policy for tiny and near-threshold components.
-5. Expand real-system and external-method comparison batteries without forcing
+1. Continue viewer geometry-boundary hardening.
+2. Decide reporting/filter policy for tiny and near-threshold components.
+3. Expand real-system and external-method comparison batteries without forcing
    strict semantic parity.
 
 The completed static-identity/provenance milestone is recorded in

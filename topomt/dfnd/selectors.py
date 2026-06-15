@@ -1,6 +1,7 @@
 """Selectors for DFND component, tetrahedron, and face records."""
 
 from collections.abc import Iterable
+from dataclasses import dataclass
 from typing import Any
 
 
@@ -21,40 +22,66 @@ def _raw_from_source(source: Any) -> dict[str, Any]:
     raise ValueError('source must be a Topography, DFNDData, DFND result, or raw dict')
 
 
-def _components_registry_from_source(source: Any) -> Any:
+@dataclass(frozen=True)
+class _ComponentSourceView:
+    records: tuple[tuple[Any, str | None], ...]
+    capabilities: frozenset[str]
+
+
+def _component_source_view(source: Any) -> _ComponentSourceView:
     dfnd_data = getattr(source, 'dfnd', None)
     if dfnd_data is not None:
-        return _components_registry_from_source(dfnd_data)
+        return _component_source_view(dfnd_data)
 
     dfn = getattr(source, 'dfn', None)
-    if dfn is not None and getattr(dfn, 'components', None) is not None:
-        return dfn.components
-
-    return None
-
-
-def _iter_components(source: Any):
-    registry = _components_registry_from_source(source)
+    registry = getattr(dfn, 'components', None) if dfn is not None else None
     if registry is not None:
-        for component in registry.values():
-            yield component, getattr(component, 'side', None)
-        return
+        records = tuple(
+            (component, getattr(component, 'side', None))
+            for component in registry.values()
+        )
+        capabilities = frozenset(
+            side for _component, side in records if side in {'wet', 'dry'}
+        )
+        return _ComponentSourceView(records, capabilities)
 
     if isinstance(source, dict):
+        records = []
+        capabilities = set()
         raw = source.get('raw', source)
-        if isinstance(raw, dict):
-            for component in raw.get('wet_components', []):
-                yield component, 'wet'
-        dry = source.get('dry', {})
-        if isinstance(dry, dict):
-            for component in dry.get('components', []):
-                yield component, 'dry'
-        return
+        if isinstance(raw, dict) and 'wet_components' in raw:
+            capabilities.add('wet')
+            records.extend((component, 'wet') for component in raw['wet_components'])
+        dry = source.get('dry')
+        if isinstance(dry, dict) and 'components' in dry:
+            capabilities.add('dry')
+            records.extend((component, 'dry') for component in dry['components'])
+        if capabilities:
+            return _ComponentSourceView(tuple(records), frozenset(capabilities))
 
-    raw = getattr(source, 'raw', None)
-    if isinstance(raw, dict):
-        for component in raw.get('wet_components', []):
-            yield component, 'wet'
+    raise ValueError(
+        'source must contain a DFND component registry or component result records'
+    )
+
+
+def _requests_side(side: Any, expected: str) -> bool:
+    if side is None:
+        return False
+    if isinstance(side, str):
+        return side == expected
+    return expected in side
+
+
+def _validate_component_capability(view: _ComponentSourceView, side: Any) -> None:
+    for expected in ('wet', 'dry'):
+        if _requests_side(side, expected) and expected not in view.capabilities:
+            raise ValueError(f'source does not contain {expected} components')
+
+
+def _iter_components(source: Any, side: Any = None):
+    view = _component_source_view(source)
+    _validate_component_capability(view, side)
+    yield from view.records
 
 
 def _component_raw_id(component: Any) -> Any:
@@ -201,7 +228,7 @@ def select_components(
 ) -> list[Any]:
     """Return DFND components matching graph-side and spatial-representation filters."""
     selected = []
-    for component, inferred_side in _iter_components(source):
+    for component, inferred_side in _iter_components(source, side):
         if not _matches_value(_component_side(component, inferred_side), side):
             continue
         if not _matches_value(_component_family(component, inferred_side), family):
@@ -233,7 +260,7 @@ def select_component_ids(
 ) -> list[str]:
     """Return canonical DFND component ids such as ``WET-1`` or ``DRY-1``."""
     out = []
-    for component, inferred_side in _iter_components(source):
+    for component, inferred_side in _iter_components(source, side):
         if not _matches_value(_component_side(component, inferred_side), side):
             continue
         if not _matches_value(_component_family(component, inferred_side), family):
@@ -399,6 +426,7 @@ def select_faces(
     owner_tetrahedron_ids: int | Iterable[int] | None = None,
     neighbor_tetrahedron_ids: int | Iterable[int] | None = None,
     permeability_state: str | Iterable[str] | None = None,
+    transit_edge: bool | Iterable[bool] | None = None,
     flags_has: str | Iterable[str] | None = None,
     unique_by: str | None = 'face_id',
 ) -> list[dict[str, Any]]:
@@ -416,6 +444,8 @@ def select_faces(
         ):
             continue
         if not _matches_value(face.get('permeability_state'), permeability_state):
+            continue
+        if not _matches_value(face.get('transit_edge'), transit_edge):
             continue
         if not _matches_flags(face, flags_has):
             continue
@@ -436,6 +466,7 @@ def select_face_indices(
     owner_tetrahedron_ids: int | Iterable[int] | None = None,
     neighbor_tetrahedron_ids: int | Iterable[int] | None = None,
     permeability_state: str | Iterable[str] | None = None,
+    transit_edge: bool | Iterable[bool] | None = None,
     flags_has: str | Iterable[str] | None = None,
     unique_by: str | None = 'face_id',
 ) -> list[int]:
@@ -453,6 +484,8 @@ def select_face_indices(
         ):
             continue
         if not _matches_value(face.get('permeability_state'), permeability_state):
+            continue
+        if not _matches_value(face.get('transit_edge'), transit_edge):
             continue
         if not _matches_flags(face, flags_has):
             continue
@@ -473,6 +506,7 @@ def select_face_ids(
     owner_tetrahedron_ids: int | Iterable[int] | None = None,
     neighbor_tetrahedron_ids: int | Iterable[int] | None = None,
     permeability_state: str | Iterable[str] | None = None,
+    transit_edge: bool | Iterable[bool] | None = None,
     flags_has: str | Iterable[str] | None = None,
     unique_by: str | None = 'face_id',
 ) -> list[int]:
@@ -484,6 +518,7 @@ def select_face_ids(
         owner_tetrahedron_ids=owner_tetrahedron_ids,
         neighbor_tetrahedron_ids=neighbor_tetrahedron_ids,
         permeability_state=permeability_state,
+        transit_edge=transit_edge,
         flags_has=flags_has,
         unique_by=unique_by,
     )
@@ -502,6 +537,7 @@ def select_face_atom_indices(
     owner_tetrahedron_ids: int | Iterable[int] | None = None,
     neighbor_tetrahedron_ids: int | Iterable[int] | None = None,
     permeability_state: str | Iterable[str] | None = None,
+    transit_edge: bool | Iterable[bool] | None = None,
     flags_has: str | Iterable[str] | None = None,
     unique_by: str | None = 'face_id',
 ) -> list[list[int]]:
@@ -513,6 +549,7 @@ def select_face_atom_indices(
             owner_tetrahedron_ids=owner_tetrahedron_ids,
             neighbor_tetrahedron_ids=neighbor_tetrahedron_ids,
             permeability_state=permeability_state,
+            transit_edge=transit_edge,
             flags_has=flags_has,
             unique_by=unique_by,
         )

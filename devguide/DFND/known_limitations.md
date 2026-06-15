@@ -140,7 +140,7 @@ ten unrelated problems.
 
 ### L1.3 — Nested concavities and single-scale `OCEAN`
 
-- **Statement.** With `sea_level = R_probe`, a pocket at the bottom of a wide
+- **Statement.** Under the single-scale probe-accessibility graph, a pocket at the bottom of a wide
   bowl that also admits the probe merges with the bowl into one component. The
   topographic hierarchy (sub-pocket inside a larger concavity) is not
   represented in v1. This is the dual of over-segmentation: large concave

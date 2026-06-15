@@ -23,10 +23,8 @@ DFND is the native TopoMT method direction. It should not be forced into strict 
 
 The immediate DFND work is:
 
-- unify face permeability and wet-graph traversability under one canonical
-  predicate;
-- define a typed immutable DFND query contract and resolve inert/incomplete
-  query options;
+- apply the completed typed mesh/query contract to validation, reporting, and
+  future temporal-comparability workflows;
 - keep the raw data model traceable and `get_topography(method='dfnd')`
   integrated with `Topography`;
 - validate wet/dry components, links, motifs, metrics, and qualitative behavior
@@ -42,6 +40,18 @@ The immediate DFND work is:
 - DFND supports the build-once/query-many workflow through `DelaunayFlowNetwork`.
 - Static component, external-link, and motif identity is deterministic and
   separates local labels, exact support, and contextual provenance.
+- Face permeability and wet-graph traversability use one canonical transit-edge
+  decision, with explicit physical and effective gate margins.
+- Frozen `DFNDMeshConfig` and `DFNDQuery` objects define substrate/query
+  provenance, complete re-probing, and reporting-independent result identity.
+- DFND diagnostics and the TopoMT viewer addon enforce explicit `mesh_local`
+  versus `molecular_system` atom-index boundaries.
+- The viewer runtime retains one complete source topography and manages feature
+  filters and render groups separately.
+- Primary viewer renderers return a common `RenderResult` and every component
+  representation supports clean repeated rendering.
+- Full-graph and component-graph nodes share one viewer-neutral tetrahedron centre extractor with explicit units and structured identity.
+- Standalone selected-feature rendering emits the requested filtered operations, and addon context actions use executable entries without no-op click callbacks.
 - `Topography` and DFND `Components` registries enforce atomic mutation,
   immutable registered IDs, coherent relations, and semantic copies.
 - `R_residence` and `R_gate` are implemented as clearance primitives with active tests.
@@ -53,6 +63,10 @@ The immediate DFND work is:
 Key DFND checkpoints:
 
 - [DFND/implementation_status.md](DFND/implementation_status.md)
+- [DFND/checkpoint_atom_index_spaces_2026_06_14.md](DFND/checkpoint_atom_index_spaces_2026_06_14.md)
+- [DFND/checkpoint_viewer_runtime_ownership_2026_06_14.md](DFND/checkpoint_viewer_runtime_ownership_2026_06_14.md)
+- [DFND/checkpoint_render_result_contract_2026_06_14.md](DFND/checkpoint_render_result_contract_2026_06_14.md)
+- [DFND/checkpoint_viewer_geometry_boundary_2026_06_14.md](DFND/checkpoint_viewer_geometry_boundary_2026_06_14.md)
 - [DFND/checkpoint_identity_provenance_registries_2026_06_06.md](DFND/checkpoint_identity_provenance_registries_2026_06_06.md)
 - [DFND/checkpoint_dfnd_hardening_stint.md](DFND/checkpoint_dfnd_hardening_stint.md)
 - [DFND/checkpoint_probe_radius_sweep.md](DFND/checkpoint_probe_radius_sweep.md)
@@ -84,8 +98,6 @@ The conventional engines remain important, but they are no longer the only activ
 - Surface-concavity, nonresident-passage, and dry motif utility must be validated before becoming public feature families.
 - Dynamic topology is documented but not implemented; matching thresholds,
   confidence, and split/merge lineage policy must be decided first.
-- Canonical face permeability and wet-graph traversability still need to be
-  unified under one predicate.
 - Cross-engine benchmarks are not yet organized into a stable comparison battery.
 
 ## Practical Development Rule

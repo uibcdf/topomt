@@ -27,6 +27,7 @@ from __future__ import annotations
 from typing import Any
 
 from .components import build_components
+from .config import DFNDQuery
 
 # A record from graph.py mixes probe-independent geometry with probe-dependent
 # state. We split it so `mesh` exposes only geometry (built once, in principle)
@@ -70,6 +71,9 @@ _FACE_STATE_KEYS = (
     'owner_tetrahedron_id',
     'neighbor_tetrahedron_id',
     'face_index',
+    'gate_margin',
+    'effective_gate_margin',
+    'transit_edge',
     'permeability_state',
     'flags',
 )
@@ -102,7 +106,9 @@ class Mesh:
         self.faces = _project(raw['faces'], _FACE_GEOMETRY_KEYS)
         self.delaunay = network.mesh  # the underlying DelaunayMesh object
 
-    def neighbors(self, tetrahedron_id: int, *, include_ocean: bool = False) -> list[int]:
+    def neighbors(
+        self, tetrahedron_id: int, *, include_ocean: bool = False
+    ) -> list[int]:
         """Bare face-neighbors of a tetrahedron (probe-independent topology).
 
         Each tetrahedron borders up to four others across its faces; ``-1`` marks a
@@ -154,7 +160,7 @@ class Graph:
         """
         if self._adjacency is None:
             raise RuntimeError(
-                "Graph has no adjacency; build it via DFN(result, network)."
+                'Graph has no adjacency; build it via DFN(result, network).'
             )
         if side not in (None, 'wet', 'dry'):
             raise ValueError("side must be None, 'wet' or 'dry'")
@@ -170,6 +176,14 @@ class DFN:
 
     def __init__(self, result: dict[str, Any], network: Any = None) -> None:
         self.parameters = result['raw']['parameters']
+        query_parameters = self.parameters.get('query')
+        if query_parameters is None:
+            defaults = DFNDQuery().to_dict()
+            query_parameters = {
+                name: self.parameters.get(name, default)
+                for name, default in defaults.items()
+            }
+        self.query = DFNDQuery(**query_parameters)
         adjacency = getattr(network, 'simplex_neighbors', None)
         self.graph = Graph(result['raw'], adjacency=adjacency)
         self.components = build_components(result, network)
@@ -186,6 +200,7 @@ class DFNDData:
 
     def __init__(self, network: Any, result: dict[str, Any]) -> None:
         self._network = network  # holds the cached, probe-independent mesh
+        self.mesh_config = getattr(network, 'mesh_config', None)
         self.raw = result['raw']
         self.mesh = Mesh(network, result['raw'])
         self.dfn = DFN(result, network)
@@ -223,23 +238,21 @@ class DFNDData:
         query options default to those of the current query.
         """
         parameters = self.raw['parameters']
-        result = self._network.get_topography(
-            probe_radius=probe_radius,
-            sea_level=overrides.get('sea_level', parameters.get('sea_level')),
-            min_size=overrides.get('min_size', 0),
-            transit_policy=overrides.get(
-                'transit_policy', parameters['transit_policy']
-            ),
-            gate_intrusion_policy=overrides.get(
-                'gate_intrusion_policy', parameters['gate_intrusion_policy']
-            ),
-            residence_tolerance=overrides.get(
-                'residence_tolerance', parameters.get('residence_tolerance', 0.0)
-            ),
-            permeability_tolerance=overrides.get(
-                'permeability_tolerance', parameters.get('permeability_tolerance', 0.0)
-            ),
+        mesh_fields = set(parameters['mesh_config'])
+        forbidden = sorted(mesh_fields.intersection(overrides))
+        if forbidden:
+            raise ValueError(
+                'at_probe cannot override mesh configuration fields: '
+                + ', '.join(forbidden)
+            )
+        min_size = overrides.pop(
+            'min_size', parameters.get('reporting', {}).get('min_size', 0)
         )
+        try:
+            query = self.dfn.query.replace(probe_radius=probe_radius, **overrides)
+        except TypeError as exc:
+            raise ValueError(f'Unknown DFND query override: {exc}') from exc
+        result = self._network.get_topography(query=query, min_size=min_size)
         return DFNDData(self._network, result)
 
     def info(self, tetrahedron_id: Any = None) -> None:
@@ -280,15 +293,19 @@ class DFNDData:
                 print(f'Error: Tetrahedron ID {tid} not found.')
                 continue
 
-            orig_atoms = tet_rec.get('local_atom_indices', [])
+            system_atom_indices = tet_rec.get('atom_indices', [])
             residue_details = []
             if mol_sys is not None:
                 try:
-                    atom_names = msm.get(mol_sys, selection=orig_atoms, atom_name=True)
-                    res_names = msm.get(
-                        mol_sys, selection=orig_atoms, residue_name=True
+                    atom_names = msm.get(
+                        mol_sys, selection=system_atom_indices, atom_name=True
                     )
-                    res_ids = msm.get(mol_sys, selection=orig_atoms, residue_id=True)
+                    res_names = msm.get(
+                        mol_sys, selection=system_atom_indices, residue_name=True
+                    )
+                    res_ids = msm.get(
+                        mol_sys, selection=system_atom_indices, residue_id=True
+                    )
 
                     if not isinstance(atom_names, (list, tuple, np.ndarray)):
                         atom_names = [atom_names]
@@ -298,15 +315,15 @@ class DFNDData:
                         res_ids = [res_ids]
 
                     for a_idx, a_name, r_name, r_id in zip(
-                        orig_atoms, atom_names, res_names, res_ids
+                        system_atom_indices, atom_names, res_names, res_ids
                     ):
                         residue_details.append(
                             f'Atom {a_idx} ({a_name}) inside Residue {r_name} (ID: {r_id})'
                         )
                 except Exception:
-                    residue_details = [f'Atom index: {a}' for a in orig_atoms]
+                    residue_details = [f'Atom index: {a}' for a in system_atom_indices]
             else:
-                residue_details = [f'Atom index: {a}' for a in orig_atoms]
+                residue_details = [f'Atom index: {a}' for a in system_atom_indices]
 
             print('=' * 60)
             print('🔬 TOPOMT DELAUNAY TETRAHEDRON DIAGNOSTIC CARD')

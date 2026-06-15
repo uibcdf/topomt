@@ -1,5 +1,7 @@
 """show_dfnd_components: typed components in multiple representations."""
 
+from functools import wraps
+from inspect import signature
 from typing import Any
 
 import numpy as np
@@ -8,7 +10,38 @@ from topomt import pyunitwizard as puw
 from topomt.dfnd import families as fam
 from topomt.dfnd.centerline import channel_centerline
 
+from ..geometry import (
+    EntityRef,
+    component_alpha_sphere_geometry,
+    component_residence_sphere_geometry,
+    dfn_graph_segments,
+    face_geometry,
+    probe_sphere_geometry,
+    tetrahedra_geometry,
+    tetrahedron_centers,
+)
+from ..index_spaces import (
+    MOLECULAR_SYSTEM,
+    mesh_local_from_molecular_system,
+)
+from ..index_spaces import (
+    atom_indices as indices_in_space,
+)
 from ._common import _dfnd_edge_meta, _dfnd_face_meta, _resolve_topography
+from .adapters import (
+    add_indexed_triangles,
+    add_point_spheres,
+    add_segments,
+    add_sphere_set,
+    add_tetrahedra,
+    add_uniform_spheres,
+)
+from .result import (
+    RenderResult,
+    clear_previous_render_result,
+    remember_render_result,
+    render_result,
+)
 
 # Colour-blind-safe (Okabe-Ito) palette, per devguide/DFND/component_visualization.md
 # §11. These eight hexes are a *generic* CVD-safe catalog that should ultimately
@@ -26,11 +59,11 @@ _OKABE_ITO = {
 }
 
 _TYPE_PALETTE = {
-    fam.POCKET: _OKABE_ITO['blue'],          # 0x0072B2
-    fam.VOID: _OKABE_ITO['sky_blue'],        # 0x56B4E9 (pocket = void + one mouth)
-    fam.CHANNEL: _OKABE_ITO['orange'],       # 0xE69F00
+    fam.POCKET: _OKABE_ITO['blue'],  # 0x0072B2
+    fam.VOID: _OKABE_ITO['sky_blue'],  # 0x56B4E9 (pocket = void + one mouth)
+    fam.CHANNEL: _OKABE_ITO['orange'],  # 0xE69F00
     fam.PERCOLATING: _OKABE_ITO['reddish_purple'],  # 0xCC79A7
-    fam.DRY_BANK: _OKABE_ITO['grey'],        # 0x999999
+    fam.DRY_BANK: _OKABE_ITO['grey'],  # 0x999999
 }
 
 # Two-colour pair for the common bipartite interface; extend with the remaining
@@ -49,17 +82,17 @@ _MOUTH_ACCENT = _OKABE_ITO['yellow']
 # light). The 1.15 Å water radius is the key threshold (see
 # devguide/DFND/component_visualization.md §6).
 _WATER_RADIUS = 1.15
-_HOLE_OPEN = _OKABE_ITO['bluish_green']   # R >= 1.5: admits water freely
-_HOLE_TIGHT = _OKABE_ITO['orange']        # 1.15 <= R < 1.5: tight constriction
-_HOLE_CLOSED = _OKABE_ITO['vermillion']   # R < 1.15: closed to water
+_HOLE_OPEN = _OKABE_ITO['bluish_green']  # R >= 1.5: admits water freely
+_HOLE_TIGHT = _OKABE_ITO['orange']  # 1.15 <= R < 1.5: tight constriction
+_HOLE_CLOSED = _OKABE_ITO['vermillion']  # R < 1.15: closed to water
 
 # Affinity (physicochemical) colours for the 'affinity_spheres' druggability map,
 # derived from molsysmt.physchem hydrophobicity (Eisenberg) + charge (pH7).
-_AFFINITY_HYDROPHOBIC = _OKABE_ITO['orange']      # drug-favourable nonpolar
-_AFFINITY_POLAR = _OKABE_ITO['sky_blue']          # polar / H-bonding
-_AFFINITY_POSITIVE = _OKABE_ITO['blue']           # positively charged
-_AFFINITY_NEGATIVE = _OKABE_ITO['vermillion']     # negatively charged
-_AFFINITY_NEUTRAL = _OKABE_ITO['grey']            # unknown / dummy (e.g. DUM)
+_AFFINITY_HYDROPHOBIC = _OKABE_ITO['orange']  # drug-favourable nonpolar
+_AFFINITY_POLAR = _OKABE_ITO['sky_blue']  # polar / H-bonding
+_AFFINITY_POSITIVE = _OKABE_ITO['blue']  # positively charged
+_AFFINITY_NEGATIVE = _OKABE_ITO['vermillion']  # negatively charged
+_AFFINITY_NEUTRAL = _OKABE_ITO['grey']  # unknown / dummy (e.g. DUM)
 
 # Per-family default representation for representation='auto' (the per-family
 # visual language). Channels become tubes; pockets/voids stay volumetric blobs
@@ -138,22 +171,19 @@ def _component_alpha_spheres(comp, mesh, *, use_resident_nodes):
     return centers, radii
 
 
-def _body_labels_from_dry(dry_components, n_atoms):
-    """Per-atom body id from the dry components (largest dry body wins shared
-    atoms), mirroring ``interfaces.body_labels_from_dry_components`` but consuming
-    the typed dry ``Component`` objects the renderer already holds. ``-1`` means
-    no body. Used by the ``contact_sheet`` (interface) representation.
-    """
-    labels = np.full(int(n_atoms), -1, dtype=int)
+def _body_labels_from_dry(dry_components):
+    """Map molecular-system atom indices to dry-body ids."""
+    labels = {}
     ordered = sorted(
         dry_components,
         key=lambda c: len(getattr(c, 'atom_indices', []) or []),
         reverse=True,
     )
     for body_id, comp in enumerate(ordered):
-        for atom in getattr(comp, 'atom_indices', []) or []:
-            if 0 <= atom < n_atoms and labels[atom] == -1:
-                labels[atom] = body_id
+        for atom in indices_in_space(
+            getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
+        ):
+            labels.setdefault(atom, body_id)
     return labels
 
 
@@ -165,7 +195,7 @@ def _rank_by_volume(components, top_n):
         return components
     return sorted(
         components,
-        key=lambda c: (getattr(c, 'volume_solvent_estimate', None) or 0.0),
+        key=lambda c: getattr(c, 'volume_solvent_estimate', None) or 0.0,
         reverse=True,
     )[:top_n]
 
@@ -241,14 +271,21 @@ def show_dfnd_legend(view, topography=None, *, families=None):
         order = (fam.POCKET, fam.VOID, fam.CHANNEL, fam.PERCOLATING)
         families = [f for f in order if f in present]
 
-    items = [{'label': str(f), 'color': _TYPE_PALETTE.get(f, 0x888888)} for f in families]
+    items = [
+        {'label': str(f), 'color': _TYPE_PALETTE.get(f, 0x888888)} for f in families
+    ]
     view.scene.set_legend(items)
     return items
 
 
-def show_dfnd_pharmacophore(view, topography=None, *, component_ids=None,
-                            component_types=fam.PRIMARY_WET_FAMILIES,
-                            tag_prefix='dfnd-pharm'):
+def show_dfnd_pharmacophore(
+    view,
+    topography=None,
+    *,
+    component_ids=None,
+    component_types=fam.PRIMARY_WET_FAMILIES,
+    tag_prefix='dfnd-pharm',
+):
     """Place an interaction-site glyph at each cavity's centre, typed by the
     dominant physicochemical character of its lining (positive/negative/
     hydrophobic/acceptor) via ``molsysmt.physchem`` + ``view.shapes.add_interaction_sites``
@@ -262,15 +299,12 @@ def show_dfnd_pharmacophore(view, topography=None, *, component_ids=None,
     if dfnd_data is None:
         raise ValueError('Topography has no DFND data attached')
 
-    coords = np.asarray(dfnd_data.mesh.atoms.coords, dtype=float)
-    index_map = np.asarray(
-        getattr(dfnd_data.mesh.atoms, 'index_map', np.arange(len(coords)))
-    )
     atom_kinds = _atom_pharmacophore_kinds(getattr(view, '_molsys', None))
     if atom_kinds is None:
         return None  # no chemistry (dummy system)
 
     from collections import Counter
+
     centers, kinds = [], []
     for comp in dfnd_data.dfn.components.wet:
         if component_types and comp.family not in component_types:
@@ -280,11 +314,11 @@ def show_dfnd_pharmacophore(view, topography=None, *, component_ids=None,
         if getattr(comp, 'center', None) is None:
             continue
         lining = []
-        for a in (getattr(comp, 'atom_indices', None) or []):
-            if 0 <= a < len(index_map):
-                m = int(index_map[a])
-                if 0 <= m < len(atom_kinds) and atom_kinds[m] is not None:
-                    lining.append(atom_kinds[m])
+        for atom in indices_in_space(
+            getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
+        ):
+            if 0 <= atom < len(atom_kinds) and atom_kinds[atom] is not None:
+                lining.append(atom_kinds[atom])
         if not lining:
             continue
         centers.append(list(comp.center))
@@ -323,6 +357,7 @@ def show_dfnd_convexity(view, topography=None, *, radius=8.0, palette='coolwarm'
     molsys = getattr(view, '_molsys', None)
     if molsys is not None:
         import molsysmt as msm
+
         n_atoms = int(msm.get(molsys, n_atoms=True))
         values = np.zeros(n_atoms)
         valid = index_map < n_atoms
@@ -356,6 +391,7 @@ def _atom_affinity_colors(molsys):
     try:
         import molsysmt as msm
         from molsysmt import physchem
+
         from topomt import pyunitwizard as _puw
 
         def _mags(q):
@@ -401,6 +437,7 @@ def _atom_pharmacophore_kinds(molsys):
     try:
         import molsysmt as msm
         from molsysmt import physchem
+
         from topomt import pyunitwizard as _puw
 
         def _mags(q):
@@ -425,7 +462,7 @@ def _atom_pharmacophore_kinds(molsys):
     return kinds
 
 
-def _mouth_gate_rings(comp, raw, coords):
+def _mouth_gate_rings(comp, raw, coords, index_map):
     """Gate rings for each mouth of a component: ``(centers, normals, radii)``.
 
     One ring per external link (mouth): centred on the mouth's lining atoms,
@@ -434,7 +471,8 @@ def _mouth_gate_rings(comp, raw, coords):
     """
     external_links = {e['external_link_id']: e for e in raw.get('external_links', [])}
     comp_center = (
-        np.asarray(comp.center, dtype=float) if getattr(comp, 'center', None) is not None
+        np.asarray(comp.center, dtype=float)
+        if getattr(comp, 'center', None) is not None
         else None
     )
     centers, normals, radii = [], [], []
@@ -442,11 +480,11 @@ def _mouth_gate_rings(comp, raw, coords):
         link = external_links.get(link_id)
         if link is None:
             continue
-        atoms = link.get('atom_indices') or []
-        atoms = [a for a in atoms if 0 <= a < len(coords)]
-        if not atoms:
+        system_atoms = link.get('atom_indices') or []
+        local_atoms = mesh_local_from_molecular_system(system_atoms, index_map)
+        if not local_atoms:
             continue
-        mouth_center = coords[atoms].mean(axis=0)
+        mouth_center = coords[local_atoms].mean(axis=0)
         normal = (mouth_center - comp_center) if comp_center is not None else None
         if normal is None or not np.any(normal):
             normal = np.array([0.0, 0.0, 1.0])
@@ -456,17 +494,19 @@ def _mouth_gate_rings(comp, raw, coords):
     return centers, normals, radii
 
 
-def _dry_scaffold_edges(comp, coords):
+def _dry_scaffold_edges(comp, coords, index_map):
     """Minimum spanning tree over a dry component's atoms — the mechanical
     'spine' / scaffold. Returns a list of ``[[x,y,z],[x,y,z]]`` coordinate pairs.
     """
-    atoms = [a for a in (getattr(comp, 'atom_indices', None) or []) if 0 <= a < len(coords)]
-    if len(atoms) < 2:
+    local_atoms = mesh_local_from_molecular_system(
+        getattr(comp, 'atom_indices', None), index_map
+    )
+    if len(local_atoms) < 2:
         return []
     from scipy.sparse.csgraph import minimum_spanning_tree
     from scipy.spatial.distance import pdist, squareform
 
-    pts = coords[atoms]
+    pts = coords[local_atoms]
     mst = minimum_spanning_tree(squareform(pdist(pts))).tocoo()
     return [[pts[i].tolist(), pts[j].tolist()] for i, j in zip(mst.row, mst.col)]
 
@@ -487,8 +527,9 @@ def _mouth_cap_triangles(comp, raw):
     return triplets
 
 
-def carve_voids(view, topography=None, *, component_ids=None,
-                component_types=(fam.VOID,), fade=0.85):
+def carve_voids(
+    view, topography=None, *, component_ids=None, component_types=(fam.VOID,), fade=0.85
+):
     """Expose buried components by fading the rest of the protein (void carving).
 
     Soft-focuses the molecular representation on the lining atoms of the selected
@@ -512,7 +553,11 @@ def carve_voids(view, topography=None, *, component_ids=None,
             continue
         if component_ids is not None and comp.component_id not in component_ids:
             continue
-        focus_atoms.update(int(a) for a in (getattr(comp, 'atom_indices', None) or []))
+        focus_atoms.update(
+            indices_in_space(
+                getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
+            )
+        )
 
     if not focus_atoms:
         return None
@@ -521,9 +566,14 @@ def carve_voids(view, topography=None, *, component_ids=None,
     return ordered
 
 
-def show_dfnd_labels(view, topography=None, *, component_ids=None,
-                     component_types=fam.PRIMARY_WET_FAMILIES,
-                     tag_prefix='dfnd-label'):
+def show_dfnd_labels(
+    view,
+    topography=None,
+    *,
+    component_ids=None,
+    component_types=fam.PRIMARY_WET_FAMILIES,
+    tag_prefix='dfnd-label',
+):
     """Label each component in the scene with its id, family, mouth count and
     solvent volume, anchored at its lining-atom centroid via ``view.annotations``.
 
@@ -549,7 +599,9 @@ def show_dfnd_labels(view, topography=None, *, component_ids=None,
             continue
         if component_ids is not None and comp.component_id not in component_ids:
             continue
-        atoms = getattr(comp, 'atom_indices', None)
+        atoms = indices_in_space(
+            getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
+        )
         if not atoms:
             continue
 
@@ -557,15 +609,15 @@ def show_dfnd_labels(view, topography=None, *, component_ids=None,
         volume = getattr(comp, 'volume_solvent_estimate', None)
         parts = [str(comp.component_id), str(comp.family)]
         if n_mouths:
-            parts.append(f"{n_mouths} mouth" + ('s' if n_mouths != 1 else ''))
+            parts.append(f'{n_mouths} mouth' + ('s' if n_mouths != 1 else ''))
         if volume:
-            parts.append(f"{float(volume):.0f} Å³")
+            parts.append(f'{float(volume):.0f} Å³')
         text = ' · '.join(parts)
 
         layer = view.annotations.add_annotation(
             text=text,
             kind='label',
-            atom_indices=list(atoms),
+            atom_indices=atoms,
             tag=f'{tag_prefix}:{comp.component_id}',
             layer_tag=tag_prefix,
             skip_digestion=True,
@@ -577,7 +629,7 @@ def show_dfnd_labels(view, topography=None, *, component_ids=None,
     return layers[0] if len(layers) == 1 else layers
 
 
-def show_dfnd_components(
+def _show_dfnd_components_legacy(
     view,
     topography=None,
     *,
@@ -739,7 +791,7 @@ def show_dfnd_components(
             groups.setdefault(mode, []).append(comp.component_id)
         results = []
         for mode, ids in groups.items():
-            res = show_dfnd_components(
+            res = _show_dfnd_components_legacy(
                 view,
                 topography,
                 show_wet=show_wet,
@@ -774,6 +826,9 @@ def show_dfnd_components(
 
     mesh = dfnd_data.mesh
     coords = np.asarray(mesh.atoms.coords, dtype=float)
+    index_map = np.asarray(
+        getattr(mesh.atoms, 'index_map', np.arange(len(coords))), dtype=int
+    )
 
     # Pre-build lookup map: tetrahedron_id -> record
     tetra_map = {
@@ -812,11 +867,11 @@ def show_dfnd_components(
     layers = []
 
     if representation == 'tetrahedra':
-        atom_quads = []
         colors = []
         alphas = []
         labels = []
         selected_tetra_ids = set()
+        selected_tetra_order = []
         tetra_to_color = {}
 
         for comp in selected_components:
@@ -840,10 +895,10 @@ def show_dfnd_components(
                 quad = tet_rec.get('local_atom_indices')
                 if not quad or len(quad) != 4:
                     continue
-                atom_quads.append(quad)
                 colors.append(color)
                 alphas.append(alpha)
                 selected_tetra_ids.add(tid)
+                selected_tetra_order.append(tid)
                 tetra_to_color[tid] = color
                 lbl = (
                     f'Component: {comp_id} ({comp.family}) | '
@@ -851,7 +906,8 @@ def show_dfnd_components(
                 )
                 labels.append(lbl)
 
-        if not atom_quads:
+        geometry = tetrahedra_geometry(topography, selected_tetra_order)
+        if not geometry.atom_quads:
             return None
 
         face_meta = (
@@ -864,8 +920,9 @@ def show_dfnd_components(
             else []
         )
 
-        layer = view.shapes.add_tetrahedra(
-            atom_quads=atom_quads,
+        layer = add_tetrahedra(
+            view,
+            geometry,
             colors=colors,
             alphas=alphas,
             labels=labels,
@@ -984,9 +1041,9 @@ def show_dfnd_components(
             if not np.any(tangent):
                 tangent = np.array([0.0, 0.0, 1.0])
             marker = view.shapes.add_rings(
-                centers=puw.quantity(centers[neck:neck + 1], 'angstroms'),
+                centers=puw.quantity(centers[neck : neck + 1], 'angstroms'),
                 normals=[tangent.tolist()],
-                radii=puw.quantity(radii[neck:neck + 1], 'angstroms'),
+                radii=puw.quantity(radii[neck : neck + 1], 'angstroms'),
                 colors=[_MOUTH_ACCENT],
                 alpha=min(1.0, alpha + 0.3),
                 tag=f'{tag_prefix}:{comp_id}-bottleneck',
@@ -1058,7 +1115,9 @@ def show_dfnd_components(
                     )
                 )
 
-            g_centers, g_normals, g_radii = _mouth_gate_rings(comp, raw, coords)
+            g_centers, g_normals, g_radii = _mouth_gate_rings(
+                comp, raw, coords, index_map
+            )
             if g_centers:
                 layers.append(
                     view.shapes.add_rings(
@@ -1100,7 +1159,7 @@ def show_dfnd_components(
             comp_id = comp.component_id
             if component_ids is not None and comp_id not in component_ids:
                 continue
-            pairs = _dry_scaffold_edges(comp, coords)
+            pairs = _dry_scaffold_edges(comp, coords, index_map)
             if not pairs:
                 continue
             layers.append(
@@ -1126,33 +1185,31 @@ def show_dfnd_components(
         # physchem). See component_visualization.md §9.
         molsys = getattr(view, '_molsys', None)
         atom_colors = _atom_affinity_colors(molsys)
-        index_map = np.asarray(
-            getattr(mesh.atoms, 'index_map', np.arange(len(coords)))
-        )
         for comp in selected_components:
             comp_id = comp.component_id
-            comp_centers, comp_radii = _component_residence_spheres(
-                comp, tetra_map, use_resident_nodes=use_resident_nodes
+            geometry = component_residence_sphere_geometry(
+                topography, comp, use_resident_nodes=use_resident_nodes
             )
-            if comp_centers is None:
+            if not geometry.centers:
                 continue
 
             color = _AFFINITY_NEUTRAL
             if atom_colors is not None:
                 from collections import Counter
+
                 lining = []
-                for a in (getattr(comp, 'atom_indices', None) or []):
-                    if 0 <= a < len(index_map):
-                        m = int(index_map[a])
-                        if 0 <= m < len(atom_colors):
-                            lining.append(atom_colors[m])
+                for atom in indices_in_space(
+                    getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
+                ):
+                    if 0 <= atom < len(atom_colors):
+                        lining.append(atom_colors[atom])
                 if lining:
                     color = Counter(lining).most_common(1)[0][0]
 
             layers.append(
-                view.shapes.add_set_alpha_spheres(
-                    centers=puw.quantity(comp_centers, 'angstroms'),
-                    radii=puw.quantity(comp_radii, 'angstroms'),
+                add_sphere_set(
+                    view,
+                    geometry,
                     color_alpha_spheres=color,
                     alpha_alpha_spheres=alpha,
                     tag=f'{tag_prefix}:{comp_id}',
@@ -1172,20 +1229,20 @@ def show_dfnd_components(
             comp_id = comp.component_id
             color = resolved_colors[comp_id]
             if representation == 'residence_spheres':
-                comp_centers, comp_radii = _component_residence_spheres(
-                    comp, tetra_map, use_resident_nodes=use_resident_nodes
+                geometry = component_residence_sphere_geometry(
+                    topography, comp, use_resident_nodes=use_resident_nodes
                 )
             else:
-                comp_centers, comp_radii = _component_alpha_spheres(
-                    comp, mesh, use_resident_nodes=use_resident_nodes
+                geometry = component_alpha_sphere_geometry(
+                    topography, comp, use_resident_nodes=use_resident_nodes
                 )
-            if comp_centers is None:
+            if not geometry.centers:
                 continue
 
             tag = f'{tag_prefix}:{comp_id}'
-            layer = view.shapes.add_set_alpha_spheres(
-                centers=puw.quantity(comp_centers, 'angstroms'),
-                radii=puw.quantity(comp_radii, 'angstroms'),
+            layer = add_sphere_set(
+                view,
+                geometry,
                 color_alpha_spheres=color,
                 alpha_alpha_spheres=alpha,
                 tag=tag,
@@ -1213,19 +1270,16 @@ def show_dfnd_components(
         for comp in selected_components:
             comp_id = comp.component_id
             color = resolved_colors[comp_id]
-            centers, residence_radii = _component_residence_spheres(
-                comp, tetra_map, use_resident_nodes=use_resident_nodes
+            residence_geometry = component_residence_sphere_geometry(
+                topography, comp, use_resident_nodes=use_resident_nodes
             )
-            if centers is None:
-                continue
-            valid_centers = residence_radii >= probe_radius
-            centers = centers[valid_centers]
-            if not len(centers):
+            geometry = probe_sphere_geometry(residence_geometry, probe_radius)
+            if not geometry.centers:
                 continue
             tag = f'{tag_prefix}:{comp_id}'
-            layer = view.shapes.add_sphere(
-                center=puw.quantity(centers, 'angstroms'),
-                radius=puw.quantity(probe_radius, 'angstroms'),
+            layer = add_uniform_spheres(
+                view,
+                geometry,
                 color=color,
                 alpha=alpha,
                 tag=tag,
@@ -1243,7 +1297,9 @@ def show_dfnd_components(
         for comp in selected_components:
             comp_id = comp.component_id
             color = resolved_colors[comp_id]
-            atom_indices = getattr(comp, 'atom_indices', None)
+            atom_indices = indices_in_space(
+                getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
+            )
             if not atom_indices:
                 continue
 
@@ -1264,19 +1320,18 @@ def show_dfnd_components(
         # colour per body for N-body junctions. Body labels are derived from the
         # dry network (the per-atom mapping the component only stores as counts).
         # See devguide/DFND/component_visualization_implementation.md (Phase 3).
-        n_atoms = len(coords)
-        body_labels = _body_labels_from_dry(
-            list(dfnd_data.dfn.components.dry), n_atoms
-        )
+        body_labels = _body_labels_from_dry(list(dfnd_data.dfn.components.dry))
         for comp in selected_components:
             comp_id = comp.component_id
-            atom_indices = getattr(comp, 'atom_indices', None)
+            atom_indices = indices_in_space(
+                getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
+            )
             if not atom_indices:
                 continue
 
             by_body = {}
             for atom in atom_indices:
-                body = int(body_labels[atom]) if 0 <= atom < n_atoms else -1
+                body = body_labels.get(int(atom), -1)
                 if body < 0:
                     continue
                 by_body.setdefault(body, []).append(atom)
@@ -1314,11 +1369,9 @@ def show_dfnd_components(
         return layers[0] if len(layers) == 1 else layers
 
     elif representation == 'coast_faces':
-        # Render shared contact coast faces between wet and dry
-        face_by_id = {f['face_id']: f for f in mesh.faces}
-        atom_triplets = []
-        colors_list = []
-        labels_list = []
+        # Render shared contact coast faces between wet and dry.
+        color_by_face_id = {}
+        label_by_face_id = {}
 
         for comp in selected_components:
             comp_id = comp.component_id
@@ -1331,40 +1384,35 @@ def show_dfnd_components(
             ]
 
             for face in comp_coast_faces:
-                f_rec = face_by_id.get(face['face_id'])
-                if f_rec is not None:
-                    atoms_local = f_rec.get('face_atoms_local')
-                    if atoms_local is not None:
-                        atom_triplets.append([int(a) for a in atoms_local])
-                        colors_list.append(color)
-                        lbl = (
-                            f'Coast Face {face["face_id"]} | '
-                            f'Wet: {face["wet_component_id"]} | '
-                            f'Dry: {face["dry_component_id"]} | '
-                            f'Area: {face.get("area", 0.0):.2f} Å²'
-                        )
-                        labels_list.append(lbl)
+                face_id = int(face['face_id'])
+                color_by_face_id.setdefault(face_id, color)
+                label_by_face_id.setdefault(
+                    face_id,
+                    (
+                        f'Coast Face {face_id} | '
+                        f'Wet: {face["wet_component_id"]} | '
+                        f'Dry: {face["dry_component_id"]} | '
+                        f'Area: {face.get("area", 0.0):.2f} Å²'
+                    ),
+                )
 
-        if not atom_triplets:
+        geometry = face_geometry(topography, face_ids=color_by_face_id)
+        if not geometry.atom_triplets:
             return None
 
-        layer = view.shapes.add_triangle_faces(
-            atom_triplets=atom_triplets,
-            colors=colors_list,
+        return add_indexed_triangles(
+            view,
+            geometry,
+            colors=[color_by_face_id[ref.entity_id] for ref in geometry.refs],
             alpha=alpha,
-            labels=labels_list,
+            labels=[label_by_face_id[ref.entity_id] for ref in geometry.refs],
             tag=tag_prefix,
             layer_tag=tag_prefix,
             skip_digestion=True,
         )
-        return layer
 
     elif representation == 'graph':
         # Render the component-filtered DFN connectivity graph.
-        barycenter = {
-            tet['tetrahedron_id']: coords[tet['local_atom_indices']].mean(axis=0)
-            for tet in mesh.tetrahedra
-        }
         selected_nodes = set()
         node_to_comp = {}
         for comp in selected_components:
@@ -1376,14 +1424,32 @@ def show_dfnd_components(
                 node_to_comp[tid] = comp.component_id
 
         ordered_nodes = sorted(selected_nodes)
-        centers_list = [barycenter[tid].tolist() for tid in ordered_nodes]
+        components_by_id = {comp.component_id: comp for comp in selected_components}
+        component_refs = {
+            tid: EntityRef(
+                kind='tetrahedron',
+                entity_id=tid,
+                tetrahedron_ids=(tid,),
+                support_key=getattr(
+                    components_by_id[node_to_comp[tid]], 'support_key', None
+                ),
+                component_key=getattr(
+                    components_by_id[node_to_comp[tid]], 'component_key', None
+                ),
+            )
+            for tid in ordered_nodes
+        }
+        node_geometry = tetrahedron_centers(
+            topography, ordered_nodes, component_refs=component_refs
+        )
         colors_list = [resolved_colors[node_to_comp[tid]] for tid in ordered_nodes]
 
-        if not centers_list:
+        if not node_geometry.coordinates:
             return None
 
-        node_layer = view.shapes.add_sphere(
-            center=puw.quantity(np.asarray(centers_list), 'angstroms'),
+        node_layer = add_point_spheres(
+            view,
+            node_geometry,
             radius=puw.quantity(0.03, 'nm'),
             color=colors_list,
             alpha=alpha,
@@ -1392,25 +1458,15 @@ def show_dfnd_components(
             skip_digestion=True,
         )
 
-        edge_pairs = []
-        for face_state in dfnd_data.dfn.graph.faces:
-            if face_state.get('permeability_state') != 'permeable':
-                continue
-            owner = face_state['owner_tetrahedron_id']
-            neighbor = face_state['neighbor_tetrahedron_id']
-            if (
-                owner in selected_nodes
-                and neighbor in selected_nodes
-                and owner < neighbor
-            ):
-                edge_pairs.append(
-                    [barycenter[owner].tolist(), barycenter[neighbor].tolist()]
-                )
+        edge_geometry, _mouth_geometry = dfn_graph_segments(
+            topography, ordered_nodes, include_mouths=False
+        )
 
         edge_layer = None
-        if edge_pairs:
-            edge_layer = view.shapes.add_links(
-                coordinate_pairs=puw.quantity(np.asarray(edge_pairs), 'angstroms'),
+        if edge_geometry.refs:
+            edge_layer = add_segments(
+                view,
+                edge_geometry,
                 radius=puw.quantity(0.015, 'nm'),
                 color=0x3B82F6,
                 tag=f'{tag_prefix}-edges',
@@ -1421,6 +1477,58 @@ def show_dfnd_components(
         return {
             'nodes': node_layer,
             'edges': edge_layer,
-            'n_nodes': len(centers_list),
-            'n_edges': len(edge_pairs),
+            'node_geometry': node_geometry,
+            'edge_geometry': edge_geometry,
+            'n_nodes': len(node_geometry.refs),
+            'n_edges': len(edge_geometry.refs),
         }
+
+
+def _selected_component_ids(topography, kwargs):
+    data = getattr(topography, 'dfnd', None)
+    if data is None:
+        return tuple(kwargs.get('component_ids') or ())
+    requested = kwargs.get('component_ids')
+    requested = None if requested is None else set(requested)
+    component_types = kwargs.get('component_types', fam.PRIMARY_WET_FAMILIES)
+    interfaces_only = kwargs.get('interfaces_only', False)
+    selected = []
+    if kwargs.get('show_wet', True):
+        for comp in data.dfn.components.wet:
+            if component_types and comp.family not in component_types:
+                continue
+            if requested is not None and comp.component_id not in requested:
+                continue
+            if interfaces_only and not getattr(comp, 'is_interface', False):
+                continue
+            selected.append(comp.component_id)
+    if kwargs.get('show_dry', False) and not interfaces_only:
+        for comp in data.dfn.components.dry:
+            if requested is None or comp.component_id in requested:
+                selected.append(comp.component_id)
+    return tuple(selected)
+
+
+@wraps(_show_dfnd_components_legacy)
+def show_dfnd_components(view, topography=None, **kwargs):
+    """Render DFND components and return a uniform ``RenderResult``."""
+    resolved = _resolve_topography(view, topography)
+    representation = {'spheres': 'residence_spheres', 'skeleton': 'graph'}.get(
+        kwargs.get('representation', 'tetrahedra'),
+        kwargs.get('representation', 'tetrahedra'),
+    )
+    operation_key = f'components:{kwargs.get("tag_prefix", "dfnd-comp")}'
+    clear_previous_render_result(view, operation_key)
+    raw = _show_dfnd_components_legacy(view, resolved, **kwargs)
+    result = render_result(
+        representation,
+        raw,
+        selected_ids=_selected_component_ids(resolved, kwargs),
+    )
+    return remember_render_result(view, operation_key, result)
+
+
+show_dfnd_components.__signature__ = signature(_show_dfnd_components_legacy).replace(
+    return_annotation=RenderResult
+)
+show_dfnd_components.__annotations__['return'] = RenderResult

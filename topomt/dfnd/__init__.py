@@ -1,5 +1,6 @@
 from . import synthetic
 from .api import dfnd
+from .config import DFNDMeshConfig, DFNDQuery
 from .graph import DelaunayFlowNetwork
 from .selectors import (
     select_component_atom_indices,
@@ -18,6 +19,8 @@ from .selectors import (
 
 __all__ = [
     'DelaunayFlowNetwork',
+    'DFNDMeshConfig',
+    'DFNDQuery',
     'dfnd',
     'synthetic',
     'select_component_atom_indices',

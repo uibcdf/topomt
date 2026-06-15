@@ -91,7 +91,6 @@ Faces should be called permeable or non-permeable. Wet and dry are reserved for 
 ## Geometric Metrics
 
 *   **`R_probe`:** The radius of the solvent probe, with 1.4 Å as the water-probe default.
-*   **`R_sea_level`:** Exterior reference scale. In the first DFND policy, its default is tied to `R_probe`; larger values are a pending optional mode.
 *   **`R_gate` (Face Permeability):** The radius of the largest sphere that can pass through a triangular face.
 *   **`R_residence` (Tetrahedron Habitability):** The radius of the largest sphere that fits inside a tetrahedron without overlapping atoms.
 *   **`R_alpha` (Alpha Radius):** The radius of the orthogonal sphere of a tetrahedron. It may be retained as diagnostic metadata, but it is not the primary physical habitability criterion.

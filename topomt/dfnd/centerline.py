@@ -28,7 +28,7 @@ def _permeable_resident_graph(raw, resident_ids, tetra_by_id):
     graph = nx.Graph()
     graph.add_nodes_from(resident_ids)
     for face in raw['faces']:
-        if face.get('permeability_state') != 'permeable':
+        if not face.get('transit_edge', face.get('permeability_state') == 'permeable'):
             continue
         owner = face.get('owner_tetrahedron_id')
         neighbor = face.get('neighbor_tetrahedron_id')

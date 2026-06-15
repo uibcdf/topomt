@@ -106,7 +106,24 @@ The molecular input path is MolSysMT-based. `selection`, `structure_indices`,
 `gate_intrusion_policy` are recorded in the raw `parameters` section for
 reproducibility.
 
-## 7. Stability Policy
+## 7. Mesh, Query, and Reporting Contract
+
+`DFNDMeshConfig` records fields that determine the cached substrate, including
+`epsilon`. `DFNDQuery` records only fields that can change while reusing that
+substrate. Both are frozen typed objects and expose canonicalizable `to_dict()`
+mappings. The existing keyword-based API remains a compatibility facade.
+
+`substrate_key` includes the mesh configuration. `result_key` combines that
+substrate identity with `DFNDQuery`; it reuses the canonical identity machinery
+in `identity.py`. Reporting filters do not affect result identity.
+
+`min_size` is currently a compatibility/reporting filter: every wet and dry
+component remains in the decomposition and records whether it belongs in the
+compatibility view. `sea_level` is not part of DFND. `DFNDData.at_probe()`
+preserves all unspecified query and reporting
+fields and rejects changes to mesh configuration.
+
+## 8. Stability Policy
 
 The public feature mapping and guaranteed fields above are the current v1
 contract. Raw records may contain more fields than listed here, but downstream

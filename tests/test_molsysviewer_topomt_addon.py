@@ -39,6 +39,11 @@ def test_addon_spec_matches_current_molsysviewer_contract():
     assert addon.workspaces[0].entry_panel == 'topography'
     assert [panel.id for panel in addon.panels] == ['topography', 'pockets']
     assert addon.context_actions[0].id == 'focus-topography-feature'
+    assert addon.context_actions[1].id == 'dfnd-tetrahedron-info'
+    assert (
+        addon.context_actions[1].entry
+        == 'molsysviewer_topomt.context.inspect_dfnd_tetrahedra'
+    )
     assert addon.workbench_sections[0].id == 'topography-summary'
     assert addon.shape_providers[0].id == 'topography-pocket-blob'
     assert addon.export_helpers[0].id == 'topography-summary-export'
@@ -81,7 +86,11 @@ def test_tetrahedron_context_action_accepts_dry_domain_shape_selection():
         ]
     )
 
-    lifecycle.on_context_action(view, 'dfnd-tetrahedron-info', {'context': {}})
+    lifecycle.on_context_action(
+        view,
+        'dfnd-tetrahedron-info',
+        {'entity_refs': [{'kind': 'tetrahedron', 'tetrahedron_ids': [104]}]},
+    )
 
     assert calls == [[104]]
 
@@ -104,9 +113,31 @@ def test_tetrahedron_context_action_accepts_dry_face_shape_selection():
         ]
     )
 
-    lifecycle.on_context_action(view, 'dfnd-tetrahedron-info', {'context': {}})
+    lifecycle.on_context_action(
+        view,
+        'dfnd-tetrahedron-info',
+        {'entity_refs': [{'kind': 'face', 'tetrahedron_ids': [0, 1]}]},
+    )
 
     assert calls == [[0, 1]]
+
+
+def test_tetrahedron_context_entry_is_directly_executable():
+    from molsysviewer_topomt.context import inspect_dfnd_tetrahedra
+
+    calls = []
+    dfnd = types.SimpleNamespace(info=lambda tetra_ids: calls.append(list(tetra_ids)))
+    view = types.SimpleNamespace(active_selection=None)
+    lifecycle.on_enable(view)
+    view._topomt_addon_runtime.topography = types.SimpleNamespace(dfnd=dfnd)
+
+    result = inspect_dfnd_tetrahedra(
+        view,
+        {'entity_refs': [{'kind': 'face', 'tetrahedron_ids': [4, 7]}]},
+    )
+
+    assert calls == [[4, 7]]
+    assert result == {'action': 'dfnd-tetrahedron-info', 'tetrahedron_ids': [4, 7]}
 
 
 def test_addon_registers_with_molsysviewer_host_registry():
@@ -332,6 +363,35 @@ def test_new_view_uses_molsysviewer_factory(monkeypatch):
     assert view.messages[0]['op'] == 'add_sphere'
 
 
+def test_new_view_feature_filter_keeps_complete_topography_attached(monkeypatch):
+    topo = tmt.Topography()
+    topo._molsys = 'system'
+    topo.dfnd = types.SimpleNamespace(marker='complete-dfnd')
+    topo.add_new_feature(
+        feature_type='pocket', feature_id='POC-1', center=[0.0, 0.0, 0.0]
+    )
+    topo.add_new_feature(
+        feature_type='pocket', feature_id='POC-2', center=[1.0, 1.0, 1.0]
+    )
+    view = DummyView()
+
+    monkeypatch.setattr(molsysviewer, 'new_view', lambda _system, **_kwargs: view)
+
+    result_view = new_view(topo, feature_ids=['POC-2'])
+    runtime = result_view._topomt_addon_runtime
+
+    assert runtime.topography is topo
+    assert result_view.topography is topo
+    assert runtime.active_feature_ids == ('POC-2',)
+    assert runtime.topography.dfnd.marker == 'complete-dfnd'
+    rendered_tags = [
+        message.get('options', {}).get('tag')
+        for message in view.messages
+        if message.get('op') in {'add_sphere', 'add_pocket_blob'}
+    ]
+    assert rendered_tags == ['topomt-pocket:POC-2']
+
+
 def test_subset_topography_keeps_only_requested_features():
     topo = tmt.Topography()
     topo.add_new_feature(
@@ -374,6 +434,109 @@ def test_attach_features_renders_only_selected_feature_ids():
     assert result['rendered']['n_rendered'] == 1
     assert result['selected_feature_ids'] == ['POC-2']
     assert result['rendered']['rendered'][0]['feature_id'] == 'POC-2'
+
+
+def test_subset_topography_preserves_selected_relations_and_dfnd_semantics():
+    topo = tmt.Topography()
+    topo.dfnd = types.SimpleNamespace(marker='complete-dfnd')
+    topo.add_new_feature(feature_type='pocket', feature_id='POC-1')
+    topo.add_new_feature(feature_type='mouth', feature_id='MOU-1')
+    topo.add_new_feature(feature_type='pocket', feature_id='POC-2')
+    topo.connect_features('MOU-1', 'POC-1')
+
+    subset = subset_topography(topo, ['POC-1', 'MOU-1'])
+
+    assert list(subset) == ['POC-1', 'MOU-1']
+    assert subset.parents_of('MOU-1', as_feature_ids=True) == {'POC-1'}
+    assert subset.dfnd.marker == 'complete-dfnd'
+    assert subset.dfnd is not topo.dfnd
+    assert subset['POC-1'] is not topo['POC-1']
+
+
+def test_subset_topography_preserves_real_dfnd_analysis(tmp_path):
+    pdb = tmp_path / 'minimal_dfnd.pdb'
+    pdb.write_text(
+        '\n'.join(
+            [
+                'ATOM      1  C1  GLY A   1       1.874   1.874   1.874  1.00  0.00           C',
+                'ATOM      2  C2  GLY A   1       1.874  -1.874  -1.874  1.00  0.00           C',
+                'ATOM      3  C3  GLY A   1      -1.874   1.874  -1.874  1.00  0.00           C',
+                'ATOM      4  C4  GLY A   1      -1.874  -1.874   1.874  1.00  0.00           C',
+                'END',
+                '',
+            ]
+        )
+    )
+    topo = tmt.get_topography(
+        str(pdb),
+        method='dfnd',
+        probe_radius=1.4,
+        min_size=0,
+        transit_policy='resident_only',
+    )
+    selected_id = next(iter(topo))
+
+    subset = subset_topography(topo, [selected_id])
+
+    assert list(subset) == [selected_id]
+    assert subset.dfnd is not topo.dfnd
+    assert subset.dfnd.raw == topo.dfnd.raw
+    assert subset.dfnd.dfn.components.wet
+
+
+def test_attach_features_keeps_complete_source_and_tracks_feature_filter():
+    topo = tmt.Topography()
+    topo.dfnd = types.SimpleNamespace(marker='complete-dfnd')
+    topo.add_new_feature(
+        feature_type='pocket', feature_id='POC-1', center=[0.0, 0.0, 0.0]
+    )
+    topo.add_new_feature(
+        feature_type='pocket', feature_id='POC-2', center=[1.0, 1.0, 1.0]
+    )
+
+    view = DummyView()
+    register_with_molsysviewer()
+    first = attach_features(view, topo, feature_ids=['POC-2'])
+    second = attach_features(view, topo, feature_ids=['POC-1'])
+    runtime = view._topomt_addon_runtime
+
+    assert runtime.topography is topo
+    assert view.topography is topo
+    assert runtime.topography.dfnd.marker == 'complete-dfnd'
+    assert runtime.active_feature_ids == ('POC-1',)
+    assert second['selected_feature_ids'] == ['POC-1']
+    assert second['rendered']['rendered'][0]['feature_id'] == 'POC-1'
+    group = runtime.render_groups['features:topomt-pocket']
+    assert group['feature_ids'] == ('POC-1',)
+    assert group['tags'] == ('topomt-pocket:POC-1',)
+    assert first['render_group_key'] == second['render_group_key']
+    assert any(
+        message.get('op') == 'clear_shapes_by_tag'
+        and message.get('tag') == 'topomt-pocket:POC-2'
+        for message in view.messages
+    )
+
+
+def test_attach_topography_clears_feature_filter_without_touching_other_groups():
+    topo = tmt.Topography()
+    topo.add_new_feature(
+        feature_type='pocket', feature_id='POC-1', center=[0.0, 0.0, 0.0]
+    )
+    topo.add_new_feature(
+        feature_type='pocket', feature_id='POC-2', center=[1.0, 1.0, 1.0]
+    )
+    view = DummyView()
+    register_with_molsysviewer()
+    attach_features(view, topo, feature_ids=['POC-1'])
+    runtime = view._topomt_addon_runtime
+    runtime.render_groups['tetrahedra:dfnd-tetra'] = {'tags': ('dfnd-tetra',)}
+
+    result = attach_topography(view, topo)
+
+    assert runtime.active_feature_ids is None
+    assert 'tetrahedra:dfnd-tetra' in runtime.render_groups
+    assert runtime.render_groups['features:topomt-pocket']['feature_ids'] is None
+    assert result['render_group_key'] == 'features:topomt-pocket'
 
 
 def test_attach_pockets_is_a_pocket_named_wrapper():
@@ -500,6 +663,49 @@ def test_build_topography_standalone0_html_can_render_only_selected_features(
     assert captured['build_view']['show'] is False
     assert captured['attach_features']['view'] is view
     assert captured['attach_features']['feature_ids'] == ['POC-2']
+
+
+def test_build_topography_standalone0_selected_features_emit_real_render_operations(
+    monkeypatch, tmp_path
+):
+    topo = tmt.Topography()
+    topo._molsys = 'system'
+    topo.add_new_feature(
+        feature_type='pocket',
+        feature_id='POC-1',
+        atom_indices=[1],
+        center=[0.0, 0.0, 0.0],
+    )
+    topo.add_new_feature(
+        feature_type='pocket',
+        feature_id='POC-2',
+        atom_indices=[2],
+        center=[1.0, 1.0, 1.0],
+    )
+    view = DummyView()
+
+    monkeypatch.setattr(molsysviewer, 'new_view', lambda *args, **kwargs: view)
+    monkeypatch.setattr(
+        molsysviewer,
+        'build_standalone0_html',
+        lambda view_arg, output_filename, **kwargs: str(
+            Path(output_filename).resolve()
+        ),
+    )
+
+    build_topography_standalone0_html(
+        'system',
+        str(tmp_path / 'selected.html'),
+        topography=topo,
+        feature_ids=['POC-2'],
+    )
+
+    rendered = [
+        message for message in view.messages if message.get('op') == 'add_sphere'
+    ]
+    assert len(rendered) == 1
+    assert rendered[0]['options']['tag'] == 'topomt-pocket:POC-2'
+    assert view._topomt_addon_runtime.active_feature_ids == ('POC-2',)
 
 
 def test_launch_topography_standalone0_can_compute_topography_and_open_host(
@@ -826,7 +1032,7 @@ def test_show_dfnd_tetrahedra_with_custom_indices():
     assert msg['options']['atom_quads'] == [[10, 11, 12, 13], [30, 31, 32, 33]]
 
 
-def test_attach_dfnd_tetrahedra_with_click_callback():
+def test_attach_dfnd_tetrahedra_relies_on_native_selection_without_click_callback():
     dfnd_records = {
         'tetrahedra': [
             {
@@ -845,12 +1051,8 @@ def test_attach_dfnd_tetrahedra_with_click_callback():
             super().__init__()
             self.click_callbacks = []
 
-        def on_click(self, cb):
-            self.click_callbacks.append(cb)
-
-        def off_click(self, cb):
-            if cb in self.click_callbacks:
-                self.click_callbacks.remove(cb)
+        def on_click(self, callback):
+            self.click_callbacks.append(callback)
 
     view = ClickableDummyView()
     from molsysviewer_topomt.integration import attach_dfnd_tetrahedra
@@ -858,24 +1060,7 @@ def test_attach_dfnd_tetrahedra_with_click_callback():
     result = attach_dfnd_tetrahedra(view, dfnd_records, tetrahedra_indices=[0])
 
     assert result['layer'] is not None
-    assert len(view.click_callbacks) == 1
-    cb = view.click_callbacks[0]
-
-    # Verify that calling attach_dfnd_tetrahedra again does not double-register the callback
-    attach_dfnd_tetrahedra(view, dfnd_records, tetrahedra_indices=[0])
-    assert len(view.click_callbacks) == 1
-
-    # Simulate triggering of click callback
-    # Triggers with mismatched event -> ignored
-    cb({'kind': 'structure'})
-    # Triggers with matched event, but no topography -> ignored
-    cb(
-        {
-            'kind': 'shape',
-            'tag': 'dfnd-tetra',
-            'shape_name': 'Tetrahedron 0: combined_class=wet_sealed, role=resident_transit, R_res=2.15 Å',
-        }
-    )
+    assert view.click_callbacks == []
 
 
 def test_attach_topography_with_tetrahedra():
@@ -973,12 +1158,15 @@ def test_topography_panel_actions_with_tetrahedra():
     panel.handle_action(view, 'render_pockets', {})
     assert len(view.messages) == 1
     assert view.messages[0]['op'] == 'add_sphere'
+    assert view._topomt_addon_runtime.active_feature_ids is None
+    assert 'features:topomt-pocket' in view._topomt_addon_runtime.render_groups
 
     # 2. Action: render_tetrahedra
     panel.handle_action(view, 'render_tetrahedra', {})
     assert len(view.messages) == 3
     assert view.messages[1]['op'] == 'clear_shapes_by_tag'
     assert view.messages[2]['op'] == 'add_tetrahedra'
+    assert 'tetrahedra:dfnd-tetra' in view._topomt_addon_runtime.render_groups
 
     # 3. Action: clear_pockets (clears both pockets and tetrahedra)
     panel.handle_action(view, 'clear_pockets', {})
@@ -988,6 +1176,8 @@ def test_topography_panel_actions_with_tetrahedra():
     tags_cleared = {msg['tag'] for msg in clear_ops}
     assert 'topomt-pocket:POC-1' in tags_cleared
     assert 'dfnd-tetra' in tags_cleared
+    assert view._topomt_addon_runtime.active_feature_ids == ()
+    assert view._topomt_addon_runtime.render_groups == {}
 
 
 def test_new_view_resolves_molsys(monkeypatch):
@@ -1080,8 +1270,11 @@ def test_show_dfnd_components_creates_shapes():
 
     class MockTopography:
         def __init__(self):
+            mesh = MockMesh()
             self.dfnd = types.SimpleNamespace(
-                mesh=MockMesh(), dfn=MockDFN(), raw={'faces': [], 'tetrahedra': []}
+                mesh=mesh,
+                dfn=MockDFN(),
+                raw={'faces': [], 'tetrahedra': mesh.tetrahedra},
             )
 
             self.features = {}
@@ -1199,13 +1392,14 @@ def test_show_dfnd_components_replaces_component_tag_between_representations():
         atom_indices=[0, 1, 2, 3],
         volume=10.0,
     )
+    mesh = MockMesh()
     topo = types.SimpleNamespace(
         dfnd=types.SimpleNamespace(
-            mesh=MockMesh(),
+            mesh=mesh,
             dfn=types.SimpleNamespace(
                 components=types.SimpleNamespace(wet=[component], dry=[])
             ),
-            raw={'faces': [], 'tetrahedra': []},
+            raw={'faces': [], 'tetrahedra': mesh.tetrahedra},
         )
     )
 
@@ -1302,7 +1496,7 @@ def test_show_dfnd_components_explicit_sphere_modes_and_graph_alias():
                 graph=types.SimpleNamespace(faces=[]),
                 parameters={'probe_radius': 1.4},
             ),
-            raw={'faces': [], 'tetrahedra': []},
+            raw={'faces': [], 'tetrahedra': MockMesh.tetrahedra},
         )
     )
     from molsysviewer_topomt.render import show_dfnd_components
@@ -1353,7 +1547,10 @@ def test_pipe_renders_channel_as_variable_radius_tube():
 
     pdb = (
         Path(__file__).resolve().parents[1]
-        / 'topomt' / 'data' / 'synthetic' / 'tube_channel_clean.pdb'
+        / 'topomt'
+        / 'data'
+        / 'synthetic'
+        / 'tube_channel_clean.pdb'
     )
     coords = np.array(
         [
@@ -1362,7 +1559,9 @@ def test_pipe_renders_channel_as_variable_radius_tube():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_arrays(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     result = net.get_topography(probe_radius=1.4, min_size=0)
     topo = SimpleNamespace(dfnd=DFNDData(net, result))
 
@@ -1396,7 +1595,10 @@ def test_contact_sheet_splits_interface_lining_by_body():
 
     pdb = (
         Path(__file__).resolve().parents[1]
-        / 'topomt' / 'data' / 'synthetic' / 'two_blocks_interface.pdb'
+        / 'topomt'
+        / 'data'
+        / 'synthetic'
+        / 'two_blocks_interface.pdb'
     )
     coords = np.array(
         [
@@ -1405,7 +1607,9 @@ def test_contact_sheet_splits_interface_lining_by_body():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_arrays(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     result = net.get_topography(probe_radius=1.4, min_size=0)
     dfnd = DFNDData(net, result)
     topo = SimpleNamespace(dfnd=dfnd)
@@ -1415,7 +1619,10 @@ def test_contact_sheet_splits_interface_lining_by_body():
 
     view = DummyView()
     layer = show_dfnd_components(
-        view, topo, representation='contact_sheet', interfaces_only=True,
+        view,
+        topo,
+        representation='contact_sheet',
+        interfaces_only=True,
         component_types=None,
     )
     assert layer is not None
@@ -1447,7 +1654,10 @@ def test_auto_renders_each_family_with_its_mode():
 
     pdb = (
         Path(__file__).resolve().parents[1]
-        / 'topomt' / 'data' / 'synthetic' / 'tube_channel_clean.pdb'
+        / 'topomt'
+        / 'data'
+        / 'synthetic'
+        / 'tube_channel_clean.pdb'
     )
     coords = np.array(
         [
@@ -1456,7 +1666,9 @@ def test_auto_renders_each_family_with_its_mode():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_arrays(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     result = net.get_topography(probe_radius=1.4, min_size=0)
     topo = SimpleNamespace(dfnd=DFNDData(net, result))
 
@@ -1478,7 +1690,11 @@ def test_rank_by_volume_keeps_largest_components():
         SimpleNamespace(component_id='B', volume_solvent_estimate=3.0),
         SimpleNamespace(component_id='C', volume_solvent_estimate=2.0),
     ]
-    assert [c.component_id for c in comp_mod._rank_by_volume(comps, None)] == ['A', 'B', 'C']
+    assert [c.component_id for c in comp_mod._rank_by_volume(comps, None)] == [
+        'A',
+        'B',
+        'C',
+    ]
     assert [c.component_id for c in comp_mod._rank_by_volume(comps, 2)] == ['B', 'C']
     assert [c.component_id for c in comp_mod._rank_by_volume(comps, 1)] == ['B']
 
@@ -1501,7 +1717,10 @@ def test_top_n_limits_rendered_components():
 
     pdb = (
         Path(__file__).resolve().parents[1]
-        / 'topomt' / 'data' / 'synthetic' / 'tube_channel_clean.pdb'
+        / 'topomt'
+        / 'data'
+        / 'synthetic'
+        / 'tube_channel_clean.pdb'
     )
     coords = np.array(
         [
@@ -1510,7 +1729,9 @@ def test_top_n_limits_rendered_components():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_arrays(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     result = net.get_topography(probe_radius=1.4, min_size=0)
     topo = SimpleNamespace(dfnd=DFNDData(net, result))
 
@@ -1540,7 +1761,10 @@ def test_auto_renders_interfaces_as_contact_sheet():
 
     pdb = (
         Path(__file__).resolve().parents[1]
-        / 'topomt' / 'data' / 'synthetic' / 'two_blocks_interface.pdb'
+        / 'topomt'
+        / 'data'
+        / 'synthetic'
+        / 'two_blocks_interface.pdb'
     )
     coords = np.array(
         [
@@ -1549,7 +1773,9 @@ def test_auto_renders_interfaces_as_contact_sheet():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_arrays(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     result = net.get_topography(probe_radius=1.4, min_size=0)
     dfnd = DFNDData(net, result)
     assert dfnd.dfn.components.wet_interfaces  # the fixture has an interface
@@ -1573,7 +1799,10 @@ def test_rings_renders_hole_clearance_profile():
 
     pdb = (
         Path(__file__).resolve().parents[1]
-        / 'topomt' / 'data' / 'synthetic' / 'tube_channel_clean.pdb'
+        / 'topomt'
+        / 'data'
+        / 'synthetic'
+        / 'tube_channel_clean.pdb'
     )
     coords = np.array(
         [
@@ -1582,12 +1811,16 @@ def test_rings_renders_hole_clearance_profile():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_arrays(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     result = net.get_topography(probe_radius=1.4, min_size=0)
     topo = SimpleNamespace(dfnd=DFNDData(net, result))
 
     view = DummyView()
-    layer = show_dfnd_components(view, topo, representation='rings', component_types=('channel',))
+    layer = show_dfnd_components(
+        view, topo, representation='rings', component_types=('channel',)
+    )
     assert layer is not None
     ring_msgs = [m for m in view.messages if m['op'] == 'add_rings']
     assert ring_msgs
@@ -1605,9 +1838,10 @@ def test_rings_renders_hole_clearance_profile():
 
 def test_hole_clearance_color_thresholds():
     from molsysviewer_topomt.render import _components as comp_mod
+
     assert comp_mod._hole_clearance_color(0.9) == comp_mod._HOLE_CLOSED  # < 1.15
-    assert comp_mod._hole_clearance_color(1.3) == comp_mod._HOLE_TIGHT   # 1.15..1.5
-    assert comp_mod._hole_clearance_color(2.0) == comp_mod._HOLE_OPEN    # >= 1.5
+    assert comp_mod._hole_clearance_color(1.3) == comp_mod._HOLE_TIGHT  # 1.15..1.5
+    assert comp_mod._hole_clearance_color(2.0) == comp_mod._HOLE_OPEN  # >= 1.5
 
 
 def test_carve_voids_focuses_on_void_lining():
@@ -1622,7 +1856,10 @@ def test_carve_voids_focuses_on_void_lining():
 
     pdb = (
         Path(__file__).resolve().parents[1]
-        / 'topomt' / 'data' / 'synthetic' / 'hollow_sphere_void.pdb'
+        / 'topomt'
+        / 'data'
+        / 'synthetic'
+        / 'hollow_sphere_void.pdb'
     )
     coords = np.array(
         [
@@ -1631,7 +1868,9 @@ def test_carve_voids_focuses_on_void_lining():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_arrays(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     result = net.get_topography(probe_radius=1.4, min_size=0)
     dfnd = DFNDData(net, result)
     # the fixture has a void
@@ -1662,7 +1901,7 @@ def test_show_dfnd_components_rejects_unknown_representation():
     from molsysviewer_topomt.render import show_dfnd_components
 
     component = types.SimpleNamespace(
-        component_id="WET-1", family="void", side="wet", node_indices=[0]
+        component_id='WET-1', family='void', side='wet', node_indices=[0]
     )
     topography = types.SimpleNamespace(
         dfnd=types.SimpleNamespace(
@@ -1672,8 +1911,8 @@ def test_show_dfnd_components_rejects_unknown_representation():
         )
     )
 
-    with pytest.raises(ValueError, match="Unknown representation"):
-        show_dfnd_components(DummyView(), topography, representation="unknown")
+    with pytest.raises(ValueError, match='Unknown representation'):
+        show_dfnd_components(DummyView(), topography, representation='unknown')
 
 
 def test_probe_centers_uses_parameters_from_real_dfnd_data():
@@ -1697,11 +1936,11 @@ def test_probe_centers_uses_parameters_from_real_dfnd_data():
 
     view = DummyView()
     layer = show_dfnd_components(
-        view, topography, representation="probe_centers", component_types=None
+        view, topography, representation='probe_centers', component_types=None
     )
 
     assert layer is not None
-    assert view.messages[-1]["options"]["radius"] == pytest.approx(1.0)
+    assert view.messages[-1]['options']['radius'] == pytest.approx(1.0)
 
 
 def _graph_render_topography():
@@ -1710,27 +1949,58 @@ def _graph_render_topography():
     tetrahedra = []
     for tetrahedron_id in tetrahedron_ids:
         start = len(coords)
-        coords.extend([[float(tetrahedron_id), 0.0, 0.0]] * 4)
+        x = float(tetrahedron_id)
+        coords.extend(
+            [[x + 1.0, 0.0, 0.0], [x, 1.0, 0.0], [x, 0.0, 1.0], [x - 1.0, -1.0, -1.0]]
+        )
         tetrahedra.append(
             {
-                "tetrahedron_id": tetrahedron_id,
-                "local_atom_indices": list(range(start, start + 4)),
+                'tetrahedron_id': tetrahedron_id,
+                'local_atom_indices': list(range(start, start + 4)),
             }
         )
+    faces = [
+        {
+            'face_id': 101,
+            'owner_tetrahedron_id': 0,
+            'neighbor_tetrahedron_id': 1,
+            'permeability_state': 'permeable',
+            'transit_edge': True,
+            'face_atoms_local': [0, 1, 2],
+        },
+        {
+            'face_id': 102,
+            'owner_tetrahedron_id': 1,
+            'neighbor_tetrahedron_id': 3,
+            'permeability_state': 'permeable',
+            'transit_edge': True,
+            'face_atoms_local': [4, 5, 6],
+        },
+        {
+            'face_id': 110,
+            'owner_tetrahedron_id': 10,
+            'neighbor_tetrahedron_id': -1,
+            'permeability_state': 'permeable',
+            'transit_edge': False,
+            'face_atoms_local': [12, 13, 14],
+        },
+    ]
     component = types.SimpleNamespace(
-        component_id="WET-1",
-        family="void",
-        side="wet",
+        component_id='WET-1',
+        family='void',
+        side='wet',
+        support_key='support:WET-1',
+        component_key='component:WET-1',
         node_indices=tetrahedron_ids,
         resident_node_indices=tetrahedron_ids,
         volume=1.0,
     )
     nodes = [
         {
-            "tetrahedron_id": tetrahedron_id,
-            "residence_state": "resident",
-            "n_permeable_contacts": 0,
-            "combined_class": "wet_sealed",
+            'tetrahedron_id': tetrahedron_id,
+            'residence_state': 'resident',
+            'n_permeable_contacts': 0,
+            'combined_class': 'wet_sealed',
         }
         for tetrahedron_id in tetrahedron_ids
     ]
@@ -1739,13 +2009,13 @@ def _graph_render_topography():
             mesh=types.SimpleNamespace(
                 atoms=types.SimpleNamespace(coords=np.asarray(coords)),
                 tetrahedra=tetrahedra,
-                faces=[],
+                faces=faces,
             ),
             dfn=types.SimpleNamespace(
                 components=types.SimpleNamespace(wet=[component], dry=[]),
-                graph=types.SimpleNamespace(nodes=nodes, faces=[]),
+                graph=types.SimpleNamespace(nodes=nodes, faces=faces),
             ),
-            raw={"faces": [], "tetrahedra": []},
+            raw={'faces': faces, 'tetrahedra': tetrahedra},
         )
     )
 
@@ -1754,12 +2024,12 @@ def test_component_graph_emits_nodes_in_tetrahedron_id_order():
     from molsysviewer_topomt.render import show_dfnd_components
 
     view = DummyView()
-    show_dfnd_components(view, _graph_render_topography(), representation="graph")
+    show_dfnd_components(view, _graph_render_topography(), representation='graph')
 
     centers = [
-        message["options"]["center"]
+        message['options']['center']
         for message in view.messages
-        if message["op"] == "add_sphere"
+        if message['op'] == 'add_sphere'
     ]
     assert np.asarray(centers)[:, 0].tolist() == [0.0, 1.0, 3.0, 10.0]
 
@@ -1770,16 +2040,20 @@ def test_show_dfn_graph_can_render_twice_with_same_tag_prefix():
     view = DummyView()
     topography = _graph_render_topography()
 
-    first = show_dfn_graph(view, topography, tag_prefix="repeat-graph")
-    second = show_dfn_graph(view, topography, tag_prefix="repeat-graph")
+    first = show_dfn_graph(view, topography, tag_prefix='repeat-graph')
+    second = show_dfn_graph(view, topography, tag_prefix='repeat-graph')
 
-    assert first["n_nodes"] == second["n_nodes"] == 4
+    assert first['n_nodes'] == second['n_nodes'] == 4
     cleared_tags = {
-        message["tag"]
+        message['tag']
         for message in view.messages
-        if message["op"] == "clear_shapes_by_tag"
+        if message['op'] == 'clear_shapes_by_tag'
     }
-    assert {"repeat-graph-node", "repeat-graph-edges", "repeat-graph-mouths"} <= cleared_tags
+    assert {
+        'repeat-graph-node',
+        'repeat-graph-edges',
+        'repeat-graph-mouths',
+    } <= cleared_tags
 
 
 def _build_dfnd_topo(pdb_name, probe=1.4):
@@ -1798,7 +2072,9 @@ def _build_dfnd_topo(pdb_name, probe=1.4):
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_arrays(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     result = net.get_topography(probe_radius=probe, min_size=0)
     return SimpleNamespace(dfnd=DFNDData(net, result))
 
@@ -1809,8 +2085,9 @@ def test_envelope_pocket_has_blob_and_one_mouth_ring():
 
     pocket_topo = _build_dfnd_topo('hollow_sphere_pocket.pdb')
     view = DummyView()
-    show_dfnd_components(view, pocket_topo, representation='envelope',
-                         component_types=('pocket',))
+    show_dfnd_components(
+        view, pocket_topo, representation='envelope', component_types=('pocket',)
+    )
     ops = [m['op'] for m in view.messages]
     assert 'add_pocket_blob' in ops  # the volume
     ring_msgs = [m for m in view.messages if m['op'] == 'add_rings']
@@ -1824,8 +2101,9 @@ def test_envelope_void_has_blob_and_no_mouth_ring():
 
     void_topo = _build_dfnd_topo('hollow_sphere_void.pdb')
     view = DummyView()
-    show_dfnd_components(view, void_topo, representation='envelope',
-                         component_types=('void',))
+    show_dfnd_components(
+        view, void_topo, representation='envelope', component_types=('void',)
+    )
     ops = [m['op'] for m in view.messages]
     assert 'add_pocket_blob' in ops  # the volume
     assert 'add_rings' not in ops  # a void has no mouths
@@ -1842,10 +2120,19 @@ def test_show_dfnd_labels_annotates_each_component():
     captured = []
 
     class FakeAnnotations:
-        def add_annotation(self, *, text, kind, atom_indices, tag, layer_tag, skip_digestion=False):
+        def add_annotation(
+            self, *, text, kind, atom_indices, tag, layer_tag, skip_digestion=False
+        ):
             layer = SimpleNamespace(tag=tag)
-            captured.append({'text': text, 'kind': kind, 'atom_indices': atom_indices,
-                             'tag': tag, 'layer_tag': layer_tag})
+            captured.append(
+                {
+                    'text': text,
+                    'kind': kind,
+                    'atom_indices': atom_indices,
+                    'tag': tag,
+                    'layer_tag': layer_tag,
+                }
+            )
             return layer
 
         def delete(self, *a, **k):
@@ -1856,8 +2143,11 @@ def test_show_dfnd_labels_annotates_each_component():
     assert layer is not None
 
     # one label per primary wet component, anchored to its lining atoms
-    wet = [c for c in topo.dfnd.dfn.components.wet
-           if c.family in ('pocket', 'void', 'channel')]
+    wet = [
+        c
+        for c in topo.dfnd.dfn.components.wet
+        if c.family in ('pocket', 'void', 'channel')
+    ]
     assert len(captured) == len(wet)
     for ann in captured:
         assert ann['kind'] == 'label'
@@ -1880,16 +2170,22 @@ def test_scaffold_draws_dry_core_spine():
     view = DummyView()
     layer = show_dfnd_components(view, topo, representation='scaffold')
     assert layer is not None
-    link_msgs = [m for m in view.messages
-                 if m['op'] in ('add_network_links', 'add_links')]
+    link_msgs = [
+        m for m in view.messages if m['op'] in ('add_network_links', 'add_links')
+    ]
     assert link_msgs  # the dry spine cylinders
 
 
 def test_affinity_color_typing_from_scalars():
     """Phase 5: the affinity classifier maps (hydrophobicity, charge) to colours."""
     from molsysviewer_topomt.render import _components as c
-    assert c._affinity_color_for_scalars(2.0, 1.0) == c._AFFINITY_POSITIVE   # +charge wins
-    assert c._affinity_color_for_scalars(2.0, -1.0) == c._AFFINITY_NEGATIVE  # -charge wins
+
+    assert (
+        c._affinity_color_for_scalars(2.0, 1.0) == c._AFFINITY_POSITIVE
+    )  # +charge wins
+    assert (
+        c._affinity_color_for_scalars(2.0, -1.0) == c._AFFINITY_NEGATIVE
+    )  # -charge wins
     assert c._affinity_color_for_scalars(1.5, 0.0) == c._AFFINITY_HYDROPHOBIC
     assert c._affinity_color_for_scalars(-1.5, 0.0) == c._AFFINITY_POLAR
     assert c._affinity_color_for_scalars(None, None) == c._AFFINITY_NEUTRAL
@@ -1919,7 +2215,10 @@ def test_atom_convexity_spike_is_most_convex():
 
     pdb = (
         Path(__file__).resolve().parents[1]
-        / 'topomt' / 'data' / 'synthetic' / 'tetrahedron_spike.pdb'
+        / 'topomt'
+        / 'data'
+        / 'synthetic'
+        / 'tetrahedron_spike.pdb'
     )
     coords = np.array(
         [
@@ -1943,8 +2242,14 @@ def test_show_dfnd_convexity_colours_whole_surface():
     captured = {}
 
     class FakeWhole:
-        def set_color_by_values(self, values, element='atom', palette='viridis',
-                                value_range=None, skip_digestion=False):
+        def set_color_by_values(
+            self,
+            values,
+            element='atom',
+            palette='viridis',
+            value_range=None,
+            skip_digestion=False,
+        ):
             captured['values'] = np.asarray(values)
             captured['element'] = element
             captured['palette'] = palette
@@ -1982,7 +2287,10 @@ def test_show_dfnd_legend_lists_present_families():
 
 def test_pharmacophore_kind_typing():
     """§9: the pharmacophore classifier maps (hydrophobicity, charge) to kinds."""
-    from molsysviewer_topomt.render._components import _pharmacophore_kind_for_scalars as k
+    from molsysviewer_topomt.render._components import (
+        _pharmacophore_kind_for_scalars as k,
+    )
+
     assert k(2.0, 1.0) == 'positive'
     assert k(2.0, -1.0) == 'negative'
     assert k(1.5, 0.0) == 'hydrophobic'
@@ -2000,8 +2308,9 @@ def test_pharmacophore_map_places_typed_sites(monkeypatch):
     topo = _build_dfnd_topo('tube_channel_clean.pdb')
     n_atoms = len(topo.dfnd.mesh.atoms.coords)
     # pretend every atom is hydrophobic (chemistry available)
-    monkeypatch.setattr(c, '_atom_pharmacophore_kinds',
-                        lambda molsys: ['hydrophobic'] * n_atoms)
+    monkeypatch.setattr(
+        c, '_atom_pharmacophore_kinds', lambda molsys: ['hydrophobic'] * n_atoms
+    )
 
     view = DummyView()
     view._molsys = object()  # non-None so the function proceeds
@@ -2017,6 +2326,633 @@ def test_pharmacophore_map_places_typed_sites(monkeypatch):
 def test_pharmacophore_map_none_on_dummy_system():
     """No chemistry (dummy) -> no sites, no crash."""
     from molsysviewer_topomt.render import show_dfnd_pharmacophore
+
     topo = _build_dfnd_topo('tube_channel_clean.pdb')
     view = DummyView()  # no _molsys
     assert show_dfnd_pharmacophore(view, topo) is None
+
+
+def test_dfnd_index_space_helpers_and_geometry_conversion_are_explicit():
+    from types import SimpleNamespace
+
+    from molsysviewer_topomt.index_spaces import (
+        MESH_LOCAL,
+        MOLECULAR_SYSTEM,
+        atom_index_payload,
+        mesh_local_from_molecular_system,
+    )
+    from molsysviewer_topomt.render._components import (
+        _body_labels_from_dry,
+        _dry_scaffold_edges,
+        _mouth_gate_rings,
+    )
+
+    index_map = np.array([10, 20, 30, 40])
+    coords = np.array(
+        [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [2.0, 0.0, 0.0], [3.0, 0.0, 0.0]]
+    )
+    comp = SimpleNamespace(
+        component_id='DRY-1',
+        atom_indices=[10, 30],
+        center=[1.0, 0.0, 0.0],
+        external_link_ids=[1],
+    )
+
+    assert mesh_local_from_molecular_system([30, 10], index_map) == [2, 0]
+    assert atom_index_payload([0, 2], MESH_LOCAL)['atom_index_space'] == MESH_LOCAL
+    assert (
+        atom_index_payload([10, 30], MOLECULAR_SYSTEM)['atom_index_space']
+        == MOLECULAR_SYSTEM
+    )
+    assert _dry_scaffold_edges(comp, coords, index_map) == [
+        [[0.0, 0.0, 0.0], [2.0, 0.0, 0.0]]
+    ]
+    centers, _normals, _radii = _mouth_gate_rings(
+        comp,
+        {'external_links': [{'external_link_id': 1, 'atom_indices': [20, 40]}]},
+        coords,
+        index_map,
+    )
+    assert centers == [[2.0, 0.0, 0.0]]
+    assert _body_labels_from_dry([comp]) == {10: 0, 30: 0}
+
+
+def test_dfnd_owned_payloads_declare_atom_index_space():
+    from molsysviewer_topomt.payloads import feature_record_from_feature
+    from molsysviewer_topomt.render._common import _dfnd_edge_meta, _dfnd_face_meta
+    from molsysviewer_topomt.simplex_selection import resolve_simplices
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+
+    net = DelaunayFlowNetwork.from_arrays(
+        np.array(
+            [
+                [0.0, 0.0, 0.0],
+                [4.0, 0.0, 0.0],
+                [0.0, 4.0, 0.0],
+                [0.0, 0.0, 4.0],
+            ]
+        ),
+        np.full(4, 1.5),
+        atom_indices=[10, 20, 30, 40],
+    )
+    result = net.get_topography()
+
+    assert all(
+        item['atom_index_space'] == 'mesh_local'
+        for item in _dfnd_edge_meta(result, {0})
+    )
+    assert all(
+        item['atom_index_space'] == 'mesh_local'
+        for item in _dfnd_face_meta(result, {0})
+    )
+    tetra_item = next(
+        item
+        for item in resolve_simplices(result, [10, 20, 30, 40])
+        if item['payload']['kind'] == 'tetrahedron'
+    )
+    assert tetra_item['payload']['atom_index_space'] == 'molecular_system'
+    feature = types.SimpleNamespace(atom_indices=[10, 20], feature_id='P-1')
+    assert (
+        feature_record_from_feature(feature)['atom_index_space'] == 'molecular_system'
+    )
+
+
+def test_partial_mesh_global_selection_hover_click_boundary():
+    from molsysviewer_topomt.addon import (
+        _handle_simplex_selection,
+        on_active_selection_changed,
+        on_enable,
+    )
+    from molsysviewer_topomt.simplex_selection import simplex_selection_info
+    from topomt.dfnd.graph import DelaunayFlowNetwork
+
+    net = DelaunayFlowNetwork.from_arrays(
+        np.array(
+            [
+                [0.0, 0.0, 0.0],
+                [4.0, 0.0, 0.0],
+                [0.0, 4.0, 0.0],
+                [0.0, 0.0, 4.0],
+            ]
+        ),
+        np.full(4, 1.5),
+        atom_indices=[10, 20, 30, 40],
+    )
+    result = net.get_topography()
+    topography = types.SimpleNamespace(dfnd=tmt.dfnd.data.DFNDData(net, result))
+    view = DummyView()
+    on_enable(view)
+    runtime = view._topomt_addon_runtime
+    runtime.topography = topography
+
+    items = on_active_selection_changed(
+        view,
+        {
+            'atom_indices': [10, 20, 30, 40],
+            'atom_index_space': 'molecular_system',
+        },
+    )
+    tetra = next(
+        item['payload'] for item in items if item['payload']['kind'] == 'tetrahedron'
+    )
+    assert tetra['atom_indices'] == [10, 20, 30, 40]
+    assert tetra['atom_index_space'] == 'molecular_system'
+
+    view._index_mapper = types.SimpleNamespace(
+        to_local_atoms=lambda atoms: [1, 3, 5, 7]
+    )
+    _handle_simplex_selection(view, runtime, tetra)
+    message = next(
+        msg for msg in reversed(view.messages) if msg['op'] == 'set_active_selection'
+    )
+    assert message['atom_indices'] == [1, 3, 5, 7]
+    assert simplex_selection_info(view)['atom_indices'] == [10, 20, 30, 40]
+    assert view._last_active_selection_event['atom_index_space'] == 'molecular_system'
+
+
+def test_primary_renderers_return_common_render_result_and_render_twice():
+    from molsysviewer_topomt.render import RenderResult
+    from molsysviewer_topomt.render import show_dfn_graph, show_dfnd_components
+    from molsysviewer_topomt.render import show_dfnd_tetrahedra, show_topography_pockets
+
+    pocket_topography = tmt.Topography()
+    pocket_topography.add_new_feature(
+        feature_type='pocket', feature_id='POC-1', center=[0.0, 0.0, 0.0]
+    )
+    pocket_view = DummyView()
+    pocket_first = show_topography_pockets(pocket_view, pocket_topography)
+    pocket_second = show_topography_pockets(pocket_view, pocket_topography)
+
+    tetra_view = DummyView()
+    tetra_empty = show_dfnd_tetrahedra(tetra_view, {'tetrahedra': []})
+
+    graph_view = DummyView()
+    graph_first = show_dfn_graph(graph_view, _graph_render_topography())
+    graph_second = show_dfn_graph(graph_view, _graph_render_topography())
+
+    component_view = DummyView()
+    component_topography = _build_dfnd_topo('hollow_sphere_void.pdb')
+    component_first = show_dfnd_components(
+        component_view, component_topography, representation='surface'
+    )
+    component_second = show_dfnd_components(
+        component_view, component_topography, representation='surface'
+    )
+
+    for result in (
+        pocket_first,
+        pocket_second,
+        tetra_empty,
+        graph_first,
+        graph_second,
+        component_first,
+        component_second,
+    ):
+        assert isinstance(result, RenderResult)
+        assert isinstance(result.layers, tuple)
+        assert isinstance(result.tags, tuple)
+        assert isinstance(result.warnings, tuple)
+
+    assert pocket_second['n_rendered'] == 1
+    assert pocket_second.primary_layer is pocket_second.layers[0]
+    assert tetra_empty.is_empty is True
+    assert bool(tetra_empty) is False
+    assert graph_second['n_nodes'] == graph_first['n_nodes']
+    assert component_second.representation == 'surface'
+    assert component_second.selected_ids
+    assert any(
+        message.get('op') == 'clear_shapes_by_tag'
+        and message.get('tag') == 'topomt-pocket:POC-1'
+        for message in pocket_view.messages
+    )
+
+
+def test_render_result_mapping_and_primary_layer_compatibility():
+    from molsysviewer_topomt.render import RenderResult
+
+    layer = types.SimpleNamespace(tag='layer-tag')
+    result = RenderResult(
+        representation='test',
+        selected_ids=('A',),
+        layers=(layer,),
+        tags=('layer-tag',),
+        counts={'n_items': 1},
+        details={'legacy': 'value'},
+    )
+
+    assert result['n_items'] == 1
+    assert result['legacy'] == 'value'
+    assert result.tag == 'layer-tag'
+    assert result.counts['n_layers'] == 1
+    assert result.counts['n_selected'] == 1
+    with pytest.raises(TypeError):
+        result.counts['n_items'] = 2
+    assert bool(result) is True
+
+
+@pytest.mark.parametrize(
+    'representation',
+    [
+        'auto',
+        'tetrahedra',
+        'cloud',
+        'envelope',
+        'pipe',
+        'rings',
+        'residence_spheres',
+        'alpha_spheres',
+        'probe_centers',
+        'surface',
+        'contact_sheet',
+        'scaffold',
+        'affinity_spheres',
+        'coast_faces',
+        'graph',
+    ],
+)
+def test_every_component_representation_returns_render_result_and_repeats(
+    representation,
+):
+    from molsysviewer_topomt.render import RenderResult, show_dfnd_components
+
+    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    view = DummyView()
+    first = show_dfnd_components(
+        view,
+        topography,
+        representation=representation,
+        show_wet=True,
+        show_dry=True,
+        component_types=None,
+        draw_faces=True,
+        draw_edges=True,
+    )
+    second = show_dfnd_components(
+        view,
+        topography,
+        representation=representation,
+        show_wet=True,
+        show_dry=True,
+        component_types=None,
+        draw_faces=True,
+        draw_edges=True,
+    )
+
+    assert isinstance(first, RenderResult)
+    assert isinstance(second, RenderResult)
+    assert first.representation == representation
+    assert second.representation == representation
+    assert first.selected_ids == second.selected_ids
+
+
+def test_empty_render_result_replaces_previous_graph_tetrahedra_and_components():
+    from molsysviewer_topomt.render import (
+        show_dfn_graph,
+        show_dfnd_components,
+        show_dfnd_tetrahedra,
+    )
+
+    graph_topography = _graph_render_topography()
+    graph_view = DummyView()
+    assert show_dfn_graph(graph_view, graph_topography)
+    for node in graph_topography.dfnd.dfn.graph.nodes:
+        node['residence_state'] = 'non_resident'
+    empty_graph = show_dfn_graph(graph_view, graph_topography)
+    assert empty_graph.is_empty
+    assert 'dfn-graph-node' not in getattr(graph_view, '_scene_objects', {})
+
+    tetra_view = DummyView()
+    tetra_records = {
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 0,
+                'local_atom_indices': [0, 1, 2, 3],
+                'combined_class': 'wet_sealed',
+                'residence_state': 'resident',
+            }
+        ]
+    }
+    assert show_dfnd_tetrahedra(tetra_view, tetra_records)
+    empty_tetrahedra = show_dfnd_tetrahedra(
+        tetra_view, tetra_records, tetrahedra_indices=[]
+    )
+    assert empty_tetrahedra.is_empty
+    assert 'dfnd-tetra' not in getattr(tetra_view, '_scene_objects', {})
+
+    component_view = DummyView()
+    component_topography = _build_dfnd_topo('hollow_sphere_void.pdb')
+    assert show_dfnd_components(
+        component_view, component_topography, representation='surface'
+    )
+    empty_components = show_dfnd_components(
+        component_view,
+        component_topography,
+        representation='surface',
+        component_ids=['missing'],
+    )
+    assert empty_components.is_empty
+    assert not any(
+        tag.startswith('dfnd-comp')
+        for tag in getattr(component_view, '_scene_objects', {})
+    )
+
+
+def test_wp18_point_geometry_requires_units_and_structured_refs():
+    from molsysviewer_topomt.geometry import EntityRef, PointGeometry
+
+    ref = EntityRef(kind='tetrahedron', entity_id=7, tetrahedron_ids=(7,))
+    geometry = PointGeometry(((1.0, 2.0, 3.0),), unit='angstroms', refs=(ref,))
+
+    assert geometry.coordinates == ((1.0, 2.0, 3.0),)
+    assert geometry.refs[0].tetrahedron_ids == (7,)
+    with pytest.raises(ValueError, match='unit is required'):
+        PointGeometry(((1.0, 2.0, 3.0),), unit='', refs=(ref,))
+
+
+def test_wp18_graph_renderers_share_canonical_tetrahedron_center_geometry():
+    from molsysviewer_topomt.render import show_dfn_graph, show_dfnd_components
+
+    topography = _graph_render_topography()
+    full = show_dfn_graph(DummyView(), topography)
+    component = show_dfnd_components(DummyView(), topography, representation='graph')
+
+    full_geometry = full['node_geometry']
+    component_geometry = component['node_geometry']
+    assert full_geometry.unit == component_geometry.unit == 'angstroms'
+    assert full_geometry.coordinates == component_geometry.coordinates
+    assert tuple(ref.entity_id for ref in full_geometry.refs) == tuple(
+        ref.entity_id for ref in component_geometry.refs
+    )
+    assert all(ref.component_key for ref in component_geometry.refs)
+
+
+def test_wp18_point_adapter_always_skips_digestion():
+    from molsysviewer_topomt.geometry import EntityRef, PointGeometry
+    from molsysviewer_topomt.render.adapters import add_point_spheres
+
+    calls = []
+    view = types.SimpleNamespace(
+        shapes=types.SimpleNamespace(add_sphere=lambda **kwargs: calls.append(kwargs))
+    )
+    geometry = PointGeometry(
+        ((0.0, 0.0, 0.0),),
+        unit='angstroms',
+        refs=(EntityRef(kind='tetrahedron', entity_id=0),),
+    )
+
+    add_point_spheres(view, geometry, radius=puw.quantity(0.03, 'nm'))
+
+    assert calls[0]['skip_digestion'] is True
+
+
+def test_wp18_tetrahedron_centers_preserve_requested_order():
+    from molsysviewer_topomt.geometry import tetrahedron_centers
+
+    geometry = tetrahedron_centers(_graph_render_topography(), [10, 0, 3])
+
+    assert tuple(ref.entity_id for ref in geometry.refs) == (10, 0, 3)
+    assert tuple(point[0] for point in geometry.coordinates) == (10.0, 0.0, 3.0)
+
+
+def test_wp18_graph_renderers_share_canonical_edge_geometry():
+    from molsysviewer_topomt.render import show_dfn_graph, show_dfnd_components
+
+    topography = _graph_render_topography()
+    full = show_dfn_graph(DummyView(), topography)
+    component = show_dfnd_components(DummyView(), topography, representation='graph')
+
+    full_edges = full['edge_geometry']
+    component_edges = component['edge_geometry']
+    assert full_edges.unit == component_edges.unit == 'angstroms'
+    assert full_edges.coordinate_pairs == component_edges.coordinate_pairs
+    assert tuple(ref.entity_id for ref in full_edges.refs) == (101, 102)
+    assert tuple(ref.entity_id for ref in component_edges.refs) == (101, 102)
+    assert all(ref.kind == 'face' for ref in full_edges.refs)
+
+
+def test_wp18_full_graph_mouth_geometry_keeps_face_reference():
+    from molsysviewer_topomt.render import show_dfn_graph
+
+    result = show_dfn_graph(DummyView(), _graph_render_topography())
+    mouths = result['mouth_geometry']
+
+    assert mouths.unit == 'angstroms'
+    assert len(mouths.refs) == 1
+    assert mouths.refs[0].entity_id == 110
+    assert mouths.refs[0].tetrahedron_ids == (10,)
+
+
+def test_wp18_segment_adapter_always_skips_digestion():
+    from molsysviewer_topomt.geometry import EntityRef, SegmentGeometry
+    from molsysviewer_topomt.render.adapters import add_segments
+
+    calls = []
+    view = types.SimpleNamespace(
+        shapes=types.SimpleNamespace(add_links=lambda **kwargs: calls.append(kwargs))
+    )
+    geometry = SegmentGeometry(
+        ((0.0, 0.0, 0.0),),
+        ((1.0, 0.0, 0.0),),
+        unit='angstroms',
+        refs=(EntityRef(kind='face', entity_id=1, tetrahedron_ids=(0, 1)),),
+    )
+
+    add_segments(view, geometry, radius=puw.quantity(0.015, 'nm'), skip_digestion=False)
+
+    assert calls[0]['skip_digestion'] is True
+
+
+def test_wp18_tetrahedra_geometry_preserves_coordinates_indices_and_refs():
+    from molsysviewer_topomt.geometry import tetrahedra_geometry
+
+    geometry = tetrahedra_geometry(_graph_render_topography(), [10, 0])
+
+    assert geometry.unit == 'angstroms'
+    assert geometry.atom_index_space == 'mesh_local'
+    assert tuple(ref.entity_id for ref in geometry.refs) == (10, 0)
+    assert len(geometry.coordinates) == len(geometry.atom_quads) == 2
+    assert geometry.atom_quads[0] == (12, 13, 14, 15)
+
+
+def test_wp18_tetrahedron_renderers_emit_identical_canonical_quads():
+    from molsysviewer_topomt.render import show_dfnd_components, show_dfnd_tetrahedra
+
+    topography = _graph_render_topography()
+    general_view = DummyView()
+    component_view = DummyView()
+    show_dfnd_tetrahedra(general_view, topography)
+    show_dfnd_components(component_view, topography, representation='tetrahedra')
+
+    general = next(
+        message
+        for message in general_view.messages
+        if message['op'] == 'add_tetrahedra'
+    )
+    component = next(
+        message
+        for message in component_view.messages
+        if message['op'] == 'add_tetrahedra'
+    )
+    assert general['options']['atom_quads'] == component['options']['atom_quads']
+
+
+def test_wp18_tetrahedra_adapter_always_skips_digestion():
+    from molsysviewer_topomt.geometry import EntityRef, TetrahedraGeometry
+    from molsysviewer_topomt.render.adapters import add_tetrahedra
+
+    calls = []
+    view = types.SimpleNamespace(
+        shapes=types.SimpleNamespace(
+            add_tetrahedra=lambda **kwargs: calls.append(kwargs)
+        )
+    )
+    geometry = TetrahedraGeometry(
+        (),
+        ((0, 1, 2, 3),),
+        atom_index_space='mesh_local',
+        unit='angstroms',
+        refs=(EntityRef(kind='tetrahedron', entity_id=0),),
+    )
+
+    add_tetrahedra(view, geometry, skip_digestion=False)
+
+    assert calls[0]['skip_digestion'] is True
+    assert calls[0]['atom_quads'] == ((0, 1, 2, 3),)
+
+
+def test_wp18_face_and_edge_geometry_preserve_pick_indices_and_identity():
+    from molsysviewer_topomt.geometry import edge_geometry, face_geometry
+
+    topography = _build_dfnd_topo('tetrahedron_void.pdb')
+    faces = face_geometry(topography, [0])
+    edges = edge_geometry(topography, [0])
+
+    assert faces.unit == edges.unit == 'angstroms'
+    assert faces.atom_index_space == edges.atom_index_space == 'mesh_local'
+    assert all(len(item) == 3 for item in faces.atom_triplets)
+    assert all(len(item) == 2 for item in edges.atom_pairs)
+    assert all(ref.kind == 'face' for ref in faces.refs)
+    assert all(ref.kind == 'edge' for ref in edges.refs)
+
+
+def test_wp18_pick_metadata_contains_json_structured_entity_refs():
+    from molsysviewer_topomt.render._common import _dfnd_edge_meta, _dfnd_face_meta
+
+    topography = _build_dfnd_topo('tetrahedron_void.pdb')
+    face = _dfnd_face_meta(topography, {0})[0]
+    edge = _dfnd_edge_meta(topography, {0})[0]
+
+    assert isinstance(face['entity_ref'], dict)
+    assert face['entity_ref']['kind'] == 'face'
+    assert face['entity_ref']['entity_id'] == face['face_id']
+    assert isinstance(edge['entity_ref'], dict)
+    assert edge['entity_ref']['kind'] == 'edge'
+    assert edge['entity_ref']['entity_id'] == edge['edge_id']
+
+
+def test_wp18_face_geometry_filters_by_stable_face_id():
+    from molsysviewer_topomt.geometry import face_geometry
+
+    topography = _graph_render_topography()
+    geometry = face_geometry(topography, face_ids=[110, 101])
+
+    assert tuple(ref.entity_id for ref in geometry.refs) == (101, 110)
+    assert all(ref.kind == 'face' for ref in geometry.refs)
+
+
+def test_wp18_indexed_triangle_adapter_preserves_pick_triplets_and_skips_digestion():
+    from molsysviewer_topomt.geometry import EntityRef, IndexedTriangleGeometry
+    from molsysviewer_topomt.render.adapters import add_indexed_triangles
+
+    calls = []
+    view = types.SimpleNamespace(
+        shapes=types.SimpleNamespace(
+            add_triangle_faces=lambda **kwargs: calls.append(kwargs)
+        )
+    )
+    geometry = IndexedTriangleGeometry(
+        (),
+        ((0, 1, 2),),
+        atom_index_space='mesh_local',
+        unit='angstroms',
+        refs=(EntityRef(kind='face', entity_id=7, tetrahedron_ids=(0, 1)),),
+    )
+
+    add_indexed_triangles(view, geometry, skip_digestion=False)
+
+    assert calls[0]['skip_digestion'] is True
+    assert calls[0]['atom_triplets'] == ((0, 1, 2),)
+
+
+def test_wp18_component_sphere_geometries_share_tetrahedron_identity():
+    from molsysviewer_topomt.geometry import (
+        component_alpha_sphere_geometry,
+        component_residence_sphere_geometry,
+        probe_sphere_geometry,
+    )
+
+    topography = _build_dfnd_topo('hollow_sphere_void.pdb')
+    component = topography.dfnd.dfn.components.wet[0]
+    residence = component_residence_sphere_geometry(topography, component)
+    alpha = component_alpha_sphere_geometry(topography, component)
+    probe = probe_sphere_geometry(residence, 1.4)
+
+    assert residence.unit == alpha.unit == probe.unit == 'angstroms'
+    assert tuple(ref.entity_id for ref in residence.refs) == tuple(
+        ref.entity_id for ref in alpha.refs
+    )
+    assert all(ref.component_key == component.component_key for ref in residence.refs)
+    assert all(radius == pytest.approx(1.4) for radius in probe.radii)
+
+
+def test_wp18_sphere_adapters_force_skip_digestion():
+    from molsysviewer_topomt.geometry import EntityRef, SphereGeometry
+    from molsysviewer_topomt.render.adapters import add_sphere_set, add_uniform_spheres
+
+    alpha_calls = []
+    uniform_calls = []
+    view = types.SimpleNamespace(
+        shapes=types.SimpleNamespace(
+            add_set_alpha_spheres=lambda **kwargs: alpha_calls.append(kwargs),
+            add_sphere=lambda **kwargs: uniform_calls.append(kwargs),
+        )
+    )
+    geometry = SphereGeometry(
+        ((0.0, 0.0, 0.0),),
+        (1.4,),
+        unit='angstroms',
+        refs=(EntityRef(kind='tetrahedron', entity_id=0),),
+    )
+
+    add_sphere_set(view, geometry, skip_digestion=False)
+    add_uniform_spheres(view, geometry, skip_digestion=False)
+
+    assert alpha_calls[0]['skip_digestion'] is True
+    assert uniform_calls[0]['skip_digestion'] is True
+
+
+def test_wp18_sphere_renderers_emit_canonical_residence_and_alpha_geometry():
+    from molsysviewer_topomt.geometry import (
+        component_alpha_sphere_geometry,
+        component_residence_sphere_geometry,
+    )
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topography = _build_dfnd_topo('hollow_sphere_void.pdb')
+    component = topography.dfnd.dfn.components.wet[0]
+
+    for representation, extractor in (
+        ('residence_spheres', component_residence_sphere_geometry),
+        ('alpha_spheres', component_alpha_sphere_geometry),
+    ):
+        expected = extractor(topography, component)
+        view = DummyView()
+        show_dfnd_components(
+            view,
+            topography,
+            representation=representation,
+            component_ids=[component.component_id],
+        )
+        emitted = view.messages[-1]['options']['alpha_spheres']
+        assert np.allclose(emitted['centers'], expected.centers)
+        assert np.allclose(emitted['radii'], expected.radii)

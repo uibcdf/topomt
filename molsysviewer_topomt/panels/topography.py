@@ -8,7 +8,6 @@ from molsysviewer.addons import AddonPanelWidget
 
 from ..runtime import ensure_runtime, record_event
 
-
 _ESM = """
 export function render({ model, el }) {
   let state = {
@@ -167,77 +166,94 @@ class TopoMTTopographyPanel(AddonPanelWidget):
     def handle_action(self, view: Any, action_id: str, payload: dict) -> None:
         runtime = ensure_runtime(view)
 
-        if action_id == "render_pockets":
+        if action_id == 'render_pockets':
             if runtime.topography is None:
-                self.push_state({**self._build_state(runtime), "status": "error", "error": "No topography attached."})
-                return
-            self.push_state({**self._build_state(runtime), "status": "rendering"})
-            try:
-                from ..render import show_topography_pockets
-                result = show_topography_pockets(
-                    view, runtime.topography, tag_prefix=runtime.tag_prefix, skip_digestion=True
+                self.push_state(
+                    {
+                        **self._build_state(runtime),
+                        'status': 'error',
+                        'error': 'No topography attached.',
+                    }
                 )
-                record_event(view, "panel_render_pockets", n_rendered=result["n_rendered"])
-                self.push_state({**self._build_state(runtime), "status": "done"})
-            except Exception as exc:
-                self.push_state({**self._build_state(runtime), "status": "error", "error": str(exc)})
+                return
+            self.push_state({**self._build_state(runtime), 'status': 'rendering'})
+            try:
+                from ..integration import attach_topography
 
-        elif action_id == "render_tetrahedra":
+                attached = attach_topography(
+                    view,
+                    runtime.topography,
+                    enable_addon=False,
+                    show=True,
+                    tag_prefix=runtime.tag_prefix,
+                    skip_digestion=True,
+                )
+                result = attached['rendered']
+                record_event(
+                    view, 'panel_render_pockets', n_rendered=result['n_rendered']
+                )
+                self.push_state({**self._build_state(runtime), 'status': 'done'})
+            except Exception as exc:
+                self.push_state(
+                    {**self._build_state(runtime), 'status': 'error', 'error': str(exc)}
+                )
+
+        elif action_id == 'render_tetrahedra':
             if runtime.topography is None:
-                self.push_state({**self._build_state(runtime), "status": "error", "error": "No topography attached."})
-                return
-            self.push_state({**self._build_state(runtime), "status": "rendering"})
-            try:
-                from ..render import show_dfnd_tetrahedra
-                show_dfnd_tetrahedra(
-                    view, runtime.topography, tag_prefix="dfnd-tetra", skip_digestion=True
+                self.push_state(
+                    {
+                        **self._build_state(runtime),
+                        'status': 'error',
+                        'error': 'No topography attached.',
+                    }
                 )
-                record_event(view, "panel_render_tetrahedra")
-                self.push_state({**self._build_state(runtime), "status": "done"})
-            except Exception as exc:
-                self.push_state({**self._build_state(runtime), "status": "error", "error": str(exc)})
-
-        elif action_id == "clear_pockets":
-            if runtime.topography is not None:
-                try:
-                    feature_ids = []
-                    if hasattr(runtime.topography, 'features'):
-                        feature_ids = list(runtime.topography.features.keys())
-                    elif isinstance(runtime.topography, dict):
-                        if 'features' in runtime.topography:
-                            feature_ids = [f['feature_id'] for f in runtime.topography['features'] if 'feature_id' in f]
-                        else:
-                            feature_ids = list(runtime.topography.keys())
-                    for feature_id in feature_ids:
-                        view.shapes.clear(tag=f"{runtime.tag_prefix}:{feature_id}", skip_digestion=True)
-                except Exception:
-                    pass
+                return
+            self.push_state({**self._build_state(runtime), 'status': 'rendering'})
             try:
-                view.shapes.clear(tag="dfnd-tetra", skip_digestion=True)
-            except Exception:
-                pass
-            record_event(view, "panel_clear_pockets")
-            self.push_state({**self._build_state(runtime), "status": "idle"})
+                from ..integration import attach_dfnd_tetrahedra
+
+                attach_dfnd_tetrahedra(
+                    view,
+                    runtime.topography,
+                    enable_addon=False,
+                    tag_prefix='dfnd-tetra',
+                    skip_digestion=True,
+                )
+                record_event(view, 'panel_render_tetrahedra')
+                self.push_state({**self._build_state(runtime), 'status': 'done'})
+            except Exception as exc:
+                self.push_state(
+                    {**self._build_state(runtime), 'status': 'error', 'error': str(exc)}
+                )
+
+        elif action_id == 'clear_pockets':
+            from ..integration import clear_render_group
+
+            clear_render_group(view, 'features', runtime.tag_prefix)
+            clear_render_group(view, 'tetrahedra', 'dfnd-tetra')
+            record_event(view, 'panel_clear_pockets')
+            self.push_state({**self._build_state(runtime), 'status': 'idle'})
 
     @staticmethod
     def _build_state(runtime: Any) -> dict:
         from ..payloads import topography_payload
+
         if runtime.topography is not None:
             try:
                 payload = topography_payload(runtime.topography)
                 return {
-                    "n_features": payload["n_features"],
-                    "feature_counts": payload["feature_counts"],
-                    "tag_prefix": runtime.tag_prefix,
-                    "status": "idle",
-                    "error": None,
+                    'n_features': payload['n_features'],
+                    'feature_counts': payload['feature_counts'],
+                    'tag_prefix': runtime.tag_prefix,
+                    'status': 'idle',
+                    'error': None,
                 }
             except Exception:
                 pass
         return {
-            "n_features": 0,
-            "feature_counts": {},
-            "tag_prefix": runtime.tag_prefix,
-            "status": "idle",
-            "error": None,
+            'n_features': 0,
+            'feature_counts': {},
+            'tag_prefix': runtime.tag_prefix,
+            'status': 'idle',
+            'error': None,
         }

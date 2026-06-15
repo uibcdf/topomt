@@ -8,7 +8,6 @@ from molsysviewer.addons import AddonPanelWidget
 
 from ..runtime import ensure_runtime, record_event
 
-
 _ESM = """
 export function render({ model, el }) {
   let state = {
@@ -182,60 +181,68 @@ class TopoMTPocketsPanel(AddonPanelWidget):
     def handle_action(self, view: Any, action_id: str, payload: dict) -> None:
         runtime = ensure_runtime(view)
 
-        if action_id == "show_all_pockets":
+        if action_id == 'show_all_pockets':
             if runtime.topography is None:
-                self.push_state({**self._build_state(runtime), "status": "error", "error": "No topography attached."})
-                return
-            self.push_state({**self._build_state(runtime), "status": "rendering"})
-            try:
-                from ..render import show_topography_pockets
-                result = show_topography_pockets(
-                    view, runtime.topography, tag_prefix=runtime.tag_prefix, skip_digestion=True
+                self.push_state(
+                    {
+                        **self._build_state(runtime),
+                        'status': 'error',
+                        'error': 'No topography attached.',
+                    }
                 )
-                record_event(view, "panel_show_all_pockets", n_rendered=result["n_rendered"])
-                self.push_state({**self._build_state(runtime), "status": "done"})
-            except Exception as exc:
-                self.push_state({**self._build_state(runtime), "status": "error", "error": str(exc)})
+                return
+            self.push_state({**self._build_state(runtime), 'status': 'rendering'})
+            try:
+                from ..integration import attach_topography
 
-        elif action_id == "show_pocket":
-            feature_id = payload.get("feature_id")
+                attached = attach_topography(
+                    view,
+                    runtime.topography,
+                    enable_addon=False,
+                    show=True,
+                    tag_prefix=runtime.tag_prefix,
+                    skip_digestion=True,
+                )
+                result = attached['rendered']
+                record_event(
+                    view, 'panel_show_all_pockets', n_rendered=result['n_rendered']
+                )
+                self.push_state({**self._build_state(runtime), 'status': 'done'})
+            except Exception as exc:
+                self.push_state(
+                    {**self._build_state(runtime), 'status': 'error', 'error': str(exc)}
+                )
+
+        elif action_id == 'show_pocket':
+            feature_id = payload.get('feature_id')
             if not feature_id or runtime.topography is None:
                 return
             try:
                 from ..integration import attach_features
+
                 attach_features(
-                    view, runtime.topography,
+                    view,
+                    runtime.topography,
                     feature_ids=[feature_id],
-                    enable_addon=False, show=True,
+                    enable_addon=False,
+                    show=True,
                     tag_prefix=runtime.tag_prefix,
                     skip_digestion=True,
                 )
-                record_event(view, "panel_show_pocket", feature_id=feature_id)
-                self.push_state({**self._build_state(runtime), "status": "done"})
+                record_event(view, 'panel_show_pocket', feature_id=feature_id)
+                self.push_state({**self._build_state(runtime), 'status': 'done'})
             except Exception as exc:
-                self.push_state({**self._build_state(runtime), "status": "error", "error": str(exc)})
+                self.push_state(
+                    {**self._build_state(runtime), 'status': 'error', 'error': str(exc)}
+                )
 
-        elif action_id == "clear_pockets":
-            if runtime.topography is not None:
-                try:
-                    feature_ids = []
-                    if hasattr(runtime.topography, 'features'):
-                        feature_ids = list(runtime.topography.features.keys())
-                    elif isinstance(runtime.topography, dict):
-                        if 'features' in runtime.topography:
-                            feature_ids = [f['feature_id'] for f in runtime.topography['features'] if 'feature_id' in f]
-                        else:
-                            feature_ids = list(runtime.topography.keys())
-                    for feature_id in feature_ids:
-                        view.shapes.clear(tag=f"{runtime.tag_prefix}:{feature_id}", skip_digestion=True)
-                except Exception:
-                    pass
-            try:
-                view.shapes.clear(tag="dfnd-tetra", skip_digestion=True)
-            except Exception:
-                pass
-            record_event(view, "panel_clear_pockets")
-            self.push_state({**self._build_state(runtime), "status": "idle"})
+        elif action_id == 'clear_pockets':
+            from ..integration import clear_render_group
+
+            clear_render_group(view, 'features', runtime.tag_prefix)
+            clear_render_group(view, 'tetrahedra', 'dfnd-tetra')
+            record_event(view, 'panel_clear_pockets')
+            self.push_state({**self._build_state(runtime), 'status': 'idle'})
 
     @staticmethod
     def _build_state(runtime: Any) -> dict:
@@ -243,17 +250,18 @@ class TopoMTPocketsPanel(AddonPanelWidget):
         if runtime.topography is not None:
             try:
                 from ..payloads import topography_payload
+
                 payload = topography_payload(runtime.topography)
                 pockets = [
-                    {"feature_id": f["feature_id"], "score": f.get("score")}
-                    for f in payload["features"]
-                    if f.get("feature_type") == "pocket"
+                    {'feature_id': f['feature_id'], 'score': f.get('score')}
+                    for f in payload['features']
+                    if f.get('feature_type') == 'pocket'
                 ]
             except Exception:
                 pass
         return {
-            "pockets": pockets,
-            "tag_prefix": runtime.tag_prefix,
-            "status": "idle",
-            "error": None,
+            'pockets': pockets,
+            'tag_prefix': runtime.tag_prefix,
+            'status': 'idle',
+            'error': None,
         }

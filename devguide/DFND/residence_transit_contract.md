@@ -130,6 +130,23 @@ transit_edge(T_i, T_j) =
     and they share a permeable finite face
 ```
 
+This is the single canonical transit-edge predicate. Implementations must not
+apply a second threshold to `R_gate` after the shared face has been classified.
+A marginal face admitted by the generous permeability policy remains flagged as
+marginal and creates a transit edge when both incident tetrahedra are transit
+nodes.
+
+For reporting:
+
+```text
+gate_margin = R_gate - R_probe
+effective_gate_margin = R_gate - (R_probe - epsilon - permeability_tolerance)
+```
+
+The physical margin may be slightly negative for a generously admitted face;
+the effective-policy margin is non-negative for a permeable face. Neither value
+is silently truncated.
+
 External edges:
 
 ```text

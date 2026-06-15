@@ -54,11 +54,23 @@ MolSysSuite packages.
 
 ### Generic molecular geometry
 
-- surrounding-atom queries around atom sets or point clouds;
-- geometric neighborhood kernels;
-- generic point-to-atom distance and overlap tests;
-- sphere sampling utilities used by accessible-surface calculations;
-- reusable Delaunay/Voronoi-facing helpers if they remain system-agnostic.
+A sharp distinction decides whether geometry belongs in `molsysmt`:
+
+- **Molecular geometry** — operates on a molecular system (atoms, coordinates,
+  units, selections) — *does* belong in `molsysmt`. Examples: surrounding-atom
+  queries around atom selections, neighbor kernels, point-to-atom distance and
+  overlap tests. Most of these now exist there (`structure.get_neighbors`,
+  `structure.get_distances`, `structure.get_contacts`).
+- **Abstract computational geometry** — operates on bare NumPy arrays of points,
+  centers, and radii with no molecular-system semantics — does *not* belong in
+  `molsysmt`. Examples: Monte-Carlo union-of-spheres volume, voxel grid volume,
+  triangle area, plane fitting, group overlap matrices. These stay in TopoMT (or
+  a dedicated geometry utility), never in `molsysmt`.
+
+The litmus test: if the function needs a molecular system to do its job, it can
+move; if it only needs arrays, it cannot. This same decision is raised in the
+MolSysMT proposal `topomt_requested_spatial_helpers_and_sasa.md` and is answered
+the same way here.
 
 These are building blocks, not feature semantics.
 
@@ -93,20 +105,44 @@ These should move only if they are formulated independently of `fpocket`,
 
 These are the core reason TopoMT exists.
 
-## Current candidates observed during native engine work
+## Status (2026-06-14)
 
-The current `fpocket4` and `alphaspace2` work suggests that the following are
-strong candidates for `molsysmt` discussion:
+A fresh audit of the native DFND/TopoMT boundary against the current `molsysmt`
+surface shows that most historical candidates have **already been absorbed by
+`molsysmt`**, and TopoMT already consumes them:
 
-- stable atom-type and element inference from PDB/mmCIF inputs;
-- atomic radii lookup exposed through a public and robust API;
-- generic ASA/SASA primitives;
-- generic sphere-point sampling utilities;
-- reusable atom-neighborhood queries around arbitrary point sets.
+- element-aware atomic radii lookup -> `physchem.get_atomic_radius`
+  (`definition='vdw'` / `'protor'`); used by DFND and `get_delaunay_mesh`;
+- surrounding-atom / neighborhood queries -> `structure.get_neighbors`
+  (threshold and fixed-count modes);
+- point-to-atom distance and overlap -> `structure.get_distances`,
+  `structure.get_contacts`;
+- SASA / ASA, surface area, buriedness -> `physchem.get_sasa`,
+  `get_surface_area`, `get_area_buried`, `get_buried_fraction`;
+- heavy-atom / water / ion masks -> the `molsysmt` selection language.
 
-Some of these already exist partially in `molsysmt`, but the policy here is to
-prefer strengthening and centralizing them there instead of growing parallel
-helpers inside TopoMT.
+The doc's earlier "good candidates" list is therefore largely **resolved**: it
+predates these additions. TopoMT is not hoarding general molecular helpers — the
+audit found none rolled locally beyond the items below.
+
+Open items already filed as `molsysmt` proposals:
+
+- `proposal_protor_atom_typing_and_radii.md` — implicit-hydrogen-aware ProtOr
+  radii (relevant to DFND's hydrogen-excluded meshes; see
+  `DFND/radius_convention_decision.md`);
+- `topomt_requested_spatial_helpers_and_sasa.md` — configurable `probe_radius`
+  in `physchem.get_sasa`, and the molecular-vs-abstract geometry decision.
+
+The one genuinely **unfiled** candidate:
+
+- **per-element electronegativity / polarity property** in `physchem`. It would
+  subsume the hard-coded `probe_weights` element heuristic in
+  `topomt/tools/features/pockets/contacts.py` (`{'C','N','O','X'}`). `molsysmt`
+  currently has `physchem.get_polarity` only per residue group, not per element.
+  See the `molsysmt` proposal `physchem_electronegativity_per_element.md`.
+
+The local `probe_weights` heuristic stays in TopoMT until that property exists
+upstream; it is then a candidate to source from `molsysmt`.
 
 ## Review policy
 

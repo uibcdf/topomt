@@ -31,7 +31,9 @@ DFND separates objects by layer.
   geometry.
 - `TransitNode`: finite tetrahedron that can participate in probe movement. It
   may be resident or a non-resident transit connector.
-- `TransitEdge`: permeable connection between two transit nodes.
+- `TransitEdge`: connection between two transit nodes through a shared face
+  classified as permeable by the single canonical face decision. Marginality is
+  diagnostic and does not trigger a second gate threshold.
 - `ExternalEdge`: permeable connection from a transit node to `OCEAN` through a
   hull face.
 
@@ -394,7 +396,8 @@ Rules:
 Tolerances must be attached to the objects they affect.
 
 - wet/dry: `R_residence` versus `probe_radius`;
-- permeable/non-permeable: `R_gate` versus `probe_radius`;
+- permeable/non-permeable and transit-edge creation: one canonical `R_gate`
+  versus `probe_radius` decision;
 - external-link clustering: marginal boundary faces and face-connectivity
   policy;
 - component family: `n_external_links` and wet-open presence after marginal

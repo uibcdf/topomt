@@ -15,10 +15,13 @@ class TopoMTAddonRuntime:
     active DFND simplex selection, etc. Older code may still read it as
     ``view._topomt_addon_runtime``; it is the *same* object.
     """
+
     enabled: bool = False
-    workspace: str = "topomt"
+    workspace: str = 'topomt'
     topography: Any = None
-    tag_prefix: str = "topomt-pocket"
+    active_feature_ids: tuple[str, ...] | None = None
+    render_groups: dict[str, dict[str, Any]] = field(default_factory=dict)
+    tag_prefix: str = 'topomt-pocket'
     last_context_action: Any = None
     active_simplex_selection: Any = None
     event_log: list = field(default_factory=list)
@@ -41,10 +44,10 @@ def ensure_runtime(view: Any) -> TopoMTAddonRuntime:
     ``view.addons.topomt`` namespace when the add-on is registered (lazy via the
     ``state_factory``); falls back to a legacy ``view._topomt_addon_runtime``
     attribute so test doubles without an addons manager still work."""
-    addons = getattr(view, "addons", None)
+    addons = getattr(view, 'addons', None)
     if addons is not None:
         try:
-            namespace = getattr(addons, "topomt", None)
+            namespace = getattr(addons, 'topomt', None)
         except Exception:
             namespace = None
         if isinstance(namespace, TopoMTAddonRuntime):
@@ -54,7 +57,7 @@ def ensure_runtime(view: Any) -> TopoMTAddonRuntime:
                 pass
             return namespace
 
-    runtime = getattr(view, "_topomt_addon_runtime", None)
+    runtime = getattr(view, '_topomt_addon_runtime', None)
     if not isinstance(runtime, TopoMTAddonRuntime):
         runtime = TopoMTAddonRuntime()
         try:
@@ -66,4 +69,4 @@ def ensure_runtime(view: Any) -> TopoMTAddonRuntime:
 
 def record_event(view: Any, event_name: str, **kwargs: Any) -> None:
     runtime = ensure_runtime(view)
-    runtime.event_log.append({"event": event_name, **kwargs})
+    runtime.event_log.append({'event': event_name, **kwargs})

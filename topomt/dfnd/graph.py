@@ -10,6 +10,7 @@ from topomt.delaunay_mesh import DelaunayMesh
 from topomt.tools.tessellation import mouth_area_from_faces
 
 from . import families as fam
+from .config import DFNDMeshConfig, DFNDQuery
 from .core.clearance import (
     _KIND_BY_CODE,
     face_gate_radius_batch,
@@ -64,18 +65,25 @@ class DelaunayFlowNetwork:
         radii_model='vdw',
     ):
         self.molecular_system = molecular_system
-        self.selection = selection
-        self.structure_indices = structure_indices
-        self.epsilon = float(epsilon)
-        self.hydrogen_policy = hydrogen_policy
-        self.radii_model = radii_model
+        self.mesh_config = DFNDMeshConfig(
+            selection=selection,
+            structure_indices=structure_indices,
+            epsilon=epsilon,
+            hydrogen_policy=hydrogen_policy,
+            radii_model=radii_model,
+        )
+        self.selection = self.mesh_config.selection
+        self.structure_indices = self.mesh_config.structure_indices
+        self.epsilon = self.mesh_config.epsilon
+        self.hydrogen_policy = self.mesh_config.hydrogen_policy
+        self.radii_model = self.mesh_config.radii_model
 
         topo = msm.convert(
             molecular_system,
             to_form='molsysmt.MolSys',
-            structure_indices=structure_indices,
+            structure_indices=self.structure_indices,
         )
-        atom_indices = self._select_atoms(topo, selection, hydrogen_policy)
+        atom_indices = self._select_atoms(topo, self.selection, self.hydrogen_policy)
 
         atom_coords = puw.get_value(
             msm.get(topo, selection=atom_indices, coordinates=True),
@@ -123,6 +131,13 @@ class DelaunayFlowNetwork:
         instance.epsilon = float(epsilon)
         instance.hydrogen_policy = 'provided_atoms'
         instance.radii_model = 'provided'
+        instance.mesh_config = DFNDMeshConfig(
+            selection='array',
+            structure_indices=0,
+            epsilon=epsilon,
+            hydrogen_policy='provided_atoms',
+            radii_model='provided',
+        )
         coordinates = np.asarray(coordinates, dtype=float)
         radii = np.asarray(radii, dtype=float)
         if atom_indices is None:
@@ -169,6 +184,7 @@ class DelaunayFlowNetwork:
                 'atom_indices': self.atom_indices_map,
                 'atom_coordinates': self.atom_coords,
                 'atom_radii': self.atom_radii,
+                'mesh_config': self.mesh_config.to_dict(),
             }
         )
         self.mesh = DelaunayMesh(points=self.atom_coords, atom_radii=self.atom_radii)
@@ -359,13 +375,13 @@ class DelaunayFlowNetwork:
     def get_topography(
         self,
         probe_radius=1.4,
-        sea_level=None,
         min_size=0,
         transit_policy='with_connectors',
         gate_intrusion_policy='flag_only',
         residence_tolerance=0.0,
         permeability_tolerance=0.0,
         dry_adjacency='face',
+        query=None,
     ):
         """Return DFND raw records and compatibility feature dictionaries.
 
@@ -378,16 +394,44 @@ class DelaunayFlowNetwork:
             permeable(F) = R_gate(F)      >= R_probe - epsilon - permeability_tolerance
             resident(T)  = R_residence(T) >= R_probe - epsilon - residence_tolerance
         """
-        probe_radius = float(probe_radius)
-        residence_tolerance = float(residence_tolerance)
-        permeability_tolerance = float(permeability_tolerance)
-        for name, value in (
-            ('probe_radius', probe_radius),
-            ('residence_tolerance', residence_tolerance),
-            ('permeability_tolerance', permeability_tolerance),
-        ):
-            if not np.isfinite(value) or value < 0.0:
-                raise ValueError(f'{name} must be a finite non-negative number')
+        if query is None:
+            query = DFNDQuery(
+                probe_radius=probe_radius,
+                residence_tolerance=residence_tolerance,
+                permeability_tolerance=permeability_tolerance,
+                transit_policy=transit_policy,
+                gate_intrusion_policy=gate_intrusion_policy,
+                dry_adjacency=dry_adjacency,
+            )
+        elif not isinstance(query, DFNDQuery):
+            raise TypeError('query must be a DFNDQuery')
+        else:
+            legacy_values = {
+                'probe_radius': float(probe_radius),
+                'residence_tolerance': float(residence_tolerance),
+                'permeability_tolerance': float(permeability_tolerance),
+                'transit_policy': transit_policy,
+                'gate_intrusion_policy': gate_intrusion_policy,
+                'dry_adjacency': dry_adjacency,
+            }
+            defaults = DFNDQuery().to_dict()
+            configured = query.to_dict()
+            conflicts = [
+                name
+                for name, value in legacy_values.items()
+                if value != defaults[name] and value != configured[name]
+            ]
+            if conflicts:
+                raise ValueError(
+                    'query conflicts with explicit arguments: ' + ', '.join(conflicts)
+                )
+
+        probe_radius = query.probe_radius
+        residence_tolerance = query.residence_tolerance
+        permeability_tolerance = query.permeability_tolerance
+        transit_policy = query.transit_policy
+        gate_intrusion_policy = query.gate_intrusion_policy
+        dry_adjacency = query.dry_adjacency
         if (
             isinstance(min_size, (bool, np.bool_))
             or not isinstance(min_size, (int, np.integer))
@@ -395,34 +439,22 @@ class DelaunayFlowNetwork:
         ):
             raise ValueError('min_size must be a non-negative integer')
         min_size = int(min_size)
-        if transit_policy not in {'resident_only', 'with_connectors'}:
-            raise ValueError(
-                "transit_policy must be 'resident_only' or 'with_connectors'"
-            )
-        if gate_intrusion_policy not in {'flag_only', 'block_suspect'}:
-            raise ValueError(
-                "gate_intrusion_policy must be 'flag_only' or 'block_suspect'"
-            )
-
+        mesh_config = self.mesh_config.to_dict()
+        query_parameters = query.to_dict()
+        reporting = {'min_size': min_size}
         parameters = {
-            'probe_radius': probe_radius,
+            **mesh_config,
+            **query_parameters,
             'epsilon_length': self.epsilon,
-            'residence_tolerance': residence_tolerance,
-            'permeability_tolerance': permeability_tolerance,
-            'sea_level': sea_level,
-            'radii_model': self.radii_model,
-            'selection': self.selection,
-            'structure_indices': self.structure_indices,
-            'hydrogen_policy': self.hydrogen_policy,
-            'transit_policy': transit_policy,
-            'gate_intrusion_policy': gate_intrusion_policy,
-            'dry_adjacency': dry_adjacency,
             'min_size': min_size,
+            'mesh_config': mesh_config,
+            'query': query_parameters,
+            'reporting': reporting,
             'substrate_key': self.substrate_key,
         }
         parameters['result_key'] = result_key(
             {'substrate_key': self.substrate_key},
-            parameters,
+            query_parameters,
         )
 
         residence_slack = self.epsilon + residence_tolerance
@@ -450,15 +482,24 @@ class DelaunayFlowNetwork:
             terminal_contact = terminal_contact | connector_candidate
         finite_transit = resident | transit_connector
 
+        # Canonical transit-edge decision: two transit nodes connected through one
+        # shared face whose single permeability decision is open. Marginality is
+        # diagnostic and must not trigger a second, stricter R_gate threshold.
         valid_edge_mask = (
             finite_transit[self.sources]
             & finite_transit[self.targets]
             & face_permeable[self.sources, self.edge_source_faces]
             & face_permeable[self.targets, self.edge_target_faces]
-            & (self.edge_weights > probe_radius + self.epsilon)
         )
         valid_sources = self.sources[valid_edge_mask]
         valid_targets = self.targets[valid_edge_mask]
+        transit_edge_per_tet_face = np.zeros_like(face_permeable, dtype=bool)
+        transit_edge_per_tet_face[
+            valid_sources, self.edge_source_faces[valid_edge_mask]
+        ] = True
+        transit_edge_per_tet_face[
+            valid_targets, self.edge_target_faces[valid_edge_mask]
+        ] = True
 
         adjacency = coo_matrix(
             (
@@ -573,6 +614,14 @@ class DelaunayFlowNetwork:
                             self.face_r_gates_per_tet_face[
                                 tetrahedron_index, face_index
                             ]
+                        ),
+                        'gate_margin': float(face_delta[tetrahedron_index, face_index]),
+                        'effective_gate_margin': float(
+                            face_delta[tetrahedron_index, face_index]
+                            + permeability_slack
+                        ),
+                        'transit_edge': bool(
+                            transit_edge_per_tet_face[tetrahedron_index, face_index]
                         ),
                         'permeability_state': 'permeable'
                         if face_permeable[tetrahedron_index, face_index]
@@ -723,30 +772,27 @@ class DelaunayFlowNetwork:
                 if resident_nodes
                 else 0.0
             )
-            edge_capacities = []
-            for source, target, weight, edge_face in zip(
-                self.sources, self.targets, self.edge_weights, self.edge_faces
-            ):
-                owner, face_index, _face_key = edge_face
-                target_face_indices = np.where(
-                    self.simplex_neighbors[target] == source
-                )[0]
-                target_face_permeable = (
-                    bool(face_permeable[target, target_face_indices[0]])
-                    if len(target_face_indices)
-                    else True
-                )
-                shared_face_permeable = (
-                    bool(face_permeable[owner, face_index]) and target_face_permeable
-                )
-                if (
-                    int(source) in node_set
-                    and int(target) in node_set
-                    and shared_face_permeable
-                    and weight > probe_radius + self.epsilon
-                ):
-                    edge_capacities.append(float(weight - probe_radius))
-            path_capacity_min = min(edge_capacities) if edge_capacities else None
+            component_edge_mask = (
+                valid_edge_mask
+                & np.isin(self.sources, nodes)
+                & np.isin(self.targets, nodes)
+            )
+            physical_gate_margins = (
+                self.edge_weights[component_edge_mask] - probe_radius
+            )
+            effective_gate_margins = physical_gate_margins + permeability_slack
+            path_gate_margin_min = (
+                float(np.min(physical_gate_margins))
+                if physical_gate_margins.size
+                else None
+            )
+            path_effective_gate_margin_min = (
+                float(np.min(effective_gate_margins))
+                if effective_gate_margins.size
+                else None
+            )
+            # Compatibility alias: historically path_capacity_min was R_gate-R_probe.
+            path_capacity_min = path_gate_margin_min
 
             component_record = {
                 'id': component_index,
@@ -760,6 +806,7 @@ class DelaunayFlowNetwork:
                 'transit_connector_tetrahedron_ids': connector_nodes,
                 'atom_indices': atom_indices,
                 'n_nodes': len(nodes),
+                'include_in_compatibility_view': not min_size or len(nodes) >= min_size,
                 'n_resident_nodes': len(resident_nodes),
                 'n_transit_connector_nodes': len(connector_nodes),
                 'n_external_links': n_external_links,
@@ -772,6 +819,8 @@ class DelaunayFlowNetwork:
                 'volume_topological_resident': volume_topological_resident,
                 'volume_solvent_estimate': volume_solvent_estimate,
                 'path_capacity_min': path_capacity_min,
+                'path_gate_margin_min': path_gate_margin_min,
+                'path_effective_gate_margin_min': path_effective_gate_margin_min,
                 'center': _component_center(
                     self.atom_coords,
                     self.tetra_atoms,
@@ -811,6 +860,7 @@ class DelaunayFlowNetwork:
                 'component_key': component_context_key,
                 'tetrahedron_support': tetrahedron_support,
                 'family': family,
+                'include_in_compatibility_view': not min_size or len(nodes) >= min_size,
                 'tetrahedron_indices': nodes,
                 'transit_indices': nodes,
                 'resident_tetrahedron_indices': resident_nodes,
@@ -1428,8 +1478,6 @@ class DelaunayFlowNetwork:
 
         dry_components = []
         for label, nodes in nodes_by_label.items():
-            if min_size and len(nodes) < min_size:
-                continue
             atom_indices = sorted(
                 {
                     int(self.atom_indices_map[atom_index])
@@ -1450,6 +1498,8 @@ class DelaunayFlowNetwork:
                     'tetrahedron_indices': nodes,
                     'atom_indices': atom_indices,
                     'size': len(nodes),
+                    'include_in_compatibility_view': not min_size
+                    or len(nodes) >= min_size,
                     'dry_edges': component_edges,
                     'dry_edge_face_ids': [edge['face_id'] for edge in component_edges],
                     'flags': [],

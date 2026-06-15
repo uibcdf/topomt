@@ -1,5 +1,7 @@
 """Addon definition for the TopoMT MolSysViewer integration."""
 
+from .index_spaces import MOLECULAR_SYSTEM
+from .index_spaces import atom_indices as indices_in_space
 from .runtime import ensure_runtime, record_event
 from .simplex_selection import ACTION_ID as _SIMPLEX_ACTION_ID
 
@@ -22,41 +24,9 @@ def on_context_action(view, action_id: str, payload: dict) -> None:
     record_event(view, 'context_action', action_id=action_id)
 
     if action_id == 'dfnd-tetrahedron-info':
-        import re
+        from .context import inspect_dfnd_tetrahedra
 
-        tetra_ids = []
-
-        def collect_tetrahedron_ids(label: str) -> None:
-            for match in re.finditer(r'Tetrahedron\s+(\d+)', label):
-                tid = int(match.group(1))
-                if tid not in tetra_ids:
-                    tetra_ids.append(tid)
-            face_match = re.search(r'tetrahedra\s+(\d+)-(\d+|OCEAN|unknown)', label)
-            if face_match:
-                for value in face_match.groups():
-                    if value.isdigit():
-                        tid = int(value)
-                        if tid not in tetra_ids:
-                            tetra_ids.append(tid)
-
-        # 1. Check right-clicked/hovered shape label.
-        context = payload.get('context', {})
-        collect_tetrahedron_ids(context.get('shape_name', ''))
-
-        # 2. Also check selected shape items.
-        if hasattr(view, 'active_selection') and view.active_selection:
-            try:
-                for item in view.active_selection.items:
-                    if item.get('source_kind') != 'shape':
-                        continue
-                    collect_tetrahedron_ids(item.get('shape_name', ''))
-            except Exception:
-                pass
-
-        if tetra_ids:
-            topo = getattr(runtime, 'topography', None)
-            if topo is not None and getattr(topo, 'dfnd', None) is not None:
-                topo.dfnd.info(tetra_ids)
+        inspect_dfnd_tetrahedra(view, payload)
 
     elif action_id == _SIMPLEX_ACTION_ID:
         # Dynamic-item clicks carry the resolved simplex under addon_action_payload.
@@ -76,7 +46,12 @@ def on_active_selection_changed(view, selection):
     topo = getattr(runtime, 'topography', None)
     if topo is None or getattr(topo, 'dfnd', None) is None:
         return []
-    atom_indices = (selection or {}).get('atom_indices') or []
+    selection = selection or {}
+    if selection.get('atom_index_space', MOLECULAR_SYSTEM) != MOLECULAR_SYSTEM:
+        return []
+    atom_indices = indices_in_space(
+        selection.get('atom_indices'), space=MOLECULAR_SYSTEM
+    )
     try:
         items = resolve_simplices(topo, atom_indices)
     except Exception:
@@ -102,7 +77,9 @@ def _handle_simplex_selection(view, runtime, payload):
     # Remember the resolved simplex so the inspection API can report it.
     runtime.active_simplex_selection = dict(payload)
 
-    atoms = [int(a) for a in payload.get('atom_indices', [])]
+    if payload.get('atom_index_space', MOLECULAR_SYSTEM) != MOLECULAR_SYSTEM:
+        raise ValueError('DFND simplex payloads must use molecular_system atom indices')
+    atoms = indices_in_space(payload.get('atom_indices'), space=MOLECULAR_SYSTEM)
     if not atoms:
         return
 
@@ -124,6 +101,7 @@ def _handle_simplex_selection(view, runtime, payload):
             'target_level': 'none',
             'items': [],
             'atom_indices': list(atoms),
+            'atom_index_space': MOLECULAR_SYSTEM,
             'group_indices': [],
             'component_indices': [],
             'chain_indices': [],
@@ -220,7 +198,7 @@ def get_addon():
             AddonContextActionSpec(
                 id='dfnd-tetrahedron-info',
                 title='Ficha de diagnóstico (consola)',
-                entry='molsysviewer_topomt.context.focus_topography_feature',
+                entry='molsysviewer_topomt.context.inspect_dfnd_tetrahedra',
                 target_kinds=('shape',),
                 group='topography',
                 order=20,

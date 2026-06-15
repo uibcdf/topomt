@@ -6,29 +6,15 @@ The goal is not to hide fragile geometric decisions behind arbitrary constants.
 The goal is to make every threshold, tolerance, and near-boundary state explicit
 so that DFND can report what it knows and what remains uncertain.
 
-## 1. Probe Radius and Sea Level
+## 1. Probe Radius and Exterior Reference
 
-DFND uses a probe radius as the central physical scale.
+DFND uses a probe radius as the central physical scale. The canonical default is
+`probe_radius = 1.4 angstroms`. Probe accessibility to the exterior is determined
+by permeable paths to hull faces and the virtual `OCEAN` node.
 
-Initial default:
-
-- `probe_radius = 1.4 angstroms`.
-
-The `sea_level` concept should depend on the probe radius. The first working
-policy is:
-
-- default `sea_level = probe_radius`;
-- a tetrahedron can be considered exterior-reachable only through faces that
-  are permeable to the same probe;
-- `OCEAN` should not be understood as a CASTp alpha-rank shell, but as the
-  exterior region available to the probe under DFND flow semantics;
-- `OCEAN` is wet by definition, but it is not a finite tetrahedron and has no
-  `R_residence`, volume, or `COAST` status.
-
-This is a change from the older notes where `sea_level` was described as a
-large curvature radius such as 10 angstroms. That older idea may still be useful
-for a coarse exterior envelope, but it is not the preferred first policy for
-DFND pocket accessibility.
+DFND has no `sea_level` parameter. Exterior access is defined directly through
+probe-permeable hull contacts to `OCEAN`. A future coarse exterior-envelope mode
+requires a separate approved scientific contract before it can affect results.
 
 ## 2. Exterior Definition
 
@@ -58,8 +44,7 @@ First working policy (Access x Residence):
 
 - whether a large-box or padding construction is needed for systems with very
   sparse exterior geometry;
-- whether `sea_level` should also support a larger envelope mode for coarse
-  outside/bulk labeling;
+- whether a future coarse exterior-envelope concept is scientifically useful;
 - whether fragmented molecular systems should have one shared exterior root or
   one exterior context per molecular fragment.
 
@@ -200,7 +185,12 @@ Numerical policy:
   finite faces per tetrahedron;
 - expose `open`, `coast`, `sealed`, and the six wet/dry combined labels in raw
   records;
-- keep primary wet connectivity based on wet tetrahedra and permeable faces;
+- keep primary transit connectivity based on transit nodes and the single
+  canonical shared-face permeability decision;
+- never re-threshold `R_gate` when deriving a transit edge from a face already
+  classified as permeable;
+- preserve both physical `gate_margin` and effective-policy
+  `effective_gate_margin` without truncation;
 - do not let local class labels create connectivity by themselves;
 - report marginal faces separately when `R_gate` is within tolerance of
   `R_probe`.

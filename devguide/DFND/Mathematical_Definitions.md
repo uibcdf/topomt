@@ -196,7 +196,7 @@ retained as boundary, lining, pharmacophore, and diagnostic metadata. Whether
 any local class contributes to a reported feature volume is a metric-policy
 decision, not part of the topological classification itself.
 
-### 4.2. Sea Level and Exterior
+### 4.2. Exterior
 The baseline DFND exterior is probe-dependent. A wet component contacts the
 exterior when it has one or more permeable boundary or hull faces connected to
 the outside root.
@@ -207,11 +207,8 @@ definition because the probe is assumed to fit freely in the exterior. It is
 not a finite Delaunay tetrahedron, has no `R_residence`, has no volume, and
 cannot be `COAST`.
 
-The default sea-level scale is therefore tied to `R_probe`, with 1.4 Å as the
-water-probe default.
-
-Larger sea-level values may be introduced later as an optional macro-surface
-mode, but they are not part of the first canonical DFND contract.
+No separate `sea_level` scale or parameter is part of DFND. A future optional
+macro-surface mode would require a separate scientific contract.
 
 ---
 

@@ -711,7 +711,7 @@ def _permeable_adjacency(faces: list[dict[str, Any]]) -> dict[int, set[int]]:
     """Node adjacency through permeable internal faces (the wet/transit graph)."""
     adjacency: dict[int, set[int]] = defaultdict(set)
     for face in faces:
-        if face['permeability_state'] != 'permeable':
+        if not face.get('transit_edge', face['permeability_state'] == 'permeable'):
             continue
         owner, neighbor = face['owner_tetrahedron_id'], face['neighbor_tetrahedron_id']
         if neighbor >= 0:
