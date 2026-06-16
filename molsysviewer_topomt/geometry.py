@@ -5,6 +5,7 @@ from typing import Any
 
 import numpy as np
 
+from topomt.dfnd.centerline import channel_centerline
 from topomt.dfnd.selectors import select_edges, select_faces, select_tetrahedra
 
 from .index_spaces import MESH_LOCAL, MOLECULAR_SYSTEM, atom_indices
@@ -84,6 +85,31 @@ class SphereGeometry:
         if any(radius < 0.0 for radius in radii):
             raise ValueError('SphereGeometry radii must be non-negative.')
         object.__setattr__(self, 'centers', centers)
+        object.__setattr__(self, 'radii', radii)
+        object.__setattr__(self, 'refs', refs)
+
+
+@dataclass(frozen=True)
+class RingGeometry:
+    """Viewer-neutral oriented rings with mandatory units and references."""
+
+    centers: tuple[tuple[float, float, float], ...]
+    normals: tuple[tuple[float, float, float], ...]
+    radii: tuple[float, ...]
+    unit: str
+    refs: tuple[EntityRef, ...]
+
+    def __post_init__(self) -> None:
+        if not self.unit:
+            raise ValueError('RingGeometry.unit is required.')
+        centers = _points(self.centers)
+        normals = _points(self.normals)
+        radii = tuple(float(value) for value in self.radii)
+        refs = tuple(self.refs)
+        if not (len(centers) == len(normals) == len(radii) == len(refs)):
+            raise ValueError('RingGeometry requires aligned fields.')
+        object.__setattr__(self, 'centers', centers)
+        object.__setattr__(self, 'normals', normals)
         object.__setattr__(self, 'radii', radii)
         object.__setattr__(self, 'refs', refs)
 
@@ -245,7 +271,34 @@ def tetrahedron_centers(
                 ),
             )
         )
-    return PointGeometry(tuple(centers), unit='angstroms', refs=tuple(refs))
+    return PointGeometry(tuple(centers), unit='nm', refs=tuple(refs))
+
+
+def _feature_ref(feature: dict[str, Any]) -> EntityRef:
+    return EntityRef(
+        kind='feature',
+        entity_id=feature.get('feature_id'),
+        atom_indices=tuple(int(value) for value in feature.get('atom_indices', ())),
+        atom_index_space=feature.get('atom_index_space', MOLECULAR_SYSTEM),
+    )
+
+
+def feature_center_geometry(feature: dict[str, Any]) -> PointGeometry:
+    """Return one canonical marker point for a normalized feature record."""
+    center = feature.get('center')
+    if center is None:
+        return PointGeometry((), unit='nm', refs=())
+    return PointGeometry((center,), unit='nm', refs=(_feature_ref(feature),))
+
+
+def feature_sphere_geometry(feature: dict[str, Any]) -> SphereGeometry:
+    """Return canonical spheres for a normalized feature record."""
+    centers = feature.get('sphere_centers') or ()
+    radii = feature.get('sphere_radii') or ()
+    ref = _feature_ref(feature)
+    return SphereGeometry(
+        tuple(centers), tuple(radii), 'nm', tuple(ref for _ in centers)
+    )
 
 
 def _component_tetrahedron_ids(component, *, use_resident_nodes: bool) -> list[int]:
@@ -287,7 +340,7 @@ def component_residence_sphere_geometry(
         centers.append(record['center'])
         radii.append(record['R_residence'])
         refs.append(_component_tetrahedron_ref(record, component))
-    return SphereGeometry(tuple(centers), tuple(radii), 'angstroms', tuple(refs))
+    return SphereGeometry(tuple(centers), tuple(radii), 'nm', tuple(refs))
 
 
 def component_alpha_sphere_geometry(
@@ -310,7 +363,7 @@ def component_alpha_sphere_geometry(
         centers.append(alpha_centers[tetrahedron_id])
         radii.append(alpha_radii[tetrahedron_id])
         refs.append(_component_tetrahedron_ref(record, component))
-    return SphereGeometry(tuple(centers), tuple(radii), 'angstroms', tuple(refs))
+    return SphereGeometry(tuple(centers), tuple(radii), 'nm', tuple(refs))
 
 
 def probe_sphere_geometry(
@@ -329,6 +382,156 @@ def probe_sphere_geometry(
         residence_geometry.unit,
         tuple(residence_geometry.refs[index] for index in selected),
     )
+
+
+def _centerline_normals(centers) -> tuple[tuple[float, float, float], ...]:
+    points = np.asarray(centers, dtype=float)
+    normals = []
+    for index in range(len(points)):
+        if index == 0:
+            tangent = points[1] - points[0]
+        elif index == len(points) - 1:
+            tangent = points[-1] - points[-2]
+        else:
+            tangent = points[index + 1] - points[index - 1]
+        if not np.any(tangent):
+            tangent = np.array([0.0, 0.0, 1.0])
+        normals.append(tangent)
+    return _points(normals)
+
+
+def component_centerline_geometry(source, component) -> tuple[SphereGeometry, int]:
+    """Return an ordered channel path whose stations reference tetrahedra."""
+    data = getattr(source, 'dfnd', source)
+    centerline = channel_centerline(data.raw, component.raw_record)
+    if centerline is None:
+        return SphereGeometry((), (), 'nm', ()), -1
+    records = select_tetrahedra(source, tetrahedron_ids=centerline['tetra_path'])
+    by_id = {int(record['tetrahedron_id']): record for record in records}
+    refs = tuple(
+        _component_tetrahedron_ref(by_id[int(tetrahedron_id)], component)
+        for tetrahedron_id in centerline['tetra_path']
+    )
+    refs = tuple(
+        EntityRef(
+            kind='centerline_station',
+            entity_id=ref.entity_id,
+            tetrahedron_ids=ref.tetrahedron_ids,
+            atom_indices=ref.atom_indices,
+            atom_index_space=ref.atom_index_space,
+            support_key=ref.support_key,
+            component_key=ref.component_key,
+        )
+        for ref in refs
+    )
+    geometry = SphereGeometry(
+        tuple(centerline['centers']), tuple(centerline['radii']), 'nm', refs
+    )
+    return geometry, int(centerline['bottleneck_index'])
+
+
+def centerline_ring_geometry(source, component) -> RingGeometry:
+    """Return one oriented clearance ring per centerline station."""
+    geometry, _ = component_centerline_geometry(source, component)
+    if not geometry.centers:
+        return RingGeometry((), (), (), 'nm', ())
+    return RingGeometry(
+        geometry.centers,
+        _centerline_normals(geometry.centers),
+        geometry.radii,
+        geometry.unit,
+        geometry.refs,
+    )
+
+
+def mouth_ring_geometry(source, component) -> RingGeometry:
+    """Return one oriented ring per external link of a component."""
+    data = getattr(source, 'dfnd', source)
+    mesh = _dfnd_mesh(source)
+    coords = np.asarray(mesh.atoms.coords, dtype=float)
+    global_to_local = {
+        int(global_id): local for local, global_id in enumerate(mesh.atoms.index_map)
+    }
+    links = {
+        link['external_link_id']: link for link in data.raw.get('external_links', [])
+    }
+    component_center = (
+        np.asarray(component.center, dtype=float)
+        if component.center is not None
+        else None
+    )
+    centers, normals, radii, refs = [], [], [], []
+    for link_id in getattr(component, 'external_link_ids', ()):
+        link = links.get(link_id)
+        if link is None:
+            continue
+        local = [
+            global_to_local[int(atom)]
+            for atom in link.get('atom_indices', ())
+            if int(atom) in global_to_local
+        ]
+        if not local:
+            continue
+        center = coords[local].mean(axis=0)
+        normal = (
+            center - component_center
+            if component_center is not None
+            else np.array([0.0, 0.0, 1.0])
+        )
+        if not np.any(normal):
+            normal = np.array([0.0, 0.0, 1.0])
+        centers.append(center)
+        normals.append(normal)
+        radii.append(link.get('R_gate_min', 0.1))  # nm fallback (~1 angstrom)
+        refs.append(
+            EntityRef(
+                kind='external_link',
+                entity_id=link.get('external_link_key', link_id),
+                atom_indices=tuple(
+                    int(value) for value in link.get('atom_indices', ())
+                ),
+                support_key=link.get('external_link_support_key'),
+                component_key=component.component_key,
+            )
+        )
+    return RingGeometry(
+        tuple(centers), tuple(normals), tuple(radii), 'nm', tuple(refs)
+    )
+
+
+def scaffold_geometry(source, component) -> SegmentGeometry:
+    """Return a dry-component MST with canonical global-atom-pair identity."""
+    from scipy.sparse.csgraph import minimum_spanning_tree
+    from scipy.spatial.distance import pdist, squareform
+
+    mesh = _dfnd_mesh(source)
+    coords = np.asarray(mesh.atoms.coords, dtype=float)
+    global_to_local = {
+        int(global_id): local for local, global_id in enumerate(mesh.atoms.index_map)
+    }
+    global_atoms = [
+        int(value) for value in component.atom_indices if int(value) in global_to_local
+    ]
+    if len(global_atoms) < 2:
+        return SegmentGeometry((), (), 'nm', ())
+    local_atoms = [global_to_local[value] for value in global_atoms]
+    points = coords[local_atoms]
+    mst = minimum_spanning_tree(squareform(pdist(points))).tocoo()
+    starts, ends, refs = [], [], []
+    for row, col in zip(mst.row, mst.col, strict=True):
+        pair = tuple(sorted((global_atoms[int(row)], global_atoms[int(col)])))
+        starts.append(points[int(row)])
+        ends.append(points[int(col)])
+        refs.append(
+            EntityRef(
+                kind='scaffold_edge',
+                entity_id=pair,
+                atom_indices=pair,
+                support_key=component.support_key,
+                component_key=component.component_key,
+            )
+        )
+    return SegmentGeometry(tuple(starts), tuple(ends), 'nm', tuple(refs))
 
 
 def _face_ref(face: dict[str, Any]) -> EntityRef:
@@ -352,7 +555,7 @@ def dfn_graph_segments(
     source,
     tetrahedron_ids,
     *,
-    mouth_stub_angstrom: float = 2.0,
+    mouth_stub_nm: float = 0.2,  # cylinder length beyond the boundary face (~2 angstrom)
     include_mouths: bool = True,
 ) -> tuple[SegmentGeometry, SegmentGeometry]:
     """Return canonical internal transit links and external mouth stubs."""
@@ -400,15 +603,15 @@ def dfn_graph_segments(
         if np.dot(normal, face_centroid - origin) < 0:
             normal = -normal
         mouth_starts.append(origin)
-        mouth_ends.append(face_centroid + normal * mouth_stub_angstrom)
+        mouth_ends.append(face_centroid + normal * mouth_stub_nm)
         mouth_refs.append(_face_ref(face))
 
     return (
         SegmentGeometry(
-            tuple(edge_starts), tuple(edge_ends), 'angstroms', tuple(edge_refs)
+            tuple(edge_starts), tuple(edge_ends), 'nm', tuple(edge_refs)
         ),
         SegmentGeometry(
-            tuple(mouth_starts), tuple(mouth_ends), 'angstroms', tuple(mouth_refs)
+            tuple(mouth_starts), tuple(mouth_ends), 'nm', tuple(mouth_refs)
         ),
     )
 
@@ -446,7 +649,7 @@ def tetrahedra_geometry(source, tetrahedron_ids=None) -> TetrahedraGeometry:
             )
         )
     return TetrahedraGeometry(
-        tuple(tetra_coords), tuple(quads), MESH_LOCAL, 'angstroms', tuple(refs)
+        tuple(tetra_coords), tuple(quads), MESH_LOCAL, 'nm', tuple(refs)
     )
 
 
@@ -485,7 +688,7 @@ def face_geometry(
             triangles.append(coords[list(triplet)])
         refs.append(_face_ref(face))
     return IndexedTriangleGeometry(
-        tuple(triangles), tuple(triplets), MESH_LOCAL, 'angstroms', tuple(refs)
+        tuple(triangles), tuple(triplets), MESH_LOCAL, 'nm', tuple(refs)
     )
 
 
@@ -516,5 +719,5 @@ def edge_geometry(source, tetrahedron_ids=None) -> IndexedEdgeGeometry:
             )
         )
     return IndexedEdgeGeometry(
-        tuple(segments), tuple(pairs), MESH_LOCAL, 'angstroms', tuple(refs)
+        tuple(segments), tuple(pairs), MESH_LOCAL, 'nm', tuple(refs)
     )

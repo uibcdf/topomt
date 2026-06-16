@@ -36,7 +36,7 @@ def _show_dfn_graph_legacy(
     edge_radius_nm: float = 0.015,
     edge_color: int = 0x3B82F6,  # blue: permeable transit through a face
     mouth_color: int = 0xF59E0B,  # amber: external link (exterior access)
-    mouth_stub_angstrom: float = 2.0,  # cylinder length beyond the boundary face
+    mouth_stub_nm: float = 0.2,  # cylinder length beyond the boundary face (~2 angstrom)
     tag_prefix: str = 'dfn-graph',
     skip_digestion: bool = False,
 ) -> dict[str, Any] | None:
@@ -88,7 +88,7 @@ def _show_dfn_graph_legacy(
     colors = [palette.get(state[tid]['combined_class'], 0x888888) for tid in node_ids]
 
     edge_geometry, mouth_geometry = dfn_graph_segments(
-        topography, node_ids, mouth_stub_angstrom=mouth_stub_angstrom
+        topography, node_ids, mouth_stub_nm=mouth_stub_nm
     )
 
     for tag in (

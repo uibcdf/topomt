@@ -1,3 +1,4 @@
+from topomt import pyunitwizard as puw
 import numpy as np
 import pytest
 
@@ -72,7 +73,7 @@ def test_marginal_residence_is_flagged_in_raw_tetrahedron_records():
     network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-6)
     probe_radius = float(network.tetra_residence[0])
 
-    result = network.get_topography(probe_radius=probe_radius, min_size=0)
+    result = network.get_topography(probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0)
     tetrahedron = result['raw']['tetrahedra'][0]
 
     # Generous policy: at exactly R_probe the numerical epsilon favours resident,
@@ -98,7 +99,7 @@ def test_marginal_gate_is_flagged_in_raw_face_and_owner_tetrahedron_records():
     network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-6)
     probe_radius = float(network.face_r_gates_per_tet_face[0, 0])
 
-    result = network.get_topography(probe_radius=probe_radius, min_size=0)
+    result = network.get_topography(probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0)
     marginal_faces = [
         face
         for face in result['raw']['faces']
@@ -124,7 +125,7 @@ def test_permeable_shared_faces_between_transit_nodes_are_transit_edges():
     network = _two_tetrahedra_fixture()
     probe_radius = float(network.edge_weights[0])
 
-    result = network.get_topography(probe_radius=probe_radius, min_size=0)
+    result = network.get_topography(probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0)
     components = result['raw']['wet_components']
     faces = [
         face for face in result['raw']['faces'] if face['neighbor_tetrahedron_id'] >= 0
@@ -143,13 +144,14 @@ def test_permeable_shared_faces_between_transit_nodes_are_transit_edges():
 
 def test_permeability_tolerance_changes_connectivity_and_preserves_both_margins():
     network = _two_tetrahedra_fixture()
+    # edge_weights are internal nm; the derived probe and tolerance stay in nm.
     gate = float(network.edge_weights[0])
     tolerance = 0.05
     probe_radius = gate + tolerance / 2.0
 
     result = network.get_topography(
-        probe_radius=probe_radius,
-        permeability_tolerance=tolerance,
+        probe_radius=puw.quantity(probe_radius, 'nm'),
+        permeability_tolerance=puw.quantity(tolerance, 'nm'),
         transit_policy='with_connectors',
         min_size=0,
     )

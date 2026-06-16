@@ -80,7 +80,7 @@ def test_known_failure_two_convex_bodies_make_a_phantom_pocket():
     pockets = [d for d in domains
                if d['family'] == 'pocket' and d['n_resident_nodes'] >= 5]
     assert pockets                                 # phantom pocket (ideal: none)
-    assert max(p['volume_solvent_estimate'] for p in pockets) > 200.0
+    assert max(p["volume_solvent_estimate"] for p in pockets) > 0.2
 
 
 def test_known_failure_same_cavity_classified_differently_by_sampling_density():
@@ -111,7 +111,7 @@ def test_known_failure_void_volume_is_overestimated():
     coords, radii = syn.hollow_sphere(10.0, 3.5, jitter=0.1, seed=0)
     void = next(d for d in _domains(coords, radii) if d['family'] == 'void')
 
-    analytic = 4.0 / 3.0 * np.pi * (10.0 - syn.ARGON_VDW_RADIUS) ** 3
+    analytic = 4.0 / 3.0 * np.pi * ((10.0 - syn.ARGON_VDW_RADIUS) * 0.1) ** 3
     assert void['volume_solvent_estimate'] / analytic > 1.3   # overestimate (ideal: ~1.0)
 
 

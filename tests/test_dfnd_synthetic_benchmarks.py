@@ -14,6 +14,8 @@ from topomt.dfnd import synthetic as syn
 
 
 def _domains(coords, radii, probe_radius=1.4):
+    # probe_radius is given in angstroms (domain convention); the nm-internal
+    # kernel takes nm. Synthetic coords/radii are already nm.
     network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
     return network.get_topography(probe_radius=probe_radius, min_size=0)['raw']['wet_components']
 
@@ -29,7 +31,7 @@ def test_hollow_sphere_is_a_single_enclosed_void():
     assert void['n_external_links'] == 0          # sealed -> no exterior access
     assert void['has_residence'] is True
     # Empty interior ~ inner ball of radius (R - r_atom) ≈ 8.1 -> ~2200-3100 A^3.
-    assert 1000.0 < void['volume_solvent_estimate'] < 5000.0
+    assert 1.0 < void["volume_solvent_estimate"] < 5.0
 
 
 def test_hollow_tube_is_a_multi_mouth_channel():
@@ -51,7 +53,7 @@ def test_solid_ball_has_no_significant_cavity():
     domains = _domains(coords, radii)
 
     assert all(d['family'] != 'void' for d in domains)
-    assert all(d['volume_solvent_estimate'] < 5.0 for d in domains)
+    assert all(d['volume_solvent_estimate'] < 0.005 for d in domains)
 
 
 def test_sphere_with_opening_is_a_pocket():
@@ -68,6 +70,7 @@ def test_sphere_with_opening_is_a_pocket():
 
 
 def _topography(coords, radii, probe_radius=1.4):
+    # probe_radius in angstroms -> nm for the nm-internal kernel.
     network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
     return network.get_topography(probe_radius=probe_radius, min_size=0)
 
@@ -108,7 +111,7 @@ def test_blind_well_is_a_single_pocket():
     dominant = max(domains, key=lambda d: d['n_resident_nodes'])
     assert dominant['family'] == 'pocket'
     assert dominant['n_external_links'] == 1
-    assert dominant['volume_solvent_estimate'] > 300.0
+    assert dominant['volume_solvent_estimate'] > 0.3
 
 
 def test_slab_pore_is_a_through_channel():
@@ -307,7 +310,7 @@ def test_void_detection_is_orientation_invariant():
     residents = {r for r, _v in results}
     volumes = [v for _r, v in results]
     assert len(residents) == 1                                  # identical resident count
-    assert max(volumes) - min(volumes) < 1e-6                   # identical volume
+    assert max(volumes) - min(volumes) < 1e-9                   # identical volume
 
 
 def test_cryptic_chamber_is_revealed_only_by_a_smaller_probe():

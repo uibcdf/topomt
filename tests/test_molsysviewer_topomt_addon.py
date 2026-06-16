@@ -1501,17 +1501,18 @@ def test_show_dfnd_components_explicit_sphere_modes_and_graph_alias():
     )
     from molsysviewer_topomt.render import show_dfnd_components
 
+    # MockMesh values are nm (kernel units); emitted on the Mol* canvas (angstroms, x10).
     residence_view = DummyView()
     show_dfnd_components(residence_view, topo, representation='residence_spheres')
     assert residence_view.messages[-1]['options']['alpha_spheres'][
         'radii'
-    ] == pytest.approx([2.5])
+    ] == pytest.approx([25.0])
 
     alpha_view = DummyView()
     show_dfnd_components(alpha_view, topo, representation='alpha_spheres')
     assert alpha_view.messages[-1]['options']['alpha_spheres'][
         'radii'
-    ] == pytest.approx([7.5])
+    ] == pytest.approx([75.0])
 
     probe_view = DummyView()
     show_dfnd_components(
@@ -1521,9 +1522,9 @@ def test_show_dfnd_components_explicit_sphere_modes_and_graph_alias():
         use_resident_nodes=False,
     )
     assert probe_view.messages[-1]['op'] == 'add_sphere'
-    assert probe_view.messages[-1]['options']['radius'] == pytest.approx(1.4)
+    assert probe_view.messages[-1]['options']['radius'] == pytest.approx(14.0)
     assert probe_view.messages[-1]['options']['center'] == pytest.approx(
-        [0.25, 0.25, 0.25]
+        [2.5, 2.5, 2.5]  # [0.25]*3 nm on the Mol* canvas (angstroms)
     )
 
     graph = show_dfnd_components(DummyView(), topo, representation='graph')
@@ -1839,9 +1840,10 @@ def test_rings_renders_hole_clearance_profile():
 def test_hole_clearance_color_thresholds():
     from molsysviewer_topomt.render import _components as comp_mod
 
-    assert comp_mod._hole_clearance_color(0.9) == comp_mod._HOLE_CLOSED  # < 1.15
-    assert comp_mod._hole_clearance_color(1.3) == comp_mod._HOLE_TIGHT  # 1.15..1.5
-    assert comp_mod._hole_clearance_color(2.0) == comp_mod._HOLE_OPEN  # >= 1.5
+    # clearance radii are nm: thresholds are 0.115 nm (water) and 0.15 nm
+    assert comp_mod._hole_clearance_color(0.09) == comp_mod._HOLE_CLOSED  # < 1.15 Å
+    assert comp_mod._hole_clearance_color(0.13) == comp_mod._HOLE_TIGHT  # 1.15..1.5 Å
+    assert comp_mod._hole_clearance_color(0.20) == comp_mod._HOLE_OPEN  # >= 1.5 Å
 
 
 def test_carve_voids_focuses_on_void_lining():
@@ -2031,7 +2033,8 @@ def test_component_graph_emits_nodes_in_tetrahedron_id_order():
         for message in view.messages
         if message['op'] == 'add_sphere'
     ]
-    assert np.asarray(centers)[:, 0].tolist() == [0.0, 1.0, 3.0, 10.0]
+    # nm geometry emitted on the Mol* canvas (angstroms) -> stub coords x10
+    assert np.asarray(centers)[:, 0].tolist() == [0.0, 10.0, 30.0, 100.0]
 
 
 def test_show_dfn_graph_can_render_twice_with_same_tag_prefix():
@@ -2341,16 +2344,9 @@ def test_dfnd_index_space_helpers_and_geometry_conversion_are_explicit():
         atom_index_payload,
         mesh_local_from_molecular_system,
     )
-    from molsysviewer_topomt.render._components import (
-        _body_labels_from_dry,
-        _dry_scaffold_edges,
-        _mouth_gate_rings,
-    )
+    from molsysviewer_topomt.render._components import _body_labels_from_dry
 
     index_map = np.array([10, 20, 30, 40])
-    coords = np.array(
-        [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [2.0, 0.0, 0.0], [3.0, 0.0, 0.0]]
-    )
     comp = SimpleNamespace(
         component_id='DRY-1',
         atom_indices=[10, 30],
@@ -2364,16 +2360,6 @@ def test_dfnd_index_space_helpers_and_geometry_conversion_are_explicit():
         atom_index_payload([10, 30], MOLECULAR_SYSTEM)['atom_index_space']
         == MOLECULAR_SYSTEM
     )
-    assert _dry_scaffold_edges(comp, coords, index_map) == [
-        [[0.0, 0.0, 0.0], [2.0, 0.0, 0.0]]
-    ]
-    centers, _normals, _radii = _mouth_gate_rings(
-        comp,
-        {'external_links': [{'external_link_id': 1, 'atom_indices': [20, 40]}]},
-        coords,
-        index_map,
-    )
-    assert centers == [[2.0, 0.0, 0.0]]
     assert _body_labels_from_dry([comp]) == {10: 0, 30: 0}
 
 
@@ -2678,7 +2664,7 @@ def test_wp18_graph_renderers_share_canonical_tetrahedron_center_geometry():
 
     full_geometry = full['node_geometry']
     component_geometry = component['node_geometry']
-    assert full_geometry.unit == component_geometry.unit == 'angstroms'
+    assert full_geometry.unit == component_geometry.unit == 'nm'
     assert full_geometry.coordinates == component_geometry.coordinates
     assert tuple(ref.entity_id for ref in full_geometry.refs) == tuple(
         ref.entity_id for ref in component_geometry.refs
@@ -2723,7 +2709,7 @@ def test_wp18_graph_renderers_share_canonical_edge_geometry():
 
     full_edges = full['edge_geometry']
     component_edges = component['edge_geometry']
-    assert full_edges.unit == component_edges.unit == 'angstroms'
+    assert full_edges.unit == component_edges.unit == 'nm'
     assert full_edges.coordinate_pairs == component_edges.coordinate_pairs
     assert tuple(ref.entity_id for ref in full_edges.refs) == (101, 102)
     assert tuple(ref.entity_id for ref in component_edges.refs) == (101, 102)
@@ -2736,7 +2722,7 @@ def test_wp18_full_graph_mouth_geometry_keeps_face_reference():
     result = show_dfn_graph(DummyView(), _graph_render_topography())
     mouths = result['mouth_geometry']
 
-    assert mouths.unit == 'angstroms'
+    assert mouths.unit == 'nm'
     assert len(mouths.refs) == 1
     assert mouths.refs[0].entity_id == 110
     assert mouths.refs[0].tetrahedron_ids == (10,)
@@ -2767,7 +2753,7 @@ def test_wp18_tetrahedra_geometry_preserves_coordinates_indices_and_refs():
 
     geometry = tetrahedra_geometry(_graph_render_topography(), [10, 0])
 
-    assert geometry.unit == 'angstroms'
+    assert geometry.unit == 'nm'
     assert geometry.atom_index_space == 'mesh_local'
     assert tuple(ref.entity_id for ref in geometry.refs) == (10, 0)
     assert len(geometry.coordinates) == len(geometry.atom_quads) == 2
@@ -2827,7 +2813,7 @@ def test_wp18_face_and_edge_geometry_preserve_pick_indices_and_identity():
     faces = face_geometry(topography, [0])
     edges = edge_geometry(topography, [0])
 
-    assert faces.unit == edges.unit == 'angstroms'
+    assert faces.unit == edges.unit == 'nm'
     assert faces.atom_index_space == edges.atom_index_space == 'mesh_local'
     assert all(len(item) == 3 for item in faces.atom_triplets)
     assert all(len(item) == 2 for item in edges.atom_pairs)
@@ -2895,14 +2881,15 @@ def test_wp18_component_sphere_geometries_share_tetrahedron_identity():
     component = topography.dfnd.dfn.components.wet[0]
     residence = component_residence_sphere_geometry(topography, component)
     alpha = component_alpha_sphere_geometry(topography, component)
-    probe = probe_sphere_geometry(residence, 1.4)
+    probe = probe_sphere_geometry(residence, 0.14)  # nm (1.4 angstroms)
 
-    assert residence.unit == alpha.unit == probe.unit == 'angstroms'
+    assert residence.unit == alpha.unit == probe.unit == 'nm'
     assert tuple(ref.entity_id for ref in residence.refs) == tuple(
         ref.entity_id for ref in alpha.refs
     )
     assert all(ref.component_key == component.component_key for ref in residence.refs)
-    assert all(radius == pytest.approx(1.4) for radius in probe.radii)
+    assert probe.radii  # the void admits the probe
+    assert all(radius == pytest.approx(0.14) for radius in probe.radii)
 
 
 def test_wp18_sphere_adapters_force_skip_digestion():
@@ -2954,5 +2941,207 @@ def test_wp18_sphere_renderers_emit_canonical_residence_and_alpha_geometry():
             component_ids=[component.component_id],
         )
         emitted = view.messages[-1]['options']['alpha_spheres']
-        assert np.allclose(emitted['centers'], expected.centers)
-        assert np.allclose(emitted['radii'], expected.radii)
+        # canonical geometry is nm; the emitted wire is the Mol* canvas (angstroms)
+        expected_centers = puw.get_value(
+            puw.quantity(np.asarray(expected.centers), 'nm'), to_unit='angstroms'
+        )
+        expected_radii = puw.get_value(
+            puw.quantity(np.asarray(expected.radii), 'nm'), to_unit='angstroms'
+        )
+        assert np.allclose(emitted['centers'], expected_centers)
+        assert np.allclose(emitted['radii'], expected_radii)
+
+
+def test_wp18_blob_adapter_forces_skip_digestion_and_preserves_spheres():
+    from molsysviewer_topomt.geometry import EntityRef, SphereGeometry
+    from molsysviewer_topomt.render.adapters import add_pocket_blob
+
+    calls = []
+    view = types.SimpleNamespace(
+        shapes=types.SimpleNamespace(
+            add_pocket_blob=lambda **kwargs: calls.append(kwargs)
+        )
+    )
+    geometry = SphereGeometry(
+        ((0.0, 0.0, 0.0),),
+        (2.0,),
+        unit='angstroms',
+        refs=(EntityRef(kind='tetrahedron', entity_id=0),),
+    )
+
+    add_pocket_blob(view, geometry, skip_digestion=False)
+
+    assert calls[0]['skip_digestion'] is True
+    assert np.allclose(
+        puw.get_value(calls[0]['centers'], to_unit='angstroms'), geometry.centers
+    )
+    assert np.allclose(
+        puw.get_value(calls[0]['radii'], to_unit='angstroms'), geometry.radii
+    )
+
+
+def test_wp18_cloud_emits_canonical_residence_sphere_geometry():
+    from molsysviewer_topomt.geometry import component_residence_sphere_geometry
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topography = _build_dfnd_topo('hollow_sphere_void.pdb')
+    component = topography.dfnd.dfn.components.wet[0]
+    expected = component_residence_sphere_geometry(topography, component)
+    view = DummyView()
+
+    show_dfnd_components(
+        view,
+        topography,
+        representation='cloud',
+        component_ids=[component.component_id],
+    )
+
+    emitted = view.messages[-1]['options']
+    # canonical geometry is nm; the emitted wire is the Mol* canvas (angstroms)
+    expected_centers = puw.get_value(
+        puw.quantity(np.asarray(expected.centers), 'nm'), to_unit='angstroms'
+    )
+    expected_radii = puw.get_value(
+        puw.quantity(np.asarray(expected.radii), 'nm'), to_unit='angstroms'
+    )
+    assert np.allclose(emitted['centers'], expected_centers)
+    assert np.allclose(emitted['radii'], expected_radii)
+
+
+def test_wp18_envelope_mouth_cap_emits_canonical_face_geometry():
+    from molsysviewer_topomt.geometry import face_geometry
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(
+        comp for comp in topography.dfnd.dfn.components.wet if comp.family == 'pocket'
+    )
+    links = {
+        link['external_link_id']: link for link in topography.dfnd.raw['external_links']
+    }
+    face_ids = [
+        face_id
+        for link_id in component.external_link_ids
+        for face_id in links[link_id]['face_ids']
+    ]
+    expected = face_geometry(topography, face_ids=face_ids)
+    view = DummyView()
+
+    show_dfnd_components(
+        view,
+        topography,
+        representation='envelope',
+        component_ids=[component.component_id],
+    )
+
+    cap = next(
+        message for message in view.messages if message['op'] == 'add_triangle_faces'
+    )
+    assert cap['options']['atom_triplets'] == [
+        list(item) for item in expected.atom_triplets
+    ]
+
+
+def test_wp18_feature_geometry_carries_stable_feature_identity_and_nm_units():
+    from molsysviewer_topomt.geometry import (
+        feature_center_geometry,
+        feature_sphere_geometry,
+    )
+
+    feature = {
+        'feature_id': 'POC-7',
+        'atom_indices': [1, 2, 3],
+        'atom_index_space': 'molecular_system',
+        'center': [0.1, 0.2, 0.3],
+        'sphere_centers': [[0.1, 0.2, 0.3], [0.2, 0.3, 0.4]],
+        'sphere_radii': [0.4, 0.5],
+    }
+
+    marker = feature_center_geometry(feature)
+    blob = feature_sphere_geometry(feature)
+
+    assert marker.unit == blob.unit == 'nm'
+    assert marker.refs[0].kind == 'feature'
+    assert marker.refs[0].entity_id == 'POC-7'
+    assert tuple(ref.entity_id for ref in blob.refs) == ('POC-7', 'POC-7')
+    assert blob.radii == (0.4, 0.5)
+
+
+def test_wp18_centerline_and_ring_geometry_preserve_structural_identity():
+    from molsysviewer_topomt.geometry import (
+        component_centerline_geometry,
+        centerline_ring_geometry,
+        mouth_ring_geometry,
+    )
+
+    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(
+        comp for comp in topography.dfnd.dfn.components.wet if comp.family == 'channel'
+    )
+    centerline, bottleneck_index = component_centerline_geometry(topography, component)
+    rings = centerline_ring_geometry(topography, component)
+    mouths = mouth_ring_geometry(topography, component)
+
+    assert centerline.unit == rings.unit == mouths.unit == 'nm'
+    assert len(centerline.centers) >= 2
+    assert 0 <= bottleneck_index < len(centerline.centers)
+    assert tuple(ref.entity_id for ref in centerline.refs) == tuple(
+        ref.entity_id for ref in rings.refs
+    )
+    assert all(ref.kind == 'centerline_station' for ref in centerline.refs)
+    assert all(ref.component_key == component.component_key for ref in centerline.refs)
+    assert all(ref.kind == 'external_link' for ref in mouths.refs)
+    assert {ref.entity_id for ref in mouths.refs} == set(component.external_link_keys)
+
+
+def test_wp18_scaffold_geometry_uses_canonical_global_atom_pairs():
+    from molsysviewer_topomt.geometry import scaffold_geometry
+
+    topography = _build_dfnd_topo('two_blocks_interface.pdb')
+    component = topography.dfnd.dfn.components.dry[0]
+    geometry = scaffold_geometry(topography, component)
+
+    assert geometry.unit == 'nm'
+    assert geometry.refs
+    assert all(ref.kind == 'scaffold_edge' for ref in geometry.refs)
+    assert all(
+        tuple(sorted(ref.atom_indices)) == ref.atom_indices for ref in geometry.refs
+    )
+    assert all(ref.component_key == component.component_key for ref in geometry.refs)
+
+
+def test_wp18_path_and_ring_adapters_force_skip_digestion():
+    from molsysviewer_topomt.geometry import EntityRef, RingGeometry, SphereGeometry
+    from molsysviewer_topomt.render.adapters import add_channel_tube, add_rings
+
+    tube_calls = []
+    ring_calls = []
+    view = types.SimpleNamespace(
+        shapes=types.SimpleNamespace(
+            add_channel_tube=lambda **kwargs: tube_calls.append(kwargs),
+            add_rings=lambda **kwargs: ring_calls.append(kwargs),
+        )
+    )
+    refs = (
+        EntityRef(kind='centerline_station', entity_id=1),
+        EntityRef(kind='centerline_station', entity_id=2),
+    )
+    tube = SphereGeometry(
+        ((0.0, 0.0, 0.0), (1.0, 0.0, 0.0)),
+        (1.0, 0.8),
+        unit='angstroms',
+        refs=refs,
+    )
+    rings = RingGeometry(
+        tube.centers,
+        ((1.0, 0.0, 0.0), (1.0, 0.0, 0.0)),
+        tube.radii,
+        unit='angstroms',
+        refs=refs,
+    )
+
+    add_channel_tube(view, tube, skip_digestion=False)
+    add_rings(view, rings, skip_digestion=False)
+
+    assert tube_calls[0]['skip_digestion'] is True
+    assert ring_calls[0]['skip_digestion'] is True

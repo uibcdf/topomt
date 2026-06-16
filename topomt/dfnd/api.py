@@ -22,11 +22,17 @@ _FEATURE_CLASS_BY_FAMILY = {
 _FAMILIES_WITH_MOUTHS = {'pockets', 'channels'}
 
 
-def _as_angstrom_float(value) -> float:
+def _as_nm_float(value) -> float:
+    """Normalize a length to nanometers (DFND's internal unit).
+
+    A PyUnitWizard quantity is converted from its own unit. A bare number is
+    interpreted as angstroms (the cavity-detection domain convention, e.g. the
+    1.4 angstrom water probe) and converted to nanometers.
+    """
     try:
-        return float(puw.get_value(value, to_unit='angstroms'))
+        return float(puw.get_value(value, to_unit='nm'))
     except Exception:
-        return float(value)
+        return float(value) * 0.1
 
 
 def _feature_from_component_record(
@@ -48,17 +54,15 @@ def _feature_from_component_record(
     feature.transit_connector_tetrahedron_indices = record[
         'transit_connector_tetrahedron_indices'
     ]
-    feature.center = puw.standardize(puw.quantity(record['center'], 'angstroms'))
-    feature.volume_topological_resident = puw.standardize(
-        puw.quantity(record['volume_topological_resident'], 'angstroms**3')
+    feature.center = puw.quantity(record['center'], 'nm')
+    feature.volume_topological_resident = puw.quantity(
+        record['volume_topological_resident'], 'nm**3'
     )
-    feature.volume_solvent_estimate = puw.standardize(
-        puw.quantity(record['volume_solvent_estimate'], 'angstroms**3')
+    feature.volume_solvent_estimate = puw.quantity(
+        record['volume_solvent_estimate'], 'nm**3'
     )
     feature.n_mouths = record['n_mouths']
-    feature.mouth_area = puw.standardize(
-        puw.quantity(record['mouth_area'], 'angstroms**2')
-    )
+    feature.mouth_area = puw.quantity(record['mouth_area'], 'nm**2')
     feature.mouths = record['mouths']
     feature.mouth_face_clusters = record['mouth_face_clusters']
     feature.flags = record['flags']
@@ -73,6 +77,12 @@ def _reject_conflicting_legacy_values(
     configured: dict[str, Any],
 ) -> None:
     def equal(left: Any, right: Any) -> bool:
+        try:
+            # Float-tolerant: nm-converted length args carry rounding error
+            # (e.g. 1.4 angstroms -> 0.14000000000000001 nm).
+            return bool(np.isclose(float(left), float(right)))
+        except (TypeError, ValueError):
+            pass
         try:
             return bool(np.array_equal(left, right))
         except Exception:
@@ -117,7 +127,7 @@ def _run_dfnd(
     mesh_defaults = {
         'selection': 'all',
         'structure_indices': 0,
-        'epsilon': 1e-6,
+        'epsilon': 1e-7,
         'hydrogen_policy': 'exclude',
         'radii_model': 'vdw',
     }
@@ -131,7 +141,7 @@ def _run_dfnd(
         )
 
     query_values = {
-        'probe_radius': _as_angstrom_float(probe_radius),
+        'probe_radius': _as_nm_float(probe_radius),
         'residence_tolerance': residence_tolerance,
         'permeability_tolerance': permeability_tolerance,
         'transit_policy': transit_policy,
@@ -165,7 +175,7 @@ def dfnd_to_topography(
     structure_indices: int = 0,
     probe_radius: float = 1.4,
     min_size: int = 0,
-    epsilon: float = 1e-6,
+    epsilon: float = 1e-7,
     hydrogen_policy: str = 'exclude',
     radii_model: str = 'vdw',
     transit_policy: str = 'with_connectors',
@@ -239,9 +249,7 @@ def dfnd_to_topography(
                 mouth.external_link_id = link['external_link_id']
                 mouth.external_link_support_key = link['external_link_support_key']
                 mouth.external_link_key = link['external_link_key']
-                mouth.area = puw.standardize(
-                    puw.quantity(link['area_geometric'], 'angstroms**2')
-                )
+                mouth.area = puw.quantity(link['area_geometric'], 'nm**2')
                 topography.add_feature(mouth)
                 topography.connect_features(mouth, feature)
 
@@ -254,7 +262,7 @@ def dfnd(
     structure_indices: int = 0,
     probe_radius: float = 1.4,
     min_size: int = 0,
-    epsilon: float = 1e-6,
+    epsilon: float = 1e-7,
     hydrogen_policy: str = 'exclude',
     radii_model: str = 'vdw',
     transit_policy: str = 'with_connectors',

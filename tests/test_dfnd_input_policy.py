@@ -74,7 +74,7 @@ def test_dfnd_public_facade_accepts_typed_mesh_and_query_configuration(tmp_path)
     pdb_path = tmp_path / 'minimal.pdb'
     _write_minimal_pdb(pdb_path)
     mesh_config = DFNDMeshConfig(epsilon=1e-5, hydrogen_policy='include')
-    query = DFNDQuery(probe_radius=1.2, transit_policy='resident_only')
+    query = DFNDQuery(probe_radius=0.12, transit_policy='resident_only')
 
     result = dfnd(str(pdb_path), mesh_config=mesh_config, query=query)
     parameters = result['raw']['parameters']

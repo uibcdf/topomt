@@ -13,12 +13,16 @@ Renderers remain responsible for scientific selection and visual style. Geometry
 
 ## Implemented Slices
 
-- Added `PointGeometry`, `SphereGeometry`, `SegmentGeometry`, `TetrahedraGeometry`, `IndexedTriangleGeometry`, `IndexedEdgeGeometry`, and `EntityRef`.
+- Added `PointGeometry`, `SphereGeometry`, `RingGeometry`, `SegmentGeometry`, `TetrahedraGeometry`, `IndexedTriangleGeometry`, `IndexedEdgeGeometry`, and `EntityRef`.
 - Added canonical extractors for tetrahedron centers, DFN graph segments, tetrahedra, faces, and edges, built on the public DFND selectors.
 - Migrated nodes and links in `show_dfn_graph()` and component `representation="graph"` to shared extractors and final adapters.
 - Migrated general and component tetrahedron rendering to one canonical tetrahedron payload.
 - Migrated coast-face rendering and tetrahedron face/edge pick metadata to canonical indexed face/edge payloads.
 - Migrated residence, alpha, probe-center, and affinity-sphere representations to canonical component sphere extractors and final adapters.
+- Migrated cloud, pipe fallback, and envelope blobs to the same canonical residence-sphere geometry.
+- Migrated envelope mouth caps from ad-hoc external-link triplets to canonical `face_ids` and indexed-triangle geometry.
+- Migrated public-feature pocket blobs and marker points to canonical geometry carrying stable `feature_id` references in the payload unit (`nm`).
+- Migrated centerline tubes and rings, mouth rings, and dry-scaffold segments to canonical geometry and final adapters.
 - Component graph references retain `support_key` and `component_key`; face and edge metadata carry JSON-serializable structured `entity_ref` payloads.
 - The diagnostic context action no longer parses hover labels with regular expressions. It consumes structured `entity_refs` or resolves selected shape atoms through the simplex selectors.
 
@@ -31,14 +35,23 @@ Renderers remain responsible for scientific selection and visual style. Geometry
 - Geometry payload units are mandatory.
 - Final point, sphere-set, uniform-sphere, segment, tetrahedron, and indexed-triangle adapters always disable argument digestion.
 - Residence and alpha-sphere renderers emit the exact centers and radii returned by their canonical extractors.
+- Blob renderers emit the canonical residence-sphere centers and radii.
+- Mouth caps emit the canonical face geometry selected by their external-link `face_ids`.
+- Public-feature blobs and markers carry stable feature references and preserve scalar marker tags.
+- Centerline stations use the corresponding tetrahedron ID, scoped by `component_key`.
+- Mouth rings use `external_link_key`, with external-link support and component keys.
+- Dry-scaffold edges use a canonical sorted molecular-system atom pair, scoped by component support and component keys.
 - Diagnostic identity does not depend on presentation text.
 
-## Remaining WP-18 Work
+## WP-18 Status
 
-VIEW-012 remains open until the same boundary covers:
+VIEW-012 is verified locally. Active TopoMT renderers now extract scientific geometry through the viewer-neutral payload boundary and emit it through final adapters. The specialized identity contracts are:
 
-- compound and specialized geometries that are not simple shared primitives, including blobs, tubes, rings, mouth caps, and dry scaffolds;
-- broader cross-renderer equivalence where those representations share scientific geometry.
+- centerline station: the station's tetrahedron ID plus `component_key`;
+- mouth ring: `external_link_key` plus its support and component keys;
+- dry-scaffold edge: canonical sorted molecular-system atom pair plus component support and component keys.
+
+The remaining work belongs to the MolSysViewer host boundary, not VIEW-012: direct frontend transport of arbitrary `entity_refs` and elimination of host-side digestion warnings for already-normalized shape options. It is recorded in `../molsysviewer/devguide/pending_proposals/generic_geometry_payloads_and_entity_refs.md`.
 
 ## Ownership Boundary
 

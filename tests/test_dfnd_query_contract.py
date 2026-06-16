@@ -36,7 +36,7 @@ def test_mesh_config_and_query_are_frozen_and_keep_epsilon_on_the_mesh_side():
     network = _network()
 
     assert isinstance(network.mesh_config, DFNDMeshConfig)
-    assert network.mesh_config.epsilon == pytest.approx(1e-7)
+    assert network.mesh_config.epsilon == pytest.approx(1e-8)
     assert 'epsilon' not in DFNDQuery().to_dict()
     with pytest.raises(FrozenInstanceError):
         network.mesh_config.epsilon = 1e-6
@@ -44,7 +44,7 @@ def test_mesh_config_and_query_are_frozen_and_keep_epsilon_on_the_mesh_side():
 
 def test_query_drives_result_identity_but_reporting_min_size_does_not():
     network = _network()
-    query = DFNDQuery(probe_radius=1.4, dry_adjacency='vertex')
+    query = DFNDQuery(probe_radius=0.14, dry_adjacency='vertex')
 
     unfiltered = network.get_topography(query=query, min_size=0)
     filtered = network.get_topography(query=query, min_size=1000)
@@ -79,7 +79,7 @@ def test_at_probe_preserves_every_unspecified_query_and_reporting_option():
 
     assert reprobed.dfn.parameters['query'] == {
         **result['raw']['parameters']['query'],
-        'probe_radius': 1.2,
+        'probe_radius': pytest.approx(0.12),  # 1.2 angstroms -> nm
     }
     assert reprobed.dfn.parameters['reporting']['min_size'] == 7
 
@@ -107,7 +107,7 @@ def test_network_rejects_non_default_arguments_that_conflict_with_query():
     network = _network()
 
     with pytest.raises(ValueError, match='query conflicts'):
-        network.get_topography(query=DFNDQuery(probe_radius=2.0), probe_radius=1.5)
+        network.get_topography(query=DFNDQuery(probe_radius=0.20), probe_radius=1.5)
 
 
 def test_epsilon_is_part_of_substrate_and_result_identity():

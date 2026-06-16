@@ -30,6 +30,22 @@ from .identity import (
 )
 
 
+def _length_to_nm(value):
+    """Convert a length to nanometers (DFND's internal unit).
+
+    A PyUnitWizard quantity is converted from its own unit. A bare number/array
+    is interpreted as angstroms — the cavity-detection domain convention for the
+    ``from_arrays`` toy-system entry point and the legacy scalar arguments — and
+    scaled to nm. ``None`` passes through.
+    """
+    if value is None:
+        return None
+    if puw.is_quantity(value):
+        return puw.get_value(value, to_unit='nm')
+    arr = np.asarray(value, dtype=float) * 0.1
+    return float(arr) if arr.ndim == 0 else arr
+
+
 def _component_center(
     atom_coords: np.ndarray,
     tetra_atoms: np.ndarray,
@@ -60,7 +76,7 @@ class DelaunayFlowNetwork:
         molecular_system,
         selection='all',
         structure_indices=0,
-        epsilon=1e-6,
+        epsilon=1e-7,
         hydrogen_policy='exclude',
         radii_model='vdw',
     ):
@@ -87,7 +103,7 @@ class DelaunayFlowNetwork:
 
         atom_coords = puw.get_value(
             msm.get(topo, selection=atom_indices, coordinates=True),
-            to_unit='angstroms',
+            to_unit='nm',
         )[0]
         atom_radii = puw.get_value(
             msm.physchem.get_atomic_radius(
@@ -97,7 +113,7 @@ class DelaunayFlowNetwork:
                 definition=radii_model,
                 syntax='MolSysMT',
             ),
-            to_unit='angstroms',
+            to_unit='nm',
         )
 
         self._initialize_geometry(atom_coords, atom_radii, atom_indices)
@@ -123,11 +139,17 @@ class DelaunayFlowNetwork:
 
     @classmethod
     def from_arrays(cls, coordinates, radii, atom_indices=None, epsilon=1e-6):
-        """Build a DFN directly from coordinates and radii for toy systems."""
+        """Build a DFN directly from coordinates and radii for toy systems.
+
+        ``coordinates``, ``radii`` and ``epsilon`` may be PyUnitWizard quantities
+        or bare numbers; bare values are interpreted as angstroms (the toy-system
+        domain convention) and converted to the nm-internal representation.
+        """
         instance = cls.__new__(cls)
         instance.molecular_system = None
         instance.selection = 'array'
         instance.structure_indices = 0
+        epsilon = _length_to_nm(epsilon)
         instance.epsilon = float(epsilon)
         instance.hydrogen_policy = 'provided_atoms'
         instance.radii_model = 'provided'
@@ -138,8 +160,8 @@ class DelaunayFlowNetwork:
             hydrogen_policy='provided_atoms',
             radii_model='provided',
         )
-        coordinates = np.asarray(coordinates, dtype=float)
-        radii = np.asarray(radii, dtype=float)
+        coordinates = np.asarray(_length_to_nm(coordinates), dtype=float)
+        radii = np.asarray(_length_to_nm(radii), dtype=float)
         if atom_indices is None:
             atom_indices = np.arange(coordinates.shape[0], dtype=int)
         instance._initialize_geometry(
@@ -395,10 +417,12 @@ class DelaunayFlowNetwork:
             resident(T)  = R_residence(T) >= R_probe - epsilon - residence_tolerance
         """
         if query is None:
+            # Legacy scalar arguments are angstroms (or quantities); the query
+            # stores the nm-internal values.
             query = DFNDQuery(
-                probe_radius=probe_radius,
-                residence_tolerance=residence_tolerance,
-                permeability_tolerance=permeability_tolerance,
+                probe_radius=_length_to_nm(probe_radius),
+                residence_tolerance=_length_to_nm(residence_tolerance),
+                permeability_tolerance=_length_to_nm(permeability_tolerance),
                 transit_policy=transit_policy,
                 gate_intrusion_policy=gate_intrusion_policy,
                 dry_adjacency=dry_adjacency,
@@ -407,19 +431,28 @@ class DelaunayFlowNetwork:
             raise TypeError('query must be a DFNDQuery')
         else:
             legacy_values = {
-                'probe_radius': float(probe_radius),
-                'residence_tolerance': float(residence_tolerance),
-                'permeability_tolerance': float(permeability_tolerance),
+                'probe_radius': _length_to_nm(probe_radius),
+                'residence_tolerance': _length_to_nm(residence_tolerance),
+                'permeability_tolerance': _length_to_nm(permeability_tolerance),
                 'transit_policy': transit_policy,
                 'gate_intrusion_policy': gate_intrusion_policy,
                 'dry_adjacency': dry_adjacency,
             }
             defaults = DFNDQuery().to_dict()
             configured = query.to_dict()
+
+            def _differs(a, b):
+                # Float-tolerant: legacy length args are converted to nm, which
+                # introduces rounding (e.g. 1.4 * 0.1 != 0.14 exactly).
+                try:
+                    return not np.isclose(float(a), float(b))
+                except (TypeError, ValueError):
+                    return a != b
+
             conflicts = [
                 name
                 for name, value in legacy_values.items()
-                if value != defaults[name] and value != configured[name]
+                if _differs(value, defaults[name]) and _differs(value, configured[name])
             ]
             if conflicts:
                 raise ValueError(

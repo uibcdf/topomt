@@ -741,8 +741,8 @@ between selected features or attached analysis substrate.
 ### VIEW-012: Geometry extraction and unit conversion are duplicated across renderers
 
 **Evidence:** Strong static finding
-**Tracking:** Open
-**Progress:** Viewer-neutral payloads now cover points, variable/uniform spheres, segments, tetrahedra, indexed triangular faces, and indexed edges. Full/component graphs share canonical nodes and links; general/component tetrahedron renderers share canonical tetrahedra; coast faces and tetrahedron pick metadata share canonical face/edge extraction; residence, alpha, probe-center, and affinity renderers share canonical component sphere geometry. Structured identity and explicit mesh-local indices cross the boundary, and diagnostic identity no longer parses hover labels. VIEW-012 remains open for compound specialized geometries such as blobs, tubes, rings, mouth caps, and dry scaffolds.
+**Tracking:** Verified
+**Resolution:** Viewer-neutral payloads and final adapters now cover all active renderer geometry, including centerline tubes and rings, mouth rings, and dry-scaffold segments. Centerline stations reference tetrahedron IDs scoped by component; mouth rings reference external-link keys; scaffold edges reference canonical molecular-system atom pairs scoped by component. Cross-renderer equivalence tests cover coordinates, units, and structured identity. Direct frontend transport of arbitrary entity refs remains a MolSysViewer host proposal, not a TopoMT geometry-extraction gap.
 
 **Category:** Technical debt with correctness risk
 **Location:** `molsysviewer_topomt/render/`
@@ -932,6 +932,7 @@ explicit deprecation and migration path if it remains public during transition.
 
 **Evidence:** Confirmed by inspection
 **Tracking:** Decision required
+**Current-worktree regression:** The settled DFND contract keeps the kernel in angstroms, but the current worktree contains an incomplete internal-nanometer migration (`graph.py` uses nm and a `0.14` default while `DFNDQuery` retains `1.4`). This makes a query-only call conflict with an argument the caller did not explicitly provide. Keep this separate from WP-18 and restore the settled unit boundary before marking API-006 verified.
 **Category:** Contract violation
 **Location:** DFND and third-party feature-promotion adapters
 
@@ -1267,7 +1268,7 @@ listed invariant regresses on the synthetic suite.
 | WP-15 DFND orchestration decomposition | Technical debt | QUAL-008 | WP-01, WP-02, WP-03 | phase-level invariant and regression tests |
 | WP-16 Test invocation and devtools imports | Test infrastructure | QUAL-009 | None | clean-shell collection and CI parity |
 | WP-17 Legacy public API cleanup | API stability | API-004, API-005 | API deprecation decision | isolated import, deprecation, and migration tests |
-| WP-18 Viewer geometry boundary | Architecture / reliability | VIEW-012 | Index-space, unit, and viewer-payload decisions | cross-renderer payload equivalence tests |
+| WP-18 Viewer geometry boundary **(Verified)** | Architecture / reliability | VIEW-012 | Index-space, unit, and viewer-payload decisions | cross-renderer payload equivalence tests |
 
 ### 10.1. Decision gates
 

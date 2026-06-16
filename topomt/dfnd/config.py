@@ -29,7 +29,7 @@ class DFNDMeshConfig:
     structure_indices: Any = 0
     hydrogen_policy: str = 'exclude'
     radii_model: str = 'vdw'
-    epsilon: float = 1e-6
+    epsilon: float = 1e-7
 
     def __post_init__(self) -> None:
         object.__setattr__(self, 'selection', _freeze_sequence(self.selection))
@@ -57,7 +57,7 @@ class DFNDMeshConfig:
 class DFNDQuery:
     """Probe-dependent DFND query that can reuse an existing substrate."""
 
-    probe_radius: float = 1.4
+    probe_radius: float = 0.14  # nanometers (the 1.4 angstrom water probe)
     residence_tolerance: float = 0.0
     permeability_tolerance: float = 0.0
     transit_policy: str = 'with_connectors'

@@ -8,29 +8,33 @@ import numpy as np
 
 from topomt import pyunitwizard as puw
 from topomt.dfnd import families as fam
-from topomt.dfnd.centerline import channel_centerline
 
 from ..geometry import (
     EntityRef,
+    RingGeometry,
+    centerline_ring_geometry,
     component_alpha_sphere_geometry,
+    component_centerline_geometry,
     component_residence_sphere_geometry,
     dfn_graph_segments,
     face_geometry,
+    mouth_ring_geometry,
     probe_sphere_geometry,
+    scaffold_geometry,
     tetrahedra_geometry,
     tetrahedron_centers,
 )
-from ..index_spaces import (
-    MOLECULAR_SYSTEM,
-    mesh_local_from_molecular_system,
-)
+from ..index_spaces import MOLECULAR_SYSTEM
 from ..index_spaces import (
     atom_indices as indices_in_space,
 )
 from ._common import _dfnd_edge_meta, _dfnd_face_meta, _resolve_topography
 from .adapters import (
+    add_channel_tube,
     add_indexed_triangles,
+    add_pocket_blob,
     add_point_spheres,
+    add_rings,
     add_segments,
     add_sphere_set,
     add_tetrahedra,
@@ -141,36 +145,6 @@ def _component_node_indices(comp, *, use_resident_nodes):
     return comp.node_indices
 
 
-def _component_residence_spheres(comp, tetra_map, *, use_resident_nodes):
-    """Return maximum-clearance residence spheres for a component."""
-    centers_list = []
-    radii_list = []
-    for tid in _component_node_indices(comp, use_resident_nodes=use_resident_nodes):
-        if tid not in tetra_map:
-            continue
-        t = tetra_map[tid]
-        if 'center' in t and 'R_residence' in t:
-            centers_list.append(t['center'])
-            radii_list.append(t['R_residence'])
-    if not centers_list:
-        return None, None
-    return np.array(centers_list, dtype=float), np.array(radii_list, dtype=float)
-
-
-def _component_alpha_spheres(comp, mesh, *, use_resident_nodes):
-    """Return geometric Delaunay circumspheres for a component."""
-    tetrahedron_ids = list(
-        _component_node_indices(comp, use_resident_nodes=use_resident_nodes)
-    )
-    if not tetrahedron_ids:
-        return None, None
-    centers = np.asarray(mesh.delaunay.alpha_sphere_centers, dtype=float)[
-        tetrahedron_ids
-    ]
-    radii = np.asarray(mesh.delaunay.alpha_sphere_radii, dtype=float)[tetrahedron_ids]
-    return centers, radii
-
-
 def _body_labels_from_dry(dry_components):
     """Map molecular-system atom indices to dry-body ids."""
     labels = {}
@@ -200,29 +174,12 @@ def _rank_by_volume(components, top_n):
     )[:top_n]
 
 
-def _centerline_normals(centers):
-    """Per-station tangent of an ordered centerline (the local axis a ring is
-    drawn perpendicular to). Central difference inside, one-sided at the ends."""
-    n = len(centers)
-    normals = []
-    for i in range(n):
-        if i == 0:
-            tangent = centers[1] - centers[0]
-        elif i == n - 1:
-            tangent = centers[-1] - centers[-2]
-        else:
-            tangent = centers[i + 1] - centers[i - 1]
-        if not np.any(tangent):
-            tangent = np.array([0.0, 0.0, 1.0])
-        normals.append(tangent.tolist())
-    return normals
-
-
 def _hole_clearance_color(radius):
-    """HOLE traffic-light colour for a free radius (Å)."""
-    if radius < _WATER_RADIUS:
+    """HOLE traffic-light colour for a free radius (nm)."""
+    radius_angstroms = radius * 10.0  # clearance radii are nm (DFND kernel units)
+    if radius_angstroms < _WATER_RADIUS:
         return _HOLE_CLOSED
-    if radius < 1.5:
+    if radius_angstroms < 1.5:
         return _HOLE_TIGHT
     return _HOLE_OPEN
 
@@ -335,7 +292,7 @@ def show_dfnd_pharmacophore(
     )
 
 
-def show_dfnd_convexity(view, topography=None, *, radius=8.0, palette='coolwarm'):
+def show_dfnd_convexity(view, topography=None, *, radius=0.8, palette='coolwarm'):
     """Colour the molecular surface by local convexity (ridges hot, valleys cold)
     via ``view.whole.set_color_by_values``. Convexity is computed per atom from the
     DFND coordinates; a convexity/protrusion heatmap (see
@@ -462,69 +419,15 @@ def _atom_pharmacophore_kinds(molsys):
     return kinds
 
 
-def _mouth_gate_rings(comp, raw, coords, index_map):
-    """Gate rings for each mouth of a component: ``(centers, normals, radii)``.
-
-    One ring per external link (mouth): centred on the mouth's lining atoms,
-    axis pointing out of the component, radius = the gate's ``R_gate_min``. A
-    void has no mouths (empty); a pocket has one. Used by the ``envelope`` mode.
-    """
+def _mouth_cap_face_ids(comp, raw):
+    """Return canonical face IDs for a component mouth-cap cluster."""
     external_links = {e['external_link_id']: e for e in raw.get('external_links', [])}
-    comp_center = (
-        np.asarray(comp.center, dtype=float)
-        if getattr(comp, 'center', None) is not None
-        else None
-    )
-    centers, normals, radii = [], [], []
+    face_ids = []
     for link_id in getattr(comp, 'external_link_ids', None) or []:
         link = external_links.get(link_id)
-        if link is None:
-            continue
-        system_atoms = link.get('atom_indices') or []
-        local_atoms = mesh_local_from_molecular_system(system_atoms, index_map)
-        if not local_atoms:
-            continue
-        mouth_center = coords[local_atoms].mean(axis=0)
-        normal = (mouth_center - comp_center) if comp_center is not None else None
-        if normal is None or not np.any(normal):
-            normal = np.array([0.0, 0.0, 1.0])
-        centers.append(mouth_center.tolist())
-        normals.append(normal.tolist())
-        radii.append(float(link.get('R_gate_min', 1.0)))
-    return centers, normals, radii
-
-
-def _dry_scaffold_edges(comp, coords, index_map):
-    """Minimum spanning tree over a dry component's atoms — the mechanical
-    'spine' / scaffold. Returns a list of ``[[x,y,z],[x,y,z]]`` coordinate pairs.
-    """
-    local_atoms = mesh_local_from_molecular_system(
-        getattr(comp, 'atom_indices', None), index_map
-    )
-    if len(local_atoms) < 2:
-        return []
-    from scipy.sparse.csgraph import minimum_spanning_tree
-    from scipy.spatial.distance import pdist, squareform
-
-    pts = coords[local_atoms]
-    mst = minimum_spanning_tree(squareform(pdist(pts))).tocoo()
-    return [[pts[i].tolist(), pts[j].tolist()] for i, j in zip(mst.row, mst.col)]
-
-
-def _mouth_cap_triangles(comp, raw):
-    """Triangles (atom triplets) of each mouth's face cluster — the translucent
-    portal cap closing the chamber. Same atom-triplet format as ``coast_faces``.
-    """
-    external_links = {e['external_link_id']: e for e in raw.get('external_links', [])}
-    triplets = []
-    for link_id in getattr(comp, 'external_link_ids', None) or []:
-        link = external_links.get(link_id)
-        if link is None:
-            continue
-        for face in link.get('faces', []):
-            if len(face) == 3:
-                triplets.append([int(a) for a in face])
-    return triplets
+        if link is not None:
+            face_ids.extend(int(face_id) for face_id in link.get('face_ids', []))
+    return face_ids
 
 
 def carve_voids(
@@ -825,11 +728,6 @@ def _show_dfnd_components_legacy(
         return results[0] if len(results) == 1 else results
 
     mesh = dfnd_data.mesh
-    coords = np.asarray(mesh.atoms.coords, dtype=float)
-    index_map = np.asarray(
-        getattr(mesh.atoms, 'index_map', np.arange(len(coords))), dtype=int
-    )
-
     # Pre-build lookup map: tetrahedron_id -> record
     tetra_map = {
         t.get('tetrahedron_id', idx): t for idx, t in enumerate(mesh.tetrahedra)
@@ -954,16 +852,16 @@ def _show_dfnd_components_legacy(
 
         for comp in selected_components:
             comp_id = comp.component_id
-            centers, radii = _component_residence_spheres(
-                comp, tetra_map, use_resident_nodes=use_resident_nodes
+            geometry = component_residence_sphere_geometry(
+                topography, comp, use_resident_nodes=use_resident_nodes
             )
-            if centers is None:
+            if not geometry.centers:
                 continue
 
             tag = f'{tag_prefix}:{comp_id}'
-            layer = view.shapes.add_pocket_blob(
-                centers=puw.quantity(centers, 'angstroms'),
-                radii=puw.quantity(radii, 'angstroms'),
+            layer = add_pocket_blob(
+                view,
+                geometry,
                 alpha=alpha,
                 tag=tag,
                 layer_tag=tag_prefix,
@@ -988,19 +886,21 @@ def _show_dfnd_components_legacy(
             comp_id = comp.component_id
             color = resolved_colors[comp_id]
 
-            centerline = None
-            if comp.family == fam.CHANNEL and comp.raw_record is not None:
-                centerline = channel_centerline(raw, comp.raw_record)
+            path_geometry, bottleneck_index = (
+                component_centerline_geometry(topography, comp)
+                if comp.family == fam.CHANNEL and comp.raw_record is not None
+                else (None, -1)
+            )
 
-            if centerline is None:
-                centers, radii = _component_residence_spheres(
-                    comp, tetra_map, use_resident_nodes=use_resident_nodes
+            if path_geometry is None or not path_geometry.centers:
+                geometry = component_residence_sphere_geometry(
+                    topography, comp, use_resident_nodes=use_resident_nodes
                 )
-                if centers is None:
+                if not geometry.centers:
                     continue
-                layer = view.shapes.add_pocket_blob(
-                    centers=puw.quantity(centers, 'angstroms'),
-                    radii=puw.quantity(radii, 'angstroms'),
+                layer = add_pocket_blob(
+                    view,
+                    geometry,
                     alpha=alpha,
                     tag=f'{tag_prefix}:{comp_id}',
                     layer_tag=tag_prefix,
@@ -1014,11 +914,9 @@ def _show_dfnd_components_legacy(
                 layers.append(layer)
                 continue
 
-            centers = centerline['centers']
-            radii = centerline['radii']
-            tube = view.shapes.add_channel_tube(
-                centers=puw.quantity(centers, 'angstroms'),
-                radii=puw.quantity(radii, 'angstroms'),
+            tube = add_channel_tube(
+                view,
+                path_geometry,
                 color_map=[color, color],
                 alpha=alpha,
                 tag=f'{tag_prefix}:{comp_id}',
@@ -1031,19 +929,18 @@ def _show_dfnd_components_legacy(
             # Bottleneck ring: a flat ring at the narrowest station, perpendicular
             # to the local channel axis, radius = the free radius there. Drawn with
             # the dedicated molsysviewer ring shape in the reserved gate accent.
-            neck = centerline['bottleneck_index']
-            if neck == 0:
-                tangent = centers[1] - centers[0]
-            elif neck == len(centers) - 1:
-                tangent = centers[-1] - centers[-2]
-            else:
-                tangent = centers[neck + 1] - centers[neck - 1]
-            if not np.any(tangent):
-                tangent = np.array([0.0, 0.0, 1.0])
-            marker = view.shapes.add_rings(
-                centers=puw.quantity(centers[neck : neck + 1], 'angstroms'),
-                normals=[tangent.tolist()],
-                radii=puw.quantity(radii[neck : neck + 1], 'angstroms'),
+            path_rings = centerline_ring_geometry(topography, comp)
+            neck = bottleneck_index
+            marker_geometry = RingGeometry(
+                (path_rings.centers[neck],),
+                (path_rings.normals[neck],),
+                (path_rings.radii[neck],),
+                path_rings.unit,
+                (path_rings.refs[neck],),
+            )
+            marker = add_rings(
+                view,
+                marker_geometry,
                 colors=[_MOUTH_ACCENT],
                 alpha=min(1.0, alpha + 0.3),
                 tag=f'{tag_prefix}:{comp_id}-bottleneck',
@@ -1061,21 +958,17 @@ def _show_dfnd_components_legacy(
         # perpendicular to the local channel axis, coloured by free-radius
         # threshold (green/amber/red). Channels only. See
         # devguide/DFND/component_visualization_implementation.md (Phase 4).
-        raw = dfnd_data.raw
         for comp in selected_components:
             comp_id = comp.component_id
             if comp.family != fam.CHANNEL or comp.raw_record is None:
                 continue
-            centerline = channel_centerline(raw, comp.raw_record)
-            if centerline is None:
+            geometry = centerline_ring_geometry(topography, comp)
+            if not geometry.centers:
                 continue
-            centers = centerline['centers']
-            radii = centerline['radii']
-            layer = view.shapes.add_rings(
-                centers=puw.quantity(centers, 'angstroms'),
-                normals=_centerline_normals(centers),
-                radii=puw.quantity(radii, 'angstroms'),
-                colors=[_hole_clearance_color(float(r)) for r in radii],
+            layer = add_rings(
+                view,
+                geometry,
+                colors=[_hole_clearance_color(float(r)) for r in geometry.radii],
                 alpha=alpha,
                 tag=f'{tag_prefix}:{comp_id}',
                 layer_tag=tag_prefix,
@@ -1095,14 +988,14 @@ def _show_dfnd_components_legacy(
         raw = dfnd_data.raw
         for comp in selected_components:
             comp_id = comp.component_id
-            comp_centers, comp_radii = _component_residence_spheres(
-                comp, tetra_map, use_resident_nodes=use_resident_nodes
+            geometry = component_residence_sphere_geometry(
+                topography, comp, use_resident_nodes=use_resident_nodes
             )
-            if comp_centers is not None:
+            if geometry.centers:
                 layers.append(
-                    view.shapes.add_pocket_blob(
-                        centers=puw.quantity(comp_centers, 'angstroms'),
-                        radii=puw.quantity(comp_radii, 'angstroms'),
+                    add_pocket_blob(
+                        view,
+                        geometry,
                         alpha=alpha,
                         tag=f'{tag_prefix}:{comp_id}',
                         layer_tag=tag_prefix,
@@ -1115,16 +1008,13 @@ def _show_dfnd_components_legacy(
                     )
                 )
 
-            g_centers, g_normals, g_radii = _mouth_gate_rings(
-                comp, raw, coords, index_map
-            )
-            if g_centers:
+            mouth_geometry = mouth_ring_geometry(topography, comp)
+            if mouth_geometry.centers:
                 layers.append(
-                    view.shapes.add_rings(
-                        centers=puw.quantity(np.array(g_centers), 'angstroms'),
-                        normals=g_normals,
-                        radii=puw.quantity(np.array(g_radii), 'angstroms'),
-                        colors=[_MOUTH_ACCENT] * len(g_centers),
+                    add_rings(
+                        view,
+                        mouth_geometry,
+                        colors=[_MOUTH_ACCENT] * len(mouth_geometry.centers),
                         alpha=min(1.0, alpha + 0.3),
                         tag=f'{tag_prefix}:{comp_id}-mouths',
                         layer_tag=tag_prefix,
@@ -1133,13 +1023,16 @@ def _show_dfnd_components_legacy(
                     )
                 )
 
-            # Translucent portal cap over the mouth face cluster.
-            cap_triplets = _mouth_cap_triangles(comp, raw)
-            if cap_triplets:
+            # Translucent portal cap over the canonical mouth face cluster.
+            cap_geometry = face_geometry(
+                topography, face_ids=_mouth_cap_face_ids(comp, raw)
+            )
+            if cap_geometry.atom_triplets:
                 layers.append(
-                    view.shapes.add_triangle_faces(
-                        atom_triplets=cap_triplets,
-                        colors=[_MOUTH_ACCENT] * len(cap_triplets),
+                    add_indexed_triangles(
+                        view,
+                        cap_geometry,
+                        colors=[_MOUTH_ACCENT] * len(cap_geometry.atom_triplets),
                         alpha=min(0.4, alpha),
                         tag=f'{tag_prefix}:{comp_id}-cap',
                         layer_tag=tag_prefix,
@@ -1159,12 +1052,13 @@ def _show_dfnd_components_legacy(
             comp_id = comp.component_id
             if component_ids is not None and comp_id not in component_ids:
                 continue
-            pairs = _dry_scaffold_edges(comp, coords, index_map)
-            if not pairs:
+            geometry = scaffold_geometry(topography, comp)
+            if not geometry.refs:
                 continue
             layers.append(
-                view.shapes.add_links(
-                    coordinate_pairs=puw.quantity(np.array(pairs), 'angstroms'),
+                add_segments(
+                    view,
+                    geometry,
                     radius=puw.quantity(0.4, 'angstroms'),
                     color=_TYPE_PALETTE[fam.DRY_BANK],
                     tag=f'{tag_prefix}:{comp_id}',
@@ -1262,8 +1156,10 @@ def _show_dfnd_components_legacy(
             raise ValueError(
                 "DFND data must provide parameters['probe_radius'] for probe_centers"
             )
+        # parameters['probe_radius'] is in nm (DFND kernel units); residence
+        # geometry is also nm, so the probe sphere radius stays in nm.
         if puw.is_quantity(probe_radius):
-            probe_radius = float(puw.get_value(probe_radius, to_unit='angstroms'))
+            probe_radius = float(puw.get_value(probe_radius, to_unit='nm'))
         else:
             probe_radius = float(probe_radius)
 

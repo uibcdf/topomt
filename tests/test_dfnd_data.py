@@ -5,6 +5,7 @@ import types
 import numpy as np
 import pytest
 
+from topomt import pyunitwizard as puw
 from topomt.dfnd import synthetic as syn
 from topomt.dfnd.data import DFNDData
 from topomt.dfnd.graph import DelaunayFlowNetwork
@@ -72,7 +73,7 @@ def test_at_probe_reuses_the_mesh_and_recomputes_the_decomposition():
     assert len(reprobed.mesh.tetrahedra) == len(data.mesh.tetrahedra)
 
     # but the probe-dependent decomposition is recomputed
-    assert reprobed.dfn.parameters['probe_radius'] == 2.2
+    assert reprobed.dfn.parameters['probe_radius'] == pytest.approx(0.22)
     assert len(_significant_voids(data)) == 1  # connected through the throat
     assert len(_significant_voids(reprobed)) == 2  # throat closed -> two chambers
 
@@ -129,8 +130,8 @@ def test_dumbbell_throat_and_chamber_motifs():
     assert len(void.chamber_candidates) == 2
     assert void.bottleneck is not None
     # the throat is passable at the 1.4 probe but seals before 2.2 (-> 2 voids there)
-    assert 1.4 <= void.bottleneck['R_gate'] < 2.2
-    assert void.bottleneck['persistence'] > 1.0
+    assert 0.14 <= void.bottleneck['R_gate'] < 0.22
+    assert void.bottleneck['persistence'] > 0.1
 
 
 def test_simple_void_has_no_throat():
@@ -148,15 +149,16 @@ def test_residence_tolerance_widens_the_residence_threshold():
     # becomes resident once residence_tolerance exceeds the gap (generous policy).
     coords, radii = _argon_cube_arrays()
     network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
-    probe = float(network.tetra_residence.max()) + 0.1
+    # tetra_residence is nm (internal); bump just above the deepest clearance.
+    probe = puw.quantity(float(network.tetra_residence.max()) + 0.01, 'nm')
 
     strict = network.get_topography(probe_radius=probe, min_size=0)
     generous = network.get_topography(
-        probe_radius=probe, min_size=0, residence_tolerance=0.2
+        probe_radius=probe, min_size=0, residence_tolerance=puw.quantity(0.02, 'nm')
     )
     assert _n_void(strict) == 0
     assert _n_void(generous) >= 1
-    assert generous['raw']['parameters']['residence_tolerance'] == 0.2
+    assert generous['raw']['parameters']['residence_tolerance'] == pytest.approx(0.02)
 
 
 def test_tolerances_recorded_and_inherited_by_at_probe():
@@ -170,11 +172,11 @@ def test_tolerances_recorded_and_inherited_by_at_probe():
     )
     data = DFNDData(network, result)
 
-    assert data.dfn.parameters['residence_tolerance'] == 0.1
-    assert data.dfn.parameters['permeability_tolerance'] == 0.2
+    assert data.dfn.parameters['residence_tolerance'] == pytest.approx(0.01)
+    assert data.dfn.parameters['permeability_tolerance'] == pytest.approx(0.02)
     reprobed = data.at_probe(1.4)  # tolerances inherited unless overridden
-    assert reprobed.dfn.parameters['residence_tolerance'] == 0.1
-    assert reprobed.dfn.parameters['permeability_tolerance'] == 0.2
+    assert reprobed.dfn.parameters['residence_tolerance'] == pytest.approx(0.01)
+    assert reprobed.dfn.parameters['permeability_tolerance'] == pytest.approx(0.02)
 
 
 def test_wet_component_initializes_motif_descriptors():

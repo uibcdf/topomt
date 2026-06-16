@@ -832,7 +832,7 @@ def _union_find_root(parent: dict[int, int], node: int) -> int:
 
 
 def _attach_capacity_motifs(
-    components: Components, result: dict[str, Any], min_persistence: float = 1.0
+    components: Components, result: dict[str, Any], min_persistence: float = 0.1
 ) -> None:
     """Attach experimental throat/chamber/bottleneck descriptors to wet components.
 

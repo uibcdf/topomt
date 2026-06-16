@@ -226,7 +226,6 @@ def _show_dfnd_tetrahedra_legacy(
     except Exception:
         pass
 
-    # Call view.shapes.add_tetrahedra directly
     layer = add_tetrahedra(
         view,
         geometry,

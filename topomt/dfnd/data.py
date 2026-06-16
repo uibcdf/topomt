@@ -248,8 +248,12 @@ class DFNDData:
         min_size = overrides.pop(
             'min_size', parameters.get('reporting', {}).get('min_size', 0)
         )
+        from .graph import _length_to_nm
+
         try:
-            query = self.dfn.query.replace(probe_radius=probe_radius, **overrides)
+            query = self.dfn.query.replace(
+                probe_radius=_length_to_nm(probe_radius), **overrides
+            )
         except TypeError as exc:
             raise ValueError(f'Unknown DFND query override: {exc}') from exc
         result = self._network.get_topography(query=query, min_size=min_size)

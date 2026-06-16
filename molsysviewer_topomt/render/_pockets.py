@@ -5,6 +5,7 @@ from typing import Any
 
 from topomt import pyunitwizard as puw
 
+from ..geometry import feature_center_geometry, feature_sphere_geometry
 from ..payloads import topography_payload
 from ._common import (
     DEFAULT_BLOB_ALPHA,
@@ -13,6 +14,7 @@ from ._common import (
     DEFAULT_MARKER_RADIUS_NM,
     _resolve_topography,
 )
+from .adapters import add_pocket_blob, add_point_spheres
 from .result import RenderResult, clear_previous_render_result, remember_render_result
 
 
@@ -64,19 +66,18 @@ def show_topography_pockets(
 
         feature_id = feature.get('feature_id') or f'{tag_prefix}-unknown'
         tag = f'{tag_prefix}:{feature_id}'
-        sphere_centers = feature.get('sphere_centers')
-        sphere_radii = feature.get('sphere_radii')
-        center = feature.get('center')
+        sphere_geometry = feature_sphere_geometry(feature)
+        marker_geometry = feature_center_geometry(feature)
 
-        if sphere_centers and sphere_radii:
-            n_spheres = len(sphere_centers)
+        if sphere_geometry.centers:
+            n_spheres = len(sphere_geometry.centers)
             score = feature.get('score')
             values = None
             if isinstance(score, (int, float)):
                 values = [float(score)] * n_spheres
-            layer = view.shapes.add_pocket_blob(
-                centers=puw.quantity(sphere_centers, 'nm'),
-                radii=puw.quantity(sphere_radii, 'nm'),
+            layer = add_pocket_blob(
+                view,
+                sphere_geometry,
                 values=values,
                 color_map=color_map,
                 alpha=alpha,
@@ -89,9 +90,10 @@ def show_topography_pockets(
             )
             continue
 
-        if center is not None:
-            layer = view.shapes.add_sphere(
-                center=puw.quantity(center, 'nm'),
+        if marker_geometry.coordinates:
+            layer = add_point_spheres(
+                view,
+                marker_geometry,
                 radius=puw.quantity(_marker_radius_from_feature(feature), 'nm'),
                 color=marker_color,
                 alpha=marker_alpha,
