@@ -277,7 +277,8 @@ ladder).
 - **Phase 3 — DONE (mouths).** A wet domain promotes to its concavity feature
   (`Pocket`/`Void`/`Channel`) with local `feature.component_id` and contextual
   `source_id = component_key`; each mouth motif (external link) promotes to a child
-  `Mouth` feature wired via `connect_features` (parent concavity → child mouth).
+  `Mouth` feature wired via `connect_features` (parent concavity → child mouth)
+  with external-link provenance and `R_gate_*` quantities.
   §7.
 
 Beyond the four phases (also done):

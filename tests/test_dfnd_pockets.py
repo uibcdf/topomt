@@ -1,5 +1,6 @@
 from pathlib import Path
 
+from topomt import pyunitwizard as puw
 from topomt.dfnd import dfnd
 
 
@@ -24,7 +25,7 @@ def test_dfnd_public_api_smoke_with_molsysmt_input(tmp_path):
 
     result = dfnd(
         str(pdb_path),
-        probe_radius=1.4,
+        probe_radius=puw.quantity(1.4, 'angstroms'),
         min_size=0,
         hydrogen_policy='exclude',
         transit_policy='resident_only',
@@ -49,7 +50,7 @@ def test_get_topography_dfnd_returns_topography_with_raw_records(tmp_path):
     topography = get_topography(
         str(pdb_path),
         method='dfnd',
-        probe_radius=1.4,
+        probe_radius=puw.quantity(1.4, 'angstroms'),
         min_size=0,
         hydrogen_policy='exclude',
         transit_policy='resident_only',
@@ -97,7 +98,7 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
         str(pdb_path),
         method='dfnd',
         selection="molecule_type in ['protein', 'peptide']",
-        probe_radius=1.4,
+        probe_radius=puw.quantity(1.4, 'angstroms'),
         min_size=0,
         hydrogen_policy='exclude',
         transit_policy='with_connectors',
@@ -169,9 +170,24 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
         )
         assert feature.source_id == feature.component_key
 
+    external_links_by_key = {
+        link['external_link_key']: link for link in records['external_links']
+    }
     for mouth in topography.get_features(by='type', value='mouth'):
         parent = next(iter(topography.parents_of(mouth.feature_id)))
         assert mouth.component_key == parent.component_key
         assert mouth.parent_component_key == parent.component_key
         assert mouth.external_link_key
         assert mouth.source_id == mouth.external_link_key
+        source_link = external_links_by_key[mouth.external_link_key]
+        assert mouth.external_link_record is source_link
+        assert mouth.external_link_id == source_link['external_link_id']
+        assert mouth.external_link_support_key == source_link['external_link_support_key']
+        assert mouth.face_ids == source_link['face_ids']
+        assert mouth.tetrahedron_ids == source_link['tetrahedron_ids']
+        assert mouth.faces == source_link['faces']
+        assert mouth.flags == source_link['flags']
+        assert puw.get_value(mouth.area, to_unit='nm**2') == source_link['area_geometric']
+        assert puw.get_value(mouth.R_gate_min, to_unit='nm') == source_link['R_gate_min']
+        assert puw.get_value(mouth.R_gate_mean, to_unit='nm') == source_link['R_gate_mean']
+        assert puw.get_value(mouth.R_gate_max, to_unit='nm') == source_link['R_gate_max']

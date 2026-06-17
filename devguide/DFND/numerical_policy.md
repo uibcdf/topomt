@@ -9,8 +9,9 @@ so that DFND can report what it knows and what remains uncertain.
 ## 1. Probe Radius and Exterior Reference
 
 DFND uses a probe radius as the central physical scale. The canonical default is
-`probe_radius = 1.4 angstroms`. Probe accessibility to the exterior is determined
-by permeable paths to hull faces and the virtual `OCEAN` node.
+`probe_radius = 0.14 nm` (the canonical 1.4 Å probe). Probe accessibility
+to the exterior is determined by permeable paths to hull faces and the virtual
+`OCEAN` node.
 
 DFND has no `sea_level` parameter. Exterior access is defined directly through
 probe-permeable hull contacts to `OCEAN`. A future coarse exterior-envelope mode
@@ -82,8 +83,8 @@ Used for radii, distances, gate radii, and habitability radii.
 
 Initial discussion value:
 
-- `epsilon_length = 1e-6 angstroms` for unit-level tests and deterministic
-  synthetic geometries.
+- `epsilon_length = 1e-7 nm` (equivalent to 1e-6 Å) for unit-level tests and
+  deterministic synthetic geometries.
 
 Open discussion:
 

@@ -1,3 +1,5 @@
+import warnings
+from numbers import Real
 from typing import Any
 
 import numpy as np
@@ -22,17 +24,24 @@ _FEATURE_CLASS_BY_FAMILY = {
 _FAMILIES_WITH_MOUTHS = {'pockets', 'channels'}
 
 
-def _as_nm_float(value) -> float:
-    """Normalize a length to nanometers (DFND's internal unit).
+def _public_length_to_nm(name: str, value: Any) -> float:
+    """Normalize a public DFND length argument to nanometers.
 
-    A PyUnitWizard quantity is converted from its own unit. A bare number is
-    interpreted as angstroms (the cavity-detection domain convention, e.g. the
-    1.4 angstrom water probe) and converted to nanometers.
+    Quantities are the canonical public form. Bare numeric values are legacy
+    compatibility inputs, interpreted as angstroms and warned.
     """
-    try:
+    if puw.is_quantity(value):
         return float(puw.get_value(value, to_unit='nm'))
-    except Exception:
+    if isinstance(value, Real):
+        warnings.warn(
+            f"DFND length argument '{name}' received a bare float. Bare floats "
+            'are deprecated in public APIs; pass a PyUnitWizard quantity instead. '
+            'For compatibility this value is interpreted as angstroms.',
+            FutureWarning,
+            stacklevel=3,
+        )
         return float(value) * 0.1
+    return float(puw.get_value(value, to_unit='nm'))
 
 
 def _feature_from_component_record(
@@ -120,7 +129,7 @@ def _run_dfnd(
     mesh_values = {
         'selection': selection,
         'structure_indices': structure_indices,
-        'epsilon': epsilon,
+        'epsilon': _public_length_to_nm('epsilon', epsilon),
         'hydrogen_policy': hydrogen_policy,
         'radii_model': radii_model,
     }
@@ -141,9 +150,13 @@ def _run_dfnd(
         )
 
     query_values = {
-        'probe_radius': _as_nm_float(probe_radius),
-        'residence_tolerance': residence_tolerance,
-        'permeability_tolerance': permeability_tolerance,
+        'probe_radius': _public_length_to_nm('probe_radius', probe_radius),
+        'residence_tolerance': _public_length_to_nm(
+            'residence_tolerance', residence_tolerance
+        ),
+        'permeability_tolerance': _public_length_to_nm(
+            'permeability_tolerance', permeability_tolerance
+        ),
         'transit_policy': transit_policy,
         'gate_intrusion_policy': gate_intrusion_policy,
         'dry_adjacency': dry_adjacency,
@@ -173,15 +186,15 @@ def dfnd_to_topography(
     molecular_system,
     selection: str = 'all',
     structure_indices: int = 0,
-    probe_radius: float = 1.4,
+    probe_radius: Any = puw.quantity(1.4, 'angstroms'),
     min_size: int = 0,
-    epsilon: float = 1e-7,
+    epsilon: Any = puw.quantity(1e-6, 'angstroms'),
     hydrogen_policy: str = 'exclude',
     radii_model: str = 'vdw',
     transit_policy: str = 'with_connectors',
     gate_intrusion_policy: str = 'flag_only',
-    residence_tolerance: float = 0.0,
-    permeability_tolerance: float = 0.0,
+    residence_tolerance: Any = puw.quantity(0.0, 'angstroms'),
+    permeability_tolerance: Any = puw.quantity(0.0, 'angstroms'),
     dry_adjacency: str = 'face',
     mesh_config: DFNDMeshConfig | None = None,
     query: DFNDQuery | None = None,
@@ -249,7 +262,15 @@ def dfnd_to_topography(
                 mouth.external_link_id = link['external_link_id']
                 mouth.external_link_support_key = link['external_link_support_key']
                 mouth.external_link_key = link['external_link_key']
+                mouth.external_link_record = link
+                mouth.face_ids = list(link.get('face_ids', []))
+                mouth.tetrahedron_ids = list(link.get('tetrahedron_ids', []))
+                mouth.faces = [list(face) for face in link.get('faces', [])]
+                mouth.flags = list(link.get('flags', []))
                 mouth.area = puw.quantity(link['area_geometric'], 'nm**2')
+                mouth.R_gate_min = puw.quantity(link['R_gate_min'], 'nm')
+                mouth.R_gate_mean = puw.quantity(link['R_gate_mean'], 'nm')
+                mouth.R_gate_max = puw.quantity(link['R_gate_max'], 'nm')
                 topography.add_feature(mouth)
                 topography.connect_features(mouth, feature)
 
@@ -260,15 +281,15 @@ def dfnd(
     molecular_system,
     selection: str = 'all',
     structure_indices: int = 0,
-    probe_radius: float = 1.4,
+    probe_radius: Any = puw.quantity(1.4, 'angstroms'),
     min_size: int = 0,
-    epsilon: float = 1e-7,
+    epsilon: Any = puw.quantity(1e-6, 'angstroms'),
     hydrogen_policy: str = 'exclude',
     radii_model: str = 'vdw',
     transit_policy: str = 'with_connectors',
     gate_intrusion_policy: str = 'flag_only',
-    residence_tolerance: float = 0.0,
-    permeability_tolerance: float = 0.0,
+    residence_tolerance: Any = puw.quantity(0.0, 'angstroms'),
+    permeability_tolerance: Any = puw.quantity(0.0, 'angstroms'),
     dry_adjacency: str = 'face',
     mesh_config: DFNDMeshConfig | None = None,
     query: DFNDQuery | None = None,

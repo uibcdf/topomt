@@ -770,7 +770,7 @@ def test_show_dfnd_tetrahedra_creates_shapes():
                 'local_atom_indices': [10, 11, 12, 13],
                 'combined_class': 'wet_sealed',
                 'transit_role': 'resident_transit',
-                'R_residence': 2.15,
+                'R_residence': 0.215,
                 'residence_state': 'resident',
             },
             {
@@ -2361,6 +2361,23 @@ def test_dfnd_index_space_helpers_and_geometry_conversion_are_explicit():
         == MOLECULAR_SYSTEM
     )
     assert _body_labels_from_dry([comp]) == {10: 0, 30: 0}
+
+
+def test_dfnd_face_label_converts_raw_nm_gate_to_angstroms():
+    from molsysviewer_topomt.render._common import _dfnd_face_label
+
+    label = _dfnd_face_label(
+        {
+            'face_id': 7,
+            'owner_tetrahedron_id': 1,
+            'neighbor_tetrahedron_id': 2,
+            'permeability_state': 'permeable',
+            'R_gate': 0.215,
+        },
+        7,
+    )
+
+    assert 'R_gate=2.15 Å' in label
 
 
 def test_dfnd_owned_payloads_declare_atom_index_space():

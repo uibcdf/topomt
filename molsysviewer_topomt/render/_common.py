@@ -13,6 +13,25 @@ DEFAULT_MARKER_ALPHA = 0.55
 DEFAULT_MARKER_COLOR = 0xD95F02
 DEFAULT_MARKER_RADIUS_NM = 0.12
 
+
+def _angstrom_from_nm(value):
+    return float(value) * 10.0
+
+
+def _angstrom2_from_nm2(value):
+    return float(value) * 100.0
+
+
+def _angstrom3_from_nm3(value):
+    return float(value) * 1000.0
+
+
+def _angstrom_label_from_nm(value, digits=2):
+    if isinstance(value, (int, float)):
+        return f'{_angstrom_from_nm(value):.{digits}f} Å'
+    return 'unknown'
+
+
 _FACE_PERMEABILITY_COLORS = {
     'permeable': 0x93C5FD,
     'non_permeable': 0xE3C98A,
@@ -115,10 +134,7 @@ def _dfnd_face_label(face: dict[str, Any], fallback_face_id: int) -> str:
     neighbor_label = 'OCEAN' if neighbor == -1 else neighbor
     permeability = face.get('permeability_state', 'unknown')
     r_gate = face.get('R_gate')
-    if isinstance(r_gate, (int, float)):
-        r_gate_label = f'{float(r_gate):.2f} Å'
-    else:
-        r_gate_label = 'unknown'
+    r_gate_label = _angstrom_label_from_nm(r_gate)
     return (
         f'Face id {face_id}: tetrahedra {owner}-{neighbor_label}; '
         f'permeability={permeability}; '

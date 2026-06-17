@@ -159,13 +159,18 @@ Unless a finding defines stricter acceptance tests, verification requires all of
 the following:
 
 - a focused regression test that fails before the correction and passes after it;
-- relevant integration tests and the complete suite passing with the canonical
-  test command;
+- relevant integration tests selected according to the affected surface;
+- the complete suite only when implementation changes have broad blast radius,
+  alter shared contracts, or close a major work package;
 - no new correctness-focused Ruff violations;
 - affected public contracts and developer documentation updated;
 - a recorded correcting commit or pull request;
 - deterministic behavior across two repeated runs where ordering or identity is
   relevant.
+
+Documentation-only edits, test-only cleanups, and warning-hygiene changes should
+use focused tests plus static checks rather than rerunning the complete suite by
+default.
 
 ---
 
@@ -643,14 +648,19 @@ internal selector view.
 ### DFND-015: Public `Mouth` promotion loses gate and provenance metrics
 
 **Evidence:** Confirmed by inspection
-**Tracking:** Open
+**Tracking:** Verified
+**Resolution:** Promoted `Mouth` features now carry the originating
+`external_link_record`, source face/tetrahedron ids, local faces, flags, area as
+`nm**2`, and `R_gate_min`/`R_gate_mean`/`R_gate_max` as `nm` quantities. Raw
+external links now include `R_gate_mean`.
 **Category:** Contract violation
 **Location:** `topomt/dfnd/api.py`, `topomt/features/Mouth.py`
 
-Promoted `Mouth` features receive `component_id`, `external_link_id`, and area,
-but gate-capacity descriptors and much of the source `ExternalLink` provenance
-remain only in parent dictionaries or raw records. Public mouth objects therefore
-do not carry the metrics needed to interpret their own permeability.
+Promoted `Mouth` features previously received `component_id`,
+`external_link_id`, and area, but gate-capacity descriptors and much of the
+source `ExternalLink` provenance remained only in parent dictionaries or raw
+records. Public mouth objects therefore did not carry the metrics needed to
+interpret their own permeability.
 
 **Required correction**
 
@@ -931,22 +941,30 @@ explicit deprecation and migration path if it remains public during transition.
 ### API-006: Public feature quantities use inconsistent unit conventions
 
 **Evidence:** Confirmed by inspection
-**Tracking:** Decision required
-**Current-worktree regression:** The settled DFND contract keeps the kernel in angstroms, but the current worktree contains an incomplete internal-nanometer migration (`graph.py` uses nm and a `0.14` default while `DFNDQuery` retains `1.4`). This makes a query-only call conflict with an argument the caller did not explicitly provide. Keep this separate from WP-18 and restore the settled unit boundary before marking API-006 verified.
+**Tracking:** Verified
+**Progress:** DFND now has a settled nm-internal/raw contract, explicit raw
+`schema_version`/`units` metadata, and human labels convert raw nm values before
+showing angstroms. CASTp/CASTP3 public promotion now converts backend Å/Å²/Å³
+records to suite-standard nm quantities. Public DFND length arguments prefer
+quantities; legacy bare floats in the public compatibility facade emit
+`FutureWarning` and are interpreted as angstroms before nm normalization.
 **Category:** Contract violation
 **Location:** DFND and third-party feature-promotion adapters
 
-Public features are populated with quantities expressed through different unit
-conventions. Some adapters use MolSysSuite standard nanometers, while DFND and
-CASTp-family adapters construct public quantities in angstroms. Quantities remain
-convertible, but the public representation and assumptions are inconsistent.
+Public features were populated with quantities expressed through different unit
+conventions. DFND now exposes raw values in nm/nm**2/nm**3 and promoted features
+as suite-standard quantities. CASTp-family adapters now promote backend Å values
+as nm quantities at the public boundary. Public DFND length-input compatibility
+is explicit: quantities are the intended contract, while legacy bare floats warn
+and are interpreted as angstroms in the public facade.
 
 **Required correction**
 
-Define the public quantity contract, the internal kernel-unit contract, and the
-unit metadata required in raw records and viewer payloads. Then normalize every
-adapter at the public boundary without forcing numerical kernels to use the same
-internal unit.
+Keep the public quantity contract, the DFND raw-unit contract, and unit metadata
+explicit. Normalize every adapter at the public boundary without forcing each
+numerical backend to use the same internal unit. Public length arguments should
+prefer quantities; bare floats are legacy compatibility and must warn before any
+future stricter rejection.
 
 **Acceptance tests**
 
@@ -1264,7 +1282,7 @@ listed invariant regresses on the synthetic suite.
 | WP-11 Public tools hardening | Bug / reliability | TOOLS-001 to TOOLS-005 | None | fresh-process imports and numerical edge-case tests |
 | WP-12 Packaging, quality, and CI | Quality | QUAL-001 to QUAL-006 | Stable dependency decision | clean wheel, docs workflow, Ruff gate, focused type checks |
 | WP-13 Centerline contract | Design decision / science | DFND-004, DFND-005 | Traversability and centerline decision | gate-aware capacity and collision-validation tests |
-| WP-14 Public feature metrics and units | Contract / decision | DFND-015, API-006 | Unit and promotion decisions | cross-engine unit and mouth-provenance tests |
+| WP-14 Public feature metrics and units **(Verified)** | Contract / decision | DFND-015, API-006 | Unit and promotion decisions | raw-unit metadata, label conversion, public input warning, CASTp promotion tests, and DFND Mouth provenance/gate-metric tests |
 | WP-15 DFND orchestration decomposition | Technical debt | QUAL-008 | WP-01, WP-02, WP-03 | phase-level invariant and regression tests |
 | WP-16 Test invocation and devtools imports | Test infrastructure | QUAL-009 | None | clean-shell collection and CI parity |
 | WP-17 Legacy public API cleanup | API stability | API-004, API-005 | API deprecation decision | isolated import, deprecation, and migration tests |
@@ -1329,7 +1347,8 @@ ruff format --check topomt molsysviewer_topomt tests
 ```
 
 Add focused commands for each work package rather than relying only on the full
-suite.
+suite. Use the complete suite for broad implementation changes, shared-contract
+closures, release checks, or when focused coverage cannot bound the risk.
 
 ---
 

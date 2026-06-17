@@ -52,7 +52,8 @@ The active implementation now covers the first v1 substrate:
 - organize all DFND output under the single `topography.dfnd` (`DFNDData`); the
   public `Topography` top level holds only the promoted features (no `dfnd_*`
   attributes). Wet components promote to `Pocket`/`Void`/`Channel` with mouths as
-  child `Mouth` features (contextual component provenance via `component_key`);
+  child `Mouth` features (contextual component provenance via `component_key`;
+  mouth provenance and gate metrics via `external_link_key` / `R_gate_*`);
 - build a dry complement with dry-edge face records, dry interfaces, dry depth, and first candidate dry motifs.
 
 Static component identity now exposes local rank-derived `component_id`,
@@ -60,7 +61,8 @@ Static component identity now exposes local rank-derived `component_id`,
 `support_key`, contextual `component_key`, and recoverable tetrahedron support.
 Equal-size ordering uses `support_key`, while `graph_label` remains internal.
 Promoted wet parent features use `component_key` as `source_id`; promoted
-mouths use `external_link_key` as `source_id` and carry `parent_component_key`.
+mouths use `external_link_key` as `source_id`, carry `parent_component_key`,
+and expose source face/tetrahedron ids plus `area` and `R_gate_*` quantities.
 External links and wet/dry motifs expose exact support keys and contextual keys.
 Raw and typed relations expose contextual component keys additively while
 retaining local component IDs for display and compatibility. The dynamic
@@ -123,7 +125,7 @@ Known gaps:
 - `tests/test_dfnd_pockets.py` is now an active public-API smoke test through MolSysMT input.
 - Direct dfnd(...) calls still return the raw-first nested dictionary used for method development and validation.
 - `get_topography(method="dfnd")` currently promotes only void, pocket, and channel components into public `Topography` features; provisional surface-concavity, nonresident-passage, degenerate-subprobe, and dry records remain available through `topography.dfnd`.
-- Feature objects receive atom indices, tetrahedron indices, centers, topological resident volume, deterministic local solvent-volume estimate, mouth counts, mouth area, flags, and the raw component record.
+- Feature objects receive atom indices, tetrahedron indices, centers, topological resident volume, deterministic local solvent-volume estimate, mouth counts, mouth area, flags, and the raw component record. Promoted `Mouth` features also receive the source external-link record, source face/tetrahedron ids, area, and `R_gate_min`/`R_gate_mean`/`R_gate_max` quantities.
 - The working `COAST` rule is defined, but its contribution to reported metrics remains a policy decision.
 - Face-index, gate identity, shared-face consistency, and external-link clustering have graph-contract coverage; more pathological near-threshold cases still need expansion.
 - Basic near-threshold residence and gate cases are covered; broader degenerate and molecular near-threshold sweeps still need expansion.

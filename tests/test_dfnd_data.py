@@ -42,6 +42,19 @@ def _significant_voids(data):
     return [c for c in data.dfn.components.wet if c.family == 'void' and c.size >= 5]
 
 
+def test_raw_records_declare_nm_schema_and_units():
+    coords, radii = _argon_cube_arrays()
+    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    result = network.get_topography(probe_radius=1.4, min_size=0)
+    raw = result['raw']
+
+    assert raw['schema_version'] == 'dfnd.raw.nm.v1'
+    assert raw['units']['length'] == 'nm'
+    assert raw['units']['area'] == 'nm**2'
+    assert raw['units']['volume'] == 'nm**3'
+    assert raw['parameters']['probe_radius'] == pytest.approx(0.14)
+
+
 def test_get_tetrahedra_returns_raw_records_by_id():
     data = object.__new__(DFNDData)
     data.raw = {
@@ -65,7 +78,7 @@ def test_at_probe_reuses_the_mesh_and_recomputes_the_decomposition():
     # The dumbbell: one void at a small probe, two voids when the throat closes.
     coords, radii = syn.dumbbell(7.0, 12.5, 3.5, jitter=0.1, seed=0)
     data = _data(coords, radii, probe_radius=1.4)
-    reprobed = data.at_probe(2.2)
+    reprobed = data.at_probe(puw.quantity(2.2, 'angstroms'))
 
     # the expensive mesh is shared, not rebuilt
     assert reprobed.network is data.network
@@ -86,7 +99,7 @@ def test_at_probe_inherits_query_options():
     )
     data = DFNDData(network, result)
 
-    reprobed = data.at_probe(1.2)
+    reprobed = data.at_probe(puw.quantity(1.2, 'angstroms'))
     assert reprobed.dfn.parameters['transit_policy'] == 'resident_only'  # inherited
 
 
@@ -174,7 +187,7 @@ def test_tolerances_recorded_and_inherited_by_at_probe():
 
     assert data.dfn.parameters['residence_tolerance'] == pytest.approx(0.01)
     assert data.dfn.parameters['permeability_tolerance'] == pytest.approx(0.02)
-    reprobed = data.at_probe(1.4)  # tolerances inherited unless overridden
+    reprobed = data.at_probe(puw.quantity(1.4, 'angstroms'))  # tolerances inherited
     assert reprobed.dfn.parameters['residence_tolerance'] == pytest.approx(0.01)
     assert reprobed.dfn.parameters['permeability_tolerance'] == pytest.approx(0.02)
 
@@ -243,6 +256,29 @@ def test_info_queries_original_molecular_system_with_global_atom_indices(monkeyp
     assert calls
     assert all(system == 'original-system' for system, _selection, _kwargs in calls)
     assert all(selection == [10, 20, 30, 40] for _system, selection, _kwargs in calls)
+
+
+def test_info_presents_raw_nm_lengths_and_volumes_as_angstroms(capsys):
+    data = object.__new__(DFNDData)
+    data._network = types.SimpleNamespace(molecular_system=None)
+    data.raw = {
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 3,
+                'atom_indices': [10, 20, 30, 40],
+                'volume_topological': 1.5,
+                'volume_solvent_estimate': 1.25,
+                'R_residence': 0.215,
+            }
+        ]
+    }
+
+    data.info(3)
+
+    output = capsys.readouterr().out
+    assert 'Topological Vol  : 1500.0 Å³' in output
+    assert 'Solvent Est. Vol : 1250.0 Å³' in output
+    assert 'Clearance (R_res): 2.150 Å' in output
 
 
 def test_info_uses_global_indices_after_hydrogen_exclusion(tmp_path, monkeypatch):

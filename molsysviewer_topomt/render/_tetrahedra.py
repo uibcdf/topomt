@@ -8,7 +8,12 @@ from typing import Any
 from topomt import pyunitwizard as puw
 
 from ..geometry import tetrahedra_geometry
-from ._common import _dfnd_edge_meta, _dfnd_face_meta, _resolve_topography
+from ._common import (
+    _angstrom_label_from_nm,
+    _dfnd_edge_meta,
+    _dfnd_face_meta,
+    _resolve_topography,
+)
 from .adapters import add_tetrahedra
 from .result import (
     RenderResult,
@@ -181,7 +186,7 @@ def _show_dfnd_tetrahedra_legacy(
             f'Tetrahedron {tet.get("tetrahedron_id", idx)}: '
             f'combined_class={tet.get("combined_class", "unknown")}, '
             f'role={tet.get("transit_role", "unknown")}, '
-            f'R_res={tet.get("R_residence", 0.0):.2f} Å'
+            f'R_res={_angstrom_label_from_nm(tet.get("R_residence", 0.0))}'
         )
         labels.append(lbl)
 

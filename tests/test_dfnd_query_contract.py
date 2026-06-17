@@ -6,6 +6,7 @@ from dataclasses import FrozenInstanceError
 import numpy as np
 import pytest
 
+from topomt import pyunitwizard as puw
 from topomt.dfnd.config import DFNDMeshConfig, DFNDQuery
 from topomt.dfnd.data import DFNDData
 from topomt.dfnd.graph import DelaunayFlowNetwork
@@ -42,6 +43,32 @@ def test_mesh_config_and_query_are_frozen_and_keep_epsilon_on_the_mesh_side():
         network.mesh_config.epsilon = 1e-6
 
 
+def test_typed_configs_accept_quantities_and_normalize_to_nm():
+    query = DFNDQuery(
+        probe_radius=puw.quantity(1.4, 'angstroms'),
+        residence_tolerance=puw.quantity(0.1, 'angstroms'),
+        permeability_tolerance=puw.quantity(0.2, 'angstroms'),
+    )
+    mesh_config = DFNDMeshConfig(epsilon=puw.quantity(1e-6, 'angstroms'))
+
+    assert query.probe_radius == pytest.approx(0.14)
+    assert query.residence_tolerance == pytest.approx(0.01)
+    assert query.permeability_tolerance == pytest.approx(0.02)
+    assert mesh_config.epsilon == pytest.approx(1e-7)
+
+
+
+def test_public_length_float_compatibility_warns_and_interprets_angstroms():
+    from topomt.dfnd.api import _public_length_to_nm
+
+    with pytest.warns(FutureWarning, match='bare float'):
+        assert _public_length_to_nm('probe_radius', 1.4) == pytest.approx(0.14)
+    with pytest.warns(FutureWarning, match='bare float'):
+        assert _public_length_to_nm('residence_tolerance', 0.1) == pytest.approx(0.01)
+    assert _public_length_to_nm(
+        'permeability_tolerance', puw.quantity(0.2, 'angstroms')
+    ) == pytest.approx(0.02)
+
 def test_query_drives_result_identity_but_reporting_min_size_does_not():
     network = _network()
     query = DFNDQuery(probe_radius=0.14, dry_adjacency='vertex')
@@ -65,9 +92,9 @@ def test_at_probe_preserves_every_unspecified_query_and_reporting_option():
     network = _network()
     result = network.get_topography(
         query=DFNDQuery(
-            probe_radius=1.4,
-            residence_tolerance=0.1,
-            permeability_tolerance=0.2,
+            probe_radius=puw.quantity(1.4, 'angstroms'),
+            residence_tolerance=puw.quantity(0.1, 'angstroms'),
+            permeability_tolerance=puw.quantity(0.2, 'angstroms'),
             transit_policy='resident_only',
             gate_intrusion_policy='block_suspect',
             dry_adjacency='vertex',
@@ -75,7 +102,7 @@ def test_at_probe_preserves_every_unspecified_query_and_reporting_option():
         min_size=7,
     )
 
-    reprobed = DFNDData(network, result).at_probe(1.2)
+    reprobed = DFNDData(network, result).at_probe(puw.quantity(1.2, 'angstroms'))
 
     assert reprobed.dfn.parameters['query'] == {
         **result['raw']['parameters']['query'],
@@ -83,6 +110,16 @@ def test_at_probe_preserves_every_unspecified_query_and_reporting_option():
     }
     assert reprobed.dfn.parameters['reporting']['min_size'] == 7
 
+
+
+def test_at_probe_warns_for_legacy_bare_float_probe_radius():
+    network = _network()
+    data = DFNDData(network, network.get_topography())
+
+    with pytest.warns(FutureWarning, match='bare float'):
+        reprobed = data.at_probe(1.2)
+
+    assert reprobed.dfn.parameters['query']['probe_radius'] == pytest.approx(0.12)
 
 def test_at_probe_rejects_mesh_configuration_overrides():
     network = _network()

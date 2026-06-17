@@ -759,6 +759,9 @@ class DelaunayFlowNetwork:
                         'R_gate_min': float(
                             min(record['R_gate'] for record in cluster)
                         ),
+                        'R_gate_mean': float(
+                            np.mean([record['R_gate'] for record in cluster])
+                        ),
                         'R_gate_max': float(
                             max(record['R_gate'] for record in cluster)
                         ),
@@ -1075,6 +1078,17 @@ class DelaunayFlowNetwork:
 
         return {
             'raw': {
+                'schema_version': 'dfnd.raw.nm.v1',
+                'units': {
+                    'length': 'nm',
+                    'area': 'nm**2',
+                    'volume': 'nm**3',
+                    'coordinates': 'nm',
+                    'R_residence': 'nm',
+                    'R_gate': 'nm',
+                    'probe_radius': 'nm',
+                    'epsilon': 'nm',
+                },
                 'parameters': parameters,
                 'tetrahedra': tetrahedron_records,
                 'faces': face_records,

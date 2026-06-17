@@ -1,11 +1,14 @@
 from typing import Any
-import numpy as np
+
 import molsysmt as msm
+import numpy as np
+from scipy.spatial import cKDTree
+
 from . import pyunitwizard as puw
-from .topography.Topography import Topography
 from ._private.arg_digestion import arg_digest
 from ._private.smonitor import signal
-from scipy.spatial import cKDTree
+from .topography.Topography import Topography
+
 
 @signal(tags=["api", "topography"])
 @arg_digest()
@@ -123,9 +126,11 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
     if implementation not in {'wrapper', 'native', 'topomt'}:
         raise ValueError("implementation must be 'wrapper', 'native' or 'topomt'")
 
-    from .third_party.alphaspace2.library import get_topography as get_library_topography
-    from .third_party.alphaspace2.native import _state_to_pocket_records, alphaspace2
     from .features.Pocket import Pocket
+    from .third_party.alphaspace2.library import (
+        get_topography as get_library_topography,
+    )
+    from .third_party.alphaspace2.native import _state_to_pocket_records, alphaspace2
 
     if implementation == 'wrapper':
         return get_library_topography(
@@ -232,15 +237,25 @@ def _run_castp(topo: Topography, **kwargs) -> Topography:
         parent_feature = topo[parent_feature_id]
 
         if 'center' in record and record['center'] is not None:
-            parent_feature.center = puw.quantity(record['center'], 'angstroms')
+            parent_feature.center = puw.quantity(
+                np.asarray(record['center']) / 10.0, 'nm'
+            )
         if 'area' in record and record['area'] is not None:
-            parent_feature.area = puw.quantity(record['area'], 'angstroms**2')
+            parent_feature.area = puw.quantity(
+                float(record['area']) / 100.0, 'nm**2'
+            )
         if 'volume' in record and record['volume'] is not None:
-            parent_feature.volume = puw.quantity(record['volume'], 'angstroms**3')
+            parent_feature.volume = puw.quantity(
+                float(record['volume']) / 1000.0, 'nm**3'
+            )
         if 'mouth_area' in record and record['mouth_area'] is not None:
-            parent_feature.mouth_area = puw.quantity(record['mouth_area'], 'angstroms**2')
+            parent_feature.mouth_area = puw.quantity(
+                float(record['mouth_area']) / 100.0, 'nm**2'
+            )
         if 'mouth_perimeter' in record and record['mouth_perimeter'] is not None:
-            parent_feature.mouth_perimeter = puw.quantity(record['mouth_perimeter'], 'angstroms')
+            parent_feature.mouth_perimeter = puw.quantity(
+                float(record['mouth_perimeter']) / 10.0, 'nm'
+            )
         if 'n_mouths' in record:
             parent_feature.n_mouths = record['n_mouths']
         if 'iT' in record:
@@ -258,7 +273,9 @@ def _run_castp(topo: Topography, **kwargs) -> Topography:
                 atom_indices=sorted(mouth.get('atom_indices', [])),
                 source='castp',
                 source_id=f'{source_id}:mouth:{mouth["id"]}',
-                area=puw.quantity(mouth.get('area', 0.0), 'angstroms**2'),
+                area=puw.quantity(
+                    float(mouth.get('area', 0.0)) / 100.0, 'nm**2'
+                ),
             )
             topo.connect_features(mouth_feature_id, parent_feature_id)
 

@@ -28,7 +28,13 @@ from ..index_spaces import MOLECULAR_SYSTEM
 from ..index_spaces import (
     atom_indices as indices_in_space,
 )
-from ._common import _dfnd_edge_meta, _dfnd_face_meta, _resolve_topography
+from ._common import (
+    _angstrom2_from_nm2,
+    _angstrom3_from_nm3,
+    _dfnd_edge_meta,
+    _dfnd_face_meta,
+    _resolve_topography,
+)
 from .adapters import (
     add_channel_tube,
     add_indexed_triangles,
@@ -514,7 +520,7 @@ def show_dfnd_labels(
         if n_mouths:
             parts.append(f'{n_mouths} mouth' + ('s' if n_mouths != 1 else ''))
         if volume:
-            parts.append(f'{float(volume):.0f} Å³')
+            parts.append(f'{_angstrom3_from_nm3(volume):.0f} Å³')
         text = ' · '.join(parts)
 
         layer = view.annotations.add_annotation(
@@ -1288,7 +1294,7 @@ def _show_dfnd_components_legacy(
                         f'Coast Face {face_id} | '
                         f'Wet: {face["wet_component_id"]} | '
                         f'Dry: {face["dry_component_id"]} | '
-                        f'Area: {face.get("area", 0.0):.2f} Å²'
+                        f'Area: {_angstrom2_from_nm2(face.get("area", 0.0)):.2f} Å²'
                     ),
                 )
 

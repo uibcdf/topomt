@@ -305,6 +305,13 @@ def test_run_castp_emits_feature_types_and_mouth_relations(topography_empty_1tcd
     assert puw.is_quantity(pocket.volume)
     assert puw.is_quantity(pocket.mouth_area)
     assert puw.is_quantity(pocket.mouth_perimeter)
+    assert np.allclose(puw.get_value(pocket.center, to_unit='nm'), [0.1, 0.2, 0.3])
+    assert puw.get_value(pocket.area, to_unit='nm**2') == pytest.approx(0.16)
+    assert puw.get_value(pocket.volume, to_unit='nm**3') == pytest.approx(0.01)
+    assert puw.get_value(pocket.mouth_area, to_unit='nm**2') == pytest.approx(0.04)
+    assert puw.get_value(pocket.mouth_perimeter, to_unit='nm') == pytest.approx(0.6)
+    mouth = topo['MOU-1']
+    assert puw.get_value(mouth.area, to_unit='nm**2') == pytest.approx(0.04)
     assert pocket.iT == [0, 1]
     assert pocket.n_mouths == 1
     assert topo.children_of(pocket.feature_id, as_feature_ids=True) == {'MOU-1'}

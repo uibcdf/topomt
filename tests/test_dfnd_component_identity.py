@@ -159,6 +159,7 @@ def test_component_relations_carry_contextual_component_keys():
         assert link['component_key'] == wet_component['component_key']
         assert link['external_link_support_key']
         assert link['external_link_key']
+        assert link['R_gate_min'] <= link['R_gate_mean'] <= link['R_gate_max']
     assert len(
         {link['external_link_key'] for link in wet_result['raw']['external_links']}
     ) == len(wet_result['raw']['external_links'])

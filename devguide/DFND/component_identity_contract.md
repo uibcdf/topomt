@@ -209,7 +209,8 @@ Implementation status on 2026-06-06:
 - equal-size ordering uses `support_key`, not `graph_label`;
 - promoted wet parent features carry the static identity fields and use
   `component_key` as `source_id`; promoted mouths use their `external_link_key` as
-  `source_id` and carry `parent_component_key`;
+  `source_id`, carry `parent_component_key`, and expose source external-link
+  provenance plus `R_gate_*` quantities;
 - external links and wet/dry motifs expose exact support keys and contextual keys;
 - raw and typed component relations carry contextual component keys additively,
   while local component IDs remain available for compatibility and display;

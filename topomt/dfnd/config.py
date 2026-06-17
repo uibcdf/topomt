@@ -5,6 +5,8 @@ from typing import Any
 
 import numpy as np
 
+from .. import pyunitwizard as puw
+
 
 def _freeze_sequence(value: Any) -> Any:
     if isinstance(value, np.ndarray):
@@ -19,6 +21,12 @@ def _non_negative_finite(name: str, value: float) -> float:
     if not np.isfinite(value) or value < 0.0:
         raise ValueError(f'{name} must be a finite non-negative number')
     return value
+
+
+def _length_to_nm(name: str, value: Any) -> float:
+    if puw.is_quantity(value):
+        value = puw.get_value(value, to_unit='nm')
+    return _non_negative_finite(name, value)
 
 
 @dataclass(frozen=True)
@@ -36,17 +44,13 @@ class DFNDMeshConfig:
         object.__setattr__(
             self, 'structure_indices', _freeze_sequence(self.structure_indices)
         )
-        object.__setattr__(
-            self, 'epsilon', _non_negative_finite('epsilon', self.epsilon)
-        )
+        object.__setattr__(self, 'epsilon', _length_to_nm('epsilon', self.epsilon))
         if self.hydrogen_policy not in {'exclude', 'include', 'provided_atoms'}:
             raise ValueError(
                 "hydrogen_policy must be 'exclude', 'include', or 'provided_atoms'"
             )
         if self.radii_model not in {'vdw', 'protor', 'provided'}:
-            raise ValueError(
-                "radii_model must be 'vdw', 'protor', or 'provided'"
-            )
+            raise ValueError("radii_model must be 'vdw', 'protor', or 'provided'")
 
     def to_dict(self) -> dict[str, Any]:
         """Return the canonicalizable configuration mapping."""
@@ -70,9 +74,7 @@ class DFNDQuery:
             'residence_tolerance',
             'permeability_tolerance',
         ):
-            object.__setattr__(
-                self, name, _non_negative_finite(name, getattr(self, name))
-            )
+            object.__setattr__(self, name, _length_to_nm(name, getattr(self, name)))
         if self.transit_policy not in {'resident_only', 'with_connectors'}:
             raise ValueError(
                 "transit_policy must be 'resident_only' or 'with_connectors'"

@@ -79,6 +79,13 @@ mouth uses its contextual `external_link_key` as its own `source_id` and carries
 `parent_component_key` to identify its parent component context. Neither field is
 temporal identity.
 
+Every promoted DFND `Mouth` must also expose the source external-link
+provenance and gate metrics: `external_link_id`, `external_link_key`,
+`external_link_support_key`, `external_link_record`, `face_ids`,
+`tetrahedron_ids`, `faces`, `flags`, `area`, `R_gate_min`, `R_gate_mean`, and
+`R_gate_max`. `area` is a PyUnitWizard quantity in `nm**2`; gate radii are
+quantities in `nm`.
+
 ## 5. Metrics Contract
 
 `volume_topological_resident` is a topological resident-cell volume descriptor.
@@ -98,8 +105,12 @@ rather than overloading existing topological fields.
 
 ## 6. Input Contract
 
-`probe_radius` accepts either a float in angstroms or a quantity convertible by
-PyUnitWizard to angstroms.
+`probe_radius`, `epsilon`, `residence_tolerance`, and
+`permeability_tolerance` should be supplied as PyUnitWizard quantities. Legacy
+bare floats are still accepted by the public compatibility facade, emit a
+`FutureWarning`, and are interpreted as angstroms before normalization to DFND
+raw nm. `DFNDData.at_probe()` follows the same compatibility rule for a bare
+`probe_radius`.
 
 The molecular input path is MolSysMT-based. `selection`, `structure_indices`,
 `hydrogen_policy`, `radii_model`, `transit_policy`, and
@@ -109,19 +120,23 @@ reproducibility.
 ## 7. Mesh, Query, and Reporting Contract
 
 `DFNDMeshConfig` records fields that determine the cached substrate, including
-`epsilon`. `DFNDQuery` records only fields that can change while reusing that
-substrate. Both are frozen typed objects and expose canonicalizable `to_dict()`
-mappings. The existing keyword-based API remains a compatibility facade.
+normalized-nm `epsilon`. `DFNDQuery` records only fields that can change while
+reusing that substrate and stores normalized-nm lengths. Both are frozen typed
+objects and expose canonicalizable `to_dict()` mappings. The existing
+keyword-based API remains a compatibility facade.
 
 `substrate_key` includes the mesh configuration. `result_key` combines that
 substrate identity with `DFNDQuery`; it reuses the canonical identity machinery
 in `identity.py`. Reporting filters do not affect result identity.
 
+Raw DFND records carry `schema_version = 'dfnd.raw.nm.v1'` and a `units` mapping;
+raw lengths, coordinates, areas, and volumes are bare nm/nm**2/nm**3 values.
+
 `min_size` is currently a compatibility/reporting filter: every wet and dry
 component remains in the decomposition and records whether it belongs in the
 compatibility view. `sea_level` is not part of DFND. `DFNDData.at_probe()`
-preserves all unspecified query and reporting
-fields and rejects changes to mesh configuration.
+preserves all unspecified query and reporting fields and rejects changes to mesh
+configuration.
 
 ## 8. Stability Policy
 

@@ -29,6 +29,15 @@ from typing import Any
 from .components import build_components
 from .config import DFNDQuery
 
+
+def _angstrom_from_nm(value):
+    return float(value) * 10.0
+
+
+def _angstrom3_from_nm3(value):
+    return float(value) * 1000.0
+
+
 # A record from graph.py mixes probe-independent geometry with probe-dependent
 # state. We split it so `mesh` exposes only geometry (built once, in principle)
 # and `dfn.graph` exposes only the per-probe state. `raw` keeps the full records.
@@ -248,11 +257,12 @@ class DFNDData:
         min_size = overrides.pop(
             'min_size', parameters.get('reporting', {}).get('min_size', 0)
         )
-        from .graph import _length_to_nm
+        from .api import _public_length_to_nm
 
         try:
             query = self.dfn.query.replace(
-                probe_radius=_length_to_nm(probe_radius), **overrides
+                probe_radius=_public_length_to_nm('probe_radius', probe_radius),
+                **overrides,
             )
         except TypeError as exc:
             raise ValueError(f'Unknown DFND query override: {exc}') from exc
@@ -260,7 +270,7 @@ class DFNDData:
         return DFNDData(self._network, result)
 
     def info(self, tetrahedron_id: Any = None) -> None:
-        """Print a premium scientific diagnostic card for one or several Delaunay tetrahedra."""
+        """Print a scientific diagnostic card for Delaunay tetrahedra."""
         import molsysmt as msm
         import numpy as np
 
@@ -272,7 +282,8 @@ class DFNDData:
         if tetrahedron_id is None:
             print(f'Topography has {len(tetrahedra_list)} Delaunay tetrahedra.')
             print(
-                'Please specify a tetrahedron_id (e.g., topography.dfnd.info(0)) to see its detailed diagnostic card.'
+                'Please specify a tetrahedron_id '
+                '(e.g., topography.dfnd.info(0)) to see its diagnostic card.'
             )
             return
 
@@ -322,7 +333,8 @@ class DFNDData:
                         system_atom_indices, atom_names, res_names, res_ids
                     ):
                         residue_details.append(
-                            f'Atom {a_idx} ({a_name}) inside Residue {r_name} (ID: {r_id})'
+                            f'Atom {a_idx} ({a_name}) inside Residue '
+                            f'{r_name} (ID: {r_id})'
                         )
                 except Exception:
                     residue_details = [f'Atom index: {a}' for a in system_atom_indices]
@@ -337,13 +349,16 @@ class DFNDData:
             print(f'  • Transit Role     : {tet_rec.get("transit_role", "N/A")}')
             print(f'  • Residence State  : {tet_rec.get("residence_state", "N/A")}')
             print('-' * 60)
-            print(
-                f'  • Topological Vol  : {tet_rec.get("volume_topological", "N/A")} Å³'
+            topological_volume = _angstrom3_from_nm3(
+                tet_rec.get('volume_topological', 0.0)
             )
-            print(
-                f'  • Solvent Est. Vol : {tet_rec.get("volume_solvent_estimate", "N/A")} Å³'
+            solvent_volume = _angstrom3_from_nm3(
+                tet_rec.get('volume_solvent_estimate', 0.0)
             )
-            print(f'  • Clearance (R_res): {tet_rec.get("R_residence", 0.0):.3f} Å')
+            residence_clearance = _angstrom_from_nm(tet_rec.get('R_residence', 0.0))
+            print(f'  • Topological Vol  : {topological_volume} Å³')
+            print(f'  • Solvent Est. Vol : {solvent_volume} Å³')
+            print(f'  • Clearance (R_res): {residence_clearance:.3f} Å')
             print('-' * 60)
             print('  • Atomic Lining composition:')
             for detail in residue_details:
