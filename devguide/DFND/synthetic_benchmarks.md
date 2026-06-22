@@ -148,9 +148,11 @@ diagnostic than comparing on a real protein with a fuzzy ground truth.
 
 ## Generator (implemented)
 
-`topomt/dfnd/synthetic.py` exposes one function per shape returning `(coords,
-radii)` with optional jitter, plus helpers (`_tube_surface`, `_grid_box`,
-`rotate`) and `to_pdb`. `devtools/dfnd/build_synthetic_catalog.py` defines the
+`topomt/dfnd/synthetic.py` exposes one function per shape returning a
+`SyntheticSystem` with `.coords`, `.radii`, optional `.elements`, explicit
+`.to_molsysmt()` / `.to_pdb(path)` conversion methods, and optional jitter.
+Helpers such as `_tube_surface`, `_grid_box`, and `rotate` remain plain numerical
+helpers. `devtools/dfnd/build_synthetic_catalog.py` defines the
 `CATALOG` (shape + parameters + probe + expected note), writes one PDB per entry
 to `topomt/data/synthetic/`, and regenerates that directory's `README.md` with
 the DFND family summary actually produced — so the documented answer can never

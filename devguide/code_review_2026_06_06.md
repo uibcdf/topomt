@@ -847,28 +847,30 @@ Define supported mesh requirements, sum signed contributions before applying the
 ### SYN-001: Synthetic builder return type depends on caller filename
 
 **Evidence:** Confirmed
-**Tracking:** Open
+**Tracking:** Verified
+**Resolution:** Synthetic builders now return an explicit `SyntheticSystem` in all
+caller contexts. Conversion to MolSysMT/PDB is requested through
+`.to_molsysmt()` / `.to_pdb(path)`, not by caller filename.
+
 **Location:** `topomt/dfnd/synthetic.py`
 
-A dynamic decorator inspects the caller filename. The same function can return
+A dynamic decorator inspected the caller filename. The same function could return
 `(coords, radii)` in tests or internal calls and a `MolSys` object in notebooks
 or user scripts.
-
-**Required correction**
-
-Use explicit stable APIs, preferably a `SyntheticSystem` result with `.coords`,
-`.radii`, `.elements`, `.to_molsysmt()`, and `.to_pdb(path)`.
 
 ### SYN-002: Dynamic synthetic wrapping breaks non-builder functions
 
 **Evidence:** Confirmed
-**Tracking:** Open
-**Progress:** The confirmed rotate() helper is excluded from dynamic builder wrapping. The broader caller-sensitive wrapping design remains open.
+**Tracking:** Verified
+**Resolution:** The module no longer wraps public callables dynamically. Builders
+produce `SyntheticSystem`; numerical helpers such as `rotate()` remain plain
+helpers.
 
 **Location:** `topomt/dfnd/synthetic.py`
 
-Every public callable is wrapped except a small exclusion list. This includes
-`rotate()`, whose array result is incorrectly unpacked as builder output.
+Every public callable was wrapped except a small exclusion list. This included
+`rotate()`, whose array result was incorrectly unpacked as builder output before
+the exclusion was added.
 
 ### API-001: `parse_atom_label()` raises `NameError` on invalid input
 
@@ -1195,7 +1197,7 @@ system.to_pdb(path)
 ### Phase 0: Freeze and characterize
 
 - Maintain regression coverage for verified DFND-001, VIEW-001, VIEW-003,
-  CORE-001, and CORE-003; add a failing regression for open SYN-002.
+  CORE-001, CORE-003, and the verified SYN-002 dynamic-wrapping regression.
 - Add invariant checks that can run against every synthetic system.
 - Record current component counts and identities before changing thresholds.
 
@@ -1278,7 +1280,7 @@ listed invariant regresses on the synthetic suite.
 | WP-07 Viewer runtime and subset semantics **(Verified)** | Contract violation | VIEW-003, VIEW-011 | Viewer ownership decision | source remains attached after every filter operation |
 | WP-08 Render lifecycle **(Verified)** | Reliability | VIEW-004, DFND-008, DFND-009, VIEW-006, VIEW-007 | Render-result decision | every representation renders twice and clears cleanly |
 | WP-09 Standalone and addon actions **(Verified)** | Bug / debt | VIEW-005, VIEW-009, VIEW-010 | WP-07, WP-08 | real emitted operations and action-state tests |
-| WP-10 Synthetic API stabilization | API contract | SYN-001, SYN-002 | None | identical behavior across callers and contexts |
+| WP-10 Synthetic API stabilization **(Verified)** | API contract | SYN-001, SYN-002 | None | `SyntheticSystem` contract tests and no caller-dependent wrapping |
 | WP-11 Public tools hardening | Bug / reliability | TOOLS-001 to TOOLS-005 | None | fresh-process imports and numerical edge-case tests |
 | WP-12 Packaging, quality, and CI | Quality | QUAL-001 to QUAL-006 | Stable dependency decision | clean wheel, docs workflow, Ruff gate, focused type checks |
 | WP-13 Centerline contract | Design decision / science | DFND-004, DFND-005 | Traversability and centerline decision | gate-aware capacity and collision-validation tests |

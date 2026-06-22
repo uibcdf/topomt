@@ -31,10 +31,10 @@ def _argon_points(points):
     """
     coords = np.asarray(points, dtype=float)
     radii = np.full(len(coords), syn.ARGON_VDW_RADIUS)
-    return coords, radii
+    return syn.SyntheticSystem(coords, radii)
 
 
-# (name, builder -> (coords, radii), probe_radius, expected-by-construction note)
+# (name, builder -> SyntheticSystem, probe_radius, expected-by-construction note)
 CATALOG = [
     # --- baseline / original battery ---
     (
@@ -555,12 +555,19 @@ def build(output_dir=OUTPUT_DIR):
     rows = []
     for name, builder, probe, note in CATALOG:
         built = builder()
-        elements = None
-        if len(built) == 3:  # (coords, radii, element_symbols)
-            coords, radii, elements = built
+        if isinstance(built, syn.SyntheticSystem):
+            coords = built.coords
+            radii = built.radii
+            built.to_pdb(output_dir / f'{name}.pdb')
         else:
-            coords, radii = built
-        syn.to_pdb(coords, radii, output_dir / f'{name}.pdb', elements=elements)
+            # Legacy local helpers should be migrated to SyntheticSystem, but keep
+            # this path explicit while the catalog is still script-oriented.
+            if len(built) == 3:
+                coords, radii, elements = built
+            else:
+                coords, radii = built
+                elements = None
+            syn.to_pdb(coords, radii, output_dir / f'{name}.pdb', elements=elements)
         families = _family_summary(coords, radii, probe)
         _write_system_doc(output_dir, name, len(coords), probe, note, families)
         rows.append((name, len(coords), probe, note, families))

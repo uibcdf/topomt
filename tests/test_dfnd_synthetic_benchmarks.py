@@ -8,9 +8,43 @@ exact cosphericity/lattice degeneracy so the triangulation is portable.
 """
 
 import numpy as np
+import pytest
 
-from topomt.dfnd.graph import DelaunayFlowNetwork
 from topomt.dfnd import synthetic as syn
+from topomt.dfnd.graph import DelaunayFlowNetwork
+
+
+def test_synthetic_builders_return_explicit_system(tmp_path):
+    system = syn.hollow_sphere(10.0, 3.5, jitter=0.1, seed=0)
+
+    assert isinstance(system, syn.SyntheticSystem)
+    assert system.n_atoms == system.coords.shape[0]
+    coords, radii = system.as_arrays()
+    assert coords.shape == system.coords.shape
+    assert radii.shape == system.radii.shape
+
+    legacy_coords, legacy_radii = system
+    assert np.array_equal(legacy_coords, coords)
+    assert np.array_equal(legacy_radii, radii)
+
+    pdb_path = tmp_path / 'hollow_sphere.pdb'
+    system.to_pdb(pdb_path)
+    assert pdb_path.read_text().startswith('HETATM')
+
+
+def test_synthetic_system_preserves_mixed_elements():
+    system = syn.mixed_radii_shell(10.0, 4.3, seed=0)
+
+    assert isinstance(system, syn.SyntheticSystem)
+    assert system.elements is not None
+    assert len(system.elements) == system.n_atoms
+    coords, radii, elements = system.as_arrays(include_elements=True)
+    assert coords.shape[0] == radii.shape[0] == len(elements)
+
+
+def test_synthetic_builders_do_not_accept_caller_dependent_output_switch():
+    with pytest.raises(TypeError):
+        syn.hollow_sphere(10.0, 3.5, to_molsysmt=True)
 
 
 def _domains(coords, radii, probe_radius=1.4):

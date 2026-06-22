@@ -10,7 +10,8 @@ wrong. It ties together the catalog (`topomt/data/synthetic/`), the generators
 ```python
 from topomt.dfnd import synthetic as syn
 from topomt.dfnd.graph import DelaunayFlowNetwork
-coords, radii = syn.<generator>(...)                 # or read the .pdb
+system = syn.<generator>(...)                       # or read the .pdb
+coords, radii = system.as_arrays()
 net = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
 topo = net.get_topography(probe_radius=<probe>, min_size=0)
 components = topo['raw']['wet_components']           # wet features

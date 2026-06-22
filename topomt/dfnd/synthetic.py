@@ -7,6 +7,10 @@ enclosed void, a tube is a channel, a solid ball has no cavity. See
 spacing rule ``d < sqrt(3) * (r_atom + R_probe)``.
 """
 
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
 import numpy as np
 
 ARGON_VDW_RADIUS = 1.88
@@ -16,13 +20,88 @@ ARGON_VDW_RADIUS = 1.88
 VDW_RADIUS_BY_ELEMENT = {'HE': 1.40, 'NE': 1.54, 'AR': 1.88, 'KR': 2.02, 'XE': 2.16}
 
 
+@dataclass(frozen=True)
+class SyntheticSystem:
+    """Explicit synthetic dummy-atom system.
+
+    Coordinates and radii are stored as bare angstrom-valued arrays, matching the
+    synthetic benchmark convention and the ``from_coordinates_and_radii``
+    construction path. Conversion to molecular systems or files is explicit.
+    """
+
+    coords: np.ndarray
+    radii: np.ndarray
+    elements: tuple[str, ...] | None = None
+    name: str | None = None
+    metadata: dict[str, Any] | None = None
+
+    def __post_init__(self):
+        coords = np.asarray(self.coords, dtype=float)
+        radii = np.asarray(self.radii, dtype=float)
+        if coords.ndim != 2 or coords.shape[1] != 3:
+            raise ValueError('coords must have shape (n_atoms, 3)')
+        if radii.ndim != 1 or radii.shape[0] != coords.shape[0]:
+            raise ValueError('radii must have shape (n_atoms,)')
+        elements = self.elements
+        if elements is not None:
+            elements = tuple(str(element).upper() for element in elements)
+            if len(elements) != coords.shape[0]:
+                raise ValueError('elements must have one entry per atom')
+        object.__setattr__(self, 'coords', coords)
+        object.__setattr__(self, 'radii', radii)
+        object.__setattr__(self, 'elements', elements)
+
+    @property
+    def n_atoms(self):
+        """Number of dummy atoms in the synthetic system."""
+        return int(self.coords.shape[0])
+
+    def as_arrays(self, include_elements=False):
+        """Return arrays for numerical DFND construction.
+
+        By default, return ``(coords, radii)``. If ``include_elements`` is true,
+        return ``(coords, radii, elements)``.
+        """
+        if include_elements:
+            return self.coords, self.radii, self.elements
+        return self.coords, self.radii
+
+    def to_pdb(self, path, element='AR', resname='DUM'):
+        """Write the system as a dummy-atom PDB file."""
+        to_pdb(
+            self.coords,
+            self.radii,
+            Path(path),
+            element=element,
+            resname=resname,
+            elements=self.elements,
+        )
+
+    def to_molsysmt(self, element='AR', resname='DUM'):
+        """Convert the system to a ``molsysmt.MolSys`` object."""
+        return to_molsysmt(
+            self.coords,
+            self.radii,
+            elements=self.elements,
+            element=element,
+            resname=resname,
+        )
+
+    def __iter__(self):
+        """Iterate like the legacy tuple representation during migration."""
+        yield self.coords
+        yield self.radii
+        if self.elements is not None:
+            yield self.elements
+
+
 def _finalize(coords, atom_radius, jitter, seed):
     coords = np.asarray(coords, dtype=float)
     if jitter:
         rng = np.random.default_rng(seed)
         coords = coords + rng.normal(scale=jitter, size=coords.shape)
     radii = np.full(coords.shape[0], float(atom_radius), dtype=float)
-    return coords, radii
+    return SyntheticSystem(coords, radii)
 
 
 def argon_cube(probe_radius=1.4, atom_radius=ARGON_VDW_RADIUS, jitter=0.0, seed=0):
@@ -111,7 +190,7 @@ def mixed_radii_shell(
         coords = coords + np.random.default_rng(seed + 1).normal(
             scale=jitter, size=coords.shape
         )
-    return coords, radii, symbols
+    return SyntheticSystem(coords, radii, elements=tuple(symbols))
 
 
 def hollow_sphere_patchy(
@@ -752,7 +831,7 @@ def two_blocks_interface_slabs(
         coords = coords + rng.normal(scale=jitter, size=coords.shape)
     coords = coords[mask]
     radii = np.full(coords.shape[0], float(atom_radius), dtype=float)
-    return coords, radii
+    return SyntheticSystem(coords, radii)
 
 
 def three_blocks(
@@ -1078,50 +1157,3 @@ def to_molsysmt(coords, radii, elements=None, element='AR', resname='DUM'):
     lines.append('END')
     pdb_string = '\n'.join(lines) + '\n'
     return msm.convert(pdb_string, to_form='molsysmt.MolSys')
-
-
-# Decorate all public functions in this module (except helper/converter functions) to support to_molsysmt parameter.
-def _molsysmt_builder_decorator(func):
-    import functools
-    import inspect
-
-    @functools.wraps(func)
-    def wrapper(*args, **kwargs):
-        # Determine the caller file path
-        frame = inspect.currentframe().f_back
-        caller_file = frame.f_code.co_filename if frame else ''
-
-        # If called internally from synthetic.py itself, or from a test/devtool context,
-        # default to returning coords/radii to support unpacking and internal compilation.
-        # Otherwise (interactive Jupyter, scripts, public usage), return molsysmt.MolSys by default!
-        is_internal_or_test = (
-            'synthetic.py' in caller_file
-            or 'test_' in caller_file
-            or 'build_synthetic_catalog' in caller_file
-            or 'conftest' in caller_file
-        )
-
-        default_to_msm = not is_internal_or_test
-        to_msm = kwargs.pop('to_molsysmt', default_to_msm)
-
-        res = func(*args, **kwargs)
-        if to_msm:
-            if len(res) == 3:
-                coords, radii, elements = res
-            else:
-                coords, radii = res
-                elements = None
-            return to_molsysmt(coords, radii, elements=elements)
-        return res
-
-    return wrapper
-
-
-# Wrap all builder functions dynamically
-for _name, _val in list(globals().items()):
-    if (
-        callable(_val)
-        and not _name.startswith('_')
-        and _name not in ('to_pdb', 'to_molsysmt', 'first_existing_path', 'path', 'rotate')
-    ):
-        globals()[_name] = _molsysmt_builder_decorator(_val)
