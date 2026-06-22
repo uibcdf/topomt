@@ -1286,7 +1286,7 @@ listed invariant regresses on the synthetic suite.
 | WP-13 Centerline contract | Design decision / science | DFND-004, DFND-005 | Traversability and centerline decision | gate-aware capacity and collision-validation tests |
 | WP-14 Public feature metrics and units **(Verified)** | Contract / decision | DFND-015, API-006 | Unit and promotion decisions | raw-unit metadata, label conversion, public input warning, CASTp promotion tests, and DFND Mouth provenance/gate-metric tests |
 | WP-15 DFND orchestration decomposition | Technical debt | QUAL-008 | WP-01, WP-02, WP-03 | phase-level invariant and regression tests |
-| WP-16 Test invocation and devtools imports | Test infrastructure | QUAL-009 | None | clean-shell collection and CI parity |
+| WP-16 Test invocation and devtools imports **(Verified)** | Test infrastructure | QUAL-009 | None | direct pytest collection of CASTP devtools tests and CI-compatible `pytest.ini` import path |
 | WP-17 Legacy public API cleanup | API stability | API-004, API-005 | API deprecation decision | isolated import, deprecation, and migration tests |
 | WP-18 Viewer geometry boundary **(Verified)** | Architecture / reliability | VIEW-012 | Index-space, unit, and viewer-payload decisions | cross-renderer payload equivalence tests |
 
