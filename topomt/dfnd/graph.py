@@ -31,7 +31,7 @@ from .identity import (
 )
 
 
-def _length_to_nm(value):
+def _angstrom_or_quantity_to_nm(value):
     """Convert a length to nanometers (DFND's internal unit).
 
     A PyUnitWizard quantity is converted from its own unit. A bare number/array
@@ -164,7 +164,7 @@ class DelaunayFlowNetwork:
         instance.molecular_system = None
         instance.selection = 'array'
         instance.structure_indices = 0
-        epsilon = _length_to_nm(epsilon)
+        epsilon = _angstrom_or_quantity_to_nm(epsilon)
         instance.epsilon = float(epsilon)
         instance.hydrogen_policy = 'provided_atoms'
         instance.radii_model = 'provided'
@@ -175,8 +175,8 @@ class DelaunayFlowNetwork:
             hydrogen_policy='provided_atoms',
             radii_model='provided',
         )
-        coordinates = np.asarray(_length_to_nm(coordinates), dtype=float)
-        radii = np.asarray(_length_to_nm(radii), dtype=float)
+        coordinates = np.asarray(_angstrom_or_quantity_to_nm(coordinates), dtype=float)
+        radii = np.asarray(_angstrom_or_quantity_to_nm(radii), dtype=float)
         if atom_indices is None:
             atom_indices = np.arange(coordinates.shape[0], dtype=int)
         instance._initialize_geometry(
@@ -457,9 +457,9 @@ class DelaunayFlowNetwork:
             # Legacy scalar arguments are angstroms (or quantities); the query
             # stores the nm-internal values.
             query = DFNDQuery(
-                probe_radius=_length_to_nm(probe_radius),
-                residence_tolerance=_length_to_nm(residence_tolerance),
-                permeability_tolerance=_length_to_nm(permeability_tolerance),
+                probe_radius=_angstrom_or_quantity_to_nm(probe_radius),
+                residence_tolerance=_angstrom_or_quantity_to_nm(residence_tolerance),
+                permeability_tolerance=_angstrom_or_quantity_to_nm(permeability_tolerance),
                 transit_policy=transit_policy,
                 gate_intrusion_policy=gate_intrusion_policy,
                 dry_adjacency=dry_adjacency,
@@ -468,9 +468,9 @@ class DelaunayFlowNetwork:
             raise TypeError('query must be a DFNDQuery')
         else:
             legacy_values = {
-                'probe_radius': _length_to_nm(probe_radius),
-                'residence_tolerance': _length_to_nm(residence_tolerance),
-                'permeability_tolerance': _length_to_nm(permeability_tolerance),
+                'probe_radius': _angstrom_or_quantity_to_nm(probe_radius),
+                'residence_tolerance': _angstrom_or_quantity_to_nm(residence_tolerance),
+                'permeability_tolerance': _angstrom_or_quantity_to_nm(permeability_tolerance),
                 'transit_policy': transit_policy,
                 'gate_intrusion_policy': gate_intrusion_policy,
                 'dry_adjacency': dry_adjacency,
