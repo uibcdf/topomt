@@ -16,7 +16,7 @@ from topomt.dfnd import synthetic as syn
 def _domains(coords, radii, probe_radius=1.4):
     # probe_radius is given in angstroms (domain convention); the nm-internal
     # kernel takes nm. Synthetic coords/radii are already nm.
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     return network.get_topography(probe_radius=probe_radius, min_size=0)['raw']['wet_components']
 
 
@@ -71,7 +71,7 @@ def test_sphere_with_opening_is_a_pocket():
 
 def _topography(coords, radii, probe_radius=1.4):
     # probe_radius in angstroms -> nm for the nm-internal kernel.
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     return network.get_topography(probe_radius=probe_radius, min_size=0)
 
 

@@ -33,7 +33,7 @@ def _n_void(result):
 
 
 def _data(coords, radii, probe_radius=1.4):
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     result = network.get_topography(probe_radius=probe_radius, min_size=0)
     return DFNDData(network, result)
 
@@ -44,7 +44,7 @@ def _significant_voids(data):
 
 def test_raw_records_declare_nm_schema_and_units():
     coords, radii = _argon_cube_arrays()
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     result = network.get_topography(probe_radius=1.4, min_size=0)
     raw = result['raw']
 
@@ -93,7 +93,7 @@ def test_at_probe_reuses_the_mesh_and_recomputes_the_decomposition():
 
 def test_at_probe_inherits_query_options():
     coords, radii = syn.hollow_sphere(10.0, 3.5, jitter=0.1, seed=0)
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     result = network.get_topography(
         probe_radius=1.4, min_size=0, transit_policy='resident_only'
     )
@@ -161,7 +161,7 @@ def test_residence_tolerance_widens_the_residence_threshold():
     # A probe just above the deepest clearance is not resident at tolerance 0, but
     # becomes resident once residence_tolerance exceeds the gap (generous policy).
     coords, radii = _argon_cube_arrays()
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     # tetra_residence is nm (internal); bump just above the deepest clearance.
     probe = puw.quantity(float(network.tetra_residence.max()) + 0.01, 'nm')
 
@@ -176,7 +176,7 @@ def test_residence_tolerance_widens_the_residence_threshold():
 
 def test_tolerances_recorded_and_inherited_by_at_probe():
     coords, radii = _argon_cube_arrays()
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     result = network.get_topography(
         probe_radius=1.45,
         min_size=0,
@@ -217,7 +217,7 @@ def test_wet_component_initializes_motif_descriptors():
 )
 def test_get_topography_rejects_invalid_physical_query_parameters(kwargs, message):
     coords, radii = _argon_cube_arrays()
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
 
     with pytest.raises(ValueError, match=message):
         network.get_topography(**kwargs)

@@ -26,7 +26,7 @@ def _network():
         ],
         dtype=float,
     )
-    return DelaunayFlowNetwork.from_arrays(
+    return DelaunayFlowNetwork.from_coordinates_and_radii(
         coordinates,
         np.full(len(coordinates), 1.5),
         epsilon=1e-7,
@@ -149,7 +149,7 @@ def test_network_rejects_non_default_arguments_that_conflict_with_query():
 
 def test_epsilon_is_part_of_substrate_and_result_identity():
     first = _network()
-    second = DelaunayFlowNetwork.from_arrays(
+    second = DelaunayFlowNetwork.from_coordinates_and_radii(
         first.atom_coords, first.atom_radii, epsilon=1e-5
     )
 

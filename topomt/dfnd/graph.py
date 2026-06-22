@@ -1,3 +1,4 @@
+import warnings
 from typing import Any
 
 import molsysmt as msm
@@ -34,9 +35,9 @@ def _length_to_nm(value):
     """Convert a length to nanometers (DFND's internal unit).
 
     A PyUnitWizard quantity is converted from its own unit. A bare number/array
-    is interpreted as angstroms — the cavity-detection domain convention for the
-    ``from_arrays`` toy-system entry point and the legacy scalar arguments — and
-    scaled to nm. ``None`` passes through.
+    is interpreted as angstroms — the cavity-detection domain convention for
+    the ``from_coordinates_and_radii`` toy-system entry point and the legacy
+    scalar arguments — and scaled to nm. ``None`` passes through.
     """
     if value is None:
         return None
@@ -138,12 +139,26 @@ class DelaunayFlowNetwork:
         raise ValueError("hydrogen_policy must be 'exclude' or 'include'")
 
     @classmethod
-    def from_arrays(cls, coordinates, radii, atom_indices=None, epsilon=1e-6):
-        """Build a DFN directly from coordinates and radii for toy systems.
+    def from_coordinates_and_radii(
+        cls,
+        coordinates,
+        radii,
+        atom_indices=None,
+        epsilon=1e-6,
+    ):
+        """Build a network directly from explicit coordinates and radii.
 
-        ``coordinates``, ``radii`` and ``epsilon`` may be PyUnitWizard quantities
-        or bare numbers; bare values are interpreted as angstroms (the toy-system
-        domain convention) and converted to the nm-internal representation.
+        Advanced constructor for synthetic and test systems: it bypasses
+        ``molsysmt`` entirely (no molecular system, user-provided radii) and
+        assembles the network from raw per-particle centers and radii. The
+        primary path remains ``DelaunayFlowNetwork(molecular_system, ...)``.
+
+        ``coordinates``, ``radii`` and ``epsilon`` may be PyUnitWizard
+        quantities or bare numbers. As a constructor for synthetic systems it
+        ingests bare values as **angstroms** (the toy-system domain convention)
+        and converts them to the nm-internal representation; no deprecation
+        warning is emitted here (the public Quantity contract applies to the
+        query surface, e.g. ``get_topography``).
         """
         instance = cls.__new__(cls)
         instance.molecular_system = None
@@ -170,6 +185,28 @@ class DelaunayFlowNetwork:
             np.asarray(atom_indices, dtype=int),
         )
         return instance
+
+
+    @classmethod
+
+    def from_arrays(cls, coordinates, radii, atom_indices=None, epsilon=1e-6):
+        """Build a network from explicit arrays.
+
+        Deprecated compatibility alias for
+        :meth:`from_coordinates_and_radii`.
+        """
+        warnings.warn(
+            'DelaunayFlowNetwork.from_arrays(...) is deprecated; use '
+            'from_coordinates_and_radii(...) for explicit coordinate/radius input.',
+            FutureWarning,
+            stacklevel=2,
+        )
+        return cls.from_coordinates_and_radii(
+            coordinates,
+            radii,
+            atom_indices=atom_indices,
+            epsilon=epsilon,
+        )
 
     def _initialize_geometry(self, atom_coords, atom_radii, atom_indices_map):
         self.atom_coords = np.asarray(atom_coords, dtype=float)

@@ -37,7 +37,7 @@ These synthetic shapes are the **meso-scale, known-ground-truth** middle layer.
   controllable. Mixed radii can come later.
 - **Parametric generator**: each shape produced from parameters (size, wall
   spacing, atom radius, optional jitter), not hand-written PDBs — reproducible and
-  sweepable. Write PDBs (or arrays via `DelaunayFlowNetwork.from_arrays`).
+  sweepable. Write PDBs (or arrays via `DelaunayFlowNetwork.from_coordinates_and_radii`).
 - **Probe-tight walls** (critical, see below): a hollow shape only encloses a
   cavity if its wall is impermeable to the probe.
 - **Two variants per shape**: a perfectly regular version (degeneracy stress test)

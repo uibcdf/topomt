@@ -25,7 +25,7 @@ def _regular_tetrahedron_network(atom_indices=None):
         dtype=float,
     )
     radii = np.full(4, 1.7, dtype=float)
-    return DelaunayFlowNetwork.from_arrays(
+    return DelaunayFlowNetwork.from_coordinates_and_radii(
         coordinates,
         radii,
         atom_indices=atom_indices,

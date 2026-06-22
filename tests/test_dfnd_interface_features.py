@@ -14,7 +14,7 @@ from topomt.dfnd import interfaces as ifc
 
 
 def _topography(coords, radii, probe_radius=1.4):
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     return network.get_topography(probe_radius=probe_radius, min_size=0)
 
 

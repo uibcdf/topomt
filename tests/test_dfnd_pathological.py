@@ -19,7 +19,7 @@ from topomt.dfnd.core.clearance import tetrahedron_residence_radius
 
 
 def _domains(coords, radii, probe_radius=1.4):
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     return network.get_topography(probe_radius=probe_radius, min_size=0)['raw']['wet_components']
 
 
@@ -214,7 +214,7 @@ def test_robustness_classification_is_stable_across_epsilon():
     coords, radii = syn.hollow_sphere(11.0, 4.5, jitter=0.1, seed=0)
     families = set()
     for epsilon in (1e-9, 1e-7, 1e-5, 1e-3, 1e-2):
-        network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=epsilon)
+        network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=epsilon)
         domains = network.get_topography(probe_radius=1.4, min_size=0)['raw']['wet_components']
         families.add(tuple(sorted(_significant_families(domains).items())))
     assert len(families) == 1                            # epsilon-robust

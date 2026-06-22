@@ -9,7 +9,7 @@ Design and the probe-tight wall-spacing rule:
 `devguide/DFND/synthetic_benchmarks.md`.
 
 DFND tests build with the explicit argon radius (1.88 A) via
-`DelaunayFlowNetwork.from_arrays`; these PDBs are for sharing and cross-algorithm
+`DelaunayFlowNetwork.from_coordinates_and_radii`; these PDBs are for sharing and cross-algorithm
 comparison (CASTp/fpocket re-derive radii from the element). The last column is
 the DFND family summary at the listed probe (significant = >= 5 resident nodes).
 

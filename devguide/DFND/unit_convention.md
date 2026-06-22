@@ -38,9 +38,13 @@ Compatibility facades still accept legacy bare floats in selected places:
   `probe_radius`: warn, interpret as angstroms, normalize to nm.
 - `DelaunayFlowNetwork.get_topography()` keeps the lower-level legacy bare-float
   convention for direct calls.
-- `DelaunayFlowNetwork.from_arrays()` is a synthetic/toy-system helper. Bare
-  coordinates, radii, and `epsilon` are interpreted as angstroms and converted to
-  nm internally.
+- `DelaunayFlowNetwork.from_coordinates_and_radii()` is the sanctioned advanced
+  constructor for synthetic/toy-system input: it bypasses `molsysmt` and builds
+  the network from user-provided per-particle centers and radii. As a
+  constructor it ingests bare `coordinates`, `radii`, and `epsilon` as angstroms
+  (the toy-system domain convention) and converts them to nm internally; it does
+  *not* emit a deprecation warning, because the public Quantity contract applies
+  to the query surface, not to construction-time input ingestion.
 - `DFNDQuery` and `DFNDMeshConfig` store normalized nm values and accept
   PyUnitWizard quantities directly. Direct bare-float construction is an
   internal/programmatic compatibility path and represents normalized nm values.

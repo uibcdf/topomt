@@ -25,7 +25,7 @@ from topomt.dfnd.graph import DelaunayFlowNetwork
 
 
 def _dfnd(coords, radii, probe_radius=1.4):
-    network = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     result = network.get_topography(probe_radius=probe_radius, min_size=0)
     return DFNDData(network, result)
 

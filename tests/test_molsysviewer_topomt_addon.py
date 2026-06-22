@@ -1560,7 +1560,7 @@ def test_pipe_renders_channel_as_variable_radius_tube():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         coords, np.full(len(coords), 1.88), epsilon=1e-7
     )
     result = net.get_topography(probe_radius=1.4, min_size=0)
@@ -1608,7 +1608,7 @@ def test_contact_sheet_splits_interface_lining_by_body():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         coords, np.full(len(coords), 1.88), epsilon=1e-7
     )
     result = net.get_topography(probe_radius=1.4, min_size=0)
@@ -1667,7 +1667,7 @@ def test_auto_renders_each_family_with_its_mode():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         coords, np.full(len(coords), 1.88), epsilon=1e-7
     )
     result = net.get_topography(probe_radius=1.4, min_size=0)
@@ -1730,7 +1730,7 @@ def test_top_n_limits_rendered_components():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         coords, np.full(len(coords), 1.88), epsilon=1e-7
     )
     result = net.get_topography(probe_radius=1.4, min_size=0)
@@ -1774,7 +1774,7 @@ def test_auto_renders_interfaces_as_contact_sheet():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         coords, np.full(len(coords), 1.88), epsilon=1e-7
     )
     result = net.get_topography(probe_radius=1.4, min_size=0)
@@ -1812,7 +1812,7 @@ def test_rings_renders_hole_clearance_profile():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         coords, np.full(len(coords), 1.88), epsilon=1e-7
     )
     result = net.get_topography(probe_radius=1.4, min_size=0)
@@ -1870,7 +1870,7 @@ def test_carve_voids_focuses_on_void_lining():
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         coords, np.full(len(coords), 1.88), epsilon=1e-7
     )
     result = net.get_topography(probe_radius=1.4, min_size=0)
@@ -1932,7 +1932,7 @@ def test_probe_centers_uses_parameters_from_real_dfnd_data():
             [-1.874, -1.874, 1.874],
         ]
     )
-    network = DelaunayFlowNetwork.from_arrays(coords, np.full(4, 1.88), epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, np.full(4, 1.88), epsilon=1e-7)
     result = network.get_topography(probe_radius=1.0, min_size=0)
     topography = SimpleNamespace(dfnd=DFNDData(network, result))
 
@@ -2075,7 +2075,7 @@ def _build_dfnd_topo(pdb_name, probe=1.4):
             if line.startswith(('ATOM', 'HETATM'))
         ]
     )
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         coords, np.full(len(coords), 1.88), epsilon=1e-7
     )
     result = net.get_topography(probe_radius=probe, min_size=0)
@@ -2386,7 +2386,7 @@ def test_dfnd_owned_payloads_declare_atom_index_space():
     from molsysviewer_topomt.simplex_selection import resolve_simplices
     from topomt.dfnd.graph import DelaunayFlowNetwork
 
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         np.array(
             [
                 [0.0, 0.0, 0.0],
@@ -2429,7 +2429,7 @@ def test_partial_mesh_global_selection_hover_click_boundary():
     from molsysviewer_topomt.simplex_selection import simplex_selection_info
     from topomt.dfnd.graph import DelaunayFlowNetwork
 
-    net = DelaunayFlowNetwork.from_arrays(
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
         np.array(
             [
                 [0.0, 0.0, 0.0],

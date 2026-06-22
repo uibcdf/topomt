@@ -21,7 +21,7 @@ def _wet_components(name, *, jitter=0.0, seed=0):
     if jitter:
         rng = np.random.default_rng(seed)
         coords = coords + rng.normal(scale=jitter, size=coords.shape)
-    net = DelaunayFlowNetwork.from_arrays(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(coords, np.full(len(coords), 1.88), epsilon=1e-7)
     dfnd = DFNDData(net, net.get_topography(probe_radius=1.4, min_size=0))
     return list(dfnd.dfn.components.wet)
 

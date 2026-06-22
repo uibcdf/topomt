@@ -40,31 +40,31 @@ def test_dfnd_rejects_empty_molecular_selection(tmp_path):
         dfnd(str(pdb_path), selection=[])
 
 
-def test_dfnd_from_arrays_rejects_too_few_atoms():
+def test_dfnd_from_coordinates_and_radii_rejects_too_few_atoms():
     with pytest.raises(ValueError, match='Not enough atoms'):
-        DelaunayFlowNetwork.from_arrays(
+        DelaunayFlowNetwork.from_coordinates_and_radii(
             _minimal_coordinates()[:3],
             np.full(3, 1.7),
         )
 
 
-def test_dfnd_from_arrays_rejects_non_finite_coordinates():
+def test_dfnd_from_coordinates_and_radii_rejects_non_finite_coordinates():
     coordinates = _minimal_coordinates()
     coordinates[0, 0] = np.nan
 
     with pytest.raises(ValueError, match='coordinates must be finite'):
-        DelaunayFlowNetwork.from_arrays(coordinates, np.full(4, 1.7))
+        DelaunayFlowNetwork.from_coordinates_and_radii(coordinates, np.full(4, 1.7))
 
 
-def test_dfnd_from_arrays_rejects_invalid_radii():
+def test_dfnd_from_coordinates_and_radii_rejects_invalid_radii():
     with pytest.raises(ValueError, match='radii must be positive'):
-        DelaunayFlowNetwork.from_arrays(
+        DelaunayFlowNetwork.from_coordinates_and_radii(
             _minimal_coordinates(),
             np.array([1.7, 1.7, 0.0, 1.7]),
         )
 
     with pytest.raises(ValueError, match='radii must be finite'):
-        DelaunayFlowNetwork.from_arrays(
+        DelaunayFlowNetwork.from_coordinates_and_radii(
             _minimal_coordinates(),
             np.array([1.7, 1.7, np.nan, 1.7]),
         )

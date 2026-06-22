@@ -28,7 +28,7 @@ def _load_pdb_coords(name):
 def _raw_for(name, probe=1.4):
     coords = _load_pdb_coords(name)
     radii = np.full(len(coords), 1.88)
-    net = DelaunayFlowNetwork.from_arrays(coords, radii, epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
     return net.get_topography(probe_radius=probe, min_size=0)['raw']
 
 
