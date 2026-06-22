@@ -752,7 +752,7 @@ between selected features or attached analysis substrate.
 
 **Evidence:** Strong static finding
 **Tracking:** Verified
-**Resolution:** Viewer-neutral payloads and final adapters now cover all active renderer geometry, including centerline tubes and rings, mouth rings, and dry-scaffold segments. Centerline stations reference tetrahedron IDs scoped by component; mouth rings reference external-link keys; scaffold edges reference canonical molecular-system atom pairs scoped by component. Cross-renderer equivalence tests cover coordinates, units, and structured identity. Direct frontend transport of arbitrary entity refs remains a MolSysViewer host proposal, not a TopoMT geometry-extraction gap.
+**Resolution:** Viewer-neutral payloads and final adapters now cover all active renderer geometry, including centerline tubes and rings, mouth rings, and dry-scaffold segments. Centerline stations reference tetrahedron IDs scoped by component; mouth rings reference external-link keys; scaffold edges reference canonical molecular-system atom pairs scoped by component. Cross-renderer equivalence tests cover coordinates, units, and structured identity. TopoMT final adapters now bypass MolSysViewer submanager digestion for already-normalized payloads, and the addon test suite passes with warnings promoted to errors. Direct frontend transport of arbitrary entity refs remains a MolSysViewer host proposal, not a TopoMT geometry-extraction gap.
 
 **Category:** Technical debt with correctness risk
 **Location:** `molsysviewer_topomt/render/`
@@ -1341,6 +1341,7 @@ pytest -n 12
 pytest -q tests/test_dfnd_graph_contract.py
 pytest -q tests/test_dfnd_selectors.py tests/test_dfnd_data.py
 pytest -q tests/test_molsysviewer_topomt_addon.py
+pytest -q tests/test_molsysviewer_topomt_addon.py -W error
 pytest -q tests/test_tools_public_surface.py
 ruff check topomt molsysviewer_topomt --select F821,F822,F823,F841,B006,B023
 ruff format --check topomt molsysviewer_topomt tests

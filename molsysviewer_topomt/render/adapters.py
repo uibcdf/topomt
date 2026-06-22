@@ -14,6 +14,22 @@ from ..geometry import (
 )
 
 
+def _shape_method(view, manager_name: str, method_name: str):
+    """Return the deepest MolSysViewer shape method when available.
+
+    Some ShapesManager forwarders accept ``skip_digestion`` but do not propagate
+    it to the decorated submanager. TopoMT adapters pass already-normalized
+    payloads, so the final boundary should call the submanager directly when a
+    real MolSysViewer view is used. Test fakes still work through the public
+    forwarder fallback.
+    """
+    shapes = view.shapes
+    manager = getattr(shapes, manager_name, None)
+    if manager is not None and hasattr(manager, method_name):
+        return getattr(manager, method_name)
+    return getattr(shapes, method_name)
+
+
 def add_point_spheres(view, geometry: PointGeometry, *, radius, **kwargs):
     """Render point geometry as spheres at the final MolSysViewer boundary."""
     kwargs.pop('skip_digestion', None)
@@ -22,7 +38,7 @@ def add_point_spheres(view, geometry: PointGeometry, *, radius, **kwargs):
     if len(coordinates) == 1 and isinstance(kwargs.get('color'), (list, tuple)):
         if len(kwargs['color']) == 1:
             kwargs['color'] = kwargs['color'][0]
-    return view.shapes.add_sphere(
+    return _shape_method(view, 'spheres', 'add_sphere')(
         center=puw.quantity(center, geometry.unit),
         radius=radius,
         skip_digestion=True,
@@ -33,7 +49,7 @@ def add_point_spheres(view, geometry: PointGeometry, *, radius, **kwargs):
 def add_pocket_blob(view, geometry: SphereGeometry, **kwargs):
     """Render a blob from canonical spheres at the final viewer boundary."""
     kwargs.pop('skip_digestion', None)
-    return view.shapes.add_pocket_blob(
+    return _shape_method(view, 'blobs', 'add_pocket_blob')(
         centers=puw.quantity(np.asarray(geometry.centers), geometry.unit),
         radii=puw.quantity(np.asarray(geometry.radii), geometry.unit),
         skip_digestion=True,
@@ -44,7 +60,7 @@ def add_pocket_blob(view, geometry: SphereGeometry, **kwargs):
 def add_sphere_set(view, geometry: SphereGeometry, **kwargs):
     """Render variable-radius spheres at the final MolSysViewer boundary."""
     kwargs.pop('skip_digestion', None)
-    return view.shapes.add_set_alpha_spheres(
+    return _shape_method(view, 'spheres', 'add_set_alpha_spheres')(
         centers=puw.quantity(np.asarray(geometry.centers), geometry.unit),
         radii=puw.quantity(np.asarray(geometry.radii), geometry.unit),
         skip_digestion=True,
@@ -59,7 +75,7 @@ def add_uniform_spheres(view, geometry: SphereGeometry, **kwargs):
         return None
     if any(radius != geometry.radii[0] for radius in geometry.radii[1:]):
         raise ValueError('add_uniform_spheres requires one common radius.')
-    return view.shapes.add_sphere(
+    return _shape_method(view, 'spheres', 'add_sphere')(
         center=puw.quantity(np.asarray(geometry.centers), geometry.unit),
         radius=puw.quantity(geometry.radii[0], geometry.unit),
         skip_digestion=True,
@@ -70,7 +86,7 @@ def add_uniform_spheres(view, geometry: SphereGeometry, **kwargs):
 def add_channel_tube(view, geometry: SphereGeometry, **kwargs):
     """Render an ordered variable-radius path at the final viewer boundary."""
     kwargs.pop('skip_digestion', None)
-    return view.shapes.add_channel_tube(
+    return _shape_method(view, 'tubes', 'add_channel_tube')(
         centers=puw.quantity(np.asarray(geometry.centers), geometry.unit),
         radii=puw.quantity(np.asarray(geometry.radii), geometry.unit),
         skip_digestion=True,
@@ -81,7 +97,7 @@ def add_channel_tube(view, geometry: SphereGeometry, **kwargs):
 def add_rings(view, geometry: RingGeometry, **kwargs):
     """Render oriented rings at the final viewer boundary."""
     kwargs.pop('skip_digestion', None)
-    return view.shapes.add_rings(
+    return _shape_method(view, 'rings', 'add_rings')(
         centers=puw.quantity(np.asarray(geometry.centers), geometry.unit),
         normals=geometry.normals,
         radii=puw.quantity(np.asarray(geometry.radii), geometry.unit),
@@ -93,7 +109,7 @@ def add_rings(view, geometry: RingGeometry, **kwargs):
 def add_segments(view, geometry: SegmentGeometry, *, radius, **kwargs):
     """Render segment geometry as links at the final MolSysViewer boundary."""
     kwargs.pop('skip_digestion', None)
-    return view.shapes.add_links(
+    return _shape_method(view, 'links', 'add_links')(
         coordinate_pairs=puw.quantity(
             np.asarray(geometry.coordinate_pairs), geometry.unit
         ),
@@ -106,7 +122,7 @@ def add_segments(view, geometry: SegmentGeometry, *, radius, **kwargs):
 def add_tetrahedra(view, geometry: TetrahedraGeometry, **kwargs):
     """Render canonical tetrahedra while preserving mesh-local pick indices."""
     kwargs.pop('skip_digestion', None)
-    return view.shapes.add_tetrahedra(
+    return _shape_method(view, 'tetrahedra', 'add_tetrahedra')(
         atom_quads=geometry.atom_quads,
         skip_digestion=True,
         **kwargs,
@@ -116,7 +132,7 @@ def add_tetrahedra(view, geometry: TetrahedraGeometry, **kwargs):
 def add_indexed_triangles(view, geometry: IndexedTriangleGeometry, **kwargs):
     """Render canonical indexed triangles with mesh-local pick triplets."""
     kwargs.pop('skip_digestion', None)
-    return view.shapes.add_triangle_faces(
+    return _shape_method(view, 'triangles', 'add_triangle_faces')(
         atom_triplets=geometry.atom_triplets,
         skip_digestion=True,
         **kwargs,

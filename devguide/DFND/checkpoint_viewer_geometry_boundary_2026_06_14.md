@@ -51,7 +51,7 @@ VIEW-012 is verified locally. Active TopoMT renderers now extract scientific geo
 - mouth ring: `external_link_key` plus its support and component keys;
 - dry-scaffold edge: canonical sorted molecular-system atom pair plus component support and component keys.
 
-The remaining work belongs to the MolSysViewer host boundary, not VIEW-012: direct frontend transport of arbitrary `entity_refs` and elimination of host-side digestion warnings for already-normalized shape options. It is recorded in `../molsysviewer/devguide/pending_proposals/generic_geometry_payloads_and_entity_refs.md`.
+The remaining work belongs to the MolSysViewer host boundary, not VIEW-012: direct frontend transport of arbitrary `entity_refs`. TopoMT final adapters now call MolSysViewer submanagers directly when needed so already-normalized shape payloads keep `skip_digestion=True` and the addon suite can run with warnings promoted to errors. Generic host-side entity-ref transport remains recorded in `../molsysviewer/devguide/pending_proposals/generic_geometry_payloads_and_entity_refs.md`.
 
 ## Ownership Boundary
 

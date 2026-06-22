@@ -289,7 +289,12 @@ def show_dfnd_pharmacophore(
 
     if not centers:
         return None
-    return view.shapes.add_interaction_sites(
+    add_sites = getattr(
+        getattr(view.shapes, 'interaction_sites', None),
+        'add_interaction_sites',
+        view.shapes.add_interaction_sites,
+    )
+    return add_sites(
         centers=puw.quantity(np.array(centers, dtype=float), 'angstroms'),
         kinds=kinds,
         tag=tag_prefix,
