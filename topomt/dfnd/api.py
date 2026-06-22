@@ -27,21 +27,39 @@ _FAMILIES_WITH_MOUTHS = {'pockets', 'channels'}
 def _public_length_to_nm(name: str, value: Any) -> float:
     """Normalize a public DFND length argument to nanometers.
 
-    Quantities are the canonical public form. Bare numeric values are legacy
-    compatibility inputs, interpreted as angstroms and warned.
+    Quantities are the canonical public form; bare numeric values are legacy
+    compatibility inputs interpreted as angstroms. This converter is silent and
+    safe to reuse internally; the bare-float deprecation warning is emitted at the
+    public boundary instead (see ``_warn_bare_length_args``).
     """
     if puw.is_quantity(value):
         return float(puw.get_value(value, to_unit='nm'))
     if isinstance(value, Real):
-        warnings.warn(
-            f"DFND length argument '{name}' received a bare float. Bare floats "
-            'are deprecated in public APIs; pass a PyUnitWizard quantity instead. '
-            'For compatibility this value is interpreted as angstroms.',
-            FutureWarning,
-            stacklevel=3,
-        )
         return float(value) * 0.1
     return float(puw.get_value(value, to_unit='nm'))
+
+
+def _warn_bare_length_args(**named_values: Any) -> None:
+    """Emit the bare-float deprecation from a public entry point.
+
+    Call this directly from a user-facing function (``dfnd``,
+    ``dfnd_to_topography``, ``at_probe``). It is always exactly one frame below the
+    function the user called, so a fixed ``stacklevel=3`` (warn -> here -> entry
+    point -> user) attributes the warning to the user's call regardless of internal
+    plumbing -- unlike a constant buried in the shared converter, which sat at
+    different depths on different call paths.
+    """
+    for name, value in named_values.items():
+        if value is None or puw.is_quantity(value):
+            continue
+        if isinstance(value, Real):
+            warnings.warn(
+                f"DFND length argument '{name}' received a bare float. Bare floats "
+                'are deprecated in public APIs; pass a PyUnitWizard quantity instead. '
+                'For compatibility this value is interpreted as angstroms.',
+                FutureWarning,
+                stacklevel=3,
+            )
 
 
 def _feature_from_component_record(
@@ -206,6 +224,12 @@ def dfnd_to_topography(
     top level holds only the promoted features. Direct calls to ``dfnd`` still
     return the raw-first dictionary used for method development and validation.
     """
+    _warn_bare_length_args(
+        probe_radius=probe_radius,
+        epsilon=epsilon,
+        residence_tolerance=residence_tolerance,
+        permeability_tolerance=permeability_tolerance,
+    )
     network, result = _run_dfnd(
         molecular_system,
         selection,
@@ -295,6 +319,12 @@ def dfnd(
     query: DFNDQuery | None = None,
 ) -> dict[str, dict[str, Any]]:
     """Run the DFND topography decomposition (raw-first dictionary)."""
+    _warn_bare_length_args(
+        probe_radius=probe_radius,
+        epsilon=epsilon,
+        residence_tolerance=residence_tolerance,
+        permeability_tolerance=permeability_tolerance,
+    )
     _network, raw_topography = _run_dfnd(
         molecular_system,
         selection,

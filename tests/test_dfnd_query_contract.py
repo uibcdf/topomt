@@ -59,15 +59,29 @@ def test_typed_configs_accept_quantities_and_normalize_to_nm():
 
 
 def test_public_length_float_compatibility_warns_and_interprets_angstroms():
-    from topomt.dfnd.api import _public_length_to_nm
+    import warnings
 
-    with pytest.warns(FutureWarning, match='bare float'):
+    from topomt.dfnd.api import _public_length_to_nm, _warn_bare_length_args
+
+    # The converter is silent and interprets bare floats as angstroms.
+    with warnings.catch_warnings():
+        warnings.simplefilter('error')
         assert _public_length_to_nm('probe_radius', 1.4) == pytest.approx(0.14)
-    with pytest.warns(FutureWarning, match='bare float'):
         assert _public_length_to_nm('residence_tolerance', 0.1) == pytest.approx(0.01)
-    assert _public_length_to_nm(
-        'permeability_tolerance', puw.quantity(0.2, 'angstroms')
-    ) == pytest.approx(0.02)
+        assert _public_length_to_nm(
+            'permeability_tolerance', puw.quantity(0.2, 'angstroms')
+        ) == pytest.approx(0.02)
+
+    # The bare-float deprecation is emitted at the public boundary instead.
+    with pytest.warns(FutureWarning, match='bare float'):
+        _warn_bare_length_args(probe_radius=1.4)
+
+    # Quantities and unset (None) arguments do not warn.
+    with warnings.catch_warnings():
+        warnings.simplefilter('error')
+        _warn_bare_length_args(
+            probe_radius=puw.quantity(1.4, 'angstroms'), epsilon=None
+        )
 
 def test_query_drives_result_identity_but_reporting_min_size_does_not():
     network = _network()

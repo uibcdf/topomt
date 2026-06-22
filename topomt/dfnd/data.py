@@ -258,8 +258,9 @@ class DFNDData:
         min_size = overrides.pop(
             'min_size', parameters.get('reporting', {}).get('min_size', 0)
         )
-        from .api import _public_length_to_nm
+        from .api import _public_length_to_nm, _warn_bare_length_args
 
+        _warn_bare_length_args(probe_radius=probe_radius)
         try:
             query = self.dfn.query.replace(
                 probe_radius=_public_length_to_nm('probe_radius', probe_radius),
