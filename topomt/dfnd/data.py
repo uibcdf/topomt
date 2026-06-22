@@ -26,16 +26,17 @@ from __future__ import annotations
 
 from typing import Any
 
+from .. import pyunitwizard as puw
 from .components import build_components
 from .config import DFNDQuery
 
 
 def _angstrom_from_nm(value):
-    return float(value) * 10.0
+    return float(value) * puw.conversion_factor('nm', 'angstroms')
 
 
 def _angstrom3_from_nm3(value):
-    return float(value) * 1000.0
+    return float(value) * puw.conversion_factor('nm', 'angstroms') ** 3
 
 
 # A record from graph.py mixes probe-independent geometry with probe-dependent

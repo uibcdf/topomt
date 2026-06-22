@@ -9,6 +9,11 @@ def get_topography(molecular_system, **kwargs):
     from topomt import Topography
     from topomt import pyunitwizard as puw
 
+    # CASTp native records are in angstroms; MolSysSuite stores nm. Derive the
+    # area/volume factors from the single linear factor (one source of truth,
+    # and avoids pint's compounded rounding on power-unit conversions).
+    angstrom_to_nm = puw.conversion_factor('angstroms', 'nm')
+
     feature_records, mesh = _native_castp(molecular_system, **kwargs)
     del mesh
 
@@ -28,21 +33,23 @@ def get_topography(molecular_system, **kwargs):
 
         if 'center' in record and record['center'] is not None:
             parent_feature.center = puw.quantity(
-                np.asarray(record['center']) / 10.0, 'nm'
+                np.asarray(record['center']) * angstrom_to_nm, 'nm'
             )
         if 'area' in record and record['area'] is not None:
-            parent_feature.area = puw.quantity(float(record['area']) / 100.0, 'nm**2')
+            parent_feature.area = puw.quantity(
+                float(record['area']) * angstrom_to_nm ** 2, 'nm**2'
+            )
         if 'volume' in record and record['volume'] is not None:
             parent_feature.volume = puw.quantity(
-                float(record['volume']) / 1000.0, 'nm**3'
+                float(record['volume']) * angstrom_to_nm ** 3, 'nm**3'
             )
         if 'mouth_area' in record and record['mouth_area'] is not None:
             parent_feature.mouth_area = puw.quantity(
-                float(record['mouth_area']) / 100.0, 'nm**2'
+                float(record['mouth_area']) * angstrom_to_nm ** 2, 'nm**2'
             )
         if 'mouth_perimeter' in record and record['mouth_perimeter'] is not None:
             parent_feature.mouth_perimeter = puw.quantity(
-                float(record['mouth_perimeter']) / 10.0, 'nm'
+                float(record['mouth_perimeter']) * angstrom_to_nm, 'nm'
             )
         if 'n_mouths' in record:
             parent_feature.n_mouths = record['n_mouths']
@@ -61,7 +68,9 @@ def get_topography(molecular_system, **kwargs):
                 atom_indices=sorted(mouth.get('atom_indices', [])),
                 source='castp',
                 source_id=f'{source_id}:mouth:{mouth["id"]}',
-                area=puw.quantity(float(mouth.get('area', 0.0)) / 100.0, 'nm**2'),
+                area=puw.quantity(
+                    float(mouth.get('area', 0.0)) * angstrom_to_nm ** 2, 'nm**2'
+                ),
             )
             topography.connect_features(mouth_feature_id, parent_feature_id)
 

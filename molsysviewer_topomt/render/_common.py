@@ -4,6 +4,7 @@ from typing import Any
 
 import numpy as np
 
+from topomt import pyunitwizard as puw
 from topomt.dfnd.selectors import select_faces
 
 from ..geometry import edge_geometry, entity_ref_payload, face_geometry
@@ -15,15 +16,15 @@ DEFAULT_MARKER_RADIUS_NM = 0.12
 
 
 def _angstrom_from_nm(value):
-    return float(value) * 10.0
+    return float(value) * puw.conversion_factor('nm', 'angstroms')
 
 
 def _angstrom2_from_nm2(value):
-    return float(value) * 100.0
+    return float(value) * puw.conversion_factor('nm', 'angstroms') ** 2
 
 
 def _angstrom3_from_nm3(value):
-    return float(value) * 1000.0
+    return float(value) * puw.conversion_factor('nm', 'angstroms') ** 3
 
 
 def _angstrom_label_from_nm(value, digits=2):
