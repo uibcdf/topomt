@@ -213,6 +213,40 @@ pocket(D) = n_external_links(D) == 1 and has_residence(D)
 
 Interpretation: a one-mouth resident concavity. The component may or may not contain a `wet_open` node. A compact one-mouth component made only of `wet_coast` resident nodes is still a pocket because the probe can reside inside it.
 
+#### 5.2.1. Pocket morphology (topology → morphology)
+
+`pocket` is a **topological** family (one mouth + residence); it deliberately
+does *not* distinguish an open **groove**/dent from an **occluded** pocket that
+narrows at the mouth and widens inside. That refinement is the **morphology**
+layer the public feature carries, and DFND supplies its discriminators on each
+wet component as `morphometrics` (`_attach_morphometrics` in `components.py`), all
+assembled from probe-independent quantities (no new primitive):
+
+- `mouth_radius` — widest aperture (max external-link `R_gate_max`); the **seal
+  radius** above which the mouth closes.
+- `interior_radius` — widest interior clearance (max `R_residence`); the
+  **residence-death radius**.
+- `occlusion = interior_radius / mouth_radius` — the primary discriminator.
+  `≤ 1` is an open **groove** (mouth is the widest point; it loses mouth and
+  residence together and never becomes a void); `> 1` is an **occluded** pocket
+  (the interior holds the probe after the mouth seals).
+- `occlusion_gap = interior_radius − mouth_radius` — the probe-radius width of the
+  window in which the cavity exists as an enclosed **void**. This is the probe
+  sweep's pocket → void interval *compressed*: because `R_residence`/`R_gate` are
+  probe-independent, the endpoints are read directly — running a probe sweep on a
+  fixed structure returns the same verdict at higher cost (and can undersample).
+- `enclosable = occlusion_gap > 0` — becomes a void as the probe grows.
+- `buriedness` — deepest residence depth from the mouth (max `topological_depth`).
+- `deepest_chamber` — the compound case (a deep narrow sub-pocket behind a wide
+  mouth that the global ratio misses) read off the merge-tree hierarchy: the
+  deepest sub-chamber and its `access_occlusion = peak_R_residence /
+  separation_radius`. A supporting descriptor (gated by depth; lattice toys grow
+  spurious shallow chambers), not a standalone classifier.
+
+The morphological **names and thresholds** (groove / occluded pocket / funnel /
+…) are a public-layer policy, not fixed in the kernel. Validation:
+`tests/test_dfnd_morphometrics.py`.
+
 ### 5.3. Surface Component
 
 A `surface_concavity` is a finite component with exactly one external link and no resident nodes.
