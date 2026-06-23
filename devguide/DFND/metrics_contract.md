@@ -156,6 +156,59 @@ Validation must include:
 A future publication-grade metric should use a new explicit name and preserve the
 current estimate for provenance and comparison.
 
+#### Implemented high-precision methods (on-demand)
+
+The plan above is now realized. The publication-grade metric uses new explicit
+names (`volume_solvent_resident`, `volume_solvent_transit`, both `canonical`);
+the old `volume_solvent_estimate` is preserved as a `provisional` fast bulk
+field for provenance. The precise quantity is computed **on demand** (never in
+the bulk pass) and lives in `topomt/dfnd/core/solvent_volume.py`, wired through
+`DFNDData.solvent_volume(component_id, *, region, method)` and
+`DFNDData.occupancy_grid(component_id, *, region, spacing)`.
+
+Target quantity (all three methods agree on it):
+
+> empty (solvent) volume of a component region = `vol(region)` −
+> `vol(region ∩ union(atom vdW balls))`,
+
+over the **union** of the excluding spheres, so overlapping atoms are never
+double-subtracted. Overlaps are pervasive in proteins (a covalent bond places
+each atom's centre well inside its neighbour's vdW sphere), so this is the
+common, not the corner, case. Atom gathering uses a KD-tree, so non-vertex
+intruder atoms are subtracted too. `region` is `'resident'` (resident tetrahedra
+only) or `'transit'` (resident + transit connectors); volumes are nm³ quantities.
+
+Three methods, offered for richness — each honest about its own error mode:
+
+- **Monte Carlo** (`method='mc'`, the production default). Seeded
+  stratified-barycentric sampling per tetrahedron; returns the volume **and a
+  rigorous 2σ statistical half-width** as the error. Cost scales with the
+  *surface* of the excluding union (roughly constant per tetrahedron), so it
+  stays cheap on large components. Reproducible for a fixed seed.
+- **Voxel occupancy grid** (its own entry point `DFNDData.occupancy_grid`, not a
+  `method=` of `solvent_volume`). Rasterises the region onto a boolean grid at a
+  chosen `spacing`,
+  subtracting the atom union; returns both the **volume and the 3-D shape**
+  (the grid + origin), which Monte Carlo cannot give. Cost scales with
+  *volume / spacing³*. Use it when the shape itself is wanted.
+- **Exact** (`method='exact'`, the oracle). Deterministic nested (z, y) Gauss
+  quadrature with an analytic 1-D interval-union along x — no Monte Carlo, no
+  3-D spherical geometry. numba-accelerated (`topomt/_private/jit.py`,
+  `lazy_njit`, lazy import). No statistical error; converges with `n_quad`.
+  Cost scales with *volume / tetrahedra* (O(L³)), so it is the **slowest on
+  large regions** — it is a per-tetrahedron ground truth and a cross-check for
+  the other two, not the production path. (Correcting an early intuition that
+  "exact" might be fastest for large cavities: it is not; MC stays production.)
+
+The validation battery (1–7 above) is met by
+`tests/test_dfnd_solvent_volume_precise.py`: zero-radius and fully occupied
+tetrahedra; single-sphere vs the analytic ball volume; overlapping spheres vs
+the closed-form lens, where naive independent subtraction provably fails;
+unequal/near-tangent radii and slivers; synthetic tetrahedra with analytic empty
+volume; MC↔voxel↔exact cross-agreement within MC's error bound. Comparison
+against external CASTp/VOLBL references (item 6) is deferred to the validation
+program, since semantics (solvent vs molecular-surface) must be matched first.
+
 ### 2.4. External-link and derived mouth area
 
 Definition:
