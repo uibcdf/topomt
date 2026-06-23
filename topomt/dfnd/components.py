@@ -852,8 +852,10 @@ def _attach_capacity_motifs(
     (same ``separation_radius``), never a forced parent/child. ``min_persistence``
     is only a mesh-noise floor in length units; the physical scale is reported per
     feature as ``separation_radius`` -- the probe radius at which the sub-feature
-    detaches from its sibling (the throat ``R_gate``). Throats/chambers stay
-    experimental (component_motifs.md sections 2/4/6; output_status.py / Q25).
+    detaches from its sibling (the throat ``R_gate``). Throats/chambers are
+    provisional: the scoring policy is fixed and toy-validated, real-system
+    validation remains for canonical (component_motifs.md sections 2/4/6;
+    output_status.py / Q25).
     """
     raw = result['raw']
     node_capacity = {t['tetrahedron_id']: t['R_residence'] for t in raw['tetrahedra']}
@@ -911,7 +913,7 @@ def _attach_capacity_motifs(
                 'node_ids': nodes,
                 'atom_indices': sorted({a for n in nodes for a in atoms_by_node[n]}),
                 'parent_throat_key': None,
-                'flags': ['experimental'],
+                'flags': ['provisional'],
             }
 
         chamber_by_peak: dict[int, dict[str, Any]] = {}
@@ -945,7 +947,7 @@ def _attach_capacity_motifs(
                     'separation_radius': capacity,
                     'persistence': prominence,
                     'child_chamber_keys': [],
-                    'flags': ['experimental'],
+                    'flags': ['provisional'],
                 }
                 # both basins are siblings under this throat; keep the first
                 # (smallest, highest-capacity) snapshot per peak so a leaf is

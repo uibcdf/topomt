@@ -94,21 +94,25 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
     # --- motifs (the four emitted motif_type strings) ---
     'depth_region': OutputStatus('canonical', 'motif', None, None),
     'external_mouth': OutputStatus('canonical', 'motif', None, None),
+    # Promoted to provisional: the merge-tree scoring/persistence policy is fixed
+    # and validated on the four-toy hierarchy panel + probe-sweep / persistence
+    # stability (tests/test_dfnd_hierarchy.py). Real-system validation remains for
+    # canonical. Emitted with flags=['provisional'].
     'throat_candidate': OutputStatus(
-        'experimental',
+        'provisional',
         'motif',
-        'scoring/persistence policy + tests + toy/real cases + tolerance stability',
+        'real-system validation of the chamber/throat scoring policy',
         'Q25',
     ),
     'chamber_candidate': OutputStatus(
-        'experimental',
+        'provisional',
         'motif',
         'as throat_candidate',
         'Q25',
     ),
     # --- derived descriptor (component.bottleneck = top throat_candidate) ---
     'bottleneck': OutputStatus(
-        'experimental',
+        'provisional',
         'metric',
         'inherits throat_candidate promotion',
         'Q25',
