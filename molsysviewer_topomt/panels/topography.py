@@ -190,7 +190,7 @@ class TopoMTTopographyPanel(AddonPanelWidget):
                 )
                 result = attached['rendered']
                 record_event(
-                    view, 'panel_render_pockets', n_rendered=result['n_rendered']
+                    view, 'panel_render_pockets', n_rendered=result.counts['n_rendered']
                 )
                 self.push_state({**self._build_state(runtime), 'status': 'done'})
             except Exception as exc:

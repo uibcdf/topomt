@@ -5,14 +5,14 @@ components according to what they **mean** — a void is not drawn like a channe
 a channel is not drawn like a pocket, an interface is not drawn like either, and
 a static snapshot is not drawn like a trajectory.
 
-Status: proposal (2026-06-06). This document consolidates the
-implementation-anchored plan with the broader representation catalog previously
-kept as a separate draft. References tagged `(roadmap §N)` identify the original
-idea grouping retained during consolidation. The primitives in
-[§3](#3-what-exists-today) already exist in
-`molsysviewer`/`molsysviewer_topomt`; the per-family language, the dynamic and
-pharmacophoric axes, and the gaps in [§13](#13-gaps-versus-the-current-implementation)
-are not yet wired.
+Status: current conceptual visual-language document. The static single-frame
+DFND language described here is now mostly implemented in
+`molsysviewer_topomt`; dynamic trajectory visualization remains a future layer.
+This document describes the *what* and user-facing rationale. The implementation
+status and remaining engineering gaps live in
+[component_visualization_implementation.md](component_visualization_implementation.md).
+References tagged `(roadmap §N)` identify the original idea grouping retained
+during consolidation.
 
 Related: [object_model.md](object_model.md) (component families),
 [feature_definitions.md](feature_definitions.md),
@@ -28,15 +28,10 @@ Related: [object_model.md](object_model.md) (component families),
 
 ## 1. Purpose
 
-`show_dfnd_components` can already draw a component in seven geometric modes, but
-those modes are *debugging primitives* (tetrahedra, coast faces, the graph), not
-a curated representation per component type. A user looking at a result cannot
-tell a void from a channel from the rendering alone, because both fall back to
-the same amorphous blob.
-
-This document defines, before any new code, the target: a small, consistent
-visual vocabulary, and a mapping from each DFND family to the representation that
-communicates *its* distinguishing feature — a pocket's mouth, a channel's
+`show_dfnd_components` now supports both low-level diagnostic modes and a
+curated representation per component type. The remaining purpose of this
+document is to keep the visual vocabulary explicit: each DFND family should be
+drawn by the representation that communicates *its* distinguishing feature — a pocket's mouth, a channel's
 through-path and bottleneck, an interface's two-body lining, a protrusion's
 convexity, and (for trajectories) a component's persistence over time.
 
@@ -64,17 +59,24 @@ values:
 
 | Mode | Draws | Intent |
 |---|---|---|
-| `tetrahedra` | the empty tetrahedra of the component | substrate / debug |
-| `cloud` | a Gaussian blob (marching cubes) over the resident spheres | volume |
-| `residence_spheres` | one sphere per resident node at `R_residence` | skeleton |
-| `probe_centers` | spheres at the probe centers | skeleton |
-| `surface` | atom-driven surface of the lining | lining |
-| `coast_faces` | the wet↔dry boundary faces | adjacency / debug |
+| `auto` | per-family default (`void`/`pocket`→`envelope`, `channel`→`pipe`, interfaces→`contact_sheet`) | user-facing default resolver |
+| `envelope` | blob plus mouth caps and gate rings | pocket/void shape and openings |
+| `pipe` | channel skeleton tube plus bottleneck cue | channel path and constriction |
+| `rings` | HOLE-style clearance rings | channel profile |
+| `contact_sheet` | lining split by body | interface composition |
+| `scaffold` | dry-core spine | dry context |
+| `affinity_spheres` | interaction-typed spheres | local chemistry |
+| `tetrahedra` | empty tetrahedra of the component | substrate / debug |
+| `cloud` | Gaussian blob over resident spheres | volume / fallback |
+| `residence_spheres`, `alpha_spheres` | discrete spheres | skeleton / debug |
+| `probe_centers` | spheres at probe centers | skeleton / debug |
+| `surface` | atom-driven lining surface | lining |
+| `coast_faces` | wet↔dry boundary faces | adjacency / debug |
 | `graph` | nodes + edges of the flow network | topology / debug |
 
-There is **no** family-specific default: every family uses whichever
-`representation` the caller passes, so a channel and a void look identical unless
-the caller knows to differentiate them.
+Family-specific rendering is therefore implemented for static single-frame views.
+The remaining gap is dynamic visualization across frames, where colours and
+layers should be keyed by track identity rather than local component ids.
 
 ### 3.2 Viewer primitives already available
 
@@ -86,23 +88,22 @@ the caller knows to differentiate them.
 - `add_tetrahedra`, `add_triangle_faces` — meshes (used by `tetrahedra`/`coast_faces`).
 - `add_links` — graph edges, with `color_by`/`color_map` (used by `graph`).
 - **`add_channel_tube`** — a variable-radius swept tube from `centers` + `radii`,
-  with `color_by` / `solvent_distances` / `color_map`. *Not yet used by DFND.*
+  with `color_by` / `solvent_distances` / `color_map`; used by DFND `pipe`.
 - **`pharmacophore`** shape — `add_interaction_sites`,
-  `add_pharmacophore_features`. *Not yet used by DFND.*
+  `add_pharmacophore_features`; used by `show_dfnd_pharmacophore`.
 - `displacements`, `anisotropy_ellipsoids`, `signal` — dynamic/scalar overlays,
-  with `color_by`. *Not yet used by DFND.*
+  with `color_by`; reserved for future trajectory visualization.
 
-Confirmed **not** present (would need new viewer support):
+Additional primitives now available upstream:
 
-- no clipping-plane / auto-slice primitive (would be ideal for void auto-focus,
-  roadmap §1.4) — but a **native opacity-carving** workaround exists today:
-  `selections.add_selection` + `regions.set_representation` / `layers.set_alpha`
-  can fade the molecular representation outside the component, no new primitive
-  needed (see §6 void and §11);
-- no surface-curvature-projection / per-vertex heatmap primitive (needed for the
-  convexity heatmap, roadmap §3.3);
-- no orthogonal stacked-ring primitive (HOLE profile, roadmap §2.2) — would have
-  to be built from `add_links`/line geometry.
+- clipping/section support (`scene.set_clip_planes`/`add_section`) exists in
+  `molsysviewer`; DFND also has `carve_voids` as an opacity-focus workflow.
+- scalar surface colouring (`set_color_by_values`) exists and is used by
+  `show_dfnd_convexity`.
+- ring rendering exists (`add_rings`) and is used by the DFND `rings` profile.
+
+Still not a static single-frame primitive: the 2D–3D synchronized trajectory
+widget needed for dynamic event timelines.
 
 Per-vertex / per-element **scalar coloring** (`color_by`/`color_map`) *is* broadly
 available, so heatmap-style coloring of tubes, links, and displacements is in
@@ -399,71 +400,29 @@ are applied when the caller passes nothing; the explicit names are overrides.
 
 These coexist with the existing debug modes (`tetrahedra`, `cloud`, `graph`, …).
 
-## 13. Gaps versus the current implementation
+## 13. Remaining gaps versus the current implementation
 
-In priority order:
+The static single-frame vocabulary is implemented. Remaining gaps are narrower:
 
-1. **Wire channels to `add_channel_tube`** (`pipe`) — the primitive exists; derive
-   an **ordered skeleton** through the resident nodes (shortest path in the flow
-   graph between the two mouths) and the **free radius per station** (`R_residence`
-   / local `R_gate`), feed `centers` + `radii`, and add a bottleneck ring.
-2. **Per-family defaults** — pick the primary representation from `family` when the
-   caller does not override it.
-3. **Mouth/gate accent primitive** (`envelope`) — translucent cap from
-   `mouth_face_clusters` + an `R_gate` ring. Data already on the component/graph.
-4. **Per-body interface surface** (`contact_sheet`) — split the lining surface by
-   body using `lining_body_split` / `lining_bodies` (**already on the component**);
-   bicolor for two banks, one color per body for 3+-body junctions.
-5. **HOLE stacked-ring profile** (`rings`) — new line/ring geometry with the
-   clearance color thresholds; complements the tube for pores.
-6. **Scalar → colour/size channel** — map a per-node scalar (gate radius, depth,
-   score, persistence) to colour/radius across families via `color_by`/`signal`.
-7. **Affinity spheres** (`affinity_spheres`) — residence spheres colored by lining
-   environment; small, high value for druggability.
-8. **Apply the Okabe–Ito palette** (§11) — replace `_TYPE_PALETTE` with the fixed
-   colour-blind-safe assignment, add the `interface` body colours, the
-   `percolating` hue, and the reserved yellow mouth/gate accent (`#F0E442`).
-9. **Void opacity carving** — fade the molecular representation outside a void's
-   geometry (selection + `set_alpha`), the native stand-in for the missing
-   clipping plane (§6, §11). Small and high value; no new viewer primitive.
-10. **Dynamic axis** (§8) — persistence/identity/pulsation, streamlines, the
-    2D–3D synced widget, and **merge/split transition cueing** (colour blend);
-    `displacements`/`signal` unused. **Blocked on** the core: cross-frame
-    component identity (§8 precondition) and, for transition cueing, **look-ahead
-    event detection** — DFND-core gaps before they are rendering gaps.
-11. **Convexity heatmap + dry-core scaffold** (§7) — heatmap needs a per-vertex
-    surface-coloring primitive (to confirm); scaffold maps to thick `add_links`.
-12. **Pharmacophoric interaction-site map** (§9) — `pharmacophore` shape unused.
-13. **Wireframe isosurface** (`wire_contour`) — confirm `add_pocket_blob`
-    wireframe support.
-14. **Labels/legend/metrics in scene** (§11) — no component labels, no family
-    legend, no metric overlays today.
-15. **Sliver filtering at render time** (§10) — desirable; coordinate jitter is
-    **not** (use the existing symbolic epsilon policy).
-16. **Switchable hierarchical grouping (UX)** — layer tags exist; no curated
-    grouping at scale.
-17. **Default visibility by relevance** — no top-N ranking rule; with many
-    components everything draws at once. Should rank by `volume_solvent_estimate`
-    and show the top solid, rest toggleable (§11).
-18. **Nested-component cue** — concentric features (`nested_spheres`,
-    `pocket_in_pocket`) render indistinctly; needs the depth-stepped
-    opacity/wireframe cue (§11).
+1. **Dynamic axis** — render trajectories with stable `track_id` colours/layers,
+   event timelines, and merge/split/open/close cues once a trajectory driver
+   supplies tracked DFND results.
+2. **2D–3D synced trajectory widget** — generic MolSysViewer UI primitive for
+   coupling timelines or scalar plots to scene selection.
+3. **Render-time sliver filtering** — visually suppress unstable sliver
+   tetrahedra without changing DFND coordinates or topology.
+4. **Branched channel view** — expose secondary mouths in >2-mouth channels
+   without implying a validated max-capacity navigability path.
+5. **Wireframe isosurface** (`wire_contour`) — optional mode, still dependent on
+   confirming or extending `add_pocket_blob` wireframe support.
 
-## 14. Suggested phasing
+## 14. Current implementation status
 
-Order that maximizes value per unit of work:
-
-1. **Per-family defaults** + the **mouth/gate cap** — small, makes pocket/void/
-   channel immediately distinguishable with primitives that already exist.
-2. **Channel skeleton → `add_channel_tube`** + bottleneck ring — highest-value
-   new feature, primitive already in the viewer.
-3. **Bipartite interface surface** — reuses body labels already on the component.
-4. **HOLE ring profile** + **scalar → gradient** plumbing — bottleneck/clearance
-   reading across pores and all families.
-5. **Affinity spheres**, **labels/legend**, **colour-accessible palette** — UX and
-   druggability polish that scales with component count.
-6. **Convexity/dry-core** (§7), **dynamic axis** (§8), **pharmacophore map** (§9) —
-   the larger, separate design slices, built on the now-rich static primitives.
+The original static phasing has landed: per-family defaults, `envelope`, `pipe`,
+`contact_sheet`, `rings`, `affinity_spheres`, labels/legend, void carving,
+`scaffold`, convexity, pharmacophore rendering, and top-N visibility are
+implemented. The implementation-level status is maintained in
+[component_visualization_implementation.md](component_visualization_implementation.md).
 
 ## 15. Cross-references
 

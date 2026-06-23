@@ -205,7 +205,7 @@ class TopoMTPocketsPanel(AddonPanelWidget):
                 )
                 result = attached['rendered']
                 record_event(
-                    view, 'panel_show_all_pockets', n_rendered=result['n_rendered']
+                    view, 'panel_show_all_pockets', n_rendered=result.counts['n_rendered']
                 )
                 self.push_state({**self._build_state(runtime), 'status': 'done'})
             except Exception as exc:

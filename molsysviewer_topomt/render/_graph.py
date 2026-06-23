@@ -1,7 +1,5 @@
 """show_dfn_graph: DFN flow-graph nodes/edges."""
 
-from functools import wraps
-from inspect import signature
 from typing import Any
 
 from topomt import pyunitwizard as puw
@@ -10,7 +8,6 @@ from ..geometry import dfn_graph_segments, tetrahedron_centers
 from ._common import _resolve_topography
 from .adapters import add_point_spheres, add_segments
 from .result import (
-    RenderResult,
     clear_previous_render_result,
     remember_render_result,
     render_result,
@@ -26,7 +23,7 @@ _DFN_NODE_PALETTE = {
 }
 
 
-def _show_dfn_graph_legacy(
+def _render_dfn_graph_layers(
     view,
     topography=None,
     *,
@@ -149,18 +146,11 @@ def _show_dfn_graph_legacy(
     }
 
 
-@wraps(_show_dfn_graph_legacy)
 def show_dfn_graph(view, topography=None, **kwargs):
     """Render the DFN graph and return a uniform ``RenderResult``."""
     operation_key = f'graph:{kwargs.get("tag_prefix", "dfn-graph")}'
     clear_previous_render_result(view, operation_key)
-    raw = _show_dfn_graph_legacy(view, topography, **kwargs)
+    raw = _render_dfn_graph_layers(view, topography, **kwargs)
     selected_ids = raw.get('node_ids', ()) if isinstance(raw, dict) else ()
     result = render_result('graph', raw, selected_ids=selected_ids)
     return remember_render_result(view, operation_key, result)
-
-
-show_dfn_graph.__signature__ = signature(_show_dfn_graph_legacy).replace(
-    return_annotation=RenderResult
-)
-show_dfn_graph.__annotations__['return'] = RenderResult

@@ -1,7 +1,5 @@
 """show_dfnd_components: typed components in multiple representations."""
 
-from functools import wraps
-from inspect import signature
 from typing import Any
 
 import numpy as np
@@ -47,7 +45,6 @@ from .adapters import (
     add_uniform_spheres,
 )
 from .result import (
-    RenderResult,
     clear_previous_render_result,
     remember_render_result,
     render_result,
@@ -543,7 +540,7 @@ def show_dfnd_labels(
     return layers[0] if len(layers) == 1 else layers
 
 
-def _show_dfnd_components_legacy(
+def _render_dfnd_component_layers(
     view,
     topography=None,
     *,
@@ -705,7 +702,7 @@ def _show_dfnd_components_legacy(
             groups.setdefault(mode, []).append(comp.component_id)
         results = []
         for mode, ids in groups.items():
-            res = _show_dfnd_components_legacy(
+            res = _render_dfnd_component_layers(
                 view,
                 topography,
                 show_wet=show_wet,
@@ -1416,7 +1413,6 @@ def _selected_component_ids(topography, kwargs):
     return tuple(selected)
 
 
-@wraps(_show_dfnd_components_legacy)
 def show_dfnd_components(view, topography=None, **kwargs):
     """Render DFND components and return a uniform ``RenderResult``."""
     resolved = _resolve_topography(view, topography)
@@ -1426,16 +1422,10 @@ def show_dfnd_components(view, topography=None, **kwargs):
     )
     operation_key = f'components:{kwargs.get("tag_prefix", "dfnd-comp")}'
     clear_previous_render_result(view, operation_key)
-    raw = _show_dfnd_components_legacy(view, resolved, **kwargs)
+    raw = _render_dfnd_component_layers(view, resolved, **kwargs)
     result = render_result(
         representation,
         raw,
         selected_ids=_selected_component_ids(resolved, kwargs),
     )
     return remember_render_result(view, operation_key, result)
-
-
-show_dfnd_components.__signature__ = signature(_show_dfnd_components_legacy).replace(
-    return_annotation=RenderResult
-)
-show_dfnd_components.__annotations__['return'] = RenderResult

@@ -1,5 +1,12 @@
 # MolSysViewer Addon Plan
 
+> **Status:** historical initial plan. This document records the first
+> `molsysviewer_topomt` addon roadmap before the DFND viewer implementation
+> matured. It is kept as a checkpoint, not as the current implementation
+> contract. Current DFND visualization status lives in
+> [DFND/component_visualization.md](DFND/component_visualization.md) and
+> [DFND/component_visualization_implementation.md](DFND/component_visualization_implementation.md).
+
 ## Objective
 
 After the non-DFND core of TopoMT is stable, the next major integration target
@@ -95,7 +102,7 @@ The first addon version should be conservative:
 - reuse existing MolSysViewer shapes for pockets;
 - avoid new frontend complexity unless strictly necessary.
 
-## Current checkpoint
+## Historical checkpoint
 
 This line of work has now started.
 
@@ -130,11 +137,16 @@ What has already been clarified during implementation:
 - the addon currently works around that by cloning the full feature state when
   building filtered temporary topographies for rendering.
 
-What still does not exist:
+At the time of this checkpoint, the following did not yet exist:
 
 - real panel/workbench UI content;
-- context actions wired to actual scene operations.
+- context actions wired to actual scene operations;
 - richer rendering modes beyond the current blob/marker fallback.
+
+These statements are historical. The current addon includes registered panels,
+context actions, render groups, typed render results, explicit atom-index-space
+payloads, and the richer DFND component representations tracked in the current
+visualization implementation document.
 
 For continuity details, see:
 

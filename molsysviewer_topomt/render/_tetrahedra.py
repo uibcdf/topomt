@@ -1,8 +1,6 @@
 """show_dfnd_tetrahedra: Delaunay tetrahedra / face rendering."""
 
 from collections.abc import Iterable
-from functools import wraps
-from inspect import signature
 from typing import Any
 
 from topomt import pyunitwizard as puw
@@ -16,14 +14,13 @@ from ._common import (
 )
 from .adapters import add_tetrahedra
 from .result import (
-    RenderResult,
     clear_previous_render_result,
     remember_render_result,
     render_result,
 )
 
 
-def _show_dfnd_tetrahedra_legacy(
+def _render_dfnd_tetrahedra_layer(
     view,
     topography=None,
     *,
@@ -259,13 +256,12 @@ def _show_dfnd_tetrahedra_legacy(
 # Node-class colors (combined_class), shared with render_dfnd_tetrahedra.
 
 
-@wraps(_show_dfnd_tetrahedra_legacy)
 def show_dfnd_tetrahedra(view, topography=None, **kwargs):
     """Render tetrahedra and return a uniform ``RenderResult``."""
     resolved = _resolve_topography(view, topography)
     operation_key = f'tetrahedra:{kwargs.get("tag_prefix", "dfnd-tetra")}'
     clear_previous_render_result(view, operation_key)
-    raw = _show_dfnd_tetrahedra_legacy(view, resolved, **kwargs)
+    raw = _render_dfnd_tetrahedra_layer(view, resolved, **kwargs)
     selected_ids = kwargs.get('tetrahedra_indices')
     if selected_ids is None:
         if getattr(resolved, 'dfnd', None) is not None:
@@ -281,9 +277,3 @@ def show_dfnd_tetrahedra(view, topography=None, **kwargs):
         )
     result = render_result('tetrahedra', raw, selected_ids=selected_ids)
     return remember_render_result(view, operation_key, result)
-
-
-show_dfnd_tetrahedra.__signature__ = signature(_show_dfnd_tetrahedra_legacy).replace(
-    return_annotation=RenderResult
-)
-show_dfnd_tetrahedra.__annotations__['return'] = RenderResult

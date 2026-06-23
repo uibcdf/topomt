@@ -263,9 +263,9 @@ def test_show_topography_pockets_uses_blob_and_marker_modes():
     view = DummyView()
     result = show_topography_pockets(view, topo)
 
-    assert result['n_rendered'] == 2
-    assert result['rendered'][0]['mode'] == 'blob'
-    assert result['rendered'][1]['mode'] == 'marker'
+    assert result.counts['n_rendered'] == 2
+    assert result.details['rendered'][0]['mode'] == 'blob'
+    assert result.details['rendered'][1]['mode'] == 'marker'
     assert view.messages[0]['op'] == 'add_pocket_blob'
     assert view.messages[1]['op'] == 'add_sphere'
 
@@ -285,7 +285,7 @@ def test_show_topography_pockets_accepts_quantity_backed_features():
     view = DummyView()
     result = show_topography_pockets(view, topo)
 
-    assert result['n_rendered'] == 1
+    assert result.counts['n_rendered'] == 1
     assert view.messages[0]['op'] == 'add_pocket_blob'
     assert np.allclose(view.messages[0]['options']['centers'], [[1.0, 2.0, 3.0]])
     assert view.messages[0]['options']['radii'] == pytest.approx([2.0])
@@ -310,7 +310,7 @@ def test_pocket_blob_provider_renders_when_view_is_available():
     result = pocket_blob_provider(view=view, topography=topo)
 
     assert result['has_view'] is True
-    assert result['rendered']['n_rendered'] == 1
+    assert result['rendered'].counts['n_rendered'] == 1
     assert view.messages[0]['op'] == 'add_pocket_blob'
 
 
@@ -331,7 +331,7 @@ def test_attach_topography_enables_addon_and_renders():
     result = attach_topography(view, topo)
 
     assert result['addon_enabled'] is True
-    assert result['rendered']['n_rendered'] == 1
+    assert result['rendered'].counts['n_rendered'] == 1
     assert view._topomt_addon_runtime.enabled is True
 
 
@@ -431,9 +431,9 @@ def test_attach_features_renders_only_selected_feature_ids():
     register_with_molsysviewer()
     result = attach_features(view, topo, feature_ids=['POC-2'])
 
-    assert result['rendered']['n_rendered'] == 1
+    assert result['rendered'].counts['n_rendered'] == 1
     assert result['selected_feature_ids'] == ['POC-2']
-    assert result['rendered']['rendered'][0]['feature_id'] == 'POC-2'
+    assert result['rendered'].details['rendered'][0]['feature_id'] == 'POC-2'
 
 
 def test_subset_topography_preserves_selected_relations_and_dfnd_semantics():
@@ -505,7 +505,7 @@ def test_attach_features_keeps_complete_source_and_tracks_feature_filter():
     assert runtime.topography.dfnd.marker == 'complete-dfnd'
     assert runtime.active_feature_ids == ('POC-1',)
     assert second['selected_feature_ids'] == ['POC-1']
-    assert second['rendered']['rendered'][0]['feature_id'] == 'POC-1'
+    assert second['rendered'].details['rendered'][0]['feature_id'] == 'POC-1'
     group = runtime.render_groups['features:topomt-pocket']
     assert group['feature_ids'] == ('POC-1',)
     assert group['tags'] == ('topomt-pocket:POC-1',)
@@ -558,9 +558,9 @@ def test_attach_pockets_is_a_pocket_named_wrapper():
     register_with_molsysviewer()
     result = attach_pockets(view, topo, pocket_ids=['POC-1'])
 
-    assert result['rendered']['n_rendered'] == 1
+    assert result['rendered'].counts['n_rendered'] == 1
     assert result['selected_feature_ids'] == ['POC-1']
-    assert result['rendered']['rendered'][0]['feature_id'] == 'POC-1'
+    assert result['rendered'].details['rendered'][0]['feature_id'] == 'POC-1'
 
 
 def test_build_topography_standalone0_html_uses_viewer_host_and_registers_addon(
@@ -1529,7 +1529,7 @@ def test_show_dfnd_components_explicit_sphere_modes_and_graph_alias():
 
     graph = show_dfnd_components(DummyView(), topo, representation='graph')
     skeleton = show_dfnd_components(DummyView(), topo, representation='skeleton')
-    assert graph['n_nodes'] == skeleton['n_nodes'] == 1
+    assert graph.counts['n_nodes'] == skeleton.counts['n_nodes'] == 1
 
 
 def test_pipe_renders_channel_as_variable_radius_tube():
@@ -2046,7 +2046,7 @@ def test_show_dfn_graph_can_render_twice_with_same_tag_prefix():
     first = show_dfn_graph(view, topography, tag_prefix='repeat-graph')
     second = show_dfn_graph(view, topography, tag_prefix='repeat-graph')
 
-    assert first['n_nodes'] == second['n_nodes'] == 4
+    assert first.counts['n_nodes'] == second.counts['n_nodes'] == 4
     cleared_tags = {
         message['tag']
         for message in view.messages
@@ -2516,11 +2516,11 @@ def test_primary_renderers_return_common_render_result_and_render_twice():
         assert isinstance(result.tags, tuple)
         assert isinstance(result.warnings, tuple)
 
-    assert pocket_second['n_rendered'] == 1
-    assert pocket_second.primary_layer is pocket_second.layers[0]
+    assert pocket_second.counts['n_rendered'] == 1
+    assert pocket_second.layers[0] is pocket_second.layers[0]
     assert tetra_empty.is_empty is True
     assert bool(tetra_empty) is False
-    assert graph_second['n_nodes'] == graph_first['n_nodes']
+    assert graph_second.counts['n_nodes'] == graph_first.counts['n_nodes']
     assert component_second.representation == 'surface'
     assert component_second.selected_ids
     assert any(
@@ -2530,7 +2530,7 @@ def test_primary_renderers_return_common_render_result_and_render_twice():
     )
 
 
-def test_render_result_mapping_and_primary_layer_compatibility():
+def test_render_result_uses_explicit_counts_and_details():
     from molsysviewer_topomt.render import RenderResult
 
     layer = types.SimpleNamespace(tag='layer-tag')
@@ -2540,16 +2540,19 @@ def test_render_result_mapping_and_primary_layer_compatibility():
         layers=(layer,),
         tags=('layer-tag',),
         counts={'n_items': 1},
-        details={'legacy': 'value'},
+        details={'payload': 'value'},
     )
 
-    assert result['n_items'] == 1
-    assert result['legacy'] == 'value'
-    assert result.tag == 'layer-tag'
+    assert result.counts['n_items'] == 1
+    assert result.details['payload'] == 'value'
+    assert result.layers == (layer,)
+    assert result.tags == ('layer-tag',)
     assert result.counts['n_layers'] == 1
     assert result.counts['n_selected'] == 1
     with pytest.raises(TypeError):
         result.counts['n_items'] = 2
+    with pytest.raises(TypeError):
+        result.details['payload'] = 'other'
     assert bool(result) is True
 
 
@@ -2679,8 +2682,8 @@ def test_wp18_graph_renderers_share_canonical_tetrahedron_center_geometry():
     full = show_dfn_graph(DummyView(), topography)
     component = show_dfnd_components(DummyView(), topography, representation='graph')
 
-    full_geometry = full['node_geometry']
-    component_geometry = component['node_geometry']
+    full_geometry = full.details['node_geometry']
+    component_geometry = component.details['node_geometry']
     assert full_geometry.unit == component_geometry.unit == 'nm'
     assert full_geometry.coordinates == component_geometry.coordinates
     assert tuple(ref.entity_id for ref in full_geometry.refs) == tuple(
@@ -2724,8 +2727,8 @@ def test_wp18_graph_renderers_share_canonical_edge_geometry():
     full = show_dfn_graph(DummyView(), topography)
     component = show_dfnd_components(DummyView(), topography, representation='graph')
 
-    full_edges = full['edge_geometry']
-    component_edges = component['edge_geometry']
+    full_edges = full.details['edge_geometry']
+    component_edges = component.details['edge_geometry']
     assert full_edges.unit == component_edges.unit == 'nm'
     assert full_edges.coordinate_pairs == component_edges.coordinate_pairs
     assert tuple(ref.entity_id for ref in full_edges.refs) == (101, 102)
@@ -2737,7 +2740,7 @@ def test_wp18_full_graph_mouth_geometry_keeps_face_reference():
     from molsysviewer_topomt.render import show_dfn_graph
 
     result = show_dfn_graph(DummyView(), _graph_render_topography())
-    mouths = result['mouth_geometry']
+    mouths = result.details['mouth_geometry']
 
     assert mouths.unit == 'nm'
     assert len(mouths.refs) == 1

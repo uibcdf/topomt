@@ -5,14 +5,12 @@ The *how* for [component_visualization.md](component_visualization.md) (the
 current `molsysviewer_topomt.render` code, the real `molsysviewer.shapes`
 primitives, and the DFND data already on the `Component`/`raw` records.
 
-Status: **in progress** (updated 2026-06-06). Phases 0–5 are implemented and
-pushed (topomt `main`); Phase 6 is partial (dry-core scaffold done). The two
-generic upstream primitives this plan needed — `add_rings` and `focus_with_fade`
-— are implemented and pushed in `molsysviewer`. Remaining work is upstream
-(more molsysviewer primitives) or core (dynamic identity). Per-phase status in
-the build-order table (§12); phasing follows
-[component_visualization.md §14](component_visualization.md) and its gap list
-(§13).
+Status: **current static-view implementation status**. The single-frame DFND
+component visual language is implemented in `molsysviewer_topomt`; generic
+viewer primitives needed by those static views are available upstream in
+`molsysviewer`. Remaining work is dynamic: trajectory execution, track-aware
+rendering, event timelines, and any 2D–3D synchronized trajectory widget.
+Per-phase status is summarized in §12.
 
 ## Implementation status (2026-06-06)
 
@@ -242,22 +240,20 @@ Makes pocket/void/channel distinguishable using mostly existing primitives.
 - **Default visibility by relevance**: render top-N by `volume_solvent_estimate`
   solid, rest as toggleable layers; demote non-resident/percolating.
 
-## 9. Phase 6 — blocked or larger (dynamic, pharmacophore, convexity)
+## 9. Remaining work — dynamic axis
 
-These are not pure rendering tasks; they wait on DFND core or new viewer support:
+Static single-frame rendering is complete enough to treat as implemented. The
+remaining visualization work is dynamic and depends on trajectory-level data:
 
-- **Dynamic axis** — persistence/identity/pulsation, streamlines, the 2D–3D
-  synced widget, and merge/split transition cueing (colour blend). **Blocked on**
-  the core emitting cross-frame component identity and, for transition cueing,
-  look-ahead event detection ([dynamic_topology.md](dynamic_topology.md)).
-- **Pharmacophoric interaction-site map** — `pharmacophore.add_pharmacophore_features`;
-  needs interaction typing ([4D_and_pharmacophores.md](4D_and_pharmacophores.md)).
-- **Convexity heatmap** — needs a per-vertex surface-curvature-projection
-  primitive not yet in the viewer; the dry-core **scaffold** (`scaffold`,
-  `add_links` cylinders) *is* doable here from the dry network.
-- **Triangulation stability** — consume a numerically stable triangulation
-  ([numerical_policy.md](numerical_policy.md)) and add render-time **sliver
-  filtering**; do **not** inject coordinate jitter.
+- **Trajectory driver** — run DFND per frame and feed the resulting sequence to
+  `assign_tracks`.
+- **Track-aware rendering** — key colours and layer tags on `track_id` so the
+  same cavity keeps visual identity across frames.
+- **Event timeline** — show birth, death, split, merge, open, and close events.
+- **2D–3D synchronized trajectory widget** — upstream MolSysViewer UI primitive
+  for coupling plots and timelines to scene selection.
+- **Render-time sliver filtering** — still desirable for triangulation stability;
+  consume stable triangulations and do **not** inject coordinate jitter.
 
 ## 10. Testing strategy
 
@@ -271,20 +267,19 @@ These are not pure rendering tasks; they wait on DFND core or new viewer support
 - **Regression anchors** — extend `tests/test_dfnd_wet_dry_adjacency.py` and the
   addon tests; tie each phase to a catalog fixture with a known verdict.
 
-## 11. Open design decisions
+## 11. Remaining decisions
 
-1. **`representation='auto'` as the eventual default?** — yes long-term, but flip
-   the default only after Phases 1–3 land so existing callers do not change
-   behaviour mid-stream.
-2. **Where the geometry module lives** — `topomt/dfnd/geometry_viewer.py`
-   (promoted from `experimental`) vs a render-local `_geometry.py`. Recommend the
-   DFND side so non-viewer consumers (exporters, tests) can reuse it.
-3. **>2-mouth channel policy** — primary path between the two widest mouths now,
-   branches later; needs sign-off so the rendering is not seen as dropping mouths.
-4. **Ring primitive** — reuse `add_links` circles vs request a dedicated ring
-   shape upstream in `molsysviewer`.
-5. **Affinity typing source** — stub from element/residue vs depend on an external
-   pharmacophore typing.
+1. **Dynamic default identity** — track-aware colours and layer tags should use
+   `track_id` once the trajectory driver supplies it; local `component_id` remains
+   a single-result label only.
+2. **Dynamic UI primitive** — decide whether the event timeline uses a generic
+   MolSysViewer 2D–3D synced widget or a TopoMT-specific panel first. Generic
+   upstream remains preferred.
+3. **Sliver filtering policy** — define render-time filtering for visually
+   unstable tetrahedra without changing DFND coordinates or topology.
+4. **>2-mouth channel branches** — the current static primary path is usable; a
+   future branched channel view should make secondary mouths visible without
+   implying a max-capacity navigability claim.
 
 ## 12. Build order (summary)
 
@@ -295,15 +290,16 @@ These are not pure rendering tasks; they wait on DFND core or new viewer support
 | 2 | channel tube + bottleneck | `pipe` | ✅ done (centerline + real bottleneck ring) |
 | 3 | interface body-split | `contact_sheet` | ✅ done |
 | 4 | HOLE rings + scalar gradient | `rings` | ✅ done |
-| 5 | carving, labels, affinity, visibility | `affinity_spheres`, `carve_voids`, `show_dfnd_labels`, `top_n` | ✅ done (legend pending, upstream) |
+| 5 | carving, labels, affinity, visibility | `affinity_spheres`, `carve_voids`, `show_dfnd_labels`, `show_dfnd_legend`, `top_n` | ✅ done |
 | 6 | dry-core scaffold | `scaffold` | ✅ done |
 | 6 | convexity heatmap | `show_dfnd_convexity` | ✅ done (`whole.set_color_by_values`, no new primitive) |
 | 6 | pharmacophore map | `show_dfnd_pharmacophore` | ✅ done (`physchem` + `add_interaction_sites`) |
-| 6 | dynamic topology | — | ⛔ blocked on DFND core (cross-frame identity) |
+| 6 | dynamic topology | — | ⛔ blocked on trajectory driver + dynamic UI |
 
-Upstream primitives (molsysviewer): `add_rings` ✅, `focus_with_fade` ✅ (both
-pushed); scalar surface colouring (`set_color_by_values`) already existed.
-Still new: `legend`, `clipping-plane`, `2D–3D widget` ⏳.
+Upstream primitives (molsysviewer): `add_rings`, `focus_with_fade`,
+`scene.set_legend`, scalar surface colouring (`set_color_by_values`), and
+clipping/section support are available. Still future: the 2D–3D synchronized
+trajectory widget.
 
 ## 13. Cross-references
 

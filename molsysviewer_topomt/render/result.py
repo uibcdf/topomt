@@ -1,6 +1,6 @@
 """Common result contract for TopoMT viewer render operations."""
 
-from collections.abc import Iterator, Mapping
+from collections.abc import Mapping
 from dataclasses import dataclass, field
 from types import MappingProxyType
 from typing import Any
@@ -40,12 +40,11 @@ def _collect_layers(value, output):
 
 
 @dataclass(frozen=True)
-class RenderResult(Mapping[str, Any]):
+class RenderResult:
     """Uniform, immutable result returned by primary render operations.
 
-    The mapping interface preserves legacy dictionary-style access. Attribute
-    access not owned by the result delegates to ``primary_layer`` for gradual
-    compatibility with callers that previously received one layer directly.
+    Renderer-specific payloads live in ``details`` and numeric summaries live in
+    ``counts``.
     """
 
     representation: str
@@ -68,58 +67,11 @@ class RenderResult(Mapping[str, Any]):
         object.__setattr__(self, 'details', MappingProxyType(dict(self.details)))
 
     @property
-    def primary_layer(self):
-        return self.layers[0] if self.layers else None
-
-    @property
     def is_empty(self) -> bool:
         return not self.layers
 
     def __bool__(self) -> bool:
         return not self.is_empty
-
-    def __getitem__(self, key: str) -> Any:
-        canonical = {
-            'representation': self.representation,
-            'selected_ids': self.selected_ids,
-            'layers': self.layers,
-            'tags': self.tags,
-            'counts': self.counts,
-            'warnings': self.warnings,
-            'details': self.details,
-            'primary_layer': self.primary_layer,
-            'is_empty': self.is_empty,
-        }
-        if key in canonical:
-            return canonical[key]
-        if key in self.counts:
-            return self.counts[key]
-        return self.details[key]
-
-    def __iter__(self) -> Iterator[str]:
-        keys = [
-            'representation',
-            'selected_ids',
-            'layers',
-            'tags',
-            'counts',
-            'warnings',
-            'details',
-            'primary_layer',
-            'is_empty',
-        ]
-        keys.extend(key for key in self.counts if key not in keys)
-        keys.extend(key for key in self.details if key not in keys)
-        return iter(keys)
-
-    def __len__(self) -> int:
-        return sum(1 for _ in self)
-
-    def __getattr__(self, name: str) -> Any:
-        layer = self.primary_layer
-        if layer is None:
-            raise AttributeError(name)
-        return getattr(layer, name)
 
 
 def render_result(
@@ -129,7 +81,7 @@ def render_result(
     selected_ids=(),
     warnings=(),
 ) -> RenderResult:
-    """Normalize a legacy renderer return value into ``RenderResult``."""
+    """Normalize renderer internals into ``RenderResult``."""
     if isinstance(raw, RenderResult):
         return raw
 
