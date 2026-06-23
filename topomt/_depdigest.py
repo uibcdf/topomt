@@ -5,6 +5,7 @@ LIBRARIES = {
     'numpy': {'type': 'hard', 'pypi': 'numpy'},
     'scipy': {'type': 'hard', 'pypi': 'scipy'},
     'molsysmt': {'type': 'hard', 'pypi': 'molsysmt'},
+    'numba': {'type': 'hard', 'pypi': 'numba'},
     'biotite': {'type': 'soft', 'pypi': 'biotite'},
     'mdtraj': {'type': 'soft', 'pypi': 'mdtraj'},
     'networkx': {'type': 'soft', 'pypi': 'networkx'},

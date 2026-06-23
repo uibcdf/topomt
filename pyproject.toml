@@ -24,6 +24,7 @@ dependencies = [
   "argdigest",
   "depdigest",
   "molsysmt",
+  "numba",
   "numpy",
   "pyunitwizard",
   "scipy",

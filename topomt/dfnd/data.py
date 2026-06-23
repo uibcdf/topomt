@@ -271,6 +271,123 @@ class DFNDData:
         result = self._network.get_topography(query=query, min_size=min_size)
         return DFNDData(self._network, result)
 
+    def _region_geometry(self, component_id: str, region: str):
+        """Tetrahedra ``(K,4,3)`` and the reaching atoms (centers, radii) for a
+        wet component's ``'resident'`` or ``'transit'`` region. ``None`` if empty.
+
+        The atom set is every atom whose ball can reach a region tetrahedron
+        (the four vertices *and* non-local intruders), gathered by a spatial query.
+        """
+        import numpy as np
+        from scipy.spatial import cKDTree
+
+        if region not in {'resident', 'transit'}:
+            raise ValueError("region must be 'resident' or 'transit'")
+        component = self.dfn.components[component_id]
+        nodes = list(component.resident_node_indices)
+        if region == 'transit':
+            nodes += list(component.transit_connector_node_indices)
+        nodes = np.asarray(nodes, dtype=int)
+        if nodes.size == 0:
+            return None
+
+        network = self._network
+        tetrahedra = network.atom_coords[network.tetra_atoms[nodes]]  # (K, 4, 3)
+        centroids = tetrahedra.mean(axis=1)
+        bounding = np.linalg.norm(tetrahedra - centroids[:, None, :], axis=2).max(axis=1)
+        tree = cKDTree(network.atom_coords)
+        max_radius = float(np.max(network.atom_radii))
+        neighbor_lists = tree.query_ball_point(centroids, bounding + max_radius)
+        flat = [index for sublist in neighbor_lists for index in sublist]
+        atom_index = (
+            np.unique(np.asarray(flat, dtype=int)) if flat else np.array([], dtype=int)
+        )
+        return tetrahedra, network.atom_coords[atom_index], network.atom_radii[atom_index]
+
+    def solvent_volume(
+        self,
+        component_id: str,
+        *,
+        region: str = 'resident',
+        method: str = 'mc',
+        n_samples: int = 40000,
+        seed: int = 0,
+        n_quad: int = 24,
+    ):
+        """Precise solvent (empty) volume of a wet component.
+
+        On-demand: this is *not* computed during ``get_topography``; call it on the
+        cavities of interest. ``region='resident'`` measures the holding capacity
+        (resident tetrahedra); ``region='transit'`` adds the transit connectors,
+        i.e. the through-volume (the meaningful one for channels). Overlapping van
+        der Waals spheres and non-local intruder atoms are handled natively.
+
+        ``method='mc'`` (default) is seeded Monte Carlo: fast, scales with surface,
+        returns ``(volume, error)`` with ``error`` the ~2-sigma statistical
+        half-width (reproducible via ``seed``). ``method='exact'`` is the
+        deterministic nested-quadrature method: no statistical error (returns
+        ``(volume, None)``), scales with the number of tetrahedra; ``n_quad`` sets
+        the quadrature order. Both return ``nm**3`` PyUnitWizard quantities.
+        """
+        from .core.solvent_volume import region_empty_volume, region_empty_volume_exact
+
+        if method not in {'mc', 'exact'}:
+            raise ValueError("method must be 'mc' or 'exact'")
+        geometry = self._region_geometry(component_id, region)
+        if geometry is None:
+            zero = puw.quantity(0.0, 'nm**3')
+            return (zero, None) if method == 'exact' else (zero, zero)
+        tetrahedra, centers, radii = geometry
+        if method == 'exact':
+            volume = region_empty_volume_exact(
+                tetrahedra, centers, radii, n_quad=n_quad
+            )
+            return puw.quantity(volume, 'nm**3'), None
+        result = region_empty_volume(
+            tetrahedra, centers, radii, n_samples=n_samples, seed=seed
+        )
+        return (
+            puw.quantity(result.volume, 'nm**3'),
+            puw.quantity(result.error, 'nm**3'),
+        )
+
+    def occupancy_grid(
+        self,
+        component_id: str,
+        *,
+        region: str = 'resident',
+        spacing: float = 0.05,
+    ):
+        """Voxel occupancy grid (the 3D *shape*) of a wet component's empty space.
+
+        On-demand companion to ``solvent_volume``: instead of a scalar it returns
+        the boolean grid of empty voxels (centre inside the region and outside every
+        ball) — for visualization, marching-cubes surfaces, diffusion, or shape
+        descriptors. ``spacing`` is the voxel size in nm.
+
+        Returns a dict ``{'volume', 'grid', 'origin', 'spacing'}``: ``volume`` (an
+        independent, discretization-limited cross-check of ``solvent_volume``) and
+        ``origin``/``spacing`` are ``nm`` quantities; ``grid`` is a boolean array.
+        """
+        from .core.solvent_volume import region_occupancy_grid
+
+        geometry = self._region_geometry(component_id, region)
+        if geometry is None:
+            return {
+                'volume': puw.quantity(0.0, 'nm**3'),
+                'grid': None,
+                'origin': None,
+                'spacing': puw.quantity(spacing, 'nm'),
+            }
+        tetrahedra, centers, radii = geometry
+        result = region_occupancy_grid(tetrahedra, centers, radii, spacing=spacing)
+        return {
+            'volume': puw.quantity(result.volume, 'nm**3'),
+            'grid': result.grid,
+            'origin': puw.quantity(result.origin, 'nm'),
+            'spacing': puw.quantity(result.spacing, 'nm'),
+        }
+
     def info(self, tetrahedron_id: Any = None) -> None:
         """Print a scientific diagnostic card for Delaunay tetrahedra."""
         import molsysmt as msm
