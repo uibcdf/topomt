@@ -1,0 +1,149 @@
+"""Authoritative status of every DFND output.
+
+Single source of truth for which DFND outputs are stable enough to **validate and
+report**, and which are still consolidating. The human-readable counterpart lives
+in ``devguide/DFND/metrics_contract.md``; the guard in
+``tests/test_dfnd_output_status.py`` enforces that this registry stays in sync
+with what the kernel actually emits, so:
+
+- no experimental output is silently forgotten (every emitted output is
+  classified here, with a promotion gate and a tracking reference);
+- no new family/motif slips in unclassified;
+- nothing marked ``experimental`` here is quietly reported as a result.
+
+Status meanings
+---------------
+- ``canonical``    : stable; may be validated and reported as a DFND result.
+- ``provisional``  : computed but with a precision/quality caveat; engineering
+                     use only until its gate is met.
+- ``experimental`` : shape may still change; carries ``flags=['experimental']``
+                     in the raw records; do **not** validate or report until
+                     promoted (see ``promotion_gate``).
+- ``diagnostic``   : raw/internal classification, not promoted to a public
+                     feature; inspected, not reported as a primary result.
+- ``deferred``     : design still open; not yet a settled output.
+
+Each entry carries the gate it must clear to become ``canonical`` and a
+``blocker_ref`` pointing at the consolidation item / open question / known
+limitation that tracks it.
+"""
+
+from __future__ import annotations
+
+from dataclasses import dataclass
+
+from . import families as fam
+
+VALID_STATUS = frozenset(
+    {'canonical', 'provisional', 'experimental', 'diagnostic', 'deferred'}
+)
+VALID_KIND = frozenset({'family', 'feature', 'motif', 'metric'})
+
+
+@dataclass(frozen=True)
+class OutputStatus:
+    status: str  # one of VALID_STATUS
+    kind: str  # one of VALID_KIND
+    promotion_gate: str | None  # what it needs to become canonical (None if canonical)
+    blocker_ref: str | None  # consolidation item / open question / known-limitation id
+
+
+OUTPUT_STATUS: dict[str, OutputStatus] = {
+    # --- wet families (the families.py family strings) ---
+    fam.POCKET: OutputStatus('canonical', 'family', None, None),
+    fam.VOID: OutputStatus('canonical', 'family', None, None),
+    fam.CHANNEL: OutputStatus('canonical', 'family', None, None),
+    fam.PERCOLATING: OutputStatus('canonical', 'family', None, None),
+    fam.SURFACE_CONCAVITY: OutputStatus(
+        'diagnostic',
+        'family',
+        'stabilize the negation-defined catch-all or redefine it',
+        'L3.1',
+    ),
+    fam.NONRESIDENT_PASSAGE: OutputStatus(
+        'diagnostic',
+        'family',
+        'deterministic synthetic fixture + non-ambiguity policy',
+        'item-4 / L1.1',
+    ),
+    fam.DEGENERATE_SUBPROBE: OutputStatus(
+        'diagnostic',
+        'family',
+        'deterministic synthetic fixture',
+        'item-4 / L1.1',
+    ),
+    # --- dry side ---
+    fam.DRY_BANK: OutputStatus('canonical', 'family', None, None),
+    # --- promoted public features ---
+    'Mouth': OutputStatus('canonical', 'feature', None, None),
+    # Q17 (atom/residue ownership) is decided: overlapping role-based membership,
+    # see interfaces.md §9. Now pending real-system validation before canonical.
+    'interface': OutputStatus(
+        'experimental',
+        'feature',
+        'real-system validation of multi-body-lining detection',
+        'validation',
+    ),
+    # --- motifs (the four emitted motif_type strings) ---
+    'depth_region': OutputStatus('canonical', 'motif', None, None),
+    'external_mouth': OutputStatus('canonical', 'motif', None, None),
+    'throat_candidate': OutputStatus(
+        'experimental',
+        'motif',
+        'scoring/persistence policy + tests + toy/real cases + tolerance stability',
+        'Q25',
+    ),
+    'chamber_candidate': OutputStatus(
+        'experimental',
+        'motif',
+        'as throat_candidate',
+        'Q25',
+    ),
+    # --- derived descriptor (component.bottleneck = top throat_candidate) ---
+    'bottleneck': OutputStatus(
+        'experimental',
+        'metric',
+        'inherits throat_candidate promotion',
+        'Q25',
+    ),
+    # --- metrics (raw-record fields; documentation-level, not runtime-guarded) ---
+    'volume_topological_resident': OutputStatus('canonical', 'metric', None, None),
+    # Precise on-demand solvent volume (seeded Monte Carlo, DFNDData.solvent_volume).
+    'volume_solvent_resident': OutputStatus('canonical', 'metric', None, None),
+    'volume_solvent_transit': OutputStatus('canonical', 'metric', None, None),
+    # Fast bulk estimate kept for provenance/speed; the precise metric above now
+    # exists, so this stays a provisional engineering-grade field.
+    'volume_solvent_estimate': OutputStatus(
+        'provisional',
+        'metric',
+        'superseded for precision by volume_solvent_resident/transit; kept as a '
+        'fast bulk estimate',
+        'item-2 / L5.1',
+    ),
+    'center': OutputStatus('canonical', 'metric', None, None),
+    'mouth_area': OutputStatus('canonical', 'metric', None, None),
+    'R_gate_min': OutputStatus('canonical', 'metric', None, None),
+    'R_gate_mean': OutputStatus('canonical', 'metric', None, None),
+    'R_gate_max': OutputStatus('canonical', 'metric', None, None),
+    'n_mouths': OutputStatus('canonical', 'metric', None, None),
+    'face_depth': OutputStatus('canonical', 'metric', None, None),
+}
+
+
+def names_by_kind(kind: str) -> set[str]:
+    """All registered output names of a given ``kind``."""
+    return {name for name, s in OUTPUT_STATUS.items() if s.kind == kind}
+
+
+def names_by_status(status: str) -> set[str]:
+    """All registered output names of a given ``status``."""
+    return {name for name, s in OUTPUT_STATUS.items() if s.status == status}
+
+
+def experimental_motif_types() -> set[str]:
+    """Motif types that must be emitted with ``flags=['experimental']``."""
+    return {
+        name
+        for name, s in OUTPUT_STATUS.items()
+        if s.kind == 'motif' and s.status == 'experimental'
+    }

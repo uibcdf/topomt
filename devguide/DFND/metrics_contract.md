@@ -268,3 +268,36 @@ now exposes `volume_solvent_estimate` as a first deterministic local correction
 for atom-occupied portions. This is a v1 estimate, not a final analytic
 CASTp-like volume. A future `volume_solvent` metric should be reserved for a
 higher-precision physical implementation.
+
+## 10. Output Status Registry (canonical / experimental / provisional)
+
+Before validation, every DFND output is classified by how stable it is, so the
+team validates and reports only what is settled and does not silently forget the
+parts still held together with pins.
+
+**Source of truth:** `topomt/dfnd/output_status.py` (the `OUTPUT_STATUS`
+registry). This table is the human-readable mirror; the registry is authoritative
+and is kept in sync with the kernel by `tests/test_dfnd_output_status.py`, which
+fails if a new family/motif is emitted unclassified or an `experimental` motif is
+mislabelled.
+
+Status meanings: `canonical` (validate & report), `provisional` (engineering use
+only, precision caveat), `experimental` (shape may change, carries
+`flags=['experimental']`, do not report), `diagnostic` (raw/internal, not a
+public feature), `deferred` (design open).
+
+| Output | Status | Promotion gate / blocker |
+| --- | --- | --- |
+| `pocket`, `void`, `channel`, `percolating`, `dry_bank` | canonical | — |
+| `Mouth`, `depth_region`, `external_mouth` | canonical | — |
+| `volume_topological_resident`, `center`, `mouth_area`, `R_gate_*`, `n_mouths`, `face_depth` | canonical | — |
+| `volume_solvent_estimate`, `bottleneck` | provisional / experimental | precise `volume_solvent` (item-2 / L5.1) ; throat promotion (Q25) |
+| `throat_candidate`, `chamber_candidate` | experimental | scoring/persistence policy + tests + toy/real + tolerance stability (Q25) |
+| `surface_concavity` | diagnostic | stabilize or redefine the catch-all (L3.1) |
+| `nonresident_passage`, `degenerate_subprobe` | diagnostic | deterministic synthetic fixture (item-4 / L1.1) |
+| `interface` | deferred | close dry/wet ownership (item-3 / Q17) |
+
+This registry resolves the open questions on confidence flags (Q19) and
+promotion strategy (Q25): each non-canonical entry carries the explicit gate it
+must clear and the consolidation item that tracks it, so "experimental" means
+"tracked with a path to canonical", not "abandoned in place".
