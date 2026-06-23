@@ -88,3 +88,21 @@ def test_buriedness_separates_shallow_from_deep():
     deep = _largest(_wet(synthetic.u_channel(), 1.4), 'pocket')
     assert shallow is not None and deep is not None
     assert shallow.morphometrics['buriedness'] < deep.morphometrics['buriedness']
+
+
+def test_deepest_chamber_reads_a_buried_subpocket_from_the_hierarchy():
+    # The compound case (a deep narrow sub-pocket behind a wider mouth, which the
+    # global occlusion ratio can miss) is read off the merge-tree hierarchy, not a
+    # new traversal: the dumbbell's far lobe is a chamber at depth>0 behind the
+    # waist constriction (access_occlusion>1). A smooth single void has no internal
+    # structure -> None. (Lattice toys grow spurious *shallow* chambers; depth
+    # gates them, and the global occlusion stays the primary classifier -- this is
+    # a supporting descriptor, not a standalone groove/pocket gate.)
+    pocket = _largest(_wet(synthetic.dumbbell(), 1.0), 'pocket')
+    deepest = pocket.morphometrics['deepest_chamber']
+    assert deepest is not None
+    assert deepest['topological_depth'] > 0  # genuinely buried
+    assert deepest['access_occlusion'] > 1.0  # the route to it narrows
+
+    void = _largest(_wet(synthetic.hollow_sphere(), 1.4), 'void', min_size=8)
+    assert void.morphometrics['deepest_chamber'] is None

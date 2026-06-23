@@ -1044,6 +1044,26 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
             occlusion = None
             occlusion_gap = None
             enclosable = None
+        # Compound morphology (a deep narrow sub-pocket behind a wide mouth that the
+        # global ratio misses): read it off the merge-tree hierarchy instead of a
+        # new traversal. The deepest sub-chamber sits behind the throat it merges
+        # through; ``access_occlusion = peak / separation_radius > 1`` means the
+        # route to it narrows (a buried sub-site). A groove has no chambers -> None.
+        chambers = component.chamber_candidates
+        if chambers:
+            deepest = max(chambers, key=lambda c: c['topological_depth'])
+            sep = deepest['separation_radius']
+            deepest_chamber = {
+                'topological_depth': deepest['topological_depth'],
+                'peak_R_residence': deepest['peak_R_residence'],
+                'separation_radius': sep,
+                'access_occlusion': (
+                    deepest['peak_R_residence'] / sep if sep and sep > 0.0 else None
+                ),
+            }
+        else:
+            deepest_chamber = None
+
         component.morphometrics = {
             'mouth_radius': mouth_radius,
             'interior_radius': interior_radius,
@@ -1051,4 +1071,5 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
             'occlusion_gap': occlusion_gap,
             'enclosable': enclosable,
             'buriedness': buriedness,
+            'deepest_chamber': deepest_chamber,
         }
