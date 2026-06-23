@@ -1417,7 +1417,7 @@ def test_show_dfnd_components_replaces_component_tag_between_representations():
         view, topo, representation='spheres', component_ids=['WET-2']
     )
     assert spheres_layer is not None
-    assert getattr(spheres_layer, 'tag') == 'dfnd-comp:WET-2'
+    assert 'dfnd-comp:WET-2' in spheres_layer.tags
 
 
 def test_dfnd_face_meta_includes_faces_touching_selected_tetrahedra():
@@ -1442,7 +1442,12 @@ def test_dfnd_face_meta_includes_faces_touching_selected_tetrahedra():
         ]
     }
 
-    face_meta = _dfnd_face_meta(raw, {1}, colors_by_tetrahedron={1: 0x123456})
+    face_meta = _dfnd_face_meta(
+        raw,
+        {1},
+        colors_by_tetrahedron={1: 0x123456},
+        face_color_mode='component',
+    )
 
     assert [entry['face_id'] for entry in face_meta] == [7, 8]
     assert face_meta[0]['color'] == 0x123456

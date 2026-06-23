@@ -71,13 +71,16 @@ def _attach_source(view, runtime, topography) -> None:
 
 def _record_feature_render_group(runtime, tag_prefix, feature_ids, rendered) -> str:
     group_key = _render_group_key('features', tag_prefix)
-    records = [] if rendered is None else rendered.get('rendered', [])
+    records = []
+    if rendered is not None:
+        records = list(getattr(rendered, 'details', {}).get('rendered', ()))
     runtime.render_groups[group_key] = {
         'kind': 'features',
         'tag_prefix': tag_prefix,
         'feature_ids': feature_ids,
-        'tags': tuple(record['tag'] for record in records if record.get('tag')),
-        'layers': tuple(record['layer'] for record in records if record.get('layer')),
+        'tags': tuple(getattr(rendered, 'tags', ()) or ()),
+        'layers': tuple(getattr(rendered, 'layers', ()) or ()),
+        'records': tuple(records),
     }
     return group_key
 
@@ -305,10 +308,12 @@ def attach_dfnd_tetrahedra(
 
     group_key = _record_tetrahedra_render_group(runtime, tag_prefix, layer)
 
+    tags = tuple(getattr(layer, 'tags', ()) or ())
     return {
         'addon_enabled': 'topomt' in view.addons.enabled(skip_digestion=True),
         'layer': layer,
-        'tag': layer.tag if layer else None,
+        'tag': tags[0] if tags else None,
+        'tags': tags,
         'render_group_key': group_key,
     }
 
