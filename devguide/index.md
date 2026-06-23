@@ -155,7 +155,7 @@ The DFND material is grouped under the dedicated `DFND/` subdirectory. The most 
 - [DFND/checkpoint_viewer_runtime_ownership_2026_06_14.md](DFND/checkpoint_viewer_runtime_ownership_2026_06_14.md)
 - [DFND/checkpoint_render_result_contract_2026_06_14.md](DFND/checkpoint_render_result_contract_2026_06_14.md)
 - [DFND/api_contract_v1.md](DFND/api_contract_v1.md)
-- [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md) — original design (historical)
 - [DFND/Algorithm.md](DFND/Algorithm.md)
 - [DFND/feature_definitions.md](DFND/feature_definitions.md)
 - [DFND/abstract_contract.md](DFND/abstract_contract.md)

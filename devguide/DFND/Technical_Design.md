@@ -1,6 +1,11 @@
 # Delaunay Flow Network Decomposition (DFND): Technical Design
 
-This document bridges the gap between the mathematical definitions and the actual Python code. It defines the data structures, algorithms, and architectural choices to ensure performance and maintainability.
+> **Status:** original design narrative (historical). This document records an
+> early DFND design direction and is not the current implementation contract.
+> Current contracts live in `object_model.md`, `Algorithm.md`,
+> `data_model_v1.md`, `api_contract_v1.md`, and related DFND contract docs.
+
+This historical document records the original bridge proposed between the mathematical definitions and the Python implementation. Some data structures, algorithms, and API details were superseded during implementation.
 
 ## 1. Data Structures: "Structure of Arrays"
 

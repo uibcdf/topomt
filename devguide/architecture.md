@@ -149,7 +149,7 @@ Relevant design references are:
 
 - [DFND/Overview.md](DFND/Overview.md)
 - [DFND/Algorithm.md](DFND/Algorithm.md)
-- [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md) — original design (historical)
 - [DFND/feature_definitions.md](DFND/feature_definitions.md)
 - [DFND/abstract_contract.md](DFND/abstract_contract.md)
 - [DFND/component_motifs.md](DFND/component_motifs.md)

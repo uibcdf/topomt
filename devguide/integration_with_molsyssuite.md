@@ -126,7 +126,7 @@ In practical terms, TopoMT should aim to provide viewer-friendly feature data:
 This also matters for DFND because DFND is now the active native method direction. Its richer channel, void, dry-interface, and dry-motif records should remain normalized in a way that is compatible with the same ecosystem contracts described in `devguide/DFND/`, especially the architectural material in:
 
 - [DFND/Overview.md](DFND/Overview.md)
-- [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md) — original design (historical)
 
 ## Practical design rule
 

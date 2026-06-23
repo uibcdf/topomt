@@ -84,7 +84,7 @@ For conceptual background on those richer semantics, see:
 
 - [DFND/Overview.md](DFND/Overview.md)
 - [DFND/Interpretation.md](DFND/Interpretation.md)
-- [DFND/Technical_Design.md](DFND/Technical_Design.md)
+- [DFND/Technical_Design.md](DFND/Technical_Design.md) — original design (historical)
 
 ## First implementation strategy
 
