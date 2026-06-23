@@ -947,6 +947,8 @@ def test_show_dfnd_tetrahedra_faces_are_pickable_with_metadata():
     assert meta[7]['permeability'] == 'permeable'
     assert meta[7]['owner_id'] == 0
     assert meta[7]['neighbor_id'] == 1
+    assert meta[7]['role'] == 'coast_face'
+    assert meta[7]['side_relation'] == 'wet-dry'
     # exterior face -> neighbor reported as OCEAN
     assert meta[8]['neighbor_id'] == 'OCEAN'
 
@@ -2378,6 +2380,120 @@ def test_dfnd_face_label_converts_raw_nm_gate_to_angstroms():
     )
 
     assert 'R_gate=2.15 Å' in label
+
+
+def test_dfnd_face_semantics_reports_role_margin_and_components():
+    from molsysviewer_topomt.render._common import _dfnd_face_meta
+
+    topography = {
+        'parameters': {'probe_radius': 0.14},
+        'tetrahedra': [
+            {
+                'tetrahedron_id': 0,
+                'local_atom_indices': [0, 1, 2, 3],
+                'combined_class': 'wet_open',
+                'residence_state': 'resident',
+            },
+            {
+                'tetrahedron_id': 1,
+                'local_atom_indices': [1, 2, 3, 4],
+                'combined_class': 'wet_open',
+                'residence_state': 'resident',
+            },
+            {
+                'tetrahedron_id': 2,
+                'local_atom_indices': [0, 2, 3, 5],
+                'combined_class': 'dry_sealed',
+                'residence_state': 'non_resident',
+            },
+        ],
+        'faces': [
+            {
+                'face_id': 10,
+                'owner_tetrahedron_id': 0,
+                'neighbor_tetrahedron_id': 1,
+                'face_atoms_local': [1, 2, 3],
+                'permeability_state': 'permeable',
+                'R_gate': 0.215,
+            },
+            {
+                'face_id': 11,
+                'owner_tetrahedron_id': 0,
+                'neighbor_tetrahedron_id': 2,
+                'face_atoms_local': [0, 2, 3],
+                'permeability_state': 'non_permeable',
+                'R_gate': 0.110,
+            },
+            {
+                'face_id': 12,
+                'owner_tetrahedron_id': 0,
+                'neighbor_tetrahedron_id': -1,
+                'face_atoms_local': [0, 1, 2],
+                'permeability_state': 'permeable',
+                'R_gate': 0.180,
+            },
+        ],
+    }
+
+    meta = {
+        item['face_id']: item
+        for item in _dfnd_face_meta(
+            topography,
+            {0, 1, 2},
+            components_by_tetrahedron={0: 'WET-1', 1: 'WET-1', 2: 'DRY-1'},
+            face_color_mode='role',
+        )
+    }
+
+    assert meta[10]['role'] == 'transit_face'
+    assert meta[10]['side_relation'] == 'wet-wet'
+    assert meta[10]['gate_margin'] == pytest.approx(0.075)
+    assert meta[10]['component_ids'] == ['WET-1']
+    assert 'gate_margin=0.75 Å' in meta[10]['label']
+    assert meta[11]['role'] == 'coast_face'
+    assert meta[11]['side_relation'] == 'wet-dry'
+    assert meta[11]['component_ids'] == ['WET-1', 'DRY-1']
+    assert meta[12]['role'] == 'mouth_face'
+    assert meta[12]['side_relation'] == 'wet-OCEAN'
+
+
+def test_dfnd_face_color_modes_are_semantic():
+    from molsysviewer_topomt.render._common import _dfnd_face_meta
+
+    topography = {
+        'parameters': {'probe_radius': 0.14},
+        'tetrahedra': [
+            {'tetrahedron_id': 0, 'local_atom_indices': [0, 1, 2, 3]},
+            {'tetrahedron_id': 1, 'local_atom_indices': [1, 2, 3, 4]},
+        ],
+        'faces': [
+            {
+                'face_id': 10,
+                'owner_tetrahedron_id': 0,
+                'neighbor_tetrahedron_id': 1,
+                'face_atoms_local': [1, 2, 3],
+                'permeability_state': 'permeable',
+                'R_gate': 0.215,
+            },
+        ],
+    }
+
+    by_component = _dfnd_face_meta(
+        topography,
+        {0, 1},
+        colors_by_tetrahedron={0: 0x123456},
+        face_color_mode='component',
+    )[0]
+    by_permeability = _dfnd_face_meta(
+        topography, {0, 1}, face_color_mode='permeability'
+    )[0]
+    by_margin = _dfnd_face_meta(
+        topography, {0, 1}, face_color_mode='gate_margin'
+    )[0]
+
+    assert by_component['color'] == 0x123456
+    assert by_permeability['color'] == 0x93C5FD
+    assert by_margin['color'] == 0x0072B2
 
 
 def test_dfnd_owned_payloads_declare_atom_index_space():

@@ -303,25 +303,20 @@ primitive both already exist.
 (*roadmap §4*, reconciled with [numerical_policy.md](numerical_policy.md).)
 
 3D meshes must not flicker between identical or near-identical conformations
-(lattices, helices) or across adjacent MD frames. Two mechanisms are proposed by
-the roadmap; they need different verdicts:
-
-- **Sliver filtering** — collapse near-flat boundary tetrahedra that lack physical
-  volume so they do not create unstable flickering "bridges". This is **compatible
-  and desirable**; `numerical_policy.md` already reasons about slivers and
-  near-zero components.
-- **Coordinate perturbation (jitter ~1e-5 Å)** — **do not adopt blindly.** DFND
-  already perturbs *symbolically* through its epsilon policy
-  (`epsilon_length = 1e-6`, `epsilon_relative = 1e-8`, generous tie-breaking), so
-  an explicit `1e-5 Å` coordinate jitter is both larger than `epsilon_length` and
-  redundant with — possibly contradictory to — the existing degeneracy handling.
-  The *goal* (stable, reproducible meshes across frames) is right; the mechanism
-  must be the existing symbolic policy, not added coordinate noise. Cross-check
-  any change here against [numerical_policy.md](numerical_policy.md) first.
+(lattices, helices) or across adjacent MD frames. The visualization layer must
+not invent a separate geometric correction for this. In particular,
+**coordinate perturbation (jitter ~1e-5 Å)** must not be adopted blindly. DFND
+already perturbs *symbolically* through its epsilon policy
+(`epsilon_length = 1e-6`, `epsilon_relative = 1e-8`, generous tie-breaking), so
+an explicit `1e-5 Å` coordinate jitter is both larger than `epsilon_length` and
+redundant with — possibly contradictory to — the existing degeneracy handling.
+The *goal* (stable, reproducible meshes across frames) is right; the mechanism
+must be the existing symbolic policy, not added coordinate noise. Cross-check any
+change here against [numerical_policy.md](numerical_policy.md) first.
 
 Net: the visualization layer should *consume* a triangulation that
-`numerical_policy` already makes stable, and additionally filter slivers at render
-time; it should not introduce its own coordinate noise.
+`numerical_policy` already makes stable. It should not hide or perturb geometry
+as a substitute for a physical or topological explanation.
 
 ## 11. Cross-cutting conventions
 
@@ -380,6 +375,12 @@ time; it should not introduce its own coordinate noise.
   [known_limitations.md](known_limitations.md).)
 - **Switchable layers** — each (component × primitive) as its own
   tagged/toggleable layer (`layer_tag`/`tag_prefix`).
+- **Face semantics, not geometric hiding** — face renderers expose DFND meaning
+  directly: permeability, semantic role (`transit_face`, `blocked_face`,
+  `mouth_face`, `boundary_face`, `coast_face`), `R_gate`, gate margin when the
+  probe radius is known, incident tetrahedra, and component ids when available.
+  Colouring can use component, permeability, role, or gate margin; the viewer
+  must not hide faces merely because their geometry looks visually awkward.
 
 ## 12. Representation mode names
 
@@ -409,11 +410,9 @@ The static single-frame vocabulary is implemented. Remaining gaps are narrower:
    supplies tracked DFND results.
 2. **2D–3D synced trajectory widget** — generic MolSysViewer UI primitive for
    coupling timelines or scalar plots to scene selection.
-3. **Render-time sliver filtering** — visually suppress unstable sliver
-   tetrahedra without changing DFND coordinates or topology.
-4. **Branched channel view** — expose secondary mouths in >2-mouth channels
+3. **Branched channel view** — expose secondary mouths in >2-mouth channels
    without implying a validated max-capacity navigability path.
-5. **Wireframe isosurface** (`wire_contour`) — optional mode, still dependent on
+4. **Wireframe isosurface** (`wire_contour`) — optional mode, still dependent on
    confirming or extending `add_pocket_blob` wireframe support.
 
 ## 14. Current implementation status

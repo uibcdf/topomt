@@ -555,6 +555,7 @@ def _render_dfnd_component_layers(
     alpha: float = 0.5,
     draw_faces: bool = True,
     draw_edges: bool = False,
+    face_color_mode: str = 'component',
     edge_radius_nm: float = 0.002,
     edge_color: int = 0x444444,
     use_resident_nodes: bool = True,
@@ -622,6 +623,9 @@ def _render_dfnd_component_layers(
         For 'tetrahedra': draw solid face triangles.
     draw_edges : bool, default False
         For 'tetrahedra': draw wireframe edge cylinders.
+    face_color_mode : {'component', 'permeability', 'role', 'gate_margin'}, default 'component'
+        For 'tetrahedra': colour faces by component, permeability class, semantic
+        role, or gate margin.
     edge_radius_nm : float, default 0.002
         Radius in nanometers of edge cylinders.
     edge_color : int, default 0x444444
@@ -716,6 +720,7 @@ def _render_dfnd_component_layers(
                 alpha=alpha,
                 draw_faces=draw_faces,
                 draw_edges=draw_edges,
+                face_color_mode=face_color_mode,
                 edge_radius_nm=edge_radius_nm,
                 edge_color=edge_color,
                 use_resident_nodes=use_resident_nodes,
@@ -779,6 +784,7 @@ def _render_dfnd_component_layers(
         selected_tetra_ids = set()
         selected_tetra_order = []
         tetra_to_color = {}
+        tetra_to_component = {}
 
         for comp in selected_components:
             comp_id = comp.component_id
@@ -806,6 +812,7 @@ def _render_dfnd_component_layers(
                 selected_tetra_ids.add(tid)
                 selected_tetra_order.append(tid)
                 tetra_to_color[tid] = color
+                tetra_to_component[tid] = comp_id
                 lbl = (
                     f'Component: {comp_id} ({comp.family}) | '
                     f'Tetrahedron {tid} | Vol: {vol_a:.1f} Å³'
@@ -821,6 +828,8 @@ def _render_dfnd_component_layers(
                 topography,
                 selected_tetra_ids,
                 colors_by_tetrahedron=tetra_to_color,
+                components_by_tetrahedron=tetra_to_component,
+                face_color_mode=face_color_mode,
             )
             if draw_faces
             else []

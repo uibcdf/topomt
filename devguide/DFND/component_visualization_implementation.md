@@ -242,7 +242,10 @@ Makes pocket/void/channel distinguishable using mostly existing primitives.
 
 ## 9. Remaining work — dynamic axis
 
-Static single-frame rendering is complete enough to treat as implemented. The
+Static single-frame rendering is complete enough to treat as implemented. Face
+rendering now exposes DFND semantics (`role`, permeability, `R_gate`, gate
+margin, incident tetrahedra, and component ids when available) and supports
+component-, permeability-, role-, and gate-margin-based face colouring. The
 remaining visualization work is dynamic and depends on trajectory-level data:
 
 - **Trajectory driver** — run DFND per frame and feed the resulting sequence to
@@ -252,8 +255,6 @@ remaining visualization work is dynamic and depends on trajectory-level data:
 - **Event timeline** — show birth, death, split, merge, open, and close events.
 - **2D–3D synchronized trajectory widget** — upstream MolSysViewer UI primitive
   for coupling plots and timelines to scene selection.
-- **Render-time sliver filtering** — still desirable for triangulation stability;
-  consume stable triangulations and do **not** inject coordinate jitter.
 
 ## 10. Testing strategy
 
@@ -275,9 +276,7 @@ remaining visualization work is dynamic and depends on trajectory-level data:
 2. **Dynamic UI primitive** — decide whether the event timeline uses a generic
    MolSysViewer 2D–3D synced widget or a TopoMT-specific panel first. Generic
    upstream remains preferred.
-3. **Sliver filtering policy** — define render-time filtering for visually
-   unstable tetrahedra without changing DFND coordinates or topology.
-4. **>2-mouth channel branches** — the current static primary path is usable; a
+3. **>2-mouth channel branches** — the current static primary path is usable; a
    future branched channel view should make secondary mouths visible without
    implying a max-capacity navigability claim.
 

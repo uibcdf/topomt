@@ -38,14 +38,17 @@ def _render_dfnd_tetrahedra_layer(
     draw_faces: bool = True,
     permeable_faces: bool = True,
     non_permeable_faces: bool = True,
+    face_color_mode: str = 'permeability',
 ) -> Any:
     """Render DFND Delaunay tetrahedra into the viewer canvas.
 
     Faces are coloured by permeability and individually pickable. Hover labels
     carry the face id, both owning tetrahedra and permeability state.
 
-    Face filters:
+    Face filters and colouring:
     - ``permeable_faces`` / ``non_permeable_faces``: hide one class of faces.
+    - ``face_color_mode``: colour faces by ``permeability``, ``role``,
+      ``gate_margin`` or ``component``.
     - ``exterior_only=True``: keep only faces on the boundary of the selected
       tetrahedra set (faces shared by two selected tetrahedra are dropped).
       Default ``False`` -- show every unique face.
@@ -220,6 +223,7 @@ def _render_dfnd_tetrahedra_layer(
             topography,
             selected_tetra_ids,
             permeability_states=allowed_permeability,
+            face_color_mode=face_color_mode,
         )
 
     # Clear existing tetrahedra layer if it exists to allow clean overwriting / re-runs
