@@ -590,8 +590,7 @@ def _render_dfnd_component_layers(
         - 'cloud': Approximate iso-surface from residence spheres.
         - 'envelope': Volumetric blob plus a gate ring at each mouth (a void
           shows only the blob, a pocket adds its single mouth ring).
-        - 'wire_contour': Reserved for wireframe isosurfaces; currently blocked
-          until MolSysViewer exposes a wireframe pocket-blob primitive.
+        - 'wire_contour': Wireframe iso-surface from residence spheres.
         - 'pipe': Channels as a variable-radius tube along their through-path
           (centerline + R_residence) with a bottleneck marker; >2-mouth channels
           add secondary visual branches to the primary path; non-channels fall
