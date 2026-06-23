@@ -84,15 +84,30 @@ Canonical now (**implemented** on each `WetComponent`, see
 
 Candidate or experimental:
 
-- **chamber detection, throat detection, bottleneck ranking** — a **first attempt
-  is implemented** (`_attach_capacity_motifs` in `topomt/dfnd/components.py`):
-  a capacity merge tree over a component's internal faces (`R_gate`, descending)
-  yields `throat_candidates` (join saddles), `chamber_candidates` (the joined
-  basins) and a `bottleneck`, each scored by **topological persistence** (peak
-  `R_residence` minus join `R_gate`) and gated by `min_persistence`. Validated on
-  the dumbbell (one throat at the neck, two chambers; none on a plain void).
-  These remain **ranked descriptors**, not a hard classifier, until the scoring /
-  persistence policy is validated on real systems.
+- **chamber detection, throat detection, bottleneck ranking** — implemented as a
+  component's **internal sub-chamber hierarchy** (`_attach_capacity_motifs` in
+  `topomt/dfnd/components.py`): a capacity merge tree over the component's internal
+  **transit** faces (`R_gate`, descending) yields `throat_candidates` (join
+  saddles), `chamber_candidates` (the joined basins) and a `bottleneck`. Each basin
+  is a local maximum of `R_residence`; a join's **prominence** is the shallower
+  basin's peak minus the join `R_gate`, and a join clears the `min_persistence`
+  floor to become a throat. Building the tree over `transit_edge`s (not raw face
+  geometry) excludes sliver / intrusion-suspect faces by construction, so a
+  spurious wide face cannot forge a throat. Symmetric lobes are **co-equal
+  siblings** (same `separation_radius`), never a forced parent/child. Each feature
+  carries `separation_radius` — the probe radius at which it detaches from its
+  sibling (the join `R_gate`) — and navigable tree links (`throat.child_chamber_keys`,
+  `chamber.parent_throat_key`); `min_persistence` is only a mesh-noise floor, the
+  reported physical scale is `separation_radius` per feature. Validated on a four-toy
+  panel (`tests/test_dfnd_hierarchy.py`): a plain void (no structure), the symmetric
+  and asymmetric dumbbell (two chambers, one throat), the trilobed chain (three
+  chambers, two throats), plus probe-sweep stability and a persistence-floor pruning
+  test (no over-segmentation). These remain **ranked descriptors**, not a hard
+  classifier, until the policy is also validated on real systems (Q25).
+  This is the **resolution of L1.3** (nested concavities under a single-scale
+  `OCEAN`): a sub-pocket inside a larger concavity stays one wet component and is
+  *characterized* by this hierarchy, never re-segmented (which would reintroduce
+  shared-owner ambiguity, cf. Q17).
 - weighted depth; capacity-based lumping beyond the above; reduced motif graph.
 
 The same capacity merge tree is the natural seed for the multi-scale segmentation

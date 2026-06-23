@@ -260,6 +260,33 @@ def dumbbell(
     return _finalize(coords, atom_radius, jitter, seed)
 
 
+def trilobed(
+    lobe_radius=6.0,
+    separation=8.0,
+    wall_spacing=3.5,
+    atom_radius=ARGON_VDW_RADIUS,
+    jitter=0.0,
+    seed=0,
+):
+    """Three overlapping hollow spheres in a line -> one sealed void with three
+    chambers joined by two internal throats. A multi-level merge tree (the linear
+    nesting case): a small probe sees one connected void, the hierarchy descriptor
+    recovers the three chambers and the two waists between them."""
+    if separation >= 2.0 * lobe_radius:
+        raise ValueError('separation must be < 2*lobe_radius so neighbours overlap')
+    base, _r = hollow_sphere(lobe_radius, wall_spacing, atom_radius, jitter=0.0, seed=seed)
+    centers = [np.array([k * separation, 0.0, 0.0]) for k in (-1, 0, 1)]
+    kept = []
+    for i, ci in enumerate(centers):
+        shell = base + ci
+        keep = np.ones(len(shell), dtype=bool)
+        for j, cj in enumerate(centers):
+            if j != i:
+                keep &= np.linalg.norm(shell - cj, axis=1) >= lobe_radius
+        kept.append(shell[keep])
+    return _finalize(np.vstack(kept), atom_radius, jitter, seed)
+
+
 def cylinder_tube(
     length=20.0,
     tube_radius=6.0,

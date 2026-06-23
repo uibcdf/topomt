@@ -50,7 +50,7 @@ ten unrelated problems.
 | L1.0 | Cell complex is a skeleton of `S`, not `S` | Discretization | WP1 | flag |
 | L1.1 | `nonresident_passage` physically ambiguous | Discretization | WP1 | flag |
 | L1.2 | Gate connectivity over-connects via slivers | Discretization | WP1 + WP2 | flag + mitigate |
-| L1.3 | Nested concavities / single-scale `OCEAN` | Discretization | WP3 | defer |
+| L1.3 | Nested concavities / single-scale `OCEAN` | Discretization | WP3 | addressed (hierarchy descriptor, experimental) |
 | L2.1 | `R_gate` locality, active-set branches, and external-atom intrusion | Primitive geometry | WP2 + new | mitigate + flag |
 | L2.1b | `R_residence` active-set completeness and degeneracy | Primitive geometry | new | mitigate |
 | L2.2 | Delaunay non-uniqueness / stability | Primitive geometry | WP4 | flag |
@@ -147,11 +147,18 @@ ten unrelated problems.
   regions can be under-segmented.
 - **Why it matters.** Real surfaces are hierarchical; flattening them can hide
   functionally distinct sub-sites.
-- **v1 policy.** `defer`. Separating nested features needs depth/motif analysis
-  ([`component_motifs.md`](component_motifs.md)) or a macro-surface mode. State
-  explicitly that v1 does not hierarchize.
-- **Validation hook.** Toy with a small pocket inside a shallow bowl; document
-  that v1 reports one component.
+- **Policy.** `addressed (experimental)`. The component is **not** re-segmented
+  (that would reintroduce shared-owner ambiguity, cf. Q17); instead its internal
+  hierarchy is exposed as a descriptor — the capacity merge tree of sub-chambers
+  joined by throats (`_attach_capacity_motifs`, see
+  [`component_motifs.md`](component_motifs.md) §2). Each sub-feature reports a
+  physical `separation_radius` (the probe radius at which it detaches), so the
+  nesting is characterized at every scale rather than collapsed. Still
+  experimental until the policy is validated on real systems (Q25).
+- **Validation hook.** `tests/test_dfnd_hierarchy.py`: a plain void reports no
+  sub-chambers (no over-segmentation); the symmetric/asymmetric dumbbell and the
+  trilobed chain recover their designed chambers and throats; probe-sweep and a
+  persistence-floor sweep show the hierarchy is stable, not spurious.
 - **Origin.** WP3 (scale/nesting half).
 
 ---

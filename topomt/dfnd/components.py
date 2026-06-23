@@ -834,27 +834,45 @@ def _union_find_root(parent: dict[int, int], node: int) -> int:
 def _attach_capacity_motifs(
     components: Components, result: dict[str, Any], min_persistence: float = 0.1
 ) -> None:
-    """Attach experimental throat/chamber/bottleneck descriptors to wet components.
+    """Attach the internal sub-chamber hierarchy (a merge tree) to each wet component.
 
-    A merge tree is built over the component's internal faces ordered by capacity
-    (``R_gate``, descending); when two basins join, the join face is a
-    ``throat_candidate`` whose **persistence** is the prominence of the shallower
-    basin (its peak ``R_residence`` minus the join capacity). The two basins are
-    ``chamber_candidate``s. Throats/chambers are ranked descriptors gated by
-    ``min_persistence`` (geometric prominence, in length units); they are NOT a
-    probe threshold and NOT a hard classifier (component_motifs.md sections 2/4/6).
+    The component is **not** re-segmented: it stays one probe-connected region,
+    preserving the wet-component invariant and avoiding shared-owner ambiguity
+    (cf. Q17). Its internal topographic hierarchy is exposed as a descriptor --
+    the resolution of L1.3 (nested concavities under a single-scale ``OCEAN``).
+
+    A merge tree is built over the component's internal **transit** faces ordered
+    by capacity (``R_gate``, descending). Using ``transit_edge`` rather than raw
+    face geometry excludes non-permeable and intrusion-suspect faces by
+    construction, so a sliver's spurious wide face cannot forge a throat. Each
+    tetrahedron starts as a basin with ``peak = R_residence``; when two basins
+    join, the shallower basin's prominence is ``peak - capacity``. A join that
+    clears ``min_persistence`` is a ``throat_candidate``; the two basins it
+    separates are sibling ``chamber_candidate``s -- symmetric lobes are co-equal
+    (same ``separation_radius``), never a forced parent/child. ``min_persistence``
+    is only a mesh-noise floor in length units; the physical scale is reported per
+    feature as ``separation_radius`` -- the probe radius at which the sub-feature
+    detaches from its sibling (the throat ``R_gate``). Throats/chambers stay
+    experimental (component_motifs.md sections 2/4/6; output_status.py / Q25).
     """
     raw = result['raw']
     node_capacity = {t['tetrahedron_id']: t['R_residence'] for t in raw['tetrahedra']}
     atoms_by_node = {t['tetrahedron_id']: t['atom_indices'] for t in raw['tetrahedra']}
 
-    # internal-face capacities per component (face shared by two component nodes)
-    edges_by_component: dict[str, dict[tuple[int, int], float]] = defaultdict(dict)
     node_to_component = {}
     for component in components.wet:
         for node in component.node_indices:
             node_to_component[node] = component.component_id
+
+    # internal navigable (transit) faces per component; transit_edge already
+    # excludes non-permeable and intrusion-suspect faces, so a sliver cannot
+    # forge a throat. Keep the widest face per node pair, with its atoms.
+    edges_by_component: dict[
+        str, dict[tuple[int, int], tuple[float, list[int]]]
+    ] = defaultdict(dict)
     for face in raw['faces']:
+        if not face.get('transit_edge'):
+            continue
         owner, neighbor = face['owner_tetrahedron_id'], face['neighbor_tetrahedron_id']
         if neighbor < 0:
             continue
@@ -863,70 +881,96 @@ def _attach_capacity_motifs(
             continue
         key = (owner, neighbor) if owner < neighbor else (neighbor, owner)
         store = edges_by_component[cid]
-        store[key] = max(store.get(key, -1.0), face['R_gate'])
+        prev = store.get(key)
+        if prev is None or face['R_gate'] > prev[0]:
+            store[key] = (face['R_gate'], list(face['atom_indices']))
 
     for component in components.wet:
         edges = edges_by_component.get(component.component_id, {})
+        depth = component.topological_depth or {}
         parent = {v: v for v in component.node_indices}
-        peak = {v: node_capacity[v] for v in component.node_indices}
+        peak = {v: v for v in component.node_indices}  # basin root -> peak node
         members = {v: {v} for v in component.node_indices}
 
+        def _chamber(peak_node, basin_nodes, separation_radius, comp=component, dep=depth):
+            nodes = sorted(basin_nodes)
+            chamber_support = support_key([atoms_by_node[n] for n in nodes])
+            return {
+                'motif_type': 'chamber_candidate',
+                'parent_component_key': comp.component_key,
+                'motif_support_key': chamber_support,
+                'motif_key': motif_key(
+                    comp.component_key, 'chamber_candidate', chamber_support
+                ),
+                'peak_R_residence': node_capacity[peak_node],
+                'separation_radius': separation_radius,
+                'persistence': node_capacity[peak_node] - separation_radius,
+                'topological_depth': min(
+                    (dep[n] for n in nodes if n in dep), default=0
+                ),
+                'node_ids': nodes,
+                'atom_indices': sorted({a for n in nodes for a in atoms_by_node[n]}),
+                'parent_throat_key': None,
+                'flags': ['experimental'],
+            }
+
+        chamber_by_peak: dict[int, dict[str, Any]] = {}
         throats = []
-        chambers_by_peak: dict[int, dict[str, Any]] = {}
-        for (a, b), capacity in sorted(edges.items(), key=lambda kv: -kv[1]):
+        for (a, b), (capacity, face_atom_indices) in sorted(
+            edges.items(), key=lambda kv: -kv[1][0]
+        ):
             ra, rb = _union_find_root(parent, a), _union_find_root(parent, b)
             if ra == rb:
                 continue
-            persistence = min(peak[ra], peak[rb]) - capacity
-            if persistence >= min_persistence:
-                face_atoms = sorted(set(atoms_by_node[a]) & set(atoms_by_node[b]))
+            if node_capacity[peak[ra]] >= node_capacity[peak[rb]]:
+                hi_root, lo_root = ra, rb
+            else:
+                hi_root, lo_root = rb, ra
+            hi_peak, lo_peak = peak[hi_root], peak[lo_root]
+            prominence = node_capacity[lo_peak] - capacity
+            if prominence >= min_persistence:
+                face_atoms = sorted(
+                    set(atoms_by_node[a]) & set(atoms_by_node[b])
+                ) or sorted(face_atom_indices)
                 throat_support = external_link_support_key([face_atoms])
-                throats.append(
-                    {
-                        'motif_type': 'throat_candidate',
-                        'parent_component_key': component.component_key,
-                        'motif_support_key': throat_support,
-                        'motif_key': motif_key(
-                            component.component_key,
-                            'throat_candidate',
-                            throat_support,
-                        ),
-                        'face_atoms': face_atoms,
-                        'R_gate': capacity,
-                        'persistence': persistence,
-                        'flags': ['experimental'],
-                    }
-                )
-                for root in (ra, rb):
-                    nodes = members[root]
-                    chamber_support = support_key(
-                        [atoms_by_node[node] for node in nodes]
-                    )
-                    chambers_by_peak[max(nodes, key=lambda n: node_capacity[n])] = {
-                        'motif_type': 'chamber_candidate',
-                        'parent_component_key': component.component_key,
-                        'motif_support_key': chamber_support,
-                        'motif_key': motif_key(
-                            component.component_key,
-                            'chamber_candidate',
-                            chamber_support,
-                        ),
-                        'peak_R_residence': peak[root],
-                        'persistence': persistence,
-                        'node_ids': sorted(nodes),
-                        'atom_indices': sorted(
-                            {at for n in nodes for at in atoms_by_node[n]}
-                        ),
-                        'flags': ['experimental'],
-                    }
-            big, small = (ra, rb) if peak[ra] >= peak[rb] else (rb, ra)
-            parent[small] = big
-            peak[big] = max(peak[ra], peak[rb])
-            members[big] |= members[small]
+                throat = {
+                    'motif_type': 'throat_candidate',
+                    'parent_component_key': component.component_key,
+                    'motif_support_key': throat_support,
+                    'motif_key': motif_key(
+                        component.component_key, 'throat_candidate', throat_support
+                    ),
+                    'face_atoms': face_atoms,
+                    'R_gate': capacity,
+                    'separation_radius': capacity,
+                    'persistence': prominence,
+                    'child_chamber_keys': [],
+                    'flags': ['experimental'],
+                }
+                # both basins are siblings under this throat; keep the first
+                # (smallest, highest-capacity) snapshot per peak so a leaf is
+                # never swallowed by the growing super-basin.
+                lo_chamber = chamber_by_peak.get(lo_peak)
+                if lo_chamber is None:
+                    lo_chamber = _chamber(lo_peak, members[lo_root], capacity)
+                    chamber_by_peak[lo_peak] = lo_chamber
+                lo_chamber['parent_throat_key'] = throat['motif_key']
+                hi_chamber = chamber_by_peak.get(hi_peak)
+                if hi_chamber is None:
+                    hi_chamber = _chamber(hi_peak, members[hi_root], capacity)
+                    chamber_by_peak[hi_peak] = hi_chamber
+                throat['child_chamber_keys'] = [
+                    lo_chamber['motif_key'],
+                    hi_chamber['motif_key'],
+                ]
+                throats.append(throat)
+            parent[lo_root] = hi_root
+            peak[hi_root] = hi_peak
+            members[hi_root] |= members[lo_root]
 
         throats.sort(key=lambda m: -m['persistence'])
         component.throat_candidates = throats
-        component.chamber_candidates = list(chambers_by_peak.values())
+        component.chamber_candidates = list(chamber_by_peak.values())
         component.bottleneck = throats[0] if throats else None
         component.motifs.extend(throats)
         component.motifs.extend(component.chamber_candidates)
