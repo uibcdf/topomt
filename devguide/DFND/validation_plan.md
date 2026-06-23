@@ -134,3 +134,98 @@ The first implementation can be considered internally successful when:
 - 5-10 small real systems can be processed without crashes;
 - reported components are visually and atomically traceable;
 - topological volume is clearly separated from physical solvent volume.
+
+## 4. What "validated" means here (re-anchored)
+
+Sections 1–3 cover contract correctness and "what not to claim". This section
+states what *validated* means — and re-anchors it on purpose:
+
+> **TopoMT exists to give the user a rich, complete, useful characterization of a
+> surface's topography. Validation exists to give the user confidence that this
+> characterization is correct, complete, and honestly labelled — not to prove
+> that DFND resembles CASTp, fpocket, or CAVER.**
+
+External comparison is **one descriptive lens**, never the driver and never a
+pass/fail bar. A DFND output (a sealed void, a transit channel, a gate
+constriction, a cryptic pocket over a trajectory) has value to the user whether
+or not another tool produces something comparable. The acceptance gates below
+exist so "correct and trustworthy" can actually *conclude*, not so DFND can be
+ranked against other detectors. For the distinctive characterization this
+serves, see [`research_program.md`](research_program.md).
+
+### 4.1. Claims (primary → secondary)
+
+- **P0 — Trustworthy, complete characterization (primary).** DFND's outputs obey
+  the contract (Sections 1–3), are deterministic, are *exact* on synthetic
+  ground truth, carry honest error bounds, are labelled by maturity
+  (`output_status.py`), and cover the surface's topography completely
+  (pockets / voids / channels / percolating regions / mouths / dry network /
+  interfaces). This is what lets a user rely on and act on the results.
+- **C-topology — Known-case correspondence.** DFND channels and voids correspond
+  to known channels/tunnels and classic buried cavities in topology and
+  geometry.
+- **C-robustness — Determinism / scale.** DFND runs, terminates, and is
+  byte-identical run-to-run on a representative real-system panel.
+- **C-navigability (deferred).** "A probe of radius *r* can pass" requires
+  `validated_probe_path` / `widest_gate_path`; the current channel *skeleton*
+  does not support this claim by construction.
+- **Concordance (descriptive lens, NOT a goal).** Where semantics overlap, report
+  how DFND agrees with — and explainably diverges from — CASTp/fpocket/CAVER on
+  geometry and site recovery. Divergence is information, not failure.
+
+### 4.2. Ground-truth tiers (strong → weak)
+
+1. **Synthetic (exact answer)** — `toy_systems_v1.md` / `synthetic.py`: known
+   void volumes, known channel bottlenecks. Assertable exactly.
+2. **Annotated (real answer)** — curated PDBs with a known ligand/site; known
+   channel proteins; classic buried cavities (T4 lysozyme L99A, myoglobin Xe).
+3. **Peer concordance (descriptive, NOT pass/fail)** — DFND vs the per-feature
+   baselines below, same probe. Peers use *different definitions*; report
+   agreement **and explained divergence**, never "match-or-fail".
+
+### 4.3. Baseline by feature type (use the right comparator)
+
+| DFND feature | Correct baseline / ground-truth |
+| --- | --- |
+| Pockets (detection) | ligand DBs (sc-PDB, PDBbind, Binding MOAD, COACH420/HOLO4K), fpocket, P2Rank |
+| Pockets/voids (geometry: volume, area) | CASTp / CASTpFold (analytic) |
+| Channels / tunnels | **CAVER, MOLE, ChannelsDB** — *not* fpocket/CASTp |
+| Buried / sealed voids | classic cavity cases (T4-L99A, Xe sites), ChannelsDB pores |
+| Flow / transit / gate / dry network | **no external baseline** — synthetic + known-case + expert review |
+
+The last row is DFND's distinctive layer (residence vs transit, gates, dry
+network, interfaces). It cannot be tool-benchmarked; validate it on synthetic
+and known cases.
+
+### 4.4. Acceptance gates (fill the numbers)
+
+| Axis | Metric | Gate (to set) |
+| --- | --- | --- |
+| C1 | relative volume/area error vs CASTp/analytic; R²/slope over the panel | e.g. <5–10% on synthetics; R²>0.9 vs CASTp |
+| C2 | DCA ≤4 Å; top-N recovery; atomic Jaccard with the site | ≥ fpocket/CASTp baseline |
+| C3a | feature↔reference match (greedy/Hungarian by overlap): precision/recall/F1 | report + characterize |
+| C4 | completion rate; run-to-run raw hash; probe-sweep stability | 100%; byte-identical; no spurious jumps |
+
+**The numeric gates and the exact PDB panel are the two open decisions.** They
+belong here once fixed — until then, validation cannot conclude.
+
+### 4.5. Sequencing
+
+Robustness on real systems (C4) → automated synthetic correctness (C1) →
+distinctive / known-case (C3a) → peer concordance (C2 + matching). Run
+concordance **last** and as *disagreement mining*: over the panel, surface the
+maximal DFND↔peer disagreements and explain each (definition difference vs real
+bug). The explained divergences are the most informative output.
+
+### 4.6. Frozen benchmark
+
+The panels are a *fixed, versioned* set with a scripted harness logging metrics
+to file — re-runnable after every change to catch regressions (e.g. the WP-15
+orchestration refactor). Extend [`known_limitations.md`](known_limitations.md)
+with every documented divergence.
+
+### 4.7. External dependencies / caveats
+
+- Native CASTp is blocked on parity — use the **reference** CASTp for
+  C1/concordance until unblocked.
+- C3b (navigability) waits on `validated_probe_path` / `widest_gate_path`.
