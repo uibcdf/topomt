@@ -10,8 +10,6 @@ widest mouths. Gate metrics are therefore conditional to this shortest-distance
 path; they are not the maximum capacity of the channel.
 """
 
-from __future__ import annotations
-
 from typing import Any
 
 import numpy as np
@@ -58,6 +56,36 @@ def _mouth_resident_sets(component, external_links_by_id, resident_ids):
     return [(link_id, tetra_ids) for _area, link_id, tetra_ids in ranked]
 
 
+def _skeleton_geometry_from_path(raw, component, path, graph):
+    tetra_by_id = {t['tetrahedron_id']: t for t in raw['tetrahedra']}
+    centers = np.array([tetra_by_id[t]['center'] for t in path], dtype=float)
+    station_radii = np.array(
+        [tetra_by_id[t]['R_residence'] for t in path],
+        dtype=float,
+    )
+    edge_records = [graph[path[index]][path[index + 1]] for index in range(len(path) - 1)]
+    edge_gate_radii = np.array(
+        [edge['gate_radius'] for edge in edge_records],
+        dtype=float,
+    )
+    edge_gate_margins = np.array(
+        [edge['gate_margin'] for edge in edge_records],
+        dtype=float,
+    )
+    gate_bottleneck_edge_index = int(np.argmin(edge_gate_radii))
+    return {
+        'tetra_path': list(path),
+        'centers': centers,
+        'station_radii': station_radii,
+        'edge_gate_radii': edge_gate_radii,
+        'edge_gate_margins': edge_gate_margins,
+        'station_bottleneck_index': int(np.argmin(station_radii)),
+        'gate_bottleneck_edge_index': gate_bottleneck_edge_index,
+        'shortest_path_gate_radius_min': float(edge_gate_radii[gate_bottleneck_edge_index]),
+        'shortest_path_gate_margin_min': float(edge_gate_margins[gate_bottleneck_edge_index]),
+    }
+
+
 @dep_digest('networkx')
 def channel_skeleton(raw, component) -> dict[str, Any] | None:
     """Return the shortest-distance channel skeleton for a channel component.
@@ -100,34 +128,70 @@ def channel_skeleton(raw, component) -> dict[str, Any] | None:
     if len(path) < 2:
         return None
 
-    centers = np.array([tetra_by_id[t]['center'] for t in path], dtype=float)
-    station_radii = np.array(
-        [tetra_by_id[t]['R_residence'] for t in path],
-        dtype=float,
+    result = _skeleton_geometry_from_path(raw, component, path, graph)
+    result.update(
+        {
+            'path_kind': 'shortest_distance',
+            'mouth_endpoints': [(link_a, path[0]), (link_b, path[-1])],
+            'mouth_endpoint_policy': 'virtual_mouth_shortest_distance',
+            'is_collision_validated': False,
+        }
     )
-    edge_records = [graph[path[index]][path[index + 1]] for index in range(len(path) - 1)]
-    edge_gate_radii = np.array(
-        [edge['gate_radius'] for edge in edge_records],
-        dtype=float,
-    )
-    edge_gate_margins = np.array(
-        [edge['gate_margin'] for edge in edge_records],
-        dtype=float,
-    )
-    gate_bottleneck_edge_index = int(np.argmin(edge_gate_radii))
+    return result
 
-    return {
-        'path_kind': 'shortest_distance',
-        'tetra_path': list(path),
-        'centers': centers,
-        'station_radii': station_radii,
-        'edge_gate_radii': edge_gate_radii,
-        'edge_gate_margins': edge_gate_margins,
-        'station_bottleneck_index': int(np.argmin(station_radii)),
-        'gate_bottleneck_edge_index': gate_bottleneck_edge_index,
-        'shortest_path_gate_radius_min': float(edge_gate_radii[gate_bottleneck_edge_index]),
-        'shortest_path_gate_margin_min': float(edge_gate_margins[gate_bottleneck_edge_index]),
-        'mouth_endpoints': [(link_a, path[0]), (link_b, path[-1])],
-        'mouth_endpoint_policy': 'virtual_mouth_shortest_distance',
-        'is_collision_validated': False,
-    }
+
+@dep_digest('networkx')
+def channel_branch_skeletons(raw, component) -> list[dict[str, Any]]:
+    """Return visual secondary branches from extra mouths to the primary path.
+
+    The primary path is still the shortest-distance skeleton between the two
+    widest mouths. Each additional mouth is connected by the shortest-distance
+    path to the nearest reachable station of that primary path. These branches
+    are a visual topology summary, not a collision-validated trajectory or a
+    max-capacity route.
+    """
+    import networkx as nx
+
+    primary = channel_skeleton(raw, component)
+    if primary is None:
+        return []
+
+    resident_ids = set(component.get('resident_tetrahedron_ids', []))
+    external_links_by_id = {e['external_link_id']: e for e in raw['external_links']}
+    mouth_sets = _mouth_resident_sets(component, external_links_by_id, resident_ids)
+    if len(mouth_sets) <= 2:
+        return []
+
+    tetra_by_id = {t['tetrahedron_id']: t for t in raw['tetrahedra']}
+    graph = _permeable_resident_graph(raw, resident_ids, tetra_by_id)
+    primary_nodes = set(primary['tetra_path'])
+    target = ('primary_path', component.get('component_id', 'channel'))
+    graph.add_node(target)
+    for node in primary_nodes:
+        graph.add_edge(target, node, weight=0.0)
+
+    branches = []
+    for link_id, mouth_nodes in mouth_sets[2:]:
+        mouth = ('mouth', link_id)
+        graph.add_node(mouth)
+        for node in mouth_nodes:
+            graph.add_edge(mouth, node, weight=0.0)
+        try:
+            path_with_virtual = nx.shortest_path(graph, mouth, target, weight='weight')
+        except (nx.NetworkXNoPath, nx.NodeNotFound):
+            continue
+        path = [node for node in path_with_virtual if not isinstance(node, tuple)]
+        if len(path) < 2:
+            continue
+        result = _skeleton_geometry_from_path(raw, component, path, graph)
+        result.update(
+            {
+                'path_kind': 'secondary_branch_shortest_distance',
+                'external_link_id': link_id,
+                'primary_join_tetrahedron_id': path[-1],
+                'mouth_endpoint_policy': 'extra_mouth_to_primary_path_shortest_distance',
+                'is_collision_validated': False,
+            }
+        )
+        branches.append(result)
+    return branches

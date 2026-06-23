@@ -9,7 +9,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from topomt.dfnd.centerline import channel_skeleton
+from topomt.dfnd.centerline import channel_branch_skeletons, channel_skeleton
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
 _DATA = Path(__file__).resolve().parents[1] / 'topomt' / 'data' / 'synthetic'
@@ -104,6 +104,24 @@ def test_branched_channel_uses_the_two_widest_mouths():
     assert len(cl['mouth_endpoints']) == 2
     used_links = {lid for lid, _tid in cl['mouth_endpoints']}
     assert len(used_links) == 2
+
+
+def test_branched_channel_exposes_secondary_mouth_branches():
+    raw = _raw_for('branched_tube_y.pdb')
+    comp = _channel(raw)
+    cl = channel_skeleton(raw, comp)
+    branches = channel_branch_skeletons(raw, comp)
+
+    assert cl is not None
+    assert len(branches) == comp['n_external_links'] - 2
+    primary_nodes = set(cl['tetra_path'])
+    for branch in branches:
+        assert branch['path_kind'] == 'secondary_branch_shortest_distance'
+        assert branch['is_collision_validated'] is False
+        assert branch['primary_join_tetrahedron_id'] in primary_nodes
+        assert branch['tetra_path'][-1] == branch['primary_join_tetrahedron_id']
+        assert branch['centers'].shape[0] == len(branch['tetra_path'])
+        assert branch['edge_gate_radii'].shape[0] == len(branch['tetra_path']) - 1
 
 
 def test_single_mouth_pocket_has_no_centerline():

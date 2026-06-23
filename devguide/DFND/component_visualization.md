@@ -410,10 +410,6 @@ The static single-frame vocabulary is implemented. Remaining gaps are narrower:
    supplies tracked DFND results.
 2. **2D–3D synced trajectory widget** — generic MolSysViewer UI primitive for
    coupling timelines or scalar plots to scene selection.
-3. **Branched channel view** — expose secondary mouths in >2-mouth channels
-   without implying a validated max-capacity navigability path.
-4. **Wireframe isosurface** (`wire_contour`) — optional mode, still dependent on
-   confirming or extending `add_pocket_blob` wireframe support.
 
 ## 14. Current implementation status
 

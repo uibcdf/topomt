@@ -12,6 +12,7 @@ from ..geometry import (
     RingGeometry,
     centerline_ring_geometry,
     component_alpha_sphere_geometry,
+    component_branch_geometries,
     component_centerline_geometry,
     component_residence_sphere_geometry,
     dfn_graph_segments,
@@ -116,6 +117,7 @@ _COMPONENT_REPRESENTATIONS = {
     'tetrahedra',
     'cloud',
     'envelope',
+    'wire_contour',
     'pipe',
     'rings',
     'residence_spheres',
@@ -558,6 +560,7 @@ def _render_dfnd_component_layers(
     face_color_mode: str = 'component',
     edge_radius_nm: float = 0.002,
     edge_color: int = 0x444444,
+    draw_channel_branches: bool = True,
     use_resident_nodes: bool = True,
     tag_prefix: str = 'dfnd-comp',
     name: str = 'DFND Components',
@@ -587,8 +590,11 @@ def _render_dfnd_component_layers(
         - 'cloud': Approximate iso-surface from residence spheres.
         - 'envelope': Volumetric blob plus a gate ring at each mouth (a void
           shows only the blob, a pocket adds its single mouth ring).
+        - 'wire_contour': Reserved for wireframe isosurfaces; currently blocked
+          until MolSysViewer exposes a wireframe pocket-blob primitive.
         - 'pipe': Channels as a variable-radius tube along their through-path
-          (centerline + R_residence) with a bottleneck marker; non-channels fall
+          (centerline + R_residence) with a bottleneck marker; >2-mouth channels
+          add secondary visual branches to the primary path; non-channels fall
           back to a blob.
         - 'rings': HOLE-style clearance profile of a channel — a ring per
           centerline station coloured by free-radius threshold (green/amber/red).
@@ -630,6 +636,10 @@ def _render_dfnd_component_layers(
         Radius in nanometers of edge cylinders.
     edge_color : int, default 0x444444
         Color of edge cylinders.
+    draw_channel_branches : bool, default True
+        For 'pipe': draw shortest-distance secondary branches from extra mouths
+        to the primary two-mouth path. These are visual topology cues, not
+        validated trajectories or max-capacity paths.
     use_resident_nodes : bool, default True
         For wet components: only render resident core tetrahedra.
     tag_prefix : str, default 'dfnd-comp'
@@ -723,6 +733,7 @@ def _render_dfnd_component_layers(
                 face_color_mode=face_color_mode,
                 edge_radius_nm=edge_radius_nm,
                 edge_color=edge_color,
+                draw_channel_branches=draw_channel_branches,
                 use_resident_nodes=use_resident_nodes,
                 tag_prefix=tag_prefix,
                 name=name,
@@ -858,6 +869,41 @@ def _render_dfnd_component_layers(
         )
         return layer
 
+    elif representation == 'wire_contour':
+        # Wireframe isosurface from the same DFND residence spheres as 'cloud'.
+        # The scientific scalar field is unchanged; only the final MolSysViewer
+        # visual is switched to marching-cubes lines.
+        blob_resolution = 0.5 if resolution is None else resolution
+        blob_smoothing = 0.5 if smoothing is None else smoothing
+        blob_iso_level = 0.5 if iso_level is None else iso_level
+        blob_radius_scale = 0.6 if radius_scale is None else radius_scale
+
+        for comp in selected_components:
+            comp_id = comp.component_id
+            geometry = component_residence_sphere_geometry(
+                topography, comp, use_resident_nodes=use_resident_nodes
+            )
+            if not geometry.centers:
+                continue
+
+            tag = f'{tag_prefix}:{comp_id}'
+            layer = add_pocket_blob(
+                view,
+                geometry,
+                alpha=alpha,
+                tag=tag,
+                layer_tag=tag_prefix,
+                name=f'{name} {comp_id} wire contour',
+                resolution=blob_resolution,
+                smoothing=blob_smoothing,
+                iso_level=blob_iso_level,
+                radius_scale=blob_radius_scale,
+                wireframe=True,
+                skip_digestion=True,
+            )
+            layers.append(layer)
+        return layers[0] if len(layers) == 1 else layers
+
     elif representation == 'cloud':
         # Render a separate volumetric pocket blob layer per component. The
         # MolSysViewer blob defaults are broad for DFND residence spheres, so use
@@ -965,6 +1011,24 @@ def _render_dfnd_component_layers(
                 skip_digestion=True,
             )
             layers.append(marker)
+
+            if draw_channel_branches:
+                for branch_index, branch_geometry in enumerate(
+                    component_branch_geometries(topography, comp), start=1
+                ):
+                    if not branch_geometry.centers:
+                        continue
+                    branch = add_channel_tube(
+                        view,
+                        branch_geometry,
+                        color_map=[_MOUTH_ACCENT, color],
+                        alpha=max(0.12, min(0.55, alpha * 0.65)),
+                        tag=f'{tag_prefix}:{comp_id}-branch-{branch_index}',
+                        layer_tag=tag_prefix,
+                        name=f'{name} {comp_id} branch {branch_index}',
+                        skip_digestion=True,
+                    )
+                    layers.append(branch)
 
         if not layers:
             return None

@@ -85,9 +85,9 @@ Data available without new core work (confirmed):
 - `raw`/graph records: per-tetra `center` + `R_residence`; per-mouth
   `mouth_face_clusters` with `faces`, `R_gate_min/max`, `area_geometric`; gate
   centers (`face_gate_radius_batch`).
-- adjacency for paths: `data.Mesh.neighbors` / `Graph.neighbors`, and
-  `experimental._resident_permeable_graph(raw, resident_ids)` which already
-  builds an `nx.Graph` over resident tetrahedra with an edge per permeable face.
+- adjacency for paths: `topomt.dfnd.centerline` builds an `nx.Graph` over
+  resident tetrahedra with an edge per permeable face, including gate metadata
+  for the primary skeleton and secondary branch summaries.
 
 Viewer primitives (confirmed): `add_pocket_blob`, `add_pocket_surface`,
 `add_set_alpha_spheres`, `add_sphere`, `add_tetrahedra`, `add_triangle_faces`,
@@ -185,23 +185,24 @@ Makes pocket/void/channel distinguishable using mostly existing primitives.
 ## 5. Phase 2 — channel `pipe` (highest value)
 
 - **Centerline (D3)**: `channel_skeleton(raw, component)`:
-  1. build `g = _resident_permeable_graph(raw, set(resident_node_indices))`
-     (promote from `experimental`);
-  2. endpoints = the resident tetrahedra adjacent to each of the two mouths
-     (owners of the mouth-cluster faces);
-  3. `path = nx.shortest_path(g, a, b)` (or weighted by inter-center distance);
+  1. build the resident permeable graph for the channel;
+  2. endpoints are virtual nodes for the two widest mouths, connected to their
+     incident resident tetrahedra;
+  3. shortest-distance path by inter-center distance;
   4. `centers = [tetra center for t in path]`,
-     `radii = [R_residence(t) for t in path]` (or local `R_gate` at the gates).
+     `radii = [R_residence(t) for t in path]`; edge gate radii/margins annotate
+     the transitions and the result remains explicitly not collision validated.
+- **Branches (D3)**: `channel_branch_skeletons(raw, component)` connects every
+  additional mouth to the primary two-mouth path by shortest distance. These are
+  visual topology cues, not max-capacity paths.
 - **Render**: `add_channel_tube(centers, radii, color_by='clearance',
-  color_map=…)`; **bottleneck ring** at the minimum-radius station / lowest
-  `R_gate` mouth, drawn in a bright accent.
-- **>2 mouths**: pick the two mouths with the largest `area_geometric` for the
-  primary path; expose the rest as secondary branches later (document the policy,
-  do not silently drop).
+  color_map=…)`; **bottleneck ring** at the minimum-radius station / lowest gate
+  along the primary path; secondary branches render as lower-opacity tubes.
 - **Degenerate**: no path / single resident node → fall back to `cloud` and flag.
 - **Tests**: a synthetic two-mouth channel (`tube_channel_clean`) yields one
   `add_channel_tube` with ≥2 centers and radii bounded by `R_residence`; the
-  bottleneck station is the global radius minimum.
+  bottleneck station is the global radius minimum. `branched_tube_y` yields one
+  primary tube plus one secondary branch for its third mouth.
 
 ## 6. Phase 3 — interface `contact_sheet`
 
@@ -276,9 +277,8 @@ remaining visualization work is dynamic and depends on trajectory-level data:
 2. **Dynamic UI primitive** — decide whether the event timeline uses a generic
    MolSysViewer 2D–3D synced widget or a TopoMT-specific panel first. Generic
    upstream remains preferred.
-3. **>2-mouth channel branches** — the current static primary path is usable; a
-   future branched channel view should make secondary mouths visible without
-   implying a max-capacity navigability claim.
+3. **Dynamic trajectory visualization** — remains blocked on the trajectory
+   driver and 2D–3D synchronized dynamic UI.
 
 ## 12. Build order (summary)
 
@@ -286,19 +286,20 @@ remaining visualization work is dynamic and depends on trajectory-level data:
 |---|---|---|---|
 | 0 | palette + per-family resolver | `auto` | ✅ done |
 | 1 | mouth caps + envelope | `envelope` | ✅ done (blob + gate ring + cap) |
-| 2 | channel tube + bottleneck | `pipe` | ✅ done (centerline + real bottleneck ring) |
+| 2 | channel tube + bottleneck | `pipe` | ✅ done (centerline + real bottleneck ring + secondary branches for >2-mouth channels) |
 | 3 | interface body-split | `contact_sheet` | ✅ done |
 | 4 | HOLE rings + scalar gradient | `rings` | ✅ done |
 | 5 | carving, labels, affinity, visibility | `affinity_spheres`, `carve_voids`, `show_dfnd_labels`, `show_dfnd_legend`, `top_n` | ✅ done |
 | 6 | dry-core scaffold | `scaffold` | ✅ done |
 | 6 | convexity heatmap | `show_dfnd_convexity` | ✅ done (`whole.set_color_by_values`, no new primitive) |
 | 6 | pharmacophore map | `show_dfnd_pharmacophore` | ✅ done (`physchem` + `add_interaction_sites`) |
+| 6 | wireframe isosurface | `wire_contour` | ✅ done (`add_pocket_blob(wireframe=True)`) |
 | 6 | dynamic topology | — | ⛔ blocked on trajectory driver + dynamic UI |
 
 Upstream primitives (molsysviewer): `add_rings`, `focus_with_fade`,
-`scene.set_legend`, scalar surface colouring (`set_color_by_values`), and
-clipping/section support are available. Still future: the 2D–3D synchronized
-trajectory widget.
+`scene.set_legend`, scalar surface colouring (`set_color_by_values`),
+clipping/section support, and pocket-blob wireframe support are available. Still
+future: the 2D–3D synchronized trajectory widget.
 
 ## 13. Cross-references
 

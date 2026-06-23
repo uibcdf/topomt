@@ -1581,6 +1581,33 @@ def test_pipe_renders_channel_as_variable_radius_tube():
     assert len(ring_msg['options']['normals']) == 1
 
 
+def test_pipe_renders_secondary_branches_for_three_mouth_channel():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('branched_tube_y.pdb')
+    component = next(
+        comp for comp in topo.dfnd.dfn.components.wet if comp.family == 'channel'
+    )
+    assert component.n_mouths >= 3
+
+    view = DummyView()
+    show_dfnd_components(
+        view,
+        topo,
+        representation='pipe',
+        component_ids=[component.component_id],
+    )
+
+    branch_msgs = [
+        message
+        for message in view.messages
+        if message['op'] == 'add_channel_tube'
+        and '-branch-' in message['options']['tag']
+    ]
+    assert len(branch_msgs) == component.n_mouths - 2
+    assert all(message['options']['alpha'] < 0.5 for message in branch_msgs)
+
+
 def test_contact_sheet_splits_interface_lining_by_body():
     """Phase 3: an interface renders its lining surface split per body.
 
@@ -1899,6 +1926,19 @@ def test_carve_voids_focuses_on_void_lining():
         if c.family == 'void':
             void_atoms.update(c.atom_indices)
     assert set(kept) == void_atoms
+
+
+def test_wire_contour_uses_pocket_blob_wireframe():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    view = DummyView()
+    result = show_dfnd_components(view, topography, representation='wire_contour')
+
+    assert result is not None
+    blob_messages = [message for message in view.messages if message['op'] == 'add_pocket_blob']
+    assert blob_messages
+    assert all(message['options']['wireframe'] is True for message in blob_messages)
 
 
 def test_show_dfnd_components_rejects_unknown_representation():
@@ -2679,6 +2719,7 @@ def test_render_result_uses_explicit_counts_and_details():
         'tetrahedra',
         'cloud',
         'envelope',
+        'wire_contour',
         'pipe',
         'rings',
         'residence_spheres',
@@ -3205,6 +3246,7 @@ def test_wp18_feature_geometry_carries_stable_feature_identity_and_nm_units():
 
 def test_wp18_centerline_and_ring_geometry_preserve_structural_identity():
     from molsysviewer_topomt.geometry import (
+        component_branch_geometries,
         component_centerline_geometry,
         centerline_ring_geometry,
         mouth_ring_geometry,
@@ -3228,6 +3270,24 @@ def test_wp18_centerline_and_ring_geometry_preserve_structural_identity():
     assert all(ref.component_key == component.component_key for ref in centerline.refs)
     assert all(ref.kind == 'external_link' for ref in mouths.refs)
     assert {ref.entity_id for ref in mouths.refs} == set(component.external_link_keys)
+
+    branched = _build_dfnd_topo('branched_tube_y.pdb')
+    branched_component = next(
+        comp for comp in branched.dfnd.dfn.components.wet if comp.family == 'channel'
+    )
+    branches = component_branch_geometries(branched, branched_component)
+    assert len(branches) == branched_component.n_mouths - 2
+    assert all(branch.unit == 'nm' for branch in branches)
+    assert all(
+        ref.kind == 'centerline_branch_station'
+        for branch in branches
+        for ref in branch.refs
+    )
+    assert all(
+        ref.metadata and ref.metadata.get('path_kind') == 'secondary_branch_shortest_distance'
+        for branch in branches
+        for ref in branch.refs
+    )
 
 
 def test_wp18_scaffold_geometry_uses_canonical_global_atom_pairs():

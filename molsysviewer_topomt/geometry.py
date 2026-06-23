@@ -5,7 +5,7 @@ from typing import Any
 
 import numpy as np
 
-from topomt.dfnd.centerline import channel_skeleton
+from topomt.dfnd.centerline import channel_branch_skeletons, channel_skeleton
 from topomt.dfnd.selectors import select_edges, select_faces, select_tetrahedra
 
 from .index_spaces import MESH_LOCAL, MOLECULAR_SYSTEM, atom_indices
@@ -31,6 +31,7 @@ class EntityRef:
     atom_index_space: str = MOLECULAR_SYSTEM
     support_key: str | None = None
     component_key: str | None = None
+    metadata: dict[str, Any] | None = None
 
 
 def entity_ref_payload(ref: EntityRef) -> dict[str, Any]:
@@ -43,6 +44,7 @@ def entity_ref_payload(ref: EntityRef) -> dict[str, Any]:
         'atom_index_space': ref.atom_index_space,
         'support_key': ref.support_key,
         'component_key': ref.component_key,
+        'metadata': dict(ref.metadata or {}),
     }
 
 
@@ -428,6 +430,50 @@ def component_centerline_geometry(source, component) -> tuple[SphereGeometry, in
         tuple(skeleton['centers']), tuple(skeleton['station_radii']), 'nm', refs
     )
     return geometry, int(skeleton['station_bottleneck_index'])
+
+
+def component_branch_geometries(source, component) -> tuple[SphereGeometry, ...]:
+    """Return visual secondary branch skeletons for extra channel mouths."""
+    data = getattr(source, 'dfnd', source)
+    branches = channel_branch_skeletons(data.raw, component.raw_record)
+    geometries = []
+    for branch_index, branch in enumerate(branches):
+        records = select_tetrahedra(source, tetrahedron_ids=branch['tetra_path'])
+        by_id = {int(record['tetrahedron_id']): record for record in records}
+        refs = tuple(
+            _component_tetrahedron_ref(by_id[int(tetrahedron_id)], component)
+            for tetrahedron_id in branch['tetra_path']
+        )
+        refs = tuple(
+            EntityRef(
+                kind='centerline_branch_station',
+                entity_id=ref.entity_id,
+                tetrahedron_ids=ref.tetrahedron_ids,
+                atom_indices=ref.atom_indices,
+                atom_index_space=ref.atom_index_space,
+                support_key=ref.support_key,
+                component_key=ref.component_key,
+                metadata={
+                    'branch_index': branch_index,
+                    'external_link_id': branch.get('external_link_id'),
+                    'primary_join_tetrahedron_id': branch.get(
+                        'primary_join_tetrahedron_id'
+                    ),
+                    'path_kind': branch.get('path_kind'),
+                    'is_collision_validated': False,
+                },
+            )
+            for ref in refs
+        )
+        geometries.append(
+            SphereGeometry(
+                tuple(branch['centers']),
+                tuple(branch['station_radii']),
+                'nm',
+                refs,
+            )
+        )
+    return tuple(geometries)
 
 
 def centerline_ring_geometry(source, component) -> RingGeometry:
