@@ -135,6 +135,9 @@ class WetComponent(Component):
         self.throat_candidates: list[dict[str, Any]] = []
         self.chamber_candidates: list[dict[str, Any]] = []
         self.bottleneck: dict[str, Any] | None = None
+        # Morphology discriminators (the topology->morphology bridge); see
+        # _attach_morphometrics and feature_definitions.md.
+        self.morphometrics: dict[str, Any] = {}
 
     def __repr__(self) -> str:
         tag = f' {self.interface_family}' if self.is_interface else ''
@@ -550,6 +553,7 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
     _attach_coast_and_lining(components, result, network)
     _attach_wet_motifs(components, result)
     _attach_capacity_motifs(components, result)
+    _attach_morphometrics(components, result)
     return components
 
 
@@ -976,3 +980,75 @@ def _attach_capacity_motifs(
         component.bottleneck = throats[0] if throats else None
         component.motifs.extend(throats)
         component.motifs.extend(component.chamber_candidates)
+
+
+def _attach_morphometrics(components: Components, result: dict[str, Any]) -> None:
+    """Attach morphology discriminators to each wet component -- the topology ->
+    morphology bridge that the public feature layer (``dfnd_to_topography``,
+    feature_definitions.md) uses to refine a topological family (e.g. ``pocket``)
+    into a morphological type (groove / occluded pocket / funnel / ...).
+
+    All are assembled from quantities DFND already computes; none introduces a new
+    geometric primitive:
+
+    - ``mouth_radius``    -- the widest aperture (max external-link ``R_gate_max``).
+      It is the **seal radius**: the probe radius above which every mouth face
+      closes and the cavity becomes an enclosed void.
+    - ``interior_radius`` -- the widest interior clearance (max ``R_residence`` over
+      the resident nodes). It is the **residence-death radius**: the largest probe
+      that still resides; above it there is no residence.
+    - ``occlusion``       -- ``interior_radius / mouth_radius``. ``<=1`` is an open
+      groove/dent (the mouth is at the widest point, clearance only narrows inward,
+      so the cavity loses residence and mouth together and never becomes a void);
+      ``>1`` narrows at the mouth and widens inside (the enclosed / "druggable"
+      kind -- the interior holds the probe after the mouth has sealed).
+    - ``occlusion_gap``   -- ``interior_radius - mouth_radius`` in length units: the
+      width of the probe-radius window in which this cavity exists as an enclosed
+      **void** (mouth sealed, residence alive). This is the probe sweep's
+      pocket -> void interval, compressed -- no sweep is run because ``R_residence``
+      and ``R_gate`` are probe-independent, so the endpoints are read directly.
+    - ``enclosable``      -- ``occlusion_gap > 0``: becomes a void as the probe grows
+      (the robust groove vs occluded-pocket discriminator).
+    - ``buriedness``      -- the deepest residence depth from the mouth
+      (max ``topological_depth``).
+
+    These are descriptors only; the morphological *naming* and its thresholds are
+    a public-layer policy, deliberately not fixed here. Note the global ratio can
+    miss a deep narrow sub-pocket behind a wide mouth; the merge-tree hierarchy and
+    the depth-ordered access profile cover that compound case.
+    """
+    raw = result['raw']
+    node_residence = {t['tetrahedron_id']: t['R_residence'] for t in raw['tetrahedra']}
+    links = {link['external_link_id']: link for link in raw['external_links']}
+
+    for component in components.wet:
+        resident_nodes = getattr(
+            component, 'resident_node_indices', None
+        ) or component.node_indices
+        interior_radius = max(
+            (node_residence[n] for n in resident_nodes if n in node_residence),
+            default=0.0,
+        )
+        mouth_radii = [
+            links[lid]['R_gate_max']
+            for lid in component.external_link_ids
+            if lid in links
+        ]
+        mouth_radius = max(mouth_radii) if mouth_radii else None
+        buriedness = max((component.topological_depth or {}).values(), default=0)
+        if mouth_radius and mouth_radius > 0.0:
+            occlusion = interior_radius / mouth_radius
+            occlusion_gap = interior_radius - mouth_radius
+            enclosable = occlusion_gap > 0.0
+        else:  # no mouth (a void): already enclosed
+            occlusion = None
+            occlusion_gap = None
+            enclosable = None
+        component.morphometrics = {
+            'mouth_radius': mouth_radius,
+            'interior_radius': interior_radius,
+            'occlusion': occlusion,
+            'occlusion_gap': occlusion_gap,
+            'enclosable': enclosable,
+            'buriedness': buriedness,
+        }
