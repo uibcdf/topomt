@@ -8,7 +8,7 @@ The repository contains public entry points, active native methods, wrapper-back
 
 ## Current Public Core
 
-The practical public core is centered on:
+The practical public core is centered on the symbols listed in [`api_contract_v0.md`](api_contract_v0.md). Implementation-wise, the core is backed by:
 
 - [topomt/get_topography.py](/home/diego/repos@uibcdf/topomt/topomt/get_topography.py)
 - [topomt/topography/Topography.py](/home/diego/repos@uibcdf/topomt/topomt/topography/Topography.py)
@@ -62,11 +62,12 @@ These engines remain useful as references, wrappers, and comparison baselines. T
 
 ## Legacy or Transitional Areas
 
-### `get_pockets()`
+### Removed top-level `get_pockets()` / `show_pockets()`
 
-[topomt/get_pockets.py](/home/diego/repos@uibcdf/topomt/topomt/get_pockets.py) does not fit the current `Topography`-centric architecture.
-
-It should be treated as legacy until it is removed, deprecated explicitly, or rebuilt on top of the current public model.
+The broken top-level legacy stub was removed under the v0 API policy. It read a
+process-relative `static/keys.txt`, ignored the requested analysis method, and did
+not fit the current `Topography`-centric architecture. Pocket-like results should
+come from `get_topography(...)` or explicit provider APIs under `topomt.third_party`.
 
 ### `third_party/`
 

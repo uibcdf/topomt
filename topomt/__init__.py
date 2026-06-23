@@ -1,3 +1,4 @@
+# ruff: noqa: E402,I001
 """
 TopoMT
 Short description
@@ -27,7 +28,6 @@ from .delaunay_mesh import DelaunayMesh
 from .weighted_delaunay_mesh import WeightedDelaunayMesh
 from .get_delaunay_mesh import get_delaunay_mesh
 from .get_topography import get_topography
-from .get_pockets import get_pockets, show_pockets
 
 from . import io
 
@@ -35,4 +35,20 @@ from . import third_party
 from . import dfnd
 from . import tools
 
-__all__ = ['Topography', 'DelaunayMesh', 'WeightedDelaunayMesh', 'get_delaunay_mesh']
+__all__ = [
+    '__version__',
+    '__print_version__',
+    'pyunitwizard',
+    'config',
+    'demo',
+    'features',
+    'Topography',
+    'DelaunayMesh',
+    'WeightedDelaunayMesh',
+    'get_delaunay_mesh',
+    'get_topography',
+    'io',
+    'third_party',
+    'dfnd',
+    'tools',
+]

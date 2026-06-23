@@ -911,37 +911,33 @@ The error message does not list every accepted method alias, including
 ### API-004: Top-level exports are incomplete or duplicated
 
 **Evidence:** Strong static finding
-**Tracking:** Open
-**Progress:** The duplicate MolSysViewer-TopoMT new_view export is removed. Defining the intended TopoMT top-level export contract remains open.
+**Tracking:** Verified
+**Resolution:** The v0 top-level API surface is declared in
+`devguide/api_contract_v0.md` and enforced by `topomt.__all__` tests.
+`get_topography` and active public modules are now listed deliberately; removed
+legacy pocket stubs are not exported.
 
 **Locations:** `topomt/__init__.py`, `molsysviewer_topomt/__init__.py`
 
-- TopoMT imports public functions such as `get_topography` but omits them from
+- TopoMT imported public functions such as `get_topography` but omitted them from
   `__all__`.
-- MolSysViewer-TopoMT lists `new_view` twice.
+- MolSysViewer-TopoMT listed `new_view` twice; that duplicate had already been
+  removed.
 
 ### API-005: Public `get_pockets()` is a broken legacy stub
 
 **Evidence:** Confirmed by inspection
-**Tracking:** Open
+**Tracking:** Verified
+**Resolution:** The broken top-level `get_pockets()` / `show_pockets()` legacy
+stub was removed under the v0 API policy. Pocket-like features are exposed through
+`get_topography(...)` / `Topography` or explicit provider submodules.
+
 **Category:** Bug / public API debt
 **Location:** `topomt/get_pockets.py`, `topomt/__init__.py`
 
-The top-level `get_pockets()` ignores the requested analysis, reads the relative
-path `static/keys.txt`, and is exported without tests or a viable runtime
-contract. Its current behavior is unrelated to `get_topography()`.
-
-**Required correction**
-
-Decide whether the function is deprecated and removed or becomes a documented
-wrapper over `get_topography()`. Do not silently change its return type. Add an
-explicit deprecation and migration path if it remains public during transition.
-
-**Acceptance tests**
-
-- Calling the public function never depends on the process working directory.
-- The return contract and supported methods are documented and tested.
-- Top-level exports contain only deliberately supported public symbols.
+The top-level `get_pockets()` ignored the requested analysis, read the relative
+path `static/keys.txt`, and was exported without tests or a viable runtime
+contract. Its behavior was unrelated to `get_topography()`.
 
 ### API-006: Public feature quantities use inconsistent unit conventions
 
@@ -1290,7 +1286,7 @@ listed invariant regresses on the synthetic suite.
 | WP-14 Public feature metrics and units **(Verified)** | Contract / decision | DFND-015, API-006 | Unit and promotion decisions | raw-unit metadata, label conversion, public input warning, CASTp promotion tests, and DFND Mouth provenance/gate-metric tests |
 | WP-15 DFND orchestration decomposition | Technical debt | QUAL-008 | WP-01, WP-02, WP-03 | phase-level invariant and regression tests |
 | WP-16 Test invocation and devtools imports **(Verified)** | Test infrastructure | QUAL-009 | None | direct pytest collection of CASTP devtools tests and CI-compatible `pytest.ini` import path |
-| WP-17 Legacy public API cleanup | API stability | API-004, API-005 | API deprecation decision | isolated import, deprecation, and migration tests |
+| WP-17 Legacy public API cleanup **(Verified)** | API stability | API-004, API-005 | v0 API policy | `topomt.__all__` contract tests and removal of broken pocket stubs |
 | WP-18 Viewer geometry boundary **(Verified)** | Architecture / reliability | VIEW-012 | Index-space, unit, and viewer-payload decisions | cross-renderer payload equivalence tests |
 
 ### 10.1. Decision gates
