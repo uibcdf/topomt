@@ -11,8 +11,16 @@ def _mesh_volume_area(vertices: np.ndarray, faces: np.ndarray) -> tuple[float, f
 
     verts = np.asarray(vertices, dtype=float)
     tri = np.asarray(faces, dtype=int)
+    if verts.ndim != 2 or verts.shape[1] != 3:
+        raise ValueError('vertices must have shape (n_vertices, 3)')
+    if tri.ndim != 2 or tri.shape[1] != 3:
+        raise ValueError('faces must have shape (n_faces, 3)')
     if verts.size == 0 or tri.size == 0:
         return 0.0, 0.0
+    if not np.all(np.isfinite(verts)):
+        raise ValueError('vertices must contain finite values')
+    if np.any((tri < 0) | (tri >= verts.shape[0])):
+        raise ValueError('faces contain out-of-range vertex indices')
 
     tris = verts[tri]
     v0 = tris[:, 0]
@@ -20,7 +28,7 @@ def _mesh_volume_area(vertices: np.ndarray, faces: np.ndarray) -> tuple[float, f
     v2 = tris[:, 2]
     cross = np.cross(v1 - v0, v2 - v0)
     area = 0.5 * np.linalg.norm(cross, axis=1).sum()
-    volume = np.abs(np.einsum('ij,ij->i', v0, cross)).sum() / 6.0
+    volume = abs(np.einsum('ij,ij->i', v0, cross).sum()) / 6.0
     return float(volume), float(area)
 
 
@@ -33,8 +41,20 @@ def marching_cubes_union(
 ) -> tuple[np.ndarray, np.ndarray, float, float]:
     """Build a mesh of the union of spheres via marching cubes."""
 
+    if grid_spacing <= 0.0:
+        raise ValueError('grid_spacing must be positive')
     c = np.asarray(centers, dtype=float)
     r = np.asarray(radii, dtype=float)
+    if c.ndim != 2 or c.shape[1] != 3:
+        raise ValueError('centers must have shape (n_spheres, 3)')
+    if r.ndim != 1 or r.shape[0] != c.shape[0]:
+        raise ValueError('radii must have shape (n_spheres,)')
+    if not np.all(np.isfinite(c)):
+        raise ValueError('centers must contain finite values')
+    if not np.all(np.isfinite(r)):
+        raise ValueError('radii must contain finite values')
+    if np.any(r < 0.0):
+        raise ValueError('radii must be non-negative')
     if c.shape[0] == 0:
         return np.zeros((0, 3)), np.zeros((0, 3), dtype=int), 0.0, 0.0
 

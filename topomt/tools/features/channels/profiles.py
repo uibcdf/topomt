@@ -12,16 +12,55 @@ def _to_numpy(array: np.ndarray | list | tuple) -> np.ndarray:
 def _validate_profile_inputs(points: np.ndarray, axis: np.ndarray, n_bins: int) -> None:
     if points.ndim != 2 or points.shape[1] != 3 or len(points) == 0:
         raise ValueError('centers must contain at least one point with shape (n, 3)')
+    if not np.all(np.isfinite(points)):
+        raise ValueError('centers must contain finite values')
     if axis.shape != (3,):
         raise ValueError('axis must have shape (3,)')
+    if not np.all(np.isfinite(axis)):
+        raise ValueError('axis must contain finite values')
     if not isinstance(n_bins, int) or isinstance(n_bins, bool) or n_bins <= 0:
         raise ValueError('n_bins must be a positive integer')
+
+
+def _profile_axis_point(points: np.ndarray, axis_point) -> np.ndarray:
+    if axis_point is None:
+        return points.mean(axis=0)
+    point = _to_numpy(axis_point)
+    if point.shape != (3,):
+        raise ValueError('axis_point must have shape (3,)')
+    if not np.all(np.isfinite(point)):
+        raise ValueError('axis_point must contain finite values')
+    return point
+
+
+def _validate_index_array(indices, n_points: int, name: str) -> np.ndarray:
+    array = np.asarray(indices, dtype=int)
+    if array.ndim != 1:
+        raise ValueError(f'{name} must be a one-dimensional sequence of indices')
+    if array.size == 0:
+        raise ValueError(f'{name} must contain at least one index')
+    if np.any((array < 0) | (array >= n_points)):
+        raise ValueError(f'{name} contains out-of-range indices')
+    return array
+
+
+def _validate_neighbor_pairs(neighbor_pairs, n_points: int) -> np.ndarray:
+    pairs = np.asarray(neighbor_pairs, dtype=int)
+    if pairs.size == 0:
+        return np.zeros((0, 2), dtype=int)
+    if pairs.ndim != 2 or pairs.shape[1] != 2:
+        raise ValueError('neighbor_pairs must have shape (n_edges, 2)')
+    if np.any((pairs < 0) | (pairs >= n_points)):
+        raise ValueError('neighbor_pairs contains out-of-range indices')
+    return pairs
 
 
 def cross_section_profile(
     centers: np.ndarray,
     axis: np.ndarray,
     n_bins: int = 20,
+    *,
+    axis_point: np.ndarray | list | tuple | None = None,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Compute a radial profile along an axis.
 
@@ -31,6 +70,9 @@ def cross_section_profile(
         Points sampling the cavity or channel.
     axis : ndarray
         Direction vector defining the profiling axis.
+    axis_point : ndarray, optional
+        Point where the profiling axis passes through. If omitted, the centroid
+        of ``centers`` is used so translated channels are handled consistently.
     n_bins : int, default=20
         Number of bins along the axis.
 
@@ -48,14 +90,16 @@ def cross_section_profile(
         raise ValueError('Axis vector cannot be zero.')
 
     axis_unit = axis / norm
-    projection = points.dot(axis_unit)
+    origin = _profile_axis_point(points, axis_point)
+    centered = points - origin
+    projection = centered.dot(axis_unit)
     projection_min, projection_max = projection.min(), projection.max()
     bins = np.linspace(projection_min, projection_max, n_bins + 1)
     bin_centers = 0.5 * (bins[:-1] + bins[1:])
     radial_max = np.zeros(n_bins, dtype=float)
 
     axis_projection = np.outer(projection, axis_unit)
-    perpendicular = points - axis_projection
+    perpendicular = centered - axis_projection
     radial_distances = np.linalg.norm(perpendicular, axis=1)
 
     indices = np.clip(np.digitize(projection, bins) - 1, 0, n_bins - 1)
@@ -71,10 +115,14 @@ def min_cross_section_radius(
     centers: np.ndarray,
     axis: np.ndarray,
     n_bins: int = 20,
+    *,
+    axis_point: np.ndarray | list | tuple | None = None,
 ) -> float:
     """Return the minimum non-zero radial extent along the profiling axis."""
 
-    _, radial = cross_section_profile(centers, axis, n_bins=n_bins)
+    _, radial = cross_section_profile(
+        centers, axis, axis_point=axis_point, n_bins=n_bins
+    )
     if radial.size == 0:
         return 0.0
 
@@ -96,21 +144,27 @@ def shortest_path_length(
     import heapq
 
     points = _to_numpy(centers)
+    if points.ndim != 2 or points.shape[1] != 3 or len(points) == 0:
+        raise ValueError('centers must contain at least one point with shape (n, 3)')
+    if not np.all(np.isfinite(points)):
+        raise ValueError('centers must contain finite values')
     n_points = points.shape[0]
+    pairs = _validate_neighbor_pairs(neighbor_pairs, n_points)
+    starts = _validate_index_array(start_indices, n_points, 'start_indices')
+    targets = set(_validate_index_array(end_indices, n_points, 'end_indices'))
     adjacency: list[list[tuple[int, float]]] = [[] for _ in range(n_points)]
 
-    for node_i, node_j in neighbor_pairs:
+    for node_i, node_j in pairs:
         index_i = int(node_i)
         index_j = int(node_j)
         weight = float(np.linalg.norm(points[index_i] - points[index_j]))
         adjacency[index_i].append((index_j, weight))
         adjacency[index_j].append((index_i, weight))
 
-    targets = {int(index) for index in end_indices}
     distances = [math.inf] * n_points
     queue: list[tuple[float, int]] = []
 
-    for start in start_indices:
+    for start in starts:
         start = int(start)
         distances[start] = 0.0
         heapq.heappush(queue, (0.0, start))
@@ -136,6 +190,8 @@ def thickness_profile(
     axis: np.ndarray,
     neighbor_pairs: np.ndarray | list | tuple | None = None,
     n_bins: int = 20,
+    *,
+    axis_point: np.ndarray | list | tuple | None = None,
 ) -> tuple[np.ndarray, np.ndarray]:
     """Compute a simple local-thickness profile along an axis."""
 
@@ -147,14 +203,16 @@ def thickness_profile(
         raise ValueError('Axis vector cannot be zero.')
 
     axis_unit = axis / norm
-    projection = points.dot(axis_unit)
+    origin = _profile_axis_point(points, axis_point)
+    projection = (points - origin).dot(axis_unit)
     projection_min, projection_max = projection.min(), projection.max()
     bins = np.linspace(projection_min, projection_max, n_bins + 1)
     bin_centers = 0.5 * (bins[:-1] + bins[1:])
 
     if neighbor_pairs is not None:
         adjacency = [[] for _ in range(len(points))]
-        for node_i, node_j in neighbor_pairs:
+        pairs = _validate_neighbor_pairs(neighbor_pairs, len(points))
+        for node_i, node_j in pairs:
             index_i = int(node_i)
             index_j = int(node_j)
             distance = np.linalg.norm(points[index_i] - points[index_j])

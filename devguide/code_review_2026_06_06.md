@@ -806,43 +806,46 @@ matrix to SciPy linkage and raises `ValueError`.
 ### TOOLS-003: Channel profile geometry assumes an axis through the origin
 
 **Evidence:** Confirmed
-**Tracking:** Open
+**Tracking:** Verified
+**Resolution:** Channel profile helpers now accept keyword-only `axis_point`; if
+omitted, the profiling line passes through the centroid of `centers`, so
+translated channels are handled consistently while existing positional calls
+remain compatible.
+
 **Location:** `topomt/tools/features/channels/profiles.py`
 
-Radial distances are computed from the line through the origin parallel to
-`axis`. A translated channel therefore receives inflated radii.
-
-**Required correction**
-
-The API needs an `axis_point` or must infer and document a centerline. A
-direction alone is insufficient to define a line in 3D.
+Radial distances were computed from the line through the origin parallel to
+`axis`. A translated channel therefore received inflated radii.
 
 ### TOOLS-004: Public numerical helpers do not validate edge cases
 
 **Evidence:** Confirmed
-**Tracking:** Open
-**Progress:** The confirmed empty-profile, final-bin-edge, non-positive sample-count, and ranking-length cases are corrected and covered. Broader shape and index validation remains open.
+**Tracking:** Verified
+**Resolution:** Channel profiles, shortest-path indexing, Monte Carlo sphere-union
+inputs, pocket ranking lengths, and mesh inputs now validate empty data, shapes,
+non-finite values, sample counts, radii, and out-of-range indices with explicit
+errors.
 
+Confirmed examples were:
 
-Confirmed examples:
-
-- empty channel profiles fail during min/max reduction;
-- points exactly at the final bin edge can be omitted;
-- `union_volume_monte_carlo(..., n_samples=0)` divides by zero;
-- `simple_ranking()` silently truncates mismatched sequences through `zip`;
-- shape and index assumptions are often left to NumPy errors.
+- empty channel profiles failed during min/max reduction;
+- points exactly at the final bin edge could be omitted;
+- `union_volume_monte_carlo(..., n_samples=0)` divided by zero;
+- `simple_ranking()` silently truncated mismatched sequences through `zip`;
+- shape and index assumptions were often left to NumPy errors.
 
 ### TOOLS-005: Generic mesh volume sums absolute per-face contributions
 
 **Evidence:** Strong static finding
-**Tracking:** Open
+**Tracking:** Verified
+**Resolution:** `_mesh_volume_area()` now computes closed-mesh volume as the
+absolute value of the sum of signed tetrahedral contributions, not the sum of
+per-face absolute contributions. Basic vertex/face shape, finite-value, and index
+validation was added.
+
 **Location:** `topomt/tools/geometry/meshes.py`
 
-`_mesh_volume_area()` applies the absolute value to every triangular signed-volume contribution before summing. The standard closed-mesh formula applies the absolute value after summing signed contributions. The current formula can overestimate volume for mixed orientations or general meshes while returning a plausible value.
-
-**Required correction**
-
-Define supported mesh requirements, sum signed contributions before applying the absolute value, and validate closedness/orientation when enclosed volume is required.
+`_mesh_volume_area()` applied the absolute value to every triangular signed-volume contribution before summing. The standard closed-mesh formula applies the absolute value after summing signed contributions. The previous formula could overestimate volume for translated closed meshes while returning a plausible value.
 
 ### SYN-001: Synthetic builder return type depends on caller filename
 
@@ -1281,7 +1284,7 @@ listed invariant regresses on the synthetic suite.
 | WP-08 Render lifecycle **(Verified)** | Reliability | VIEW-004, DFND-008, DFND-009, VIEW-006, VIEW-007 | Render-result decision | every representation renders twice and clears cleanly |
 | WP-09 Standalone and addon actions **(Verified)** | Bug / debt | VIEW-005, VIEW-009, VIEW-010 | WP-07, WP-08 | real emitted operations and action-state tests |
 | WP-10 Synthetic API stabilization **(Verified)** | API contract | SYN-001, SYN-002 | None | `SyntheticSystem` contract tests and no caller-dependent wrapping |
-| WP-11 Public tools hardening | Bug / reliability | TOOLS-001 to TOOLS-005 | None | fresh-process imports and numerical edge-case tests |
+| WP-11 Public tools hardening **(Verified)** | Bug / reliability | TOOLS-001 to TOOLS-005 | None | fresh-process imports, translation-aware profiles, validation errors, and signed mesh-volume tests |
 | WP-12 Packaging, quality, and CI | Quality | QUAL-001 to QUAL-006 | Stable dependency decision | clean wheel, docs workflow, Ruff gate, focused type checks |
 | WP-13 Centerline contract | Design decision / science | DFND-004, DFND-005 | Traversability and centerline decision | gate-aware capacity and collision-validation tests |
 | WP-14 Public feature metrics and units **(Verified)** | Contract / decision | DFND-015, API-006 | Unit and promotion decisions | raw-unit metadata, label conversion, public input warning, CASTp promotion tests, and DFND Mouth provenance/gate-metric tests |

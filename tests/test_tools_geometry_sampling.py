@@ -40,3 +40,26 @@ def test_union_volume_monte_carlo_rejects_non_positive_sample_count():
             radii=np.array([1.0], dtype=float),
             n_samples=0,
         )
+
+def test_union_volume_monte_carlo_rejects_invalid_center_shape():
+    with pytest.raises(ValueError, match='centers must have shape'):
+        union_volume_monte_carlo(
+            centers=np.zeros((3,), dtype=float),
+            radii=np.ones(1, dtype=float),
+        )
+
+
+def test_union_volume_monte_carlo_rejects_mismatched_radii():
+    with pytest.raises(ValueError, match='radii must have shape'):
+        union_volume_monte_carlo(
+            centers=np.zeros((2, 3), dtype=float),
+            radii=np.ones(1, dtype=float),
+        )
+
+
+def test_union_volume_monte_carlo_rejects_negative_radii():
+    with pytest.raises(ValueError, match='radii must be non-negative'):
+        union_volume_monte_carlo(
+            centers=np.zeros((1, 3), dtype=float),
+            radii=np.array([-1.0], dtype=float),
+        )
