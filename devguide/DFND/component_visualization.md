@@ -404,7 +404,7 @@ These coexist with the existing debug modes (`tetrahedra`, `cloud`, `graph`, …
 In priority order:
 
 1. **Wire channels to `add_channel_tube`** (`pipe`) — the primitive exists; derive
-   an **ordered centerline** through the resident nodes (shortest path in the flow
+   an **ordered skeleton** through the resident nodes (shortest path in the flow
    graph between the two mouths) and the **free radius per station** (`R_residence`
    / local `R_gate`), feed `centers` + `radii`, and add a bottleneck ring.
 2. **Per-family defaults** — pick the primary representation from `family` when the
@@ -455,7 +455,7 @@ Order that maximizes value per unit of work:
 
 1. **Per-family defaults** + the **mouth/gate cap** — small, makes pocket/void/
    channel immediately distinguishable with primitives that already exist.
-2. **Channel centerline → `add_channel_tube`** + bottleneck ring — highest-value
+2. **Channel skeleton → `add_channel_tube`** + bottleneck ring — highest-value
    new feature, primitive already in the viewer.
 3. **Bipartite interface surface** — reuses body labels already on the component.
 4. **HOLE ring profile** + **scalar → gradient** plumbing — bottleneck/clearance

@@ -11,7 +11,7 @@ PyUnitWizard quantities.
   raw areas, and raw volumes are stored as bare numerical values in `nm`,
   `nm**2`, and `nm**3` as appropriate.
 - **Raw schema is explicit.** Raw DFND dictionaries carry
-  `schema_version = 'dfnd.raw.nm.v1'` and a `units` mapping. Consumers must not
+  `schema_version = 'dfnd.raw.nm.v2'` and a `units` mapping. Consumers must not
   infer angstroms from field names or historical notebooks.
 - **Public TopoMT features: quantities.** Values promoted to `Topography`
   features are PyUnitWizard quantities in suite-standard units (`nm`, `nm**2`,

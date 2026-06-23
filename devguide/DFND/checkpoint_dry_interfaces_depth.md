@@ -1,4 +1,4 @@
-# DFND Checkpoint: Dry Interfaces and Dry Depth
+# DFND Checkpoint: Dry Interfaces and Face Depth
 
 Date: 2026-05-21
 
@@ -14,7 +14,7 @@ faces. This checkpoint adds two derived records:
 - `dry_interfaces`: explicit boundary faces where a dry component touches the
   hull/OCEAN, a resident/transit tetrahedron, or another dry component through
   a permeable contact.
-- `dry_depth`: graph distance inside each dry component, measured from dry
+- `face_depth`: graph distance inside each dry component, measured from dry
   tetrahedra that own at least one dry-interface face and propagated through
   dry edges.
 
@@ -44,9 +44,9 @@ The current `interface_kind` values are:
 `touches_ocean` is intentionally stricter than `touches_hull`: it is true only
 for hull faces that are also permeable.
 
-## Dry Depth
+## Face Depth
 
-`dry_depth` is a topological depth, not a Euclidean burial depth. It is computed
+`face_depth` is a topological depth, not a Euclidean burial depth. It is computed
 per dry component:
 
 1. Boundary nodes are the dry tetrahedra that own at least one dry-interface
@@ -59,10 +59,10 @@ Each dry component now records:
 
 - `dry_interface_ids`;
 - `dry_boundary_tetrahedron_ids`;
-- `dry_depth_by_tetrahedron`;
-- `dry_depth_min`;
-- `dry_depth_max`;
-- `dry_depth_mean`.
+- `face_depth_by_tetrahedron`;
+- `face_depth_min`;
+- `face_depth_max`;
+- `face_depth_mean`.
 
 ## Tests
 
@@ -72,7 +72,7 @@ The active graph-contract tests now cover:
 - dry interfaces are exposed consistently through both `raw['dry_interfaces']`
   and `dry['interfaces']`;
 - dry boundary tetrahedra have depth `0`;
-- dry-depth values are consistent with dry-edge BFS propagation;
+- face-depth values are consistent with dry-edge BFS propagation;
 - singleton dry components with interfaces have depth `0`.
 
 ## Interpretation
@@ -87,9 +87,9 @@ motif names into the public v1 feature taxonomy yet.
 The next dry-network steps are:
 
 - decide which dry-interface kinds should be promoted to public metadata;
-- decide whether dry depth should be computed from all interfaces or only from
+- decide whether face depth should be computed from all interfaces or only from
   OCEAN-facing/permeable interfaces for specific analyses;
 - define dry motif candidates using `dry_components`, `dry_edges`,
-  `dry_interfaces`, and `dry_depth`;
+  `dry_interfaces`, and `face_depth`;
 - keep validating the behavior on real small molecular systems before exposing
   dry-derived features as stable public API.

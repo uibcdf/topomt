@@ -1036,7 +1036,7 @@ class DelaunayFlowNetwork:
                 )
             )
 
-        dry_mask = ~resident
+        dry_mask = ~finite_transit
         dry_components = self._build_dry_components(
             dry_mask, face_permeable, min_size, dry_adjacency=dry_adjacency
         )
@@ -1065,7 +1065,7 @@ class DelaunayFlowNetwork:
             interface['target_dry_component_key'] = (
                 dry_key_by_id[target_id] if target_id is not None else None
             )
-        self._assign_dry_depths(dry_components, dry_interfaces)
+        self._assign_face_depths(dry_components, dry_interfaces)
         dry_motifs = self._build_dry_motifs(dry_components, dry_interfaces)
         for motif in dry_motifs:
             motif['dry_component_key'] = dry_key_by_id[motif['dry_component_id']]
@@ -1115,7 +1115,7 @@ class DelaunayFlowNetwork:
 
         return {
             'raw': {
-                'schema_version': 'dfnd.raw.nm.v1',
+                'schema_version': 'dfnd.raw.nm.v2',
                 'units': {
                     'length': 'nm',
                     'area': 'nm**2',
@@ -1271,7 +1271,7 @@ class DelaunayFlowNetwork:
                 )
         return dry_interfaces
 
-    def _assign_dry_depths(self, dry_components, dry_interfaces):
+    def _assign_face_depths(self, dry_components, dry_interfaces):
         interfaces_by_component = {}
         for interface in dry_interfaces:
             component_id = int(interface['dry_component_id'])
@@ -1311,10 +1311,10 @@ class DelaunayFlowNetwork:
                 int(interface['dry_interface_id']) for interface in component_interfaces
             ]
             component['dry_boundary_tetrahedron_ids'] = boundary_nodes
-            component['dry_depth_by_tetrahedron'] = depths
-            component['dry_depth_min'] = min(finite_depths) if finite_depths else None
-            component['dry_depth_max'] = max(finite_depths) if finite_depths else None
-            component['dry_depth_mean'] = (
+            component['face_depth_by_tetrahedron'] = depths
+            component['face_depth_min'] = min(finite_depths) if finite_depths else None
+            component['face_depth_max'] = max(finite_depths) if finite_depths else None
+            component['face_depth_mean'] = (
                 float(np.mean(finite_depths)) if finite_depths else None
             )
 
@@ -1329,7 +1329,7 @@ class DelaunayFlowNetwork:
             component_id = int(component['id'])
             depth_by_node = {
                 int(node): depth
-                for node, depth in component['dry_depth_by_tetrahedron'].items()
+                for node, depth in component['face_depth_by_tetrahedron'].items()
             }
             component_interfaces = interfaces_by_component.get(component_id, [])
 
@@ -1418,7 +1418,7 @@ class DelaunayFlowNetwork:
         motif_type,
         tetrahedron_ids,
         interfaces,
-        dry_depth,
+        face_depth,
     ):
         atom_indices = sorted(
             {
@@ -1441,7 +1441,7 @@ class DelaunayFlowNetwork:
             'dry_interface_ids': [
                 int(interface['dry_interface_id']) for interface in interfaces
             ],
-            'dry_depth': None if dry_depth is None else int(dry_depth),
+            'face_depth': None if face_depth is None else int(face_depth),
             'flags': ['candidate'],
         }
 

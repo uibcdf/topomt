@@ -15,11 +15,47 @@ transition.
 [pyproject.toml](/home/diego/repos@uibcdf/topomt/pyproject.toml) is the main build-system file and
 uses `versioningit`.
 
-However, it still shows signs of incompleteness:
+The runtime dependency list now follows the current import audit:
 
-- placeholder project description;
-- empty runtime dependency list;
-- metadata that does not yet fully reflect the actual ecosystem contracts.
+- core runtime dependencies are imports required by the public load path;
+- optional dependencies are lazy, feature-gated, or backend-specific imports;
+- metadata still needs to be mirrored in the conda recipe/environment layer.
+
+The operational rule is:
+
+- top-level import on the public load path means a core dependency;
+- lazy, gated, or backend-specific import means an optional extra;
+- packages with no active imports should not be kept as runtime dependencies.
+
+The current core dependency set is:
+
+- `numpy`;
+- `scipy`;
+- `molsysmt`;
+- `pyunitwizard`;
+- `smonitor`;
+- `argdigest`;
+- `depdigest`.
+
+`networkx` is intentionally not core. It is guarded as the `centerline` extra
+because it is imported lazily by the DFND channel-skeleton path. The `viewer`
+extra includes `topomt[centerline]`, because the MolSysViewer channel-tube
+representation consumes that skeleton.
+
+`pyunitwizard` has one release gate that packaging must not hide: TopoMT now
+uses `pyunitwizard.conversion_factor`, but that API is newer than the latest
+published `pyunitwizard 0.22.0` release at the time this note was written.
+This does not block the development work package, because MolSysSuite
+packages are still moving together in editable development environments. It
+does mean that a public TopoMT release must set the final `pyunitwizard`
+minimum version after PyUnitWizard cuts a release containing
+`conversion_factor`.
+
+`depdigest` has the same publication note for conditional optional
+dependencies: TopoMT uses `dep_digest(..., when={...})` on scientific
+arguments that can be NumPy arrays. A public TopoMT release must set the
+final `depdigest` minimum version after DepDigest releases the array-safe
+conditional comparison used by that guard.
 
 The repository tag policy should now be treated as strict `X.Y.Z`
 versioning with no tag prefixes or suffixes. Release tags are expected to look
@@ -71,9 +107,14 @@ accurately than `pyproject.toml`.
 
 Current interpretation:
 
-- hard scientific core: `numpy`, `scipy`, `molsysmt`, `pyunitwizard`;
-- soft extras and optional integrations: visualization and some geometry tools;
-- dependency metadata and packaging metadata are not yet fully aligned.
+- hard scientific core in `depdigest`: `numpy`, `scipy`, `molsysmt`;
+- soft extras and optional integrations: `networkx`, `scikit-image`,
+  `scikit-learn`, `mdtraj`, and `biotite`;
+- MolSysSuite infrastructure such as `argdigest`, `depdigest`, and `smonitor`
+  is declared in packaging metadata, but is not modeled as a feature dependency
+  inside `_depdigest.py`;
+- dependency metadata and packaging metadata must stay aligned with the conda
+  recipe/environment layer.
 
 ## Diagnostics and digestion config
 

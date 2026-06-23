@@ -422,9 +422,9 @@ n_edges
 R_residence_min
 R_residence_mean
 R_residence_max
-dry_depth_min
-dry_depth_mean
-dry_depth_max
+face_depth_min
+face_depth_mean
+face_depth_max
 local_class_composition
 flags
 ```
@@ -459,15 +459,15 @@ flags
 Dry interfaces are the bridge between the dry graph and later convexity,
 boundary, and mixed features.
 
-### 6.3. Dry Depth
+### 6.3. Face Depth
 
-`dry_depth` is stored per dry tetrahedron and summarized per dry component or
+`face_depth` is stored per dry tetrahedron and summarized per dry component or
 motif.
 
 Initial definition:
 
 ```text
-dry_depth(v) = shortest dry-graph distance from v to any dry boundary node in
+face_depth(v) = shortest dry face-graph distance from v to any dry boundary node in
                the same DryComponent
 ```
 
@@ -595,7 +595,7 @@ Must implement first:
 - dry graph;
 - dry components;
 - dry interfaces;
-- dry depth;
+- face depth;
 - raw output record.
 
 Can be postponed:

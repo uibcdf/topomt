@@ -1,7 +1,7 @@
-from topomt import pyunitwizard as puw
 import numpy as np
 import pytest
 
+from topomt import pyunitwizard as puw
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
 
@@ -255,6 +255,15 @@ def test_dry_open_cut_connector_policy_can_merge_resident_regions():
         for domain in resident_only['raw']['wet_components']
     ]
     assert not any(merged_residents <= domain for domain in resident_only_domains)
+
+    connector_ids = set(merged_domain['transit_connector_tetrahedron_ids'])
+    dry_ids = {
+        tetrahedron_id
+        for component in with_connectors['dry']['components']
+        for tetrahedron_id in component['tetrahedron_indices']
+    }
+    assert connector_ids
+    assert connector_ids.isdisjoint(dry_ids)
 
 
 def test_wet_coast_one_link_domain_is_pocket_not_surface_concavity():
@@ -582,7 +591,7 @@ def _dry_record_maps(result):
     return tetrahedra, faces
 
 
-def test_dry_components_cover_all_and_only_non_resident_tetrahedra():
+def test_dry_components_cover_all_and_only_blocked_tetrahedra():
     network = _two_tetrahedra_fixture()
     result = network.get_topography(probe_radius=10.0, min_size=0)
     tetrahedra, _faces = _dry_record_maps(result)
@@ -591,6 +600,7 @@ def test_dry_components_cover_all_and_only_non_resident_tetrahedra():
         tetrahedron_id
         for tetrahedron_id, record in tetrahedra.items()
         if record['residence_state'] == 'non_resident'
+        and record['transit_role'] not in {'resident_transit', 'transit_connector'}
     }
     component_nodes = {
         tetrahedron_id
@@ -724,20 +734,20 @@ def test_dry_interfaces_reference_existing_components_and_faces():
         }
 
 
-def test_dry_depth_is_zero_on_boundary_nodes_and_consistent_with_dry_edges():
+def test_face_depth_is_zero_on_boundary_nodes_and_consistent_with_dry_edges():
     network = _two_tetrahedra_fixture()
     result = network.get_topography(probe_radius=10.0, min_size=0)
 
     for component in result['dry']['components']:
-        depths = component['dry_depth_by_tetrahedron']
+        depths = component['face_depth_by_tetrahedron']
         boundary_nodes = set(component['dry_boundary_tetrahedron_ids'])
         assert component['dry_interface_ids']
         assert boundary_nodes
         assert all(depths[node] == 0 for node in boundary_nodes)
         finite_depths = [depth for depth in depths.values() if depth is not None]
-        assert component['dry_depth_min'] == min(finite_depths)
-        assert component['dry_depth_max'] == max(finite_depths)
-        assert component['dry_depth_mean'] == pytest.approx(
+        assert component['face_depth_min'] == min(finite_depths)
+        assert component['face_depth_max'] == max(finite_depths)
+        assert component['face_depth_mean'] == pytest.approx(
             float(np.mean(finite_depths))
         )
 
@@ -767,10 +777,10 @@ def test_singleton_dry_component_with_interface_has_depth_zero():
     assert len(singletons) == 1
     component = singletons[0]
     assert component['dry_interface_ids']
-    assert list(component['dry_depth_by_tetrahedron'].values()) == [0]
-    assert component['dry_depth_min'] == 0
-    assert component['dry_depth_max'] == 0
-    assert component['dry_depth_mean'] == 0.0
+    assert list(component['face_depth_by_tetrahedron'].values()) == [0]
+    assert component['face_depth_min'] == 0
+    assert component['face_depth_max'] == 0
+    assert component['face_depth_mean'] == 0.0
 
 
 def test_dry_motifs_reference_existing_components_interfaces_and_dry_nodes():
@@ -795,7 +805,7 @@ def test_dry_motifs_reference_existing_components_interfaces_and_dry_nodes():
         assert 'candidate' in motif['flags']
 
 
-def test_dry_core_candidate_uses_component_maximum_dry_depth():
+def test_dry_core_candidate_uses_component_maximum_face_depth():
     network = _network_from_random_points(seed=5, n_atoms=24)
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
@@ -809,11 +819,11 @@ def test_dry_core_candidate_uses_component_maximum_dry_depth():
     ]
     for motif in core_motifs:
         component = components[motif['dry_component_id']]
-        assert motif['dry_depth'] == component['dry_depth_max']
+        assert motif['face_depth'] == component['face_depth_max']
         for tetrahedron_id in motif['tetrahedron_ids']:
             assert (
-                component['dry_depth_by_tetrahedron'][tetrahedron_id]
-                == motif['dry_depth']
+                component['face_depth_by_tetrahedron'][tetrahedron_id]
+                == motif['face_depth']
             )
 
 

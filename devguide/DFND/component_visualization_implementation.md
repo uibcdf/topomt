@@ -21,7 +21,7 @@ Done and on `main`:
 - **Phase 0** — Okabe–Ito CVD-safe palette + `representation='auto'` per-family
   dispatch (channel→pipe, pocket/void→envelope; interface→contact_sheet).
 - **Phase 1** — `envelope`: blob + per-mouth gate ring + translucent mouth cap.
-- **Phase 2** — `pipe`: channel centerline tube (`topomt/dfnd/centerline.py`) +
+- **Phase 2** — `pipe`: channel skeleton tube (`topomt/dfnd/centerline.py`) +
   real bottleneck ring.
 - **Phase 3** — `contact_sheet`: interface lining split per body.
 - **Phase 4** — `rings`: HOLE-style clearance profile (green/amber/red @ 1.15 Å).
@@ -145,7 +145,7 @@ Viewer primitives (confirmed): `add_pocket_blob`, `add_pocket_surface`,
   | **legend** overlay; CVD-safe **palette catalog** (Okabe–Ito) | molsysviewer (**new**) | reusable by any addon |
   | **2D–3D synced plot widget** | molsysviewer (**new**) | generic trajectory-inspection UX |
   | per-family default resolver; family→palette mapping | molsysviewer_topomt | DFND families |
-  | channel **centerline** derivation (resident permeable graph + shortest path) | molsysviewer_topomt | DFND graph |
+  | channel **skeleton** derivation (resident permeable graph + shortest path) | molsysviewer_topomt | DFND graph |
   | **mouth caps** from `mouth_face_clusters`/`R_gate`; ring **sampling** along the centerline | molsysviewer_topomt | DFND records |
   | interface **body-split** from `lining_body_split` | molsysviewer_topomt | DFND records |
   | top-N **visibility** by `volume_solvent_estimate`; affinity **typing** | molsysviewer_topomt | DFND metrics |
@@ -186,7 +186,7 @@ Makes pocket/void/channel distinguishable using mostly existing primitives.
 
 ## 5. Phase 2 — channel `pipe` (highest value)
 
-- **Centerline (D3)**: `channel_centerline(component, raw)`:
+- **Centerline (D3)**: `channel_skeleton(raw, component)`:
   1. build `g = _resident_permeable_graph(raw, set(resident_node_indices))`
      (promote from `experimental`);
   2. endpoints = the resident tetrahedra adjacent to each of the two mouths
@@ -261,7 +261,7 @@ These are not pure rendering tasks; they wait on DFND core or new viewer support
 
 ## 10. Testing strategy
 
-- **Geometry helpers (D3) unit-tested without a viewer** — `channel_centerline`,
+- **Geometry helpers (D3) unit-tested without a viewer** — `channel_skeleton`,
   `mouth_caps`, ring sampling on the synthetic catalog (`tube_channel_clean`,
   `two_blocks_interface*`, `nested_spheres`), asserting on coordinates/radii.
 - **Render branches via `DummyView`** — the existing pattern (`view.messages`

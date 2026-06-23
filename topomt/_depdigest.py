@@ -5,18 +5,19 @@ LIBRARIES = {
     'numpy': {'type': 'hard', 'pypi': 'numpy'},
     'scipy': {'type': 'hard', 'pypi': 'scipy'},
     'molsysmt': {'type': 'hard', 'pypi': 'molsysmt'},
-    'pyunitwizard': {'type': 'hard', 'pypi': 'pyunitwizard'},
-    'nglview': {'type': 'soft', 'pypi': 'nglview'},
-    'py3Dmol': {'type': 'soft', 'pypi': 'py3Dmol'},
+    'biotite': {'type': 'soft', 'pypi': 'biotite'},
+    'mdtraj': {'type': 'soft', 'pypi': 'mdtraj'},
+    'networkx': {'type': 'soft', 'pypi': 'networkx'},
     'skimage': {'type': 'soft', 'pypi': 'scikit-image'},
-    'argdigest': {'type': 'soft', 'pypi': 'argdigest'},
-    'smonitor': {'type': 'soft', 'pypi': 'smonitor'},
+    'sklearn': {'type': 'soft', 'pypi': 'scikit-learn'},
 }
 
 MAPPING = {
-    'nglview_NGLWidget': 'nglview',
-    'py3Dmol_view': 'py3Dmol',
+    'biotite_structure': 'biotite',
+    'mdtraj_load': 'mdtraj',
+    'networkx_Graph': 'networkx',
     'skimage_measure': 'skimage',
+    'sklearn_neighbors': 'sklearn',
 }
 
 SHOW_ALL_CAPABILITIES = True

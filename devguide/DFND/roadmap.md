@@ -101,7 +101,7 @@ Candidates (pick one to prototype):
 - **MD trajectory tracking**: per-frame DFND + atom/tetrahedron/face identity to
   follow a cryptic or gated site across frames. See
   [`dynamic_topology.md`](dynamic_topology.md) (documented, not implemented).
-- **Dry side**: `DryComponent` / `DryInterface` / `dry_depth` end-to-end — the
+- **Dry side**: `DryComponent` / `DryInterface` / `face_depth` end-to-end — the
   wet/dry symmetry few tools offer. See
   [`dry_network_and_convexity.md`](dry_network_and_convexity.md).
 

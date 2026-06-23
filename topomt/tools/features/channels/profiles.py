@@ -3,6 +3,7 @@
 import math
 
 import numpy as np
+from depdigest import dep_digest
 
 
 def _to_numpy(array: np.ndarray | list | tuple) -> np.ndarray:
@@ -185,6 +186,7 @@ def shortest_path_length(
     return math.inf
 
 
+@dep_digest('sklearn', when={'neighbor_pairs': None})
 def thickness_profile(
     centers: np.ndarray,
     axis: np.ndarray,

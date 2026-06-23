@@ -57,7 +57,7 @@ The immediate DFND work is:
 - `R_residence` and `R_gate` are implemented as clearance primitives with active tests.
 - DFND raw records separate topological/debug volumes from `volume_solvent_estimate`.
 - DFND promotes stable void, pocket, and channel component families while provisional families remain available through `topography.dfnd`.
-- Dry-side records now include dry components, dry edges, dry interfaces, dry depth, and first candidate dry motifs.
+- Dry-side records now include dry components, dry edges, dry interfaces, face depth, and first candidate dry motifs.
 - Probe-radius sweeps on five small real systems obey the expected monotonicity invariants.
 
 Key DFND checkpoints:

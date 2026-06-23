@@ -21,6 +21,13 @@ classifiers = [
 requires-python = ">=3.10.0,<3.14.0"
 # Declare any run-time dependencies that should be installed with the package.
 dependencies = [
+  "argdigest",
+  "depdigest",
+  "molsysmt",
+  "numpy",
+  "pyunitwizard",
+  "scipy",
+  "smonitor",
 ]
 
 # Update the urls once the hosting is set up.
@@ -29,9 +36,30 @@ dependencies = [
 "Documentation" = "https://uibcdf.org/topomt/"
 
 [project.optional-dependencies]
+alphaspace2 = [
+  "mdtraj",
+]
+centerline = [
+  "networkx",
+]
+pocketeer = [
+  "biotite",
+]
+third-party = [
+  "topomt[alphaspace2,pocketeer]",
+]
+tools = [
+  "scikit-image",
+  "scikit-learn",
+]
+viewer = [
+  "molsysviewer",
+  "topomt[centerline]",
+]
 test = [
   "pytest>=6.1.2",
-  "pytest-runner"
+  "pytest-cov",
+  "pytest-xdist",
 ]
 dev = [
   "ruff>=0.15",

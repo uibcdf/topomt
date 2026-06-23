@@ -129,7 +129,7 @@ Tasks:
    volumes, and gate summaries consistently.
 8. Build the dry graph from finite non-resident tetrahedra connected through
    non-permeable faces.
-9. Extract dry components, dry interfaces, terminal contacts, transit connectors, and dry depth as raw records.
+9. Extract dry components, dry interfaces, terminal contacts, transit connectors, and face depth as raw records.
 10. Keep component-motif and dry-motif analysis separate from primary
    classification. Start with topological depth, external-link paths, and dry
    interface signatures before enabling capacity-based chamber, throat, rim, or
@@ -174,7 +174,7 @@ Tasks:
 3. Add small synthetic tests where expected transit components, residence regions,
    voids, surface concavities, pockets, multi-external-link components, external
    links, dry components, dry interfaces, terminal contacts, transit connectors,
-   and dry depth are known by construction.
+   and face depth are known by construction.
 4. Add small real-system smoke tests.
 5. Add monotonic probe-radius tests for component accessibility.
 6. Add tests for external-link clustering, dry-interface extraction, derived

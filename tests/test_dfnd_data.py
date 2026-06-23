@@ -48,7 +48,7 @@ def test_raw_records_declare_nm_schema_and_units():
     result = network.get_topography(probe_radius=1.4, min_size=0)
     raw = result['raw']
 
-    assert raw['schema_version'] == 'dfnd.raw.nm.v1'
+    assert raw['schema_version'] == 'dfnd.raw.nm.v2'
     assert raw['units']['length'] == 'nm'
     assert raw['units']['area'] == 'nm**2'
     assert raw['units']['volume'] == 'nm**3'

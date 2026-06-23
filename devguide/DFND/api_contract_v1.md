@@ -129,7 +129,7 @@ keyword-based API remains a compatibility facade.
 substrate identity with `DFNDQuery`; it reuses the canonical identity machinery
 in `identity.py`. Reporting filters do not affect result identity.
 
-Raw DFND records carry `schema_version = 'dfnd.raw.nm.v1'` and a `units` mapping;
+Raw DFND records carry `schema_version = 'dfnd.raw.nm.v2'` and a `units` mapping;
 raw lengths, coordinates, areas, and volumes are bare nm/nm**2/nm**3 values.
 
 `min_size` is currently a compatibility/reporting filter: every wet and dry

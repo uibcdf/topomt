@@ -44,7 +44,7 @@ Dry component records now include:
 Still pending:
 
 - dry interfaces;
-- dry depth;
+- face depth;
 - dry-interface signatures;
 - dry motifs such as cores, protrusions, ridges, rims, walls, separators, or
   lining regions;

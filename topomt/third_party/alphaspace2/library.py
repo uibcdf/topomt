@@ -1,7 +1,8 @@
-from pathlib import Path
 import tempfile
+from pathlib import Path
 
 import numpy as np
+from depdigest import dep_digest
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
@@ -10,8 +11,9 @@ from topomt.third_party._common import import_upstream_module, prepare_wrapper_i
 
 
 def _patch_alphaspace2_mdtraj_sasa(upstream):
-    from mdtraj.geometry import _geometry
     import inspect
+
+    from mdtraj.geometry import _geometry
 
     try:
         sasa_signature = inspect.signature(_geometry._sasa)
@@ -71,6 +73,7 @@ def _patch_alphaspace2_numpy_compatibility():
         setattr(np, 'float', float)
 
 
+@dep_digest('mdtraj')
 def get_topography(
     molecular_system,
     *,

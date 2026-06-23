@@ -52,7 +52,7 @@ Implemented and tested at the engineering-contract level:
 - vectorized per-query thresholding and transit-edge filtering;
 - access-by-residence domain classification;
 - external-link clustering;
-- dry components, dry edges, dry interfaces, dry depth, and first candidate dry motifs;
+- dry components, dry edges, dry interfaces, face depth, and first candidate dry motifs;
 - `dfnd(...)` raw-first API;
 - `get_topography(method='dfnd')` compatibility feature conversion;
 - small real-system stability and monotonicity sweeps.

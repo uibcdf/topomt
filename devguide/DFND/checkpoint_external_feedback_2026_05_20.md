@@ -41,7 +41,7 @@ ExternalLink
 dry graph
 DryComponent
 DryInterface
-dry_depth
+face_depth
 RawDFNDRecord
 candidate DomainMotif/DryMotif descriptors
 ```

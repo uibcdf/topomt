@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import warnings
+from dataclasses import dataclass
+
 import molsysmt as msm
 import numpy as np
+from depdigest import dep_digest
 from scipy.spatial import cKDTree
 
+from topomt import pyunitwizard as puw
 from topomt._private.molsysmt_preparation import build_heavy_receptor_view
 from topomt._private.smonitor import (
     PocketeerDelaunayWarning,
@@ -15,7 +18,6 @@ from topomt._private.smonitor import (
     signal,
 )
 from topomt.delaunay_mesh import DelaunayMesh
-from topomt import pyunitwizard as puw
 
 MIN_RADIUS_A = 3.5
 MAX_RADIUS_A = 5.0
@@ -41,6 +43,7 @@ class PocketeerPocket:
     score: float
 
 
+@dep_digest('biotite')
 @signal(tags=['method', 'pocketeer', 'native'])
 def pocketeer(
     molecular_system,
@@ -234,8 +237,7 @@ def _sasa_molsysmt(receptor, coords_nm: np.ndarray, polar_probe_radius_nm: float
     if coords_nm.shape[0] == 0:
         return np.zeros(0, dtype=float)
     try:
-        from biotite.structure import AtomArray
-        from biotite.structure import sasa
+        from biotite.structure import AtomArray, sasa
     except ModuleNotFoundError as exc:
         warnings.warn(PocketeerSasaBackendWarning(reason=str(exc)))
         return np.zeros(coords_nm.shape[0], dtype=float)

@@ -88,7 +88,7 @@ CASTp-like molecular volume. It is now covered by unit tests for:
 ## 6. First Dry Motif Layer
 
 A first internal dry-motif layer is now derived from dry components,
-dry interfaces, and dry depth. The current motif records are candidates only:
+dry interfaces, and face depth. The current motif records are candidates only:
 
 - `dry_boundary_shell`;
 - `dry_ocean_exposed_shell`;

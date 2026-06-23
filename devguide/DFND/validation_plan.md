@@ -27,7 +27,7 @@ Required checks:
 - transit-connector and terminal-contact policies;
 - dry-component extraction;
 - dry-interface extraction;
-- dry-depth calculation;
+- face-depth calculation;
 - raw-record provenance.
 
 ### 1.2. Geometric Feasibility Validation

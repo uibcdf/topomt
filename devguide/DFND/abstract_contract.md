@@ -159,7 +159,7 @@ DryComponent
     dry nodes
     dry edges
     dry interfaces
-    dry depth
+    face depth
     dry interface signatures
 
 ConcavityFeature
@@ -281,7 +281,7 @@ The first dry-network contract is defined in [`dry_network_and_convexity.md`](dr
 - dry component id;
 - dry node and edge counts;
 - dry interface ids;
-- minimum, mean, and maximum `dry_depth`;
+- minimum, mean, and maximum `face_depth`;
 - adjacent concavity component ids;
 - adjacent external link ids;
 - OCEAN exposure descriptors;

@@ -176,7 +176,7 @@ that support and classification in one result context; temporal continuity uses
 [`interfaces.md`](interfaces.md)); and the wet→dry adjacency `dry_lining` (§10).
 
 **`DryComponent`**: `interface_ids`, `neighbor_component_ids`,
-`dry_depth_{min,max,mean}` (+ per-node), `motif_ids`, `motif_keys`; and the
+`face_depth_{min,max,mean}` (+ per-node), `motif_ids`, `motif_keys`; and the
 dry→wet adjacency
 `wet_lining` + the named view `interface_walls` (§10).
 

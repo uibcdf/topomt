@@ -29,7 +29,7 @@ The current tests include conventional engine tests and an active DFND suite:
 
 - `Topography` smoke behavior and DFND feature conversion;
 - DFND geometry primitives (`R_residence`, `R_gate`);
-- DFND graph contract, face identity, external links, dry components, dry interfaces, dry depth, and dry motifs;
+- DFND graph contract, face identity, external links, dry components, dry interfaces, face depth, and dry motifs;
 - DFND input-policy failures before triangulation;
 - DFND deterministic `volume_solvent_estimate` bounds and batch/scalar consistency;
 - DFND small real-system stability and multi-radius monotonicity;

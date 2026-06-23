@@ -54,7 +54,7 @@ The active implementation now covers the first v1 substrate:
   attributes). Wet components promote to `Pocket`/`Void`/`Channel` with mouths as
   child `Mouth` features (contextual component provenance via `component_key`;
   mouth provenance and gate metrics via `external_link_key` / `R_gate_*`);
-- build a dry complement with dry-edge face records, dry interfaces, dry depth, and first candidate dry motifs.
+- build a dry complement with dry-edge face records, dry interfaces, face depth, and first candidate dry motifs.
 
 Static component identity now exposes local rank-derived `component_id`,
 `component_index`, `node_count_rank`, the compatibility alias `size_rank`, exact
@@ -98,7 +98,7 @@ Validated by active tests so far:
 - external-link edge-connectivity clustering.
 - Delaunay face identity is tested against oriented-simplex neighbor semantics; see checkpoint_face_identity_external_links.md.
 - Basic dry-component invariants and dry-edge face records are covered; see checkpoint_dry_graph_basics.md.
-- Dry interfaces and dry-depth propagation are implemented and tested; see checkpoint_dry_interfaces_depth.md.
+- Dry interfaces and face-depth propagation are implemented and tested; see checkpoint_dry_interfaces_depth.md.
 - Probe-radius monotonicity sweeps on five small real systems are green using one cached `DelaunayFlowNetwork` per system; see checkpoint_probe_radius_sweep.md.
 - Query-time thresholding/edge filtering, Topography raw accessors, solvent-volume tests, quality snapshots, and first internal dry motifs are covered; see checkpoint_dfnd_hardening_stint.md and checkpoint_quality_snapshot.md.
 - A synthetic-shape battery (65 catalogued dummy-atom PDBs across success,

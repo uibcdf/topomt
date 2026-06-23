@@ -54,7 +54,7 @@ network views:
 
 The transit side defines transit components and concavity components. The residence
 layer defines resident content and volume-bearing regions inside those components.
-The dry side defines dry components, dry interfaces, dry depth, and candidate
+The dry side defines dry components, dry interfaces, face depth, and candidate
 dry motifs that may later support convexity, boundary, and mixed features.
 
 ### 2.3. DFN
@@ -190,7 +190,7 @@ A mature DFND run should be able to report:
 - `ExternalLink` records;
 - `DryComponent` records;
 - `DryInterface` records;
-- dry depth and dry interface signatures;
+- face depth and dry interface signatures;
 - derived mouth geometry when requested;
 - candidate rim, protrusion, ridge, wall, separator, lining, and dry-core motifs;
 - topological volume and other metrics;

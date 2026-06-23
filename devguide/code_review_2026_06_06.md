@@ -279,72 +279,49 @@ Validate all scientific parameters before calculation:
 - enum-like policies are validated centrally;
 - future physical parameters define units and valid ranges.
 
-### DFND-004: Channel centerline clearance is not guaranteed along the path
+### DFND-004: Channel centerline clearance was not guaranteed along the path
 
 **Evidence:** Design risk with confirmed implementation limitation
-**Tracking:** Decision required
-**Location:** `topomt/dfnd/centerline.py`
+**Tracking:** Verified
+**Resolution:** The API is now named `channel_skeleton`, replacing the older centerline name. It returns `path_kind='shortest_distance'`, station radii (`R_residence`), gate radii/margins for the N-1 traversed transitions, separate station and gate bottleneck indices, and `is_collision_validated=False`. Gate minima are explicitly named as shortest-path metrics, not channel capacity.
+**Location:** `topomt/dfnd/centerline.py`, `tests/test_dfnd_centerline.py`
 
-The current centerline chooses a shortest path through resident tetrahedra,
-connects residence centers with straight segments, reports `R_residence` at
-each station, and defines the bottleneck as the smallest station
-`R_residence`.
+The skeleton chooses a shortest path through resident tetrahedra and connects residence centers with straight segments. A permeable shared face guarantees a feasible crossing somewhere on that face, not that the straight segment between centers is a collision-free probe trajectory. The result is therefore a visualization/geometry skeleton. Future `widest_gate_path` and validated probe-path work should live in a separate work package.
 
-A permeable shared face guarantees a feasible crossing somewhere on that face.
-It does not guarantee that the straight segment between the selected residence
-centers crosses through a collision-free point. The true capacity can also be
-limited by `R_gate`, which is not included in the reported bottleneck.
-
-**Required correction**
-
-Treat the current result as a graph skeleton, not yet as a guaranteed
-probe-center trajectory. A robust centerline should:
-
-1. select a feasible crossing point on every traversed face;
-2. include node residence clearance and face gate clearance;
-3. define path capacity as the minimum over stations and crossings;
-4. validate interpolated segments against excluded atomic volume;
-5. distinguish a visualization skeleton from a quantitative profile.
-
-### DFND-005: Centerline mouth endpoints are order-dependent
+### DFND-005: Centerline mouth endpoints were order-dependent
 
 **Evidence:** Confirmed by inspection
-**Tracking:** Open
-**Location:** `topomt/dfnd/centerline.py`
+**Tracking:** Verified
+**Resolution:** `channel_skeleton` represents the two widest mouths as virtual graph nodes connected to every incident resident tetrahedron. The shortest-distance path is computed between those virtual mouth nodes, then virtual nodes are stripped from the returned tetrahedron path. The result records `mouth_endpoint_policy='virtual_mouth_shortest_distance'`.
+**Location:** `topomt/dfnd/centerline.py`, `tests/test_dfnd_centerline.py`
 
-For each mouth, the first resident tetrahedron in `link['tetrahedron_ids']` is
-selected. If a mouth contains several resident tetrahedra, the result depends on
-record ordering rather than a geometric criterion.
+This removes dependence on the first tetrahedron listed for a mouth while keeping the current shortest-distance visual skeleton contract.
 
-**Required correction**
+### DFND-013: Transit connectors belonged to both wet and dry component sets
 
-Define an endpoint policy, such as maximum gate capacity, closest tetrahedron to
-the mouth-area centroid, or a virtual mouth station connected to all incident
-resident tetrahedra.
+**Evidence:** Confirmed implementation behavior
+**Tracking:** Verified
+**Resolution:** Dry components are now built from blocked tetrahedra only: `dry_mask = ~finite_transit`. Non-resident transit connectors remain on the wet/transit side and are excluded from dry components.
+**Location:** `topomt/dfnd/graph.py`, `tests/test_dfnd_graph_contract.py`
 
-### DFND-013: Transit connectors belong to both wet and dry component sets
+Wet components include resident tetrahedra plus non-resident transit connectors. Dry components previously used every non-resident tetrahedron, so a connector could belong simultaneously to one wet and one dry component. The dry side now means non-resident and non-transit, which keeps wet/transit and dry membership disjoint for connector nodes.
 
-**Evidence:** Design risk with confirmed implementation behavior
-**Tracking:** Decision required
-**Location:** `topomt/dfnd/graph.py`, `topomt/dfnd/components.py`
+**Closure evidence**
 
-Wet components include resident tetrahedra plus non-resident transit connectors. Dry components are built from every non-resident tetrahedron, so a connector can belong simultaneously to one wet and one dry component. Later coast construction uses a single `node_to_component` map where dry assignment overwrites wet assignment, implicitly assuming exclusive membership.
+The connector fixture asserts that `transit_connector_tetrahedron_ids` are disjoint from all dry component tetrahedra.
 
-**Required correction**
-
-Decide whether wet and dry memberships are disjoint or overlapping. If overlapping roles are canonical, downstream mappings must be many-to-many. Add invariants for connector membership, coast attribution, and selection.
-
-### DFND-014: Dry depth ignores edge/vertex adjacency used to form components
+### DFND-014: Dry depth was face-based while dry components can be edge/vertex-connected
 
 **Evidence:** Strong static finding
-**Tracking:** Open
-**Location:** `topomt/dfnd/graph.py`
+**Tracking:** Verified
+**Resolution:** The metric is now explicitly named `face_depth`. It remains face-based by design: depth propagates only through non-permeable shared faces (`dry_edges`), even when `dry_adjacency='edge'` or `'vertex'` uses looser contacts to group components.
+**Location:** `topomt/dfnd/graph.py`, `tests/test_dfnd_graph_contract.py`
 
-With `dry_adjacency="edge"` or `"vertex"`, dry components use additional edge/vertex contacts. Stored `dry_edges`, and therefore dry-depth propagation, contain only non-permeable shared-face contacts. Some tetrahedra can retain `dry_depth=None` inside a connected dry component.
+With `dry_adjacency="edge"` or `"vertex"`, dry components may use additional edge/vertex contacts. Stored `dry_edges`, and therefore `face_depth` propagation, contain only non-permeable shared-face contacts. A tetrahedron connected only by edge/vertex contacts can honestly retain `face_depth=None`: it is in the dry component, but not face-reachable from the dry interface.
 
-**Required correction**
+**Closure evidence**
 
-Store the actual adjacency edges used to build each component, including their kind. Depth must use that same adjacency or be explicitly named as a separate face-depth metric.
+Raw records and public dry components expose `face_depth_*` fields, dry motifs use `face_depth`, and the raw schema was bumped to `dfnd.raw.nm.v2`.
 
 ---
 
@@ -981,17 +958,31 @@ future stricter rejection.
 ### QUAL-001: Runtime dependencies are absent from Python packaging metadata
 
 **Evidence:** Confirmed by inspection
-**Tracking:** Open
-**Location:** `pyproject.toml`
+**Tracking:** Verified
+**Resolution:** `pyproject.toml` now declares the audited core runtime
+dependencies and optional extras. `_depdigest.py` now tracks feature-level
+optional dependencies only, and lazy optional entry points are guarded with
+`depdigest`. The dependency contract is covered by focused tests.
+**Publication note:** Because MolSysSuite packages remain in active joint
+development, final release floors for `pyunitwizard` and `depdigest` are
+publication metadata, not blockers for closing this work package. Before a
+public TopoMT release, the conda recipe/environment layer should mirror this
+contract and floors should be set to releases containing
+`pyunitwizard.conversion_factor` and array-safe `depdigest` conditional
+checks.
+**Location:** `pyproject.toml`, `topomt/_depdigest.py`
 
-`project.dependencies` is empty despite required runtime imports. Additional
-undeclared or untracked dependencies include `networkx`, `scikit-learn`, and
-`scikit-image`.
+`project.dependencies` now reflects imports required by the public load path.
+`networkx`, `scikit-image`, `scikit-learn`, `mdtraj`, and `biotite` are
+classified as extras because they are lazy, gated, or backend-specific.
+`nglview` and `py3Dmol` are removed from the dependency inventory because no
+active imports require them.
 
-**Required correction**
+**Release follow-up**
 
-Classify dependencies as core runtime, optional capability extras, or test/dev
-dependencies. Add an isolated wheel-install smoke test.
+Keep conda packaging aligned with this contract. Before publishing TopoMT, set
+the final release floors for PyUnitWizard and DepDigest to versions that
+contain `pyunitwizard.conversion_factor` and array-safe `when={...}` checks.
 
 ### QUAL-002: Ruff is declared but not enforced and reports real errors
 
@@ -1231,12 +1222,12 @@ system.to_pdb(path)
 - Enforce correctness-focused Ruff rules.
 - Add isolated installation and fresh-process import tests.
 
-### Phase 5: Centerline scientific hardening
+### Phase 5: Channel skeleton scientific hardening
 
-- Decide whether the centerline is a visualization skeleton or a quantitative
-  probe-center path.
-- Implement gate-aware path capacity and validated crossings.
-- Validate channel profiles against analytical synthetic systems.
+- The current channel result is a visualization skeleton, not a quantitative
+  validated probe-center path.
+- Future work: implement `widest_gate_path`, validated crossings, and channel
+  profile validation against analytical synthetic systems.
 
 ---
 
@@ -1272,7 +1263,7 @@ listed invariant regresses on the synthetic suite.
 | WP-00 Documentation alignment | Documentation | QUAL-007 | Architecture decisions | authoritative contracts agree; retired vocabulary check |
 | WP-01 Canonical DFND traversability **(Verified)** | Contract violation | DFND-001 | None | threshold equality and graph/face invariant tests |
 | WP-02 DFND query validation and provenance **(Verified)** | Bug / contract | DFND-002, DFND-003, DFND-006, DFND-007, DFND-012 | None | typed mesh/query contract, complete reprobe preservation, reporting-independent identity, selector capability tests |
-| WP-03 DFND membership and dry depth | Design decision / bug | DFND-013, DFND-014 | Membership decision | connector ownership, coast attribution, depth reachability |
+| WP-03 DFND membership and face depth **(Verified)** | Design decision / bug | DFND-013, DFND-014 | Membership decision | connector disjointness, blocked dry mask, face-depth schema v2 tests |
 | WP-04 Atomic feature registry **(Verified)** | Data integrity | CORE-001 to CORE-005, API-002 | Identity decision | duplicate, failed-add, rename, relation, and copy tests |
 | WP-05 Atomic component registry **(Verified)** | Data integrity | CORE-006 | WP-04, identity decision | duplicate, replace, relation, and index-integrity tests |
 | WP-06 Viewer atom-index mapping **(Verified)** | Bug | VIEW-001, VIEW-002 | Index-space contract | partial-selection and excluded-hydrogen tests |
@@ -1281,8 +1272,8 @@ listed invariant regresses on the synthetic suite.
 | WP-09 Standalone and addon actions **(Verified)** | Bug / debt | VIEW-005, VIEW-009, VIEW-010 | WP-07, WP-08 | real emitted operations and action-state tests |
 | WP-10 Synthetic API stabilization **(Verified)** | API contract | SYN-001, SYN-002 | None | `SyntheticSystem` contract tests and no caller-dependent wrapping |
 | WP-11 Public tools hardening **(Verified)** | Bug / reliability | TOOLS-001 to TOOLS-005 | None | fresh-process imports, translation-aware profiles, validation errors, and signed mesh-volume tests |
-| WP-12 Packaging, quality, and CI | Quality | QUAL-001 to QUAL-006 | Stable dependency decision | clean wheel, docs workflow, Ruff gate, focused type checks |
-| WP-13 Centerline contract | Design decision / science | DFND-004, DFND-005 | Traversability and centerline decision | gate-aware capacity and collision-validation tests |
+| WP-12 Packaging, quality, and CI **(Verified)** | Quality | QUAL-001 to QUAL-006 | Stable dependency decision | dependency contract tests, optional dependency guards, and packaging/devguide alignment |
+| WP-13 Channel skeleton contract **(Verified)** | Design decision / science | DFND-004, DFND-005 | Traversability and skeleton decision | `channel_skeleton`, shortest-path gate metrics, virtual mouth endpoints, viewer caller tests |
 | WP-14 Public feature metrics and units **(Verified)** | Contract / decision | DFND-015, API-006 | Unit and promotion decisions | raw-unit metadata, label conversion, public input warning, CASTp promotion tests, and DFND Mouth provenance/gate-metric tests |
 | WP-15 DFND orchestration decomposition | Technical debt | QUAL-008 | WP-01, WP-02, WP-03 | phase-level invariant and regression tests |
 | WP-16 Test invocation and devtools imports **(Verified)** | Test infrastructure | QUAL-009 | None | direct pytest collection of CASTP devtools tests and CI-compatible `pytest.ini` import path |
@@ -1298,7 +1289,7 @@ before implementation:
 - ~~the distinction among query-local index, display rank, public ID, and
   trajectory lineage identity~~ — decided in
   [`DFND/component_identity_contract.md`](DFND/component_identity_contract.md);
-- whether a centerline is a visual graph skeleton or a validated probe-center
+- whether a channel skeleton should later grow into a validated probe-center
   path;
 - ~~whether visual filtering operates on queries, render groups, or copied
   topographies~~ — decided in

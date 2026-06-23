@@ -153,9 +153,9 @@ class DryComponent(Component):
         super().__init__(family=fam.DRY_BANK, **kwargs)
         self.interface_ids: list[int] = []
         self.neighbor_component_ids: list[str] = []
-        self.dry_depth_min = None
-        self.dry_depth_max = None
-        self.dry_depth_mean = None
+        self.face_depth_min = None
+        self.face_depth_max = None
+        self.face_depth_mean = None
         self.motif_ids: list[int] = []
         self.motif_keys: list[str] = []
         # wet/dry adjacency (layer 2): the wet components this bank lines, keyed by
@@ -540,9 +540,9 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
         component.interface_ids = record.get('dry_interface_ids', [])
         component.motif_ids = record.get('dry_motif_ids', [])
         component.motif_keys = record.get('motif_keys', [])
-        component.dry_depth_min = record.get('dry_depth_min')
-        component.dry_depth_max = record.get('dry_depth_max')
-        component.dry_depth_mean = record.get('dry_depth_mean')
+        component.face_depth_min = record.get('face_depth_min')
+        component.face_depth_max = record.get('face_depth_max')
+        component.face_depth_mean = record.get('face_depth_mean')
         component.raw_record = record
         components.add(component)
 

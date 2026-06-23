@@ -62,7 +62,7 @@ DFND uses two complementary graph views over the same Delaunay mesh:
 
 The wet side supports concavity components such as voids, pockets, and
 multi-opening components. The dry side supports raw dry components, dry interfaces,
-dry depth, and future candidate motifs such as walls, rims, ridges, protrusions,
+face depth, and future candidate motifs such as walls, rims, ridges, protrusions,
 separators, and dry cores.
 
 The dry side is not claimed as a validated public feature system yet. It is a

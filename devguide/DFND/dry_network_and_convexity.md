@@ -78,7 +78,7 @@ They provide the substrate for dry motifs and dry-interface analysis.
 Many molecular systems may contain one dominant dry component associated with
 the probe-excluded body of the molecule. This is not a failure of the
 definition. The useful information is expected to come from dry interfaces,
-dry depth, exposure, and motif analysis rather than from component counts alone.
+face depth, exposure, and motif analysis rather than from component counts alone.
 
 **`dry_adjacency` (what counts as "connected").** `get_topography` takes a
 `dry_adjacency` parameter that chooses the connectivity relation used to group
@@ -149,7 +149,7 @@ The interface is expected to be important for:
 - rim candidates around exterior openings;
 - future pharmacophore descriptors.
 
-## 6. Dry Depth
+## 6. Face Depth
 
 Dry depth is the graph distance from the dry interface into each
 `dry_component`.
@@ -164,20 +164,20 @@ dry_boundary_node(v) =
     context through a finite or hull face
 ```
 
-The first dry-depth definition is unweighted graph distance inside the dry
+The first face-depth definition is unweighted graph distance inside the dry
 graph:
 
 ```text
-dry_depth(v) = shortest number of dry_edges from v
+face_depth(v) = shortest number of dry_edges from v
                to any dry_boundary_node in the same dry_component
 ```
 
 This creates intuitive dry layers:
 
 ```text
-dry_depth = 0  -> first dry shoreline
-dry_depth = 1  -> second dry shoreline
-dry_depth >= 2 -> deeper dry interior
+face_depth = 0  -> first dry shoreline
+face_depth = 1  -> second dry shoreline
+face_depth >= 2 -> deeper dry interior
 ```
 
 Dry depth is a topographic descriptor. It should not be conflated with
@@ -194,7 +194,7 @@ touched_external_link_ids
 touches_ocean
 touches_hull
 exposure_to_ocean
-min/mean/max dry_depth
+min/mean/max face_depth
 local dry class composition
 ```
 
@@ -216,7 +216,7 @@ touches OCEAN strongly
 touches an ExternalLink boundary
     -> rim_candidate
 
-has high dry_depth and weak OCEAN exposure
+has high face_depth and weak OCEAN exposure
     -> dry_core_candidate
 ```
 
@@ -263,14 +263,14 @@ Recommended first descriptors:
 - adjacent external link ids;
 - `touches_ocean`;
 - `exposure_to_ocean`;
-- minimum, mean, and maximum `dry_depth`;
+- minimum, mean, and maximum `face_depth`;
 - local class composition: `dry_open`, `dry_coast`, `dry_sealed`;
 - compactness, elongation, or anisotropy when geometry is available;
 - graph centrality or cut/corridor descriptors when graph analysis is enabled.
 
 Possible dry-lumping signals:
 
-- dry-depth layers;
+- face-depth layers;
 - interface signature;
 - OCEAN exposure;
 - adjacency to one or more concavity components;
@@ -312,7 +312,7 @@ than becoming public features.
 Dry topology may provide a useful bridge to structural mechanics and dynamics.
 Potential future descriptors include correlations between:
 
-- `dry_depth`;
+- `face_depth`;
 - dry-component centrality;
 - dry-core membership;
 - B-factors;
@@ -372,7 +372,7 @@ Canonical now:
 - `dry_edge` through non-permeable faces;
 - `dry_component`;
 - `dry_interface` records;
-- `dry_depth` as unweighted dry-graph distance from dry boundary nodes;
+- `face_depth` as unweighted dry face-graph distance from dry boundary nodes;
 - dry interface signatures as raw descriptors.
 
 Candidate or experimental:

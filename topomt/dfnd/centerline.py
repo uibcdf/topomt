@@ -1,15 +1,13 @@
-"""Derive a channel centerline (ordered stations + free radii) from DFND records.
+"""Derive a channel skeleton from DFND records.
 
-Pure geometry on the raw topography: no viewer dependency, unit-testable. Used by
-the ``molsysviewer_topomt`` ``pipe`` representation (``add_channel_tube``) to draw
-a channel as a variable-radius tube along its through-path, and equally usable as
-a HOLE-style channel *profile* for analysis. See
-``devguide/DFND/component_visualization_implementation.md`` (Phase 2).
+A channel skeleton is a graph-derived geometric summary of a DFND channel. It is
+used by ``molsysviewer_topomt`` to draw channel tubes and rings, but it is not a
+collision-validated probe trajectory.
 
-The through-path is the shortest route (weighted by inter-center distance) in the
-component's *permeable* resident graph between resident tetrahedra of its two
-widest mouths. Returns ``None`` for anything that is not a genuine through-channel
-(fewer than two resident mouths, or no connecting path).
+The current skeleton path is the shortest route by center-to-center distance in
+the component's permeable resident graph between resident tetrahedra of its two
+widest mouths. Gate metrics are therefore conditional to this shortest-distance
+path; they are not the maximum capacity of the channel.
 """
 
 from __future__ import annotations
@@ -17,12 +15,11 @@ from __future__ import annotations
 from typing import Any
 
 import numpy as np
+from depdigest import dep_digest
 
 
 def _permeable_resident_graph(raw, resident_ids, tetra_by_id):
-    """``networkx.Graph`` over ``resident_ids`` with one edge per shared *permeable*
-    face, weighted by the distance between residence centers (so the path is the
-    geometrically shortest route a probe can take, not the fewest hops)."""
+    """Build a resident graph with distance weights and gate metadata."""
     import networkx as nx
 
     graph = nx.Graph()
@@ -35,51 +32,42 @@ def _permeable_resident_graph(raw, resident_ids, tetra_by_id):
         if owner in resident_ids and neighbor in resident_ids:
             ca = np.asarray(tetra_by_id[owner]['center'], dtype=float)
             cb = np.asarray(tetra_by_id[neighbor]['center'], dtype=float)
-            graph.add_edge(owner, neighbor, weight=float(np.linalg.norm(ca - cb)))
+            graph.add_edge(
+                owner,
+                neighbor,
+                weight=float(np.linalg.norm(ca - cb)),
+                face_id=int(face['face_id']),
+                gate_radius=float(face['R_gate']),
+                gate_margin=float(face.get('gate_margin', face['R_gate'])),
+            )
     return graph
 
 
-def _mouth_endpoints(component, external_links_by_id, resident_ids):
-    """One resident endpoint tetra per mouth, mouths ordered widest-first.
-
-    Returns ``[(external_link_id, endpoint_tetra_id), ...]``; mouths with no
-    resident tetra are skipped.
-    """
+def _mouth_resident_sets(component, external_links_by_id, resident_ids):
+    """Resident tetrahedra per mouth, mouths ordered widest-first."""
     ranked = []
     for link_id in component.get('external_link_ids', []):
         link = external_links_by_id.get(link_id)
         if link is None:
             continue
-        resident_overlap = [t for t in link['tetrahedron_ids'] if t in resident_ids]
+        resident_overlap = sorted(t for t in link['tetrahedron_ids'] if t in resident_ids)
         if not resident_overlap:
             continue
-        ranked.append((link.get('area_geometric', 0.0), link_id, resident_overlap[0]))
+        ranked.append((link.get('area_geometric', 0.0), link_id, resident_overlap))
     ranked.sort(reverse=True)  # widest mouth first
-    return [(link_id, tetra_id) for _area, link_id, tetra_id in ranked]
+    return [(link_id, tetra_ids) for _area, link_id, tetra_ids in ranked]
 
 
-def channel_centerline(raw, component) -> dict[str, Any] | None:
-    """Ordered centerline stations + free radii for a channel ``component``.
+@dep_digest('networkx')
+def channel_skeleton(raw, component) -> dict[str, Any] | None:
+    """Return the shortest-distance channel skeleton for a channel component.
 
-    Parameters
-    ----------
-    raw : dict
-        A DFND ``raw`` topography (``get_topography(...)['raw']``) with
-        ``faces``, ``tetrahedra`` and ``external_links``.
-    component : dict
-        One ``raw['wet_components']`` record (its ``resident_tetrahedron_ids``
-        and ``external_link_ids`` are used).
-
-    Returns
-    -------
-    dict or None
-        ``None`` when there is no through-path. Otherwise:
-
-        - ``tetra_path``: tetrahedron ids from one mouth to the other;
-        - ``centers``: ``(N, 3)`` residence centers along the path;
-        - ``radii``: ``(N,)`` ``R_residence`` per station (the free radius);
-        - ``bottleneck_index``: index of the narrowest station;
-        - ``mouth_endpoints``: the two ``(link_id, tetra_id)`` mouths used.
+    The two widest mouths are represented as virtual nodes connected to every
+    incident resident tetrahedron, avoiding order-dependent endpoint selection.
+    For a path with ``N`` tetrahedra, ``centers`` and ``station_radii`` have
+    length ``N``. ``edge_gate_radii`` and ``edge_gate_margins`` have length
+    ``N - 1`` and element ``i`` describes the transition
+    ``tetra_path[i] -> tetra_path[i + 1]``.
     """
     import networkx as nx
 
@@ -88,27 +76,58 @@ def channel_centerline(raw, component) -> dict[str, Any] | None:
         return None
 
     external_links_by_id = {e['external_link_id']: e for e in raw['external_links']}
-    endpoints = _mouth_endpoints(component, external_links_by_id, resident_ids)
-    if len(endpoints) < 2:
-        return None  # not a through-channel: needs two resident mouths
+    mouth_sets = _mouth_resident_sets(component, external_links_by_id, resident_ids)
+    if len(mouth_sets) < 2:
+        return None
 
     tetra_by_id = {t['tetrahedron_id']: t for t in raw['tetrahedra']}
     graph = _permeable_resident_graph(raw, resident_ids, tetra_by_id)
 
-    (link_a, node_a), (link_b, node_b) = endpoints[0], endpoints[1]
+    (link_a, mouth_a_nodes), (link_b, mouth_b_nodes) = mouth_sets[0], mouth_sets[1]
+    mouth_a = ('mouth', link_a)
+    mouth_b = ('mouth', link_b)
+    graph.add_node(mouth_a)
+    graph.add_node(mouth_b)
+    for node in mouth_a_nodes:
+        graph.add_edge(mouth_a, node, weight=0.0)
+    for node in mouth_b_nodes:
+        graph.add_edge(mouth_b, node, weight=0.0)
     try:
-        path = nx.shortest_path(graph, node_a, node_b, weight='weight')
+        path_with_mouths = nx.shortest_path(graph, mouth_a, mouth_b, weight='weight')
     except (nx.NetworkXNoPath, nx.NodeNotFound):
         return None
+    path = [node for node in path_with_mouths if not isinstance(node, tuple)]
     if len(path) < 2:
         return None
 
     centers = np.array([tetra_by_id[t]['center'] for t in path], dtype=float)
-    radii = np.array([tetra_by_id[t]['R_residence'] for t in path], dtype=float)
+    station_radii = np.array(
+        [tetra_by_id[t]['R_residence'] for t in path],
+        dtype=float,
+    )
+    edge_records = [graph[path[index]][path[index + 1]] for index in range(len(path) - 1)]
+    edge_gate_radii = np.array(
+        [edge['gate_radius'] for edge in edge_records],
+        dtype=float,
+    )
+    edge_gate_margins = np.array(
+        [edge['gate_margin'] for edge in edge_records],
+        dtype=float,
+    )
+    gate_bottleneck_edge_index = int(np.argmin(edge_gate_radii))
+
     return {
+        'path_kind': 'shortest_distance',
         'tetra_path': list(path),
         'centers': centers,
-        'radii': radii,
-        'bottleneck_index': int(np.argmin(radii)),
-        'mouth_endpoints': [(link_a, node_a), (link_b, node_b)],
+        'station_radii': station_radii,
+        'edge_gate_radii': edge_gate_radii,
+        'edge_gate_margins': edge_gate_margins,
+        'station_bottleneck_index': int(np.argmin(station_radii)),
+        'gate_bottleneck_edge_index': gate_bottleneck_edge_index,
+        'shortest_path_gate_radius_min': float(edge_gate_radii[gate_bottleneck_edge_index]),
+        'shortest_path_gate_margin_min': float(edge_gate_margins[gate_bottleneck_edge_index]),
+        'mouth_endpoints': [(link_a, path[0]), (link_b, path[-1])],
+        'mouth_endpoint_policy': 'virtual_mouth_shortest_distance',
+        'is_collision_validated': False,
     }

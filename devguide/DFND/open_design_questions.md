@@ -362,7 +362,7 @@ family
 external_link_id
 dry_component_id
 dry_interface_id
-dry_depth
+face_depth
 dry_interface_signature
 flags
 ```

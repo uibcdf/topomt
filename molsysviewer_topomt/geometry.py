@@ -5,7 +5,7 @@ from typing import Any
 
 import numpy as np
 
-from topomt.dfnd.centerline import channel_centerline
+from topomt.dfnd.centerline import channel_skeleton
 from topomt.dfnd.selectors import select_edges, select_faces, select_tetrahedra
 
 from .index_spaces import MESH_LOCAL, MOLECULAR_SYSTEM, atom_indices
@@ -401,16 +401,16 @@ def _centerline_normals(centers) -> tuple[tuple[float, float, float], ...]:
 
 
 def component_centerline_geometry(source, component) -> tuple[SphereGeometry, int]:
-    """Return an ordered channel path whose stations reference tetrahedra."""
+    """Return an ordered channel skeleton whose stations reference tetrahedra."""
     data = getattr(source, 'dfnd', source)
-    centerline = channel_centerline(data.raw, component.raw_record)
-    if centerline is None:
+    skeleton = channel_skeleton(data.raw, component.raw_record)
+    if skeleton is None:
         return SphereGeometry((), (), 'nm', ()), -1
-    records = select_tetrahedra(source, tetrahedron_ids=centerline['tetra_path'])
+    records = select_tetrahedra(source, tetrahedron_ids=skeleton['tetra_path'])
     by_id = {int(record['tetrahedron_id']): record for record in records}
     refs = tuple(
         _component_tetrahedron_ref(by_id[int(tetrahedron_id)], component)
-        for tetrahedron_id in centerline['tetra_path']
+        for tetrahedron_id in skeleton['tetra_path']
     )
     refs = tuple(
         EntityRef(
@@ -425,9 +425,9 @@ def component_centerline_geometry(source, component) -> tuple[SphereGeometry, in
         for ref in refs
     )
     geometry = SphereGeometry(
-        tuple(centerline['centers']), tuple(centerline['radii']), 'nm', refs
+        tuple(skeleton['centers']), tuple(skeleton['station_radii']), 'nm', refs
     )
-    return geometry, int(centerline['bottleneck_index'])
+    return geometry, int(skeleton['station_bottleneck_index'])
 
 
 def centerline_ring_geometry(source, component) -> RingGeometry:
