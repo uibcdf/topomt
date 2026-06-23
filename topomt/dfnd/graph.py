@@ -1,4 +1,5 @@
 import warnings
+from dataclasses import dataclass
 from typing import Any
 
 import molsysmt as msm
@@ -67,6 +68,32 @@ def _component_center(
     if total > 0.0:
         return np.average(barycenters, axis=0, weights=volumes)
     return barycenters.mean(axis=0)
+
+
+@dataclass(frozen=True)
+class _QueryStates:
+    residence_slack: float
+    permeability_slack: float
+    residence_delta: np.ndarray
+    resident: np.ndarray
+    marginal_residence: np.ndarray
+    face_delta: np.ndarray
+    face_permeable: np.ndarray
+    face_marginal: np.ndarray
+    intrusion_suspect: np.ndarray
+    n_permeable_contacts: np.ndarray
+    connector_candidate: np.ndarray
+    transit_connector: np.ndarray
+    terminal_contact: np.ndarray
+    finite_transit: np.ndarray
+
+
+@dataclass(frozen=True)
+class _TransitEdges:
+    valid_edge_mask: np.ndarray
+    valid_sources: np.ndarray
+    valid_targets: np.ndarray
+    transit_edge_per_tet_face: np.ndarray
 
 
 class DelaunayFlowNetwork:
@@ -383,6 +410,224 @@ class DelaunayFlowNetwork:
             return fam.POCKET if has_residence else fam.SURFACE_CONCAVITY
         return fam.CHANNEL if has_residence else fam.NONRESIDENT_PASSAGE
 
+
+    def _compute_query_states(
+        self,
+        probe_radius: float,
+        residence_tolerance: float,
+        permeability_tolerance: float,
+        transit_policy: str,
+        gate_intrusion_policy: str,
+    ) -> _QueryStates:
+        residence_slack = self.epsilon + residence_tolerance
+        permeability_slack = self.epsilon + permeability_tolerance
+
+        residence_delta = self.tetra_residence - probe_radius
+        resident = residence_delta >= -residence_slack
+        marginal_residence = np.abs(residence_delta) <= residence_slack
+
+        face_delta = self.face_r_gates_per_tet_face - probe_radius
+        face_permeable = face_delta >= -permeability_slack
+        face_marginal = np.abs(face_delta) <= permeability_slack
+        intrusion_suspect = self.face_intrusion_suspect_per_tet_face
+        if gate_intrusion_policy == 'block_suspect':
+            face_permeable = face_permeable & ~intrusion_suspect
+
+        n_permeable_contacts = np.count_nonzero(face_permeable, axis=1).astype(int)
+        connector_candidate = (~resident) & (n_permeable_contacts >= 2)
+        if transit_policy == 'with_connectors':
+            transit_connector = connector_candidate
+        else:
+            transit_connector = np.zeros(self.n_tetrahedra, dtype=bool)
+        terminal_contact = (~resident) & (n_permeable_contacts == 1)
+        if transit_policy == 'resident_only':
+            terminal_contact = terminal_contact | connector_candidate
+        finite_transit = resident | transit_connector
+
+        return _QueryStates(
+            residence_slack=float(residence_slack),
+            permeability_slack=float(permeability_slack),
+            residence_delta=residence_delta,
+            resident=resident,
+            marginal_residence=marginal_residence,
+            face_delta=face_delta,
+            face_permeable=face_permeable,
+            face_marginal=face_marginal,
+            intrusion_suspect=intrusion_suspect,
+            n_permeable_contacts=n_permeable_contacts,
+            connector_candidate=connector_candidate,
+            transit_connector=transit_connector,
+            terminal_contact=terminal_contact,
+            finite_transit=finite_transit,
+        )
+
+    def _build_transit_edges(self, states: _QueryStates) -> _TransitEdges:
+        # Canonical transit-edge decision: two transit nodes connected through one
+        # shared face whose single permeability decision is open. Marginality is
+        # diagnostic and must not trigger a second, stricter R_gate threshold.
+        valid_edge_mask = (
+            states.finite_transit[self.sources]
+            & states.finite_transit[self.targets]
+            & states.face_permeable[self.sources, self.edge_source_faces]
+            & states.face_permeable[self.targets, self.edge_target_faces]
+        )
+        valid_sources = self.sources[valid_edge_mask]
+        valid_targets = self.targets[valid_edge_mask]
+        transit_edge_per_tet_face = np.zeros_like(
+            states.face_permeable,
+            dtype=bool,
+        )
+        transit_edge_per_tet_face[
+            valid_sources, self.edge_source_faces[valid_edge_mask]
+        ] = True
+        transit_edge_per_tet_face[
+            valid_targets, self.edge_target_faces[valid_edge_mask]
+        ] = True
+
+        return _TransitEdges(
+            valid_edge_mask=valid_edge_mask,
+            valid_sources=valid_sources,
+            valid_targets=valid_targets,
+            transit_edge_per_tet_face=transit_edge_per_tet_face,
+        )
+
+
+    def _build_tetrahedron_and_face_records(
+        self,
+        states: _QueryStates,
+        transit_edges: _TransitEdges,
+        probe_radius: float,
+        gate_intrusion_policy: str,
+    ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+        face_records = []
+        tetrahedron_records = []
+        for tetrahedron_index in range(self.n_tetrahedra):
+            permeable_count = int(states.n_permeable_contacts[tetrahedron_index])
+            if permeable_count == 4:
+                local_class = 'open'
+            elif permeable_count == 0:
+                local_class = 'sealed'
+            else:
+                local_class = 'coast'
+
+            if states.resident[tetrahedron_index]:
+                residence_state = 'resident'
+                transit_role = 'resident_transit'
+            elif states.transit_connector[tetrahedron_index]:
+                residence_state = 'non_resident'
+                transit_role = 'transit_connector'
+            elif states.terminal_contact[tetrahedron_index]:
+                residence_state = 'non_resident'
+                transit_role = 'terminal_contact'
+            else:
+                residence_state = 'non_resident'
+                transit_role = 'non_transit'
+
+            flags = []
+            if states.marginal_residence[tetrahedron_index] or np.any(
+                states.face_marginal[tetrahedron_index]
+            ):
+                flags.append('marginal')
+
+            tetrahedron_records.append(
+                {
+                    'tetrahedron_id': int(tetrahedron_index),
+                    'atom_indices': [
+                        int(self.atom_indices_map[index])
+                        for index in self.tetra_atoms[tetrahedron_index]
+                    ],
+                    'local_atom_indices': [
+                        int(index) for index in self.tetra_atoms[tetrahedron_index]
+                    ],
+                    'R_residence': float(self.tetra_residence[tetrahedron_index]),
+                    'residence_candidate_kind': self.tetra_residence_kind[
+                        tetrahedron_index
+                    ],
+                    'R_apollonius4': float(self.tetra_r_apollonius4[tetrahedron_index]),
+                    'apollonius4_valid': bool(
+                        self.tetra_apollonius4_valid[tetrahedron_index]
+                    ),
+                    'residence_margin': float(
+                        self.tetra_residence[tetrahedron_index] - probe_radius
+                    ),
+                    'center': self.tetra_residence_centers[tetrahedron_index].tolist(),
+                    'volume_topological': float(
+                        self.mesh.simplex_volumes[tetrahedron_index]
+                    ),
+                    'volume_solvent_estimate': float(
+                        self.tetra_volume_solvent_estimate[tetrahedron_index]
+                    ),
+                    'solvent_empty_fraction_estimate': float(
+                        self.tetra_solvent_empty_fraction[tetrahedron_index]
+                    ),
+                    'solvent_occupied_fraction_estimate': float(
+                        self.tetra_solvent_occupied_fraction[tetrahedron_index]
+                    ),
+                    'solvent_volume_n_samples': int(
+                        self.tetra_solvent_n_samples[tetrahedron_index]
+                    ),
+                    'residence_state': residence_state,
+                    'transit_role': transit_role,
+                    'n_permeable_contacts': permeable_count,
+                    'local_class': local_class,
+                    'combined_class': (
+                        f'{"wet" if states.resident[tetrahedron_index] else "dry"}'
+                        f'_{local_class}'
+                    ),
+                    'flags': flags,
+                }
+            )
+
+            for face_index in range(4):
+                face_atoms_local = self.face_atom_keys_per_tet_face[tetrahedron_index][
+                    face_index
+                ]
+                face_records.append(
+                    {
+                        'face_id': int(
+                            self.face_ids_per_tet_face[tetrahedron_index, face_index]
+                        ),
+                        'owner_tetrahedron_id': int(tetrahedron_index),
+                        'neighbor_tetrahedron_id': int(
+                            self.simplex_neighbors[tetrahedron_index, face_index]
+                        ),
+                        'face_index': int(face_index),
+                        'face_atoms_local': [int(index) for index in face_atoms_local],
+                        'atom_indices': [
+                            int(self.atom_indices_map[index])
+                            for index in face_atoms_local
+                        ],
+                        'R_gate': float(
+                            self.face_r_gates_per_tet_face[
+                                tetrahedron_index, face_index
+                            ]
+                        ),
+                        'gate_margin': float(
+                            states.face_delta[tetrahedron_index, face_index]
+                        ),
+                        'effective_gate_margin': float(
+                            states.face_delta[tetrahedron_index, face_index]
+                            + states.permeability_slack
+                        ),
+                        'transit_edge': bool(
+                            transit_edges.transit_edge_per_tet_face[
+                                tetrahedron_index, face_index
+                            ]
+                        ),
+                        'permeability_state': 'permeable'
+                        if states.face_permeable[tetrahedron_index, face_index]
+                        else 'non_permeable',
+                        'flags': self._face_flags(
+                            tetrahedron_index,
+                            face_index,
+                            states.face_marginal,
+                            states.intrusion_suspect,
+                            gate_intrusion_policy,
+                        ),
+                    }
+                )
+        return tetrahedron_records, face_records
+
     def _state_from_delta(self, value, threshold):
         delta = float(value) - float(threshold)
         if delta > self.epsilon:
@@ -527,49 +772,24 @@ class DelaunayFlowNetwork:
             query_parameters,
         )
 
-        residence_slack = self.epsilon + residence_tolerance
-        permeability_slack = self.epsilon + permeability_tolerance
-
-        residence_delta = self.tetra_residence - probe_radius
-        resident = residence_delta >= -residence_slack
-        marginal_residence = np.abs(residence_delta) <= residence_slack
-
-        face_delta = self.face_r_gates_per_tet_face - probe_radius
-        face_permeable = face_delta >= -permeability_slack
-        face_marginal = np.abs(face_delta) <= permeability_slack
-        intrusion_suspect = self.face_intrusion_suspect_per_tet_face
-        if gate_intrusion_policy == 'block_suspect':
-            face_permeable = face_permeable & ~intrusion_suspect
-
-        n_permeable_contacts = np.count_nonzero(face_permeable, axis=1).astype(int)
-        connector_candidate = (~resident) & (n_permeable_contacts >= 2)
-        if transit_policy == 'with_connectors':
-            transit_connector = connector_candidate
-        else:
-            transit_connector = np.zeros(self.n_tetrahedra, dtype=bool)
-        terminal_contact = (~resident) & (n_permeable_contacts == 1)
-        if transit_policy == 'resident_only':
-            terminal_contact = terminal_contact | connector_candidate
-        finite_transit = resident | transit_connector
-
-        # Canonical transit-edge decision: two transit nodes connected through one
-        # shared face whose single permeability decision is open. Marginality is
-        # diagnostic and must not trigger a second, stricter R_gate threshold.
-        valid_edge_mask = (
-            finite_transit[self.sources]
-            & finite_transit[self.targets]
-            & face_permeable[self.sources, self.edge_source_faces]
-            & face_permeable[self.targets, self.edge_target_faces]
+        states = self._compute_query_states(
+            probe_radius,
+            residence_tolerance,
+            permeability_tolerance,
+            transit_policy,
+            gate_intrusion_policy,
         )
-        valid_sources = self.sources[valid_edge_mask]
-        valid_targets = self.targets[valid_edge_mask]
-        transit_edge_per_tet_face = np.zeros_like(face_permeable, dtype=bool)
-        transit_edge_per_tet_face[
-            valid_sources, self.edge_source_faces[valid_edge_mask]
-        ] = True
-        transit_edge_per_tet_face[
-            valid_targets, self.edge_target_faces[valid_edge_mask]
-        ] = True
+        transit_edges = self._build_transit_edges(states)
+
+        permeability_slack = states.permeability_slack
+        resident = states.resident
+        face_permeable = states.face_permeable
+        n_permeable_contacts = states.n_permeable_contacts
+        transit_connector = states.transit_connector
+        finite_transit = states.finite_transit
+        valid_edge_mask = transit_edges.valid_edge_mask
+        valid_sources = transit_edges.valid_sources
+        valid_targets = transit_edges.valid_targets
 
         adjacency = coo_matrix(
             (
@@ -585,126 +805,12 @@ class DelaunayFlowNetwork:
         for node in transit_nodes:
             nodes_by_label.setdefault(int(labels[node]), []).append(int(node))
 
-        face_records = []
-        tetrahedron_records = []
-        for tetrahedron_index in range(self.n_tetrahedra):
-            permeable_count = int(n_permeable_contacts[tetrahedron_index])
-            if permeable_count == 4:
-                local_class = 'open'
-            elif permeable_count == 0:
-                local_class = 'sealed'
-            else:
-                local_class = 'coast'
-
-            if resident[tetrahedron_index]:
-                residence_state = 'resident'
-                transit_role = 'resident_transit'
-            elif transit_connector[tetrahedron_index]:
-                residence_state = 'non_resident'
-                transit_role = 'transit_connector'
-            elif terminal_contact[tetrahedron_index]:
-                residence_state = 'non_resident'
-                transit_role = 'terminal_contact'
-            else:
-                residence_state = 'non_resident'
-                transit_role = 'non_transit'
-
-            flags = []
-            if marginal_residence[tetrahedron_index] or np.any(
-                face_marginal[tetrahedron_index]
-            ):
-                flags.append('marginal')
-
-            tetrahedron_records.append(
-                {
-                    'tetrahedron_id': int(tetrahedron_index),
-                    'atom_indices': [
-                        int(self.atom_indices_map[index])
-                        for index in self.tetra_atoms[tetrahedron_index]
-                    ],
-                    'local_atom_indices': [
-                        int(index) for index in self.tetra_atoms[tetrahedron_index]
-                    ],
-                    'R_residence': float(self.tetra_residence[tetrahedron_index]),
-                    'residence_candidate_kind': self.tetra_residence_kind[
-                        tetrahedron_index
-                    ],
-                    'R_apollonius4': float(self.tetra_r_apollonius4[tetrahedron_index]),
-                    'apollonius4_valid': bool(
-                        self.tetra_apollonius4_valid[tetrahedron_index]
-                    ),
-                    'residence_margin': float(
-                        self.tetra_residence[tetrahedron_index] - probe_radius
-                    ),
-                    'center': self.tetra_residence_centers[tetrahedron_index].tolist(),
-                    'volume_topological': float(
-                        self.mesh.simplex_volumes[tetrahedron_index]
-                    ),
-                    'volume_solvent_estimate': float(
-                        self.tetra_volume_solvent_estimate[tetrahedron_index]
-                    ),
-                    'solvent_empty_fraction_estimate': float(
-                        self.tetra_solvent_empty_fraction[tetrahedron_index]
-                    ),
-                    'solvent_occupied_fraction_estimate': float(
-                        self.tetra_solvent_occupied_fraction[tetrahedron_index]
-                    ),
-                    'solvent_volume_n_samples': int(
-                        self.tetra_solvent_n_samples[tetrahedron_index]
-                    ),
-                    'residence_state': residence_state,
-                    'transit_role': transit_role,
-                    'n_permeable_contacts': permeable_count,
-                    'local_class': local_class,
-                    'combined_class': f'{"wet" if resident[tetrahedron_index] else "dry"}_{local_class}',
-                    'flags': flags,
-                }
-            )
-
-            for face_index in range(4):
-                face_atoms_local = self.face_atom_keys_per_tet_face[tetrahedron_index][
-                    face_index
-                ]
-                face_records.append(
-                    {
-                        'face_id': int(
-                            self.face_ids_per_tet_face[tetrahedron_index, face_index]
-                        ),
-                        'owner_tetrahedron_id': int(tetrahedron_index),
-                        'neighbor_tetrahedron_id': int(
-                            self.simplex_neighbors[tetrahedron_index, face_index]
-                        ),
-                        'face_index': int(face_index),
-                        'face_atoms_local': [int(index) for index in face_atoms_local],
-                        'atom_indices': [
-                            int(self.atom_indices_map[index])
-                            for index in face_atoms_local
-                        ],
-                        'R_gate': float(
-                            self.face_r_gates_per_tet_face[
-                                tetrahedron_index, face_index
-                            ]
-                        ),
-                        'gate_margin': float(face_delta[tetrahedron_index, face_index]),
-                        'effective_gate_margin': float(
-                            face_delta[tetrahedron_index, face_index]
-                            + permeability_slack
-                        ),
-                        'transit_edge': bool(
-                            transit_edge_per_tet_face[tetrahedron_index, face_index]
-                        ),
-                        'permeability_state': 'permeable'
-                        if face_permeable[tetrahedron_index, face_index]
-                        else 'non_permeable',
-                        'flags': self._face_flags(
-                            tetrahedron_index,
-                            face_index,
-                            face_marginal,
-                            intrusion_suspect,
-                            gate_intrusion_policy,
-                        ),
-                    }
-                )
+        tetrahedron_records, face_records = self._build_tetrahedron_and_face_records(
+            states,
+            transit_edges,
+            probe_radius,
+            gate_intrusion_policy,
+        )
 
         wet_components = []
         residence_regions = []

@@ -1043,25 +1043,24 @@ Examples include widespread `from __future__ import annotations` despite the
 repository instruction forbidding it, incomplete public annotations, and mixed
 style conventions.
 
-### QUAL-008: `DelaunayFlowNetwork.get_topography()` mixes too many phases
+### QUAL-008: `DelaunayFlowNetwork.get_topography()` mixed too many phases
 
 **Evidence:** Strong static finding
-**Tracking:** Open
+**Tracking:** Verified
 **Category:** Technical debt with scientific-change risk
-**Location:** `topomt/dfnd/graph.py`
+**Resolution:** Query-local scientific state is now produced by typed immutable
+phase bundles (`_QueryStates`, `_TransitEdges`) rather than a mutable god-context
+or string-keyed dict. Transit-edge construction and tetrahedron/face raw-record
+construction are private phase helpers with narrow signatures. A characterization
+test hashes the complete canonical DFND raw JSON for representative synthetic
+systems and therefore guards ids, ordering, rankings, schema, and values during
+future behavior-preserving refactors.
+**Location:** `topomt/dfnd/graph.py`, `tests/test_dfnd_raw_characterization.py`
 
-The method combines query validation, probe-state classification, graph
-construction, wet and dry decomposition, external-link extraction, compatibility
-views, record construction, and result assembly in one large orchestration path.
-This makes scientific changes difficult to test independently and increases the
-risk of inconsistent predicates across outputs.
-
-**Required correction**
-
-After the relevant contracts are fixed, decompose the workflow by scientific
-phase with typed intermediate results and phase-level invariant tests. Do not use
-an arbitrary line-count target or extract helpers that merely move mutable local
-state without clarifying ownership.
+The method still owns high-level orchestration, but the most predicate-sensitive
+local-state and raw-record phases have explicit typed boundaries. Future
+extractions should follow the same rule: self methods, narrow inputs, immutable
+phase outputs, and raw-characterization hashes unchanged.
 
 ### QUAL-009: Test importability depends on the invocation command
 
@@ -1275,7 +1274,7 @@ listed invariant regresses on the synthetic suite.
 | WP-12 Packaging, quality, and CI **(Verified)** | Quality | QUAL-001 to QUAL-006 | Stable dependency decision | dependency contract tests, optional dependency guards, and packaging/devguide alignment |
 | WP-13 Channel skeleton contract **(Verified)** | Design decision / science | DFND-004, DFND-005 | Traversability and skeleton decision | `channel_skeleton`, shortest-path gate metrics, virtual mouth endpoints, viewer caller tests |
 | WP-14 Public feature metrics and units **(Verified)** | Contract / decision | DFND-015, API-006 | Unit and promotion decisions | raw-unit metadata, label conversion, public input warning, CASTp promotion tests, and DFND Mouth provenance/gate-metric tests |
-| WP-15 DFND orchestration decomposition | Technical debt | QUAL-008 | WP-01, WP-02, WP-03 | phase-level invariant and regression tests |
+| WP-15 DFND orchestration decomposition **(Verified)** | Technical debt | QUAL-008 | WP-01, WP-02, WP-03 | typed phase bundles, raw-characterization hashes, and focused DFND regression tests |
 | WP-16 Test invocation and devtools imports **(Verified)** | Test infrastructure | QUAL-009 | None | direct pytest collection of CASTP devtools tests and CI-compatible `pytest.ini` import path |
 | WP-17 Legacy public API cleanup **(Verified)** | API stability | API-004, API-005 | v0 API policy | `topomt.__all__` contract tests and removal of broken pocket stubs |
 | WP-18 Viewer geometry boundary **(Verified)** | Architecture / reliability | VIEW-012 | Index-space, unit, and viewer-payload decisions | cross-renderer payload equivalence tests |
