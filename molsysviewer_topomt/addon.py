@@ -120,6 +120,15 @@ _addon_instance = None
 _lifecycle_instance = None
 
 
+def _accepts_keyword(callable_obj, keyword: str) -> bool:
+    import inspect
+
+    try:
+        return keyword in inspect.signature(callable_obj).parameters
+    except (TypeError, ValueError):
+        return False
+
+
 def get_lifecycle():
     global _lifecycle_instance
     if _lifecycle_instance is not None:
@@ -127,12 +136,15 @@ def get_lifecycle():
 
     from molsysviewer.addons import AddonLifecycleSpec
 
-    _lifecycle_instance = AddonLifecycleSpec(
-        on_enable=on_enable,
-        on_disable=on_disable,
-        on_context_action=on_context_action,
-        on_active_selection_changed=on_active_selection_changed,
-    )
+    kwargs = {
+        'on_enable': on_enable,
+        'on_disable': on_disable,
+        'on_context_action': on_context_action,
+    }
+    if _accepts_keyword(AddonLifecycleSpec, 'on_active_selection_changed'):
+        kwargs['on_active_selection_changed'] = on_active_selection_changed
+
+    _lifecycle_instance = AddonLifecycleSpec(**kwargs)
     return _lifecycle_instance
 
 
@@ -153,12 +165,17 @@ def get_addon():
 
     from .runtime import create_topomt_state
 
+    addon_kwargs = {
+        'name': 'topomt',
+        'package': 'molsysviewer-topomt',
+        'version': '0.1.0',
+        'description': 'TopoMT workspace for pocket and topography analysis in MolSysViewer.',
+    }
+    if _accepts_keyword(AddonSpec, 'state_factory'):
+        addon_kwargs['state_factory'] = create_topomt_state
+
     _addon_instance = AddonSpec(
-        name='topomt',
-        package='molsysviewer-topomt',
-        version='0.1.0',
-        description='TopoMT workspace for pocket and topography analysis in MolSysViewer.',
-        state_factory=create_topomt_state,
+        **addon_kwargs,
         workspaces=(
             AddonWorkspaceSpec(
                 id='topomt',
