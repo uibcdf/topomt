@@ -539,25 +539,49 @@ def test_surface_dent_one_link_has_no_residence():
 
 @pytest.mark.skip(
     reason='The nonresident_passage family (>=2 external links, no residence) is '
-    'covered directly by the classifier unit test (_classify_component(2, 0)) and the '
-    'non-resident transit-connector machinery is exercised end-to-end by the '
-    'surface_dent and degenerate toys. A stable two-mouth, fully non-resident '
-    'fixture is hard to construct (the two openings tend to merge into one link '
-    'or pick up residence); deferred until a deterministic construction is found.'
+    'covered directly by the classifier unit test (_classify_component(2, 0)). No '
+    'end-to-end fixture is known: an exhaustive sweep of every synthetic generator '
+    'x probe radius produces none, and there is a structural reason -- a region thin '
+    'enough to deny residence everywhere also has thin transit faces (a long, thin '
+    'triangle has its in-circle bounded by its short side), so R_gate tracks '
+    'R_residence and the two mouths fragment into voids the moment residence dies, '
+    'rather than surviving as one connected non-resident passage. Deferred until a '
+    'deliberately pinched 3-D construction is found.'
 )
 def test_nonresident_passage_two_links_has_no_residence():
     raise NotImplementedError
 
 
-@pytest.mark.skip(
-    reason='The degenerate_subprobe family (0 external links, no residence) is '
-    'covered directly by the classifier unit test (_classify_component(0, 0)). A '
-    'stable end-to-end fixture needs a fully buried non-resident transit cluster '
-    '(no permeable hull face), which is hard to construct robustly and is fragile '
-    'to mesh face/neighbor conventions; deferred like nonresident_passage.'
-)
 def test_degenerate_subprobe_domain_has_no_links_and_no_residence():
-    raise NotImplementedError
+    # A sealed donut-shaped cavity probed with a probe larger than the tube's
+    # minor radius: the cavity is too tight to host residence anywhere, yet a
+    # transit connector survives inside it, and it reaches no permeable hull
+    # face. That is exactly degenerate_subprobe (0 external links, no residence,
+    # a buried sub-probe cluster). Deterministic (seed=0); the probe value sits
+    # in a stable window (~3.3-3.8) found by the item-4 exploration.
+    from topomt.dfnd import synthetic
+
+    system = synthetic.toroidal_void()
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        system.coords, system.radii
+    )
+    result = network.get_topography(
+        probe_radius=3.5, min_size=0, transit_policy='with_connectors'
+    )
+
+    degenerates = [
+        domain
+        for domain in result['raw']['wet_components']
+        if domain['family'] == 'degenerate_subprobe'
+    ]
+    assert len(degenerates) == 1
+
+    degenerate = degenerates[0]
+    assert degenerate['n_external_links'] == 0
+    assert degenerate['has_residence'] is False
+    assert degenerate['n_resident_nodes'] == 0
+    assert degenerate['n_transit_connector_nodes'] >= 1
+    assert 'provisional' in degenerate['flags']
 
 
 def test_min_size_filters_compatibility_views_not_raw_domains():

@@ -63,13 +63,20 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
     fam.NONRESIDENT_PASSAGE: OutputStatus(
         'diagnostic',
         'family',
-        'deterministic synthetic fixture + non-ambiguity policy',
+        'a deliberately pinched 3-D construction (no atom arrangement realizes '
+        'it: thin enough to deny residence => thin transit faces, so R_gate '
+        'tracks R_residence and the mouths fragment into voids)',
         'item-4 / L1.1',
     ),
     fam.DEGENERATE_SUBPROBE: OutputStatus(
+        # Fixture gate met (item-4: toroidal_void @ probe 3.5, end-to-end test).
+        # Stays diagnostic for an intrinsic reason: it is a probe-relative
+        # artifact -- a cavity too tight for the chosen probe, which becomes a
+        # void at a smaller probe -- so it is an internal signal ("shrink the
+        # probe"), not a primary reportable feature.
         'diagnostic',
         'family',
-        'deterministic synthetic fixture',
+        'intentionally diagnostic: probe-relative artifact, not a public feature',
         'item-4 / L1.1',
     ),
     # --- dry side ---
