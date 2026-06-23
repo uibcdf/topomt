@@ -233,14 +233,17 @@ Currently only dry graph and dry/wet interface are canonical.
 
 ## 17. Dry/Wet Interface Ownership
 
-Define ownership of atoms/residues for:
-
-```text
-component lining
-external_link lining
-dry wall
-separator
-```
+Status: **decided**. Ownership of atoms/residues across `component lining`,
+`external_link lining`, `dry wall`, and `separator` is **overlapping and
+role-based** — an atom belongs to every component its star (incident tetrahedra)
+touches, so multi-membership (wet-wet, dry-dry, wet-dry) is canonical, not an
+edge case. Presentation is context-aware and honest: hover reports an atom as
+multi-component; a single-component render colours it as that component; a
+two-or-more-component render gives shared atoms a distinct `shared` key; counts
+report exclusive vs shared separately. A forced single-owner is used only when a
+downstream consumer needs a disjoint partition, by an explicit tie-break, with a
+`shared` group still exposed. Full contract in
+[`interfaces.md`](interfaces.md) §9.
 
 ## 18. Minimal Metrics
 

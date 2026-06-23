@@ -180,3 +180,42 @@ re-derived:
   peeling) localizes the slab vs the rafts, but neither gives a crisp boundary:
   the slab **grades into the exterior at the gap rim**, so there is no clean
   graph cut. Exploratory only; not wired into `get_topography`.
+
+## 9. Atom/residue ownership (Q17, decided)
+
+How atoms/residues are owned across the four Q17 contexts — `component lining`,
+`external_link lining`, `dry wall`, `separator`.
+
+**Membership is overlapping and role-based — the canonical truth.** A component's
+`atom_indices` is the union of the vertices of its tetrahedra (`graph.py`).
+Because an atom's *star* (its incident tetrahedra) can split across components,
+an atom belongs to **every** component its star touches:
+
+- a thin-septum atom lines **two distinct wet components** (two cavities);
+- a junction atom belongs to **two dry banks** — this *is* the interface signal
+  (`lining_bodies >= 2`, `lining_body_split`);
+- a cavity-wall atom is in the **wet lining and the dry wall** at once.
+
+Multi-membership is the norm at boundaries, not the exception, so forcing
+exclusive ownership would be unfaithful. The four contexts are **orthogonal
+roles/layers** (coast / lining / interface), not competing claims.
+
+**Presentation is context-aware and honest — never a hidden majority collapse:**
+
+| Context | A multi-component atom is treated as |
+| --- | --- |
+| Hover / inspection | **multi-component**: report every component it belongs to |
+| Render of one component | belonging to **that** component (in that view it does) |
+| Render of two+ components | a distinct **`shared`** key/marker — never adjudicated to one |
+| Counts / areas | **exclusive vs shared** reported separately (e.g. *A: 56 + 5 shared*), not flattened |
+
+`lining_body_split` records the per-body split; honest presentation *keeps* it
+rather than collapsing it.
+
+**Forced single-owner is the exception, not the model.** Only when a downstream
+consumer genuinely needs a disjoint partition (e.g. a non-overlapping molsysmt
+selection for another tool) is each shared atom assigned to one owner, by an
+**explicit documented tie-break** (majority of its star, or largest component),
+and a `shared` group is still exposed. `body_labels_from_dry_components`
+(largest-bank-wins) is exactly such a derived view, for colouring — not the
+canonical ownership.
