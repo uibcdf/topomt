@@ -133,16 +133,113 @@ _AFFINITY_POSITIVE = _OKABE_ITO['blue']  # positively charged
 _AFFINITY_NEGATIVE = _OKABE_ITO['vermillion']  # negatively charged
 _AFFINITY_NEUTRAL = _OKABE_ITO['grey']  # unknown / dummy (e.g. DUM)
 
-# Per-family default representation for representation='auto' (the per-family
-# visual language). Channels become tubes; pockets/voids stay volumetric blobs
-# until the 'envelope' mode (mouth caps) lands. See
-# devguide/DFND/component_visualization_implementation.md.
-_DEFAULT_REPRESENTATION_BY_FAMILY = {
-    fam.CHANNEL: 'pipe',
-    fam.POCKET: 'envelope',
-    fam.VOID: 'envelope',
-}
 _AUTO_FALLBACK_REPRESENTATION = 'cloud'
+
+# --- Grounded, name-free component rendering -----------------------------------
+# The component renderer keys on ``component.signature`` (the grounded topological
+# handle: resident / exposed / n_mouths), NEVER on ``component.family`` -- so it
+# survives the retirement of ``family`` from the kernel. Each wet component falls in
+# one render *bucket*, derived from the signature; the bucket -- not a family name --
+# drives the visual language (representation + colour). The buckets reproduce the
+# legacy family mapping exactly (void=enclosed, pocket=mouthed, channel=through,
+# percolating=through_open, every non-resident form=transient), so behaviour is
+# preserved. See dfnd/components.py WetComponent.signature and
+# devguide/DFND/component_visualization_implementation.md.
+
+
+def _signature_of(component):
+    sig = getattr(component, 'signature', None)
+    return sig if isinstance(sig, dict) else None
+
+
+def _render_bucket(component):
+    """Grounded render bucket from the signature (resident/exposed/n_mouths). A
+    non-wet component (no signature, e.g. a dry bank) is ``transient``."""
+    sig = _signature_of(component)
+    if sig is None or not sig.get('resident', False):
+        return 'transient'
+    if sig.get('exposed'):
+        return 'through_open'  # percolating: resident but no enclosing wall
+    n = int(sig.get('n_mouths', 0) or 0)
+    if n >= 2:
+        return 'through'  # >=2 mouths -> through passage (was channel)
+    if n == 1:
+        return 'mouthed'  # one mouth (was pocket)
+    return 'enclosed'  # no mouth (was void)
+
+
+# bucket -> visual language. Channels (through) read as tubes; mouthed/enclosed as
+# volumetric blobs; through_open (percolating) + transient keep the auto fallback,
+# matching the legacy per-family map (which omitted them).
+_REPRESENTATION_BY_BUCKET = {
+    'through': 'pipe',
+    'mouthed': 'envelope',
+    'enclosed': 'envelope',
+}
+_COLOR_BY_BUCKET = {
+    'through': _OKABE_ITO['orange'],  # was fam.CHANNEL
+    'through_open': _OKABE_ITO['reddish_purple'],  # was fam.PERCOLATING
+    'mouthed': _OKABE_ITO['blue'],  # was fam.POCKET
+    'enclosed': _OKABE_ITO['sky_blue'],  # was fam.VOID
+}
+_BUCKET_LABEL = {
+    'enclosed': 'enclosed cavity',
+    'mouthed': 'one-mouth concavity',
+    'through': 'through passage',
+    'through_open': 'percolating',
+    'transient': 'transient',
+}
+
+# Back-compat shim for the ``component_types`` / ``color_palette`` selectors, whose
+# historical values are legacy family names. This table -- the only place still tied
+# to those names -- maps a legacy selector to the grounded bucket(s) it covers, so a
+# caller passing ``fam.PRIMARY_WET_FAMILIES`` keeps working without the renderer ever
+# reading ``component.family``. New callers can pass grounded buckets directly.
+_SELECTOR_BUCKETS = {
+    fam.CHANNEL: {'through'},
+    fam.PERCOLATING: {'through_open'},
+    fam.POCKET: {'mouthed'},
+    fam.VOID: {'enclosed'},
+}
+
+
+def _matches_component_types(component, component_types):
+    """Whether ``component_types`` selects this component, decided from the grounded
+    bucket (never from comp.family). Accepts grounded buckets or, for back-compat,
+    legacy family-name selectors."""
+    if not component_types:
+        return True
+    bucket = _render_bucket(component)
+    for selector in component_types:
+        if selector == bucket or bucket in _SELECTOR_BUCKETS.get(selector, ()):
+            return True
+    return False
+
+
+def _representation_for(component):
+    return _REPRESENTATION_BY_BUCKET.get(
+        _render_bucket(component), _AUTO_FALLBACK_REPRESENTATION
+    )
+
+
+def _color_for(component):
+    """Grounded by-type colour. A dry bank (no signature) keeps its structural
+    DRY_BANK colour -- the dry side is outside the wet-family retirement."""
+    if _signature_of(component) is None:
+        return _TYPE_PALETTE.get(getattr(component, 'family', None), 0x888888)
+    return _COLOR_BY_BUCKET.get(_render_bucket(component), 0x888888)
+
+
+def _palette_color_override(color_palette, component):
+    """A per-category colour override from ``color_palette``, by grounded bucket or
+    (back-compat) by a legacy family-name key, without reading comp.family."""
+    bucket = _render_bucket(component)
+    if bucket in color_palette:
+        return color_palette[bucket]
+    for selector, buckets in _SELECTOR_BUCKETS.items():
+        if bucket in buckets and selector in color_palette:
+            return color_palette[selector]
+    return None
 _COMPONENT_REPRESENTATIONS = {
     'auto',
     'tetrahedra',
@@ -296,12 +393,21 @@ def show_dfnd_legend(view, topography=None, *, families=None):
         raise ValueError('Topography has no DFND data attached')
 
     if families is None:
-        present = {c.family for c in dfnd_data.dfn.components.wet}
-        order = (fam.POCKET, fam.VOID, fam.CHANNEL, fam.PERCOLATING)
-        families = [f for f in order if f in present]
+        present = {_render_bucket(c) for c in dfnd_data.dfn.components.wet}
+        order = ('enclosed', 'mouthed', 'through', 'through_open')
+        buckets = [b for b in order if b in present]
+    else:
+        # accept grounded buckets or (back-compat) legacy family-name selectors
+        buckets = []
+        for f in families:
+            if f in _BUCKET_LABEL:
+                buckets.append(f)
+            else:
+                buckets.extend(sorted(_SELECTOR_BUCKETS.get(f, ())))
 
     items = [
-        {'label': str(f), 'color': _TYPE_PALETTE.get(f, 0x888888)} for f in families
+        {'label': _BUCKET_LABEL.get(b, str(b)), 'color': _COLOR_BY_BUCKET.get(b, 0x888888)}
+        for b in buckets
     ]
     view.scene.set_legend(items)
     return items
@@ -336,7 +442,7 @@ def show_dfnd_pharmacophore(
 
     centers, kinds = [], []
     for comp in dfnd_data.dfn.components.wet:
-        if component_types and comp.family not in component_types:
+        if not _matches_component_types(comp, component_types):
             continue
         if component_ids is not None and comp.component_id not in component_ids:
             continue
@@ -1029,7 +1135,7 @@ def _components_matching(
     for comp in dfnd_data.dfn.components.wet:
         if requested is not None and comp.component_id not in requested:
             continue
-        if component_types and comp.family not in component_types:
+        if not _matches_component_types(comp, component_types):
             continue
         if interfaces_only and not getattr(comp, 'is_interface', False):
             continue
@@ -1207,7 +1313,7 @@ def carve_voids(
 
     focus_atoms: set[int] = set()
     for comp in dfnd_data.dfn.components.wet:
-        if component_types and comp.family not in component_types:
+        if not _matches_component_types(comp, component_types):
             continue
         if component_ids is not None and comp.component_id not in component_ids:
             continue
@@ -1253,7 +1359,7 @@ def show_dfnd_labels(
 
     layers = []
     for comp in dfnd_data.dfn.components.wet:
-        if component_types and comp.family not in component_types:
+        if not _matches_component_types(comp, component_types):
             continue
         if component_ids is not None and comp.component_id not in component_ids:
             continue
@@ -1265,7 +1371,7 @@ def show_dfnd_labels(
 
         n_mouths = int(getattr(comp, 'n_mouths', 0) or 0)
         volume = getattr(comp, 'volume_solvent_estimate', None)
-        parts = [str(comp.component_id), str(comp.family)]
+        parts = [str(comp.component_id), _BUCKET_LABEL.get(_render_bucket(comp), 'component')]
         if n_mouths:
             parts.append(f'{n_mouths} mouth' + ('s' if n_mouths != 1 else ''))
         if volume:
@@ -1489,7 +1595,7 @@ def _render_dfnd_component_layers(
 
     if show_wet:
         for comp in dfnd_data.dfn.components.wet:
-            if component_types and comp.family not in component_types:
+            if not _matches_component_types(comp, component_types):
                 continue
             if component_ids is not None and comp.component_id not in component_ids:
                 continue
@@ -1522,9 +1628,7 @@ def _render_dfnd_component_layers(
             if getattr(comp, 'is_interface', False):
                 mode = 'contact_sheet'
             else:
-                mode = _DEFAULT_REPRESENTATION_BY_FAMILY.get(
-                    comp.family, _AUTO_FALLBACK_REPRESENTATION
-                )
+                mode = _representation_for(comp)
             groups.setdefault(mode, []).append(comp.component_id)
         results = []
         for mode, ids in groups.items():
@@ -1596,12 +1700,15 @@ def _render_dfnd_component_layers(
     resolved_colors = {}
     for idx, comp in enumerate(selected_components):
         comp_id = comp.component_id
+        palette_override = (
+            _palette_color_override(color_palette, comp) if color_palette else None
+        )
         if color_palette and comp_id in color_palette:
             color = color_palette[comp_id]
-        elif color_palette and comp.family in color_palette:
-            color = color_palette[comp.family]
+        elif palette_override is not None:
+            color = palette_override
         elif color_mode == 'by_type':
-            color = _TYPE_PALETTE.get(comp.family, 0x888888)
+            color = _color_for(comp)
         else:
             color = _DISTINCT_PALETTE_LIST[idx % len(_DISTINCT_PALETTE_LIST)]
         resolved_colors[comp_id] = color
@@ -1645,7 +1752,7 @@ def _render_dfnd_component_layers(
                 tetra_to_color[tid] = color
                 tetra_to_component[tid] = comp_id
                 lbl = (
-                    f'Component: {comp_id} ({comp.family}) | '
+                    f'Component: {comp_id} ({_BUCKET_LABEL.get(_render_bucket(comp), "component")}) | '
                     f'Tetrahedron {tid} | Vol: {vol_a:.1f} Å³'
                 )
                 labels.append(lbl)
@@ -1794,7 +1901,7 @@ def _render_dfnd_component_layers(
 
             path_geometry, bottleneck_index = (
                 component_centerline_geometry(topography, comp)
-                if comp.family == fam.CHANNEL and comp.raw_record is not None
+                if _render_bucket(comp) == 'through' and comp.raw_record is not None
                 else (None, -1)
             )
 
@@ -1940,7 +2047,7 @@ def _render_dfnd_component_layers(
         # devguide/DFND/component_visualization_implementation.md (Phase 4).
         for comp in selected_components:
             comp_id = comp.component_id
-            if comp.family != fam.CHANNEL or comp.raw_record is None:
+            if _render_bucket(comp) != 'through' or comp.raw_record is None:
                 continue
             geometry = centerline_ring_geometry(topography, comp)
             if not geometry.centers:
@@ -2123,7 +2230,7 @@ def _render_dfnd_component_layers(
     elif representation == 'bottleneck_rings':
         for comp in selected_components:
             comp_id = comp.component_id
-            if comp.family != fam.CHANNEL or comp.raw_record is None:
+            if _render_bucket(comp) != 'through' or comp.raw_record is None:
                 continue
             path_geometry, bottleneck_index = component_centerline_geometry(
                 topography, comp
@@ -2470,7 +2577,7 @@ def _render_dfnd_component_layers(
 
     elif representation == 'groove_width_profile':
         for comp in selected_components:
-            if comp.family != fam.CHANNEL or comp.raw_record is None:
+            if _render_bucket(comp) != 'through' or comp.raw_record is None:
                 continue
             geometry = centerline_ring_geometry(topography, comp)
             if not geometry.centers:
@@ -2671,7 +2778,7 @@ def _selected_component_ids(topography, kwargs):
     selected = []
     if kwargs.get('show_wet', True):
         for comp in data.dfn.components.wet:
-            if component_types and comp.family not in component_types:
+            if not _matches_component_types(comp, component_types):
                 continue
             if requested is not None and comp.component_id not in requested:
                 continue

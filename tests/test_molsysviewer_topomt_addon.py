@@ -31,6 +31,23 @@ from molsysviewer_topomt.standalone import (
 from topomt import pyunitwizard as puw
 
 
+def _grounded_signature(family='void', *, n_mouths=None, exposed=False, resident=True):
+    """The grounded signature a real WetComponent exposes, for the lightweight mock
+    components below. The component renderer keys on this (never on family), so the
+    mocks must carry it. n_mouths defaults to the legacy family's mouth count."""
+    if n_mouths is None:
+        n_mouths = {'void': 0, 'pocket': 1, 'channel': 2, 'percolating': 2}.get(
+            family, 0
+        )
+    return {
+        'n_mouths': n_mouths,
+        'resident': resident,
+        'exposed': exposed,
+        'n_septa': 0,
+        'branched': n_mouths >= 3,
+    }
+
+
 def test_addon_spec_matches_current_molsysviewer_contract():
     addon = get_addon()
 
@@ -1261,6 +1278,7 @@ def test_show_dfnd_components_creates_shapes():
         ):
             self.component_id = component_id
             self.family = family
+            self.signature = _grounded_signature(family)
             self.side = side
             self.node_indices = node_indices
             self.resident_node_indices = resident_node_indices
@@ -1393,6 +1411,7 @@ def test_show_dfnd_components_replaces_component_tag_between_representations():
     component = types.SimpleNamespace(
         component_id='WET-2',
         family='pocket',
+        signature=_grounded_signature('pocket'),
         side='wet',
         node_indices=[0],
         resident_node_indices=[0],
@@ -1494,6 +1513,7 @@ def test_show_dfnd_components_explicit_sphere_modes_and_graph_alias():
     component = types.SimpleNamespace(
         component_id='WET-1',
         family='pocket',
+        signature=_grounded_signature('pocket'),
         side='wet',
         node_indices=[0, 1],
         resident_node_indices=[0],
@@ -2543,7 +2563,11 @@ def test_show_dfnd_components_rejects_unknown_representation():
     from molsysviewer_topomt.render import show_dfnd_components
 
     component = types.SimpleNamespace(
-        component_id='WET-1', family='void', side='wet', node_indices=[0]
+        component_id='WET-1',
+        family='void',
+        signature=_grounded_signature('void'),
+        side='wet',
+        node_indices=[0],
     )
     topography = types.SimpleNamespace(
         dfnd=types.SimpleNamespace(
@@ -2630,6 +2654,7 @@ def _graph_render_topography():
     component = types.SimpleNamespace(
         component_id='WET-1',
         family='void',
+        signature=_grounded_signature('void'),
         side='wet',
         support_key='support:WET-1',
         component_key='component:WET-1',
@@ -2785,21 +2810,22 @@ def test_show_dfnd_labels_annotates_each_component():
     layer = show_dfnd_labels(view, topo)
     assert layer is not None
 
-    # one label per primary wet component, anchored to its lining atoms
+    # one label per primary wet component (grounded: resident, not percolating),
+    # anchored to its lining atoms -- the renderer selects by the same predicate
     wet = [
         c
         for c in topo.dfnd.dfn.components.wet
-        if c.family in ('pocket', 'void', 'channel')
+        if c.signature['resident'] and not c.signature['exposed']
     ]
     assert len(captured) == len(wet)
     for ann in captured:
         assert ann['kind'] == 'label'
         assert ann['layer_tag'] == 'dfnd-label'
         assert ann['atom_indices']  # anchored to atoms
-    # the channel label mentions its family and mouth count
-    channel = next(c for c in wet if c.family == 'channel')
+    # the through-passage label mentions its grounded bucket and mouth count
+    channel = next(c for c in wet if c.signature['n_mouths'] >= 2)
     chan_label = next(a for a in captured if a['tag'].endswith(channel.component_id))
-    assert 'channel' in chan_label['text']
+    assert 'through passage' in chan_label['text']
     assert 'mouth' in chan_label['text']
 
 
@@ -2982,12 +3008,13 @@ def test_show_dfnd_convexity_colours_whole_surface():
 
 
 def test_show_dfnd_legend_lists_present_families():
-    """Phase 5 legend: show_dfnd_legend feeds family->Okabe-Ito items to scene.set_legend."""
+    """Phase 5 legend: show_dfnd_legend feeds grounded-bucket->Okabe-Ito items to
+    scene.set_legend (name-free: keyed on the render bucket, not the family)."""
     from types import SimpleNamespace
     from molsysviewer_topomt.render import show_dfnd_legend
     from molsysviewer_topomt.render import _components as c
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')  # channel + pocket
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')  # through + one-mouth
     captured = {}
 
     class FakeScene:
@@ -2998,10 +3025,10 @@ def test_show_dfnd_legend_lists_present_families():
     items = show_dfnd_legend(view, topo)
     assert captured['items'] == items
     labels = {it['label'] for it in items}
-    assert 'channel' in labels and 'pocket' in labels
+    assert 'through passage' in labels and 'one-mouth concavity' in labels
     by_label = {it['label']: it['color'] for it in items}
-    assert by_label['channel'] == c._TYPE_PALETTE[c.fam.CHANNEL]
-    assert by_label['pocket'] == c._TYPE_PALETTE[c.fam.POCKET]
+    assert by_label['through passage'] == c._COLOR_BY_BUCKET['through']
+    assert by_label['one-mouth concavity'] == c._COLOR_BY_BUCKET['mouthed']
 
 
 def test_pharmacophore_kind_typing():
