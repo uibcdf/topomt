@@ -146,6 +146,31 @@ class WetComponent(Component):
         # with ``family`` (see _attach_classification, classify.classify).
         self.classification: dict[str, Any] = {}
 
+    @property
+    def signature(self) -> dict[str, Any]:
+        """Grounded topological signature -- for **name-free** consumers (e.g. the
+        component renderer, front 2). It references neither ``family`` nor the
+        catalog ``classification`` names, so a consumer that keys on it survives the
+        retirement of ``family`` from the kernel. All fields are measured grounded
+        properties:
+
+        - ``n_mouths``  -- external links to OCEAN;
+        - ``resident``  -- the probe can reside;
+        - ``exposed``   -- no enclosing wall (``n_connected_walls == 0``, percolating);
+        - ``n_septa``   -- wet<->wet constrictions (inter-cavity boundaries);
+        - ``branched``  -- the topological junction signal (``n_mouths >= 3`` needs a
+          branch point). Finer skeleton branching (a 2-mouth side branch) is a
+          centerline refinement computed downstream, not here.
+        """
+        n_mouths = len(self.external_link_ids)
+        return {
+            'n_mouths': n_mouths,
+            'resident': bool(self.has_residence),
+            'exposed': self.boundary.get('n_connected_walls') == 0,
+            'n_septa': self.boundary.get('n_septa', 0),
+            'branched': n_mouths >= 3,
+        }
+
     def __repr__(self) -> str:
         tag = f' {self.interface_family}' if self.is_interface else ''
         return (

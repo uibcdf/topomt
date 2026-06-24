@@ -61,6 +61,21 @@ def test_inter_cavity_constriction_is_counted_as_a_septum():
     assert any(c.boundary['n_septa'] >= 1 for c in components.wet if c.size >= 8)
 
 
+def test_signature_is_grounded_and_name_free():
+    # the grounded signature references no family/classification names, so a
+    # consumer (the component renderer) that keys on it survives family retirement
+    void = _largest(_wet(synthetic.dumbbell(), 1.8), 'void')
+    assert void is not None
+    sig = void.signature
+    assert set(sig) == {'n_mouths', 'resident', 'exposed', 'n_septa', 'branched'}
+    assert sig['n_mouths'] == 0
+    assert sig['resident'] is True
+
+    channel = _largest(_wet(synthetic.cylinder_tube(), 1.4), 'channel')
+    assert channel is not None
+    assert channel.signature['n_mouths'] >= 2
+
+
 def test_every_wet_component_has_boundary_counts():
     # the helper runs for all wet components and yields non-negative integer counts
     for component in _wet(synthetic.dumbbell(), 1.8).wet:

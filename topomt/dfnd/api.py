@@ -280,6 +280,11 @@ def dfnd_to_topography(
                 feature.morphometrics = dict(getattr(component, 'morphometrics', {}))
                 feature.boundary = dict(getattr(component, 'boundary', {}))
                 feature.motifs = list(getattr(component, 'motifs', []))
+                # The grounded, name-free signature (for consumers that key on
+                # topology, not names -- survives family retirement).
+                signature = getattr(component, 'signature', None)
+                if signature is not None:
+                    feature.signature = dict(signature)
             topography.add_feature(feature)
             if family_key not in _FAMILIES_WITH_MOUTHS:
                 continue
