@@ -63,6 +63,9 @@ def feature_record_from_feature(feature: Any) -> dict[str, Any]:
         'mouth_atom_indices': _tolist_or_none(
             getattr(feature, 'mouth_atom_indices', None)
         ),
+        # the catalog classification (feature_type IS its name; this adds confidence /
+        # marginal for the panels) -- additive, front 1.b.
+        'classification': dict(getattr(feature, 'classification', {}) or {}),
     }
     return record
 

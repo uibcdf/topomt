@@ -340,15 +340,21 @@ optional cleanup.
   residence_death/seal/merge/split) + **per-threshold confidence** in `classify`
   (`{name, confidence, marginal}`); per-mouth occlusion; marginality.
 - the grounded name-free `component.signature` (the renderer keys on it, not family).
+- **`feature_type` re-typing** from `classification` (§5.2) — **landed** (`41e63ba`):
+  `feature_type` **is** the catalog name. `open_concavity` is registered in the feature
+  zoo (a concavity generic) with its `OpenConcavity` class; the bridge promotes a
+  1-mouth component by its classification (open → `OpenConcavity`, occluded → `Pocket`).
+  The feature renderer covers it (`cb792ac`); the payload carries `classification`.
+- **coast/shore/beach** (§6) + the past-beach wetted contact (`beach_pocket`,
+  `volume_solvent_accessible`, `accessible_atom_indices`) — the ligand interaction
+  surface; the render keys on the kernel `shore`/`beach` (single source).
 
-**Pending — the catalog/viewer migration (its own effort, `viewer_grounded_named_split.md`):**
+**Pending — the broader viewer grounded/named split (`viewer_grounded_named_split.md`):**
 
-- **`feature_type` re-typing** from `classification` (decision §5.2): deliberately
-  deferred (it needs `open_concavity`/`groove`/… registered in the feature zoo
-  `_feature_constants`, plus payload/renderer/tests). This **is** the feature-layer
-  migration; the bridge already carries `classification` additively (front 1.a).
-- the viewer grounded/named split (component primitives vs named features),
+- the remaining grounded-primitive renames (interface_*/groove_floor/cutaways) and the
   `show_features` API, chemistry overlay, convex diagnostics.
+- the morphology **leaves** (`groove`/`funnel`/`cleft`/`dish`) — registered + refined
+  when their distinguishing metric (elongation/axis, flank count …) lands.
 - `septum` → `constriction` rename (+ dry `septum`); `output_status` `kind='family'`
   → catalog framing (cosmetic; not broken); dry-side dual scheme.
 - **real-system validation** (§12).
