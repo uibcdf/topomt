@@ -177,6 +177,7 @@ _COMPONENT_REPRESENTATIONS = {
     'dry_interface_faces',
     'dry_blocked_faces',
     'dry_depth_map',
+    'dry_shell',
     'semantic_faces',
     'permeable_faces',
     'impermeable_faces',
@@ -714,20 +715,28 @@ def _dry_face_payloads(topography, selected_components, representation: str):
     color_by_face_id = {}
     label_by_face_id = {}
 
-    if representation == 'dry_interface_faces':
+    if representation in {'dry_interface_faces', 'dry_shell'}:
         for face in getattr(topography.dfnd.dfn.components, 'coast_faces', []):
             dry_tetrahedron = int(face.get('dry_tetrahedron_id', -1))
             if dry_tetrahedron not in selected_tetrahedra:
                 continue
             face_id = int(face['face_id'])
-            color_by_face_id[face_id] = _OKABE_ITO['orange']
+            color_by_face_id[face_id] = (
+                _TYPE_PALETTE[fam.DRY_BANK]
+                if representation == 'dry_shell'
+                else _OKABE_ITO['orange']
+            )
             label_by_face_id[face_id] = (
-                f'Dry interface face {face_id} | '
+                f'Dry shell face {face_id} | '
+                if representation == 'dry_shell'
+                else f'Dry interface face {face_id} | '
+            ) + (
                 f'Wet: {face.get("wet_component_id")} | '
                 f'Dry: {face.get("dry_component_id")} | '
                 f'Area: {_angstrom2_from_nm2(face.get("area", 0.0)):.2f} Å²'
             )
-        return color_by_face_id, label_by_face_id
+        if representation == 'dry_interface_faces':
+            return color_by_face_id, label_by_face_id
 
     for face in select_faces(topography, permeability_state='non_permeable'):
         owner = int(face.get('owner_tetrahedron_id', -1))
@@ -744,6 +753,8 @@ def _dry_face_payloads(topography, selected_components, representation: str):
         color_by_face_id[face_id] = (
             _dry_depth_color(depth, max_depth)
             if representation == 'dry_depth_map'
+            else _TYPE_PALETTE[fam.DRY_BANK]
+            if representation == 'dry_shell'
             else _OKABE_ITO['vermillion']
         )
         depth_label = 'unknown' if depth is None else str(depth)
@@ -752,6 +763,7 @@ def _dry_face_payloads(topography, selected_components, representation: str):
             f'face_depth={depth_label} | tetrahedra={owner},{neighbor}'
         )
     return color_by_face_id, label_by_face_id
+
 
 def _component_shape_ellipsoid_payload(topography, component, *, use_resident_nodes=True):
     """Return one PCA ellipsoid payload for a component in nm coordinates.
@@ -1247,6 +1259,7 @@ def _render_dfnd_component_layers(
         - 'dry_interface_faces': Dry-side wet/dry coast faces.
         - 'dry_blocked_faces': Non-permeable faces touching selected dry banks.
         - 'dry_depth_map': Dry faces coloured by face-depth from interface.
+        - 'dry_shell': Semitransparent shell of selected dry-bank boundary faces.
         - 'interface_ribbon': Flattened tube through interface face centroids.
         - 'semantic_faces': DFND faces touching selected components, coloured by semantic role.
         - 'permeable_faces': Permeable DFND faces touching selected components.
@@ -1338,7 +1351,12 @@ def _render_dfnd_component_layers(
         show_wet = True
         show_dry = False
         interfaces_only = True
-    if requested_representation in {'dry_interface_faces', 'dry_blocked_faces', 'dry_depth_map'}:
+    if requested_representation in {
+        'dry_interface_faces',
+        'dry_blocked_faces',
+        'dry_depth_map',
+        'dry_shell',
+    }:
         show_wet = False
         show_dry = True
         component_types = None
@@ -2282,7 +2300,12 @@ def _render_dfnd_component_layers(
             return None
         return layers[0] if len(layers) == 1 else layers
 
-    elif representation in {'dry_interface_faces', 'dry_blocked_faces', 'dry_depth_map'}:
+    elif representation in {
+        'dry_interface_faces',
+        'dry_blocked_faces',
+        'dry_depth_map',
+        'dry_shell',
+    }:
         color_by_face_id, label_by_face_id = _dry_face_payloads(
             topography, selected_components, representation
         )

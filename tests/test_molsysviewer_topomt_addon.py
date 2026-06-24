@@ -2029,6 +2029,33 @@ def test_dry_face_representations_are_explicit():
     assert len(set(depth_msg['options']['colors'])) >= 1
 
 
+def test_dry_shell_collects_boundary_faces_without_semantic_coloring():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    dry_component = topo.dfnd.dfn.components.dry[0]
+    view = DummyView()
+
+    show_dfnd_components(
+        view,
+        topo,
+        representation='dry_shell',
+        component_ids=[dry_component.component_id],
+        alpha=0.35,
+    )
+
+    shell_msg = next(
+        message for message in view.messages if message['op'] == 'add_triangle_faces'
+    )
+    assert shell_msg['options']['colors']
+    assert set(shell_msg['options']['colors']) == {0x999999}
+    assert any(
+        label.startswith('Dry shell face')
+        for label in shell_msg['options']['labels']
+    )
+    assert shell_msg['options']['alpha'] == pytest.approx(0.35)
+
+
 def test_clearance_map_colours_envelope_by_residence_radius():
     from molsysviewer_topomt.render import show_dfnd_components
 
@@ -3286,6 +3313,7 @@ def test_render_result_uses_explicit_counts_and_details():
         'dry_interface_faces',
         'dry_blocked_faces',
         'dry_depth_map',
+        'dry_shell',
         'semantic_faces',
         'permeable_faces',
         'impermeable_faces',
