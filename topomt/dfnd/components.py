@@ -1177,7 +1177,8 @@ def _attach_boundary_helpers(
       ``n_dry_contacts >= 2``.
 
     Each wall is then characterized (*cluster first, characterize after*) by its
-    other side: ``coast`` (a dry bank), ``constriction`` (another wet cavity -- a
+    other side: ``shore`` (a dry bank -- the real wet-dry wall; ``coast`` is reserved
+    for the tetrahedron permeability class), ``constriction`` (another wet cavity -- a
     closed throat / septum face, S6), or ``exterior`` (a non-permeable OCEAN face).
     ``n_septa`` = walls whose other side is wet (the inter-cavity boundaries whose
     ``R_gate`` is a merge radius). See taxonomy_architecture_decision.md S4/S6.
@@ -1195,7 +1196,7 @@ def _attach_boundary_helpers(
         if neighbor < 0:
             return 'exterior'
         side = node_side.get(neighbor)
-        return 'coast' if side == 'dry' else ('constriction' if side == 'wet' else 'exterior')
+        return 'shore' if side == 'dry' else ('constriction' if side == 'wet' else 'exterior')
 
     walls_by_component: dict[str, list] = defaultdict(list)
     for face in raw['faces']:
