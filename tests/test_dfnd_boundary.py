@@ -54,9 +54,18 @@ def test_two_body_interface_has_two_walls_and_two_dry_contacts():
     assert slot.boundary['n_dry_contacts'] == 2
 
 
+def test_inter_cavity_constriction_is_counted_as_a_septum():
+    # two chambers separated by a sub-probe pinch share a wet<->wet wall -- a
+    # constriction / closed throat -- which is characterized as a septum
+    components = _wet(synthetic.two_chambers_septum(4.5, 1.0, seed=0), 1.4)
+    assert any(c.boundary['n_septa'] >= 1 for c in components.wet if c.size >= 8)
+
+
 def test_every_wet_component_has_boundary_counts():
     # the helper runs for all wet components and yields non-negative integer counts
     for component in _wet(synthetic.dumbbell(), 1.8).wet:
         b = component.boundary
         assert b['n_connected_walls'] >= 0
         assert b['n_dry_contacts'] >= 0
+        assert b['n_septa'] >= 0
+        assert len(b['walls']) == b['n_connected_walls']

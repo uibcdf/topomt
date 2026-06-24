@@ -14,7 +14,7 @@ feature's `shape_type`/`dimensionality` are derived from `feature_type`).
 from __future__ import annotations
 
 import copy
-from collections import defaultdict, deque
+from collections import Counter, defaultdict, deque
 from collections.abc import Iterator, Mapping
 from typing import Any
 
@@ -1002,22 +1002,34 @@ def _attach_boundary_helpers(
       (= ``len(lining_bodies)``); ``interface`` is the catalog predicate
       ``n_dry_contacts >= 2``.
 
-    Per-wall composition (coast / exterior / constriction) and ``n_septa`` are a
-    later refinement; this slice ships the two robust counts. See
-    taxonomy_architecture_decision.md S4.
+    Each wall is then characterized (*cluster first, characterize after*) by its
+    other side: ``coast`` (a dry bank), ``constriction`` (another wet cavity -- a
+    closed throat / septum face, S6), or ``exterior`` (a non-permeable OCEAN face).
+    ``n_septa`` = walls whose other side is wet (the inter-cavity boundaries whose
+    ``R_gate`` is a merge radius). See taxonomy_architecture_decision.md S4/S6.
     """
     raw = result['raw']
     node_component = {}
+    node_side = {}
     for component in components.values():
         for node in component.node_indices:
             node_component[node] = component.component_id
+            node_side[node] = component.side
+
+    def _face_class(face):
+        neighbor = face['neighbor_tetrahedron_id']
+        if neighbor < 0:
+            return 'exterior'
+        side = node_side.get(neighbor)
+        return 'coast' if side == 'dry' else ('constriction' if side == 'wet' else 'exterior')
 
     walls_by_component: dict[str, list] = defaultdict(list)
     for face in raw['faces']:
         if face['permeability_state'] == 'permeable':
             continue  # permeable boundary faces are mouths, not walls
-        cid = node_component.get(face['owner_tetrahedron_id'])
-        if cid is None:
+        owner = face['owner_tetrahedron_id']
+        cid = node_component.get(owner)
+        if cid is None or node_side.get(owner) != 'wet':
             continue
         neighbor = face['neighbor_tetrahedron_id']
         if neighbor >= 0 and node_component.get(neighbor) == cid:
@@ -1027,9 +1039,21 @@ def _attach_boundary_helpers(
     for component in components.wet:
         faces = walls_by_component.get(component.component_id, [])
         clusters = network._cluster_external_faces(faces) if faces else []
+        walls = []
+        for cluster in clusters:
+            composition = Counter(_face_class(f) for f in cluster)
+            walls.append(
+                {
+                    'kind': composition.most_common(1)[0][0],
+                    'n_faces': len(cluster),
+                    'composition': dict(composition),
+                }
+            )
         component.boundary = {
             'n_connected_walls': len(clusters),
             'n_dry_contacts': len(component.lining_bodies),
+            'n_septa': sum(1 for w in walls if w['kind'] == 'constriction'),
+            'walls': walls,
         }
 
 
