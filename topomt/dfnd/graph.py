@@ -12,6 +12,7 @@ from topomt.delaunay_mesh import DelaunayMesh
 from topomt.tools.tessellation import mouth_area_from_faces
 
 from . import families as fam
+from .classify import classify_topology, topology_family
 from .config import DFNDMeshConfig, DFNDQuery
 from .core.clearance import (
     _KIND_BY_CODE,
@@ -403,12 +404,10 @@ class DelaunayFlowNetwork:
 
     @staticmethod
     def _classify_component(n_external_links, n_resident_nodes):
-        has_residence = n_resident_nodes >= 1
-        if n_external_links == 0:
-            return fam.VOID if has_residence else fam.DEGENERATE_SUBPROBE
-        if n_external_links == 1:
-            return fam.POCKET if has_residence else fam.SURFACE_CONCAVITY
-        return fam.CHANNEL if has_residence else fam.NONRESIDENT_PASSAGE
+        # Delegates to the single classification source (catalog, classify.py);
+        # the cross-product part only -- ``percolating`` is applied where the
+        # wall count is known (see classify_topology at the record-building site).
+        return topology_family(n_external_links, n_resident_nodes >= 1)
 
 
     def _compute_query_states(
@@ -923,9 +922,11 @@ class DelaunayFlowNetwork:
                     is_boundary = neighbor == -1 or neighbor not in node_set
                     if is_boundary and not face_permeable[node, face_index]:
                         n_wall_faces += 1
-            family = self._classify_component(n_external_links, len(resident_nodes))
-            if resident_nodes and n_wall_faces == 0:
-                family = fam.PERCOLATING
+            # Single source of truth: the catalog classifier derives the family
+            # from the grounded signature; the kernel no longer assigns it inline.
+            family = classify_topology(
+                n_external_links, len(resident_nodes), n_wall_faces
+            )
             atom_indices = sorted(
                 {
                     int(self.atom_indices_map[atom_index])
