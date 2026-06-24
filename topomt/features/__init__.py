@@ -4,6 +4,7 @@ from .Feature1D import Feature1D
 from .Feature2D import Feature2D
 from .Void import Void
 from .Pocket import Pocket
+from .OpenConcavity import OpenConcavity
 from .Channel import Channel
 from .BranchedChannel import BranchedChannel
 from .Mouth import Mouth
@@ -18,6 +19,7 @@ _FEATURE_TYPE_REGISTRY = {
     'feature_1d': Feature1D,
     'feature_2d': Feature2D,
     'pocket': Pocket,
+    'open_concavity': OpenConcavity,
     'void': Void,
     'mouth': Mouth,
     'channel': Channel,

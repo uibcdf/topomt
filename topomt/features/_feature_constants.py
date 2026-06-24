@@ -4,6 +4,7 @@ _FEATURE_PREFIXES = {
     'feature_1d': 'F1D',
     'feature_2d': 'F2D',
     'pocket': 'POC',
+    'open_concavity': 'OCV',
     'void': 'VOI',
     'mouth': 'MOU',
     'channel': 'CHA',
@@ -17,6 +18,7 @@ _FEATURE_TYPE_ALIASES = {
     'Feature1D': 'feature_1d',
     'Feature2D': 'feature_2d',
     'Pocket': 'pocket',
+    'OpenConcavity': 'open_concavity',
     'Void': 'void',
     'Mouth': 'mouth',
     'Channel': 'channel',
@@ -30,6 +32,7 @@ _FEATURE_TYPE_TO_CLASS_NAME = {
     'feature_1d': 'Feature1D',
     'feature_2d': 'Feature2D',
     'pocket': 'Pocket',
+    'open_concavity': 'OpenConcavity',
     'void': 'Void',
     'mouth': 'Mouth',
     'channel': 'Channel',
@@ -41,12 +44,14 @@ _FEATURE_TYPES_BY_SHAPE_TYPE = {
     "point": ["feature0d", "point", "pit", "apex", "summit", "bifurcation", "saddle_point", "ridge_tip"],
     "boundary": ["feature1d", "mouth", "base_rim", "neck", "ridge", "furrow", "lip", "seam", "isthmus", "edge_loop",
                  "branch_line", "hinge_line"],
-    # Only DFND component-level families. A concavity feature *type* is what the
-    # DFND decomposition produces (one component = one of these). Morphological
-    # refinements (groove ...) and sub-chamber roles (alcove ...) are NOT component
-    # types and were removed from here -- see _PENDING_* below and
-    # devguide/DFND/feature_definitions.md S5.2.1.
-    "concavity": ["void", "pocket", "channel", "branched_channel"],
+    # DFND component-level concavity types: what the catalog (classify) names a wet
+    # resident component directly from its grounded signature (+ occlusion). These
+    # are GENERICS, one component = one of these. `open_concavity` is the generic for
+    # a 1-mouth open (occlusion<=1) concavity -- a real catalog name, distinct from
+    # the morphological *leaves* (groove ...) that refine it once their metric lands;
+    # those leaves and sub-chamber roles (alcove ...) are NOT component types and stay
+    # in _PENDING_* below. See devguide/DFND/feature_catalog.md.
+    "concavity": ["void", "pocket", "open_concavity", "channel", "branched_channel"],
     "convexity": ["protrusion", "dome", "ridge", "spine", "bulge", "ridge_cap", "knob", "buttress", "pinnacle"],
     "mixed": ["feature2d", "interface", "patch", "joint", "saddle", "trench"],
     # neutral: neither concave, convex nor mixed -- a fully permeable/exposed region.

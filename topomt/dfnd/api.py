@@ -5,7 +5,7 @@ from typing import Any
 import numpy as np
 
 from .. import pyunitwizard as puw
-from ..features import Channel, Mouth, Percolating, Pocket, Void
+from ..features import Channel, Mouth, OpenConcavity, Percolating, Pocket, Void
 from ..topography.Topography import Topography
 from .config import DFNDMeshConfig, DFNDQuery
 from .data import DFNDData
@@ -16,6 +16,14 @@ _FEATURE_CLASS_BY_FAMILY = {
     'voids': Void,
     'channels': Channel,
     'percolatings': Percolating,
+}
+
+# Catalog-name overrides within a topological family: the 1-mouth family splits into
+# the occluded `pocket` (default) and the open `open_concavity` by occlusion (decision
+# S5.2). Other families' classification name == the family default, so they need no
+# entry. feature_type then IS the catalog name.
+_FEATURE_CLASS_BY_NAME = {
+    'open_concavity': OpenConcavity,
 }
 
 # Families whose external links are promoted to child Mouth features. Voids have
@@ -258,15 +266,21 @@ def dfnd_to_topography(
     # (external links) to a child Mouth feature. The local component_id remains a
     # display selector; contextual provenance uses component_key.
     components = topography.dfnd.dfn.components
-    for family_key, feature_class in _FEATURE_CLASS_BY_FAMILY.items():
+    for family_key, default_class in _FEATURE_CLASS_BY_FAMILY.items():
         for record in result['wet'][family_key]:
+            component = components.get(f'WET-{record["id"]}')
+            # Promote by the catalog classification -- feature_type IS the classification
+            # (decision S5.2). The only split within a topological family is the 1-mouth
+            # bucket: an OPEN concavity (occlusion <= 1) is OpenConcavity, the occluded
+            # case stays Pocket; every other family's classification == its name.
+            name = (getattr(component, 'classification', None) or {}).get('name')
+            feature_class = _FEATURE_CLASS_BY_NAME.get(name, default_class)
             feature = _feature_from_component_record(record, feature_class)
             feature.component_id = f'WET-{record["id"]}'
             feature.source_id = feature.component_key
             # Carry the interface descriptor (orthogonal axis) from the typed
             # component onto the public feature, so an interface is catalogued as
             # one. See devguide/DFND/interfaces.md.
-            component = components.get(feature.component_id)
             if component is not None:
                 feature.is_interface = bool(getattr(component, 'is_interface', False))
                 feature.interface_family = getattr(component, 'interface_family', None)

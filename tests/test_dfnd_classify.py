@@ -67,9 +67,10 @@ def _largest(system, probe, family):
 
 
 def test_bridge_carries_catalog_layer_onto_features():
-    # front 1.a: dfnd_to_topography promotes components to features that carry the
-    # catalog layer (classification, morphometrics, boundary, motifs) -- additive,
-    # feature_type unchanged; the viewer keys on feature.classification['name'].
+    # dfnd_to_topography promotes components to features that carry the catalog layer
+    # (classification, morphometrics, boundary, motifs). feature_type IS the catalog
+    # classification (decision S5.2): an open 1-mouth concavity types as
+    # 'open_concavity' (OpenConcavity), the occluded case as 'pocket'.
     from topomt.get_topography import get_topography
 
     system = synthetic.to_molsysmt(
@@ -79,9 +80,13 @@ def test_bridge_carries_catalog_layer_onto_features():
     features = [
         topo[fid]
         for fid in topo
-        if getattr(topo[fid], 'feature_type', None) in ('pocket', 'void', 'channel')
+        if getattr(topo[fid], 'feature_type', None)
+        in ('pocket', 'open_concavity', 'void', 'channel')
     ]
     assert features
+    # the re-typing is live: feature_type matches the classification name
+    for feature in features:
+        assert feature.feature_type == feature.classification['name']
     for feature in features:
         assert 'name' in feature.classification
         assert isinstance(feature.morphometrics, dict)
