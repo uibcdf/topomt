@@ -6,8 +6,8 @@ a channel is not drawn like a pocket, an interface is not drawn like either, and
 a static snapshot is not drawn like a trajectory.
 
 Status: current conceptual visual-language document. The static single-frame
-DFND language described here is now mostly implemented in
-`molsysviewer_topomt`; dynamic trajectory visualization remains a future layer.
+DFND language described here is implemented in `molsysviewer_topomt`; dynamic
+trajectory visualization remains a future layer.
 This document describes the *what* and user-facing rationale. The implementation
 status and remaining engineering gaps live in
 [component_visualization_implementation.md](component_visualization_implementation.md).
@@ -61,24 +61,58 @@ values:
 |---|---|---|
 | `auto` | per-family default (`void`/`pocket`→`envelope`, `channel`→`pipe`, interfaces→`contact_sheet`) | user-facing default resolver |
 | `envelope` | blob plus mouth caps and gate rings | pocket/void shape and openings |
-| `pipe` | channel skeleton tube plus bottleneck cue | channel path and constriction |
-| `rings` | HOLE-style clearance rings | channel profile |
-| `contact_sheet` | lining split by body | interface composition |
+| `wire_contour` | wireframe version of the volume envelope | inspect envelope without hiding atoms |
+| `cloud`, `scalar_isosurface` | Gaussian/metaball volume over residence spheres | volume fallback / scalar-surface diagnostic |
+| `clearance_map`, `clearance_wire` | envelope coloured by local residence radius | clearance heatmap |
+| `pocket_depth_map` | envelope coloured by topological depth from mouths | pocket/void interior organization |
+| `shape_ellipsoids` | PCA ellipsoid per component | orientation, elongation, anisotropy |
+| `pipe`, `channel_tube`, `channel_solid` | channel tube plus bottleneck cue | channel path and constriction |
+| `channel_profile`, `rings` | HOLE-style clearance colours/rings | channel profile |
+| `channel_lumen`, `channel_tunnel` | continuous lumen surface around a channel path | inspect channel bore/lumen |
+| `channel_ribbon`, `groove_ribbon` | flattened path tube | direction/branch reading without occluding the lining |
+| `channel_blob`, `channel_wire_blob` | volumetric channel blob / wire blob | channel as occupied volume rather than path |
+| `groove_floor` | permeable DFND faces touching the component | groove floor diagnostic |
+| `groove_walls` | lining surface of the selected component | groove walls / atom lining |
+| `groove_width_profile` | rings along the channel/groove path | local width profile |
+| `groove_depth_profile` | envelope coloured by topological depth | local depth profile |
+| `contact_sheet`, `interface_lining_surface` | lining split by body | interface composition |
+| `interface_faces`, `interface_contact_faces` | coast faces by semantic role | exact interface boundary faces |
+| `interface_links` | wet↔dry center links across coast faces | interface connectivity |
+| `interface_ribbon` | flattened ribbon through coast-face centroids | spatial continuity of an interface |
+| `dry_shell` | semitransparent dry-bank boundary shell | compact dry-bank footprint |
+| `dry_cage` | edge-only tetrahedral cage of dry banks | dry-bank scaffold / tetrahedral support |
+| `dry_interface_faces`, `dry_blocked_faces`, `dry_depth_map` | dry-side boundary faces | dry/wet boundary, blocked faces, face-depth |
 | `scaffold` | dry-core spine | dry context |
-| `affinity_spheres` | interaction-typed spheres | local chemistry |
+| `affinity_spheres`, `show_dfnd_pharmacophore` | interaction-typed spheres/sites | local chemistry |
+| `show_dfnd_convexity`, `show_dfnd_spikes`, `show_dfnd_peak_patches`, `show_dfnd_ridge_lines` | convexity heatmap, arrows, patches, ridge links | convex protrusions and exposed ridges |
+| `mouth_rings`, `bottleneck_rings`, `mouth_stubs` | explicit aperture/bottleneck markers | mouth/gate inspection |
 | `tetrahedra` | empty tetrahedra of the component | substrate / debug |
-| `cloud` | Gaussian blob over resident spheres | volume / fallback |
-| `residence_spheres`, `alpha_spheres` | discrete spheres | skeleton / debug |
-| `probe_centers` | spheres at probe centers | skeleton / debug |
+| `residence_spheres`, `alpha_spheres`, `probe_centers` | discrete spheres | skeleton / debug |
+| `semantic_faces`, `permeable_faces`, `impermeable_faces`, `mouth_faces`, `coast_faces` | selected DFND faces by meaning | face-level audit |
 | `surface` | atom-driven lining surface | lining |
-| `coast_faces` | wet↔dry boundary faces | adjacency / debug |
 | `graph` | nodes + edges of the flow network | topology / debug |
 
 Family-specific rendering is therefore implemented for static single-frame views.
 The remaining gap is dynamic visualization across frames, where colours and
 layers should be keyed by track identity rather than local component ids.
 
-### 3.2 Viewer primitives already available
+### 3.2 Recommended usage by question
+
+| User question | Start with | Add when needed | Avoid as first read |
+|---|---|---|---|
+| What wet components exist? | `representation='auto'` | `show_dfnd_legend`, `show_dfnd_labels` | low-level `tetrahedra` unless debugging |
+| Where is this pocket or void? | `envelope` | `wire_contour`, `show_dfnd_pocket_cutaway`, `pocket_depth_map` | `residence_spheres` for presentation |
+| Where are the mouths? | `envelope` | `mouth_rings`, `mouth_faces`, `mouth_stubs` | raw graph-only view |
+| How wide is the channel? | `pipe` | `rings`, `channel_profile`, `bottleneck_rings`, `clearance_map` | `channel_blob` if bottleneck location matters |
+| What is the channel lumen? | `channel_lumen` | `channel_wire_blob`, `channel_ribbon` | opaque solid blobs when lining atoms must remain visible |
+| Is this an interface? | `contact_sheet` | `interface_faces`, `interface_links`, `interface_ribbon`, `show_dfnd_interface_cutaway` | single-colour `surface` only |
+| Which faces are permeable or blocked? | `semantic_faces` | `permeable_faces`, `impermeable_faces`, `dry_blocked_faces` | hiding faces without a DFND semantic criterion |
+| What does the dry bank look like? | `dry_shell` | `dry_cage`, `scaffold`, `dry_depth_map`, `dry_interface_faces` | wet-style blobs |
+| Is there a groove-like open feature? | `groove_ribbon` | `groove_floor`, `groove_walls`, `groove_width_profile`, `groove_depth_profile` | treating it as a validated biological groove without further analysis |
+| Where are protrusions/ridges? | `show_dfnd_convexity` | `show_dfnd_spikes`, `show_dfnd_peak_patches`, `show_dfnd_ridge_lines` | calling ridges mechanistic hotspots without chemistry/context |
+| Why did a result look surprising? | `tetrahedra`, `graph` | `semantic_faces`, `dry_cage`, `residence_spheres`, `alpha_spheres` | polished envelope-only views |
+
+### 3.3 Viewer primitives already available
 
 `molsysviewer.shapes` already exposes more than the renderer uses. Confirmed:
 
@@ -109,7 +143,7 @@ Per-vertex / per-element **scalar coloring** (`color_by`/`color_map`) *is* broad
 available, so heatmap-style coloring of tubes, links, and displacements is in
 reach even though a molecular-surface curvature projection is not.
 
-### 3.3 Component data already available
+### 3.4 Component data already available
 
 Each `Component` (`topomt/dfnd/components.py`) already carries the fields a richer
 rendering needs:
@@ -184,11 +218,12 @@ sensible default plus on-demand secondaries.
 
 | Family | Primary representation | Secondary / on-demand | Rationale |
 |---|---|---|---|
-| **void** (0 mouths, buried) | closed translucent **blob** (`add_pocket_blob`) **+ opacity carving** — fade (α≈0.1) the molecular representation *outside* the component, exposing the cavity natively (*roadmap §1.4*) | clip plane (when available); wireframe isosurface (*roadmap §1.2*) | a buried closed volume is invisible under cartoon/spacefill; carving exposes it without manual camera work |
-| **pocket** (1 mouth) | **blob** + **mouth cap** (triangulated portal face cluster, translucent) + gate ring at `R_gate` (*roadmap §1.1*) | bicolor lining wall (warm inner / neutral outer, *roadmap §1.1*); affinity spheres (*roadmap §1.3*); depth→color | the mouth is what distinguishes a pocket from a void; the cap shows exactly where a ligand enters |
-| **channel** (≥2 mouths) | **`add_channel_tube`** along the centerline, radius = local `R_gate`/free radius, **+ bright bottleneck ring** at the narrowest gate (*roadmap §2.1*) | **HOLE stacked rings** color-coded by clearance (*roadmap §2.2*); flow streamlines (*roadmap §2.3*); lumen blob | path/length/bottleneck, which an amorphous blob hides; rings keep the lining visible for ion channels |
-| **interface** (multi-body lining) | family blob/tube **+ per-body contact sheet** split by body from `lining_body_split` — bicolor for two banks, one color per body for 3+-body junctions (*roadmap §3.1*) | electrostatics / hydrophobicity | the point is *which bodies* line it and their shape complementarity |
-| **dry_bank** (context) | slate, low-opacity surface or hidden | **hydrophobic scaffold** cylinders through packed-core centroids (*roadmap §3.2*) | usually scaffold/context, but the scaffold view exposes the mechanical "spine" |
+| **void** (0 mouths, buried) | closed translucent **blob** (`envelope`) **+ opacity carving/cutaway** | `wire_contour`, `pocket_depth_map`, `shape_ellipsoids` | a buried closed volume is invisible under cartoon/spacefill; carving/cutaway exposes it without changing the DFND model |
+| **pocket** (1 mouth) | **blob** + **mouth cap** + gate ring (`envelope`) | `mouth_rings`, `mouth_faces`, `affinity_spheres`, `pocket_depth_map`, `show_dfnd_pocket_cutaway` | the mouth is what distinguishes a pocket from a void; the cap/ring shows exactly where a ligand enters |
+| **channel** (≥2 mouths) | **`pipe`** / `channel_tube` with bottleneck cue | `rings`, `channel_profile`, `channel_lumen`, `channel_ribbon`, `channel_blob`, `channel_wire_blob` | path/length/bottleneck, which an amorphous blob hides; rings keep the lining visible for ion channels |
+| **interface** (multi-body lining) | `contact_sheet` / `interface_lining_surface` | `interface_faces`, `interface_links`, `interface_ribbon`, `show_dfnd_interface_cutaway` | the point is *which bodies* line it and their shape complementarity |
+| **groove-like open feature** | `groove_ribbon` | `groove_floor`, `groove_walls`, `groove_width_profile`, `groove_depth_profile` | these are diagnostic views; biological groove naming requires the taxonomy/occlusion criteria |
+| **dry_bank** (context) | `dry_shell` or hidden | `dry_cage`, `scaffold`, `dry_interface_faces`, `dry_blocked_faces`, `dry_depth_map` | dry is barrier/context, not an accessible wet volume; do not style it like a pocket |
 | **non-resident** (`degenerate_subprobe`, `surface_concavity`, `nonresident_passage`) and **`percolating`** | **diagnostic style**: hidden by default; desaturated/wireframe when shown | spheres for inspection | usually artifacts/pathologies; visible only on demand and visually demoted |
 
 Notes:
@@ -216,14 +251,13 @@ Notes:
 The families above describe *concave* topography (cavities). The surface also has
 *convex* features — ridges, protrusions, knobs — and an inaccessible packed core.
 Both have synthetic fixtures already (`tetrahedron_spike*`, the two-block
-interfaces) and deserve a representation (*roadmap §3.2, §3.3*).
+interfaces) and deserve a representation (*see §3.3 and §3.4*).
 
 - **Convexity heatmap** — project a curvature scalar onto the molecular surface:
   valleys (concave pockets) cold, ridges (convex protrusions/loops) hot. A clean,
-  non-cluttered surface summary that needs no extra mesh. **Requires a per-vertex
-  surface-coloring primitive not yet confirmed in the viewer** (see §3.2); the
-  scalar coloring machinery (`color_by`) exists but the curvature-projection slot
-  does not.
+  non-cluttered surface summary that needs no extra mesh. The scalar-colouring
+  machinery is available through `whole.set_color_by_values` and is used by
+  `show_dfnd_convexity` (see §3.3).
 - **Hydrophobic scaffold** — the dry bank rendered as thick cylinders connecting
   the centroids of packed hydrophobic residues, i.e. the folding "spine". Maps to
   `add_links` styled as cylinders; data comes from the dry network
@@ -384,9 +418,11 @@ as a substitute for a physical or topological explanation.
 
 ## 12. Representation mode names
 
-A concrete naming for the extended `representation` parameter, reconciling the
-roadmap's modes (*roadmap §6*) with the per-family defaults of §6. Family defaults
-are applied when the caller passes nothing; the explicit names are overrides.
+A concrete naming for the extended `representation` parameter and companion
+public helpers, reconciling the roadmap's modes (*roadmap §6*) with the
+per-family defaults of §6. Family defaults are applied when the caller passes
+nothing; explicit representation names are overrides. Entries beginning with
+`show_*` are helper functions, not values for `representation=`.
 
 | Name | Family fit | Primitive |
 |---|---|---|
@@ -396,8 +432,18 @@ are applied when the caller passes nothing; the explicit names are overrides.
 | `pipe` | channel | `add_channel_tube` + bottleneck ring |
 | `rings` | channel | HOLE stacked-ring profile |
 | `contact_sheet` | interface | per-body body-split surface (bicolor / N-body) |
+| `dry_shell` | dry_bank | dry boundary shell |
+| `dry_cage` | dry_bank | edge-only tetrahedral cage |
 | `scaffold` | dry_bank | hydrophobic-core cylinders |
-| `heatmap` | surface/convexity | curvature projection (needs viewer support) |
+| `groove_ribbon` | groove-like open feature | flattened path ribbon |
+| `groove_floor` | groove-like open feature | permeable floor faces |
+| `groove_walls` | groove-like open feature | lining surface |
+| `groove_width_profile` | groove-like open feature | width rings |
+| `groove_depth_profile` | groove-like open feature | depth-coloured envelope |
+| `show_dfnd_convexity` | surface/convexity | scalar surface colouring |
+| `show_dfnd_spikes` | surface/convexity | outward protrusion arrows |
+| `show_dfnd_peak_patches` | surface/convexity | translucent peak patches |
+| `show_dfnd_ridge_lines` | surface/convexity | diagnostic ridge links |
 
 These coexist with the existing debug modes (`tetrahedra`, `cloud`, `graph`, …).
 
@@ -414,9 +460,10 @@ The static single-frame vocabulary is implemented. Remaining gaps are narrower:
 ## 14. Current implementation status
 
 The original static phasing has landed: per-family defaults, `envelope`, `pipe`,
-`contact_sheet`, `rings`, `affinity_spheres`, labels/legend, void carving,
-`scaffold`, convexity, pharmacophore rendering, and top-N visibility are
-implemented. The implementation-level status is maintained in
+`contact_sheet`, `rings`, `affinity_spheres`, labels/legend, void carving and
+cutaway sections, `scaffold`, `dry_shell`, `dry_cage`, groove diagnostics,
+convexity/peak/ridge diagnostics, pharmacophore rendering, and top-N visibility
+are implemented. The implementation-level status is maintained in
 [component_visualization_implementation.md](component_visualization_implementation.md).
 
 ## 15. Cross-references

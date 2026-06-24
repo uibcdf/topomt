@@ -294,7 +294,12 @@ remaining visualization work is dynamic and depends on trajectory-level data:
 | 6 | convexity heatmap | `show_dfnd_convexity` | ✅ done (`whole.set_color_by_values`, no new primitive) |
 | 6 | pharmacophore map | `show_dfnd_pharmacophore` | ✅ done (`physchem` + `add_interaction_sites`) |
 | 6 | wireframe isosurface | `wire_contour` | ✅ done (`add_pocket_blob(wireframe=True)`) |
-| 6 | dynamic topology | — | ⛔ blocked on trajectory driver + dynamic UI |
+| 7 | interface diagnostics | `interface_faces`, `interface_links`, `interface_ribbon` | ✅ done |
+| 7 | explicit mouths/bottlenecks | `mouth_rings`, `bottleneck_rings`, `mouth_stubs` | ✅ done |
+| 7 | dry-bank views | `dry_shell`, `dry_cage`, `dry_interface_faces`, `dry_blocked_faces`, `dry_depth_map` | ✅ done |
+| 7 | groove diagnostics | `groove_ribbon`, `groove_floor`, `groove_walls`, `groove_width_profile`, `groove_depth_profile` | ✅ done |
+| 7 | convex protrusion diagnostics | `show_dfnd_spikes`, `show_dfnd_peak_patches`, `show_dfnd_ridge_lines` | ✅ done |
+| 8 | dynamic topology | — | ⛔ blocked on trajectory driver + dynamic UI |
 
 Upstream primitives (molsysviewer): `add_rings`, `focus_with_fade`,
 `scene.set_legend`, scalar surface colouring (`set_color_by_values`),
