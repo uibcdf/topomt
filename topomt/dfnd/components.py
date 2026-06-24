@@ -234,6 +234,26 @@ class WetComponent(Component):
             'split_radii': split,
         }
 
+    @property
+    def accessible_atom_indices(self) -> list[int]:
+        """The atoms a probe -- hence a **ligand** -- in this component can contact:
+        the full interaction surface, not just the residence lining.
+
+        This is the answer to "which atoms can a ligand sitting in this pocket / void
+        / channel interact with?". It is the union of:
+
+        - ``atom_indices`` -- the atoms lining the component's own (residable) space;
+        - ``beach_pocket['atom_indices']`` -- the atoms the probe can additionally
+          **'kiss'** in the dry coast tets by crossing a permeable (``beach``) face
+          (the past-beach contact, see _attach_beach_pockets and
+          taxonomy_architecture_decision.md S6.2). The residence-only atom set would
+          miss these dry-coast vertices (e.g. the tet apex) the probe still touches.
+
+        Global atom indices (the molecular-system space), sorted and de-duplicated.
+        """
+        beach = (self.beach_pocket or {}).get('atom_indices', [])
+        return sorted(set(self.atom_indices) | set(beach))
+
     def __repr__(self) -> str:
         tag = f' {self.interface_family}' if self.is_interface else ''
         return (

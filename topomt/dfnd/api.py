@@ -294,6 +294,11 @@ def dfnd_to_topography(
                     feature.volume_solvent_accessible = puw.quantity(
                         accessible, 'nm**3'
                     )
+                # The probe-accessible atoms a ligand here can interact with: the
+                # component lining + the past-beach atoms 'kissed' in the dry coast.
+                feature.accessible_atom_indices = list(
+                    getattr(component, 'accessible_atom_indices', [])
+                )
             topography.add_feature(feature)
             if family_key not in _FAMILIES_WITH_MOUTHS:
                 continue

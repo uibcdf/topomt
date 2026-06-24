@@ -92,6 +92,8 @@ def test_bridge_carries_catalog_layer_onto_features():
             'dry_tetrahedron_ids', 'atom_indices', 'volume_wetted_estimate'
         }
         assert feature.volume_solvent_accessible is not None
+        # the probe-accessible atoms a ligand here can interact with (lining + beach)
+        assert set(feature.accessible_atom_indices) >= set(feature.atom_indices)
     names = {f.classification['name'] for f in features}
     assert names <= {'pocket', 'open_concavity', 'void', 'channel'}
     assert 'pocket' in names  # the dumbbell's occluded lobe-pocket at probe 1.0

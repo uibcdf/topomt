@@ -112,6 +112,13 @@ def test_beach_pockets_capture_past_beach_contact():
     # accessible volume brackets residence from above
     assert slot.volume_solvent_accessible >= float(slot.volume_solvent_estimate or 0.0)
 
+    # the atoms a ligand sitting here can interact with = residence lining + the
+    # past-beach atoms kissed in the dry coast through permeable faces
+    accessible = set(slot.accessible_atom_indices)
+    assert accessible >= set(slot.atom_indices)  # superset of the residence lining
+    assert accessible >= set(pocket['atom_indices'])  # includes the past-beach atoms
+    assert accessible - set(slot.atom_indices)  # adds kissed dry-coast vertices
+
 
 def test_every_wet_component_has_boundary_counts():
     # the helper runs for all wet components and yields non-negative integer counts

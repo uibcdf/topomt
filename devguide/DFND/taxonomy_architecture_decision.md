@@ -211,7 +211,21 @@ additively, per wet component:
 
 The `shore` wall **correctly excludes** beaches (the wall is the non-permeable side);
 residence volume and the shore wall are unchanged — both correct for what they are.
-Carried onto the public feature by the bridge (`feature.beach_pocket`,
+
+**The primary use case — the ligand interaction surface.** A central user question is:
+*"which atoms can a ligand sitting in this pocket / void / channel interact with?"*
+The honest answer is **not** the residence-only lining — it is the lining **plus** the
+atoms the probe can "kiss" in the dry coast tets by crossing a `beach` face. So each
+wet component (and its public feature) exposes:
+
+> **`accessible_atom_indices`** = `atom_indices` (the component's own lining) **∪**
+> `beach_pocket['atom_indices']` (the past-beach kissed atoms — the dry-coast vertices,
+> e.g. the tet apex, the residence-only set misses).
+
+This is the atom set TopoMT **reports as probe-accessible** for interaction analysis
+(pharmacophore, contacts, druggability). The residence lining alone would under-report
+the interaction surface. Carried onto the public feature by the bridge
+(`feature.accessible_atom_indices`, `feature.beach_pocket`,
 `feature.volume_solvent_accessible`).
 
 `throat` (internal, permeable, within one cavity — the merge-tree narrowings) and
