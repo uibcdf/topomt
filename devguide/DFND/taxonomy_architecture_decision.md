@@ -1,16 +1,16 @@
 # DFND Taxonomy & Kernel/Catalog Architecture — Decision Record
 
-Status: **decided (design)**, implementation pending. Supersedes the implicit
+Status: **decided (design)**; building-block measurements implemented, the
+architectural re-grounding pending (§11). Supersedes the implicit
 "families as kernel types" model. Operational counterparts:
 [`feature_definitions.md`](feature_definitions.md),
 [`metrics_contract.md`](metrics_contract.md),
 [`component_motifs.md`](component_motifs.md),
-[`known_limitations.md`](known_limitations.md).
+[`known_limitations.md`](known_limitations.md) — these still describe the old
+model and are reconciliation debt (§12).
 
-This records a design conversation that re-grounded how DFND names and
-characterizes wet components. The driving principle: **be consistent, clear and
-honest ourselves** rather than inherit the pocket community's loaded, inconsistent
-vocabulary.
+Driving principle: **be consistent, clear and honest ourselves** rather than
+inherit the pocket community's loaded, inconsistent vocabulary.
 
 ## 1. The core rule
 
@@ -20,32 +20,32 @@ Everything DFND produces sorts into exactly one of three kinds:
    trajectory frames. It is the **atom support** (`support_key`), already
    family-blind (`component_key = (result_key, side, support_key)`; lineage matches
    by support/Jaccard). Family is **not** part of identity.
-2. **Observable (grounded measurement)** — what the kernel measures and stores.
-   Per-face and per-tet raw data only (§3). Continuous or count-valued; never a
+2. **Observable (grounded measurement)** — what the kernel measures and stores:
+   per-face and per-tet raw data only (§4). Continuous or count-valued; never a
    thresholded name.
 3. **Name (catalog predicate)** — every human/community label is a **predicate or
-   threshold over observables**, computed in the public catalog (layer 0), never
-   stored in the kernel.
+   threshold over observables**, computed in the public catalog (layer 0, §6),
+   never stored in the kernel.
 
-The test for "where does X belong?": *Is X a name put on a threshold over a
-measurement?* → catalog. *Is X a measurement?* → kernel observable. *Does X define
-the component's role in the flow graph (mouths + residence)?* → it is the primary
-classification, still **derived** from observables, and it lives in the catalog.
+Test for "where does X belong?": *a name put on a threshold over a measurement?*
+→ catalog. *a measurement?* → kernel observable. *the component's role in the flow
+graph (mouths + residence)?* → the primary classification, still **derived** from
+observables, in the catalog.
 
-Consequence: **`family` (void/pocket/channel), `percolating`/`exposed`,
-`interface`, `open`/`occluded`, `shallow`/`buried` all leave the kernel.** The
-kernel has **no classification logic and no stored labels** — only data + helpers.
+Consequence: **`family`, `percolating`/`exposed`, `interface`, `open`/`occluded`,
+`shallow`/`buried`, `branched`, residence all leave the kernel.** The kernel has
+**no classification logic and no stored labels** — only data + helpers.
 
 ## 2. Why (robustness)
 
-Identity is already atom-based, so a component that seals (1 mouth → 0 mouths in a
+Identity is atom-based, so a component that seals (1 mouth → 0 mouths in a
 trajectory) is *the same track*; only its derived classification changes. The old
 model bucketed by `family` and instantiated `Pocket`/`Void`/`Channel` classes, so
-the same physical cavity appeared to *die as a pocket and be born as a void* —
-contradicting the continuous lineage track. Separating **stable identity (atoms)**
-from **derived classification (per query)** turns label flicker near a threshold
-from tracking-corruption into an **observable signal** (gate breathing, cryptic
-pockets). See §9 gap-list item on marginality.
+the same cavity appeared to *die as a pocket and be born as a void* — contradicting
+the continuous lineage track. Separating **stable identity (atoms)** from **derived
+classification (per query)** turns label flicker near a threshold from
+tracking-corruption into an **observable signal** (gate breathing, cryptic
+pockets — §8).
 
 ## 3. Kernel contract — grounded data only
 
@@ -56,129 +56,204 @@ The kernel emits, per **wet component**:
   component), R_gate, atoms }`.
 - **Per tetrahedron / node:** `R_residence`, residence margin (`R_residence −
   probe`), gate margins, etc.
-- **Per-feature geometry/metrics** already defined elsewhere: topological volume,
-  precise solvent volume, hierarchy (merge-tree throats/chambers), centerline, …
+- **Per-feature geometry/metrics** defined elsewhere: topological & precise solvent
+  volume, merge-tree hierarchy, centerline/skeleton, …
 
 No `family`, no signature label (`YK` was considered and **rejected** — it is just
 `f(resident, n_mouths)`, derivable, so storing it is denormalization), no
-`percolating`/`interface` flags, no `classify`.
-
-Even the **topological signature `(n_mouths, resident)` is derived**, not stored:
-`n_mouths` is a connected-cluster count over permeable boundary faces.
+`percolating`/`interface` flags, no `classify`. Even the topological signature
+`(n_mouths, resident)` is **derived** (a connected-cluster count over faces).
 
 ## 4. Derived helpers (computed from §3, not stored)
 
 - `n_mouths` = connected clusters of permeable boundary faces.
-- `n_connected_walls` = connected clusters of **all** non-permeable boundary faces
-  (one "wall" is a connected physical structure; **cluster first, then
-  characterize** — do not pre-split by other-side type). `n_connected_walls == 0`
-  ⟺ percolating/exposed.
-- **Per-wall characterization** (after clustering): its composition (how much
-  coast/exterior/septum), which dry bodies it touches.
+- `n_connected_walls` = connected clusters of **all** non-permeable boundary faces.
+  **Cluster first, then characterize** — a wall is one connected physical
+  structure; do not pre-split by other-side type. `n_connected_walls == 0` ⟺
+  percolating/exposed.
+- **Per-wall characterization** (after clustering): composition (coast / exterior /
+  constriction), which dry bodies it touches.
 - `n_dry_contacts` = distinct dry components across the walls (= `len(lining_bodies)`).
-- `n_septa` = walls whose other side is another **wet** component (§6).
-- **Morphometrics:** `occlusion = interior_radius / mouth_radius`,
-  `occlusion_gap`/`enclosable`, `buriedness`, per-mouth occlusion (§ channels),
+- **Constrictions** = walls whose other side is another **wet** component (§7) — a
+  closed throat; its `R_gate` is a merge radius (§8).
+- **Morphometrics:** `occlusion = interior_radius / mouth_radius` (enclosability,
+  any mouth count), `occlusion_gap`/`enclosable`, **per-mouth occlusion**
+  (`interior / R_gate(mouth)`, asymmetric entrance constriction), `buriedness`,
   `deepest_chamber` (supporting, lattice-sensitive).
+- **Characteristic radii** (§8): `residence_death_radius`, `seal_radius`, merge &
+  split radii — the probe values at which the classification changes.
 
 ## 5. The catalog (public layer 0)
 
-`classify()` is the **single source of truth** for naming — one deterministic
-partition over the derived signature + morphometrics:
+`classify(component, probe)` is the **single source of truth** for naming —
+**probe-parameterized** (§8) — and returns **`{name, confidence, marginal}`** (§6
+is universal: every name is a threshold, so every name carries a margin).
+
+**Primary partition** over the derived signature + morphometrics:
 
 ```
-not resident         → degenerate_subprobe (0) / surface_concavity (1) / nonresident_passage (≥2)
-n_connected_walls==0 → percolating
-n_mouths == 0        → void
-n_mouths == 1        → pocket if occlusion>1 else groove
-n_mouths == 2        → channel
-n_mouths ≥ 3         → junction (info the old "channel/branched_channel" collapsed)
+n_connected_walls == 0  → percolating
+n_mouths == 0           → void
+n_mouths == 1           → pocket if occlusion>1 else groove
+n_mouths ≥ 2            → channel
 ```
 
-Orthogonal **modifiers** (tags, not a partition): `interface` (`n_dry_contacts ≥
-2`), `buried` (`buriedness ≥ τ`), per-mouth constriction, marginal (§9). Community
-nouns are **derived views**; thresholds (e.g. `occlusion = 1`, `τ_depth`) are a
-**tunable layer-0 policy**, not kernel-fixed.
+**Residence is a MODIFIER, not a separate axis.** A non-resident component is the
+"residence-lost shadow" of the resident one (same signature, residence lost at a
+larger probe). So the non-resident side is **compositional** `(n_mouths × ¬resident)`,
+not separate negation-defined families:
 
-User queries are unchanged in spirit — "how many pockets?" = `count(classify(c) ==
-'pocket')`; the family buckets `result['wet']['pockets']` become **derived views**.
+- `(0 × ¬res)` = `degenerate_subprobe` (probe-relative sub-probe cluster, diagnostic).
+- `(1 × ¬res)` = a non-resident dent/contact (was `surface_concavity`, the L3.1
+  catch-all — now defined by its signature, not by negation).
+- `(≥2 × ¬res)` = an **empirically non-occurring cell** (we proved a fully
+  non-resident multi-mouth passage is geometrically infeasible). **`nonresident_passage`
+  is retired as a curated family** — `classify` stays total by composition but no
+  vacuous family is maintained.
 
-`feature_type` on the public feature objects **is** this classification and **is**
-the stable contract the viewer consumes (§8).
+**Orthogonal modifiers** (tags, not a partition), all derived:
+
+- `interface` = `n_dry_contacts ≥ 2`.
+- `buried` = `buriedness ≥ τ`.
+- `branched` = the **centerline skeleton has branch points** — subsumes the old
+  `branched_channel` (now "channel + `branched`"). Distinct from mouth count: a
+  2-mouth tube can be branched (dead-end side branch); every ≥3-mouth cavity is
+  branched. `junction`/`hub` = optional alias for `n_mouths ≥ 3` (a label over the
+  exact-`n_mouths` measurement, not a separate type).
+- per-mouth occlusion / marginal flags.
+
+Community nouns are **derived views**; thresholds (`occlusion = 1`, `τ`) are a
+**tunable layer-0 policy**, not kernel-fixed. "how many pockets?" =
+`count(classify(c, probe).name == 'pocket')`; the family buckets become derived
+views. `feature_type` on public feature objects **is** this classification and
+**is** the stable contract the viewer consumes (§10).
 
 ## 6. Face & constriction taxonomy
 
-A constriction/boundary face is `(other side) × (does the probe pass?)`:
+A boundary face is `(other side) × (does the probe pass?)`:
 
-| | probe passes (permeable) | probe blocked (non-permeable) |
+| Other side | passes (permeable) | blocked (non-permeable) |
 | --- | --- | --- |
-| other side = OCEAN | **mouth** (opening to exterior) | **exterior wall** |
-| other side = interior region | **throat / angostura** (passable narrowing inside one cavity) | **septum** (narrowing so tight it splits two cavities) |
+| OCEAN | **mouth** (opening to exterior) | **exterior wall** |
+| another cavity (wet) | *(impossible — would merge them)* | **constriction** (closed throat) |
+| solid (dry) | *(impossible — blocked)* | **coast** (lining) |
 
-- **septum ≠ mouth.** A septum is a **throat in its closed state** — the same
-  physical constriction, seen when the probe no longer fits, so it separates two
-  cavities. Its `R_gate` is **the probe radius at which the two cavities merge**.
-- Vertical pairs are the same face at different probe: a mouth seals into an
-  exterior wall; a throat closes into a septum. This unifies the boundary taxonomy
-  with the merge-tree throats: throats *inside* a cavity and septa *between*
-  cavities are one feature family across the probe threshold.
+`throat` (internal, permeable, within one cavity — the merge-tree narrowings) and
+`constriction` (boundary, non-permeable, between two cavities) are the **same
+feature family, different state**; a throat *closes* into a constriction as the
+probe grows. A constriction's `R_gate` is **the probe radius at which the two
+cavities merge** (§8).
 
-## 7. Dry side — dual scheme, reserved
+**"septum" is reserved for the SOLID side** — a dry divider **bank** (anatomically a
+septum is a solid dividing wall). It is *not* the empty-space wet↔wet pinch (that is
+a constriction). The two are mutually exclusive at the face level: a solid divider
+gives **coast** on both sides + a septum bank; an empty pinch gives a **constriction**
+face with no solid between.
 
-Same rule applies symmetrically (identity = atoms; measurements; catalog
-predicates; no stored dry-family — `DRY_BANK` → implicit `side=dry`). But the dry
-**content is dual**, not a copy: it is walls/dividers/cores, not cavities.
+## 7. Probe-relativity (a first-class property)
 
-- Dry signature (dual): `n_wet_contacts`, `exterior_exposure` (surface bank vs
-  buried core), `n_coast_clusters`, `face_depth`.
-- Dry catalog (its own names): `surface_bank`, `buried_core`, `septum`/divider.
-- **`interface` is a bilateral relation object** between a wet component and its
+Classification is **probe-parameterized**: a component's name is
+`classify(c, probe)`. Because `R_gate`/`R_residence` are **probe-independent**, the
+**entire classification trajectory across probe is determined by one query** — no
+sweep needed; the per-face/per-tet values encode the whole probe axis. The trajectory
+is a step function with transitions at the component's **characteristic radii**:
+
+```
+residence_death_radius = max R_residence       → above: loses residence (degenerate)
+seal_radius            = max mouth R_gate       → above: loses mouths (becomes void)
+merge radii            = constriction R_gates   → merges with neighbours
+split radii            = internal throat R_gates → splits internally
+```
+
+A complete characterization is a **classification spectrum over probe** ("groove for
+probe < a, pocket on [a,b), void above b"), free from the grounded data. This is the
+formal home for enclosability (pocket→void), constriction = merge radius (§6), the
+"redundant probe sweep", and gate-breathing/cryptic pockets (the characteristic radii
+**changing across frames**). **Margin (§6 confidence) = distance to the nearest
+characteristic radius**; a marginal classification ⟺ the probe sits near a transition.
+Probe and time are **sibling axes**, sharing the atom-based lineage matcher.
+
+## 8. Dry side — dual scheme, reserved
+
+The rule applies symmetrically (identity = atoms; measurements; catalog predicates;
+no stored dry-family — `DRY_BANK` → implicit `side=dry`). The dry **content is dual**,
+not a copy — walls/dividers/cores, not cavities:
+
+- Dual signature: `n_wet_contacts`, `exterior_exposure` (surface bank vs buried
+  core), `n_coast_clusters`, `face_depth`.
+- Dry catalog names: `surface_bank`, `buried_core`, **`septum`** (a solid divider
+  bank lining exactly 2 wet cavities — §6).
+- **`interface`** is a bilateral relation object between a wet component and its
   lining banks, characterized from both sides.
 
-Dry is secondary to pocket characterization and **less mature**; full spec is
-**deferred** but the symmetric slot is **reserved** so it cannot be bolted on
-incoherently.
+Dry is secondary and less mature; full spec is **deferred**, the symmetric slot
+**reserved** so it cannot be bolted on incoherently.
 
-## 8. Migration & compatibility
+## 9. Migration & compatibility
 
 - **No two sources of truth, ever.** Migrate by **inversion**: extract `classify()`
-  as the single definition and make any legacy `family`/`feature_type` **computed
-  from it** (an atomic switch), not assigned in parallel. The inversion also
-  **proves the grounded signature is complete** (if `classify()` cannot reproduce a
-  family, that family encoded something missing from the observables).
+  as the single definition; make any legacy `family`/`feature_type` **computed from
+  it** (atomic switch), not assigned in parallel. The inversion also **proves the
+  grounded signature is complete** (if `classify()` cannot reproduce a family, that
+  family encoded something missing from the observables).
 - **Compatibility is a layer-0 responsibility, not the kernel's.** Verified: the
-  viewer (`molsysviewer_topomt`) already consumes layer-0 `feature_type` from
-  feature objects (`payloads.py`, `panels/pockets.py`), **not** kernel `family`;
-  its only kernel coupling is raw geometry (`dfnd.selectors`, `dfnd.centerline`),
-  orthogonal to naming. So the kernel refactor is **invisible** to the viewer.
+  viewer (`molsysviewer_topomt`) already consumes layer-0 `feature_type` from feature
+  objects (`payloads.py`, `panels/pockets.py`), **not** kernel `family`; its only
+  kernel coupling is raw geometry (`dfnd.selectors`, `dfnd.centerline`), orthogonal
+  to naming. So the kernel refactor is **invisible** to the viewer.
 - Morphology evolves in layer 0: **additive first** (`feature_type='pocket'` kept,
-  `morphology` added as an attribute, so no silent break of the "pocket" bucket),
-  then **coordinated re-typing** (`feature_type='groove'`, narrow "pocket" to
-  occluded) at the viewer's pace.
-- The **unification of `Pocket`/`Void`/`Channel` into one parameterized feature
-  class** (so a sealing component never changes object class) is the layer-0
-  coordinated end-step with the collaborator.
+  `morphology` added as attribute → no silent break of the "pocket" bucket), then
+  **coordinated re-typing** (`feature_type='groove'`, narrow "pocket" to occluded) at
+  the viewer's pace. Unifying `Pocket`/`Void`/`Channel` into one parameterized class
+  (so a sealing component never changes object class) is the coordinated end-step.
 
-## 9. The seven gaps (resolution / debt)
+## 10. Implementation status
 
-| # | Gap | Resolution / status |
-| --- | --- | --- |
-| 1 | **Real-system validation** | The empirical gate. Untested on real proteins; all evidence is synthetic. Protocol: 3–5 PDBs with known sites; check detection (DCA≤4Å), spurious junk, morphology sanity, stability. **Deferred until §1–8 are locked, then it is the #1 action.** It is what turns "coherent" into "correct". |
-| 2 | **Marginality / confidence** | Emit per-component `mouth_margin`/`residence_margin` (data exists as deltas); `classify()` returns name + `marginal` flag (within slack of a class-flipping boundary). Dual purpose: confidence **and** the dynamic breathing signal. `percolating` is the most fragile (binary) → flag marginal when one wall-face from flipping. |
-| 3 | **Aperture for channels (≥2 mouths)** | The global `occlusion = interior/max_mouth` already generalizes as **enclosability** for any mouth count. Add **per-mouth occlusion** (`interior/R_gate(mouth)`) for asymmetric entrance constriction; **beadedness = the merge-tree**, already applies to channels. No new measurement. |
-| 4 | **Dry side** | §7. Dual scheme reserved, full spec deferred. |
-| 5 | **Exterior walls vs coast** | Corrected: walls = connected clusters of **all** non-permeable faces (cluster first, characterize after); other-side type is a per-face/per-wall attribute, **not** a pre-split. Cluster counts are **derived helpers**, not stored observables. |
-| 6 | **Two sources of truth** | §8 inversion. |
-| 7 | **Compatibility / viewer** | §8 — articulated through layer 0; viewer already consumes `feature_type`. |
+**Done (committed this session) — validated building blocks, NOT final placement:**
 
-## 10. Open debts (honest)
+- merge-tree sub-chamber hierarchy (`_attach_capacity_motifs`) — resolves L1.3.
+- throat/chamber/bottleneck promoted to provisional (`output_status`).
+- morphometrics: `occlusion`/`enclosable`/`occlusion_gap`/`buriedness`/`deepest_chamber`.
 
-- **Real-system validation** (gap 1) — the dominant unknown; ~55–60% practical
-  confidence until measured.
-- **Elongation metric** — "groove" currently means "open dent" (`occlusion ≤ 1`);
-  a true elongated furrow needs an aspect-ratio measure DFND does not yet compute.
-  `elongated` is a future sub-label.
+Caveat: these live **kernel-side** (`components.py`) **alongside `family`**; under
+this decision they must be **re-homed/reframed as derived helpers** (§4) during the
+split. Done = validated measurement, not final location.
+
+**Pending — the architectural re-grounding:**
+
+- the kernel/catalog split; `classify()` single source; probe-parameterization.
+- the boundary-face partition + derived wall/constriction/`n_dry_contacts` helpers.
+- `family` removal (inversion); per-mouth occlusion; marginality + characteristic
+  radii in `classify`; non-resident compositionalization (retire `nonresident_passage`).
+- `septum` → `constriction` rename (+ dry `septum`); `branched` as modifier;
+  `output_status` reframed to track the catalog; dry-side dual scheme.
+- **real-system validation** (§13).
+
+## 11. Reconciliation debt
+
+The decision contradicts docs/code that still encode the old model. Reconcile by
+**reframing (not deleting)** — the old definitions survive as the derived
+catalog/classification layer:
+
+- `feature_definitions.md §5`: families become the **derived topological signature**
+  the catalog refines (`pocket` topological → `pocket`(occluded)/`groove`(open)).
+  Align the §5.2.1 morphology note (`pocket` = occluded).
+- `metrics_contract.md`: metrics are **kernel observables**; naming is catalog — add
+  the pointer.
+- `output_status.py`: it registers families as `kind='family'` and the guard couples
+  to kernel families. Reframe it to **track catalog outputs** (the `classify` names),
+  with the guard verifying `classify` is total / nothing unclassified.
+
+## 12. Open debts (honest)
+
+- **Real-system validation** — the dominant unknown; all evidence is synthetic. The
+  empirical gate (~55–60% practical confidence until measured). Protocol: 3–5 PDBs
+  with known sites — detection (DCA≤4Å), spurious junk, morphology sanity, stability.
+  **The #1 action once §1–9 are locked.**
+- **Elongation metric** — `groove` means "open dent" (`occlusion ≤ 1`); a true
+  elongated furrow needs an aspect-ratio measure DFND does not yet compute
+  (`elongated` = future sub-label).
 - **Hierarchy lattice-noise** — `deepest_chamber`/access descriptors are confounded
   by lattice artifacts on gridded synthetics; supporting descriptors, not standalone
   classifiers (component_motifs.md / Q25).
-- **Dry-side maturity** (gap 4).
+- **Dry-side maturity** (§8).
