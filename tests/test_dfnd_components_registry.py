@@ -3,17 +3,57 @@ import pytest
 from topomt.dfnd.components import Components, DryComponent, WetComponent
 
 
+# family is derived from the grounded signature (decision S5.2), so a test
+# component must supply the grounded inputs that classify_topology names `family`:
+# (n_mouths, n_resident_nodes, n_wall_faces).
+_FAMILY_GROUNDED = {
+    'void': (0, 1, 5),
+    'pocket': (1, 1, 5),
+    'channel': (2, 1, 5),
+    'percolating': (1, 1, 0),
+    'surface_concavity': (1, 0, 5),
+    'degenerate_subprobe': (0, 0, 5),
+}
+
+
 def _wet(component_id='WET-1', family='void', component_key=None):
-    return WetComponent(
+    n_mouths, n_resident, n_wall = _FAMILY_GROUNDED[family]
+    component = WetComponent(
         component_id=component_id,
         component_key=component_key,
-        family=family,
         node_indices=[1],
     )
+    component.external_link_ids = list(range(n_mouths))
+    component.n_mouths = n_mouths
+    component.resident_node_indices = list(range(n_resident))
+    component.has_residence = n_resident >= 1
+    component.n_wall_faces = n_wall
+    return component
 
 
 def _dry(component_id='DRY-1'):
     return DryComponent(component_id=component_id, node_indices=[2])
+
+
+def test_family_is_derived_from_the_grounded_signature_not_stored():
+    # family is no longer a stored kernel fact: it is re-derived on read from
+    # (n_mouths, n_resident_nodes, n_wall_faces) by classify_topology (decision S5.2)
+    from topomt.dfnd import families as fam
+
+    component = WetComponent(component_id='WET-1')
+    component.n_mouths = 1
+    component.external_link_ids = [0]
+    component.resident_node_indices = [0]
+    component.n_wall_faces = 5
+    assert component.family == fam.POCKET
+    # mutate the grounded inputs -> the name re-derives (there is no setter)
+    component.n_mouths = 2
+    component.external_link_ids = [0, 1]
+    assert component.family == fam.CHANNEL
+    # a dry bank keeps its structural side label; side is intrinsic to the subclass
+    dry = _dry()
+    assert dry.family == fam.DRY_BANK
+    assert WetComponent(component_id='WET-2').side == 'wet' and dry.side == 'dry'
 
 
 def test_add_rejects_duplicate_id_without_mutating_registry():

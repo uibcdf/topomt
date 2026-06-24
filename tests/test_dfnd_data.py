@@ -195,7 +195,7 @@ def test_tolerances_recorded_and_inherited_by_at_probe():
 def test_wet_component_initializes_motif_descriptors():
     from topomt.dfnd.components import WetComponent
 
-    component = WetComponent(component_id='WET-1', family='void')
+    component = WetComponent(component_id='WET-1')
 
     assert component.topological_depth == {}
     assert component.depth_regions == []

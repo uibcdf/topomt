@@ -21,20 +21,22 @@ from typing import Any
 # side is derived from family (single source of truth in families.py), exactly as
 # feature shape/dimensionality are derived from feature_type in _feature_constants.
 from . import families as fam
-from .classify import classify
+from .classify import classify, classify_topology
 from .identity import external_link_support_key, motif_key, support_key
 
-_SIDE_BY_FAMILY = fam.SIDE_BY_FAMILY
 _COMPONENT_PREFIX_BY_SIDE = {'wet': 'WET', 'dry': 'DRY'}
 
 
 class Component:
     """A connected component of the DFN graph (mirrors ``BaseFeature``)."""
 
+    #: the side of the DFN (``wet``/``dry``) is intrinsic to the subclass -- a more
+    #: fundamental axis than ``family`` (decision S8); each subclass sets it.
+    side: str | None = None
+
     def __init__(
         self,
         component_id=None,
-        family=None,
         node_indices=None,
         atom_indices=None,
         boundary_face_ids=None,
@@ -60,8 +62,8 @@ class Component:
             if tetrahedron_support is not None
             else []
         )
-        self.family = family
-        self.side = _SIDE_BY_FAMILY.get(family)  # derived from family
+        # ``family`` is no longer a stored kernel fact -- the subclasses expose it as
+        # a derived property over the grounded signature (decision S3/S5.2).
         # component facet (the graph object)
         self.node_indices = list(node_indices) if node_indices is not None else []
         self.boundary_face_ids = (
@@ -104,6 +106,19 @@ class Component:
 
 class WetComponent(Component):
     """A transit/concavity component (families void/pocket/channel/…)."""
+
+    side = 'wet'
+
+    @property
+    def family(self) -> str:
+        """Derived (not stored): the topological family from the grounded signature.
+        ``classify_topology`` is the single definition (decision S5.2); the kernel no
+        longer stores a family fact -- this is a convenience view, reproducing exactly
+        what the graph computed from ``(n_mouths, n_resident_nodes, n_wall_faces)``.
+        """
+        return classify_topology(
+            self.n_mouths, len(self.resident_node_indices), self.n_wall_faces
+        )
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -226,9 +241,17 @@ class WetComponent(Component):
 class DryComponent(Component):
     """A dry bank (the dry-network side of the decomposition)."""
 
+    side = 'dry'
+
+    @property
+    def family(self) -> str:
+        """Derived (not stored): a dry bank's structural label (decision S8). The
+        dry content is dual (convexity / core); ``DRY_BANK`` is the side label."""
+        return fam.DRY_BANK
+
     def __init__(self, **kwargs):
         kwargs.pop('family', None)
-        super().__init__(family=fam.DRY_BANK, **kwargs)
+        super().__init__(**kwargs)
         self.interface_ids: list[int] = []
         self.neighbor_component_ids: list[str] = []
         self.face_depth_min = None
@@ -573,7 +596,6 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
     for record in raw['wet_components']:
         component = WetComponent(
             component_id=f'WET-{record["id"]}',
-            family=record['family'],
             node_indices=record['tetrahedron_ids'],
             atom_indices=record['atom_indices'],
             center=record['center'],
