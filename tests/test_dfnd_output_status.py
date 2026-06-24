@@ -110,3 +110,23 @@ def test_panel_actually_exercises_canonical_and_experimental_motifs():
         pytest.skip('panel produced no canonical motif (needs a richer fixture)')
     if not (seen & ostat.experimental_motif_types()):
         pytest.skip('panel produced no experimental motif (needs a richer fixture)')
+
+
+# --- catalog: classify is total -------------------------------------------
+
+
+def test_catalog_classification_is_total():
+    """The kernel/catalog reframe of the family guard: every catalog
+    classification (``classify`` -> ``component.classification``) a component
+    receives must be registered -- nothing classified may be left unregistered."""
+    registered = ostat.catalog_classification_names()
+    observed: set[str] = set()
+    for system in _PANEL:
+        for component in _components_for(system).values():
+            name = (getattr(component, 'classification', None) or {}).get('name')
+            if name is not None:
+                observed.add(name)
+    assert observed, 'panel produced no catalog classifications'
+    assert observed <= registered, (
+        f'unregistered catalog classifications: {observed - registered}'
+    )

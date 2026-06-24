@@ -33,11 +33,16 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from . import families as fam
+from .classify import GROOVE
 
 VALID_STATUS = frozenset(
     {'canonical', 'provisional', 'experimental', 'diagnostic', 'deferred'}
 )
-VALID_KIND = frozenset({'family', 'feature', 'motif', 'metric'})
+# ``family`` = the topological classification the kernel records; ``classification``
+# = a morphological refinement name emitted by the catalog (classify) on top of it.
+VALID_KIND = frozenset(
+    {'family', 'feature', 'motif', 'metric', 'classification'}
+)
 
 
 @dataclass(frozen=True)
@@ -81,6 +86,16 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
     ),
     # --- dry side ---
     fam.DRY_BANK: OutputStatus('canonical', 'family', None, None),
+    # --- catalog morphological refinements (classify names on top of the family) ---
+    # ``groove`` is the open (occlusion<=1) refinement of a 1-mouth resident family;
+    # the occluded case keeps the name ``pocket``. Additive; not yet driving
+    # feature_type (the coordinated re-typing of phase 5).
+    GROOVE: OutputStatus(
+        'provisional',
+        'classification',
+        'real-system validation of the aperture (open/occluded) split',
+        'phase-3 / morphology',
+    ),
     # --- promoted public features ---
     'Mouth': OutputStatus('canonical', 'feature', None, None),
     # Q17 (atom/residue ownership) is decided: overlapping role-based membership,
@@ -149,6 +164,13 @@ def names_by_kind(kind: str) -> set[str]:
 def names_by_status(status: str) -> set[str]:
     """All registered output names of a given ``status``."""
     return {name for name, s in OUTPUT_STATUS.items() if s.status == status}
+
+
+def catalog_classification_names() -> set[str]:
+    """Every name the catalog classifier may emit -- topological families plus
+    morphological refinements. The guard checks that ``classify`` is total: nothing
+    a component is classified as may be left unregistered."""
+    return names_by_kind('family') | names_by_kind('classification')
 
 
 def experimental_motif_types() -> set[str]:
