@@ -160,6 +160,11 @@ class WetComponent(Component):
         # Catalog morphological classification {name, marginal}; additive, coexists
         # with ``family`` (see _attach_classification, classify.classify).
         self.classification: dict[str, Any] = {}
+        # The wetted dry pockets reached THROUGH beach (permeable wet-dry) faces --
+        # past-beach contact the residence-only model misses (see _attach_beach_pockets).
+        self.beach_pocket: dict[str, Any] = {}
+        # Solvent volume the probe can reach: residence + the wetted beach pockets.
+        self.volume_solvent_accessible: float | None = None
 
     @property
     def signature(self) -> dict[str, Any]:
@@ -648,6 +653,7 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
 
     _attach_interface_labels(components, result)
     _attach_coast_and_lining(components, result, network)
+    _attach_beach_pockets(components, result)
     _attach_wet_motifs(components, result)
     _attach_capacity_motifs(components, result)
     _attach_morphometrics(components, result)
@@ -731,6 +737,15 @@ def _attach_coast_and_lining(
                 'area': area,
                 'R_gate': face.get('R_gate'),
                 'permeability_state': face.get('permeability_state'),
+                # the wet-dry contact splits by permeability (coast/shore/beach
+                # decision): a non-permeable face is a ``shore`` (the real wall); a
+                # permeable one is a ``beach`` (the probe wets through it into the
+                # dry coast tet). ``coast`` stays the tetrahedron permeability class.
+                'kind': (
+                    'beach'
+                    if face.get('permeability_state') == 'permeable'
+                    else 'shore'
+                ),
             }
         )
 
@@ -755,6 +770,53 @@ def _attach_coast_and_lining(
             entry['tetrahedron_ids'] = sorted(entry['tetrahedron_ids'])
             entry['contact_face_ids'] = sorted(entry['contact_face_ids'])
     components.coast_faces = coast
+
+
+def _attach_beach_pockets(components: Components, result: dict[str, Any]) -> None:
+    """The wetted dry pockets a wet component reaches THROUGH its beach (permeable
+    wet-dry) faces -- the past-beach contact the residence-only model misses (the
+    coast/shore/beach decision; see taxonomy_architecture_decision.md).
+
+    A *beach* is a permeable wet-dry coast face: the probe passes through it into the
+    adjacent dry coast tet (non-residable, yet the probe wets it). That dry tet's
+    interior (its apex atom, its sub-volume) is touched by the probe but sits outside
+    the resident set, so the residence-only volume and the wet component's own atoms
+    miss it. Per wet component we attach:
+
+    - ``beach_pocket['dry_tetrahedron_ids']`` -- the dry tets directly behind its
+      beach faces (the wetted cul-de-sacs / connectors);
+    - ``beach_pocket['atom_indices']`` -- their atoms (probe-touchable past the beach);
+    - ``beach_pocket['volume_wetted_estimate']`` -- the sum of their per-tet solvent
+      volume, an **upper bound** on the wetted contribution (the probe need not fill
+      the whole tet);
+    - ``volume_solvent_accessible`` -- ``volume_solvent_estimate`` (residence) **+**
+      the wetted-pocket estimate; residence <= accessible <= this bracket.
+
+    Additive: it changes neither the residence volume nor the ``shore`` wall (both
+    correct for what they are).
+    """
+    raw = result['raw']
+    tet_solvent = {
+        t['tetrahedron_id']: float(t.get('volume_solvent_estimate', 0.0) or 0.0)
+        for t in raw['tetrahedra']
+    }
+    tet_atoms = {t['tetrahedron_id']: t['atom_indices'] for t in raw['tetrahedra']}
+    for component in components.wet:
+        beach_dry_tets = {
+            face['dry_tetrahedron_id']
+            for face in components.coast_faces
+            if face['wet_component_id'] == component.component_id
+            and face.get('kind') == 'beach'
+        }
+        atoms = sorted({a for t in beach_dry_tets for a in tet_atoms.get(t, [])})
+        volume = float(sum(tet_solvent.get(t, 0.0) for t in beach_dry_tets))
+        component.beach_pocket = {
+            'dry_tetrahedron_ids': sorted(beach_dry_tets),
+            'atom_indices': atoms,
+            'volume_wetted_estimate': volume,
+        }
+        base = float(component.volume_solvent_estimate or 0.0)
+        component.volume_solvent_accessible = base + volume
 
 
 def _attach_interface_labels(components: Components, result: dict[str, Any]) -> None:

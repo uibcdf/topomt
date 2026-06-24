@@ -95,6 +95,24 @@ def test_characteristic_radii_expose_grounded_transitions():
     assert void.characteristic_radii['residence_death_radius'] is not None
 
 
+def test_beach_pockets_capture_past_beach_contact():
+    # coast faces split into shore (non-permeable wall) and beach (permeable opening);
+    # each wet component's beach pocket captures the dry tets it wets THROUGH its
+    # beaches -- the past-beach atoms + an accessible-volume bracket that the
+    # residence-only model misses (the coast/shore/beach decision)
+    components = _wet(synthetic.two_blocks_interface_slabs(), 1.4)
+    kinds = {f['kind'] for f in components.coast_faces}
+    assert kinds == {'shore', 'beach'}  # an interface has both walls and openings
+
+    slot = max((c for c in components.wet if c.size >= 50), key=lambda c: c.size)
+    pocket = slot.beach_pocket
+    assert pocket['dry_tetrahedron_ids']  # it wets dry pockets past its beaches
+    assert pocket['atom_indices']  # past-beach atoms (the dry apices the probe touches)
+    assert pocket['volume_wetted_estimate'] >= 0.0
+    # accessible volume brackets residence from above
+    assert slot.volume_solvent_accessible >= float(slot.volume_solvent_estimate or 0.0)
+
+
 def test_every_wet_component_has_boundary_counts():
     # the helper runs for all wet components and yields non-negative integer counts
     for component in _wet(synthetic.dumbbell(), 1.8).wet:
