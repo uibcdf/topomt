@@ -1132,6 +1132,13 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
             if lid in links
         ]
         mouth_radius = max(mouth_radii) if mouth_radii else None
+        # Per-mouth occlusion (which entrances are constrictions to a wider
+        # interior): interior / each mouth's R_gate. For one mouth it equals the
+        # global occlusion; for a channel it distinguishes a funnel end from an
+        # open end. See taxonomy_architecture_decision.md S5.3.
+        per_mouth_occlusion = [
+            interior_radius / r for r in mouth_radii if r and r > 0.0
+        ]
         buriedness = max((component.topological_depth or {}).values(), default=0)
         if mouth_radius and mouth_radius > 0.0:
             occlusion = interior_radius / mouth_radius
@@ -1167,6 +1174,7 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
             'occlusion': occlusion,
             'occlusion_gap': occlusion_gap,
             'enclosable': enclosable,
+            'per_mouth_occlusion': per_mouth_occlusion,
             'buriedness': buriedness,
             'deepest_chamber': deepest_chamber,
         }

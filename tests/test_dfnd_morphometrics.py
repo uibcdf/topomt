@@ -90,6 +90,23 @@ def test_buriedness_separates_shallow_from_deep():
     assert shallow.morphometrics['buriedness'] < deep.morphometrics['buriedness']
 
 
+def test_per_mouth_occlusion_is_one_value_per_mouth():
+    # a channel reports an occlusion per mouth (entrance constriction per end)
+    channel = next(
+        (c for c in _wet(synthetic.cylinder_tube(), 1.4).wet if c.family == 'channel'),
+        None,
+    )
+    assert channel is not None
+    pmo = channel.morphometrics['per_mouth_occlusion']
+    assert len(pmo) == len(channel.external_link_ids)
+
+    # for a single-mouth pocket it collapses to the global occlusion
+    pocket = _largest(_wet(synthetic.dumbbell(), 1.0), 'pocket')
+    single = pocket.morphometrics['per_mouth_occlusion']
+    assert len(single) == 1
+    assert abs(single[0] - pocket.morphometrics['occlusion']) < 1e-9
+
+
 def test_deepest_chamber_reads_a_buried_subpocket_from_the_hierarchy():
     # The compound case (a deep narrow sub-pocket behind a wider mouth, which the
     # global occlusion ratio can miss) is read off the merge-tree hierarchy, not a
