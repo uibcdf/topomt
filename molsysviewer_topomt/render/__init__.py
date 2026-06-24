@@ -11,8 +11,10 @@ from ._components import (
     show_dfnd_interface_cutaway,
     show_dfnd_labels,
     show_dfnd_legend,
+    show_dfnd_peak_patches,
     show_dfnd_pharmacophore,
     show_dfnd_pocket_cutaway,
+    show_dfnd_ridge_lines,
     show_dfnd_spikes,
 )
 from ._graph import show_dfn_graph
@@ -33,6 +35,8 @@ __all__ = [
     'show_dfnd_labels',
     'show_dfnd_convexity',
     'show_dfnd_legend',
+    'show_dfnd_peak_patches',
     'show_dfnd_pharmacophore',
+    'show_dfnd_ridge_lines',
     'show_dfnd_spikes',
 ]

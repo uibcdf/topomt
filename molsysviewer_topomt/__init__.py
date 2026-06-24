@@ -56,6 +56,8 @@ from .render import (
     show_dfnd_components,
     show_dfnd_interface_cutaway,
     show_dfnd_pocket_cutaway,
+    show_dfnd_peak_patches,
+    show_dfnd_ridge_lines,
 )
 from .runtime import TopoMTAddonRuntime, ensure_runtime, record_event
 from .simplex_selection import simplex_selection_info
@@ -91,6 +93,8 @@ __all__ = [
     'show_dfnd_components',
     'show_dfnd_interface_cutaway',
     'show_dfnd_pocket_cutaway',
+    'show_dfnd_peak_patches',
+    'show_dfnd_ridge_lines',
     'simplex_selection_info',
     'build_topography_standalone0_html',
     'launch_topography_standalone0',

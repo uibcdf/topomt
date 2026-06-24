@@ -2056,6 +2056,79 @@ def test_dry_shell_collects_boundary_faces_without_semantic_coloring():
     assert shell_msg['options']['alpha'] == pytest.approx(0.35)
 
 
+def test_dry_cage_draws_edge_only_tetrahedral_scaffold():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    dry_component = topo.dfnd.dfn.components.dry[0]
+    view = DummyView()
+
+    show_dfnd_components(
+        view,
+        topo,
+        representation='dry_cage',
+        component_ids=[dry_component.component_id],
+    )
+
+    cage_msg = next(message for message in view.messages if message['op'] == 'add_tetrahedra')
+    assert cage_msg['options']['draw_faces'] is False
+    assert cage_msg['options']['draw_edges'] is True
+    assert cage_msg['options']['edge_color'] == 0x999999
+
+
+def test_groove_diagnostics_reuse_component_geometry_primitives():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('branched_tube_y.pdb')
+    component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.family == 'channel')
+
+    floor_view = DummyView()
+    show_dfnd_components(
+        floor_view,
+        topo,
+        representation='groove_floor',
+        component_ids=[component.component_id],
+    )
+    floor_msg = next(
+        message for message in floor_view.messages if message['op'] == 'add_triangle_faces'
+    )
+    assert floor_msg['options']['labels']
+    assert set(floor_msg['options']['colors']) == {0x56B4E9}
+
+    walls_view = DummyView()
+    show_dfnd_components(
+        walls_view,
+        topo,
+        representation='groove_walls',
+        component_ids=[component.component_id],
+    )
+    assert any(message['op'] == 'add_pocket_surface' for message in walls_view.messages)
+
+    width_view = DummyView()
+    show_dfnd_components(
+        width_view,
+        topo,
+        representation='groove_width_profile',
+        component_ids=[component.component_id],
+    )
+    width_msg = next(message for message in width_view.messages if message['op'] == 'add_rings')
+    assert width_msg['options']['centers']
+    assert width_msg['options']['colors']
+
+    depth_view = DummyView()
+    show_dfnd_components(
+        depth_view,
+        topo,
+        representation='groove_depth_profile',
+        component_ids=[component.component_id],
+    )
+    depth_msg = next(
+        message for message in depth_view.messages if message['op'] == 'add_pocket_blob'
+    )
+    assert depth_msg['options']['values']
+    assert depth_msg['options']['color_map'] == 'turbo'
+
+
 def test_clearance_map_colours_envelope_by_residence_radius():
     from molsysviewer_topomt.render import show_dfnd_components
 
@@ -2803,6 +2876,43 @@ def test_atom_convexity_spike_is_most_convex():
     assert conv[3] > 0  # it is a protrusion (positive)
 
 
+def test_peak_patches_and_ridge_lines_use_convex_peak_geometry():
+    from types import SimpleNamespace
+
+    from molsysviewer_topomt.render import show_dfnd_peak_patches, show_dfnd_ridge_lines
+
+    coords = np.array(
+        [
+            [0.0, 0.0, 0.0],
+            [1.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 3.0],
+        ]
+    )
+    atoms = SimpleNamespace(coords=coords, index_map=np.array([10, 11, 12, 13]))
+    topography = SimpleNamespace(dfnd=SimpleNamespace(mesh=SimpleNamespace(atoms=atoms)))
+
+    patch_view = DummyView()
+    patches = show_dfnd_peak_patches(
+        patch_view, topography, radius=4.0, top_n=2, patch_radius=0.2
+    )
+    assert patches is not None
+    patch_msgs = [message for message in patch_view.messages if message['op'] == 'add_sphere']
+    assert patch_msgs
+    assert patch_msgs[0]['options']['layer_tag'] == 'dfnd-peak-patches'
+
+    ridge_view = DummyView()
+    ridge = show_dfnd_ridge_lines(ridge_view, topography, radius=4.0, top_n=3)
+    assert ridge is not None
+    ridge_msg = next(
+        message
+        for message in ridge_view.messages
+        if message['op'] in {'add_network_links', 'add_links'}
+    )
+    assert ridge_msg['options']['coordinate_pairs']
+    assert ridge_msg['options']['tag'] == 'dfnd-ridge-lines'
+
+
 def test_show_dfnd_spikes_uses_displacement_vectors_for_convex_peaks():
     from types import SimpleNamespace
 
@@ -3297,6 +3407,10 @@ def test_render_result_uses_explicit_counts_and_details():
         'channel_tunnel',
         'channel_ribbon',
         'groove_ribbon',
+        'groove_floor',
+        'groove_walls',
+        'groove_width_profile',
+        'groove_depth_profile',
         'channel_blob',
         'channel_wire_blob',
         'rings',
@@ -3314,6 +3428,7 @@ def test_render_result_uses_explicit_counts_and_details():
         'dry_blocked_faces',
         'dry_depth_map',
         'dry_shell',
+        'dry_cage',
         'semantic_faces',
         'permeable_faces',
         'impermeable_faces',

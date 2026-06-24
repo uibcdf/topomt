@@ -10,6 +10,7 @@ from topomt.dfnd.selectors import select_faces
 
 from ..geometry import (
     EntityRef,
+    PointGeometry,
     RingGeometry,
     SegmentGeometry,
     SphereGeometry,
@@ -161,6 +162,10 @@ _COMPONENT_REPRESENTATIONS = {
     'channel_tunnel',
     'channel_ribbon',
     'groove_ribbon',
+    'groove_floor',
+    'groove_walls',
+    'groove_width_profile',
+    'groove_depth_profile',
     'channel_blob',
     'channel_wire_blob',
     'rings',
@@ -178,6 +183,7 @@ _COMPONENT_REPRESENTATIONS = {
     'dry_blocked_faces',
     'dry_depth_map',
     'dry_shell',
+    'dry_cage',
     'semantic_faces',
     'permeable_faces',
     'impermeable_faces',
@@ -435,6 +441,116 @@ def show_dfnd_spikes(
         palette=palette,
         max_length=puw.quantity(vector_length, 'nm'),
         radius_scale=0.06,
+        tag=tag_prefix,
+        layer_tag=tag_prefix,
+        skip_digestion=True,
+    )
+
+
+def _convex_peak_geometry(topography, *, radius=0.8, top_n=12, min_convexity=0.0):
+    dfnd_data = getattr(topography, 'dfnd', None)
+    if dfnd_data is None:
+        raise ValueError('Topography has no DFND data attached')
+    coords = np.asarray(dfnd_data.mesh.atoms.coords, dtype=float)
+    if coords.size == 0:
+        return PointGeometry((), 'nm', ())
+    convexity = _atom_convexity(coords, radius=radius)
+    selected = [
+        int(index)
+        for index in np.argsort(convexity)[::-1]
+        if convexity[index] > float(min_convexity)
+    ][: int(top_n)]
+    index_map = np.asarray(
+        getattr(dfnd_data.mesh.atoms, 'index_map', np.arange(len(coords)))
+    )
+    refs = tuple(
+        EntityRef(
+            kind='convex_peak',
+            entity_id=int(index_map[index]),
+            atom_indices=(int(index_map[index]),),
+            metadata={'convexity': float(convexity[index])},
+        )
+        for index in selected
+    )
+    return PointGeometry(tuple(coords[selected]), 'nm', refs)
+
+
+def show_dfnd_peak_patches(
+    view,
+    topography=None,
+    *,
+    radius=0.8,
+    top_n=12,
+    min_convexity=0.0,
+    patch_radius=0.18,
+    alpha=0.35,
+    tag_prefix='dfnd-peak-patches',
+):
+    """Mark convex peak neighborhoods with translucent spherical patches."""
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    geometry = _convex_peak_geometry(
+        topography, radius=radius, top_n=top_n, min_convexity=min_convexity
+    )
+    if not geometry.coordinates:
+        return None
+    return add_point_spheres(
+        view,
+        geometry,
+        radius=puw.quantity(patch_radius, 'nm'),
+        color=_OKABE_ITO['vermillion'],
+        alpha=alpha,
+        tag=tag_prefix,
+        layer_tag=tag_prefix,
+        skip_digestion=True,
+    )
+
+
+def show_dfnd_ridge_lines(
+    view,
+    topography=None,
+    *,
+    radius=0.8,
+    top_n=12,
+    min_convexity=0.0,
+    line_radius=0.015,
+    alpha=0.75,
+    tag_prefix='dfnd-ridge-lines',
+):
+    """Connect convex peak markers into a diagnostic ridge-line scaffold."""
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    peaks = _convex_peak_geometry(
+        topography, radius=radius, top_n=top_n, min_convexity=min_convexity
+    )
+    if len(peaks.coordinates) < 2:
+        return None
+    order = _ordered_interface_points(list(peaks.coordinates))
+    starts = []
+    ends = []
+    refs = []
+    for left, right in zip(order[:-1], order[1:], strict=True):
+        starts.append(peaks.coordinates[left])
+        ends.append(peaks.coordinates[right])
+        refs.append(
+            EntityRef(
+                kind='ridge_line',
+                entity_id=f'{peaks.refs[left].entity_id}-{peaks.refs[right].entity_id}',
+                atom_indices=(
+                    int(peaks.refs[left].entity_id),
+                    int(peaks.refs[right].entity_id),
+                ),
+            )
+        )
+    geometry = SegmentGeometry(tuple(starts), tuple(ends), 'nm', tuple(refs))
+    return add_segments(
+        view,
+        geometry,
+        radius=puw.quantity(line_radius, 'nm'),
+        color=_OKABE_ITO['vermillion'],
+        alpha=alpha,
         tag=tag_prefix,
         layer_tag=tag_prefix,
         skip_digestion=True,
@@ -1238,6 +1354,10 @@ def _render_dfnd_component_layers(
           lumen surface built from the channel path radii.
         - 'channel_ribbon'/'groove_ribbon': Flattened channel ribbon/cinta for
           reading direction and branching without implying a validated path.
+        - 'groove_floor': Permeable component faces as a groove-floor diagnostic.
+        - 'groove_walls': Component lining atoms as a groove-wall surface.
+        - 'groove_width_profile': HOLE-style width rings along a groove/channel path.
+        - 'groove_depth_profile': Residence envelope coloured by topological depth.
         - 'channel_blob': Explicit channel-only volumetric blob.
         - 'channel_wire_blob': Explicit channel-only wireframe blob.
         - 'mouth_rings': Aperture rings at external links.
@@ -1260,6 +1380,7 @@ def _render_dfnd_component_layers(
         - 'dry_blocked_faces': Non-permeable faces touching selected dry banks.
         - 'dry_depth_map': Dry faces coloured by face-depth from interface.
         - 'dry_shell': Semitransparent shell of selected dry-bank boundary faces.
+        - 'dry_cage': Edge-only tetrahedral cage of selected dry banks.
         - 'interface_ribbon': Flattened tube through interface face centroids.
         - 'semantic_faces': DFND faces touching selected components, coloured by semantic role.
         - 'permeable_faces': Permeable DFND faces touching selected components.
@@ -1356,6 +1477,7 @@ def _render_dfnd_component_layers(
         'dry_blocked_faces',
         'dry_depth_map',
         'dry_shell',
+        'dry_cage',
     }:
         show_wet = False
         show_dry = True
@@ -1602,7 +1724,14 @@ def _render_dfnd_component_layers(
             layers.append(layer)
         return layers[0] if len(layers) == 1 else layers
 
-    elif representation in {'cloud', 'clearance_map', 'clearance_wire', 'scalar_isosurface', 'pocket_depth_map'}:
+    elif representation in {
+        'cloud',
+        'clearance_map',
+        'clearance_wire',
+        'scalar_isosurface',
+        'pocket_depth_map',
+        'groove_depth_profile',
+    }:
         # Render a separate volumetric envelope per component. The clearance
         # variants use the same scalar field but pass R_residence as a per-sphere
         # value so MolSysViewer colours the surface by local probe clearance.
@@ -1633,7 +1762,7 @@ def _render_dfnd_component_layers(
                 tag=tag,
                 layer_tag=tag_prefix,
                 name=f'{name} {comp_id}'
-                + (' clearance' if clearance else ' depth' if representation == 'pocket_depth_map' else ''),
+                + (' clearance' if clearance else ' depth' if representation in {'pocket_depth_map', 'groove_depth_profile'} else ''),
                 resolution=blob_resolution,
                 smoothing=blob_smoothing,
                 iso_level=blob_iso_level,
@@ -1642,10 +1771,10 @@ def _render_dfnd_component_layers(
                     [_angstrom_from_nm(radius) for radius in geometry.radii]
                     if clearance
                     else _component_depth_values(comp, geometry)
-                    if representation == 'pocket_depth_map'
+                    if representation in {'pocket_depth_map', 'groove_depth_profile'}
                     else None
                 ),
-                color_map='turbo' if clearance or representation == 'pocket_depth_map' else None,
+                color_map='turbo' if clearance or representation in {'pocket_depth_map', 'groove_depth_profile'} else None,
                 wireframe=representation == 'clearance_wire',
                 skip_digestion=True,
             )
@@ -2299,6 +2428,98 @@ def _render_dfnd_component_layers(
         if not layers:
             return None
         return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'groove_floor':
+        color_by_face_id, label_by_face_id = _component_face_payloads(
+            topography, selected_components, 'permeable_faces'
+        )
+        geometry = face_geometry(topography, face_ids=color_by_face_id)
+        if not geometry.atom_triplets:
+            return None
+        return add_indexed_triangles(
+            view,
+            geometry,
+            colors=[_OKABE_ITO['sky_blue'] for _ in geometry.refs],
+            alpha=alpha,
+            labels=[label_by_face_id[ref.entity_id] for ref in geometry.refs],
+            tag=tag_prefix,
+            layer_tag=tag_prefix,
+            skip_digestion=True,
+        )
+
+    elif representation == 'groove_walls':
+        for comp in selected_components:
+            atom_indices = indices_in_space(
+                getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
+            )
+            if not atom_indices:
+                continue
+            layers.append(
+                view.shapes.add_pocket_surface(
+                    atom_indices=atom_indices,
+                    color_map=[_OKABE_ITO['sky_blue'], _OKABE_ITO['sky_blue']],
+                    alpha=alpha,
+                    tag=f'{tag_prefix}:{comp.component_id}',
+                    layer_tag=tag_prefix,
+                    skip_digestion=True,
+                )
+            )
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'groove_width_profile':
+        for comp in selected_components:
+            if comp.family != fam.CHANNEL or comp.raw_record is None:
+                continue
+            geometry = centerline_ring_geometry(topography, comp)
+            if not geometry.centers:
+                continue
+            layers.append(
+                add_rings(
+                    view,
+                    geometry,
+                    colors=[_hole_clearance_color(float(r)) for r in geometry.radii],
+                    alpha=alpha,
+                    tag=f'{tag_prefix}:{comp.component_id}',
+                    layer_tag=tag_prefix,
+                    name=f'{name} {comp.component_id} groove width profile',
+                    skip_digestion=True,
+                )
+            )
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'dry_cage':
+        selected_tetra_ids = []
+        for comp in selected_components:
+            if getattr(comp, 'side', None) != 'dry':
+                continue
+            selected_tetra_ids.extend(
+                _component_node_indices(comp, use_resident_nodes=False)
+            )
+        selected_tetra_ids = sorted({int(value) for value in selected_tetra_ids})
+        geometry = tetrahedra_geometry(topography, selected_tetra_ids)
+        if not geometry.atom_quads:
+            return None
+        return add_tetrahedra(
+            view,
+            geometry,
+            colors=[_TYPE_PALETTE[fam.DRY_BANK]] * len(geometry.atom_quads),
+            alphas=[0.0] * len(geometry.atom_quads),
+            labels=[f'Dry cage tetrahedron {ref.entity_id}' for ref in geometry.refs],
+            draw_faces=False,
+            draw_edges=True,
+            edge_meta=_dfnd_edge_meta(topography, selected_tetra_ids) or None,
+            edge_radius=puw.quantity(max(edge_radius_nm, 0.006), 'nm'),
+            edge_color=_TYPE_PALETTE[fam.DRY_BANK],
+            tag=tag_prefix,
+            layer_tag=tag_prefix,
+            name=f'{name} dry cage',
+            skip_digestion=True,
+            exterior_only=True,
+        )
 
     elif representation in {
         'dry_interface_faces',
