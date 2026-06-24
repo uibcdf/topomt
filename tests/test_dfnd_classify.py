@@ -54,6 +54,32 @@ def _largest(system, probe, family):
     return max(candidates, key=lambda c: c.size) if candidates else None
 
 
+def test_bridge_carries_catalog_layer_onto_features():
+    # front 1.a: dfnd_to_topography promotes components to features that carry the
+    # catalog layer (classification, morphometrics, boundary, motifs) -- additive,
+    # feature_type unchanged; the viewer keys on feature.classification['name'].
+    from topomt.get_topography import get_topography
+
+    system = synthetic.to_molsysmt(
+        synthetic.dumbbell().coords, synthetic.dumbbell().radii
+    )
+    topo = get_topography(system, method='dfnd', probe_radius=1.0)
+    features = [
+        topo[fid]
+        for fid in topo
+        if getattr(topo[fid], 'feature_type', None) in ('pocket', 'void', 'channel')
+    ]
+    assert features
+    for feature in features:
+        assert 'name' in feature.classification
+        assert isinstance(feature.morphometrics, dict)
+        assert 'n_connected_walls' in feature.boundary
+        assert isinstance(feature.motifs, list)
+    names = {f.classification['name'] for f in features}
+    assert names <= {'pocket', 'open_concavity', 'void', 'channel'}
+    assert 'pocket' in names  # the dumbbell's occluded lobe-pocket at probe 1.0
+
+
 def test_component_classification_coexists_with_unchanged_family():
     # the open surface bowl keeps the topological family 'pocket' but the catalog
     # classification refines it to the generic 'open_concavity' -- additive,

@@ -271,6 +271,15 @@ def dfnd_to_topography(
                 feature.is_interface = bool(getattr(component, 'is_interface', False))
                 feature.interface_family = getattr(component, 'interface_family', None)
                 feature.lining_bodies = list(getattr(component, 'lining_bodies', []))
+                # Carry the catalog layer onto the public feature (front 1.a:
+                # DFND component -> layer 0). The morphological classification
+                # (pocket / open_concavity / ...) is an ADDITIVE attribute that
+                # coexists with feature_type; the viewer keys on it (front 1.b).
+                # Grounded measurements and the motifs ride along too.
+                feature.classification = dict(getattr(component, 'classification', {}))
+                feature.morphometrics = dict(getattr(component, 'morphometrics', {}))
+                feature.boundary = dict(getattr(component, 'boundary', {}))
+                feature.motifs = list(getattr(component, 'motifs', []))
             topography.add_feature(feature)
             if family_key not in _FAMILIES_WITH_MOUTHS:
                 continue
