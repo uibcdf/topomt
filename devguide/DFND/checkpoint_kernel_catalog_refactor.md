@@ -25,6 +25,7 @@ premise (component = access landscape; chambers/voids = sub-sites) was validated
 | **1. Inversion** | `topomt/dfnd/classify.py` is the single classification source: `classify_topology(n_external_links, n_resident_nodes, n_wall_faces)` reproduces every family (cross-product + percolating override). `graph.py` delegates (`family = classify_topology(...)`); `_classify_component` is a delegating wrapper. The green suite with identical strings **is the completeness proof**. | `305f896` |
 | **2. Grounded boundary layer** | `_attach_boundary_helpers` -> `component.boundary`: `n_connected_walls` (clusters of non-permeable boundary faces; `== 0` is percolating), `n_dry_contacts` (interface = `>= 2`), `n_septa` (wet<->wet constrictions), per-wall composition (coast/exterior/constriction). | `8988a6f`, `ab10c8a` |
 | **3. Catalog morphology (core)** | `classify.classify(...) -> {name, marginal}` refines the 1-mouth resident family by aperture (pocket=occluded / groove=open), exposed as `component.classification` **alongside the unchanged `family`**. `morphometrics['per_mouth_occlusion']` (per-mouth entrance constriction). | `3d6ef95`, `7013551` |
+| **4. Doc reconciliation** | known_limitations L1.1 (nonresident_passage retired/infeasible) and L3.1 (surface_concavity signature-defined); feature_definitions §5 (families = derived classification, classify_topology single source). Reframe, not delete. | `8ebcc0e` |
 
 New surface (all additive, coexisting with the legacy model): `classify.py`
 (`classify_topology`, `classify`, `GROOVE`); `component.boundary`,
@@ -41,15 +42,16 @@ and/or need coordination -- this is why we paused.
   radii as a first-class derived view (seal/residence-death exist as
   `mouth_radius`/`interior_radius`; add merge radii = septa `R_gate`, split radii =
   throat `separation_radius`); re-home morphometrics/hierarchy as derived helpers.
-- **Phase 4** (touches the guard + docs): reframe `output_status.py` to track the
+- **Phase 4** -- **docs done** (`8ebcc0e`: known_limitations L1.1/L3.1,
+  feature_definitions §5). What remains is the **non-additive, guard-touching**
+  part, deferred to a reviewed step: reframe `output_status.py` to track the
   **catalog** outputs (classify names) instead of kernel families -- the guard must
-  change from "kernel emits families" to "classify is total". Retire
+  change from "kernel emits families" to "classify is total"; retire
   `nonresident_passage` as a curated family (the empirically-vacuous `(>=2, non-res)`
-  cell) -- **NOT additive**: touches `families.py`, `SIDE_BY_FAMILY`, the guard,
-  tests, done together with the output_status reframe. Rename septum->constriction
-  in docs (the code already uses `constriction` for the wet<->wet wall). Reconcile
-  the broad doc set (feature_definitions §5/§5.2.1, Glossary, Algorithm, Overview,
-  interfaces, known_limitations L1.1/L3.1).
+  cell), which touches `families.py`, `SIDE_BY_FAMILY`, the guard and tests, done
+  together with the output_status reframe. Minor remaining doc pointers (Glossary,
+  Algorithm, Overview, interfaces, metrics_contract) and the septum->constriction
+  rename in prose.
 - **Phase 5** (coordination): retire the stored `family` from the kernel (inversion
   already makes it derived); the **feature_type re-typing** (pocket=occluded /
   groove as a type) is the one point that touches the collaborator's viewer -- the
