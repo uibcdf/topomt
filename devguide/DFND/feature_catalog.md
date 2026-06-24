@@ -32,19 +32,21 @@ Component correspondence: a **wet resident component**, by `(n_mouths, occlusion
 | `1 mouth, resident, occlusion ≤ 1` | **`open_concavity`** *(open)* | `groove` (elongation+axis) / `dish` (roundness) / `funnel` (taper) | ✅ generic / ⏳ leaves |
 | `≥2 mouths, resident` | **`channel`** | tunnel / pore / branched (centerline branching) | ✅ generic / ⏳ leaves |
 
-Non-resident shadow (same signature, residence lost at larger probe): `(0,¬res)`
-= `degenerate_subprobe`, `(1,¬res)` = a non-resident contact/dent (was
-`surface_concavity`), `(≥2,¬res)` = empirically non-occurring (retired). These are
-compositions, not separate families.
+Non-resident shadow (same signature, residence lost at a larger probe) -- generic
+**`non_resident_contact`**: `(0,¬res)` = `degenerate_subprobe`, `(1,¬res)` = a
+non-resident contact/dent (was `surface_concavity`), `(≥2,¬res)` = empirically
+non-occurring (retired). These are compositions, not separate families.
 
-## Convexity (the solid bulges) ⏳
+## Solid side: convexity + buried cores (the dry components) ⏳
 
-Component correspondence: the **dry side** (dry banks / surface convexities) -- not
-yet promoted to features.
+Component correspondence: the **dry side** (dry banks). It carries two generics: a
+surface **convexity** (relief bulging out) and an internal **buried core** (solid,
+*not* convex, not a cavity). Neither is promoted to a feature yet.
 
 | Component | Generic | Refined leaves | Status |
 | --- | --- | --- | --- |
-| dry bank / surface convexity | **`generic_convexity`** | dome / ridge / spine / knob / protrusion | ⏳ future (no promotion yet) |
+| dry bank, surface relief | **`generic_convexity`** | protrusion / dome / spine / knob / bulge / ridge_cap / buttress / pinnacle | ⏳ future (no promotion yet) |
+| dry bank, fully internal | **`buried_core`** | (packing core / hydrophobic core) | ⏳ future |
 
 ## Mixed (two-body lining) 🔶
 
@@ -53,7 +55,7 @@ interface), or a dry **septum** bank between two cavities.
 
 | Component | Generic | Refined leaves | Status |
 | --- | --- | --- | --- |
-| wet, `n_dry_contacts ≥ 2` | **`interface`** *(generic_mixed)* | patch / joint / saddle | 🔶 detected (n_dry_contacts) / ⏳ promotion |
+| wet, `n_dry_contacts ≥ 2` | **`interface`** *(generic_mixed)* | patch / joint / saddle / trench | 🔶 detected (n_dry_contacts) / ⏳ promotion |
 
 ## Boundary (1D, children of a feature)
 
@@ -63,7 +65,11 @@ Component correspondence: a **face cluster** on a component's boundary.
 | --- | --- | --- | --- |
 | permeable cluster → OCEAN | **`mouth`** | — | ✅ |
 | non-permeable wet↔wet constriction | **`neck`** *(constriction / closed throat)* | — | 🔶 measured (n_septa) / ⏳ feature |
-| coast / exterior wall cluster | `generic_boundary` | lip / rim | ⏳ |
+| coast / exterior wall cluster | **`generic_boundary`** | base_rim / lip / furrow / seam / isthmus / edge_loop / branch_line / hinge_line / ridge | ⏳ |
+
+`ridge` is a 1D crest line (a convex boundary *between* concavities) -- it lives
+here (boundary), not in the convexity surface patches; `spine`/`ridge_cap` (2D
+relief) stay under convexity.
 
 ## Point (0D) ⏳
 
@@ -71,7 +77,7 @@ Component correspondence: a distinguished **node/atom** of a component.
 
 | Component element | Generic | Refined leaves | Status |
 | --- | --- | --- | --- |
-| residence/depth extremum | **`generic_point`** *(Feature0D)* | depth-point / pit / apex / summit | ⏳ (depth_region motif exists) |
+| residence/depth extremum | **`generic_point`** *(Feature0D)* | depth-point / pit / apex / summit / bifurcation / saddle_point / ridge_tip | ⏳ (depth_region motif exists) |
 
 ## Neutral
 
@@ -90,6 +96,12 @@ resolution).
 | `chamber` | a sub-cavity (merge-tree basin) -- a feature-inside-a-feature | 🔶 provisional |
 | `throat` / `bottleneck` | an internal constriction (merge-tree saddle); the closed form is a `neck` boundary | 🔶 provisional |
 | `depth_region` | a topological-depth layer | ✅ |
+
+**Chamber roles** (refinements of a `chamber` motif by its position in the
+hierarchy -- the relocated `vestibule`/`ampulla`/`alcove` vocabulary): `vestibule`
+= a shallow antechamber near the mouth before a deeper constriction; `ampulla` =
+a dilated bulb chamber behind a neck; `alcove` = a side recess off the main path.
+⏳ future (ride the chamber hierarchy + depth; see component_motifs.md / Q25).
 
 ## How to extend (the recipe)
 

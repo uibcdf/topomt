@@ -63,10 +63,14 @@ OPEN_CONCAVITY = 'open_concavity'
 # devguide/DFND/feature_catalog.md. Create a shape-type's generic WHEN DFND promotes
 # components in it (concavity now; convexity/mixed when their promotion is built).
 GENERIC_FEATURE_BY_SHAPE_TYPE = {
-    'concavity': (fam.VOID, fam.POCKET, OPEN_CONCAVITY, fam.CHANNEL),  # implemented
-    'convexity': ('generic_convexity',),  # future -- no dry/convex promotion yet
+    # concavity: resident families + the non-resident-shadow generic
+    'concavity': (
+        fam.VOID, fam.POCKET, OPEN_CONCAVITY, fam.CHANNEL, 'non_resident_contact',
+    ),
+    # solid side (dry): surface relief vs internal core -- future (no promotion yet)
+    'convexity': ('generic_convexity', 'buried_core'),
     'mixed': ('interface',),  # partial -- detected via n_dry_contacts
-    'boundary': ('mouth', 'neck'),  # mouth implemented; neck = the constriction
+    'boundary': ('mouth', 'neck', 'generic_boundary'),  # mouth done; neck = constriction
     'point': ('generic_point',),  # future
 }
 
