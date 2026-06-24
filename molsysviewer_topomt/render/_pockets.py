@@ -28,11 +28,19 @@ def _marker_radius_from_feature(feature_record: dict[str, Any]) -> float:
     return DEFAULT_MARKER_RADIUS_NM
 
 
+#: the blob/marker renderer covers the 1-mouth surface concavities. Since the catalog
+#: re-typing split the old 'pocket' into 'pocket' (occluded) + 'open_concavity' (open),
+#: both are rendered by default so the open concavities are not silently dropped
+#: (behaviour-preserving vs the pre-re-typing single 'pocket' type).
+_BLOB_FEATURE_TYPES = ('pocket', 'open_concavity')
+
+
 def show_topography_pockets(
     view,
     topography=None,
     *,
     feature_ids=None,
+    feature_types=_BLOB_FEATURE_TYPES,
     tag_prefix: str = 'topomt-pocket',
     color_map: str = 'viridis',
     alpha: float = DEFAULT_BLOB_ALPHA,
@@ -40,10 +48,12 @@ def show_topography_pockets(
     marker_alpha: float = DEFAULT_MARKER_ALPHA,
     skip_digestion: bool = False,
 ) -> RenderResult:
-    """Render current TopoMT pocket features into an existing MolSysViewer view.
+    """Render current TopoMT surface-concavity features into a MolSysViewer view.
 
-    Pockets with `sphere_centers` and `sphere_radii` are rendered as pocket blobs.
-    Pockets that only expose a `center` fall back to a marker sphere.
+    Covers the 1-mouth concavity feature types (`feature_types`, default
+    pocket + open_concavity -- the catalog re-typing split the old single 'pocket').
+    Features with `sphere_centers` and `sphere_radii` are rendered as blobs; those
+    that only expose a `center` fall back to a marker sphere.
     """
     topography = _resolve_topography(view, topography)
     if topography is None:
@@ -61,7 +71,7 @@ def show_topography_pockets(
     for feature in payload['features']:
         if selected_ids is not None and feature.get('feature_id') not in selected_ids:
             continue
-        if feature.get('feature_type') != 'pocket':
+        if feature.get('feature_type') not in feature_types:
             continue
 
         feature_id = feature.get('feature_id') or f'{tag_prefix}-unknown'
