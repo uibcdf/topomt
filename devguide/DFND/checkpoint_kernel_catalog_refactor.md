@@ -55,12 +55,19 @@ and/or need coordination -- this is why we paused.
   already diagnostic/non-curated, so no `SIDE_BY_FAMILY` change was needed. Minor
   remaining: doc pointers (Glossary, Algorithm, Overview, interfaces,
   metrics_contract) and the septum->constriction rename in prose (low priority).
-- **Phase 5** (coordination): retire the stored `family` from the kernel (inversion
-  already makes it derived); the **feature_type re-typing** (pocket=occluded /
-  groove as a type) is the one point that touches the collaborator's viewer -- the
-  viewer consumes layer-0 `feature_type`, so phases 1-4 are invisible to it, but the
-  re-typing must be coordinated. Unify `Pocket`/`Void`/`Channel` into one
-  parameterized feature class (so a sealing component never changes object class).
+- **Phase 5** (coordination) -- **topomt side wired** (`42e7be5`): both paths to the
+  viewer now carry the catalog. Front **1.a** (components → layer 0): the bridge
+  attaches `feature.classification` ({name, marginal}: pocket / `open_concavity` /
+  …), `feature.morphometrics`, `feature.boundary`, `feature.motifs`. Front **2**
+  (components → viewer direct): `component.classification`/`morphometrics`/`boundary`
+  are exposed by build_components. **Viewer side (the coordinated part)**: Front
+  **1.b** -- the feature payload includes `feature.classification` and the feature
+  renderer keys on it; Front **2** -- the component renderer keys its representation
+  map on `component.classification['name']` (add `open_concavity → groove_ribbon`)
+  instead of `component.family`. Morphology stays additive (`feature_type` unchanged)
+  until a later coordinated re-typing; `groove` is now the generic `open_concavity`
+  (see feature_catalog.md). Optional later: unify Pocket/Void/Channel into one
+  parameterized class.
 - **Deferred**: dry-side dual scheme; systematic real-system validation
   (acceptance bars / PDB panel).
 
