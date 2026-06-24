@@ -1789,6 +1789,29 @@ def test_interface_links_connect_wet_and_dry_sides():
     )
 
 
+def test_interface_ribbon_summarizes_coast_face_centroids():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
+    view = DummyView()
+
+    show_dfnd_components(
+        view,
+        topo,
+        representation='interface_ribbon',
+        component_ids=[component.component_id],
+    )
+
+    ribbon_msg = next(
+        message for message in view.messages if message['op'] == 'add_channel_tube'
+    )
+    assert ribbon_msg['options']['tube_style'] == 'smooth'
+    assert ribbon_msg['options']['tube_aspect_ratio'] == pytest.approx(0.18)
+    assert len(ribbon_msg['options']['centers']) >= 2
+    assert len(ribbon_msg['options']['radii']) == len(ribbon_msg['options']['centers'])
+
+
 def test_pocket_depth_map_uses_topological_depth_values():
     from molsysviewer_topomt.render import show_dfnd_components
 
@@ -3220,6 +3243,7 @@ def test_render_result_uses_explicit_counts_and_details():
         'interface_faces',
         'interface_contact_faces',
         'interface_links',
+        'interface_ribbon',
         'interface_lining_surface',
         'interface_surface',
         'mouth_stubs',

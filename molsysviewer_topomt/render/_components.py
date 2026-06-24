@@ -12,6 +12,7 @@ from ..geometry import (
     EntityRef,
     RingGeometry,
     SegmentGeometry,
+    SphereGeometry,
     centerline_ring_geometry,
     component_alpha_sphere_geometry,
     component_branch_geometries,
@@ -183,6 +184,7 @@ _COMPONENT_REPRESENTATIONS = {
     'interface_faces',
     'interface_contact_faces',
     'interface_links',
+    'interface_ribbon',
     'interface_lining_surface',
     'interface_surface',
     'mouth_stubs',
@@ -590,6 +592,81 @@ def _interface_link_geometry(topography, selected_components) -> SegmentGeometry
             )
         )
     return SegmentGeometry(tuple(starts), tuple(ends), 'nm', tuple(refs))
+
+
+
+def _ordered_interface_points(points: list[tuple[float, float, float]]) -> list[int]:
+    if len(points) <= 2:
+        return list(range(len(points)))
+    array = np.asarray(points, dtype=float)
+    centered = array - array.mean(axis=0)
+    try:
+        _, _, vh = np.linalg.svd(centered, full_matrices=False)
+    except np.linalg.LinAlgError:
+        return list(range(len(points)))
+    axis = vh[0]
+    projection = centered @ axis
+    return [int(index) for index in np.argsort(projection)]
+
+
+def _interface_ribbon_geometries(topography, selected_components):
+    selected_ids = {comp.component_id for comp in selected_components}
+    component_faces = {}
+    for face in topography.dfnd.dfn.components.coast_faces:
+        wet_id = face.get('wet_component_id')
+        dry_id = face.get('dry_component_id')
+        for component_id in (wet_id, dry_id):
+            if component_id in selected_ids:
+                component_faces.setdefault(component_id, []).append(face)
+
+    geometries = []
+    for component_id, faces in component_faces.items():
+        face_ids = [int(face['face_id']) for face in faces]
+        face_geom = face_geometry(topography, face_ids=face_ids)
+        if len(face_geom.coordinates) < 2:
+            continue
+
+        centers = []
+        radii = []
+        refs = []
+        face_by_id = {int(face['face_id']): face for face in faces}
+        for triplet, ref in zip(face_geom.coordinates, face_geom.refs, strict=True):
+            face = face_by_id.get(int(ref.entity_id), {})
+            centers.append(tuple(float(value) for value in np.mean(triplet, axis=0)))
+            area = float(face.get('area', 0.0) or 0.0)
+            radii.append(max(0.018, min(0.055, np.sqrt(max(area, 0.0)) * 0.18)))
+            refs.append(
+                EntityRef(
+                    kind='interface_ribbon',
+                    entity_id=ref.entity_id,
+                    tetrahedron_ids=(
+                        int(face.get('wet_tetrahedron_id', -1)),
+                        int(face.get('dry_tetrahedron_id', -1)),
+                    ),
+                    component_key=None,
+                    metadata={
+                        'component_id': component_id,
+                        'wet_component_id': face.get('wet_component_id'),
+                        'dry_component_id': face.get('dry_component_id'),
+                        'face_id': int(ref.entity_id),
+                    },
+                )
+            )
+
+        order = _ordered_interface_points(centers)
+        geometries.append(
+            (
+                component_id,
+                SphereGeometry(
+                    tuple(centers[index] for index in order),
+                    tuple(radii[index] for index in order),
+                    'nm',
+                    tuple(refs[index] for index in order),
+                ),
+            )
+        )
+    return geometries
+
 
 def _lerp_color(color_a: int, color_b: int, fraction: float) -> int:
     fraction = max(0.0, min(1.0, float(fraction)))
@@ -1001,6 +1078,7 @@ def _render_dfnd_component_layers(
         - 'dry_interface_faces': Dry-side wet/dry coast faces.
         - 'dry_blocked_faces': Non-permeable faces touching selected dry banks.
         - 'dry_depth_map': Dry faces coloured by face-depth from interface.
+        - 'interface_ribbon': Flattened tube through interface face centroids.
         - 'semantic_faces': DFND faces touching selected components, coloured by semantic role.
         - 'permeable_faces': Permeable DFND faces touching selected components.
         - 'impermeable_faces': Non-permeable DFND faces touching selected components.
@@ -2007,6 +2085,33 @@ def _render_dfnd_component_layers(
             layer_tag=tag_prefix,
             skip_digestion=True,
         )
+
+    elif representation == 'interface_ribbon':
+        for comp_id, geometry in _interface_ribbon_geometries(
+            topography, selected_components
+        ):
+            if len(geometry.centers) < 2:
+                continue
+            layers.append(
+                add_channel_tube(
+                    view,
+                    geometry,
+                    color_by='segment',
+                    colors=[_OKABE_ITO['orange']],
+                    alpha=min(1.0, max(alpha, 0.6)),
+                    radial_segments=18,
+                    smoothing_subdivisions=1,
+                    tube_style='smooth',
+                    tube_aspect_ratio=0.18,
+                    tag=f'{tag_prefix}:{comp_id}',
+                    layer_tag=tag_prefix,
+                    name=f'{name} {comp_id} interface ribbon',
+                    skip_digestion=True,
+                )
+            )
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
 
     elif representation in {'dry_interface_faces', 'dry_blocked_faces', 'dry_depth_map'}:
         color_by_face_id, label_by_face_id = _dry_face_payloads(
