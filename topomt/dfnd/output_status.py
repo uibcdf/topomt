@@ -33,7 +33,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from . import families as fam
-from .classify import GROOVE
+from .classify import OPEN_CONCAVITY
 
 VALID_STATUS = frozenset(
     {'canonical', 'provisional', 'experimental', 'diagnostic', 'deferred'}
@@ -87,14 +87,16 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
     # --- dry side ---
     fam.DRY_BANK: OutputStatus('canonical', 'family', None, None),
     # --- catalog morphological refinements (classify names on top of the family) ---
-    # ``groove`` is the open (occlusion<=1) refinement of a 1-mouth resident family;
-    # the occluded case keeps the name ``pocket``. Additive; not yet driving
-    # feature_type (the coordinated re-typing of phase 5).
-    GROOVE: OutputStatus(
+    # ``open_concavity`` is the open (occlusion<=1) refinement of a 1-mouth resident
+    # family -- a GENERIC placeholder (aperture measured, shape not yet), refined
+    # later into a leaf (groove/dish/funnel) when shape metrics land. The occluded
+    # case keeps the name ``pocket``. Additive; not yet driving feature_type.
+    OPEN_CONCAVITY: OutputStatus(
         'provisional',
         'classification',
-        'real-system validation of the aperture (open/occluded) split',
-        'phase-3 / morphology',
+        'quantitative shape metrics (elongation/axis) to refine into a leaf '
+        '(groove/dish/funnel), plus real-system validation of the aperture split',
+        'phase-3 / morphology / elongation debt',
     ),
     # --- promoted public features ---
     'Mouth': OutputStatus('canonical', 'feature', None, None),

@@ -49,9 +49,14 @@ def classify_topology(
 
 # --- morphological refinement (catalog level; not kernel families) -----------
 
-GROOVE = 'groove'  # an open 1-mouth concavity (occlusion <= 1)
+# The open (occlusion<=1) refinement of a 1-mouth resident concavity is a
+# **generic** placeholder: we can measure the aperture (open vs occluded) but not
+# yet the *shape* (elongation/axis), so we cannot yet name the leaf. It is
+# provisional and refines, when shape metrics land, into a leaf -- groove
+# (elongated, with an axis), a round dish, a funnel, ... -- or stays open_concavity.
+OPEN_CONCAVITY = 'open_concavity'
 
-# |occlusion - 1| within this band -> the pocket/groove call is marginal.
+# |occlusion - 1| within this band -> the pocket/open_concavity call is marginal.
 _OCCLUSION_MARGIN = 0.1
 
 
@@ -64,17 +69,19 @@ def classify(
     """Catalog morphological classification: ``{name, marginal}``.
 
     Refines the 1-mouth resident family by aperture -- ``pocket`` (occluded,
-    ``occlusion > 1``) vs ``groove`` (open, ``occlusion <= 1``); occlusion is
-    name-determining only for one mouth (S5 criterion). All other families pass
-    through unchanged. This is the **additive** morphology layer: it coexists with
-    the kernel ``family`` and does not yet drive ``feature_type`` (that is the
-    coordinated re-typing of phase 5). ``marginal`` flags an occlusion near the
-    pocket/groove boundary; fuller per-threshold confidence is a later refinement.
+    ``occlusion > 1``) vs ``open_concavity`` (open, ``occlusion <= 1``). The open
+    case is a **generic** leaf (we measure aperture but not yet shape), refined
+    later into ``groove``/``dish``/``funnel``/... when shape metrics land; the
+    occluded case keeps the community name ``pocket``. Occlusion is
+    name-determining only for one mouth (S5 criterion); all other families pass
+    through. This is the **additive** morphology layer (coexists with the kernel
+    ``family``; does not yet drive ``feature_type``). ``marginal`` flags an
+    occlusion near the boundary; fuller per-threshold confidence is later.
     """
     family = classify_topology(n_external_links, n_resident_nodes, n_wall_faces)
     if family == fam.POCKET and occlusion is not None:
         return {
-            'name': fam.POCKET if occlusion > 1.0 else GROOVE,
+            'name': fam.POCKET if occlusion > 1.0 else OPEN_CONCAVITY,
             'marginal': abs(occlusion - 1.0) <= _OCCLUSION_MARGIN,
         }
     return {'name': family, 'marginal': False}

@@ -11,7 +11,7 @@ import numpy as np
 
 from topomt.dfnd import families as fam
 from topomt.dfnd import synthetic
-from topomt.dfnd.classify import GROOVE, classify, classify_topology
+from topomt.dfnd.classify import OPEN_CONCAVITY, classify, classify_topology
 from topomt.dfnd.components import build_components
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
@@ -29,7 +29,7 @@ def test_classify_topology_reproduces_every_family():
 
 def test_classify_splits_one_mouth_pocket_by_occlusion():
     assert classify(1, 1, 5, occlusion=2.0)['name'] == fam.POCKET  # occluded
-    assert classify(1, 1, 5, occlusion=0.8)['name'] == GROOVE  # open
+    assert classify(1, 1, 5, occlusion=0.8)['name'] == OPEN_CONCAVITY  # open
     # occlusion is name-determining only for one mouth (S5 criterion)
     assert classify(2, 1, 5, occlusion=0.5)['name'] == fam.CHANNEL
     # other families pass through unchanged
@@ -56,11 +56,12 @@ def _largest(system, probe, family):
 
 def test_component_classification_coexists_with_unchanged_family():
     # the open surface bowl keeps the topological family 'pocket' but the catalog
-    # classification refines it to 'groove' -- additive, family unchanged
+    # classification refines it to the generic 'open_concavity' -- additive,
+    # family unchanged
     bowl = _largest(synthetic.surface_bowl(), 1.4, 'pocket')
     assert bowl is not None
     assert bowl.family == fam.POCKET
-    assert bowl.classification['name'] == GROOVE
+    assert bowl.classification['name'] == OPEN_CONCAVITY
 
     # an occluded pocket keeps family 'pocket' and classifies as 'pocket'
     pocket = _largest(synthetic.dumbbell(), 1.0, 'pocket')
