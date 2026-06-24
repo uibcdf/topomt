@@ -21,6 +21,7 @@ from typing import Any
 # side is derived from family (single source of truth in families.py), exactly as
 # feature shape/dimensionality are derived from feature_type in _feature_constants.
 from . import families as fam
+from .classify import classify
 from .identity import external_link_support_key, motif_key, support_key
 
 _SIDE_BY_FAMILY = fam.SIDE_BY_FAMILY
@@ -141,6 +142,9 @@ class WetComponent(Component):
         # Derived boundary measurements (the grounded boundary layer); see
         # _attach_boundary_helpers and taxonomy_architecture_decision.md.
         self.boundary: dict[str, Any] = {}
+        # Catalog morphological classification {name, marginal}; additive, coexists
+        # with ``family`` (see _attach_classification, classify.classify).
+        self.classification: dict[str, Any] = {}
 
     def __repr__(self) -> str:
         tag = f' {self.interface_family}' if self.is_interface else ''
@@ -558,6 +562,7 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
     _attach_capacity_motifs(components, result)
     _attach_morphometrics(components, result)
     _attach_boundary_helpers(components, result, network)
+    _attach_classification(components)
     return components
 
 
@@ -984,6 +989,23 @@ def _attach_capacity_motifs(
         component.bottleneck = throats[0] if throats else None
         component.motifs.extend(throats)
         component.motifs.extend(component.chamber_candidates)
+
+
+def _attach_classification(components: Components) -> None:
+    """Attach the catalog morphological classification to each wet component.
+
+    Additive: ``component.classification = {name, marginal}`` from
+    ``classify.classify`` (the 1-mouth resident family splits into pocket/groove by
+    occlusion). It coexists with ``component.family`` and does not change it -- the
+    feature-layer re-typing is the coordinated phase-5 step.
+    """
+    for component in components.wet:
+        component.classification = classify(
+            len(component.external_link_ids),
+            len(component.resident_node_indices),
+            component.n_wall_faces,
+            occlusion=component.morphometrics.get('occlusion'),
+        )
 
 
 def _attach_boundary_helpers(
