@@ -125,6 +125,17 @@ _CHANNEL_REPRESENTATION_ALIASES = {
     'channel_blob': ('cloud', None),
     'channel_wire_blob': ('wire_contour', None),
 }
+
+# Deprecated named modes -> grounded primitive (decision: the component renderer's
+# vocabulary is grounded geometry, names live in the feature layer; see
+# devguide/DFND/viewer_grounded_named_split.md). These collapse exact duplicates;
+# the old names resolve to the grounded primitive (back-compat) before dispatch.
+_REPRESENTATION_ALIASES = {
+    'pocket_depth_map': 'depth_map',  # depth field over the residence envelope
+    'groove_depth_profile': 'depth_map',
+    'groove_walls': 'lining_surface',  # component lining atoms as a surface
+    'groove_width_profile': 'width_profile',  # HOLE width rings along the centerline
+}
 # Affinity (physicochemical) colours for the 'affinity_spheres' druggability map,
 # derived from molsysmt.physchem hydrophobicity (Eisenberg) + charge (pH7).
 _AFFINITY_HYDROPHOBIC = _OKABE_ITO['orange']  # drug-favourable nonpolar
@@ -250,6 +261,10 @@ _COMPONENT_REPRESENTATIONS = {
     'clearance_wire',
     'scalar_isosurface',
     'pocket_depth_map',
+    # grounded primitives (deprecated named modes above resolve here)
+    'depth_map',
+    'lining_surface',
+    'width_profile',
     'shape_ellipsoids',
     'pipe',
     'channel_tube',
@@ -1561,6 +1576,8 @@ def _render_dfnd_component_layers(
         'interface_lining_surface': 'contact_sheet',
         'interface_surface': 'contact_sheet',
     }.get(representation, representation)
+    # resolve deprecated named modes to their grounded primitive (back-compat)
+    representation = _REPRESENTATION_ALIASES.get(representation, representation)
     channel_alias = representation in _CHANNEL_REPRESENTATION_ALIASES
     if channel_alias:
         representation, alias_pipe_style = _CHANNEL_REPRESENTATION_ALIASES[representation]
@@ -1836,8 +1853,7 @@ def _render_dfnd_component_layers(
         'clearance_map',
         'clearance_wire',
         'scalar_isosurface',
-        'pocket_depth_map',
-        'groove_depth_profile',
+        'depth_map',
     }:
         # Render a separate volumetric envelope per component. The clearance
         # variants use the same scalar field but pass R_residence as a per-sphere
@@ -1869,7 +1885,7 @@ def _render_dfnd_component_layers(
                 tag=tag,
                 layer_tag=tag_prefix,
                 name=f'{name} {comp_id}'
-                + (' clearance' if clearance else ' depth' if representation in {'pocket_depth_map', 'groove_depth_profile'} else ''),
+                + (' clearance' if clearance else ' depth' if representation == 'depth_map' else ''),
                 resolution=blob_resolution,
                 smoothing=blob_smoothing,
                 iso_level=blob_iso_level,
@@ -1878,10 +1894,10 @@ def _render_dfnd_component_layers(
                     [_angstrom_from_nm(radius) for radius in geometry.radii]
                     if clearance
                     else _component_depth_values(comp, geometry)
-                    if representation in {'pocket_depth_map', 'groove_depth_profile'}
+                    if representation == 'depth_map'
                     else None
                 ),
-                color_map='turbo' if clearance or representation in {'pocket_depth_map', 'groove_depth_profile'} else None,
+                color_map='turbo' if clearance or representation == 'depth_map' else None,
                 wireframe=representation == 'clearance_wire',
                 skip_digestion=True,
             )
@@ -2554,7 +2570,7 @@ def _render_dfnd_component_layers(
             skip_digestion=True,
         )
 
-    elif representation == 'groove_walls':
+    elif representation == 'lining_surface':
         for comp in selected_components:
             atom_indices = indices_in_space(
                 getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
@@ -2575,7 +2591,7 @@ def _render_dfnd_component_layers(
             return None
         return layers[0] if len(layers) == 1 else layers
 
-    elif representation == 'groove_width_profile':
+    elif representation == 'width_profile':
         for comp in selected_components:
             if _render_bucket(comp) != 'through' or comp.raw_record is None:
                 continue

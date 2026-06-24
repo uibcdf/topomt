@@ -2845,6 +2845,19 @@ def test_scaffold_draws_dry_core_spine():
     assert link_msgs  # the dry spine cylinders
 
 
+def test_grounded_primitive_names_with_deprecated_aliases():
+    """Viewer migration phase 1: the component renderer's representation vocabulary
+    is grounded geometry; the old named modes (groove_*/pocket_*) resolve to a
+    grounded primitive (back-compat). See viewer_grounded_named_split.md."""
+    from molsysviewer_topomt.render import _components as c
+
+    assert {'depth_map', 'lining_surface', 'width_profile'} <= c._COMPONENT_REPRESENTATIONS
+    assert c._REPRESENTATION_ALIASES['groove_walls'] == 'lining_surface'
+    assert c._REPRESENTATION_ALIASES['groove_width_profile'] == 'width_profile'
+    assert c._REPRESENTATION_ALIASES['pocket_depth_map'] == 'depth_map'
+    assert c._REPRESENTATION_ALIASES['groove_depth_profile'] == 'depth_map'
+
+
 def test_affinity_color_typing_from_scalars():
     """Phase 5: the affinity classifier maps (hydrophobicity, charge) to colours."""
     from molsysviewer_topomt.render import _components as c
