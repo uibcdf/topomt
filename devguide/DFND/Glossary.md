@@ -64,10 +64,11 @@ suffixes and old `transit_domains` or `concavity_domains` labels).
     *   This is a local permeability label, independent of wet/dry habitability.
 
 *   **COAST:**
-    *   A finite tetrahedron with mixed local permeability.
+    *   A finite **tetrahedron** with mixed local permeability. **`coast` is a tet
+        class, never a face** — the wet-dry *faces* are `shore`/`beach` (see Face States).
     *   Working condition: the tetrahedron has at least one permeable finite face and at least one non-permeable finite face.
     *   `wet_coast` is a wet tetrahedron on a partially blocked boundary.
-    *   `dry_coast` is a dry tetrahedron with at least one permeable face; it can help describe lining atoms or pharmacophore contact without creating wet connectivity.
+    *   `dry_coast` is a dry tetrahedron with at least one permeable face; it can help describe lining atoms or pharmacophore contact without creating wet connectivity. The probe wets it *through* its permeable (`beach`) face — the **past-beach** contact (`beach_pocket`, see taxonomy_architecture_decision.md §6.2).
 
 *   **SEALED:**
     *   A finite tetrahedron whose finite faces are all non-permeable.
@@ -87,6 +88,14 @@ suffixes and old `transit_domains` or `concavity_domains` labels).
     *   Condition: `R_gate < R_probe`.
 
 Faces should be called permeable or non-permeable. Wet and dry are reserved for tetrahedra and volumetric regions.
+
+*   **Shore face:**
+    *   A **non-permeable wet-dry** face — the real wall separating a wet region from a dry bank. Used for enclosure / buriedness / the wall taxonomy. (`_face_class`, `coast_faces[kind='shore']`.)
+
+*   **Beach face:**
+    *   A **permeable wet-dry** face — the probe passes *through* it into the adjacent dry coast tet, wetting it (it cannot reside there). (`coast_faces[kind='beach']`.) The dry pocket reached past a beach is the **past-beach** contact recovered by `beach_pocket` / `volume_solvent_accessible` (taxonomy_architecture_decision.md §6.2).
+
+(coast = the boundary *tetrahedron*; shore + beach = the two kinds of wet-dry *face* on it.)
 
 ## Geometric Metrics
 

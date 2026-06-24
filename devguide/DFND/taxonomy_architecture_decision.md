@@ -174,7 +174,45 @@ A boundary face is `(other side) × (does the probe pass?)`:
 | --- | --- | --- |
 | OCEAN | **mouth** (opening to exterior) | **exterior wall** |
 | another cavity (wet) | *(impossible — would merge them)* | **constriction** (closed throat) |
-| solid (dry) | *(impossible — blocked)* | **coast** (lining) |
+| solid (dry) | **beach** (probe wets through into the dry coast tet) | **shore** (the wet-dry wall) |
+
+### 6.1 coast / shore / beach — three concepts, one nautical family
+
+`dry` means **non-residable** (`R_residence < R_probe`), *not* impassable, so a wet-dry
+face **can** be permeable — the earlier "impossible" cell was wrong. The three terms
+are distinct and must not be conflated (the historical "coast face" drift mixed them):
+
+- **`coast` = a TETRAHEDRON permeability class** (`coast(T)` = T has ≥1 permeable face;
+  `wet_coast`/`dry_coast`). The canonical, math-defined notion (Glossary, Algorithm
+  §2.3, Mathematical_Definitions). *coast is about a tet's permeability, never a face.*
+- **`shore` = a non-permeable wet-dry FACE/wall** — the real wall separating water from
+  land (used for enclosure, buriedness, the wall taxonomy above). `_face_class` and
+  the wall `kind` emit `shore`.
+- **`beach` = a permeable wet-dry FACE** — the probe passes *through* it into the
+  adjacent dry coast tet, wetting it (it cannot reside there). `coast_faces` carry
+  `kind = shore|beach`.
+
+A **coast tet is where shore and beach meet**: its wet-dry faces split into beaches
+(permeable) and shores (non-permeable); a terminal beach (the dry tet has exactly one
+permeable face) is a wetted cul-de-sac.
+
+### 6.2 Past-beach contact (the wetted pockets) — a correctness fix
+
+Through a beach the probe reaches the dry coast tet's **interior** — its apex atom and
+sub-volume — touched yet outside the resident set. The residence-only volume and the
+wet component's own atom set therefore **miss** it. `_attach_beach_pockets` recovers it
+additively, per wet component:
+
+- `beach_pocket` = `{dry_tetrahedron_ids, atom_indices, volume_wetted_estimate}` — the
+  dry pockets reached through its beaches, their probe-touchable atoms (the apices), and
+  an **upper-bound** wetted-volume estimate (the probe need not fill the whole tet);
+- `volume_solvent_accessible` = `volume_solvent_estimate` (residence) **+** the wetted
+  pockets — so `residence ≤ accessible ≤` this bracket.
+
+The `shore` wall **correctly excludes** beaches (the wall is the non-permeable side);
+residence volume and the shore wall are unchanged — both correct for what they are.
+Carried onto the public feature by the bridge (`feature.beach_pocket`,
+`feature.volume_solvent_accessible`).
 
 `throat` (internal, permeable, within one cavity — the merge-tree narrowings) and
 `constriction` (boundary, non-permeable, between two cavities) are the **same
@@ -185,7 +223,7 @@ merge** (§7).
 **"septum" is reserved for the SOLID side** — a dry divider **bank** (anatomically a
 septum is a solid dividing wall). It is *not* the empty-space wet↔wet pinch (that is
 a constriction). The two are mutually exclusive at the face level: a solid divider
-gives **coast** on both sides + a septum bank; an empty pinch gives a **constriction**
+gives **shore** on both sides + a septum bank; an empty pinch gives a **constriction**
 face with no solid between.
 
 ## 7. Probe-relativity (a first-class property)
