@@ -6,6 +6,7 @@ import numpy as np
 
 from topomt import pyunitwizard as puw
 from topomt.dfnd import families as fam
+from topomt.dfnd.selectors import select_faces
 
 from ..geometry import (
     EntityRef,
@@ -30,9 +31,13 @@ from ..index_spaces import (
 from ._common import (
     _angstrom2_from_nm2,
     _angstrom3_from_nm3,
+    _angstrom_from_nm,
     _dfnd_edge_meta,
+    _dfnd_face_label,
     _dfnd_face_meta,
     _resolve_topography,
+    face_color_from_semantics,
+    face_semantics,
 )
 from .adapters import (
     add_channel_tube,
@@ -40,6 +45,7 @@ from .adapters import (
     add_pocket_blob,
     add_point_spheres,
     add_rings,
+    add_scalar_isosurface,
     add_segments,
     add_sphere_set,
     add_tetrahedra,
@@ -93,7 +99,29 @@ _WATER_RADIUS = 1.15
 _HOLE_OPEN = _OKABE_ITO['bluish_green']  # R >= 1.5: admits water freely
 _HOLE_TIGHT = _OKABE_ITO['orange']  # 1.15 <= R < 1.5: tight constriction
 _HOLE_CLOSED = _OKABE_ITO['vermillion']  # R < 1.15: closed to water
-
+_PIPE_STYLE_SOLID = 'solid'
+_PIPE_STYLE_PROFILE = 'profile'
+_PIPE_STYLE_SOLID_RINGS = 'solid_rings'
+_PIPE_STYLE_LUMEN = 'lumen'
+_PIPE_STYLE_RIBBON = 'ribbon'
+_PIPE_STYLES = {
+    _PIPE_STYLE_SOLID,
+    _PIPE_STYLE_PROFILE,
+    _PIPE_STYLE_SOLID_RINGS,
+    _PIPE_STYLE_LUMEN,
+    _PIPE_STYLE_RIBBON,
+}
+_CHANNEL_REPRESENTATION_ALIASES = {
+    'channel_tube': ('pipe', _PIPE_STYLE_SOLID),
+    'channel_solid': ('pipe', _PIPE_STYLE_SOLID),
+    'channel_profile': ('pipe', _PIPE_STYLE_PROFILE),
+    'channel_lumen': ('pipe', _PIPE_STYLE_LUMEN),
+    'channel_tunnel': ('pipe', _PIPE_STYLE_LUMEN),
+    'channel_ribbon': ('pipe', _PIPE_STYLE_RIBBON),
+    'groove_ribbon': ('pipe', _PIPE_STYLE_RIBBON),
+    'channel_blob': ('cloud', None),
+    'channel_wire_blob': ('wire_contour', None),
+}
 # Affinity (physicochemical) colours for the 'affinity_spheres' druggability map,
 # derived from molsysmt.physchem hydrophobicity (Eisenberg) + charge (pH7).
 _AFFINITY_HYDROPHOBIC = _OKABE_ITO['orange']  # drug-favourable nonpolar
@@ -118,7 +146,19 @@ _COMPONENT_REPRESENTATIONS = {
     'cloud',
     'envelope',
     'wire_contour',
+    'clearance_map',
+    'clearance_wire',
+    'scalar_isosurface',
     'pipe',
+    'channel_tube',
+    'channel_solid',
+    'channel_profile',
+    'channel_lumen',
+    'channel_tunnel',
+    'channel_ribbon',
+    'groove_ribbon',
+    'channel_blob',
+    'channel_wire_blob',
     'rings',
     'residence_spheres',
     'alpha_spheres',
@@ -128,6 +168,15 @@ _COMPONENT_REPRESENTATIONS = {
     'scaffold',
     'affinity_spheres',
     'coast_faces',
+    'semantic_faces',
+    'permeable_faces',
+    'impermeable_faces',
+    'mouth_faces',
+    'interface_faces',
+    'interface_contact_faces',
+    'interface_lining_surface',
+    'interface_surface',
+    'mouth_stubs',
     'graph',
 }
 
@@ -302,6 +351,83 @@ def show_dfnd_pharmacophore(
     )
 
 
+
+def show_dfnd_spikes(
+    view,
+    topography=None,
+    *,
+    radius=0.8,
+    top_n=12,
+    min_convexity=0.0,
+    vector_length=0.25,
+    palette='turbo',
+    tag_prefix='dfnd-spikes',
+):
+    """Mark local convex protrusions with outward arrows.
+
+    Convexity is computed from DFND atom coordinates. The final glyphs are
+    rendered with MolSysViewer's generic displacement-vector primitive, so this
+    function only decides which atoms are protrusion peaks and how long the
+    outward marker should be. Coordinates and vectors are passed in nanometers.
+    """
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    dfnd_data = getattr(topography, 'dfnd', None)
+    if dfnd_data is None:
+        raise ValueError('Topography has no DFND data attached')
+
+    coords = np.asarray(dfnd_data.mesh.atoms.coords, dtype=float)
+    if coords.size == 0:
+        return None
+    convexity = _atom_convexity(coords, radius=radius)
+    selected = [
+        int(index)
+        for index in np.argsort(convexity)[::-1]
+        if convexity[index] > float(min_convexity)
+    ][: int(top_n)]
+    if not selected:
+        return None
+
+    origins = coords[selected]
+    center = coords.mean(axis=0)
+    directions = origins - center
+    lengths = np.linalg.norm(directions, axis=1)
+    safe = lengths > 1e-12
+    directions[~safe] = np.array([0.0, 0.0, 1.0])
+    lengths[~safe] = 1.0
+    directions = directions / lengths[:, None]
+
+    selected_convexity = convexity[selected]
+    max_convexity = float(np.max(selected_convexity)) if len(selected_convexity) else 1.0
+    if max_convexity <= 0.0:
+        scales = np.ones(len(selected))
+    else:
+        scales = np.clip(selected_convexity / max_convexity, 0.25, 1.0)
+    vectors = directions * (float(vector_length) * scales)[:, None]
+
+    index_map = np.asarray(
+        getattr(dfnd_data.mesh.atoms, 'index_map', np.arange(len(coords)))
+    )
+    vector_shapes = getattr(view.shapes, 'vectors', None)
+    add_vectors = (
+        getattr(vector_shapes, 'add_displacement_vectors')
+        if vector_shapes is not None
+        else view.shapes.add_displacement_vectors
+    )
+    return add_vectors(
+        origins=puw.quantity(origins, 'nm'),
+        vectors=puw.quantity(vectors, 'nm'),
+        atom_indices=[int(index_map[index]) for index in selected],
+        color_by='norm',
+        palette=palette,
+        max_length=puw.quantity(vector_length, 'nm'),
+        radius_scale=0.06,
+        tag=tag_prefix,
+        layer_tag=tag_prefix,
+        skip_digestion=True,
+    )
+
 def show_dfnd_convexity(view, topography=None, *, radius=0.8, palette='coolwarm'):
     """Colour the molecular surface by local convexity (ridges hot, valleys cold)
     via ``view.whole.set_color_by_values``. Convexity is computed per atom from the
@@ -346,6 +472,58 @@ def _affinity_color_for_scalars(hydrophobicity, charge):
         return _AFFINITY_NEUTRAL
     return _AFFINITY_HYDROPHOBIC if hydrophobicity > 0 else _AFFINITY_POLAR
 
+
+
+def _semantic_face_filters(representation: str):
+    if representation == 'permeable_faces':
+        return {'permeability': {'permeable'}, 'roles': None, 'color_mode': 'permeability'}
+    if representation == 'impermeable_faces':
+        return {
+            'permeability': {'non_permeable'},
+            'roles': None,
+            'color_mode': 'permeability',
+        }
+    if representation == 'mouth_faces':
+        return {'permeability': None, 'roles': {'mouth_face'}, 'color_mode': 'role'}
+    if representation == 'interface_faces':
+        return {'permeability': None, 'roles': {'coast_face'}, 'color_mode': 'role'}
+    return {'permeability': None, 'roles': None, 'color_mode': 'role'}
+
+
+def _component_face_payloads(topography, selected_components, representation: str):
+    filters = _semantic_face_filters(representation)
+    selected_tetrahedra = set()
+    components_by_tetrahedron = {}
+    for comp in selected_components:
+        for tetrahedron_id in _component_node_indices(comp, use_resident_nodes=False):
+            selected_tetrahedra.add(int(tetrahedron_id))
+            components_by_tetrahedron[int(tetrahedron_id)] = comp.component_id
+
+    color_by_face_id = {}
+    label_by_face_id = {}
+    for face in select_faces(topography, permeability_state=filters['permeability']):
+        owner = int(face.get('owner_tetrahedron_id', -1))
+        neighbor = int(face.get('neighbor_tetrahedron_id', -1))
+        if owner not in selected_tetrahedra and neighbor not in selected_tetrahedra:
+            continue
+        semantics = face_semantics(
+            topography,
+            face,
+            components_by_tetrahedron=components_by_tetrahedron,
+        )
+        if filters['roles'] is not None and semantics['role'] not in filters['roles']:
+            continue
+        permeability = face.get('permeability_state', 'unknown')
+        face_id = int(face.get('face_id'))
+        color_by_face_id[face_id] = face_color_from_semantics(
+            semantics,
+            permeability=permeability,
+            mode=filters['color_mode'],
+        )
+        label_by_face_id[face_id] = _dfnd_face_label(
+            face, face_id, semantics=semantics
+        )
+    return color_by_face_id, label_by_face_id
 
 def _atom_affinity_colors(molsys):
     """Per-(molsys)atom affinity colour from ``molsysmt.physchem`` (hydrophobicity
@@ -561,6 +739,7 @@ def _render_dfnd_component_layers(
     edge_radius_nm: float = 0.002,
     edge_color: int = 0x444444,
     draw_channel_branches: bool = True,
+    pipe_style: str = _PIPE_STYLE_SOLID,
     use_resident_nodes: bool = True,
     tag_prefix: str = 'dfnd-comp',
     name: str = 'DFND Components',
@@ -591,10 +770,23 @@ def _render_dfnd_component_layers(
         - 'envelope': Volumetric blob plus a gate ring at each mouth (a void
           shows only the blob, a pocket adds its single mouth ring).
         - 'wire_contour': Wireframe iso-surface from residence spheres.
+        - 'clearance_map': Volumetric envelope coloured by local R_residence.
+        - 'scalar_isosurface': Domain-neutral gaussian isosurface of residence spheres.
+        - 'clearance_wire': Wireframe envelope coloured by local R_residence.
         - 'pipe': Channels as a variable-radius tube along their through-path
           (centerline + R_residence) with a bottleneck marker; >2-mouth channels
           add secondary visual branches to the primary path; non-channels fall
           back to a blob.
+        - 'channel_tube'/'channel_solid': Explicit channel-only aliases for
+          a fixed-colour continuous tube.
+        - 'channel_profile': Explicit channel-only diagnostic tube coloured by
+          clearance profile.
+        - 'channel_lumen'/'channel_tunnel': Explicit channel-only continuous
+          lumen surface built from the channel path radii.
+        - 'channel_ribbon'/'groove_ribbon': Flattened channel ribbon/cinta for
+          reading direction and branching without implying a validated path.
+        - 'channel_blob': Explicit channel-only volumetric blob.
+        - 'channel_wire_blob': Explicit channel-only wireframe blob.
         - 'rings': HOLE-style clearance profile of a channel — a ring per
           centerline station coloured by free-radius threshold (green/amber/red).
         - 'residence_spheres': Maximum-clearance spheres inside resident tetrahedra.
@@ -609,6 +801,12 @@ def _render_dfnd_component_layers(
           physicochemical affinity of the lining (hydrophobic/polar/charged),
           from molsysmt.physchem; neutral for dummy systems.
         - 'coast_faces': Boundary faces touching between wet and dry sides.
+        - 'semantic_faces': DFND faces touching selected components, coloured by semantic role.
+        - 'permeable_faces': Permeable DFND faces touching selected components.
+        - 'impermeable_faces': Non-permeable DFND faces touching selected components.
+        - 'mouth_faces': Permeable boundary faces opening to OCEAN.
+        - 'interface_faces': Wet-dry coast/interface faces.
+        - 'mouth_stubs': Short outward links through external permeable faces.
         - 'graph': DFN connectivity graph connecting tetrahedron barycenters.
     interfaces_only : bool, default False
         If True, only show components flagged as interfaces (wet_interfaces).
@@ -639,6 +837,13 @@ def _render_dfnd_component_layers(
         For 'pipe': draw shortest-distance secondary branches from extra mouths
         to the primary two-mouth path. These are visual topology cues, not
         validated trajectories or max-capacity paths.
+    pipe_style : {'solid', 'profile', 'solid_rings', 'lumen', 'ribbon'}, default 'solid'
+        Visual style for 'pipe':
+        - 'solid': fixed-colour, near-opaque channel tube with a bottleneck marker.
+        - 'profile': diagnostic tube coloured by the station clearance profile.
+        - 'solid_rings': solid tube plus HOLE-style clearance rings.
+        - 'lumen': continuous channel-lumen surface from the path radii.
+        - 'ribbon': flattened smooth tube/cinta for reading channel orientation.
     use_resident_nodes : bool, default True
         For wet components: only render resident core tetrahedra.
     tag_prefix : str, default 'dfnd-comp'
@@ -661,15 +866,31 @@ def _render_dfnd_component_layers(
     if dfnd_data is None:
         raise ValueError('Topography has no DFND data attached')
 
+    requested_representation = representation
     representation = {
         'spheres': 'residence_spheres',
         'skeleton': 'graph',
+        'interface_contact_faces': 'interface_faces',
+        'interface_lining_surface': 'contact_sheet',
+        'interface_surface': 'contact_sheet',
     }.get(representation, representation)
+    channel_alias = representation in _CHANNEL_REPRESENTATION_ALIASES
+    if channel_alias:
+        representation, alias_pipe_style = _CHANNEL_REPRESENTATION_ALIASES[representation]
+        if alias_pipe_style is not None:
+            pipe_style = alias_pipe_style
+        if component_types == fam.PRIMARY_WET_FAMILIES:
+            component_types = (fam.CHANNEL,)
     if representation not in _COMPONENT_REPRESENTATIONS:
         supported = ', '.join(sorted(_COMPONENT_REPRESENTATIONS))
         raise ValueError(
             f'Unknown representation {representation!r}. Supported: {supported}.'
         )
+
+    if requested_representation in {'interface_lining_surface', 'interface_surface'}:
+        show_wet = True
+        show_dry = False
+        interfaces_only = True
 
     # Gather matching components
     selected_components = []
@@ -733,6 +954,7 @@ def _render_dfnd_component_layers(
                 edge_radius_nm=edge_radius_nm,
                 edge_color=edge_color,
                 draw_channel_branches=draw_channel_branches,
+                pipe_style=pipe_style,
                 use_resident_nodes=use_resident_nodes,
                 tag_prefix=tag_prefix,
                 name=name,
@@ -751,6 +973,13 @@ def _render_dfnd_component_layers(
         return results[0] if len(results) == 1 else results
 
     mesh = dfnd_data.mesh
+    if representation == 'pipe':
+        pipe_style = pipe_style.lower()
+        if pipe_style not in _PIPE_STYLES:
+            supported = ', '.join(sorted(_PIPE_STYLES))
+            raise ValueError(
+                f'Unknown pipe_style {pipe_style!r}. Supported: {supported}.'
+            )
     # Pre-build lookup map: tetrahedron_id -> record
     tetra_map = {
         t.get('tetrahedron_id', idx): t for idx, t in enumerate(mesh.tetrahedra)
@@ -903,14 +1132,15 @@ def _render_dfnd_component_layers(
             layers.append(layer)
         return layers[0] if len(layers) == 1 else layers
 
-    elif representation == 'cloud':
-        # Render a separate volumetric pocket blob layer per component. The
-        # MolSysViewer blob defaults are broad for DFND residence spheres, so use
-        # conservative defaults unless the caller provides explicit values.
+    elif representation in {'cloud', 'clearance_map', 'clearance_wire', 'scalar_isosurface'}:
+        # Render a separate volumetric envelope per component. The clearance
+        # variants use the same scalar field but pass R_residence as a per-sphere
+        # value so MolSysViewer colours the surface by local probe clearance.
         blob_resolution = 0.5 if resolution is None else resolution
         blob_smoothing = 0.5 if smoothing is None else smoothing
         blob_iso_level = 0.5 if iso_level is None else iso_level
         blob_radius_scale = 0.6 if radius_scale is None else radius_scale
+        clearance = representation in {'clearance_map', 'clearance_wire', 'scalar_isosurface'}
 
         for comp in selected_components:
             comp_id = comp.component_id
@@ -921,17 +1151,28 @@ def _render_dfnd_component_layers(
                 continue
 
             tag = f'{tag_prefix}:{comp_id}'
-            layer = add_pocket_blob(
+            surface_adapter = (
+                add_scalar_isosurface
+                if representation == 'scalar_isosurface'
+                else add_pocket_blob
+            )
+            layer = surface_adapter(
                 view,
                 geometry,
                 alpha=alpha,
                 tag=tag,
                 layer_tag=tag_prefix,
-                name=f'{name} {comp_id}',
+                name=f'{name} {comp_id}'
+                + (' clearance' if clearance else ''),
                 resolution=blob_resolution,
                 smoothing=blob_smoothing,
                 iso_level=blob_iso_level,
                 radius_scale=blob_radius_scale,
+                values=[_angstrom_from_nm(radius) for radius in geometry.radii]
+                if clearance
+                else None,
+                color_map='turbo' if clearance else None,
+                wireframe=representation == 'clearance_wire',
                 skip_digestion=True,
             )
             layers.append(layer)
@@ -976,11 +1217,33 @@ def _render_dfnd_component_layers(
                 layers.append(layer)
                 continue
 
+            solid_pipe = pipe_style in {_PIPE_STYLE_SOLID, _PIPE_STYLE_SOLID_RINGS}
+            lumen_pipe = pipe_style == _PIPE_STYLE_LUMEN
+            ribbon_pipe = pipe_style == _PIPE_STYLE_RIBBON
+            tube_alpha = max(alpha, 0.85) if solid_pipe else alpha
+            tube_colors = (
+                [color]
+                if solid_pipe or lumen_pipe or ribbon_pipe
+                else [_hole_clearance_color(float(r)) for r in path_geometry.radii]
+            )
             tube = add_channel_tube(
                 view,
                 path_geometry,
-                color_map=[color, color],
-                alpha=alpha,
+                color_by='segment',
+                colors=tube_colors,
+                alpha=max(alpha, 0.55) if lumen_pipe else tube_alpha,
+                radial_segments=24 if solid_pipe or ribbon_pipe else 16,
+                smoothing_subdivisions=2 if solid_pipe or ribbon_pipe else 0,
+                tube_style='surface'
+                if lumen_pipe
+                else 'smooth'
+                if solid_pipe or ribbon_pipe
+                else 'segments',
+                surface_resolution=0.5 if lumen_pipe and resolution is None else resolution,
+                surface_smoothing=0.75 if lumen_pipe and smoothing is None else smoothing,
+                surface_iso_level=0.5 if lumen_pipe and iso_level is None else iso_level,
+                surface_radius_scale=0.85 if lumen_pipe and radius_scale is None else radius_scale,
+                tube_aspect_ratio=0.22 if ribbon_pipe else None,
                 tag=f'{tag_prefix}:{comp_id}',
                 layer_tag=tag_prefix,
                 name=f'{name} {comp_id}',
@@ -1004,12 +1267,25 @@ def _render_dfnd_component_layers(
                 view,
                 marker_geometry,
                 colors=[_MOUTH_ACCENT],
-                alpha=min(1.0, alpha + 0.3),
+                alpha=min(1.0, max(alpha, 0.75)),
                 tag=f'{tag_prefix}:{comp_id}-bottleneck',
                 layer_tag=tag_prefix,
                 skip_digestion=True,
             )
             layers.append(marker)
+
+            if pipe_style == _PIPE_STYLE_SOLID_RINGS:
+                profile = add_rings(
+                    view,
+                    path_rings,
+                    colors=[_hole_clearance_color(float(r)) for r in path_rings.radii],
+                    alpha=min(1.0, max(alpha, 0.45)),
+                    tag=f'{tag_prefix}:{comp_id}-profile-rings',
+                    layer_tag=tag_prefix,
+                    name=f'{name} {comp_id} clearance profile',
+                    skip_digestion=True,
+                )
+                layers.append(profile)
 
             if draw_channel_branches:
                 for branch_index, branch_geometry in enumerate(
@@ -1017,11 +1293,32 @@ def _render_dfnd_component_layers(
                 ):
                     if not branch_geometry.centers:
                         continue
+                    branch_colors = (
+                        [color]
+                        if solid_pipe or lumen_pipe or ribbon_pipe
+                        else [
+                            _hole_clearance_color(float(r))
+                            for r in branch_geometry.radii
+                        ]
+                    )
                     branch = add_channel_tube(
                         view,
                         branch_geometry,
-                        color_map=[_MOUTH_ACCENT, color],
-                        alpha=max(0.12, min(0.55, alpha * 0.65)),
+                        color_by='segment',
+                        colors=branch_colors,
+                        alpha=max(0.25, min(0.45, alpha * 0.65)),
+                        radial_segments=18 if solid_pipe or ribbon_pipe else 12,
+                        smoothing_subdivisions=1 if solid_pipe or ribbon_pipe else 0,
+                        tube_style='surface'
+                        if lumen_pipe
+                        else 'smooth'
+                        if solid_pipe or ribbon_pipe
+                        else 'segments',
+                        surface_resolution=0.5 if lumen_pipe and resolution is None else resolution,
+                        surface_smoothing=0.75 if lumen_pipe and smoothing is None else smoothing,
+                        surface_iso_level=0.5 if lumen_pipe and iso_level is None else iso_level,
+                        surface_radius_scale=0.85 if lumen_pipe and radius_scale is None else radius_scale,
+                        tube_aspect_ratio=0.22 if ribbon_pipe else None,
                         tag=f'{tag_prefix}:{comp_id}-branch-{branch_index}',
                         layer_tag=tag_prefix,
                         name=f'{name} {comp_id} branch {branch_index}',
@@ -1343,6 +1640,51 @@ def _render_dfnd_component_layers(
         if not layers:
             return None
         return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'mouth_stubs':
+        selected_nodes = set()
+        for comp in selected_components:
+            selected_nodes.update(
+                _component_node_indices(comp, use_resident_nodes=use_resident_nodes)
+            )
+        _edge_geometry, mouth_geometry = dfn_graph_segments(
+            topography, sorted(selected_nodes), include_mouths=True
+        )
+        if not mouth_geometry.refs:
+            return None
+        return add_segments(
+            view,
+            mouth_geometry,
+            radius=puw.quantity(0.02, 'nm'),
+            color=_MOUTH_ACCENT,
+            tag=tag_prefix,
+            layer_tag=tag_prefix,
+            skip_digestion=True,
+        )
+
+    elif representation in {
+        'semantic_faces',
+        'permeable_faces',
+        'impermeable_faces',
+        'mouth_faces',
+        'interface_faces',
+    }:
+        color_by_face_id, label_by_face_id = _component_face_payloads(
+            topography, selected_components, representation
+        )
+        geometry = face_geometry(topography, face_ids=color_by_face_id)
+        if not geometry.atom_triplets:
+            return None
+        return add_indexed_triangles(
+            view,
+            geometry,
+            colors=[color_by_face_id[ref.entity_id] for ref in geometry.refs],
+            alpha=alpha,
+            labels=[label_by_face_id[ref.entity_id] for ref in geometry.refs],
+            tag=tag_prefix,
+            layer_tag=tag_prefix,
+            skip_digestion=True,
+        )
 
     elif representation == 'coast_faces':
         # Render shared contact coast faces between wet and dry.

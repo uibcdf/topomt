@@ -57,6 +57,17 @@ def add_pocket_blob(view, geometry: SphereGeometry, **kwargs):
     )
 
 
+def add_scalar_isosurface(view, geometry: SphereGeometry, **kwargs):
+    """Render a generic gaussian/scalar isosurface at the final viewer boundary."""
+    kwargs.pop('skip_digestion', None)
+    return _shape_method(view, 'blobs', 'add_scalar_isosurface')(
+        centers=puw.quantity(np.asarray(geometry.centers), geometry.unit),
+        radii=puw.quantity(np.asarray(geometry.radii), geometry.unit),
+        skip_digestion=True,
+        **kwargs,
+    )
+
+
 def add_sphere_set(view, geometry: SphereGeometry, **kwargs):
     """Render variable-radius spheres at the final MolSysViewer boundary."""
     kwargs.pop('skip_digestion', None)

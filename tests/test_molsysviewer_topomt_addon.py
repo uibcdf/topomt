@@ -1613,6 +1613,260 @@ def test_pipe_renders_secondary_branches_for_three_mouth_channel():
     assert all(message['options']['alpha'] < 0.5 for message in branch_msgs)
 
 
+def test_channel_representation_aliases_emit_expected_shapes():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('branched_tube_y.pdb')
+    component = next(
+        comp for comp in topo.dfnd.dfn.components.wet if comp.family == 'channel'
+    )
+
+    tube_view = DummyView()
+    show_dfnd_components(
+        tube_view,
+        topo,
+        representation='channel_tube',
+        component_ids=[component.component_id],
+    )
+    primary_tube = next(
+        message
+        for message in tube_view.messages
+        if message['op'] == 'add_channel_tube'
+        and message['options']['tag'] == f'dfnd-comp:{component.component_id}'
+    )
+    assert primary_tube['options']['tube_style'] == 'smooth'
+    assert len(set(primary_tube['options']['colors'])) == 1
+    assert primary_tube['options']['alpha'] >= 0.85
+
+    profile_view = DummyView()
+    show_dfnd_components(
+        profile_view,
+        topo,
+        representation='channel_profile',
+        component_ids=[component.component_id],
+    )
+    profile_tube = next(
+        message
+        for message in profile_view.messages
+        if message['op'] == 'add_channel_tube'
+        and message['options']['tag'] == f'dfnd-comp:{component.component_id}'
+    )
+    assert profile_tube['options']['tube_style'] == 'segments'
+    assert len(set(profile_tube['options']['colors'])) >= 1
+
+    blob_view = DummyView()
+    show_dfnd_components(
+        blob_view,
+        topo,
+        representation='channel_blob',
+        component_ids=[component.component_id],
+    )
+    assert any(message['op'] == 'add_pocket_blob' for message in blob_view.messages)
+    assert not any(message['op'] == 'add_channel_tube' for message in blob_view.messages)
+
+    wire_view = DummyView()
+    show_dfnd_components(
+        wire_view,
+        topo,
+        representation='channel_wire_blob',
+        component_ids=[component.component_id],
+    )
+    wire_blob = next(
+        message for message in wire_view.messages if message['op'] == 'add_pocket_blob'
+    )
+    assert wire_blob['options']['wireframe'] is True
+
+    lumen_view = DummyView()
+    show_dfnd_components(
+        lumen_view,
+        topo,
+        representation='channel_lumen',
+        component_ids=[component.component_id],
+    )
+    lumen_tube = next(
+        message
+        for message in lumen_view.messages
+        if message['op'] == 'add_channel_tube'
+        and message['options']['tag'] == f'dfnd-comp:{component.component_id}'
+    )
+    assert lumen_tube['options']['tube_style'] == 'surface'
+    assert lumen_tube['options']['surface_resolution'] == pytest.approx(0.5)
+    assert lumen_tube['options']['surface_iso_level'] == pytest.approx(0.5)
+
+    ribbon_view = DummyView()
+    show_dfnd_components(
+        ribbon_view,
+        topo,
+        representation='channel_ribbon',
+        component_ids=[component.component_id],
+    )
+    ribbon_tube = next(
+        message
+        for message in ribbon_view.messages
+        if message['op'] == 'add_channel_tube'
+        and message['options']['tag'] == f'dfnd-comp:{component.component_id}'
+    )
+    assert ribbon_tube['options']['tube_style'] == 'smooth'
+    assert ribbon_tube['options']['tube_aspect_ratio'] == pytest.approx(0.22)
+
+
+def test_scalar_isosurface_uses_generic_molsysviewer_primitive():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(comp for comp in topo.dfnd.dfn.components.wet)
+    view = DummyView()
+
+    show_dfnd_components(
+        view,
+        topo,
+        representation='scalar_isosurface',
+        component_ids=[component.component_id],
+    )
+
+    iso = next(
+        message for message in view.messages if message['op'] == 'add_scalar_isosurface'
+    )
+    assert iso['options']['centers']
+    assert iso['options']['radii']
+    assert iso['options']['values']
+    assert iso['options']['color_map'] == 'turbo'
+
+
+def test_interface_surface_aliases_are_explicit():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('two_blocks_interface.pdb')
+    component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.is_interface)
+
+    surface_view = DummyView()
+    show_dfnd_components(
+        surface_view,
+        topo,
+        representation='interface_lining_surface',
+        component_ids=[component.component_id],
+    )
+    assert any(
+        message['op'] == 'add_pocket_surface' for message in surface_view.messages
+    )
+
+    faces_view = DummyView()
+    show_dfnd_components(
+        faces_view,
+        topo,
+        representation='interface_contact_faces',
+        component_ids=[component.component_id],
+    )
+    face_msg = next(
+        message for message in faces_view.messages if message['op'] == 'add_triangle_faces'
+    )
+    assert face_msg['options']['labels']
+    assert all('role=coast_face' in label for label in face_msg['options']['labels'])
+
+
+def test_mouth_stubs_render_external_links_as_segments():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
+    view = DummyView()
+    layer = show_dfnd_components(
+        view,
+        topo,
+        representation='mouth_stubs',
+        component_ids=[component.component_id],
+    )
+
+    assert layer is not None
+    link_msg = next(
+        message
+        for message in view.messages
+        if message['op'] in {'add_network_links', 'add_links'}
+    )
+    assert link_msg['options']['coordinate_pairs']
+    assert link_msg['options']['colors']
+    assert set(link_msg['options']['colors']) == {0xF0E442}
+    assert link_msg['options']['tag'] == 'dfnd-comp'
+    assert link_msg['options']['layer_tag'] == 'dfnd-comp'
+
+
+def test_clearance_map_colours_envelope_by_residence_radius():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(
+        comp for comp in topo.dfnd.dfn.components.wet if comp.family in ('pocket', 'channel')
+    )
+
+    view = DummyView()
+    show_dfnd_components(
+        view,
+        topo,
+        representation='clearance_map',
+        component_ids=[component.component_id],
+    )
+    blob = next(message for message in view.messages if message['op'] == 'add_pocket_blob')
+    assert blob['options']['values']
+    assert len(blob['options']['values']) == len(blob['options']['centers'])
+    assert blob['options']['color_map'] == 'turbo'
+    assert 'wireframe' not in blob['options']
+
+    wire_view = DummyView()
+    show_dfnd_components(
+        wire_view,
+        topo,
+        representation='clearance_wire',
+        component_ids=[component.component_id],
+    )
+    wire_blob = next(
+        message for message in wire_view.messages if message['op'] == 'add_pocket_blob'
+    )
+    assert wire_blob['options']['values']
+    assert wire_blob['options']['wireframe'] is True
+
+
+def test_semantic_face_representations_emit_filtered_triangle_faces():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    pocket_topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    pocket_component = next(
+        comp for comp in pocket_topography.dfnd.dfn.components.wet if comp.n_mouths > 0
+    )
+    mouth_view = DummyView()
+    show_dfnd_components(
+        mouth_view,
+        pocket_topography,
+        representation='mouth_faces',
+        component_ids=[pocket_component.component_id],
+    )
+    mouth_msg = next(
+        message for message in mouth_view.messages if message['op'] == 'add_triangle_faces'
+    )
+    assert mouth_msg['options']['labels']
+    assert all('role=mouth_face' in label for label in mouth_msg['options']['labels'])
+
+    interface_topography = _build_dfnd_topo('two_blocks_interface.pdb')
+    interface_component = next(
+        comp for comp in interface_topography.dfnd.dfn.components.wet if comp.is_interface
+    )
+    interface_view = DummyView()
+    show_dfnd_components(
+        interface_view,
+        interface_topography,
+        representation='interface_faces',
+        component_ids=[interface_component.component_id],
+    )
+    interface_msg = next(
+        message
+        for message in interface_view.messages
+        if message['op'] == 'add_triangle_faces'
+    )
+    assert interface_msg['options']['labels']
+    assert all(
+        'role=coast_face' in label for label in interface_msg['options']['labels']
+    )
+
+
 def test_contact_sheet_splits_interface_lining_by_body():
     """Phase 3: an interface renders its lining surface split per body.
 
@@ -2283,6 +2537,45 @@ def test_atom_convexity_spike_is_most_convex():
     assert conv[3] > 0  # it is a protrusion (positive)
 
 
+def test_show_dfnd_spikes_uses_displacement_vectors_for_convex_peaks():
+    from types import SimpleNamespace
+
+    from molsysviewer_topomt.render import show_dfnd_spikes
+
+    coords = np.array(
+        [
+            [0.0, 0.0, 0.0],
+            [1.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 3.0],
+        ]
+    )
+    atoms = SimpleNamespace(coords=coords, index_map=np.array([10, 11, 12, 13]))
+    mesh = SimpleNamespace(atoms=atoms)
+    topography = SimpleNamespace(dfnd=SimpleNamespace(mesh=mesh))
+    calls = []
+
+    class FakeVectors:
+        def add_displacement_vectors(self, **kwargs):
+            calls.append(kwargs)
+            return 'spike-layer'
+
+    view = SimpleNamespace(shapes=SimpleNamespace(vectors=FakeVectors()))
+    layer = show_dfnd_spikes(
+        view,
+        topography,
+        radius=4.0,
+        top_n=1,
+        vector_length=0.3,
+        palette=None,
+    )
+
+    assert layer == 'spike-layer'
+    assert calls[0]['atom_indices'] == [13]
+    assert calls[0]['tag'] == 'dfnd-spikes'
+    assert calls[0]['skip_digestion'] is True
+
+
 def test_show_dfnd_convexity_colours_whole_surface():
     """§7: show_dfnd_convexity feeds per-atom convexity to whole.set_color_by_values."""
     from types import SimpleNamespace
@@ -2725,7 +3018,19 @@ def test_render_result_uses_explicit_counts_and_details():
         'cloud',
         'envelope',
         'wire_contour',
+        'clearance_map',
+        'clearance_wire',
+        'scalar_isosurface',
         'pipe',
+        'channel_tube',
+        'channel_solid',
+        'channel_profile',
+        'channel_lumen',
+        'channel_tunnel',
+        'channel_ribbon',
+        'groove_ribbon',
+        'channel_blob',
+        'channel_wire_blob',
         'rings',
         'residence_spheres',
         'alpha_spheres',
@@ -2735,6 +3040,15 @@ def test_render_result_uses_explicit_counts_and_details():
         'scaffold',
         'affinity_spheres',
         'coast_faces',
+        'semantic_faces',
+        'permeable_faces',
+        'impermeable_faces',
+        'mouth_faces',
+        'interface_faces',
+        'interface_contact_faces',
+        'interface_lining_surface',
+        'interface_surface',
+        'mouth_stubs',
         'graph',
     ],
 )

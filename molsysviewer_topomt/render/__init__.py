@@ -11,6 +11,7 @@ from ._components import (
     show_dfnd_labels,
     show_dfnd_legend,
     show_dfnd_pharmacophore,
+    show_dfnd_spikes,
 )
 from ._graph import show_dfn_graph
 from ._pockets import show_topography_pockets
@@ -29,4 +30,5 @@ __all__ = [
     'show_dfnd_convexity',
     'show_dfnd_legend',
     'show_dfnd_pharmacophore',
+    'show_dfnd_spikes',
 ]
