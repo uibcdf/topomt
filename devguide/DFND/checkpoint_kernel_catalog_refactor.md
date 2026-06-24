@@ -4,6 +4,13 @@ Date: 2026-06-24. Resume point for the kernel/catalog split. Authoritative targe
 [`taxonomy_architecture_decision.md`](taxonomy_architecture_decision.md). This file
 is a *where-we-are*, not a re-derivation.
 
+**Status: phases 1-4 done** (10 commits, `305f896`..`aff20cd`; all additive,
+green, the catalog coexists with the legacy family, the viewer is untouched).
+**The solo-doable refactor is complete.** What remains is phase 5 -- the
+**coordination-gated** step (retire `family`, re-type `feature_type`, viewer) --
+plus additive phase-3 refinements. Next move: coordinate phase 5 with the
+collaborator (the viewer owner).
+
 ## Why (pre-validation verdict, before the refactor)
 
 DFND was run on **8 real proteins** with known ligands (3ptb, 1ATP, 3LKF, 1stp,
@@ -59,7 +66,8 @@ and/or need coordination -- this is why we paused.
 
 ## How to resume
 
-- Tracking tasks: #34 (phase 3 rest), #35 (phase 4), #36 (phase 5) -- each carries a
+- Tracking tasks: #34 (phase 3 rest -- additive, can be done solo), #36 (phase 5 --
+  coordination with the viewer owner). Task #35 (phase 4) is done. Each carries a
   precise note of what is left.
 - Target/contract: `taxonomy_architecture_decision.md` (the rule, the 7 gaps, the
   migration §9, the impl status §10, the reconciliation debt §11).
