@@ -138,6 +138,9 @@ class WetComponent(Component):
         # Morphology discriminators (the topology->morphology bridge); see
         # _attach_morphometrics and feature_definitions.md.
         self.morphometrics: dict[str, Any] = {}
+        # Derived boundary measurements (the grounded boundary layer); see
+        # _attach_boundary_helpers and taxonomy_architecture_decision.md.
+        self.boundary: dict[str, Any] = {}
 
     def __repr__(self) -> str:
         tag = f' {self.interface_family}' if self.is_interface else ''
@@ -554,6 +557,7 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
     _attach_wet_motifs(components, result)
     _attach_capacity_motifs(components, result)
     _attach_morphometrics(components, result)
+    _attach_boundary_helpers(components, result, network)
     return components
 
 
@@ -980,6 +984,53 @@ def _attach_capacity_motifs(
         component.bottleneck = throats[0] if throats else None
         component.motifs.extend(throats)
         component.motifs.extend(component.chamber_candidates)
+
+
+def _attach_boundary_helpers(
+    components: Components, result: dict[str, Any], network: Any
+) -> None:
+    """Derived boundary measurements per wet component (the grounded boundary layer).
+
+    The boundary of a wet component partitions into mouths (permeable, to OCEAN)
+    and walls (non-permeable). Here we cluster the walls -- *cluster first, then
+    characterize* -- with the same edge-adjacency the kernel uses for mouths:
+
+    - ``n_connected_walls`` = number of connected non-permeable boundary clusters.
+      It subsumes the binary ``exposed`` flag: ``n_connected_walls == 0`` <=> a
+      fully exposed/porous (percolating) component.
+    - ``n_dry_contacts`` = distinct dry banks lining the component
+      (= ``len(lining_bodies)``); ``interface`` is the catalog predicate
+      ``n_dry_contacts >= 2``.
+
+    Per-wall composition (coast / exterior / constriction) and ``n_septa`` are a
+    later refinement; this slice ships the two robust counts. See
+    taxonomy_architecture_decision.md S4.
+    """
+    raw = result['raw']
+    node_component = {}
+    for component in components.values():
+        for node in component.node_indices:
+            node_component[node] = component.component_id
+
+    walls_by_component: dict[str, list] = defaultdict(list)
+    for face in raw['faces']:
+        if face['permeability_state'] == 'permeable':
+            continue  # permeable boundary faces are mouths, not walls
+        cid = node_component.get(face['owner_tetrahedron_id'])
+        if cid is None:
+            continue
+        neighbor = face['neighbor_tetrahedron_id']
+        if neighbor >= 0 and node_component.get(neighbor) == cid:
+            continue  # internal non-permeable face (same component), not a boundary wall
+        walls_by_component[cid].append(face)
+
+    for component in components.wet:
+        faces = walls_by_component.get(component.component_id, [])
+        clusters = network._cluster_external_faces(faces) if faces else []
+        component.boundary = {
+            'n_connected_walls': len(clusters),
+            'n_dry_contacts': len(component.lining_bodies),
+        }
 
 
 def _attach_morphometrics(components: Components, result: dict[str, Any]) -> None:
