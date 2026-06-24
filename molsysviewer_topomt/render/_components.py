@@ -888,6 +888,175 @@ def _mouth_cap_face_ids(comp, raw):
     return face_ids
 
 
+
+def _components_matching(
+    dfnd_data,
+    *,
+    component_ids=None,
+    component_types=None,
+    interfaces_only=False,
+):
+    requested = None if component_ids is None else set(component_ids)
+    matches = []
+    for comp in dfnd_data.dfn.components.wet:
+        if requested is not None and comp.component_id not in requested:
+            continue
+        if component_types and comp.family not in component_types:
+            continue
+        if interfaces_only and not getattr(comp, 'is_interface', False):
+            continue
+        matches.append(comp)
+    return matches
+
+
+def _normal_from_points(points) -> tuple[float, float, float]:
+    array = np.asarray(points, dtype=float)
+    if len(array) < 2:
+        return (1.0, 0.0, 0.0)
+    centered = array - array.mean(axis=0)
+    try:
+        _, _, vh = np.linalg.svd(centered, full_matrices=False)
+    except np.linalg.LinAlgError:
+        return (1.0, 0.0, 0.0)
+    normal = np.asarray(vh[0], dtype=float)
+    norm = float(np.linalg.norm(normal))
+    if norm < 1e-10:
+        return (1.0, 0.0, 0.0)
+    return tuple(float(value) for value in normal / norm)
+
+
+def _component_cutaway_payload(topography, component, *, interface_normal=False):
+    geometry = component_residence_sphere_geometry(
+        topography, component, use_resident_nodes=True
+    )
+    if not geometry.centers:
+        geometry = component_alpha_sphere_geometry(
+            topography, component, use_resident_nodes=False
+        )
+    if not geometry.centers:
+        return None
+
+    points = np.asarray(geometry.centers, dtype=float)
+    center = tuple(float(value) for value in points.mean(axis=0))
+    normal = None
+    if interface_normal:
+        link_geometry = _interface_link_geometry(topography, [component])
+        vectors = []
+        for start, end in zip(link_geometry.starts, link_geometry.ends, strict=True):
+            vector = np.asarray(end, dtype=float) - np.asarray(start, dtype=float)
+            norm = float(np.linalg.norm(vector))
+            if norm > 1e-10:
+                vectors.append(vector / norm)
+        if vectors:
+            averaged = np.mean(np.asarray(vectors), axis=0)
+            norm = float(np.linalg.norm(averaged))
+            if norm > 1e-10:
+                normal = tuple(float(value) for value in averaged / norm)
+    if normal is None:
+        normal = _normal_from_points(points)
+    return center, normal
+
+
+def _show_dfnd_cutaway(
+    view,
+    topography=None,
+    *,
+    component_ids=None,
+    component_types=fam.PRIMARY_WET_FAMILIES,
+    interfaces_only=False,
+    invert=False,
+    tag_prefix='dfnd-cutaway',
+):
+    topography = _resolve_topography(view, topography)
+    if topography is None:
+        raise ValueError('topography is required')
+    dfnd_data = getattr(topography, 'dfnd', None)
+    if dfnd_data is None:
+        raise ValueError('Topography has no DFND data attached')
+    if not hasattr(view, 'scene') or not hasattr(view.scene, 'add_section'):
+        raise TypeError('view must expose scene.add_section() for DFND cutaways')
+
+    sections = []
+    for comp in _components_matching(
+        dfnd_data,
+        component_ids=component_ids,
+        component_types=component_types,
+        interfaces_only=interfaces_only,
+    ):
+        payload = _component_cutaway_payload(
+            topography, comp, interface_normal=interfaces_only
+        )
+        if payload is None:
+            continue
+        center, normal = payload
+        tag = f'{tag_prefix}:{comp.component_id}'
+        try:
+            view.scene.remove_section(tag)
+        except (AttributeError, KeyError):
+            pass
+        sections.append(
+            view.scene.add_section(
+                point=puw.quantity(center, 'nm'),
+                normal=normal,
+                invert=invert,
+                tag=tag,
+            )
+        )
+    if not sections:
+        return None
+    return sections[0] if len(sections) == 1 else sections
+
+
+def show_dfnd_pocket_cutaway(
+    view,
+    topography=None,
+    *,
+    component_ids=None,
+    component_types=fam.PRIMARY_WET_FAMILIES,
+    invert=False,
+    tag_prefix='dfnd-cutaway',
+):
+    """Add clipping sections through selected wet DFND components.
+
+    This helper delegates the actual clipping plane to ``view.scene.add_section``.
+    The initial plane is a diagnostic cut through the component centroid; it does
+    not modify the DFND model or add a component representation.
+    """
+    return _show_dfnd_cutaway(
+        view,
+        topography,
+        component_ids=component_ids,
+        component_types=component_types,
+        interfaces_only=False,
+        invert=invert,
+        tag_prefix=tag_prefix,
+    )
+
+
+def show_dfnd_interface_cutaway(
+    view,
+    topography=None,
+    *,
+    component_ids=None,
+    component_types=fam.PRIMARY_WET_FAMILIES,
+    invert=False,
+    tag_prefix='dfnd-interface-cutaway',
+):
+    """Add clipping sections through selected DFND interface components.
+
+    The normal is initialized from the mean wet-to-dry coast direction when coast
+    faces are available, falling back to the component's principal geometric axis.
+    """
+    return _show_dfnd_cutaway(
+        view,
+        topography,
+        component_ids=component_ids,
+        component_types=component_types,
+        interfaces_only=True,
+        invert=invert,
+        tag_prefix=tag_prefix,
+    )
+
 def carve_voids(
     view, topography=None, *, component_ids=None, component_types=(fam.VOID,), fade=0.85
 ):

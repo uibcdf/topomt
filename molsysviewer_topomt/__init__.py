@@ -54,6 +54,8 @@ from .render import (
     show_dfnd_tetrahedra,
     show_dfn_graph,
     show_dfnd_components,
+    show_dfnd_interface_cutaway,
+    show_dfnd_pocket_cutaway,
 )
 from .runtime import TopoMTAddonRuntime, ensure_runtime, record_event
 from .simplex_selection import simplex_selection_info
@@ -87,6 +89,8 @@ __all__ = [
     'show_dfnd_tetrahedra',
     'show_dfn_graph',
     'show_dfnd_components',
+    'show_dfnd_interface_cutaway',
+    'show_dfnd_pocket_cutaway',
     'simplex_selection_info',
     'build_topography_standalone0_html',
     'launch_topography_standalone0',

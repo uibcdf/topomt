@@ -7,6 +7,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import molsysviewer
 import numpy as np
 import pytest
+from molsysviewer.scene import SceneManager
 from molsysviewer.shapes import ShapesManager
 
 import topomt as tmt
@@ -203,7 +204,11 @@ class DummyView:
     def __init__(self):
         self.messages = []
         self._layers = {}
+        self._scene_objects = {}
+        self._section_history = []
+        self._section_counter = 0
         self._layer_counter = 0
+        self.scene = SceneManager(self)
         self.shapes = ShapesManager(self)
         self.addons = molsysviewer.MolSysView().addons
         self.load_calls = []
@@ -1810,6 +1815,51 @@ def test_interface_ribbon_summarizes_coast_face_centroids():
     assert ribbon_msg['options']['tube_aspect_ratio'] == pytest.approx(0.18)
     assert len(ribbon_msg['options']['centers']) >= 2
     assert len(ribbon_msg['options']['radii']) == len(ribbon_msg['options']['centers'])
+
+
+def test_dfnd_cutaway_helpers_add_scene_sections():
+    from molsysviewer_topomt.render import (
+        show_dfnd_interface_cutaway,
+        show_dfnd_pocket_cutaway,
+    )
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
+
+    pocket_view = DummyView()
+    pocket_section = show_dfnd_pocket_cutaway(
+        pocket_view,
+        topo,
+        component_ids=[component.component_id],
+        tag_prefix='cut',
+    )
+
+    assert pocket_section.tag == f'cut:{component.component_id}'
+    pocket_msg = next(
+        message for message in pocket_view.messages if message['op'] == 'set_sections'
+    )
+    assert len(pocket_msg['sections']) == 1
+    assert pocket_msg['sections'][0]['tag'] == pocket_section.tag
+    assert len(pocket_msg['sections'][0]['point']) == 3
+    assert np.linalg.norm(pocket_msg['sections'][0]['normal']) == pytest.approx(1.0)
+
+    interface_topo = _build_dfnd_topo('two_blocks_interface.pdb')
+    interface_component = next(
+        comp for comp in interface_topo.dfnd.dfn.components.wet if comp.is_interface
+    )
+    interface_view = DummyView()
+    interface_section = show_dfnd_interface_cutaway(
+        interface_view,
+        interface_topo,
+        component_ids=[interface_component.component_id],
+    )
+
+    assert interface_section is not None
+    assert interface_section.tag == f'dfnd-interface-cutaway:{interface_component.component_id}'
+    interface_msg = next(
+        message for message in interface_view.messages if message['op'] == 'set_sections'
+    )
+    assert np.linalg.norm(interface_msg['sections'][0]['normal']) == pytest.approx(1.0)
 
 
 def test_pocket_depth_map_uses_topological_depth_values():
