@@ -149,6 +149,23 @@ Community nouns are **derived views**; thresholds (`occlusion = 1`, `τ`) are a
 views. `feature_type` on public feature objects **is** this classification and **is**
 the stable contract the viewer consumes (§9).
 
+### 5.4 Generic features and continuous refinement
+
+The catalog assigns the **most specific name it can justify with today's metrics**,
+defaulting to a **generic feature per shape-type** when it cannot yet refine to a
+leaf. Refinement is **first-class and continuous**: a 1-mouth open concavity is the
+generic `open_concavity` (we measure aperture, not shape); when an elongation/axis
+metric lands it refines to the leaf `groove` (or `dish`/`funnel`), or stays generic.
+The generics are a small backbone -- one-ish per shape-type (concavity, convexity,
+mixed, boundary, point) -- created **when DFND promotes components in that
+shape-type**, not speculatively. Even today's names (`void`/`pocket`/`channel`) are
+coarse levels, refinable further. The authoritative sheet (every feature by
+shape-type, its generic, refined leaves + the metric that refines each, the
+component correspondence, and the motifs) is
+[`feature_catalog.md`](feature_catalog.md); the backbone is recorded in code as
+`classify.GENERIC_FEATURE_BY_SHAPE_TYPE`. ('groove' was renamed to the generic
+`open_concavity` to stop over-claiming elongation -- the elongation debt, §12.)
+
 ## 6. Face & constriction taxonomy
 
 A boundary face is `(other side) × (does the probe pass?)`:

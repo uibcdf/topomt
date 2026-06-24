@@ -56,6 +56,20 @@ def classify_topology(
 # (elongated, with an axis), a round dish, a funnel, ... -- or stays open_concavity.
 OPEN_CONCAVITY = 'open_concavity'
 
+# The feature-catalog backbone: the generic feature(s) per shape-type -- the
+# refinement target for a component we cannot yet name to a specific leaf. Recorded
+# here so the backbone is one source in code; the full sheet (refined leaves, the
+# metric that refines each, component correspondence, motifs, status) lives in
+# devguide/DFND/feature_catalog.md. Create a shape-type's generic WHEN DFND promotes
+# components in it (concavity now; convexity/mixed when their promotion is built).
+GENERIC_FEATURE_BY_SHAPE_TYPE = {
+    'concavity': (fam.VOID, fam.POCKET, OPEN_CONCAVITY, fam.CHANNEL),  # implemented
+    'convexity': ('generic_convexity',),  # future -- no dry/convex promotion yet
+    'mixed': ('interface',),  # partial -- detected via n_dry_contacts
+    'boundary': ('mouth', 'neck'),  # mouth implemented; neck = the constriction
+    'point': ('generic_point',),  # future
+}
+
 # |occlusion - 1| within this band -> the pocket/open_concavity call is marginal.
 _OCCLUSION_MARGIN = 0.1
 
