@@ -76,6 +76,9 @@ GENERIC_FEATURE_BY_SHAPE_TYPE = {
 
 # |occlusion - 1| within this band -> the pocket/open_concavity call is marginal.
 _OCCLUSION_MARGIN = 0.1
+# |occlusion - 1| at/above which the pocket/open_concavity call is fully confident
+# (occlusion 2 or 0 -> 1.0). Confidence ramps linearly from the threshold.
+_OCCLUSION_FULL_CONFIDENCE = 1.0
 
 
 def classify(
@@ -84,7 +87,7 @@ def classify(
     n_wall_faces: int,
     occlusion: float | None = None,
 ) -> dict:
-    """Catalog morphological classification: ``{name, marginal}``.
+    """Catalog morphological classification: ``{name, confidence, marginal}``.
 
     Refines the 1-mouth resident family by aperture -- ``pocket`` (occluded,
     ``occlusion > 1``) vs ``open_concavity`` (open, ``occlusion <= 1``). The open
@@ -93,13 +96,21 @@ def classify(
     occluded case keeps the community name ``pocket``. Occlusion is
     name-determining only for one mouth (S5 criterion); all other families pass
     through. This is the **additive** morphology layer (coexists with the kernel
-    ``family``; does not yet drive ``feature_type``). ``marginal`` flags an
-    occlusion near the boundary; fuller per-threshold confidence is later.
+    ``family``; does not yet drive ``feature_type``).
+
+    **Confidence is per-threshold** (decision S7): the topological names are exact
+    given the grounded signature, so ``confidence = 1.0`` (their probe-margin is a
+    separate first-class view, ``component.characteristic_radii``); the
+    morphological pocket/open_concavity call rides the ``occlusion = 1`` threshold,
+    so its confidence ramps with ``|occlusion - 1|`` (its own unit, a ratio), and
+    ``marginal`` flags an occlusion within the boundary band.
     """
     family = classify_topology(n_external_links, n_resident_nodes, n_wall_faces)
     if family == fam.POCKET and occlusion is not None:
+        margin = abs(occlusion - 1.0)
         return {
             'name': fam.POCKET if occlusion > 1.0 else OPEN_CONCAVITY,
-            'marginal': abs(occlusion - 1.0) <= _OCCLUSION_MARGIN,
+            'confidence': min(1.0, margin / _OCCLUSION_FULL_CONFIDENCE),
+            'marginal': margin <= _OCCLUSION_MARGIN,
         }
-    return {'name': family, 'marginal': False}
+    return {'name': family, 'confidence': 1.0, 'marginal': False}

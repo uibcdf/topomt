@@ -171,6 +171,49 @@ class WetComponent(Component):
             'branched': n_mouths >= 3,
         }
 
+    @property
+    def characteristic_radii(self) -> dict[str, Any]:
+        """The component's classification transitions over probe, read directly from
+        the probe-independent grounded values (no sweep). All in nm-internal units;
+        ``decision S7``:
+
+        - ``residence_death_radius`` -- max ``R_residence``; above it the probe loses
+          residence (the component degenerates).
+        - ``seal_radius`` -- max mouth ``R_gate``; above it the mouths seal (it becomes
+          a void). ``None`` when there are no mouths.
+        - ``merge_radii`` -- constriction (wet<->wet wall) ``R_gate``s, descending;
+          probe values at which it merges with a neighbour cavity.
+        - ``split_radii`` -- internal throat ``separation_radius``es, descending; probe
+          values at which it splits internally.
+
+        These are the major transitions; the full trajectory is the entire sorted set
+        of face ``R_gate`` / tet ``R_residence`` (mouth clusters also split/merge at
+        intermediate values), so this is the backbone, not the complete spectrum.
+        """
+        morph = self.morphometrics or {}
+        merge = sorted(
+            (
+                w['R_gate']
+                for w in self.boundary.get('walls', [])
+                if w.get('kind') == 'constriction' and w.get('R_gate') is not None
+            ),
+            reverse=True,
+        )
+        split = sorted(
+            (
+                t['separation_radius']
+                for t in self.throat_candidates
+                if t.get('separation_radius') is not None
+            ),
+            reverse=True,
+        )
+        return {
+            'residence_death_radius': morph.get('interior_radius'),
+            'seal_radius': morph.get('mouth_radius'),
+            'merge_radii': merge,
+            'split_radii': split,
+        }
+
     def __repr__(self) -> str:
         tag = f' {self.interface_family}' if self.is_interface else ''
         return (
@@ -1089,11 +1132,15 @@ def _attach_boundary_helpers(
         walls = []
         for cluster in clusters:
             composition = Counter(_face_class(f) for f in cluster)
+            gates = [f['R_gate'] for f in cluster if f.get('R_gate') is not None]
             walls.append(
                 {
                     'kind': composition.most_common(1)[0][0],
                     'n_faces': len(cluster),
                     'composition': dict(composition),
+                    # widest gate of the cluster: a constriction wall's R_gate is a
+                    # merge radius (characteristic_radii); see decision S6/S7.
+                    'R_gate': max(gates) if gates else None,
                 }
             )
         component.boundary = {

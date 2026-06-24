@@ -76,6 +76,25 @@ def test_signature_is_grounded_and_name_free():
     assert channel.signature['n_mouths'] >= 2
 
 
+def test_characteristic_radii_expose_grounded_transitions():
+    # the classification transitions over probe, read from the probe-independent
+    # grounded values (no sweep): seal = widest mouth gate, residence_death =
+    # widest interior clearance; merge/split = constriction/throat radii
+    pocket = _largest(_wet(synthetic.dumbbell(), 1.0), 'pocket')
+    assert pocket is not None
+    cr = pocket.characteristic_radii
+    assert cr['seal_radius'] is not None and cr['seal_radius'] > 0
+    # an occluded pocket: interior wider than the mouth
+    assert cr['residence_death_radius'] >= cr['seal_radius']
+    assert isinstance(cr['merge_radii'], list)
+    assert isinstance(cr['split_radii'], list)
+
+    # a void has no mouths -> no seal radius
+    void = _largest(_wet(synthetic.dumbbell(), 1.8), 'void')
+    assert void.characteristic_radii['seal_radius'] is None
+    assert void.characteristic_radii['residence_death_radius'] is not None
+
+
 def test_every_wet_component_has_boundary_counts():
     # the helper runs for all wet components and yields non-negative integer counts
     for component in _wet(synthetic.dumbbell(), 1.8).wet:

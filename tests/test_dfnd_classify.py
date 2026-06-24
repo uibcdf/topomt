@@ -42,6 +42,18 @@ def test_classify_flags_marginal_near_the_pocket_groove_boundary():
     assert classify(1, 1, 5, occlusion=2.0)['marginal'] is False
 
 
+def test_classify_confidence_is_per_threshold():
+    # topological names are exact given the signature -> confidence 1.0 (their
+    # probe-margin lives in characteristic_radii, not here; decision S7)
+    assert classify(0, 1, 5)['confidence'] == 1.0  # void
+    assert classify(2, 1, 5)['confidence'] == 1.0  # channel
+    assert classify(1, 1, 0)['confidence'] == 1.0  # percolating
+    # the morphological pocket/open_concavity call ramps with |occlusion - 1|
+    assert classify(1, 1, 5, occlusion=2.0)['confidence'] == 1.0  # far -> full
+    near = classify(1, 1, 5, occlusion=1.05)
+    assert near['confidence'] < 0.1 and near['marginal'] is True  # near boundary
+
+
 def _largest(system, probe, family):
     network = DelaunayFlowNetwork.from_coordinates_and_radii(
         np.asarray(system.coords, float), np.asarray(system.radii, float)
