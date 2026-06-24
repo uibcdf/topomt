@@ -267,18 +267,38 @@ Dry is secondary and less mature; full spec is **deferred**, the symmetric slot
 - throat/chamber/bottleneck promoted to provisional (`output_status`).
 - morphometrics: `occlusion`/`enclosable`/`occlusion_gap`/`buriedness`/`deepest_chamber`.
 
-Caveat: these live **kernel-side** (`components.py`) **alongside `family`**; under
-this decision they must be **re-homed/reframed as derived helpers** (§4) during the
-split. Done = validated measurement, not final location.
+Re-homing (§4): the derived views are now **proper derived helpers** — `signature`,
+`characteristic_radii`, and `family` itself are read-only properties computed from
+the grounded inputs (no longer kernel facts sitting beside a stored `family`).
+`morphometrics`/hierarchy are still computed at build time and cached on the
+component (a legitimate caching of a derived value); the conceptual re-grounding is
+done (they are derived-from-grounded, not identity), the physical lazification is an
+optional cleanup.
 
-**Pending — the architectural re-grounding:**
+**Landed (kernel side, committed):**
 
-- the kernel/catalog split; `classify()` single source; probe-parameterization.
-- the boundary-face partition + derived wall/constriction/`n_dry_contacts` helpers.
-- `family` removal (inversion); per-mouth occlusion; marginality + characteristic
-  radii in `classify`; non-resident compositionalization (retire `nonresident_passage`).
-- `septum` → `constriction` rename (+ dry `septum`); `branched` as modifier;
-  `output_status` reframed to track the catalog; dry-side dual scheme.
+- the kernel/catalog split; `classify()` single source; the boundary-face partition
+  + derived wall/constriction/`n_dry_contacts` helpers; non-resident
+  compositionalization (retire `nonresident_passage`).
+- **`family` retired as a stored kernel fact** (`d2eff71`): it is a derived property
+  over the grounded signature (`WetComponent.family = classify_topology(n_mouths,
+  n_resident_nodes, n_wall_faces)`; `DryComponent.family = DRY_BANK`); `side` is now
+  intrinsic to the subclass (the more fundamental axis), not derived from `family`.
+- **characteristic radii** as a derived view (`component.characteristic_radii`:
+  residence_death/seal/merge/split) + **per-threshold confidence** in `classify`
+  (`{name, confidence, marginal}`); per-mouth occlusion; marginality.
+- the grounded name-free `component.signature` (the renderer keys on it, not family).
+
+**Pending — the catalog/viewer migration (its own effort, `viewer_grounded_named_split.md`):**
+
+- **`feature_type` re-typing** from `classification` (decision §5.2): deliberately
+  deferred (it needs `open_concavity`/`groove`/… registered in the feature zoo
+  `_feature_constants`, plus payload/renderer/tests). This **is** the feature-layer
+  migration; the bridge already carries `classification` additively (front 1.a).
+- the viewer grounded/named split (component primitives vs named features),
+  `show_features` API, chemistry overlay, convex diagnostics.
+- `septum` → `constriction` rename (+ dry `septum`); `output_status` `kind='family'`
+  → catalog framing (cosmetic; not broken); dry-side dual scheme.
 - **real-system validation** (§12).
 
 ## 11. Reconciliation debt
