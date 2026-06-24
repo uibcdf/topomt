@@ -11,6 +11,7 @@ from topomt.dfnd.selectors import select_faces
 from ..geometry import (
     EntityRef,
     RingGeometry,
+    SegmentGeometry,
     centerline_ring_geometry,
     component_alpha_sphere_geometry,
     component_branch_geometries,
@@ -149,6 +150,8 @@ _COMPONENT_REPRESENTATIONS = {
     'clearance_map',
     'clearance_wire',
     'scalar_isosurface',
+    'pocket_depth_map',
+    'shape_ellipsoids',
     'pipe',
     'channel_tube',
     'channel_solid',
@@ -160,6 +163,8 @@ _COMPONENT_REPRESENTATIONS = {
     'channel_blob',
     'channel_wire_blob',
     'rings',
+    'mouth_rings',
+    'bottleneck_rings',
     'residence_spheres',
     'alpha_spheres',
     'probe_centers',
@@ -168,12 +173,16 @@ _COMPONENT_REPRESENTATIONS = {
     'scaffold',
     'affinity_spheres',
     'coast_faces',
+    'dry_interface_faces',
+    'dry_blocked_faces',
+    'dry_depth_map',
     'semantic_faces',
     'permeable_faces',
     'impermeable_faces',
     'mouth_faces',
     'interface_faces',
     'interface_contact_faces',
+    'interface_links',
     'interface_lining_surface',
     'interface_surface',
     'mouth_stubs',
@@ -525,6 +534,190 @@ def _component_face_payloads(topography, selected_components, representation: st
         )
     return color_by_face_id, label_by_face_id
 
+
+
+
+def _component_depth_values(component, geometry):
+    depth_by_tetrahedron = getattr(component, 'topological_depth', {}) or {}
+    return [
+        float(depth_by_tetrahedron.get(int(ref.entity_id), 0))
+        for ref in geometry.refs
+    ]
+
+
+def _interface_link_geometry(topography, selected_components) -> SegmentGeometry:
+    selected_ids = {comp.component_id for comp in selected_components}
+    relevant_faces = []
+    tetrahedron_ids = set()
+    for face in topography.dfnd.dfn.components.coast_faces:
+        if (
+            face.get('wet_component_id') not in selected_ids
+            and face.get('dry_component_id') not in selected_ids
+        ):
+            continue
+        wet_tetrahedron = int(face['wet_tetrahedron_id'])
+        dry_tetrahedron = int(face['dry_tetrahedron_id'])
+        relevant_faces.append((face, wet_tetrahedron, dry_tetrahedron))
+        tetrahedron_ids.add(wet_tetrahedron)
+        tetrahedron_ids.add(dry_tetrahedron)
+    if not relevant_faces:
+        return SegmentGeometry((), (), 'nm', ())
+
+    centers = tetrahedron_centers(topography, sorted(tetrahedron_ids))
+    center_by_id = {
+        int(ref.entity_id): point
+        for point, ref in zip(centers.coordinates, centers.refs, strict=True)
+    }
+    starts = []
+    ends = []
+    refs = []
+    for face, wet_tetrahedron, dry_tetrahedron in relevant_faces:
+        if wet_tetrahedron not in center_by_id or dry_tetrahedron not in center_by_id:
+            continue
+        starts.append(center_by_id[wet_tetrahedron])
+        ends.append(center_by_id[dry_tetrahedron])
+        refs.append(
+            EntityRef(
+                kind='interface_link',
+                entity_id=face.get('face_id'),
+                tetrahedron_ids=(wet_tetrahedron, dry_tetrahedron),
+                component_key=None,
+                metadata={
+                    'wet_component_id': face.get('wet_component_id'),
+                    'dry_component_id': face.get('dry_component_id'),
+                    'face_id': face.get('face_id'),
+                },
+            )
+        )
+    return SegmentGeometry(tuple(starts), tuple(ends), 'nm', tuple(refs))
+
+def _lerp_color(color_a: int, color_b: int, fraction: float) -> int:
+    fraction = max(0.0, min(1.0, float(fraction)))
+    ar, ag, ab = (color_a >> 16) & 0xFF, (color_a >> 8) & 0xFF, color_a & 0xFF
+    br, bg, bb = (color_b >> 16) & 0xFF, (color_b >> 8) & 0xFF, color_b & 0xFF
+    rr = round(ar + (br - ar) * fraction)
+    rg = round(ag + (bg - ag) * fraction)
+    rb = round(ab + (bb - ab) * fraction)
+    return (rr << 16) | (rg << 8) | rb
+
+
+def _dry_depth_color(depth, max_depth) -> int:
+    if depth is None:
+        return _OKABE_ITO['grey']
+    if not max_depth or max_depth <= 0:
+        return _OKABE_ITO['yellow']
+    return _lerp_color(_OKABE_ITO['yellow'], _OKABE_ITO['vermillion'], depth / max_depth)
+
+
+def _dry_depth_by_tetrahedron(selected_components) -> dict[int, int]:
+    depths = {}
+    for comp in selected_components:
+        if getattr(comp, 'side', None) != 'dry':
+            continue
+        raw = getattr(comp, 'raw_record', None) or {}
+        for tetrahedron_id, depth in raw.get('face_depth_by_tetrahedron', {}).items():
+            if depth is None:
+                continue
+            depths[int(tetrahedron_id)] = int(depth)
+    return depths
+
+
+def _dry_face_payloads(topography, selected_components, representation: str):
+    selected_tetrahedra = {
+        int(tetrahedron_id)
+        for comp in selected_components
+        if getattr(comp, 'side', None) == 'dry'
+        for tetrahedron_id in _component_node_indices(comp, use_resident_nodes=False)
+    }
+    if not selected_tetrahedra:
+        return {}, {}
+
+    depth_by_tetrahedron = _dry_depth_by_tetrahedron(selected_components)
+    max_depth = max(depth_by_tetrahedron.values(), default=0)
+    color_by_face_id = {}
+    label_by_face_id = {}
+
+    if representation == 'dry_interface_faces':
+        for face in getattr(topography.dfnd.dfn.components, 'coast_faces', []):
+            dry_tetrahedron = int(face.get('dry_tetrahedron_id', -1))
+            if dry_tetrahedron not in selected_tetrahedra:
+                continue
+            face_id = int(face['face_id'])
+            color_by_face_id[face_id] = _OKABE_ITO['orange']
+            label_by_face_id[face_id] = (
+                f'Dry interface face {face_id} | '
+                f'Wet: {face.get("wet_component_id")} | '
+                f'Dry: {face.get("dry_component_id")} | '
+                f'Area: {_angstrom2_from_nm2(face.get("area", 0.0)):.2f} Å²'
+            )
+        return color_by_face_id, label_by_face_id
+
+    for face in select_faces(topography, permeability_state='non_permeable'):
+        owner = int(face.get('owner_tetrahedron_id', -1))
+        neighbor = int(face.get('neighbor_tetrahedron_id', -1))
+        if owner not in selected_tetrahedra and neighbor not in selected_tetrahedra:
+            continue
+        face_id = int(face['face_id'])
+        dry_depths = [
+            depth_by_tetrahedron[tetrahedron_id]
+            for tetrahedron_id in (owner, neighbor)
+            if tetrahedron_id in depth_by_tetrahedron
+        ]
+        depth = min(dry_depths) if dry_depths else None
+        color_by_face_id[face_id] = (
+            _dry_depth_color(depth, max_depth)
+            if representation == 'dry_depth_map'
+            else _OKABE_ITO['vermillion']
+        )
+        depth_label = 'unknown' if depth is None else str(depth)
+        label_by_face_id[face_id] = (
+            f'Dry face {face_id} | permeability=non_permeable | '
+            f'face_depth={depth_label} | tetrahedra={owner},{neighbor}'
+        )
+    return color_by_face_id, label_by_face_id
+
+def _component_shape_ellipsoid_payload(topography, component, *, use_resident_nodes=True):
+    """Return one PCA ellipsoid payload for a component in nm coordinates.
+
+    The ellipsoid is a visual summary of spatial orientation and elongation. It is
+    not a DFND classification criterion: axes come from the covariance of
+    residence centers when available, otherwise from alpha-sphere centers.
+    """
+    geometry = component_residence_sphere_geometry(
+        topography, component, use_resident_nodes=use_resident_nodes
+    )
+    if len(geometry.centers) < 2:
+        geometry = component_alpha_sphere_geometry(
+            topography, component, use_resident_nodes=False
+        )
+    if len(geometry.centers) < 2:
+        return None
+
+    points = np.asarray(geometry.centers, dtype=float)
+    center = points.mean(axis=0)
+    centered = points - center
+    covariance = np.cov(centered, rowvar=False)
+    if covariance.shape != (3, 3) or not np.all(np.isfinite(covariance)):
+        return None
+    values, vectors = np.linalg.eigh(covariance)
+    order = np.argsort(values)[::-1]
+    values = np.maximum(values[order], 1e-6)
+    vectors = vectors[:, order].T
+
+    # Convert nm axes to Angstrom because MolSysViewer currently serializes
+    # ellipsoid centers through unit conversion but leaves eigenvalues as raw
+    # Mol* wire lengths.
+    axes_angstrom = tuple(float(np.sqrt(value) * 10.0) for value in values)
+    anisotropy = 0.0
+    if axes_angstrom[0] > 0.0:
+        anisotropy = (axes_angstrom[0] - axes_angstrom[-1]) / axes_angstrom[0]
+    return {
+        'center': center,
+        'eigenvalues': axes_angstrom,
+        'eigenvectors': tuple(tuple(float(x) for x in row) for row in vectors),
+        'anisotropy': float(anisotropy),
+    }
+
 def _atom_affinity_colors(molsys):
     """Per-(molsys)atom affinity colour from ``molsysmt.physchem`` (hydrophobicity
     + charge by residue). Returns a list indexed by molsys atom index, or ``None``
@@ -772,6 +965,8 @@ def _render_dfnd_component_layers(
         - 'wire_contour': Wireframe iso-surface from residence spheres.
         - 'clearance_map': Volumetric envelope coloured by local R_residence.
         - 'scalar_isosurface': Domain-neutral gaussian isosurface of residence spheres.
+        - 'pocket_depth_map': Envelope coloured by wet topological depth from mouths.
+        - 'shape_ellipsoids': PCA ellipsoid per component for orientation/elongation.
         - 'clearance_wire': Wireframe envelope coloured by local R_residence.
         - 'pipe': Channels as a variable-radius tube along their through-path
           (centerline + R_residence) with a bottleneck marker; >2-mouth channels
@@ -787,6 +982,8 @@ def _render_dfnd_component_layers(
           reading direction and branching without implying a validated path.
         - 'channel_blob': Explicit channel-only volumetric blob.
         - 'channel_wire_blob': Explicit channel-only wireframe blob.
+        - 'mouth_rings': Aperture rings at external links.
+        - 'bottleneck_rings': Neck markers for channel shortest-distance skeletons.
         - 'rings': HOLE-style clearance profile of a channel — a ring per
           centerline station coloured by free-radius threshold (green/amber/red).
         - 'residence_spheres': Maximum-clearance spheres inside resident tetrahedra.
@@ -801,6 +998,9 @@ def _render_dfnd_component_layers(
           physicochemical affinity of the lining (hydrophobic/polar/charged),
           from molsysmt.physchem; neutral for dummy systems.
         - 'coast_faces': Boundary faces touching between wet and dry sides.
+        - 'dry_interface_faces': Dry-side wet/dry coast faces.
+        - 'dry_blocked_faces': Non-permeable faces touching selected dry banks.
+        - 'dry_depth_map': Dry faces coloured by face-depth from interface.
         - 'semantic_faces': DFND faces touching selected components, coloured by semantic role.
         - 'permeable_faces': Permeable DFND faces touching selected components.
         - 'impermeable_faces': Non-permeable DFND faces touching selected components.
@@ -891,6 +1091,11 @@ def _render_dfnd_component_layers(
         show_wet = True
         show_dry = False
         interfaces_only = True
+    if requested_representation in {'dry_interface_faces', 'dry_blocked_faces', 'dry_depth_map'}:
+        show_wet = False
+        show_dry = True
+        component_types = None
+        interfaces_only = False
 
     # Gather matching components
     selected_components = []
@@ -1132,7 +1337,7 @@ def _render_dfnd_component_layers(
             layers.append(layer)
         return layers[0] if len(layers) == 1 else layers
 
-    elif representation in {'cloud', 'clearance_map', 'clearance_wire', 'scalar_isosurface'}:
+    elif representation in {'cloud', 'clearance_map', 'clearance_wire', 'scalar_isosurface', 'pocket_depth_map'}:
         # Render a separate volumetric envelope per component. The clearance
         # variants use the same scalar field but pass R_residence as a per-sphere
         # value so MolSysViewer colours the surface by local probe clearance.
@@ -1163,15 +1368,19 @@ def _render_dfnd_component_layers(
                 tag=tag,
                 layer_tag=tag_prefix,
                 name=f'{name} {comp_id}'
-                + (' clearance' if clearance else ''),
+                + (' clearance' if clearance else ' depth' if representation == 'pocket_depth_map' else ''),
                 resolution=blob_resolution,
                 smoothing=blob_smoothing,
                 iso_level=blob_iso_level,
                 radius_scale=blob_radius_scale,
-                values=[_angstrom_from_nm(radius) for radius in geometry.radii]
-                if clearance
-                else None,
-                color_map='turbo' if clearance else None,
+                values=(
+                    [_angstrom_from_nm(radius) for radius in geometry.radii]
+                    if clearance
+                    else _component_depth_values(comp, geometry)
+                    if representation == 'pocket_depth_map'
+                    else None
+                ),
+                color_map='turbo' if clearance or representation == 'pocket_depth_map' else None,
                 wireframe=representation == 'clearance_wire',
                 skip_digestion=True,
             )
@@ -1493,6 +1702,102 @@ def _render_dfnd_component_layers(
             return None
         return layers[0] if len(layers) == 1 else layers
 
+
+    elif representation == 'mouth_rings':
+        for comp in selected_components:
+            comp_id = comp.component_id
+            geometry = mouth_ring_geometry(topography, comp)
+            if not geometry.centers:
+                continue
+            layers.append(
+                add_rings(
+                    view,
+                    geometry,
+                    colors=[_MOUTH_ACCENT] * len(geometry.centers),
+                    alpha=min(1.0, max(alpha, 0.75)),
+                    tag=f'{tag_prefix}:{comp_id}',
+                    layer_tag=tag_prefix,
+                    name=f'{name} {comp_id} mouths',
+                    skip_digestion=True,
+                )
+            )
+
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'bottleneck_rings':
+        for comp in selected_components:
+            comp_id = comp.component_id
+            if comp.family != fam.CHANNEL or comp.raw_record is None:
+                continue
+            path_geometry, bottleneck_index = component_centerline_geometry(
+                topography, comp
+            )
+            if not path_geometry.centers or bottleneck_index < 0:
+                continue
+            path_rings = centerline_ring_geometry(topography, comp)
+            geometry = RingGeometry(
+                (path_rings.centers[bottleneck_index],),
+                (path_rings.normals[bottleneck_index],),
+                (path_rings.radii[bottleneck_index],),
+                path_rings.unit,
+                (path_rings.refs[bottleneck_index],),
+            )
+            layers.append(
+                add_rings(
+                    view,
+                    geometry,
+                    colors=[_MOUTH_ACCENT],
+                    alpha=min(1.0, max(alpha, 0.8)),
+                    tag=f'{tag_prefix}:{comp_id}',
+                    layer_tag=tag_prefix,
+                    name=f'{name} {comp_id} bottleneck',
+                    skip_digestion=True,
+                )
+            )
+
+        if not layers:
+            return None
+        return layers[0] if len(layers) == 1 else layers
+
+    elif representation == 'shape_ellipsoids':
+        centers = []
+        eigenvalues = []
+        eigenvectors = []
+        values = []
+        colors = []
+        for comp in selected_components:
+            payload = _component_shape_ellipsoid_payload(
+                topography, comp, use_resident_nodes=use_resident_nodes
+            )
+            if payload is None:
+                continue
+            centers.append(payload['center'])
+            eigenvalues.append(payload['eigenvalues'])
+            eigenvectors.append(payload['eigenvectors'])
+            values.append(payload['anisotropy'])
+            colors.append(resolved_colors[comp.component_id])
+
+        if not centers:
+            return None
+        return view.shapes.add_anisotropy_ellipsoids(
+            centers=puw.quantity(np.asarray(centers), 'nm'),
+            eigenvalues=eigenvalues,
+            eigenvectors=eigenvectors,
+            values=values,
+            colors=colors,
+            color_by='anisotropy',
+            palette='turbo',
+            alpha=alpha,
+            scale=2.0,
+            max_eccentricity=6.0,
+            tag=tag_prefix,
+            layer_tag=tag_prefix,
+            name=f'{name} shape ellipsoids',
+            skip_digestion=True,
+        )
+
     elif representation in {'residence_spheres', 'alpha_spheres'}:
         # Residence spheres describe clearance; alpha-spheres describe geometry.
         layers = []
@@ -1670,6 +1975,41 @@ def _render_dfnd_component_layers(
         'interface_faces',
     }:
         color_by_face_id, label_by_face_id = _component_face_payloads(
+            topography, selected_components, representation
+        )
+        geometry = face_geometry(topography, face_ids=color_by_face_id)
+        if not geometry.atom_triplets:
+            return None
+        return add_indexed_triangles(
+            view,
+            geometry,
+            colors=[color_by_face_id[ref.entity_id] for ref in geometry.refs],
+            alpha=alpha,
+            labels=[label_by_face_id[ref.entity_id] for ref in geometry.refs],
+            tag=tag_prefix,
+            layer_tag=tag_prefix,
+            skip_digestion=True,
+        )
+
+
+
+    elif representation == 'interface_links':
+        geometry = _interface_link_geometry(topography, selected_components)
+        if not geometry.refs:
+            return None
+        return add_segments(
+            view,
+            geometry,
+            radius=puw.quantity(0.012, 'nm'),
+            color=_OKABE_ITO['orange'],
+            alpha=min(1.0, max(alpha, 0.65)),
+            tag=tag_prefix,
+            layer_tag=tag_prefix,
+            skip_digestion=True,
+        )
+
+    elif representation in {'dry_interface_faces', 'dry_blocked_faces', 'dry_depth_map'}:
+        color_by_face_id, label_by_face_id = _dry_face_payloads(
             topography, selected_components, representation
         )
         geometry = face_geometry(topography, face_ids=color_by_face_id)

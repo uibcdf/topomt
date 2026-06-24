@@ -1764,6 +1764,55 @@ def test_interface_surface_aliases_are_explicit():
     assert all('role=coast_face' in label for label in face_msg['options']['labels'])
 
 
+def test_interface_links_connect_wet_and_dry_sides():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
+    view = DummyView()
+
+    show_dfnd_components(
+        view,
+        topo,
+        representation='interface_links',
+        component_ids=[component.component_id],
+    )
+
+    link_msg = next(
+        message
+        for message in view.messages
+        if message['op'] in {'add_network_links', 'add_links'}
+    )
+    assert link_msg['options']['coordinate_pairs']
+    assert link_msg['options']['colors'] == [0xE69F00] * len(
+        link_msg['options']['coordinate_pairs']
+    )
+
+
+def test_pocket_depth_map_uses_topological_depth_values():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
+    view = DummyView()
+
+    show_dfnd_components(
+        view,
+        topo,
+        representation='pocket_depth_map',
+        component_ids=[component.component_id],
+    )
+
+    blob = next(
+        message
+        for message in view.messages
+        if message['op'] in {'add_pocket_blob', 'add_scalar_isosurface'}
+    )
+    assert blob['options']['values']
+    assert len(blob['options']['values']) == len(blob['options']['centers'])
+    assert blob['options']['color_map'] == 'turbo'
+
+
 def test_mouth_stubs_render_external_links_as_segments():
     from molsysviewer_topomt.render import show_dfnd_components
 
@@ -1788,6 +1837,123 @@ def test_mouth_stubs_render_external_links_as_segments():
     assert set(link_msg['options']['colors']) == {0xF0E442}
     assert link_msg['options']['tag'] == 'dfnd-comp'
     assert link_msg['options']['layer_tag'] == 'dfnd-comp'
+
+
+def test_mouth_and_bottleneck_rings_are_explicit():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    component = next(
+        comp
+        for comp in topo.dfnd.dfn.components.wet
+        if comp.family == 'channel' and comp.n_mouths > 0
+    )
+
+    mouth_view = DummyView()
+    show_dfnd_components(
+        mouth_view,
+        topo,
+        representation='mouth_rings',
+        component_ids=[component.component_id],
+    )
+    mouth_msg = next(message for message in mouth_view.messages if message['op'] == 'add_rings')
+    assert mouth_msg['options']['centers']
+    assert mouth_msg['options']['colors']
+    assert set(mouth_msg['options']['colors']) == {0xF0E442}
+    assert mouth_msg['options']['tag'] == f'dfnd-comp:{component.component_id}'
+
+    neck_view = DummyView()
+    show_dfnd_components(
+        neck_view,
+        topo,
+        representation='bottleneck_rings',
+        component_ids=[component.component_id],
+    )
+    neck_msg = next(message for message in neck_view.messages if message['op'] == 'add_rings')
+    assert len(neck_msg['options']['centers']) == 1
+    assert neck_msg['options']['colors'] == [0xF0E442]
+    assert neck_msg['options']['tag'] == f'dfnd-comp:{component.component_id}'
+
+
+def test_shape_ellipsoids_summarize_component_orientation():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    view = DummyView()
+    layer = show_dfnd_components(
+        view,
+        topo,
+        representation='shape_ellipsoids',
+        show_wet=True,
+        show_dry=True,
+        component_types=None,
+    )
+
+    assert layer is not None
+    ellipsoid = next(
+        message
+        for message in view.messages
+        if message['op'] == 'add_anisotropy_ellipsoids'
+    )
+    options = ellipsoid['options']
+    assert options['centers']
+    assert len(options['centers']) == len(options['eigenvalues'])
+    assert len(options['centers']) == len(options['eigenvectors'])
+    assert len(options['centers']) == len(options['values'])
+    assert options['color_by'] == 'anisotropy'
+    assert options['tag'] == 'dfnd-comp'
+
+
+def test_dry_face_representations_are_explicit():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    dry_component = topo.dfnd.dfn.components.dry[0]
+
+    interface_view = DummyView()
+    show_dfnd_components(
+        interface_view,
+        topo,
+        representation='dry_interface_faces',
+        component_ids=[dry_component.component_id],
+    )
+    interface_msg = next(
+        message
+        for message in interface_view.messages
+        if message['op'] == 'add_triangle_faces'
+    )
+    assert interface_msg['options']['labels']
+    assert all(
+        label.startswith('Dry interface face')
+        for label in interface_msg['options']['labels']
+    )
+
+    blocked_view = DummyView()
+    show_dfnd_components(
+        blocked_view,
+        topo,
+        representation='dry_blocked_faces',
+        component_ids=[dry_component.component_id],
+    )
+    blocked_msg = next(
+        message for message in blocked_view.messages if message['op'] == 'add_triangle_faces'
+    )
+    assert blocked_msg['options']['labels']
+    assert all('permeability=non_permeable' in label for label in blocked_msg['options']['labels'])
+
+    depth_view = DummyView()
+    show_dfnd_components(
+        depth_view,
+        topo,
+        representation='dry_depth_map',
+        component_ids=[dry_component.component_id],
+    )
+    depth_msg = next(
+        message for message in depth_view.messages if message['op'] == 'add_triangle_faces'
+    )
+    assert depth_msg['options']['labels']
+    assert all('face_depth=' in label for label in depth_msg['options']['labels'])
+    assert len(set(depth_msg['options']['colors'])) >= 1
 
 
 def test_clearance_map_colours_envelope_by_residence_radius():
@@ -3021,6 +3187,8 @@ def test_render_result_uses_explicit_counts_and_details():
         'clearance_map',
         'clearance_wire',
         'scalar_isosurface',
+        'pocket_depth_map',
+        'shape_ellipsoids',
         'pipe',
         'channel_tube',
         'channel_solid',
@@ -3032,6 +3200,8 @@ def test_render_result_uses_explicit_counts_and_details():
         'channel_blob',
         'channel_wire_blob',
         'rings',
+        'mouth_rings',
+        'bottleneck_rings',
         'residence_spheres',
         'alpha_spheres',
         'probe_centers',
@@ -3040,12 +3210,16 @@ def test_render_result_uses_explicit_counts_and_details():
         'scaffold',
         'affinity_spheres',
         'coast_faces',
+        'dry_interface_faces',
+        'dry_blocked_faces',
+        'dry_depth_map',
         'semantic_faces',
         'permeable_faces',
         'impermeable_faces',
         'mouth_faces',
         'interface_faces',
         'interface_contact_faces',
+        'interface_links',
         'interface_lining_surface',
         'interface_surface',
         'mouth_stubs',
