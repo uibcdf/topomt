@@ -111,12 +111,29 @@ Current v1 policy:
 - do not include transit connectors as resident solvent volume;
 - do not include non-local atom intrusions yet.
 
+Accessible volume — past-beach contribution (`volume_solvent_accessible`):
+
+- the residence-only aggregate (above) misses the space the probe wets **through a
+  beach** (a permeable wet-dry face) into a dry coast tet — non-residable yet touched
+  (the coast/shore/beach decision, taxonomy_architecture_decision.md §6.2);
+- `_attach_beach_pockets` adds, per wet component, `beach_pocket.volume_wetted_estimate`
+  = the per-tet `volume_solvent_estimate` of those dry coast tets (an **upper bound** —
+  the probe need not fill the whole tet), and
+  `volume_solvent_accessible = volume_solvent_estimate (residence) + that` — so
+  `residence ≤ accessible ≤` this bracket;
+- this **answers "whether COAST candidates contribute"** below: yes — the dry *coast*
+  tets reached through beaches contribute the past-beach wetted volume; the `shore`
+  (non-permeable) wall stays the true boundary and is excluded.
+
 Open discussion:
 
 - whether a later high-precision mode should use analytic sphere-tetrahedron
   intersections, deterministic adaptive integration, or another validated route;
-- whether accessible volume should be approximated by transit tetrahedra only;
-- whether COAST candidates contribute;
+- whether accessible volume should be approximated by transit tetrahedra only
+  (the beach-pocket bracket above is the current additive answer);
+- ~~whether COAST candidates contribute~~ — resolved: dry coast tets reached through
+  beaches contribute (see `volume_solvent_accessible`); the precise wetted sub-volume
+  (vs the per-tet upper bound) is the remaining refinement;
 - whether marginal gates should be included, excluded, or reported separately.
 
 #### High-precision physical-volume evaluation plan
