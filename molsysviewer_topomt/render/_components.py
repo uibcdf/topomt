@@ -115,13 +115,13 @@ _PIPE_STYLES = {
     _PIPE_STYLE_RIBBON,
 }
 _CHANNEL_REPRESENTATION_ALIASES = {
-    'channel_tube': ('pipe', _PIPE_STYLE_SOLID),
-    'channel_solid': ('pipe', _PIPE_STYLE_SOLID),
-    'channel_profile': ('pipe', _PIPE_STYLE_PROFILE),
-    'channel_lumen': ('pipe', _PIPE_STYLE_LUMEN),
-    'channel_tunnel': ('pipe', _PIPE_STYLE_LUMEN),
-    'channel_ribbon': ('pipe', _PIPE_STYLE_RIBBON),
-    'groove_ribbon': ('pipe', _PIPE_STYLE_RIBBON),
+    'channel_tube': ('tube', _PIPE_STYLE_SOLID),
+    'channel_solid': ('tube', _PIPE_STYLE_SOLID),
+    'channel_profile': ('tube', _PIPE_STYLE_PROFILE),
+    'channel_lumen': ('tube', _PIPE_STYLE_LUMEN),
+    'channel_tunnel': ('tube', _PIPE_STYLE_LUMEN),
+    'channel_ribbon': ('tube', _PIPE_STYLE_RIBBON),
+    'groove_ribbon': ('tube', _PIPE_STYLE_RIBBON),
     'channel_blob': ('cloud', None),
     'channel_wire_blob': ('wire_contour', None),
 }
@@ -131,6 +131,7 @@ _CHANNEL_REPRESENTATION_ALIASES = {
 # devguide/DFND/viewer_grounded_named_split.md). These collapse exact duplicates;
 # the old names resolve to the grounded primitive (back-compat) before dispatch.
 _REPRESENTATION_ALIASES = {
+    'pipe': 'tube',  # variable-radius tube along the centerline (was the canonical name)
     'pocket_depth_map': 'depth_map',  # depth field over the residence envelope
     'groove_depth_profile': 'depth_map',
     'groove_walls': 'lining_surface',  # component lining atoms as a surface
@@ -183,7 +184,7 @@ def _render_bucket(component):
 # volumetric blobs; through_open (percolating) + transient keep the auto fallback,
 # matching the legacy per-family map (which omitted them).
 _REPRESENTATION_BY_BUCKET = {
-    'through': 'pipe',
+    'through': 'tube',
     'mouthed': 'envelope',
     'enclosed': 'envelope',
 }
@@ -266,6 +267,7 @@ _COMPONENT_REPRESENTATIONS = {
     'lining_surface',
     'width_profile',
     'shape_ellipsoids',
+    'tube',
     'pipe',
     'channel_tube',
     'channel_solid',
@@ -1686,7 +1688,7 @@ def _render_dfnd_component_layers(
         return results[0] if len(results) == 1 else results
 
     mesh = dfnd_data.mesh
-    if representation == 'pipe':
+    if representation == 'tube':
         pipe_style = pipe_style.lower()
         if pipe_style not in _PIPE_STYLES:
             supported = ', '.join(sorted(_PIPE_STYLES))
@@ -1904,7 +1906,7 @@ def _render_dfnd_component_layers(
             layers.append(layer)
         return layers[0] if len(layers) == 1 else layers
 
-    elif representation == 'pipe':
+    elif representation == 'tube':
         # Channels as variable-radius tubes along their through-path (CAVER-style),
         # radius = local R_residence, with a bottleneck marker at the narrowest
         # station. Non-channels (or channels with no through-path) fall back to a

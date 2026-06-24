@@ -2851,11 +2851,17 @@ def test_grounded_primitive_names_with_deprecated_aliases():
     grounded primitive (back-compat). See viewer_grounded_named_split.md."""
     from molsysviewer_topomt.render import _components as c
 
-    assert {'depth_map', 'lining_surface', 'width_profile'} <= c._COMPONENT_REPRESENTATIONS
+    assert {
+        'tube', 'depth_map', 'lining_surface', 'width_profile'
+    } <= c._COMPONENT_REPRESENTATIONS
+    assert c._REPRESENTATION_ALIASES['pipe'] == 'tube'  # channel tube primitive
     assert c._REPRESENTATION_ALIASES['groove_walls'] == 'lining_surface'
     assert c._REPRESENTATION_ALIASES['groove_width_profile'] == 'width_profile'
     assert c._REPRESENTATION_ALIASES['pocket_depth_map'] == 'depth_map'
     assert c._REPRESENTATION_ALIASES['groove_depth_profile'] == 'depth_map'
+    # the channel_* aliases resolve to the grounded tube primitive (+ a style)
+    assert c._CHANNEL_REPRESENTATION_ALIASES['channel_tube'][0] == 'tube'
+    assert c._CHANNEL_REPRESENTATION_ALIASES['channel_lumen'][0] == 'tube'
 
 
 def test_affinity_color_typing_from_scalars():
