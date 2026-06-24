@@ -1786,7 +1786,9 @@ def test_interface_surface_aliases_are_explicit():
         message for message in faces_view.messages if message['op'] == 'add_triangle_faces'
     )
     assert face_msg['options']['labels']
-    assert all('role=coast_face' in label for label in face_msg['options']['labels'])
+    # interface_contact_faces now routes to the kernel coast list (single source for
+    # shore/beach), not the render's own face-role re-classification
+    assert all('Coast Face' in label for label in face_msg['options']['labels'])
 
 
 def test_interface_links_connect_wet_and_dry_sides():
@@ -2204,26 +2206,27 @@ def test_semantic_face_representations_emit_filtered_triangle_faces():
     assert mouth_msg['options']['labels']
     assert all('role=mouth_face' in label for label in mouth_msg['options']['labels'])
 
+    # shore_faces consumes the kernel coast list (kind='shore'), the single source --
+    # not the render's own face-role re-classification (the old 5-face drift). The
+    # deprecated interface_faces now routes to the kernel coast union too.
     interface_topography = _build_dfnd_topo('two_blocks_interface.pdb')
     interface_component = next(
         comp for comp in interface_topography.dfnd.dfn.components.wet if comp.is_interface
     )
-    interface_view = DummyView()
+    shore_view = DummyView()
     show_dfnd_components(
-        interface_view,
+        shore_view,
         interface_topography,
-        representation='interface_faces',
+        representation='shore_faces',
         component_ids=[interface_component.component_id],
     )
-    interface_msg = next(
+    shore_msg = next(
         message
-        for message in interface_view.messages
+        for message in shore_view.messages
         if message['op'] == 'add_triangle_faces'
     )
-    assert interface_msg['options']['labels']
-    assert all(
-        'role=coast_face' in label for label in interface_msg['options']['labels']
-    )
+    assert shore_msg['options']['labels']
+    assert all('Coast Face' in label for label in shore_msg['options']['labels'])
 
 
 def test_contact_sheet_splits_interface_lining_by_body():
@@ -2856,6 +2859,10 @@ def test_grounded_primitive_names_with_deprecated_aliases():
     } <= c._COMPONENT_REPRESENTATIONS
     assert c._REPRESENTATION_ALIASES['pipe'] == 'tube'  # channel tube primitive
     assert c._REPRESENTATION_ALIASES['interface_links'] == 'links'
+    # the wet-dry contact is the kernel coast list (shore|beach), single source;
+    # interface_faces routed there instead of re-classifying faces itself
+    assert {'shore_faces', 'beach_faces'} <= c._COMPONENT_REPRESENTATIONS
+    assert c._REPRESENTATION_ALIASES['interface_faces'] == 'coast_faces'
     assert c._REPRESENTATION_ALIASES['groove_walls'] == 'lining_surface'
     assert c._REPRESENTATION_ALIASES['groove_width_profile'] == 'width_profile'
     assert c._REPRESENTATION_ALIASES['pocket_depth_map'] == 'depth_map'

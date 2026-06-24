@@ -133,6 +133,9 @@ _CHANNEL_REPRESENTATION_ALIASES = {
 _REPRESENTATION_ALIASES = {
     'pipe': 'tube',  # variable-radius tube along the centerline (was the canonical name)
     'interface_links': 'links',  # segments between linked components (grounded)
+    # the wet-dry contact is the kernel coast list (shore|beach), the single source;
+    # interface_faces re-classified faces itself (the 5-face drift) -- route it here.
+    'interface_faces': 'coast_faces',
     'pocket_depth_map': 'depth_map',  # depth field over the residence envelope
     'groove_depth_profile': 'depth_map',
     'groove_walls': 'lining_surface',  # component lining atoms as a surface
@@ -304,6 +307,8 @@ _COMPONENT_REPRESENTATIONS = {
     'permeable_faces',
     'impermeable_faces',
     'mouth_faces',
+    'shore_faces',
+    'beach_faces',
     'interface_faces',
     'interface_contact_faces',
     'interface_links',
@@ -1500,7 +1505,11 @@ def _render_dfnd_component_layers(
         - 'affinity_spheres': Residence spheres coloured by the dominant
           physicochemical affinity of the lining (hydrophobic/polar/charged),
           from molsysmt.physchem; neutral for dummy systems.
-        - 'coast_faces': Boundary faces touching between wet and dry sides.
+        - 'coast_faces': Wet-dry contact faces from the kernel coast list (the union
+          of shore + beach; the single source -- not a render-side re-classification).
+        - 'shore_faces': The non-permeable wet-dry faces -- the real wall (kind=shore).
+        - 'beach_faces': The permeable wet-dry faces -- the probe wets through into the
+          dry coast tet (kind=beach).
         - 'dry_interface_faces': Dry-side wet/dry coast faces.
         - 'dry_blocked_faces': Non-permeable faces touching selected dry banks.
         - 'dry_depth_map': Dry faces coloured by face-depth from interface.
@@ -2671,8 +2680,14 @@ def _render_dfnd_component_layers(
             skip_digestion=True,
         )
 
-    elif representation == 'coast_faces':
-        # Render shared contact coast faces between wet and dry.
+    elif representation in {'coast_faces', 'shore_faces', 'beach_faces'}:
+        # Render the wet-dry contact faces from the kernel coast list -- the SINGLE
+        # source for shore/beach (decision S6), not the render's own face-role
+        # re-classification. shore = non-permeable wall; beach = permeable opening;
+        # coast_faces = their union.
+        kind_filter = {'shore_faces': 'shore', 'beach_faces': 'beach'}.get(
+            representation
+        )
         color_by_face_id = {}
         label_by_face_id = {}
 
@@ -2682,8 +2697,11 @@ def _render_dfnd_component_layers(
             comp_coast_faces = [
                 face
                 for face in dfnd_data.dfn.components.coast_faces
-                if face['wet_component_id'] == comp_id
-                or face['dry_component_id'] == comp_id
+                if (
+                    face['wet_component_id'] == comp_id
+                    or face['dry_component_id'] == comp_id
+                )
+                and (kind_filter is None or face.get('kind') == kind_filter)
             ]
 
             for face in comp_coast_faces:
