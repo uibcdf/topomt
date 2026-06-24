@@ -285,6 +285,15 @@ def dfnd_to_topography(
                 signature = getattr(component, 'signature', None)
                 if signature is not None:
                     feature.signature = dict(signature)
+                # Past-beach wetted contact (coast/shore/beach): the dry pockets the
+                # probe wets THROUGH permeable wet-dry faces, and the solvent volume
+                # the probe can reach (residence + those pockets).
+                feature.beach_pocket = dict(getattr(component, 'beach_pocket', {}))
+                accessible = getattr(component, 'volume_solvent_accessible', None)
+                if accessible is not None:
+                    feature.volume_solvent_accessible = puw.quantity(
+                        accessible, 'nm**3'
+                    )
             topography.add_feature(feature)
             if family_key not in _FAMILIES_WITH_MOUTHS:
                 continue

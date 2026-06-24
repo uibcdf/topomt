@@ -87,6 +87,11 @@ def test_bridge_carries_catalog_layer_onto_features():
         assert isinstance(feature.morphometrics, dict)
         assert 'n_connected_walls' in feature.boundary
         assert isinstance(feature.motifs, list)
+        # past-beach wetted contact (coast/shore/beach) rides along too
+        assert set(feature.beach_pocket) == {
+            'dry_tetrahedron_ids', 'atom_indices', 'volume_wetted_estimate'
+        }
+        assert feature.volume_solvent_accessible is not None
     names = {f.classification['name'] for f in features}
     assert names <= {'pocket', 'open_concavity', 'void', 'channel'}
     assert 'pocket' in names  # the dumbbell's occluded lobe-pocket at probe 1.0
