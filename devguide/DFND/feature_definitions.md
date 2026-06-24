@@ -191,6 +191,15 @@ channel
 percolating
 ```
 
+**Naming model (kernel/catalog refactor).** These family strings are a *derived
+classification* over the grounded signature `(n_mouths, residence, n_wall_faces)`,
+not kernel-assigned types: `classify_topology` (`topomt/dfnd/classify.py`) is the
+single source and the kernel delegates to it. The morphological refinement
+(`pocket` -> pocket/groove by occlusion, §5.2.1) and these names' maturity live in
+the catalog (public layer 0); residence is a *primary* axis (so the non-resident
+families are the compositional `(n_mouths x non-resident)` shadow, not separate
+catch-alls). See [`taxonomy_architecture_decision.md`](taxonomy_architecture_decision.md).
+
 ### 5.1. Void Component
 
 A `void` is a finite component with no external links to `OCEAN` and at least one resident node.

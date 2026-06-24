@@ -119,6 +119,16 @@ ten unrelated problems.
   declared.
 - **Validation hook.** `toy_nonresident_pore_2links`, plus an adversarial toy
   where the two permeable faces have disjoint accessible spots inside the cell.
+- **Update (kernel/catalog refactor).** Shown geometrically **infeasible**: an
+  exhaustive sweep of every synthetic generator x probe produces no
+  `(>= 2 mouths, non-resident)` component, with a structural reason -- a region
+  thin enough to deny residence everywhere also has thin transit faces (a long
+  thin triangle's in-circle is bounded by its short side), so `R_gate` tracks
+  `R_residence` and the mouths fragment into voids the moment residence dies. In
+  the kernel/catalog model residence is a *primary* axis, so this is the
+  empirically non-occurring composition `(>= 2 x non-resident)`;
+  `nonresident_passage` is **retired as a curated family** (classify stays total
+  by composition). See [`taxonomy_architecture_decision.md`](taxonomy_architecture_decision.md) S5.
 - **Origin.** WP1.
 
 ### L1.2 — Gate connectivity can over-connect via slivers
@@ -227,6 +237,13 @@ ten unrelated problems.
   real dents from noise.
 - **Validation hook.** `toy_surface_dent_1link` plus small real systems; inspect
   the heterogeneity of what lands in the family.
+- **Update (kernel/catalog refactor).** No longer a *negation-defined* family: in
+  the kernel/catalog model residence is a **primary** classification axis, so this
+  is the signature-defined composition `(1 mouth x non-resident)` -- a
+  contact/dent the probe grazes but cannot reside in -- defined by its grounded
+  signature, not by negation. The heterogeneity/utility question stands (it is the
+  non-resident shadow of pocket/groove). See
+  [`taxonomy_architecture_decision.md`](taxonomy_architecture_decision.md) S5.
 - **Origin.** new.
 
 ### L3.2 — `has_residence` may be too lax
