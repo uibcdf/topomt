@@ -196,10 +196,17 @@ from the grounded data.
 
 This is the formal home for enclosability (pocket→void), constriction = merge radius
 (§6), the "redundant probe sweep", and gate-breathing/cryptic pockets (the
-characteristic radii **changing across frames**). **Margin (the §5 confidence) =
-distance to the nearest characteristic radius**; a marginal classification ⟺ the
-probe sits near a transition. Probe and time are **sibling axes**, sharing the
-atom-based lineage matcher.
+characteristic radii **changing across frames**). Probe and time are **sibling
+axes**, sharing the atom-based lineage matcher.
+
+**Margin units are heterogeneous** (the §5 confidence is *not* a single quantity).
+For the **topological** transitions (residence, mouths) the margin is a probe-radius
+distance to the nearest characteristic radius. For the **morphological/porosity**
+thresholds it is in their own units — `|occlusion − 1|` (a ratio; its probe
+transition is membership-dependent, not one of the four simple radii) and the
+wall-face count for `percolating`. A marginal classification still means the probe
+sits near *some* transition, but "confidence" is per-threshold, not one number in
+one unit.
 
 ## 8. Dry side — dual scheme, reserved
 
