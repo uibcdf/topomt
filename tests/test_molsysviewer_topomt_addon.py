@@ -2852,9 +2852,10 @@ def test_grounded_primitive_names_with_deprecated_aliases():
     from molsysviewer_topomt.render import _components as c
 
     assert {
-        'tube', 'depth_map', 'lining_surface', 'width_profile'
+        'tube', 'depth_map', 'lining_surface', 'width_profile', 'links'
     } <= c._COMPONENT_REPRESENTATIONS
     assert c._REPRESENTATION_ALIASES['pipe'] == 'tube'  # channel tube primitive
+    assert c._REPRESENTATION_ALIASES['interface_links'] == 'links'
     assert c._REPRESENTATION_ALIASES['groove_walls'] == 'lining_surface'
     assert c._REPRESENTATION_ALIASES['groove_width_profile'] == 'width_profile'
     assert c._REPRESENTATION_ALIASES['pocket_depth_map'] == 'depth_map'

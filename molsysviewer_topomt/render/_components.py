@@ -132,6 +132,7 @@ _CHANNEL_REPRESENTATION_ALIASES = {
 # the old names resolve to the grounded primitive (back-compat) before dispatch.
 _REPRESENTATION_ALIASES = {
     'pipe': 'tube',  # variable-radius tube along the centerline (was the canonical name)
+    'interface_links': 'links',  # segments between linked components (grounded)
     'pocket_depth_map': 'depth_map',  # depth field over the residence envelope
     'groove_depth_profile': 'depth_map',
     'groove_walls': 'lining_surface',  # component lining atoms as a surface
@@ -266,6 +267,7 @@ _COMPONENT_REPRESENTATIONS = {
     'depth_map',
     'lining_surface',
     'width_profile',
+    'links',
     'shape_ellipsoids',
     'tube',
     'pipe',
@@ -2512,7 +2514,7 @@ def _render_dfnd_component_layers(
 
 
 
-    elif representation == 'interface_links':
+    elif representation == 'links':
         geometry = _interface_link_geometry(topography, selected_components)
         if not geometry.refs:
             return None
