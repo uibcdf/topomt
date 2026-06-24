@@ -1,5 +1,14 @@
 # TopoMT: Formal Topological Feature Model (Detailed)
 
+> **⚠️ Superseded (2026-06, kernel/catalog refactor).** This feature-type taxonomy
+> predates the kernel/catalog refactor and is kept for historical context (it still
+> informs the *formal intent*: minimal topological concavity/boundary/convexity +
+> necks + hierarchies). The **authoritative, current sheet** is
+> [`feature_catalog.md`](../../DFND/feature_catalog.md) (features by shape-type +
+> generics + refined leaves + component correspondence + motifs); the naming rule is
+> [`taxonomy_architecture_decision.md`](../../DFND/taxonomy_architecture_decision.md).
+> Do not treat the taxonomy below as current.
+
 ## 1. Mathematical Space
 
 Let:

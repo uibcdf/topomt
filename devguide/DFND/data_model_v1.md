@@ -63,6 +63,12 @@ BoundaryFeature
 MixedFeature
 ```
 
+> **⚠️ Superseded (2026-06).** This feature-type list predates the kernel/catalog
+> refactor. The authoritative, current sheet of features by shape-type (with
+> generics, refined leaves, component correspondence and motifs) is
+> [`feature_catalog.md`](feature_catalog.md); the naming rule is
+> [`taxonomy_architecture_decision.md`](taxonomy_architecture_decision.md).
+
 The first implementation may use dataclasses, dictionaries, or lightweight
 classes internally, but field names should follow this contract.
 

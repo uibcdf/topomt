@@ -1,5 +1,15 @@
 # TopoMT: definición formal fina de tipos topológicos y semánticos
 
+> **⚠️ Superada (2026-06, refactor kernel/catálogo).** Esta taxonomía de tipos de
+> feature es anterior al refactor kernel/catálogo y se conserva por contexto
+> histórico (sigue informando la *intención formal*: ontología topológica mínima,
+> extensible, con cuellos y jerarquías). La **hoja autoritativa actual** es
+> [`feature_catalog.md`](../../DFND/feature_catalog.md) (features por shape-type +
+> genéricos + hojas refinadas + correspondencia con componentes + motifs); la regla
+> de naming es
+> [`taxonomy_architecture_decision.md`](../../DFND/taxonomy_architecture_decision.md).
+> No tratar la taxonomía de abajo como vigente.
+
 ## Propósito
 
 Este documento propone una formulación **rigurosa, extensible y programable** para el modelo de entidades topográficas de **TopoMT**. La meta no es sólo detectar *pockets*, sino construir una ontología geométrico-topológica del espacio molecular que permita representar de manera explícita:
