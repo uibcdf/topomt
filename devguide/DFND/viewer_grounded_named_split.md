@@ -160,7 +160,10 @@ not promote a shape-type speculatively" rule. Consequences for the viewer:
 `show_dfnd_pharmacophore` and `affinity_spheres` are a **physicochemical /
 druggability overlay**, orthogonal to topology — not feature renders. They move to
 a separate chemistry-overlay surface (`show_pharmacophore`, `show_affinity`),
-applicable on top of any feature.
+applicable on top of any feature. **Deferred but analysed in full** —
+[`chemistry_overlay_analysis.md`](chemistry_overlay_analysis.md): the third axis (fed
+by `molsysmt.physchem`), how it classifies/aggregates, the gap (it should run on
+`accessible_atom_indices`, not just the lining), and the target overlay design.
 
 ## 8. What was checked for rescue (and where it went)
 
