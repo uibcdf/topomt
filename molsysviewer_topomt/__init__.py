@@ -37,6 +37,7 @@ def __getattr__(name: str):
 
 
 from .integration import (
+    attach_dfnd_tetrahedra,
     attach_features,
     attach_pockets,
     attach_topography,
@@ -44,23 +45,26 @@ from .integration import (
     new_view,
     register_with_molsysviewer,
     subset_topography,
-    attach_dfnd_tetrahedra,
 )
-from .panels import TopoMTTopographyPanel, TopoMTPocketsPanel
+from .panels import TopoMTPocketsPanel, TopoMTTopographyPanel
 from .payloads import feature_record_from_feature, topography_payload
 from .render import (
     RenderResult,
     show_affinity,
+    show_dfn_graph,
+    show_dfnd_components,
+    show_dfnd_convexity,
+    show_dfnd_interface_cutaway,
+    show_dfnd_legend,
+    show_dfnd_peak_patches,
+    show_dfnd_pharmacophore,
+    show_dfnd_pocket_cutaway,
+    show_dfnd_ridge_lines,
+    show_dfnd_spikes,
+    show_dfnd_tetrahedra,
     show_features,
     show_pharmacophore,
     show_topography_pockets,
-    show_dfnd_tetrahedra,
-    show_dfn_graph,
-    show_dfnd_components,
-    show_dfnd_interface_cutaway,
-    show_dfnd_pocket_cutaway,
-    show_dfnd_peak_patches,
-    show_dfnd_ridge_lines,
 )
 from .runtime import TopoMTAddonRuntime, ensure_runtime, record_event
 from .simplex_selection import simplex_selection_info
@@ -97,10 +101,14 @@ __all__ = [
     'show_dfnd_tetrahedra',
     'show_dfn_graph',
     'show_dfnd_components',
+    'show_dfnd_convexity',
     'show_dfnd_interface_cutaway',
+    'show_dfnd_legend',
     'show_dfnd_pocket_cutaway',
     'show_dfnd_peak_patches',
+    'show_dfnd_pharmacophore',
     'show_dfnd_ridge_lines',
+    'show_dfnd_spikes',
     'simplex_selection_info',
     'build_topography_standalone0_html',
     'launch_topography_standalone0',
