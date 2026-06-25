@@ -183,19 +183,20 @@ absorbed it (§6).
 
 ## 9. Migration plan (phased; pre-release, so renaming is free)
 
-1. **Grounded primitive library** — rename/collapse the named modes in
-   `render/_components.py` to §3 (channel_*/groove_*/interface_*/pocket_* → grounded
-   primitives + style params). Behaviour-preserving; the modes still render the
-   same geometry. Update tests.
-2. **Feature renderer** — `show_features` + `show_<feature>` (§5) with the §4 map;
-   delegate to the primitives. Carry the catalog layer in the feature payload
-   (`feature_record_from_feature` += classification/morphometrics/boundary/motifs/
-   signature). Rename `show_topography_pockets` accordingly.
-3. **Legend/labels** → feature layer (§5); **chemistry overlay** → separate (§7).
-4. **Convex diagnostics** — rename to catalog vocabulary (§6); keep diagnostic.
-5. **`open_concavity` leaves** — register `groove`/`cleft`/`dish`/`funnel` in
-   `output_status` (`provisional`) + their discriminators in `classify` as the
-   metrics land (§4.1).
+1. **Grounded primitive library** — 🔶 the clean collapses are done (groove_walls→
+   lining_surface, groove_width_profile→width_profile, {pocket,groove}_depth→depth_map,
+   channel_*→tube, interface_links→links, interface_faces→coast (kernel) +
+   shore_faces/beach_faces). Remaining: groove_floor/interface_ribbon/cutaways are
+   feature-STYLED (not pure primitives) — they live as `show_features` styles (2).
+2. **Feature renderer** — ✅ `show_features` (dispatch by `feature_type` → default
+   grounded representation, `styles=` for a type's vocabulary); the payload carries
+   `classification`. Optional sugar: per-feature `show_<feature>` wrappers.
+3. **Legend/labels** → feature layer; **chemistry overlay** → separate (§7) — ⏳.
+4. **Convex diagnostics** — rename to catalog vocabulary (§6); keep diagnostic — ⏳.
+5. **`open_concavity` leaves** — 🔶 `groove` landed (elongation metric + provisional
+   threshold, `output_status`); `funnel` needs a robust taper metric (the naive
+   depth-profile is dominated by corner artifacts — a cylinder reads as tapered);
+   `cleft`/`dish` ⏳.
 
 ## 10. Open items
 
