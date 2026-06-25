@@ -50,6 +50,7 @@ from .panels import TopoMTTopographyPanel, TopoMTPocketsPanel
 from .payloads import feature_record_from_feature, topography_payload
 from .render import (
     RenderResult,
+    show_features,
     show_topography_pockets,
     show_dfnd_tetrahedra,
     show_dfn_graph,
@@ -87,6 +88,7 @@ __all__ = [
     'feature_record_from_feature',
     'topography_payload',
     'RenderResult',
+    'show_features',
     'show_topography_pockets',
     'show_dfnd_tetrahedra',
     'show_dfn_graph',

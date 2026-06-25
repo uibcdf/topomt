@@ -17,6 +17,7 @@ from ._components import (
     show_dfnd_ridge_lines,
     show_dfnd_spikes,
 )
+from ._features import show_features
 from ._graph import show_dfn_graph
 from ._pockets import show_topography_pockets
 from ._tetrahedra import show_dfnd_tetrahedra
@@ -25,6 +26,7 @@ from .result import RenderResult, render_result
 __all__ = [
     'RenderResult',
     'render_result',
+    'show_features',
     'show_topography_pockets',
     'show_dfnd_tetrahedra',
     'show_dfn_graph',

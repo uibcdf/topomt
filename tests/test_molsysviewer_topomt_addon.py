@@ -2848,6 +2848,37 @@ def test_scaffold_draws_dry_core_spine():
     assert link_msgs  # the dry spine cylinders
 
 
+def test_show_features_dispatches_by_feature_type():
+    """The feature-layer renderer dispatches each feature by its catalog feature_type
+    to a default grounded representation, delegating to the component renderer; a
+    `styles` override reaches a type's richer vocabulary."""
+    from molsysviewer_topomt.render import show_features
+    from molsysviewer_topomt.render import _features as f
+    from topomt.dfnd import synthetic
+    from topomt.get_topography import get_topography
+
+    system = synthetic.to_molsysmt(
+        synthetic.dumbbell().coords, synthetic.dumbbell().radii
+    )
+    topo = get_topography(system, method='dfnd', probe_radius=1.0)  # pocket + open_concavity
+    present = {
+        getattr(topo[fid], 'feature_type', None)
+        for fid in topo
+        if getattr(topo[fid], 'feature_type', None)
+        in f._DEFAULT_REPRESENTATION_BY_FEATURE_TYPE
+    }
+    assert present  # there are renderable wet features
+
+    view = DummyView()
+    results = show_features(view, topo)
+    assert view.messages and results  # it delegated to the component renderer
+
+    # a per-feature-type style override is honoured (the names live only in the map)
+    view2 = DummyView()
+    show_features(view2, topo, styles={'pocket': 'cloud', 'open_concavity': 'lining_surface'})
+    assert view2.messages
+
+
 def test_grounded_primitive_names_with_deprecated_aliases():
     """Viewer migration phase 1: the component renderer's representation vocabulary
     is grounded geometry; the old named modes (groove_*/pocket_*) resolve to a
