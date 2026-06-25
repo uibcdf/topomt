@@ -85,9 +85,6 @@ The single "with names" table; it lives in the feature layer:
 | `pocket` | envelope | cutaway, blob, depth_map |
 | `open_concavity` (generic) | envelope | — |
 | `groove` | ribbon | floor (=permeable_faces), walls (=lining_surface), width_profile, depth_profile (=depth_map) |
-| `dish` | envelope | depth_map |
-| `funnel` | envelope + rings | width_profile (taper) |
-| `cleft` | cutaway | walls (=lining_surface), depth_map (V-wedge between flanks) |
 | `channel` | tube | lumen/tunnel/solid/profile (tube styles), width_profile |
 | `branched_channel` | tube | (branch-aware) |
 | `interface` | contact_sheet | links, ribbon, cutaway(interface_normal), faces |
@@ -96,21 +93,21 @@ The single "with names" table; it lives in the feature layer:
 | convex candidates `convexity`/`ridge`/`spike` | peak_patches / ridge_lines / spikes | — (diagnostic, see §6) |
 | motif `chamber` / `throat` | envelope(sub) / bottleneck_rings | — |
 
-### 4.1 `open_concavity` leaves (the refinement targets)
+### 4.1 `open_concavity` refinement — what is a leaf, and what is NOT
 
-`open_concavity` (1 mouth, occlusion ≤ 1) refines into morphological leaves, each
-held generic until its quantitative discriminator lands (`feature_catalog.md` §
-recipe; register in `output_status` as `provisional`):
+The conservative outcome (no zoo growth; a leaf only when it adds a NEW metric/structure
+the existing signals do not already carry):
 
-| Leaf | Distinct morphology | Grounded discriminator (pending) |
+| Name | Verdict | Why |
 | --- | --- | --- |
-| `groove` | elongated, single axis, U-section furrow | elongation + axis |
-| `cleft` | the gap **between two lobes**; two flanking convexities; deep V/wedge section | depth + two flanking dry banks / V-section asymmetry |
-| `dish` | shallow, round | roundness + low depth |
-| `funnel` | tapering aperture → interior | aperture/interior taper ratio |
+| `groove` | ✅ **leaf** (landed) | a genuinely distinct shape (an elongated furrow); a NEW metric (`elongation`) separates it. Provisional threshold. |
+| `funnel` | ✅ **motif** (landed) | the access zone that *directs* solvent inward (steady narrowing gradient); a motif, not a leaf (the tapering of a *closed* cavity is the `occlusion` descriptor, not a name). |
+| `cleft` | ❌ **not added** — a derived *label* | covers nothing new: it is exactly `interface` (the `n_dry_contacts ≥ 2` modifier) + an open feature (`open_concavity`/`channel`) + `elongation` — all already present. "Cleft" is the community name for that **composition**, derivable in presentation; topologically an inter-lobe gap is often a `channel` (≥2 mouths), so it is not even a clean `open_concavity` leaf. |
+| `dish` | ❌ likely **descriptors** | "round + shallow" = low `elongation` + low `buriedness`; no new axis. |
 
-`cleft` is its own leaf (not folded into `groove`): the discriminating physics is
-*flanked-by-two-lobes + V-wedge*, orthogonal to groove's *elongation+axis*.
+Principle: `groove` (new shape metric) and the `funnel` motif (new structure) earn their
+place; `cleft`/`dish`/the tapering-cone are **compositions of existing modifiers/
+descriptors**, named in presentation if wanted, not grown into the kernel/catalog.
 
 ## 5. The public API
 
@@ -125,7 +122,7 @@ show_channel(view, topography,   *, style='tube')     # {tube, lumen, tunnel, so
 show_interface(view, topography, *, style='contact_sheet')  # {contact_sheet, links, ribbon, cutaway}
 show_pocket(view, topography,    *, style='envelope') # {envelope, cutaway, blob}
 show_void(view, topography,      *, style='envelope')
-# ... open_concavity leaves: show_cleft / show_dish / show_funnel when promoted
+# show_groove for the elongated leaf; funnel is a motif (morphometrics['funnel'])
 ```
 
 - `show_features` = convenience + dispatch. The styles are **not lost**: they
@@ -170,8 +167,9 @@ applicable on top of any feature.
 Reviewed the superseded `feature_definitions.md` secondary axes:
 
 - **Concavity morphology**: `groove`✓ `tunnel`✓ `pore`✓ `multi_chamber`/`branched`✓
-  (now channel leaves / chamber motifs). `cleft` — **rescued** as its own
-  `open_concavity` leaf (§4.1). `shallow_depression` ≈ `dish`.
+  (now channel leaves / chamber motifs). `cleft` — **not a leaf** (§4.1): the
+  community label for `interface` + an open feature + elongation, a composition of
+  existing signals. `shallow_depression` ≈ `dish` (also descriptors, not a leaf).
 - **Dynamics** (`cryptic`/`transient`/`persistent`/`gated`/`breathing`) → the
   **dynamic identity layer** (lineage/tracks), outside the static catalog by the
   taxonomy decision. (`cryptic` already appears as a `pocket` leaf under dynamics.)
