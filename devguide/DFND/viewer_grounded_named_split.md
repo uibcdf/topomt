@@ -102,7 +102,7 @@ the existing signals do not already carry):
 | --- | --- | --- |
 | `groove` | ✅ **leaf** (landed) | a genuinely distinct shape (an elongated furrow); a NEW metric (`elongation`) separates it. Provisional threshold. |
 | `funnel` | ✅ **motif** (landed) | the access zone that *directs* solvent inward (steady narrowing gradient); a motif, not a leaf (the tapering of a *closed* cavity is the `occlusion` descriptor, not a name). |
-| `cleft` | ❌ **not added** — a derived *label* | covers nothing new: it is exactly `interface` (the `n_dry_contacts ≥ 2` modifier) + an open feature (`open_concavity`/`channel`) + `elongation` — all already present. "Cleft" is the community name for that **composition**, derivable in presentation; topologically an inter-lobe gap is often a `channel` (≥2 mouths), so it is not even a clean `open_concavity` leaf. |
+| `cleft` | ❌ **not added** — not grounded-detectable | a real intra-protein cleft (lysozyme/kinase active site) sits between two **lobes of one chain** = **one** dry bank, so `n_dry_contacts = 0/1`: the `interface` modifier (which detects inter-**molecular** contacts, ≥2 separate dry banks) does **not** capture it (real-PDB check: 1hel cleft → `interfaces=0`). Naming "cleft" would need a geometric "flanked on two opposing sides" detector DFND lacks. A real cleft appears as `open_concavity` **+ a `funnel` access motif** (1hel, 3ptb both fire 1 funnel) — a sensible functional characterization without a new name. |
 | `dish` | ❌ likely **descriptors** | "round + shallow" = low `elongation` + low `buriedness`; no new axis. |
 
 Principle: `groove` (new shape metric) and the `funnel` motif (new structure) earn their
@@ -167,9 +167,11 @@ applicable on top of any feature.
 Reviewed the superseded `feature_definitions.md` secondary axes:
 
 - **Concavity morphology**: `groove`✓ `tunnel`✓ `pore`✓ `multi_chamber`/`branched`✓
-  (now channel leaves / chamber motifs). `cleft` — **not a leaf** (§4.1): the
-  community label for `interface` + an open feature + elongation, a composition of
-  existing signals. `shallow_depression` ≈ `dish` (also descriptors, not a leaf).
+  (now channel leaves / chamber motifs). `cleft` — **not added** (§4.1): an
+  intra-protein cleft is between two lobes of ONE chain (one dry bank), so it is not
+  grounded-detectable (the `interface` modifier is inter-molecular); a real cleft
+  shows up as `open_concavity` + a `funnel` access motif. `shallow_depression` ≈
+  `dish` (descriptors, not a leaf).
 - **Dynamics** (`cryptic`/`transient`/`persistent`/`gated`/`breathing`) → the
   **dynamic identity layer** (lineage/tracks), outside the static catalog by the
   taxonomy decision. (`cryptic` already appears as a `pocket` leaf under dynamics.)
