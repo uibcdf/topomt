@@ -15,8 +15,9 @@ up is easy and error-free. Authoritative companions:
 - **Phases 1–5 of the kernel/catalog refactor: DONE.** Tasks #32–#36 complete.
 - **#37 (viewer grounded/named split + morphology leaves): DONE** (the implementable
   scope). **#38 (research) is the open backlog.**
-- Tests **green** across the suite (excluding the slow `test_dfnd_real_system_stability`
-  and `tests/methods`, which were not run in the final sweep but were untouched).
+- Tests **green across the FULL suite**, including the slow `test_dfnd_real_system_stability`
+  (real proteins) and `tests/methods` (castp) -- both confirmed passing with the
+  morphology/zoo changes. Resume is genuinely error-free.
 
 ## 2. What is done (the major arcs)
 
@@ -64,6 +65,11 @@ up is easy and error-free. Authoritative companions:
    `physchem_support_dummy_atoms`.
 4. **Optional**: `show_<feature>` wrappers; cleanup of deprecated feature-styled modes
    (groove_floor/interface_ribbon/cutaways already reachable via `show_features` styles).
+5. **Minor reconciliation debt** (low priority, in `taxonomy_architecture_decision.md`
+   §8/§11, not lost): the prose `septum → constriction` rename; the dry-side **dual
+   scheme** (§8, reserved); unifying `Pocket`/`Void`/`Channel`/`OpenConcavity`/`Groove`/
+   `Cleft` into one parameterized class (optional, §5.2); `output_status` `kind='family'`
+   → catalog framing (cosmetic — not broken).
 
 ## 4. Provisional thresholds (so they are not lost)
 
