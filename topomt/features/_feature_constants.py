@@ -5,6 +5,7 @@ _FEATURE_PREFIXES = {
     'feature_2d': 'F2D',
     'pocket': 'POC',
     'open_concavity': 'OCV',
+    'groove': 'GRV',
     'void': 'VOI',
     'mouth': 'MOU',
     'channel': 'CHA',
@@ -19,6 +20,7 @@ _FEATURE_TYPE_ALIASES = {
     'Feature2D': 'feature_2d',
     'Pocket': 'pocket',
     'OpenConcavity': 'open_concavity',
+    'Groove': 'groove',
     'Void': 'void',
     'Mouth': 'mouth',
     'Channel': 'channel',
@@ -33,6 +35,7 @@ _FEATURE_TYPE_TO_CLASS_NAME = {
     'feature_2d': 'Feature2D',
     'pocket': 'Pocket',
     'open_concavity': 'OpenConcavity',
+    'groove': 'Groove',
     'void': 'Void',
     'mouth': 'Mouth',
     'channel': 'Channel',
@@ -51,7 +54,7 @@ _FEATURE_TYPES_BY_SHAPE_TYPE = {
     # the morphological *leaves* (groove ...) that refine it once their metric lands;
     # those leaves and sub-chamber roles (alcove ...) are NOT component types and stay
     # in _PENDING_* below. See devguide/DFND/feature_catalog.md.
-    "concavity": ["void", "pocket", "open_concavity", "channel", "branched_channel"],
+    "concavity": ["void", "pocket", "open_concavity", "groove", "channel", "branched_channel"],
     "convexity": ["protrusion", "dome", "ridge", "spine", "bulge", "ridge_cap", "knob", "buttress", "pinnacle"],
     "mixed": ["feature2d", "interface", "patch", "joint", "saddle", "trench"],
     # neutral: neither concave, convex nor mixed -- a fully permeable/exposed region.
@@ -69,7 +72,9 @@ _FEATURE_TYPES_BY_SHAPE_TYPE = {
 # Morphological *labels* on a concavity feature (refine a type, e.g. "a pocket
 # that is an open groove"); the robust grounded axis today is open<->occluded
 # (morphometrics['occlusion']) and shallow<->deep (buriedness), not these names.
-_PENDING_MORPHOLOGY_LABELS = ["groove", "funnel"]
+# groove is now a promoted leaf (PROVISIONAL elongation threshold, decision S12);
+# funnel awaits its taper metric.
+_PENDING_MORPHOLOGY_LABELS = ["funnel"]
 # Sub-chamber *roles* inside one component (motifs on chamber_candidates): an
 # antechamber, a flask bulb, a side recess. Relational, not standalone types.
 _PENDING_CHAMBER_MOTIF_ROLES = ["vestibule", "ampulla", "alcove"]

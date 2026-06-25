@@ -33,7 +33,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from . import families as fam
-from .classify import OPEN_CONCAVITY
+from .classify import GROOVE, OPEN_CONCAVITY
 
 VALID_STATUS = frozenset(
     {'canonical', 'provisional', 'experimental', 'diagnostic', 'deferred'}
@@ -97,6 +97,15 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
         'quantitative shape metrics (elongation/axis) to refine into a leaf '
         '(groove/dish/funnel), plus real-system validation of the aperture split',
         'phase-3 / morphology / elongation debt',
+    ),
+    # ``groove`` = the elongated open-concavity leaf (morphometrics['elongation'] >=
+    # threshold). The metric is grounded but the THRESHOLD is provisional -- synthetic
+    # data does not separate groove from a round bowl cleanly (decision S12).
+    GROOVE: OutputStatus(
+        'provisional',
+        'classification',
+        'real-system validation of the elongation threshold (3-5 PDBs, S12)',
+        'morphology / elongation debt',
     ),
     # --- promoted public features ---
     'Mouth': OutputStatus('canonical', 'feature', None, None),

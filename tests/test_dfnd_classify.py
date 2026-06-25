@@ -11,7 +11,7 @@ import numpy as np
 
 from topomt.dfnd import families as fam
 from topomt.dfnd import synthetic
-from topomt.dfnd.classify import OPEN_CONCAVITY, classify, classify_topology
+from topomt.dfnd.classify import GROOVE, OPEN_CONCAVITY, classify, classify_topology
 from topomt.dfnd.components import build_components
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
@@ -40,6 +40,25 @@ def test_classify_splits_one_mouth_pocket_by_occlusion():
 def test_classify_flags_marginal_near_the_pocket_groove_boundary():
     assert classify(1, 1, 5, occlusion=1.05)['marginal'] is True
     assert classify(1, 1, 5, occlusion=2.0)['marginal'] is False
+
+
+def test_classify_refines_open_concavity_to_groove_by_elongation():
+    # open (occlusion <= 1) + elongated -> the leaf groove; open + round -> the generic
+    assert classify(1, 1, 5, occlusion=0.8, elongation=3.0)['name'] == GROOVE
+    assert classify(1, 1, 5, occlusion=0.8, elongation=1.2)['name'] == OPEN_CONCAVITY
+    # elongation does NOT promote an occluded pocket (occlusion is the kind boundary)
+    assert classify(1, 1, 5, occlusion=2.0, elongation=3.0)['name'] == fam.POCKET
+    # without the shape metric, stays the generic
+    assert classify(1, 1, 5, occlusion=0.8)['name'] == OPEN_CONCAVITY
+
+
+def test_groove_leaf_promoted_from_an_elongated_open_concavity():
+    # an elongated open concavity (a surface trench) refines past the generic
+    # open_concavity to the groove leaf (PROVISIONAL elongation threshold, S12)
+    groove = _largest(synthetic.surface_groove(), 1.4, 'pocket')
+    assert groove is not None
+    assert groove.classification['name'] == GROOVE
+    assert groove.morphometrics['elongation'] >= 2.5
 
 
 def test_classify_confidence_is_per_threshold():

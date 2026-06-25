@@ -5,7 +5,15 @@ from typing import Any
 import numpy as np
 
 from .. import pyunitwizard as puw
-from ..features import Channel, Mouth, OpenConcavity, Percolating, Pocket, Void
+from ..features import (
+    Channel,
+    Groove,
+    Mouth,
+    OpenConcavity,
+    Percolating,
+    Pocket,
+    Void,
+)
 from ..topography.Topography import Topography
 from .config import DFNDMeshConfig, DFNDQuery
 from .data import DFNDData
@@ -24,6 +32,7 @@ _FEATURE_CLASS_BY_FAMILY = {
 # entry. feature_type then IS the catalog name.
 _FEATURE_CLASS_BY_NAME = {
     'open_concavity': OpenConcavity,
+    'groove': Groove,
 }
 
 # Families whose external links are promoted to child Mouth features. Voids have

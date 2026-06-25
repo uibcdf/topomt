@@ -389,6 +389,34 @@ def surface_bowl(
     return _finalize(grid[keep], atom_radius, jitter, seed)
 
 
+def surface_groove(
+    length=24.0,
+    trench_radius=6.0,
+    depth=6.0,
+    margin=5.0,
+    slab_extra=2.0,
+    spacing=3.0,
+    atom_radius=ARGON_VDW_RADIUS,
+    jitter=0.0,
+    seed=0,
+):
+    """A solid slab with an elongated cylindrical trench carved into its top face --
+    an open concavity that is a **groove**: one mouth, occlusion <= 1, and a high
+    shape elongation (long along x, narrow in y/z). Open upward (+z). ``jitter=0`` keeps
+    the trench one connected wet component (a jittered grid fragments it)."""
+    half_x = length / 2.0 + margin
+    half_y = trench_radius + margin
+    thickness = depth + slab_extra
+    grid = _grid_box(half_x, half_y, 0.0, thickness, spacing)
+    # Carve a cylinder whose axis runs along x at the top face, biting ``depth`` in,
+    # only within the trench length so the ends stay walled.
+    axis_z = thickness + trench_radius - depth
+    dist = np.sqrt(grid[:, 1] ** 2 + (grid[:, 2] - axis_z) ** 2)
+    within = np.abs(grid[:, 0]) <= length / 2.0
+    keep = ~(within & (dist < trench_radius))
+    return _finalize(grid[keep], atom_radius, jitter, seed)
+
+
 def blind_well(
     well_radius=4.0,
     depth=10.0,

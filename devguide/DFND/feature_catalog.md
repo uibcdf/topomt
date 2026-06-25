@@ -29,7 +29,7 @@ Component correspondence: a **wet resident component**, by `(n_mouths, occlusion
 | --- | --- | --- | --- |
 | `0 mouths, resident` | **`void`** *(a.k.a. `enclosed_cavity`)* | sealed-water / gas-pocket / packing-defect *(chemistry, dynamics)* | ✅ generic / ⏳ leaves |
 | `1 mouth, resident, occlusion > 1` | **`pocket`** *(occluded)* | buried / surface / cryptic *(buriedness, dynamics)* | ✅ generic / ⏳ leaves |
-| `1 mouth, resident, occlusion ≤ 1` | **`open_concavity`** *(open)* | `groove` (elongation+axis) / `dish` (roundness) / `funnel` (taper) | ✅ generic / ⏳ leaves |
+| `1 mouth, resident, occlusion ≤ 1` | **`open_concavity`** *(open)* | **`groove`** (elongation+axis) 🔶 / `dish` (roundness) ⏳ / `funnel` (taper) ⏳ | ✅ generic / 🔶 `groove` provisional (elongation threshold, S12) |
 | `≥2 mouths, resident` | **`channel`** | tunnel / pore / branched (centerline branching) | ✅ generic / ⏳ leaves |
 
 Non-resident shadow (same signature, residence lost at a larger probe) -- generic

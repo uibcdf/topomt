@@ -55,6 +55,10 @@ def classify_topology(
 # provisional and refines, when shape metrics land, into a leaf -- groove
 # (elongated, with an axis), a round dish, a funnel, ... -- or stays open_concavity.
 OPEN_CONCAVITY = 'open_concavity'
+# The first refined leaf of ``open_concavity``: an elongated open concavity with a
+# defined long axis (a surface furrow). ``GROOVE`` refines the generic when the shape
+# metric (``morphometrics['elongation']``) clears the threshold below.
+GROOVE = 'groove'
 
 # The feature-catalog backbone: the generic feature(s) per shape-type -- the
 # refinement target for a component we cannot yet name to a specific leaf. Recorded
@@ -79,6 +83,13 @@ _OCCLUSION_MARGIN = 0.1
 # |occlusion - 1| at/above which the pocket/open_concavity call is fully confident
 # (occlusion 2 or 0 -> 1.0). Confidence ramps linearly from the threshold.
 _OCCLUSION_FULL_CONFIDENCE = 1.0
+# PROVISIONAL, tunable threshold (the elongation debt, decision S12): an open concavity
+# whose shape elongation (max/second PCA std of its residence centers) is at/above this
+# is the leaf ``groove``; below it stays the generic ``open_concavity``. Synthetic data
+# does not yet separate groove from a round bowl cleanly -- validate on real PDBs before
+# treating it as canonical. ``_GROOVE_MARGIN`` flags a near-threshold call as marginal.
+_GROOVE_ELONGATION = 2.5
+_GROOVE_MARGIN = 0.3
 
 
 def classify(
@@ -86,6 +97,7 @@ def classify(
     n_resident_nodes: int,
     n_wall_faces: int,
     occlusion: float | None = None,
+    elongation: float | None = None,
 ) -> dict:
     """Catalog morphological classification: ``{name, confidence, marginal}``.
 
@@ -106,11 +118,27 @@ def classify(
     ``marginal`` flags an occlusion within the boundary band.
     """
     family = classify_topology(n_external_links, n_resident_nodes, n_wall_faces)
-    if family == fam.POCKET and occlusion is not None:
-        margin = abs(occlusion - 1.0)
+    if family != fam.POCKET or occlusion is None:
+        return {'name': family, 'confidence': 1.0, 'marginal': False}
+
+    occ_margin = abs(occlusion - 1.0)
+    confidence = min(1.0, occ_margin / _OCCLUSION_FULL_CONFIDENCE)
+    if occlusion > 1.0:  # occluded -> the community pocket
         return {
-            'name': fam.POCKET if occlusion > 1.0 else OPEN_CONCAVITY,
-            'confidence': min(1.0, margin / _OCCLUSION_FULL_CONFIDENCE),
-            'marginal': margin <= _OCCLUSION_MARGIN,
+            'name': fam.POCKET,
+            'confidence': confidence,
+            'marginal': occ_margin <= _OCCLUSION_MARGIN,
         }
-    return {'name': family, 'confidence': 1.0, 'marginal': False}
+
+    # open (occlusion <= 1): refine the generic open_concavity to the leaf groove when
+    # the shape is elongated (provisional, S12). marginal if near either threshold.
+    near_groove = (
+        elongation is not None and abs(elongation - _GROOVE_ELONGATION) <= _GROOVE_MARGIN
+    )
+    marginal = occ_margin <= _OCCLUSION_MARGIN or near_groove
+    name = (
+        GROOVE
+        if elongation is not None and elongation >= _GROOVE_ELONGATION
+        else OPEN_CONCAVITY
+    )
+    return {'name': name, 'confidence': confidence, 'marginal': marginal}

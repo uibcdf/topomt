@@ -1179,6 +1179,7 @@ def _attach_classification(components: Components) -> None:
             len(component.resident_node_indices),
             component.n_wall_faces,
             occlusion=component.morphometrics.get('occlusion'),
+            elongation=component.morphometrics.get('elongation'),
         )
 
 
