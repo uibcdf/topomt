@@ -2848,6 +2848,43 @@ def test_scaffold_draws_dry_core_spine():
     assert link_msgs  # the dry spine cylinders
 
 
+def test_show_features_is_a_view_per_representation():
+    """Each representation is a self-contained render unit (its own RenderResult +
+    tag) -- a 'view per representation'; the aggregate is the keyed collection over
+    them, and a single representation can be cleared/hidden/shown independently."""
+    from molsysviewer_topomt import show_features
+    from molsysviewer_topomt.render import (
+        clear_feature_representations,
+        hide_feature_representations,
+    )
+    from topomt.dfnd import synthetic
+    from topomt.get_topography import get_topography
+
+    system = synthetic.to_molsysmt(
+        synthetic.dumbbell().coords, synthetic.dumbbell().radii
+    )
+    topo = get_topography(system, method='dfnd', probe_radius=1.0)
+    view = DummyView()
+    # force two representations (pocket -> cloud, open_concavity -> envelope)
+    result = show_features(view, topo, styles={'pocket': 'cloud'})
+
+    by_rep = result.details['by_representation']
+    assert by_rep  # a keyed collection of per-representation units
+    for representation, sub in by_rep.items():
+        assert sub.representation and hasattr(sub, 'layers')  # each is a RenderResult
+
+    # rendered_ids stays in FEATURE order (not group order)
+    rendered_set = set(result.rendered_ids)
+    assert list(result.rendered_ids) == [
+        cid for cid in result.details['component_ids'] if cid in rendered_set
+    ]
+
+    # a single representation view can be targeted independently (callable, no crash)
+    one = next(iter(by_rep))
+    assert isinstance(hide_feature_representations(view, representation=one), bool)
+    assert isinstance(clear_feature_representations(view, representation=one), bool)
+
+
 def test_show_features_dispatches_by_feature_type():
     """The feature-layer renderer dispatches each feature by its catalog feature_type
     to a default grounded representation, delegating to the component renderer; a
@@ -2877,6 +2914,86 @@ def test_show_features_dispatches_by_feature_type():
     view2 = DummyView()
     show_features(view2, topo, styles={'pocket': 'cloud', 'open_concavity': 'lining_surface'})
     assert view2.messages
+
+
+def test_show_features_replaces_previous_group_by_default_and_can_be_additive():
+    from molsysviewer_topomt.render import show_features
+    from molsysviewer_topomt.render import (
+        clear_feature_representations,
+        hide_feature_representations,
+        show_feature_representations,
+    )
+    from topomt.dfnd import synthetic
+    from topomt.get_topography import get_topography
+
+    system = synthetic.to_molsysmt(
+        synthetic.dumbbell().coords, synthetic.dumbbell().radii
+    )
+    topo = get_topography(system, method='dfnd', probe_radius=1.0)
+
+    view = DummyView()
+    first = show_features(view, topo)
+    assert first.tags
+
+    second = show_features(
+        view,
+        topo,
+        styles={'pocket': 'cloud', 'open_concavity': 'lining_surface'},
+    )
+    assert second.tags
+    assert second.rendered_ids == tuple(
+        component_id
+        for component_id in second.details['component_ids']
+        if component_id in set(second.rendered_ids)
+    )
+    assert 'object at 0x' not in repr(second)
+    assert 'groups=' in repr(second)
+    cleared_tags = {
+        msg.get('tag')
+        for msg in view.messages
+        if msg.get('op') == 'clear_shapes_by_tag'
+    }
+    assert set(first.tags) <= cleared_tags
+
+    assert hide_feature_representations(view) is True
+    assert any(msg.get('op') == 'hide_layer' for msg in view.messages)
+    assert show_feature_representations(view) is True
+    assert any(msg.get('op') == 'show_layer' for msg in view.messages)
+    assert clear_feature_representations(view) is True
+
+    additive_view = DummyView()
+    additive_first = show_features(additive_view, topo)
+    n_messages = len(additive_view.messages)
+    show_features(
+        additive_view,
+        topo,
+        styles={'pocket': 'cloud', 'open_concavity': 'lining_surface'},
+        replace=False,
+    )
+    additive_cleared_tags = {
+        msg.get('tag')
+        for msg in additive_view.messages[n_messages:]
+        if msg.get('op') == 'clear_shapes_by_tag'
+    }
+    assert not (set(additive_first.tags) & additive_cleared_tags)
+
+
+def test_show_dfnd_components_reports_rendered_ids_for_channel_aliases():
+    from molsysviewer_topomt.render import show_dfnd_components
+
+    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    result = show_dfnd_components(
+        DummyView(), topography, representation='channel_lumen'
+    )
+
+    assert result.selected_ids
+    assert result.rendered_ids
+    assert set(result.rendered_ids) <= set(result.selected_ids)
+    assert result.details['rendered_ids'] == result.rendered_ids
+    assert result.counts['n_rendered_ids'] == len(result.rendered_ids)
+    for component_id in result.rendered_ids:
+        base = f'dfnd-comp:{component_id}'
+        assert any(tag == base or tag.startswith(f'{base}-') for tag in result.tags)
 
 
 def test_grounded_primitive_names_with_deprecated_aliases():
@@ -3487,6 +3604,11 @@ def test_render_result_uses_explicit_counts_and_details():
     assert result.tags == ('layer-tag',)
     assert result.counts['n_layers'] == 1
     assert result.counts['n_selected'] == 1
+    assert result.rendered_ids == ()
+    assert result.counts['n_rendered_ids'] == 0
+    assert repr(result) == (
+        "RenderResult(representation='test', n_selected=1, n_rendered=0, n_layers=1)"
+    )
     with pytest.raises(TypeError):
         result.counts['n_items'] = 2
     with pytest.raises(TypeError):

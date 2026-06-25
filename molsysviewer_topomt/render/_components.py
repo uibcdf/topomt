@@ -55,6 +55,7 @@ from .adapters import (
     add_uniform_spheres,
 )
 from .result import (
+    RenderResult,
     clear_previous_render_result,
     remember_render_result,
     render_result,
@@ -2810,6 +2811,15 @@ def _render_dfnd_component_layers(
         }
 
 
+def _rendered_component_ids_from_tags(tags, candidate_ids, tag_prefix):
+    rendered = []
+    for component_id in candidate_ids:
+        base = f'{tag_prefix}:{component_id}'
+        if any(tag == base or tag.startswith(f'{base}-') for tag in tags):
+            rendered.append(component_id)
+    return tuple(rendered)
+
+
 def _selected_component_ids(topography, kwargs):
     data = getattr(topography, 'dfnd', None)
     if data is None:
@@ -2844,10 +2854,24 @@ def show_dfnd_components(view, topography=None, **kwargs):
     )
     operation_key = f'components:{kwargs.get("tag_prefix", "dfnd-comp")}'
     clear_previous_render_result(view, operation_key)
+    candidate_ids = _selected_component_ids(resolved, kwargs)
     raw = _render_dfnd_component_layers(view, resolved, **kwargs)
-    result = render_result(
-        representation,
-        raw,
-        selected_ids=_selected_component_ids(resolved, kwargs),
+    base_result = render_result(representation, raw, selected_ids=candidate_ids)
+    rendered_ids = _rendered_component_ids_from_tags(
+        base_result.tags, candidate_ids, kwargs.get('tag_prefix', 'dfnd-comp')
+    )
+    result = RenderResult(
+        representation=base_result.representation,
+        selected_ids=base_result.selected_ids,
+        rendered_ids=rendered_ids,
+        layers=base_result.layers,
+        tags=base_result.tags,
+        counts={
+            key: value
+            for key, value in base_result.counts.items()
+            if key != 'n_rendered_ids'
+        },
+        warnings=base_result.warnings,
+        details={**dict(base_result.details), 'rendered_ids': rendered_ids},
     )
     return remember_render_result(view, operation_key, result)

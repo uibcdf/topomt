@@ -49,6 +49,7 @@ class RenderResult:
 
     representation: str
     selected_ids: tuple[Any, ...] = ()
+    rendered_ids: tuple[Any, ...] = ()
     layers: tuple[Any, ...] = ()
     tags: tuple[str, ...] = ()
     counts: Mapping[str, int] = field(default_factory=dict)
@@ -59,7 +60,9 @@ class RenderResult:
         counts = dict(self.counts)
         counts.setdefault('n_layers', len(self.layers))
         counts.setdefault('n_selected', len(self.selected_ids))
+        counts.setdefault('n_rendered_ids', len(self.rendered_ids))
         object.__setattr__(self, 'selected_ids', tuple(self.selected_ids))
+        object.__setattr__(self, 'rendered_ids', tuple(self.rendered_ids))
         object.__setattr__(self, 'layers', tuple(self.layers))
         object.__setattr__(self, 'tags', tuple(self.tags))
         object.__setattr__(self, 'warnings', tuple(self.warnings))
@@ -73,12 +76,27 @@ class RenderResult:
     def __bool__(self) -> bool:
         return not self.is_empty
 
+    def __repr__(self) -> str:
+        parts = [
+            f"representation={self.representation!r}",
+            f"n_selected={len(self.selected_ids)}",
+            f"n_rendered={len(self.rendered_ids)}",
+            f"n_layers={len(self.layers)}",
+        ]
+        groups = self.details.get('groups')
+        if groups:
+            parts.append(f"groups={tuple(groups)!r}")
+        if self.warnings:
+            parts.append(f"n_warnings={len(self.warnings)}")
+        return f"RenderResult({', '.join(parts)})"
+
 
 def render_result(
     representation: str,
     raw: Any = None,
     *,
     selected_ids=(),
+    rendered_ids=None,
     warnings=(),
 ) -> RenderResult:
     """Normalize renderer internals into ``RenderResult``."""
@@ -105,9 +123,13 @@ def render_result(
     tags = tuple(
         tag for tag in (_layer_tag(layer) for layer in layers) if tag is not None
     )
+    if rendered_ids is None:
+        rendered_ids = selected_ids if layers else ()
+
     return RenderResult(
         representation=representation,
         selected_ids=tuple(selected_ids or ()),
+        rendered_ids=tuple(rendered_ids or ()),
         layers=layers,
         tags=tags,
         counts=counts,

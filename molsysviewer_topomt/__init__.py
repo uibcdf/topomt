@@ -50,6 +50,8 @@ from .panels import TopoMTPocketsPanel, TopoMTTopographyPanel
 from .payloads import feature_record_from_feature, topography_payload
 from .render import (
     RenderResult,
+    clear_feature_representations,
+    hide_feature_representations,
     show_affinity,
     show_dfn_graph,
     show_dfnd_components,
@@ -62,6 +64,7 @@ from .render import (
     show_dfnd_ridge_lines,
     show_dfnd_spikes,
     show_dfnd_tetrahedra,
+    show_feature_representations,
     show_features,
     show_pharmacophore,
     show_topography_pockets,
@@ -95,6 +98,9 @@ __all__ = [
     'topography_payload',
     'RenderResult',
     'show_features',
+    'clear_feature_representations',
+    'hide_feature_representations',
+    'show_feature_representations',
     'show_pharmacophore',
     'show_affinity',
     'show_topography_pockets',

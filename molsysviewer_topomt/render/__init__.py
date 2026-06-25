@@ -4,6 +4,7 @@ Split from a single module into one submodule per ``show_*`` entry point; the
 public surface is unchanged (``from molsysviewer_topomt.render import show_*``).
 """
 
+from ._chemistry import show_affinity, show_pharmacophore
 from ._components import (
     carve_voids,
     show_dfnd_components,
@@ -17,8 +18,12 @@ from ._components import (
     show_dfnd_ridge_lines,
     show_dfnd_spikes,
 )
-from ._chemistry import show_affinity, show_pharmacophore
-from ._features import show_features
+from ._features import (
+    clear_feature_representations,
+    hide_feature_representations,
+    show_feature_representations,
+    show_features,
+)
 from ._graph import show_dfn_graph
 from ._pockets import show_topography_pockets
 from ._tetrahedra import show_dfnd_tetrahedra
@@ -28,6 +33,9 @@ __all__ = [
     'RenderResult',
     'render_result',
     'show_features',
+    'clear_feature_representations',
+    'hide_feature_representations',
+    'show_feature_representations',
     'show_pharmacophore',
     'show_affinity',
     'show_topography_pockets',
