@@ -417,6 +417,33 @@ def surface_groove(
     return _finalize(grid[keep], atom_radius, jitter, seed)
 
 
+def surface_funnel(
+    top_radius=8.0,
+    bottom_radius=2.5,
+    depth=10.0,
+    margin=5.0,
+    slab_extra=2.0,
+    spacing=2.6,
+    atom_radius=ARGON_VDW_RADIUS,
+    jitter=0.0,
+    seed=0,
+):
+    """A truncated cone carved into a slab: a wide opening up top narrowing **steadily**
+    to a smaller opening at the bottom -- the access-funnel motif (the zone that directs
+    solvent inward toward an access). The defining signal is the constant narrowing
+    gradient; what lies beyond the narrow end is not modelled. ``jitter=0`` keeps the
+    cone one connected wet component."""
+    half = top_radius + margin
+    thickness = depth + slab_extra
+    grid = _grid_box(half, half, 0.0, thickness, spacing)
+    rad = np.sqrt(grid[:, 0] ** 2 + grid[:, 1] ** 2)
+    z_bottom = thickness - depth
+    frac = np.clip((grid[:, 2] - z_bottom) / max(depth, 1e-9), 0.0, 1.0)
+    cone_r = bottom_radius + (top_radius - bottom_radius) * frac
+    keep = ~((grid[:, 2] >= z_bottom) & (rad < cone_r))
+    return _finalize(grid[keep], atom_radius, jitter, seed)
+
+
 def blind_well(
     well_radius=4.0,
     depth=10.0,

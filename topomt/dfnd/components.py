@@ -1259,6 +1259,54 @@ def _attach_boundary_helpers(
         }
 
 
+# PROVISIONAL, tunable thresholds for the funnel motif (validate on real PDBs): a
+# zone is a funnel when its clearance narrows with an APPRECIABLE gradient
+# (|fractional narrowing over the depth span| >= _FUNNEL_GRADIENT) that is STEADY
+# (linear-fit R^2 >= _FUNNEL_STEADINESS). A uniform tube (~flat gradient) fails the
+# first; an erratic cavity fails the second.
+_FUNNEL_GRADIENT = 0.4
+_FUNNEL_STEADINESS = 0.8
+
+
+def _funnel_descriptor(resident_nodes, node_residence, topological_depth) -> dict | None:
+    """The access-funnel motif: a zone whose clearance narrows with a steady,
+    appreciable gradient (a truncated cone directing solvent inward toward an access),
+    distinct from a tube (flat gradient). It is the *directing* region; what lies
+    beyond the narrow end is not part of the motif.
+
+    Fits the clearance (max ``R_residence`` per topological-depth level) vs depth:
+    - ``gradient`` -- fractional narrowing over the depth span (``< 0`` narrows);
+    - ``steadiness`` -- ``R^2`` of the linear fit (constant gradient ~ 1);
+    - ``is_funnel`` -- the PROVISIONAL call (decision S12; thresholds tunable).
+
+    ``None`` when there are too few depth levels to fit a gradient.
+    """
+    depth_radius: dict[int, float] = {}
+    for node in resident_nodes:
+        depth = topological_depth.get(node)
+        clearance = node_residence.get(node)
+        if depth is not None and clearance is not None:
+            depth_radius[depth] = max(depth_radius.get(depth, 0.0), clearance)
+    levels = sorted(depth_radius)
+    if len(levels) < 4:
+        return None
+    d = np.asarray(levels, dtype=float)
+    r = np.asarray([depth_radius[x] for x in levels], dtype=float)
+    slope, intercept = np.polyfit(d, r, 1)
+    fit = slope * d + intercept
+    ss_res = float(((r - fit) ** 2).sum())
+    ss_tot = float(((r - r.mean()) ** 2).sum())
+    steadiness = 1.0 - ss_res / ss_tot if ss_tot > 0.0 else 0.0
+    span = d.max() - d.min()
+    gradient = float(slope * span / r.max()) if r.max() > 0.0 else 0.0
+    is_funnel = gradient <= -_FUNNEL_GRADIENT and steadiness >= _FUNNEL_STEADINESS
+    return {
+        'gradient': gradient,
+        'steadiness': round(steadiness, 4),
+        'is_funnel': bool(is_funnel),
+    }
+
+
 def _elongation_and_axis(points: list) -> tuple:
     """Shape elongation + principal axis of a point cloud, by PCA. ``elongation`` is
     the ratio of the largest to the second-largest standard deviation along the
@@ -1346,6 +1394,11 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
         elongation, elongation_axis = _elongation_and_axis(
             [node_center[n] for n in resident_nodes if n in node_center]
         )
+        # The access-funnel motif: a steady, appreciable narrowing of the clearance
+        # with depth (a directing truncated cone), distinct from a uniform tube.
+        funnel = _funnel_descriptor(
+            resident_nodes, node_residence, component.topological_depth or {}
+        )
         if mouth_radius and mouth_radius > 0.0:
             occlusion = interior_radius / mouth_radius
             occlusion_gap = interior_radius - mouth_radius
@@ -1385,4 +1438,5 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
             'deepest_chamber': deepest_chamber,
             'elongation': elongation,
             'elongation_axis': elongation_axis,
+            'funnel': funnel,
         }

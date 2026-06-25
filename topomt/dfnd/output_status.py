@@ -136,6 +136,15 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
         'as throat_candidate',
         'Q25',
     ),
+    # the access-funnel motif (morphometrics['funnel'].is_funnel): a steady, appreciable
+    # narrowing of the clearance with depth -- a directing truncated cone, distinct from
+    # a tube. The metric is grounded; the gradient/steadiness THRESHOLDS are provisional.
+    'funnel': OutputStatus(
+        'provisional',
+        'motif',
+        'real-system validation of the gradient/steadiness thresholds (S12)',
+        'morphology / access funnel',
+    ),
     # --- derived descriptor (component.bottleneck = top throat_candidate) ---
     'bottleneck': OutputStatus(
         'provisional',

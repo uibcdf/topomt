@@ -135,3 +135,22 @@ def test_morphometrics_carry_shape_elongation():
     assert metrics['elongation'] is not None and metrics['elongation'] > 2.0
     axis = metrics['elongation_axis']
     assert isinstance(axis, list) and len(axis) == 3
+
+
+def test_funnel_motif_detects_steady_narrowing():
+    # the access-funnel motif: a steady, appreciable narrowing of the clearance (a
+    # directing truncated cone) is a funnel; a uniform tube is not (flat gradient);
+    # an occluded pocket widens inward, not a funnel (PROVISIONAL thresholds).
+    cone = max(
+        (c for c in _wet(synthetic.surface_funnel(), 1.4).wet if c.size >= 8),
+        key=lambda c: c.size,
+    )
+    funnel = cone.morphometrics['funnel']
+    assert funnel['is_funnel'] is True
+    assert funnel['gradient'] < 0 and funnel['steadiness'] >= 0.8
+
+    tube = max(
+        (c for c in _wet(synthetic.cylinder_tube(), 1.4).wet if c.size >= 8),
+        key=lambda c: c.size,
+    )
+    assert tube.morphometrics['funnel']['is_funnel'] is False  # a uniform tube
