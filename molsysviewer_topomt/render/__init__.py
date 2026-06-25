@@ -17,6 +17,7 @@ from ._components import (
     show_dfnd_ridge_lines,
     show_dfnd_spikes,
 )
+from ._chemistry import show_affinity, show_pharmacophore
 from ._features import show_features
 from ._graph import show_dfn_graph
 from ._pockets import show_topography_pockets
@@ -27,6 +28,8 @@ __all__ = [
     'RenderResult',
     'render_result',
     'show_features',
+    'show_pharmacophore',
+    'show_affinity',
     'show_topography_pockets',
     'show_dfnd_tetrahedra',
     'show_dfn_graph',

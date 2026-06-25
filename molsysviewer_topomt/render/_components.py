@@ -472,10 +472,15 @@ def show_dfnd_pharmacophore(
             continue
         if getattr(comp, 'center', None) is None:
             continue
+        # the chemistry of the FULL interaction surface (lining + past-beach kissed
+        # atoms), not just the residence lining -- the chemical complement of
+        # accessible_atom_indices (coast/shore/beach; chemistry_overlay_analysis.md).
+        surface_atoms = (
+            getattr(comp, 'accessible_atom_indices', None)
+            or getattr(comp, 'atom_indices', None)
+        )
         lining = []
-        for atom in indices_in_space(
-            getattr(comp, 'atom_indices', None), space=MOLECULAR_SYSTEM
-        ):
+        for atom in indices_in_space(surface_atoms, space=MOLECULAR_SYSTEM):
             if 0 <= atom < len(atom_kinds) and atom_kinds[atom] is not None:
                 lining.append(atom_kinds[atom])
         if not lining:

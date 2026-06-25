@@ -3127,6 +3127,29 @@ def test_pharmacophore_map_places_typed_sites(monkeypatch):
     assert all(kind == 'hydrophobic' for kind in opts['kinds'])
 
 
+def test_chemistry_overlay_is_a_separate_surface(monkeypatch):
+    """The physicochemical overlay is a distinct surface (orthogonal to topology):
+    show_pharmacophore / show_affinity apply on top of any topology, fed by
+    molsysmt.physchem. See chemistry_overlay_analysis.md."""
+    from molsysviewer_topomt import show_affinity, show_pharmacophore
+    from molsysviewer_topomt.render import _components as c
+
+    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    n_atoms = len(topo.dfnd.mesh.atoms.coords)
+    monkeypatch.setattr(
+        c, '_atom_pharmacophore_kinds', lambda molsys: ['hydrophobic'] * n_atoms
+    )
+
+    view = DummyView()
+    view._molsys = object()
+    assert show_pharmacophore(view, topo) is not None
+    assert any(m['op'] == 'add_pharmacophore_features' for m in view.messages)
+
+    # show_affinity delegates to the affinity colouring; neutral + no crash without chemistry
+    view2 = DummyView()
+    show_affinity(view2, topo)
+
+
 def test_pharmacophore_map_none_on_dummy_system():
     """No chemistry (dummy) -> no sites, no crash."""
     from molsysviewer_topomt.render import show_dfnd_pharmacophore
