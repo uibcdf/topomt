@@ -95,6 +95,7 @@ resolution).
 | `external_mouth` → `Mouth` | the mouth's atoms/geometry (promotes to a 1D boundary feature) | ✅ |
 | `chamber` | a sub-cavity (merge-tree basin) -- a feature-inside-a-feature | 🔶 provisional |
 | `throat` / `bottleneck` | an internal constriction (merge-tree saddle); the closed form is a `neck` boundary | 🔶 provisional |
+| `funnel` | the **access** zone that *directs* solvent inward: a steady, appreciable narrowing of the clearance with depth (a directing truncated cone, distinct from a tube). `morphometrics['funnel']` = {gradient, steadiness, is_funnel}. NOT a leaf of `open_concavity` -- the tapering of a closed cavity is the `occlusion` descriptor, not a name | 🔶 provisional (gradient/steadiness thresholds, S12) |
 | `depth_region` | a topological-depth layer | ✅ |
 
 **Chamber roles** (refinements of a `chamber` motif by its position in the

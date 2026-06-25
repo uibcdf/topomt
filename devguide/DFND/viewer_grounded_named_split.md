@@ -193,10 +193,12 @@ absorbed it (§6).
    `classification`. Optional sugar: per-feature `show_<feature>` wrappers.
 3. **Legend/labels** → feature layer; **chemistry overlay** → separate (§7) — ⏳.
 4. **Convex diagnostics** — rename to catalog vocabulary (§6); keep diagnostic — ⏳.
-5. **`open_concavity` leaves** — 🔶 `groove` landed (elongation metric + provisional
-   threshold, `output_status`); `funnel` needs a robust taper metric (the naive
-   depth-profile is dominated by corner artifacts — a cylinder reads as tapered);
-   `cleft`/`dish` ⏳.
+5. **`open_concavity` leaves / motifs** — 🔶 `groove` leaf landed (elongation metric +
+   provisional threshold). **`funnel` is a MOTIF, not a leaf** (the access zone that
+   directs solvent inward via a steady narrowing gradient; the tapering of a *closed*
+   cavity is the `occlusion` descriptor, not a name) -- landed provisional
+   (`morphometrics['funnel']`, steady-gradient detector). `cleft` (inter-lobe context)
+   / `dish` ⏳ -- and likely `dish` is descriptors, not a leaf.
 
 ## 10. Open items
 
