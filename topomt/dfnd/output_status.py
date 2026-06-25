@@ -33,7 +33,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 from . import families as fam
-from .classify import GROOVE, OPEN_CONCAVITY
+from .classify import CLEFT, GROOVE, OPEN_CONCAVITY
 
 VALID_STATUS = frozenset(
     {'canonical', 'provisional', 'experimental', 'diagnostic', 'deferred'}
@@ -106,6 +106,15 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
         'classification',
         'real-system validation of the elongation threshold (3-5 PDBs, S12)',
         'morphology / elongation debt',
+    ),
+    # ``cleft`` = a DEEP open canyon (morphometrics['buriedness'] >= threshold), the
+    # active-site cleft. DFND sees the inter-lobe context only as depth; buriedness is a
+    # RAW depth count, so the THRESHOLD is system-dependent and provisional (S12).
+    CLEFT: OutputStatus(
+        'provisional',
+        'classification',
+        'real-system validation of the buriedness threshold; a normalised depth (S12)',
+        'morphology / depth',
     ),
     # --- promoted public features ---
     'Mouth': OutputStatus('canonical', 'feature', None, None),

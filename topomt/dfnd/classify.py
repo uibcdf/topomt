@@ -59,6 +59,12 @@ OPEN_CONCAVITY = 'open_concavity'
 # defined long axis (a surface furrow). ``GROOVE`` refines the generic when the shape
 # metric (``morphometrics['elongation']``) clears the threshold below.
 GROOVE = 'groove'
+# A second leaf of ``open_concavity``: a DEEP open canyon (the active-site cleft
+# between two lobes). DFND sees the inter-lobe context only as depth, so ``CLEFT``
+# refines the generic when ``morphometrics['buriedness']`` (the deepest residence
+# depth from the mouth) clears the threshold below. It is checked BEFORE groove (a
+# deep canyon is a cleft even if elongated).
+CLEFT = 'cleft'
 
 # The feature-catalog backbone: the generic feature(s) per shape-type -- the
 # refinement target for a component we cannot yet name to a specific leaf. Recorded
@@ -90,6 +96,14 @@ _OCCLUSION_FULL_CONFIDENCE = 1.0
 # treating it as canonical. ``_GROOVE_MARGIN`` flags a near-threshold call as marginal.
 _GROOVE_ELONGATION = 2.5
 _GROOVE_MARGIN = 0.3
+# PROVISIONAL, tunable threshold for the ``cleft`` leaf: an open concavity whose
+# buriedness (deepest residence depth from the mouth, a RAW topological-depth count --
+# so the threshold is system/discretization-dependent, hence provisional, S12) is
+# at/above this is a deep canyon (a cleft); below it the elongation test (groove)
+# applies. Calibrated against a real cleft (1hel lysozyme buriedness 13) vs a shallow
+# groove (6).
+_CLEFT_BURIEDNESS = 10
+_CLEFT_MARGIN = 1
 
 
 def classify(
@@ -98,6 +112,7 @@ def classify(
     n_wall_faces: int,
     occlusion: float | None = None,
     elongation: float | None = None,
+    buriedness: float | None = None,
 ) -> dict:
     """Catalog morphological classification: ``{name, confidence, marginal}``.
 
@@ -130,15 +145,21 @@ def classify(
             'marginal': occ_margin <= _OCCLUSION_MARGIN,
         }
 
-    # open (occlusion <= 1): refine the generic open_concavity to the leaf groove when
-    # the shape is elongated (provisional, S12). marginal if near either threshold.
+    # open (occlusion <= 1): refine the generic open_concavity to a leaf (provisional,
+    # S12). cleft (a DEEP canyon, by buriedness) is checked BEFORE groove (an ELONGATED
+    # furrow, by elongation) -- a deep canyon is a cleft even if elongated. marginal if
+    # near any threshold.
+    near_cleft = (
+        buriedness is not None and abs(buriedness - _CLEFT_BURIEDNESS) <= _CLEFT_MARGIN
+    )
     near_groove = (
         elongation is not None and abs(elongation - _GROOVE_ELONGATION) <= _GROOVE_MARGIN
     )
-    marginal = occ_margin <= _OCCLUSION_MARGIN or near_groove
-    name = (
-        GROOVE
-        if elongation is not None and elongation >= _GROOVE_ELONGATION
-        else OPEN_CONCAVITY
-    )
+    marginal = occ_margin <= _OCCLUSION_MARGIN or near_cleft or near_groove
+    if buriedness is not None and buriedness >= _CLEFT_BURIEDNESS:
+        name = CLEFT
+    elif elongation is not None and elongation >= _GROOVE_ELONGATION:
+        name = GROOVE
+    else:
+        name = OPEN_CONCAVITY
     return {'name': name, 'confidence': confidence, 'marginal': marginal}

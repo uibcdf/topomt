@@ -11,7 +11,13 @@ import numpy as np
 
 from topomt.dfnd import families as fam
 from topomt.dfnd import synthetic
-from topomt.dfnd.classify import GROOVE, OPEN_CONCAVITY, classify, classify_topology
+from topomt.dfnd.classify import (
+    CLEFT,
+    GROOVE,
+    OPEN_CONCAVITY,
+    classify,
+    classify_topology,
+)
 from topomt.dfnd.components import build_components
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
@@ -50,6 +56,27 @@ def test_classify_refines_open_concavity_to_groove_by_elongation():
     assert classify(1, 1, 5, occlusion=2.0, elongation=3.0)['name'] == fam.POCKET
     # without the shape metric, stays the generic
     assert classify(1, 1, 5, occlusion=0.8)['name'] == OPEN_CONCAVITY
+
+
+def test_classify_refines_open_concavity_to_cleft_by_depth():
+    # open (occlusion <= 1) + DEEP (buriedness >= threshold) -> cleft, checked BEFORE
+    # groove: a deep canyon is a cleft even when elongated
+    assert classify(1, 1, 5, occlusion=0.9, buriedness=13)['name'] == CLEFT
+    assert classify(1, 1, 5, occlusion=0.9, buriedness=13, elongation=4.0)['name'] == CLEFT
+    # shallow + elongated -> groove; shallow + round -> the generic
+    assert classify(1, 1, 5, occlusion=0.9, buriedness=4, elongation=4.0)['name'] == GROOVE
+    assert classify(1, 1, 5, occlusion=0.9, buriedness=4)['name'] == OPEN_CONCAVITY
+    # depth does NOT promote an occluded pocket (occlusion is the kind boundary)
+    assert classify(1, 1, 5, occlusion=2.0, buriedness=13)['name'] == fam.POCKET
+
+
+def test_cleft_leaf_promoted_from_a_deep_open_canyon():
+    # a deep open V-canyon (a surface cleft) refines past the generic to the cleft leaf
+    # (PROVISIONAL buriedness threshold, S12)
+    cleft = _largest(synthetic.surface_cleft(), 1.4, 'pocket')
+    assert cleft is not None
+    assert cleft.classification['name'] == CLEFT
+    assert cleft.morphometrics['buriedness'] >= 10
 
 
 def test_groove_leaf_promoted_from_an_elongated_open_concavity():

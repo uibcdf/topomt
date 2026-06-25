@@ -1180,6 +1180,7 @@ def _attach_classification(components: Components) -> None:
             component.n_wall_faces,
             occlusion=component.morphometrics.get('occlusion'),
             elongation=component.morphometrics.get('elongation'),
+            buriedness=component.morphometrics.get('buriedness'),
         )
 
 

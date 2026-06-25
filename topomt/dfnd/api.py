@@ -7,6 +7,7 @@ import numpy as np
 from .. import pyunitwizard as puw
 from ..features import (
     Channel,
+    Cleft,
     Groove,
     Mouth,
     OpenConcavity,
@@ -33,6 +34,7 @@ _FEATURE_CLASS_BY_FAMILY = {
 _FEATURE_CLASS_BY_NAME = {
     'open_concavity': OpenConcavity,
     'groove': Groove,
+    'cleft': Cleft,
 }
 
 # Families whose external links are promoted to child Mouth features. Voids have

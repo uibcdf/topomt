@@ -6,6 +6,7 @@ _FEATURE_PREFIXES = {
     'pocket': 'POC',
     'open_concavity': 'OCV',
     'groove': 'GRV',
+    'cleft': 'CLF',
     'void': 'VOI',
     'mouth': 'MOU',
     'channel': 'CHA',
@@ -21,6 +22,7 @@ _FEATURE_TYPE_ALIASES = {
     'Pocket': 'pocket',
     'OpenConcavity': 'open_concavity',
     'Groove': 'groove',
+    'Cleft': 'cleft',
     'Void': 'void',
     'Mouth': 'mouth',
     'Channel': 'channel',
@@ -36,6 +38,7 @@ _FEATURE_TYPE_TO_CLASS_NAME = {
     'pocket': 'Pocket',
     'open_concavity': 'OpenConcavity',
     'groove': 'Groove',
+    'cleft': 'Cleft',
     'void': 'Void',
     'mouth': 'Mouth',
     'channel': 'Channel',
@@ -54,7 +57,7 @@ _FEATURE_TYPES_BY_SHAPE_TYPE = {
     # the morphological *leaves* (groove ...) that refine it once their metric lands;
     # those leaves and sub-chamber roles (alcove ...) are NOT component types and stay
     # in _PENDING_* below. See devguide/DFND/feature_catalog.md.
-    "concavity": ["void", "pocket", "open_concavity", "groove", "channel", "branched_channel"],
+    "concavity": ["void", "pocket", "open_concavity", "groove", "cleft", "channel", "branched_channel"],
     "convexity": ["protrusion", "dome", "ridge", "spine", "bulge", "ridge_cap", "knob", "buttress", "pinnacle"],
     "mixed": ["feature2d", "interface", "patch", "joint", "saddle", "trench"],
     # neutral: neither concave, convex nor mixed -- a fully permeable/exposed region.

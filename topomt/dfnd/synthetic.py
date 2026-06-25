@@ -444,6 +444,33 @@ def surface_funnel(
     return _finalize(grid[keep], atom_radius, jitter, seed)
 
 
+def surface_cleft(
+    top_radius=9.0,
+    bottom_radius=2.0,
+    depth=16.0,
+    margin=6.0,
+    slab_extra=2.0,
+    spacing=2.2,
+    atom_radius=ARGON_VDW_RADIUS,
+    jitter=0.0,
+    seed=0,
+):
+    """A DEEP open V-canyon: a wide open mouth narrowing toward the bottom, **deep**
+    (high buriedness) -- the active-site cleft between two lobes. DFND sees the
+    inter-lobe context only as depth, so a cleft is a deep open concavity (occlusion
+    <= 1) -- distinct from the shallow `surface_funnel` of the same shape. Calibrated
+    to a real lysozyme cleft (1hel, buriedness ~13)."""
+    half = top_radius + margin
+    thickness = depth + slab_extra
+    grid = _grid_box(half, half, 0.0, thickness, spacing)
+    rad = np.sqrt(grid[:, 0] ** 2 + grid[:, 1] ** 2)
+    z_bottom = thickness - depth
+    frac = np.clip((grid[:, 2] - z_bottom) / max(depth, 1e-9), 0.0, 1.0)
+    cone_r = bottom_radius + (top_radius - bottom_radius) * frac
+    keep = ~((grid[:, 2] >= z_bottom) & (rad < cone_r))
+    return _finalize(grid[keep], atom_radius, jitter, seed)
+
+
 def blind_well(
     well_radius=4.0,
     depth=10.0,
