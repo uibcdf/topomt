@@ -123,3 +123,15 @@ def test_deepest_chamber_reads_a_buried_subpocket_from_the_hierarchy():
 
     void = _largest(_wet(synthetic.hollow_sphere(), 1.4), 'void', min_size=8)
     assert void.morphometrics['deepest_chamber'] is None
+
+
+def test_morphometrics_carry_shape_elongation():
+    # elongation = ratio of the two largest PCA standard deviations of the residence
+    # centers (>= 1; ~1 round, high = elongated) -- the grounded metric that refines
+    # the generic open_concavity into the leaf groove (elongated + an axis).
+    components = _wet(synthetic.cylinder_tube(), 1.4)  # an elongated tube
+    elongated = max((c for c in components.wet if c.size >= 8), key=lambda c: c.size)
+    metrics = elongated.morphometrics
+    assert metrics['elongation'] is not None and metrics['elongation'] > 2.0
+    axis = metrics['elongation_axis']
+    assert isinstance(axis, list) and len(axis) == 3

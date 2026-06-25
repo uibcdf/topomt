@@ -18,6 +18,8 @@ from collections import Counter, defaultdict, deque
 from collections.abc import Iterator, Mapping
 from typing import Any
 
+import numpy as np
+
 # side is derived from family (single source of truth in families.py), exactly as
 # feature shape/dimensionality are derived from feature_type in _feature_constants.
 from . import families as fam
@@ -1256,6 +1258,26 @@ def _attach_boundary_helpers(
         }
 
 
+def _elongation_and_axis(points: list) -> tuple:
+    """Shape elongation + principal axis of a point cloud, by PCA. ``elongation`` is
+    the ratio of the largest to the second-largest standard deviation along the
+    principal axes (``>1`` elongated, ``~1`` round/isotropic); ``axis`` is the
+    principal direction (the long axis). Needs >= 3 points spanning a plane;
+    otherwise ``(None, None)``. This is the grounded metric that refines the generic
+    ``open_concavity`` into the leaf ``groove`` (elongated + an axis).
+    """
+    pts = np.asarray(points, dtype=float)
+    if pts.ndim != 2 or pts.shape[0] < 3:
+        return None, None
+    centered = pts - pts.mean(axis=0)
+    cov = centered.T @ centered / pts.shape[0]
+    eigvals, eigvecs = np.linalg.eigh(cov)  # ascending eigenvalues
+    std = np.sqrt(np.clip(eigvals, 0.0, None))
+    if std[1] <= 1e-9:
+        return None, None
+    return float(std[2] / std[1]), eigvecs[:, 2].tolist()
+
+
 def _attach_morphometrics(components: Components, result: dict[str, Any]) -> None:
     """Attach morphology discriminators to each wet component -- the topology ->
     morphology bridge that the public feature layer (``dfnd_to_topography``,
@@ -1293,6 +1315,7 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
     """
     raw = result['raw']
     node_residence = {t['tetrahedron_id']: t['R_residence'] for t in raw['tetrahedra']}
+    node_center = {t['tetrahedron_id']: t['center'] for t in raw['tetrahedra']}
     links = {link['external_link_id']: link for link in raw['external_links']}
 
     for component in components.wet:
@@ -1317,6 +1340,11 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
             interior_radius / r for r in mouth_radii if r and r > 0.0
         ]
         buriedness = max((component.topological_depth or {}).values(), default=0)
+        # Shape elongation (PCA of the resident residence-centers): the grounded
+        # metric that refines open_concavity -> groove (elongated, with an axis).
+        elongation, elongation_axis = _elongation_and_axis(
+            [node_center[n] for n in resident_nodes if n in node_center]
+        )
         if mouth_radius and mouth_radius > 0.0:
             occlusion = interior_radius / mouth_radius
             occlusion_gap = interior_radius - mouth_radius
@@ -1354,4 +1382,6 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
             'per_mouth_occlusion': per_mouth_occlusion,
             'buriedness': buriedness,
             'deepest_chamber': deepest_chamber,
+            'elongation': elongation,
+            'elongation_axis': elongation_axis,
         }
