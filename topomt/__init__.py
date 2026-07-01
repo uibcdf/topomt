@@ -13,7 +13,6 @@ def __print_version__():
 from ._pyunitwizard import pyunitwizard
 
 from . import config
-config.setup_logging(level="WARNING", capture_warnings=True, simplify_warning_format=True)
 
 from smonitor.integrations import ensure_configured
 from ._private.smonitor import PACKAGE_ROOT

@@ -1,6 +1,10 @@
 import logging
 import warnings
+from pathlib import Path
 from typing import IO
+
+_ORIGINAL_FORMATWARNING = warnings.formatwarning
+_TOPOMT_ROOT = Path(__file__).resolve().parents[1]
 
 
 def _parse_level(level: int | str) -> int:
@@ -58,10 +62,19 @@ def setup_logging(
 
     # Capture Python warnings and route to logging via "py.warnings"
     if capture_warnings:
-        # Simplify the warning text so it contains only "Category: message"
+        # Simplify only warnings emitted from TopoMT itself. Python warning
+        # formatting is process-global, so unrelated libraries keep the
+        # formatter that was active before TopoMT setup.
         if simplify_warning_format:
             def _simple_formatwarning(message, category, filename, lineno, line=None):
-                return f"{category.__name__}: {message}\n"
+                try:
+                    origin = Path(filename).resolve()
+                    is_topomt_warning = origin.is_relative_to(_TOPOMT_ROOT)
+                except Exception:
+                    is_topomt_warning = False
+                if is_topomt_warning:
+                    return f"{category.__name__}: {message}\n"
+                return _ORIGINAL_FORMATWARNING(message, category, filename, lineno, line)
             warnings.formatwarning = _simple_formatwarning
 
         logging.captureWarnings(True)
