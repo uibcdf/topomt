@@ -159,7 +159,7 @@ def get_addon():
         AddonPanelSpec,
         AddonShapeProviderSpec,
         AddonSpec,
-        AddonWorkbenchSectionSpec,
+        AddonSectionSpec,
         AddonWorkspaceSpec,
     )
 
@@ -221,12 +221,12 @@ def get_addon():
                 order=20,
             ),
         ),
-        workbench_sections=(
-            AddonWorkbenchSectionSpec(
+        addon_sections=(
+            AddonSectionSpec(
                 id='topography-summary',
                 title='Topography Summary',
                 entry='molsysviewer_topomt.workbench.topography_summary',
-                target_panel='workbench',
+                target_panel='addons',
                 order=10,
             ),
         ),
