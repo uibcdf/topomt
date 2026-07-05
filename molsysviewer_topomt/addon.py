@@ -83,37 +83,7 @@ def _handle_simplex_selection(view, runtime, payload):
     if not atoms:
         return
 
-    # The op expects frontend-local atom indices; remap when the view does.
-    local = atoms
-    mapper = getattr(view, '_index_mapper', None)
-    if mapper is not None:
-        try:
-            local = list(mapper.to_local_atoms(atoms))
-        except Exception:
-            local = atoms
-
-    try:
-        view._send({'op': 'set_active_selection', 'atom_indices': list(local)})
-        view._last_active_selection_event = {
-            'event': 'interaction_active_selection_changed',
-            'source_kind': 'element',
-            'element_level': 'atom',
-            'target_level': 'none',
-            'items': [],
-            'atom_indices': list(atoms),
-            'atom_index_space': MOLECULAR_SYSTEM,
-            'group_indices': [],
-            'component_indices': [],
-            'chain_indices': [],
-            'molecule_indices': [],
-            'entity_indices': [],
-            'count_atoms': len(atoms),
-            'count_groups': 0,
-            'count_shapes': 0,
-            'count_annotations': 0,
-        }
-    except Exception:
-        pass
+    view.active_selection.set(list(atoms))
 
 
 _addon_instance = None
