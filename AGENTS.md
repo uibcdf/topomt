@@ -17,6 +17,10 @@ external tools must be used here.
 This file defines how automated agents and human contributors must work with the **TopoMT** repository.  
 It serves as a guide for consistent, transparent, and safe collaboration between humans and automated systems.
 
+All contributors must also read `MOLSYSSUITE_GUIDE.md`. It is the synchronized,
+read-only suite-governance guide owned by `uibcdf/molsyssuite`; shared policies and
+cross-component improvements are reported there as the guide directs.
+
 ---
 
 ## 2. Project Overview
