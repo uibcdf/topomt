@@ -76,4 +76,5 @@ Wrapper smoke/parity tests remain distinct from native parity suites.
 
 ## Environment Caveat
 
-The repository targets Python 3.10, 3.11, and 3.12. Results obtained in newer interpreters can be useful for development, but they should not be confused with the official support story.
+The repository supports Python 3.11, 3.12, and 3.13. Routine development and the
+documentation build use Python 3.13, following the MolSysSuite baseline.

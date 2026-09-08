@@ -15,7 +15,7 @@ This creates a style-contract mismatch: new contributors following `AGENTS.md`
 will remove or avoid the future import, while existing modules use it as normal
 practice. The current rationale in `AGENTS.md` also says modern Python already
 supports deferred annotation evaluation through PEP 649, but TopoMT still targets
-Python 3.10, 3.11, and 3.12, where this is not a practical replacement for the
+Python 3.11, 3.12, and 3.13, where this is not a practical replacement for the
 future import.
 
 ## Evidence
@@ -42,7 +42,7 @@ The 2026-06-06 code review already noted the same mismatch.
 ### Option A: Allow the future import
 
 Update `AGENTS.md` to permit `from __future__ import annotations` while Python
-3.10-3.12 remain supported. This matches current code, keeps runtime annotation
+3.11-3.13 remain supported. This matches current code, keeps runtime annotation
 evaluation cheap, and avoids broad mechanical churn.
 
 Tradeoff: type-hint introspection that relies on eager runtime objects must use
@@ -69,7 +69,7 @@ drift again.
 
 Prefer Option A unless there is confirmed runtime annotation introspection that
 breaks under postponed evaluation. The current code already relies on the future
-import in multiple areas, and Python 3.10-3.12 support makes the prohibition
+import in multiple areas, and Python 3.11-3.13 support makes the prohibition
 costlier than the benefit.
 
 If Option A is accepted, update `AGENTS.md` and any shared MolSysSuite coding
@@ -89,7 +89,7 @@ treat it as a dedicated mechanical cleanup with tests/import smoke checks.
 ## Decision Questions
 
 1. Do we want `from __future__ import annotations` to be allowed while supporting
-   Python 3.10-3.12?
+   Python 3.11-3.13?
 2. Are there runtime annotation consumers in TopoMT that require eager annotation
    objects?
 3. Should this policy be synchronized across MolSysSuite repositories?

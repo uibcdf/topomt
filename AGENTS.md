@@ -87,8 +87,8 @@ analysis.|
 
 ### 3.2 Python Versions supported
 
-TopoMT is developed and tested for **Python 3.10, 3.11 and 3.12**.
-Taking advantage of the latest language features and type hinting improvements for that versions.
+TopoMT supports **Python 3.11, 3.12 and 3.13**. Routine development uses Python
+3.13, following the MolSysSuite baseline.
 
 ---
 
@@ -174,7 +174,7 @@ consistency.
 
 ### 4.11  Type hints and annotations
 
-- All source code targets **Python ≥3.10**.
+- All source code targets **Python ≥3.11**.
 - Do **not** use `from __future__ import annotations`.  
   Modern Python already supports deferred evaluation of annotations (PEP 649).
 - Do **not** wrap types in quotes (e.g., use `str`, not `'str'`), except for
