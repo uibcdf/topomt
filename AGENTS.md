@@ -11,6 +11,8 @@ external tools must be used here.
 
 - `GH_RUN_RECEPTOR_GUIDE.md` — Required guide for compact, truth-preserving inspection of
   GitHub Actions runs and the native-command fallback.
+- `ACKREDIT_GUIDE.md` — Required guide for optional scientific attribution and citation
+  reporting.
 
 ## 1. Purpose of This File
 

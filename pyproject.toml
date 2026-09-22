@@ -128,6 +128,7 @@ file = "topomt/_version.py"
 line-length = 88
 target-version = "py311"
 extend-exclude = [
+    "ACKREDIT_GUIDE.md",
     "ARGDIGEST_GUIDE.md",
     "DEPDIGEST_GUIDE.md",
     "GH_RUN_RECEPTOR_GUIDE.md",
