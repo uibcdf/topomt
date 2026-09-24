@@ -45,12 +45,15 @@ def flow_targets_to_sinks(
             lower_neighbors = [
                 neighbor
                 for neighbor in neighbor_dict[current]
-                if (current_proxy - float(proxy_values[neighbor])) > tol_fraction * max(current_proxy, 1e-12)
+                if (current_proxy - float(proxy_values[neighbor]))
+                > tol_fraction * max(current_proxy, 1e-12)
             ]
             if not lower_neighbors:
                 break
 
-            next_current = min(lower_neighbors, key=lambda neighbor: float(proxy_values[neighbor]))
+            next_current = min(
+                lower_neighbors, key=lambda neighbor: float(proxy_values[neighbor])
+            )
             if next_current in visited:
                 break
 

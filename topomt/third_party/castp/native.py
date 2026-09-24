@@ -37,15 +37,15 @@ def get_topography(molecular_system, **kwargs):
             )
         if 'area' in record and record['area'] is not None:
             parent_feature.area = puw.quantity(
-                float(record['area']) * angstrom_to_nm ** 2, 'nm**2'
+                float(record['area']) * angstrom_to_nm**2, 'nm**2'
             )
         if 'volume' in record and record['volume'] is not None:
             parent_feature.volume = puw.quantity(
-                float(record['volume']) * angstrom_to_nm ** 3, 'nm**3'
+                float(record['volume']) * angstrom_to_nm**3, 'nm**3'
             )
         if 'mouth_area' in record and record['mouth_area'] is not None:
             parent_feature.mouth_area = puw.quantity(
-                float(record['mouth_area']) * angstrom_to_nm ** 2, 'nm**2'
+                float(record['mouth_area']) * angstrom_to_nm**2, 'nm**2'
             )
         if 'mouth_perimeter' in record and record['mouth_perimeter'] is not None:
             parent_feature.mouth_perimeter = puw.quantity(
@@ -69,7 +69,7 @@ def get_topography(molecular_system, **kwargs):
                 source='castp',
                 source_id=f'{source_id}:mouth:{mouth["id"]}',
                 area=puw.quantity(
-                    float(mouth.get('area', 0.0)) * angstrom_to_nm ** 2, 'nm**2'
+                    float(mouth.get('area', 0.0)) * angstrom_to_nm**2, 'nm**2'
                 ),
             )
             topography.connect_features(mouth_feature_id, parent_feature_id)

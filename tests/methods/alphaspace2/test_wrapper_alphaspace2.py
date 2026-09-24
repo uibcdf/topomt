@@ -12,7 +12,6 @@ from topomt.third_party.alphaspace2.library import (
     _patch_alphaspace2_numpy_compatibility,
 )
 
-
 UPSTREAM_REPO = Path.home() / 'repos@others' / 'AlphaSpace2'
 TEST_PDB = Path('topomt/data/fpocket4/sample/1GG0.pdb')
 
@@ -58,14 +57,16 @@ def test_alphaspace2_wrapper_matches_upstream_snapshot_on_reference_system():
 
     assert len(wrapper_pockets) == len(upstream_pockets)
 
-    for wrapper_pocket, upstream_pocket in zip(wrapper_pockets[:5], upstream_pockets[:5]):
+    for wrapper_pocket, upstream_pocket in zip(
+        wrapper_pockets[:5], upstream_pockets[:5]
+    ):
         assert puw.get_value(wrapper_pocket.volume, to_unit='nm**3') == pytest.approx(
             upstream_pocket.space / 1000.0
         )
         assert wrapper_pocket.score == pytest.approx(upstream_pocket.score)
-        assert len(puw.get_value(wrapper_pocket.alpha_sphere_radii, to_unit='nm')) == len(
-            upstream_pocket.alpha_index
-        )
+        assert len(
+            puw.get_value(wrapper_pocket.alpha_sphere_radii, to_unit='nm')
+        ) == len(upstream_pocket.alpha_index)
 
 
 def test_alphaspace2_wrapper_smoke_on_demo_system():

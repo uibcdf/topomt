@@ -462,24 +462,28 @@ CATALOG = [
     #     small base -- a positive/knob feature, not a cavity; no wet family) ---
     (
         'tetrahedron_spike',
-        lambda: _argon_points([
-            (2.170, 0.000, 0.000),
-            (-1.085, 1.880, 0.000),
-            (-1.085, -1.880, 0.000),
-            (0.000, 0.000, 10.000),
-        ]),
+        lambda: _argon_points(
+            [
+                (2.170, 0.000, 0.000),
+                (-1.085, 1.880, 0.000),
+                (-1.085, -1.880, 0.000),
+                (0.000, 0.000, 10.000),
+            ]
+        ),
         1.4,
         'convexity probe: equilateral triangular base (r=2.17) + a long axial spike '
         'at z=10 (a protrusion/knob, not a cavity); no significant wet family',
     ),
     (
         'tetrahedron_spike_2',
-        lambda: _argon_points([
-            (0.600, 0.000, 0.000),
-            (-1.000, 3.000, 0.000),
-            (-1.000, -3.000, 0.000),
-            (0.200, 0.000, 10.000),
-        ]),
+        lambda: _argon_points(
+            [
+                (0.600, 0.000, 0.000),
+                (-1.000, 3.000, 0.000),
+                (-1.000, -3.000, 0.000),
+                (0.200, 0.000, 10.000),
+            ]
+        ),
         1.4,
         'convexity probe: narrow elongated base + a slightly off-axis spike at z=10 '
         '(asymmetric protrusion variant); no significant wet family',
@@ -488,7 +492,9 @@ CATALOG = [
 
 
 def _family_summary(coords, radii, probe_radius):
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-7
+    )
     topo = network.get_topography(probe_radius=probe_radius, min_size=0)
     domains = topo['raw']['wet_components']
     significant = Counter(

@@ -3,17 +3,20 @@ Tests for the alpha-sphere-derived view exposed by DelaunayMesh.
 """
 
 import numpy as np
+
 import topomt as pom
 
 
 def test_delaunay_mesh_alpha_view_original_points():
 
-    points = ([[-1.,  2.,  0.],
-               [ 0.,  2.,  1.],
-               [ 1., -2.,  1.],
-               [ 0.,  1.,  1.],
-               [ 0.,  0.,  0.],
-               [-1., -1.,  0.]])
+    points = [
+        [-1.0, 2.0, 0.0],
+        [0.0, 2.0, 1.0],
+        [1.0, -2.0, 1.0],
+        [0.0, 1.0, 1.0],
+        [0.0, 0.0, 0.0],
+        [-1.0, -1.0, 0.0],
+    ]
 
     mesh = pom.DelaunayMesh(points)
 
@@ -23,23 +26,22 @@ def test_delaunay_mesh_alpha_view_original_points():
 
     assert mesh.n_alpha_spheres == 4
 
-    centers = ([[ 6.5 ,  1.5 , -0.5 ],
-                [-0.25, -0.75,  1.75],
-                [ 0.5 ,  1.5 , -0.5 ],
-                [-1.5 ,  0.5 ,  0.5 ]])
+    centers = [
+        [6.5, 1.5, -0.5],
+        [-0.25, -0.75, 1.75],
+        [0.5, 1.5, -0.5],
+        [-1.5, 0.5, 0.5],
+    ]
 
     assert np.allclose(centers, mesh.centers)
 
-    radius_all = ([6.68954408, 1.92028644, 1.6583124 , 1.6583124 ])
+    radius_all = [6.68954408, 1.92028644, 1.6583124, 1.6583124]
     assert np.allclose(radius_all, mesh.radii)
 
-    volumes = ([0.16666667, 0.66666667, 0.16666667, 0.5])
+    volumes = [0.16666667, 0.66666667, 0.16666667, 0.5]
     assert np.allclose(volumes, mesh.get_volumes())
 
-    points_of_alpha_sphere = ([[1, 2, 3, 4],
-                               [2, 3, 4, 5],
-                               [0, 1, 3, 4],
-                               [0, 3, 4, 5]])
+    points_of_alpha_sphere = [[1, 2, 3, 4], [2, 3, 4, 5], [0, 1, 3, 4], [0, 3, 4, 5]]
     assert np.allclose(points_of_alpha_sphere, mesh.points_of_alpha_sphere)
 
     assert mesh.get_neighbors() == {
@@ -50,18 +52,22 @@ def test_delaunay_mesh_alpha_view_original_points():
     }
 
     merged_selected_point_indices = [0, 2, 3, 4, 5]
-    assert np.allclose(merged_selected_point_indices, mesh.get_points_of_alpha_spheres([1, 3]))
+    assert np.allclose(
+        merged_selected_point_indices, mesh.get_points_of_alpha_spheres([1, 3])
+    )
 
 
 def test_delaunay_mesh_alpha_view_ambiguity_indicators_detect_near_cospherical_case():
 
-    points = np.array([
-        [1.0, 0.0, 0.0],
-        [-1.0, 0.0, 0.0],
-        [0.0, 1.0, 0.0],
-        [0.0, 0.0, 1.0],
-        [0.0, 0.0, -0.99],
-    ])
+    points = np.array(
+        [
+            [1.0, 0.0, 0.0],
+            [-1.0, 0.0, 0.0],
+            [0.0, 1.0, 0.0],
+            [0.0, 0.0, 1.0],
+            [0.0, 0.0, -0.99],
+        ]
+    )
 
     mesh = pom.DelaunayMesh(points)
 
@@ -87,6 +93,8 @@ def test_delaunay_mesh_alpha_view_ambiguity_indicators_detect_near_cospherical_c
         minimum_condition_number=None,
     )
 
-    assert returned_indicators['near_cospherical_count'].shape == (mesh.n_alpha_spheres,)
+    assert returned_indicators['near_cospherical_count'].shape == (
+        mesh.n_alpha_spheres,
+    )
     assert indices.size > 0
     assert np.all(returned_indicators['near_cospherical_count'][indices] > 0)

@@ -127,9 +127,9 @@ def get_addon():
         AddonContextActionSpec,
         AddonExportHelperSpec,
         AddonPanelSpec,
+        AddonSectionSpec,
         AddonShapeProviderSpec,
         AddonSpec,
-        AddonSectionSpec,
         AddonWorkspaceSpec,
     )
 

@@ -10,7 +10,9 @@ def _to_numpy(points) -> np.ndarray:
     return np.asarray(points, dtype=float)
 
 
-def bounding_metrics(points: Sequence[Sequence[float]]) -> dict[str, float | np.ndarray]:
+def bounding_metrics(
+    points: Sequence[Sequence[float]],
+) -> dict[str, float | np.ndarray]:
     """Compute oriented bounding-box-like metrics using PCA axes."""
 
     point_array = _to_numpy(points)
@@ -43,7 +45,9 @@ def bounding_metrics(points: Sequence[Sequence[float]]) -> dict[str, float | np.
     }
 
 
-def effective_center_radius(points: Sequence[Sequence[float]]) -> tuple[np.ndarray, float, float]:
+def effective_center_radius(
+    points: Sequence[Sequence[float]],
+) -> tuple[np.ndarray, float, float]:
     """Return centroid, mean radial distance, and max radial distance."""
 
     point_array = _to_numpy(points)

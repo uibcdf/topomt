@@ -28,9 +28,7 @@ def _load_pdb_coords(name: str) -> np.ndarray:
     coords = []
     for line in (_DATA / name).read_text().splitlines():
         if line.startswith(('ATOM', 'HETATM')):
-            coords.append(
-                [float(line[30:38]), float(line[38:46]), float(line[46:54])]
-            )
+            coords.append([float(line[30:38]), float(line[38:46]), float(line[46:54])])
     return np.array(coords, dtype=float)
 
 

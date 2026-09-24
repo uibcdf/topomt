@@ -16,7 +16,7 @@ def pytest_configure(config):
     the compiled functions instead of recompiling. Best-effort: never fail
     collection if warmup is unavailable.
     """
-    if hasattr(config, "workerinput"):
+    if hasattr(config, 'workerinput'):
         return  # xdist worker: only the controller pre-warms
     try:
         import molsysmt as msm
@@ -25,14 +25,16 @@ def pytest_configure(config):
     except Exception:
         pass
 
-@pytest.fixture(scope="session")
+
+@pytest.fixture(scope='session')
 def seed_topography_empty_1tcd():
     pdb_file = tmt.demo['TcTIM']['1tcd.pdb']
     topography = tmt.Topography(molecular_system=pdb_file)
     assert topography is not None
     return topography
 
-@pytest.fixture(scope="function")
+
+@pytest.fixture(scope='function')
 def topography_empty_1tcd(seed_topography_empty_1tcd):
     topography = seed_topography_empty_1tcd.copy(deep=True)
     assert topography is not None

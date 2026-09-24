@@ -1,6 +1,7 @@
 import re
 from typing import Iterable
 
+
 def sort_feature_ids(feature_ids: Iterable[str]) -> list[str]:
     """Return a list of feature IDs sorted numerically by their index.
 
@@ -31,13 +32,14 @@ def sort_feature_ids(feature_ids: Iterable[str]) -> list[str]:
     >>> sort_feature_ids(['VOI-3', 'POC-2', 'POC-10', 'CHA-1'])
     ['CHA-1', 'POC-2', 'POC-10', 'VOI-3']
     """
+
     def sort_key(fid: str):
         # Extrae prefijo (no dígitos) y número (dígitos)
-        match = re.match(r"([A-Za-z_]+)[^\d]*(\d+)?", fid)
+        match = re.match(r'([A-Za-z_]+)[^\d]*(\d+)?', fid)
         if not match:
-            return ("", float("inf"))
+            return ('', float('inf'))
         prefix, num = match.groups()
-        index = int(num) if num is not None else float("inf")
+        index = int(num) if num is not None else float('inf')
         return (prefix, index)
 
     return sorted(feature_ids, key=sort_key)

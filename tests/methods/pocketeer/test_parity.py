@@ -3,7 +3,6 @@ import sys
 from pathlib import Path
 
 import molsysmt as msm
-import numpy as np
 import pytest
 
 from topomt.third_party.pocketeer._native_impl import pocketeer
@@ -17,7 +16,7 @@ def upstream_pocketeer():
     try:
         pocketeer_module = importlib.import_module('pocketeer')
     except ModuleNotFoundError as exc:
-        pytest.skip(f"Upstream pocketeer dependency missing: {exc}")
+        pytest.skip(f'Upstream pocketeer dependency missing: {exc}')
     yield pocketeer_module
     sys.path.remove(str(POCKETEER_REPO / 'src'))
 
@@ -51,7 +50,9 @@ def test_pocketeer_parity_with_upstream(upstream_pocketeer):
     )
 
     assert len(local_pockets) >= len(upstream_pockets)
-    paired = zip(sorted(local_pockets, key=lambda p: p.score, reverse=True), upstream_pockets)
+    paired = zip(
+        sorted(local_pockets, key=lambda p: p.score, reverse=True), upstream_pockets
+    )
     for local, upstream in paired:
         local_volume_a3 = local.volume * 1000.0
         if upstream.volume > 0:

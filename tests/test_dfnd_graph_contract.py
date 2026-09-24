@@ -70,10 +70,14 @@ def test_marginal_residence_is_flagged_in_raw_tetrahedron_records():
         dtype=float,
     )
     radii = np.full(4, 1.7, dtype=float)
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-6)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-6
+    )
     probe_radius = float(network.tetra_residence[0])
 
-    result = network.get_topography(probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0)
+    result = network.get_topography(
+        probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0
+    )
     tetrahedron = result['raw']['tetrahedra'][0]
 
     # Generous policy: at exactly R_probe the numerical epsilon favours resident,
@@ -96,10 +100,14 @@ def test_marginal_gate_is_flagged_in_raw_face_and_owner_tetrahedron_records():
         dtype=float,
     )
     radii = np.full(5, 0.5, dtype=float)
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-6)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-6
+    )
     probe_radius = float(network.face_r_gates_per_tet_face[0, 0])
 
-    result = network.get_topography(probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0)
+    result = network.get_topography(
+        probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0
+    )
     marginal_faces = [
         face
         for face in result['raw']['faces']
@@ -125,7 +133,9 @@ def test_permeable_shared_faces_between_transit_nodes_are_transit_edges():
     network = _two_tetrahedra_fixture()
     probe_radius = float(network.edge_weights[0])
 
-    result = network.get_topography(probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0)
+    result = network.get_topography(
+        probe_radius=puw.quantity(probe_radius, 'nm'), min_size=0
+    )
     components = result['raw']['wet_components']
     faces = [
         face for face in result['raw']['faces'] if face['neighbor_tetrahedron_id'] >= 0
@@ -225,7 +235,9 @@ def test_dry_open_cut_connector_policy_can_merge_resident_regions():
         [1.51, 1.48, 1.51, 1.67, 1.65, 1.59, 1.52, 1.61, 1.61, 1.6], dtype=float
     )
 
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-7
+    )
     resident_only = network.get_topography(
         probe_radius=1.4,
         transit_policy='resident_only',
@@ -278,7 +290,9 @@ def test_wet_coast_one_link_domain_is_pocket_not_surface_concavity():
     )
     radii = np.array([1.71923894, 1.53403038, 1.75274022, 1.87381129], dtype=float)
 
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-8)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-8
+    )
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
     assert len(result['raw']['wet_components']) == 1
@@ -481,7 +495,9 @@ def test_channel_domain_has_distinct_external_links():
         [1.53, 1.56, 1.34, 1.39, 1.69, 1.68, 1.67, 1.59, 1.56, 1.64, 1.55], dtype=float
     )
 
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-7
+    )
     result = network.get_topography(probe_radius=1.4, min_size=0)
 
     domains = result['raw']['wet_components']
@@ -517,7 +533,9 @@ def test_surface_dent_one_link_has_no_residence():
     )
     radii = np.array([1.7, 1.49, 1.85, 1.39, 1.4, 1.81, 1.57, 1.64], dtype=float)
 
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-7
+    )
     result = network.get_topography(
         probe_radius=1.4, min_size=0, transit_policy='with_connectors'
     )
@@ -698,7 +716,9 @@ def test_permeable_shared_faces_do_not_create_dry_edges():
         [1.58, 1.42, 1.61, 1.92, 1.09, 1.86, 1.77, 1.63, 1.63],
         dtype=float,
     )
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-7
+    )
     result = network.get_topography(probe_radius=1.4, min_size=0)
     tetrahedra, faces = _dry_record_maps(result)
 
@@ -792,7 +812,9 @@ def test_singleton_dry_component_with_interface_has_depth_zero():
         dtype=float,
     )
     radii = np.full(4, 1.7, dtype=float)
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-7)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-7
+    )
     result = network.get_topography(probe_radius=2.0, min_size=0)
 
     singletons = [
@@ -863,7 +885,9 @@ def test_gate_intrusion_suspect_is_flagged_and_can_block_face():
     )
     radii = np.array([1.4, 1.4, 1.4, 1.8], dtype=float)
 
-    network = DelaunayFlowNetwork.from_coordinates_and_radii(coords, radii, epsilon=1e-8)
+    network = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, radii, epsilon=1e-8
+    )
     flagged = network.get_topography(
         probe_radius=1.0,
         gate_intrusion_policy='flag_only',

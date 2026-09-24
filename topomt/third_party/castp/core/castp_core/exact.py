@@ -1,7 +1,7 @@
 """Exact arithmetic helpers for canonical CASTp weighted events."""
 
-from dataclasses import dataclass
 import math
+from dataclasses import dataclass
 from math import gcd
 
 import numpy as np
@@ -41,7 +41,9 @@ class ExactRatio:
 
         if self.denominator == 0:
             if other.denominator == 0:
-                return (self.numerator > other.numerator) - (self.numerator < other.numerator)
+                return (self.numerator > other.numerator) - (
+                    self.numerator < other.numerator
+                )
             return (self.numerator > 0) - (self.numerator < 0)
 
         if other.denominator == 0:
@@ -78,7 +80,9 @@ def fixed_point_array(values: np.ndarray, decimals: int) -> np.ndarray:
     return np.rint(values_array * scale).astype(object)
 
 
-def castp1_fixed_point_int(value: float, decimals: int = 5, source_decimals: int = 3) -> int:
+def castp1_fixed_point_int(
+    value: float, decimals: int = 5, source_decimals: int = 3
+) -> int:
     """Return CASTp 1.0 fixed-point integer materialization.
 
     Historical CASTp inputs written with ``# fix: 7.5`` are read through

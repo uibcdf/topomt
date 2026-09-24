@@ -15,7 +15,6 @@ from topomt.delaunay_mesh import DelaunayMesh
 from topomt.features import Pocket
 from topomt.third_party.fpocket._legacy_cli import get_topography_with_fpocket
 
-
 ASPH_MIN_SIZE_NM = 0.34
 ASPH_MAX_SIZE_NM = 0.62
 CLUST_MAX_DIST_NM = 0.24
@@ -42,19 +41,56 @@ ELECTRONEGATIVITY_BY_ATOM_TYPE = {
 
 WATER_GROUP_NAMES = {'HOH', 'WAT', 'TIP'}
 UPSTREAM_KEEP_HETATM_GROUP_NAMES = frozenset(
-    Path(__file__).resolve().parents[2]
+    Path(__file__)
+    .resolve()
+    .parents[2]
     .joinpath('data', 'fpocket4', 'upstream_keep_hetatm.txt')
     .read_text()
     .splitlines()
 )
 CANONICAL_POLYMER_GROUP_NAMES = frozenset(
     {
-        'ALA', 'ARG', 'ASN', 'ASP', 'ASX', 'CYS', 'GLN', 'GLU', 'GLX', 'GLY',
-        'HIS', 'HID', 'HIE', 'HIP', 'ILE', 'LEU', 'LYS', 'MET', 'PHE', 'PRO',
-        'PYL', 'SEC', 'SER', 'THR', 'TRP', 'TYR', 'VAL',
-        'A', 'C', 'G', 'U', 'I',
-        'DA', 'DC', 'DG', 'DT', 'DI',
-        'ADE', 'CYT', 'GUA', 'URI',
+        'ALA',
+        'ARG',
+        'ASN',
+        'ASP',
+        'ASX',
+        'CYS',
+        'GLN',
+        'GLU',
+        'GLX',
+        'GLY',
+        'HIS',
+        'HID',
+        'HIE',
+        'HIP',
+        'ILE',
+        'LEU',
+        'LYS',
+        'MET',
+        'PHE',
+        'PRO',
+        'PYL',
+        'SEC',
+        'SER',
+        'THR',
+        'TRP',
+        'TYR',
+        'VAL',
+        'A',
+        'C',
+        'G',
+        'U',
+        'I',
+        'DA',
+        'DC',
+        'DG',
+        'DT',
+        'DI',
+        'ADE',
+        'CYT',
+        'GUA',
+        'URI',
     }
 )
 
@@ -271,7 +307,9 @@ def _prepare_receptor(
         selection=keep_local_indices,
         syntax='MolSysMT',
     )
-    filtered_atom_indices = selected_atom_indices[np.array(keep_local_indices, dtype=int)]
+    filtered_atom_indices = selected_atom_indices[
+        np.array(keep_local_indices, dtype=int)
+    ]
     coordinates = msm.get(
         molecular_system=filtered_receptor,
         coordinates=True,
@@ -477,7 +515,9 @@ def _get_atomic_radii_nm(receptor, atom_types: np.ndarray) -> np.ndarray:
         return np.asarray(fallback, dtype=float)
 
 
-def _get_selected_b_factors(molecular_system, atom_indices: np.ndarray) -> np.ndarray | None:
+def _get_selected_b_factors(
+    molecular_system, atom_indices: np.ndarray
+) -> np.ndarray | None:
     b_factors = msm.get(molecular_system, b_factor=True)
     if b_factors is None:
         return None
@@ -505,7 +545,15 @@ def _build_native_state(
     exclude_group_names: list[str] | tuple[str, ...] | set[str] | None = None,
     implementation: str = 'native',
 ) -> Fpocket4NativeState:
-    receptor, atom_indices, coordinates_nm, atom_types, atom_radii_nm, atom_electronegativities, atom_b_factors = _prepare_receptor(
+    (
+        receptor,
+        atom_indices,
+        coordinates_nm,
+        atom_types,
+        atom_radii_nm,
+        atom_electronegativities,
+        atom_b_factors,
+    ) = _prepare_receptor(
         # Returned data is already filtered to the heavy-atom receptor seen by
         # the native fpocket pipeline.
         molecular_system=molecular_system,
@@ -553,7 +601,9 @@ def _build_native_state(
     descriptor_atom_types = np.array(
         [
             _get_atom_element(atom_type, atom_name)
-            for atom_type, atom_name in zip(descriptor_raw_atom_types, descriptor_atom_names)
+            for atom_type, atom_name in zip(
+                descriptor_raw_atom_types, descriptor_atom_names
+            )
         ],
         dtype=object,
     )
@@ -631,13 +681,22 @@ def _build_native_state(
         if len(pocket_indices) >= MIN_POCKET_ALPHA_SPHERES
     ]
 
-    pocket_centers_nm = np.array(
-        [np.mean(mesh.centers[pocket_indices], axis=0) for pocket_indices in pocket_alpha_index_list],
-        dtype=float,
-    ) if pocket_alpha_index_list else np.zeros((0, 3))
+    pocket_centers_nm = (
+        np.array(
+            [
+                np.mean(mesh.centers[pocket_indices], axis=0)
+                for pocket_indices in pocket_alpha_index_list
+            ],
+            dtype=float,
+        )
+        if pocket_alpha_index_list
+        else np.zeros((0, 3))
+    )
 
     pocket_atom_index_list = [
-        np.unique(atom_indices[mesh.points_of_alpha_sphere[pocket_indices]].reshape(-1)).astype(int).tolist()
+        np.unique(atom_indices[mesh.points_of_alpha_sphere[pocket_indices]].reshape(-1))
+        .astype(int)
+        .tolist()
         for pocket_indices in pocket_alpha_index_list
     ]
 
@@ -736,7 +795,9 @@ def _compute_local_hydrophobic_density(
             continue
         distances = np.linalg.norm(centers - centers[alpha_index], axis=1)
         overlap = distances - (radii + radii[alpha_index])
-        local_density[alpha_index] = float(np.sum((overlap <= 0.0) & alpha_is_apolar) - 1)
+        local_density[alpha_index] = float(
+            np.sum((overlap <= 0.0) & alpha_is_apolar) - 1
+        )
 
     return local_density
 
@@ -809,7 +870,8 @@ def _compute_native_surface_descriptors(
     unique_local_atom_indices = np.unique(pocket_alpha_points.reshape(-1))
 
     distances_to_centers = np.linalg.norm(
-        state.descriptor_occluder_coordinates_nm[:, None, :] - pocket_alpha_centers[None, :, :],
+        state.descriptor_occluder_coordinates_nm[:, None, :]
+        - pocket_alpha_centers[None, :, :],
         axis=2,
     )
     surrounding_mask = np.any(
@@ -833,7 +895,9 @@ def _compute_native_surface_descriptors(
         atom_alpha_centers = pocket_alpha_centers[contact_mask]
         atom_alpha_radii = pocket_alpha_radii[contact_mask]
 
-        probe14_points = atom_coordinate + _ASA_SPHERE_POINTS * (atom_radius_nm + _ASA_PROBE_14_NM)
+        probe14_points = atom_coordinate + _ASA_SPHERE_POINTS * (
+            atom_radius_nm + _ASA_PROBE_14_NM
+        )
         accessible14 = 0
         for point in probe14_points:
             if atom_alpha_centers.size == 0:
@@ -841,15 +905,19 @@ def _compute_native_surface_descriptors(
             else:
                 vref_buried = not np.any(
                     np.sum((point - atom_alpha_centers) ** 2, axis=1)
-                    <= (atom_alpha_radii ** 2)
+                    <= (atom_alpha_radii**2)
                 )
             if vref_buried:
                 continue
 
             buried = False
             for surrounding_index in surrounding_indices:
-                surrounding_coordinate = state.descriptor_occluder_coordinates_nm[surrounding_index]
-                surrounding_radius_nm = state.descriptor_occluder_radii_nm[surrounding_index]
+                surrounding_coordinate = state.descriptor_occluder_coordinates_nm[
+                    surrounding_index
+                ]
+                surrounding_radius_nm = state.descriptor_occluder_radii_nm[
+                    surrounding_index
+                ]
                 if np.sum((point - surrounding_coordinate) ** 2) < (
                     (surrounding_radius_nm + _ASA_PROBE_14_NM) ** 2
                 ):
@@ -871,7 +939,9 @@ def _compute_native_surface_descriptors(
         else:
             surf_pol_vdw14_angstrom2 += area14_angstrom2
 
-        probe22_points = atom_coordinate + _ASA_SPHERE_POINTS * (atom_radius_nm + _ASA_PROBE_22_NM)
+        probe22_points = atom_coordinate + _ASA_SPHERE_POINTS * (
+            atom_radius_nm + _ASA_PROBE_22_NM
+        )
         accessible22 = 0
         for point in probe22_points:
             if atom_alpha_centers.size == 0:
@@ -879,15 +949,19 @@ def _compute_native_surface_descriptors(
             else:
                 vref_buried = not np.any(
                     np.sum((point - atom_alpha_centers) ** 2, axis=1)
-                    <= (atom_alpha_radii ** 2)
+                    <= (atom_alpha_radii**2)
                 )
             if vref_buried:
                 continue
 
             buried = False
             for surrounding_index in surrounding_indices:
-                surrounding_coordinate = state.descriptor_occluder_coordinates_nm[surrounding_index]
-                surrounding_radius_nm = state.descriptor_occluder_radii_nm[surrounding_index]
+                surrounding_coordinate = state.descriptor_occluder_coordinates_nm[
+                    surrounding_index
+                ]
+                surrounding_radius_nm = state.descriptor_occluder_radii_nm[
+                    surrounding_index
+                ]
                 if np.sum((point - surrounding_coordinate) ** 2) < (
                     (surrounding_radius_nm + _ASA_PROBE_22_NM) ** 2
                 ):
@@ -996,7 +1070,9 @@ def _normalize_native_descriptors(
         descriptor.as_max_dst_norm = 0.0
         return
 
-    nas_values = np.array([descriptor.n_alpha_spheres for descriptor in descriptors], dtype=float)
+    nas_values = np.array(
+        [descriptor.n_alpha_spheres for descriptor in descriptors], dtype=float
+    )
     mean_loc_hyd_dens_values = np.array(
         [descriptor.local_hydrophobic_density for descriptor in descriptors],
         dtype=float,
@@ -1021,9 +1097,9 @@ def _normalize_native_descriptors(
 
     for descriptor in descriptors:
         if nas_max != nas_min:
-            descriptor.nas_norm = (
-                descriptor.n_alpha_spheres - nas_min
-            ) / (nas_max - nas_min)
+            descriptor.nas_norm = (descriptor.n_alpha_spheres - nas_min) / (
+                nas_max - nas_min
+            )
         if mean_loc_hyd_dens_max != mean_loc_hyd_dens_min:
             descriptor.mean_loc_hyd_dens_norm = (
                 descriptor.local_hydrophobic_density - mean_loc_hyd_dens_min
@@ -1041,7 +1117,9 @@ def _normalize_native_descriptors(
 def _score_native_pocket(
     descriptor: Fpocket4NativePocketDescriptor,
 ) -> float:
-    convex_hull_volume_angstrom3 = float((descriptor.convex_hull_volume_nm3 or 0.0) * 1000.0)
+    convex_hull_volume_angstrom3 = float(
+        (descriptor.convex_hull_volume_nm3 or 0.0) * 1000.0
+    )
     return float(
         -0.03783394
         + 0.48461469 * descriptor.nas_norm
@@ -1098,7 +1176,9 @@ def _native_topography_from_state(
         _build_native_pocket_descriptor(state, pocket_index)
         for pocket_index in range(len(state.pocket_alpha_index_list))
     ]
-    descriptors = [descriptor for descriptor in descriptors if _keep_native_pocket(descriptor)]
+    descriptors = [
+        descriptor for descriptor in descriptors if _keep_native_pocket(descriptor)
+    ]
     _normalize_native_descriptors(descriptors)
     for descriptor in descriptors:
         descriptor.score = _score_native_pocket(descriptor)
@@ -1116,7 +1196,9 @@ def _native_topography_from_state(
             convex_hull_volume=puw.quantity(descriptor.convex_hull_volume_nm3, 'nm**3'),
             score=descriptor.score,
             n_alpha_spheres=descriptor.n_alpha_spheres,
-            mean_alpha_sphere_radius=puw.quantity(descriptor.mean_alpha_sphere_radius_nm, 'nm'),
+            mean_alpha_sphere_radius=puw.quantity(
+                descriptor.mean_alpha_sphere_radius_nm, 'nm'
+            ),
             n_apolar_alpha_spheres=descriptor.n_apolar_alpha_spheres,
             apolar_alpha_sphere_ratio=descriptor.apolar_alpha_sphere_ratio,
             local_hydrophobic_density_score=descriptor.local_hydrophobic_density,

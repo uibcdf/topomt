@@ -66,7 +66,9 @@ def get_pockets(
     return features
 
 
-def load_topography(*, zip_file=None, dir_path=None, molecular_system=None, **kwargs) -> Topography:
+def load_topography(
+    *, zip_file=None, dir_path=None, molecular_system=None, **kwargs
+) -> Topography:
     """Load CASTp-family artifacts from persisted files."""
 
     from .files import load_topography as load_topography_from_files

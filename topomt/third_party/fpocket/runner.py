@@ -23,7 +23,7 @@ def run_fpocket(
     else:
         workdir = Path(workdir).resolve()
 
-    cmd = [fpocket_cmd, "-f", str(pdb_file)]
+    cmd = [fpocket_cmd, '-f', str(pdb_file)]
     if extra_args:
         cmd.extend(extra_args)
 
@@ -37,11 +37,11 @@ def run_fpocket(
         )
     except subprocess.CalledProcessError as exc:
         raise FpocketError(
-            f"fpocket failed with code {exc.returncode}:\n{exc.stderr}"
+            f'fpocket failed with code {exc.returncode}:\n{exc.stderr}'
         ) from exc
 
-    out_dir = workdir / f"{pdb_file.stem}_out"
+    out_dir = workdir / f'{pdb_file.stem}_out'
     if not out_dir.exists():
-        raise FpocketError(f"Expected fpocket output dir not found: {out_dir}")
+        raise FpocketError(f'Expected fpocket output dir not found: {out_dir}')
 
     return out_dir

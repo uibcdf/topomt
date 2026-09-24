@@ -1,94 +1,135 @@
-"""
-"""
+""" """
 
-import topomt as tmt
 import importlib
 import warnings
-from molsysmt.native.molsys import MolSys
-from topomt.features import Mouth, Pocket
-from topomt import pyunitwizard as puw
-from topomt.get_topography import get_topography
-from topomt.get_topography import _run_alphaspace2, _run_castp, _run_pocketeer, _run_pycasta
-import pytest
+
 import numpy as np
+import pytest
+from molsysmt.native.molsys import MolSys
+
+import topomt as tmt
+from topomt import pyunitwizard as puw
+from topomt.features import Mouth, Pocket
+from topomt.get_topography import (
+    _run_alphaspace2,
+    _run_castp,
+    _run_pocketeer,
+    _run_pycasta,
+    get_topography,
+)
+
 
 def test_empty_Topography():
 
     topography = tmt.Topography()
 
-    assert type(topography) == tmt.Topography
+    assert type(topography) is tmt.Topography
     assert len(topography) == 0
     assert topography.features == {}
     assert topography.molecular_system is None
     assert topography._molsys is None
-    assert topography.get_features(by='type', value='pocket')==set()
-    assert topography.get_features(by='type', value='pocket', as_feature_ids=True)==set()
-    assert topography.get_features(by='dimensionality', value=2)==set()
-    assert topography.get_features(by='dimensionality', value=2, as_feature_ids=True)==set()
-    assert topography.get_features(by='shape', value='concavity')==set()
-    assert topography.get_features(by='shape', value='convexity')==set()
-    assert topography.get_features(by='shape', value='mixed')==set()
-    assert topography.get_features(by='shape', value='boundary')==set()
-    assert topography.get_features(by='shape', value='point')==set()
-    assert topography._make_next_feature_id('pocket')=='POC-1'
+    assert topography.get_features(by='type', value='pocket') == set()
+    assert (
+        topography.get_features(by='type', value='pocket', as_feature_ids=True) == set()
+    )
+    assert topography.get_features(by='dimensionality', value=2) == set()
+    assert (
+        topography.get_features(by='dimensionality', value=2, as_feature_ids=True)
+        == set()
+    )
+    assert topography.get_features(by='shape', value='concavity') == set()
+    assert topography.get_features(by='shape', value='convexity') == set()
+    assert topography.get_features(by='shape', value='mixed') == set()
+    assert topography.get_features(by='shape', value='boundary') == set()
+    assert topography.get_features(by='shape', value='point') == set()
+    assert topography._make_next_feature_id('pocket') == 'POC-1'
 
 
 def test_empty_Topography_with_molecular_system(topography_empty_1tcd):
 
     topography = topography_empty_1tcd
 
-    assert type(topography) == tmt.Topography
+    assert type(topography) is tmt.Topography
     assert len(topography) == 0
     assert topography.features == {}
     assert topography.molecular_system == tmt.demo['TcTIM']['1tcd.pdb']
-    assert type(topography._molsys) == MolSys
-    assert topography.get_features(by='type', value='pocket')==set()
-    assert topography.get_features(by='type', value='pocket', as_feature_ids=True)==set()
-    assert topography.get_features(by='dimensionality', value=2)==set()
-    assert topography.get_features(by='dimensionality', value=2, as_feature_ids=True)==set()
-    assert topography.get_features(by='shape', value='concavity')==set()
-    assert topography.get_features(by='shape', value='convexity')==set()
-    assert topography.get_features(by='shape', value='mixed')==set()
-    assert topography.get_features(by='shape', value='boundary')==set()
-    assert topography.get_features(by='shape', value='point')==set()
-    assert topography._make_next_feature_id('pocket')=='POC-1'
+    assert type(topography._molsys) is MolSys
+    assert topography.get_features(by='type', value='pocket') == set()
+    assert (
+        topography.get_features(by='type', value='pocket', as_feature_ids=True) == set()
+    )
+    assert topography.get_features(by='dimensionality', value=2) == set()
+    assert (
+        topography.get_features(by='dimensionality', value=2, as_feature_ids=True)
+        == set()
+    )
+    assert topography.get_features(by='shape', value='concavity') == set()
+    assert topography.get_features(by='shape', value='convexity') == set()
+    assert topography.get_features(by='shape', value='mixed') == set()
+    assert topography.get_features(by='shape', value='boundary') == set()
+    assert topography.get_features(by='shape', value='point') == set()
+    assert topography._make_next_feature_id('pocket') == 'POC-1'
+
 
 def test_Topography_new_pocket(topography_empty_1tcd):
 
     topography = topography_empty_1tcd
 
-    feature_id = topography.add_new_feature(feature_type='pocket', atom_indices=[1,2,3])    
+    feature_id = topography.add_new_feature(
+        feature_type='pocket', atom_indices=[1, 2, 3]
+    )
     new_feature = topography.features[feature_id]
 
     assert feature_id == 'POC-1'
-    assert type(topography) == tmt.Topography
+    assert type(topography) is tmt.Topography
     assert len(topography) == 1
     assert list(topography.features.keys()) == ['POC-1']
     assert isinstance(list(topography.features.values())[0], Pocket)
     assert isinstance(topography['POC-1'], Pocket)
     assert topography.molecular_system == tmt.demo['TcTIM']['1tcd.pdb']
-    assert type(topography._molsys) == MolSys
-    assert topography.get_features(by='type', value='pocket')==set([new_feature])
-    assert topography.get_features(by='type', value='pocket', as_feature_ids=True)==set(['POC-1'])
-    assert topography.get_features(by='dimensionality', value=2)==set([new_feature])
-    assert topography.get_features(by='dimensionality', value=2, as_feature_ids=True)==set(['POC-1'])
-    assert topography.get_features(by='shape', value='concavity')==set([new_feature])
-    assert topography.get_features(by='shape', value='concavity', as_feature_ids=True)==set(['POC-1'])
-    assert topography.get_features(by='shape', value='convexity')==set()
-    assert topography.get_features(by='shape', value='convexity', as_feature_ids=True)==set()
-    assert topography.get_features(by='shape', value='mixed')==set()
-    assert topography.get_features(by='shape', value='mixed', as_feature_ids=True)==set()
-    assert topography.get_features(by='shape', value='boundary')==set()
-    assert topography.get_features(by='shape', value='boundary', as_feature_ids=True)==set()
-    assert topography.get_features(by='shape', value='point')==set()
-    assert topography.get_features(by='shape', value='point', as_feature_ids=True)==set()
-    assert topography._make_next_feature_id('pocket')=='POC-2'
-    assert topography._make_next_feature_id('void')=='VOI-1'
+    assert type(topography._molsys) is MolSys
+    assert topography.get_features(by='type', value='pocket') == set([new_feature])
+    assert topography.get_features(
+        by='type', value='pocket', as_feature_ids=True
+    ) == set(['POC-1'])
+    assert topography.get_features(by='dimensionality', value=2) == set([new_feature])
+    assert topography.get_features(
+        by='dimensionality', value=2, as_feature_ids=True
+    ) == set(['POC-1'])
+    assert topography.get_features(by='shape', value='concavity') == set([new_feature])
+    assert topography.get_features(
+        by='shape', value='concavity', as_feature_ids=True
+    ) == set(['POC-1'])
+    assert topography.get_features(by='shape', value='convexity') == set()
+    assert (
+        topography.get_features(by='shape', value='convexity', as_feature_ids=True)
+        == set()
+    )
+    assert topography.get_features(by='shape', value='mixed') == set()
+    assert (
+        topography.get_features(by='shape', value='mixed', as_feature_ids=True) == set()
+    )
+    assert topography.get_features(by='shape', value='boundary') == set()
+    assert (
+        topography.get_features(by='shape', value='boundary', as_feature_ids=True)
+        == set()
+    )
+    assert topography.get_features(by='shape', value='point') == set()
+    assert (
+        topography.get_features(by='shape', value='point', as_feature_ids=True) == set()
+    )
+    assert topography._make_next_feature_id('pocket') == 'POC-2'
+    assert topography._make_next_feature_id('void') == 'VOI-1'
 
 
 def test_feature_info_uses_public_identifiers():
 
-    feature = Pocket(feature_id='POC-7', atom_indices=[1, 2, 3], source='pocketeer', source_id='pocketeer:7')
+    feature = Pocket(
+        feature_id='POC-7',
+        atom_indices=[1, 2, 3],
+        source='pocketeer',
+        source_id='pocketeer:7',
+    )
 
     assert feature.info() == {
         'feature_id': 'POC-7',
@@ -100,7 +141,9 @@ def test_feature_info_uses_public_identifiers():
 def test_connect_features_updates_relations(topography_empty_1tcd):
 
     topography = topography_empty_1tcd
-    pocket_id = topography.add_new_feature(feature_type='pocket', atom_indices=[1, 2, 3, 4])
+    pocket_id = topography.add_new_feature(
+        feature_type='pocket', atom_indices=[1, 2, 3, 4]
+    )
     mouth = Mouth(feature_id='MOU-1', atom_indices=[1, 2])
 
     topography.connect_features(mouth, pocket_id)
@@ -114,7 +157,9 @@ def test_connect_features_updates_relations(topography_empty_1tcd):
 def test_demo_supports_uppercase_castp_keys():
 
     assert tmt.demo['TcTIM']['1TCD.pdb'] == tmt.demo['TcTIM']['1tcd.pdb']
-    assert tmt.demo['HIV-1 Protease']['1HIV.pdb'] == tmt.demo['HIV-1 Protease']['1hiv.pdb']
+    assert (
+        tmt.demo['HIV-1 Protease']['1HIV.pdb'] == tmt.demo['HIV-1 Protease']['1hiv.pdb']
+    )
 
 
 def test_demo_synthetic_systems():
@@ -126,7 +171,9 @@ def test_demo_synthetic_systems():
 
 
 def test_run_pocketeer_maps_local_indices_to_global(topography_empty_1tcd, monkeypatch):
-    pocketeer_module = importlib.import_module('topomt.third_party.pocketeer._native_impl')
+    pocketeer_module = importlib.import_module(
+        'topomt.third_party.pocketeer._native_impl'
+    )
     PocketeerPocket = pocketeer_module.PocketeerPocket
     PocketeerSphere = pocketeer_module.PocketeerSphere
 
@@ -164,12 +211,15 @@ def test_run_pocketeer_maps_local_indices_to_global(topography_empty_1tcd, monke
     assert puw.get_value(pocket.volume, to_unit='nm**3') == pytest.approx(0.5)
 
 
-def test_run_alphaspace2_uses_filtered_atom_index_mapping(topography_empty_1tcd, monkeypatch):
-    alphaspace2_module = importlib.import_module('topomt.third_party.alphaspace2.native')
+def test_run_alphaspace2_uses_filtered_atom_index_mapping(
+    topography_empty_1tcd, monkeypatch
+):
+    alphaspace2_module = importlib.import_module(
+        'topomt.third_party.alphaspace2.native'
+    )
     get_topography_module = importlib.import_module('topomt.get_topography')
 
     class FakeKDTree:
-
         def __init__(self, data):
             self.data = data
 
@@ -193,8 +243,12 @@ def test_run_alphaspace2_uses_filtered_atom_index_mapping(topography_empty_1tcd,
     assert pocket.source_id == 'alphaspace2:0'
 
 
-def test_run_alphaspace2_state_path_returns_quantities(topography_empty_1tcd, monkeypatch):
-    alphaspace2_module = importlib.import_module('topomt.third_party.alphaspace2.native')
+def test_run_alphaspace2_state_path_returns_quantities(
+    topography_empty_1tcd, monkeypatch
+):
+    alphaspace2_module = importlib.import_module(
+        'topomt.third_party.alphaspace2.native'
+    )
 
     def fake_alphaspace2(*args, **kwargs):
         state = object()
@@ -218,7 +272,9 @@ def test_run_alphaspace2_state_path_returns_quantities(topography_empty_1tcd, mo
         ]
 
     monkeypatch.setattr(alphaspace2_module, 'alphaspace2', fake_alphaspace2)
-    monkeypatch.setattr(alphaspace2_module, '_state_to_pocket_records', fake_state_to_pocket_records)
+    monkeypatch.setattr(
+        alphaspace2_module, '_state_to_pocket_records', fake_state_to_pocket_records
+    )
 
     topo = _run_alphaspace2(topography_empty_1tcd.copy(deep=True), min_vertices=1)
 
@@ -227,7 +283,9 @@ def test_run_alphaspace2_state_path_returns_quantities(topography_empty_1tcd, mo
     assert puw.is_quantity(pocket.volume)
 
 
-def test_run_castp_emits_feature_types_and_mouth_relations(topography_empty_1tcd, monkeypatch):
+def test_run_castp_emits_feature_types_and_mouth_relations(
+    topography_empty_1tcd, monkeypatch
+):
     castp_module = importlib.import_module('topomt.third_party.castp._native_impl')
 
     def fake_castp(*args, **kwargs):
@@ -318,7 +376,10 @@ def test_run_castp_emits_feature_types_and_mouth_relations(topography_empty_1tcd
 
     channel = next(iter(channels))
     assert channel.n_mouths == 2
-    assert topo.children_of(channel.feature_id, as_feature_ids=True) == {'MOU-2', 'MOU-3'}
+    assert topo.children_of(channel.feature_id, as_feature_ids=True) == {
+        'MOU-2',
+        'MOU-3',
+    }
 
     void = next(iter(voids))
     assert void.n_mouths == 0
@@ -365,7 +426,9 @@ def test_get_topography_argdigest_standardizes_engine_and_structure_index(monkey
     assert called['method'] == 'pycasta'
 
 
-def test_run_pocketeer_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
+def test_run_pocketeer_wrapper_routes_to_wrapper_integration(
+    topography_empty_1tcd, monkeypatch
+):
     provider_module = importlib.import_module('topomt.third_party.pocketeer.api')
     get_topography_module = importlib.import_module('topomt.get_topography')
 
@@ -391,12 +454,18 @@ def test_run_pocketeer_wrapper_routes_to_wrapper_integration(topography_empty_1t
     assert isinstance(topo, tmt.Topography)
     assert called['molecular_system'] == topography_empty_1tcd.molecular_system
     assert called['kwargs']['selection'] == topography_empty_1tcd.selection
-    assert called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    assert (
+        called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    )
     assert called['kwargs']['upstream_root'] == '/tmp/pocketeer'
 
 
-def test_run_alphaspace2_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
-    integration_module = importlib.import_module('topomt.third_party.alphaspace2.library')
+def test_run_alphaspace2_wrapper_routes_to_wrapper_integration(
+    topography_empty_1tcd, monkeypatch
+):
+    integration_module = importlib.import_module(
+        'topomt.third_party.alphaspace2.library'
+    )
     get_topography_module = importlib.import_module('topomt.get_topography')
 
     called = {}
@@ -422,12 +491,16 @@ def test_run_alphaspace2_wrapper_routes_to_wrapper_integration(topography_empty_
     assert isinstance(topo, tmt.Topography)
     assert called['molecular_system'] == topography_empty_1tcd.molecular_system
     assert called['kwargs']['selection'] == topography_empty_1tcd.selection
-    assert called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    assert (
+        called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    )
     assert called['kwargs']['min_vertices'] == 12
     assert called['kwargs']['upstream_root'] == '/tmp/alphaspace2'
 
 
-def test_run_pycasta_wrapper_routes_to_wrapper_integration(topography_empty_1tcd, monkeypatch):
+def test_run_pycasta_wrapper_routes_to_wrapper_integration(
+    topography_empty_1tcd, monkeypatch
+):
     provider_module = importlib.import_module('topomt.third_party.pycasta.api')
     get_topography_module = importlib.import_module('topomt.get_topography')
 
@@ -453,11 +526,15 @@ def test_run_pycasta_wrapper_routes_to_wrapper_integration(topography_empty_1tcd
     assert isinstance(topo, tmt.Topography)
     assert called['molecular_system'] == topography_empty_1tcd.molecular_system
     assert called['kwargs']['selection'] == topography_empty_1tcd.selection
-    assert called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    assert (
+        called['kwargs']['structure_indices'] == topography_empty_1tcd.structure_indices
+    )
     assert called['kwargs']['upstream_root'] == '/tmp/pycasta'
 
 
-def test_get_topography_wrapper_kwargs_do_not_emit_digest_not_digested_warning(monkeypatch):
+def test_get_topography_wrapper_kwargs_do_not_emit_digest_not_digested_warning(
+    monkeypatch,
+):
     def fake_wrapper(molecular_system, **kwargs):
         return tmt.Topography(
             molecular_system=molecular_system,
@@ -487,11 +564,15 @@ def test_get_topography_wrapper_kwargs_do_not_emit_digest_not_digested_warning(m
         )
 
     assert isinstance(topo, tmt.Topography)
-    assert not any(type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught)
+    assert not any(
+        type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught
+    )
 
 
 def test_pocketeer_sasa_warning_uses_topomt_catalog_warning():
-    pocketeer_module = importlib.import_module('topomt.third_party.pocketeer._native_impl')
+    pocketeer_module = importlib.import_module(
+        'topomt.third_party.pocketeer._native_impl'
+    )
     smonitor_module = importlib.import_module('topomt._private.smonitor')
     coords_nm = np.zeros((3, 3), dtype=float)
 
@@ -506,6 +587,7 @@ def test_pocketeer_sasa_warning_uses_topomt_catalog_warning():
     assert result.shape == (3,)
     assert len(caught) == 1
     assert isinstance(caught[0].message, smonitor_module.PocketeerSasaBackendWarning)
+
 
 def test_connect_features_rejects_unsupported_argument_types():
 

@@ -1,20 +1,19 @@
 import json
 import tempfile
 import time
+import zipfile
 from io import BytesIO
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from uuid import uuid4
-import zipfile
 
 import molsysmt as msm
 
 from topomt import pyunitwizard as puw
+from topomt.third_party._common import prepare_wrapper_input_pdb
 from topomt.third_party.castp.files import load_topography as load_castp_topography
 from topomt.topography.Topography import Topography
-from topomt.third_party._common import prepare_wrapper_input_pdb
-
 
 SUBMIT_URL = 'https://cfold.bme.uic.edu/castpfold/submit_calc.php'
 DOWNLOAD_URL_TEMPLATE = (

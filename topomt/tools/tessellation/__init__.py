@@ -8,9 +8,9 @@ from .discrete_flow import (
     flow_targets_to_sinks,
     group_by_flow_sink,
 )
-from .tetrahedra import analytic_tetra_volume
 from .mouths import mouth_area_from_faces, mouth_metrics_from_tetrahedra
 from .representatives import representative_points_from_tetra
+from .tetrahedra import analytic_tetra_volume
 
 __all__ = [
     'ancestors_of_exterior',

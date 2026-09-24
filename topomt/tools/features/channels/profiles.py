@@ -220,11 +220,15 @@ def thickness_profile(
             distance = np.linalg.norm(points[index_i] - points[index_j])
             adjacency[index_i].append(distance)
             adjacency[index_j].append(distance)
-        local_radii = np.array([min(neighbors) / 2 if neighbors else 0.0 for neighbors in adjacency])
+        local_radii = np.array(
+            [min(neighbors) / 2 if neighbors else 0.0 for neighbors in adjacency]
+        )
     else:
         from sklearn.neighbors import NearestNeighbors
 
-        neighbors = NearestNeighbors(n_neighbors=min(3, len(points)), algorithm='auto').fit(points)
+        neighbors = NearestNeighbors(
+            n_neighbors=min(3, len(points)), algorithm='auto'
+        ).fit(points)
         distances, _ = neighbors.kneighbors(points)
         if distances.shape[1] > 1:
             local_radii = distances[:, 1] / 2.0

@@ -6,7 +6,6 @@ import pytest
 from topomt import Topography, get_topography
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
-
 SMALL_CASTPFOLD_SYSTEMS = ('1crn', '1rop')
 PUBLIC_DOMAIN_FAMILIES = {
     'void',
@@ -45,7 +44,9 @@ def test_dfnd_real_small_system_stability_smoke(pdb_id, tmp_path):
     assert isinstance(topography, Topography)
     assert topography.dfnd is not None
     records = topography.dfnd.raw
-    assert records['parameters']['selection'] == "molecule_type in ['protein', 'peptide']"
+    assert (
+        records['parameters']['selection'] == "molecule_type in ['protein', 'peptide']"
+    )
     assert records['parameters']['transit_policy'] == 'with_connectors'
     assert len(records['tetrahedra']) > 0
     assert len(records['faces']) == 4 * len(records['tetrahedra'])
@@ -64,7 +65,9 @@ def test_dfnd_real_small_system_stability_smoke(pdb_id, tmp_path):
 
     for domain in records['wet_components']:
         assert domain['volume_solvent_estimate'] >= 0.0
-        assert domain['volume_solvent_estimate'] <= domain['volume_topological_resident']
+        assert (
+            domain['volume_solvent_estimate'] <= domain['volume_topological_resident']
+        )
         assert domain['n_nodes'] == len(domain['tetrahedron_ids'])
         assert domain['n_resident_nodes'] == len(domain['resident_tetrahedron_ids'])
         assert domain['n_transit_connector_nodes'] == len(

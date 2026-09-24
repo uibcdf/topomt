@@ -3,9 +3,9 @@ from pathlib import Path
 import molsysmt as msm
 
 from topomt.features.Pocket import Pocket
-from topomt.topography.Topography import Topography
 from topomt.third_party.fpocket.model import FpocketPocket, FpocketResult
 from topomt.third_party.fpocket.parser import parse_fpocket_output
+from topomt.topography.Topography import Topography
 
 
 def fpocket_result_to_topography(
@@ -139,7 +139,9 @@ def _get_original_pdb_path(molecular_system) -> Path | None:
     return None
 
 
-def _fpocket_pocket_to_feature(fpocket_pocket: FpocketPocket, atom_indices: list[int]) -> Pocket:
+def _fpocket_pocket_to_feature(
+    fpocket_pocket: FpocketPocket, atom_indices: list[int]
+) -> Pocket:
     return Pocket(
         atom_indices=sorted(atom_indices),
         center=fpocket_pocket.center,

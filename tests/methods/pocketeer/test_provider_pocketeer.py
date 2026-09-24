@@ -1,14 +1,13 @@
 import importlib
+import sys
 import warnings
 from pathlib import Path
-import sys
 
 import pytest
 
 import topomt as tmt
 from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
-
 
 POCKETEER_REPO = Path.home() / 'repos@others' / 'pocketeer'
 
@@ -65,7 +64,9 @@ def test_pocketeer_provider_library_matches_upstream_reference(upstream_pocketee
 
     assert len(provider_pockets) == len(upstream_pockets)
 
-    for provider_pocket, upstream_pocket in zip(provider_pockets[:5], upstream_pockets[:5]):
+    for provider_pocket, upstream_pocket in zip(
+        provider_pockets[:5], upstream_pockets[:5]
+    ):
         assert puw.get_value(provider_pocket.volume, to_unit='nm**3') == pytest.approx(
             upstream_pocket.volume / 1000.0
         )
@@ -99,4 +100,6 @@ def test_get_topography_pocketeer_routes_without_digest_warnings(monkeypatch):
         )
 
     assert isinstance(topo, tmt.Topography)
-    assert not any(type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught)
+    assert not any(
+        type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught
+    )

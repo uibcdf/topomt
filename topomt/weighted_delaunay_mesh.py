@@ -20,7 +20,9 @@ def _build_neighbors_from_simplices(simplices: np.ndarray) -> np.ndarray:
 
     for simplex_index, simplex in enumerate(simplices):
         for face_index, local_indices in enumerate(_SIMPLEX_FACE_LOCAL_INDICES):
-            face = tuple(sorted(int(simplex[local_index]) for local_index in local_indices))
+            face = tuple(
+                sorted(int(simplex[local_index]) for local_index in local_indices)
+            )
             previous = face_owner.get(face)
             if previous is None:
                 face_owner[face] = (int(simplex_index), int(face_index))
@@ -100,9 +102,18 @@ def _weighted_simplex_centers_power_values(
         )
         vector = np.array(
             [
-                np.dot(simplex_points[1], simplex_points[1]) - np.dot(point_a, point_a) - simplex_weights[1] + weight_a,
-                np.dot(simplex_points[2], simplex_points[2]) - np.dot(point_a, point_a) - simplex_weights[2] + weight_a,
-                np.dot(simplex_points[3], simplex_points[3]) - np.dot(point_a, point_a) - simplex_weights[3] + weight_a,
+                np.dot(simplex_points[1], simplex_points[1])
+                - np.dot(point_a, point_a)
+                - simplex_weights[1]
+                + weight_a,
+                np.dot(simplex_points[2], simplex_points[2])
+                - np.dot(point_a, point_a)
+                - simplex_weights[2]
+                + weight_a,
+                np.dot(simplex_points[3], simplex_points[3])
+                - np.dot(point_a, point_a)
+                - simplex_weights[3]
+                + weight_a,
             ],
             dtype=float,
         )
@@ -113,7 +124,9 @@ def _weighted_simplex_centers_power_values(
             center = simplex_points.mean(axis=0)
 
         centers[simplex_index] = center
-        power_values[simplex_index] = float(np.dot(center - point_a, center - point_a) - weight_a)
+        power_values[simplex_index] = float(
+            np.dot(center - point_a, center - point_a) - weight_a
+        )
 
     return centers, power_values
 
@@ -125,11 +138,15 @@ def _regular_triangulation_simplices(
     """Return oriented and sorted regular-triangulation simplices."""
 
     if points.shape[0] == 4:
-        oriented = np.asarray([_orient_simplex_vertices(np.asarray([0, 1, 2, 3]), points)], dtype=int)
+        oriented = np.asarray(
+            [_orient_simplex_vertices(np.asarray([0, 1, 2, 3]), points)], dtype=int
+        )
         return oriented, np.sort(oriented.copy(), axis=1)
 
     if points.shape[0] < 4:
-        raise ValueError('At least 4 weighted points are required to build a 3D regular triangulation.')
+        raise ValueError(
+            'At least 4 weighted points are required to build a 3D regular triangulation.'
+        )
 
     lifted_points = np.concatenate(
         (
@@ -153,11 +170,15 @@ def _regular_triangulation_simplices(
             continue
 
         seen.add(simplex)
-        oriented_simplices.append(_orient_simplex_vertices(np.asarray(simplex_vertices, dtype=int), points))
+        oriented_simplices.append(
+            _orient_simplex_vertices(np.asarray(simplex_vertices, dtype=int), points)
+        )
         simplices.append(simplex)
 
     if not simplices:
-        raise ValueError('Regular triangulation produced no tetrahedra for the given weighted points.')
+        raise ValueError(
+            'Regular triangulation produced no tetrahedra for the given weighted points.'
+        )
 
     return np.asarray(oriented_simplices, dtype=int), np.asarray(simplices, dtype=int)
 
@@ -217,7 +238,9 @@ class WeightedDelaunayMesh:
             raise ValueError('weights must be provided for WeightedDelaunayMesh')
 
         if puw.is_quantity(weights):
-            weights_value = np.asarray(puw.get_value(weights, to_unit='nm**2'), dtype=float)
+            weights_value = np.asarray(
+                puw.get_value(weights, to_unit='nm**2'), dtype=float
+            )
         else:
             weights_value = np.asarray(weights, dtype=float)
 
@@ -230,7 +253,9 @@ class WeightedDelaunayMesh:
 
         if atom_radii is not None:
             if puw.is_quantity(atom_radii):
-                atom_radii_value = np.asarray(puw.get_value(atom_radii, to_unit='nm'), dtype=float)
+                atom_radii_value = np.asarray(
+                    puw.get_value(atom_radii, to_unit='nm'), dtype=float
+                )
             else:
                 atom_radii_value = np.asarray(atom_radii, dtype=float)
 
@@ -239,7 +264,9 @@ class WeightedDelaunayMesh:
 
             self.atom_radii = atom_radii_value
 
-        oriented_simplices, simplices = _regular_triangulation_simplices(points_value, weights_value)
+        oriented_simplices, simplices = _regular_triangulation_simplices(
+            points_value, weights_value
+        )
         neighbors = _build_neighbors_from_simplices(oriented_simplices)
         simplex_centers, simplex_power_values = _weighted_simplex_centers_power_values(
             oriented_simplices,
@@ -254,11 +281,17 @@ class WeightedDelaunayMesh:
         self.simplex_centers = simplex_centers
         self.simplex_power_values = simplex_power_values
         self.simplex_volumes = _tetrahedron_volumes(oriented_simplices, points_value)
-        self._min_edges, self._max_edges = _tetrahedron_edge_extrema(oriented_simplices, points_value)
-        self._condition_numbers = _tetrahedron_condition_numbers(oriented_simplices, points_value)
+        self._min_edges, self._max_edges = _tetrahedron_edge_extrema(
+            oriented_simplices, points_value
+        )
+        self._condition_numbers = _tetrahedron_condition_numbers(
+            oriented_simplices, points_value
+        )
 
         self._simplex_neighbor_map = {
-            int(index): sorted(int(neighbor) for neighbor in simplex_neighbors if neighbor != -1)
+            int(index): sorted(
+                int(neighbor) for neighbor in simplex_neighbors if neighbor != -1
+            )
             for index, simplex_neighbors in enumerate(neighbors)
         }
         pairs = []
@@ -316,7 +349,10 @@ class WeightedDelaunayMesh:
     def _ensure_face_index_cache(self) -> None:
         """Build global triangle indices from unique face atom triples."""
 
-        if self._face_index_by_atoms is not None and self._face_index_by_owner is not None:
+        if (
+            self._face_index_by_atoms is not None
+            and self._face_index_by_owner is not None
+        ):
             return
 
         face_index_by_atoms = {}
@@ -331,19 +367,25 @@ class WeightedDelaunayMesh:
                     global_face_index = next_face_index
                     face_index_by_atoms[face_atoms] = global_face_index
                     next_face_index += 1
-                face_index_by_owner[(int(simplex_index), int(face_index))] = int(global_face_index)
+                face_index_by_owner[(int(simplex_index), int(face_index))] = int(
+                    global_face_index
+                )
 
         self._face_index_by_atoms = face_index_by_atoms
         self._face_index_by_owner = face_index_by_owner
 
-    def get_face_atoms(self, simplex_index: int, face_index: int) -> tuple[int, int, int]:
+    def get_face_atoms(
+        self, simplex_index: int, face_index: int
+    ) -> tuple[int, int, int]:
         """Return the atom indices of a simplex face as a sorted triple."""
 
         local_indices = _SIMPLEX_FACE_LOCAL_INDICES[int(face_index)]
         return tuple(
             sorted(
                 int(atom_index)
-                for atom_index in self.oriented_simplices[int(simplex_index), local_indices]
+                for atom_index in self.oriented_simplices[
+                    int(simplex_index), local_indices
+                ]
             )
         )
 
@@ -357,9 +399,13 @@ class WeightedDelaunayMesh:
         """Return the global triangle index for a sorted face triple if present."""
 
         self._ensure_face_index_cache()
-        return self._face_index_by_atoms.get(tuple(sorted(int(atom_index) for atom_index in face_atoms)))
+        return self._face_index_by_atoms.get(
+            tuple(sorted(int(atom_index) for atom_index in face_atoms))
+        )
 
-    def get_face_owner_indices(self, simplex_index: int, face_index: int) -> tuple[int, int]:
+    def get_face_owner_indices(
+        self, simplex_index: int, face_index: int
+    ) -> tuple[int, int]:
         """Return the two tetrahedron owners of one face.
 
         The first owner is always the supplied local owner. The second owner is
@@ -370,7 +416,9 @@ class WeightedDelaunayMesh:
         face_index = int(face_index)
         return (simplex_index, int(self.neighbors[simplex_index, face_index]))
 
-    def get_oriented_face_atoms(self, simplex_index: int, face_index: int) -> tuple[int, int, int]:
+    def get_oriented_face_atoms(
+        self, simplex_index: int, face_index: int
+    ) -> tuple[int, int, int]:
         """Return the outward-oriented atom order of a simplex face."""
 
         local_indices = _oriented_face_local_indices(int(face_index))

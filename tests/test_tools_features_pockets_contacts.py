@@ -55,7 +55,9 @@ def test_probe_scoring_returns_weighted_scores():
     vertices = np.array([[0.0, 0.0, 0.0]], dtype=float)
     ligand_coords = np.array([[1.0, 0.0, 0.0]], dtype=float)
 
-    scores = probe_scoring(vertices, ligand_coords, probe_weights={'C': 1.0, 'N': 0.5}, cutoff=2.0)
+    scores = probe_scoring(
+        vertices, ligand_coords, probe_weights={'C': 1.0, 'N': 0.5}, cutoff=2.0
+    )
 
     assert set(scores.keys()) == {'C', 'N'}
     assert scores['C'] > scores['N'] > 0.0

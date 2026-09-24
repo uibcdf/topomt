@@ -4,10 +4,10 @@ from types import SimpleNamespace
 
 import numpy as np
 
+from topomt.third_party.castp3._native_impl import _component_to_record
 from topomt.third_party.castp3.core.castp_core import components as castp3_components
 from topomt.third_party.castp3.core.castp_core import mouths as castp3_mouths
 from topomt.third_party.castp3.core.castp_core.mouths import EdgeFacetRecord
-from topomt.third_party.castp3._native_impl import _component_to_record
 
 
 def test_castp3_default_beta_rank_uses_max_depth_not_probe_cutoff(monkeypatch):
@@ -18,7 +18,9 @@ def test_castp3_default_beta_rank_uses_max_depth_not_probe_cutoff(monkeypatch):
     captured = {}
 
     monkeypatch.setattr(castp3_components, '_geometry_max_rank', lambda geometry: 42)
-    monkeypatch.setattr(castp3_components, '_probe_rank', lambda geometry, probe_radius: 11)
+    monkeypatch.setattr(
+        castp3_components, '_probe_rank', lambda geometry, probe_radius: 11
+    )
 
     def fake_build_at_ranks(
         geometry,
@@ -132,7 +134,9 @@ def test_probe_limited_depth_keeps_accessible_sink_inside_beta(monkeypatch):
     monkeypatch.setattr(
         castp3_components,
         '_hidden_triangle',
-        lambda geometry, simplex_index, face_index, neighbor_index: int(face_index) == 0,
+        lambda geometry, simplex_index, face_index, neighbor_index: (
+            int(face_index) == 0
+        ),
     )
     monkeypatch.setattr(
         castp3_components,

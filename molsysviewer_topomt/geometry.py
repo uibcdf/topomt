@@ -540,9 +540,7 @@ def mouth_ring_geometry(source, component) -> RingGeometry:
                 component_key=component.component_key,
             )
         )
-    return RingGeometry(
-        tuple(centers), tuple(normals), tuple(radii), 'nm', tuple(refs)
-    )
+    return RingGeometry(tuple(centers), tuple(normals), tuple(radii), 'nm', tuple(refs))
 
 
 def scaffold_geometry(source, component) -> SegmentGeometry:
@@ -653,9 +651,7 @@ def dfn_graph_segments(
         mouth_refs.append(_face_ref(face))
 
     return (
-        SegmentGeometry(
-            tuple(edge_starts), tuple(edge_ends), 'nm', tuple(edge_refs)
-        ),
+        SegmentGeometry(tuple(edge_starts), tuple(edge_ends), 'nm', tuple(edge_refs)),
         SegmentGeometry(
             tuple(mouth_starts), tuple(mouth_ends), 'nm', tuple(mouth_refs)
         ),

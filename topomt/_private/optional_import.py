@@ -23,8 +23,8 @@ from __future__ import annotations
 
 import importlib
 import warnings
-from typing import Any
 from types import ModuleType
+from typing import Any
 
 
 def optional_import(
@@ -67,7 +67,7 @@ def optional_import(
         if warn:
             warnings.warn(
                 f"Optional dependency '{module_name}' is not installed. "
-                "Using safe fallbacks."
+                'Using safe fallbacks.'
             )
 
         # If no specific names requested, just return None
@@ -82,6 +82,6 @@ def optional_import(
                 # default no-op
                 def _noop(*args, **kwargs):
                     return None
+
                 results.append(_noop)
         return results
-

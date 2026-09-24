@@ -4,9 +4,9 @@ from pathlib import Path
 
 import molsysmt as msm
 
-from topomt.topography.Topography import Topography
 from topomt.third_party.fpocket.files import load_topography as load_fpocket_topography
 from topomt.third_party.fpocket.runner import run_fpocket
+from topomt.topography.Topography import Topography
 
 
 def get_topography(

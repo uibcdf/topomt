@@ -19,10 +19,18 @@ def apolar_ratio(
     index_array = np.asarray(indices, dtype=int)
     if apolar_mask is not None:
         mask = np.asarray(apolar_mask, dtype=bool)
-        return float(mask[index_array].sum()) / len(index_array) if len(index_array) else 0.0
+        return (
+            float(mask[index_array].sum()) / len(index_array)
+            if len(index_array)
+            else 0.0
+        )
 
     types_array = np.asarray(types)
-    return float((types_array[index_array] == 1).sum()) / len(index_array) if len(index_array) else 0.0
+    return (
+        float((types_array[index_array] == 1).sum()) / len(index_array)
+        if len(index_array)
+        else 0.0
+    )
 
 
 def nonpolar_ratio_from_sasa(
@@ -95,7 +103,18 @@ def get_physicochemical_properties(
         'GLU': -1.0,
     }
 
-    polar_residues = {'ARG', 'LYS', 'HIS', 'GLU', 'ASP', 'ASN', 'GLN', 'SER', 'THR', 'TYR'}
+    polar_residues = {
+        'ARG',
+        'LYS',
+        'HIS',
+        'GLU',
+        'ASP',
+        'ASN',
+        'GLN',
+        'SER',
+        'THR',
+        'TYR',
+    }
 
     residue_names = msm.get(
         molecular_system,
@@ -129,7 +148,9 @@ def get_physicochemical_properties(
 
     return {
         'net_charge': float(charge_sum),
-        'mean_hydrophobicity': float(hydrophobicity_sum / n_unique) if n_unique > 0 else 0.0,
+        'mean_hydrophobicity': float(hydrophobicity_sum / n_unique)
+        if n_unique > 0
+        else 0.0,
         'polarity_ratio': float(polar_count / n_unique) if n_unique > 0 else 0.0,
         'n_residues': n_unique,
         'n_atoms': len(atom_indices),

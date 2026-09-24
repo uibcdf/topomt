@@ -1,17 +1,19 @@
 """Canonical weighted geometry substrate for the native CASTp implementation."""
 
 from dataclasses import dataclass
-from functools import cmp_to_key
-from functools import lru_cache
+from functools import cmp_to_key, lru_cache
 from pathlib import Path
 
 import molsysmt as msm
 import numpy as np
 
 from topomt import pyunitwizard as puw
-from topomt.weighted_delaunay_mesh import WeightedDelaunayMesh, _regular_triangulation_simplices
-from .exact import ExactRatio, castp1_fixed_point_array, exact_determinant
+from topomt.weighted_delaunay_mesh import (
+    WeightedDelaunayMesh,
+    _regular_triangulation_simplices,
+)
 
+from .exact import ExactRatio, castp1_fixed_point_array, exact_determinant
 
 _CASTP_PARAM_PATH = Path(__file__).resolve().parents[4] / 'data' / 'castp' / 'param.dat'
 _CASTP_DEFAULT_HEAVY_RADIUS = 1.8
@@ -53,89 +55,276 @@ _PROTOR_RESIDUE_NAME_ALIASES = {
 _PROTOR_PROTEIN_HEAVY_ATOM_TYPES = {
     'ALA': {'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0', 'CB': 'C4H3'},
     'ARG': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C4H2', 'CD': 'C4H2', 'NE': 'N3H1', 'CZ': 'C3H0', 'NH1': 'N3H2', 'NH2': 'N3H2',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H2',
+        'CD': 'C4H2',
+        'NE': 'N3H1',
+        'CZ': 'C3H0',
+        'NH1': 'N3H2',
+        'NH2': 'N3H2',
     },
     'ASN': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'OD1': 'O1H0', 'ND2': 'N3H2',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'OD1': 'O1H0',
+        'ND2': 'N3H2',
     },
     'ASP': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'OD1': 'O1H0', 'OD2': 'O1H0',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'OD1': 'O1H0',
+        'OD2': 'O1H0',
     },
     'ASH': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'OD1': 'O1H0', 'OD2': 'O2H1',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'OD1': 'O1H0',
+        'OD2': 'O2H1',
     },
-    'CYS': {'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0', 'CB': 'C4H2', 'SG': 'S2H1'},
-    'CYX': {'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0', 'CB': 'C4H2', 'SG': 'S2H0'},
+    'CYS': {
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'SG': 'S2H1',
+    },
+    'CYX': {
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'SG': 'S2H0',
+    },
     'GLN': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C4H2', 'CD': 'C3H0', 'OE1': 'O1H0', 'NE2': 'N3H2',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H2',
+        'CD': 'C3H0',
+        'OE1': 'O1H0',
+        'NE2': 'N3H2',
     },
     'GLU': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C4H2', 'CD': 'C3H0', 'OE1': 'O1H0', 'OE2': 'O1H0',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H2',
+        'CD': 'C3H0',
+        'OE1': 'O1H0',
+        'OE2': 'O1H0',
     },
     'GLH': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C4H2', 'CD': 'C3H0', 'OE1': 'O1H0', 'OE2': 'O2H1',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H2',
+        'CD': 'C3H0',
+        'OE1': 'O1H0',
+        'OE2': 'O2H1',
     },
     'GLY': {'N': 'N3H1', 'CA': 'C4H2', 'C': 'C3H0', 'O': 'O1H0'},
     'HIS': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'ND1': 'N3H0', 'CD2': 'C3H1', 'CE1': 'C3H1', 'NE2': 'N3H0',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'ND1': 'N3H0',
+        'CD2': 'C3H1',
+        'CE1': 'C3H1',
+        'NE2': 'N3H0',
     },
     'HID': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'ND1': 'N3H1', 'CD2': 'C3H1', 'CE1': 'C3H1', 'NE2': 'N3H0',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'ND1': 'N3H1',
+        'CD2': 'C3H1',
+        'CE1': 'C3H1',
+        'NE2': 'N3H0',
     },
     'HIE': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'ND1': 'N3H0', 'CD2': 'C3H1', 'CE1': 'C3H1', 'NE2': 'N3H1',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'ND1': 'N3H0',
+        'CD2': 'C3H1',
+        'CE1': 'C3H1',
+        'NE2': 'N3H1',
     },
     'HIP': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'ND1': 'N3H1', 'CD2': 'C3H1', 'CE1': 'C3H1', 'NE2': 'N3H1',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'ND1': 'N3H1',
+        'CD2': 'C3H1',
+        'CE1': 'C3H1',
+        'NE2': 'N3H1',
     },
     'ILE': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H1', 'CG1': 'C4H2', 'CG2': 'C4H3', 'CD1': 'C4H3',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H1',
+        'CG1': 'C4H2',
+        'CG2': 'C4H3',
+        'CD1': 'C4H3',
     },
     'LEU': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C4H1', 'CD1': 'C4H3', 'CD2': 'C4H3',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H1',
+        'CD1': 'C4H3',
+        'CD2': 'C4H3',
     },
     'LYS': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C4H2', 'CD': 'C4H2', 'CE': 'C4H2', 'NZ': 'N4H3',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H2',
+        'CD': 'C4H2',
+        'CE': 'C4H2',
+        'NZ': 'N4H3',
     },
     'LYN': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C4H2', 'CD': 'C4H2', 'CE': 'C4H2', 'NZ': 'N3H2',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H2',
+        'CD': 'C4H2',
+        'CE': 'C4H2',
+        'NZ': 'N3H2',
     },
     'MET': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C4H2', 'SD': 'S2H0', 'CE': 'C4H3',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H2',
+        'SD': 'S2H0',
+        'CE': 'C4H3',
     },
     'PHE': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'CD1': 'C3H1', 'CD2': 'C3H1', 'CE1': 'C3H1', 'CE2': 'C3H1', 'CZ': 'C3H1',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'CD1': 'C3H1',
+        'CD2': 'C3H1',
+        'CE1': 'C3H1',
+        'CE2': 'C3H1',
+        'CZ': 'C3H1',
     },
-    'PRO': {'N': 'N3H0', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0', 'CB': 'C4H2', 'CG': 'C4H2', 'CD': 'C4H2'},
-    'SER': {'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0', 'CB': 'C4H2', 'OG': 'O2H1'},
-    'THR': {'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0', 'CB': 'C4H1', 'OG1': 'O2H1', 'CG2': 'C4H3'},
+    'PRO': {
+        'N': 'N3H0',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C4H2',
+        'CD': 'C4H2',
+    },
+    'SER': {
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'OG': 'O2H1',
+    },
+    'THR': {
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H1',
+        'OG1': 'O2H1',
+        'CG2': 'C4H3',
+    },
     'TRP': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'CD1': 'C3H1', 'CD2': 'C3H0', 'NE1': 'N3H1', 'CE2': 'C3H0',
-        'CE3': 'C3H1', 'CZ2': 'C3H1', 'CZ3': 'C3H1', 'CH2': 'C3H1',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'CD1': 'C3H1',
+        'CD2': 'C3H0',
+        'NE1': 'N3H1',
+        'CE2': 'C3H0',
+        'CE3': 'C3H1',
+        'CZ2': 'C3H1',
+        'CZ3': 'C3H1',
+        'CH2': 'C3H1',
     },
     'TYR': {
-        'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0',
-        'CB': 'C4H2', 'CG': 'C3H0', 'CD1': 'C3H1', 'CD2': 'C3H1', 'CE1': 'C3H1', 'CE2': 'C3H1', 'CZ': 'C3H0', 'OH': 'O2H1',
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H2',
+        'CG': 'C3H0',
+        'CD1': 'C3H1',
+        'CD2': 'C3H1',
+        'CE1': 'C3H1',
+        'CE2': 'C3H1',
+        'CZ': 'C3H0',
+        'OH': 'O2H1',
     },
-    'VAL': {'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0', 'CB': 'C4H1', 'CG1': 'C4H3', 'CG2': 'C4H3'},
+    'VAL': {
+        'N': 'N3H1',
+        'CA': 'C4H1',
+        'C': 'C3H0',
+        'O': 'O1H0',
+        'CB': 'C4H1',
+        'CG1': 'C4H3',
+        'CG2': 'C4H3',
+    },
 }
 
 ALF_BLANK = 0
@@ -219,7 +408,9 @@ def _load_castp_param_radii() -> dict[tuple[str, str], float]:
             param_radii[(fields[0].strip(), fields[1].strip())] = radius
 
     if not param_radii:
-        raise ValueError(f'CAST parameter file is empty or unreadable: {_CASTP_PARAM_PATH}')
+        raise ValueError(
+            f'CAST parameter file is empty or unreadable: {_CASTP_PARAM_PATH}'
+        )
 
     return param_radii
 
@@ -239,7 +430,11 @@ def _castp_param_radii_for_labels(
         radius = param_radii.get((residue_name, atom_label))
         if radius is None:
             atom_is_hydrogen = atom_label.lstrip('0123456789').startswith('H')
-            radius = _CASTP_DEFAULT_HYDROGEN_RADIUS if atom_is_hydrogen else _CASTP_DEFAULT_HEAVY_RADIUS
+            radius = (
+                _CASTP_DEFAULT_HYDROGEN_RADIUS
+                if atom_is_hydrogen
+                else _CASTP_DEFAULT_HEAVY_RADIUS
+            )
         radii[index] = float(radius)
 
     return radii
@@ -271,7 +466,11 @@ def _castp1_pdb2alf_radii_for_pdb_path(pdb_path: str | Path) -> np.ndarray:
             if radius is None:
                 warning_key = raw_line[12:21].strip().replace(' ', '')
                 atom_is_hydrogen = warning_key.lstrip('0123456789').startswith('H')
-                radius = _CASTP_DEFAULT_HYDROGEN_RADIUS if atom_is_hydrogen else _CASTP_DEFAULT_HEAVY_RADIUS
+                radius = (
+                    _CASTP_DEFAULT_HYDROGEN_RADIUS
+                    if atom_is_hydrogen
+                    else _CASTP_DEFAULT_HEAVY_RADIUS
+                )
             radii.append(float(radius))
 
     if not radii:
@@ -305,7 +504,9 @@ def _infer_protor_type_for_atom(
     atom_type = str(atom_type).strip().upper()
     n_bonds = int(n_bonds)
 
-    normalized_residue_name = _PROTOR_RESIDUE_NAME_ALIASES.get(residue_name, residue_name)
+    normalized_residue_name = _PROTOR_RESIDUE_NAME_ALIASES.get(
+        residue_name, residue_name
+    )
     residue_map = _PROTOR_PROTEIN_HEAVY_ATOM_TYPES.get(normalized_residue_name)
     if residue_map is not None and atom_name in residue_map:
         return residue_map[atom_name]
@@ -336,18 +537,24 @@ def _protor_radii_for_labels(
     for index, (group_name, atom_name, atom_type, atom_n_bonds) in enumerate(
         zip(group_names, atom_names, atom_types, n_bonds)
     ):
-        protor_type = _infer_protor_type_for_atom(group_name, atom_name, atom_type, int(atom_n_bonds))
+        protor_type = _infer_protor_type_for_atom(
+            group_name, atom_name, atom_type, int(atom_n_bonds)
+        )
         if protor_type is not None:
             radii[index] = float(_PROTOR_RADII_BY_TYPE[protor_type])
             continue
 
         element = str(atom_type).strip().upper()
-        radii[index] = float(_PROTOR_FALLBACK_RADII.get(element, _CASTP_DEFAULT_HEAVY_RADIUS))
+        radii[index] = float(
+            _PROTOR_FALLBACK_RADII.get(element, _CASTP_DEFAULT_HEAVY_RADIUS)
+        )
 
     return radii
 
 
-def _rank_of_ratio(spectrum_ratios: tuple[ExactRatio, ...], value_ratio: ExactRatio) -> int:
+def _rank_of_ratio(
+    spectrum_ratios: tuple[ExactRatio, ...], value_ratio: ExactRatio
+) -> int:
     """Return the 1-based MKALF-like rank of an exact threshold ratio."""
 
     if not spectrum_ratios:
@@ -400,7 +607,9 @@ def _rank_table_is_interior(mu2_rank: int, rank: int) -> bool:
     return bool(mu2_rank <= rank)
 
 
-def _face_is_in_complex_at(geometry: CastpGeometry, simplex_index: int, face_index: int, rank: int) -> bool:
+def _face_is_in_complex_at(
+    geometry: CastpGeometry, simplex_index: int, face_index: int, rank: int
+) -> bool:
     """Return canonical `alf_is_in_complex(ALF_TRIANGLE, rank, ...)` semantics."""
 
     simplex_index = int(simplex_index)
@@ -430,7 +639,9 @@ def _edge_is_in_complex_at(
     )
 
 
-def _vertex_is_in_complex_at(geometry: CastpGeometry, vertex_index: int, rank: int) -> bool:
+def _vertex_is_in_complex_at(
+    geometry: CastpGeometry, vertex_index: int, rank: int
+) -> bool:
     """Return canonical `alf_is_in_complex(ALF_VERTEX, rank, ...)` semantics."""
 
     vertex_index = int(vertex_index)
@@ -441,7 +652,9 @@ def _vertex_is_in_complex_at(geometry: CastpGeometry, vertex_index: int, rank: i
     )
 
 
-def _vertex_is_interior_at(geometry: CastpGeometry, vertex_index: int, rank: int) -> bool:
+def _vertex_is_interior_at(
+    geometry: CastpGeometry, vertex_index: int, rank: int
+) -> bool:
     """Return canonical `alf_is_interior(ALF_VERTEX, rank, ...)` semantics."""
 
     vertex_index = int(vertex_index)
@@ -451,12 +664,16 @@ def _vertex_is_interior_at(geometry: CastpGeometry, vertex_index: int, rank: int
     )
 
 
-def _infer_decimal_places(values: np.ndarray, max_places: int = 6, tolerance: float = 1e-12) -> int:
+def _infer_decimal_places(
+    values: np.ndarray, max_places: int = 6, tolerance: float = 1e-12
+) -> int:
     """Infer the smallest decimal grid that represents the values faithfully."""
 
     values_array = np.asarray(values, dtype=float)
     for decimals in range(max_places + 1):
-        if np.allclose(values_array, np.round(values_array, decimals), atol=tolerance, rtol=0.0):
+        if np.allclose(
+            values_array, np.round(values_array, decimals), atol=tolerance, rtol=0.0
+        ):
             return int(decimals)
     return int(max_places)
 
@@ -548,7 +765,9 @@ def _face_rank_data(
     for simplex_index, simplex_neighbors in enumerate(mesh.neighbors):
         for face_index, neighbor in enumerate(simplex_neighbors):
             face_atoms = mesh.get_face_atoms(simplex_index, face_index)
-            face_to_incident_simplices.setdefault(face_atoms, []).append(int(simplex_index))
+            face_to_incident_simplices.setdefault(face_atoms, []).append(
+                int(simplex_index)
+            )
             face_records.append((int(simplex_index), int(face_index), face_atoms))
 
     face_is_on_hull_map: dict[tuple[int, int, int], bool] = {}
@@ -577,7 +796,9 @@ def _simplex_rank_sublists(simplex_rho_ranks: np.ndarray) -> dict[int, list[int]
     """
 
     result: dict[int, list[int]] = {}
-    for simplex_index, simplex_rho_rank in enumerate(np.asarray(simplex_rho_ranks, dtype=int)):
+    for simplex_index, simplex_rho_rank in enumerate(
+        np.asarray(simplex_rho_ranks, dtype=int)
+    ):
         result.setdefault(int(simplex_rho_rank), []).append(int(simplex_index))
     return result
 
@@ -600,7 +821,9 @@ def _build_master_entries(
     rank_buckets: dict[int, list[CastpMasterEntry]] = {}
     insertion_order = 0
 
-    def push(rank: int, f_type: int, r_type: int, index: int, is_attached: bool) -> None:
+    def push(
+        rank: int, f_type: int, r_type: int, index: int, is_attached: bool
+    ) -> None:
         nonlocal insertion_order
         if int(rank) <= 0:
             return
@@ -620,7 +843,9 @@ def _build_master_entries(
             )
         )
 
-    for simplex_index, simplex_rho_rank in enumerate(np.asarray(simplex_rho_ranks, dtype=int)):
+    for simplex_index, simplex_rho_rank in enumerate(
+        np.asarray(simplex_rho_ranks, dtype=int)
+    ):
         push(int(simplex_rho_rank), ALF_TETRA, ALF_RHO, int(simplex_index), False)
 
     face_id_by_atoms: dict[tuple[int, int, int], int] = {}
@@ -639,7 +864,12 @@ def _build_master_entries(
             face_rho_rank == 0,
         )
 
-    for face_id, (face_rho_rank, face_mu1_rank, face_mu2_rank, is_attached) in face_rank_payloads.items():
+    for face_id, (
+        face_rho_rank,
+        face_mu1_rank,
+        face_mu2_rank,
+        is_attached,
+    ) in face_rank_payloads.items():
         push(face_rho_rank, ALF_TRIANGLE, ALF_RHO, face_id, bool(is_attached))
         push(face_mu1_rank, ALF_TRIANGLE, ALF_MU1, face_id, bool(is_attached))
         push(face_mu2_rank, ALF_TRIANGLE, ALF_MU2, face_id, bool(is_attached))
@@ -709,8 +939,14 @@ def _weighted_face_center_and_power(
     )
     vector = np.array(
         [
-            np.dot(face_points[1], face_points[1]) - np.dot(point_a, point_a) - face_weights[1] + weight_a,
-            np.dot(face_points[2], face_points[2]) - np.dot(point_a, point_a) - face_weights[2] + weight_a,
+            np.dot(face_points[1], face_points[1])
+            - np.dot(point_a, point_a)
+            - face_weights[1]
+            + weight_a,
+            np.dot(face_points[2], face_points[2])
+            - np.dot(point_a, point_a)
+            - face_weights[2]
+            + weight_a,
             np.dot(normal, point_a),
         ],
         dtype=float,
@@ -751,9 +987,15 @@ def _weighted_face_size2_value(
     if np.isclose(d0, 0.0):
         return float('inf')
 
-    d1 = -2.0 * (minor_130 * minor_340 + minor_120 * minor_240 - 2.0 * minor_123 * minor_230)
-    d2 = 2.0 * (minor_120 * minor_140 - minor_230 * minor_340 - 2.0 * minor_123 * minor_130)
-    d3 = 2.0 * (minor_230 * minor_240 + minor_130 * minor_140 + 2.0 * minor_123 * minor_120)
+    d1 = -2.0 * (
+        minor_130 * minor_340 + minor_120 * minor_240 - 2.0 * minor_123 * minor_230
+    )
+    d2 = 2.0 * (
+        minor_120 * minor_140 - minor_230 * minor_340 - 2.0 * minor_123 * minor_130
+    )
+    d3 = 2.0 * (
+        minor_230 * minor_240 + minor_130 * minor_140 + 2.0 * minor_123 * minor_120
+    )
     d4 = -4.0 * (
         minor_120 * minor_124
         + minor_130 * minor_134
@@ -783,7 +1025,9 @@ def _exact_minor_determinant(rows: np.ndarray, columns: tuple[int, ...]) -> int:
     return exact_determinant(matrix)
 
 
-def _fixed_point_lifted_rows(points: np.ndarray, radii: np.ndarray, decimals: int) -> np.ndarray:
+def _fixed_point_lifted_rows(
+    points: np.ndarray, radii: np.ndarray, decimals: int
+) -> np.ndarray:
     """Return exact fixed-point lifted rows compatible with historical predicates."""
 
     points_fixed = castp1_fixed_point_array(points, decimals)
@@ -876,9 +1120,33 @@ def _face_exact_ratio(face_rows: np.ndarray) -> ExactRatio:
 
     d0 = 4 * (minor_120 * minor_120 + minor_130 * minor_130 + minor_230 * minor_230)
     numerator = (
-        (-2 * (minor_130 * minor_340 + minor_120 * minor_240 - 2 * minor_123 * minor_230)) ** 2
-        + (2 * (minor_120 * minor_140 - minor_230 * minor_340 - 2 * minor_123 * minor_130)) ** 2
-        + (2 * (minor_230 * minor_240 + minor_130 * minor_140 + 2 * minor_123 * minor_120)) ** 2
+        (
+            -2
+            * (
+                minor_130 * minor_340
+                + minor_120 * minor_240
+                - 2 * minor_123 * minor_230
+            )
+        )
+        ** 2
+        + (
+            2
+            * (
+                minor_120 * minor_140
+                - minor_230 * minor_340
+                - 2 * minor_123 * minor_130
+            )
+        )
+        ** 2
+        + (
+            2
+            * (
+                minor_230 * minor_240
+                + minor_130 * minor_140
+                + 2 * minor_123 * minor_120
+            )
+        )
+        ** 2
         - d0
         * (
             -4
@@ -894,7 +1162,9 @@ def _face_exact_ratio(face_rows: np.ndarray) -> ExactRatio:
     return ExactRatio(numerator, denominator)
 
 
-def _edge_exact_ratio(edge_points: np.ndarray, edge_radii: np.ndarray, decimals: int) -> ExactRatio:
+def _edge_exact_ratio(
+    edge_points: np.ndarray, edge_radii: np.ndarray, decimals: int
+) -> ExactRatio:
     """Return the exact weighted size1 ratio for an edge."""
 
     edge_points_fixed = castp1_fixed_point_array(edge_points, decimals)
@@ -936,8 +1206,7 @@ def _build_exact_rho_rank_tables(
     simplex_rho_ranks = np.zeros(mesh.n_simplices, dtype=int)
     face_rho_ranks = np.zeros((mesh.n_simplices, 4), dtype=int)
     edge_rho_ranks: dict[tuple[int, int], int] = {
-        tuple(int(atom_index) for atom_index in edge): 0
-        for edge in edge_rho_map
+        tuple(int(atom_index) for atom_index in edge): 0 for edge in edge_rho_map
     }
     vertex_rho_states = np.zeros(atom_coordinates.shape[0], dtype=int)
     for edge_atom_indices in edge_rho_map:
@@ -950,7 +1219,8 @@ def _build_exact_rho_rank_tables(
                     float(atom_radii[left] * atom_radii[left]),
                     atom_coordinates[right],
                     float(atom_radii[right] * atom_radii[right]),
-                ) != 0
+                )
+                != 0
                 else 1
             )
         if vertex_rho_states[right] >= 0:
@@ -961,7 +1231,8 @@ def _build_exact_rho_rank_tables(
                     float(atom_radii[right] * atom_radii[right]),
                     atom_coordinates[left],
                     float(atom_radii[left] * atom_radii[left]),
-                ) != 0
+                )
+                != 0
                 else 1
             )
 
@@ -969,7 +1240,9 @@ def _build_exact_rho_rank_tables(
     events: list[tuple[ExactRatio, float, str, object]] = []
     face_owners: dict[tuple[int, int, int], list[tuple[int, int]]] = {}
     for simplex_index, face_index, face_atoms in face_records:
-        face_owners.setdefault(face_atoms, []).append((int(simplex_index), int(face_index)))
+        face_owners.setdefault(face_atoms, []).append(
+            (int(simplex_index), int(face_index))
+        )
 
     for simplex_index, simplex_atom_indices in enumerate(mesh.simplex_atom_indices):
         simplex_rows = lifted_rows[np.asarray(simplex_atom_indices, dtype=int)]
@@ -1028,9 +1301,13 @@ def _build_exact_rho_rank_tables(
         if vertex_rho_state == 0:
             vertex_rho_ranks[int(vertex_index)] = -1
             continue
-        scaled_radius = int(castp1_fixed_point_array(np.asarray([atom_radius]), decimals)[0])
+        scaled_radius = int(
+            castp1_fixed_point_array(np.asarray([atom_radius]), decimals)[0]
+        )
         ratio = ExactRatio(-(scaled_radius * scaled_radius), 1)
-        events.append((ratio, -float(atom_radius * atom_radius), 'vertex', int(vertex_index)))
+        events.append(
+            (ratio, -float(atom_radius * atom_radius), 'vertex', int(vertex_index))
+        )
 
     events.sort(key=cmp_to_key(lambda left, right: left[0].compare(right[0])))
 
@@ -1049,7 +1326,9 @@ def _build_exact_rho_rank_tables(
             simplex_rho_ranks[int(target)] = int(current_rank)
         elif kind == 'face':
             for owner_simplex_index, owner_face_index in face_owners[tuple(target)]:
-                face_rho_ranks[int(owner_simplex_index), int(owner_face_index)] = int(current_rank)
+                face_rho_ranks[int(owner_simplex_index), int(owner_face_index)] = int(
+                    current_rank
+                )
         elif kind == 'edge':
             edge_rho_ranks[tuple(target)] = int(current_rank)
         elif kind == 'vertex':
@@ -1090,8 +1369,12 @@ def _weighted_hidden2(
     - ``2``: degenerate attachment, whose interpretation depends on context
     """
 
-    all_points = np.vstack((np.asarray(face_points, dtype=float), np.asarray(probe_point, dtype=float)))
-    all_weights = np.concatenate((np.asarray(face_weights, dtype=float), np.asarray([probe_weight], dtype=float)))
+    all_points = np.vstack(
+        (np.asarray(face_points, dtype=float), np.asarray(probe_point, dtype=float))
+    )
+    all_weights = np.concatenate(
+        (np.asarray(face_weights, dtype=float), np.asarray([probe_weight], dtype=float))
+    )
     decimals = _CASTP1_FIXED_DECIMALS
     rows = _fixed_point_lifted_rows_from_weights(all_points, all_weights, decimals)
     triangle_rows = rows[:3]
@@ -1126,8 +1409,12 @@ def _weighted_hidden1(
 
     del epsilon
 
-    all_points = np.vstack((np.asarray(edge_points, dtype=float), np.asarray(probe_point, dtype=float)))
-    all_weights = np.concatenate((np.asarray(edge_weights, dtype=float), np.asarray([probe_weight], dtype=float)))
+    all_points = np.vstack(
+        (np.asarray(edge_points, dtype=float), np.asarray(probe_point, dtype=float))
+    )
+    all_weights = np.concatenate(
+        (np.asarray(edge_weights, dtype=float), np.asarray([probe_weight], dtype=float))
+    )
     decimals = _CASTP1_FIXED_DECIMALS
     rows = _fixed_point_lifted_rows_from_weights(all_points, all_weights, decimals)
     edge_rows = rows[:2]
@@ -1139,21 +1426,23 @@ def _weighted_hidden1(
     result_3 = _exact_minor2(edge_rows, (coord1, coord2))
     result_4 = _exact_minor2(edge_rows, (coord1, coord3))
 
-    det_gamma = result_0 * (result_0 * result_0 + result_1 * result_1 + result_2 * result_2)
+    det_gamma = result_0 * (
+        result_0 * result_0 + result_1 * result_1 + result_2 * result_2
+    )
 
     det_lambda = (
         result_0 * _exact_minor3(rows, (coord1, 4, 0))
         + result_1 * _exact_minor3(rows, (coord2, 4, 0))
         + result_2 * _exact_minor3(rows, (coord3, 4, 0))
-        - 2 * (
+        - 2
+        * (
             result_4 * _exact_minor3(rows, (coord1, coord3, 0))
             + result_3 * _exact_minor3(rows, (coord1, coord2, 0))
         )
     )
-    det_lambda = (
-        result_0 * det_lambda
-        + 2 * (result_3 * result_2 - result_4 * result_1) * _exact_minor3(rows, (coord2, coord3, 0))
-    )
+    det_lambda = result_0 * det_lambda + 2 * (
+        result_3 * result_2 - result_4 * result_1
+    ) * _exact_minor3(rows, (coord2, coord3, 0))
 
     expression = det_gamma * det_lambda
 
@@ -1172,7 +1461,9 @@ def _weighted_hidden0(
 ) -> int:
     """Return the historical weighted attachment predicate for a vertex."""
 
-    all_points = np.vstack((np.asarray(vertex_point, dtype=float), np.asarray(probe_point, dtype=float)))
+    all_points = np.vstack(
+        (np.asarray(vertex_point, dtype=float), np.asarray(probe_point, dtype=float))
+    )
     all_weights = np.asarray([float(vertex_weight), float(probe_weight)], dtype=float)
     decimals = _CASTP1_FIXED_DECIMALS
     points_fixed = castp1_fixed_point_array(all_points, decimals)
@@ -1233,13 +1524,17 @@ def _edge_rho_map(
         simplex_atom_indices = [int(atom_index) for atom_index in simplex_atom_indices]
         for first in range(4):
             for second in range(first + 1, 4):
-                edge = tuple(sorted((simplex_atom_indices[first], simplex_atom_indices[second])))
+                edge = tuple(
+                    sorted((simplex_atom_indices[first], simplex_atom_indices[second]))
+                )
                 opposite_vertices = {
                     simplex_atom_indices[index]
                     for index in range(4)
                     if index not in (first, second)
                 }
-                edge_to_opposite_vertices.setdefault(edge, set()).update(opposite_vertices)
+                edge_to_opposite_vertices.setdefault(edge, set()).update(
+                    opposite_vertices
+                )
 
     result: dict[tuple[int, int], float] = {}
     for edge_atom_indices, opposite_vertices in edge_to_opposite_vertices.items():
@@ -1248,19 +1543,24 @@ def _edge_rho_map(
         edge_weights = atom_weights[edge_atom_indices_array]
         attached = False
         for opposite_vertex in opposite_vertices:
-            if _weighted_hidden1(
-                edge_points,
-                edge_weights,
-                atom_coordinates[int(opposite_vertex)],
-                float(atom_weights[int(opposite_vertex)]),
-            ) != 0:
+            if (
+                _weighted_hidden1(
+                    edge_points,
+                    edge_weights,
+                    atom_coordinates[int(opposite_vertex)],
+                    float(atom_weights[int(opposite_vertex)]),
+                )
+                != 0
+            ):
                 attached = True
                 break
 
         if attached:
             result[edge_atom_indices] = 0.0
         else:
-            _edge_center, edge_power_value = _weighted_edge_center_and_power(edge_points, edge_weights)
+            _edge_center, edge_power_value = _weighted_edge_center_and_power(
+                edge_points, edge_weights
+            )
             result[edge_atom_indices] = float(edge_power_value)
 
     return result
@@ -1330,10 +1630,14 @@ def _vertex_mu_rank_arrays(
         edge = tuple(int(atom_index) for atom_index in edge)
         edge_mu1_rank = int(edge_mu1_ranks.get(edge, 0))
         edge_mu2_rank = int(edge_mu2_ranks.get(edge, 0))
-        candidate_mu1 = int(edge_rho_rank) if int(edge_rho_rank) != 0 else int(edge_mu1_rank)
+        candidate_mu1 = (
+            int(edge_rho_rank) if int(edge_rho_rank) != 0 else int(edge_mu1_rank)
+        )
         for vertex_index in edge:
             previous_mu1 = int(vertex_mu1_ranks[vertex_index])
-            if previous_mu1 == 0 or (candidate_mu1 != 0 and candidate_mu1 < previous_mu1):
+            if previous_mu1 == 0 or (
+                candidate_mu1 != 0 and candidate_mu1 < previous_mu1
+            ):
                 vertex_mu1_ranks[vertex_index] = int(candidate_mu1)
             if edge_mu2_rank > int(vertex_mu2_ranks[vertex_index]):
                 vertex_mu2_ranks[vertex_index] = int(edge_mu2_rank)
@@ -1402,7 +1706,9 @@ def _face_rho_data(
             face_atom_indices = np.asarray(face_atoms, dtype=int)
             face_points = atom_coordinates[face_atom_indices]
             face_weights = atom_weights[face_atom_indices]
-            face_center, _face_power_value = _weighted_face_center_and_power(face_points, face_weights)
+            face_center, _face_power_value = _weighted_face_center_and_power(
+                face_points, face_weights
+            )
             face_size2_value = _weighted_face_size2_value(face_points, face_weights)
 
             # Attachment criterion: hidden2(L) OR hidden2(R), where L is the
@@ -1413,18 +1719,24 @@ def _face_rho_data(
             opp_L = int(next(a for a in simplex_atoms if a not in face_atoms))
             is_attached = (
                 _weighted_hidden2(
-                    face_points, face_weights,
-                    atom_coordinates[opp_L], float(atom_weights[opp_L]),
-                ) != 0
+                    face_points,
+                    face_weights,
+                    atom_coordinates[opp_L],
+                    float(atom_weights[opp_L]),
+                )
+                != 0
             )
             if not is_attached and neighbor != -1:
                 neighbor_atoms = mesh.simplex_atom_indices[int(neighbor)]
                 opp_R = int(next(a for a in neighbor_atoms if a not in face_atoms))
                 is_attached = (
                     _weighted_hidden2(
-                        face_points, face_weights,
-                        atom_coordinates[opp_R], float(atom_weights[opp_R]),
-                    ) != 0
+                        face_points,
+                        face_weights,
+                        atom_coordinates[opp_R],
+                        float(atom_weights[opp_R]),
+                    )
+                    != 0
                 )
 
             rho = 0.0 if is_attached else float(face_size2_value)
@@ -1452,8 +1764,12 @@ def _point_in_tetrahedron(
 
     coordinate_u, coordinate_v, coordinate_w = barycentric
     coordinate_t = 1.0 - coordinate_u - coordinate_v - coordinate_w
-    coordinates = np.array([coordinate_t, coordinate_u, coordinate_v, coordinate_w], dtype=float)
-    return bool(np.all(coordinates >= -epsilon) and np.all(coordinates <= 1.0 + epsilon))
+    coordinates = np.array(
+        [coordinate_t, coordinate_u, coordinate_v, coordinate_w], dtype=float
+    )
+    return bool(
+        np.all(coordinates >= -epsilon) and np.all(coordinates <= 1.0 + epsilon)
+    )
 
 
 def build_castp_geometry(
@@ -1468,7 +1784,9 @@ def build_castp_geometry(
 ) -> CastpGeometry:
     """Build the weighted geometric substrate used by the native CASTp path."""
 
-    molsys = msm.convert(molecular_system, to_form='molsysmt.MolSys', structure_indices=structure_indices)
+    molsys = msm.convert(
+        molecular_system, to_form='molsysmt.MolSys', structure_indices=structure_indices
+    )
     atom_indices = msm.select(molsys, selection=selection)
 
     atom_coordinates = puw.get_value(
@@ -1514,7 +1832,9 @@ def build_castp_geometry(
         atom_radii = _castp_param_radii_for_labels(atom_group_names, atom_names)
         atom_radii = atom_radii + float(solvent_radius)
     elif radii_model == 'protor':
-        atom_radii = _protor_radii_for_labels(atom_group_names, atom_names, atom_types, atom_n_bonds)
+        atom_radii = _protor_radii_for_labels(
+            atom_group_names, atom_names, atom_types, atom_n_bonds
+        )
         atom_radii = atom_radii + float(solvent_radius)
     else:
         raise ValueError(f'Unsupported CASTp radii model: {radii_model}')
@@ -1543,7 +1863,9 @@ def build_castp_geometry(
         )
 
     if atom_coordinates.shape[0] < 4:
-        raise ValueError('Not enough atoms to build a CASTp weighted triangulation (min 4).')
+        raise ValueError(
+            'Not enough atoms to build a CASTp weighted triangulation (min 4).'
+        )
 
     mesh = WeightedDelaunayMesh(
         points=atom_coordinates,
@@ -1559,8 +1881,12 @@ def build_castp_geometry(
             tetrahedron_points,
         )
 
-    face_rho_values, face_centers = _face_rho_data(mesh, atom_coordinates, np.asarray(mesh.weights, dtype=float))
-    edge_rho_map = _edge_rho_map(mesh, atom_coordinates, np.asarray(mesh.weights, dtype=float))
+    face_rho_values, face_centers = _face_rho_data(
+        mesh, atom_coordinates, np.asarray(mesh.weights, dtype=float)
+    )
+    edge_rho_map = _edge_rho_map(
+        mesh, atom_coordinates, np.asarray(mesh.weights, dtype=float)
+    )
     face_is_on_hull, face_records = _face_rank_data(mesh)
     (
         simplex_rho_ranks,
@@ -1590,9 +1916,13 @@ def build_castp_geometry(
     face_mu2_ranks = np.zeros((mesh.n_simplices, 4), dtype=int)
     for simplex_index, face_index, face_atoms in face_records:
         incident_simplex_ranks = face_to_incident_simplex_ranks[face_atoms]
-        face_mu1_ranks[int(simplex_index), int(face_index)] = int(min(incident_simplex_ranks))
+        face_mu1_ranks[int(simplex_index), int(face_index)] = int(
+            min(incident_simplex_ranks)
+        )
         if not bool(face_is_on_hull[int(simplex_index), int(face_index)]):
-            face_mu2_ranks[int(simplex_index), int(face_index)] = int(max(incident_simplex_ranks))
+            face_mu2_ranks[int(simplex_index), int(face_index)] = int(
+                max(incident_simplex_ranks)
+            )
 
     base_rank = _rank_of_ratio(spectrum_ratios, ExactRatio(0, 1))
     edge_mu1_ranks, edge_mu2_ranks = _edge_mu_rank_maps(
@@ -1602,12 +1932,14 @@ def build_castp_geometry(
         face_mu2_ranks,
         face_is_on_hull,
     )
-    _vertex_rho_ranks_unused, vertex_mu1_ranks, vertex_mu2_ranks = _vertex_mu_rank_arrays(
-        mesh,
-        edge_rho_ranks,
-        edge_mu1_ranks,
-        edge_mu2_ranks,
-        face_is_on_hull,
+    _vertex_rho_ranks_unused, vertex_mu1_ranks, vertex_mu2_ranks = (
+        _vertex_mu_rank_arrays(
+            mesh,
+            edge_rho_ranks,
+            edge_mu1_ranks,
+            edge_mu2_ranks,
+            face_is_on_hull,
+        )
     )
     master_entries, master_rank_offsets, simplex_rank_sublists = _build_master_entries(
         simplex_rho_ranks,

@@ -14,14 +14,14 @@ family was named ``multi_external_link`` until 2026-06.
 from __future__ import annotations
 
 #                              mouths | residence
-VOID = 'void'                        # 0      | resident
+VOID = 'void'  # 0      | resident
 DEGENERATE_SUBPROBE = 'degenerate_subprobe'  # 0      | non-resident
-POCKET = 'pocket'                    # 1      | resident
-SURFACE_CONCAVITY = 'surface_concavity'      # 1      | non-resident
-CHANNEL = 'channel'                  # >=2    | resident
+POCKET = 'pocket'  # 1      | resident
+SURFACE_CONCAVITY = 'surface_concavity'  # 1      | non-resident
+CHANNEL = 'channel'  # >=2    | resident
 NONRESIDENT_PASSAGE = 'nonresident_passage'  # >=2    | non-resident
-PERCOLATING = 'percolating'          # spans the whole system
-DRY_BANK = 'dry_bank'                # the dry-network side
+PERCOLATING = 'percolating'  # spans the whole system
+DRY_BANK = 'dry_bank'  # the dry-network side
 
 # side is derived from family (mirrors how a feature's shape is derived from its
 # feature_type in features/_feature_constants.py).

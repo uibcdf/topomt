@@ -274,7 +274,9 @@ def trilobed(
     recovers the three chambers and the two waists between them."""
     if separation >= 2.0 * lobe_radius:
         raise ValueError('separation must be < 2*lobe_radius so neighbours overlap')
-    base, _r = hollow_sphere(lobe_radius, wall_spacing, atom_radius, jitter=0.0, seed=seed)
+    base, _r = hollow_sphere(
+        lobe_radius, wall_spacing, atom_radius, jitter=0.0, seed=seed
+    )
     centers = [np.array([k * separation, 0.0, 0.0]) for k in (-1, 0, 1)]
     kept = []
     for i, ci in enumerate(centers):

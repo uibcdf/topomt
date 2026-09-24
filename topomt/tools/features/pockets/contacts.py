@@ -21,7 +21,9 @@ def ligand_contact_distances(
     }
 
 
-def ligand_contact_mask(vertices: np.ndarray, ligand_coords: np.ndarray, hit_dist: float) -> np.ndarray:
+def ligand_contact_mask(
+    vertices: np.ndarray, ligand_coords: np.ndarray, hit_dist: float
+) -> np.ndarray:
     """Return a boolean mask selecting vertices within ``hit_dist`` of a ligand atom."""
 
     if len(vertices) == 0 or len(ligand_coords) == 0:

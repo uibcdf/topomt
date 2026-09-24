@@ -8,9 +8,21 @@ dependencies:
 - versioningit ~=2.0
 - molsysmt
 - pyunitwizard
+- numba
+- rdkit
+- mdtraj
+- networkx
+- biotite
+- scikit-image
+- scikit-learn
+- anywidget
+- aiohttp
+- traitlets
+- packaging
 - scipy
 - nglview
 - pytest
+- pytest-receptor=0.6.0
 - pytest-cov
 - pytest-xdist
 - codecov

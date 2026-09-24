@@ -10,7 +10,8 @@ import numpy as np
 # physical contract by themselves.
 GateResult = namedtuple('GateResult', ['radius', 'center', 'kind'])
 ResidenceResult = namedtuple(
-    'ResidenceResult', ['radius', 'center', 'kind', 'r_apollonius4', 'apollonius4_valid']
+    'ResidenceResult',
+    ['radius', 'center', 'kind', 'r_apollonius4', 'apollonius4_valid'],
 )
 
 
@@ -120,7 +121,10 @@ def _face_three_atom_candidate_centers_2d(c1, r1, c2, r2, c3, r3, epsilon):
         return []
     sqrt_discriminant = math.sqrt(discriminant)
     centers = []
-    for radius in ((q_coef - sqrt_discriminant) / p_coef, (q_coef + sqrt_discriminant) / p_coef):
+    for radius in (
+        (q_coef - sqrt_discriminant) / p_coef,
+        (q_coef + sqrt_discriminant) / p_coef,
+    ):
         if radius > epsilon:
             x = (a + b * radius) / denominator
             y = (c + d * radius) / denominator
@@ -161,7 +165,9 @@ def face_gate_radius(p1, p2, p3, r1, r2, r3, epsilon=1e-6):
     candidates = []
 
     # Interior candidates: tangent to all three atoms (both Apollonius branches).
-    for center in _face_three_atom_candidate_centers_2d(c1, r1, c2, r2, c3, r3, epsilon):
+    for center in _face_three_atom_candidate_centers_2d(
+        c1, r1, c2, r2, c3, r3, epsilon
+    ):
         candidates.append(('face3', center))
 
     # Edge candidates: largest empty circle tangent to an atom pair with center
@@ -177,7 +183,13 @@ def face_gate_radius(p1, p2, p3, r1, r2, r3, epsilon=1e-6):
         direction = direction / norm
         for pair_a, pair_b in edges:
             for center in _tangent2_on_line(
-                q0, direction, points[pair_a], radii[pair_a], points[pair_b], radii[pair_b], epsilon
+                q0,
+                direction,
+                points[pair_a],
+                radii[pair_a],
+                points[pair_b],
+                radii[pair_b],
+                epsilon,
             ):
                 candidates.append(('pair2', center))
 
@@ -188,7 +200,9 @@ def face_gate_radius(p1, p2, p3, r1, r2, r3, epsilon=1e-6):
     for kind, center in candidates:
         if not _point_in_triangle_2d(center, c1, c2, c3, epsilon=epsilon):
             continue
-        radius = float(np.min(np.linalg.norm(stacked - center, axis=1) - np.asarray(radii)))
+        radius = float(
+            np.min(np.linalg.norm(stacked - center, axis=1) - np.asarray(radii))
+        )
         if radius > best_radius:
             best_radius = radius
             best_center = center
@@ -200,7 +214,11 @@ def face_gate_radius(p1, p2, p3, r1, r2, r3, epsilon=1e-6):
 def _inside_tetrahedron(point, vertices, tol=1e-7):
     """Return true if point lies in the closed tetrahedron."""
     matrix = np.column_stack(
-        [vertices[0] - vertices[3], vertices[1] - vertices[3], vertices[2] - vertices[3]]
+        [
+            vertices[0] - vertices[3],
+            vertices[1] - vertices[3],
+            vertices[2] - vertices[3],
+        ]
     )
     try:
         bary = np.linalg.solve(matrix, point - vertices[3])
@@ -248,7 +266,11 @@ def _tangent3_on_plane(p1, r1, p2, r2, p3, r3, q0, normal, epsilon):
     a_q = A @ A - 1.0
     b_q = 2.0 * (A @ D - r1)
     c_q = D @ D - r1 * r1
-    return [A * radius + B for radius in _quadratic_roots(a_q, b_q, c_q, epsilon) if radius > epsilon]
+    return [
+        A * radius + B
+        for radius in _quadratic_roots(a_q, b_q, c_q, epsilon)
+        if radius > epsilon
+    ]
 
 
 def _tangent2_on_line(q0, direction, ca, ra, cb, rb, epsilon):
@@ -285,11 +307,13 @@ def _apollonius4_roots(vertices, radii, epsilon):
         np.dot(a1, a1) - radii[0] ** 2,
         np.dot(a2, a2) - radii[1] ** 2,
         np.dot(a3, a3) - radii[2] ** 2,
-        -radii[3] ** 2,
+        -(radii[3] ** 2),
     )
     matrix = 2.0 * np.array([a1, a2, a3])
     v_k = np.array([k[0] - k[3], k[1] - k[3], k[2] - k[3]])
-    v_r = -2.0 * np.array([radii[0] - radii[3], radii[1] - radii[3], radii[2] - radii[3]])
+    v_r = -2.0 * np.array(
+        [radii[0] - radii[3], radii[1] - radii[3], radii[2] - radii[3]]
+    )
     try:
         matrix_inverse = np.linalg.inv(matrix)
     except np.linalg.LinAlgError:
@@ -299,7 +323,9 @@ def _apollonius4_roots(vertices, radii, epsilon):
     a_q = np.dot(A, A) - 1.0
     b_q = 2.0 * (np.dot(A, B) - radii[3])
     c_q = np.dot(B, B) - radii[3] ** 2
-    roots = [root for root in _quadratic_roots(a_q, b_q, c_q, epsilon) if root > epsilon]
+    roots = [
+        root for root in _quadratic_roots(a_q, b_q, c_q, epsilon) if root > epsilon
+    ]
     return roots, A, B, origin
 
 
@@ -327,14 +353,24 @@ def tetrahedron_residence_radius(coords, radii, epsilon=1e-9):
     # face active set rather than by all four atoms.
     for first, second, third in _FACES:
         q0 = vertices[first]
-        normal = np.cross(vertices[second] - vertices[first], vertices[third] - vertices[first])
+        normal = np.cross(
+            vertices[second] - vertices[first], vertices[third] - vertices[first]
+        )
         norm = np.linalg.norm(normal)
         if norm < epsilon:
             continue
         normal = normal / norm
         for t1, t2, t3 in _TRIPLES:
             centers = _tangent3_on_plane(
-                vertices[t1], radii[t1], vertices[t2], radii[t2], vertices[t3], radii[t3], q0, normal, epsilon
+                vertices[t1],
+                radii[t1],
+                vertices[t2],
+                radii[t2],
+                vertices[t3],
+                radii[t3],
+                q0,
+                normal,
+                epsilon,
             )
             for center in centers:
                 candidates.append(('face3', center))
@@ -350,7 +386,13 @@ def tetrahedron_residence_radius(coords, radii, epsilon=1e-9):
         direction = direction / norm
         for pair_a, pair_b in _EDGES:
             centers = _tangent2_on_line(
-                q0, direction, vertices[pair_a], radii[pair_a], vertices[pair_b], radii[pair_b], epsilon
+                q0,
+                direction,
+                vertices[pair_a],
+                radii[pair_a],
+                vertices[pair_b],
+                radii[pair_b],
+                epsilon,
             )
             for center in centers:
                 candidates.append(('edge2', center))
@@ -367,8 +409,9 @@ def tetrahedron_residence_radius(coords, radii, epsilon=1e-9):
             best_center = center
             best_kind = kind
 
-    return ResidenceResult(best_radius, best_center, best_kind, float(r_apollonius4), apollonius4_valid)
-
+    return ResidenceResult(
+        best_radius, best_center, best_kind, float(r_apollonius4), apollonius4_valid
+    )
 
 
 # --- Vectorized batch residence ("brute-force" reference for the mesh) --------
@@ -390,9 +433,14 @@ def _solve3_batch(matrix, rhs):
     c0, c1, c2 = matrix[:, :, 0], matrix[:, :, 1], matrix[:, :, 2]
     det = _det3_batch(c0, c1, c2)
     safe = np.where(np.abs(det) < 1e-12, 1.0, det)
-    x = np.stack([_det3_batch(rhs, c1, c2) / safe,
-                  _det3_batch(c0, rhs, c2) / safe,
-                  _det3_batch(c0, c1, rhs) / safe], axis=1)
+    x = np.stack(
+        [
+            _det3_batch(rhs, c1, c2) / safe,
+            _det3_batch(c0, rhs, c2) / safe,
+            _det3_batch(c0, c1, rhs) / safe,
+        ],
+        axis=1,
+    )
     x[np.abs(det) < 1e-12] = np.nan
     return x
 
@@ -429,11 +477,21 @@ def tetrahedron_residence_radius_batch(coords, radii, epsilon=1e-9, inside_tol=1
     # interior: tangent to four atoms
     origin = V[:, 3]
     a1, a2, a3 = V[:, 0] - origin, V[:, 1] - origin, V[:, 2] - origin
-    k4 = -radii[:, 3] ** 2
-    kk = [np.einsum('ti,ti->t', a, a) - radii[:, j] ** 2 for a, j in ((a1, 0), (a2, 1), (a3, 2))]
+    k4 = -(radii[:, 3] ** 2)
+    kk = [
+        np.einsum('ti,ti->t', a, a) - radii[:, j] ** 2
+        for a, j in ((a1, 0), (a2, 1), (a3, 2))
+    ]
     M = np.stack([2 * a1, 2 * a2, 2 * a3], axis=1)
     v_k = np.stack([kk[0] - k4, kk[1] - k4, kk[2] - k4], axis=1)
-    v_r = -2 * np.stack([radii[:, 0] - radii[:, 3], radii[:, 1] - radii[:, 3], radii[:, 2] - radii[:, 3]], axis=1)
+    v_r = -2 * np.stack(
+        [
+            radii[:, 0] - radii[:, 3],
+            radii[:, 1] - radii[:, 3],
+            radii[:, 2] - radii[:, 3],
+        ],
+        axis=1,
+    )
     A = _solve3_batch(M, v_r)
     B = _solve3_batch(M, v_k)
     aq = np.einsum('ti,ti->t', A, A) - 1.0
@@ -450,14 +508,25 @@ def tetrahedron_residence_radius_batch(coords, radii, epsilon=1e-9, inside_tol=1
         q0 = V[:, fa]
         normal = np.cross(V[:, fb] - V[:, fa], V[:, fc] - V[:, fa])
         norm = np.linalg.norm(normal, axis=1, keepdims=True)
-        normal = np.where(norm < epsilon, 0.0, normal / np.where(norm < epsilon, 1.0, norm))
+        normal = np.where(
+            norm < epsilon, 0.0, normal / np.where(norm < epsilon, 1.0, norm)
+        )
         for ta, tb, tc in _TRIPLES:
             p1, p2, p3 = V[:, ta], V[:, tb], V[:, tc]
             r1, r2, r3 = radii[:, ta], radii[:, tb], radii[:, tc]
             MM = np.stack([2 * (p2 - p1), 2 * (p3 - p1), normal], axis=1)
-            u = np.stack([np.einsum('ti,ti->t', p2, p2) - np.einsum('ti,ti->t', p1, p1) - (r2 * r2 - r1 * r1),
-                          np.einsum('ti,ti->t', p3, p3) - np.einsum('ti,ti->t', p1, p1) - (r3 * r3 - r1 * r1),
-                          np.einsum('ti,ti->t', normal, q0)], axis=1)
+            u = np.stack(
+                [
+                    np.einsum('ti,ti->t', p2, p2)
+                    - np.einsum('ti,ti->t', p1, p1)
+                    - (r2 * r2 - r1 * r1),
+                    np.einsum('ti,ti->t', p3, p3)
+                    - np.einsum('ti,ti->t', p1, p1)
+                    - (r3 * r3 - r1 * r1),
+                    np.einsum('ti,ti->t', normal, q0),
+                ],
+                axis=1,
+            )
             vv = np.stack([-2 * (r2 - r1), -2 * (r3 - r1), np.zeros_like(r1)], axis=1)
             Aa = _solve3_batch(MM, vv)
             Bb = _solve3_batch(MM, u)
@@ -475,14 +544,19 @@ def tetrahedron_residence_radius_batch(coords, radii, epsilon=1e-9, inside_tol=1
         q0 = V[:, ea]
         direction = V[:, eb] - V[:, ea]
         norm = np.linalg.norm(direction, axis=1, keepdims=True)
-        direction = np.where(norm < epsilon, 0.0, direction / np.where(norm < epsilon, 1.0, norm))
+        direction = np.where(
+            norm < epsilon, 0.0, direction / np.where(norm < epsilon, 1.0, norm)
+        )
         for pa, pb in _EDGES:
             ca, cb = V[:, pa], V[:, pb]
             ra, rb = radii[:, pa], radii[:, pb]
             diff = ca - cb
             linear = np.einsum('ti,ti->t', direction, diff)
-            const = (-2 * np.einsum('ti,ti->t', q0, diff)
-                     + (np.einsum('ti,ti->t', ca, ca) - np.einsum('ti,ti->t', cb, cb)) - (ra * ra - rb * rb))
+            const = (
+                -2 * np.einsum('ti,ti->t', q0, diff)
+                + (np.einsum('ti,ti->t', ca, ca) - np.einsum('ti,ti->t', cb, cb))
+                - (ra * ra - rb * rb)
+            )
             neq = np.abs(ra - rb) > epsilon
             rad = np.where(neq, ra - rb, 1.0)
             alpha = -linear / rad
@@ -495,7 +569,14 @@ def tetrahedron_residence_radius_batch(coords, radii, epsilon=1e-9, inside_tol=1
             for k in range(2):
                 t = troots[:, k]
                 R = alpha * t + beta
-                add(np.where((neq & (R > epsilon))[:, None], q0 + t[:, None] * direction, np.nan), 2)
+                add(
+                    np.where(
+                        (neq & (R > epsilon))[:, None],
+                        q0 + t[:, None] * direction,
+                        np.nan,
+                    ),
+                    2,
+                )
             lin_ok = (~neq) & (np.abs(linear) >= epsilon)
             l_safe = np.where(np.abs(linear) < epsilon, 1.0, linear)
             t = const / (2.0 * l_safe)
@@ -503,8 +584,8 @@ def tetrahedron_residence_radius_batch(coords, radii, epsilon=1e-9, inside_tol=1
             R = np.linalg.norm(center - ca, axis=1) - ra
             add(np.where((lin_ok & (R > epsilon))[:, None], center, np.nan), 2)
 
-    C = np.stack(candidates, axis=1)              # (T, K, 3)
-    code = np.asarray(kinds)                      # (K,)
+    C = np.stack(candidates, axis=1)  # (T, K, 3)
+    code = np.asarray(kinds)  # (K,)
     e0, e1, e2 = V[:, 0] - V[:, 3], V[:, 1] - V[:, 3], V[:, 2] - V[:, 3]
     vol = _det3_batch(e0, e1, e2)
     vol_safe = np.where(np.abs(vol) < epsilon, 1.0, vol)
@@ -512,9 +593,16 @@ def tetrahedron_residence_radius_batch(coords, radii, epsilon=1e-9, inside_tol=1
     b0 = np.einsum('tki,ti->tk', d, np.cross(e1, e2)) / vol_safe[:, None]
     b1 = np.einsum('tki,ti->tk', d, np.cross(e2, e0)) / vol_safe[:, None]
     b2 = np.einsum('tki,ti->tk', d, np.cross(e0, e1)) / vol_safe[:, None]
-    inside = ((b0 >= -inside_tol) & (b1 >= -inside_tol) & (b2 >= -inside_tol)
-              & ((1 - b0 - b1 - b2) >= -inside_tol) & (np.abs(vol)[:, None] > epsilon))
-    dist = np.linalg.norm(C[:, :, None, :] - V[:, None, :, :], axis=3) - radii[:, None, :]
+    inside = (
+        (b0 >= -inside_tol)
+        & (b1 >= -inside_tol)
+        & (b2 >= -inside_tol)
+        & ((1 - b0 - b1 - b2) >= -inside_tol)
+        & (np.abs(vol)[:, None] > epsilon)
+    )
+    dist = (
+        np.linalg.norm(C[:, :, None, :] - V[:, None, :, :], axis=3) - radii[:, None, :]
+    )
     clearance_raw = dist.min(axis=2)
     clearance = np.where(inside & np.isfinite(clearance_raw), clearance_raw, -np.inf)
     best = np.argmax(clearance, axis=1)
@@ -565,17 +653,23 @@ def face_gate_radius_batch(coords, radii, epsilon=1e-6):
 
     c1 = np.zeros((P, 2))
     c2 = np.stack([n12, np.zeros(P)], axis=1)
-    c3 = np.stack([np.einsum('pi,pi->p', v13, u), np.einsum('pi,pi->p', v13, vv)], axis=1)
-    pts = np.stack([c1, c2, c3], axis=1)            # (P, 3, 2)
-    r = radii                                       # (P, 3)
+    c3 = np.stack(
+        [np.einsum('pi,pi->p', v13, u), np.einsum('pi,pi->p', v13, vv)], axis=1
+    )
+    pts = np.stack([c1, c2, c3], axis=1)  # (P, 3, 2)
+    r = radii  # (P, 3)
     candidates = []
     kinds = []
 
     # Interior: tangent to all three atoms (both Apollonius branches), in 2D.
     cx = pts[:, :, 0]
     cy = pts[:, :, 1]
-    dx12 = cx[:, 1] - cx[:, 0]; dx23 = cx[:, 2] - cx[:, 1]; dx31 = cx[:, 0] - cx[:, 2]
-    dy12 = cy[:, 1] - cy[:, 0]; dy23 = cy[:, 2] - cy[:, 1]; dy31 = cy[:, 0] - cy[:, 2]
+    dx12 = cx[:, 1] - cx[:, 0]
+    dx23 = cx[:, 2] - cx[:, 1]
+    dx31 = cx[:, 0] - cx[:, 2]
+    dy12 = cy[:, 1] - cy[:, 0]
+    dy23 = cy[:, 2] - cy[:, 1]
+    dy31 = cy[:, 0] - cy[:, 2]
     g1 = cx[:, 0] ** 2 + cy[:, 0] ** 2 - r[:, 0] ** 2
     g2 = cx[:, 1] ** 2 + cy[:, 1] ** 2 - r[:, 1] ** 2
     g3 = cx[:, 2] ** 2 + cy[:, 2] ** 2 - r[:, 2] ** 2
@@ -592,13 +686,20 @@ def face_gate_radius_batch(coords, radii, epsilon=1e-6):
     q_coef = bb * dxv + dd * dyv + denom * drv
     r_coef = dxv * dxv + dyv * dyv - drv * drv
     disc = q_coef * q_coef - p_coef * r_coef
-    ok3 = (np.abs(det123) >= epsilon) & (np.abs(denom) >= epsilon) & (np.abs(p_coef) >= epsilon) & (disc >= 0)
+    ok3 = (
+        (np.abs(det123) >= epsilon)
+        & (np.abs(denom) >= epsilon)
+        & (np.abs(p_coef) >= epsilon)
+        & (disc >= 0)
+    )
     sqrt3 = np.sqrt(np.clip(disc, 0.0, None))
     p_safe = np.where(np.abs(p_coef) < epsilon, 1.0, p_coef)
     den_safe = np.where(np.abs(denom) < epsilon, 1.0, denom)
     for sign in (-1.0, 1.0):
         root = (q_coef + sign * sqrt3) / p_safe
-        center = np.stack([(aa + bb * root) / den_safe, (cc + dd * root) / den_safe], axis=1)
+        center = np.stack(
+            [(aa + bb * root) / den_safe, (cc + dd * root) / den_safe], axis=1
+        )
         keep = ok3 & (root > epsilon)
         candidates.append(np.where(keep[:, None], center, np.nan))
         kinds.append(0)
@@ -615,8 +716,11 @@ def face_gate_radius_batch(coords, radii, epsilon=1e-6):
             ra, rb = r[:, pa], r[:, pb]
             diff = ca - cb
             linear = np.einsum('pi,pi->p', direction, diff)
-            const = (-2 * np.einsum('pi,pi->p', q0, diff)
-                     + (np.einsum('pi,pi->p', ca, ca) - np.einsum('pi,pi->p', cb, cb)) - (ra * ra - rb * rb))
+            const = (
+                -2 * np.einsum('pi,pi->p', q0, diff)
+                + (np.einsum('pi,pi->p', ca, ca) - np.einsum('pi,pi->p', cb, cb))
+                - (ra * ra - rb * rb)
+            )
             neq = np.abs(ra - rb) > epsilon
             rad = np.where(neq, ra - rb, 1.0)
             alpha = -linear / rad
@@ -630,17 +734,21 @@ def face_gate_radius_batch(coords, radii, epsilon=1e-6):
                 t = troots[:, k]
                 R = alpha * t + beta
                 center = q0 + t[:, None] * direction
-                candidates.append(np.where((neq & (R > epsilon))[:, None], center, np.nan))
+                candidates.append(
+                    np.where((neq & (R > epsilon))[:, None], center, np.nan)
+                )
                 kinds.append(1)
             lin_ok = (~neq) & (np.abs(linear) >= epsilon)
             l_safe = np.where(np.abs(linear) < epsilon, 1.0, linear)
             t = const / (2.0 * l_safe)
             center = q0 + t[:, None] * direction
             R = np.linalg.norm(center - ca, axis=1) - ra
-            candidates.append(np.where((lin_ok & (R > epsilon))[:, None], center, np.nan))
+            candidates.append(
+                np.where((lin_ok & (R > epsilon))[:, None], center, np.nan)
+            )
             kinds.append(1)
 
-    C = np.stack(candidates, axis=1)                # (P, K, 2)
+    C = np.stack(candidates, axis=1)  # (P, K, 2)
     code = np.asarray(kinds)
     # point-in-triangle (barycentric, matches _point_in_triangle_2d)
     v0 = (c3 - c1)[:, None, :]
@@ -655,10 +763,17 @@ def face_gate_radius_batch(coords, radii, epsilon=1e-6):
     bary_safe = np.where(np.abs(bary_den) < epsilon, 1.0, bary_den)
     bu = (dot11 * dot02 - dot01 * dot12) / bary_safe
     bv = (dot00 * dot12 - dot01 * dot02) / bary_safe
-    inside = (bu >= -epsilon) & (bv >= -epsilon) & (bu + bv <= 1.0 + epsilon) & (np.abs(bary_den) >= epsilon)
+    inside = (
+        (bu >= -epsilon)
+        & (bv >= -epsilon)
+        & (bu + bv <= 1.0 + epsilon)
+        & (np.abs(bary_den) >= epsilon)
+    )
     dist = np.linalg.norm(C[:, :, None, :] - pts[:, None, :, :], axis=3) - r[:, None, :]
     clearance = dist.min(axis=2)
-    clearance = np.where(inside & np.isfinite(clearance) & ~degenerate[:, None], clearance, -np.inf)
+    clearance = np.where(
+        inside & np.isfinite(clearance) & ~degenerate[:, None], clearance, -np.inf
+    )
     best = np.argmax(clearance, axis=1)
     rows = np.arange(P)
     radius = clearance[rows, best]

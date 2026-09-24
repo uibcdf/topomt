@@ -1,6 +1,6 @@
 import re
-from pathlib import Path
-from typing import Pattern, Any
+from typing import Any, Pattern
+
 
 def format_to_regex(format: str) -> Pattern[str]:
     """Convert a format-string-like template into a regex with named groups.
@@ -13,16 +13,16 @@ def format_to_regex(format: str) -> Pattern[str]:
     parts: list[str] = []
     i = 0
     while i < len(format):
-        if format[i] == "{":
-            j = format.index("}", i)
-            field_name = format[i+1:j].strip()
+        if format[i] == '{':
+            j = format.index('}', i)
+            field_name = format[i + 1 : j].strip()
             # grupo no codicioso con nombre
-            parts.append(f"(?P<{field_name}>.+?)")
+            parts.append(f'(?P<{field_name}>.+?)')
             i = j + 1
         else:
             parts.append(re.escape(format[i]))
             i += 1
-    regex = "^" + "".join(parts) + "$"
+    regex = '^' + ''.join(parts) + '$'
     return re.compile(regex)
 
 
@@ -30,17 +30,19 @@ def atom_label_from_format(format: str, context: dict[str, Any]) -> str:
     """Render a string from a template like '{atom_id}-{atom_name}'."""
     return format.format(**context)
 
+
 def parse_atom_label(atom_label: str, format: str) -> dict[str, str]:
     """Parse a string using the given template and return the captured fields."""
     pattern = format_to_regex(format)
     m = pattern.match(atom_label)
     if not m:
-        raise ValueError(
-            f'String {atom_label!r} does not match template {format!r}'
-        )
+        raise ValueError(f'String {atom_label!r} does not match template {format!r}')
     return m.groupdict()
 
-def parse_list_of_atom_labels(list_of_atom_labels: list[str], format: str, output_type: str = 'list of dicts'):
+
+def parse_list_of_atom_labels(
+    list_of_atom_labels: list[str], format: str, output_type: str = 'list of dicts'
+):
     """Parse many strings with the same template.
 
     Parameters
@@ -64,7 +66,9 @@ def parse_list_of_atom_labels(list_of_atom_labels: list[str], format: str, outpu
     for atom_label in list_of_atom_labels:
         m = pattern.match(atom_label)
         if not m:
-            raise ValueError(f"String {atom_label!r} does not match template {format!r}")
+            raise ValueError(
+                f'String {atom_label!r} does not match template {format!r}'
+            )
         results.append(m.groupdict())
 
     if output_type == 'list of dicts':
@@ -76,5 +80,6 @@ def parse_list_of_atom_labels(list_of_atom_labels: list[str], format: str, outpu
                 dict_of_lists.setdefault(key, []).append(value)
         return dict_of_lists
     else:
-        raise ValueError("output_type must be either 'dict of lists' or 'list of dicts'")
-
+        raise ValueError(
+            "output_type must be either 'dict of lists' or 'list of dicts'"
+        )

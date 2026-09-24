@@ -1,15 +1,19 @@
 """Generate a qualitative DFND domain snapshot for small real systems."""
 
 import argparse
-import tempfile
 import sys
+import tempfile
 import time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
+from devtools.dfnd.run_probe_sweep import (
+    DEFAULT_DATA_DIRS,
+    DEFAULT_SYSTEMS,
+    _resolve_input,
+)
 from topomt.dfnd.graph import DelaunayFlowNetwork
-from devtools.dfnd.run_probe_sweep import DEFAULT_DATA_DIRS, DEFAULT_SYSTEMS, _resolve_input
 
 
 def _family_counts(domains):
@@ -103,7 +107,7 @@ def write_markdown(records, output_path, selection, probe_radius):
     for record in records:
         lines.extend(
             [
-                f"### {record['system_id']}",
+                f'### {record["system_id"]}',
                 '',
                 '| rank | id | family | nodes | resident | connectors | external_links | atoms | volume_solvent_estimate | path_capacity_min | flags |',
                 '| ---: | ---: | --- | ---: | ---: | ---: | ---: | ---: | ---: | --- | --- |',
@@ -111,7 +115,9 @@ def write_markdown(records, output_path, selection, probe_radius):
         )
         for rank, domain in enumerate(record['top_domains'], start=1):
             path_capacity = domain['path_capacity_min']
-            path_capacity_text = '-' if path_capacity is None else f'{path_capacity:.3f}'
+            path_capacity_text = (
+                '-' if path_capacity is None else f'{path_capacity:.3f}'
+            )
             flags = ','.join(domain['flags']) if domain['flags'] else '-'
             lines.append(
                 '| {rank} | {id} | {family} | {n_nodes} | {n_resident_nodes} | {n_transit_connector_nodes} | {n_external_links} | {n_atoms} | {volume_solvent_estimate:.3f} | {path_capacity} | {flags_text} |'.format(
@@ -139,14 +145,20 @@ def write_markdown(records, output_path, selection, probe_radius):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('systems', nargs='*', default=list(DEFAULT_SYSTEMS))
-    parser.add_argument('--data-dir', dest='data_dirs', action='append', type=Path, default=None)
-    parser.add_argument('--selection', default="molecule_type in ['protein', 'peptide']")
+    parser.add_argument(
+        '--data-dir', dest='data_dirs', action='append', type=Path, default=None
+    )
+    parser.add_argument(
+        '--selection', default="molecule_type in ['protein', 'peptide']"
+    )
     parser.add_argument('--probe-radius', type=float, default=1.4)
     parser.add_argument('--top-n', type=int, default=5)
     parser.add_argument('--output', type=Path, default=None)
     args = parser.parse_args()
 
-    data_dirs = args.data_dirs if args.data_dirs is not None else list(DEFAULT_DATA_DIRS)
+    data_dirs = (
+        args.data_dirs if args.data_dirs is not None else list(DEFAULT_DATA_DIRS)
+    )
     records = run_snapshot(
         args.systems,
         data_dirs,

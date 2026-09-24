@@ -1,11 +1,10 @@
-from pathlib import Path
 import shutil
-import tempfile
+from pathlib import Path
 
 import pytest
+
 import topomt as tmt
 from topomt import pyunitwizard as puw
-
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 FP_3LKF_PDB = REPO_ROOT / 'topomt' / 'data' / 'fpocket4' / 'sample' / '3LKF.pdb'

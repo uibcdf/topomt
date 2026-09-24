@@ -182,12 +182,22 @@ def test_get_topography_dfnd_smoke_with_real_small_pdb():
         source_link = external_links_by_key[mouth.external_link_key]
         assert mouth.external_link_record is source_link
         assert mouth.external_link_id == source_link['external_link_id']
-        assert mouth.external_link_support_key == source_link['external_link_support_key']
+        assert (
+            mouth.external_link_support_key == source_link['external_link_support_key']
+        )
         assert mouth.face_ids == source_link['face_ids']
         assert mouth.tetrahedron_ids == source_link['tetrahedron_ids']
         assert mouth.faces == source_link['faces']
         assert mouth.flags == source_link['flags']
-        assert puw.get_value(mouth.area, to_unit='nm**2') == source_link['area_geometric']
-        assert puw.get_value(mouth.R_gate_min, to_unit='nm') == source_link['R_gate_min']
-        assert puw.get_value(mouth.R_gate_mean, to_unit='nm') == source_link['R_gate_mean']
-        assert puw.get_value(mouth.R_gate_max, to_unit='nm') == source_link['R_gate_max']
+        assert (
+            puw.get_value(mouth.area, to_unit='nm**2') == source_link['area_geometric']
+        )
+        assert (
+            puw.get_value(mouth.R_gate_min, to_unit='nm') == source_link['R_gate_min']
+        )
+        assert (
+            puw.get_value(mouth.R_gate_mean, to_unit='nm') == source_link['R_gate_mean']
+        )
+        assert (
+            puw.get_value(mouth.R_gate_max, to_unit='nm') == source_link['R_gate_max']
+        )

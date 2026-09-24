@@ -1,11 +1,10 @@
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pytest
 
 from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
-
 
 UPSTREAM_ROOT = Path('/home/diego/repos@others/pycasta/src/pycasta')
 BOUND_DIR = UPSTREAM_ROOT / 'data' / 'bounded'

@@ -8,7 +8,9 @@ from topomt.tools.geometry.primitives import triangle_area
 from topomt.tools.tessellation import mouth_area_from_faces
 
 
-def component_center(simplex_centers: np.ndarray, simplex_indices: list[int]) -> np.ndarray:
+def component_center(
+    simplex_centers: np.ndarray, simplex_indices: list[int]
+) -> np.ndarray:
     """Return the centroid of a simplex component."""
 
     if not simplex_indices:
@@ -24,7 +26,9 @@ def component_volume(simplex_volumes: np.ndarray, simplex_indices: list[int]) ->
     return float(np.sum(simplex_volumes[simplex_indices]))
 
 
-def component_area(atom_coordinates: np.ndarray, faces: list[tuple[int, int, int]]) -> float:
+def component_area(
+    atom_coordinates: np.ndarray, faces: list[tuple[int, int, int]]
+) -> float:
     """Return the boundary area of a feature from its triangular faces."""
 
     if not faces:
@@ -37,7 +41,9 @@ def component_area(atom_coordinates: np.ndarray, faces: list[tuple[int, int, int
     return float(total)
 
 
-def mouth_area(atom_coordinates: np.ndarray, faces: list[tuple[int, int, int]]) -> float:
+def mouth_area(
+    atom_coordinates: np.ndarray, faces: list[tuple[int, int, int]]
+) -> float:
     """Return the area of a mouth defined by triangular face triples."""
 
     if not faces:
@@ -45,7 +51,9 @@ def mouth_area(atom_coordinates: np.ndarray, faces: list[tuple[int, int, int]]) 
     return float(mouth_area_from_faces(list(faces), atom_coordinates))
 
 
-def mouth_perimeter(atom_coordinates: np.ndarray, faces: list[tuple[int, int, int]]) -> float:
+def mouth_perimeter(
+    atom_coordinates: np.ndarray, faces: list[tuple[int, int, int]]
+) -> float:
     """Return the perimeter of a mouth triangulation.
 
     The perimeter is the sum of boundary edges of the mouth patch, not the sum
@@ -70,5 +78,7 @@ def mouth_perimeter(atom_coordinates: np.ndarray, faces: list[tuple[int, int, in
     for (source, target), count in edge_counter.items():
         if count != 1:
             continue
-        total += float(np.linalg.norm(atom_coordinates[source] - atom_coordinates[target]))
+        total += float(
+            np.linalg.norm(atom_coordinates[source] - atom_coordinates[target])
+        )
     return float(total)

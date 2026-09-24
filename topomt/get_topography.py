@@ -10,12 +10,19 @@ from ._private.smonitor import signal
 from .topography.Topography import Topography
 
 
-@signal(tags=["api", "topography"])
+@signal(tags=['api', 'topography'])
 @arg_digest()
-def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: str = 'all',
-                   structure_indices: int | list[int] = 0, syntax: str = 'MolSysMT',
-                   engine: str | None = None, structure_index: int | list[int] | None = None,
-                   skip_digestion: bool = False, **kwargs) -> Topography:
+def get_topography(
+    molecular_system: Any,
+    method: str = 'pocketeer',
+    selection: str = 'all',
+    structure_indices: int | list[int] = 0,
+    syntax: str = 'MolSysMT',
+    engine: str | None = None,
+    structure_index: int | list[int] | None = None,
+    skip_digestion: bool = False,
+    **kwargs,
+) -> Topography:
     """
     Generate a Topography object from a molecular system using a specified method.
     """
@@ -27,17 +34,31 @@ def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: 
         structure_indices = structure_index
 
     method_lower = method.lower()
-    
+
     if method_lower == 'pocketeer':
-        topo = Topography(molecular_system=molecular_system, selection=selection, structure_indices=structure_indices)
+        topo = Topography(
+            molecular_system=molecular_system,
+            selection=selection,
+            structure_indices=structure_indices,
+        )
         topo = _run_pocketeer(topo, **kwargs)
 
     elif method_lower in ['fpocket', 'fpocket4']:
         from .third_party.fpocket._native_impl import fpocket4
-        topo = fpocket4(molecular_system, selection=selection, structure_indices=structure_indices, **kwargs)
+
+        topo = fpocket4(
+            molecular_system,
+            selection=selection,
+            structure_indices=structure_indices,
+            **kwargs,
+        )
 
     elif method_lower == 'alphaspace2':
-        topo = Topography(molecular_system=molecular_system, selection=selection, structure_indices=structure_indices)
+        topo = Topography(
+            molecular_system=molecular_system,
+            selection=selection,
+            structure_indices=structure_indices,
+        )
         topo = _run_alphaspace2(topo, **kwargs)
 
     elif method_lower == 'castp':
@@ -45,7 +66,11 @@ def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: 
         server = kwargs.pop('server', None)
 
         if str(backend).lower() == 'native' and server is None:
-            topo = Topography(molecular_system=molecular_system, selection=selection, structure_indices=structure_indices)
+            topo = Topography(
+                molecular_system=molecular_system,
+                selection=selection,
+                structure_indices=structure_indices,
+            )
             topo = _run_castp(topo, **kwargs)
         else:
             from .third_party.castp.api import get_topography as get_castp_topography
@@ -84,7 +109,11 @@ def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: 
         )
 
     elif method_lower == 'pycasta':
-        topo = Topography(molecular_system=molecular_system, selection=selection, structure_indices=structure_indices)
+        topo = Topography(
+            molecular_system=molecular_system,
+            selection=selection,
+            structure_indices=structure_indices,
+        )
         topo = _run_pycasta(topo, **kwargs)
 
     elif method_lower == 'dfnd':
@@ -106,6 +135,7 @@ def get_topography(molecular_system: Any, method: str = 'pocketeer', selection: 
 
     return topo
 
+
 def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
     implementation = kwargs.pop('implementation', 'native').lower()
     if implementation not in {'wrapper', 'native', 'topomt'}:
@@ -120,6 +150,7 @@ def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
         structure_indices=topo.structure_indices,
         **kwargs,
     )
+
 
 def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topography:
     implementation = kwargs.pop('implementation', 'native').lower()
@@ -168,9 +199,13 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
                 volume=puw.quantity(pocket_record['volume'], 'nm**3'),
                 score=pocket_record['score'],
                 source='alphaspace2',
-                source_id=f"alphaspace2:{pocket_record['pocket_index']}",
-                alpha_sphere_centers=puw.quantity(pocket_record['alpha_sphere_centers'], 'nm'),
-                alpha_sphere_radii=puw.quantity(pocket_record['alpha_sphere_radii'], 'nm'),
+                source_id=f'alphaspace2:{pocket_record["pocket_index"]}',
+                alpha_sphere_centers=puw.quantity(
+                    pocket_record['alpha_sphere_centers'], 'nm'
+                ),
+                alpha_sphere_radii=puw.quantity(
+                    pocket_record['alpha_sphere_radii'], 'nm'
+                ),
                 beta_centers=puw.quantity(pocket_record['beta_centers'], 'nm'),
                 beta_scores=pocket_record['beta_scores'],
                 nonpolar_volume=puw.quantity(pocket_record['nonpolar_volume'], 'nm**3'),
@@ -181,7 +216,9 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
 
         return topo
 
-    atom_coords = msm.get(topo.molecular_system, selection=atom_indices, coordinates=True)[0]
+    atom_coords = msm.get(
+        topo.molecular_system, selection=atom_indices, coordinates=True
+    )[0]
     atom_coords = puw.get_value(atom_coords, to_unit='nm')
     tree = cKDTree(atom_coords)
 
@@ -191,7 +228,9 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
 
         cluster_vertices = vertices[cluster]
         cluster_radii = radii[cluster]
-        centroid = np.mean(cluster_vertices, axis=0) if len(cluster_vertices) > 0 else None
+        centroid = (
+            np.mean(cluster_vertices, axis=0) if len(cluster_vertices) > 0 else None
+        )
 
         involved_atoms = set()
         for vertex, radius in zip(cluster_vertices, cluster_radii):
@@ -211,6 +250,7 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
         topo.add_feature(pocket_feature)
 
     return topo
+
 
 def _run_castp(topo: Topography, **kwargs) -> Topography:
     from .third_party.castp._native_impl import castp
@@ -241,9 +281,7 @@ def _run_castp(topo: Topography, **kwargs) -> Topography:
                 np.asarray(record['center']) / 10.0, 'nm'
             )
         if 'area' in record and record['area'] is not None:
-            parent_feature.area = puw.quantity(
-                float(record['area']) / 100.0, 'nm**2'
-            )
+            parent_feature.area = puw.quantity(float(record['area']) / 100.0, 'nm**2')
         if 'volume' in record and record['volume'] is not None:
             parent_feature.volume = puw.quantity(
                 float(record['volume']) / 1000.0, 'nm**3'
@@ -273,13 +311,12 @@ def _run_castp(topo: Topography, **kwargs) -> Topography:
                 atom_indices=sorted(mouth.get('atom_indices', [])),
                 source='castp',
                 source_id=f'{source_id}:mouth:{mouth["id"]}',
-                area=puw.quantity(
-                    float(mouth.get('area', 0.0)) / 100.0, 'nm**2'
-                ),
+                area=puw.quantity(float(mouth.get('area', 0.0)) / 100.0, 'nm**2'),
             )
             topo.connect_features(mouth_feature_id, parent_feature_id)
 
     return topo
+
 
 def _run_pycasta(topo: Topography, **kwargs) -> Topography:
     implementation = kwargs.pop('implementation', 'native').lower()

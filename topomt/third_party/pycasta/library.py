@@ -1,10 +1,11 @@
-from pathlib import Path
 import tempfile
+from pathlib import Path
 
 import numpy as np
 from scipy.spatial import Delaunay
 
-from topomt import Topography, pyunitwizard as puw
+from topomt import Topography
+from topomt import pyunitwizard as puw
 from topomt.features import Pocket
 from topomt.third_party._common import import_upstream_module, prepare_wrapper_input_pdb
 
@@ -51,7 +52,9 @@ def get_topography(
 
         for pocket_index, tetra_indices in enumerate(result.get('ranked_pockets', [])):
             tetra_indices = np.asarray(tetra_indices, dtype=int)
-            tetra_indices = tetra_indices[(tetra_indices >= 0) & (tetra_indices < len(simplices))]
+            tetra_indices = tetra_indices[
+                (tetra_indices >= 0) & (tetra_indices < len(simplices))
+            ]
             if tetra_indices.size == 0:
                 continue
 

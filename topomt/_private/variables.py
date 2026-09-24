@@ -1,8 +1,7 @@
 import numpy as np
-from topomt import pyunitwizard as puw
+
 
 def is_all(variable):
-
     """Checks if the value of a variable is equal to 'all', 'All', or 'ALL'.
 
     The method returns True if the value of a variable is equal to 'all', 'All', or 'ALL'.
@@ -37,12 +36,14 @@ def is_all(variable):
 
     return False
 
+
 def is_iterable(variable):
 
     if isinstance(variable, (list, tuple, set, np.ndarray)):
         return True
 
     return False
+
 
 def is_iterable_of_iterables(variable):
 
@@ -51,12 +52,14 @@ def is_iterable_of_iterables(variable):
 
     return False
 
+
 def is_iterable_of_iterables_of_iterables(variable):
 
     if isinstance(variable, (list, tuple, set, np.ndarray)):
         return all([is_iterable_of_iterables(ii) for ii in variable])
 
     return False
+
 
 def is_next(variable):
 
@@ -65,13 +68,14 @@ def is_next(variable):
 
     return False
 
+
 def is_iterable_of_pairs(variable):
 
     output = False
 
     if isinstance(variable, np.ndarray):
-        if len(variable.shape)==2:
-            if variable.shape[1]==2:
+        if len(variable.shape) == 2:
+            if variable.shape[1] == 2:
                 output = True
     elif isinstance(variable, (list, tuple, set)):
         for ii in variable:
@@ -79,17 +83,18 @@ def is_iterable_of_pairs(variable):
             if isinstance(ii, (list, tuple, set)):
                 if len(ii) == 2:
                     output = True
-            if output == False:
+            if not output:
                 break
 
     return output
+
 
 def is_iterable_of_integers(variable):
 
     output = False
 
     if isinstance(variable, np.ndarray):
-        if len(variable.shape)==1:
+        if len(variable.shape) == 1:
             if np.issubdtype(variable.dtype, np.integer):
                 output = True
     elif isinstance(variable, (list, tuple, set)):
@@ -97,4 +102,3 @@ def is_iterable_of_integers(variable):
             output = True
 
     return output
-

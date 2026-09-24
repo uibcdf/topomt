@@ -14,12 +14,12 @@ def _parse_level(level: int | str) -> int:
 
 
 def setup_logging(
-    level: int | str = "WARNING",
+    level: int | str = 'WARNING',
     *,
     stream: IO | None = None,
     capture_warnings: bool = True,
     simplify_warning_format: bool = True,
-    logger_name: str = "topomt",
+    logger_name: str = 'topomt',
 ) -> logging.Logger:
     """
     Configure TopoMT logging and (optionally) capture Python warnings.
@@ -56,7 +56,7 @@ def setup_logging(
         # EXACT desired format for warnings:
         # "TOPOMT WARNING | <Category>: <message>"
         # (For normal logs, <Category> won't appear, but the prefix still matches.)
-        formatter = logging.Formatter("TOPOMT %(levelname)s | %(message)s")
+        formatter = logging.Formatter('TOPOMT %(levelname)s | %(message)s')
         stream_handler.setFormatter(formatter)
         logger.addHandler(stream_handler)
 
@@ -66,6 +66,7 @@ def setup_logging(
         # formatting is process-global, so unrelated libraries keep the
         # formatter that was active before TopoMT setup.
         if simplify_warning_format:
+
             def _simple_formatwarning(message, category, filename, lineno, line=None):
                 try:
                     origin = Path(filename).resolve()
@@ -73,15 +74,18 @@ def setup_logging(
                 except Exception:
                     is_topomt_warning = False
                 if is_topomt_warning:
-                    return f"{category.__name__}: {message}\n"
-                return _ORIGINAL_FORMATWARNING(message, category, filename, lineno, line)
+                    return f'{category.__name__}: {message}\n'
+                return _ORIGINAL_FORMATWARNING(
+                    message, category, filename, lineno, line
+                )
+
             warnings.formatwarning = _simple_formatwarning
 
         logging.captureWarnings(True)
 
-        pyw = logging.getLogger("py.warnings")
+        pyw = logging.getLogger('py.warnings')
         pyw.setLevel(lvl)
-        pyw.handlers.clear()       # avoid duplicate handlers
+        pyw.handlers.clear()  # avoid duplicate handlers
         pyw.addHandler(stream_handler)
         pyw.propagate = False
 

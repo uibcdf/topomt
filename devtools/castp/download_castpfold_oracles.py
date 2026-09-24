@@ -9,7 +9,6 @@ from urllib.request import urlopen
 
 import topomt
 
-
 DEFAULT_LIST_FILE = Path('topomt/data/CASTpFold_server/list_pycast_pdbs.md')
 DEFAULT_OUTPUT_DIR = Path('topomt/data/CASTpFold_server')
 DEFAULT_PDB_CACHE_DIR = Path('/tmp/topomt_castpfold_pdb_cache')
@@ -63,7 +62,9 @@ def download_pdb_from_rcsb(
     if pdb_path.exists() and pdb_path.stat().st_size > 0:
         return pdb_path
 
-    with urlopen(RCSB_PDB_URL.format(pdb_id=pdb_id.upper()), timeout=timeout) as response:
+    with urlopen(
+        RCSB_PDB_URL.format(pdb_id=pdb_id.upper()), timeout=timeout
+    ) as response:
         pdb_path.write_bytes(response.read())
     return pdb_path
 
@@ -142,7 +143,9 @@ def main() -> None:
     parser.add_argument('--output-dir', type=Path, default=DEFAULT_OUTPUT_DIR)
     parser.add_argument('--pdb-cache-dir', type=Path, default=DEFAULT_PDB_CACHE_DIR)
     parser.add_argument('--ids', nargs='*', help='Explicit PDB IDs to download.')
-    parser.add_argument('--pending', action='store_true', help='Skip ZIPs already present.')
+    parser.add_argument(
+        '--pending', action='store_true', help='Skip ZIPs already present.'
+    )
     parser.add_argument('--limit', type=int, default=None)
     parser.add_argument('--start-after', default=None)
     parser.add_argument('--overwrite', action='store_true')

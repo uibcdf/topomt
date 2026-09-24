@@ -1,13 +1,31 @@
-from .BaseFeature import BaseFeature
 import copy
 
-class Feature0D(BaseFeature):
+from .BaseFeature import BaseFeature
 
-    def __init__(self, feature_id=None, feature_type='feature_0d', atom_indices=None,
-                 atom_labels=None, atom_label_format=None, source=None, source_id=None, topography=None, **kwargs):
-        super().__init__(feature_id=feature_id, feature_type=feature_type, atom_indices=atom_indices,
-                         atom_labels=atom_labels, atom_label_format=atom_label_format, source=source, source_id=source_id,
-                         topography=topography)
+
+class Feature0D(BaseFeature):
+    def __init__(
+        self,
+        feature_id=None,
+        feature_type='feature_0d',
+        atom_indices=None,
+        atom_labels=None,
+        atom_label_format=None,
+        source=None,
+        source_id=None,
+        topography=None,
+        **kwargs,
+    ):
+        super().__init__(
+            feature_id=feature_id,
+            feature_type=feature_type,
+            atom_indices=atom_indices,
+            atom_labels=atom_labels,
+            atom_label_format=atom_label_format,
+            source=source,
+            source_id=source_id,
+            topography=topography,
+        )
 
         self.surfaces = set()
 
@@ -40,7 +58,9 @@ class Feature0D(BaseFeature):
     def add_connected_surface(self, feature_or_id: 'BaseFeature | str'):
 
         if self._topography is None:
-            raise ValueError('Topography is not set for this feature. Cannot add connected surface.')
+            raise ValueError(
+                'Topography is not set for this feature. Cannot add connected surface.'
+            )
 
         self._topography.connect_features(self.feature_id, feature_or_id)
 

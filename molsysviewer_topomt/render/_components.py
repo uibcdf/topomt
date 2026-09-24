@@ -257,6 +257,8 @@ def _palette_color_override(color_palette, component):
         if bucket in buckets and selector in color_palette:
             return color_palette[selector]
     return None
+
+
 _COMPONENT_REPRESENTATIONS = {
     'auto',
     'tetrahedra',
@@ -431,7 +433,10 @@ def show_dfnd_legend(view, topography=None, *, families=None):
                 buckets.extend(sorted(_SELECTOR_BUCKETS.get(f, ())))
 
     items = [
-        {'label': _BUCKET_LABEL.get(b, str(b)), 'color': _COLOR_BY_BUCKET.get(b, 0x888888)}
+        {
+            'label': _BUCKET_LABEL.get(b, str(b)),
+            'color': _COLOR_BY_BUCKET.get(b, 0x888888),
+        }
         for b in buckets
     ]
     view.scene.set_legend(items)
@@ -476,9 +481,8 @@ def show_dfnd_pharmacophore(
         # the chemistry of the FULL interaction surface (lining + past-beach kissed
         # atoms), not just the residence lining -- the chemical complement of
         # accessible_atom_indices (coast/shore/beach; chemistry_overlay_analysis.md).
-        surface_atoms = (
-            getattr(comp, 'accessible_atom_indices', None)
-            or getattr(comp, 'atom_indices', None)
+        surface_atoms = getattr(comp, 'accessible_atom_indices', None) or getattr(
+            comp, 'atom_indices', None
         )
         lining = []
         for atom in indices_in_space(surface_atoms, space=MOLECULAR_SYSTEM):
@@ -503,7 +507,6 @@ def show_dfnd_pharmacophore(
         layer_tag=tag_prefix,
         skip_digestion=True,
     )
-
 
 
 def show_dfnd_spikes(
@@ -553,7 +556,9 @@ def show_dfnd_spikes(
     directions = directions / lengths[:, None]
 
     selected_convexity = convexity[selected]
-    max_convexity = float(np.max(selected_convexity)) if len(selected_convexity) else 1.0
+    max_convexity = (
+        float(np.max(selected_convexity)) if len(selected_convexity) else 1.0
+    )
     if max_convexity <= 0.0:
         scales = np.ones(len(selected))
     else:
@@ -692,6 +697,7 @@ def show_dfnd_ridge_lines(
         skip_digestion=True,
     )
 
+
 def show_dfnd_convexity(view, topography=None, *, radius=0.8, palette='coolwarm'):
     """Colour the molecular surface by local convexity (ridges hot, valleys cold)
     via ``view.whole.set_color_by_values``. Convexity is computed per atom from the
@@ -737,10 +743,13 @@ def _affinity_color_for_scalars(hydrophobicity, charge):
     return _AFFINITY_HYDROPHOBIC if hydrophobicity > 0 else _AFFINITY_POLAR
 
 
-
 def _semantic_face_filters(representation: str):
     if representation == 'permeable_faces':
-        return {'permeability': {'permeable'}, 'roles': None, 'color_mode': 'permeability'}
+        return {
+            'permeability': {'permeable'},
+            'roles': None,
+            'color_mode': 'permeability',
+        }
     if representation == 'impermeable_faces':
         return {
             'permeability': {'non_permeable'},
@@ -784,19 +793,14 @@ def _component_face_payloads(topography, selected_components, representation: st
             permeability=permeability,
             mode=filters['color_mode'],
         )
-        label_by_face_id[face_id] = _dfnd_face_label(
-            face, face_id, semantics=semantics
-        )
+        label_by_face_id[face_id] = _dfnd_face_label(face, face_id, semantics=semantics)
     return color_by_face_id, label_by_face_id
-
-
 
 
 def _component_depth_values(component, geometry):
     depth_by_tetrahedron = getattr(component, 'topological_depth', {}) or {}
     return [
-        float(depth_by_tetrahedron.get(int(ref.entity_id), 0))
-        for ref in geometry.refs
+        float(depth_by_tetrahedron.get(int(ref.entity_id), 0)) for ref in geometry.refs
     ]
 
 
@@ -845,7 +849,6 @@ def _interface_link_geometry(topography, selected_components) -> SegmentGeometry
             )
         )
     return SegmentGeometry(tuple(starts), tuple(ends), 'nm', tuple(refs))
-
 
 
 def _ordered_interface_points(points: list[tuple[float, float, float]]) -> list[int]:
@@ -936,7 +939,9 @@ def _dry_depth_color(depth, max_depth) -> int:
         return _OKABE_ITO['grey']
     if not max_depth or max_depth <= 0:
         return _OKABE_ITO['yellow']
-    return _lerp_color(_OKABE_ITO['yellow'], _OKABE_ITO['vermillion'], depth / max_depth)
+    return _lerp_color(
+        _OKABE_ITO['yellow'], _OKABE_ITO['vermillion'], depth / max_depth
+    )
 
 
 def _dry_depth_by_tetrahedron(selected_components) -> dict[int, int]:
@@ -1017,7 +1022,9 @@ def _dry_face_payloads(topography, selected_components, representation: str):
     return color_by_face_id, label_by_face_id
 
 
-def _component_shape_ellipsoid_payload(topography, component, *, use_resident_nodes=True):
+def _component_shape_ellipsoid_payload(
+    topography, component, *, use_resident_nodes=True
+):
     """Return one PCA ellipsoid payload for a component in nm coordinates.
 
     The ellipsoid is a visual summary of spatial orientation and elongation. It is
@@ -1058,6 +1065,7 @@ def _component_shape_ellipsoid_payload(topography, component, *, use_resident_no
         'eigenvectors': tuple(tuple(float(x) for x in row) for row in vectors),
         'anisotropy': float(anisotropy),
     }
+
 
 def _atom_affinity_colors(molsys):
     """Per-(molsys)atom affinity colour from ``molsysmt.physchem`` (hydrophobicity
@@ -1150,7 +1158,6 @@ def _mouth_cap_face_ids(comp, raw):
         if link is not None:
             face_ids.extend(int(face_id) for face_id in link.get('face_ids', []))
     return face_ids
-
 
 
 def _components_matching(
@@ -1321,6 +1328,7 @@ def show_dfnd_interface_cutaway(
         tag_prefix=tag_prefix,
     )
 
+
 def carve_voids(
     view, topography=None, *, component_ids=None, component_types=(fam.VOID,), fade=0.85
 ):
@@ -1401,7 +1409,10 @@ def show_dfnd_labels(
 
         n_mouths = int(getattr(comp, 'n_mouths', 0) or 0)
         volume = getattr(comp, 'volume_solvent_estimate', None)
-        parts = [str(comp.component_id), _BUCKET_LABEL.get(_render_bucket(comp), 'component')]
+        parts = [
+            str(comp.component_id),
+            _BUCKET_LABEL.get(_render_bucket(comp), 'component'),
+        ]
         if n_mouths:
             parts.append(f'{n_mouths} mouth' + ('s' if n_mouths != 1 else ''))
         if volume:
@@ -1599,7 +1610,9 @@ def _render_dfnd_component_layers(
     representation = _REPRESENTATION_ALIASES.get(representation, representation)
     channel_alias = representation in _CHANNEL_REPRESENTATION_ALIASES
     if channel_alias:
-        representation, alias_pipe_style = _CHANNEL_REPRESENTATION_ALIASES[representation]
+        representation, alias_pipe_style = _CHANNEL_REPRESENTATION_ALIASES[
+            representation
+        ]
         if alias_pipe_style is not None:
             pipe_style = alias_pipe_style
         if component_types == fam.PRIMARY_WET_FAMILIES:
@@ -1881,7 +1894,11 @@ def _render_dfnd_component_layers(
         blob_smoothing = 0.5 if smoothing is None else smoothing
         blob_iso_level = 0.5 if iso_level is None else iso_level
         blob_radius_scale = 0.6 if radius_scale is None else radius_scale
-        clearance = representation in {'clearance_map', 'clearance_wire', 'scalar_isosurface'}
+        clearance = representation in {
+            'clearance_map',
+            'clearance_wire',
+            'scalar_isosurface',
+        }
 
         for comp in selected_components:
             comp_id = comp.component_id
@@ -1904,7 +1921,13 @@ def _render_dfnd_component_layers(
                 tag=tag,
                 layer_tag=tag_prefix,
                 name=f'{name} {comp_id}'
-                + (' clearance' if clearance else ' depth' if representation == 'depth_map' else ''),
+                + (
+                    ' clearance'
+                    if clearance
+                    else ' depth'
+                    if representation == 'depth_map'
+                    else ''
+                ),
                 resolution=blob_resolution,
                 smoothing=blob_smoothing,
                 iso_level=blob_iso_level,
@@ -1916,7 +1939,9 @@ def _render_dfnd_component_layers(
                     if representation == 'depth_map'
                     else None
                 ),
-                color_map='turbo' if clearance or representation == 'depth_map' else None,
+                color_map='turbo'
+                if clearance or representation == 'depth_map'
+                else None,
                 wireframe=representation == 'clearance_wire',
                 skip_digestion=True,
             )
@@ -1984,10 +2009,18 @@ def _render_dfnd_component_layers(
                 else 'smooth'
                 if solid_pipe or ribbon_pipe
                 else 'segments',
-                surface_resolution=0.5 if lumen_pipe and resolution is None else resolution,
-                surface_smoothing=0.75 if lumen_pipe and smoothing is None else smoothing,
-                surface_iso_level=0.5 if lumen_pipe and iso_level is None else iso_level,
-                surface_radius_scale=0.85 if lumen_pipe and radius_scale is None else radius_scale,
+                surface_resolution=0.5
+                if lumen_pipe and resolution is None
+                else resolution,
+                surface_smoothing=0.75
+                if lumen_pipe and smoothing is None
+                else smoothing,
+                surface_iso_level=0.5
+                if lumen_pipe and iso_level is None
+                else iso_level,
+                surface_radius_scale=0.85
+                if lumen_pipe and radius_scale is None
+                else radius_scale,
                 tube_aspect_ratio=0.22 if ribbon_pipe else None,
                 tag=f'{tag_prefix}:{comp_id}',
                 layer_tag=tag_prefix,
@@ -2059,10 +2092,18 @@ def _render_dfnd_component_layers(
                         else 'smooth'
                         if solid_pipe or ribbon_pipe
                         else 'segments',
-                        surface_resolution=0.5 if lumen_pipe and resolution is None else resolution,
-                        surface_smoothing=0.75 if lumen_pipe and smoothing is None else smoothing,
-                        surface_iso_level=0.5 if lumen_pipe and iso_level is None else iso_level,
-                        surface_radius_scale=0.85 if lumen_pipe and radius_scale is None else radius_scale,
+                        surface_resolution=0.5
+                        if lumen_pipe and resolution is None
+                        else resolution,
+                        surface_smoothing=0.75
+                        if lumen_pipe and smoothing is None
+                        else smoothing,
+                        surface_iso_level=0.5
+                        if lumen_pipe and iso_level is None
+                        else iso_level,
+                        surface_radius_scale=0.85
+                        if lumen_pipe and radius_scale is None
+                        else radius_scale,
                         tube_aspect_ratio=0.22 if ribbon_pipe else None,
                         tag=f'{tag_prefix}:{comp_id}-branch-{branch_index}',
                         layer_tag=tag_prefix,
@@ -2237,7 +2278,6 @@ def _render_dfnd_component_layers(
         if not layers:
             return None
         return layers[0] if len(layers) == 1 else layers
-
 
     elif representation == 'mouth_rings':
         for comp in selected_components:
@@ -2526,8 +2566,6 @@ def _render_dfnd_component_layers(
             layer_tag=tag_prefix,
             skip_digestion=True,
         )
-
-
 
     elif representation == 'links':
         geometry = _interface_link_geometry(topography, selected_components)

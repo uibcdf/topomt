@@ -1,10 +1,9 @@
-from pathlib import Path
 import sys
+from pathlib import Path
 
 import pytest
 
 from topomt.third_party.pycasta._native_impl import pycasta
-
 
 UPSTREAM_ROOT = Path('/home/diego/repos@others/pycasta/src/pycasta')
 BOUND_DIR = UPSTREAM_ROOT / 'data' / 'bounded'
@@ -78,4 +77,6 @@ def test_pycasta_matches_upstream_counts_and_volumes_for_small_bounded_examples(
     assert len(pockets) == len(expected_sizes) == len(upstream['ranked_pockets'])
     assert [len(pocket) for pocket in pockets] == expected_sizes
     assert upstream_sizes == expected_sizes
-    assert volumes == pytest.approx([value / 1000.0 for value in upstream['pocket_volumes']])
+    assert volumes == pytest.approx(
+        [value / 1000.0 for value in upstream['pocket_volumes']]
+    )

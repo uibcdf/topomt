@@ -9,5 +9,5 @@ def digest_gate_intrusion_policy(gate_intrusion_policy, caller=None):
         arg_name='gate_intrusion_policy',
         value=gate_intrusion_policy,
         caller=caller,
-        reason="gate_intrusion_policy must be flag_only or block_suspect.",
+        reason='gate_intrusion_policy must be flag_only or block_suspect.',
     )

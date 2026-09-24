@@ -48,7 +48,9 @@ def _mouth_resident_sets(component, external_links_by_id, resident_ids):
         link = external_links_by_id.get(link_id)
         if link is None:
             continue
-        resident_overlap = sorted(t for t in link['tetrahedron_ids'] if t in resident_ids)
+        resident_overlap = sorted(
+            t for t in link['tetrahedron_ids'] if t in resident_ids
+        )
         if not resident_overlap:
             continue
         ranked.append((link.get('area_geometric', 0.0), link_id, resident_overlap))
@@ -63,7 +65,9 @@ def _skeleton_geometry_from_path(raw, component, path, graph):
         [tetra_by_id[t]['R_residence'] for t in path],
         dtype=float,
     )
-    edge_records = [graph[path[index]][path[index + 1]] for index in range(len(path) - 1)]
+    edge_records = [
+        graph[path[index]][path[index + 1]] for index in range(len(path) - 1)
+    ]
     edge_gate_radii = np.array(
         [edge['gate_radius'] for edge in edge_records],
         dtype=float,
@@ -81,8 +85,12 @@ def _skeleton_geometry_from_path(raw, component, path, graph):
         'edge_gate_margins': edge_gate_margins,
         'station_bottleneck_index': int(np.argmin(station_radii)),
         'gate_bottleneck_edge_index': gate_bottleneck_edge_index,
-        'shortest_path_gate_radius_min': float(edge_gate_radii[gate_bottleneck_edge_index]),
-        'shortest_path_gate_margin_min': float(edge_gate_margins[gate_bottleneck_edge_index]),
+        'shortest_path_gate_radius_min': float(
+            edge_gate_radii[gate_bottleneck_edge_index]
+        ),
+        'shortest_path_gate_margin_min': float(
+            edge_gate_margins[gate_bottleneck_edge_index]
+        ),
     }
 
 

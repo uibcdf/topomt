@@ -41,7 +41,9 @@ def _patch_alphaspace2_mdtraj_sasa(upstream):
         else:
             xyz = np.array(
                 np.expand_dims(
-                    np.concatenate((protein_snapshot.xyz[0], cover_atom_coords), axis=0),
+                    np.concatenate(
+                        (protein_snapshot.xyz[0], cover_atom_coords), axis=0
+                    ),
                     axis=0,
                 ),
                 dtype=np.float32,
@@ -63,7 +65,7 @@ def _patch_alphaspace2_mdtraj_sasa(upstream):
             atom_selection_mask,
             out,
         )
-        return out[:, :protein_snapshot.xyz.shape[1]][0]
+        return out[:, : protein_snapshot.xyz.shape[1]][0]
 
     functions_module.getSASA = get_sasa_compat
 
@@ -118,12 +120,18 @@ def get_topography(
             if alpha_indices.size < min_vertices:
                 continue
 
-            lining_local_indices = np.unique(snapshot._alpha_lining[alpha_indices].reshape(-1))
+            lining_local_indices = np.unique(
+                snapshot._alpha_lining[alpha_indices].reshape(-1)
+            )
             atom_indices = selected_atom_indices[lining_local_indices].tolist()
             beta_indices = snapshot._pocket_beta_index_list[pocket_index]
 
-            alpha_centers_nm = np.asarray(snapshot._alpha_xyz[alpha_indices], dtype=float) / 10.0
-            alpha_radii_nm = np.asarray(snapshot._alpha_radii[alpha_indices], dtype=float) / 10.0
+            alpha_centers_nm = (
+                np.asarray(snapshot._alpha_xyz[alpha_indices], dtype=float) / 10.0
+            )
+            alpha_radii_nm = (
+                np.asarray(snapshot._alpha_radii[alpha_indices], dtype=float) / 10.0
+            )
             beta_centers_nm = (
                 np.asarray(snapshot._beta_xyz[beta_indices], dtype=float) / 10.0
                 if len(beta_indices) > 0
@@ -133,7 +141,9 @@ def get_topography(
             topography.add_feature(
                 Pocket(
                     atom_indices=sorted(atom_indices),
-                    center=puw.quantity(np.asarray(pocket.centroid, dtype=float) / 10.0, 'nm'),
+                    center=puw.quantity(
+                        np.asarray(pocket.centroid, dtype=float) / 10.0, 'nm'
+                    ),
                     volume=puw.quantity(float(pocket.space) / 1000.0, 'nm**3'),
                     score=float(pocket.score),
                     source='alphaspace2',
@@ -141,7 +151,9 @@ def get_topography(
                     alpha_sphere_centers=puw.quantity(alpha_centers_nm, 'nm'),
                     alpha_sphere_radii=puw.quantity(alpha_radii_nm, 'nm'),
                     beta_centers=puw.quantity(beta_centers_nm, 'nm'),
-                    nonpolar_volume=puw.quantity(float(pocket.nonpolar_space) / 1000.0, 'nm**3'),
+                    nonpolar_volume=puw.quantity(
+                        float(pocket.nonpolar_space) / 1000.0, 'nm**3'
+                    ),
                     is_contact=bool(pocket.isContact),
                 )
             )

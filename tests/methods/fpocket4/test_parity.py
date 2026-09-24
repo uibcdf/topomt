@@ -1,14 +1,15 @@
 import importlib
-from pathlib import Path
 import shutil
 import tempfile
+from pathlib import Path
 
+import molsysmt as msm
 import numpy as np
 import pytest
-import topomt as tmt
-import molsysmt as msm
-from topomt import pyunitwizard as puw
 
+import topomt as tmt
+from topomt import pyunitwizard as puw
+from topomt.third_party.fpocket._legacy_cli import load_topography_from_fpocket_output
 from topomt.third_party.fpocket._native_impl import (
     ASPH_MAX_SIZE_NM,
     ASPH_MIN_SIZE_NM,
@@ -18,10 +19,11 @@ from topomt.third_party.fpocket._native_impl import (
     _prepare_receptor,
     fpocket4,
 )
-from topomt.third_party.fpocket._legacy_cli import load_topography_from_fpocket_output
-from topomt.third_party.fpocket.parser import _parse_pqr_charge_and_radius, parse_fpocket_output
+from topomt.third_party.fpocket.parser import (
+    _parse_pqr_charge_and_radius,
+    parse_fpocket_output,
+)
 from topomt.third_party.fpocket.runner import run_fpocket
-
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 FP_3LKF_PDB = REPO_ROOT / 'topomt' / 'data' / 'fpocket4' / 'sample' / '3LKF.pdb'
@@ -127,7 +129,9 @@ def test_parse_fpocket_output_keeps_full_precision_of_vert_radius_for_1tcd():
 
 def test_load_topography_from_fpocket_output_maps_atoms_for_3lkf():
 
-    topography = load_topography_from_fpocket_output(FP_3LKF_PDB, FP_3LKF_PDB, FP_3LKF_OUT)
+    topography = load_topography_from_fpocket_output(
+        FP_3LKF_PDB, FP_3LKF_PDB, FP_3LKF_OUT
+    )
 
     assert len(topography) == 7
 
@@ -202,7 +206,9 @@ def _best_native_matches_by_atom_indices(native_topography, wrapper_topography):
     PDB_PARITY_SYSTEMS,
     ids=[item[0] for item in PDB_PARITY_SYSTEMS],
 )
-def test_fpocket4_matches_direct_fpocket_run_for_supported_pdb_inputs(label, source_pdb):
+def test_fpocket4_matches_direct_fpocket_run_for_supported_pdb_inputs(
+    label, source_pdb
+):
 
     topography = fpocket4(source_pdb)
 
@@ -211,7 +217,9 @@ def test_fpocket4_matches_direct_fpocket_run_for_supported_pdb_inputs(label, sou
         local_pdb = tmpdir / source_pdb.name
         shutil.copy2(source_pdb, local_pdb)
         output_dir = run_fpocket(local_pdb, workdir=tmpdir)
-        reference = load_topography_from_fpocket_output(local_pdb, local_pdb, output_dir)
+        reference = load_topography_from_fpocket_output(
+            local_pdb, local_pdb, output_dir
+        )
 
     _assert_topographies_match(topography, reference)
 
@@ -243,7 +251,9 @@ def test_fpocket4_matches_pdb_and_bcif_inputs_when_bcif_is_available(
     DEEP_VALIDATION_FPPOCKET_CASES,
     ids=[item[0] for item in DEEP_VALIDATION_FPPOCKET_CASES],
 )
-@pytest.mark.skip(reason='large-system deep-validation case kept outside the routine battery')
+@pytest.mark.skip(
+    reason='large-system deep-validation case kept outside the routine battery'
+)
 def test_fpocket4_deep_validation_cases(label, source_pdb):
 
     topography = fpocket4(source_pdb)
@@ -253,7 +263,9 @@ def test_fpocket4_deep_validation_cases(label, source_pdb):
         local_pdb = tmpdir / source_pdb.name
         shutil.copy2(source_pdb, local_pdb)
         output_dir = run_fpocket(local_pdb, workdir=tmpdir)
-        reference = load_topography_from_fpocket_output(local_pdb, local_pdb, output_dir)
+        reference = load_topography_from_fpocket_output(
+            local_pdb, local_pdb, output_dir
+        )
 
     _assert_topographies_match(topography, reference)
 
@@ -262,7 +274,9 @@ def test_fpocket4_native_implementation_does_not_require_wrapper(monkeypatch):
     fpocket4_module = importlib.import_module('topomt.third_party.fpocket._native_impl')
 
     def fail_if_called(*args, **kwargs):
-        raise AssertionError('wrapper path should not be used by the native implementation')
+        raise AssertionError(
+            'wrapper path should not be used by the native implementation'
+        )
 
     monkeypatch.setattr(fpocket4_module, 'get_topography_with_fpocket', fail_if_called)
 
@@ -301,7 +315,15 @@ def test_fpocket4_argdigest_normalizes_structure_indices_for_native_path(monkeyp
 
 def test_fpocket4_native_prepare_receptor_keeps_b_factors_for_1atp():
 
-    receptor, atom_indices, coordinates_nm, atom_types, atom_radii_nm, atom_electronegativities, atom_b_factors = _prepare_receptor(
+    (
+        receptor,
+        atom_indices,
+        coordinates_nm,
+        atom_types,
+        atom_radii_nm,
+        atom_electronegativities,
+        atom_b_factors,
+    ) = _prepare_receptor(
         Path(tmt.demo['fpocket']['1ATP.pdb']),
         selection='all',
         structure_indices=0,
@@ -310,23 +332,48 @@ def test_fpocket4_native_prepare_receptor_keeps_b_factors_for_1atp():
 
     assert receptor is not None
     assert atom_b_factors is not None
-    assert len(atom_indices) == len(coordinates_nm) == len(atom_types) == len(atom_radii_nm) == len(atom_electronegativities) == len(atom_b_factors)
+    assert (
+        len(atom_indices)
+        == len(coordinates_nm)
+        == len(atom_types)
+        == len(atom_radii_nm)
+        == len(atom_electronegativities)
+        == len(atom_b_factors)
+    )
 
 
 def test_fpocket4_native_prepare_receptor_excludes_water_and_ions_for_3lkf():
 
-    receptor, atom_indices, coordinates_nm, atom_types, atom_radii_nm, atom_electronegativities, atom_b_factors = _prepare_receptor(
+    (
+        receptor,
+        atom_indices,
+        coordinates_nm,
+        atom_types,
+        atom_radii_nm,
+        atom_electronegativities,
+        atom_b_factors,
+    ) = _prepare_receptor(
         FP_3LKF_PDB,
         selection='all',
         structure_indices=0,
         syntax='MolSysMT',
     )
 
-    group_names = np.array(msm.get(receptor, element='atom', group_name=True), dtype=object)
-    molecule_types = np.array(msm.get(receptor, element='atom', molecule_type=True), dtype=object)
+    group_names = np.array(
+        msm.get(receptor, element='atom', group_name=True), dtype=object
+    )
+    molecule_types = np.array(
+        msm.get(receptor, element='atom', molecule_type=True), dtype=object
+    )
 
     assert receptor is not None
-    assert len(atom_indices) == len(coordinates_nm) == len(atom_types) == len(atom_radii_nm) == len(atom_electronegativities)
+    assert (
+        len(atom_indices)
+        == len(coordinates_nm)
+        == len(atom_types)
+        == len(atom_radii_nm)
+        == len(atom_electronegativities)
+    )
     assert 'H' not in set(atom_types.tolist())
     assert not {'HOH', 'WAT', 'TIP'} & set(group_names.tolist())
     assert not {'water', 'ion'} & set(molecule_types.tolist())
@@ -335,14 +382,24 @@ def test_fpocket4_native_prepare_receptor_excludes_water_and_ions_for_3lkf():
 
 def test_fpocket4_native_prepare_receptor_keeps_whitelisted_small_molecule_for_e15ala():
 
-    receptor, atom_indices, coordinates_nm, atom_types, atom_radii_nm, atom_electronegativities, atom_b_factors = _prepare_receptor(
+    (
+        receptor,
+        atom_indices,
+        coordinates_nm,
+        atom_types,
+        atom_radii_nm,
+        atom_electronegativities,
+        atom_b_factors,
+    ) = _prepare_receptor(
         Path(tmt.demo['fpocket']['E15ALA.pdb']),
         selection='all',
         structure_indices=0,
         syntax='MolSysMT',
     )
 
-    group_names = np.array(msm.get(receptor, element='atom', group_name=True), dtype=object)
+    group_names = np.array(
+        msm.get(receptor, element='atom', group_name=True), dtype=object
+    )
 
     assert receptor is not None
     assert 'HEO' in set(group_names.tolist())
@@ -350,7 +407,15 @@ def test_fpocket4_native_prepare_receptor_keeps_whitelisted_small_molecule_for_e
 
 def test_fpocket4_native_prepare_receptor_matches_upstream_input_count_for_e15ala():
 
-    receptor, atom_indices, coordinates_nm, atom_types, atom_radii_nm, atom_electronegativities, atom_b_factors = _prepare_receptor(
+    (
+        receptor,
+        atom_indices,
+        coordinates_nm,
+        atom_types,
+        atom_radii_nm,
+        atom_electronegativities,
+        atom_b_factors,
+    ) = _prepare_receptor(
         Path(tmt.demo['fpocket']['E15ALA.pdb']),
         selection='all',
         structure_indices=0,
@@ -363,14 +428,26 @@ def test_fpocket4_native_prepare_receptor_matches_upstream_input_count_for_e15al
 
 def test_fpocket4_native_prepare_receptor_excludes_non_whitelisted_small_molecules_for_1atp():
 
-    receptor, atom_indices, coordinates_nm, atom_types, atom_radii_nm, atom_electronegativities, atom_b_factors = _prepare_receptor(
+    (
+        receptor,
+        atom_indices,
+        coordinates_nm,
+        atom_types,
+        atom_radii_nm,
+        atom_electronegativities,
+        atom_b_factors,
+    ) = _prepare_receptor(
         Path(tmt.demo['fpocket']['1ATP.pdb']),
         selection='all',
         structure_indices=0,
         syntax='MolSysMT',
     )
 
-    group_names = set(np.array(msm.get(receptor, element='atom', group_name=True), dtype=object).tolist())
+    group_names = set(
+        np.array(
+            msm.get(receptor, element='atom', group_name=True), dtype=object
+        ).tolist()
+    )
 
     assert receptor is not None
     assert 'ATP' not in group_names
@@ -379,14 +456,26 @@ def test_fpocket4_native_prepare_receptor_excludes_non_whitelisted_small_molecul
 
 def test_fpocket4_native_prepare_receptor_excludes_po4_for_1gg0():
 
-    receptor, atom_indices, coordinates_nm, atom_types, atom_radii_nm, atom_electronegativities, atom_b_factors = _prepare_receptor(
+    (
+        receptor,
+        atom_indices,
+        coordinates_nm,
+        atom_types,
+        atom_radii_nm,
+        atom_electronegativities,
+        atom_b_factors,
+    ) = _prepare_receptor(
         Path(tmt.demo['fpocket']['1GG0.pdb']),
         selection='all',
         structure_indices=0,
         syntax='MolSysMT',
     )
 
-    group_names = set(np.array(msm.get(receptor, element='atom', group_name=True), dtype=object).tolist())
+    group_names = set(
+        np.array(
+            msm.get(receptor, element='atom', group_name=True), dtype=object
+        ).tolist()
+    )
 
     assert receptor is not None
     assert 'PO4' not in group_names
@@ -394,7 +483,15 @@ def test_fpocket4_native_prepare_receptor_excludes_po4_for_1gg0():
 
 def test_fpocket4_native_prepare_receptor_keeps_pc_when_requested_explicitly():
 
-    receptor, atom_indices, coordinates_nm, atom_types, atom_radii_nm, atom_electronegativities, atom_b_factors = _prepare_receptor(
+    (
+        receptor,
+        atom_indices,
+        coordinates_nm,
+        atom_types,
+        atom_radii_nm,
+        atom_electronegativities,
+        atom_b_factors,
+    ) = _prepare_receptor(
         FP_3LKF_PDB,
         selection='all',
         structure_indices=0,
@@ -402,7 +499,11 @@ def test_fpocket4_native_prepare_receptor_keeps_pc_when_requested_explicitly():
         include_group_names={'PC'},
     )
 
-    group_names = set(np.array(msm.get(receptor, element='atom', group_name=True), dtype=object).tolist())
+    group_names = set(
+        np.array(
+            msm.get(receptor, element='atom', group_name=True), dtype=object
+        ).tolist()
+    )
 
     assert receptor is not None
     assert 'PC' in group_names
@@ -427,20 +528,26 @@ def test_fpocket4_upstream_like_bfactor_statistics_follow_fpocket_semantics_for_
         syntax='MolSysMT',
     )
 
-    average_b_factor, min_b_factor, max_b_factor = _get_upstream_like_bfactor_statistics(
-        molecular_system
+    average_b_factor, min_b_factor, max_b_factor = (
+        _get_upstream_like_bfactor_statistics(molecular_system)
     )
 
     assert atom_b_factors is not None
-    assert average_b_factor == pytest.approx(float(np.mean(atom_b_factors)), abs=1.0e-12)
+    assert average_b_factor == pytest.approx(
+        float(np.mean(atom_b_factors)), abs=1.0e-12
+    )
     assert min_b_factor == pytest.approx(0.0, abs=1.0e-12)
     assert max_b_factor == pytest.approx(float(np.max(atom_b_factors)), abs=1.0e-12)
 
 
 def test_fpocket4_alpha_size_thresholds_leave_upstream_precision_margin():
 
-    assert ASPH_MIN_SIZE_NM - PRECISION_TOLERANCE_NM == pytest.approx(0.3399, abs=1.0e-8)
-    assert ASPH_MAX_SIZE_NM + PRECISION_TOLERANCE_NM == pytest.approx(0.6201, abs=1.0e-8)
+    assert ASPH_MIN_SIZE_NM - PRECISION_TOLERANCE_NM == pytest.approx(
+        0.3399, abs=1.0e-8
+    )
+    assert ASPH_MAX_SIZE_NM + PRECISION_TOLERANCE_NM == pytest.approx(
+        0.6201, abs=1.0e-8
+    )
 
 
 @pytest.mark.parametrize(
@@ -456,7 +563,9 @@ def test_fpocket4_native_recovers_wrapper_pockets_ignoring_order(source_pdb):
     wrapper_topography = fpocket4(source_pdb, implementation='wrapper')
     native_topography = fpocket4(source_pdb, implementation='native')
 
-    matches = _best_native_matches_by_atom_indices(native_topography, wrapper_topography)
+    matches = _best_native_matches_by_atom_indices(
+        native_topography, wrapper_topography
+    )
 
     assert len(matches) == len(wrapper_topography)
     assert len(native_topography) >= len(wrapper_topography)

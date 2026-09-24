@@ -1,5 +1,6 @@
 from ..functions import caller_name
-from ..webs import github_issues, api_doc
+from ..webs import api_doc, github_issues
+
 
 class ArgumentError(Exception):
     """Exception raised when a method, or a class, was not properly called or instantiated.
@@ -38,16 +39,16 @@ class ArgumentError(Exception):
         if not caller:
             caller = caller_name()
 
-        full_message = f"Error in {caller} due to the {argument} argument with value {value}."
+        full_message = (
+            f'Error in {caller} due to the {argument} argument with value {value}.'
+        )
 
         if message:
             full_message += message
 
-
         full_message += (
-            f"Check {api_doc} for more information. "
-            f"If you still need help, open a new issue in {github_issues}."
+            f'Check {api_doc} for more information. '
+            f'If you still need help, open a new issue in {github_issues}.'
         )
 
         super().__init__(full_message)
-

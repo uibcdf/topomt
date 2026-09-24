@@ -64,8 +64,12 @@ class FpocketResult:
                     'local_hydrophobic_density_score': pocket.local_hydrophobic_density_score,
                     'n_apolar_alpha_spheres': pocket.n_apolar_alpha_spheres,
                     'apolar_alpha_sphere_ratio': pocket.apolar_alpha_sphere_ratio,
-                    'alpha_sphere_centers': None if pocket.alpha_sphere_centers is None else pocket.alpha_sphere_centers.tolist(),
-                    'alpha_sphere_radii': None if pocket.alpha_sphere_radii is None else pocket.alpha_sphere_radii.tolist(),
+                    'alpha_sphere_centers': None
+                    if pocket.alpha_sphere_centers is None
+                    else pocket.alpha_sphere_centers.tolist(),
+                    'alpha_sphere_radii': None
+                    if pocket.alpha_sphere_radii is None
+                    else pocket.alpha_sphere_radii.tolist(),
                     'alpha_sphere_types': pocket.alpha_sphere_types,
                     'raw': pocket.raw,
                 }

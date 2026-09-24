@@ -1,9 +1,8 @@
-from pathlib import Path
 import warnings
+from pathlib import Path
 
 import topomt as tmt
 from topomt.get_topography import get_topography
-
 
 SERVER_ZIP = Path('topomt/data/CASTp_3.0_server/1tcd.zip')
 
@@ -95,7 +94,9 @@ def test_get_topography_castp_server_routes_without_digest_warnings(monkeypatch)
         )
 
     assert isinstance(topo, tmt.Topography)
-    assert not any(type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught)
+    assert not any(
+        type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught
+    )
 
 
 def test_get_topography_castpfold_kept_as_compatibility_alias(monkeypatch):

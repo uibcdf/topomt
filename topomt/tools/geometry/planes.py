@@ -33,8 +33,14 @@ def clip_mesh_with_plane(
             distance_i = triangle_distances[i]
             distance_j = triangle_distances[j]
             if distance_i * distance_j < 0 or distance_i == 0 or distance_j == 0:
-                fraction = distance_i / (distance_i - distance_j) if (distance_i - distance_j) != 0 else 0.0
-                intersection = triangle_vertices[i] + fraction * (triangle_vertices[j] - triangle_vertices[i])
+                fraction = (
+                    distance_i / (distance_i - distance_j)
+                    if (distance_i - distance_j) != 0
+                    else 0.0
+                )
+                intersection = triangle_vertices[i] + fraction * (
+                    triangle_vertices[j] - triangle_vertices[i]
+                )
                 polygon_points.append(intersection)
 
     if len(polygon_points) < 3:
@@ -44,7 +50,11 @@ def clip_mesh_with_plane(
     if polygon.shape[0] < 3:
         return np.zeros((0, 3)), 0.0, 0.0
 
-    reference = np.array([1.0, 0.0, 0.0]) if abs(normal_unit[0]) < 0.9 else np.array([0.0, 1.0, 0.0])
+    reference = (
+        np.array([1.0, 0.0, 0.0])
+        if abs(normal_unit[0]) < 0.9
+        else np.array([0.0, 1.0, 0.0])
+    )
     basis_u = np.cross(normal_unit, reference)
     basis_u /= np.linalg.norm(basis_u)
     basis_v = np.cross(normal_unit, basis_u)

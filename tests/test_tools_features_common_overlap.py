@@ -20,6 +20,7 @@ def test_jaccard_overlap_clusters_returns_empty_dict_for_empty_input():
 
     assert clusters == {}
 
+
 def test_jaccard_overlap_clusters_returns_single_feature_cluster():
 
     clusters = jaccard_overlap_clusters([[1, 2]], overlap_cutoff=0.5)

@@ -1,13 +1,12 @@
-from pathlib import Path
 import sys
 import warnings
+from pathlib import Path
 
 import pytest
 
 import topomt as tmt
 from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
-
 
 UPSTREAM_ROOT = Path('/home/diego/repos@others/pycasta/src/pycasta')
 BOUND_DIR = UPSTREAM_ROOT / 'data' / 'bounded'
@@ -72,4 +71,6 @@ def test_get_topography_pycasta_routes_without_digest_warnings(monkeypatch):
         )
 
     assert isinstance(topo, tmt.Topography)
-    assert not any(type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught)
+    assert not any(
+        type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught
+    )

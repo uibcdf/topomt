@@ -1,6 +1,7 @@
 import numpy as np
 
-from topomt import Topography, pyunitwizard as puw
+from topomt import Topography
+from topomt import pyunitwizard as puw
 from topomt.features import Pocket
 from topomt.third_party._common import import_upstream_module, prepare_wrapper_input_pdb
 
@@ -16,7 +17,9 @@ def _normalize_upstream_pocketeer_kwargs(kwargs):
 
     sasa_threshold = normalized.get('sasa_threshold', None)
     if sasa_threshold is not None and puw.is_quantity(sasa_threshold):
-        normalized['sasa_threshold'] = float(puw.get_value(sasa_threshold, to_unit='angstroms**2'))
+        normalized['sasa_threshold'] = float(
+            puw.get_value(sasa_threshold, to_unit='angstroms**2')
+        )
 
     min_spheres = normalized.get('min_spheres', None)
     if min_spheres is not None:
@@ -36,8 +39,8 @@ def get_topography(
 ) -> Topography:
     """Run the upstream Pocketeer Python library and return a Topography."""
 
-    from pathlib import Path
     import tempfile
+    from pathlib import Path
 
     with tempfile.TemporaryDirectory(prefix='topomt_pocketeer_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
@@ -78,12 +81,16 @@ def get_topography(
             topography.add_feature(
                 Pocket(
                     atom_indices=sorted(atom_indices),
-                    center=puw.quantity(np.asarray(pocket.centroid, dtype=float) / 10.0, 'nm'),
+                    center=puw.quantity(
+                        np.asarray(pocket.centroid, dtype=float) / 10.0, 'nm'
+                    ),
                     volume=puw.quantity(float(pocket.volume) / 1000.0, 'nm**3'),
                     score=float(pocket.score),
                     source='pocketeer',
                     source_id=f'pocketeer:{pocket.pocket_id}',
-                    alpha_sphere_centers=puw.quantity(alpha_sphere_centers / 10.0, 'nm'),
+                    alpha_sphere_centers=puw.quantity(
+                        alpha_sphere_centers / 10.0, 'nm'
+                    ),
                     alpha_sphere_radii=puw.quantity(alpha_sphere_radii / 10.0, 'nm'),
                 )
             )

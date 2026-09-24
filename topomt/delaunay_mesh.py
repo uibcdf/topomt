@@ -5,7 +5,6 @@ from scipy.spatial import Delaunay
 
 from topomt import pyunitwizard as puw
 
-
 _SIMPLEX_FACE_LOCAL_INDICES = (
     (1, 2, 3),  # face opposite vertex 0 → matches neighbors[s, 0]
     (0, 2, 3),  # face opposite vertex 1 → matches neighbors[s, 1]
@@ -18,7 +17,9 @@ def _tetrahedron_volumes(points_of_alpha_sphere, points):
     volumes = np.empty(len(points_of_alpha_sphere), dtype=float)
     for index, tetrahedron_indices in enumerate(points_of_alpha_sphere):
         tetrahedron_points = points[tetrahedron_indices]
-        tetrahedron_matrix = np.concatenate((tetrahedron_points, np.ones((4, 1))), axis=1)
+        tetrahedron_matrix = np.concatenate(
+            (tetrahedron_points, np.ones((4, 1))), axis=1
+        )
         volumes[index] = abs(np.linalg.det(tetrahedron_matrix) / 6.0)
     return volumes
 
@@ -47,7 +48,9 @@ def _tetrahedron_condition_numbers(points_of_alpha_sphere, points):
     for index, tetrahedron_indices in enumerate(points_of_alpha_sphere):
         tetrahedron_points = points[tetrahedron_indices]
         point_a, point_b, point_c, point_d = tetrahedron_points
-        matrix = 2.0 * np.vstack((point_b - point_a, point_c - point_a, point_d - point_a))
+        matrix = 2.0 * np.vstack(
+            (point_b - point_a, point_c - point_a, point_d - point_a)
+        )
         condition_numbers[index] = np.linalg.cond(matrix)
 
     return condition_numbers
@@ -83,7 +86,9 @@ def _circumsphere_centers_radii(points_of_alpha_sphere, points):
     return centers, radii
 
 
-def _tetrahedron_near_cospherical_counts(points_of_alpha_sphere, points, centers, radii, tolerance):
+def _tetrahedron_near_cospherical_counts(
+    points_of_alpha_sphere, points, centers, radii, tolerance
+):
     near_cospherical_counts = np.zeros(len(points_of_alpha_sphere), dtype=int)
 
     for index, tetrahedron_indices in enumerate(points_of_alpha_sphere):
@@ -180,12 +185,16 @@ class DelaunayMesh:
         self.neighbors = np.asarray(triangulation.neighbors, dtype=int)
 
         self.alpha_sphere_atom_indices = self.simplices.copy()
-        self.alpha_sphere_centers, self.alpha_sphere_radii = _circumsphere_centers_radii(
-            self.alpha_sphere_atom_indices,
-            points_value,
+        self.alpha_sphere_centers, self.alpha_sphere_radii = (
+            _circumsphere_centers_radii(
+                self.alpha_sphere_atom_indices,
+                points_value,
+            )
         )
         self.n_alpha_spheres = self.alpha_sphere_centers.shape[0]
-        self.alpha_sphere_volumes = _tetrahedron_volumes(self.alpha_sphere_atom_indices, points_value)
+        self.alpha_sphere_volumes = _tetrahedron_volumes(
+            self.alpha_sphere_atom_indices, points_value
+        )
         self._min_edges, self._max_edges = _tetrahedron_edge_extrema(
             self.alpha_sphere_atom_indices,
             points_value,
@@ -196,7 +205,9 @@ class DelaunayMesh:
         )
 
         self._alpha_sphere_neighbor_map = {
-            int(index): sorted(int(neighbor) for neighbor in simplex_neighbors if neighbor != -1)
+            int(index): sorted(
+                int(neighbor) for neighbor in simplex_neighbors if neighbor != -1
+            )
             for index, simplex_neighbors in enumerate(self.neighbors)
         }
 
@@ -273,7 +284,10 @@ class DelaunayMesh:
     def _ensure_face_index_cache(self) -> None:
         """Build global triangle indices from unique face atom triples."""
 
-        if self._face_index_by_atoms is not None and self._face_index_by_owner is not None:
+        if (
+            self._face_index_by_atoms is not None
+            and self._face_index_by_owner is not None
+        ):
             return
 
         face_index_by_atoms = {}
@@ -288,19 +302,25 @@ class DelaunayMesh:
                     global_face_index = next_face_index
                     face_index_by_atoms[face_atoms] = global_face_index
                     next_face_index += 1
-                face_index_by_owner[(int(simplex_index), int(face_index))] = int(global_face_index)
+                face_index_by_owner[(int(simplex_index), int(face_index))] = int(
+                    global_face_index
+                )
 
         self._face_index_by_atoms = face_index_by_atoms
         self._face_index_by_owner = face_index_by_owner
 
-    def get_face_atoms(self, simplex_index: int, face_index: int) -> tuple[int, int, int]:
+    def get_face_atoms(
+        self, simplex_index: int, face_index: int
+    ) -> tuple[int, int, int]:
         """Return the atom indices of a simplex face as a sorted triple."""
 
         local_indices = _SIMPLEX_FACE_LOCAL_INDICES[int(face_index)]
         return tuple(
             sorted(
                 int(atom_index)
-                for atom_index in self.oriented_simplices[int(simplex_index), local_indices]
+                for atom_index in self.oriented_simplices[
+                    int(simplex_index), local_indices
+                ]
             )
         )
 
@@ -314,9 +334,13 @@ class DelaunayMesh:
         """Return the global triangle index for a sorted face triple if present."""
 
         self._ensure_face_index_cache()
-        return self._face_index_by_atoms.get(tuple(sorted(int(atom_index) for atom_index in face_atoms)))
+        return self._face_index_by_atoms.get(
+            tuple(sorted(int(atom_index) for atom_index in face_atoms))
+        )
 
-    def get_face_owner_indices(self, simplex_index: int, face_index: int) -> tuple[int, int]:
+    def get_face_owner_indices(
+        self, simplex_index: int, face_index: int
+    ) -> tuple[int, int]:
         """Return the two tetrahedron owners of one face.
 
         The first owner is always the supplied local owner. The second owner is
@@ -405,7 +429,9 @@ class DelaunayMesh:
         self._face_index_by_atoms = None
         self._face_index_by_owner = None
         self._alpha_sphere_neighbor_map = {
-            int(index): sorted(int(neighbor) for neighbor in simplex_neighbors if neighbor != -1)
+            int(index): sorted(
+                int(neighbor) for neighbor in simplex_neighbors if neighbor != -1
+            )
             for index, simplex_neighbors in enumerate(neighbors)
         }
         pairs = []
@@ -431,9 +457,7 @@ class DelaunayMesh:
 
         self._alpha_sphere_neighbor_map = {
             old_to_new[old_index]: [
-                old_to_new[neighbor]
-                for neighbor in neighbors
-                if neighbor in old_to_new
+                old_to_new[neighbor] for neighbor in neighbors if neighbor in old_to_new
             ]
             for old_index, neighbors in self._alpha_sphere_neighbor_map.items()
             if old_index in old_to_new
@@ -505,7 +529,9 @@ class DelaunayMesh:
     def get_points_of_alpha_spheres(self, indices):
         """Return unique point indices touching a set of alpha-sphere entries."""
 
-        return np.unique(self.alpha_sphere_atom_indices[np.asarray(indices, dtype=int)].reshape(-1))
+        return np.unique(
+            self.alpha_sphere_atom_indices[np.asarray(indices, dtype=int)].reshape(-1)
+        )
 
     def get_ambiguity_indicators(self, cospherical_tolerance=0.01):
         """Return geometric indicators of potentially ambiguous alpha-sphere entries."""
@@ -554,11 +580,15 @@ class DelaunayMesh:
     ):
         """Return indices of alpha-sphere entries that look geometrically ambiguous."""
 
-        indicators = self.get_ambiguity_indicators(cospherical_tolerance=cospherical_tolerance)
+        indicators = self.get_ambiguity_indicators(
+            cospherical_tolerance=cospherical_tolerance
+        )
         mask = np.zeros(self.n_alpha_spheres, dtype=bool)
 
         if minimum_near_cospherical_count is not None:
-            mask |= indicators['near_cospherical_count'] >= int(minimum_near_cospherical_count)
+            mask |= indicators['near_cospherical_count'] >= int(
+                minimum_near_cospherical_count
+            )
 
         if minimum_condition_number is not None:
             mask |= indicators['condition_number'] >= float(minimum_condition_number)

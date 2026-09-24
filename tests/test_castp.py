@@ -4,7 +4,6 @@ Tests for CASTp method.
 
 import inspect
 
-import pytest
 import topomt as tmt
 from topomt.third_party.castp._native_impl import castp
 
@@ -25,7 +24,7 @@ def test_castp_integration():
     assert isinstance(pockets, list)
     assert len(pockets) > 1
     assert hasattr(mesh, 'centers')
-    
+
     if len(pockets) > 0:
         p1 = pockets[0]
         assert 'id' in p1
@@ -36,6 +35,7 @@ def test_castp_integration():
         assert 'component_atom_indices' in p1
         assert isinstance(p1['properties'], dict)
         assert set(p1['atom_indices']).issubset(set(p1['component_atom_indices']))
+
 
 def test_castp_empty_system():
     # Test graceful handling of no pockets or empty system

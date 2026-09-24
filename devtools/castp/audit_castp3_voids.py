@@ -55,7 +55,9 @@ def _jaccard(left: frozenset[int], right: frozenset[int]) -> float:
     return len(left & right) / len(left | right)
 
 
-def _native_void_sets(records: list[dict], atom_lookup: dict[int, int]) -> list[frozenset[int]]:
+def _native_void_sets(
+    records: list[dict], atom_lookup: dict[int, int]
+) -> list[frozenset[int]]:
     return [
         _record_atom_ids(record.get('atom_indices', []), atom_lookup)
         for record in records
@@ -90,7 +92,9 @@ def _best_native_matches(
     return matches
 
 
-def _serials_for_simplex(geometry, atom_lookup: dict[int, int], simplex_index: int) -> list[int]:
+def _serials_for_simplex(
+    geometry, atom_lookup: dict[int, int], simplex_index: int
+) -> list[int]:
     return [
         int(atom_lookup[int(atom_index)])
         for atom_index in geometry.mesh.simplices[int(simplex_index)]
@@ -105,7 +109,9 @@ def _serials_for_face(
 ) -> list[int]:
     return [
         int(atom_lookup[int(atom_index)])
-        for atom_index in geometry.mesh.get_face_atoms(int(simplex_index), int(face_index))
+        for atom_index in geometry.mesh.get_face_atoms(
+            int(simplex_index), int(face_index)
+        )
     ]
 
 
@@ -136,7 +142,7 @@ def _neighbor_atom_variants(
         wall_opposite_attached = set(base_atoms)
         wall_full = set(base_atoms)
         for simplex_index in component:
-            simplex_atoms = {
+            {
                 int(atom_index)
                 for atom_index in geometry.mesh.simplices[int(simplex_index)]
             }
@@ -163,7 +169,10 @@ def _neighbor_atom_variants(
                 opposite_atoms = neighbor_atoms - face_atoms
                 wall_opposite.update(opposite_atoms)
                 wall_full.update(neighbor_atoms)
-                if int(geometry.face_rho_ranks[int(simplex_index), int(face_index)]) == 0:
+                if (
+                    int(geometry.face_rho_ranks[int(simplex_index), int(face_index)])
+                    == 0
+                ):
                     wall_opposite_attached.update(opposite_atoms)
 
         variants['base'].append(
@@ -176,7 +185,9 @@ def _neighbor_atom_variants(
             frozenset(atom_lookup[int(atom_index)] for atom_index in wall_opposite)
         )
         variants['wall_opposite_attached_base_complex'].append(
-            frozenset(atom_lookup[int(atom_index)] for atom_index in wall_opposite_attached)
+            frozenset(
+                atom_lookup[int(atom_index)] for atom_index in wall_opposite_attached
+            )
         )
         variants['wall_full_base_complex'].append(
             frozenset(atom_lookup[int(atom_index)] for atom_index in wall_full)
@@ -199,7 +210,9 @@ def _neighbor_hits_for_atom(
     serial: int,
     max_distance: int,
 ) -> list[dict]:
-    local_by_serial = {serial_id: atom_index for atom_index, serial_id in atom_lookup.items()}
+    local_by_serial = {
+        serial_id: atom_index for atom_index, serial_id in atom_lookup.items()
+    }
     atom_index = int(local_by_serial[int(serial)])
     containing = {
         simplex_index
@@ -218,12 +231,16 @@ def _neighbor_hits_for_atom(
                 {
                     'simplex': int(simplex_index),
                     'distance': int(distance),
-                    'serials': _serials_for_simplex(geometry, atom_lookup, simplex_index),
+                    'serials': _serials_for_simplex(
+                        geometry, atom_lookup, simplex_index
+                    ),
                 }
             )
         if distance >= int(max_distance):
             continue
-        for face_index, neighbor_index in enumerate(geometry.mesh.neighbors[simplex_index]):
+        for face_index, neighbor_index in enumerate(
+            geometry.mesh.neighbors[simplex_index]
+        ):
             neighbor_index = int(neighbor_index)
             if neighbor_index < 0 or neighbor_index in visited:
                 continue
@@ -247,7 +264,9 @@ def _neighbor_hits_for_atom(
                             face_index,
                         ),
                         'base_complex': bool(
-                            _base_triangle_in_complex(geometry, simplex_index, face_index)
+                            _base_triangle_in_complex(
+                                geometry, simplex_index, face_index
+                            )
                         ),
                         'beta_complex': bool(
                             _triangle_in_complex_at(
@@ -260,8 +279,12 @@ def _neighbor_hits_for_atom(
                         'face_rho_rank': int(
                             geometry.face_rho_ranks[int(simplex_index), int(face_index)]
                         ),
-                        'from_rho_rank': int(geometry.simplex_rho_ranks[int(simplex_index)]),
-                        'to_rho_rank': int(geometry.simplex_rho_ranks[int(neighbor_index)]),
+                        'from_rho_rank': int(
+                            geometry.simplex_rho_ranks[int(simplex_index)]
+                        ),
+                        'to_rho_rank': int(
+                            geometry.simplex_rho_ranks[int(neighbor_index)]
+                        ),
                     }
                 )
     return hits
@@ -297,15 +320,15 @@ def audit_zip(
             probe_limited_depth=False,
         )
         void_records = [
-            record
-            for record in records
-            if record.get('feature_type') == 'void'
+            record for record in records if record.get('feature_type') == 'void'
         ]
         oracle_sets = oracle_atom_id_sets(tmpdir_path)['void']
         native_sets = _native_void_sets(void_records, atom_lookup)
 
         exact = _variant_exact_count(native_sets, oracle_sets)
-        lines.append(f'Native void parity: `{len(oracle_sets)}/{len(native_sets)}/{exact}`.')
+        lines.append(
+            f'Native void parity: `{len(oracle_sets)}/{len(native_sets)}/{exact}`.'
+        )
         lines.append('')
 
         variants = _neighbor_atom_variants(geometry, void_records, atom_lookup)
@@ -329,11 +352,7 @@ def audit_zip(
         )
         for oracle_index, native_index, score in matches:
             oracle_set = oracle_sets[oracle_index]
-            native_set = (
-                native_sets[native_index]
-                if native_index >= 0
-                else frozenset()
-            )
+            native_set = native_sets[native_index] if native_index >= 0 else frozenset()
             missing = sorted(oracle_set - native_set)
             extra = sorted(native_set - oracle_set)
             n_tetra = (
@@ -358,8 +377,7 @@ def audit_zip(
         unmatched_native = [
             index
             for index in range(len(native_sets))
-            if index not in matched_native
-            and native_sets[index] not in oracle_sets
+            if index not in matched_native and native_sets[index] not in oracle_sets
         ]
         if unmatched_native:
             lines.extend(

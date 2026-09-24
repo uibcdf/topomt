@@ -1,7 +1,7 @@
 """Tests for pocket physicochemistry helpers in topomt.tools.features."""
 
-import numpy as np
 import molsysmt as msm
+import numpy as np
 
 import topomt as tmt
 from topomt.tools.features.pockets import (
@@ -30,7 +30,9 @@ def test_nonpolar_ratio_from_sasa_uses_lining_subset():
 
 def test_get_physicochemical_properties_reports_residue_level_summary():
 
-    molecular_system = msm.convert(tmt.demo['TcTIM']['1TCD.pdb'], to_form='molsysmt.MolSys')
+    molecular_system = msm.convert(
+        tmt.demo['TcTIM']['1TCD.pdb'], to_form='molsysmt.MolSys'
+    )
     atom_indices = [0, 1, 2, 3, 4, 5]
 
     properties = get_physicochemical_properties(molecular_system, atom_indices)

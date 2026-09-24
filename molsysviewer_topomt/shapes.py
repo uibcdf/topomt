@@ -10,7 +10,11 @@ from .render import show_topography_pockets
 
 def pocket_blob_provider(view=None, topography=None, **kwargs) -> dict[str, Any]:
     """Render pockets when a view is available, otherwise expose the normalized payload."""
-    payload = topography_payload(topography) if topography is not None else {'n_features': 0, 'feature_counts': {}, 'features': []}
+    payload = (
+        topography_payload(topography)
+        if topography is not None
+        else {'n_features': 0, 'feature_counts': {}, 'features': []}
+    )
     rendered = None
     if view is not None and topography is not None:
         rendered = show_topography_pockets(view, topography, **kwargs)

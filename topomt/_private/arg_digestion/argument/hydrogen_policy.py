@@ -9,5 +9,5 @@ def digest_hydrogen_policy(hydrogen_policy, caller=None):
         arg_name='hydrogen_policy',
         value=hydrogen_policy,
         caller=caller,
-        reason="hydrogen_policy must be exclude or include.",
+        reason='hydrogen_policy must be exclude or include.',
     )

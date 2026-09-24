@@ -4,7 +4,6 @@ import numpy as np
 
 from ..._private.jit import lazy_njit
 
-
 SolventVolumeResult = namedtuple(
     'SolventVolumeResult',
     ['volume', 'empty_fraction', 'occupied_fraction', 'n_samples'],
@@ -17,7 +16,11 @@ def tetrahedron_volume(vertices) -> float:
     if vertices.shape != (4, 3):
         raise ValueError('vertices must have shape (4, 3)')
     matrix = np.column_stack(
-        [vertices[1] - vertices[0], vertices[2] - vertices[0], vertices[3] - vertices[0]]
+        [
+            vertices[1] - vertices[0],
+            vertices[2] - vertices[0],
+            vertices[3] - vertices[0],
+        ]
     )
     return abs(float(np.linalg.det(matrix))) / 6.0
 
@@ -35,13 +38,13 @@ def _simplex_lattice_weights(resolution: int, alpha: float = 0.5) -> np.ndarray:
     for i in range(resolution + 1):
         for j in range(resolution + 1 - i):
             for k in range(resolution + 1 - i - j):
-                l = resolution - i - j - k
+                fourth = resolution - i - j - k
                 weights.append(
                     [
                         (i + alpha) / denominator,
                         (j + alpha) / denominator,
                         (k + alpha) / denominator,
-                        (l + alpha) / denominator,
+                        (fourth + alpha) / denominator,
                     ]
                 )
     return np.asarray(weights, dtype=float)
@@ -161,7 +164,9 @@ def _sample_simplex(rng, vertices: np.ndarray, n_samples: int) -> np.ndarray:
     return bary @ vertices
 
 
-def _empty_fraction(points: np.ndarray, centers: np.ndarray, radii: np.ndarray) -> float:
+def _empty_fraction(
+    points: np.ndarray, centers: np.ndarray, radii: np.ndarray
+) -> float:
     """Fraction of ``points`` lying outside *every* ball."""
     if centers.shape[0] == 0:
         return 1.0
@@ -296,7 +301,9 @@ def region_occupancy_grid(
         index = np.stack(grids, axis=-1)  # (..., 3) voxel indices
         voxel_centers = origin + (index + 0.5) * spacing
         inside = _points_in_tetra(voxel_centers.reshape(-1, 3), tet)
-        block = in_region[low[0] : high[0] + 1, low[1] : high[1] + 1, low[2] : high[2] + 1]
+        block = in_region[
+            low[0] : high[0] + 1, low[1] : high[1] + 1, low[2] : high[2] + 1
+        ]
         in_region[low[0] : high[0] + 1, low[1] : high[1] + 1, low[2] : high[2] + 1] = (
             block | inside.reshape(block.shape)
         )
@@ -344,7 +351,7 @@ def _disk_polygon_area(polygon: np.ndarray, radius: float) -> float:
 def _edge_term(a: np.ndarray, b: np.ndarray, radius: float, r2: float) -> float:
     """Signed area contribution of directed edge ``a -> b`` (origin-centred disk)."""
     da2 = float(a @ a)
-    db2 = float(b @ b)
+    float(b @ b)
     a_in = da2 <= r2
     b_in = b @ b <= r2
     if a_in and b_in:
@@ -394,13 +401,13 @@ def _tet_plane_polygon(tet: np.ndarray, z: float) -> np.ndarray:
         return np.empty((0, 2))
     points = np.array(points)
     centroid = points.mean(axis=0)
-    order = np.argsort(np.arctan2(points[:, 1] - centroid[1], points[:, 0] - centroid[0]))
+    order = np.argsort(
+        np.arctan2(points[:, 1] - centroid[1], points[:, 0] - centroid[0])
+    )
     return points[order]
 
 
-def ball_tetrahedron_volume(
-    vertices, center, radius, *, n_quad: int = 24
-) -> float:
+def ball_tetrahedron_volume(vertices, center, radius, *, n_quad: int = 24) -> float:
     """Deterministic ``vol(ball ∩ tetrahedron)`` by exact-slice Gauss quadrature.
 
     The z-range is split at every breakpoint where the integrand loses smoothness
@@ -704,7 +711,9 @@ def tetrahedron_empty_volume_exact(
     The hot loop is numba-accelerated (``_njit_tet_exact``) when numba is present.
     """
     tet = np.ascontiguousarray(np.asarray(vertices, dtype=np.float64))
-    centers = np.ascontiguousarray(np.asarray(atom_positions, dtype=np.float64).reshape(-1, 3))
+    centers = np.ascontiguousarray(
+        np.asarray(atom_positions, dtype=np.float64).reshape(-1, 3)
+    )
     radii = np.ascontiguousarray(np.asarray(atom_radii, dtype=np.float64).reshape(-1))
     nodes, weights = np.polynomial.legendre.leggauss(n_quad)
     return float(_njit_tet_exact(tet, centers, radii, nodes, weights))

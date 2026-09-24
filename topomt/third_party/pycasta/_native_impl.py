@@ -5,9 +5,9 @@ from typing import Sequence
 import molsysmt as msm
 import numpy as np
 
+from topomt import pyunitwizard as puw
 from topomt._private.smonitor import signal
 from topomt.delaunay_mesh import DelaunayMesh
-from topomt import pyunitwizard as puw
 
 
 @signal(tags=['method', 'pycasta', 'native'])
@@ -38,8 +38,12 @@ def pycasta(
     - `min_pocket_volume=0.05` means `0.05 nm**3` (upstream default `50 Å^3`)
     - `merge_threshold=1.8` means `1.8 nm` (upstream default `18 Å`)
     """
-    
-    alpha_nm = float(puw.get_value(alpha, to_unit='nm')) if puw.is_quantity(alpha) else float(alpha)
+
+    alpha_nm = (
+        float(puw.get_value(alpha, to_unit='nm'))
+        if puw.is_quantity(alpha)
+        else float(alpha)
+    )
     min_vol_nm3 = (
         float(puw.get_value(min_pocket_volume, to_unit='nm**3'))
         if puw.is_quantity(min_pocket_volume)
@@ -56,7 +60,7 @@ def pycasta(
         structure_indices=structure_indices,
         syntax=syntax,
     )
-    
+
     if coords_nm.shape[0] < 4:
         if return_atom_indices:
             return [], [], np.empty((0, 4), dtype=int), atom_indices
@@ -171,6 +175,7 @@ def _prepare_pycasta_receptor(
 
     return selected_atom_indices, coordinates_nm
 
+
 def _flow_detection(
     simplices: np.ndarray,
     alpha_mask: np.ndarray,
@@ -263,7 +268,9 @@ def _flow_detection(
     return pockets
 
 
-def _merge_clusters(pockets: list[list[int]], tetra_positions: np.ndarray, threshold: float) -> list[list[int]]:
+def _merge_clusters(
+    pockets: list[list[int]], tetra_positions: np.ndarray, threshold: float
+) -> list[list[int]]:
     clusters = [list(p) for p in pockets]
     changed = True
     while changed:
@@ -299,11 +306,14 @@ def _tetra_group_volume(tetra_positions: np.ndarray, indices: Sequence[int]) -> 
     atom_b = tets[:, 1]
     atom_c = tets[:, 2]
     atom_d = tets[:, 3]
-    volumes = np.abs(
-        np.einsum(
-            'ij,ij->i',
-            atom_a - atom_d,
-            np.cross(atom_b - atom_d, atom_c - atom_d),
+    volumes = (
+        np.abs(
+            np.einsum(
+                'ij,ij->i',
+                atom_a - atom_d,
+                np.cross(atom_b - atom_d, atom_c - atom_d),
+            )
         )
-    ) / 6.0
+        / 6.0
+    )
     return float(volumes.sum())
