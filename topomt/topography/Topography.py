@@ -7,6 +7,7 @@ from typing import Any
 import molsysmt as msm
 
 from topomt.features import _FEATURE_PREFIXES, _FEATURE_TYPE_REGISTRY
+from topomt.provider_output import ProviderRun
 
 from ..features.BaseFeature import (
     BaseFeature,
@@ -37,6 +38,7 @@ class Topography(Mapping[str, BaseFeature]):
     ) -> None:
         # main store: id → feature
         self._features: dict[FeatureID, BaseFeature] = {}
+        self.provider_runs: dict[str, ProviderRun] = {}
 
         # derived indexes
         self._by_dimensionality: dict[int, set[FeatureID]] = {
@@ -127,6 +129,13 @@ class Topography(Mapping[str, BaseFeature]):
     @property
     def features(self) -> dict[FeatureID, BaseFeature]:
         return self._features
+
+    def add_provider_run(self, run: ProviderRun) -> None:
+        """Register an independent, recoverable provider-result snapshot."""
+        existing = self.provider_runs.get(run.run_id)
+        if existing is not None and existing != run:
+            raise ValueError(f'Conflicting provider run ID: {run.run_id}')
+        self.provider_runs[run.run_id] = run
 
     @property
     def molecular_system(self) -> Any | None:

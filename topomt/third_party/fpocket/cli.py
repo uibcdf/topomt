@@ -1,12 +1,13 @@
+import hashlib
 import shutil
 import tempfile
 from pathlib import Path
 
 import molsysmt as msm
 
-from topomt.topography.Topography import Topography
 from topomt.third_party.fpocket.files import load_topography as load_fpocket_topography
 from topomt.third_party.fpocket.runner import run_fpocket
+from topomt.topography.Topography import Topography
 
 
 def get_topography(
@@ -37,6 +38,14 @@ def get_topography(
             extra_args=extra_args,
         )
 
+        executable = shutil.which(fpocket_cmd)
+        executable_sha256 = None
+        if executable is not None:
+            with Path(executable).open('rb') as file_handle:
+                executable_sha256 = hashlib.file_digest(
+                    file_handle, 'sha256'
+                ).hexdigest()
+
         return load_fpocket_topography(
             molecular_system,
             pdb_file=input_pdb,
@@ -44,6 +53,12 @@ def get_topography(
             selection=selection,
             structure_indices=structure_indices,
             syntax=syntax,
+            backend='cli',
+            provider_metadata={
+                'executable_name': Path(fpocket_cmd).name,
+                'executable_sha256': executable_sha256,
+                'extra_args': list(extra_args or []),
+            },
         )
 
 

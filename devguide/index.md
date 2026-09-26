@@ -34,6 +34,14 @@ and the next engineering steps.
   Cross-cutting future plan for CPU-pool parallelization, distributed
   execution, and GPU evaluation across pocket engines.
 
+- [third_party_results_plan.md](third_party_results_plan.md)
+  Active plan to preserve third-party results and reproduce provider
+  measurements with traceable comparisons.
+
+- [third_party_results_checkpoint.md](third_party_results_checkpoint.md)
+  Weighted progress, accepted evidence, provider coverage, and next gates for
+  the third-party results plan.
+
 - [tools_architecture.md](tools_architecture.md)
   Proposed internal architecture for `topomt.tools`, including the separation
   between general geometry, tessellation-specific helpers, feature-oriented
@@ -42,6 +50,14 @@ and the next engineering steps.
 - [fpocket4/scalable_options.md](fpocket4/scalable_options.md)
   Specific design options for a future `fpocket4`
   `implementation='topomt-scalable'` path.
+
+- [fpocket4/external_output_inventory.md](fpocket4/external_output_inventory.md)
+  Field-level audit of original fpocket output, interpreted units, calculation
+  status, and remaining integration gaps.
+
+- [pocketeer/external_output_inventory.md](pocketeer/external_output_inventory.md)
+  Field-level audit of Pocketeer's library result, mask snapshot, atom-index
+  mapping, and remaining parity checks.
 
 - [viewer_addon_plan.md](viewer_addon_plan.md)
   Initial plan for the future `molsysviewer_topomt` addon.

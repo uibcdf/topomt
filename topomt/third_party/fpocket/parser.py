@@ -1,10 +1,9 @@
-from pathlib import Path
 import re
+from pathlib import Path
 
 import numpy as np
 
 from .model import FpocketPocket, FpocketResult
-
 
 _HEADER_FIELD_MAP = {
     'Pocket Score': 'score',
@@ -58,7 +57,9 @@ def parse_fpocket_output(pdb_file: str | Path, output_dir: str | Path) -> Fpocke
             pocket_vert = pockets_dir / f'pocket{file_pocket_id}_vert.pqr'
             vert_data = _parse_pocket_vert(pocket_vert) if pocket_vert.exists() else {}
 
-            pocket_id = reported_pocket_id if reported_pocket_id is not None else file_pocket_id
+            pocket_id = (
+                reported_pocket_id if reported_pocket_id is not None else file_pocket_id
+            )
             merged_props = {}
             merged_props.update(metadata.get(f'Pocket {pocket_id}', {}))
             merged_props.update(props)
@@ -72,8 +73,12 @@ def parse_fpocket_output(pdb_file: str | Path, output_dir: str | Path) -> Fpocke
                 score=_get_prop(merged_props, 'score'),
                 druggability_score=_get_prop(merged_props, 'druggability_score'),
                 n_alpha_spheres=_get_prop(merged_props, 'n_alpha_spheres'),
-                mean_alpha_sphere_radius=_get_prop(merged_props, 'mean_alpha_sphere_radius'),
-                mean_alpha_sphere_sasa=_get_prop(merged_props, 'mean_alpha_sphere_sasa'),
+                mean_alpha_sphere_radius=_get_prop(
+                    merged_props, 'mean_alpha_sphere_radius'
+                ),
+                mean_alpha_sphere_sasa=_get_prop(
+                    merged_props, 'mean_alpha_sphere_sasa'
+                ),
                 mean_b_factor=_get_prop(merged_props, 'mean_b_factor'),
                 hydrophobicity_score=_get_prop(merged_props, 'hydrophobicity_score'),
                 polarity_score=_get_prop(merged_props, 'polarity_score'),
@@ -84,10 +89,16 @@ def parse_fpocket_output(pdb_file: str | Path, output_dir: str | Path) -> Fpocke
                 local_hydrophobic_density_score=_get_prop(
                     merged_props, 'local_hydrophobic_density_score'
                 ),
-                n_apolar_alpha_spheres=_get_prop(merged_props, 'n_apolar_alpha_spheres'),
-                apolar_alpha_sphere_ratio=_get_prop(merged_props, 'apolar_alpha_sphere_ratio'),
+                n_apolar_alpha_spheres=_get_prop(
+                    merged_props, 'n_apolar_alpha_spheres'
+                ),
+                apolar_alpha_sphere_ratio=_get_prop(
+                    merged_props, 'apolar_alpha_sphere_ratio'
+                ),
                 alpha_sphere_centers=vert_data.get('alpha_sphere_centers'),
                 alpha_sphere_radii=vert_data.get('alpha_sphere_radii'),
+                alpha_sphere_ids=vert_data.get('alpha_sphere_ids', []),
+                alpha_sphere_charges=vert_data.get('alpha_sphere_charges'),
                 alpha_sphere_types=vert_data.get('alpha_sphere_types', []),
                 raw=merged_props,
             )
@@ -112,7 +123,9 @@ def _extract_pocket_id(stem: str) -> int:
     return int(match.group(1))
 
 
-def _parse_pocket_atm(pocket_file: Path) -> tuple[dict[str, float | int | str], list[int], int | None]:
+def _parse_pocket_atm(
+    pocket_file: Path,
+) -> tuple[dict[str, float | int | str], list[int], int | None]:
 
     props: dict[str, float | int | str] = {}
     atom_serials: list[int] = []
@@ -142,6 +155,8 @@ def _parse_pocket_vert(pocket_vert: Path) -> dict[str, object]:
     props: dict[str, float | int | str] = {}
     centers = []
     radii = []
+    ids = []
+    charges = []
     types = []
 
     with pocket_vert.open() as file_handle:
@@ -154,6 +169,7 @@ def _parse_pocket_vert(pocket_vert: Path) -> dict[str, object]:
                 continue
 
             if line.startswith(('ATOM  ', 'HETATM')):
+                ids.append(int(line[6:11]))
                 centers.append(
                     [
                         float(line[30:38]),
@@ -161,23 +177,28 @@ def _parse_pocket_vert(pocket_vert: Path) -> dict[str, object]:
                         float(line[46:54]),
                     ]
                 )
-                _, radius = _parse_pqr_charge_and_radius(line)
+                charge, radius = _parse_pqr_charge_and_radius(line)
+                charges.append(charge)
                 radii.append(radius)
-                types.append(line[13:16].strip())
+                types.append(line[12:16].strip())
 
     if len(centers) == 0:
         center = None
         centers_array = None
         radii_array = None
+        charges_array = None
     else:
         centers_array = np.asarray(centers, dtype=float)
         radii_array = np.asarray(radii, dtype=float)
+        charges_array = np.asarray(charges, dtype=float)
         center = centers_array.mean(axis=0)
 
     return {
         'center': center,
         'alpha_sphere_centers': centers_array,
         'alpha_sphere_radii': radii_array,
+        'alpha_sphere_ids': ids,
+        'alpha_sphere_charges': charges_array,
         'alpha_sphere_types': types,
         'raw': props,
     }
@@ -216,7 +237,9 @@ def _parse_global_info(info_file: Path) -> dict[str, dict[str, float | int | str
                 continue
 
             key, value = stripped.split(':', 1)
-            metadata[current_pocket][_normalize_key(key.strip())] = _coerce_value(value.strip())
+            metadata[current_pocket][_normalize_key(key.strip())] = _coerce_value(
+                value.strip()
+            )
 
     return metadata
 

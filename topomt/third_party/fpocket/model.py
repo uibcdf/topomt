@@ -28,6 +28,8 @@ class FpocketPocket:
     apolar_alpha_sphere_ratio: float | None = None
     alpha_sphere_centers: np.ndarray | None = None
     alpha_sphere_radii: np.ndarray | None = None
+    alpha_sphere_ids: list[int] = field(default_factory=list)
+    alpha_sphere_charges: np.ndarray | None = None
     alpha_sphere_types: list[str] = field(default_factory=list)
     raw: dict[str, Any] = field(default_factory=dict)
 
@@ -64,8 +66,16 @@ class FpocketResult:
                     'local_hydrophobic_density_score': pocket.local_hydrophobic_density_score,
                     'n_apolar_alpha_spheres': pocket.n_apolar_alpha_spheres,
                     'apolar_alpha_sphere_ratio': pocket.apolar_alpha_sphere_ratio,
-                    'alpha_sphere_centers': None if pocket.alpha_sphere_centers is None else pocket.alpha_sphere_centers.tolist(),
-                    'alpha_sphere_radii': None if pocket.alpha_sphere_radii is None else pocket.alpha_sphere_radii.tolist(),
+                    'alpha_sphere_centers': None
+                    if pocket.alpha_sphere_centers is None
+                    else pocket.alpha_sphere_centers.tolist(),
+                    'alpha_sphere_radii': None
+                    if pocket.alpha_sphere_radii is None
+                    else pocket.alpha_sphere_radii.tolist(),
+                    'alpha_sphere_ids': pocket.alpha_sphere_ids,
+                    'alpha_sphere_charges': None
+                    if pocket.alpha_sphere_charges is None
+                    else pocket.alpha_sphere_charges.tolist(),
                     'alpha_sphere_types': pocket.alpha_sphere_types,
                     'raw': pocket.raw,
                 }

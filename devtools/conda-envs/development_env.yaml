@@ -10,7 +10,8 @@ dependencies:
 - pyunitwizard
 - scipy
 - nglview
-- pytest
+- pytest >=8
+- pytest-receptor
 - pytest-cov
 - pytest-xdist
 - codecov

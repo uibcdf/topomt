@@ -1,14 +1,15 @@
 import importlib
-from pathlib import Path
 import shutil
 import tempfile
+from pathlib import Path
 
+import molsysmt as msm
 import numpy as np
 import pytest
-import topomt as tmt
-import molsysmt as msm
-from topomt import pyunitwizard as puw
 
+import topomt as tmt
+from topomt import pyunitwizard as puw
+from topomt.third_party.fpocket._legacy_cli import load_topography_from_fpocket_output
 from topomt.third_party.fpocket._native_impl import (
     ASPH_MAX_SIZE_NM,
     ASPH_MIN_SIZE_NM,
@@ -18,10 +19,11 @@ from topomt.third_party.fpocket._native_impl import (
     _prepare_receptor,
     fpocket4,
 )
-from topomt.third_party.fpocket._legacy_cli import load_topography_from_fpocket_output
-from topomt.third_party.fpocket.parser import _parse_pqr_charge_and_radius, parse_fpocket_output
+from topomt.third_party.fpocket.parser import (
+    _parse_pqr_charge_and_radius,
+    parse_fpocket_output,
+)
 from topomt.third_party.fpocket.runner import run_fpocket
-
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 FP_3LKF_PDB = REPO_ROOT / 'topomt' / 'data' / 'fpocket4' / 'sample' / '3LKF.pdb'
@@ -290,13 +292,13 @@ def test_fpocket4_argdigest_normalizes_structure_indices_for_native_path(monkeyp
     )
 
     result = fpocket4(
-        'dummy',
+        FP_3LKF_PDB,
         structure_indices=0,
         implementation='native',
     )
 
     assert captured['structure_indices'] == 0
-    assert result == ('native-state', {'molecular_system': 'dummy'})
+    assert result == ('native-state', {'molecular_system': str(FP_3LKF_PDB)})
 
 
 def test_fpocket4_native_prepare_receptor_keeps_b_factors_for_1atp():

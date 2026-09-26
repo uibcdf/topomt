@@ -58,7 +58,8 @@ viewer = [
   "topomt[centerline]",
 ]
 test = [
-  "pytest>=6.1.2",
+  "pytest>=8",
+  "pytest-receptor",
   "pytest-cov",
   "pytest-xdist",
 ]
