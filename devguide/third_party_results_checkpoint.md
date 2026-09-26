@@ -1,9 +1,13 @@
 # Third-party results checkpoint
 
 Updated: 2026-09-26
+Work state: paused at this checkpoint; external-result integration remains active
+when work resumes. The native provider-method review is queued for after its
+final parity gate.
 Plan: [third_party_results_plan.md](third_party_results_plan.md)
 Tracking issue: [#19](https://github.com/uibcdf/topomt/issues/19)
 Attribute-origin register: [third_party_attribute_origins.md](third_party_attribute_origins.md)
+Later phase: [native_methods_plan.md](native_methods_plan.md)
 
 ## Progress rule
 
@@ -33,6 +37,35 @@ separate scientific check against an inflated engineering percentage.
 full field inventories, four other providers, independent calculations,
 cross-provider validation, and the final parity battery. This percentage must
 be reduced if an accepted milestone regresses.
+
+The later review of TopoMT-owned fpocket, CASTp/CASTp3, Pocketeer, pyCASTA,
+and AlphaSpace2 algorithms has **not started**. Its progress is separate from
+the 100 points above. The 15-point independent-calculation milestone concerns
+individual descriptor definitions; it does not certify a complete native
+detection engine.
+
+## Resume sequence
+
+1. Check the worktree before editing; preserve the pre-existing untracked
+   `sandbox/smoke_test.ipynb`. Read this checkpoint, the
+   [external-result plan](third_party_results_plan.md), and the relevant
+   provider inventory. Do not infer that a prior local or remote green run
+   covers later commits.
+2. Finish each provider's open field and route inventory. The next concrete
+   CASTp slice is typed treatment of optional `.4.contrib.csv` atom
+   contributions and `.bulb.json` display geometry, with original bytes and
+   definitions still retained. The detailed provider-specific next gates are
+   listed below.
+3. Complete independent calculations, cross-provider cases, and the final
+   versioned, field-by-field parity suite. Use `pytest --receptor=llm` locally,
+   `pytest --receptor=ci` in CI, and `gh run-receptor` to inspect relevant
+   GitHub Actions runs. Update milestone evidence and the percentage only when
+   a full gate passes.
+4. Once the external plan's final gate is accepted, start the
+   [native-method review](native_methods_plan.md#review-after-external-result-integration).
+   Audit the existing local algorithm for each provider against the saved
+   original output. Create its own evidence-based checkpoint and progress
+   measure; do not merge its status into this 20/100 figure.
 
 ## Provider coverage at this checkpoint
 

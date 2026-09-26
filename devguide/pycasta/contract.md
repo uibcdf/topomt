@@ -1,9 +1,10 @@
 **PyCasta Contract**
 
-Purpose: record the active contract for the upcoming TopoMT-native
-`pycasta` method so the implementation stays focused on the reproducible
-geometric core of the upstream workflow while keeping track of the current
-drift between the paper description and the public repository.
+Purpose: record the contract for reviewing and improving the existing
+TopoMT-native `pycasta` method against the reproducible geometric core of the
+upstream workflow, while keeping track of the current drift between the paper
+description and the public repository. The local route already exists; its
+complete output parity is not established by this contract.
 
 ## Upstream references
 

@@ -17,7 +17,12 @@ The project is not yet a polished stable product. The main remaining gap is not 
 
 ## Current Priority
 
-The current priority is DFND hardening while preserving the conventional engine integrations as references and comparison targets.
+The current provider-integration workstream is paused at the
+[third-party results checkpoint](third_party_results_checkpoint.md): 20/100
+verified, with external-result fidelity still incomplete. Its next phase will
+audit the existing TopoMT-owned implementations of those provider algorithms
+after the external parity gate. DFND hardening remains a separate native
+TopoMT workstream.
 
 DFND is the native TopoMT method direction. It should not be forced into strict CASTp, fpocket, AlphaSpace2, Pocketeer, or pycasta parity. Those methods remain valuable as external references, loader or wrapper integrations, and qualitative/quantitative comparison baselines.
 
@@ -85,8 +90,8 @@ The conventional engines remain important, but they are no longer the only activ
 - `fpocket4` has strong native/source parity evidence on the audited set, with remaining source-level questions concentrated in raw geometry and build drift rather than final output for the audited local source build.
 - `alphaspace2` has native parity coverage for the currently audited reference behavior and a first Vina-aware/contact layer.
 - `pocketeer` has a native parity route and wrapper-backed Topography integration.
-- `pycasta` has repository-parity coverage on the audited bounded battery, with explicit repository-versus-paper and selection-semantics questions documented.
-- CASTp work is currently reference material and historical learning for DFND; strict CASTp3 parity is not the active target.
+- `pycasta` has local algorithm and bounded parity tests, with explicit repository-versus-paper and selection-semantics questions documented. Its native `Topography` adapter currently assigns volume as score; the later audit must compare it with the distinct upstream ranking score.
+- CASTp server/file integration is active in the external-result workstream. Strict parity of TopoMT's local CASTp3 algorithm is deferred to the later native review; the existing CASTp prototypes remain reference material for DFND.
 
 ## What Is Still Weak
 

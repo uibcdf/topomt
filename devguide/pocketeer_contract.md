@@ -1,8 +1,9 @@
 **Pocketeer Contract**
 
-Purpose: record the scope of the TopoMT-native `pocketeer` method so the
-implemented parity effort stays focused on the same descriptors that the
-original project documents.
+Purpose: record the scope of the existing TopoMT-native `pocketeer` method so
+its later post-integration audit stays focused on the descriptors that the
+original project documents. The local route exists; this contract does not
+certify full output parity.
 
 ## Upstream references
 

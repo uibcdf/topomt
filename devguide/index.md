@@ -39,8 +39,8 @@ and the next engineering steps.
   measurements with traceable comparisons.
 
 - [third_party_results_checkpoint.md](third_party_results_checkpoint.md)
-  Weighted progress, accepted evidence, provider coverage, and next gates for
-  the third-party results plan.
+  Paused-work restart sequence, weighted progress, accepted evidence, provider
+  coverage, next gates, and the handoff to the later native-method review.
 
 - [third_party_attribute_origins.md](third_party_attribute_origins.md)
   Register of application-specific feature attributes and the shared
@@ -93,9 +93,10 @@ and the next engineering steps.
   External repositories, binaries, packages, and validation targets used as
   reference points for the supported engines.
 - [pocketeer_contract.md](pocketeer_contract.md)
-  Scope note for the upcoming `pocketeer` parity implementation, linking to the upstream documentation and the local mirror repository.
+  Scope note for the existing local `pocketeer` implementation and its later
+  parity audit, linking to upstream documentation and the local mirror.
 - [pycasta/contract.md](pycasta/contract.md)
-  Active contract for the upcoming native `pycasta` implementation, including
+  Contract for reviewing the existing native `pycasta` implementation, including
   the upstream repository, the paper source, and the current
   repository-versus-paper audit notes.
 - [castp/contract.md](castp/contract.md)
@@ -110,8 +111,9 @@ and the next engineering steps.
   `molsysviewer_topomt`.
 
 - [native_methods_plan.md](native_methods_plan.md)
-  Native reimplementation plan for the prioritized engines and the intended
-  separation between `methods/` and `wrappers/`.
+  Existing local method inventory and the queued review of TopoMT-owned
+  fpocket, CASTp, Pocketeer, pyCASTA, and AlphaSpace2 implementations after
+  external-result integration.
 
 - [fpocket4/native_checkpoint.md](fpocket4/native_checkpoint.md)
   Current detailed checkpoint for the native `fpocket4` diagnostic and parity

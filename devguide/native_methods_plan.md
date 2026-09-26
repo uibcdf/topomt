@@ -1,5 +1,10 @@
 # Native Methods Plan
 
+Status: existing local implementations and historical parity checkpoints;
+systematic post-integration review queued. See
+[third_party_results_checkpoint.md](third_party_results_checkpoint.md) for the
+active external-result phase and its handoff gate.
+
 ## Purpose
 
 This document defines how TopoMT should evolve its engine implementations under
@@ -25,6 +30,38 @@ Initial design checkpoint:
 - [topomt_native_pockets_initial_design_2026_05_19.md](topomt_native_pockets_initial_design_2026_05_19.md)
 
 The previous idea of a separate native pocket method outside `topomt.dfnd.*` is superseded. DFND is the native method; CASTp1, CASTp3/CASTpFold, fpocket, and AlphaSpace2 remain benchmarks and references, not hidden specifications.
+
+## Review after external-result integration
+
+The user requires a second review once
+[third_party_results_plan.md](third_party_results_plan.md) reaches its final
+external-provider parity gate. The first phase checks that calling an upstream
+CLI, library, server, or loading its files yields the provider's original
+results in `Topography`. The second phase audits TopoMT-owned implementations
+of those algorithms. It has not started and is not included in the first
+phase's 20/100 progress figure.
+
+Current code-entry inventory, verified by reading the provider facades and
+local modules on 2026-09-26:
+
+| Method | Local entry point | External comparison route | Review focus |
+|---|---|---|---|
+| fpocket | `topomt.third_party.fpocket.native` and the distinct `topomt` variant | `topomt.third_party.fpocket.cli` and saved files | Recheck source-build identity, raw tessellation differences, final-pocket parity, descriptor definitions, and whether the corrected variant is clearly identified. |
+| CASTp/CASTp3 | `topomt.third_party.castp.native`; separate `topomt.third_party.castp3.native` code also exists | CASTp 3.0/CASTpFold server and saved ZIPs | Determine which local algorithm each route implements; measure feature, mouth, atom, SA/MS metric parity; retain the historical prototype status until evidence supports more. |
+| Pocketeer | `topomt.third_party.pocketeer.native` | `topomt.third_party.pocketeer.library` | Check alpha-sphere, SASA, clustering, score, mask and atom-mapping parity, including parameter and selection cases. |
+| pyCASTA | `topomt.third_party.pycasta.native` | `topomt.third_party.pycasta.library` | Check tetrahedron and flow stages, ranking score, depth, mouth geometry, atom indices and optional validation. The current native `Topography` adapter assigns `score=volume` and passes bare center/volume values, so both score parity and PyUnitWizard units need review. |
+| AlphaSpace2 | `topomt.third_party.alphaspace2.native` | `topomt.third_party.alphaspace2.library` | Recheck alpha/beta grouping, scores, binder/contact behavior, atom ownership and advanced typing. |
+
+For each row, the restart audit must record the upstream revision or server
+artifact, TopoMT revision, exact invocation and parameters, input structure
+and atom population, matched feature IDs or matching rule, stage-level and
+field-level differences with units and tolerances, public backend behavior,
+and a pytest selector. Treat old native checkpoints as evidence to reproduce,
+not as current pass certificates. A local method is marked provider-faithful
+only after the compared outputs and definitions pass on the fixed reference
+set; an intentionally changed method must have a separate TopoMT identity.
+The resulting decisions and remaining work become a dedicated native-method
+checkpoint before any native parity percentage is reported.
 
 ## Shared implementation principles
 
@@ -130,17 +167,15 @@ See [engine_acceleration_plan.md](engine_acceleration_plan.md).
 
 ### Current state
 
-`topomt.third_party.fpocket._native_impl` is currently wrapper-backed.
-
-It preserves fpocket semantics well for the validated systems, but it does so
-through:
-
-- the external `fpocket` binary;
-- parsing of fpocket output files;
-- and a wrapper-to-`Topography` adaptation layer.
-
-This is useful and should remain available, but it is not the final target for
-`topomt.third_party.fpocket._native_impl`.
+`topomt.third_party.fpocket._native_impl` contains a local fpocket algorithm
+path as well as compatibility routing. The provider facade exposes separate
+`cli`, `native`, and `topomt` backends. The native path builds local state and
+returns local features; the CLI path invokes the external binary. The
+[fpocket native checkpoint](fpocket4/native_checkpoint.md) reports strong
+parity for an audited source build, while raw tessellation and binary-build
+differences remain to be rechecked at the post-integration gate. The
+`topomt` variant intentionally carries TopoMT-side changes and needs its own
+identity in comparisons.
 
 ### Upstream semantics that must be preserved
 
@@ -340,8 +375,14 @@ Useful TopoMT-side tools for the native implementation include:
 
 ### Current state
 
-`pycasta` is now a reviewed prioritized engine, but not yet an implemented
-native method in TopoMT.
+`pycasta` now has a local implementation in
+`topomt.third_party.pycasta._native_impl` and a `Topography` adapter in
+`topomt.third_party.pycasta.native`. This existing route requires a fresh
+stage-by-stage and output-field audit after the external provider phase. In
+particular, its current `Topography` adapter uses volume as `score`, whereas
+the upstream library exposes a distinct ranking score; it also passes bare
+center and volume values to `Pocket`. The local route must
+not be described as fully provider-faithful on that evidence alone.
 
 The current upstream material consists of:
 
@@ -439,15 +480,20 @@ The validation path should differ from the runtime path.
 - failures should be interpreted as semantic gaps in the reimplementation, not
   as evidence that TopoMT should import the upstream code at runtime.
 
-## Immediate next steps
+## Next steps after the external-result gate
 
-1. Keep `fpocket4` documented as transitional while its provider structure is refined.
-2. Start a native `fpocket4` plan around alpha-sphere generation and refine
-   semantics.
-3. Start a native `alphaspace2` plan around `genAlphas()` and exact lining
-   atoms.
-4. Formalize the initial `pycasta` native contract around repository parity
-   before deciding whether a second paper-faithful mode or an upstream report
-   is needed.
-5. Extend tests so all prioritized native methods can be measured continuously
-   against their upstream references.
+1. Re-run and refresh the existing fpocket, AlphaSpace2, Pocketeer, and pyCASTA
+   native parity checkpoints against the versions and artifacts fixed by the
+   external-result phase. Start with the current local implementations; do not
+   restart their plans from a blank implementation.
+2. Audit the two CASTp-family local code paths and the
+   [from-scratch CASTp plan](CASTp/implementation.md) against CASTp 3.0 and
+   CASTpFold exports. Decide whether the current prototypes can be hardened or
+   which stages require replacement.
+3. For every provider, write the stage/field comparison matrix and a fresh
+   native checkpoint with pass/fail selectors, known divergences, versioned
+   references, and a decision about the public `native` route.
+4. Preserve the independently useful CLI, library, server, and file routes
+   while native code is corrected. Track intentionally different TopoMT
+   algorithms under explicit identities rather than folding them into an
+   upstream-parity claim.

@@ -186,6 +186,37 @@ AlphaSpace2, CASTp/CASTpFold, and pyCASTA, the field inventories have no silent
 gaps, and documented external-engine results exposed by TopoMT agree with the
 original provider output within their declared comparison rules.
 
+## Handoff to the native provider-method review
+
+After the external-result plan passes its final gate, review TopoMT's own
+implementations of the corresponding algorithms. This is a **separate next
+phase**, tracked in [native_methods_plan.md](native_methods_plan.md). It does
+not change the 100-point denominator or the currently verified percentage in
+[third_party_results_checkpoint.md](third_party_results_checkpoint.md).
+Individual descriptor calculations in step 3 above are prerequisites and
+useful building blocks; they do not by themselves validate a complete native
+pocket-detection algorithm.
+
+The review must include fpocket, CASTp/CASTp3, Pocketeer, pyCASTA, and
+AlphaSpace2 because each has a local method path. For each one, inventory the
+actual route exposed by `get_topography`, distinguish local algorithm code
+from CLI/library/server execution, and compare the local route against the
+versioned original output already captured in this phase. Audit input atom
+selection and ordering, probe/radius policy, geometric stages, feature and
+mouth identities, atom membership, classifications, all reported descriptors,
+units, failure cases, performance, and independence from the upstream runtime.
+Record known divergence as an explicit TopoMT variant rather than calling it
+provider parity. Keep the external routes available for users and for future
+regression comparisons.
+
+The native review starts from a field and stage matrix with a reproducible
+reference run, a concrete pytest selector, and a decision per provider:
+retain and harden the existing local implementation, implement missing stages,
+or keep a local route explicitly experimental. The review is accepted only
+when those decisions and their evidence are recorded in the native-method
+checkpoint; implementation work follows its own gates. DFND remains TopoMT's
+independent native method, with its own semantics and validation.
+
 ## Issue policy
 
 Use one English-language GitHub issue for each missing calculable measurement
