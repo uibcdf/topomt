@@ -95,6 +95,11 @@ def test_castp_provider_load_topography_reads_server_zip(tmp_path):
     assert {
         parent.source_id for parent in topography.parents_of(mouth_2.feature_id)
     } == {'Pocket 2'}
+    pocket_1 = next(
+        feature
+        for feature in _castp_surface_features(topography)
+        if feature.source_id == 'Pocket 1'
+    )
     mouth_1 = next(
         mouth
         for mouth in topography.get_features(by='type', value='mouth')
@@ -115,14 +120,24 @@ def test_castp_provider_load_topography_reads_server_zip(tmp_path):
             measurement.issue_url == f'https://github.com/uibcdf/topomt/issues/{issue}'
         )
         assert puw.get_value(getattr(mouth_1, name)) == pytest.approx(normalized)
+    for feature, name, original, unit, source_field, issue in (
+        (pocket_1, 'length', 234.656, 'angstroms', 'pocInfo[1].Lenth', 49),
+        (pocket_1, 'corner_points_count', 108, '1', 'pocInfo[1].cnr', 50),
+        (pocket_1, 'n_mouths', 1, '1', 'pocInfo[1].N_mth', 51),
+        (mouth_1, 'n_triangles', 24, '1', 'mouthInfo[1].Ntri', 52),
+        (mouth_1, 'n_mouths', 1, '1', 'mouthInfo[1].N_mth', 51),
+    ):
+        measurement = feature.external_measurements[name]
+        assert measurement.original_value == pytest.approx(original)
+        assert measurement.original_unit == unit
+        assert measurement.source_field == source_field
+        assert (
+            measurement.issue_url == f'https://github.com/uibcdf/topomt/issues/{issue}'
+        )
+    assert puw.get_value(pocket_1.length, to_unit='nm') == pytest.approx(23.4656)
     assert all(
         mouth.provider_run_id == run.run_id
         for mouth in topography.get_features(by='type', value='mouth')
-    )
-    pocket_1 = next(
-        feature
-        for feature in _castp_surface_features(topography)
-        if feature.source_id == 'Pocket 1'
     )
     for name, original, unit, normalized, source_field, issue in (
         ('solvent_accessible_area', 283.364, 'angstroms**2', 2.83364, 'Area_sa', 41),

@@ -447,6 +447,61 @@ def load_CASTp(
                             issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
                             status='external_only',
                         )
+                original_length = float(
+                    puw.get_value(
+                        poc_id_to_poc_data[poc_id]['length'], to_unit='angstroms'
+                    )
+                )
+                args_dict['length'] = puw.quantity(original_length / 10.0, 'nm')
+                for (
+                    name,
+                    original_value,
+                    value,
+                    original_unit,
+                    source_field,
+                    issue,
+                    definition,
+                ) in (
+                    (
+                        'length',
+                        original_length,
+                        args_dict['length'],
+                        'angstroms',
+                        'Lenth',
+                        49,
+                        'CASTp reported pocket length; exact geometric definition pending audit',
+                    ),
+                    (
+                        'corner_points_count',
+                        args_dict['corner_points_count'],
+                        args_dict['corner_points_count'],
+                        '1',
+                        'cnr',
+                        50,
+                        'CASTp corner-point count in its discrete surface representation',
+                    ),
+                    (
+                        'n_mouths',
+                        args_dict['n_mouths'],
+                        args_dict['n_mouths'],
+                        '1',
+                        'N_mth',
+                        51,
+                        'Number of CASTp-reported mouth openings for the pocket',
+                    ),
+                ):
+                    if provider_run is not None and pocInfo_file is not None:
+                        attributed_measurements[name] = ExternalMeasurement(
+                            value=value,
+                            original_value=original_value,
+                            original_unit=original_unit,
+                            source_field=f'pocInfo[{poc_id}].{source_field}',
+                            source_artifact=f'output/{pocInfo_file.name}',
+                            run_id=provider_run.run_id,
+                            definition=definition,
+                            issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
+                            status='external_only',
+                        )
                 if attributed_measurements:
                     args_dict['external_measurements'] = attributed_measurements
             feature_id = topography.add_new_feature(
@@ -525,6 +580,33 @@ def load_CASTp(
                             original_value=original_value,
                             original_unit=original_unit,
                             source_field=f'mouthInfo[{mouth_id}].{original_field}',
+                            source_artifact=f'output/{mouthInfo_file.name}',
+                            run_id=provider_run.run_id,
+                            definition=definition,
+                            issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
+                            status='external_only',
+                        )
+                for name, source_field, issue, definition in (
+                    (
+                        'n_mouths',
+                        'N_mth',
+                        51,
+                        'Number of CASTp-reported mouth openings in this aggregate',
+                    ),
+                    (
+                        'n_triangles',
+                        'Ntri',
+                        52,
+                        'CASTp mouth triangle count in its surface representation',
+                    ),
+                ):
+                    if provider_run is not None and mouthInfo_file is not None:
+                        count = int(args_dict[name])
+                        attributed_measurements[name] = ExternalMeasurement(
+                            value=count,
+                            original_value=count,
+                            original_unit='1',
+                            source_field=f'mouthInfo[{mouth_id}].{source_field}',
                             source_artifact=f'output/{mouthInfo_file.name}',
                             run_id=provider_run.run_id,
                             definition=definition,
