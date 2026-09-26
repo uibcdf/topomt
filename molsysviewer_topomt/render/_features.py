@@ -73,7 +73,10 @@ def clear_feature_representations(
     if representation is not None:
         key = f'components:{tag_prefix}:{representation}'
         return clear_previous_render_result(view, key) is not None
-    return clear_previous_render_result(view, _feature_operation_key(tag_prefix)) is not None
+    return (
+        clear_previous_render_result(view, _feature_operation_key(tag_prefix))
+        is not None
+    )
 
 
 def hide_feature_representations(
@@ -190,9 +193,7 @@ def show_features(
     layers = tuple(layer for result in results for layer in result.layers)
     tags = tuple(tag for result in results for tag in result.tags)
     rendered_component_set = {
-        component_id
-        for result in results
-        for component_id in result.rendered_ids
+        component_id for result in results for component_id in result.rendered_ids
     }
     # rendered_ids in FEATURE order (selected_component_ids), not group order
     rendered_ids = tuple(

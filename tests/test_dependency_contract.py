@@ -1,9 +1,10 @@
 """Dependency contract tests for TopoMT packaging and optional features."""
 
+import tomllib
+
 import depdigest.core.decorator as depdigest_decorator
 import numpy as np
 import pytest
-import tomllib
 
 from topomt._private.smonitor import LibraryNotFoundError
 
@@ -61,7 +62,9 @@ def test_depdigest_inventory_tracks_feature_dependencies_only():
     assert MAPPING['biotite_structure'] == 'biotite'
 
 
-def _raise_missing_dependency(module_name, pypi_name=None, caller=None, exception_class=ImportError):
+def _raise_missing_dependency(
+    module_name, pypi_name=None, caller=None, exception_class=ImportError
+):
     raise exception_class(library=pypi_name or module_name, caller=caller)
 
 

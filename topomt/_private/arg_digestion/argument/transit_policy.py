@@ -9,5 +9,5 @@ def digest_transit_policy(transit_policy, caller=None):
         arg_name='transit_policy',
         value=transit_policy,
         caller=caller,
-        reason="transit_policy must be resident_only or with_connectors.",
+        reason='transit_policy must be resident_only or with_connectors.',
     )

@@ -5,8 +5,8 @@ from pathlib import Path
 
 import numpy as np
 
-from topomt.dfnd.graph import DelaunayFlowNetwork
 from topomt.dfnd.data import DFNDData
+from topomt.dfnd.graph import DelaunayFlowNetwork
 from topomt.dfnd.lineage import jaccard, match_results
 
 _DATA = Path(__file__).resolve().parents[1] / 'topomt' / 'data' / 'synthetic'
@@ -21,7 +21,9 @@ def _wet_components(name, *, jitter=0.0, seed=0):
     if jitter:
         rng = np.random.default_rng(seed)
         coords = coords + rng.normal(scale=jitter, size=coords.shape)
-    net = DelaunayFlowNetwork.from_coordinates_and_radii(coords, np.full(len(coords), 1.88), epsilon=1e-7)
+    net = DelaunayFlowNetwork.from_coordinates_and_radii(
+        coords, np.full(len(coords), 1.88), epsilon=1e-7
+    )
     dfnd = DFNDData(net, net.get_topography(probe_radius=1.4, min_size=0))
     return list(dfnd.dfn.components.wet)
 
@@ -72,6 +74,7 @@ def test_match_accepts_dict_records():
 
 def test_assign_tracks_continues_identical_frames():
     from topomt.dfnd.lineage import assign_tracks
+
     comps = _wet_components('tube_channel_clean.pdb')
     result = assign_tracks([comps, comps, comps])  # three identical frames
     track_of = result['track_of']
@@ -88,19 +91,22 @@ def test_assign_tracks_continues_identical_frames():
 
 def test_assign_tracks_detects_split_and_merge():
     from topomt.dfnd.lineage import assign_tracks
+
     # synthetic dict frames: A splits into B1+B2, then B1+B2 merge back into C
-    frame0 = [{'component_key': 'A', 'support_key': 'sA',
-               'atom_indices': [1, 2, 3, 4, 5, 6]}]
+    frame0 = [
+        {'component_key': 'A', 'support_key': 'sA', 'atom_indices': [1, 2, 3, 4, 5, 6]}
+    ]
     frame1 = [
         {'component_key': 'B1', 'support_key': 'sB1', 'atom_indices': [1, 2, 3]},
         {'component_key': 'B2', 'support_key': 'sB2', 'atom_indices': [4, 5, 6]},
     ]
-    frame2 = [{'component_key': 'C', 'support_key': 'sC',
-               'atom_indices': [1, 2, 3, 4, 5, 6]}]
+    frame2 = [
+        {'component_key': 'C', 'support_key': 'sC', 'atom_indices': [1, 2, 3, 4, 5, 6]}
+    ]
     result = assign_tracks([frame0, frame1, frame2], min_jaccard=0.2)
     types = [e['type'] for e in result['events']]
-    assert 'split' in types   # A -> B1, B2
-    assert 'merge' in types   # B1, B2 -> C
+    assert 'split' in types  # A -> B1, B2
+    assert 'merge' in types  # B1, B2 -> C
     split = next(e for e in result['events'] if e['type'] == 'split')
     assert set(split['into']) == {'B1', 'B2'}
     merge = next(e for e in result['events'] if e['type'] == 'merge')

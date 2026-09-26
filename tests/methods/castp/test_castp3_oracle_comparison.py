@@ -67,22 +67,26 @@ def test_native_atom_id_sets_exports_aggregated_mouth_records():
 
     assert atom_sets['branched_channel'] == [frozenset({10, 20, 30})]
     assert atom_sets['mouth'] == [frozenset({10, 20, 30})]
-    assert Counter(atom_sets['mouth']) != Counter([
-        frozenset({10, 20}),
-        frozenset({20, 30}),
-    ])
+    assert Counter(atom_sets['mouth']) != Counter(
+        [
+            frozenset({10, 20}),
+            frozenset({20, 30}),
+        ]
+    )
 
 
 def test_render_markdown_table():
-    table = render_markdown_table([
-        ParityRow(
-            pdb_id='3phv',
-            feature_type='mouth',
-            oracle_count=11,
-            native_count=11,
-            exact_count=11,
-        )
-    ])
+    table = render_markdown_table(
+        [
+            ParityRow(
+                pdb_id='3phv',
+                feature_type='mouth',
+                oracle_count=11,
+                native_count=11,
+                exact_count=11,
+            )
+        ]
+    )
 
     assert '| pdb | type | oracle | native | exact |' in table
     assert '| 3phv | mouth | 11 | 11 | 11 |' in table

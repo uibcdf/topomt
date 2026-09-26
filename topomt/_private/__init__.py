@@ -1,1 +1,1 @@
-from . import arg_digestion
+from . import arg_digestion as arg_digestion

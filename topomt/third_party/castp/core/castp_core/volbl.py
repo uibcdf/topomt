@@ -7,7 +7,6 @@ from typing import Callable
 
 import numpy as np
 
-
 EPSILON = 1.0e-5
 _FACE_RANK_MAP_CACHE_LIMIT = 16
 _FACE_RANK_MAP_CACHE: dict[
@@ -208,28 +207,76 @@ class VolblMetricContext:
         a4 = self._det3(x0, y0, z0, x1, y1, z1, x2, y2, z2)
 
         d0 = self._det4(
-            x0, y0, z0, 1.0,
-            x1, y1, z1, 1.0,
-            x2, y2, z2, 1.0,
-            a1, a2, a3, 0.0,
+            x0,
+            y0,
+            z0,
+            1.0,
+            x1,
+            y1,
+            z1,
+            1.0,
+            x2,
+            y2,
+            z2,
+            1.0,
+            a1,
+            a2,
+            a3,
+            0.0,
         )
         dx = self._det4(
-            -i0, y0, z0, 1.0,
-            -j0, y1, z1, 1.0,
-            -k0, y2, z2, 1.0,
-            a4, a2, a3, 0.0,
+            -i0,
+            y0,
+            z0,
+            1.0,
+            -j0,
+            y1,
+            z1,
+            1.0,
+            -k0,
+            y2,
+            z2,
+            1.0,
+            a4,
+            a2,
+            a3,
+            0.0,
         )
         dy = self._det4(
-            x0, -i0, z0, 1.0,
-            x1, -j0, z1, 1.0,
-            x2, -k0, z2, 1.0,
-            a1, a4, a3, 0.0,
+            x0,
+            -i0,
+            z0,
+            1.0,
+            x1,
+            -j0,
+            z1,
+            1.0,
+            x2,
+            -k0,
+            z2,
+            1.0,
+            a1,
+            a4,
+            a3,
+            0.0,
         )
         dz = self._det4(
-            x0, y0, -i0, 1.0,
-            x1, y1, -j0, 1.0,
-            x2, y2, -k0, 1.0,
-            a1, a2, a4, 0.0,
+            x0,
+            y0,
+            -i0,
+            1.0,
+            x1,
+            y1,
+            -j0,
+            1.0,
+            x2,
+            y2,
+            -k0,
+            1.0,
+            a1,
+            a2,
+            a4,
+            0.0,
         )
         return np.asarray([dx / d0, dy / d0, dz / d0], dtype=float)
 
@@ -249,28 +296,76 @@ class VolblMetricContext:
         l0 = self._lift0(l)
 
         d0 = self._det4(
-            x0, y0, z0, 1.0,
-            x1, y1, z1, 1.0,
-            x2, y2, z2, 1.0,
-            x3, y3, z3, 1.0,
+            x0,
+            y0,
+            z0,
+            1.0,
+            x1,
+            y1,
+            z1,
+            1.0,
+            x2,
+            y2,
+            z2,
+            1.0,
+            x3,
+            y3,
+            z3,
+            1.0,
         )
         dx = self._det4(
-            -i0, y0, z0, 1.0,
-            -j0, y1, z1, 1.0,
-            -k0, y2, z2, 1.0,
-            -l0, y3, z3, 1.0,
+            -i0,
+            y0,
+            z0,
+            1.0,
+            -j0,
+            y1,
+            z1,
+            1.0,
+            -k0,
+            y2,
+            z2,
+            1.0,
+            -l0,
+            y3,
+            z3,
+            1.0,
         )
         dy = self._det4(
-            x0, -i0, z0, 1.0,
-            x1, -j0, z1, 1.0,
-            x2, -k0, z2, 1.0,
-            x3, -l0, z3, 1.0,
+            x0,
+            -i0,
+            z0,
+            1.0,
+            x1,
+            -j0,
+            z1,
+            1.0,
+            x2,
+            -k0,
+            z2,
+            1.0,
+            x3,
+            -l0,
+            z3,
+            1.0,
         )
         dz = self._det4(
-            x0, y0, -i0, 1.0,
-            x1, y1, -j0, 1.0,
-            x2, y2, -k0, 1.0,
-            x3, y3, -l0, 1.0,
+            x0,
+            y0,
+            -i0,
+            1.0,
+            x1,
+            y1,
+            -j0,
+            1.0,
+            x2,
+            y2,
+            -k0,
+            1.0,
+            x3,
+            y3,
+            -l0,
+            1.0,
         )
         return np.asarray(
             [
@@ -430,8 +525,12 @@ class VolblMetricContext:
     def cap2_volume(self, i: int, j: int, k: int) -> float:
         radius = float(self.radii[int(i)])
         sector = (1.0 / 3.0) * radius * self.cap2_area(i, j, k)
-        side_j = (1.0 / 3.0) * (radius - self.cap_height(i, j)) * self.segment_area(i, j, k)
-        side_k = (1.0 / 3.0) * (radius - self.cap_height(i, k)) * self.segment_area(i, k, j)
+        side_j = (
+            (1.0 / 3.0) * (radius - self.cap_height(i, j)) * self.segment_area(i, j, k)
+        )
+        side_k = (
+            (1.0 / 3.0) * (radius - self.cap_height(i, k)) * self.segment_area(i, k, j)
+        )
         return sector - side_j - side_k
 
     @lru_cache(maxsize=None)
@@ -462,9 +561,21 @@ class VolblMetricContext:
     def cap3_volume(self, i: int, j: int, k: int, l: int) -> float:
         radius = float(self.radii[int(i)])
         sector = (1.0 / 3.0) * radius * self.cap3_area(i, j, k, l)
-        side_j = (1.0 / 3.0) * (radius - self.cap_height(i, j)) * self.segment2_area(i, j, k, l)
-        side_k = (1.0 / 3.0) * (radius - self.cap_height(i, k)) * self.segment2_area(i, k, j, l)
-        side_l = (1.0 / 3.0) * (radius - self.cap_height(i, l)) * self.segment2_area(i, l, j, k)
+        side_j = (
+            (1.0 / 3.0)
+            * (radius - self.cap_height(i, j))
+            * self.segment2_area(i, j, k, l)
+        )
+        side_k = (
+            (1.0 / 3.0)
+            * (radius - self.cap_height(i, k))
+            * self.segment2_area(i, k, j, l)
+        )
+        side_l = (
+            (1.0 / 3.0)
+            * (radius - self.cap_height(i, l))
+            * self.segment2_area(i, l, j, k)
+        )
         return sector - side_j - side_k - side_l
 
     @lru_cache(maxsize=None)
@@ -481,7 +592,9 @@ class VolblMetricContext:
 
     @lru_cache(maxsize=None)
     def ball3_area(self, i: int, j: int, k: int) -> float:
-        return self.cap2_area(i, j, k) + self.cap2_area(j, i, k) + self.cap2_area(k, i, j)
+        return (
+            self.cap2_area(i, j, k) + self.cap2_area(j, i, k) + self.cap2_area(k, i, j)
+        )
 
     @lru_cache(maxsize=None)
     def ball3_length(self, i: int, j: int, k: int) -> float:
@@ -493,7 +606,11 @@ class VolblMetricContext:
 
     @lru_cache(maxsize=None)
     def ball3_volume(self, i: int, j: int, k: int) -> float:
-        return self.cap2_volume(i, j, k) + self.cap2_volume(j, i, k) + self.cap2_volume(k, i, j)
+        return (
+            self.cap2_volume(i, j, k)
+            + self.cap2_volume(j, i, k)
+            + self.cap2_volume(k, i, j)
+        )
 
     @lru_cache(maxsize=None)
     def ball4_area(self, i: int, j: int, k: int, l: int) -> float:
@@ -684,14 +801,24 @@ class VolblMetricContext:
         if disk_radius > solvent_radius:
             area_i = 2.0 * pi * solvent_radius * (disk_radius * angle_i - dist_i)
             area_j = 2.0 * pi * solvent_radius * (disk_radius * angle_j - dist_j)
-            volume_i = self.volume_torus_fraction(sin_i, disk_radius, solvent_radius, angle_i)
-            volume_j = self.volume_torus_fraction(sin_j, disk_radius, solvent_radius, angle_j)
-        else:
-            area_i = 2.0 * pi * solvent_radius * (
-                disk_radius * (angle_i - angle) - (dist_i - half_ab)
+            volume_i = self.volume_torus_fraction(
+                sin_i, disk_radius, solvent_radius, angle_i
             )
-            area_j = 2.0 * pi * solvent_radius * (
-                disk_radius * (angle_j - angle) - (dist_j - half_ab)
+            volume_j = self.volume_torus_fraction(
+                sin_j, disk_radius, solvent_radius, angle_j
+            )
+        else:
+            area_i = (
+                2.0
+                * pi
+                * solvent_radius
+                * (disk_radius * (angle_i - angle) - (dist_i - half_ab))
+            )
+            area_j = (
+                2.0
+                * pi
+                * solvent_radius
+                * (disk_radius * (angle_j - angle) - (dist_j - half_ab))
             )
             volume_i = self.volume_cone_frustum(
                 vdw_i * cos_i,
@@ -771,19 +898,23 @@ class VolblMetricContext:
         disk_radius: float,
         solvent_radius: float,
     ) -> float:
-        return pi * solvent_radius * (
-            (
-                disk_radius * disk_radius * sin_phi2
-                - solvent_radius * disk_radius * phi2
-                - solvent_radius * disk_radius * sin_phi2 * cos_phi2
-                + solvent_radius * solvent_radius * (
-                    sin_phi2 - sin_phi2 * sin_phi2 * sin_phi2 / 3.0
+        return (
+            pi
+            * solvent_radius
+            * (
+                (
+                    disk_radius * disk_radius * sin_phi2
+                    - solvent_radius * disk_radius * phi2
+                    - solvent_radius * disk_radius * sin_phi2 * cos_phi2
+                    + solvent_radius
+                    * solvent_radius
+                    * (sin_phi2 - sin_phi2 * sin_phi2 * sin_phi2 / 3.0)
                 )
-            )
-            - (
-                -solvent_radius * disk_radius * phi1
-                + solvent_radius * solvent_radius * (
-                    sin_phi1 - sin_phi1 * sin_phi1 * sin_phi1 / 3.0
+                - (
+                    -solvent_radius * disk_radius * phi1
+                    + solvent_radius
+                    * solvent_radius
+                    * (sin_phi1 - sin_phi1 * sin_phi1 * sin_phi1 / 3.0)
                 )
             )
         )
@@ -796,12 +927,16 @@ class VolblMetricContext:
         disk_radius: float,
         solvent_radius: float,
     ) -> float:
-        return pi * solvent_radius * (
-            disk_radius * disk_radius * sin_phi
-            - solvent_radius * disk_radius * phi
-            - solvent_radius * disk_radius * sin_phi * cos_phi
-            + solvent_radius * solvent_radius * (
-                sin_phi - sin_phi * sin_phi * sin_phi / 3.0
+        return (
+            pi
+            * solvent_radius
+            * (
+                disk_radius * disk_radius * sin_phi
+                - solvent_radius * disk_radius * phi
+                - solvent_radius * disk_radius * sin_phi * cos_phi
+                + solvent_radius
+                * solvent_radius
+                * (sin_phi - sin_phi * sin_phi * sin_phi / 3.0)
             )
         )
 
@@ -816,8 +951,11 @@ class VolblMetricContext:
         solvent_radius: float,
         angle: float,
     ) -> float:
-        return pi * solvent_radius * solvent_radius * (
-            disk_radius * angle - 2.0 * solvent_radius * sin_phi / 3.0
+        return (
+            pi
+            * solvent_radius
+            * solvent_radius
+            * (disk_radius * angle - 2.0 * solvent_radius * sin_phi / 3.0)
         )
 
     @staticmethod
@@ -870,24 +1008,48 @@ class VolblMetricContext:
         a33: float,
     ) -> float:
         minor0 = VolblMetricContext._det3(
-            a11, a12, a13,
-            a21, a22, a23,
-            a31, a32, a33,
+            a11,
+            a12,
+            a13,
+            a21,
+            a22,
+            a23,
+            a31,
+            a32,
+            a33,
         )
         minor1 = VolblMetricContext._det3(
-            a10, a12, a13,
-            a20, a22, a23,
-            a30, a32, a33,
+            a10,
+            a12,
+            a13,
+            a20,
+            a22,
+            a23,
+            a30,
+            a32,
+            a33,
         )
         minor2 = VolblMetricContext._det3(
-            a10, a11, a13,
-            a20, a21, a23,
-            a30, a31, a33,
+            a10,
+            a11,
+            a13,
+            a20,
+            a21,
+            a23,
+            a30,
+            a31,
+            a33,
         )
         minor3 = VolblMetricContext._det3(
-            a10, a11, a12,
-            a20, a21, a22,
-            a30, a31, a32,
+            a10,
+            a11,
+            a12,
+            a20,
+            a21,
+            a22,
+            a30,
+            a31,
+            a32,
         )
         return a00 * minor0 - a01 * minor1 + a02 * minor2 - a03 * minor3
 
@@ -1046,9 +1208,7 @@ class VolblMetricContext:
                 solvent_radius * sin_phi,
             )
             if not cusp:
-                area_phi = 2.0 * pi * solvent_radius * (
-                    dist_phi - disk_radius * phi
-                )
+                area_phi = 2.0 * pi * solvent_radius * (dist_phi - disk_radius * phi)
                 volume_phi -= self.volume_spindle(
                     phi,
                     sin_phi,
@@ -1176,15 +1336,9 @@ def space_filling_measurements(
                 corners += 2
                 area_sa += area_i + area_j + area_k
                 area_ms += shell_i.area + shell_j.area + shell_k.area
-                area_ms -= segment_angle_ij_k * (
-                    torus_ij.area_1 + torus_ij.area_2
-                )
-                area_ms -= segment_angle_ik_j * (
-                    torus_ik.area_1 + torus_ik.area_2
-                )
-                area_ms -= segment_angle_jk_i * (
-                    torus_jk.area_1 + torus_jk.area_2
-                )
+                area_ms -= segment_angle_ij_k * (torus_ij.area_1 + torus_ij.area_2)
+                area_ms -= segment_angle_ik_j * (torus_ik.area_1 + torus_ik.area_2)
+                area_ms -= segment_angle_jk_i * (torus_jk.area_1 + torus_jk.area_2)
                 area_ms += 2.0 * patch_ijk.area
             elif f_type == ALF_TETRA:
                 i, j, k, l = [
@@ -1226,10 +1380,7 @@ def space_filling_measurements(
                 volume_sa -= ball4_volume_ijkl
                 volume_ms -= ball4_volume_ijkl
                 volume_ms += (
-                    shell_i.volume
-                    + shell_j.volume
-                    + shell_k.volume
-                    + shell_l.volume
+                    shell_i.volume + shell_j.volume + shell_k.volume + shell_l.volume
                 )
                 volume_ms -= segment2_angle_ij_kl * (
                     torus_ij.volume_1 + torus_ij.volume_2
@@ -1256,32 +1407,15 @@ def space_filling_measurements(
                     + patch_jkl.volume
                 )
                 area_sa -= area_i + area_j + area_k + area_l
+                area_ms -= shell_i.area + shell_j.area + shell_k.area + shell_l.area
+                area_ms += segment2_angle_ij_kl * (torus_ij.area_1 + torus_ij.area_2)
+                area_ms += segment2_angle_ik_jl * (torus_ik.area_1 + torus_ik.area_2)
+                area_ms += segment2_angle_il_jk * (torus_il.area_1 + torus_il.area_2)
+                area_ms += segment2_angle_jk_il * (torus_jk.area_1 + torus_jk.area_2)
+                area_ms += segment2_angle_jl_ik * (torus_jl.area_1 + torus_jl.area_2)
+                area_ms += segment2_angle_kl_ij * (torus_kl.area_1 + torus_kl.area_2)
                 area_ms -= (
-                    shell_i.area + shell_j.area + shell_k.area + shell_l.area
-                )
-                area_ms += segment2_angle_ij_kl * (
-                    torus_ij.area_1 + torus_ij.area_2
-                )
-                area_ms += segment2_angle_ik_jl * (
-                    torus_ik.area_1 + torus_ik.area_2
-                )
-                area_ms += segment2_angle_il_jk * (
-                    torus_il.area_1 + torus_il.area_2
-                )
-                area_ms += segment2_angle_jk_il * (
-                    torus_jk.area_1 + torus_jk.area_2
-                )
-                area_ms += segment2_angle_jl_ik * (
-                    torus_jl.area_1 + torus_jl.area_2
-                )
-                area_ms += segment2_angle_kl_ij * (
-                    torus_kl.area_1 + torus_kl.area_2
-                )
-                area_ms -= (
-                    patch_ijk.area
-                    + patch_ijl.area
-                    + patch_ikl.area
-                    + patch_jkl.area
+                    patch_ijk.area + patch_ijl.area + patch_ikl.area + patch_jkl.area
                 )
                 length += context.ball4_length(i, j, k, l)
                 corners -= 4
@@ -1566,8 +1700,7 @@ def _measure_void_component(
     volume_sa = 0.0
     for simplex_index in simplex_indices:
         i, j, k, l = [
-            int(atom_index)
-            for atom_index in simplex_atom_indices[int(simplex_index)]
+            int(atom_index) for atom_index in simplex_atom_indices[int(simplex_index)]
         ]
         volume_sa += context.tetrahedron_volume(i, j, k, l)
 
@@ -1579,8 +1712,7 @@ def _measure_void_component(
 
     for simplex_index in simplex_indices:
         i, j, k, l = [
-            int(atom_index)
-            for atom_index in simplex_atom_indices[int(simplex_index)]
+            int(atom_index) for atom_index in simplex_atom_indices[int(simplex_index)]
         ]
         vertices = (i, j, k, l)
         for vertex_position, vertex_index in enumerate(vertices):
@@ -1767,11 +1899,7 @@ def _void_tetra_triangle(
         ),
         area_sa=area_i + area_j + area_k,
         area_ms=(
-            shell_i.area
-            + shell_j.area
-            + shell_k.area
-            - torus_area
-            + patch_ijk.area
+            shell_i.area + shell_j.area + shell_k.area - torus_area + patch_ijk.area
         ),
         length=-context.pawn_length(i, j, k),
         corners=1,
@@ -1848,9 +1976,7 @@ def _complex_tetrahedron_fringe_deltas(
         if _vertex_is_interior(geometry, vertex_index, int(input_rank)):
             continue
         others = tuple(
-            int(vertices[index])
-            for index in range(4)
-            if index != int(vertex_position)
+            int(vertices[index]) for index in range(4) if index != int(vertex_position)
         )
         deltas.append(_outside_tetra_vertex(context, vertex_index, *others))
 
@@ -2108,7 +2234,9 @@ def _face_is_interior(geometry, i: int, j: int, k: int, rank: int) -> bool:
     return bool(_rank_table_is_interior(mu2_rank, int(rank)))
 
 
-def _face_rank_maps_by_atoms(geometry) -> dict[tuple[int, int, int], tuple[int, int, int]]:
+def _face_rank_maps_by_atoms(
+    geometry,
+) -> dict[tuple[int, int, int], tuple[int, int, int]]:
     cached = _FACE_RANK_MAP_CACHE.get(id(geometry))
     if cached is not None and cached[0] is geometry:
         return cached[1]

@@ -40,9 +40,7 @@ VALID_STATUS = frozenset(
 )
 # ``family`` = the topological classification the kernel records; ``classification``
 # = a morphological refinement name emitted by the catalog (classify) on top of it.
-VALID_KIND = frozenset(
-    {'family', 'feature', 'motif', 'metric', 'classification'}
-)
+VALID_KIND = frozenset({'family', 'feature', 'motif', 'metric', 'classification'})
 
 
 @dataclass(frozen=True)

@@ -62,9 +62,13 @@ def test_classify_refines_open_concavity_to_cleft_by_depth():
     # open (occlusion <= 1) + DEEP (buriedness >= threshold) -> cleft, checked BEFORE
     # groove: a deep canyon is a cleft even when elongated
     assert classify(1, 1, 5, occlusion=0.9, buriedness=13)['name'] == CLEFT
-    assert classify(1, 1, 5, occlusion=0.9, buriedness=13, elongation=4.0)['name'] == CLEFT
+    assert (
+        classify(1, 1, 5, occlusion=0.9, buriedness=13, elongation=4.0)['name'] == CLEFT
+    )
     # shallow + elongated -> groove; shallow + round -> the generic
-    assert classify(1, 1, 5, occlusion=0.9, buriedness=4, elongation=4.0)['name'] == GROOVE
+    assert (
+        classify(1, 1, 5, occlusion=0.9, buriedness=4, elongation=4.0)['name'] == GROOVE
+    )
     assert classify(1, 1, 5, occlusion=0.9, buriedness=4)['name'] == OPEN_CONCAVITY
     # depth does NOT promote an occluded pocket (occlusion is the kind boundary)
     assert classify(1, 1, 5, occlusion=2.0, buriedness=13)['name'] == fam.POCKET
@@ -140,7 +144,9 @@ def test_bridge_carries_catalog_layer_onto_features():
         assert isinstance(feature.motifs, list)
         # past-beach wetted contact (coast/shore/beach) rides along too
         assert set(feature.beach_pocket) == {
-            'dry_tetrahedron_ids', 'atom_indices', 'volume_wetted_estimate'
+            'dry_tetrahedron_ids',
+            'atom_indices',
+            'volume_wetted_estimate',
         }
         assert feature.volume_solvent_accessible is not None
         # the probe-accessible atoms a ligand here can interact with (lining + beach)

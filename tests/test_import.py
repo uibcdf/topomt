@@ -11,11 +11,13 @@ import topomt
 
 def test_openpocket_imported():
     """Sample test, will always pass so long as import statement worked"""
-    assert "topomt" in sys.modules
+    assert 'topomt' in sys.modules
+
 
 def test_molsysviewer_topomt_all_has_no_duplicates():
 
     assert len(molsysviewer_topomt.__all__) == len(set(molsysviewer_topomt.__all__))
+
 
 def test_topomt_all_declares_public_api_v0():
     expected = {

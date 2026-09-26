@@ -13,16 +13,16 @@
 import pyunitwizard
 
 STANDARD_UNITS = [
-    'nm',              # length: nanometer
-    'ps',              # time: picosecond
-    'K',               # temperature: kelvin
-    'mole',            # amount of substance
-    'dalton',          # mass
-    'e',               # charge: elementary charge
-    'kJ/mol',          # energy
-    'kJ/(mol*nm)',     # force
+    'nm',  # length: nanometer
+    'ps',  # time: picosecond
+    'K',  # temperature: kelvin
+    'mole',  # amount of substance
+    'dalton',  # mass
+    'e',  # charge: elementary charge
+    'kJ/mol',  # energy
+    'kJ/(mol*nm)',  # force
     'kJ/(mol*nm**2)',  # force constant
-    'radians',         # angle
+    'radians',  # angle
 ]
 
 # Only when nobody has decided yet. An active policy belongs to whoever set it:

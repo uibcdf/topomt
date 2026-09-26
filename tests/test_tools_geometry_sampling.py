@@ -32,6 +32,7 @@ def test_union_volume_monte_carlo_estimates_single_sphere_volume():
 
     assert np.isclose(volume, expected, rtol=0.05)
 
+
 def test_union_volume_monte_carlo_rejects_non_positive_sample_count():
 
     with pytest.raises(ValueError, match='n_samples must be a positive integer'):
@@ -40,6 +41,7 @@ def test_union_volume_monte_carlo_rejects_non_positive_sample_count():
             radii=np.array([1.0], dtype=float),
             n_samples=0,
         )
+
 
 def test_union_volume_monte_carlo_rejects_invalid_center_shape():
     with pytest.raises(ValueError, match='centers must have shape'):

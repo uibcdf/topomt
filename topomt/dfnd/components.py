@@ -1056,9 +1056,9 @@ def _attach_capacity_motifs(
     # internal navigable (transit) faces per component; transit_edge already
     # excludes non-permeable and intrusion-suspect faces, so a sliver cannot
     # forge a throat. Keep the widest face per node pair, with its atoms.
-    edges_by_component: dict[
-        str, dict[tuple[int, int], tuple[float, list[int]]]
-    ] = defaultdict(dict)
+    edges_by_component: dict[str, dict[tuple[int, int], tuple[float, list[int]]]] = (
+        defaultdict(dict)
+    )
     for face in raw['faces']:
         if not face.get('transit_edge'):
             continue
@@ -1081,7 +1081,9 @@ def _attach_capacity_motifs(
         peak = {v: v for v in component.node_indices}  # basin root -> peak node
         members = {v: {v} for v in component.node_indices}
 
-        def _chamber(peak_node, basin_nodes, separation_radius, comp=component, dep=depth):
+        def _chamber(
+            peak_node, basin_nodes, separation_radius, comp=component, dep=depth
+        ):
             nodes = sorted(basin_nodes)
             chamber_support = support_key([atoms_by_node[n] for n in nodes])
             return {
@@ -1220,7 +1222,11 @@ def _attach_boundary_helpers(
         if neighbor < 0:
             return 'exterior'
         side = node_side.get(neighbor)
-        return 'shore' if side == 'dry' else ('constriction' if side == 'wet' else 'exterior')
+        return (
+            'shore'
+            if side == 'dry'
+            else ('constriction' if side == 'wet' else 'exterior')
+        )
 
     walls_by_component: dict[str, list] = defaultdict(list)
     for face in raw['faces']:
@@ -1269,7 +1275,9 @@ _FUNNEL_GRADIENT = 0.4
 _FUNNEL_STEADINESS = 0.8
 
 
-def _funnel_descriptor(resident_nodes, node_residence, topological_depth) -> dict | None:
+def _funnel_descriptor(
+    resident_nodes, node_residence, topological_depth
+) -> dict | None:
     """The access-funnel motif: a zone whose clearance narrows with a steady,
     appreciable gradient (a truncated cone directing solvent inward toward an access),
     distinct from a tube (flat gradient). It is the *directing* region; what lies
@@ -1369,9 +1377,9 @@ def _attach_morphometrics(components: Components, result: dict[str, Any]) -> Non
     links = {link['external_link_id']: link for link in raw['external_links']}
 
     for component in components.wet:
-        resident_nodes = getattr(
-            component, 'resident_node_indices', None
-        ) or component.node_indices
+        resident_nodes = (
+            getattr(component, 'resident_node_indices', None) or component.node_indices
+        )
         interior_radius = max(
             (node_residence[n] for n in resident_nodes if n in node_residence),
             default=0.0,

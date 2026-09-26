@@ -1,10 +1,11 @@
 import numpy as np
+
 from ...exceptions import ArgumentError
 from ...variables import is_all
 
 
 def digest_structure_indices(structure_indices, caller=None):
-    """ Checks if atom_indices has the expected type and value.
+    """Checks if atom_indices has the expected type and value.
 
     Parameters
     ----------
@@ -39,4 +40,3 @@ def digest_structure_indices(structure_indices, caller=None):
             return [digest_structure_indices(ii) for ii in structure_indices]
 
     raise ArgumentError('structure_indices', caller=caller, message=None)
-

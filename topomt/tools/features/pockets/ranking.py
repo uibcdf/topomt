@@ -14,4 +14,6 @@ def simple_ranking(
     if len(volumes) != len(pockets):
         raise ValueError('volumes and pockets must have the same length')
 
-    return [alpha * volume + beta * len(pocket) for volume, pocket in zip(volumes, pockets)]
+    return [
+        alpha * volume + beta * len(pocket) for volume, pocket in zip(volumes, pockets)
+    ]

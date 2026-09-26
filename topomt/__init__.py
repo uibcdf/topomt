@@ -7,8 +7,10 @@ Short description
 # versioningit
 from ._version import __version__
 
+
 def __print_version__():
-    print("TopoMT version " + __version__)
+    print('TopoMT version ' + __version__)
+
 
 from ._pyunitwizard import pyunitwizard
 

@@ -24,7 +24,6 @@ from topomt.io.load_CASTp import (
     _parse_poc_info_file,
 )
 
-
 DEFAULT_SYSTEMS = (
     '1crn',
     '1rop',

@@ -1,5 +1,7 @@
-from .Feature2D import Feature2D
 import copy
+
+from .Feature2D import Feature2D
+
 
 class Groove(Feature2D):
     """An elongated open concavity with a defined long axis -- a surface furrow. The
@@ -8,11 +10,27 @@ class Groove(Feature2D):
     validate on real PDBs before treating it as canonical). See feature_catalog.md.
     """
 
-    def __init__(self, feature_id=None, atom_indices=None, atom_labels=None, atom_label_format=None, source=None,
-                 source_id=None, topography=None, **kwargs):
-        super().__init__(feature_id=feature_id, feature_type='groove', atom_indices=atom_indices,
-                         atom_labels=atom_labels, atom_label_format=atom_label_format, source=source, source_id=source_id,
-                         topography=topography)
+    def __init__(
+        self,
+        feature_id=None,
+        atom_indices=None,
+        atom_labels=None,
+        atom_label_format=None,
+        source=None,
+        source_id=None,
+        topography=None,
+        **kwargs,
+    ):
+        super().__init__(
+            feature_id=feature_id,
+            feature_type='groove',
+            atom_indices=atom_indices,
+            atom_labels=atom_labels,
+            atom_label_format=atom_label_format,
+            source=source,
+            source_id=source_id,
+            topography=topography,
+        )
 
         for key, value in kwargs.items():
             setattr(self, key, value)

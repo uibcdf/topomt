@@ -80,7 +80,9 @@ def test_enclosability_agrees_with_an_actual_probe_sweep():
     bowl = _largest(_wet(synthetic.surface_bowl(), 1.4), 'pocket')
     assert bowl.morphometrics['enclosable'] is False
     for probe in (1.8, 2.2, 2.6, 3.0):
-        assert _largest(_wet(synthetic.surface_bowl(), probe), 'void', min_size=8) is None
+        assert (
+            _largest(_wet(synthetic.surface_bowl(), probe), 'void', min_size=8) is None
+        )
 
 
 def test_buriedness_separates_shallow_from_deep():

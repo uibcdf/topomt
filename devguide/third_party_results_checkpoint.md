@@ -42,7 +42,9 @@ The later review of TopoMT-owned fpocket, CASTp/CASTp3, Pocketeer, pyCASTA,
 and AlphaSpace2 algorithms has **not started**. Its progress is separate from
 the 100 points above. The 15-point independent-calculation milestone concerns
 individual descriptor definitions; it does not certify a complete native
-detection engine.
+detection engine. A current `1a6w` native pyCASTA count failure is tracked in
+[#53](https://github.com/uibcdf/topomt/issues/53); it does not alter the
+external-library measurement evidence above.
 
 ## Resume sequence
 

@@ -1,14 +1,32 @@
-from .Feature1D import Feature1D
 import copy
 
-class Mouth(Feature1D):
+from .Feature1D import Feature1D
 
-    def __init__(self, feature_id=None, atom_indices=None, surfaces=None,
-                 atom_labels=None, atom_label_format=None, source=None, source_id=None, topography=None,
-                 **kwargs):
-        super().__init__(feature_id=feature_id, feature_type='mouth', atom_indices=atom_indices,
-                         surfaces=surfaces, atom_labels=atom_labels, atom_label_format=atom_label_format,
-                         source=source, source_id=source_id, topography=topography)
+
+class Mouth(Feature1D):
+    def __init__(
+        self,
+        feature_id=None,
+        atom_indices=None,
+        surfaces=None,
+        atom_labels=None,
+        atom_label_format=None,
+        source=None,
+        source_id=None,
+        topography=None,
+        **kwargs,
+    ):
+        super().__init__(
+            feature_id=feature_id,
+            feature_type='mouth',
+            atom_indices=atom_indices,
+            surfaces=surfaces,
+            atom_labels=atom_labels,
+            atom_label_format=atom_label_format,
+            source=source,
+            source_id=source_id,
+            topography=topography,
+        )
 
         for key, value in kwargs.items():
             setattr(self, key, value)

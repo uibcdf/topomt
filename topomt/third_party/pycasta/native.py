@@ -1,7 +1,8 @@
 import molsysmt as msm
 import numpy as np
 
-from topomt import Topography, pyunitwizard as puw
+from topomt import Topography
+from topomt import pyunitwizard as puw
 from topomt.features import Pocket
 from topomt.third_party.pycasta._native_impl import pycasta as _native_pycasta
 
@@ -29,12 +30,16 @@ def get_topography(
         **kwargs,
     )
 
-    for pocket_index, (pocket_tetrahedra, volume_nm3) in enumerate(zip(pockets_tet, volumes)):
+    for pocket_index, (pocket_tetrahedra, volume_nm3) in enumerate(
+        zip(pockets_tet, volumes)
+    ):
         involved_local_indices = set()
         for tetra_index in pocket_tetrahedra:
             involved_local_indices.update(simplices[tetra_index])
 
-        involved_global_indices = [atom_indices[index] for index in involved_local_indices]
+        involved_global_indices = [
+            atom_indices[index] for index in involved_local_indices
+        ]
         atom_coords = msm.get(
             topography.molecular_system,
             selection=involved_global_indices,

@@ -1,9 +1,7 @@
 """Tests for reusable tetrahedral discrete-flow helpers."""
 
-import pytest
 import numpy as np
-
-pytestmark = pytest.mark.skip(reason="DFND tessellation helpers are postponed and not yet implemented")
+import pytest
 
 from topomt.delaunay_mesh import DelaunayMesh
 from topomt.tools.tessellation import (
@@ -12,6 +10,10 @@ from topomt.tools.tessellation import (
     build_open_neighbor_dict,
     flow_targets_to_sinks,
     group_by_flow_sink,
+)
+
+pytestmark = pytest.mark.skip(
+    reason='DFND tessellation helpers are postponed and not yet implemented'
 )
 
 
@@ -87,7 +89,9 @@ def test_build_open_neighbor_dict_filters_closed_faces():
     )
     face_radii[shared_face] = 0.1
 
-    neighbor_dict = build_open_neighbor_dict(mesh, open_mask, face_radii, probe_radius=1.4)
+    neighbor_dict = build_open_neighbor_dict(
+        mesh, open_mask, face_radii, probe_radius=1.4
+    )
 
     assert neighbor_dict[0] == []
     assert neighbor_dict[1] == []

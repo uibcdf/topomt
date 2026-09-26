@@ -1,4 +1,5 @@
-from .integration import attach_features, attach_topography, new_view
+from .integration import attach_features, new_view
+from .integration import attach_topography as attach_topography
 
 
 def _resolve_topography(
@@ -11,7 +12,10 @@ def _resolve_topography(
 ):
     """Return an explicit or freshly computed TopoMT topography."""
     if topography is not None:
-        if getattr(topography, '_molsys', None) is None and molecular_system is not None:
+        if (
+            getattr(topography, '_molsys', None) is None
+            and molecular_system is not None
+        ):
             topography._molsys = molecular_system
         return topography
 
@@ -80,6 +84,7 @@ def build_topography_standalone0_html(
             resolved_addon_modules.append(module_name)
 
     import molsysviewer
+
     return molsysviewer.build_standalone0_html(
         view,
         output_filename,
@@ -148,6 +153,7 @@ def launch_topography_standalone0(
             resolved_addon_modules.append(module_name)
 
     import molsysviewer
+
     return molsysviewer.launch_standalone0(
         view,
         output_filename=output_filename,

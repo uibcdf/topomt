@@ -1,6 +1,5 @@
-import numpy as np
-from topomt import pyunitwizard as puw
 from ...exceptions import ArgumentError
+
 
 def digest_pbc(pbc, caller=None):
 
@@ -8,4 +7,3 @@ def digest_pbc(pbc, caller=None):
         return pbc
 
     raise ArgumentError('pbc', value=pbc, caller=caller, message=None)
-

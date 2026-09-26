@@ -47,9 +47,30 @@ _FEATURE_TYPE_TO_CLASS_NAME = {
 }
 
 _FEATURE_TYPES_BY_SHAPE_TYPE = {
-    "point": ["feature0d", "point", "pit", "apex", "summit", "bifurcation", "saddle_point", "ridge_tip"],
-    "boundary": ["feature1d", "mouth", "base_rim", "neck", "ridge", "furrow", "lip", "seam", "isthmus", "edge_loop",
-                 "branch_line", "hinge_line"],
+    'point': [
+        'feature0d',
+        'point',
+        'pit',
+        'apex',
+        'summit',
+        'bifurcation',
+        'saddle_point',
+        'ridge_tip',
+    ],
+    'boundary': [
+        'feature1d',
+        'mouth',
+        'base_rim',
+        'neck',
+        'ridge',
+        'furrow',
+        'lip',
+        'seam',
+        'isthmus',
+        'edge_loop',
+        'branch_line',
+        'hinge_line',
+    ],
     # DFND component-level concavity types: what the catalog (classify) names a wet
     # resident component directly from its grounded signature (+ occlusion). These
     # are GENERICS, one component = one of these. `open_concavity` is the generic for
@@ -57,12 +78,30 @@ _FEATURE_TYPES_BY_SHAPE_TYPE = {
     # the morphological *leaves* (groove ...) that refine it once their metric lands;
     # those leaves and sub-chamber roles (alcove ...) are NOT component types and stay
     # in _PENDING_* below. See devguide/DFND/feature_catalog.md.
-    "concavity": ["void", "pocket", "open_concavity", "groove", "cleft", "channel", "branched_channel"],
-    "convexity": ["protrusion", "dome", "ridge", "spine", "bulge", "ridge_cap", "knob", "buttress", "pinnacle"],
-    "mixed": ["feature2d", "interface", "patch", "joint", "saddle", "trench"],
+    'concavity': [
+        'void',
+        'pocket',
+        'open_concavity',
+        'groove',
+        'cleft',
+        'channel',
+        'branched_channel',
+    ],
+    'convexity': [
+        'protrusion',
+        'dome',
+        'ridge',
+        'spine',
+        'bulge',
+        'ridge_cap',
+        'knob',
+        'buttress',
+        'pinnacle',
+    ],
+    'mixed': ['feature2d', 'interface', 'patch', 'joint', 'saddle', 'trench'],
     # neutral: neither concave, convex nor mixed -- a fully permeable/exposed region.
     # Added for completeness; rarely encountered when analysing real proteins.
-    "neutral": ["percolating"],
+    'neutral': ['percolating'],
 }
 
 # Vocabulary relocated out of the feature-TYPE table above: these are not
@@ -77,20 +116,19 @@ _FEATURE_TYPES_BY_SHAPE_TYPE = {
 # (morphometrics['occlusion']) and shallow<->deep (buriedness), not these names.
 # groove is now a promoted leaf (PROVISIONAL elongation threshold, decision S12);
 # funnel awaits its taper metric.
-_PENDING_MORPHOLOGY_LABELS = ["funnel"]
+_PENDING_MORPHOLOGY_LABELS = ['funnel']
 # Sub-chamber *roles* inside one component (motifs on chamber_candidates): an
 # antechamber, a flask bulb, a side recess. Relational, not standalone types.
-_PENDING_CHAMBER_MOTIF_ROLES = ["vestibule", "ampulla", "alcove"]
+_PENDING_CHAMBER_MOTIF_ROLES = ['vestibule', 'ampulla', 'alcove']
 
 _SHAPE_TYPE_BY_FEATURE_TYPE = {}
 _DIMENSIONALITY_BY_FEATURE_TYPE = {}
 for shape_type, feature_types in _FEATURE_TYPES_BY_SHAPE_TYPE.items():
     for feature_type in feature_types:
         _SHAPE_TYPE_BY_FEATURE_TYPE[feature_type] = shape_type
-        if shape_type in ["point"]:
+        if shape_type in ['point']:
             _DIMENSIONALITY_BY_FEATURE_TYPE[feature_type] = 0
-        elif shape_type in ["boundary"]:
+        elif shape_type in ['boundary']:
             _DIMENSIONALITY_BY_FEATURE_TYPE[feature_type] = 1
-        elif shape_type in ["concavity", "convexity", "mixed", "neutral"]:
+        elif shape_type in ['concavity', 'convexity', 'mixed', 'neutral']:
             _DIMENSIONALITY_BY_FEATURE_TYPE[feature_type] = 2
-

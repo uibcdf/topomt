@@ -13,7 +13,6 @@ from zipfile import ZipFile
 
 from topomt import get_topography
 
-
 DEFAULT_SYSTEMS = ('1crn', '1rop', '2pk4', '3phv', '8rat', '1stp')
 PUBLIC_DOMAIN_FAMILIES = {
     'void',
@@ -71,8 +70,7 @@ def _summarize_topography(
         domain['volume_topological_resident'] for domain in records['wet_components']
     )
     volume_solvent = sum(
-        domain['volume_solvent_estimate']
-        for domain in records['wet_components']
+        domain['volume_solvent_estimate'] for domain in records['wet_components']
     )
     return {
         'system_id': system_id,
@@ -159,7 +157,9 @@ def main() -> None:
     with tempfile.TemporaryDirectory(prefix='dfnd-stability-') as tmp_name:
         tmp_dir = Path(tmp_name)
         for system_id in args.systems:
-            records.append(run_system(system_id, args.data_dir, args.selection, tmp_dir))
+            records.append(
+                run_system(system_id, args.data_dir, args.selection, tmp_dir)
+            )
 
     if args.output is not None:
         args.output.parent.mkdir(parents=True, exist_ok=True)

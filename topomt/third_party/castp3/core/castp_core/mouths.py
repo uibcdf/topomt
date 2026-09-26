@@ -35,7 +35,9 @@ def _ensure_mouth_face_triangle_index(record: MouthFaceRecord, mesh) -> MouthFac
         return record
     triangle_index = None
     if hasattr(mesh, 'get_face_index'):
-        triangle_index = mesh.get_face_index(int(record.simplex_index), int(record.face_index))
+        triangle_index = mesh.get_face_index(
+            int(record.simplex_index), int(record.face_index)
+        )
     if triangle_index is not None:
         return MouthFaceRecord(
             face_atoms=record.face_atoms,
@@ -52,7 +54,9 @@ def _local_face_index(simplex_index: int, a: int, b: int, c: int, mesh) -> int:
     tet_vertices = [int(v) for v in mesh.simplex_atom_indices[int(simplex_index)]]
     if not all(vertex in tet_vertices for vertex in (int(a), int(b), int(c))):
         raise ValueError('Edge-facet face atoms are not local to the provided simplex.')
-    return next(i for i, v in enumerate(tet_vertices) if v not in (int(a), int(b), int(c)))
+    return next(
+        i for i, v in enumerate(tet_vertices) if v not in (int(a), int(b), int(c))
+    )
 
 
 def _make_edge_facet(
@@ -267,7 +271,9 @@ def _fnext_walk_around_edge(
     for _ in range(max_steps):
         state = (
             int(current_edge_facet.simplex_index),
-            tuple(int(atom_index) for atom_index in current_edge_facet.oriented_face_atoms),
+            tuple(
+                int(atom_index) for atom_index in current_edge_facet.oriented_face_atoms
+            ),
         )
         if state in visited_states:
             return None
@@ -286,7 +292,11 @@ def _fnext_walk_around_edge(
             # Non-pocket tetrahedron — walk exits here
             return next_edge_facet
 
-        if pocket_simplex_indices is None and simplex_rho_ranks is not None and rank2 is not None:
+        if (
+            pocket_simplex_indices is None
+            and simplex_rho_ranks is not None
+            and rank2 is not None
+        ):
             sink = int(depth[next_tet])
             if sink >= 0 and int(simplex_rho_ranks[sink]) > int(rank2):
                 return next_edge_facet
@@ -360,8 +370,7 @@ def cluster_mouth_faces(
                 'Canonical Fnext mouth clustering requires a mesh with explicit triangle identity.'
             )
         canonical_face_records = [
-            _ensure_mouth_face_triangle_index(record, mesh)
-            for record in face_records
+            _ensure_mouth_face_triangle_index(record, mesh) for record in face_records
         ]
         if any(record.triangle_index is None for record in canonical_face_records):
             raise ValueError(
@@ -480,7 +489,9 @@ def _cluster_mouth_faces_fnext(
         for initial_edge_facet in initial_edge_facets:
             ea, eb, _third_vertex = initial_edge_facet.oriented_face_atoms
             edge_key = (min(ea, eb), max(ea, eb))
-            if _edge_is_in_complex_at(edge_rho_ranks, edge_mu1_ranks, edge_key, int(rank1)):
+            if _edge_is_in_complex_at(
+                edge_rho_ranks, edge_mu1_ranks, edge_key, int(rank1)
+            ):
                 continue
 
             result = _fnext_walk_around_edge(
@@ -497,7 +508,9 @@ def _cluster_mouth_faces_fnext(
 
             if result.triangle_index is None:
                 continue
-            neighbor_face_ids = face_ids_by_triangle_index.get(int(result.triangle_index), [])
+            neighbor_face_ids = face_ids_by_triangle_index.get(
+                int(result.triangle_index), []
+            )
 
             for neighbor_face_id in neighbor_face_ids:
                 if neighbor_face_id != face_id:

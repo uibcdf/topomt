@@ -1,6 +1,5 @@
-import molsysmt as msm
-
-from topomt import Topography, pyunitwizard as puw
+from topomt import Topography
+from topomt import pyunitwizard as puw
 from topomt.features import Pocket
 from topomt.third_party.pocketeer._native_impl import pocketeer as _native_pocketeer
 
@@ -32,7 +31,9 @@ def get_topography(
     for pocket_record in pockets_data:
         all_atom_indices = set()
         for sphere in pocket_record.spheres:
-            all_atom_indices.update(atom_indices[index] for index in sphere.atom_indices)
+            all_atom_indices.update(
+                atom_indices[index] for index in sphere.atom_indices
+            )
 
         pocket_feature = Pocket(
             atom_indices=sorted(all_atom_indices),

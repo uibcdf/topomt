@@ -6,7 +6,9 @@ import numpy as np
 from scipy.spatial import ConvexHull
 
 
-def convex_hull_metrics(points: Sequence[Sequence[float]]) -> tuple[float | None, float | None]:
+def convex_hull_metrics(
+    points: Sequence[Sequence[float]],
+) -> tuple[float | None, float | None]:
     """Compute convex-hull volume and area."""
 
     pts = np.asarray(points, dtype=float)

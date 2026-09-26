@@ -148,7 +148,7 @@ These are the first repository-parity cases now used to anchor the local
 TopoMT battery because they are relatively small and already reproduce pocket
 counts, top-pocket/group sizes, and pocket volumes consistently.
 
-The current green audited bounded battery has now expanded to:
+The historically audited bounded battery included:
 
 - `1a4j`
 - `1acj`
@@ -161,6 +161,12 @@ The current green audited bounded battery has now expanded to:
 - `1a6w`
 - `1okm`
 - `1gca`
+
+On 2026-09-26, an isolated rerun of `1a6w` failed: the local native route
+reported 3 pockets and the upstream library reported 4. This case is no
+longer counted as green; [#53](https://github.com/uibcdf/topomt/issues/53)
+tracks the stage-level diagnosis. The other historical cases should be rerun
+before claiming current native parity for the full battery.
 
 ## Deliberate semantic boundary
 

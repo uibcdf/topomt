@@ -294,7 +294,9 @@ class DFNDData:
         network = self._network
         tetrahedra = network.atom_coords[network.tetra_atoms[nodes]]  # (K, 4, 3)
         centroids = tetrahedra.mean(axis=1)
-        bounding = np.linalg.norm(tetrahedra - centroids[:, None, :], axis=2).max(axis=1)
+        bounding = np.linalg.norm(tetrahedra - centroids[:, None, :], axis=2).max(
+            axis=1
+        )
         tree = cKDTree(network.atom_coords)
         max_radius = float(np.max(network.atom_radii))
         neighbor_lists = tree.query_ball_point(centroids, bounding + max_radius)
@@ -302,7 +304,11 @@ class DFNDData:
         atom_index = (
             np.unique(np.asarray(flat, dtype=int)) if flat else np.array([], dtype=int)
         )
-        return tetrahedra, network.atom_coords[atom_index], network.atom_radii[atom_index]
+        return (
+            tetrahedra,
+            network.atom_coords[atom_index],
+            network.atom_radii[atom_index],
+        )
 
     def solvent_volume(
         self,

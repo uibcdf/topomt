@@ -11,9 +11,9 @@ from scipy.spatial.distance import cdist
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._private.arg_digestion.argument.binder_coords import digest_binder_coords
 from topomt._private.smonitor import signal
 from topomt.delaunay_mesh import DelaunayMesh
-from topomt._private.arg_digestion.argument.binder_coords import digest_binder_coords
 from topomt.features import Pocket
 
 
@@ -77,7 +77,9 @@ def _get_atom_element(atom_type, atom_name) -> str:
     if atom_name is None:
         return ''
 
-    stripped_name = ''.join(character for character in str(atom_name).strip() if character.isalpha())
+    stripped_name = ''.join(
+        character for character in str(atom_name).strip() if character.isalpha()
+    )
     if not stripped_name:
         return ''
 
@@ -100,7 +102,9 @@ def _load_vina_scoring_data():
         stripped = line.strip()
         if not stripped or stripped.startswith('#'):
             continue
-        residue_name, atom_name, for_acc, for_don = [item.strip() for item in stripped.split(',')]
+        residue_name, atom_name, for_acc, for_don = [
+            item.strip() for item in stripped.split(',')
+        ]
         hp_types_dict.setdefault(residue_name, {})[atom_name] = (for_acc, for_don)
 
     typing_pdb_dict: dict[str, dict[str, str]] = {}
@@ -108,11 +112,15 @@ def _load_vina_scoring_data():
         stripped = line.strip()
         if not stripped or stripped.startswith('#'):
             continue
-        residue_name, atom_name, atom_type = [item.strip() for item in stripped.split(',')]
+        residue_name, atom_name, atom_type = [
+            item.strip() for item in stripped.split(',')
+        ]
         typing_pdb_dict.setdefault(residue_name, {})[atom_name] = atom_type
 
     autodock_types_dict: dict[str, tuple[float, bool]] = {}
-    for line in data_dir.joinpath('autodock_atom_type_info.dat').read_text().splitlines():
+    for line in (
+        data_dir.joinpath('autodock_atom_type_info.dat').read_text().splitlines()
+    ):
         stripped = line.strip()
         if not stripped or stripped.startswith('#'):
             continue
@@ -216,11 +224,12 @@ def _compute_alpha_layer(
     sasa = msm.physchem.get_sasa(receptor, element='atom', engine='mdtraj')
     atom_sasa_nm2 = np.asarray(puw.get_value(sasa, to_unit='nm**2'))[0]
     atom_types = receptor.topology.atoms['atom_type'].to_numpy()
-    is_nonpolar = np.array([atom_type not in ['O', 'N', 'S'] for atom_type in atom_types], dtype=float)
-    alpha_nonpolar_ratio = (
-        (atom_sasa_nm2 * is_nonpolar)[alpha_lining_local].sum(axis=1)
-        / (atom_sasa_nm2[alpha_lining_local].sum(axis=1) + 1e-12)
+    is_nonpolar = np.array(
+        [atom_type not in ['O', 'N', 'S'] for atom_type in atom_types], dtype=float
     )
+    alpha_nonpolar_ratio = (atom_sasa_nm2 * is_nonpolar)[alpha_lining_local].sum(
+        axis=1
+    ) / (atom_sasa_nm2[alpha_lining_local].sum(axis=1) + 1e-12)
 
     return (
         coordinates_nm,
@@ -233,7 +242,9 @@ def _compute_alpha_layer(
     )
 
 
-def _cluster_pockets(alpha_centers_nm: np.ndarray, alpha_space_nm3: np.ndarray, cluster_cutoff_nm: float):
+def _cluster_pockets(
+    alpha_centers_nm: np.ndarray, alpha_space_nm3: np.ndarray, cluster_cutoff_nm: float
+):
     if len(alpha_centers_nm) == 0:
         return [], np.zeros((0, 3)), np.zeros(0)
 
@@ -245,7 +256,10 @@ def _cluster_pockets(alpha_centers_nm: np.ndarray, alpha_space_nm3: np.ndarray, 
         pocket_alpha_index_list = _group_labels(labels)
 
     pocket_centers_nm = np.array(
-        [np.mean(alpha_centers_nm[indices], axis=0) for indices in pocket_alpha_index_list],
+        [
+            np.mean(alpha_centers_nm[indices], axis=0)
+            for indices in pocket_alpha_index_list
+        ],
         dtype=float,
     )
     pocket_space_nm3 = np.array(
@@ -277,7 +291,10 @@ def _cluster_betas(
             grouped_alpha_indices = [[int(pocket_alpha_indices[0])]]
         else:
             linkage_matrix = linkage(pocket_alpha_centers, method='complete')
-            labels = fcluster(linkage_matrix, beta_cluster_cutoff_nm, criterion='distance') - 1
+            labels = (
+                fcluster(linkage_matrix, beta_cluster_cutoff_nm, criterion='distance')
+                - 1
+            )
             grouped_local = _group_labels(labels)
             grouped_alpha_indices = [
                 [int(pocket_alpha_indices[local_idx]) for local_idx in group]
@@ -285,14 +302,25 @@ def _cluster_betas(
             ]
 
         offset = len(beta_alpha_index_list)
-        pocket_beta_index_list.append([offset + index for index in range(len(grouped_alpha_indices))])
+        pocket_beta_index_list.append(
+            [offset + index for index in range(len(grouped_alpha_indices))]
+        )
         beta_alpha_index_list.extend(grouped_alpha_indices)
 
     if len(beta_alpha_index_list) == 0:
-        return beta_alpha_index_list, pocket_beta_index_list, np.zeros((0, 3)), np.zeros(0), np.zeros(0)
+        return (
+            beta_alpha_index_list,
+            pocket_beta_index_list,
+            np.zeros((0, 3)),
+            np.zeros(0),
+            np.zeros(0),
+        )
 
     beta_centers_nm = np.array(
-        [np.mean(alpha_centers_nm[indices], axis=0) for indices in beta_alpha_index_list],
+        [
+            np.mean(alpha_centers_nm[indices], axis=0)
+            for indices in beta_alpha_index_list
+        ],
         dtype=float,
     )
     beta_space_nm3 = np.array(
@@ -301,27 +329,39 @@ def _cluster_betas(
     )
     beta_scores = np.zeros(len(beta_alpha_index_list), dtype=float)
 
-    return beta_alpha_index_list, pocket_beta_index_list, beta_centers_nm, beta_space_nm3, beta_scores
+    return (
+        beta_alpha_index_list,
+        pocket_beta_index_list,
+        beta_centers_nm,
+        beta_space_nm3,
+        beta_scores,
+    )
 
 
-def _grid_volume(coord_list: np.ndarray, threshold_nm: float = 0.16, resolution_nm: float = 0.05) -> float:
+def _grid_volume(
+    coord_list: np.ndarray, threshold_nm: float = 0.16, resolution_nm: float = 0.05
+) -> float:
     if coord_list.size == 0:
         return 0.0
     min_coord = np.min(coord_list, axis=0) - threshold_nm
     max_coord = np.max(coord_list, axis=0) + threshold_nm
     grid_axes = [
-        np.arange(start=min_coord[i], stop=max_coord[i] + resolution_nm, step=resolution_nm)
+        np.arange(
+            start=min_coord[i], stop=max_coord[i] + resolution_nm, step=resolution_nm
+        )
         for i in range(3)
     ]
     mesh = np.array(np.meshgrid(*grid_axes)).transpose().reshape(-1, 3)
-    contact = np.linalg.norm(
-        mesh[:, None, :] - coord_list[None, :, :], axis=2
-    ) < threshold_nm
+    contact = (
+        np.linalg.norm(mesh[:, None, :] - coord_list[None, :, :], axis=2) < threshold_nm
+    )
     contact_voxel = np.any(contact, axis=1)
-    return float(np.count_nonzero(contact_voxel) * (resolution_nm ** 3))
+    return float(np.count_nonzero(contact_voxel) * (resolution_nm**3))
 
 
-def _overlap_matrices(groups: list[list[int]], total_space: int) -> tuple[np.ndarray, np.ndarray]:
+def _overlap_matrices(
+    groups: list[list[int]], total_space: int
+) -> tuple[np.ndarray, np.ndarray]:
     if len(groups) == 0:
         return np.zeros((0, 0), dtype=float), np.zeros((0, 0), dtype=float)
     incidence = np.zeros((len(groups), total_space), dtype=int)
@@ -339,6 +379,7 @@ def _connection_matrix(intersection_matrix: np.ndarray) -> np.ndarray:
     if intersection_matrix.size == 0:
         return np.zeros_like(intersection_matrix, dtype=bool)
     return intersection_matrix > 0
+
 
 def _read_pdbqt_adv_atom_types(pdbqt_file: str) -> np.ndarray:
     adv_atom_types: list[str] = []
@@ -385,7 +426,9 @@ def _prepare_vina_typing(
     elements: np.ndarray,
     adv_atom_types: np.ndarray,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
-    prot_types = np.array([str(value).strip() for value in adv_atom_types], dtype=object)
+    prot_types = np.array(
+        [str(value).strip() for value in adv_atom_types], dtype=object
+    )
     hp_type = np.full(len(prot_types), 'UNK', dtype=object)
     don_type = np.full(len(prot_types), 'UNK', dtype=object)
     acc_type = np.full(len(prot_types), 'UNK', dtype=object)
@@ -393,15 +436,23 @@ def _prepare_vina_typing(
     tree = cKDTree(coordinates_a)
 
     for index in np.where(hp_type == 'UNK')[0]:
-        neighbor_indices = np.array(tree.query_ball_point(coordinates_a[index], 2.0), dtype=int)
+        neighbor_indices = np.array(
+            tree.query_ball_point(coordinates_a[index], 2.0), dtype=int
+        )
         neighbor_indices = neighbor_indices[neighbor_indices != index]
         if prot_types[index] not in POLAR_TYPES:
-            hp_type[index] = 'NNP' if np.any(np.isin(prot_types[neighbor_indices], POLAR_TYPES)) else 'NP'
+            hp_type[index] = (
+                'NNP'
+                if np.any(np.isin(prot_types[neighbor_indices], POLAR_TYPES))
+                else 'NP'
+            )
         else:
             hp_type[index] = 'XXX'
 
     for index in np.where(don_type == 'UNK')[0]:
-        neighbor_indices = np.array(tree.query_ball_point(coordinates_a[index], 2.0), dtype=int)
+        neighbor_indices = np.array(
+            tree.query_ball_point(coordinates_a[index], 2.0), dtype=int
+        )
         neighbor_indices = neighbor_indices[neighbor_indices != index]
         if prot_types[index] in {'N', 'NS', 'NA'}:
             don_type[index] = 'NPP' if len(neighbor_indices) > 2 else 'P'
@@ -442,7 +493,9 @@ def _get_probe_scores(
         return -distance / 0.7
 
     probe_prot_dist = cdist(probe_coords_a, prot_coord_a)
-    probe_scores = np.zeros((probe_coords_a.shape[0], len(PROBE_ELEMENTS)), dtype=np.float32)
+    probe_scores = np.zeros(
+        (probe_coords_a.shape[0], len(PROBE_ELEMENTS)), dtype=np.float32
+    )
 
     for probe_index in range(probe_coords_a.shape[0]):
         distance_mask = probe_prot_dist[probe_index] <= 8.0
@@ -451,32 +504,61 @@ def _get_probe_scores(
         np_type = hp_type[distance_mask] == 'NP'
         polar_donor_type = don_type[distance_mask] == 'P'
         polar_acceptor_type = acc_type[distance_mask] == 'P'
-        dist_radii = np.array([autodock_types_dict[str(atom_type)][0] for atom_type in temp_type], dtype=float)
+        dist_radii = np.array(
+            [autodock_types_dict[str(atom_type)][0] for atom_type in temp_type],
+            dtype=float,
+        )
 
         for element_index, probe_element in enumerate(PROBE_ELEMENTS):
             probe_dist = autodock_types_dict[str(probe_element)][0]
             processed_dist = temp_dist - dist_radii - probe_dist
-            gauss1 = float(np.sum(np.exp(-(processed_dist / 0.5) ** 2)))
-            gauss2 = float(np.sum(np.exp(-((processed_dist - 3.0) / 2.0) ** 2)))
-            repulsion = float(np.sum([distance**2 if distance < 0.0 else 0.0 for distance in processed_dist]))
+            gauss1 = float(np.sum(np.exp(-((processed_dist / 0.5) ** 2))))
+            gauss2 = float(np.sum(np.exp(-(((processed_dist - 3.0) / 2.0) ** 2))))
+            repulsion = float(
+                np.sum(
+                    [
+                        distance**2 if distance < 0.0 else 0.0
+                        for distance in processed_dist
+                    ]
+                )
+            )
 
             if probe_element in {'C', 'Br', 'Cl', 'F', 'I'}:
-                hydrophobic = float(np.sum([_nonpolar_interp(distance) for distance in processed_dist[np_type]]))
+                hydrophobic = float(
+                    np.sum(
+                        [
+                            _nonpolar_interp(distance)
+                            for distance in processed_dist[np_type]
+                        ]
+                    )
+                )
                 hydrogen = 0.0
             elif probe_element in {'OA', 'SA'}:
                 hydrophobic = 0.0
                 hydrogen = float(
-                    np.sum([_polar_interp(distance) for distance in processed_dist[polar_donor_type]])
+                    np.sum(
+                        [
+                            _polar_interp(distance)
+                            for distance in processed_dist[polar_donor_type]
+                        ]
+                    )
                 )
             elif probe_element in {'N', 'P'}:
                 hydrophobic = 0.0
                 hydrogen = float(
-                    np.sum([_polar_interp(distance) for distance in processed_dist[polar_acceptor_type]])
+                    np.sum(
+                        [
+                            _polar_interp(distance)
+                            for distance in processed_dist[polar_acceptor_type]
+                        ]
+                    )
                 )
             else:
                 raise ValueError(f'Unsupported probe element {probe_element!r}.')
 
-            terms = np.array([gauss1, gauss2, repulsion, hydrophobic, hydrogen], dtype=np.float32)
+            terms = np.array(
+                [gauss1, gauss2, repulsion, hydrophobic, hydrogen], dtype=np.float32
+            )
             probe_scores[probe_index][element_index] = float(np.sum(terms * vina_terms))
 
     return probe_scores
@@ -502,11 +584,20 @@ def _compute_beta_scores(
     if filtered_adv_atom_types is None:
         return np.zeros(len(beta_centers_nm), dtype=float)
 
-    atom_names = np.array(msm.get(receptor, element='atom', atom_name=True), dtype=object)[keep_local_indices]
-    residue_names = np.array(msm.get(receptor, element='atom', group_name=True), dtype=object)[keep_local_indices]
-    raw_atom_types = np.array(msm.get(receptor, element='atom', atom_type=True), dtype=object)[keep_local_indices]
+    atom_names = np.array(
+        msm.get(receptor, element='atom', atom_name=True), dtype=object
+    )[keep_local_indices]
+    residue_names = np.array(
+        msm.get(receptor, element='atom', group_name=True), dtype=object
+    )[keep_local_indices]
+    raw_atom_types = np.array(
+        msm.get(receptor, element='atom', atom_type=True), dtype=object
+    )[keep_local_indices]
     elements = np.array(
-        [_get_atom_element(atom_type, atom_name) for atom_type, atom_name in zip(raw_atom_types, atom_names)],
+        [
+            _get_atom_element(atom_type, atom_name)
+            for atom_type, atom_name in zip(raw_atom_types, atom_names)
+        ],
         dtype=object,
     )
 
@@ -537,7 +628,9 @@ def _get_beta_scalar_scores(beta_scores: np.ndarray) -> np.ndarray:
     return beta_scores.astype(float)
 
 
-def _contact_matrix(alpha_centers_nm: np.ndarray, binder_coords_nm: np.ndarray | None, cutoff_nm: float) -> np.ndarray:
+def _contact_matrix(
+    alpha_centers_nm: np.ndarray, binder_coords_nm: np.ndarray | None, cutoff_nm: float
+) -> np.ndarray:
     if binder_coords_nm is None or len(binder_coords_nm) == 0:
         return np.zeros((len(alpha_centers_nm), 0), dtype=bool)
     dist = cdist(alpha_centers_nm, binder_coords_nm)
@@ -557,16 +650,25 @@ def _compute_contact_masks(
         binder_coords_nm = np.asarray(binder_coords_nm, dtype=float)
         binder_tree = cKDTree(binder_coords_nm)
         alpha_contact = np.array(
-            [len(binder_tree.query_ball_point(center, r=cutoff_nm)) > 0 for center in alpha_centers_nm],
+            [
+                len(binder_tree.query_ball_point(center, r=cutoff_nm)) > 0
+                for center in alpha_centers_nm
+            ],
             dtype=bool,
         )
 
     beta_contact = np.array(
-        [np.any(alpha_contact[alpha_indices]) for alpha_indices in beta_alpha_index_list],
+        [
+            np.any(alpha_contact[alpha_indices])
+            for alpha_indices in beta_alpha_index_list
+        ],
         dtype=bool,
     )
     pocket_contact = np.array(
-        [np.any(alpha_contact[alpha_indices]) for alpha_indices in pocket_alpha_index_list],
+        [
+            np.any(alpha_contact[alpha_indices])
+            for alpha_indices in pocket_alpha_index_list
+        ],
         dtype=bool,
     )
 
@@ -636,7 +738,10 @@ def _build_state(
     )
 
     pocket_grid_volume_nm3 = np.array(
-        [_grid_volume(alpha_centers_nm[indices]) for indices in pocket_alpha_index_list],
+        [
+            _grid_volume(alpha_centers_nm[indices])
+            for indices in pocket_alpha_index_list
+        ],
         dtype=float,
     )
     pocket_overlap_intersection, pocket_overlap_union = _overlap_matrices(
@@ -685,9 +790,13 @@ def _state_to_pocket_records(state: AlphaSpace2State) -> list[dict[str, object]]
     beta_scalar_scores = _get_beta_scalar_scores(state.beta_scores)
 
     for pocket_index, alpha_indices in enumerate(state.pocket_alpha_index_list):
-        lining_atom_indices = np.unique(state.alpha_lining_atom_indices[alpha_indices].reshape(-1))
+        lining_atom_indices = np.unique(
+            state.alpha_lining_atom_indices[alpha_indices].reshape(-1)
+        )
         beta_indices = state.pocket_beta_index_list[pocket_index]
-        pocket_score = float(np.sum(beta_scalar_scores[beta_indices])) if beta_indices else 0.0
+        pocket_score = (
+            float(np.sum(beta_scalar_scores[beta_indices])) if beta_indices else 0.0
+        )
 
         pocket_records.append(
             {
@@ -704,12 +813,20 @@ def _state_to_pocket_records(state: AlphaSpace2State) -> list[dict[str, object]]
                 ),
                 'alpha_sphere_centers': state.alpha_centers_nm[alpha_indices],
                 'alpha_sphere_radii': state.alpha_radii_nm[alpha_indices],
-                'beta_centers': state.beta_centers_nm[beta_indices] if beta_indices else np.zeros((0, 3)),
-                'beta_scores': beta_scalar_scores[beta_indices] if beta_indices else np.zeros(0),
-                'beta_probe_scores': state.beta_scores[beta_indices] if beta_indices else np.zeros((0, 9)),
+                'beta_centers': state.beta_centers_nm[beta_indices]
+                if beta_indices
+                else np.zeros((0, 3)),
+                'beta_scores': beta_scalar_scores[beta_indices]
+                if beta_indices
+                else np.zeros(0),
+                'beta_probe_scores': state.beta_scores[beta_indices]
+                if beta_indices
+                else np.zeros((0, 9)),
                 'is_contact': bool(state.pocket_contact[pocket_index]),
                 'grid_volume_nm3': float(state.pocket_grid_volume_nm3[pocket_index]),
-                'overlap_intersection_counts': state.pocket_overlap_intersection[pocket_index].copy(),
+                'overlap_intersection_counts': state.pocket_overlap_intersection[
+                    pocket_index
+                ].copy(),
                 'overlap_union_counts': state.pocket_overlap_union[pocket_index].copy(),
             }
         )
@@ -764,7 +881,9 @@ def alphaspace2(
     binder_coords_nm = None
     if binder_coords is not None:
         if puw.is_quantity(binder_coords):
-            binder_coords_nm = np.asarray(puw.get_value(binder_coords, to_unit='nm'), dtype=float)
+            binder_coords_nm = np.asarray(
+                puw.get_value(binder_coords, to_unit='nm'), dtype=float
+            )
         else:
             binder_coords_nm = np.asarray(binder_coords, dtype=float)
 
@@ -780,7 +899,12 @@ def alphaspace2(
         adv_atom_types=adv_atom_types,
         pdbqt_file=pdbqt_file,
     )
-    state.alpha_contact, state.beta_contact, state.pocket_contact, state.alpha_contact_matrix = _compute_contact_masks(
+    (
+        state.alpha_contact,
+        state.beta_contact,
+        state.pocket_contact,
+        state.alpha_contact_matrix,
+    ) = _compute_contact_masks(
         alpha_centers_nm=state.alpha_centers_nm,
         beta_alpha_index_list=state.beta_alpha_index_list,
         pocket_alpha_index_list=state.pocket_alpha_index_list,
@@ -803,7 +927,13 @@ def alphaspace2(
     contacts = state.alpha_contact
 
     if return_atom_indices:
-        outputs = [clusters, state.alpha_centers_nm, state.alpha_radii_nm, contacts, state.atom_indices.tolist()]
+        outputs = [
+            clusters,
+            state.alpha_centers_nm,
+            state.alpha_radii_nm,
+            contacts,
+            state.atom_indices.tolist(),
+        ]
         if return_state:
             outputs.append(state)
         return tuple(outputs)
@@ -860,7 +990,7 @@ def get_topography(
                     volume=puw.quantity(pocket_record['volume'], 'nm**3'),
                     score=pocket_record['score'],
                     source='alphaspace2',
-                    source_id=f"alphaspace2:{pocket_record['pocket_index']}",
+                    source_id=f'alphaspace2:{pocket_record["pocket_index"]}',
                     alpha_sphere_centers=puw.quantity(
                         pocket_record['alpha_sphere_centers'],
                         'nm',
@@ -891,7 +1021,9 @@ def get_topography(
 
         cluster_vertices = vertices[cluster]
         cluster_radii = radii[cluster]
-        centroid = np.mean(cluster_vertices, axis=0) if len(cluster_vertices) > 0 else None
+        centroid = (
+            np.mean(cluster_vertices, axis=0) if len(cluster_vertices) > 0 else None
+        )
 
         involved_atoms = set()
         for vertex, radius in zip(cluster_vertices, cluster_radii):

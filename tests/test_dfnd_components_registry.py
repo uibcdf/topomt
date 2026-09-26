@@ -2,7 +2,6 @@ import pytest
 
 from topomt.dfnd.components import Components, DryComponent, WetComponent
 
-
 # family is derived from the grounded signature (decision S5.2), so a test
 # component must supply the grounded inputs that classify_topology names `family`:
 # (n_mouths, n_resident_nodes, n_wall_faces).

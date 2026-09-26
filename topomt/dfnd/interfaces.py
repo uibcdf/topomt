@@ -47,8 +47,9 @@ def body_labels_from_dry_components(topography, n_atoms, min_component_size=1):
     return labels
 
 
-def classify_interface_components(wet_components, body_labels,
-                               min_body_atoms=3, min_minority_fraction=0.15):
+def classify_interface_components(
+    wet_components, body_labels, min_body_atoms=3, min_minority_fraction=0.15
+):
     """Tag each wet component with its lining-body composition and interface status.
 
     A component is an interface region when >=2 distinct bodies each contribute at
@@ -60,23 +61,30 @@ def classify_interface_components(wet_components, body_labels,
     records = []
     for component in wet_components:
         labels = body_labels[component['atom_indices']]
-        counts = {int(body): int(n) for body, n in Counter(labels.tolist()).items()
-                  if body >= 0 and n >= min_body_atoms}
+        counts = {
+            int(body): int(n)
+            for body, n in Counter(labels.tolist()).items()
+            if body >= 0 and n >= min_body_atoms
+        }
         total = sum(counts.values())
         n_bodies = len(counts)
         minority = (min(counts.values()) / total) if n_bodies >= 2 else 0.0
         is_interface = n_bodies >= 2 and minority >= min_minority_fraction
         family = component['family']
-        records.append({
-            'component_id': component['id'],
-            'family': family,
-            'n_resident_nodes': component['n_resident_nodes'],
-            'n_lining_bodies': n_bodies,
-            'lining_body_split': counts,
-            'minority_fraction': minority,
-            'is_interface': is_interface,
-            'interface_family': _INTERFACE_FAMILY_BY_FAMILY.get(family) if is_interface else None,
-        })
+        records.append(
+            {
+                'component_id': component['id'],
+                'family': family,
+                'n_resident_nodes': component['n_resident_nodes'],
+                'n_lining_bodies': n_bodies,
+                'lining_body_split': counts,
+                'minority_fraction': minority,
+                'is_interface': is_interface,
+                'interface_family': _INTERFACE_FAMILY_BY_FAMILY.get(family)
+                if is_interface
+                else None,
+            }
+        )
     return records
 
 

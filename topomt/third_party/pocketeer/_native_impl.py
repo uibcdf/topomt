@@ -117,7 +117,9 @@ def pocketeer(
     sasa_vals = _sasa_molsysmt(receptor, coords_nm, polar_probe_radius_nm)
     for sphere in spheres:
         if sphere.atom_indices:
-            sphere.mean_sasa = float(np.mean(sasa_vals[np.asarray(sphere.atom_indices, int)]))
+            sphere.mean_sasa = float(
+                np.mean(sasa_vals[np.asarray(sphere.atom_indices, int)])
+            )
 
     buried = [sphere for sphere in spheres if sphere.mean_sasa < sasa_threshold_nm2]
     if not buried:
@@ -126,7 +128,9 @@ def pocketeer(
         return [], spheres
 
     graph = _sphere_graph(buried, merge_dist_nm)
-    clusters = [comp for comp in _connected_components(graph) if len(comp) >= min_spheres]
+    clusters = [
+        comp for comp in _connected_components(graph) if len(comp) >= min_spheres
+    ]
 
     pockets: list[PocketeerPocket] = []
     for pocket_id, component in enumerate(clusters):
@@ -134,7 +138,11 @@ def pocketeer(
         centers = np.array([sphere.center for sphere in pocket_spheres])
         centroid = centers.mean(axis=0) if len(centers) else np.zeros(3)
         volume = _estimate_pocket_volume(pocket_spheres)
-        avg_radius_nm = np.mean([sphere.radius for sphere in pocket_spheres]) if pocket_spheres else 0.0
+        avg_radius_nm = (
+            np.mean([sphere.radius for sphere in pocket_spheres])
+            if pocket_spheres
+            else 0.0
+        )
         score = _score_pocket(volume, len(pocket_spheres), avg_radius_nm)
         pockets.append(
             PocketeerPocket(
@@ -233,7 +241,9 @@ def _score_pocket(volume_nm3: float, n_spheres: int, avg_radius_nm: float) -> fl
     return score
 
 
-def _sasa_molsysmt(receptor, coords_nm: np.ndarray, polar_probe_radius_nm: float) -> np.ndarray:
+def _sasa_molsysmt(
+    receptor, coords_nm: np.ndarray, polar_probe_radius_nm: float
+) -> np.ndarray:
     if coords_nm.shape[0] == 0:
         return np.zeros(0, dtype=float)
     try:
@@ -272,7 +282,13 @@ def _sasa_molsysmt(receptor, coords_nm: np.ndarray, polar_probe_radius_nm: float
     return sasa_values[0]
 
 
-def _is_sphere_empty(center: np.ndarray, radius: float, tree: cKDTree, exclude: set[int], tol: float = 1e-7) -> bool:
+def _is_sphere_empty(
+    center: np.ndarray,
+    radius: float,
+    tree: cKDTree,
+    exclude: set[int],
+    tol: float = 1e-7,
+) -> bool:
     close = tree.query_ball_point(center, radius)
     for idx in close:
         if idx in exclude:
@@ -283,7 +299,9 @@ def _is_sphere_empty(center: np.ndarray, radius: float, tree: cKDTree, exclude: 
     return True
 
 
-def _sphere_graph(spheres: list[PocketeerSphere], dist_th: float) -> dict[int, set[int]]:
+def _sphere_graph(
+    spheres: list[PocketeerSphere], dist_th: float
+) -> dict[int, set[int]]:
     if not spheres:
         return {}
     centers = np.array([sphere.center for sphere in spheres])

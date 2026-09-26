@@ -4,17 +4,18 @@ import importlib
 import tempfile
 import zipfile
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 import pytest
-import topomt as tmt
-from types import SimpleNamespace
 
 from topomt.delaunay_mesh import DelaunayMesh
 from topomt.io.load_CASTp import load_CASTp
 from topomt.third_party.castp._native_impl import castp
 from topomt.third_party.castp.core.castp_core import (
     build_castp_geometry,
+)
+from topomt.third_party.castp.core.castp_core import (
     components as castp_components,
 )
 from topomt.third_party.castp.core.castp_core.components import (
@@ -24,20 +25,20 @@ from topomt.third_party.castp.core.castp_core.components import (
     ALF_POC_TETRA,
     ALF_POC_UNION_SAME,
     ALF_POC_UNION_TWO,
-    _component_edge_partitions,
-    _component_face_partitions,
     _build_rank_driven_components,
     _build_void_components,
-    _compute_pocket_depths,
-    _iter_master_tetra_rho_indices,
-    castp1_pocket_metric_signatures,
+    _component_edge_partitions,
+    _component_face_partitions,
     _component_regular_vertex_indices,
     _component_vertex_partitions,
+    _compute_pocket_depths,
     _geometry_max_rank,
     _handle_tetra_pocket,
     _handle_tetra_seq,
     _hidden_triangle,
+    _iter_master_tetra_rho_indices,
     _probe_rank,
+    castp1_pocket_metric_signatures,
 )
 from topomt.third_party.castp.core.castp_core.exact import (
     ExactRatio,
@@ -57,62 +58,66 @@ from topomt.third_party.castp.core.castp_core.geometry import (
     CastpMasterEntry,
     _build_exact_rho_rank_tables,
     _build_master_entries,
-    _simplex_rank_sublists,
     _build_spectrum_values,
     _castp1_pdb2alf_radii_for_pdb_path,
     _castp_param_radii_for_labels,
     _deduplicate_weighted_points,
     _discard_redundant_weighted_points,
-    _exact_threshold_ratio,
     _edge_exact_ratio,
-    _edge_mu_rank_maps,
     _edge_is_in_complex_at,
+    _edge_mu_rank_maps,
+    _exact_threshold_ratio,
     _face_exact_ratio,
     _fixed_point_lifted_rows,
-    _protor_radii_for_labels,
     _infer_weighted_decimal_places,
+    _protor_radii_for_labels,
     _rank_of_ratio,
     _rank_table_is_in_complex,
     _rank_table_is_interior,
     _simplex_exact_ratio,
+    _simplex_rank_sublists,
     _vertex_mu_rank_arrays,
     _weighted_edge_center_and_power,
     _weighted_face_center_and_power,
+    _weighted_face_size2_value,
     _weighted_hidden0,
     _weighted_hidden1,
-    _weighted_face_size2_value,
     _weighted_hidden2,
+)
+from topomt.third_party.castp.core.castp_core.metrics import (
+    component_area,
+    mouth_perimeter,
 )
 from topomt.third_party.castp.core.castp_core.mouths import (
     EdgeFacetRecord,
     MouthFaceRecord,
     _edge_facet_enext,
     _edge_facet_fnext,
-    _make_edge_facet,
-    _mouth_face_initial_edge_facets,
-    _mouth_face_edge_facets,
-    _mouth_face_outward_atoms,
     _fnext_walk_around_edge,
+    _make_edge_facet,
+    _mouth_face_edge_facets,
+    _mouth_face_initial_edge_facets,
+    _mouth_face_outward_atoms,
     cluster_mouth_faces,
 )
 from topomt.third_party.castp.core.castp_core.volbl import (
     VolblMetricContext,
     envelope_measurements,
-    fringe_measurements_cx,
     shape_volume,
     space_filling_measurements,
-    volbl_measurements,
     voids_measurements,
+    volbl_measurements,
 )
 from topomt.weighted_delaunay_mesh import WeightedDelaunayMesh
-from topomt.third_party.castp.core.castp_core.metrics import component_area, mouth_perimeter
 
 
 def _extract_castp_server_pdb(zip_path: str | Path, tmp_dir: str) -> str:
     """Extract the PDB payload from a CASTp server ZIP and return its path."""
 
     with zipfile.ZipFile(zip_path) as archive:
-        pdb_name = next(name for name in archive.namelist() if name.lower().endswith('.pdb'))
+        pdb_name = next(
+            name for name in archive.namelist() if name.lower().endswith('.pdb')
+        )
         archive.extract(pdb_name, path=tmp_dir)
     return f'{tmp_dir}/{pdb_name}'
 
@@ -126,11 +131,15 @@ def _feature_atom_sets(topography_or_records) -> dict[str, set[tuple[int, ...]]]
         for feature in topography_or_records.features.values():
             if feature.feature_type == 'mouth':
                 continue
-            result.setdefault(feature.feature_type, set()).add(tuple(sorted(feature.atom_indices)))
+            result.setdefault(feature.feature_type, set()).add(
+                tuple(sorted(feature.atom_indices))
+            )
         return result
 
     for feature in topography_or_records:
-        result.setdefault(feature['feature_type'], set()).add(tuple(sorted(feature['atom_indices'])))
+        result.setdefault(feature['feature_type'], set()).add(
+            tuple(sorted(feature['atom_indices']))
+        )
     return result
 
 
@@ -241,9 +250,7 @@ def _parse_castp1_feature_file(
             parts = line.split()
             field = parts[0]
             if field in current:
-                current[field].append(
-                    tuple(sorted(int(value) for value in parts[1:]))
-                )
+                current[field].append(tuple(sorted(int(value) for value in parts[1:])))
 
     if current is not None:
         components.append(current)
@@ -316,8 +323,7 @@ def _native_castp1_component_sets(
 
     for field in ['iV', 'rV']:
         component[field] = {
-            (int(atom_index) + 1,)
-            for atom_index in record.get(field, [])
+            (int(atom_index) + 1,) for atom_index in record.get(field, [])
         }
 
     return component
@@ -332,12 +338,10 @@ def _assert_castp1_components_match(
     """Assert exact CASTp 1.0 component and field parity."""
 
     native_by_key = {
-        _castp1_component_key(component): component
-        for component in native_components
+        _castp1_component_key(component): component for component in native_components
     }
     oracle_by_key = {
-        _castp1_component_key(component): component
-        for component in oracle_components
+        _castp1_component_key(component): component for component in oracle_components
     }
 
     assert native_by_key.keys() == oracle_by_key.keys(), (
@@ -345,12 +349,10 @@ def _assert_castp1_components_match(
         label,
         {
             'native_only': [
-                sorted(key)
-                for key in native_by_key.keys() - oracle_by_key.keys()
+                sorted(key) for key in native_by_key.keys() - oracle_by_key.keys()
             ],
             'oracle_only': [
-                sorted(key)
-                for key in oracle_by_key.keys() - native_by_key.keys()
+                sorted(key) for key in oracle_by_key.keys() - native_by_key.keys()
             ],
         },
     )
@@ -387,7 +389,9 @@ def test_cluster_mouth_faces_splits_disconnected_openings():
     assert sorted(len(cluster) for cluster in clusters) == [1, 2]
 
     # edge_rho_ranks / rank1 are accepted but not yet used as a filter
-    clusters_with_ranks = cluster_mouth_faces(faces, edge_rho_ranks={(0, 2): 1}, rank1=1)
+    clusters_with_ranks = cluster_mouth_faces(
+        faces, edge_rho_ranks={(0, 2): 1}, rank1=1
+    )
     assert len(clusters_with_ranks) == 2
 
 
@@ -432,7 +436,9 @@ def test_make_edge_facet_prefers_local_face_index_over_atom_lookup():
 
         @staticmethod
         def get_face_index_from_atoms(face_atoms):
-            raise AssertionError('Should not fall back to atom-based triangle lookup for a local face')
+            raise AssertionError(
+                'Should not fall back to atom-based triangle lookup for a local face'
+            )
 
     edge_facet = _make_edge_facet(0, 1, 2, 0, FakeMesh())
 
@@ -457,15 +463,14 @@ def test_delaunay_mesh_face_indices_roundtrip_through_face_atoms():
         )
     )
 
-    face_indices = {
-        mesh.get_face_index(0, face_index)
-        for face_index in range(4)
-    }
+    face_indices = {mesh.get_face_index(0, face_index) for face_index in range(4)}
 
     assert len(face_indices) == 4
     for face_index in range(4):
         face_atoms = mesh.get_face_atoms(0, face_index)
-        assert mesh.get_face_index_from_atoms(face_atoms) == mesh.get_face_index(0, face_index)
+        assert mesh.get_face_index_from_atoms(face_atoms) == mesh.get_face_index(
+            0, face_index
+        )
         assert mesh.get_face_owner_indices(0, face_index) == (0, -1)
 
 
@@ -490,11 +495,21 @@ def test_castp_delegates_to_castp_core(monkeypatch):
         def __init__(self, mesh):
             self.mesh = mesh
 
-    def fake_build_castp_geometry(molecular_system, selection, structure_indices, solvent_radius, radii_model):
-        calls['geometry'] = (molecular_system, selection, structure_indices, solvent_radius, radii_model)
+    def fake_build_castp_geometry(
+        molecular_system, selection, structure_indices, solvent_radius, radii_model
+    ):
+        calls['geometry'] = (
+            molecular_system,
+            selection,
+            structure_indices,
+            solvent_radius,
+            radii_model,
+        )
         return FakeGeometry(mesh)
 
-    def fake_build_castp_feature_records(geometry, probe_radius, alpha_rank=None, beta_rank=None):
+    def fake_build_castp_feature_records(
+        geometry, probe_radius, alpha_rank=None, beta_rank=None
+    ):
         calls['components'] = (geometry, probe_radius, alpha_rank, beta_rank)
         return [
             {
@@ -530,7 +545,9 @@ def test_castp_delegates_to_castp_core(monkeypatch):
         ]
 
     monkeypatch.setattr(castp_module, 'build_castp_geometry', fake_build_castp_geometry)
-    monkeypatch.setattr(castp_module, 'build_castp_feature_records', fake_build_castp_feature_records)
+    monkeypatch.setattr(
+        castp_module, 'build_castp_feature_records', fake_build_castp_feature_records
+    )
 
     feature_records, returned_mesh = castp(
         'fake-system',
@@ -579,15 +596,27 @@ def test_castp_defaults_to_all_atoms_and_historical_param_radii(monkeypatch):
         def __init__(self, mesh):
             self.mesh = mesh
 
-    def fake_build_castp_geometry(molecular_system, selection, structure_indices, solvent_radius, radii_model):
-        calls['geometry'] = (molecular_system, selection, structure_indices, solvent_radius, radii_model)
+    def fake_build_castp_geometry(
+        molecular_system, selection, structure_indices, solvent_radius, radii_model
+    ):
+        calls['geometry'] = (
+            molecular_system,
+            selection,
+            structure_indices,
+            solvent_radius,
+            radii_model,
+        )
         return FakeGeometry(mesh)
 
-    def fake_build_castp_feature_records(geometry, probe_radius, alpha_rank=None, beta_rank=None):
+    def fake_build_castp_feature_records(
+        geometry, probe_radius, alpha_rank=None, beta_rank=None
+    ):
         return []
 
     monkeypatch.setattr(castp_module, 'build_castp_geometry', fake_build_castp_geometry)
-    monkeypatch.setattr(castp_module, 'build_castp_feature_records', fake_build_castp_feature_records)
+    monkeypatch.setattr(
+        castp_module, 'build_castp_feature_records', fake_build_castp_feature_records
+    )
 
     castp('fake-system')
 
@@ -694,14 +723,26 @@ def test_build_master_entries_groups_and_sorts_rank_sublists():
     }
     assert master_rank_offsets[1] == (0, 4)
     rank1_entries = master_entries[slice(*master_rank_offsets[1])]
-    assert [entry.f_type for entry in rank1_entries] == [ALF_VERTEX, ALF_VERTEX, ALF_VERTEX, ALF_TETRA]
+    assert [entry.f_type for entry in rank1_entries] == [
+        ALF_VERTEX,
+        ALF_VERTEX,
+        ALF_VERTEX,
+        ALF_TETRA,
+    ]
     assert [entry.index for entry in rank1_entries[:3]] == [2, 1, 0]
     assert rank1_entries[-1].r_type == ALF_RHO
 
     rank3_entries = master_entries[slice(*master_rank_offsets[3])]
-    assert any(entry.f_type == ALF_TRIANGLE and entry.r_type == ALF_MU1 for entry in rank3_entries)
-    assert any(entry.f_type == ALF_EDGE and entry.r_type == ALF_MU1 for entry in rank3_entries)
-    assert any(entry.f_type == ALF_TETRA and entry.r_type == ALF_RHO for entry in rank3_entries)
+    assert any(
+        entry.f_type == ALF_TRIANGLE and entry.r_type == ALF_MU1
+        for entry in rank3_entries
+    )
+    assert any(
+        entry.f_type == ALF_EDGE and entry.r_type == ALF_MU1 for entry in rank3_entries
+    )
+    assert any(
+        entry.f_type == ALF_TETRA and entry.r_type == ALF_RHO for entry in rank3_entries
+    )
 
 
 def test_iter_master_tetra_rho_indices_uses_master_list_order():
@@ -981,7 +1022,9 @@ def test_vertex_mu_rank_arrays_follow_historical_attached_vs_unattached_rules():
     assert vertex_mu2_ranks.tolist() == [0, 0, 14, 0]
 
 
-def test_rank_driven_components_do_not_union_retained_tetrahedra_into_outside(monkeypatch):
+def test_rank_driven_components_do_not_union_retained_tetrahedra_into_outside(
+    monkeypatch,
+):
     master_entries, master_rank_offsets = _tetra_rho_master({2: [0, 1]})
 
     class FakeMesh:
@@ -1133,7 +1176,9 @@ def test_build_void_components_scans_master_list_like_alf_find_voids():
     assert blocked_nodes == {-1}
 
 
-def test_component_boundary_faces_use_regular_triangle_selection_per_pocket(monkeypatch):
+def test_component_boundary_faces_use_regular_triangle_selection_per_pocket(
+    monkeypatch,
+):
     class FakeMesh:
         neighbors = np.asarray([[1, -1, -1, -1]], dtype=int)
 
@@ -1185,7 +1230,9 @@ def test_component_boundary_faces_use_regular_triangle_selection_per_pocket(monk
     ]
 
 
-def test_component_boundary_faces_do_not_make_mouths_between_active_pockets(monkeypatch):
+def test_component_boundary_faces_do_not_make_mouths_between_active_pockets(
+    monkeypatch,
+):
     class FakeMesh:
         neighbors = np.asarray([[1, -1, -1, -1]], dtype=int)
 
@@ -1315,8 +1362,12 @@ def test_cluster_mouth_faces_fnext_prefers_triangle_index_identity():
             return lookup[(int(simplex_index), int(face_index))]
 
     faces = [
-        MouthFaceRecord(face_atoms=(0, 2, 3), simplex_index=0, face_index=2, triangle_index=20),
-        MouthFaceRecord(face_atoms=(0, 1, 3), simplex_index=1, face_index=2, triangle_index=21),
+        MouthFaceRecord(
+            face_atoms=(0, 2, 3), simplex_index=0, face_index=2, triangle_index=20
+        ),
+        MouthFaceRecord(
+            face_atoms=(0, 1, 3), simplex_index=1, face_index=2, triangle_index=21
+        ),
     ]
 
     clusters = cluster_mouth_faces(
@@ -1380,8 +1431,12 @@ def test_cluster_mouth_faces_populates_triangle_index_before_fnext_clustering():
             return lookup[(int(simplex_index), int(face_index))]
 
     faces = [
-        MouthFaceRecord(face_atoms=(0, 2, 3), simplex_index=0, face_index=2, triangle_index=None),
-        MouthFaceRecord(face_atoms=(0, 1, 3), simplex_index=1, face_index=2, triangle_index=None),
+        MouthFaceRecord(
+            face_atoms=(0, 2, 3), simplex_index=0, face_index=2, triangle_index=None
+        ),
+        MouthFaceRecord(
+            face_atoms=(0, 1, 3), simplex_index=1, face_index=2, triangle_index=None
+        ),
     ]
 
     clusters = cluster_mouth_faces(
@@ -1433,8 +1488,12 @@ def test_cluster_mouth_faces_requires_explicit_triangle_identity_in_canonical_fn
             return lookup[(int(simplex_index), int(face_index))]
 
     faces = [
-        MouthFaceRecord(face_atoms=(0, 2, 3), simplex_index=0, face_index=2, triangle_index=None),
-        MouthFaceRecord(face_atoms=(0, 1, 3), simplex_index=1, face_index=2, triangle_index=None),
+        MouthFaceRecord(
+            face_atoms=(0, 2, 3), simplex_index=0, face_index=2, triangle_index=None
+        ),
+        MouthFaceRecord(
+            face_atoms=(0, 1, 3), simplex_index=1, face_index=2, triangle_index=None
+        ),
     ]
 
     with pytest.raises(ValueError, match='explicit triangle identity'):
@@ -1538,9 +1597,24 @@ def test_mouth_face_initial_edge_facets_build_explicit_edge_facet_records():
     )
 
     assert edge_facets == (
-        EdgeFacetRecord(oriented_face_atoms=(10, 11, 12), face_atoms=(10, 11, 12), triangle_index=70, simplex_index=0),
-        EdgeFacetRecord(oriented_face_atoms=(11, 12, 10), face_atoms=(10, 11, 12), triangle_index=70, simplex_index=0),
-        EdgeFacetRecord(oriented_face_atoms=(12, 10, 11), face_atoms=(10, 11, 12), triangle_index=70, simplex_index=0),
+        EdgeFacetRecord(
+            oriented_face_atoms=(10, 11, 12),
+            face_atoms=(10, 11, 12),
+            triangle_index=70,
+            simplex_index=0,
+        ),
+        EdgeFacetRecord(
+            oriented_face_atoms=(11, 12, 10),
+            face_atoms=(10, 11, 12),
+            triangle_index=70,
+            simplex_index=0,
+        ),
+        EdgeFacetRecord(
+            oriented_face_atoms=(12, 10, 11),
+            face_atoms=(10, 11, 12),
+            triangle_index=70,
+            simplex_index=0,
+        ),
     )
 
 
@@ -1586,7 +1660,9 @@ def test_edge_facet_fnext_returns_next_triangle_around_same_edge():
     )
 
 
-def test_build_castp_feature_records_uses_canonical_base_rank_for_component_assembly(monkeypatch):
+def test_build_castp_feature_records_uses_canonical_base_rank_for_component_assembly(
+    monkeypatch,
+):
     geometry = SimpleNamespace(
         mesh=SimpleNamespace(),
         spectrum_values=np.asarray([0.0, 1.0, 2.0, 3.0], dtype=float),
@@ -1609,6 +1685,7 @@ def test_build_castp_feature_records_uses_canonical_base_rank_for_component_asse
         '_build_empty_simplex_mask',
         lambda geometry, probe_radius: np.asarray([True], dtype=bool),
     )
+
     def fake_build_rank_driven_components(geometry, size_limit_rank, rank1=None):
         calls['assembly_rank'] = int(size_limit_rank)
         calls['rank1'] = rank1
@@ -1650,12 +1727,18 @@ def test_build_castp_feature_records_uses_canonical_base_rank_for_component_asse
     monkeypatch.setattr(
         castp_components,
         '_component_edge_partitions',
-        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: ([], []),
+        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: (
+            [],
+            [],
+        ),
     )
     monkeypatch.setattr(
         castp_components,
         '_component_vertex_partitions',
-        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: ([], []),
+        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: (
+            [],
+            [],
+        ),
     )
     monkeypatch.setattr(
         castp_components,
@@ -1752,7 +1835,9 @@ def test_build_castp_feature_records_uses_probe_rank_as_beta(monkeypatch):
             [MouthFaceRecord(face_atoms=(0, 1, 2), simplex_index=0, face_index=0)],
         )
 
-    def fake_component_regular_vertex_indices(geometry, simplex_indices, touched_simplex_indices, rank2):
+    def fake_component_regular_vertex_indices(
+        geometry, simplex_indices, touched_simplex_indices, rank2
+    ):
         calls['regular_vertex_rank2'] = int(rank2)
         return []
 
@@ -1782,12 +1867,18 @@ def test_build_castp_feature_records_uses_probe_rank_as_beta(monkeypatch):
     monkeypatch.setattr(
         castp_components,
         '_component_edge_partitions',
-        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: ([], []),
+        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: (
+            [],
+            [],
+        ),
     )
     monkeypatch.setattr(
         castp_components,
         '_component_vertex_partitions',
-        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: ([], []),
+        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: (
+            [],
+            [],
+        ),
     )
     monkeypatch.setattr(
         castp_components,
@@ -1817,7 +1908,9 @@ def test_build_castp_feature_records_uses_probe_rank_as_beta(monkeypatch):
     monkeypatch.setattr(
         castp_components,
         'cluster_mouth_faces',
-        lambda mouth_faces, edge_rho_ranks=None, edge_mu1_ranks=None, rank1=0, **kwargs: [[(0, 1, 2)]],
+        lambda mouth_faces, edge_rho_ranks=None, edge_mu1_ranks=None, rank1=0, **kwargs: [
+            [(0, 1, 2)]
+        ],
     )
 
     geometry.atom_indices_map = np.asarray([10, 11, 12, 13], dtype=int)
@@ -1873,7 +1966,11 @@ def test_build_castp_feature_records_accepts_explicit_castp_ranks(monkeypatch):
 
     calls = {}
 
-    monkeypatch.setattr(castp_components, '_probe_rank', lambda geometry, probe_radius: (_ for _ in ()).throw(AssertionError))
+    monkeypatch.setattr(
+        castp_components,
+        '_probe_rank',
+        lambda geometry, probe_radius: (_ for _ in ()).throw(AssertionError),
+    )
     monkeypatch.setattr(
         castp_components,
         '_build_empty_simplex_mask',
@@ -1945,7 +2042,11 @@ def test_build_castp_feature_records_classifies_branched_channels(monkeypatch):
     monkeypatch.setattr(
         castp_components,
         '_build_rank_driven_components',
-        lambda geometry, size_limit_rank, rank1=None: ({0: [0]}, set(), np.asarray([0], dtype=int)),
+        lambda geometry, size_limit_rank, rank1=None: (
+            {0: [0]},
+            set(),
+            np.asarray([0], dtype=int),
+        ),
     )
     monkeypatch.setattr(
         castp_components,
@@ -2022,9 +2123,30 @@ def test_build_castp_feature_records_classifies_branched_channels(monkeypatch):
         castp_components,
         'cluster_mouth_faces',
         lambda mouth_faces, edge_rho_ranks=None, edge_mu1_ranks=None, rank1=0, **kwargs: [
-            [MouthFaceRecord(face_atoms=(0, 1, 2), simplex_index=0, face_index=0, triangle_index=30)],
-            [MouthFaceRecord(face_atoms=(0, 1, 3), simplex_index=0, face_index=1, triangle_index=31)],
-            [MouthFaceRecord(face_atoms=(0, 2, 3), simplex_index=0, face_index=2, triangle_index=32)],
+            [
+                MouthFaceRecord(
+                    face_atoms=(0, 1, 2),
+                    simplex_index=0,
+                    face_index=0,
+                    triangle_index=30,
+                )
+            ],
+            [
+                MouthFaceRecord(
+                    face_atoms=(0, 1, 3),
+                    simplex_index=0,
+                    face_index=1,
+                    triangle_index=31,
+                )
+            ],
+            [
+                MouthFaceRecord(
+                    face_atoms=(0, 2, 3),
+                    simplex_index=0,
+                    face_index=2,
+                    triangle_index=32,
+                )
+            ],
         ],
     )
 
@@ -2089,7 +2211,11 @@ def test_build_castp_feature_records_does_not_duplicate_closed_voids(monkeypatch
     monkeypatch.setattr(
         castp_components,
         '_build_rank_driven_components',
-        lambda geometry, size_limit_rank, rank1=None: ({0: [0]}, set(), np.asarray([0], dtype=int)),
+        lambda geometry, size_limit_rank, rank1=None: (
+            {0: [0]},
+            set(),
+            np.asarray([0], dtype=int),
+        ),
     )
     monkeypatch.setattr(
         castp_components,
@@ -2112,7 +2238,12 @@ def test_build_castp_feature_records_does_not_duplicate_closed_voids(monkeypatch
     monkeypatch.setattr(
         castp_components,
         '_component_regular_vertex_indices',
-        lambda geometry, simplex_indices, touched_simplex_indices, rank2: [10, 11, 12, 13],
+        lambda geometry, simplex_indices, touched_simplex_indices, rank2: [
+            10,
+            11,
+            12,
+            13,
+        ],
     )
     monkeypatch.setattr(
         castp_components,
@@ -2122,12 +2253,18 @@ def test_build_castp_feature_records_does_not_duplicate_closed_voids(monkeypatch
     monkeypatch.setattr(
         castp_components,
         '_component_edge_partitions',
-        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: ([], []),
+        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: (
+            [],
+            [],
+        ),
     )
     monkeypatch.setattr(
         castp_components,
         '_component_vertex_partitions',
-        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: ([], []),
+        lambda geometry, simplex_indices, touched_simplex_indices, rank1, rank2: (
+            [],
+            [],
+        ),
     )
     monkeypatch.setattr(
         castp_components,
@@ -2308,16 +2445,6 @@ def test_component_face_partitions_follow_mkalf_interior_and_regular_logic():
         (1, 2): 16,
         (1, 3): 13,
     }
-    neighbor_by_owner = {
-        (0, 0): -1,
-        (0, 1): -1,
-        (0, 2): -1,
-        (0, 3): 1,
-        (1, 0): -1,
-        (1, 1): -1,
-        (1, 2): -1,
-        (1, 3): 0,
-    }
 
     mesh = SimpleNamespace(
         neighbors=np.asarray(
@@ -2327,8 +2454,12 @@ def test_component_face_partitions_follow_mkalf_interior_and_regular_logic():
             ],
             dtype=int,
         ),
-        get_face_atoms=lambda simplex_index, face_index: face_by_owner[(int(simplex_index), int(face_index))],
-        get_face_index=lambda simplex_index, face_index: face_index_by_owner[(int(simplex_index), int(face_index))],
+        get_face_atoms=lambda simplex_index, face_index: face_by_owner[
+            (int(simplex_index), int(face_index))
+        ],
+        get_face_index=lambda simplex_index, face_index: face_index_by_owner[
+            (int(simplex_index), int(face_index))
+        ],
     )
     geometry = SimpleNamespace(
         mesh=mesh,
@@ -2400,7 +2531,9 @@ def test_handle_tetra_seq_emits_canonical_pocket_events():
             ],
             dtype=int,
         ),
-        get_face_index=lambda simplex_index, face_index: 10 * int(simplex_index) + int(face_index),
+        get_face_index=lambda simplex_index, face_index: (
+            10 * int(simplex_index) + int(face_index)
+        ),
     )
     geometry = SimpleNamespace(
         mesh=mesh,
@@ -2425,7 +2558,9 @@ def test_handle_tetra_seq_emits_canonical_pocket_events():
         parents=parents,
         sizes=sizes,
         exterior=-1,
-        event_hook=lambda index, event_type: events.append((int(index), int(event_type))),
+        event_hook=lambda index, event_type: events.append(
+            (int(index), int(event_type))
+        ),
     )
 
     assert events[0] == (1, ALF_POC_TETRA)
@@ -2444,7 +2579,9 @@ def test_handle_tetra_seq_emits_canonical_pocket_events():
         parents=parents_same,
         sizes=sizes_same,
         exterior=-1,
-        event_hook=lambda index, event_type: events_same.append((int(index), int(event_type))),
+        event_hook=lambda index, event_type: events_same.append(
+            (int(index), int(event_type))
+        ),
     )
     assert (10, ALF_POC_UNION_SAME) in events_same
 
@@ -2460,7 +2597,9 @@ def test_handle_tetra_seq_unions_through_face_owner_indices():
             dtype=int,
         ),
         get_face_index=lambda simplex_index, face_index: 20 + int(face_index),
-        get_face_owner_indices=lambda simplex_index, face_index: (7, 3) if int(face_index) == 0 else (int(simplex_index), -1),
+        get_face_owner_indices=lambda simplex_index, face_index: (
+            (7, 3) if int(face_index) == 0 else (int(simplex_index), -1)
+        ),
     )
     geometry = SimpleNamespace(
         mesh=mesh,
@@ -2486,7 +2625,9 @@ def test_handle_tetra_seq_unions_through_face_owner_indices():
         parents=parents,
         sizes=sizes,
         exterior=-1,
-        event_hook=lambda index, event_type: events.append((int(index), int(event_type))),
+        event_hook=lambda index, event_type: events.append(
+            (int(index), int(event_type))
+        ),
     )
 
     assert (20, ALF_POC_UNION_TWO) in events
@@ -2503,7 +2644,10 @@ def test_handle_tetra_seq_uses_canonical_edge_facet_owner_order_for_union():
             dtype=int,
         ),
         get_face_index=lambda simplex_index, face_index: 30 + int(face_index),
-        get_face_owner_indices=lambda simplex_index, face_index: (int(simplex_index), int(mesh.neighbors[int(simplex_index), int(face_index)])),
+        get_face_owner_indices=lambda simplex_index, face_index: (
+            int(simplex_index),
+            int(mesh.neighbors[int(simplex_index), int(face_index)]),
+        ),
         get_face_atoms=lambda simplex_index, face_index: {
             (0, 0): (1, 2, 3),
             (1, 0): (1, 2, 3),
@@ -2539,7 +2683,9 @@ def test_handle_tetra_seq_uses_canonical_edge_facet_owner_order_for_union():
         parents=parents,
         sizes=sizes,
         exterior=-1,
-        event_hook=lambda index, event_type: events.append((int(index), int(event_type))),
+        event_hook=lambda index, event_type: events.append(
+            (int(index), int(event_type))
+        ),
     )
 
     assert (30, ALF_POC_UNION_TWO) in events
@@ -2609,7 +2755,9 @@ def test_build_rank_driven_components_emits_rank_and_mouth_events_without_monkey
         geometry,
         size_limit_rank=2,
         rank1=1,
-        event_hook=lambda index, event_type: events.append((int(index), int(event_type))),
+        event_hook=lambda index, event_type: events.append(
+            (int(index), int(event_type))
+        ),
     )
 
     assert components == {0: [0]}
@@ -3303,7 +3451,9 @@ def test_build_rank_driven_components_drains_delayed_tetrahedra_as_lifo_stack():
             dtype=int,
         ),
         n_simplices=3,
-        get_face_index=lambda simplex_index, face_index: 100 + 10 * int(simplex_index) + int(face_index),
+        get_face_index=lambda simplex_index, face_index: (
+            100 + 10 * int(simplex_index) + int(face_index)
+        ),
     )
     geometry = SimpleNamespace(
         mesh=mesh,
@@ -3361,10 +3511,14 @@ def test_build_rank_driven_components_drains_delayed_tetrahedra_as_lifo_stack():
         geometry,
         size_limit_rank=3,
         rank1=1,
-        event_hook=lambda index, event_type: events.append((int(index), int(event_type))),
+        event_hook=lambda index, event_type: events.append(
+            (int(index), int(event_type))
+        ),
     )
 
-    tetra_event_order = [index for index, event_type in events if event_type == ALF_POC_TETRA]
+    tetra_event_order = [
+        index for index, event_type in events if event_type == ALF_POC_TETRA
+    ]
 
     assert components == {0: [0, 1, 2]}
     assert blocked_nodes == set()
@@ -3385,9 +3539,14 @@ def test_build_rank_driven_components_event_sequence_delays_same_rank_non_sink_t
             dtype=int,
         ),
         n_simplices=3,
-        get_face_index=lambda simplex_index, face_index: 200 + 10 * int(simplex_index) + int(face_index),
+        get_face_index=lambda simplex_index, face_index: (
+            200 + 10 * int(simplex_index) + int(face_index)
+        ),
         get_face_owner_indices=lambda simplex_index, face_index: (
-            (int(simplex_index), int(mesh.neighbors[int(simplex_index), int(face_index)]))
+            (
+                int(simplex_index),
+                int(mesh.neighbors[int(simplex_index), int(face_index)]),
+            )
             if int(mesh.neighbors[int(simplex_index), int(face_index)]) != -1
             else (int(simplex_index), -1)
         ),
@@ -3462,10 +3621,14 @@ def test_build_rank_driven_components_event_sequence_delays_same_rank_non_sink_t
         geometry,
         size_limit_rank=2,
         rank1=1,
-        event_hook=lambda index, event_type: events.append((int(index), int(event_type))),
+        event_hook=lambda index, event_type: events.append(
+            (int(index), int(event_type))
+        ),
     )
 
-    tetra_event_order = [index for index, event_type in events if event_type == ALF_POC_TETRA]
+    tetra_event_order = [
+        index for index, event_type in events if event_type == ALF_POC_TETRA
+    ]
 
     assert components == {0: [0, 1, 2]}
     assert blocked_nodes == set()
@@ -3486,7 +3649,9 @@ def test_weighted_delaunay_mesh_preserves_oriented_tetrahedra():
     mesh = WeightedDelaunayMesh(points=points, weights=np.zeros(4, dtype=float))
 
     sorted_simplex = tuple(int(atom_index) for atom_index in mesh.simplices[0])
-    oriented_simplex = tuple(int(atom_index) for atom_index in mesh.oriented_simplices[0])
+    oriented_simplex = tuple(
+        int(atom_index) for atom_index in mesh.oriented_simplices[0]
+    )
 
     tetrahedron_points = points[list(oriented_simplex)]
     orientation = np.linalg.det(
@@ -3502,7 +3667,9 @@ def test_weighted_delaunay_mesh_preserves_oriented_tetrahedra():
     assert sorted_simplex == (0, 1, 2, 3)
     assert orientation > 0.0
     assert tuple(sorted(oriented_simplex)) == sorted_simplex
-    assert mesh.get_face_atoms(0, 0) == tuple(sorted(oriented_simplex[index] for index in (1, 2, 3)))
+    assert mesh.get_face_atoms(0, 0) == tuple(
+        sorted(oriented_simplex[index] for index in (1, 2, 3))
+    )
 
 
 def test_weighted_delaunay_mesh_returns_outward_oriented_faces():
@@ -3540,18 +3707,24 @@ def test_weighted_hidden2_matches_attached_vs_non_attached_triangle_cases():
     )
     face_weights = np.asarray([0.0, 0.0, 0.0], dtype=float)
 
-    assert _weighted_hidden2(
-        face_points,
-        face_weights,
-        np.asarray([0.5, 0.5, 0.1], dtype=float),
-        0.0,
-    ) > 0
-    assert _weighted_hidden2(
-        face_points,
-        face_weights,
-        np.asarray([0.0, 0.0, 1.0], dtype=float),
-        0.0,
-    ) == 0
+    assert (
+        _weighted_hidden2(
+            face_points,
+            face_weights,
+            np.asarray([0.5, 0.5, 0.1], dtype=float),
+            0.0,
+        )
+        > 0
+    )
+    assert (
+        _weighted_hidden2(
+            face_points,
+            face_weights,
+            np.asarray([0.0, 0.0, 1.0], dtype=float),
+            0.0,
+        )
+        == 0
+    )
 
 
 def test_weighted_hidden2_reports_degenerate_case_separately():
@@ -3565,12 +3738,15 @@ def test_weighted_hidden2_reports_degenerate_case_separately():
     )
     face_weights = np.asarray([0.0, 0.0, 0.0], dtype=float)
 
-    assert _weighted_hidden2(
-        face_points,
-        face_weights,
-        np.asarray([1.0, 1.0, 0.0], dtype=float),
-        0.0,
-    ) == 2
+    assert (
+        _weighted_hidden2(
+            face_points,
+            face_weights,
+            np.asarray([1.0, 1.0, 0.0], dtype=float),
+            0.0,
+        )
+        == 2
+    )
 
 
 def test_weighted_hidden1_matches_attached_vs_non_attached_edge_cases():
@@ -3583,24 +3759,33 @@ def test_weighted_hidden1_matches_attached_vs_non_attached_edge_cases():
     )
     edge_weights = np.asarray([0.0, 0.0], dtype=float)
 
-    assert _weighted_hidden1(
-        edge_points,
-        edge_weights,
-        np.asarray([0.5, 0.1, 0.0], dtype=float),
-        0.0,
-    ) > 0
-    assert _weighted_hidden1(
-        edge_points,
-        edge_weights,
-        np.asarray([0.5, 0.5, 0.0], dtype=float),
-        0.0,
-    ) == 2
-    assert _weighted_hidden1(
-        edge_points,
-        edge_weights,
-        np.asarray([0.5, 1.0, 0.0], dtype=float),
-        0.0,
-    ) == 0
+    assert (
+        _weighted_hidden1(
+            edge_points,
+            edge_weights,
+            np.asarray([0.5, 0.1, 0.0], dtype=float),
+            0.0,
+        )
+        > 0
+    )
+    assert (
+        _weighted_hidden1(
+            edge_points,
+            edge_weights,
+            np.asarray([0.5, 0.5, 0.0], dtype=float),
+            0.0,
+        )
+        == 2
+    )
+    assert (
+        _weighted_hidden1(
+            edge_points,
+            edge_weights,
+            np.asarray([0.5, 1.0, 0.0], dtype=float),
+            0.0,
+        )
+        == 0
+    )
 
 
 def test_weighted_hidden1_matches_castp1_lia_ffpload_regression_for_1lyz_edge():
@@ -3615,35 +3800,47 @@ def test_weighted_hidden1_matches_castp1_lia_ffpload_regression_for_1lyz_edge():
     probe_point = np.asarray([10.547, 17.139, 35.754], dtype=float)
     probe_radius = 3.275
 
-    assert _weighted_hidden1(
-        edge_points,
-        edge_radii * edge_radii,
-        probe_point,
-        probe_radius * probe_radius,
-    ) == 0
+    assert (
+        _weighted_hidden1(
+            edge_points,
+            edge_radii * edge_radii,
+            probe_point,
+            probe_radius * probe_radius,
+        )
+        == 0
+    )
 
 
 def test_weighted_hidden0_matches_vertex_attachment_semantics():
     vertex_point = np.asarray([0.0, 0.0, 0.0], dtype=float)
 
-    assert _weighted_hidden0(
-        vertex_point,
-        1.0,
-        np.asarray([0.0, 0.0, 0.0], dtype=float),
-        4.0,
-    ) == 1
-    assert _weighted_hidden0(
-        vertex_point,
-        0.0,
-        np.asarray([1.0, 0.0, 0.0], dtype=float),
-        1.0,
-    ) == 2
-    assert _weighted_hidden0(
-        vertex_point,
-        1.0,
-        np.asarray([1.0, 0.0, 0.0], dtype=float),
-        1.0,
-    ) == 0
+    assert (
+        _weighted_hidden0(
+            vertex_point,
+            1.0,
+            np.asarray([0.0, 0.0, 0.0], dtype=float),
+            4.0,
+        )
+        == 1
+    )
+    assert (
+        _weighted_hidden0(
+            vertex_point,
+            0.0,
+            np.asarray([1.0, 0.0, 0.0], dtype=float),
+            1.0,
+        )
+        == 2
+    )
+    assert (
+        _weighted_hidden0(
+            vertex_point,
+            1.0,
+            np.asarray([1.0, 0.0, 0.0], dtype=float),
+            1.0,
+        )
+        == 0
+    )
 
 
 def test_deduplicate_weighted_points_keeps_largest_radius_for_duplicate_coordinates():
@@ -3801,11 +3998,11 @@ def test_native_castp1_matches_local_mkalf_structural_outputs(case_id):
         if record['feature_type'] == 'void'
     ]
 
-    oracle_poc_components = _parse_castp1_feature_file(poc_path) if poc_path is not None else []
+    oracle_poc_components = (
+        _parse_castp1_feature_file(poc_path) if poc_path is not None else []
+    )
     oracle_void_components = (
-        _parse_castp1_feature_file(voids_path)
-        if voids_path is not None
-        else []
+        _parse_castp1_feature_file(voids_path) if voids_path is not None else []
     )
 
     _assert_castp1_components_match(
@@ -3822,7 +4019,9 @@ def test_native_castp1_matches_local_mkalf_structural_outputs(case_id):
     )
 
 
-@pytest.mark.xfail(reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.')
+@pytest.mark.xfail(
+    reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.'
+)
 def test_castp_voids_parity_1hiv():
     # 1HIV oracle: 3 voids.  The native implementation recovers all 3 exactly.
     oracle_topography = load_CASTp(zip_file='topomt/data/CASTp_3.0_server/1hiv.zip')
@@ -3840,9 +4039,12 @@ def test_castp_voids_parity_1hiv():
     }
 
     # All three oracle voids must be present exactly.
-    assert tuple(sorted([67, 86, 180, 624])) in native_void_atoms                                         # VOI-1
-    assert tuple(sorted([480, 499, 561, 578, 679, 680])) in native_void_atoms                             # VOI-2
-    assert tuple(sorted([866, 882, 914, 915, 917, 1008, 1009, 1035, 1389, 1391])) in native_void_atoms    # VOI-3
+    assert tuple(sorted([67, 86, 180, 624])) in native_void_atoms  # VOI-1
+    assert tuple(sorted([480, 499, 561, 578, 679, 680])) in native_void_atoms  # VOI-2
+    assert (
+        tuple(sorted([866, 882, 914, 915, 917, 1008, 1009, 1035, 1389, 1391]))
+        in native_void_atoms
+    )  # VOI-3
 
     # No spurious voids beyond the oracle set.
     assert native_void_atoms <= oracle_void_atoms
@@ -3852,7 +4054,9 @@ def test_castp_voids_parity_1hiv():
     assert recovered == 3, f'Expected 3/3 oracle voids; got {recovered}'
 
 
-@pytest.mark.xfail(reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.')
+@pytest.mark.xfail(
+    reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.'
+)
 def test_castp_voids_parity_1tcd():
     # 1TCD oracle: 36 voids.  The native implementation recovers 35/36 exactly.
     # VOI-11 ([488, 695, 696, 790, 851]) is the one remaining residual: our
@@ -3892,7 +4096,9 @@ def test_castp_voids_parity_1tcd():
     assert recovered == 35, f'Expected 35/36 oracle voids; got {recovered}'
 
 
-@pytest.mark.xfail(reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.')
+@pytest.mark.xfail(
+    reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.'
+)
 def test_castp_recovers_branched_channel_for_1a4j_pocket_2():
     oracle_topography = load_CASTp(zip_file='topomt/data/CASTp_3.0_server/1a4j.zip')
     oracle_feature = next(
@@ -3902,11 +4108,14 @@ def test_castp_recovers_branched_channel_for_1a4j_pocket_2():
     )
 
     with tempfile.TemporaryDirectory() as tmp:
-        feature_records, _ = castp(_extract_castp_server_pdb('topomt/data/CASTp_3.0_server/1a4j.zip', tmp))
+        feature_records, _ = castp(
+            _extract_castp_server_pdb('topomt/data/CASTp_3.0_server/1a4j.zip', tmp)
+        )
     native_feature = next(
         feature
         for feature in feature_records
-        if tuple(sorted(feature['atom_indices'])) == tuple(sorted(oracle_feature.atom_indices))
+        if tuple(sorted(feature['atom_indices']))
+        == tuple(sorted(oracle_feature.atom_indices))
     )
 
     assert oracle_feature.feature_type == 'branched_channel'
@@ -3914,7 +4123,9 @@ def test_castp_recovers_branched_channel_for_1a4j_pocket_2():
     assert native_feature['n_mouths'] == 3
 
 
-@pytest.mark.xfail(reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.')
+@pytest.mark.xfail(
+    reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.'
+)
 def test_castp_recovers_channel_for_1stp_pocket_7():
     oracle_topography = load_CASTp(zip_file='topomt/data/CASTp_3.0_server/1stp.zip')
     oracle_feature = next(
@@ -3924,11 +4135,14 @@ def test_castp_recovers_channel_for_1stp_pocket_7():
     )
 
     with tempfile.TemporaryDirectory() as tmp:
-        feature_records, _ = castp(_extract_castp_server_pdb('topomt/data/CASTp_3.0_server/1stp.zip', tmp))
+        feature_records, _ = castp(
+            _extract_castp_server_pdb('topomt/data/CASTp_3.0_server/1stp.zip', tmp)
+        )
     native_feature = next(
         feature
         for feature in feature_records
-        if tuple(sorted(feature['atom_indices'])) == tuple(sorted(oracle_feature.atom_indices))
+        if tuple(sorted(feature['atom_indices']))
+        == tuple(sorted(oracle_feature.atom_indices))
     )
 
     assert oracle_feature.feature_type == 'channel'
@@ -3937,7 +4151,9 @@ def test_castp_recovers_channel_for_1stp_pocket_7():
     assert native_feature['n_mouths'] == 2
 
 
-@pytest.mark.xfail(reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.')
+@pytest.mark.xfail(
+    reason='CASTP 3.0 server parity is a later phase; current native target is CASTp1.'
+)
 def test_castp_short_green_battery_exact_feature_parity():
     cases = ['1stp', '1rop', '2lyz', '2pk4']
 
@@ -3950,9 +4166,15 @@ def test_castp_short_green_battery_exact_feature_parity():
         oracle_sets = _feature_atom_sets(oracle_topography)
         native_sets = _feature_atom_sets(feature_records)
 
-        assert native_sets.get('pocket', set()) == oracle_sets.get('pocket', set()), pdb_id
-        assert native_sets.get('channel', set()) == oracle_sets.get('channel', set()), pdb_id
-        assert native_sets.get('branched_channel', set()) == oracle_sets.get('branched_channel', set()), pdb_id
+        assert native_sets.get('pocket', set()) == oracle_sets.get('pocket', set()), (
+            pdb_id
+        )
+        assert native_sets.get('channel', set()) == oracle_sets.get('channel', set()), (
+            pdb_id
+        )
+        assert native_sets.get('branched_channel', set()) == oracle_sets.get(
+            'branched_channel', set()
+        ), pdb_id
         assert native_sets.get('void', set()) == oracle_sets.get('void', set()), pdb_id
 
 
@@ -4030,4 +4252,6 @@ def test_exact_size3_ratio_matches_weighted_tetrahedron_power_value():
     rows = _fixed_point_lifted_rows(tetra_points, tetra_radii, decimals=1)
     ratio = _simplex_exact_ratio(rows)
 
-    assert np.isclose(ratio.numerator / ratio.denominator / 100.0, mesh.simplex_power_values[0])
+    assert np.isclose(
+        ratio.numerator / ratio.denominator / 100.0, mesh.simplex_power_values[0]
+    )

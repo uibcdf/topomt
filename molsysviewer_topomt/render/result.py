@@ -78,17 +78,17 @@ class RenderResult:
 
     def __repr__(self) -> str:
         parts = [
-            f"representation={self.representation!r}",
-            f"n_selected={len(self.selected_ids)}",
-            f"n_rendered={len(self.rendered_ids)}",
-            f"n_layers={len(self.layers)}",
+            f'representation={self.representation!r}',
+            f'n_selected={len(self.selected_ids)}',
+            f'n_rendered={len(self.rendered_ids)}',
+            f'n_layers={len(self.layers)}',
         ]
         groups = self.details.get('groups')
         if groups:
-            parts.append(f"groups={tuple(groups)!r}")
+            parts.append(f'groups={tuple(groups)!r}')
         if self.warnings:
-            parts.append(f"n_warnings={len(self.warnings)}")
-        return f"RenderResult({', '.join(parts)})"
+            parts.append(f'n_warnings={len(self.warnings)}')
+        return f'RenderResult({", ".join(parts)})'
 
 
 def render_result(

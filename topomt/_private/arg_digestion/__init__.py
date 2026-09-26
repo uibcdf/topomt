@@ -1,1 +1,1 @@
-from .digest import arg_digest
+from .digest import arg_digest as arg_digest

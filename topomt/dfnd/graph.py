@@ -214,9 +214,7 @@ class DelaunayFlowNetwork:
         )
         return instance
 
-
     @classmethod
-
     def from_arrays(cls, coordinates, radii, atom_indices=None, epsilon=1e-6):
         """Build a network from explicit arrays.
 
@@ -409,7 +407,6 @@ class DelaunayFlowNetwork:
         # wall count is known (see classify_topology at the record-building site).
         return topology_family(n_external_links, n_resident_nodes >= 1)
 
-
     def _compute_query_states(
         self,
         probe_radius: float,
@@ -489,7 +486,6 @@ class DelaunayFlowNetwork:
             valid_targets=valid_targets,
             transit_edge_per_tet_face=transit_edge_per_tet_face,
         )
-
 
     def _build_tetrahedron_and_face_records(
         self,
@@ -703,7 +699,9 @@ class DelaunayFlowNetwork:
             query = DFNDQuery(
                 probe_radius=_angstrom_or_quantity_to_nm(probe_radius),
                 residence_tolerance=_angstrom_or_quantity_to_nm(residence_tolerance),
-                permeability_tolerance=_angstrom_or_quantity_to_nm(permeability_tolerance),
+                permeability_tolerance=_angstrom_or_quantity_to_nm(
+                    permeability_tolerance
+                ),
                 transit_policy=transit_policy,
                 gate_intrusion_policy=gate_intrusion_policy,
                 dry_adjacency=dry_adjacency,
@@ -714,7 +712,9 @@ class DelaunayFlowNetwork:
             legacy_values = {
                 'probe_radius': _angstrom_or_quantity_to_nm(probe_radius),
                 'residence_tolerance': _angstrom_or_quantity_to_nm(residence_tolerance),
-                'permeability_tolerance': _angstrom_or_quantity_to_nm(permeability_tolerance),
+                'permeability_tolerance': _angstrom_or_quantity_to_nm(
+                    permeability_tolerance
+                ),
                 'transit_policy': transit_policy,
                 'gate_intrusion_policy': gate_intrusion_policy,
                 'dry_adjacency': dry_adjacency,

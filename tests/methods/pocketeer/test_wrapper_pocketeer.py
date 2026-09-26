@@ -7,7 +7,6 @@ import pytest
 from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
 
-
 POCKETEER_REPO = Path.home() / 'repos@others' / 'pocketeer'
 
 
@@ -64,11 +63,13 @@ def test_pocketeer_wrapper_matches_upstream_reference(upstream_pocketeer):
 
     assert len(wrapper_pockets) == len(upstream_pockets)
 
-    for wrapper_pocket, upstream_pocket in zip(wrapper_pockets[:5], upstream_pockets[:5]):
+    for wrapper_pocket, upstream_pocket in zip(
+        wrapper_pockets[:5], upstream_pockets[:5]
+    ):
         assert puw.get_value(wrapper_pocket.volume, to_unit='nm**3') == pytest.approx(
             upstream_pocket.volume / 1000.0
         )
         assert wrapper_pocket.score == pytest.approx(upstream_pocket.score)
-        assert len(puw.get_value(wrapper_pocket.alpha_sphere_radii, to_unit='nm')) == len(
-            upstream_pocket.spheres
-        )
+        assert len(
+            puw.get_value(wrapper_pocket.alpha_sphere_radii, to_unit='nm')
+        ) == len(upstream_pocket.spheres)

@@ -319,8 +319,12 @@ def _dfnd_face_label(
         parts.append(f'role={semantics.get("role", "unknown_face")}')
         gate_margin = semantics.get('gate_margin')
         if gate_margin is not None:
-            parts.append(f'gate_margin={_angstrom_label_from_nm(gate_margin, digits=2)}')
+            parts.append(
+                f'gate_margin={_angstrom_label_from_nm(gate_margin, digits=2)}'
+            )
         component_ids = semantics.get('component_ids') or []
         if component_ids:
-            parts.append('components=' + ','.join(str(value) for value in component_ids))
+            parts.append(
+                'components=' + ','.join(str(value) for value in component_ids)
+            )
     return '; '.join(parts)

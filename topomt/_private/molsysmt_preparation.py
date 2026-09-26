@@ -3,7 +3,6 @@ import numpy as np
 
 from topomt import pyunitwizard as puw
 
-
 NON_RECEPTOR_GROUP_SELECTION = 'group_type not in ["water", "ion", "small molecule"]'
 HEAVY_ATOM_SELECTION = 'atom_type not in ["H"]'
 

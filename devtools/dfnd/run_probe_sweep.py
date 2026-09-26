@@ -13,7 +13,6 @@ from zipfile import ZipFile
 
 from topomt.dfnd.graph import DelaunayFlowNetwork
 
-
 DEFAULT_SYSTEMS = ('1crn', '1rop', '2pk4', '2lyz', '3ptb')
 DEFAULT_RADII = (0.8, 1.0, 1.2, 1.4, 1.8, 2.2)
 DEFAULT_DATA_DIRS = (
@@ -192,7 +191,9 @@ def run_sweep(
     return records
 
 
-def write_markdown_report(records: list[dict], output_path: Path, selection: str) -> None:
+def write_markdown_report(
+    records: list[dict], output_path: Path, selection: str
+) -> None:
     invariants = _invariant_records(records)
     lines = [
         '# DFND Probe-Radius Sweep',
@@ -259,8 +260,12 @@ def main() -> None:
     parser.add_argument('--output', type=Path, default=None)
     args = parser.parse_args()
 
-    probe_radii = args.probe_radii if args.probe_radii is not None else list(DEFAULT_RADII)
-    data_dirs = args.data_dirs if args.data_dirs is not None else list(DEFAULT_DATA_DIRS)
+    probe_radii = (
+        args.probe_radii if args.probe_radii is not None else list(DEFAULT_RADII)
+    )
+    data_dirs = (
+        args.data_dirs if args.data_dirs is not None else list(DEFAULT_DATA_DIRS)
+    )
     records = run_sweep(args.systems, probe_radii, data_dirs, args.selection)
 
     if args.output is not None:

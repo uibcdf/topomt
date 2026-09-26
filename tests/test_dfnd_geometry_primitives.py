@@ -20,7 +20,11 @@ from topomt.dfnd.core.solvent_volume import (
 def _inside_tetrahedron(point, vertices, tol=1e-7):
     vertices = np.asarray(vertices, dtype=float)
     matrix = np.column_stack(
-        [vertices[0] - vertices[3], vertices[1] - vertices[3], vertices[2] - vertices[3]]
+        [
+            vertices[0] - vertices[3],
+            vertices[1] - vertices[3],
+            vertices[2] - vertices[3],
+        ]
     )
     bary = np.linalg.solve(matrix, np.asarray(point, dtype=float) - vertices[3])
     return bool(np.all(bary >= -tol) and bary.sum() <= 1.0 + tol)
@@ -69,8 +73,8 @@ def test_tetrahedron_residence_radius_is_the_clearance_at_an_interior_center():
     assert radius > 0.0
     assert _inside_tetrahedron(center, coords)
     clearances = np.linalg.norm(coords - center, axis=1) - radii
-    assert clearances.min() == pytest.approx(radius, abs=1e-6)   # radius == clearance
-    assert clearances.min() >= -1e-9                              # overlaps no atom
+    assert clearances.min() == pytest.approx(radius, abs=1e-6)  # radius == clearance
+    assert clearances.min() >= -1e-9  # overlaps no atom
 
 
 def test_face_gate_equilateral_equal_radii():
@@ -86,7 +90,9 @@ def test_face_gate_equilateral_equal_radii():
     )
     radii = np.full(3, 1.7, dtype=float)
 
-    gate = check_face_permeability(points[0], points[1], points[2], radii[0], radii[1], radii[2])
+    gate = check_face_permeability(
+        points[0], points[1], points[2], radii[0], radii[1], radii[2]
+    )
 
     expected = side / math.sqrt(3.0) - 1.7
     assert gate == pytest.approx(expected, abs=1e-6)
@@ -111,8 +117,12 @@ def test_face_gate_is_invariant_to_rigid_transform():
     )
     shifted = points @ rotation.T + np.array([3.0, -2.0, 5.0])
 
-    gate_a = check_face_permeability(points[0], points[1], points[2], radii[0], radii[1], radii[2])
-    gate_b = check_face_permeability(shifted[0], shifted[1], shifted[2], radii[0], radii[1], radii[2])
+    gate_a = check_face_permeability(
+        points[0], points[1], points[2], radii[0], radii[1], radii[2]
+    )
+    gate_b = check_face_permeability(
+        shifted[0], shifted[1], shifted[2], radii[0], radii[1], radii[2]
+    )
 
     assert gate_a > 0.0
     assert gate_b == pytest.approx(gate_a, abs=1e-6)
@@ -129,7 +139,9 @@ def test_face_gate_can_be_limited_by_two_atoms_at_boundary():
     )
     radii = np.array([1.5, 1.5, 1.5], dtype=float)
 
-    gate = check_face_permeability(points[0], points[1], points[2], radii[0], radii[1], radii[2])
+    gate = check_face_permeability(
+        points[0], points[1], points[2], radii[0], radii[1], radii[2]
+    )
 
     assert gate == pytest.approx(1.0, abs=1e-6)
 
@@ -168,13 +180,18 @@ def test_face_gate_is_invariant_to_atom_order():
     )
     radii = np.array([1.4, 1.8, 1.5], dtype=float)
 
-    ref_gate = check_face_permeability(points[0], points[1], points[2], radii[0], radii[1], radii[2])
-    gate = check_face_permeability(points[2], points[0], points[1], radii[2], radii[0], radii[1])
+    ref_gate = check_face_permeability(
+        points[0], points[1], points[2], radii[0], radii[1], radii[2]
+    )
+    gate = check_face_permeability(
+        points[2], points[0], points[1], radii[2], radii[0], radii[1]
+    )
 
     assert gate == pytest.approx(ref_gate, abs=1e-6)
 
 
 # --- Face three-atom clearance candidate direct coverage. ---
+
 
 def test_face_three_atom_clearance_candidate_inner_soddy_three_tangent_circles():
     # Three mutually tangent unit circles: the inner tangent probe is the inner
@@ -184,7 +201,9 @@ def test_face_three_atom_clearance_candidate_inner_soddy_three_tangent_circles()
     c2 = np.array([2.0, 0.0])
     c3 = np.array([1.0, math.sqrt(3.0)])
 
-    solution = face_three_atom_clearance_candidate_2d(c1, radius, c2, radius, c3, radius)
+    solution = face_three_atom_clearance_candidate_2d(
+        c1, radius, c2, radius, c3, radius
+    )
 
     assert solution is not None
     r_sol, center = solution
@@ -195,9 +214,12 @@ def test_face_three_atom_clearance_candidate_inner_soddy_three_tangent_circles()
 def test_face_three_atom_clearance_candidate_returns_none_for_collinear_centers():
     assert (
         face_three_atom_clearance_candidate_2d(
-            np.array([0.0, 0.0]), 1.0,
-            np.array([2.0, 0.0]), 1.0,
-            np.array([4.0, 0.0]), 1.0,
+            np.array([0.0, 0.0]),
+            1.0,
+            np.array([2.0, 0.0]),
+            1.0,
+            np.array([4.0, 0.0]),
+            1.0,
         )
         is None
     )
@@ -238,7 +260,8 @@ def test_tetrahedron_residence_radius_former_exterior_root_is_now_bounded_and_in
 
     max_edge = max(
         float(np.linalg.norm(coords[a] - coords[b]))
-        for a in range(4) for b in range(a + 1, 4)
+        for a in range(4)
+        for b in range(a + 1, 4)
     )
     assert radius > 0.0
     assert _inside_tetrahedron(center, coords)
@@ -250,7 +273,7 @@ def _random_tetrahedron(rng):
 
 
 def _monte_carlo_max_clearance(coords, radii, rng, n=50000):
-    weights = rng.dirichlet(np.ones(4), size=n)        # uniform inside the tetra
+    weights = rng.dirichlet(np.ones(4), size=n)  # uniform inside the tetra
     points = weights @ coords
     clearances = np.linalg.norm(points[:, None, :] - coords[None, :, :], axis=2) - radii
     return float(clearances.min(axis=1).max())
@@ -292,6 +315,7 @@ def test_tetrahedron_residence_radius_result_is_a_valid_inscribed_sphere():
 # --- Residence active-set toys (residence_radius_audit.md): assert which
 #     stratum produced the optimum, so the right label is reached for the right
 #     reason. R_residence is NOT assumed to equal the four-atom Apollonius. ---
+
 
 def test_residence_interior4_compact_tetrahedron():
     # Compact regular tetrahedron: the 4-atom Apollonius center is inside and is
@@ -352,11 +376,14 @@ def test_residence_apollonius4_invalid_is_not_used():
 
     max_edge = max(
         float(np.linalg.norm(coords[a] - coords[b]))
-        for a in range(4) for b in range(a + 1, 4)
+        for a in range(4)
+        for b in range(a + 1, 4)
     )
     assert result.apollonius4_valid is False
-    assert result.r_apollonius4 > max_edge          # the raw 4-atom candidate is the exterior sphere
-    assert 0.0 < result.radius <= max_edge          # residence stays physical
+    assert (
+        result.r_apollonius4 > max_edge
+    )  # the raw 4-atom candidate is the exterior sphere
+    assert 0.0 < result.radius <= max_edge  # residence stays physical
     assert _inside_tetrahedron(result.center, coords)
 
 
@@ -398,9 +425,14 @@ def test_residence_batch_matches_scalar_reference():
     coords = rng.normal(size=(400, 4, 3)) * 3.0
     radii = rng.uniform(1.0, 2.0, size=(400, 4))
 
-    radius_batch, _centers, _kinds, _r4, _valid = tetrahedron_residence_radius_batch(coords, radii)
+    radius_batch, _centers, _kinds, _r4, _valid = tetrahedron_residence_radius_batch(
+        coords, radii
+    )
     radius_scalar = np.array(
-        [tetrahedron_residence_radius(coords[i], radii[i]).radius for i in range(coords.shape[0])]
+        [
+            tetrahedron_residence_radius(coords[i], radii[i]).radius
+            for i in range(coords.shape[0])
+        ]
     )
 
     assert np.max(np.abs(radius_batch - radius_scalar)) < 1e-9
@@ -458,7 +490,12 @@ def test_face_gate_radius_batch_matches_scalar_reference():
     radius_scalar = np.array(
         [
             face_gate_radius(
-                coords[i, 0], coords[i, 1], coords[i, 2], radii[i, 0], radii[i, 1], radii[i, 2]
+                coords[i, 0],
+                coords[i, 1],
+                coords[i, 2],
+                radii[i, 0],
+                radii[i, 1],
+                radii[i, 2],
             ).radius
             for i in range(coords.shape[0])
         ]

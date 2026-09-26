@@ -1,13 +1,24 @@
-from pathlib import Path
-
-from topomt.features.Pocket import Pocket
 from topomt.third_party.fpocket.cli import get_topography as get_topography_with_fpocket
 from topomt.third_party.fpocket.files import (
-    _build_topography_and_atom_map,
-    _fpocket_pocket_to_feature,
-    fpocket_result_to_topography,
+    _build_topography_and_atom_map as _build_topography_and_atom_map,
+)
+from topomt.third_party.fpocket.files import (
+    _fpocket_pocket_to_feature as _fpocket_pocket_to_feature,
+)
+from topomt.third_party.fpocket.files import (
+    fpocket_result_to_topography as fpocket_result_to_topography,
+)
+from topomt.third_party.fpocket.files import (
     load_topography,
 )
+
+__all__ = [
+    'get_topography_with_fpocket',
+    '_build_topography_and_atom_map',
+    '_fpocket_pocket_to_feature',
+    'fpocket_result_to_topography',
+    'load_topography_from_fpocket_output',
+]
 
 
 def load_topography_from_fpocket_output(

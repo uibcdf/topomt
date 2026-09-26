@@ -26,7 +26,9 @@ def test_cross_section_profile_returns_expected_radial_maxima():
         dtype=float,
     )
 
-    bin_centers, radial_max = cross_section_profile(centers, axis=np.array([1.0, 0.0, 0.0]), n_bins=2)
+    bin_centers, radial_max = cross_section_profile(
+        centers, axis=np.array([1.0, 0.0, 0.0]), n_bins=2
+    )
 
     assert bin_centers.shape == (2,)
     assert np.allclose(radial_max, np.array([1.0, 2.0]))
@@ -125,6 +127,7 @@ def test_thickness_profile_averages_local_radii_per_bin():
     assert bin_centers.shape == (2,)
     assert np.allclose(profile, np.array([1.0, 4.0 / 3.0]))
 
+
 def test_cross_section_profile_rejects_empty_points():
 
     with pytest.raises(ValueError, match='centers must contain at least one point'):
@@ -155,6 +158,7 @@ def test_thickness_profile_rejects_empty_points():
 
     with pytest.raises(ValueError, match='centers must contain at least one point'):
         thickness_profile(np.empty((0, 3)), axis=np.array([1.0, 0.0, 0.0]))
+
 
 def test_cross_section_profile_is_translation_aware_by_default():
     centers = np.array(
@@ -228,7 +232,9 @@ def test_min_cross_section_radius_passes_axis_point():
 def test_shortest_path_length_rejects_out_of_range_indices():
     centers = np.array([[0.0, 0.0, 0.0]], dtype=float)
 
-    with pytest.raises(ValueError, match='neighbor_pairs contains out-of-range indices'):
+    with pytest.raises(
+        ValueError, match='neighbor_pairs contains out-of-range indices'
+    ):
         shortest_path_length(
             centers,
             neighbor_pairs=[(0, 1)],
@@ -240,7 +246,9 @@ def test_shortest_path_length_rejects_out_of_range_indices():
 def test_thickness_profile_rejects_out_of_range_neighbor_indices():
     centers = np.array([[0.0, 0.0, 0.0]], dtype=float)
 
-    with pytest.raises(ValueError, match='neighbor_pairs contains out-of-range indices'):
+    with pytest.raises(
+        ValueError, match='neighbor_pairs contains out-of-range indices'
+    ):
         thickness_profile(
             centers,
             axis=np.array([1.0, 0.0, 0.0]),

@@ -38,7 +38,11 @@ def mouth_area_on_plane(
         return 0.0
     normal_unit = normal / norm
 
-    reference = np.array([1.0, 0.0, 0.0]) if abs(normal_unit[0]) < 0.9 else np.array([0.0, 1.0, 0.0])
+    reference = (
+        np.array([1.0, 0.0, 0.0])
+        if abs(normal_unit[0]) < 0.9
+        else np.array([0.0, 1.0, 0.0])
+    )
     basis_u = np.cross(normal_unit, reference)
     basis_u /= np.linalg.norm(basis_u)
     basis_v = np.cross(normal_unit, basis_u)

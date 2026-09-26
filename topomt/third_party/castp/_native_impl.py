@@ -39,15 +39,12 @@ def _component_to_record(
     def _sorted_int_tuples(values, tuple_size: int) -> List[Tuple[int, ...]]:
         tuples = []
         for value in values:
-            tuples.append(
-                tuple(
-                    int(item)
-                    for item in sorted(value[:tuple_size])
-                )
-            )
+            tuples.append(tuple(int(item) for item in sorted(value[:tuple_size])))
         return sorted(tuples)
 
-    atom_indices = sorted(int(atom_index) for atom_index in component.get('atom_indices', []))
+    atom_indices = sorted(
+        int(atom_index) for atom_index in component.get('atom_indices', [])
+    )
 
     try:
         properties = get_physicochemical_properties(molsys, atom_indices)
@@ -66,7 +63,8 @@ def _component_to_record(
                 'perimeter': float(mouth.get('perimeter', 0.0)),
                 'faces': list(mouth.get('faces', [])),
                 'triangle_indices': sorted(
-                    int(triangle_index) for triangle_index in mouth.get('triangle_indices', [])
+                    int(triangle_index)
+                    for triangle_index in mouth.get('triangle_indices', [])
                 ),
             }
         )
@@ -81,13 +79,16 @@ def _component_to_record(
             int(index)
             for index in component.get('iT', component.get('tetrahedron_indices', []))
         ],
-        'tetrahedron_indices': [int(index) for index in component.get('tetrahedron_indices', [])],
+        'tetrahedron_indices': [
+            int(index) for index in component.get('tetrahedron_indices', [])
+        ],
         'atom_indices': atom_indices,
         'boundary_atom_indices': sorted(
             int(atom_index) for atom_index in component.get('boundary_atom_indices', [])
         ),
         'component_atom_indices': sorted(
-            int(atom_index) for atom_index in component.get('component_atom_indices', [])
+            int(atom_index)
+            for atom_index in component.get('component_atom_indices', [])
         ),
         'center': component.get('center'),
         'area': float(component.get('area', 0.0)),

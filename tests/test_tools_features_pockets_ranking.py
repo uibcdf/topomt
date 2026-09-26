@@ -16,6 +16,7 @@ def test_simple_ranking_combines_volume_and_pocket_size():
 
     assert scores == [11.0, 4.5]
 
+
 def test_simple_ranking_rejects_mismatched_sequences():
 
     with pytest.raises(ValueError, match='same length'):

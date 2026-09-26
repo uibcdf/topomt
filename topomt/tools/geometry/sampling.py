@@ -23,7 +23,10 @@ def union_volume_monte_carlo(
     sphere_radii_flat = np.asarray(radii, dtype=float)
     if sphere_centers.ndim != 2 or sphere_centers.shape[1] != 3:
         raise ValueError('centers must have shape (n_spheres, 3)')
-    if sphere_radii_flat.ndim != 1 or sphere_radii_flat.shape[0] != sphere_centers.shape[0]:
+    if (
+        sphere_radii_flat.ndim != 1
+        or sphere_radii_flat.shape[0] != sphere_centers.shape[0]
+    ):
         raise ValueError('radii must have shape (n_spheres,)')
     if not np.all(np.isfinite(sphere_centers)):
         raise ValueError('centers must contain finite values')
@@ -43,11 +46,13 @@ def union_volume_monte_carlo(
 
     inside = 0
     chunk = 50_000
-    radius_squared = sphere_radii_flat ** 2
+    radius_squared = sphere_radii_flat**2
     for start in range(0, n_samples, chunk):
         stop = min(start + chunk, n_samples)
         sample = points[start:stop]
-        distance_squared = ((sample[:, None, :] - sphere_centers[None, :, :]) ** 2).sum(axis=2)
+        distance_squared = ((sample[:, None, :] - sphere_centers[None, :, :]) ** 2).sum(
+            axis=2
+        )
         mask = np.any(distance_squared <= radius_squared, axis=1)
         inside += int(np.sum(mask))
 

@@ -83,23 +83,27 @@ def match_results(
 
         if support_a is not None and support_a in support_b:
             j = support_b[support_a]
-            matches.append({
-                'a': key_a,
-                'b': _get(comps_b[j], 'component_key'),
-                'jaccard': 1.0,
-                'exact': True,
-            })
+            matches.append(
+                {
+                    'a': key_a,
+                    'b': _get(comps_b[j], 'component_key'),
+                    'jaccard': 1.0,
+                    'exact': True,
+                }
+            )
             continue
 
         for j, comp_b in enumerate(comps_b):
             score = jaccard(atoms_a[i], atoms_b[j])
             if score >= min_jaccard:
-                matches.append({
-                    'a': key_a,
-                    'b': _get(comp_b, 'component_key'),
-                    'jaccard': score,
-                    'exact': False,
-                })
+                matches.append(
+                    {
+                        'a': key_a,
+                        'b': _get(comp_b, 'component_key'),
+                        'jaccard': score,
+                        'exact': False,
+                    }
+                )
 
     return matches
 
@@ -144,12 +148,14 @@ def assign_tracks(
     for comp in frame_list[0]:
         key = _get(comp, 'component_key')
         track_of[(0, key)] = _new_track()
-        events.append({'type': 'birth', 'frame': 0, 'component': key,
-                       'track': track_of[(0, key)]})
+        events.append(
+            {'type': 'birth', 'frame': 0, 'component': key, 'track': track_of[(0, key)]}
+        )
 
     for i in range(len(frame_list) - 1):
-        matches = match_results(frame_list[i], frame_list[i + 1],
-                                min_jaccard=min_jaccard)
+        matches = match_results(
+            frame_list[i], frame_list[i + 1], min_jaccard=min_jaccard
+        )
         succ: dict[Any, list[Any]] = {}
         pred: dict[Any, list[Any]] = {}
         for m in matches:
@@ -162,18 +168,37 @@ def assign_tracks(
         for key_a in keys_a:
             outgoing = succ.get(key_a, [])
             if not outgoing:
-                events.append({'type': 'death', 'frame': i, 'component': key_a,
-                               'track': track_of.get((i, key_a))})
+                events.append(
+                    {
+                        'type': 'death',
+                        'frame': i,
+                        'component': key_a,
+                        'track': track_of.get((i, key_a)),
+                    }
+                )
             elif len(outgoing) >= 2:
-                events.append({'type': 'split', 'frame': i, 'component': key_a,
-                               'into': outgoing, 'track': track_of.get((i, key_a))})
+                events.append(
+                    {
+                        'type': 'split',
+                        'frame': i,
+                        'component': key_a,
+                        'into': outgoing,
+                        'track': track_of.get((i, key_a)),
+                    }
+                )
 
         for key_b in keys_b:
             incoming = pred.get(key_b, [])
             if not incoming:
                 track_of[(i + 1, key_b)] = _new_track()
-                events.append({'type': 'birth', 'frame': i + 1, 'component': key_b,
-                               'track': track_of[(i + 1, key_b)]})
+                events.append(
+                    {
+                        'type': 'birth',
+                        'frame': i + 1,
+                        'component': key_b,
+                        'track': track_of[(i + 1, key_b)],
+                    }
+                )
             elif len(incoming) == 1 and len(succ.get(incoming[0], [])) == 1:
                 # clean one-to-one: continue the predecessor's track
                 track_of[(i + 1, key_b)] = (
@@ -181,8 +206,15 @@ def assign_tracks(
                 )
             elif len(incoming) >= 2:
                 track_of[(i + 1, key_b)] = _new_track()
-                events.append({'type': 'merge', 'frame': i + 1, 'component': key_b,
-                               'from': incoming, 'track': track_of[(i + 1, key_b)]})
+                events.append(
+                    {
+                        'type': 'merge',
+                        'frame': i + 1,
+                        'component': key_b,
+                        'from': incoming,
+                        'track': track_of[(i + 1, key_b)],
+                    }
+                )
             else:
                 # one branch of a predecessor that split: start a fresh track
                 track_of[(i + 1, key_b)] = _new_track()

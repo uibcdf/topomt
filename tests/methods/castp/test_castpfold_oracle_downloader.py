@@ -1,5 +1,3 @@
-from pathlib import Path
-
 from devtools.castp.download_castpfold_oracles import (
     existing_zip_ids,
     parse_pdb_id_list,

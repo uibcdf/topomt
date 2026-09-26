@@ -57,7 +57,6 @@ def test_typed_configs_accept_quantities_and_normalize_to_nm():
     assert mesh_config.epsilon == pytest.approx(1e-7)
 
 
-
 def test_public_length_float_compatibility_warns_and_interprets_angstroms():
     import warnings
 
@@ -82,6 +81,7 @@ def test_public_length_float_compatibility_warns_and_interprets_angstroms():
         _warn_bare_length_args(
             probe_radius=puw.quantity(1.4, 'angstroms'), epsilon=None
         )
+
 
 def test_query_drives_result_identity_but_reporting_min_size_does_not():
     network = _network()
@@ -125,7 +125,6 @@ def test_at_probe_preserves_every_unspecified_query_and_reporting_option():
     assert reprobed.dfn.parameters['reporting']['min_size'] == 7
 
 
-
 def test_at_probe_warns_for_legacy_bare_float_probe_radius():
     network = _network()
     data = DFNDData(network, network.get_topography())
@@ -134,6 +133,7 @@ def test_at_probe_warns_for_legacy_bare_float_probe_radius():
         reprobed = data.at_probe(1.2)
 
     assert reprobed.dfn.parameters['query']['probe_radius'] == pytest.approx(0.12)
+
 
 def test_at_probe_rejects_mesh_configuration_overrides():
     network = _network()

@@ -59,7 +59,7 @@ def import_upstream_module(
         if upstream_root is None:
             raise ModuleNotFoundError(
                 f"Optional upstream package '{module_name}' is not installed. "
-                f"Install it or pass upstream_root to the wrapper-backed path."
+                f'Install it or pass upstream_root to the wrapper-backed path.'
             ) from original_exc
 
         upstream_root = Path(upstream_root).expanduser().resolve()

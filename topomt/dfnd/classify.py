@@ -75,12 +75,20 @@ CLEFT = 'cleft'
 GENERIC_FEATURE_BY_SHAPE_TYPE = {
     # concavity: resident families + the non-resident-shadow generic
     'concavity': (
-        fam.VOID, fam.POCKET, OPEN_CONCAVITY, fam.CHANNEL, 'non_resident_contact',
+        fam.VOID,
+        fam.POCKET,
+        OPEN_CONCAVITY,
+        fam.CHANNEL,
+        'non_resident_contact',
     ),
     # solid side (dry): surface relief vs internal core -- future (no promotion yet)
     'convexity': ('generic_convexity', 'buried_core'),
     'mixed': ('interface',),  # partial -- detected via n_dry_contacts
-    'boundary': ('mouth', 'neck', 'generic_boundary'),  # mouth done; neck = constriction
+    'boundary': (
+        'mouth',
+        'neck',
+        'generic_boundary',
+    ),  # mouth done; neck = constriction
     'point': ('generic_point',),  # future
 }
 
@@ -153,7 +161,8 @@ def classify(
         buriedness is not None and abs(buriedness - _CLEFT_BURIEDNESS) <= _CLEFT_MARGIN
     )
     near_groove = (
-        elongation is not None and abs(elongation - _GROOVE_ELONGATION) <= _GROOVE_MARGIN
+        elongation is not None
+        and abs(elongation - _GROOVE_ELONGATION) <= _GROOVE_MARGIN
     )
     marginal = occ_margin <= _OCCLUSION_MARGIN or near_cleft or near_groove
     if buriedness is not None and buriedness >= _CLEFT_BURIEDNESS:

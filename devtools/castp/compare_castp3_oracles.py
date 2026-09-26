@@ -17,7 +17,6 @@ from topomt.io.load_CASTp import (
 )
 from topomt.third_party.castp3._native_impl import castp as native_castp3
 
-
 DEFAULT_ZIP_DIR = Path('topomt/data/CASTpFold_server')
 DEFAULT_FEATURE_TYPES = ('pocket', 'void', 'channel', 'branched_channel', 'mouth')
 DEFAULT_SELECTION = 'molecule_type in ["protein", "peptide"]'
@@ -69,7 +68,9 @@ def oracle_atom_id_sets(extracted_dir: str | Path) -> dict[str, list[frozenset[i
 
     for poc_id, atom_labels in poc_atom_labels.items():
         feature_type = _feature_type_from_n_mouths(poc_info[poc_id]['n_mouths'])
-        result.setdefault(feature_type, []).append(atom_ids_from_castp_labels(atom_labels))
+        result.setdefault(feature_type, []).append(
+            atom_ids_from_castp_labels(atom_labels)
+        )
 
     mouth_atom_labels = _parse_mouth_file(mouth_file)
     result['mouth'] = [
@@ -98,8 +99,7 @@ def _atom_id_lookup(molecular_system) -> dict[int, int]:
             atom_serials.append(int(line[6:11]))
 
     return {
-        atom_index: atom_serial
-        for atom_index, atom_serial in enumerate(atom_serials)
+        atom_index: atom_serial for atom_index, atom_serial in enumerate(atom_serials)
     }
 
 
@@ -237,7 +237,9 @@ def main() -> None:
     parser.add_argument('--selection', default=DEFAULT_SELECTION)
     parser.add_argument('--probe-radius', type=float, default=1.4)
     parser.add_argument('--probe-limited-depth', action='store_true', default=False)
-    parser.add_argument('--full-depth', action='store_false', dest='probe_limited_depth')
+    parser.add_argument(
+        '--full-depth', action='store_false', dest='probe_limited_depth'
+    )
     parser.add_argument(
         '--peripheral-atom-expansion-steps',
         type=int,
