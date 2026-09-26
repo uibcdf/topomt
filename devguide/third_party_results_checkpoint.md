@@ -23,7 +23,7 @@ separate scientific check against an inflated engineering percentage.
 | Remaining fpocket field inventory and typed mapping | 10 | In progress | All 19 scalar info fields checked line by line in two fixtures and a local CLI run; sphere and contact-atom provenance retained; defining atoms, global PDB, historical build identity, and broader parity remain |
 | Pocketeer result fidelity and output record | 10 | In progress | Library result and mask captured for 6qrd and 2xjx; sphere IDs, SASA, defining atoms, residues and masks mapped; selection/chain, clean install and broader parity remain |
 | AlphaSpace2 result fidelity and output record | 10 | In progress | 1GG0 snapshot and upstream PDB exports retained; alpha/beta memberships, spaces, scores and contact state mapped; binder and advanced-score parity remain |
-| CASTp/CASTpFold result fidelity and output record | 10 | In progress | Pinned ZIP and extracted bytes retained; `N_mth` aggregation and parent links checked in six ZIPs; all 13 fixed numeric columns attributed, with 12 calculation issues; a native CASTpFold job-named ZIP passes field checks; optional output and live-server evidence pending |
+| CASTp/CASTpFold result fidelity and output record | 10 | In progress | ZIP, directory, and individual-file artifacts retained; `N_mth` aggregation and parent links checked in six ZIPs; all 13 fixed numeric columns attributed, with 12 calculation issues; a native CASTpFold job-named ZIP passes field checks; optional typed output and live-server evidence pending |
 | pyCASTA result fidelity and output record | 10 | In progress | Four bounded structures compare per-pocket values; full returned dict and isolated native files retained; tetrahedron-array identity checked; atom-order, optional validation and broader parity remain |
 | Independent TopoMT calculations and comparisons | 15 | Not started | Definition-specific issues closed by matching-input numerical tests |
 | Cross-provider edge-case and server validation | 5 | Not started | Selection, ligand, chain, void/channel/interface, version and live-server matrix |
@@ -41,7 +41,7 @@ be reduced if an accepted milestone regresses.
 | fpocket CLI and persisted files | Yes, input and all output files | All 19 scalar info fields, sphere ID/type/charge, ordered contact serials and positional atom mapping; four defining atoms are absent from PQR output | Reported scalars match original info lines in two fixtures and a local CLI run; native-calculation parity pending |
 | Pocketeer library | Yes, submitted PDB, official JSON and omitted-mask supplement | Volume, score, centroid, residues, mask, sphere IDs/geometry/mean SASA/four defining atoms | 6qrd and non-default 2xjx against local source; broader parity pending |
 | AlphaSpace2 library | Yes, submitted PDB, all upstream exported PDBs and full snapshot supplement | Pocket, alpha and beta geometry, space, nonpolar contribution, scores and contact/occupancy descriptors | 1GG0 direct snapshot and exported-file parity; binder/advanced-score parity pending |
-| CASTp/CASTpFold files and mocked server | Yes, exact ZIP, submitted PDB where available, and all extracted files | All 13 fixed numeric `.pocInfo`/`.mouthInfo` columns attributed; physical quantities canonical in nm units and counts integral | Six CASTp 3.0 ZIPs checked for reported counts and mouth links; 1tcd fixed columns and a job-named CASTpFold 1psn ZIP checked numerically; broader numeric and live-server parity pending |
+| CASTp/CASTpFold files and mocked server | Yes, exact ZIP, submitted PDB where available, all extracted files, and individually supplied files | All 13 fixed numeric `.pocInfo`/`.mouthInfo` columns attributed; physical quantities canonical in nm units and counts integral | Six CASTp 3.0 ZIPs checked for reported counts and mouth links; 1tcd fixed columns and a job-named CASTpFold 1psn ZIP checked numerically; individual-file and info-only routes checked; broader numeric and live-server parity pending |
 | pyCASTA library | Yes, submitted PDB, returned-result snapshot, alpha NPZ, native pocket PDB/CSV and logs for default route | Score, volume, depth, mouth area/perimeter, representative point, tetrahedron IDs and validation method with PyUnitWizard geometry | Four bounded structures compared per pocket; atom-order and validation edge cases pending |
 
 ## Next checkpoint
@@ -133,7 +133,8 @@ the 2pk4 native files and portable bundle were checked. A first joint run
 exposed a NumPy-array metadata serialization error in the public route; the
 adapter now normalizes those settings and the repeated joint run passes.
 The CASTp file and mocked-server `pytest --receptor=llm` selection reported
-22 passed across seven pinned ZIPs. It checks reported surface/mouth IDs,
+24 passed across seven pinned ZIPs and two individual-file routes. It checks
+reported surface/mouth IDs,
 zero-mouth rows, parent links, exact ZIP retention, bundle recovery, and
 all 13 fixed numeric mappings for 1tcd; the seventh ZIP is a native
 CASTpFold job-named result with selected field and README parity checks.

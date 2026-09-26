@@ -376,6 +376,44 @@ def load_CASTp(
                     },
                 )
                 topography.add_provider_run(provider_run)
+        else:
+            supplied_files = [
+                Path(path)
+                for path in (
+                    poc_file,
+                    pocInfo_file,
+                    mouth_file,
+                    mouthInfo_file,
+                    pdb_file,
+                )
+                if path is not None
+            ]
+            provider_input = (
+                submitted_input_pdb or pdb_file or next(iter(supplied_files), None)
+            )
+            if provider_input is not None:
+                with tempfile.TemporaryDirectory(
+                    prefix='topomt_castp_files_'
+                ) as output_dir:
+                    for path in supplied_files:
+                        destination = Path(output_dir) / path.name
+                        if destination.exists():
+                            raise ValueError(
+                                f'Duplicate CASTp filename in individual-file input: {path.name}'
+                            )
+                        shutil.copy2(path, destination)
+                    provider_run = ProviderRun.capture(
+                        'castp',
+                        provider_backend,
+                        provider_input,
+                        output_dir,
+                        metadata={
+                            'server': provider_server,
+                            'jobid': provider_jobid,
+                            'probe_radius_angstroms': probe_radius,
+                        },
+                    )
+                topography.add_provider_run(provider_run)
 
         poc_id_to_feature_id = dict()
         mouth_id_to_feature_id = dict()

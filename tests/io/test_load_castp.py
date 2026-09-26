@@ -7,6 +7,7 @@ import pytest
 import topomt as tmt
 from topomt import pyunitwizard as puw
 from topomt.io.load_CASTp import load_CASTp
+from topomt.provider_output import ProviderRun
 
 
 def _features_by_source_id(topography, feature_type):
@@ -28,6 +29,44 @@ def _value(quantity, unit=None):
     if unit is None:
         return float(puw.get_value(quantity))
     return float(puw.get_value(quantity, to_unit=unit))
+
+
+def test_load_castp_individual_files_retains_original_bundle(tmp_path):
+    base = Path(tmt.demo['TcTIM']['CASTp_1tcd'])
+    paths = {
+        'poc_file': base / '1tcd.poc',
+        'pocInfo_file': base / '1tcd.pocInfo',
+        'mouth_file': base / '1tcd.mouth',
+        'mouthInfo_file': base / '1tcd.mouthInfo',
+        'pdb_file': base / '1tcd.pdb',
+    }
+    topography = load_CASTp(**paths)
+
+    assert len(topography.provider_runs) == 1
+    run = next(iter(topography.provider_runs.values()))
+    assert run.get_artifact('input/1tcd.pdb') == paths['pdb_file'].read_bytes()
+    for path in paths.values():
+        assert run.get_artifact(f'output/{path.name}') == path.read_bytes()
+    pocket_1 = _castp_surface_features(topography)['Pocket 1']
+    assert pocket_1.provider_run_id == run.run_id
+    assert pocket_1.external_measurements['length'].source_artifact == (
+        'output/1tcd.pocInfo'
+    )
+    bundle = tmp_path / 'individual_files.zip'
+    run.save(bundle)
+    assert ProviderRun.load(bundle).artifacts == run.artifacts
+
+
+def test_load_castp_individual_info_file_keeps_source_without_structure():
+    info_file = Path(tmt.demo['TcTIM']['CASTp_1tcd']) / '1tcd.pocInfo'
+    topography = load_CASTp(pocInfo_file=info_file)
+
+    run = next(iter(topography.provider_runs.values()))
+    assert run.get_artifact('input/1tcd.pocInfo') == info_file.read_bytes()
+    assert run.get_artifact('output/1tcd.pocInfo') == info_file.read_bytes()
+    pocket_1 = _castp_surface_features(topography)['Pocket 1']
+    assert pocket_1.atom_labels is None
+    assert pocket_1.external_measurements['length'].run_id == run.run_id
 
 
 def test_load_castp_tctim_imports_server_metrics():

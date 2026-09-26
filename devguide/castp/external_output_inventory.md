@@ -17,6 +17,10 @@ ZIP under `output/raw_server_zip/`, and every extracted file. All parsed
 pocket, void, channel, branched-channel, and mouth features link to the run.
 Their atom-label source is `.poc` or `.mouth`; their metric source is
 `.pocInfo` or `.mouthInfo`. The portable bundle round trip is tested on 1tcd.
+For explicit individual files, the run retains every supplied file as an
+output artifact and uses the supplied PDB, or the first available file, as
+its input artifact. A `.pocInfo`-only import remains attributable without a
+molecular system.
 
 The loader uses pocket IDs from both `.poc` and `.pocInfo`; a reported
 surface without atom rows remains a feature with unknown atom ownership.
@@ -24,8 +28,8 @@ For mouths, `.mouthInfo` also contains zero rows for voids (`N_mth = 0`),
 which have no matching `.mouth` atom rows. Those zero rows remain in the
 original artifact but do not create fictitious Mouth features. A positive
 `N_mth` row is retained even if its atom records are absent. The file loader
-still needs explicit coverage for individual-file and
-directory-only inputs, nested ZIP layouts, alternate filenames, absent
+still needs explicit coverage for directory-only inputs, nested ZIP layouts,
+alternate filenames, absent
 optional files, and invalid archives. Submitted-atom matching under selection
 and multiple chains needs independent tests. Server tests do not yet compare
 results returned by a live service.
