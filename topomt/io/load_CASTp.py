@@ -11,9 +11,44 @@ from topomt._private.path import (
     ensure_path_exists_and_is_dir,
     ensure_path_exists_and_is_file,
 )
-from topomt.provider_output import ProviderRun
+from topomt.provider_output import ExternalMeasurement, ProviderRun
 
 _atom_label_format = '{atom_id}-{atom_name}/{group_name}/{chain_id}'
+
+_CASTP_POCKET_MEASUREMENTS = (
+    (
+        'solvent_accessible_area',
+        'Area_sa',
+        'angstroms**2',
+        'nm**2',
+        41,
+        'CASTp pocket area in the Richards solvent-accessible surface model',
+    ),
+    (
+        'molecular_surface_area',
+        'Area_ms',
+        'angstroms**2',
+        'nm**2',
+        42,
+        'CASTp pocket area in the Connolly molecular-surface model',
+    ),
+    (
+        'solvent_accessible_volume',
+        'Vol_sa',
+        'angstroms**3',
+        'nm**3',
+        43,
+        'CASTp pocket volume in the Richards solvent-accessible surface model',
+    ),
+    (
+        'molecular_surface_volume',
+        'Vol_ms',
+        'angstroms**3',
+        'nm**3',
+        44,
+        'CASTp pocket volume in the Connolly molecular-surface model',
+    ),
+)
 
 
 def _feature_type_from_n_mouths(n_mouths: int | None) -> str:
@@ -347,6 +382,38 @@ def load_CASTp(
                     'corner_points_count'
                 ]
                 args_dict['n_mouths'] = poc_id_to_poc_data[poc_id]['n_mouths']
+                attributed_measurements = {}
+                for (
+                    name,
+                    original_field,
+                    original_unit,
+                    canonical_unit,
+                    issue,
+                    definition,
+                ) in _CASTP_POCKET_MEASUREMENTS:
+                    original_quantity = poc_id_to_poc_data[poc_id][name]
+                    original_value = float(
+                        puw.get_value(original_quantity, to_unit=original_unit)
+                    )
+                    canonical_quantity = puw.quantity(
+                        float(puw.get_value(original_quantity, to_unit=canonical_unit)),
+                        canonical_unit,
+                    )
+                    args_dict[name] = canonical_quantity
+                    if provider_run is not None and pocInfo_file is not None:
+                        attributed_measurements[name] = ExternalMeasurement(
+                            value=canonical_quantity,
+                            original_value=original_value,
+                            original_unit=original_unit,
+                            source_field=f'pocInfo[{poc_id}].{original_field}',
+                            source_artifact=f'output/{pocInfo_file.name}',
+                            run_id=provider_run.run_id,
+                            definition=definition,
+                            issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
+                            status='external_only',
+                        )
+                if attributed_measurements:
+                    args_dict['external_measurements'] = attributed_measurements
             feature_id = topography.add_new_feature(
                 feature_type=feature_type,
                 atom_labels=atom_labels,

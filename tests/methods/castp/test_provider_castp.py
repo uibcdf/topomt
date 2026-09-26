@@ -99,6 +99,27 @@ def test_castp_provider_load_topography_reads_server_zip(tmp_path):
         mouth.provider_run_id == run.run_id
         for mouth in topography.get_features(by='type', value='mouth')
     )
+    pocket_1 = next(
+        feature
+        for feature in _castp_surface_features(topography)
+        if feature.source_id == 'Pocket 1'
+    )
+    for name, original, unit, normalized, source_field, issue in (
+        ('solvent_accessible_area', 283.364, 'angstroms**2', 2.83364, 'Area_sa', 41),
+        ('molecular_surface_area', 456.907, 'angstroms**2', 4.56907, 'Area_ms', 42),
+        ('solvent_accessible_volume', 165.990, 'angstroms**3', 0.16599, 'Vol_sa', 43),
+        ('molecular_surface_volume', 637.990, 'angstroms**3', 0.63799, 'Vol_ms', 44),
+    ):
+        measurement = pocket_1.external_measurements[name]
+        assert measurement.original_value == pytest.approx(original)
+        assert measurement.original_unit == unit
+        assert measurement.run_id == run.run_id
+        assert measurement.source_artifact == 'output/1tcd.pocInfo'
+        assert measurement.source_field == f'pocInfo[1].{source_field}'
+        assert (
+            measurement.issue_url == f'https://github.com/uibcdf/topomt/issues/{issue}'
+        )
+        assert puw.get_value(getattr(pocket_1, name)) == pytest.approx(normalized)
     bundle = tmp_path / 'castp_run.zip'
     run.save(bundle)
     assert ProviderRun.load(bundle).artifacts == run.artifacts

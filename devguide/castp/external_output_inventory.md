@@ -36,8 +36,8 @@ results returned by a live service.
 |---|---|---|
 | `.poc` record ID and atom rows | Surface feature `source_id` and atom labels | One reported surface pocket ID. Feature class is inferred from `N_mth`: zero void, one pocket, two channel, more branched channel. This is a TopoMT interpretation of the CASTp mouth count. |
 | `.pocInfo` `N_mth` | `n_mouths` | Number of mouths for that pocket. |
-| `.pocInfo` `Area_sa`, `Area_ms` | `solvent_accessible_area`, `molecular_surface_area` | Distinct CASTp surface definitions; currently PyUnitWizard Å² quantities. Add attributed original-field records and definition-specific independent-calculation issues. |
-| `.pocInfo` `Vol_sa`, `Vol_ms` | `solvent_accessible_volume`, `molecular_surface_volume` | Distinct CASTp volume definitions; currently PyUnitWizard Å³ quantities. Add attributed records and separate calculation issues. |
+| `.pocInfo` `Area_sa`, `Area_ms` | `solvent_accessible_area`, `molecular_surface_area` | Distinct CASTp surface definitions; original Å² values are attributed and feature quantities use nm². Independent-calculation issues [#41](https://github.com/uibcdf/topomt/issues/41) and [#42](https://github.com/uibcdf/topomt/issues/42). |
+| `.pocInfo` `Vol_sa`, `Vol_ms` | `solvent_accessible_volume`, `molecular_surface_volume` | Distinct CASTp volume definitions; original Å³ values are attributed and feature quantities use nm³. Independent-calculation issues [#43](https://github.com/uibcdf/topomt/issues/43) and [#44](https://github.com/uibcdf/topomt/issues/44). |
 | `.pocInfo` `Lenth` | `length` | Reported linear extent in Å; exact algorithm needs source-level definition audit and calculation issue. |
 | `.pocInfo` `cnr` | `corner_points_count` | Count specific to CASTp's discrete surface representation; attribute origin is CASTp. Definition and calculation issue pending. |
 | `.mouth` record ID and atom rows | Mouth feature `source_id` and atom labels | The row ID matches the parent pocket ID in this fixture. One record may summarize multiple mouths. |
@@ -50,7 +50,13 @@ General physical concepts retain neutral names. CASTp-specific choices of
 surface, probe, discrete corner representation, aggregation, and feature
 classification are documented in the
 [attribute-origin register](../third_party_attribute_origins.md) and remain
-necessary provenance for numerical comparisons. The physical feature values
-are already PyUnitWizard quantities but have not yet been normalized to
-TopoMT's nanometer convention or linked to per-field `ExternalMeasurement`
-records. This is a required next step, not an accepted fidelity milestone.
+necessary provenance for numerical comparisons. The four pocket area/volume
+fields now use canonical PyUnitWizard quantities and keep their original
+numbers, units, definitions, source fields, and issue links in
+`ExternalMeasurement`. The remaining pocket length/corner and mouth fields
+still need equivalent treatment; this is not an accepted fidelity milestone.
+The [CASTp 3.0 paper](https://academic.oup.com/nar/article/46/W1/W363/5026264)
+describes analytic SA and MS measurement from alpha shapes. The
+[CASTpFold tutorial](https://cfold.bme.uic.edu/castpfold/infos/allabout/tutorial.html)
+states that its interface displays SA area and volume only; CASTp 3.0 ZIP
+fields must therefore not be assumed present in every CASTpFold response.
