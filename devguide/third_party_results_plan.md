@@ -50,6 +50,11 @@ fpocket's pocket total/polar/apolar SASA.
 
 ## Provider-run record
 
+The [attribute-origin register](third_party_attribute_origins.md) identifies
+feature attributes whose score, typing, normalization, or index space belongs
+to a particular application. General geometric descriptors keep neutral names;
+their reported definitions and source artifacts remain attached to measurements.
+
 One immutable record belongs to each execution or imported artifact set. It
 stores the exact submitted structure, native output files or library-result
 snapshot, original units, parameters, backend/version, source IDs, input and

@@ -4,6 +4,7 @@ Status: active; scalar `_info.txt` mapping verified for pinned 3LKF and 1tcd
 fixtures and one locally installed CLI build.
 Plan: [third-party results](../third_party_results_plan.md)
 Checkpoint: [third-party results checkpoint](../third_party_results_checkpoint.md)
+Attribute origins: [provider-specific attributes](../third_party_attribute_origins.md)
 
 ## Reference and limits
 

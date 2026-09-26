@@ -3,6 +3,7 @@
 Updated: 2026-09-26
 Plan: [third_party_results_plan.md](third_party_results_plan.md)
 Tracking issue: [#19](https://github.com/uibcdf/topomt/issues/19)
+Attribute-origin register: [third_party_attribute_origins.md](third_party_attribute_origins.md)
 
 ## Progress rule
 
@@ -21,9 +22,9 @@ separate scientific check against an inflated engineering percentage.
 | fpocket total/polar/apolar SASA with source and issue links | 5 | Done | 3LKF fixture checks values and square-angstrom units |
 | Remaining fpocket field inventory and typed mapping | 10 | In progress | All 19 scalar info fields checked line by line in two fixtures and a local CLI run; sphere and contact-atom provenance retained; defining atoms, global PDB, historical build identity, and broader parity remain |
 | Pocketeer result fidelity and output record | 10 | In progress | Library result and mask captured for 6qrd and 2xjx; sphere IDs, SASA, defining atoms, residues and masks mapped; selection/chain, clean install and broader parity remain |
-| AlphaSpace2 result fidelity and output record | 10 | Not started | Pinned fixture, full field inventory, state and source links |
+| AlphaSpace2 result fidelity and output record | 10 | In progress | 1GG0 snapshot and upstream PDB exports retained; alpha/beta memberships, spaces, scores and contact state mapped; binder and advanced-score parity remain |
 | CASTp/CASTpFold result fidelity and output record | 10 | Not started | Pinned ZIP, mouth aggregation, SA/MS definitions, server evidence |
-| pyCASTA result fidelity and output record | 10 | Not started | Pinned fixture, tetrahedron/depth validation, source links |
+| pyCASTA result fidelity and output record | 10 | Not started | Pinned fixture, tetrahedron/depth validation, source links; [#35](https://github.com/uibcdf/topomt/issues/35) records the incorrect score=volume alias |
 | Independent TopoMT calculations and comparisons | 15 | Not started | Definition-specific issues closed by matching-input numerical tests |
 | Cross-provider edge-case and server validation | 5 | Not started | Selection, ligand, chain, void/channel/interface, version and live-server matrix |
 | Final exhaustive provider parity regression suite | 10 | Not started | Every provider and supported route compared field by field with pinned upstream output in CI; live server checks tracked separately |
@@ -39,7 +40,7 @@ be reduced if an accepted milestone regresses.
 |---|---|---|---|
 | fpocket CLI and persisted files | Yes, input and all output files | All 19 scalar info fields, sphere ID/type/charge, ordered contact serials and positional atom mapping; four defining atoms are absent from PQR output | Reported scalars match original info lines in two fixtures and a local CLI run; native-calculation parity pending |
 | Pocketeer library | Yes, submitted PDB, official JSON and omitted-mask supplement | Volume, score, centroid, residues, mask, sphere IDs/geometry/mean SASA/four defining atoms | 6qrd and non-default 2xjx against local source; broader parity pending |
-| AlphaSpace2 | Pending | Pending | Pending |
+| AlphaSpace2 library | Yes, submitted PDB, all upstream exported PDBs and full snapshot supplement | Pocket, alpha and beta geometry, space, nonpolar contribution, scores and contact/occupancy descriptors | 1GG0 direct snapshot and exported-file parity; binder/advanced-score parity pending |
 | CASTp/CASTpFold | Pending | Pending | Pending |
 | pyCASTA | Pending | Pending | Pending |
 
@@ -65,6 +66,16 @@ comparisons pass, including a non-default probe and hetero-atom setting.
 Selection/chain mapping and clean-install/version coverage remain before its
 10-point milestone can be accepted.
 
+The [AlphaSpace2 inventory](alphaspace2/external_output_inventory.md) now
+records the complete library `Snapshot` state, upstream PDB exports, derived
+pocket and beta properties, and original-to-MolSysMT lining-atom mappings.
+Issues [#31](https://github.com/uibcdf/topomt/issues/31),
+[#32](https://github.com/uibcdf/topomt/issues/32),
+[#33](https://github.com/uibcdf/topomt/issues/33), and
+[#34](https://github.com/uibcdf/topomt/issues/34) track independent occupied
+volume and occupancy calculations. The 1GG0 reference passes; binder and
+advanced-score routes remain to validate before the 10-point milestone counts.
+
 Verification for this checkpoint: `pytest --receptor=llm` reported 88 passed,
 4 skipped, and 24 warnings across provider-output, fpocket-provider, full
 fpocket parity, Topography registry, and public get-topography tests. The skips
@@ -77,6 +88,9 @@ calculations to fpocket's calculations.
 The joint Pocketeer, Topography, public-API and provider-output
 `pytest --receptor=llm` selection reported 28 passed. A follow-up focused
 Pocketeer selection reported 3 passed after count-field mapping.
+The AlphaSpace2 library-wrapper `pytest --receptor=llm` selection reported
+2 passed with 4 upstream zero-denominator warnings; snapshot state, every
+upstream export file, feature mappings, and bundle recovery were checked.
 The remote `gh run-receptor` inspection of Ruff run 36227804844 reported PASS,
 but its commit predates these uncommitted changes. Local `ruff check`,
 `ruff format --check` on newly formatted modules, YAML parsing, and

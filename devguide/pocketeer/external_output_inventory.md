@@ -3,6 +3,7 @@
 Status: library route partially integrated; local 6qrd and 2xjx parity references.
 Plan: [third-party results](../third_party_results_plan.md)
 Checkpoint: [third-party results checkpoint](../third_party_results_checkpoint.md)
+Attribute origins: [provider-specific attributes](../third_party_attribute_origins.md)
 
 ## Reference
 

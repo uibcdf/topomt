@@ -42,6 +42,10 @@ and the next engineering steps.
   Weighted progress, accepted evidence, provider coverage, and next gates for
   the third-party results plan.
 
+- [third_party_attribute_origins.md](third_party_attribute_origins.md)
+  Register of application-specific feature attributes and the shared
+  topographic concepts that keep neutral names.
+
 - [tools_architecture.md](tools_architecture.md)
   Proposed internal architecture for `topomt.tools`, including the separation
   between general geometry, tessellation-specific helpers, feature-oriented
@@ -58,6 +62,10 @@ and the next engineering steps.
 - [pocketeer/external_output_inventory.md](pocketeer/external_output_inventory.md)
   Field-level audit of Pocketeer's library result, mask snapshot, atom-index
   mapping, and remaining parity checks.
+
+- [alphaspace2/external_output_inventory.md](alphaspace2/external_output_inventory.md)
+  Field-level audit of AlphaSpace2's snapshot, pocket and beta descriptors,
+  recoverable output, and remaining binder/scoring parity work.
 
 - [viewer_addon_plan.md](viewer_addon_plan.md)
   Initial plan for the future `molsysviewer_topomt` addon.
