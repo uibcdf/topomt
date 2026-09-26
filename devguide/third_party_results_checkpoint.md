@@ -23,7 +23,7 @@ separate scientific check against an inflated engineering percentage.
 | Remaining fpocket field inventory and typed mapping | 10 | In progress | All 19 scalar info fields checked line by line in two fixtures and a local CLI run; sphere and contact-atom provenance retained; defining atoms, global PDB, historical build identity, and broader parity remain |
 | Pocketeer result fidelity and output record | 10 | In progress | Library result and mask captured for 6qrd and 2xjx; sphere IDs, SASA, defining atoms, residues and masks mapped; selection/chain, clean install and broader parity remain |
 | AlphaSpace2 result fidelity and output record | 10 | In progress | 1GG0 snapshot and upstream PDB exports retained; alpha/beta memberships, spaces, scores and contact state mapped; binder and advanced-score parity remain |
-| CASTp/CASTpFold result fidelity and output record | 10 | Not started | Pinned ZIP, mouth aggregation, SA/MS definitions, server evidence |
+| CASTp/CASTpFold result fidelity and output record | 10 | In progress | Pinned ZIP and extracted bytes retained; `N_mth` aggregation and parent links checked in six ZIPs; zero-mouth rows kept only in the original record; attributed per-field units, SA/MS definitions and live-server evidence pending |
 | pyCASTA result fidelity and output record | 10 | In progress | Four bounded structures compare per-pocket values; full returned dict and isolated native files retained; tetrahedron-array identity checked; atom-order, optional validation and broader parity remain |
 | Independent TopoMT calculations and comparisons | 15 | Not started | Definition-specific issues closed by matching-input numerical tests |
 | Cross-provider edge-case and server validation | 5 | Not started | Selection, ligand, chain, void/channel/interface, version and live-server matrix |
@@ -41,7 +41,7 @@ be reduced if an accepted milestone regresses.
 | fpocket CLI and persisted files | Yes, input and all output files | All 19 scalar info fields, sphere ID/type/charge, ordered contact serials and positional atom mapping; four defining atoms are absent from PQR output | Reported scalars match original info lines in two fixtures and a local CLI run; native-calculation parity pending |
 | Pocketeer library | Yes, submitted PDB, official JSON and omitted-mask supplement | Volume, score, centroid, residues, mask, sphere IDs/geometry/mean SASA/four defining atoms | 6qrd and non-default 2xjx against local source; broader parity pending |
 | AlphaSpace2 library | Yes, submitted PDB, all upstream exported PDBs and full snapshot supplement | Pocket, alpha and beta geometry, space, nonpolar contribution, scores and contact/occupancy descriptors | 1GG0 direct snapshot and exported-file parity; binder/advanced-score parity pending |
-| CASTp/CASTpFold | Pending | Pending | Pending |
+| CASTp/CASTpFold files and mocked server | Yes, exact ZIP, submitted PDB where available, and all extracted files | Legacy PyUnitWizard SA/MS area and volume, length, corner count, mouth area/length and triangle count; per-field attribution pending | 1tcd counts, ZIP bytes, aggregate mouth meaning and parent links tested; numeric and live-server parity pending |
 | pyCASTA library | Yes, submitted PDB, returned-result snapshot, alpha NPZ, native pocket PDB/CSV and logs for default route | Score, volume, depth, mouth area/perimeter, representative point, tetrahedron IDs and validation method with PyUnitWizard geometry | Four bounded structures compared per pocket; atom-order and validation edge cases pending |
 
 ## Next checkpoint
@@ -87,6 +87,16 @@ regression passes. Issues [#36](https://github.com/uibcdf/topomt/issues/36)
 through [#40](https://github.com/uibcdf/topomt/issues/40) track independent
 calculations and the source depth/index ambiguity. The 10-point milestone
 remains open pending complex atom-order cases, optional validation, and broader parity.
+
+The [CASTp inventory](castp/external_output_inventory.md) records a pinned
+server ZIP and the original submitted PDB on server routes. The `.mouthInfo`
+`N_mth` column was previously read as a parent ID; it is a mouth count. The
+parser now links the mouth aggregate by its row ID and marks rows that
+summarize multiple mouths. Five additional ZIPs confirm that `.mouthInfo`
+also has zero rows for voids; the loader retains them in the raw artifact
+without inventing Mouth features. The file and mocked server routes pass their
+current tests; per-field attribution, canonical units, scientific definitions,
+and live server evidence remain before this milestone counts.
 
 Verification for this checkpoint: `pytest --receptor=llm` reported 88 passed,
 4 skipped, and 24 warnings across provider-output, fpocket-provider, full

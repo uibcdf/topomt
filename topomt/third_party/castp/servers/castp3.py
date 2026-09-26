@@ -1,19 +1,18 @@
 import tempfile
 import time
+import zipfile
 from io import BytesIO
 from pathlib import Path
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from uuid import uuid4
-import zipfile
 
 import molsysmt as msm
 
 from topomt import pyunitwizard as puw
+from topomt.third_party._common import prepare_wrapper_input_pdb
 from topomt.third_party.castp.files import load_topography as load_castp_topography
 from topomt.topography.Topography import Topography
-from topomt.third_party._common import prepare_wrapper_input_pdb
-
 
 SUBMIT_URL = 'http://sts.bioe.uic.edu/castp/submit_calc.php'
 DOWNLOAD_URL_TEMPLATE = (
@@ -193,6 +192,11 @@ def get_topography(
         return load_castp_topography(
             zip_file=zip_path,
             molecular_system=selected_molecular_system,
+            submitted_input_pdb=input_pdb,
+            provider_backend='server',
+            provider_server='castp3',
+            provider_jobid=jobid,
+            probe_radius=_probe_radius_to_angstroms(probe_radius),
         )
 
 
@@ -208,29 +212,29 @@ def _encode_multipart_form_data(
     body = bytearray()
 
     for key, value in fields.items():
-        body.extend(f'--{boundary}'.encode('utf-8'))
+        body.extend(f'--{boundary}'.encode())
         body.extend(line_break)
-        body.extend(f'Content-Disposition: form-data; name="{key}"'.encode('utf-8'))
+        body.extend(f'Content-Disposition: form-data; name="{key}"'.encode())
         body.extend(line_break)
         body.extend(line_break)
         body.extend(str(value).encode('utf-8'))
         body.extend(line_break)
 
-    body.extend(f'--{boundary}'.encode('utf-8'))
+    body.extend(f'--{boundary}'.encode())
     body.extend(line_break)
     body.extend(
         (
             f'Content-Disposition: form-data; name="{file_field}"; '
             f'filename="{file_path.name}"'
-        ).encode('utf-8')
+        ).encode()
     )
     body.extend(line_break)
-    body.extend(f'Content-Type: {content_type}'.encode('utf-8'))
+    body.extend(f'Content-Type: {content_type}'.encode())
     body.extend(line_break)
     body.extend(line_break)
     body.extend(file_path.read_bytes())
     body.extend(line_break)
-    body.extend(f'--{boundary}--'.encode('utf-8'))
+    body.extend(f'--{boundary}--'.encode())
     body.extend(line_break)
 
     return bytes(body), boundary

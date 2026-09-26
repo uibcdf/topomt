@@ -1,11 +1,65 @@
-from pathlib import Path
 import warnings
+import zipfile
+from pathlib import Path
+
+import pytest
 
 import topomt as tmt
+from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
-
+from topomt.io.load_CASTp import _parse_mouth_info_file, _parse_poc_info_file
+from topomt.provider_output import ProviderRun
 
 SERVER_ZIP = Path('topomt/data/CASTp_3.0_server/1tcd.zip')
+
+
+def test_castp_mouth_info_n_mth_is_count_not_parent_id(tmp_path):
+    with zipfile.ZipFile(SERVER_ZIP) as archive:
+        mouth_info = tmp_path / '1tcd.mouthInfo'
+        mouth_info.write_bytes(archive.read('1tcd.mouthInfo'))
+
+    parsed = _parse_mouth_info_file(mouth_info)
+    assert parsed[2]['n_mouths'] == 3
+    assert parsed[2]['pocket_ids'] == {2}
+
+
+@pytest.mark.parametrize('structure_id', ['1a4j', '1hiv', '1stp', '2pk4', '3ptb'])
+def test_castp_mouth_aggregates_match_original_rows(structure_id, tmp_path):
+    zip_path = SERVER_ZIP.with_name(f'{structure_id}.zip')
+    with zipfile.ZipFile(zip_path) as archive:
+        mouth_info = tmp_path / f'{structure_id}.mouthInfo'
+        mouth_info.write_bytes(archive.read(f'{structure_id}.mouthInfo'))
+        poc_info = tmp_path / f'{structure_id}.pocInfo'
+        poc_info.write_bytes(archive.read(f'{structure_id}.pocInfo'))
+    expected = {
+        mouth_id: row
+        for mouth_id, row in _parse_mouth_info_file(mouth_info).items()
+        if row['n_mouths'] > 0
+    }
+    expected_pockets = _parse_poc_info_file(poc_info)
+    topography = tmt.third_party.castp.load_topography(zip_file=zip_path)
+
+    surfaces = _castp_surface_features(topography)
+    assert len(surfaces) == len(expected_pockets)
+    for feature in surfaces:
+        source_id = int(feature.source_id.split()[1])
+        assert puw.get_value(
+            feature.solvent_accessible_area, to_unit='angstroms**2'
+        ) == pytest.approx(
+            puw.get_value(
+                expected_pockets[source_id]['solvent_accessible_area'],
+                to_unit='angstroms**2',
+            )
+        )
+    mouths = topography.get_features(by='type', value='mouth')
+    assert len(mouths) == len(expected)
+    for mouth in mouths:
+        source_id = int(mouth.source_id.split()[1])
+        assert mouth.n_mouths == expected[source_id]['n_mouths']
+        assert mouth.provider_aggregates_multiple_mouths == (mouth.n_mouths > 1)
+        assert {
+            parent.source_id for parent in topography.parents_of(mouth.feature_id)
+        } == {f'Pocket {source_id}'}
 
 
 def _castp_surface_features(topography):
@@ -16,13 +70,38 @@ def _castp_surface_features(topography):
     return features
 
 
-def test_castp_provider_load_topography_reads_server_zip():
+def test_castp_provider_load_topography_reads_server_zip(tmp_path):
     topography = tmt.third_party.castp.load_topography(
         zip_file=SERVER_ZIP,
     )
 
     assert len(_castp_surface_features(topography)) == 78
     assert len(topography.get_features(by='type', value='mouth')) == 42
+    assert len(topography.provider_runs) == 1
+    run = next(iter(topography.provider_runs.values()))
+    assert run.get_artifact('input/1tcd.zip') == SERVER_ZIP.read_bytes()
+    with zipfile.ZipFile(SERVER_ZIP) as archive:
+        assert run.get_artifact('output/1tcd.pocInfo') == archive.read('1tcd.pocInfo')
+    assert all(
+        feature.provider_run_id == run.run_id
+        for feature in _castp_surface_features(topography)
+    )
+    mouth_2 = next(
+        mouth
+        for mouth in topography.get_features(by='type', value='mouth')
+        if mouth.source_id == 'Mouth 2'
+    )
+    assert mouth_2.n_mouths == 3
+    assert {
+        parent.source_id for parent in topography.parents_of(mouth_2.feature_id)
+    } == {'Pocket 2'}
+    assert all(
+        mouth.provider_run_id == run.run_id
+        for mouth in topography.get_features(by='type', value='mouth')
+    )
+    bundle = tmp_path / 'castp_run.zip'
+    run.save(bundle)
+    assert ProviderRun.load(bundle).artifacts == run.artifacts
 
 
 def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch, tmp_path):
@@ -35,6 +114,7 @@ def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch, tmp_path)
 
     def fake_submit(self, pdb_path, **kwargs):
         submitted['pdb_path'] = Path(pdb_path)
+        submitted['pdb_bytes'] = Path(pdb_path).read_bytes()
         submitted['kwargs'] = kwargs
         return 'j_mock'
 
@@ -67,6 +147,14 @@ def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch, tmp_path)
     assert (tmp_path / 'castpfold.zip').read_bytes() == SERVER_ZIP.read_bytes()
     assert len(_castp_surface_features(topography)) == 78
     assert len(topography.get_features(by='type', value='mouth')) == 42
+    run = next(iter(topography.provider_runs.values()))
+    assert run.get_artifact('input/1tcd.pdb') == submitted['pdb_bytes']
+    assert (
+        run.get_artifact('output/raw_server_zip/castpfold.zip')
+        == SERVER_ZIP.read_bytes()
+    )
+    assert run.metadata['server'] == 'castpfold'
+    assert run.metadata['jobid'] == 'j_mock'
 
 
 def test_get_topography_castp_server_routes_without_digest_warnings(monkeypatch):
@@ -95,7 +183,9 @@ def test_get_topography_castp_server_routes_without_digest_warnings(monkeypatch)
         )
 
     assert isinstance(topo, tmt.Topography)
-    assert not any(type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught)
+    assert not any(
+        type(item.message).__name__ == 'DigestNotDigestedWarning' for item in caught
+    )
 
 
 def test_get_topography_castpfold_kept_as_compatibility_alias(monkeypatch):

@@ -71,6 +71,10 @@ and the next engineering steps.
   Field-level audit of pyCASTA's library result, native files, PyUnitWizard
   quantities, and outstanding index-space and validation checks.
 
+- [castp/external_output_inventory.md](castp/external_output_inventory.md)
+  Field-level audit of CASTp/CASTpFold ZIP output, reported mouth aggregates,
+  source links, and remaining unit and calculation work.
+
 - [viewer_addon_plan.md](viewer_addon_plan.md)
   Initial plan for the future `molsysviewer_topomt` addon.
 
