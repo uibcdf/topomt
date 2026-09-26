@@ -95,6 +95,26 @@ def test_castp_provider_load_topography_reads_server_zip(tmp_path):
     assert {
         parent.source_id for parent in topography.parents_of(mouth_2.feature_id)
     } == {'Pocket 2'}
+    mouth_1 = next(
+        mouth
+        for mouth in topography.get_features(by='type', value='mouth')
+        if mouth.source_id == 'Mouth 1'
+    )
+    for name, original, unit, normalized, source_field, issue in (
+        ('solvent_accessible_area', 57.751, 'angstroms**2', 0.57751, 'Area_sa', 45),
+        ('molecular_surface_area', 171.53, 'angstroms**2', 1.7153, 'Area_ms', 46),
+        ('solvent_accessible_length', 77.154, 'angstroms', 7.7154, 'Len_sa', 47),
+        ('molecular_surface_length', 85.95, 'angstroms', 8.595, 'Len_ms', 48),
+    ):
+        measurement = mouth_1.external_measurements[name]
+        assert measurement.original_value == pytest.approx(original)
+        assert measurement.original_unit == unit
+        assert measurement.source_artifact == 'output/1tcd.mouthInfo'
+        assert measurement.source_field == f'mouthInfo[1].{source_field}'
+        assert (
+            measurement.issue_url == f'https://github.com/uibcdf/topomt/issues/{issue}'
+        )
+        assert puw.get_value(getattr(mouth_1, name)) == pytest.approx(normalized)
     assert all(
         mouth.provider_run_id == run.run_id
         for mouth in topography.get_features(by='type', value='mouth')

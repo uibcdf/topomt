@@ -50,6 +50,41 @@ _CASTP_POCKET_MEASUREMENTS = (
     ),
 )
 
+_CASTP_MOUTH_MEASUREMENTS = (
+    (
+        'solvent_accessible_area',
+        'Area_sa',
+        'angstroms**2',
+        'nm**2',
+        45,
+        'CASTp mouth-aggregate area in the Richards solvent-accessible surface model',
+    ),
+    (
+        'molecular_surface_area',
+        'Area_ms',
+        'angstroms**2',
+        'nm**2',
+        46,
+        'CASTp mouth-aggregate area in the Connolly molecular-surface model',
+    ),
+    (
+        'solvent_accessible_length',
+        'Len_sa',
+        'angstroms',
+        'nm',
+        47,
+        'CASTp mouth-aggregate length in the Richards solvent-accessible surface model',
+    ),
+    (
+        'molecular_surface_length',
+        'Len_ms',
+        'angstroms',
+        'nm',
+        48,
+        'CASTp mouth-aggregate length in the Connolly molecular-surface model',
+    ),
+)
+
 
 def _feature_type_from_n_mouths(n_mouths: int | None) -> str:
     """Return the CAST-style feature type implied by the number of mouths."""
@@ -466,6 +501,38 @@ def load_CASTp(
                 args_dict['provider_aggregates_multiple_mouths'] = (
                     args_dict['n_mouths'] > 1
                 )
+                attributed_measurements = {}
+                for (
+                    name,
+                    original_field,
+                    original_unit,
+                    canonical_unit,
+                    issue,
+                    definition,
+                ) in _CASTP_MOUTH_MEASUREMENTS:
+                    original_quantity = mouth_id_to_mouth_data[mouth_id][name]
+                    original_value = float(
+                        puw.get_value(original_quantity, to_unit=original_unit)
+                    )
+                    canonical_quantity = puw.quantity(
+                        float(puw.get_value(original_quantity, to_unit=canonical_unit)),
+                        canonical_unit,
+                    )
+                    args_dict[name] = canonical_quantity
+                    if provider_run is not None and mouthInfo_file is not None:
+                        attributed_measurements[name] = ExternalMeasurement(
+                            value=canonical_quantity,
+                            original_value=original_value,
+                            original_unit=original_unit,
+                            source_field=f'mouthInfo[{mouth_id}].{original_field}',
+                            source_artifact=f'output/{mouthInfo_file.name}',
+                            run_id=provider_run.run_id,
+                            definition=definition,
+                            issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
+                            status='external_only',
+                        )
+                if attributed_measurements:
+                    args_dict['external_measurements'] = attributed_measurements
             feature_id = topography.add_new_feature(
                 feature_type='mouth',
                 atom_labels=atom_labels,

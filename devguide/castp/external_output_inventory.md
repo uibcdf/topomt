@@ -42,18 +42,18 @@ results returned by a live service.
 | `.pocInfo` `cnr` | `corner_points_count` | Count specific to CASTp's discrete surface representation; attribute origin is CASTp. Definition and calculation issue pending. |
 | `.mouth` record ID and atom rows | Mouth feature `source_id` and atom labels | The row ID matches the parent pocket ID in this fixture. One record may summarize multiple mouths. |
 | `.mouthInfo` `N_mth` | Mouth `n_mouths`, `provider_aggregates_multiple_mouths` | This column is a count, not a parent-pocket ID. The parser uses the row ID for the pocket link; `N_mth > 1` marks an aggregate. `N_mth = 0` remains only in the original record. No individual mouth geometry is invented. |
-| `.mouthInfo` `Area_sa`, `Area_ms` | Mouth `solvent_accessible_area`, `molecular_surface_area` | Reported aggregate areas in Å². Attributed records and independent calculations pending. |
-| `.mouthInfo` `Len_sa`, `Len_ms` | Mouth `solvent_accessible_length`, `molecular_surface_length` | Reported aggregate lengths in Å. They are not silently renamed to a generic mouth perimeter because the surface definitions differ. |
+| `.mouthInfo` `Area_sa`, `Area_ms` | Mouth `solvent_accessible_area`, `molecular_surface_area` | Original aggregate Å² values are attributed; feature quantities use nm². Independent-calculation issues [#45](https://github.com/uibcdf/topomt/issues/45) and [#46](https://github.com/uibcdf/topomt/issues/46). |
+| `.mouthInfo` `Len_sa`, `Len_ms` | Mouth `solvent_accessible_length`, `molecular_surface_length` | Original aggregate Å values are attributed; feature quantities use nm. Independent-calculation issues [#47](https://github.com/uibcdf/topomt/issues/47) and [#48](https://github.com/uibcdf/topomt/issues/48). They are not silently renamed to a generic mouth perimeter because the surface definitions differ. |
 | `.mouthInfo` `Ntri` | Mouth `n_triangles` | Triangle count of the reported surface representation; original artifact retained. |
 
 General physical concepts retain neutral names. CASTp-specific choices of
 surface, probe, discrete corner representation, aggregation, and feature
 classification are documented in the
 [attribute-origin register](../third_party_attribute_origins.md) and remain
-necessary provenance for numerical comparisons. The four pocket area/volume
-fields now use canonical PyUnitWizard quantities and keep their original
+necessary provenance for numerical comparisons. The eight pocket/mouth
+area, volume, and length fields now use canonical PyUnitWizard quantities and keep their original
 numbers, units, definitions, source fields, and issue links in
-`ExternalMeasurement`. The remaining pocket length/corner and mouth fields
+`ExternalMeasurement`. Pocket length, corner count, and mesh/count fields
 still need equivalent treatment; this is not an accepted fidelity milestone.
 The [CASTp 3.0 paper](https://academic.oup.com/nar/article/46/W1/W363/5026264)
 describes analytic SA and MS measurement from alpha shapes. The
