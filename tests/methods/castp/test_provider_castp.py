@@ -12,6 +12,7 @@ from topomt.provider_output import ProviderRun
 
 SERVER_ZIP = Path('topomt/data/CASTp_3.0_server/1tcd.zip')
 FOLD_ZIP = Path('topomt/data/CASTpFold_server/1psn.zip')
+FOLD_SERVER_ZIP = Path('topomt/data/CASTpFold_server/1tcd.zip')
 
 
 def test_castp_mouth_info_n_mth_is_count_not_parent_id(tmp_path):
@@ -245,7 +246,7 @@ def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch, tmp_path)
     def fake_download(self, jobid, **kwargs):
         submitted['jobid'] = jobid
         submitted['download_kwargs'] = kwargs
-        return SERVER_ZIP.read_bytes()
+        return FOLD_SERVER_ZIP.read_bytes()
 
     monkeypatch.setattr(server_module.CastpFoldClient, 'submit', fake_submit)
     monkeypatch.setattr(
@@ -268,15 +269,20 @@ def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch, tmp_path)
 
     assert submitted['pdb_path'].suffix == '.pdb'
     assert submitted['kwargs']['email'] == 'N/A'
-    assert (tmp_path / 'castpfold.zip').read_bytes() == SERVER_ZIP.read_bytes()
+    assert (tmp_path / 'castpfold.zip').read_bytes() == FOLD_SERVER_ZIP.read_bytes()
     assert len(_castp_surface_features(topography)) == 78
     assert len(topography.get_features(by='type', value='mouth')) == 42
     run = next(iter(topography.provider_runs.values()))
     assert run.get_artifact('input/1tcd.pdb') == submitted['pdb_bytes']
     assert (
         run.get_artifact('output/raw_server_zip/castpfold.zip')
-        == SERVER_ZIP.read_bytes()
+        == FOLD_SERVER_ZIP.read_bytes()
     )
+    with zipfile.ZipFile(FOLD_SERVER_ZIP) as archive:
+        assert run.get_artifact('output/README.txt') == archive.read('README.txt')
+        assert run.get_artifact('output/1tcd.4.contrib.csv') == archive.read(
+            '1tcd.4.contrib.csv'
+        )
     assert run.metadata['server'] == 'castpfold'
     assert run.metadata['jobid'] == 'j_mock'
 

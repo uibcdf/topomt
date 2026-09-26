@@ -101,7 +101,9 @@ values and 12 distinct independent-calculation issues
 scientific definitions, and live-server evidence remain before this milestone
 counts.
 
-The native `README.txt` in CASTpFold `1psn.zip` defines `Lenth` as a sum of
+The mocked CASTpFold server route now uses its own `1tcd.zip`, including the
+native README and optional CSV and JSON, rather than a CASTp 3.0 ZIP. The
+native `README.txt` in CASTpFold `1psn.zip` defines `Lenth` as a sum of
 arc lengths over qualifying atom pairs and `cnr` as surface triangles
 excluding mouth triangles. The earlier `corner_points_count` mapping was
 incorrect and has been replaced by
@@ -109,8 +111,7 @@ incorrect and has been replaced by
 original definitions. The real job-named ZIP passes typed field, unit,
 source-link, retained-README, contribution-CSV, and bulb-JSON checks. The
 optional atom-level and bulb fields remain raw and need typed mapping. The
-20-point total is unchanged
-because the CASTp milestone still has open gates.
+20-point total is unchanged because the CASTp milestone still has open gates.
 
 Verification for this checkpoint: `pytest --receptor=llm` reported 88 passed,
 4 skipped, and 24 warnings across provider-output, fpocket-provider, full

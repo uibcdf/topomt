@@ -4,9 +4,11 @@ Status: file and server ZIP retention in progress. The pinned CASTp 3.0
 `topomt/data/CASTp_3.0_server/1tcd.zip` is the initial parser fixture;
 1a4j, 1hiv, 1stp, 2pk4, and 3ptb now cover aggregate mouth rows and
 surface counts.
-CASTpFold and CASTp 3.0 server routes have mocked-download tests against that
-same ZIP; these tests establish route and parser behavior, not live-server
-availability or CASTpFold-specific numeric parity.
+CASTp 3.0 and CASTpFold server routes have mocked-download tests against
+their respective `1tcd.zip` files. The Fold file contains its native README,
+atom contribution CSV, and bulb JSON. These tests establish route and parser
+behavior, not live-server availability. A separate Fold `1psn.zip` with
+job-named result files supplies fixed-field parity evidence.
 
 ## Retained artifacts and feature identity
 
