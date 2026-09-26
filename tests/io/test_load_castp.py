@@ -42,29 +42,47 @@ def test_load_castp_tctim_imports_server_metrics():
     pocket_1 = all_features['Pocket 1']
     assert pocket_1.source == 'CASTp'
     assert len(pocket_1.atom_indices) == 68
-    assert _value(pocket_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(283.364)
-    assert _value(pocket_1.molecular_surface_area, 'angstroms**2') == pytest.approx(456.907)
-    assert _value(pocket_1.solvent_accessible_volume, 'angstroms**3') == pytest.approx(165.990)
-    assert _value(pocket_1.molecular_surface_volume, 'angstroms**3') == pytest.approx(637.990)
+    assert _value(pocket_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(
+        283.364
+    )
+    assert _value(pocket_1.molecular_surface_area, 'angstroms**2') == pytest.approx(
+        456.907
+    )
+    assert _value(pocket_1.solvent_accessible_volume, 'angstroms**3') == pytest.approx(
+        165.990
+    )
+    assert _value(pocket_1.molecular_surface_volume, 'angstroms**3') == pytest.approx(
+        637.990
+    )
     assert _value(pocket_1.length, 'angstroms') == pytest.approx(234.656)
-    assert pocket_1.corner_points_count == 108
+    assert pocket_1.surface_triangles_excluding_mouth_count == 108
 
     pocket_2 = all_features['Pocket 2']
     assert len(pocket_2.atom_indices) == 36
-    assert _value(pocket_2.solvent_accessible_volume, 'angstroms**3') == pytest.approx(54.058)
+    assert _value(pocket_2.solvent_accessible_volume, 'angstroms**3') == pytest.approx(
+        54.058
+    )
 
     mouth_1 = mouths['Mouth 1']
     assert mouth_1.source == 'CASTp'
     assert len(mouth_1.atom_indices) == 26
-    assert _value(mouth_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(57.751)
-    assert _value(mouth_1.molecular_surface_area, 'angstroms**2') == pytest.approx(171.53)
-    assert _value(mouth_1.solvent_accessible_length, 'angstroms') == pytest.approx(77.154)
+    assert _value(mouth_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(
+        57.751
+    )
+    assert _value(mouth_1.molecular_surface_area, 'angstroms**2') == pytest.approx(
+        171.53
+    )
+    assert _value(mouth_1.solvent_accessible_length, 'angstroms') == pytest.approx(
+        77.154
+    )
     assert _value(mouth_1.molecular_surface_length, 'angstroms') == pytest.approx(85.95)
     assert mouth_1.n_triangles == 24
 
     mouth_2 = mouths['Mouth 2']
     assert len(mouth_2.atom_indices) == 14
-    assert _value(mouth_2.solvent_accessible_area, 'angstroms**2') == pytest.approx(23.923)
+    assert _value(mouth_2.solvent_accessible_area, 'angstroms**2') == pytest.approx(
+        23.923
+    )
 
     assert 'Mouth 25' not in mouths
 
@@ -80,28 +98,48 @@ def test_load_castp_hiv_imports_server_metrics():
 
     pocket_1 = all_features['Pocket 1']
     assert len(pocket_1.atom_indices) == 105
-    assert _value(pocket_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(521.316)
-    assert _value(pocket_1.molecular_surface_area, 'angstroms**2') == pytest.approx(748.133)
-    assert _value(pocket_1.solvent_accessible_volume, 'angstroms**3') == pytest.approx(460.905)
-    assert _value(pocket_1.molecular_surface_volume, 'angstroms**3') == pytest.approx(1337.275)
+    assert _value(pocket_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(
+        521.316
+    )
+    assert _value(pocket_1.molecular_surface_area, 'angstroms**2') == pytest.approx(
+        748.133
+    )
+    assert _value(pocket_1.solvent_accessible_volume, 'angstroms**3') == pytest.approx(
+        460.905
+    )
+    assert _value(pocket_1.molecular_surface_volume, 'angstroms**3') == pytest.approx(
+        1337.275
+    )
     assert _value(pocket_1.length, 'angstroms') == pytest.approx(422.856)
-    assert pocket_1.corner_points_count == 186
+    assert pocket_1.surface_triangles_excluding_mouth_count == 186
 
     pocket_2 = all_features['Pocket 2']
     assert len(pocket_2.atom_indices) == 16
-    assert _value(pocket_2.solvent_accessible_volume, 'angstroms**3') == pytest.approx(9.850)
+    assert _value(pocket_2.solvent_accessible_volume, 'angstroms**3') == pytest.approx(
+        9.850
+    )
 
     mouth_1 = mouths['Mouth 1']
     assert len(mouth_1.atom_indices) == 36
-    assert _value(mouth_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(97.135)
-    assert _value(mouth_1.molecular_surface_area, 'angstroms**2') == pytest.approx(237.38)
-    assert _value(mouth_1.solvent_accessible_length, 'angstroms') == pytest.approx(94.456)
-    assert _value(mouth_1.molecular_surface_length, 'angstroms') == pytest.approx(112.05)
+    assert _value(mouth_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(
+        97.135
+    )
+    assert _value(mouth_1.molecular_surface_area, 'angstroms**2') == pytest.approx(
+        237.38
+    )
+    assert _value(mouth_1.solvent_accessible_length, 'angstroms') == pytest.approx(
+        94.456
+    )
+    assert _value(mouth_1.molecular_surface_length, 'angstroms') == pytest.approx(
+        112.05
+    )
     assert mouth_1.n_triangles == 32
 
     mouth_2 = mouths['Mouth 2']
     assert len(mouth_2.atom_indices) == 6
-    assert _value(mouth_2.solvent_accessible_area, 'angstroms**2') == pytest.approx(5.715)
+    assert _value(mouth_2.solvent_accessible_area, 'angstroms**2') == pytest.approx(
+        5.715
+    )
 
 
 def test_load_castp_uses_only_mouths_present_in_mouth_file():
@@ -127,7 +165,7 @@ def test_load_castp_uses_only_mouths_present_in_mouth_file():
                 'pocket_1_sa_volume': 1219.652,
                 'pocket_1_ms_volume': 2712.339,
                 'pocket_1_length': 681.759,
-                'pocket_1_corner_points': 284,
+                'pocket_1_surface_triangles': 284,
                 'mouth_1_atom_labels': 75,
                 'mouth_1_sa_area': 317.427,
                 'mouth_1_ms_area': 643.53,
@@ -147,7 +185,7 @@ def test_load_castp_uses_only_mouths_present_in_mouth_file():
                 'pocket_1_sa_volume': 460.905,
                 'pocket_1_ms_volume': 1337.275,
                 'pocket_1_length': 422.856,
-                'pocket_1_corner_points': 186,
+                'pocket_1_surface_triangles': 186,
                 'mouth_1_atom_labels': 36,
                 'mouth_1_sa_area': 97.135,
                 'mouth_1_ms_area': 237.38,
@@ -167,7 +205,7 @@ def test_load_castp_uses_only_mouths_present_in_mouth_file():
                 'pocket_1_sa_volume': 74.087,
                 'pocket_1_ms_volume': 319.870,
                 'pocket_1_length': 125.176,
-                'pocket_1_corner_points': 77,
+                'pocket_1_surface_triangles': 77,
                 'mouth_1_atom_labels': 11,
                 'mouth_1_sa_area': 13.424,
                 'mouth_1_ms_area': 53.48,
@@ -187,7 +225,7 @@ def test_load_castp_uses_only_mouths_present_in_mouth_file():
                 'pocket_1_sa_volume': 165.990,
                 'pocket_1_ms_volume': 637.990,
                 'pocket_1_length': 234.656,
-                'pocket_1_corner_points': 108,
+                'pocket_1_surface_triangles': 108,
                 'mouth_1_atom_labels': 26,
                 'mouth_1_sa_area': 57.751,
                 'mouth_1_ms_area': 171.53,
@@ -207,7 +245,7 @@ def test_load_castp_uses_only_mouths_present_in_mouth_file():
                 'pocket_1_sa_volume': 4.252,
                 'pocket_1_ms_volume': 48.078,
                 'pocket_1_length': 23.608,
-                'pocket_1_corner_points': 20,
+                'pocket_1_surface_triangles': 20,
                 'mouth_1_atom_labels': 6,
                 'mouth_1_sa_area': 3.809,
                 'mouth_1_ms_area': 22.31,
@@ -230,19 +268,40 @@ def test_load_castp_server_zip_imports_metrics(zip_name, expected):
 
     pocket_1 = all_features['Pocket 1']
     assert len(pocket_1.atom_labels) == expected['pocket_1_atom_labels']
-    assert _value(pocket_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(expected['pocket_1_sa_area'])
-    assert _value(pocket_1.molecular_surface_area, 'angstroms**2') == pytest.approx(expected['pocket_1_ms_area'])
-    assert _value(pocket_1.solvent_accessible_volume, 'angstroms**3') == pytest.approx(expected['pocket_1_sa_volume'])
-    assert _value(pocket_1.molecular_surface_volume, 'angstroms**3') == pytest.approx(expected['pocket_1_ms_volume'])
-    assert _value(pocket_1.length, 'angstroms') == pytest.approx(expected['pocket_1_length'])
-    assert pocket_1.corner_points_count == expected['pocket_1_corner_points']
+    assert _value(pocket_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(
+        expected['pocket_1_sa_area']
+    )
+    assert _value(pocket_1.molecular_surface_area, 'angstroms**2') == pytest.approx(
+        expected['pocket_1_ms_area']
+    )
+    assert _value(pocket_1.solvent_accessible_volume, 'angstroms**3') == pytest.approx(
+        expected['pocket_1_sa_volume']
+    )
+    assert _value(pocket_1.molecular_surface_volume, 'angstroms**3') == pytest.approx(
+        expected['pocket_1_ms_volume']
+    )
+    assert _value(pocket_1.length, 'angstroms') == pytest.approx(
+        expected['pocket_1_length']
+    )
+    assert (
+        pocket_1.surface_triangles_excluding_mouth_count
+        == expected['pocket_1_surface_triangles']
+    )
 
     mouth_1 = mouths['Mouth 1']
     assert len(mouth_1.atom_labels) == expected['mouth_1_atom_labels']
-    assert _value(mouth_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(expected['mouth_1_sa_area'])
-    assert _value(mouth_1.molecular_surface_area, 'angstroms**2') == pytest.approx(expected['mouth_1_ms_area'])
-    assert _value(mouth_1.solvent_accessible_length, 'angstroms') == pytest.approx(expected['mouth_1_sa_length'])
-    assert _value(mouth_1.molecular_surface_length, 'angstroms') == pytest.approx(expected['mouth_1_ms_length'])
+    assert _value(mouth_1.solvent_accessible_area, 'angstroms**2') == pytest.approx(
+        expected['mouth_1_sa_area']
+    )
+    assert _value(mouth_1.molecular_surface_area, 'angstroms**2') == pytest.approx(
+        expected['mouth_1_ms_area']
+    )
+    assert _value(mouth_1.solvent_accessible_length, 'angstroms') == pytest.approx(
+        expected['mouth_1_sa_length']
+    )
+    assert _value(mouth_1.molecular_surface_length, 'angstroms') == pytest.approx(
+        expected['mouth_1_ms_length']
+    )
     assert mouth_1.n_triangles == expected['mouth_1_triangles']
 
 

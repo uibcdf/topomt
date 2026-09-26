@@ -11,6 +11,7 @@ from topomt.io.load_CASTp import _parse_mouth_info_file, _parse_poc_info_file
 from topomt.provider_output import ProviderRun
 
 SERVER_ZIP = Path('topomt/data/CASTp_3.0_server/1tcd.zip')
+FOLD_ZIP = Path('topomt/data/CASTpFold_server/1psn.zip')
 
 
 def test_castp_mouth_info_n_mth_is_count_not_parent_id(tmp_path):
@@ -122,7 +123,14 @@ def test_castp_provider_load_topography_reads_server_zip(tmp_path):
         assert puw.get_value(getattr(mouth_1, name)) == pytest.approx(normalized)
     for feature, name, original, unit, source_field, issue in (
         (pocket_1, 'length', 234.656, 'angstroms', 'pocInfo[1].Lenth', 49),
-        (pocket_1, 'corner_points_count', 108, '1', 'pocInfo[1].cnr', 50),
+        (
+            pocket_1,
+            'surface_triangles_excluding_mouth_count',
+            108,
+            '1',
+            'pocInfo[1].cnr',
+            50,
+        ),
         (pocket_1, 'n_mouths', 1, '1', 'pocInfo[1].N_mth', 51),
         (mouth_1, 'n_triangles', 24, '1', 'mouthInfo[1].Ntri', 52),
         (mouth_1, 'n_mouths', 1, '1', 'mouthInfo[1].N_mth', 51),
@@ -158,6 +166,66 @@ def test_castp_provider_load_topography_reads_server_zip(tmp_path):
     bundle = tmp_path / 'castp_run.zip'
     run.save(bundle)
     assert ProviderRun.load(bundle).artifacts == run.artifacts
+
+
+def test_castpfold_real_zip_uses_job_named_files_and_native_definitions():
+    topography = tmt.third_party.castp.load_topography(zip_file=FOLD_ZIP)
+    run = next(iter(topography.provider_runs.values()))
+    pocket_1 = next(
+        feature
+        for feature in _castp_surface_features(topography)
+        if feature.source_id == 'Pocket 1'
+    )
+    mouth_1 = next(
+        feature
+        for feature in topography.get_features(by='type', value='mouth')
+        if feature.source_id == 'Mouth 1'
+    )
+
+    with zipfile.ZipFile(FOLD_ZIP) as archive:
+        names = archive.namelist()
+        poc_info_name = next(name for name in names if name.endswith('.pocInfo'))
+        mouth_info_name = next(name for name in names if name.endswith('.mouthInfo'))
+        contribution_name = next(
+            name for name in names if name.endswith('.contrib.csv')
+        )
+        bulb_name = next(name for name in names if name.endswith('.bulb.json'))
+        poc_row = archive.read(poc_info_name).decode().splitlines()[1].split()
+        mouth_row = archive.read(mouth_info_name).decode().splitlines()[1].split()
+        assert run.get_artifact(f'output/{poc_info_name}') == archive.read(
+            poc_info_name
+        )
+        assert run.get_artifact('output/README.txt') == archive.read('README.txt')
+        assert run.get_artifact(f'output/{contribution_name}') == archive.read(
+            contribution_name
+        )
+        assert run.get_artifact(f'output/{bulb_name}') == archive.read(bulb_name)
+    assert len(_castp_surface_features(topography)) == 41
+    assert pocket_1.provider_run_id == run.run_id
+    assert pocket_1.surface_triangles_excluding_mouth_count == int(poc_row[9])
+    assert pocket_1.corner_points_count is None
+    assert (
+        pocket_1.external_measurements[
+            'surface_triangles_excluding_mouth_count'
+        ].source_field
+        == 'pocInfo[1].cnr'
+    )
+    assert (
+        'surface triangles excluding the mouth triangles'
+        in pocket_1.external_measurements[
+            'surface_triangles_excluding_mouth_count'
+        ].definition.lower()
+    )
+    assert puw.get_value(pocket_1.length, to_unit='angstroms') == pytest.approx(
+        float(poc_row[8])
+    )
+    assert pocket_1.external_measurements['length'].source_artifact == (
+        f'output/{poc_info_name}'
+    )
+    assert puw.get_value(mouth_1.solvent_accessible_area, to_unit='angstroms**2') == (
+        pytest.approx(float(mouth_row[4]))
+    )
+    assert mouth_1.n_mouths == int(mouth_row[3])
 
 
 def test_castp_provider_server_castpfold_loads_server_zip(monkeypatch, tmp_path):

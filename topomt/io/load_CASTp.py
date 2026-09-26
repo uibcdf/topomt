@@ -236,7 +236,7 @@ def _parse_poc_info_file(file_path: PathLike[str]) -> dict[int, dict[str, Any]]:
                     float(fields[7]), 'angstroms**3'
                 ),
                 'length': puw.quantity(float(fields[8]), 'angstroms'),
-                'corner_points_count': int(fields[9]),
+                'surface_triangles_excluding_mouth_count': int(fields[9]),
             }
             if len(fields) > 10:
                 mouth_ids: list[int] = []
@@ -413,9 +413,11 @@ def load_CASTp(
                     'molecular_surface_volume'
                 ]
                 args_dict['length'] = poc_id_to_poc_data[poc_id]['length']
-                args_dict['corner_points_count'] = poc_id_to_poc_data[poc_id][
-                    'corner_points_count'
-                ]
+                args_dict['surface_triangles_excluding_mouth_count'] = (
+                    poc_id_to_poc_data[poc_id][
+                        'surface_triangles_excluding_mouth_count'
+                    ]
+                )
                 args_dict['n_mouths'] = poc_id_to_poc_data[poc_id]['n_mouths']
                 attributed_measurements = {}
                 for (
@@ -452,7 +454,14 @@ def load_CASTp(
                         poc_id_to_poc_data[poc_id]['length'], to_unit='angstroms'
                     )
                 )
-                args_dict['length'] = puw.quantity(original_length / 10.0, 'nm')
+                args_dict['length'] = puw.quantity(
+                    float(
+                        puw.get_value(
+                            poc_id_to_poc_data[poc_id]['length'], to_unit='nm'
+                        )
+                    ),
+                    'nm',
+                )
                 for (
                     name,
                     original_value,
@@ -469,16 +478,16 @@ def load_CASTp(
                         'angstroms',
                         'Lenth',
                         49,
-                        'CASTp reported pocket length; exact geometric definition pending audit',
+                        'Sum of arc lengths where two pocket atoms meet and the edge alpha value is negative, as defined in the CASTpFold result README',
                     ),
                     (
-                        'corner_points_count',
-                        args_dict['corner_points_count'],
-                        args_dict['corner_points_count'],
+                        'surface_triangles_excluding_mouth_count',
+                        args_dict['surface_triangles_excluding_mouth_count'],
+                        args_dict['surface_triangles_excluding_mouth_count'],
                         '1',
                         'cnr',
                         50,
-                        'CASTp corner-point count in its discrete surface representation',
+                        'Surface triangles excluding the mouth triangles, as defined in the CASTpFold result README',
                     ),
                     (
                         'n_mouths',
