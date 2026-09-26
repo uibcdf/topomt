@@ -27,8 +27,12 @@ protein coordinates exactly match the reconstructed SciPy Delaunay indexing
 before deriving pocket atom membership. It raises an error if this proof is
 unavailable or fails. This protects against silently attaching the wrong
 atoms when a future weighted or SASA-filtered route changes the index space.
-The mapping from pyCASTA `ATOM` coordinates to MolSysMT atom IDs still needs
-chain, HETATM-order, altloc, and selection tests.
+The adapter now maps pyCASTA's `ATOM` rows through submitted PDB record order,
+skipping interleaved `HETATM` records. It checks record count and the complete
+protein-coordinate sequence before assigning MolSysMT indices. A synthetic
+interleaved-record regression test passes. MolSysMT-versus-PDB order under
+chains, altlocs, multiple models, and non-default selections still needs
+independent checks.
 
 ## Field mapping
 
@@ -59,6 +63,6 @@ mouth perimeter, representative point, and tetrahedron list against separate
 upstream calls. The 2pk4 test also verifies native artifact types and ZIP
 recovery. This is a narrow library-route test, not complete provider parity.
 Further gates: active configuration and clean installation, atom order under
-selection and HETATM interleaving, empty/invalid results, bound and unbound
+selection, altlocs, and multiple models, empty/invalid results, bound and unbound
 structures, ligand validation with optional dependencies installed, and
 field-by-field interpretation of all conditional native files.

@@ -80,12 +80,13 @@ The [pyCASTA inventory](pycasta/external_output_inventory.md) now records
 the library result and native output from an isolated run. Score correctly
 uses `ranking_scores`; the general geometric descriptors use PyUnitWizard
 nanometer units while their original angstrom values remain attributed.
-Four bounded structures pass per-pocket comparisons, and the alpha-array
-index check prevents an unsupported tetrahedron mapping from being reported
-as atom membership. Issues [#36](https://github.com/uibcdf/topomt/issues/36)
+Four bounded structures pass per-pocket comparisons. The alpha-array index
+check and submitted-PDB ATOM/HETATM order check prevent unsupported mappings
+from being reported as atom membership; a synthetic interleaved-record
+regression passes. Issues [#36](https://github.com/uibcdf/topomt/issues/36)
 through [#40](https://github.com/uibcdf/topomt/issues/40) track independent
 calculations and the source depth/index ambiguity. The 10-point milestone
-remains open pending atom-order, optional validation, and broader parity.
+remains open pending complex atom-order cases, optional validation, and broader parity.
 
 Verification for this checkpoint: `pytest --receptor=llm` reported 88 passed,
 4 skipped, and 24 warnings across provider-output, fpocket-provider, full

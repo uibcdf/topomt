@@ -50,6 +50,41 @@ def _json_safe(value):
     return value
 
 
+def _protein_atom_indices_from_pdb(
+    input_pdb: Path,
+    selected_atom_indices: np.ndarray,
+    protein_coords_ang: np.ndarray,
+) -> np.ndarray:
+    """Map pyCASTA ATOM rows to MolSysMT indices using submitted PDB order."""
+    atom_records = [
+        line
+        for line in input_pdb.read_text().splitlines()
+        if line.startswith(('ATOM  ', 'HETATM'))
+    ]
+    if len(atom_records) != len(selected_atom_indices):
+        raise ValueError(
+            'Submitted PDB atom count differs from the MolSysMT selection; '
+            'pyCASTA atom mapping is unsafe'
+        )
+
+    protein_positions = [
+        index for index, line in enumerate(atom_records) if line.startswith('ATOM  ')
+    ]
+    coordinates = np.asarray(
+        [
+            [float(atom_records[index][start : start + 8]) for start in (30, 38, 46)]
+            for index in protein_positions
+        ],
+        dtype=float,
+    ).reshape(-1, 3)
+    if not np.array_equal(coordinates, protein_coords_ang):
+        raise ValueError(
+            'pyCASTA protein coordinate order differs from submitted PDB ATOM '
+            'records; atom mapping is unsafe'
+        )
+    return selected_atom_indices[protein_positions]
+
+
 def get_topography(
     molecular_system,
     *,
@@ -103,6 +138,10 @@ def get_topography(
         result = json.loads(result_path.read_text())
         result_path.write_text(json.dumps(_json_safe(result), sort_keys=True))
         execution_configuration = json.loads(configuration_path.read_text())
+        protein_coords_ang = np.asarray(result['protein_coords'], dtype=float)
+        protein_atom_indices = _protein_atom_indices_from_pdb(
+            input_pdb, selected_atom_indices, protein_coords_ang
+        )
         source_file = Path(run_analysis.__file__)
         with source_file.open('rb') as file_handle:
             source_sha256 = hashlib.file_digest(file_handle, 'sha256').hexdigest()
@@ -119,10 +158,10 @@ def get_topography(
                 'structure_indices': _json_safe(structure_indices),
                 'syntax': syntax,
                 'selected_atom_indices': selected_atom_indices.tolist(),
+                'protein_atom_indices': protein_atom_indices.tolist(),
             },
         )
 
-        protein_coords_ang = np.asarray(result['protein_coords'], dtype=float)
         simplices = Delaunay(protein_coords_ang).simplices
         alpha_file = (
             output_dir / run_analysis.VERSION_TAG / f'{input_pdb.stem}.alpha.npz'
@@ -160,7 +199,7 @@ def get_topography(
                 raise ValueError(f'pyCASTA pocket {pocket_index} has no tetrahedra')
 
             local_atom_indices = np.unique(simplices[tetra_indices].reshape(-1))
-            atom_indices = selected_atom_indices[local_atom_indices].tolist()
+            atom_indices = protein_atom_indices[local_atom_indices].tolist()
             center_nm = protein_coords_ang[local_atom_indices].mean(axis=0) / 10.0
             original_volume = float(result['pocket_volumes'][pocket_index])
             original_score = float(result['ranking_scores'][pocket_index])

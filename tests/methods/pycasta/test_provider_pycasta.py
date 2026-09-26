@@ -11,9 +11,44 @@ import topomt as tmt
 from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
 from topomt.provider_output import ProviderRun
+from topomt.third_party.pycasta.library import _protein_atom_indices_from_pdb
 
 UPSTREAM_ROOT = Path('/home/diego/repos@others/pycasta/src/pycasta')
 BOUND_DIR = UPSTREAM_ROOT / 'data' / 'bounded'
+
+
+def test_pycasta_atom_mapping_skips_interleaved_hetatm(tmp_path):
+    original_lines = (BOUND_DIR / '2pk4.pdb').read_text().splitlines()
+    protein_lines = [line for line in original_lines if line.startswith('ATOM  ')][:2]
+    ligand_line = next(line for line in original_lines if line.startswith('HETATM'))
+    input_pdb = tmp_path / 'interleaved.pdb'
+    input_pdb.write_text('\n'.join([ligand_line, *protein_lines]) + '\n')
+    protein_coords = np.asarray(
+        [
+            [float(line[start : start + 8]) for start in (30, 38, 46)]
+            for line in protein_lines
+        ]
+    )
+
+    mapped = _protein_atom_indices_from_pdb(
+        input_pdb, np.asarray([10, 20, 30]), protein_coords
+    )
+    assert mapped.tolist() == [20, 30]
+
+
+def test_pycasta_atom_mapping_rejects_coordinate_mismatch(tmp_path):
+    line = next(
+        line
+        for line in (BOUND_DIR / '2pk4.pdb').read_text().splitlines()
+        if line.startswith('ATOM  ')
+    )
+    input_pdb = tmp_path / 'one_atom.pdb'
+    input_pdb.write_text(line + '\n')
+
+    with pytest.raises(ValueError, match='coordinate order'):
+        _protein_atom_indices_from_pdb(
+            input_pdb, np.asarray([10]), np.asarray([[0.0, 0.0, 0.0]])
+        )
 
 
 def _load_upstream_pycasta():
