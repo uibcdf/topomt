@@ -177,7 +177,7 @@ class ExternalMeasurement:
     """A reported value linked to its exact provider field and calculation issue."""
 
     value: Any
-    original_value: int | float
+    original_value: int | float | list[float]
     original_unit: str
     source_field: str
     source_artifact: str

@@ -67,6 +67,10 @@ and the next engineering steps.
   Field-level audit of AlphaSpace2's snapshot, pocket and beta descriptors,
   recoverable output, and remaining binder/scoring parity work.
 
+- [pycasta/external_output_inventory.md](pycasta/external_output_inventory.md)
+  Field-level audit of pyCASTA's library result, native files, PyUnitWizard
+  quantities, and outstanding index-space and validation checks.
+
 - [viewer_addon_plan.md](viewer_addon_plan.md)
   Initial plan for the future `molsysviewer_topomt` addon.
 

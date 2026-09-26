@@ -22,7 +22,7 @@ source still belong in measurement provenance.
 | Pocketeer | `score`, `provider_mask`, `provider_residues`, `n_provider_residues`, `alpha_sphere_provider_atom_indices`, `alpha_sphere_measurements` | Pocketeer scoring and its original Biotite array/index spaces; the per-sphere measurements retain its reported radius and mean defining-atom SASA |
 | AlphaSpace2 | `score`, `alpha_space`, `alpha_nonpolar_ratio`, `alpha_nonpolar_space`, `beta_space`, `beta_nonpolar_space`, `beta_scores`, `alpha_indices`, `beta_indices`, `beta_alpha_indices`, `alpha_lining_provider_atom_indices`, `provider_snapshot_properties`, `beta_provider_properties` | AlphaSpace2 alpha/beta decomposition, nonpolar typing, Vina probe scoring, and snapshot index spaces |
 | CASTp/CASTpFold | `corner_points_count` | Corner points of the provider's discrete surface representation; the count depends on that representation and resolution |
-| pyCASTA | `score` must map to upstream `ranking_scores` | The library wrapper currently copies `pocket_volumes` into `score`, although `process_pdb()` returns a separate ranking score; correction is tracked in [#35](https://github.com/uibcdf/topomt/issues/35) |
+| pyCASTA | `score`, `provider_tetrahedron_indices`, `provider_validation_method` | `score` uses the upstream volume/flow/connectivity ranking formula and maps to `ranking_scores`, not `pocket_volumes` ([#35](https://github.com/uibcdf/topomt/issues/35)); tetrahedron IDs and `Mesh`/`SASA`/`FakeBall` validation belong to pyCASTA's own computation |
 
 Provider-specific technical links such as `provider_run_id`,
 `provider_snapshot_source_artifact`, `atom_source_artifact`, and

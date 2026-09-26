@@ -24,7 +24,7 @@ separate scientific check against an inflated engineering percentage.
 | Pocketeer result fidelity and output record | 10 | In progress | Library result and mask captured for 6qrd and 2xjx; sphere IDs, SASA, defining atoms, residues and masks mapped; selection/chain, clean install and broader parity remain |
 | AlphaSpace2 result fidelity and output record | 10 | In progress | 1GG0 snapshot and upstream PDB exports retained; alpha/beta memberships, spaces, scores and contact state mapped; binder and advanced-score parity remain |
 | CASTp/CASTpFold result fidelity and output record | 10 | Not started | Pinned ZIP, mouth aggregation, SA/MS definitions, server evidence |
-| pyCASTA result fidelity and output record | 10 | Not started | Pinned fixture, tetrahedron/depth validation, source links; [#35](https://github.com/uibcdf/topomt/issues/35) records the incorrect score=volume alias |
+| pyCASTA result fidelity and output record | 10 | In progress | Four bounded structures compare per-pocket values; full returned dict and isolated native files retained; tetrahedron-array identity checked; atom-order, optional validation and broader parity remain |
 | Independent TopoMT calculations and comparisons | 15 | Not started | Definition-specific issues closed by matching-input numerical tests |
 | Cross-provider edge-case and server validation | 5 | Not started | Selection, ligand, chain, void/channel/interface, version and live-server matrix |
 | Final exhaustive provider parity regression suite | 10 | Not started | Every provider and supported route compared field by field with pinned upstream output in CI; live server checks tracked separately |
@@ -42,7 +42,7 @@ be reduced if an accepted milestone regresses.
 | Pocketeer library | Yes, submitted PDB, official JSON and omitted-mask supplement | Volume, score, centroid, residues, mask, sphere IDs/geometry/mean SASA/four defining atoms | 6qrd and non-default 2xjx against local source; broader parity pending |
 | AlphaSpace2 library | Yes, submitted PDB, all upstream exported PDBs and full snapshot supplement | Pocket, alpha and beta geometry, space, nonpolar contribution, scores and contact/occupancy descriptors | 1GG0 direct snapshot and exported-file parity; binder/advanced-score parity pending |
 | CASTp/CASTpFold | Pending | Pending | Pending |
-| pyCASTA | Pending | Pending | Pending |
+| pyCASTA library | Yes, submitted PDB, returned-result snapshot, alpha NPZ, native pocket PDB/CSV and logs for default route | Score, volume, depth, mouth area/perimeter, representative point, tetrahedron IDs and validation method with PyUnitWizard geometry | Four bounded structures compared per pocket; atom-order and validation edge cases pending |
 
 ## Next checkpoint
 
@@ -76,6 +76,17 @@ Issues [#31](https://github.com/uibcdf/topomt/issues/31),
 volume and occupancy calculations. The 1GG0 reference passes; binder and
 advanced-score routes remain to validate before the 10-point milestone counts.
 
+The [pyCASTA inventory](pycasta/external_output_inventory.md) now records
+the library result and native output from an isolated run. Score correctly
+uses `ranking_scores`; the general geometric descriptors use PyUnitWizard
+nanometer units while their original angstrom values remain attributed.
+Four bounded structures pass per-pocket comparisons, and the alpha-array
+index check prevents an unsupported tetrahedron mapping from being reported
+as atom membership. Issues [#36](https://github.com/uibcdf/topomt/issues/36)
+through [#40](https://github.com/uibcdf/topomt/issues/40) track independent
+calculations and the source depth/index ambiguity. The 10-point milestone
+remains open pending atom-order, optional validation, and broader parity.
+
 Verification for this checkpoint: `pytest --receptor=llm` reported 88 passed,
 4 skipped, and 24 warnings across provider-output, fpocket-provider, full
 fpocket parity, Topography registry, and public get-topography tests. The skips
@@ -91,8 +102,13 @@ Pocketeer selection reported 3 passed after count-field mapping.
 The AlphaSpace2 library-wrapper `pytest --receptor=llm` selection reported
 2 passed with 4 upstream zero-denominator warnings; snapshot state, every
 upstream export file, feature mappings, and bundle recovery were checked.
+The pyCASTA library and public-wrapper `pytest --receptor=llm` selection
+reported 9 passed. Four bounded structures were compared pocket by pocket;
+the 2pk4 native files and portable bundle were checked. A first joint run
+exposed a NumPy-array metadata serialization error in the public route; the
+adapter now normalizes those settings and the repeated joint run passes.
 The remote `gh run-receptor` inspection of Ruff run 36227804844 reported PASS,
-but its commit predates these uncommitted changes. Local `ruff check`,
+but its commit predates these local changes. Local `ruff check`,
 `ruff format --check` on newly formatted modules, YAML parsing, and
 `git diff --check` passed. The older `test_parity.py` file retains pre-existing
 whole-file formatting debt; its imports now pass `ruff check`.
