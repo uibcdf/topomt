@@ -48,8 +48,8 @@ external-library measurement evidence above.
 
 ## Resume sequence
 
-1. Check the worktree before editing; preserve the pre-existing untracked
-   `sandbox/smoke_test.ipynb`. Read this checkpoint, the
+1. Check the worktree before editing; `sandbox/smoke_test.ipynb` is now
+   committed. Read this checkpoint, the
    [external-result plan](third_party_results_plan.md), and the relevant
    provider inventory. Do not infer that a prior local or remote green run
    covers later commits.
@@ -179,3 +179,18 @@ but its commit predates these local changes. Local `ruff check`,
 `ruff format --check` on newly formatted modules, YAML parsing, and
 `git diff --check` passed. The older `test_parity.py` file retains pre-existing
 whole-file formatting debt; its imports now pass `ruff check`.
+
+Latest published state (commit `febed66660f967efa42f015b222af163647543f0`,
+2026-09-26): the worktree and `origin/main` were synchronized and clean.
+The merged-tree provider selection passed 66 tests locally. A full local
+`pytest --receptor=llm tests/` run was interrupted after 435 passed, 17
+skipped, 5 xfailed and one reproducible native pyCASTA `1a6w` pocket-count
+failure ([#53](https://github.com/uibcdf/topomt/issues/53)); it is not a
+full-suite pass. Ruff and MolSysSuite policy passed on GitHub Actions. The
+[six-job CI run](https://github.com/uibcdf/topomt/actions/runs/36267974033)
+failed in its test step on all platforms with `ModuleNotFoundError: No module
+named 'alphaspace2'`. The CI environment files do not list that upstream
+package, while the test suite imports it. On resumption, restore a reproducible
+AlphaSpace2 installation or an explicit optional-dependency test policy, rerun
+the six-job CI matrix, then address the separate native pyCASTA failure. Do
+not treat either failure as evidence that external-provider parity is complete.
