@@ -12,7 +12,7 @@ from .warnings import (
 
 
 class TopoMTException(CatalogException):
-    def __init__(self, **kwargs):
+    def __init__(self, message=None, **kwargs):
         """
         Base exception for TopoMT that automatically bundles non-standard
         keyword arguments into the 'extra' dictionary for SMonitor.
@@ -34,11 +34,11 @@ class TopoMTException(CatalogException):
         kwargs.setdefault('meta', META)
         kwargs['extra'] = extra
 
-        super().__init__(**kwargs)
+        super().__init__(message, **kwargs)
 
 
 class TopoMTWarning(CatalogWarning):
-    def __init__(self, **kwargs):
+    def __init__(self, message=None, **kwargs):
         """
         Base warning for TopoMT that automatically bundles non-standard
         keyword arguments into the 'extra' dictionary for SMonitor.
@@ -56,7 +56,7 @@ class TopoMTWarning(CatalogWarning):
         kwargs.setdefault('meta', META)
         kwargs['extra'] = extra
 
-        super().__init__(**kwargs)
+        super().__init__(message, **kwargs)
 
 
 class LibraryNotFoundError(TopoMTException):

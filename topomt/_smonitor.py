@@ -1,5 +1,6 @@
 # TopoMT/_smonitor.py
-from topomt._private.smonitor.catalog import CODES
+from topomt._private.smonitor.catalog import CODES as CODES
+from topomt._private.smonitor.catalog import SIGNALS as SIGNALS
 
 PROFILE = 'user'
 
@@ -11,7 +12,3 @@ SMONITOR = {
     'theme': 'plain',
     'silence': ['pint', 'networkx'],
 }
-
-SIGNALS = CODES['SIGNALS']
-ERRORS = CODES['ERRORS']
-WARNINGS = CODES['WARNINGS']

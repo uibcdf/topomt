@@ -3,6 +3,28 @@ import sys
 import warnings
 from pathlib import Path
 
+import pytest
+
+from topomt._private.smonitor import (
+    NotDigestedArgumentWarning,
+    PocketeerDelaunayWarning,
+    PocketeerSasaBackendWarning,
+)
+
+
+@pytest.mark.parametrize(
+    'warning',
+    [
+        NotDigestedArgumentWarning(argument='value', caller='method'),
+        PocketeerDelaunayWarning(reason='degenerate coordinates'),
+        PocketeerSasaBackendWarning(reason='missing backend'),
+    ],
+)
+def test_catalog_warning_renders_and_survives_args_reconstruction(warning):
+    assert warning.code is not None
+    assert str(warning)
+    assert str(type(warning)(*warning.args)) == str(warning)
+
 
 def test_import_topomt_does_not_replace_global_warning_formatter():
     repo_root = Path(__file__).resolve().parents[1]

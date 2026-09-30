@@ -1,15 +1,13 @@
-from __future__ import annotations
-
 from smonitor.integrations import CatalogWarning
 
 from .emitter import warn, warn_once
 
 
 class TopoMTCatalogWarning(CatalogWarning):
-    def __init__(self, **kwargs):
+    def __init__(self, message=None, **kwargs):
         from . import CATALOG, META
 
-        super().__init__(catalog=CATALOG, meta=META, **kwargs)
+        super().__init__(message, catalog=CATALOG, meta=META, **kwargs)
 
 
 class UserTopoMTWarning(TopoMTCatalogWarning):
@@ -19,22 +17,29 @@ class UserTopoMTWarning(TopoMTCatalogWarning):
 class NotDigestedArgumentWarning(TopoMTCatalogWarning):
     catalog_key = 'NotDigestedArgumentWarning'
 
-    def __init__(self, argument, caller=None):
-        super().__init__(extra={'argument': argument, 'caller': caller})
+    def __init__(self, message=None, *, argument=None, caller=None):
+        extra = (
+            {'argument': argument, 'caller': caller} if argument is not None else None
+        )
+        super().__init__(message, extra=extra)
 
 
 class PocketeerDelaunayWarning(UserTopoMTWarning):
     catalog_key = 'PocketeerDelaunayWarning'
 
-    def __init__(self, reason):
-        super().__init__(extra={'reason': reason})
+    def __init__(self, message=None, *, reason=None):
+        super().__init__(
+            message, extra={'reason': reason} if reason is not None else None
+        )
 
 
 class PocketeerSasaBackendWarning(UserTopoMTWarning):
     catalog_key = 'PocketeerSasaBackendWarning'
 
-    def __init__(self, reason: str):
-        super().__init__(extra={'reason': reason})
+    def __init__(self, message=None, *, reason: str | None = None):
+        super().__init__(
+            message, extra={'reason': reason} if reason is not None else None
+        )
 
 
 __all__ = [

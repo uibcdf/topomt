@@ -26,40 +26,53 @@ CATALOG = {
             'tags': ['method', 'pycasta', 'native'],
         },
     },
-    'errors': {
+    'exceptions': {
         'LibraryNotFoundError': {
-            'template': "Required library '{library}' is not installed. Please install it using '{hint}'.",
+            'code': 'LibraryNotFoundError',
+            'user_message': "Required library '{library}' is not installed.",
+            'user_hint': 'Install it in the active environment with: pip install {library}',
+            'category': 'dependency',
+        },
+        'ExecutableNotFoundError': {
+            'code': 'ExecutableNotFoundError',
+            'user_message': "Required fpocket executable '{executable}' was not found.",
+            'user_hint': 'Install it with: conda install -c conda-forge fpocket; or set fpocket_cmd to the executable path.',
             'category': 'dependency',
         },
         'ArgumentError': {
-            'template': "Invalid argument '{arg_name}': {reason}",
+            'code': 'ArgumentError',
+            'user_message': "Invalid argument '{arg_name}': {reason}",
             'category': 'validation',
         },
     },
     'warnings': {
         'ExperimentalMethodWarning': {
-            'template': "The method '{method}' is experimental and its API may change in future versions.",
+            'code': 'ExperimentalMethodWarning',
+            'user_message': "The method '{method}' is experimental and its API may change in future versions.",
             'category': 'api',
         },
         'NotDigestedArgumentWarning': {
-            'template': "The argument '{argument}' in '{caller}' was not digested.",
+            'code': 'NotDigestedArgumentWarning',
+            'user_message': "The argument '{argument}' in '{caller}' was not digested.",
             'category': 'validation',
         },
         'PocketeerDelaunayWarning': {
-            'template': 'Pocketeer Delaunay tessellation failed: {reason}',
+            'code': 'PocketeerDelaunayWarning',
+            'user_message': 'Pocketeer Delaunay tessellation failed: {reason}',
             'category': 'algorithm',
         },
         'PocketeerSasaBackendWarning': {
-            'template': 'Pocketeer SASA backend could not run ({reason}); mean_sasa is set to 0.0 for all spheres.',
+            'code': 'PocketeerSasaBackendWarning',
+            'user_message': 'Pocketeer SASA backend could not run ({reason}); mean_sasa is set to 0.0 for all spheres.',
             'category': 'dependency',
         },
     },
 }
 
 CODES = {
-    'SIGNALS': CATALOG['signals'],
-    'ERRORS': CATALOG['errors'],
-    'WARNINGS': CATALOG['warnings'],
+    entry['code']: entry
+    for group in ('exceptions', 'warnings')
+    for entry in CATALOG[group].values()
 }
 
 SIGNALS = CATALOG['signals']
