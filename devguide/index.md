@@ -10,6 +10,10 @@ and the next engineering steps.
   Current priority and restart checkpoint: provider-specific outputs and shared
   pocket access before DFND consolidation or full Topography runtime adoption.
 
+- [provider_output_viewer_checkpoint.md](provider_output_viewer_checkpoint.md)
+  Current consumer slice: original pocket outputs in the TopoMT-owned MolSysViewer
+  addon; concrete DockingMT and PharmacophoreMT adoption remains deferred.
+
 - [status.md](status.md)
   Current status of the project, including what is stable, what is in
   progress, and what is postponed.

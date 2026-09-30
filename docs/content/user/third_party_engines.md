@@ -145,6 +145,47 @@ existing APIs and separate parity gates. Contact/volume/score definitions remain
 specific to their original methods. No DFND calculation is required to use
 these outputs.
 
+## Show original pockets in MolSysViewer
+
+Install the optional viewer dependencies with `python -m pip install 'topomt[viewer]'`.
+The integration ships inside TopoMT as `molsysviewer_topomt`.
+
+```python
+import molsysviewer as msv
+import molsysviewer_topomt as viewer_topomt
+import topomt as tmt
+
+molecular_system = 'protein.pdb'
+result = tmt.get_provider_output(molecular_system, method='fpocket', structure_indices=0)
+view = msv.new_view(molecular_system, structure_indices=0)
+attached = viewer_topomt.attach_provider_output(view, result)
+view  # Display in Jupyter; the TopoMT panels list the active run's original pockets.
+
+if result.pockets:
+    selected = [result.pockets[0].source_id]
+    viewer_topomt.show_provider_pockets(view, result, pocket_ids=selected)
+viewer_topomt.clear_provider_pockets(view, result)
+```
+
+The same helpers accept all five provider output classes. Original results are
+retained under `view.addons.topomt.provider_outputs[result.run.run_id]`, separately
+from any attached Topography. Different runs have separate layer tags; attaching
+a run makes it active for the panels. The panels show all pockets or one pocket,
+clear the active run's display, and disable DFND controls for provider results.
+
+The automatic display uses available alpha spheres, beta sites or mapped member
+atoms. Choose a representation explicitly, for example
+`show_provider_pockets(view, result, representation='member_atoms')`.
+Reported sphere radii keep their original physical meaning. Point-only evidence
+uses display markers with `point_radius_nm=0.06`; this radius is not a provider
+measurement or pocket boundary. No exact pocket volume or surface is inferred.
+Missing geometry produces warnings in RenderResult and the panel; present empty
+geometry is reported separately. Rendering and clearing preserve original data.
+
+Load the source coordinate frame when showing its receptor alongside the output.
+The helper does not align different structures or transformed coordinates.
+If you choose a custom `tag_prefix`, use the same prefix for later show/clear calls.
+
 ## AlphaSpace2 contacts with a reference ligand
 
 The original AlphaSpace2 adapter accepts `binder`, the upstream name for a

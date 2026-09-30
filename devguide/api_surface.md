@@ -62,6 +62,11 @@ evidence. Their version-1 schema is provisional; permanent pocket delivery does
 not depend on completing DFND or full Topography adoption. The existing
 `get_topography` and provider `get_pockets` APIs remain available.
 
+The TopoMT-owned viewer addon now exposes `attach_provider_output`,
+`show_provider_pockets` and `clear_provider_pockets`. Provider output state is
+separate from canonical Topography state. See the
+[viewer adoption checkpoint](provider_output_viewer_checkpoint.md).
+
 The current conventional engine surface includes:
 
 - `pocketeer`;

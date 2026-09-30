@@ -1,6 +1,6 @@
 # Provider pocket output checkpoint
 
-Updated: 2026-09-30. Workstream: **active; external providers first**.
+Updated: 2026-09-30. Workstream: **paused by the user after initial provider/viewer delivery**.
 Implementation owner: [#65](https://github.com/uibcdf/topomt/issues/65).
 Exhaustive provider fidelity: [#19](https://github.com/uibcdf/topomt/issues/19) and
 [third_party_results_checkpoint.md](third_party_results_checkpoint.md).
@@ -17,7 +17,9 @@ DFND remains the native semantic reference for
 #60–#62 runtime gates are **not prerequisites** for external-provider delivery.
 #63 remains future canonical admission. This checkpoint takes precedence over
 older roadmap/status wording that schedules DFND or viewer hardening first.
-The viewer addon and native provider-method parity review remain deferred.
+Viewer addon adoption has been explicitly resumed under #66; see the
+[viewer checkpoint](provider_output_viewer_checkpoint.md). Concrete DockingMT
+and PharmacophoreMT adoption and native provider-method parity review remain deferred.
 
 The TcTIM pilot needs useful, inspectable comparative pockets before the final
 general model is complete. It does not justify inventing cross-system
@@ -80,11 +82,14 @@ weighted contact occupancy does not become a geometric intersection.
 MolSysViewer can consume membership and points/spheres; DockingMT can construct
 a declared search region from supported evidence; PharmacophoreMT can consume
 membership/geometry for its own models. A derived box or proxy is a consumer
-derivation, not the provider's exact pocket region. Actual sibling integration
-is separate work; this checkpoint does not claim those components accept the
-new classes already.
+derivation, not the provider's exact pocket region. The TopoMT-owned MolSysViewer
+addon now has explicit attachment/rendering helpers under #66. Concrete DockingMT
+and PharmacophoreMT integration remains separate, deferred work.
 
 ## Evidence and next steps
+
+The user requested a pause after this initial integration. The sequence below
+is for a future explicitly resumed turn, not a current work instruction.
 
 Test-first evidence is in `tests/test_provider_pocket_outputs.py`. The first red
 run found absent entry points and a source-index bug: fpocket mapped a selection
@@ -107,8 +112,9 @@ checks complete the broader #19 parity program.
 
 Resume from this checkpoint, then:
 
-1. Adopt the consumer contract in the pilot/sibling components through their own
-   issues, keeping the viewer addon review deferred until requested.
+1. Resume from the [provider-output viewer checkpoint](provider_output_viewer_checkpoint.md)
+   for MolSysViewer adoption and a real selected-receptor workflow. Concrete
+   DockingMT and PharmacophoreMT adoption remains deferred.
 2. Complete provider-specific field/route fidelity and saved-library-output
    reconstruction with the retained upstream fixtures. Keep #19's existing
    20/100 engineering denominator unchanged until its own milestones pass.

@@ -1,5 +1,10 @@
 # MolSysViewer TopoMT Addon Checkpoint
 
+Historical scaffold checkpoint. Current original-provider adoption and host API
+references are in [provider_output_viewer_checkpoint.md](provider_output_viewer_checkpoint.md),
+#66. Earlier priority, packaging and feature-copy notes below describe the
+scaffold stage; they are not the current operational checkpoint.
+
 ## Why this became the current priority
 
 We are pausing the previous engine-focused line of work in order to start a

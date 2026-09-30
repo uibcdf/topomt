@@ -1,5 +1,9 @@
 # MolSysViewer Addon Plan
 
+Current adoption slice: [provider-output viewer checkpoint](provider_output_viewer_checkpoint.md),
+#66. Original-provider outputs have their own runtime state and do not require
+canonical Topography admission.
+
 > **Status:** historical initial plan. This document records the first
 > `molsysviewer_topomt` addon roadmap before the DFND viewer implementation
 > matured. It is kept as a checkpoint, not as the current implementation

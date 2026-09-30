@@ -17,15 +17,20 @@ The project is not yet a polished stable product. The main remaining gap is not 
 
 ## Current Priority
 
+Work is **paused at the user's request** after initial original-provider outputs
+and MolSysViewer addon adoption. Resume only on a new instruction; the bounded
+consumer checkpoint is [provider_output_viewer_checkpoint.md](provider_output_viewer_checkpoint.md).
+
 The active priority is [provider-specific pocket delivery](provider_pocket_output_checkpoint.md)
-for MolSysViewer, DockingMT and PharmacophoreMT, owned by #65. Provisional output
+for MolSysViewer, DockingMT and PharmacophoreMT, initially implemented in #65. Provisional output
 contracts preserve original engine semantics and expose shared pocket access;
 DFND consolidation and full Topography runtime adoption are deferred.
 
 The broader [third-party results checkpoint](third_party_results_checkpoint.md)
 remains 20/100 verified, with exhaustive fidelity incomplete. Its later local
-provider-method audit follows its separate parity gate. Viewer addon repairs
-remain deferred and do not block the output contracts.
+provider-method audit follows its separate parity gate. The current consumer
+slice is [MolSysViewer addon adoption](provider_output_viewer_checkpoint.md), #66.
+Concrete DockingMT and PharmacophoreMT adoption remains deferred.
 
 DFND is the native TopoMT method direction. It should not be forced into strict CASTp, fpocket, AlphaSpace2, Pocketeer, or pycasta parity. Those methods remain valuable as external references, loader or wrapper integrations, and qualitative/quantitative comparison baselines.
 

@@ -1,11 +1,14 @@
 # Third-party results checkpoint
 
 Updated: 2026-09-30
-Work state: active; the immediate priority is
+Work state: paused at the user's request after initial provider/viewer delivery;
+the future resume priority is
 [provider-specific pocket outputs](provider_pocket_output_checkpoint.md), #65,
 using the existing optional original-engine execution and retained evidence.
 Full Topography runtime adoption and DFND consolidation are deferred. The native provider-method review
 is queued for after the external-result plan's final parity gate.
+The current consumer slice is [MolSysViewer addon adoption](provider_output_viewer_checkpoint.md),
+#66; concrete DockingMT and PharmacophoreMT adoption remains deferred.
 Plan: [third_party_results_plan.md](third_party_results_plan.md)
 Tracking issue: [#19](https://github.com/uibcdf/topomt/issues/19)
 Attribute-origin register: [third_party_attribute_origins.md](third_party_attribute_origins.md)

@@ -277,4 +277,6 @@ reference-region characterization differs from occupied-assembly geometry.
 Third-party preservation/parity remains under its existing plan, followed by
 the separate native provider-method review. Neither is a prerequisite to
 stating DFND-grounded public semantics. Runtime changes need test-first,
-compatibility-aware slices. Viewer/addon work can remain deferred.
+compatibility-aware slices. Original-provider viewer adoption is now explicit
+under [#66](provider_output_viewer_checkpoint.md), with provider state separate
+from canonical Topography. DockingMT and PharmacophoreMT adoption remain deferred.

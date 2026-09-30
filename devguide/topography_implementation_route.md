@@ -159,8 +159,10 @@ by inventing geometry or changing a definition.
 
 The [native provider-method review](native_methods_plan.md) still follows the
 external-result gate. DFND remains a separate native method with its own
-scientific validation. Viewer/addon changes are deferred; viewer availability
-does not determine the core conceptual contracts.
+scientific validation. Original-provider addon adoption is now owned by
+[the viewer checkpoint](provider_output_viewer_checkpoint.md), #66. Broader DFND
+viewer work remains separate; viewer availability does not determine these
+core conceptual contracts.
 
 ## 6. Evidence and documentation maintenance
 

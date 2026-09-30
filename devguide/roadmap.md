@@ -7,8 +7,13 @@ TopoMT should converge toward a reliable native topography framework. External e
 Current scheduling decision (2026-09-30): deliver usable original-provider
 pockets first through provider-specific provisional outputs and shared consumer
 access. See the [current checkpoint](provider_pocket_output_checkpoint.md), #65.
-DFND consolidation, full Topography runtime gates and viewer addon work are
-deferred. The phases below retain their long-term architectural direction.
+The current adoption slice is [the MolSysViewer addon](provider_output_viewer_checkpoint.md),
+#66. DFND consolidation, full Topography runtime gates and concrete DockingMT/
+PharmacophoreMT adoption remain deferred. The phases below retain their long-term
+architectural direction.
+
+The user has requested a pause after this initial provider/viewer delivery.
+Immediate work below is a future resume sequence, not an active instruction.
 
 ## Phase 1: Unified API and Conventional Engine Integration
 
@@ -61,9 +66,9 @@ DFND now has:
 
 ### Immediate Work
 
-Deliver and validate the provider outputs in #65, then complete the original
-field/route fidelity gates. Viewer geometry-boundary hardening and DFND
-reporting/filter policy remain deferred. Original results become comparison
+Provider outputs in #65 are implemented. Adopt them in the MolSysViewer addon
+under #66, then continue original field/route fidelity gates. Broader DFND viewer
+geometry work and DFND reporting/filter policy remain deferred. Original results become comparison
 inputs without forcing methods with different definitions into strict parity.
 
 The completed static-identity/provenance milestone is recorded in
