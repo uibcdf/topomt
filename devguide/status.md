@@ -17,16 +17,19 @@ The project is not yet a polished stable product. The main remaining gap is not 
 
 ## Current Priority
 
-The current provider-integration workstream is paused at the
-[third-party results checkpoint](third_party_results_checkpoint.md): 20/100
-verified, with external-result fidelity still incomplete. Its next phase will
-audit the existing TopoMT-owned implementations of those provider algorithms
-after the external parity gate. DFND hardening remains a separate native
-TopoMT workstream.
+The active priority is [provider-specific pocket delivery](provider_pocket_output_checkpoint.md)
+for MolSysViewer, DockingMT and PharmacophoreMT, owned by #65. Provisional output
+contracts preserve original engine semantics and expose shared pocket access;
+DFND consolidation and full Topography runtime adoption are deferred.
+
+The broader [third-party results checkpoint](third_party_results_checkpoint.md)
+remains 20/100 verified, with exhaustive fidelity incomplete. Its later local
+provider-method audit follows its separate parity gate. Viewer addon repairs
+remain deferred and do not block the output contracts.
 
 DFND is the native TopoMT method direction. It should not be forced into strict CASTp, fpocket, AlphaSpace2, Pocketeer, or pycasta parity. Those methods remain valuable as external references, loader or wrapper integrations, and qualitative/quantitative comparison baselines.
 
-The immediate DFND work is:
+The deferred DFND backlog is:
 
 - apply the completed typed mesh/query contract to validation, reporting, and
   future temporal-comparability workflows;

@@ -4,7 +4,12 @@ Public semantic direction: [Topography conceptual contract](topography_conceptua
 (accepted design, 2026-09-30). Runtime adoption:
 [implementation route](topography_implementation_route.md), issues #60–#63.
 The responsibilities below distinguish implemented foundations from that target;
-they do not announce new public classes or signatures.
+they do not announce new Topography registry classes or signatures.
+
+Current delivery priority: [provider pocket output checkpoint](provider_pocket_output_checkpoint.md).
+Original-engine outputs have provider-specific provisional classes and shared
+pocket access. Full Topography runtime adoption and DFND consolidation are
+deferred; the conceptual contract continues to govern their eventual integration.
 
 ## Purpose
 
@@ -257,6 +262,11 @@ TopoMT is expected to follow the same dependency model used in MolSysSuite:
 Optional scientific tools must not leak through top-level imports.
 
 ## Architectural direction
+
+Deliver original-provider results under #65 first. Consumers use the small
+shared pocket contract while retaining each method's definitions and original
+evidence. Existing adapters can be reused privately; returned result objects
+have independent ownership. This does not require the following deferred gates.
 
 Adopt the [conceptual contract](topography_conceptual_contract.md) through its
 [bounded gates](topography_implementation_route.md): analysis context/support,

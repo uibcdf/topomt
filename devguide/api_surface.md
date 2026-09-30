@@ -20,6 +20,11 @@ This is the surface new code should normally build on.
 
 ## DFND API Status
 
+Scheduling update: native hardening is deferred behind
+[provider pocket outputs](provider_pocket_output_checkpoint.md). The historical
+DFND surface inventory below does not define current priority or require these
+records for original-provider delivery.
+
 DFND is the native TopoMT method direction and is now an active hardening track.
 
 Public entry points:
@@ -49,6 +54,13 @@ The returned `Topography` object also exposes DFND raw/provisional records throu
 Those convenience attributes are not independent public feature APIs. They expose records for method development, diagnostics, and validation.
 
 ## Conventional Engine API Status
+
+`topomt.get_provider_output` and each provider's `get_output` return detached
+provider-specific objects with shared `pockets`, source IDs, membership roles,
+declared representations, attributed measurements and original ProviderRun
+evidence. Their version-1 schema is provisional; permanent pocket delivery does
+not depend on completing DFND or full Topography adoption. The existing
+`get_topography` and provider `get_pockets` APIs remain available.
 
 The current conventional engine surface includes:
 

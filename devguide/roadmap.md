@@ -4,6 +4,12 @@
 
 TopoMT should converge toward a reliable native topography framework. External engines remain important references and integration targets, but the native method direction is now DFND.
 
+Current scheduling decision (2026-09-30): deliver usable original-provider
+pockets first through provider-specific provisional outputs and shared consumer
+access. See the [current checkpoint](provider_pocket_output_checkpoint.md), #65.
+DFND consolidation, full Topography runtime gates and viewer addon work are
+deferred. The phases below retain their long-term architectural direction.
+
 ## Phase 1: Unified API and Conventional Engine Integration
 
 Phase 1 established the shared API direction:
@@ -17,7 +23,7 @@ This phase is historically valid and remains part of the project foundation.
 
 ## Phase 2: DFND Hardening and Topography Integration
 
-Current phase.
+Deferred native phase; original-provider pocket delivery currently has priority.
 
 ### Goals
 
@@ -55,10 +61,10 @@ DFND now has:
 
 ### Immediate Work
 
-1. Continue viewer geometry-boundary hardening.
-2. Decide reporting/filter policy for tiny and near-threshold components.
-3. Expand real-system and external-method comparison batteries without forcing
-   strict semantic parity.
+Deliver and validate the provider outputs in #65, then complete the original
+field/route fidelity gates. Viewer geometry-boundary hardening and DFND
+reporting/filter policy remain deferred. Original results become comparison
+inputs without forcing methods with different definitions into strict parity.
 
 The completed static-identity/provenance milestone is recorded in
 [`DFND/checkpoint_identity_provenance_registries_2026_06_06.md`](DFND/checkpoint_identity_provenance_registries_2026_06_06.md).

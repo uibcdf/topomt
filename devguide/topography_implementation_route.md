@@ -6,6 +6,12 @@ recorded by [#59](https://github.com/uibcdf/topomt/issues/59).
 This broad route lives outside the report queues; its bounded work has owning
 issues. Closing the conceptual decision does not complete these runtime gates.
 
+Scheduling update (2026-09-30): these are deferred public-model gates, not global
+prerequisites for external results. The current priority is
+[provider-specific pocket outputs](provider_pocket_output_checkpoint.md), #65.
+Its provisional contracts reuse only the needed existing adapter evidence;
+they do not claim canonical Topography admission or consolidate DFND.
+
 ## 1. Starting evidence
 
 | Area | Implemented foundation | Remaining public contract |
@@ -36,7 +42,7 @@ kernel/catalog refactor or all lineage code is absent is not current evidence.
 
 G4's inventory and admission design can proceed alongside G2/G3. Runtime use of
 a relation or evaluation capability waits for its corresponding gate. The first
-implementation is G1; no registry class zoo or blanket engine rewrite precedes
+implementation within this deferred route is G1; no registry class zoo or blanket engine rewrite precedes
 its type/schema and compatibility decision.
 
 Every runtime slice follows test-first development. Its issue must name the

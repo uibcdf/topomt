@@ -11,6 +11,12 @@ in `architecture.md` and the June architecture review. DFND's mathematical,
 numerical, input, and query contracts retain their own authority. Historical
 checkpoints describe their recorded revision, not current release readiness.
 
+Current delivery priority: [provider-specific pocket outputs](provider_pocket_output_checkpoint.md).
+Their provisional contracts preserve original semantics and shared pocket
+access without waiting for DFND consolidation or the complete public runtime
+gates. They are evidence for future Topography integration, not canonical
+feature promotion merely because the provider calls a result a pocket.
+
 ## 1. Governing decision
 
 **DFND is the native semantic reference; Topography is the public scientific

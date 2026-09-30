@@ -1,8 +1,10 @@
 # Third-party results checkpoint
 
 Updated: 2026-09-30
-Work state: active; the immediate priority is reliable optional original-engine
-execution and shared dependency management. The native provider-method review
+Work state: active; the immediate priority is
+[provider-specific pocket outputs](provider_pocket_output_checkpoint.md), #65,
+using the existing optional original-engine execution and retained evidence.
+Full Topography runtime adoption and DFND consolidation are deferred. The native provider-method review
 is queued for after the external-result plan's final parity gate.
 Plan: [third_party_results_plan.md](third_party_results_plan.md)
 Tracking issue: [#19](https://github.com/uibcdf/topomt/issues/19)
@@ -47,6 +49,11 @@ detection engine. A current `1a6w` native pyCASTA count failure is tracked in
 external-library measurement evidence above.
 
 ## Resume sequence
+
+Current first action: resume from the
+[provider pocket output checkpoint](provider_pocket_output_checkpoint.md).
+The numbered sequence below describes the broader fidelity program; its field
+and independent-calculation milestones do not block the initial output contract.
 
 1. Check the worktree before editing; `sandbox/smoke_test.ipynb` is now
    committed. Read this checkpoint, the

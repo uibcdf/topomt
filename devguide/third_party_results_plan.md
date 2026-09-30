@@ -8,6 +8,14 @@ Progress: [third_party_results_checkpoint.md](third_party_results_checkpoint.md)
 
 ## Objective
 
+Scheduling update (2026-09-30): [provider pocket outputs](provider_pocket_output_checkpoint.md)
+are the immediate delivery, owned by #65. Each provider's own provisional
+result contract preserves its evidence and offers shared pocket access.
+Topography mappings below are the eventual canonical destination and existing
+compatibility path, not a prerequisite to exposing these outputs. DFND and
+#60–#62 consolidation remain deferred. This does not waive exhaustive parity
+or change the checkpoint's progress denominator.
+
 TopoMT must retain every useful topographic result returned by Pocketeer,
 fpocket, AlphaSpace2, CASTp/CASTpFold, and pyCASTA. Each calculable geometric or
 physicochemical measurement must eventually have a TopoMT calculation that can

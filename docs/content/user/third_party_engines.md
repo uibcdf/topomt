@@ -84,6 +84,67 @@ not its PyPI distribution version. AlphaSpace2 records whether it initialized
 missing unbound contact arrays; this compatibility step supplies zero ligand
 contacts without changing calculated geometry or scores.
 
+## Provider-specific pocket outputs
+
+Use `get_provider_output` to obtain the original method's own result and shared
+access to its pockets. It selects CLI for fpocket, the original Python library
+for Pocketeer/AlphaSpace2/pyCASTA, and a server for CASTp. Existing
+`get_topography` defaults remain unchanged.
+
+```python
+result = tmt.get_provider_output('protein.pdb', method='fpocket')
+# Also available as tmt.third_party.fpocket.get_output(...).
+
+for pocket in result.pockets:
+    print(pocket.source_id, pocket.atom_indices, pocket.atom_role)
+    if 'alpha_spheres' in pocket.geometries:
+        spheres = pocket.geometries['alpha_spheres']
+        coordinates, radii = spheres.coordinates, spheres.radii
+    if 'volume' in pocket.measurements:
+        reported_volume = pocket.measurements['volume']
+        print(reported_volume.value, reported_volume.definition)
+
+result.run.save('original_fpocket.zip')
+```
+
+`result` is a `FpocketOutput`, `PocketeerOutput`, `AlphaSpace2Output`,
+`PyCASTAOutput` or `CASTpOutput`. These version-1 result classes are provisional;
+providing the reported pockets and original evidence remains a permanent
+capability. `result.records` includes auxiliary CASTp mouth aggregates, while
+`result.pockets` includes all reported CASTp pocket rows, even closed cavities.
+
+Geometry coordinates/radii have explicit length units. Available keys include
+`member_atoms`, `alpha_spheres` and `beta_sites`; missing keys mean unavailable
+geometry. Inspect `atom_role`: Pocketeer's mask membership comprises residue
+atoms and is separate from its sphere-defined `lining_atoms` representation.
+pyCASTA membership identifies tetrahedron vertices. Sites and membership alone
+do not promise an exact closed region or a geometric volume.
+
+`pocket.fields` preserves provider-specific parsed fields with their existing
+conventions. Prefer `pocket.measurements` for attributed physical quantities and
+`pocket.geometries` for unitized coordinates. Returned dictionaries/quantities
+are independent copies. `result.input_coordinates` is a source-frame snapshot;
+exact submitted structures, selections, metadata and additional AlphaSpace2
+binder input remain in `result.run`. Saving that run exports original evidence,
+not a serialization of the complete provisional result.
+
+Persisted original output requires no installed engine or network:
+
+```python
+result = tmt.get_provider_output(
+    'protein.pdb', method='fpocket', backend='files',
+    pdb_file='protein.pdb', output_dir='protein_out',
+)
+result = tmt.get_provider_output(
+    method='castp', backend='files', zip_file='castp_result.zip',
+)
+```
+
+The new entry point rejects `backend='native'`; local reproductions retain their
+existing APIs and separate parity gates. Contact/volume/score definitions remain
+specific to their original methods. No DFND calculation is required to use
+these outputs.
+
 ## AlphaSpace2 contacts with a reference ligand
 
 The original AlphaSpace2 adapter accepts `binder`, the upstream name for a

@@ -6,6 +6,10 @@ and the next engineering steps.
 
 ## Main documents
 
+- [provider_pocket_output_checkpoint.md](provider_pocket_output_checkpoint.md)
+  Current priority and restart checkpoint: provider-specific outputs and shared
+  pocket access before DFND consolidation or full Topography runtime adoption.
+
 - [status.md](status.md)
   Current status of the project, including what is stable, what is in
   progress, and what is postponed.
@@ -20,7 +24,7 @@ and the next engineering steps.
   evaluations, provider admission and provenance. Runtime adoption is pending.
 
 - [topography_implementation_route.md](topography_implementation_route.md)
-  Current implementation evidence, bounded issue-owned adoption gates and
+  Deferred public-model implementation evidence, bounded adoption gates and
   compatibility/scientific validation requirements.
 
 - [roadmap.md](roadmap.md)
