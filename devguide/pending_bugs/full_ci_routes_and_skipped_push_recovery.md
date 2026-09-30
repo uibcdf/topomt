@@ -1,7 +1,7 @@
 ---
 summary: Complete contributor full-CI routes and skipped-push recovery.
 issue: uibcdf/topomt#58
-status: active
+status: partial
 opened: 2026-09-30
 closed:
 severity: medium
@@ -63,8 +63,8 @@ Linux 3.11 reported 88 failed, 716 passed, 69 skipped and five xfailed in
 Missing fpocket is one of nine grouped causes, not a complete diagnosis.
 
 The new PR-route regression failed against the old workflow because its
-paths-ignore excluded documentation PRs. New governance execution and
-protection evidence are pending verification.
+paths-ignore excluded documentation PRs. Independent hosted governance and protection are verified below; complete
+scientific execution, daily/PR observation and platform claims remain partial.
 
 ## What was refuted
 
@@ -135,3 +135,32 @@ by other suite consumers. Preserve the scientific Conda environments' existing
 0.6.0 pins and complete scientific pytest selection. This is a local workflow
 bootstrap error under #58, not a provider/scientific defect or a suite-wide
 mandatory tool upgrade. Retain the initial failed run as evidence.
+
+## Corrected hosted governance and remaining evidence
+
+At corrected source 100bc49, probe
+[36716167067](https://github.com/uibcdf/topomt/actions/runs/36716167067)
+passed both independent governance and the detector. Native evidence confirms
+index validation and all seven administrative tests executed successfully.
+The detector reported 40 skipped commits, exactly one more than the initial
+39 after the additional skipped bootstrap correction, with no eligible executed
+full watermark. Heavy jobs were intentionally omitted. A successful probe
+therefore neither certifies scientific results nor clears skipped debt.
+Corrected Ruff 36716171200 and suite policy 36716176543 passed.
+
+Complete manual CI
+[36716726423](https://github.com/uibcdf/topomt/actions/runs/36716726423)
+was dispatched at 100bc49. It instantiated all six supported Linux/macOS cells
+and passed independent governance; its decision job was intentionally skipped
+for unconditional full execution. Scientific jobs are pending/in progress at
+this evidence capture, including hosted macOS queueing. This is not a full
+scientific success. The unchanged older six-cell scientific failure remains
+visible in 36700609235 under the component-owned matrix issue #16.
+
+No failing scientific test, dependency environment, source pin or assertion
+was repaired or weakened by this governance work. The detector regression
+explicitly rejects failed coverage; observed failed baseline matrices did not
+become eligible anchors in either probe. Final adoption still requires actual
+daily execution, hosted external-PR evidence and separate publication-platform
+review. Keep #58 partial/open. Internal direct pushes and CI skipping remain
+permitted; their debt persists until successful complete coverage includes them.
