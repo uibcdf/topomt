@@ -23,6 +23,14 @@ All contributors must also read `MOLSYSSUITE_GUIDE.md`. It is the synchronized,
 read-only suite-governance guide owned by `uibcdf/molsyssuite`; shared policies and
 cross-component improvements are reported there as the guide directs.
 
+Before filing or closing a defect or proposal, read
+`devguide/reporting_protocol.md`. Open the owning GitHub issue first, create
+the record from `devguide/templates/report.md`, and regenerate the queue
+indexes with `python devtools/devguide_index.py`. Run
+`python devtools/devguide_index.py --check` and
+`python -m pytest tests/test_reporting_protocol.py` before committing a
+report lifecycle change. Archive resolved records; never delete them.
+
 ---
 
 ## 2. Project Overview

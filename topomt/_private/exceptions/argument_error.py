@@ -17,7 +17,7 @@ class ArgumentError(Exception):
     BadCallError
         A message is printed out with the name of the class or the method raising the exception,
         the possible wrong argument, the link to the API documentation, and the link to the
-        issues board of Sabueso's GitHub repository.
+        issues board of TopoMT's GitHub repository.
 
     Examples
     --------

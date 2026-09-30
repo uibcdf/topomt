@@ -30,6 +30,9 @@ and the next engineering steps.
   Notes on which parts of TopoMT and its ecosystem dependencies are plausible
   GPU targets and why.
 
+- [gpu_and_parallelization_options.md](gpu_and_parallelization_options.md)
+  Exploratory acceleration options awaiting measurements and separate decisions.
+
 - [engine_acceleration_plan.md](engine_acceleration_plan.md)
   Cross-cutting future plan for CPU-pool parallelization, distributed
   execution, and GPU evaluation across pocket engines.
@@ -107,8 +110,14 @@ and the next engineering steps.
   From-scratch technical implementation plan for a faithful native CASTp path,
   explicitly separated from DFND semantics and from the current prototype.
 - [pending_proposals/](pending_proposals/)
-  Intake area for unevaluated proposals that may change TopoMT or
+  Issue-backed proposals that may change TopoMT or
   `molsysviewer_topomt`.
+- [reporting_protocol.md](reporting_protocol.md)
+  Issue-backed defect and proposal lifecycle, local queue paths, and checks.
+- [pending_bugs/](pending_bugs/)
+  Open, issue-backed defects.
+- [archive/](archive/)
+  Permanent resolved, withdrawn, and superseded report records.
 
 - [native_methods_plan.md](native_methods_plan.md)
   Existing local method inventory and the queued review of TopoMT-owned
@@ -173,7 +182,7 @@ Proposal intake is separated by ownership:
   Pending proposals whose implementation would change TopoMT or
   `molsysviewer_topomt`.
 Requests owned by another MolSysSuite library must be written in that
-repository's own `devguide/pending_proposals/` directory.
+repository's own issue tracker and developer-guide lifecycle.
 
 ## DFND
 

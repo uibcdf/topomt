@@ -1,9 +1,9 @@
 # Pending TopoMT Proposals
 
-This directory is the intake area for proposals that may change TopoMT itself.
-It must remain present even when no concrete proposal is pending, because it is
-the agreed place where contributors and automated agents record new ideas before
-they are evaluated.
+This directory holds open, issue-backed proposals that may change TopoMT.
+Read [the reporting protocol](../reporting_protocol.md) and open the owning
+GitHub issue before creating a record from
+[`templates/report.md`](../templates/report.md).
 
 ## What Belongs Here
 
@@ -22,30 +22,40 @@ Do not use this directory for:
 - accepted architecture: document it in the relevant authoritative `devguide/`
   contract;
 - implementation checkpoints: place them with the relevant subsystem;
-- improvements that belong in a sibling MolSysSuite repository: write the
-  proposal in that repository's own `devguide/pending_proposals/` directory.
+- broad option catalogs and plans: keep them outside the issue-backed queues
+  until split into independently closable themes;
+- improvements that belong in a sibling MolSysSuite repository: open the
+  owning issue in that repository and follow its reporting protocol.
 
 ## Proposal Lifecycle
 
-Every proposal should declare:
-
-```text
-Status: pending | under review | accepted | accepted with changes | rejected | superseded
-Owner: optional
-Created: YYYY-MM-DD
-Last reviewed: YYYY-MM-DD
-```
+Every queued proposal has the common front matter, including its owning
+`uibcdf/topomt#<number>` issue and an open status. The generated list below
+is maintained with `python devtools/devguide_index.py`.
 
 A pending proposal should state the problem, scientific or user value,
 alternatives, risks, dependencies, validation plan, and decision questions. It
 must not present unmeasured performance claims or speculative implementation
 choices as established facts.
 
-After evaluation:
+After evaluation, record the decision and its guard or normative rule, move
+the report to `devguide/archive/`, regenerate indexes, and close the issue.
+Archive every resolved, withdrawn, or superseded report; never delete one.
 
-- move accepted contracts and rationale into the appropriate authoritative
-  document;
-- add executable correction work to the technical backlog or issue tracker;
-- delete proposals whose useful content has been fully integrated;
-- retain rejected proposals only when the rejection rationale prevents likely
-  repetition.
+## Open reports
+
+<!-- generated: devguide_index -->
+
+### Active (1)
+
+- [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
+
+### Partial (1)
+
+- [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
+
+### Open (1)
+
+- [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
+
+<!-- /generated -->

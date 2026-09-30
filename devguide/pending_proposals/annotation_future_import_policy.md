@@ -1,9 +1,20 @@
+---
+summary: Decide TopoMT's future-annotation import rule for Python 3.11–3.13.
+issue: uibcdf/topomt#57
+status: open
+opened: 2026-09-27
+closed:
+verification: inspected
+area: [governance, python]
+guard:
+normative:
+blocked_by: []
+supersedes: []
+---
+
 # Annotation Future Import Policy
 
-Status: pending
-Owner: unassigned
-Created: 2026-06-25
-Last reviewed: 2026-06-25
+First drafted 2026-06-25; issue-backed on 2026-09-27.
 
 ## Problem
 

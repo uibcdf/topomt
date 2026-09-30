@@ -81,6 +81,11 @@ ArgDigest requires:
 - `smonitor` for diagnostics and telemetry.
 - `depdigest` for conditional dependency checks via `@dep_digest`.
 
+The next ArgDigest release makes NumPy optional. Basic argument contracts and `std`
+pipelines neither install nor import it. Consumers using `data` or `sci` NumPy pipelines
+should install `argdigest[science]`; the `pyunitwizard` extra includes NumPy as well.
+Scientific pipelines raise a clear missing-dependency error if NumPy is absent.
+
 Do not replace `depdigest` integration with local no-op fallbacks in runtime code.
 If dependency checks are disabled silently, behavior diverges across environments and
 diagnostic quality degrades.
@@ -97,6 +102,22 @@ from argdigest import arg_digest
 @arg_digest(type_check=True)  # Optional beartype integration
 def my_function(molecular_system, selection="all"): ...
 ```
+
+#### Warning attribution inside decorated functions
+
+A `warnings.warn(..., stacklevel=2)` call inside a digested function can point to
+`argdigest/core/decorator.py` instead of the user's call site. The current normal path
+adds `_invoke`, `_run_digestion`, and `wrapper` frames; other decorators, including
+SMonitor's `@signal`, add their own frames. The count is an implementation detail and is
+not a stable `stacklevel` contract.
+
+On Python 3.12 or newer, a warning emitted by the consumer can use
+[`skip_file_prefixes`](https://docs.python.org/3/library/warnings.html#warnings.warn)
+to skip ArgDigest's package directory, plus any other decorator
+packages in the call chain. On Python 3.11, consumers that require user-call attribution
+must calculate the stack level from the active frames. Do not hand-count a fixed level
+across decorator compositions. ArgDigest's own warnings remain separate from warnings
+raised by the decorated function.
 
 ### 2.2 Explicit Mapping (`arg_digest.map`)
 Use this when you need specific pipelines for specific arguments. Global `kind` and `rules` will apply to any argument not explicitly mapped.
@@ -220,6 +241,27 @@ should express it.
 Caller-keyed digesters remain the right tool for **value** semantics that depend on the
 callable. What does *not* belong there is which arguments a function accepts at all: that
 is axis 1, and it has its own place since `0.10.0`. See section 4.5.
+
+For methods, the `caller` passed to a digester remains the contract key
+`<owner module>.<method>`; changing it would break registered function contracts and
+standardizers. A digester may also declare an optional `qualname` parameter. ArgDigest
+then passes `<runtime class module>.<runtime class>.<method>`, including the class for
+inherited and mixin-assembled methods. Use `caller` for contract decisions and
+`qualname` for user-facing refusal messages:
+
+```python
+from argdigest import argument_digest
+
+
+@argument_digest("policy")
+def digest_policy(policy, caller=None, qualname=None):
+    if policy not in {"strict", "permissive"}:
+        raise ValueError(f"{qualname} cannot take policy={policy!r}")
+    return policy
+```
+
+Free functions receive their normal qualified function name. Digesters that do not
+declare `qualname` keep their existing call signature and behavior.
 
 ## 4.5 The function argument contract (axis 1)
 

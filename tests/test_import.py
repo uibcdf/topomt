@@ -19,6 +19,18 @@ def test_molsysviewer_topomt_all_has_no_duplicates():
     assert len(molsysviewer_topomt.__all__) == len(set(molsysviewer_topomt.__all__))
 
 
+def test_molsysviewer_topomt_exports_lifecycle_hooks():
+    import importlib
+
+    from molsysviewer_topomt import on_context_action, on_disable, on_enable
+
+    addon_module = importlib.import_module('molsysviewer_topomt.addon')
+
+    assert on_enable is addon_module.on_enable
+    assert on_disable is addon_module.on_disable
+    assert on_context_action is addon_module.on_context_action
+
+
 def test_topomt_all_declares_public_api_v0():
     expected = {
         '__version__',

@@ -1,6 +1,6 @@
-# Proposal: High-Performance GPU and Parallelization Roadmaps for Spatial Topology & Pocket Analysis
+# GPU and Parallelization Options for Spatial Topology and Pocket Analysis
 
-**Status:** pending; requires profiling and dependency evaluation  
+**Status:** exploratory option catalog; requires profiling and dependency evaluation
 **Created:** 2026-06-06  
 **Last reviewed:** 2026-06-06
 
@@ -8,6 +8,9 @@
 > claims, and speedups are hypotheses until measured against representative
 > TopoMT workloads. No dependency or execution model is approved by this
 > proposal.
+
+This catalog is a planning reference. An independently closable implementation
+theme must first receive its own `uibcdf/topomt#<number>` issue and report.
 
 ## Abstract
 
@@ -135,4 +138,3 @@ The following claims are explicitly unapproved until demonstrated:
 - fallback behavior on machines without accelerator support;
 - a decision on whether the work belongs in TopoMT, MolSysMT, or a lower-level
   shared numerical package.
-
