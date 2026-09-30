@@ -10,6 +10,7 @@ from topomt.get_topography import get_topography
 from topomt.provider_output import ProviderRun
 from topomt.third_party._common import import_upstream_module
 from topomt.third_party.alphaspace2.library import (
+    _initialize_unbound_contacts,
     _patch_alphaspace2_mdtraj_sasa,
     _patch_alphaspace2_numpy_compatibility,
 )
@@ -49,6 +50,8 @@ def test_alphaspace2_wrapper_matches_upstream_snapshot_on_reference_system(
     receptor = md.load(str(TEST_PDB))
     snapshot = upstream.Snapshot()
     snapshot.run(receptor)
+    # PyPI 0.1.2 lacks the upstream source fix for an unbound snapshot.
+    _initialize_unbound_contacts(snapshot)
 
     min_vertices = 20
     wrapper_topography = get_topography(
@@ -91,7 +94,10 @@ def test_alphaspace2_wrapper_matches_upstream_snapshot_on_reference_system(
     direct_output = tmp_path / 'upstream'
     direct_output.mkdir()
     snapshot.save(
-        output_dir=str(direct_output), receptor=receptor, chimera_scripts=False
+        output_dir=str(direct_output),
+        receptor=receptor,
+        chimera_scripts=False,
+        contact_only=False,
     )
     output_paths = sorted(path for path in direct_output.rglob('*') if path.is_file())
     assert output_paths

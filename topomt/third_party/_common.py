@@ -22,12 +22,23 @@ def prepare_wrapper_input_pdb(
         msm.select(full_molsys, selection=selection, syntax=syntax),
         dtype=int,
     )
+    if selected_atom_indices.size == 0:
+        raise ValueError('Cannot submit an empty atom selection to an external engine.')
 
     original_pdb = get_original_pdb_path(molecular_system)
-    if original_pdb is not None and selection == 'all' and structure_indices == 0:
-        input_pdb = tmpdir / original_pdb.name
-        shutil.copy2(original_pdb, input_pdb)
-        return input_pdb, selected_atom_indices
+    if (
+        original_pdb is not None
+        and isinstance(selection, str)
+        and selection == 'all'
+        and np.array_equal(np.atleast_1d(structure_indices), [0])
+    ):
+        # Preserve exact single-frame bytes, but select rather than copy a trajectory.
+        with original_pdb.open() as pdb_file:
+            model_count = sum(line.startswith('MODEL ') for line in pdb_file)
+        if model_count <= 1:
+            input_pdb = tmpdir / original_pdb.name
+            shutil.copy2(original_pdb, input_pdb)
+            return input_pdb, selected_atom_indices
 
     input_pdb = tmpdir / 'input.pdb'
     pdb_text = msm.convert(

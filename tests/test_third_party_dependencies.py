@@ -4,6 +4,7 @@ import importlib
 import subprocess
 import sys
 from importlib.machinery import ModuleSpec
+from pathlib import Path
 from types import SimpleNamespace
 
 import depdigest.core.decorator as dependency_decorator
@@ -13,6 +14,54 @@ import pytest
 from topomt._private.smonitor import LibraryNotFoundError
 
 PROVIDERS = ('pocketeer', 'alphaspace2', 'pycasta')
+
+
+def test_external_input_rejects_empty_selection_before_writing(monkeypatch, tmp_path):
+    from topomt.third_party import _common
+
+    def convert(*args, to_form, **kwargs):
+        assert to_form == 'molsysmt.MolSys'
+        return object()
+
+    monkeypatch.setattr(_common.msm, 'convert', convert)
+    monkeypatch.setattr(_common.msm, 'select', lambda *args, **kwargs: [])
+    with pytest.raises(ValueError, match='empty atom selection'):
+        _common.prepare_wrapper_input_pdb(None, tmpdir=tmp_path)
+    assert not list(tmp_path.iterdir())
+
+
+@pytest.mark.parametrize('frame_index', [0, 1])
+def test_external_input_selects_one_pdb_frame_without_optional_engines(
+    tmp_path, frame_index
+):
+    from topomt.third_party._common import prepare_wrapper_input_pdb
+
+    source = Path('topomt/data/fpocket4/sample/1GG0.pdb')
+    first = [
+        line for line in source.read_text().splitlines() if line.startswith('ATOM  ')
+    ][:4]
+    second = [f'{line[:30]}{float(line[30:38]) + 10:8.3f}{line[38:]}' for line in first]
+    trajectory = tmp_path / 'trajectory.pdb'
+    trajectory.write_text(
+        'MODEL        1\n' + '\n'.join(first) + '\nENDMDL\n'
+        'MODEL        2\n' + '\n'.join(second) + '\nENDMDL\nEND\n'
+    )
+    submitted_dir = tmp_path / 'submitted'
+    submitted_dir.mkdir()
+    submitted, indices = prepare_wrapper_input_pdb(
+        str(trajectory),
+        tmpdir=submitted_dir,
+        structure_indices=np.array([frame_index]),
+    )
+    atoms = [
+        line for line in submitted.read_text().splitlines() if line.startswith('ATOM  ')
+    ]
+    assert indices.tolist() == [0, 1, 2, 3]
+    assert len(atoms) == 4
+    expected = first if frame_index == 0 else second
+    assert [float(line[30:38]) for line in atoms] == pytest.approx(
+        [float(line[30:38]) for line in expected]
+    )
 
 
 @pytest.mark.parametrize('provider', PROVIDERS)

@@ -3,6 +3,7 @@ import inspect
 import json
 import tempfile
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 from depdigest import dep_digest
@@ -108,15 +109,66 @@ def _initialize_unbound_contacts(snapshot) -> bool:
 @dep_digest('alphaspace2', when={'upstream_root': None})
 @dep_digest('mdtraj')
 def get_topography(
-    molecular_system,
+    molecular_system: Any,
     *,
     selection: str = 'all',
     structure_indices: int | list[int] = 0,
     syntax: str = 'MolSysMT',
     upstream_root: str | Path | None = None,
     min_vertices: int = 20,
+    binder: Any | None = None,
+    binder_selection: str = 'all',
+    binder_structure_indices: int | list[int] = 0,
+    binder_syntax: str = 'MolSysMT',
     **kwargs,
 ) -> Topography:
+    """Run the original AlphaSpace2 engine on a receptor and optional binder.
+
+    Parameters
+    ----------
+    molecular_system : molecular system
+        Receptor in a form supported by MolSysMT.
+    selection : str, default='all'
+        Receptor atom selection in ``syntax``.
+    structure_indices : int or list of int, default=0
+        Receptor frame selection. The submitted structure must have one frame.
+    syntax : str, default='MolSysMT'
+        Receptor selection syntax.
+    upstream_root : str or Path, optional
+        Source checkout import root when the optional package is unavailable.
+    min_vertices : int, default=20
+        Minimum alpha-site count for returning a pocket. Original outputs retain
+        every pocket regardless of this filter.
+    binder : molecular system, optional
+        Ligand in the same coordinate frame as the receptor. No alignment is
+        performed. May be the same complex with a separate atom selection.
+    binder_selection : str, default='all'
+        Binder atom selection in ``binder_syntax``.
+    binder_structure_indices : int or list of int, default=0
+        Binder frame selection. The submitted structure must have one frame.
+    binder_syntax : str, default='MolSysMT'
+        Binder selection syntax.
+
+    Returns
+    -------
+    Topography
+        Original pocket measurements, contact state and portable input/output.
+        A binder activates contacts and occupancy, but not Vina receptor typing.
+
+    Raises
+    ------
+    ValueError
+        If an input has an empty selection, multiple frames, nonfinite
+        coordinates or an atom count incompatible with its selection.
+    TypeError
+        If unsupported engine options are supplied.
+    LibraryNotFoundError
+        If a required optional library is absent.
+
+    Examples
+    --------
+    >>> topography = get_topography('receptor.pdb', binder='ligand.pdb')
+    """
     if kwargs:
         unexpected = ', '.join(sorted(kwargs))
         raise TypeError(f'Unsupported wrapper kwargs for alphaspace2: {unexpected}')
@@ -137,20 +189,58 @@ def get_topography(
         _patch_alphaspace2_numpy_compatibility()
         _patch_alphaspace2_mdtraj_sasa(upstream)
         receptor = md.load(str(input_pdb))
-        snapshot = upstream.Snapshot()
-        snapshot.run(receptor)
-        unbound_contacts_initialized = _initialize_unbound_contacts(snapshot)
+        if receptor.n_frames != 1:
+            raise ValueError('AlphaSpace2 receptor must contain a single frame.')
+        if not np.all(np.isfinite(receptor.xyz)):
+            raise ValueError('AlphaSpace2 receptor coordinates must be finite.')
         if receptor.n_atoms != len(selected_atom_indices):
             raise ValueError(
                 'AlphaSpace2 receptor atom count differs from the selected molecular '
                 'system; lining atoms cannot be mapped safely.'
             )
 
+        binder_trajectory = None
+        binder_metadata = None
+        additional_inputs: dict[str, str | Path] = {}
+        if binder is not None:
+            binder_dir = tmpdir / 'binder'
+            binder_dir.mkdir()
+            binder_pdb, binder_atom_indices = prepare_wrapper_input_pdb(
+                binder,
+                tmpdir=binder_dir,
+                selection=binder_selection,
+                structure_indices=binder_structure_indices,
+                syntax=binder_syntax,
+            )
+            binder_trajectory = md.load(str(binder_pdb))
+            if binder_trajectory.n_frames != 1:
+                raise ValueError('AlphaSpace2 binder must contain a single frame.')
+            if not np.all(np.isfinite(binder_trajectory.xyz)):
+                raise ValueError('AlphaSpace2 binder coordinates must be finite.')
+            if binder_trajectory.n_atoms != len(binder_atom_indices):
+                raise ValueError(
+                    'AlphaSpace2 binder atom count differs from its selection.'
+                )
+            binder_input_name = f'binder/{binder_pdb.name}'
+            additional_inputs[binder_input_name] = binder_pdb
+            binder_metadata = {
+                'input_artifact': f'input/{binder_input_name}',
+                'selection': _snapshot_json_value(binder_selection),
+                'structure_indices': _snapshot_json_value(binder_structure_indices),
+                'syntax': binder_syntax,
+                'selected_atom_indices': binder_atom_indices.tolist(),
+            }
+
+        snapshot = upstream.Snapshot()
+        snapshot.run(receptor, binder=binder_trajectory)
+        unbound_contacts_initialized = _initialize_unbound_contacts(snapshot)
+
         output_dir = tmpdir / 'results'
         output_dir.mkdir()
         snapshot.save(
             output_dir=str(output_dir),
             receptor=receptor,
+            binder=binder_trajectory,
             chimera_scripts=False,
             contact_only=False,
         )
@@ -215,9 +305,12 @@ def get_topography(
             'library',
             input_pdb,
             output_dir,
+            additional_inputs=additional_inputs,
             metadata={
                 'snapshot_source_sha256': source_sha256,
                 'unbound_contacts_initialized': unbound_contacts_initialized,
+                'receptor_input_artifact': f'input/{input_pdb.name}',
+                'binder': binder_metadata,
                 'selection': selection,
                 'structure_indices': _snapshot_json_value(structure_indices),
                 'syntax': syntax,

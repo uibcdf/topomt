@@ -26,7 +26,7 @@ separate scientific check against an inflated engineering percentage.
 | fpocket total/polar/apolar SASA with source and issue links | 5 | Done | 3LKF fixture checks values and square-angstrom units |
 | Remaining fpocket field inventory and typed mapping | 10 | In progress | All 19 scalar info fields checked line by line in two fixtures and a local CLI run; sphere and contact-atom provenance retained; defining atoms, global PDB, historical build identity, and broader parity remain |
 | Pocketeer result fidelity and output record | 10 | In progress | Library result and mask captured for 6qrd and 2xjx; sphere IDs, SASA, defining atoms, residues and masks mapped; selection/chain, clean install and broader parity remain |
-| AlphaSpace2 result fidelity and output record | 10 | In progress | 1GG0 snapshot and upstream PDB exports retained; alpha/beta memberships, spaces, scores and contact state mapped; binder and advanced-score parity remain |
+| AlphaSpace2 result fidelity and output record | 10 | In progress | 1GG0 and installed 2pk4 references; bound contact/occupancy and export parity checked; advanced-score and broader input parity remain |
 | CASTp/CASTpFold result fidelity and output record | 10 | In progress | ZIP, directory, and individual-file artifacts retained; `N_mth` aggregation and parent links checked in six ZIPs; all 13 fixed numeric columns attributed, with 12 calculation issues; a native CASTpFold job-named ZIP passes field checks; optional typed output and live-server evidence pending |
 | pyCASTA result fidelity and output record | 10 | In progress | Four bounded structures compare per-pocket values; full returned dict and isolated native files retained; tetrahedron-array identity checked; atom-order, optional validation and broader parity remain |
 | Independent TopoMT calculations and comparisons | 15 | Not started | Definition-specific issues closed by matching-input numerical tests |
@@ -139,13 +139,53 @@ clean installation on every platform, establish live-server availability,
 or replace the six-job CI rerun. Verified engineering progress remains 20/100;
 native pyCASTA issue #53 remains separate.
 
+## AlphaSpace2 reference-ligand extension: 2026-09-30
+
+The original-library adapter now passes an optional `binder` molecular system to
+`Snapshot.run()` and `Snapshot.save()`. This is a known reference position for
+geometric contacts and occupancy, not docking, affinity prediction, or
+pharmacophore generation. Independent receptor/binder selections and frame
+indices are retained alongside both exact submitted files. `ProviderRun.capture`
+supports additional named inputs without changing the bundle schema.
+
+Installed AlphaSpace2 0.1.2 comparisons use the public bundled 2pk4 ACA ligand.
+They cover separate files, receptor/ligand selections from one complex, selected
+first/second ligand frames, occupied volumes/fractions, alpha/beta/pocket contact
+arrays, mapped lining atoms, every upstream export and bundle recovery. A frame
+selection regression also runs without optional engines: requesting frame zero
+from a multi-model PDB must select it, while single-frame PDB bytes remain exact.
+Empty selections and submission of multiple selected frames are rejected.
+The unbound 1GG0 comparator applies the documented PyPI contact initialization
+and exports all pockets explicitly, matching the adapter's compatibility route.
+
+The final focused installed-engine, input, provider-record and public-API
+selection passed 42 tests with eight upstream zero-denominator warnings. The two
+portable frame regressions and the empty-selection regression also passed in the
+shared environment. The earlier source/native AlphaSpace2,
+registry, import and reporting selection passed 62 tests. Ruff lint/format,
+seven-file scoped mypy, report indexes and Sphinx validation are checked before
+publication. Sphinx retains eight existing heading/toctree warnings.
+
+The preceding commit's [six-job CI run](https://github.com/uibcdf/topomt/actions/runs/36700609235)
+finished with failure in all test jobs. `gh-run-receptor` identifies missing
+fpocket in its compact report. Narrow inspection of the Ubuntu/Python 3.11 log
+also shows the known viewer failures, native fpocket/MolSysMT index errors,
+DFND raw-characterization hash and empty-selection failures, and a native CASTp
+array-shape failure (716 passed, 88 failed, 69 skipped, five xfailed for that job).
+These remote results are distinct from local passing selections and are not a
+green matrix gate. They require a separate CI review; the addon remains deferred.
+
+Advanced receptor typing/Vina scores and broader input/version parity remain
+pending. Original occupancy measurements keep `external_only` attribution and
+issues #31–#34 stay open. Engineering progress remains 20/100.
+
 ## Provider coverage at this checkpoint
 
 | Provider | Original output retained in `Topography` | Typed attributed measurements | Scientific parity |
 |---|---|---|---|
 | fpocket CLI and persisted files | Yes, input and all output files | All 19 scalar info fields, sphere ID/type/charge, ordered contact serials and positional atom mapping; four defining atoms are absent from PQR output | Reported scalars match original info lines in two fixtures and a local CLI run; native-calculation parity pending |
 | Pocketeer library | Yes, submitted PDB, official JSON and omitted-mask supplement | Volume, score, centroid, residues, mask, sphere IDs/geometry/mean SASA/four defining atoms | 6qrd and non-default 2xjx against local source; broader parity pending |
-| AlphaSpace2 library | Yes, submitted PDB, all upstream exported PDBs and full snapshot supplement | Pocket, alpha and beta geometry, space, nonpolar contribution, scores and contact/occupancy descriptors | 1GG0 direct snapshot and exported-file parity; binder/advanced-score parity pending |
+| AlphaSpace2 library | Yes, submitted receptor and optional binder PDBs, all upstream exported PDBs and full snapshot supplement | Pocket, alpha and beta geometry, space, nonpolar contribution, scores and contact/occupancy descriptors | 1GG0 unbound and installed 2pk4 bound parity; separate-input and same-complex selections checked; advanced-score and broader input parity pending |
 | CASTp/CASTpFold files and mocked server | Yes, exact ZIP, submitted PDB where available, all extracted files, and individually supplied files | All 13 fixed numeric `.pocInfo`/`.mouthInfo` columns attributed; physical quantities canonical in nm units and counts integral | Six CASTp 3.0 ZIPs checked for reported counts and mouth links; 1tcd fixed columns and a job-named CASTpFold 1psn ZIP checked numerically; individual-file and info-only routes checked; broader numeric and live-server parity pending |
 | pyCASTA library | Yes, submitted PDB, returned-result snapshot, alpha NPZ, native pocket PDB/CSV and logs for default route | Score, volume, depth, mouth area/perimeter, representative point, tetrahedron IDs and validation method with PyUnitWizard geometry | Four bounded structures compared per pocket; atom-order and validation edge cases pending |
 
@@ -178,8 +218,10 @@ Issues [#31](https://github.com/uibcdf/topomt/issues/31),
 [#32](https://github.com/uibcdf/topomt/issues/32),
 [#33](https://github.com/uibcdf/topomt/issues/33), and
 [#34](https://github.com/uibcdf/topomt/issues/34) track independent occupied
-volume and occupancy calculations. The 1GG0 reference passes; binder and
-advanced-score routes remain to validate before the 10-point milestone counts.
+volume and occupancy calculations. The 1GG0 reference passes; the installed 2pk4
+ACA reference now checks bound contacts, occupancy, selected atom mapping, exact
+exports and bundle recovery. Advanced-score and broader input routes remain
+before the 10-point milestone counts.
 
 The [pyCASTA inventory](pycasta/external_output_inventory.md) now records
 the library result and native output from an isolated run. Score correctly
