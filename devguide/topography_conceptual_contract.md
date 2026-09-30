@@ -69,6 +69,11 @@ triangulation, region decomposition, or original record. An atom-only export
 declares spatial reconstruction unavailable; it must not receive a fabricated
 exact-region identity or geometry-dependent capability.
 
+Exact identification of tetrahedral support does not imply an exact physical
+volume. A volume definition also specifies resident/connectors, atomic exclusion,
+radii/probe convention, and numerical accuracy. Recovery and measurement
+capabilities remain distinct.
+
 Keep these roles separate:
 
 - **Structural support:** the primitives that define the region or boundary.
@@ -177,6 +182,11 @@ boundaries, or another supported realization. Several realizations can belong
 to one association. Whole-component multi-participant lining is useful evidence,
 but is not sufficient to assert a crisp localized interface patch.
 
+Participant registration alone does not establish an interface. Distinguish a
+user-declared association from an inferred association with criterion-satisfying
+evidence; neither establishes a localized realization by itself. Bank-based and
+molecular criteria retain separate definitions, thresholds and outcomes.
+
 Keep two compatible catalog uses:
 
 - Interface status is an orthogonal descriptor of a Pocket, Void, Channel, or
@@ -208,6 +218,10 @@ geometry(A union B, query) -> assembly features G
 F and G need not have equal support, identity, or classification. A comparison
 can relate them with evidence. Moving B changes a reference evaluation; it
 changes the geometry substrate when B is included in the assembly input.
+
+A completed evaluation for pose B0 remains valid for that recorded pose. Moving
+to B1 prevents reuse as a current-pose result and requires a new evaluation or
+an explicit not-computed state; it does not rewrite historical values or inputs.
 
 An evaluation records target feature/support, participant(s), referenced input
 frames and coordinate alignment, definition/version, algorithm, parameters,

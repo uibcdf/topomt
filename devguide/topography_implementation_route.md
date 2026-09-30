@@ -31,7 +31,7 @@ kernel/catalog refactor or all lineage code is absent is not current evidence.
 | G0: conceptual decision | [#59](https://github.com/uibcdf/topomt/issues/59) | Repository/issue review | Normative contract, adversarial scenarios, discoverable documentation and checked reporting lifecycle. |
 | G1: analysis context and spatial support | [#60](https://github.com/uibcdf/topomt/issues/60) | G0 | Typed/schema decision, native and incomplete-provider examples, identity/invalidation and compatibility tests. |
 | G2: participants and typed relations | [#61](https://github.com/uibcdf/topomt/issues/61) | G1 | Molecular/bank distinction, endpoint validation, overlapping incidence, honest interface association and atomic lifecycle tests. |
-| G3: contextual evaluations | [#62](https://github.com/uibcdf/topomt/issues/62) | G1, G2 | Definition/value-state schema and a bounded validated calculation slice with pose/support/provenance tests. |
+| G3: contextual evaluations | [#62](https://github.com/uibcdf/topomt/issues/62) | G1, G2 | Evaluation schema, atomic-distance contacts and geometric occupied-volume/fraction calculations with independent accuracy and historical-pose tests. |
 | G4: provider admission and capabilities | [#63](https://github.com/uibcdf/topomt/issues/63) | G1; G2/G3 for relevant capabilities | Route-specific declarations, reported/inferred classification tests and explicit incomplete-support behavior. |
 
 G4's inventory and admission design can proceed alongside G2/G3. Runtime use of
@@ -51,6 +51,18 @@ support reference and availability. Resolve snapshot/revision ownership and
 local-to-source atom maps first. Keep implementation-specific primitives under
 their engine namespace and expose neutral support access.
 
+The snapshot decision must state what input evidence is retained or recoverable
+and prevent a later live-input mutation from retargeting completed findings.
+Define the `molecular_system` setter's behavior and the migration of direct
+`features` dictionary mutation; preserving read access does not exempt writes
+from registry validation. Test selected atom maps in nontrivial source order.
+
+Distinguish geometry-input/mesh identity, probe-query identity and classification
+derivation. Probe changes may reuse a compatible mesh; reporting changes and
+catalog thresholds must not rewrite structural support. G1 owns the shared
+minimum support/availability vocabulary used by G4, avoiding parallel schemas.
+Exact tetrahedron recovery alone does not grant a physical-volume capability.
+
 Start with one DFND concavity and its Mouth, plus an actual provider fixture
 whose spatial geometry is incomplete. Test equal lining with different support,
 probe/input changes, reporting-independent geometry identity, and the behavior
@@ -69,17 +81,54 @@ and separate molecular/geometric counts. A relation can carry an unavailable or
 provisional realization; it cannot claim canonical localized geometry from
 whole-component membership alone.
 
+Start with typed `part_of` containment and the current boundary/point links,
+plus interface associations referencing at least two participants. Document
+endpoint roles, direction, arity and evidence for these kinds before adding
+general adjacency or overlap relations. Keep current connector restrictions;
+validated 2D containment uses the new relation path. Declare one canonical owner
+and derive the compatible parent/child views from it.
+
+Explicit declarations and inferred associations carry different evidence states.
+Test that participant registration without criterion-satisfying evidence does
+not infer an interface. Preserve separate bank-based and molecular criteria,
+including thresholds and negative outcomes; user labels cannot overwrite the
+native bank descriptor. Shared atoms and overlapping selections remain explicit.
+
 G2 does not close research-grade bare-interface localization or chamber/mixed
 feature promotion. Before implementing either, open its own bounded scientific
 issue with region definition, fixtures and acceptance tolerances. Its eventual
 implementation must satisfy the conceptual contract and native catalog maturity
 policy. Experimental localization does not become canonical through registration.
 
-G3 begins with one declared support and contact/evaluation definition. Validate
-its observable against independent expected evidence, not only a replay of the
-implementation. Any geometric-volume slice needs a reference-region and volume
-model, union handling, and an accuracy contract. A provider-formula reproduction
-keeps its method identity and its original/independent value distinction.
+G3 closes only after its evaluation schema and both bounded calculations work:
+
+1. Atomic-distance contacts between a feature's explicitly declared delimiting
+   atoms and participant atoms, using an explicit length cutoff. Preserve pair
+   identities and deduplicate union totals under shared participant membership.
+   This quantity does not imply buried surface area or site-volume occupancy.
+2. Geometric occupied volume and fraction for one DFND resident region. Define
+   `T` as the union of resident tetrahedra, `A` as the union of all reference-input
+   vdW balls reaching T, and `Omega = T minus A`. For participant volume
+   `B = union(participant_vdw_balls)`, compute `vol(Omega intersect B)` and divide
+   by `vol(Omega)` only when that denominator is positive. Record both radius
+   models. The balls are not probe-expanded; this is empty-space occupancy in a
+   query-selected region, not probe-center accessibility or contact-weighted
+   AlphaSpace2 occupancy. Additional region models remain separate capabilities.
+
+Both calculations initially support a single nonperiodic frame with recorded
+alignment. Before implementing the volume estimator, document its method,
+absolute/relative acceptance tolerances and uncertainty or convergence evidence.
+Use independent analytic fixtures and test zero/partial/full occupancy and
+overlapping participant unions. Numerical estimates are not relabeled exact.
+A provider-formula reproduction keeps its method identity and original versus
+independent values; it does not substitute for this geometric-volume gate.
+
+A completed evaluation records its input pose. Moving B0 to B1 prevents reuse
+for B1, preserves the historical B0 evaluation and unchanged reference geometry,
+and requires a new evaluation or an explicit not-computed state. Moving an atom
+included in the assembly's geometry input instead requires a new geometry
+context. Schema-only storage, contacts alone, or placeholder occupancy values
+cannot close G3.
 
 The adversarial matrix in the conceptual contract is the shared acceptance
 inventory. Select bounded cases per gate; do not claim all cases are already
