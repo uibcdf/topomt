@@ -65,3 +65,52 @@ def test_provider_run_rejects_missing_artifact(tmp_path):
 
     with pytest.raises(ValueError, match='missing'):
         ProviderRun.load(incomplete)
+
+
+def test_provider_run_preserves_additional_inputs_and_hashes_them(tmp_path):
+    receptor = tmp_path / 'input.pdb'
+    binder = tmp_path / 'binder.pdb'
+    output = tmp_path / 'output'
+    output.mkdir()
+    receptor.write_bytes(b'receptor')
+    binder.write_bytes(b'ligand')
+    run = ProviderRun.capture(
+        'alphaspace2',
+        'library',
+        receptor,
+        output,
+        additional_inputs={'binder/input.pdb': binder},
+    )
+    bundle = tmp_path / 'bound.zip'
+    run.save(bundle)
+    binder.write_bytes(b'different ligand')
+    changed = ProviderRun.capture(
+        'alphaspace2',
+        'library',
+        receptor,
+        output,
+        additional_inputs={'binder/input.pdb': binder},
+    )
+    receptor.unlink()
+    binder.unlink()
+    restored = ProviderRun.load(bundle)
+    assert restored == run
+    assert restored.get_artifact('input/input.pdb') == b'receptor'
+    assert restored.get_artifact('input/binder/input.pdb') == b'ligand'
+    assert changed.run_id != run.run_id
+
+
+@pytest.mark.parametrize('name', ['../ligand.pdb', '/ligand.pdb', 'input.pdb'])
+def test_provider_run_rejects_unsafe_or_duplicate_additional_inputs(tmp_path, name):
+    receptor = tmp_path / 'input.pdb'
+    output = tmp_path / 'output'
+    output.mkdir()
+    receptor.write_bytes(b'receptor')
+    with pytest.raises(ValueError, match='Unsafe|Duplicate'):
+        ProviderRun.capture(
+            'alphaspace2',
+            'library',
+            receptor,
+            output,
+            additional_inputs={name: receptor},
+        )

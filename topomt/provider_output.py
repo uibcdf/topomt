@@ -52,6 +52,8 @@ class ProviderRun:
         input_file: str | Path,
         output_dir: str | Path,
         metadata: dict[str, Any] | None = None,
+        *,
+        additional_inputs: dict[str, str | Path] | None = None,
     ) -> 'ProviderRun':
         """Read original files into memory before their directories disappear.
 
@@ -67,6 +69,9 @@ class ProviderRun:
             Directory containing the provider's original output files.
         metadata : dict, optional
             JSON-compatible run settings and atom mapping.
+        additional_inputs : dict, optional
+            Additional submitted files keyed by their relative names under
+            ``input/``, for example ``{'binder/ligand.pdb': ligand_path}``.
 
         Returns
         -------
@@ -76,11 +81,20 @@ class ProviderRun:
         Raises
         ------
         ValueError
-            If an output entry is a symbolic link or has an unsafe name.
+            If an output entry is a symbolic link, or an artifact name is unsafe
+            or duplicates the primary input.
         """
         input_path = Path(input_file)
         output_path = Path(output_dir)
         artifacts = [(f'input/{input_path.name}', input_path.read_bytes())]
+        for relative_name, additional_path in (additional_inputs or {}).items():
+            name = f'input/{relative_name}'
+            if not relative_name or any(not part for part in relative_name.split('/')):
+                raise ValueError(f'Unsafe provider artifact name: {name!r}')
+            _validate_artifact_name(name)
+            if name == artifacts[0][0]:
+                raise ValueError(f'Duplicate provider input artifact: {name}')
+            artifacts.append((name, Path(additional_path).read_bytes()))
         for path in sorted(output_path.rglob('*')):
             if path.is_symlink():
                 raise ValueError(f'Symbolic links cannot be captured: {path}')
