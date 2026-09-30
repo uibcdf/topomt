@@ -111,3 +111,10 @@ MolSysMT source pin remain unchanged. The implementation direct push uses
 [skip ci] under the user's exception; explicit dispatches verify governance,
 Ruff/policy and the complete lane once, avoiding repeated scientific matrices
 for each development step.
+
+A concurrent component development advanced main to c5b6588 before publication.
+The rejected first push changed no remote files; the unpublished governance
+commit was rebased over those provider/provenance/AlphaSpace2 changes. Its delta
+still contains only CI routing, administrative guards and this report; external
+component implementation is preserved. Governance dispatch evidence must name
+the rebased source, not the older head used by the rejected dispatch attempt.
