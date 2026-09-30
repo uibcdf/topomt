@@ -14,6 +14,15 @@ and the next engineering steps.
   High-level design of `Topography`, `Feature` objects, detection engines, and
   the expected internal contracts.
 
+- [topography_conceptual_contract.md](topography_conceptual_contract.md)
+  Normative public semantic direction grounded in DFND: spatial support,
+  identity, classification, molecular participants, interfaces, contextual
+  evaluations, provider admission and provenance. Runtime adoption is pending.
+
+- [topography_implementation_route.md](topography_implementation_route.md)
+  Current implementation evidence, bounded issue-owned adoption gates and
+  compatibility/scientific validation requirements.
+
 - [roadmap.md](roadmap.md)
   Working roadmap for the current development cycle, including the outcome of
   the original phase-1 integration effort.
@@ -186,9 +195,15 @@ repository's own issue tracker and developer-guide lifecycle.
 
 ## DFND
 
-The DFND material is grouped under the dedicated `DFND/` subdirectory. The most useful entry point is `Overview.md`; the canonical abstract contract is `abstract_contract.md`:
+The DFND material is grouped under `DFND/`. Start with `Overview.md` and the
+kernel/catalog decision; the public conceptual contract above defines new
+Topography work. The abstract/API documents include earlier implementation
+stages and must be read with their later checkpoints and the current catalog:
 
 - [DFND/Overview.md](DFND/Overview.md)
+- [DFND/taxonomy_architecture_decision.md](DFND/taxonomy_architecture_decision.md)
+- [DFND/feature_catalog.md](DFND/feature_catalog.md)
+- [DFND/checkpoint_pause_2026_06_25.md](DFND/checkpoint_pause_2026_06_25.md)
 - [DFND/checkpoint.md](DFND/checkpoint.md)
 - [DFND/implementation_status.md](DFND/implementation_status.md)
 - [DFND/checkpoint_identity_provenance_registries_2026_06_06.md](DFND/checkpoint_identity_provenance_registries_2026_06_06.md)
@@ -241,8 +256,10 @@ DFND is the native TopoMT method direction and is now an active
 implementation-hardening track. It is not production-ready yet, but it has
 executable code, deterministic static identity and contextual provenance, atomic
 feature/component registries, `Topography` integration, real-system
-smoke/monotonicity checks, and wet/dry motif records. Dynamic lineage, canonical
-traversability hardening, reporting policy, and biological validation remain.
+smoke/monotonicity checks, and wet/dry motif records. Public dynamic-collection
+policy, reporting policy, provisional refinements and biological validation
+remain. Pairwise matching and track/event helpers already exist; their presence
+does not close those public/scientific gates.
 The main `devguide/` should describe the whole project, not only DFND.
 
 When DFND is mentioned from the main developer guide, it should normally be in
@@ -250,4 +267,5 @@ one of these roles:
 
 - as the native TopoMT method direction;
 - as an implementation-hardening track;
-- as a source of richer domain and feature semantics for voids, surface concavities, pockets, channels, external links, derived mouths, dry networks, motifs, and dynamics.
+- as the semantic reference for grounded regions, classification, accessibility,
+  boundaries, interfaces and feature promotion.

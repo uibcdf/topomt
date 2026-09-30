@@ -1,7 +1,7 @@
 # DFND Taxonomy & Kernel/Catalog Architecture — Decision Record
 
-Status: **decided (design)**; building-block measurements implemented, the
-architectural re-grounding pending (§10). Supersedes the implicit
+Status: **decided; kernel/catalog split implemented**, with public-contract
+adoption and scientific refinement gates remaining. Supersedes the implicit
 "families as kernel types" model. Operational counterparts:
 [`feature_definitions.md`](feature_definitions.md),
 [`metrics_contract.md`](metrics_contract.md),
@@ -112,7 +112,7 @@ NON-resident (no residence → occlusion undefined):
 RESIDENT:
   n_connected_walls == 0  → percolating
   n_mouths == 0           → void
-  n_mouths == 1           → pocket (occlusion>1) | groove (occlusion≤1)
+  n_mouths == 1           → pocket (occlusion>1) | open_concavity (occlusion≤1)
   n_mouths ≥ 2            → channel
 ```
 
@@ -123,7 +123,7 @@ RESIDENT:
   `(≥2 × ¬resident)` cell is empirically infeasible (proven), so
   **`nonresident_passage` is retired** as a curated family; `classify` stays total
   by composition without maintaining a vacuous family.
-- **`occlusion` is name-determining only for 1-mouth** (pocket vs groove are
+- **`occlusion` is name-determining only for 1-mouth** (pocket vs open concavity are
   different *kinds* — an enclosable binding site vs an open surface feature) and a
   **modifier for channels** (an occluded/beaded channel is still a channel). The
   asymmetry is **principled by the criterion**: enclosability crosses a kind-boundary
@@ -360,6 +360,13 @@ optional cleanup.
 - **real-system validation** (§12).
 
 ## 11. Reconciliation debt
+
+The 2026-09-30 [public conceptual contract](../topography_conceptual_contract.md)
+and [adoption route](../topography_implementation_route.md) reconcile the main
+architecture entry point and clarify public promotion, support and context.
+Open concavities refine to groove/cleft only with the catalog's additional
+measurements. This does not close the remaining native documentation or
+scientific-validation debt listed below.
 
 The decision contradicts docs/code that still encode the old model. Reconcile by
 **reframing (not deleting)** — the old definitions survive as the derived

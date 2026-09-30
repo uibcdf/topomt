@@ -219,3 +219,17 @@ Implementation status on 2026-06-06:
 - `track_id` and `lineage` are not implemented.
 
 Dynamic tracking must continue test-first.
+
+### Later implementation clarification (2026-09-30)
+
+The implementation-status list above records 2026-06-06. Pairwise
+`match_results` and multi-frame `assign_tracks` now exist in
+`topomt/dfnd/lineage.py`, with focused tests in `tests/test_dfnd_lineage.py`.
+Public collection ownership, compatible-context validation, correspondence
+confidence and scientific tracking policy remain separate gates. Existence of
+these helpers does not make support keys temporal identities or establish
+universal cross-system atom correspondence.
+
+The [Topography conceptual contract](../topography_conceptual_contract.md)
+distinguishes registry, source-occurrence, structural-support and correspondence
+identity. Catalog labels are excluded from DFND contextual component keys.

@@ -1,5 +1,11 @@
 # TopoMT Architecture
 
+Public semantic direction: [Topography conceptual contract](topography_conceptual_contract.md)
+(accepted design, 2026-09-30). Runtime adoption:
+[implementation route](topography_implementation_route.md), issues #60–#63.
+The responsibilities below distinguish implemented foundations from that target;
+they do not announce new public classes or signatures.
+
 ## Purpose
 
 TopoMT provides a common representation for molecular surface topography.
@@ -23,6 +29,11 @@ Its responsibilities are:
 - maintain parent/child relations between features;
 - preserve the link to the input molecular system.
 
+The target additionally makes analysis context, spatial support, participants,
+typed relations, evaluations and provenance explicit. These contracts are
+pending runtime adoption. A result derives from identified inputs; changing a
+live system reference must not silently retarget an already computed result.
+
 ### `Feature`
 
 Features are the semantic building blocks of the model.
@@ -33,21 +44,19 @@ The base hierarchy is:
 - `Feature1D`
 - `Feature2D`
 
-`TopographyFeature` should be read as the broad semantic feature umbrella.
-The current and planned topography-specific families include:
-
-- `ConcavityFeature`: `Void`, `SurfaceConcavity`, `Pocket`, `Channel`, and
-  later morphology-specific subtypes such as `BranchedChannel`;
-- `ConvexityFeature`: future dry-derived features such as `Protrusion`,
-  `Ridge`, or `Core`;
-- `BoundaryFeature`: boundary descriptors such as `Mouth`, `Rim`, or `Neck`;
-- `MixedFeature`: transition or interface features such as `Wall`,
-  `Separator`, `LiningRegion`, or `Interface`.
+`TopographyFeature` denotes the broad semantic umbrella, not an implemented
+class. Current registered classes include Pocket, Void, Channel, OpenConcavity,
+Groove, Cleft, Mouth, BranchedChannel and Percolating. Native naming is derived
+from grounded observations through the [DFND catalog](DFND/feature_catalog.md);
+some refinements remain provisional. Convex and mixed-feature promotion remain
+future gates. Do not populate a speculative class hierarchy or use Python class
+identity as geometric or temporal identity.
 
 Not every raw engine object should become a public feature. DFND, for example,
-uses raw objects such as `ConcavityDomain`, `ExternalLink`, `DryComponent`,
-`DryInterface`, `DomainMotif`, and `DryMotif` before building semantic
-Topography features.
+uses components, external links, dry interfaces and motifs before building
+semantic Topography features. The retired intermediate `domain` rung is not
+part of the model. Promotion can yield a feature subgraph, but subregion
+promotion must establish support and public invariants first.
 
 Each feature is expected to carry, when available:
 
@@ -70,6 +79,10 @@ Engine-specific metadata may also be attached, such as:
 - `score`
 - `mouth_area`
 - alpha-sphere or probe-sphere data
+
+These attribute names do not establish equivalent measures across engines.
+Declare support, definition, units, capabilities and source occurrence. Preserve
+provider-reported classification separately from a justified TopoMT inference.
 
 ## Detection engines
 
@@ -100,17 +113,12 @@ external integrations.
 
 This package is the current home of TopoMT's own native method line.
 
-That means:
-
-- native methods should be runnable without requiring the original upstream package or
-  binary at runtime;
-- native methods may be inspired by, validated against, or benchmarked against the
-  original engine;
-- but the production implementation should belong to TopoMT itself.
-- a faithful reimplementation does not mean copying upstream code line by line;
-- instead, TopoMT should reproduce the algorithmic semantics while using its
-  own code, data model, and ecosystem tools such as `molsysmt`,
-  `pyunitwizard`, and the common feature contracts.
+DFND implements TopoMT's native scientific semantics and does not require a
+third-party pocket engine at runtime. It uses ecosystem molecular/unit tools
+and shared geometry while preserving its own validation and numerical policy.
+Benchmarking against another method does not redefine DFND as that method.
+Faithful local reproductions of third-party algorithms belong to the provider
+namespace below, retaining their original method identity and parity gates.
 
 ### `topomt/third_party/`
 
@@ -139,11 +147,11 @@ The intended end state is:
 
 ## DFND within the architecture
 
-DFND should be understood as the native TopoMT method track for pocket and topography detection, while still not being the definition of the whole library.
-
-Its role is to explore a richer Delaunay-flow interpretation of molecular
-topography, with more explicit network semantics for pockets, voids,
-channels, and dry components.
+DFND is TopoMT's native method and semantic reference for public topography.
+Its implemented kernel/catalog split separates support and observables from
+derived names; the mesh/query split identifies invalidation and context.
+Topography expresses those scientific distinctions without requiring users or
+third-party adapters to implement a DFND graph.
 
 Relevant design references are:
 
@@ -159,29 +167,31 @@ Relevant design references are:
 - [DFND/implementation_status.md](DFND/implementation_status.md)
 - [DFND/Implementation_Route.md](DFND/Implementation_Route.md)
 
-For the time being, DFND is best treated as:
-
-- a documented experimental subsystem;
-- a source of conceptual guidance for future feature semantics;
-- an active native-method direction whose implementation still needs hardening.
+DFND already contributes public concavity and Mouth features, accessibility
+and interface descriptors, contextual identities and native records. Remaining
+scientific validation, provisional morphology thresholds, dry/mixed promotion
+and public-contract adoption retain their own gates. Historical green
+checkpoints are not current product-matrix evidence.
 
 ## Internal geometric keystone
 
-The internal geometric keystone should be `DelaunayMesh`.
+`DelaunayMesh` is the internal geometric keystone of DFND and reusable
+Delaunay-based local implementations. It is not a required public support
+representation for every external result.
 
 The intended architectural reading is:
 
 - `DelaunayMesh`: primary persistent geometric representation;
 - `DelaunayFlowNetwork`: flow-based interpretation of that mesh for DFND-like
   queries;
-- `ConcavityDomain`: DFND decomposition object built from finite wet DFN components;
+- `WetComponent`: native decomposition together with its spatial representation;
 - `DryComponent`: dry-graph decomposition object built from probe-excluded
   tetrahedra connected through non-permeable faces;
 - `ExternalLink` and `DryInterface`: raw boundary/interface records used before
   semantic feature construction;
-- feature objects (`Void`, `SurfaceConcavity`, `Pocket`, `Channel`,
-  `Protrusion`, `Rim`, `Wall`, etc.): semantic outputs built from domains, dry
-  motifs, boundary descriptors, and interface records.
+- feature objects: semantic outputs built from components and validated
+  substructures, boundaries, or interface realizations. Planned names are not
+  evidence that those promotions have been implemented.
 
 In this model, alpha-spheres remain important but are no longer a keystone
 class. They should be understood as a derived view of `DelaunayMesh`, useful
@@ -208,8 +218,10 @@ The practical internal contract for native engine methods should be:
 1. Work on a well-defined atom selection.
 2. Filter atoms explicitly when needed.
 3. Keep a reliable mapping between local indices and original atom indices.
-4. Return or build `Pocket`-like features with canonical atom ownership.
-5. Store geometric metadata without breaking the common feature API.
+4. Promote justified features with recoverable support and declared
+   delimiting/accessibility atom roles; preserve overlapping incidence.
+5. Record classification evidence, context, capabilities and provenance while
+   preserving the established feature API.
 
 This local-to-global atom-index mapping is critical for both analysis and
 future visualization.
@@ -246,17 +258,13 @@ Optional scientific tools must not leak through top-level imports.
 
 ## Architectural direction
 
-The short-term architectural direction is:
+Adopt the [conceptual contract](topography_conceptual_contract.md) through its
+[bounded gates](topography_implementation_route.md): analysis context/support,
+participants/relations, contextual evaluations, and provider admission.
+Interfaces retain both participant association and spatial realization;
+reference-region characterization differs from occupied-assembly geometry.
 
-1. stabilize `Topography` and feature invariants;
-2. normalize engine outputs;
-3. strengthen tests around those normalized outputs;
-4. expose a viewer-friendly representation for pockets and related features;
-5. build the MolSysViewer addon on top of that stable surface.
-
-Longer term, once the non-DFND path is stable, DFND may enrich the architecture
-with:
-
-- stronger channel and void semantics;
-- dry/wet network decomposition;
-- richer topological relations between features.
+Third-party preservation/parity remains under its existing plan, followed by
+the separate native provider-method review. Neither is a prerequisite to
+stating DFND-grounded public semantics. Runtime changes need test-first,
+compatibility-aware slices. Viewer/addon work can remain deferred.

@@ -1,5 +1,14 @@
 # DFND API Contract v1
 
+**Scope clarification (2026-09-30).** The promotion/metric tables below include
+the earlier v1 compatibility stage; they are not an exhaustive description of
+today's bridge. Later [catalog decisions](taxonomy_architecture_decision.md),
+[feature catalog](feature_catalog.md) and implemented checkpoints describe its
+extensions. New public work follows the
+[Topography conceptual contract](../topography_conceptual_contract.md), with
+[runtime adoption gates](../topography_implementation_route.md). This notice
+does not change current function signatures or claim release readiness.
+
 This document defines the current public API contract for DFND while the method
 is still being hardened.
 

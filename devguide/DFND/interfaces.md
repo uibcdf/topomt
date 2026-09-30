@@ -1,5 +1,13 @@
 # DFND Interfaces
 
+**2026-09-30 public-model clarification.** This analysis describes native
+bank-based geometry and its molecular-label alternative. The
+[Topography conceptual contract](../topography_conceptual_contract.md) separates
+molecular participants from dry banks, interface association from spatial
+realization, and interface status from mixed-feature promotion. Neither a wet
+region nor multiple dry banks is a universal requirement for a molecular
+interface. Runtime adoption remains under its own gates.
+
 Design note recorded on 2026-05-22. It defines what an *interface* is in DFND,
 how it relates to the wet concavity families and the dry network, and how to
 extract it from what `get_topography` already returns. It is grounded in the

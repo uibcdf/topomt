@@ -1,5 +1,13 @@
 # DFND Object Model and Terminology (authoritative)
 
+**2026-09-30 public-model clarification.** The
+[Topography conceptual contract](../topography_conceptual_contract.md) governs
+new public support, participant, relation, evaluation and provider-admission
+work. This document owns native component/motif terminology. Later
+[kernel/catalog decisions](taxonomy_architecture_decision.md) and the
+[current catalog](feature_catalog.md) supersede earlier family/promotion
+snapshots below. Pending public types are not already implemented.
+
 Recorded on 2026-05-23. This is the **authoritative** reference for how DFND
 output is organized and for the words we use. Where any other DFND document or
 code field disagrees with this one, this document is the target and the other is
@@ -66,8 +74,10 @@ atoms, volume, center, footprint           method-agnostic
 
 1. **The word `feature` is NEVER used inside `dfnd`.** Inside dfnd there are
    components and motifs — never features.
-2. **The word `motif` is NEVER used at the `Topography` level.** A motif is a
-   dfnd object; when it surfaces publicly it has become a feature.
+2. **The word `motif` is not a public feature concept.** A motif is a native
+   object; validated public promotion produces a feature. The current bridge's
+   legacy `feature.motifs` payload does not establish public subregion support
+   or promotion invariants; migration belongs to the public-contract gates.
 
 ## 3. motif — sub-structure of a component
 
@@ -131,9 +141,9 @@ there is one mental model for both levels.
   `dry_bank` (dry). `percolating` is the wall-less resident override
   (`n_wall_faces == 0`); it promotes to a `Percolating` feature with `shape_type`
   `neutral` and gets no `Mouth` child.
-- **wet and dry are unified under `component`.** `side` is **derived from
-  `family`** via a `_SIDE_BY_FAMILY` registry, mirroring how `BaseFeature` derives
-  `shape_type`/`dimensionality` from `feature_type`.
+- **wet and dry are unified under `component`.** `side` is intrinsic to the
+  WetComponent/DryComponent subclass. Topology family is a derived view over
+  grounded observations, following the later kernel/catalog decision.
 - The `Components` registry is atomic: component IDs are unique and immutable
   while registered; re-adding the same object is idempotent; duplicate objects
   are rejected; and explicit `replace`, `rename`, and `remove` operations keep
@@ -145,7 +155,7 @@ there is one mental model for both levels.
 **`Component`** (base, ≡ `BaseFeature`):
 - `component_id` (local rank label), `component_index` (local collection
   position), `node_count_rank`, deprecated compatibility alias `size_rank`,
-  `family`, `side` (derived), `flags`, `_dfn` back-ref;
+  `family` (derived), `side` (intrinsic), `flags`, `_dfn` back-ref;
 - exact/contextual identity: `support_key`, `component_key`;
 - internal implementation label: `graph_label`;
 - **graph facet**: `node_indices` (tetrahedra), `boundary_face_ids`;
@@ -164,8 +174,8 @@ The fields above follow the authoritative
 [`component_identity_contract.md`](component_identity_contract.md):
 `component_id`, `component_index`, and ranks are local to one result;
 `support_key` identifies exact tetrahedral support; `component_key` identifies
-that support and classification in one result context; temporal continuity uses
-`track_id` and a lineage graph in a separate dynamic layer.
+that support and side in one result context, without the catalog name; temporal
+continuity uses correspondence/track evidence in a separate dynamic layer.
 
 **`WetComponent`** (≡ concavity classes): `resident_node_indices`,
 `transit_connector_node_indices`, `external_link_ids`, `external_link_keys`,
@@ -195,7 +205,9 @@ family was named `multi_external_link` until 2026-06.)
 
 ## 7. Promotion: dfnd → Topography (not 1:1)
 
-A single component yields a **feature subgraph**, not one feature:
+A single component can yield a **feature subgraph**, not one feature. The
+diagram describes the promotion direction; today Mouth promotion is implemented
+while chamber/throat promotion needs the catalog's remaining public gates:
 
 ```
 WetComponent(family='pocket', id='WET-3')   ──▶  Pocket   (feature.source_id = component_key)
@@ -205,9 +217,10 @@ WetComponent(family='pocket', id='WET-3')   ──▶  Pocket   (feature.source_
 ```
 
 - The **component** promotes to the concavity **feature** (`Void`/`Pocket`/`Channel`).
-- The component's **motifs** promote to **child features** (`Mouth`, throat→`Neck`,
-  chamber→sub-`Pocket`), wired with `connect_features`. The feature parenthood
-  *is* the component's motif structure.
+- Validated **motifs** can promote to related features (`Mouth`, future
+  throat→`Neck`, chamber→subregion). Existing `connect_features` handles only
+  0D/1D children of 2D parents. A 2D subregion needs the future typed containment
+  contract; the diagram does not claim that nested Pocket promotion works today.
 - A promoted parent feature carries `source_id = component_key`. A promoted
   child keeps its own contextual source identity (`external_link_key` for a
   mouth) and carries `parent_component_key`, making feature → component →
