@@ -303,6 +303,7 @@ def load_CASTp(
     provider_server=None,
     provider_jobid=None,
     probe_radius=None,
+    provider_metadata: dict[str, Any] | None = None,
 ):
     """
     Load CASTp data.
@@ -361,6 +362,14 @@ def load_CASTp(
                 molecular_system = pdb_file
         topography = Topography(molecular_system=molecular_system)
         provider_run = None
+        run_metadata = dict(provider_metadata or {})
+        run_metadata.update(
+            {
+                'server': provider_server,
+                'jobid': provider_jobid,
+                'probe_radius_angstroms': probe_radius,
+            }
+        )
         if dir_path is not None:
             provider_input = submitted_input_pdb or zip_file or pdb_file or poc_file
             if provider_input is not None:
@@ -369,11 +378,7 @@ def load_CASTp(
                     provider_backend,
                     provider_input,
                     dir_path,
-                    metadata={
-                        'server': provider_server,
-                        'jobid': provider_jobid,
-                        'probe_radius_angstroms': probe_radius,
-                    },
+                    metadata=run_metadata,
                 )
                 topography.add_provider_run(provider_run)
         else:
@@ -407,11 +412,7 @@ def load_CASTp(
                         provider_backend,
                         provider_input,
                         output_dir,
-                        metadata={
-                            'server': provider_server,
-                            'jobid': provider_jobid,
-                            'probe_radius_angstroms': probe_radius,
-                        },
+                        metadata=run_metadata,
                     )
                 topography.add_provider_run(provider_run)
 

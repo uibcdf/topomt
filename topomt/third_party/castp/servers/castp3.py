@@ -163,7 +163,7 @@ def get_topography(
 
     with tempfile.TemporaryDirectory(prefix='topomt_castp3_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
-        input_pdb, _ = prepare_wrapper_input_pdb(
+        input_pdb, selected_atom_indices = prepare_wrapper_input_pdb(
             molecular_system,
             tmpdir=tmpdir,
             selection=selection,
@@ -197,6 +197,17 @@ def get_topography(
             provider_server='castp3',
             provider_jobid=jobid,
             probe_radius=_probe_radius_to_angstroms(probe_radius),
+            provider_metadata={
+                'selection': selection
+                if isinstance(selection, str)
+                else selected_atom_indices.tolist(),
+                'syntax': syntax,
+                'structure_indices': [int(i) for i in structure_indices]
+                if isinstance(structure_indices, list)
+                else [int(structure_indices)],
+                'selected_atom_indices': selected_atom_indices.tolist(),
+                'atom_index_space': 'submitted_selection',
+            },
         )
 
 

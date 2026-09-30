@@ -1,4 +1,8 @@
+from typing import Any
+
 from topomt.topography.Topography import Topography
+
+from .output import CASTpOutput
 
 
 def get_topography(
@@ -79,3 +83,56 @@ def load_topography(
         molecular_system=molecular_system,
         **kwargs,
     )
+
+
+def get_output(
+    molecular_system: Any = None, *, backend: str = 'server', **kwargs: Any
+) -> CASTpOutput:
+    """Return original castp results with shared pocket access.
+
+    Parameters
+    ----------
+    molecular_system : molecular system, optional
+        MolSysMT-compatible input; persisted CASTp files can supply their PDB.
+    backend : str, default='server'
+        Original route: server, castpfold or files. Local reproductions are not substituted.
+    **kwargs
+        Execution/import options documented by the corresponding legacy adapter,
+        including selection, structure_indices and provider-specific settings.
+
+    Returns
+    -------
+    CASTpOutput
+        Detached records, available geometry and recoverable original evidence.
+
+    Raises
+    ------
+    ValueError
+        If the backend or result evidence is unsupported or inconsistent.
+
+    Examples
+    --------
+    >>> result = get_output('protein.pdb')  # doctest: +SKIP
+    >>> pockets = result.pockets  # doctest: +SKIP
+    """
+    from topomt.third_party.output import _from_topography
+
+    backend = backend.lower()
+    if backend == 'files':
+        topography = load_topography(molecular_system=molecular_system, **kwargs)
+    elif backend in {'server', 'castpfold'}:
+        topography = get_topography(molecular_system, backend=backend, **kwargs)
+    else:
+        raise ValueError(f'Unsupported original CASTp backend: {backend!r}')
+    if backend in {'server', 'castpfold'} and len(topography.provider_runs) == 1:
+        run = next(iter(topography.provider_runs.values()))
+        selected = run.metadata.get('selected_atom_indices')
+        if selected is not None:
+            return _from_topography(
+                topography,
+                CASTpOutput,
+                source_molecular_system=molecular_system,
+                source_structure_indices=kwargs.get('structure_indices', 0),
+                atom_index_map=tuple(selected),
+            )
+    return _from_topography(topography, CASTpOutput)

@@ -266,7 +266,7 @@ def _build_topography_and_atom_map(
             structure_indices=structure_indices,
         )
         serial_to_index = _build_serial_to_atom_index_map(
-            topography._molsys,
+            molecular_system,
             selection=selection,
             syntax=syntax,
         )

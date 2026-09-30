@@ -1,4 +1,8 @@
+from typing import Any
+
 from topomt.topography.Topography import Topography
+
+from .output import FpocketOutput
 
 
 def get_topography(
@@ -64,3 +68,47 @@ def load_topography(
         output_dir=output_dir,
         **kwargs,
     )
+
+
+def get_output(
+    molecular_system: Any = None, *, backend: str = 'cli', **kwargs: Any
+) -> FpocketOutput:
+    """Return original fpocket results with shared pocket access.
+
+    Parameters
+    ----------
+    molecular_system : molecular system, optional
+        MolSysMT-compatible source input.
+    backend : str, default='cli'
+        Original route: cli, wrapper or files. Local reproductions are not substituted.
+    **kwargs
+        Execution/import options documented by the corresponding legacy adapter,
+        including selection, structure_indices and provider-specific settings.
+
+    Returns
+    -------
+    FpocketOutput
+        Detached records, available geometry and recoverable original evidence.
+
+    Raises
+    ------
+    ValueError
+        If the backend or result evidence is unsupported or inconsistent.
+
+    Examples
+    --------
+    >>> result = get_output('protein.pdb')  # doctest: +SKIP
+    >>> pockets = result.pockets  # doctest: +SKIP
+    """
+    from topomt.third_party.output import _from_topography
+
+    backend = backend.lower()
+    if backend == 'files':
+        if molecular_system is None:
+            molecular_system = kwargs.get('pdb_file')
+        topography = load_topography(molecular_system, **kwargs)
+    elif backend in {'cli', 'wrapper'}:
+        topography = get_topography(molecular_system, backend=backend, **kwargs)
+    else:
+        raise ValueError(f'Unsupported original fpocket backend: {backend!r}')
+    return _from_topography(topography, FpocketOutput)

@@ -29,6 +29,7 @@ from .delaunay_mesh import DelaunayMesh
 from .weighted_delaunay_mesh import WeightedDelaunayMesh
 from .get_delaunay_mesh import get_delaunay_mesh
 from .get_topography import get_topography
+from .get_provider_output import get_provider_output
 
 from . import io
 
@@ -48,6 +49,7 @@ __all__ = [
     'WeightedDelaunayMesh',
     'get_delaunay_mesh',
     'get_topography',
+    'get_provider_output',
     'io',
     'third_party',
     'dfnd',
