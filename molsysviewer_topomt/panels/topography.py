@@ -4,9 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from molsysviewer.addons import AddonPanelWidget
-
 from ..runtime import ensure_runtime, record_event
+from ._base import TopoMTPanelWidget
 
 _ESM = """
 export function render({ model, el }) {
@@ -23,6 +22,7 @@ export function render({ model, el }) {
       <div class="tmt-summary" id="tmt-summary">
         <span class="tmt-empty">No topography loaded.</span>
       </div>
+      <div class="tmt-source" id="tmt-source"></div>
       <button class="tmt-btn tmt-btn--primary" id="tmt-render">Render Pockets</button>
       <button class="tmt-btn tmt-btn--primary" id="tmt-render-tetra" style="margin-top: 4px; background: #651fff;">Render Tetrahedra</button>
       <button class="tmt-btn tmt-btn--secondary" id="tmt-clear" style="margin-top: 4px;">Clear All</button>
@@ -35,6 +35,7 @@ export function render({ model, el }) {
   const renderTetraBtn = el.querySelector("#tmt-render-tetra");
   const clearBtn  = el.querySelector("#tmt-clear");
   const statusEl  = el.querySelector("#tmt-status");
+  const sourceEl  = el.querySelector("#tmt-source");
 
   function buildSummaryHtml(counts) {
     const entries = Object.entries(counts);
@@ -46,6 +47,7 @@ export function render({ model, el }) {
 
   function applyState(s) {
     state = { ...state, ...s };
+    sourceEl.textContent = state.source_kind === "provider_output" ? `${state.provider} — original reported pockets` : "";
     summaryEl.innerHTML =
       state.n_features > 0
         ? buildSummaryHtml(state.feature_counts)
@@ -54,11 +56,11 @@ export function render({ model, el }) {
     renderBtn.disabled = state.status === "rendering" || state.n_features === 0;
     renderBtn.textContent = state.status === "rendering" ? "Rendering…" : "Render Pockets";
 
-    renderTetraBtn.disabled = state.status === "rendering" || state.n_features === 0;
+    renderTetraBtn.disabled = state.status === "rendering" || state.n_features === 0 || state.has_dfnd === false;
     renderTetraBtn.textContent = state.status === "rendering" ? "Rendering…" : "Render Tetrahedra";
 
     if (state.status === "done") {
-      statusEl.textContent = "Rendered.";
+      statusEl.textContent = state.warnings?.length ? state.warnings.join(" ") : "Rendered.";
       statusEl.className = "tmt-status tmt-status--ok";
     } else if (state.status === "error" && state.error) {
       statusEl.textContent = "Error: " + state.error;
@@ -88,7 +90,7 @@ export function render({ model, el }) {
     if (msg?.type === "state") applyState(msg.state);
   });
 
-  model.send({ type: "query", id: "viewer.context" });
+  model.send({ type: "query", id: "topomt.state" });
   applyState(state);
 }
 """
@@ -155,15 +157,20 @@ _CSS = """
 """
 
 
-class TopoMTTopographyPanel(AddonPanelWidget):
+class TopoMTTopographyPanel(TopoMTPanelWidget):
     _esm: str = _ESM
     _css: str = _CSS
 
     def on_mount(self, view: Any) -> None:
+        super().on_mount(view)
         runtime = ensure_runtime(view)
         self.push_state(self._build_state(runtime))
 
     def handle_action(self, view: Any, action_id: str, payload: dict) -> None:
+        from ..providers import _handle_provider_panel_action
+
+        if _handle_provider_panel_action(self, view, action_id, payload):
+            return
         runtime = ensure_runtime(view)
 
         if action_id == 'render_pockets':
@@ -236,12 +243,22 @@ class TopoMTTopographyPanel(AddonPanelWidget):
 
     @staticmethod
     def _build_state(runtime: Any) -> dict:
+        from ..providers import _provider_panel_state
+
+        provider_state = _provider_panel_state(runtime)
+        if provider_state is not None:
+            return provider_state
         from ..payloads import topography_payload
 
         if runtime.topography is not None:
             try:
                 payload = topography_payload(runtime.topography)
                 return {
+                    'source_kind': 'topography',
+                    'provider': None,
+                    'run_id': None,
+                    'has_dfnd': getattr(runtime.topography, 'dfnd', None) is not None,
+                    'warnings': [],
                     'n_features': payload['n_features'],
                     'feature_counts': payload['feature_counts'],
                     'tag_prefix': runtime.tag_prefix,
@@ -251,6 +268,11 @@ class TopoMTTopographyPanel(AddonPanelWidget):
             except Exception:
                 pass
         return {
+            'source_kind': 'topography',
+            'provider': None,
+            'run_id': None,
+            'has_dfnd': False,
+            'warnings': [],
             'n_features': 0,
             'feature_counts': {},
             'tag_prefix': runtime.tag_prefix,

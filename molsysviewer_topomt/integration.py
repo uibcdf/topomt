@@ -2,7 +2,7 @@ from collections.abc import Iterable
 from typing import Any
 
 from .render import show_dfnd_tetrahedra, show_topography_pockets
-from .runtime import ensure_runtime
+from .runtime import _refresh_panels, ensure_runtime
 
 
 def register_with_molsysviewer() -> None:
@@ -62,11 +62,13 @@ def _clear_all_render_groups(view, runtime) -> None:
 
 
 def _attach_source(view, runtime, topography) -> None:
+    runtime.active_provider_run_id = None
     if runtime.topography is not None and runtime.topography is not topography:
         _clear_all_render_groups(view, runtime)
         runtime.active_feature_ids = None
     runtime.topography = topography
     view.topography = topography
+    _refresh_panels(view)
 
 
 def _record_feature_render_group(runtime, tag_prefix, feature_ids, rendered) -> str:

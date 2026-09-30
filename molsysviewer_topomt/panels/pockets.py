@@ -4,9 +4,8 @@ from __future__ import annotations
 
 from typing import Any
 
-from molsysviewer.addons import AddonPanelWidget
-
 from ..runtime import ensure_runtime, record_event
+from ._base import TopoMTPanelWidget
 
 _ESM = """
 export function render({ model, el }) {
@@ -22,6 +21,7 @@ export function render({ model, el }) {
       <div class="tmt-pocket-list" id="tmt-pocket-list">
         <span class="tmt-empty">No pockets loaded.</span>
       </div>
+      <div class="tmt-source" id="tmt-source"></div>
       <div class="tmt-actions">
         <button class="tmt-btn tmt-btn--primary" id="tmt-show-all">Show All</button>
         <button class="tmt-btn tmt-btn--secondary" id="tmt-clear-all">Clear</button>
@@ -34,6 +34,7 @@ export function render({ model, el }) {
   const showAllBtn = el.querySelector("#tmt-show-all");
   const clearBtn  = el.querySelector("#tmt-clear-all");
   const statusEl  = el.querySelector("#tmt-status");
+  const sourceEl  = el.querySelector("#tmt-source");
 
   function buildPocketRow(p) {
     const scoreText = p.score !== null && p.score !== undefined ? p.score.toFixed(2) : "—";
@@ -52,6 +53,7 @@ export function render({ model, el }) {
 
   function applyState(s) {
     state = { ...state, ...s };
+    sourceEl.textContent = state.source_kind === "provider_output" ? `${state.provider} — original reported pockets` : "";
 
     listEl.innerHTML = "";
     if (state.pockets.length === 0) {
@@ -64,7 +66,7 @@ export function render({ model, el }) {
     showAllBtn.textContent = state.status === "rendering" ? "Rendering…" : "Show All";
 
     if (state.status === "done") {
-      statusEl.textContent = "Done.";
+      statusEl.textContent = state.warnings?.length ? state.warnings.join(" ") : "Done.";
       statusEl.className = "tmt-status tmt-status--ok";
     } else if (state.status === "error" && state.error) {
       statusEl.textContent = "Error: " + state.error;
@@ -87,7 +89,7 @@ export function render({ model, el }) {
     if (msg?.type === "state") applyState(msg.state);
   });
 
-  model.send({ type: "query", id: "viewer.context" });
+  model.send({ type: "query", id: "topomt.state" });
   applyState(state);
 }
 """
@@ -170,15 +172,20 @@ _CSS = """
 """
 
 
-class TopoMTPocketsPanel(AddonPanelWidget):
+class TopoMTPocketsPanel(TopoMTPanelWidget):
     _esm: str = _ESM
     _css: str = _CSS
 
     def on_mount(self, view: Any) -> None:
+        super().on_mount(view)
         runtime = ensure_runtime(view)
         self.push_state(self._build_state(runtime))
 
     def handle_action(self, view: Any, action_id: str, payload: dict) -> None:
+        from ..providers import _handle_provider_panel_action
+
+        if _handle_provider_panel_action(self, view, action_id, payload):
+            return
         runtime = ensure_runtime(view)
 
         if action_id == 'show_all_pockets':
@@ -248,6 +255,11 @@ class TopoMTPocketsPanel(AddonPanelWidget):
 
     @staticmethod
     def _build_state(runtime: Any) -> dict:
+        from ..providers import _provider_panel_state
+
+        provider_state = _provider_panel_state(runtime)
+        if provider_state is not None:
+            return provider_state
         pockets = []
         if runtime.topography is not None:
             try:
@@ -262,7 +274,11 @@ class TopoMTPocketsPanel(AddonPanelWidget):
             except Exception:
                 pass
         return {
+            'source_kind': 'topography',
+            'provider': None,
+            'run_id': None,
             'pockets': pockets,
+            'warnings': [],
             'tag_prefix': runtime.tag_prefix,
             'status': 'idle',
             'error': None,

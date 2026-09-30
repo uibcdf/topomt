@@ -44,6 +44,7 @@ def test_topomt_all_declares_public_api_v0():
         'WeightedDelaunayMesh',
         'get_delaunay_mesh',
         'get_topography',
+        'get_provider_output',
         'io',
         'third_party',
         'dfnd',

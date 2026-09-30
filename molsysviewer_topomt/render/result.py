@@ -103,7 +103,7 @@ def render_result(
     if isinstance(raw, RenderResult):
         return raw
 
-    layers = []
+    layers: list[Any] = []
     details = {}
     counts = {}
     if raw is None:
@@ -119,18 +119,18 @@ def render_result(
     else:
         _collect_layers(raw, layers)
 
-    layers = _unique(layers)
+    layers_tuple = _unique(layers)
     tags = tuple(
-        tag for tag in (_layer_tag(layer) for layer in layers) if tag is not None
+        tag for tag in (_layer_tag(layer) for layer in layers_tuple) if tag is not None
     )
     if rendered_ids is None:
-        rendered_ids = selected_ids if layers else ()
+        rendered_ids = selected_ids if layers_tuple else ()
 
     return RenderResult(
         representation=representation,
         selected_ids=tuple(selected_ids or ()),
         rendered_ids=tuple(rendered_ids or ()),
-        layers=layers,
+        layers=layers_tuple,
         tags=tags,
         counts=counts,
         warnings=tuple(warnings or ()),
@@ -146,10 +146,16 @@ def clear_previous_render_result(view, key: str) -> RenderResult | None:
     previous = registry.pop(key, None)
     if not isinstance(previous, RenderResult):
         return None
-    scene_objects = getattr(view, '_scene_objects', {})
+    get_shape = getattr(view.shapes, 'get', None)
+    owned_by_tag = {getattr(layer, 'tag', None): layer for layer in previous.layers}
     for tag in previous.tags:
-        if tag in scene_objects:
-            view.shapes.clear(tag=tag, skip_digestion=True)
+        if get_shape is not None:
+            current = get_shape(tag, skip_digestion=True)
+            if current is None or (
+                tag in owned_by_tag and current is not owned_by_tag[tag]
+            ):
+                continue
+        view.shapes.clear(tag=tag, skip_digestion=True)
     return previous
 
 

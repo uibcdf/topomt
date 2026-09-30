@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from typing import Any
+from weakref import WeakSet
 
 
 @dataclass
@@ -19,6 +20,10 @@ class TopoMTAddonRuntime:
     enabled: bool = False
     workspace: str = 'topomt'
     topography: Any = None
+    provider_outputs: dict[str, Any] = field(default_factory=dict)
+    provider_display_options: dict[str, dict[str, Any]] = field(default_factory=dict)
+    active_provider_run_id: str | None = None
+    panel_widgets: WeakSet[Any] = field(default_factory=WeakSet)
     active_feature_ids: tuple[str, ...] | None = None
     render_groups: dict[str, dict[str, Any]] = field(default_factory=dict)
     tag_prefix: str = 'topomt-pocket'
@@ -70,3 +75,8 @@ def ensure_runtime(view: Any) -> TopoMTAddonRuntime:
 def record_event(view: Any, event_name: str, **kwargs: Any) -> None:
     runtime = ensure_runtime(view)
     runtime.event_log.append({'event': event_name, **kwargs})
+
+
+def _refresh_panels(view: Any) -> None:
+    for panel in tuple(ensure_runtime(view).panel_widgets):
+        panel.on_mount(view)

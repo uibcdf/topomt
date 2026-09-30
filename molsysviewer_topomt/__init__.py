@@ -48,6 +48,11 @@ from .integration import (
 )
 from .panels import TopoMTPocketsPanel, TopoMTTopographyPanel
 from .payloads import feature_record_from_feature, topography_payload
+from .providers import (
+    attach_provider_output,
+    clear_provider_pockets,
+    show_provider_pockets,
+)
 from .render import (
     RenderResult,
     clear_feature_representations,
@@ -86,6 +91,9 @@ __all__ = [
     'attach_features',
     'attach_pockets',
     'attach_topography',
+    'attach_provider_output',
+    'show_provider_pockets',
+    'clear_provider_pockets',
     'clear_render_group',
     'attach_dfnd_tetrahedra',
     'new_view',

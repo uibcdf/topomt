@@ -1,3 +1,4 @@
+import copy
 import sys
 import types
 from pathlib import Path
@@ -220,11 +221,19 @@ class RenderMessageHistory:
 
     def __init__(self, view):
         self._view = view
+        self._messages = []
+        original_send = view._send
+
+        def capture(message):
+            self._messages.append(copy.deepcopy(message))
+            return original_send(message)
+
+        view._send = capture
 
     def _items(self):
         return [
             message
-            for message in self._view._message_history  # noqa: SLF001
+            for message in self._messages
             if message.get('op') not in self._IGNORED_OPS
         ]
 
@@ -238,14 +247,14 @@ class RenderMessageHistory:
         return self._items()[item]
 
     def clear(self):
-        self._view._message_history.clear()  # noqa: SLF001
+        self._messages.clear()
 
 
 def topomt_test_view(*, with_system=False):
-    """Return a real MolSysView with legacy test aliases.
+    """Return a real MolSysView with test-owned transport capture.
 
     The tests historically asserted against ``view.messages``. Keep that alias
-    pointing to the real MolSysViewer message history while exercising the real
+    pointing to captured calls while exercising the real
     managers, active selection, index mapper, and optional molecular system.
     """
     view = molsysviewer.MolSysView()
@@ -3800,7 +3809,7 @@ def test_empty_render_result_replaces_previous_graph_tetrahedra_and_components()
         node['residence_state'] = 'non_resident'
     empty_graph = show_dfn_graph(graph_view, graph_topography)
     assert empty_graph.is_empty
-    assert 'dfn-graph-node' not in getattr(graph_view, '_scene_objects', {})
+    assert not graph_view.shapes.contains('dfn-graph-node')
 
     tetra_view = topomt_test_view()
     tetra_records = {
@@ -3818,7 +3827,7 @@ def test_empty_render_result_replaces_previous_graph_tetrahedra_and_components()
         tetra_view, tetra_records, tetrahedra_indices=[]
     )
     assert empty_tetrahedra.is_empty
-    assert 'dfnd-tetra' not in getattr(tetra_view, '_scene_objects', {})
+    assert not tetra_view.shapes.contains('dfnd-tetra')
 
     component_view = topomt_test_view()
     component_topography = _build_dfnd_topo('hollow_sphere_void.pdb')
@@ -3832,10 +3841,7 @@ def test_empty_render_result_replaces_previous_graph_tetrahedra_and_components()
         component_ids=['missing'],
     )
     assert empty_components.is_empty
-    assert not any(
-        tag.startswith('dfnd-comp')
-        for tag in getattr(component_view, '_scene_objects', {})
-    )
+    assert not any(tag.startswith('dfnd-comp') for tag in component_view.shapes.tags())
 
 
 def test_wp18_point_geometry_requires_units_and_structured_refs():
