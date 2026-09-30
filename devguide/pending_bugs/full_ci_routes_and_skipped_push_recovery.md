@@ -118,3 +118,20 @@ commit was rebased over those provider/provenance/AlphaSpace2 changes. Its delta
 still contains only CI routing, administrative guards and this report; external
 component implementation is preserved. Governance dispatch evidence must name
 the rebased source, not the older head used by the rejected dispatch attempt.
+
+## First hosted verification and bootstrap correction
+
+At published 47683f5 (implementation 8bd0a83), GitHub confirmed bypass of the
+explicit PR rule and all eight required checks. Ruff 36715830303 and suite
+policy 36715837117 passed. Initial probe 36715825226 found no eligible executed
+green full watermark and reported 39 skipped commits, including both new
+internal skips and the earlier guide-distribution commit; heavy jobs were
+omitted as requested. The probe's overall result was failure because the new
+governance-only pip bootstrap requested pytest-receptor 0.6.0, a Conda pin not
+available from PyPI. Native pip evidence listed published 1.0.0/1.1.0/1.2.0.
+
+Correct the new independent pip job to exact published 1.0.0, already proven
+by other suite consumers. Preserve the scientific Conda environments' existing
+0.6.0 pins and complete scientific pytest selection. This is a local workflow
+bootstrap error under #58, not a provider/scientific defect or a suite-wide
+mandatory tool upgrade. Retain the initial failed run as evidence.
