@@ -73,7 +73,7 @@ external-library measurement evidence above.
 
 ## Optional-engine integration: 2026-09-30
 
-The current uncommitted TopoMT changes register Pocketeer, AlphaSpace2 and
+The TopoMT implementation commits `989b46d` and `162038a` register Pocketeer, AlphaSpace2 and
 pyCASTA as soft Python dependencies, guard only the original-library route,
 and preserve source-checkout support. pyCASTA can locate installed scripts and
 runs in an isolated subprocess. AlphaSpace2 has compatibility handling for the
@@ -93,7 +93,9 @@ It adds executable availability checks and explicit disabled installer routes,
 reusing SMonitor diagnostics and conditional dependency guards. The provider
 suite passed 129 tests with one unavailable sibling-checkout test skipped;
 TopoMT consumer checks against that checkout passed 29 tests. This extension
-has not been integrated or released. TopoMT's fpocket absence translation
+is integrated on DepDigest `main` in `08f8263`, with example formatting in
+`457e72a`; the direct push was verified on 2026-09-30. It has not been released
+or installed in the shared environment. TopoMT's fpocket absence translation
 remains local until the provider capability is released and adopted.
 
 The current test portability work removes collection-time MDTraj imports,
@@ -115,6 +117,20 @@ HEAD (`34522bebb3fcabfbc6aaa08f56b8ebf823922e3e`) with the same installed
 MolSysViewer checkout. No neighboring consumer
 worktree was modified. This is a failed full run, not a green release gate;
 the viewer failures and native review remain outside this optional-engine slice.
+
+The 57 missing-history failures come from the test helper inspecting the retired
+private `_message_history` attribute. They do not independently prove a failed
+first render. The 15 duplicate-tag failures affect real repeated rendering:
+`clear_previous_render_result()` checks string tags in `_scene_objects`, while
+MolSysViewer now stores `(kind, tag)` keys. Owned shapes survive the cleanup and
+the next add operation rejects their existing tags. The remaining tuple/string
+failure is an obsolete scene-registry assertion. Updating test inspection and
+fixing adapter cleanup are separate follow-up tasks; engine calculations and
+original-result retention remain covered by their passing tests.
+
+After merging remote governance commits through `3e67fcb`, 36 import, reporting,
+dependency and warning regressions passed. Complete Ruff lint/format checks,
+seven-file scoped mypy and generated-report indexes passed on the merged tree.
 See [the testing policy](../docs/content/developer/testing.md) and
 [the supported engines](../docs/content/user/third_party_engines.md).
 

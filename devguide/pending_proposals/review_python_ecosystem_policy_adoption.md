@@ -81,3 +81,25 @@ verify representative public boundaries, and refresh the central inventory
 from exact-source evidence before upgrading support libraries to `adopted`.
 Keep developer-tool evidence current if CI environments or run inspection
 change.
+
+## Component evidence update: 2026-09-30
+
+Commits `989b46d` and `162038a` repair catalog registration/message-first
+diagnostics and the optional original-engine boundaries. The engine adapters
+support installed Pocketeer, AlphaSpace2 and isolated pyCASTA scripts; collection
+without original engines or MDTraj has explicit regression coverage. The source
+selection passed 61 tests, three installed-distribution comparisons and eleven
+fpocket 4.2.3 direct-CLI comparisons passed separately, and 29 consumer tests
+passed against the DepDigest extension. After integrating remote governance
+through `3e67fcb`, 36 import/reporting/dependency/warning tests passed; complete
+Ruff lint/format, scoped mypy and generated indexes passed.
+
+DepDigest's executable/installer-route extension is on `main` in `08f8263` and
+`457e72a`, tracked by `uibcdf/depdigest#22`; publication as an installable release
+and coordinated guide/consumer adoption remain under `uibcdf/molsyssuite#62`.
+The full pre-merge local suite had 771 passed, 74 failed, 25 skipped and five
+xfailed. One failure is native pyCASTA issue #53 and 73 are viewer-addon
+compatibility failures; representatives of every viewer failure group also
+fail with unchanged TopoMT HEAD. Support-library adoption remains partial until
+the shared release/adoption and public-boundary evidence are reviewed; this
+update does not assert a passing hosted Python matrix.
