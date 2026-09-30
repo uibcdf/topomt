@@ -2,9 +2,14 @@ import subprocess
 from pathlib import Path
 from typing import Sequence
 
+from topomt._private.smonitor import TopoMTException
 
-class FpocketError(RuntimeError):
-    pass
+
+class FpocketError(TopoMTException, RuntimeError):
+    """Report fpocket availability or execution failures through SMonitor."""
+
+    def __init__(self, message: str | None = None, **kwargs) -> None:
+        super().__init__(message, **kwargs)
 
 
 def run_fpocket(
@@ -35,6 +40,12 @@ def run_fpocket(
             capture_output=True,
             text=True,
         )
+    except FileNotFoundError as exc:
+        if not Path(workdir).is_dir():
+            raise
+        raise FpocketError(
+            code='ExecutableNotFoundError', executable=fpocket_cmd
+        ) from exc
     except subprocess.CalledProcessError as exc:
         raise FpocketError(
             f'fpocket failed with code {exc.returncode}:\n{exc.stderr}'

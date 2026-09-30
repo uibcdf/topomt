@@ -6,6 +6,8 @@ from pathlib import Path
 import molsysmt as msm
 import numpy as np
 
+from topomt._private.smonitor import LibraryNotFoundError
+
 
 def prepare_wrapper_input_pdb(
     molecular_system,
@@ -56,10 +58,14 @@ def import_upstream_module(
     try:
         return import_module(module_name)
     except ModuleNotFoundError as original_exc:
+        if (
+            original_exc.name != module_name.split('.')[0]
+            and original_exc.name != module_name
+        ):
+            raise
         if upstream_root is None:
-            raise ModuleNotFoundError(
-                f"Optional upstream package '{module_name}' is not installed. "
-                f'Install it or pass upstream_root to the wrapper-backed path.'
+            raise LibraryNotFoundError(
+                library=module_name.split('.')[0]
             ) from original_exc
 
         upstream_root = Path(upstream_root).expanduser().resolve()
@@ -67,7 +73,11 @@ def import_upstream_module(
         if upstream_root.is_file():
             search_root = upstream_root.parent
 
-        if str(search_root) not in sys.path:
+        inserted = str(search_root) not in sys.path
+        if inserted:
             sys.path.insert(0, str(search_root))
-
-        return import_module(module_name)
+        try:
+            return import_module(module_name)
+        finally:
+            if inserted:
+                sys.path.remove(str(search_root))

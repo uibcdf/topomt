@@ -93,6 +93,19 @@ def _patch_alphaspace2_numpy_compatibility():
         setattr(np, 'float', float)
 
 
+def _initialize_unbound_contacts(snapshot) -> bool:
+    """Supply the upstream source fix missing from the PyPI 0.1.2 release."""
+    if snapshot._alpha_contact is not None:
+        return False
+    snapshot._alpha_contact = np.zeros(len(snapshot._alpha_xyz), dtype=bool)
+    snapshot._beta_contact = np.zeros(len(snapshot._beta_alpha_index_list), dtype=bool)
+    snapshot._pocket_contact = np.zeros(
+        len(snapshot._pocket_alpha_index_list), dtype=bool
+    )
+    return True
+
+
+@dep_digest('alphaspace2', when={'upstream_root': None})
 @dep_digest('mdtraj')
 def get_topography(
     molecular_system,
@@ -126,6 +139,7 @@ def get_topography(
         receptor = md.load(str(input_pdb))
         snapshot = upstream.Snapshot()
         snapshot.run(receptor)
+        unbound_contacts_initialized = _initialize_unbound_contacts(snapshot)
         if receptor.n_atoms != len(selected_atom_indices):
             raise ValueError(
                 'AlphaSpace2 receptor atom count differs from the selected molecular '
@@ -135,7 +149,10 @@ def get_topography(
         output_dir = tmpdir / 'results'
         output_dir.mkdir()
         snapshot.save(
-            output_dir=str(output_dir), receptor=receptor, chimera_scripts=False
+            output_dir=str(output_dir),
+            receptor=receptor,
+            chimera_scripts=False,
+            contact_only=False,
         )
         state = {
             'schema_version': 1,
@@ -200,6 +217,7 @@ def get_topography(
             output_dir,
             metadata={
                 'snapshot_source_sha256': source_sha256,
+                'unbound_contacts_initialized': unbound_contacts_initialized,
                 'selection': selection,
                 'structure_indices': _snapshot_json_value(structure_indices),
                 'syntax': syntax,

@@ -3,16 +3,19 @@ import json
 import subprocess
 import sys
 import tempfile
+from importlib.util import find_spec
 from pathlib import Path
 
 import numpy as np
+from depdigest import dep_digest
 from scipy.spatial import Delaunay
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._private.smonitor import LibraryNotFoundError
 from topomt.features import Pocket
 from topomt.provider_output import ExternalMeasurement, ProviderRun
-from topomt.third_party._common import import_upstream_module, prepare_wrapper_input_pdb
+from topomt.third_party._common import prepare_wrapper_input_pdb
 
 _PYCASTA_WORKER = """
 import json
@@ -32,8 +35,28 @@ Path(sys.argv[4]).write_text(json.dumps({
     'validation_method': config.VALIDATION_METHOD,
     'use_existing_results': bool(config.USE_EXISTING_RESULTS),
     'manual_alpha': config.MANUAL_ALPHA,
+    'version_tag': run_analysis.VERSION_TAG,
 }, sort_keys=True))
 """
+
+
+def _get_source_root(upstream_root: str | Path | None) -> Path:
+    """Locate scripts without importing pyCASTA's global config in this process."""
+    candidates: tuple[Path, ...]
+    if upstream_root is not None:
+        root = Path(upstream_root).expanduser().resolve()
+        if root.is_file():
+            root = root.parent
+        candidates = (root, root / 'pycasta', root / 'src' / 'pycasta')
+    else:
+        spec = find_spec('pycasta')
+        if spec is None:
+            raise LibraryNotFoundError(library='pycasta')
+        candidates = tuple(Path(path) for path in spec.submodule_search_locations or ())
+    for candidate in candidates:
+        if (candidate / 'run_analysis.py').is_file():
+            return candidate
+    raise ValueError('pyCASTA installation or upstream_root has no run_analysis.py')
 
 
 def _json_safe(value):
@@ -85,6 +108,7 @@ def _protein_atom_indices_from_pdb(
     return selected_atom_indices[protein_positions]
 
 
+@dep_digest('pycasta', when={'upstream_root': None})
 def get_topography(
     molecular_system,
     *,
@@ -110,10 +134,7 @@ def get_topography(
             syntax=syntax,
         )
 
-        run_analysis = import_upstream_module(
-            'run_analysis',
-            upstream_root=upstream_root,
-        )
+        source_root = _get_source_root(upstream_root)
         output_dir = tmpdir / 'results'
         output_dir.mkdir()
         result_path = output_dir / 'topomt_returned_result.json'
@@ -123,7 +144,7 @@ def get_topography(
                 sys.executable,
                 '-c',
                 _PYCASTA_WORKER,
-                str(Path(run_analysis.__file__).resolve().parent),
+                str(source_root),
                 str(input_pdb),
                 str(result_path),
                 str(configuration_path),
@@ -142,7 +163,7 @@ def get_topography(
         protein_atom_indices = _protein_atom_indices_from_pdb(
             input_pdb, selected_atom_indices, protein_coords_ang
         )
-        source_file = Path(run_analysis.__file__)
+        source_file = source_root / 'run_analysis.py'
         with source_file.open('rb') as file_handle:
             source_sha256 = hashlib.file_digest(file_handle, 'sha256').hexdigest()
         run = ProviderRun.capture(
@@ -152,7 +173,7 @@ def get_topography(
             output_dir,
             metadata={
                 'source_sha256': source_sha256,
-                'version_tag': run_analysis.VERSION_TAG,
+                'version_tag': execution_configuration['version_tag'],
                 'configuration': execution_configuration,
                 'selection': selection,
                 'structure_indices': _json_safe(structure_indices),
@@ -164,7 +185,9 @@ def get_topography(
 
         simplices = Delaunay(protein_coords_ang).simplices
         alpha_file = (
-            output_dir / run_analysis.VERSION_TAG / f'{input_pdb.stem}.alpha.npz'
+            output_dir
+            / execution_configuration['version_tag']
+            / f'{input_pdb.stem}.alpha.npz'
         )
         if not alpha_file.is_file():
             raise ValueError(

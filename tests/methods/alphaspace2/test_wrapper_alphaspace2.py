@@ -1,15 +1,14 @@
 import importlib
 import json
-import sys
 from pathlib import Path
 
-import mdtraj as md
 import numpy as np
 import pytest
 
 from topomt import pyunitwizard as puw
 from topomt.get_topography import get_topography
 from topomt.provider_output import ProviderRun
+from topomt.third_party._common import import_upstream_module
 from topomt.third_party.alphaspace2.library import (
     _patch_alphaspace2_mdtraj_sasa,
     _patch_alphaspace2_numpy_compatibility,
@@ -19,17 +18,21 @@ UPSTREAM_REPO = Path.home() / 'repos@others' / 'AlphaSpace2'
 TEST_PDB = Path('topomt/data/fpocket4/sample/1GG0.pdb')
 
 
-def _import_upstream_alphaspace2():
+@pytest.fixture
+def upstream_alphaspace2():
+    try:
+        md = importlib.import_module('mdtraj')
+    except ModuleNotFoundError as exc:
+        if exc.name != 'mdtraj':
+            raise
+        pytest.skip('optional MDTraj library is not installed')
     if not UPSTREAM_REPO.exists():
         pytest.skip('local AlphaSpace2 upstream mirror is not available')
 
-    if str(UPSTREAM_REPO) not in sys.path:
-        sys.path.insert(0, str(UPSTREAM_REPO))
-
-    module = importlib.import_module('alphaspace2')
+    module = import_upstream_module('alphaspace2', upstream_root=UPSTREAM_REPO)
     _patch_alphaspace2_numpy_compatibility()
     _patch_alphaspace2_mdtraj_sasa(module)
-    return module
+    return module, md
 
 
 def _pocket_features(topography):
@@ -39,8 +42,10 @@ def _pocket_features(topography):
     )
 
 
-def test_alphaspace2_wrapper_matches_upstream_snapshot_on_reference_system(tmp_path):
-    upstream = _import_upstream_alphaspace2()
+def test_alphaspace2_wrapper_matches_upstream_snapshot_on_reference_system(
+    tmp_path, upstream_alphaspace2
+):
+    upstream, md = upstream_alphaspace2
     receptor = md.load(str(TEST_PDB))
     snapshot = upstream.Snapshot()
     snapshot.run(receptor)
@@ -207,7 +212,7 @@ def test_alphaspace2_wrapper_matches_upstream_snapshot_on_reference_system(tmp_p
         ) == pytest.approx(upstream_pocket.nonpolar_space)
 
 
-def test_alphaspace2_wrapper_smoke_on_demo_system():
+def test_alphaspace2_wrapper_smoke_on_demo_system(upstream_alphaspace2):
     wrapper_topography = get_topography(
         str(TEST_PDB),
         method='alphaspace2',

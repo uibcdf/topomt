@@ -1,12 +1,11 @@
 import importlib
-import sys
 from pathlib import Path
 
-import mdtraj as md
 import numpy as np
 import pytest
 
 from topomt._private.arg_digestion.argument.binder_coords import digest_binder_coords
+from topomt.third_party._common import import_upstream_module
 from topomt.third_party.alphaspace2.native import (
     _build_state,
     _compute_beta_scores,
@@ -48,17 +47,28 @@ UPSTREAM_CDK2_PDBQT_PATH = (
 )
 
 
+@pytest.fixture
+def mdtraj_available():
+    try:
+        return importlib.import_module('mdtraj')
+    except ModuleNotFoundError as exc:
+        if exc.name != 'mdtraj':
+            raise
+        pytest.skip('optional MDTraj library is not installed')
+
+
 def _import_upstream_alphaspace2():
     try:
         return importlib.import_module('alphaspace2')
-    except ImportError:
+    except ModuleNotFoundError as exc:
+        if exc.name != 'alphaspace2':
+            raise
         repo_path = Path.home() / 'repos@others' / 'AlphaSpace2'
         if not repo_path.exists():
             pytest.skip(
                 'AlphaSpace2 upstream repository not available for parity testing'
             )
-        sys.path.insert(0, str(repo_path))
-        return importlib.import_module('alphaspace2')
+        return import_upstream_module('alphaspace2', upstream_root=repo_path)
 
 
 def _patch_upstream_compatibility():
@@ -111,6 +121,8 @@ def _patch_upstream_compatibility():
 
 
 def _filtered_upstream_receptor(pdb_path: Path):
+    import mdtraj as md
+
     receptor = md.load(str(pdb_path))
     keep_atom_indices = [
         atom.index
@@ -140,7 +152,7 @@ def _native_pocket_scores_from_state(state) -> np.ndarray:
 
 
 @pytest.mark.parametrize('pdb_name', ['1GG0.pdb', '3LKF.pdb'])
-def test_alphaspace2_native_state_matches_upstream_snapshot(pdb_name):
+def test_alphaspace2_native_state_matches_upstream_snapshot(pdb_name, mdtraj_available):
     alphaspace2 = _import_upstream_alphaspace2()
     _patch_upstream_compatibility()
 
@@ -221,7 +233,7 @@ def test_alphaspace2_native_state_matches_upstream_snapshot(pdb_name):
     assert np.allclose(upstream_pocket_scores, native_pocket_scores)
 
 
-def test_alphaspace2_native_grid_volume_matches_helper():
+def test_alphaspace2_native_grid_volume_matches_helper(mdtraj_available):
     state = _build_state(
         molecular_system='topomt/data/fpocket4/sample/1GG0.pdb',
         selection='all',
@@ -242,7 +254,7 @@ def test_alphaspace2_native_grid_volume_matches_helper():
     assert np.allclose(state.pocket_grid_volume_nm3, expected)
 
 
-def test_alphaspace2_native_overlap_matrices_match_helper():
+def test_alphaspace2_native_overlap_matrices_match_helper(mdtraj_available):
     state = _build_state(
         molecular_system='topomt/data/fpocket4/sample/1GG0.pdb',
         selection='all',
@@ -260,7 +272,7 @@ def test_alphaspace2_native_overlap_matrices_match_helper():
     assert np.allclose(state.pocket_overlap_union, union)
 
 
-def test_alphaspace2_native_contact_matrix_matches_helper():
+def test_alphaspace2_native_contact_matrix_matches_helper(mdtraj_available):
     binder = np.array([[0.35, 0.2, 0.15], [0.44, 0.79, 0.5]], dtype=float)
     _, _, _, _, state = alphaspace2(
         molecular_system='topomt/data/fpocket4/sample/1GG0.pdb',
@@ -279,7 +291,7 @@ def test_alphaspace2_native_contact_matrix_matches_helper():
     assert np.array_equal(state.alpha_contact_matrix, expected)
 
 
-def test_alphaspace2_pocket_connection_matrix_reflects_overlap():
+def test_alphaspace2_pocket_connection_matrix_reflects_overlap(mdtraj_available):
     state = _build_state(
         molecular_system='topomt/data/fpocket4/sample/3LKF.pdb',
         selection='all',
@@ -296,7 +308,7 @@ def test_alphaspace2_pocket_connection_matrix_reflects_overlap():
     assert np.array_equal(state.pocket_connection_matrix, overlap > 0)
 
 
-def test_alphaspace2_beta_overlap_matches_helper():
+def test_alphaspace2_beta_overlap_matches_helper(mdtraj_available):
     state = _build_state(
         molecular_system='topomt/data/fpocket4/sample/3LKF.pdb',
         selection='all',
@@ -314,7 +326,7 @@ def test_alphaspace2_beta_overlap_matches_helper():
     assert np.allclose(state.beta_overlap_union, union)
 
 
-def test_alphaspace2_beta_probe_scores_match_helper():
+def test_alphaspace2_beta_probe_scores_match_helper(mdtraj_available):
     if not UPSTREAM_CDK2_PDB_PATH.exists() or not UPSTREAM_CDK2_PDBQT_PATH.exists():
         pytest.skip(
             'AlphaSpace2 CDK2 Vina example not available for scoring comparison'
@@ -362,6 +374,7 @@ def test_alphaspace2_beta_probe_scores_match_helper():
 )
 def test_alphaspace2_native_state_matches_upstream_snapshot_for_protease_examples(
     pdb_path,
+    mdtraj_available,
 ):
     if not pdb_path.exists():
         pytest.skip(f'AlphaSpace2 protease example not available: {pdb_path.name}')
@@ -444,7 +457,9 @@ def test_alphaspace2_native_state_matches_upstream_snapshot_for_protease_example
     assert np.allclose(upstream_pocket_scores, native_pocket_scores)
 
 
-def test_alphaspace2_native_state_matches_upstream_snapshot_for_cdk2_vina_scores():
+def test_alphaspace2_native_state_matches_upstream_snapshot_for_cdk2_vina_scores(
+    mdtraj_available,
+):
     if not UPSTREAM_CDK2_PDB_PATH.exists() or not UPSTREAM_CDK2_PDBQT_PATH.exists():
         pytest.skip('AlphaSpace2 CDK2 Vina example not available for parity testing')
 
@@ -492,7 +507,7 @@ def test_alphaspace2_native_state_matches_upstream_snapshot_for_cdk2_vina_scores
     )
 
 
-def test_alphaspace2_native_state_matches_upstream_contact_flags():
+def test_alphaspace2_native_state_matches_upstream_contact_flags(mdtraj_available):
     upstream_alphaspace2 = _import_upstream_alphaspace2()
     _patch_upstream_compatibility()
 

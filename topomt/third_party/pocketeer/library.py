@@ -4,6 +4,7 @@ import tempfile
 from pathlib import Path
 
 import numpy as np
+from depdigest import dep_digest
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
@@ -46,6 +47,8 @@ def _normalize_upstream_pocketeer_kwargs(kwargs):
     return normalized
 
 
+@dep_digest('pocketeer', when={'upstream_root': None})
+@dep_digest('biotite')
 def get_topography(
     molecular_system,
     *,
@@ -83,7 +86,7 @@ def get_topography(
 
         import biotite.structure as struc
 
-        filtered_atom_indices = np.arange(len(atomarray), dtype=int)
+        filtered_atom_indices: np.ndarray = np.arange(len(atomarray), dtype=int)
         if normalized_kwargs.get('ignore_hydrogens', True):
             filtered_atom_indices = filtered_atom_indices[
                 atomarray.element[filtered_atom_indices] != 'H'

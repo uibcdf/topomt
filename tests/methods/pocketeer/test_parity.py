@@ -12,13 +12,17 @@ POCKETEER_REPO = Path.home() / 'repos@others' / 'pocketeer'
 
 @pytest.fixture(scope='module')
 def upstream_pocketeer():
-    sys.path.insert(0, str(POCKETEER_REPO / 'src'))
+    if not POCKETEER_REPO.exists():
+        pytest.skip('local Pocketeer upstream mirror is not available')
+    search_path = str(POCKETEER_REPO / 'src')
+    inserted = search_path not in sys.path
+    if inserted:
+        sys.path.insert(0, search_path)
     try:
-        pocketeer_module = importlib.import_module('pocketeer')
-    except ModuleNotFoundError as exc:
-        pytest.skip(f'Upstream pocketeer dependency missing: {exc}')
-    yield pocketeer_module
-    sys.path.remove(str(POCKETEER_REPO / 'src'))
+        yield importlib.import_module('pocketeer')
+    finally:
+        if inserted:
+            sys.path.remove(search_path)
 
 
 def test_pocketeer_parity_with_upstream(upstream_pocketeer):

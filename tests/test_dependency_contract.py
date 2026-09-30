@@ -63,7 +63,7 @@ def test_depdigest_inventory_tracks_feature_dependencies_only():
 
 
 def _raise_missing_dependency(
-    module_name, pypi_name=None, caller=None, exception_class=ImportError
+    module_name, pypi_name=None, caller=None, exception_class=ImportError, **kwargs
 ):
     raise exception_class(library=pypi_name or module_name, caller=caller)
 

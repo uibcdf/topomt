@@ -1,6 +1,7 @@
 import json
 import sys
 import warnings
+import zipfile
 from io import BytesIO
 from pathlib import Path
 
@@ -13,12 +14,19 @@ from topomt.get_topography import get_topography
 from topomt.provider_output import ProviderRun
 from topomt.third_party.pycasta.library import _protein_atom_indices_from_pdb
 
-UPSTREAM_ROOT = Path('/home/diego/repos@others/pycasta/src/pycasta')
+UPSTREAM_ROOT = Path.home() / 'repos@others' / 'pycasta' / 'src' / 'pycasta'
 BOUND_DIR = UPSTREAM_ROOT / 'data' / 'bounded'
 
 
-def test_pycasta_atom_mapping_skips_interleaved_hetatm(tmp_path):
-    original_lines = (BOUND_DIR / '2pk4.pdb').read_text().splitlines()
+@pytest.fixture
+def reference_pdb_lines():
+    archive = Path(tmt.__file__).parent / 'data' / 'CASTpFold_server' / '2pk4.zip'
+    with zipfile.ZipFile(archive) as files:
+        return files.read('2pk4.pdb').decode().splitlines()
+
+
+def test_pycasta_atom_mapping_skips_interleaved_hetatm(tmp_path, reference_pdb_lines):
+    original_lines = reference_pdb_lines
     protein_lines = [line for line in original_lines if line.startswith('ATOM  ')][:2]
     ligand_line = next(line for line in original_lines if line.startswith('HETATM'))
     input_pdb = tmp_path / 'interleaved.pdb'
@@ -36,12 +44,10 @@ def test_pycasta_atom_mapping_skips_interleaved_hetatm(tmp_path):
     assert mapped.tolist() == [20, 30]
 
 
-def test_pycasta_atom_mapping_rejects_coordinate_mismatch(tmp_path):
-    line = next(
-        line
-        for line in (BOUND_DIR / '2pk4.pdb').read_text().splitlines()
-        if line.startswith('ATOM  ')
-    )
+def test_pycasta_atom_mapping_rejects_coordinate_mismatch(
+    tmp_path, reference_pdb_lines
+):
+    line = next(line for line in reference_pdb_lines if line.startswith('ATOM  '))
     input_pdb = tmp_path / 'one_atom.pdb'
     input_pdb.write_text(line + '\n')
 

@@ -1,9 +1,9 @@
 # Third-party results checkpoint
 
-Updated: 2026-09-26
-Work state: paused at this checkpoint; external-result integration remains active
-when work resumes. The native provider-method review is queued for after its
-final parity gate.
+Updated: 2026-09-30
+Work state: active; the immediate priority is reliable optional original-engine
+execution and shared dependency management. The native provider-method review
+is queued for after the external-result plan's final parity gate.
 Plan: [third_party_results_plan.md](third_party_results_plan.md)
 Tracking issue: [#19](https://github.com/uibcdf/topomt/issues/19)
 Attribute-origin register: [third_party_attribute_origins.md](third_party_attribute_origins.md)
@@ -53,7 +53,9 @@ external-library measurement evidence above.
    [external-result plan](third_party_results_plan.md), and the relevant
    provider inventory. Do not infer that a prior local or remote green run
    covers later commits.
-2. Finish each provider's open field and route inventory. The next concrete
+2. Complete the optional-engine integration described below, including provider
+   release/adoption and regression validation. Then finish each provider's open
+   field and route inventory. The next concrete
    CASTp slice is typed treatment of optional `.4.contrib.csv` atom
    contributions and `.bulb.json` display geometry, with original bytes and
    definitions still retained. The detailed provider-specific next gates are
@@ -68,6 +70,58 @@ external-library measurement evidence above.
    Audit the existing local algorithm for each provider against the saved
    original output. Create its own evidence-based checkpoint and progress
    measure; do not merge its status into this 20/100 figure.
+
+## Optional-engine integration: 2026-09-30
+
+The current uncommitted TopoMT changes register Pocketeer, AlphaSpace2 and
+pyCASTA as soft Python dependencies, guard only the original-library route,
+and preserve source-checkout support. pyCASTA can locate installed scripts and
+runs in an isolated subprocess. AlphaSpace2 has compatibility handling for the
+missing unbound contact arrays in PyPI 0.1.2. SMonitor catalog diagnostics and
+fpocket executable-absence hints have regression coverage.
+
+Installed-distribution comparisons passed for Pocketeer 0.4.0, AlphaSpace2
+0.1.2 and pyCASTA 1.0.8 on the bundled `2pk4.pdb` in a temporary validation
+environment. The shared `molsyssuite@uibcdf_3.13` environment contains fpocket
+4.2.3 from conda-forge. Its direct-CLI provider comparison and ten parametrized
+PDB comparisons passed (11 tests, four unknown-atom-name warnings).
+
+The reusable extension is prepared in an isolated DepDigest checkout and
+reported in [DepDigest #22](https://github.com/uibcdf/depdigest/issues/22), with
+suite coordination in [MolSysSuite #62](https://github.com/uibcdf/molsyssuite/issues/62).
+It adds executable availability checks and explicit disabled installer routes,
+reusing SMonitor diagnostics and conditional dependency guards. The provider
+suite passed 129 tests with one unavailable sibling-checkout test skipped;
+TopoMT consumer checks against that checkout passed 29 tests. This extension
+has not been integrated or released. TopoMT's fpocket absence translation
+remains local until the provider capability is released and adopted.
+
+The current test portability work removes collection-time MDTraj imports,
+uses the bundled PDB for atom-mapping unit tests, and makes missing local
+upstream mirrors explicit skips. A fresh-process regression checks collection
+without optional engines and continued execution of independent tests.
+The focused dependency, warning and source-comparison selection passed 61 tests
+with four upstream AlphaSpace2 division warnings. Ruff and `git diff --check`
+passed. The updated documentation built successfully with eight existing
+heading/toctree warnings; the fresh full build previously retained additional
+unrelated documentation warnings.
+The full local suite finished with 771 passed, 74 failed, 25 skipped, five
+xfailed and 30 warnings across 875 tests (1372 seconds). One failure is the
+known native pyCASTA `1a6w` mismatch (#53). The other 73 are in the MolSysViewer
+addon: missing `_message_history` (57), duplicate shape tags (15), and a tuple
+treated as a string (one). Four representative tests covering these viewer
+failure groups also fail against an isolated archive of the unchanged TopoMT
+HEAD (`34522bebb3fcabfbc6aaa08f56b8ebf823922e3e`) with the same installed
+MolSysViewer checkout. No neighboring consumer
+worktree was modified. This is a failed full run, not a green release gate;
+the viewer failures and native review remain outside this optional-engine slice.
+See [the testing policy](../docs/content/developer/testing.md) and
+[the supported engines](../docs/content/user/third_party_engines.md).
+
+These checks do not close a provider fidelity milestone, certify a resolved
+clean installation on every platform, establish live-server availability,
+or replace the six-job CI rerun. Verified engineering progress remains 20/100;
+native pyCASTA issue #53 remains separate.
 
 ## Provider coverage at this checkpoint
 

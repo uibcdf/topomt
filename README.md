@@ -11,3 +11,7 @@
 Molecular Topography Multi Toolkit is a Python library for the
 detection, representation and analysis of molecular surface topography,
 including pockets, cavities, channels, interfaces, grooves and protrusions.
+
+Original third-party engines are optional. See the [supported engines and
+installation requirements](docs/content/user/third_party_engines.md) for Python
+library, executable, web-service and native routes.
