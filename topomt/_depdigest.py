@@ -1,7 +1,7 @@
 # DepDigest configuration for TopoMT
 from topomt._private.smonitor import LibraryNotFoundError
 
-LIBRARIES = {
+LIBRARIES: dict[str, dict[str, str | None]] = {
     'numpy': {'type': 'hard', 'pypi': 'numpy'},
     'scipy': {'type': 'hard', 'pypi': 'scipy'},
     'molsysmt': {'type': 'hard', 'pypi': 'molsysmt'},
@@ -11,6 +11,14 @@ LIBRARIES = {
     'alphaspace2': {'type': 'soft', 'pypi': 'alphaspace2', 'conda': None},
     'pycasta': {'type': 'soft', 'pypi': 'pycasta', 'conda': None},
     'mdtraj': {'type': 'soft', 'pypi': 'mdtraj'},
+    'fpocket': {
+        'type': 'soft',
+        'kind': 'executable',
+        'executable': 'fpocket',
+        'pypi': None,
+        'conda': 'fpocket',
+        'channel': 'conda-forge',
+    },
     'networkx': {'type': 'soft', 'pypi': 'networkx'},
     'skimage': {'type': 'soft', 'pypi': 'scikit-image'},
     'sklearn': {'type': 'soft', 'pypi': 'scikit-learn'},

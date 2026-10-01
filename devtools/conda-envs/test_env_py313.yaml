@@ -7,6 +7,7 @@ channels:
 dependencies:
 - python
 - pip
+- depdigest >=0.12.0
 - setuptools >=68.0
 - versioningit>=3.0
 - h5py
