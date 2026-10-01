@@ -13,7 +13,12 @@ production:
     - *setup_channels
   dependencies: &production_dependencies
     - *setup_dependencies
+    - argdigest
+    - depdigest >=0.12.0
     - molsysmt
+    - numba
+    - numpy
+    - smonitor
     - pyunitwizard
     - scipy
     - nglview

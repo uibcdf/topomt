@@ -74,9 +74,13 @@ is requested. SMonitor provides the dependency diagnostic. An absent fpocket
 command raises `FpocketError` with its Conda installation hint. Transitive import
 failures and engine execution failures remain distinct from absence.
 
-Older DepDigest versions may also suggest an inferred Conda installation command
-for pip-only engines. Use the commands in the table above. The shared correction
-is tracked in [DepDigest #22](https://github.com/uibcdf/depdigest/issues/22).
+TopoMT requires DepDigest 0.12.0 or newer for executable availability and explicit
+disabled installer routes. The shared check uses the supplied `fpocket_cmd`, so a
+custom executable does not require a separate default `fpocket` on PATH. Missing
+commands retain TopoMT's `FpocketError` and its Conda hint; execution failures
+remain separate. Pip-only engines do not receive inferred Conda installation hints.
+Publication and adoption are tracked in
+[DepDigest #22](https://github.com/uibcdf/depdigest/issues/22).
 
 TopoMT captures submitted input, engine output and execution metadata in
 `Topography.provider_runs`. pyCASTA's `version_tag` is an upstream output tag,

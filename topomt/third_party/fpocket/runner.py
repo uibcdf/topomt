@@ -2,6 +2,9 @@ import subprocess
 from pathlib import Path
 from typing import Sequence
 
+from depdigest import check_dependency
+
+from topomt._depdigest import DOC_URL, LIBRARIES
 from topomt._private.smonitor import TopoMTException
 
 
@@ -12,6 +15,10 @@ class FpocketError(TopoMTException, RuntimeError):
         super().__init__(message, **kwargs)
 
 
+class _MissingExecutable(ImportError):
+    """Distinguish the shared absence result from provider import failures."""
+
+
 def run_fpocket(
     pdb_file: str | Path,
     *,
@@ -19,9 +26,30 @@ def run_fpocket(
     workdir: str | Path | None = None,
     extra_args: Sequence[str] | None = None,
 ) -> Path:
+    """Run the configured fpocket command and return its output directory.
+
+    Availability is checked through DepDigest for ``fpocket_cmd`` before
+    execution. Missing commands and engine failures raise ``FpocketError``;
+    unrelated filesystem and provider errors retain their original identity.
     """
-    Ejecuta fpocket -f <pdb_file> y devuelve el directorio <stem>_out generado.
-    """
+    dependency = LIBRARIES['fpocket']
+    try:
+        check_dependency(
+            'fpocket',
+            kind=dependency['kind'],
+            executable=fpocket_cmd,
+            pypi_name=dependency['pypi'],
+            conda_name=dependency['conda'],
+            conda_channel=dependency['channel'],
+            doc_url=DOC_URL,
+            caller='run_fpocket',
+            exception_class=_MissingExecutable,
+        )
+    except _MissingExecutable as exc:
+        raise FpocketError(
+            str(exc), code='ExecutableNotFoundError', executable=fpocket_cmd
+        ) from exc
+
     pdb_file = Path(pdb_file).resolve()
     if workdir is None:
         workdir = pdb_file.parent
@@ -40,12 +68,6 @@ def run_fpocket(
             capture_output=True,
             text=True,
         )
-    except FileNotFoundError as exc:
-        if not Path(workdir).is_dir():
-            raise
-        raise FpocketError(
-            code='ExecutableNotFoundError', executable=fpocket_cmd
-        ) from exc
     except subprocess.CalledProcessError as exc:
         raise FpocketError(
             f'fpocket failed with code {exc.returncode}:\n{exc.stderr}'

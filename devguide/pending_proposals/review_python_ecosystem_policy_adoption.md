@@ -103,3 +103,59 @@ compatibility failures; representatives of every viewer failure group also
 fail with unchanged TopoMT HEAD. Support-library adoption remains partial until
 the shared release/adoption and public-boundary evidence are reviewed; this
 update does not assert a passing hosted Python matrix.
+
+## Published-provider migration: 2026-10-01
+
+The fpocket boundary now delegates command availability to DepDigest 0.12.0,
+whose immutable release candidate is
+`0da46d9ff31fbe2f92e4e667a32868aebe840b39`. `_depdigest.py` declares fpocket as
+a soft executable with its Conda-forge route and no pip route. The guard checks
+the supplied `fpocket_cmd`; custom commands do not require the default command.
+A private absence sentinel translates only provider-confirmed absence into the
+established public `FpocketError` and `ExecutableNotFoundError` code. Provider
+internal import errors and filesystem/execution failures preserve their identity;
+the original subprocess arguments, working directory and output checks remain.
+Local discovery and the broad missing-file classification have been retired.
+
+`pyproject.toml`, the canonical `devtools/requirements.yaml`, generated environment
+surfaces and Conda recipe require DepDigest >=0.12.0. Production manifests also
+include the already declared hard dependency closure. The controlled DepDigest
+pin identifies that same released commit; all other suite pins, the MolSysMT pin,
+the supported Python range, specialized scientific packages and receptor pins
+are preserved. The legacy broadcasting script would overwrite specialized
+profiles, so only the required entries were merged into those existing profiles.
+Bootstrap-only setup/build environments acquire no runtime dependency.
+
+Six focused tests in `tests/test_fpocket_availability_contract.py` cover truthful
+configuration, absent/custom commands, public exception reconstruction, native
+working-directory failures, execution failure causes and provider import errors.
+Before implementation the original five-test selection had three failures;
+the final six pass against the actual staged 0.12.0 artifact with public SMonitor
+0.17.3 on Linux/Python 3.13.15. Its version, off-checkout import origin, exact
+staging URL and SHA-256 were checked independently. Seven administrative tests
+also pass, full Ruff lint/format over 383 files passes, and scoped mypy passes
+for the two changed runtime modules. The initial mypy run caught heterogeneous
+dictionary inference; the configuration now declares its actual value types.
+
+The manual `optional_engine_contract.yaml` workflow tests this same six-test
+boundary against the exact public artifact on Linux/macOS and all three supported
+Python minors. It checks installed version/origin, public Conda URL and digest.
+It adds no per-push full-engine requirement or branch-protection check. Standalone
+`--noconftest` checks load the real runner/configuration/catalog while isolating
+heavy package facades; they do not certify full TopoMT import, actual fpocket
+execution, scientific parity, viewer compatibility or the full recovery watermark.
+Public installation and hosted workflow results follow once measured.
+
+The broader support-library review remains partial under this issue and #15.
+Scientific defects remain with the component development team. MolSysMT and
+MolSysViewer execution reviews remain deferred under the shared coordination.
+
+The clean public-channel environment contains Conda DepDigest 0.12.0 `py_0`
+with public URL and SHA-256
+`03d5aa569bfeb95bdd253a52e68e59094d9af5a6c4c7bc4ba228d3e36cfb30a3`.
+Its installed import is inside the new prefix, with no editable provider checkout.
+All six availability tests and seven administrative tests pass against this
+public artifact on Linux/Python 3.13.15. Provider installed contract and launcher
+also pass with the environment PATH. The first launcher invocation used the host
+PATH and correctly rejected an outside-prefix launcher; activating the intended
+PATH repairs the invocation without changing provider code or assertions.

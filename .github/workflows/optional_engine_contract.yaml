@@ -1,0 +1,60 @@
+name: Optional engine availability contract
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  availability:
+    name: Availability on ${{ matrix.os }} / Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-15]
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install published providers in an isolated environment
+        uses: mamba-org/setup-micromamba@v3.2.1
+        with:
+          environment-name: engine-contract
+          condarc: |
+            channels:
+              - uibcdf
+              - conda-forge
+            channel_priority: strict
+          create-args: >-
+            python=${{ matrix.python }}
+            depdigest=0.12.0=py_0
+            smonitor=0.17.3=py_0
+            pytest>=8
+            pip
+      - name: Verify installed provider identity and run the availability checks
+        shell: bash -l {0}
+        run: |
+          set -euo pipefail
+          python -m pip install "pytest-receptor==1.1.0"
+          python - <<'PY'
+          import importlib.metadata
+          import json
+          import os
+          from pathlib import Path
+
+          import depdigest
+
+          prefix = Path(os.environ["CONDA_PREFIX"]).resolve()
+          assert Path(depdigest.__file__).resolve().is_relative_to(prefix)
+          assert importlib.metadata.version("depdigest") == "0.12.0"
+          records = [json.loads(p.read_text()) for p in (prefix / "conda-meta").glob("depdigest-*.json")]
+          assert len(records) == 1
+          assert records[0]["url"] == "https://conda.anaconda.org/uibcdf/noarch/depdigest-0.12.0-py_0.tar.bz2"
+          assert records[0]["sha256"] == "03d5aa569bfeb95bdd253a52e68e59094d9af5a6c4c7bc4ba228d3e36cfb30a3"
+          print("Verified published DepDigest 0.12.0; testing the source runner availability boundary.")
+          PY
+          python -m pytest --noconftest --receptor=ci -o addopts= tests/test_fpocket_availability_contract.py
