@@ -183,8 +183,13 @@ class BaseFeature:
             dict_of_lists['atom_id'] = [int(x) for x in dict_of_lists['atom_id']]
         if 'group_id' in dict_of_lists:
             dict_of_lists['group_id'] = [int(x) for x in dict_of_lists['group_id']]
-        atom_indices = self._topography._molsys.topology.get_atom_indices(
-            **dict_of_lists
+        context = self._topography.input_context
+        molecular_system = (
+            context.recover_molecular_system()
+            if context is not None
+            else self._topography._molsys
         )
-
+        atom_indices = molecular_system.topology.get_atom_indices(**dict_of_lists)
+        if context is not None:
+            atom_indices = context.atom_indices[atom_indices].tolist()
         return atom_indices

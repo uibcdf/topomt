@@ -272,6 +272,7 @@ def dfnd_to_topography(
         structure_indices=network.mesh_config.structure_indices,
     )
     topography.dfnd = DFNDData(network, result)
+    topography._input_context = network.input_context
 
     # Promote each wet component to a concavity feature, and each of its mouth motifs
     # (external links) to a child Mouth feature. The local component_id remains a

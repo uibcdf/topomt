@@ -293,7 +293,9 @@ def test_info_presents_raw_nm_lengths_and_volumes_as_angstroms(capsys):
     assert 'Clearance (R_res): 2.150 Å' in output
 
 
-def test_info_uses_global_indices_after_hydrogen_exclusion(tmp_path, monkeypatch):
+def test_info_uses_global_indices_after_hydrogen_exclusion(
+    tmp_path, monkeypatch, capsys
+):
     import molsysmt as msm
 
     pdb = tmp_path / 'hydrogen_first.pdb'
@@ -331,4 +333,9 @@ def test_info_uses_global_indices_after_hydrogen_exclusion(tmp_path, monkeypatch
     monkeypatch.setattr(msm, 'get', fake_get)
     DFNDData(network, result).info(record['tetrahedron_id'])
 
-    assert selections and all(selection == [1, 2, 3, 4] for selection in selections)
+    # Labels are queried in the selected saved MolSys; the card still addresses
+    # atoms in the original source namespace.
+    assert selections and all(selection == [0, 1, 2, 3] for selection in selections)
+    output = capsys.readouterr().out
+    for index in range(1, 5):
+        assert f'Atom {index} (C{index})' in output

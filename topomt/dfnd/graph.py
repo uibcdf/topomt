@@ -11,6 +11,7 @@ from topomt import pyunitwizard as puw
 from topomt.delaunay_mesh import DelaunayMesh
 from topomt.tools.geometry.arrays import _GeometrySnapshot, immutable_array
 from topomt.tools.tessellation import mouth_area_from_faces
+from topomt.topography.input_context import InputContext
 
 from . import families as fam
 from .classify import classify_topology, topology_family
@@ -125,6 +126,17 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
             radii_model=radii_model,
         )
         self.selection = self.mesh_config.selection
+        frames = np.asarray(self.mesh_config.structure_indices)
+        if (
+            frames.size != 1
+            or frames.ndim > 1
+            or frames.dtype.kind not in 'iu'
+            or int(frames.flat[0]) < 0
+        ):
+            raise ValueError(
+                'DFND requires a single explicit non-negative frame index.'
+            )
+        frame_index = int(frames.flat[0])
         self.structure_indices = self.mesh_config.structure_indices
         self.epsilon = self.mesh_config.epsilon
         self.hydrogen_policy = self.mesh_config.hydrogen_policy
@@ -133,7 +145,7 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
         topo = msm.convert(
             molecular_system,
             to_form='molsysmt.MolSys',
-            structure_indices=self.structure_indices,
+            structure_indices=frame_index,
         )
         atom_indices = self._select_atoms(topo, self.selection, self.hydrogen_policy)
 
@@ -153,6 +165,28 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
         )
 
         self._initialize_geometry(atom_coords, atom_radii, atom_indices)
+        self._input_context = InputContext(
+            coordinates=puw.quantity(self.atom_coords, 'nm'),
+            radii=puw.quantity(self.atom_radii, 'nm'),
+            atom_indices=self.atom_indices_map,
+            selection=self.selection,
+            structure_index=frame_index,
+            selection_syntax='MolSysMT',
+            hydrogen_policy=self.hydrogen_policy,
+            radii_model=self.radii_model,
+            molecular_system=msm.extract(topo, selection=atom_indices),
+        )
+
+    @property
+    def input_context(self) -> InputContext:
+        """Return the captured geometry, source mapping and recoverable frame.
+
+        Returns
+        -------
+        InputContext
+            Read-only selected input, shared across probe queries.
+        """
+        return self._input_context
 
     @staticmethod
     def _select_atoms(topo, selection, hydrogen_policy):
@@ -218,6 +252,16 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
             coordinates,
             radii,
             np.asarray(atom_indices, dtype=int),
+        )
+        instance._input_context = InputContext(
+            coordinates=puw.quantity(instance.atom_coords, 'nm'),
+            radii=puw.quantity(instance.atom_radii, 'nm'),
+            atom_indices=instance.atom_indices_map,
+            selection='array',
+            structure_index=None,
+            selection_syntax='explicit_indices',
+            hydrogen_policy='provided_atoms',
+            radii_model='provided',
         )
         return instance
 

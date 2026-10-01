@@ -29,6 +29,16 @@ Mutable coordinate/radius/map inputs cannot retarget an existing network;
 cached arrays and public numerical views are protected, and probe queries share
 their geometry. The guard above protects only that delivered slice.
 
+The subsequent [input-context slice](../topography_input_context.md) retains
+selected single-frame molecular input through MolSysMT, explicit source atom
+maps, quantity-valued coordinates/radii and source occurrence namespaces.
+`tests/test_dfnd_input_context.py` and `tests/test_topography_input_binding.py`
+guard live input edits, historical recovery, copy/restoration, source rebinding
+and native source/local label conversion. Standalone validation lives in
+`tests/test_topography_input_context.py`. This delivery remains partial;
+neutral support, complete method/source provenance and registry write migration
+are not covered by these input guards.
+
 ## Why
 
 Cached geometry, source identity and recoverable support must describe the

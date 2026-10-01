@@ -14,6 +14,11 @@ ownership/context/support contract, with numerical/reference validation #75/#76.
 Its [native numeric snapshot slice](DFND/checkpoint_geometry_snapshots_2026_10_01.md)
 is implemented and measured; source recovery and neutral public support/mutation
 adoption remain open.
+The subsequent [input-context slice](topography_input_context.md) delivers
+selected-frame molecular recovery, shared numerical storage, explicit source
+mapping and source-rebinding rejection. The original input reference remains
+a compatibility reference. Neutral support/availability, provider context
+adoption and remaining public mutation/provenance gates are still open.
 The provider-output delivery below is historical and remains independently
 usable; broader provider work is paused. No runtime gate is closed by this audit.
 

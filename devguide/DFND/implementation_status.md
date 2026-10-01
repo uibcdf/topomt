@@ -14,6 +14,12 @@ protect input and cached arrays and share geometry across probes. Memory and
 regression evidence is recorded there; #60's public context/support gate remains
 partial.
 
+Subsequent progress: [selected-frame input contexts](../topography_input_context.md)
+retain selected MolSysMT topology/structural metadata without copying a full
+trajectory. Explicit source maps, saved-label diagnostics, protected quantities,
+shared probe context and analysed-source rebinding are guarded. Public neutral
+support, complete provenance and remaining mutation paths are still pending.
+
 This document separates the DFND design intent from the current code state.
 
 ## 1. Strategic Status

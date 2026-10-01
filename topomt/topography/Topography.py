@@ -8,6 +8,7 @@ import molsysmt as msm
 
 from topomt.features import _FEATURE_PREFIXES, _FEATURE_TYPE_REGISTRY
 from topomt.provider_output import ProviderRun
+from topomt.topography.input_context import InputContext
 
 from ..features.BaseFeature import (
     BaseFeature,
@@ -62,6 +63,7 @@ class Topography(Mapping[str, BaseFeature]):
         # molecular system references
         self._molecular_system: Any | None = None
         self._molsys: Any | None = None
+        self._input_context: InputContext | None = None
         self.selection = selection
         self.structure_indices = structure_indices
 
@@ -179,17 +181,46 @@ class Topography(Mapping[str, BaseFeature]):
         self.provider_runs[run.run_id] = run
 
     @property
+    def input_context(self) -> InputContext | None:
+        """Historical selected input when the analysis engine captures it.
+
+        Returns
+        -------
+        InputContext or None
+            Read-only context, or None for an unadopted analysis route.
+            Recovery returns selected local atom order, with an explicit source
+            map. The molecular_system compatibility reference can remain live.
+        """
+        return self._input_context
+
+    @property
     def molecular_system(self) -> Any | None:
+        """Original input reference; use input_context for historical recovery."""
         return self._molecular_system
 
     @molecular_system.setter
     def molecular_system(self, value: Any | None) -> None:
-        if value is None:
-            self._molecular_system = None
-            self._molsys = None
-        else:
-            self._molecular_system = value
-            self._molsys = msm.convert(value, to_form='molsysmt.MolSys')
+        if (
+            self._features
+            or self.provider_runs
+            or self._input_context is not None
+            or hasattr(self, 'dfnd')
+        ):
+            raise ValueError(
+                'Cannot retarget an analysis; construct a new Topography instead.'
+            )
+        converted = (
+            None
+            if value is None
+            else msm.convert(
+                value,
+                selection=self.selection,
+                structure_indices=self.structure_indices,
+                to_form='molsysmt.MolSys',
+            )
+        )
+        self._molecular_system = value
+        self._molsys = converted
 
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
     # public: add_feature and add_new_feature
@@ -619,12 +650,23 @@ class Topography(Mapping[str, BaseFeature]):
         """
         from molsysmt import view as msm_view
 
-        view = msm_view(self._molecular_system, standard=True, **kwargs)
+        context = self.input_context
+        molecular_system = (
+            context.recover_molecular_system()
+            if context is not None
+            else self._molecular_system
+        )
+        view = msm_view(molecular_system, standard=True, **kwargs)
 
         for fid, feature in self._features.items():
             if feature.feature_type == 'pocket':
                 if feature.atom_indices is not None:
-                    sel = '@' + ','.join(map(str, feature.atom_indices))
+                    indices = feature.atom_indices
+                    if context is not None:
+                        indices = context.local_atom_indices(
+                            indices, source_id=context.source_id
+                        )
+                    sel = '@' + ','.join(map(str, indices))
                     # Assign a color per pocket or a default one
                     view.add_surface(sel, opacity='0.3', color='red')
 

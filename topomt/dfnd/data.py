@@ -28,6 +28,7 @@ from typing import Any
 
 from .. import pyunitwizard as puw
 from ..tools.geometry.arrays import _GeometrySnapshot
+from ..topography.input_context import InputContext
 from .components import build_components
 from .config import DFNDQuery
 
@@ -220,6 +221,17 @@ class DFNDData:
     @property
     def network(self) -> Any:
         return self._network
+
+    @property
+    def input_context(self) -> InputContext | None:
+        """Return historical input shared by every query of this native network.
+
+        Returns
+        -------
+        InputContext or None
+            Native captured input; None for legacy diagnostic-only containers.
+        """
+        return getattr(self._network, 'input_context', None)
 
     def get_tetrahedra(
         self, tetrahedron_ids: Any = None, **filters
@@ -422,7 +434,14 @@ class DFNDData:
             except Exception:
                 target_ids = [int(tetrahedron_id)]
 
-        mol_sys = getattr(self._network, 'molecular_system', None)
+        context = self.input_context
+        if context is None:
+            mol_sys = getattr(self._network, 'molecular_system', None)
+        else:
+            try:
+                mol_sys = context.recover_molecular_system()
+            except ValueError:
+                mol_sys = None
 
         for tid in target_ids:
             tet_rec = None
@@ -439,14 +458,27 @@ class DFNDData:
             residue_details = []
             if mol_sys is not None:
                 try:
+                    local_indices = (
+                        system_atom_indices
+                        if context is None
+                        else context.local_atom_indices(
+                            system_atom_indices, source_id=context.source_id
+                        )
+                    )
                     atom_names = msm.get(
-                        mol_sys, selection=system_atom_indices, atom_name=True
+                        mol_sys, element='atom', selection=local_indices, atom_name=True
                     )
                     res_names = msm.get(
-                        mol_sys, selection=system_atom_indices, residue_name=True
+                        mol_sys,
+                        element='atom',
+                        selection=local_indices,
+                        residue_name=True,
                     )
                     res_ids = msm.get(
-                        mol_sys, selection=system_atom_indices, residue_id=True
+                        mol_sys,
+                        element='atom',
+                        selection=local_indices,
+                        residue_id=True,
                     )
 
                     if not isinstance(atom_names, (list, tuple, np.ndarray)):

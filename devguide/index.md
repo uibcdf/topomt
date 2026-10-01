@@ -6,6 +6,11 @@ and the next engineering steps.
 
 ## Main documents
 
+- [topography_input_context.md](topography_input_context.md)
+  Delivered selected-frame input context under #60: MolSysMT recovery, shared
+  protected quantities, original atom mapping, binding rejection and explicit
+  legacy-source compatibility. Neutral spatial support remains pending.
+
 - [DFND/checkpoint_geometry_snapshots_2026_10_01.md](DFND/checkpoint_geometry_snapshots_2026_10_01.md)
   Delivered native numeric ownership slice of #60, immutable shared geometry,
   input-change/reprobe guards and measured memory limits. Public context/support

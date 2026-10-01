@@ -17,6 +17,11 @@ Subsequent progress: #60's [native numeric snapshot slice](checkpoint_geometry_s
 is implemented and measured. Continue with source/frame recovery, public
 mutation paths and neutral context/support adoption; #60 remains partial.
 
+Subsequent progress: [input-context recovery](../topography_input_context.md)
+and analysed-source rebinding rejection are delivered. Neutral spatial support,
+remaining public mutation paths and method/source provenance are next; #60
+remains partial.
+
 Forward-looking roadmap recorded on 2026-05-22. It captures where DFND stands now
 and the prioritized next directions. It complements
 [`Implementation_Route.md`](Implementation_Route.md) (the original "build and

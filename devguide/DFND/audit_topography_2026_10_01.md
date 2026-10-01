@@ -301,3 +301,11 @@ the public context/support schema and mutation migration are still pending.
 
 The final expanded selection, including restored-snapshot protection, reporting
 checks and executable examples, passes 385 tests with seven existing skips.
+
+Further progress on 2026-10-01: the [selected-frame input-context slice](../topography_input_context.md)
+retains selected topology/structural metadata through MolSysMT and protected
+quantity-valued geometry sharing native buffers. Historical source/local maps
+and labels remain coherent after live source edits; source replacement on an
+analysed Topography is rejected. Original-input compatibility references can
+remain live. Public neutral support and remaining context/provenance/mutation
+gates remain pending under #60; this does not close #75/#76.

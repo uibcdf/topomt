@@ -31,6 +31,14 @@ is now delivered: mutable input arrays cannot change historical cached geometry,
 native arrays are protected and probes share buffers. Public mutation and
 source/context/support gates remain open.
 
+Subsequent progress: [selected-frame input contexts](topography_input_context.md)
+now retain recoverable selected MolSysMT topology and structural metadata,
+protected quantities and explicit source mappings. Native diagnostics and
+`Topography.show()` use this evidence; populated/analysed source rebinding is
+rejected. Neutral support, provider context adoption and remaining public
+mutation paths keep #60 partial. The original-input compatibility reference can
+remain live and is distinct from historical recovery.
+
 Initial [provider pocket delivery](provider_pocket_output_checkpoint.md) (#65)
 and [MolSysViewer adoption](provider_output_viewer_checkpoint.md) (#66) are
 implemented. Their provisional contracts remain usable while broader provider

@@ -51,12 +51,60 @@ buffers while copying mutable metadata.
 Pickle restoration reapplies array protection. It may allocate fresh buffers;
 it is not a canonical Topography interchange schema.
 
-This native protection does not make all legacy result dictionaries or feature
-fields immutable. The broader Topography context/support contract and behavior
-of assigning its `molecular_system` remain under development. A retained live
-system reference identifies the source; use the captured mesh coordinates for
-historical geometric measurements.
+DFND also captures an input context shared by the network, its probe results
+and the promoted Topography. It preserves requested selection, resolved atom
+order, original frame index, radius/hydrogen policies and selected molecular
+topology. Public coordinates and radii in the context are protected
+PyUnitWizard quantities. Only one selected frame is retained.
+
+For a molecular workflow:
+
+```python
+from topomt import get_topography
+from topomt.dfnd import synthetic
+
+source = synthetic.tetrahedron().to_molsysmt()
+topography = get_topography(source, method='dfnd', structure_indices=0)
+context = topography.input_context
+saved_selection = context.recover_molecular_system()
+original_atom_indices = context.atom_indices
+```
+
+The recovered MolSys is an independent, editable copy. It contains selected
+atoms in local order `0..N-1` and the saved frame at index 0. `atom_indices`
+maps those atoms back to the original input. Requested selection order may
+differ from MolSysMT's resolved selection order; the map records the order
+actually used by DFND. The opaque `source_id` identifies this captured
+occurrence, rather than a universal molecular identity. To translate original
+indices explicitly, use
+`context.local_atom_indices(indices, source_id=context.source_id)`.
+
+Array-only inputs preserve geometry and mapping without inventing molecular
+topology: `recover_molecular_system()` raises `ValueError` for those inputs.
+DFND requires a single explicit frame index, either a scalar or a one-element
+sequence. Multiple/empty/`'all'` frame requests raise `ValueError`; analyse
+frames separately. Geometry is nonperiodic Cartesian, even when recoverable
+input metadata contains a box; minimum-image calculations are not performed.
+
+`Topography.molecular_system` and `feature.molecular_system` remain original
+input references and can be live. Use the context for historical recovery;
+native diagnostic labels and `Topography.show()` do so automatically. Assigning
+`molecular_system` on an object containing features, an input context or engine
+results raises `ValueError`. Construct a new Topography/analysis for changed
+input. Empty objects without results can still bind an input.
+
+This protection does not make all legacy result dictionaries, feature fields
+or registry views immutable. Other engine routes currently expose
+`input_context=None`; their existing provider-specific outputs remain usable.
+The complete public context/spatial-support contract remains under development.
+The native MolSysViewer addon has its separate source/index-space contract;
+its adoption of historical input contexts is not covered by `Topography.show()`.
 
 Retaining multiple probe results still costs memory for their separate records,
 graphs and components. Retain only the results needed by the workflow; geometry
 sharing does not eliminate those per-query allocations.
+The retained selected topology also costs memory once per input context. The
+original compatibility reference can keep a source trajectory alive, even
+though the context only captures one frame. Copy/pickle preserve recovery and
+array protection; a full Topography/network copy or pickle can also copy/store
+its original input reference. No cross-version interchange format is promised.
