@@ -58,6 +58,7 @@ bounded outcomes, not full-provider certification.
 
 ## Detailed records and discussion
 
+- [Permanent CASTp / CASTpFold discussion #73](https://github.com/uibcdf/topomt/discussions/73) in External Tools.
 - [Original output inventory](external_output_inventory.md).
 - [Classical functional closure](checkpoint_2026_04_23_castp1_functional_parity_closure.md).
 - [CASTp3/CASTpFold reproducibility boundary](checkpoint_2026_05_19_castp3_reproducibility_boundary.md).
@@ -67,4 +68,3 @@ bounded outcomes, not full-provider certification.
 Update this overview when installation, routes, evidence or issue state changes.
 Keep detailed measurements in the linked inventories/checkpoints and public
 work state in its owning issue; do not replace history with an unqualified green status.
-

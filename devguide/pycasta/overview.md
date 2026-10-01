@@ -62,6 +62,7 @@ bounded outcomes, not full-provider certification.
 
 ## Detailed records and discussion
 
+- [Permanent pyCASTA discussion #72](https://github.com/uibcdf/topomt/discussions/72) in External Tools.
 - [Original output inventory](external_output_inventory.md).
 - [Native contract and repository/paper distinction](contract.md).
 - [Native adapter](../../topomt/third_party/pycasta/native.py).
@@ -71,4 +72,3 @@ bounded outcomes, not full-provider certification.
 Update this overview when installation, routes, evidence or issue state changes.
 Keep detailed measurements in the linked inventories/checkpoints and public
 work state in its owning issue; do not replace history with an unqualified green status.
-

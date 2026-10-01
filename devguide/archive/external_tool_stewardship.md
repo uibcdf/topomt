@@ -1,16 +1,16 @@
 ---
 summary: Centralize external-tool discovery and integrated-provider stewardship.
 issue: uibcdf/topomt#67
-status: partial
+status: resolved
 opened: 2026-10-01
-closed:
+closed: 2026-10-01
 severity: low
 verification: inspected
 area: [documentation, integrations]
 guard:
-normative:
+normative: devguide/external_tools_catalog.md#maintenance-rule
 blocked_by: []
-supersedes: []
+supersedes: [uibcdf/topomt#8]
 ---
 
 # External-tool catalogue and integrated-provider stewardship
@@ -66,3 +66,25 @@ External tools category: GitHub's GraphQL API exposes discussion creation but no
 category-creation mutation. Keep this issue open until publication, reverse links
 and historical-intake routing are verified. No scientific test was rerun as part
 of this documentation change.
+
+Before publication, origin/main advanced to 1aa25c4 (shared optional-engine
+contract and published DepDigest migration). Merge f7ab6d2 preserves those
+changes. Ruff/index checks still pass. An additional reporting/availability
+selection yielded three passes and five failures: the new availability tests
+imported editable DepDigest 0.10.1+15.g78a9106, below the merged >=0.12.0
+requirement, and could not address checker.shutil. Both the shared environment
+and earlier provider-validation environment import that older checkout. This
+is not passing availability evidence for the merged boundary; its correctly
+installed published-provider evidence remains in the owning #56 review.
+
+## Resolution (2026-10-01)
+
+The user created External Tools as an open-ended category; GraphQL confirmed
+isAnswerable=false. Discussions #68–#73 now provide one catalogue conversation
+and one permanent conversation per integrated provider. All opening posts link
+the maintained records; each overview and the catalogue link back. Issue #8's
+historical comments remain intact and its superseded record names the new
+research destination. Native regressions and descriptor issues are not closed
+or replaced by this organization outcome. Final local/index/render checks and
+publication evidence are recorded in #67; full installed-engine/CI certification
+is outside this bounded organization gate.

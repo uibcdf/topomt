@@ -5,6 +5,17 @@ comparison references and research candidates. Historical intake remains in
 [#8](https://github.com/uibcdf/topomt/issues/8); bounded reorganization is
 tracked in [#67](https://github.com/uibcdf/topomt/issues/67).
 
+Permanent conversation: [catalogue discussion #68](https://github.com/uibcdf/topomt/discussions/68)
+in the [External Tools category](https://github.com/uibcdf/topomt/discussions/categories/external-tools).
+
+| Integrated provider conversation | Maintained overview |
+|---|---|
+| [fpocket #69](https://github.com/uibcdf/topomt/discussions/69) | [Overview](fpocket4/overview.md) |
+| [Pocketeer #70](https://github.com/uibcdf/topomt/discussions/70) | [Overview](pocketeer/overview.md) |
+| [AlphaSpace2 #71](https://github.com/uibcdf/topomt/discussions/71) | [Overview](alphaspace2/overview.md) |
+| [pyCASTA #72](https://github.com/uibcdf/topomt/discussions/72) | [Overview](pycasta/overview.md) |
+| [CASTp / CASTpFold #73](https://github.com/uibcdf/topomt/discussions/73) | [Overview](castp/overview.md) |
+
 ## Ownership and current scope
 
 This catalogue and the five linked provider overviews are permanent, versioned
@@ -26,6 +37,13 @@ retain their provenance until separately admitted under that contract.
 All five are both optional providers and comparison references. Availability of
 a package or service, original-adapter fidelity, local reproduction and canonical
 Topography admission are separate statuses.
+
+Shared availability and diagnostics follow the
+[MolSysSuite optional-engine contract](https://github.com/uibcdf/molsyssuite/blob/main/devguide/optional_engine_integration.md).
+TopoMT's adoption evidence lives in [the ecosystem review](pending_proposals/review_python_ecosystem_policy_adoption.md)
+under [#56](https://github.com/uibcdf/topomt/issues/56). The current package
+requires DepDigest >=0.12.0; an older editable checkout is not an installed
+verification target for the new executable boundary.
 
 | Provider overview | Original routes and result | Original/runtime evidence | Local reproduction |
 |---|---|---|---|

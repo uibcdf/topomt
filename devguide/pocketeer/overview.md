@@ -61,6 +61,7 @@ bounded outcomes, not full-provider certification.
 
 ## Detailed records and discussion
 
+- [Permanent Pocketeer discussion #70](https://github.com/uibcdf/topomt/discussions/70) in External Tools.
 - [Original output inventory](external_output_inventory.md).
 - [Existing native contract](../pocketeer_contract.md).
 - [Native comparison assertions](../../tests/methods/pocketeer/test_parity.py).
@@ -69,4 +70,3 @@ bounded outcomes, not full-provider certification.
 Update this overview when installation, routes, evidence or issue state changes.
 Keep detailed measurements in the linked inventories/checkpoints and public
 work state in its owning issue; do not replace history with an unqualified green status.
-
