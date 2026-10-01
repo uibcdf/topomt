@@ -179,3 +179,10 @@ availability cases and seven administrative tests pass against the clean public
 provider; scoped mypy and changed-file Ruff lint/format pass. The final exact
 source needs its own focused hosted run; the preceding six-case run remains
 historical evidence.
+
+Final focused run [36829466420](https://github.com/uibcdf/topomt/actions/runs/36829466420)
+completed/success at `0fbaa32dc74100e8fb04e2c06e7ee29093cd3fc9` after integrating
+concurrent catalogue documentation. All six native verification steps succeeded;
+logs show nine passed availability cases in every Linux/macOS Python 3.11–3.13
+cell. Dispatch 36829387085 targeted the then-remote 7bd47fa after a rejected push
+and is not credited with these new cases. No remote work was overwritten.
