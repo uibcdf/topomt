@@ -11,6 +11,7 @@ import pytest
 from devtools.castp.audit_castp3_radii import (
     audit_archive,
     audit_bulb_contacts,
+    parse_contribution_atom_serials,
     summarize_audits,
 )
 from topomt.third_party.castp3.core.castp_core.geometry import (
@@ -154,6 +155,34 @@ def test_radius_summary_distinguishes_presence_from_observation():
     assert summary['label_coverage']['SER:OG']['observed_castp3_protor'] > 0
 
 
+def test_contribution_identity_rejects_a_mismatched_atom_label():
+    pdb = b'ATOM     72  CD1 TRP A 109     -20.029  50.761  61.248  1.00 17.72           C  \n'
+    with pytest.raises(ValueError, match='identity'):
+        parse_contribution_atom_serials(b'ATOM,72,CD2,TRP,A,109\n', pdb)
+
+
+def test_contribution_identity_accepts_joined_chain_and_large_residue_number():
+    pdb = b'ATOM   2420  N   GLU B1159      15.234   0.062 -17.512  1.00 49.38           N  \n'
+    assert parse_contribution_atom_serials(
+        b'# No cusp correction.\nATOM,2420,N,GLU,B1159,2418,43.6696\n', pdb
+    ) == {2420}
+
+
+def test_contribution_membership_resolves_terminal_interior_conflict():
+    archive = (
+        Path(__file__).resolve().parents[3] / 'topomt/data/CASTpFold_server/1bid.zip'
+    )
+    raw = audit_archive(archive)
+    selected = audit_archive(archive, atom_source='contributions')
+    assert raw['profiles']['castp3_protor']['bulb_statuses']['conflict'] == 2
+    assert selected['profiles']['castp3_protor']['bulb_statuses'] == {
+        'compatible': sum(raw['profiles']['castp3_protor']['bulb_statuses'].values())
+    }
+    assert selected['skipped_atoms']['absent_from_contributions'] == 1
+    assert selected['archive_sha256'] == raw['archive_sha256']
+    assert selected['contributions_sha256']
+
+
 def test_pinned_radius_summary_accounts_for_all_archived_inputs():
     root = Path(__file__).resolve().parents[3]
     summary = json.loads(
@@ -173,6 +202,32 @@ def test_pinned_radius_summary_accounts_for_all_archived_inputs():
     for counts in summary['profile_statuses'].values():
         assert sum(counts.values()) == summary['bulb_count'] == 59080
     assert len(summary['castp3_protor_candidates']) == 3
+
+
+def test_contribution_radius_summary_guards_all_input_hashes_and_terminal_observations():
+    root = Path(__file__).resolve().parents[3]
+    summary = json.loads(
+        (
+            root / 'devguide/castp/artifacts/contribution_radius_audit_2026_10_01.json'
+        ).read_text()
+    )
+    assert summary['archive_count'] == 89
+    assert summary['profile_statuses']['castp3_protor'] == {'compatible': 59080}
+    for case in summary['cases']:
+        path = root / f'topomt/data/CASTpFold_server/{case["case"]}.zip'
+        assert hashlib.sha256(path.read_bytes()).hexdigest() == case['archive_sha256']
+        with ZipFile(path) as archive:
+            member = next(
+                name for name in archive.namelist() if name.endswith('.contrib.csv')
+            )
+            assert (
+                hashlib.sha256(archive.read(member)).hexdigest()
+                == case['contributions_sha256']
+            )
+    observations = summary['terminal_atom_inclusion']['observations']
+    assert len(observations) == 87
+    assert sum(row['listed'] for row in observations) == 12
+    assert {row['group'] for row in observations if row['listed']} == {'GLY', 'LEU'}
 
 
 @pytest.mark.parametrize(
@@ -215,7 +270,7 @@ def test_terminal_oxygen_hypothesis_reconstructs_independent_archived_bulbs(
         np.asarray([line[76:78].strip() for line in support]),
         np.zeros(4, dtype=int),
     )
-    assert base[-1] == 1.46
+    assert base[-1] == 1.50
     bulb = bulbs[feature_id - 1][bulb_id]
     printed = np.asarray([bulb['c'][axis] for axis in 'xyz'])
     reconstructed = []

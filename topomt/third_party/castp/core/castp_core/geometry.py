@@ -1595,12 +1595,27 @@ def build_castp_geometry(
     discard_redundant_vertices: bool = True,
     atom_radii_override: np.ndarray | None = None,
 ) -> CastpGeometry:
-    """Build the weighted geometric substrate used by the native CASTp path."""
+    """Build the weighted geometric substrate used by the native CASTp path.
+
+    ProtOr represents attached hydrogens implicitly. Explicit hydrogen atoms
+    are omitted through MolSysMT selection while original atom indices and
+    requested order are retained. Explicit radius overrides and classical
+    parameter policies retain their selected atoms.
+    """
 
     molsys = msm.convert(
         molecular_system, to_form='molsysmt.MolSys', structure_indices=structure_indices
     )
     atom_indices = msm.select(molsys, selection=selection)
+    if atom_radii_override is None and radii_model == 'protor':
+        # United-atom radii already include attached hydrogens. A separate H
+        # sphere would count them twice and can fill otherwise valid voids.
+        hydrogen_indices = set(
+            msm.select(molsys, selection='atom_type == "H"', mask=atom_indices)
+        )
+        atom_indices = [
+            index for index in atom_indices if index not in hydrogen_indices
+        ]
 
     atom_coordinates = puw.get_value(
         msm.get(molsys, selection=atom_indices, coordinates=True),

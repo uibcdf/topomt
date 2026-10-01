@@ -68,3 +68,79 @@ def test_protor_connectivity_failure_is_preserved(
             INPUT_ROOT / 'regular_tetrahedron_v1/input_castp.pdb',
             radii_model=radii_model,
         )
+
+
+@pytest.fixture
+def protein_with_explicit_hydrogen(tmp_path):
+    pdb = tmp_path / 'explicit_hydrogen.pdb'
+    labels = [('N', 'N'), ('CA', 'C'), ('C', 'C'), ('O', 'O'), ('H', 'H')]
+    points = [(3, 3, 3), (3, -3, -3), (-3, 3, -3), (-3, -3, 3), (12, 0, 0)]
+    pdb.write_text(
+        ''.join(
+            f'ATOM  {index:5d} {name:^4s} ALA A   1    {x:8.3f}{y:8.3f}{z:8.3f}  1.00  0.00          {element:>2s}  \n'
+            for index, ((name, element), (x, y, z)) in enumerate(
+                zip(labels, points), start=1
+            )
+        )
+        + 'END\n'
+    )
+    return pdb
+
+
+@pytest.mark.parametrize(
+    'implementation,radii_model',
+    [
+        (castp_geometry, 'protor'),
+        (castp3_geometry, 'protor'),
+        (castp3_geometry, 'castp3_protor'),
+    ],
+)
+def test_protor_geometry_omits_explicit_hydrogen_but_preserves_source_indices(
+    implementation, radii_model, protein_with_explicit_hydrogen
+):
+    geometry = implementation.build_castp_geometry(
+        protein_with_explicit_hydrogen, radii_model=radii_model
+    )
+    assert geometry.atom_indices_map.tolist() == [0, 1, 2, 3]
+    assert geometry.atom_coordinates.shape == (4, 3)
+
+
+def test_protor_hydrogen_selection_preserves_requested_atom_order(
+    protein_with_explicit_hydrogen,
+):
+    geometry = castp3_geometry.build_castp_geometry(
+        protein_with_explicit_hydrogen,
+        selection=[4, 2, 0, 3, 1],
+        radii_model='castp3_protor',
+    )
+    assert geometry.atom_indices_map.tolist() == [2, 0, 3, 1]
+
+
+@pytest.mark.parametrize('implementation', [castp_geometry, castp3_geometry])
+@pytest.mark.parametrize('mode', ['castp_param', 'override'])
+def test_non_protor_geometry_preserves_explicit_hydrogen(
+    implementation, mode, protein_with_explicit_hydrogen
+):
+    options = (
+        {'radii_model': mode}
+        if mode != 'override'
+        else {'atom_radii_override': np.full(5, 3.1)}
+    )
+    geometry = implementation.build_castp_geometry(
+        protein_with_explicit_hydrogen, **options
+    )
+    assert geometry.atom_indices_map.tolist() == [0, 1, 2, 3, 4]
+
+
+@pytest.mark.parametrize(
+    'profile,terminal_retained', [('castp3_protor', False), ('protor', True)]
+)
+def test_only_server_profile_omits_an_observed_unlisted_terminal_atom(
+    profile, terminal_retained, protein_with_explicit_hydrogen
+):
+    pdb = protein_with_explicit_hydrogen
+    lines = pdb.read_text().splitlines()
+    lines[4] = lines[4][:12] + ' OXT' + lines[4][16:76] + ' O' + lines[4][78:]
+    pdb.write_text('\n'.join(lines) + '\n')
+    geometry = castp3_geometry.build_castp_geometry(pdb, radii_model=profile)
+    assert (4 in geometry.atom_indices_map) == terminal_retained

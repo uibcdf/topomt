@@ -104,3 +104,15 @@ the bounded pytest causes while other matrix cells were still running:
 None of those named failures is in the CASTp selectors. This completed job
 does not certify the other cells or a green matrix. The new CASTp radius-profile
 slice has separate local evidence; the wider failures remain outside that slice.
+
+## 2026-10-01 9516716 job evidence
+
+In run `36937886645`, the completed Ubuntu/Python 3.13 job `110622317159`
+reports seven failures, 1,590 passes, 85 skips and five expected failures.
+GH Run Receptor identified failed test jobs; its pending-run report did not
+resolve their causes. Native failed-log inspection was unavailable while the
+run was active, so the completed job-log API supplied the bounded causes.
+They are the same four DFND raw hash comparisons, two unavailable fpocket
+executable comparisons and missing `depdigest` installed metadata described
+above. No CASTp selector failure is reported. This is evidence for that
+completed cell only; the other cells and subsequent source remain uncertified.

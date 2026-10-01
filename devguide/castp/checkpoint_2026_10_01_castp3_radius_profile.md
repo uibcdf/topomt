@@ -1,5 +1,13 @@
 # Modern CASTp radius profile and expanded closed-void panel
 
+## Subsequent input-policy evidence
+
+The [later hydrogen/terminal checkpoint](checkpoint_2026_10_01_hydrogen_and_terminal_policy.md)
+adds united-atom explicit-H exclusion and bounded empirical OXT rules. The
+four-system results and first profile described below retain their original
+scope; statements that all other atoms retain their old assignments precede
+the GLY/LEU OXT = 1.50 Å observation and the thirteen terminal omission rules.
+
 Date: 2026-10-01. Owning issue:
 [#80](https://github.com/uibcdf/topomt/issues/80).
 This extends the [first closed-void milestone](checkpoint_2026_10_01_modern_void_measurements.md).

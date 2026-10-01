@@ -6,7 +6,9 @@ All numerical inputs to the geometry operation below are in angstroms.
 """
 
 import argparse
+import csv
 import hashlib
+import io
 import json
 from collections import Counter, defaultdict
 from pathlib import Path
@@ -138,7 +140,60 @@ def audit_bulb_contacts(
     }
 
 
-def audit_archive(archive_path: Path, probe_radius: float = 1.4) -> dict:
+def parse_contribution_atom_serials(contents: bytes, pdb_contents: bytes) -> set[int]:
+    """Read contribution membership and verify its source atom identity.
+
+    Parameters
+    ----------
+    contents, pdb_contents
+        Exact contribution CSV and original PDB bytes from one archived job.
+
+    Returns
+    -------
+    set[int]
+        Original PDB serials explicitly listed by the contribution output.
+        No scalar contribution or later variable-width CSV field is parsed.
+
+    Raises
+    ------
+    ValueError
+        If identities are missing, duplicated or inconsistent with the PDB.
+
+    Examples
+    --------
+    Use ``audit_archive(..., atom_source='contributions')`` for paired inputs.
+    """
+    source = {}
+    for line in pdb_contents.decode().splitlines():
+        if line.startswith(('ATOM', 'HETATM')):
+            serial = int(line[6:11])
+            if serial in source:
+                raise ValueError('Duplicate source atom identity.')
+            source[serial] = (
+                line[:6].strip(),
+                line[12:16].strip(),
+                line[17:20].strip(),
+            )
+    serials: set[int] = set()
+    for row in csv.reader(io.StringIO(contents.decode())):
+        if not row or row[0] not in {'ATOM', 'HETATM'}:
+            continue
+        if len(row) < 4:
+            raise ValueError('Incomplete contribution atom identity.')
+        serial = int(row[1])
+        if serial in serials or source.get(serial) != (row[0], row[2], row[3]):
+            raise ValueError(
+                'Contribution atom identity does not match the source PDB.'
+            )
+        serials.add(serial)
+    if not serials:
+        raise ValueError('No contribution atom identity records.')
+    return serials
+
+
+def audit_archive(
+    archive_path: Path, probe_radius: float = 1.4, *, atom_source: str = 'pdb'
+) -> dict:
     """Return profile observations from one exact archived PDB/bulb pair.
 
     Parameters
@@ -147,6 +202,9 @@ def audit_archive(archive_path: Path, probe_radius: float = 1.4) -> dict:
         CASTpFold ZIP containing one PDB and one bulb JSON.
     probe_radius
         Probe used by that archived job, in angstroms; supplied explicitly.
+    atom_source
+        ``'pdb'`` retains raw supported atom rows; ``'contributions'`` uses
+        independently verified contribution membership to study input policy.
 
     Returns
     -------
@@ -165,13 +223,23 @@ def audit_archive(archive_path: Path, probe_radius: float = 1.4) -> dict:
     --------
     ``audit_archive(Path('topomt/data/CASTpFold_server/1hew.zip'))``
     """
+    if atom_source not in {'pdb', 'contributions'}:
+        raise ValueError('Unknown archived atom source.')
     with ZipFile(archive_path) as archive:
         members = {}
-        for suffix in ('.pdb', '.bulb.json'):
+        suffixes = ('.pdb', '.bulb.json') + (
+            ('.contrib.csv',) if atom_source == 'contributions' else ()
+        )
+        for suffix in suffixes:
             names = [name for name in archive.namelist() if name.endswith(suffix)]
             if len(names) != 1:
                 raise ValueError(f'Expected one {suffix} member, found {len(names)}.')
             members[suffix] = archive.read(names[0])
+    included = (
+        parse_contribution_atom_serials(members['.contrib.csv'], members['.pdb'])
+        if atom_source == 'contributions'
+        else None
+    )
     rows = []
     skipped: Counter[str] = Counter()
     serials = set()
@@ -192,6 +260,9 @@ def audit_archive(archive_path: Path, probe_radius: float = 1.4) -> dict:
             and name not in _PROTOR_PROTEIN_BACKBONE_TYPES
         ):
             skipped['non_supported_atom'] += 1
+            continue
+        if included is not None and serial not in included:
+            skipped['absent_from_contributions'] += 1
             continue
         atom_type = _infer_protor_type_for_atom(group, name, element, 0)
         rows.append(
@@ -304,7 +375,14 @@ def audit_archive(archive_path: Path, probe_radius: float = 1.4) -> dict:
         'skipped_atoms': dict(skipped),
         'label_presence': dict(sorted(Counter(row['label'] for row in rows).items())),
         'profiles': profiles,
-    }
+    } | (
+        {
+            'atom_source': atom_source,
+            'contributions_sha256': hashlib.sha256(members['.contrib.csv']).hexdigest(),
+        }
+        if included is not None
+        else {}
+    )
 
 
 def summarize_audits(cases: list[dict]) -> dict:
@@ -381,6 +459,11 @@ def summarize_audits(cases: list[dict]) -> dict:
                     for name, profile in case['profiles'].items()
                 }
             }
+            | {
+                key: case[key]
+                for key in ('atom_source', 'contributions_sha256')
+                if key in case
+            }
         )
     return {
         'schema': 'topomt.castp_radius_summary@1',
@@ -407,6 +490,9 @@ def main() -> None:
     parser.add_argument('--output', type=Path, required=True)
     parser.add_argument('--summary-output', type=Path)
     parser.add_argument('--probe-radius', type=float, default=1.4)
+    parser.add_argument(
+        '--atom-source', choices=('pdb', 'contributions'), default='pdb'
+    )
     args = parser.parse_args()
     paths = (
         [args.zip_dir / f'{case}.zip' for case in args.ids]
@@ -415,7 +501,7 @@ def main() -> None:
     )
     cases = []
     for path in paths:
-        result = audit_archive(path, args.probe_radius)
+        result = audit_archive(path, args.probe_radius, atom_source=args.atom_source)
         cases.append(result)
         print(
             path.stem,

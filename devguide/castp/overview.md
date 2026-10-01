@@ -7,6 +7,14 @@ local CASTp3 reconstruction under [#79](https://github.com/uibcdf/topomt/issues/
 Broader provider work remains paused under the
 [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
+Latest scientific slice: the
+[hydrogen and terminal-policy checkpoint](checkpoint_2026_10_01_hydrogen_and_terminal_policy.md)
+resolves the three missing 1CGE voids by excluding explicit H from ProtOr
+preparation. It implements only the observed terminal rules in the explicit
+server profile and records complete bulb compatibility using verified archived
+contribution membership. The molecular panel expands to twenty-two systems;
+terminal types absent from the corpus remain unvalidated under #84.
+
 ## Identity, installation and use
 
 Upstream: <https://cfold.bme.uic.edu/castpfold/>. Follow upstream licensing and scientific citation
@@ -84,7 +92,7 @@ exception to the deferred broader review. No equivalence deadline is promised.
 
 - Complete original archive layouts, optional atom contributions and bulb fields under [#19](https://github.com/uibcdf/topomt/issues/19).
 - Validate live server availability separately and record the last successful submission/date.
-- Resolve terminal-oxygen inclusion/radii (#84) and the three missing 1CGE closed voids (#85).
+- Complete unobserved terminal-oxygen/protonation coverage under #84; the 1CGE hydrogen defect (#85) is resolved.
 - Review independent SA/MS metrics and mouth/surface definitions under [#41–#52](https://github.com/uibcdf/topomt/issues?q=is%3Aissue+is%3Aopen+CASTp).
 - Retain CASTp1 historical evidence and experimental CASTp3 identity when native review resumes.
 
@@ -99,6 +107,7 @@ bounded outcomes, not full-provider certification.
 - [Modern closed-void measurements checkpoint](checkpoint_2026_10_01_modern_void_measurements.md).
 - [Modern radius profile and expanded panel](checkpoint_2026_10_01_castp3_radius_profile.md).
 - [Full corpus radius coverage and twenty-system void panel](checkpoint_2026_10_01_radius_coverage_and_void_panel.md).
+- [Hydrogen preparation and bounded terminal policy](checkpoint_2026_10_01_hydrogen_and_terminal_policy.md).
 - [Classical functional closure](checkpoint_2026_04_23_castp1_functional_parity_closure.md).
 - [CASTp3/CASTpFold reproducibility boundary](checkpoint_2026_05_19_castp3_reproducibility_boundary.md).
 - [Historical fidelity contract](contract.md).

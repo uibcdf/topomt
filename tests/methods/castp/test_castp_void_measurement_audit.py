@@ -60,15 +60,15 @@ def test_pinned_crambin_void_matches_all_four_server_measures():
     assert result['passed']
 
 
-def test_pinned_1cge_audit_retains_missing_voids_in_parity_denominator():
-    """Track #85 honestly until all seven archived voids are reproduced."""
+def test_pinned_1cge_voids_match_all_memberships_and_measures():
+    """Guard #85 with all seven cavities from the hydrogen-bearing input."""
     archive = (
         Path(__file__).resolve().parents[3] / 'topomt/data/CASTpFold_server/1cge.zip'
     )
     result = audit_archive_voids(archive)
     assert result['oracle_voids'] == 7
-    assert result['native_voids'] == result['exact_memberships'] == 4
-    assert len(result['missing_memberships']) == 3
-    assert result['passed_measures'] == 16
+    assert result['native_voids'] == result['exact_memberships'] == 7
+    assert not result['missing_memberships']
+    assert result['passed_measures'] == 28
     assert result['failed_measures'] == 0
-    assert not result['passed']
+    assert result['passed']

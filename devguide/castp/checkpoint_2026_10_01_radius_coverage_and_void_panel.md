@@ -1,5 +1,16 @@
 # CASTp radius coverage and expanded closed-void checkpoint
 
+## Subsequent hydrogen and terminal-policy correction
+
+The [later checkpoint](checkpoint_2026_10_01_hydrogen_and_terminal_policy.md)
+resolves 1CGE by excluding explicit hydrogen from united-atom ProtOr geometry.
+Verified contribution membership separates terminal inclusion from radius
+assignment and makes all 59,080 archived bulbs compatible with the revised
+numerical profile. The observed GLY/LEU OXT radii and thirteen omission labels
+are now implemented; unobserved terminal types remain partial under #84.
+The counts, failure guard and no-override statements below retain the original
+audit's scope and are superseded by that later evidence where explicitly stated.
+
 Date: 2026-10-01. Bounded outcome under
 [#82](https://github.com/uibcdf/topomt/issues/82), extending the
 [four-system radius-profile study](checkpoint_2026_10_01_castp3_radius_profile.md).

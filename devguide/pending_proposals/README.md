@@ -50,16 +50,16 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
-### Partial (3)
+### Partial (4)
 
+- [`castp3_terminal_oxygen_policy.md`](castp3_terminal_oxygen_policy.md) — [#84](https://github.com/uibcdf/topomt/issues/84) — Determine terminal-oxygen radius and inclusion policy before extending the empirical CASTp profile. *(partial, measured)*
 - [`noarch_distribution_adoption.md`](noarch_distribution_adoption.md) — [#78](https://github.com/uibcdf/topomt/issues/78) — Adopt the distribution policy and a guarded single-file noarch publication route. *(partial, measured)*
 - [`topography_context_and_support.md`](topography_context_and_support.md) — [#60](https://github.com/uibcdf/topomt/issues/60) — Adopt explicit Topography analysis context and spatial support. *(partial, measured)*
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
-### Open (3)
+### Open (2)
 
 - [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
-- [`castp3_terminal_oxygen_policy.md`](castp3_terminal_oxygen_policy.md) — [#84](https://github.com/uibcdf/topomt/issues/84) — Determine terminal-oxygen radius and inclusion policy before extending the empirical CASTp profile. *(open, measured)*
 - [`dfnd_reference_validation_panel.md`](dfnd_reference_validation_panel.md) — [#76](https://github.com/uibcdf/topomt/issues/76) — Reconcile DFND synthetic reference assumptions and freeze independent validation evidence. *(open, inspected)*
 
 <!-- /generated -->

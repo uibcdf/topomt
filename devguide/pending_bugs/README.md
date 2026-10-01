@@ -11,7 +11,7 @@ Read [the reporting protocol](../reporting_protocol.md) before filing.
 
 ### Open (2)
 
-- [`castp3_1cge_missing_closed_voids.md`](castp3_1cge_missing_closed_voids.md) — [#85](https://github.com/uibcdf/topomt/issues/85) — Resolve three missing native closed cavities in the pinned 1CGE CASTpFold output. *(open, reproduced)*
+- [`castp_geometry_existing_typing_errors.md`](castp_geometry_existing_typing_errors.md) — [#86](https://github.com/uibcdf/topomt/issues/86) — Correct the preexisting typing errors in the two CASTp geometry modules without changing scientific behavior. *(open, reproduced)*
 - [`dfnd_volume_precision_claims.md`](dfnd_volume_precision_claims.md) — [#75](https://github.com/uibcdf/topomt/issues/75) — DFND solvent-volume precision and finite-sample uncertainty are overstated. *(open, reproduced)*
 
 <!-- /generated -->

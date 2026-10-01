@@ -1,7 +1,7 @@
 ---
 summary: Determine terminal-oxygen radius and inclusion policy before extending the empirical CASTp profile.
 issue: uibcdf/topomt#84
-status: open
+status: partial
 opened: 2026-10-01
 closed:
 severity: medium
@@ -51,3 +51,26 @@ unknown changes remain outside the current evidence.
 Establish reproducible inclusion and typing rules with independent archived
 and, where necessary, controlled new inputs. Validate affected topology and
 SA/MS measures before adopting an explicit provider-specific policy.
+
+## Delivered bounded evidence and policy
+
+Every contribution serial is checked against the exact PDB record/atom/residue
+identity. Across all 89 archives, 12 protein OXT atoms are listed (three GLY,
+nine LEU); 68 OXT atoms in thirteen other observed protein residue types are
+unlisted. Seven OXT records belong to unsupported residues and are also unlisted.
+No explicit H is listed. The exact inclusion evidence and independent bulb
+audit are in `castp/artifacts/contribution_radius_audit_2026_10_01.json`.
+
+With verified contribution membership and GLY/LEU OXT = 1.50 Å, all 59,080
+bulbs are compatible. Runtime `castp3_protor` implements the observed thirteen
+omission rules and the two observed radius assignments without reading any
+oracle. Explicit radius overrides bypass these rules. Standard `protor`
+retains its terminal assignments and selection policy, apart from the shared
+united-atom H correction in #85.
+
+This issue stays partial: CYS, PRO, THR, TRP and TYR have no terminal OXT
+observations in the corpus, and protonation variants/live jobs need independent
+validation. Their legacy assignments are retained rather than extrapolating
+an exclusion rule. The authors' rationale remains unknown. Archived input
+membership used to audit radii does not certify native alternate-location
+preparation or open-feature measurements.

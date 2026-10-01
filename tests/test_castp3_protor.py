@@ -59,6 +59,52 @@ def test_castp3_server_profile_distinguishes_carboxylate_radii():
     np.testing.assert_allclose(server, [1.40] * 4 + [1.42] + [1.46] * 3)
 
 
+def test_castp3_server_profile_assigns_only_observed_terminal_radii():
+    groups = np.asarray(['GLY', 'LEU', 'ALA', 'PRO'])
+    names = np.full(4, 'OXT')
+    elements = np.full(4, 'O')
+    bonds = np.ones(4, dtype=int)
+    np.testing.assert_allclose(
+        _protor_radii_for_labels(groups, names, elements, bonds), [1.46] * 4
+    )
+    np.testing.assert_allclose(
+        geometry._castp3_protor_radii_for_labels(groups, names, elements, bonds),
+        [1.50, 1.50, 1.46, 1.46],
+    )
+
+
+def test_castp3_server_terminal_inclusion_is_bounded_by_observed_residues():
+    groups = np.asarray(
+        [
+            'GLY',
+            'LEU',
+            'ALA',
+            'ARG',
+            'ASN',
+            'ASP',
+            'GLN',
+            'GLU',
+            'HIS',
+            'ILE',
+            'LYS',
+            'MET',
+            'PHE',
+            'SER',
+            'VAL',
+            'PRO',
+            'CYS',
+            'THR',
+            'TRP',
+            'TYR',
+            'UNK',
+            'ALA',
+        ]
+    )
+    names = np.asarray(['OXT'] * 21 + ['O'])
+    mask = geometry._castp3_protor_atom_mask(groups, names)
+    assert mask.tolist() == [True, True] + [False] * 13 + [True] * 7
+
+
 def test_castp3_server_profile_preserves_explicit_radius_overrides(monkeypatch):
     # Profile dispatch must not override an explicit user sphere model.
     from pathlib import Path

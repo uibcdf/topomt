@@ -52,6 +52,25 @@ _PROTOR_RESIDUE_NAME_ALIASES = {
     'HSE': 'HIE',
     'HSP': 'HIP',
 }
+# These terminal labels are absent from contribution records in the pinned
+# 89-archive corpus. Unobserved terminal residue types retain the old policy.
+_CASTP3_OMITTED_TERMINAL_GROUPS = frozenset(
+    {
+        'ALA',
+        'ARG',
+        'ASN',
+        'ASP',
+        'GLN',
+        'GLU',
+        'HIS',
+        'ILE',
+        'LYS',
+        'MET',
+        'PHE',
+        'SER',
+        'VAL',
+    }
+)
 _PROTOR_PROTEIN_HEAVY_ATOM_TYPES = {
     'ALA': {'N': 'N3H1', 'CA': 'C4H1', 'C': 'C3H0', 'O': 'O1H0', 'CB': 'C4H3'},
     'ARG': {
@@ -562,8 +581,10 @@ def _castp3_protor_radii_for_labels(
 
     Pinned CASTpFold bulb centers and orthosphere radii identify 1.40 Å for
     ASP/GLU carboxylate oxygens, independently of reported SA/MS measures.
-    Other atoms retain the existing ProtOr assignments. This server profile
-    is separate from the standard ``protor`` policy, which retains 1.42 Å.
+    GLY/LEU OXT uses 1.50 Å, independently reconstructed from three bulbs in
+    two archives. Other atoms retain the existing ProtOr assignments. This
+    server profile is separate from the standard ``protor`` policy, which
+    retains 1.42 Å carboxylate and its legacy terminal assignments.
     """
 
     radii = _protor_radii_for_labels(group_names, atom_names, atom_types, n_bonds)
@@ -577,7 +598,30 @@ def _castp3_protor_radii_for_labels(
         label = str(group).strip().upper(), str(atom).strip().upper()
         if label in carboxylate_labels:
             radii[index] = 1.40
+        elif label in {('GLY', 'OXT'), ('LEU', 'OXT')}:
+            radii[index] = 1.50
     return radii
+
+
+def _castp3_protor_atom_mask(
+    group_names: np.ndarray, atom_names: np.ndarray
+) -> np.ndarray:
+    """Return the bounded archived-server terminal-atom inclusion mask.
+
+    This empirical rule only omits terminal labels observed absent from all
+    contribution records in the corpus. Unobserved residue types are not
+    extrapolated; their previous assignment remains unvalidated under #84.
+    """
+    return np.asarray(
+        [
+            not (
+                str(atom).strip().upper() == 'OXT'
+                and str(group).strip().upper() in _CASTP3_OMITTED_TERMINAL_GROUPS
+            )
+            for group, atom in zip(group_names, atom_names)
+        ],
+        dtype=bool,
+    )
 
 
 def _rank_of_ratio(
@@ -1817,17 +1861,26 @@ def build_castp_geometry(
     including the empirically identified ASP/GLU carboxylate oxygen radii.
     Both typing policies require connectivity. An explicit radius override
     supplies already-expanded balls and takes precedence over either profile.
+    ProtOr represents attached hydrogens implicitly: explicit hydrogen atoms
+    are omitted while retained atom indices still refer to the original input.
+    The empirical server profile also omits observed unlisted OXT labels;
+    terminal residue types absent from the evidence retain the legacy policy.
     """
 
     molsys = msm.convert(
         molecular_system, to_form='molsysmt.MolSys', structure_indices=structure_indices
     )
     atom_indices = msm.select(molsys, selection=selection)
+    if atom_radii_override is None and radii_model in {'protor', 'castp3_protor'}:
+        # United-atom radii already include attached hydrogens. A separate H
+        # sphere would count them twice and can fill otherwise valid voids.
+        hydrogen_indices = set(
+            msm.select(molsys, selection='atom_type == "H"', mask=atom_indices)
+        )
+        atom_indices = [
+            index for index in atom_indices if index not in hydrogen_indices
+        ]
 
-    atom_coordinates = puw.get_value(
-        msm.get(molsys, selection=atom_indices, coordinates=True),
-        to_unit='angstroms',
-    )[0]
     atom_group_names = np.asarray(
         msm.get(molsys, selection=atom_indices, group_name=True),
         dtype=object,
@@ -1836,6 +1889,15 @@ def build_castp_geometry(
         msm.get(molsys, selection=atom_indices, atom_name=True),
         dtype=object,
     )
+    if atom_radii_override is None and radii_model == 'castp3_protor':
+        mask = _castp3_protor_atom_mask(atom_group_names, atom_names)
+        atom_indices = np.asarray(atom_indices, dtype=int)[mask]
+        atom_group_names = atom_group_names[mask]
+        atom_names = atom_names[mask]
+    atom_coordinates = puw.get_value(
+        msm.get(molsys, selection=atom_indices, coordinates=True),
+        to_unit='angstroms',
+    )[0]
     if atom_radii_override is not None:
         atom_radii = np.asarray(atom_radii_override, dtype=float)
         if atom_radii.shape[0] != atom_coordinates.shape[0]:
