@@ -97,7 +97,37 @@ class Topography(Mapping[str, BaseFeature]):
         return len(self._features)
 
     def copy(self, deep: bool = True) -> Topography:
-        """Return a semantic copy preserving all analysis state."""
+        """Copy the analysis state into an independent feature registry.
+
+        Parameters
+        ----------
+        deep : bool, optional
+            If True (default), recursively copy analysis payloads. If False,
+            copy payloads shallowly; nested scientific data may remain shared.
+            Both modes copy registry indexes and relation sets independently
+            and bind the copied features to the new Topography.
+
+        Returns
+        -------
+        Topography
+            The copied analysis with its own feature registry.
+
+        Notes
+        -----
+        Shallow copies support independent add, remove, rename, replace and
+        connect operations. They do not isolate mutation of nested analysis
+        payloads; use a deep copy when that isolation is required.
+
+        Examples
+        --------
+        >>> from topomt import Topography
+        >>> original = Topography()
+        >>> copied = original.copy(deep=False)
+        >>> copied.add_new_feature('pocket')
+        'POC-1'
+        >>> len(original), len(copied)
+        (0, 1)
+        """
         return copy.deepcopy(self) if deep else copy.copy(self)
 
     def __copy__(self):
@@ -105,7 +135,18 @@ class Topography(Mapping[str, BaseFeature]):
         for name, value in self.__dict__.items():
             if name == '_features':
                 continue
-            setattr(new_topography, name, copy.copy(value))
+            if name in (
+                '_by_dimensionality',
+                '_by_shape',
+                '_by_type',
+                '_children_of',
+                '_parents_of',
+            ):
+                # Each registry owns its mutable membership and adjacency sets.
+                copied_value = {key: ids.copy() for key, ids in value.items()}
+            else:
+                copied_value = copy.copy(value)
+            setattr(new_topography, name, copied_value)
         new_topography._features = {}
         for feature_id, feature in self._features.items():
             new_feature = feature.copy(deep=False)

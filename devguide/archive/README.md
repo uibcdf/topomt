@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (6)
+### Resolved (7)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*
@@ -13,6 +13,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`provider_output_viewer_adoption.md`](provider_output_viewer_adoption.md) — [#66](https://github.com/uibcdf/topomt/issues/66) — Adopt original provider pocket outputs in the MolSysViewer addon. *(resolved, inspected)*
 - [`provider_pocket_outputs.md`](provider_pocket_outputs.md) — [#65](https://github.com/uibcdf/topomt/issues/65) — Expose original provider pocket outputs without DFND prerequisites. *(resolved, inspected)*
 - [`topography_conceptual_contract.md`](topography_conceptual_contract.md) — [#59](https://github.com/uibcdf/topomt/issues/59) — Define the DFND-grounded public Topography conceptual contract and bounded adoption gates. *(resolved, inspected)*
+- [`topography_shallow_copy_indexes.md`](topography_shallow_copy_indexes.md) — [#74](https://github.com/uibcdf/topomt/issues/74) — Shallow Topography copies share nested registry indexes and relation sets. *(resolved, measured)*
 
 ### Superseded (1)
 

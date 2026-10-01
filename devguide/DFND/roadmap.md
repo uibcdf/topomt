@@ -7,6 +7,12 @@ test evidence, integrity findings and the next sequence. The May roadmap below
 is historical; its missing-promotion and absent-lineage descriptions no longer
 describe current code. Scientific validation remains open.
 
+Implementation progress (2026-10-01): the bounded
+[Topography shallow-copy correction](../archive/topography_shallow_copy_indexes.md)
+(#74) is delivered. Native snapshot/cache ownership and public context/support
+(#60) remain the next slice; this does not complete the integrity baseline or
+the numerical/reference validation gates (#75/#76).
+
 Forward-looking roadmap recorded on 2026-05-22. It captures where DFND stands now
 and the prioritized next directions. It complements
 [`Implementation_Route.md`](Implementation_Route.md) (the original "build and

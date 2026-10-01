@@ -11,6 +11,13 @@ additional engines and concrete DockingMT/PharmacophoreMT adoption remain paused
 or deferred. The dated September sequence below is historical; no DFND runtime
 or scientific gate is completed by this planning update.
 
+Implementation progress (2026-10-01): the bounded
+[Topography shallow-copy correction](archive/topography_shallow_copy_indexes.md)
+(#74) is delivered with regression tests. The next stage-0 slice is native
+snapshot/cache ownership under #60, followed by its public context/support
+contract. Independent synthetic/reference validation (#76) and numerical
+precision (#75) retain their separate acceptance criteria.
+
 Current scheduling decision (2026-09-30): deliver usable original-provider
 pockets first through provider-specific provisional outputs and shared consumer
 access. See the [current checkpoint](provider_pocket_output_checkpoint.md), #65.

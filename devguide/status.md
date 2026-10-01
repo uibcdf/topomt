@@ -22,8 +22,11 @@ On 2026-10-01 the user selected joint DFND/Topography work, starting with
 The audited local selector passed 312 tests with two skips; additional probes
 reproduced shallow-copy index corruption (#74), mutable native-cache ownership
 risks (#60) and overstated numerical certainty (#75). Independent reference
-validation is tracked in #76. The next implementation sequence is the bounded
-copy correction followed by #60's ownership/context/support slice.
+validation is tracked in #76. The bounded
+[copy correction](archive/topography_shallow_copy_indexes.md) (#74) is now
+implemented with failing-first regressions for all five registry operations in
+both directions. The next implementation slice is #60's ownership/context/support
+contract; the stage-0 native snapshot/cache gate remains open.
 
 Initial [provider pocket delivery](provider_pocket_output_checkpoint.md) (#65)
 and [MolSysViewer adoption](provider_output_viewer_checkpoint.md) (#66) are
@@ -70,8 +73,8 @@ The DFND backlog is:
 - Full-graph and component-graph nodes share one viewer-neutral tetrahedron centre extractor with explicit units and structured identity.
 - Standalone selected-feature rendering emits the requested filtered operations, and addon context actions use executable entries without no-op click callbacks.
 - `Topography` and DFND `Components` registries have validated mutation and
-  registered-ID protection. The newly reproduced Topography shallow-copy defect
-  remains open in #74; direct mutable views and snapshot ownership remain #60.
+  registered-ID protection. Topography shallow copies now own independent index
+  and relation sets (#74); direct mutable views and snapshot ownership remain #60.
 - `R_residence` and `R_gate` are implemented as clearance primitives with active tests.
 - DFND raw records separate topological/debug volumes from `volume_solvent_estimate`.
 - DFND promotes void/pocket/channel, percolating regions and provisional

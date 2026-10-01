@@ -8,8 +8,9 @@ issues. Closing the conceptual decision does not complete these runtime gates.
 
 Scheduling update (2026-10-01): the user has selected joint DFND/Topography
 work, starting with [the audit and roadmap](DFND/audit_topography_2026_10_01.md).
-The next implementation sequence is #74's bounded copy correction and #60's
-ownership/context/support slice, with numerical/reference validation #75/#76.
+The bounded [copy correction](archive/topography_shallow_copy_indexes.md) (#74)
+is implemented and guarded. The next implementation slice is #60's
+ownership/context/support contract, with numerical/reference validation #75/#76.
 The provider-output delivery below is historical and remains independently
 usable; broader provider work is paused. No runtime gate is closed by this audit.
 

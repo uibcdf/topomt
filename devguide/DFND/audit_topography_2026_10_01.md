@@ -4,6 +4,9 @@ Date: 2026-10-01. Audited source: `7bd47faba6179a6e02444331e442acd251572564`.
 Scope: native DFND, public Topography, their contracts, current tests and owning
 issues. This audit changes documentation and work tracking, not runtime code.
 
+Subsequent implementation progress is recorded at the end of this document.
+The assessment and reproductions retain their explicitly named audited source.
+
 ## Decision and precedence
 
 The user has selected DFND and Topography as the next workstream, starting with
@@ -101,7 +104,7 @@ original raise `KeyError('POC-renamed')`. `__copy__` copies dictionaries but
 shares their nested sets. Existing registry-copy coverage exercises `deep=True`.
 
 Owner: [#74](https://github.com/uibcdf/topomt/issues/74), with
-[reproduction and acceptance](../pending_bugs/topography_shallow_copy_indexes.md).
+[reproduction, acceptance and subsequent resolution](../archive/topography_shallow_copy_indexes.md).
 Fix this bounded defect before extending registry ownership.
 
 ### Exposed native geometry can make caches and identity stale
@@ -188,7 +191,7 @@ outcomes must not be rewritten as current certification.
 
 | Stage | Delivery | Owner / exit evidence |
 | --- | --- | --- |
-| 0. Integrity baseline | Isolate shallow-copy registry state; define ownership of cached geometry and public mutation paths. | #74 plus the first #60 slice. Failing regressions first; add/remove/rename/connect cannot corrupt another registry; input mutation cannot silently reuse old caches/keys. |
+| 0. Integrity baseline | Isolate shallow-copy registry state; define ownership of cached geometry and public mutation paths. | Bounded #74 copy correction delivered; first #60 slice remains open. Add/remove/rename/replace/connect cannot corrupt another registry; input mutation must not silently reuse old caches/keys. |
 | 1. Public context/support | Choose concrete schema/ownership, retain input/probe/atom-map/version evidence and adopt neutral support references. | #60. One DFND concavity + Mouth and one incomplete provider fixture; equal lining with different supports distinguished; probe/reporting/classification changes preserve the right identities. |
 | 2. Numerical and scientific trust | Correct uncertainty/precision reporting; classify reference assumptions; freeze small independent synthetic and annotated evidence panels. | #75/#76. Defined accuracy and maturity, independent expected answers, reproducible reports and explicit unresolved cases. This can progress alongside stage 1 after the integrity baseline. |
 | 3. Participants and relations | Add contextual molecular participants, typed containment/boundaries and interface associations with honest localization state. | #61 after #60. Tight dimer with fused bank, shared membership, buried/contact-only interfaces and atomic reference lifecycle tested. |
@@ -196,8 +199,8 @@ outcomes must not be rewritten as current certification.
 | 5. Canonical provider admission | Adopt route-specific capabilities and reported/inferred labels without changing original-output access. | #63 after #60; relation/evaluation capabilities wait for their owners. Incomplete geometry remains explicitly unsupported; no fabricated exact region/mouth. |
 | 6. Distinctive native extensions | Validate subregion promotion, dry/convex features, navigability or public dynamic collections in individually scoped work. | Future bounded scientific issues once a concrete capability is selected. Do not promote all motifs or build a speculative class hierarchy. |
 
-The first implementation package should be **#74 followed by the ownership and
-context/support slice of #60**. Establish stage-2 references before any change
+The bounded **#74 correction is delivered**; the next implementation package is
+**the ownership and context/support slice of #60**. Establish stage-2 references before any change
 intended to fix segmentation or calibrate groove/cleft/funnel. This sequence
 preserves the existing engine while making Topography a trustworthy scientific
 result rather than a bag of mutable attributes.
@@ -253,3 +256,36 @@ clean scoped render and remain documentation debt under #64. Public incremental
 claim a clean full Sphinx build. Concurrent remote changes to fpocket command
 availability are preserved separately; the scientific evidence above remains
 at its explicitly named audited source.
+
+## Subsequent implementation progress (2026-10-01)
+
+The bounded registry-copy correction (#74) is implemented. Registry-owned
+nested index and relation sets are independent in shallow copies, while
+analysis attributes retain their existing shallow payload behavior. Its
+[archived report](../archive/topography_shallow_copy_indexes.md) names the
+guard and preserves the original reproduction.
+
+Failing-first evidence: all ten combinations of five registry operations and
+mutation through either original/copy failed before the correction. After the
+fix, the registry module passes **23 tests**; the same joint DFND/Topography
+selector above passes **324 tests with two existing skips** (63.29 s).
+Reporting/contract-term checks and the copy docstring example pass **4 tests**.
+These are Linux Python 3.13 development-source results, not an installed-package
+or full Python/OS matrix certificate.
+
+The next stage-0 slice remains native snapshot/cache ownership under #60,
+followed by its public context/support adoption. Scientific reference review
+and numerical precision remain #76/#75. No segmentation, classification,
+physical geometry or provider behavior is changed by this correction.
+
+The bounded mypy invocation still reports six pre-existing diagnostics, also
+reproduced against the unchanged preceding source using `--shadow-file`.
+Public annotation/narrowing and checker dependency resolution are recorded in
+[#77](https://github.com/uibcdf/topomt/issues/77); this slice does not claim a
+clean typing gate.
+
+Publication preparation: generated report indexes are current; full Ruff lint
+and format checks pass. The eight authored/updated guide pages render with
+warnings treated as errors, and their local Markdown targets exist. Public
+incremental `make html` succeeds with the same eight existing diagnostics
+tracked in #64. Hosted scientific/matrix evidence remains a separate gate.

@@ -1,13 +1,13 @@
 ---
 summary: Shallow Topography copies share nested registry indexes and relation sets.
 issue: uibcdf/topomt#74
-status: open
+status: resolved
 opened: 2026-10-01
-closed:
+closed: 2026-10-01
 severity: high
-verification: reproduced
+verification: measured
 area: [topography, registry]
-guard:
+guard: tests/test_topography_registry.py::test_shallow_copy_registry_mutations_are_independent
 normative:
 blocked_by: []
 supersedes: []
@@ -60,3 +60,22 @@ Native snapshot/cache ownership is separately tracked in #60.
 Add failing pytest regressions first. Add/remove/rename/replace/connect through
 either copy preserve the other's Mapping, filters, relations and owners. Retain
 deep-copy coverage and explicitly document allowed shallow payload sharing.
+
+## Resolution (2026-10-01)
+
+`Topography.__copy__` now copies every nested membership/adjacency set in the
+five registry-owned index and relation maps. Copied feature objects retain
+independent owners and relation fields. Other analysis attributes still use
+their existing shallow-copy behavior; this correction does not recursively
+duplicate scientific payloads.
+
+Before the implementation change, the guard failed in all ten combinations
+of add/remove/rename/replace/connect and mutation through original/copy.
+After the correction, the registry module passes **23 tests**. The guard
+checks the untouched Mapping, all three filter indexes, parent/child views,
+feature relation fields and owner references. Separate tests retain deep-copy
+coverage and demonstrate nested analysis-payload sharing in shallow mode.
+
+The copy docstring describes this ownership boundary. Direct mutable views,
+native array/cache snapshots and public support/context adoption remain #60;
+this resolution does not close that broader contract.

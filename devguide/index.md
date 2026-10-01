@@ -11,6 +11,12 @@ and the next engineering steps.
   reference review and staged roadmap. DFND/Topography is the selected next
   workstream; broader provider implementation remains paused.
 
+- [archive/topography_shallow_copy_indexes.md](archive/topography_shallow_copy_indexes.md)
+  First delivered roadmap slice (#74): independent shallow-copy registry
+  indexes and relations, failing-first regression evidence and the payload
+  sharing boundary. Native snapshot/cache ownership and context/support (#60)
+  remain the next slice.
+
 - [external_tools_catalog.md](external_tools_catalog.md)
   Maintained external-tool catalogue, comparison/candidate watchlist and
   stewardship rule. Permanent provider overviews: [fpocket](fpocket4/overview.md),

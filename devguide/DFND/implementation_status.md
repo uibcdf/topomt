@@ -4,8 +4,10 @@ Current evidence (2026-10-01): [the joint DFND/Topography audit](audit_topograph
 supersedes conflicting implementation/status and scheduling wording below.
 Promotion includes percolating and provisional morphological classes; lineage
 helpers exist. Public context/support adoption and scientific validation remain
-open. Registry shallow copies and numerical precision have newly reproduced
-limitations (#74/#75); older broad green/copy claims do not certify those paths.
+open. The bounded [registry shallow-copy correction](../archive/topography_shallow_copy_indexes.md)
+(#74) is implemented and guarded; native snapshot/cache ownership (#60) and
+numerical precision (#75) remain open. Older broad green claims do not certify
+those paths.
 
 This document separates the DFND design intent from the current code state.
 
