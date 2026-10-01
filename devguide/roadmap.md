@@ -2,6 +2,15 @@
 
 ## Guiding Principle
 
+Latest scheduling decision (2026-10-01): proceed with
+[case-by-case DFND notebook studies](DFND/notebook_laboratory_checkpoint.md).
+The sequence is regular tetrahedron, independently reviewed closed shell,
+opening, tube and two chambers with a neck. Public notebooks and reproducible
+benchmark artifacts grow alongside scientific validation. This supersedes the
+immediate public-support implementation sequence below; #60, #75 and #76 retain
+their distinct unfinished gates. Historical provider-paused statements do not
+describe the active scientific workstream.
+
 TopoMT should converge toward a reliable native topography framework. External engines remain important references and integration targets, but the native method direction is now DFND.
 
 Current scheduling decision (2026-10-01): joint DFND/Topography work is resumed,

@@ -1,5 +1,14 @@
 # DFND Validation Plan
 
+Current priority (2026-10-01): the
+[notebook laboratory checkpoint](notebook_laboratory_checkpoint.md) governs
+the immediate sequence: independent synthetic case → inspect raw observations
+and plots → vary one parameter → descriptive original-provider comparison →
+adopt a regression guard. Start with the regular tetrahedron, then a reviewed
+closed shell, opening, tube and chambers/neck. Construction labels are not
+independent ground truth. This checkpoint supersedes older real-system-first
+ordering and illustrative peer-ranking gates below.
+
 This document defines the validation path required before DFND is presented as a
 competitive pocket, channel, or topography detector.
 
@@ -156,8 +165,9 @@ serves, see [`research_program.md`](research_program.md).
 ### 4.1. Claims (primary → secondary)
 
 - **P0 — Trustworthy, complete characterization (primary).** DFND's outputs obey
-  the contract (Sections 1–3), are deterministic, are *exact* on synthetic
-  ground truth, carry honest error bounds, are labelled by maturity
+  the contract (Sections 1–3), are deterministic, match independently justified
+  synthetic references within declared tolerances, report uncertainty honestly
+  where established, are labelled by maturity
   (`output_status.py`), and cover the surface's topography completely
   (pockets / voids / channels / percolating regions / mouths / dry network /
   interfaces). This is what lets a user rely on and act on the results.
@@ -175,8 +185,10 @@ serves, see [`research_program.md`](research_program.md).
 
 ### 4.2. Ground-truth tiers (strong → weak)
 
-1. **Synthetic (exact answer)** — `toy_systems_v1.md` / `synthetic.py`: known
-   void volumes, known channel bottlenecks. Assertable exactly.
+1. **Synthetic (independent reference)** — `toy_systems_v1.md` / `synthetic.py`:
+   controlled inputs whose atomic-ball assumptions and expected observables
+   must be independently justified case by case. Exact shape construction does
+   not establish exact solvent volume or continuous navigability.
 2. **Annotated (real answer)** — curated PDBs with a known ligand/site; known
    channel proteins; classic buried cavities (T4 lysozyme L99A, myoglobin Xe).
 3. **Peer concordance (descriptive, NOT pass/fail)** — DFND vs the per-feature
@@ -201,8 +213,8 @@ and known cases.
 
 | Axis | Metric | Gate (to set) |
 | --- | --- | --- |
-| C1 | relative volume/area error vs CASTp/analytic; R²/slope over the panel | e.g. <5–10% on synthetics; R²>0.9 vs CASTp |
-| C2 | DCA ≤4 Å; top-N recovery; atomic Jaccard with the site | ≥ fpocket/CASTp baseline |
+| C1 | clearance/topology/volume error against an independent reference with the same physical definition | case-specific tolerance fixed before tuning; solvent-volume precision pending #75 |
+| C2 | site distance, top-N recovery and atomic overlap on verified annotated inputs | report and investigate; no peer-ranking acceptance gate |
 | C3a | feature↔reference match (greedy/Hungarian by overlap): precision/recall/F1 | report + characterize |
 | C4 | completion rate; run-to-run raw hash; probe-sweep stability | 100%; byte-identical; no spurious jumps |
 

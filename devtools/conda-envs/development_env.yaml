@@ -21,6 +21,10 @@ dependencies:
 - pytest-xdist
 - codecov
 - jupyterlab
+- ipykernel
+- nbformat
+- nbclient
+- matplotlib
 - plantuml
 - graphviz
 - sphinx

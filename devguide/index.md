@@ -6,6 +6,10 @@ and the next engineering steps.
 
 ## Main documents
 
+- [DFND/notebook_laboratory_checkpoint.md](DFND/notebook_laboratory_checkpoint.md)
+  Active case-by-case scientific study route, public notebook/benchmark seed,
+  first independent tetrahedron reference and original-provider input limits.
+
 - [topography_input_context.md](topography_input_context.md)
   Delivered selected-frame input context under #60: MolSysMT recovery, shared
   protected quantities, original atom mapping, binding rejection and explicit

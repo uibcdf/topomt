@@ -58,3 +58,20 @@ Freeze fixture models and numeric acceptance before tuning code. Publish a
 structured reproducible report with independent expected answers, evidence and
 explicit unresolved cases. Add meaningful test guards for adopted references.
 Do not close on documentation alone or alter the kernel merely to match a peer.
+
+## First adopted reference and public notebook seed
+
+The [notebook laboratory checkpoint](../DFND/notebook_laboratory_checkpoint.md)
+records the active case-by-case route and the first frozen input/observation
+artifacts under `docs/content/showcase/dfnd/`. The regular tetrahedron uses
+independent circumradius and finite hull-volume formulas, three nonmarginal
+probe anchors and a rigid-motion guard in
+`tests/test_dfnd_regular_tetrahedron_reference.py`. Its notebook includes input
+geometry, an 81-point probe sweep, quantity-aware input/report and an optional
+original fpocket invocation. The observed dummy-PDB fpocket run fails at input
+reading; it is explicitly a failure with no pocket count, not an oracle.
+
+This is partial progress. The reviewed closed-shell/opening/passage/neck panel,
+independent solvent-volume reference and annotated molecular cases remain.
+No DFND kernel changes were needed for this first reference. #75 and #60 retain
+their own unfinished numerical/public-model gates.

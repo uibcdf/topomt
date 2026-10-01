@@ -15,12 +15,14 @@ probe) are first-class catalog entries.
 
 ## Purpose
 
-Real proteins have a fuzzy "correct answer"; these shapes have **ground truth by
-construction**. A hollow sphere has one enclosed void of known volume; a hollow
-tube is a channel with two mouths; a dumbbell is two chambers joined by a neck.
-That lets us assert quantitatively (DFND volume vs analytic cavity volume, expected
-family, link count) and to compare with CASTp/fpocket/etc. on geometry whose answer
-we already know.
+Current reference policy (2026-10-01): see the
+[notebook laboratory checkpoint](notebook_laboratory_checkpoint.md). These
+generators provide controlled geometry; their shape names do not establish
+ground truth for the discrete union-of-balls model. A sampled spherical shell
+may leak through interatomic gaps and need not have the continuum sphere's
+volume. Freeze and justify independent observables for each adopted case before
+turning construction expectations into assertions. The tables below retain
+historical intended shapes and observations, rather than certify every label.
 
 This layer sits between two existing layers:
 - [`toy_systems_v1.md`](toy_systems_v1.md): micro contract fixtures (4–13 atoms,
@@ -28,7 +30,7 @@ This layer sits between two existing layers:
 - [`validation_plan.md`](validation_plan.md) §1.3+: real small systems and
   benchmarks.
 
-These synthetic shapes are the **meso-scale, known-ground-truth** middle layer.
+These synthetic shapes are the **meso-scale controlled-input** middle layer.
 
 ## Design Principles
 
@@ -118,8 +120,10 @@ a comfortable margin — **wall spacing ≈ 3.5–4.5 Å** gives a clearly seale
 ≈ 3.76 Å is argon-touching (fully sealed). Document the chosen spacing per shape so
 the void/channel result is reproducible.
 
-(For probe-sweep benchmarks, note that increasing `R_probe` past the wall limit
-intentionally opens the cavity — a useful transition to test.)
+(For fixed coordinates and radii, increasing `R_probe` above the gate threshold
+seals that gate; decreasing it below the threshold opens it. Residence may also
+be lost at a separate, larger threshold. Marginal epsilon cases require separate
+numerical-policy checks.)
 
 ## Delaunay Degeneracy of Regular Lattices
 
@@ -132,11 +136,13 @@ Delaunay non-uniqueness and slivers (the WP4 limitation in
 
 ## Metrics and Assertions
 
-For each shape, assert against the known answer:
+For each independently reviewed shape, establish which observables are justified:
 - expected **family** and **number of external links**;
-- **solvent volume estimate** vs the analytic cavity volume (within a tolerance);
-- **probe sweeps**: vary `R_probe` and check family transitions (e.g. void→leaky as
-  the probe exceeds the wall limit; pocket→channel as a dumbbell neck opens). The
+- **solvent volume estimate** vs an independent reference for the same ball model
+  and volume definition, with a justified tolerance; an ideal continuum cavity
+  is not automatically that reference;
+- **probe sweeps**: vary `R_probe` and check justified family transitions (e.g.
+  leaky→sealed as the probe exceeds the wall threshold). The
   sweep is a strong demonstration of DFND's volume/connectivity decoupling.
 
 ## Cross-Algorithm Comparison

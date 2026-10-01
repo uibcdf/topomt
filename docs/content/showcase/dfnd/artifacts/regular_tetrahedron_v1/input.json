@@ -1,0 +1,303 @@
+{
+  "schema": "topomt.dfnd.reference-input/1",
+  "case_id": "regular_tetrahedron",
+  "case_version": 1,
+  "model": "Four non-overlapping equal-radius atomic balls; nonperiodic Cartesian geometry.",
+  "radius_policy": "Explicit 1.7 angstrom radii, carbon-like geometric choice; not inferred from PDB.",
+  "coordinates": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "coordinates",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [
+        4,
+        3
+      ],
+      "blocks": [
+        12
+      ]
+    },
+    "values": [
+      [
+        1.8738329701443508,
+        1.8738329701443508,
+        1.8738329701443508
+      ],
+      [
+        1.8738329701443508,
+        -1.8738329701443508,
+        -1.8738329701443508
+      ],
+      [
+        -1.8738329701443508,
+        1.8738329701443508,
+        -1.8738329701443508
+      ],
+      [
+        -1.8738329701443508,
+        -1.8738329701443508,
+        1.8738329701443508
+      ]
+    ],
+    "block_digests": [
+      "blake2b-128:9ba4005ab7c95184d3526fbd9b771575"
+    ],
+    "digest": "blake2b-128:9fc7ecf1e84b5f39e7e9437526095ed2"
+  },
+  "atom_radii": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "atom_radii",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [
+        4
+      ],
+      "blocks": [
+        4
+      ]
+    },
+    "values": [
+      1.7,
+      1.7,
+      1.7,
+      1.7
+    ],
+    "block_digests": [
+      "blake2b-128:b316dc410c327ac77a1d87c296cadb45"
+    ],
+    "digest": "blake2b-128:189a4fea509b2acf62a21fdda427cb40"
+  },
+  "edge": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "edge",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 5.3,
+    "block_digests": [
+      "blake2b-128:9c1023f1f38efeabb6da05a243794bfa"
+    ],
+    "digest": "blake2b-128:b48975aa8453fcb8713e49bb12ba6567"
+  },
+  "epsilon": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "epsilon",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1e-06,
+    "block_digests": [
+      "blake2b-128:fdc4aee404c6c8d3af6c444a146a42d5"
+    ],
+    "digest": "blake2b-128:afe0b5c20f12a97f318d2e509e8ae42b"
+  },
+  "anchor_probes": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "anchor_probes",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [
+        3
+      ],
+      "blocks": [
+        3
+      ]
+    },
+    "values": [
+      1.2,
+      1.4,
+      1.7
+    ],
+    "block_digests": [
+      "blake2b-128:2932c63aa741ea2de1d9e4b532d1d622"
+    ],
+    "digest": "blake2b-128:38235070ea8fe64362f48b3b4a4aa6fa"
+  },
+  "probe_sweep": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "probe_sweep",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [
+        81
+      ],
+      "blocks": [
+        81
+      ]
+    },
+    "values": [
+      1.0,
+      1.01,
+      1.02,
+      1.03,
+      1.04,
+      1.05,
+      1.06,
+      1.07,
+      1.08,
+      1.09,
+      1.1,
+      1.11,
+      1.12,
+      1.13,
+      1.1400000000000001,
+      1.15,
+      1.16,
+      1.17,
+      1.18,
+      1.19,
+      1.2,
+      1.21,
+      1.22,
+      1.23,
+      1.24,
+      1.25,
+      1.26,
+      1.27,
+      1.28,
+      1.29,
+      1.3,
+      1.31,
+      1.32,
+      1.33,
+      1.34,
+      1.35,
+      1.3599999999999999,
+      1.37,
+      1.38,
+      1.3900000000000001,
+      1.4,
+      1.4100000000000001,
+      1.42,
+      1.43,
+      1.44,
+      1.45,
+      1.46,
+      1.47,
+      1.48,
+      1.49,
+      1.5,
+      1.51,
+      1.52,
+      1.53,
+      1.54,
+      1.55,
+      1.56,
+      1.57,
+      1.58,
+      1.5899999999999999,
+      1.6,
+      1.6099999999999999,
+      1.62,
+      1.63,
+      1.6400000000000001,
+      1.65,
+      1.6600000000000001,
+      1.67,
+      1.6800000000000002,
+      1.69,
+      1.7000000000000002,
+      1.71,
+      1.72,
+      1.73,
+      1.74,
+      1.75,
+      1.76,
+      1.77,
+      1.78,
+      1.79,
+      1.8
+    ],
+    "block_digests": [
+      "blake2b-128:8b23c86b324f3047ba65095ffb88a282"
+    ],
+    "digest": "blake2b-128:1588d0ac0419d33ea88e7d5c00d2f232"
+  },
+  "query": {
+    "min_size": 0
+  },
+  "reference": {
+    "method": "Regular tetrahedron and equilateral triangle circumradii minus the common ball radius.",
+    "clearance_atol_angstroms": 1e-06,
+    "clearance_rtol": 0,
+    "cell_volume_rtol": 1e-12,
+    "expected_anchor_regimes": [
+      "percolating",
+      "void",
+      "non_resident"
+    ],
+    "expected_permeable_contacts": [
+      4,
+      0,
+      0
+    ],
+    "expected_external_links": [
+      1,
+      0,
+      0
+    ],
+    "scope": "Primitive clearances, hull volume and away-from-threshold graph states. No solvent-volume accuracy or continuous navigability claim."
+  },
+  "provider_input": {
+    "file": "input.pdb",
+    "sha256": "481c34c20a847f91190bf94b94ab9cd25dddda577afefb3d0c4f919c7d6b409c",
+    "encoding": "HETATM dummy carbon atoms, DUM residue; Cartesian coordinates rounded to 0.001 angstrom.",
+    "atom_radii_encoded": false
+  }
+}

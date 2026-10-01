@@ -1,0 +1,1226 @@
+{
+  "schema": "topomt.dfnd.reference-observations/1",
+  "case_id": "regular_tetrahedron",
+  "case_version": 1,
+  "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+  "software": {
+    "topomt": "0.3.0+2.g5dde63c.dirty",
+    "molsysmt": "0.21.0+606.ga03eb4bf6",
+    "pyunitwizard": "0.25.0+7.g00d756c",
+    "numpy": "2.4.6",
+    "scipy": "1.18.0",
+    "depdigest": "0.12.0",
+    "matplotlib": "3.10.9"
+  },
+  "topomt_source": {
+    "scope": "Installed topomt/**/*.py, sorted relative paths and length-delimited bytes",
+    "file_count": 229,
+    "sha256": "f1403d55fd5e402044eae7fb61ee5448663332dcc67f9d071bb5b5d46369cf69"
+  },
+  "query": {
+    "min_size": 0
+  },
+  "reference": {
+    "method": "Regular tetrahedron and equilateral triangle circumradii minus the common ball radius.",
+    "clearance_atol_angstroms": 1e-06,
+    "clearance_rtol": 0,
+    "cell_volume_rtol": 1e-12,
+    "expected_anchor_regimes": [
+      "percolating",
+      "void",
+      "non_resident"
+    ],
+    "expected_permeable_contacts": [
+      4,
+      0,
+      0
+    ],
+    "expected_external_links": [
+      1,
+      0,
+      0
+    ],
+    "scope": "Primitive clearances, hull volume and away-from-threshold graph states. No solvent-volume accuracy or continuous navigability claim."
+  },
+  "reference_checks": "passed",
+  "residence_clearance": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "residence_clearance",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [
+        1
+      ],
+      "blocks": [
+        1
+      ]
+    },
+    "values": [
+      1.5455739091877108
+    ],
+    "block_digests": [
+      "blake2b-128:e5acadba832509bd5d3177f2a0b35df8"
+    ],
+    "digest": "blake2b-128:970ed54b7819affd8ca0f587e1adda0e"
+  },
+  "face_clearances": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "face_clearances",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [
+        1,
+        4
+      ],
+      "blocks": [
+        4
+      ]
+    },
+    "values": [
+      [
+        1.3599564267050157,
+        1.3599564267050157,
+        1.3599564267050157,
+        1.3599564267050157
+      ]
+    ],
+    "block_digests": [
+      "blake2b-128:08a520385cf976dba2674c83dbb03721"
+    ],
+    "digest": "blake2b-128:f0d80d471548bf76be3d2550244c4fb4"
+  },
+  "anchors": [
+    {
+      "probe_angstroms": 1.2,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.4,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.7,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    }
+  ],
+  "sweep": [
+    {
+      "probe_angstroms": 1.0,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.01,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.02,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.03,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.04,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.05,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.06,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.07,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.08,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.09,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.1,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.11,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.12,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.13,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.1400000000000001,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.15,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.16,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.17,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.18,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.19,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.2,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.21,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.22,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.23,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.24,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.25,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.26,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.27,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.28,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.29,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.3,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.31,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.32,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.33,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.34,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.35,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "open",
+      "permeable_contacts": 4,
+      "wet_component_count": 1,
+      "regime": "percolating",
+      "external_links": 1,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.3599999999999999,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.37,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.38,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.3900000000000001,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.4,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.4100000000000001,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.42,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.43,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.44,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.45,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.46,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.47,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.48,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.49,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.5,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.51,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.52,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.53,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.54,
+      "residence_state": "resident",
+      "transit_role": "resident_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 1,
+      "regime": "void",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.55,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.56,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.57,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.58,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.5899999999999999,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.6,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.6099999999999999,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.62,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.63,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.6400000000000001,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.65,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.6600000000000001,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.67,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.6800000000000002,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.69,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.7000000000000002,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.71,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.72,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.73,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.74,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.75,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.76,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.77,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.78,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.79,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    },
+    {
+      "probe_angstroms": 1.8,
+      "residence_state": "non_resident",
+      "transit_role": "non_transit",
+      "local_class": "sealed",
+      "permeable_contacts": 0,
+      "wet_component_count": 0,
+      "regime": "non_resident",
+      "external_links": 0,
+      "cell_hull_volume_angstroms3": 17.5453227104516,
+      "solvent_volume_estimate_angstroms3": 13.291911144281514
+    }
+  ],
+  "provider": {
+    "name": "fpocket",
+    "backend": "cli",
+    "extra_args": [],
+    "status": "execution_failed",
+    "pocket_count": null,
+    "input_sha256": "481c34c20a847f91190bf94b94ab9cd25dddda577afefb3d0c4f919c7d6b409c",
+    "executable_sha256": "b5118c50d151f7ee2f21987b63754a3014deadcd099f10129f6e647861e81919",
+    "error_type": "FpocketError",
+    "reason": "fpocket failed with code 1:\n! File '<submitted PDB>' contains no atoms...\n! Structure reading failed!\n"
+  },
+  "pdb_rounding": {
+    "maximum_coordinate_change": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "maximum_coordinate_change",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.00016702985564931438,
+      "block_digests": [
+        "blake2b-128:0a041b7fcd024ecbc7095d6869efbd46"
+      ],
+      "digest": "blake2b-128:49e49a9e0ea10aa9051f2afdff0e0cfc"
+    },
+    "dfnd_residence_clearance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "residence_clearance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          1
+        ],
+        "blocks": [
+          1
+        ]
+      },
+      "values": [
+        1.5458632133840755
+      ],
+      "block_digests": [
+        "blake2b-128:e7df66f9efd6657d60ef9fce01d926a6"
+      ],
+      "digest": "blake2b-128:78b6c88178eb5ab90ce5905845dfaaec"
+    },
+    "dfnd_face_clearances": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "face_clearances",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          1,
+          4
+        ],
+        "blocks": [
+          4
+        ]
+      },
+      "values": [
+        [
+          1.3602291853171171,
+          1.3602291853171171,
+          1.3602291853171171,
+          1.3602291853171171
+        ]
+      ],
+      "block_digests": [
+        "blake2b-128:fd31316eae50bd2d7fec64b742fe20d6"
+      ],
+      "digest": "blake2b-128:d0997ef6b4056e0dbefc91b89768f840"
+    },
+    "radius_policy": "Explicit 1.7 angstrom radii, carbon-like geometric choice; not inferred from PDB."
+  },
+  "limits": [
+    "No biological site claim",
+    "No solvent-volume precision guarantee",
+    "No validated continuous probe path",
+    "No peer-agreement acceptance gate"
+  ]
+}

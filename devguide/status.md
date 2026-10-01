@@ -17,6 +17,15 @@ The project is not yet a polished stable product. The main remaining gap is not 
 
 ## Current Priority
 
+The immediate scientific workstream is now the
+[DFND notebook laboratory](DFND/notebook_laboratory_checkpoint.md): learn and
+validate native residence/transit behavior case by case, starting from frozen
+synthetic inputs and independent references. The notebooks seed the future
+public documentation/benchmark annex. The first regular-tetrahedron case is
+delivered; the sampled closed shell is next. #76 remains open for the broader
+reference panel and #75 for numerical volume precision. Remaining #60 public
+support work is pending rather than a prerequisite for these studies.
+
 On 2026-10-01 the user selected joint DFND/Topography work, starting with
 [the audit, assessment and staged roadmap](DFND/audit_topography_2026_10_01.md).
 The audited local selector passed 312 tests with two skips; additional probes
