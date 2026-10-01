@@ -1,0 +1,18 @@
+{
+  "method": "castp3",
+  "status": "execution_failed",
+  "pocket_count": null,
+  "error_type": "RuntimeError",
+  "reason": "Invalid CASTp 3.0 submission response: 'Something wrong with upload! 7'",
+  "backend": "server",
+  "input_sha256": "478b65b4bdfb9d7f8f3428d0ed382e2e5ca99c7d8c63a787ae655434c476d4b6",
+  "input_encoding": "Synthetic ATOM carbon rows with DUM residue",
+  "server": "castp3",
+  "submit_url": "http://sts.bioe.uic.edu/castp/submit_calc.php",
+  "requested_probe_angstroms": 1.4,
+  "observed_utc": "2026-10-01T14:56:26.343781+00:00",
+  "evidence_mode": "recorded_original_server_attempt",
+  "input_file": "input_atom.pdb",
+  "submission_accepted": false,
+  "calculation_completion_observed": false
+}

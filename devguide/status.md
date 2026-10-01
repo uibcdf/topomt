@@ -21,8 +21,10 @@ The immediate scientific workstream is now the
 [DFND notebook laboratory](DFND/notebook_laboratory_checkpoint.md): learn and
 validate native residence/transit behavior case by case, starting from frozen
 synthetic inputs and independent references. The notebooks seed the future
-public documentation/benchmark annex. The first regular-tetrahedron case is
-delivered; the sampled closed shell is next. #76 remains open for the broader
+public documentation/benchmark annex. The regular-tetrahedron and sampled
+closed-shell cases include original-provider comparisons. The user requested a
+pause at this two-case checkpoint; further cases and kernel changes await a later
+resume. #76 remains open for the broader
 reference panel and #75 for numerical volume precision. Remaining #60 public
 support work is pending rather than a prerequisite for these studies.
 

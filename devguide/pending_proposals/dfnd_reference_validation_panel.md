@@ -71,7 +71,19 @@ geometry, an 81-point probe sweep, quantity-aware input/report and an optional
 original fpocket invocation. The observed dummy-PDB fpocket run fails at input
 reading; it is explicitly a failure with no pocket count, not an oracle.
 
-This is partial progress. The reviewed closed-shell/opening/passage/neck panel,
+## Second control and review boundary
+
+The closed-shell notebook independently certifies a probe-tight hull boundary
+and a free origin at 1.4 Å. Native containment identifies its central sealed
+resident component. Both controls now retain original fpocket, Pocketeer,
+AlphaSpace2 and pyCASTA attempts, including successful evidence bundles and
+explicit failures. Peer pocket/volume definitions remain separate from native
+acceptance. The server-input audit and cached observations record CASTp 3.0
+upload failures and two accepted CASTpFold jobs whose completion is unknown.
+Notebook reruns do not resubmit. The user requested a pause after this two-case
+tranche; no third case or kernel tuning is authorized by that stopping boundary.
+
+This is partial progress. The reviewed opening/passage/neck panel,
 independent solvent-volume reference and annotated molecular cases remain.
-No DFND kernel changes were needed for this first reference. #75 and #60 retain
+No DFND kernel changes were needed for these controls. #75 and #60 retain
 their own unfinished numerical/public-model gates.

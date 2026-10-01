@@ -258,6 +258,29 @@ topography = tmt.third_party.castp.get_topography(
 )
 ```
 
+For a provider-specific result, the common original-output route is:
+
+```python
+output = tmt.get_provider_output(
+    'protein.pdb', method='castp', backend='server', server='castpfold',
+    probe_radius=1.4, output_zip_file='castpfold_result.zip'
+)
+```
+
+The [CASTp 3.0 form](http://sts.bioe.uic.edu/castp/calculation.html) accepts PDB
+files up to 5,000,000 bytes. The
+[CASTpFold form](https://cfold.bme.uic.edu/castpfold/compute) accepts PDB/mmCIF
+files below 2,000,000 bytes, disallows multiple-model NMR inputs and ignores
+nonpolar hydrogens. TopoMT submits its selected structure as PDB. Both forms
+offer a 0–10 Å probe range; the current TopoMT CASTpFold client accepts 0–5 Å.
+Neither form accepts an explicit per-atom radius array. Use standard coordinate
+records and atom/element names; dummy synthetic atoms need separate validation.
+
+CASTpFold states that calculation can take minutes to hours. Exhausting the
+client's polling interval does not establish that the remote job failed. Keep
+the job identifier from the exception and retrieve that job before uploading
+again. Retain the downloaded original ZIP for repeatable file imports.
+
 Live service availability is not established by local unit tests. Server adapters
 and persisted result loaders have separate validation; using a saved result does
 not require installing or contacting its original engine.

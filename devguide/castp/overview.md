@@ -12,6 +12,10 @@ requirements; checked versions are evidence targets, not claims of latest releas
 
 No original CASTp Python package is required. Server execution needs network access and a functioning service; importing persisted output needs neither an installed engine nor network. CASTp 3.0 and CASTpFold are separate server/artifact references.
 
+The [2026-10-01 server-input audit](server_input_contract_2026_10_01.md) records
+current form requirements, client discrepancies, synthetic-PDB alignment and
+the two accepted CASTpFold jobs whose completion has not yet been observed.
+
 Original routes: CASTp 3.0/CASTpFold servers and persisted archives/files. Returned class: `CASTpOutput`.
 
 ```python

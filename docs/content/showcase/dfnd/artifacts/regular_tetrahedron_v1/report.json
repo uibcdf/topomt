@@ -1128,6 +1128,124 @@
     "error_type": "FpocketError",
     "reason": "fpocket failed with code 1:\n! File '<submitted PDB>' contains no atoms...\n! Structure reading failed!\n"
   },
+  "provider_comparisons": [
+    {
+      "method": "fpocket",
+      "backend": "cli",
+      "settings": "Provider defaults; geometry-only AlphaSpace2 route, no binder or Vina typing",
+      "input_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+      "input_encoding": "Synthetic ATOM carbon rows with DUM residue; no inferred biological topology",
+      "status": "execution_failed",
+      "pocket_count": null,
+      "executable_sha256": "b5118c50d151f7ee2f21987b63754a3014deadcd099f10129f6e647861e81919",
+      "error_type": "FpocketError",
+      "reason": "Expected fpocket output dir not found: <temporary path>"
+    },
+    {
+      "method": "pocketeer",
+      "backend": "library",
+      "settings": "Provider defaults; geometry-only AlphaSpace2 route, no binder or Vina typing",
+      "input_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+      "input_encoding": "Synthetic ATOM carbon rows with DUM residue; no inferred biological topology",
+      "status": "completed",
+      "pocket_count": 0,
+      "software_version": "0.4.0",
+      "pockets": [],
+      "run_id": "6c20398c3dfbcc0d3031b473872db4cfca89933712a00eee93ea0551d2f705c8",
+      "execution_metadata": {
+        "api_sha256": "60cda1e9f6679aaf72845034b40f48db18f085d1b97fa9b61068294f4db8c631",
+        "filtered_input_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "parameters": {},
+        "selected_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "selection": "all",
+        "structure_indices": 0,
+        "syntax": "MolSysMT",
+        "version": "0.3.0"
+      },
+      "original_bundle": {
+        "file": "pocketeer_original.zip",
+        "sha256": "050d313f304b8a31fc7b8f081748f68ccdb757c30927b7f9499e97ff0bd5c440"
+      }
+    },
+    {
+      "method": "alphaspace2",
+      "backend": "library",
+      "settings": "Provider defaults; geometry-only AlphaSpace2 route, no binder or Vina typing",
+      "input_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+      "input_encoding": "Synthetic ATOM carbon rows with DUM residue; no inferred biological topology",
+      "status": "execution_failed",
+      "pocket_count": null,
+      "software_version": "0.1.2",
+      "error_type": "ValueError",
+      "reason": "The number of observations cannot be determined on an empty distance matrix."
+    },
+    {
+      "method": "pycasta",
+      "backend": "library",
+      "settings": "Provider defaults; geometry-only AlphaSpace2 route, no binder or Vina typing",
+      "input_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+      "input_encoding": "Synthetic ATOM carbon rows with DUM residue; no inferred biological topology",
+      "status": "execution_failed",
+      "pocket_count": null,
+      "software_version": "1.0.8",
+      "error_type": "CalledProcessError",
+      "reason": "Original engine subprocess exited with code 1:\nWARNING:root:PyMOL not found. SASA will not be computed using PyMOL.\nWARNING:root:pymol2 not found.\nWARNING:root:Alpha shape filtered out all tetrahedra. No pockets detected.\nTraceback (most recent call last):\n  File \"<string>\", line 10, in <module>\n    result = run_analysis.process_pdb(sys.argv[2])\n  File \"<temporary path>\", line 490, in process_pdb\n    ranked_pockets = pocket_info.get(\"ranked_pockets\", [])\n                     ^^^^^^^^^^^^^^^\nAttributeError: 'tuple' object has no attribute 'get'\n"
+    },
+    {
+      "method": "castp3",
+      "status": "execution_failed",
+      "pocket_count": null,
+      "error_type": "RuntimeError",
+      "reason": "Invalid CASTp 3.0 submission response: 'Something wrong with upload! 7'",
+      "backend": "server",
+      "input_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+      "input_encoding": "Synthetic ATOM carbon rows with DUM residue",
+      "server": "castp3",
+      "submit_url": "http://sts.bioe.uic.edu/castp/submit_calc.php",
+      "requested_probe_angstroms": 1.4,
+      "observed_utc": "2026-10-01T14:56:25.099185+00:00",
+      "evidence_mode": "recorded_original_server_attempt",
+      "input_file": "input_atom.pdb",
+      "submission_accepted": false,
+      "calculation_completion_observed": false
+    },
+    {
+      "method": "castpfold",
+      "status": "submitted_pending",
+      "pocket_count": null,
+      "error_type": "RuntimeError",
+      "reason": "CASTpFold result ZIP is not ready for job j_6abe78a311665.",
+      "backend": "server",
+      "input_sha256": "e40db4e92eb260682c4e77e43873425efda37f96a55008da0e2a0721c57bc5cb",
+      "input_encoding": "Synthetic HETATM carbon rows with corrected one-letter atom-name alignment and DUM residue",
+      "input_file": "input_castp.pdb",
+      "server": "castpfold",
+      "submit_url": "https://cfold.bme.uic.edu/castpfold/submit_calc.php",
+      "requested_probe_angstroms": 1.4,
+      "observed_utc": "2026-10-01T15:14:28.043503+00:00",
+      "evidence_mode": "recorded_original_server_attempt",
+      "jobid": "j_6abe78a311665",
+      "submission_accepted": true,
+      "calculation_completion_observed": false,
+      "client_outcome": "execution_failed",
+      "result_url": "https://cfold.bme.uic.edu/castpfold/data/tmppdb/j_6abe78a311665/processed/j_6abe78a311665.zip",
+      "result_poll": {
+        "http_status": 200,
+        "response_bytes": 713
+      },
+      "last_polled_utc": "2026-10-01T15:23:50.806984+00:00"
+    }
+  ],
   "pdb_rounding": {
     "maximum_coordinate_change": {
       "manifest": {

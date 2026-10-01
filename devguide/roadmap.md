@@ -2,6 +2,12 @@
 
 ## Guiding Principle
 
+Stopping boundary: the user requested a pause after the tetrahedron and closed
+shell studies, including original-provider comparisons and CASTp server evidence.
+The [notebook checkpoint](DFND/notebook_laboratory_checkpoint.md) records the
+delivered tranche and unresolved findings. Opening/tube/neck studies and kernel
+changes require a later resume; the longer sequence below is a future route.
+
 Latest scheduling decision (2026-10-01): proceed with
 [case-by-case DFND notebook studies](DFND/notebook_laboratory_checkpoint.md).
 The sequence is regular tetrahedron, independently reviewed closed shell,
