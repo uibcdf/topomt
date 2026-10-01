@@ -18,6 +18,11 @@ snapshot/cache ownership under #60, followed by its public context/support
 contract. Independent synthetic/reference validation (#76) and numerical
 precision (#75) retain their separate acceptance criteria.
 
+Subsequent progress: the [native numeric snapshot slice](DFND/checkpoint_geometry_snapshots_2026_10_01.md)
+of #60 is delivered with shared protected geometry, regression guards and memory
+measurements. The next slice is source/frame recovery and public context/support
+and mutation adoption. #60 remains partial.
+
 Current scheduling decision (2026-09-30): deliver usable original-provider
 pockets first through provider-specific provisional outputs and shared consumer
 access. See the [current checkpoint](provider_pocket_output_checkpoint.md), #65.

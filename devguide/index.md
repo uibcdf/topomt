@@ -6,6 +6,11 @@ and the next engineering steps.
 
 ## Main documents
 
+- [DFND/checkpoint_geometry_snapshots_2026_10_01.md](DFND/checkpoint_geometry_snapshots_2026_10_01.md)
+  Delivered native numeric ownership slice of #60, immutable shared geometry,
+  input-change/reprobe guards and measured memory limits. Public context/support
+  adoption remains partial.
+
 - [DFND/audit_topography_2026_10_01.md](DFND/audit_topography_2026_10_01.md)
   Current joint DFND/Topography audit, reproduced integrity findings, scientific
   reference review and staged roadmap. DFND/Topography is the selected next

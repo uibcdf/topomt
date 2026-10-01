@@ -9,6 +9,7 @@ from scipy.sparse.csgraph import connected_components
 
 from topomt import pyunitwizard as puw
 from topomt.delaunay_mesh import DelaunayMesh
+from topomt.tools.geometry.arrays import _GeometrySnapshot, immutable_array
 from topomt.tools.tessellation import mouth_area_from_faces
 
 from . import families as fam
@@ -97,8 +98,14 @@ class _TransitEdges:
     transit_edge_per_tet_face: np.ndarray
 
 
-class DelaunayFlowNetwork:
-    """Delaunay Flow Network substrate for DFND analysis."""
+class DelaunayFlowNetwork(_GeometrySnapshot):
+    """DFND substrate owning a protected snapshot of its input geometry.
+
+    Coordinates and atomic radii are retained in nm, with the resolved
+    local-to-source atom map. Public arrays are read-only views, shared across
+    probe queries. Changing input requires a new network; a live molecular-system
+    reference is retained for provenance and does not retarget cached geometry.
+    """
 
     def __init__(
         self,
@@ -235,9 +242,9 @@ class DelaunayFlowNetwork:
         )
 
     def _initialize_geometry(self, atom_coords, atom_radii, atom_indices_map):
-        self.atom_coords = np.asarray(atom_coords, dtype=float)
-        self.atom_radii = np.asarray(atom_radii, dtype=float)
-        self.atom_indices_map = np.asarray(atom_indices_map, dtype=int)
+        self.atom_coords = immutable_array(np.asarray(atom_coords, dtype=float))
+        self.atom_radii = immutable_array(np.asarray(atom_radii, dtype=float))
+        self.atom_indices_map = immutable_array(np.asarray(atom_indices_map, dtype=int))
 
         if self.atom_coords.ndim != 2 or self.atom_coords.shape[1] != 3:
             raise ValueError('coordinates must have shape (n_atoms, 3)')
@@ -272,7 +279,9 @@ class DelaunayFlowNetwork:
                 'mesh_config': self.mesh_config.to_dict(),
             }
         )
-        self.mesh = DelaunayMesh(points=self.atom_coords, atom_radii=self.atom_radii)
+        self.mesh = DelaunayMesh(
+            points=self.atom_coords, atom_radii=self.atom_radii
+        ).freeze()
         self.tetra_atoms = self.mesh.simplices
         self.simplex_neighbors = self.mesh.neighbors
         self.n_tetrahedra = int(self.tetra_atoms.shape[0])
@@ -399,6 +408,7 @@ class DelaunayFlowNetwork:
                 self.face_intrusion_suspect_per_tet_face[
                     tetrahedron_index, face_index
                 ] = self._gate_intrusion_suspect(tetrahedron_index, face_index)
+        self._freeze_arrays()
 
     @staticmethod
     def _classify_component(n_external_links, n_resident_nodes):

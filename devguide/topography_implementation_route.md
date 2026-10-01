@@ -11,6 +11,9 @@ work, starting with [the audit and roadmap](DFND/audit_topography_2026_10_01.md)
 The bounded [copy correction](archive/topography_shallow_copy_indexes.md) (#74)
 is implemented and guarded. The next implementation slice is #60's
 ownership/context/support contract, with numerical/reference validation #75/#76.
+Its [native numeric snapshot slice](DFND/checkpoint_geometry_snapshots_2026_10_01.md)
+is implemented and measured; source recovery and neutral public support/mutation
+adoption remain open.
 The provider-output delivery below is historical and remains independently
 usable; broader provider work is paused. No runtime gate is closed by this audit.
 

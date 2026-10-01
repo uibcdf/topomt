@@ -1,9 +1,12 @@
 """Delaunay-based geometric substrate for TopoMT."""
 
+from typing import Self
+
 import numpy as np
 from scipy.spatial import Delaunay
 
 from topomt import pyunitwizard as puw
+from topomt.tools.geometry.arrays import _GeometrySnapshot
 
 _SIMPLEX_FACE_LOCAL_INDICES = (
     (1, 2, 3),  # face opposite vertex 0 → matches neighbors[s, 0]
@@ -106,7 +109,7 @@ def _tetrahedron_near_cospherical_counts(
     return near_cospherical_counts
 
 
-class DelaunayMesh:
+class DelaunayMesh(_GeometrySnapshot):
     """Persistent Delaunay mesh with alpha-sphere-derived views.
 
     Parameters
@@ -218,6 +221,35 @@ class DelaunayMesh:
                     pairs.append((source, target))
         self._alpha_sphere_neighbor_pairs = np.asarray(pairs, dtype=int)
 
+    def freeze(self) -> Self:
+        """Protect the current geometry and return this mesh.
+
+        Returns
+        -------
+        DelaunayMesh
+            This mesh, with owned read-only array storage. Repeated calls reuse
+            immutable buffers. Public attribute replacement and destructive
+            mesh operations are rejected; lazy derived lookups remain available.
+
+        Notes
+        -----
+        Meshes remain mutable until this method is called. Frozen arrays expose
+        inexpensive views; independently editable arrays require an explicit
+        ``.copy()``. Deep copies safely share immutable numeric storage while
+        copying mutable metadata. Changed input requires a new mesh.
+
+        Examples
+        --------
+        >>> mesh = DelaunayMesh(np.array([[0., 0., 0.], [1., 0., 0.],
+        ...                              [0., 1., 0.], [0., 0., 1.]]))
+        >>> mesh.freeze() is mesh
+        True
+        >>> mesh.points.flags.writeable
+        False
+        """
+        self._freeze_arrays()
+        return self
+
     @property
     def n_simplices(self):
         """Return the number of simplices currently exposed by the mesh."""
@@ -251,6 +283,11 @@ class DelaunayMesh:
     def get_alpha_sphere_neighbors(self) -> dict[int, list[int]]:
         """Return alpha-sphere adjacency induced by simplex face sharing."""
 
+        if vars(self).get('_geometry_frozen', False):
+            return {
+                node: neighbors.copy()
+                for node, neighbors in self._alpha_sphere_neighbor_map.items()
+            }
         return self._alpha_sphere_neighbor_map
 
     def get_alpha_sphere_neighbor_pairs(self) -> np.ndarray:

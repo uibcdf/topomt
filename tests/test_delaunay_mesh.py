@@ -1,7 +1,40 @@
 import numpy as np
+import pytest
 
 import topomt as tmt
 from topomt.delaunay_mesh import DelaunayMesh
+
+
+def test_frozen_mesh_keeps_owned_geometry_and_rejects_destructive_operations():
+    points = np.array(
+        [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+    )
+    mesh = DelaunayMesh(points=points)
+    assert mesh.freeze() is mesh
+    points[:] *= 2
+    assert mesh.simplex_volumes[0] == pytest.approx(1 / 6)
+    assert mesh.points[1, 0] == 1
+    with pytest.raises(ValueError, match='read-only'):
+        mesh.points[1, 0] = 2
+    with pytest.raises(ValueError):
+        mesh.points.setflags(write=True)
+    with pytest.raises(AttributeError, match='read-only'):
+        mesh.points = points
+    with pytest.raises(AttributeError, match='read-only'):
+        mesh.remove_alpha_spheres([0])
+    assert mesh.n_simplices == 1
+    assert mesh.get_simplex_faces().shape == (1, 4, 3)
+
+
+def test_frozen_mesh_neighbor_lookup_cannot_modify_its_cached_adjacency():
+    mesh = DelaunayMesh(
+        points=np.array(
+            [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+        )
+    )
+    mesh.freeze()
+    mesh.get_alpha_sphere_neighbors()[0].append(100)
+    assert mesh.get_alpha_sphere_neighbors() == {0: []}
 
 
 def test_delaunay_mesh_builds_minimal_single_simplex():

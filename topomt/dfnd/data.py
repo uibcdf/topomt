@@ -27,6 +27,7 @@ from __future__ import annotations
 from typing import Any
 
 from .. import pyunitwizard as puw
+from ..tools.geometry.arrays import _GeometrySnapshot
 from .components import build_components
 from .config import DFNDQuery
 
@@ -93,13 +94,14 @@ def _project(records: list[dict[str, Any]], keys) -> list[dict[str, Any]]:
     return [{k: record[k] for k in keys if k in record} for record in records]
 
 
-class MeshAtoms:
+class MeshAtoms(_GeometrySnapshot):
     """Vertices of the Delaunay mesh (the dummy/real atoms used by DFND)."""
 
     def __init__(self, network: Any) -> None:
         self.coords = network.atom_coords  # (N, 3) selected-atom coordinates
         self.radii = network.atom_radii  # (N,)
         self.index_map = network.atom_indices_map  # local index -> global atom index
+        self._freeze_arrays()
 
 
 class Mesh:

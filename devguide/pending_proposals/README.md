@@ -50,8 +50,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
-### Partial (1)
+### Partial (2)
 
+- [`topography_context_and_support.md`](topography_context_and_support.md) — [#60](https://github.com/uibcdf/topomt/issues/60) — Adopt explicit Topography analysis context and spatial support. *(partial, measured)*
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
 ### Open (2)

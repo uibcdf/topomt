@@ -9,6 +9,11 @@ open. The bounded [registry shallow-copy correction](../archive/topography_shall
 numerical precision (#75) remain open. Older broad green claims do not certify
 those paths.
 
+Subsequent progress: [native numeric snapshots](checkpoint_geometry_snapshots_2026_10_01.md)
+protect input and cached arrays and share geometry across probes. Memory and
+regression evidence is recorded there; #60's public context/support gate remains
+partial.
+
 This document separates the DFND design intent from the current code state.
 
 ## 1. Strategic Status

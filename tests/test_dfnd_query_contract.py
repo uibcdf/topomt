@@ -164,9 +164,13 @@ def test_network_rejects_non_default_arguments_that_conflict_with_query():
 def test_epsilon_is_part_of_substrate_and_result_identity():
     first = _network()
     second = DelaunayFlowNetwork.from_coordinates_and_radii(
-        first.atom_coords, first.atom_radii, epsilon=1e-5
+        puw.quantity(first.atom_coords, 'nm'),
+        puw.quantity(first.atom_radii, 'nm'),
+        epsilon=puw.quantity(1e-5, 'angstroms'),
     )
 
+    np.testing.assert_array_equal(first.atom_coords, second.atom_coords)
+    np.testing.assert_array_equal(first.atom_radii, second.atom_radii)
     assert first.substrate_key != second.substrate_key
     assert (
         first.get_topography()['raw']['parameters']['result_key']

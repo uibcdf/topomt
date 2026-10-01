@@ -26,7 +26,10 @@ validation is tracked in #76. The bounded
 [copy correction](archive/topography_shallow_copy_indexes.md) (#74) is now
 implemented with failing-first regressions for all five registry operations in
 both directions. The next implementation slice is #60's ownership/context/support
-contract; the stage-0 native snapshot/cache gate remains open.
+contract. Its [native numeric snapshot slice](DFND/checkpoint_geometry_snapshots_2026_10_01.md)
+is now delivered: mutable input arrays cannot change historical cached geometry,
+native arrays are protected and probes share buffers. Public mutation and
+source/context/support gates remain open.
 
 Initial [provider pocket delivery](provider_pocket_output_checkpoint.md) (#65)
 and [MolSysViewer adoption](provider_output_viewer_checkpoint.md) (#66) are
@@ -74,7 +77,8 @@ The DFND backlog is:
 - Standalone selected-feature rendering emits the requested filtered operations, and addon context actions use executable entries without no-op click callbacks.
 - `Topography` and DFND `Components` registries have validated mutation and
   registered-ID protection. Topography shallow copies now own independent index
-  and relation sets (#74); direct mutable views and snapshot ownership remain #60.
+  and relation sets (#74). Native input/cache arrays are protected under #60;
+  other public mutation paths and full context/support adoption remain partial.
 - `R_residence` and `R_gate` are implemented as clearance primitives with active tests.
 - DFND raw records separate topological/debug volumes from `volume_solvent_estimate`.
 - DFND promotes void/pocket/channel, percolating regions and provisional

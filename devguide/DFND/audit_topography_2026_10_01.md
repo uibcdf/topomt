@@ -191,7 +191,7 @@ outcomes must not be rewritten as current certification.
 
 | Stage | Delivery | Owner / exit evidence |
 | --- | --- | --- |
-| 0. Integrity baseline | Isolate shallow-copy registry state; define ownership of cached geometry and public mutation paths. | Bounded #74 copy correction delivered; first #60 slice remains open. Add/remove/rename/replace/connect cannot corrupt another registry; input mutation must not silently reuse old caches/keys. |
+| 0. Integrity baseline | Isolate shallow-copy registry state; define ownership of cached geometry and public mutation paths. | #74 copy correction and #60 native numeric snapshots delivered. Source recovery and public mutation/context/support adoption remain partial; see the snapshot checkpoint below. |
 | 1. Public context/support | Choose concrete schema/ownership, retain input/probe/atom-map/version evidence and adopt neutral support references. | #60. One DFND concavity + Mouth and one incomplete provider fixture; equal lining with different supports distinguished; probe/reporting/classification changes preserve the right identities. |
 | 2. Numerical and scientific trust | Correct uncertainty/precision reporting; classify reference assumptions; freeze small independent synthetic and annotated evidence panels. | #75/#76. Defined accuracy and maturity, independent expected answers, reproducible reports and explicit unresolved cases. This can progress alongside stage 1 after the integrity baseline. |
 | 3. Participants and relations | Add contextual molecular participants, typed containment/boundaries and interface associations with honest localization state. | #61 after #60. Tight dimer with fused bank, shared membership, buried/contact-only interfaces and atomic reference lifecycle tested. |
@@ -289,3 +289,15 @@ and format checks pass. The eight authored/updated guide pages render with
 warnings treated as errors, and their local Markdown targets exist. Public
 incremental `make html` succeeds with the same eight existing diagnostics
 tracked in #64. Hosted scientific/matrix evidence remains a separate gate.
+
+Later on 2026-10-01, #60's native numeric ownership slice is implemented and
+measured in [the geometry snapshot checkpoint](checkpoint_geometry_snapshots_2026_10_01.md).
+Input coordinate/radius/map edits cannot retarget cached numerical geometry;
+protected mesh/input buffers are shared across probes. The expanded selector
+passes 381 tests with seven existing skips. Unique retained native array bytes
+are unchanged in four measured fixtures; input alias isolation and per-query
+records have their explicitly documented memory costs. #60 remains partial;
+the public context/support schema and mutation migration are still pending.
+
+The final expanded selection, including restored-snapshot protection, reporting
+checks and executable examples, passes 385 tests with seven existing skips.
