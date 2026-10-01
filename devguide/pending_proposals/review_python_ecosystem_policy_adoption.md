@@ -166,3 +166,23 @@ All six actual installed-provider identity and availability-check steps passed
 on Linux/macOS and Python 3.11–3.13. This settles the published-provider fpocket
 availability migration. It does not close this broad support-library review or
 replace complete scientific recovery evidence.
+
+
+Final compatibility correction: a relative command containing a directory
+(e.g. `bin/fpocket` or `./fpocket`) is resolved by subprocess relative to its
+execution directory, which may differ from the caller's directory. Three new
+cases failed before correction (two valid execution-directory cases and one
+false-positive caller-directory case). The runner now gives DepDigest the same
+resolved executable path while preserving the original subprocess command and
+public error metadata. Bare command names retain PATH discovery. All nine
+availability cases and seven administrative tests pass against the clean public
+provider; scoped mypy and changed-file Ruff lint/format pass. The final exact
+source needs its own focused hosted run; the preceding six-case run remains
+historical evidence.
+
+Final focused run [36829466420](https://github.com/uibcdf/topomt/actions/runs/36829466420)
+completed/success at `0fbaa32dc74100e8fb04e2c06e7ee29093cd3fc9` after integrating
+concurrent catalogue documentation. All six native verification steps succeeded;
+logs show nine passed availability cases in every Linux/macOS Python 3.11–3.13
+cell. Dispatch 36829387085 targeted the then-remote 7bd47fa after a rejected push
+and is not credited with these new cases. No remote work was overwritten.

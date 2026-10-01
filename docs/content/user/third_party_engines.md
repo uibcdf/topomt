@@ -76,7 +76,9 @@ failures and engine execution failures remain distinct from absence.
 
 TopoMT requires DepDigest 0.12.0 or newer for executable availability and explicit
 disabled installer routes. The shared check uses the supplied `fpocket_cmd`, so a
-custom executable does not require a separate default `fpocket` on PATH. Missing
+custom executable does not require a separate default `fpocket` on PATH. Relative
+command paths are checked against the execution directory (`workdir`, or the input
+PDB directory by default), matching subprocess execution. Missing
 commands retain TopoMT's `FpocketError` and its Conda hint; execution failures
 remain separate. Pip-only engines do not receive inferred Conda installation hints.
 Publication and adoption are tracked in

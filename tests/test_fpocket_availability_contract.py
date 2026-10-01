@@ -136,3 +136,60 @@ def test_provider_internal_import_failure_is_not_engine_absence(
     with pytest.raises(ImportError) as caught:
         runner.run_fpocket(tmp_path / 'input.pdb')
     assert caught.value is original
+
+
+@pytest.mark.parametrize('explicit_workdir', [False, True])
+def test_relative_command_is_checked_in_execution_directory(
+    runner, monkeypatch, tmp_path, explicit_workdir
+):
+    workdir = tmp_path / 'execution'
+    workdir.mkdir()
+    command = workdir / 'bin' / 'fpocket'
+    command.parent.mkdir()
+    command.write_text('#!/bin/sh\n')
+    command.chmod(0o755)
+    pdb_file = workdir / 'input.pdb'
+    checked = []
+    original_which = checker.shutil.which
+
+    def inspect(actual):
+        checked.append(actual)
+        return original_which(actual)
+
+    def execute(args, **kwargs):
+        assert args[0] == 'bin/fpocket'
+        assert kwargs['cwd'] == workdir.resolve()
+        (workdir / 'input_out').mkdir()
+
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.setattr(checker.shutil, 'which', inspect)
+    monkeypatch.setattr(runner.subprocess, 'run', execute)
+    result = runner.run_fpocket(
+        pdb_file,
+        fpocket_cmd='bin/fpocket',
+        workdir=workdir if explicit_workdir else None,
+    )
+    assert result == workdir / 'input_out'
+    assert checked == [str(command.resolve())]
+
+
+def test_relative_command_in_caller_directory_is_not_execution_availability(
+    runner, monkeypatch, tmp_path
+):
+    caller = tmp_path / 'caller'
+    caller.mkdir()
+    command = caller / 'fpocket'
+    command.write_text('#!/bin/sh\n')
+    command.chmod(0o755)
+    workdir = tmp_path / 'execution'
+    workdir.mkdir()
+    monkeypatch.chdir(caller)
+
+    def forbid_execution(*args, **kwargs):
+        raise AssertionError('command is absent from the execution directory')
+
+    monkeypatch.setattr(runner.subprocess, 'run', forbid_execution)
+    with pytest.raises(runner.FpocketError) as caught:
+        runner.run_fpocket(workdir / 'input.pdb', fpocket_cmd='./fpocket')
+    assert caught.value.code == 'ExecutableNotFoundError'
+    assert caught.value.extra['executable'] == './fpocket'
