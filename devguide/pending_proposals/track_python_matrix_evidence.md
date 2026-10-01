@@ -61,3 +61,20 @@ Before a release or unqualified supported-matrix claim, demonstrate passing
 installed-package and test evidence for the claimed Python and OS cells under
 the current MolSysSuite CI policy, or record an explicit bounded policy
 decision where that policy permits one. Do not mark a failing matrix as green.
+
+## 2026-10-01 notebook dependency regression
+
+CI `36874210900`, at `3da03db196c3a679af54152a868024eae187aada`, failed all
+six matrix jobs during collection: the new tetrahedron reference test imports
+`QuantityRecord`, which was absent from the controlled PyUnitWizard revision
+`342babd`. Local validation imported a newer editable revision, so it did not
+expose that mismatch. GH Run Receptor identified the failed jobs; native failed
+logs established the exact import error. This is a regression introduced by
+the notebook tests, not a native DFND calculation failure.
+
+The controlled source pin is advanced to the canonical QuantityRecord feature
+commit `23554a7aca31cba144ef248b9771d4668815dd1c`. Its PyUnitWizard source matches
+the locally tested checkout; its codec is provisional. The adopted reference
+tests exercise record decoding and dimensional quantities without adding a
+TopoMT-specific serialization fallback. A passing full matrix remains a separate
+gate; the pin correction alone does not establish it.
