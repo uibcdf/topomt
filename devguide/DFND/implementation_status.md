@@ -1,5 +1,12 @@
 # DFND Implementation Status
 
+Current evidence (2026-10-01): [the joint DFND/Topography audit](audit_topography_2026_10_01.md)
+supersedes conflicting implementation/status and scheduling wording below.
+Promotion includes percolating and provisional morphological classes; lineage
+helpers exist. Public context/support adoption and scientific validation remain
+open. Registry shallow copies and numerical precision have newly reproduced
+limitations (#74/#75); older broad green/copy claims do not certify those paths.
+
 This document separates the DFND design intent from the current code state.
 
 ## 1. Strategic Status

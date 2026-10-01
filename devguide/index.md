@@ -6,6 +6,11 @@ and the next engineering steps.
 
 ## Main documents
 
+- [DFND/audit_topography_2026_10_01.md](DFND/audit_topography_2026_10_01.md)
+  Current joint DFND/Topography audit, reproduced integrity findings, scientific
+  reference review and staged roadmap. DFND/Topography is the selected next
+  workstream; broader provider implementation remains paused.
+
 - [external_tools_catalog.md](external_tools_catalog.md)
   Maintained external-tool catalogue, comparison/candidate watchlist and
   stewardship rule. Permanent provider overviews: [fpocket](fpocket4/overview.md),
@@ -13,12 +18,12 @@ and the next engineering steps.
   [pyCASTA](pycasta/overview.md) and [CASTp/CASTpFold](castp/overview.md).
 
 - [provider_pocket_output_checkpoint.md](provider_pocket_output_checkpoint.md)
-  Current priority and restart checkpoint: provider-specific outputs and shared
-  pocket access before DFND consolidation or full Topography runtime adoption.
+  Delivered provider-specific outputs and shared pocket access; restart checkpoint
+  for the paused broader provider work, independent of DFND consolidation.
 
 - [provider_output_viewer_checkpoint.md](provider_output_viewer_checkpoint.md)
-  Current consumer slice: original pocket outputs in the TopoMT-owned MolSysViewer
-  addon; concrete DockingMT and PharmacophoreMT adoption remains deferred.
+  Delivered original pocket outputs in the TopoMT-owned MolSysViewer addon;
+  concrete DockingMT and PharmacophoreMT adoption remains deferred.
 
 - [status.md](status.md)
   Current status of the project, including what is stable, what is in
@@ -34,8 +39,8 @@ and the next engineering steps.
   evaluations, provider admission and provenance. Runtime adoption is pending.
 
 - [topography_implementation_route.md](topography_implementation_route.md)
-  Deferred public-model implementation evidence, bounded adoption gates and
-  compatibility/scientific validation requirements.
+  Pending public-model adoption gates and compatibility/scientific requirements,
+  sequenced with the current joint audit.
 
 - [roadmap.md](roadmap.md)
   Working roadmap for the current development cycle, including the outcome of

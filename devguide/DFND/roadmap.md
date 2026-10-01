@@ -1,5 +1,12 @@
 # DFND Roadmap
 
+Current scheduling and evidence (2026-10-01): the user has resumed joint
+DFND/Topography work, starting with an audit and staged roadmap. Use
+[the current audit](audit_topography_2026_10_01.md) for implementation presence,
+test evidence, integrity findings and the next sequence. The May roadmap below
+is historical; its missing-promotion and absent-lineage descriptions no longer
+describe current code. Scientific validation remains open.
+
 Forward-looking roadmap recorded on 2026-05-22. It captures where DFND stands now
 and the prioritized next directions. It complements
 [`Implementation_Route.md`](Implementation_Route.md) (the original "build and

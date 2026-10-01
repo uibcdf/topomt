@@ -54,8 +54,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
-### Open (1)
+### Open (2)
 
 - [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
+- [`dfnd_reference_validation_panel.md`](dfnd_reference_validation_panel.md) — [#76](https://github.com/uibcdf/topomt/issues/76) — Reconcile DFND synthetic reference assumptions and freeze independent validation evidence. *(open, inspected)*
 
 <!-- /generated -->

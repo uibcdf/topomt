@@ -17,24 +17,28 @@ The project is not yet a polished stable product. The main remaining gap is not 
 
 ## Current Priority
 
-Work is **paused at the user's request** after initial original-provider outputs
-and MolSysViewer addon adoption. Resume only on a new instruction; the bounded
-consumer checkpoint is [provider_output_viewer_checkpoint.md](provider_output_viewer_checkpoint.md).
+On 2026-10-01 the user selected joint DFND/Topography work, starting with
+[the audit, assessment and staged roadmap](DFND/audit_topography_2026_10_01.md).
+The audited local selector passed 312 tests with two skips; additional probes
+reproduced shallow-copy index corruption (#74), mutable native-cache ownership
+risks (#60) and overstated numerical certainty (#75). Independent reference
+validation is tracked in #76. The next implementation sequence is the bounded
+copy correction followed by #60's ownership/context/support slice.
 
-The active priority is [provider-specific pocket delivery](provider_pocket_output_checkpoint.md)
-for MolSysViewer, DockingMT and PharmacophoreMT, initially implemented in #65. Provisional output
-contracts preserve original engine semantics and expose shared pocket access;
-DFND consolidation and full Topography runtime adoption are deferred.
+Initial [provider pocket delivery](provider_pocket_output_checkpoint.md) (#65)
+and [MolSysViewer adoption](provider_output_viewer_checkpoint.md) (#66) are
+implemented. Their provisional contracts remain usable while broader provider
+implementation is paused. Runtime public-model gates are still open.
 
 The broader [third-party results checkpoint](third_party_results_checkpoint.md)
 remains 20/100 verified, with exhaustive fidelity incomplete. Its later local
-provider-method audit follows its separate parity gate. The current consumer
-slice is [MolSysViewer addon adoption](provider_output_viewer_checkpoint.md), #66.
+provider-method audit follows its separate parity gate. Initial consumer adoption
+is retained in #66.
 Concrete DockingMT and PharmacophoreMT adoption remains deferred.
 
 DFND is the native TopoMT method direction. It should not be forced into strict CASTp, fpocket, AlphaSpace2, Pocketeer, or pycasta parity. Those methods remain valuable as external references, loader or wrapper integrations, and qualitative/quantitative comparison baselines.
 
-The deferred DFND backlog is:
+The DFND backlog is:
 
 - apply the completed typed mesh/query contract to validation, reporting, and
   future temporal-comparability workflows;
@@ -65,11 +69,14 @@ The deferred DFND backlog is:
   representation supports clean repeated rendering.
 - Full-graph and component-graph nodes share one viewer-neutral tetrahedron centre extractor with explicit units and structured identity.
 - Standalone selected-feature rendering emits the requested filtered operations, and addon context actions use executable entries without no-op click callbacks.
-- `Topography` and DFND `Components` registries enforce atomic mutation,
-  immutable registered IDs, coherent relations, and semantic copies.
+- `Topography` and DFND `Components` registries have validated mutation and
+  registered-ID protection. The newly reproduced Topography shallow-copy defect
+  remains open in #74; direct mutable views and snapshot ownership remain #60.
 - `R_residence` and `R_gate` are implemented as clearance primitives with active tests.
 - DFND raw records separate topological/debug volumes from `volume_solvent_estimate`.
-- DFND promotes stable void, pocket, and channel component families while provisional families remain available through `topography.dfnd`.
+- DFND promotes void/pocket/channel, percolating regions and provisional
+  open-concavity/groove/cleft classifications, with Mouth children where applicable.
+  Remaining raw evidence is available through `topography.dfnd`.
 - Dry-side records now include dry components, dry edges, dry interfaces, face depth, and first candidate dry motifs.
 - Probe-radius sweeps on five small real systems obey the expected monotonicity invariants.
 
@@ -109,8 +116,9 @@ The conventional engines remain important, but they are no longer the only activ
 - `volume_solvent_estimate` is deterministic and tested, but it is still an estimator, not a publication-grade CASTp-like analytic volume.
 - Tiny void/domain reporting policy is not settled.
 - Surface-concavity, nonresident-passage, and dry motif utility must be validated before becoming public feature families.
-- Dynamic topology is documented but not implemented; matching thresholds,
-  confidence, and split/merge lineage policy must be decided first.
+- Pairwise matching and multi-frame track/event helpers exist. Public dynamic
+  collection ownership, compatible-input checks, matching confidence and
+  scientific lineage validation remain pending.
 - Cross-engine benchmarks are not yet organized into a stable comparison battery.
 
 ## Practical Development Rule

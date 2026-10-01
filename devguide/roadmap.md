@@ -4,6 +4,13 @@
 
 TopoMT should converge toward a reliable native topography framework. External engines remain important references and integration targets, but the native method direction is now DFND.
 
+Current scheduling decision (2026-10-01): joint DFND/Topography work is resumed,
+starting with [the audit and staged roadmap](DFND/audit_topography_2026_10_01.md).
+Initial provider/viewer delivery is complete. Broader provider fidelity,
+additional engines and concrete DockingMT/PharmacophoreMT adoption remain paused
+or deferred. The dated September sequence below is historical; no DFND runtime
+or scientific gate is completed by this planning update.
+
 Current scheduling decision (2026-09-30): deliver usable original-provider
 pockets first through provider-specific provisional outputs and shared consumer
 access. See the [current checkpoint](provider_pocket_output_checkpoint.md), #65.

@@ -11,7 +11,11 @@ in `architecture.md` and the June architecture review. DFND's mathematical,
 numerical, input, and query contracts retain their own authority. Historical
 checkpoints describe their recorded revision, not current release readiness.
 
-Current delivery priority: [provider-specific pocket outputs](provider_pocket_output_checkpoint.md).
+Scheduling update (2026-10-01): initial provider output and viewer delivery is
+complete; the user has selected [joint DFND/Topography audit and work](DFND/audit_topography_2026_10_01.md).
+Runtime adoption remains pending. Broader provider fidelity stays paused.
+
+Delivered consumer boundary: [provider-specific pocket outputs](provider_pocket_output_checkpoint.md).
 Their provisional contracts preserve original semantics and shared pocket
 access without waiting for DFND consolidation or the complete public runtime
 gates. They are evidence for future Topography integration, not canonical

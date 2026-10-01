@@ -6,6 +6,13 @@ recorded by [#59](https://github.com/uibcdf/topomt/issues/59).
 This broad route lives outside the report queues; its bounded work has owning
 issues. Closing the conceptual decision does not complete these runtime gates.
 
+Scheduling update (2026-10-01): the user has selected joint DFND/Topography
+work, starting with [the audit and roadmap](DFND/audit_topography_2026_10_01.md).
+The next implementation sequence is #74's bounded copy correction and #60's
+ownership/context/support slice, with numerical/reference validation #75/#76.
+The provider-output delivery below is historical and remains independently
+usable; broader provider work is paused. No runtime gate is closed by this audit.
+
 Scheduling update (2026-09-30): these are deferred public-model gates, not global
 prerequisites for external results. The current priority is
 [provider-specific pocket outputs](provider_pocket_output_checkpoint.md), #65.
