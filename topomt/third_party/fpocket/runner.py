@@ -1,3 +1,4 @@
+import os
 import subprocess
 from pathlib import Path
 from typing import Sequence
@@ -32,12 +33,23 @@ def run_fpocket(
     execution. Missing commands and engine failures raise ``FpocketError``;
     unrelated filesystem and provider errors retain their original identity.
     """
+    pdb_file = Path(pdb_file).resolve()
+    if workdir is None:
+        workdir = pdb_file.parent
+    else:
+        workdir = Path(workdir).resolve()
+
+    # subprocess resolves relative executable paths after changing to cwd.
+    executable = fpocket_cmd
+    if os.path.dirname(fpocket_cmd) and not Path(fpocket_cmd).is_absolute():
+        executable = str((workdir / fpocket_cmd).resolve())
+
     dependency = LIBRARIES['fpocket']
     try:
         check_dependency(
             'fpocket',
             kind=dependency['kind'],
-            executable=fpocket_cmd,
+            executable=executable,
             pypi_name=dependency['pypi'],
             conda_name=dependency['conda'],
             conda_channel=dependency['channel'],
@@ -49,12 +61,6 @@ def run_fpocket(
         raise FpocketError(
             str(exc), code='ExecutableNotFoundError', executable=fpocket_cmd
         ) from exc
-
-    pdb_file = Path(pdb_file).resolve()
-    if workdir is None:
-        workdir = pdb_file.parent
-    else:
-        workdir = Path(workdir).resolve()
 
     cmd = [fpocket_cmd, '-f', str(pdb_file)]
     if extra_args:
