@@ -1,5 +1,11 @@
 # Engine References
 
+**Historical reference notes.** Current installation, integration status and
+provider roadmaps are maintained in the [external-tool catalogue](external_tools_catalog.md)
+and its five provider overviews. The sections below preserve earlier reference
+decisions; their native-default recommendations and status summaries are not
+current original-provider delivery guidance or fresh parity certificates.
+
 ## Purpose
 
 This document records the external reference points used to design, validate,

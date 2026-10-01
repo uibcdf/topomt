@@ -78,6 +78,10 @@ extract documented fields and arrays into a versioned JSON/binary snapshot.
 
 ## Inventory and provider work
 
+The [external-tool catalogue](external_tools_catalog.md) and provider overviews
+centralize discovery and permanent stewardship. They link this bounded fidelity
+work and individual descriptor issues; provider discussions do not replace them.
+
 | Provider | Initial measurement families | Original result to preserve |
 |---|---|---|
 | Pocketeer | volume, score, per-sphere radius and SASA | pocket residues/mask, defining atoms, sphere identities and geometry |

@@ -6,6 +6,12 @@ and the next engineering steps.
 
 ## Main documents
 
+- [external_tools_catalog.md](external_tools_catalog.md)
+  Maintained external-tool catalogue, comparison/candidate watchlist and
+  stewardship rule. Permanent provider overviews: [fpocket](fpocket4/overview.md),
+  [Pocketeer](pocketeer/overview.md), [AlphaSpace2](alphaspace2/overview.md),
+  [pyCASTA](pycasta/overview.md) and [CASTp/CASTpFold](castp/overview.md).
+
 - [provider_pocket_output_checkpoint.md](provider_pocket_output_checkpoint.md)
   Current priority and restart checkpoint: provider-specific outputs and shared
   pocket access before DFND consolidation or full Topography runtime adoption.
