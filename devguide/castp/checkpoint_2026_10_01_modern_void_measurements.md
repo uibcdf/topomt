@@ -1,5 +1,14 @@
 # Modern CASTp closed-void measurements checkpoint
 
+## Subsequent radius-profile qualification
+
+The later [expanded panel](checkpoint_2026_10_01_castp3_radius_profile.md) found
+two SA/MS residuals with standard ProtOr despite exact lining atoms. Server
+bulb geometry identified a distinct carboxylate radius. The explicit
+`castp3_protor` profile now reproduces thirteen voids and fifty-two measures
+across four systems. The first 2PK4 evidence below retains its original inputs;
+do not extend its standard-ProtOr agreement to all modern-server cases.
+
 Date: 2026-10-01. Bounded implementation theme:
 [#79](https://github.com/uibcdf/topomt/issues/79).
 

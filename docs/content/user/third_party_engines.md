@@ -250,7 +250,7 @@ The local reconstruction can run without a CASTp executable or service:
 
 ```python
 topography = tmt.third_party.castp3.get_topography(
-    'protein.pdb', backend='native', radii_model='protor', probe_radius=1.4
+    'protein.pdb', backend='native', radii_model='castp3_protor', probe_radius=1.4
 )
 ```
 
@@ -258,10 +258,14 @@ At the base alpha rank, closed voids carry independent unit-bearing
 `solvent_accessible_area`, `molecular_surface_area`,
 `solvent_accessible_volume` and `molecular_surface_volume` attributes. Generic
 `area` and `volume` retain their polyhedral definitions. Validation currently
-establishes exact lining atoms and agreement within the server's printed
-precision for the four closed cavities in bundled 2PK4. Open pockets, mouths,
-altered-alpha measurements and general CASTp3 equivalence remain experimental.
-ProtOr radii require chemical connectivity from MolSysMT.
+establishes exact lining atoms and all 52 SA/MS values within the server's
+printed precision for 13 closed cavities across bundled 2PK4, 1IFB, 3PHV and
+1HEW. `castp3_protor` is an explicit empirical server profile with 1.40 Å
+ASP/GLU carboxylate oxygen radii, inferred from exported sphere geometry.
+Standard `protor` retains 1.42 Å for those atoms and differs from the server
+in two cavities of this panel. Both profiles require MolSysMT connectivity.
+Open pockets, mouths, altered-alpha measurements and general CASTp3 equivalence
+remain experimental.
 
 ### Original source checkouts and services
 

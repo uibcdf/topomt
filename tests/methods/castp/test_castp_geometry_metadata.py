@@ -43,8 +43,17 @@ def test_classical_geometry_does_not_require_chemical_bonds(
     np.testing.assert_allclose(geometry.atom_radii, expected_radius)
 
 
-@pytest.mark.parametrize('implementation', [castp_geometry, castp3_geometry])
-def test_protor_connectivity_failure_is_preserved(implementation, monkeypatch):
+@pytest.mark.parametrize(
+    'implementation,radii_model',
+    [
+        (castp_geometry, 'protor'),
+        (castp3_geometry, 'protor'),
+        (castp3_geometry, 'castp3_protor'),
+    ],
+)
+def test_protor_connectivity_failure_is_preserved(
+    implementation, radii_model, monkeypatch
+):
     original_get = implementation.msm.get
 
     def get_with_unavailable_connectivity(*args, **kwargs):
@@ -57,5 +66,5 @@ def test_protor_connectivity_failure_is_preserved(implementation, monkeypatch):
     with pytest.raises(RuntimeError, match='connectivity unavailable'):
         implementation.build_castp_geometry(
             INPUT_ROOT / 'regular_tetrahedron_v1/input_castp.pdb',
-            radii_model='protor',
+            radii_model=radii_model,
         )

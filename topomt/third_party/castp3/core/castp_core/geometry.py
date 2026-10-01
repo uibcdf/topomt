@@ -552,6 +552,34 @@ def _protor_radii_for_labels(
     return radii
 
 
+def _castp3_protor_radii_for_labels(
+    group_names: np.ndarray,
+    atom_names: np.ndarray,
+    atom_types: np.ndarray,
+    n_bonds: np.ndarray,
+) -> np.ndarray:
+    """Return the explicit, empirically identified modern CASTp radius profile.
+
+    Pinned CASTpFold bulb centers and orthosphere radii identify 1.40 Å for
+    ASP/GLU carboxylate oxygens, independently of reported SA/MS measures.
+    Other atoms retain the existing ProtOr assignments. This server profile
+    is separate from the standard ``protor`` policy, which retains 1.42 Å.
+    """
+
+    radii = _protor_radii_for_labels(group_names, atom_names, atom_types, n_bonds)
+    carboxylate_labels = {
+        ('ASP', 'OD1'),
+        ('ASP', 'OD2'),
+        ('GLU', 'OE1'),
+        ('GLU', 'OE2'),
+    }
+    for index, (group, atom) in enumerate(zip(group_names, atom_names)):
+        label = str(group).strip().upper(), str(atom).strip().upper()
+        if label in carboxylate_labels:
+            radii[index] = 1.40
+    return radii
+
+
 def _rank_of_ratio(
     spectrum_ratios: tuple[ExactRatio, ...], value_ratio: ExactRatio
 ) -> int:
@@ -1782,7 +1810,14 @@ def build_castp_geometry(
     atom_radii_override: np.ndarray | None = None,
     alpha_boundary_epsilon_length: float = 0.0,
 ) -> CastpGeometry:
-    """Build the weighted geometric substrate used by the native CASTp path."""
+    """Build the weighted geometric substrate used by the native CASTp path.
+
+    ``radii_model='protor'`` retains the standard ProtOr table.
+    ``radii_model='castp3_protor'`` selects the explicit modern-server profile,
+    including the empirically identified ASP/GLU carboxylate oxygen radii.
+    Both typing policies require connectivity. An explicit radius override
+    supplies already-expanded balls and takes precedence over either profile.
+    """
 
     molsys = msm.convert(
         molecular_system, to_form='molsysmt.MolSys', structure_indices=structure_indices
@@ -1823,7 +1858,7 @@ def build_castp_geometry(
     elif radii_model == 'castp_param':
         atom_radii = _castp_param_radii_for_labels(atom_group_names, atom_names)
         atom_radii = atom_radii + float(solvent_radius)
-    elif radii_model == 'protor':
+    elif radii_model in {'protor', 'castp3_protor'}:
         # Chemical connectivity belongs to ProtOr typing, not to explicit
         # geometric balls or the classical parameter-table radii policies.
         atom_types = np.asarray(
@@ -1834,7 +1869,12 @@ def build_castp_geometry(
             msm.get(molsys, selection=atom_indices, n_bonds=True),
             dtype=int,
         )
-        atom_radii = _protor_radii_for_labels(
+        radius_function = (
+            _castp3_protor_radii_for_labels
+            if radii_model == 'castp3_protor'
+            else _protor_radii_for_labels
+        )
+        atom_radii = radius_function(
             atom_group_names, atom_names, atom_types, atom_n_bonds
         )
         atom_radii = atom_radii + float(solvent_radius)

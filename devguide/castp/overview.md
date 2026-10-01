@@ -42,6 +42,9 @@ and has documented server discrepancies. The
 [modern closed-void checkpoint](checkpoint_2026_10_01_modern_void_measurements.md)
 records the first exact 2PK4 lining-atom and sixteen-measure SA/MS comparison,
 rerun CAST regressions and the bounded new unit-bearing output.
+The [expanded radius-profile checkpoint](checkpoint_2026_10_01_castp3_radius_profile.md)
+identifies an explicit `castp3_protor` policy and extends agreement to thirteen
+voids and fifty-two measures. Standard ProtOr differs in two of those voids.
 
 The [common output checkpoint](../provider_pocket_output_checkpoint.md) defines
 shared pocket access, exact run evidence, units, source mapping and missing
@@ -78,6 +81,7 @@ bounded outcomes, not full-provider certification.
 - [Permanent CASTp / CASTpFold discussion #73](https://github.com/uibcdf/topomt/discussions/73) in External Tools.
 - [Original output inventory](external_output_inventory.md).
 - [Modern closed-void measurements checkpoint](checkpoint_2026_10_01_modern_void_measurements.md).
+- [Modern radius profile and expanded panel](checkpoint_2026_10_01_castp3_radius_profile.md).
 - [Classical functional closure](checkpoint_2026_04_23_castp1_functional_parity_closure.md).
 - [CASTp3/CASTpFold reproducibility boundary](checkpoint_2026_05_19_castp3_reproducibility_boundary.md).
 - [Historical fidelity contract](contract.md).

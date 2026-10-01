@@ -1,5 +1,6 @@
 """Independent local measurements against pinned modern CASTp server outputs."""
 
+import json
 import subprocess
 import sys
 import zipfile
@@ -21,6 +22,12 @@ QUANTITIES = (
     ('solvent_accessible_volume', 'volume_sa', 'angstrom**3'),
     ('molecular_surface_volume', 'volume_ms', 'angstrom**3'),
 )
+VOID_IDS = {
+    '2pk4': (4, 5, 6, 7),
+    '1ifb': (1, 7, 9, 10),
+    '3phv': (8, 13),
+    '1hew': (3, 6, 7),
+}
 
 
 @pytest.mark.parametrize('case', ['1stp', '1tcd', '2pk4', '3ptb'])
@@ -46,18 +53,30 @@ def test_pinned_castp3_and_castpfold_geometric_outputs_agree(case):
 
 
 @pytest.fixture(scope='module')
-def modern_void_case(tmp_path_factory):
-    folder = tmp_path_factory.mktemp('castp_modern_voids')
-    with zipfile.ZipFile(DATA / 'CASTpFold_server/2pk4.zip') as archive:
+def modern_void_cache():
+    """Reuse each archive's expensive geometry across scalar-parametrized rows."""
+    return {'cases': {}, 'measurements': {}}
+
+
+@pytest.fixture(scope='module')
+def modern_void_case(tmp_path_factory, request, modern_void_cache):
+    case = getattr(request, 'param', '2pk4')
+    if case in modern_void_cache['cases']:
+        return modern_void_cache['cases'][case]
+    folder = tmp_path_factory.mktemp(f'castp_modern_voids_{case}')
+    with zipfile.ZipFile(DATA / f'CASTpFold_server/{case}.zip') as archive:
+        pdb_members = [name for name in archive.namelist() if name.endswith('.pdb')]
+        assert len(pdb_members) == 1
+        stem = Path(pdb_members[0]).stem
         for extension in ('pdb', 'poc', 'pocInfo'):
-            (folder / f'2pk4.{extension}').write_bytes(
-                archive.read(f'2pk4.{extension}')
+            (folder / f'{case}.{extension}').write_bytes(
+                archive.read(f'{stem}.{extension}')
             )
-    pdb = folder / '2pk4.pdb'
+    pdb = folder / f'{case}.pdb'
     geometry = build_castp_geometry(
         pdb,
         selection='molecule_type in ["protein", "peptide"]',
-        radii_model='protor',
+        radii_model='castp3_protor',
         solvent_radius=1.4,
     )
     serials = [
@@ -65,14 +84,22 @@ def modern_void_case(tmp_path_factory):
         for line in pdb.read_text().splitlines()
         if line.startswith(('ATOM', 'HETATM'))
     ]
-    info = _parse_poc_info_file(folder / '2pk4.pocInfo')
-    lining_atoms = _parse_poc_file(folder / '2pk4.poc')
+    info = _parse_poc_info_file(folder / f'{case}.pocInfo')
+    lining_atoms = _parse_poc_file(folder / f'{case}.poc')
     oracle = {
-        frozenset(int(label.split('-', 1)[0]) for label in labels): info[feature_id]
+        frozenset(int(label.split('-', 1)[0]) for label in labels): {
+            **info[feature_id],
+            'server_id': feature_id,
+        }
         for feature_id, labels in lining_atoms.items()
         if info[feature_id]['n_mouths'] == 0
     }
-    return pdb, geometry, serials, oracle
+    expected_ids = {key for key, value in info.items() if value['n_mouths'] == 0}
+    assert len(oracle) == len(expected_ids)
+    assert {item['server_id'] for item in oracle.values()} == expected_ids
+    result = pdb, geometry, serials, oracle
+    modern_void_cache['cases'][case] = result
+    return result
 
 
 def _component_atom_ids(geometry, simplex_indices, serials):
@@ -82,6 +109,94 @@ def _component_atom_ids(geometry, simplex_indices, serials):
     return frozenset(
         serials[int(geometry.atom_indices_map[index])] for index in vertices
     )
+
+
+@pytest.fixture(scope='module')
+def local_void_measurements(modern_void_case, modern_void_cache):
+    pdb, geometry, serials, _oracle = modern_void_case
+    if pdb.stem in modern_void_cache['measurements']:
+        return modern_void_cache['measurements'][pdb.stem]
+    measurements = voids_measurements(geometry, geometry.base_rank)
+    observed = {
+        _component_atom_ids(geometry, item.simplex_indices, serials): item
+        for item in measurements.voids
+    }
+    assert len(observed) == len(measurements.voids)
+    modern_void_cache['measurements'][pdb.stem] = observed
+    return observed
+
+
+@pytest.mark.parametrize('modern_void_case', VOID_IDS, indirect=True)
+def test_modern_panel_void_membership(modern_void_case, local_void_measurements):
+    pdb, _geometry, _serials, oracle = modern_void_case
+    assert {item['server_id'] for item in oracle.values()} == set(VOID_IDS[pdb.stem])
+    assert local_void_measurements.keys() == oracle.keys()
+
+
+@pytest.mark.parametrize(
+    'modern_void_case,feature_id,field,attribute,unit',
+    [
+        pytest.param(
+            case, feature_id, *quantity, id=f'{case}-{feature_id}-{quantity[0]}'
+        )
+        for case, feature_ids in VOID_IDS.items()
+        for feature_id in feature_ids
+        for quantity in QUANTITIES
+    ],
+    indirect=['modern_void_case'],
+)
+def test_modern_panel_void_measurement(
+    modern_void_case, local_void_measurements, feature_id, field, attribute, unit
+):
+    _pdb, _geometry, _serials, oracle = modern_void_case
+    atom_ids, expected = next(
+        (atom_ids, expected)
+        for atom_ids, expected in oracle.items()
+        if expected['server_id'] == feature_id
+    )
+    observed = getattr(local_void_measurements[atom_ids], attribute)
+    assert observed == pytest.approx(
+        puw.get_value(expected[field], to_unit=unit), abs=0.00050001, rel=0
+    )
+
+
+@pytest.mark.parametrize('modern_void_case', ['1hew'], indirect=True)
+def test_castp3_profile_reproduces_pinned_1hew_void_bulbs(
+    modern_void_case, local_void_measurements
+):
+    _pdb, geometry, _serials, oracle = modern_void_case
+    atom_ids = next(ids for ids, data in oracle.items() if data['server_id'] == 7)
+    component = local_void_measurements[atom_ids]
+    with zipfile.ZipFile(DATA / 'CASTpFold_server/1hew.zip') as archive:
+        member = next(
+            name for name in archive.namelist() if name.endswith('.bulb.json')
+        )
+        remaining = json.loads(archive.read(member))[6]
+    assert len(remaining) == len(component.simplex_indices) == 6
+    for index in component.simplex_indices:
+        vertices = np.asarray(geometry.mesh.simplex_atom_indices)[index]
+        points = np.asarray(geometry.atom_coordinates)[vertices]
+        weights = np.asarray(geometry.atom_radii)[vertices] ** 2
+        # Independently solve equal-power equations instead of reusing the
+        # kernel's determinant centers. Bulbs print four decimal places.
+        center = np.linalg.solve(
+            2 * (points[1:] - points[0]),
+            np.sum(points[1:] ** 2, axis=1)
+            - np.dot(points[0], points[0])
+            - weights[1:]
+            + weights[0],
+        )
+        radius = np.sqrt(np.dot(center - points[0], center - points[0]) - weights[0])
+        matches = [
+            position
+            for position, bulb in enumerate(remaining)
+            if np.max(np.abs(center - [bulb['c'][axis] for axis in 'xyz']))
+            <= 0.000050001
+            and abs(radius - bulb['r']) <= 0.000050001
+        ]
+        assert len(matches) == 1
+        remaining.pop(matches[0])
+    assert not remaining
 
 
 def test_local_void_sa_ms_measurements_match_modern_server(modern_void_case):
@@ -114,10 +229,11 @@ def test_void_measurements_respect_requested_rank(modern_void_case):
     assert geometry.base_rank == original_rank
 
 
+@pytest.mark.parametrize('modern_void_case', VOID_IDS, indirect=True)
 def test_native_void_metrics_reach_topography_with_units(modern_void_case, monkeypatch):
     pdb, geometry, serials, oracle = modern_void_case
     monkeypatch.setattr(_native_impl, 'build_castp_geometry', lambda *a, **k: geometry)
-    records, mesh = _native_impl.castp(pdb, radii_model='protor')
+    records, mesh = _native_impl.castp(pdb, radii_model='castp3_protor')
     assert mesh is geometry.mesh
     for record in records:
         if record['feature_type'] != 'void':

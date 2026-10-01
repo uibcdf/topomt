@@ -2,6 +2,7 @@
 
 import numpy as np
 
+from topomt.third_party.castp3.core.castp_core import geometry
 from topomt.third_party.castp3.core.castp_core.geometry import (
     _infer_protor_type_for_atom,
     _protor_radii_for_labels,
@@ -43,3 +44,35 @@ def test_castp3_protor_radii_follow_table_before_element_fallback():
     assert radii[3] == 1.64
     assert radii[4] == 1.88
     assert radii[5] == 1.77
+
+
+def test_castp3_server_profile_distinguishes_carboxylate_radii():
+    groups = np.asarray(['ASP', 'ASP', 'GLU', 'GLU', 'ALA', 'SER', 'TYR', 'ASH'])
+    names = np.asarray(['OD1', 'OD2', 'OE1', 'OE2', 'O', 'OG', 'OH', 'OD2'])
+    elements = np.full(len(groups), 'O')
+    bonds = np.ones(len(groups), dtype=int)
+
+    standard = _protor_radii_for_labels(groups, names, elements, bonds)
+    server = geometry._castp3_protor_radii_for_labels(groups, names, elements, bonds)
+
+    np.testing.assert_allclose(standard, [1.42] * 5 + [1.46] * 3)
+    np.testing.assert_allclose(server, [1.40] * 4 + [1.42] + [1.46] * 3)
+
+
+def test_castp3_server_profile_preserves_explicit_radius_overrides(monkeypatch):
+    # Profile dispatch must not override an explicit user sphere model.
+    from pathlib import Path
+
+    source = (
+        Path(__file__).parent.parent
+        / 'docs/content/showcase/dfnd/artifacts/regular_tetrahedron_v1/input_castp.pdb'
+    )
+
+    def unexpected_typing(*args, **kwargs):
+        raise AssertionError('An explicit radius override must bypass typing.')
+
+    monkeypatch.setattr(geometry, '_castp3_protor_radii_for_labels', unexpected_typing)
+    result = geometry.build_castp_geometry(
+        source, radii_model='castp3_protor', atom_radii_override=np.full(4, 3.1)
+    )
+    np.testing.assert_allclose(result.atom_radii, 3.1)

@@ -175,6 +175,9 @@ def castp(
     These SA/MS quantities use the VOLBL construction without cusp correction.
     Legacy ``area`` and ``volume`` retain their polyhedral definitions. Open
     features and altered alpha ranks do not yet expose analytical SA/MS fields.
+    ``radii_model='castp3_protor'`` explicitly selects the modern-server radius
+    profile identified from archived bulb geometry; ``'protor'`` retains the
+    standard table and differs in ASP/GLU carboxylate oxygen radii.
     """
 
     del syntax, skip_digestion, sea_level, epsilon

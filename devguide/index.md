@@ -6,6 +6,10 @@ and the next engineering steps.
 
 ## Main documents
 
+- [castp/checkpoint_2026_10_01_castp3_radius_profile.md](castp/checkpoint_2026_10_01_castp3_radius_profile.md)
+  Explicit modern-server radius profile, resolved closed-void residuals and
+  thirteen-void/fifty-two-measure panel with independent sphere-center evidence.
+
 - [castp/checkpoint_2026_10_01_modern_void_measurements.md](castp/checkpoint_2026_10_01_modern_void_measurements.md)
   Selected local CASTp reconstruction: historical algorithmic reference,
   pinned modern-result oracle, first closed-void SA/MS milestone and limits.

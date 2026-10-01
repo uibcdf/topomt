@@ -24,6 +24,10 @@ records exact lining-atom and sixteen-measure agreement for 2PK4, explicit
 unit-bearing delivery and the remaining open-pocket/mouth roadmap. Historical
 code is an algorithmic reference; pinned modern outputs are the result oracle.
 DFND remains the native method, and its two-case notebook laboratory is paused.
+The [expanded CASTp panel](castp/checkpoint_2026_10_01_castp3_radius_profile.md)
+now reproduces thirteen voids and fifty-two SA/MS measures under an explicit
+modern-server radius profile (#80), after identifying two standard-ProtOr
+residuals from independently exported sphere geometry.
 
 The DFND scientific workstream is the
 [DFND notebook laboratory](DFND/notebook_laboratory_checkpoint.md): learn and

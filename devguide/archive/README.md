@@ -5,10 +5,11 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (8)
+### Resolved (9)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`castp3_closed_void_measurements.md`](castp3_closed_void_measurements.md) — [#79](https://github.com/uibcdf/topomt/issues/79) — Validate and expose local CASTp3 closed-void SA/MS measurements. *(resolved, measured)*
+- [`castp3_closed_void_radius_profile.md`](castp3_closed_void_radius_profile.md) — [#80](https://github.com/uibcdf/topomt/issues/80) — Identify an explicit modern CASTp radius profile and resolve two closed-void residuals. *(resolved, measured)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*
 - [`molsysviewer_topomt_init_exports.md`](molsysviewer_topomt_init_exports.md) — [#55](https://github.com/uibcdf/topomt/issues/55) — Restore MolSysViewer TopoMT add-on lifecycle exports. *(resolved, measured)*
 - [`provider_output_viewer_adoption.md`](provider_output_viewer_adoption.md) — [#66](https://github.com/uibcdf/topomt/issues/66) — Adopt original provider pocket outputs in the MolSysViewer addon. *(resolved, inspected)*

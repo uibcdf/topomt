@@ -89,3 +89,18 @@ setup. The macOS/Python 3.11 cell reached pytest and failed
 These failures are distinct from the corrected QuantityRecord collection error
 and from the separately passing local CAST regressions. The full matrix remains
 an unmet support gate; no CI or DFND fix is included in the bounded CASTp slice.
+
+## 2026-10-01 b564a85 job evidence
+
+In CI run `36922512390`, the completed Ubuntu/Python 3.13 job `110571755495`
+reports seven failures, 984 passes, 85 skips and five expected failures.
+GH Run Receptor identified failing test jobs; the native job-log API supplied
+the bounded pytest causes while other matrix cells were still running:
+
+- four DFND raw-characterization hash comparisons;
+- two fpocket native/wrapper comparisons invoking an unavailable executable;
+- the dependency-contract test finding `depdigest` absent from installed metadata.
+
+None of those named failures is in the CASTp selectors. This completed job
+does not certify the other cells or a green matrix. The new CASTp radius-profile
+slice has separate local evidence; the wider failures remain outside that slice.
