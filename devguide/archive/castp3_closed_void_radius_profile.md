@@ -59,3 +59,21 @@ The four-system molecular panel, independent 1HEW bulb equations, separate
 standard/server profiles, explicit-radius precedence and connectivity-failure
 guards pass. The [checkpoint](../castp/checkpoint_2026_10_01_castp3_radius_profile.md)
 records the inference, exact inputs, numerical allowances and broader limits.
+
+## 2026-10-01 clarification of radius provenance
+
+The [checkpoint clarification](../castp/checkpoint_2026_10_01_castp3_radius_profile.md#2026-10-01-clarification-published-values-typing-and-implementation-ownership)
+and [user documentation](../../docs/content/user/third_party_engines.md#published-protor-and-the-castp-server-profile)
+distinguish the published ProtOr table, local type assignment and the empirical
+server profile. MolSysMT's current type-radius table agrees with Tsai, Taylor,
+Chothia and Gerstein (1999), Table 2. CASTp3 currently uses a duplicated table
+in TopoMT and obtains molecular metadata, rather than radius values, from
+MolSysMT. Agreement of numeric tables does not certify identical typing and
+fallbacks for every molecular input.
+
+The server authors' reason for choosing 1.40 Å for the identified carboxylate
+labels remains unknown. The profile is inferred from exported geometry and
+validated against the bounded molecular panel; it is not a new canonical
+ProtOr table or proof that it is physically more accurate. No new calculation,
+radius change, broader parity claim or implementation migration is made by
+this clarification. Issue #80 remains resolved for its original bounded theme.

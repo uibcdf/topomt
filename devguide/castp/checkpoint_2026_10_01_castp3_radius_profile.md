@@ -112,3 +112,49 @@ correct sphere model before changing their alpha-complex predicates. Then
 address analytical open-pocket and mouth boundaries under #41–#52. The profile
 is still experimental outside its tested panel; it does not establish all-server
 parity, alter DFND or enable native results through the original-output route.
+
+## 2026-10-01 clarification: published values, typing and implementation ownership
+
+The reference for standard ProtOr is Tsai, Taylor, Chothia and Gerstein,
+*The Packing Density in Proteins: Standard Radii and Volumes*, J. Mol. Biol.
+290 (1999), 253–266, DOI
+[10.1006/jmbi.1999.2829](https://doi.org/10.1006/jmbi.1999.2829).
+The [author-hosted paper, Table 2](https://papers.gersteinlab.org/e-print/std-vols-jmb/std-vols-jmb.pdf)
+gives `O1H0 = 1.42 Å` and `O2H1 = 1.46 Å`; Table 1 includes carboxylate
+oxygen in `O1H0`. These empirical atomic-group radii incorporate attached
+hydrogens implicitly. The paper compares several reference sets; published
+ProtOr is an established convention, not a unique universal physical standard.
+
+Inspection of `molsysmt/physchem/atoms/protor.py` finds its type-radius table
+consistent with the published values. This is source inspection of the current
+MolSysMT checkout, not certification of every residue mapping, fallback or
+released version. Type assignment and numeric tables are distinct contracts.
+
+In the local CASTp3 route, `_PROTOR_RADII_BY_TYPE`,
+`_infer_protor_type_for_atom` and `_protor_radii_for_labels` belong to
+`topomt/third_party/castp3/core/castp_core/geometry.py`.
+`build_castp_geometry` obtains molecular metadata from MolSysMT and calls
+these local helpers. It does not delegate numeric radius assignment to
+`molsysmt.physchem.get_atomic_radius`. Describing the current CASTp3 radii as
+"provided by MolSysMT" would therefore be inaccurate. General radius
+assignment belongs to MolSysMT; the existing duplication is a future
+consolidation concern. Provider-specific server overrides belong to TopoMT.
+This documentation change does not migrate either implementation.
+
+`castp3_protor` names the bounded empirical profile described above. Only ASP
+OD1/OD2 and GLU OE1/OE2 are overridden. The remaining assignments inherit the
+local ProtOr policy and are not thereby proven to match the full server table.
+The reason for the server authors' 1.40 Å choice remains unknown. That value
+also appears in older oxygen tables such as Chothia's, but historical lineage,
+a hybrid table or a rounding policy have not been established. Server
+reproduction does not rank the physical accuracy of alternative conventions.
+
+Both comparisons use the same 1.40 Å probe and explicit Å units. The affected
+expanded radii are 2.82 Å versus 2.80 Å; equal lining atoms alone do not imply
+equal geometry or measures. Keep published values and the inferred server
+profile separately selectable, preserving defaults and DFND input policy.
+The [user explanation](../../docs/content/user/third_party_engines.md#published-protor-and-the-castp-server-profile)
+and [owning issue #80](https://github.com/uibcdf/topomt/issues/80) retain this
+distinction. Earlier checkpoints using "CASTpFold/ProtOr" or "same as oracle"
+are historical hypotheses and do not certify an identical input sphere model;
+consult this clarification before interpreting their residuals.

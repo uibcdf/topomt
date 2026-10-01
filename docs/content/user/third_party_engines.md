@@ -267,6 +267,51 @@ in two cavities of this panel. Both profiles require MolSysMT connectivity.
 Open pockets, mouths, altered-alpha measurements and general CASTp3 equivalence
 remain experimental.
 
+#### Published ProtOr and the CASTp server profile
+
+ProtOr is a published reference set of empirical radii for protein atomic
+groups: a heavy atom represents its attached hydrogens implicitly. It is one
+established radius convention, rather than a unique universal set. The
+[original paper by Tsai, Taylor, Chothia and Gerstein (1999), Table 2](https://papers.gersteinlab.org/e-print/std-vols-jmb/std-vols-jmb.pdf)
+assigns 1.42 Å to type `O1H0`, which includes carboxylate oxygen, and 1.46 Å
+to hydroxyl type `O2H1`. MolSysMT's ProtOr type-radius table agrees with that
+published table. Assigning types to residue variants or falling back for
+unrecognized atoms is a separate implementation policy.
+
+The experimental local CASTp3 route currently assigns radius values from its
+own table in TopoMT. It obtains coordinates, residue/atom labels and chemical
+metadata from MolSysMT; it does not call MolSysMT's atomic-radius operation
+for those values. Agreement between the tables does not establish identical
+typing or fallback behavior for every input.
+
+| Radius policy | ASP OD1/OD2 and GLU OE1/OE2 | Meaning |
+|---|---:|---|
+| `protor` | 1.42 Å | Published ProtOr values in the existing local assignment policy. |
+| `castp3_protor` | 1.40 Å | Explicit empirical profile inferred from pinned modern-server geometry. |
+
+The server value was inferred from exported sphere centers and radii before
+checking the resulting SA/MS measures. The corrected profile reproduces the
+13 closed voids and 52 measures described above. Its other assignments reuse
+the local ProtOr policy; this does not certify the complete server radius
+table, untested protonation states or open pockets.
+
+The authors' reason for using 1.40 Å for these atoms has not been established.
+Older reference sets, including Chothia's, also contain oxygen radii of
+1.40 Å, but this is not evidence of the server's historical implementation
+choice. Neither convention is shown to be physically more accurate by
+agreement with the server alone.
+
+The identified discrepancy concerns atomic radii, not units or probe size.
+With the same 1.40 Å probe, the expanded spheres have radii of 2.82 Å under
+`protor` and 2.80 Å under `castp3_protor`. This small change can affect the
+area and volume of a narrow void even when its lining atoms remain identical.
+Choose `protor` to retain the published radius values or `castp3_protor` to
+compare with the validated modern-server panel. Selection is explicit and
+does not change the default radius policy or DFND.
+
+The evidence and its scope are recorded in
+[TopoMT issue #80](https://github.com/uibcdf/topomt/issues/80).
+
 ### Original source checkouts and services
 
 The Python adapters retain `upstream_root` for controlled source-checkout

@@ -45,6 +45,12 @@ rerun CAST regressions and the bounded new unit-bearing output.
 The [expanded radius-profile checkpoint](checkpoint_2026_10_01_castp3_radius_profile.md)
 identifies an explicit `castp3_protor` policy and extends agreement to thirteen
 voids and fifty-two measures. Standard ProtOr differs in two of those voids.
+Its [provenance clarification](checkpoint_2026_10_01_castp3_radius_profile.md#2026-10-01-clarification-published-values-typing-and-implementation-ownership)
+separates the published table, the current local assignment implementation and
+the empirical server profile. CASTp3 obtains metadata from MolSysMT but uses
+a radius table in TopoMT. The server authors' reason for the identified 1.40 Å
+carboxylate radii remains unknown; neither full-table equivalence nor superior
+physical accuracy is established.
 
 The [common output checkpoint](../provider_pocket_output_checkpoint.md) defines
 shared pocket access, exact run evidence, units, source mapping and missing
