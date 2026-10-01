@@ -17,7 +17,15 @@ The project is not yet a polished stable product. The main remaining gap is not 
 
 ## Current Priority
 
-The immediate scientific workstream is now the
+The current selected implementation slice is local CASTp3 closed-void SA/MS
+validation under #79. The
+[modern CASTp checkpoint](castp/checkpoint_2026_10_01_modern_void_measurements.md)
+records exact lining-atom and sixteen-measure agreement for 2PK4, explicit
+unit-bearing delivery and the remaining open-pocket/mouth roadmap. Historical
+code is an algorithmic reference; pinned modern outputs are the result oracle.
+DFND remains the native method, and its two-case notebook laboratory is paused.
+
+The DFND scientific workstream is the
 [DFND notebook laboratory](DFND/notebook_laboratory_checkpoint.md): learn and
 validate native residence/transit behavior case by case, starting from frozen
 synthetic inputs and independent references. The notebooks seed the future

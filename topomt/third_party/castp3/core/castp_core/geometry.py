@@ -1801,14 +1801,6 @@ def build_castp_geometry(
         msm.get(molsys, selection=atom_indices, atom_name=True),
         dtype=object,
     )
-    atom_types = np.asarray(
-        msm.get(molsys, selection=atom_indices, atom_type=True),
-        dtype=object,
-    )
-    atom_n_bonds = np.asarray(
-        msm.get(molsys, selection=atom_indices, n_bonds=True),
-        dtype=int,
-    )
     if atom_radii_override is not None:
         atom_radii = np.asarray(atom_radii_override, dtype=float)
         if atom_radii.shape[0] != atom_coordinates.shape[0]:
@@ -1832,6 +1824,16 @@ def build_castp_geometry(
         atom_radii = _castp_param_radii_for_labels(atom_group_names, atom_names)
         atom_radii = atom_radii + float(solvent_radius)
     elif radii_model == 'protor':
+        # Chemical connectivity belongs to ProtOr typing, not to explicit
+        # geometric balls or the classical parameter-table radii policies.
+        atom_types = np.asarray(
+            msm.get(molsys, selection=atom_indices, atom_type=True),
+            dtype=object,
+        )
+        atom_n_bonds = np.asarray(
+            msm.get(molsys, selection=atom_indices, n_bonds=True),
+            dtype=int,
+        )
         atom_radii = _protor_radii_for_labels(
             atom_group_names, atom_names, atom_types, atom_n_bonds
         )

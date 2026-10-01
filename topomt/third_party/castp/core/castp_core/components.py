@@ -711,6 +711,8 @@ def _iter_master_tetra_rho_indices(
 def _build_void_components(
     geometry,
     empty_mask: np.ndarray,
+    *,
+    alpha_rank: int | None = None,
 ) -> tuple[dict[int, list[int]], set[int]]:
     """Build voids as complement components, following ``alf_find_voids``."""
 
@@ -739,7 +741,8 @@ def _build_void_components(
     if master_entries is None or master_rank_offsets is None:
         raise ValueError('CASTp void assembly requires explicit master-list entries.')
 
-    for rank in range(max_rank, int(geometry.base_rank), -1):
+    base_rank = int(geometry.base_rank) if alpha_rank is None else int(alpha_rank)
+    for rank in range(max_rank, base_rank, -1):
         bounds = master_rank_offsets.get(int(rank))
         if bounds is None:
             continue

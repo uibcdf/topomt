@@ -8,6 +8,7 @@ from topomt.third_party.castp3.core.castp_core import (
     build_castp_feature_records,
     build_castp_geometry,
 )
+from topomt.third_party.castp3.core.castp_core.volbl import voids_measurements
 from topomt.tools.features.pockets import get_physicochemical_properties
 
 
@@ -51,7 +52,7 @@ def _component_to_record(
     except Exception:
         properties = {}
 
-    topological_mouths = []
+    topological_mouths: List[Dict] = []
     for mouth in component.get('mouths', []):
         topological_mouths.append(
             {
@@ -165,7 +166,16 @@ def castp(
     alpha_boundary_epsilon_length: float = 0.0,
     alpha_boundary_face_epsilon_rank: int = 0,
 ) -> Tuple[List[Dict], object]:
-    """Detect topographic features through the native CASTp workflow scaffold."""
+    """Detect features with the experimental local CASTp3 reconstruction.
+
+    Closed voids at the base alpha rank also carry independent
+    ``solvent_accessible_area``, ``molecular_surface_area``,
+    ``solvent_accessible_volume`` and ``molecular_surface_volume`` values.
+    Record areas are in angstroms squared and volumes in angstroms cubed.
+    These SA/MS quantities use the VOLBL construction without cusp correction.
+    Legacy ``area`` and ``volume`` retain their polyhedral definitions. Open
+    features and altered alpha ranks do not yet expose analytical SA/MS fields.
+    """
 
     del syntax, skip_digestion, sea_level, epsilon
 
@@ -190,16 +200,40 @@ def castp(
         alpha_boundary_face_epsilon_rank=int(alpha_boundary_face_epsilon_rank),
     )
 
+    # Closed-component measurements have their own SA/MS definitions. Keep
+    # them separate from the legacy tetrahedral volume and triangular area.
+    # Altered alpha ranks remain topology diagnostics: their sphere-growth
+    # measurement context has not been validated against modern server output.
+    analytical_voids = {}
+    canonical_rank = alpha_rank is None or int(alpha_rank) == int(geometry.base_rank)
+    if canonical_rank and any(
+        component['feature_type'] == 'void' for component in raw_feature_records
+    ):
+        analytical_voids = {
+            measurement.simplex_indices: measurement
+            for measurement in voids_measurements(geometry, geometry.base_rank).voids
+        }
+
     feature_records = []
     for component in raw_feature_records:
-        feature_records.append(
-            _component_to_record(
-                component,
-                molecular_system,
-                feature_type=component['feature_type'],
-                component_index=int(component['id']),
-            )
+        record = _component_to_record(
+            component,
+            molecular_system,
+            feature_type=component['feature_type'],
+            component_index=int(component['id']),
         )
+        if component['feature_type'] == 'void' and canonical_rank:
+            key = tuple(
+                sorted(int(index) for index in component['tetrahedron_indices'])
+            )
+            measurement = analytical_voids[key]
+            record.update(
+                solvent_accessible_area=measurement.area_sa,
+                molecular_surface_area=measurement.area_ms,
+                solvent_accessible_volume=measurement.volume_sa,
+                molecular_surface_volume=measurement.volume_ms,
+            )
+        feature_records.append(record)
     feature_records.sort(key=lambda record: record['volume'], reverse=True)
 
     return feature_records, geometry.mesh

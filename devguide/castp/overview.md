@@ -2,8 +2,10 @@
 
 Reviewed: 2026-10-01 (repository and issue state). Scientific evidence dates are
 stated below; this organizational update does not rerun or extend that evidence.
-Role: integrated provider and comparison reference. Implementation work remains
-paused under the [delivery checkpoint](../provider_pocket_output_checkpoint.md).
+Role: integrated provider and comparison reference. The user resumed a bounded
+local CASTp3 reconstruction under [#79](https://github.com/uibcdf/topomt/issues/79).
+Broader provider work remains paused under the
+[delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
 ## Identity, installation and use
 
@@ -32,7 +34,14 @@ or silently substituted by this overview.
 
 ## Contract and evidence
 
-Deterministic archives and mocked transports have passing parser/retention evidence; they do not establish current live-service availability. CASTp1 has a historical eleven-system functional closure with limited multi-mouth stress coverage. CASTp3-like native code is experimental and has documented server discrepancies. Those native batteries were not rerun on 2026-09-30.
+Deterministic archives and mocked transports have passing parser/retention evidence;
+they do not establish current live-service availability. CASTp1 has a historical
+eleven-system closure with limited multi-mouth stress coverage; its generic
+feature area/volume remain polyhedral. CASTp3-like native code is experimental
+and has documented server discrepancies. The
+[modern closed-void checkpoint](checkpoint_2026_10_01_modern_void_measurements.md)
+records the first exact 2PK4 lining-atom and sixteen-measure SA/MS comparison,
+rerun CAST regressions and the bounded new unit-bearing output.
 
 The [common output checkpoint](../provider_pocket_output_checkpoint.md) defines
 shared pocket access, exact run evidence, units, source mapping and missing
@@ -43,11 +52,15 @@ closed pocket regions. Exhaustive original fidelity remains under
 
 ## Local implementation
 
-`topomt.third_party.castp.native` implements the classical workflow. `topomt.third_party.castp3.native` is a separate experimental CASTp3-like route. The 2026-05-19 reproducibility audit rejects guaranteed CASTp3/CASTpFold equivalence without source/internal server decisions.
+`topomt.third_party.castp.native` implements the classical workflow.
+`topomt.third_party.castp3.native` is a separate experimental CASTp3-like route.
+The 2026-05-19 audit records unresolved modern-server differences. The current
+target uses historical code and papers as algorithmic descriptions and pinned
+modern outputs as the result oracle. It does not guarantee general equivalence.
 
 DFND remains the native semantic reference for public Topography admission.
-See the [deferred native-method plan](../native_methods_plan.md); this profile
-does not resume implementation or promise an equivalence deadline.
+See the [native-method plan](../native_methods_plan.md) for the selected CASTp
+exception to the deferred broader review. No equivalence deadline is promised.
 
 ## Roadmap and issue history
 
@@ -64,6 +77,7 @@ bounded outcomes, not full-provider certification.
 
 - [Permanent CASTp / CASTpFold discussion #73](https://github.com/uibcdf/topomt/discussions/73) in External Tools.
 - [Original output inventory](external_output_inventory.md).
+- [Modern closed-void measurements checkpoint](checkpoint_2026_10_01_modern_void_measurements.md).
 - [Classical functional closure](checkpoint_2026_04_23_castp1_functional_parity_closure.md).
 - [CASTp3/CASTpFold reproducibility boundary](checkpoint_2026_05_19_castp3_reproducibility_boundary.md).
 - [Historical fidelity contract](contract.md).

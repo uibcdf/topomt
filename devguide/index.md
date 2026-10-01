@@ -6,6 +6,10 @@ and the next engineering steps.
 
 ## Main documents
 
+- [castp/checkpoint_2026_10_01_modern_void_measurements.md](castp/checkpoint_2026_10_01_modern_void_measurements.md)
+  Selected local CASTp reconstruction: historical algorithmic reference,
+  pinned modern-result oracle, first closed-void SA/MS milestone and limits.
+
 - [DFND/notebook_laboratory_checkpoint.md](DFND/notebook_laboratory_checkpoint.md)
   Active case-by-case scientific study route, public notebook/benchmark seed,
   first independent tetrahedron reference and original-provider input limits.
@@ -23,7 +27,8 @@ and the next engineering steps.
 - [DFND/audit_topography_2026_10_01.md](DFND/audit_topography_2026_10_01.md)
   Current joint DFND/Topography audit, reproduced integrity findings, scientific
   reference review and staged roadmap. DFND/Topography is the selected next
-  workstream; broader provider implementation remains paused.
+  workstream; the later selected CASTp slice is recorded above and broader
+  provider implementation remains paused.
 
 - [archive/topography_shallow_copy_indexes.md](archive/topography_shallow_copy_indexes.md)
   First delivered roadmap slice (#74): independent shallow-copy registry

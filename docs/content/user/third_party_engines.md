@@ -244,6 +244,27 @@ validation of its contact definition.
 
 ## Source checkouts and web services
 
+### Experimental local CASTp3 closed-void measurements
+
+The local reconstruction can run without a CASTp executable or service:
+
+```python
+topography = tmt.third_party.castp3.get_topography(
+    'protein.pdb', backend='native', radii_model='protor', probe_radius=1.4
+)
+```
+
+At the base alpha rank, closed voids carry independent unit-bearing
+`solvent_accessible_area`, `molecular_surface_area`,
+`solvent_accessible_volume` and `molecular_surface_volume` attributes. Generic
+`area` and `volume` retain their polyhedral definitions. Validation currently
+establishes exact lining atoms and agreement within the server's printed
+precision for the four closed cavities in bundled 2PK4. Open pockets, mouths,
+altered-alpha measurements and general CASTp3 equivalence remain experimental.
+ProtOr radii require chemical connectivity from MolSysMT.
+
+### Original source checkouts and services
+
 The Python adapters retain `upstream_root` for controlled source-checkout
 comparisons. Supply an import root for Pocketeer or AlphaSpace2; pyCASTA accepts
 the directory containing `run_analysis.py`, its package directory, or repository

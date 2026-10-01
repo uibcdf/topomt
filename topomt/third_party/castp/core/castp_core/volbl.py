@@ -1444,6 +1444,7 @@ def voids_measurements(
     void_components, _blocked_nodes = _build_void_components(
         geometry,
         np.zeros(int(geometry.mesh.n_simplices), dtype=bool),
+        alpha_rank=int(input_rank),
     )
     context = _context or _metric_context_from_geometry(geometry)
     measurements = [

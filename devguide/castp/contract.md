@@ -118,7 +118,7 @@ What it currently does:
 - builds a weighted geometric substrate;
 - computes alpha-style ranks and weighted simplex geometry;
 - separates `void` construction from pocket/channel construction;
-- implements wrapping-depth-style pocket flow;
+- implements classical maximum-rho discrete pocket flow;
 - materializes `pocket`, `channel`, `branched_channel`, and `void` records;
 - performs mouth clustering through an `Fnext`-style walk over open edges;
 - computes a partial geometric summary suitable for parity testing
@@ -131,6 +131,16 @@ What it does **not** yet reproduce faithfully:
 - analytical solvent-accessible vs molecular-surface contracts aligned with
   CASTp server outputs;
 - the CASTp 3.0-specific algorithmic differences relative to MKALF 4.1
+
+### 2026-10-01 bounded modern measurement milestone
+
+The separate `topomt.third_party.castp3.native` route now exposes independent
+closed-void SA/MS measurements at its base alpha rank, validated against the
+four pinned 2PK4 cavities. This is an initial per-component result, not full
+modern parity or completion of the classical route. Generic `area`/`volume`
+remain polyhedral. See the
+[current checkpoint](checkpoint_2026_10_01_modern_void_measurements.md) for units,
+selection, radius model, exact matching, tolerances and remaining cases.
 
 ## Implementation target for the native path
 

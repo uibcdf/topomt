@@ -1,5 +1,15 @@
 # CASTp1 Functional Parity Closure
 
+## 2026-10-01 qualification of historical evidence
+
+The closure below records its historical reference panel. It does not certify
+all modern-server per-feature SA/MS fields: generic native feature `area` and
+`volume` remain polyhedral, and global VOLBL evidence must be distinguished from
+per-component measures. The current user direction treats historical code as
+an algorithmic description and modern server archives as the result oracle.
+The first bounded modern closed-void result and its exact validation contract
+are recorded in [the new checkpoint](checkpoint_2026_10_01_modern_void_measurements.md).
+
 Date: 2026-04-23
 
 ## Decision

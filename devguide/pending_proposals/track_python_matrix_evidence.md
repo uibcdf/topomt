@@ -78,3 +78,14 @@ the locally tested checkout; its codec is provisional. The adopted reference
 tests exercise record decoding and dimensional quantities without adding a
 TopoMT-specific serialization fallback. A passing full matrix remains a separate
 gate; the pin correction alone does not establish it.
+
+## 2026-10-01 subsequent matrix evidence
+
+CI run `36887103616` at `88e2164c17b118327ff8fc7383a9b2a4c1e60ed0`
+failed. GH Run Receptor reported five cells failing Conda environment setup;
+bounded failed-log inspection identified `ENOENT` in setup-micromamba's shell
+setup. The macOS/Python 3.11 cell reached pytest and failed
+`tests/test_dfnd_morphometrics.py::test_funnel_motif_detects_steady_narrowing`.
+These failures are distinct from the corrected QuantityRecord collection error
+and from the separately passing local CAST regressions. The full matrix remains
+an unmet support gate; no CI or DFND fix is included in the bounded CASTp slice.

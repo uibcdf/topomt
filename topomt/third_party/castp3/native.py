@@ -4,7 +4,12 @@ from topomt.third_party.castp3._native_impl import castp as _native_castp
 
 
 def get_topography(molecular_system, **kwargs):
-    """Run the local CASTp native implementation and return a Topography."""
+    """Return local CASTp3 features, including unit-bearing void SA/MS metrics.
+
+    Analytical measurements are available on closed voids at the base alpha
+    rank. Open-feature measurements and general modern-server equivalence
+    remain unvalidated. The original-output service/file routes are separate.
+    """
 
     from topomt import Topography
     from topomt import pyunitwizard as puw
@@ -30,6 +35,21 @@ def get_topography(molecular_system, **kwargs):
             source_id=source_id,
         )
         parent_feature = topography[parent_feature_id]
+
+        for field, power in (
+            ('solvent_accessible_area', 2),
+            ('molecular_surface_area', 2),
+            ('solvent_accessible_volume', 3),
+            ('molecular_surface_volume', 3),
+        ):
+            if record.get(field) is not None:
+                setattr(
+                    parent_feature,
+                    field,
+                    puw.quantity(
+                        float(record[field]) * angstrom_to_nm**power, f'nm**{power}'
+                    ),
+                )
 
         if 'center' in record and record['center'] is not None:
             parent_feature.center = puw.quantity(

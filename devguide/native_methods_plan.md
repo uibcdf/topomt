@@ -5,6 +5,13 @@ systematic post-integration review queued. See
 [third_party_results_checkpoint.md](third_party_results_checkpoint.md) for the
 active external-result phase and its handoff gate.
 
+On 2026-10-01 the user explicitly resumed a bounded local CASTp reconstruction
+before that broader review. Historical source and papers are algorithmic
+references; modern server artifacts define result comparisons. The first slice
+validates and exposes closed-void SA/MS measurements under #79, documented in
+[the modern CASTp checkpoint](castp/checkpoint_2026_10_01_modern_void_measurements.md).
+This exception does not resume all providers or change DFND's native-method role.
+
 ## Purpose
 
 This document defines how TopoMT should evolve its engine implementations under
@@ -39,7 +46,8 @@ external-provider parity gate. The first phase checks that calling an upstream
 CLI, library, server, or loading its files yields the provider's original
 results in `Topography`. The second phase audits TopoMT-owned implementations
 of those algorithms. It has not started and is not included in the first
-phase's 20/100 progress figure.
+phase's 20/100 progress figure. The selected CASTp slice above is a separately
+bounded exception and is not full completion of this review.
 
 Current code-entry inventory, verified by reading the provider facades and
 local modules on 2026-09-26:
