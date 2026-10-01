@@ -159,3 +159,10 @@ public artifact on Linux/Python 3.13.15. Provider installed contract and launche
 also pass with the environment PATH. The first launcher invocation used the host
 PATH and correctly rejected an outside-prefix launcher; activating the intended
 PATH repairs the invocation without changing provider code or assertions.
+
+Hosted workflow [36825125490](https://github.com/uibcdf/topomt/actions/runs/36825125490)
+at exact source `1aa25c4346eb0d56c16c5a6453bb600026732c44` is completed/success.
+All six actual installed-provider identity and availability-check steps passed
+on Linux/macOS and Python 3.11–3.13. This settles the published-provider fpocket
+availability migration. It does not close this broad support-library review or
+replace complete scientific recovery evidence.
