@@ -9,6 +9,9 @@ from collections import Counter
 from dataclasses import dataclass
 from pathlib import Path
 
+import molsysmt as msm
+import numpy as np
+
 from topomt.io.load_CASTp import (
     _feature_type_from_n_mouths,
     _parse_mouth_file,
@@ -85,22 +88,46 @@ def _atom_id_lookup(molecular_system) -> dict[int, int]:
     """Return native atom-index to PDB-serial mapping from an input PDB file.
 
     CASTp `.poc` and `.mouth` files use the PDB atom serial field, not
-    necessarily MolSysMT's normalized `atom_id`. For oracle parity, the stable
-    comparison frame is therefore the fixed-width serial in columns 7-11 of the
-    exact PDB bundled in the oracle ZIP.
+    necessarily raw PDB row ordinals: the parser can discard alternate
+    locations. Validate retained parser IDs against the exact file's serials
+    and positions in angstroms before mapping native global atom indices.
     """
 
     pdb_file = Path(molecular_system)
-    atom_serials = []
+    source_positions = {}
     with pdb_file.open('r', encoding='utf-8') as handle:
         for line in handle:
             if not line.startswith(('ATOM', 'HETATM')):
                 continue
-            atom_serials.append(int(line[6:11]))
-
-    return {
-        atom_index: atom_serial for atom_index, atom_serial in enumerate(atom_serials)
-    }
+            serial = int(line[6:11])
+            if serial in source_positions:
+                raise ValueError(f'Duplicate PDB serial {serial}.')
+            source_positions[serial] = np.asarray(
+                [
+                    float(line[start:stop])
+                    for start, stop in ((30, 38), (38, 46), (46, 54))
+                ]
+            )
+    parsed = msm.convert(str(pdb_file), to_form='molsysmt.MolSys')
+    atom_ids = msm.get(parsed, element='atom', atom_id=True)
+    positions = msm.pyunitwizard.get_value(
+        msm.get(parsed, element='atom', coordinates=True), to_unit='angstrom'
+    )[0]
+    if len(atom_ids) != len(positions):
+        raise ValueError('Parser atom identity and coordinate counts differ.')
+    result = {}
+    for index, (atom_id, position) in enumerate(zip(atom_ids, positions)):
+        serial = int(atom_id)
+        if serial not in source_positions or not np.allclose(
+            position, source_positions[serial], rtol=0, atol=1e-10
+        ):
+            raise ValueError(
+                f'Parser atom {index} does not preserve verified PDB identity.'
+            )
+        result[index] = serial
+    if len(set(result.values())) != len(result):
+        raise ValueError('Parser retained duplicate PDB atom identities.')
+    return result
 
 
 def _record_atom_ids(

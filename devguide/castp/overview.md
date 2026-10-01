@@ -52,6 +52,15 @@ a radius table in TopoMT. The server authors' reason for the identified 1.40 Å
 carboxylate radii remains unknown; neither full-table equivalence nor superior
 physical accuracy is established.
 
+The subsequent [radius-coverage and twenty-system checkpoint](checkpoint_2026_10_01_radius_coverage_and_void_panel.md)
+accounts for all 89 archives and 59,080 bulbs. Nineteen systems reproduce
+136 closed voids and 544 measures; 1CGE retains three missing cavities under
+[#85](https://github.com/uibcdf/topomt/issues/85). Terminal-oxygen observations
+and inclusion conflicts remain unresolved under
+[#84](https://github.com/uibcdf/topomt/issues/84). The corrected oracle serial
+mapping under [#83](https://github.com/uibcdf/topomt/issues/83) supersedes raw-row
+identity for alternate-location inputs; historical broad counts were not rerun.
+
 The [common output checkpoint](../provider_pocket_output_checkpoint.md) defines
 shared pocket access, exact run evidence, units, source mapping and missing
 geometry. The [viewer checkpoint](../provider_output_viewer_checkpoint.md)
@@ -75,6 +84,7 @@ exception to the deferred broader review. No equivalence deadline is promised.
 
 - Complete original archive layouts, optional atom contributions and bulb fields under [#19](https://github.com/uibcdf/topomt/issues/19).
 - Validate live server availability separately and record the last successful submission/date.
+- Resolve terminal-oxygen inclusion/radii (#84) and the three missing 1CGE closed voids (#85).
 - Review independent SA/MS metrics and mouth/surface definitions under [#41–#52](https://github.com/uibcdf/topomt/issues?q=is%3Aissue+is%3Aopen+CASTp).
 - Retain CASTp1 historical evidence and experimental CASTp3 identity when native review resumes.
 
@@ -88,6 +98,7 @@ bounded outcomes, not full-provider certification.
 - [Original output inventory](external_output_inventory.md).
 - [Modern closed-void measurements checkpoint](checkpoint_2026_10_01_modern_void_measurements.md).
 - [Modern radius profile and expanded panel](checkpoint_2026_10_01_castp3_radius_profile.md).
+- [Full corpus radius coverage and twenty-system void panel](checkpoint_2026_10_01_radius_coverage_and_void_panel.md).
 - [Classical functional closure](checkpoint_2026_04_23_castp1_functional_parity_closure.md).
 - [CASTp3/CASTpFold reproducibility boundary](checkpoint_2026_05_19_castp3_reproducibility_boundary.md).
 - [Historical fidelity contract](contract.md).

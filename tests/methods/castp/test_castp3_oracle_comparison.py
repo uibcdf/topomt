@@ -1,4 +1,6 @@
 from collections import Counter
+from pathlib import Path
+from zipfile import ZipFile
 
 from devtools.castp.compare_castp3_oracles import (
     DEFAULT_SELECTION,
@@ -32,6 +34,22 @@ def test_atom_id_lookup_uses_pdb_serials_not_molsysmt_atom_ids(tmp_path):
     )
 
     assert _atom_id_lookup(pdb_file) == {0: 101, 1: 205, 2: 604}
+
+
+def test_atom_id_lookup_respects_parser_alternate_location_removal(tmp_path):
+    archive_path = (
+        Path(__file__).resolve().parents[3] / 'topomt/data/CASTpFold_server/1rob.zip'
+    )
+    with ZipFile(archive_path) as archive:
+        member = next(name for name in archive.namelist() if name.endswith('.pdb'))
+        pdb_file = tmp_path / '1rob.pdb'
+        pdb_file.write_bytes(archive.read(member))
+
+    lookup = _atom_id_lookup(pdb_file)
+
+    assert len(lookup) == 1073
+    assert lookup[66] == 68
+    assert 67 not in lookup.values()
 
 
 def test_compare_atom_id_sets_counts_exact_multiset_matches():

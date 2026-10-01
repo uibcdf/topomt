@@ -6,6 +6,10 @@ and the next engineering steps.
 
 ## Main documents
 
+- [castp/checkpoint_2026_10_01_radius_coverage_and_void_panel.md](castp/checkpoint_2026_10_01_radius_coverage_and_void_panel.md)
+  All 89 archived radius audits, twenty-system analytical void panel, corrected
+  alternate-location identity and explicit OXT/1CGE follow-up limits.
+
 - [castp/checkpoint_2026_10_01_castp3_radius_profile.md](castp/checkpoint_2026_10_01_castp3_radius_profile.md)
   Explicit modern-server radius profile, resolved closed-void residuals and
   thirteen-void/fifty-two-measure panel with independent sphere-center evidence.

@@ -258,12 +258,15 @@ At the base alpha rank, closed voids carry independent unit-bearing
 `solvent_accessible_area`, `molecular_surface_area`,
 `solvent_accessible_volume` and `molecular_surface_volume` attributes. Generic
 `area` and `volume` retain their polyhedral definitions. Validation currently
-establishes exact lining atoms and all 52 SA/MS values within the server's
-printed precision for 13 closed cavities across bundled 2PK4, 1IFB, 3PHV and
-1HEW. `castp3_protor` is an explicit empirical server profile with 1.40 Å
+establishes exact lining atoms and all 544 SA/MS values within the server's
+printed precision for 136 closed cavities across nineteen bundled systems.
+The twenty-system audit also includes 1CGE: four of its seven cavities match,
+but three remain absent locally under
+[issue #85](https://github.com/uibcdf/topomt/issues/85).
+`castp3_protor` is an explicit empirical server profile with 1.40 Å
 ASP/GLU carboxylate oxygen radii, inferred from exported sphere geometry.
 Standard `protor` retains 1.42 Å for those atoms and differs from the server
-in two cavities of this panel. Both profiles require MolSysMT connectivity.
+in two cavities of the initial four-system panel. Both profiles require MolSysMT connectivity.
 Open pockets, mouths, altered-alpha measurements and general CASTp3 equivalence
 remain experimental.
 
@@ -291,9 +294,20 @@ typing or fallback behavior for every input.
 
 The server value was inferred from exported sphere centers and radii before
 checking the resulting SA/MS measures. The corrected profile reproduces the
-13 closed voids and 52 measures described above. Its other assignments reuse
+expanded closed-void controls described above. Its other assignments reuse
 the local ProtOr policy; this does not certify the complete server radius
 table, untested protonation states or open pockets.
+
+An offline audit of all 89 bundled CASTpFold archives evaluates 59,080 exported
+spheres without restricting the search to ASP/GLU. Observed contacts support
+the current backbone, ASN/GLN amide and SER/THR/TYR hydroxyl oxygen assignments.
+Presence in a PDB alone does not validate an atom's radius. Three conditional
+terminal-oxygen (OXT) observations in 1A4J and 1CDO suggest 1.50 Å instead of
+the local 1.46 Å assignment, but other inputs also show terminal-atom inclusion
+conflicts. The terminal policy remains under
+[issue #84](https://github.com/uibcdf/topomt/issues/84); the current profile
+does not add an OXT override. The expanded evidence and its coverage limits
+are tracked in [issue #82](https://github.com/uibcdf/topomt/issues/82).
 
 The authors' reason for using 1.40 Å for these atoms has not been established.
 Older reference sets, including Chothia's, also contain oxygen radii of

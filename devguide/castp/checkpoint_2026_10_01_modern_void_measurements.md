@@ -1,5 +1,14 @@
 # Modern CASTp closed-void measurements checkpoint
 
+## Subsequent coverage and molecular-panel expansion
+
+The [later corpus checkpoint](checkpoint_2026_10_01_radius_coverage_and_void_panel.md)
+accounts for all 89 archives and expands the molecular panel to twenty systems.
+Nineteen reproduce 136 voids and 544 measures; 1CGE still lacks three closed
+cavities. It also corrects alternate-location oracle identity and separates
+terminal-oxygen candidates from established radius assignments. The initial
+milestone and next-step list below retain their original scope.
+
 ## Subsequent radius-profile qualification
 
 The later [expanded panel](checkpoint_2026_10_01_castp3_radius_profile.md) found

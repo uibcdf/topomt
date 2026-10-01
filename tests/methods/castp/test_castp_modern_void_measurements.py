@@ -9,6 +9,7 @@ from pathlib import Path
 import numpy as np
 import pytest
 
+from devtools.castp.compare_castp3_oracles import _atom_id_lookup
 from topomt import pyunitwizard as puw
 from topomt.io.load_CASTp import _parse_poc_file, _parse_poc_info_file
 from topomt.third_party.castp3 import _native_impl, native
@@ -27,6 +28,21 @@ VOID_IDS = {
     '1ifb': (1, 7, 9, 10),
     '3phv': (8, 13),
     '1hew': (3, 6, 7),
+    '1crn': (1,),
+    '1stp': (5, 8, 9),
+    '2lyz': (5, 7, 8, 9, 11, 12),
+    '2ifb': (1, 3, 8, 9, 13, 17),
+    '1stn': (8, 9, 13, 14, 15, 16, 17),
+    '1hel': (2, 8, 11, 12),
+    '1snc': (5, 8, 9, 10, 11, 12, 13, 14),
+    '1rob': (11, 12),
+    '5dfr': (14, 15, 16),
+    '3ptb': (5, 8, 9, 11, 13, 14, 15, 18, 19, 22, 23, 24, 25, 26),
+    '1a6w': (11, 13, 18, 21, 23, 26, 27, 28, 29, 30, 31, 32),
+    '1bmq': (18, 19, 20, 21, 22, 23, 26, 27, 28, 29, 30, 31, 32, 35, 37),
+    '2tga': (6, 9, 10, 13, 14, 15, 18, 21, 22, 23, 25, 27, 28, 29, 30, 31),
+    '1srf': (16, 17, 21, 24, 25, 26, 27, 28, 30, 31, 32, 33),
+    '2ctv': (14, 15, 17, 18, 20, 21, 22, 23, 24, 25, 26, 27, 28, 30),
 }
 
 
@@ -79,11 +95,7 @@ def modern_void_case(tmp_path_factory, request, modern_void_cache):
         radii_model='castp3_protor',
         solvent_radius=1.4,
     )
-    serials = [
-        int(line[6:11])
-        for line in pdb.read_text().splitlines()
-        if line.startswith(('ATOM', 'HETATM'))
-    ]
+    serials = _atom_id_lookup(pdb)
     info = _parse_poc_info_file(folder / f'{case}.pocInfo')
     lining_atoms = _parse_poc_file(folder / f'{case}.poc')
     oracle = {

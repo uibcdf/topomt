@@ -2,6 +2,19 @@
 
 Date: 2026-04-29
 
+## 2026-10-01 correction: oracle identity and bounded new evidence
+
+The old comparison harness mapped native indices onto raw PDB row positions.
+MolSysMT can discard alternate locations, making that mapping invalid for
+affected inputs. The corrected operation verifies retained IDs and coordinates
+against the exact source under [#83](https://github.com/uibcdf/topomt/issues/83).
+This historical sweep has not been rerun; its alternate-location counts must
+not be treated as verified current evidence. The
+[new twenty-system checkpoint](checkpoint_2026_10_01_radius_coverage_and_void_panel.md)
+records corrected identity and explicit `castp3_protor` closed-void metrics.
+It supersedes selected historical cavity mismatches for that bounded contract,
+without updating or certifying this sweep's open-pocket/mouth counts.
+
 This checkpoint compares the current native `topomt.third_party.castp3` path
 against the downloaded CASTpFold server ZIPs for the 38 small or near-small
 systems available in `topomt/data/CASTpFold_server`.

@@ -1,0 +1,3197 @@
+{
+  "schema": "topomt.castp_radius_summary@1",
+  "archive_count": 89,
+  "bulb_count": 59080,
+  "profile_statuses": {
+    "protor": {
+      "compatible": 47718,
+      "single_candidate": 9177,
+      "unresolved": 1758,
+      "conflict": 411,
+      "ambiguous": 16
+    },
+    "castp3_protor": {
+      "compatible": 58696,
+      "single_candidate": 3,
+      "ambiguous": 18,
+      "conflict": 363
+    }
+  },
+  "label_coverage": {
+    "ALA:C": {
+      "present_atoms": 1984,
+      "observed_protor": 128,
+      "observed_castp3_protor": 141
+    },
+    "ALA:CA": {
+      "present_atoms": 1984,
+      "observed_protor": 302,
+      "observed_castp3_protor": 312
+    },
+    "ALA:CB": {
+      "present_atoms": 1984,
+      "observed_protor": 728,
+      "observed_castp3_protor": 758
+    },
+    "ALA:N": {
+      "present_atoms": 1988,
+      "observed_protor": 293,
+      "observed_castp3_protor": 307
+    },
+    "ALA:O": {
+      "present_atoms": 1984,
+      "observed_protor": 458,
+      "observed_castp3_protor": 477
+    },
+    "ALA:OXT": {
+      "present_atoms": 8,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "ARG:C": {
+      "present_atoms": 1119,
+      "observed_protor": 59,
+      "observed_castp3_protor": 60
+    },
+    "ARG:CA": {
+      "present_atoms": 1119,
+      "observed_protor": 144,
+      "observed_castp3_protor": 159
+    },
+    "ARG:CB": {
+      "present_atoms": 1119,
+      "observed_protor": 297,
+      "observed_castp3_protor": 318
+    },
+    "ARG:CD": {
+      "present_atoms": 1103,
+      "observed_protor": 287,
+      "observed_castp3_protor": 304
+    },
+    "ARG:CG": {
+      "present_atoms": 1105,
+      "observed_protor": 265,
+      "observed_castp3_protor": 279
+    },
+    "ARG:CZ": {
+      "present_atoms": 1099,
+      "observed_protor": 107,
+      "observed_castp3_protor": 117
+    },
+    "ARG:N": {
+      "present_atoms": 1119,
+      "observed_protor": 132,
+      "observed_castp3_protor": 141
+    },
+    "ARG:NE": {
+      "present_atoms": 1101,
+      "observed_protor": 243,
+      "observed_castp3_protor": 262
+    },
+    "ARG:NH1": {
+      "present_atoms": 1098,
+      "observed_protor": 333,
+      "observed_castp3_protor": 362
+    },
+    "ARG:NH2": {
+      "present_atoms": 1098,
+      "observed_protor": 345,
+      "observed_castp3_protor": 376
+    },
+    "ARG:O": {
+      "present_atoms": 1119,
+      "observed_protor": 248,
+      "observed_castp3_protor": 255
+    },
+    "ARG:OXT": {
+      "present_atoms": 4,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "ASN:C": {
+      "present_atoms": 1427,
+      "observed_protor": 100,
+      "observed_castp3_protor": 100
+    },
+    "ASN:CA": {
+      "present_atoms": 1427,
+      "observed_protor": 231,
+      "observed_castp3_protor": 234
+    },
+    "ASN:CB": {
+      "present_atoms": 1427,
+      "observed_protor": 330,
+      "observed_castp3_protor": 351
+    },
+    "ASN:CG": {
+      "present_atoms": 1419,
+      "observed_protor": 120,
+      "observed_castp3_protor": 124
+    },
+    "ASN:N": {
+      "present_atoms": 1427,
+      "observed_protor": 169,
+      "observed_castp3_protor": 178
+    },
+    "ASN:ND2": {
+      "present_atoms": 1418,
+      "observed_protor": 404,
+      "observed_castp3_protor": 425
+    },
+    "ASN:O": {
+      "present_atoms": 1427,
+      "observed_protor": 278,
+      "observed_castp3_protor": 290
+    },
+    "ASN:OD1": {
+      "present_atoms": 1418,
+      "observed_protor": 328,
+      "observed_castp3_protor": 341
+    },
+    "ASN:OXT": {
+      "present_atoms": 18,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "ASP:C": {
+      "present_atoms": 1549,
+      "observed_protor": 71,
+      "observed_castp3_protor": 76
+    },
+    "ASP:CA": {
+      "present_atoms": 1549,
+      "observed_protor": 210,
+      "observed_castp3_protor": 255
+    },
+    "ASP:CB": {
+      "present_atoms": 1547,
+      "observed_protor": 382,
+      "observed_castp3_protor": 450
+    },
+    "ASP:CG": {
+      "present_atoms": 1544,
+      "observed_protor": 96,
+      "observed_castp3_protor": 201
+    },
+    "ASP:N": {
+      "present_atoms": 1553,
+      "observed_protor": 219,
+      "observed_castp3_protor": 250
+    },
+    "ASP:O": {
+      "present_atoms": 1549,
+      "observed_protor": 310,
+      "observed_castp3_protor": 333
+    },
+    "ASP:OD1": {
+      "present_atoms": 1543,
+      "observed_protor": 0,
+      "observed_castp3_protor": 448
+    },
+    "ASP:OD2": {
+      "present_atoms": 1543,
+      "observed_protor": 2,
+      "observed_castp3_protor": 433
+    },
+    "ASP:OXT": {
+      "present_atoms": 2,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "CYS:C": {
+      "present_atoms": 524,
+      "observed_protor": 38,
+      "observed_castp3_protor": 40
+    },
+    "CYS:CA": {
+      "present_atoms": 524,
+      "observed_protor": 72,
+      "observed_castp3_protor": 76
+    },
+    "CYS:CB": {
+      "present_atoms": 524,
+      "observed_protor": 138,
+      "observed_castp3_protor": 147
+    },
+    "CYS:N": {
+      "present_atoms": 524,
+      "observed_protor": 67,
+      "observed_castp3_protor": 72
+    },
+    "CYS:O": {
+      "present_atoms": 524,
+      "observed_protor": 125,
+      "observed_castp3_protor": 125
+    },
+    "CYS:SG": {
+      "present_atoms": 519,
+      "observed_protor": 138,
+      "observed_castp3_protor": 143
+    },
+    "GLN:C": {
+      "present_atoms": 1055,
+      "observed_protor": 40,
+      "observed_castp3_protor": 42
+    },
+    "GLN:CA": {
+      "present_atoms": 1055,
+      "observed_protor": 128,
+      "observed_castp3_protor": 133
+    },
+    "GLN:CB": {
+      "present_atoms": 1055,
+      "observed_protor": 240,
+      "observed_castp3_protor": 243
+    },
+    "GLN:CD": {
+      "present_atoms": 1049,
+      "observed_protor": 76,
+      "observed_castp3_protor": 78
+    },
+    "GLN:CG": {
+      "present_atoms": 1051,
+      "observed_protor": 251,
+      "observed_castp3_protor": 258
+    },
+    "GLN:N": {
+      "present_atoms": 1056,
+      "observed_protor": 104,
+      "observed_castp3_protor": 107
+    },
+    "GLN:NE2": {
+      "present_atoms": 1047,
+      "observed_protor": 318,
+      "observed_castp3_protor": 336
+    },
+    "GLN:O": {
+      "present_atoms": 1055,
+      "observed_protor": 215,
+      "observed_castp3_protor": 220
+    },
+    "GLN:OE1": {
+      "present_atoms": 1047,
+      "observed_protor": 272,
+      "observed_castp3_protor": 280
+    },
+    "GLN:OXT": {
+      "present_atoms": 3,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "GLU:C": {
+      "present_atoms": 1499,
+      "observed_protor": 61,
+      "observed_castp3_protor": 63
+    },
+    "GLU:CA": {
+      "present_atoms": 1499,
+      "observed_protor": 177,
+      "observed_castp3_protor": 201
+    },
+    "GLU:CB": {
+      "present_atoms": 1499,
+      "observed_protor": 293,
+      "observed_castp3_protor": 337
+    },
+    "GLU:CD": {
+      "present_atoms": 1471,
+      "observed_protor": 92,
+      "observed_castp3_protor": 184
+    },
+    "GLU:CG": {
+      "present_atoms": 1486,
+      "observed_protor": 296,
+      "observed_castp3_protor": 374
+    },
+    "GLU:N": {
+      "present_atoms": 1500,
+      "observed_protor": 161,
+      "observed_castp3_protor": 168
+    },
+    "GLU:O": {
+      "present_atoms": 1499,
+      "observed_protor": 253,
+      "observed_castp3_protor": 264
+    },
+    "GLU:OE1": {
+      "present_atoms": 1470,
+      "observed_protor": 0,
+      "observed_castp3_protor": 431
+    },
+    "GLU:OE2": {
+      "present_atoms": 1470,
+      "observed_protor": 1,
+      "observed_castp3_protor": 464
+    },
+    "GLU:OXT": {
+      "present_atoms": 3,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "GLY:C": {
+      "present_atoms": 2341,
+      "observed_protor": 244,
+      "observed_castp3_protor": 256
+    },
+    "GLY:CA": {
+      "present_atoms": 2341,
+      "observed_protor": 758,
+      "observed_castp3_protor": 781
+    },
+    "GLY:N": {
+      "present_atoms": 2343,
+      "observed_protor": 380,
+      "observed_castp3_protor": 403
+    },
+    "GLY:O": {
+      "present_atoms": 2341,
+      "observed_protor": 573,
+      "observed_castp3_protor": 588
+    },
+    "GLY:OXT": {
+      "present_atoms": 3,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "HIS:C": {
+      "present_atoms": 559,
+      "observed_protor": 41,
+      "observed_castp3_protor": 41
+    },
+    "HIS:CA": {
+      "present_atoms": 559,
+      "observed_protor": 83,
+      "observed_castp3_protor": 89
+    },
+    "HIS:CB": {
+      "present_atoms": 560,
+      "observed_protor": 163,
+      "observed_castp3_protor": 167
+    },
+    "HIS:CD2": {
+      "present_atoms": 559,
+      "observed_protor": 157,
+      "observed_castp3_protor": 167
+    },
+    "HIS:CE1": {
+      "present_atoms": 559,
+      "observed_protor": 153,
+      "observed_castp3_protor": 164
+    },
+    "HIS:CG": {
+      "present_atoms": 559,
+      "observed_protor": 41,
+      "observed_castp3_protor": 42
+    },
+    "HIS:N": {
+      "present_atoms": 559,
+      "observed_protor": 89,
+      "observed_castp3_protor": 95
+    },
+    "HIS:ND1": {
+      "present_atoms": 559,
+      "observed_protor": 139,
+      "observed_castp3_protor": 141
+    },
+    "HIS:NE2": {
+      "present_atoms": 559,
+      "observed_protor": 152,
+      "observed_castp3_protor": 163
+    },
+    "HIS:O": {
+      "present_atoms": 559,
+      "observed_protor": 142,
+      "observed_castp3_protor": 148
+    },
+    "HIS:OXT": {
+      "present_atoms": 1,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "ILE:C": {
+      "present_atoms": 1612,
+      "observed_protor": 51,
+      "observed_castp3_protor": 51
+    },
+    "ILE:CA": {
+      "present_atoms": 1612,
+      "observed_protor": 179,
+      "observed_castp3_protor": 187
+    },
+    "ILE:CB": {
+      "present_atoms": 1612,
+      "observed_protor": 193,
+      "observed_castp3_protor": 196
+    },
+    "ILE:CD1": {
+      "present_atoms": 1612,
+      "observed_protor": 582,
+      "observed_castp3_protor": 603
+    },
+    "ILE:CG1": {
+      "present_atoms": 1612,
+      "observed_protor": 339,
+      "observed_castp3_protor": 353
+    },
+    "ILE:CG2": {
+      "present_atoms": 1612,
+      "observed_protor": 554,
+      "observed_castp3_protor": 575
+    },
+    "ILE:N": {
+      "present_atoms": 1612,
+      "observed_protor": 130,
+      "observed_castp3_protor": 137
+    },
+    "ILE:O": {
+      "present_atoms": 1612,
+      "observed_protor": 296,
+      "observed_castp3_protor": 303
+    },
+    "ILE:OXT": {
+      "present_atoms": 5,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "LEU:C": {
+      "present_atoms": 2180,
+      "observed_protor": 119,
+      "observed_castp3_protor": 123
+    },
+    "LEU:CA": {
+      "present_atoms": 2180,
+      "observed_protor": 214,
+      "observed_castp3_protor": 226
+    },
+    "LEU:CB": {
+      "present_atoms": 2180,
+      "observed_protor": 461,
+      "observed_castp3_protor": 480
+    },
+    "LEU:CD1": {
+      "present_atoms": 2181,
+      "observed_protor": 719,
+      "observed_castp3_protor": 739
+    },
+    "LEU:CD2": {
+      "present_atoms": 2181,
+      "observed_protor": 798,
+      "observed_castp3_protor": 809
+    },
+    "LEU:CG": {
+      "present_atoms": 2181,
+      "observed_protor": 305,
+      "observed_castp3_protor": 309
+    },
+    "LEU:N": {
+      "present_atoms": 2180,
+      "observed_protor": 217,
+      "observed_castp3_protor": 229
+    },
+    "LEU:O": {
+      "present_atoms": 2180,
+      "observed_protor": 472,
+      "observed_castp3_protor": 485
+    },
+    "LEU:OXT": {
+      "present_atoms": 9,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "LYS:C": {
+      "present_atoms": 1686,
+      "observed_protor": 74,
+      "observed_castp3_protor": 77
+    },
+    "LYS:CA": {
+      "present_atoms": 1686,
+      "observed_protor": 178,
+      "observed_castp3_protor": 185
+    },
+    "LYS:CB": {
+      "present_atoms": 1686,
+      "observed_protor": 314,
+      "observed_castp3_protor": 329
+    },
+    "LYS:CD": {
+      "present_atoms": 1649,
+      "observed_protor": 361,
+      "observed_castp3_protor": 387
+    },
+    "LYS:CE": {
+      "present_atoms": 1641,
+      "observed_protor": 415,
+      "observed_castp3_protor": 454
+    },
+    "LYS:CG": {
+      "present_atoms": 1657,
+      "observed_protor": 357,
+      "observed_castp3_protor": 387
+    },
+    "LYS:N": {
+      "present_atoms": 1686,
+      "observed_protor": 147,
+      "observed_castp3_protor": 157
+    },
+    "LYS:NZ": {
+      "present_atoms": 1638,
+      "observed_protor": 405,
+      "observed_castp3_protor": 459
+    },
+    "LYS:O": {
+      "present_atoms": 1686,
+      "observed_protor": 325,
+      "observed_castp3_protor": 341
+    },
+    "LYS:OXT": {
+      "present_atoms": 6,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "MET:C": {
+      "present_atoms": 517,
+      "observed_protor": 30,
+      "observed_castp3_protor": 31
+    },
+    "MET:CA": {
+      "present_atoms": 517,
+      "observed_protor": 91,
+      "observed_castp3_protor": 93
+    },
+    "MET:CB": {
+      "present_atoms": 517,
+      "observed_protor": 141,
+      "observed_castp3_protor": 147
+    },
+    "MET:CE": {
+      "present_atoms": 515,
+      "observed_protor": 202,
+      "observed_castp3_protor": 212
+    },
+    "MET:CG": {
+      "present_atoms": 517,
+      "observed_protor": 128,
+      "observed_castp3_protor": 131
+    },
+    "MET:N": {
+      "present_atoms": 517,
+      "observed_protor": 64,
+      "observed_castp3_protor": 66
+    },
+    "MET:O": {
+      "present_atoms": 517,
+      "observed_protor": 127,
+      "observed_castp3_protor": 131
+    },
+    "MET:OXT": {
+      "present_atoms": 3,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "MET:SD": {
+      "present_atoms": 516,
+      "observed_protor": 165,
+      "observed_castp3_protor": 172
+    },
+    "PHE:C": {
+      "present_atoms": 1088,
+      "observed_protor": 64,
+      "observed_castp3_protor": 64
+    },
+    "PHE:CA": {
+      "present_atoms": 1088,
+      "observed_protor": 196,
+      "observed_castp3_protor": 204
+    },
+    "PHE:CB": {
+      "present_atoms": 1088,
+      "observed_protor": 329,
+      "observed_castp3_protor": 335
+    },
+    "PHE:CD1": {
+      "present_atoms": 1087,
+      "observed_protor": 239,
+      "observed_castp3_protor": 246
+    },
+    "PHE:CD2": {
+      "present_atoms": 1087,
+      "observed_protor": 263,
+      "observed_castp3_protor": 266
+    },
+    "PHE:CE1": {
+      "present_atoms": 1087,
+      "observed_protor": 271,
+      "observed_castp3_protor": 287
+    },
+    "PHE:CE2": {
+      "present_atoms": 1087,
+      "observed_protor": 299,
+      "observed_castp3_protor": 301
+    },
+    "PHE:CG": {
+      "present_atoms": 1088,
+      "observed_protor": 36,
+      "observed_castp3_protor": 38
+    },
+    "PHE:CZ": {
+      "present_atoms": 1087,
+      "observed_protor": 267,
+      "observed_castp3_protor": 278
+    },
+    "PHE:N": {
+      "present_atoms": 1088,
+      "observed_protor": 133,
+      "observed_castp3_protor": 139
+    },
+    "PHE:O": {
+      "present_atoms": 1088,
+      "observed_protor": 204,
+      "observed_castp3_protor": 212
+    },
+    "PHE:OXT": {
+      "present_atoms": 8,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "PRO:C": {
+      "present_atoms": 1211,
+      "observed_protor": 55,
+      "observed_castp3_protor": 58
+    },
+    "PRO:CA": {
+      "present_atoms": 1211,
+      "observed_protor": 229,
+      "observed_castp3_protor": 236
+    },
+    "PRO:CB": {
+      "present_atoms": 1210,
+      "observed_protor": 312,
+      "observed_castp3_protor": 326
+    },
+    "PRO:CD": {
+      "present_atoms": 1210,
+      "observed_protor": 300,
+      "observed_castp3_protor": 310
+    },
+    "PRO:CG": {
+      "present_atoms": 1210,
+      "observed_protor": 344,
+      "observed_castp3_protor": 354
+    },
+    "PRO:N": {
+      "present_atoms": 1211,
+      "observed_protor": 47,
+      "observed_castp3_protor": 47
+    },
+    "PRO:O": {
+      "present_atoms": 1211,
+      "observed_protor": 278,
+      "observed_castp3_protor": 285
+    },
+    "SER:C": {
+      "present_atoms": 2144,
+      "observed_protor": 149,
+      "observed_castp3_protor": 151
+    },
+    "SER:CA": {
+      "present_atoms": 2144,
+      "observed_protor": 260,
+      "observed_castp3_protor": 276
+    },
+    "SER:CB": {
+      "present_atoms": 2144,
+      "observed_protor": 538,
+      "observed_castp3_protor": 562
+    },
+    "SER:N": {
+      "present_atoms": 2144,
+      "observed_protor": 322,
+      "observed_castp3_protor": 329
+    },
+    "SER:O": {
+      "present_atoms": 2143,
+      "observed_protor": 477,
+      "observed_castp3_protor": 483
+    },
+    "SER:OG": {
+      "present_atoms": 2140,
+      "observed_protor": 600,
+      "observed_castp3_protor": 634
+    },
+    "SER:OXT": {
+      "present_atoms": 3,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    },
+    "THR:C": {
+      "present_atoms": 1772,
+      "observed_protor": 100,
+      "observed_castp3_protor": 103
+    },
+    "THR:CA": {
+      "present_atoms": 1772,
+      "observed_protor": 200,
+      "observed_castp3_protor": 211
+    },
+    "THR:CB": {
+      "present_atoms": 1772,
+      "observed_protor": 304,
+      "observed_castp3_protor": 313
+    },
+    "THR:CG2": {
+      "present_atoms": 1774,
+      "observed_protor": 546,
+      "observed_castp3_protor": 571
+    },
+    "THR:N": {
+      "present_atoms": 1772,
+      "observed_protor": 216,
+      "observed_castp3_protor": 227
+    },
+    "THR:O": {
+      "present_atoms": 1772,
+      "observed_protor": 368,
+      "observed_castp3_protor": 379
+    },
+    "THR:OG1": {
+      "present_atoms": 1774,
+      "observed_protor": 490,
+      "observed_castp3_protor": 515
+    },
+    "TRP:C": {
+      "present_atoms": 505,
+      "observed_protor": 46,
+      "observed_castp3_protor": 46
+    },
+    "TRP:CA": {
+      "present_atoms": 505,
+      "observed_protor": 67,
+      "observed_castp3_protor": 67
+    },
+    "TRP:CB": {
+      "present_atoms": 505,
+      "observed_protor": 126,
+      "observed_castp3_protor": 129
+    },
+    "TRP:CD1": {
+      "present_atoms": 505,
+      "observed_protor": 141,
+      "observed_castp3_protor": 145
+    },
+    "TRP:CD2": {
+      "present_atoms": 505,
+      "observed_protor": 55,
+      "observed_castp3_protor": 57
+    },
+    "TRP:CE2": {
+      "present_atoms": 505,
+      "observed_protor": 61,
+      "observed_castp3_protor": 61
+    },
+    "TRP:CE3": {
+      "present_atoms": 505,
+      "observed_protor": 125,
+      "observed_castp3_protor": 132
+    },
+    "TRP:CG": {
+      "present_atoms": 505,
+      "observed_protor": 37,
+      "observed_castp3_protor": 39
+    },
+    "TRP:CH2": {
+      "present_atoms": 505,
+      "observed_protor": 138,
+      "observed_castp3_protor": 143
+    },
+    "TRP:CZ2": {
+      "present_atoms": 505,
+      "observed_protor": 151,
+      "observed_castp3_protor": 155
+    },
+    "TRP:CZ3": {
+      "present_atoms": 505,
+      "observed_protor": 129,
+      "observed_castp3_protor": 137
+    },
+    "TRP:N": {
+      "present_atoms": 505,
+      "observed_protor": 80,
+      "observed_castp3_protor": 83
+    },
+    "TRP:NE1": {
+      "present_atoms": 505,
+      "observed_protor": 155,
+      "observed_castp3_protor": 162
+    },
+    "TRP:O": {
+      "present_atoms": 505,
+      "observed_protor": 131,
+      "observed_castp3_protor": 133
+    },
+    "TYR:C": {
+      "present_atoms": 1038,
+      "observed_protor": 71,
+      "observed_castp3_protor": 72
+    },
+    "TYR:CA": {
+      "present_atoms": 1038,
+      "observed_protor": 162,
+      "observed_castp3_protor": 167
+    },
+    "TYR:CB": {
+      "present_atoms": 1039,
+      "observed_protor": 251,
+      "observed_castp3_protor": 263
+    },
+    "TYR:CD1": {
+      "present_atoms": 1039,
+      "observed_protor": 211,
+      "observed_castp3_protor": 215
+    },
+    "TYR:CD2": {
+      "present_atoms": 1039,
+      "observed_protor": 196,
+      "observed_castp3_protor": 205
+    },
+    "TYR:CE1": {
+      "present_atoms": 1039,
+      "observed_protor": 292,
+      "observed_castp3_protor": 304
+    },
+    "TYR:CE2": {
+      "present_atoms": 1039,
+      "observed_protor": 249,
+      "observed_castp3_protor": 266
+    },
+    "TYR:CG": {
+      "present_atoms": 1039,
+      "observed_protor": 38,
+      "observed_castp3_protor": 41
+    },
+    "TYR:CZ": {
+      "present_atoms": 1039,
+      "observed_protor": 84,
+      "observed_castp3_protor": 87
+    },
+    "TYR:N": {
+      "present_atoms": 1038,
+      "observed_protor": 135,
+      "observed_castp3_protor": 142
+    },
+    "TYR:O": {
+      "present_atoms": 1038,
+      "observed_protor": 228,
+      "observed_castp3_protor": 237
+    },
+    "TYR:OH": {
+      "present_atoms": 1039,
+      "observed_protor": 358,
+      "observed_castp3_protor": 383
+    },
+    "VAL:C": {
+      "present_atoms": 2015,
+      "observed_protor": 77,
+      "observed_castp3_protor": 79
+    },
+    "VAL:CA": {
+      "present_atoms": 2015,
+      "observed_protor": 239,
+      "observed_castp3_protor": 248
+    },
+    "VAL:CB": {
+      "present_atoms": 2015,
+      "observed_protor": 241,
+      "observed_castp3_protor": 251
+    },
+    "VAL:CG1": {
+      "present_atoms": 2015,
+      "observed_protor": 683,
+      "observed_castp3_protor": 707
+    },
+    "VAL:CG2": {
+      "present_atoms": 2015,
+      "observed_protor": 629,
+      "observed_castp3_protor": 655
+    },
+    "VAL:N": {
+      "present_atoms": 2015,
+      "observed_protor": 209,
+      "observed_castp3_protor": 215
+    },
+    "VAL:O": {
+      "present_atoms": 2015,
+      "observed_protor": 419,
+      "observed_castp3_protor": 430
+    },
+    "VAL:OXT": {
+      "present_atoms": 4,
+      "observed_protor": 0,
+      "observed_castp3_protor": 0
+    }
+  },
+  "castp3_protor_candidates": [
+    {
+      "case": "1a4j",
+      "feature_id": 3,
+      "bulb_id": 116,
+      "serial": 1668,
+      "label": "GLY:OXT",
+      "residue": "L 217:",
+      "radius_interval": {
+        "lower": 1.4998230849982686,
+        "upper": 1.5000831653094235,
+        "unit": "angstrom"
+      },
+      "baseline_radius": {
+        "value": 1.46,
+        "unit": "angstrom"
+      }
+    },
+    {
+      "case": "1a4j",
+      "feature_id": 3,
+      "bulb_id": 159,
+      "serial": 1668,
+      "label": "GLY:OXT",
+      "residue": "L 217:",
+      "radius_interval": {
+        "lower": 1.499858415092532,
+        "upper": 1.5000953229880252,
+        "unit": "angstrom"
+      },
+      "baseline_radius": {
+        "value": 1.46,
+        "unit": "angstrom"
+      }
+    },
+    {
+      "case": "1cdo",
+      "feature_id": 39,
+      "bulb_id": 2,
+      "serial": 5607,
+      "label": "LEU:OXT",
+      "residue": "B 374:",
+      "radius_interval": {
+        "lower": 1.4999259598113381,
+        "upper": 1.50011315944952,
+        "unit": "angstrom"
+      },
+      "baseline_radius": {
+        "value": 1.46,
+        "unit": "angstrom"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "case": "1a4j",
+      "archive_sha256": "e9ee8eafe2dbd9846f0231f7c789247a64ce328e9f6026285c08f9f1a2d1c921",
+      "pdb_sha256": "62d9f8b7e5f662d0861691ec6ed23e81c2df2856560df5c9c1dd4f8d4ab78b95",
+      "bulbs_sha256": "1cc913bbf07d1dedc31fee572b0f9ee967db782b9133ce571ed3728bcbb4a4a5",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 6626,
+      "skipped_atoms": {
+        "non_supported_residue": 264
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 2215,
+          "single_candidate": 312,
+          "unresolved": 41,
+          "conflict": 1,
+          "ambiguous": 12
+        },
+        "castp3_protor": {
+          "compatible": 2567,
+          "single_candidate": 2,
+          "ambiguous": 12
+        }
+      }
+    },
+    {
+      "case": "1a6u",
+      "archive_sha256": "cd9dea23ece360c221586a393b87062783f13eaab8b4c1d2a28b5f943ac5f223",
+      "pdb_sha256": "79b48ebffa451300a3ad546737c8ef4a672d1bf731f0354c0fa048e78314e121",
+      "bulbs_sha256": "924768e268a43f35dba2380bd65363e5084f1c5bd5a42b434f6515a079f1ee6b",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1736,
+      "skipped_atoms": {
+        "non_supported_residue": 156
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 282,
+          "single_candidate": 22,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 305
+        }
+      }
+    },
+    {
+      "case": "1a6w",
+      "archive_sha256": "8bf1f1cce72b3727a74918f55a5f06c6af852c804f80201e13a38f147732fe3d",
+      "pdb_sha256": "47d943a57b9e235bf899316949a0b45423552404acbc3a3a6958f60914b43383",
+      "bulbs_sha256": "5a3806da43e6f06e665379ed20ec3ba352cee86336d49dc5e20d3872fdb89b29",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1774,
+      "skipped_atoms": {
+        "non_supported_residue": 199
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 224,
+          "single_candidate": 22,
+          "conflict": 10
+        },
+        "castp3_protor": {
+          "compatible": 246,
+          "conflict": 10
+        }
+      }
+    },
+    {
+      "case": "1acj",
+      "archive_sha256": "c6fbb4215f115fd836d3f1537294627c228d167546fb22f8f0eade27d7f6efd4",
+      "pdb_sha256": "736abc1f57ab7f50365640ec10413ef32ec83249e649721e79e419ccbd091f68",
+      "bulbs_sha256": "6c9b1cf5e245bffacf7113be89b6d3e92ac581731ae5ea4b2eb2e8e513e33295",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 4095,
+      "skipped_atoms": {
+        "non_supported_residue": 97
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1004,
+          "single_candidate": 160,
+          "conflict": 5,
+          "unresolved": 20
+        },
+        "castp3_protor": {
+          "compatible": 1189
+        }
+      }
+    },
+    {
+      "case": "1ahc",
+      "archive_sha256": "eb147ae9b64d88facfd7504fc363b037e3c318cc4df8f8d54730ec095fb93e7f",
+      "pdb_sha256": "c679543ad6a1bceeeed81d42b70c20919ec65e8ccd7062acbf9469d4df8bf93b",
+      "bulbs_sha256": "1bacdb2457c8cfd28aa8bf87008eceb1fc5af1c640f9de42f21005a94673f097",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1933,
+      "skipped_atoms": {
+        "non_supported_residue": 163
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 277,
+          "single_candidate": 48,
+          "unresolved": 4,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 330
+        }
+      }
+    },
+    {
+      "case": "1apu",
+      "archive_sha256": "96311a30e68a0cfc3fa6f9fc384199b74478054a36a76f3f857b7648418d111a",
+      "pdb_sha256": "1e012c6f7d503af692e63845eb135bc8f5611579dbc9f7377e5a3bc0223f0149",
+      "bulbs_sha256": "da2741bfd923f7db4fe7a3abaa3aa8dcaf0efe8fdc0034427e7a667f022d4387",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2380,
+      "skipped_atoms": {
+        "non_supported_residue": 346
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 425,
+          "single_candidate": 105,
+          "unresolved": 21,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 552
+        }
+      }
+    },
+    {
+      "case": "1bbs",
+      "archive_sha256": "b0c050acb08c2adf5c706344d764ef4294f295f21c65e97e95e177d75fd84003",
+      "pdb_sha256": "5e7865a6dc7f3351336220e07d014720a7c00c9a29f496cbdb22602cb18c33a3",
+      "bulbs_sha256": "fb61db4e9eca2c2c60c265bd5126aca76c3b90b8b3add97aca7a1872da13e688",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 5018,
+      "skipped_atoms": {},
+      "profiles": {
+        "protor": {
+          "compatible": 1490,
+          "single_candidate": 254,
+          "unresolved": 37,
+          "conflict": 7
+        },
+        "castp3_protor": {
+          "compatible": 1788
+        }
+      }
+    },
+    {
+      "case": "1bid",
+      "archive_sha256": "cbe6be98a8383d57d7ec883ad393d0a02048b02dd4ba39203545d9e7832b0c34",
+      "pdb_sha256": "156e6027c54177b613b8c7b99698378a49d2281d2a61bf959193e3b5e1e69f30",
+      "bulbs_sha256": "92edfb17a607d520695f506a0d4760af13cff5e0dad60aa717ac69bf9baadf47",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2150,
+      "skipped_atoms": {
+        "non_supported_residue": 136
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 473,
+          "single_candidate": 90,
+          "unresolved": 15,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 579,
+          "conflict": 2
+        }
+      }
+    },
+    {
+      "case": "1blh",
+      "archive_sha256": "d47f4c6dd6aba39ee9e7d75d29528f6081c57b50a3bd54b66ace589a7e94f258",
+      "pdb_sha256": "0327afd99cca64cc39d236f482735e8c7ab4b8ce877cafd5e58e2f9a09f55228",
+      "bulbs_sha256": "d2fd9566c93ea13e65901c0703d742e6fee6caa0ed363ba19ba3a7ab58e10eac",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1999,
+      "skipped_atoms": {
+        "non_supported_residue": 210
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 258,
+          "single_candidate": 35,
+          "conflict": 6,
+          "unresolved": 3
+        },
+        "castp3_protor": {
+          "compatible": 297,
+          "conflict": 5
+        }
+      }
+    },
+    {
+      "case": "1bmq",
+      "archive_sha256": "5827f7e45637b0944e88b18f3a97b0deae9e2b8be7046efa0cb2670531acd350",
+      "pdb_sha256": "d103dbc8c3ac7e619b4cd8055c0176ea9a19c878c2c310c8aa1444f96c44a790",
+      "bulbs_sha256": "91b7823889e9de99d4fb40c637954d7097578c0fbc93b980f9566270b67654e4",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2032,
+      "skipped_atoms": {
+        "non_supported_residue": 38
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 55,
+          "unresolved": 11,
+          "compatible": 429,
+          "conflict": 19
+        },
+        "castp3_protor": {
+          "compatible": 496,
+          "conflict": 18
+        }
+      }
+    },
+    {
+      "case": "1brq",
+      "archive_sha256": "760449b0e051f86cdd891f9ca9ee56ec221114fc712cdeff3a4dd9130d1b2b87",
+      "pdb_sha256": "a3ce720a0cb7d10579c21918953490079195364d8c8cb65566cbf5a5c8a2358f",
+      "bulbs_sha256": "ace251c6373445e639292ac8ec1c91bb29528bac1319128f193e954ffda7e9ee",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1408,
+      "skipped_atoms": {
+        "non_supported_residue": 55
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 297,
+          "single_candidate": 56,
+          "unresolved": 6,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 360
+        }
+      }
+    },
+    {
+      "case": "1bya",
+      "archive_sha256": "4e88137f8beb435c8dd2477428693ab4b6ae55d58c1966c376354abf8c44cf79",
+      "pdb_sha256": "f01f10147ea096636cb51c22fa67d7e2edbd0eea819b736053b1e0eabf1acb53",
+      "bulbs_sha256": "6c5c2363090ec88fdb8d7f0cba71da48a1a67c6e00bf93ae5249b96f8edef720",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3929,
+      "skipped_atoms": {
+        "non_supported_residue": 325
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 209,
+          "compatible": 1035,
+          "unresolved": 42,
+          "conflict": 2
+        },
+        "castp3_protor": {
+          "compatible": 1288
+        }
+      }
+    },
+    {
+      "case": "1byb",
+      "archive_sha256": "25f6575f53d7bb45c267f182255e5db4e08fb969964db2a34d7b575811e3b752",
+      "pdb_sha256": "ba36561ea6bcd462cae391cae28db64b49864405804f975811a44e867a9b959b",
+      "bulbs_sha256": "dd6a58d59e6a08b678347375651b1839515b1ec3b0041ae2d6887f2a1c667dea",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3925,
+      "skipped_atoms": {
+        "non_supported_residue": 382
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 942,
+          "single_candidate": 225,
+          "unresolved": 40,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 1210
+        }
+      }
+    },
+    {
+      "case": "1cdo",
+      "archive_sha256": "288afe4a4655c4be293fa59b01fc4d47af44614f08334510e1cae1e0b156b560",
+      "pdb_sha256": "3806c9b7efc7527444f3213bb02a61e6d56138fc930e7da3db940bf02499763f",
+      "bulbs_sha256": "2a6c3955dc98684180d8a3d42d67d93ceb013b2538476230d72b84d28ee1b3b0",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 5606,
+      "skipped_atoms": {
+        "non_supported_residue": 740
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1748,
+          "single_candidate": 219,
+          "unresolved": 48,
+          "conflict": 3,
+          "ambiguous": 4
+        },
+        "castp3_protor": {
+          "compatible": 2015,
+          "ambiguous": 6,
+          "single_candidate": 1
+        }
+      }
+    },
+    {
+      "case": "1cge",
+      "archive_sha256": "b91fec50d80d3addd52068eedf717870b84f1fb07aab6cb4a45821ac3cef5643",
+      "pdb_sha256": "4d9c912c53b7a7016103837328e96565bbaa72115229005eeec8186e09b0b37d",
+      "bulbs_sha256": "c381f17182df936ef1728b8d3e39b14836529c7bfdb0e67b89db9c1a7f3d7d3c",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1269,
+      "skipped_atoms": {
+        "non_supported_atom": 273,
+        "non_supported_residue": 311
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 193,
+          "single_candidate": 34,
+          "unresolved": 4
+        },
+        "castp3_protor": {
+          "compatible": 231
+        }
+      }
+    },
+    {
+      "case": "1crn",
+      "archive_sha256": "f2e368d8d7630758f8d125b235fb00ae35289f864ae96da189f15f23bfbe96ed",
+      "pdb_sha256": "123b2f8cfb5d60f0d176aac05ff7938a007cc49a14308a24062de898489b9d44",
+      "bulbs_sha256": "0d03a2e5586f14fd6c7846b6dfec412bd7f7f189c7ccd8c4cf17a241cb5ca682",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 327,
+      "skipped_atoms": {},
+      "profiles": {
+        "protor": {
+          "compatible": 8
+        },
+        "castp3_protor": {
+          "compatible": 8
+        }
+      }
+    },
+    {
+      "case": "1djb",
+      "archive_sha256": "dbad05d0f674be2c95557944720c8fd0e7e4123cc6b37c0ebb4f49aab839faf3",
+      "pdb_sha256": "3266ef99f3967f65a23f835616e0f9050ef8cde4a308ee6ce1faa0f5c40cdbeb",
+      "bulbs_sha256": "006519868056eaec78e745cd42d84374b077cfcd581a47b8447792bb0d2e4f7c",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2028,
+      "skipped_atoms": {
+        "non_supported_residue": 161
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 323,
+          "single_candidate": 41,
+          "unresolved": 7,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 372
+        }
+      }
+    },
+    {
+      "case": "1dwd",
+      "archive_sha256": "ef8d5530eee64d6a63b836501d1c09928d48e00815cfa9bef855f63ee0c963c6",
+      "pdb_sha256": "1bca759b47cb91b92dfbb9a40a738dbda2f38275bd3d5baedc6985ff05e89fff",
+      "bulbs_sha256": "14fddd281d286e6093070fea014f9d2d8e25c81b0f09c24796a2de28a10eec14",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2358,
+      "skipped_atoms": {
+        "non_supported_residue": 87
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 644,
+          "single_candidate": 105,
+          "unresolved": 14,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 764
+        }
+      }
+    },
+    {
+      "case": "1esa",
+      "archive_sha256": "31bd206b0b0edcd61ba02eab470a03e3a854590b31139664a1403a0ab701cc5e",
+      "pdb_sha256": "65b8f98187d0d1a8997f6bcf6e079a4237fd6e4b2e34d72a287e388e4fdce63e",
+      "bulbs_sha256": "00484d31b4946c26261a07375c0ce2793a188b11801d4f631eae4e677defd1d5",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1822,
+      "skipped_atoms": {
+        "non_supported_residue": 145
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 400,
+          "single_candidate": 23
+        },
+        "castp3_protor": {
+          "compatible": 423
+        }
+      }
+    },
+    {
+      "case": "1fbp",
+      "archive_sha256": "3ac750d2a539527bdc088ac134036443999931fa1b4ddd9a98240e2e6cfcf6e0",
+      "pdb_sha256": "7d70f7a292a68a278b577c4345cf48077df1d418074ffc422c974a64c8bebc25",
+      "bulbs_sha256": "3eb0c77633d6bf452a71c8c999a1ed8c19925f0eacf15b516705092a95a3f2c2",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 4860,
+      "skipped_atoms": {
+        "non_supported_atom": 1076,
+        "non_supported_residue": 80
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1346,
+          "single_candidate": 199,
+          "unresolved": 57,
+          "conflict": 4
+        },
+        "castp3_protor": {
+          "compatible": 1606
+        }
+      }
+    },
+    {
+      "case": "1g1f",
+      "archive_sha256": "c7e65e75babd4844ef6c2ba337479226fad82a5655359a34c14bdf95619e380d",
+      "pdb_sha256": "e826e8cb8ede4128a9d8706ea95f77245a4fdef3eb70e692e26181c60af6fe8e",
+      "bulbs_sha256": "67464115f9257bdf0d7055ecff32c05c50242655643d67a3df7dd5fe8dc4cf5e",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2453,
+      "skipped_atoms": {
+        "non_supported_residue": 279
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 525,
+          "conflict": 2,
+          "single_candidate": 125,
+          "unresolved": 12
+        },
+        "castp3_protor": {
+          "compatible": 664
+        }
+      }
+    },
+    {
+      "case": "1gca",
+      "archive_sha256": "70938b0b26237bb2e5c5d8a7ff471908ebf2488af513388413708b4e56ffc3d7",
+      "pdb_sha256": "8a9ffeae2dcc5db145236825fd3e06a91d1581ddb0ae01cd64b00e20452f3b16",
+      "bulbs_sha256": "28e7482fdd3061b926e916d35b49bd2520e84b6ff060aa45fa521fbc5d4b21e1",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2351,
+      "skipped_atoms": {
+        "non_supported_atom": 541,
+        "non_supported_residue": 484
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 296,
+          "single_candidate": 110,
+          "unresolved": 18,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 427
+        }
+      }
+    },
+    {
+      "case": "1gcg",
+      "archive_sha256": "5fcf736756c3e92dd7a8330e9a303ba119144bbaca0dc9021a4d4910d85eac0f",
+      "pdb_sha256": "5e69af0d177386aab0ea391705927d4453b65b95305c466a9ee925bb3c3806c2",
+      "bulbs_sha256": "32950aded7e69bfe38eaa520d4e20432698f622d951e7b7982cbf1a78da67725",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2351,
+      "skipped_atoms": {
+        "non_supported_atom": 542,
+        "non_supported_residue": 526
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 387,
+          "single_candidate": 110,
+          "unresolved": 11,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 509
+        }
+      }
+    },
+    {
+      "case": "1hel",
+      "archive_sha256": "7f0e2ce8ac56e7b555193692fce25c3ac58d2fb208d6cd4c3b9ed8d804b6e649",
+      "pdb_sha256": "4803e42d2ee4f027c3d0813c67593c7ea39571bb1bb965ab329c16f7b8a52bb8",
+      "bulbs_sha256": "fea8061885f7c0acd5a07630f3f210b8bbcaeb297ac785f5a5605903b8b3d17c",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1001,
+      "skipped_atoms": {
+        "non_supported_residue": 185
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 113,
+          "single_candidate": 22
+        },
+        "castp3_protor": {
+          "compatible": 135
+        }
+      }
+    },
+    {
+      "case": "1hew",
+      "archive_sha256": "b76a9360b866af0c6ee3a609b9ce8ba0b061aad5378c2a3497e519100baa3296",
+      "pdb_sha256": "7b97063491f6e1a1b586cb7ea8a602ca68e8281afc1682772aa54cfa511e7840",
+      "bulbs_sha256": "4b5b060580006a3a474002bf511d0bd87336f9d28f761fb95df2ba9684041d1e",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1001,
+      "skipped_atoms": {
+        "non_supported_residue": 146
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 86,
+          "single_candidate": 2
+        },
+        "castp3_protor": {
+          "compatible": 88
+        }
+      }
+    },
+    {
+      "case": "1hfc",
+      "archive_sha256": "13cb2c94b102164e64d51af5ac03f69f5d8570b055b4cbd32dd3dc3aef5b6254",
+      "pdb_sha256": "6c5b24c30bff5cbb46e8ad543c6101efdeb59271155037639bf7bf7248a28878",
+      "bulbs_sha256": "629d7186bf95d779243e907c09df5a5b42f21a878e2d6caea69b54cdc7c6679b",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1244,
+      "skipped_atoms": {
+        "non_supported_residue": 116
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 40,
+          "compatible": 205,
+          "unresolved": 10
+        },
+        "castp3_protor": {
+          "compatible": 255
+        }
+      }
+    },
+    {
+      "case": "1hiv",
+      "archive_sha256": "fef9f0db8abeea1f5ea0dbfb30f60839e87c9d1f2e045cdd0d8d64acf7061f7d",
+      "pdb_sha256": "df01b847368d85516f00b0bd35ee3d65d73925c0856e2d9490a67a964f15369a",
+      "bulbs_sha256": "866f34466a3b7892060db0f742ab31525f765e3e36947455caf01989be000a57",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1502,
+      "skipped_atoms": {
+        "non_supported_residue": 163
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 272,
+          "single_candidate": 82,
+          "unresolved": 14,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 369
+        }
+      }
+    },
+    {
+      "case": "1hsi",
+      "archive_sha256": "fc52aae7b35270a60935248ac58fde9b43f99c1ad3a878ad52b70265c34d62b6",
+      "pdb_sha256": "8567905eb362a492f6d77ba1236c39437e4d42a7d980532171866b5bfcbfba2d",
+      "bulbs_sha256": "891a6e1a8a567b8e22d93874563ca05616478996cbb1ccbfce5dbcaa3c4ef95a",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1508,
+      "skipped_atoms": {
+        "non_supported_residue": 94
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 300,
+          "single_candidate": 96,
+          "unresolved": 18,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 415
+        }
+      }
+    },
+    {
+      "case": "1hxf",
+      "archive_sha256": "b299ff1bf2c52ba91d1d1dba51c4d54db23df48756fab3da1a48095f287c83bc",
+      "pdb_sha256": "a915e799fe03fd00f5a4c69cc7a15ef73212ed5497a0603f6847e685cc3d6995",
+      "bulbs_sha256": "f4481866c5002af9310637d365f15a939940e5d7bd0cf43493b199330a5a9648",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2309,
+      "skipped_atoms": {
+        "non_supported_residue": 138
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 110,
+          "compatible": 464,
+          "conflict": 3,
+          "unresolved": 8
+        },
+        "castp3_protor": {
+          "compatible": 585
+        }
+      }
+    },
+    {
+      "case": "1hyt",
+      "archive_sha256": "7eecbda3b2d1627710fb7d7ccfa1b723ca321529b3c702d0734b0d1474098e5d",
+      "pdb_sha256": "64f3004efd0edf3d8f23fa3d368a96e8049cca03bfc4779530dcffe0c396cdf7",
+      "bulbs_sha256": "06643b0450002a6c934515f86de617f72264c7cab5b6443ac69c980e8bf31647",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2438,
+      "skipped_atoms": {
+        "non_supported_residue": 181
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 320,
+          "single_candidate": 116,
+          "unresolved": 28,
+          "conflict": 2
+        },
+        "castp3_protor": {
+          "compatible": 466
+        }
+      }
+    },
+    {
+      "case": "1ida",
+      "archive_sha256": "98c729658230171cdc3b04dce9f2456c531712930ad552fe518e65da671811e8",
+      "pdb_sha256": "6234576ff89fd236f6a42ba9a57f4473fa476fe5b7e3cf1c541567c20f718ac6",
+      "bulbs_sha256": "d337473e6acda09541f5f64bc37cef4715304910a780e239e4e80ddd39bc4be8",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1510,
+      "skipped_atoms": {
+        "non_supported_residue": 165
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 86,
+          "compatible": 235,
+          "unresolved": 18,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 340
+        }
+      }
+    },
+    {
+      "case": "1ifb",
+      "archive_sha256": "f23b24a3d3f259bf0b2db382c43cbcd09c8a49b0d627ceee37305d6c2ab3a4d8",
+      "pdb_sha256": "f4d5d24f7a1a4ce7b2d6e4de80164236fe091b13f363167490a5f270f2a6f50d",
+      "bulbs_sha256": "9d1ba94dcac6f3f41cce24b94cd4e7d704dffb1a62ac20009d712851c6c5889b",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1057,
+      "skipped_atoms": {
+        "non_supported_residue": 52
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 202,
+          "single_candidate": 39,
+          "unresolved": 5
+        },
+        "castp3_protor": {
+          "compatible": 246
+        }
+      }
+    },
+    {
+      "case": "1inc",
+      "archive_sha256": "98fa367a31074752871a044dae2cada8ba68fd5c20eaead8abc190a242cfeb2c",
+      "pdb_sha256": "b17a77ba4264aeb331dfda71eb385ea90f96dc2e069bbd1db162e26d22261b46",
+      "bulbs_sha256": "010309b8ac3e2331923b50b2f007eef4cc81aae106c3048c0674aff2c83a0af4",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1822,
+      "skipped_atoms": {
+        "non_supported_residue": 170
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 402,
+          "single_candidate": 17,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 420
+        }
+      }
+    },
+    {
+      "case": "1ivd",
+      "archive_sha256": "6b34ab6f9237298a5891b66075011daad56674c202c8bcc732a929c851cef861",
+      "pdb_sha256": "27b78e3082f1d837f41b169b36758556c107a87bcef764585ce3f4dc1f3b40db",
+      "bulbs_sha256": "c7f2ac11f87da8fe5c3f38136870a87939fca08ee4b73d51fe518a08574efd0b",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 6044,
+      "skipped_atoms": {
+        "non_supported_atom": 1446,
+        "non_supported_residue": 1105
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1747,
+          "single_candidate": 319,
+          "unresolved": 80,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 2147
+        }
+      }
+    },
+    {
+      "case": "1jf7",
+      "archive_sha256": "78bf0326171351957e06ebc16c7bb6fc2f1aaa0f4f47e500525082b51e7367ac",
+      "pdb_sha256": "87e0cdbc785712ecf1e4f696ecb5f0d2951db4705324e4b11521a2591fc7f584",
+      "bulbs_sha256": "5a8a5b85a73347c27d0b0e7aa2940b00631eb643dfd9d3ac5e68272d1bc4903f",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 4592,
+      "skipped_atoms": {
+        "non_supported_residue": 400
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1080,
+          "single_candidate": 313,
+          "unresolved": 39,
+          "conflict": 2
+        },
+        "castp3_protor": {
+          "compatible": 1434
+        }
+      }
+    },
+    {
+      "case": "1mem",
+      "archive_sha256": "dee87b1dc99d1cfe06ec8071e02c095ffe0fb3bea343a1b4e26e81f77eaa9c04",
+      "pdb_sha256": "dcd596547ff26526cd4ebb6646b53a0c09ad85ab57b3b7b589e661baf8049e6f",
+      "bulbs_sha256": "e03758afbf0251a0021e0d3649e9488135783bda1cce9ed783a28bb030a1b388",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1622,
+      "skipped_atoms": {
+        "non_supported_atom": 381,
+        "non_supported_residue": 432
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 253,
+          "single_candidate": 50,
+          "unresolved": 2,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 308
+        }
+      }
+    },
+    {
+      "case": "1mrg",
+      "archive_sha256": "6f6a79a5a52e02e4ef878ec1e03276dff719bdc068876ea80f59ef7d275e6205",
+      "pdb_sha256": "1f2d801cc8e3862ffeb0d3564808856db3ab7ac2f199e46a96e55fa25c629f1f",
+      "bulbs_sha256": "e88f21973468e63ae55e1a99a7834da10e3870d7c0e461dc4766bf4ddc18d0c6",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1940,
+      "skipped_atoms": {
+        "non_supported_atom": 455,
+        "non_supported_residue": 336
+      },
+      "profiles": {
+        "protor": {
+          "conflict": 44,
+          "compatible": 265,
+          "unresolved": 4,
+          "single_candidate": 52
+        },
+        "castp3_protor": {
+          "conflict": 45,
+          "compatible": 320
+        }
+      }
+    },
+    {
+      "case": "1mtw",
+      "archive_sha256": "c30f510c3b5be77dd96500bc0b4c0a5c91ffb772e181d146d6d3180e94534778",
+      "pdb_sha256": "c9fd27a0e0ff52af49614d501f71e85fb11ce21ae0f0e60c1efaa52bda0ccab8",
+      "bulbs_sha256": "c2bb6b212728b48a78561613083b10c9893ab2e72ef5309f942b37965349a5f5",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1629,
+      "skipped_atoms": {
+        "non_supported_residue": 323
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 240,
+          "single_candidate": 63,
+          "unresolved": 15
+        },
+        "castp3_protor": {
+          "compatible": 318
+        }
+      }
+    },
+    {
+      "case": "1nlj",
+      "archive_sha256": "9e74c555ae42efd6ef022de25b0f8e023ec5dbf07c3bbc92ffbc3de29901df85",
+      "pdb_sha256": "addc910dc896af78f3249a7e49dc2e04cef7d27072c04bb7e60060b11859347e",
+      "bulbs_sha256": "dc1a45226141d039f67b5293bb13d81ef7abb18132ce08b8277a77f5aa98c66e",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3298,
+      "skipped_atoms": {
+        "non_supported_residue": 74
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 768,
+          "single_candidate": 72,
+          "unresolved": 2
+        },
+        "castp3_protor": {
+          "compatible": 842
+        }
+      }
+    },
+    {
+      "case": "1nna",
+      "archive_sha256": "411c8a67d613de31a35af89deb3dd932b61bbb08a8a9ce03e81f7af30ff5e564",
+      "pdb_sha256": "0baf9f3c8d18b89d61ab09b9e5c58223e6928f147bce153c0a70bcd8f488e011",
+      "bulbs_sha256": "8b5cfade4c276ef3f832e13aaa83c3700f3ef3a316ce32bc5f36c790d775f3f7",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3056,
+      "skipped_atoms": {
+        "non_supported_atom": 709,
+        "non_supported_residue": 1
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 754,
+          "unresolved": 47,
+          "single_candidate": 146,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 950
+        }
+      }
+    },
+    {
+      "case": "1nny",
+      "archive_sha256": "334c9c508246404a3d617fc8e28b92ee512accbcbaabd000423fca2b66d10281",
+      "pdb_sha256": "ffe65de9320559fbcb58770caf6e5fb8c554e5a3a6e0fc67e6f27b8d9ec459e8",
+      "bulbs_sha256": "b237ddf1dacf4d5bfad929feb64dd6df67bb3170aac984f7d1fe226d2c7cc203",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2301,
+      "skipped_atoms": {
+        "non_supported_residue": 244
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 423,
+          "single_candidate": 80,
+          "conflict": 5,
+          "unresolved": 8
+        },
+        "castp3_protor": {
+          "compatible": 516
+        }
+      }
+    },
+    {
+      "case": "1npc",
+      "archive_sha256": "f76d206b4062fa497432488ee125f54059c83e39b2d0b44f44631f4f0afa4966",
+      "pdb_sha256": "20a4c67992cb87536f33c97e0b89e554a53e345343ff35313591ab4582836c68",
+      "bulbs_sha256": "8cc05366068304e67e263c40c823fd79789bd44a326980b2abe14143975fc82d",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2390,
+      "skipped_atoms": {
+        "non_supported_residue": 309
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 330,
+          "single_candidate": 116,
+          "unresolved": 35,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 482
+        }
+      }
+    },
+    {
+      "case": "1okm",
+      "archive_sha256": "018d65a4eabac94ee33ea58715571d2916a8ec9ba6080955a1d75532b5a75dc9",
+      "pdb_sha256": "b8d3f02503d185d36eb5a114c21d76ea7a8d13df7686272d8b86752c3e27860d",
+      "bulbs_sha256": "51a4142becc711b96476a09aed5f386e8004ca0f2a1ca91c466b38b0e65452e2",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2049,
+      "skipped_atoms": {
+        "non_supported_residue": 162
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 365,
+          "single_candidate": 80,
+          "unresolved": 13,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 458,
+          "conflict": 1
+        }
+      }
+    },
+    {
+      "case": "1onz",
+      "archive_sha256": "7ded283bdd19c42e8da214d44d67f73522dea16a599cfef48d3c24ac6225e4c0",
+      "pdb_sha256": "404c466d3fd8438f1c203c190ab6292bb252a074c31210cfcf89769b0563a673",
+      "bulbs_sha256": "a3eb3fa0342de68f0b7b60d51b7c1d6283688f7c71ddb0d9585e39ba809ae7c3",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2301,
+      "skipped_atoms": {
+        "non_supported_residue": 305
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 435,
+          "single_candidate": 64,
+          "unresolved": 16,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 518
+        }
+      }
+    },
+    {
+      "case": "1pdy",
+      "archive_sha256": "49ad37bc43be7687c83781e2c9098fe82161dfbd6c5030cddb4ace71ad55db91",
+      "pdb_sha256": "6bc4217069fd971b1a3cdad21c05e1c1d8f701572fd559ae6c6958f490918ee5",
+      "bulbs_sha256": "979aa7e0dc43505a8814610efa0396dab574575059271073ca8f644134d975db",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3298,
+      "skipped_atoms": {
+        "non_supported_residue": 120
+      },
+      "profiles": {
+        "protor": {
+          "unresolved": 36,
+          "single_candidate": 158,
+          "compatible": 382,
+          "conflict": 2
+        },
+        "castp3_protor": {
+          "compatible": 578
+        }
+      }
+    },
+    {
+      "case": "1pdz",
+      "archive_sha256": "b794344bb50d102f71dfab90882c6d5406077222572fe42fa1b7b9b2c368151c",
+      "pdb_sha256": "7e8d9a728dfc131eabd640acefe442085c3e01c2799effab70079a2b73dccf65",
+      "bulbs_sha256": "5c0b5926f8ed0164909dbe269177dcdfac76265ce1bfe0814dd8e38298014185",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3299,
+      "skipped_atoms": {
+        "non_supported_residue": 137
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 499,
+          "unresolved": 48,
+          "single_candidate": 173,
+          "conflict": 16
+        },
+        "castp3_protor": {
+          "compatible": 723,
+          "conflict": 13
+        }
+      }
+    },
+    {
+      "case": "1phc",
+      "archive_sha256": "332c87d6f39974e07101a7855313383ded7e9355270dc87feea3a33420792491",
+      "pdb_sha256": "9886cb74806cefce1405be4332b5bd9456884ef820212897586fe2c11221a0f5",
+      "bulbs_sha256": "53e2a3ebc59cf4d951546a72d2a0354e4228fa6b06da6653fb388f8eb33446dd",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3204,
+      "skipped_atoms": {
+        "non_supported_residue": 235
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 705,
+          "single_candidate": 111,
+          "unresolved": 21,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 838
+        }
+      }
+    },
+    {
+      "case": "1phd",
+      "archive_sha256": "e7bfaacd62833a9678238164aa463fef35b6e15cbe80a034a3db27541173fe99",
+      "pdb_sha256": "bbad1a236976db2150265f8e43167e22b3dedcaa3d7f51a0e673279a5b86d713",
+      "bulbs_sha256": "3c9deb0f2924e12e8f74d47c49b1066c50349842a1e019379d34b678407de978",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3204,
+      "skipped_atoms": {
+        "non_supported_residue": 258
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 658,
+          "single_candidate": 119,
+          "unresolved": 19,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 797
+        }
+      }
+    },
+    {
+      "case": "1psn",
+      "archive_sha256": "23586bf64261fd4f657472e257ba3bed57800a457279a9b83d5c33c320f13b49",
+      "pdb_sha256": "a3589219de36c7b380fcceff8f87f2413f51a7fc04592f08e53a6354d2e5ace2",
+      "bulbs_sha256": "738e70470bd3e0cadf7524381e76d9acaaaf8094f6087d38f983c8d0bf17e001",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2438,
+      "skipped_atoms": {
+        "non_supported_residue": 136
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 539,
+          "single_candidate": 151,
+          "unresolved": 40,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 733
+        }
+      }
+    },
+    {
+      "case": "1pso",
+      "archive_sha256": "1d09cce897f27719b21a69cc0763c21a9836d36577d1fce71369506f30fa937d",
+      "pdb_sha256": "4025588d30ff90323bcb465a16aa0843b784090e18bbd6e071548a7201dc4526",
+      "bulbs_sha256": "5e854875e9bcf4be6e71cd4ed7a1af49bdc90b34d58df3a4191ff78bdfb869e5",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2457,
+      "skipped_atoms": {
+        "non_supported_residue": 263
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 446,
+          "single_candidate": 128,
+          "unresolved": 41,
+          "conflict": 2
+        },
+        "castp3_protor": {
+          "compatible": 617
+        }
+      }
+    },
+    {
+      "case": "1pty",
+      "archive_sha256": "b32ae8744296c8eda3995f6bf3763b3a49ad10b646f87215911be4f92a219441",
+      "pdb_sha256": "30d7c2a2db7b822bad3b8ff73ef363fbf8800565a710cb7a3357bd52402ca37c",
+      "bulbs_sha256": "7f8e4ad4ebf05a8a0f2f7871ad22902fb94a40b9521a5047184920fc770a7830",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2437,
+      "skipped_atoms": {
+        "non_supported_residue": 298
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 343,
+          "single_candidate": 99,
+          "conflict": 5,
+          "unresolved": 15
+        },
+        "castp3_protor": {
+          "compatible": 457,
+          "conflict": 5
+        }
+      }
+    },
+    {
+      "case": "1q1m",
+      "archive_sha256": "5819084fb17406662970bc4eb59223eddf0cb6a4cd9960298290d9c7f46d49a9",
+      "pdb_sha256": "594555647ee02ba1521f71948a25b294c7998aefaa733bb7fe0af93370fcf1ab",
+      "bulbs_sha256": "e49755fe33f7e999cc8516bc5af10172a867ba93efe32737b6332dec52dbf9f6",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2435,
+      "skipped_atoms": {
+        "non_supported_residue": 154
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 337,
+          "single_candidate": 86,
+          "unresolved": 10
+        },
+        "castp3_protor": {
+          "compatible": 433
+        }
+      }
+    },
+    {
+      "case": "1qif",
+      "archive_sha256": "ac312228aa31daeed4f44a617809d50ec526cf0ad5f847bf2d456c47c219e9cd",
+      "pdb_sha256": "60bfe19ddbd20adb5e56218a8db98861434179ba9d5f04fc63b884dd8b8f3d69",
+      "bulbs_sha256": "29778bff6a8506fddd9482e6fcb2af5b2e949afd56f1605098f1d4a37607c3be",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 4238,
+      "skipped_atoms": {
+        "non_supported_residue": 314
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1065,
+          "single_candidate": 202,
+          "unresolved": 29
+        },
+        "castp3_protor": {
+          "compatible": 1296
+        }
+      }
+    },
+    {
+      "case": "1qpe",
+      "archive_sha256": "4d0a3340347229cfa3ed125e7027e2023451fbb7eec5a54815b156633b04303d",
+      "pdb_sha256": "ab20c947011c6b7fae822b1774b1ad72206cec29dd43f9a090bdb87b5de76411",
+      "bulbs_sha256": "edee4018d1fc0e441e29b1f2f77e6daaf3873dc4691e7c4b95ec5dc954d25ed4",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2175,
+      "skipped_atoms": {
+        "non_supported_residue": 235
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 112,
+          "compatible": 483,
+          "conflict": 3,
+          "unresolved": 21
+        },
+        "castp3_protor": {
+          "compatible": 619
+        }
+      }
+    },
+    {
+      "case": "1qs4",
+      "archive_sha256": "f39c11272978aff02984a8d8606d77061d86e9e3a944f82b604fd0a285d5b2cf",
+      "pdb_sha256": "e3f20ef33533b9fe58dfa56117bb5d216e0168d29c70db10e68a2d489e2b0dd8",
+      "bulbs_sha256": "761b21fba9a0b310199cf7e8ec9cf14c20e729dcc01f47dbcb9098cc937ff312",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3469,
+      "skipped_atoms": {
+        "non_supported_residue": 567
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1183,
+          "single_candidate": 302,
+          "unresolved": 86,
+          "conflict": 4
+        },
+        "castp3_protor": {
+          "compatible": 1575
+        }
+      }
+    },
+    {
+      "case": "1rbp",
+      "archive_sha256": "26d3a85862e96247b951b327d4042b8f5e9659df883c8df2702435bb3d3102f5",
+      "pdb_sha256": "bb917306286305e19f605bc5ade8dfc5dd38dec97bd1c4335e660720fbad6ec2",
+      "bulbs_sha256": "a31d23321155462c4fb2558725bdb38014afc26c93fa1f97b3fe2e3cc02c9b5a",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1408,
+      "skipped_atoms": {
+        "non_supported_residue": 174
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 358,
+          "single_candidate": 51,
+          "unresolved": 6
+        },
+        "castp3_protor": {
+          "compatible": 415
+        }
+      }
+    },
+    {
+      "case": "1rne",
+      "archive_sha256": "52128481428dbf50a7aa45578cae021572e33924872d23ea7fe2543e5017af38",
+      "pdb_sha256": "010ca4f7da35c94d032a8b206781c1170fecce1ac227278e10c214bee07148c3",
+      "bulbs_sha256": "eaf80b403692acfa9a2ad5b3ef0aa2734ec7244903b8342f24787ea10a749cb4",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2510,
+      "skipped_atoms": {
+        "non_supported_residue": 203
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 540,
+          "conflict": 1,
+          "single_candidate": 57,
+          "unresolved": 21
+        },
+        "castp3_protor": {
+          "compatible": 619
+        }
+      }
+    },
+    {
+      "case": "1rob",
+      "archive_sha256": "c9bee4711311c3fc8ee7d6400207031e944ef020024bab5f74cbcabb306b187a",
+      "pdb_sha256": "28df3ea8487986a02cfd540655b61db83c1af3a65801ec7773da519868426aa3",
+      "bulbs_sha256": "68ca2612afd44320eb56a6e254eb9d58f84634aeb434173600f03b867e991319",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 955,
+      "skipped_atoms": {
+        "non_supported_residue": 122
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 28,
+          "compatible": 126,
+          "unresolved": 5,
+          "conflict": 10
+        },
+        "castp3_protor": {
+          "compatible": 159,
+          "conflict": 10
+        }
+      }
+    },
+    {
+      "case": "1rop",
+      "archive_sha256": "41200b3b55bf1bde6493b427e3db8e32d044237c2b840472624ccd4499686ab0",
+      "pdb_sha256": "b1d46deb144851db9a9e63d57071f5a1781d76188b1dc289e7a7d781b19cdd8e",
+      "bulbs_sha256": "2599011526623783d36b641855029eb17d0db30f1bedd192557bf4b00c5472fc",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 447,
+      "skipped_atoms": {
+        "non_supported_residue": 48
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 20
+        },
+        "castp3_protor": {
+          "compatible": 20
+        }
+      }
+    },
+    {
+      "case": "1snc",
+      "archive_sha256": "dc58d8e2401c59dea9194ffbd91f0f875386e0034b6140cba6f3b7012cc9df5d",
+      "pdb_sha256": "1896e1eaa5f33330d536102525d8536132f53aca3fcc41098fd44ec29088bee2",
+      "bulbs_sha256": "dfe6e9588ec34ebdd220108c18041dfe8058a3e5d56bed44a3339a1d6d09dd23",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1082,
+      "skipped_atoms": {
+        "non_supported_residue": 108
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 161,
+          "unresolved": 24,
+          "single_candidate": 45
+        },
+        "castp3_protor": {
+          "compatible": 230
+        }
+      }
+    },
+    {
+      "case": "1srf",
+      "archive_sha256": "efba5734def59d592bc379223d8cfb928046c1c8a1ad721bab73733f564a3ea4",
+      "pdb_sha256": "7fc1653e09fccdfe660e486a4070cd2dd184c017abfbc3c6065626b339674a1c",
+      "bulbs_sha256": "0b21d895af893258eb35f4e5082252b76999d6bfd944353cece5d049ddac045e",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1740,
+      "skipped_atoms": {
+        "non_supported_residue": 203
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 383,
+          "single_candidate": 47,
+          "unresolved": 2,
+          "conflict": 10
+        },
+        "castp3_protor": {
+          "compatible": 433,
+          "conflict": 9
+        }
+      }
+    },
+    {
+      "case": "1stn",
+      "archive_sha256": "853fa2d822adc1e43c5d1330ad7392dfaf14c67c9135c5d5b88a3fbd7c696295",
+      "pdb_sha256": "a34b2a047a311e356f902be2601f06ee224494ff5f93ab7ba15207ea84f99bc3",
+      "bulbs_sha256": "38fe0d7616c5d369109489b6db259e981e6ce624f5deb44984b920523c30eafa",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1091,
+      "skipped_atoms": {
+        "non_supported_residue": 83
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 191,
+          "single_candidate": 36,
+          "conflict": 1,
+          "unresolved": 2
+        },
+        "castp3_protor": {
+          "compatible": 230
+        }
+      }
+    },
+    {
+      "case": "1stp",
+      "archive_sha256": "0e80ae5ab12e4339ff40f24c13ef65df829f50cc4efe9c91e17839a6b4e82b5a",
+      "pdb_sha256": "39c5922d3c24c9b9110fde936915d1904e51d5d929d561035a28f94b626c97a3",
+      "bulbs_sha256": "86241f7f59c2db3615010b5fa95e9e76e5bfd89713303e220930b1705dbc5924",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 901,
+      "skipped_atoms": {
+        "non_supported_residue": 100
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 102,
+          "unresolved": 1,
+          "single_candidate": 16
+        },
+        "castp3_protor": {
+          "compatible": 119
+        }
+      }
+    },
+    {
+      "case": "1swb",
+      "archive_sha256": "0ef8c2a424667a5b57139d9181fc782e9cc3893de8d7cc69d29107a0f9564b31",
+      "pdb_sha256": "37490d8bb26f3b2b59e47db73657b6fac59060dd963d83bef15f6d61ea6043e0",
+      "bulbs_sha256": "aebf39de3cbe9739ab0cda20814f65f28626f6f084b6b8c2a84869f0db598d96",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3496,
+      "skipped_atoms": {
+        "non_supported_residue": 209
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1326,
+          "single_candidate": 156,
+          "unresolved": 10
+        },
+        "castp3_protor": {
+          "compatible": 1492
+        }
+      }
+    },
+    {
+      "case": "1tcd",
+      "archive_sha256": "ed7e087756b06666797aeaeba65d3d1f2f39fea877480b9ab1e47c44fd91b7c4",
+      "pdb_sha256": "3fd3dacb1994f28e1ccdb85c4a4c9df7bc013679fe014e77bce27d3e5149c4c1",
+      "bulbs_sha256": "06da83a15822edf4df1ec53d43fa85bfa109ea24685bbe9cfaae5e0239a1256e",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3818,
+      "skipped_atoms": {
+        "non_supported_residue": 165
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 164,
+          "compatible": 878,
+          "unresolved": 24,
+          "conflict": 2
+        },
+        "castp3_protor": {
+          "compatible": 1068
+        }
+      }
+    },
+    {
+      "case": "1ula",
+      "archive_sha256": "bc18e80e3105bc8239dc9badeaa965574b994a0e0606ba89215f812f9a67ab97",
+      "pdb_sha256": "a17f08c67e46ad8f80df6a270d89666c5222d69ad5037a6812c2edd0871a4c9a",
+      "bulbs_sha256": "23ce66591151f78caa6ea8e8fb93280a8be2121d0aa259cd034eb86daa208e44",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2258,
+      "skipped_atoms": {
+        "non_supported_residue": 10
+      },
+      "profiles": {
+        "protor": {
+          "single_candidate": 95,
+          "compatible": 623,
+          "unresolved": 9,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 728
+        }
+      }
+    },
+    {
+      "case": "1ulb",
+      "archive_sha256": "f0711946a0ff96f365044f536b7d9ef9a5c778fe52ee668abfe60749cfb80cc9",
+      "pdb_sha256": "35a95c0f0232d71c585f544b13af6f9b6dc2cd739fcc64a925d9b70e2b3ea9ce",
+      "bulbs_sha256": "485516a323a4b46589419c767d277986355abe949eee9a128bea3403cdee7164",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2258,
+      "skipped_atoms": {
+        "non_supported_residue": 21
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 561,
+          "single_candidate": 84,
+          "unresolved": 6,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 652
+        }
+      }
+    },
+    {
+      "case": "1ypi",
+      "archive_sha256": "df1ca85bb1ad5367b0ff730bd4ed04b529ceeed6c7887dfc411ba4e10bd65f7a",
+      "pdb_sha256": "64d2d25b2b1a6bed39918378dd25547b8ed0a8ceade763f64243125bb4eb403f",
+      "bulbs_sha256": "2d2c4bf7677dd3e36bdbc3395c2db5cce221eeec7109a6ec711392030c902fda",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3766,
+      "skipped_atoms": {
+        "non_supported_residue": 119
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 842,
+          "unresolved": 22,
+          "single_candidate": 153,
+          "conflict": 9
+        },
+        "castp3_protor": {
+          "compatible": 1022,
+          "conflict": 4
+        }
+      }
+    },
+    {
+      "case": "2ctv",
+      "archive_sha256": "0402c45ccdb0b2b87188b0feabe5f9eef1362eb637066ac74a736915dbd1e507",
+      "pdb_sha256": "921edd1a122bf0f58f42fb204099c460a3be3bb1f0300e2be48da15885d83936",
+      "bulbs_sha256": "9c5866601ecb9bcad2aa67a67f8b32db7461d20c9fe200474476714ba766d4ed",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1809,
+      "skipped_atoms": {
+        "non_supported_residue": 148
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 316,
+          "single_candidate": 86,
+          "unresolved": 27
+        },
+        "castp3_protor": {
+          "compatible": 429
+        }
+      }
+    },
+    {
+      "case": "2fbp",
+      "archive_sha256": "eb6714f65d2556c07f15b738eed8e5ee3d6f90f8c1e71e7b39f603efd1257e4d",
+      "pdb_sha256": "18bcc6c36377fb4aae6627b52c2fb8f26d9451d8e31e2f86fe91bc9377a84e0e",
+      "bulbs_sha256": "91b36996b6239df84b47973a2872ccb927596703fd494c1acccc48b5c2d9e08a",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 4860,
+      "skipped_atoms": {
+        "non_supported_atom": 1076
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 1360,
+          "single_candidate": 207,
+          "unresolved": 51,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 1621
+        }
+      }
+    },
+    {
+      "case": "2ifb",
+      "archive_sha256": "5c79a41768769edcfadcd53b5f5284752926f748ea67def53c715d9d230770ab",
+      "pdb_sha256": "b052f3ebfc1fa14c7a655ec524df77196639e18162d18825486bea27147c818a",
+      "bulbs_sha256": "7854778a058bdf1b1202466e85f56461ad067ad108226159fd4adce45e48b021",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1057,
+      "skipped_atoms": {
+        "non_supported_residue": 79
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 231,
+          "single_candidate": 31,
+          "unresolved": 5
+        },
+        "castp3_protor": {
+          "compatible": 267
+        }
+      }
+    },
+    {
+      "case": "2lyz",
+      "archive_sha256": "8ce53d49eb2989d0df9cc95631663803185cac05850ca8464b7312270c1a105f",
+      "pdb_sha256": "4ed087248c4344e1fac9a6d1c94b6c4cfcdec654c9f2a7c1909e6c5ce6ab82d1",
+      "bulbs_sha256": "45ed09ef051f7d246c4297b8e548f19543c8d27f791b080eaa7efecdeed6093b",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1001,
+      "skipped_atoms": {
+        "non_supported_residue": 101
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 131,
+          "single_candidate": 15,
+          "unresolved": 2
+        },
+        "castp3_protor": {
+          "compatible": 148
+        }
+      }
+    },
+    {
+      "case": "2pk4",
+      "archive_sha256": "05aa0478f5f62f4d0ad0bf1b3982318c5525d28b2c1535bf93f27dd28b0b9c73",
+      "pdb_sha256": "491d6fc18883b7b3f82c8b9c85023129a7390c7120ba94eb16b199801f2ee1c1",
+      "bulbs_sha256": "645feacc7c4f0864c28afd34163ae4cc33bfe8d89df5c978dd96d32126155c59",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 630,
+      "skipped_atoms": {
+        "non_supported_residue": 115
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 48
+        },
+        "castp3_protor": {
+          "compatible": 48
+        }
+      }
+    },
+    {
+      "case": "2tga",
+      "archive_sha256": "3871bd25955aa20d2961f18515e6e8b13150777db94508e4ea1033be6eb7de1d",
+      "pdb_sha256": "b0137be0ceeee84dc633d1d50ec324fb6a088e1a2ff91e43d9984487a1a5ef40",
+      "bulbs_sha256": "5b8fd4b3f15ad0a471d84a160d36a4fe6100582e3f96c82ca5ada16c98e2eab1",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1629,
+      "skipped_atoms": {
+        "non_supported_residue": 94
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 228,
+          "single_candidate": 81,
+          "unresolved": 10,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 320
+        }
+      }
+    },
+    {
+      "case": "2ypi",
+      "archive_sha256": "0ab23fa679842a2a676e642a501b4c5deb588c96e00350979c9ccf34ba0dab74",
+      "pdb_sha256": "4449f0a4ccfcbcba9a875397e1d99256d7e6fd01c2e8b098575e5aa5d11f7fbc",
+      "bulbs_sha256": "1c283212a8368d5df7a31f61fe0985f82c31a9ae4e7312a0cb10d37a8903316a",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 3766,
+      "skipped_atoms": {
+        "non_supported_residue": 43
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 988,
+          "single_candidate": 161,
+          "unresolved": 27,
+          "conflict": 2
+        },
+        "castp3_protor": {
+          "compatible": 1176,
+          "conflict": 2
+        }
+      }
+    },
+    {
+      "case": "3app",
+      "archive_sha256": "9f6da210c67d196c51d71b323efb136af979bf99a857dbc96fd18665a027aa57",
+      "pdb_sha256": "1f034d51ddd3de3200194424463776ebe3bf05efa7cf57de2a621ba52c50cfdb",
+      "bulbs_sha256": "281146feabb4897434c22f217ef951f03c754f291acfd9d80ef13994c5f748b7",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2366,
+      "skipped_atoms": {
+        "non_supported_residue": 318
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 404,
+          "single_candidate": 117,
+          "unresolved": 49,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 571
+        }
+      }
+    },
+    {
+      "case": "3lck",
+      "archive_sha256": "5dd41b0a3045fc45dbe4a8d042989c14058b5708fbd4fa8343d17d59a6fc0554",
+      "pdb_sha256": "0d17849b308f7eb0c17bca382b8ba37c28e4e1b6fb091ab711eb972aaab8e78c",
+      "bulbs_sha256": "da1ced5267c0bcec031c4c039d874b17256145dbe4972afeb8ef6d70669aedae",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2331,
+      "skipped_atoms": {
+        "non_supported_residue": 361
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 591,
+          "conflict": 92,
+          "unresolved": 55,
+          "single_candidate": 118
+        },
+        "castp3_protor": {
+          "compatible": 733,
+          "conflict": 123
+        }
+      }
+    },
+    {
+      "case": "3phv",
+      "archive_sha256": "ab12f20c3f8de4e50b81ea8c5f614af0123e765a156b93aba8de097282f8c264",
+      "pdb_sha256": "7d90dcc2492fe9144a81e264373baca96ea33889212baba5d4f6782eaea4ea61",
+      "bulbs_sha256": "d22328c0a13b439203f6ed623c932e36a2e1b3c29d70e54a4acdb84ee1d2a673",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 758,
+      "skipped_atoms": {},
+      "profiles": {
+        "protor": {
+          "compatible": 152,
+          "single_candidate": 8
+        },
+        "castp3_protor": {
+          "compatible": 160
+        }
+      }
+    },
+    {
+      "case": "3ptb",
+      "archive_sha256": "858a8ebe1f99a3177444be694d6648bb51658ce3a447ad96d9d0cd3dfb97b82d",
+      "pdb_sha256": "c079cac40dc56c2e6d62497ae5db47e2510ea9c91aaa539ee68bf0c93aa41dbb",
+      "bulbs_sha256": "50c34b50c24552437ce2ada1dbe997f210d2f3871862213cf29cc56a342b569c",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1629,
+      "skipped_atoms": {
+        "non_supported_residue": 72
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 286,
+          "single_candidate": 54,
+          "unresolved": 14,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 355
+        }
+      }
+    },
+    {
+      "case": "3ptn",
+      "archive_sha256": "0a8467fa8ceca6bd7e66ca5b20a3f86f1e5e8382ec6cc38101e03401cb66d3c8",
+      "pdb_sha256": "850f3d745d9c9b85c01f90d46bc5075e78477e403e703c5e03af94e5365ef4d0",
+      "bulbs_sha256": "dea9f2ecb3885e152df64a982d1f1165c732535bdf3d987537642e7f9befa299",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1629,
+      "skipped_atoms": {
+        "non_supported_residue": 83
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 287,
+          "single_candidate": 44,
+          "unresolved": 6
+        },
+        "castp3_protor": {
+          "compatible": 337
+        }
+      }
+    },
+    {
+      "case": "3tms",
+      "archive_sha256": "09892b62517569eb68dc5f8a7fe24c6c2b20462e420ec2e1fbcb8851d0c7be69",
+      "pdb_sha256": "64bb9154cdd6cd3334d793c9ed5d66bd398ec6ce68a0f6d07e1c22dbe200a03a",
+      "bulbs_sha256": "06e1a7eb105f651f0d80ce4407b3d01b2656d7e204d2082ca262fc19db379e4d",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2150,
+      "skipped_atoms": {
+        "non_supported_residue": 16
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 465,
+          "unresolved": 16,
+          "single_candidate": 87,
+          "conflict": 3
+        },
+        "castp3_protor": {
+          "compatible": 570,
+          "conflict": 1
+        }
+      }
+    },
+    {
+      "case": "4ca2",
+      "archive_sha256": "aeba212822a07c31353bb449bc727f6c7ab23a71b46c605c2945fea85a5b85ae",
+      "pdb_sha256": "b6f2d977d083f55d62b7fec94ca5f7df90f331ba1f57ebd49a08df75120caa1f",
+      "bulbs_sha256": "1164ffcc08a5d6dcf24af3d5f1f42c00ec19e7e2e690c30aaa7e6dd4e98ddb47",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2029,
+      "skipped_atoms": {
+        "non_supported_residue": 104
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 293,
+          "single_candidate": 45,
+          "unresolved": 3
+        },
+        "castp3_protor": {
+          "compatible": 341
+        }
+      }
+    },
+    {
+      "case": "4dfr",
+      "archive_sha256": "c795964e056c9a71fd2b62dc13530c048be7c5806876832862577e8dae6eda92",
+      "pdb_sha256": "e5c36bcbbeb60b1fa5bc2ebc2350442084b2556dabe5e758cfa6d07c8627ce82",
+      "bulbs_sha256": "48c0d37b0e73237933fe52f5c8480459e7ed96f40124448c64243ee2a4c33221",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2538,
+      "skipped_atoms": {
+        "non_supported_residue": 497
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 802,
+          "conflict": 55,
+          "single_candidate": 88,
+          "unresolved": 22
+        },
+        "castp3_protor": {
+          "compatible": 905,
+          "conflict": 62
+        }
+      }
+    },
+    {
+      "case": "4phv",
+      "archive_sha256": "1431484ad7351b5a83bd0b17ad847ea4ff81b4088d2751b64cbcb7ac3942ca0d",
+      "pdb_sha256": "af9cd62c7304e3eb61a376cda317e252668fb021b5795428d8bdc8c9a07d7860",
+      "bulbs_sha256": "d60d1da9793af00c177a7c1a6d49716f86e00e269a5a1166477918117091cff5",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1520,
+      "skipped_atoms": {
+        "non_supported_residue": 196
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 259,
+          "single_candidate": 94,
+          "unresolved": 18,
+          "conflict": 1
+        },
+        "castp3_protor": {
+          "compatible": 372
+        }
+      }
+    },
+    {
+      "case": "5cna",
+      "archive_sha256": "b354c9831b53106b8e32b29e80547b402a6aaf2cc7939b00b718927d50edc873",
+      "pdb_sha256": "820828ca6222c861b3f1ac6db7ba4cace2cbcfba9bb9337784a59a68340939c5",
+      "bulbs_sha256": "e2fae23a543a4d56aa9ab03e6905b26d27455003579cae7e6f028b400b120a77",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 7236,
+      "skipped_atoms": {
+        "non_supported_residue": 594
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 2260,
+          "single_candidate": 635,
+          "unresolved": 164,
+          "conflict": 28
+        },
+        "castp3_protor": {
+          "compatible": 3037,
+          "conflict": 50
+        }
+      }
+    },
+    {
+      "case": "5dfr",
+      "archive_sha256": "1e184eddc24fc3b8758886376c35ee679dd1a62fb2aac09e571595e27e09d73c",
+      "pdb_sha256": "fd642a68a9c16c73252a68d68931c9e23e3700ac28b9293581177fd5753344f2",
+      "bulbs_sha256": "f30cc244e771bfd5e987d88cf70b335d2273eca9d175c03d675af028b5dcb0e0",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 1220,
+      "skipped_atoms": {
+        "non_supported_residue": 123
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 268,
+          "single_candidate": 44,
+          "unresolved": 7
+        },
+        "castp3_protor": {
+          "compatible": 319
+        }
+      }
+    },
+    {
+      "case": "7cpa",
+      "archive_sha256": "e3678b76f1ba80634aca31e9aa28f0f28e0670a85ef1e04d9e8d0b888fafd8cb",
+      "pdb_sha256": "97491de8aa33dd015fa0b05b4e3fae68f2746a2071641f62a3b6497d53687e96",
+      "bulbs_sha256": "e27e0ca9753a1fcb22b5e7b45bf12d3495ac5f3e4e7403a0c8a2ef52d8662808",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2437,
+      "skipped_atoms": {
+        "non_supported_residue": 264
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 330,
+          "single_candidate": 86,
+          "unresolved": 8,
+          "conflict": 4
+        },
+        "castp3_protor": {
+          "compatible": 425,
+          "conflict": 3
+        }
+      }
+    },
+    {
+      "case": "8adh",
+      "archive_sha256": "f0db38504ce4f01cb79b581ffa8f9840c31b2829180ae52d8b181b8f8949e420",
+      "pdb_sha256": "ab7c8935d53ec79050bf91e24d61d625fa3fc471449dba37cf64d1b10059aad1",
+      "bulbs_sha256": "1ea525347e5f7f93c64701e627d0feaeb954890aec13a6588f195e4995012a47",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 2785,
+      "skipped_atoms": {
+        "non_supported_residue": 170
+      },
+      "profiles": {
+        "protor": {
+          "compatible": 616,
+          "single_candidate": 55,
+          "conflict": 1,
+          "unresolved": 1
+        },
+        "castp3_protor": {
+          "compatible": 673
+        }
+      }
+    },
+    {
+      "case": "8rat",
+      "archive_sha256": "19f08c9e20df50c3a4f8048b4435d843ce65c2c58a908ceef2187c926dc0b91b",
+      "pdb_sha256": "87e7228f66b2719a5d2eab954f79bf8183f599886038fd73d3bc31ee0b2e46c0",
+      "bulbs_sha256": "136135807e4ed2d5dfdfe59eb8f5a9d01b1e2c3271af863e22cc704e4432724b",
+      "probe_radius": {
+        "value": 1.4,
+        "unit": "angstrom"
+      },
+      "supported_atoms": 951,
+      "skipped_atoms": {},
+      "profiles": {
+        "protor": {
+          "compatible": 172,
+          "single_candidate": 24,
+          "unresolved": 2
+        },
+        "castp3_protor": {
+          "compatible": 198
+        }
+      }
+    }
+  ]
+}
