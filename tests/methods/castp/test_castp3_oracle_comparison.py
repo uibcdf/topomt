@@ -25,6 +25,52 @@ from topomt.io.load_CASTp import (
 )
 
 
+def test_pinned_explicit_definition_panel_preserves_all_results_and_input_identity():
+    repository = Path(__file__).resolve().parents[3]
+    artifacts = repository / 'devguide/castp/artifacts'
+    report = json.loads(
+        (artifacts / 'membership_audit_2026_10_02_definitions.json').read_text()
+    )
+    assert report['complete']
+    assert len(report['cases']) == len(report['requested_cases']) == 40
+    assert {case['case'] for case in report['cases']} == set(report['requested_cases'])
+    assert [case['case'] for case in report['cases'] if not case['passed']] == ['1hiv']
+    assert (
+        report['orchestration_script_sha256']
+        == hashlib.sha256(
+            (
+                artifacts / 'membership_audit_2026_10_02_definitions_runner.py.txt'
+            ).read_bytes()
+        ).hexdigest()
+    )
+    for case in report['cases']:
+        archive_path = (
+            repository / 'topomt/data/CASTpFold_server' / f'{case["case"]}.zip'
+        )
+        assert (
+            case['archive_sha256']
+            == hashlib.sha256(archive_path.read_bytes()).hexdigest()
+        )
+        with ZipFile(archive_path) as archive:
+            member = next(name for name in archive.namelist() if name.endswith('.pdb'))
+            assert (
+                case['pdb_sha256'] == hashlib.sha256(archive.read(member)).hexdigest()
+            )
+        assert case['policy']['pocket_definition'] == 'castp3'
+        assert case['policy']['radii_model'] == 'castp3_protor'
+    for kind, oracle, native, exact in (
+        ('pocket', 534, 534, 533),
+        ('void', 388, 388, 388),
+        ('channel', 52, 52, 52),
+        ('branched_channel', 17, 17, 17),
+        ('mouth', 603, 603, 602),
+    ):
+        counts = [case['features'][kind] for case in report['cases']]
+        assert sum(row['oracle_count'] for row in counts) == oracle
+        assert sum(row['native_count'] for row in counts) == native
+        assert sum(row['exact_count'] for row in counts) == exact
+
+
 def test_membership_details_preserve_missing_duplicate_and_extra_sets():
     result = compare_membership_details(
         [frozenset({2, 1}), frozenset({4})],
@@ -80,6 +126,7 @@ def test_membership_audit_keeps_source_hashes_policy_and_original_indices(
     )
     assert result['pdb_sha256'] == hashlib.sha256(pdb).hexdigest()
     assert result['policy']['radii_model'] == 'castp3_protor'
+    assert result['policy']['pocket_definition'] == 'literature'
     assert result['policy']['probe_radius'] == {'value': 1.4, 'unit': 'angstrom'}
     assert result['policy']['selection'] == DEFAULT_SELECTION
     assert not result['policy']['probe_limited_depth']
@@ -100,7 +147,9 @@ def test_corrected_native_feature_memberships_match_archive_controls(pdb_id):
         / 'topomt/data/CASTpFold_server'
         / f'{pdb_id}.zip'
     )
-    result = audit_castp3_oracle_zip(archive_path, radii_model='castp3_protor')
+    result = audit_castp3_oracle_zip(
+        archive_path, radii_model='castp3_protor', pocket_definition='castp3'
+    )
 
     assert result['passed']
     for feature in result['features'].values():
@@ -127,7 +176,9 @@ def test_corrected_profile_recovers_historical_micro_pockets(
     info = _parse_poc_info_file(next(tmp_path.glob('*.pocInfo')))
     assert info[server_id]['n_mouths'] == 1
 
-    result = audit_castp3_oracle_zip(archive_path, radii_model='castp3_protor')
+    result = audit_castp3_oracle_zip(
+        archive_path, radii_model='castp3_protor', pocket_definition='castp3'
+    )
 
     for kind, labels in [('pocket', pocket_labels), ('mouth', mouth_labels)]:
         target = sorted(atom_ids_from_castp_labels(labels[server_id]))

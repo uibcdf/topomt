@@ -88,10 +88,8 @@ def test_1stp_flow_audit_separates_bulb_geometry_from_final_atom_reporting():
     assert all(
         row['passed'] for row in minimum['component_vertex_memberships'].values()
     )
-    # Reconstructing the bulb regions alone does not validate the current
-    # attached-face atom-export rules or aggregate mouth records.
-    assert not minimum['atom_memberships']['pocket']['passed']
-    assert not minimum['atom_memberships']['mouth']['passed']
+    # The explicit CASTp3 definition now uses the actual geometric vertices.
+    assert all(row['passed'] for row in minimum['atom_memberships'].values())
     target = next(row for row in result['bulbs'] if row['server_id'] == 3)
     support = next(bulb for bulb in target['bulbs'] if 592 in bulb['contact_serials'])
     assert support['compatible']

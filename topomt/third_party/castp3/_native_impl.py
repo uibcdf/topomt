@@ -1,12 +1,15 @@
 """Native CASTp implementation scaffold built from the classical workflow."""
 
-from typing import Dict, List, Tuple
+from typing import Dict, List, Literal, Tuple
 
 from topomt import pyunitwizard as puw
 from topomt._private.smonitor import signal
 from topomt.third_party.castp3.core.castp_core import (
     build_castp_feature_records,
     build_castp_geometry,
+)
+from topomt.third_party.castp3.core.castp_core.components import (
+    _validate_pocket_definition,
 )
 from topomt.third_party.castp3.core.castp_core.volbl import voids_measurements
 from topomt.tools.features.pockets import get_physicochemical_properties
@@ -165,6 +168,7 @@ def castp(
     peripheral_atom_expansion_steps: int = 0,
     alpha_boundary_epsilon_length: float = 0.0,
     alpha_boundary_face_epsilon_rank: int = 0,
+    pocket_definition: Literal['literature', 'castp3'] = 'literature',
 ) -> Tuple[List[Dict], object]:
     """Detect features with the experimental local CASTp3 reconstruction.
 
@@ -178,8 +182,16 @@ def castp(
     ``radii_model='castp3_protor'`` explicitly selects the modern-server radius
     profile identified from archived bulb geometry; ``'protor'`` retains the
     standard table and differs in ASP/GLU carboxylate oxygen radii.
+    ``pocket_definition='literature'`` retains the published maximum-depth
+    definition; ``'castp3'`` requests empirical minimum-terminal compatibility.
+    These choices are independent of the radius model. Both definitions report
+    actual component/mouth vertices, replacing earlier atom substitutions.
+    Execution choices are preserved in ``properties['castp3_execution']``.
+    Unknown definitions and CASTp3 with probe-limited depth raise ``ValueError``
+    before geometry construction. Open-feature SA/MS parity remains unvalidated.
     """
 
+    _validate_pocket_definition(pocket_definition, probe_limited_depth)
     del syntax, skip_digestion, sea_level, epsilon
 
     probe_radius_angstroms = _to_angstroms(probe_radius)
@@ -199,6 +211,7 @@ def castp(
         alpha_rank=alpha_rank,
         beta_rank=beta_rank,
         probe_limited_depth=bool(probe_limited_depth),
+        pocket_definition=pocket_definition,
         peripheral_atom_expansion_steps=int(peripheral_atom_expansion_steps),
         alpha_boundary_face_epsilon_rank=int(alpha_boundary_face_epsilon_rank),
     )
@@ -236,6 +249,17 @@ def castp(
                 solvent_accessible_volume=measurement.volume_sa,
                 molecular_surface_volume=measurement.volume_ms,
             )
+        record['properties']['castp3_execution'] = {
+            'pocket_definition': pocket_definition,
+            'radii_model': radii_model,
+            'probe_radius_angstrom': probe_radius_angstroms,
+            'probe_limited_depth': bool(probe_limited_depth),
+            'alpha_rank': alpha_rank,
+            'beta_rank': beta_rank,
+            'peripheral_atom_expansion_steps': int(peripheral_atom_expansion_steps),
+            'alpha_boundary_epsilon_length': float(alpha_boundary_epsilon_length),
+            'alpha_boundary_face_epsilon_rank': int(alpha_boundary_face_epsilon_rank),
+        }
         feature_records.append(record)
     feature_records.sort(key=lambda record: record['volume'], reverse=True)
 

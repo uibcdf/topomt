@@ -1,6 +1,7 @@
 """Component assembly for the native CASTp implementation."""
 
 from collections import defaultdict, deque
+from typing import Literal
 
 import numpy as np
 
@@ -369,6 +370,81 @@ def _compute_pocket_depths(geometry) -> np.ndarray:
     return depth
 
 
+def _validate_pocket_definition(
+    pocket_definition: str, probe_limited_depth: bool
+) -> None:
+    """Reject unknown definitions and unsupported combinations before calculation."""
+    if pocket_definition not in ('literature', 'castp3'):
+        raise ValueError("pocket_definition must be 'literature' or 'castp3'.")
+    if pocket_definition == 'castp3' and probe_limited_depth:
+        raise ValueError('probe_limited_depth is a literature-only diagnostic.')
+
+
+def _minimum_reachable_sinks(
+    successors: list[list[int]], ranks: list[int], infinity: int
+) -> np.ndarray:
+    """Choose the lowest-ranked reachable terminal; reject unresolved cycles."""
+    if len(ranks) != infinity or len(successors) != infinity + 1:
+        raise ValueError('Flow graph and exterior marker do not agree.')
+    depths: np.ndarray = np.full(infinity + 1, -1, dtype=int)
+    depths[infinity] = infinity
+    visiting = set()
+
+    def visit(node: int) -> int:
+        if depths[node] >= 0:
+            return int(depths[node])
+        if node in visiting:
+            raise ValueError('Minimum-reachable flow contains an unresolved cycle.')
+        visiting.add(node)
+        terminals = [visit(neighbor) for neighbor in successors[node]]
+        depths[node] = (
+            min(
+                terminals,
+                key=lambda sink: (
+                    (ranks[sink], sink) if sink < infinity else (np.inf, sink)
+                ),
+            )
+            if terminals
+            else node
+        )
+        visiting.remove(node)
+        return int(depths[node])
+
+    for node in range(infinity):
+        visit(node)
+    return depths[:infinity]
+
+
+def _flow_successors(geometry) -> list[list[int]]:
+    """Materialize current exact hidden-face links, including the exterior."""
+    mesh = geometry.mesh
+    successors: list[list[int]] = [[] for _ in range(mesh.n_simplices + 1)]
+    for simplex in range(mesh.n_simplices):
+        for face, neighbor in enumerate(mesh.neighbors[simplex]):
+            if geometry.face_is_on_hull[simplex, face]:
+                if _triangle_is_attached(geometry, simplex, face):
+                    successors[simplex].append(mesh.n_simplices)
+            elif neighbor >= 0 and _hidden_triangle(
+                geometry, simplex, face, int(neighbor)
+            ):
+                successors[simplex].append(int(neighbor))
+    return successors
+
+
+def _compute_castp3_pocket_depths(geometry) -> np.ndarray:
+    """Use the minimum finite reachable sink inferred from archived CASTp3 output.
+
+    This is an empirical compatibility policy, independent of radius assignment.
+    Infinity wins only when no finite terminal is reachable. Cycles are rejected
+    rather than silently assigning a molecular region.
+    """
+    return _minimum_reachable_sinks(
+        _flow_successors(geometry),
+        geometry.simplex_rho_ranks.tolist(),
+        geometry.mesh.n_simplices,
+    )
+
+
 def _compute_probe_limited_pocket_depths(
     geometry,
     size_limit_rank: int,
@@ -658,6 +734,7 @@ def _build_rank_driven_components(
     rank1: int | None = None,
     event_hook=None,
     probe_limited_depth: bool = False,
+    pocket_definition: Literal['literature', 'castp3'] = 'literature',
 ) -> tuple[dict[int, list[int]], set[int], np.ndarray]:
     """Build pockets using the original depth-and-delay construction.
 
@@ -686,6 +763,8 @@ def _build_rank_driven_components(
             geometry,
             int(size_limit_rank),
         )
+    elif pocket_definition == 'castp3':
+        depth = _compute_castp3_pocket_depths(geometry)
     else:
         depth = _compute_pocket_depths(geometry)
     infinity_marker = mesh.n_simplices
@@ -1002,82 +1081,19 @@ def _component_boundary_faces_void(
     return boundary_faces
 
 
-def _attached_mouth_exterior_opposite_atom_indices(
-    geometry,
-    mouth_clusters: list[list[MouthFaceRecord]],
-    active_pocket_nodes: set[int],
-) -> set[int]:
-    """Return exterior-side atoms opposite attached mouth faces."""
-
-    mesh = geometry.mesh
-    exterior_atom_indices = set()
-    active_pocket_nodes = {int(simplex_index) for simplex_index in active_pocket_nodes}
-
-    for mouth_cluster in mouth_clusters:
-        for face in mouth_cluster:
-            if not isinstance(face, MouthFaceRecord):
-                continue
-            if int(face.face_index) < 0:
-                continue
-
-            simplex_index = int(face.simplex_index)
-            face_index = int(face.face_index)
-            if int(geometry.face_rho_ranks[simplex_index, face_index]) != 0:
-                continue
-
-            neighbor = int(mesh.neighbors[simplex_index, face_index])
-            if neighbor == -1 or neighbor in active_pocket_nodes:
-                continue
-
-            face_atoms = {int(atom_index) for atom_index in face.face_atoms}
-            for atom_index in mesh.simplex_atom_indices[neighbor]:
-                atom_index = int(atom_index)
-                if atom_index not in face_atoms:
-                    exterior_atom_indices.add(atom_index)
-
-    return exterior_atom_indices
-
-
 def _mouth_cluster_atom_indices_for_reporting(
     geometry,
     mouth_cluster: list[MouthFaceRecord],
     active_pocket_nodes: set[int],
 ) -> set[int]:
-    """Return local atom indices reported for one CASTp3 mouth cluster."""
-
-    mesh = geometry.mesh
-    active_pocket_nodes = {int(simplex_index) for simplex_index in active_pocket_nodes}
-    non_attached_atoms = set()
-    attached_exterior_atoms = set()
-
-    for face in mouth_cluster:
-        if not isinstance(face, MouthFaceRecord):
-            non_attached_atoms.update(int(atom_index) for atom_index in face)
-            continue
-        if int(face.face_index) < 0:
-            non_attached_atoms.update(int(atom_index) for atom_index in face.face_atoms)
-            continue
-
-        simplex_index = int(face.simplex_index)
-        face_index = int(face.face_index)
-        face_atoms = {int(atom_index) for atom_index in face.face_atoms}
-        if int(geometry.face_rho_ranks[simplex_index, face_index]) != 0:
-            non_attached_atoms.update(face_atoms)
-            continue
-
-        neighbor = int(mesh.neighbors[simplex_index, face_index])
-        if neighbor == -1 or neighbor in active_pocket_nodes:
-            non_attached_atoms.update(face_atoms)
-            continue
-
-        for atom_index in mesh.simplex_atom_indices[neighbor]:
-            atom_index = int(atom_index)
-            if atom_index not in face_atoms:
-                attached_exterior_atoms.add(atom_index)
-
-    if non_attached_atoms:
-        return non_attached_atoms | attached_exterior_atoms
-    return attached_exterior_atoms
+    """Return vertices of the actual mouth triangles, including attached faces."""
+    return {
+        int(atom_index)
+        for face in mouth_cluster
+        for atom_index in (
+            face.face_atoms if isinstance(face, MouthFaceRecord) else face
+        )
+    }
 
 
 def _map_local_atom_indices(
@@ -1401,9 +1417,45 @@ def build_castp_feature_records(
     probe_limited_depth: bool = False,
     peripheral_atom_expansion_steps: int = 0,
     alpha_boundary_face_epsilon_rank: int = 0,
+    pocket_definition: Literal['literature', 'castp3'] = 'literature',
 ) -> list[dict]:
-    """Build CASTp-like feature records from the weighted tetrahedral substrate."""
+    """Build feature records with an explicit, radius-independent pocket definition.
 
+    Parameters
+    ----------
+    geometry
+        Weighted molecular geometry with its original atom-index map.
+    probe_radius
+        Solvent probe radius in angstroms.
+    alpha_rank, beta_rank
+        Optional lower and upper filtration ranks. Defaults use the base
+        molecular surface and full upper rank.
+    probe_limited_depth
+        Literature-only diagnostic restricting the depth calculation.
+    peripheral_atom_expansion_steps, alpha_boundary_face_epsilon_rank
+        Explicit experimental reporting diagnostics, disabled by default.
+    pocket_definition
+        ``'literature'`` selects maximum reachable depth. ``'castp3'`` selects
+        the minimum finite terminal inferred from archived server outputs.
+        Both use component vertices and actual mouth-triangle vertices.
+
+    Returns
+    -------
+    list[dict]
+        Feature records with source atom indices and polyhedral measurements.
+
+    Raises
+    ------
+    ValueError
+        If the definition is unknown, the diagnostic combination is unsupported,
+        or the minimum-terminal flow contains an unresolved cycle.
+
+    Examples
+    --------
+    ``build_castp_feature_records(geometry, 1.4, pocket_definition='castp3')``
+    """
+
+    _validate_pocket_definition(pocket_definition, probe_limited_depth)
     original_base_rank = int(geometry.base_rank)
     effective_base_rank = original_base_rank if alpha_rank is None else int(alpha_rank)
     if beta_rank is None:
@@ -1421,6 +1473,7 @@ def build_castp_feature_records(
             int(effective_base_rank),
             int(size_limit_rank),
             probe_limited_depth=bool(probe_limited_depth),
+            pocket_definition=pocket_definition,
             peripheral_atom_expansion_steps=int(peripheral_atom_expansion_steps),
             alpha_boundary_face_epsilon_rank=int(alpha_boundary_face_epsilon_rank),
         )
@@ -1436,6 +1489,7 @@ def _build_castp_feature_records_at_ranks(
     probe_limited_depth: bool = False,
     peripheral_atom_expansion_steps: int = 0,
     alpha_boundary_face_epsilon_rank: int = 0,
+    pocket_definition: Literal['literature', 'castp3'] = 'literature',
 ) -> list[dict]:
     """Build feature records using explicit CASTp rank cutoffs."""
 
@@ -1447,6 +1501,7 @@ def _build_castp_feature_records_at_ranks(
         size_limit_rank,
         rank1=int(alpha_rank),
         probe_limited_depth=bool(probe_limited_depth),
+        pocket_definition=pocket_definition,
     )
     void_components, _void_blocked_nodes = _build_void_components(
         geometry,
@@ -1730,14 +1785,6 @@ def _build_castp_feature_records_at_ranks(
             int(peripheral_atom_expansion_steps),
             excluded_simplex_indices=active_pocket_nodes - set(simplex_indices),
         )
-        attached_mouth_atom_indices = _map_local_atom_indices(
-            geometry.atom_indices_map,
-            _attached_mouth_exterior_opposite_atom_indices(
-                geometry,
-                mouth_clusters,
-                active_pocket_nodes,
-            ),
-        )
         feature_records.append(
             {
                 'id': counters[feature_type],
@@ -1748,9 +1795,7 @@ def _build_castp_feature_records_at_ranks(
                 'iT': list(simplex_indices),
                 'tetrahedron_indices': list(simplex_indices),
                 'atom_indices': sorted(
-                    set(component_atom_indices)
-                    | set(attached_mouth_atom_indices)
-                    | set(peripheral_atom_indices)
+                    set(component_atom_indices) | set(peripheral_atom_indices)
                 ),
                 'boundary_atom_indices': list(regular_vertex_indices),
                 'component_atom_indices': component_atom_indices,

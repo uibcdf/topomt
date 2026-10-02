@@ -49,3 +49,13 @@ scientific definition changes or blanket suppression of checker errors.
 
 Both modules pass a documented bounded checker with an explicit dependency
 stub policy while existing runtime geometry/parity guards remain green.
+
+## 2026-10-02: explicit-definition validation boundary
+
+The wider modern geometry/components/native check reports 40 diagnostics in
+this repository, while a matched isolated before/after source comparison gives
+43 versus 42 diagnostics (including absent package-export diagnostics), with
+no newly added normalized messages. This broader invocation includes component
+annotations outside the original nineteen-per-geometry scope. Exact arithmetic
+and maintained audit tools pass their bounded check; neither outcome closes the
+existing geometry typing theme.

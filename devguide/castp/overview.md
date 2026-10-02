@@ -7,20 +7,20 @@ local CASTp3 reconstruction under [#79](https://github.com/uibcdf/topomt/issues/
 Broader provider work remains paused under the
 [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
-Latest feature-comparison slice: the
-[corrected pocket-membership checkpoint](checkpoint_2026_10_02_corrected_pocket_membership.md)
-recalculates pockets, channels and aggregated exported mouth records after
-the preparation corrections: 468/534 pocket sets and all 388 closed-void sets
-match across forty systems. Residual memberships remain under #88.
-Closed-void analytical measures retain their
-separate validation contract. Exact atom sets do not certify metric parity.
+Latest work: the [explicit pocket-definition checkpoint](checkpoint_2026_10_02_pocket_definitions.md)
+separates `pocket_definition='literature'` from empirical `castp3` compatibility,
+independently of atomic radii. Both use actual region and mouth vertices; the
+modern predicate grid has an independent correction under #89. Fresh production validation matches every compared atom class in 39/40
+systems: 533/534 pocket sets, all closed void/channel/branched-channel sets and
+602/603 aggregate mouths. The remaining 1HIV difference concerns input
+heterogen inclusion; the separately corrected 1CDO numeric defect belongs to #89. General server
+metric equivalence is not certified; #88 remains open.
 
-The subsequent [1STP flow diagnosis](checkpoint_2026_10_02_1stp_flow.md)
-reconstructs all fifty exported sphere regions and vertex-lining sets on
-1STP plus six controls with a minimum-reachable-depth hypothesis. Existing
-final reporting rules regress under that alternative, so production defaults
-remain unchanged and #88 remains open. Broader validation and geometric
-mouth/atom attribution precede adoption.
+Historical baselines are retained in the
+[corrected pocket-membership checkpoint](checkpoint_2026_10_02_corrected_pocket_membership.md)
+and [1STP flow diagnosis](checkpoint_2026_10_02_1stp_flow.md). Their counts and
+old attached-face reporting conclusions refer to their recorded source and
+must not be treated as the current algorithm contract.
 
 Latest preparation slice: the
 [hydrogen and terminal-policy checkpoint](checkpoint_2026_10_01_hydrogen_and_terminal_policy.md)
@@ -118,6 +118,7 @@ bounded outcomes, not full-provider certification.
 ## Detailed records and discussion
 
 - [Permanent CASTp / CASTpFold discussion #73](https://github.com/uibcdf/topomt/discussions/73) in External Tools.
+- [Explicit pocket definitions and numerical geometry](checkpoint_2026_10_02_pocket_definitions.md).
 - [Original output inventory](external_output_inventory.md).
 - [Modern closed-void measurements checkpoint](checkpoint_2026_10_01_modern_void_measurements.md).
 - [Modern radius profile and expanded panel](checkpoint_2026_10_01_castp3_radius_profile.md).

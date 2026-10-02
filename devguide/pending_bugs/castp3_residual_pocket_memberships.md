@@ -72,3 +72,24 @@ to those regions nevertheless regresses final pocket and mouth memberships.
 No production default changes. Extend geometry evidence to the forty-system
 panel and derive atom/mouth reporting before promoting the alternative.
 Python 3.11/3.12 CI work is deferred at the user's explicit request.
+
+## 2026-10-02: explicit definitions and geometric vertices
+
+The [new checkpoint](../castp/checkpoint_2026_10_02_pocket_definitions.md) implements
+separate literature and empirical CASTp3 choices, independent of radii. Actual
+component/mouth vertices remove the former reporting compensation. A completed
+forty-input diagnostic matches all atom classes in 38/40 systems and 533/534
+pocket sets. 1CDO's false sink is a local numeric defect tracked separately
+under #89; 1HIV includes fourteen CSO HETATM atoms absent from the server
+contribution list. No demonstrated server algorithm bug is asserted. Fresh
+production validation and the remaining input/metric boundaries are recorded
+in the checkpoint; historical diagnostic counts remain dated evidence.
+
+
+The fresh explicit-compatibility production run now matches every compared atom
+class in 39/40 systems: 533/534 pockets, 388/388 closed voids, 52/52 channels,
+17/17 branched channels and 602/603 aggregate mouths. A 968-test run preserves
+the independent 225-cavity/900-measure panel and recovers 1CDO's separate regions.
+#89 is resolved. #88 remains open for generic input/individual-mouth fidelity;
+1HIV is the sole current atom-set residual. Work pauses before new input-policy
+or open-metric development; no general equivalence certification is claimed.

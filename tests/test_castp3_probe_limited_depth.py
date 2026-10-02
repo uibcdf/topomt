@@ -30,7 +30,9 @@ def test_castp3_default_beta_rank_uses_max_depth_not_probe_cutoff(monkeypatch):
         probe_limited_depth=False,
         peripheral_atom_expansion_steps=0,
         alpha_boundary_face_epsilon_rank=0,
+        pocket_definition='literature',
     ):
+        captured['pocket_definition'] = pocket_definition
         captured['alpha_rank'] = alpha_rank
         captured['beta_rank'] = beta_rank
         captured['probe_limited_depth'] = probe_limited_depth
@@ -51,6 +53,7 @@ def test_castp3_default_beta_rank_uses_max_depth_not_probe_cutoff(monkeypatch):
 
     assert records == []
     assert captured == {
+        'pocket_definition': 'literature',
         'alpha_rank': 7,
         'beta_rank': 42,
         'probe_limited_depth': False,

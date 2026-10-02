@@ -13,12 +13,12 @@ from topomt.weighted_delaunay_mesh import (
     _regular_triangulation_simplices,
 )
 
-from .exact import ExactRatio, castp1_fixed_point_array, exact_determinant
+from .exact import ExactRatio, exact_determinant, fixed_point_array
 
 _CASTP_PARAM_PATH = Path(__file__).resolve().parents[4] / 'data' / 'castp' / 'param.dat'
 _CASTP_DEFAULT_HEAVY_RADIUS = 1.8
 _CASTP_DEFAULT_HYDROGEN_RADIUS = 1.2
-_CASTP1_FIXED_DECIMALS = 5
+_FIXED_POINT_DECIMALS = 5
 _PROTOR_FALLBACK_RADII = {
     'C': 1.88,
     'N': 1.64,
@@ -1100,10 +1100,10 @@ def _exact_minor_determinant(rows: np.ndarray, columns: tuple[int, ...]) -> int:
 def _fixed_point_lifted_rows(
     points: np.ndarray, radii: np.ndarray, decimals: int
 ) -> np.ndarray:
-    """Return exact fixed-point lifted rows compatible with historical predicates."""
+    """Return exact integer lifted rows on the modern nearest decimal grid."""
 
-    points_fixed = castp1_fixed_point_array(points, decimals)
-    radii_fixed = castp1_fixed_point_array(radii, decimals)
+    points_fixed = fixed_point_array(points, decimals)
+    radii_fixed = fixed_point_array(radii, decimals)
     weights_fixed = radii_fixed * radii_fixed
     lifted = np.sum(points_fixed * points_fixed, axis=1) - weights_fixed
     ones = np.ones((points_fixed.shape[0], 1), dtype=object)
@@ -1117,9 +1117,9 @@ def _fixed_point_lifted_rows_from_weights(
 ) -> np.ndarray:
     """Return exact fixed-point lifted rows from point coordinates and weights."""
 
-    points_fixed = castp1_fixed_point_array(points, decimals)
+    points_fixed = fixed_point_array(points, decimals)
     radii = np.sqrt(np.asarray(weights, dtype=float))
-    radii_fixed = castp1_fixed_point_array(radii, decimals)
+    radii_fixed = fixed_point_array(radii, decimals)
     weights_fixed = radii_fixed * radii_fixed
     lifted = np.sum(points_fixed * points_fixed, axis=1) - weights_fixed
     ones = np.ones((points_fixed.shape[0], 1), dtype=object)
@@ -1239,8 +1239,8 @@ def _edge_exact_ratio(
 ) -> ExactRatio:
     """Return the exact weighted size1 ratio for an edge."""
 
-    edge_points_fixed = castp1_fixed_point_array(edge_points, decimals)
-    edge_radii_fixed = castp1_fixed_point_array(edge_radii, decimals).reshape(-1)
+    edge_points_fixed = fixed_point_array(edge_points, decimals)
+    edge_radii_fixed = fixed_point_array(edge_radii, decimals).reshape(-1)
     point_a = edge_points_fixed[0]
     point_b = edge_points_fixed[1]
     weight_a = int(edge_radii_fixed[0] * edge_radii_fixed[0])
@@ -1272,7 +1272,7 @@ def _build_exact_rho_rank_tables(
 ]:
     """Return exact rho ranks and the corresponding spectrum values."""
 
-    decimals = _CASTP1_FIXED_DECIMALS
+    decimals = _FIXED_POINT_DECIMALS
     lifted_rows = _fixed_point_lifted_rows(atom_coordinates, atom_radii, decimals)
 
     simplex_rho_ranks = np.zeros(mesh.n_simplices, dtype=int)
@@ -1373,9 +1373,7 @@ def _build_exact_rho_rank_tables(
         if vertex_rho_state == 0:
             vertex_rho_ranks[int(vertex_index)] = -1
             continue
-        scaled_radius = int(
-            castp1_fixed_point_array(np.asarray([atom_radius]), decimals)[0]
-        )
+        scaled_radius = int(fixed_point_array(np.asarray([atom_radius]), decimals)[0])
         ratio = ExactRatio(-(scaled_radius * scaled_radius), 1)
         events.append(
             (ratio, -float(atom_radius * atom_radius), 'vertex', int(vertex_index))
@@ -1447,7 +1445,7 @@ def _weighted_hidden2(
     all_weights = np.concatenate(
         (np.asarray(face_weights, dtype=float), np.asarray([probe_weight], dtype=float))
     )
-    decimals = _CASTP1_FIXED_DECIMALS
+    decimals = _FIXED_POINT_DECIMALS
     rows = _fixed_point_lifted_rows_from_weights(all_points, all_weights, decimals)
     triangle_rows = rows[:3]
 
@@ -1487,7 +1485,7 @@ def _weighted_hidden1(
     all_weights = np.concatenate(
         (np.asarray(edge_weights, dtype=float), np.asarray([probe_weight], dtype=float))
     )
-    decimals = _CASTP1_FIXED_DECIMALS
+    decimals = _FIXED_POINT_DECIMALS
     rows = _fixed_point_lifted_rows_from_weights(all_points, all_weights, decimals)
     edge_rows = rows[:2]
     coord1, coord2, coord3 = _edge_rotation_order(np.asarray(edge_points, dtype=float))
@@ -1537,9 +1535,9 @@ def _weighted_hidden0(
         (np.asarray(vertex_point, dtype=float), np.asarray(probe_point, dtype=float))
     )
     all_weights = np.asarray([float(vertex_weight), float(probe_weight)], dtype=float)
-    decimals = _CASTP1_FIXED_DECIMALS
-    points_fixed = castp1_fixed_point_array(all_points, decimals)
-    radii_fixed = castp1_fixed_point_array(np.sqrt(all_weights), decimals)
+    decimals = _FIXED_POINT_DECIMALS
+    points_fixed = fixed_point_array(all_points, decimals)
+    radii_fixed = fixed_point_array(np.sqrt(all_weights), decimals)
     weights_fixed = radii_fixed * radii_fixed
 
     delta = points_fixed[1] - points_fixed[0]

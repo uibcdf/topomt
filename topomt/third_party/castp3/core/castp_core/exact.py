@@ -76,8 +76,8 @@ def fixed_point_array(values: np.ndarray, decimals: int) -> np.ndarray:
     """Return an integer array on a fixed-point decimal grid."""
 
     values_array = np.asarray(values, dtype=float)
-    scale = 10 ** int(decimals)
-    return np.rint(values_array * scale).astype(object)
+    fixed_values = [fixed_point_int(value, decimals) for value in values_array.flat]
+    return np.asarray(fixed_values, dtype=object).reshape(values_array.shape)
 
 
 def castp1_fixed_point_int(

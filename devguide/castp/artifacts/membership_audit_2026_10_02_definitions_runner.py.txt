@@ -1,0 +1,53 @@
+import hashlib
+import json
+import sys
+from concurrent.futures import ProcessPoolExecutor, as_completed
+from pathlib import Path
+from devtools.castp.compare_castp3_oracles import audit_castp3_oracle_zip
+from topomt.third_party.castp3 import _native_impl
+
+
+def calculate(identifier):
+    _native_impl.get_physicochemical_properties = lambda *args: {}
+    return audit_castp3_oracle_zip(
+        Path('topomt/data/CASTpFold_server') / f'{identifier}.zip',
+        radii_model='castp3_protor', pocket_definition='castp3',
+    )
+
+
+def main():
+    baseline_path = Path('devguide/castp/artifacts/membership_audit_2026_10_02_corrected_inputs.json')
+    baseline = json.loads(baseline_path.read_text())
+    identifiers = [case['case'] for case in baseline['cases']]
+    destination = Path('/tmp/topomt-definition-panel40.json')
+    report = {
+        'schema': 'topomt.castp3_membership_audit@1',
+        'requested_cases': identifiers, 'cases': [], 'complete': False,
+        'python_version': sys.version.split()[0],
+        'scientific_base_commit': 'ce69d25e4e5639fa248b1a440547eadc259eb20f',
+        'membership_baseline_sha256': hashlib.sha256(baseline_path.read_bytes()).hexdigest(),
+        'orchestration_script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'workers': 3,
+        'physicochemical_properties': 'disabled; do not affect geometric memberships',
+        'scientific_source_sha256': {p.as_posix(): hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted([*Path('topomt/third_party/castp3').rglob('*.py'), Path('topomt/weighted_delaunay_mesh.py'), Path('devtools/castp/compare_castp3_oracles.py')])},
+    }
+    with ProcessPoolExecutor(max_workers=3) as pool:
+        futures = {pool.submit(calculate, identifier): identifier for identifier in identifiers}
+        for future in as_completed(futures):
+            identifier = futures[future]
+            try:
+                case = future.result()
+                print(identifier, 'exact' if case['passed'] else 'discrepant', flush=True)
+            except Exception as error:
+                case = {'case': identifier, 'error': f'{type(error).__name__}: {error}'}
+                print(identifier, case['error'], flush=True)
+            report['cases'].append(case)
+            report['cases'].sort(key=lambda case: identifiers.index(case['case']))
+            destination.write_text(json.dumps(report, indent=2) + '\n')
+    report['complete'] = len(report['cases']) == len(identifiers) and not any('error' in case for case in report['cases'])
+    destination.write_text(json.dumps(report, indent=2) + '\n')
+    return 0 if report['complete'] else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())

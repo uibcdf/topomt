@@ -1,0 +1,2721 @@
+{
+  "schema": "topomt.castp3_membership_audit@1",
+  "requested_cases": [
+    "1a4j",
+    "1a6u",
+    "1a6w",
+    "1ahc",
+    "1bmq",
+    "1brq",
+    "1cdo",
+    "1cge",
+    "1crn",
+    "1djb",
+    "1esa",
+    "1hel",
+    "1hew",
+    "1hfc",
+    "1hiv",
+    "1hsi",
+    "1ida",
+    "1ifb",
+    "1inc",
+    "1mtw",
+    "1rbp",
+    "1rob",
+    "1rop",
+    "1snc",
+    "1srf",
+    "1stn",
+    "1stp",
+    "2ctv",
+    "2ifb",
+    "2lyz",
+    "2pk4",
+    "2tga",
+    "3phv",
+    "3ptb",
+    "3ptn",
+    "3tms",
+    "4ca2",
+    "4phv",
+    "5dfr",
+    "8rat"
+  ],
+  "cases": [
+    {
+      "case": "1a4j",
+      "archive_sha256": "e9ee8eafe2dbd9846f0231f7c789247a64ce328e9f6026285c08f9f1a2d1c921",
+      "pdb_sha256": "62d9f8b7e5f662d0861691ec6ed23e81c2df2856560df5c9c1dd4f8d4ab78b95",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 161.92899207677692,
+      "features": {
+        "pocket": {
+          "oracle_count": 55,
+          "native_count": 55,
+          "exact_count": 55,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 39,
+          "native_count": 39,
+          "exact_count": 39,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 4,
+          "native_count": 4,
+          "exact_count": 4,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 62,
+          "native_count": 62,
+          "exact_count": 62,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1a6u",
+      "archive_sha256": "cd9dea23ece360c221586a393b87062783f13eaab8b4c1d2a28b5f943ac5f223",
+      "pdb_sha256": "79b48ebffa451300a3ad546737c8ef4a672d1bf731f0354c0fa048e78314e121",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 43.320973167195916,
+      "features": {
+        "pocket": {
+          "oracle_count": 21,
+          "native_count": 21,
+          "exact_count": 21,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 19,
+          "native_count": 19,
+          "exact_count": 19,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 24,
+          "native_count": 24,
+          "exact_count": 24,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1a6w",
+      "archive_sha256": "8bf1f1cce72b3727a74918f55a5f06c6af852c804f80201e13a38f147732fe3d",
+      "pdb_sha256": "47d943a57b9e235bf899316949a0b45423552404acbc3a3a6958f60914b43383",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 43.385742890648544,
+      "features": {
+        "pocket": {
+          "oracle_count": 19,
+          "native_count": 19,
+          "exact_count": 19,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 12,
+          "native_count": 12,
+          "exact_count": 12,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 20,
+          "native_count": 20,
+          "exact_count": 20,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1ahc",
+      "archive_sha256": "eb147ae9b64d88facfd7504fc363b037e3c318cc4df8f8d54730ec095fb93e7f",
+      "pdb_sha256": "c679543ad6a1bceeeed81d42b70c20919ec65e8ccd7062acbf9469d4df8bf93b",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 44.42965737916529,
+      "features": {
+        "pocket": {
+          "oracle_count": 19,
+          "native_count": 19,
+          "exact_count": 19,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 13,
+          "native_count": 13,
+          "exact_count": 13,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 20,
+          "native_count": 20,
+          "exact_count": 20,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1bmq",
+      "archive_sha256": "5827f7e45637b0944e88b18f3a97b0deae9e2b8be7046efa0cb2670531acd350",
+      "pdb_sha256": "d103dbc8c3ac7e619b4cd8055c0176ea9a19c878c2c310c8aa1444f96c44a790",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 47.74500096589327,
+      "features": {
+        "pocket": {
+          "oracle_count": 20,
+          "native_count": 20,
+          "exact_count": 20,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 15,
+          "native_count": 15,
+          "exact_count": 15,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 22,
+          "native_count": 22,
+          "exact_count": 22,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1brq",
+      "archive_sha256": "760449b0e051f86cdd891f9ca9ee56ec221114fc712cdeff3a4dd9130d1b2b87",
+      "pdb_sha256": "a3ce720a0cb7d10579c21918953490079195364d8c8cb65566cbf5a5c8a2358f",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 32.01126896869391,
+      "features": {
+        "pocket": {
+          "oracle_count": 10,
+          "native_count": 10,
+          "exact_count": 10,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 7,
+          "native_count": 7,
+          "exact_count": 7,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 13,
+          "native_count": 13,
+          "exact_count": 13,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1cdo",
+      "archive_sha256": "288afe4a4655c4be293fa59b01fc4d47af44614f08334510e1cae1e0b156b560",
+      "pdb_sha256": "3806c9b7efc7527444f3213bb02a61e6d56138fc930e7da3db940bf02499763f",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 135.72301171068102,
+      "features": {
+        "pocket": {
+          "oracle_count": 36,
+          "native_count": 36,
+          "exact_count": 36,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 43,
+          "native_count": 43,
+          "exact_count": 43,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 42,
+          "native_count": 42,
+          "exact_count": 42,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1cge",
+      "archive_sha256": "b91fec50d80d3addd52068eedf717870b84f1fb07aab6cb4a45821ac3cef5643",
+      "pdb_sha256": "4d9c912c53b7a7016103837328e96565bbaa72115229005eeec8186e09b0b37d",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 28.970595533959568,
+      "features": {
+        "pocket": {
+          "oracle_count": 11,
+          "native_count": 11,
+          "exact_count": 11,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 7,
+          "native_count": 7,
+          "exact_count": 7,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1crn",
+      "archive_sha256": "f2e368d8d7630758f8d125b235fb00ae35289f864ae96da189f15f23bfbe96ed",
+      "pdb_sha256": "123b2f8cfb5d60f0d176aac05ff7938a007cc49a14308a24062de898489b9d44",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 6.7572873793542385,
+      "features": {
+        "pocket": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1djb",
+      "archive_sha256": "dbad05d0f674be2c95557944720c8fd0e7e4123cc6b37c0ebb4f49aab839faf3",
+      "pdb_sha256": "3266ef99f3967f65a23f835616e0f9050ef8cde4a308ee6ce1faa0f5c40cdbeb",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 47.74544291663915,
+      "features": {
+        "pocket": {
+          "oracle_count": 22,
+          "native_count": 22,
+          "exact_count": 22,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 7,
+          "native_count": 7,
+          "exact_count": 7,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 24,
+          "native_count": 24,
+          "exact_count": 24,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1esa",
+      "archive_sha256": "31bd206b0b0edcd61ba02eab470a03e3a854590b31139664a1403a0ab701cc5e",
+      "pdb_sha256": "65b8f98187d0d1a8997f6bcf6e079a4237fd6e4b2e34d72a287e388e4fdce63e",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 43.692324119620025,
+      "features": {
+        "pocket": {
+          "oracle_count": 15,
+          "native_count": 15,
+          "exact_count": 15,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 16,
+          "native_count": 16,
+          "exact_count": 16,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 16,
+          "native_count": 16,
+          "exact_count": 16,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1hel",
+      "archive_sha256": "7f0e2ce8ac56e7b555193692fce25c3ac58d2fb208d6cd4c3b9ed8d804b6e649",
+      "pdb_sha256": "4803e42d2ee4f027c3d0813c67593c7ea39571bb1bb965ab329c16f7b8a52bb8",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 22.81052407529205,
+      "features": {
+        "pocket": {
+          "oracle_count": 8,
+          "native_count": 8,
+          "exact_count": 8,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 4,
+          "native_count": 4,
+          "exact_count": 4,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 8,
+          "native_count": 8,
+          "exact_count": 8,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1hew",
+      "archive_sha256": "b76a9360b866af0c6ee3a609b9ce8ba0b061aad5378c2a3497e519100baa3296",
+      "pdb_sha256": "7b97063491f6e1a1b586cb7ea8a602ca68e8281afc1682772aa54cfa511e7840",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 22.493259293027222,
+      "features": {
+        "pocket": {
+          "oracle_count": 4,
+          "native_count": 4,
+          "exact_count": 4,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 4,
+          "native_count": 4,
+          "exact_count": 4,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1hfc",
+      "archive_sha256": "13cb2c94b102164e64d51af5ac03f69f5d8570b055b4cbd32dd3dc3aef5b6254",
+      "pdb_sha256": "6c5b24c30bff5cbb46e8ad543c6101efdeb59271155037639bf7bf7248a28878",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 28.376801386475563,
+      "features": {
+        "pocket": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 5,
+          "native_count": 5,
+          "exact_count": 5,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 15,
+          "native_count": 15,
+          "exact_count": 15,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1hiv",
+      "archive_sha256": "fef9f0db8abeea1f5ea0dbfb30f60839e87c9d1f2e045cdd0d8d64acf7061f7d",
+      "pdb_sha256": "df01b847368d85516f00b0bd35ee3d65d73925c0856e2d9490a67a964f15369a",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 35.155179095454514,
+      "features": {
+        "pocket": {
+          "oracle_count": 13,
+          "native_count": 13,
+          "exact_count": 12,
+          "missing_memberships": [
+            [
+              857,
+              860,
+              862,
+              863,
+              869,
+              873,
+              1264,
+              1266,
+              1269,
+              1272,
+              1285
+            ]
+          ],
+          "extra_memberships": [
+            [
+              857,
+              858,
+              860,
+              862,
+              863,
+              869,
+              873,
+              1264,
+              1266,
+              1269,
+              1278,
+              1279,
+              1285
+            ]
+          ],
+          "passed": false
+        },
+        "void": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 13,
+          "missing_memberships": [
+            [
+              857,
+              860,
+              873,
+              1269,
+              1285
+            ]
+          ],
+          "extra_memberships": [
+            [
+              858,
+              860,
+              873,
+              1269,
+              1279,
+              1285
+            ]
+          ],
+          "passed": false
+        }
+      },
+      "passed": false
+    },
+    {
+      "case": "1hsi",
+      "archive_sha256": "fc52aae7b35270a60935248ac58fde9b43f99c1ad3a878ad52b70265c34d62b6",
+      "pdb_sha256": "8567905eb362a492f6d77ba1236c39437e4d42a7d980532171866b5bfcbfba2d",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 34.48967785667628,
+      "features": {
+        "pocket": {
+          "oracle_count": 11,
+          "native_count": 11,
+          "exact_count": 11,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 13,
+          "native_count": 13,
+          "exact_count": 13,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1ida",
+      "archive_sha256": "98c729658230171cdc3b04dce9f2456c531712930ad552fe518e65da671811e8",
+      "pdb_sha256": "6234576ff89fd236f6a42ba9a57f4473fa476fe5b7e3cf1c541567c20f718ac6",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 36.15793309919536,
+      "features": {
+        "pocket": {
+          "oracle_count": 12,
+          "native_count": 12,
+          "exact_count": 12,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 5,
+          "native_count": 5,
+          "exact_count": 5,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1ifb",
+      "archive_sha256": "f23b24a3d3f259bf0b2db382c43cbcd09c8a49b0d627ceee37305d6c2ab3a4d8",
+      "pdb_sha256": "f4d5d24f7a1a4ce7b2d6e4de80164236fe091b13f363167490a5f270f2a6f50d",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 24.1282803080976,
+      "features": {
+        "pocket": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 4,
+          "native_count": 4,
+          "exact_count": 4,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1inc",
+      "archive_sha256": "98fa367a31074752871a044dae2cada8ba68fd5c20eaead8abc190a242cfeb2c",
+      "pdb_sha256": "b17a77ba4264aeb331dfda71eb385ea90f96dc2e069bbd1db162e26d22261b46",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 43.662051065824926,
+      "features": {
+        "pocket": {
+          "oracle_count": 19,
+          "native_count": 19,
+          "exact_count": 19,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 13,
+          "native_count": 13,
+          "exact_count": 13,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 19,
+          "native_count": 19,
+          "exact_count": 19,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1mtw",
+      "archive_sha256": "c30f510c3b5be77dd96500bc0b4c0a5c91ffb772e181d146d6d3180e94534778",
+      "pdb_sha256": "c9fd27a0e0ff52af49614d501f71e85fb11ce21ae0f0e60c1efaa52bda0ccab8",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 39.15532452426851,
+      "features": {
+        "pocket": {
+          "oracle_count": 10,
+          "native_count": 10,
+          "exact_count": 10,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 11,
+          "native_count": 11,
+          "exact_count": 11,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1rbp",
+      "archive_sha256": "26d3a85862e96247b951b327d4042b8f5e9659df883c8df2702435bb3d3102f5",
+      "pdb_sha256": "bb917306286305e19f605bc5ade8dfc5dd38dec97bd1c4335e660720fbad6ec2",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 34.27226180024445,
+      "features": {
+        "pocket": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 7,
+          "native_count": 7,
+          "exact_count": 7,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 17,
+          "native_count": 17,
+          "exact_count": 17,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1rob",
+      "archive_sha256": "c9bee4711311c3fc8ee7d6400207031e944ef020024bab5f74cbcabb306b187a",
+      "pdb_sha256": "28df3ea8487986a02cfd540655b61db83c1af3a65801ec7773da519868426aa3",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 21.78129283990711,
+      "features": {
+        "pocket": {
+          "oracle_count": 8,
+          "native_count": 8,
+          "exact_count": 8,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 10,
+          "native_count": 10,
+          "exact_count": 10,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1rop",
+      "archive_sha256": "41200b3b55bf1bde6493b427e3db8e32d044237c2b840472624ccd4499686ab0",
+      "pdb_sha256": "b1d46deb144851db9a9e63d57071f5a1781d76188b1dc289e7a7d781b19cdd8e",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 10.623308965936303,
+      "features": {
+        "pocket": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1snc",
+      "archive_sha256": "dc58d8e2401c59dea9194ffbd91f0f875386e0034b6140cba6f3b7012cc9df5d",
+      "pdb_sha256": "1896e1eaa5f33330d536102525d8536132f53aca3fcc41098fd44ec29088bee2",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 25.635528673417866,
+      "features": {
+        "pocket": {
+          "oracle_count": 5,
+          "native_count": 5,
+          "exact_count": 5,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 8,
+          "native_count": 8,
+          "exact_count": 8,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1srf",
+      "archive_sha256": "efba5734def59d592bc379223d8cfb928046c1c8a1ad721bab73733f564a3ea4",
+      "pdb_sha256": "7fc1653e09fccdfe660e486a4070cd2dd184c017abfbc3c6065626b339674a1c",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 44.027231592684984,
+      "features": {
+        "pocket": {
+          "oracle_count": 18,
+          "native_count": 18,
+          "exact_count": 18,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 12,
+          "native_count": 12,
+          "exact_count": 12,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 21,
+          "native_count": 21,
+          "exact_count": 21,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1stn",
+      "archive_sha256": "853fa2d822adc1e43c5d1330ad7392dfaf14c67c9135c5d5b88a3fbd7c696295",
+      "pdb_sha256": "a34b2a047a311e356f902be2601f06ee224494ff5f93ab7ba15207ea84f99bc3",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 26.009214038960636,
+      "features": {
+        "pocket": {
+          "oracle_count": 11,
+          "native_count": 11,
+          "exact_count": 11,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 7,
+          "native_count": 7,
+          "exact_count": 7,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 11,
+          "native_count": 11,
+          "exact_count": 11,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "1stp",
+      "archive_sha256": "0e80ae5ab12e4339ff40f24c13ef65df829f50cc4efe9c91e17839a6b4e82b5a",
+      "pdb_sha256": "39c5922d3c24c9b9110fde936915d1904e51d5d929d561035a28f94b626c97a3",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 22.200586804188788,
+      "features": {
+        "pocket": {
+          "oracle_count": 5,
+          "native_count": 5,
+          "exact_count": 5,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "2ctv",
+      "archive_sha256": "0402c45ccdb0b2b87188b0feabe5f9eef1362eb637066ac74a736915dbd1e507",
+      "pdb_sha256": "921edd1a122bf0f58f42fb204099c460a3be3bb1f0300e2be48da15885d83936",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 43.90218119882047,
+      "features": {
+        "pocket": {
+          "oracle_count": 13,
+          "native_count": 13,
+          "exact_count": 13,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 16,
+          "native_count": 16,
+          "exact_count": 16,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "2ifb",
+      "archive_sha256": "5c79a41768769edcfadcd53b5f5284752926f748ea67def53c715d9d230770ab",
+      "pdb_sha256": "b052f3ebfc1fa14c7a655ec524df77196639e18162d18825486bea27147c818a",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 24.791465922258794,
+      "features": {
+        "pocket": {
+          "oracle_count": 10,
+          "native_count": 10,
+          "exact_count": 10,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 11,
+          "native_count": 11,
+          "exact_count": 11,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "2lyz",
+      "archive_sha256": "8ce53d49eb2989d0df9cc95631663803185cac05850ca8464b7312270c1a105f",
+      "pdb_sha256": "4ed087248c4344e1fac9a6d1c94b6c4cfcdec654c9f2a7c1909e6c5ce6ab82d1",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 23.419859936460853,
+      "features": {
+        "pocket": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "2pk4",
+      "archive_sha256": "05aa0478f5f62f4d0ad0bf1b3982318c5525d28b2c1535bf93f27dd28b0b9c73",
+      "pdb_sha256": "491d6fc18883b7b3f82c8b9c85023129a7390c7120ba94eb16b199801f2ee1c1",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 14.780542802996933,
+      "features": {
+        "pocket": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 4,
+          "native_count": 4,
+          "exact_count": 4,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "2tga",
+      "archive_sha256": "3871bd25955aa20d2961f18515e6e8b13150777db94508e4ea1033be6eb7de1d",
+      "pdb_sha256": "b0137be0ceeee84dc633d1d50ec324fb6a088e1a2ff91e43d9984487a1a5ef40",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 39.516094150952995,
+      "features": {
+        "pocket": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 16,
+          "native_count": 16,
+          "exact_count": 16,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 15,
+          "native_count": 15,
+          "exact_count": 15,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "3phv",
+      "archive_sha256": "ab12f20c3f8de4e50b81ea8c5f614af0123e765a156b93aba8de097282f8c264",
+      "pdb_sha256": "7d90dcc2492fe9144a81e264373baca96ea33889212baba5d4f6782eaea4ea61",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 17.090805216692388,
+      "features": {
+        "pocket": {
+          "oracle_count": 8,
+          "native_count": 8,
+          "exact_count": 8,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 11,
+          "native_count": 11,
+          "exact_count": 11,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "3ptb",
+      "archive_sha256": "858a8ebe1f99a3177444be694d6648bb51658ce3a447ad96d9d0cd3dfb97b82d",
+      "pdb_sha256": "c079cac40dc56c2e6d62497ae5db47e2510ea9c91aaa539ee68bf0c93aa41dbb",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 39.918383405543864,
+      "features": {
+        "pocket": {
+          "oracle_count": 12,
+          "native_count": 12,
+          "exact_count": 12,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 13,
+          "native_count": 13,
+          "exact_count": 13,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "3ptn",
+      "archive_sha256": "0a8467fa8ceca6bd7e66ca5b20a3f86f1e5e8382ec6cc38101e03401cb66d3c8",
+      "pdb_sha256": "850f3d745d9c9b85c01f90d46bc5075e78477e403e703c5e03af94e5365ef4d0",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 38.68964384216815,
+      "features": {
+        "pocket": {
+          "oracle_count": 17,
+          "native_count": 17,
+          "exact_count": 17,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 17,
+          "native_count": 17,
+          "exact_count": 17,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "3tms",
+      "archive_sha256": "09892b62517569eb68dc5f8a7fe24c6c2b20462e420ec2e1fbcb8851d0c7be69",
+      "pdb_sha256": "64bb9154cdd6cd3334d793c9ed5d66bd398ec6ce68a0f6d07e1c22dbe200a03a",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 50.78915745485574,
+      "features": {
+        "pocket": {
+          "oracle_count": 12,
+          "native_count": 12,
+          "exact_count": 12,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 17,
+          "native_count": 17,
+          "exact_count": 17,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 14,
+          "native_count": 14,
+          "exact_count": 14,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "4ca2",
+      "archive_sha256": "aeba212822a07c31353bb449bc727f6c7ab23a71b46c605c2945fea85a5b85ae",
+      "pdb_sha256": "b6f2d977d083f55d62b7fec94ca5f7df90f331ba1f57ebd49a08df75120caa1f",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 50.36486501339823,
+      "features": {
+        "pocket": {
+          "oracle_count": 12,
+          "native_count": 12,
+          "exact_count": 12,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 15,
+          "native_count": 15,
+          "exact_count": 15,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 6,
+          "native_count": 6,
+          "exact_count": 6,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 18,
+          "native_count": 18,
+          "exact_count": 18,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "4phv",
+      "archive_sha256": "1431484ad7351b5a83bd0b17ad847ea4ff81b4088d2751b64cbcb7ac3942ca0d",
+      "pdb_sha256": "af9cd62c7304e3eb61a376cda317e252668fb021b5795428d8bdc8c9a07d7860",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 34.91509575676173,
+      "features": {
+        "pocket": {
+          "oracle_count": 17,
+          "native_count": 17,
+          "exact_count": 17,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 5,
+          "native_count": 5,
+          "exact_count": 5,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 19,
+          "native_count": 19,
+          "exact_count": 19,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "5dfr",
+      "archive_sha256": "1e184eddc24fc3b8758886376c35ee679dd1a62fb2aac09e571595e27e09d73c",
+      "pdb_sha256": "fd642a68a9c16c73252a68d68931c9e23e3700ac28b9293581177fd5753344f2",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 28.484280684031546,
+      "features": {
+        "pocket": {
+          "oracle_count": 10,
+          "native_count": 10,
+          "exact_count": 10,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 3,
+          "native_count": 3,
+          "exact_count": 3,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 2,
+          "native_count": 2,
+          "exact_count": 2,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 13,
+          "native_count": 13,
+          "exact_count": 13,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    },
+    {
+      "case": "8rat",
+      "archive_sha256": "19f08c9e20df50c3a4f8048b4435d843ce65c2c58a908ceef2187c926dc0b91b",
+      "pdb_sha256": "87e7228f66b2719a5d2eab954f79bf8183f599886038fd73d3bc31ee0b2e46c0",
+      "policy": {
+        "radii_model": "castp3_protor",
+        "pocket_definition": "castp3",
+        "selection": "molecule_type in [\"protein\", \"peptide\"]",
+        "probe_radius": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "probe_limited_depth": false,
+        "peripheral_atom_expansion_steps": 0,
+        "alpha_boundary_epsilon_length": {
+          "value": 0.0,
+          "unit": "angstrom"
+        },
+        "alpha_boundary_face_epsilon_rank": 0
+      },
+      "duration_seconds": 21.41942281089723,
+      "features": {
+        "pocket": {
+          "oracle_count": 11,
+          "native_count": 11,
+          "exact_count": 11,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "void": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "channel": {
+          "oracle_count": 1,
+          "native_count": 1,
+          "exact_count": 1,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "branched_channel": {
+          "oracle_count": 0,
+          "native_count": 0,
+          "exact_count": 0,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        },
+        "mouth": {
+          "oracle_count": 12,
+          "native_count": 12,
+          "exact_count": 12,
+          "missing_memberships": [],
+          "extra_memberships": [],
+          "passed": true
+        }
+      },
+      "passed": true
+    }
+  ],
+  "complete": true,
+  "python_version": "3.13.14",
+  "scientific_base_commit": "ce69d25e4e5639fa248b1a440547eadc259eb20f",
+  "membership_baseline_sha256": "e5a56bbebcb3bb6b0376b01e0405b9ef9a1488e43a8cf0d115159c5603230af3",
+  "orchestration_script_sha256": "6f92f7af1b441603870ed96dd2721ccd4ad486215ffe65544e816cc1e0f6b9b7",
+  "workers": 3,
+  "physicochemical_properties": "disabled; do not affect geometric memberships",
+  "scientific_source_sha256": {
+    "devtools/castp/compare_castp3_oracles.py": "e5e2d0a3bd6543d116d35ac4611eb1caa08a17c88f2fdc18a12bbf2578989094",
+    "topomt/third_party/castp3/__init__.py": "ca33bc39a6b174c0f0d325a544481aa172da828fb961e3223b5103c7ed551662",
+    "topomt/third_party/castp3/_native_impl.py": "92d2b354ab3cb625dc47377c149bda01fb9f2e96eeb69d047cc6e96a6f21658f",
+    "topomt/third_party/castp3/api.py": "b123a3381b1b4ab9c7b7a7d7ac53458fd99b6f26444abaa83dc6734d9e327eb8",
+    "topomt/third_party/castp3/core/castp_core/__init__.py": "fd67bd4311284652cb886968b7b9a8d78630c5ab71e7b1635567f569c95c7b46",
+    "topomt/third_party/castp3/core/castp_core/components.py": "9736e44599ad84c2b14e6bda987f80c7f80fd6a1cb282326fcf7c78923eef41b",
+    "topomt/third_party/castp3/core/castp_core/exact.py": "e0bea997d7df2626179e2d88f7d58f138f2496c835e81695c2e530e3de5f437d",
+    "topomt/third_party/castp3/core/castp_core/geometry.py": "76adf2c87d7b749aabed69f982044b2d93b8ca780e34a59992109210628e0429",
+    "topomt/third_party/castp3/core/castp_core/metrics.py": "4a462ec5d0480fded3d1a1ea851f8a8b1b974c0ae90b3028093460e0f1402d46",
+    "topomt/third_party/castp3/core/castp_core/mouths.py": "8eb0afbdf921f4688e8005627318ef89c732a7e4dff1685f1651a4bcf35dc660",
+    "topomt/third_party/castp3/core/castp_core/volbl.py": "537e5039ddade379d70989e2905cd22fd0d047dead7378404d950295b92f003f",
+    "topomt/third_party/castp3/files.py": "35ea417e95c2b8e33ddfd62d2f828e817a244e2cdb32b0cf001b01d3002bddae",
+    "topomt/third_party/castp3/native.py": "a0af538c3f1a9c014c5d3dd4356054725809ad70e67f922c4e723d083bf3da3d",
+    "topomt/third_party/castp3/servers/__init__.py": "1a6704f3c5634fa71a153e3db212819233579856e553b9a5f9161bcce86d0cb9",
+    "topomt/third_party/castp3/servers/_castpfold_legacy.py": "d01d4e317ce9c0cfeb9b5b98d3a554af8b5e318d417c754f05fa6f2d3c068a40",
+    "topomt/third_party/castp3/servers/castp3.py": "8fb9adf3122d7f530e2bf0e1ed1b7feb293462310c2a42ad8c74a2d1aac41607",
+    "topomt/third_party/castp3/servers/castpfold.py": "4eba88bffac39426ce40f3b749fce391aeea7f57e475d8fa2f17cc1fb76d7371",
+    "topomt/weighted_delaunay_mesh.py": "989cc362a7fc340611b94b872398b2c384cb0cf0ef391b855ce65987498cfbfb"
+  }
+}

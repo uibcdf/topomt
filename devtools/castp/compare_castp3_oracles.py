@@ -206,6 +206,7 @@ def audit_castp3_oracle_zip(
     zip_file: str | Path,
     *,
     radii_model: str = 'protor',
+    pocket_definition: str = 'literature',
     probe_limited_depth: bool = False,
     peripheral_atom_expansion_steps: int = 0,
     alpha_boundary_epsilon_length: float = 0.0,
@@ -267,6 +268,7 @@ def audit_castp3_oracle_zip(
             selection=selection,
             probe_radius=probe_radius,
             radii_model=radii_model,
+            pocket_definition=pocket_definition,
             probe_limited_depth=probe_limited_depth,
             peripheral_atom_expansion_steps=int(peripheral_atom_expansion_steps),
             alpha_boundary_epsilon_length=float(alpha_boundary_epsilon_length),
@@ -289,6 +291,7 @@ def audit_castp3_oracle_zip(
         'pdb_sha256': pdb_sha256,
         'policy': {
             'radii_model': radii_model,
+            'pocket_definition': pocket_definition,
             'selection': selection,
             'probe_radius': {'value': probe_radius, 'unit': 'angstrom'},
             'probe_limited_depth': probe_limited_depth,
@@ -309,6 +312,7 @@ def compare_castp3_oracle_zip(
     zip_file: str | Path,
     *,
     radii_model: str = 'protor',
+    pocket_definition: str = 'literature',
     probe_limited_depth: bool = False,
     peripheral_atom_expansion_steps: int = 0,
     alpha_boundary_epsilon_length: float = 0.0,
@@ -321,6 +325,7 @@ def compare_castp3_oracle_zip(
     audit = audit_castp3_oracle_zip(
         zip_file,
         radii_model=radii_model,
+        pocket_definition=pocket_definition,
         probe_limited_depth=probe_limited_depth,
         peripheral_atom_expansion_steps=peripheral_atom_expansion_steps,
         alpha_boundary_epsilon_length=alpha_boundary_epsilon_length,
@@ -385,6 +390,9 @@ def main() -> None:
     parser.add_argument('--ids', nargs='*', help='Explicit PDB IDs to compare.')
     parser.add_argument('--limit', type=int, default=None)
     parser.add_argument('--radii-model', default='protor')
+    parser.add_argument(
+        '--pocket-definition', choices=['literature', 'castp3'], default='literature'
+    )
     parser.add_argument('--selection', default=DEFAULT_SELECTION)
     parser.add_argument('--probe-radius', type=float, default=1.4)
     parser.add_argument('--probe-limited-depth', action='store_true', default=False)
@@ -432,6 +440,7 @@ def main() -> None:
     calculate = partial(
         audit_castp3_oracle_zip,
         radii_model=args.radii_model,
+        pocket_definition=args.pocket_definition,
         probe_limited_depth=args.probe_limited_depth,
         peripheral_atom_expansion_steps=args.peripheral_atom_expansion_steps,
         alpha_boundary_epsilon_length=args.alpha_boundary_epsilon_length,

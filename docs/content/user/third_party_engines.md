@@ -250,7 +250,8 @@ The local reconstruction can run without a CASTp executable or service:
 
 ```python
 topography = tmt.third_party.castp3.get_topography(
-    'protein.pdb', backend='native', radii_model='castp3_protor', probe_radius=1.4
+    'protein.pdb', backend='native', radii_model='castp3_protor',
+    pocket_definition='castp3', probe_radius=1.4
 )
 ```
 
@@ -264,17 +265,37 @@ This includes all seven cavities of hydrogen-bearing 1CGE, corrected under
 [issue #85](https://github.com/uibcdf/topomt/issues/85), and the complete
 closed-void panels of 1A4J and 1CDO.
 
-A separate corrected forty-system comparison matches exact atom-set multisets
-for **468 of 534 open pockets**, **45 of 52 channels**, **8 of 17 branched
-channels** and **520 of 603 aggregated exported mouth records**. All 388
-closed-void atom sets match in that broader panel; the independent SA/MS
-measurement evidence remains the 225-cavity panel above. Equal counts alone
-do not establish matching features. Aggregate mouth atom records do not certify
-individual mouth topology or triangles. The completed comparison is recorded in
-[issue #87](https://github.com/uibcdf/topomt/issues/87); residual component and
-lining/rim discrepancies remain under
-[issue #88](https://github.com/uibcdf/topomt/issues/88). Open-feature SA/MS
-measurements and general server equivalence remain experimental.
+The local route offers two independently selectable pocket definitions:
+
+| `pocket_definition` | Region rule | Interpretation |
+|---|---|---|
+| `'literature'` (default) | Maximum reachable depth; any route to the exterior excludes the tetrahedron. | Non-wrapping definition in the [1998 pocket-construction paper](https://doi.org/10.1016/S0166-218X(98)00067-5). |
+| `'castp3'` | Lowest-rank reachable finite terminal; exterior only if no finite terminal is reachable. | Empirical compatibility inferred from archived CASTp3/CASTpFold sphere regions. |
+
+This choice is independent of `radii_model`: either definition accepts either
+radius profile. Both report component vertices as lining atoms and actual
+mouth-triangle vertices as rim atoms. The old exterior-opposite atom
+substitutions are no longer used, so outputs can change under the default
+literature definition too. `probe_limited_depth=True` remains a diagnostic
+for the literature definition and is rejected with `'castp3'`.
+Each feature preserves the choices and diagnostic switches in
+`feature.properties['castp3_execution']`. Select the options explicitly for
+reproducible comparisons.
+
+The compatibility definition is an inference from measurements, not a claim
+to have recovered the server's source or proved a server defect. A fresh
+forty-system calculation with explicit `'castp3'` and `'castp3_protor'` matches
+all compared atom classes in **39/40 systems**: **533/534 pockets**, **388/388
+closed voids**, **52/52 channels**, **17/17 branched channels** and **602/603
+aggregate mouth records**. Complete deltas and the dated earlier baselines
+remain under [issue #88](https://github.com/uibcdf/topomt/issues/88). The corrected
+local numeric defect in 1CDO is tracked under
+[#89](https://github.com/uibcdf/topomt/issues/89). The remaining 1HIV disagreement
+is associated with modified HETATM residues absent from the server contribution
+list. General protein selection retains those residues; compare identical atom
+inputs before interpreting a disagreement.
+Exact atom memberships do not establish individual mouth triangulation or
+open-feature SA/MS metric equivalence, which remain experimental.
 
 `castp3_protor` is an explicit empirical server profile with 1.40 Å
 ASP/GLU carboxylate oxygen radii, inferred from exported sphere geometry.

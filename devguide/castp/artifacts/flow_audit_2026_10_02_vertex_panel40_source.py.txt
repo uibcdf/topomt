@@ -1,7 +1,7 @@
 """Separate archived bulb geometry from atom reporting in CASTp3 flow audits.
 
-The two explicit production pocket definitions never use oracle memberships
-to choose a depth or a component. Historical artifacts retain their old policies.
+The minimum-reachable-sink branch is a diagnostic hypothesis, not a production
+policy. It never uses oracle memberships to choose a depth or a component.
 """
 
 import argparse
@@ -10,8 +10,8 @@ import json
 import sys
 import tempfile
 from collections import Counter
+from contextlib import ExitStack
 from pathlib import Path
-from typing import Literal
 from unittest.mock import patch
 from zipfile import ZipFile
 
@@ -29,11 +29,58 @@ from devtools.castp.compare_castp3_oracles import (
 from topomt.io.load_CASTp import _parse_poc_info_file
 from topomt.third_party.castp3 import _native_impl
 from topomt.third_party.castp3.core.castp_core import components
-from topomt.third_party.castp3.core.castp_core.components import (
-    _flow_successors,
-    _minimum_reachable_sinks,
-)
 from topomt.third_party.castp3.core.castp_core.geometry import build_castp_geometry
+
+
+def _minimum_reachable_sinks(
+    successors: list[list[int]], ranks: list[int], infinity: int
+) -> np.ndarray:
+    """Choose the lowest-ranked reachable terminal; reject unresolved cycles."""
+    if len(ranks) != infinity or len(successors) != infinity + 1:
+        raise ValueError('Flow graph and exterior marker do not agree.')
+    depths: np.ndarray = np.full(infinity + 1, -1, dtype=int)
+    depths[infinity] = infinity
+    visiting = set()
+
+    def visit(node: int) -> int:
+        if depths[node] >= 0:
+            return int(depths[node])
+        if node in visiting:
+            raise ValueError('Minimum-reachable flow contains an unresolved cycle.')
+        visiting.add(node)
+        terminals = [visit(neighbor) for neighbor in successors[node]]
+        depths[node] = (
+            min(
+                terminals,
+                key=lambda sink: (
+                    (ranks[sink], sink) if sink < infinity else (np.inf, sink)
+                ),
+            )
+            if terminals
+            else node
+        )
+        visiting.remove(node)
+        return int(depths[node])
+
+    for node in range(infinity):
+        visit(node)
+    return depths[:infinity]
+
+
+def _flow_successors(geometry) -> list[list[int]]:
+    """Materialize current exact hidden-face links, including the exterior."""
+    mesh = geometry.mesh
+    successors: list[list[int]] = [[] for _ in range(mesh.n_simplices + 1)]
+    for simplex in range(mesh.n_simplices):
+        for face, neighbor in enumerate(mesh.neighbors[simplex]):
+            if geometry.face_is_on_hull[simplex, face]:
+                if components._triangle_is_attached(geometry, simplex, face):
+                    successors[simplex].append(mesh.n_simplices)
+            elif neighbor >= 0 and components._hidden_triangle(
+                geometry, simplex, face, int(neighbor)
+            ):
+                successors[simplex].append(int(neighbor))
+    return successors
 
 
 def _match_bulbs(geometry, bulbs: list[list[dict]], serials: np.ndarray) -> list[dict]:
@@ -86,13 +133,27 @@ def _match_bulbs(geometry, bulbs: list[list[dict]], serials: np.ndarray) -> list
     return result
 
 
-def audit_flow_archive(archive_path: Path) -> dict:
+def _mouth_triangle_vertices(_geometry, mouth_cluster: list, _active_nodes) -> set[int]:
+    """Report vertices of the actual mouth triangles, including attached faces."""
+    return {
+        int(atom)
+        for face in mouth_cluster
+        for atom in (
+            face.face_atoms if isinstance(face, components.MouthFaceRecord) else face
+        )
+    }
+
+
+def audit_flow_archive(archive_path: Path, *, vertex_reporting: bool = False) -> dict:
     """Audit two flow policies against an exact archived PDB and its outputs.
 
     Parameters
     ----------
     archive_path
         ZIP containing one PDB, bulb JSON and original CASTp feature records.
+    vertex_reporting
+        Also evaluate minimum-depth regions with component-vertex lining and
+        mouth-triangle vertices, without exterior-opposite atom substitution.
 
     Returns
     -------
@@ -144,13 +205,31 @@ def audit_flow_archive(archive_path: Path) -> dict:
             ('maximum', original_depths),
             ('minimum_reachable', minimum_depths),
         ]
+        if vertex_reporting:
+            policies.append(('minimum_vertex_reporting', minimum_depths))
         for name, depths in policies:
-            definition: Literal['literature', 'castp3'] = (
-                'literature' if name == 'maximum' else 'castp3'
-            )
-            raw = components.build_castp_feature_records(
-                geometry, probe_radius=1.4, pocket_definition=definition
-            )
+            with ExitStack() as substitutions:
+                substitutions.enter_context(
+                    patch.object(
+                        components, '_compute_pocket_depths', lambda _geometry: depths
+                    )
+                )
+                if name == 'minimum_vertex_reporting':
+                    substitutions.enter_context(
+                        patch.object(
+                            components,
+                            '_mouth_cluster_atom_indices_for_reporting',
+                            _mouth_triangle_vertices,
+                        )
+                    )
+                    substitutions.enter_context(
+                        patch.object(
+                            components,
+                            '_attached_mouth_exterior_opposite_atom_indices',
+                            return_value=set(),
+                        )
+                    )
+                raw = components.build_castp_feature_records(geometry, probe_radius=1.4)
             # Physicochemical properties do not enter this fixed-geometry audit.
             with patch.object(
                 _native_impl, 'get_physicochemical_properties', return_value={}
@@ -275,6 +354,7 @@ def main() -> int:
         '--zip-dir', type=Path, default=Path('topomt/data/CASTpFold_server')
     )
     parser.add_argument('--output-json', type=Path, required=True)
+    parser.add_argument('--vertex-reporting', action='store_true')
     args = parser.parse_args()
     report = {
         'schema': 'topomt.castp3.flow-audit@1',
@@ -295,7 +375,10 @@ def main() -> int:
     }
     for identifier in args.ids:
         try:
-            case = audit_flow_archive(args.zip_dir / f'{identifier}.zip')
+            case = audit_flow_archive(
+                args.zip_dir / f'{identifier}.zip',
+                vertex_reporting=args.vertex_reporting,
+            )
             print(
                 identifier,
                 {
