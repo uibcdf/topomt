@@ -15,6 +15,13 @@ match across forty systems. Residual memberships remain under #88.
 Closed-void analytical measures retain their
 separate validation contract. Exact atom sets do not certify metric parity.
 
+The subsequent [1STP flow diagnosis](checkpoint_2026_10_02_1stp_flow.md)
+reconstructs all fifty exported sphere regions and vertex-lining sets on
+1STP plus six controls with a minimum-reachable-depth hypothesis. Existing
+final reporting rules regress under that alternative, so production defaults
+remain unchanged and #88 remains open. Broader validation and geometric
+mouth/atom attribution precede adoption.
+
 Latest preparation slice: the
 [hydrogen and terminal-policy checkpoint](checkpoint_2026_10_01_hydrogen_and_terminal_policy.md)
 resolves the three missing 1CGE voids by excluding explicit H from ProtOr

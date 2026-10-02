@@ -6,6 +6,10 @@ and the next engineering steps.
 
 ## Main documents
 
+- [castp/checkpoint_2026_10_02_1stp_flow.md](castp/checkpoint_2026_10_02_1stp_flow.md)
+  1STP hidden-face bifurcation, exported sphere-region reconstruction on six
+  additional controls and separation from still-discrepant atom/mouth export.
+
 - [castp/checkpoint_2026_10_02_corrected_pocket_membership.md](castp/checkpoint_2026_10_02_corrected_pocket_membership.md)
   Recalculated modern pocket/channel and aggregate mouth atom sets after
   corrected input preparation, with exact multiset comparisons and residuals.

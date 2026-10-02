@@ -59,3 +59,16 @@ molecular guards. Re-evaluate every affected class on all forty controls,
 preserving exact closed-void memberships and the independent 225-void,
 900-measure panel. Distinguish atom membership, component topology, individual
 mouth boundaries and metric definitions. No DFND/Topography semantic change.
+
+## 2026-10-02: 1STP flow diagnosis
+
+The [focused checkpoint](../castp/checkpoint_2026_10_02_1stp_flow.md) now
+distinguishes sphere-region reconstruction from final atom export. The missing
+SER A93 nitrogen supports an archived orthosphere whose native tetrahedron is
+sent to the exterior by the maximum-depth flow rule. The minimum-reachable
+alternative reproduces all fifty exported sphere regions and component-vertex
+lining sets in 1STP plus six prior controls. Applying existing reporting rules
+to those regions nevertheless regresses final pocket and mouth memberships.
+No production default changes. Extend geometry evidence to the forty-system
+panel and derive atom/mouth reporting before promoting the alternative.
+Python 3.11/3.12 CI work is deferred at the user's explicit request.

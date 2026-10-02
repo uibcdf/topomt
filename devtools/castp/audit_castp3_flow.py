@@ -1,0 +1,361 @@
+"""Separate archived bulb geometry from atom reporting in CASTp3 flow audits.
+
+The minimum-reachable-sink branch is a diagnostic hypothesis, not a production
+policy. It never uses oracle memberships to choose a depth or a component.
+"""
+
+import argparse
+import hashlib
+import json
+import sys
+import tempfile
+from collections import Counter
+from pathlib import Path
+from unittest.mock import patch
+from zipfile import ZipFile
+
+import numpy as np
+from scipy.spatial import cKDTree
+
+from devtools.castp.audit_castp3_radii import audit_bulb_contacts
+from devtools.castp.compare_castp3_oracles import (
+    DEFAULT_SELECTION,
+    _atom_id_lookup,
+    compare_membership_details,
+    native_atom_id_sets,
+    oracle_atom_id_sets,
+)
+from topomt.io.load_CASTp import _parse_poc_info_file
+from topomt.third_party.castp3 import _native_impl
+from topomt.third_party.castp3.core.castp_core import components
+from topomt.third_party.castp3.core.castp_core.geometry import build_castp_geometry
+
+
+def _minimum_reachable_sinks(
+    successors: list[list[int]], ranks: list[int], infinity: int
+) -> np.ndarray:
+    """Choose the lowest-ranked reachable terminal; reject unresolved cycles."""
+    if len(ranks) != infinity or len(successors) != infinity + 1:
+        raise ValueError('Flow graph and exterior marker do not agree.')
+    depths: np.ndarray = np.full(infinity + 1, -1, dtype=int)
+    depths[infinity] = infinity
+    visiting = set()
+
+    def visit(node: int) -> int:
+        if depths[node] >= 0:
+            return int(depths[node])
+        if node in visiting:
+            raise ValueError('Minimum-reachable flow contains an unresolved cycle.')
+        visiting.add(node)
+        terminals = [visit(neighbor) for neighbor in successors[node]]
+        depths[node] = (
+            min(
+                terminals,
+                key=lambda sink: (
+                    (ranks[sink], sink) if sink < infinity else (np.inf, sink)
+                ),
+            )
+            if terminals
+            else node
+        )
+        visiting.remove(node)
+        return int(depths[node])
+
+    for node in range(infinity):
+        visit(node)
+    return depths[:infinity]
+
+
+def _flow_successors(geometry) -> list[list[int]]:
+    """Materialize current exact hidden-face links, including the exterior."""
+    mesh = geometry.mesh
+    successors: list[list[int]] = [[] for _ in range(mesh.n_simplices + 1)]
+    for simplex in range(mesh.n_simplices):
+        for face, neighbor in enumerate(mesh.neighbors[simplex]):
+            if geometry.face_is_on_hull[simplex, face]:
+                if components._triangle_is_attached(geometry, simplex, face):
+                    successors[simplex].append(mesh.n_simplices)
+            elif neighbor >= 0 and components._hidden_triangle(
+                geometry, simplex, face, int(neighbor)
+            ):
+                successors[simplex].append(int(neighbor))
+    return successors
+
+
+def _match_bulbs(geometry, bulbs: list[list[dict]], serials: np.ndarray) -> list[dict]:
+    """Match only compatible, empty printed spheres to native supporting tetrahedra."""
+    tree = cKDTree(geometry.mesh.simplex_centers)
+    result = []
+    for feature_id, feature_bulbs in enumerate(bulbs, 1):
+        matched = []
+        for bulb in feature_bulbs:
+            center = np.asarray([bulb['c'][axis] for axis in 'xyz'])
+            distance, simplex = tree.query(center)
+            simplex = int(simplex)
+            contacts = audit_bulb_contacts(
+                geometry.atom_coordinates,
+                geometry.atom_radii - geometry.solvent_radius,
+                center,
+                float(bulb['r']),
+                geometry.solvent_radius,
+            )
+            vertices = set(
+                int(atom) for atom in geometry.mesh.simplex_atom_indices[simplex]
+            )
+            center_compatible = bool(
+                np.all(
+                    np.abs(geometry.mesh.simplex_centers[simplex] - center)
+                    <= 0.00005 + 1e-8
+                )
+            )
+            compatible = (
+                contacts['status'] == 'compatible'
+                and center_compatible
+                and vertices == set(contacts['contacts'])
+            )
+            matched.append(
+                {
+                    'center': center.tolist(),
+                    'radius_angstrom': float(bulb['r']),
+                    'compatible': compatible,
+                    'contact_serials': sorted(
+                        int(serials[index]) for index in contacts['contacts']
+                    ),
+                    'simplex': simplex if compatible else None,
+                    'simplex_serials': sorted(
+                        int(serials[index]) for index in vertices
+                    ),
+                    'center_error_angstrom': float(distance),
+                }
+            )
+        result.append({'server_id': feature_id, 'bulbs': matched})
+    return result
+
+
+def audit_flow_archive(archive_path: Path) -> dict:
+    """Audit two flow policies against an exact archived PDB and its outputs.
+
+    Parameters
+    ----------
+    archive_path
+        ZIP containing one PDB, bulb JSON and original CASTp feature records.
+
+    Returns
+    -------
+    dict
+        Source hashes, validated sphere/support matches, component multisets,
+        final atom-set comparisons and local hidden-face branches. All geometry
+        uses angstroms, a 1.4 angstrom probe and explicit ``castp3_protor``.
+
+    Raises
+    ------
+    ValueError
+        For ambiguous archive members or an unresolved minimum-flow cycle.
+
+    Examples
+    --------
+    ``audit_flow_archive(Path('topomt/data/CASTpFold_server/1stp.zip'))``
+    """
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        with ZipFile(archive_path) as archive:
+            for suffix in ('.pdb', '.bulb.json', '.pocInfo', '.poc', '.mouth'):
+                names = [name for name in archive.namelist() if name.endswith(suffix)]
+                if len(names) != 1:
+                    raise ValueError(f'Expected one {suffix} archive member.')
+                (root / Path(names[0]).name).write_bytes(archive.read(names[0]))
+        source = next(root.glob('*.pdb'))
+        geometry = build_castp_geometry(
+            source, selection=DEFAULT_SELECTION, radii_model='castp3_protor'
+        )
+        lookup = _atom_id_lookup(source)
+        serials = np.asarray(
+            [lookup[int(index)] for index in geometry.atom_indices_map]
+        )
+        bulbs = _match_bulbs(
+            geometry, json.loads(next(root.glob('*.bulb.json')).read_text()), serials
+        )
+        info = _parse_poc_info_file(next(root.glob('*.pocInfo')))
+        for row in bulbs:
+            row['server_n_mouths'] = int(info[row['server_id']]['n_mouths'])
+        successors = _flow_successors(geometry)
+        original_depths = components._compute_pocket_depths(geometry)
+        minimum_depths = _minimum_reachable_sinks(
+            successors, geometry.simplex_rho_ranks.tolist(), geometry.mesh.n_simplices
+        )
+        expected_atoms = oracle_atom_id_sets(root)
+        variants = {}
+        trace_nodes = set()
+        for name, depths in [
+            ('maximum', original_depths),
+            ('minimum_reachable', minimum_depths),
+        ]:
+            with patch.object(
+                components, '_compute_pocket_depths', lambda _geometry: depths
+            ):
+                raw = components.build_castp_feature_records(geometry, probe_radius=1.4)
+            # Physicochemical properties do not enter this fixed-geometry audit.
+            with patch.object(
+                _native_impl, 'get_physicochemical_properties', return_value={}
+            ):
+                normalized = [
+                    _native_impl._component_to_record(
+                        record, source, record['feature_type'], int(record['id'])
+                    )
+                    for record in raw
+                ]
+            atom_sets = native_atom_id_sets(normalized, lookup)
+            vertex_records = [
+                dict(record, atom_indices=record['component_atom_indices'])
+                for record in raw
+            ]
+            vertex_sets = native_atom_id_sets(vertex_records, lookup)
+            rows = []
+            oracle_sets = []
+            for bulb_row in bulbs:
+                complete = bool(bulb_row['bulbs']) and all(
+                    b['compatible'] for b in bulb_row['bulbs']
+                )
+                target = frozenset(
+                    b['simplex'] for b in bulb_row['bulbs'] if b['compatible']
+                )
+                if complete:
+                    oracle_sets.append(target)
+                best = max(
+                    raw,
+                    key=lambda record: len(
+                        target.intersection(record['tetrahedron_indices'])
+                    ),
+                )
+                current = set(best['tetrahedron_indices'])
+                missing = sorted(target - current)
+                trace_nodes.update(missing)
+                rows.append(
+                    {
+                        'server_id': bulb_row['server_id'],
+                        'bulbs_validated': complete,
+                        'nearest_component_id': best['id'],
+                        'nearest_component_type': best['feature_type'],
+                        'missing_simplices': missing,
+                        'extra_simplices': sorted(current - target),
+                        'exact': complete and target == current,
+                    }
+                )
+            native_sets = Counter(
+                frozenset(record['tetrahedron_indices']) for record in raw
+            )
+            oracle_counter = Counter(oracle_sets)
+            variants[name] = {
+                'bulb_regions': rows,
+                'geometry_exact_count': sum((oracle_counter & native_sets).values()),
+                'geometry_native_count': len(raw),
+                'geometry_validated_oracle_count': len(oracle_sets),
+                'geometry_oracle_region_count': len(bulbs),
+                'geometry_passed': (
+                    len(oracle_sets) == len(bulbs) == len(raw)
+                    and oracle_counter == native_sets
+                ),
+                'atom_memberships': {
+                    kind: compare_membership_details(
+                        atom_sets[kind], expected_atoms[kind]
+                    )
+                    for kind in expected_atoms
+                },
+                'component_vertex_memberships': {
+                    kind: compare_membership_details(
+                        vertex_sets[kind], expected_atoms[kind]
+                    )
+                    for kind in expected_atoms
+                    if kind != 'mouth'
+                },
+            }
+        trace_nodes.update(
+            neighbor
+            for node in list(trace_nodes)
+            for neighbor in successors[node]
+            if neighbor < geometry.mesh.n_simplices
+        )
+        traces = [
+            {
+                'simplex': node,
+                'serials': sorted(
+                    int(serials[index])
+                    for index in geometry.mesh.simplex_atom_indices[node]
+                ),
+                'rho_rank': int(geometry.simplex_rho_ranks[node]),
+                'maximum_depth': int(original_depths[node]),
+                'minimum_depth': int(minimum_depths[node]),
+                'hidden_face_successors': successors[node],
+            }
+            for node in sorted(trace_nodes)
+        ]
+        return {
+            'case': archive_path.stem,
+            'archive_sha256': hashlib.sha256(archive_path.read_bytes()).hexdigest(),
+            'pdb_sha256': hashlib.sha256(source.read_bytes()).hexdigest(),
+            'policy': {
+                'selection': DEFAULT_SELECTION,
+                'radii_model': 'castp3_protor',
+                'probe_radius_angstrom': 1.4,
+                'diagnostic_only': True,
+                'peripheral_atom_expansion_steps': 0,
+                'alpha_boundary_epsilon_length_angstrom': 0.0,
+                'alpha_boundary_face_epsilon_rank': 0,
+            },
+            'base_rank': int(geometry.base_rank),
+            'infinity_marker': geometry.mesh.n_simplices,
+            'bulbs': bulbs,
+            'variants': variants,
+            'flow_trace': traces,
+        }
+
+
+def main() -> int:
+    """Write source-identified per-case diagnostic evidence; retain errors."""
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--ids', nargs='+', required=True)
+    parser.add_argument(
+        '--zip-dir', type=Path, default=Path('topomt/data/CASTpFold_server')
+    )
+    parser.add_argument('--output-json', type=Path, required=True)
+    args = parser.parse_args()
+    report = {
+        'schema': 'topomt.castp3.flow-audit@1',
+        'requested_cases': args.ids,
+        'cases': [],
+        'complete': False,
+        'audit_script_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        'python_version': sys.version.split()[0],
+        'scientific_source_sha256': {
+            path.as_posix(): hashlib.sha256(path.read_bytes()).hexdigest()
+            for path in sorted(
+                [
+                    *Path('topomt/third_party/castp3').rglob('*.py'),
+                    Path('topomt/weighted_delaunay_mesh.py'),
+                ]
+            )
+        },
+    }
+    for identifier in args.ids:
+        try:
+            case = audit_flow_archive(args.zip_dir / f'{identifier}.zip')
+            print(
+                identifier,
+                {
+                    name: variant['geometry_exact_count']
+                    for name, variant in case['variants'].items()
+                },
+                flush=True,
+            )
+        except Exception as error:
+            case = {'case': identifier, 'error': f'{type(error).__name__}: {error}'}
+            print(identifier, case['error'], flush=True)
+        report['cases'].append(case)
+        args.output_json.write_text(json.dumps(report, indent=2) + '\n')
+    report['complete'] = not any('error' in case for case in report['cases'])
+    args.output_json.write_text(json.dumps(report, indent=2) + '\n')
+    return 0 if report['complete'] else 1
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
