@@ -2,6 +2,18 @@
 
 Date: 2026-04-29
 
+## 2026-10-02 recalculation after corrected input preparation
+
+The same thirty-eight inputs have now been recalculated with verified source
+identity, corrected implicit-H preparation and explicit `castp3_protor`.
+Current exact memberships are 386/443 pockets, 306/306 voids, 40/46 channels,
+7/10 branched channels and 435/499 aggregated exported mouth records. The
+historical results below remain dated evidence, rather than current counts.
+The [corrected forty-system checkpoint](checkpoint_2026_10_02_corrected_pocket_membership.md)
+adds 1A4J and 1CDO and retains complete source hashes and missing/extra sets.
+It supersedes this sweep's membership evidence for those fixed inputs and
+policies; it does not certify analytical open-feature metrics or mouth triangles.
+
 ## 2026-10-01 correction: oracle identity and bounded new evidence
 
 The old comparison harness mapped native indices onto raw PDB row positions.

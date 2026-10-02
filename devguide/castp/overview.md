@@ -1,13 +1,21 @@
 # CASTp / CASTpFold provider overview
 
-Reviewed: 2026-10-01 (repository and issue state). Scientific evidence dates are
+Reviewed: 2026-10-02 (repository and issue state). Scientific evidence dates are
 stated below; this organizational update does not rerun or extend that evidence.
 Role: integrated provider and comparison reference. The user resumed a bounded
 local CASTp3 reconstruction under [#79](https://github.com/uibcdf/topomt/issues/79).
 Broader provider work remains paused under the
 [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
-Latest scientific slice: the
+Latest feature-comparison slice: the
+[corrected pocket-membership checkpoint](checkpoint_2026_10_02_corrected_pocket_membership.md)
+recalculates pockets, channels and aggregated exported mouth records after
+the preparation corrections: 468/534 pocket sets and all 388 closed-void sets
+match across forty systems. Residual memberships remain under #88.
+Closed-void analytical measures retain their
+separate validation contract. Exact atom sets do not certify metric parity.
+
+Latest preparation slice: the
 [hydrogen and terminal-policy checkpoint](checkpoint_2026_10_01_hydrogen_and_terminal_policy.md)
 resolves the three missing 1CGE voids by excluding explicit H from ProtOr
 preparation. It implements only the observed terminal rules in the explicit

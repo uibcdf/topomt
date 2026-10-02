@@ -116,3 +116,23 @@ They are the same four DFND raw hash comparisons, two unavailable fpocket
 executable comparisons and missing `depdigest` installed metadata described
 above. No CASTp selector failure is reported. This is evidence for that
 completed cell only; the other cells and subsequent source remain uncertified.
+
+## 2026-10-02 completed 387f9b4 matrix evidence
+
+Run `36942562766` completed with all six test cells failing. GH Run Receptor
+named dependency metadata and DFND morphometrics failures; its bounded causes
+did not describe every failure. Native failed logs establish additional
+CASTp connectivity failures in both Ubuntu and macOS Python 3.11/3.12: seventy-two
+modern-void setup errors and six geometry-policy failures reach per-atom
+`n_bonds`, then NumPy's inconsistent empty-array dimensionality. The Python
+3.13 cells instead reach the CASTp tests without that error; Ubuntu reports
+1,968 passes and seven wider failures, macOS 1,967 passes and eight failures.
+
+MolSysMT's owning issue `uibcdf/molsysmt#283` is already closed with source
+fix `91f157eeb`. TopoMT CI still installs `3bcfaf4`, which predates that fix.
+Adopting and validating the corrected controlled provider source is consumer
+work here; no downstream bond-query implementation or silent fallback is
+appropriate. The local forty-system feature audit uses the working Python
+3.13 development environment and does not establish matrix compatibility.
+The other failures (DFND, fpocket, dependency metadata and additional older-cell
+scientific checks) remain part of this support gate. No passing matrix is claimed.

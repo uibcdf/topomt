@@ -1,12 +1,16 @@
 """Compare native CASTp3 records against persisted CASTpFold oracle ZIPs."""
 
-from __future__ import annotations
-
 import argparse
+import hashlib
+import json
+import sys
 import tempfile
+import time
 import zipfile
 from collections import Counter
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from dataclasses import dataclass
+from functools import partial
 from pathlib import Path
 
 import molsysmt as msm
@@ -52,6 +56,43 @@ def compare_atom_id_sets(
     oracle_counter = Counter(oracle_sets)
     exact_count = sum((native_counter & oracle_counter).values())
     return len(oracle_sets), len(native_sets), exact_count
+
+
+def compare_membership_details(
+    native_sets: list[frozenset[int]], oracle_sets: list[frozenset[int]]
+) -> dict:
+    """Compare exact atom memberships while preserving duplicate features.
+
+    Parameters
+    ----------
+    native_sets, oracle_sets
+        Feature atom sets in the same verified original PDB serial frame.
+
+    Returns
+    -------
+    dict
+        Counts, exact multiset matches and deterministic missing/extra sets.
+        Passing requires complete equality, including duplicate multiplicity.
+
+    Examples
+    --------
+    Empty evaluated feature populations pass when both sides are empty.
+    """
+    native = Counter(native_sets)
+    oracle = Counter(oracle_sets)
+    counts = compare_atom_id_sets(native_sets, oracle_sets)
+    return {
+        'oracle_count': counts[0],
+        'native_count': counts[1],
+        'exact_count': counts[2],
+        'missing_memberships': sorted(
+            sorted(atoms) for atoms in (oracle - native).elements()
+        ),
+        'extra_memberships': sorted(
+            sorted(atoms) for atoms in (native - oracle).elements()
+        ),
+        'passed': native == oracle,
+    }
 
 
 def oracle_atom_id_sets(extracted_dir: str | Path) -> dict[str, list[frozenset[int]]]:
@@ -161,7 +202,7 @@ def native_atom_id_sets(
     return result
 
 
-def compare_castp3_oracle_zip(
+def audit_castp3_oracle_zip(
     zip_file: str | Path,
     *,
     radii_model: str = 'protor',
@@ -172,9 +213,43 @@ def compare_castp3_oracle_zip(
     probe_radius: float = 1.4,
     selection: str = DEFAULT_SELECTION,
     feature_types: tuple[str, ...] = DEFAULT_FEATURE_TYPES,
-) -> list[ParityRow]:
-    """Compare one CASTpFold oracle ZIP against the native CASTp3 path."""
+) -> dict:
+    """Audit native feature memberships against one pinned CASTpFold archive.
 
+    Parameters
+    ----------
+    zip_file
+        Archive containing the exact source PDB and original feature exports.
+    radii_model, selection, probe_radius
+        Native input policy, atom selection and probe in angstroms.
+    probe_limited_depth
+        Select probe-limited depth; false uses the established full-depth route.
+    peripheral_atom_expansion_steps, alpha_boundary_face_epsilon_rank
+        Experimental diagnostic switches, disabled by default.
+    alpha_boundary_epsilon_length
+        Diagnostic boundary tolerance in angstroms, zero by default.
+    feature_types
+        Feature classes to compare; mouths are aggregated exported records.
+
+    Returns
+    -------
+    dict
+        Input hashes, explicit policy, duration and complete membership deltas.
+        Scalar SA/MS quantities and individual mouth topology are not audited.
+
+    Raises
+    ------
+    ValueError
+        If original atom identity cannot be verified against the source PDB.
+    Exception
+        Native calculation and original archive parsing errors propagate.
+
+    Examples
+    --------
+    ``audit_castp3_oracle_zip('1rop.zip', radii_model='castp3_protor')``
+    """
+
+    started = time.monotonic()
     zip_file = Path(zip_file)
     pdb_id = zip_file.stem.lower()
 
@@ -184,6 +259,7 @@ def compare_castp3_oracle_zip(
             handle.extractall(tmpdir_path)
 
         pdb_file = next(tmpdir_path.glob('*.pdb'))
+        pdb_sha256 = hashlib.sha256(pdb_file.read_bytes()).hexdigest()
         atom_id_by_index = _atom_id_lookup(pdb_file)
 
         records, mesh = native_castp3(
@@ -201,19 +277,67 @@ def compare_castp3_oracle_zip(
         oracle_sets = oracle_atom_id_sets(tmpdir_path)
         native_sets = native_atom_id_sets(records, atom_id_by_index)
 
-    rows = []
-    for feature_type in feature_types:
-        oracle_count, native_count, exact_count = compare_atom_id_sets(
-            native_sets.get(feature_type, []),
-            oracle_sets.get(feature_type, []),
+    features = {
+        feature_type: compare_membership_details(
+            native_sets.get(feature_type, []), oracle_sets.get(feature_type, [])
         )
+        for feature_type in feature_types
+    }
+    return {
+        'case': pdb_id,
+        'archive_sha256': hashlib.sha256(zip_file.read_bytes()).hexdigest(),
+        'pdb_sha256': pdb_sha256,
+        'policy': {
+            'radii_model': radii_model,
+            'selection': selection,
+            'probe_radius': {'value': probe_radius, 'unit': 'angstrom'},
+            'probe_limited_depth': probe_limited_depth,
+            'peripheral_atom_expansion_steps': peripheral_atom_expansion_steps,
+            'alpha_boundary_epsilon_length': {
+                'value': alpha_boundary_epsilon_length,
+                'unit': 'angstrom',
+            },
+            'alpha_boundary_face_epsilon_rank': alpha_boundary_face_epsilon_rank,
+        },
+        'duration_seconds': time.monotonic() - started,
+        'features': features,
+        'passed': all(result['passed'] for result in features.values()),
+    }
+
+
+def compare_castp3_oracle_zip(
+    zip_file: str | Path,
+    *,
+    radii_model: str = 'protor',
+    probe_limited_depth: bool = False,
+    peripheral_atom_expansion_steps: int = 0,
+    alpha_boundary_epsilon_length: float = 0.0,
+    alpha_boundary_face_epsilon_rank: int = 0,
+    probe_radius: float = 1.4,
+    selection: str = DEFAULT_SELECTION,
+    feature_types: tuple[str, ...] = DEFAULT_FEATURE_TYPES,
+) -> list[ParityRow]:
+    """Compare one CASTpFold oracle ZIP against the native CASTp3 path."""
+    audit = audit_castp3_oracle_zip(
+        zip_file,
+        radii_model=radii_model,
+        probe_limited_depth=probe_limited_depth,
+        peripheral_atom_expansion_steps=peripheral_atom_expansion_steps,
+        alpha_boundary_epsilon_length=alpha_boundary_epsilon_length,
+        alpha_boundary_face_epsilon_rank=alpha_boundary_face_epsilon_rank,
+        probe_radius=probe_radius,
+        selection=selection,
+        feature_types=feature_types,
+    )
+    rows = []
+    for feature_type, counts in audit['features'].items():
         rows.append(
             ParityRow(
-                pdb_id=pdb_id,
+                pdb_id=audit['case'],
                 feature_type=feature_type,
-                oracle_count=oracle_count,
-                native_count=native_count,
-                exact_count=exact_count,
+                oracle_count=counts['oracle_count'],
+                native_count=counts['native_count'],
+                exact_count=counts['exact_count'],
             )
         )
 
@@ -299,22 +423,73 @@ def main() -> None:
         ),
     )
     parser.add_argument('--output-md', type=Path, default=None)
+    parser.add_argument('--output-json', type=Path, default=None)
+    parser.add_argument('--workers', type=int, default=1)
     args = parser.parse_args()
+    if args.workers < 1:
+        parser.error('--workers must be positive')
 
-    rows = []
-    for zip_file in _selected_zip_files(args):
-        rows.extend(
-            compare_castp3_oracle_zip(
-                zip_file,
-                radii_model=args.radii_model,
-                probe_limited_depth=args.probe_limited_depth,
-                peripheral_atom_expansion_steps=args.peripheral_atom_expansion_steps,
-                alpha_boundary_epsilon_length=args.alpha_boundary_epsilon_length,
-                alpha_boundary_face_epsilon_rank=args.alpha_boundary_face_epsilon_rank,
-                probe_radius=args.probe_radius,
-                selection=args.selection,
+    calculate = partial(
+        audit_castp3_oracle_zip,
+        radii_model=args.radii_model,
+        probe_limited_depth=args.probe_limited_depth,
+        peripheral_atom_expansion_steps=args.peripheral_atom_expansion_steps,
+        alpha_boundary_epsilon_length=args.alpha_boundary_epsilon_length,
+        alpha_boundary_face_epsilon_rank=args.alpha_boundary_face_epsilon_rank,
+        probe_radius=args.probe_radius,
+        selection=args.selection,
+    )
+    cases = []
+    with ProcessPoolExecutor(max_workers=args.workers) as executor:
+        futures = {
+            executor.submit(calculate, path): path for path in _selected_zip_files(args)
+        }
+        for future in as_completed(futures):
+            path = futures[future]
+            try:
+                case = future.result()
+            except Exception as error:
+                case = {
+                    'case': path.stem.lower(),
+                    'passed': False,
+                    'error': {'type': type(error).__name__, 'message': str(error)},
+                }
+            cases.append(case)
+            cases.sort(key=lambda item: item['case'])
+            print(
+                f'{case["case"]}: '
+                f'{"error" if "error" in case else "exact" if case["passed"] else "discrepant"} '
+                f'({len(cases)}/{len(futures)})',
+                file=sys.stderr,
+                flush=True,
             )
+            if args.output_json is not None:
+                args.output_json.parent.mkdir(parents=True, exist_ok=True)
+                args.output_json.write_text(
+                    json.dumps(
+                        {
+                            'schema': 'topomt.castp3_membership_audit@1',
+                            'requested_cases': sorted(
+                                path.stem.lower() for path in futures.values()
+                            ),
+                            'complete': len(cases) == len(futures),
+                            'cases': cases,
+                        },
+                        indent=2,
+                    )
+                    + '\n'
+                )
+    rows = [
+        ParityRow(
+            pdb_id=case['case'],
+            feature_type=feature_type,
+            oracle_count=counts['oracle_count'],
+            native_count=counts['native_count'],
+            exact_count=counts['exact_count'],
         )
+        for case in cases
+        for feature_type, counts in case.get('features', {}).items()
+    ]
 
     markdown = render_markdown_table(rows)
     if args.output_md is None:
@@ -322,6 +497,8 @@ def main() -> None:
     else:
         args.output_md.parent.mkdir(parents=True, exist_ok=True)
         args.output_md.write_text(markdown)
+    if any('error' in case for case in cases):
+        raise SystemExit(1)
 
 
 if __name__ == '__main__':

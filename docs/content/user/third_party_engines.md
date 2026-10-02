@@ -244,7 +244,7 @@ validation of its contact definition.
 
 ## Source checkouts and web services
 
-### Experimental local CASTp3 closed-void measurements
+### Experimental local CASTp3 reconstruction
 
 The local reconstruction can run without a CASTp executable or service:
 
@@ -263,6 +263,19 @@ printed precision for 225 closed cavities across twenty-two bundled systems.
 This includes all seven cavities of hydrogen-bearing 1CGE, corrected under
 [issue #85](https://github.com/uibcdf/topomt/issues/85), and the complete
 closed-void panels of 1A4J and 1CDO.
+
+A separate corrected forty-system comparison matches exact atom-set multisets
+for **468 of 534 open pockets**, **45 of 52 channels**, **8 of 17 branched
+channels** and **520 of 603 aggregated exported mouth records**. All 388
+closed-void atom sets match in that broader panel; the independent SA/MS
+measurement evidence remains the 225-cavity panel above. Equal counts alone
+do not establish matching features. Aggregate mouth atom records do not certify
+individual mouth topology or triangles. The completed comparison is recorded in
+[issue #87](https://github.com/uibcdf/topomt/issues/87); residual component and
+lining/rim discrepancies remain under
+[issue #88](https://github.com/uibcdf/topomt/issues/88). Open-feature SA/MS
+measurements and general server equivalence remain experimental.
+
 `castp3_protor` is an explicit empirical server profile with 1.40 Å
 ASP/GLU carboxylate oxygen radii, inferred from exported sphere geometry.
 Standard `protor` retains 1.42 Å for those atoms and differs from the server

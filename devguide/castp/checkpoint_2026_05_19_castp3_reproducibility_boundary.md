@@ -2,6 +2,17 @@
 
 Date: 2026-05-19
 
+## 2026-10-02 correction: historical micro-pocket counterexamples
+
+The [corrected forty-system comparison](checkpoint_2026_10_02_corrected_pocket_membership.md)
+now recovers both the pocket and aggregate mouth atom sets for 3PTB feature 27
+and 1BMQ feature 34. Independent molecular guards recalculate these exact
+archived records using corrected input preparation and explicit `castp3_protor`.
+The old native rank tables and classifications below do not establish current
+impossibility. They remain historical observations under their earlier input
+policy. General equivalence, individual mouth triangles and open-feature SA/MS
+remain unvalidated; current residual memberships belong to #88.
+
 This checkpoint closes the current CASTp3 parity investigation as a bounded
 reproducibility audit. The objective was to decide whether strict CASTp3/
 CASTpFold parity is still a realistic engineering target, or whether TopoMT
