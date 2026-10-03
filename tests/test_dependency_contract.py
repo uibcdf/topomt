@@ -5,6 +5,7 @@ import tomllib
 import depdigest.core.decorator as depdigest_decorator
 import numpy as np
 import pytest
+from packaging.requirements import Requirement
 
 from topomt._private.smonitor import LibraryNotFoundError
 
@@ -23,7 +24,10 @@ def test_pyproject_declares_core_dependencies_and_extras():
     with open('pyproject.toml', 'rb') as file:
         pyproject = tomllib.load(file)
 
-    dependencies = set(pyproject['project']['dependencies'])
+    dependencies = {
+        Requirement(requirement).name
+        for requirement in pyproject['project']['dependencies']
+    }
     assert CORE_DEPENDENCIES <= dependencies
     assert 'networkx' not in dependencies
     assert 'nglview' not in dependencies

@@ -22,7 +22,7 @@ def test_every_pull_request_runs_the_complete_supported_suite():
     assert {(cell['os'], cell['python-version']) for cell in cells} == {
         (os, version)
         for os in ('ubuntu-latest', 'macos-15')
-        for version in ('3.11', '3.12', '3.13')
+        for version in ('3.11', '3.12', '3.13', '3.14')
     }
     command = next(
         step['run'] for step in test['steps'] if step.get('name') == 'Run tests'
