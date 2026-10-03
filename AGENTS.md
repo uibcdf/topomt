@@ -97,8 +97,8 @@ analysis.|
 
 ### 3.2 Python Versions supported
 
-TopoMT supports **Python 3.11, 3.12 and 3.13**. Routine development uses Python
-3.13, following the MolSysSuite baseline.
+TopoMT must adopt **Python 3.11, 3.12, 3.13 and 3.14**. Routine development
+uses Python 3.13. Qualification remains tracked before an unqualified support claim.
 
 ---
 
@@ -369,3 +369,12 @@ instructions, following
 For work under `devguide/`, also read [devguide/AGENTS.md](devguide/AGENTS.md)
 and its local reporting protocol. Shared instruction proposals belong in
 `uibcdf/molsyssuite`; cross-MOLI contracts belong in `uibcdf/moli`.
+
+
+## Required Python support
+
+The required source contract is Python 3.11–3.14; routine development remains
+on 3.13. Qualification and public delivery are tracked in `uibcdf/topomt#16`.
+Keep metadata, recipe, required CI and recovery evidence aligned. Normal
+installed evidence must not bypass `Requires-Python`; public support claims
+remain tied to the suite's recorded admission.
