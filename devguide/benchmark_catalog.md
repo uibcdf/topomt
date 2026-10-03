@@ -90,6 +90,15 @@ matching aggregates but no individual server oracle. Five regional scalar
 residuals remain; no tested joint intermediate-precision/export variant
 improves the panel. This is OpenCASTp evidence, not a new TopoMT engine run.
 
+The [independent 1MRG geometry and live-server controls](https://github.com/uibcdf/opencastp/blob/main/devguide/1mrg_geometric_server_controls_2026_10_03.md)
+support native SA volume and area using a separate planar-section algorithm on
+the same prepared spheres and two-tetrahedron domain. Three fresh CASTpFold
+jobs preserve all 29 regions, printed measurements and 365 exported orthospheres
+under translations, including the unresolved volume discrepancy. These are
+replicates of one existing benchmark system, not three additional cases. The
+five scalar residuals remain open under OpenCASTp #6; no server defect or exact
+equivalence recipe is established. TopoMT's engine is unchanged.
+
 ## DFND controls
 
 Sources: [synthetic collection](DFND/synthetic_benchmarks.md),
