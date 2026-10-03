@@ -98,7 +98,7 @@ analysis.|
 ### 3.2 Python Versions supported
 
 TopoMT must adopt **Python 3.11, 3.12, 3.13 and 3.14**. Routine development
-uses Python 3.13. Qualification remains tracked before an unqualified support claim.
+uses Python 3.14. Qualification remains tracked before an unqualified support claim.
 
 ---
 
@@ -373,8 +373,8 @@ and its local reporting protocol. Shared instruction proposals belong in
 
 ## Required Python support
 
-The required source contract is Python 3.11–3.14; routine development remains
-on 3.13. Qualification and public delivery are tracked in `uibcdf/topomt#16`.
+The required source contract is Python 3.11–3.14; routine development uses
+Python 3.14. Qualification and public delivery are tracked in `uibcdf/topomt#16`.
 Keep metadata, recipe, required CI and recovery evidence aligned. Normal
 installed evidence must not bypass `Requires-Python`; public support claims
 remain tied to the suite's recorded admission.
