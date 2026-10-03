@@ -161,7 +161,6 @@ The new 3.14 lane uses the existing controlled-source mechanism, with MolSysMT
 the suite transition records their qualified source pair). Older minors keep
 their prior source revisions. Where needed, the 3.14 environment keeps the
 3.13 scientific dependency surface and uses published Pytest Receptor 1.1.0.
-ElastNetMT's LinDelINT provider migration is owned by uibcdf/lindelint#14.
 These source routes remain test evidence, not publicly delivered closure;
 replace them after reviewed compatible public packages are independently
 installed. Do not bypass Requires-Python.
@@ -210,3 +209,26 @@ retaining test-results publication only from Linux/Python 3.13 after failed test
 as well as successful tests, unless the run is cancelled. Python 3.14 cells
 run the suite without publishing additional test-results uploads. The separate
 coverage report publisher was already correctly scoped to Linux/Python 3.13.
+
+### First Python 3.14 execution and packaging guard — 2026-10-03
+
+Source `e1d2fee16f1666e8c2b673b229243d8bf422eae0`, CI
+[37105640084](https://github.com/uibcdf/topomt/actions/runs/37105640084),
+passed reporting governance, ordinary installation, off-checkout import and
+interpreter/architecture checks on both Python 3.14 platforms. Linux executed
+the full suite: 2,003 passed, seven failed, 85 skipped, five xfailed in
+2,081.73 seconds. The older cells remain unqualified until their final results.
+
+One failure is a packaging guard defect: it compares bare dependency names
+with complete requirement strings and rejects the already required
+`depdigest>=0.12.0`. The guard now uses the existing public
+`packaging.requirements.Requirement` parser to obtain dependency names. It
+retains all required providers and optional-feature assertions; its focused
+local test passes. This does not change runtime dependencies or scientific code.
+
+The other six Linux 3.14 failures are four DFND characterization hash
+mismatches and two fpocket parity failures (missing `fpocket` executable,
+with a nested `ImportError` keyword-argument error). They remain component
+team work under this matrix-evidence issue. No scientific expectation, skip,
+engine availability or numerical implementation is altered. This source is
+not a passing scientific matrix or public 3.14 admission.
