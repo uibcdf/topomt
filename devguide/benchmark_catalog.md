@@ -108,6 +108,15 @@ worsens the original 89-input corpus. Original C regional assembly retains the
 five residuals. This adds no distinct molecular systems or TopoMT engine run;
 the complete OpenCASTp equivalence gate remains open.
 
+The [six completed minimal controls](https://github.com/uibcdf/opencastp/blob/main/devguide/minimal_server_controls_2026_10_03.md)
+retain the 1MRG discrepancy with only five original atoms and supply a regular-
+tetrahedron counterexample to uniform final rounding. All six lining sets,
+42 additional descriptors and eight supporting spheres match; 22/24 regional
+scalars and all 16 elementary separated-sphere atom measures pass. Both server
+and native castp3 report an open hull region for the separated balls. These
+are explicitly constructed diagnostic geometries, not six additional proteins,
+the original DFND DUM/radius models or a biological binding-site benchmark.
+
 ## DFND controls
 
 Sources: [synthetic collection](DFND/synthetic_benchmarks.md),
