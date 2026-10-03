@@ -81,6 +81,15 @@ individual-mouth geometry, per-atom contributions and exported orthospheres
 are not fully qualified. This is not a ligand-site accuracy/ranking benchmark.
 TopoMT's own historical reproduction evidence remains separate from OpenCASTp's.
 
+The later [joint precision and individual-mouth checkpoint](https://github.com/uibcdf/opencastp/blob/main/devguide/joint_precision_mouth_controls_2026_10_03.md)
+adds bounded checks in seven systems: 203 mouth partitions / 1059 triangles
+agree with an independent edge-fan graph on shared geometry and seeds. All
+632 individual SA/MS area/perimeter values, rim atom sets and triangle counts
+match the server for 158 one-mouth regions. The 20 multi-mouth regions have
+matching aggregates but no individual server oracle. Five regional scalar
+residuals remain; no tested joint intermediate-precision/export variant
+improves the panel. This is OpenCASTp evidence, not a new TopoMT engine run.
+
 ## DFND controls
 
 Sources: [synthetic collection](DFND/synthetic_benchmarks.md),
