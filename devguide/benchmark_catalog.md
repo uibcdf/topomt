@@ -99,6 +99,15 @@ replicates of one existing benchmark system, not three additional cases. The
 five scalar residuals remain open under OpenCASTp #6; no server defect or exact
 equivalence recipe is established. TopoMT's engine is unchanged.
 
+The later [probe and historical assembly controls](https://github.com/uibcdf/opencastp/blob/main/devguide/1mrg_probe_assembly_controls_2026_10_03.md)
+add five completed 1MRG parameter replicates: 145 exact regions, 579/580 scalars,
+1015 additional descriptors and 1825 exported orthospheres. Archive receipts
+and job identity were verified after correcting a private filename collision.
+A six-decimal intermediate formatting candidate matches these controls but
+worsens the original 89-input corpus. Original C regional assembly retains the
+five residuals. This adds no distinct molecular systems or TopoMT engine run;
+the complete OpenCASTp equivalence gate remains open.
+
 ## DFND controls
 
 Sources: [synthetic collection](DFND/synthetic_benchmarks.md),
