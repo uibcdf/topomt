@@ -8,6 +8,10 @@ tracked in [#67](https://github.com/uibcdf/topomt/issues/67).
 Permanent conversation: [catalogue discussion #68](https://github.com/uibcdf/topomt/discussions/68)
 in the [External Tools category](https://github.com/uibcdf/topomt/discussions/categories/external-tools).
 
+Datasets and validation references have their own
+[benchmark catalogue](benchmark_catalog.md) and permanent
+[discussion #92](https://github.com/uibcdf/topomt/discussions/92) in Reading List.
+
 | Integrated provider conversation | Maintained overview |
 |---|---|
 | [fpocket #69](https://github.com/uibcdf/topomt/discussions/69) | [Overview](fpocket4/overview.md) |

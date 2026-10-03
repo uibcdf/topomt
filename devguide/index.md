@@ -6,6 +6,10 @@ and the next engineering steps.
 
 ## Main documents
 
+- [benchmark_catalog.md](benchmark_catalog.md)
+  Maintained benchmark/database inventory, source and qualification boundaries;
+  permanent discovery conversation in [discussion #92](https://github.com/uibcdf/topomt/discussions/92).
+
 - [castp/checkpoint_2026_10_02_1stp_flow.md](castp/checkpoint_2026_10_02_1stp_flow.md)
   1STP hidden-face bifurcation, exported sphere-region reconstruction on six
   additional controls and separation from still-discrepant atom/mouth export.
