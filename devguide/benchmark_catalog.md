@@ -117,6 +117,16 @@ and native castp3 report an open hull region for the separated balls. These
 are explicitly constructed diagnostic geometries, not six additional proteins,
 the original DFND DUM/radius models or a biological binding-site benchmark.
 
+The [partial-precision investigation](https://github.com/uibcdf/opencastp/blob/main/devguide/partial_precision_controls_2026_10_03.md)
+uses those six cases to screen forty-one ablations. Two candidate policies
+survive nineteen proteins (seven frozen geometries plus twelve freshly
+prepared inputs), but two new predeclared four-atom CASTpFold jobs refute
+both common policies. Native matches all eight new regional scalars,
+fourteen additional descriptors and two supporting spheres. Independent
+sections support the explicit new geometries. No TopoMT engine or OpenCASTp
+numerical policy changed; the original five residuals/89-input verdict remain
+open. These two jobs are diagnostic point clouds, not additional proteins.
+
 ## DFND controls
 
 Sources: [synthetic collection](DFND/synthetic_benchmarks.md),
