@@ -127,6 +127,16 @@ sections support the explicit new geometries. No TopoMT engine or OpenCASTp
 numerical policy changed; the original five residuals/89-input verdict remain
 open. These two jobs are diagnostic point clouds, not additional proteins.
 
+The [geometry/radius contrasts](https://github.com/uibcdf/opencastp/blob/main/devguide/branch_factor_controls_2026_10_03.md)
+add six diagnostic jobs, with five qualified ZIPs and one native-empty input
+that reports zero in server metadata but lacks full archive qualification.
+The five ZIPs reproduce all lining sets, 35 additional descriptors and seven
+spheres; 18/20 regional scalars match. New mixed-radius one-cell and all-carbon
+two-cell controls reproduce the SA-volume residual; the carbon bipyramid
+matches. Independent sections support the native closed models and distinguish
+signed per-cell algebraic allocations from physical empty sub-volumes. These
+are not additional proteins, a TopoMT engine change or complete equivalence.
+
 ## DFND controls
 
 Sources: [synthetic collection](DFND/synthetic_benchmarks.md),
