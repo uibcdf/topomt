@@ -119,7 +119,8 @@ uses Python 3.14. Qualification remains tracked before an unqualified support cl
 - Tools: `ruff format` (formatting), `ruff check` (linting/import sorting), `mypy` (type checking).  
 - Prefer short, modular functions.  
 - Use explicit, descriptive names.  
-- Run linting and type checks before committing.
+- Run applicable linting and local type checks for executable/code changes
+  before committing; select documentation/governance checks for prose changes.
 
 ### 4.3 Naming
 
@@ -299,7 +300,8 @@ If referencing code changes or test results in PR summaries, prefer **file citat
 
 - Follow **test-first** development: add or update tests before writing new code.  
 - For bug fixes, add a failing test first, then implement the fix.  
-- Do not skip tests unless justified in the PR.  
+- Do not waive required PR tests. For authorized direct pushes, select local
+  checks and document deferred evidence through the common checkpoint route.
 
 ### 8.5 Programmatic Checks for Agents
 
@@ -349,6 +351,21 @@ To be extended in future versions, it may include:
   before submitting any pull request.
 
 ---
+
+## Direct pushes and scoped local validation
+
+Follow [the common checkpoint policy](MOLSYSSUITE_GUIDE.md#direct-pushes-and-validation-checkpoints)
+for authorized internal direct pushes by `dprada` and `LMMV`. Batch focused local
+commits when remote visibility is unnecessary; a permitted interim CI skip is
+conditional, never the default after every locally checked change. Retain local
+results while tested code, inputs, environment and scope remain applicable.
+Normally finish with an unskipped head and inspect its applicable CI, or explicitly
+execute and verify those exact-head gates manually. Record missing evidence,
+untested scope, owning issue and recovery route; administrative checks do not
+clear full-suite backlog. External PRs, admission and publication require all
+mandatory executed gates for the exact candidate and required installed file.
+An authorized manual qualification retains the original producer and artifact
+bytes/digest; a marker alone neither waives a gate nor disqualifies that evidence.
 
 ## Modular reusable tools
 
