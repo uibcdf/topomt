@@ -137,6 +137,18 @@ matches. Independent sections support the native closed models and distinguish
 signed per-cell algebraic allocations from physical empty sub-volumes. These
 are not additional proteins, a TopoMT engine change or complete equivalence.
 
+The [pi-constant checkpoint](https://github.com/uibcdf/opencastp/blob/main/devguide/pi_constant_controls_2026_10_04.md)
+adds nine qualified CASTpFold point-cloud jobs for representation, transition
+and predeclared area/volume tests. The diagnostic pi=3.14159265 convention
+matches 88 minimal scalars and the fresh 89-input regional gate
+(14916/14916 scalars,
+26103/26103
+additional descriptors; exact regional displays also match). Three-system
+atom CSV exports match 15132/15132 under their separately declared export rule.
+These jobs are not new molecular benchmark systems. Native OpenCASTp/TopoMT
+code is unchanged; public compatibility controls, full contribution coverage
+and individual multi-mouth equivalence remain open.
+
 ## DFND controls
 
 Sources: [synthetic collection](DFND/synthetic_benchmarks.md),
