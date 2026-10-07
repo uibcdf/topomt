@@ -92,6 +92,7 @@ include-package-data = false
 [tool.setuptools.packages.find]
 namespaces = true
 where = ["."]
+include = ["topomt*", "molsysviewer_topomt*"]
 
 # Ref https://setuptools.pypa.io/en/latest/userguide/datafiles.html#package-data
 [tool.setuptools.package-data]
@@ -99,6 +100,8 @@ topomt = [
     "py.typed"
 ]
 "topomt.data" = ["**"]
+"topomt._private.citation" = ["README.md"]
+"topomt.third_party.fpocket.testdata" = ["**"]
 
 [tool.versioningit]
 default-version = "0.0.0+unknown"
@@ -129,6 +132,8 @@ file = "topomt/_version.py"
 line-length = 88
 target-version = "py311"
 extend-exclude = [
+    ".molsyssuite",
+    ".molsyssuite-tools",
     "devguide",
     "docs",
     "results",

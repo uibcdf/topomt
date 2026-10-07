@@ -31,6 +31,7 @@ The current core dependency set is:
 
 - `numpy`;
 - `scipy`;
+- `numba`;
 - `molsysmt`;
 - `pyunitwizard`;
 - `smonitor`;
@@ -145,3 +146,19 @@ The current document records that these answers are not yet fully consolidated.
 
 The `0.1.0` tag records the first faithful fpocket integration checkpoint for
 TopoMT on the currently supported reference PDB systems.
+
+## Distribution control checkpoint — 2026-10-07
+
+TopoMT #78 now aligns required metadata/recipe bounds and separates unused
+nglview into development/test/docs tooling by explicit maintainer decision.
+The optional extras and scientific API floor decisions remain with TopoMT.
+The historical publication notes above are not current provider-release evidence;
+use the actual candidate's public installed context and API checks before setting
+a scientific minimum or claiming receiving support.
+
+Reviewed ordinary generation and explicit checked manager commands are in
+[the environment guide](../devtools/conda-envs/README.md). Source/helper SDK
+8f00e6d and publication SDK 2d32048 have independent qualified pins. The resource
+inventory covers 609 tracked files across both package roots and retains the
+whole installed test selection. Qualification, actual environment science and
+public delivery remain separate; #78/#16 still own the latter evidence.

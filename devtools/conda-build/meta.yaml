@@ -23,7 +23,6 @@ requirements:
     - pyunitwizard
     - scipy
     - smonitor
-    - nglview
 test:
   imports:
     - topomt

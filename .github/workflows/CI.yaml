@@ -33,8 +33,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.14"
+      - name: Check out the reviewed dependency SDK
+        uses: actions/checkout@v4
+        with:
+          repository: uibcdf/molsyssuite
+          ref: 8f00e6d9de943b6e4710ea62936e2ebea00fad24
+          path: .molsyssuite
+          persist-credentials: false
       - name: Install governance-only test tools
-        run: python -m pip install "pytest>=8" "pytest-receptor==1.2.0" "PyYAML>=6"
+        run: python -m pip install "pytest>=8" "pytest-receptor==1.2.0" "PyYAML>=6" "Jinja2>=3,<4" "packaging>=24" "setuptools>=61"
       - name: Validate report records and generated indexes
         run: python devtools/devguide_index.py --check
       - name: Test reporting and CI governance
@@ -42,6 +49,13 @@ jobs:
         run: >-
           python -m pytest --noconftest --receptor=ci
           tests/test_reporting_protocol.py tests/test_ci_backlog.py tests/test_ci_routes.py
+
+      - name: Review declared dependency routes
+        run: python devtools/check_dependency_routes.py --declared-only
+      - name: Test distribution and dependency contracts
+        run: python -m unittest discover -s devtools/tests -p "test_*.py"
+      - name: Check generated ordinary environments
+        run: python devtools/broadcast_requirements.py --check
 
   nightly-decision:
     name: Check skipped-commit backlog
@@ -128,6 +142,22 @@ jobs:
       shell: bash -l {0}
       run: |
         python -m pip install --force-reinstall --no-deps "git+https://github.com/uibcdf/molsysmt@3bcfaf4d50df6c84ebd14505790ed5221543e5de"
+
+    - name: Check out the reviewed dependency SDK
+      uses: actions/checkout@v4
+      with:
+        repository: uibcdf/molsyssuite
+        ref: 8f00e6d9de943b6e4710ea62936e2ebea00fad24
+        path: .molsyssuite
+        persist-credentials: false
+
+    - name: Install isolated dependency-check tools
+      shell: bash -l {0}
+      run: python -m pip install --target .molsyssuite-tools "PyYAML>=6" "Jinja2>=3,<4" "packaging>=24"
+
+    - name: Check dependency routes and installed Git context
+      shell: bash -l {0}
+      run: python devtools/check_dependency_routes.py --context ci-${{ matrix.cfg.python-version }}
 
     - name: Info conda
       shell: bash -l {0}

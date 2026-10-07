@@ -6,7 +6,7 @@ opened: 2026-10-01
 closed:
 verification: measured
 area: [governance, distribution, compatibility]
-guard:
+guard: devtools/tests/test_distribution_contract.py
 normative: MOLSYSSUITE_GUIDE.md
 blocked_by: []
 supersedes: []
@@ -90,7 +90,7 @@ Central common implementation a44e86a passed native governance run 36898671705
 and 249 local administrative tests. Its archive guards separately reject missing
 resources, stale embedded versions and native payloads before upload.
 
-The retained extra runtime recipe requirement nglview needs owner classification; it was not silently removed.
+The extra recipe requirement nglview was retained at this 2026-10-01 checkpoint; the explicit 2026-10-07 maintainer classification below supersedes that pending decision.
 
 ## Installed qualification capability, 2026-10-01
 
@@ -101,3 +101,66 @@ requires ordinary public dependency provenance and runs the whole local test
 selection outside source, with import checks inside the pytest interpreter.
 It neither uploads nor adds a scientific suite to internal pushes. The real
 release plan and actual scientific/installed evidence remain future prerequisites.
+
+## Current resource/source/environment controls — 2026-10-07
+
+Initial owner source `bfbd28f8c3d25a438c7b3d1e526097dd56f63d3c` has 609 tracked
+files across `topomt` and `molsysviewer_topomt`, while the old 297-path inventory
+omits 312. The current inventory covers both roots, version, data, private
+modules and addon; bounded discovery excludes SDK/test namespaces and explicit
+package-data includes outside-data reference assets. Eighteen local distribution
+guards exercise actual shared recipe/archive/context operations and reject
+missing addon/private/data paths, stale versions, route/source drift and false
+editable origins. Synthetic administrative archives are not scientific artifacts.
+
+The four wrappers adopt publication SDK `2d32048457c6d37093ae509f5626d00a5cda121b`;
+source/helper operations use additive qualified
+`8f00e6d9de943b6e4710ea62936e2ebea00fad24` (406 central hosted tests). Installed
+Linux/macOS arm64 × Python 3.11–3.14 keeps the whole local suite and requires all
+four provenance/science steps. Separate optional qualification SHA preserves
+original producer/file/digest identity. The example requires twelve executed
+source/admin jobs and selects no real candidate.
+
+General @3 proof describes nineteen routes, twelve exact sources, two unchanged
+Git manifests and seven contexts. It preserves the distinct older-minor/Python3.14
+MolSysMT and Viewer pins, actual public bootstrap overlays and original scientific
+commands/matrix/triggers/recovery. Preflight runs before science using isolated
+administrative parser imports; it does not install scientific providers. Missing
+Python declarations are bounded inside package metadata without removing native
+or optional scientific selections. Python3.14 scientific YAML and the existing
+optional-engine contract retain their original bytes. Routine Ruff uses 3.14.
+
+The maintainer explicitly chose to remove unused nglview from package/production
+runtime and retain it as development/test/documentation tooling. All eight core
+requirements and owner-defined optional extras stay unchanged; no scientific API
+minimum is invented. A public selector floor still needs owner evidence if its
+actual APIs require a newer provider.
+
+Eight helper guards call the shared operator directly. Its thin broadcaster/manager
+is import-inert, validates all outputs before writes, checks drift without writes,
+respects complete minor/source restrictions and uses explicit checked manager and
+target identity. The owner profile generates five ordinary environments; recipes,
+plans, scientific test documents, historical counterpart fixture and Git inputs
+are outside generation. Unsafe automatic dev/update/discovery flags are retired
+with documented explicit replacements. No actual environment operation is run.
+
+The queried official Conda/PyPI metadata endpoints return 404 and GitHub releases
+are empty at observation. Installation guidance now states source-development
+prerequisites and separates configured publication from actual public receiving
+evidence. These observations are not proof of historical absence.
+
+Local 26 administrative guards, reporting/index tests, declared preflight, drift,
+Ruff/format, actionlint, conformance and scoped type checks qualify this control
+delta; exact-head hosted evidence is delivered in the owning issue after push.
+The initial failing guard run detects the missing inventory/controls; the final
+guards protect those mechanisms through actual shared operations. The original
+297-path illustrative-wheel evidence remains its dated historical measurement.
+
+Whole adoption remains partial: actual source-free production/dev/docs closure,
+complete successful exact-candidate science, real plan/access/build/original
+archive/eight-cell installed qualification/same-byte public promotion/receiving
+evidence stay in this owner issue and #16. Administrative evidence does not clear
+science/recovery debt. No source tag, actual build/upload/promotion or installed
+scientific dispatch is selected. The modified primary-clone generated version is
+preserved by isolated work. Shared provider #108 is already delivered; no copied
+sibling helper or new provider capability is required for this adoption.

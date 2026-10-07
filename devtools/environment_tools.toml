@@ -1,0 +1,31 @@
+schema = "molsyssuite.environment-tools@1"
+tooling = "devtools/requirements.yaml"
+inventory = "devtools/dependency_routes.toml"
+
+# Specialized scientific tests and the historical importable fixture stay outside generation.
+
+[[environments]]
+path = "devtools/conda-envs/production_env.yaml"
+group = "production"
+reason = "Ordinary owner environment; metadata owns runtime, local groups own tools"
+
+[[environments]]
+path = "devtools/conda-envs/development_env.yaml"
+group = "development"
+reason = "Ordinary owner environment; metadata owns runtime, local groups own tools"
+python_minor = "3.14"
+
+[[environments]]
+path = "devtools/conda-envs/docs_env.yaml"
+group = "docs"
+reason = "Ordinary owner environment; metadata owns runtime, local groups own tools"
+
+[[environments]]
+path = "devtools/conda-envs/setup_env.yaml"
+group = "setup"
+reason = "Ordinary owner environment; metadata owns runtime, local groups own tools"
+
+[[environments]]
+path = "devtools/conda-envs/build_env.yaml"
+group = "conda-build"
+reason = "Ordinary owner environment; metadata owns runtime, local groups own tools"

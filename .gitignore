@@ -117,3 +117,7 @@ record.txt
 
 # In this library
 pocketmt/_version.py
+
+# Isolated administrative SDK/parser imports
+.molsyssuite/
+.molsyssuite-tools/

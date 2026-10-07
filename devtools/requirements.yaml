@@ -1,43 +1,31 @@
+# Tooling only; metadata and reviewed contexts own Python/runtime.
 setup:
-  channels: &setup_channels
-    - uibcdf
-    - conda-forge
-  dependencies: &setup_dependencies
-    - python
+  channels: &channels [uibcdf, conda-forge]
+  dependencies: &setup_tools
     - pip
     - setuptools >=61.0
     - versioningit ~=2.0
 
 production:
-  channels: &production_channels
-    - *setup_channels
-  dependencies: &production_dependencies
-    - *setup_dependencies
-    - argdigest
-    - depdigest >=0.12.0
-    - molsysmt
-    - numba
-    - numpy
-    - smonitor
-    - pyunitwizard
-    - scipy
-    - nglview
+  channels: *channels
+  dependencies: *setup_tools
 
 test:
-  channels: &test_channels
-    - *production_channels
-  dependencies: &test_dependencies
-    - *production_dependencies
-    - pytest
+  channels: *channels
+  dependencies: &test_tools
+    - *setup_tools
+    - nglview
+    - pytest >=8
+    - pytest-receptor
     - pytest-cov
     - pytest-xdist
     - codecov
 
 docs:
-  channels: &docs_channels
-    - *production_channels
-  dependencies: &docs_dependencies
-    - *production_dependencies
+  channels: *channels
+  dependencies: &docs_tools
+    - *setup_tools
+    - nglview
     - jupyterlab
     - plantuml
     - graphviz
@@ -51,21 +39,18 @@ docs:
     - sphinx-tabs
     - sphinxcontrib-plantuml
     - myst-nb
-    - fpocket
 
 development:
-  channels:
-    - *production_channels
+  channels: *channels
   dependencies:
-    - *production_dependencies
-    - *test_dependencies
-    - *docs_dependencies
+    - *test_tools
+    - *docs_tools
+    - ipykernel
+    - nbformat
+    - nbclient
+    - matplotlib
     - mamba
 
 conda-build:
-  channels:
-    - *production_channels
-  dependencies:
-    - anaconda-client
-    - conda-build
-
+  channels: *channels
+  dependencies: [anaconda-client, conda-build]

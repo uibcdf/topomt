@@ -1,0 +1,310 @@
+schema = "molsyssuite.dependency-routes@3"
+reason = "Preserve actual TopoMT scientific source contexts; qualify governance under TopoMT #78 / MolSysSuite #45"
+
+[[source_routes]]
+id = "smonitor-base"
+name = "smonitor"
+role = "required-runtime"
+url = "https://github.com/uibcdf/smonitor"
+commit = "4b5e5c5a46e3c8a4dc46461ce72937f9a7dfbdae"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "depdigest-base"
+name = "depdigest"
+role = "required-runtime"
+url = "https://github.com/uibcdf/depdigest"
+commit = "0da46d9ff31fbe2f92e4e667a32868aebe840b39"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "pyunitwizard-base"
+name = "pyunitwizard"
+role = "required-runtime"
+url = "https://github.com/uibcdf/pyunitwizard"
+commit = "23554a7aca31cba144ef248b9771d4668815dd1c"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "argdigest-base"
+name = "argdigest"
+role = "required-runtime"
+url = "https://github.com/uibcdf/argdigest"
+commit = "c604ce387fe60558ceb51a3016892e7a10686504"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "molsysviewer-base"
+name = "molsysviewer"
+role = "integration"
+url = "https://github.com/uibcdf/molsysviewer"
+commit = "be60f478f91ff0113a9219d441e6200e287d4da4"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "molsysmt-base"
+name = "molsysmt"
+role = "required-runtime"
+url = "https://github.com/uibcdf/molsysmt"
+commit = "3bcfaf4d50df6c84ebd14505790ed5221543e5de"
+install = "pip-no-deps-git"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "smonitor-3.14"
+name = "smonitor"
+role = "required-runtime"
+url = "https://github.com/uibcdf/smonitor"
+commit = "4b5e5c5a46e3c8a4dc46461ce72937f9a7dfbdae"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies_py314.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "depdigest-3.14"
+name = "depdigest"
+role = "required-runtime"
+url = "https://github.com/uibcdf/depdigest"
+commit = "0da46d9ff31fbe2f92e4e667a32868aebe840b39"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies_py314.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "pyunitwizard-3.14"
+name = "pyunitwizard"
+role = "required-runtime"
+url = "https://github.com/uibcdf/pyunitwizard"
+commit = "23554a7aca31cba144ef248b9771d4668815dd1c"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies_py314.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "argdigest-3.14"
+name = "argdigest"
+role = "required-runtime"
+url = "https://github.com/uibcdf/argdigest"
+commit = "c604ce387fe60558ceb51a3016892e7a10686504"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies_py314.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "molsysviewer-3.14"
+name = "molsysviewer"
+role = "integration"
+url = "https://github.com/uibcdf/molsysviewer"
+commit = "ec4c71e574d798b7c8675b7e7e983da878ce9889"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies_py314.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_routes]]
+id = "molsysmt-3.14"
+name = "molsysmt"
+role = "required-runtime"
+url = "https://github.com/uibcdf/molsysmt"
+commit = "3eb5afd1de087f775b78d7fa45ad69cca3a02d43"
+install = "pip-no-deps-git"
+input = "devtools/requirements/controlled_suite_dependencies_py314.txt"
+reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+
+[[source_inputs]]
+path = "devtools/requirements/controlled_suite_dependencies.txt"
+sha256 = "5de12393a4d740c8e5c28e2ef6e6450da3958268422ae3a6e36e3cdc55874764"
+reason = "Preserved actual pip --no-deps input"
+
+[[source_inputs]]
+path = "devtools/requirements/controlled_suite_dependencies_py314.txt"
+sha256 = "c59998b836f3abfada9aeb162315e147c5098e7eba6be0719107c7d9a734b54e"
+reason = "Preserved actual pip --no-deps input"
+
+[[contexts]]
+name = "ci-3.11"
+environment = "devtools/conda-envs/test_env.yaml"
+python_minor = "3.11"
+sources = ["smonitor-base", "depdigest-base", "pyunitwizard-base", "argdigest-base", "molsysviewer-base", "molsysmt-base"]
+overlays = ["argdigest", "depdigest", "molsysmt", "pyunitwizard", "smonitor"]
+overlay_reason = "Keep existing public bootstrap replaced by original no-deps Git inputs; final provenance is checked before science"
+reason = "Original supported scientific minor and exact source revisions"
+
+[[contexts]]
+name = "ci-3.12"
+environment = "devtools/conda-envs/test_env.yaml"
+python_minor = "3.12"
+sources = ["smonitor-base", "depdigest-base", "pyunitwizard-base", "argdigest-base", "molsysviewer-base", "molsysmt-base"]
+overlays = ["argdigest", "depdigest", "molsysmt", "pyunitwizard", "smonitor"]
+overlay_reason = "Keep existing public bootstrap replaced by original no-deps Git inputs; final provenance is checked before science"
+reason = "Original supported scientific minor and exact source revisions"
+
+[[contexts]]
+name = "ci-3.13"
+environment = "devtools/conda-envs/test_env_py313.yaml"
+python_minor = "3.13"
+sources = ["smonitor-base", "depdigest-base", "pyunitwizard-base", "argdigest-base", "molsysviewer-base", "molsysmt-base"]
+overlays = ["depdigest"]
+overlay_reason = "Keep existing public bootstrap replaced by original no-deps Git inputs; final provenance is checked before science"
+reason = "Original supported scientific minor and exact source revisions"
+
+[[contexts]]
+name = "ci-3.14"
+environment = "devtools/conda-envs/test_env_py314.yaml"
+python_minor = "3.14"
+sources = ["smonitor-3.14", "depdigest-3.14", "pyunitwizard-3.14", "argdigest-3.14", "molsysviewer-3.14", "molsysmt-3.14"]
+overlays = ["depdigest"]
+overlay_reason = "Keep existing public bootstrap replaced by original no-deps Git inputs; final provenance is checked before science"
+reason = "Original supported scientific minor and exact source revisions"
+
+[[contexts]]
+name = "production-3.14"
+environment = "devtools/conda-envs/production_env.yaml"
+python_minor = "3.14"
+sources = []
+overlays = []
+reason = "Source-free declared owner environment; actual installed evidence remains pending"
+
+[[contexts]]
+name = "development-3.14"
+environment = "devtools/conda-envs/development_env.yaml"
+python_minor = "3.14"
+sources = []
+overlays = []
+reason = "Source-free declared owner environment; actual installed evidence remains pending"
+
+[[contexts]]
+name = "documentation-3.13"
+environment = "devtools/conda-envs/docs_env.yaml"
+python_minor = "3.13"
+sources = []
+overlays = []
+reason = "Source-free declared owner environment; actual installed evidence remains pending"
+
+[[recipes]]
+path = "devtools/conda-build/meta.yaml"
+kind = "shared-noarch"
+plan = "devtools/conda-build/release_plan.example.toml"
+resources = "devtools/conda-build/resources.toml"
+reason = "Administrative example/resource review; no real candidate selected"
+
+[[environments]]
+path = "devtools/conda-envs/build_env.yaml"
+kind = "build-only"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+
+[[environments]]
+path = "devtools/conda-envs/development_env.yaml"
+kind = "runtime"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+purpose = "development"
+channel_priority = "strict"
+narrowing_reason = "Preserve reviewed native, minor and source-bootstrap conditions"
+
+[[environments]]
+path = "devtools/conda-envs/docs_env.yaml"
+kind = "runtime"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+purpose = "documentation"
+channel_priority = "strict"
+narrowing_reason = "Preserve reviewed native, minor and source-bootstrap conditions"
+
+[[environments]]
+path = "devtools/conda-envs/importable_env.yaml"
+kind = "resolved-package"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+
+[[environments]]
+path = "devtools/conda-envs/production_env.yaml"
+kind = "runtime"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+purpose = "production"
+channel_priority = "strict"
+narrowing_reason = "Preserve reviewed native, minor and source-bootstrap conditions"
+
+[[environments]]
+path = "devtools/conda-envs/setup_env.yaml"
+kind = "build-only"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+
+[[environments]]
+path = "devtools/conda-envs/test_env.yaml"
+kind = "runtime"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+purpose = "test"
+channel_priority = "strict"
+narrowing_reason = "Preserve reviewed native, minor and source-bootstrap conditions"
+
+[[environments]]
+path = "devtools/conda-envs/test_env_py313.yaml"
+kind = "runtime"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+purpose = "test"
+channel_priority = "strict"
+narrowing_reason = "Preserve reviewed native, minor and source-bootstrap conditions"
+additional_channels = ["ambermd"]
+channel_reason = "Preserved existing scientific AmberTools bootstrap"
+
+[[environments]]
+path = "devtools/conda-envs/test_env_py314.yaml"
+kind = "runtime"
+reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
+purpose = "test"
+channel_priority = "strict"
+narrowing_reason = "Preserve reviewed native, minor and source-bootstrap conditions"
+additional_channels = ["ambermd"]
+channel_reason = "Preserved existing scientific AmberTools bootstrap"
+
+[[workflows]]
+path = ".github/workflows/CI.yaml"
+sha256 = "09047d3feba6cf595f6b13997914b6c548ab125aebfd2ef360516c48d03e40eb"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
+
+[[workflows]]
+path = ".github/workflows/build_and_upload_conda_packages.yaml"
+sha256 = "a7ae60a309898f9da75e01255fc69356d5a9ebf9e9091c9af4ef8ef5c804bd61"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
+
+[[workflows]]
+path = ".github/workflows/conda_publication_governance.yaml"
+sha256 = "eb54f756f9aa208adbc210b3839bf23be640457ff975f84415d12eb6c6b9cf4d"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
+
+[[workflows]]
+path = ".github/workflows/molsyssuite-policy.yml"
+sha256 = "6cc62208156f765ca0456e3bc5f398934263e03afc7063c69afa692c5dafdffd"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
+
+[[workflows]]
+path = ".github/workflows/optional_engine_contract.yaml"
+sha256 = "640bce647a09dbf512c7471b0e67ec8b3cd7ae450eec538a186c839d98d233fa"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
+
+[[workflows]]
+path = ".github/workflows/promote_conda_package.yaml"
+sha256 = "3cb1b6a85020a3b4cbe4cca0c4b592110f734dde0005d0b9579b33a0cd721a49"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
+
+[[workflows]]
+path = ".github/workflows/ruff.yaml"
+sha256 = "a754ef7eaa07067fd30a8c30a8798cbe6e95e8fd60397d954c2cc3cc91a0ee82"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
+
+[[workflows]]
+path = ".github/workflows/sphinx_docs_to_gh_pages.yaml"
+sha256 = "2cedcd5492ab683a369bc1aaadc6ebea983bb8e631df59645d11461a96ffe342"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
+
+[[workflows]]
+path = ".github/workflows/test_installed_conda_package.yaml"
+sha256 = "83bcd0126b7150334e31cc2407a39b4e9963834f7a027a341be268db7f2dcf28"
+reason = "Reviewed actual source, documentation, optional-contract or publication route; changes require renewed review"
