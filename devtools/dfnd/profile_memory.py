@@ -4,6 +4,10 @@ Run from the repository root. Array storage counts unique backing allocations
 referenced by the network and its Delaunay mesh. Tracemalloc values are Python
 and NumPy traced allocations, not process RSS or a worst-case scaling bound.
 The two query results remain live during measurement.
+
+Extracted PDB input lives in owned scratch and is removed after its last use,
+including failures. The requested report remains caller-owned. Measurements
+release only tracing they started and preserve a caller's active tracing session.
 """
 
 import argparse
@@ -12,6 +16,7 @@ import json
 import sys
 import tracemalloc
 from pathlib import Path
+from tempfile import TemporaryDirectory
 from time import perf_counter
 from zipfile import ZipFile
 
@@ -42,18 +47,23 @@ def _array_bytes(network):
 
 def _measure(name, build):
     gc.collect()
-    tracemalloc.start()
-    start = perf_counter()
-    network = build()
-    build_seconds = perf_counter() - start
-    build_live, build_peak = tracemalloc.get_traced_memory()
-    start = perf_counter()
-    data = DFNDData(network, network.get_topography())
-    first_live, _ = tracemalloc.get_traced_memory()
-    reprobed = data.at_probe(puw.quantity(2.2, 'angstroms'))
-    query_seconds = perf_counter() - start
-    second_live, total_peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
+    owns_tracing = not tracemalloc.is_tracing()
+    if owns_tracing:
+        tracemalloc.start()
+    try:
+        start = perf_counter()
+        network = build()
+        build_seconds = perf_counter() - start
+        build_live, build_peak = tracemalloc.get_traced_memory()
+        start = perf_counter()
+        data = DFNDData(network, network.get_topography())
+        first_live, _ = tracemalloc.get_traced_memory()
+        reprobed = data.at_probe(puw.quantity(2.2, 'angstroms'))
+        query_seconds = perf_counter() - start
+        second_live, total_peak = tracemalloc.get_traced_memory()
+    finally:
+        if owns_tracing:
+            tracemalloc.stop()
     assert reprobed.network is network
     assert reprobed.mesh.delaunay is network.mesh
     assert np.shares_memory(data.mesh.atoms.coords, reprobed.mesh.atoms.coords)
@@ -100,11 +110,14 @@ def main() -> None:
                 ),
             )
         )
-    pdb_path = args.output.parent / 'profile_memory_1crn.pdb'
-    with ZipFile('topomt/data/CASTpFold_server/1crn.zip') as archive:
-        name = sorted(n for n in archive.namelist() if n.lower().endswith('.pdb'))[0]
-        pdb_path.write_bytes(archive.read(name))
-    results.append(_measure('1crn', lambda: DelaunayFlowNetwork(str(pdb_path))))
+    with TemporaryDirectory(prefix='topomt-memory-profile-') as directory:
+        pdb_path = Path(directory) / '1crn.pdb'
+        with ZipFile('topomt/data/CASTpFold_server/1crn.zip') as archive:
+            name = sorted(n for n in archive.namelist() if n.lower().endswith('.pdb'))[
+                0
+            ]
+            pdb_path.write_bytes(archive.read(name))
+        results.append(_measure('1crn', lambda: DelaunayFlowNetwork(str(pdb_path))))
     args.output.write_text(
         json.dumps({'python': sys.version.split()[0], 'cases': results}, indent=2)
         + '\n'
