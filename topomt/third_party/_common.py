@@ -18,9 +18,9 @@ def prepare_wrapper_input_pdb(
     syntax: str = 'MolSysMT',
 ) -> tuple[Path, np.ndarray]:
     full_molsys = msm.convert(molecular_system, to_form='molsysmt.MolSys')
-    selected_atom_indices = np.array(
-        msm.select(full_molsys, selection=selection, syntax=syntax),
-        dtype=int,
+    # Export in source order so the returned map and the PDB atom rows agree.
+    selected_atom_indices = np.sort(
+        np.array(msm.select(full_molsys, selection=selection, syntax=syntax), dtype=int)
     )
     if selected_atom_indices.size == 0:
         raise ValueError('Cannot submit an empty atom selection to an external engine.')

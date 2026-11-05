@@ -151,6 +151,52 @@ existing APIs and separate parity gates. Contact/volume/score definitions remain
 specific to their original methods. No DFND calculation is required to use
 these outputs.
 
+### Recover fpocket selections against the original source
+
+The CLI requires a nonempty atom selection and exactly one coordinate frame.
+A multi-model PDB is exported at the requested frame. Submitted atom rows follow
+source order; their serials may be renumbered during PDB export.
+
+CLI results retain `result.run.metadata['submitted_atom_indices']`: one source
+atom index per submitted PDB atom row, in file order. Keep the full source system
+and its selected frame alongside the run bundle. After restoring the bundle's
+validated input/output files, replay against that source with the same context:
+
+```python
+recovered = tmt.get_provider_output(
+    source_system, method='fpocket', backend='files',
+    pdb_file=submitted_pdb, output_dir=original_output_directory,
+    selection=result.run.metadata['selection'],
+    structure_indices=result.run.metadata['structure_indices'],
+    submitted_atom_indices=result.run.metadata['submitted_atom_indices'],
+)
+```
+
+The explicit map must uniquely cover the selection. Submitted serials must be
+unique, and mapped source coordinates must agree with PDB coordinates within
+0.00051 Å (the PDB rounding precision). Incompatible atom maps or frames raise
+`ValueError`. Without an explicit map, the files route retains its legacy
+serial-to-source-atom-ID behavior. A run bundle does not contain the full source
+system or qualify its chemical-state context by itself.
+
+The bounded source handoff pilot is tracked in
+[TopoMT #101](https://github.com/uibcdf/topomt/issues/101). Its developer command,
+`python -m devtools.qualify_fpocket_handoff`, tests real execution, a nonconsecutive
+selection, the second frame, source persistence and recovery, alternate units,
+and independence from later source-coordinate changes. It currently requires a
+compatible MolSysMT source checkout and one reference chemical state; it does
+not establish general installed-package or alternative-state support.
+
+A subsequent source integration control consumes a prepared ERalpha fragment's
+original pocket through PharmacophoreMT's public `get_features` and
+`from_receptor_projections` operations. It preserves membership, frame, state
+and units through native model persistence. This is an explicit hydrophobic
+analytical hypothesis, with caller-declared placements and matching radii.
+Spatial pocket detection alone does not establish the chemical readiness needed
+for native feature recognition; incomplete chemistry remains a provider error.
+This optional control adds no PharmacophoreMT runtime requirement to TopoMT and
+does not qualify a complete receptor model or installed integration.
+
 ## Show original pockets in MolSysViewer
 
 Install the optional viewer dependencies with `python -m pip install 'topomt[viewer]'`.

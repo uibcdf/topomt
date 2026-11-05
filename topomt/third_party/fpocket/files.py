@@ -2,6 +2,7 @@ from pathlib import Path
 from typing import Any
 
 import molsysmt as msm
+import numpy as np
 
 from topomt import pyunitwizard as puw
 from topomt.features.Pocket import Pocket
@@ -152,6 +153,7 @@ def fpocket_result_to_topography(
     syntax: str = 'MolSysMT',
     backend: str = 'files',
     provider_metadata: dict[str, Any] | None = None,
+    submitted_atom_indices: list[int] | None = None,
 ) -> Topography:
     topography, serial_to_index = _build_topography_and_atom_map(
         molecular_system,
@@ -159,10 +161,21 @@ def fpocket_result_to_topography(
         structure_indices=structure_indices,
         syntax=syntax,
     )
+    if submitted_atom_indices is not None:
+        serial_to_index = _submitted_serial_map(
+            molecular_system,
+            fpocket_result.source_pdb,
+            submitted_atom_indices,
+            selection=selection,
+            structure_indices=structure_indices,
+            syntax=syntax,
+        )
     info_name = f'{fpocket_result.source_pdb.stem}_info.txt'
     run_metadata = {
-        'selection': selection,
-        'structure_indices': structure_indices,
+        'selection': selection
+        if isinstance(selection, str)
+        else np.asarray(selection).tolist(),
+        'structure_indices': np.asarray(structure_indices).tolist(),
         'syntax': syntax,
         'atom_serial_to_index': {
             str(key): value for key, value in serial_to_index.items()
@@ -170,6 +183,10 @@ def fpocket_result_to_topography(
     }
     if provider_metadata:
         run_metadata.update(provider_metadata)
+    if submitted_atom_indices is not None:
+        run_metadata['submitted_atom_indices'] = [
+            int(index) for index in submitted_atom_indices
+        ]
     run = ProviderRun.capture(
         'fpocket',
         backend,
@@ -211,7 +228,47 @@ def load_topography(
     syntax: str = 'MolSysMT',
     backend: str = 'files',
     provider_metadata: dict[str, Any] | None = None,
+    submitted_atom_indices: list[int] | None = None,
 ) -> Topography:
+    """Recover original fpocket files against a declared source context.
+
+    Parameters
+    ----------
+    molecular_system : molecular system
+        Source atom axis and coordinate frames.
+    pdb_file, output_dir : str or Path
+        Exact submitted PDB and original fpocket output directory.
+    selection : str or sequence of int, default='all'
+        Source atoms submitted to the engine.
+    structure_indices : int or list of int, default=0
+        Source coordinate frame.
+    syntax : str, default='MolSysMT'
+        Selection syntax.
+    backend : str, default='files'
+        Recorded execution route.
+    provider_metadata : dict, optional
+        Additional run metadata.
+    submitted_atom_indices : list of int, optional
+        Source index for each submitted PDB atom row, in file order. Required
+        when exported serials differ from source atom IDs. The map must uniquely
+        cover the selection and match the source frame within PDB precision.
+        Omission retains the legacy serial-to-atom-ID mapping.
+
+    Returns
+    -------
+    Topography
+        Provider pockets and captured original files.
+
+    Raises
+    ------
+    ValueError
+        If an explicit map, submitted serials or source coordinates disagree.
+
+    Examples
+    --------
+    Recover using ``submitted_atom_indices=run.metadata['submitted_atom_indices']``
+    together with the original source system, selection and coordinate frame.
+    """
     fpocket_result = parse_fpocket_output(pdb_file, output_dir)
     return fpocket_result_to_topography(
         molecular_system,
@@ -221,7 +278,55 @@ def load_topography(
         syntax=syntax,
         backend=backend,
         provider_metadata=provider_metadata,
+        submitted_atom_indices=submitted_atom_indices,
     )
+
+
+def _submitted_serial_map(
+    molecular_system,
+    pdb_file: Path,
+    atom_indices: list[int],
+    *,
+    selection: str,
+    structure_indices: int | list[int],
+    syntax: str,
+) -> dict[int, int]:
+    """Validate an explicit submitted-row to source-atom correspondence."""
+    indices = np.asarray(atom_indices)
+    lines = [
+        line
+        for line in pdb_file.read_text().splitlines()
+        if line.startswith(('ATOM  ', 'HETATM'))
+    ]
+    selected = msm.select(molecular_system, selection=selection, syntax=syntax)
+    if (
+        indices.ndim != 1
+        or indices.dtype.kind not in 'iu'
+        or len(indices) != len(lines)
+        or len(np.unique(indices)) != len(indices)
+        or set(indices) != set(selected)
+    ):
+        raise ValueError('The submitted atom map must uniquely cover the selection.')
+    serials = [int(line[6:11]) for line in lines]
+    if len(set(serials)) != len(serials):
+        raise ValueError('Submitted PDB atom serials must be unique.')
+    coordinates = puw.get_value(
+        msm.get(
+            molecular_system,
+            selection=indices,
+            structure_indices=structure_indices,
+            coordinates=True,
+        ),
+        to_unit='angstroms',
+    )
+    submitted = np.asarray(
+        [[float(line[start : start + 8]) for start in (30, 38, 46)] for line in lines]
+    )
+    if coordinates.shape != (1, len(indices), 3) or not np.allclose(
+        coordinates[0], submitted, rtol=0.0, atol=0.00051
+    ):
+        raise ValueError('Submitted PDB coordinates disagree with the source frame.')
+    return {serial: int(index) for serial, index in zip(serials, indices)}
 
 
 def _build_serial_to_atom_index_map(
@@ -355,7 +460,9 @@ def _fpocket_pocket_to_feature(
     unmapped_provider_fields = {
         key: value for key, value in info_fields.items() if key not in mapped_keys
     }
-    sphere_artifact = f'output/pockets/pocket{fpocket_pocket.file_pocket_id}_vert.pqr'
+    sphere_artifact: str | None = (
+        f'output/pockets/pocket{fpocket_pocket.file_pocket_id}_vert.pqr'
+    )
     if not any(name == sphere_artifact for name, _ in run.artifacts):
         sphere_artifact = None
     atom_artifact = f'output/pockets/pocket{fpocket_pocket.file_pocket_id}_atm.pdb'

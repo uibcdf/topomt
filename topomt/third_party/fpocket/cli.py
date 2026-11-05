@@ -3,8 +3,9 @@ import shutil
 import tempfile
 from pathlib import Path
 
-import molsysmt as msm
+import numpy as np
 
+from topomt.third_party._common import prepare_wrapper_input_pdb
 from topomt.third_party.fpocket.files import load_topography as load_fpocket_topography
 from topomt.third_party.fpocket.runner import run_fpocket
 from topomt.topography.Topography import Topography
@@ -23,7 +24,7 @@ def get_topography(
 
     with tempfile.TemporaryDirectory(prefix='topomt_fpocket_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
-        input_pdb = _prepare_fpocket_input_pdb(
+        input_pdb, submitted_atom_indices = _prepare_fpocket_input(
             molecular_system,
             tmpdir=tmpdir,
             selection=selection,
@@ -59,6 +60,7 @@ def get_topography(
                 'executable_sha256': executable_sha256,
                 'extra_args': list(extra_args or []),
             },
+            submitted_atom_indices=submitted_atom_indices.tolist(),
         )
 
 
@@ -69,29 +71,35 @@ def _prepare_fpocket_input_pdb(
     structure_indices: int | list[int] = 0,
     syntax: str = 'MolSysMT',
 ) -> Path:
-    original_pdb = _get_original_pdb_path(molecular_system)
-    if original_pdb is not None and selection == 'all' and structure_indices == 0:
-        input_pdb = tmpdir / original_pdb.name
-        shutil.copy2(original_pdb, input_pdb)
-        return input_pdb
+    return _prepare_fpocket_input(
+        molecular_system, tmpdir, selection, structure_indices, syntax
+    )[0]
 
-    molsys = msm.convert(molecular_system, to_form='molsysmt.MolSys')
-    input_pdb = tmpdir / 'input.pdb'
-    pdb_text = msm.convert(
-        molsys,
-        to_form='string:pdb_text',
+
+def _prepare_fpocket_input(
+    molecular_system,
+    tmpdir: Path,
+    selection: str = 'all',
+    structure_indices: int | list[int] = 0,
+    syntax: str = 'MolSysMT',
+) -> tuple[Path, np.ndarray]:
+    if (
+        not isinstance(structure_indices, str)
+        and np.asarray(structure_indices).size != 1
+    ):
+        raise ValueError('fpocket requires exactly one input coordinate frame.')
+    input_pdb, atom_indices = prepare_wrapper_input_pdb(
+        molecular_system,
+        tmpdir=tmpdir,
         selection=selection,
         structure_indices=structure_indices,
         syntax=syntax,
     )
-    input_pdb.write_text(pdb_text)
-    return input_pdb
-
-
-def _get_original_pdb_path(molecular_system) -> Path | None:
-    if isinstance(molecular_system, (str, Path)):
-        path = Path(molecular_system).expanduser().resolve()
-        if path.exists() and path.suffix.lower() == '.pdb':
-            return path
-
-    return None
+    model_count, atom_count = 0, 0
+    with input_pdb.open() as handle:
+        for line in handle:
+            model_count += line.startswith('MODEL ')
+            atom_count += line.startswith(('ATOM  ', 'HETATM'))
+    if model_count > 1 or atom_count == 0:
+        raise ValueError('fpocket requires exactly one input coordinate frame.')
+    return input_pdb, atom_indices
