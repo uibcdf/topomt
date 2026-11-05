@@ -1,0 +1,18 @@
+{
+  "archive": "original_handoff_20261105.zip",
+  "sha256": "22f5bf4b3e5ddb23cec1e02a3dd9dbcec813158ac1ec883d77868cb67eb39d1c",
+  "bytes": 1720334,
+  "files": {
+    "handoff/original.zip": "d0453958254658de38060cdda6486332b16b5fc469b1ea3ab1349ee90764aa7b",
+    "handoff/receipt.json": "a75e1aac969159d4ce8a8fa698739c780f0228ec2a5ceb0a826b1ecdfebefa5e",
+    "handoff/source.h5msm": "39d96dce60310b08f92bfe28004db2720e3d77b0d969c91e66c3fae72722e213",
+    "eralpha-handoff/original.zip": "ecbf7628efb35d1fb0fba1e619d336c34301d31cb26e5fbb21ecf8787c823fe3",
+    "eralpha-handoff/receipt.json": "1fbf1058c87574463ed443cf5a4745dc09dad4646ad696ec9c0cdcc4291a1d41",
+    "eralpha-handoff/source.h5msm": "1b63f84a716f981d95c585758ce4908ee9ac396e6986f14db41f17e1ea40041e",
+    "consumer-final/query.json": "b801429b603274c092b04dce4959cec81c74e34045a2b617bbc3d53cbab98eff",
+    "consumer-final/receipt.json": "b75f3b2fc5c82f327167910a6d759b6c54796f121528ae0392a3ed1417be2e53",
+    "consumer-pm-final/query.json": "975c7cdaa7f35003d3c33780a37b845359195303d2a97e8d4a7311a062a3ebb1",
+    "consumer-pm-final/receipt.json": "e881036da12435ede9ab48b05d538c9bdd44c162ed71799cc07887eff6c9112c",
+    "prepared-eralpha.h5msm": "a42ef9868578ba16c62d52a1267d24160b973dca0d50dbc804ca46b6b2fe316a"
+  }
+}

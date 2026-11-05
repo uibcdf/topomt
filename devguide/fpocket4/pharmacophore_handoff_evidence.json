@@ -1,0 +1,152 @@
+{
+  "profile": "topomt-fpocket-pharmacophoremt-source-control@1",
+  "date": "2026-11-05",
+  "owner_issue": "https://github.com/uibcdf/topomt/issues/101",
+  "sources": {
+    "topomt_base": "0f82d5adfae73ae24846f713ab5bf62782a4f1ad",
+    "topomt_worktree_file_sha256": {
+      "topomt/_version.py": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+      "topomt/third_party/_common.py": "80e7e93925f8b100a7dfcfdf10d31255aace06134752d839f18b17a2874bb9e0",
+      "topomt/third_party/fpocket/cli.py": "58ec0aa26245eb3cf4dc3dd8805a242ea3033749abbd2b2689035c07ecf482cf",
+      "topomt/third_party/fpocket/files.py": "0cd382924b0b91903ab3b9d4d5f45bd9aae625751cc5a9da468db83943cc0217",
+      "devtools/qualify_fpocket_handoff.py": "961d0ae0c41031feec562774c5225c3e2f78335e6927394d9774fa5d139b4ff9",
+      "devtools/qualify_pharmacophore_handoff.py": "ae33992722ff95602c473dc0dc7a6ab0bf88270114336763cb40176f4cccd4a4",
+      "tests/methods/fpocket4/test_input_preparation.py": "ec949aaf4ae6edb583609379a590e3d8201cdc3fcdd5cc11888c4dd6277c4d36",
+      "tests/methods/fpocket4/test_submission_mapping.py": "30c86368b4f6223d9eb1334e1a81200152ea0d0437e81c0efee50fefddb8edd0",
+      "tests/methods/fpocket4/test_handoff_pilot.py": "e3272f451aa4530a884e7642a649c43a2d80f38fdd8b8e26deeeb757653f5aa9",
+      "tests/methods/fpocket4/test_pharmacophore_handoff.py": "791fefd9f3ed56575ba38978edfa7e2f6aee1e775cf271093e74b57a1ecc6aa7"
+    },
+    "molsysmt": "00abb958fb93649131d5ce5fe5e12e90cf4900e9",
+    "pharmacophoremt": "b934471ac8ab8bdb1bd7646550ac23baeb07daa7",
+    "python": "3.14.7"
+  },
+  "prepared_input": {
+    "archive_url": "https://github.com/uibcdf/pharmacophoremt/blob/869cf967cba0a066e5c10e9c725b52c5272500fc/devguide/evidence/eralpha_interface_prepared_py314.h5msm.gz",
+    "compressed_sha256": "ab67b64df320e1d2a12ee23f312344d207af528db69fdb6ee9bb10a10dee9b6c",
+    "uncompressed_sha256": "a42ef9868578ba16c62d52a1267d24160b973dca0d50dbc804ca46b6b2fe316a"
+  },
+  "original_handoff": {
+    "run_id": "55e92e4f7a58bfea89517093f4c829d127657a91af6faaaccb88aa677f63b6c8",
+    "pocket_count": 14,
+    "structure_index": 1,
+    "chemical_state": {
+      "count": 1,
+      "reference_index": 0
+    },
+    "checks": {
+      "nonempty_pockets": true,
+      "bundle_identity": true,
+      "chemical_state_round_trip": true,
+      "source_labels_round_trip": true,
+      "source_frames_round_trip": true,
+      "persisted_recovery": true,
+      "source_snapshot_recovery": true,
+      "alternate_unit_policy": true,
+      "detached_after_source_mutation": true,
+      "incompatible_source_rejected": true
+    },
+    "input_sha256": "a42ef9868578ba16c62d52a1267d24160b973dca0d50dbc804ca46b6b2fe316a",
+    "executable_sha256": "18a3a5e78481e572018703fd7e463969dd1cc598464efde18acf30284f5941eb",
+    "source_sha256": "1b63f84a716f981d95c585758ce4908ee9ac396e6986f14db41f17e1ea40041e"
+  },
+  "consumers": {
+    "nm_ps": {
+      "context": {
+        "original_run_id": "55e92e4f7a58bfea89517093f4c829d127657a91af6faaaccb88aa677f63b6c8",
+        "pocket_id": "fpocket:1",
+        "source_sha256": "1b63f84a716f981d95c585758ce4908ee9ac396e6986f14db41f17e1ea40041e",
+        "structure_index": 1,
+        "chemical_state": 0,
+        "membership_role": "provider_lining_atoms",
+        "interpretation": "explicit analytical projection; not binding relevance"
+      },
+      "site_count": 15,
+      "recipe": {
+        "projection_direction": {
+          "value": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "unit": "dimensionless"
+        },
+        "distance": "0.30 nm",
+        "radius": "0.15 nm",
+        "features": [
+          "hydrophobicity"
+        ]
+      },
+      "checks": {
+        "nonempty_query": true,
+        "native_site_round_trip": true,
+        "native_context_round_trip": true,
+        "source_coordinates_unchanged": true,
+        "source_bytes_unchanged": true
+      },
+      "query_sha256": "b801429b603274c092b04dce4959cec81c74e34045a2b617bbc3d53cbab98eff",
+      "original_bundle_sha256": "ecbf7628efb35d1fb0fba1e619d336c34301d31cb26e5fbb21ecf8787c823fe3",
+      "pocket_atom_count": 48,
+      "receipt_sha256": "b75f3b2fc5c82f327167910a6d759b6c54796f121528ae0392a3ed1417be2e53"
+    },
+    "pm_fs": {
+      "context": {
+        "original_run_id": "55e92e4f7a58bfea89517093f4c829d127657a91af6faaaccb88aa677f63b6c8",
+        "pocket_id": "fpocket:1",
+        "source_sha256": "1b63f84a716f981d95c585758ce4908ee9ac396e6986f14db41f17e1ea40041e",
+        "structure_index": 1,
+        "chemical_state": 0,
+        "membership_role": "provider_lining_atoms",
+        "interpretation": "explicit analytical projection; not binding relevance"
+      },
+      "site_count": 15,
+      "recipe": {
+        "projection_direction": {
+          "value": [
+            1.0,
+            0.0,
+            0.0
+          ],
+          "unit": "dimensionless"
+        },
+        "distance": "0.30 nm",
+        "radius": "0.15 nm",
+        "features": [
+          "hydrophobicity"
+        ]
+      },
+      "checks": {
+        "nonempty_query": true,
+        "native_site_round_trip": true,
+        "native_context_round_trip": true,
+        "source_coordinates_unchanged": true,
+        "source_bytes_unchanged": true
+      },
+      "query_sha256": "975c7cdaa7f35003d3c33780a37b845359195303d2a97e8d4a7311a062a3ebb1",
+      "original_bundle_sha256": "ecbf7628efb35d1fb0fba1e619d336c34301d31cb26e5fbb21ecf8787c823fe3",
+      "pocket_atom_count": 48,
+      "receipt_sha256": "e881036da12435ede9ab48b05d538c9bdd44c162ed71799cc07887eff6c9112c"
+    }
+  },
+  "verification": {
+    "pytest": {
+      "passed": 10,
+      "skipped": 0,
+      "seconds": 34.11,
+      "scope": [
+        "tests/methods/fpocket4/test_pharmacophore_handoff.py",
+        "tests/methods/fpocket4/test_handoff_pilot.py",
+        "tests/test_reporting_protocol.py",
+        "tests/test_devguide_contract_terms.py"
+      ]
+    },
+    "ruff": "check and format --check passed across 415 files",
+    "mypy": "2.3.1; both recorder modules passed with imported bodies skipped",
+    "sphinx": "make html exit 0; 12 warnings outside changed user page"
+  },
+  "artifact_storage": "Original bundle, generated source, two native queries and receipts retained in the local task workspace; not a public archive.",
+  "limits": [
+    "One prepared fragment/reference state and explicit hydrophobic query recipe.",
+    "No full-suite, clean installed/public, hosted, affinity or biological validation.",
+    "Checksums retain integrity and producer identity; they do not authenticate chemistry."
+  ]
+}

@@ -1,8 +1,10 @@
 # fpocket provider overview
 
-Reviewed: 2026-10-01 (repository and issue state). Scientific evidence dates are
+Reviewed: 2026-11-05 (repository and issue state). Scientific evidence dates are
 stated below; this organizational update does not rerun or extend that evidence.
-Role: integrated provider and comparison reference. Implementation work remains
+Role: integrated provider and comparison reference. A bounded original-provider
+handoff resumed under [#101](https://github.com/uibcdf/topomt/issues/101); see the
+[source handoff checkpoint](handoff_checkpoint.md). The broader work remains
 paused under the [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
 ## Identity, installation and use
@@ -63,6 +65,8 @@ bounded outcomes, not full-provider certification.
 
 - [Permanent fpocket discussion #69](https://github.com/uibcdf/topomt/discussions/69) in External Tools.
 - [Original output inventory](external_output_inventory.md).
+- [Original-engine source handoff evidence](handoff_checkpoint.md).
+- [Prepared-source PharmacophoreMT consumer control](pharmacophore_handoff_checkpoint.md).
 - [Native evidence and caveats](native_checkpoint.md).
 - [Source/binary parity matrix](../native_methods_plan.md).
 - [External-tool catalogue and stewardship](../external_tools_catalog.md).

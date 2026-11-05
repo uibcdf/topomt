@@ -5,6 +5,12 @@ Implementation owner: [#65](https://github.com/uibcdf/topomt/issues/65).
 Exhaustive provider fidelity: [#19](https://github.com/uibcdf/topomt/issues/19) and
 [third_party_results_checkpoint.md](third_party_results_checkpoint.md).
 
+2026-11-05 bounded resumption: the user approved an original-fpocket source
+handoff pilot under [#101](https://github.com/uibcdf/topomt/issues/101). See the
+[fpocket handoff checkpoint](fpocket4/handoff_checkpoint.md) for actual execution,
+persisted recovery, source mapping and remaining provider/consumer gates. The
+pause recorded below still applies to the broader deferred work.
+
 ## Accepted direction and precedence
 
 TopoMT must permanently offer pockets detected by every supported external
