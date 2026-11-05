@@ -7,6 +7,7 @@ import numpy as np
 
 from topomt.third_party._common import prepare_wrapper_input_pdb
 from topomt.third_party.fpocket.files import load_topography as load_fpocket_topography
+from topomt.third_party.fpocket.input_context import _chemical_context
 from topomt.third_party.fpocket.runner import run_fpocket
 from topomt.topography.Topography import Topography
 
@@ -19,9 +20,46 @@ def get_topography(
     syntax: str = 'MolSysMT',
     fpocket_cmd: str = 'fpocket',
     extra_args: list[str] | None = None,
+    chemical_state: str | int = 'reference',
 ) -> Topography:
-    """Run the fpocket CLI and return a Topography."""
+    """Run original fpocket with a declared reference chemical state.
 
+    Parameters
+    ----------
+    molecular_system : molecular system
+        MolSysMT-compatible input with one unambiguous reference state.
+    selection : str or sequence of int, default='all'
+        Nonempty source atom selection.
+    structure_indices : int or list of int, default=0
+        Exactly one coordinate frame.
+    syntax : str, default='MolSysMT'
+        Selection syntax.
+    fpocket_cmd : str, default='fpocket'
+        Original executable name or path.
+    extra_args : list of str, optional
+        Additional original-engine options.
+    chemical_state : str or int, default='reference'
+        The reference selector or its integer index, including a nonzero index.
+        Nonreference export is unsupported by the qualified MolSysMT converter.
+
+    Returns
+    -------
+    Topography
+        Original provider records and captured execution/context evidence.
+
+    Raises
+    ------
+    ValueError
+        If the input frame, selection or chemical context is not admitted.
+    FpocketError
+        If the executable is absent or its execution fails.
+
+    Examples
+    --------
+    >>> result = get_topography('protein.pdb', chemical_state='reference')  # doctest: +SKIP
+    """
+
+    context = _chemical_context(molecular_system, chemical_state)
     with tempfile.TemporaryDirectory(prefix='topomt_fpocket_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
         input_pdb, submitted_atom_indices = _prepare_fpocket_input(
@@ -30,6 +68,7 @@ def get_topography(
             selection=selection,
             structure_indices=structure_indices,
             syntax=syntax,
+            chemical_state=chemical_state,
         )
 
         output_dir = run_fpocket(
@@ -61,6 +100,8 @@ def get_topography(
                 'extra_args': list(extra_args or []),
             },
             submitted_atom_indices=submitted_atom_indices.tolist(),
+            chemical_state=chemical_state,
+            chemical_state_context=context,
         )
 
 
@@ -70,9 +111,10 @@ def _prepare_fpocket_input_pdb(
     selection: str = 'all',
     structure_indices: int | list[int] = 0,
     syntax: str = 'MolSysMT',
+    chemical_state: str | int = 'reference',
 ) -> Path:
     return _prepare_fpocket_input(
-        molecular_system, tmpdir, selection, structure_indices, syntax
+        molecular_system, tmpdir, selection, structure_indices, syntax, chemical_state
     )[0]
 
 
@@ -82,7 +124,9 @@ def _prepare_fpocket_input(
     selection: str = 'all',
     structure_indices: int | list[int] = 0,
     syntax: str = 'MolSysMT',
+    chemical_state: str | int = 'reference',
 ) -> tuple[Path, np.ndarray]:
+    _chemical_context(molecular_system, chemical_state)
     if (
         not isinstance(structure_indices, str)
         and np.asarray(structure_indices).size != 1

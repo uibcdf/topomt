@@ -7,6 +7,7 @@ import numpy as np
 from topomt import pyunitwizard as puw
 from topomt.features.Pocket import Pocket
 from topomt.provider_output import ExternalMeasurement, ProviderRun
+from topomt.third_party.fpocket.input_context import _chemical_context
 from topomt.third_party.fpocket.model import FpocketPocket, FpocketResult
 from topomt.third_party.fpocket.parser import parse_fpocket_output
 from topomt.topography.Topography import Topography
@@ -154,7 +155,25 @@ def fpocket_result_to_topography(
     backend: str = 'files',
     provider_metadata: dict[str, Any] | None = None,
     submitted_atom_indices: list[int] | None = None,
+    chemical_state: str | int | None = None,
+    chemical_state_context: dict[str, Any] | None = None,
 ) -> Topography:
+    context = None
+    if chemical_state_context is not None and (
+        not isinstance(chemical_state_context, dict)
+        or not isinstance(chemical_state_context.get('index'), int)
+        or isinstance(chemical_state_context['index'], bool)
+    ):
+        raise ValueError('Invalid saved chemical-state context.')
+    selector = chemical_state
+    if selector is None and chemical_state_context is not None:
+        selector = chemical_state_context['index']
+    if selector is not None:
+        context = _chemical_context(molecular_system, selector)
+        if chemical_state_context is not None and context != chemical_state_context:
+            raise ValueError(
+                'Source chemical-state context disagrees with the saved run.'
+            )
     topography, serial_to_index = _build_topography_and_atom_map(
         molecular_system,
         selection=selection,
@@ -183,6 +202,8 @@ def fpocket_result_to_topography(
     }
     if provider_metadata:
         run_metadata.update(provider_metadata)
+    if context is not None:
+        run_metadata['chemical_state_context'] = context
     if submitted_atom_indices is not None:
         run_metadata['submitted_atom_indices'] = [
             int(index) for index in submitted_atom_indices
@@ -229,6 +250,8 @@ def load_topography(
     backend: str = 'files',
     provider_metadata: dict[str, Any] | None = None,
     submitted_atom_indices: list[int] | None = None,
+    chemical_state: str | int | None = None,
+    chemical_state_context: dict[str, Any] | None = None,
 ) -> Topography:
     """Recover original fpocket files against a declared source context.
 
@@ -253,6 +276,13 @@ def load_topography(
         when exported serials differ from source atom IDs. The map must uniquely
         cover the selection and match the source frame within PDB precision.
         Omission retains the legacy serial-to-atom-ID mapping.
+    chemical_state : str or int, optional
+        Explicit reference selector or its integer index. Omission preserves
+        legacy files behavior unless a saved chemical_state_context is supplied.
+    chemical_state_context : dict, optional
+        Original run metadata entry of the same name. Its reference identity,
+        inventory count and chemistry digest must match the source. A stored
+        context determines the selector when chemical_state is omitted.
 
     Returns
     -------
@@ -262,7 +292,8 @@ def load_topography(
     Raises
     ------
     ValueError
-        If an explicit map, submitted serials or source coordinates disagree.
+        If an explicit map, submitted serials, source coordinates or declared
+        chemical context disagree.
 
     Examples
     --------
@@ -279,6 +310,8 @@ def load_topography(
         backend=backend,
         provider_metadata=provider_metadata,
         submitted_atom_indices=submitted_atom_indices,
+        chemical_state=chemical_state,
+        chemical_state_context=chemical_state_context,
     )
 
 

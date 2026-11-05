@@ -190,6 +190,7 @@ def qualify(pdb_file: Path, fpocket_cmd: str, output_dir: Path) -> dict[str, Any
                 selection=selection,
                 structure_indices=1,
                 submitted_atom_indices=run.metadata['submitted_atom_indices'],
+                chemical_state_context=run.metadata.get('chemical_state_context'),
             )
 
         recovered = recover(restored)

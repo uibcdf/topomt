@@ -169,6 +169,7 @@ recovered = tmt.get_provider_output(
     selection=result.run.metadata['selection'],
     structure_indices=result.run.metadata['structure_indices'],
     submitted_atom_indices=result.run.metadata['submitted_atom_indices'],
+    chemical_state_context=result.run.metadata['chemical_state_context'],
 )
 ```
 
@@ -178,6 +179,23 @@ unique, and mapped source coordinates must agree with PDB coordinates within
 `ValueError`. Without an explicit map, the files route retains its legacy
 serial-to-source-atom-ID behavior. A run bundle does not contain the full source
 system or qualify its chemical-state context by itself.
+
+The CLI admits an unambiguous reference chemical state. `chemical_state='reference'`
+is the default; its explicit integer index is also accepted, including an index
+other than zero. With the qualified MolSysMT converter, a different chosen state,
+an ambiguous reference, absent chemistry or a zero-state inventory raises
+`ValueError` before fpocket executes. The adapter does not change the source's
+reference to make an export succeed. Unknown connectivity and a declared complete
+zero-bond graph remain distinct; pocket execution does not establish readiness
+for downstream chemical recognition.
+
+New runs retain `chemical_state_context` with reference index, state ID, inventory
+count and a digest of the provider's formal charges, bond table and connectivity
+completeness. Pass that entry to file recovery, as above, to reject changed source
+chemistry even when its coordinates agree. Keep the original full source system;
+the digest does not authenticate chemistry or reconstruct a discarded state.
+Files calls omitting both chemical options retain legacy behavior and do not
+claim this additional state qualification. Historical bundles remain readable.
 
 The bounded source handoff pilot is tracked in
 [TopoMT #101](https://github.com/uibcdf/topomt/issues/101). Its developer command,

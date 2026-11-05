@@ -162,6 +162,7 @@ def consume(
             selection=run.metadata['selection'],
             structure_indices=1,
             submitted_atom_indices=run.metadata['submitted_atom_indices'],
+            chemical_state_context=run.metadata.get('chemical_state_context'),
         )
     pocket = next(
         (record for record in output.pockets if record.source_id == pocket_id), None

@@ -84,6 +84,8 @@ def get_output(
     **kwargs
         Execution/import options documented by the corresponding legacy adapter,
         including selection, structure_indices and provider-specific settings.
+        CLI chemical_state selects the unambiguous reference or its index;
+        files chemical_state_context validates the original saved context.
 
     Returns
     -------
