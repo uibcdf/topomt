@@ -1,0 +1,15 @@
+{
+  "date": "2026-11-05",
+  "repository": "Discngine/fpocket",
+  "issue_number": 188,
+  "url": "https://github.com/Discngine/fpocket/issues/188",
+  "title": "PDB formal-charge parsing drops trailing minus signs in 4.2.3",
+  "state_at_verification": "open",
+  "author": "LMMV",
+  "source_report": "devguide/fpocket4/upstream_negative_charge_draft.md",
+  "published_body_sha256": "9e68ba9dcee010798499c949fff9f17fd38d366b2ca0bc94fe80af3c0075a211",
+  "exact_report_verified": true,
+  "authorization": "Explicit user request to communicate the reviewed finding.",
+  "publication_route": "GitHub CLI using LMMV after the connector returned Resource not accessible by integration (403).",
+  "scope": "Reproduced original-source PDB charge parsing only; no production fix, pull request or geometric/biological impact claim."
+}

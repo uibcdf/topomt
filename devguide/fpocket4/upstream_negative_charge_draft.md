@@ -2,8 +2,12 @@ Title: PDB formal-charge parsing drops trailing minus signs in 4.2.3
 
 In fpocket 4.2.3, commit `4bb0d8447f62fee77e2c3c29f54b5fcaf5e2c066`,
 `rpdb_extract_pdb_atom` copies PDB columns 79–80 to a buffer and calls `atoi`
-(`src/rpdb.c`, lines 372–385). The valid PDB magnitude/sign field `1-` is
+([source, lines 372–385](https://github.com/Discngine/fpocket/blob/4bb0d8447f62fee77e2c3c29f54b5fcaf5e2c066/src/rpdb.c#L372-L385)). The valid PDB magnitude/sign field `1-` is
 therefore read as positive 1; `2-` becomes positive 2.
+
+The [official wwPDB format specification](https://www.wwpdb.org/documentation/file-format-content/format33/sect9.html#ATOM)
+defines columns 79–80 as charge and explicitly gives `2+` and `1-` as examples.
+The expected negative values below follow that documented magnitude/sign syntax.
 
 An independent caller of the unchanged original parser, linked to the original
 `rpdb.c`, `utils.c` and `pertable.c`, produces:

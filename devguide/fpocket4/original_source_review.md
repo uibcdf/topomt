@@ -80,3 +80,11 @@ external repository is `Discngine/fpocket`; publication of a report there needs
 the common explicit external-publication authorization. No upstream issue or PR
 has been created. The reviewed local issue draft is separate from the already
 approved TopoMT #101 checkpoint payload.
+
+Publication follow-up — 2026-11-05: after the user's explicit authorization,
+the reviewed report was submitted as
+[Discngine/fpocket #188](https://github.com/Discngine/fpocket/issues/188) by `LMMV`.
+The published title/body were verified against the local draft; the
+[publication receipt](evidence/upstream_issue_188_publication.json) retains its
+body digest and route. The report includes the official wwPDB magnitude/sign
+specification. It remains open; no upstream fix or broader impact is claimed.
