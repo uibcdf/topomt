@@ -1,0 +1,88 @@
+{
+  "schema": "topomt.installed-receiving-evidence@1",
+  "archive": "installed_receiving_20261105.zip",
+  "size": 1408066,
+  "sha256": "a804caec5aadec3420cac959e7e7358893791a7bdd93e94d0582a2604874d990",
+  "members": 49,
+  "producer": "edb43579b2a937e1ac5faa7f89876c7ff3c81e5c",
+  "scope": "Bounded installed Linux x86_64/Python 3.14 fpocket receiving; shared external dependencies; not full/release/public qualification.",
+  "tests": {
+    "passed": 32,
+    "skipped": 0,
+    "failed": 0
+  },
+  "wheel_artifacts": [
+    {
+      "name": "smonitor",
+      "filename": "smonitor-0.22.0+16.gccdcace-py3-none-any.whl",
+      "size": 72313,
+      "sha256": "74e6ded5542a5c79e35df173743375a9daf7280bf0d077c7d4e4be43d0bfc7d7",
+      "build_log_sha256": "f32cda5056e3844a5d57593038a98f1ee8cbac1c752f7644c7d09c38a8034d26"
+    },
+    {
+      "name": "depdigest",
+      "filename": "depdigest-0.15.1+8.g0884f0c-py3-none-any.whl",
+      "size": 22292,
+      "sha256": "0adb2a8ffd5081ed2101ba377d83812c1d16bd2727cd1fd4fe15df73318085a7",
+      "build_log_sha256": "5438b158244a5ea376d6e9dbd199e0d0b0bb29dad82f17fbee5844f5fd3a7920"
+    },
+    {
+      "name": "argdigest",
+      "filename": "argdigest-0.17.0+5.gcd9c4f3-py3-none-any.whl",
+      "size": 60883,
+      "sha256": "24321e200ef43158c6aece066b7318f377ab455fa3aed440074f68a647e88721",
+      "build_log_sha256": "36f09acdc577a7d484a7b6e9b3d120cf36a4de5c719aa72d9b8e5e815aabaaec"
+    },
+    {
+      "name": "pyunitwizard",
+      "filename": "pyunitwizard-0.29.0+4.g9d74f0e-py3-none-any.whl",
+      "size": 134232,
+      "sha256": "2fd3e46683e83e56ea29ce2fa9201a369688ec369bbd8abe3c57698fa8026213",
+      "build_log_sha256": "f40c87a18f9ef5db465fea55f3a9d614355daea73822d566c8f891ca51064a4b"
+    },
+    {
+      "name": "molsysviewer",
+      "filename": "molsysviewer-0.24.0+188.g73a6f388-py3-none-any.whl",
+      "size": 2031654,
+      "sha256": "498477eeb40ff24943df4c0698a22246dfc7cf3df6e99cbb7b4e7e056cbed675",
+      "build_log_sha256": "4aaf5855578b9a690d548d530d8b157c4085bdb36a8b960e9b2c2c92d38e5ef8"
+    },
+    {
+      "name": "pytest-receptor",
+      "filename": "pytest_receptor-1.2.2+2.gb9676f8-py3-none-any.whl",
+      "size": 45296,
+      "sha256": "1578743c9c8e5fc9afcc965187b484e6614cef21acc4e40cf98db36bb3d45372",
+      "build_log_sha256": "9d3287b4530024160e62f6b53c154c3158a6b105e5a41a833cd1d968d74347fd"
+    },
+    {
+      "name": "topomt",
+      "filename": "topomt-0.5.0+337.gedb4357.dirty-py3-none-any.whl",
+      "size": 21564290,
+      "sha256": "d767c86274e5cd3b5e055642ff2440433fd01ab15903e505f98bc8c816cbc92b",
+      "build_log_sha256": "e77639f26f0406aa790f6f848a3990c24c26156fab46d38c498ed7cfe515b18d"
+    },
+    {
+      "name": "pharmacophoremt",
+      "filename": "pharmacophoremt-0.4.0+98.gb934471-py3-none-any.whl",
+      "size": 4476533,
+      "sha256": "9a18a044fd4c63827619b52af3be9c37112fa397fb8b0ac655729920b5517b45",
+      "build_log_sha256": "2d82bf3749c46129d3c16bbda2d2214660930237256d81fd8329ae2c2abc474e"
+    },
+    {
+      "name": "molsysmt",
+      "filename": "molsysmt-0.23.0+368.g00abb958f-cp311-abi3-linux_x86_64.whl",
+      "size": 61910408,
+      "sha256": "29ee31477065db70f0d58085c4598a6b8d66495a06c98e0f23c894bdd9c0c1d9",
+      "build_log_sha256": "12eb01fa213be114e3ef17d139b18c3b771cef7c6e337a87b961caaf3d7b86a0"
+    }
+  ],
+  "native": {
+    "path": "env/lib/python3.14/site-packages/molsysmt/_rust.abi3.so",
+    "size": 5184304,
+    "sha256": "737086505b2bd3efd982216bcb90d8c8ce45e4ca65dd8a69fdb00baf0b7c6308"
+  },
+  "retention": {
+    "root": "/dev/shm/topomt-installed-101.bch3yxd8/wheels",
+    "status": "Original wheel bytes retained locally in task storage; not committed or publicly hosted."
+  }
+}

@@ -68,6 +68,7 @@ bounded outcomes, not full-provider certification.
 - [Original-engine source handoff evidence](handoff_checkpoint.md).
 - [Prepared-source PharmacophoreMT consumer control](pharmacophore_handoff_checkpoint.md).
 - [Reference-state admission and recovery controls](chemical_context_checkpoint.md).
+- [Bounded installed-wheel receiving evidence](installed_receiving_checkpoint.md).
 - [Original 4.2.3 source review and charge-parser control](original_source_review.md).
 - [Native evidence and caveats](native_checkpoint.md).
 - [Source/binary parity matrix](../native_methods_plan.md).
