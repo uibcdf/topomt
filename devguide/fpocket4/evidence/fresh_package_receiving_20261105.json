@@ -1,0 +1,51 @@
+{
+  "schema": "topomt.fresh-package-receiving-evidence@1",
+  "archive": "fresh_package_receiving_20261105.zip",
+  "size": 4515782,
+  "sha256": "4e00e49aa4dc63776e8e6c0252a494b9cc258c9fa993c9e58064948ea37040ed",
+  "members": 74,
+  "producer": "edb43579b2a937e1ac5faa7f89876c7ff3c81e5c",
+  "original_wheels_manifest": "installed_receiving_20261105.json",
+  "original_wheels_manifest_sha256": "a7bb35518a8590d6c00979cdb26446a802acd3b2857d2032bc11a1ec0d1806b1",
+  "profiles": {
+    "metadata-only": {
+      "receipt": "receipt-metadata-only.json",
+      "tests": 32,
+      "skipped": 0,
+      "failed": 0,
+      "distributions": 137,
+      "record_hashes": 25784,
+      "test_support": "Unchanged five test files and two qualification helpers from the original producer."
+    },
+    "types-enabled": {
+      "receipt": "receipt-types-enabled.json",
+      "tests": 32,
+      "skipped": 0,
+      "failed": 0,
+      "distributions": 138,
+      "record_hashes": 26210,
+      "test_support": "Unchanged five test files and two qualification helpers from the original producer."
+    }
+  },
+  "scope": "Fresh isolated Python-package closure on Linux x86_64/Python 3.14; original local suite wheels; existing interpreter and OS libraries reused. Not full/public/Conda/matrix qualification.",
+  "pip_check": {
+    "before": "No broken requirements found.",
+    "after": "No broken requirements found."
+  },
+  "original_wheel_retention": "/dev/shm/topomt-installed-101.bch3yxd8/wheels",
+  "external_built_wheels": [
+    {
+      "filename": "mmcif-1.2.1-cp314-cp314-linux_x86_64.whl",
+      "size": 639239,
+      "sha256": "683a77bb3a7dff74d614081e8161542a13ae52b540aa10e19c6957c90ffcb89b",
+      "retained": "/dev/shm/topomt-installed-101.bch3yxd8/clean/external-wheels/mmcif-1.2.1-cp314-cp314-linux_x86_64.whl"
+    },
+    {
+      "filename": "nglview-4.0.1-py3-none-any.whl",
+      "size": 10672420,
+      "sha256": "089495673323754a3cabad2f9bf3c1a313708d6c3659541a96dbca6d0a3a6a0c",
+      "retained": "/dev/shm/topomt-installed-101.bch3yxd8/clean/external-wheels/nglview-4.0.1-py3-none-any.whl"
+    }
+  ],
+  "argdigest_audit": "control/argdigest-boundary-review.json; four undecorated entry points and two invalid-dispatch AttributeErrors. Audit does not change or qualify those boundaries."
+}

@@ -108,3 +108,8 @@ was introduced. Full-suite/hosted recovery remains under
 [#58](https://github.com/uibcdf/topomt/issues/58). The upstream
 [negative-charge parser report](https://github.com/Discngine/fpocket/issues/188)
 remains separate from installed receiving success.
+
+The subsequent [fresh-package control](fresh_package_receiving_checkpoint.md)
+reuses these exact wheels with independent Python packages, passes the same
+32 cases in both recorded profiles and obtains a clean `pip check`. It also
+records the remaining ArgDigest integration gap without changing the candidate.
