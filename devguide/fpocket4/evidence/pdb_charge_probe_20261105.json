@@ -1,0 +1,70 @@
+{
+  "profile": "fpocket4.2.3-original-pdb-charge-parser-control@1",
+  "date": "2026-11-05",
+  "upstream_commit": "4bb0d8447f62fee77e2c3c29f54b5fcaf5e2c066",
+  "upstream_tag": "4.2.3",
+  "compiler": "cc (Ubuntu 15.2.0-16ubuntu1) 15.2.0",
+  "original_source_sha256": {
+    "src/rpdb.c": "be453dbe217547cd33fc65932c54799fb444ff43e2c121573d58017f3ef355d7",
+    "src/utils.c": "d8c899c9b1cc08c5ba53fde03d7b75b2ef5bbc7909f8a7e209f3e4f87eb64306",
+    "src/pertable.c": "c937377b02b0a3d03af308aa98246c119fc7a2775372e94fdc9dd2f6cf10ddb9"
+  },
+  "probe_source": "devtools/fpocket/probe_pdb_charge.c",
+  "probe_sha256": "8cfdedf32e47eef25e7e7319cd902dec3404a681b0b59f24350ba3504d9ea1db",
+  "exit_code": 1,
+  "cases": [
+    {
+      "field": "1+",
+      "expected": {
+        "value": 1,
+        "unit": "e"
+      },
+      "observed": {
+        "value": 1,
+        "unit": "e"
+      },
+      "matches": true
+    },
+    {
+      "field": "1-",
+      "expected": {
+        "value": -1,
+        "unit": "e"
+      },
+      "observed": {
+        "value": 1,
+        "unit": "e"
+      },
+      "matches": false
+    },
+    {
+      "field": "2-",
+      "expected": {
+        "value": -2,
+        "unit": "e"
+      },
+      "observed": {
+        "value": 2,
+        "unit": "e"
+      },
+      "matches": false
+    },
+    {
+      "field": "  ",
+      "expected": {
+        "value": 0,
+        "unit": "e"
+      },
+      "observed": {
+        "value": 0,
+        "unit": "e"
+      },
+      "matches": true
+    }
+  ],
+  "limits": [
+    "Unchanged source function plus original helper objects, not a rebuilt complete fpocket executable.",
+    "No measured change to charge_score, ranking, geometry or biology.",
+    "External issue not submitted without separate authorization."
+  ]
+}

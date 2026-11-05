@@ -100,6 +100,12 @@ native artifact. PharmacophoreMT's current clean head is `b934471ac8ab...`; its
 package bytes are unchanged from the earlier `869cf967cba0...` consumer source.
 No sibling code or shared environment was modified.
 
+Subsequent [original-source review](original_source_review.md) reproduces a
+negative-charge parsing defect in fpocket 4.2.3. The context digest preserves
+source chemistry and submitted evidence; it does not certify that upstream
+interprets every field correctly. Consumers retain the original MolSysMT source
+for chemical recognition rather than reconstructing it from lining-atom exports.
+
 ## Reproduce and remaining scope
 
 ```bash

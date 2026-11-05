@@ -1,0 +1,11 @@
+{
+  "issue": "https://github.com/uibcdf/topomt/issues/101",
+  "comment_url": "https://github.com/uibcdf/topomt/issues/101#issuecomment-6671198669",
+  "comment_id": 6671198669,
+  "date": "2026-11-05",
+  "approved_payload": "devguide/fpocket4/issue_101_update_draft.md",
+  "payload_sha256": "35dbd691f99dd8851e548519004d1dbb0733d99a4cfc099bd561da30394ccbe5",
+  "published_body_matches_approved_payload": true,
+  "source_candidate": "2209e38f9b2c5f23b129519e85d2a5cbd96788b6",
+  "scope": "Approved checkpoint comment only; no branch publication, issue closure or upstream report."
+}
