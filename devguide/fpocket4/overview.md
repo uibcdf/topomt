@@ -67,6 +67,7 @@ bounded outcomes, not full-provider certification.
 - [Original output inventory](external_output_inventory.md).
 - [Original-engine source handoff evidence](handoff_checkpoint.md).
 - [Prepared-source PharmacophoreMT consumer control](pharmacophore_handoff_checkpoint.md).
+- [Reference-state admission and recovery controls](chemical_context_checkpoint.md).
 - [Native evidence and caveats](native_checkpoint.md).
 - [Source/binary parity matrix](../native_methods_plan.md).
 - [External-tool catalogue and stewardship](../external_tools_catalog.md).

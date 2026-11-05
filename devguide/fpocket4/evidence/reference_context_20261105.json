@@ -1,0 +1,65 @@
+{
+  "profile": "topomt.fpocket_reference_context_control@1",
+  "date": "2026-11-05",
+  "owner_issues": [
+    "https://github.com/uibcdf/topomt/issues/101",
+    "https://github.com/uibcdf/topomt/issues/100"
+  ],
+  "source": {
+    "topomt_base": "4bd74503a856e9b361595e4d8729a653e49adbc3",
+    "molsysmt": "00abb958fb93649131d5ce5fe5e12e90cf4900e9",
+    "pharmacophoremt": "6e7c934fcf288cf97c800ab5db1d3c040370e10b",
+    "python": "3.14.7",
+    "worktree_sha256": {
+      "topomt/third_party/fpocket/input_context.py": "fa00c58187aa39b24a8ad7c92b4e07cbb219c72e9e5f45d32274fe258eac3dc1",
+      "topomt/third_party/fpocket/cli.py": "56c1389110b37176d0c8d3f7f0c772d901c387613adbdbab17da3336bbaa6fea",
+      "topomt/third_party/fpocket/files.py": "d32e716a7766254e14d7e89e6f9a80ceb6f348983dcff3d38b664e5df4a1c19c",
+      "topomt/third_party/fpocket/api.py": "862cc9b3e2cf8cb27777474932fe59064e21063c65ff9bc60e25e64aa221a4e8",
+      "devtools/qualify_fpocket_handoff.py": "414b2a3c691d6369edc4694e7e96495057ce39e90bb30b670ad081f53c2c9183",
+      "devtools/qualify_pharmacophore_handoff.py": "9fe99b83914629078ab43920d67066a30a1e4909999cd03a102311f782b87a7b",
+      "tests/methods/fpocket4/test_chemical_context.py": "113eb8dce19856930193a3251479037e9a71c0995540dcdc29ea39f9017ab0b6"
+    }
+  },
+  "original_run_id": "fa82d24cfe8eb54ecb1a2bc20de1dca7e33ecffa79ca764c457582df06f791de",
+  "chemical_state_context": {
+    "index": 1,
+    "pdb_chemistry_sha256": "303db8c8dffb309d6ba8bdd4e0e4102e7f4dfadcc69fdc072e76c0520b294d31",
+    "reference_index": 1,
+    "state_count": 2,
+    "state_id": "analytical-state-1"
+  },
+  "structure_indices": 0,
+  "selection": "molecule_type in ['protein', 'peptide']",
+  "pocket_count": 10,
+  "source_sha256": "1cb9698a0f6216aa1918611a36e19eb9ad8f1bd11ee420c0838d1ce127949dbe",
+  "original_bundle_sha256": "b639e50a8671a758a466ef93603ab747039a7777a5a5ea5b680e9f7f9c7c743b",
+  "validation": {
+    "selected_passed": 153,
+    "deselected": 5,
+    "seconds": 121.64,
+    "chemical_context_cases_passed": 11,
+    "host_legacy_input_map_cases_passed": 14,
+    "ruff": "check and format --check pass across 417 files",
+    "mypy": "2.3.1: five affected executable modules pass; imported bodies skipped"
+  },
+  "limits": [
+    "Only an unambiguous reference can be exported by the qualified provider.",
+    "Nonreference, ambiguous, absent and zero-state inputs reject before original execution.",
+    "Identity/digest is not authentication, chemical readiness, affinity or biological validation.",
+    "Source-only controlled provider and unchanged compiled artifact; clean installed/public qualification remains separate."
+  ],
+  "archive": {
+    "path": "reference_context_20261105.zip",
+    "sha256": "be6475e50274c0083e315f96956c6efd19dd5c64d8f14eb5eb498eb7715e1635",
+    "bytes": 221412,
+    "members": {
+      "source.h5msm": "1cb9698a0f6216aa1918611a36e19eb9ad8f1bd11ee420c0838d1ce127949dbe",
+      "original.zip": "b639e50a8671a758a466ef93603ab747039a7777a5a5ea5b680e9f7f9c7c743b",
+      "summary.json": "029621f1e28520ecc70afbda7ac8ecaf6d759e98dbf38180e87701a1c2bcafbb"
+    }
+  },
+  "runtime_verification": {
+    "native_artifact_sha256": "9a485965d06f4966d9a78a420b8622765159e80e3dafb8b475e7a5ed6e01275e",
+    "pharmacophoremt_package_unchanged_from": "869cf967cba0a066e5c10e9c725b52c5272500fc"
+  }
+}

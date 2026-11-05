@@ -126,6 +126,9 @@ claim. This initial spatial control did not exercise PharmacophoreMT. The
 subsequent [prepared-source consumer control](pharmacophore_handoff_checkpoint.md)
 records that bounded follow-up and preserves the incomplete-chemistry rejection
 of this 3PTB source.
+The later [reference-state controls](chemical_context_checkpoint.md) qualify
+nonzero references and rejection of nonreference/ambiguous/absent states; they
+do not relabel this original single-state execution as a multi-state run.
 
 The host `pip check` already reported seven conflicts involving Amber-related
 tools, pdb2pqr, NumPy and Biopython; they were not repaired by this pilot. The
