@@ -81,7 +81,7 @@ def test_missing_engine_fails_before_input_conversion(monkeypatch, provider):
 
     monkeypatch.setattr(dependency_decorator, 'check_dependency', check)
     with pytest.raises(LibraryNotFoundError) as caught:
-        library.get_topography(None)
+        library.get_topography(object())
 
     assert caught.value.code == 'LibraryNotFoundError'
     assert provider in str(caught.value)
@@ -103,7 +103,7 @@ def test_source_checkout_does_not_require_installed_provider(monkeypatch, provid
     monkeypatch.setattr(dependency_decorator, 'check_dependency', check)
     monkeypatch.setattr(library, 'prepare_wrapper_input_pdb', stop_at_input)
     with pytest.raises(RuntimeError, match='input boundary reached'):
-        library.get_topography(None, upstream_root='/explicit/source')
+        library.get_topography(object(), upstream_root='/explicit/source')
 
 
 def test_import_topomt_does_not_import_original_engines():

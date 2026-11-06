@@ -7,7 +7,10 @@ import numpy as np
 
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.arg_digestion.fpocket_arguments import OPTIONS
-from topomt.third_party._common import prepare_wrapper_input_pdb
+from topomt.third_party._common import (
+    prepare_wrapper_input_pdb,
+    validate_single_frame_pdb,
+)
 from topomt.third_party.fpocket.files import load_topography as load_fpocket_topography
 from topomt.third_party.fpocket.input_context import _chemical_context
 from topomt.third_party.fpocket.runner import run_fpocket
@@ -146,11 +149,5 @@ def _prepare_fpocket_input(
         structure_indices=structure_indices,
         syntax=syntax,
     )
-    model_count, atom_count = 0, 0
-    with input_pdb.open() as handle:
-        for line in handle:
-            model_count += line.startswith('MODEL ')
-            atom_count += line.startswith(('ATOM  ', 'HETATM'))
-    if model_count > 1 or atom_count == 0:
-        raise ValueError('fpocket requires exactly one input coordinate frame.')
+    validate_single_frame_pdb(input_pdb, provider='fpocket')
     return input_pdb, atom_indices

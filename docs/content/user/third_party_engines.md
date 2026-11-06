@@ -242,6 +242,23 @@ for native feature recognition; incomplete chemistry remains a provider error.
 This optional control adds no PharmacophoreMT runtime requirement to TopoMT and
 does not qualify a complete receptor model or installed integration.
 
+### Pocketeer original inputs
+
+Original Pocketeer options have an ArgDigest contract, including calls through
+`get_provider_output`. Unknown options and invalid values are rejected before
+dependency or molecular-input work. Radii, probe size and SASA threshold must be
+finite positive scalars; the maximum radius must exceed the minimum. Merge
+distance may be zero. `min_spheres` is a positive integer and `ignore_*` flags
+are literal booleans. Scalar quantities are converted explicitly to the original
+angstrom/angstrom-squared protocol; omitted options keep upstream defaults.
+The original route requires one exported frame. Select its source index with
+`structure_indices`; an ambiguous multiframe export is rejected before execution.
+Run metadata preserves the module's `version` and adds `distribution_version`
+only when the imported package matches its installed metadata origin. These
+identities can differ, as in Pocketeer 0.4.0's module string `0.3.0`.
+An explicit chemical-state argument and saved-output reconstruction are not
+supported by this Pocketeer route yet.
+
 ## Show original pockets in MolSysViewer
 
 Install the optional viewer dependencies with `python -m pip install 'topomt[viewer]'`.

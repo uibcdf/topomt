@@ -3,96 +3,31 @@
 from numbers import Integral
 from pathlib import Path
 from string import hexdigits
-from typing import Any, NoReturn
+from typing import Any
 
 import numpy as np
 from argdigest import register_pipeline
 from argdigest.core.context import Context
 
-from .provider_dispatch import ORIGINAL_BACKENDS, ProviderDispatchArgumentError
+from .external_arguments import (
+    _error,
+    _indices,
+    digest_molecular_system,
+    digest_selection,
+    digest_skip_digestion,
+    digest_structure_indices,
+    digest_syntax,
+)
+from .provider_dispatch import ORIGINAL_BACKENDS
 
 API_CALLER = 'topomt.third_party.fpocket.api.get_output'
 FILES_CALLER = 'topomt.third_party.fpocket.files.load_topography'
-
-
-def _error(argument: str, value: Any, caller: str | None, reason: str) -> NoReturn:
-    raise ProviderDispatchArgumentError(
-        arg_name=argument, value=value, caller=caller, reason=reason
-    )
 
 
 def digest_backend(backend: Any, caller: str | None = None) -> str:
     if isinstance(backend, str) and backend.lower() in ORIGINAL_BACKENDS['fpocket']:
         return backend.lower()
     _error('backend', backend, caller, 'backend must be cli, wrapper or files.')
-
-
-def digest_molecular_system(
-    molecular_system: Any, backend: str | None = None, caller: str | None = None
-) -> Any:
-    # Molecular-form support, source inventory and identity belong to MolSysMT.
-    if molecular_system is None:
-        _error(
-            'molecular_system',
-            molecular_system,
-            caller,
-            'A molecular source is required.',
-        )
-    return molecular_system
-
-
-def _indices(
-    value: Any, argument: str, caller: str | None, single: bool = False
-) -> Any:
-    if isinstance(value, Integral) and not isinstance(value, bool) and int(value) >= 0:
-        return value
-    if isinstance(value, (list, tuple, range, np.ndarray)):
-        try:
-            array = np.asarray(value)
-        except (TypeError, ValueError):
-            _error(argument, value, caller, 'Expected a flat integer index axis.')
-        if array.ndim == 1 and array.size and (not single or array.size == 1):
-            if all(
-                isinstance(i, Integral) and not isinstance(i, bool) and int(i) >= 0
-                for i in value
-            ):
-                return value
-    reason = (
-        'Expected a nonempty one-dimensional sequence of nonnegative integer indices.'
-    )
-    if single:
-        reason = 'Expected exactly one input coordinate frame as a nonnegative integer index.'
-    _error(argument, value, caller, reason)
-
-
-def digest_selection(selection: Any, caller: str | None = None) -> Any:
-    if isinstance(selection, str) and selection.strip():
-        return selection
-    return _indices(selection, 'selection', caller)
-
-
-def digest_structure_indices(structure_indices: Any, caller: str | None = None) -> Any:
-    # These legacy selectors require source-dependent frame-count admission later.
-    if (
-        structure_indices is None
-        or isinstance(structure_indices, str)
-        and structure_indices.lower() == 'all'
-    ):
-        return structure_indices
-    return _indices(structure_indices, 'structure_indices', caller, single=True)
-
-
-def digest_syntax(syntax: Any, caller: str | None = None) -> str:
-    from topomt._private.exceptions import ArgumentError
-
-    from .argument.syntax import digest_syntax as owning_digest
-
-    try:
-        return owning_digest(syntax, caller=caller)
-    except ArgumentError:
-        _error(
-            'syntax', syntax, caller, 'Expected a supported MolSysMT selection syntax.'
-        )
 
 
 def digest_fpocket_cmd(fpocket_cmd: Any, caller: str | None = None) -> str:
@@ -234,12 +169,6 @@ def digest_chemical_state_context(
         caller,
         'Invalid saved chemical-state context schema; source agreement is checked separately.',
     )
-
-
-def digest_skip_digestion(skip_digestion: Any, caller: str | None = None) -> bool:
-    if type(skip_digestion) is bool:
-        return skip_digestion
-    _error('skip_digestion', skip_digestion, caller, 'Expected a literal boolean.')
 
 
 @register_pipeline(kind='fpocket', name='backend')

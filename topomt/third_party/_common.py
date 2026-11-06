@@ -1,12 +1,77 @@
 import shutil
 import sys
 from importlib import import_module
+from importlib.metadata import PackageNotFoundError, distribution
 from pathlib import Path
+from types import ModuleType
 
 import molsysmt as msm
 import numpy as np
 
 from topomt._private.smonitor import LibraryNotFoundError
+
+
+def installed_provider_version(module: ModuleType) -> str | None:
+    """Return distribution metadata only for its matching Python package origin.
+
+    Parameters
+    ----------
+    module : types.ModuleType
+        Imported pure Python provider package with an ``__init__.py`` origin.
+
+    Returns
+    -------
+    str or None
+        Distribution version, or None for absent metadata or a source override.
+        This identifies metadata; artifact-byte integrity is a separate check.
+
+    Raises
+    ------
+    OSError
+        If resolving the package origin fails.
+    """
+    origin = getattr(module, '__file__', None)
+    if origin is None:
+        return None
+    try:
+        installed = distribution(module.__name__)
+    except PackageNotFoundError:
+        return None
+    expected = installed.locate_file(module.__name__.replace('.', '/') + '/__init__.py')
+    return (
+        installed.version
+        if Path(origin).resolve() == Path(str(expected)).resolve()
+        else None
+    )
+
+
+def validate_single_frame_pdb(input_pdb: Path, *, provider: str) -> None:
+    """Require one nonempty submitted PDB frame before an original engine runs.
+
+    Parameters
+    ----------
+    input_pdb : pathlib.Path
+        Actual prepared input; implicit single-model PDB files are accepted.
+    provider : str
+        Engine identity used in the admission diagnostic.
+
+    Returns
+    -------
+    None
+        Admission succeeds without changing the submitted bytes.
+
+    Raises
+    ------
+    ValueError
+        If multiple explicit models or no atom rows are present.
+    """
+    model_count, atom_count = 0, 0
+    with input_pdb.open() as handle:
+        for line in handle:
+            model_count += line.startswith('MODEL ')
+            atom_count += line.startswith(('ATOM  ', 'HETATM'))
+    if model_count > 1 or atom_count == 0:
+        raise ValueError(f'{provider} requires exactly one input coordinate frame.')
 
 
 def prepare_wrapper_input_pdb(

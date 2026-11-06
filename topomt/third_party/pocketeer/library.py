@@ -2,15 +2,23 @@ import hashlib
 import json
 import tempfile
 from pathlib import Path
+from typing import Any
 
 import numpy as np
 from depdigest import dep_digest
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.pocketeer_arguments import OPTIONS, RADIUS_PIPELINES
 from topomt.features import Pocket
 from topomt.provider_output import ExternalMeasurement, ProviderRun
-from topomt.third_party._common import import_upstream_module, prepare_wrapper_input_pdb
+from topomt.third_party._common import (
+    import_upstream_module,
+    installed_provider_version,
+    prepare_wrapper_input_pdb,
+    validate_single_frame_pdb,
+)
 
 
 def _json_ready(value):
@@ -47,18 +55,60 @@ def _normalize_upstream_pocketeer_kwargs(kwargs):
     return normalized
 
 
+@arg_digest(**OPTIONS, map=RADIUS_PIPELINES)
 @dep_digest('pocketeer', when={'upstream_root': None})
 @dep_digest('biotite')
 def get_topography(
-    molecular_system,
+    molecular_system: Any,
     *,
     selection: str = 'all',
     structure_indices: int | list[int] = 0,
     syntax: str = 'MolSysMT',
-    upstream_root: str | None = None,
-    **kwargs,
+    upstream_root: str | Path | None = None,
+    skip_digestion: bool = False,
+    **kwargs: Any,
 ) -> Topography:
-    """Run the upstream Pocketeer Python library and return a Topography."""
+    """Run the original Pocketeer library on one submitted coordinate frame.
+
+    Parameters
+    ----------
+    molecular_system : MolSysMT-compatible input
+        Source atom inventory and coordinates.
+    selection : str or sequence of int, default='all'
+        Nonempty source selection. Submitted rows use source atom order.
+    structure_indices : int or sequence of int, default=0
+        One source frame. None or 'all' must resolve to one exported frame.
+    syntax : str, default='MolSysMT'
+        Source selection syntax.
+    upstream_root : str or Path, optional
+        Source-import fallback when the original package is unavailable.
+    skip_digestion : bool, default=False
+        Internal bypass for already admitted arguments.
+    **kwargs
+        Original r_min, r_max, polar_probe_radius, sasa_threshold,
+        merge_distance, min_spheres and the three ignore_* flags.
+        Bare distances/areas use angstroms/angstroms squared; compatible
+        scalar quantities are converted to those protocol units.
+        Original defaults remain owned by Pocketeer for omitted options.
+
+    Returns
+    -------
+    Topography
+        Original pockets, source mappings and captured execution evidence.
+
+    Raises
+    ------
+    ArgumentError
+        If options, finite scalars, radius range or index axes are invalid.
+    ValueError
+        If the exported frame or atom mapping is incompatible.
+    LibraryNotFoundError
+        If an original-route dependency is unavailable.
+
+    Examples
+    --------
+    >>> result = get_topography('protein.pdb', min_spheres=40)  # doctest: +SKIP
+    """
 
     with tempfile.TemporaryDirectory(prefix='topomt_pocketeer_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
@@ -70,19 +120,17 @@ def get_topography(
             structure_indices=structure_indices,
             syntax=syntax,
         )
+        validate_single_frame_pdb(input_pdb, provider='Pocketeer')
 
         upstream = import_upstream_module('pocketeer', upstream_root=upstream_root)
         atomarray = upstream.load_structure(str(input_pdb))
-        normalized_kwargs = _normalize_upstream_pocketeer_kwargs(kwargs)
-        pockets = upstream.find_pockets(
-            atomarray,
-            **normalized_kwargs,
-        )
         if len(atomarray) != len(selected_atom_indices):
             raise ValueError(
                 'Pocketeer input atom count differs from the selected molecular system; '
                 'atom identities cannot be mapped safely.'
             )
+        normalized_kwargs = _normalize_upstream_pocketeer_kwargs(kwargs)
+        pockets = upstream.find_pockets(atomarray, **normalized_kwargs)
 
         import biotite.structure as struc
 
@@ -128,9 +176,10 @@ def get_topography(
             output_dir,
             metadata={
                 'version': upstream.__version__,
+                'distribution_version': installed_provider_version(upstream),
                 'api_sha256': api_sha256,
                 'parameters': _json_ready(normalized_kwargs),
-                'selection': selection,
+                'selection': _json_ready(selection),
                 'structure_indices': _json_ready(structure_indices),
                 'syntax': syntax,
                 'selected_atom_indices': selected_atom_indices.tolist(),

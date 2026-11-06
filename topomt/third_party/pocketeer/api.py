@@ -1,15 +1,24 @@
 from typing import Any
 
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.pocketeer_arguments import (
+    GATEWAY_PIPELINES,
+    OPTIONS,
+    ORIGINAL_PIPELINES,
+)
+from topomt.features import Pocket
 from topomt.topography.Topography import Topography
 
 from .output import PocketeerOutput
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=GATEWAY_PIPELINES)
 def get_topography(
-    molecular_system,
+    molecular_system: Any,
     *,
     backend: str = 'native',
-    **kwargs,
+    skip_digestion: bool = False,
+    **kwargs: Any,
 ) -> Topography:
     """Return a Topography through the selected Pocketeer backend."""
 
@@ -30,24 +39,32 @@ def get_topography(
     )
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=GATEWAY_PIPELINES)
 def get_pockets(
-    molecular_system,
+    molecular_system: Any,
     *,
     backend: str = 'native',
-    **kwargs,
-):
+    skip_digestion: bool = False,
+    **kwargs: Any,
+) -> list[Pocket]:
     """Return Pocketeer-derived pocket features from the selected backend."""
 
     topography = get_topography(
         molecular_system,
         backend=backend,
+        skip_digestion=True,
         **kwargs,
     )
     return list(topography.get_features(by='type', value='pocket'))
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=ORIGINAL_PIPELINES)
 def get_output(
-    molecular_system: Any = None, *, backend: str = 'library', **kwargs: Any
+    molecular_system: Any = None,
+    *,
+    backend: str = 'library',
+    skip_digestion: bool = False,
+    **kwargs: Any,
 ) -> PocketeerOutput:
     """Return original pocketeer results with shared pocket access.
 
@@ -57,6 +74,8 @@ def get_output(
         MolSysMT-compatible source input.
     backend : str, default='library'
         Original route: library or wrapper. Local reproductions are not substituted.
+    skip_digestion : bool, default=False
+        Internal bypass for already admitted routing arguments.
     **kwargs
         Execution/import options documented by the corresponding legacy adapter,
         including selection, structure_indices and provider-specific settings.
@@ -83,5 +102,8 @@ def get_output(
     if backend.lower() not in {'library', 'wrapper'}:
         raise ValueError(f'Unsupported original Pocketeer backend: {backend!r}')
     return _from_topography(
-        get_topography(molecular_system, backend=backend, **kwargs), PocketeerOutput
+        get_topography(
+            molecular_system, backend=backend, skip_digestion=True, **kwargs
+        ),
+        PocketeerOutput,
     )
