@@ -5,8 +5,9 @@ Original-provider fidelity remains [#19](https://github.com/uibcdf/topomt/issues
 The following dated source checkpoints retain their original producer and test
 scope. MolSysMT owns molecular representation and chemistry, TopoMT owns the
 original-result mapping and recovery, and PharmacophoreMT owns model construction.
-Prepared PharmacophoreMT receiving and updated installed qualification remain
-next steps in the [provider plan](../provider_handoff_plan.md).
+Prepared public PharmacophoreMT receiving now has a bounded source control;
+updated exact installed qualification remains next in the
+[provider plan](../provider_handoff_plan.md).
 
 ## Original argument handoff, 2026-11-06
 
@@ -264,3 +265,91 @@ use analytical duplicated states; they do not establish prepared receptor
 chemistry, binding relevance or affinity. Native equivalence, exhaustive #19
 fidelity and general hosted/full-suite/matrix/public-delivery gates remain
 separate.
+
+
+## Prepared public PharmacophoreMT receiving, 2026-11-06
+
+Producer `ce4708a2e5338757ce774a6b0750424324704e30` adds an unbound prepared
+AlphaSpace2 source control. The original library recorder is shared with
+Pocketeer, retaining Pocketeer's function/CLI and receipt identity fields.
+MolSysMT supplies the existing reference chemistry, permutation, selection,
+frame declaration and H5MSM persistence. The detector sees all 4,003 selected
+protein atoms, including H, in nonconsecutive source order at frame 1, with
+reference state 0. Original 0.1.2 defaults include `min_vertices=20`; no binder,
+hydrogen removal, chemical preparation or input-profile substitution occurs.
+The historical prepared seed has SHA-256
+`a42ef9868578ba16c62d52a1267d24160b973dca0d50dbc804ca46b6b2fe316a`.
+
+The original returns **13 pockets**. Exploratory public PharmacophoreMT
+hydrophobic recognition yields zero features for every pocket's exact lining
+membership. This observation is retained as evidence; it does not diagnose a
+provider defect. In `alphaspace2:20`, the 23 lining atoms include 17 H, three C,
+two N and one O. Public recognition of that same membership finds two acceptors,
+at source atoms **1674 and 1707**, and no donor participants. No lining index is
+expanded to a residue, bonded neighbor or alternative geometric region.
+
+The positive recipe explicitly requests `hb acceptor` instead of hydrophobicity.
+Public `get_features` recognizes its participants, and public
+`from_receptor_projections` complements them to **two ligand donor sites**.
+The caller declares projection direction (+1,0,0), distance 0.30 nm, independent
+donor orientation (-1,0,0), and matching radius 0.15 nm. These are analytical
+query parameters, not inferred molecular orientations or binding relevance.
+PharmacophoreMT supplies complementation, shape, essentiality, weights and
+native JSON persistence; TopoMT contains no second implementation of them.
+The hydrophobic default still fails for empty recognition. Missing donor
+orientation remains a PharmacophoreMT error, and this single-source consumer
+profile explicitly rejects a bound run.
+
+Two independent complete flows begin under pm/fs and nm/ps. Each persists the
+full source and original bundle, recovers the original run, builds the declared
+query and verifies its native roundtrip. Original snapshot JSON agrees exactly
+between flows; source coordinates, query centers, radii and donor orientations
+agree physically. Source bytes and chemical context stay unchanged. The first
+flow imports PharmacophoreMT under the already active pm/fs application policy
+and preserves it. An independent fresh process consumes both saved flows with
+AlphaSpace2 and MDTraj distributions absent and imports blocked: zero import
+attempts, two sites each, preserved run identity and application units.
+
+Initial feature-interface tests fail for the unsupported keyword; the original
+qualifier tests fail for the missing module. A generic synthetic NaN-score
+comparison regression also fails first. The shared developer signature now
+preserves undefined original measurements as comparable markers, distinguishing
+NaN, finite values and signed infinities; the existing `PocketGeometry`
+finite-value contract is unchanged. This synthetic guard does not claim fpocket emitted NaN.
+The focused source control passes **31 cases**.
+
+The affected regression run passes **515 cases**, with eight fpocket cases
+skipped because its invocation used the wrong executable environment-variable
+name. All eight subsequently execute with `TOPOMT_FPOCKET_CMD`: seven prepared
+consumer/source cases and the nonzero-reference-state control. The retained
+coverage receipt verifies the exact union: **523 distinct selected cases, all
+executed and passed**. The original run retains its eight skips; it is not
+rewritten as an unskipped invocation. Ten divide warnings come from original
+AlphaSpace2 occupancy calculations. No broader full-suite claim follows.
+
+Repository Ruff passes **456 Python files**, scoped mypy passes six source
+modules, and the distribution/reporting selection passes **20 cases**. Its
+initial administrative failure lacked setuptools; the qualified build-tool
+overlay supplies it without changing the runtime prefix. A fresh HTML build
+passes with the prior **12 diagnostics** after correcting the new checkpoint
+link. No runtime module or dependency is added by this developer control.
+
+The [prepared-consumer archive](evidence/alphaspace2_prepared_consumer_20261106.zip)
+and [sidecar](evidence/alphaspace2_prepared_consumer_20261106.json) retain source,
+original bundles, native models, recipes, checks, probes, initial failures,
+executed test evidence and dependency/source identities. Archive: **4,653,745
+bytes, 80 members**, SHA-256
+`e5ed2e08b84d46995fb2159f86e7815676004ac7d7ccaf28cc7a490c6712d790`.
+Every member digest is verified. Raw artifacts remain at
+`/dev/shm/topomt-alphaspace2-consumer-101` for the next installed-candidate stage.
+The loaded TopoMT source is the producer checkout; its preserved human version
+label is not that producer's identity. Pinned MolSysMT `00abb958f` and
+PharmacophoreMT `b934471` come from the retained installed prefix; original
+AlphaSpace2/MDTraj come from the separately qualified optional overlay.
+
+Next: qualify an updated exact installed candidate and its dependency origins,
+then continue pyCASTA and CASTp/CASTpFold. This evidence covers one prepared
+reference state, one nonperiodic receptor frame and an explicit polar query;
+it establishes neither alternative-state/bound-consumer support, biological
+validity, affinity nor an exact closed region. General component, hosted,
+full-suite, matrix and public-delivery obligations retain #16/#58/#81.

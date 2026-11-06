@@ -1,6 +1,6 @@
 # AlphaSpace2 provider overview
 
-Reviewed: 2026-11-06 for original saved-output recovery. Scientific evidence dates
+Reviewed: 2026-11-06 for prepared public PharmacophoreMT receiving. Scientific evidence dates
 are stated below; the historical native evidence retains its own scope.
 Role: integrated provider and comparison reference. Original receiving work is
 active under [#101](https://github.com/uibcdf/topomt/issues/101) and the
@@ -16,7 +16,7 @@ requirements; checked versions are evidence targets, not claims of latest releas
 python -m pip install alphaspace2
 ```
 
-The upstream Python package requires MDTraj, SciPy, Cython and configargparser. Original AlphaSpace2 0.1.2 was checked on Linux/Python 3.13; the adapter has compatibility adjustments recorded in its run evidence.
+The upstream Python package requires MDTraj, SciPy, Cython and configargparser. Original AlphaSpace2 0.1.2 has bounded Linux source controls on Python 3.13 and 3.14; the adapter records its compatibility adjustments in each run.
 
 Original routes: original Python library with optional `binder`, and captured
 source-bound results through `get_provider_output(..., backend='files')`.
@@ -55,11 +55,16 @@ values, validates full source chemistry/coordinates and converts quantities
 through PyUnitWizard. Unknown schemas or incomplete historical context fail
 explicitly. The legacy native defaults and parity scope remain separate.
 
-The affected source battery passes 504 cases, plus the new bundle/source
-independence guard. In the engine-free prefix, 68 selected cases and four
-independent full receivings pass under alternate unit policies. These source
-checks do not qualify a new installed wheel or prepared PharmacophoreMT model;
-those are the next steps.
+The saved-output stage retains its 504-case battery and independent engine-free
+controls. Prepared source receiving now also verifies 13 original pockets and
+an explicit two-donor PharmacophoreMT query derived from the first pocket's
+recognized acceptors. That same lining membership yields no hydrophobic
+features; the control preserves this negative result without expanding atoms.
+Two independent complete flows agree under alternate units, and saved public
+consumption works with both original engines absent. The affected selection has
+523 distinct executed passing cases, with its initial fpocket skips and explicit
+follow-up executions retained separately. Exact updated installed qualification
+is next; the source control establishes no binding relevance or affinity.
 
 ## Local implementation
 

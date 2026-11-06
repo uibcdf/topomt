@@ -1,0 +1,312 @@
+{
+  "archive": {
+    "bytes": 4653745,
+    "members": 80,
+    "name": "alphaspace2_prepared_consumer_20261106.zip",
+    "sha256": "e5ed2e08b84d46995fb2159f86e7815676004ac7d7ccaf28cc7a490c6712d790"
+  },
+  "checks": {
+    "distribution_reporting_cases": 20,
+    "docs_build": "passed",
+    "docs_known_warnings": 12,
+    "mypy_source_files": 6,
+    "public_pytest_receptor": "1.2.0",
+    "ruff_format_files": 456,
+    "ruff_lint": "passed",
+    "runtime_files_unchanged_except_preserved_human_version": true,
+    "source_files_match_producer": true
+  },
+  "coverage": {
+    "all_selected_cases_executed_and_passed": true,
+    "explicit_fpocket_followup_passes": 8,
+    "initial_skips": 8,
+    "reason": "Initial command used TOPO_EXE_FPOCKET instead of required TOPOMT_FPOCKET_CMD; seven prepared/source cases and one nonzero-state case subsequently passed with the required original executable.",
+    "unique_passed_cases": 523,
+    "unique_selected_cases": 523
+  },
+  "date": "2026-11-06",
+  "dependency_context": {
+    "base_prefix": "/dev/shm/topomt-current-installed-101/env",
+    "human_version_file_preserved": true,
+    "module_origins": {
+      "alphaspace2": "/dev/shm/topomt-alphaspace2-101/engine-overlay/alphaspace2/__init__.py",
+      "argdigest": "/dev/shm/topomt-current-installed-101/env/lib/python3.14/site-packages/argdigest/__init__.py",
+      "depdigest": "/dev/shm/topomt-current-installed-101/env/lib/python3.14/site-packages/depdigest/__init__.py",
+      "mdtraj": "/dev/shm/topomt-alphaspace2-101/engine-overlay/mdtraj/__init__.py",
+      "molsysmt": "/dev/shm/topomt-current-installed-101/env/lib/python3.14/site-packages/molsysmt/__init__.py",
+      "pharmacophoremt": "/dev/shm/topomt-current-installed-101/env/lib/python3.14/site-packages/pharmacophoremt/__init__.py",
+      "pyunitwizard": "/dev/shm/topomt-current-installed-101/env/lib/python3.14/site-packages/pyunitwizard/__init__.py",
+      "smonitor": "/dev/shm/topomt-current-installed-101/env/lib/python3.14/site-packages/smonitor/__init__.py",
+      "topomt": "/home/liliana/repos@uibcdf/topomt/topomt/__init__.py"
+    },
+    "molsysmt_commit": "00abb958fb93649131d5ce5fe5e12e90cf4900e9",
+    "original_engine_overlay": "/dev/shm/topomt-alphaspace2-101/engine-overlay",
+    "package_version_labels": {
+      "alphaspace2": "0.1.2",
+      "argdigest": "0.17.0",
+      "depdigest": "0.15.1+8.g0884f0c",
+      "mdtraj": "1.11.1",
+      "molsysmt": "0.23.0+368.g00abb958f",
+      "pharmacophoremt": "0.4.0+98.gb934471",
+      "pytest-receptor": "1.2.0",
+      "pyunitwizard": "0.29.0+4.g9d74f0e",
+      "smonitor": "0.22.0+16.gccdcace",
+      "topomt": "0.5.0+324.g5f6239f.dirty"
+    },
+    "pharmacophoremt_commit": "b934471ac8ab8bdb1bd7646550ac23baeb07daa7",
+    "producer": "ce4708a2e5338757ce774a6b0750424324704e30",
+    "retained_qualification_references": {
+      "devguide/alphaspace2/evidence/alphaspace2_arguments_20261106.json": "f84045b963460b94f1ab3aaf8f6ed575f29c6b5bbc15135898f14b7d762881ce",
+      "devguide/alphaspace2/evidence/alphaspace2_saved_output_20261106.json": "095c3034bd3802d0c5ef31284d0b5f97d3c6a26f9dcb248cb04685d0915de612",
+      "devguide/pocketeer/evidence/pocketeer_installed_handoff_20261106.json": "ea06530f78a4b8275cc8197d619f694949bc5245d0db0564c3385e31f15262c0"
+    },
+    "reused_prefix_is_not_current_candidate_qualification": true,
+    "source_test_command_environment": "PYTHONDONTWRITEBYTECODE=1; PYTEST_DISABLE_PLUGIN_AUTOLOAD=1; repo source + explicit original overlay; public pytest-receptor 1.2.0; see event session_start argv for selection."
+  },
+  "engine_free_checks": {
+    "application_policy_preserved": true,
+    "engine_imports_blocked": true,
+    "engines_absent": true,
+    "zero_import_attempts": true
+  },
+  "limits": [
+    "One historical prepared ERalpha fragment reference state, unbound original default min_vertices=20, all 4003 protein atoms including H, selected frame 1; no alternative-state or bound-consumer admission.",
+    "All 13 actual pockets yield zero hydrophobic features in the retained exploratory public recognition probe; the distinct polar recipe preserves that negative result and exact original lining membership.",
+    "Two caller-declared complementary donor placements; no inferred orientations, binding relevance, affinity, fit or exact volumetric region.",
+    "Generic undefined-measurement comparison guard uses a synthetic NaN score; it does not claim an actual fpocket undefined score.",
+    "Base prefix/original overlay qualification is reused; no updated installed TopoMT candidate or general hosted/component/full-suite/matrix/public-delivery qualification.",
+    "Initial documentation build had one new cross-reference warning, corrected before final build; initial administrative run lacked setuptools and passed with the qualified build-tool overlay."
+  ],
+  "measured_profiles": [
+    {
+      "member_atoms": 23,
+      "original_bundle_sha256": "14fc9eb209c9784c1e3327a0309e1bb2afbb15ef513cb879d611f8afb47af211",
+      "pocket_count": 13,
+      "policy": [
+        "pm",
+        "fs",
+        "radians"
+      ],
+      "query_sha256": "8e798d4ac8c703ba513f9c8907aba5f5dc94625f3e7908d0c961ec0ee239e898",
+      "run_id": "f8a2ef84fe78351b51cfe9662b6339763318de626a148804436bca13985ae380",
+      "selected_pocket": "alphaspace2:20",
+      "site_count": 2,
+      "site_source_atoms": [
+        [
+          1674
+        ],
+        [
+          1707
+        ]
+      ],
+      "source_sha256": "f73084d70d37e4f186a25a88404fec2a728f5fdf39c24bcf4f0e736acb736c87"
+    },
+    {
+      "member_atoms": 23,
+      "original_bundle_sha256": "eda050a069e8dfb99acdc0f05f061bf3491710d06f0f71b85e94f3ab035d6629",
+      "pocket_count": 13,
+      "policy": [
+        "nm",
+        "ps",
+        "radians"
+      ],
+      "query_sha256": "ae1af3863d86db75483c559041d2ba2402c574c927a45a2d56f627672e509b8e",
+      "run_id": "bb328c3efc3bce304ff0b98d6602f95efec5de2d2ba236229d8739e2c0476ed7",
+      "selected_pocket": "alphaspace2:20",
+      "site_count": 2,
+      "site_source_atoms": [
+        [
+          1674
+        ],
+        [
+          1707
+        ]
+      ],
+      "source_sha256": "c967e3f15cdb5a5401ab016588aa1cf886675083ab750ea8fbd0008eabff8580"
+    }
+  ],
+  "owner": "uibcdf/topomt#101",
+  "preserved_human_version_sha256": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+  "producer": "ce4708a2e5338757ce774a6b0750424324704e30",
+  "recipe": {
+    "chemical_preparation": false,
+    "chemical_state": 0,
+    "distance": {
+      "unit": "nm",
+      "value": 0.3
+    },
+    "matching_radius": {
+      "unit": "nm",
+      "value": 0.15
+    },
+    "membership_expanded": false,
+    "projection_direction": {
+      "unit": "dimensionless",
+      "value": [
+        1,
+        0,
+        0
+      ]
+    },
+    "receptor_feature": "hb acceptor",
+    "source_frame": 1,
+    "target_direction": {
+      "unit": "dimensionless",
+      "value": [
+        -1,
+        0,
+        0
+      ]
+    },
+    "target_sites": "hb donor"
+  },
+  "results": {
+    "comparison-red": {
+      "counts": {
+        "collected": 1,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 1,
+        "failed": 1,
+        "not_executed": 0,
+        "passed": 0,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 6.673243593191728,
+      "exitstatus": 1
+    },
+    "distribution": {
+      "counts": {
+        "collected": 20,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 20,
+        "failed": 1,
+        "not_executed": 0,
+        "passed": 19,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {
+          "passed": 5
+        },
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 4.74863329809159,
+      "exitstatus": 1
+    },
+    "distribution-final": {
+      "counts": {
+        "collected": 20,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 20,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 20,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {
+          "passed": 5
+        },
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 4.706397115951404,
+      "exitstatus": 0
+    },
+    "fpocket-controls": {
+      "counts": {
+        "collected": 7,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 7,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 7,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 33.181297386065125,
+      "exitstatus": 0
+    },
+    "fpocket-state": {
+      "counts": {
+        "collected": 1,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 1,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 1,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 7.511661157011986,
+      "exitstatus": 0
+    },
+    "red": {
+      "counts": {
+        "collected": 15,
+        "deselected": 0,
+        "errors": 10,
+        "executed": 15,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 5,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 3.9674963059369475,
+      "exitstatus": 1
+    },
+    "regression": {
+      "counts": {
+        "collected": 523,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 523,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 515,
+        "reruns": 0,
+        "skipped": 8,
+        "subtests": {},
+        "warnings": 10,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 175.70404878701083,
+      "exitstatus": 0
+    }
+  },
+  "schema_version": 1,
+  "scope": "Prepared-source original AlphaSpace2 execution, engine-free saved recovery and public PharmacophoreMT acceptor-derived donor control; source-only qualification.",
+  "standalone_checks": {
+    "application_policy_preserved": true,
+    "both_full_flows_passed": true,
+    "empty_hydrophobic_control_preserved": true,
+    "original_snapshots_equal": true,
+    "physical_sites_agree": true,
+    "source_frames_physically_agree": true
+  }
+}

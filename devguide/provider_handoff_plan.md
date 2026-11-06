@@ -53,15 +53,15 @@ changing another component.
 | --- | --- | --- |
 | fpocket | Original CLI/files, reference chemistry, prepared hydrophobic consumer and bounded installed receipts under `fpocket4/`; the current Pocketeer candidate repeats these controls. | Preserve regression coverage; broader fidelity and component gates retain their owners. |
 | Pocketeer | Public 0.4.0 original, argument/state and saved-reader controls; prepared public PharmacophoreMT receiving under both unit policies. Exact producer `bb34e67` also passes 311 installed cases without skips and two independent prepared flows in a new prefix. | Preserve the qualified candidate and regression evidence; general fidelity and component gates remain separate. |
-| AlphaSpace2 | Original argument/source contracts followed by engine-free schema 1 recovery at `10d3b33`; 504 affected source cases and four independent full receivings retain the original bound/unbound values, geometry and run identity. See its [handoff checkpoint](alphaspace2/handoff_checkpoint.md). | Prepared public PharmacophoreMT consumer control and updated exact installed qualification. |
+| AlphaSpace2 | Original argument/source and engine-free schema 1 recovery; prepared unbound public PharmacophoreMT receiving at `ce4708a` retains the zero-hydrophobic control and an explicit two-donor query from recognized acceptors. Two full flows agree under alternate units; 523 distinct affected cases have passing execution evidence. See its [handoff checkpoint](alphaspace2/handoff_checkpoint.md). | Updated exact installed qualification and dependency-origin verification. |
 | pyCASTA | Existing original adapter/output and retained JSON/files; current receiving qualification pending. | Review provider contracts, saved reconstruction and prepared consumer control. |
 | CASTp/CASTpFold | Existing server/files adapters and retained archive evidence. | Verify current route/context fidelity and qualify an explicit consumer profile. |
 
 The [prepared consumer checkpoint](pocketeer/pharmacophore_handoff_checkpoint.md)
 now also retains the exact installed-candidate receipt and its limits. Continue
-with AlphaSpace2's prepared receiving before qualifying its changed installed
-candidate. Its argument, source and saved-result handoffs are now checked against
-the pinned original source profile and independent pre-refactor witnesses.
+with AlphaSpace2's changed installed candidate. Its argument, source, saved-result
+and prepared public-consumer handoffs now have bounded source evidence against
+the pinned original and independent witnesses.
 Reuse the fpocket developer qualification recorder and PharmacophoreMT's public
 tools when extending that pilot; do not introduce a second recognition or model
 implementation. Keep the full goal active until the evidence above is complete.
