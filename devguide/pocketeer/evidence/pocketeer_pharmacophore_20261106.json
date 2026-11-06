@@ -1,0 +1,241 @@
+{
+  "archive": {
+    "bytes": 2001872,
+    "members": 42,
+    "name": "pocketeer_pharmacophore_20261106.zip",
+    "sha256": "016a74b5ee1b832029d8ed86d0a6eb25b41ea3a740c3a3b801c7d787b0c5b82e"
+  },
+  "checks": {
+    "docs_warnings": 12,
+    "mypy_modules": 4,
+    "primary_origins_recorded": true,
+    "report_indexes": "current",
+    "ruff_formatted_files": 443,
+    "ruff_lint": "passed",
+    "runtime_source_files_match_producer": true
+  },
+  "date": "2026-11-06",
+  "limits": [
+    "Hydrophobic analytical projections with caller-declared direction/distance/radius; no affinity or biological validation.",
+    "One historical prepared reference state and nonperiodic frame 1; no chemical preparation or alternative-state admission.",
+    "No updated installed candidate, general component/matrix/full-suite or current sibling-main qualification."
+  ],
+  "measured_profiles": [
+    {
+      "member_atoms": 408,
+      "pocket_count": 11,
+      "pocket_ids": [
+        "pocketeer:7",
+        "pocketeer:4",
+        "pocketeer:6",
+        "pocketeer:0",
+        "pocketeer:3",
+        "pocketeer:8",
+        "pocketeer:2",
+        "pocketeer:5",
+        "pocketeer:9",
+        "pocketeer:10",
+        "pocketeer:1"
+      ],
+      "policy": [
+        "pm",
+        "fs",
+        "radians"
+      ],
+      "query_sha256": "ea239d66be5b03b05c12c65806c8ce9f9c81e6dfac578540154c3919d43d2540",
+      "run_id": "c610b536d2dc297461bb6b780625922b080ccb4cb1693a17c9312dcccec04969",
+      "selected_pocket": "pocketeer:0",
+      "site_count": 46,
+      "source_sha256": "f73084d70d37e4f186a25a88404fec2a728f5fdf39c24bcf4f0e736acb736c87"
+    },
+    {
+      "member_atoms": 408,
+      "pocket_count": 11,
+      "pocket_ids": [
+        "pocketeer:7",
+        "pocketeer:4",
+        "pocketeer:6",
+        "pocketeer:0",
+        "pocketeer:3",
+        "pocketeer:8",
+        "pocketeer:2",
+        "pocketeer:5",
+        "pocketeer:9",
+        "pocketeer:10",
+        "pocketeer:1"
+      ],
+      "policy": [
+        "nm",
+        "ps",
+        "radians"
+      ],
+      "query_sha256": "187c3aa2cea893dffb84816012f41e5a27ec00bad001af0135669170ac6a1489",
+      "run_id": "7fcbeed17628286c37e3a86c5fa38603ee9288901080aea367d8807236036688",
+      "selected_pocket": "pocketeer:0",
+      "site_count": 46,
+      "source_sha256": "c967e3f15cdb5a5401ab016588aa1cf886675083ab750ea8fbd0008eabff8580"
+    }
+  ],
+  "owner": "uibcdf/topomt#101",
+  "preserved_human_version_sha256": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+  "producer_commit": "ba786b17717b94bc57b39d848068065c34991e33",
+  "public_receptor": {
+    "version": "1.2.0",
+    "wheel_sha256": "4e339abd53d85406c3acc0c643b895154b133c0a6f9d5f7a2350703f514a9971"
+  },
+  "results": {
+    "controls": {
+      "counts": {
+        "collected": 34,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 34,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 34,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 74.69451947696507,
+      "exitstatus": 0,
+      "receptor_version": "1.2.0"
+    },
+    "distribution": {
+      "counts": {
+        "collected": 18,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 18,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 18,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {
+          "passed": 5
+        },
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 4.350350156892091,
+      "exitstatus": 0,
+      "receptor_version": "1.2.0"
+    },
+    "green": {
+      "counts": {
+        "collected": 12,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 12,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 12,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 43.5595006509684,
+      "exitstatus": 0,
+      "receptor_version": "1.2.0"
+    },
+    "receipt-red": {
+      "counts": {
+        "collected": 2,
+        "deselected": 12,
+        "errors": 0,
+        "executed": 2,
+        "failed": 1,
+        "not_executed": 0,
+        "passed": 1,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 0.22042528516612947,
+      "exitstatus": 1,
+      "receptor_version": "1.2.0"
+    },
+    "red": {
+      "counts": {
+        "collected": 12,
+        "deselected": 0,
+        "errors": 5,
+        "executed": 12,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 7,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 1.6164801330305636,
+      "exitstatus": 1,
+      "receptor_version": "1.2.0"
+    },
+    "regression": {
+      "counts": {
+        "collected": 369,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 369,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 364,
+        "reruns": 0,
+        "skipped": 5,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 165.57336152298376,
+      "exitstatus": 0,
+      "receptor_version": "1.2.0"
+    },
+    "shared": {
+      "counts": {
+        "collected": 13,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 13,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 13,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 7.113891914021224,
+      "exitstatus": 0,
+      "receptor_version": "1.2.0"
+    }
+  },
+  "schema_version": 1,
+  "scope": "Prepared-source original Pocketeer execution, recovery and public PharmacophoreMT consumer; no new installed TopoMT candidate.",
+  "seed_sha256": "a42ef9868578ba16c62d52a1267d24160b973dca0d50dbc804ca46b6b2fe316a",
+  "source_profile_refactor_commit": "fdb59234d5530350ee5871fd3e1c41db241c7dbb",
+  "standalone_checks": {
+    "application_policy_preserved": true,
+    "both_full_flows_passed": true,
+    "original_json_and_masks_equal": true,
+    "physical_sites_agree": true,
+    "source_frames_physically_agree": true
+  }
+}

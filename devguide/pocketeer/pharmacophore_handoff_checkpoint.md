@@ -158,6 +158,24 @@ different source hash instead of crediting a skip. The two expected ERROR lines
 in the standalone log are the deliberate incompatible-source probes; both
 complete positive flows return success.
 
+Producer: `ba786b17717b94bc57b39d848068065c34991e33`, following the shared-tool
+refactor `fdb5923`. All six source/test file hashes in the runtime identity
+record were checked against the final producer's committed blobs. The
+[archive](evidence/pocketeer_pharmacophore_20261106.zip) and
+[receipt](evidence/pocketeer_pharmacophore_20261106.json) retain tests, exact
+runtime origins, producer patches, the independent control script and both
+complete source/bundle/query/receipt sets. Archive identity: 2,001,872 bytes,
+42 members, SHA-256
+`016a74b5ee1b832029d8ed86d0a6eb25b41ea3a740c3a3b801c7d787b0c5b82e`.
+Every member digest was verified. Source labels, source hashes and both original
+run IDs remain attached to their own execution rather than being normalized
+across the two unit policies.
+
+Task-owned raw controls remain at `/dev/shm/topomt-pocketeer-consumer-101` for
+the next installed-candidate phase. The compatible scientific prefix and public
+reporter overlay are retained from the preceding checkpoint; this source work
+does not mutate their scientific distributions or qualify a new wheel.
+
 ## Remaining scope
 
 An updated exact TopoMT wheel and clean installed receiving are next. The
