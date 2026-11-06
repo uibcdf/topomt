@@ -12,6 +12,7 @@ from .external_arguments import (
     _error,
     _indices,
     digest_molecular_system,
+    digest_path,
     digest_selection,
     digest_skip_digestion,
     digest_structure_indices,
@@ -67,9 +68,7 @@ def digest_chemical_state(
 
 
 def _path(value: Any, argument: str, caller: str | None) -> Path:
-    if isinstance(value, (str, Path)) and str(value).strip() and '\0' not in str(value):
-        return Path(value)
-    _error(argument, value, caller, 'Expected a nonempty path string or pathlib.Path.')
+    return digest_path(value, argument, caller)
 
 
 def digest_pdb_file(pdb_file: Any, caller: str | None = None) -> Path:

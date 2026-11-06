@@ -1,6 +1,7 @@
 """Real original-engine structural controls; chemical receiving is separate."""
 
 import copy
+import json
 import tempfile
 import zipfile
 from importlib.metadata import PackageNotFoundError, distribution
@@ -88,6 +89,7 @@ def scientific_artifacts(run):
         if name.startswith('input/')
         else data
         for name, data in run.artifacts
+        if name != 'output/topomt_source_context.json'
     }
 
 
@@ -145,6 +147,24 @@ def test_selected_frame_matches_original_and_survives_bundle_recovery(
         assert result.run.metadata == reference_output.run.metadata
         assert scientific_artifacts(result.run) == scientific_artifacts(
             reference_output.run
+        )
+        # The TopoMT source supplement can differ by unit-conversion roundoff.
+        # Original engine outputs above still require exact scientific bytes.
+        context = json.loads(
+            result.run.get_artifact('output/topomt_source_context.json')
+        )
+        reference_context = json.loads(
+            reference_output.run.get_artifact('output/topomt_source_context.json')
+        )
+        actual_coordinates = context.pop('coordinates')
+        expected_coordinates = reference_context.pop('coordinates')
+        assert context == reference_context
+        assert actual_coordinates['unit'] == expected_coordinates['unit'] == 'nm'
+        np.testing.assert_allclose(
+            actual_coordinates['value'],
+            expected_coordinates['value'],
+            rtol=0,
+            atol=1e-12,
         )
         assert result.pockets
         assert result.run.metadata['selected_atom_indices'] == selected.tolist()

@@ -8,6 +8,7 @@ from ..pocketeer_arguments import PROVIDER_PARAMETERS
 
 
 def _options() -> tuple[str, ...]:
+    from topomt.third_party.pocketeer.files import load_output
     from topomt.third_party.pocketeer.library import get_topography
 
     return tuple(
@@ -15,6 +16,10 @@ def _options() -> tuple[str, ...]:
             (
                 set(signature(get_topography).parameters)
                 - {'molecular_system', 'skip_digestion', 'kwargs'}
+            )
+            | (
+                set(signature(load_output).parameters)
+                - {'molecular_system', 'skip_digestion'}
             )
             | set(PROVIDER_PARAMETERS)
         )

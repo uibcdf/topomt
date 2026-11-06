@@ -12,6 +12,7 @@ from topomt.provider_output import ExternalMeasurement, ProviderRun
 from topomt.third_party.fpocket.input_context import _chemical_context
 from topomt.third_party.fpocket.model import FpocketPocket, FpocketResult
 from topomt.third_party.fpocket.parser import parse_fpocket_output
+from topomt.third_party.pdb_context import validate_submitted_pdb
 from topomt.topography.Topography import Topography
 
 # Parsed key -> (feature name, original label, unit, calculation issue, definition).
@@ -332,41 +333,14 @@ def _submitted_serial_map(
     syntax: str,
 ) -> dict[int, int]:
     """Validate an explicit submitted-row to source-atom correspondence."""
-    indices = np.asarray(atom_indices)
-    lines = [
-        line
-        for line in pdb_file.read_text().splitlines()
-        if line.startswith(('ATOM  ', 'HETATM'))
-    ]
-    selected = msm.select(molecular_system, selection=selection, syntax=syntax)
-    if (
-        indices.ndim != 1
-        or indices.dtype.kind not in 'iu'
-        or len(indices) != len(lines)
-        or len(np.unique(indices)) != len(indices)
-        or set(indices) != set(selected)
-    ):
-        raise ValueError('The submitted atom map must uniquely cover the selection.')
-    serials = [int(line[6:11]) for line in lines]
-    if len(set(serials)) != len(serials):
-        raise ValueError('Submitted PDB atom serials must be unique.')
-    coordinates = puw.get_value(
-        msm.get(
-            molecular_system,
-            selection=indices,
-            structure_indices=structure_indices,
-            coordinates=True,
-        ),
-        to_unit='angstroms',
+    return validate_submitted_pdb(
+        molecular_system,
+        pdb_file,
+        atom_indices,
+        selection=selection,
+        structure_indices=structure_indices,
+        syntax=syntax,
     )
-    submitted = np.asarray(
-        [[float(line[start : start + 8]) for start in (30, 38, 46)] for line in lines]
-    )
-    if coordinates.shape != (1, len(indices), 3) or not np.allclose(
-        coordinates[0], submitted, rtol=0.0, atol=0.00051
-    ):
-        raise ValueError('Submitted PDB coordinates disagree with the source frame.')
-    return {serial: int(index) for serial, index in zip(serials, indices)}
 
 
 def _build_serial_to_atom_index_map(

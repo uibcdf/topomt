@@ -38,7 +38,7 @@ def test_invalid_backend_is_digested_before_provider_import(
 
 @pytest.mark.parametrize(
     ('method', 'backend'),
-    [('fpocket', 'library'), ('castp', 'cli'), ('pocketeer', 'files')],
+    [('fpocket', 'library'), ('castp', 'cli'), ('pocketeer', 'cli')],
 )
 def test_incompatible_route_is_rejected_before_provider_import(
     method, backend, forbidden_provider
@@ -54,6 +54,7 @@ def test_incompatible_route_is_rejected_before_provider_import(
         ('fpocket', 'WRAPPER', 'fpocket', 'wrapper', {}),
         ('fpocket', 'FILES', 'fpocket', 'files', {}),
         ('POCKETEER', None, 'pocketeer', 'library', {}),
+        ('pocketeer', 'FILES', 'pocketeer', 'files', {}),
         ('alphaspace2', None, 'alphaspace2', 'library', {}),
         ('pycasta', None, 'pycasta', 'library', {}),
         ('pycasta', 'wrapper', 'pycasta', 'wrapper', {}),

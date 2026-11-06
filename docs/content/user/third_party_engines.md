@@ -269,8 +269,38 @@ detects pockets using geometry and Biotite SASA/radius tables; it ignores hydrog
 atoms by default and does not prepare a protonation state. The context neither
 establishes chemical readiness nor implies that Pocketeer uses all its fields.
 Pharmacophore recognition belongs to PharmacophoreMT and requires separately
-qualified source chemistry. Saved-output reconstruction and Pocketeer's
-PharmacophoreMT receiving control remain pending.
+qualified source chemistry. Pocketeer's prepared-receptor PharmacophoreMT
+receiving control remains pending.
+
+Save an original run and recover its parsed output with its full source:
+
+```python
+result = tmt.get_provider_output(source, method='pocketeer', structure_indices=1)
+result.run.save('original.zip')
+restored = tmt.get_provider_output(
+    source, method='pocketeer', backend='files', bundle_file='original.zip'
+)
+assert restored.run.run_id == result.run.run_id
+```
+
+The `files` route uses NumPy, MolSysMT and PyUnitWizard; it does not import
+Pocketeer or Biotite. `ProviderRun.load` verifies the bundle's content and identity.
+Run metadata's `output_protocol` declares the original artifact's length, area,
+volume and dimensionless fields; recovery verifies that exact unit contract.
+Selection, frame and state come from the saved run and cannot be overridden.
+Recovery checks the full atom inventory and labels, the full source frame in nm
+(absolute tolerance `1e-12 nm`), chemical context and the submitted PDB row map
+(`0.00051 angstroms` for three-decimal PDB coordinates). No alignment, atom
+correspondence or chemical preparation is inferred. Keep the full source system
+in a MolSysMT-supported persistent format; a selected exported PDB is insufficient.
+
+Original pocket order, residue masks, sphere IDs, defining-atom maps and attributed
+measurements are retained. An available empty result or membership remains empty.
+Inconsistent schemas, maps, masks or nonfinite measurements are rejected. Older
+runs missing the new `topomt_source_context.json` supplement remain recoverable
+as `ProviderRun` artifacts, but cannot reconstruct a source-qualified
+`PocketeerOutput`. The legacy `get_topography`/`get_pockets` routing is unchanged;
+saved reconstruction is exposed through the original-output entry point.
 
 ## Show original pockets in MolSysViewer
 

@@ -1,6 +1,7 @@
 """Reusable argument admission for original molecular-provider boundaries."""
 
 from numbers import Integral
+from pathlib import Path
 from typing import Any, NoReturn
 
 import numpy as np
@@ -12,6 +13,13 @@ def _error(argument: str, value: Any, caller: str | None, reason: str) -> NoRetu
     raise ProviderDispatchArgumentError(
         arg_name=argument, value=value, caller=caller, reason=reason
     )
+
+
+def digest_path(value: Any, argument: str, caller: str | None) -> Path:
+    """Admit an explicit file/directory path without touching the filesystem."""
+    if isinstance(value, (str, Path)) and str(value).strip() and '\0' not in str(value):
+        return Path(value)
+    _error(argument, value, caller, 'Expected a nonempty path string or pathlib.Path.')
 
 
 def digest_molecular_system(

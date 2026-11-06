@@ -35,7 +35,7 @@ def get_provider_output(
         fpocket/fpocket4, pocketeer, alphaspace2, pycasta, castp/castp3/castpfold.
     backend : str, optional
         Defaults to cli for fpocket, library for Python engines, server for CASTp.
-        Files are supported for fpocket and CASTp. Local reproductions are not
+        Files are supported for fpocket, Pocketeer and CASTp. Local reproductions are not
         admitted through this original-output entry point.
     **kwargs
         Provider execution/import options, including selection and frame.

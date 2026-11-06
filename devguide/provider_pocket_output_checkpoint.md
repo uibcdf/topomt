@@ -16,8 +16,10 @@ Pocketeer argument/structural profile. Its
 [checkpoint](pocketeer/argument_handoff_checkpoint.md) records original-engine
 execution, unit policies and installed receiving. The subsequent
 [reference-state source boundary](pocketeer/chemical_context_checkpoint.md)
-records existing MolSysMT chemistry without preparing it. Saved-result
-reconstruction and PharmacophoreMT receiving remain pending; the earlier
+records existing MolSysMT chemistry without preparing it. The
+[saved-result reader](pocketeer/saved_output_checkpoint.md) now reconstructs
+source-bound Pocketeer output without the optional engine. Prepared-receptor
+PharmacophoreMT receiving remains pending; the earlier
 installed-wheel evidence covers its original candidate. This does not resume
 native parity.
 
@@ -53,7 +55,7 @@ correspondence, binding claims, or canonical geometry from incomplete exports.
 | Class | Original routes | Provider-specific evidence |
 | --- | --- | --- |
 | `FpocketOutput` | CLI, persisted files | Info fields; atom serials; sphere PQR identity/type/charge; original PDB/PQR bytes. |
-| `PocketeerOutput` | Python library | Original JSON/masks; residues; ordered spheres and defining-atom maps; reported volume/score/SASA. |
+| `PocketeerOutput` | Python library, captured-run files | Original JSON/masks; residues; ordered spheres and defining-atom maps; reported volume/score/SASA; full source context. |
 | `AlphaSpace2Output` | Python library | Receptor and optional binder; alpha/beta sites; full snapshot and exports; original contact/weighted occupancy. |
 | `PyCASTAOutput` | Python library | Returned JSON and native files; original tetrahedron indexing; representative point/ranking/depth/validation. |
 | `CASTpOutput` | CASTp/CASTpFold servers, persisted files | Original archive/files; all pocket rows; SA/MS definitions; auxiliary mouth aggregates and source-parent links. |

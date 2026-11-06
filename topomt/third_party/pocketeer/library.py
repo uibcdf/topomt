@@ -11,15 +11,20 @@ from topomt import Topography
 from topomt import pyunitwizard as puw
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.arg_digestion.pocketeer_arguments import OPTIONS, RADIUS_PIPELINES
-from topomt.features import Pocket
-from topomt.provider_output import ExternalMeasurement, ProviderRun
+from topomt.provider_output import ProviderRun
 from topomt.third_party._common import (
     import_upstream_module,
     installed_provider_version,
     prepare_wrapper_input_pdb,
     validate_single_frame_pdb,
 )
-from topomt.third_party.pdb_context import reference_chemical_context
+from topomt.third_party.pdb_context import (
+    reference_chemical_context,
+    source_input_context,
+)
+
+from .parser import _output_protocol
+from .records import pockets_to_topography
 
 
 def _json_ready(value):
@@ -129,6 +134,7 @@ def get_topography(
             syntax=syntax,
         )
         validate_single_frame_pdb(input_pdb, provider='Pocketeer')
+        source_context = source_input_context(molecular_system, structure_indices)
 
         upstream = import_upstream_module('pocketeer', upstream_root=upstream_root)
         atomarray = upstream.load_structure(str(input_pdb))
@@ -158,6 +164,9 @@ def get_topography(
 
         output_dir = tmpdir / 'results'
         output_dir.mkdir()
+        (output_dir / 'topomt_source_context.json').write_text(
+            json.dumps(source_context, sort_keys=True, allow_nan=False)
+        )
         upstream.write_pockets_json(str(output_dir / 'pocketeer_pockets.json'), pockets)
         (output_dir / 'topomt_masks.json').write_text(
             json.dumps(
@@ -187,6 +196,7 @@ def get_topography(
                 'distribution_version': installed_provider_version(upstream),
                 'api_sha256': api_sha256,
                 'parameters': _json_ready(normalized_kwargs),
+                'output_protocol': _output_protocol(),
                 'selection': _json_ready(selection),
                 'structure_indices': _json_ready(structure_indices),
                 'chemical_state_context': chemical_context,
@@ -196,118 +206,12 @@ def get_topography(
             },
         )
 
-        topography = Topography(
-            molecular_system=molecular_system,
+        return pockets_to_topography(
+            molecular_system,
+            pockets,
+            selected_atom_indices,
+            filtered_atom_indices,
+            run,
             selection=selection,
             structure_indices=structure_indices,
         )
-        topography.add_provider_run(run)
-
-        for pocket in pockets:
-            local_atom_indices = np.flatnonzero(np.asarray(pocket.mask, dtype=bool))
-            atom_indices = selected_atom_indices[local_atom_indices].tolist()
-            sphere_ids = [sphere.sphere_id for sphere in pocket.spheres]
-            alpha_sphere_centers = np.asarray(
-                [sphere.center for sphere in pocket.spheres],
-                dtype=float,
-            )
-            alpha_sphere_radii = np.asarray(
-                [sphere.radius for sphere in pocket.spheres],
-                dtype=float,
-            )
-            alpha_sphere_mean_sasa = np.asarray(
-                [sphere.mean_sasa for sphere in pocket.spheres], dtype=float
-            )
-            sphere_provider_atom_indices = [
-                sphere.atom_indices.copy() for sphere in pocket.spheres
-            ]
-            sphere_atom_indices = [
-                selected_atom_indices[
-                    filtered_atom_indices[sphere.atom_indices]
-                ].tolist()
-                for sphere in pocket.spheres
-            ]
-            artifact = 'output/pocketeer_pockets.json'
-            external_measurements = {
-                'volume': ExternalMeasurement(
-                    value=puw.quantity(float(pocket.volume), 'angstroms**3'),
-                    original_value=float(pocket.volume),
-                    original_unit='angstroms**3',
-                    source_field='volume',
-                    source_artifact=artifact,
-                    run_id=run.run_id,
-                    definition='Pocketeer voxel-estimated pocket volume',
-                    issue_url=None,
-                    status='topomt_available',
-                ),
-                'score': ExternalMeasurement(
-                    value=float(pocket.score),
-                    original_value=float(pocket.score),
-                    original_unit='1',
-                    source_field='score',
-                    source_artifact=artifact,
-                    run_id=run.run_id,
-                    definition='Pocketeer pocket quality score',
-                    issue_url=None,
-                    status='topomt_available',
-                ),
-            }
-            sphere_measurements = {}
-            for index, sphere in enumerate(pocket.spheres):
-                sphere_measurements[sphere.sphere_id] = {
-                    'radius': ExternalMeasurement(
-                        value=puw.quantity(float(sphere.radius), 'angstroms'),
-                        original_value=float(sphere.radius),
-                        original_unit='angstroms',
-                        source_field=f'spheres[{index}].radius',
-                        source_artifact=artifact,
-                        run_id=run.run_id,
-                        definition='radius of the alpha sphere through four atoms',
-                        issue_url=None,
-                        status='topomt_available',
-                    ),
-                    'mean_sasa': ExternalMeasurement(
-                        value=puw.quantity(float(sphere.mean_sasa), 'angstroms**2'),
-                        original_value=float(sphere.mean_sasa),
-                        original_unit='angstroms**2',
-                        source_field=f'spheres[{index}].mean_sasa',
-                        source_artifact=artifact,
-                        run_id=run.run_id,
-                        definition='mean Biotite SASA of four defining atoms',
-                        issue_url='https://github.com/uibcdf/topomt/issues/30',
-                        status='external_only',
-                    ),
-                }
-
-            topography.add_feature(
-                Pocket(
-                    atom_indices=sorted(atom_indices),
-                    center=puw.quantity(
-                        np.asarray(pocket.centroid, dtype=float) / 10.0, 'nm'
-                    ),
-                    volume=puw.quantity(float(pocket.volume) / 1000.0, 'nm**3'),
-                    score=float(pocket.score),
-                    source='pocketeer',
-                    source_id=f'pocketeer:{pocket.pocket_id}',
-                    alpha_sphere_centers=puw.quantity(
-                        alpha_sphere_centers / 10.0, 'nm'
-                    ),
-                    alpha_sphere_radii=puw.quantity(alpha_sphere_radii / 10.0, 'nm'),
-                    alpha_sphere_mean_sasa=puw.quantity(
-                        alpha_sphere_mean_sasa, 'angstroms**2'
-                    ),
-                    alpha_sphere_ids=sphere_ids,
-                    alpha_sphere_provider_atom_indices=sphere_provider_atom_indices,
-                    alpha_sphere_defining_atom_indices=sphere_atom_indices,
-                    n_alpha_spheres=len(pocket.spheres),
-                    n_provider_residues=len(pocket.residues),
-                    provider_residues=list(pocket.residues),
-                    provider_mask=np.asarray(pocket.mask, dtype=bool).copy(),
-                    provider_mask_source_artifact='output/topomt_masks.json',
-                    provider_run_id=run.run_id,
-                    external_measurements=external_measurements,
-                    alpha_sphere_measurements=sphere_measurements,
-                )
-            )
-
-        return topography

@@ -82,7 +82,7 @@ def test_unknown_options_are_rejected_by_argdigest(function, option, monkeypatch
         function(object(), **{option: 3})
 
 
-@pytest.mark.parametrize('backend', [None, True, 1, 'native', 'files'])
+@pytest.mark.parametrize('backend', [None, True, 1, 'native', 'cli'])
 def test_original_route_is_admitted_before_delegation(backend, monkeypatch):
     monkeypatch.setattr(api, 'get_topography', forbidden)
     with pytest.raises(ArgumentError, match='backend'):
@@ -157,6 +157,7 @@ def test_original_values_are_normalized_without_adding_unsupplied_options(
 
     monkeypatch.setattr(library, 'prepare_wrapper_input_pdb', prepare)
     monkeypatch.setattr(library, 'reference_chemical_context', lambda *a, **k: {})
+    monkeypatch.setattr(library, 'source_input_context', lambda *a, **k: {})
     monkeypatch.setattr(
         library,
         'import_upstream_module',

@@ -14,6 +14,7 @@ from .external_arguments import (
     _error,
     digest_chemical_state,
     digest_molecular_system,
+    digest_path,
     digest_selection,
     digest_skip_digestion,
     digest_structure_indices,
@@ -22,6 +23,7 @@ from .external_arguments import (
 
 API_CALLER = 'topomt.third_party.pocketeer.api.get_output'
 LIBRARY_CALLER = 'topomt.third_party.pocketeer.library.get_topography'
+FILES_CALLER = 'topomt.third_party.pocketeer.files.load_output'
 PROVIDER_PARAMETERS = (
     'r_min',
     'r_max',
@@ -130,6 +132,10 @@ def digest_upstream_root(upstream_root: Any, caller: str | None = None) -> str |
     )
 
 
+def digest_bundle_file(bundle_file: Any, caller: str | None = None) -> Path:
+    return digest_path(bundle_file, 'bundle_file', caller)
+
+
 @register_pipeline(kind='pocketeer', name='radius_range')
 def check_radius_range(value: Any, context: Context) -> Any:
     # Both supplied values have been digested before pipelines run. Omitted
@@ -143,10 +149,13 @@ def check_radius_range(value: Any, context: Context) -> Any:
 
 @register_pipeline(kind='pocketeer', name='original_backend')
 def digest_original_backend(value: Any, context: Context) -> str:
-    if isinstance(value, str) and value.lower() in {'library', 'wrapper'}:
+    if isinstance(value, str) and value.lower() in {'library', 'wrapper', 'files'}:
         return value.lower()
     _error(
-        'backend', value, API_CALLER, 'Expected library or wrapper for original output.'
+        'backend',
+        value,
+        API_CALLER,
+        'Expected library, wrapper or files for original output.',
     )
 
 
@@ -167,6 +176,7 @@ def digest_skip(value: Any, context: Context) -> bool:
 ARGUMENT_DIGESTERS = {
     'molecular_system': digest_molecular_system,
     'chemical_state': digest_chemical_state,
+    'bundle_file': digest_bundle_file,
     'selection': digest_selection,
     'structure_indices': digest_structure_indices,
     'syntax': digest_syntax,

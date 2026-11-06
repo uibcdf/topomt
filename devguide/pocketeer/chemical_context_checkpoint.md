@@ -85,6 +85,12 @@ comparison failure remains visible alongside the corrected final run.
 
 ## Remaining scope
 
+Subsequent work on 2026-11-06 delivers the
+[saved-output reader](saved_output_checkpoint.md), using the source-owned
+reference state and public atom/frame queries. The pending statements below
+describe this checkpoint's original boundary; prepared PharmacophoreMT receiving
+and qualification of the updated installed candidate remain open.
+
 Recovering ProviderRun artifact bytes is already supported; reconstructing a
 PocketeerOutput from those saved bytes with source agreement checks remains
 pending. The prepared-receptor PharmacophoreMT receiving control is also pending.

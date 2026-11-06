@@ -18,7 +18,7 @@ DEFAULT_BACKENDS = {
 }
 ORIGINAL_BACKENDS = {
     'fpocket': {'cli', 'wrapper', 'files'},
-    'pocketeer': {'library', 'wrapper'},
+    'pocketeer': {'library', 'wrapper', 'files'},
     'alphaspace2': {'library', 'wrapper'},
     'pycasta': {'library', 'wrapper'},
     'castp': {'server', 'castpfold', 'files'},

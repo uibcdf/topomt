@@ -6,7 +6,9 @@ Role: integrated provider and comparison reference. A bounded original-provider
 argument and structural profile resumed under [#101](https://github.com/uibcdf/topomt/issues/101);
 see its [checkpoint](argument_handoff_checkpoint.md). The subsequent
 [reference-state boundary](chemical_context_checkpoint.md) preserves MolSysMT
-chemical facts without preparing chemistry. PharmacophoreMT receiving remains
+chemical facts without preparing chemistry. Its subsequent
+[saved-output reader](saved_output_checkpoint.md) verifies source agreement and
+recovers parsed records without the optional engine. PharmacophoreMT receiving remains
 unqualified; broader native work retains the [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
 ## Identity, installation and use
@@ -69,6 +71,7 @@ bounded outcomes, not full-provider certification.
 - [Original output inventory](external_output_inventory.md).
 - [ArgDigest and original-library structural receiving](argument_handoff_checkpoint.md).
 - [MolSysMT reference-state provenance and remaining chemical receiving](chemical_context_checkpoint.md).
+- [Saved original output and source-bound recovery](saved_output_checkpoint.md).
 - [Existing native contract](../pocketeer_contract.md).
 - [Native comparison assertions](../../tests/methods/pocketeer/test_parity.py).
 - [External-tool catalogue and stewardship](../external_tools_catalog.md).
