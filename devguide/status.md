@@ -8,21 +8,30 @@ original producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
-The immediate task is documentation and machine handoff. The previous automated
-long-term implementation goal was stopped and cleared. The accepted
+The documentation review is committed at `f3ffa90`; the current user-authorized
+task publishes the development history and preserves local files in a separate
+verified ZIP before cleaning the checkout. The previous automated long-term
+implementation goal was stopped and cleared. The accepted
 [original-provider programme](provider_handoff_plan.md) remains a technical
 continuation plan, rather than an instruction to restart scientific work during
 migration.
 
-The GitHub snapshot checked on 2026-11-06 has **62 open issues and no open pull
-requests**. Remote `main` is
-`0f82d5adfae73ae24846f713ab5bf62782a4f1ad`; the other published branch is
-`gh-pages`. The local `work/fpocket-handoff-101` baseline is **35 commits ahead**
-of that `main`, has no tracking upstream, and is not a published branch. A fresh
-clone of `main` therefore omits the November provider work. Transfer the selected
-branch, Git history, committed evidence and separately preserved local work.
-This observation does not authorize a push, merge or publication. Recheck remote
-state on resumption; these are dated facts, not permanent branch policy.
+At the pre-publication snapshot on 2026-11-06, GitHub had 62 open issues and no
+open pull requests; remote `main` was `0f82d5a`. The local scientific baseline
+`87fd192` was 35 commits ahead, and the later documentation commit `f3ffa90`
+made that 36. These dated observations explain the original bundle-first
+handoff, not the final published state.
+
+The authorized publication preserves the complete fast-forward history on
+`main` and `work/fpocket-handoff-101`, with remote tracking configured. The local
+version edit and all ignored generated files were verified in
+`topomt-local-files.zip` outside the repository before the tracked file was
+restored and the generated copies removed. The [migration handoff](migration_handoff.md)
+now starts with a public clone. Its separate ZIP instructions preserve the old
+local state without making it a required runtime or committing an obsolete
+generated version. The ZIP publication receipt records the exact final SHA,
+remote identities, clean-tree check and CI state. Publishing source does not
+clear scientific-CI, full-matrix or installed-candidate debt.
 
 ## Implemented foundations
 

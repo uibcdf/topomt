@@ -4,15 +4,17 @@ Reviewed for migration on **2026-11-06**. This is the ordered technical programm
 and its decision gates. [Status](status.md) describes implemented evidence;
 [the provider plan](provider_handoff_plan.md) defines receiving acceptance;
 [issue-backed queues](reporting_protocol.md) retain independently closable work.
-The current task is documentation and machine handoff. The previous automated
-implementation goal was cleared; the future sequence below does not restart it.
+The current task is documentation, source publication and machine handoff. The
+previous automated implementation goal was cleared; the future sequence below
+does not restart it.
 
 ## 1. Transfer a usable development baseline
 
-Receive the selected development branch and its committed history rather than
-assuming remote `main` contains the local provider work. Preserve separately
-identified human edits, durable evidence and any indispensable non-Git artifacts
-before retiring the old machine. Rebuild a qualified development environment;
+Clone the published `main` and verify that its history contains the source SHA
+in the local-file ZIP's publication receipt. The published development branch
+retains the same work as an alternative. Preserve the verified non-Git backup,
+including the optional historical version edit and validation evidence, before
+retiring the old machine. Rebuild a qualified development environment;
 verify actual import origins and relevant checks using
 [packaging and environments](packaging_and_environments.md) and
 [validation and tests](validation_and_tests.md).

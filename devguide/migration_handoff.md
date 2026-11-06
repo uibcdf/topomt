@@ -1,106 +1,119 @@
 # Moving TopoMT development to another machine
 
-This handoff preserves the local development branch, human work and committed
-scientific evidence. It also identifies what must be reconstructed and qualified
-on the receiving machine. Read [onboarding](onboarding.md),
+This handoff preserves published development history, committed scientific
+evidence and a separate local-file backup. Read [onboarding](onboarding.md),
 [status](status.md) and [the environment guide](packaging_and_environments.md)
-alongside these transfer steps.
+alongside these steps. Publication is source delivery, not scientific or
+installed-package qualification.
 
-## Source baseline and local work
+## Published source and local backup
 
-The reviewed scientific baseline on 2026-11-06 is
-`87fd192b03f36b0e24a279450fab3c60620244bd`, branch
-`work/fpocket-handoff-101`. It is 35 commits ahead of local `main` and
-`origin/main` at `0f82d5adfae73ae24846f713ab5bf62782a4f1ad`.
-The branch has no tracking upstream. An `origin` remote exists for the public
-TopoMT repository; the working branch is not present in the published branch
-snapshot recorded by [status](status.md). A fresh clone of published `main`
-therefore omits this local development history.
+The scientific review baseline is `87fd192b03f36b0e24a279450fab3c60620244bd`;
+the documentation review is `f3ffa90acbcfced831e397e0a75e510924ca9204`.
+Before publication the development branch was ahead of remote `main` and had no
+upstream. The subsequent user-authorized publication fast-forwards `main` and
+publishes `work/fpocket-handoff-101`, preserving all development commits and their
+original identities. The old unpublished-branch snapshot in the review history
+is not the receiving procedure after that publication.
 
-The human modification to `topomt/_version.py` is deliberately separate from
-committed work. Its SHA-256 is
+The final source SHA and remote checks are retained in `PUBLICATION_RECEIPT.json`
+inside the separate `topomt-local-files.zip`. Check that receipt and current
+remote state when receiving the work. The working clone finishes on `main`,
+tracking `origin/main`; the development branch also has its remote counterpart.
+No release tag or package qualification follows from publishing these refs.
+
+The only local tracked modification before cleanup was the generated
+`topomt/_version.py`, SHA-256
 `91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf`.
-Do not replace it with the committed file or regenerate it during environment
-setup without preserving the edit. The filename is generated during packaging,
-but its current content is still human work.
+Its exact bytes and patch were preserved in the verified ZIP before restoring
+the tracked file. The ZIP also retains all 543 ignored generated files and the
+recent documentation-validation outputs. The checkout's current version file
+is the tracked one; the archived local edit is an optional historical state.
 
-Commit the reviewed documentation changes before producing the transfer bundle.
-The exported HEAD will then be later than the scientific baseline above; record
-that actual HEAD rather than hardcoding the baseline as the final transfer
-identity. A Git bundle contains committed objects and refs, not uncommitted
-changes or untracked files. Review `git status` and preserve any additional
-uncommitted work separately before using this recipe.
+## Clone on the receiving machine
 
-## Export committed history and the human version patch
+Use a destination where `topomt/` does not already exist:
 
-Run these steps at the chosen transfer moment. Choose a new directory on
-**durable storage outside the repository**. Do not use `/tmp` or `/dev/shm` as
-the sole transfer location.
+```bash
+git clone https://github.com/uibcdf/topomt.git topomt
+cd topomt
+git switch main
+git log -1 --oneline
+git status --short --branch
+git branch -vv
+```
 
-From the source repository root, after checking that the reviewed documentation
-is committed and the remaining local change is the preserved version edit:
+Confirm that the received history contains the published SHA recorded by the
+backup receipt. If remote `main` has subsequently advanced, inspect its ancestry
+rather than assuming a different HEAD means the earlier work was lost. Select
+the recorded commit explicitly when reproducing that exact snapshot.
+
+## Transfer and verify the local-file ZIP
+
+Copy `topomt-local-files.zip` and its `.sha256` sidecar from the durable sibling
+backup directory to durable storage on the receiving machine. Keep the archive
+outside the source checkout. The root `RESTORE_INSTRUCTIONS.md` explains every
+payload directory and its placement; `MANIFEST.json` records SHA-256 and size
+for each payload. A compact verification from any directory is:
+
+```bash
+python - /PATH/TO/topomt-local-files.zip <<'PYVERIFY'
+import hashlib
+import json
+from pathlib import Path
+import sys
+from zipfile import ZipFile
+
+archive = Path(sys.argv[1])
+with ZipFile(archive) as saved:
+    if saved.testzip() is not None:
+        raise ValueError('ZIP integrity check failed')
+    manifest = json.loads(saved.read('MANIFEST.json'))['files']
+    if set(saved.namelist()) != set(manifest) | {'MANIFEST.json'}:
+        raise ValueError('Unexpected ZIP member inventory')
+    for name, item in manifest.items():
+        data = saved.read(name)
+        if len(data) != item['bytes'] or hashlib.sha256(data).hexdigest() != item['sha256']:
+            raise ValueError(f'Backup checksum mismatch: {name}')
+print('All backup payloads verified')
+PYVERIFY
+```
+
+Extract the verified archive to a separate directory. Keep validation JSON,
+logs, JUnit XML and events as evidence; `validation_20261106/html-final/index.html`
+is the archived public-docs build. Recreate SDKs and environments through the
+environment guide. The old temporary SDK clones were excluded because their
+Git alternates refer to the old host. Archived reporter/docs overlays are
+verification inputs, not replacements for a fresh installation.
+
+Leave `repository_ignored/` in the backup: bytecode, Numba/cache files and
+`topomt.egg-info` are generated and can depend on the old interpreter or host.
+The saved `repository_state/topomt/_version.py` and `human-version.patch` can
+restore the historical local edit if explicitly needed. Applying them makes
+the new clone dirty; a normal continuation uses the tracked version file and
+lets the build backend generate versions in an appropriate isolated checkout.
+
+## Optional offline source copy
+
+A bundle is an alternative when the receiving host cannot access GitHub.
+Create it from the final committed source into a new directory on durable
+storage outside the repository:
 
 ```bash
 set -eu
 topomt_transfer_dir=/absolute/path/on/durable/storage/topomt-transfer
 mkdir -p "$topomt_transfer_dir"
 test ! -e "$topomt_transfer_dir/topomt.bundle"
-test ! -e "$topomt_transfer_dir/human-version.patch"
-git status --short --branch
 git rev-parse HEAD > "$topomt_transfer_dir/source-head.txt"
-git diff --binary HEAD -- topomt/_version.py > "$topomt_transfer_dir/human-version.patch"
-sha256sum topomt/_version.py > "$topomt_transfer_dir/human-version.sha256"
 git bundle create "$topomt_transfer_dir/topomt.bundle" --all
 git bundle verify "$topomt_transfer_dir/topomt.bundle"
 ```
 
-Review the patch and compare the version-file digest with the preserved digest
-above. Then generate transport checksums with relative filenames:
-
-```bash
-cd "$topomt_transfer_dir"
-sha256sum topomt.bundle human-version.patch human-version.sha256 source-head.txt > SHA256SUMS
-```
-
-Keep `SHA256SUMS`, the bundle and the separate patch together. The bundle also
-contains the committed evidence ZIPs. It does not contain local Conda/virtual
-environments, caches, credentials or external source trees. No remote write is
-needed to produce this local transfer.
-
-## Receive and verify the checkout
-
-Use a destination where `topomt/` does not already exist. From its parent:
-
-```bash
-set -eu
-topomt_transfer_dir=/absolute/path/to/received/topomt-transfer
-(cd "$topomt_transfer_dir" && sha256sum -c SHA256SUMS)
-git clone --branch work/fpocket-handoff-101 "$topomt_transfer_dir/topomt.bundle" topomt
-cd topomt
-test "$(git rev-parse HEAD)" = "$(cat "$topomt_transfer_dir/source-head.txt")"
-git bundle verify "$topomt_transfer_dir/topomt.bundle"
-git apply --check "$topomt_transfer_dir/human-version.patch"
-git apply "$topomt_transfer_dir/human-version.patch"
-sha256sum -c "$topomt_transfer_dir/human-version.sha256"
-git status --short --branch
-```
-
-A bundle clone initially points `origin` at the bundle file. Restore the intended
-repository transport explicitly, for example:
-
-```bash
-git remote set-url origin https://github.com/uibcdf/topomt.git
-git fetch origin
-git branch -vv
-```
-
-Fetching updates remote observations without merging or resetting the received
-working branch. A clone can create an upstream pointing at a branch from the
-bundle; remove that inherited tracking relationship if it does not correspond
-to a real reviewed remote branch. The original working branch had no upstream.
-Set a new upstream only when the intended published working branch is chosen;
-`origin/main` is not a substitute for preserving the 35 local commits.
-Remote configuration does not authorize pushing, merging or releasing.
+Transfer the bundle, recorded HEAD and the local-file ZIP separately. A bundle
+contains Git objects and refs, not uncommitted edits, ignored files or runtime
+environments. A bundle clone initially points `origin` at a local file; restore
+the intended GitHub URL before fetching or publishing. The public-clone route
+above already configures the ordinary remote correctly.
 
 ## Evidence that survives the transfer
 
@@ -182,8 +195,8 @@ oracle; transferring TopoMT alone does not recreate it.
 
 ## Acceptance on the new machine
 
-1. Verify the received HEAD, branch, separate version patch, evidence ZIP hashes
-   and complete documentation before installing or rebuilding packages.
+1. Verify the received published history, branch, local-file backup and evidence
+   ZIP hashes before installing or rebuilding packages.
 2. Use the current registered development profile and Python 3.14 through
    [packaging and environments](packaging_and_environments.md). Historical
    source pins describe historical experiments, not an automatic upgrade plan
