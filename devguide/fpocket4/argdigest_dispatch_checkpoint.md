@@ -97,3 +97,7 @@ No full-suite/hosted, other-minor/platform, Conda/public-package or complete
 ArgDigest migration claim follows. Recovery owners remain
 [#58](https://github.com/uibcdf/topomt/issues/58) and
 [#16](https://github.com/uibcdf/topomt/issues/16). No remote branch or issue changed.
+
+The subsequent [specific argument stage](argument_contracts_checkpoint.md) adds
+the original fpocket API/CLI/files contracts and 115 installed passing cases in
+a new candidate. This dispatch-stage artifact and its earlier scope remain intact.

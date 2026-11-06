@@ -1,0 +1,59 @@
+{
+  "schema": "topomt.fpocket-argument-evidence@1",
+  "archive": "fpocket_arguments_20261105.zip",
+  "size": 1531488,
+  "sha256": "4b76f78144ce07a43f9e091a2f36dbcbeb5f3976b10b3f3b41c6bf7eac4c4a2b",
+  "members": 53,
+  "producer": "75eb36bbd8d93d4059b6ce673a7e73adc6785da5",
+  "wheel": {
+    "name": "topomt",
+    "filename": "topomt-0.5.0+342.g75eb36b.dirty-py3-none-any.whl",
+    "size": 21570840,
+    "sha256": "f5515b4786a204a3dd5ab85199ac06ff267086eac1e726bffb7b357514509dd7",
+    "producer": "75eb36bbd8d93d4059b6ce673a7e73adc6785da5"
+  },
+  "validation": {
+    "producer": "75eb36bbd8d93d4059b6ce673a7e73adc6785da5",
+    "source_tests": {
+      "passed": 242,
+      "deselected": 5,
+      "skipped": 0,
+      "seconds": 95.97
+    },
+    "argument_cases": 50,
+    "earlier_dispatch_cases": 33,
+    "science_cases": 32,
+    "distribution_and_reporting": {
+      "passed": 20
+    },
+    "mypy": {
+      "version": "2.3.1",
+      "files": 6,
+      "imported_bodies": "skipped",
+      "result": "success"
+    },
+    "ruff": {
+      "files": 426,
+      "lint": "success",
+      "format": "success"
+    },
+    "docs": {
+      "result": "success",
+      "warnings": 8,
+      "edited_user_page_diagnostic": false
+    },
+    "installed": {
+      "passed": 115,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 38.14,
+      "distributions": 138,
+      "record_hashes_before_and_after": 26217
+    },
+    "pip_check": "No broken requirements found.",
+    "required_resources": 617,
+    "artifact_retention": "/dev/shm/topomt-installed-101.bch3yxd8/fpocket-arguments/wheels",
+    "scope": "Original fpocket get_output, CLI and files-loader argument boundaries. Molecular/source-dependent agreement remains with its owner; native gateways and parsed-result assembly are separate."
+  },
+  "scope_limits": "Bounded Linux x86_64/Python 3.14 installed receiving with existing interpreter/OS; not full hosted/Conda/public qualification."
+}
