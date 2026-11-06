@@ -176,11 +176,82 @@ the next installed-candidate phase. The compatible scientific prefix and public
 reporter overlay are retained from the preceding checkpoint; this source work
 does not mutate their scientific distributions or qualify a new wheel.
 
+## Subsequent exact installed candidate
+
+The later producer `bb34e67a67631217c732aaac779ad885d9d8df07` is now checked
+through the actual development wheel
+`topomt-0.5.0+355.gbb34e67.dirty-py3-none-any.whl` (21,585,201 bytes), SHA-256
+`4c6484fbc09a2b320de7ac7d576a661bb1616894ece379488aea48bc5df3578d`.
+This is a new candidate; the earlier source and installed receipts retain their
+original identities.
+
+A full isolated clone preserves the human's live version edit. The declared-only
+dependency SDK preflight passes at its recorded immutable revision. A preliminary
+build used the host's versioningit 3.3.0, outside the declared `~=2.0` range; it is
+retained as an experiment and excluded from candidate acceptance. The accepted
+build uses versioningit **2.3.0**, setuptools 84.0.0 and wheel 0.48.0 in a separate
+tool overlay. Its clean first attempt reproduces #78's filename/metadata mismatch;
+the retained second attempt differs from the producer only in the generated
+version file and produces coherent filename, metadata and embedded version.
+This documented development build does not qualify a release build. All **625**
+runtime resources are present, with committed source bytes matching except for
+the generated version module.
+
+A new virtual environment disables system and user site-packages and contains
+**161 distributions**. Its exact wheel inputs are frozen by URL and SHA-256 and
+installed with `--no-deps --require-hashes`. It reuses the previously inspected
+scientific dependency snapshot, replacing TopoMT and the reporter with this
+candidate and public Pytest Receptor **1.2.0**. It neither upgrades the sibling
+checkouts nor claims compatibility with their current mains. Locally built
+mmcif, nglview and Biotraj wheels are recovered from their retained bytes, with
+their source archives and actual wheel hashes distinguished.
+
+The detached, producer-hashed harness passes **311 tests, zero skips and zero
+failures, in 101.57 s**. It covers the original Pocketeer argument/state/saved
+reader contracts, engine-independent recovery, source correspondence and
+prepared consumer, plus the existing fpocket arguments, input/frame/state,
+original files and prepared receiving controls. The prepared fpocket consumer
+retains **15 sites** and Pocketeer retains **46 sites** under both unit policies.
+
+Before and after science, all **29,308 RECORD hashes** agree and each installed
+distribution's direct input hash matches the frozen manifest. The unchanged
+shared installed-origin checker and the previously documented explicit checks
+for PyUnitWizard's generated alias and seven Biotite PyO3 modules verify loaded
+origins. No origin is rewritten or module removed. The all-runtime check covers
+3,184 loaded modules before and 4,492 after, allowing only this prefix, standard
+library, the declared detached harness, qualification script and immutable
+checker support. Neither
+the source clone nor another site's scientific packages supply runtime modules.
+`pip check` passes before and after the scientific controls.
+
+A second fresh process independently repeats complete Pocketeer detection,
+saved-source recovery and public PharmacophoreMT receiving under pm/fs first
+and nm/ps second. PharmacophoreMT is absent before the first policy is selected.
+Both flows retain 11 ordered pockets, 408 member atoms for `pocketeer:0`, and 46
+query sites. The application policy is preserved; original JSON/masks agree
+byte-for-byte, and source frames/sites agree physically at 1e-12 nm. Each real
+run keeps its own source, bundle and query hashes. Installed RECORD/input/origin
+checks also pass before and after this independent control. The two deliberate
+incompatible-source ERROR probes in its log remain expected negative controls.
+
+The [installed archive](evidence/pocketeer_installed_handoff_20261106.zip) and
+[sidecar](evidence/pocketeer_installed_handoff_20261106.json) retain build and
+installation commands/logs, frozen inputs, resources, detached support, exact
+origin/integrity receipts, all test outcomes and complete prepared positive
+source/bundle/query evidence. Every archive member digest is checked. As in the
+previous receiving checkpoints, the large actual TopoMT and suite wheels remain
+in temporary artifact storage rather than being duplicated into Git. This
+candidate is at `/dev/shm/topomt-current-installed-101/wheels`; its scientific
+prefix and raw controls remain under the same task root. This is not durable
+public wheel hosting or a source-free acquisition route. The old environments,
+source controls and the human's `_version.py` bytes remain unchanged. No runtime
+or dependency declarations changed in this qualification stage.
+
 ## Remaining scope
 
-An updated exact TopoMT wheel and clean installed receiving are next. The
-current source control does not qualify a new installed candidate, component
-support/matrix/full-suite gates, chemical preparation, binding relevance or
-affinity. AlphaSpace2, pyCASTA and CASTp/CASTpFold retain the next provider work
-in the long-term plan. Native equivalence and exhaustive descriptor fidelity
-retain their independent owners.
+This installed control covers Linux x86_64/Python 3.14.7 with a reused interpreter
+and operating system. It does not qualify hosted/full-suite or platform/Python
+matrix gates, chemical preparation, binding relevance, affinity, general
+recognition or public delivery. AlphaSpace2 is the next original-provider
+handoff; pyCASTA and CASTp/CASTpFold remain in the long-term plan. Native
+equivalence and exhaustive descriptor fidelity retain their independent owners.

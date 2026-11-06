@@ -1,0 +1,133 @@
+{
+  "date": "2026-11-06",
+  "owner": "uibcdf/topomt#101",
+  "producer": "bb34e67a67631217c732aaac779ad885d9d8df07",
+  "wheel": {
+    "name": "topomt",
+    "filename": "topomt-0.5.0+355.gbb34e67.dirty-py3-none-any.whl",
+    "size": 21585201,
+    "sha256": "4c6484fbc09a2b320de7ac7d576a661bb1616894ece379488aea48bc5df3578d",
+    "producer": "bb34e67a67631217c732aaac779ad885d9d8df07"
+  },
+  "archive": {
+    "name": "pocketeer_installed_handoff_20261106.zip",
+    "bytes": 5424429,
+    "members": 107,
+    "sha256": "3b1aac470c4c6e49e76350f69967b8662fe7c9e0aeee0d1c2e23b8013381ed37"
+  },
+  "tests": {
+    "passed": 311,
+    "skipped": 0,
+    "failed": 0,
+    "duration_seconds": 101.57408150099218,
+    "public_pytest_receptor": "1.2.0"
+  },
+  "integrity": {
+    "distributions": 161,
+    "record_hashes_before_and_after": 29308,
+    "loaded_file_backed_modules_before": 3184,
+    "loaded_file_backed_modules_after": 4492,
+    "runtime_resources": 625,
+    "pip_check_before": "passed",
+    "pip_check_after": "passed",
+    "all_inputs_frozen_with_hashes": true,
+    "system_user_site_packages_disabled": true,
+    "unchanged_sdk_origin_checker": "b9852d973e96613a68cab7278491ff647bfd0b7d",
+    "dependency_sdk": "8f00e6d9de943b6e4710ea62936e2ebea00fad24"
+  },
+  "preserved_human_version_sha256": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+  "prepared_profiles": [
+    {
+      "policy": [
+        "pm",
+        "fs",
+        "radians"
+      ],
+      "pocket_count": 11,
+      "pocket_ids": [
+        "pocketeer:7",
+        "pocketeer:4",
+        "pocketeer:6",
+        "pocketeer:0",
+        "pocketeer:3",
+        "pocketeer:8",
+        "pocketeer:2",
+        "pocketeer:5",
+        "pocketeer:9",
+        "pocketeer:10",
+        "pocketeer:1"
+      ],
+      "selected_pocket": "pocketeer:0",
+      "site_count": 46,
+      "member_atoms": 408,
+      "run_id": "47ce1e09890b71413b21d7ab2fa37f31ad5d7e3daf8a7939096b891466cb426c",
+      "source_sha256": "f73084d70d37e4f186a25a88404fec2a728f5fdf39c24bcf4f0e736acb736c87",
+      "checks": {
+        "nonempty_query": true,
+        "native_site_round_trip": true,
+        "native_context_round_trip": true,
+        "source_coordinates_unchanged": true,
+        "source_bytes_unchanged": true,
+        "source_chemical_context_unchanged": true
+      }
+    },
+    {
+      "policy": [
+        "nm",
+        "ps",
+        "radians"
+      ],
+      "pocket_count": 11,
+      "pocket_ids": [
+        "pocketeer:7",
+        "pocketeer:4",
+        "pocketeer:6",
+        "pocketeer:0",
+        "pocketeer:3",
+        "pocketeer:8",
+        "pocketeer:2",
+        "pocketeer:5",
+        "pocketeer:9",
+        "pocketeer:10",
+        "pocketeer:1"
+      ],
+      "selected_pocket": "pocketeer:0",
+      "site_count": 46,
+      "member_atoms": 408,
+      "run_id": "ab047822f38e88ad4b7a8fbbdf26d6bc494197e0a1f8635cafd565dafbde9e62",
+      "source_sha256": "c967e3f15cdb5a5401ab016588aa1cf886675083ab750ea8fbd0008eabff8580",
+      "checks": {
+        "nonempty_query": true,
+        "native_site_round_trip": true,
+        "native_context_round_trip": true,
+        "source_coordinates_unchanged": true,
+        "source_bytes_unchanged": true,
+        "source_chemical_context_unchanged": true
+      }
+    }
+  ],
+  "independent_control_checks": {
+    "both_full_flows_passed": true,
+    "original_json_and_masks_equal": true,
+    "physical_sites_agree": true,
+    "source_frames_physically_agree": true,
+    "application_policy_preserved": true
+  },
+  "build": {
+    "versioningit": "2.3.0",
+    "setuptools": "84.0.0",
+    "wheel": "0.48.0",
+    "clean_metadata_failure_retained": true,
+    "preliminary_host_tool_mismatch_retained": true,
+    "accepted_state": "Only the generated version file differs from exact producer; known #78 development build, no release claim."
+  },
+  "limits": [
+    "Independent packages reuse interpreter/OS; Linux x86_64/Python 3.14 only; hosted/public and full-suite/matrix qualification remain separate.",
+    "Prepared ERalpha fragment, structural 2pk4 and raw 3PTB controls; hydrophobic consumer recipe only, no biological/affinity or full recognition admission.",
+    "The unchanged SDK checker does not accept known fileless generated modules; explicit installed generator origins verify PyUnitWizard alias and seven Biotite PyO3 parent bindings. No module was rewritten or deleted.",
+    "Initial incompatible host build and failed clean metadata attempts remain retained; accepted wheel uses declared-compatible versioningit 2.3.0 and generated-version-only dirty state under #78.",
+    "Retained dependency/source snapshot, not current sibling mains or minimum-version certification.",
+    "Actual TopoMT and other suite wheels remain in temporary task storage; candidate identity and all input hashes/URLs are archived, with small public/native dependency wheels; no durable wheel-hosting or public source-free acquisition claim.",
+    "AlphaSpace2, pyCASTA and CASTp/CASTpFold handoff qualification remains outstanding."
+  ]
+}
