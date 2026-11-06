@@ -8,8 +8,8 @@ probable route to parity now looks like.
 
 It should be read together with:
 
-- [native_parity_matrix_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/native_parity_matrix_2026_04_10.md)
-- [checkpoint_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/checkpoint_2026_04_10.md)
+- [native_parity_matrix_2026_04_10.md](native_parity_matrix_2026_04_10.md)
+- [checkpoint_2026_04_10.md](checkpoint_2026_04_10.md)
 
 ## The short version
 

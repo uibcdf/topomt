@@ -19,9 +19,9 @@ The goal is to identify:
 
 This document should be read together with:
 
-- [native_parity_matrix_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/native_parity_matrix_2026_04_10.md)
-- [failure_analysis_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/failure_analysis_2026_04_10.md)
-- [checkpoint_2026_04_10_route_to_parity.md](/home/diego/repos@uibcdf/topomt/devguide/castp/checkpoint_2026_04_10_route_to_parity.md)
+- [native_parity_matrix_2026_04_10.md](native_parity_matrix_2026_04_10.md)
+- [failure_analysis_2026_04_10.md](failure_analysis_2026_04_10.md)
+- [checkpoint_2026_04_10_route_to_parity.md](checkpoint_2026_04_10_route_to_parity.md)
 
 ## High-level conclusion
 

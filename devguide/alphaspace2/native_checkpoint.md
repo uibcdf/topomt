@@ -1,5 +1,13 @@
 # `alphaspace2` Native Checkpoint
 
+Historical native-reproduction checkpoint. Its `0.3.0` milestone and "current"
+scheduling language describe that earlier work, not an active implementation
+instruction or the upstream original-provider version. For the 2026-11-06
+handoff, start with [continuity](continuity.md), [overview](overview.md) and
+[original receiving evidence](handoff_checkpoint.md); current priorities are in
+[status](../status.md) and [roadmap](../roadmap.md). The account below preserves
+its original scientific observations, tolerances and unresolved questions.
+
 ## Purpose
 
 This document records the current state of the native `alphaspace2`

@@ -10,7 +10,7 @@ input/output helpers.
 
 ## Demo systems
 
-[topomt/demo.py](/home/diego/repos@uibcdf/topomt/topomt/demo.py) defines demo entries used in tests
+[topomt/demo.py](../topomt/demo.py) defines demo entries used in tests
 and exploratory workflows.
 
 At the moment, the demo registry mainly covers:
@@ -40,7 +40,7 @@ The role of bundled data should remain pragmatic:
 
 ## CASTp loading
 
-[topomt/io/load_CASTp.py](/home/diego/repos@uibcdf/topomt/topomt/io/load_CASTp.py) is an important
+[topomt/io/load_CASTp.py](../topomt/io/load_CASTp.py) is an important
 part of the repository because it is not simply a detector wrapper.
 
 It allows TopoMT to import external CASTp results and turn them into a
@@ -70,7 +70,7 @@ engineering concerns:
 ## Wrappers and external artifacts
 
 The fpocket material under
-[topomt/third_party/fpocket/testdata/](/home/diego/repos@uibcdf/topomt/topomt/third_party/fpocket/testdata) shows that the
+[topomt/third_party/fpocket/testdata/](../topomt/third_party/fpocket/testdata) shows that the
 repository also acts as a bridge to external tools and their artifacts.
 
 This wrapper-oriented layer is currently under-documented and should be made

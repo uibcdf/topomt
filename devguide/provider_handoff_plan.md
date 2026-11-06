@@ -1,6 +1,9 @@
 # Reproducible original-provider handoff plan
 
-Accepted direction: 2026-11-06, under the user's active long-term development goal.
+Accepted technical direction: 2026-11-06. The previous automated development
+goal was subsequently paused and cleared. This plan preserves the intended
+scientific scope; it does not authorize resuming it. The current task is the
+developer-guide and machine-migration handoff.
 Owner for the first consumer pilots: [#101](https://github.com/uibcdf/topomt/issues/101).
 Provider fidelity remains [#19](https://github.com/uibcdf/topomt/issues/19);
 component qualification and full-suite backlog remain #16/#58. This plan is
@@ -64,4 +67,6 @@ and prepared public-consumer handoffs now have bounded source evidence against
 the pinned original and independent witnesses.
 Reuse the fpocket developer qualification recorder and PharmacophoreMT's public
 tools when extending that pilot; do not introduce a second recognition or model
-implementation. Keep the full goal active until the evidence above is complete.
+implementation. Resume implementation only as an explicitly selected task after
+the migration handoff. Completion still requires all five providers and the
+evidence above; the prepared AlphaSpace2 source control is not the full outcome.

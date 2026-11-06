@@ -33,7 +33,7 @@ boundary faces".
 
 File:
 
-- [topomt/third_party/castp/core/castp_core/geometry.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/geometry.py)
+- [topomt/third_party/castp/core/castp_core/geometry.py](../../topomt/third_party/castp/core/castp_core/geometry.py)
 
 Added canonical vertex-rank construction:
 
@@ -52,7 +52,7 @@ These are built from edge ranks following the historical `vertex_mus()` logic in
 
 File:
 
-- [topomt/third_party/castp/core/castp_core/components.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/components.py)
+- [topomt/third_party/castp/core/castp_core/components.py](../../topomt/third_party/castp/core/castp_core/components.py)
 
 Added:
 
@@ -71,7 +71,7 @@ This is a canonical improvement over the previous proxy.
 
 Added regression:
 
-- [tests/test_castp_core.py](/home/diego/repos@uibcdf/topomt/tests/test_castp_core.py)
+- [tests/test_castp_core.py](../../tests/test_castp_core.py)
   `::test_component_regular_vertex_indices_follow_mkalf_interior_and_touched_logic`
 
 Existing short green battery remained green:

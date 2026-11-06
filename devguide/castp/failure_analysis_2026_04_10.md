@@ -12,7 +12,7 @@ It is not a changelog. It is an attempt to answer:
 
 It is based on the measured battery summarized in:
 
-- [native_parity_matrix_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/native_parity_matrix_2026_04_10.md)
+- [native_parity_matrix_2026_04_10.md](native_parity_matrix_2026_04_10.md)
 
 ## Current state by feature family
 

@@ -1,9 +1,15 @@
 # Native Methods Plan
 
 Status: existing local implementations and historical parity checkpoints;
-systematic post-integration review queued. See
-[third_party_results_checkpoint.md](third_party_results_checkpoint.md) for the
-active external-result phase and its handoff gate.
+systematic post-integration review queued. Reading note, 2026-11-06: this is a
+scientific continuation plan. [Status](status.md), [roadmap](roadmap.md) and
+[the provider handoff plan](provider_handoff_plan.md) govern the current
+receiving sequence; the present task is documentation and machine migration.
+The plan is neither a prerequisite for using original-provider outputs nor
+authorization to resume native implementation. The
+[external-results checkpoint](third_party_results_checkpoint.md) retains its
+own historical phase, score and acceptance gate. Dated exceptions below do not
+activate every provider or supersede the current task.
 
 On 2026-10-01 the user explicitly resumed a bounded local CASTp reconstruction
 before that broader review. Historical source and papers are algorithmic
@@ -495,7 +501,7 @@ The validation path should differ from the runtime path.
    external-result phase. Start with the current local implementations; do not
    restart their plans from a blank implementation.
 2. Audit the two CASTp-family local code paths and the
-   [from-scratch CASTp plan](CASTp/implementation.md) against CASTp 3.0 and
+   [from-scratch CASTp plan](castp/native_implementation_plan.md) against CASTp 3.0 and
    CASTpFold exports. Decide whether the current prototypes can be hardened or
    which stages require replacement.
 3. For every provider, write the stage/field comparison matrix and a fresh

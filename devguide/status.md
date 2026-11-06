@@ -1,164 +1,154 @@
-# TopoMT Status
+# TopoMT development status
 
-## Summary
+Reviewed for machine migration on **2026-11-06**. This describes the local
+handoff baseline `87fd192b03f36b0e24a279450fab3c60620244bd` and its committed
+evidence. Read [the index](index.md) first, then use this page to choose the
+relevant contract, checkpoint and owning issue. Dated checkpoints retain their
+original producer, inputs and limits; documentation edits do not requalify them.
 
-TopoMT is in an active implementation-hardening stage.
+## Current work and delivery boundary
 
-The project already contains:
+The immediate task is documentation and machine handoff. The previous automated
+long-term implementation goal was stopped and cleared. The accepted
+[original-provider programme](provider_handoff_plan.md) remains a technical
+continuation plan, rather than an instruction to restart scientific work during
+migration.
 
-- a coherent `Topography`/`Feature` object model;
-- a public orchestrator, `get_topography()`;
-- several conventional engine integrations and wrapper-backed routes;
-- shared geometry, tessellation, and feature-characterization utilities under `topomt.tools`;
-- an active `DelaunayMesh` substrate used by several native paths;
-- a native DFND implementation that is now executable, tested at the substrate/API level, and documented through focused checkpoints.
+The GitHub snapshot checked on 2026-11-06 has **62 open issues and no open pull
+requests**. Remote `main` is
+`0f82d5adfae73ae24846f713ab5bf62782a4f1ad`; the other published branch is
+`gh-pages`. The local `work/fpocket-handoff-101` baseline is **35 commits ahead**
+of that `main`, has no tracking upstream, and is not a published branch. A fresh
+clone of `main` therefore omits the November provider work. Transfer the selected
+branch, Git history, committed evidence and separately preserved local work.
+This observation does not authorize a push, merge or publication. Recheck remote
+state on resumption; these are dated facts, not permanent branch policy.
 
-The project is not yet a polished stable product. The main remaining gap is not lack of direction; it is validation depth, performance hardening, and deciding which experimental records become public feature APIs.
+## Implemented foundations
 
-## Current Priority
+TopoMT contains two complementary result paths:
 
-The current selected implementation slice is local CASTp3 closed-void SA/MS
-validation under #79. The
-[modern CASTp checkpoint](castp/checkpoint_2026_10_01_modern_void_measurements.md)
-records exact lining-atom and sixteen-measure agreement for 2PK4, explicit
-unit-bearing delivery and the remaining open-pocket/mouth roadmap. Historical
-code is an algorithmic reference; pinned modern outputs are the result oracle.
-DFND remains the native method, and its two-case notebook laboratory is paused.
-The [expanded CASTp panel](castp/checkpoint_2026_10_01_castp3_radius_profile.md)
-now reproduces thirteen voids and fifty-two SA/MS measures under an explicit
-modern-server radius profile (#80), after identifying two standard-ProtOr
-residuals from independently exported sphere geometry.
+- `get_provider_output()` executes or recovers an explicitly selected original
+  provider. Provisional version-1 records preserve pocket IDs, source indices and
+  membership roles, declared geometry, attributed measurements and original
+  `ProviderRun` artifacts. See the
+  [provider output checkpoint](provider_pocket_output_checkpoint.md).
+- `get_topography()` supplies the common `Topography`/`Feature` hierarchy.
+  DFND is TopoMT's native scientific method; its raw mesh, graph and component
+  evidence lives in `topography.dfnd`. Shared geometry and tessellation tools
+  live under `topomt.tools` and `DelaunayMesh`. See
+  [architecture](architecture.md), [API surface](api_surface.md) and
+  [DFND implementation status](DFND/implementation_status.md).
 
-The DFND scientific workstream is the
-[DFND notebook laboratory](DFND/notebook_laboratory_checkpoint.md): learn and
-validate native residence/transit behavior case by case, starting from frozen
-synthetic inputs and independent references. The notebooks seed the future
-public documentation/benchmark annex. The regular-tetrahedron and sampled
-closed-shell cases include original-provider comparisons. The user requested a
-pause at this two-case checkpoint; further cases and kernel changes await a later
-resume. #76 remains open for the broader
-reference panel and #75 for numerical volume precision. Remaining #60 public
-support work is pending rather than a prerequisite for these studies.
+Initial provider delivery [#65](https://github.com/uibcdf/topomt/issues/65),
+MolSysViewer adoption [#66](https://github.com/uibcdf/topomt/issues/66), and the
+Topography shallow-copy correction
+[#74](https://github.com/uibcdf/topomt/issues/74) are closed bounded outcomes.
+The addon displays provider pocket representations separately from canonical
+Topography state. These deliveries and displayed point/sphere sets do not
+establish exact closed regions or complete public-model semantic admission.
 
-On 2026-10-01 the user selected joint DFND/Topography work, starting with
-[the audit, assessment and staged roadmap](DFND/audit_topography_2026_10_01.md).
-The audited local selector passed 312 tests with two skips; additional probes
-reproduced shallow-copy index corruption (#74), mutable native-cache ownership
-risks (#60) and overstated numerical certainty (#75). Independent reference
-validation is tracked in #76. The bounded
-[copy correction](archive/topography_shallow_copy_indexes.md) (#74) is now
-implemented with failing-first regressions for all five registry operations in
-both directions. The next implementation slice is #60's ownership/context/support
-contract. Its [native numeric snapshot slice](DFND/checkpoint_geometry_snapshots_2026_10_01.md)
-is now delivered: mutable input arrays cannot change historical cached geometry,
-native arrays are protected and probes share buffers. Public mutation and
-source/context/support gates remain open.
+## Original-provider receiving
 
-Subsequent progress: [selected-frame input contexts](topography_input_context.md)
-now retain recoverable selected MolSysMT topology and structural metadata,
-protected quantities and explicit source mappings. Native diagnostics and
-`Topography.show()` use this evidence; populated/analysed source rebinding is
-rejected. Neutral support, provider context adoption and remaining public
-mutation paths keep #60 partial. The original-input compatibility reference can
-remain live and is distinct from historical recovery.
+MolSysMT owns molecular representation, loading, selections, chemistry,
+coordinates and atom correspondence. TopoMT owns original topography execution,
+evidence, source maps and pocket records. PharmacophoreMT owns recognition,
+complementation, query placement, tolerances, essentiality, weights and native
+model persistence. Missing sibling capabilities go to their owner. ArgDigest,
+DepDigest, SMonitor and PyUnitWizard retain their registered responsibilities.
 
-Initial [provider pocket delivery](provider_pocket_output_checkpoint.md) (#65)
-and [MolSysViewer adoption](provider_output_viewer_checkpoint.md) (#66) are
-implemented. Their provisional contracts remain usable while broader provider
-implementation is paused. Runtime public-model gates are still open.
+| Provider | Committed bounded evidence | Continuation gap |
+| --- | --- | --- |
+| fpocket | Original CLI/files, source/frame/reference-state guards, prepared public PharmacophoreMT receiving and source/installed receipts. See [overview](fpocket4/overview.md). | Preserve regressions; exhaustive fidelity and general qualification remain separate. |
+| Pocketeer | Original 0.4.0 argument/state contracts, engine-independent saved recovery and a prepared 46-site hydrophobic control. Producer `bb34e67` has a recorded 311-case installed qualification. See [consumer checkpoint](pocketeer/pharmacophore_handoff_checkpoint.md). | Preserve artifact/evidence identities and re-establish the receiving environment. |
+| AlphaSpace2 | Original 0.1.2 argument/source contracts, schema-1 recovery and prepared public receiving at `ce4708a`: 13 pockets, retained empty hydrophobic recognition and two explicitly projected donor sites from recognized acceptors. See [handoff checkpoint](alphaspace2/handoff_checkpoint.md). | Repeat and durably preserve updated exact installed qualification and dependency-origin checks; the later interrupted attempt has no committed installed receipt. |
+| pyCASTA | Existing original adapter/output and retained JSON/files; [overview](pycasta/overview.md) and [contract](pycasta/contract.md). | Original argument/source/recovery and prepared consumer qualification. Native `1a6w` parity [#53](https://github.com/uibcdf/topomt/issues/53) is separate. |
+| CASTp/CASTpFold | Server/files integrations and original exports; [overview](castp/overview.md). Local modern closed-void measures have their own historical validation. | Original route/source fidelity and an explicit prepared consumer; local/native parity and residual memberships remain separate. |
 
-The broader [third-party results checkpoint](third_party_results_checkpoint.md)
-remains 20/100 verified, with exhaustive fidelity incomplete. Its later local
-provider-method audit follows its separate parity gate. Initial consumer adoption
-is retained in #66.
-Concrete DockingMT and PharmacophoreMT adoption remains deferred.
+The AlphaSpace2 prepared-source checkpoint retains passing execution evidence
+for **523 distinct affected cases**, including eight initially skipped fpocket
+cases that subsequently ran with the required executable variable. Original
+skips remain visible. Two complete source flows agree under pm/fs and nm/ps;
+saved public consumption works without AlphaSpace2 or MDTraj installed. These
+are declared analytical hypotheses on one historical prepared reference state,
+with no affinity or binding-site relevance claim. They do not qualify an updated
+installed package, another platform, current sibling mains or the full suite.
 
-DFND is the native TopoMT method direction. It should not be forced into strict CASTp, fpocket, AlphaSpace2, Pocketeer, or pycasta parity. Those methods remain valuable as external references, loader or wrapper integrations, and qualitative/quantitative comparison baselines.
+Source, installed candidate and public delivery are distinct evidence classes.
+Historical temporary prefixes, wheels and `/tmp` or `/dev/shm` paths are not
+portable installation requirements. Use the committed archives and their hashes
+to recover available evidence, and [the environment guide](packaging_and_environments.md)
+to establish actual imports/dependencies. Conversation-only outcomes and missing
+temporary files are not acceptance evidence.
 
-The DFND backlog is:
+## DFND and Topography gates
 
-- apply the completed typed mesh/query contract to validation, reporting, and
-  future temporal-comparability workflows;
-- keep the raw data model traceable and `get_topography(method='dfnd')`
-  integrated with `Topography`;
-- validate wet/dry components, links, motifs, metrics, and qualitative behavior
-  on controlled and real systems;
-- add reporting/filter policy before judging cavity quality;
-- profile and optimize query/build performance for larger systems.
+The [DFND notebook laboratory](DFND/notebook_laboratory_checkpoint.md) is paused
+after regular-tetrahedron and sampled closed-shell studies. Opening, tube, neck
+and new kernel studies await a separately selected resume. DFND is not required
+to reproduce other methods' definitions or rankings.
 
-## What Is Currently Solid
+Delivered groundwork includes canonical residence/transit decisions, source/local
+index checks, typed mesh/query configuration, static support/context identity,
+protected numerical snapshots and selected-frame input recovery. Raw dry-network,
+motif and dynamic matching helpers exist without completing their scientific or
+public contracts. Details remain in the
+[joint audit](DFND/audit_topography_2026_10_01.md),
+[implementation status](DFND/implementation_status.md) and
+[Topography implementation route](topography_implementation_route.md).
 
-- `get_topography()` routes DFND and the conventional engines through the same top-level API.
-- `DelaunayMesh` is the shared geometric substrate for Delaunay/tetrahedral work.
-- DFND now has active geometry, graph-contract, input-policy, Topography, solvent-volume, and real-system stability tests.
-- DFND supports the build-once/query-many workflow through `DelaunayFlowNetwork`.
-- Static component, external-link, and motif identity is deterministic and
-  separates local labels, exact support, and contextual provenance.
-- Face permeability and wet-graph traversability use one canonical transit-edge
-  decision, with explicit physical and effective gate margins.
-- Frozen `DFNDMeshConfig` and `DFNDQuery` objects define substrate/query
-  provenance, complete re-probing, and reporting-independent result identity.
-- DFND diagnostics and the TopoMT viewer addon enforce explicit `mesh_local`
-  versus `molecular_system` atom-index boundaries.
-- The viewer runtime retains one complete source topography and manages feature
-  filters and render groups separately.
-- Primary viewer renderers return a common `RenderResult` and every component
-  representation supports clean repeated rendering.
-- Full-graph and component-graph nodes share one viewer-neutral tetrahedron centre extractor with explicit units and structured identity.
-- Standalone selected-feature rendering emits the requested filtered operations, and addon context actions use executable entries without no-op click callbacks.
-- `Topography` and DFND `Components` registries have validated mutation and
-  registered-ID protection. Topography shallow copies now own independent index
-  and relation sets (#74). Native input/cache arrays are protected under #60;
-  other public mutation paths and full context/support adoption remain partial.
-- `R_residence` and `R_gate` are implemented as clearance primitives with active tests.
-- DFND raw records separate topological/debug volumes from `volume_solvent_estimate`.
-- DFND promotes void/pocket/channel, percolating regions and provisional
-  open-concavity/groove/cleft classifications, with Mouth children where applicable.
-  Remaining raw evidence is available through `topography.dfnd`.
-- Dry-side records now include dry components, dry edges, dry interfaces, face depth, and first candidate dry motifs.
-- Probe-radius sweeps on five small real systems obey the expected monotonicity invariants.
+Distinct unfinished gates are:
 
-Key DFND checkpoints:
+- [#60](https://github.com/uibcdf/topomt/issues/60): public context/support,
+  provenance and remaining mutation adoption; delivered snapshot/input guards
+  cover slices rather than the whole gate.
+- [#61](https://github.com/uibcdf/topomt/issues/61),
+  [#62](https://github.com/uibcdf/topomt/issues/62),
+  [#63](https://github.com/uibcdf/topomt/issues/63): molecular participants,
+  contextual contact/occupancy and semantic provider admission.
+- [#75](https://github.com/uibcdf/topomt/issues/75),
+  [#76](https://github.com/uibcdf/topomt/issues/76): volume precision/uncertainty
+  and independent references. Deterministic estimator output is not evidence of
+  analytic or publication-grade volume precision.
+- [#97](https://github.com/uibcdf/topomt/issues/97),
+  [#100](https://github.com/uibcdf/topomt/issues/100): molecular ownership/copy
+  and receiving MolSysMT's independent ChemicalStates/Topology contract.
 
-- [DFND/implementation_status.md](DFND/implementation_status.md)
-- [DFND/checkpoint_atom_index_spaces_2026_06_14.md](DFND/checkpoint_atom_index_spaces_2026_06_14.md)
-- [DFND/checkpoint_viewer_runtime_ownership_2026_06_14.md](DFND/checkpoint_viewer_runtime_ownership_2026_06_14.md)
-- [DFND/checkpoint_render_result_contract_2026_06_14.md](DFND/checkpoint_render_result_contract_2026_06_14.md)
-- [DFND/checkpoint_viewer_geometry_boundary_2026_06_14.md](DFND/checkpoint_viewer_geometry_boundary_2026_06_14.md)
-- [DFND/checkpoint_identity_provenance_registries_2026_06_06.md](DFND/checkpoint_identity_provenance_registries_2026_06_06.md)
-- [DFND/checkpoint_dfnd_hardening_stint.md](DFND/checkpoint_dfnd_hardening_stint.md)
-- [DFND/checkpoint_probe_radius_sweep.md](DFND/checkpoint_probe_radius_sweep.md)
-- [DFND/checkpoint_quality_snapshot.md](DFND/checkpoint_quality_snapshot.md)
-- [DFND/checkpoint_dry_interfaces_depth.md](DFND/checkpoint_dry_interfaces_depth.md)
-- [DFND/checkpoint_dry_graph_basics.md](DFND/checkpoint_dry_graph_basics.md)
-- [DFND/checkpoint_face_identity_external_links.md](DFND/checkpoint_face_identity_external_links.md)
-- [DFND/checkpoint_numerical_threshold_policy.md](DFND/checkpoint_numerical_threshold_policy.md)
-- [DFND/residence_radius_audit.md](DFND/residence_radius_audit.md)
-- [DFND/gate_radius_audit.md](DFND/gate_radius_audit.md)
+CASTp3 closed-void delivery [#79](https://github.com/uibcdf/topomt/issues/79) and
+bounded radius-profile study [#80](https://github.com/uibcdf/topomt/issues/80)
+are closed, rather than the immediate implementation priority. Residual
+lining/rim/component membership [#88](https://github.com/uibcdf/topomt/issues/88)
+and terminal-oxygen policy [#84](https://github.com/uibcdf/topomt/issues/84)
+remain open with their own acceptance criteria.
 
-## Conventional Engine Status
+## Qualification and known limitations
 
-The conventional engines remain important, but they are no longer the only active focus.
+The last committed **complete source-suite** run in the
+[2026-11-05 checkpoint](fpocket4/full_suite_checkpoint.md) executed 2,245 cases:
+2,156 passed, eight failed, 76 skipped and five xfailed. All eight failures also
+reproduced on the pre-ArgDigest baseline with identical exception messages.
+Declared optional tools resolved two environment failures in a separate control;
+four DFND characterization-hash and two viewer-selection failures remain
+unresolved baseline findings. Expected hashes, numerical thresholds and missing
+molecular indices were not changed to obtain a pass. Later focused green
+selections do not replace that full-suite result.
 
-- `fpocket4` has strong native/source parity evidence on the audited set, with remaining source-level questions concentrated in raw geometry and build drift rather than final output for the audited local source build.
-- `alphaspace2` has native parity coverage for the currently audited reference behavior and a first Vina-aware/contact layer.
-- `pocketeer` has a native parity route and wrapper-backed Topography integration.
-- `pycasta` has a local algorithm and bounded parity tests, with explicit repository-versus-paper and selection-semantics questions documented. Its native `Topography` adapter currently assigns volume as score; the later audit must compare it with the distinct upstream ranking score. `1a6w` currently fails native pocket-count parity ([#53](https://github.com/uibcdf/topomt/issues/53)).
-- CASTp server/file integration is active in the external-result workstream. Strict parity of TopoMT's local CASTp3 algorithm is deferred to the later native review; the existing CASTp prototypes remain reference material for DFND.
+Python metadata and the required matrix target **3.11–3.14**, with routine work
+on Python 3.14. Public support on every minor/platform is not established by
+source or installed pilots. Qualification remains
+[#16](https://github.com/uibcdf/topomt/issues/16), full-CI recovery
+[#58](https://github.com/uibcdf/topomt/issues/58), distribution
+[#78](https://github.com/uibcdf/topomt/issues/78), and coverage
+[#81](https://github.com/uibcdf/topomt/issues/81). The clean-build version/metadata
+mismatch belongs to #78; existing Sphinx/reference diagnostics remain
+[#64](https://github.com/uibcdf/topomt/issues/64), and typing debt is #77/#86.
 
-## What Is Still Weak
-
-- Public user-facing documentation is still sparse.
-- Packaging metadata and release-quality checks remain incomplete.
-- Performance is acceptable for small systems but still needs profiling and optimization for larger repeated workflows.
-- `volume_solvent_estimate` is deterministic and tested, but it is still an estimator, not a publication-grade CASTp-like analytic volume.
-- Tiny void/domain reporting policy is not settled.
-- Surface-concavity, nonresident-passage, and dry motif utility must be validated before becoming public feature families.
-- Pairwise matching and multi-frame track/event helpers exist. Public dynamic
-  collection ownership, compatible-input checks, matching confidence and
-  scientific lineage validation remain pending.
-- Cross-engine benchmarks are not yet organized into a stable comparison battery.
-
-## Practical Development Rule
-
-Build new topography work on `get_topography()`, `Topography`, `DelaunayMesh`, `topomt.tools`, and DFND raw records. Keep experimental/provisional DFND records traceable, but do not promote them to stable public feature classes until validation supports that decision.
+Further open work includes support-library adoption #56, temporary-resource
+lifecycle #96, Numba-to-Rust migration #93, optional OpenCASTp transition #90 and
+independent evaluation of AI-generated designs #102. Backlog presence does not
+schedule these ahead of the selected programme or authorize scientific workloads
+during documentation work. Local [bug](pending_bugs/README.md) and
+[proposal](pending_proposals/README.md) queues hold issue-backed analyses;
+[GitHub issues](https://github.com/uibcdf/topomt/issues) also contain work without
+local queued reports. Use [validation and tests](validation_and_tests.md) for
+commands and acceptance scope.

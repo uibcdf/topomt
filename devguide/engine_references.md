@@ -124,7 +124,7 @@ TopoMT already works with:
 
 - CASTp-style exported files;
 - CASTp-derived demo folders;
-- CASTp loading through [topomt/io/load_CASTp.py](/home/diego/repos@uibcdf/topomt/topomt/io/load_CASTp.py).
+- CASTp loading through [topomt/io/load_CASTp.py](../topomt/io/load_CASTp.py).
 
 ### Current status
 
@@ -136,8 +136,8 @@ specified executable parity target like `fpocket4`.
 
 The active contract for making it a real parity target now lives in:
 
-- [castp/contract.md](/home/diego/repos@uibcdf/topomt/devguide/castp/contract.md)
-- [CASTp/implementation.md](/home/diego/repos@uibcdf/topomt/devguide/CASTp/implementation.md)
+- [castp/contract.md](castp/contract.md)
+- [castp/native_implementation_plan.md](castp/native_implementation_plan.md)
 
 ### Role of `pyCAST`
 
@@ -341,7 +341,7 @@ Delaunay and persistent-homology pieces require:
 ### Existing repository notes
 
 The repository already contains one useful external note in
-[to_be_checked.md](/home/diego/repos@uibcdf/topomt/to_be_checked.md):
+[to_be_checked.md](../to_be_checked.md):
 
 - <https://github.com/giorgioluciano/pycasta>
 

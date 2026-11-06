@@ -1,162 +1,133 @@
-# TopoMT Roadmap
+# TopoMT development roadmap
 
-## Guiding Principle
+Reviewed for migration on **2026-11-06**. This is the ordered technical programme
+and its decision gates. [Status](status.md) describes implemented evidence;
+[the provider plan](provider_handoff_plan.md) defines receiving acceptance;
+[issue-backed queues](reporting_protocol.md) retain independently closable work.
+The current task is documentation and machine handoff. The previous automated
+implementation goal was cleared; the future sequence below does not restart it.
 
-Stopping boundary: the user requested a pause after the tetrahedron and closed
-shell studies, including original-provider comparisons and CASTp server evidence.
-The [notebook checkpoint](DFND/notebook_laboratory_checkpoint.md) records the
-delivered tranche and unresolved findings. Opening/tube/neck studies and kernel
-changes require a later resume; the longer sequence below is a future route.
+## 1. Transfer a usable development baseline
 
-Latest scheduling decision (2026-10-01): proceed with
-[case-by-case DFND notebook studies](DFND/notebook_laboratory_checkpoint.md).
-The sequence is regular tetrahedron, independently reviewed closed shell,
-opening, tube and two chambers with a neck. Public notebooks and reproducible
-benchmark artifacts grow alongside scientific validation. This supersedes the
-immediate public-support implementation sequence below; #60, #75 and #76 retain
-their distinct unfinished gates. Historical provider-paused statements do not
-describe the active scientific workstream.
+Receive the selected development branch and its committed history rather than
+assuming remote `main` contains the local provider work. Preserve separately
+identified human edits, durable evidence and any indispensable non-Git artifacts
+before retiring the old machine. Rebuild a qualified development environment;
+verify actual import origins and relevant checks using
+[packaging and environments](packaging_and_environments.md) and
+[validation and tests](validation_and_tests.md).
 
-TopoMT should converge toward a reliable native topography framework. External engines remain important references and integration targets, but the native method direction is now DFND.
+Acceptance is a developer who can locate the governing contracts, explain the
+current limits, identify the next unfinished gate and run the appropriate
+control without the original maintainer's temporary directories. Historical
+receipts remain attached to their producer and inputs. A newly built wheel or
+new sibling revision needs its own receiving evidence.
 
-Current scheduling decision (2026-10-01): joint DFND/Topography work is resumed,
-starting with [the audit and staged roadmap](DFND/audit_topography_2026_10_01.md).
-Initial provider/viewer delivery is complete. Broader provider fidelity,
-additional engines and concrete DockingMT/PharmacophoreMT adoption remain paused
-or deferred. The dated September sequence below is historical; no DFND runtime
-or scientific gate is completed by this planning update.
+## 2. Complete original-provider receiving
 
-Implementation progress (2026-10-01): the bounded
-[Topography shallow-copy correction](archive/topography_shallow_copy_indexes.md)
-(#74) is delivered with regression tests. The next stage-0 slice is native
-snapshot/cache ownership under #60, followed by its public context/support
-contract. Independent synthetic/reference validation (#76) and numerical
-precision (#75) retain their separate acceptance criteria.
+The accepted continuation direction is a reproducible prepared receptor →
+original pocket output → declared PharmacophoreMT hypothesis, covering fpocket,
+Pocketeer, AlphaSpace2, pyCASTA and CASTp/CASTpFold. It extends implemented provider
+output delivery #65 and its first consumer pilot #101. It does not reopen #65,
+finish every independent descriptor in #19, or require DFND before a provider
+can be consumed.
 
-Subsequent progress: the [native numeric snapshot slice](DFND/checkpoint_geometry_snapshots_2026_10_01.md)
-of #60 is delivered with shared protected geometry, regression guards and memory
-measurements. The next slice is source/frame recovery and public context/support
-and mutation adoption. #60 remains partial.
+On implementation resumption, use this order:
 
-Subsequent progress: [selected-frame context recovery](topography_input_context.md)
-and source-rebinding guards are delivered. Next: neutral spatial support for
-one DFND concavity/Mouth and an incomplete provider, remaining public mutation
-migration, and method/source occurrence provenance. Input context alone does not
-complete #60 or certify numerical/scientific precision.
+1. Re-establish and durably qualify an updated **exact installed AlphaSpace2
+   candidate**, dependency origins and prepared public-consumer route. Committed
+   source receiving exists; the subsequent interrupted installed attempt is not
+   a completed durable qualification.
+2. Qualify **pyCASTA's original** argument/source contracts, saved recovery and
+   explicit prepared public consumption. Preserve original ranking separately
+   from the existing native adapter's volume-as-score choice. Native `1a6w`
+   parity #53 remains its own acceptance problem.
+3. Qualify **CASTp/CASTpFold original** server/files routes, source correspondence
+   and explicit prepared consumption. Server reachability, retained export
+   recovery and local numerical parity are distinct gates.
+4. Preserve fpocket/Pocketeer regressions, run combined receiving controls and
+   reconcile provider/fidelity records with delivered scope. Retain exact
+   package identities, selected tests, outcomes, omissions and scientific limits.
 
-Current scheduling decision (2026-09-30): deliver usable original-provider
-pockets first through provider-specific provisional outputs and shared consumer
-access. See the [current checkpoint](provider_pocket_output_checkpoint.md), #65.
-The current adoption slice is [the MolSysViewer addon](provider_output_viewer_checkpoint.md),
-#66. DFND consolidation, full Topography runtime gates and concrete DockingMT/
-PharmacophoreMT adoption remain deferred. The phases below retain their long-term
-architectural direction.
+For each provider, success includes original execution versus persisted recovery
+agreement, ordered IDs/memberships, result/source independence, source/frame and
+reference chemistry, alternate-unit agreement, original bytes and public model
+roundtrip. Missing engines fail explicitly; available-empty, unknown and invalid
+results stay distinguishable. Atom masks and sphere sets are declared
+representations, and ranking is not affinity or pharmacophoric importance. See
+[the full criteria](provider_handoff_plan.md#evidence-required-for-completion).
 
-The user has requested a pause after this initial provider/viewer delivery.
-Immediate work below is a future resume sequence, not an active instruction.
+Component ownership is part of acceptance: MolSysMT performs molecular
+representation, chemistry, selection, correspondence and geometry; TopoMT performs
+topography integration and record delivery; PharmacophoreMT performs recognition,
+complementation, query construction and persistence. Use public owning tools;
+do not duplicate sibling science to complete a consumer demonstration. ArgDigest,
+DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
-## Phase 1: Unified API and Conventional Engine Integration
+## 3. Continue native Topography and DFND at their own gates
 
-Phase 1 established the shared API direction:
+DFND remains TopoMT's native scientific direction. Its notebook laboratory is
+paused at the regular-tetrahedron and sampled closed-shell tranche. If selected,
+the next studies are opening, tube and two chambers with a neck. Start with
+[the notebook checkpoint](DFND/notebook_laboratory_checkpoint.md),
+[the audit](DFND/audit_topography_2026_10_01.md) and
+[the DFND roadmap](DFND/roadmap.md). Provider integration or documentation
+maintenance does not silently resume kernel or reference changes.
 
-- `get_topography()` as the main entry point;
-- multiple engines behind a common interface;
-- feature-oriented output through `Topography`;
-- wrapper-backed and native paths for several external methods.
+The longer native programme retains independent gates:
 
-This phase is historically valid and remains part of the project foundation.
+- Complete #60's public context/support, provenance and remaining mutation
+  adoption, preserving delivered snapshot and source/frame guards.
+- Receive molecular copy/ownership #97 and ChemicalStates/Topology #100 through
+  MolSysMT's contract rather than implementing molecular repair locally.
+- Reconcile independent references #76 and volume precision/uncertainty #75.
+  Freeze inputs, radii, probe, tolerances and independently justified expectations
+  before interpreting implementation output.
+- Validate wet/dry components, exterior links, motifs, tiny-domain reporting and
+  morphological promotion before expanding the public feature model.
+- Develop participants, typed relations, contact/occupancy and semantic provider
+  admission under #61–#63. Original result delivery does not complete them.
 
-## Phase 2: DFND Hardening and Topography Integration
+Completed #74 shallow-copy and #79/#80 closed-void/radius-profile work remains a
+historical foundation. CASTp residual memberships #88, terminal-oxygen policy
+#84 and exhaustive provider measures #19 retain their own acceptance. DFND should
+not imitate another method where definitions differ; classify comparisons as a
+defect, parameter effect, reporting effect or intended semantic difference.
 
-Deferred native phase; original-provider pocket delivery currently has priority.
+## 4. Validate comparison, scale and dynamic workflows
 
-### Goals
+A stable small-system comparison battery should record original provider
+versions/artifacts, quantities, atom ownership, parameter choices, field
+definitions and tolerances. Reuse existing native implementations and
+[the deferred native-method plan](native_methods_plan.md) when their review is
+selected. The older 20/100 external-results programme is not a percentage for
+the prepared-consumer handoff and is not advanced by a narrower pilot.
 
-- harden DFND as the native TopoMT method;
-- keep conventional engines available as references, comparison targets, and wrappers;
-- preserve clean `Topography` output for stable feature families;
-- preserve full DFND raw records for method development and diagnostics;
-- keep geometry, units, atom indices, and input policy explicit;
-- improve performance enough for repeated probe-radius sweeps and larger systems.
+Optimize measured bottlenecks after scientific contracts are fixed. Numba
+migration #93 and optional OpenCASTp transition #90 are tracked architectural
+work, not implicit authority to rewrite kernels during a migration. OpenCASTp
+owns its independent CASTp numerical kernel; TopoMT owns its Topography adapter.
+Use [the acceleration plan](engine_acceleration_plan.md) for profiling questions
+without presenting unmeasured speedups or GPU paths as implemented capabilities.
 
-### Current DFND State
+Dynamic topology needs compatible-input checks, matching evidence, confidence,
+split/merge semantics and ownership before public collection/lineage claims.
+Static contextual keys provide matching evidence rather than temporal identity;
+existing helpers do not close the dynamic contract. Richer viewer/workbench
+behavior likewise requires interaction and rendering validation beyond the
+implemented provider-pocket display.
 
-DFND now has:
+## 5. Qualify component delivery
 
-- active `DelaunayFlowNetwork` construction;
-- build-once/query-many probe-radius workflows;
-- tested `R_residence` and `R_gate` primitives;
-- tested face identity and external-link tracing;
-- deterministic component, external-link, and motif support/context keys;
-- contextual provenance across raw records, typed relations, and promoted features;
-- canonical transit edges derived directly from shared-face permeability;
-- typed immutable mesh/query configuration with complete re-probing and explicit
-  reporting separation;
-- explicit and tested mesh-local versus molecular-system atom-index boundaries;
-- complete-source viewer runtime ownership with separate feature filters and
-  render groups;
-- common primary-render `RenderResult` and exact repeated-render lifecycle;
-- atomic feature and component registries;
-- tested access-by-residence component classification;
-- raw records for tetrahedra, faces, wet components, residence regions, external links, dry components, dry interfaces, and dry motifs;
-- `get_topography(method='dfnd')` integration;
-- public features for stable void, pocket, and channel component families;
-- deterministic `volume_solvent_estimate` with unit tests;
-- small real-system stability and monotonicity sweeps.
+Preserve mandatory full-suite, supported-minor/platform and exact-installed
+checks while investigating actual failures. The latest committed complete suite
+is not green; focused receiving and documentation controls cannot clear that
+debt. #16 owns scientific/platform qualification, #58 full-CI recovery, #78
+distribution and #81 accepted coverage evidence. Public support, release and
+publication claims require actual candidate gates.
 
-### Immediate Work
-
-Provider outputs in #65 are implemented. Adopt them in the MolSysViewer addon
-under #66, then continue original field/route fidelity gates. Broader DFND viewer
-geometry work and DFND reporting/filter policy remain deferred. Original results become comparison
-inputs without forcing methods with different definitions into strict parity.
-
-The completed static-identity/provenance milestone is recorded in
-[`DFND/checkpoint_identity_provenance_registries_2026_06_06.md`](DFND/checkpoint_identity_provenance_registries_2026_06_06.md).
-
-## Phase 3: Validation and Benchmarking
-
-Next phase after the current hardening pass.
-
-### Goals
-
-- build a stable small-system benchmark battery;
-- compare DFND against CASTp/CASTpFold, fpocket/fpocket4, AlphaSpace2, Pocketeer, and pycasta;
-- categorize differences as bugs, parameter effects, reporting/filter effects, or intended semantic differences;
-- evaluate atom ownership, external links, domain counts, dominant-site localization, and volume estimates;
-- establish performance envelopes and optional acceleration paths.
-
-## Phase 4: Dynamic Topology
-
-DFND's long-term differentiator is tracking topography through trajectories.
-
-### Decision Gate
-
-Before implementation, decide matching evidence and thresholds, confidence
-policy, split/merge semantics, and lineage event contracts. Exact contextual
-keys are evidence for matching, not temporal identity.
-
-### Goals
-
-- run DFND frame by frame on small trajectories;
-- match components/features across frames into unbranched `track_id` segments;
-- represent births, deaths, splits, and merges in a lineage graph;
-- report persistence, gate events, external-link changes, volume series, dry/wet transitions, and candidate dynamic pharmacophores.
-
-## Phase 5: MolSysViewer Integration
-
-MolSysViewer integration should become production-facing only after the topographic data model is stable enough.
-
-Current note:
-
-- the `molsysviewer_topomt` scaffold exists and has initial rendering/export helper work;
-- richer panel/workbench UI and interactive scene operations remain pending.
-
-## Conventional Engine Maintenance Track
-
-The conventional engines remain maintained in parallel:
-
-- keep wrapper-backed integrations working;
-- keep native parity tests for audited reference sets;
-- document upstream repository-versus-paper drift explicitly;
-- keep CASTp work as reference material and historical algorithmic context, not as the active native-method target.
+Keep tooling/type/docs debt visible under #56/#57/#64/#77/#86/#94/#96. Report
+cross-component limitations to their owner, and follow
+[the reporting protocol](reporting_protocol.md) when filing or resolving a
+tracked record. A queue item, preliminary study or future phase becomes active
+work through explicit selection and its owning acceptance criteria.

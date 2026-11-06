@@ -58,7 +58,7 @@ The canonical default probe radius remains:
 This plan is **not**:
 
 - a continuation of the current connected-components prototype in
-  [topomt/third_party/castp/_native_impl.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/_native_impl.py);
+  [topomt/third_party/castp/_native_impl.py](../../topomt/third_party/castp/_native_impl.py);
 - a DFND implementation under another name;
 - or a proposal to base CASTp primarily on `R_insphere` / `R_gate` semantics.
 

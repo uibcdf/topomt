@@ -17,15 +17,15 @@ Short answer:
 
 Related documents:
 
-- [native_parity_matrix_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/native_parity_matrix_2026_04_10.md)
-- [checkpoint_2026_04_10_route_to_parity.md](/home/diego/repos@uibcdf/topomt/devguide/castp/checkpoint_2026_04_10_route_to_parity.md)
-- [failure_analysis_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/failure_analysis_2026_04_10.md)
-- [canonical_gap_audit_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/canonical_gap_audit_2026_04_10.md)
-- [checkpoint_2026_04_10_canonicalization_round2.md](/home/diego/repos@uibcdf/topomt/devguide/castp/checkpoint_2026_04_10_canonicalization_round2.md)
-- [atom_materialization_audit_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/atom_materialization_audit_2026_04_10.md)
-- [checkpoint_2026_04_11_vertex_materialization.md](/home/diego/repos@uibcdf/topomt/devguide/castp/checkpoint_2026_04_11_vertex_materialization.md)
-- [checkpoint_2026_04_11_spectrum_rank_audit.md](/home/diego/repos@uibcdf/topomt/devguide/castp/checkpoint_2026_04_11_spectrum_rank_audit.md)
-- [open_canonical_fronts_2026_04_11.md](/home/diego/repos@uibcdf/topomt/devguide/castp/open_canonical_fronts_2026_04_11.md)
+- [native_parity_matrix_2026_04_10.md](native_parity_matrix_2026_04_10.md)
+- [checkpoint_2026_04_10_route_to_parity.md](checkpoint_2026_04_10_route_to_parity.md)
+- [failure_analysis_2026_04_10.md](failure_analysis_2026_04_10.md)
+- [canonical_gap_audit_2026_04_10.md](canonical_gap_audit_2026_04_10.md)
+- [checkpoint_2026_04_10_canonicalization_round2.md](checkpoint_2026_04_10_canonicalization_round2.md)
+- [atom_materialization_audit_2026_04_10.md](atom_materialization_audit_2026_04_10.md)
+- [checkpoint_2026_04_11_vertex_materialization.md](checkpoint_2026_04_11_vertex_materialization.md)
+- [checkpoint_2026_04_11_spectrum_rank_audit.md](checkpoint_2026_04_11_spectrum_rank_audit.md)
+- [open_canonical_fronts_2026_04_11.md](open_canonical_fronts_2026_04_11.md)
 
 ---
 
@@ -35,7 +35,7 @@ Related documents:
 
 File:
 
-- [topomt/weighted_delaunay_mesh.py](/home/diego/repos@uibcdf/topomt/topomt/weighted_delaunay_mesh.py)
+- [topomt/weighted_delaunay_mesh.py](../../topomt/weighted_delaunay_mesh.py)
 
 Problem:
 
@@ -63,8 +63,8 @@ This is a safe substrate fix and should remain.
 
 Files:
 
-- [topomt/third_party/castp/core/castp_core/components.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/components.py)
-- [topomt/third_party/castp/_native_impl.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/_native_impl.py)
+- [topomt/third_party/castp/core/castp_core/components.py](../../topomt/third_party/castp/core/castp_core/components.py)
+- [topomt/third_party/castp/_native_impl.py](../../topomt/third_party/castp/_native_impl.py)
 
 What changed:
 
@@ -83,7 +83,7 @@ This is also a safe improvement and should remain.
 
 File:
 
-- [topomt/third_party/castp/core/castp_core/mouths.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/mouths.py)
+- [topomt/third_party/castp/core/castp_core/mouths.py](../../topomt/third_party/castp/core/castp_core/mouths.py)
 
 Old behaviour:
 
@@ -256,6 +256,6 @@ Those paths have already been tested enough to know they are insufficient.
 
 Related matrix document:
 
-- [native_parity_matrix_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/native_parity_matrix_2026_04_10.md)
-- [checkpoint_2026_04_10_route_to_parity.md](/home/diego/repos@uibcdf/topomt/devguide/castp/checkpoint_2026_04_10_route_to_parity.md)
-- [failure_analysis_2026_04_10.md](/home/diego/repos@uibcdf/topomt/devguide/castp/failure_analysis_2026_04_10.md)
+- [native_parity_matrix_2026_04_10.md](native_parity_matrix_2026_04_10.md)
+- [checkpoint_2026_04_10_route_to_parity.md](checkpoint_2026_04_10_route_to_parity.md)
+- [failure_analysis_2026_04_10.md](failure_analysis_2026_04_10.md)

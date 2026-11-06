@@ -109,7 +109,7 @@ present in `.mouth` should materialize as `Mouth` features in `Topography`.
 
 ## Current status of `topomt.third_party.castp._native_impl`
 
-The current [topomt/third_party/castp/_native_impl.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/_native_impl.py)
+The current [topomt/third_party/castp/_native_impl.py](../../topomt/third_party/castp/_native_impl.py)
 implementation should be treated as a serious but still incomplete native
 reconstruction, not yet as a faithful CASTp 3.0 implementation.
 

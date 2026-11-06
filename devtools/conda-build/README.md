@@ -10,7 +10,7 @@ and optional environment operations separately pin additive SDK
 access remains unconfirmed. A changed wrapper reference is source adoption, not
 an executed candidate or delivered public package.
 
-The resource inventory covers **617 runtime files** across `topomt` and
+The resource inventory covers **632 runtime files** across `topomt` and
 `molsysviewer_topomt`, including the embedded version, runtime data/reference
 assets and the lazy viewer addon. Package discovery admits only these roots;
 SDK/tests namespaces cannot become wheel packages. Non-Python reference assets

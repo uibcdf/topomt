@@ -371,7 +371,7 @@ and should be reviewed first when resuming:
 
 - `topomt/third_party/castp/core/castp_core/components.py`
 - `tests/test_castp_core.py`
-- `devguide/CASTp/implementation.md`
+- `devguide/castp/native_implementation_plan.md`
 - `devguide/castp/checkpoint_2026_04_05.md`
 
 ## Hypotheses now discarded

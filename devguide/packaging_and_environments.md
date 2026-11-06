@@ -1,164 +1,184 @@
-# Packaging and Environments
+# Packaging and development environments
 
-## Purpose
+Use Python **3.14** for routine development. The required supported range is
+**3.11–3.14**, expressed as `>=3.11,<3.15` in package metadata. Interpreter
+requirements, a successful environment solve and executed scientific support
+are separate facts. Component qualification remains under
+[TopoMT #16](https://github.com/uibcdf/topomt/issues/16).
 
-This document summarizes the current state of packaging, dependency metadata,
-and environment definitions in the repository.
+Read [the synchronized suite guide](../MOLSYSSUITE_GUIDE.md) and
+[the repository instructions](../AGENTS.md) before choosing an installation
+route. This page distinguishes daily source development, registered CI inputs
+and exact historical reproduction.
 
-## Current status
+## Authoritative files
 
-The packaging layer is functional enough for development, but clearly still in
-transition.
+| Boundary | Authoritative input |
+| --- | --- |
+| Python bounds, required packages, extras and build backend | [pyproject.toml](../pyproject.toml) |
+| Selected optional capabilities and installation diagnostics | [topomt/_depdigest.py](../topomt/_depdigest.py) and [DepDigest guide](../DEPDIGEST_GUIDE.md) |
+| Required Conda runtime and package contents | [recipe](../devtools/conda-build/meta.yaml) and [resource inventory](../devtools/conda-build/resources.toml) |
+| Registered source routes, contexts and immutable inputs | [dependency_routes.toml](../devtools/dependency_routes.toml) |
+| Ordinary environment generation and explicit manager operations | [environment guide](../devtools/conda-envs/README.md), [environment_tools.toml](../devtools/environment_tools.toml) and [tooling groups](../devtools/requirements.yaml) |
+| Current shared-workspace eligibility and recipe | MolSysSuite's [development workspace](https://github.com/uibcdf/molsyssuite/blob/main/devguide/development_workspace.md) and registry |
+| Exact receiving experiments | Dated provider checkpoints and their checksum-bearing evidence archives |
 
-### `pyproject.toml`
+The required runtime set is ArgDigest, DepDigest, MolSysMT, Numba, NumPy,
+PyUnitWizard, SciPy and SMonitor. Current explicit support-library floors are
+`argdigest>=0.17.0` and `depdigest>=0.12.0`; inspect metadata before changing
+one. Older notes that refer to a then-unpublished API are historical evidence,
+not a current package index or a justification to invent another minimum.
 
-[pyproject.toml](/home/diego/repos@uibcdf/topomt/pyproject.toml) is the main build-system file and
-uses `versioningit`.
+Optional extras include `centerline` (`networkx`), `tools` (`scikit-image` and
+`scikit-learn`), and `viewer` (MolSysViewer plus the centerline extra).
+The `alphaspace2` and `pocketeer` extras provide supporting libraries, MDTraj
+and Biotite respectively. They do not install their original pocket engines.
+Original fpocket, Pocketeer, AlphaSpace2, pyCASTA and CASTp service/file routes
+retain the explicit requirements in the
+[external-engine guide](../docs/content/user/third_party_engines.md).
+PharmacophoreMT is an optional consumer in developer qualification controls;
+it is not a TopoMT runtime requirement. `nglview` is development/test/docs
+tooling rather than package or production runtime.
 
-The runtime dependency list now follows the current import audit:
+## Daily source development
 
-- core runtime dependencies are imports required by the public load path;
-- optional dependencies are lazy, feature-gated, or backend-specific imports;
-- metadata still needs to be mirrored in the conda recipe/environment layer.
+The common Linux workspace uses `molsyssuite@uibcdf_3.14` for its qualified
+cohort. Read the current central profile before assuming TopoMT belongs to that
+cohort. The recorded TopoMT integration assessment remains tracked by #16;
+installing a local clone or using the named environment does not establish
+cohort admission. The suite's deliberate `reinstall` operation can include
+TopoMT without expanding that qualified cohort.
 
-The operational rule is:
+From the **working MolSysSuite checkout**, inspect the current profile and
+local sources before installation:
 
-- top-level import on the public load path means a core dependency;
-- lazy, gated, or backend-specific import means an optional extra;
-- packages with no active imports should not be kept as runtime dependencies.
+```bash
+python devtools/scripts/development_environment.py profile
+python devtools/scripts/development_environment.py sources --workspace ..
+```
 
-The current core dependency set is:
+Use that checkout's maintained workspace instructions to create the environment,
+verify its toolchain and connect the eligible clones. This is distinct from the
+immutable administrative SDK below. The suite installer owns the current cohort;
+do not maintain a second fixed list in TopoMT. A member awaiting shared-workspace
+qualification uses a compatible component-owned Python 3.14 environment and
+retains the integration gap in #16.
 
-- `numpy`;
-- `scipy`;
-- `numba`;
-- `molsysmt`;
-- `pyunitwizard`;
-- `smonitor`;
-- `argdigest`;
-- `depdigest`.
+After provisioning compatible dependencies and activating the intended
+interpreter, install the intended TopoMT source from its repository root:
 
-`networkx` is intentionally not core. It is guarded as the `centerline` extra
-because it is imported lazily by the DFND channel-skeleton path. The `viewer`
-extra includes `topomt[centerline]`, because the MolSysViewer channel-tube
-representation consumes that skeleton.
+```bash
+python -c 'import sys; assert sys.version_info[:2] == (3, 14); print(sys.executable, sys.prefix)'
+python -m pip install --no-deps --editable .
+python -m pip check
+```
 
-`pyunitwizard` has one release gate that packaging must not hide: TopoMT now
-uses `pyunitwizard.conversion_factor`, but that API is newer than the latest
-published `pyunitwizard 0.22.0` release at the time this note was written.
-This does not block the development work package, because MolSysSuite
-packages are still moving together in editable development environments. It
-does mean that a public TopoMT release must set the final `pyunitwizard`
-minimum version after PyUnitWizard cuts a release containing
-`conversion_factor`.
+Use `--no-build-isolation` when the declared build tools must come from the
+selected environment. Preserve existing work before installing: versioningit
+can rewrite the tracked `topomt/_version.py`. Inspect `git status` before and
+after; do not restore a human edit merely to obtain a clean tree.
 
-`depdigest` has the same publication note for conditional optional
-dependencies: TopoMT uses `dep_digest(..., when={...})` on scientific
-arguments that can be NumPy arrays. A public TopoMT release must set the
-final `depdigest` minimum version after DepDigest releases the array-safe
-conditional comparison used by that guard.
+Verify actual imports from a neutral directory outside the repository as well:
 
-The repository tag policy should now be treated as strict `X.Y.Z`
-versioning with no tag prefixes or suffixes. Release tags are expected to look
-like:
+```bash
+python -c 'import topomt, molsysmt, argdigest, depdigest, pyunitwizard, smonitor; print({module.__name__: module.__file__ for module in (topomt, molsysmt, argdigest, depdigest, pyunitwizard, smonitor)})'
+```
 
-- `0.1.0`
-- `0.2.0`
-- `1.0.0`
+Confirm that editable origins point to the intended clones. Metadata/version
+labels alone do not identify the loaded source. Reinstall after dependency,
+entry-point, generated-version or compiled-extension changes as appropriate;
+restart Python processes that cached the previous installation.
 
-This convention matters because TopoMT is being integrated with other
-MolSysSuite repositories and we want release identifiers to remain simple and
-predictable.
+## Bootstrap the administrative SDK
 
-This applies to git tags. Development builds derived from `versioningit` may
-still include local metadata such as commit distance or dirty state when the
-working tree is not exactly on a release tag.
+Local declaration, generation and distribution checks require a separate clean
+MolSysSuite checkout at
+`8f00e6d9de943b6e4710ea62936e2ebea00fad24`. The loader verifies this exact commit
+and the administrative module's actual origin. A moving sibling checkout is
+not a substitute. With no pre-existing `.molsyssuite` directory, the portable
+bootstrap from the TopoMT root is:
 
-### `setup.cfg`
+```bash
+git clone https://github.com/uibcdf/molsyssuite.git .molsyssuite
+git -C .molsyssuite checkout --detach 8f00e6d9de943b6e4710ea62936e2ebea00fad24
+export TOPOMT_SUITE_ROOT="$PWD/.molsyssuite"
+python -m pip install --target .molsyssuite-tools 'PyYAML>=6' 'Jinja2>=3,<4' 'packaging>=24'
+python devtools/check_dependency_routes.py --declared-only
+python devtools/broadcast_requirements.py --check
+```
 
-[setup.cfg](/home/diego/repos@uibcdf/topomt/setup.cfg) still carries `versioneer`
-configuration, which suggests repository drift from an older packaging phase.
+Both administrative directories are Git-ignored. If a suitable SDK already
+exists elsewhere, set `TOPOMT_SUITE_ROOT` to that checkout instead. Use an
+administrative overlay compatible with the Python interpreter invoking it;
+recreate it when changing Python. Do not overwrite an existing SDK or change a
+colleague's working MolSysSuite clone to satisfy this pin.
 
-This should be documented rather than ignored, because it affects how
-developers interpret the packaging state.
+For a component-owned environment, the reviewed manager supports an explicit
+creation operation; it requires the named Conda executable to be available:
 
-## Development environments
+```bash
+python devtools/conda_env_manager.py create \
+  devtools/conda-envs/development_env.yaml --python-minor 3.14 \
+  --manager conda --name topomt-dev
+conda activate topomt-dev
+```
 
-The repository includes multiple environment definitions under
-[devtools/conda-envs/](/home/diego/repos@uibcdf/topomt/devtools/conda-envs).
+The name must be unused. Follow the environment guide for an update to an
+existing active prefix. Install the intended local sources, run `pip check`,
+verify imports and then inspect the actual selected context:
 
-These files are useful, but the surrounding tooling in
-[devtools/](/home/diego/repos@uibcdf/topomt/devtools) also contains legacy
-material and older guidance that no longer reflects the cleanest current
-workflow.
+```bash
+python devtools/check_dependency_routes.py --context development-3.14
+```
 
-The practical reading is:
+A source-free environment declaration or a successful manager exit does not
+prove that all scientific APIs used by this branch are available. If an API is
+missing, compare the owning checkpoint's reviewed inputs and report the gap to
+its component; do not copy its implementation into TopoMT.
 
-- environment files are useful references;
-- the development-tooling story is not yet fully modernized;
-- some `devtools` content is historical rather than authoritative.
+## CI and historical environments
 
-## Dependency metadata
+The scientific CI matrix has explicit Linux/macOS Python 3.11–3.14 lanes in
+[CI.yaml](../.github/workflows/CI.yaml). Its fixed Git inputs and overlay rules
+are declared in `dependency_routes.toml`; these are not the same input set as
+any subsequent prepared-provider experiment. The specialized test YAML files
+and historical `importable_env.yaml` stay outside ordinary environment
+generation. The docs deployment workflow currently selects Python 3.13; that
+lane is not the routine development baseline.
 
-[topomt/_depdigest.py](/home/diego/repos@uibcdf/topomt/topomt/_depdigest.py) defines the current
-dependency model for TopoMT.
+For an exact CI-context reproduction, follow the selected workflow's complete
+acquisition order, including its no-deps source inputs and context preflight.
+`--context ci-3.14` checks that registered context, rather than an arbitrary
+editable workspace or a later independently frozen receiving profile.
+The [validation guide](validation_and_tests.md) explains which checks establish
+which claims.
 
-This is important because it already captures the intended hard/soft split more
-accurately than `pyproject.toml`.
+Historical checkpoints may name `/tmp`, `/dev/shm`, former home directories,
+local binaries or upstream mirrors. Those paths identify the original host.
+On another machine, use the committed archive, immutable source IDs and hashes;
+recreate environments and paths, then generate fresh receiving evidence.
+Copying a Conda prefix or editing a receipt's paths does not reproduce an
+experiment. Preserve original receipts unchanged.
 
-Current interpretation:
+## Build and distribution boundaries
 
-- hard scientific core in `depdigest`: `numpy`, `scipy`, `molsysmt`;
-- soft extras and optional integrations: `networkx`, `scikit-image`,
-  `scikit-learn`, `mdtraj`, and `biotite`;
-- MolSysSuite infrastructure such as `argdigest`, `depdigest`, and `smonitor`
-  is declared in packaging metadata, but is not modeled as a feature dependency
-  inside `_depdigest.py`;
-- dependency metadata and packaging metadata must stay aligned with the conda
-  recipe/environment layer.
+Setuptools and `versioningit~=2.0` in `pyproject.toml` own the build. The
+`[versioneer]` section in [setup.cfg](../setup.cfg) is legacy configuration;
+it does not replace that backend. The generated version, distribution metadata
+and wheel filename must agree. Preserve the known generated-version build
+behavior and its failed attempts under
+[#78](https://github.com/uibcdf/topomt/issues/78); a dirty development wheel is
+not a public release. Build qualification candidates in an isolated checkout
+so generation cannot overwrite human work in the development clone.
 
-## Diagnostics and digestion config
+Public release tags use bare `X.Y.Z`. A development version may include distance,
+commit and dirty metadata. Publication/governance wrappers use a separate SDK
+pin, `2d32048457c6d37093ae509f5626d00a5cda121b`, documented in the
+[guarded noarch route](../devtools/conda-build/README.md). The example release
+plan is not a selected release or publication authorization.
 
-The package-level ecosystem configuration is also spread across:
-
-- [topomt/_argdigest.py](/home/diego/repos@uibcdf/topomt/topomt/_argdigest.py)
-- [topomt/_smonitor.py](/home/diego/repos@uibcdf/topomt/topomt/_smonitor.py)
-- [topomt/_pyunitwizard.py](/home/diego/repos@uibcdf/topomt/topomt/_pyunitwizard.py)
-
-This means that a future cleanup of packaging and environments should not be
-treated as a purely packaging-only task. It is also an ecosystem-integration
-task.
-
-## Practical conclusion
-
-The repository should eventually document one clear answer to each of these
-questions:
-
-- how to install TopoMT for normal use;
-- how to create a development environment;
-- which dependencies are truly required at runtime;
-- which dependencies are optional;
-- which build/versioning path is authoritative.
-
-The current document records that these answers are not yet fully consolidated.
-
-## Current checkpoint
-
-The `0.1.0` tag records the first faithful fpocket integration checkpoint for
-TopoMT on the currently supported reference PDB systems.
-
-## Distribution control checkpoint — 2026-10-07
-
-TopoMT #78 now aligns required metadata/recipe bounds and separates unused
-nglview into development/test/docs tooling by explicit maintainer decision.
-The optional extras and scientific API floor decisions remain with TopoMT.
-The historical publication notes above are not current provider-release evidence;
-use the actual candidate's public installed context and API checks before setting
-a scientific minimum or claiming receiving support.
-
-Reviewed ordinary generation and explicit checked manager commands are in
-[the environment guide](../devtools/conda-envs/README.md). Source/helper SDK
-8f00e6d and publication SDK 2d32048 have independent qualified pins. The resource
-inventory covers 609 tracked files across both package roots and retains the
-whole installed test selection. Qualification, actual environment science and
-public delivery remain separate; #78/#16 still own the latter evidence.
+Exact candidate files, dependency origins, resource contents, installed tests,
+platform/interpreter matrix and actual public delivery retain separate gates.
+Use the current inventory instead of copying an old file count into a release
+claim. Packaging adoption and public/component evidence remain owned by
+#78/#16; a focused provider receipt does not close them.

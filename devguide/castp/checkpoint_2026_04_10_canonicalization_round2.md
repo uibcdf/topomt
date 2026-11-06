@@ -22,8 +22,8 @@ edge-facets, not over sorted atom triples.
 
 Files:
 
-- [topomt/weighted_delaunay_mesh.py](/home/diego/repos@uibcdf/topomt/topomt/weighted_delaunay_mesh.py)
-- [topomt/third_party/castp/core/castp_core/mouths.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/mouths.py)
+- [topomt/weighted_delaunay_mesh.py](../../topomt/weighted_delaunay_mesh.py)
+- [topomt/third_party/castp/core/castp_core/mouths.py](../../topomt/third_party/castp/core/castp_core/mouths.py)
 
 ### 2. Mouth faces now carry both simplex index and face index
 
@@ -34,8 +34,8 @@ from sorted face atoms.
 
 Files:
 
-- [topomt/third_party/castp/core/castp_core/components.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/components.py)
-- [topomt/third_party/castp/core/castp_core/mouths.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/mouths.py)
+- [topomt/third_party/castp/core/castp_core/components.py](../../topomt/third_party/castp/core/castp_core/components.py)
+- [topomt/third_party/castp/core/castp_core/mouths.py](../../topomt/third_party/castp/core/castp_core/mouths.py)
 
 ### 3. Edge `mu1` / `mu2` ranks were added and are now used in mouth-edge openness
 
@@ -59,8 +59,8 @@ to decide whether an edge is in the complex during mouth walks.
 
 Files:
 
-- [topomt/third_party/castp/core/castp_core/geometry.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/geometry.py)
-- [topomt/third_party/castp/core/castp_core/mouths.py](/home/diego/repos@uibcdf/topomt/topomt/third_party/castp/core/castp_core/mouths.py)
+- [topomt/third_party/castp/core/castp_core/geometry.py](../../topomt/third_party/castp/core/castp_core/geometry.py)
+- [topomt/third_party/castp/core/castp_core/mouths.py](../../topomt/third_party/castp/core/castp_core/mouths.py)
 
 ### 4. `rank1 = base_rank` remains the canonical working choice for pocket assembly
 

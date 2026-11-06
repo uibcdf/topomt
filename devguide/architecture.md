@@ -6,10 +6,15 @@ Public semantic direction: [Topography conceptual contract](topography_conceptua
 The responsibilities below distinguish implemented foundations from that target;
 they do not announce new Topography registry classes or signatures.
 
-Current delivery priority: [provider pocket output checkpoint](provider_pocket_output_checkpoint.md).
-Original-engine outputs have provider-specific provisional classes and shared
-pocket access. Full Topography runtime adoption and DFND consolidation are
-deferred; the conceptual contract continues to govern their eventual integration.
+Reviewed for migration: 2026-11-06. Initial original-provider delivery
+[#65](provider_pocket_output_checkpoint.md) and viewer adoption
+[#66](provider_output_viewer_checkpoint.md) are implemented bounded foundations.
+The [current receiving programme](provider_handoff_plan.md), under #101, extends
+them through prepared public PharmacophoreMT pilots; exhaustive provider fidelity
+and full Topography runtime adoption remain separate gates. The present task is
+documentation and machine handoff. See [status](status.md) and [roadmap](roadmap.md)
+for current evidence and scheduling rather than treating an older checkpoint's
+"next" action as a new instruction.
 
 ## Purpose
 
@@ -91,12 +96,22 @@ provider-reported classification separately from a justified TopoMT inference.
 
 ## Detection engines
 
-TopoMT currently exposes a public orchestrator:
+TopoMT exposes two deliberately distinct public workflows:
 
-- `topomt.get_topography()`
+- `topomt.get_provider_output()` runs or recovers an explicitly selected original
+  provider and returns its detached provider-specific result. It preserves
+  reported pocket identity, membership roles, declared geometry, measurements
+  and recoverable run artifacts. It neither requires a DFND graph nor asserts
+  canonical Topography semantic admission. Local `native`/`topomt` reproductions
+  are not accepted as original-output backends.
+- `topomt.get_topography()` dispatches existing native or provider-adapter routes
+  into the common `Topography` hierarchy. Existing method/backend defaults retain
+  their own compatibility behavior. They are not evidence that an original
+  provider ran or that every target contract below is adopted.
 
-This function dispatches to different engines and converts their outputs into a
-common `Topography` object.
+The [API surface](api_surface.md) and [provider checkpoint](provider_pocket_output_checkpoint.md)
+identify these result contracts. Broader public context/support and provider
+admission remain #60–#63.
 
 The relevant non-DFND engines are:
 
@@ -240,16 +255,18 @@ For wrapper layers, the internal contract is different:
 
 ## Units
 
-TopoMT should follow MolSysSuite conventions:
+Use TopoMT's configured PyUnitWizard and the
+[registered quantity guide](../PYUNITWIZARD_GUIDE.md). Native geometry boundaries
+name explicit target units such as nm and nm**3; a kernel may use magnitudes
+only after that conversion and must retain the dimensional meaning on return.
+Original provider values preserve their reported units and definitions, including
+an explicitly unspecified score unit where appropriate.
 
-- coordinates in nanometers;
-- time in picoseconds;
-- temperatures in kelvin;
-- angles in radians when derived;
-- user inputs and outputs managed via PyUnitWizard.
-
-Internal geometric kernels should operate on raw NumPy magnitudes in canonical
-units whenever possible.
+The shared nm/ps/K/radians baseline is initialized only when no application
+policy is active. Importing or lazily activating a sibling must preserve an
+existing policy. Test actual physical agreement under alternate units rather
+than relying on the current session defaults. Serialized quantities carry value
+and unit together; field names or bare numbers do not establish units.
 
 ## Dependencies
 
@@ -263,10 +280,13 @@ Optional scientific tools must not leak through top-level imports.
 
 ## Architectural direction
 
-Deliver original-provider results under #65 first. Consumers use the small
-shared pocket contract while retaining each method's definitions and original
-evidence. Existing adapters can be reused privately; returned result objects
-have independent ownership. This does not require the following deferred gates.
+Original-provider results under #65 are delivered through a shared pocket
+contract that retains each method's definitions and evidence. Prepared fpocket,
+Pocketeer and AlphaSpace2 source pilots now exercise public PharmacophoreMT
+recognition/projections; their bounded evidence and remaining installed/provider
+gates are in [the handoff plan](provider_handoff_plan.md). Result ownership is
+independent of temporary files and later source changes. This delivery does not
+require or complete the following public-model gates.
 
 Adopt the [conceptual contract](topography_conceptual_contract.md) through its
 [bounded gates](topography_implementation_route.md): analysis context/support,
@@ -279,4 +299,9 @@ the separate native provider-method review. Neither is a prerequisite to
 stating DFND-grounded public semantics. Runtime changes need test-first,
 compatibility-aware slices. Original-provider viewer adoption is now explicit
 under [#66](provider_output_viewer_checkpoint.md), with provider state separate
-from canonical Topography. DockingMT and PharmacophoreMT adoption remain deferred.
+from canonical Topography. Broader consumer adoption retains its own gates;
+existing prepared PharmacophoreMT pilots are not full model, affinity or public
+package qualification. Molecular representation/chemistry belongs to MolSysMT,
+recognition/model construction to PharmacophoreMT, and visualization to
+MolSysViewer. TopoMT owns its adapter and topographic interpretation; it must
+reuse those owners' public tools instead of copying their implementations.
