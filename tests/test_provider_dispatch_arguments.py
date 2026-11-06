@@ -59,6 +59,7 @@ def test_incompatible_route_is_rejected_before_provider_import(
         ('alphaspace2', 'FILES', 'alphaspace2', 'files', {}),
         ('pycasta', None, 'pycasta', 'library', {}),
         ('pycasta', 'wrapper', 'pycasta', 'wrapper', {}),
+        ('pycasta', 'FILES', 'pycasta', 'files', {}),
         ('CASTP', None, 'castp', 'server', {}),
         ('CASTP3', None, 'castp', 'server', {'server': 'castp3'}),
         ('CASTPFOLD', 'FILES', 'castp', 'files', {'provider_server': 'castpfold'}),

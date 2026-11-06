@@ -109,12 +109,28 @@ def get_topography(
         )
 
     elif method_lower == 'pycasta':
-        topo = Topography(
-            molecular_system=molecular_system,
-            selection=selection,
-            structure_indices=structure_indices,
-        )
-        topo = _run_pycasta(topo, **kwargs)
+        implementation = kwargs.get('implementation', 'native')
+        if isinstance(implementation, str) and implementation.lower() == 'wrapper':
+            from .third_party.pycasta.api import (
+                get_topography as get_pycasta_topography,
+            )
+
+            kwargs.pop('implementation')
+            topo = get_pycasta_topography(
+                molecular_system,
+                backend='library',
+                selection=selection,
+                structure_indices=structure_indices,
+                syntax=syntax,
+                **kwargs,
+            )
+        else:
+            topo = Topography(
+                molecular_system=molecular_system,
+                selection=selection,
+                structure_indices=structure_indices,
+            )
+            topo = _run_pycasta(topo, **kwargs)
 
     elif method_lower == 'dfnd':
         from .dfnd.api import dfnd_to_topography

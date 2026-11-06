@@ -12,7 +12,7 @@ not install them, and importing TopoMT does not import them.
 | [fpocket](https://github.com/Discngine/fpocket) | `third_party.fpocket`, `backend='cli'` | `conda install -c conda-forge fpocket`; executable available on PATH, or supply `fpocket_cmd` | Persisted output loader; native implementation and TopoMT variant. Native equivalence is under validation. |
 | [Pocketeer](https://github.com/cch1999/pocketeer) | `third_party.pocketeer`, `backend='library'` | `python -m pip install pocketeer`; upstream installs Biotite, atomview and its other requirements | Native implementation needs Biotite, but does not require Pocketeer. Native equivalence is under validation. |
 | [AlphaSpace2](https://github.com/RedesignScience/AlphaSpace2) | `third_party.alphaspace2`, `backend='library'` | `python -m pip install alphaspace2`; upstream requires MDTraj, SciPy, Cython and configargparser | Saved original-output reader without AlphaSpace2/MDTraj; native implementation; library adapter accepts a receptor and optional positioned ligand. Vina receptor typing is not exposed yet. Compatibility adjustments cover NumPy, MDTraj SASA and missing unbound contact arrays in PyPI 0.1.2. |
-| [pyCASTA](https://github.com/giorgioluciano/pycasta) | `third_party.pycasta`, `backend='library'` | `python -m pip install pycasta biopandas colorama`; the published package omits these last two runtime requirements | Native implementation. The original runs in an isolated subprocess using its installed scripts and configuration. Optional PyMOL/FreeSASA functions have their own upstream requirements. |
+| [pyCASTA](https://github.com/giorgioluciano/pycasta) | `third_party.pycasta`, `backend='library'` | `python -m pip install pycasta biopandas colorama`; the published package omits these last two runtime requirements | Saved original-output reader without pyCASTA; native implementation. The original runs in an isolated subprocess using its installed scripts and configuration. Optional mesh/PyMOL/FreeSASA functions have their own upstream requirements. |
 | CASTp 3.0 | `third_party.castp`, `backend='server', server='castp3'` | Network access to the public server; no CASTp Python package to install | Persisted result loader. Server availability and job completion are independent of local dependencies. Local CASTp methods remain experimental. |
 | CASTpFold | `third_party.castp`, `backend='server', server='castpfold'` | Network access to the public server; no CASTpFold Python package to install | Persisted result loader and experimental native CASTp routes. |
 
@@ -307,6 +307,46 @@ runs missing the new `topomt_source_context.json` supplement remain recoverable
 as `ProviderRun` artifacts, but cannot reconstruct a source-qualified
 `PocketeerOutput`. The legacy `get_topography`/`get_pockets` routing is unchanged;
 saved reconstruction is exposed through the original-output entry point.
+
+## Recover original pyCASTA results
+
+The original pyCASTA route admits argument names and values before engine
+discovery. It records the submitted selection, single frame, reference chemical
+state and full source context. The legacy
+`get_topography(..., method='pycasta', implementation='wrapper')` also forwards
+the declared selection syntax to this original adapter before preparation.
+
+```python
+result = tmt.get_provider_output(
+    source, method='pycasta', structure_indices=1, chemical_state='reference'
+)
+result.run.save('original_pycasta.zip')
+restored = tmt.get_provider_output(
+    source, method='pycasta', backend='files', bundle_file='original_pycasta.zip'
+)
+assert restored.run.run_id == result.run.run_id
+```
+
+Keep the full source in a MolSysMT-supported persistent format, including its
+reference chemistry and coordinate frames. Recovery verifies that source,
+the submitted PDB rows and original ATOM/HETATM correspondence. It consumes
+the tetrahedron-to-atom map verified against the original alpha NPZ during
+execution; it performs no new triangulation and imports no pyCASTA scripts.
+Selection, frame, state and execution options cannot override a saved run.
+Historical bundles without these source and index supplements remain readable
+as `ProviderRun` artifacts, but cannot reconstruct a source-qualified output.
+
+Original ranking, tetrahedron membership, volumes, depth, representative points,
+mouth measurements and reported validation outcomes retain their own meanings.
+An empty result stays empty. Tagged undefined scalar measurements remain
+undefined; they are never converted to zero. Nonfinite coordinates, malformed
+indices, unknown schemas and incompatible sources fail explicitly.
+
+pyCASTA's ligand mesh validation is separate from pocket detection. Its current
+Trimesh path can require Rtree; upstream may catch a missing-dependency failure
+and return a negative validation outcome. That outcome alone does not establish
+physical exclusion. Unbound detection and saved recovery do not qualify mesh,
+SASA, affinity or biological relevance. Native parity remains a separate gate.
 
 ## Show original pockets in MolSysViewer
 

@@ -1,14 +1,22 @@
 from typing import Any
 
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.pycasta_arguments import (
+    GATEWAY_PIPELINES,
+    OPTIONS,
+    ORIGINAL_PIPELINES,
+)
 from topomt.topography.Topography import Topography
 
 from .output import PyCASTAOutput
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=GATEWAY_PIPELINES)
 def get_topography(
     molecular_system,
     *,
     backend: str = 'native',
+    skip_digestion: bool = False,
     **kwargs,
 ) -> Topography:
     """Return a Topography through the selected pyCASTA backend."""
@@ -30,10 +38,12 @@ def get_topography(
     )
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=GATEWAY_PIPELINES)
 def get_pockets(
     molecular_system,
     *,
     backend: str = 'native',
+    skip_digestion: bool = False,
     **kwargs,
 ):
     """Return pyCASTA-derived pocket features from the selected backend."""
@@ -41,13 +51,19 @@ def get_pockets(
     topography = get_topography(
         molecular_system,
         backend=backend,
+        skip_digestion=True,
         **kwargs,
     )
     return list(topography.get_features(by='type', value='pocket'))
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=ORIGINAL_PIPELINES)
 def get_output(
-    molecular_system: Any = None, *, backend: str = 'library', **kwargs: Any
+    molecular_system: Any = None,
+    *,
+    backend: str = 'library',
+    skip_digestion: bool = False,
+    **kwargs: Any,
 ) -> PyCASTAOutput:
     """Return original pycasta results with shared pocket access.
 
@@ -56,7 +72,9 @@ def get_output(
     molecular_system : molecular system, optional
         MolSysMT-compatible source input.
     backend : str, default='library'
-        Original route: library or wrapper. Local reproductions are not substituted.
+        Original route: library, wrapper or saved files.
+    skip_digestion : bool, default=False
+        Internal bypass for already admitted routing arguments.
     **kwargs
         Execution/import options documented by the corresponding legacy adapter,
         including selection, structure_indices and provider-specific settings.
@@ -80,8 +98,15 @@ def get_output(
     """
     from topomt.third_party.output import _from_topography
 
+    if backend.lower() == 'files':
+        from .files import load_output
+
+        return load_output(molecular_system, **kwargs)
     if backend.lower() not in {'library', 'wrapper'}:
         raise ValueError(f'Unsupported original pyCASTA backend: {backend!r}')
     return _from_topography(
-        get_topography(molecular_system, backend=backend, **kwargs), PyCASTAOutput
+        get_topography(
+            molecular_system, backend=backend, skip_digestion=True, **kwargs
+        ),
+        PyCASTAOutput,
     )

@@ -1,9 +1,10 @@
 # pyCASTA provider overview
 
-Reviewed: 2026-10-01 (repository and issue state). Scientific evidence dates are
-stated below; this organizational update does not rerun or extend that evidence.
-Role: integrated provider and comparison reference. Implementation work remains
-paused under the [delivery checkpoint](../provider_pocket_output_checkpoint.md).
+Original source-bound receiving is active under
+[#101](https://github.com/uibcdf/topomt/issues/101) and the
+[provider handoff plan](../provider_handoff_plan.md). Dated native evidence below
+retains its own scope; native research remains paused.
+Role: integrated provider and comparison reference.
 
 ## Identity, installation and use
 
@@ -16,7 +17,8 @@ python -m pip install pycasta biopandas colorama
 
 Published pyCASTA 1.0.8 omits the Biopandas and Colorama runtime requirements in its package metadata. The original adapter was checked on Linux/Python 3.13 and runs the installed scripts in an isolated subprocess. Optional upstream mesh/SASA validation has additional requirements; absence of `rtree` is not demonstrated to cause the native count regression.
 
-Original routes: Original Python library/scripts. Returned class: `PyCASTAOutput`.
+Original routes: original Python library/scripts, and source-bound saved bundles
+through `backend='files'`. Returned class: `PyCASTAOutput`.
 
 ```python
 import topomt as tmt
@@ -42,6 +44,14 @@ closed pocket regions. Exhaustive original fidelity remains under
 [#19](https://github.com/uibcdf/topomt/issues/19), independently of native parity.
 
 ## Local implementation
+
+The original adapter now records a schema-1 full-source/frame/reference context,
+its verified tetrahedron index map and original worker source/origin evidence.
+The saved reader uses the same descriptor mapper without importing pyCASTA or
+rerunning Delaunay. Explicit undefined scalar measurements survive recovery;
+invalid geometry and source/index mismatches are rejected. See the
+[user recovery guide](../../docs/content/user/third_party_engines.md#recover-original-pycasta-results).
+Exact installed-candidate and broader provider qualification retain separate gates.
 
 `topomt.third_party.pycasta.native` implements the reproducible repository core, not all stronger claims in the paper. Its legacy Pocket adapter uses volume as score and bare center/volume values; descriptor identity and quantity boundaries need review before broader native acceptance. The original adapter score correction in #35 does not certify this local route.
 

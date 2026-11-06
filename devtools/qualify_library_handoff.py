@@ -26,7 +26,10 @@ from topomt.provider_output import ProviderRun
 
 
 def qualify_library_source(
-    input_file: Path, output_dir: Path, *, method: Literal['pocketeer', 'alphaspace2']
+    input_file: Path,
+    output_dir: Path,
+    *,
+    method: Literal['pocketeer', 'alphaspace2', 'pycasta'],
 ) -> dict[str, Any]:
     """Run the installed original and persist a verified selected-frame handoff.
 
@@ -35,7 +38,7 @@ def qualify_library_source(
     input_file : pathlib.Path
         Single-frame source accepted by prepare_reference_source. Receptor
         chemistry is supplied by MolSysMT and must already be prepared.
-    method : {'pocketeer', 'alphaspace2'}
+    method : {'pocketeer', 'alphaspace2', 'pycasta'}
         Explicit original library. AlphaSpace2 uses its default min_vertices=20
         and no binder; all selected protein atoms, including H, are submitted.
     output_dir : pathlib.Path
@@ -63,8 +66,10 @@ def qualify_library_source(
     >>> receipt = qualify_library_source(  # doctest: +SKIP
     ...     Path('prepared.h5msm'), Path('handoff'), method='alphaspace2')
     """
-    if method not in {'pocketeer', 'alphaspace2'}:
-        raise ValueError('Select an original Pocketeer or AlphaSpace2 library.')
+    if method not in {'pocketeer', 'alphaspace2', 'pycasta'}:
+        raise ValueError(
+            'Select an original Pocketeer, AlphaSpace2 or pyCASTA library.'
+        )
     if output_dir.exists():
         raise FileExistsError(output_dir)
     source, selection = prepare_reference_source(input_file)
@@ -144,20 +149,26 @@ def qualify_library_source(
         checks['incompatible_source_rejected'] = True
     if not all(checks.values()):
         raise ValueError(f'{method} handoff qualification failed: {checks}')
-    provider_fields = (
-        ('version', 'api_sha256', 'parameters')
-        if method == 'pocketeer'
-        else ('snapshot_source_sha256', 'snapshot_settings', 'min_vertices', 'binder')
-    )
+    provider_fields = {
+        'pocketeer': ('version', 'api_sha256', 'parameters'),
+        'alphaspace2': (
+            'snapshot_source_sha256',
+            'snapshot_settings',
+            'min_vertices',
+            'binder',
+        ),
+        'pycasta': ('source_sha256', 'version_tag', 'configuration'),
+    }[method]
+    receipt_fields = {
+        'version': 'version_label',
+        'source_sha256': 'provider_source_sha256',
+    }
     receipt = {
         'profile': f'original-{method}-source-handoff-1',
         'provider': run.provider,
         'backend': run.backend,
         'distribution_version': run.metadata['distribution_version'],
-        **{
-            ('version_label' if key == 'version' else key): run.metadata[key]
-            for key in provider_fields
-        },
+        **{receipt_fields.get(key, key): run.metadata[key] for key in provider_fields},
         'output_protocol': run.metadata['output_protocol'],
         'pocket_count': len(original.pockets),
         'pocket_ids': [pocket.source_id for pocket in original.pockets],
@@ -182,7 +193,7 @@ def qualify_library_source(
     return receipt
 
 
-def run_cli(method: Literal['pocketeer', 'alphaspace2']) -> None:
+def run_cli(method: Literal['pocketeer', 'alphaspace2', 'pycasta']) -> None:
     """Run the bounded source profile with explicit input and output paths."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('input_file', type=Path)

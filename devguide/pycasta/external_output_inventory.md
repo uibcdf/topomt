@@ -1,12 +1,19 @@
 # pyCASTA external output inventory
 
-Status: library adapter in progress. Source inspected at local revision
+Historical source inventory: source inspected at local revision
 `75d7baf988fc02ff39d51784ac9a9ea8e5aef62b` of
 `~/repos@others/pycasta`. The default configuration uses `VERSION_TAG=bov1`,
 `SAVE_ALPHA=True`, `FILTER_ALPHA_BY_SASA=False`, and a placeholder
 `cgal_weighted_delaunay()` that calls SciPy Delaunay. A future source revision
 may change these assumptions; the run records the source hash and active
 settings.
+
+The source-bound receiving implementation now adds a schema-1 output protocol,
+full source and reference-state context, a persisted tetrahedron-to-atom map,
+and worker origins plus exact loaded original source files. `backend='files'`
+validates those supplements and the original NPZ without importing the engine
+or triangulating again. Historical runs lacking the supplements remain artifact
+evidence. Their missing source/index contracts are not inferred.
 
 ## Retained execution evidence
 

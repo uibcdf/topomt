@@ -24,6 +24,7 @@ _PROFILES = {
     'original-fpocket-source-handoff-1': ('fpocket', 'cli'),
     'original-pocketeer-source-handoff-1': ('pocketeer', 'library'),
     'original-alphaspace2-source-handoff-1': ('alphaspace2', 'library'),
+    'original-pycasta-source-handoff-1': ('pycasta', 'library'),
 }
 
 
@@ -101,7 +102,7 @@ def consume(
     Parameters
     ----------
     handoff_dir : Path
-        Output of an original fpocket, Pocketeer or unbound AlphaSpace2 qualifier:
+        Output of an original fpocket, Pocketeer, unbound AlphaSpace2 or pyCASTA qualifier:
         source.h5msm, original.zip and receipt.json.
         Molecular chemistry must already support MolSysMT native recognition.
     output_dir : Path
@@ -203,7 +204,7 @@ def consume(
         raise ValueError('Restored source chemical-state context disagrees.')
     before = puw.get_value(msm.get(source, coordinates=True), to_unit='nm').copy()
     chemical_before = reference_chemical_context(source, 0, provider=provider)
-    if provider in {'pocketeer', 'alphaspace2'}:
+    if provider in {'pocketeer', 'alphaspace2', 'pycasta'}:
         output = tmt.get_provider_output(
             source,
             method=provider,

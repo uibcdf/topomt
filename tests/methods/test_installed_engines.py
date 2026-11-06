@@ -309,46 +309,260 @@ def test_installed_alphaspace2_selects_binder_frame_without_alignment(
         )
 
 
-def test_installed_pycasta_matches_direct_process(protein_pdb, tmp_path):
-    _require_distribution('pycasta')
+@pytest.fixture(params=['2pk4', '1stp', '2ifb', '1hew'])
+def installed_pycasta_pdb(request, tmp_path):
+    assert _require_distribution('pycasta') == '1.0.8'
+    installed = distribution('pycasta')
+    spec = find_spec('pycasta')
+    assert spec is not None and spec.submodule_search_locations is not None
+    package_root = Path(installed.locate_file('pycasta')).resolve()
+    assert [Path(p).resolve() for p in spec.submodule_search_locations] == [
+        package_root
+    ]
+    assert (package_root / 'run_analysis.py').is_file()
+    archive = (
+        Path(tmt.__file__).parent / 'data' / 'CASTpFold_server' / f'{request.param}.zip'
+    )
+    pdb = tmp_path / f'{request.param}.pdb'
+    with zipfile.ZipFile(archive) as files:
+        inputs = [name for name in files.namelist() if name.endswith('.pdb')]
+        assert len(inputs) == 1
+        pdb = tmp_path / Path(inputs[0]).name
+        pdb.write_bytes(files.read(inputs[0]))
+    return pdb, package_root
+
+
+def test_installed_pycasta_matches_direct_process(installed_pycasta_pdb, tmp_path):
+    import hashlib
+    from io import BytesIO
+
+    import molsysmt as msm
+    from scipy.spatial import Delaunay
+
+    protein_pdb, package_root = installed_pycasta_pdb
     script = """
+import hashlib
+import importlib.metadata
 import importlib.util
 import json
 from pathlib import Path
 import sys
+installed = importlib.metadata.distribution('pycasta')
+assert installed.version == '1.0.8'
+root = Path(sys.argv[3]).resolve()
+assert root == Path(installed.locate_file('pycasta')).resolve()
 spec = importlib.util.find_spec('pycasta')
-sys.path.insert(0, next(iter(spec.submodule_search_locations)))
+assert [Path(p).resolve() for p in spec.submodule_search_locations] == [root]
+sys.path.insert(0, str(root))
+import config
 import run_analysis
+assert Path(config.__file__).resolve() == root / 'config.py'
+assert Path(run_analysis.__file__).resolve() == root / 'run_analysis.py'
 result = run_analysis.process_pdb(sys.argv[1])
-Path(sys.argv[2]).write_text(json.dumps(result, allow_nan=True))
+source_modules = {}
+for name, module in sorted(sys.modules.items()):
+    filename = getattr(module, '__file__', None)
+    if filename is None:
+        continue
+    path = Path(filename).resolve()
+    if path.is_relative_to(root):
+        source_modules[name] = {
+            'path': str(path.relative_to(root)),
+            'sha256': hashlib.sha256(path.read_bytes()).hexdigest(),
+        }
+assert {'config', 'run_analysis', 'pocket_detection'} <= set(source_modules)
+Path(sys.argv[2]).write_text(json.dumps({
+    'result': result,
+    'source_modules': source_modules,
+    'configuration': {
+        'use_cgal': bool(config.USE_CGAL),
+        'filter_alpha_by_sasa': bool(config.FILTER_ALPHA_BY_SASA),
+        'save_alpha': bool(config.SAVE_ALPHA),
+        'validation_method': config.VALIDATION_METHOD,
+        'use_existing_results': bool(config.USE_EXISTING_RESULTS),
+        'manual_alpha': config.MANUAL_ALPHA,
+        'version_tag': run_analysis.VERSION_TAG,
+        'distribution_version': installed.version,
+    },
+}, sort_keys=True, allow_nan=True))
 """
+    direct = tmp_path / 'direct'
+    direct.mkdir()
     result_path = tmp_path / 'direct.json'
     execution = subprocess.run(
-        [sys.executable, '-c', script, str(protein_pdb), str(result_path)],
-        cwd=tmp_path,
+        [
+            sys.executable,
+            '-I',
+            '-B',
+            '-c',
+            script,
+            str(protein_pdb),
+            str(result_path),
+            str(package_root),
+        ],
+        cwd=direct,
         capture_output=True,
         text=True,
         check=False,
     )
     assert execution.returncode == 0, execution.stderr
-    expected = json.loads(result_path.read_text())
+    direct_run = json.loads(result_path.read_text())
+    expected = direct_run['result']
     before = set(sys.modules)
-    topography = tmt.third_party.pycasta.get_topography(
-        str(protein_pdb), backend='library'
+    assert not set(direct_run['source_modules']) & before
+    output = tmt.get_provider_output(
+        str(protein_pdb), method='pycasta', backend='library'
     )
-    assert not {'run_analysis', 'config', 'pocket_detection'} & (
-        set(sys.modules) - before
-    )
-    pockets = list(topography.get_features(by='type', value='pocket'))
+    assert not set(direct_run['source_modules']) & (set(sys.modules) - before)
+    pockets = output.pockets
     assert len(pockets) == len(expected['ranked_pockets'])
     assert pockets
-    for pocket in pockets:
-        index = int(pocket.source_id.split(':')[-1])
-        assert pocket.score == pytest.approx(expected['ranking_scores'][index])
-        assert puw.get_value(pocket.volume, to_unit='angstroms**3') == pytest.approx(
+    assert [p.source_id for p in pockets] == [
+        f'pycasta:{index}' for index in range(len(pockets))
+    ]
+    configuration = direct_run['configuration']
+    direct_alpha = (
+        direct
+        / 'results'
+        / configuration['version_tag']
+        / f'{protein_pdb.stem}.alpha.npz'
+    )
+    with np.load(direct_alpha, allow_pickle=False) as arrays:
+        protein_coords = arrays['protein_coords']
+        tetrahedra = arrays['tetrahedra']
+    np.testing.assert_array_equal(protein_coords, expected['protein_coords'])
+    simplices = Delaunay(protein_coords).simplices
+    np.testing.assert_array_equal(tetrahedra, protein_coords[simplices])
+    submitted_rows = [
+        row
+        for row in protein_pdb.read_text().splitlines()
+        if row.startswith(('ATOM  ', 'HETATM'))
+    ]
+    protein_map = np.array(
+        [index for index, row in enumerate(submitted_rows) if row.startswith('ATOM  ')]
+    )
+    all_coordinates = np.array(
+        [
+            [float(row[start : start + 8]) for start in (30, 38, 46)]
+            for row in submitted_rows
+        ]
+    )
+    np.testing.assert_array_equal(protein_coords, all_coordinates[protein_map])
+    for index, pocket in enumerate(pockets):
+        fields = pocket.fields
+        tetra_indices = expected['ranked_pockets'][index]
+        assert fields['provider_tetrahedron_indices'] == tetra_indices
+        members = np.unique(simplices[tetra_indices].reshape(-1))
+        assert pocket.atom_indices == tuple(sorted(protein_map[members].tolist()))
+        assert pocket.atom_role == 'region_tetrahedron_vertices'
+        assert fields['score'] == pytest.approx(expected['ranking_scores'][index])
+        assert (
+            fields['provider_validation_method']
+            == expected['validation_methods'][index]
+        )
+        assert puw.get_value(fields['volume'], to_unit='angstroms**3') == pytest.approx(
             expected['pocket_volumes'][index]
         )
-    run = next(iter(topography.provider_runs.values()))
+        for field, original, unit in (
+            ('depth', 'pocket_depths', 'angstroms'),
+            ('mouth_area', 'mouth_area', 'angstroms**2'),
+            ('mouth_perimeter', 'mouth_perimeter', 'angstroms'),
+            ('representative_point', 'representative_points', 'angstroms'),
+        ):
+            assert puw.get_value(fields[field], to_unit=unit) == pytest.approx(
+                expected[original][index]
+            )
+            assert pocket.measurements[field].original_value == pytest.approx(
+                expected[original][index]
+            )
+        np.testing.assert_allclose(
+            puw.get_value(
+                pocket.geometries['member_atoms'].coordinates, to_unit='angstroms'
+            ),
+            all_coordinates[np.array(pocket.atom_indices)],
+            rtol=0,
+            atol=1e-9,
+        )
+    run = output.run
+    assert run.metadata['distribution_version'] == '1.0.8'
+    assert run.metadata['configuration'] == configuration
+    assert (
+        run.metadata['source_sha256']
+        == direct_run['source_modules']['run_analysis']['sha256']
+    )
+    assert (
+        run.metadata['source_sha256']
+        == hashlib.sha256((package_root / 'run_analysis.py').read_bytes()).hexdigest()
+    )
+    assert run.metadata['selected_atom_indices'] == list(range(len(submitted_rows)))
+    assert run.metadata['protein_atom_indices'] == protein_map.tolist()
+    assert np.atleast_1d(run.metadata['structure_indices']).tolist() == [0]
+    assert run.metadata['selection'] == 'all'
+    assert run.metadata['syntax'] == 'MolSysMT'
     recorded = json.loads(run.get_artifact('output/topomt_returned_result.json'))
-    assert recorded['ranked_pockets'] == expected['ranked_pockets']
-    assert run.get_artifact('input/2pk4.pdb') == protein_pdb.read_bytes()
+
+    def json_value(value):
+        if isinstance(value, dict):
+            return {key: json_value(item) for key, item in value.items()}
+        if isinstance(value, list):
+            return [json_value(item) for item in value]
+        if isinstance(value, float) and not np.isfinite(value):
+            return {'nonfinite': str(value)}
+        return value
+
+    assert recorded.keys() == expected.keys()
+    for name, value in expected.items():
+        if name == 'pdb_path':
+            # Each independent execution retains its own submitted path.
+            assert Path(recorded[name]).name == Path(value).name == protein_pdb.name
+        else:
+            assert recorded[name] == json_value(value)
+    assert run.get_artifact(f'input/{protein_pdb.name}') == protein_pdb.read_bytes()
+    with np.load(
+        BytesIO(run.get_artifact(run.metadata['alpha_artifact'])), allow_pickle=False
+    ) as arrays:
+        np.testing.assert_array_equal(arrays['protein_coords'], protein_coords)
+        np.testing.assert_array_equal(arrays['tetrahedra'], tetrahedra)
+    source_context = json.loads(
+        run.get_artifact(run.metadata['source_context_artifact'])
+    )
+    source = msm.convert(str(protein_pdb), to_form='molsysmt.MolSys')
+    assert source_context['schema_version'] == 1
+    assert source_context['n_atoms'] == len(submitted_rows)
+    assert source_context['coordinates']['unit'] == 'nm'
+    np.testing.assert_allclose(
+        source_context['coordinates']['value'],
+        puw.get_value(
+            msm.get(source, structure_indices=0, coordinates=True), to_unit='nm'
+        )[0],
+        rtol=0,
+        atol=1e-12,
+    )
+    attributes = msm.get(
+        source,
+        element='atom',
+        output_type='dictionary',
+        get_missing_bonds=False,
+        **{name: True for name in source_context['atom_attributes']},
+    )
+    for name, values in attributes.items():
+        np.testing.assert_equal(source_context['atom_attributes'][name], values)
+    worker = json.loads(run.get_artifact(run.metadata['worker_origin_artifact']))
+    assert Path(worker['source_root']).resolve() == package_root
+    assert worker['distribution_version'] == '1.0.8'
+    for name, identity in direct_run['source_modules'].items():
+        assert (
+            Path(worker['modules'][name]['file']).resolve()
+            == package_root / identity['path']
+        )
+        artifact = 'output/topomt_worker_sources/' + identity['path']
+        assert worker['source_files'][artifact]['sha256'] == identity['sha256']
+        assert (
+            hashlib.sha256(run.get_artifact(artifact)).hexdigest() == identity['sha256']
+        )
+    portable = tmp_path / f'{protein_pdb.stem}-provider.zip'
+    run.save(portable)
+    recovered = ProviderRun.load(portable)
+    assert recovered.run_id == run.run_id
+    assert recovered.artifacts == run.artifacts
+    assert recovered.metadata_json == run.metadata_json
