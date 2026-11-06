@@ -73,6 +73,16 @@ Design principles:
 - **Composability:** small, reusable components.
 - **Extensibility:** easy to add new feature types or surface descriptors.
 - **Robustness:** strict type checking and dimensional consistency.
+- **Measured performance:** pursue real workflows that run quickly and use memory
+  efficiently. Base performance claims and optimizations on representative
+  measurements
+  while preserving scientific correctness and failure diagnostics.
+- **Accessible public API:** make routine tasks intuitive with consistent terms,
+  predictable defaults and concise examples. Provide a complete, documented and
+  composable public API for users who need explicit control and deeper inspection.
+- **Deliberate quality:** prefer solid, reviewable increments over delivery speed.
+  Take the time needed for sound scientific behavior, robust edge cases and a
+  maintainable architecture, including additional iterations when needed.
 
 ---
 
