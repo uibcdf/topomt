@@ -61,7 +61,8 @@ was changed for this boundary.
   fixtures; the fourth is the existing 2HGR deep-validation exclusion. Its 36
   warnings concern LO1/LO2 atom names and an existing native divide operation.
 - Distribution-contract checks passed all 18 cases, including the updated
-  inventory for the shared runtime module.
+  inventory for the shared runtime module. Its five passing unittest subtests
+  account for JUnit's declared count of 23; the receptor reports 18 pytest cases.
 - Repository-wide Ruff lint and formatting passed (435 files); the final two
   strengthened test modules passed again. Scoped mypy passed six changed runtime
   modules. Report indexes are current.
@@ -72,6 +73,15 @@ was changed for this boundary.
 These are source checks, not a replacement for the previous exact installed
 wheel, a new installed candidate, complete-suite qualification or the supported
 Python/platform matrix. The human's pre-existing `_version.py` edit is preserved.
+
+Producer commit: `c16dd3d609a5192c0c7c4cba269ff6ae999b497b`. The
+[evidence archive](evidence/pocketeer_chemical_context_20261106.zip) retains the
+test-first failure, intermediate/final reports, event streams and producer patch.
+Its [receipt](evidence/pocketeer_chemical_context_20261106.json) records counts,
+scope and archive identity: 80,569 bytes, 17 members, SHA-256
+`9806d6a47e621d5ab6c94aa73de7b5a6e67b4865c6864c700bfec3445dd5f0bb`.
+Every retained member digest was verified. The earlier intermediate snapshot
+comparison failure remains visible alongside the corrected final run.
 
 ## Remaining scope
 
