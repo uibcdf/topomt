@@ -22,6 +22,15 @@ def digest_path(value: Any, argument: str, caller: str | None) -> Path:
     _error(argument, value, caller, 'Expected a nonempty path string or pathlib.Path.')
 
 
+def digest_upstream_root(upstream_root: Any, caller: str | None = None) -> str | None:
+    """Admit an optional original-engine source-import root."""
+    if upstream_root is None:
+        return None
+    return str(
+        digest_path(upstream_root, 'upstream_root', caller).expanduser().resolve()
+    )
+
+
 def digest_molecular_system(
     molecular_system: Any, backend: str | None = None, caller: str | None = None
 ) -> Any:
@@ -74,38 +83,46 @@ def _indices(
         'Expected a nonempty one-dimensional sequence of nonnegative integer indices.'
     )
     if single:
-        reason = 'Expected exactly one input coordinate frame as a nonnegative integer index.'
+        reason = 'Expected exactly one input coordinate frame: a single nonnegative integer index.'
     _error(argument, value, caller, reason)
 
 
+def _selection(value: Any, argument: str, caller: str | None) -> Any:
+    if isinstance(value, str) and value.strip():
+        return value
+    return _indices(value, argument, caller)
+
+
 def digest_selection(selection: Any, caller: str | None = None) -> Any:
-    if isinstance(selection, str) and selection.strip():
-        return selection
-    return _indices(selection, 'selection', caller)
+    return _selection(selection, 'selection', caller)
+
+
+def _structure_indices(value: Any, argument: str, caller: str | None) -> Any:
+    # These legacy selectors require source-dependent frame-count admission later.
+    if value is None or isinstance(value, str) and value.lower() == 'all':
+        return value
+    return _indices(value, argument, caller, single=True)
 
 
 def digest_structure_indices(structure_indices: Any, caller: str | None = None) -> Any:
-    # These legacy selectors require source-dependent frame-count admission later.
-    if (
-        structure_indices is None
-        or isinstance(structure_indices, str)
-        and structure_indices.lower() == 'all'
-    ):
-        return structure_indices
-    return _indices(structure_indices, 'structure_indices', caller, single=True)
+    return _structure_indices(structure_indices, 'structure_indices', caller)
 
 
-def digest_syntax(syntax: Any, caller: str | None = None) -> str:
+def _syntax(value: Any, argument: str, caller: str | None) -> str:
     from topomt._private.exceptions import ArgumentError
 
     from .argument.syntax import digest_syntax as owning_digest
 
     try:
-        return owning_digest(syntax, caller=caller)
+        return owning_digest(value, caller=caller)
     except ArgumentError:
         _error(
-            'syntax', syntax, caller, 'Expected a supported MolSysMT selection syntax.'
+            argument, value, caller, 'Expected a supported MolSysMT selection syntax.'
         )
+
+
+def digest_syntax(syntax: Any, caller: str | None = None) -> str:
+    return _syntax(syntax, 'syntax', caller)
 
 
 def digest_skip_digestion(skip_digestion: Any, caller: str | None = None) -> bool:

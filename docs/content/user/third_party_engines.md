@@ -351,6 +351,17 @@ If you choose a custom `tag_prefix`, use the same prefix for later show/clear ca
 
 ## AlphaSpace2 contacts with a reference ligand
 
+Original AlphaSpace2 arguments are admitted through ArgDigest before optional
+dependency loading or molecular conversion. `min_vertices` is a positive integer
+(booleans are rejected), and unknown option names are rejected. Receptor and
+binder selections accept nonempty selection strings or flat nonnegative integer
+axes. Each explicit frame axis contains one nonnegative integer; `None` and
+`'all'` retain their source-dependent single-frame checks. MolSysMT owns selection
+syntax, molecular-form support and conversion. Syntax names are normalized;
+caller-owned index arrays and molecular inputs are forwarded without mutation.
+The optional `upstream_root` remains a fallback import path, not an automatic
+replacement of an installed original. The legacy native default is unchanged.
+
 The original AlphaSpace2 adapter accepts `binder`, the upstream name for a
 reference ligand whose position is already known. This engine-specific option
 describes pocket geometry relative to that position. TopoMT does not search for

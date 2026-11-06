@@ -19,6 +19,7 @@ from .external_arguments import (
     digest_skip_digestion,
     digest_structure_indices,
     digest_syntax,
+    digest_upstream_root,
 )
 
 API_CALLER = 'topomt.third_party.pocketeer.api.get_output'
@@ -113,23 +114,6 @@ def digest_ignore_water(ignore_water: Any, caller: str | None = None) -> bool:
 
 def digest_ignore_hetero(ignore_hetero: Any, caller: str | None = None) -> bool:
     return _boolean(ignore_hetero, 'ignore_hetero', caller)
-
-
-def digest_upstream_root(upstream_root: Any, caller: str | None = None) -> str | None:
-    if upstream_root is None:
-        return None
-    if (
-        isinstance(upstream_root, (str, Path))
-        and str(upstream_root).strip()
-        and '\0' not in str(upstream_root)
-    ):
-        return str(Path(upstream_root).expanduser().resolve())
-    _error(
-        'upstream_root',
-        upstream_root,
-        caller,
-        'Expected None or a nonempty source path.',
-    )
 
 
 def digest_bundle_file(bundle_file: Any, caller: str | None = None) -> Path:

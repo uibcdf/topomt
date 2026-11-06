@@ -10,6 +10,8 @@ from depdigest import dep_digest
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.alphaspace2_arguments import OPTIONS
 from topomt.features import Pocket
 from topomt.provider_output import ExternalMeasurement, ProviderRun
 from topomt.third_party._common import import_upstream_module, prepare_wrapper_input_pdb
@@ -106,6 +108,7 @@ def _initialize_unbound_contacts(snapshot) -> bool:
     return True
 
 
+@arg_digest(**OPTIONS)
 @dep_digest('alphaspace2', when={'upstream_root': None})
 @dep_digest('mdtraj')
 def get_topography(
@@ -120,7 +123,7 @@ def get_topography(
     binder_selection: str = 'all',
     binder_structure_indices: int | list[int] = 0,
     binder_syntax: str = 'MolSysMT',
-    **kwargs,
+    skip_digestion: bool = False,
 ) -> Topography:
     """Run the original AlphaSpace2 engine on a receptor and optional binder.
 
@@ -148,6 +151,8 @@ def get_topography(
         Binder frame selection. The submitted structure must have one frame.
     binder_syntax : str, default='MolSysMT'
         Binder selection syntax.
+    skip_digestion : bool, default=False
+        Internal bypass for already admitted argument values.
 
     Returns
     -------
@@ -157,6 +162,9 @@ def get_topography(
 
     Raises
     ------
+    ArgumentError
+        If an index axis, selection, route option or positive count is invalid.
+        Argument admission precedes dependency loading and molecular conversion.
     ValueError
         If an input has an empty selection, multiple frames, nonfinite
         coordinates or an atom count incompatible with its selection.
@@ -169,10 +177,6 @@ def get_topography(
     --------
     >>> topography = get_topography('receptor.pdb', binder='ligand.pdb')
     """
-    if kwargs:
-        unexpected = ', '.join(sorted(kwargs))
-        raise TypeError(f'Unsupported wrapper kwargs for alphaspace2: {unexpected}')
-
     with tempfile.TemporaryDirectory(prefix='topomt_alphaspace2_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
         input_pdb, selected_atom_indices = prepare_wrapper_input_pdb(
@@ -364,7 +368,9 @@ def get_topography(
                         )
                     )
                 )
-            beta_nonpolar_space = np.asarray(beta_nonpolar_values, dtype=float)
+            beta_nonpolar_space: np.ndarray = np.asarray(
+                beta_nonpolar_values, dtype=float
+            )
             beta_scores = np.asarray(snapshot._beta_scores)[beta_indices]
             reported_pocket = state['pocket_properties'][pocket_index]
             source_artifact = 'output/topomt_snapshot.json'
