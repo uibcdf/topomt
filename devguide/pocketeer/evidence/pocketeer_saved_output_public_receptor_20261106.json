@@ -1,0 +1,100 @@
+{
+  "archive": {
+    "bytes": 182226,
+    "members": 13,
+    "name": "pocketeer_saved_output_public_receptor_20261106.zip",
+    "sha256": "a795eb8778f861ddff39e1cfc86284b87c6c819b1b53b788ffb33865a413f1cb"
+  },
+  "counts": {
+    "public-distribution": {
+      "counts": {
+        "collected": 18,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 18,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 18,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {
+          "passed": 5
+        },
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 4.437090276973322,
+      "exitstatus": 0,
+      "receptor_version": "1.2.0"
+    },
+    "public-final": {
+      "counts": {
+        "collected": 338,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 338,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 333,
+        "reruns": 0,
+        "skipped": 5,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration": 123.87650679796934,
+      "exitstatus": 0,
+      "receptor_version": "1.2.0"
+    }
+  },
+  "date": "2026-11-06",
+  "inherited_reporter_note": "Earlier retained source reports use development pytest-receptor 1.2.2+2.gb9676f8; these public 1.2.0 reruns supply the published-reporter evidence for the current source.",
+  "owner": "uibcdf/topomt#101",
+  "preserved_human_version_sha256": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+  "producer_commit": "35e43f23408c04a47b314fa66bc706b049b24db0",
+  "receptor": {
+    "bytes": 44000,
+    "ci_pin": ".github/workflows/CI.yaml",
+    "file": "pytest_receptor-1.2.0-py3-none-any.whl",
+    "name": "pytest-receptor",
+    "registry": "https://pypi.org/pypi/pytest-receptor/1.2.0/json",
+    "requirements": [
+      "pytest>=8.0.0",
+      "packaging>=24; extra == \"test\"",
+      "pytest-cov<8,>=6; extra == \"test\"",
+      "pytest-rerunfailures<17,>=15; extra == \"test\"",
+      "pytest-subtests<0.16,>=0.14; extra == \"test\"",
+      "pytest-xdist<4,>=3.6; extra == \"test\"",
+      "ruff==0.16.5; extra == \"lint\"",
+      "myst-parser<5,>=4; extra == \"docs\"",
+      "sphinx<10,>=8; extra == \"docs\"",
+      "sphinx-rtd-theme<4,>=3; extra == \"docs\"",
+      "tiktoken<1,>=0.9; extra == \"benchmark\"",
+      "build<2,>=1.2; extra == \"release\"",
+      "packaging>=24; extra == \"release\"",
+      "twine<7,>=6; extra == \"release\"",
+      "build<2,>=1.2; extra == \"dev\"",
+      "myst-parser<5,>=4; extra == \"dev\"",
+      "packaging>=24; extra == \"dev\"",
+      "pytest-cov<8,>=6; extra == \"dev\"",
+      "pytest-rerunfailures<17,>=15; extra == \"dev\"",
+      "pytest-subtests<0.16,>=0.14; extra == \"dev\"",
+      "pytest-xdist<4,>=3.6; extra == \"dev\"",
+      "ruff==0.16.5; extra == \"dev\"",
+      "sphinx<10,>=8; extra == \"dev\"",
+      "sphinx-rtd-theme<4,>=3; extra == \"dev\"",
+      "tiktoken<1,>=0.9; extra == \"dev\"",
+      "twine<7,>=6; extra == \"dev\""
+    ],
+    "sha256": "4e339abd53d85406c3acc0c643b895154b133c0a6f9d5f7a2350703f514a9971",
+    "upload_time": "2026-09-26T20:13:14.592916Z",
+    "url": "https://files.pythonhosted.org/packages/72/f9/2bfb2877cc556be61732466a118175d7382579fbb88619dae2d4ef01af24/pytest_receptor-1.2.0-py3-none-any.whl",
+    "version": "1.2.0",
+    "yanked": false
+  },
+  "reporter_origin_and_bytes_verified_before_and_after": true,
+  "schema_version": 1,
+  "scope": "Final source recovery/consumer regressions with published CI-pinned Pytest Receptor; no new installed TopoMT candidate."
+}

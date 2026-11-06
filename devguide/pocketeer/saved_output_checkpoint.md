@@ -95,6 +95,40 @@ PharmacophoreMT was current and clean. These sibling worktrees were not changed.
 The immutable installed dependency profile from the prior checkpoint was reused;
 this is source evidence, not receiving against those sibling main branches.
 
+### Final published-reporter verification
+
+Closeout identified the inherited reporting tool as development version
+`1.2.2+2.gb9676f8`. Its earlier reports above remain retained with their actual
+identity. The final producer was then rechecked using the repository CI's
+published **Pytest Receptor 1.2.0**, downloaded from PyPI and verified against
+the registry SHA-256 `4e339abd53d85406c3acc0c643b895154b133c0a6f9d5f7a2350703f514a9971`.
+A task-owned reporting overlay replaced no scientific distribution. All reporter
+Python files matched the public wheel before and after execution.
+
+The final current-source selection passed **333 cases, five skips, 123.88 s**
+(338 collected), including all 48 saved-reader controls. The five skips retain
+the reasons above. Distribution checks passed **18 cases and five subtests**
+with the same public reporter. These results provide the published-tool evidence
+for this producer; they do not retroactively qualify earlier installed wheels.
+
+Producer: `35e43f23408c04a47b314fa66bc706b049b24db0`. The initial
+[archive](evidence/pocketeer_saved_output_20261106.zip) and
+[receipt](evidence/pocketeer_saved_output_20261106.json) retain test-first and
+intermediate reports, original control files and the producer patch: 271,963
+bytes, 43 members, SHA-256
+`e4fd9a04fcf47e7f3ad1bb6945c50215f1ae3e5b3ea0c2bd5905b29ba5411673`.
+
+The separate [public-reporter archive](evidence/pocketeer_saved_output_public_receptor_20261106.zip)
+and [receipt](evidence/pocketeer_saved_output_public_receptor_20261106.json)
+retain the public wheel, registry/origin checks, final reports and public
+structural-control source/bundle pair: 182,226 bytes, 13 members, SHA-256
+`a795eb8778f861ddff39e1cfc86284b87c6c819b1b53b788ffb33865a413f1cb`.
+All archive member digests were verified. The task-owned raw directory and
+reporting overlay at `/dev/shm/topomt-pocketeer-recovery-101` remain available for
+the next source consumer control; use its public-reporter overlay when testing
+with the retained scientific prefix. Existing experimental artifacts remain
+unchanged rather than being relabelled as published-tool evidence.
+
 Historical bundles lacking the source supplement remain readable as ProviderRun
 artifacts, with no invented source-qualified reconstruction. The new source
 reader does not itself qualify a new installed wheel, receptor chemistry or

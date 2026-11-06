@@ -1,0 +1,308 @@
+{
+  "archive": {
+    "bytes": 271963,
+    "members": 43,
+    "name": "pocketeer_saved_output_20261106.zip",
+    "sha256": "e4fd9a04fcf47e7f3ad1bb6945c50215f1ae3e5b3ea0c2bd5905b29ba5411673"
+  },
+  "date": "2026-11-06",
+  "limits": [
+    "Prepared-receptor PharmacophoreMT receiving remains pending.",
+    "Earlier installed wheels retain their earlier candidate identity.",
+    "Five wider source skips: three missing local Pocketeer mirror fixtures and absent AlphaSpace2/pyCASTA.",
+    "Unchanged native parity, full-suite backlog, coverage and supported platform/minor gates retain their separate evidence."
+  ],
+  "other_checks": {
+    "built_guide_matches_source": true,
+    "docs_final_warnings": 8,
+    "docs_fresh_warnings": 12,
+    "final_mypy_modules": 2,
+    "mypy_runtime_modules": 13,
+    "report_indexes": "current",
+    "ruff_format_files": 439,
+    "ruff_lint": "passed"
+  },
+  "owner": "uibcdf/topomt#101",
+  "preserved_human_version_sha256": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+  "producer_commit": "35e43f23408c04a47b314fa66bc706b049b24db0",
+  "published_reporter_followup": {
+    "bytes": 182226,
+    "members": 13,
+    "name": "pocketeer_saved_output_public_receptor_20261106.zip",
+    "sha256": "a795eb8778f861ddff39e1cfc86284b87c6c819b1b53b788ffb33865a413f1cb"
+  },
+  "python": "3.14.7",
+  "reporter_identity_note": "Earlier retained source reports use development pytest-receptor 1.2.2+2.gb9676f8; these public 1.2.0 reruns supply the published-reporter evidence for the current source.",
+  "runtime_profile": "Retained independent prefix from the preceding argument/state checkpoints; TopoMT imported from the producer source.",
+  "schema_version": 1,
+  "scope": "Source-bound saved Pocketeer recovery; no new installed-wheel or prepared PharmacophoreMT receiving qualification.",
+  "structural_control": {
+    "artifacts": {
+      "original.zip": "ae404137dcc85a13b4309bde362f5c27358af3b59960653d677c54a6f0870745",
+      "source.h5msm": "6312e2b0b3c25f08df22302f380c4cd52dfdf98a8becb3d2796515b91e2d0ca8"
+    },
+    "n_source_atoms": 745,
+    "n_submitted_atoms": 744,
+    "prepared_chemistry": false,
+    "seed": "bundled CASTpFold_server/2pk4.zip",
+    "structure_index": 1
+  },
+  "test_results": {
+    "admission": {
+      "errors": 0,
+      "exitstatus": 0,
+      "failures": 0,
+      "receptor": {
+        "collected": 46,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 46,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 46,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 46,
+      "tests": 46
+    },
+    "distribution": {
+      "errors": 0,
+      "exitstatus": 0,
+      "failures": 0,
+      "receptor": {
+        "collected": 18,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 18,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 18,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {
+          "passed": 5
+        },
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 18,
+      "tests": 23
+    },
+    "final": {
+      "errors": 0,
+      "exitstatus": 0,
+      "failures": 0,
+      "receptor": {
+        "collected": 127,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 127,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 127,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 127,
+      "tests": 127
+    },
+    "focused": {
+      "errors": 0,
+      "exitstatus": 1,
+      "failures": 1,
+      "receptor": {
+        "collected": 159,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 159,
+        "failed": 1,
+        "not_executed": 0,
+        "passed": 158,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 159,
+      "tests": 159
+    },
+    "green": {
+      "errors": 0,
+      "exitstatus": 1,
+      "failures": 4,
+      "receptor": {
+        "collected": 151,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 151,
+        "failed": 4,
+        "not_executed": 0,
+        "passed": 147,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 151,
+      "tests": 151
+    },
+    "protocol-final": {
+      "errors": 0,
+      "exitstatus": 0,
+      "failures": 0,
+      "receptor": {
+        "collected": 127,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 127,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 127,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 127,
+      "tests": 127
+    },
+    "protocol-red": {
+      "errors": 0,
+      "exitstatus": 1,
+      "failures": 2,
+      "receptor": {
+        "collected": 2,
+        "deselected": 46,
+        "errors": 0,
+        "executed": 2,
+        "failed": 2,
+        "not_executed": 0,
+        "passed": 0,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 2,
+      "tests": 2
+    },
+    "red": {
+      "errors": 0,
+      "exitstatus": 1,
+      "failures": 30,
+      "receptor": {
+        "collected": 30,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 30,
+        "failed": 30,
+        "not_executed": 0,
+        "passed": 0,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 30,
+      "tests": 30
+    },
+    "regression": {
+      "errors": 0,
+      "exitstatus": 0,
+      "failures": 0,
+      "receptor": {
+        "collected": 330,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 330,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 325,
+        "reruns": 0,
+        "skipped": 5,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 5,
+      "testcase_records": 330,
+      "tests": 330
+    },
+    "saved-final": {
+      "errors": 0,
+      "exitstatus": 0,
+      "failures": 0,
+      "receptor": {
+        "collected": 38,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 38,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 38,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 38,
+      "tests": 38
+    },
+    "traced-final": {
+      "errors": 0,
+      "exitstatus": 0,
+      "failures": 0,
+      "receptor": {
+        "collected": 48,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 48,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 48,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "skipped": 0,
+      "testcase_records": 48,
+      "tests": 48
+    }
+  },
+  "upstream_pocketeer_commit": "f59cd12fbe175ebf4c34d70405c4c41476d4cc03"
+}

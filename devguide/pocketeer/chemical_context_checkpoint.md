@@ -91,6 +91,12 @@ reference state and public atom/frame queries. The pending statements below
 describe this checkpoint's original boundary; prepared PharmacophoreMT receiving
 and qualification of the updated installed candidate remain open.
 
+Reporting-tool identity addendum: the inherited event streams for the earlier
+source checks record development Pytest Receptor `1.2.2+2.gb9676f8`. The subsequent
+saved-output checkpoint retains those facts and supplies a new current-source
+verification with published CI-pinned Receptor 1.2.0, including the state and
+fpocket guards. Earlier producer/artifact evidence retains its original scope.
+
 Recovering ProviderRun artifact bytes is already supported; reconstructing a
 PocketeerOutput from those saved bytes with source agreement checks remains
 pending. The prepared-receptor PharmacophoreMT receiving control is also pending.
