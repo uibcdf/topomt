@@ -11,6 +11,12 @@ handoff pilot under [#101](https://github.com/uibcdf/topomt/issues/101). See the
 persisted recovery, source mapping and remaining provider/consumer gates. The
 pause recorded below still applies to the broader deferred work.
 
+Subsequent explicit continuation on 2026-11-05 resumed the bounded original
+Pocketeer argument/structural profile. Its
+[checkpoint](pocketeer/argument_handoff_checkpoint.md) records original-engine
+execution, unit policies and installed receiving. Pocketeer chemical-state and
+PharmacophoreMT receiving remain unqualified; this does not resume native parity.
+
 The subsequent [installed receiving control](fpocket4/installed_receiving_checkpoint.md)
 passes 32 bounded cases against local TopoMT/MolSysMT/PharmacophoreMT wheels,
 including original fpocket execution and the prepared consumer. External

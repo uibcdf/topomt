@@ -1,0 +1,110 @@
+{
+  "schema": "topomt.pocketeer-argument-evidence@1",
+  "archive": "pocketeer_arguments_20261105.zip",
+  "size": 1887757,
+  "sha256": "b52dcabd5a4cfe0406560f6604a047f4ba517ac7d092a4631e2de0b67910c9fb",
+  "members": 111,
+  "producer": "cac8cbb21f79b685a669e7ede06639d3d7432b79",
+  "wheel": {
+    "name": "topomt",
+    "filename": "topomt-0.5.0+347.gcac8cbb.dirty-py3-none-any.whl",
+    "size": 21576833,
+    "sha256": "44717c40bdde30d674f6c280ec610fe58b7c402774b1234e5884260ddb89cef3",
+    "producer": "cac8cbb21f79b685a669e7ede06639d3d7432b79"
+  },
+  "original_provider_wheel": {
+    "filename": "pocketeer-0.4.0-py3-none-any.whl",
+    "size": 27673,
+    "sha256": "c814c4eadc461c15b032fbca84a7a2a862dc0654cbea1ad8c541bacf849bd897"
+  },
+  "original_provider_tag": "v0.4.0",
+  "original_provider_commit": "f59cd12fbe175ebf4c34d70405c4c41476d4cc03",
+  "installed": {
+    "counts": {
+      "collected": 218,
+      "deselected": 0,
+      "errors": 0,
+      "executed": 218,
+      "failed": 0,
+      "not_executed": 0,
+      "passed": 218,
+      "reruns": 0,
+      "skipped": 0,
+      "subtests": {},
+      "warnings": 0,
+      "xfailed": 0,
+      "xpassed": 0
+    },
+    "seconds": 46.01642709085718,
+    "distributions": 161,
+    "record_before_after_equal": true,
+    "generated_native_modules": 7
+  },
+  "source": {
+    "whole_invocation_counts": {
+      "collected": 313,
+      "deselected": 0,
+      "errors": 0,
+      "executed": 313,
+      "failed": 1,
+      "not_executed": 0,
+      "passed": 310,
+      "reruns": 0,
+      "skipped": 2,
+      "subtests": {
+        "passed": 5
+      },
+      "warnings": 0,
+      "xfailed": 0,
+      "xpassed": 0
+    },
+    "whole_invocation_exitstatus": 1,
+    "runtime_subset": {
+      "passed": 293,
+      "skipped": 2
+    },
+    "administrative_failure": "The isolated runtime profile has no setuptools; the unchanged 18-case distribution suite passes separately in the development tool profile."
+  },
+  "administrative": {
+    "passed": 18,
+    "seconds": 4.36
+  },
+  "resources": {
+    "required_count": 621,
+    "missing": [],
+    "unexpected_roots": [],
+    "version": "0.5.0+347.gcac8cbb.dirty"
+  },
+  "mypy": {
+    "version": "2.3.1",
+    "files": 9,
+    "imported_bodies": "skipped",
+    "result": "pass"
+  },
+  "ruff": {
+    "files": 433,
+    "lint": "pass",
+    "format": "pass"
+  },
+  "docs": {
+    "sphinx": "9.1.0",
+    "fresh_warnings": 12,
+    "incremental_warnings": 8,
+    "edited_page_warnings": 0,
+    "plantuml_command_available": false
+  },
+  "limits": [
+    "Two pockets in an explicit 744/745-atom partial 2pk4 selection and translated frame 1, nm/ps/radian and pm/fs/radian policies.",
+    "ProviderRun raw evidence recovery, not a saved PocketeerOutput reader.",
+    "Pocketeer chemical-state admission/source snapshot/PharmacophoreMT receiving, native parity, other platforms/minors and public release qualification remain open.",
+    "First wheel build metadata mismatch and first installed audit failure are retained as failed attempts; the accepted wheel was not rebuilt for the successful installed audit."
+  ],
+  "retention": "Original wheel and temporary receiving prefix remain task-owned; archive retains evidence and artifact identities, not package bytes.",
+  "source_worktree": {
+    "runtime_diff": [
+      "topomt/_version.py"
+    ],
+    "preserved_user_version_sha256": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+    "tested_source_relationship": "The source runtime matches the producer except for the existing user version file; the independent wheel has its own generated development version."
+  }
+}

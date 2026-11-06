@@ -1,9 +1,11 @@
 # Pocketeer provider overview
 
-Reviewed: 2026-10-01 (repository and issue state). Scientific evidence dates are
+Reviewed: 2026-11-05 (repository and issue state). Scientific evidence dates are
 stated below; this organizational update does not rerun or extend that evidence.
-Role: integrated provider and comparison reference. Implementation work remains
-paused under the [delivery checkpoint](../provider_pocket_output_checkpoint.md).
+Role: integrated provider and comparison reference. A bounded original-provider
+argument and structural profile resumed under [#101](https://github.com/uibcdf/topomt/issues/101);
+see its [checkpoint](argument_handoff_checkpoint.md). Chemical receiving remains
+unqualified; broader native work retains the [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
 ## Identity, installation and use
 
@@ -63,6 +65,7 @@ bounded outcomes, not full-provider certification.
 
 - [Permanent Pocketeer discussion #70](https://github.com/uibcdf/topomt/discussions/70) in External Tools.
 - [Original output inventory](external_output_inventory.md).
+- [ArgDigest and original-library structural receiving](argument_handoff_checkpoint.md).
 - [Existing native contract](../pocketeer_contract.md).
 - [Native comparison assertions](../../tests/methods/pocketeer/test_parity.py).
 - [External-tool catalogue and stewardship](../external_tools_catalog.md).
