@@ -11,10 +11,25 @@ from depdigest import dep_digest
 from topomt import Topography
 from topomt import pyunitwizard as puw
 from topomt._private.arg_digestion import arg_digest
-from topomt._private.arg_digestion.alphaspace2_arguments import OPTIONS
+from topomt._private.arg_digestion.alphaspace2_arguments import (
+    LIBRARY_PIPELINES,
+    OPTIONS,
+)
 from topomt.features import Pocket
 from topomt.provider_output import ExternalMeasurement, ProviderRun
-from topomt.third_party._common import import_upstream_module, prepare_wrapper_input_pdb
+from topomt.third_party._common import (
+    import_upstream_module,
+    installed_provider_version,
+    prepare_wrapper_input_pdb,
+    validate_single_frame_pdb,
+)
+from topomt.third_party.pdb_context import (
+    reference_chemical_context,
+    source_input_context,
+    validate_submitted_pdb,
+)
+
+from .output import _output_protocol
 
 
 def _snapshot_json_value(value):
@@ -108,7 +123,32 @@ def _initialize_unbound_contacts(snapshot) -> bool:
     return True
 
 
-@arg_digest(**OPTIONS)
+def _validate_loaded_coordinates(
+    trajectory: Any, indices: np.ndarray, context: dict[str, Any], role: str
+) -> None:
+    """Bind MDTraj's ordered nm rows to the admitted source frame.
+
+    No atom matching or alignment is inferred. The absolute tolerance covers
+    PDB's three-decimal angstrom rounding (0.000051 nm), and the relative
+    tolerance covers four float32 epsilons in MDTraj's coordinate conversion.
+    """
+    xyz = np.asarray(trajectory.xyz)
+    if xyz.shape != (1, len(indices), 3):
+        raise ValueError(
+            f'AlphaSpace2 {role} must contain a single frame and the submitted atom count.'
+        )
+    if not np.isfinite(xyz).all():
+        raise ValueError(f'AlphaSpace2 {role} coordinates must be finite.')
+    expected = np.asarray(context['coordinates']['value'], dtype=float)[indices]
+    if not np.allclose(
+        xyz[0], expected, rtol=4 * np.finfo(np.float32).eps, atol=0.000051
+    ):
+        raise ValueError(
+            f'AlphaSpace2 {role} loaded coordinates disagree with the source rows.'
+        )
+
+
+@arg_digest(**OPTIONS, map=LIBRARY_PIPELINES)
 @dep_digest('alphaspace2', when={'upstream_root': None})
 @dep_digest('mdtraj')
 def get_topography(
@@ -116,12 +156,14 @@ def get_topography(
     *,
     selection: str = 'all',
     structure_indices: int | list[int] = 0,
+    chemical_state: str | int = 'reference',
     syntax: str = 'MolSysMT',
     upstream_root: str | Path | None = None,
     min_vertices: int = 20,
     binder: Any | None = None,
     binder_selection: str = 'all',
     binder_structure_indices: int | list[int] = 0,
+    binder_chemical_state: str | int = 'reference',
     binder_syntax: str = 'MolSysMT',
     skip_digestion: bool = False,
 ) -> Topography:
@@ -135,6 +177,9 @@ def get_topography(
         Receptor atom selection in ``syntax``.
     structure_indices : int or list of int, default=0
         Receptor frame selection. The submitted structure must have one frame.
+    chemical_state : str or int, default='reference'
+        Existing unambiguous receptor reference state or its index. No reference
+        is changed and no chemistry is prepared or inferred here.
     syntax : str, default='MolSysMT'
         Receptor selection syntax.
     upstream_root : str or Path, optional
@@ -149,6 +194,9 @@ def get_topography(
         Binder atom selection in ``binder_syntax``.
     binder_structure_indices : int or list of int, default=0
         Binder frame selection. The submitted structure must have one frame.
+    binder_chemical_state : str or int, default='reference'
+        Existing unambiguous binder reference state or its index, independently
+        of the receptor. An explicit index requires a binder.
     binder_syntax : str, default='MolSysMT'
         Binder selection syntax.
     skip_digestion : bool, default=False
@@ -166,8 +214,9 @@ def get_topography(
         If an index axis, selection, route option or positive count is invalid.
         Argument admission precedes dependency loading and molecular conversion.
     ValueError
-        If an input has an empty selection, multiple frames, nonfinite
-        coordinates or an atom count incompatible with its selection.
+        If a reference state is absent, empty, ambiguous or conflicts with an
+        explicit index; or if a submitted frame, row map or loaded coordinate
+        axis disagrees with its source. Nonreference export is not substituted.
     TypeError
         If unsupported engine options are supplied.
     LibraryNotFoundError
@@ -177,6 +226,22 @@ def get_topography(
     --------
     >>> topography = get_topography('receptor.pdb', binder='ligand.pdb')
     """
+    chemical_context = reference_chemical_context(
+        molecular_system, chemical_state, provider='AlphaSpace2 receptor'
+    )
+    binder_chemical_context = (
+        None
+        if binder is None
+        else reference_chemical_context(
+            binder, binder_chemical_state, provider='AlphaSpace2 binder'
+        )
+    )
+    source_context = source_input_context(molecular_system, structure_indices)
+    binder_source_context = (
+        None
+        if binder is None
+        else source_input_context(binder, binder_structure_indices)
+    )
     with tempfile.TemporaryDirectory(prefix='topomt_alphaspace2_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
         input_pdb, selected_atom_indices = prepare_wrapper_input_pdb(
@@ -187,21 +252,15 @@ def get_topography(
             syntax=syntax,
         )
 
-        import mdtraj as md
-
-        upstream = import_upstream_module('alphaspace2', upstream_root=upstream_root)
-        _patch_alphaspace2_numpy_compatibility()
-        _patch_alphaspace2_mdtraj_sasa(upstream)
-        receptor = md.load(str(input_pdb))
-        if receptor.n_frames != 1:
-            raise ValueError('AlphaSpace2 receptor must contain a single frame.')
-        if not np.all(np.isfinite(receptor.xyz)):
-            raise ValueError('AlphaSpace2 receptor coordinates must be finite.')
-        if receptor.n_atoms != len(selected_atom_indices):
-            raise ValueError(
-                'AlphaSpace2 receptor atom count differs from the selected molecular '
-                'system; lining atoms cannot be mapped safely.'
-            )
+        validate_single_frame_pdb(input_pdb, provider='AlphaSpace2 receptor')
+        serial_map = validate_submitted_pdb(
+            molecular_system,
+            input_pdb,
+            selected_atom_indices,
+            selection=selection,
+            structure_indices=structure_indices,
+            syntax=syntax,
+        )
 
         binder_trajectory = None
         binder_metadata = None
@@ -216,15 +275,15 @@ def get_topography(
                 structure_indices=binder_structure_indices,
                 syntax=binder_syntax,
             )
-            binder_trajectory = md.load(str(binder_pdb))
-            if binder_trajectory.n_frames != 1:
-                raise ValueError('AlphaSpace2 binder must contain a single frame.')
-            if not np.all(np.isfinite(binder_trajectory.xyz)):
-                raise ValueError('AlphaSpace2 binder coordinates must be finite.')
-            if binder_trajectory.n_atoms != len(binder_atom_indices):
-                raise ValueError(
-                    'AlphaSpace2 binder atom count differs from its selection.'
-                )
+            validate_single_frame_pdb(binder_pdb, provider='AlphaSpace2 binder')
+            binder_serial_map = validate_submitted_pdb(
+                binder,
+                binder_pdb,
+                binder_atom_indices,
+                selection=binder_selection,
+                structure_indices=binder_structure_indices,
+                syntax=binder_syntax,
+            )
             binder_input_name = f'binder/{binder_pdb.name}'
             additional_inputs[binder_input_name] = binder_pdb
             binder_metadata = {
@@ -233,14 +292,40 @@ def get_topography(
                 'structure_indices': _snapshot_json_value(binder_structure_indices),
                 'syntax': binder_syntax,
                 'selected_atom_indices': binder_atom_indices.tolist(),
+                'atom_serial_to_index': {
+                    str(serial): index for serial, index in binder_serial_map.items()
+                },
+                'chemical_state_context': binder_chemical_context,
+                'source_context_artifact': 'output/topomt_binder_context.json',
             }
 
+        import mdtraj as md
+
+        receptor = md.load(str(input_pdb))
+        _validate_loaded_coordinates(
+            receptor, selected_atom_indices, source_context, 'receptor'
+        )
+        if binder_source_context is not None:
+            binder_trajectory = md.load(str(binder_pdb))
+            _validate_loaded_coordinates(
+                binder_trajectory, binder_atom_indices, binder_source_context, 'binder'
+            )
+        upstream = import_upstream_module('alphaspace2', upstream_root=upstream_root)
+        _patch_alphaspace2_numpy_compatibility()
+        _patch_alphaspace2_mdtraj_sasa(upstream)
         snapshot = upstream.Snapshot()
         snapshot.run(receptor, binder=binder_trajectory)
         unbound_contacts_initialized = _initialize_unbound_contacts(snapshot)
 
         output_dir = tmpdir / 'results'
         output_dir.mkdir()
+        (output_dir / 'topomt_source_context.json').write_text(
+            json.dumps(source_context, sort_keys=True, allow_nan=False)
+        )
+        if binder_source_context is not None:
+            (output_dir / 'topomt_binder_context.json').write_text(
+                json.dumps(binder_source_context, sort_keys=True, allow_nan=False)
+            )
         snapshot.save(
             output_dir=str(output_dir),
             receptor=receptor,
@@ -312,10 +397,17 @@ def get_topography(
             additional_inputs=additional_inputs,
             metadata={
                 'snapshot_source_sha256': source_sha256,
+                'distribution_version': installed_provider_version(upstream),
+                'output_protocol': _output_protocol(),
+                'source_context_artifact': 'output/topomt_source_context.json',
+                'chemical_state_context': chemical_context,
+                'atom_serial_to_index': {
+                    str(serial): index for serial, index in serial_map.items()
+                },
                 'unbound_contacts_initialized': unbound_contacts_initialized,
                 'receptor_input_artifact': f'input/{input_pdb.name}',
                 'binder': binder_metadata,
-                'selection': selection,
+                'selection': _snapshot_json_value(selection),
                 'structure_indices': _snapshot_json_value(structure_indices),
                 'syntax': syntax,
                 'min_vertices': min_vertices,

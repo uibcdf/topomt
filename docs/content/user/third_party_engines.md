@@ -389,6 +389,25 @@ independently of the receptor options. Select one frame explicitly, for example
 are handled by MolSysMT and the PDB/MDTraj conversion; AlphaSpace2's recorded
 default contact cutoff is 1.6 angstroms.
 
+`chemical_state='reference'` and `binder_chemical_state='reference'` refer to
+each source's existing, unambiguous MolSysMT reference. You can supply that
+reference's integer index, including a nonzero reference. An explicit binder
+state index requires a binder. Absent, empty, ambiguous and nonreference state
+requests are rejected before either input is exported. TopoMT records existing
+charges, bonds and completeness as provenance without preparing chemistry or
+changing either reference.
+
+Before the original detector is imported, the adapter verifies each submitted
+PDB's source map, unique serials, single frame and coordinates. The loaded
+MDTraj rows must also agree in their declared nm units, allowing PDB rounding
+and float32 conversion. There is no inferred atom matching or alignment.
+The bundle retains separate receptor/binder full-source identities and frame
+coordinates, chemical fingerprints and submitted serial maps. Snapshot fields
+and settings have an explicit output-unit protocol; unspecified score units
+remain unspecified. These records survive changes to the caller's sources.
+Bundle persistence is available through `output.run.save(...)`; source-bound
+reconstruction of `AlphaSpace2Output` from saved files is still pending.
+
 Pocket features expose `is_contact`, `alpha_contact`, `beta_contact`,
 `occupied_space`, `occupied_nonpolar_space`, `occupancy` and `occupancy_nonpolar`.
 Occupied quantities are sums of upstream alpha-space volumes labelled as contacts;

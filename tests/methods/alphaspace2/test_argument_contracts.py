@@ -5,10 +5,12 @@ import sys
 from pathlib import Path
 from types import SimpleNamespace
 
+import molsysmt as msm
 import numpy as np
 import pytest
 from argdigest import UnknownArgumentError
 
+from tests.methods.fpocket4.test_input_preparation import _pdb_frame
 from topomt._private.smonitor import ArgumentError
 from topomt.third_party.alphaspace2 import api, library, native
 
@@ -56,6 +58,14 @@ def forbidden(*args, **kwargs):
         ('binder_structure_indices', [0.0]),
         ('binder_syntax', 1),
         ('binder_syntax', 'unknown'),
+        ('chemical_state', True),
+        ('chemical_state', None),
+        ('chemical_state', -1),
+        ('chemical_state', 'structure'),
+        ('binder_chemical_state', True),
+        ('binder_chemical_state', None),
+        ('binder_chemical_state', -1),
+        ('binder_chemical_state', 'structure'),
         ('skip_digestion', 1),
     ],
 )
@@ -69,7 +79,7 @@ def test_original_arguments_fail_before_input_work(name, value, monkeypatch):
 
 @pytest.mark.parametrize('function', [api.get_output, library.get_topography])
 @pytest.mark.parametrize(
-    'option', ['min_verticies', 'binder_structures', 'chemical_state']
+    'option', ['min_verticies', 'binder_structures', 'chemical_states']
 )
 def test_unknown_options_are_rejected_by_argdigest(function, option, monkeypatch):
     monkeypatch.setattr(library, 'prepare_wrapper_input_pdb', forbidden)
@@ -136,21 +146,25 @@ def test_original_values_preserve_molecular_inputs_and_index_axes(
     pytest.importorskip('alphaspace2')
 
     pdb = tmp_path / 'input.pdb'
-    pdb.write_text(
-        'ATOM      1  CA  ALA A   1       0.000   0.000   0.000  1.00  0.00           C\nEND\n'
-    )
-    source, binder = object(), object()
+    pdb.write_text(_pdb_frame() + 'END\n')
+    source = msm.convert(pdb, to_form='molsysmt.MolSys')
+    frame_data = msm.convert(source, to_form='molsysmt.Structures')
+    msm.append_structures(source, frame_data)
+    msm.append_structures(source, frame_data)
+    binder = msm.copy(source)
     selection, frame = np.array([3]), np.array([1])
-    binder_selection, binder_frame = np.array([5]), np.array([2])
+    binder_selection, binder_frame = np.array([2]), np.array([2])
     preparations = []
     original_root = tmp_path / 'original'
 
     class ReachedProvider(Exception):
         pass
 
+    original_prepare = library.prepare_wrapper_input_pdb
+
     def prepare(value, **options):
         preparations.append((value, options))
-        return pdb, np.array([3 if value is source else 5])
+        return original_prepare(value, **options)
 
     class Snapshot:
         def run(self, receptor, binder):
@@ -187,10 +201,18 @@ def test_original_values_preserve_molecular_inputs_and_index_axes(
         )
         assert options['syntax'] == 'MolSysMT'
     np.testing.assert_array_equal(selection, [3])
-    np.testing.assert_array_equal(binder_selection, [5])
+    np.testing.assert_array_equal(binder_selection, [2])
 
 
-@pytest.mark.parametrize('field', ['min_vertices', 'binder_structure_indices'])
+@pytest.mark.parametrize(
+    'field',
+    [
+        'min_vertices',
+        'binder_structure_indices',
+        'chemical_state',
+        'binder_chemical_state',
+    ],
+)
 def test_argument_admission_does_not_import_optional_engines(field):
     script = """
 import importlib.abc
@@ -220,3 +242,9 @@ assert not attempts
         text=True,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_explicit_binder_state_requires_a_binder(monkeypatch):
+    monkeypatch.setattr(library, 'prepare_wrapper_input_pdb', forbidden)
+    with pytest.raises(ArgumentError, match='binder_chemical_state'):
+        library.get_topography(object(), binder_chemical_state=0)

@@ -7,10 +7,12 @@ from argdigest import register_pipeline
 from argdigest.core.context import Context
 
 from .external_arguments import (
+    _chemical_state,
     _error,
     _selection,
     _structure_indices,
     _syntax,
+    digest_chemical_state,
     digest_molecular_system,
     digest_selection,
     digest_skip_digestion,
@@ -26,6 +28,24 @@ def digest_binder(binder: Any, caller: str | None = None) -> Any:
     # None is an unbound snapshot; support of other molecular forms belongs to
     # MolSysMT at conversion, without changing or preparing the caller's input.
     return binder
+
+
+def digest_binder_chemical_state(
+    binder_chemical_state: Any, caller: str | None = None
+) -> str | int:
+    return _chemical_state(binder_chemical_state, 'binder_chemical_state', caller)
+
+
+@register_pipeline(kind='alphaspace2', name='binder_state')
+def check_binder_state(value: Any, context: Context) -> Any:
+    if context.all_args.get('binder') is None and value != 'reference':
+        _error(
+            'binder_chemical_state',
+            value,
+            context.function_name,
+            'An explicit binder state index requires a binder.',
+        )
+    return value
 
 
 def digest_binder_selection(binder_selection: Any, caller: str | None = None) -> Any:
@@ -79,12 +99,14 @@ def digest_skip(value: Any, context: Context) -> bool:
 
 ARGUMENT_DIGESTERS = {
     'molecular_system': digest_molecular_system,
+    'chemical_state': digest_chemical_state,
     'selection': digest_selection,
     'structure_indices': digest_structure_indices,
     'syntax': digest_syntax,
     'upstream_root': digest_upstream_root,
     'min_vertices': digest_min_vertices,
     'binder': digest_binder,
+    'binder_chemical_state': digest_binder_chemical_state,
     'binder_selection': digest_binder_selection,
     'binder_structure_indices': digest_binder_structure_indices,
     'binder_syntax': digest_binder_syntax,
@@ -104,4 +126,7 @@ GATEWAY_PIPELINES = {
 ORIGINAL_PIPELINES = {
     **GATEWAY_PIPELINES,
     'backend': {'kind': 'alphaspace2', 'rules': ['original_backend']},
+}
+LIBRARY_PIPELINES = {
+    'binder_chemical_state': {'kind': 'alphaspace2', 'rules': ['binder_state']},
 }
