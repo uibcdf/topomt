@@ -5,9 +5,10 @@ Original-provider fidelity remains [#19](https://github.com/uibcdf/topomt/issues
 The following dated source checkpoints retain their original producer and test
 scope. MolSysMT owns molecular representation and chemistry, TopoMT owns the
 original-result mapping and recovery, and PharmacophoreMT owns model construction.
-Prepared public PharmacophoreMT receiving now has a bounded source control;
-updated exact installed qualification remains next in the
-[provider plan](../provider_handoff_plan.md).
+The subsequent exact installed receiving on the new host is recorded separately
+in the [installed checkpoint](installed_receiving_checkpoint.md). The dated source
+stages below retain their original counts, next-step statements and limits;
+current continuation follows the [provider plan](../provider_handoff_plan.md).
 
 ## Original argument handoff, 2026-11-06
 

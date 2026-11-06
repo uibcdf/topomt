@@ -1,20 +1,22 @@
 # TopoMT development status
 
-Reviewed for machine migration on **2026-11-06**. This describes the local
-handoff baseline `87fd192b03f36b0e24a279450fab3c60620244bd` and its committed
-evidence. Read [the index](index.md) first, then use this page to choose the
-relevant contract, checkpoint and owning issue. Dated checkpoints retain their
-original producer, inputs and limits; documentation edits do not requalify them.
+The migration review on **2026-11-06** records the historical source baseline
+`87fd192b03f36b0e24a279450fab3c60620244bd`. Subsequent bounded installed receiving
+for published producer `5ae5c46` is recorded in the
+[AlphaSpace2 installed checkpoint](alphaspace2/installed_receiving_checkpoint.md).
+Read [the index](index.md) first, then use this page to choose the relevant
+contract, checkpoint and owning issue. Dated checkpoints retain their original
+producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
-The documentation review is committed at `f3ffa90`; the current user-authorized
-task publishes the development history and preserves local files in a separate
-verified ZIP before cleaning the checkout. The previous automated long-term
-implementation goal was stopped and cleared. The accepted
-[original-provider programme](provider_handoff_plan.md) remains a technical
-continuation plan, rather than an instruction to restart scientific work during
-migration.
+The migration publication is complete. The user selected the AlphaSpace2
+installed receiving continuation, now completed for the exact `5ae5c46`
+development candidate on this host. The qualification preserved the checkout's
+existing version-file edit. The earlier automated long-term goal remains
+stopped and cleared; this bounded result advances the accepted
+[original-provider programme](provider_handoff_plan.md). Its five-provider scope
+remains open under [#101](https://github.com/uibcdf/topomt/issues/101).
 
 At the pre-publication snapshot on 2026-11-06, GitHub had 62 open issues and no
 open pull requests; remote `main` was `0f82d5a`. The local scientific baseline
@@ -66,11 +68,11 @@ complementation, query placement, tolerances, essentiality, weights and native
 model persistence. Missing sibling capabilities go to their owner. ArgDigest,
 DepDigest, SMonitor and PyUnitWizard retain their registered responsibilities.
 
-| Provider | Committed bounded evidence | Continuation gap |
+| Provider | Recorded bounded evidence | Continuation gap |
 | --- | --- | --- |
 | fpocket | Original CLI/files, source/frame/reference-state guards, prepared public PharmacophoreMT receiving and source/installed receipts. See [overview](fpocket4/overview.md). | Preserve regressions; exhaustive fidelity and general qualification remain separate. |
 | Pocketeer | Original 0.4.0 argument/state contracts, engine-independent saved recovery and a prepared 46-site hydrophobic control. Producer `bb34e67` has a recorded 311-case installed qualification. See [consumer checkpoint](pocketeer/pharmacophore_handoff_checkpoint.md). | Preserve artifact/evidence identities and re-establish the receiving environment. |
-| AlphaSpace2 | Original 0.1.2 argument/source contracts, schema-1 recovery and prepared public receiving at `ce4708a`: 13 pockets, retained empty hydrophobic recognition and two explicitly projected donor sites from recognized acceptors. See [handoff checkpoint](alphaspace2/handoff_checkpoint.md). | Repeat and durably preserve updated exact installed qualification and dependency-origin checks; the later interrupted attempt has no committed installed receipt. |
+| AlphaSpace2 | Original 0.1.2 argument/source contracts, schema-1 recovery and prepared source receiving at `ce4708a`. The exact `5ae5c46` development wheel now passes 256 installed cases, both prepared unit-policy flows and independent engine-free recovery. See [installed checkpoint](alphaspace2/installed_receiving_checkpoint.md). | Preserve the exact candidate, evidence and regressions; exhaustive fidelity and general qualification remain separate. |
 | pyCASTA | Existing original adapter/output and retained JSON/files; [overview](pycasta/overview.md) and [contract](pycasta/contract.md). | Original argument/source/recovery and prepared consumer qualification. Native `1a6w` parity [#53](https://github.com/uibcdf/topomt/issues/53) is separate. |
 | CASTp/CASTpFold | Server/files integrations and original exports; [overview](castp/overview.md). Local modern closed-void measures have their own historical validation. | Original route/source fidelity and an explicit prepared consumer; local/native parity and residual memberships remain separate. |
 
@@ -80,8 +82,17 @@ cases that subsequently ran with the required executable variable. Original
 skips remain visible. Two complete source flows agree under pm/fs and nm/ps;
 saved public consumption works without AlphaSpace2 or MDTraj installed. These
 are declared analytical hypotheses on one historical prepared reference state,
-with no affinity or binding-site relevance claim. They do not qualify an updated
-installed package, another platform, current sibling mains or the full suite.
+with no affinity or binding-site relevance claim. Those historical source
+controls do not qualify an updated installed package, another platform, current
+sibling mains or the full suite.
+
+The new installed checkpoint separately verifies **256 executed passing cases**,
+two complete 13-pocket/two-site flows under pm/fs and nm/ps, and saved public
+consumption with AlphaSpace2 and MDTraj absent. It uses Linux/Python **3.14.10**
+and newly built wheels from MolSysMT `00abb958f` and PharmacophoreMT `b934471`.
+Evidence applies to those recorded source pins and candidate files; public-only
+acquisition and compatibility with current sibling mains retain separate gates.
+The next original-provider receiving gates are pyCASTA and CASTp/CASTpFold.
 
 Source, installed candidate and public delivery are distinct evidence classes.
 Historical temporary prefixes, wheels and `/tmp` or `/dev/shm` paths are not

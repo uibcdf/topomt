@@ -1,12 +1,13 @@
 # TopoMT development roadmap
 
-Reviewed for migration on **2026-11-06**. This is the ordered technical programme
-and its decision gates. [Status](status.md) describes implemented evidence;
+This ordered technical programme includes the migration review of
+**2026-11-06** and the completed bounded AlphaSpace2 installed receiving gate.
+[Status](status.md) describes implemented evidence;
 [the provider plan](provider_handoff_plan.md) defines receiving acceptance;
 [issue-backed queues](reporting_protocol.md) retain independently closable work.
-The current task is documentation, source publication and machine handoff. The
-previous automated implementation goal was cleared; the future sequence below
-does not restart it.
+The migration publication is complete, and the user selected the AlphaSpace2
+continuation recorded below. The earlier automated implementation goal remains
+cleared; the five-provider programme retains its unfinished gates.
 
 ## 1. Transfer a usable development baseline
 
@@ -34,22 +35,26 @@ output delivery #65 and its first consumer pilot #101. It does not reopen #65,
 finish every independent descriptor in #19, or require DFND before a provider
 can be consumed.
 
-On implementation resumption, use this order:
+The [AlphaSpace2 installed checkpoint](alphaspace2/installed_receiving_checkpoint.md)
+now records the exact `5ae5c46` development candidate: 256 installed cases, two
+prepared unit-policy flows and independent recovery without the original engines.
+It uses Linux/Python 3.14.10 and newly built wheels from MolSysMT `00abb958f` and
+PharmacophoreMT `b934471`. Preserve these exact files, origins and regressions;
+public-only acquisition and compatibility with current sibling mains retain
+separate gates.
 
-1. Re-establish and durably qualify an updated **exact installed AlphaSpace2
-   candidate**, dependency origins and prepared public-consumer route. Committed
-   source receiving exists; the subsequent interrupted installed attempt is not
-   a completed durable qualification.
-2. Qualify **pyCASTA's original** argument/source contracts, saved recovery and
+The remaining original-provider sequence is:
+
+1. Qualify **pyCASTA's original** argument/source contracts, saved recovery and
    explicit prepared public consumption. Preserve original ranking separately
    from the existing native adapter's volume-as-score choice. Native `1a6w`
    parity #53 remains its own acceptance problem.
-3. Qualify **CASTp/CASTpFold original** server/files routes, source correspondence
+2. Qualify **CASTp/CASTpFold original** server/files routes, source correspondence
    and explicit prepared consumption. Server reachability, retained export
    recovery and local numerical parity are distinct gates.
-4. Preserve fpocket/Pocketeer regressions, run combined receiving controls and
-   reconcile provider/fidelity records with delivered scope. Retain exact
-   package identities, selected tests, outcomes, omissions and scientific limits.
+3. Preserve fpocket/Pocketeer/AlphaSpace2 regressions, run combined receiving
+   controls and reconcile provider/fidelity records with delivered scope. Retain
+   exact package identities, selected tests, outcomes, omissions and scientific limits.
 
 For each provider, success includes original execution versus persisted recovery
 agreement, ordered IDs/memberships, result/source independence, source/frame and

@@ -1,9 +1,10 @@
 # Reproducible original-provider handoff plan
 
-Accepted technical direction: 2026-11-06. The previous automated development
-goal was subsequently paused and cleared. This plan preserves the intended
-scientific scope; it does not authorize resuming it. The current task is the
-developer-guide and machine-migration handoff.
+Accepted technical direction: 2026-11-06. The earlier automated development goal
+was paused and cleared during migration. The user subsequently selected the
+AlphaSpace2 installed receiving continuation, now completed within the bounded
+[installed checkpoint](alphaspace2/installed_receiving_checkpoint.md). This plan
+preserves the full five-provider scientific scope and its remaining gates.
 Owner for the first consumer pilots: [#101](https://github.com/uibcdf/topomt/issues/101).
 Provider fidelity remains [#19](https://github.com/uibcdf/topomt/issues/19);
 component qualification and full-suite backlog remain #16/#58. This plan is
@@ -56,17 +57,19 @@ changing another component.
 | --- | --- | --- |
 | fpocket | Original CLI/files, reference chemistry, prepared hydrophobic consumer and bounded installed receipts under `fpocket4/`; the current Pocketeer candidate repeats these controls. | Preserve regression coverage; broader fidelity and component gates retain their owners. |
 | Pocketeer | Public 0.4.0 original, argument/state and saved-reader controls; prepared public PharmacophoreMT receiving under both unit policies. Exact producer `bb34e67` also passes 311 installed cases without skips and two independent prepared flows in a new prefix. | Preserve the qualified candidate and regression evidence; general fidelity and component gates remain separate. |
-| AlphaSpace2 | Original argument/source and engine-free schema 1 recovery; prepared unbound public PharmacophoreMT receiving at `ce4708a` retains the zero-hydrophobic control and an explicit two-donor query from recognized acceptors. Two full flows agree under alternate units; 523 distinct affected cases have passing execution evidence. See its [handoff checkpoint](alphaspace2/handoff_checkpoint.md). | Updated exact installed qualification and dependency-origin verification. |
+| AlphaSpace2 | Historical source receiving at `ce4708a` retains its 523 distinct affected cases. Exact producer `5ae5c46` now has 256 passing installed cases, two complete 13-pocket/two-site flows under alternate units and independent engine-free recovery. See the [installed checkpoint](alphaspace2/installed_receiving_checkpoint.md). | Preserve the candidate and regressions; broader fidelity and component gates retain their owners. |
 | pyCASTA | Existing original adapter/output and retained JSON/files; current receiving qualification pending. | Review provider contracts, saved reconstruction and prepared consumer control. |
 | CASTp/CASTpFold | Existing server/files adapters and retained archive evidence. | Verify current route/context fidelity and qualify an explicit consumer profile. |
 
-The [prepared consumer checkpoint](pocketeer/pharmacophore_handoff_checkpoint.md)
-now also retains the exact installed-candidate receipt and its limits. Continue
-with AlphaSpace2's changed installed candidate. Its argument, source, saved-result
-and prepared public-consumer handoffs now have bounded source evidence against
-the pinned original and independent witnesses.
-Reuse the fpocket developer qualification recorder and PharmacophoreMT's public
-tools when extending that pilot; do not introduce a second recognition or model
-implementation. Resume implementation only as an explicitly selected task after
-the migration handoff. Completion still requires all five providers and the
-evidence above; the prepared AlphaSpace2 source control is not the full outcome.
+The AlphaSpace2 installed checkpoint records Linux/Python 3.14.10 receiving with
+new wheels from MolSysMT `00abb958f` and PharmacophoreMT `b934471`. Its source pins,
+candidate and executed controls retain their own identities. Public-only
+dependency acquisition and compatibility with current sibling mains remain
+separate from this result.
+
+Continue the technical sequence with pyCASTA's original contracts, saved recovery
+and prepared consumer, then CASTp/CASTpFold. Preserve the fpocket, Pocketeer and
+AlphaSpace2 regressions through the existing developer recorders and public
+PharmacophoreMT tools. Issue #101 remains open: completion requires all five
+providers and the evidence above, while exhaustive fidelity and general
+component qualification retain their separate gates.

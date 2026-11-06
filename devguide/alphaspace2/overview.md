@@ -1,7 +1,7 @@
 # AlphaSpace2 provider overview
 
-Reviewed: 2026-11-06 for prepared public PharmacophoreMT receiving. Scientific evidence dates
-are stated below; the historical native evidence retains its own scope.
+Reviewed for the new-host exact installed receiving gate. Scientific evidence
+dates are stated in the linked checkpoints; historical evidence retains its own scope.
 Role: integrated provider and comparison reference. Original receiving work is
 active under [#101](https://github.com/uibcdf/topomt/issues/101) and the
 [provider handoff plan](../provider_handoff_plan.md); native work retains the
@@ -63,8 +63,17 @@ features; the control preserves this negative result without expanding atoms.
 Two independent complete flows agree under alternate units, and saved public
 consumption works with both original engines absent. The affected selection has
 523 distinct executed passing cases, with its initial fpocket skips and explicit
-follow-up executions retained separately. Exact updated installed qualification
-is next; the source control establishes no binding relevance or affinity.
+follow-up executions retained separately.
+
+The [installed receiving checkpoint](installed_receiving_checkpoint.md) records
+bounded acceptance of the exact development wheel from producer `5ae5c46`:
+**256 passing installed cases**, both complete **13-pocket/two-site** unit-policy
+flows, and independent saved recovery with AlphaSpace2 and MDTraj absent. The
+new Linux/Python **3.14.10** profile uses newly built wheels from MolSysMT
+`00abb958f` and PharmacophoreMT `b934471`. Public-only acquisition,
+compatibility with current sibling mains and full component qualification retain
+separate gates. The declared query remains an analytical hypothesis; affinity and
+biological validation remain outside this evidence.
 
 ## Local implementation
 
@@ -89,6 +98,7 @@ bounded outcomes, not full-provider certification.
 - [Permanent AlphaSpace2 discussion #71](https://github.com/uibcdf/topomt/discussions/71) in External Tools.
 - [Original output inventory](external_output_inventory.md).
 - [Original provider handoff checkpoints](handoff_checkpoint.md).
+- [Exact installed receiving checkpoint](installed_receiving_checkpoint.md).
 - [Native checkpoint and numerical limits](native_checkpoint.md).
 - [Contract](contract.md).
 - [External-tool catalogue and stewardship](../external_tools_catalog.md).

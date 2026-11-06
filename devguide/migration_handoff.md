@@ -117,7 +117,8 @@ above already configures the ordinary remote correctly.
 
 ## Evidence that survives the transfer
 
-The committed `devguide/` inventory contains **18 evidence ZIPs**, totaling
+At the migration baseline, the committed `devguide/` inventory contained
+**18 evidence ZIPs**, totaling
 **30,332,025 compressed bytes**. The migration audit verified CRC, safe member
 paths and **971 payload hashes/sizes** against their manifests, with no errors.
 Archives use different historical manifest/sidecar schemas: `bytes` and `size`
@@ -182,10 +183,12 @@ That digest identifies a historical file; it cannot recreate it. The fpocket
 TopoMT wheels and the complete installed dependency prefixes also remain
 unavailable. A fresh build is a new candidate and requires its own qualification.
 
-The later AlphaSpace2 installed attempt after baseline `87fd192` has no committed
-installed checkpoint or retained candidate in this checkout. Conversation-only
-outcomes are not acceptance evidence. Its updated exact installed qualification
-remains pending, even though the preceding source control is durably archived.
+The interrupted AlphaSpace2 installed attempt after baseline `87fd192` had no
+committed installed checkpoint or retained candidate at migration. That
+historical attempt remains unqualified. A separate
+[new-host installed checkpoint](alphaspace2/installed_receiving_checkpoint.md)
+now records the newly built exact candidate, executed acceptance and durable
+wheel retention. It does not recover the missing historical wheel bytes.
 
 The [historical CASTp1 build recipe](castp/castp1_original_build.md) also depends
 on an external, modified Alphashape source tree and its local build helper.
