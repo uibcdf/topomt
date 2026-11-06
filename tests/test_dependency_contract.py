@@ -20,6 +20,19 @@ CORE_DEPENDENCIES = {
 }
 
 
+def test_argdigest_requires_the_qualified_dispatch_contract():
+    with open('pyproject.toml', 'rb') as file:
+        project = tomllib.load(file)['project']
+    requirement = next(
+        Requirement(value)
+        for value in project['dependencies']
+        if Requirement(value).name == 'argdigest'
+    )
+    assert '0.16.0' not in requirement.specifier
+    assert '0.17.0' in requirement.specifier
+    assert '0.18.0' in requirement.specifier
+
+
 def test_pyproject_declares_core_dependencies_and_extras():
     with open('pyproject.toml', 'rb') as file:
         pyproject = tomllib.load(file)

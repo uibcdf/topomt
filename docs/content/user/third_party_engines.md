@@ -151,6 +151,14 @@ existing APIs and separate parity gates. Contact/volume/score definitions remain
 specific to their original methods. No DFND calculation is required to use
 these outputs.
 
+TopoMT requires ArgDigest 0.17.0 or newer. `get_provider_output` validates `method`
+and `backend` through ArgDigest before
+importing a provider adapter. Names are case-insensitive; `fpocket4`, `castp3`
+and `castpfold` retain their aliases, and `backend=None` selects the default
+original route. Invalid types or incompatible routes raise a catalogued TopoMT
+argument error that is also catchable as `ValueError`. Molecular inputs and
+provider-specific keyword names and values remain owned by the selected adapter.
+
 ### Recover fpocket selections against the original source
 
 The CLI requires a nonempty atom selection and exactly one coordinate frame.

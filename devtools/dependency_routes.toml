@@ -36,10 +36,10 @@ id = "argdigest-base"
 name = "argdigest"
 role = "required-runtime"
 url = "https://github.com/uibcdf/argdigest"
-commit = "c604ce387fe60558ceb51a3016892e7a10686504"
+commit = "c7128f09b2fe064b6c5603d1077dbd2cec52223d"
 install = "pip-no-deps-git"
 input = "devtools/requirements/controlled_suite_dependencies.txt"
-reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+reason = "ArgDigest 0.17.0 dispatch contract; other scientific source pins remain unchanged"
 
 [[source_routes]]
 id = "molsysviewer-base"
@@ -95,10 +95,10 @@ id = "argdigest-3.14"
 name = "argdigest"
 role = "required-runtime"
 url = "https://github.com/uibcdf/argdigest"
-commit = "c604ce387fe60558ceb51a3016892e7a10686504"
+commit = "c7128f09b2fe064b6c5603d1077dbd2cec52223d"
 install = "pip-no-deps-git"
 input = "devtools/requirements/controlled_suite_dependencies_py314.txt"
-reason = "Original exact source input; inline MolSysMT command additionally bound by workflow hash"
+reason = "ArgDigest 0.17.0 dispatch contract; other scientific source pins remain unchanged"
 
 [[source_routes]]
 id = "molsysviewer-3.14"
@@ -122,12 +122,12 @@ reason = "Original exact source input; inline MolSysMT command additionally boun
 
 [[source_inputs]]
 path = "devtools/requirements/controlled_suite_dependencies.txt"
-sha256 = "5de12393a4d740c8e5c28e2ef6e6450da3958268422ae3a6e36e3cdc55874764"
+sha256 = "4d3c02510e7f3402489fb9cdbfb6ba72538d3bd77025f96afbe55ad9756f2264"
 reason = "Preserved actual pip --no-deps input"
 
 [[source_inputs]]
 path = "devtools/requirements/controlled_suite_dependencies_py314.txt"
-sha256 = "c59998b836f3abfada9aeb162315e147c5098e7eba6be0719107c7d9a734b54e"
+sha256 = "848fde64fc771fc0857ab3a8e346ee87654ac6b92d1823d390158f9d27efd3e5"
 reason = "Preserved actual pip --no-deps input"
 
 [[contexts]]

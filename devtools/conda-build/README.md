@@ -10,7 +10,7 @@ and optional environment operations separately pin additive SDK
 access remains unconfirmed. A changed wrapper reference is source adoption, not
 an executed candidate or delivered public package.
 
-The resource inventory covers **609 tracked files** across `topomt` and
+The resource inventory covers **613 runtime files** across `topomt` and
 `molsysviewer_topomt`, including the embedded version, runtime data/reference
 assets and the lazy viewer addon. Package discovery admits only these roots;
 SDK/tests namespaces cannot become wheel packages. Non-Python reference assets
@@ -35,9 +35,15 @@ bytes and digest; it neither rebuilds nor overwrites an occupied coordinate.
 Ordinary environment/source declarations, scientific source matrix, candidate
 build, installed artifact matrix and public receiving evidence are separate.
 The generalized @3 preflight covers nineteen routes, twelve source records/two
-unchanged manifests and seven contexts. Original older-minor/Python3.14 MolSysMT
+hash-bound manifests and seven contexts. Original older-minor/Python3.14 MolSysMT
 and Viewer pins and bootstrap overlays remain explicit. There is no inferred
 scientific API minimum or optional original-engine promotion to core runtime.
+
+Original-provider dispatch requires ArgDigest >=0.17.0. Both scientific source
+inputs pin its exact 0.17.0 commit `c7128f09b2fe064b6c5603d1077dbd2cec52223d`;
+other source pins remain unchanged. Its runtime source bytes match the qualified
+0.17.0+5 source used by the bounded receiving control. This is a consumed
+argument-contract requirement, not public environment or complete-CI qualification.
 
 `nglview` is removed from recipe/production runtime by explicit maintainer choice,
 retained as development/test/docs tooling. No other required scientific selector

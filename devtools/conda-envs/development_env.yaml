@@ -30,7 +30,7 @@ dependencies:
 - nbclient
 - matplotlib
 - mamba
-- argdigest
+- argdigest>=0.17.0
 - depdigest>=0.12.0
 - molsysmt
 - numba

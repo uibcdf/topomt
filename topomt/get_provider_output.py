@@ -3,9 +3,21 @@
 from importlib import import_module
 from typing import Any
 
+from ._private.arg_digestion import arg_digest
+from ._private.arg_digestion.provider_dispatch import (
+    ALIASES,
+    DEFAULT_BACKENDS,
+    PIPELINES,
+)
 from .third_party.output import ProviderOutput
 
 
+@arg_digest(
+    argument_digestion=False,
+    standardizer=None,
+    function_source='topomt._private.arg_digestion.function.provider_output',
+    map=PIPELINES,
+)
 def get_provider_output(
     molecular_system: Any = None,
     *,
@@ -36,7 +48,8 @@ def get_provider_output(
     Raises
     ------
     ValueError
-        If the provider method or original backend is unsupported.
+        If the provider method or original backend is invalid. Dispatch refusals
+        also inherit the catalogued TopoMT ArgumentError diagnostic.
     LibraryNotFoundError
         If a requested optional Python engine is absent.
 
@@ -45,20 +58,9 @@ def get_provider_output(
     >>> result = get_provider_output('protein.pdb', method='fpocket')  # doctest: +SKIP
     >>> spheres = result.pockets[0].geometries['alpha_spheres']  # doctest: +SKIP
     """
-    name = method.lower()
-    provider = {'fpocket4': 'fpocket', 'castp3': 'castp', 'castpfold': 'castp'}.get(
-        name, name
-    )
-    defaults = {
-        'fpocket': 'cli',
-        'pocketeer': 'library',
-        'alphaspace2': 'library',
-        'pycasta': 'library',
-        'castp': 'server',
-    }
-    if provider not in defaults:
-        raise ValueError(f'Unsupported provider method: {method!r}')
-    selected_backend = defaults[provider] if backend is None else backend.lower()
+    name = method
+    provider = ALIASES.get(name, name)
+    selected_backend = DEFAULT_BACKENDS[provider] if backend is None else backend
     if name in {'castp3', 'castpfold'}:
         if selected_backend == 'files':
             kwargs.setdefault('provider_server', name)
