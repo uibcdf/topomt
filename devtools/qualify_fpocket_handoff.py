@@ -10,8 +10,6 @@ import hashlib
 import json
 import shutil
 import tempfile
-from dataclasses import asdict
-from itertools import zip_longest
 from pathlib import Path
 from typing import Any
 
@@ -19,61 +17,21 @@ import molsysmt as msm
 import numpy as np
 
 import topomt as tmt
+from devtools.provider_handoff import (
+    chemical_state_context as _state_context,
+)
+from devtools.provider_handoff import (
+    pocket_outputs_agree as _same_output,
+)
+from devtools.provider_handoff import (
+    pocket_signature as _signature,
+)
+from devtools.provider_handoff import (
+    prepare_reference_source,
+)
 from topomt import pyunitwizard as puw
 from topomt.provider_output import ProviderRun
 from topomt.third_party.fpocket.output import FpocketOutput
-
-
-def _signature(output: FpocketOutput) -> list[dict[str, Any]]:
-    return [
-        {
-            'source_id': pocket.source_id,
-            'atom_indices': pocket.atom_indices,
-            'atom_role': pocket.atom_role,
-            'geometries': {
-                name: asdict(geometry) for name, geometry in pocket.geometries.items()
-            },
-            'measurements': {
-                name: {
-                    key: value
-                    for key, value in asdict(measurement).items()
-                    if key not in {'run_id', 'value'}
-                }
-                for name, measurement in pocket.measurements.items()
-            },
-        }
-        for pocket in output.pockets
-    ]
-
-
-def _state_context(source: Any) -> dict[str, int | None]:
-    return {
-        'count': source.chemical_states.n_chemical_states,
-        'reference_index': source.chemical_states.reference_chemical_state_index,
-    }
-
-
-def _same_output(left: FpocketOutput, right: FpocketOutput) -> bool:
-    first, second = _signature(left), _signature(right)
-    if len(first) != len(second):
-        return False
-    for a, b in zip(first, second):
-        if a['geometries'].keys() != b['geometries'].keys():
-            return False
-        for kind in a['geometries']:
-            for name in ('points_nm', 'radii_nm'):
-                x = a['geometries'][kind].pop(name)
-                y = b['geometries'][kind].pop(name)
-                if x is None or y is None:
-                    if x != y:
-                        return False
-                elif np.shape(x) != np.shape(y) or not np.allclose(
-                    x, y, rtol=0.0, atol=1e-12
-                ):
-                    return False
-    # Only physical geometry tolerates unit-conversion roundoff; membership,
-    # definitions and original reported measurements must still agree exactly.
-    return first == second
 
 
 def qualify(pdb_file: Path, fpocket_cmd: str, output_dir: Path) -> dict[str, Any]:
@@ -112,39 +70,8 @@ def qualify(pdb_file: Path, fpocket_cmd: str, output_dir: Path) -> dict[str, Any
         raise FileNotFoundError(
             f'Original fpocket executable unavailable: {fpocket_cmd}'
         )
-    source = msm.convert(pdb_file, to_form='molsysmt.MolSys')
-    if msm.get(source, n_structures=True) != 1:
-        raise ValueError('The pilot seed requires exactly one coordinate frame.')
-    protein = msm.select(source, selection="molecule_type in ['protein', 'peptide']")
-    auxiliary = sorted(set(range(msm.get(source, n_atoms=True))) - set(protein))
-    order = [
-        int(index)
-        for pair in zip_longest(protein, auxiliary)
-        for index in pair
-        if index is not None
-    ]
-    source = msm.permute_atoms(source, order)
-    selection = [
-        int(index)
-        for index in msm.select(
-            source, selection="molecule_type in ['protein', 'peptide']"
-        )
-    ]
+    source, selection = prepare_reference_source(pdb_file)
     nonconsecutive = bool(np.any(np.diff(np.asarray(selection, dtype=int)) > 1))
-    if not nonconsecutive or _state_context(source) != {
-        'count': 1,
-        'reference_index': 0,
-    }:
-        raise ValueError('Pilot requires nonconsecutive protein atoms and one state.')
-    second = msm.copy(source)
-    msm.set(
-        second,
-        coordinates=msm.get(second, coordinates=True)
-        + puw.quantity([0.3, -0.2, 0.1], 'nm'),
-    )
-    # Append only coordinates; historical interaction analyses do not describe
-    # a newly declared frame. The sole state provides its implicit association.
-    msm.append_structures(source, msm.convert(second, to_form='molsysmt.Structures'))
     output_dir.mkdir(parents=True, exist_ok=False)
     source_file = output_dir / 'source.h5msm'
     msm.convert(source, to_form='file:h5msm', output_filename=source_file)
