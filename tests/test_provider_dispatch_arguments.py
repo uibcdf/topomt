@@ -56,6 +56,7 @@ def test_incompatible_route_is_rejected_before_provider_import(
         ('POCKETEER', None, 'pocketeer', 'library', {}),
         ('pocketeer', 'FILES', 'pocketeer', 'files', {}),
         ('alphaspace2', None, 'alphaspace2', 'library', {}),
+        ('alphaspace2', 'FILES', 'alphaspace2', 'files', {}),
         ('pycasta', None, 'pycasta', 'library', {}),
         ('pycasta', 'wrapper', 'pycasta', 'wrapper', {}),
         ('CASTP', None, 'castp', 'server', {}),

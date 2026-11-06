@@ -11,7 +11,7 @@ not install them, and importing TopoMT does not import them.
 |---|---|---|---|
 | [fpocket](https://github.com/Discngine/fpocket) | `third_party.fpocket`, `backend='cli'` | `conda install -c conda-forge fpocket`; executable available on PATH, or supply `fpocket_cmd` | Persisted output loader; native implementation and TopoMT variant. Native equivalence is under validation. |
 | [Pocketeer](https://github.com/cch1999/pocketeer) | `third_party.pocketeer`, `backend='library'` | `python -m pip install pocketeer`; upstream installs Biotite, atomview and its other requirements | Native implementation needs Biotite, but does not require Pocketeer. Native equivalence is under validation. |
-| [AlphaSpace2](https://github.com/RedesignScience/AlphaSpace2) | `third_party.alphaspace2`, `backend='library'` | `python -m pip install alphaspace2`; upstream requires MDTraj, SciPy, Cython and configargparser | Native implementation; library adapter accepts a receptor and an optional ligand at a known position. Vina receptor typing is not exposed yet. Compatibility adjustments cover NumPy, the MDTraj SASA signature, and missing unbound contact arrays in PyPI 0.1.2. |
+| [AlphaSpace2](https://github.com/RedesignScience/AlphaSpace2) | `third_party.alphaspace2`, `backend='library'` | `python -m pip install alphaspace2`; upstream requires MDTraj, SciPy, Cython and configargparser | Saved original-output reader without AlphaSpace2/MDTraj; native implementation; library adapter accepts a receptor and optional positioned ligand. Vina receptor typing is not exposed yet. Compatibility adjustments cover NumPy, MDTraj SASA and missing unbound contact arrays in PyPI 0.1.2. |
 | [pyCASTA](https://github.com/giorgioluciano/pycasta) | `third_party.pycasta`, `backend='library'` | `python -m pip install pycasta biopandas colorama`; the published package omits these last two runtime requirements | Native implementation. The original runs in an isolated subprocess using its installed scripts and configuration. Optional PyMOL/FreeSASA functions have their own upstream requirements. |
 | CASTp 3.0 | `third_party.castp`, `backend='server', server='castp3'` | Network access to the public server; no CASTp Python package to install | Persisted result loader. Server availability and job completion are independent of local dependencies. Local CASTp methods remain experimental. |
 | CASTpFold | `third_party.castp`, `backend='server', server='castpfold'` | Network access to the public server; no CASTpFold Python package to install | Persisted result loader and experimental native CASTp routes. |
@@ -406,7 +406,27 @@ coordinates, chemical fingerprints and submitted serial maps. Snapshot fields
 and settings have an explicit output-unit protocol; unspecified score units
 remain unspecified. These records survive changes to the caller's sources.
 Bundle persistence is available through `output.run.save(...)`; source-bound
-reconstruction of `AlphaSpace2Output` from saved files is still pending.
+reconstruction uses the original full sources, for example:
+
+```python
+restored = tmt.get_provider_output(
+    'receptor.h5msm', method='alphaspace2', backend='files',
+    binder='binder.h5msm', bundle_file='original_alphaspace2.zip',
+)
+```
+
+Save the full sources through MolSysMT alongside the original bundle. Omit
+`binder` for an unbound original run; supply its full source for a bound run.
+This reader imports neither AlphaSpace2 nor MDTraj and retains the original
+library run, artifact bytes, pocket order/IDs, memberships and attributed fields.
+Selections, frames, references and `min_vertices` come from the run and cannot
+be overridden. Unknown snapshot schemas, ambiguous JSON keys, missing unit
+protocols or inconsistent source maps are rejected. Source coordinate agreement
+uses 1e-12 nm; submitted PDB rows retain their 0.00051 angstrom tolerance.
+Undefined occupancy markers remain undefined, and a recorded filter can yield
+an available empty result. Recovered data are detached from the sources and
+bundle path. Older runs without the required source context remain readable
+as `ProviderRun` evidence but cannot reconstruct a source-bound output.
 
 Pocket features expose `is_contact`, `alpha_contact`, `beta_contact`,
 `occupied_space`, `occupied_nonpolar_space`, `occupancy` and `occupancy_nonpolar`.

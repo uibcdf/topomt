@@ -130,7 +130,7 @@ def get_output(
     molecular_system : molecular system, optional
         MolSysMT-compatible source input.
     backend : str, default='library'
-        Original route: library or wrapper. Local reproductions are not substituted.
+        Original route: library, wrapper or saved files.
     skip_digestion : bool, default=False
         Internal bypass for already admitted routing arguments.
     **kwargs
@@ -158,6 +158,10 @@ def get_output(
     """
     from topomt.third_party.output import _from_topography
 
+    if backend.lower() == 'files':
+        from .files import load_output
+
+        return load_output(molecular_system, **kwargs)
     if backend.lower() not in {'library', 'wrapper'}:
         raise ValueError(f'Unsupported original AlphaSpace2 backend: {backend!r}')
     return _from_topography(

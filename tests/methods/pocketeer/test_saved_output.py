@@ -439,3 +439,37 @@ def test_bundle_checksum_is_verified(bundle, source_profile, tmp_path):
         tmt.get_provider_output(
             source_profile[0], method='pocketeer', backend='files', bundle_file=tampered
         )
+
+
+@pytest.mark.parametrize('field', ['reference_index', 'state_count'])
+def test_saved_chemical_context_rejects_numerically_equal_wrong_types(
+    reference_output, source_profile, tmp_path, field
+):
+    def mutate(metadata, artifacts):
+        metadata['chemical_state_context'][field] = float(
+            metadata['chemical_state_context'][field]
+        )
+
+    path = _rewrite(reference_output.run, tmp_path, mutate)
+    with pytest.raises(ValueError, match='chemical'):
+        tmt.get_provider_output(
+            source_profile[0], method='pocketeer', backend='files', bundle_file=path
+        )
+
+
+def test_saved_coordinate_payload_rejects_numeric_strings(
+    reference_output, source_profile, tmp_path
+):
+    def mutate(metadata, artifacts):
+        name = 'output/topomt_source_context.json'
+        context = json.loads(artifacts[name])
+        context['coordinates']['value'][0][0] = str(
+            context['coordinates']['value'][0][0]
+        )
+        artifacts[name] = json.dumps(context).encode()
+
+    path = _rewrite(reference_output.run, tmp_path, mutate)
+    with pytest.raises(ValueError, match='context'):
+        tmt.get_provider_output(
+            source_profile[0], method='pocketeer', backend='files', bundle_file=path
+        )

@@ -87,7 +87,7 @@ def test_unknown_options_are_rejected_by_argdigest(function, option, monkeypatch
         function(object(), **{option: 3})
 
 
-@pytest.mark.parametrize('backend', [None, True, 1, 'native', 'cli', 'files'])
+@pytest.mark.parametrize('backend', [None, True, 1, 'native', 'cli'])
 def test_original_route_is_admitted_before_delegation(backend, monkeypatch):
     monkeypatch.setattr(api, 'get_topography', forbidden)
     with pytest.raises(ArgumentError, match='backend'):

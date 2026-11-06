@@ -18,7 +18,7 @@ from topomt.provider_output import ProviderRun
 from topomt.third_party._common import validate_single_frame_pdb
 from topomt.third_party.output import _from_topography
 from topomt.third_party.pdb_context import (
-    reference_chemical_context,
+    validate_reference_chemical_context,
     validate_source_input_context,
     validate_submitted_pdb,
 )
@@ -112,15 +112,9 @@ def load_output(
     selection = digest_selection(metadata['selection'], caller=FILES_CALLER)
     frame = digest_structure_indices(metadata['structure_indices'], caller=FILES_CALLER)
     syntax = digest_syntax(metadata['syntax'], caller=FILES_CALLER)
-    chemical = metadata['chemical_state_context']
-    if not isinstance(chemical, dict) or type(chemical.get('index')) is not int:
-        raise ValueError('Invalid Pocketeer saved chemical-state context.')
-    if chemical != reference_chemical_context(
-        molecular_system, chemical['index'], provider='Pocketeer'
-    ):
-        raise ValueError(
-            'Source chemical-state context disagrees with the saved Pocketeer run.'
-        )
+    validate_reference_chemical_context(
+        molecular_system, metadata['chemical_state_context'], provider='Pocketeer'
+    )
     source_context = _read_json(_artifact(run, 'output/topomt_source_context.json'))
     if not isinstance(source_context, dict):
         raise ValueError('Invalid Pocketeer saved source context.')

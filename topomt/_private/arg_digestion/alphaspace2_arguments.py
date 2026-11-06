@@ -1,6 +1,7 @@
 """Original AlphaSpace2 adapter argument contracts, independent of its engine."""
 
 from numbers import Integral
+from pathlib import Path
 from typing import Any
 
 from argdigest import register_pipeline
@@ -14,6 +15,7 @@ from .external_arguments import (
     _syntax,
     digest_chemical_state,
     digest_molecular_system,
+    digest_path,
     digest_selection,
     digest_skip_digestion,
     digest_structure_indices,
@@ -22,6 +24,11 @@ from .external_arguments import (
 )
 
 API_CALLER = 'topomt.third_party.alphaspace2.api.get_output'
+FILES_CALLER = 'topomt.third_party.alphaspace2.files.load_output'
+
+
+def digest_bundle_file(bundle_file: Any, caller: str | None = None) -> Path:
+    return digest_path(bundle_file, 'bundle_file', caller)
 
 
 def digest_binder(binder: Any, caller: str | None = None) -> Any:
@@ -76,10 +83,13 @@ def digest_min_vertices(min_vertices: Any, caller: str | None = None) -> int:
 
 @register_pipeline(kind='alphaspace2', name='original_backend')
 def digest_original_backend(value: Any, context: Context) -> str:
-    if isinstance(value, str) and value.lower() in {'library', 'wrapper'}:
+    if isinstance(value, str) and value.lower() in {'library', 'wrapper', 'files'}:
         return value.lower()
     _error(
-        'backend', value, API_CALLER, 'Expected library or wrapper for original output.'
+        'backend',
+        value,
+        API_CALLER,
+        'Expected library, wrapper or files for original output.',
     )
 
 
@@ -99,6 +109,7 @@ def digest_skip(value: Any, context: Context) -> bool:
 
 ARGUMENT_DIGESTERS = {
     'molecular_system': digest_molecular_system,
+    'bundle_file': digest_bundle_file,
     'chemical_state': digest_chemical_state,
     'selection': digest_selection,
     'structure_indices': digest_structure_indices,

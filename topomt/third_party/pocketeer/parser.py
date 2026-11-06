@@ -1,10 +1,11 @@
 """Read Pocketeer's original JSON and TopoMT's explicit mask supplement."""
 
-import json
 from types import SimpleNamespace
 from typing import Any, NoReturn
 
 import numpy as np
+
+from topomt.third_party._saved_json import read_json
 
 
 def _invalid(field: str) -> NoReturn:
@@ -13,22 +14,7 @@ def _invalid(field: str) -> NoReturn:
 
 def _read_json(data: bytes) -> Any:
     """Read JSON while rejecting ambiguous duplicate keys and nonfinite constants."""
-
-    def pairs(items):
-        result = {}
-        for key, value in items:
-            if key in result:
-                _invalid(f'duplicate JSON key {key}')
-            result[key] = value
-        return result
-
-    def constant(value):
-        _invalid(f'nonfinite JSON constant {value}')
-
-    try:
-        return json.loads(data, object_pairs_hook=pairs, parse_constant=constant)
-    except (UnicodeError, json.JSONDecodeError) as error:
-        raise ValueError('Invalid Pocketeer saved JSON.') from error
+    return read_json(data, provider='Pocketeer')
 
 
 def _integer(value: Any, field: str, *, nonnegative: bool = True) -> int:

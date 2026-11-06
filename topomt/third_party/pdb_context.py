@@ -106,6 +106,63 @@ _ATOM_ATTRIBUTES = (
 )
 
 
+def validate_reference_chemical_context(
+    molecular_system: Any, context: Any, *, provider: str
+) -> None:
+    """Require the exact saved reference schema and public source chemistry.
+
+    Integer fields reject booleans/floats before comparing the source. This
+    prevents Python's numerically equal values from disguising malformed JSON.
+
+    Parameters
+    ----------
+    molecular_system : MolSysMT-compatible input
+        Full source whose existing reference state is compared.
+    context : dict
+        Exact recorded index/reference/count/ID and chemistry digest schema.
+    provider : str
+        Provider name used in disagreement diagnostics.
+
+    Returns
+    -------
+    None
+        Saved typed values and public source facts agree.
+
+    Raises
+    ------
+    ValueError
+        If the saved schema, selector or source chemistry disagrees. No state
+        is prepared, inferred or changed to obtain agreement.
+    """
+    keys = {
+        'index',
+        'reference_index',
+        'state_count',
+        'state_id',
+        'pdb_chemistry_sha256',
+    }
+    if (
+        not isinstance(context, dict)
+        or set(context) != keys
+        or any(
+            type(context[k]) is not int
+            for k in ('index', 'reference_index', 'state_count')
+        )
+        or not 0
+        <= context['index']
+        == context['reference_index']
+        < context['state_count']
+    ):
+        raise ValueError(f'Invalid {provider} saved chemical-state context.')
+    actual = reference_chemical_context(
+        molecular_system, context['index'], provider=provider
+    )
+    if json.dumps(context, sort_keys=True) != json.dumps(actual, sort_keys=True):
+        raise ValueError(
+            f'Source chemical-state context disagrees with the saved {provider} run.'
+        )
+
+
 def source_input_context(
     molecular_system: Any, structure_indices: Any
 ) -> dict[str, Any]:
@@ -204,12 +261,21 @@ def validate_source_input_context(
             or context['schema_version'] != 1
             or type(context['n_atoms']) is not int
             or context['n_atoms'] != actual['n_atoms']
-            or context['atom_attributes'] != actual['atom_attributes']
+            or json.dumps(context['atom_attributes'], sort_keys=True)
+            != json.dumps(actual['atom_attributes'], sort_keys=True)
             or set(context['coordinates']) != {'value', 'unit'}
             or context['coordinates']['unit'] != 'nm'
         ):
             raise ValueError('Source atom context disagrees with the saved run.')
-        saved = np.asarray(context['coordinates']['value'], dtype=float)
+        values = context['coordinates']['value']
+        if not isinstance(values, list) or any(
+            not isinstance(row, list)
+            or len(row) != 3
+            or any(type(value) not in (int, float) for value in row)
+            for row in values
+        ):
+            raise ValueError('Invalid saved source context coordinate types.')
+        saved: np.ndarray = np.asarray(values, dtype=float)
         current = np.asarray(actual['coordinates']['value'], dtype=float)
         if (
             saved.shape != current.shape
@@ -217,7 +283,7 @@ def validate_source_input_context(
             or not np.allclose(saved, current, rtol=0, atol=1e-12)
         ):
             raise ValueError('Source coordinates disagree with the saved context.')
-    except (KeyError, TypeError) as error:
+    except (KeyError, TypeError, OverflowError) as error:
         raise ValueError('Invalid saved source context.') from error
 
 

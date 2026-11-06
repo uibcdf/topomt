@@ -6,11 +6,15 @@ from argdigest import Domain
 
 
 def _options() -> tuple[str, ...]:
+    from topomt.third_party.alphaspace2.files import load_output
     from topomt.third_party.alphaspace2.library import get_topography
 
     return tuple(
         sorted(
-            set(signature(get_topography).parameters)
+            (
+                set(signature(get_topography).parameters)
+                | set(signature(load_output).parameters)
+            )
             - {'molecular_system', 'skip_digestion'}
         )
     )
