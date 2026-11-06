@@ -1,16 +1,18 @@
 from typing import Any
 
 from topomt._private.arg_digestion import arg_digest
-from topomt._private.arg_digestion.fpocket_arguments import OPTIONS
+from topomt._private.arg_digestion.fpocket_arguments import GATEWAY_PIPELINES, OPTIONS
 from topomt.topography.Topography import Topography
 
 from .output import FpocketOutput
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=GATEWAY_PIPELINES)
 def get_topography(
     molecular_system,
     *,
     backend: str = 'cli',
+    skip_digestion: bool = False,
     **kwargs,
 ) -> Topography:
     """Return a Topography through the selected fpocket backend."""
@@ -37,10 +39,12 @@ def get_topography(
     )
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=GATEWAY_PIPELINES)
 def get_pockets(
     molecular_system,
     *,
     backend: str = 'cli',
+    skip_digestion: bool = False,
     **kwargs,
 ):
     """Return fpocket-derived pocket features from the selected backend."""
@@ -48,11 +52,13 @@ def get_pockets(
     topography = get_topography(
         molecular_system,
         backend=backend,
+        skip_digestion=True,
         **kwargs,
     )
     return list(topography.get_features(by='type', value='pocket'))
 
 
+@arg_digest(**OPTIONS, argument_digestion=False)
 def load_topography(
     molecular_system,
     *,
@@ -75,12 +81,16 @@ def load_topography(
 @arg_digest(
     **OPTIONS,
     argument_digestion=False,
-    map={'backend': {'kind': 'fpocket', 'rules': ['backend']}},
+    map={
+        'backend': {'kind': 'fpocket', 'rules': ['backend']},
+        'skip_digestion': {'kind': 'fpocket', 'rules': ['skip']},
+    },
 )
 def get_output(
     molecular_system: Any = None,
     *,
     backend: str = 'cli',
+    skip_digestion: bool = False,
     **kwargs: Any,
 ) -> FpocketOutput:
     """Return original fpocket results with shared pocket access.
@@ -91,6 +101,8 @@ def get_output(
         MolSysMT-compatible source input.
     backend : str, default='cli'
         Original route: cli, wrapper or files. Local reproductions are not substituted.
+    skip_digestion : bool, default=False
+        Internal bypass for already digested arguments.
     **kwargs
         Execution/import options documented by the corresponding legacy adapter,
         including selection, structure_indices and provider-specific settings.
@@ -120,7 +132,9 @@ def get_output(
             molecular_system = kwargs.get('pdb_file')
         topography = load_topography(molecular_system, **kwargs)
     elif backend in {'cli', 'wrapper'}:
-        topography = get_topography(molecular_system, backend=backend, **kwargs)
+        topography = get_topography(
+            molecular_system, backend=backend, skip_digestion=True, **kwargs
+        )
     else:
         raise ValueError(f'Unsupported original fpocket backend: {backend!r}')
     return _from_topography(topography, FpocketOutput)

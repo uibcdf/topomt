@@ -171,6 +171,13 @@ arrays and the original submitted-row order remain supported.
 Additional `provider_metadata` may annotate a run, but cannot replace the adapter's
 selection, frame, syntax, atom map or chemical-context fields.
 
+The public fpocket `get_topography` and `get_pockets` gateways also digest their
+case-insensitive `backend` through ArgDigest. They retain `cli` (default),
+`wrapper`, `native` and `topomt`; `files` recovery uses `load_topography` or
+`get_output(backend='files')`. The public file wrapper admits the owning loader's
+option names and delegates value digestion to it. Native and variant options
+remain owned by those backends; routing validation does not qualify their parity.
+
 ### Recover fpocket selections against the original source
 
 The CLI requires a nonempty atom selection and exactly one coordinate frame.

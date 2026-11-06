@@ -18,3 +18,17 @@ domain = Domain(
     members=_members,
     description='Union of original CLI/files option names; each closed leaf enforces its own signature.',
 )
+
+
+def _file_members() -> tuple[str, ...]:
+    from topomt.third_party.fpocket.files import load_topography
+
+    return tuple(
+        sorted(
+            set(signature(load_topography).parameters)
+            - {'molecular_system', 'skip_digestion'}
+        )
+    )
+
+
+DOMAINS = [Domain(name='fpocket_file_options', members=_file_members)]

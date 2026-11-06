@@ -247,6 +247,34 @@ def digest_api_backend(value: Any, context: Context) -> str:
     return digest_backend(value, caller=API_CALLER)
 
 
+@register_pipeline(kind='fpocket', name='gateway_backend')
+def digest_gateway_backend(value: Any, context: Context) -> str:
+    if isinstance(value, str) and value.lower() in {
+        'cli',
+        'wrapper',
+        'native',
+        'topomt',
+    }:
+        return value.lower()
+    _error(
+        'backend',
+        value,
+        context.function_name,
+        'Expected cli, wrapper, native or topomt.',
+    )
+
+
+@register_pipeline(kind='fpocket', name='skip')
+def digest_gateway_skip(value: Any, context: Context) -> bool:
+    return digest_skip_digestion(value, caller=context.function_name)
+
+
+GATEWAY_PIPELINES = {
+    'backend': {'kind': 'fpocket', 'rules': ['gateway_backend']},
+    'skip_digestion': {'kind': 'fpocket', 'rules': ['skip']},
+}
+
+
 ARGUMENT_DIGESTERS = {
     'backend': digest_backend,
     'molecular_system': digest_molecular_system,
