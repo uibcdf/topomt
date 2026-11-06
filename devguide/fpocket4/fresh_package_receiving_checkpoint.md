@@ -106,3 +106,8 @@ interpreter/OS, a Conda candidate, full scientific or hosted gates, other Python
 minors, macOS arm64, or complete argument-contract coverage. The human version
 edit, principal environments, sibling worktrees and project dependencies remain
 unchanged. No remote publication, issue closure or support claim follows.
+
+The subsequent [ArgDigest dispatch stage](argdigest_dispatch_checkpoint.md)
+implements method/backend admission in a new candidate and records 65 installed
+passing cases. The earlier artifacts and audit above retain their original
+identities; the direct-provider boundary migration remains incomplete.

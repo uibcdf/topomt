@@ -1,0 +1,36 @@
+{
+  "schema": "topomt.argdigest-dispatch-evidence@1",
+  "archive": "argdigest_dispatch_20261105.zip",
+  "size": 1527628,
+  "sha256": "8bad9ad7c8ef7aea5eda2c43eb38c98bc584497bd66c9e54bd2d4e64ce95f0d2",
+  "members": 54,
+  "producer": "f7f4947d1cf216d06216242bbf8823bd938978c0",
+  "wheels": [
+    {
+      "name": "argdigest",
+      "filename": "argdigest-0.17.0-py3-none-any.whl",
+      "size": 60713,
+      "sha256": "b9583ddc9a7c78c97cb805b05dc1117846fd033883f6404c0ac3656095d62b12",
+      "producer": "c7128f09b2fe064b6c5603d1077dbd2cec52223d"
+    },
+    {
+      "name": "topomt",
+      "filename": "topomt-0.5.0+340.gf7f4947.dirty-py3-none-any.whl",
+      "size": 21566605,
+      "sha256": "951197a753fb8f45a21584bfb87e6f465f0305c81509ddda6c1eb478878dfd5f",
+      "producer": "f7f4947d1cf216d06216242bbf8823bd938978c0"
+    }
+  ],
+  "installed": {
+    "passed": 65,
+    "skipped": 0,
+    "failed": 0,
+    "elapsed_seconds": 39.96,
+    "runtime_distributions": 138,
+    "record_hashes_before_and_after": 26213,
+    "suite_record_hashes_before_and_after": 5120
+  },
+  "scope": "ArgDigest admission of method/backend at get_provider_output only; provider keyword/value and direct-adapter coverage remain separate.",
+  "artifact_retention": "/dev/shm/topomt-installed-101.bch3yxd8/dispatch/wheels",
+  "limits": "Independent installed packages on Linux x86_64/Python 3.14; existing interpreter/OS and pinned local suite inputs. No full hosted/Conda/public qualification."
+}
