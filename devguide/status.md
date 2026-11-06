@@ -2,17 +2,18 @@
 
 The migration review on **2026-11-06** records the historical source baseline
 `87fd192b03f36b0e24a279450fab3c60620244bd`. Subsequent bounded installed receiving
-for published producer `5ae5c46` is recorded in the
-[AlphaSpace2 installed checkpoint](alphaspace2/installed_receiving_checkpoint.md).
+is recorded in the [AlphaSpace2 checkpoint](alphaspace2/installed_receiving_checkpoint.md)
+for producer `5ae5c46` and the [pyCASTA checkpoint](pycasta/installed_receiving_checkpoint.md)
+for local producer `02a38be`.
 Read [the index](index.md) first, then use this page to choose the relevant
 contract, checkpoint and owning issue. Dated checkpoints retain their original
 producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
-The migration publication is complete. The user selected the AlphaSpace2
-installed receiving continuation, now completed for the exact `5ae5c46`
-development candidate on this host. The qualification preserved the checkout's
+The migration publication is complete. Subsequent user-selected AlphaSpace2
+and pyCASTA receiving are completed for their exact `5ae5c46` and `02a38be`
+development candidates on this host. The qualification preserved the checkout's
 existing version-file edit. The earlier automated long-term goal remains
 stopped and cleared; this bounded result advances the accepted
 [original-provider programme](provider_handoff_plan.md). Its five-provider scope
@@ -73,7 +74,7 @@ DepDigest, SMonitor and PyUnitWizard retain their registered responsibilities.
 | fpocket | Original CLI/files, source/frame/reference-state guards, prepared public PharmacophoreMT receiving and source/installed receipts. See [overview](fpocket4/overview.md). | Preserve regressions; exhaustive fidelity and general qualification remain separate. |
 | Pocketeer | Original 0.4.0 argument/state contracts, engine-independent saved recovery and a prepared 46-site hydrophobic control. Producer `bb34e67` has a recorded 311-case installed qualification. See [consumer checkpoint](pocketeer/pharmacophore_handoff_checkpoint.md). | Preserve artifact/evidence identities and re-establish the receiving environment. |
 | AlphaSpace2 | Original 0.1.2 argument/source contracts, schema-1 recovery and prepared source receiving at `ce4708a`. The exact `5ae5c46` development wheel now passes 256 installed cases, both prepared unit-policy flows and independent engine-free recovery. See [installed checkpoint](alphaspace2/installed_receiving_checkpoint.md). | Preserve the exact candidate, evidence and regressions; exhaustive fidelity and general qualification remain separate. |
-| pyCASTA | Existing original adapter/output and retained JSON/files; [overview](pycasta/overview.md) and [contract](pycasta/contract.md). | Original argument/source/recovery and prepared consumer qualification. Native `1a6w` parity [#53](https://github.com/uibcdf/topomt/issues/53) is separate. |
+| pyCASTA | Original 1.0.8 source-bound execution and saved recovery. Exact `02a38be` has 217 passing installed cases, two complete five-pocket/four-site flows and independent engine-free receiving. See the [installed checkpoint](pycasta/installed_receiving_checkpoint.md). | Preserve the exact candidate and regressions; native `1a6w` parity [#53](https://github.com/uibcdf/topomt/issues/53), exhaustive fidelity and component qualification remain separate. |
 | CASTp/CASTpFold | Server/files integrations and original exports; [overview](castp/overview.md). Local modern closed-void measures have their own historical validation. | Original route/source fidelity and an explicit prepared consumer; local/native parity and residual memberships remain separate. |
 
 The AlphaSpace2 prepared-source checkpoint retains passing execution evidence
@@ -92,7 +93,12 @@ consumption with AlphaSpace2 and MDTraj absent. It uses Linux/Python **3.14.10**
 and newly built wheels from MolSysMT `00abb958f` and PharmacophoreMT `b934471`.
 Evidence applies to those recorded source pins and candidate files; public-only
 acquisition and compatibility with current sibling mains retain separate gates.
-The next original-provider receiving gates are pyCASTA and CASTp/CASTpFold.
+The pyCASTA checkpoint separately records 217 passing installed cases and four
+explicit hydrophobic query sites from the first original pocket, reproduced in
+two complete unit-policy flows and with the engine absent. Its exact candidate,
+worker-source evidence, raw integrity findings and reconstruction inputs are
+durably retained. These counts overlap source controls and are not additive
+coverage. The next original-provider receiving gate is CASTp/CASTpFold.
 
 Source, installed candidate and public delivery are distinct evidence classes.
 Historical temporary prefixes, wheels and `/tmp` or `/dev/shm` paths are not

@@ -1,0 +1,14 @@
+{
+  "profile": "pycasta-installed-durable-retention-1",
+  "producer": "02a38be58adef184e7d1331093b98e589e0b1f96",
+  "destination": "/fast_data/home/liliana/repos@uibcdf/topomt-local-backup/qualifications/pycasta-installed-20261106",
+  "candidate_sha256": "285e8d928e1ec17f3b1ad760e0cbf6553809c3c79b3a3521248911382047c4db",
+  "scientific_archive_sha256": "2c65515ae6a408974429e8933f8139481c451b65244e37a3465aead665a0fc7f",
+  "manifest_sha256": "27c029f2b68999fc0ea16c83f2045c5a4457888f73f24b4ef44cd4b85220ed56",
+  "retained_files": 24,
+  "retained_bytes": 146639710,
+  "checks": {
+    "all_files_present_and_sha256_verified": true,
+    "no_existing_different_file_overwritten": true
+  }
+}

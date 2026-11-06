@@ -51,7 +51,12 @@ The saved reader uses the same descriptor mapper without importing pyCASTA or
 rerunning Delaunay. Explicit undefined scalar measurements survive recovery;
 invalid geometry and source/index mismatches are rejected. See the
 [user recovery guide](../../docs/content/user/third_party_engines.md#recover-original-pycasta-results).
-Exact installed-candidate and broader provider qualification retain separate gates.
+The [installed receiving checkpoint](installed_receiving_checkpoint.md) accepts
+the exact `02a38be` development candidate on Linux/Python 3.14.10: **217 passing
+installed cases**, two complete five-pocket/four-site unit-policy flows and
+saved consumption with the original distribution absent. It uses the recorded
+MolSysMT/PharmacophoreMT source pins; public-only acquisition, current sibling
+compatibility and broader component qualification retain separate gates.
 
 `topomt.third_party.pycasta.native` implements the reproducible repository core, not all stronger claims in the paper. Its legacy Pocket adapter uses volume as score and bare center/volume values; descriptor identity and quantity boundaries need review before broader native acceptance. The original adapter score correction in #35 does not certify this local route.
 
@@ -74,6 +79,7 @@ bounded outcomes, not full-provider certification.
 
 - [Permanent pyCASTA discussion #72](https://github.com/uibcdf/topomt/discussions/72) in External Tools.
 - [Original output inventory](external_output_inventory.md).
+- [Source and exact installed receiving checkpoint](installed_receiving_checkpoint.md).
 - [Native contract and repository/paper distinction](contract.md).
 - [Native adapter](../../topomt/third_party/pycasta/native.py).
 - [Native parity regression](../../tests/methods/pycasta/test_parity.py).

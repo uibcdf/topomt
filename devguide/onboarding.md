@@ -107,7 +107,7 @@ is not the team's current work selection.
 | June 2026 | DFND object/kernel/catalog decisions separated raw evidence, public feature classification, deterministic identity and contextual provenance. Read the [catalog decision](DFND/taxonomy_architecture_decision.md), [kernel refactor checkpoint](DFND/checkpoint_kernel_catalog_refactor.md) and [identity checkpoint](DFND/checkpoint_identity_provenance_registries_2026_06_06.md). |
 | September 2026 | The [Topography conceptual contract](topography_conceptual_contract.md) established the accepted direction for spatial support, participants, contextual evaluations and provider admission. Its [implementation route](topography_implementation_route.md) remains partial; accepted semantics do not prove delivered runtime behavior. |
 | October 2026 | The [joint DFND/Topography audit](DFND/audit_topography_2026_10_01.md), [snapshot checkpoint](DFND/checkpoint_geometry_snapshots_2026_10_01.md) and [CASTp membership study](castp/checkpoint_2026_10_02_corrected_pocket_membership.md) documented delivered slices and residual scientific gates. |
-| November 2026 | [Original-provider receiving](provider_handoff_plan.md) added rigorous argument/source contracts, engine-independent persistence and explicit public PharmacophoreMT controls for fpocket, Pocketeer and AlphaSpace2. The updated AlphaSpace2 installed candidate, pyCASTA and CASTp/CASTpFold receiving still require their stated evidence. |
+| November 2026 | [Original-provider receiving](provider_handoff_plan.md) added rigorous argument/source contracts, engine-independent persistence and explicit public PharmacophoreMT controls. Subsequent bounded installed checkpoints qualify exact [AlphaSpace2](alphaspace2/installed_receiving_checkpoint.md) and [pyCASTA](pycasta/installed_receiving_checkpoint.md) candidates; CASTp/CASTpFold and combined receiving retain their gates. |
 
 The [reference catalogue](reference_catalog.md) retains the detailed studies,
 drafts and earlier checkpoints. Its historical sections should be read after
@@ -133,8 +133,8 @@ the relevant current overview or contract.
    what another developer should do. Preserve old checkpoints and use the
    [reporting protocol](reporting_protocol.md) for report lifecycle changes.
 
-The first prospective scientific continuation is an updated, durably retained
-AlphaSpace2 installed qualification with dependency-origin checks, if that work
-is selected after migration. Do not credit the interrupted, unarchived attempt
-as completed work. The provider plan and owning issue retain the remaining
-acceptance criteria.
+The next original-provider receiving gate is CASTp/CASTpFold. The preceding
+AlphaSpace2 and pyCASTA installed checkpoints retain actual candidates,
+dependency identities and executed scope; they do not credit the interrupted,
+unarchived historical attempt. Use the provider plan and owning issue for the
+remaining acceptance criteria and combined regression controls.

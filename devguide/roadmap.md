@@ -1,12 +1,12 @@
 # TopoMT development roadmap
 
 This ordered technical programme includes the migration review of
-**2026-11-06** and the completed bounded AlphaSpace2 installed receiving gate.
+**2026-11-06** and the completed bounded AlphaSpace2 and pyCASTA receiving gates.
 [Status](status.md) describes implemented evidence;
 [the provider plan](provider_handoff_plan.md) defines receiving acceptance;
 [issue-backed queues](reporting_protocol.md) retain independently closable work.
 The migration publication is complete, and the user selected the AlphaSpace2
-continuation recorded below. The earlier automated implementation goal remains
+and pyCASTA continuations recorded below. The earlier automated implementation goal remains
 cleared; the five-provider programme retains its unfinished gates.
 
 ## 1. Transfer a usable development baseline
@@ -43,16 +43,18 @@ PharmacophoreMT `b934471`. Preserve these exact files, origins and regressions;
 public-only acquisition and compatibility with current sibling mains retain
 separate gates.
 
+The [pyCASTA installed checkpoint](pycasta/installed_receiving_checkpoint.md)
+accepts exact producer `02a38be`: 217 installed cases, two complete five-pocket/
+four-site prepared flows and independent engine-free receiving. Its original
+ranking remains distinct from the native adapter's volume-as-score choice;
+native `1a6w` parity #53 retains its own acceptance problem.
+
 The remaining original-provider sequence is:
 
-1. Qualify **pyCASTA's original** argument/source contracts, saved recovery and
-   explicit prepared public consumption. Preserve original ranking separately
-   from the existing native adapter's volume-as-score choice. Native `1a6w`
-   parity #53 remains its own acceptance problem.
-2. Qualify **CASTp/CASTpFold original** server/files routes, source correspondence
+1. Qualify **CASTp/CASTpFold original** server/files routes, source correspondence
    and explicit prepared consumption. Server reachability, retained export
    recovery and local numerical parity are distinct gates.
-3. Preserve fpocket/Pocketeer/AlphaSpace2 regressions, run combined receiving
+2. Preserve fpocket/Pocketeer/AlphaSpace2/pyCASTA regressions, run combined receiving
    controls and reconcile provider/fidelity records with delivered scope. Retain
    exact package identities, selected tests, outcomes, omissions and scientific limits.
 

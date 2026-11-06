@@ -1,0 +1,20 @@
+{
+  "profile": "pycasta-reconstruction-supplement-retention-1",
+  "primary_retention_manifest_sha256": "27c029f2b68999fc0ea16c83f2045c5a4457888f73f24b4ef44cd4b85220ed56",
+  "destination": "/fast_data/home/liliana/repos@uibcdf/topomt-local-backup/qualifications/pycasta-installed-20261106",
+  "files": {
+    "reconstruction/wheels/configargparser-0.0.2-py3-none-any.whl": {
+      "bytes": 2965,
+      "sha256": "3091ae17e52ea80e2ad663ca5199326fc7d6b9c3cbe3fa7d0b96c58085c328e2"
+    },
+    "reconstruction/pycasta_installed_handoff_20261106_environment.json": {
+      "bytes": 216991,
+      "sha256": "1035629af821cb78d10445dc659b9e8c8b464b159a3df3f4359c739bcb30e4f3"
+    }
+  },
+  "checks": {
+    "all_files_present_and_sha256_verified": true,
+    "Conda_records_equal_accepted_after_snapshot": true,
+    "primary_manifest_and_receipt_unchanged": true
+  }
+}

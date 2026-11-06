@@ -52,7 +52,7 @@ existing failure to a new change.
 | `Topography`, registries and source context | [test_topography.py](../tests/test_topography.py), [test_topography_registry.py](../tests/test_topography_registry.py), [test_topography_input_context.py](../tests/test_topography_input_context.py) | Object, identity, selection/frame and source-context invariants |
 | Original-provider dispatch and records | [test_provider_dispatch_arguments.py](../tests/test_provider_dispatch_arguments.py), [test_provider_output.py](../tests/test_provider_output.py), [test_provider_pocket_outputs.py](../tests/test_provider_pocket_outputs.py) | Admission, provenance, source indices, attributed measurements and available geometry |
 | Original-provider adapters and saved readers | [tests/methods/](../tests/methods/) and [test_installed_engines.py](../tests/methods/test_installed_engines.py) | Selected real CLI/library/file execution and recovery, independently of native reproduction |
-| Prepared public PharmacophoreMT receiving | `test_pharmacophore_handoff.py` in [fpocket4](../tests/methods/fpocket4/test_pharmacophore_handoff.py), [Pocketeer](../tests/methods/pocketeer/test_pharmacophore_handoff.py) and [AlphaSpace2](../tests/methods/alphaspace2/test_pharmacophore_handoff.py) | Explicit source-bound query recipes and native model roundtrip; no affinity or binding-site admission |
+| Prepared public PharmacophoreMT receiving | `test_pharmacophore_handoff.py` in [fpocket4](../tests/methods/fpocket4/test_pharmacophore_handoff.py), [Pocketeer](../tests/methods/pocketeer/test_pharmacophore_handoff.py), [AlphaSpace2](../tests/methods/alphaspace2/test_pharmacophore_handoff.py) and [pyCASTA](../tests/methods/pycasta/test_pharmacophore_handoff.py) | Explicit source-bound query recipes and native model roundtrip; no affinity or binding-site admission |
 | DFND and common geometry | `tests/test_dfnd_*.py`, [test_delaunay_mesh.py](../tests/test_delaunay_mesh.py), [test_weighted_delaunay_mesh.py](../tests/test_weighted_delaunay_mesh.py), `tests/test_tools_*.py` | Declared algorithmic/numerical contracts, pathological inputs and bounded real-system behavior |
 | Native/upstream comparisons | Provider `test_parity.py` modules and dated native checkpoints | Bounded semantic comparison against the recorded original, separate from adapter fidelity |
 | Viewer integration | [test_provider_output_viewer.py](../tests/test_provider_output_viewer.py), [test_molsysviewer_topomt_addon.py](../tests/test_molsysviewer_topomt_addon.py) | Data/conversion/addon contracts; headless checks do not establish live GUI behavior |
@@ -125,13 +125,14 @@ before rerunning them on another host.
 
 Prepared consumer tests are opt-in. `TOPOMT_PREPARED_RECEPTOR` must identify the
 checksum-qualified H5MSM seed from the provider checkpoints. fpocket additionally
-requires `TOPOMT_FPOCKET_CMD` to identify the actual executable. The Pocketeer and
-AlphaSpace2 prepared fixtures require their real, unshadowed installed original
+requires `TOPOMT_FPOCKET_CMD` to identify the actual executable. Pocketeer,
+AlphaSpace2 and pyCASTA prepared fixtures require their real, unshadowed installed original
 distributions. With an explicit opt-in, wrong identities or seed hashes fail rather than
 qualifying a skipped replacement.
 
 The developer recorders `qualify_fpocket_handoff`, `qualify_pocketeer_handoff`,
-`qualify_alphaspace2_handoff` and `qualify_pharmacophore_handoff` orchestrate public
+`qualify_alphaspace2_handoff`, `qualify_pycasta_handoff` and
+`qualify_pharmacophore_handoff` orchestrate public
 owner tools. Their bounded source profiles and explicit query parameters are documented
 in each provider checkpoint. They do not prepare missing chemistry, infer pharmacophoric
 importance from pocket rank, expand lining membership to make recognition positive, or
