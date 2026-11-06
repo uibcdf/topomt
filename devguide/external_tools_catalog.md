@@ -53,7 +53,7 @@ verification target for the new executable boundary.
 |---|---|---|---|
 | [fpocket](fpocket4/overview.md) | CLI/files; `FpocketOutput` | CLI 4.2.3 and retained fixtures audited on bounded inputs | Historical pinned-build final-pocket parity; explicit `fpocket-topomt` variant |
 | [Pocketeer](pocketeer/overview.md) | Python library; `PocketeerOutput` | Installed 0.4.0 plus source fixtures | Selected test passes, but allows extra pockets and large numeric differences |
-| [AlphaSpace2](alphaspace2/overview.md) | Python library; `AlphaSpace2Output` | Installed 0.1.2, including selected receptor/reference contacts | Selected geometry/contact/typed-score tests pass; broader semantics remain |
+| [AlphaSpace2](alphaspace2/overview.md) | Python library and captured files; `AlphaSpace2Output` | Installed 0.1.2, including selected receptor/reference contacts | Selected geometry/contact/typed-score tests pass; broader semantics remain |
 | [pyCASTA](pycasta/overview.md) | Python library/scripts; `PyCASTAOutput` | Installed 1.0.8; separate original-score correction #35 closed | Native `1a6w` regression [#53](https://github.com/uibcdf/topomt/issues/53) remains open |
 | [CASTp / CASTpFold](castp/overview.md) | Servers/files; `CASTpOutput` | Archives and mocked transports; current live availability unverified | Historical CASTp1 closure; experimental CASTp3-like route |
 
