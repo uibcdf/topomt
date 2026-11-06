@@ -6,6 +6,7 @@ recognition, chemical preparation, atom matching or pharmacophore modeling.
 
 from dataclasses import asdict
 from itertools import zip_longest
+from math import isfinite, isnan
 from typing import Any
 
 import molsysmt as msm
@@ -106,6 +107,15 @@ def prepare_reference_source(molecular_system: Any) -> tuple[Any, list[int]]:
     return source, selection
 
 
+def _original_value(value: Any) -> Any:
+    """Compare undefined original measurements without admitting NaN geometry."""
+    if isinstance(value, list):
+        return [_original_value(item) for item in value]
+    if isinstance(value, float) and not isfinite(value):
+        return ('nonfinite', 'nan' if isnan(value) else 'inf' if value > 0 else '-inf')
+    return value
+
+
 def pocket_signature(output: ProviderOutput) -> list[dict[str, Any]]:
     """Snapshot ordered consumer fields without recaptured-run identity.
 
@@ -120,7 +130,9 @@ def pocket_signature(output: ProviderOutput) -> list[dict[str, Any]]:
         IDs, source membership/role, explicit nm geometry and original attributed
         measurement fields. Execution IDs and converted measurement values are
         excluded so legacy fpocket files recapture can compare its original
-        scientific fields. This is not an exhaustive comparison of extra fields.
+        scientific fields. Undefined measurement values use comparable markers;
+        finite values and geometry remain unchanged. This is not an exhaustive
+        comparison of extra fields.
 
     Raises
     ------
@@ -137,7 +149,7 @@ def pocket_signature(output: ProviderOutput) -> list[dict[str, Any]]:
             },
             'measurements': {
                 name: {
-                    key: value
+                    key: _original_value(value) if key == 'original_value' else value
                     for key, value in asdict(measurement).items()
                     if key not in {'run_id', 'value'}
                 }

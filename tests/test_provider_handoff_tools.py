@@ -125,3 +125,22 @@ def test_comparison_accepts_only_physical_roundoff(original_output):
     assert pocket_outputs_agree(
         replace(original_output, records=(changed, *others)), original_output
     )
+
+
+def test_comparison_preserves_undefined_original_measurements(original_output):
+    first, *others = original_output.records
+
+    def with_value(value):
+        attributes = first.fields
+        score = attributes['external_measurements']['score']
+        attributes['external_measurements']['score'] = replace(
+            score, original_value=value
+        )
+        record = replace(first, _fields=attributes)
+        return replace(original_output, records=(record, *others))
+
+    left, right = with_value(float('nan')), with_value(float('nan'))
+    assert pocket_outputs_agree(left, right)
+    assert not pocket_outputs_agree(left, with_value(0.0))
+    assert not pocket_outputs_agree(left, with_value(float('inf')))
+    assert not pocket_outputs_agree(with_value(float('inf')), with_value(float('-inf')))

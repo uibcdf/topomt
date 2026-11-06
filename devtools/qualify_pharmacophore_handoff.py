@@ -1,7 +1,7 @@
 """Consume a qualified original-provider run through public PharmacophoreMT tools.
 
 This opt-in integration recorder owns no molecular recognition or pharmacophore
-algorithm. Its explicit hydrophobic projections are an analytical composition
+algorithm. Its explicit single-family projections are an analytical composition
 control, not a proposed binding model. See topomt#101.
 """
 
@@ -10,7 +10,7 @@ import hashlib
 import json
 import tempfile
 from pathlib import Path
-from typing import Any
+from typing import Any, Literal, Optional
 
 import molsysmt as msm
 import numpy as np
@@ -23,6 +23,7 @@ from topomt.third_party.pdb_context import reference_chemical_context
 _PROFILES = {
     'original-fpocket-source-handoff-1': ('fpocket', 'cli'),
     'original-pocketeer-source-handoff-1': ('pocketeer', 'library'),
+    'original-alphaspace2-source-handoff-1': ('alphaspace2', 'library'),
 }
 
 
@@ -43,6 +44,18 @@ def _sites(model: Any) -> list[dict[str, Any]]:
                 'value': float(puw.get_value(site.shape.radius, to_unit='nm')),
                 'unit': 'nm',
             },
+            **(
+                {
+                    'direction': {
+                        'value': puw.get_value(
+                            site.shape.direction, to_unit='dimensionless'
+                        ).tolist(),
+                        'unit': 'dimensionless',
+                    }
+                }
+                if hasattr(site.shape, 'direction')
+                else {}
+            ),
             'essential': site.essential,
             'weight': site.weight,
         }
@@ -55,7 +68,13 @@ def _same_sites(first: Any, second: Any) -> bool:
     if len(left) != len(right):
         return False
     for a, b in zip(left, right):
-        for field in ('center', 'radius'):
+        if ('direction' in a) != ('direction' in b):
+            return False
+        for field in (
+            'center',
+            'radius',
+            *(('direction',) if 'direction' in a else ()),
+        ):
             x, y = a.pop(field), b.pop(field)
             if x['unit'] != y['unit'] or not np.allclose(
                 x['value'], y['value'], rtol=0, atol=1e-12
@@ -74,13 +93,15 @@ def consume(
     projection_direction: tuple[float, float, float],
     distance: str,
     radius: str,
+    feature: Literal['hydrophobicity', 'hb acceptor'] = 'hydrophobicity',
+    target_direction: Optional[tuple[float, float, float]] = None,
 ) -> dict[str, Any]:
-    """Build and persist an explicit hydrophobic query from one original pocket.
+    """Build and persist an explicit single-family query from one original pocket.
 
     Parameters
     ----------
     handoff_dir : Path
-        Output of qualify_fpocket_handoff or qualify_pocketeer_handoff:
+        Output of an original fpocket, Pocketeer or unbound AlphaSpace2 qualifier:
         source.h5msm, original.zip and receipt.json.
         Molecular chemistry must already support MolSysMT native recognition.
     output_dir : Path
@@ -92,6 +113,13 @@ def consume(
     distance, radius : str
         Explicit-unit projection distance and matching tolerance. PharmacophoreMT
         validates and interprets these scientific choices.
+    feature : {'hydrophobicity', 'hb acceptor'}, default='hydrophobicity'
+        Explicit receptor family for this bounded control. Empty recognition
+        fails; it never triggers another family or a membership expansion.
+    target_direction : tuple of float, optional
+        Independent dimensionless ligand-donor orientation for an acceptor
+        receptor. PharmacophoreMT requires it for that family and rejects it for
+        hydrophobic targets. No orientation is inferred from molecular geometry.
 
     Returns
     -------
@@ -121,6 +149,8 @@ def consume(
     """
     if output_dir.exists():
         raise FileExistsError(output_dir)
+    if feature not in ('hydrophobicity', 'hb acceptor'):
+        raise ValueError('This recorder supports hydrophobicity or hb acceptor.')
     evidence = json.loads((handoff_dir / 'receipt.json').read_text())
     if not isinstance(evidence, dict):
         raise ValueError('A mapping handoff receipt is required.')
@@ -162,6 +192,8 @@ def consume(
         or run.metadata.get('structure_indices') != 1
     ):
         raise ValueError('Original run identity or structure context disagrees.')
+    if provider == 'alphaspace2' and run.metadata.get('binder') is not None:
+        raise ValueError('This AlphaSpace2 consumer profile requires an unbound run.')
     source = msm.convert(source_file, to_form='molsysmt.MolSys')
     if (
         source.chemical_states is None
@@ -171,15 +203,15 @@ def consume(
         raise ValueError('Restored source chemical-state context disagrees.')
     before = puw.get_value(msm.get(source, coordinates=True), to_unit='nm').copy()
     chemical_before = reference_chemical_context(source, 0, provider=provider)
-    if provider == 'pocketeer':
+    if provider in {'pocketeer', 'alphaspace2'}:
         output = tmt.get_provider_output(
             source,
-            method='pocketeer',
+            method=provider,
             backend='files',
             bundle_file=handoff_dir / 'original.zip',
         )
         if output.run != run:
-            raise ValueError('Recovered original Pocketeer run identity disagrees.')
+            raise ValueError(f'Recovered original {provider} run identity disagrees.')
     else:
         with tempfile.TemporaryDirectory(prefix='topomt_consumer_') as temporary:
             root = Path(temporary)
@@ -221,11 +253,12 @@ def consume(
         selection=list(pocket.atom_indices),
         structure_index=1,
         chemical_state=0,
-        features=['hydrophobicity'],
+        features=[feature],
     )
     if not inventory['features']:
+        family = 'hydrophobic' if feature == 'hydrophobicity' else feature
         raise ValueError(
-            'The declared pocket has no hydrophobic features for this control.'
+            f'The declared pocket has no {family} features for this control.'
         )
     if any(
         not set(record['atom_indices']) <= set(pocket.atom_indices)
@@ -252,8 +285,17 @@ def consume(
                     projection_direction, 'dimensionless'
                 ),
                 'distance': distance,
-                'label': f'{pocket_id} explicit hydrophobic control {index}',
+                'label': f'{pocket_id} explicit {feature} control {index}',
                 'evidence': context,
+                **(
+                    {
+                        'target_direction': puw.quantity(
+                            target_direction, 'dimensionless'
+                        )
+                    }
+                    if target_direction is not None
+                    else {}
+                ),
             }
             for index in range(len(inventory['features']))
         ],
@@ -280,7 +322,8 @@ def consume(
     if not all(checks.values()):
         raise ValueError(f'Consumer handoff failed: {checks}')
     receipt = {
-        'profile': f'{provider}-pharmacophoremt-hydrophobic-control-1',
+        'profile': f'{provider}-pharmacophoremt-'
+        f'{"hydrophobic" if feature == "hydrophobicity" else "hb-acceptor"}-control-1',
         'context': context,
         'pharmacophoremt_version_label': consumer_version,
         'pocket_atom_indices': list(pocket.atom_indices),
@@ -293,7 +336,17 @@ def consume(
             },
             'distance': distance,
             'radius': radius,
-            'features': ['hydrophobicity'],
+            'features': [feature],
+            **(
+                {
+                    'target_direction': {
+                        'value': list(target_direction),
+                        'unit': 'dimensionless',
+                    }
+                }
+                if target_direction is not None
+                else {}
+            ),
         },
         'checks': checks,
         'query_sha256': _sha256(output_dir / 'query.json'),
@@ -301,7 +354,7 @@ def consume(
         'limits': [
             'Source integration control; no installed/public qualification.',
             'One explicitly prepared reference chemical state and nonperiodic frame.',
-            'Declared hydrophobic placements; no affinity, fit or biological validation.',
+            'Declared analytical placements; no affinity, fit or biological validation.',
             'Pocket atoms and alpha spheres do not define an exact volumetric region.',
         ],
     }
@@ -318,6 +371,10 @@ def main() -> None:
     parser.add_argument('--direction', type=float, nargs=3, required=True)
     parser.add_argument('--distance', required=True)
     parser.add_argument('--radius', required=True)
+    parser.add_argument(
+        '--feature', choices=['hydrophobicity', 'hb acceptor'], default='hydrophobicity'
+    )
+    parser.add_argument('--target-direction', type=float, nargs=3)
     args = parser.parse_args()
     receipt = consume(
         args.handoff_dir,
@@ -326,6 +383,14 @@ def main() -> None:
         projection_direction=(args.direction[0], args.direction[1], args.direction[2]),
         distance=args.distance,
         radius=args.radius,
+        feature=args.feature,
+        target_direction=None
+        if args.target_direction is None
+        else (
+            args.target_direction[0],
+            args.target_direction[1],
+            args.target_direction[2],
+        ),
     )
     print(
         json.dumps(

@@ -428,6 +428,17 @@ an available empty result. Recovered data are detached from the sources and
 bundle path. Older runs without the required source context remain readable
 as `ProviderRun` evidence but cannot reconstruct a source-bound output.
 
+Original lining atoms need not contain the same chemical participants as a
+residue-level pocket mask. Recognition and any complementary query belong to
+PharmacophoreMT, using the separately prepared full source and the exact lining
+indices. The prepared AlphaSpace2 pilot under
+[#101](https://github.com/uibcdf/topomt/issues/101) retains an empty hydrophobic
+result and a distinct explicit acceptor-to-donor control on that same membership.
+Its caller-declared projection direction,
+distance, donor orientation and matching radius are analytical choices; they
+establish neither a binding site nor affinity. This optional integration adds no
+PharmacophoreMT runtime dependency to TopoMT.
+
 Pocket features expose `is_contact`, `alpha_contact`, `beta_contact`,
 `occupied_space`, `occupied_nonpolar_space`, `occupancy` and `occupancy_nonpolar`.
 Occupied quantities are sums of upstream alpha-space volumes labelled as contacts;
