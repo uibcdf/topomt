@@ -18,6 +18,11 @@ reporting protocol. Keep repository-specific instructions below.
 
 *A Python library for the hierarchical analysis of molecular surface topography.*
 
+Upstream source checkouts are available in `~/repos@others` for consultation.
+Use them when reviewing external implementations; inspect their exact revision
+and local changes before using or updating a checkout as a reference. The local
+inventory is described in `devguide/engine_references.md`.
+
 ---
 
 ## External Tooling Guides (Required for Development)

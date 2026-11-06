@@ -378,3 +378,48 @@ document should record at least:
 - one upstream code or methodological reference;
 - one practical package/binary/channel reference;
 - one concrete validation target.
+
+## Local source consultation after migration
+
+The transferred references are available under `~/repos@others/`. Use the files
+below to trace original definitions, output fields and example data. The
+historical notes above retain their original paths and evidence; installed
+reference identities remain attached to their own versions, commits and artifact
+hashes.
+
+| Directory | Useful source and data | Consultation scope |
+| --- | --- | --- |
+| `AlphaSpace2` | `alphaspace2/Snapshot.py`, `Cluster.py`, `functions.py`, `VinaScoring.py`, `View.py`; `cookbooks/DataSet/` | Original detection, alpha/beta/pocket membership, space/contact/score definitions and output examples. |
+| `fpocket` | `src/fpocket.c`, `voronoi.c`, `descriptors.c`, `pscoring.c`, `writepocket.c`; `headers/fparams.h`, `src/pertable.c`; `tests/reference_output/`, `data/sample/` | Original C detector, radii, descriptors, distinct scores and writers. Its volume estimator and upstream tests have their own approximation limits. |
+| `pocketeer` | `src/pocketeer/api.py`, `core/{tessellation,geometry,scoring,types}.py`, `utils/io.py`; `tests/data/` | Detection, voxel volume, residue masks, ranking and JSON fields. The JSON writer omits the mask. |
+| `pycasta` | `src/pycasta/{run_analysis,pocket_detection,alpha_shape,ranking,atomic_radii,cgal_wdelaunay}.py`, `utils/`, `dual_sets.py`; `src/pycasta/data/`, `data/coach420/` | Detector/ranking/radius definitions, optional triangulation routes and paired/benchmark inputs. Saved results retain their own provenance. |
+| `castp-Script` | `src/castpfoldpy/client.py`; `data/j_68e5495011fa9.zip` | Remote submission/download client and saved-output coordinate reader; the server performs detection and SA/MS measurements. |
+| `CastpFold` | `public/submit_calc.php`, `src/UrlManager.js`, viewer/measurement components; `public/infos/allabout/`; saved example folders | Historical frontend, server-method documentation and result schemas. The scientific `arsenal` invoked by PHP is absent from this checkout. |
+| `scripts_view_pockets` | `CASTpyMOL_v3.py`, `castp.py`, `GPSS-PyMOL-Plugin/`, `caver-pymol-plugin-3.0.3/` | Historical membership/viewing tools. CAVER supplies a separate tunnel method; these files do not provide the CASTpFold kernel. |
+
+The inspected AlphaSpace2 checkout (`1283f73db757`, declaring `0.1.2`) differs
+from the qualified original `0.1.2` package bytes. The Pocketeer checkout
+(`25a06df9a905`, declaring `0.3.0`) also differs from the qualified `0.4.0` wheel.
+Consultation or a later source update requires a separately identified revision
+and applicable revalidation before it changes an engine or scientific oracle.
+
+Static parsing of the transferred pycasta `src/pycasta/run_analysis.py` failed at
+line 457 in checkout `f3418f38cd3d`. This observation applies to that file and
+revision; it does not characterize every published pycasta release or qualify
+TopoMT's independent native implementation. Current receiving status remains in
+the [provider plan](provider_handoff_plan.md) and provider overviews.
+
+Other transferred references under the same directory support narrower queries:
+
+- Molecular formats and chemistry: `mdanalysis`, `mdtraj`, `biopython`, `openmm`, `AmberClassic`, `ParmEd`, `pdbfixer`, `rdkit`, `Meeko`, `openff-toolkit` and `pytraj`.
+- Visualization: `molstar`, `ngl`, `nglview`, `anywidget` and `ProteinView`.
+- Quantity handling: `astropy` and `physipy`; docking definitions and outputs: `AutoDock-Vina`.
+
+The local review receipts are `.cache/reference-repositories/provider-code-map.json`
+and `.cache/reference-repositories/pull-assessment.json`. The remote observation
+at `2026-11-06T21:42:51Z` found 10 identical branches, 14 proven behind and one
+unknown ancestry (`AutoDock-Vina`); 12 clean checkouts were candidates for a later
+fast-forward, while five dirty checkouts were protected. Pocketeer was 23 commits
+behind its observed remote; preserve the identified reference revision before
+any separately authorized update and revalidation. This inspection performed no
+fetch or pull and changed no external checkout.
