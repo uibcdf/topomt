@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "owner": "uibcdf/topomt#101; fidelity uibcdf/topomt#19",
+  "scope": "original source-reader checkpoint only",
+  "archive": "castp_file_inputs_20261106.zip",
+  "bytes": 84457,
+  "sha256": "02a043d8890721d4f60c7c1fe2f00689cc0ef402ff343fcdb04f22ffbbf039aa",
+  "manifest_sha256": "45271b945286447ad69c0d3a5447712e0ba4d249fefa4f6daf40a93ff86ada99",
+  "payload_files": 17,
+  "reader_sha256": "465c4cde3385c78d08295117a549c76372a380feb6a4e9fdbfdf35e4d35d2285",
+  "tests_sha256": "2ec1b8481cb6baeeec916ce91985432b40159e9b67d9b8398748355664eb78bb",
+  "validation": {
+    "schema_version": 1,
+    "scope": "source-reader evidence; distribution metadata is not installed-origin qualification",
+    "python": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+    "executable": "/fast_data/home/liliana/miniconda3/envs/topomt-dev/bin/python",
+    "distributions": {
+      "topomt": "0.5.0+367.g5ae5c46.dirty",
+      "molsysmt": "0.23.0",
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "scipy": "1.18.1",
+      "pyunitwizard": "0.29.1",
+      "argdigest": "0.17.1",
+      "depdigest": "0.15.2",
+      "smonitor": "0.22.1",
+      "pytest": "9.2.0",
+      "pytest-receptor": "1.2.2"
+    },
+    "source_tests": {
+      "selected": 150,
+      "passed": 146,
+      "skipped": 4,
+      "new_castp_cases": 60,
+      "new_castp_skipped": 0
+    },
+    "distribution_reporting_contracts": {
+      "passed": 20
+    },
+    "checks": {
+      "ruff_check": "passed",
+      "ruff_format": "472 files already formatted",
+      "mypy": "passed for topomt/io/load_CASTp.py",
+      "report_indexes": "current",
+      "local_links": {
+        "checked": 56,
+        "missing": 0
+      },
+      "docs_html": {
+        "status": "succeeded",
+        "warnings": 11,
+        "scope": "existing warnings in untouched documentation; complete headless HTML build with environment tools on PATH"
+      }
+    },
+    "limitations": [
+      "No service execution, prepared-receptor binding, full chemistry or receiving claim.",
+      "No installed-package or support-matrix qualification.",
+      "Four optional-engine skips remain in shared source guards; full-suite owners #16/#58.",
+      "Missing legacy OpenMM PDB bond inference retains declared edges, without chemistry preparation."
+    ],
+    "source_base_commit": "4b0b7a85264c2ea6808183f91bdcb23c080b2c03"
+  },
+  "recovery": "All input archives are tracked under topomt/data; corpus-audit.json lists their exact hashes and member hashes.",
+  "temporary_resources": {
+    "owner": "TopoMT original-provider receiving work",
+    "working_cache": ".cache/castp-handoff",
+    "purpose": "Active CASTp continuation with source-binding work still pending; this committed archive is the durable file-input evidence.",
+    "review_after": "next source-binding checkpoint or 2026-11-13"
+  }
+}

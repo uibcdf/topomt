@@ -1,10 +1,15 @@
 # CASTp / CASTpFold provider overview
 
-Reviewed: 2026-10-02 (repository and issue state). Scientific evidence dates are
-stated below; this organizational update does not rerun or extend that evidence.
+Reviewed: 2026-11-06 (original file-input boundary). Native scientific evidence
+dates are stated below; this update does not rerun or extend those comparisons.
 Role: integrated provider and comparison reference. The user resumed a bounded
 local CASTp3 reconstruction under [#79](https://github.com/uibcdf/topomt/issues/79).
-Broader provider work remains paused under the
+Original-provider receiving now continues under
+[#101](https://github.com/uibcdf/topomt/issues/101) and the
+[handoff plan](../provider_handoff_plan.md). The
+[file-input checkpoint](file_input_checkpoint_2026_11_06.md) establishes
+deterministic discovery and exact relative artifact retention before source
+binding and prepared consumer work. Native-method scope retains the separate
 [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
 Latest work: the [explicit pocket-definition checkpoint](checkpoint_2026_10_02_pocket_definitions.md)

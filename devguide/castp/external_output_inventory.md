@@ -1,6 +1,9 @@
 # CASTp/CASTpFold external output inventory
 
-Status: file and server ZIP retention in progress. The pinned CASTp 3.0
+Status: original file-input discovery and retention have a bounded
+[2026-11-06 source checkpoint](file_input_checkpoint_2026_11_06.md). Source
+binding, portable result reconstruction and prepared consumer receiving remain
+under #101; exhaustive fidelity remains under #19. The pinned CASTp 3.0
 `topomt/data/CASTp_3.0_server/1tcd.zip` is the initial parser fixture;
 1a4j, 1hiv, 1stp, 2pk4, and 3ptb now cover aggregate mouth rows and
 surface counts.
@@ -30,9 +33,12 @@ For mouths, `.mouthInfo` also contains zero rows for voids (`N_mth = 0`),
 which have no matching `.mouth` atom rows. Those zero rows remain in the
 original artifact but do not create fictitious Mouth features. A positive
 `N_mth` row is retained even if its atom records are absent. The file loader
-still needs explicit coverage for directory-only inputs, nested ZIP layouts,
-alternate filenames, absent
-optional files, and invalid archives. Submitted-atom matching under selection
+now covers directory-only inputs, nested ZIP layouts, job-named result files,
+measurement-only input, absent optional files, empty atom files and invalid or
+ambiguous archives. It discovers one coherent result family; auxiliary PDBs
+without matching result files remain evidence rather than competing molecular
+sources. Feature and measurement attribution uses the actual relative artifact
+path. Submitted-atom matching under selection
 and multiple chains needs independent tests. Server tests do not yet compare
 results returned by a live service.
 

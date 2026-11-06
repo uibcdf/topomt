@@ -146,6 +146,22 @@ result = tmt.get_provider_output(
 )
 ```
 
+CASTp accepts one input route at a time: `zip_file`, `dir_path`, or explicitly
+named result files. ZIP and directory imports find one result family in the
+root or a subdirectory. Its result files share a directory and filename stem;
+the ZIP itself can have a different name, as CASTpFold job exports commonly do.
+The matching PDB supplies atom ownership. Auxiliary files, including unrelated
+PDBs, remain in the original evidence. Multiple result families require an
+explicit choice through the individual-file arguments.
+
+Nested artifact paths and original bytes survive in `result.run`. An import
+with only a measurement table keeps atom membership unknown. A header-only
+table can describe an empty result; an absent result or a table without its
+header raises an error. Empty `.poc` and `.mouth` files remain valid. Ambiguous
+archives, duplicate member names, inconsistent capitalization of path components
+and paths that change during extraction are rejected. This keeps artifact
+identities consistent across file systems.
+
 The new entry point rejects `backend='native'`; local reproductions retain their
 existing APIs and separate parity gates. Contact/volume/score definitions remain
 specific to their original methods. No DFND calculation is required to use

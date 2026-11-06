@@ -1,7 +1,9 @@
 import shutil
+import stat
 import tempfile
+import zipfile
 from os import PathLike
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from typing import Any
 
 import molsysmt as msm
@@ -11,7 +13,11 @@ from topomt._private.path import (
     ensure_path_exists_and_is_dir,
     ensure_path_exists_and_is_file,
 )
-from topomt.provider_output import ExternalMeasurement, ProviderRun
+from topomt.provider_output import (
+    ExternalMeasurement,
+    ProviderRun,
+    _validate_artifact_name,
+)
 
 _atom_label_format = '{atom_id}-{atom_name}/{group_name}/{chain_id}'
 
@@ -131,9 +137,10 @@ def _parse_castp_atom_record_line(
 
 
 def _discover_castp_files_in_dir(base_path: PathLike[str]) -> dict[str, Path]:
-    """Discover CASTp-related files in the given directory (non-recursive)."""
+    """Require one unambiguous result family, retaining nested relative paths."""
     base_path = Path(base_path)
     discovered: dict[str, Path] = {}
+    pdb_candidates = []
 
     extension_to_key = {
         '.poc': 'poc',
@@ -143,14 +150,90 @@ def _discover_castp_files_in_dir(base_path: PathLike[str]) -> dict[str, Path]:
         '.pdb': 'pdb',
     }
 
-    for file_path in base_path.iterdir():
+    for file_path in sorted(base_path.rglob('*')):
+        if file_path.is_symlink():
+            raise ValueError(f'Symbolic links cannot be imported: {file_path}')
         if not file_path.is_file():
             continue
         key = extension_to_key.get(file_path.suffix)
-        if key and key not in discovered:
-            discovered[key] = file_path
+        if key is None:
+            continue
+        if key == 'pdb':
+            pdb_candidates.append(file_path)
+            continue
+        if key in discovered:
+            raise ValueError(
+                f'Ambiguous CASTp {file_path.suffix} files: '
+                f'{discovered[key].relative_to(base_path)} and '
+                f'{file_path.relative_to(base_path)}'
+            )
+        discovered[key] = file_path
 
+    families = {path.with_suffix('') for path in discovered.values()}
+    if len(families) > 1:
+        raise ValueError(
+            'Ambiguous CASTp result families; select individual files explicitly.'
+        )
+    if families:
+        expected_pdb = Path(str(next(iter(families))) + '.pdb')
+        if expected_pdb in pdb_candidates:
+            discovered['pdb'] = expected_pdb
+        elif pdb_candidates:
+            raise ValueError(
+                'Ambiguous CASTp .pdb association; no PDB matches the result family. '
+                'Select individual files explicitly.'
+            )
     return discovered
+
+
+def _extract_castp_archive(archive_path: str | PathLike[str], destination: str) -> None:
+    """Validate member identities before extracting original bytes."""
+    with zipfile.ZipFile(archive_path) as archive:
+        seen: set[str] = set()
+        spellings: dict[str, str] = {}
+        for member in archive.infolist():
+            name = (
+                member.filename.removesuffix('/')
+                if member.is_dir()
+                else member.filename
+            )
+            try:
+                _validate_artifact_name(f'output/{name}')
+                if (
+                    not name
+                    or any(not part for part in name.split('/'))
+                    or name.startswith('/')
+                    or PureWindowsPath(name).drive
+                    or member.orig_filename != member.filename
+                ):
+                    raise ValueError
+            except ValueError as error:
+                raise ValueError(
+                    f'Invalid CASTp archive path: {member.filename!r}'
+                ) from error
+            if name in seen:
+                raise ValueError(f'Duplicate CASTp archive member: {name!r}')
+            seen.add(name)
+            if stat.S_ISLNK(member.external_attr >> 16):
+                raise ValueError(f'Symbolic link in CASTp archive: {name!r}')
+            parts = name.split('/')
+            for depth in range(1, len(parts) + 1):
+                prefix = '/'.join(parts[:depth])
+                previous = spellings.setdefault(prefix.casefold(), prefix)
+                if previous != prefix:
+                    raise ValueError(
+                        f'Aliased CASTp archive path: {previous!r} and {prefix!r}'
+                    )
+        # extractall normalizes some names differently across platforms. Keep
+        # canonical names unchanged and fail rather than overwrite an alias.
+        for member in archive.infolist():
+            target = Path(destination).joinpath(*member.filename.rstrip('/').split('/'))
+            if member.is_dir():
+                target.mkdir(parents=True, exist_ok=True)
+            else:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                with archive.open(member) as source, target.open('xb') as output:
+                    shutil.copyfileobj(source, output)
 
 
 def _parse_poc_file(file_path: PathLike[str]):
@@ -247,6 +330,8 @@ def _parse_poc_info_file(file_path: PathLike[str]) -> dict[int, dict[str, Any]]:
                 if mouth_ids:
                     entry['mouth_ids'] = set(mouth_ids)
             poc_id_to_poc_data[poc_id] = entry
+        if not header_skipped:
+            raise ValueError(f'Missing CASTp pocInfo table header in {file_path}.')
     return poc_id_to_poc_data
 
 
@@ -286,6 +371,8 @@ def _parse_mouth_info_file(file_path: PathLike) -> dict[int, dict[str, Any]]:
             if len(fields) > 9:
                 entry['extra_fields'] = fields[9:]
             mouth_id_to_mouth_data[mouth_id] = entry
+        if not header_skipped:
+            raise ValueError(f'Missing CASTp mouthInfo table header in {file_path}.')
     return mouth_id_to_mouth_data
 
 
@@ -310,33 +397,58 @@ def load_CASTp(
 
     """
 
+    individual_files = (poc_file, pocInfo_file, mouth_file, mouthInfo_file, pdb_file)
+    if (
+        sum(
+            (
+                zip_file is not None,
+                dir_path is not None,
+                any(path is not None for path in individual_files),
+            )
+        )
+        > 1
+    ):
+        raise ValueError(
+            'Choose one CASTp input route: ZIP, directory or individual files.'
+        )
     extracted_from_zip = False
     temporary_dir = None
 
-    if zip_file is not None:
-        ensure_path_exists_and_is_file(zip_file)
-        import zipfile
-
-        temporary_dir = tempfile.TemporaryDirectory(prefix='topomt_castp_')
-        extracted_from_zip = True
-
-        with zipfile.ZipFile(zip_file, 'r') as zip_ref:
-            zip_ref.extractall(temporary_dir.name)
-        dir_path = temporary_dir.name
-        if submitted_input_pdb is not None:
-            raw_zip_dir = Path(dir_path) / 'raw_server_zip'
-            raw_zip_dir.mkdir()
-            shutil.copy2(zip_file, raw_zip_dir / Path(zip_file).name)
-
     try:
+        if zip_file is not None:
+            ensure_path_exists_and_is_file(zip_file)
+            temporary_dir = tempfile.TemporaryDirectory(prefix='topomt_castp_')
+            extracted_from_zip = True
+            _extract_castp_archive(zip_file, temporary_dir.name)
+            dir_path = temporary_dir.name
+            if submitted_input_pdb is not None:
+                raw_zip_dir = Path(dir_path) / 'raw_server_zip'
+                raw_zip_dir.mkdir()
+                shutil.copy2(zip_file, raw_zip_dir / Path(zip_file).name)
         if dir_path is not None:
             ensure_path_exists_and_is_dir(dir_path)
+            dir_path = Path(dir_path)
             dict_of_files_cast_files = _discover_castp_files_in_dir(dir_path)
             poc_file = dict_of_files_cast_files.get('poc', None)
             pocInfo_file = dict_of_files_cast_files.get('poc_info', None)
             mouth_file = dict_of_files_cast_files.get('mouth', None)
             mouthInfo_file = dict_of_files_cast_files.get('mouth_info', None)
             pdb_file = dict_of_files_cast_files.get('pdb', None)
+
+        if all(
+            path is None
+            for path in (poc_file, pocInfo_file, mouth_file, mouthInfo_file)
+        ):
+            raise ValueError('No CASTp result files were supplied or discovered.')
+
+        def artifact_name(path: PathLike[str]) -> str:
+            result_path = Path(path)
+            relative = (
+                result_path.name
+                if dir_path is None
+                else result_path.relative_to(dir_path).as_posix()
+            )
+            return f'output/{relative}'
 
         poc_id_to_atom_labels = (
             _parse_poc_file(poc_file) if poc_file is not None else None
@@ -371,7 +483,15 @@ def load_CASTp(
             }
         )
         if dir_path is not None:
-            provider_input = submitted_input_pdb or zip_file or pdb_file or poc_file
+            provider_input = (
+                submitted_input_pdb
+                or zip_file
+                or pdb_file
+                or poc_file
+                or pocInfo_file
+                or mouth_file
+                or mouthInfo_file
+            )
             if provider_input is not None:
                 provider_run = ProviderRun.capture(
                     'castp',
@@ -423,16 +543,14 @@ def load_CASTp(
         for poc_id in sorted(poc_ids):
             atom_labels = (poc_id_to_atom_labels or {}).get(poc_id)
             source_id = 'Pocket ' + str(poc_id)
-            args_dict = {}
+            args_dict: dict[str, Any] = {}
             if provider_run is not None:
                 args_dict['provider_run_id'] = provider_run.run_id
                 if atom_labels is not None and poc_file is not None:
-                    args_dict['provider_atom_source_artifact'] = (
-                        f'output/{poc_file.name}'
-                    )
+                    args_dict['provider_atom_source_artifact'] = artifact_name(poc_file)
                 if pocInfo_file is not None:
-                    args_dict['provider_result_source_artifact'] = (
-                        f'output/{pocInfo_file.name}'
+                    args_dict['provider_result_source_artifact'] = artifact_name(
+                        pocInfo_file
                     )
             feature_type = 'pocket'
             if poc_id_to_poc_data is not None and poc_id in poc_id_to_poc_data:
@@ -482,7 +600,7 @@ def load_CASTp(
                             original_value=original_value,
                             original_unit=original_unit,
                             source_field=f'pocInfo[{poc_id}].{original_field}',
-                            source_artifact=f'output/{pocInfo_file.name}',
+                            source_artifact=artifact_name(pocInfo_file),
                             run_id=provider_run.run_id,
                             definition=definition,
                             issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
@@ -544,7 +662,7 @@ def load_CASTp(
                             original_value=original_value,
                             original_unit=original_unit,
                             source_field=f'pocInfo[{poc_id}].{source_field}',
-                            source_artifact=f'output/{pocInfo_file.name}',
+                            source_artifact=artifact_name(pocInfo_file),
                             run_id=provider_run.run_id,
                             definition=definition,
                             issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
@@ -560,6 +678,7 @@ def load_CASTp(
                 source_id=source_id,
                 **args_dict,
             )
+            assert feature_id is not None
             poc_id_to_feature_id[poc_id] = feature_id
 
         mouth_ids = set(mouth_id_to_atom_labels or {}) | {
@@ -574,12 +693,12 @@ def load_CASTp(
             if provider_run is not None:
                 args_dict['provider_run_id'] = provider_run.run_id
                 if atom_labels is not None and mouth_file is not None:
-                    args_dict['provider_atom_source_artifact'] = (
-                        f'output/{mouth_file.name}'
+                    args_dict['provider_atom_source_artifact'] = artifact_name(
+                        mouth_file
                     )
                 if mouthInfo_file is not None:
-                    args_dict['provider_result_source_artifact'] = (
-                        f'output/{mouthInfo_file.name}'
+                    args_dict['provider_result_source_artifact'] = artifact_name(
+                        mouthInfo_file
                     )
             if (
                 mouth_id_to_mouth_data is not None
@@ -628,7 +747,7 @@ def load_CASTp(
                             original_value=original_value,
                             original_unit=original_unit,
                             source_field=f'mouthInfo[{mouth_id}].{original_field}',
-                            source_artifact=f'output/{mouthInfo_file.name}',
+                            source_artifact=artifact_name(mouthInfo_file),
                             run_id=provider_run.run_id,
                             definition=definition,
                             issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
@@ -655,7 +774,7 @@ def load_CASTp(
                             original_value=count,
                             original_unit='1',
                             source_field=f'mouthInfo[{mouth_id}].{source_field}',
-                            source_artifact=f'output/{mouthInfo_file.name}',
+                            source_artifact=artifact_name(mouthInfo_file),
                             run_id=provider_run.run_id,
                             definition=definition,
                             issue_url=f'https://github.com/uibcdf/topomt/issues/{issue}',
@@ -671,6 +790,7 @@ def load_CASTp(
                 source_id=source_id,
                 **args_dict,
             )
+            assert feature_id is not None
             mouth_id_to_feature_id[mouth_id] = feature_id
             if mouth_id in poc_id_to_feature_id:
                 topography.connect_features(feature_id, poc_id_to_feature_id[mouth_id])
