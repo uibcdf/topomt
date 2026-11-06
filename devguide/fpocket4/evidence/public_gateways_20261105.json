@@ -1,0 +1,59 @@
+{
+  "schema": "topomt.fpocket-gateway-evidence@1",
+  "archive": "public_gateways_20261105.zip",
+  "size": 1533588,
+  "sha256": "daa737c23bff45563bfda1c9cbace0bdcc04eab1decaccca76df08808cfa2e3e",
+  "members": 52,
+  "producer": "4a55982f9eb8d7b4cfa70104dd7d71a5314c72d6",
+  "wheel": {
+    "name": "topomt",
+    "filename": "topomt-0.5.0+344.g4a55982.dirty-py3-none-any.whl",
+    "size": 21571396,
+    "sha256": "e5be463b7fcf772425ee9f72911123c0f63db6ab4e81e94baa4977944275acbd",
+    "producer": "4a55982f9eb8d7b4cfa70104dd7d71a5314c72d6"
+  },
+  "validation": {
+    "producer": "4a55982f9eb8d7b4cfa70104dd7d71a5314c72d6",
+    "source_tests": {
+      "passed": 269,
+      "deselected": 5,
+      "skipped": 0,
+      "seconds": 105.24
+    },
+    "source_scope": "269 before final bypass correction; final 112 contract cases and 144 installed cases cover the final producer.",
+    "gateway_cases": 29,
+    "argument_cases": 50,
+    "earlier_dispatch_cases": 33,
+    "science_cases": 32,
+    "distribution_and_reporting": "Prior 20-case resource/reporting evidence retained; no inventory or dependency route changed.",
+    "mypy": {
+      "version": "2.3.1",
+      "files": 6,
+      "imported_bodies": "skipped",
+      "result": "success"
+    },
+    "ruff": {
+      "files": 427,
+      "lint": "success",
+      "format": "success"
+    },
+    "docs": {
+      "result": "success",
+      "warnings": 8,
+      "edited_user_page_diagnostic": false
+    },
+    "installed": {
+      "passed": 144,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 40.3,
+      "distributions": 138,
+      "record_hashes_before_and_after": 26217
+    },
+    "pip_check": "No broken requirements found.",
+    "required_resources": 617,
+    "artifact_retention": "/dev/shm/topomt-installed-101.bch3yxd8/gateways/wheels",
+    "scope": "Public routing/name gateways and original CLI/files contracts; native algorithms and backend-owned native values remain separate."
+  },
+  "scope_limits": "Bounded Linux x86_64/Python 3.14 installed receiving with existing interpreter/OS; not full hosted/Conda/public qualification."
+}

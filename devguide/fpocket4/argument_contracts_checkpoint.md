@@ -90,3 +90,7 @@ to belong to their established owners. No full hosted suite, other Python minor,
 macOS arm64, Conda/public acquisition, release or complete-library ArgDigest claim
 follows. Recovery remains tracked in [#58](https://github.com/uibcdf/topomt/issues/58)
 and [#16](https://github.com/uibcdf/topomt/issues/16). No remote issue or branch changed.
+
+The subsequent [public gateway stage](public_gateways_checkpoint.md) adds routing
+contracts to the remaining wrappers, with 144 installed passing cases in a new
+candidate. Backend-owned native values and parity remain separate.
