@@ -5,6 +5,8 @@ import molsysmt as msm
 import numpy as np
 
 from topomt import pyunitwizard as puw
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.fpocket_arguments import OPTIONS
 from topomt.features.Pocket import Pocket
 from topomt.provider_output import ExternalMeasurement, ProviderRun
 from topomt.third_party.fpocket.input_context import _chemical_context
@@ -239,6 +241,7 @@ def fpocket_result_to_topography(
     return topography
 
 
+@arg_digest(**OPTIONS)
 def load_topography(
     molecular_system,
     *,
@@ -252,6 +255,7 @@ def load_topography(
     submitted_atom_indices: list[int] | None = None,
     chemical_state: str | int | None = None,
     chemical_state_context: dict[str, Any] | None = None,
+    skip_digestion: bool = False,
 ) -> Topography:
     """Recover original fpocket files against a declared source context.
 
@@ -270,7 +274,8 @@ def load_topography(
     backend : str, default='files'
         Recorded execution route.
     provider_metadata : dict, optional
-        Additional run metadata.
+        Additional run metadata. Source-context fields owned by the adapter
+        cannot be replaced through this dictionary.
     submitted_atom_indices : list of int, optional
         Source index for each submitted PDB atom row, in file order. Required
         when exported serials differ from source atom IDs. The map must uniquely
@@ -283,6 +288,8 @@ def load_topography(
         Original run metadata entry of the same name. Its reference identity,
         inventory count and chemistry digest must match the source. A stored
         context determines the selector when chemical_state is omitted.
+    skip_digestion : bool, default=False
+        Internal bypass for arguments already digested by the owning boundary.
 
     Returns
     -------

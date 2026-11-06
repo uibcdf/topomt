@@ -1,5 +1,7 @@
 from typing import Any
 
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.fpocket_arguments import OPTIONS
 from topomt.topography.Topography import Topography
 
 from .output import FpocketOutput
@@ -70,8 +72,16 @@ def load_topography(
     )
 
 
+@arg_digest(
+    **OPTIONS,
+    argument_digestion=False,
+    map={'backend': {'kind': 'fpocket', 'rules': ['backend']}},
+)
 def get_output(
-    molecular_system: Any = None, *, backend: str = 'cli', **kwargs: Any
+    molecular_system: Any = None,
+    *,
+    backend: str = 'cli',
+    **kwargs: Any,
 ) -> FpocketOutput:
     """Return original fpocket results with shared pocket access.
 

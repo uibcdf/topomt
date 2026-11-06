@@ -159,6 +159,18 @@ original route. Invalid types or incompatible routes raise a catalogued TopoMT
 argument error that is also catchable as `ValueError`. Molecular inputs and
 provider-specific keyword names and values remain owned by the selected adapter.
 
+The original fpocket output API admits options declared by its CLI/files
+signatures and reports unknown names through ArgDigest. The closed routes digest
+selection/index shapes, single-frame requests, syntax, executable/argument types,
+file paths, metadata and saved chemical-context fields before molecular preparation
+or file parsing. Boolean/fractional indices, duplicate submitted atom maps and
+malformed saved contexts are rejected. Index bounds, selected atom correspondence,
+source coordinates and reference-state agreement are checked against the molecular
+system afterward. Files recovery still permits omitted chemical options; explicit
+arrays and the original submitted-row order remain supported.
+Additional `provider_metadata` may annotate a run, but cannot replace the adapter's
+selection, frame, syntax, atom map or chemical-context fields.
+
 ### Recover fpocket selections against the original source
 
 The CLI requires a nonempty atom selection and exactly one coordinate frame.

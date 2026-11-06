@@ -1,0 +1,20 @@
+"""The original routes' signatures own the admissible fpocket option names."""
+
+from inspect import signature
+
+from argdigest import Domain
+
+
+def _members() -> tuple[str, ...]:
+    from topomt.third_party.fpocket import cli, files
+
+    names = set(signature(cli.get_topography).parameters)
+    names.update(signature(files.load_topography).parameters)
+    return tuple(sorted(names - {'molecular_system', 'backend', 'skip_digestion'}))
+
+
+domain = Domain(
+    name='fpocket_options',
+    members=_members,
+    description='Union of original CLI/files option names; each closed leaf enforces its own signature.',
+)

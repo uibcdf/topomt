@@ -5,6 +5,8 @@ from pathlib import Path
 
 import numpy as np
 
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.fpocket_arguments import OPTIONS
 from topomt.third_party._common import prepare_wrapper_input_pdb
 from topomt.third_party.fpocket.files import load_topography as load_fpocket_topography
 from topomt.third_party.fpocket.input_context import _chemical_context
@@ -12,6 +14,7 @@ from topomt.third_party.fpocket.runner import run_fpocket
 from topomt.topography.Topography import Topography
 
 
+@arg_digest(**OPTIONS)
 def get_topography(
     molecular_system,
     *,
@@ -21,6 +24,7 @@ def get_topography(
     fpocket_cmd: str = 'fpocket',
     extra_args: list[str] | None = None,
     chemical_state: str | int = 'reference',
+    skip_digestion: bool = False,
 ) -> Topography:
     """Run original fpocket with a declared reference chemical state.
 
@@ -41,6 +45,8 @@ def get_topography(
     chemical_state : str or int, default='reference'
         The reference selector or its integer index, including a nonzero index.
         Nonreference export is unsupported by the qualified MolSysMT converter.
+    skip_digestion : bool, default=False
+        Internal bypass for arguments already digested by the owning boundary.
 
     Returns
     -------
@@ -102,6 +108,7 @@ def get_topography(
             submitted_atom_indices=submitted_atom_indices.tolist(),
             chemical_state=chemical_state,
             chemical_state_context=context,
+            skip_digestion=True,
         )
 
 
