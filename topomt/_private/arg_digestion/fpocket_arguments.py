@@ -1,6 +1,5 @@
 """Value contracts for the original fpocket CLI and persisted-file boundaries."""
 
-from numbers import Integral
 from pathlib import Path
 from string import hexdigits
 from typing import Any
@@ -17,6 +16,9 @@ from .external_arguments import (
     digest_skip_digestion,
     digest_structure_indices,
     digest_syntax,
+)
+from .external_arguments import (
+    digest_chemical_state as digest_reference_state,
 )
 from .provider_dispatch import ORIGINAL_BACKENDS
 
@@ -61,20 +63,7 @@ def digest_chemical_state(
 ) -> str | int | None:
     if chemical_state is None and caller == FILES_CALLER:
         return None
-    if isinstance(chemical_state, str) and chemical_state == 'reference':
-        return chemical_state
-    if (
-        isinstance(chemical_state, Integral)
-        and not isinstance(chemical_state, bool)
-        and int(chemical_state) >= 0
-    ):
-        return int(chemical_state)
-    _error(
-        'chemical_state',
-        chemical_state,
-        caller,
-        'Expected reference or a nonnegative integer chemical_state index.',
-    )
+    return digest_reference_state(chemical_state, caller=caller)
 
 
 def _path(value: Any, argument: str, caller: str | None) -> Path:

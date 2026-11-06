@@ -100,3 +100,10 @@ native equivalence or biological/affinity claim follows. #16/#58 and coverage
 snapshot and PharmacophoreMT receiving are the next Pocketeer slice. AlphaSpace2
 and pyCASTA follow after that boundary is qualified; #19's engineering progress
 and #30's independent SASA work are unchanged.
+
+Subsequent source work on 2026-11-06 implements the reference-state admission
+and provenance part of that next slice; see the
+[chemical-context checkpoint](chemical_context_checkpoint.md). Saved-output
+reconstruction, prepared chemical receiving and an updated installed candidate
+remain pending. The wheel and receiving evidence above retain their exact
+original scope and identity.

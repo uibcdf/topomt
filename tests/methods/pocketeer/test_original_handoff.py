@@ -1,5 +1,6 @@
 """Real original-engine structural controls; chemical receiving is separate."""
 
+import copy
 import tempfile
 import zipfile
 from importlib.metadata import PackageNotFoundError, distribution
@@ -10,6 +11,7 @@ import numpy as np
 import pytest
 
 import topomt as tmt
+from tests.methods.fpocket4.test_chemical_context import _with_states
 from topomt import pyunitwizard as puw
 from topomt.provider_output import ProviderRun
 
@@ -87,6 +89,46 @@ def scientific_artifacts(run):
         else data
         for name, data in run.artifacts
     }
+
+
+def test_original_run_retains_nonzero_reference_without_chemical_preparation(
+    source_profile, reference_output, tmp_path
+):
+    source, selected, _ = source_profile
+    source = _with_states(source, reference=1)
+    before = copy.deepcopy(
+        msm.convert(
+            source.chemical_states, to_form='molsysmt.ChemicalStatesDict'
+        ).to_dict()
+    )
+    result = tmt.get_provider_output(
+        source,
+        method='pocketeer',
+        selection=selected,
+        structure_indices=1,
+        chemical_state=np.int64(1),
+        r_min=puw.quantity(300, 'pm'),
+        r_max=puw.quantity(0.6, 'nm'),
+        sasa_threshold=puw.quantity(0.2, 'nm**2'),
+    )
+    context = result.run.metadata['chemical_state_context']
+    assert context['index'] == context['reference_index'] == 1
+    assert context['state_count'] == 2
+    assert context['state_id'] == 'analytical-state-1'
+    assert scientific_artifacts(result.run) == scientific_artifacts(
+        reference_output.run
+    )
+    np.testing.assert_equal(
+        msm.convert(
+            source.chemical_states, to_form='molsysmt.ChemicalStatesDict'
+        ).to_dict(),
+        before,
+    )
+    bundle = tmp_path / 'original.zip'
+    result.run.save(bundle)
+    assert ProviderRun.load(bundle).metadata['chemical_state_context'] == context
+    msm.set(source, element='atom', formal_charge=1, chemical_state=1)
+    assert result.run.metadata['chemical_state_context'] == context
 
 
 @pytest.mark.parametrize('policy', [['nm', 'ps'], ['pm', 'fs']])

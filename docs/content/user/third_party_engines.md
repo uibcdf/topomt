@@ -256,8 +256,21 @@ The original route requires one exported frame. Select its source index with
 Run metadata preserves the module's `version` and adds `distribution_version`
 only when the imported package matches its installed metadata origin. These
 identities can differ, as in Pocketeer 0.4.0's module string `0.3.0`.
-An explicit chemical-state argument and saved-output reconstruction are not
-supported by this Pocketeer route yet.
+`chemical_state='reference'` (the default) records MolSysMT's unambiguous
+reference state; its integer index is also accepted. Missing, empty, ambiguous
+or nonreference state selections are rejected before input export and original
+execution. TopoMT does not change the reference or prepare protonation, charges
+or bonds. Run metadata's `chemical_state_context` retains the reference identity
+and a digest of source charges, bonds and connectivity completeness, using the
+same PDB-boundary tool as fpocket.
+
+This context is provenance for the source receptor. Original Pocketeer 0.4.0
+detects pockets using geometry and Biotite SASA/radius tables; it ignores hydrogen
+atoms by default and does not prepare a protonation state. The context neither
+establishes chemical readiness nor implies that Pocketeer uses all its fields.
+Pharmacophore recognition belongs to PharmacophoreMT and requires separately
+qualified source chemistry. Saved-output reconstruction and Pocketeer's
+PharmacophoreMT receiving control remain pending.
 
 ## Show original pockets in MolSysViewer
 

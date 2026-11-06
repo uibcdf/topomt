@@ -19,6 +19,7 @@ from topomt.third_party._common import (
     prepare_wrapper_input_pdb,
     validate_single_frame_pdb,
 )
+from topomt.third_party.pdb_context import reference_chemical_context
 
 
 def _json_ready(value):
@@ -63,6 +64,7 @@ def get_topography(
     *,
     selection: str = 'all',
     structure_indices: int | list[int] = 0,
+    chemical_state: str | int = 'reference',
     syntax: str = 'MolSysMT',
     upstream_root: str | Path | None = None,
     skip_digestion: bool = False,
@@ -78,6 +80,9 @@ def get_topography(
         Nonempty source selection. Submitted rows use source atom order.
     structure_indices : int or sequence of int, default=0
         One source frame. None or 'all' must resolve to one exported frame.
+    chemical_state : str or int, default='reference'
+        Unambiguous reference state or its index. MolSysMT owns the state and
+        PDB export. No protonation, charge or bond preparation is performed.
     syntax : str, default='MolSysMT'
         Source selection syntax.
     upstream_root : str or Path, optional
@@ -110,6 +115,9 @@ def get_topography(
     >>> result = get_topography('protein.pdb', min_spheres=40)  # doctest: +SKIP
     """
 
+    chemical_context = reference_chemical_context(
+        molecular_system, chemical_state, provider='Pocketeer'
+    )
     with tempfile.TemporaryDirectory(prefix='topomt_pocketeer_') as tmpdir_name:
         tmpdir = Path(tmpdir_name)
 
@@ -181,6 +189,7 @@ def get_topography(
                 'parameters': _json_ready(normalized_kwargs),
                 'selection': _json_ready(selection),
                 'structure_indices': _json_ready(structure_indices),
+                'chemical_state_context': chemical_context,
                 'syntax': syntax,
                 'selected_atom_indices': selected_atom_indices.tolist(),
                 'filtered_input_atom_indices': filtered_atom_indices.tolist(),

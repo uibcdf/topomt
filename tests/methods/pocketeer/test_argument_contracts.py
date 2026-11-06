@@ -32,6 +32,10 @@ def forbidden(*args, **kwargs):
         ('structure_indices', []),
         ('structure_indices', [0, 1]),
         ('structure_indices', [0.0]),
+        ('chemical_state', True),
+        ('chemical_state', None),
+        ('chemical_state', -1),
+        ('chemical_state', 'structure'),
         ('syntax', 1),
         ('syntax', 'unknown'),
         ('upstream_root', 1),
@@ -71,7 +75,7 @@ def test_original_arguments_fail_before_input_work(name, value, monkeypatch):
 
 
 @pytest.mark.parametrize('function', [api.get_output, library.get_topography])
-@pytest.mark.parametrize('option', ['r_mni', 'chemical_state'])
+@pytest.mark.parametrize('option', ['r_mni', 'chemical_states'])
 def test_unknown_options_are_rejected_by_argdigest(function, option, monkeypatch):
     monkeypatch.setattr(library, 'prepare_wrapper_input_pdb', forbidden)
     with pytest.raises(UnknownArgumentError, match=option):
@@ -152,6 +156,7 @@ def test_original_values_are_normalized_without_adding_unsupplied_options(
         raise ReachedProvider
 
     monkeypatch.setattr(library, 'prepare_wrapper_input_pdb', prepare)
+    monkeypatch.setattr(library, 'reference_chemical_context', lambda *a, **k: {})
     monkeypatch.setattr(
         library,
         'import_upstream_module',
@@ -201,6 +206,7 @@ def test_exported_multiple_frames_fail_before_loading_provider(monkeypatch, tmp_
     monkeypatch.setattr(
         library, 'prepare_wrapper_input_pdb', lambda *a, **k: (pdb, np.array([0]))
     )
+    monkeypatch.setattr(library, 'reference_chemical_context', lambda *a, **k: {})
     monkeypatch.setattr(library, 'import_upstream_module', forbidden)
     with pytest.raises(ValueError, match='exactly one'):
         library.get_topography(object(), structure_indices='all')

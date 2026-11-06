@@ -12,6 +12,7 @@ from topomt import pyunitwizard as puw
 
 from .external_arguments import (
     _error,
+    digest_chemical_state,
     digest_molecular_system,
     digest_selection,
     digest_skip_digestion,
@@ -165,6 +166,7 @@ def digest_skip(value: Any, context: Context) -> bool:
 
 ARGUMENT_DIGESTERS = {
     'molecular_system': digest_molecular_system,
+    'chemical_state': digest_chemical_state,
     'selection': digest_selection,
     'structure_indices': digest_structure_indices,
     'syntax': digest_syntax,

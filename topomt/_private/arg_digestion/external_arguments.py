@@ -28,6 +28,24 @@ def digest_molecular_system(
     return molecular_system
 
 
+def digest_chemical_state(chemical_state: Any, caller: str | None = None) -> str | int:
+    """Admit a reference-state selector; source agreement is adapter-owned."""
+    if isinstance(chemical_state, str) and chemical_state == 'reference':
+        return chemical_state
+    if (
+        isinstance(chemical_state, Integral)
+        and not isinstance(chemical_state, bool)
+        and int(chemical_state) >= 0
+    ):
+        return int(chemical_state)
+    _error(
+        'chemical_state',
+        chemical_state,
+        caller,
+        'Expected reference or a nonnegative integer chemical_state index.',
+    )
+
+
 def _indices(
     value: Any, argument: str, caller: str | None, single: bool = False
 ) -> Any:

@@ -14,8 +14,12 @@ pause recorded below still applies to the broader deferred work.
 Subsequent explicit continuation on 2026-11-05 resumed the bounded original
 Pocketeer argument/structural profile. Its
 [checkpoint](pocketeer/argument_handoff_checkpoint.md) records original-engine
-execution, unit policies and installed receiving. Pocketeer chemical-state and
-PharmacophoreMT receiving remain unqualified; this does not resume native parity.
+execution, unit policies and installed receiving. The subsequent
+[reference-state source boundary](pocketeer/chemical_context_checkpoint.md)
+records existing MolSysMT chemistry without preparing it. Saved-result
+reconstruction and PharmacophoreMT receiving remain pending; the earlier
+installed-wheel evidence covers its original candidate. This does not resume
+native parity.
 
 The subsequent [installed receiving control](fpocket4/installed_receiving_checkpoint.md)
 passes 32 bounded cases against local TopoMT/MolSysMT/PharmacophoreMT wheels,
