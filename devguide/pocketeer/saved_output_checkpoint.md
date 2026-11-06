@@ -134,3 +134,8 @@ artifacts, with no invented source-qualified reconstruction. The new source
 reader does not itself qualify a new installed wheel, receptor chemistry or
 PharmacophoreMT recognition. Those remain the next steps, using the established
 prepared-receptor profile and public consumer operations.
+
+Subsequent source work on 2026-11-06 completes that prepared receiving control;
+see its [checkpoint](pharmacophore_handoff_checkpoint.md). The original source and
+artifact identities above remain historical evidence. A new installed candidate
+is the next Pocketeer requirement in the long-term plan.

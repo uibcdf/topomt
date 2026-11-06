@@ -1,4 +1,4 @@
-"""Consume a qualified original fpocket run through public PharmacophoreMT tools.
+"""Consume a qualified original-provider run through public PharmacophoreMT tools.
 
 This opt-in integration recorder owns no molecular recognition or pharmacophore
 algorithm. Its explicit hydrophobic projections are an analytical composition
@@ -18,6 +18,12 @@ import numpy as np
 import topomt as tmt
 from topomt import pyunitwizard as puw
 from topomt.provider_output import ProviderRun
+from topomt.third_party.pdb_context import reference_chemical_context
+
+_PROFILES = {
+    'original-fpocket-source-handoff-1': ('fpocket', 'cli'),
+    'original-pocketeer-source-handoff-1': ('pocketeer', 'library'),
+}
 
 
 def _sha256(path: Path) -> str:
@@ -74,7 +80,8 @@ def consume(
     Parameters
     ----------
     handoff_dir : Path
-        Output of qualify_fpocket_handoff: source.h5msm, original.zip and receipt.json.
+        Output of qualify_fpocket_handoff or qualify_pocketeer_handoff:
+        source.h5msm, original.zip and receipt.json.
         Molecular chemistry must already support MolSysMT native recognition.
     output_dir : Path
         New directory for query.json and the consumer receipt.
@@ -115,55 +122,85 @@ def consume(
     if output_dir.exists():
         raise FileExistsError(output_dir)
     evidence = json.loads((handoff_dir / 'receipt.json').read_text())
-    if evidence.get('chemical_state') != {'count': 1, 'reference_index': 0}:
+    if not isinstance(evidence, dict):
+        raise ValueError('A mapping handoff receipt is required.')
+    state = evidence.get('chemical_state')
+    if (
+        not isinstance(state, dict)
+        or any(type(state.get(key)) is not int for key in ('count', 'reference_index'))
+        or state != {'count': 1, 'reference_index': 0}
+    ):
         raise ValueError(
             'A single explicit reference chemical-state context is required.'
         )
-    if evidence.get('structure_index') != 1:
-        raise ValueError('This handoff profile requires source structure context 1.')
-    if evidence.get('profile') != 'original-fpocket-source-handoff-1' or not (
-        evidence.get('checks')
-        and all(value is True for value in evidence['checks'].values())
+    if (
+        type(evidence.get('structure_index')) is not int
+        or evidence['structure_index'] != 1
     ):
-        raise ValueError('A successful original fpocket handoff receipt is required.')
+        raise ValueError('This handoff profile requires source structure context 1.')
+    profile, checks = evidence.get('profile'), evidence.get('checks')
+    if (
+        not isinstance(profile, str)
+        or profile not in _PROFILES
+        or not isinstance(checks, dict)
+        or not checks
+        or not all(value is True for value in checks.values())
+    ):
+        raise ValueError(
+            'A successful supported original-provider handoff receipt is required.'
+        )
+    provider, backend = _PROFILES[profile]
     source_file = handoff_dir / 'source.h5msm'
     if _sha256(source_file) != evidence.get('source_sha256'):
         raise ValueError('The source checksum disagrees with the handoff receipt.')
     run = ProviderRun.load(handoff_dir / 'original.zip')
     if (
         run.run_id != evidence.get('run_id')
-        or run.provider != 'fpocket'
-        or run.backend != 'cli'
+        or run.provider != provider
+        or run.backend != backend
+        or type(run.metadata.get('structure_indices')) is not int
         or run.metadata.get('structure_indices') != 1
     ):
         raise ValueError('Original run identity or structure context disagrees.')
     source = msm.convert(source_file, to_form='molsysmt.MolSys')
     if (
-        source.chemical_states.n_chemical_states != 1
+        source.chemical_states is None
+        or source.chemical_states.n_chemical_states != 1
         or source.chemical_states.reference_chemical_state_index != 0
     ):
         raise ValueError('Restored source chemical-state context disagrees.')
     before = puw.get_value(msm.get(source, coordinates=True), to_unit='nm').copy()
-    with tempfile.TemporaryDirectory(prefix='topomt_consumer_') as temporary:
-        root = Path(temporary)
-        for name, data in run.artifacts:
-            target = root / name  # ProviderRun.load validated names and checksums.
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(data)
-        inputs = list((root / 'input').glob('*.pdb'))
-        if len(inputs) != 1:
-            raise ValueError('Exactly one submitted PDB is required.')
+    chemical_before = reference_chemical_context(source, 0, provider=provider)
+    if provider == 'pocketeer':
         output = tmt.get_provider_output(
             source,
-            method='fpocket',
+            method='pocketeer',
             backend='files',
-            pdb_file=inputs[0],
-            output_dir=root / 'output',
-            selection=run.metadata['selection'],
-            structure_indices=1,
-            submitted_atom_indices=run.metadata['submitted_atom_indices'],
-            chemical_state_context=run.metadata.get('chemical_state_context'),
+            bundle_file=handoff_dir / 'original.zip',
         )
+        if output.run != run:
+            raise ValueError('Recovered original Pocketeer run identity disagrees.')
+    else:
+        with tempfile.TemporaryDirectory(prefix='topomt_consumer_') as temporary:
+            root = Path(temporary)
+            for name, data in run.artifacts:
+                target = root / name  # ProviderRun.load validated names and checksums.
+                target.parent.mkdir(parents=True, exist_ok=True)
+                target.write_bytes(data)
+            inputs = list((root / 'input').glob('*.pdb'))
+            if len(inputs) != 1:
+                raise ValueError('Exactly one submitted PDB is required.')
+            output = tmt.get_provider_output(
+                source,
+                method='fpocket',
+                backend='files',
+                pdb_file=inputs[0],
+                output_dir=root / 'output',
+                selection=run.metadata['selection'],
+                structure_indices=1,
+                submitted_atom_indices=run.metadata['submitted_atom_indices'],
+                chemical_state_context=run.metadata.get('chemical_state_context'),
+            )
     pocket = next(
         (record for record in output.pockets if record.source_id == pocket_id), None
     )
@@ -235,11 +272,15 @@ def consume(
             before, puw.get_value(msm.get(source, coordinates=True), to_unit='nm')
         ),
         'source_bytes_unchanged': _sha256(source_file) == evidence['source_sha256'],
+        'source_chemical_context_unchanged': reference_chemical_context(
+            source, 0, provider=provider
+        )
+        == chemical_before,
     }
     if not all(checks.values()):
         raise ValueError(f'Consumer handoff failed: {checks}')
     receipt = {
-        'profile': 'fpocket-pharmacophoremt-hydrophobic-control-1',
+        'profile': f'{provider}-pharmacophoremt-hydrophobic-control-1',
         'context': context,
         'pharmacophoremt_version_label': consumer_version,
         'pocket_atom_indices': list(pocket.atom_indices),

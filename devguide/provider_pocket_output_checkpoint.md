@@ -19,8 +19,10 @@ execution, unit policies and installed receiving. The subsequent
 records existing MolSysMT chemistry without preparing it. The
 [saved-result reader](pocketeer/saved_output_checkpoint.md) now reconstructs
 source-bound Pocketeer output without the optional engine. Prepared-receptor
-PharmacophoreMT receiving remains pending; the earlier
-installed-wheel evidence covers its original candidate. This does not resume
+PharmacophoreMT receiving now has a
+[bounded prepared source control](pocketeer/pharmacophore_handoff_checkpoint.md);
+the earlier installed-wheel evidence covers its original candidate. Updated
+installed receiving remains pending. This does not resume
 native parity.
 
 The subsequent [installed receiving control](fpocket4/installed_receiving_checkpoint.md)

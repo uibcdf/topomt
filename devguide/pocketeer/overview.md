@@ -8,8 +8,11 @@ see its [checkpoint](argument_handoff_checkpoint.md). The subsequent
 [reference-state boundary](chemical_context_checkpoint.md) preserves MolSysMT
 chemical facts without preparing chemistry. Its subsequent
 [saved-output reader](saved_output_checkpoint.md) verifies source agreement and
-recovers parsed records without the optional engine. PharmacophoreMT receiving remains
-unqualified; broader native work retains the [delivery checkpoint](../provider_pocket_output_checkpoint.md).
+recovers parsed records without the optional engine. The subsequent
+[prepared-receptor source control](pharmacophore_handoff_checkpoint.md) consumes
+original membership through public PharmacophoreMT operations. Updated installed
+receiving remains pending; broader native work retains the
+[delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
 ## Identity, installation and use
 
@@ -72,6 +75,7 @@ bounded outcomes, not full-provider certification.
 - [ArgDigest and original-library structural receiving](argument_handoff_checkpoint.md).
 - [MolSysMT reference-state provenance and remaining chemical receiving](chemical_context_checkpoint.md).
 - [Saved original output and source-bound recovery](saved_output_checkpoint.md).
+- [Prepared receptor and public PharmacophoreMT receiving](pharmacophore_handoff_checkpoint.md).
 - [Existing native contract](../pocketeer_contract.md).
 - [Native comparison assertions](../../tests/methods/pocketeer/test_parity.py).
 - [External-tool catalogue and stewardship](../external_tools_catalog.md).

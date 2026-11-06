@@ -52,12 +52,12 @@ changing another component.
 | Provider | Current bounded evidence | Next required work |
 | --- | --- | --- |
 | fpocket | Original CLI/files, reference chemistry, prepared hydrophobic consumer and bounded installed receipts under `fpocket4/`. | Preserve regression coverage; broader fidelity and component gates retain their owners. |
-| Pocketeer | Public 0.4.0 original, argument/structural and reference-state controls; source-bound saved reader. The earlier installed wheel covers its earlier source. | Prepared receptor and public PharmacophoreMT receiving, then updated exact installed candidate. |
+| Pocketeer | Public 0.4.0 original, argument/state and saved-reader controls; prepared source and public PharmacophoreMT hydrophobic receiving under both unit policies. The earlier installed wheel covers its earlier source. | Updated exact installed candidate and receiving/dependency-origin verification. |
 | AlphaSpace2 | Existing original adapter/output and retained exports; current receiving qualification pending. | Review provider contracts, saved reconstruction and prepared consumer control. |
 | pyCASTA | Existing original adapter/output and retained JSON/files; current receiving qualification pending. | Review provider contracts, saved reconstruction and prepared consumer control. |
 | CASTp/CASTpFold | Existing server/files adapters and retained archive evidence. | Verify current route/context fidelity and qualify an explicit consumer profile. |
 
-Resume Pocketeer from its [saved-output checkpoint](pocketeer/saved_output_checkpoint.md).
+Resume Pocketeer from its [prepared consumer checkpoint](pocketeer/pharmacophore_handoff_checkpoint.md).
 Reuse the fpocket developer qualification recorder and PharmacophoreMT's public
 tools when extending that pilot; do not introduce a second recognition or model
 implementation. Keep the full goal active until the evidence above is complete.

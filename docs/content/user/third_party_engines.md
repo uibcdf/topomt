@@ -269,8 +269,14 @@ detects pockets using geometry and Biotite SASA/radius tables; it ignores hydrog
 atoms by default and does not prepare a protonation state. The context neither
 establishes chemical readiness nor implies that Pocketeer uses all its fields.
 Pharmacophore recognition belongs to PharmacophoreMT and requires separately
-qualified source chemistry. Pocketeer's prepared-receptor PharmacophoreMT
-receiving control remains pending.
+qualified source chemistry. A bounded source control now consumes a prepared
+ERalpha fragment's original Pocketeer residue membership through public
+PharmacophoreMT `get_features` and `from_receptor_projections`, then persists the
+native model. The caller declares the selected pocket, direction, distance and
+matching radius. This optional hydrophobic control preserves source/frame/state
+and units; it does not add a PharmacophoreMT runtime dependency to TopoMT.
+Receptor preparation and biological validation retain their separate ownership.
+Qualification of an updated installed TopoMT candidate remains separate.
 
 Save an original run and recover its parsed output with its full source:
 
