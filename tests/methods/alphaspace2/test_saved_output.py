@@ -123,6 +123,8 @@ def test_saved_records_preserve_legacy_fields_and_original_run(captured, tag, po
         _compare(output.input_points_nm, witness['input_points_nm'])
         assert len(output.records) == len(witness['records']) == 61
         for actual, expected in zip(output.records, witness['records']):
+            assert actual.record_kind == 'pocket' and actual.run == output.run
+            assert actual.run_id == output.run.run_id
             _compare(
                 {
                     name: getattr(actual, name)
