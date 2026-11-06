@@ -73,6 +73,7 @@ bounded outcomes, not full-provider certification.
 - [ArgDigest admission of original-provider method/backend](argdigest_dispatch_checkpoint.md).
 - [ArgDigest contracts for original fpocket options and values](argument_contracts_checkpoint.md).
 - [Public fpocket routing and recovery gateway contracts](public_gateways_checkpoint.md).
+- [Complete source-suite results and baseline classification](full_suite_checkpoint.md).
 - [Original 4.2.3 source review and charge-parser control](original_source_review.md).
 - [Native evidence and caveats](native_checkpoint.md).
 - [Source/binary parity matrix](../native_methods_plan.md).

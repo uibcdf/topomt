@@ -1,0 +1,96 @@
+{
+  "schema": "topomt.full-source-suite-evidence@1",
+  "archive": "full_suite_20261105.zip",
+  "size": 360074,
+  "sha256": "c6340e97a143a4c9533ade559675948e0f5f8929e8bdfe6cff23fc48ed33be20",
+  "members": 52,
+  "source_head": "ca8ad21f726b19cb32644fbc611ff5f48c043f8f",
+  "user_version_sha256": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+  "scope": "Source TopoMT, all tests/, normal conftest, no exclusions; installed independent dependencies",
+  "full_suite": {
+    "counts": {
+      "collected": 2245,
+      "deselected": 0,
+      "errors": 0,
+      "executed": 2245,
+      "failed": 8,
+      "not_executed": 0,
+      "passed": 2156,
+      "reruns": 0,
+      "skipped": 76,
+      "subtests": {},
+      "warnings": 41,
+      "xfailed": 5,
+      "xpassed": 0
+    },
+    "seconds": 1078.3139863761608,
+    "exit_code": 1,
+    "junit": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "8",
+      "skipped": "81",
+      "tests": "2245",
+      "time": "1078.209",
+      "timestamp": "2026-11-05T20:16:23.271879-06:00",
+      "hostname": "spika"
+    }
+  },
+  "argdigest_and_original_handoff": {
+    "passed": 144,
+    "failed": 0,
+    "skipped": 0
+  },
+  "castp_modern_measurements": {
+    "passed": 952,
+    "failed": 0
+  },
+  "baseline": {
+    "source": "edb43579b2a937e1ac5faa7f89876c7ff3c81e5c",
+    "failed": 8,
+    "seconds": 7.559816403081641,
+    "all_messages_equal": true
+  },
+  "optional_tools_control": {
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 0.1517526179086417,
+    "installed_added": {
+      "scikit-learn": "1.9.1",
+      "joblib": "1.6.0",
+      "scikit-image": "0.26.0",
+      "cloudpickle": "3.1.2",
+      "ImageIO": "2.38.1",
+      "lazy-loader": "0.6",
+      "narwhals": "2.28.0",
+      "threadpoolctl": "3.8.0",
+      "tifffile": "2026.10.15"
+    },
+    "full_suite_rerun_in_this_expanded_profile": false
+  },
+  "integrity": {
+    "full": true,
+    "baseline": true,
+    "tools_control": true,
+    "dropped_records": 0
+  },
+  "execution": {
+    "requested": "xdist, four workers, loadscope",
+    "observed_workers": [
+      "gw0",
+      "gw1",
+      "gw2",
+      "gw3"
+    ],
+    "original_header_mode": "serial",
+    "header_caveat": "The explicit -p xdist.plugin route is recorded as serial in the original session header; argv and gw0-gw3 phase identities retain actual distributed execution. Original artifact bytes are unchanged."
+  },
+  "limitations": [
+    "Full source suite failed; six reproduced baseline scientific/viewer failures remain.",
+    "The two missing-tool failures pass in a separate 20-case control after optional dependencies are added; that does not rewrite the original full run.",
+    "No new installed-TopoMT, hosted, other-platform/minor or publication qualification.",
+    "Earlier immutable installed-wheel evidence remains separate."
+  ],
+  "retention": "Original package/engine files and temporary environments remain task-owned local artifacts; the archive retains results, identities and digests, not those package bytes."
+}
