@@ -1,0 +1,171 @@
+{
+  "date": "2026-11-06",
+  "owner": "uibcdf/topomt#101",
+  "fidelity_owner": "uibcdf/topomt#19",
+  "producer": "3e86d1b2adec16683b5b74bb4666781f276412f2",
+  "archive": {
+    "name": "alphaspace2_arguments_20261106.zip",
+    "bytes": 542302,
+    "members": 73,
+    "sha256": "9fbf9751f2f48bb165630c38d304caf1ecf7eab87b5817a9a5dd444a38b7dcf4"
+  },
+  "tests": {
+    "red": {
+      "counts": {
+        "collected": 70,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 70,
+        "failed": 67,
+        "not_executed": 0,
+        "passed": 3,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration_seconds": 11.831829049857333,
+      "exitstatus": 1
+    },
+    "green": {
+      "counts": {
+        "collected": 70,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 70,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 70,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration_seconds": 11.441420389106497,
+      "exitstatus": 0
+    },
+    "regression": {
+      "counts": {
+        "collected": 396,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 396,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 396,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 4,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration_seconds": 123.02589443000033,
+      "exitstatus": 0
+    },
+    "final-alpha": {
+      "counts": {
+        "collected": 78,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 78,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 78,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {},
+        "warnings": 4,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration_seconds": 19.52568284003064,
+      "exitstatus": 0
+    },
+    "distribution": {
+      "counts": {
+        "collected": 20,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 20,
+        "failed": 1,
+        "not_executed": 0,
+        "passed": 19,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {
+          "passed": 5
+        },
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration_seconds": 4.553368343040347,
+      "exitstatus": 1
+    },
+    "distribution-final": {
+      "counts": {
+        "collected": 20,
+        "deselected": 0,
+        "errors": 0,
+        "executed": 20,
+        "failed": 0,
+        "not_executed": 0,
+        "passed": 20,
+        "reruns": 0,
+        "skipped": 0,
+        "subtests": {
+          "passed": 5
+        },
+        "warnings": 0,
+        "xfailed": 0,
+        "xpassed": 0
+      },
+      "duration_seconds": 4.455247079022229,
+      "exitstatus": 0
+    }
+  },
+  "original_source": {
+    "sdist": "alphaspace2-0.1.2.tar.gz",
+    "wheel": "alphaspace2-0.1.2-py3-none-any.whl",
+    "wheel_sha256": "82933999551c2ef67b7c24fbf7214c3e775a55b37a297f418cff73e383a69eff",
+    "all_python_files_match_public_sdist": {
+      "alphaspace2/Cluster.py": "2b1cbd7e223dc1176dff16dbd33cc2984f255cc15db3af4b2a6b034059378935",
+      "alphaspace2/Community.py": "d88a37251581e5a498197c0e2d6f1a77413c24c6fe9187a500b1df86f16cafd4",
+      "alphaspace2/Configs.py": "dfd548ca20fe27252929fed8291744c4a2278aaf297d25c2bd3dd0d63cfdc018",
+      "alphaspace2/Features.py": "edaf3aeb581955f9b7c197e1c12db30e39bca203d6a6866ed2dd5a382438b531",
+      "alphaspace2/Snapshot.py": "691470f2c2bf7f9ed56dd3395b7ec88ea902c21fbb890dcc971aed75937fff1b",
+      "alphaspace2/Trajectory.py": "0612435451b18bc67e18ca559751ef6d1e13c21feb5f6889629c04e11f32adc5",
+      "alphaspace2/View.py": "357b2b958c0d9ce006b1ef4c9e7742d5790527926b2882607d3e604c27ff3f98",
+      "alphaspace2/VinaScoring.py": "6efb865d0ccda51169a4c54820fbdcefb8a7cc29fa22d82e611f11a6bfff83ba",
+      "alphaspace2/__init__.py": "7c36d4e15f93fcf1c3714b8fedfa65c0847dc973c1bd3a21ce716c7ebc520180",
+      "alphaspace2/data/AS_Chimera_beta.py": "2f332252b6a10e64e536846be6e7adbfb24c9f8f612db381924e5a7d006ca756",
+      "alphaspace2/data/AS_chimera_alpha.py": "faa71619a7d4cb947d3889c1e25e967ceef5c383d6b28292b84136d35999e930",
+      "alphaspace2/functions.py": "f56a47ce127a2b20e37bff61306cd09b9fc05d7e60bb27b0a6a0a6b75fb790fc"
+    }
+  },
+  "checks": {
+    "ruff_lint": "passed",
+    "ruff_formatted_files": 447,
+    "mypy_source_files": 7,
+    "distribution_runtime_resources": 628,
+    "docs_build": "passed",
+    "docs_known_warnings": 12,
+    "public_pytest_receptor": "1.2.0",
+    "source_files_match_committed_producer": true
+  },
+  "preserved_human_version_sha256": "91af00335ecf06be1573c95e22dbba13bfaa0a9e472ffa3de802cee87dc38baf",
+  "limits": [
+    "Source profile only; current installed wheel receipts still refer to their previous producer.",
+    "The original reference is PyPI 0.1.2 with the already documented NumPy, MDTraj SASA and unbound-contact compatibility adjustments, not current upstream main.",
+    "Initial red includes a missing-MDTraj normalization probe; final optional imports skip only ordinary absent-engine use, while designated real original cases executed.",
+    "Four undefined original nonpolar occupancy ratios retain RuntimeWarnings/NaN semantics; zero is not fabricated.",
+    "Runtime identity and overlay RECORD checks are a separate probe, not before/after instrumentation of the pytest process.",
+    "Receptor/binder reference-state and complete source provenance, engine-free saved reconstruction, prepared PharmacophoreMT receiving and a new installed AlphaSpace2 candidate remain pending.",
+    "No new chemical recognition, preparation, pharmacophore or original detector implementation. No hosted/full-suite/matrix/public-release admission."
+  ]
+}

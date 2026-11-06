@@ -1,9 +1,11 @@
 # AlphaSpace2 provider overview
 
-Reviewed: 2026-10-01 (repository and issue state). Scientific evidence dates are
-stated below; this organizational update does not rerun or extend that evidence.
-Role: integrated provider and comparison reference. Implementation work remains
-paused under the [delivery checkpoint](../provider_pocket_output_checkpoint.md).
+Reviewed: 2026-11-06 for the original argument handoff. Scientific evidence dates
+are stated below; the historical native evidence retains its own scope.
+Role: integrated provider and comparison reference. Original receiving work is
+active under [#101](https://github.com/uibcdf/topomt/issues/101) and the
+[provider handoff plan](../provider_handoff_plan.md); native work retains the
+separate [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
 ## Identity, installation and use
 
@@ -40,6 +42,81 @@ geometry. The [viewer checkpoint](../provider_output_viewer_checkpoint.md)
 records initial consumer adoption. Point/membership displays are not exact
 closed pocket regions. Exhaustive original fidelity remains under
 [#19](https://github.com/uibcdf/topomt/issues/19), independently of native parity.
+
+## Original argument handoff, 2026-11-06
+
+Producer `3e86d1b2adec16683b5b74bb4666781f276412f2` adds both ArgDigest axes
+to the original library adapter and its public gateways. The original-output
+domain follows the closed library signature; unknown option names are rejected
+before delegation. Native options still belong to their own route, whose
+default remains unchanged. Invalid original counts, selections, syntax names,
+frame axes and source-import paths fail before optional dependency or molecular
+work. Literal booleans are required for the internal bypass. NumPy integer
+counts become Python integers, while caller-owned molecular objects and valid
+index arrays retain their identity and contents.
+
+Receptor and binder axes share the existing external-provider value admission,
+with errors naming their respective argument. Source-dependent selection and
+molecular-form conversion remain public MolSysMT operations. The source-import
+root validator is extracted from Pocketeer's existing contract, preserving its
+registry entry, instead of introducing another provider's path rules. This
+stage introduces no molecular preparation, recognition, pharmacophore model or
+detector implementation. Explicit chemical-state arguments remain unsupported
+until the source-context stage; they are rejected rather than silently ignored.
+
+The initial 70-case test run reports 67 failures and three passing native
+delegation cases. One failure is the normalization probe's unavailable MDTraj;
+the other failures expose absent argument admission or auditable plans. The
+corrected contract passes all **70 cases** with original dependencies available.
+A fresh process blocks both AlphaSpace2 and MDTraj to verify that invalid
+arguments do not attempt either import. The final **78-case AlphaSpace2
+selection** also passes its eight original-engine receptor, binder, occupancy,
+empty-selection and displaced-frame comparisons. No local source mirror is
+needed by that designated original-engine selection.
+
+The wider affected source selection passes **396 cases, zero skips/failures,
+123.03 s**. This includes the earlier fpocket and Pocketeer source/consumer
+regressions after the common validator extraction. Both it and the final
+78-case selection retain four RuntimeWarnings from original `Cluster.py:268`:
+undefined nonpolar occupancy ratios keep their NaN semantics. These are not
+replaced with zero. Original definitions retain their #33/#34 ownership.
+
+The measured Linux/Python 3.14.7 profile uses original AlphaSpace2 **0.1.2**
+built from its public source archive, MDTraj **1.11.1**, Cython **3.2.6** and
+configargparser **0.0.2** in a separate temporary package overlay. All four
+downloaded artifacts match PyPI's SHA-256 records, and all 12 original Python
+files in the built AlphaSpace2 wheel match the source archive. The previously
+documented NumPy, MDTraj SASA and unbound-contact compatibility adjustments
+remain explicit parts of the adapter/reference profile. The four overlay
+distributions pass 479 RECORD checks in a separate identity probe; this is not
+before/after instrumentation of the pytest process. Other scientific dependencies
+come from the retained independent receiving prefix. TopoMT itself runs from
+this source checkout; metadata labels alone do not identify its producer.
+
+Ruff passes across 447 Python files, scoped mypy passes seven source modules,
+and the 20 administrative distribution/reporting cases pass with setuptools in
+an isolated tool overlay. An initial administrative run lacked setuptools; its
+failure and the corrected runner are retained without changing the scientific
+prefix. The three new runtime modules are included in the 628-file resource
+inventory. The fresh HTML documentation build succeeds with the same 12 known
+diagnostics outside the edited guide, including unavailable PlantUML. Published
+Pytest Receptor 1.2.0 reports every pytest run. The human's version edit remains
+unchanged, and no dependency declaration or principal/sibling environment changes.
+
+The [argument archive](evidence/alphaspace2_arguments_20261106.zip) and
+[sidecar](evidence/alphaspace2_arguments_20261106.json) retain the producer,
+source/test support, original inputs, public artifact hashes, identity probe,
+two original bound-result bundles, commands/logs, initial failures and executed
+outcomes. Archive: 542,302 bytes, 73 members, SHA-256
+`9fbf9751f2f48bb165630c38d304caf1ecf7eab87b5817a9a5dd444a38b7dcf4`.
+Every member digest is verified. Raw resources remain under
+`/dev/shm/topomt-alphaspace2-101` for the next phase.
+
+Next: bind receptor and binder reference-state/source evidence, reconstruct
+saved results without the original engine, exercise the prepared public
+PharmacophoreMT consumer and qualify the changed exact installed candidate.
+This source checkpoint does not extend previous installed-wheel receipts,
+general fidelity, native parity, full-suite, matrix or public-delivery claims.
 
 ## Local implementation
 
