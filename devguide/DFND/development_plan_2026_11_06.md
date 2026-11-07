@@ -151,8 +151,9 @@ method and tolerances before observing DFND. Obtain primary method sources and
 independent local optimization/bounds where analytic oracles are unavailable.
 Record disagreement before tuning segmentation or morphology.
 
-The 65-shape catalog remains useful engineering characterization. Density/radius
-changes alter the obstacle union; larger probes can split components, so their
+The synthetic catalog (currently 69 entries) remains useful engineering
+characterization. Density/radius changes alter the obstacle union; larger probes
+can split components, so their
 counts need not decrease. Peer methods retain their own regions/radii/measures.
 A failed provider run is not a successful zero-feature result.
 
