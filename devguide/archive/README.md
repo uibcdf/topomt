@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (16)
+### Resolved (17)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`castp3_1cge_missing_closed_voids.md`](castp3_1cge_missing_closed_voids.md) — [#85](https://github.com/uibcdf/topomt/issues/85) — Resolve three missing native closed cavities in the pinned 1CGE CASTpFold output. *(resolved, reproduced)*
@@ -15,6 +15,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`castp3_modern_predicate_grid.md`](castp3_modern_predicate_grid.md) — [#89](https://github.com/uibcdf/topomt/issues/89) — Align modern CASTp3 exact predicates and event ranks with its decimal weighted input geometry. *(resolved, measured)*
 - [`castp3_oracle_alternate_location_identity.md`](castp3_oracle_alternate_location_identity.md) — [#83](https://github.com/uibcdf/topomt/issues/83) — Preserve original PDB atom serials after the parser removes alternate locations. *(resolved, reproduced)*
 - [`castp3_radius_coverage_and_void_panel.md`](castp3_radius_coverage_and_void_panel.md) — [#82](https://github.com/uibcdf/topomt/issues/82) — Audit radius-profile evidence across the archived corpus and expand analytical closed-void comparisons. *(resolved, measured)*
+- [`discussions_resource_organization.md`](discussions_resource_organization.md) — [#103](https://github.com/uibcdf/topomt/issues/103) — Organize resource Discussions with preserved history, facets and maintained guidance. *(resolved, inspected)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*
 - [`molsysviewer_topomt_init_exports.md`](molsysviewer_topomt_init_exports.md) — [#55](https://github.com/uibcdf/topomt/issues/55) — Restore MolSysViewer TopoMT add-on lifecycle exports. *(resolved, measured)*
 - [`profile_memory_resource_lifecycle.md`](profile_memory_resource_lifecycle.md) — [#95](https://github.com/uibcdf/topomt/issues/95) — Preserve caller files and release memory-profile scratch and tracing. *(resolved, reproduced)*

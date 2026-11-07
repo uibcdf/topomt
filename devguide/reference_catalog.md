@@ -7,6 +7,10 @@ use [status](status.md) and [the roadmap](roadmap.md) for current scheduling.
 
 ## Main documents
 
+- [discussions.md](discussions.md) and [discussion_resources.md](discussion_resources.md)
+  Local category purposes, accountable ownership, resource triage, facets,
+  scientific-evidence boundaries and canonical conversation navigation.
+
 - [DFND/study_zone.md](DFND/study_zone.md)
   Named system studies for DFND development and original-provider comparison;
   case-unit content, independent references, fair evaluation and publication

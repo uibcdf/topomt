@@ -21,6 +21,11 @@ library, executable, web-service and native routes.
 Start with the [developer guide](devguide/index.md) for onboarding, current work
 and transferring development to another machine.
 
+For questions and scientific-resource conversations, start with
+[TopoMT Discussions](https://github.com/uibcdf/topomt/discussions/132).
+Contributors maintaining that area should read
+[the category, label and follow-up instructions](devguide/discussions.md).
+
 Metadata and configured source/installed matrices target Python 3.11–3.14; routine
 workspace development uses `molsyssuite@uibcdf_3.14`. Qualification/admission stays
 tracked in [#16](https://github.com/uibcdf/topomt/issues/16). Distribution controls

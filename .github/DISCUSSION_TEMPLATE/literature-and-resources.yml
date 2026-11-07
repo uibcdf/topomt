@@ -1,0 +1,45 @@
+title: '[Paper/Resource] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Discuss papers, reviews and technical resources on molecular topography.
+        Search existing conversations first. A paper documenting a tool can be cited
+        in its tool thread; use a reading thread for a distinct scientific discussion.
+        Summarize findings and questions here, with links to the underlying evidence.
+  - type: input
+    id: title
+    attributes:
+      label: Full resource title
+      description: Original title and publication date, if known.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Primary source or DOI
+      description: Original publication, preprint or author-maintained technical resource.
+    validations:
+      required: true
+  - type: textarea
+    id: relevance
+    attributes:
+      label: Relevance and scientific question
+      description: Why does this matter for TopoMT or the science it supports?
+    validations:
+      required: true
+  - type: textarea
+    id: findings
+    attributes:
+      label: Findings, arguments and limitations
+      description: Distinguish author-reported results, your interpretation and independently reproduced evidence. Which claims, definitions or assumptions should we examine?
+  - type: textarea
+    id: context
+    attributes:
+      label: Features, context and possible studies
+      description: Relevant topographic phenomena, synthetic controls, molecular systems or trajectories. Maintainers apply supported labels; unknowns need no label.
+  - type: textarea
+    id: related
+    attributes:
+      label: Related conversations and follow-up
+      description: Link existing methods, datasets, study results and actionable owning issues. A citation alone does not establish TopoMT validation.

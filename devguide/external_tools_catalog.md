@@ -1,16 +1,21 @@
 # External-tool catalogue and provider stewardship
 
-Updated: 2026-10-01. This is the maintained index for external integrations,
-comparison references and research candidates. Historical intake remains in
+Organization updated: 2026-11-07; technical assessments retain their stated dates.
+This is the maintained index for external integrations, comparison references
+and research candidates. Historical intake remains in
 [#8](https://github.com/uibcdf/topomt/issues/8); bounded reorganization is
 tracked in [#67](https://github.com/uibcdf/topomt/issues/67).
 
 Permanent conversation: [catalogue discussion #68](https://github.com/uibcdf/topomt/discussions/68)
-in the [External Tools category](https://github.com/uibcdf/topomt/discussions/categories/external-tools).
+in [Methods and Tools](https://github.com/uibcdf/topomt/discussions/categories/methods-and-tools).
+The [resource register](discussion_resources.md) links each canonical resource
+conversation, including historical candidates. Read [the contributor instructions](discussions.md)
+for category procedures, facets and follow-up. Resource reviews, arguments and
+dated conclusions belong in the conversations themselves.
 
 Datasets and validation references have their own
 [benchmark catalogue](benchmark_catalog.md) and permanent
-[discussion #92](https://github.com/uibcdf/topomt/discussions/92) in Reading List.
+[discussion #92](https://github.com/uibcdf/topomt/discussions/92) in Datasets and Benchmarks.
 
 | Integrated provider conversation | Maintained overview |
 |---|---|
@@ -23,16 +28,18 @@ Datasets and validation references have their own
 ## Ownership and current scope
 
 This catalogue and the five linked provider overviews are permanent, versioned
-navigation records outside the defect/proposal queues. Discussions host
-discovery and provider conversations; their opening posts link here rather than
-copying changing installation, evidence or roadmap text. Independently closable
+navigation records outside the defect/proposal queues. Discussions host resource
+descriptions, discovery, reviews, evidence and scientific conversations; their
+opening posts also link relevant technical records. Independently closable
 bugs, capabilities and validation phases keep their own issues and reports under
 the [reporting protocol](reporting_protocol.md).
 
 Original-provider delivery and its viewer consumer are initially implemented.
 Exhaustive fidelity and local-method certification remain incomplete. The
-[implementation pause](provider_pocket_output_checkpoint.md) remains in effect;
-catalogue membership is not authorization to integrate a candidate or resume DFND.
+historical [implementation pause](provider_pocket_output_checkpoint.md) does not
+override later decisions: use [current status](status.md) and the resumed
+[synthetic-first DFND checkpoint](DFND/notebook_laboratory_checkpoint.md) for
+scheduling. Catalogue membership is not authorization to integrate a candidate.
 DFND defines Topography's native semantic direction. External geometry and labels
 retain their provenance until separately admitted under that contract.
 
@@ -41,6 +48,8 @@ retain their provenance until separately admitted under that contract.
 All five are both optional providers and comparison references. Availability of
 a package or service, original-adapter fidelity, local reproduction and canonical
 Topography admission are separate statuses.
+The table and dated native receipt below retain their original review scope;
+later provider evidence is linked from the current status and individual records.
 
 Shared availability and diagnostics follow the
 [MolSysSuite optional-engine contract](https://github.com/uibcdf/molsyssuite/blob/main/devguide/optional_engine_integration.md).
@@ -125,7 +134,10 @@ The existing [POVME 2 discussion](https://github.com/uibcdf/topomt/discussions/1
 [POVME 3 discussion](https://github.com/uibcdf/topomt/discussions/11),
 [cryptic-pocket reading](https://github.com/uibcdf/topomt/discussions/12) and
 [SARS-CoV-2 reading](https://github.com/uibcdf/topomt/discussions/13) remain in
-Reading List. Literature discussion is not evidence that a provider is integrated.
+Literature and Resources. The POVME tool-family conversation is linked from
+the [resource register](discussion_resources.md); the two primary-paper threads
+retain their distinct reading histories. Literature discussion is not evidence
+that a provider is integrated.
 
 ## Maintenance rule
 
@@ -145,5 +157,6 @@ Reading List. Literature discussion is not evidence that a provider is integrate
 - Review manually when upstream releases, service failures, scientific findings
   or integration work supply a reason. No scheduled monitoring is implemented
   or claimed by this catalogue.
-- Discussions are the permanent conversation/index; the versioned documents
-  hold maintained technical state and owning issues hold actionable public state.
+- Follow [Discussions maintenance](discussions.md) for resource intake, category
+  choice, labels and follow-up. Keep substantive reviews and conclusions in the
+  conversation, linking technical studies and owning issues for actionable work.

@@ -63,7 +63,7 @@ bounded outcomes, not full-provider certification.
 
 ## Detailed records and discussion
 
-- [Permanent fpocket discussion #69](https://github.com/uibcdf/topomt/discussions/69) in External Tools.
+- [Permanent fpocket discussion #69](https://github.com/uibcdf/topomt/discussions/69) in Methods and Tools.
 - [Original output inventory](external_output_inventory.md).
 - [Original-engine source handoff evidence](handoff_checkpoint.md).
 - [Prepared-source PharmacophoreMT consumer control](pharmacophore_handoff_checkpoint.md).

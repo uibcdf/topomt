@@ -133,7 +133,7 @@ bounded outcomes, not full-provider certification.
 
 ## Detailed records and discussion
 
-- [Permanent CASTp / CASTpFold discussion #73](https://github.com/uibcdf/topomt/discussions/73) in External Tools.
+- [Permanent CASTp / CASTpFold discussion #73](https://github.com/uibcdf/topomt/discussions/73) in Methods and Tools.
 - [Explicit pocket definitions and numerical geometry](checkpoint_2026_10_02_pocket_definitions.md).
 - [Original output inventory](external_output_inventory.md).
 - [Modern closed-void measurements checkpoint](checkpoint_2026_10_01_modern_void_measurements.md).

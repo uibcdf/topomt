@@ -22,6 +22,7 @@ respective boundaries.
 
 | Subject | Starting point |
 | --- | --- |
+| Discussions and scientific resources | [Maintenance instructions](discussions.md), [resource conversations](discussion_resources.md), [tools](external_tools_catalog.md) and [benchmarks](benchmark_catalog.md) |
 | Public APIs and runtime models | [Architecture](architecture.md), [API surface](api_surface.md) and [repository map](repository_map.md) |
 | Accepted Topography semantics and partial implementation | [Conceptual contract](topography_conceptual_contract.md), [implementation route](topography_implementation_route.md) and [input context](topography_input_context.md) |
 | Component responsibilities and reusable operations | [MolSysSuite integration](integration_with_molsyssuite.md) and [operations owned by MolSysMT](what_should_move_to_molsysmt.md) |

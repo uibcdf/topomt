@@ -1,0 +1,45 @@
+title: '[Dataset/Benchmark] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Propose or discuss synthetic/molecular datasets, geometric references,
+        evaluation metrics, benchmark protocols and comparative results.
+        Search existing conversations first. Name, source and relevance are enough;
+        leave unknowns explicit. A collection is not automatically ground truth.
+  - type: input
+    id: resource
+    attributes:
+      label: Dataset, benchmark or study
+      description: Name and release, version or access date, if known.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Official source or reproducible study
+      description: Original publication, dataset archive, protocol or versioned system study.
+    validations:
+      required: true
+  - type: textarea
+    id: relevance
+    attributes:
+      label: Scientific question and relevance
+      description: What could this collection or comparison help us understand?
+    validations:
+      required: true
+  - type: textarea
+    id: reference
+    attributes:
+      label: Provenance, coverage and reference
+      description: Synthetic or molecular scope, annotations, geometric references and their independence, versions, access and reuse terms, where known.
+  - type: textarea
+    id: evaluation
+    attributes:
+      label: Evaluation, results and limitations
+      description: Inputs/radii/preparation, feature definitions, metrics, eligible/excluded/failed cases, overlapping data and reproducibility. Separate reported and reproduced evidence; no completed benchmark is required.
+  - type: textarea
+    id: related
+    attributes:
+      label: Related methods, papers and work
+      description: Link canonical conversations, frozen inputs/results and owning issues. Maintainers apply supported feature/context/topic labels; labels do not qualify a reference.

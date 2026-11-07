@@ -95,7 +95,7 @@ bounded outcomes, not full-provider certification.
 
 ## Detailed records and discussion
 
-- [Permanent AlphaSpace2 discussion #71](https://github.com/uibcdf/topomt/discussions/71) in External Tools.
+- [Permanent AlphaSpace2 discussion #71](https://github.com/uibcdf/topomt/discussions/71) in Methods and Tools.
 - [Original output inventory](external_output_inventory.md).
 - [Original provider handoff checkpoints](handoff_checkpoint.md).
 - [Exact installed receiving checkpoint](installed_receiving_checkpoint.md).

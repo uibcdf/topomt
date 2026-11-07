@@ -1,0 +1,52 @@
+title: '[Method/Tool] '
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Suggest a molecular topography method, program, library or service to study.
+        Search existing discussions and reuse the same resource conversation.
+        A name, official source and reason for interest are enough; unknown details
+        are welcome. No installation or benchmark is required to suggest a resource.
+        Describe findings and questions here; link evidence and related records.
+        Concrete defects and implementation work belong in owning issues.
+  - type: input
+    id: resource
+    attributes:
+      label: Method or tool
+      description: Name and version, if known.
+    validations:
+      required: true
+  - type: input
+    id: source
+    attributes:
+      label: Official source
+      description: Project website, documentation, source repository or original paper.
+    validations:
+      required: true
+  - type: textarea
+    id: relevance
+    attributes:
+      label: Why study it?
+      description: What could TopoMT learn, and what would you like to discuss?
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scientific scope and context
+      description: Features, inputs, trajectory support and scientific definitions, where known. Maintainers apply supported feature/context/role/topic labels to the whole discussion.
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Findings, evidence and open questions
+      description: Distinguish source-reported results, your interpretation and independently reproduced observations. Include comparison, API, usability or performance questions where useful.
+  - type: textarea
+    id: access
+    attributes:
+      label: Version, access and licence
+      description: Known source revision, software/data terms and installation or service requirements. Unknown is a valid answer; keep credentials and private data out of public threads.
+  - type: textarea
+    id: related
+    attributes:
+      label: Related conversations and evidence
+      description: Link existing papers, datasets, system studies, results or owning issues. Inclusion does not establish integration, equivalence or scientific qualification.

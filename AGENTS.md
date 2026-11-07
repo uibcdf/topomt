@@ -41,6 +41,13 @@ DFND observations and original third-party comparisons. Prepare the same case
 content for documentation integration and a future standalone study/benchmark
 site. See `devguide/DFND/study_zone.md` for the working design and its limits.
 
+Discussions maintenance: before creating, reorganizing or triaging resource
+conversations, read `devguide/discussions.md` and consult
+`devguide/discussion_resources.md`. Reuse the canonical resource thread,
+classify it by resource type and supported feature/context labels, and link
+relevant study records and actionable issues in both directions. Preserve thread
+history and distinguish documentary study, executed comparisons and integration.
+
 ---
 
 ## External Tooling Guides (Required for Development)

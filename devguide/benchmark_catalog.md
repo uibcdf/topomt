@@ -1,7 +1,12 @@
 # Benchmarks and benchmarking databases
 
 Reviewed: 2026-10-03. Permanent discovery conversation:
-[discussion #92](https://github.com/uibcdf/topomt/discussions/92), in Reading List.
+[discussion #92](https://github.com/uibcdf/topomt/discussions/92), in Datasets and Benchmarks.
+Organization updated: 2026-11-07; the inventory below retains its stated review
+date. The [resource register](discussion_resources.md) links individual collection
+conversations. Read [the maintenance instructions](discussions.md) for category
+procedures and labels; discuss findings, comparisons and conclusions in those
+threads, linking reproducible study inputs and results where available.
 
 This inventory covers datasets and reference collections for molecular surface
 topography. The [external-tool catalogue](external_tools_catalog.md) covers

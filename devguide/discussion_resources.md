@@ -1,0 +1,94 @@
+# Discussion resource register
+
+This is contributor navigation for the Discussions area. Read
+[the maintenance instructions](discussions.md) for category procedures, labels,
+triage and evidence boundaries. Substantive resource descriptions, reviews,
+scientific arguments and dated conclusions belong in their conversations;
+this register does not replace them or qualify their scientific evidence.
+
+## Entry points
+
+- [#132](https://github.com/uibcdf/topomt/discussions/132): how to use the area.
+- [#68](https://github.com/uibcdf/topomt/discussions/68): Methods and Tools index.
+- [#92](https://github.com/uibcdf/topomt/discussions/92): Datasets and Benchmarks index.
+- [#131](https://github.com/uibcdf/topomt/discussions/131): Literature and Resources index.
+
+## Methods and Tools
+
+One canonical resource conversation is retained across versions and study phases.
+Relationships below describe the purpose of the conversation. Existing provider
+routes, documentary reviews, executed comparisons and scientific qualification
+remain separately scoped in the thread and its evidence links.
+
+| Resource | Conversation | Relationship / study scope |
+| --- | --- | --- |
+| fpocket | [#69](https://github.com/uibcdf/topomt/discussions/69) | Existing optional provider and comparison; [technical overview](fpocket4/overview.md). |
+| Pocketeer | [#70](https://github.com/uibcdf/topomt/discussions/70) | Existing optional provider and comparison; [technical overview](pocketeer/overview.md). |
+| AlphaSpace2 | [#71](https://github.com/uibcdf/topomt/discussions/71) | Existing optional provider and comparison; [technical overview](alphaspace2/overview.md). |
+| pyCASTA | [#72](https://github.com/uibcdf/topomt/discussions/72) | Existing optional provider and comparison; [technical overview](pycasta/overview.md). |
+| CASTp / CASTpFold | [#73](https://github.com/uibcdf/topomt/discussions/73) | Existing optional provider and comparison; [technical overview](castp/overview.md). |
+| CAVER | [#104](https://github.com/uibcdf/topomt/discussions/104) | Channel/tunnel method and intended path comparison. |
+| MOLE / MOLEonline | [#105](https://github.com/uibcdf/topomt/discussions/105) | Channel/tunnel/pore method and close DFND antecedent. |
+| PISA | [#106](https://github.com/uibcdf/topomt/discussions/106) | Interface comparison candidate. |
+| pyKVFinder | [#107](https://github.com/uibcdf/topomt/discussions/107) | Grid/dual-probe cavity comparison candidate. |
+| P2Rank / PrankWeb | [#108](https://github.com/uibcdf/topomt/discussions/108) | Site prediction and pocket-ranking comparison candidate. |
+| GHECOM | [#109](https://github.com/uibcdf/topomt/discussions/109) | Multiscale morphological cavity/pocket comparison candidate. |
+| DoGSite3 | [#110](https://github.com/uibcdf/topomt/discussions/110) | Pocket/subpocket and descriptor comparison candidate. |
+| HOLE | [#111](https://github.com/uibcdf/topomt/discussions/111) | Specialized pore-profile comparison candidate. |
+| CHAP | [#112](https://github.com/uibcdf/topomt/discussions/112) | Specialized channel structural/functional comparison candidate. |
+| fpocketR | [#113](https://github.com/uibcdf/topomt/discussions/113) | RNA-oriented reference imported from historical intake. |
+| Scipion fpocket integration | [#114](https://github.com/uibcdf/topomt/discussions/114) | Workflow/wrapper reference. |
+| Pocket-to-Concavity / P2C | [#115](https://github.com/uibcdf/topomt/discussions/115) | fpocket-related interpretation reference. |
+| pfnet-research/pocket_detection | [#116](https://github.com/uibcdf/topomt/discussions/116) | Unassessed historical method/tool candidate. |
+| MolModa | [#117](https://github.com/uibcdf/topomt/discussions/117) | Application and interaction-design reference. |
+| PePrMint | [#118](https://github.com/uibcdf/topomt/discussions/118) | Historical surface/interface-related reference. |
+| POVME family | [#119](https://github.com/uibcdf/topomt/discussions/119) | Pocket shape, volume and flexibility comparison reference. |
+| AlphaTraj | [#120](https://github.com/uibcdf/topomt/discussions/120) | Unassessed historical tool/reference candidate. |
+| Pocket2Mol | [#121](https://github.com/uibcdf/topomt/discussions/121) | Related project; domain ownership needs assessment. |
+| PPD | [#122](https://github.com/uibcdf/topomt/discussions/122) | Unassessed historical tool/reference candidate. |
+| LIGSITE in ENSPARA | [#123](https://github.com/uibcdf/topomt/discussions/123) | Pocket-detection comparison reference. |
+| PocketSCP | [#124](https://github.com/uibcdf/topomt/discussions/124) | Research-method intake; implementation and scope to assess. |
+| SurfDock | [#125](https://github.com/uibcdf/topomt/discussions/125) | Related project; domain ownership needs assessment. |
+| DFND | [#130](https://github.com/uibcdf/topomt/discussions/130) | Native-method scientific conversation; current work is synthetic-first. |
+
+Historical CASTp auxiliary repositories share the CASTp/CASTpFold conversation
+#73; their relationship to exact deployed server internals remains unqualified.
+The [existing tool catalogue](external_tools_catalog.md) retains every imported
+source link and its dated assessment scope. Unassessed leads stay Candidate.
+
+## Datasets and Benchmarks
+
+| Resource | Conversation | Evaluation role |
+| --- | --- | --- |
+| PocketPicker bound/unbound collection | [#126](https://github.com/uibcdf/topomt/discussions/126) | Historical paired ligand-site evaluation collection. |
+| COACH420 collection | [#127](https://github.com/uibcdf/topomt/discussions/127) | Ligand-site detection/ranking benchmark resource. |
+| TopoMT archived CASTpFold panel | [#128](https://github.com/uibcdf/topomt/discussions/128) | Original-provider output reference collection. |
+| DFND synthetic collection and system laboratory | [#129](https://github.com/uibcdf/topomt/discussions/129) | Controlled topography studies and independent geometric references. |
+
+Use the [benchmark catalogue](benchmark_catalog.md) for existing source and
+qualification records. Dataset discovery is separate from acquisition, execution
+and validation. Provider-reference agreement is separate from independent
+geometric truth and biological-site evaluation.
+
+## Existing Literature and Resources
+
+| Reading | Conversation |
+| --- | --- |
+| POVME 2 primary paper | [#10](https://github.com/uibcdf/topomt/discussions/10) |
+| POVME 3 primary paper | [#11](https://github.com/uibcdf/topomt/discussions/11) |
+| Will the Real Cryptic Pocket Please Stand Out? | [#12](https://github.com/uibcdf/topomt/discussions/12) |
+| Cryptic and allosteric Mpro pockets | [#13](https://github.com/uibcdf/topomt/discussions/13) |
+
+POVME papers retain distinct literature conversations and cross-link the single
+tool-family conversation. Other papers can be cited within their resource thread
+or receive a separate conversation when their scientific argument merits one.
+
+## Keeping this register coherent
+
+- Search and reuse the resource conversation before opening another.
+- Add its canonical link here and in the relevant category index.
+- Cross-link related tools, datasets and papers rather than copying histories.
+- Preserve thread IDs and URLs when changing categories or titles.
+- Record substantive review updates in the conversation; link exact evidence
+  and owning issues where needed. Maintainer instructions remain in
+  [discussions.md](discussions.md) and the root/nested AGENTS reading routes.

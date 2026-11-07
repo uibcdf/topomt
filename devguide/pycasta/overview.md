@@ -77,7 +77,7 @@ bounded outcomes, not full-provider certification.
 
 ## Detailed records and discussion
 
-- [Permanent pyCASTA discussion #72](https://github.com/uibcdf/topomt/discussions/72) in External Tools.
+- [Permanent pyCASTA discussion #72](https://github.com/uibcdf/topomt/discussions/72) in Methods and Tools.
 - [Original output inventory](external_output_inventory.md).
 - [Source and exact installed receiving checkpoint](installed_receiving_checkpoint.md).
 - [Native contract and repository/paper distinction](contract.md).

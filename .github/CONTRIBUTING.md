@@ -1,7 +1,19 @@
 # How to contribute
 
 We welcome contributions from external contributors, and this document
-describes how to merge code changes into this projectname. 
+describes how to contribute to TopoMT.
+
+## Questions, ideas and scientific resources
+
+Start with [TopoMT Discussions](https://github.com/uibcdf/topomt/discussions/132)
+for usage questions, exploratory ideas, methods/tools, datasets/benchmarks and
+scientific readings. Before opening or maintaining resource conversations, read
+[the Discussions instructions](../devguide/discussions.md) for category purposes,
+supported labels, evidence scope and follow-up. Reuse existing resource threads;
+concrete defects and implementation work use owning issues, linked both ways.
+
+Read [AGENTS.md](../AGENTS.md) and [the developer guide](../devguide/index.md)
+before development work.
 
 ## Getting Started
 
@@ -19,7 +31,7 @@ describes how to merge code changes into this projectname.
   [branch](https://help.github.com/articles/creating-and-deleting-branches-within-your-repository/)
   with the branch name relating to the feature you are going to add.
 * When you are ready for others to examine and comment on your new feature,
-  navigate to your fork of projectname on GitHub and open a [pull
+  navigate to your fork of TopoMT on GitHub and open a [pull
   request](https://help.github.com/articles/using-pull-requests/) (PR). Note that
   after you launch a PR from one of your fork's branches, all
   subsequent commits to that branch will be added to the open pull request

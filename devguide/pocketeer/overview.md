@@ -70,7 +70,7 @@ bounded outcomes, not full-provider certification.
 
 ## Detailed records and discussion
 
-- [Permanent Pocketeer discussion #70](https://github.com/uibcdf/topomt/discussions/70) in External Tools.
+- [Permanent Pocketeer discussion #70](https://github.com/uibcdf/topomt/discussions/70) in Methods and Tools.
 - [Original output inventory](external_output_inventory.md).
 - [ArgDigest and original-library structural receiving](argument_handoff_checkpoint.md).
 - [MolSysMT reference-state provenance and remaining chemical receiving](chemical_context_checkpoint.md).
