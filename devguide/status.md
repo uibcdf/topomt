@@ -75,7 +75,7 @@ DepDigest, SMonitor and PyUnitWizard retain their registered responsibilities.
 | Pocketeer | Original 0.4.0 argument/state contracts, engine-independent saved recovery and a prepared 46-site hydrophobic control. Producer `bb34e67` has a recorded 311-case installed qualification. See [consumer checkpoint](pocketeer/pharmacophore_handoff_checkpoint.md). | Preserve artifact/evidence identities and re-establish the receiving environment. |
 | AlphaSpace2 | Original 0.1.2 argument/source contracts, schema-1 recovery and prepared source receiving at `ce4708a`. The exact `5ae5c46` development wheel now passes 256 installed cases, both prepared unit-policy flows and independent engine-free recovery. See [installed checkpoint](alphaspace2/installed_receiving_checkpoint.md). | Preserve the exact candidate, evidence and regressions; exhaustive fidelity and general qualification remain separate. |
 | pyCASTA | Original 1.0.8 source-bound execution and saved recovery. Exact `02a38be` has 217 passing installed cases, two complete five-pocket/four-site flows and independent engine-free receiving. See the [installed checkpoint](pycasta/installed_receiving_checkpoint.md). | Preserve the exact candidate and regressions; native `1a6w` parity [#53](https://github.com/uibcdf/topomt/issues/53), exhaustive fidelity and component qualification remain separate. |
-| CASTp/CASTpFold | Original files with deterministic discovery, explicit source/reference/frame binding and portable reconstruction; [source checkpoint](castp/source_binding_checkpoint_2026_11_06.md). Local modern closed-void measures retain historical validation. | Prepared consumer, live-service source admission and exact installed receiving; local/native parity and residual memberships remain separate. |
+| CASTp/CASTpFold | Original source-bound files, portable reconstruction and one live prepared Fold control with 42 pockets and 16 public pharmacophore sites under both unit policies; [prepared source checkpoint](castp/prepared_consumer_checkpoint_2026_11_06.md). Local native evidence retains its separate scope. | Exact installed receiving; CASTp3 availability, broader service admission, native parity and residual memberships remain separate. |
 
 The AlphaSpace2 prepared-source checkpoint retains passing execution evidence
 for **523 distinct affected cases**, including eight initially skipped fpocket
@@ -98,7 +98,8 @@ explicit hydrophobic query sites from the first original pocket, reproduced in
 two complete unit-policy flows and with the engine absent. Its exact candidate,
 worker-source evidence, raw integrity findings and reconstruction inputs are
 durably retained. These counts overlap source controls and are not additive
-coverage. The next original-provider receiving gate is CASTp/CASTpFold.
+coverage. The next original-provider receiving gate is CASTp/CASTpFold's newly
+built exact installed candidate. Its prepared source consumer now passes.
 
 The [live 2PK4 diagnostic](castp/live_server_checkpoint_2026_11_06.md) confirms
 Fold submission, completed download, seven-pocket import and source recovery.

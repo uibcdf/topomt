@@ -102,3 +102,8 @@ Raw website HTML and third-party JavaScript are excluded; their HTTP observation
 and hashes remain. No original provider package was installed.
 Prepared-receptor receiving remains under #101; no biological relevance or
 chemical-readiness claim follows from this processed-PDB diagnostic.
+
+The subsequent [prepared source checkpoint](prepared_consumer_checkpoint_2026_11_06.md)
+adds public-client acknowledgement retention, an explicitly authorized new Fold
+calculation and a bounded prepared consumer. It preserves this diagnostic's
+original scope; retry-count and HTML/not-ready distinctions remain pending.

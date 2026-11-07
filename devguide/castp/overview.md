@@ -1,6 +1,6 @@
 # CASTp / CASTpFold provider overview
 
-Reviewed: 2026-11-06 (original files, source binding and live diagnostic). Native scientific evidence
+Reviewed: 2026-11-06 (original files, source binding and live prepared consumer). Native scientific evidence
 dates are stated below; this update does not rerun or extend those comparisons.
 Role: integrated provider and comparison reference. The user resumed a bounded
 local CASTp3 reconstruction under [#79](https://github.com/uibcdf/topomt/issues/79).
@@ -10,8 +10,11 @@ Original-provider receiving now continues under
 [file-input checkpoint](file_input_checkpoint_2026_11_06.md) establishes
 deterministic discovery and exact relative artifact retention. The subsequent
 [source-binding checkpoint](source_binding_checkpoint_2026_11_06.md) adds explicit
-correspondence, reference/frame validation and portable files recovery. Prepared
-consumer and live-service admission remain separate. Native-method scope retains the separate
+correspondence, reference/frame validation and portable files recovery. The
+[prepared source checkpoint](prepared_consumer_checkpoint_2026_11_06.md) adds a
+declared heavy-protein Fold execution, 42 pockets, 22 mouth aggregates and a
+16-site public PharmacophoreMT consumer under both unit policies. Exact installed
+receiving and general service admission remain separate. Native-method scope retains the separate
 [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
 The [live 2PK4 diagnostic](live_server_checkpoint_2026_11_06.md) separately

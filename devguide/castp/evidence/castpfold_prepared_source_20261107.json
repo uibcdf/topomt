@@ -1,0 +1,61 @@
+{
+  "archive": {
+    "bytes": 2335267,
+    "path": "castpfold_prepared_source_20261107.zip",
+    "payload_count": 75,
+    "sha256": "6c1a4289a55d06a7ef3c59863812f3da44db2bee974b511d92ec9f69c492609b"
+  },
+  "class": "bounded source integration, not exact installed qualification",
+  "counts": {
+    "mouth_aggregates": 22,
+    "openings": 23,
+    "pockets": 42,
+    "query_sites": 16,
+    "source_atoms": 4047,
+    "submitted_atoms": 1975
+  },
+  "created_utc": "2026-11-07T01:58:37.936385+00:00",
+  "jobid": "j_6aee831b083dc",
+  "limits": [
+    "One declared prepared reference and selected frame; Cartesian projections without periodic imaging.",
+    "Original CASTpFold only; CASTp3 upload failure remains separate.",
+    "No binding relevance, chemical preparation certification, full-service uptime, native parity, full suite or platform/matrix claim.",
+    "Historical initial consumer receipts retain corrected wording history.",
+    "Preflight manifests describe their original directories; shared identical source bytes are retained at qualified/source.h5msm."
+  ],
+  "owner": "uibcdf/topomt#101",
+  "producer_commit": "00f6a9a04d6f511303dc82da326754322d0523f4",
+  "profile": "original-castpfold-source-handoff-1",
+  "run_id": "e121c3d691e29a1474355735cf6c5ad30b9a87fa92aa3a689c246e83d065d877",
+  "schema_version": 1,
+  "source_sha256": "c967e3f15cdb5a5401ab016588aa1cf886675083ab750ea8fbd0008eabff8580",
+  "temporary_resources": {
+    "cleanup_condition": "Installed receiving accepted and required candidate/evidence bytes durably retained; preserve human/shared resources.",
+    "owner": "TopoMT#101 prepared CASTpFold receiving",
+    "reason": "Continuation to exact new installed candidate; durable source/result evidence is in this archive. Shared/previous receivers were not modified.",
+    "retained": [
+      ".cache/castp-prepared-receiving",
+      "/tmp/topomt-pycasta-handoff-bshtk36l/engine-free"
+    ],
+    "review_by": "2026-11-13"
+  },
+  "validation": {
+    "adapter_and_recovery_tests": {
+      "passed": 200,
+      "skip_scope": "separate original pyCASTA prepared input absent",
+      "skipped": 3
+    },
+    "distribution_reporting_tests": {
+      "passed": 20,
+      "skipped": 0
+    },
+    "documentation": "HTML build succeeded; 12 existing warnings including unavailable PlantUML",
+    "mypy": "3 changed executable modules; follow-imports skip, missing optional imports ignored",
+    "new_and_prepared_tests": {
+      "passed": 97,
+      "skipped": 0
+    },
+    "overlap": "Selections overlap and are not additive coverage.",
+    "ruff": "484 files formatted; check passed"
+  }
+}
