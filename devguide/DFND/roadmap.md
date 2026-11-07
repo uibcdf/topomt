@@ -1,5 +1,13 @@
 # DFND Roadmap
 
+Latest review (2026-11-06): use the
+[proposed development sequence](development_plan_2026_11_06.md) and its
+[evidence/inventory](review_2026_11_06.md) for the current code, reproduced
+defects, live issue reconciliation and acceptance gates. This proposal builds
+on delivered snapshot/InputContext work; it preserves the laboratory pause and
+the open scientific gates. Historical priorities below are not a current
+implementation or qualification claim.
+
 Current scheduling and evidence (2026-10-01): the user has resumed joint
 DFND/Topography work, starting with an audit and staged roadmap. Use
 [the current audit](audit_topography_2026_10_01.md) for implementation presence,
