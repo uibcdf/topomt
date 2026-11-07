@@ -100,6 +100,11 @@ worker-source evidence, raw integrity findings and reconstruction inputs are
 durably retained. These counts overlap source controls and are not additive
 coverage. The next original-provider receiving gate is CASTp/CASTpFold.
 
+The [live 2PK4 diagnostic](castp/live_server_checkpoint_2026_11_06.md) confirms
+Fold submission, completed download, seven-pocket import and source recovery.
+CASTp3 rejected that input at upload. These dated observations do not qualify
+general service availability, website lookup or a prepared consumer profile.
+
 Source, installed candidate and public delivery are distinct evidence classes.
 Historical temporary prefixes, wheels and `/tmp` or `/dev/shm` paths are not
 portable installation requirements. Use the committed archives and their hashes

@@ -1,6 +1,6 @@
 # CASTp / CASTpFold provider overview
 
-Reviewed: 2026-11-06 (original file-input and source-binding boundaries). Native scientific evidence
+Reviewed: 2026-11-06 (original files, source binding and live diagnostic). Native scientific evidence
 dates are stated below; this update does not rerun or extend those comparisons.
 Role: integrated provider and comparison reference. The user resumed a bounded
 local CASTp3 reconstruction under [#79](https://github.com/uibcdf/topomt/issues/79).
@@ -14,7 +14,13 @@ correspondence, reference/frame validation and portable files recovery. Prepared
 consumer and live-service admission remain separate. Native-method scope retains the separate
 [delivery checkpoint](../provider_pocket_output_checkpoint.md).
 
-Latest work: the [explicit pocket-definition checkpoint](checkpoint_2026_10_02_pocket_definitions.md)
+The [live 2PK4 diagnostic](live_server_checkpoint_2026_11_06.md) separately
+confirms Fold submission, completed ZIP retrieval, seven-pocket import and
+source recovery on 2026-11-07 UTC. CASTp3 returned an upload error. Website
+rendering/PDB-ID search, prepared receiving and general service availability
+are not qualified by that one result.
+
+Latest native work: the [explicit pocket-definition checkpoint](checkpoint_2026_10_02_pocket_definitions.md)
 separates `pocket_definition='literature'` from empirical `castp3` compatibility,
 independently of atomic radii. Both use actual region and mouth vertices; the
 modern predicate grid has an independent correction under #89. Fresh production validation matches every compared atom class in 39/40

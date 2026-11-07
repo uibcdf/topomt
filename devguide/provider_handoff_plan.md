@@ -70,7 +70,11 @@ separate from this result.
 
 Continue with CASTp/CASTpFold's prepared consumer profile, live-service source
 admission and exact installed receiving. Its source-bound original files and
-saved recovery now have their own checkpoint. Preserve the fpocket,
+saved recovery now have their own checkpoint. A separate
+[live 2PK4 diagnostic](castp/live_server_checkpoint_2026_11_06.md) confirms Fold
+calculation and file receiving on one historical processed PDB; CASTp3 upload
+failed. This does not replace the prepared profile or full service admission.
+Preserve the fpocket,
 Pocketeer, AlphaSpace2 and pyCASTA regressions through the existing developer recorders and public
 PharmacophoreMT tools. Issue #101 remains open: completion requires all five
 providers and the evidence above, while exhaustive fidelity and general

@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "owner": "uibcdf/topomt#101; fidelity uibcdf/topomt#19",
+  "archive": "castp_live_2pk4_20261107.zip",
+  "bytes": 261774,
+  "sha256": "7638a314e7e7987c7061bc14325bfd52b9fbe811b20c2798ac10f95370f23a96",
+  "manifest_sha256": "5258ebfef8abb3211c44c206cddc6e033e8457dc28a38978ec59a3c66953533e",
+  "payload_files": 24,
+  "summary": {
+    "schema_version": 1,
+    "scope": "live public historical 2PK4 diagnostic; not prepared chemistry or installed qualification",
+    "source_commit": "a2d91fffa4b9a451e5f2438bcd87aaeddd96b7b5",
+    "castp3": {
+      "state": "no accepted job ID observed",
+      "http_status": 200,
+      "body": "Something wrong with upload! 7",
+      "production_handler_not_inspected": true
+    },
+    "castpfold": {
+      "state": "completed_downloaded_imported_bound",
+      "jobid": "j_6aee76eb99748",
+      "acknowledgement": {
+        "success": true,
+        "jobid": "j_6aee76eb99748",
+        "filename": "2pk4.pdb",
+        "email": "N/A",
+        "probe": "1.4"
+      },
+      "result": {
+        "scope": "live original CASTpFold diagnostic using public historical processed PDB; explicit retained-serial correspondence validated by source binding; no chemical preparation or installed candidate claim",
+        "jobid": "j_6aee76eb99748",
+        "n_submitted_atoms": 745,
+        "n_result_pdb_atoms": 745,
+        "pockets": 7,
+        "records": 10,
+        "bound_run_id": "699e8017d111fc4e7eef8e2d1a6cc60b15d7d1f0d82514f47dd9675c6eb39372",
+        "bundle_sha256": "a75ead7ae164f3c8fc4a086fee1dd9e72daf9b4adce5c92d7d614ccecf64c996",
+        "input_pdb_sha256": "491d6fc18883b7b3f82c8b9c85023129a7390c7120ba94eb16b199801f2ee1c1"
+      },
+      "public_client_download": {
+        "scope": "public existing CastpFoldClient download of accepted job, no new POST",
+        "jobid": "j_6aee76eb99748",
+        "bytes": 39462,
+        "sha256": "3d607718a4bc40bf85cd779173425642ad8f96620db485cda11043cb7611508b",
+        "matches_first_received_zip": true
+      },
+      "source_persistence": {
+        "scope": "live result source persistence/recovery only; not chemical preparation",
+        "source_h5msm_sha256": "9401ca3dfc8bf366dfdae84f0ef80d17ac1f2d4f7adc4709e6dca41fb56dd8fe",
+        "pockets": 7,
+        "records": 10,
+        "bound_run_id": "699e8017d111fc4e7eef8e2d1a6cc60b15d7d1f0d82514f47dd9675c6eb39372"
+      },
+      "historical_comparison": {
+        "scope": "one historical processed PDB and probe1.4; original service repeatability only, not general fidelity or native equivalence",
+        "compared": {
+          ".pocInfo": true,
+          ".mouthInfo": true,
+          ".poc": true,
+          ".mouth": true
+        },
+        "all_equal": true
+      }
+    },
+    "no_resubmission": true,
+    "uploaded_data": "only exact public historical 2pk4.pdb; no personal email",
+    "excluded_from_archive": "Raw website HTML and third-party JavaScript; retain hashes/HTTP observations instead."
+  }
+}

@@ -15,6 +15,12 @@ atom contribution CSV, and bulb JSON. These tests establish route and parser
 behavior, not live-server availability. A separate Fold `1psn.zip` with
 job-named result files supplies fixed-field parity evidence.
 
+The separate [live 2PK4 checkpoint](live_server_checkpoint_2026_11_06.md)
+records a newly submitted Fold job, its complete original ZIP and source-bound
+recovery. Its pocket/mouth membership and numeric tables match the historical
+Fold export for that input. CASTp3 rejected the same input at upload; general
+service availability and prepared-receptor receiving remain unqualified.
+
 ## Retained artifacts and feature identity
 
 For an imported ZIP, `Topography.provider_runs` retains the exact ZIP as its
