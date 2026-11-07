@@ -1,7 +1,10 @@
-# Showcase
+---
+orphan: true
+---
 
-```{toctree}
-:maxdepth: 2
+# The system laboratory has moved
 
-dfnd/index
-```
+The laboratory has its own documentation section:
+[Topography BenchLab](../benchlab/index.md), with
+[Synthetic systems](../benchlab/synthetic/index.md) and the planned
+[Molecular systems](../benchlab/molecular/index.md) collection.

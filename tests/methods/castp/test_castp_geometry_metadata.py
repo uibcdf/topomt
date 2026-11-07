@@ -8,9 +8,7 @@ import pytest
 from topomt.third_party.castp.core.castp_core import geometry as castp_geometry
 from topomt.third_party.castp3.core.castp_core import geometry as castp3_geometry
 
-INPUT_ROOT = (
-    Path(__file__).resolve().parents[3] / 'docs/content/showcase/dfnd/artifacts'
-)
+INPUT_ROOT = Path(__file__).resolve().parents[3] / 'docs/content/benchlab/synthetic'
 
 
 @pytest.mark.parametrize('case', ['regular_tetrahedron', 'closed_shell'])
@@ -27,7 +25,7 @@ def test_classical_geometry_does_not_require_chemical_bonds(
         return original_get(*args, **kwargs)
 
     monkeypatch.setattr(implementation.msm, 'get', get_without_chemical_typing)
-    input_path = INPUT_ROOT / f'{case}_v1/input_castp.pdb'
+    input_path = INPUT_ROOT / case / 'artifacts' / f'{case}_v1/input_castp.pdb'
     options = {'radii_model': radii_model}
     expected_radius = 3.2
     if radii_model == 'override':
@@ -65,7 +63,8 @@ def test_protor_connectivity_failure_is_preserved(
 
     with pytest.raises(RuntimeError, match='connectivity unavailable'):
         implementation.build_castp_geometry(
-            INPUT_ROOT / 'regular_tetrahedron_v1/input_castp.pdb',
+            INPUT_ROOT
+            / 'regular_tetrahedron/artifacts/regular_tetrahedron_v1/input_castp.pdb',
             radii_model=radii_model,
         )
 

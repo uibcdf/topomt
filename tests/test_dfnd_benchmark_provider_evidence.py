@@ -9,14 +9,12 @@ from pyunitwizard import QuantityRecord
 
 from topomt.provider_output import ProviderRun
 
-ARTIFACT_ROOT = (
-    Path(__file__).resolve().parents[1] / 'docs/content/showcase/dfnd/artifacts'
-)
+SYNTHETIC_ROOT = Path(__file__).resolve().parents[1] / 'docs/content/benchlab/synthetic'
 
 
-@pytest.mark.parametrize('case', ['regular_tetrahedron_v1', 'closed_shell_v1'])
+@pytest.mark.parametrize('case', ['regular_tetrahedron', 'closed_shell'])
 def test_provider_panel_preserves_same_input_original_runs_and_failure_meaning(case):
-    directory = ARTIFACT_ROOT / case
+    directory = SYNTHETIC_ROOT / case / 'artifacts' / f'{case}_v1'
     report = json.loads((directory / 'report.json').read_text())
     entries = report['provider_comparisons']
     assert [entry['method'] for entry in entries] == [
@@ -82,9 +80,9 @@ def test_provider_panel_preserves_same_input_original_runs_and_failure_meaning(c
                 assert coordinates.shape[1] == 3
 
 
-@pytest.mark.parametrize('case', ['regular_tetrahedron_v1', 'closed_shell_v1'])
+@pytest.mark.parametrize('case', ['regular_tetrahedron', 'closed_shell'])
 def test_castp_export_preserves_geometry_and_aligns_one_letter_atom_names(case):
-    directory = ARTIFACT_ROOT / case
+    directory = SYNTHETIC_ROOT / case / 'artifacts' / f'{case}_v1'
     canonical = (directory / 'input.pdb').read_bytes().splitlines()
     submitted = (directory / 'input_castp.pdb').read_bytes().splitlines()
     assert len(canonical) == len(submitted)

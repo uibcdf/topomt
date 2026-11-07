@@ -22,6 +22,7 @@ respective boundaries.
 
 | Subject | Starting point |
 | --- | --- |
+| Public system laboratory | [Topography BenchLab](../docs/content/benchlab/index.md), [synthetic cases](../docs/content/benchlab/synthetic/index.md) and the [planned molecular collection](../docs/content/benchlab/molecular/index.md) |
 | Discussions and scientific resources | [Maintenance instructions](discussions.md), [resource conversations](discussion_resources.md), [tools](external_tools_catalog.md) and [benchmarks](benchmark_catalog.md) |
 | Public APIs and runtime models | [Architecture](architecture.md), [API surface](api_surface.md) and [repository map](repository_map.md) |
 | Accepted Topography semantics and partial implementation | [Conceptual contract](topography_conceptual_contract.md), [implementation route](topography_implementation_route.md) and [input context](topography_input_context.md) |

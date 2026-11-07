@@ -14,7 +14,10 @@ from topomt.dfnd import DelaunayFlowNetwork, synthetic
 EDGE = 5.3
 ATOM_RADIUS = 1.7
 REFERENCE_TOLERANCE = 1e-6  # angstroms; fixed before studying the solver
-NOTEBOOK_DIR = Path(__file__).resolve().parents[1] / 'docs/content/showcase/dfnd'
+NOTEBOOK_DIR = (
+    Path(__file__).resolve().parents[1]
+    / 'docs/content/benchlab/synthetic/regular_tetrahedron'
+)
 
 
 @pytest.fixture
@@ -133,7 +136,7 @@ def test_public_tetrahedron_input_preserves_units_model_and_submitted_bytes():
 
 
 def test_public_tetrahedron_notebook_has_reviewed_report_and_executed_figures():
-    notebook = json.loads((NOTEBOOK_DIR / 'regular_tetrahedron.ipynb').read_text())
+    notebook = json.loads((NOTEBOOK_DIR / 'index.ipynb').read_text())
     artifact_dir = NOTEBOOK_DIR / 'artifacts/regular_tetrahedron_v1'
     report = json.loads((artifact_dir / 'report.json').read_text())
     code_cells = [cell for cell in notebook['cells'] if cell['cell_type'] == 'code']

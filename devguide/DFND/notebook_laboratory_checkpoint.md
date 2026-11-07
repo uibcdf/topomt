@@ -24,9 +24,16 @@ the object of study. Pocket outputs are one comparison lens.
 
 Each study is a Jupyter notebook that can later serve the public documentation,
 benchmark compendium and method demonstrations. The current sources live in
-`docs/content/showcase/dfnd/`; the existing MyST-NB/Sphinx documentation path
+`docs/content/benchlab/synthetic/<case>/`; the existing MyST-NB/Sphinx documentation path
 renders reviewed outputs with execution off. No separate website deployment or
 new provider integration is part of this first slice.
+
+BenchLab is a top-level documentation section, with Synthetic systems and the
+planned Molecular systems collection. Each existing case keeps its notebook as
+`index.ipynb` and its original versioned artifact directory. The 2026-11-07
+relocation under #133 preserves scientific cells, reviewed outputs and artifact
+bytes; earlier Showcase addresses retain relocation links. Source layout changes
+do not constitute another scientific execution or qualification.
 
 ### Current sequence and completion rule
 

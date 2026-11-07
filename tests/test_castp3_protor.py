@@ -1,6 +1,7 @@
 """ProtOr typing tests for the experimental CASTp3 backend."""
 
 import numpy as np
+from numpy.typing import NDArray
 
 from topomt.third_party.castp3.core.castp_core import geometry
 from topomt.third_party.castp3.core.castp_core.geometry import (
@@ -50,7 +51,7 @@ def test_castp3_server_profile_distinguishes_carboxylate_radii():
     groups = np.asarray(['ASP', 'ASP', 'GLU', 'GLU', 'ALA', 'SER', 'TYR', 'ASH'])
     names = np.asarray(['OD1', 'OD2', 'OE1', 'OE2', 'O', 'OG', 'OH', 'OD2'])
     elements = np.full(len(groups), 'O')
-    bonds = np.ones(len(groups), dtype=int)
+    bonds: NDArray[np.int_] = np.ones(len(groups), dtype=int)
 
     standard = _protor_radii_for_labels(groups, names, elements, bonds)
     server = geometry._castp3_protor_radii_for_labels(groups, names, elements, bonds)
@@ -63,7 +64,7 @@ def test_castp3_server_profile_assigns_only_observed_terminal_radii():
     groups = np.asarray(['GLY', 'LEU', 'ALA', 'PRO'])
     names = np.full(4, 'OXT')
     elements = np.full(4, 'O')
-    bonds = np.ones(4, dtype=int)
+    bonds: NDArray[np.int_] = np.ones(4, dtype=int)
     np.testing.assert_allclose(
         _protor_radii_for_labels(groups, names, elements, bonds), [1.46] * 4
     )
@@ -111,7 +112,8 @@ def test_castp3_server_profile_preserves_explicit_radius_overrides(monkeypatch):
 
     source = (
         Path(__file__).parent.parent
-        / 'docs/content/showcase/dfnd/artifacts/regular_tetrahedron_v1/input_castp.pdb'
+        / 'docs/content/benchlab/synthetic/regular_tetrahedron'
+        / 'artifacts/regular_tetrahedron_v1/input_castp.pdb'
     )
 
     def unexpected_typing(*args, **kwargs):

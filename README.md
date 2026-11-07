@@ -26,6 +26,10 @@ For questions and scientific-resource conversations, start with
 Contributors maintaining that area should read
 [the category, label and follow-up instructions](devguide/discussions.md).
 
+[Topography BenchLab](docs/content/benchlab/index.md) is the dedicated system
+study and comparison laboratory, starting with synthetic geometries and a
+separate planned collection for real molecular systems.
+
 Metadata and configured source/installed matrices target Python 3.11–3.14; routine
 workspace development uses `molsyssuite@uibcdf_3.14`. Qualification/admission stays
 tracked in [#16](https://github.com/uibcdf/topomt/issues/16). Distribution controls

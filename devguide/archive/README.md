@@ -5,9 +5,10 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (17)
+### Resolved (18)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
+- [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
 - [`castp3_1cge_missing_closed_voids.md`](castp3_1cge_missing_closed_voids.md) — [#85](https://github.com/uibcdf/topomt/issues/85) — Resolve three missing native closed cavities in the pinned 1CGE CASTpFold output. *(resolved, reproduced)*
 - [`castp3_closed_void_measurements.md`](castp3_closed_void_measurements.md) — [#79](https://github.com/uibcdf/topomt/issues/79) — Validate and expose local CASTp3 closed-void SA/MS measurements. *(resolved, measured)*
 - [`castp3_closed_void_radius_profile.md`](castp3_closed_void_radius_profile.md) — [#80](https://github.com/uibcdf/topomt/issues/80) — Identify an explicit modern CASTp radius profile and resolve two closed-void residuals. *(resolved, measured)*

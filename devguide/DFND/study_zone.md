@@ -8,11 +8,44 @@ not a delivered independent deployment or scientific qualification.
 
 ## Existing foundation and identity
 
-Extend `docs/content/showcase/dfnd/`: its two notebooks already combine frozen
+Maintain `docs/content/benchlab/` as the dedicated public laboratory section.
+Its two existing synthetic notebooks combine frozen
 inputs, independent references, plots, native observations and original-provider
 evidence. MyST-NB/Sphinx renders stored outputs without running calculations.
 Keep the [laboratory checkpoint](notebook_laboratory_checkpoint.md) as the active
 case-by-case continuation record.
+
+### Canonical collection layout
+
+```text
+docs/content/benchlab/
+  index.md
+  synthetic/
+    index.md
+    regular_tetrahedron/
+      index.ipynb
+      artifacts/regular_tetrahedron_v1/...
+    closed_shell/
+      index.ipynb
+      artifacts/closed_shell_v1/...
+  molecular/
+    index.md
+```
+
+Synthetic systems and Molecular systems are separate collections sharing the
+same study-unit contract below. Molecular systems is initially a planned index,
+not an assertion that historical protein tests are qualified laboratory cases.
+Use the same descriptive case-directory pattern for future molecular studies.
+The public reading order is navigation, not a numbered case identity. Indexes
+summarize scientific questions, references, review state and available comparisons.
+
+The 2026-11-07 move from Showcase is tracked in
+[#133](https://github.com/uibcdf/topomt/issues/133). Existing notebooks retain
+scientific code and outputs; versioned artifact bytes are unchanged. Only their
+location and navigation prose change. Earlier documentation addresses keep
+relocation pages, with no duplicate source notebook or evidence collection.
+New cases and input versions enter the collection only after their declared
+reference assumptions and evidence have been reviewed.
 
 Use descriptive names as permanent case identities, without ordinal codes.
 Grouping and study order are editable navigation. Each frozen input retains its

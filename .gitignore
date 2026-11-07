@@ -121,3 +121,6 @@ pocketmt/_version.py
 # Isolated administrative SDK/parser imports
 .molsyssuite/
 .molsyssuite-tools/
+
+# Disposable notebook reruns; reviewed BenchLab artifacts remain versioned.
+docs/content/benchlab/**/runs/

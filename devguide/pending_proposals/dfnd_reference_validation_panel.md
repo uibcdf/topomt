@@ -63,7 +63,7 @@ Do not close on documentation alone or alter the kernel merely to match a peer.
 
 The [notebook laboratory checkpoint](../DFND/notebook_laboratory_checkpoint.md)
 records the active case-by-case route and the first frozen input/observation
-artifacts under `docs/content/showcase/dfnd/`. The regular tetrahedron uses
+artifacts under `docs/content/benchlab/synthetic/<case>/`. The regular tetrahedron uses
 independent circumradius and finite hull-volume formulas, three nonmarginal
 probe anchors and a rigid-motion guard in
 `tests/test_dfnd_regular_tetrahedron_reference.py`. Its notebook includes input

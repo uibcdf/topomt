@@ -162,9 +162,11 @@ Sources: [synthetic collection](DFND/synthetic_benchmarks.md),
 
 The regular tetrahedron and sampled closed shell have reviewed independent
 references and retained provider outcomes. Their notebook sources live under
-`docs/content/showcase/dfnd/`. Synthetic construction labels alone are not
+`docs/content/benchlab/synthetic/<case>/`. Synthetic construction labels alone are not
 oracles. Provider input failures remain failures, not zero detected pockets.
-The notebook checkpoint retains the pause boundary and unresolved server jobs.
+The notebook checkpoint records the resumed synthetic-first sequence, historical
+pause and unresolved server jobs. Molecular BenchLab has a separate planned
+index; this relocation does not qualify new molecular studies.
 
 ## Adding and adopting a collection
 

@@ -11,7 +11,9 @@ from scipy.spatial import ConvexHull
 from topomt import pyunitwizard as puw
 from topomt.dfnd import DelaunayFlowNetwork
 
-NOTEBOOK_DIR = Path(__file__).resolve().parents[1] / 'docs/content/showcase/dfnd'
+NOTEBOOK_DIR = (
+    Path(__file__).resolve().parents[1] / 'docs/content/benchlab/synthetic/closed_shell'
+)
 ARTIFACT_DIR = NOTEBOOK_DIR / 'artifacts/closed_shell_v1'
 
 
@@ -84,7 +86,7 @@ def test_dfnd_reports_a_sealed_component_containing_the_certified_center():
 
 
 def test_public_closed_shell_notebook_has_executed_reference_report():
-    notebook = json.loads((NOTEBOOK_DIR / 'closed_shell.ipynb').read_text())
+    notebook = json.loads((NOTEBOOK_DIR / 'index.ipynb').read_text())
     report = json.loads((ARTIFACT_DIR / 'report.json').read_text())
     assert report['reference_checks'] == 'passed'
     assert (
