@@ -128,6 +128,10 @@ def get_output(
 
     backend = backend.lower()
     if backend == 'files':
+        if 'bundle_file' in kwargs:
+            from .files import load_output
+
+            return load_output(molecular_system, **kwargs)
         if molecular_system is None:
             molecular_system = kwargs.get('pdb_file')
         topography = load_topography(molecular_system, **kwargs)

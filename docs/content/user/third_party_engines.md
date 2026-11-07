@@ -207,6 +207,58 @@ original route. Invalid types or incompatible routes raise a catalogued TopoMT
 argument error that is also catchable as `ValueError`. Molecular inputs and
 provider-specific keyword names and values remain owned by the selected adapter.
 
+### Save and recover an original result
+
+Keep the full molecular source alongside the original result:
+
+```python
+import topomt as tmt
+
+result = tmt.get_provider_output(source_system, method='fpocket')
+result.save('pockets.zip')
+
+# Later, with the original molecular source restored:
+recovered = tmt.load_provider_output(
+    'pockets.zip', molecular_system=source_system
+)
+assert recovered.run == result.run
+```
+
+The same recovery call supports source-bound fpocket, Pocketeer, AlphaSpace2,
+pyCASTA and CASTp results. The verified ZIP identifies its provider and original
+backend. Recovery reads saved files without running the original engine or
+contacting its server. It preserves the original run ID, artifacts, metadata,
+pocket order, memberships and attributed measurements, including available empty
+results.
+
+`save()` delegates to `result.run.save()`; both remain supported. An existing
+destination is replaced. The ZIP contains original evidence for reconstruction,
+rather than the full MolSysMT source or arbitrary manually constructed record
+fields. Preserve the full source with its original atom identities, frame and
+reference chemistry. `load_provider_output()` verifies that source against the
+saved context. Execution options, selections, frame and chemical state come
+from the bundle and cannot be overridden at this boundary.
+
+For a bound AlphaSpace2 result, also supply its original full binder source:
+
+```python
+recovered = tmt.load_provider_output(
+    'bound-pockets.zip', molecular_system=receptor, binder=binder
+)
+```
+
+Other providers reject `binder`. Bundles without sufficient source
+context remain inspectable with `ProviderRun.load()`; the result loader reports
+the missing context instead of inventing it. Existing provider-specific file
+imports remain available for importing original files with explicit source maps.
+
+For CASTp/CASTpFold, reconstruction currently supports source-bound **files**
+captures. Current direct-server results retain original evidence without the
+full-source reconstruction context. Saving such a result preserves that evidence
+but does not make it reconstructable by `load_provider_output()`. Explicitly
+binding the retained original files to the full source and known atom map creates
+a separate files run, as described in the CASTp file-import examples above.
+
 The original fpocket output API admits options declared by its CLI/files
 signatures and reports unknown names through ArgDigest. The closed routes digest
 selection/index shapes, single-frame requests, syntax, executable/argument types,
@@ -217,7 +269,7 @@ source coordinates and reference-state agreement are checked against the molecul
 system afterward. Files recovery still permits omitted chemical options; explicit
 arrays and the original submitted-row order remain supported.
 Additional `provider_metadata` may annotate a run, but cannot replace the adapter's
-selection, frame, syntax, atom map or chemical-context fields.
+selection, frame, syntax, atom map, chemical-context or source-binding fields.
 
 The public fpocket `get_topography` and `get_pockets` gateways also digest their
 case-insensitive `backend` through ArgDigest. They retain `cli` (default),
@@ -232,10 +284,17 @@ The CLI requires a nonempty atom selection and exactly one coordinate frame.
 A multi-model PDB is exported at the requested frame. Submitted atom rows follow
 source order; their serials may be renumbered during PDB export.
 
+New source-bound CLI results support `result.save()` and the shared
+`tmt.load_provider_output()` call above. Their complete source snapshot is
+captured without modifying the original input/output directories. Recovery
+retains the original CLI backend and run ID. Raw file imports with explicit
+chemical context and a submitted atom map also record this source supplement;
+legacy imports with those options omitted retain their existing behavior.
+
 CLI results retain `result.run.metadata['submitted_atom_indices']`: one source
 atom index per submitted PDB atom row, in file order. Keep the full source system
-and its selected frame alongside the run bundle. After restoring the bundle's
-validated input/output files, replay against that source with the same context:
+and its selected frame alongside the run bundle. When importing original files
+explicitly, supply their known context:
 
 ```python
 recovered = tmt.get_provider_output(

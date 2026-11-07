@@ -25,6 +25,7 @@ from .provider_dispatch import ORIGINAL_BACKENDS
 
 API_CALLER = 'topomt.third_party.fpocket.api.get_output'
 FILES_CALLER = 'topomt.third_party.fpocket.files.load_topography'
+SAVED_CALLER = 'topomt.third_party.fpocket.files.load_output'
 
 
 def digest_backend(backend: Any, caller: str | None = None) -> str:
@@ -79,6 +80,10 @@ def digest_output_dir(output_dir: Any, caller: str | None = None) -> Path:
     return _path(output_dir, 'output_dir', caller)
 
 
+def digest_bundle_file(bundle_file: Any, caller: str | None = None) -> Path:
+    return _path(bundle_file, 'bundle_file', caller)
+
+
 def digest_provider_metadata(
     provider_metadata: Any, caller: str | None = None
 ) -> dict | None:
@@ -89,6 +94,8 @@ def digest_provider_metadata(
         'atom_serial_to_index',
         'submitted_atom_indices',
         'chemical_state_context',
+        'source_binding_protocol',
+        'source_context_artifact',
     }
     if provider_metadata is None:
         return provider_metadata
@@ -203,6 +210,7 @@ ARGUMENT_DIGESTERS = {
     'chemical_state': digest_chemical_state,
     'pdb_file': digest_pdb_file,
     'output_dir': digest_output_dir,
+    'bundle_file': digest_bundle_file,
     'provider_metadata': digest_provider_metadata,
     'submitted_atom_indices': digest_submitted_atom_indices,
     'chemical_state_context': digest_chemical_state_context,

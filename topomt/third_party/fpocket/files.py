@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 from typing import Any
 
@@ -7,10 +8,12 @@ import numpy as np
 from topomt import pyunitwizard as puw
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.arg_digestion.fpocket_arguments import OPTIONS
+from topomt._private.smonitor import signal
 from topomt.features.Pocket import Pocket
 from topomt.provider_output import ExternalMeasurement, ProviderRun
 from topomt.third_party.fpocket.input_context import _chemical_context
 from topomt.third_party.fpocket.model import FpocketPocket, FpocketResult
+from topomt.third_party.fpocket.output import FpocketOutput
 from topomt.third_party.fpocket.parser import parse_fpocket_output
 from topomt.third_party.pdb_context import validate_submitted_pdb
 from topomt.topography.Topography import Topography
@@ -160,6 +163,7 @@ def fpocket_result_to_topography(
     submitted_atom_indices: list[int] | None = None,
     chemical_state: str | int | None = None,
     chemical_state_context: dict[str, Any] | None = None,
+    _provider_run: ProviderRun | None = None,
 ) -> Topography:
     context = None
     if chemical_state_context is not None and (
@@ -211,13 +215,36 @@ def fpocket_result_to_topography(
         run_metadata['submitted_atom_indices'] = [
             int(index) for index in submitted_atom_indices
         ]
-    run = ProviderRun.capture(
-        'fpocket',
-        backend,
-        fpocket_result.source_pdb,
-        fpocket_result.output_dir,
-        metadata=run_metadata,
-    )
+    if _provider_run is not None:
+        if (
+            _provider_run.provider != 'fpocket'
+            or _provider_run.backend != backend
+            or any(
+                json.dumps(_provider_run.metadata.get(key), sort_keys=True)
+                != json.dumps(value, sort_keys=True)
+                for key, value in run_metadata.items()
+            )
+        ):
+            raise ValueError('Saved fpocket run source metadata disagrees.')
+        run = _provider_run
+    elif context is not None and submitted_atom_indices is not None:
+        from ._saved import capture_bound_run
+
+        run = capture_bound_run(
+            molecular_system,
+            fpocket_result,
+            backend,
+            run_metadata,
+            structure_indices=structure_indices,
+        )
+    else:
+        run = ProviderRun.capture(
+            'fpocket',
+            backend,
+            fpocket_result.source_pdb,
+            fpocket_result.output_dir,
+            metadata=run_metadata,
+        )
     topography.add_provider_run(run)
 
     for fpocket_pocket in fpocket_result.pockets:
@@ -240,6 +267,54 @@ def fpocket_result_to_topography(
         topography.add_feature(pocket)
 
     return topography
+
+
+@signal(tags=['provider', 'fpocket', 'files'])
+@arg_digest(**OPTIONS)
+def load_output(
+    molecular_system: Any,
+    *,
+    bundle_file: str | Path,
+    skip_digestion: bool = False,
+) -> FpocketOutput:
+    """Recover a bound original fpocket bundle without executing the engine.
+
+    Parameters
+    ----------
+    molecular_system : MolSysMT-compatible input
+        Full source with the saved atom inventory, frame and reference state.
+    bundle_file : str or pathlib.Path
+        ProviderRun ZIP containing the recorded full-source context supplement.
+    skip_digestion : bool, default=False
+        Internal bypass for already admitted arguments.
+
+    Returns
+    -------
+    FpocketOutput
+        Detached pockets and the unchanged original run, including its backend.
+
+    Raises
+    ------
+    ArgumentError
+        If source/path arguments are invalid or saved selectors are overridden.
+    ValueError
+        If bundle integrity, source context, reference state or maps disagree.
+        Historical bundles without the supplement require explicit raw import.
+    OSError
+        If the bundle cannot be read.
+
+    Examples
+    --------
+    >>> result = load_output('source.h5msm', bundle_file='original.zip')  # doctest: +SKIP
+    """
+    from topomt.third_party.output import _from_topography
+
+    from ._saved import recover_topography
+
+    return _from_topography(
+        recover_topography(molecular_system, ProviderRun.load(bundle_file)),
+        FpocketOutput,
+    )
 
 
 @arg_digest(**OPTIONS)

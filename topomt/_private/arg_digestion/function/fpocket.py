@@ -21,4 +21,8 @@ CONTRACTS = [
         caller='topomt.third_party.fpocket.api.load_topography',
         admits='fpocket_file_options',
     ),
+    FunctionContract(
+        caller='topomt.third_party.fpocket.files.load_output',
+        admits='signature',
+    ),
 ]

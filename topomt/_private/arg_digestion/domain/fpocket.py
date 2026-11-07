@@ -10,6 +10,7 @@ def _members() -> tuple[str, ...]:
 
     names = set(signature(cli.get_topography).parameters)
     names.update(signature(files.load_topography).parameters)
+    names.update(signature(files.load_output).parameters)
     return tuple(sorted(names - {'molecular_system', 'backend', 'skip_digestion'}))
 
 

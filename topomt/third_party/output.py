@@ -7,10 +7,13 @@ when adapters produce these records directly.
 
 import copy
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, ClassVar, TypeVar
 
 import numpy as np
 
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.provider_persistence import OPTIONS, SAVE_PIPELINES
 from topomt._pyunitwizard import pyunitwizard as puw
 from topomt.provider_output import ExternalMeasurement, ProviderRun
 
@@ -48,7 +51,7 @@ class PocketGeometry:
     radii_nm: tuple[float, ...] | None = None
 
     def __post_init__(self) -> None:
-        points = np.asarray(self.points_nm, dtype=float)
+        points: np.ndarray = np.asarray(self.points_nm, dtype=float)
         if points.size == 0:
             points = points.reshape(0, 3)
         if not self.kind or not self.definition:
@@ -57,7 +60,7 @@ class PocketGeometry:
             raise ValueError('Geometry points must be finite with shape (N, 3)')
         object.__setattr__(self, 'points_nm', tuple(tuple(row) for row in points))
         if self.radii_nm is not None:
-            radii = np.asarray(self.radii_nm, dtype=float)
+            radii: np.ndarray = np.asarray(self.radii_nm, dtype=float)
             if (
                 radii.shape != (len(points),)
                 or not np.isfinite(radii).all()
@@ -202,7 +205,8 @@ class ProviderOutput:
     Examples
     --------
     ``output.pockets`` is the shared consumer access. Save original evidence with
-    ``output.run.save('original.zip')``; it is not a serialization of this output.
+    ``output.save('original.zip')`` and recover through
+    ``topomt.load_provider_output('original.zip', molecular_system=source)``.
     """
 
     run: ProviderRun
@@ -245,6 +249,44 @@ class ProviderOutput:
         if self.input_points_nm is None:
             return None
         return puw.quantity(np.asarray(self.input_points_nm).reshape(-1, 3), 'nm')
+
+    @arg_digest(**OPTIONS, map=SAVE_PIPELINES)
+    def save(self, path: str | Path) -> None:
+        """Save original evidence for inspection or supported reconstruction.
+
+        Parameters
+        ----------
+        path : str or pathlib.Path
+            Destination ZIP; an existing destination is replaced, as with
+            ProviderRun.save.
+
+        Returns
+        -------
+        None
+            The original run's manifest and artifact bytes are written.
+
+        Raises
+        ------
+        ArgumentError
+            If path is not a nonempty path string or pathlib.Path.
+        ValueError
+            If the run manifest or its checksums are inconsistent.
+        OSError
+            If the destination cannot be written.
+
+        Notes
+        -----
+        This delegates to ProviderRun.save. It stores original evidence rather
+        than serializing arbitrary manually constructed record fields or the
+        full molecular source. Keep that source for load_provider_output.
+        Saving adds no missing source context; reconstruction remains limited
+        to source-bound captures supported by the corresponding saved reader.
+
+        Examples
+        --------
+        >>> output.save('original.zip')  # doctest: +SKIP
+        """
+        self.run.save(path)
 
 
 def _length_values(value: Any, *, bare_unit: str | None = None) -> np.ndarray:

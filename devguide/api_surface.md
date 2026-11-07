@@ -15,6 +15,7 @@ workflows are:
 | Entry point or object | Current role | Implementation |
 | --- | --- | --- |
 | `topomt.get_provider_output()` | Execute/recover an original provider and retain its own result semantics. | [dispatch](../topomt/get_provider_output.py) |
+| `topomt.load_provider_output()` | Recover a source-bound result using the verified bundle's provider and original execution context. | [saved dispatch](../topomt/load_provider_output.py) |
 | `topomt.get_topography()` | Existing native/provider-adapter orchestration into `Topography`. | [orchestrator](../topomt/get_topography.py) |
 | `topomt.Topography` | Mapping of feature IDs to features, typed lookup indexes, relations, provider runs and captured input context where adopted. | [registry](../topomt/topography/Topography.py) |
 | `topomt.features` | Feature classes and the current type registry. | [feature exports](../topomt/features/__init__.py) |
@@ -45,8 +46,15 @@ their provider interpretation.
 
 [ProviderRun](../topomt/provider_output.py) captures original inputs, outputs,
 metadata and checksummed artifact bytes; its save/load operations preserve the
-run's identity. Source-bound reconstruction verifies the corresponding source
-context where adopted. The output and original run are separate from canonical
+run's identity. `output.save(path)` delegates to that evidence writer, and
+`load_provider_output(path, molecular_system=source)` dispatches only a supported
+saved reader after verifying the bundle. It preserves the original backend/run,
+rejects execution-context overrides and requires the explicit binder source for
+bound AlphaSpace2 runs. All five providers support this source-bound workflow.
+CASTp requires a source-bound files capture: current direct-server captures
+remain inspectable evidence and are not reconstructable through this loader.
+Context-insufficient bundles are never upgraded implicitly.
+The full molecular source is kept separately. The output and original run are separate from canonical
 `Topography` semantic admission and DFND. Explicitly requesting an unavailable
 original engine must not invoke a native reproduction as a substitute.
 
