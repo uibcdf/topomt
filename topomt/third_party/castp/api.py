@@ -1,5 +1,7 @@
 from typing import Any
 
+from topomt._private.arg_digestion import arg_digest
+from topomt._private.arg_digestion.castp_arguments import OPTIONS, ORIGINAL_PIPELINES
 from topomt.topography.Topography import Topography
 
 from .output import CASTpOutput
@@ -85,8 +87,13 @@ def load_topography(
     )
 
 
+@arg_digest(**OPTIONS, argument_digestion=False, map=ORIGINAL_PIPELINES)
 def get_output(
-    molecular_system: Any = None, *, backend: str = 'server', **kwargs: Any
+    molecular_system: Any = None,
+    *,
+    backend: str = 'server',
+    skip_digestion: bool = False,
+    **kwargs: Any,
 ) -> CASTpOutput:
     """Return original castp results with shared pocket access.
 
@@ -96,6 +103,8 @@ def get_output(
         MolSysMT-compatible input; persisted CASTp files can supply their PDB.
     backend : str, default='server'
         Original route: server, castpfold or files. Local reproductions are not substituted.
+    skip_digestion : bool, default=False
+        Internal bypass for already admitted routing arguments.
     **kwargs
         Execution/import options documented by the corresponding legacy adapter,
         including selection, structure_indices and provider-specific settings.
@@ -119,7 +128,11 @@ def get_output(
 
     backend = backend.lower()
     if backend == 'files':
-        topography = load_topography(molecular_system=molecular_system, **kwargs)
+        from .files import load_output, recover_output
+
+        if kwargs.get('bundle_file') is not None:
+            return recover_output(molecular_system, **kwargs)
+        return load_output(molecular_system, **kwargs)
     elif backend in {'server', 'castpfold'}:
         topography = get_topography(molecular_system, backend=backend, **kwargs)
     else:

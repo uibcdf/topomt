@@ -1,0 +1,103 @@
+{
+  "archive": {
+    "bytes": 122432,
+    "crc_and_all_payload_hashes_verified": true,
+    "embedded_manifest_sha256": "1823d2ef37065c8d135e570c3c81902338a79e6380aabf910f592f6f3bbae012",
+    "members": 11,
+    "path": "tests/data/castp_source_binding.zip",
+    "sha256": "7baa95e7ef4ea91d78e0a2160fadf9a60b72b97afa8a2e7b587efed5615a214b"
+  },
+  "fixture_manifest": {
+    "artifacts": {
+      "atom-map-report.json": {
+        "bytes": 51005,
+        "sha256": "48f7c8fdcdc6b6aef4c6ad73fb74dbbfc146bae7f79df4fd17ea6421e7cf4511"
+      },
+      "expected-source.json": {
+        "bytes": 195394,
+        "sha256": "3143e493d2d12aa573da77ebacdb5cf320704d6d2c1d27941da9c7bb509ca816"
+      },
+      "generate.py": {
+        "bytes": 12222,
+        "sha256": "31782d76ff9fcd5e5ecf9cee9c923dbf324ead99f7dd879cea4434b36b418314"
+      },
+      "generation-receipt.json": {
+        "bytes": 2132,
+        "sha256": "82786787426cd317467d3ece113225dadc5f417a8eab56ca35373c76392049a8"
+      },
+      "input/2pk4.pdb": {
+        "bytes": 92340,
+        "sha256": "491d6fc18883b7b3f82c8b9c85023129a7390c7120ba94eb16b199801f2ee1c1"
+      },
+      "mapping.json": {
+        "bytes": 14007,
+        "sha256": "7d12b4ca99d70ff8cf5df0734f0251dda53049fe3985a4d61f25f7834ca56c6d"
+      },
+      "public-connectivity-shapes.json": {
+        "bytes": 963,
+        "sha256": "12a09f32e8124e24be3422f60904dd78a23bc48a2c07610fc442bd4aa77accc1"
+      },
+      "public-readback-receipt.json": {
+        "bytes": 1418,
+        "sha256": "bfc292bec8f77281d20e5cf6b4f93c15de9abbe6ab3cbcfe81e999fd7204fc52"
+      },
+      "source.h5msm": {
+        "bytes": 366145,
+        "sha256": "d97596013c1f953ec3165198fa2d886630b41fa24689a52c15c18eb338874c2b"
+      },
+      "verify_public.py": {
+        "bytes": 4103,
+        "sha256": "3d441f529e2b00365ec510f6e574a2e07935fa9931c257d1eabb347ca5d67408"
+      }
+    },
+    "description": "Known reverse permutation of an original CASTp PDB export, with two copied translated auxiliary atoms interleaved and one translated decoy frame.",
+    "limitations": [
+      "Synthetic atom correspondence is not a chemically prepared receptor.",
+      "No missing bonds, charges or atoms were inferred or repaired.",
+      "No live submission, scientific pocket detection or algorithm parity is claimed.",
+      "Auxiliary labels copy the seed; correspondence comes from operation maps, not an atom matcher.",
+      "Packaged receipts omit local module origins and use the repository-relative seed archive path; original receipts remain in task evidence."
+    ],
+    "producer": {
+      "molsysmt_source_commit": "00abb958fb93649131d5ce5fe5e12e90cf4900e9",
+      "molsysmt_version": "0.23.0+368.g00abb958f",
+      "molsysmt_wheel_sha256": "60a042df84375752d37c65e961036d78fa13d5f4ea0ddb6e231a7abd447a31a1",
+      "python_version": "3.14.10"
+    },
+    "profile": "tests-only analytical source correspondence",
+    "public_readback": {
+      "controlled_getter_value": "partial",
+      "maximum_original_pdb_coordinate_error_angstroms": 3.552713678800501e-15,
+      "molsysmt_version": "0.23.0",
+      "public_getter_value": [
+        "partial"
+      ],
+      "status": "passed with recorded connectivity getter return-shape difference"
+    },
+    "schema": "topomt.castp_source_binding_fixture@1",
+    "seed": {
+      "archive": "topomt/data/CASTp_3.0_server/2pk4.zip",
+      "archive_sha256": "bfaf53263b6757d77c4f6511fa6c6300ff74cb59806c1864cc0bfed13f3e122a",
+      "get_missing_bonds": false,
+      "member": "2pk4.pdb",
+      "pdb_sha256": "491d6fc18883b7b3f82c8b9c85023129a7390c7120ba94eb16b199801f2ee1c1"
+    },
+    "source_contract": {
+      "connectivity_completeness": "partial",
+      "excluded_source_atom_indices": [
+        1,
+        3
+      ],
+      "n_atoms": 747,
+      "n_selected_atoms": 745,
+      "n_structures": 2,
+      "original_pdb_row_map_is_nonmonotonic": true,
+      "original_pdb_structure_index": 1,
+      "reference_chemical_state_index": 0,
+      "structure_chemical_state_indices": [
+        0,
+        0
+      ]
+    }
+  }
+}

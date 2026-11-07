@@ -48,8 +48,9 @@ def get_provider_output(
     Raises
     ------
     ValueError
-        If the provider method or original backend is invalid. Dispatch refusals
-        also inherit the catalogued TopoMT ArgumentError diagnostic.
+        If the provider method, original backend or asserted server conflicts.
+        Dispatch refusals also inherit the catalogued TopoMT ArgumentError
+        diagnostic.
     LibraryNotFoundError
         If a requested optional Python engine is absent.
 
@@ -61,8 +62,21 @@ def get_provider_output(
     name = method
     provider = ALIASES.get(name, name)
     selected_backend = DEFAULT_BACKENDS[provider] if backend is None else backend
+    if provider == 'castp' and selected_backend == 'castpfold':
+        requested_server = kwargs.get('server')
+        if (
+            name == 'castp3'
+            or requested_server is not None
+            and (
+                not isinstance(requested_server, str)
+                or requested_server.lower() != 'castpfold'
+            )
+        ):
+            raise ValueError('Server conflicts with the requested provider method')
     if name in {'castp3', 'castpfold'}:
         if selected_backend == 'files':
+            if 'provider_server' in kwargs and kwargs['provider_server'] != name:
+                raise ValueError('Server conflicts with the requested provider method')
             kwargs.setdefault('provider_server', name)
         else:
             if 'server' in kwargs and kwargs['server'] != name:

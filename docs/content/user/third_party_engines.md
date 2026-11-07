@@ -162,6 +162,38 @@ archives, duplicate member names, inconsistent capitalization of path components
 and paths that change during extraction are rejected. This keeps artifact
 identities consistent across file systems.
 
+To associate a CASTp export with an external molecular source, supply an explicit
+correspondence: one full-source atom index per row of the export's original PDB,
+in that row order. MolSysMT owns correspondence and preparation; TopoMT checks
+the declared map without inferring one or sorting it.
+
+```python
+output = tmt.get_provider_output(
+    source, method='castp', backend='files', zip_file='original_castp.zip',
+    source_atom_indices=pdb_row_to_source, selection=pdb_row_to_source,
+    structure_indices=1, chemical_state='reference',
+)
+output.run.save('bound_castp.zip')
+restored = tmt.get_provider_output(
+    source, method='castp', backend='files', bundle_file='bound_castp.zip',
+)
+```
+
+The bound import requires the original result PDB, one source frame and an
+unambiguous existing reference chemical state. The initial binding profile
+rejects alternate-location and insertion-code rows. It checks atom/residue/chain
+identity and declared elements, as well as coordinates at PDB rounding precision.
+Saving retains the complete source identity/frame and reference chemistry,
+including atoms excluded from the provider selection. Recovery verifies that
+context and preserves the exact run ID, original bytes and attributed records.
+It accepts no replacement selection, frame or chemical-state settings.
+
+Historical evidence saved without source context remains attributable, but it
+cannot be reconstructed as a source-bound result by inference. Import the
+original files with a known correspondence first. These checks establish a
+declared correspondence; they do not establish chemical readiness or a new
+server calculation.
+
 The new entry point rejects `backend='native'`; local reproductions retain their
 existing APIs and separate parity gates. Contact/volume/score definitions remain
 specific to their original methods. No DFND calculation is required to use

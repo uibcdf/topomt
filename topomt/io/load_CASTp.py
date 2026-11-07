@@ -391,6 +391,9 @@ def load_CASTp(
     provider_jobid=None,
     probe_radius=None,
     provider_metadata: dict[str, Any] | None = None,
+    _provider_run: ProviderRun | None = None,
+    _load_molecular_system: bool = True,
+    _artifact_root: str | Path | None = None,
 ):
     """
     Load CASTp data.
@@ -443,10 +446,11 @@ def load_CASTp(
 
         def artifact_name(path: PathLike[str]) -> str:
             result_path = Path(path)
+            root = dir_path if dir_path is not None else _artifact_root
             relative = (
                 result_path.name
-                if dir_path is None
-                else result_path.relative_to(dir_path).as_posix()
+                if root is None
+                else result_path.relative_to(root).as_posix()
             )
             return f'output/{relative}'
 
@@ -467,7 +471,7 @@ def load_CASTp(
 
         from topomt.topography.Topography import Topography
 
-        if molecular_system is None and pdb_file is not None:
+        if _load_molecular_system and molecular_system is None and pdb_file is not None:
             if extracted_from_zip:
                 molecular_system = msm.convert(pdb_file, to_form='molsysmt.MolSys')
             else:
@@ -482,7 +486,16 @@ def load_CASTp(
                 'probe_radius_angstroms': probe_radius,
             }
         )
-        if dir_path is not None:
+        if _provider_run is not None:
+            if _provider_run.provider != 'castp' or (
+                dir_path is None and _artifact_root is None
+            ):
+                raise ValueError(
+                    'CASTp reconstruction requires its retained output directory.'
+                )
+            provider_run = _provider_run
+            topography.add_provider_run(provider_run)
+        elif dir_path is not None:
             provider_input = (
                 submitted_input_pdb
                 or zip_file
