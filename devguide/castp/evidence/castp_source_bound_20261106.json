@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "owner": "uibcdf/topomt#101; fidelity uibcdf/topomt#19",
+  "archive": "castp_source_bound_20261106.zip",
+  "bytes": 430880,
+  "sha256": "bef81aa44769fed98ad038fa2c09e35da568a61f5a9193c2dd28c77969426c38",
+  "manifest_sha256": "0a1010abcd965ec21af03041a719c90cb9dfff074a2ccaea9480548335ed758d",
+  "payload_files": 52,
+  "validation": {
+    "schema_version": 1,
+    "scope": "source-only original CASTp files binding and portable recovery; no service execution, chemical preparation, public consumer or installed-candidate qualification",
+    "source_producer_commit": "bffc26b2b72de0f057b223c892021dccfe519fef",
+    "python": "3.14.10",
+    "working_dependencies": {
+      "molsysmt": "0.23.0",
+      "argdigest": "0.17.1",
+      "depdigest": "0.15.2",
+      "smonitor": "0.22.1",
+      "pyunitwizard": "0.29.1",
+      "numpy": "2.5.4",
+      "pandas": "3.1.1",
+      "pytest": "9.2.0",
+      "pytest-receptor": "1.2.2"
+    },
+    "source_tests": {
+      "selected": 392,
+      "passed": 388,
+      "skipped": 4,
+      "new_castp_binding_cases": 63,
+      "new_castp_argument_cases": 82,
+      "new_provider_run_schema_cases": 84,
+      "original_optional_engines_unavailable": [
+        "fpocket",
+        "pocketeer",
+        "alphaspace2",
+        "pycasta"
+      ]
+    },
+    "distribution_reporting": {
+      "passed": 20
+    },
+    "controlled_saved_reader_regressions": {
+      "passed": 104,
+      "skipped": 4,
+      "molsysmt_source_commit": "00abb958fb93649131d5ce5fe5e12e90cf4900e9",
+      "scope": "source tests under retained engine-free dependency closure; not an installed TopoMT gate"
+    },
+    "retained_pocketeer_adapter": {
+      "scope": "current source adapter over retained genuine Pocketeer output; no installed-candidate or original-execution claim",
+      "pockets": 11,
+      "run_id": "ab047822f38e88ad4b7a8fbbdf26d6bc494197e0a1f8635cafd565dafbde9e62",
+      "original_provider_import_attempts": [],
+      "retained_bundle_sha256": "3b7259fb2381b470039a6f1f4c459603769d164b42c99b5851c709feef70790f"
+    },
+    "public_prefix_observations": {
+      "shared_saved_reader_attempt": {
+        "passed": 99,
+        "skipped": 53,
+        "failed": 7
+      },
+      "cause": "AlphaSpace2 stored chemical-context fingerprints use controlled scalar completeness; public MolSysMT returns a list. No fingerprint or provider artifact was changed to waive disagreement.",
+      "original_execution_pocketeer_cases_unexecuted": 49
+    },
+    "checks": {
+      "ruff_check": "passed",
+      "ruff_format": "479 files formatted",
+      "mypy": "9 runtime modules passed, with changed binding/leaf/IO rechecked after explicit-file coverage",
+      "instruction_routes": "passed against pinned admin SDK",
+      "report_indexes": "current",
+      "docs_html": {
+        "status": "succeeded",
+        "warnings": 11,
+        "scope": "existing warnings in unchanged documentation"
+      }
+    },
+    "delivery": {
+      "route": "principal-maintainer authorized direct commit/push",
+      "ci": "[skip ci] as explicitly requested; remote full suite/matrix deferred under #16/#58",
+      "release_claim": false
+    },
+    "scientific": {
+      "scope": "source-bound original archive recovery only; no prepared chemistry, service execution or installed qualification",
+      "source_sha256": "d97596013c1f953ec3165198fa2d886630b41fa24689a52c15c18eb338874c2b",
+      "reader_sha256": "10d3bf62577004af4acb5a1e44caae2480f16b9237cce7b5e26e5c1521dec8b0",
+      "results": [
+        {
+          "provider": "castp3",
+          "units": [
+            "nm",
+            "ps",
+            "radians"
+          ],
+          "pockets": 7,
+          "records": 10,
+          "run_id": "06e428daf116c9a1b2991f899f0d2e6962232dab9d04a057937bf11859a7b92c",
+          "bundle": "castp3-nm.zip",
+          "bundle_sha256": "5c88df9b5675fffbbfa9757b2d2be8f31915ff1d28035e13dc5c739ef0c9c77f"
+        },
+        {
+          "provider": "castp3",
+          "units": [
+            "pm",
+            "fs",
+            "radians"
+          ],
+          "pockets": 7,
+          "records": 10,
+          "run_id": "242fedd7d5f158ddcb59084552862d9476d600041e5c81637ae2346d60c4ae1d",
+          "bundle": "castp3-pm.zip",
+          "bundle_sha256": "52568a17f942251e6037e782c16ba76199335956a0c244f49a367e0031a9a9a4"
+        },
+        {
+          "provider": "castpfold",
+          "units": [
+            "nm",
+            "ps",
+            "radians"
+          ],
+          "pockets": 7,
+          "records": 10,
+          "run_id": "d08a6950b2da43ef66e9268a900123f84dfc4e4ad5d86b243b30c81d8f91eabb",
+          "bundle": "castpfold-nm.zip",
+          "bundle_sha256": "4e0528ea1b42f74bee8c313f5e27788681b829a24cdb6c3bca88ab5d8f30349d"
+        },
+        {
+          "provider": "castpfold",
+          "units": [
+            "pm",
+            "fs",
+            "radians"
+          ],
+          "pockets": 7,
+          "records": 10,
+          "run_id": "b85a6d285183b1e084e78281a98f3d12505497bb16f9cb984cf7be86873ceece",
+          "bundle": "castpfold-pm.zip",
+          "bundle_sha256": "b6b06a490d2ccc7037ce9a7c90f29efe61e62ecf71a836190f5d4c2e56f9fcab"
+        }
+      ]
+    }
+  },
+  "fixture": {
+    "archive": "tests/data/castp_source_binding.zip",
+    "sha256": "7baa95e7ef4ea91d78e0a2160fadf9a60b72b97afa8a2e7b587efed5615a214b"
+  },
+  "temporary_resource_review": {
+    "owner": "TopoMT CASTp receiving continuation",
+    "working_directory": ".cache/castp-handoff",
+    "purpose": "Active prepared-consumer and installed receiving continuation; this archive is the durable source checkpoint.",
+    "review_after": "next receiving checkpoint or 2026-11-13"
+  }
+}

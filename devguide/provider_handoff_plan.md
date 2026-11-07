@@ -60,7 +60,7 @@ changing another component.
 | Pocketeer | Public 0.4.0 original, argument/state and saved-reader controls; prepared public PharmacophoreMT receiving under both unit policies. Exact producer `bb34e67` also passes 311 installed cases without skips and two independent prepared flows in a new prefix. | Preserve the qualified candidate and regression evidence; general fidelity and component gates remain separate. |
 | AlphaSpace2 | Historical source receiving at `ce4708a` retains its 523 distinct affected cases. Exact producer `5ae5c46` now has 256 passing installed cases, two complete 13-pocket/two-site flows under alternate units and independent engine-free recovery. See the [installed checkpoint](alphaspace2/installed_receiving_checkpoint.md). | Preserve the candidate and regressions; broader fidelity and component gates retain their owners. |
 | pyCASTA | Original 1.0.8 argument/source contracts, schema-1 saved recovery and prepared public consumption. Exact producer `02a38be` passes 217 installed cases, two complete five-pocket/four-site unit-policy flows and independent engine-free receiving. See its [installed checkpoint](pycasta/installed_receiving_checkpoint.md). | Preserve the candidate and regressions; native #53, exhaustive fidelity and general component gates remain separate. |
-| CASTp/CASTpFold | Existing server/files adapters; deterministic original file discovery and relative artifact retention in the [file-input checkpoint](castp/file_input_checkpoint_2026_11_06.md). | Complete source/context binding and portable reconstruction, then qualify an explicit prepared consumer profile. |
+| CASTp/CASTpFold | Original file discovery, explicit source/reference/frame binding and portable reconstruction in the [source checkpoint](castp/source_binding_checkpoint_2026_11_06.md). Genuine archives and analytical maps retain their bounded identities. | Qualify a prepared consumer profile, live-service source admission and exact installed receiving; original file correspondence is not chemical preparation. |
 
 The AlphaSpace2 installed checkpoint records Linux/Python 3.14.10 receiving with
 new wheels from MolSysMT `00abb958f` and PharmacophoreMT `b934471`. Its source pins,
@@ -68,8 +68,9 @@ candidate and executed controls retain their own identities. Public-only
 dependency acquisition and compatibility with current sibling mains remain
 separate from this result.
 
-Continue the technical sequence with CASTp/CASTpFold's original route/source
-contracts, saved recovery and explicit prepared consumer. Preserve the fpocket,
+Continue with CASTp/CASTpFold's prepared consumer profile, live-service source
+admission and exact installed receiving. Its source-bound original files and
+saved recovery now have their own checkpoint. Preserve the fpocket,
 Pocketeer, AlphaSpace2 and pyCASTA regressions through the existing developer recorders and public
 PharmacophoreMT tools. Issue #101 remains open: completion requires all five
 providers and the evidence above, while exhaustive fidelity and general

@@ -2,8 +2,10 @@
 
 Status: original file-input discovery and retention have a bounded
 [2026-11-06 source checkpoint](file_input_checkpoint_2026_11_06.md). Source
-binding, portable result reconstruction and prepared consumer receiving remain
-under #101; exhaustive fidelity remains under #19. The pinned CASTp 3.0
+binding and portable files reconstruction now have a separate
+[source checkpoint](source_binding_checkpoint_2026_11_06.md). Prepared consumer,
+live-service admission and installed receiving remain under #101; exhaustive
+fidelity remains under #19. The pinned CASTp 3.0
 `topomt/data/CASTp_3.0_server/1tcd.zip` is the initial parser fixture;
 1a4j, 1hiv, 1stp, 2pk4, and 3ptb now cover aggregate mouth rows and
 surface counts.
