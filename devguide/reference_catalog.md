@@ -7,6 +7,11 @@ use [status](status.md) and [the roadmap](roadmap.md) for current scheduling.
 
 ## Main documents
 
+- [DFND/study_zone.md](DFND/study_zone.md)
+  Named system studies for DFND development and original-provider comparison;
+  case-unit content, independent references, fair evaluation and publication
+  through shared sources inside documentation or a future standalone site.
+
 - [DFND/mole_comparison_2026_11_07.md](DFND/mole_comparison_2026_11_07.md)
   Primary-paper and exact-source MOLE comparison: accommodation antecedents,
   different implemented capacities, cavity/opening objects and bounded DFND

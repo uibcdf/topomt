@@ -35,6 +35,12 @@ through the synthetic phase before starting new protein-characterization work.
 Use `devguide/DFND/notebook_laboratory_checkpoint.md` for the active sequence;
 catalog labels and agreement with other engines are not independent truth.
 
+Study-area direction (2026-11-07): use descriptive case names without numbering.
+Maintain one versioned study unit per system, including independent references,
+DFND observations and original third-party comparisons. Prepare the same case
+content for documentation integration and a future standalone study/benchmark
+site. See `devguide/DFND/study_zone.md` for the working design and its limits.
+
 ---
 
 ## External Tooling Guides (Required for Development)

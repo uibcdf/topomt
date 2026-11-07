@@ -1,10 +1,16 @@
-# DFND laboratory
+# Molecular topography laboratory
 
 This collection starts a public, reproducible laboratory for learning how DFND
 describes molecular topography. Each notebook combines an explained geometric
 input, independent reference checks, visual observations and an optional
 comparison with original third-party tools. It is the seed of a future benchmark
-annex to the TopoMT documentation.
+annex to the TopoMT documentation. It also guides development of DFND through
+progressively characterized synthetic systems before molecular benchmarks.
+
+Each system is a named study unit, with versioned inputs and observations.
+Scientific groups and reading order can evolve as new systems are added.
+The publication target is a collection that can live inside the documentation
+or become a standalone study site using the same reviewed case sources.
 
 The collection is under development. Two controls are available: a regular
 tetrahedron and a sampled shell with an independently certified wall. They do not
@@ -18,6 +24,23 @@ necessary variants. Protein studies follow completion of that synthetic phase.
 regular_tetrahedron
 closed_shell
 ```
+
+## What each study explains
+
+| Part | What the reader can inspect |
+| --- | --- |
+| System and question | Geometry, parameters, units, downloadable inputs and the phenomenon being isolated. |
+| Independent reference | What is known, how it is justified and which conclusions remain unresolved. |
+| DFND observations | Local clearances, regions, access, boundaries, metrics and their interpretation. |
+| Original-method comparisons | Versions, settings, submitted inputs, original results and execution status. |
+| Comparison and conclusions | Comparable observables, explained differences, limitations and development outcomes. |
+
+Comparison helps identify concrete improvements. Distinguish a geometric error
+from an input rejection, a different modeled object or a reporting convention.
+Optional methods have different domains; failed or unsupported runs do not mean
+zero pockets. The development collection and a later frozen evaluation panel
+have different purposes, and synthetic results alone do not establish biological
+accuracy.
 
 ## Run a case
 

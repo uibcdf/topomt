@@ -2,6 +2,13 @@
 
 ## Active direction
 
+The user refined the publication target on 2026-11-07: a
+[study and benchmark area](study_zone.md), with one named unit per system,
+DFND observations and original third-party comparisons. Case identities use
+descriptive names without numbering. The same reviewed sources should serve
+documentation integration and a future standalone site. This extends the
+existing laboratory rather than creating a second evidence collection.
+
 On 2026-11-07 the user explicitly resumed native DFND development, following a
 fresh reading of code/devguide and the MOLE comparison. The working order is
 **one synthetic case at a time, then proteins after the synthetic phase**.
