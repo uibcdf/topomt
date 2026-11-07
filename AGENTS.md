@@ -27,6 +27,14 @@ Use them when reviewing external implementations; inspect their exact revision
 and local changes before using or updating a checkout as a reference. The local
 inventory is described in `devguide/engine_references.md`.
 
+DFND working direction (2026-11-07): develop the native method one synthetic
+case at a time, guided by its independently justified geometry and observed
+behaviour. Freeze inputs/references, inspect raw and public results, and make
+focused, test-first changes supported by the case before moving on. Continue
+through the synthetic phase before starting new protein-characterization work.
+Use `devguide/DFND/notebook_laboratory_checkpoint.md` for the active sequence;
+catalog labels and agreement with other engines are not independent truth.
+
 ---
 
 ## External Tooling Guides (Required for Development)

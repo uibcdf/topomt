@@ -1,5 +1,15 @@
 # DFND Research Program — characterization first
 
+Reading update (2026-11-07): this is the intended product/research programme,
+not a statement that every capability below is implemented or qualified. Use
+the [resumed synthetic laboratory](notebook_laboratory_checkpoint.md) for current
+work: characterize one case and its necessary variants, implement the justified
+increment, then continue; proteins follow the synthetic phase. The
+[theoretical reconstruction](core_theory_review_2026_11_06.md) and
+[MOLE comparison](mole_comparison_2026_11_07.md) qualify earlier passage, complete
+coverage, dynamic-identity and uniqueness language. In particular, a claimed
+absence of external baselines does not establish novelty or physical validity.
+
 The north star is **not** "match other detectors". It is:
 
 > **Give the user a rich, complete, useful characterization of a surface's

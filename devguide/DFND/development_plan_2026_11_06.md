@@ -1,5 +1,11 @@
 # DFND development plan after the repository review
 
+Active scheduling update (2026-11-07): the user selected
+[case-by-case synthetic development](notebook_laboratory_checkpoint.md), with
+proteins after the synthetic phase. The sections below retain their technical
+acceptance criteria; case observations now guide their implementation order.
+The laboratory-pause statements record this proposal's earlier review state.
+
 Date: 2026-11-06, America/Mexico_City. Status: **proposed development sequence**.
 Reviewed source: `3f89ae3bb44f38c5bb56966e8f45a931d4a9215b`.
 GitHub state was checked on 2026-11-07 UTC, including later issue comments.

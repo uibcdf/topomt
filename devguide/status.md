@@ -18,6 +18,12 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
+On 2026-11-07 the user selected native DFND development guided one synthetic
+case at a time, with protein studies after that phase. The
+[laboratory checkpoint](DFND/notebook_laboratory_checkpoint.md) records the
+resumption, independent-reference rules and current control checks. Existing
+provider delivery and other open work retain their separate gates below.
+
 The migration publication is complete. Subsequent user-selected AlphaSpace2
 and pyCASTA receiving are completed for their exact `5ae5c46` and `02a38be`
 development candidates on this host. The qualification preserved the checkout's
@@ -130,10 +136,11 @@ temporary files are not acceptance evidence.
 
 ## DFND and Topography gates
 
-The [DFND notebook laboratory](DFND/notebook_laboratory_checkpoint.md) is paused
-after regular-tetrahedron and sampled closed-shell studies. Opening, tube, neck
-and new kernel studies await a separately selected resume. DFND is not required
-to reproduce other methods' definitions or rankings.
+The [DFND notebook laboratory](DFND/notebook_laboratory_checkpoint.md) resumed
+on 2026-11-07. The regular tetrahedron and sampled closed shell are the two
+adopted references; opening, tube and neck studies follow case by case, with
+proteins after the synthetic phase. DFND is not required to reproduce other
+methods' definitions or rankings.
 
 Delivered groundwork includes canonical residence/transit decisions, source/local
 index checks, typed mesh/query configuration, static support/context identity,

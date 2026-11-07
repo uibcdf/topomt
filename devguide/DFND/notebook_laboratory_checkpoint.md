@@ -2,6 +2,13 @@
 
 ## Active direction
 
+On 2026-11-07 the user explicitly resumed native DFND development, following a
+fresh reading of code/devguide and the MOLE comparison. The working order is
+**one synthetic case at a time, then proteins after the synthetic phase**.
+This supersedes the previous two-example pause and real-system-first ordering.
+The priority is characterization-driven development: an understood case motivates
+the next bounded change, followed by regression checks of adopted earlier cases.
+
 The user selected case-by-case native-method development and validation on
 2026-10-01. The selected-frame context groundwork is delivered; extending the
 public support architecture is no longer the immediate next task. DFND's richer
@@ -13,6 +20,52 @@ benchmark compendium and method demonstrations. The current sources live in
 `docs/content/showcase/dfnd/`; the existing MyST-NB/Sphinx documentation path
 renders reviewed outputs with execution off. No separate website deployment or
 new provider integration is part of this first slice.
+
+### Current sequence and completion rule
+
+1. Re-anchor the regular tetrahedron: independent residence/gate values,
+   threshold regimes, exterior contacts, volume definitions and reporting.
+2. Retain the sampled closed shell as the sealed negative control for access;
+   its certificate proves an origin-containing bounded region, not every cavity
+   or an exact empty volume.
+3. Study a shell with an opening. Freeze the altered atomic-ball input and an
+   independent all-atom access witness before examining DFND. A certified path
+   establishes access; exactly one physical mouth requires additional evidence.
+   Derive the opening from the frozen shell coordinates and preserve atom
+   correspondence: regenerating jitter after deleting atoms changes the wall
+   too, even with the same seed.
+4. Continue with a tube and two chambers with a neck, then the remaining
+   synthetic cases/variants for fragmentation, thresholds, unequal radii,
+   degeneracy, dry boundaries, relief and interfaces as their questions arise.
+
+For each case retain a versioned input, reference assumptions, fixed tolerances,
+reviewed plots/raw supports, conclusions and meaningful regression guards.
+Separate physical topology changes, local-model limitations, numerical defects,
+reporting behaviour and unresolved references. An unresolved reference is not a
+closed scientific case; a changed catalog expectation requires justification.
+Review necessary variants before advancing rather than tuning to one example.
+
+The synthetic phase completes when the selected case inventory and necessary
+variants have reviewed dispositions and the claims needed for the protein phase
+have passed their explicit gates. A catalog count or an all-green engineering
+suite alone does not complete it. Protein annotations/generalization follow
+this phase. Optional peer comparisons retain their own input domains and do
+not gate progress on the native independent references.
+
+The current 69-entry catalog is the initial inventory to reconcile case by case;
+the two adopted public controls use their own distinct frozen inputs. Record
+unstudied entries and variants explicitly rather than treating the five initial
+study themes as completion of the synthetic catalogue.
+
+### Receiving check at resumption
+
+At source `4229f60facfe64ce15310395e8efb588b43271b5`, the two adopted reference
+modules passed **10 tests in 1.92 s** in the shared Python 3.14.10 workspace
+with Pytest Receptor. Actual PyUnitWizard imports provide QuantityRecord; no
+installation or historical temporary-prefix workaround was needed. This checks
+the existing analytic/input/notebook guards without rerunning notebooks or
+providers, overwriting frozen observations, or changing the engine. It does
+not qualify new cases, volume precision, all synthetic cases or proteins.
 
 ## Delivered first case
 
@@ -110,13 +163,13 @@ export for both cases; its jobs remain `submitted_pending` at the last recorded
 poll. This is not a completed CASTp comparison. Cached evidence retains exact
 submitted files, dates, settings and identifiers; notebook reruns do not upload.
 
-## Pause boundary and remaining gates
+## Previous pause and remaining gates
 
-The user requested a pause after these two examples and their original-provider
-comparisons. Do not start opening, tube, neck or engine-tuning work automatically.
-The local comparison tranche is reviewed; obtaining and interpreting the two
-existing CASTpFold jobs remains unresolved. Resume those job IDs before any
-new submission, and preserve the input/radius-model limitations.
+The user had paused after these two examples and their original-provider
+comparisons. That scheduling boundary was superseded by the explicit
+2026-11-07 resumption above. Obtaining and interpreting the two existing
+CASTpFold jobs remains unresolved, independently of native development. Resume
+those job IDs before any new submission and preserve input/radius-model limits.
 
 Issue #76 remains open: these are two independent controls, not the full panel.
 Issue #75 remains open: volume precision and uncertainty require their own

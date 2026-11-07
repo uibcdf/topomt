@@ -9,6 +9,11 @@ The migration publication is complete, and the user selected the AlphaSpace2
 and pyCASTA continuations recorded below. The earlier automated implementation goal remains
 cleared; the five-provider programme retains its unfinished gates.
 
+Current scheduling (2026-11-07): the user selected the native DFND laboratory
+in section 3 as the immediate focus, developing from synthetic characterization
+one case at a time before proteins. The numbered programme retains its broader
+delivery gates; it is not a requirement to finish providers before this work.
+
 ## 1. Transfer a usable development baseline
 
 Clone the published `main` and verify that its history contains the source SHA
@@ -85,9 +90,11 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
-DFND remains TopoMT's native scientific direction. Its notebook laboratory is
-paused at the regular-tetrahedron and sampled closed-shell tranche. If selected,
-the next studies are opening, tube and two chambers with a neck. Start with
+DFND remains TopoMT's native scientific direction. The user resumed its notebook
+laboratory on 2026-11-07: re-anchor the adopted regular-tetrahedron and closed-shell
+references, then characterize opening, tube, neck and the remaining synthetic
+cases/variants individually. Protein characterization follows the synthetic
+phase. Start with
 [the notebook checkpoint](DFND/notebook_laboratory_checkpoint.md),
 [the audit](DFND/audit_topography_2026_10_01.md) and
 [the DFND roadmap](DFND/roadmap.md). Provider integration or documentation

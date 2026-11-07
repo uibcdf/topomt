@@ -9,7 +9,8 @@ annex to the TopoMT documentation.
 The collection is under development. Two controls are available: a regular
 tetrahedron and a sampled shell with an independently certified wall. They do not
 establish general biological accuracy or numerical volume precision. Development
-pauses after this two-case tranche for review.
+resumed on 2026-11-07, guided by characterization of each synthetic case and its
+necessary variants. Protein studies follow completion of that synthetic phase.
 
 ```{toctree}
 :maxdepth: 1

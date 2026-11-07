@@ -1,5 +1,14 @@
 # DFND Roadmap
 
+Active scheduling (2026-11-07): the user resumed
+[case-by-case synthetic development](notebook_laboratory_checkpoint.md).
+Re-read the implementation and contracts, characterize each atomic-ball case
+independently, make the justified bounded changes and preserve earlier guards.
+Protein characterization follows completion of the synthetic phase. This is
+the immediate work order; the general development proposal below retains its
+independent technical gates rather than imposing an unrelated implementation
+tranche ahead of the selected cases.
+
 Latest review (2026-11-06): use the
 [proposed development sequence](development_plan_2026_11_06.md) and its
 [evidence/inventory](review_2026_11_06.md) for the current code, reproduced

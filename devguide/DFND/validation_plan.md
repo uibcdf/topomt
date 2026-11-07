@@ -1,5 +1,13 @@
 # DFND Validation Plan
 
+Active direction (2026-11-07): development is guided by the characterization of
+each synthetic case, with proteins following completion of the synthetic phase.
+Use the [resumed notebook sequence](notebook_laboratory_checkpoint.md) for case
+acceptance and ordering; the two-reference pause has been superseded. Current
+[theoretical questions](core_theory_review_2026_11_06.md) and
+[MOLE antecedents](mole_comparison_2026_11_07.md) qualify older interpretation
+and uniqueness claims below without changing accepted operators automatically.
+
 Current priority (2026-10-01): the
 [notebook laboratory checkpoint](notebook_laboratory_checkpoint.md) governs
 the immediate sequence: independent synthetic case → inspect raw observations
