@@ -25,6 +25,12 @@ relationship to all-atom free space. It also makes convexity/boundary developmen
 an explicit workstream below. The small API fixes remain independently useful;
 their success does not resolve that theoretical question.
 
+Comparative follow-up (2026-11-07): the [MOLE review](mole_comparison_2026_11_07.md)
+qualifies originality claims. Broad Delaunay/probe accommodation and cavity
+analysis have direct antecedents. Compare exact node/face operators, exterior
+policies and coupled wet/dry information; a different output is not automatically
+more accurate. This adds no engine integration or new experiment to the plan.
+
 ## Delivered foundations
 
 | Layer | Present implementation | Remaining qualification or adoption |

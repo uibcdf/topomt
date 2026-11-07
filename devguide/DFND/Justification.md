@@ -3,6 +3,12 @@
 This document explains why DFND is worth implementing as a native TopoMT method
 and how its claims should be framed responsibly.
 
+Evidence update (2026-11-07): the [MOLE comparison](mole_comparison_2026_11_07.md)
+identifies direct antecedents for tetrahedral accommodation, separate scales,
+cavity components, depth and opening grouping. The contributions below describe
+DFND's design and candidate research value; they do not establish historical
+priority. MOLE also retains cavity/void regions before extracting paths.
+
 DFND should not be presented as a formal limiting case or superset of CASTp,
 fpocket, MOLE, Caver, or other tools. It shares concepts with several of them,
 especially Delaunay/Voronoi geometry and probe-based accessibility, but it uses
@@ -17,9 +23,9 @@ Molecular topography tools differ in substrate, objective, and output:
   cavities, mouth areas, and volumes, with strong historical validation.
 - fpocket-style alpha-sphere clustering methods are practical and efficient for
   binding-site detection and ranking, but use heuristic clustering choices.
-- MOLE/Caver-style tunnel methods focus on centerlines and transport paths,
-  which is powerful for tunnels and channels but less direct for irregular
-  volumetric binding regions.
+- MOLE-style tunnel methods retain cavity/void regions and boundary information
+  before extracting centreline paths and profiles. Compare their region and
+  path products separately; other tunnel methods need their own source review.
 - Grid and surface scanning methods are flexible but can depend on sampling,
   orientation, and resolution choices.
 
@@ -33,8 +39,10 @@ graph connectivity       -> what components and access relations result?
 
 ## 2. Core Contribution
 
-The main DFND contribution is the explicit decoupling of local volume
-habitability from connectivity.
+DFND's central design choice is an explicit pair of local volume-habitability
+and face-permeability capacities. Accommodation and passage already have MOLE
+antecedents; the precise operators, solver and induced decomposition are the
+candidate contributions to evaluate.
 
 ```text
 R_residence: node-level resident-probe capacity
@@ -45,11 +53,11 @@ This allows a component to keep information about chambers, gates, bottlenecks,
 and access without forcing every decision into a single alpha-radius or cluster
 threshold.
 
-The second contribution is traceability. DFND is designed so that every component,
+Another design commitment is traceability. DFND is designed so that each component,
 external link, dry component, and interface can be traced back to exact atoms,
 tetrahedra, faces, thresholds, and marginal decisions.
 
-The third contribution is future dynamic use. Tetrahedron and face identities
+An additional goal is dynamic use. Tetrahedron and face identities
 provide a natural basis for tracking topographic objects through molecular
 dynamics frames without relying only on shape fitting.
 
@@ -57,8 +65,13 @@ dynamics frames without relying only on shape fitting.
 
 DFND uses two complementary graph views over the same Delaunay mesh:
 
-- the wet graph, where the probe can reside and pass;
-- the dry graph, where the probe cannot reside and where faces block passage.
+- the finite transit graph, including resident cells and optional connectors;
+- a dry bank graph over its complement, with an explicit adjacency policy.
+
+These are local discrete descriptors, not a certified partition of physical
+solvent and molecular material. Dry-bank membership differs from nonresidence
+when connectors are enabled; physical passage needs the
+[theoretical reconciliation](core_theory_review_2026_11_06.md).
 
 The wet side supports concavity components such as voids, pockets, and
 multi-opening components. The dry side supports raw dry components, dry interfaces,

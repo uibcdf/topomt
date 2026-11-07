@@ -14,6 +14,11 @@ residence/transit interpretation to reconcile before kernel changes. It also
 grounds an explicit convexity/boundary workstream; the common graph substrate
 does not yet supply every required relief/interface operator.
 
+The [MOLE comparison (2026-11-07)](mole_comparison_2026_11_07.md) establishes
+antecedents for accommodation, cavity graphs, depth and opening grouping while
+identifying concrete operator/decomposition differences. Use it to frame
+candidate contributions; it is neither global novelty nor numerical validation.
+
 Current scheduling and evidence (2026-10-01): the user has resumed joint
 DFND/Topography work, starting with an audit and staged roadmap. Use
 [the current audit](audit_topography_2026_10_01.md) for implementation presence,

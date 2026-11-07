@@ -81,7 +81,7 @@ A comparison reference can also become an optional provider.
 | Tool and official source | Capability / relationship | Route to assess | Priority / rationale |
 |---|---|---|---|
 | [CAVER](https://www.caver.cz/index.php) | Channel/tunnel candidate and path comparison | CLI/results | High: expands path and trajectory coverage |
-| [MOLE / MOLEonline](https://moleonline.biodata.ceitec.cz/) | Channel/tunnel/pore candidate and comparison | Server/results; assess local toolkit separately | High: select CAVER or MOLE first against a real use case |
+| [MOLE / MOLEonline](https://moleonline.cz/) | Channel/tunnel/pore candidate and close DFND antecedent | [Engine](https://github.com/sb-ncbr/MOLE), [Webchemistry](https://github.com/sb-ncbr/webchemistry), [web interface](https://github.com/sb-ncbr/moleonline-web); no runtime integration | High: [2026-11-07 source/method review](DFND/mole_comparison_2026_11_07.md) distinguishes operators and bounds originality claims; executable comparison remains pending |
 | [PISA](https://github.com/PDBe-KB/pisa) | Interface candidate and comparison | CLI/XML, including `--as-is` assembly-interface analysis | High: supplied-assembly interfaces without assembly prediction |
 | [pyKVFinder](https://lbc-lnbio.github.io/pyKVFinder/) | Grid/dual-probe cavity candidate and comparison | Optional Python package | High among cavity additions: complementary geometric support |
 | [P2Rank](https://github.com/rdk/p2rank) / [PrankWeb](https://prankweb.cz/) | ML site prediction and pocket rescoring comparison | Java CLI first; assess web automation separately | Medium-high: surface-site prediction is not automatically a closed region |

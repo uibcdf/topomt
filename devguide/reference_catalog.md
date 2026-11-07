@@ -7,6 +7,11 @@ use [status](status.md) and [the roadmap](roadmap.md) for current scheduling.
 
 ## Main documents
 
+- [DFND/mole_comparison_2026_11_07.md](DFND/mole_comparison_2026_11_07.md)
+  Primary-paper and exact-source MOLE comparison: accommodation antecedents,
+  different implemented capacities, cavity/opening objects and bounded DFND
+  contribution candidates. No engine execution or global novelty conclusion.
+
 - [provider_handoff_plan.md](provider_handoff_plan.md)
   Accepted original-provider to public-consumer continuation programme, with
   component ownership, executed evidence and outstanding provider gates.
