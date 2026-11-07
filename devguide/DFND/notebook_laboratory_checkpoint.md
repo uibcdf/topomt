@@ -52,8 +52,12 @@ suite alone does not complete it. Protein annotations/generalization follow
 this phase. Optional peer comparisons retain their own input domains and do
 not gate progress on the native independent references.
 
-The current 69-entry catalog is the initial inventory to reconcile case by case;
-the two adopted public controls use their own distinct frozen inputs. Record
+The current 73-entry catalog is the initial inventory to reconcile case by case.
+It includes the three surface morphology geometries and a disclosed historical
+PDB alias: `pathological_thin_tube` has the same stored coordinates as
+`pathological_thin_tube_r25`, with different encoding and preserved bytes.
+The new entries have not received a new DFND characterization by registration.
+The two adopted public controls use their own distinct frozen inputs. Record
 unstudied entries and variants explicitly rather than treating the five initial
 study themes as completion of the synthetic catalogue.
 

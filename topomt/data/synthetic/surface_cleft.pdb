@@ -1,0 +1,1584 @@
+HETATM    1 AR   DUM A   1     -15.000 -15.000   0.000  1.00  0.00          AR
+HETATM    2 AR   DUM A   2     -15.000 -15.000   2.200  1.00  0.00          AR
+HETATM    3 AR   DUM A   3     -15.000 -15.000   4.400  1.00  0.00          AR
+HETATM    4 AR   DUM A   4     -15.000 -15.000   6.600  1.00  0.00          AR
+HETATM    5 AR   DUM A   5     -15.000 -15.000   8.800  1.00  0.00          AR
+HETATM    6 AR   DUM A   6     -15.000 -15.000  11.000  1.00  0.00          AR
+HETATM    7 AR   DUM A   7     -15.000 -15.000  13.200  1.00  0.00          AR
+HETATM    8 AR   DUM A   8     -15.000 -15.000  15.400  1.00  0.00          AR
+HETATM    9 AR   DUM A   9     -15.000 -15.000  17.600  1.00  0.00          AR
+HETATM   10 AR   DUM A  10     -15.000 -12.800   0.000  1.00  0.00          AR
+HETATM   11 AR   DUM A  11     -15.000 -12.800   2.200  1.00  0.00          AR
+HETATM   12 AR   DUM A  12     -15.000 -12.800   4.400  1.00  0.00          AR
+HETATM   13 AR   DUM A  13     -15.000 -12.800   6.600  1.00  0.00          AR
+HETATM   14 AR   DUM A  14     -15.000 -12.800   8.800  1.00  0.00          AR
+HETATM   15 AR   DUM A  15     -15.000 -12.800  11.000  1.00  0.00          AR
+HETATM   16 AR   DUM A  16     -15.000 -12.800  13.200  1.00  0.00          AR
+HETATM   17 AR   DUM A  17     -15.000 -12.800  15.400  1.00  0.00          AR
+HETATM   18 AR   DUM A  18     -15.000 -12.800  17.600  1.00  0.00          AR
+HETATM   19 AR   DUM A  19     -15.000 -10.600   0.000  1.00  0.00          AR
+HETATM   20 AR   DUM A  20     -15.000 -10.600   2.200  1.00  0.00          AR
+HETATM   21 AR   DUM A  21     -15.000 -10.600   4.400  1.00  0.00          AR
+HETATM   22 AR   DUM A  22     -15.000 -10.600   6.600  1.00  0.00          AR
+HETATM   23 AR   DUM A  23     -15.000 -10.600   8.800  1.00  0.00          AR
+HETATM   24 AR   DUM A  24     -15.000 -10.600  11.000  1.00  0.00          AR
+HETATM   25 AR   DUM A  25     -15.000 -10.600  13.200  1.00  0.00          AR
+HETATM   26 AR   DUM A  26     -15.000 -10.600  15.400  1.00  0.00          AR
+HETATM   27 AR   DUM A  27     -15.000 -10.600  17.600  1.00  0.00          AR
+HETATM   28 AR   DUM A  28     -15.000  -8.400   0.000  1.00  0.00          AR
+HETATM   29 AR   DUM A  29     -15.000  -8.400   2.200  1.00  0.00          AR
+HETATM   30 AR   DUM A  30     -15.000  -8.400   4.400  1.00  0.00          AR
+HETATM   31 AR   DUM A  31     -15.000  -8.400   6.600  1.00  0.00          AR
+HETATM   32 AR   DUM A  32     -15.000  -8.400   8.800  1.00  0.00          AR
+HETATM   33 AR   DUM A  33     -15.000  -8.400  11.000  1.00  0.00          AR
+HETATM   34 AR   DUM A  34     -15.000  -8.400  13.200  1.00  0.00          AR
+HETATM   35 AR   DUM A  35     -15.000  -8.400  15.400  1.00  0.00          AR
+HETATM   36 AR   DUM A  36     -15.000  -8.400  17.600  1.00  0.00          AR
+HETATM   37 AR   DUM A  37     -15.000  -6.200   0.000  1.00  0.00          AR
+HETATM   38 AR   DUM A  38     -15.000  -6.200   2.200  1.00  0.00          AR
+HETATM   39 AR   DUM A  39     -15.000  -6.200   4.400  1.00  0.00          AR
+HETATM   40 AR   DUM A  40     -15.000  -6.200   6.600  1.00  0.00          AR
+HETATM   41 AR   DUM A  41     -15.000  -6.200   8.800  1.00  0.00          AR
+HETATM   42 AR   DUM A  42     -15.000  -6.200  11.000  1.00  0.00          AR
+HETATM   43 AR   DUM A  43     -15.000  -6.200  13.200  1.00  0.00          AR
+HETATM   44 AR   DUM A  44     -15.000  -6.200  15.400  1.00  0.00          AR
+HETATM   45 AR   DUM A  45     -15.000  -6.200  17.600  1.00  0.00          AR
+HETATM   46 AR   DUM A  46     -15.000  -4.000   0.000  1.00  0.00          AR
+HETATM   47 AR   DUM A  47     -15.000  -4.000   2.200  1.00  0.00          AR
+HETATM   48 AR   DUM A  48     -15.000  -4.000   4.400  1.00  0.00          AR
+HETATM   49 AR   DUM A  49     -15.000  -4.000   6.600  1.00  0.00          AR
+HETATM   50 AR   DUM A  50     -15.000  -4.000   8.800  1.00  0.00          AR
+HETATM   51 AR   DUM A  51     -15.000  -4.000  11.000  1.00  0.00          AR
+HETATM   52 AR   DUM A  52     -15.000  -4.000  13.200  1.00  0.00          AR
+HETATM   53 AR   DUM A  53     -15.000  -4.000  15.400  1.00  0.00          AR
+HETATM   54 AR   DUM A  54     -15.000  -4.000  17.600  1.00  0.00          AR
+HETATM   55 AR   DUM A  55     -15.000  -1.800   0.000  1.00  0.00          AR
+HETATM   56 AR   DUM A  56     -15.000  -1.800   2.200  1.00  0.00          AR
+HETATM   57 AR   DUM A  57     -15.000  -1.800   4.400  1.00  0.00          AR
+HETATM   58 AR   DUM A  58     -15.000  -1.800   6.600  1.00  0.00          AR
+HETATM   59 AR   DUM A  59     -15.000  -1.800   8.800  1.00  0.00          AR
+HETATM   60 AR   DUM A  60     -15.000  -1.800  11.000  1.00  0.00          AR
+HETATM   61 AR   DUM A  61     -15.000  -1.800  13.200  1.00  0.00          AR
+HETATM   62 AR   DUM A  62     -15.000  -1.800  15.400  1.00  0.00          AR
+HETATM   63 AR   DUM A  63     -15.000  -1.800  17.600  1.00  0.00          AR
+HETATM   64 AR   DUM A  64     -15.000   0.400   0.000  1.00  0.00          AR
+HETATM   65 AR   DUM A  65     -15.000   0.400   2.200  1.00  0.00          AR
+HETATM   66 AR   DUM A  66     -15.000   0.400   4.400  1.00  0.00          AR
+HETATM   67 AR   DUM A  67     -15.000   0.400   6.600  1.00  0.00          AR
+HETATM   68 AR   DUM A  68     -15.000   0.400   8.800  1.00  0.00          AR
+HETATM   69 AR   DUM A  69     -15.000   0.400  11.000  1.00  0.00          AR
+HETATM   70 AR   DUM A  70     -15.000   0.400  13.200  1.00  0.00          AR
+HETATM   71 AR   DUM A  71     -15.000   0.400  15.400  1.00  0.00          AR
+HETATM   72 AR   DUM A  72     -15.000   0.400  17.600  1.00  0.00          AR
+HETATM   73 AR   DUM A  73     -15.000   2.600   0.000  1.00  0.00          AR
+HETATM   74 AR   DUM A  74     -15.000   2.600   2.200  1.00  0.00          AR
+HETATM   75 AR   DUM A  75     -15.000   2.600   4.400  1.00  0.00          AR
+HETATM   76 AR   DUM A  76     -15.000   2.600   6.600  1.00  0.00          AR
+HETATM   77 AR   DUM A  77     -15.000   2.600   8.800  1.00  0.00          AR
+HETATM   78 AR   DUM A  78     -15.000   2.600  11.000  1.00  0.00          AR
+HETATM   79 AR   DUM A  79     -15.000   2.600  13.200  1.00  0.00          AR
+HETATM   80 AR   DUM A  80     -15.000   2.600  15.400  1.00  0.00          AR
+HETATM   81 AR   DUM A  81     -15.000   2.600  17.600  1.00  0.00          AR
+HETATM   82 AR   DUM A  82     -15.000   4.800   0.000  1.00  0.00          AR
+HETATM   83 AR   DUM A  83     -15.000   4.800   2.200  1.00  0.00          AR
+HETATM   84 AR   DUM A  84     -15.000   4.800   4.400  1.00  0.00          AR
+HETATM   85 AR   DUM A  85     -15.000   4.800   6.600  1.00  0.00          AR
+HETATM   86 AR   DUM A  86     -15.000   4.800   8.800  1.00  0.00          AR
+HETATM   87 AR   DUM A  87     -15.000   4.800  11.000  1.00  0.00          AR
+HETATM   88 AR   DUM A  88     -15.000   4.800  13.200  1.00  0.00          AR
+HETATM   89 AR   DUM A  89     -15.000   4.800  15.400  1.00  0.00          AR
+HETATM   90 AR   DUM A  90     -15.000   4.800  17.600  1.00  0.00          AR
+HETATM   91 AR   DUM A  91     -15.000   7.000   0.000  1.00  0.00          AR
+HETATM   92 AR   DUM A  92     -15.000   7.000   2.200  1.00  0.00          AR
+HETATM   93 AR   DUM A  93     -15.000   7.000   4.400  1.00  0.00          AR
+HETATM   94 AR   DUM A  94     -15.000   7.000   6.600  1.00  0.00          AR
+HETATM   95 AR   DUM A  95     -15.000   7.000   8.800  1.00  0.00          AR
+HETATM   96 AR   DUM A  96     -15.000   7.000  11.000  1.00  0.00          AR
+HETATM   97 AR   DUM A  97     -15.000   7.000  13.200  1.00  0.00          AR
+HETATM   98 AR   DUM A  98     -15.000   7.000  15.400  1.00  0.00          AR
+HETATM   99 AR   DUM A  99     -15.000   7.000  17.600  1.00  0.00          AR
+HETATM  100 AR   DUM A 100     -15.000   9.200   0.000  1.00  0.00          AR
+HETATM  101 AR   DUM A 101     -15.000   9.200   2.200  1.00  0.00          AR
+HETATM  102 AR   DUM A 102     -15.000   9.200   4.400  1.00  0.00          AR
+HETATM  103 AR   DUM A 103     -15.000   9.200   6.600  1.00  0.00          AR
+HETATM  104 AR   DUM A 104     -15.000   9.200   8.800  1.00  0.00          AR
+HETATM  105 AR   DUM A 105     -15.000   9.200  11.000  1.00  0.00          AR
+HETATM  106 AR   DUM A 106     -15.000   9.200  13.200  1.00  0.00          AR
+HETATM  107 AR   DUM A 107     -15.000   9.200  15.400  1.00  0.00          AR
+HETATM  108 AR   DUM A 108     -15.000   9.200  17.600  1.00  0.00          AR
+HETATM  109 AR   DUM A 109     -15.000  11.400   0.000  1.00  0.00          AR
+HETATM  110 AR   DUM A 110     -15.000  11.400   2.200  1.00  0.00          AR
+HETATM  111 AR   DUM A 111     -15.000  11.400   4.400  1.00  0.00          AR
+HETATM  112 AR   DUM A 112     -15.000  11.400   6.600  1.00  0.00          AR
+HETATM  113 AR   DUM A 113     -15.000  11.400   8.800  1.00  0.00          AR
+HETATM  114 AR   DUM A 114     -15.000  11.400  11.000  1.00  0.00          AR
+HETATM  115 AR   DUM A 115     -15.000  11.400  13.200  1.00  0.00          AR
+HETATM  116 AR   DUM A 116     -15.000  11.400  15.400  1.00  0.00          AR
+HETATM  117 AR   DUM A 117     -15.000  11.400  17.600  1.00  0.00          AR
+HETATM  118 AR   DUM A 118     -15.000  13.600   0.000  1.00  0.00          AR
+HETATM  119 AR   DUM A 119     -15.000  13.600   2.200  1.00  0.00          AR
+HETATM  120 AR   DUM A 120     -15.000  13.600   4.400  1.00  0.00          AR
+HETATM  121 AR   DUM A 121     -15.000  13.600   6.600  1.00  0.00          AR
+HETATM  122 AR   DUM A 122     -15.000  13.600   8.800  1.00  0.00          AR
+HETATM  123 AR   DUM A 123     -15.000  13.600  11.000  1.00  0.00          AR
+HETATM  124 AR   DUM A 124     -15.000  13.600  13.200  1.00  0.00          AR
+HETATM  125 AR   DUM A 125     -15.000  13.600  15.400  1.00  0.00          AR
+HETATM  126 AR   DUM A 126     -15.000  13.600  17.600  1.00  0.00          AR
+HETATM  127 AR   DUM A 127     -12.800 -15.000   0.000  1.00  0.00          AR
+HETATM  128 AR   DUM A 128     -12.800 -15.000   2.200  1.00  0.00          AR
+HETATM  129 AR   DUM A 129     -12.800 -15.000   4.400  1.00  0.00          AR
+HETATM  130 AR   DUM A 130     -12.800 -15.000   6.600  1.00  0.00          AR
+HETATM  131 AR   DUM A 131     -12.800 -15.000   8.800  1.00  0.00          AR
+HETATM  132 AR   DUM A 132     -12.800 -15.000  11.000  1.00  0.00          AR
+HETATM  133 AR   DUM A 133     -12.800 -15.000  13.200  1.00  0.00          AR
+HETATM  134 AR   DUM A 134     -12.800 -15.000  15.400  1.00  0.00          AR
+HETATM  135 AR   DUM A 135     -12.800 -15.000  17.600  1.00  0.00          AR
+HETATM  136 AR   DUM A 136     -12.800 -12.800   0.000  1.00  0.00          AR
+HETATM  137 AR   DUM A 137     -12.800 -12.800   2.200  1.00  0.00          AR
+HETATM  138 AR   DUM A 138     -12.800 -12.800   4.400  1.00  0.00          AR
+HETATM  139 AR   DUM A 139     -12.800 -12.800   6.600  1.00  0.00          AR
+HETATM  140 AR   DUM A 140     -12.800 -12.800   8.800  1.00  0.00          AR
+HETATM  141 AR   DUM A 141     -12.800 -12.800  11.000  1.00  0.00          AR
+HETATM  142 AR   DUM A 142     -12.800 -12.800  13.200  1.00  0.00          AR
+HETATM  143 AR   DUM A 143     -12.800 -12.800  15.400  1.00  0.00          AR
+HETATM  144 AR   DUM A 144     -12.800 -12.800  17.600  1.00  0.00          AR
+HETATM  145 AR   DUM A 145     -12.800 -10.600   0.000  1.00  0.00          AR
+HETATM  146 AR   DUM A 146     -12.800 -10.600   2.200  1.00  0.00          AR
+HETATM  147 AR   DUM A 147     -12.800 -10.600   4.400  1.00  0.00          AR
+HETATM  148 AR   DUM A 148     -12.800 -10.600   6.600  1.00  0.00          AR
+HETATM  149 AR   DUM A 149     -12.800 -10.600   8.800  1.00  0.00          AR
+HETATM  150 AR   DUM A 150     -12.800 -10.600  11.000  1.00  0.00          AR
+HETATM  151 AR   DUM A 151     -12.800 -10.600  13.200  1.00  0.00          AR
+HETATM  152 AR   DUM A 152     -12.800 -10.600  15.400  1.00  0.00          AR
+HETATM  153 AR   DUM A 153     -12.800 -10.600  17.600  1.00  0.00          AR
+HETATM  154 AR   DUM A 154     -12.800  -8.400   0.000  1.00  0.00          AR
+HETATM  155 AR   DUM A 155     -12.800  -8.400   2.200  1.00  0.00          AR
+HETATM  156 AR   DUM A 156     -12.800  -8.400   4.400  1.00  0.00          AR
+HETATM  157 AR   DUM A 157     -12.800  -8.400   6.600  1.00  0.00          AR
+HETATM  158 AR   DUM A 158     -12.800  -8.400   8.800  1.00  0.00          AR
+HETATM  159 AR   DUM A 159     -12.800  -8.400  11.000  1.00  0.00          AR
+HETATM  160 AR   DUM A 160     -12.800  -8.400  13.200  1.00  0.00          AR
+HETATM  161 AR   DUM A 161     -12.800  -8.400  15.400  1.00  0.00          AR
+HETATM  162 AR   DUM A 162     -12.800  -8.400  17.600  1.00  0.00          AR
+HETATM  163 AR   DUM A 163     -12.800  -6.200   0.000  1.00  0.00          AR
+HETATM  164 AR   DUM A 164     -12.800  -6.200   2.200  1.00  0.00          AR
+HETATM  165 AR   DUM A 165     -12.800  -6.200   4.400  1.00  0.00          AR
+HETATM  166 AR   DUM A 166     -12.800  -6.200   6.600  1.00  0.00          AR
+HETATM  167 AR   DUM A 167     -12.800  -6.200   8.800  1.00  0.00          AR
+HETATM  168 AR   DUM A 168     -12.800  -6.200  11.000  1.00  0.00          AR
+HETATM  169 AR   DUM A 169     -12.800  -6.200  13.200  1.00  0.00          AR
+HETATM  170 AR   DUM A 170     -12.800  -6.200  15.400  1.00  0.00          AR
+HETATM  171 AR   DUM A 171     -12.800  -6.200  17.600  1.00  0.00          AR
+HETATM  172 AR   DUM A 172     -12.800  -4.000   0.000  1.00  0.00          AR
+HETATM  173 AR   DUM A 173     -12.800  -4.000   2.200  1.00  0.00          AR
+HETATM  174 AR   DUM A 174     -12.800  -4.000   4.400  1.00  0.00          AR
+HETATM  175 AR   DUM A 175     -12.800  -4.000   6.600  1.00  0.00          AR
+HETATM  176 AR   DUM A 176     -12.800  -4.000   8.800  1.00  0.00          AR
+HETATM  177 AR   DUM A 177     -12.800  -4.000  11.000  1.00  0.00          AR
+HETATM  178 AR   DUM A 178     -12.800  -4.000  13.200  1.00  0.00          AR
+HETATM  179 AR   DUM A 179     -12.800  -4.000  15.400  1.00  0.00          AR
+HETATM  180 AR   DUM A 180     -12.800  -4.000  17.600  1.00  0.00          AR
+HETATM  181 AR   DUM A 181     -12.800  -1.800   0.000  1.00  0.00          AR
+HETATM  182 AR   DUM A 182     -12.800  -1.800   2.200  1.00  0.00          AR
+HETATM  183 AR   DUM A 183     -12.800  -1.800   4.400  1.00  0.00          AR
+HETATM  184 AR   DUM A 184     -12.800  -1.800   6.600  1.00  0.00          AR
+HETATM  185 AR   DUM A 185     -12.800  -1.800   8.800  1.00  0.00          AR
+HETATM  186 AR   DUM A 186     -12.800  -1.800  11.000  1.00  0.00          AR
+HETATM  187 AR   DUM A 187     -12.800  -1.800  13.200  1.00  0.00          AR
+HETATM  188 AR   DUM A 188     -12.800  -1.800  15.400  1.00  0.00          AR
+HETATM  189 AR   DUM A 189     -12.800  -1.800  17.600  1.00  0.00          AR
+HETATM  190 AR   DUM A 190     -12.800   0.400   0.000  1.00  0.00          AR
+HETATM  191 AR   DUM A 191     -12.800   0.400   2.200  1.00  0.00          AR
+HETATM  192 AR   DUM A 192     -12.800   0.400   4.400  1.00  0.00          AR
+HETATM  193 AR   DUM A 193     -12.800   0.400   6.600  1.00  0.00          AR
+HETATM  194 AR   DUM A 194     -12.800   0.400   8.800  1.00  0.00          AR
+HETATM  195 AR   DUM A 195     -12.800   0.400  11.000  1.00  0.00          AR
+HETATM  196 AR   DUM A 196     -12.800   0.400  13.200  1.00  0.00          AR
+HETATM  197 AR   DUM A 197     -12.800   0.400  15.400  1.00  0.00          AR
+HETATM  198 AR   DUM A 198     -12.800   0.400  17.600  1.00  0.00          AR
+HETATM  199 AR   DUM A 199     -12.800   2.600   0.000  1.00  0.00          AR
+HETATM  200 AR   DUM A 200     -12.800   2.600   2.200  1.00  0.00          AR
+HETATM  201 AR   DUM A 201     -12.800   2.600   4.400  1.00  0.00          AR
+HETATM  202 AR   DUM A 202     -12.800   2.600   6.600  1.00  0.00          AR
+HETATM  203 AR   DUM A 203     -12.800   2.600   8.800  1.00  0.00          AR
+HETATM  204 AR   DUM A 204     -12.800   2.600  11.000  1.00  0.00          AR
+HETATM  205 AR   DUM A 205     -12.800   2.600  13.200  1.00  0.00          AR
+HETATM  206 AR   DUM A 206     -12.800   2.600  15.400  1.00  0.00          AR
+HETATM  207 AR   DUM A 207     -12.800   2.600  17.600  1.00  0.00          AR
+HETATM  208 AR   DUM A 208     -12.800   4.800   0.000  1.00  0.00          AR
+HETATM  209 AR   DUM A 209     -12.800   4.800   2.200  1.00  0.00          AR
+HETATM  210 AR   DUM A 210     -12.800   4.800   4.400  1.00  0.00          AR
+HETATM  211 AR   DUM A 211     -12.800   4.800   6.600  1.00  0.00          AR
+HETATM  212 AR   DUM A 212     -12.800   4.800   8.800  1.00  0.00          AR
+HETATM  213 AR   DUM A 213     -12.800   4.800  11.000  1.00  0.00          AR
+HETATM  214 AR   DUM A 214     -12.800   4.800  13.200  1.00  0.00          AR
+HETATM  215 AR   DUM A 215     -12.800   4.800  15.400  1.00  0.00          AR
+HETATM  216 AR   DUM A 216     -12.800   4.800  17.600  1.00  0.00          AR
+HETATM  217 AR   DUM A 217     -12.800   7.000   0.000  1.00  0.00          AR
+HETATM  218 AR   DUM A 218     -12.800   7.000   2.200  1.00  0.00          AR
+HETATM  219 AR   DUM A 219     -12.800   7.000   4.400  1.00  0.00          AR
+HETATM  220 AR   DUM A 220     -12.800   7.000   6.600  1.00  0.00          AR
+HETATM  221 AR   DUM A 221     -12.800   7.000   8.800  1.00  0.00          AR
+HETATM  222 AR   DUM A 222     -12.800   7.000  11.000  1.00  0.00          AR
+HETATM  223 AR   DUM A 223     -12.800   7.000  13.200  1.00  0.00          AR
+HETATM  224 AR   DUM A 224     -12.800   7.000  15.400  1.00  0.00          AR
+HETATM  225 AR   DUM A 225     -12.800   7.000  17.600  1.00  0.00          AR
+HETATM  226 AR   DUM A 226     -12.800   9.200   0.000  1.00  0.00          AR
+HETATM  227 AR   DUM A 227     -12.800   9.200   2.200  1.00  0.00          AR
+HETATM  228 AR   DUM A 228     -12.800   9.200   4.400  1.00  0.00          AR
+HETATM  229 AR   DUM A 229     -12.800   9.200   6.600  1.00  0.00          AR
+HETATM  230 AR   DUM A 230     -12.800   9.200   8.800  1.00  0.00          AR
+HETATM  231 AR   DUM A 231     -12.800   9.200  11.000  1.00  0.00          AR
+HETATM  232 AR   DUM A 232     -12.800   9.200  13.200  1.00  0.00          AR
+HETATM  233 AR   DUM A 233     -12.800   9.200  15.400  1.00  0.00          AR
+HETATM  234 AR   DUM A 234     -12.800   9.200  17.600  1.00  0.00          AR
+HETATM  235 AR   DUM A 235     -12.800  11.400   0.000  1.00  0.00          AR
+HETATM  236 AR   DUM A 236     -12.800  11.400   2.200  1.00  0.00          AR
+HETATM  237 AR   DUM A 237     -12.800  11.400   4.400  1.00  0.00          AR
+HETATM  238 AR   DUM A 238     -12.800  11.400   6.600  1.00  0.00          AR
+HETATM  239 AR   DUM A 239     -12.800  11.400   8.800  1.00  0.00          AR
+HETATM  240 AR   DUM A 240     -12.800  11.400  11.000  1.00  0.00          AR
+HETATM  241 AR   DUM A 241     -12.800  11.400  13.200  1.00  0.00          AR
+HETATM  242 AR   DUM A 242     -12.800  11.400  15.400  1.00  0.00          AR
+HETATM  243 AR   DUM A 243     -12.800  11.400  17.600  1.00  0.00          AR
+HETATM  244 AR   DUM A 244     -12.800  13.600   0.000  1.00  0.00          AR
+HETATM  245 AR   DUM A 245     -12.800  13.600   2.200  1.00  0.00          AR
+HETATM  246 AR   DUM A 246     -12.800  13.600   4.400  1.00  0.00          AR
+HETATM  247 AR   DUM A 247     -12.800  13.600   6.600  1.00  0.00          AR
+HETATM  248 AR   DUM A 248     -12.800  13.600   8.800  1.00  0.00          AR
+HETATM  249 AR   DUM A 249     -12.800  13.600  11.000  1.00  0.00          AR
+HETATM  250 AR   DUM A 250     -12.800  13.600  13.200  1.00  0.00          AR
+HETATM  251 AR   DUM A 251     -12.800  13.600  15.400  1.00  0.00          AR
+HETATM  252 AR   DUM A 252     -12.800  13.600  17.600  1.00  0.00          AR
+HETATM  253 AR   DUM A 253     -10.600 -15.000   0.000  1.00  0.00          AR
+HETATM  254 AR   DUM A 254     -10.600 -15.000   2.200  1.00  0.00          AR
+HETATM  255 AR   DUM A 255     -10.600 -15.000   4.400  1.00  0.00          AR
+HETATM  256 AR   DUM A 256     -10.600 -15.000   6.600  1.00  0.00          AR
+HETATM  257 AR   DUM A 257     -10.600 -15.000   8.800  1.00  0.00          AR
+HETATM  258 AR   DUM A 258     -10.600 -15.000  11.000  1.00  0.00          AR
+HETATM  259 AR   DUM A 259     -10.600 -15.000  13.200  1.00  0.00          AR
+HETATM  260 AR   DUM A 260     -10.600 -15.000  15.400  1.00  0.00          AR
+HETATM  261 AR   DUM A 261     -10.600 -15.000  17.600  1.00  0.00          AR
+HETATM  262 AR   DUM A 262     -10.600 -12.800   0.000  1.00  0.00          AR
+HETATM  263 AR   DUM A 263     -10.600 -12.800   2.200  1.00  0.00          AR
+HETATM  264 AR   DUM A 264     -10.600 -12.800   4.400  1.00  0.00          AR
+HETATM  265 AR   DUM A 265     -10.600 -12.800   6.600  1.00  0.00          AR
+HETATM  266 AR   DUM A 266     -10.600 -12.800   8.800  1.00  0.00          AR
+HETATM  267 AR   DUM A 267     -10.600 -12.800  11.000  1.00  0.00          AR
+HETATM  268 AR   DUM A 268     -10.600 -12.800  13.200  1.00  0.00          AR
+HETATM  269 AR   DUM A 269     -10.600 -12.800  15.400  1.00  0.00          AR
+HETATM  270 AR   DUM A 270     -10.600 -12.800  17.600  1.00  0.00          AR
+HETATM  271 AR   DUM A 271     -10.600 -10.600   0.000  1.00  0.00          AR
+HETATM  272 AR   DUM A 272     -10.600 -10.600   2.200  1.00  0.00          AR
+HETATM  273 AR   DUM A 273     -10.600 -10.600   4.400  1.00  0.00          AR
+HETATM  274 AR   DUM A 274     -10.600 -10.600   6.600  1.00  0.00          AR
+HETATM  275 AR   DUM A 275     -10.600 -10.600   8.800  1.00  0.00          AR
+HETATM  276 AR   DUM A 276     -10.600 -10.600  11.000  1.00  0.00          AR
+HETATM  277 AR   DUM A 277     -10.600 -10.600  13.200  1.00  0.00          AR
+HETATM  278 AR   DUM A 278     -10.600 -10.600  15.400  1.00  0.00          AR
+HETATM  279 AR   DUM A 279     -10.600 -10.600  17.600  1.00  0.00          AR
+HETATM  280 AR   DUM A 280     -10.600  -8.400   0.000  1.00  0.00          AR
+HETATM  281 AR   DUM A 281     -10.600  -8.400   2.200  1.00  0.00          AR
+HETATM  282 AR   DUM A 282     -10.600  -8.400   4.400  1.00  0.00          AR
+HETATM  283 AR   DUM A 283     -10.600  -8.400   6.600  1.00  0.00          AR
+HETATM  284 AR   DUM A 284     -10.600  -8.400   8.800  1.00  0.00          AR
+HETATM  285 AR   DUM A 285     -10.600  -8.400  11.000  1.00  0.00          AR
+HETATM  286 AR   DUM A 286     -10.600  -8.400  13.200  1.00  0.00          AR
+HETATM  287 AR   DUM A 287     -10.600  -8.400  15.400  1.00  0.00          AR
+HETATM  288 AR   DUM A 288     -10.600  -8.400  17.600  1.00  0.00          AR
+HETATM  289 AR   DUM A 289     -10.600  -6.200   0.000  1.00  0.00          AR
+HETATM  290 AR   DUM A 290     -10.600  -6.200   2.200  1.00  0.00          AR
+HETATM  291 AR   DUM A 291     -10.600  -6.200   4.400  1.00  0.00          AR
+HETATM  292 AR   DUM A 292     -10.600  -6.200   6.600  1.00  0.00          AR
+HETATM  293 AR   DUM A 293     -10.600  -6.200   8.800  1.00  0.00          AR
+HETATM  294 AR   DUM A 294     -10.600  -6.200  11.000  1.00  0.00          AR
+HETATM  295 AR   DUM A 295     -10.600  -6.200  13.200  1.00  0.00          AR
+HETATM  296 AR   DUM A 296     -10.600  -6.200  15.400  1.00  0.00          AR
+HETATM  297 AR   DUM A 297     -10.600  -6.200  17.600  1.00  0.00          AR
+HETATM  298 AR   DUM A 298     -10.600  -4.000   0.000  1.00  0.00          AR
+HETATM  299 AR   DUM A 299     -10.600  -4.000   2.200  1.00  0.00          AR
+HETATM  300 AR   DUM A 300     -10.600  -4.000   4.400  1.00  0.00          AR
+HETATM  301 AR   DUM A 301     -10.600  -4.000   6.600  1.00  0.00          AR
+HETATM  302 AR   DUM A 302     -10.600  -4.000   8.800  1.00  0.00          AR
+HETATM  303 AR   DUM A 303     -10.600  -4.000  11.000  1.00  0.00          AR
+HETATM  304 AR   DUM A 304     -10.600  -4.000  13.200  1.00  0.00          AR
+HETATM  305 AR   DUM A 305     -10.600  -4.000  15.400  1.00  0.00          AR
+HETATM  306 AR   DUM A 306     -10.600  -4.000  17.600  1.00  0.00          AR
+HETATM  307 AR   DUM A 307     -10.600  -1.800   0.000  1.00  0.00          AR
+HETATM  308 AR   DUM A 308     -10.600  -1.800   2.200  1.00  0.00          AR
+HETATM  309 AR   DUM A 309     -10.600  -1.800   4.400  1.00  0.00          AR
+HETATM  310 AR   DUM A 310     -10.600  -1.800   6.600  1.00  0.00          AR
+HETATM  311 AR   DUM A 311     -10.600  -1.800   8.800  1.00  0.00          AR
+HETATM  312 AR   DUM A 312     -10.600  -1.800  11.000  1.00  0.00          AR
+HETATM  313 AR   DUM A 313     -10.600  -1.800  13.200  1.00  0.00          AR
+HETATM  314 AR   DUM A 314     -10.600  -1.800  15.400  1.00  0.00          AR
+HETATM  315 AR   DUM A 315     -10.600  -1.800  17.600  1.00  0.00          AR
+HETATM  316 AR   DUM A 316     -10.600   0.400   0.000  1.00  0.00          AR
+HETATM  317 AR   DUM A 317     -10.600   0.400   2.200  1.00  0.00          AR
+HETATM  318 AR   DUM A 318     -10.600   0.400   4.400  1.00  0.00          AR
+HETATM  319 AR   DUM A 319     -10.600   0.400   6.600  1.00  0.00          AR
+HETATM  320 AR   DUM A 320     -10.600   0.400   8.800  1.00  0.00          AR
+HETATM  321 AR   DUM A 321     -10.600   0.400  11.000  1.00  0.00          AR
+HETATM  322 AR   DUM A 322     -10.600   0.400  13.200  1.00  0.00          AR
+HETATM  323 AR   DUM A 323     -10.600   0.400  15.400  1.00  0.00          AR
+HETATM  324 AR   DUM A 324     -10.600   0.400  17.600  1.00  0.00          AR
+HETATM  325 AR   DUM A 325     -10.600   2.600   0.000  1.00  0.00          AR
+HETATM  326 AR   DUM A 326     -10.600   2.600   2.200  1.00  0.00          AR
+HETATM  327 AR   DUM A 327     -10.600   2.600   4.400  1.00  0.00          AR
+HETATM  328 AR   DUM A 328     -10.600   2.600   6.600  1.00  0.00          AR
+HETATM  329 AR   DUM A 329     -10.600   2.600   8.800  1.00  0.00          AR
+HETATM  330 AR   DUM A 330     -10.600   2.600  11.000  1.00  0.00          AR
+HETATM  331 AR   DUM A 331     -10.600   2.600  13.200  1.00  0.00          AR
+HETATM  332 AR   DUM A 332     -10.600   2.600  15.400  1.00  0.00          AR
+HETATM  333 AR   DUM A 333     -10.600   2.600  17.600  1.00  0.00          AR
+HETATM  334 AR   DUM A 334     -10.600   4.800   0.000  1.00  0.00          AR
+HETATM  335 AR   DUM A 335     -10.600   4.800   2.200  1.00  0.00          AR
+HETATM  336 AR   DUM A 336     -10.600   4.800   4.400  1.00  0.00          AR
+HETATM  337 AR   DUM A 337     -10.600   4.800   6.600  1.00  0.00          AR
+HETATM  338 AR   DUM A 338     -10.600   4.800   8.800  1.00  0.00          AR
+HETATM  339 AR   DUM A 339     -10.600   4.800  11.000  1.00  0.00          AR
+HETATM  340 AR   DUM A 340     -10.600   4.800  13.200  1.00  0.00          AR
+HETATM  341 AR   DUM A 341     -10.600   4.800  15.400  1.00  0.00          AR
+HETATM  342 AR   DUM A 342     -10.600   4.800  17.600  1.00  0.00          AR
+HETATM  343 AR   DUM A 343     -10.600   7.000   0.000  1.00  0.00          AR
+HETATM  344 AR   DUM A 344     -10.600   7.000   2.200  1.00  0.00          AR
+HETATM  345 AR   DUM A 345     -10.600   7.000   4.400  1.00  0.00          AR
+HETATM  346 AR   DUM A 346     -10.600   7.000   6.600  1.00  0.00          AR
+HETATM  347 AR   DUM A 347     -10.600   7.000   8.800  1.00  0.00          AR
+HETATM  348 AR   DUM A 348     -10.600   7.000  11.000  1.00  0.00          AR
+HETATM  349 AR   DUM A 349     -10.600   7.000  13.200  1.00  0.00          AR
+HETATM  350 AR   DUM A 350     -10.600   7.000  15.400  1.00  0.00          AR
+HETATM  351 AR   DUM A 351     -10.600   7.000  17.600  1.00  0.00          AR
+HETATM  352 AR   DUM A 352     -10.600   9.200   0.000  1.00  0.00          AR
+HETATM  353 AR   DUM A 353     -10.600   9.200   2.200  1.00  0.00          AR
+HETATM  354 AR   DUM A 354     -10.600   9.200   4.400  1.00  0.00          AR
+HETATM  355 AR   DUM A 355     -10.600   9.200   6.600  1.00  0.00          AR
+HETATM  356 AR   DUM A 356     -10.600   9.200   8.800  1.00  0.00          AR
+HETATM  357 AR   DUM A 357     -10.600   9.200  11.000  1.00  0.00          AR
+HETATM  358 AR   DUM A 358     -10.600   9.200  13.200  1.00  0.00          AR
+HETATM  359 AR   DUM A 359     -10.600   9.200  15.400  1.00  0.00          AR
+HETATM  360 AR   DUM A 360     -10.600   9.200  17.600  1.00  0.00          AR
+HETATM  361 AR   DUM A 361     -10.600  11.400   0.000  1.00  0.00          AR
+HETATM  362 AR   DUM A 362     -10.600  11.400   2.200  1.00  0.00          AR
+HETATM  363 AR   DUM A 363     -10.600  11.400   4.400  1.00  0.00          AR
+HETATM  364 AR   DUM A 364     -10.600  11.400   6.600  1.00  0.00          AR
+HETATM  365 AR   DUM A 365     -10.600  11.400   8.800  1.00  0.00          AR
+HETATM  366 AR   DUM A 366     -10.600  11.400  11.000  1.00  0.00          AR
+HETATM  367 AR   DUM A 367     -10.600  11.400  13.200  1.00  0.00          AR
+HETATM  368 AR   DUM A 368     -10.600  11.400  15.400  1.00  0.00          AR
+HETATM  369 AR   DUM A 369     -10.600  11.400  17.600  1.00  0.00          AR
+HETATM  370 AR   DUM A 370     -10.600  13.600   0.000  1.00  0.00          AR
+HETATM  371 AR   DUM A 371     -10.600  13.600   2.200  1.00  0.00          AR
+HETATM  372 AR   DUM A 372     -10.600  13.600   4.400  1.00  0.00          AR
+HETATM  373 AR   DUM A 373     -10.600  13.600   6.600  1.00  0.00          AR
+HETATM  374 AR   DUM A 374     -10.600  13.600   8.800  1.00  0.00          AR
+HETATM  375 AR   DUM A 375     -10.600  13.600  11.000  1.00  0.00          AR
+HETATM  376 AR   DUM A 376     -10.600  13.600  13.200  1.00  0.00          AR
+HETATM  377 AR   DUM A 377     -10.600  13.600  15.400  1.00  0.00          AR
+HETATM  378 AR   DUM A 378     -10.600  13.600  17.600  1.00  0.00          AR
+HETATM  379 AR   DUM A 379      -8.400 -15.000   0.000  1.00  0.00          AR
+HETATM  380 AR   DUM A 380      -8.400 -15.000   2.200  1.00  0.00          AR
+HETATM  381 AR   DUM A 381      -8.400 -15.000   4.400  1.00  0.00          AR
+HETATM  382 AR   DUM A 382      -8.400 -15.000   6.600  1.00  0.00          AR
+HETATM  383 AR   DUM A 383      -8.400 -15.000   8.800  1.00  0.00          AR
+HETATM  384 AR   DUM A 384      -8.400 -15.000  11.000  1.00  0.00          AR
+HETATM  385 AR   DUM A 385      -8.400 -15.000  13.200  1.00  0.00          AR
+HETATM  386 AR   DUM A 386      -8.400 -15.000  15.400  1.00  0.00          AR
+HETATM  387 AR   DUM A 387      -8.400 -15.000  17.600  1.00  0.00          AR
+HETATM  388 AR   DUM A 388      -8.400 -12.800   0.000  1.00  0.00          AR
+HETATM  389 AR   DUM A 389      -8.400 -12.800   2.200  1.00  0.00          AR
+HETATM  390 AR   DUM A 390      -8.400 -12.800   4.400  1.00  0.00          AR
+HETATM  391 AR   DUM A 391      -8.400 -12.800   6.600  1.00  0.00          AR
+HETATM  392 AR   DUM A 392      -8.400 -12.800   8.800  1.00  0.00          AR
+HETATM  393 AR   DUM A 393      -8.400 -12.800  11.000  1.00  0.00          AR
+HETATM  394 AR   DUM A 394      -8.400 -12.800  13.200  1.00  0.00          AR
+HETATM  395 AR   DUM A 395      -8.400 -12.800  15.400  1.00  0.00          AR
+HETATM  396 AR   DUM A 396      -8.400 -12.800  17.600  1.00  0.00          AR
+HETATM  397 AR   DUM A 397      -8.400 -10.600   0.000  1.00  0.00          AR
+HETATM  398 AR   DUM A 398      -8.400 -10.600   2.200  1.00  0.00          AR
+HETATM  399 AR   DUM A 399      -8.400 -10.600   4.400  1.00  0.00          AR
+HETATM  400 AR   DUM A 400      -8.400 -10.600   6.600  1.00  0.00          AR
+HETATM  401 AR   DUM A 401      -8.400 -10.600   8.800  1.00  0.00          AR
+HETATM  402 AR   DUM A 402      -8.400 -10.600  11.000  1.00  0.00          AR
+HETATM  403 AR   DUM A 403      -8.400 -10.600  13.200  1.00  0.00          AR
+HETATM  404 AR   DUM A 404      -8.400 -10.600  15.400  1.00  0.00          AR
+HETATM  405 AR   DUM A 405      -8.400 -10.600  17.600  1.00  0.00          AR
+HETATM  406 AR   DUM A 406      -8.400  -8.400   0.000  1.00  0.00          AR
+HETATM  407 AR   DUM A 407      -8.400  -8.400   2.200  1.00  0.00          AR
+HETATM  408 AR   DUM A 408      -8.400  -8.400   4.400  1.00  0.00          AR
+HETATM  409 AR   DUM A 409      -8.400  -8.400   6.600  1.00  0.00          AR
+HETATM  410 AR   DUM A 410      -8.400  -8.400   8.800  1.00  0.00          AR
+HETATM  411 AR   DUM A 411      -8.400  -8.400  11.000  1.00  0.00          AR
+HETATM  412 AR   DUM A 412      -8.400  -8.400  13.200  1.00  0.00          AR
+HETATM  413 AR   DUM A 413      -8.400  -8.400  15.400  1.00  0.00          AR
+HETATM  414 AR   DUM A 414      -8.400  -8.400  17.600  1.00  0.00          AR
+HETATM  415 AR   DUM A 415      -8.400  -6.200   0.000  1.00  0.00          AR
+HETATM  416 AR   DUM A 416      -8.400  -6.200   2.200  1.00  0.00          AR
+HETATM  417 AR   DUM A 417      -8.400  -6.200   4.400  1.00  0.00          AR
+HETATM  418 AR   DUM A 418      -8.400  -6.200   6.600  1.00  0.00          AR
+HETATM  419 AR   DUM A 419      -8.400  -6.200   8.800  1.00  0.00          AR
+HETATM  420 AR   DUM A 420      -8.400  -6.200  11.000  1.00  0.00          AR
+HETATM  421 AR   DUM A 421      -8.400  -6.200  13.200  1.00  0.00          AR
+HETATM  422 AR   DUM A 422      -8.400  -6.200  15.400  1.00  0.00          AR
+HETATM  423 AR   DUM A 423      -8.400  -6.200  17.600  1.00  0.00          AR
+HETATM  424 AR   DUM A 424      -8.400  -4.000   0.000  1.00  0.00          AR
+HETATM  425 AR   DUM A 425      -8.400  -4.000   2.200  1.00  0.00          AR
+HETATM  426 AR   DUM A 426      -8.400  -4.000   4.400  1.00  0.00          AR
+HETATM  427 AR   DUM A 427      -8.400  -4.000   6.600  1.00  0.00          AR
+HETATM  428 AR   DUM A 428      -8.400  -4.000   8.800  1.00  0.00          AR
+HETATM  429 AR   DUM A 429      -8.400  -4.000  11.000  1.00  0.00          AR
+HETATM  430 AR   DUM A 430      -8.400  -4.000  13.200  1.00  0.00          AR
+HETATM  431 AR   DUM A 431      -8.400  -4.000  15.400  1.00  0.00          AR
+HETATM  432 AR   DUM A 432      -8.400  -4.000  17.600  1.00  0.00          AR
+HETATM  433 AR   DUM A 433      -8.400  -1.800   0.000  1.00  0.00          AR
+HETATM  434 AR   DUM A 434      -8.400  -1.800   2.200  1.00  0.00          AR
+HETATM  435 AR   DUM A 435      -8.400  -1.800   4.400  1.00  0.00          AR
+HETATM  436 AR   DUM A 436      -8.400  -1.800   6.600  1.00  0.00          AR
+HETATM  437 AR   DUM A 437      -8.400  -1.800   8.800  1.00  0.00          AR
+HETATM  438 AR   DUM A 438      -8.400  -1.800  11.000  1.00  0.00          AR
+HETATM  439 AR   DUM A 439      -8.400  -1.800  13.200  1.00  0.00          AR
+HETATM  440 AR   DUM A 440      -8.400  -1.800  15.400  1.00  0.00          AR
+HETATM  441 AR   DUM A 441      -8.400   0.400   0.000  1.00  0.00          AR
+HETATM  442 AR   DUM A 442      -8.400   0.400   2.200  1.00  0.00          AR
+HETATM  443 AR   DUM A 443      -8.400   0.400   4.400  1.00  0.00          AR
+HETATM  444 AR   DUM A 444      -8.400   0.400   6.600  1.00  0.00          AR
+HETATM  445 AR   DUM A 445      -8.400   0.400   8.800  1.00  0.00          AR
+HETATM  446 AR   DUM A 446      -8.400   0.400  11.000  1.00  0.00          AR
+HETATM  447 AR   DUM A 447      -8.400   0.400  13.200  1.00  0.00          AR
+HETATM  448 AR   DUM A 448      -8.400   0.400  15.400  1.00  0.00          AR
+HETATM  449 AR   DUM A 449      -8.400   2.600   0.000  1.00  0.00          AR
+HETATM  450 AR   DUM A 450      -8.400   2.600   2.200  1.00  0.00          AR
+HETATM  451 AR   DUM A 451      -8.400   2.600   4.400  1.00  0.00          AR
+HETATM  452 AR   DUM A 452      -8.400   2.600   6.600  1.00  0.00          AR
+HETATM  453 AR   DUM A 453      -8.400   2.600   8.800  1.00  0.00          AR
+HETATM  454 AR   DUM A 454      -8.400   2.600  11.000  1.00  0.00          AR
+HETATM  455 AR   DUM A 455      -8.400   2.600  13.200  1.00  0.00          AR
+HETATM  456 AR   DUM A 456      -8.400   2.600  15.400  1.00  0.00          AR
+HETATM  457 AR   DUM A 457      -8.400   4.800   0.000  1.00  0.00          AR
+HETATM  458 AR   DUM A 458      -8.400   4.800   2.200  1.00  0.00          AR
+HETATM  459 AR   DUM A 459      -8.400   4.800   4.400  1.00  0.00          AR
+HETATM  460 AR   DUM A 460      -8.400   4.800   6.600  1.00  0.00          AR
+HETATM  461 AR   DUM A 461      -8.400   4.800   8.800  1.00  0.00          AR
+HETATM  462 AR   DUM A 462      -8.400   4.800  11.000  1.00  0.00          AR
+HETATM  463 AR   DUM A 463      -8.400   4.800  13.200  1.00  0.00          AR
+HETATM  464 AR   DUM A 464      -8.400   4.800  15.400  1.00  0.00          AR
+HETATM  465 AR   DUM A 465      -8.400   4.800  17.600  1.00  0.00          AR
+HETATM  466 AR   DUM A 466      -8.400   7.000   0.000  1.00  0.00          AR
+HETATM  467 AR   DUM A 467      -8.400   7.000   2.200  1.00  0.00          AR
+HETATM  468 AR   DUM A 468      -8.400   7.000   4.400  1.00  0.00          AR
+HETATM  469 AR   DUM A 469      -8.400   7.000   6.600  1.00  0.00          AR
+HETATM  470 AR   DUM A 470      -8.400   7.000   8.800  1.00  0.00          AR
+HETATM  471 AR   DUM A 471      -8.400   7.000  11.000  1.00  0.00          AR
+HETATM  472 AR   DUM A 472      -8.400   7.000  13.200  1.00  0.00          AR
+HETATM  473 AR   DUM A 473      -8.400   7.000  15.400  1.00  0.00          AR
+HETATM  474 AR   DUM A 474      -8.400   7.000  17.600  1.00  0.00          AR
+HETATM  475 AR   DUM A 475      -8.400   9.200   0.000  1.00  0.00          AR
+HETATM  476 AR   DUM A 476      -8.400   9.200   2.200  1.00  0.00          AR
+HETATM  477 AR   DUM A 477      -8.400   9.200   4.400  1.00  0.00          AR
+HETATM  478 AR   DUM A 478      -8.400   9.200   6.600  1.00  0.00          AR
+HETATM  479 AR   DUM A 479      -8.400   9.200   8.800  1.00  0.00          AR
+HETATM  480 AR   DUM A 480      -8.400   9.200  11.000  1.00  0.00          AR
+HETATM  481 AR   DUM A 481      -8.400   9.200  13.200  1.00  0.00          AR
+HETATM  482 AR   DUM A 482      -8.400   9.200  15.400  1.00  0.00          AR
+HETATM  483 AR   DUM A 483      -8.400   9.200  17.600  1.00  0.00          AR
+HETATM  484 AR   DUM A 484      -8.400  11.400   0.000  1.00  0.00          AR
+HETATM  485 AR   DUM A 485      -8.400  11.400   2.200  1.00  0.00          AR
+HETATM  486 AR   DUM A 486      -8.400  11.400   4.400  1.00  0.00          AR
+HETATM  487 AR   DUM A 487      -8.400  11.400   6.600  1.00  0.00          AR
+HETATM  488 AR   DUM A 488      -8.400  11.400   8.800  1.00  0.00          AR
+HETATM  489 AR   DUM A 489      -8.400  11.400  11.000  1.00  0.00          AR
+HETATM  490 AR   DUM A 490      -8.400  11.400  13.200  1.00  0.00          AR
+HETATM  491 AR   DUM A 491      -8.400  11.400  15.400  1.00  0.00          AR
+HETATM  492 AR   DUM A 492      -8.400  11.400  17.600  1.00  0.00          AR
+HETATM  493 AR   DUM A 493      -8.400  13.600   0.000  1.00  0.00          AR
+HETATM  494 AR   DUM A 494      -8.400  13.600   2.200  1.00  0.00          AR
+HETATM  495 AR   DUM A 495      -8.400  13.600   4.400  1.00  0.00          AR
+HETATM  496 AR   DUM A 496      -8.400  13.600   6.600  1.00  0.00          AR
+HETATM  497 AR   DUM A 497      -8.400  13.600   8.800  1.00  0.00          AR
+HETATM  498 AR   DUM A 498      -8.400  13.600  11.000  1.00  0.00          AR
+HETATM  499 AR   DUM A 499      -8.400  13.600  13.200  1.00  0.00          AR
+HETATM  500 AR   DUM A 500      -8.400  13.600  15.400  1.00  0.00          AR
+HETATM  501 AR   DUM A 501      -8.400  13.600  17.600  1.00  0.00          AR
+HETATM  502 AR   DUM A 502      -6.200 -15.000   0.000  1.00  0.00          AR
+HETATM  503 AR   DUM A 503      -6.200 -15.000   2.200  1.00  0.00          AR
+HETATM  504 AR   DUM A 504      -6.200 -15.000   4.400  1.00  0.00          AR
+HETATM  505 AR   DUM A 505      -6.200 -15.000   6.600  1.00  0.00          AR
+HETATM  506 AR   DUM A 506      -6.200 -15.000   8.800  1.00  0.00          AR
+HETATM  507 AR   DUM A 507      -6.200 -15.000  11.000  1.00  0.00          AR
+HETATM  508 AR   DUM A 508      -6.200 -15.000  13.200  1.00  0.00          AR
+HETATM  509 AR   DUM A 509      -6.200 -15.000  15.400  1.00  0.00          AR
+HETATM  510 AR   DUM A 510      -6.200 -15.000  17.600  1.00  0.00          AR
+HETATM  511 AR   DUM A 511      -6.200 -12.800   0.000  1.00  0.00          AR
+HETATM  512 AR   DUM A 512      -6.200 -12.800   2.200  1.00  0.00          AR
+HETATM  513 AR   DUM A 513      -6.200 -12.800   4.400  1.00  0.00          AR
+HETATM  514 AR   DUM A 514      -6.200 -12.800   6.600  1.00  0.00          AR
+HETATM  515 AR   DUM A 515      -6.200 -12.800   8.800  1.00  0.00          AR
+HETATM  516 AR   DUM A 516      -6.200 -12.800  11.000  1.00  0.00          AR
+HETATM  517 AR   DUM A 517      -6.200 -12.800  13.200  1.00  0.00          AR
+HETATM  518 AR   DUM A 518      -6.200 -12.800  15.400  1.00  0.00          AR
+HETATM  519 AR   DUM A 519      -6.200 -12.800  17.600  1.00  0.00          AR
+HETATM  520 AR   DUM A 520      -6.200 -10.600   0.000  1.00  0.00          AR
+HETATM  521 AR   DUM A 521      -6.200 -10.600   2.200  1.00  0.00          AR
+HETATM  522 AR   DUM A 522      -6.200 -10.600   4.400  1.00  0.00          AR
+HETATM  523 AR   DUM A 523      -6.200 -10.600   6.600  1.00  0.00          AR
+HETATM  524 AR   DUM A 524      -6.200 -10.600   8.800  1.00  0.00          AR
+HETATM  525 AR   DUM A 525      -6.200 -10.600  11.000  1.00  0.00          AR
+HETATM  526 AR   DUM A 526      -6.200 -10.600  13.200  1.00  0.00          AR
+HETATM  527 AR   DUM A 527      -6.200 -10.600  15.400  1.00  0.00          AR
+HETATM  528 AR   DUM A 528      -6.200 -10.600  17.600  1.00  0.00          AR
+HETATM  529 AR   DUM A 529      -6.200  -8.400   0.000  1.00  0.00          AR
+HETATM  530 AR   DUM A 530      -6.200  -8.400   2.200  1.00  0.00          AR
+HETATM  531 AR   DUM A 531      -6.200  -8.400   4.400  1.00  0.00          AR
+HETATM  532 AR   DUM A 532      -6.200  -8.400   6.600  1.00  0.00          AR
+HETATM  533 AR   DUM A 533      -6.200  -8.400   8.800  1.00  0.00          AR
+HETATM  534 AR   DUM A 534      -6.200  -8.400  11.000  1.00  0.00          AR
+HETATM  535 AR   DUM A 535      -6.200  -8.400  13.200  1.00  0.00          AR
+HETATM  536 AR   DUM A 536      -6.200  -8.400  15.400  1.00  0.00          AR
+HETATM  537 AR   DUM A 537      -6.200  -8.400  17.600  1.00  0.00          AR
+HETATM  538 AR   DUM A 538      -6.200  -6.200   0.000  1.00  0.00          AR
+HETATM  539 AR   DUM A 539      -6.200  -6.200   2.200  1.00  0.00          AR
+HETATM  540 AR   DUM A 540      -6.200  -6.200   4.400  1.00  0.00          AR
+HETATM  541 AR   DUM A 541      -6.200  -6.200   6.600  1.00  0.00          AR
+HETATM  542 AR   DUM A 542      -6.200  -6.200   8.800  1.00  0.00          AR
+HETATM  543 AR   DUM A 543      -6.200  -6.200  11.000  1.00  0.00          AR
+HETATM  544 AR   DUM A 544      -6.200  -6.200  13.200  1.00  0.00          AR
+HETATM  545 AR   DUM A 545      -6.200  -6.200  15.400  1.00  0.00          AR
+HETATM  546 AR   DUM A 546      -6.200  -4.000   0.000  1.00  0.00          AR
+HETATM  547 AR   DUM A 547      -6.200  -4.000   2.200  1.00  0.00          AR
+HETATM  548 AR   DUM A 548      -6.200  -4.000   4.400  1.00  0.00          AR
+HETATM  549 AR   DUM A 549      -6.200  -4.000   6.600  1.00  0.00          AR
+HETATM  550 AR   DUM A 550      -6.200  -4.000   8.800  1.00  0.00          AR
+HETATM  551 AR   DUM A 551      -6.200  -4.000  11.000  1.00  0.00          AR
+HETATM  552 AR   DUM A 552      -6.200  -4.000  13.200  1.00  0.00          AR
+HETATM  553 AR   DUM A 553      -6.200  -1.800   0.000  1.00  0.00          AR
+HETATM  554 AR   DUM A 554      -6.200  -1.800   2.200  1.00  0.00          AR
+HETATM  555 AR   DUM A 555      -6.200  -1.800   4.400  1.00  0.00          AR
+HETATM  556 AR   DUM A 556      -6.200  -1.800   6.600  1.00  0.00          AR
+HETATM  557 AR   DUM A 557      -6.200  -1.800   8.800  1.00  0.00          AR
+HETATM  558 AR   DUM A 558      -6.200  -1.800  11.000  1.00  0.00          AR
+HETATM  559 AR   DUM A 559      -6.200   0.400   0.000  1.00  0.00          AR
+HETATM  560 AR   DUM A 560      -6.200   0.400   2.200  1.00  0.00          AR
+HETATM  561 AR   DUM A 561      -6.200   0.400   4.400  1.00  0.00          AR
+HETATM  562 AR   DUM A 562      -6.200   0.400   6.600  1.00  0.00          AR
+HETATM  563 AR   DUM A 563      -6.200   0.400   8.800  1.00  0.00          AR
+HETATM  564 AR   DUM A 564      -6.200   0.400  11.000  1.00  0.00          AR
+HETATM  565 AR   DUM A 565      -6.200   2.600   0.000  1.00  0.00          AR
+HETATM  566 AR   DUM A 566      -6.200   2.600   2.200  1.00  0.00          AR
+HETATM  567 AR   DUM A 567      -6.200   2.600   4.400  1.00  0.00          AR
+HETATM  568 AR   DUM A 568      -6.200   2.600   6.600  1.00  0.00          AR
+HETATM  569 AR   DUM A 569      -6.200   2.600   8.800  1.00  0.00          AR
+HETATM  570 AR   DUM A 570      -6.200   2.600  11.000  1.00  0.00          AR
+HETATM  571 AR   DUM A 571      -6.200   4.800   0.000  1.00  0.00          AR
+HETATM  572 AR   DUM A 572      -6.200   4.800   2.200  1.00  0.00          AR
+HETATM  573 AR   DUM A 573      -6.200   4.800   4.400  1.00  0.00          AR
+HETATM  574 AR   DUM A 574      -6.200   4.800   6.600  1.00  0.00          AR
+HETATM  575 AR   DUM A 575      -6.200   4.800   8.800  1.00  0.00          AR
+HETATM  576 AR   DUM A 576      -6.200   4.800  11.000  1.00  0.00          AR
+HETATM  577 AR   DUM A 577      -6.200   4.800  13.200  1.00  0.00          AR
+HETATM  578 AR   DUM A 578      -6.200   7.000   0.000  1.00  0.00          AR
+HETATM  579 AR   DUM A 579      -6.200   7.000   2.200  1.00  0.00          AR
+HETATM  580 AR   DUM A 580      -6.200   7.000   4.400  1.00  0.00          AR
+HETATM  581 AR   DUM A 581      -6.200   7.000   6.600  1.00  0.00          AR
+HETATM  582 AR   DUM A 582      -6.200   7.000   8.800  1.00  0.00          AR
+HETATM  583 AR   DUM A 583      -6.200   7.000  11.000  1.00  0.00          AR
+HETATM  584 AR   DUM A 584      -6.200   7.000  13.200  1.00  0.00          AR
+HETATM  585 AR   DUM A 585      -6.200   7.000  15.400  1.00  0.00          AR
+HETATM  586 AR   DUM A 586      -6.200   7.000  17.600  1.00  0.00          AR
+HETATM  587 AR   DUM A 587      -6.200   9.200   0.000  1.00  0.00          AR
+HETATM  588 AR   DUM A 588      -6.200   9.200   2.200  1.00  0.00          AR
+HETATM  589 AR   DUM A 589      -6.200   9.200   4.400  1.00  0.00          AR
+HETATM  590 AR   DUM A 590      -6.200   9.200   6.600  1.00  0.00          AR
+HETATM  591 AR   DUM A 591      -6.200   9.200   8.800  1.00  0.00          AR
+HETATM  592 AR   DUM A 592      -6.200   9.200  11.000  1.00  0.00          AR
+HETATM  593 AR   DUM A 593      -6.200   9.200  13.200  1.00  0.00          AR
+HETATM  594 AR   DUM A 594      -6.200   9.200  15.400  1.00  0.00          AR
+HETATM  595 AR   DUM A 595      -6.200   9.200  17.600  1.00  0.00          AR
+HETATM  596 AR   DUM A 596      -6.200  11.400   0.000  1.00  0.00          AR
+HETATM  597 AR   DUM A 597      -6.200  11.400   2.200  1.00  0.00          AR
+HETATM  598 AR   DUM A 598      -6.200  11.400   4.400  1.00  0.00          AR
+HETATM  599 AR   DUM A 599      -6.200  11.400   6.600  1.00  0.00          AR
+HETATM  600 AR   DUM A 600      -6.200  11.400   8.800  1.00  0.00          AR
+HETATM  601 AR   DUM A 601      -6.200  11.400  11.000  1.00  0.00          AR
+HETATM  602 AR   DUM A 602      -6.200  11.400  13.200  1.00  0.00          AR
+HETATM  603 AR   DUM A 603      -6.200  11.400  15.400  1.00  0.00          AR
+HETATM  604 AR   DUM A 604      -6.200  11.400  17.600  1.00  0.00          AR
+HETATM  605 AR   DUM A 605      -6.200  13.600   0.000  1.00  0.00          AR
+HETATM  606 AR   DUM A 606      -6.200  13.600   2.200  1.00  0.00          AR
+HETATM  607 AR   DUM A 607      -6.200  13.600   4.400  1.00  0.00          AR
+HETATM  608 AR   DUM A 608      -6.200  13.600   6.600  1.00  0.00          AR
+HETATM  609 AR   DUM A 609      -6.200  13.600   8.800  1.00  0.00          AR
+HETATM  610 AR   DUM A 610      -6.200  13.600  11.000  1.00  0.00          AR
+HETATM  611 AR   DUM A 611      -6.200  13.600  13.200  1.00  0.00          AR
+HETATM  612 AR   DUM A 612      -6.200  13.600  15.400  1.00  0.00          AR
+HETATM  613 AR   DUM A 613      -6.200  13.600  17.600  1.00  0.00          AR
+HETATM  614 AR   DUM A 614      -4.000 -15.000   0.000  1.00  0.00          AR
+HETATM  615 AR   DUM A 615      -4.000 -15.000   2.200  1.00  0.00          AR
+HETATM  616 AR   DUM A 616      -4.000 -15.000   4.400  1.00  0.00          AR
+HETATM  617 AR   DUM A 617      -4.000 -15.000   6.600  1.00  0.00          AR
+HETATM  618 AR   DUM A 618      -4.000 -15.000   8.800  1.00  0.00          AR
+HETATM  619 AR   DUM A 619      -4.000 -15.000  11.000  1.00  0.00          AR
+HETATM  620 AR   DUM A 620      -4.000 -15.000  13.200  1.00  0.00          AR
+HETATM  621 AR   DUM A 621      -4.000 -15.000  15.400  1.00  0.00          AR
+HETATM  622 AR   DUM A 622      -4.000 -15.000  17.600  1.00  0.00          AR
+HETATM  623 AR   DUM A 623      -4.000 -12.800   0.000  1.00  0.00          AR
+HETATM  624 AR   DUM A 624      -4.000 -12.800   2.200  1.00  0.00          AR
+HETATM  625 AR   DUM A 625      -4.000 -12.800   4.400  1.00  0.00          AR
+HETATM  626 AR   DUM A 626      -4.000 -12.800   6.600  1.00  0.00          AR
+HETATM  627 AR   DUM A 627      -4.000 -12.800   8.800  1.00  0.00          AR
+HETATM  628 AR   DUM A 628      -4.000 -12.800  11.000  1.00  0.00          AR
+HETATM  629 AR   DUM A 629      -4.000 -12.800  13.200  1.00  0.00          AR
+HETATM  630 AR   DUM A 630      -4.000 -12.800  15.400  1.00  0.00          AR
+HETATM  631 AR   DUM A 631      -4.000 -12.800  17.600  1.00  0.00          AR
+HETATM  632 AR   DUM A 632      -4.000 -10.600   0.000  1.00  0.00          AR
+HETATM  633 AR   DUM A 633      -4.000 -10.600   2.200  1.00  0.00          AR
+HETATM  634 AR   DUM A 634      -4.000 -10.600   4.400  1.00  0.00          AR
+HETATM  635 AR   DUM A 635      -4.000 -10.600   6.600  1.00  0.00          AR
+HETATM  636 AR   DUM A 636      -4.000 -10.600   8.800  1.00  0.00          AR
+HETATM  637 AR   DUM A 637      -4.000 -10.600  11.000  1.00  0.00          AR
+HETATM  638 AR   DUM A 638      -4.000 -10.600  13.200  1.00  0.00          AR
+HETATM  639 AR   DUM A 639      -4.000 -10.600  15.400  1.00  0.00          AR
+HETATM  640 AR   DUM A 640      -4.000 -10.600  17.600  1.00  0.00          AR
+HETATM  641 AR   DUM A 641      -4.000  -8.400   0.000  1.00  0.00          AR
+HETATM  642 AR   DUM A 642      -4.000  -8.400   2.200  1.00  0.00          AR
+HETATM  643 AR   DUM A 643      -4.000  -8.400   4.400  1.00  0.00          AR
+HETATM  644 AR   DUM A 644      -4.000  -8.400   6.600  1.00  0.00          AR
+HETATM  645 AR   DUM A 645      -4.000  -8.400   8.800  1.00  0.00          AR
+HETATM  646 AR   DUM A 646      -4.000  -8.400  11.000  1.00  0.00          AR
+HETATM  647 AR   DUM A 647      -4.000  -8.400  13.200  1.00  0.00          AR
+HETATM  648 AR   DUM A 648      -4.000  -8.400  15.400  1.00  0.00          AR
+HETATM  649 AR   DUM A 649      -4.000  -8.400  17.600  1.00  0.00          AR
+HETATM  650 AR   DUM A 650      -4.000  -6.200   0.000  1.00  0.00          AR
+HETATM  651 AR   DUM A 651      -4.000  -6.200   2.200  1.00  0.00          AR
+HETATM  652 AR   DUM A 652      -4.000  -6.200   4.400  1.00  0.00          AR
+HETATM  653 AR   DUM A 653      -4.000  -6.200   6.600  1.00  0.00          AR
+HETATM  654 AR   DUM A 654      -4.000  -6.200   8.800  1.00  0.00          AR
+HETATM  655 AR   DUM A 655      -4.000  -6.200  11.000  1.00  0.00          AR
+HETATM  656 AR   DUM A 656      -4.000  -6.200  13.200  1.00  0.00          AR
+HETATM  657 AR   DUM A 657      -4.000  -4.000   0.000  1.00  0.00          AR
+HETATM  658 AR   DUM A 658      -4.000  -4.000   2.200  1.00  0.00          AR
+HETATM  659 AR   DUM A 659      -4.000  -4.000   4.400  1.00  0.00          AR
+HETATM  660 AR   DUM A 660      -4.000  -4.000   6.600  1.00  0.00          AR
+HETATM  661 AR   DUM A 661      -4.000  -4.000   8.800  1.00  0.00          AR
+HETATM  662 AR   DUM A 662      -4.000  -1.800   0.000  1.00  0.00          AR
+HETATM  663 AR   DUM A 663      -4.000  -1.800   2.200  1.00  0.00          AR
+HETATM  664 AR   DUM A 664      -4.000  -1.800   4.400  1.00  0.00          AR
+HETATM  665 AR   DUM A 665      -4.000  -1.800   6.600  1.00  0.00          AR
+HETATM  666 AR   DUM A 666      -4.000   0.400   0.000  1.00  0.00          AR
+HETATM  667 AR   DUM A 667      -4.000   0.400   2.200  1.00  0.00          AR
+HETATM  668 AR   DUM A 668      -4.000   0.400   4.400  1.00  0.00          AR
+HETATM  669 AR   DUM A 669      -4.000   0.400   6.600  1.00  0.00          AR
+HETATM  670 AR   DUM A 670      -4.000   2.600   0.000  1.00  0.00          AR
+HETATM  671 AR   DUM A 671      -4.000   2.600   2.200  1.00  0.00          AR
+HETATM  672 AR   DUM A 672      -4.000   2.600   4.400  1.00  0.00          AR
+HETATM  673 AR   DUM A 673      -4.000   2.600   6.600  1.00  0.00          AR
+HETATM  674 AR   DUM A 674      -4.000   4.800   0.000  1.00  0.00          AR
+HETATM  675 AR   DUM A 675      -4.000   4.800   2.200  1.00  0.00          AR
+HETATM  676 AR   DUM A 676      -4.000   4.800   4.400  1.00  0.00          AR
+HETATM  677 AR   DUM A 677      -4.000   4.800   6.600  1.00  0.00          AR
+HETATM  678 AR   DUM A 678      -4.000   4.800   8.800  1.00  0.00          AR
+HETATM  679 AR   DUM A 679      -4.000   4.800  11.000  1.00  0.00          AR
+HETATM  680 AR   DUM A 680      -4.000   7.000   0.000  1.00  0.00          AR
+HETATM  681 AR   DUM A 681      -4.000   7.000   2.200  1.00  0.00          AR
+HETATM  682 AR   DUM A 682      -4.000   7.000   4.400  1.00  0.00          AR
+HETATM  683 AR   DUM A 683      -4.000   7.000   6.600  1.00  0.00          AR
+HETATM  684 AR   DUM A 684      -4.000   7.000   8.800  1.00  0.00          AR
+HETATM  685 AR   DUM A 685      -4.000   7.000  11.000  1.00  0.00          AR
+HETATM  686 AR   DUM A 686      -4.000   7.000  13.200  1.00  0.00          AR
+HETATM  687 AR   DUM A 687      -4.000   7.000  15.400  1.00  0.00          AR
+HETATM  688 AR   DUM A 688      -4.000   9.200   0.000  1.00  0.00          AR
+HETATM  689 AR   DUM A 689      -4.000   9.200   2.200  1.00  0.00          AR
+HETATM  690 AR   DUM A 690      -4.000   9.200   4.400  1.00  0.00          AR
+HETATM  691 AR   DUM A 691      -4.000   9.200   6.600  1.00  0.00          AR
+HETATM  692 AR   DUM A 692      -4.000   9.200   8.800  1.00  0.00          AR
+HETATM  693 AR   DUM A 693      -4.000   9.200  11.000  1.00  0.00          AR
+HETATM  694 AR   DUM A 694      -4.000   9.200  13.200  1.00  0.00          AR
+HETATM  695 AR   DUM A 695      -4.000   9.200  15.400  1.00  0.00          AR
+HETATM  696 AR   DUM A 696      -4.000   9.200  17.600  1.00  0.00          AR
+HETATM  697 AR   DUM A 697      -4.000  11.400   0.000  1.00  0.00          AR
+HETATM  698 AR   DUM A 698      -4.000  11.400   2.200  1.00  0.00          AR
+HETATM  699 AR   DUM A 699      -4.000  11.400   4.400  1.00  0.00          AR
+HETATM  700 AR   DUM A 700      -4.000  11.400   6.600  1.00  0.00          AR
+HETATM  701 AR   DUM A 701      -4.000  11.400   8.800  1.00  0.00          AR
+HETATM  702 AR   DUM A 702      -4.000  11.400  11.000  1.00  0.00          AR
+HETATM  703 AR   DUM A 703      -4.000  11.400  13.200  1.00  0.00          AR
+HETATM  704 AR   DUM A 704      -4.000  11.400  15.400  1.00  0.00          AR
+HETATM  705 AR   DUM A 705      -4.000  11.400  17.600  1.00  0.00          AR
+HETATM  706 AR   DUM A 706      -4.000  13.600   0.000  1.00  0.00          AR
+HETATM  707 AR   DUM A 707      -4.000  13.600   2.200  1.00  0.00          AR
+HETATM  708 AR   DUM A 708      -4.000  13.600   4.400  1.00  0.00          AR
+HETATM  709 AR   DUM A 709      -4.000  13.600   6.600  1.00  0.00          AR
+HETATM  710 AR   DUM A 710      -4.000  13.600   8.800  1.00  0.00          AR
+HETATM  711 AR   DUM A 711      -4.000  13.600  11.000  1.00  0.00          AR
+HETATM  712 AR   DUM A 712      -4.000  13.600  13.200  1.00  0.00          AR
+HETATM  713 AR   DUM A 713      -4.000  13.600  15.400  1.00  0.00          AR
+HETATM  714 AR   DUM A 714      -4.000  13.600  17.600  1.00  0.00          AR
+HETATM  715 AR   DUM A 715      -1.800 -15.000   0.000  1.00  0.00          AR
+HETATM  716 AR   DUM A 716      -1.800 -15.000   2.200  1.00  0.00          AR
+HETATM  717 AR   DUM A 717      -1.800 -15.000   4.400  1.00  0.00          AR
+HETATM  718 AR   DUM A 718      -1.800 -15.000   6.600  1.00  0.00          AR
+HETATM  719 AR   DUM A 719      -1.800 -15.000   8.800  1.00  0.00          AR
+HETATM  720 AR   DUM A 720      -1.800 -15.000  11.000  1.00  0.00          AR
+HETATM  721 AR   DUM A 721      -1.800 -15.000  13.200  1.00  0.00          AR
+HETATM  722 AR   DUM A 722      -1.800 -15.000  15.400  1.00  0.00          AR
+HETATM  723 AR   DUM A 723      -1.800 -15.000  17.600  1.00  0.00          AR
+HETATM  724 AR   DUM A 724      -1.800 -12.800   0.000  1.00  0.00          AR
+HETATM  725 AR   DUM A 725      -1.800 -12.800   2.200  1.00  0.00          AR
+HETATM  726 AR   DUM A 726      -1.800 -12.800   4.400  1.00  0.00          AR
+HETATM  727 AR   DUM A 727      -1.800 -12.800   6.600  1.00  0.00          AR
+HETATM  728 AR   DUM A 728      -1.800 -12.800   8.800  1.00  0.00          AR
+HETATM  729 AR   DUM A 729      -1.800 -12.800  11.000  1.00  0.00          AR
+HETATM  730 AR   DUM A 730      -1.800 -12.800  13.200  1.00  0.00          AR
+HETATM  731 AR   DUM A 731      -1.800 -12.800  15.400  1.00  0.00          AR
+HETATM  732 AR   DUM A 732      -1.800 -12.800  17.600  1.00  0.00          AR
+HETATM  733 AR   DUM A 733      -1.800 -10.600   0.000  1.00  0.00          AR
+HETATM  734 AR   DUM A 734      -1.800 -10.600   2.200  1.00  0.00          AR
+HETATM  735 AR   DUM A 735      -1.800 -10.600   4.400  1.00  0.00          AR
+HETATM  736 AR   DUM A 736      -1.800 -10.600   6.600  1.00  0.00          AR
+HETATM  737 AR   DUM A 737      -1.800 -10.600   8.800  1.00  0.00          AR
+HETATM  738 AR   DUM A 738      -1.800 -10.600  11.000  1.00  0.00          AR
+HETATM  739 AR   DUM A 739      -1.800 -10.600  13.200  1.00  0.00          AR
+HETATM  740 AR   DUM A 740      -1.800 -10.600  15.400  1.00  0.00          AR
+HETATM  741 AR   DUM A 741      -1.800 -10.600  17.600  1.00  0.00          AR
+HETATM  742 AR   DUM A 742      -1.800  -8.400   0.000  1.00  0.00          AR
+HETATM  743 AR   DUM A 743      -1.800  -8.400   2.200  1.00  0.00          AR
+HETATM  744 AR   DUM A 744      -1.800  -8.400   4.400  1.00  0.00          AR
+HETATM  745 AR   DUM A 745      -1.800  -8.400   6.600  1.00  0.00          AR
+HETATM  746 AR   DUM A 746      -1.800  -8.400   8.800  1.00  0.00          AR
+HETATM  747 AR   DUM A 747      -1.800  -8.400  11.000  1.00  0.00          AR
+HETATM  748 AR   DUM A 748      -1.800  -8.400  13.200  1.00  0.00          AR
+HETATM  749 AR   DUM A 749      -1.800  -8.400  15.400  1.00  0.00          AR
+HETATM  750 AR   DUM A 750      -1.800  -6.200   0.000  1.00  0.00          AR
+HETATM  751 AR   DUM A 751      -1.800  -6.200   2.200  1.00  0.00          AR
+HETATM  752 AR   DUM A 752      -1.800  -6.200   4.400  1.00  0.00          AR
+HETATM  753 AR   DUM A 753      -1.800  -6.200   6.600  1.00  0.00          AR
+HETATM  754 AR   DUM A 754      -1.800  -6.200   8.800  1.00  0.00          AR
+HETATM  755 AR   DUM A 755      -1.800  -6.200  11.000  1.00  0.00          AR
+HETATM  756 AR   DUM A 756      -1.800  -4.000   0.000  1.00  0.00          AR
+HETATM  757 AR   DUM A 757      -1.800  -4.000   2.200  1.00  0.00          AR
+HETATM  758 AR   DUM A 758      -1.800  -4.000   4.400  1.00  0.00          AR
+HETATM  759 AR   DUM A 759      -1.800  -4.000   6.600  1.00  0.00          AR
+HETATM  760 AR   DUM A 760      -1.800  -1.800   0.000  1.00  0.00          AR
+HETATM  761 AR   DUM A 761      -1.800  -1.800   2.200  1.00  0.00          AR
+HETATM  762 AR   DUM A 762      -1.800   0.400   0.000  1.00  0.00          AR
+HETATM  763 AR   DUM A 763      -1.800   2.600   0.000  1.00  0.00          AR
+HETATM  764 AR   DUM A 764      -1.800   2.600   2.200  1.00  0.00          AR
+HETATM  765 AR   DUM A 765      -1.800   2.600   4.400  1.00  0.00          AR
+HETATM  766 AR   DUM A 766      -1.800   4.800   0.000  1.00  0.00          AR
+HETATM  767 AR   DUM A 767      -1.800   4.800   2.200  1.00  0.00          AR
+HETATM  768 AR   DUM A 768      -1.800   4.800   4.400  1.00  0.00          AR
+HETATM  769 AR   DUM A 769      -1.800   4.800   6.600  1.00  0.00          AR
+HETATM  770 AR   DUM A 770      -1.800   4.800   8.800  1.00  0.00          AR
+HETATM  771 AR   DUM A 771      -1.800   7.000   0.000  1.00  0.00          AR
+HETATM  772 AR   DUM A 772      -1.800   7.000   2.200  1.00  0.00          AR
+HETATM  773 AR   DUM A 773      -1.800   7.000   4.400  1.00  0.00          AR
+HETATM  774 AR   DUM A 774      -1.800   7.000   6.600  1.00  0.00          AR
+HETATM  775 AR   DUM A 775      -1.800   7.000   8.800  1.00  0.00          AR
+HETATM  776 AR   DUM A 776      -1.800   7.000  11.000  1.00  0.00          AR
+HETATM  777 AR   DUM A 777      -1.800   7.000  13.200  1.00  0.00          AR
+HETATM  778 AR   DUM A 778      -1.800   9.200   0.000  1.00  0.00          AR
+HETATM  779 AR   DUM A 779      -1.800   9.200   2.200  1.00  0.00          AR
+HETATM  780 AR   DUM A 780      -1.800   9.200   4.400  1.00  0.00          AR
+HETATM  781 AR   DUM A 781      -1.800   9.200   6.600  1.00  0.00          AR
+HETATM  782 AR   DUM A 782      -1.800   9.200   8.800  1.00  0.00          AR
+HETATM  783 AR   DUM A 783      -1.800   9.200  11.000  1.00  0.00          AR
+HETATM  784 AR   DUM A 784      -1.800   9.200  13.200  1.00  0.00          AR
+HETATM  785 AR   DUM A 785      -1.800   9.200  15.400  1.00  0.00          AR
+HETATM  786 AR   DUM A 786      -1.800   9.200  17.600  1.00  0.00          AR
+HETATM  787 AR   DUM A 787      -1.800  11.400   0.000  1.00  0.00          AR
+HETATM  788 AR   DUM A 788      -1.800  11.400   2.200  1.00  0.00          AR
+HETATM  789 AR   DUM A 789      -1.800  11.400   4.400  1.00  0.00          AR
+HETATM  790 AR   DUM A 790      -1.800  11.400   6.600  1.00  0.00          AR
+HETATM  791 AR   DUM A 791      -1.800  11.400   8.800  1.00  0.00          AR
+HETATM  792 AR   DUM A 792      -1.800  11.400  11.000  1.00  0.00          AR
+HETATM  793 AR   DUM A 793      -1.800  11.400  13.200  1.00  0.00          AR
+HETATM  794 AR   DUM A 794      -1.800  11.400  15.400  1.00  0.00          AR
+HETATM  795 AR   DUM A 795      -1.800  11.400  17.600  1.00  0.00          AR
+HETATM  796 AR   DUM A 796      -1.800  13.600   0.000  1.00  0.00          AR
+HETATM  797 AR   DUM A 797      -1.800  13.600   2.200  1.00  0.00          AR
+HETATM  798 AR   DUM A 798      -1.800  13.600   4.400  1.00  0.00          AR
+HETATM  799 AR   DUM A 799      -1.800  13.600   6.600  1.00  0.00          AR
+HETATM  800 AR   DUM A 800      -1.800  13.600   8.800  1.00  0.00          AR
+HETATM  801 AR   DUM A 801      -1.800  13.600  11.000  1.00  0.00          AR
+HETATM  802 AR   DUM A 802      -1.800  13.600  13.200  1.00  0.00          AR
+HETATM  803 AR   DUM A 803      -1.800  13.600  15.400  1.00  0.00          AR
+HETATM  804 AR   DUM A 804      -1.800  13.600  17.600  1.00  0.00          AR
+HETATM  805 AR   DUM A 805       0.400 -15.000   0.000  1.00  0.00          AR
+HETATM  806 AR   DUM A 806       0.400 -15.000   2.200  1.00  0.00          AR
+HETATM  807 AR   DUM A 807       0.400 -15.000   4.400  1.00  0.00          AR
+HETATM  808 AR   DUM A 808       0.400 -15.000   6.600  1.00  0.00          AR
+HETATM  809 AR   DUM A 809       0.400 -15.000   8.800  1.00  0.00          AR
+HETATM  810 AR   DUM A 810       0.400 -15.000  11.000  1.00  0.00          AR
+HETATM  811 AR   DUM A 811       0.400 -15.000  13.200  1.00  0.00          AR
+HETATM  812 AR   DUM A 812       0.400 -15.000  15.400  1.00  0.00          AR
+HETATM  813 AR   DUM A 813       0.400 -15.000  17.600  1.00  0.00          AR
+HETATM  814 AR   DUM A 814       0.400 -12.800   0.000  1.00  0.00          AR
+HETATM  815 AR   DUM A 815       0.400 -12.800   2.200  1.00  0.00          AR
+HETATM  816 AR   DUM A 816       0.400 -12.800   4.400  1.00  0.00          AR
+HETATM  817 AR   DUM A 817       0.400 -12.800   6.600  1.00  0.00          AR
+HETATM  818 AR   DUM A 818       0.400 -12.800   8.800  1.00  0.00          AR
+HETATM  819 AR   DUM A 819       0.400 -12.800  11.000  1.00  0.00          AR
+HETATM  820 AR   DUM A 820       0.400 -12.800  13.200  1.00  0.00          AR
+HETATM  821 AR   DUM A 821       0.400 -12.800  15.400  1.00  0.00          AR
+HETATM  822 AR   DUM A 822       0.400 -12.800  17.600  1.00  0.00          AR
+HETATM  823 AR   DUM A 823       0.400 -10.600   0.000  1.00  0.00          AR
+HETATM  824 AR   DUM A 824       0.400 -10.600   2.200  1.00  0.00          AR
+HETATM  825 AR   DUM A 825       0.400 -10.600   4.400  1.00  0.00          AR
+HETATM  826 AR   DUM A 826       0.400 -10.600   6.600  1.00  0.00          AR
+HETATM  827 AR   DUM A 827       0.400 -10.600   8.800  1.00  0.00          AR
+HETATM  828 AR   DUM A 828       0.400 -10.600  11.000  1.00  0.00          AR
+HETATM  829 AR   DUM A 829       0.400 -10.600  13.200  1.00  0.00          AR
+HETATM  830 AR   DUM A 830       0.400 -10.600  15.400  1.00  0.00          AR
+HETATM  831 AR   DUM A 831       0.400 -10.600  17.600  1.00  0.00          AR
+HETATM  832 AR   DUM A 832       0.400  -8.400   0.000  1.00  0.00          AR
+HETATM  833 AR   DUM A 833       0.400  -8.400   2.200  1.00  0.00          AR
+HETATM  834 AR   DUM A 834       0.400  -8.400   4.400  1.00  0.00          AR
+HETATM  835 AR   DUM A 835       0.400  -8.400   6.600  1.00  0.00          AR
+HETATM  836 AR   DUM A 836       0.400  -8.400   8.800  1.00  0.00          AR
+HETATM  837 AR   DUM A 837       0.400  -8.400  11.000  1.00  0.00          AR
+HETATM  838 AR   DUM A 838       0.400  -8.400  13.200  1.00  0.00          AR
+HETATM  839 AR   DUM A 839       0.400  -8.400  15.400  1.00  0.00          AR
+HETATM  840 AR   DUM A 840       0.400  -6.200   0.000  1.00  0.00          AR
+HETATM  841 AR   DUM A 841       0.400  -6.200   2.200  1.00  0.00          AR
+HETATM  842 AR   DUM A 842       0.400  -6.200   4.400  1.00  0.00          AR
+HETATM  843 AR   DUM A 843       0.400  -6.200   6.600  1.00  0.00          AR
+HETATM  844 AR   DUM A 844       0.400  -6.200   8.800  1.00  0.00          AR
+HETATM  845 AR   DUM A 845       0.400  -6.200  11.000  1.00  0.00          AR
+HETATM  846 AR   DUM A 846       0.400  -4.000   0.000  1.00  0.00          AR
+HETATM  847 AR   DUM A 847       0.400  -4.000   2.200  1.00  0.00          AR
+HETATM  848 AR   DUM A 848       0.400  -4.000   4.400  1.00  0.00          AR
+HETATM  849 AR   DUM A 849       0.400  -4.000   6.600  1.00  0.00          AR
+HETATM  850 AR   DUM A 850       0.400  -1.800   0.000  1.00  0.00          AR
+HETATM  851 AR   DUM A 851       0.400   0.400   0.000  1.00  0.00          AR
+HETATM  852 AR   DUM A 852       0.400   2.600   0.000  1.00  0.00          AR
+HETATM  853 AR   DUM A 853       0.400   2.600   2.200  1.00  0.00          AR
+HETATM  854 AR   DUM A 854       0.400   4.800   0.000  1.00  0.00          AR
+HETATM  855 AR   DUM A 855       0.400   4.800   2.200  1.00  0.00          AR
+HETATM  856 AR   DUM A 856       0.400   4.800   4.400  1.00  0.00          AR
+HETATM  857 AR   DUM A 857       0.400   4.800   6.600  1.00  0.00          AR
+HETATM  858 AR   DUM A 858       0.400   7.000   0.000  1.00  0.00          AR
+HETATM  859 AR   DUM A 859       0.400   7.000   2.200  1.00  0.00          AR
+HETATM  860 AR   DUM A 860       0.400   7.000   4.400  1.00  0.00          AR
+HETATM  861 AR   DUM A 861       0.400   7.000   6.600  1.00  0.00          AR
+HETATM  862 AR   DUM A 862       0.400   7.000   8.800  1.00  0.00          AR
+HETATM  863 AR   DUM A 863       0.400   7.000  11.000  1.00  0.00          AR
+HETATM  864 AR   DUM A 864       0.400   7.000  13.200  1.00  0.00          AR
+HETATM  865 AR   DUM A 865       0.400   9.200   0.000  1.00  0.00          AR
+HETATM  866 AR   DUM A 866       0.400   9.200   2.200  1.00  0.00          AR
+HETATM  867 AR   DUM A 867       0.400   9.200   4.400  1.00  0.00          AR
+HETATM  868 AR   DUM A 868       0.400   9.200   6.600  1.00  0.00          AR
+HETATM  869 AR   DUM A 869       0.400   9.200   8.800  1.00  0.00          AR
+HETATM  870 AR   DUM A 870       0.400   9.200  11.000  1.00  0.00          AR
+HETATM  871 AR   DUM A 871       0.400   9.200  13.200  1.00  0.00          AR
+HETATM  872 AR   DUM A 872       0.400   9.200  15.400  1.00  0.00          AR
+HETATM  873 AR   DUM A 873       0.400   9.200  17.600  1.00  0.00          AR
+HETATM  874 AR   DUM A 874       0.400  11.400   0.000  1.00  0.00          AR
+HETATM  875 AR   DUM A 875       0.400  11.400   2.200  1.00  0.00          AR
+HETATM  876 AR   DUM A 876       0.400  11.400   4.400  1.00  0.00          AR
+HETATM  877 AR   DUM A 877       0.400  11.400   6.600  1.00  0.00          AR
+HETATM  878 AR   DUM A 878       0.400  11.400   8.800  1.00  0.00          AR
+HETATM  879 AR   DUM A 879       0.400  11.400  11.000  1.00  0.00          AR
+HETATM  880 AR   DUM A 880       0.400  11.400  13.200  1.00  0.00          AR
+HETATM  881 AR   DUM A 881       0.400  11.400  15.400  1.00  0.00          AR
+HETATM  882 AR   DUM A 882       0.400  11.400  17.600  1.00  0.00          AR
+HETATM  883 AR   DUM A 883       0.400  13.600   0.000  1.00  0.00          AR
+HETATM  884 AR   DUM A 884       0.400  13.600   2.200  1.00  0.00          AR
+HETATM  885 AR   DUM A 885       0.400  13.600   4.400  1.00  0.00          AR
+HETATM  886 AR   DUM A 886       0.400  13.600   6.600  1.00  0.00          AR
+HETATM  887 AR   DUM A 887       0.400  13.600   8.800  1.00  0.00          AR
+HETATM  888 AR   DUM A 888       0.400  13.600  11.000  1.00  0.00          AR
+HETATM  889 AR   DUM A 889       0.400  13.600  13.200  1.00  0.00          AR
+HETATM  890 AR   DUM A 890       0.400  13.600  15.400  1.00  0.00          AR
+HETATM  891 AR   DUM A 891       0.400  13.600  17.600  1.00  0.00          AR
+HETATM  892 AR   DUM A 892       2.600 -15.000   0.000  1.00  0.00          AR
+HETATM  893 AR   DUM A 893       2.600 -15.000   2.200  1.00  0.00          AR
+HETATM  894 AR   DUM A 894       2.600 -15.000   4.400  1.00  0.00          AR
+HETATM  895 AR   DUM A 895       2.600 -15.000   6.600  1.00  0.00          AR
+HETATM  896 AR   DUM A 896       2.600 -15.000   8.800  1.00  0.00          AR
+HETATM  897 AR   DUM A 897       2.600 -15.000  11.000  1.00  0.00          AR
+HETATM  898 AR   DUM A 898       2.600 -15.000  13.200  1.00  0.00          AR
+HETATM  899 AR   DUM A 899       2.600 -15.000  15.400  1.00  0.00          AR
+HETATM  900 AR   DUM A 900       2.600 -15.000  17.600  1.00  0.00          AR
+HETATM  901 AR   DUM A 901       2.600 -12.800   0.000  1.00  0.00          AR
+HETATM  902 AR   DUM A 902       2.600 -12.800   2.200  1.00  0.00          AR
+HETATM  903 AR   DUM A 903       2.600 -12.800   4.400  1.00  0.00          AR
+HETATM  904 AR   DUM A 904       2.600 -12.800   6.600  1.00  0.00          AR
+HETATM  905 AR   DUM A 905       2.600 -12.800   8.800  1.00  0.00          AR
+HETATM  906 AR   DUM A 906       2.600 -12.800  11.000  1.00  0.00          AR
+HETATM  907 AR   DUM A 907       2.600 -12.800  13.200  1.00  0.00          AR
+HETATM  908 AR   DUM A 908       2.600 -12.800  15.400  1.00  0.00          AR
+HETATM  909 AR   DUM A 909       2.600 -12.800  17.600  1.00  0.00          AR
+HETATM  910 AR   DUM A 910       2.600 -10.600   0.000  1.00  0.00          AR
+HETATM  911 AR   DUM A 911       2.600 -10.600   2.200  1.00  0.00          AR
+HETATM  912 AR   DUM A 912       2.600 -10.600   4.400  1.00  0.00          AR
+HETATM  913 AR   DUM A 913       2.600 -10.600   6.600  1.00  0.00          AR
+HETATM  914 AR   DUM A 914       2.600 -10.600   8.800  1.00  0.00          AR
+HETATM  915 AR   DUM A 915       2.600 -10.600  11.000  1.00  0.00          AR
+HETATM  916 AR   DUM A 916       2.600 -10.600  13.200  1.00  0.00          AR
+HETATM  917 AR   DUM A 917       2.600 -10.600  15.400  1.00  0.00          AR
+HETATM  918 AR   DUM A 918       2.600 -10.600  17.600  1.00  0.00          AR
+HETATM  919 AR   DUM A 919       2.600  -8.400   0.000  1.00  0.00          AR
+HETATM  920 AR   DUM A 920       2.600  -8.400   2.200  1.00  0.00          AR
+HETATM  921 AR   DUM A 921       2.600  -8.400   4.400  1.00  0.00          AR
+HETATM  922 AR   DUM A 922       2.600  -8.400   6.600  1.00  0.00          AR
+HETATM  923 AR   DUM A 923       2.600  -8.400   8.800  1.00  0.00          AR
+HETATM  924 AR   DUM A 924       2.600  -8.400  11.000  1.00  0.00          AR
+HETATM  925 AR   DUM A 925       2.600  -8.400  13.200  1.00  0.00          AR
+HETATM  926 AR   DUM A 926       2.600  -8.400  15.400  1.00  0.00          AR
+HETATM  927 AR   DUM A 927       2.600  -6.200   0.000  1.00  0.00          AR
+HETATM  928 AR   DUM A 928       2.600  -6.200   2.200  1.00  0.00          AR
+HETATM  929 AR   DUM A 929       2.600  -6.200   4.400  1.00  0.00          AR
+HETATM  930 AR   DUM A 930       2.600  -6.200   6.600  1.00  0.00          AR
+HETATM  931 AR   DUM A 931       2.600  -6.200   8.800  1.00  0.00          AR
+HETATM  932 AR   DUM A 932       2.600  -6.200  11.000  1.00  0.00          AR
+HETATM  933 AR   DUM A 933       2.600  -4.000   0.000  1.00  0.00          AR
+HETATM  934 AR   DUM A 934       2.600  -4.000   2.200  1.00  0.00          AR
+HETATM  935 AR   DUM A 935       2.600  -4.000   4.400  1.00  0.00          AR
+HETATM  936 AR   DUM A 936       2.600  -4.000   6.600  1.00  0.00          AR
+HETATM  937 AR   DUM A 937       2.600  -1.800   0.000  1.00  0.00          AR
+HETATM  938 AR   DUM A 938       2.600  -1.800   2.200  1.00  0.00          AR
+HETATM  939 AR   DUM A 939       2.600  -1.800   4.400  1.00  0.00          AR
+HETATM  940 AR   DUM A 940       2.600   0.400   0.000  1.00  0.00          AR
+HETATM  941 AR   DUM A 941       2.600   0.400   2.200  1.00  0.00          AR
+HETATM  942 AR   DUM A 942       2.600   2.600   0.000  1.00  0.00          AR
+HETATM  943 AR   DUM A 943       2.600   2.600   2.200  1.00  0.00          AR
+HETATM  944 AR   DUM A 944       2.600   2.600   4.400  1.00  0.00          AR
+HETATM  945 AR   DUM A 945       2.600   4.800   0.000  1.00  0.00          AR
+HETATM  946 AR   DUM A 946       2.600   4.800   2.200  1.00  0.00          AR
+HETATM  947 AR   DUM A 947       2.600   4.800   4.400  1.00  0.00          AR
+HETATM  948 AR   DUM A 948       2.600   4.800   6.600  1.00  0.00          AR
+HETATM  949 AR   DUM A 949       2.600   4.800   8.800  1.00  0.00          AR
+HETATM  950 AR   DUM A 950       2.600   7.000   0.000  1.00  0.00          AR
+HETATM  951 AR   DUM A 951       2.600   7.000   2.200  1.00  0.00          AR
+HETATM  952 AR   DUM A 952       2.600   7.000   4.400  1.00  0.00          AR
+HETATM  953 AR   DUM A 953       2.600   7.000   6.600  1.00  0.00          AR
+HETATM  954 AR   DUM A 954       2.600   7.000   8.800  1.00  0.00          AR
+HETATM  955 AR   DUM A 955       2.600   7.000  11.000  1.00  0.00          AR
+HETATM  956 AR   DUM A 956       2.600   7.000  13.200  1.00  0.00          AR
+HETATM  957 AR   DUM A 957       2.600   9.200   0.000  1.00  0.00          AR
+HETATM  958 AR   DUM A 958       2.600   9.200   2.200  1.00  0.00          AR
+HETATM  959 AR   DUM A 959       2.600   9.200   4.400  1.00  0.00          AR
+HETATM  960 AR   DUM A 960       2.600   9.200   6.600  1.00  0.00          AR
+HETATM  961 AR   DUM A 961       2.600   9.200   8.800  1.00  0.00          AR
+HETATM  962 AR   DUM A 962       2.600   9.200  11.000  1.00  0.00          AR
+HETATM  963 AR   DUM A 963       2.600   9.200  13.200  1.00  0.00          AR
+HETATM  964 AR   DUM A 964       2.600   9.200  15.400  1.00  0.00          AR
+HETATM  965 AR   DUM A 965       2.600   9.200  17.600  1.00  0.00          AR
+HETATM  966 AR   DUM A 966       2.600  11.400   0.000  1.00  0.00          AR
+HETATM  967 AR   DUM A 967       2.600  11.400   2.200  1.00  0.00          AR
+HETATM  968 AR   DUM A 968       2.600  11.400   4.400  1.00  0.00          AR
+HETATM  969 AR   DUM A 969       2.600  11.400   6.600  1.00  0.00          AR
+HETATM  970 AR   DUM A 970       2.600  11.400   8.800  1.00  0.00          AR
+HETATM  971 AR   DUM A 971       2.600  11.400  11.000  1.00  0.00          AR
+HETATM  972 AR   DUM A 972       2.600  11.400  13.200  1.00  0.00          AR
+HETATM  973 AR   DUM A 973       2.600  11.400  15.400  1.00  0.00          AR
+HETATM  974 AR   DUM A 974       2.600  11.400  17.600  1.00  0.00          AR
+HETATM  975 AR   DUM A 975       2.600  13.600   0.000  1.00  0.00          AR
+HETATM  976 AR   DUM A 976       2.600  13.600   2.200  1.00  0.00          AR
+HETATM  977 AR   DUM A 977       2.600  13.600   4.400  1.00  0.00          AR
+HETATM  978 AR   DUM A 978       2.600  13.600   6.600  1.00  0.00          AR
+HETATM  979 AR   DUM A 979       2.600  13.600   8.800  1.00  0.00          AR
+HETATM  980 AR   DUM A 980       2.600  13.600  11.000  1.00  0.00          AR
+HETATM  981 AR   DUM A 981       2.600  13.600  13.200  1.00  0.00          AR
+HETATM  982 AR   DUM A 982       2.600  13.600  15.400  1.00  0.00          AR
+HETATM  983 AR   DUM A 983       2.600  13.600  17.600  1.00  0.00          AR
+HETATM  984 AR   DUM A 984       4.800 -15.000   0.000  1.00  0.00          AR
+HETATM  985 AR   DUM A 985       4.800 -15.000   2.200  1.00  0.00          AR
+HETATM  986 AR   DUM A 986       4.800 -15.000   4.400  1.00  0.00          AR
+HETATM  987 AR   DUM A 987       4.800 -15.000   6.600  1.00  0.00          AR
+HETATM  988 AR   DUM A 988       4.800 -15.000   8.800  1.00  0.00          AR
+HETATM  989 AR   DUM A 989       4.800 -15.000  11.000  1.00  0.00          AR
+HETATM  990 AR   DUM A 990       4.800 -15.000  13.200  1.00  0.00          AR
+HETATM  991 AR   DUM A 991       4.800 -15.000  15.400  1.00  0.00          AR
+HETATM  992 AR   DUM A 992       4.800 -15.000  17.600  1.00  0.00          AR
+HETATM  993 AR   DUM A 993       4.800 -12.800   0.000  1.00  0.00          AR
+HETATM  994 AR   DUM A 994       4.800 -12.800   2.200  1.00  0.00          AR
+HETATM  995 AR   DUM A 995       4.800 -12.800   4.400  1.00  0.00          AR
+HETATM  996 AR   DUM A 996       4.800 -12.800   6.600  1.00  0.00          AR
+HETATM  997 AR   DUM A 997       4.800 -12.800   8.800  1.00  0.00          AR
+HETATM  998 AR   DUM A 998       4.800 -12.800  11.000  1.00  0.00          AR
+HETATM  999 AR   DUM A 999       4.800 -12.800  13.200  1.00  0.00          AR
+HETATM 1000 AR   DUM A1000       4.800 -12.800  15.400  1.00  0.00          AR
+HETATM 1001 AR   DUM A1001       4.800 -12.800  17.600  1.00  0.00          AR
+HETATM 1002 AR   DUM A1002       4.800 -10.600   0.000  1.00  0.00          AR
+HETATM 1003 AR   DUM A1003       4.800 -10.600   2.200  1.00  0.00          AR
+HETATM 1004 AR   DUM A1004       4.800 -10.600   4.400  1.00  0.00          AR
+HETATM 1005 AR   DUM A1005       4.800 -10.600   6.600  1.00  0.00          AR
+HETATM 1006 AR   DUM A1006       4.800 -10.600   8.800  1.00  0.00          AR
+HETATM 1007 AR   DUM A1007       4.800 -10.600  11.000  1.00  0.00          AR
+HETATM 1008 AR   DUM A1008       4.800 -10.600  13.200  1.00  0.00          AR
+HETATM 1009 AR   DUM A1009       4.800 -10.600  15.400  1.00  0.00          AR
+HETATM 1010 AR   DUM A1010       4.800 -10.600  17.600  1.00  0.00          AR
+HETATM 1011 AR   DUM A1011       4.800  -8.400   0.000  1.00  0.00          AR
+HETATM 1012 AR   DUM A1012       4.800  -8.400   2.200  1.00  0.00          AR
+HETATM 1013 AR   DUM A1013       4.800  -8.400   4.400  1.00  0.00          AR
+HETATM 1014 AR   DUM A1014       4.800  -8.400   6.600  1.00  0.00          AR
+HETATM 1015 AR   DUM A1015       4.800  -8.400   8.800  1.00  0.00          AR
+HETATM 1016 AR   DUM A1016       4.800  -8.400  11.000  1.00  0.00          AR
+HETATM 1017 AR   DUM A1017       4.800  -8.400  13.200  1.00  0.00          AR
+HETATM 1018 AR   DUM A1018       4.800  -8.400  15.400  1.00  0.00          AR
+HETATM 1019 AR   DUM A1019       4.800  -8.400  17.600  1.00  0.00          AR
+HETATM 1020 AR   DUM A1020       4.800  -6.200   0.000  1.00  0.00          AR
+HETATM 1021 AR   DUM A1021       4.800  -6.200   2.200  1.00  0.00          AR
+HETATM 1022 AR   DUM A1022       4.800  -6.200   4.400  1.00  0.00          AR
+HETATM 1023 AR   DUM A1023       4.800  -6.200   6.600  1.00  0.00          AR
+HETATM 1024 AR   DUM A1024       4.800  -6.200   8.800  1.00  0.00          AR
+HETATM 1025 AR   DUM A1025       4.800  -6.200  11.000  1.00  0.00          AR
+HETATM 1026 AR   DUM A1026       4.800  -6.200  13.200  1.00  0.00          AR
+HETATM 1027 AR   DUM A1027       4.800  -4.000   0.000  1.00  0.00          AR
+HETATM 1028 AR   DUM A1028       4.800  -4.000   2.200  1.00  0.00          AR
+HETATM 1029 AR   DUM A1029       4.800  -4.000   4.400  1.00  0.00          AR
+HETATM 1030 AR   DUM A1030       4.800  -4.000   6.600  1.00  0.00          AR
+HETATM 1031 AR   DUM A1031       4.800  -4.000   8.800  1.00  0.00          AR
+HETATM 1032 AR   DUM A1032       4.800  -4.000  11.000  1.00  0.00          AR
+HETATM 1033 AR   DUM A1033       4.800  -1.800   0.000  1.00  0.00          AR
+HETATM 1034 AR   DUM A1034       4.800  -1.800   2.200  1.00  0.00          AR
+HETATM 1035 AR   DUM A1035       4.800  -1.800   4.400  1.00  0.00          AR
+HETATM 1036 AR   DUM A1036       4.800  -1.800   6.600  1.00  0.00          AR
+HETATM 1037 AR   DUM A1037       4.800  -1.800   8.800  1.00  0.00          AR
+HETATM 1038 AR   DUM A1038       4.800   0.400   0.000  1.00  0.00          AR
+HETATM 1039 AR   DUM A1039       4.800   0.400   2.200  1.00  0.00          AR
+HETATM 1040 AR   DUM A1040       4.800   0.400   4.400  1.00  0.00          AR
+HETATM 1041 AR   DUM A1041       4.800   0.400   6.600  1.00  0.00          AR
+HETATM 1042 AR   DUM A1042       4.800   2.600   0.000  1.00  0.00          AR
+HETATM 1043 AR   DUM A1043       4.800   2.600   2.200  1.00  0.00          AR
+HETATM 1044 AR   DUM A1044       4.800   2.600   4.400  1.00  0.00          AR
+HETATM 1045 AR   DUM A1045       4.800   2.600   6.600  1.00  0.00          AR
+HETATM 1046 AR   DUM A1046       4.800   2.600   8.800  1.00  0.00          AR
+HETATM 1047 AR   DUM A1047       4.800   4.800   0.000  1.00  0.00          AR
+HETATM 1048 AR   DUM A1048       4.800   4.800   2.200  1.00  0.00          AR
+HETATM 1049 AR   DUM A1049       4.800   4.800   4.400  1.00  0.00          AR
+HETATM 1050 AR   DUM A1050       4.800   4.800   6.600  1.00  0.00          AR
+HETATM 1051 AR   DUM A1051       4.800   4.800   8.800  1.00  0.00          AR
+HETATM 1052 AR   DUM A1052       4.800   4.800  11.000  1.00  0.00          AR
+HETATM 1053 AR   DUM A1053       4.800   7.000   0.000  1.00  0.00          AR
+HETATM 1054 AR   DUM A1054       4.800   7.000   2.200  1.00  0.00          AR
+HETATM 1055 AR   DUM A1055       4.800   7.000   4.400  1.00  0.00          AR
+HETATM 1056 AR   DUM A1056       4.800   7.000   6.600  1.00  0.00          AR
+HETATM 1057 AR   DUM A1057       4.800   7.000   8.800  1.00  0.00          AR
+HETATM 1058 AR   DUM A1058       4.800   7.000  11.000  1.00  0.00          AR
+HETATM 1059 AR   DUM A1059       4.800   7.000  13.200  1.00  0.00          AR
+HETATM 1060 AR   DUM A1060       4.800   7.000  15.400  1.00  0.00          AR
+HETATM 1061 AR   DUM A1061       4.800   9.200   0.000  1.00  0.00          AR
+HETATM 1062 AR   DUM A1062       4.800   9.200   2.200  1.00  0.00          AR
+HETATM 1063 AR   DUM A1063       4.800   9.200   4.400  1.00  0.00          AR
+HETATM 1064 AR   DUM A1064       4.800   9.200   6.600  1.00  0.00          AR
+HETATM 1065 AR   DUM A1065       4.800   9.200   8.800  1.00  0.00          AR
+HETATM 1066 AR   DUM A1066       4.800   9.200  11.000  1.00  0.00          AR
+HETATM 1067 AR   DUM A1067       4.800   9.200  13.200  1.00  0.00          AR
+HETATM 1068 AR   DUM A1068       4.800   9.200  15.400  1.00  0.00          AR
+HETATM 1069 AR   DUM A1069       4.800   9.200  17.600  1.00  0.00          AR
+HETATM 1070 AR   DUM A1070       4.800  11.400   0.000  1.00  0.00          AR
+HETATM 1071 AR   DUM A1071       4.800  11.400   2.200  1.00  0.00          AR
+HETATM 1072 AR   DUM A1072       4.800  11.400   4.400  1.00  0.00          AR
+HETATM 1073 AR   DUM A1073       4.800  11.400   6.600  1.00  0.00          AR
+HETATM 1074 AR   DUM A1074       4.800  11.400   8.800  1.00  0.00          AR
+HETATM 1075 AR   DUM A1075       4.800  11.400  11.000  1.00  0.00          AR
+HETATM 1076 AR   DUM A1076       4.800  11.400  13.200  1.00  0.00          AR
+HETATM 1077 AR   DUM A1077       4.800  11.400  15.400  1.00  0.00          AR
+HETATM 1078 AR   DUM A1078       4.800  11.400  17.600  1.00  0.00          AR
+HETATM 1079 AR   DUM A1079       4.800  13.600   0.000  1.00  0.00          AR
+HETATM 1080 AR   DUM A1080       4.800  13.600   2.200  1.00  0.00          AR
+HETATM 1081 AR   DUM A1081       4.800  13.600   4.400  1.00  0.00          AR
+HETATM 1082 AR   DUM A1082       4.800  13.600   6.600  1.00  0.00          AR
+HETATM 1083 AR   DUM A1083       4.800  13.600   8.800  1.00  0.00          AR
+HETATM 1084 AR   DUM A1084       4.800  13.600  11.000  1.00  0.00          AR
+HETATM 1085 AR   DUM A1085       4.800  13.600  13.200  1.00  0.00          AR
+HETATM 1086 AR   DUM A1086       4.800  13.600  15.400  1.00  0.00          AR
+HETATM 1087 AR   DUM A1087       4.800  13.600  17.600  1.00  0.00          AR
+HETATM 1088 AR   DUM A1088       7.000 -15.000   0.000  1.00  0.00          AR
+HETATM 1089 AR   DUM A1089       7.000 -15.000   2.200  1.00  0.00          AR
+HETATM 1090 AR   DUM A1090       7.000 -15.000   4.400  1.00  0.00          AR
+HETATM 1091 AR   DUM A1091       7.000 -15.000   6.600  1.00  0.00          AR
+HETATM 1092 AR   DUM A1092       7.000 -15.000   8.800  1.00  0.00          AR
+HETATM 1093 AR   DUM A1093       7.000 -15.000  11.000  1.00  0.00          AR
+HETATM 1094 AR   DUM A1094       7.000 -15.000  13.200  1.00  0.00          AR
+HETATM 1095 AR   DUM A1095       7.000 -15.000  15.400  1.00  0.00          AR
+HETATM 1096 AR   DUM A1096       7.000 -15.000  17.600  1.00  0.00          AR
+HETATM 1097 AR   DUM A1097       7.000 -12.800   0.000  1.00  0.00          AR
+HETATM 1098 AR   DUM A1098       7.000 -12.800   2.200  1.00  0.00          AR
+HETATM 1099 AR   DUM A1099       7.000 -12.800   4.400  1.00  0.00          AR
+HETATM 1100 AR   DUM A1100       7.000 -12.800   6.600  1.00  0.00          AR
+HETATM 1101 AR   DUM A1101       7.000 -12.800   8.800  1.00  0.00          AR
+HETATM 1102 AR   DUM A1102       7.000 -12.800  11.000  1.00  0.00          AR
+HETATM 1103 AR   DUM A1103       7.000 -12.800  13.200  1.00  0.00          AR
+HETATM 1104 AR   DUM A1104       7.000 -12.800  15.400  1.00  0.00          AR
+HETATM 1105 AR   DUM A1105       7.000 -12.800  17.600  1.00  0.00          AR
+HETATM 1106 AR   DUM A1106       7.000 -10.600   0.000  1.00  0.00          AR
+HETATM 1107 AR   DUM A1107       7.000 -10.600   2.200  1.00  0.00          AR
+HETATM 1108 AR   DUM A1108       7.000 -10.600   4.400  1.00  0.00          AR
+HETATM 1109 AR   DUM A1109       7.000 -10.600   6.600  1.00  0.00          AR
+HETATM 1110 AR   DUM A1110       7.000 -10.600   8.800  1.00  0.00          AR
+HETATM 1111 AR   DUM A1111       7.000 -10.600  11.000  1.00  0.00          AR
+HETATM 1112 AR   DUM A1112       7.000 -10.600  13.200  1.00  0.00          AR
+HETATM 1113 AR   DUM A1113       7.000 -10.600  15.400  1.00  0.00          AR
+HETATM 1114 AR   DUM A1114       7.000 -10.600  17.600  1.00  0.00          AR
+HETATM 1115 AR   DUM A1115       7.000  -8.400   0.000  1.00  0.00          AR
+HETATM 1116 AR   DUM A1116       7.000  -8.400   2.200  1.00  0.00          AR
+HETATM 1117 AR   DUM A1117       7.000  -8.400   4.400  1.00  0.00          AR
+HETATM 1118 AR   DUM A1118       7.000  -8.400   6.600  1.00  0.00          AR
+HETATM 1119 AR   DUM A1119       7.000  -8.400   8.800  1.00  0.00          AR
+HETATM 1120 AR   DUM A1120       7.000  -8.400  11.000  1.00  0.00          AR
+HETATM 1121 AR   DUM A1121       7.000  -8.400  13.200  1.00  0.00          AR
+HETATM 1122 AR   DUM A1122       7.000  -8.400  15.400  1.00  0.00          AR
+HETATM 1123 AR   DUM A1123       7.000  -8.400  17.600  1.00  0.00          AR
+HETATM 1124 AR   DUM A1124       7.000  -6.200   0.000  1.00  0.00          AR
+HETATM 1125 AR   DUM A1125       7.000  -6.200   2.200  1.00  0.00          AR
+HETATM 1126 AR   DUM A1126       7.000  -6.200   4.400  1.00  0.00          AR
+HETATM 1127 AR   DUM A1127       7.000  -6.200   6.600  1.00  0.00          AR
+HETATM 1128 AR   DUM A1128       7.000  -6.200   8.800  1.00  0.00          AR
+HETATM 1129 AR   DUM A1129       7.000  -6.200  11.000  1.00  0.00          AR
+HETATM 1130 AR   DUM A1130       7.000  -6.200  13.200  1.00  0.00          AR
+HETATM 1131 AR   DUM A1131       7.000  -6.200  15.400  1.00  0.00          AR
+HETATM 1132 AR   DUM A1132       7.000  -6.200  17.600  1.00  0.00          AR
+HETATM 1133 AR   DUM A1133       7.000  -4.000   0.000  1.00  0.00          AR
+HETATM 1134 AR   DUM A1134       7.000  -4.000   2.200  1.00  0.00          AR
+HETATM 1135 AR   DUM A1135       7.000  -4.000   4.400  1.00  0.00          AR
+HETATM 1136 AR   DUM A1136       7.000  -4.000   6.600  1.00  0.00          AR
+HETATM 1137 AR   DUM A1137       7.000  -4.000   8.800  1.00  0.00          AR
+HETATM 1138 AR   DUM A1138       7.000  -4.000  11.000  1.00  0.00          AR
+HETATM 1139 AR   DUM A1139       7.000  -4.000  13.200  1.00  0.00          AR
+HETATM 1140 AR   DUM A1140       7.000  -4.000  15.400  1.00  0.00          AR
+HETATM 1141 AR   DUM A1141       7.000  -1.800   0.000  1.00  0.00          AR
+HETATM 1142 AR   DUM A1142       7.000  -1.800   2.200  1.00  0.00          AR
+HETATM 1143 AR   DUM A1143       7.000  -1.800   4.400  1.00  0.00          AR
+HETATM 1144 AR   DUM A1144       7.000  -1.800   6.600  1.00  0.00          AR
+HETATM 1145 AR   DUM A1145       7.000  -1.800   8.800  1.00  0.00          AR
+HETATM 1146 AR   DUM A1146       7.000  -1.800  11.000  1.00  0.00          AR
+HETATM 1147 AR   DUM A1147       7.000  -1.800  13.200  1.00  0.00          AR
+HETATM 1148 AR   DUM A1148       7.000   0.400   0.000  1.00  0.00          AR
+HETATM 1149 AR   DUM A1149       7.000   0.400   2.200  1.00  0.00          AR
+HETATM 1150 AR   DUM A1150       7.000   0.400   4.400  1.00  0.00          AR
+HETATM 1151 AR   DUM A1151       7.000   0.400   6.600  1.00  0.00          AR
+HETATM 1152 AR   DUM A1152       7.000   0.400   8.800  1.00  0.00          AR
+HETATM 1153 AR   DUM A1153       7.000   0.400  11.000  1.00  0.00          AR
+HETATM 1154 AR   DUM A1154       7.000   0.400  13.200  1.00  0.00          AR
+HETATM 1155 AR   DUM A1155       7.000   2.600   0.000  1.00  0.00          AR
+HETATM 1156 AR   DUM A1156       7.000   2.600   2.200  1.00  0.00          AR
+HETATM 1157 AR   DUM A1157       7.000   2.600   4.400  1.00  0.00          AR
+HETATM 1158 AR   DUM A1158       7.000   2.600   6.600  1.00  0.00          AR
+HETATM 1159 AR   DUM A1159       7.000   2.600   8.800  1.00  0.00          AR
+HETATM 1160 AR   DUM A1160       7.000   2.600  11.000  1.00  0.00          AR
+HETATM 1161 AR   DUM A1161       7.000   2.600  13.200  1.00  0.00          AR
+HETATM 1162 AR   DUM A1162       7.000   4.800   0.000  1.00  0.00          AR
+HETATM 1163 AR   DUM A1163       7.000   4.800   2.200  1.00  0.00          AR
+HETATM 1164 AR   DUM A1164       7.000   4.800   4.400  1.00  0.00          AR
+HETATM 1165 AR   DUM A1165       7.000   4.800   6.600  1.00  0.00          AR
+HETATM 1166 AR   DUM A1166       7.000   4.800   8.800  1.00  0.00          AR
+HETATM 1167 AR   DUM A1167       7.000   4.800  11.000  1.00  0.00          AR
+HETATM 1168 AR   DUM A1168       7.000   4.800  13.200  1.00  0.00          AR
+HETATM 1169 AR   DUM A1169       7.000   4.800  15.400  1.00  0.00          AR
+HETATM 1170 AR   DUM A1170       7.000   7.000   0.000  1.00  0.00          AR
+HETATM 1171 AR   DUM A1171       7.000   7.000   2.200  1.00  0.00          AR
+HETATM 1172 AR   DUM A1172       7.000   7.000   4.400  1.00  0.00          AR
+HETATM 1173 AR   DUM A1173       7.000   7.000   6.600  1.00  0.00          AR
+HETATM 1174 AR   DUM A1174       7.000   7.000   8.800  1.00  0.00          AR
+HETATM 1175 AR   DUM A1175       7.000   7.000  11.000  1.00  0.00          AR
+HETATM 1176 AR   DUM A1176       7.000   7.000  13.200  1.00  0.00          AR
+HETATM 1177 AR   DUM A1177       7.000   7.000  15.400  1.00  0.00          AR
+HETATM 1178 AR   DUM A1178       7.000   7.000  17.600  1.00  0.00          AR
+HETATM 1179 AR   DUM A1179       7.000   9.200   0.000  1.00  0.00          AR
+HETATM 1180 AR   DUM A1180       7.000   9.200   2.200  1.00  0.00          AR
+HETATM 1181 AR   DUM A1181       7.000   9.200   4.400  1.00  0.00          AR
+HETATM 1182 AR   DUM A1182       7.000   9.200   6.600  1.00  0.00          AR
+HETATM 1183 AR   DUM A1183       7.000   9.200   8.800  1.00  0.00          AR
+HETATM 1184 AR   DUM A1184       7.000   9.200  11.000  1.00  0.00          AR
+HETATM 1185 AR   DUM A1185       7.000   9.200  13.200  1.00  0.00          AR
+HETATM 1186 AR   DUM A1186       7.000   9.200  15.400  1.00  0.00          AR
+HETATM 1187 AR   DUM A1187       7.000   9.200  17.600  1.00  0.00          AR
+HETATM 1188 AR   DUM A1188       7.000  11.400   0.000  1.00  0.00          AR
+HETATM 1189 AR   DUM A1189       7.000  11.400   2.200  1.00  0.00          AR
+HETATM 1190 AR   DUM A1190       7.000  11.400   4.400  1.00  0.00          AR
+HETATM 1191 AR   DUM A1191       7.000  11.400   6.600  1.00  0.00          AR
+HETATM 1192 AR   DUM A1192       7.000  11.400   8.800  1.00  0.00          AR
+HETATM 1193 AR   DUM A1193       7.000  11.400  11.000  1.00  0.00          AR
+HETATM 1194 AR   DUM A1194       7.000  11.400  13.200  1.00  0.00          AR
+HETATM 1195 AR   DUM A1195       7.000  11.400  15.400  1.00  0.00          AR
+HETATM 1196 AR   DUM A1196       7.000  11.400  17.600  1.00  0.00          AR
+HETATM 1197 AR   DUM A1197       7.000  13.600   0.000  1.00  0.00          AR
+HETATM 1198 AR   DUM A1198       7.000  13.600   2.200  1.00  0.00          AR
+HETATM 1199 AR   DUM A1199       7.000  13.600   4.400  1.00  0.00          AR
+HETATM 1200 AR   DUM A1200       7.000  13.600   6.600  1.00  0.00          AR
+HETATM 1201 AR   DUM A1201       7.000  13.600   8.800  1.00  0.00          AR
+HETATM 1202 AR   DUM A1202       7.000  13.600  11.000  1.00  0.00          AR
+HETATM 1203 AR   DUM A1203       7.000  13.600  13.200  1.00  0.00          AR
+HETATM 1204 AR   DUM A1204       7.000  13.600  15.400  1.00  0.00          AR
+HETATM 1205 AR   DUM A1205       7.000  13.600  17.600  1.00  0.00          AR
+HETATM 1206 AR   DUM A1206       9.200 -15.000   0.000  1.00  0.00          AR
+HETATM 1207 AR   DUM A1207       9.200 -15.000   2.200  1.00  0.00          AR
+HETATM 1208 AR   DUM A1208       9.200 -15.000   4.400  1.00  0.00          AR
+HETATM 1209 AR   DUM A1209       9.200 -15.000   6.600  1.00  0.00          AR
+HETATM 1210 AR   DUM A1210       9.200 -15.000   8.800  1.00  0.00          AR
+HETATM 1211 AR   DUM A1211       9.200 -15.000  11.000  1.00  0.00          AR
+HETATM 1212 AR   DUM A1212       9.200 -15.000  13.200  1.00  0.00          AR
+HETATM 1213 AR   DUM A1213       9.200 -15.000  15.400  1.00  0.00          AR
+HETATM 1214 AR   DUM A1214       9.200 -15.000  17.600  1.00  0.00          AR
+HETATM 1215 AR   DUM A1215       9.200 -12.800   0.000  1.00  0.00          AR
+HETATM 1216 AR   DUM A1216       9.200 -12.800   2.200  1.00  0.00          AR
+HETATM 1217 AR   DUM A1217       9.200 -12.800   4.400  1.00  0.00          AR
+HETATM 1218 AR   DUM A1218       9.200 -12.800   6.600  1.00  0.00          AR
+HETATM 1219 AR   DUM A1219       9.200 -12.800   8.800  1.00  0.00          AR
+HETATM 1220 AR   DUM A1220       9.200 -12.800  11.000  1.00  0.00          AR
+HETATM 1221 AR   DUM A1221       9.200 -12.800  13.200  1.00  0.00          AR
+HETATM 1222 AR   DUM A1222       9.200 -12.800  15.400  1.00  0.00          AR
+HETATM 1223 AR   DUM A1223       9.200 -12.800  17.600  1.00  0.00          AR
+HETATM 1224 AR   DUM A1224       9.200 -10.600   0.000  1.00  0.00          AR
+HETATM 1225 AR   DUM A1225       9.200 -10.600   2.200  1.00  0.00          AR
+HETATM 1226 AR   DUM A1226       9.200 -10.600   4.400  1.00  0.00          AR
+HETATM 1227 AR   DUM A1227       9.200 -10.600   6.600  1.00  0.00          AR
+HETATM 1228 AR   DUM A1228       9.200 -10.600   8.800  1.00  0.00          AR
+HETATM 1229 AR   DUM A1229       9.200 -10.600  11.000  1.00  0.00          AR
+HETATM 1230 AR   DUM A1230       9.200 -10.600  13.200  1.00  0.00          AR
+HETATM 1231 AR   DUM A1231       9.200 -10.600  15.400  1.00  0.00          AR
+HETATM 1232 AR   DUM A1232       9.200 -10.600  17.600  1.00  0.00          AR
+HETATM 1233 AR   DUM A1233       9.200  -8.400   0.000  1.00  0.00          AR
+HETATM 1234 AR   DUM A1234       9.200  -8.400   2.200  1.00  0.00          AR
+HETATM 1235 AR   DUM A1235       9.200  -8.400   4.400  1.00  0.00          AR
+HETATM 1236 AR   DUM A1236       9.200  -8.400   6.600  1.00  0.00          AR
+HETATM 1237 AR   DUM A1237       9.200  -8.400   8.800  1.00  0.00          AR
+HETATM 1238 AR   DUM A1238       9.200  -8.400  11.000  1.00  0.00          AR
+HETATM 1239 AR   DUM A1239       9.200  -8.400  13.200  1.00  0.00          AR
+HETATM 1240 AR   DUM A1240       9.200  -8.400  15.400  1.00  0.00          AR
+HETATM 1241 AR   DUM A1241       9.200  -8.400  17.600  1.00  0.00          AR
+HETATM 1242 AR   DUM A1242       9.200  -6.200   0.000  1.00  0.00          AR
+HETATM 1243 AR   DUM A1243       9.200  -6.200   2.200  1.00  0.00          AR
+HETATM 1244 AR   DUM A1244       9.200  -6.200   4.400  1.00  0.00          AR
+HETATM 1245 AR   DUM A1245       9.200  -6.200   6.600  1.00  0.00          AR
+HETATM 1246 AR   DUM A1246       9.200  -6.200   8.800  1.00  0.00          AR
+HETATM 1247 AR   DUM A1247       9.200  -6.200  11.000  1.00  0.00          AR
+HETATM 1248 AR   DUM A1248       9.200  -6.200  13.200  1.00  0.00          AR
+HETATM 1249 AR   DUM A1249       9.200  -6.200  15.400  1.00  0.00          AR
+HETATM 1250 AR   DUM A1250       9.200  -6.200  17.600  1.00  0.00          AR
+HETATM 1251 AR   DUM A1251       9.200  -4.000   0.000  1.00  0.00          AR
+HETATM 1252 AR   DUM A1252       9.200  -4.000   2.200  1.00  0.00          AR
+HETATM 1253 AR   DUM A1253       9.200  -4.000   4.400  1.00  0.00          AR
+HETATM 1254 AR   DUM A1254       9.200  -4.000   6.600  1.00  0.00          AR
+HETATM 1255 AR   DUM A1255       9.200  -4.000   8.800  1.00  0.00          AR
+HETATM 1256 AR   DUM A1256       9.200  -4.000  11.000  1.00  0.00          AR
+HETATM 1257 AR   DUM A1257       9.200  -4.000  13.200  1.00  0.00          AR
+HETATM 1258 AR   DUM A1258       9.200  -4.000  15.400  1.00  0.00          AR
+HETATM 1259 AR   DUM A1259       9.200  -4.000  17.600  1.00  0.00          AR
+HETATM 1260 AR   DUM A1260       9.200  -1.800   0.000  1.00  0.00          AR
+HETATM 1261 AR   DUM A1261       9.200  -1.800   2.200  1.00  0.00          AR
+HETATM 1262 AR   DUM A1262       9.200  -1.800   4.400  1.00  0.00          AR
+HETATM 1263 AR   DUM A1263       9.200  -1.800   6.600  1.00  0.00          AR
+HETATM 1264 AR   DUM A1264       9.200  -1.800   8.800  1.00  0.00          AR
+HETATM 1265 AR   DUM A1265       9.200  -1.800  11.000  1.00  0.00          AR
+HETATM 1266 AR   DUM A1266       9.200  -1.800  13.200  1.00  0.00          AR
+HETATM 1267 AR   DUM A1267       9.200  -1.800  15.400  1.00  0.00          AR
+HETATM 1268 AR   DUM A1268       9.200  -1.800  17.600  1.00  0.00          AR
+HETATM 1269 AR   DUM A1269       9.200   0.400   0.000  1.00  0.00          AR
+HETATM 1270 AR   DUM A1270       9.200   0.400   2.200  1.00  0.00          AR
+HETATM 1271 AR   DUM A1271       9.200   0.400   4.400  1.00  0.00          AR
+HETATM 1272 AR   DUM A1272       9.200   0.400   6.600  1.00  0.00          AR
+HETATM 1273 AR   DUM A1273       9.200   0.400   8.800  1.00  0.00          AR
+HETATM 1274 AR   DUM A1274       9.200   0.400  11.000  1.00  0.00          AR
+HETATM 1275 AR   DUM A1275       9.200   0.400  13.200  1.00  0.00          AR
+HETATM 1276 AR   DUM A1276       9.200   0.400  15.400  1.00  0.00          AR
+HETATM 1277 AR   DUM A1277       9.200   0.400  17.600  1.00  0.00          AR
+HETATM 1278 AR   DUM A1278       9.200   2.600   0.000  1.00  0.00          AR
+HETATM 1279 AR   DUM A1279       9.200   2.600   2.200  1.00  0.00          AR
+HETATM 1280 AR   DUM A1280       9.200   2.600   4.400  1.00  0.00          AR
+HETATM 1281 AR   DUM A1281       9.200   2.600   6.600  1.00  0.00          AR
+HETATM 1282 AR   DUM A1282       9.200   2.600   8.800  1.00  0.00          AR
+HETATM 1283 AR   DUM A1283       9.200   2.600  11.000  1.00  0.00          AR
+HETATM 1284 AR   DUM A1284       9.200   2.600  13.200  1.00  0.00          AR
+HETATM 1285 AR   DUM A1285       9.200   2.600  15.400  1.00  0.00          AR
+HETATM 1286 AR   DUM A1286       9.200   2.600  17.600  1.00  0.00          AR
+HETATM 1287 AR   DUM A1287       9.200   4.800   0.000  1.00  0.00          AR
+HETATM 1288 AR   DUM A1288       9.200   4.800   2.200  1.00  0.00          AR
+HETATM 1289 AR   DUM A1289       9.200   4.800   4.400  1.00  0.00          AR
+HETATM 1290 AR   DUM A1290       9.200   4.800   6.600  1.00  0.00          AR
+HETATM 1291 AR   DUM A1291       9.200   4.800   8.800  1.00  0.00          AR
+HETATM 1292 AR   DUM A1292       9.200   4.800  11.000  1.00  0.00          AR
+HETATM 1293 AR   DUM A1293       9.200   4.800  13.200  1.00  0.00          AR
+HETATM 1294 AR   DUM A1294       9.200   4.800  15.400  1.00  0.00          AR
+HETATM 1295 AR   DUM A1295       9.200   4.800  17.600  1.00  0.00          AR
+HETATM 1296 AR   DUM A1296       9.200   7.000   0.000  1.00  0.00          AR
+HETATM 1297 AR   DUM A1297       9.200   7.000   2.200  1.00  0.00          AR
+HETATM 1298 AR   DUM A1298       9.200   7.000   4.400  1.00  0.00          AR
+HETATM 1299 AR   DUM A1299       9.200   7.000   6.600  1.00  0.00          AR
+HETATM 1300 AR   DUM A1300       9.200   7.000   8.800  1.00  0.00          AR
+HETATM 1301 AR   DUM A1301       9.200   7.000  11.000  1.00  0.00          AR
+HETATM 1302 AR   DUM A1302       9.200   7.000  13.200  1.00  0.00          AR
+HETATM 1303 AR   DUM A1303       9.200   7.000  15.400  1.00  0.00          AR
+HETATM 1304 AR   DUM A1304       9.200   7.000  17.600  1.00  0.00          AR
+HETATM 1305 AR   DUM A1305       9.200   9.200   0.000  1.00  0.00          AR
+HETATM 1306 AR   DUM A1306       9.200   9.200   2.200  1.00  0.00          AR
+HETATM 1307 AR   DUM A1307       9.200   9.200   4.400  1.00  0.00          AR
+HETATM 1308 AR   DUM A1308       9.200   9.200   6.600  1.00  0.00          AR
+HETATM 1309 AR   DUM A1309       9.200   9.200   8.800  1.00  0.00          AR
+HETATM 1310 AR   DUM A1310       9.200   9.200  11.000  1.00  0.00          AR
+HETATM 1311 AR   DUM A1311       9.200   9.200  13.200  1.00  0.00          AR
+HETATM 1312 AR   DUM A1312       9.200   9.200  15.400  1.00  0.00          AR
+HETATM 1313 AR   DUM A1313       9.200   9.200  17.600  1.00  0.00          AR
+HETATM 1314 AR   DUM A1314       9.200  11.400   0.000  1.00  0.00          AR
+HETATM 1315 AR   DUM A1315       9.200  11.400   2.200  1.00  0.00          AR
+HETATM 1316 AR   DUM A1316       9.200  11.400   4.400  1.00  0.00          AR
+HETATM 1317 AR   DUM A1317       9.200  11.400   6.600  1.00  0.00          AR
+HETATM 1318 AR   DUM A1318       9.200  11.400   8.800  1.00  0.00          AR
+HETATM 1319 AR   DUM A1319       9.200  11.400  11.000  1.00  0.00          AR
+HETATM 1320 AR   DUM A1320       9.200  11.400  13.200  1.00  0.00          AR
+HETATM 1321 AR   DUM A1321       9.200  11.400  15.400  1.00  0.00          AR
+HETATM 1322 AR   DUM A1322       9.200  11.400  17.600  1.00  0.00          AR
+HETATM 1323 AR   DUM A1323       9.200  13.600   0.000  1.00  0.00          AR
+HETATM 1324 AR   DUM A1324       9.200  13.600   2.200  1.00  0.00          AR
+HETATM 1325 AR   DUM A1325       9.200  13.600   4.400  1.00  0.00          AR
+HETATM 1326 AR   DUM A1326       9.200  13.600   6.600  1.00  0.00          AR
+HETATM 1327 AR   DUM A1327       9.200  13.600   8.800  1.00  0.00          AR
+HETATM 1328 AR   DUM A1328       9.200  13.600  11.000  1.00  0.00          AR
+HETATM 1329 AR   DUM A1329       9.200  13.600  13.200  1.00  0.00          AR
+HETATM 1330 AR   DUM A1330       9.200  13.600  15.400  1.00  0.00          AR
+HETATM 1331 AR   DUM A1331       9.200  13.600  17.600  1.00  0.00          AR
+HETATM 1332 AR   DUM A1332      11.400 -15.000   0.000  1.00  0.00          AR
+HETATM 1333 AR   DUM A1333      11.400 -15.000   2.200  1.00  0.00          AR
+HETATM 1334 AR   DUM A1334      11.400 -15.000   4.400  1.00  0.00          AR
+HETATM 1335 AR   DUM A1335      11.400 -15.000   6.600  1.00  0.00          AR
+HETATM 1336 AR   DUM A1336      11.400 -15.000   8.800  1.00  0.00          AR
+HETATM 1337 AR   DUM A1337      11.400 -15.000  11.000  1.00  0.00          AR
+HETATM 1338 AR   DUM A1338      11.400 -15.000  13.200  1.00  0.00          AR
+HETATM 1339 AR   DUM A1339      11.400 -15.000  15.400  1.00  0.00          AR
+HETATM 1340 AR   DUM A1340      11.400 -15.000  17.600  1.00  0.00          AR
+HETATM 1341 AR   DUM A1341      11.400 -12.800   0.000  1.00  0.00          AR
+HETATM 1342 AR   DUM A1342      11.400 -12.800   2.200  1.00  0.00          AR
+HETATM 1343 AR   DUM A1343      11.400 -12.800   4.400  1.00  0.00          AR
+HETATM 1344 AR   DUM A1344      11.400 -12.800   6.600  1.00  0.00          AR
+HETATM 1345 AR   DUM A1345      11.400 -12.800   8.800  1.00  0.00          AR
+HETATM 1346 AR   DUM A1346      11.400 -12.800  11.000  1.00  0.00          AR
+HETATM 1347 AR   DUM A1347      11.400 -12.800  13.200  1.00  0.00          AR
+HETATM 1348 AR   DUM A1348      11.400 -12.800  15.400  1.00  0.00          AR
+HETATM 1349 AR   DUM A1349      11.400 -12.800  17.600  1.00  0.00          AR
+HETATM 1350 AR   DUM A1350      11.400 -10.600   0.000  1.00  0.00          AR
+HETATM 1351 AR   DUM A1351      11.400 -10.600   2.200  1.00  0.00          AR
+HETATM 1352 AR   DUM A1352      11.400 -10.600   4.400  1.00  0.00          AR
+HETATM 1353 AR   DUM A1353      11.400 -10.600   6.600  1.00  0.00          AR
+HETATM 1354 AR   DUM A1354      11.400 -10.600   8.800  1.00  0.00          AR
+HETATM 1355 AR   DUM A1355      11.400 -10.600  11.000  1.00  0.00          AR
+HETATM 1356 AR   DUM A1356      11.400 -10.600  13.200  1.00  0.00          AR
+HETATM 1357 AR   DUM A1357      11.400 -10.600  15.400  1.00  0.00          AR
+HETATM 1358 AR   DUM A1358      11.400 -10.600  17.600  1.00  0.00          AR
+HETATM 1359 AR   DUM A1359      11.400  -8.400   0.000  1.00  0.00          AR
+HETATM 1360 AR   DUM A1360      11.400  -8.400   2.200  1.00  0.00          AR
+HETATM 1361 AR   DUM A1361      11.400  -8.400   4.400  1.00  0.00          AR
+HETATM 1362 AR   DUM A1362      11.400  -8.400   6.600  1.00  0.00          AR
+HETATM 1363 AR   DUM A1363      11.400  -8.400   8.800  1.00  0.00          AR
+HETATM 1364 AR   DUM A1364      11.400  -8.400  11.000  1.00  0.00          AR
+HETATM 1365 AR   DUM A1365      11.400  -8.400  13.200  1.00  0.00          AR
+HETATM 1366 AR   DUM A1366      11.400  -8.400  15.400  1.00  0.00          AR
+HETATM 1367 AR   DUM A1367      11.400  -8.400  17.600  1.00  0.00          AR
+HETATM 1368 AR   DUM A1368      11.400  -6.200   0.000  1.00  0.00          AR
+HETATM 1369 AR   DUM A1369      11.400  -6.200   2.200  1.00  0.00          AR
+HETATM 1370 AR   DUM A1370      11.400  -6.200   4.400  1.00  0.00          AR
+HETATM 1371 AR   DUM A1371      11.400  -6.200   6.600  1.00  0.00          AR
+HETATM 1372 AR   DUM A1372      11.400  -6.200   8.800  1.00  0.00          AR
+HETATM 1373 AR   DUM A1373      11.400  -6.200  11.000  1.00  0.00          AR
+HETATM 1374 AR   DUM A1374      11.400  -6.200  13.200  1.00  0.00          AR
+HETATM 1375 AR   DUM A1375      11.400  -6.200  15.400  1.00  0.00          AR
+HETATM 1376 AR   DUM A1376      11.400  -6.200  17.600  1.00  0.00          AR
+HETATM 1377 AR   DUM A1377      11.400  -4.000   0.000  1.00  0.00          AR
+HETATM 1378 AR   DUM A1378      11.400  -4.000   2.200  1.00  0.00          AR
+HETATM 1379 AR   DUM A1379      11.400  -4.000   4.400  1.00  0.00          AR
+HETATM 1380 AR   DUM A1380      11.400  -4.000   6.600  1.00  0.00          AR
+HETATM 1381 AR   DUM A1381      11.400  -4.000   8.800  1.00  0.00          AR
+HETATM 1382 AR   DUM A1382      11.400  -4.000  11.000  1.00  0.00          AR
+HETATM 1383 AR   DUM A1383      11.400  -4.000  13.200  1.00  0.00          AR
+HETATM 1384 AR   DUM A1384      11.400  -4.000  15.400  1.00  0.00          AR
+HETATM 1385 AR   DUM A1385      11.400  -4.000  17.600  1.00  0.00          AR
+HETATM 1386 AR   DUM A1386      11.400  -1.800   0.000  1.00  0.00          AR
+HETATM 1387 AR   DUM A1387      11.400  -1.800   2.200  1.00  0.00          AR
+HETATM 1388 AR   DUM A1388      11.400  -1.800   4.400  1.00  0.00          AR
+HETATM 1389 AR   DUM A1389      11.400  -1.800   6.600  1.00  0.00          AR
+HETATM 1390 AR   DUM A1390      11.400  -1.800   8.800  1.00  0.00          AR
+HETATM 1391 AR   DUM A1391      11.400  -1.800  11.000  1.00  0.00          AR
+HETATM 1392 AR   DUM A1392      11.400  -1.800  13.200  1.00  0.00          AR
+HETATM 1393 AR   DUM A1393      11.400  -1.800  15.400  1.00  0.00          AR
+HETATM 1394 AR   DUM A1394      11.400  -1.800  17.600  1.00  0.00          AR
+HETATM 1395 AR   DUM A1395      11.400   0.400   0.000  1.00  0.00          AR
+HETATM 1396 AR   DUM A1396      11.400   0.400   2.200  1.00  0.00          AR
+HETATM 1397 AR   DUM A1397      11.400   0.400   4.400  1.00  0.00          AR
+HETATM 1398 AR   DUM A1398      11.400   0.400   6.600  1.00  0.00          AR
+HETATM 1399 AR   DUM A1399      11.400   0.400   8.800  1.00  0.00          AR
+HETATM 1400 AR   DUM A1400      11.400   0.400  11.000  1.00  0.00          AR
+HETATM 1401 AR   DUM A1401      11.400   0.400  13.200  1.00  0.00          AR
+HETATM 1402 AR   DUM A1402      11.400   0.400  15.400  1.00  0.00          AR
+HETATM 1403 AR   DUM A1403      11.400   0.400  17.600  1.00  0.00          AR
+HETATM 1404 AR   DUM A1404      11.400   2.600   0.000  1.00  0.00          AR
+HETATM 1405 AR   DUM A1405      11.400   2.600   2.200  1.00  0.00          AR
+HETATM 1406 AR   DUM A1406      11.400   2.600   4.400  1.00  0.00          AR
+HETATM 1407 AR   DUM A1407      11.400   2.600   6.600  1.00  0.00          AR
+HETATM 1408 AR   DUM A1408      11.400   2.600   8.800  1.00  0.00          AR
+HETATM 1409 AR   DUM A1409      11.400   2.600  11.000  1.00  0.00          AR
+HETATM 1410 AR   DUM A1410      11.400   2.600  13.200  1.00  0.00          AR
+HETATM 1411 AR   DUM A1411      11.400   2.600  15.400  1.00  0.00          AR
+HETATM 1412 AR   DUM A1412      11.400   2.600  17.600  1.00  0.00          AR
+HETATM 1413 AR   DUM A1413      11.400   4.800   0.000  1.00  0.00          AR
+HETATM 1414 AR   DUM A1414      11.400   4.800   2.200  1.00  0.00          AR
+HETATM 1415 AR   DUM A1415      11.400   4.800   4.400  1.00  0.00          AR
+HETATM 1416 AR   DUM A1416      11.400   4.800   6.600  1.00  0.00          AR
+HETATM 1417 AR   DUM A1417      11.400   4.800   8.800  1.00  0.00          AR
+HETATM 1418 AR   DUM A1418      11.400   4.800  11.000  1.00  0.00          AR
+HETATM 1419 AR   DUM A1419      11.400   4.800  13.200  1.00  0.00          AR
+HETATM 1420 AR   DUM A1420      11.400   4.800  15.400  1.00  0.00          AR
+HETATM 1421 AR   DUM A1421      11.400   4.800  17.600  1.00  0.00          AR
+HETATM 1422 AR   DUM A1422      11.400   7.000   0.000  1.00  0.00          AR
+HETATM 1423 AR   DUM A1423      11.400   7.000   2.200  1.00  0.00          AR
+HETATM 1424 AR   DUM A1424      11.400   7.000   4.400  1.00  0.00          AR
+HETATM 1425 AR   DUM A1425      11.400   7.000   6.600  1.00  0.00          AR
+HETATM 1426 AR   DUM A1426      11.400   7.000   8.800  1.00  0.00          AR
+HETATM 1427 AR   DUM A1427      11.400   7.000  11.000  1.00  0.00          AR
+HETATM 1428 AR   DUM A1428      11.400   7.000  13.200  1.00  0.00          AR
+HETATM 1429 AR   DUM A1429      11.400   7.000  15.400  1.00  0.00          AR
+HETATM 1430 AR   DUM A1430      11.400   7.000  17.600  1.00  0.00          AR
+HETATM 1431 AR   DUM A1431      11.400   9.200   0.000  1.00  0.00          AR
+HETATM 1432 AR   DUM A1432      11.400   9.200   2.200  1.00  0.00          AR
+HETATM 1433 AR   DUM A1433      11.400   9.200   4.400  1.00  0.00          AR
+HETATM 1434 AR   DUM A1434      11.400   9.200   6.600  1.00  0.00          AR
+HETATM 1435 AR   DUM A1435      11.400   9.200   8.800  1.00  0.00          AR
+HETATM 1436 AR   DUM A1436      11.400   9.200  11.000  1.00  0.00          AR
+HETATM 1437 AR   DUM A1437      11.400   9.200  13.200  1.00  0.00          AR
+HETATM 1438 AR   DUM A1438      11.400   9.200  15.400  1.00  0.00          AR
+HETATM 1439 AR   DUM A1439      11.400   9.200  17.600  1.00  0.00          AR
+HETATM 1440 AR   DUM A1440      11.400  11.400   0.000  1.00  0.00          AR
+HETATM 1441 AR   DUM A1441      11.400  11.400   2.200  1.00  0.00          AR
+HETATM 1442 AR   DUM A1442      11.400  11.400   4.400  1.00  0.00          AR
+HETATM 1443 AR   DUM A1443      11.400  11.400   6.600  1.00  0.00          AR
+HETATM 1444 AR   DUM A1444      11.400  11.400   8.800  1.00  0.00          AR
+HETATM 1445 AR   DUM A1445      11.400  11.400  11.000  1.00  0.00          AR
+HETATM 1446 AR   DUM A1446      11.400  11.400  13.200  1.00  0.00          AR
+HETATM 1447 AR   DUM A1447      11.400  11.400  15.400  1.00  0.00          AR
+HETATM 1448 AR   DUM A1448      11.400  11.400  17.600  1.00  0.00          AR
+HETATM 1449 AR   DUM A1449      11.400  13.600   0.000  1.00  0.00          AR
+HETATM 1450 AR   DUM A1450      11.400  13.600   2.200  1.00  0.00          AR
+HETATM 1451 AR   DUM A1451      11.400  13.600   4.400  1.00  0.00          AR
+HETATM 1452 AR   DUM A1452      11.400  13.600   6.600  1.00  0.00          AR
+HETATM 1453 AR   DUM A1453      11.400  13.600   8.800  1.00  0.00          AR
+HETATM 1454 AR   DUM A1454      11.400  13.600  11.000  1.00  0.00          AR
+HETATM 1455 AR   DUM A1455      11.400  13.600  13.200  1.00  0.00          AR
+HETATM 1456 AR   DUM A1456      11.400  13.600  15.400  1.00  0.00          AR
+HETATM 1457 AR   DUM A1457      11.400  13.600  17.600  1.00  0.00          AR
+HETATM 1458 AR   DUM A1458      13.600 -15.000   0.000  1.00  0.00          AR
+HETATM 1459 AR   DUM A1459      13.600 -15.000   2.200  1.00  0.00          AR
+HETATM 1460 AR   DUM A1460      13.600 -15.000   4.400  1.00  0.00          AR
+HETATM 1461 AR   DUM A1461      13.600 -15.000   6.600  1.00  0.00          AR
+HETATM 1462 AR   DUM A1462      13.600 -15.000   8.800  1.00  0.00          AR
+HETATM 1463 AR   DUM A1463      13.600 -15.000  11.000  1.00  0.00          AR
+HETATM 1464 AR   DUM A1464      13.600 -15.000  13.200  1.00  0.00          AR
+HETATM 1465 AR   DUM A1465      13.600 -15.000  15.400  1.00  0.00          AR
+HETATM 1466 AR   DUM A1466      13.600 -15.000  17.600  1.00  0.00          AR
+HETATM 1467 AR   DUM A1467      13.600 -12.800   0.000  1.00  0.00          AR
+HETATM 1468 AR   DUM A1468      13.600 -12.800   2.200  1.00  0.00          AR
+HETATM 1469 AR   DUM A1469      13.600 -12.800   4.400  1.00  0.00          AR
+HETATM 1470 AR   DUM A1470      13.600 -12.800   6.600  1.00  0.00          AR
+HETATM 1471 AR   DUM A1471      13.600 -12.800   8.800  1.00  0.00          AR
+HETATM 1472 AR   DUM A1472      13.600 -12.800  11.000  1.00  0.00          AR
+HETATM 1473 AR   DUM A1473      13.600 -12.800  13.200  1.00  0.00          AR
+HETATM 1474 AR   DUM A1474      13.600 -12.800  15.400  1.00  0.00          AR
+HETATM 1475 AR   DUM A1475      13.600 -12.800  17.600  1.00  0.00          AR
+HETATM 1476 AR   DUM A1476      13.600 -10.600   0.000  1.00  0.00          AR
+HETATM 1477 AR   DUM A1477      13.600 -10.600   2.200  1.00  0.00          AR
+HETATM 1478 AR   DUM A1478      13.600 -10.600   4.400  1.00  0.00          AR
+HETATM 1479 AR   DUM A1479      13.600 -10.600   6.600  1.00  0.00          AR
+HETATM 1480 AR   DUM A1480      13.600 -10.600   8.800  1.00  0.00          AR
+HETATM 1481 AR   DUM A1481      13.600 -10.600  11.000  1.00  0.00          AR
+HETATM 1482 AR   DUM A1482      13.600 -10.600  13.200  1.00  0.00          AR
+HETATM 1483 AR   DUM A1483      13.600 -10.600  15.400  1.00  0.00          AR
+HETATM 1484 AR   DUM A1484      13.600 -10.600  17.600  1.00  0.00          AR
+HETATM 1485 AR   DUM A1485      13.600  -8.400   0.000  1.00  0.00          AR
+HETATM 1486 AR   DUM A1486      13.600  -8.400   2.200  1.00  0.00          AR
+HETATM 1487 AR   DUM A1487      13.600  -8.400   4.400  1.00  0.00          AR
+HETATM 1488 AR   DUM A1488      13.600  -8.400   6.600  1.00  0.00          AR
+HETATM 1489 AR   DUM A1489      13.600  -8.400   8.800  1.00  0.00          AR
+HETATM 1490 AR   DUM A1490      13.600  -8.400  11.000  1.00  0.00          AR
+HETATM 1491 AR   DUM A1491      13.600  -8.400  13.200  1.00  0.00          AR
+HETATM 1492 AR   DUM A1492      13.600  -8.400  15.400  1.00  0.00          AR
+HETATM 1493 AR   DUM A1493      13.600  -8.400  17.600  1.00  0.00          AR
+HETATM 1494 AR   DUM A1494      13.600  -6.200   0.000  1.00  0.00          AR
+HETATM 1495 AR   DUM A1495      13.600  -6.200   2.200  1.00  0.00          AR
+HETATM 1496 AR   DUM A1496      13.600  -6.200   4.400  1.00  0.00          AR
+HETATM 1497 AR   DUM A1497      13.600  -6.200   6.600  1.00  0.00          AR
+HETATM 1498 AR   DUM A1498      13.600  -6.200   8.800  1.00  0.00          AR
+HETATM 1499 AR   DUM A1499      13.600  -6.200  11.000  1.00  0.00          AR
+HETATM 1500 AR   DUM A1500      13.600  -6.200  13.200  1.00  0.00          AR
+HETATM 1501 AR   DUM A1501      13.600  -6.200  15.400  1.00  0.00          AR
+HETATM 1502 AR   DUM A1502      13.600  -6.200  17.600  1.00  0.00          AR
+HETATM 1503 AR   DUM A1503      13.600  -4.000   0.000  1.00  0.00          AR
+HETATM 1504 AR   DUM A1504      13.600  -4.000   2.200  1.00  0.00          AR
+HETATM 1505 AR   DUM A1505      13.600  -4.000   4.400  1.00  0.00          AR
+HETATM 1506 AR   DUM A1506      13.600  -4.000   6.600  1.00  0.00          AR
+HETATM 1507 AR   DUM A1507      13.600  -4.000   8.800  1.00  0.00          AR
+HETATM 1508 AR   DUM A1508      13.600  -4.000  11.000  1.00  0.00          AR
+HETATM 1509 AR   DUM A1509      13.600  -4.000  13.200  1.00  0.00          AR
+HETATM 1510 AR   DUM A1510      13.600  -4.000  15.400  1.00  0.00          AR
+HETATM 1511 AR   DUM A1511      13.600  -4.000  17.600  1.00  0.00          AR
+HETATM 1512 AR   DUM A1512      13.600  -1.800   0.000  1.00  0.00          AR
+HETATM 1513 AR   DUM A1513      13.600  -1.800   2.200  1.00  0.00          AR
+HETATM 1514 AR   DUM A1514      13.600  -1.800   4.400  1.00  0.00          AR
+HETATM 1515 AR   DUM A1515      13.600  -1.800   6.600  1.00  0.00          AR
+HETATM 1516 AR   DUM A1516      13.600  -1.800   8.800  1.00  0.00          AR
+HETATM 1517 AR   DUM A1517      13.600  -1.800  11.000  1.00  0.00          AR
+HETATM 1518 AR   DUM A1518      13.600  -1.800  13.200  1.00  0.00          AR
+HETATM 1519 AR   DUM A1519      13.600  -1.800  15.400  1.00  0.00          AR
+HETATM 1520 AR   DUM A1520      13.600  -1.800  17.600  1.00  0.00          AR
+HETATM 1521 AR   DUM A1521      13.600   0.400   0.000  1.00  0.00          AR
+HETATM 1522 AR   DUM A1522      13.600   0.400   2.200  1.00  0.00          AR
+HETATM 1523 AR   DUM A1523      13.600   0.400   4.400  1.00  0.00          AR
+HETATM 1524 AR   DUM A1524      13.600   0.400   6.600  1.00  0.00          AR
+HETATM 1525 AR   DUM A1525      13.600   0.400   8.800  1.00  0.00          AR
+HETATM 1526 AR   DUM A1526      13.600   0.400  11.000  1.00  0.00          AR
+HETATM 1527 AR   DUM A1527      13.600   0.400  13.200  1.00  0.00          AR
+HETATM 1528 AR   DUM A1528      13.600   0.400  15.400  1.00  0.00          AR
+HETATM 1529 AR   DUM A1529      13.600   0.400  17.600  1.00  0.00          AR
+HETATM 1530 AR   DUM A1530      13.600   2.600   0.000  1.00  0.00          AR
+HETATM 1531 AR   DUM A1531      13.600   2.600   2.200  1.00  0.00          AR
+HETATM 1532 AR   DUM A1532      13.600   2.600   4.400  1.00  0.00          AR
+HETATM 1533 AR   DUM A1533      13.600   2.600   6.600  1.00  0.00          AR
+HETATM 1534 AR   DUM A1534      13.600   2.600   8.800  1.00  0.00          AR
+HETATM 1535 AR   DUM A1535      13.600   2.600  11.000  1.00  0.00          AR
+HETATM 1536 AR   DUM A1536      13.600   2.600  13.200  1.00  0.00          AR
+HETATM 1537 AR   DUM A1537      13.600   2.600  15.400  1.00  0.00          AR
+HETATM 1538 AR   DUM A1538      13.600   2.600  17.600  1.00  0.00          AR
+HETATM 1539 AR   DUM A1539      13.600   4.800   0.000  1.00  0.00          AR
+HETATM 1540 AR   DUM A1540      13.600   4.800   2.200  1.00  0.00          AR
+HETATM 1541 AR   DUM A1541      13.600   4.800   4.400  1.00  0.00          AR
+HETATM 1542 AR   DUM A1542      13.600   4.800   6.600  1.00  0.00          AR
+HETATM 1543 AR   DUM A1543      13.600   4.800   8.800  1.00  0.00          AR
+HETATM 1544 AR   DUM A1544      13.600   4.800  11.000  1.00  0.00          AR
+HETATM 1545 AR   DUM A1545      13.600   4.800  13.200  1.00  0.00          AR
+HETATM 1546 AR   DUM A1546      13.600   4.800  15.400  1.00  0.00          AR
+HETATM 1547 AR   DUM A1547      13.600   4.800  17.600  1.00  0.00          AR
+HETATM 1548 AR   DUM A1548      13.600   7.000   0.000  1.00  0.00          AR
+HETATM 1549 AR   DUM A1549      13.600   7.000   2.200  1.00  0.00          AR
+HETATM 1550 AR   DUM A1550      13.600   7.000   4.400  1.00  0.00          AR
+HETATM 1551 AR   DUM A1551      13.600   7.000   6.600  1.00  0.00          AR
+HETATM 1552 AR   DUM A1552      13.600   7.000   8.800  1.00  0.00          AR
+HETATM 1553 AR   DUM A1553      13.600   7.000  11.000  1.00  0.00          AR
+HETATM 1554 AR   DUM A1554      13.600   7.000  13.200  1.00  0.00          AR
+HETATM 1555 AR   DUM A1555      13.600   7.000  15.400  1.00  0.00          AR
+HETATM 1556 AR   DUM A1556      13.600   7.000  17.600  1.00  0.00          AR
+HETATM 1557 AR   DUM A1557      13.600   9.200   0.000  1.00  0.00          AR
+HETATM 1558 AR   DUM A1558      13.600   9.200   2.200  1.00  0.00          AR
+HETATM 1559 AR   DUM A1559      13.600   9.200   4.400  1.00  0.00          AR
+HETATM 1560 AR   DUM A1560      13.600   9.200   6.600  1.00  0.00          AR
+HETATM 1561 AR   DUM A1561      13.600   9.200   8.800  1.00  0.00          AR
+HETATM 1562 AR   DUM A1562      13.600   9.200  11.000  1.00  0.00          AR
+HETATM 1563 AR   DUM A1563      13.600   9.200  13.200  1.00  0.00          AR
+HETATM 1564 AR   DUM A1564      13.600   9.200  15.400  1.00  0.00          AR
+HETATM 1565 AR   DUM A1565      13.600   9.200  17.600  1.00  0.00          AR
+HETATM 1566 AR   DUM A1566      13.600  11.400   0.000  1.00  0.00          AR
+HETATM 1567 AR   DUM A1567      13.600  11.400   2.200  1.00  0.00          AR
+HETATM 1568 AR   DUM A1568      13.600  11.400   4.400  1.00  0.00          AR
+HETATM 1569 AR   DUM A1569      13.600  11.400   6.600  1.00  0.00          AR
+HETATM 1570 AR   DUM A1570      13.600  11.400   8.800  1.00  0.00          AR
+HETATM 1571 AR   DUM A1571      13.600  11.400  11.000  1.00  0.00          AR
+HETATM 1572 AR   DUM A1572      13.600  11.400  13.200  1.00  0.00          AR
+HETATM 1573 AR   DUM A1573      13.600  11.400  15.400  1.00  0.00          AR
+HETATM 1574 AR   DUM A1574      13.600  11.400  17.600  1.00  0.00          AR
+HETATM 1575 AR   DUM A1575      13.600  13.600   0.000  1.00  0.00          AR
+HETATM 1576 AR   DUM A1576      13.600  13.600   2.200  1.00  0.00          AR
+HETATM 1577 AR   DUM A1577      13.600  13.600   4.400  1.00  0.00          AR
+HETATM 1578 AR   DUM A1578      13.600  13.600   6.600  1.00  0.00          AR
+HETATM 1579 AR   DUM A1579      13.600  13.600   8.800  1.00  0.00          AR
+HETATM 1580 AR   DUM A1580      13.600  13.600  11.000  1.00  0.00          AR
+HETATM 1581 AR   DUM A1581      13.600  13.600  13.200  1.00  0.00          AR
+HETATM 1582 AR   DUM A1582      13.600  13.600  15.400  1.00  0.00          AR
+HETATM 1583 AR   DUM A1583      13.600  13.600  17.600  1.00  0.00          AR
+END

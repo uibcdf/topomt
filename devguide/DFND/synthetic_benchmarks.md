@@ -15,6 +15,13 @@ probe) are first-class catalog entries.
 
 ## Purpose
 
+Inventory update (2026-11-07): the catalog contains **73 entries**, including
+`surface_groove`, `surface_cleft`, `surface_funnel` and the historical
+`pathological_thin_tube` PDB. The latter is a registered encoding alias of
+`pathological_thin_tube_r25`, with identical stored coordinates. Its original
+bytes are preserved; it is not an independent geometric control. Registration
+of the four entries adds no new scientific characterization or adopted reference.
+
 Current reference policy (2026-10-01): see the
 [notebook laboratory checkpoint](notebook_laboratory_checkpoint.md). These
 generators provide controlled geometry; their shape names do not establish
