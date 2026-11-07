@@ -54,6 +54,14 @@ changing another component.
 
 ## Current sequence and gaps
 
+The [public persistence increment](provider_persistence_checkpoint.md) adds
+`output.save()` and self-describing `load_provider_output()` for supported
+source-bound runs from all five providers. It closes fpocket's manual bundle
+reconstruction gap for new captures while preserving the original run identity.
+Current direct-server CASTp source admission remains separate. Continue source
+workflow development; this increment supplies evidence for a later batched
+installed checkpoint rather than starting one automatically.
+
 | Provider | Current bounded evidence | Next required work |
 | --- | --- | --- |
 | fpocket | Original CLI/files, reference chemistry, prepared hydrophobic consumer and bounded installed receipts under `fpocket4/`; the current Pocketeer candidate repeats these controls. | Preserve regression coverage; broader fidelity and component gates retain their owners. |

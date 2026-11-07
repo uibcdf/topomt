@@ -1,5 +1,12 @@
 # TopoMT development status
 
+Latest source workflow increment: [public result persistence](provider_persistence_checkpoint.md)
+adds `output.save()` and `load_provider_output()` with 323 passing source/contract
+cases, including all five saved readers under both unit policies. It preserves
+original run identity and adds fpocket's full-source bundle reconstruction.
+Current direct-server CASTp captures remain outside source-bound reconstruction.
+No new package or installed qualification is claimed.
+
 The migration review on **2026-11-06** records the historical source baseline
 `87fd192b03f36b0e24a279450fab3c60620244bd`. Subsequent bounded installed receiving
 is recorded in the [AlphaSpace2 checkpoint](alphaspace2/installed_receiving_checkpoint.md)
