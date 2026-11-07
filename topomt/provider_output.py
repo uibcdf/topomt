@@ -17,16 +17,60 @@ def _digest(data: bytes) -> str:
 
 
 def _validate_artifact_name(name: str) -> None:
+    if not isinstance(name, str) or not name or '\0' in name:
+        raise ValueError(f'Unsafe provider artifact name: {name!r}')
     path = PurePosixPath(name)
     if (
-        not name
-        or name.startswith('/')
+        name.startswith('/')
         or '\\' in name
         or any(part in ('.', '..') for part in name.split('/'))
         or path.parts[0] not in ('input', 'output')
         or len(path.parts) < 2
+        or path.as_posix() != name
     ):
         raise ValueError(f'Unsafe provider artifact name: {name!r}')
+
+
+def _validate_run_context(provider: Any, backend: Any, metadata: Any) -> None:
+    for name, value in (('provider', provider), ('backend', backend)):
+        if not isinstance(value, str) or not value.strip():
+            raise ValueError(f'Provider bundle {name} must be a nonempty string.')
+    if not isinstance(metadata, dict):
+        raise ValueError('Provider bundle metadata must be a JSON object.')
+
+
+def _validate_sha256(value: Any) -> None:
+    if (
+        not isinstance(value, str)
+        or len(value) != 64
+        or any(character not in '0123456789abcdef' for character in value)
+    ):
+        raise ValueError('Provider bundle checksum must be a lowercase SHA-256 string.')
+
+
+def _validate_manifest(manifest: Any) -> dict[str, Any]:
+    required = {
+        'schema_version',
+        'provider',
+        'backend',
+        'metadata',
+        'artifacts',
+        'run_id',
+    }
+    if not isinstance(manifest, dict) or set(manifest) != required:
+        raise ValueError('Provider bundle manifest has missing or unexpected fields.')
+    if type(manifest['schema_version']) is not int or manifest['schema_version'] != 1:
+        raise ValueError('Provider bundle requires literal integer schema version 1.')
+    _validate_run_context(
+        manifest['provider'], manifest['backend'], manifest['metadata']
+    )
+    if not isinstance(manifest['artifacts'], dict):
+        raise ValueError('Provider bundle artifacts must be a checksum object.')
+    for name, checksum in manifest['artifacts'].items():
+        _validate_artifact_name(name)
+        _validate_sha256(checksum)
+    _validate_sha256(manifest['run_id'])
+    return manifest
 
 
 @dataclass(frozen=True)
@@ -84,6 +128,8 @@ class ProviderRun:
             If an output entry is a symbolic link, or an artifact name is unsafe
             or duplicates the primary input.
         """
+        metadata = {} if metadata is None else metadata
+        _validate_run_context(provider, backend, metadata)
         input_path = Path(input_file)
         output_path = Path(output_dir)
         artifacts = [(f'input/{input_path.name}', input_path.read_bytes())]
@@ -108,7 +154,7 @@ class ProviderRun:
         for name, _ in artifacts:
             _validate_artifact_name(name)
         artifact_tuple = tuple(sorted(artifacts))
-        metadata_json = _canonical_json(metadata or {})
+        metadata_json = _canonical_json(metadata)
         manifest = cls._manifest_without_id(
             provider, backend, artifact_tuple, metadata_json
         )
@@ -144,6 +190,10 @@ class ProviderRun:
             self.provider, self.backend, self.artifacts, self.metadata_json
         )
         manifest['run_id'] = self.run_id
+        _validate_manifest(manifest)
+        body = {key: value for key, value in manifest.items() if key != 'run_id'}
+        if _digest(_canonical_json(body).encode('utf-8')) != self.run_id:
+            raise ValueError('Provider bundle manifest checksum mismatch.')
         with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
             archive.writestr('manifest.json', _canonical_json(manifest))
             for name, data in self.artifacts:
@@ -158,11 +208,20 @@ class ProviderRun:
         ValueError
             If the bundle is incomplete, modified, or has unsafe paths.
         """
+        # A top-level import would cycle through third_party's API imports while
+        # Topography is importing ProviderRun. Reuse the strict reader at load time.
+        from .third_party._saved_json import read_json
+
         with zipfile.ZipFile(path) as archive:
-            names = archive.namelist()
+            members = archive.infolist()
+            if any(member.orig_filename != member.filename for member in members):
+                raise ValueError('Unsafe provider archive member name.')
+            names = [member.filename for member in members]
             if len(names) != len(set(names)) or 'manifest.json' not in names:
                 raise ValueError('Provider bundle has duplicate names or no manifest')
-            manifest = json.loads(archive.read('manifest.json'))
+            manifest = _validate_manifest(
+                read_json(archive.read('manifest.json'), provider='ProviderRun')
+            )
             expected = manifest['artifacts']
             if set(names) != {'manifest.json', *expected}:
                 raise ValueError('Provider bundle has missing or unexpected artifacts')
