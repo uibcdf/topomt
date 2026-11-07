@@ -722,6 +722,29 @@ client's polling interval does not establish that the remote job failed. Keep
 the job identifier from the exception and retrieve that job before uploading
 again. Retain the downloaded original ZIP for repeatable file imports.
 
+For separate submission and retrieval, the original Fold client can reserve a
+receipt before sending the PDB and retain the exact server acknowledgement:
+
+```python
+from pathlib import Path
+from topomt.third_party.castp.servers.castpfold import CastpFoldClient
+
+client = CastpFoldClient()
+jobid = client.submit('protein.pdb', submission_file='submission.json')
+# Run later if the calculation is still pending; reuse the accepted jobid.
+payload = client.download_result_zip_bytes(jobid, wait=0, extra_wait=0, retries=0)
+Path('castpfold_result.zip').write_bytes(payload)
+```
+
+An existing `submission_file` raises `FileExistsError` before another POST,
+including after an interrupted or failed attempt. Read its `jobid` to resume an
+accepted job. The receipt records input SHA-256, parameters, HTTP response bytes
+and acknowledgement; `submitted_pending` means acceptance, not completion.
+A local `failed` state does not establish whether the server created a job.
+Inspect the retained response before considering another submission. This option
+belongs to `CastpFoldClient.submit`; the combined high-level calls above retain
+their existing interface.
+
 Live service availability is not established by local unit tests. Server adapters
 and persisted result loaders have separate validation; using a saved result does
 not require installing or contacting its original engine.

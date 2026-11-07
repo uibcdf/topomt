@@ -1,9 +1,15 @@
+import base64
+import hashlib
 import json
+import os
+import re
 import tempfile
 import time
 import zipfile
+from datetime import UTC, datetime
 from io import BytesIO
 from pathlib import Path
+from typing import Any
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
 from uuid import uuid4
@@ -12,6 +18,7 @@ import molsysmt as msm
 
 from topomt import pyunitwizard as puw
 from topomt.third_party._common import prepare_wrapper_input_pdb
+from topomt.third_party._saved_json import read_json
 from topomt.third_party.castp.files import load_topography as load_castp_topography
 from topomt.topography.Topography import Topography
 
@@ -19,6 +26,49 @@ SUBMIT_URL = 'https://cfold.bme.uic.edu/castpfold/submit_calc.php'
 DOWNLOAD_URL_TEMPLATE = (
     'https://cfold.bme.uic.edu/castpfold/data/tmppdb/{jobid}/processed/{jobid}.zip'
 )
+
+
+def _write_submission_file(
+    path: Path, receipt: dict[str, Any], *, exclusive: bool = False
+) -> None:
+    """Reserve once, then replace complete receipt snapshots atomically."""
+    encoded = json.dumps(receipt, sort_keys=True, indent=2, allow_nan=False) + '\n'
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if exclusive:
+        with path.open('x', encoding='utf-8') as stream:
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        return
+    temporary = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            mode='w',
+            encoding='utf-8',
+            dir=path.parent,
+            prefix='.castpfold-submission-',
+            suffix='.tmp',
+            delete=False,
+        ) as stream:
+            temporary = Path(stream.name)
+            stream.write(encoded)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.replace(temporary, path)
+    finally:
+        if temporary is not None:
+            temporary.unlink(missing_ok=True)
+
+
+def _http_receipt(response: Any, payload: bytes) -> dict[str, Any]:
+    headers = getattr(response, 'headers', None)
+    return {
+        'status': getattr(response, 'status', getattr(response, 'code', None)),
+        'final_url': response.geturl(),
+        'content_type': headers.get('Content-Type') if headers is not None else None,
+        'response_base64': base64.b64encode(payload).decode('ascii'),
+        'response_sha256': hashlib.sha256(payload).hexdigest(),
+    }
 
 
 class CastpFoldClient:
@@ -48,7 +98,52 @@ class CastpFoldClient:
         *,
         probe_radius: float = 1.4,
         email: str = 'N/A',
+        submission_file: str | Path | None = None,
     ) -> str:
+        """Submit once and optionally persist the exact acknowledgement.
+
+        Parameters
+        ----------
+        pdb_path : str or pathlib.Path
+            Existing PDB whose captured bytes are uploaded.
+        probe_radius : float or length quantity, default=1.4
+            Probe radius in angstroms for bare values.
+        email : str, default='N/A'
+            Original server's notification field.
+        submission_file : str or pathlib.Path, optional
+            New receipt reserved before POST. An existing receipt always prevents
+            another submission, including after failure or interrupted polling.
+
+        Returns
+        -------
+        str
+            Accepted safe job ID. No completed calculation is implied.
+
+        Raises
+        ------
+        FileExistsError
+            If submission_file already exists; it is never overwritten.
+        ValueError
+            If input/probe admission or strict JSON decoding fails.
+        RuntimeError
+            If the acknowledgement does not explicitly accept a safe job ID.
+        OSError
+            If input/receipt IO or the original transport fails. Original
+            exceptions propagate; a failed receipt is a local observation,
+            not proof that the remote server created no job.
+
+        Examples
+        --------
+        >>> job = CastpFoldClient().submit(  # doctest: +SKIP
+        ...     'prepared.pdb', submission_file='submission.json')
+        """
+        receipt_path = (
+            None if submission_file is None else Path(submission_file).expanduser()
+        )
+        if receipt_path is not None and (
+            receipt_path.exists() or receipt_path.is_symlink()
+        ):
+            raise FileExistsError(receipt_path)
         pdb_path = Path(pdb_path)
         if not pdb_path.exists():
             raise FileNotFoundError(f'PDB file not found: {pdb_path}')
@@ -59,6 +154,9 @@ class CastpFoldClient:
 
         if pdb_path.stat().st_size > 2 * 1024 * 1024:
             raise ValueError('CASTpFold only accepts uploads up to 2 MB.')
+        pdb_bytes = pdb_path.read_bytes()
+        if len(pdb_bytes) > 2 * 1024 * 1024:
+            raise ValueError('CASTpFold only accepts uploads up to 2 MB.')
 
         body, boundary = _encode_multipart_form_data(
             fields={
@@ -68,6 +166,7 @@ class CastpFoldClient:
             file_field='file',
             file_path=pdb_path,
             content_type='chemical/x-pdb',
+            file_data=pdb_bytes,
         )
         headers = dict(self.headers)
         headers['Content-Type'] = f'multipart/form-data; boundary={boundary}'
@@ -78,14 +177,76 @@ class CastpFoldClient:
             headers=headers,
             method='POST',
         )
-        with urlopen(request, timeout=self.timeout) as response:
-            payload = json.loads(response.read().decode('utf-8'))
+        started = datetime.now(UTC).isoformat()
+        receipt: dict[str, Any] = {
+            'schema_version': 1,
+            'provider': 'castp',
+            'server': 'castpfold',
+            'endpoint': self.submit_url,
+            'input_pdb': {
+                'filename': pdb_path.name,
+                'bytes': len(pdb_bytes),
+                'sha256': hashlib.sha256(pdb_bytes).hexdigest(),
+            },
+            'parameters': {
+                'probe_radius': {'value': probe_radius_value, 'unit': 'angstroms'},
+                'email': email,
+            },
+            'started_utc': started,
+            'updated_utc': started,
+            'state': 'submitting',
+            'http': None,
+            'acknowledgement': None,
+            'jobid': None,
+        }
 
-        jobid = payload.get('jobid', None)
-        if not isinstance(jobid, str) or jobid == '':
-            raise RuntimeError(f'Invalid CASTpFold submission response: {payload!r}')
+        def persist(*, exclusive: bool = False) -> None:
+            if receipt_path is not None:
+                receipt['updated_utc'] = datetime.now(UTC).isoformat()
+                _write_submission_file(receipt_path, receipt, exclusive=exclusive)
 
-        return jobid
+        # Reservation failures must not enter the failure updater: that would
+        # overwrite an existing receipt and permit duplicate POSTs on rerun.
+        persist(exclusive=True)
+        try:
+            with urlopen(request, timeout=self.timeout) as response:
+                raw = response.read()
+                receipt['http'] = _http_receipt(response, raw)
+                persist()
+            payload = read_json(raw, provider='CASTpFold submission')
+            receipt['acknowledgement'] = payload
+            jobid = payload.get('jobid') if isinstance(payload, dict) else None
+            if (
+                not isinstance(payload, dict)
+                or payload.get('success') is not True
+                or not isinstance(jobid, str)
+                or re.fullmatch(r'j_[A-Za-z0-9_]+', jobid) is None
+            ):
+                raise RuntimeError(
+                    'CASTpFold did not acknowledge success with a safe job ID.'
+                )
+            receipt['jobid'], receipt['state'] = jobid, 'submitted_pending'
+            persist()
+            return jobid
+        except BaseException as error:
+            if receipt_path is not None and isinstance(error, HTTPError):
+                try:
+                    receipt['http'] = _http_receipt(error, error.read())
+                except Exception as capture_error:
+                    error.add_note(
+                        'Could not retain CASTpFold HTTP failure response '
+                        f'({type(capture_error).__name__}).'
+                    )
+            receipt['state'] = 'failed'
+            receipt['error'] = {'type': type(error).__name__}
+            try:
+                persist()
+            except Exception as recording_error:
+                error.add_note(
+                    'Could not persist CASTpFold submission failure '
+                    f'({type(recording_error).__name__}).'
+                )
+            raise
 
     def download_result_zip_bytes(
         self,
@@ -219,6 +380,7 @@ def _encode_multipart_form_data(
     file_field: str,
     file_path: Path,
     content_type: str,
+    file_data: bytes | None = None,
 ) -> tuple[bytes, str]:
     boundary = f'----TopoMTBoundary{uuid4().hex}'
     line_break = b'\r\n'
@@ -245,7 +407,7 @@ def _encode_multipart_form_data(
     body.extend(f'Content-Type: {content_type}'.encode())
     body.extend(line_break)
     body.extend(line_break)
-    body.extend(file_path.read_bytes())
+    body.extend(file_path.read_bytes() if file_data is None else file_data)
     body.extend(line_break)
     body.extend(f'--{boundary}--'.encode())
     body.extend(line_break)
