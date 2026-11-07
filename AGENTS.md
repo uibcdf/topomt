@@ -9,8 +9,12 @@ and any nested `AGENTS.md`. Local instructions may refine them; deviations
 require the documented policy exception process.
 
 The synchronized guide is owned by `uibcdf/molsyssuite`. It includes the
-[reusable-tool ownership rules](MOLSYSSUITE_GUIDE.md#modular-reusable-tools)
-and [working-instruction rules](MOLSYSSUITE_GUIDE.md#durable-working-instructions).
+[reusable-tool ownership rules](MOLSYSSUITE_GUIDE.md#modular-reusable-tools).
+
+## Durable working instructions
+
+Follow the common
+[working-instruction rules](MOLSYSSUITE_GUIDE.md#durable-working-instructions).
 For work under `devguide/`, also read `devguide/AGENTS.md` and its local
 reporting protocol. Keep repository-specific instructions below.
 
@@ -339,6 +343,12 @@ To be extended in future versions, it may include:
 Use the common authorization and principal-maintainer contribution route. Existing
 explicit authorization within the same scope persists across commits and ordinary
 documentation/configuration edits; local workflow defaults add no approval round.
+
+Principal-maintainer workspace instruction (2026-11-06): authorized development
+uses direct commits and pushes without requiring a PR. Incremental commits carry
+`[skip ci]`, grouping remote CI into validation checkpoints. Run the applicable
+local checks and record deferred evidence; a skipped run does not qualify a
+release, the full suite or a support matrix.
 
 ---
 
