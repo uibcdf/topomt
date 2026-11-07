@@ -25,6 +25,7 @@ _PROFILES = {
     'original-pocketeer-source-handoff-1': ('pocketeer', 'library'),
     'original-alphaspace2-source-handoff-1': ('alphaspace2', 'library'),
     'original-pycasta-source-handoff-1': ('pycasta', 'library'),
+    'original-castpfold-source-handoff-1': ('castp', 'files'),
 }
 
 
@@ -102,7 +103,8 @@ def consume(
     Parameters
     ----------
     handoff_dir : Path
-        Output of an original fpocket, Pocketeer, unbound AlphaSpace2 or pyCASTA qualifier:
+        Output of an original fpocket, Pocketeer, unbound AlphaSpace2, pyCASTA
+        or CASTpFold qualifier:
         source.h5msm, original.zip and receipt.json.
         Molecular chemistry must already support MolSysMT native recognition.
     output_dir : Path
@@ -185,14 +187,24 @@ def consume(
     if _sha256(source_file) != evidence.get('source_sha256'):
         raise ValueError('The source checksum disagrees with the handoff receipt.')
     run = ProviderRun.load(handoff_dir / 'original.zip')
+    frame = run.metadata.get('structure_indices')
+    frame_matches = (
+        isinstance(frame, list)
+        and len(frame) == 1
+        and type(frame[0]) is int
+        and frame[0] == 1
+        if provider == 'castp'
+        else type(frame) is int and frame == 1
+    )
     if (
         run.run_id != evidence.get('run_id')
         or run.provider != provider
         or run.backend != backend
-        or type(run.metadata.get('structure_indices')) is not int
-        or run.metadata.get('structure_indices') != 1
+        or not frame_matches
     ):
         raise ValueError('Original run identity or structure context disagrees.')
+    if provider == 'castp' and run.metadata.get('server') != 'castpfold':
+        raise ValueError('This CASTp consumer profile requires server castpfold.')
     if provider == 'alphaspace2' and run.metadata.get('binder') is not None:
         raise ValueError('This AlphaSpace2 consumer profile requires an unbound run.')
     source = msm.convert(source_file, to_form='molsysmt.MolSys')
@@ -204,10 +216,10 @@ def consume(
         raise ValueError('Restored source chemical-state context disagrees.')
     before = puw.get_value(msm.get(source, coordinates=True), to_unit='nm').copy()
     chemical_before = reference_chemical_context(source, 0, provider=provider)
-    if provider in {'pocketeer', 'alphaspace2', 'pycasta'}:
+    if provider in {'pocketeer', 'alphaspace2', 'pycasta', 'castp'}:
         output = tmt.get_provider_output(
             source,
-            method=provider,
+            method='castpfold' if provider == 'castp' else provider,
             backend='files',
             bundle_file=handoff_dir / 'original.zip',
         )
@@ -268,7 +280,13 @@ def consume(
         raise ValueError(
             'Consumer features fall outside the original pocket membership.'
         )
+    original_route = (
+        {'provider': provider, 'backend': backend, 'server': 'castpfold'}
+        if provider == 'castp'
+        else {}
+    )
     context = {
+        **original_route,
         'original_run_id': run.run_id,
         'pocket_id': pocket_id,
         'source_sha256': evidence['source_sha256'],
@@ -323,6 +341,7 @@ def consume(
     if not all(checks.values()):
         raise ValueError(f'Consumer handoff failed: {checks}')
     receipt = {
+        **original_route,
         'profile': f'{provider}-pharmacophoremt-'
         f'{"hydrophobic" if feature == "hydrophobicity" else "hb-acceptor"}-control-1',
         'context': context,
@@ -354,7 +373,7 @@ def consume(
         'original_bundle_sha256': _sha256(handoff_dir / 'original.zip'),
         'limits': [
             'Source integration control; no installed/public qualification.',
-            'One explicitly prepared reference chemical state and nonperiodic frame.',
+            'One explicitly prepared reference chemical state and selected coordinate frame; Cartesian projections without periodic imaging.',
             'Declared analytical placements; no affinity, fit or biological validation.',
             'Pocket atoms and alpha spheres do not define an exact volumetric region.',
         ],
