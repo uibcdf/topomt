@@ -49,14 +49,24 @@ four-site prepared flows and independent engine-free receiving. Its original
 ranking remains distinct from the native adapter's volume-as-score choice;
 native `1a6w` parity #53 retains its own acceptance problem.
 
+The [CASTpFold prepared source checkpoint](castp/prepared_consumer_checkpoint_2026_11_06.md)
+now records original server execution, source-bound files recovery and the
+declared public consumer under both unit policies. Its exact installed
+qualification remains pending. The user selected continued development before
+freezing another package candidate.
+
 The remaining original-provider sequence is:
 
-1. Qualify **CASTp/CASTpFold original** server/files routes, source correspondence
-   and explicit prepared consumption. Server reachability, retained export
-   recovery and local numerical parity are distinct gates.
-2. Preserve fpocket/Pocketeer/AlphaSpace2/pyCASTA regressions, run combined receiving
-   controls and reconcile provider/fidelity records with delivered scope. Retain
-   exact package identities, selected tests, outcomes, omissions and scientific limits.
+1. Review and improve the public original-provider workflow, including ordinary
+   execution, saved recovery, explicit source/frame/state choices and informative
+   failure or pending-job behavior. Preserve the five providers' focused source
+   regressions while implementing scoped improvements.
+2. At a coherent workflow milestone, freeze and qualify a new exact installed
+   candidate, run combined receiving controls and reconcile provider/fidelity
+   records with delivered scope. Retain exact package identities, selected tests,
+   outcomes, omissions and scientific limits. Packaging, resource or dependency
+   changes receive applicable checks during development; installed qualification
+   remains required before package delivery or completion of #101.
 
 For each provider, success includes original execution versus persisted recovery
 agreement, ordered IDs/memberships, result/source independence, source/frame and
