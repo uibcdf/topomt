@@ -1,0 +1,2983 @@
+{
+  "schema": "topomt.benchlab.dfnd-observations/1",
+  "case_id": "regular_tetrahedron",
+  "case_version": 1,
+  "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+  "reference_sha256": "cc60019cd121d352d1ddc9c700ec4c0684c43e3cfb229f721a11a368ecdabab3",
+  "software": {
+    "python": "3.14.10",
+    "topomt": "0.5.0+387.gcf4d475.dirty",
+    "pyunitwizard": "0.29.1+6.gf82b618",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "numba": "0.68.1"
+  },
+  "topomt_source": {
+    "file_count": 267,
+    "sha256": "bdab884fdc530c55fe99e8109720879dd8609da9b1f8764e937d1448da8e40d9",
+    "scope": "Sorted topomt/**/*.py relative paths and length-delimited bytes"
+  },
+  "query": {
+    "min_size": 0,
+    "transit_policy": "with_connectors",
+    "gate_intrusion_policy": "flag_only",
+    "dry_adjacency": "face",
+    "residence_tolerance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "residence_tolerance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:3ba2a05b6ed0bfc574a7a7c18c6a68e1"
+    },
+    "permeability_tolerance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "permeability_tolerance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:5776c109ac89c18e2c9b62bf36990ac4"
+    },
+    "epsilon": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "epsilon",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1e-06,
+      "block_digests": [
+        "blake2b-128:fdc4aee404c6c8d3af6c444a146a42d5"
+      ],
+      "digest": "blake2b-128:afe0b5c20f12a97f318d2e509e8ae42b"
+    }
+  },
+  "clearances": {
+    "residence_clearance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "residence_clearance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          1
+        ],
+        "blocks": [
+          1
+        ]
+      },
+      "values": [
+        1.5455739091877108
+      ],
+      "block_digests": [
+        "blake2b-128:e5acadba832509bd5d3177f2a0b35df8"
+      ],
+      "digest": "blake2b-128:970ed54b7819affd8ca0f587e1adda0e"
+    },
+    "face_clearance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "face_clearance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          1,
+          4
+        ],
+        "blocks": [
+          4
+        ]
+      },
+      "values": [
+        [
+          1.3599564267050157,
+          1.3599564267050157,
+          1.3599564267050157,
+          1.3599564267050157
+        ]
+      ],
+      "block_digests": [
+        "blake2b-128:08a520385cf976dba2674c83dbb03721"
+      ],
+      "digest": "blake2b-128:ab6ae33f88130ea67db867baf468e904"
+    }
+  },
+  "anchors": [
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2,
+        "block_digests": [
+          "blake2b-128:7f818a45feb71a60cf3effd121324813"
+        ],
+        "digest": "blake2b-128:8ad14c1a9de655527fbef89a4dc29b85"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1,
+      "local_class": "open",
+      "transit_role": "resident_transit",
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 1
+      },
+      "cell_hull_volume": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "cell_hull_volume",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 17.5453227104516,
+        "block_digests": [
+          "blake2b-128:d28c0304bfcb5509f108f755f3acbd3f"
+        ],
+        "digest": "blake2b-128:ca3329b87e34408b6bca63d96ff2a05a"
+      },
+      "solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 13.291911144281515,
+        "block_digests": [
+          "blake2b-128:c4c60eb17ba6486025a197eacf9e7d00"
+        ],
+        "digest": "blake2b-128:49646fa06b4f0d47f3b8bd5e94c58417"
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0,
+      "local_class": "sealed",
+      "transit_role": "resident_transit",
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      },
+      "cell_hull_volume": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "cell_hull_volume",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 17.5453227104516,
+        "block_digests": [
+          "blake2b-128:d28c0304bfcb5509f108f755f3acbd3f"
+        ],
+        "digest": "blake2b-128:ca3329b87e34408b6bca63d96ff2a05a"
+      },
+      "solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 13.291911144281515,
+        "block_digests": [
+          "blake2b-128:c4c60eb17ba6486025a197eacf9e7d00"
+        ],
+        "digest": "blake2b-128:49646fa06b4f0d47f3b8bd5e94c58417"
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7,
+        "block_digests": [
+          "blake2b-128:59a575c733de96d813e448f180437714"
+        ],
+        "digest": "blake2b-128:5bf17f9b659bbe2231b77f2f17c15004"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0,
+      "local_class": "sealed",
+      "transit_role": "non_transit",
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      },
+      "cell_hull_volume": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "cell_hull_volume",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 17.5453227104516,
+        "block_digests": [
+          "blake2b-128:d28c0304bfcb5509f108f755f3acbd3f"
+        ],
+        "digest": "blake2b-128:ca3329b87e34408b6bca63d96ff2a05a"
+      },
+      "solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 13.291911144281515,
+        "block_digests": [
+          "blake2b-128:c4c60eb17ba6486025a197eacf9e7d00"
+        ],
+        "digest": "blake2b-128:49646fa06b4f0d47f3b8bd5e94c58417"
+      }
+    }
+  ],
+  "sweep": [
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.0,
+        "block_digests": [
+          "blake2b-128:cce003cb82d6981ca8f4f85e79904fc4"
+        ],
+        "digest": "blake2b-128:df17497732e12a1cc8280bf570dba8a2"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.01,
+        "block_digests": [
+          "blake2b-128:a1c64ad9db9acaf9b33758ba35f68af2"
+        ],
+        "digest": "blake2b-128:f23a93317e168422d42021392159c5d9"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.02,
+        "block_digests": [
+          "blake2b-128:d01bdb840a5d9b2c60c7b567b2ee9e50"
+        ],
+        "digest": "blake2b-128:25162083a7ea190734806fde291b55e6"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.03,
+        "block_digests": [
+          "blake2b-128:cfdacbc926cf2d9c45c7b541f6a02b7d"
+        ],
+        "digest": "blake2b-128:d9d44196309680b0b127e5e21ea99dd2"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.04,
+        "block_digests": [
+          "blake2b-128:c1e49885ffc391a1471b8e59cefc9206"
+        ],
+        "digest": "blake2b-128:6786ce7c5ba0b594f960b8cd9975fbdb"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.05,
+        "block_digests": [
+          "blake2b-128:1d94fff880e5b9578a49062688cbc8ed"
+        ],
+        "digest": "blake2b-128:3a737ac8a5214b89db34e711ced66c20"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.06,
+        "block_digests": [
+          "blake2b-128:4081c924aef37de3d3f1a38530c1ffee"
+        ],
+        "digest": "blake2b-128:5eac0939fcdf7e37835d8f33b63552e3"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.07,
+        "block_digests": [
+          "blake2b-128:f9991f60825bc11dbf16e7bd5b813725"
+        ],
+        "digest": "blake2b-128:fdcf11a6c648a40cb42fab31ff9bdc61"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.08,
+        "block_digests": [
+          "blake2b-128:9d6b7f11d4857cebf2decb2882ba8821"
+        ],
+        "digest": "blake2b-128:4835ee9479575ce14ab89ae2d7623518"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.09,
+        "block_digests": [
+          "blake2b-128:4383c55e3f0412337d347c83428ff767"
+        ],
+        "digest": "blake2b-128:fc1865bfe0c80df428f42fa7c61c5ed9"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.1,
+        "block_digests": [
+          "blake2b-128:47a6ef78de8c093c1f49377e0d0ecc3b"
+        ],
+        "digest": "blake2b-128:a89a4535310cf6b30ac586473e753762"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.11,
+        "block_digests": [
+          "blake2b-128:0e58c8a7cb5501fbce5406f8a038aa60"
+        ],
+        "digest": "blake2b-128:085621a818bf98cf4d2b8308a8378498"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.12,
+        "block_digests": [
+          "blake2b-128:34aba257263e78c56c35b02240c2885f"
+        ],
+        "digest": "blake2b-128:038ca25cec46ce8590de9fdf504e514f"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.13,
+        "block_digests": [
+          "blake2b-128:83784148f37ac939c308c87a8cfc41d1"
+        ],
+        "digest": "blake2b-128:709642bdd11036a25143e305c493d5d9"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.1400000000000001,
+        "block_digests": [
+          "blake2b-128:0bf86c82c4afa12c9316700b4beb074c"
+        ],
+        "digest": "blake2b-128:5c27e79fdda10f24cfaf50d851f8fe57"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.15,
+        "block_digests": [
+          "blake2b-128:3192e3a37ffd526a70d3e847714fda42"
+        ],
+        "digest": "blake2b-128:91b5de71fd6c35d9ed8546dcf582a8ac"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.16,
+        "block_digests": [
+          "blake2b-128:e0c8ebfb02ea088dbfaf6a754ef9abed"
+        ],
+        "digest": "blake2b-128:c6687931e52bf8bd44fafa93b7c377d3"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.17,
+        "block_digests": [
+          "blake2b-128:dc6d409f9e35346ba893c9fffcf90f7c"
+        ],
+        "digest": "blake2b-128:d14ac32ef8d34e158ead77ff7d73d71c"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.18,
+        "block_digests": [
+          "blake2b-128:204ba04ce5d5dd0c625e5cd0b433b4db"
+        ],
+        "digest": "blake2b-128:57a9abc2d7e200514d4938bd4b3a4886"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.19,
+        "block_digests": [
+          "blake2b-128:ea2aef1d03c07723782c0a1825ad4e3a"
+        ],
+        "digest": "blake2b-128:f4651db8d88979e9732d2343a9b3d47d"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2,
+        "block_digests": [
+          "blake2b-128:7f818a45feb71a60cf3effd121324813"
+        ],
+        "digest": "blake2b-128:8ad14c1a9de655527fbef89a4dc29b85"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.21,
+        "block_digests": [
+          "blake2b-128:79610bf2f1b1640a69c06ab7c5cbe1fc"
+        ],
+        "digest": "blake2b-128:0c4835704079b6ee3c7eb69dc1ec908d"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.22,
+        "block_digests": [
+          "blake2b-128:aca689f039729417be856e090ef3cba6"
+        ],
+        "digest": "blake2b-128:311adf8e087d891dd6a75a0e9a20c808"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.23,
+        "block_digests": [
+          "blake2b-128:0b4434d3f22bf7a4ced4686b565eb3bc"
+        ],
+        "digest": "blake2b-128:d05b7ca017e59a30c8f889af6ef109b5"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.24,
+        "block_digests": [
+          "blake2b-128:b6bdb09fc965ab665ff5ac1a14e20d68"
+        ],
+        "digest": "blake2b-128:f9830f87597880c9cb005b5cb875fe2b"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.25,
+        "block_digests": [
+          "blake2b-128:a77785c496a4bea29a05706fe11eaf6e"
+        ],
+        "digest": "blake2b-128:3d495ab1ce2dc1f364c8397d8a02cdbd"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.26,
+        "block_digests": [
+          "blake2b-128:59a6ffc652dea6b0c0cf9c55e302cebe"
+        ],
+        "digest": "blake2b-128:242a0d8d2d71723747edce5bf7beec5a"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.27,
+        "block_digests": [
+          "blake2b-128:1cbc35272e574ca0b2d2c3ceed9a0cd5"
+        ],
+        "digest": "blake2b-128:e48dbf227b6f70579aa8fcca5e89752f"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.28,
+        "block_digests": [
+          "blake2b-128:310dfb76e89170059afb4174a1d49d56"
+        ],
+        "digest": "blake2b-128:5c4ba927d463625d79f1f9327134c007"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.29,
+        "block_digests": [
+          "blake2b-128:2803677a0aabc3354741b20510b83e07"
+        ],
+        "digest": "blake2b-128:e6c2d1b7b07ffd035a159b121ac429ba"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.3,
+        "block_digests": [
+          "blake2b-128:f7a32a214e86a81292cccb6a6e338c27"
+        ],
+        "digest": "blake2b-128:c7168144b02c57bf2a72976bbd4838de"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.31,
+        "block_digests": [
+          "blake2b-128:ad524b7e28759f6be76d39b289f8ee7a"
+        ],
+        "digest": "blake2b-128:6fb66dd42157055db5e6b2e30fbe6ae0"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.32,
+        "block_digests": [
+          "blake2b-128:3be489bc0d71dc7c913eca8f0ba981bc"
+        ],
+        "digest": "blake2b-128:d219c97610861e1b89e1c383febccbe1"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.33,
+        "block_digests": [
+          "blake2b-128:bed0fac3d31766e70efbe858e06724a8"
+        ],
+        "digest": "blake2b-128:14cbf0fe578650963acd8464c8036895"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.34,
+        "block_digests": [
+          "blake2b-128:f9e7839310e9b5c14c96f5d9e48b2056"
+        ],
+        "digest": "blake2b-128:e1690cc6490db37852f9dd7b5c39005b"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.35,
+        "block_digests": [
+          "blake2b-128:2a948538a5f9914c07ab61b72c7c7976"
+        ],
+        "digest": "blake2b-128:5a8ea76bc7b555bfa973d75db078eac6"
+      },
+      "resident": true,
+      "permeable_faces": 4,
+      "family": "percolating",
+      "raw_component_count": 1,
+      "external_links": 1
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.3599999999999999,
+        "block_digests": [
+          "blake2b-128:c89cf33c4599db88437c63c061940057"
+        ],
+        "digest": "blake2b-128:5b85ae8075e006009b038243f4c285fc"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.37,
+        "block_digests": [
+          "blake2b-128:d393c009158f2ad8665ceff8c1726af1"
+        ],
+        "digest": "blake2b-128:112fc1d0bfe140c81feb910a3b60e7fd"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.38,
+        "block_digests": [
+          "blake2b-128:0ddb292929fa71299b4bcc335a2d1e36"
+        ],
+        "digest": "blake2b-128:d4d76d999c89e2741e2ac4580f3fb13a"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.3900000000000001,
+        "block_digests": [
+          "blake2b-128:78bc5f2120ca4c9a789d22a4bfee038d"
+        ],
+        "digest": "blake2b-128:6eda30300b0da6ed76d1d8926502366f"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4100000000000001,
+        "block_digests": [
+          "blake2b-128:b56ae78ddf62d1df7420ba6fa5c3c4f6"
+        ],
+        "digest": "blake2b-128:a8adc37676e29f8b0fe22b1004a83676"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.42,
+        "block_digests": [
+          "blake2b-128:d7a8d674e9cda564300ae123c7ee3f12"
+        ],
+        "digest": "blake2b-128:548fb52904cd630afaf8d239febc7ce5"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.43,
+        "block_digests": [
+          "blake2b-128:114b620e4de2b3bbcb434a2d5e8e4df7"
+        ],
+        "digest": "blake2b-128:bfc16eb347c8003e4f7c95b002a9a4af"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.44,
+        "block_digests": [
+          "blake2b-128:c5d50562c8f56674e003db11c2b8c55d"
+        ],
+        "digest": "blake2b-128:b08ec4aaf3f7f81b53eb661838600dc4"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.45,
+        "block_digests": [
+          "blake2b-128:660ecda79ec491744c0c2554c33875fd"
+        ],
+        "digest": "blake2b-128:976d929e9860fde1d84274907b2543e1"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.46,
+        "block_digests": [
+          "blake2b-128:8cd9ab7953b967ac0cef37e5f67e3364"
+        ],
+        "digest": "blake2b-128:e5354dff297c595bc5f9fd5c4d90dbbb"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.47,
+        "block_digests": [
+          "blake2b-128:a4b5018616efc2270b18beb3647bb52a"
+        ],
+        "digest": "blake2b-128:7216988d8d5f0a7e677a534625d03711"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.48,
+        "block_digests": [
+          "blake2b-128:8bcc59ab1157a1195c188ddaa55d05d2"
+        ],
+        "digest": "blake2b-128:5d2ff23d7cbbe90c0aa2ffa7771b7253"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.49,
+        "block_digests": [
+          "blake2b-128:acb9400568a25372265b5ab7f3f9d09f"
+        ],
+        "digest": "blake2b-128:9d0001c24855bb3e5f98b9220246ee0c"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.5,
+        "block_digests": [
+          "blake2b-128:4b7acd829c59b555ba65737de2121114"
+        ],
+        "digest": "blake2b-128:033196224fd44992c67f742293671233"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.51,
+        "block_digests": [
+          "blake2b-128:e108d2df3505ef8e0620ef244d6b0304"
+        ],
+        "digest": "blake2b-128:90cd536b4e79986de635bb57ca8a86d6"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.52,
+        "block_digests": [
+          "blake2b-128:4a1c6f30c91cce452f843cfbd6b31845"
+        ],
+        "digest": "blake2b-128:2c66c895f6b6c8785c12cb80754efee7"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.53,
+        "block_digests": [
+          "blake2b-128:b1f5542b969252f30d599ca0f47f352e"
+        ],
+        "digest": "blake2b-128:059b3e1921550dcd26d52e7d0e81ee52"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.54,
+        "block_digests": [
+          "blake2b-128:36ea98acd4b41f85c5bde4dab01117f5"
+        ],
+        "digest": "blake2b-128:1f60c5141574d824e68ade8b0ac3c9a5"
+      },
+      "resident": true,
+      "permeable_faces": 0,
+      "family": "void",
+      "raw_component_count": 1,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.55,
+        "block_digests": [
+          "blake2b-128:711997dffe66b95ae6b8e610ab3f4a86"
+        ],
+        "digest": "blake2b-128:f30925fb894151e89da4ce728d640158"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.56,
+        "block_digests": [
+          "blake2b-128:d9603f9a0adaa1d4bb426a3befb5641e"
+        ],
+        "digest": "blake2b-128:0e5842448d40dd2d439e853fe5cd4405"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.57,
+        "block_digests": [
+          "blake2b-128:9bd176ed0f54554f0771b8d5e339c424"
+        ],
+        "digest": "blake2b-128:cae2846bb74ea8d4cf980d84db9eea52"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.58,
+        "block_digests": [
+          "blake2b-128:9c17acbe60aee49b76b729e70008261e"
+        ],
+        "digest": "blake2b-128:041fa9432da861409edd0d2fda56728e"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.5899999999999999,
+        "block_digests": [
+          "blake2b-128:30891b8674c0b1bd4931caf029ce22b3"
+        ],
+        "digest": "blake2b-128:352931725b1fd43769090a19ef148eae"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.6,
+        "block_digests": [
+          "blake2b-128:64fc40dfebae0bac2de402f4bd76347f"
+        ],
+        "digest": "blake2b-128:739c8d0bcb7d50b341bf1ad41470e504"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.6099999999999999,
+        "block_digests": [
+          "blake2b-128:0cedee225eff682653f82065e4eae52f"
+        ],
+        "digest": "blake2b-128:ad2641a5c49e55e9c6dab7bf7567294f"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.62,
+        "block_digests": [
+          "blake2b-128:7aa17aca7bfa8fff4cd769eca22cd6c2"
+        ],
+        "digest": "blake2b-128:ff3d132b764d2b2ae3e9ec7d6b18afb1"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.63,
+        "block_digests": [
+          "blake2b-128:0064d5125548090b9e0a9dac4e6de7dc"
+        ],
+        "digest": "blake2b-128:84ddecf92537a82bf7d84e5ca6bf3f66"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.6400000000000001,
+        "block_digests": [
+          "blake2b-128:8b09597bfa586056918134cf13450f4b"
+        ],
+        "digest": "blake2b-128:c31f984cc60ace29de6c0f94b591a1d9"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.65,
+        "block_digests": [
+          "blake2b-128:4e0df18fa876275a8e90380f39318edc"
+        ],
+        "digest": "blake2b-128:0051d718b71f038ec8589d500d361834"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.6600000000000001,
+        "block_digests": [
+          "blake2b-128:b99f05cbb6162e30d7deeeb1368ba364"
+        ],
+        "digest": "blake2b-128:6688bc31df60a23a01b9e8c6edcd38dc"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.67,
+        "block_digests": [
+          "blake2b-128:624b0585349dceb3f17fd1d8a7365e1a"
+        ],
+        "digest": "blake2b-128:96304e464237bd338096ca28b5331c94"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.6800000000000002,
+        "block_digests": [
+          "blake2b-128:be34ea4cda6e8f49de3f94ef1d4aa330"
+        ],
+        "digest": "blake2b-128:6c2031f0b6958097f8895c0ffabd80d6"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.69,
+        "block_digests": [
+          "blake2b-128:d741a1a03c597a4cbbbb5942a1dc17e5"
+        ],
+        "digest": "blake2b-128:6834e6ead8c89d31608affa16b7e0745"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7000000000000002,
+        "block_digests": [
+          "blake2b-128:47ae24b1ed86e4af9930b48857b34312"
+        ],
+        "digest": "blake2b-128:da578e7c3023d25482c82751cfcb8145"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.71,
+        "block_digests": [
+          "blake2b-128:0550f21422ad97e9d6d5c06433f159c5"
+        ],
+        "digest": "blake2b-128:ac37d662b3303ca85ae6bec6d909919d"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.72,
+        "block_digests": [
+          "blake2b-128:7ea4e01c000761c13d16d41251c999e2"
+        ],
+        "digest": "blake2b-128:bd67e7eb5dfdb429a53a885a46a64673"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.73,
+        "block_digests": [
+          "blake2b-128:d9031592c5903b81fdc067c701c50bde"
+        ],
+        "digest": "blake2b-128:f73374c40f76445dc3e3d5669d34bb43"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.74,
+        "block_digests": [
+          "blake2b-128:41d6ab77274f83ffe0de4b00fa105ee8"
+        ],
+        "digest": "blake2b-128:1e2262791395c28a554909f7c770effc"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.75,
+        "block_digests": [
+          "blake2b-128:b2461c11dbe6e972d587c473863c3963"
+        ],
+        "digest": "blake2b-128:16fb4264eb6a72ed3826597d79fefcf8"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.76,
+        "block_digests": [
+          "blake2b-128:404298f9a3af14bee91498f6040bc91a"
+        ],
+        "digest": "blake2b-128:c81e70d762c0e2b5be4b025cf4551f27"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.77,
+        "block_digests": [
+          "blake2b-128:446eccbfbcafb5adca4fbbabc09409df"
+        ],
+        "digest": "blake2b-128:77677e3b2eb70f84c10acfee1cb9e2f7"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.78,
+        "block_digests": [
+          "blake2b-128:4507751a7581af5ab0f1f04e3c07a3e4"
+        ],
+        "digest": "blake2b-128:9b5e2a65e094f4d06822a35238a0ece6"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.79,
+        "block_digests": [
+          "blake2b-128:cbb5f7f86ce13436735b93aa5b49353c"
+        ],
+        "digest": "blake2b-128:7b45d037625ee40a60d98df8a0a2b101"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.8,
+        "block_digests": [
+          "blake2b-128:bd2753e5e52458b8d45d868ae67d466e"
+        ],
+        "digest": "blake2b-128:e8b95e9d1c031c54b06492e3968b1106"
+      },
+      "resident": false,
+      "permeable_faces": 0,
+      "family": "non_resident",
+      "raw_component_count": 0,
+      "external_links": 0
+    }
+  ],
+  "reporting_control": {
+    "probe_radius": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_radius",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.4,
+      "block_digests": [
+        "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+      ],
+      "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+    },
+    "min_size": 2,
+    "raw_component_count": 1,
+    "reported_component_count": 0,
+    "geometry_unchanged": true
+  },
+  "reference_checks": "passed",
+  "limits": [
+    "No original-provider execution in this stage",
+    "No exact solvent-volume claim",
+    "No general continuous navigability or biological-site validation"
+  ]
+}

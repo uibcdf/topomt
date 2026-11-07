@@ -2,9 +2,9 @@
 
 This collection is the synthetic section of [Topography BenchLab](../index.md).
 It provides a public, reproducible laboratory for learning how DFND
-describes molecular topography. Each notebook combines an explained geometric
-input, independent reference checks, visual observations and an optional
-comparison with original third-party tools. It is the seed of a future benchmark
+describes molecular topography. Each study unit combines an explained geometric
+input, independent reference checks, visual observations and eligible
+comparisons with original third-party tools. It is the seed of a future benchmark
 annex to the TopoMT documentation. It also guides development of DFND through
 progressively characterized synthetic systems before molecular benchmarks.
 
@@ -30,7 +30,7 @@ closed_shell/index
 
 | Case | Scientific question | Reference and study status |
 | --- | --- | --- |
-| [Regular tetrahedron](regular_tetrahedron/index.ipynb) | How do residence and face transit differ as the probe grows? | Analytic clearance references, reviewed native observations and retained original-provider outcomes. |
+| [Regular tetrahedron](regular_tetrahedron/index.md) | How do residence and face transit differ as the probe grows? | Separate executed system and DFND notebooks; historical original-provider evidence is retained. |
 | [Sampled closed shell](closed_shell/index.ipynb) | Does a certified atomic-ball wall enclose a free central probe region? | Independent wall-coverage certificate and reviewed central-region observations; global cavity count and exact volume remain outside that certificate. |
 
 | Part | What the reader can inspect |
@@ -60,12 +60,16 @@ the first case from the repository root:
 
 ```bash
 python -m jupyter nbconvert --to notebook --execute \
-    docs/content/benchlab/synthetic/regular_tetrahedron/index.ipynb \
-    --output regular_tetrahedron.executed \
+    docs/content/benchlab/synthetic/regular_tetrahedron/system.ipynb \
+    --output system.executed \
     --output-dir /tmp/topomt-notebook-rerun
 ```
 
-Install original providers separately if you want the optional comparisons:
+The tetrahedron's new `system.ipynb` and `dfnd.ipynb` run independently and do not
+execute original providers. Its comparison stage will be a separate notebook.
+The closed-shell notebook and the tetrahedron's historical combined notebook
+retain their earlier optional-provider code. Install original providers
+separately if deliberately rerunning those historical comparisons:
 
 ```bash
 conda install -c conda-forge fpocket
@@ -80,7 +84,7 @@ upstream release. Follow the requirements of
 Set `RUN_PROVIDERS=False` to run native references alone. The tetrahedron's
 separate HETATM fpocket check can be disabled with `RUN_FPOCKET=False`.
 
-Both notebooks compare original engines on an explicit synthetic `ATOM` export;
+The historical combined notebooks compare original engines on a synthetic `ATOM` export;
 the canonical dummy `HETATM` encoding remains downloadable. Only the record type
 changes. Completed provider runs include original evidence bundles. Failures
 retain their causes and no invented pocket counts or geometry. CASTp server
@@ -103,7 +107,7 @@ revision `23554a7aca31cba144ef248b9771d4668815dd1c` recorded in
 revision lacked that API and failed test collection; the source pin is updated
 with these notebook tests.
 
-The notebook reads versioned input artifacts and displays a new observation
+Each notebook reads versioned input artifacts and displays a new observation
 report without overwriting the recorded reference files. Sphinx renders reviewed,
 executed outputs; it does not launch optional providers during a documentation
 build. Execution and scientific review are separate checks.
@@ -117,5 +121,6 @@ build. Execution and scientific review are separate checks.
 4. **Tube:** passage, bottlenecks and the limits of a graph skeleton.
 5. **Two chambers with a neck:** residence regions, communication and separation.
 
-The first two notebooks are delivered. Later cases will enter the collection
+The first two controls are available; the tetrahedron now separates its system
+reference and native analysis into independently executable notebooks. Later cases enter the collection
 after their input assumptions and independent expectations have been reviewed.

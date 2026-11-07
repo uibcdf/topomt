@@ -22,15 +22,16 @@ public support architecture is no longer the immediate next task. DFND's richer
 residence, transit, region, gate, exterior-link and dry-network information is
 the object of study. Pocket outputs are one comparison lens.
 
-Each study is a Jupyter notebook that can later serve the public documentation,
+Each study unit contains Jupyter notebooks that can serve the public documentation,
 benchmark compendium and method demonstrations. The current sources live in
 `docs/content/benchlab/synthetic/<case>/`; the existing MyST-NB/Sphinx documentation path
 renders reviewed outputs with execution off. No separate website deployment or
 new provider integration is part of this first slice.
 
 BenchLab is a top-level documentation section, with Synthetic systems and the
-planned Molecular systems collection. Each existing case keeps its notebook as
-`index.ipynb` and its original versioned artifact directory. The 2026-11-07
+planned Molecular systems collection. The initial relocation kept each notebook
+as `index.ipynb` with its original versioned artifact directory; #134 below
+records the subsequent split of the tetrahedron unit. The 2026-11-07
 relocation under #133 preserves scientific cells, reviewed outputs and artifact
 bytes; earlier Showcase addresses retain relocation links. Source layout changes
 do not constitute another scientific execution or qualification.
@@ -86,6 +87,22 @@ providers, overwriting frozen observations, or changing the engine. It does
 not qualify new cases, volume precision, all synthetic cases or proteins.
 
 ## Delivered first case
+
+### Current split study — 2026-11-07
+
+The tetrahedron now has a short `index.md`, independent `system.ipynb` and native
+`dfnd.ipynb`. They execute in separate fresh Python 3.14 kernels and share only
+frozen input/reference files. Five system and ten native code cells execute
+successfully, with two figures each. Independent/reference assertions, the three
+nonmarginal probes, 81-point sweep and a reporting-filter control pass. The latter
+retains a one-node raw void while `min_size=2` hides its compatibility projection.
+
+New records and standalone figures live in `artifacts/native_study_v1/` within
+the case directory. The historical combined notebook is retained byte-for-byte
+as `historical.ipynb`, together with its unchanged original artifacts. A new
+comparison notebook remains pending; no original provider or server is executed
+by this increment. Work is tracked in #134; the following historical paragraphs
+retain their earlier producer/evidence scope rather than describing a new run.
 
 `regular_tetrahedron.ipynb` studies four equal-radius atomic balls, edge 5.3 Å,
 radius 1.7 Å, no jitter and no periodic boundary. Versioned `input.json` uses

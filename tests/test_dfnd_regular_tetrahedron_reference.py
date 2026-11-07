@@ -136,7 +136,7 @@ def test_public_tetrahedron_input_preserves_units_model_and_submitted_bytes():
 
 
 def test_public_tetrahedron_notebook_has_reviewed_report_and_executed_figures():
-    notebook = json.loads((NOTEBOOK_DIR / 'index.ipynb').read_text())
+    notebook = json.loads((NOTEBOOK_DIR / 'historical.ipynb').read_text())
     artifact_dir = NOTEBOOK_DIR / 'artifacts/regular_tetrahedron_v1'
     report = json.loads((artifact_dir / 'report.json').read_text())
     code_cells = [cell for cell in notebook['cells'] if cell['cell_type'] == 'code']

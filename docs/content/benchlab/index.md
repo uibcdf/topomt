@@ -23,8 +23,11 @@ molecular/index
 
 Case names are descriptive and stable. Reading order and thematic grouping can
 change as the collection grows without renaming or numbering the systems.
-Each case has its own directory, a study notebook and versioned input/evidence
-artifacts. Input versions and variants retain their separate identities.
+Each case has its own directory, study notebooks and versioned input/evidence
+artifacts. The working pattern separates the system/reference, native DFND
+analysis and original-method comparisons as those stages are prepared. A short
+case overview provides navigation and synthesis. Input versions and variants
+retain their separate identities.
 
 | Part | What the study should make clear |
 | --- | --- |

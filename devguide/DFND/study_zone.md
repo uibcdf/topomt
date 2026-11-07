@@ -9,7 +9,7 @@ not a delivered independent deployment or scientific qualification.
 ## Existing foundation and identity
 
 Maintain `docs/content/benchlab/` as the dedicated public laboratory section.
-Its two existing synthetic notebooks combine frozen
+Its two existing synthetic studies combine frozen
 inputs, independent references, plots, native observations and original-provider
 evidence. MyST-NB/Sphinx renders stored outputs without running calculations.
 Keep the [laboratory checkpoint](notebook_laboratory_checkpoint.md) as the active
@@ -23,8 +23,12 @@ docs/content/benchlab/
   synthetic/
     index.md
     regular_tetrahedron/
-      index.ipynb
+      index.md
+      system.ipynb
+      dfnd.ipynb
+      historical.ipynb
       artifacts/regular_tetrahedron_v1/...
+      artifacts/native_study_v1/...
     closed_shell/
       index.ipynb
       artifacts/closed_shell_v1/...
@@ -46,6 +50,14 @@ location and navigation prose change. Earlier documentation addresses keep
 relocation pages, with no duplicate source notebook or evidence collection.
 New cases and input versions enter the collection only after their declared
 reference assumptions and evidence have been reviewed.
+
+The maintainer selected a short case overview plus separate `system.ipynb`,
+`dfnd.ipynb` and, when prepared, `comparisons.ipynb` stages. The first two stages
+are delivered for the tetrahedron under #134; comparison remains pending as a new
+notebook. Each runs from a clean kernel using frozen inputs and, for DFND, the
+committed independent reference rather than another notebook's live variables.
+The earlier combined tetrahedron notebook is retained unchanged as historical
+evidence. The closed shell keeps its existing combined notebook until reviewed.
 
 Use descriptive names as permanent case identities, without ordinal codes.
 Grouping and study order are editable navigation. Each frozen input retains its
