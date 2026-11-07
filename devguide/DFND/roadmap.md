@@ -8,6 +8,12 @@ on delivered snapshot/InputContext work; it preserves the laboratory pause and
 the open scientific gates. Historical priorities below are not a current
 implementation or qualification claim.
 
+The subsequent [core theoretical reconstruction](core_theory_review_2026_11_06.md)
+separates original CAST-style proposals from current DFND and identifies the
+residence/transit interpretation to reconcile before kernel changes. It also
+grounds an explicit convexity/boundary workstream; the common graph substrate
+does not yet supply every required relief/interface operator.
+
 Current scheduling and evidence (2026-10-01): the user has resumed joint
 DFND/Topography work, starting with an audit and staged roadmap. Use
 [the current audit](audit_topography_2026_10_01.md) for implementation presence,

@@ -18,6 +18,13 @@ It proposes work; it does not accept a new scientific definition, change default
 resume the paused notebook laboratory or close an issue. The accompanying
 [review evidence](review_2026_11_06.md) records scope, reproductions and limits.
 
+Conceptual follow-up: the [core theoretical reconstruction](core_theory_review_2026_11_06.md)
+adds a prerequisite before scientific kernel changes: reconcile existential
+residence, local gate observations and physical transit, and choose the intended
+relationship to all-atom free space. It also makes convexity/boundary development
+an explicit workstream below. The small API fixes remain independently useful;
+their success does not resolve that theoretical question.
+
 ## Delivered foundations
 
 | Layer | Present implementation | Remaining qualification or adoption |
@@ -224,6 +231,25 @@ need not wait for all biological references in #76.
 
 ## E. Scientific usefulness and richer public analysis
 
+### E0. Convexities and their boundaries
+
+Treat positive relief as a central native capability. A connected dry bank can
+contain many protrusions, ridges and rims, so bank decomposition alone cannot
+supply their local segmentation. Current shell/lining/core candidates provide
+raw support for this work, rather than complete detectors.
+
+Select one relief family first. Define its spatial support, the neighborhood or
+reference against which it projects, its prominence/elongation criterion and
+the boundary/base that separates it from the remaining bank. Keep a buried core,
+a solid separator, an aperture rim and an empty-space constriction distinct.
+Raw descriptor development can proceed alongside C; public promotion needs C's
+support/availability contract.
+
+**Exit:** frozen single-relief, multiple-relief-on-one-bank, smooth/flat negative
+and scale controls; an independently justified support and boundary; declared
+probe/radius/triangulation sensitivity. Relations to nearby concavities and
+molecular interface patches enrich the result without defining it by name.
+
 ### E1. Morphology and real molecular references
 
 Separate topology, morphology policy and biological interpretation. Calibrate
@@ -277,19 +303,23 @@ universal score during this core work.
 
 | Workstream | Prerequisite | Completion evidence |
 | --- | --- | --- |
+| Core meaning | Reconcile residence/transit and define the intended all-atom correspondence. | Explicit scientific decision and independent per-implication references before kernel retuning. |
 | A: small fixes/baseline | This review and individual regressions. | Focused red/green, explained characterization. |
 | B1: primitives | Frozen local objective/domain. | Independent values/bounds and conditioning policy. |
 | B2: volume (#75) | Region/error contract. | Coverage/convergence and analytic controls. |
 | B3: references (#76) | Selection of a bounded scientific tranche. | Independent per-observable acceptance. |
 | C: #60 and #97/#100 receiving | Accepted conceptual route. | Coherent native plus incomplete-provider slice. |
 | D: Rust/performance (#93) | Stable contract/tests for each ported kernel. | Measured behavior, actual binaries, Numba removal. |
+| E0: convexities/boundaries | A chosen relief/reference/segmentation definition; C for public promotion. | Independent support/boundary controls, including multiple reliefs on one bank. |
 | E1: morphology/usefulness | Valid reference/metric for each claim. | Calibration/holdout report and visible maturity. |
 | E2: #61 → #62 | C; occupancy additionally needs B2. | Molecular identity and geometric evaluations. |
 | #63, dynamics, AI consumers | Relevant support/evaluation/correspondence. | Capability-specific evidence. |
 
-Start with A1/A2/A3, with A4 and semantic baseline triage as adjacent small
-changes. B1/B2 and C can then progress in parallel. Select B3's next case
-deliberately; do not automatically restart every experiment or retune the model.
+Resolve the core interpretation before selecting scientific kernel changes.
+A1/A2/A3, A4 and baseline triage remain independent small implementation slices.
+B1/B2, C and E0's definition can progress in parallel under their stated gates.
+Select B3's next case deliberately; do not automatically restart every
+experiment or retune the model.
 
 ## Tracking and validation checkpoints
 
