@@ -225,8 +225,11 @@ assert restored.run == output.run
 ```
 
 For `backend='files'`, supply only `bundle_file`; execution or source-context
-overrides are rejected. Missing engines, execution failures, invalid results and
-valid-empty output remain distinct. `ProviderExecutionError.run`, when available,
+overrides are rejected. Rejected original results retain an inspectable failed
+receipt with `failure_stage='result_validation'`, including original process
+metadata and auxiliary inputs. A successful process return code alone does not
+qualify the output for recovery. Missing engines, execution failures, invalid
+results and valid-empty output remain distinct. `ProviderExecutionError.run`, when available,
 retains bounded partial evidence after temporary directories disappear; it can
 be saved for inspection with `ProviderRun.load`. Failed runs cannot be recovered
 as successful original results. Parsing a fixture alone is not execution evidence.

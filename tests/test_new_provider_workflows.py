@@ -123,3 +123,37 @@ def test_failed_original_keeps_inspectable_bytes_and_cannot_be_recovered(
     failed.save(path)
     with pytest.raises(ValueError, match='protocol'):
         tmt.load_provider_output(path, molecular_system=source)
+
+
+def test_rejected_original_result_keeps_failed_receipt_and_auxiliary_input(
+    protocol_case, tmp_path, monkeypatch
+):
+    provider, source, _, runner = protocol_case
+
+    def invalid(pdb, output, options):
+        (output / 'stdout.txt').write_text('Original process completed\n')
+        extra = pdb.parent / 'settings.txt'
+        extra.write_text('Original auxiliary input\n')
+        return {'returncode': 0}, {'settings.txt': extra}
+
+    monkeypatch.setattr(runner, 'run', invalid)
+    options = (
+        {'origin': puw.quantity([1, 2, 3], 'angstroms')} if provider == 'caver' else {}
+    )
+    with pytest.raises(
+        ProviderExecutionError, match='original result is invalid'
+    ) as caught:
+        tmt.get_provider_output(source, method=provider, **options)
+    failed = caught.value.run
+    assert failed is not None
+    assert failed.metadata['execution_status'] == 'failed'
+    assert failed.metadata['failure_stage'] == 'result_validation'
+    assert failed.metadata['returncode'] == 0
+    assert failed.get_artifact('output/stdout.txt') == b'Original process completed\n'
+    assert failed.get_artifact('input/settings.txt') == b'Original auxiliary input\n'
+    assert failed.metadata['selected_atom_indices']
+    assert failed.get_artifact('output/topomt_source_context.json')
+    path = tmp_path / 'invalid.zip'
+    failed.save(path)
+    with pytest.raises(ValueError, match='protocol'):
+        tmt.load_provider_output(path, molecular_system=source)

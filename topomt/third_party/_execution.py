@@ -425,8 +425,20 @@ def get_output(
         try:
             return _bind_output(run, context)
         except ValueError as cause:
+            failed_run = ProviderRun.capture(
+                provider,
+                backend,
+                submitted,
+                output,
+                metadata={
+                    **run.metadata,
+                    'execution_status': 'failed',
+                    'failure_stage': 'result_validation',
+                },
+                additional_inputs=additional,
+            )
             result_error = ProviderExecutionError(
                 provider=provider, reason=f'original result is invalid: {cause}'
             )
-            result_error.run = run
+            result_error.run = failed_run
             raise result_error from cause

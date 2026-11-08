@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (25)
+### Resolved (26)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
@@ -25,6 +25,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`original_mole_provider.md`](original_mole_provider.md) — [#140](https://github.com/uibcdf/topomt/issues/140) — Add source-bound original MOLE execution and engine-independent recovery. *(resolved, measured)*
 - [`original_p2rank_provider.md`](original_p2rank_provider.md) — [#139](https://github.com/uibcdf/topomt/issues/139) — Add source-bound original P2Rank execution and engine-independent recovery. *(resolved, measured)*
 - [`original_pykvfinder_provider.md`](original_pykvfinder_provider.md) — [#136](https://github.com/uibcdf/topomt/issues/136) — Add source-bound original pyKVFinder execution and engine-independent recovery. *(resolved, measured)*
+- [`original_result_validation_receipt.md`](original_result_validation_receipt.md) — [#142](https://github.com/uibcdf/topomt/issues/142) — Rejected original-provider results retained a completed receipt. *(resolved, reproduced)*
 - [`profile_memory_resource_lifecycle.md`](profile_memory_resource_lifecycle.md) — [#95](https://github.com/uibcdf/topomt/issues/95) — Preserve caller files and release memory-profile scratch and tracing. *(resolved, reproduced)*
 - [`provider_output_viewer_adoption.md`](provider_output_viewer_adoption.md) — [#66](https://github.com/uibcdf/topomt/issues/66) — Adopt original provider pocket outputs in the MolSysViewer addon. *(resolved, inspected)*
 - [`provider_pocket_outputs.md`](provider_pocket_outputs.md) — [#65](https://github.com/uibcdf/topomt/issues/65) — Expose original provider pocket outputs without DFND prerequisites. *(resolved, inspected)*
