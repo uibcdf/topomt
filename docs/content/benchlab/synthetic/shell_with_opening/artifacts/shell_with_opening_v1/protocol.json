@@ -1,0 +1,275 @@
+{
+  "schema": "topomt.benchlab.shell-opening-protocol/1",
+  "case_id": "shell_with_opening",
+  "case_version": 1,
+  "owning_issue": "uibcdf/topomt#145",
+  "created_utc": "2026-11-08T19:08:22.984188+00:00",
+  "source_file": "artifacts/shell_with_opening_v1/input.json",
+  "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+  "pdb_file": "artifacts/shell_with_opening_v1/input.pdb",
+  "pdb_sha256": "cc4da10580190859cabe5c1839bd745d35c9606b532fe3e018defeb20721b9d5",
+  "parent_directory": "../closed_shell",
+  "parent_preserved_files": {
+    "artifacts/closed_shell_v1/alphaspace2_original.zip": "e89975beb5e10ae4c53157409f24c7d579db2cf9d84a1b58eba87ca755bfe76f",
+    "artifacts/closed_shell_v1/castp3_observation.json": "047a9318d7b51eee6bc02ce65ad7613748d4cfdb9bb3fdd8f24361c44ddb4d1a",
+    "artifacts/closed_shell_v1/castpfold_observation.json": "9aafd816d9fad3b36be84830f9628b3b0cff0ce594031f07548fbb466371486c",
+    "artifacts/closed_shell_v1/input.json": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+    "artifacts/closed_shell_v1/input.pdb": "e77ad9034389008e5b9ed7d5e05403b9add397f1cae596c470c4c303fca8f3be",
+    "artifacts/closed_shell_v1/input_atom.pdb": "478b65b4bdfb9d7f8f3428d0ed382e2e5ca99c7d8c63a787ae655434c476d4b6",
+    "artifacts/closed_shell_v1/input_castp.pdb": "258ce42c8d51392b3d15b8720e90a5d1e632a2c7d17eb77e8ae161aa8d2d0875",
+    "artifacts/closed_shell_v1/pocketeer_original.zip": "d7caea21fbbc9208d23811f532bcc5411c1bda92d58254def292bfc666b27488",
+    "artifacts/closed_shell_v1/report.json": "c490ac61d8119a48d67fae458b4878207c6b01cc74eea6496979df9612304f4d",
+    "artifacts/native_study_v1/dfnd_observations.json": "bbce6d18840f0dd489a6ed028dddee33ebc662e65e9a79ea13a9f3856a323f93",
+    "artifacts/native_study_v1/dfnd_probes.png": "78c8af6e9b3a46e0ad76930d50b8c09f19c76515dad59d479befaf4e3413353f",
+    "artifacts/native_study_v1/dfnd_sweep.png": "58ad6855901a003e72d73f401303c6bbe2ac552bfd9f903c9a8c13bc6ce91112",
+    "artifacts/native_study_v1/execution_receipt.json": "6b9b9c286dd0c06fcf1e96b28fba3bc06054356d23f6d4dd189d6defae73644b",
+    "artifacts/native_study_v1/protocol.json": "533fd978a20725c36c355e01ad6ed1f05268d61b31bd62f4e77bbddfd8596925",
+    "artifacts/native_study_v1/system_certificates.png": "b31fc77cc032f70d13f3bc0ba4c626e5192b92460765a56512a9fad9486fcf6c",
+    "artifacts/native_study_v1/system_geometry.png": "659048bbd160c31e96b2fa4021d0e3969a28fd8a517d72c86b923a3ea15d3156",
+    "artifacts/native_study_v1/system_reference.json": "2cd156c8b30adf1729f3c5479dba75e6a4853f781f390eef008e9a0ea0176e58",
+    "dfnd.ipynb": "5c7e0fde48039c4b53cfe3a5cdf0630136d3fe0c2daa9c120da0a88fd57c9140",
+    "historical.ipynb": "15eae3d8ebf03aa6ecaaac3b0c9c7c2a3914a20cf467e965b6ae02b072d2c011",
+    "system.ipynb": "988c55ba5a4c21c1246eadab50c29e527f2a8f8814691896089a8375146d79fb"
+  },
+  "parent_input_file": "artifacts/closed_shell_v1/input.json",
+  "parent_reference_file": "artifacts/native_study_v1/system_reference.json",
+  "reference_before_new_native_execution": true,
+  "provider_execution": false,
+  "workers": 1,
+  "origin": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "origin",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "int64",
+      "shape": [
+        3
+      ],
+      "blocks": [
+        3
+      ]
+    },
+    "values": [
+      0,
+      0,
+      0
+    ],
+    "block_digests": [
+      "blake2b-128:94238cee6e6e269281baf1c01232768d"
+    ],
+    "digest": "blake2b-128:8ef37c9c5bf16a7a4f42e9317dc65203"
+  },
+  "query": {
+    "min_size": 0,
+    "transit_policy": "with_connectors",
+    "gate_intrusion_policy": "flag_only",
+    "dry_adjacency": "face",
+    "residence_tolerance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "residence_tolerance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:3ba2a05b6ed0bfc574a7a7c18c6a68e1"
+    },
+    "permeability_tolerance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "permeability_tolerance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:5776c109ac89c18e2c9b62bf36990ac4"
+    }
+  },
+  "tolerances": {
+    "length_absolute": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "length_absolute",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1e-06,
+      "block_digests": [
+        "blake2b-128:fdc4aee404c6c8d3af6c444a146a42d5"
+      ],
+      "digest": "blake2b-128:3f449f091f8964e5dd214f9b8a75f2e2"
+    },
+    "barycentric_absolute": 1e-08
+  },
+  "experiments": [
+    {
+      "id": "open_at_water_probe",
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+      },
+      "expectation": "origin_free_and_exterior_connected",
+      "proof": "Positive +Y all-atom straight-ray clearance; same-probe parent wall independently enclosed."
+    },
+    {
+      "id": "closed_to_larger_probe",
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.0,
+        "block_digests": [
+          "blake2b-128:7680177f7cc17b8a86589f0b5edfa0b3"
+        ],
+        "digest": "blake2b-128:d8b12b89c7dc260a92f9272e70014f49"
+      },
+      "expectation": "origin_free_and_enclosed",
+      "proof": "Child hull triangle coverage plus free strictly interior origin."
+    },
+    {
+      "id": "no_finite_residence",
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 5.0,
+        "block_digests": [
+          "blake2b-128:f268dce3141bedeb49543617e25a607f"
+        ],
+        "digest": "blake2b-128:3283a855e6d9da2f2b31a228fe78c7a1"
+      },
+      "expectation": "no_free_probe_center_in_finite_hull",
+      "proof": "Atom-center enclosing ball and convex-combination bound."
+    }
+  ],
+  "parent_control": {
+    "probe_radius": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_radius",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.4,
+      "block_digests": [
+        "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+      ],
+      "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+    },
+    "expectation": "origin_free_and_enclosed"
+  },
+  "contact_reference": "At probe 1.4 angstroms every unchanged parent hull triangle remains covered by its retained three expanded vertex balls. Any genuine free exterior face must therefore be a newly exposed child hull face, compared through parent atom IDs.",
+  "sweep": "Reuse the parent 49-point 0.2-to-5 angstrom sweep, without asserting exact physical transition values or monotone component counts.",
+  "reporting_control": "For the open 1.4 angstrom result, choose min_size=central component n_nodes+1 and retain raw geometry/result key while hiding that reported projection.",
+  "scope_limits": [
+    "Origin access/closure controls, not exact global cavity or physical mouth counts.",
+    "Contact clusters and family names are native observations, not independent references.",
+    "No solvent-volume precision, general continuous graph-path or biological claims.",
+    "No original third-party execution or server request; parent scientific bytes stay unchanged."
+  ]
+}
