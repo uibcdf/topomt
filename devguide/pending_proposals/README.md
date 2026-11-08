@@ -46,8 +46,10 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (1)
+### Active (3)
 
+- [`benchlab_public_topography.md`](benchlab_public_topography.md) — [#146](https://github.com/uibcdf/topomt/issues/146) — Audit the three frozen BenchLab cases through the public Topography registry. *(active, inspected)*
+- [`closed_shell_wall_cover.md`](closed_shell_wall_cover.md) — [#148](https://github.com/uibcdf/topomt/issues/148) — Certify the frozen closed-shell wall at the historical 0.2 angstrom probe. *(active, measured)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
 ### Partial (5)

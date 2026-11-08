@@ -35,6 +35,13 @@ through the synthetic phase before starting new protein-characterization work.
 Use `devguide/DFND/notebook_laboratory_checkpoint.md` for the active sequence;
 catalog labels and agreement with other engines are not independent truth.
 
+DFND priority refinement (2026-11-08): remain with `regular_tetrahedron`,
+`closed_shell` and `shell_with_opening` before adding another geometry. Audit
+the complete route into `Topography`, including catalog refinement, public
+relations and recoverable supports, and resolve the open scientific questions
+for these inputs with explicit evidence. Keep unresolved outcomes and their
+owning issues visible; passing the initial controls is not the completion rule.
+
 Immediate priority (2026-11-07): consolidate the original providers and add four
 or five no-cost third-party engines before further BenchLab development. Follow
 `devguide/external_provider_expansion_plan.md` under #135. Preserve distinct

@@ -5,6 +5,10 @@ Read [the reporting protocol](../reporting_protocol.md) before filing.
 
 <!-- generated: devguide_index -->
 
+### Active (1)
+
+- [`dfnd_dispatch_lengths.md`](dfnd_dispatch_lengths.md) — [#147](https://github.com/uibcdf/topomt/issues/147) — Register the three missing native length digesters in the public dispatcher. *(active, reproduced)*
+
 ### Partial (1)
 
 - [`full_ci_routes_and_skipped_push_recovery.md`](full_ci_routes_and_skipped_push_recovery.md) — [#58](https://github.com/uibcdf/topomt/issues/58) — Complete contributor full-CI routes and skipped-push recovery. *(partial, measured)*

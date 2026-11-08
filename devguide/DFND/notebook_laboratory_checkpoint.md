@@ -2,6 +2,15 @@
 
 ## Active direction
 
+**2026-11-08 refinement:** the maintainer requests deeper study of the existing
+three units before adding a tube. Follow [the three-case deepening plan](three_case_deepening.md).
+Audit the actual public `Topography` projection, resolve the historical 0.2 Å
+wall reference, then study physical mouth/path connectivity, volume accuracy,
+native dry structures and robustness. Earlier suggestions below to move next
+to a tube are deferred by this decision; initial passing anchors are not the
+completion rule. #146 owns the bounded public audit, #148 the 0.2 Å cover;
+#75/#76/#60 retain their broader numerical/scientific/public-support gates.
+
 The user refined the publication target on 2026-11-07: a
 [study and benchmark area](study_zone.md), with one named unit per system,
 DFND observations and original third-party comparisons. Case identities use
