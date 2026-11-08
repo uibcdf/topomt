@@ -1,4 +1,4 @@
-"""Provisional provider outputs with permanent access to reported pockets.
+"""Original provider outputs with distinct feature kinds and explicit geometry.
 
 These records preserve provider definitions. They do not assert canonical DFND
 classification or volumetric support. The private legacy bridge can be replaced
@@ -88,16 +88,23 @@ class PocketGeometry:
         )
 
 
+# Retain the original public name while exposing a neutral name for paths,
+# cavity grids and predicted sites. Both names use the same quantity contract.
+ProviderGeometry = PocketGeometry
+
+
 @dataclass(frozen=True)
 class ProviderRecord:
-    """Detached pocket or auxiliary record linked to an original provider run.
+    """Detached original feature linked to an original provider run.
 
     Parameters
     ----------
     source_id : str
         Original source identifier; not a Topography registry identifier.
     record_kind : str
-        ``pocket`` or ``mouth_aggregate`` for the initial adapters.
+        Provider-reported ``pocket``, ``cavity``, ``channel``, ``site`` or
+        ``mouth_aggregate``. These are original-result kinds, not native DFND
+        classifications or assertions of biological function.
     run : ProviderRun
         Recoverable original inputs, outputs and execution metadata.
     atom_indices : tuple of int, optional
@@ -138,7 +145,8 @@ class ProviderRecord:
         if (
             not self.source_id
             or not self.atom_role
-            or self.record_kind not in {'pocket', 'mouth_aggregate'}
+            or self.record_kind
+            not in {'pocket', 'cavity', 'channel', 'site', 'mouth_aggregate'}
         ):
             raise ValueError(
                 'Provider record requires source identity and a supported kind'
@@ -242,6 +250,21 @@ class ProviderOutput:
         return tuple(
             record for record in self.records if record.record_kind == 'pocket'
         )
+
+    @property
+    def cavities(self) -> tuple[ProviderRecord, ...]:
+        """Return original cavity records, without asserting exterior closure."""
+        return tuple(r for r in self.records if r.record_kind == 'cavity')
+
+    @property
+    def channels(self) -> tuple[ProviderRecord, ...]:
+        """Return original channel/tunnel records, without inferring a volume."""
+        return tuple(r for r in self.records if r.record_kind == 'channel')
+
+    @property
+    def sites(self) -> tuple[ProviderRecord, ...]:
+        """Return provider-predicted sites, without asserting binding relevance."""
+        return tuple(r for r in self.records if r.record_kind == 'site')
 
     @property
     def input_coordinates(self) -> Any | None:

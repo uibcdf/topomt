@@ -27,6 +27,17 @@ CATALOG = {
         },
     },
     'exceptions': {
+        'ProviderUnavailableError': {
+            'code': 'ProviderUnavailableError',
+            'user_message': "Original provider '{provider}' requires '{requirement}'.",
+            'user_hint': 'Install the selected original tool or use its saved files route; consult the third-party engine guide.',
+            'category': 'dependency',
+        },
+        'ProviderExecutionError': {
+            'code': 'ProviderExecutionError',
+            'user_message': "Original provider '{provider}' failed: {reason}",
+            'category': 'execution',
+        },
         'LibraryNotFoundError': {
             'code': 'LibraryNotFoundError',
             'user_message': "Required library '{library}' is not installed.",
