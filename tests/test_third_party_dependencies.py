@@ -101,7 +101,10 @@ def test_source_checkout_does_not_require_installed_provider(monkeypatch, provid
         raise RuntimeError('input boundary reached')
 
     monkeypatch.setattr(dependency_decorator, 'check_dependency', check)
-    monkeypatch.setattr(library, 'prepare_wrapper_input_pdb', stop_at_input)
+    # Reference chemistry is now the first source boundary, before PDB export.
+    # Stop there: this control tests source-root dependency bypass, not whether
+    # an arbitrary object is a valid MolSysMT input.
+    monkeypatch.setattr(library, 'reference_chemical_context', stop_at_input)
     with pytest.raises(RuntimeError, match='input boundary reached'):
         library.get_topography(object(), upstream_root='/explicit/source')
 
@@ -113,12 +116,12 @@ import sys
 
 class BlockEngines(importlib.abc.MetaPathFinder):
     def find_spec(self, fullname, path=None, target=None):
-        if fullname.split('.')[0] in {'pocketeer', 'alphaspace2', 'pycasta'}:
+        if fullname.split('.')[0] in {'pocketeer', 'alphaspace2', 'pycasta', 'pyKVFinder'}:
             raise AssertionError(f'Eager engine import: {fullname}')
 
 sys.meta_path.insert(0, BlockEngines())
 import topomt
-assert not {'pocketeer', 'alphaspace2', 'pycasta'} & set(sys.modules)
+assert not {'pocketeer', 'alphaspace2', 'pycasta', 'pyKVFinder'} & set(sys.modules)
 """
     result = subprocess.run(
         [sys.executable, '-c', code], capture_output=True, text=True, check=False

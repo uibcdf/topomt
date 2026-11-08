@@ -1,4 +1,4 @@
-"""Original-engine pocket output dispatch, independent of DFND adoption."""
+"""Original-engine result dispatch, independent of DFND adoption."""
 
 from importlib import import_module
 from typing import Any
@@ -33,9 +33,10 @@ def get_provider_output(
         MolSysMT-compatible source. CASTp file imports can supply their own PDB.
     method : str
         fpocket/fpocket4, pocketeer, alphaspace2, pycasta, castp/castp3/castpfold.
+        Also pykvfinder, ghecom, caver and p2rank for the local original routes.
     backend : str, optional
         Defaults to cli for fpocket, library for Python engines, server for CASTp.
-        Files are supported for fpocket, Pocketeer, AlphaSpace2, pyCASTA and CASTp.
+        Files are supported for every provider; required source context varies.
         Local reproductions are not admitted through this original-output entry point.
     **kwargs
         Provider execution/import options, including selection and frame.
@@ -43,7 +44,8 @@ def get_provider_output(
     Returns
     -------
     ProviderOutput
-        Provider-specific object with ordered pockets, representations and run.
+        Provider-specific object with original records, representations and run.
+        Use pockets, cavities, channels or sites according to the provider.
 
     Raises
     ------

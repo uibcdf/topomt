@@ -21,6 +21,10 @@ _SAVED_BACKENDS = {
     'alphaspace2': {'library'},
     'pycasta': {'library'},
     'castp': {'files'},
+    'pykvfinder': {'library'},
+    'ghecom': {'cli'},
+    'caver': {'cli'},
+    'p2rank': {'cli'},
 }
 
 
@@ -32,7 +36,7 @@ def load_provider_output(
     molecular_system: Any,
     binder: Any = None,
 ) -> ProviderOutput:
-    """Recover saved original results without running their pocket engine.
+    """Recover saved original results without running their scientific engine.
 
     Parameters
     ----------

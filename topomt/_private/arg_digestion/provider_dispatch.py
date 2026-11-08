@@ -15,6 +15,10 @@ DEFAULT_BACKENDS = {
     'alphaspace2': 'library',
     'pycasta': 'library',
     'castp': 'server',
+    'pykvfinder': 'library',
+    'ghecom': 'cli',
+    'caver': 'cli',
+    'p2rank': 'cli',
 }
 ORIGINAL_BACKENDS = {
     'fpocket': {'cli', 'wrapper', 'files'},
@@ -22,6 +26,10 @@ ORIGINAL_BACKENDS = {
     'alphaspace2': {'library', 'wrapper', 'files'},
     'pycasta': {'library', 'wrapper', 'files'},
     'castp': {'server', 'castpfold', 'files'},
+    'pykvfinder': {'library', 'files'},
+    'ghecom': {'cli', 'files'},
+    'caver': {'cli', 'files'},
+    'p2rank': {'cli', 'files'},
 }
 
 

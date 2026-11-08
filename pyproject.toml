@@ -46,6 +46,9 @@ centerline = [
 pocketeer = [
   "biotite",
 ]
+pykvfinder = [
+  "pyKVFinder==0.9.6",
+]
 third-party = [
   "topomt[alphaspace2,pocketeer]",
 ]
