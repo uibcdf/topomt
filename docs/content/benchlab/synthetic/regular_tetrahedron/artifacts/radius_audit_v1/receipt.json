@@ -1,0 +1,76 @@
+{
+  "schema": "topomt.benchlab.effective-radius-receipt/1",
+  "owning_issue": "uibcdf/topomt#143",
+  "protocol_commit": "6808516",
+  "audit_driver_sha256": "07bfedf8439c7c113ea7e226b659b99765b36a86ad77f84688601204bf94101b",
+  "complete_run_wall_time": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "elapsed_time",
+      "unit": "second",
+      "si": {
+        "factor": 1.0,
+        "offset": 0.0,
+        "exponents": {
+          "s": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 3.74,
+    "block_digests": [
+      "blake2b-128:5b062b9cf7f82cc3da4425819e0334ae"
+    ],
+    "digest": "blake2b-128:d3d1ac148baf218c6e7151eebe59f3b2"
+  },
+  "maximum_observed_process_rss": {
+    "value": 154664,
+    "unit": "KiB"
+  },
+  "execution_limits": "Serial original reader calls, one OS CPU, four GiB address-space ceiling, 128 MiB Java heap, 20 seconds per command. Slurm inspected: local partitions inval, other nodes unk; no allocated Slurm job. Shared host had no memory PSI and active vmstat sample no swapping.",
+  "scope": "Input-model audit only; timings are receipts, not performance comparisons.",
+  "files": {
+    "initial_reader_attempt/attempt_record.json": "395ef6acfe013186fc6d6dff5d073ee56d41cc68a591a59196afaae8b79c3990",
+    "initial_reader_attempt/compile.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "initial_reader_attempt/compile.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "initial_reader_attempt/ghecom-original/input.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "initial_reader_attempt/ghecom-original/results/assigned.pdb": "6b5684afcfb42cd66738264ffcb6ab69a6934b0424741c1523a4c08ed20096cd",
+    "initial_reader_attempt/ghecom-original/results/pockets.pdb": "2d11efb3f0d792bd3dbebc9f68d0ce49501e3f038d0b1fd5f8974fc2b3d0fe80",
+    "initial_reader_attempt/ghecom-original/results/probeL.gdb": "51cdc9ce34d8c289a40b0192099cb33e3f3fd22e8889090b28864d4107ee496f",
+    "initial_reader_attempt/ghecom-original/results/stdout.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "initial_reader_attempt/ghecom-original/results/stdout.txt": "4fe183c6f6cff451cb8ba38089ceba4feaaa99b0428fe750a0a9f47cf02fcc4f",
+    "initial_reader_attempt/ghecom_input_model.zip": "a702062fdef123c746dfc3c710e18322855cfae9bae11ac32d9be116bfd1468f",
+    "input_aligned.pdb": "cd8c0ef7d219d302e817f53d6f7866a97991c4d5dae642d094b41b4653fa532c",
+    "original_readers/caver-aligned/input.pdb": "cd8c0ef7d219d302e817f53d6f7866a97991c4d5dae642d094b41b4653fa532c",
+    "original_readers/caver-aligned/reader.zip": "070ae424819c7ca316c644a13a08ec8d9eacf1c2c1ed561e6b2e0e504c97296e",
+    "original_readers/caver-aligned/results/stdout.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original_readers/caver-aligned/results/stdout.txt": "c4da8356b99d71e070800186b6abd5879fb35cdb9411542c6008833eeac360a1",
+    "original_readers/caver-original/input.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_readers/caver-original/reader.zip": "b1d8d1ac5def3849c8096d0972c78c29c6def2a91c2c2c9eed432e927ca6f961",
+    "original_readers/caver-original/results/stdout.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original_readers/caver-original/results/stdout.txt": "c4da8356b99d71e070800186b6abd5879fb35cdb9411542c6008833eeac360a1",
+    "original_readers/compile.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original_readers/compile.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original_readers/ghecom-aligned/input.pdb": "cd8c0ef7d219d302e817f53d6f7866a97991c4d5dae642d094b41b4653fa532c",
+    "original_readers/ghecom-aligned/reader.zip": "5a0349f36e3353f3d4a5b1979dcc3ce3d134ab48ecdbcbdf89c7eb593863a484",
+    "original_readers/ghecom-aligned/results/assigned.pdb": "47e87bf383cfdb1b7414b80ab3c7c0f95381d0c933a86227f959947ddf5032d7",
+    "original_readers/ghecom-aligned/results/pockets.pdb": "69c765606dfca1d30330f1eef032b9caa2243407507ea437746cd8e351f3b952",
+    "original_readers/ghecom-aligned/results/probeL.gdb": "d33d89d848adca5275b6d66319e73699bf2b033f669894a269fe941e7741e5f0",
+    "original_readers/ghecom-aligned/results/stdout.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original_readers/ghecom-aligned/results/stdout.txt": "833aa2eccc9200106e71b4b2879dd8310f53a096fc5cceedeca0cc1390a2fdef",
+    "original_readers/ghecom-original/input.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_readers/ghecom-original/reader.zip": "4e1d9ca4b1715966b91d4855b3e0fbef56edb96db3173a9cafbf5ebccaeceba3",
+    "original_readers/ghecom-original/results/assigned.pdb": "ca3b085cc2fbcfbb8a580fa99d527b671557addc671fb0b3fc138b757bfe8360",
+    "original_readers/ghecom-original/results/pockets.pdb": "49942cb7c606b1593097f54cc083209640fa362138aa715133fe2062a3e41939",
+    "original_readers/ghecom-original/results/probeL.gdb": "5c707ac6bfdeab7069a816e99ec84027b67551ebc5b0a9cf1fdb173cd1833b03",
+    "original_readers/ghecom-original/results/stdout.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "original_readers/ghecom-original/results/stdout.txt": "4fe183c6f6cff451cb8ba38089ceba4feaaa99b0428fe750a0a9f47cf02fcc4f",
+    "original_readers/report.json": "2c5a318279f6271bad180190cb98d5273f024681814c611b232257bb0ab7c439",
+    "protocol.json": "6110bc41adc7e3e2568ca417729464ae64733cc56c6d8ffe497b2d3c30503b94",
+    "report.json": "2c5a318279f6271bad180190cb98d5273f024681814c611b232257bb0ab7c439"
+  }
+}

@@ -17,6 +17,7 @@ changes across the three principal experiments.
 system
 dfnd
 comparisons
+Effective atomic models <atomic_models>
 Comparison evidence <artifacts/comparisons_v1/README>
 Historical combined record <historical>
 ```
@@ -74,3 +75,9 @@ zero-cutoff controls. Raw inputs, bundles, receipts, two figures and a
 are retained under `artifacts/comparisons_v1/`. The
 [artifact guide](artifacts/comparisons_v1/README.md) explains original execution
 and evidence history. This is characterization, without an accuracy ranking.
+
+The [effective-radius follow-up](atomic_models.md) resolves the assignments that
+were still unknown at the comparison checkpoint: GHECOM uses 1.87 Å and CAVER
+uses 1.70 Å for these four carbon rows. A separate atom-name-alignment control
+leaves both assignments unchanged. This changes the independent probe regimes
+for GHECOM's atomic-ball model, without revising earlier observed outputs.

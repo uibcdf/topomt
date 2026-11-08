@@ -88,6 +88,45 @@ not qualify new cases, volume precision, all synthetic cases or proteins.
 
 ## Delivered first case
 
+### Effective-radius follow-up — 2026-11-08
+
+Under #143, the [public input-model follow-up](../../docs/content/benchlab/synthetic/regular_tetrahedron/atomic_models.md)
+resolves the GHECOM/CAVER assignments that were unknown at #141's checkpoint.
+The four-row protocol and original-reader Java caller were committed at
+`6808516` before execution; all 91 earlier notebook/data files retain their hashes.
+
+Original GHECOM assigns 1.87 Å to all four DUM/C atoms, and original CAVER's
+default reader assigns 1.70 Å. A separate variant changes only the name fields
+from `C   ` to ` C  `; neither numerical assignment changes. GHECOM's included
+table uses a 1.87 Å generic fallback even though an illustrative code comment
+shows an older 1.50 Å value. Raw export, actual table and executable, rather
+than that comment, establish the assignment. CAVER's default public-reader
+constructor and flag were verified in original bytecode and invoked directly;
+no tunnel calculation or copied radius logic is part of its audit.
+
+These input models have different independent tetrahedron regimes. With GHECOM's
+1.87 Å balls and rounded PDB coordinates, face clearance is 1.190229 Å and
+residence clearance 1.375863 Å: a 1.2 Å ball fits inside but not through a face;
+1.4 Å does not fit inside the finite cell. With CAVER's 1.70 Å assignment the
+rounded-reference clearances are 1.360229/1.545863 Å, matching the earlier
+nonmarginal native regimes. These are independent ball-model implications,
+not detector predictions, new accepted cavities or proof of operator equality.
+
+`artifacts/radius_audit_v1/` retains the protocol, separate aligned PDB,
+quantity-aware report, original-reader capsules and receipts. The ordinary
+engine-free guards verify raw radii/coordinates under nm/ps and pm/fs policies.
+The original-reader run used one OS CPU, serial commands, 4 GiB address-space
+ceiling and a 128 MiB Java heap; measured peak process RSS was about 151 MiB.
+Neither frozen comparison notebook nor its original observations are rewritten.
+
+The first audit receiver failed on GHECOM's nonnumeric REMARK metadata after
+the original program successfully wrote its radius export. That attempt is
+retained; [MolSysMT #654](https://github.com/uibcdf/molsysmt/issues/654) owns the
+compatibility/diagnostic question. The corrected receiver reuses TopoMT's existing
+provider-point reader for the geometric export and MolSysMT for standard input
+coordinates. No sibling or original scientific code changed. #75/#76, #223,
+installed/full-matrix gates and the next certified-shell study remain separate.
+
 ### Original comparison stage — 2026-11-08
 
 Issue #141 adds `comparisons.ipynb`, executed in a fresh Python 3.14 kernel from

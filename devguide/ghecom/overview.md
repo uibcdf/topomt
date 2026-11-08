@@ -29,6 +29,12 @@ remain `None`; original labels are not guessed into source indices.
 
 ## Evidence and next gates
 
+The [tetrahedron input audit](../../docs/content/benchlab/synthetic/regular_tetrahedron/atomic_models.md)
+directly verifies 1.87 Å assignments for its four DUM/C atoms through original
+`-opdbin` output. Changing only atom-name alignment leaves that numerical value
+unchanged. This is version/input-specific radius evidence, not a general atom
+table replacement or a new pocket-accuracy claim.
+
 The shared [implementation plan](../external_provider_expansion_plan.md)
 and [expansion checkpoint](../original_provider_expansion_checkpoint.md)
 distinguish protocol tests, actual upstream execution, source recovery and

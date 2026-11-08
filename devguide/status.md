@@ -18,6 +18,14 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
+The later first-case input audit under #143 resolves the remaining effective
+GHECOM/CAVER radii using original readers: 1.87/1.70 Å for the four DUM/C atoms.
+Name alignment alone leaves those numerical assignments unchanged. The
+[laboratory follow-up](../docs/content/benchlab/synthetic/regular_tetrahedron/atomic_models.md)
+explains the resulting independent probe regimes and retains all prior artifacts.
+The original GHECOM metadata-reading incompatibility is handed off to MolSysMT
+#654; no sibling or native scientific code was changed.
+
 The 2026-11-08 continuation returns to the first BenchLab synthetic unit under
 [#141](https://github.com/uibcdf/topomt/issues/141). Its separate
 `comparisons.ipynb` verifies retained original evidence without running providers.

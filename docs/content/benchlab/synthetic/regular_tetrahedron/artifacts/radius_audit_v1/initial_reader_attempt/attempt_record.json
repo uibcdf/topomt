@@ -1,0 +1,10 @@
+{
+  "stage": "audit_receiver_metadata_reading",
+  "original_process_returncode": 1,
+  "original_radius_export_written": true,
+  "audit_status": "failed",
+  "error": "ValueError: invalid literal for int() with base 10: CO (GHECOM nonnumeric REMARK metadata)",
+  "owner_issue": "uibcdf/molsysmt#654",
+  "molsysmt_revision": "2325038e8c68157f5c730693ffbb8535f0b45540",
+  "disposition": "Retain original bytes. Corrected receiver reuses TopoMT provider-point reader rather than general molecular metadata parsing; no GHECOM or MolSysMT scientific code changed."
+}

@@ -29,6 +29,12 @@ remain `None`; original labels are not guessed into source indices.
 
 ## Evidence and next gates
 
+The [tetrahedron input audit](../../docs/content/benchlab/synthetic/regular_tetrahedron/atomic_models.md)
+verifies 1.70 Å for its four DUM/C atoms using the original default public
+reader. Name alignment alone leaves that numerical assignment unchanged.
+This reader control does not resolve the earlier four-atom origin/shell failure
+or supply a new tunnel result; the molecular pilot keeps its own scope.
+
 The shared [implementation plan](../external_provider_expansion_plan.md)
 and [expansion checkpoint](../original_provider_expansion_checkpoint.md)
 distinguish protocol tests, actual upstream execution, source recovery and

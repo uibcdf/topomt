@@ -133,3 +133,13 @@ above describes the original checkpoint and is superseded by this dated handoff.
 No scientific code or frozen notebook, input or observation artifact changed.
 The upstream issue remains open; this is no claim of reproduction or acceptance
 by its maintainers. Original packaging issue #222 retains its separate scope.
+
+## Effective-radius follow-up — 2026-11-08
+
+TopoMT #143 separately audits the two assignments left unknown above. Original
+readers verify GHECOM 1.87 Å and CAVER 1.70 Å for these DUM/C atoms; a distinct
+name-alignment control leaves both numerical assignments unchanged. The public
+`atomic_models.md` page and `artifacts/radius_audit_v1/` retain the new protocol,
+raw reader evidence and independent geometric implications. The original
+unknown-at-checkpoint statements, comparison notebook and observations are
+preserved, with no retrospective input change or new accuracy ranking.

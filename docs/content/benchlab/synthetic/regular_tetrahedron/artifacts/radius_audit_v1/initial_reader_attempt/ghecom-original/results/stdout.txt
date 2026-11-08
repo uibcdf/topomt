@@ -1,0 +1,99 @@
+#WARNING:Can't understand option 'ipdb'
+#WARNING:Can't understand option 'opdbin'
+#WARNING:Can't understand option 'opocpdb'
+#MODE 'P'
+/*** [0] General procedures commonly used for all the MODE ***/
+#COMMAND /fast_data/home/liliana/repos@uibcdf/topomt/.cache/third-party-expansion/tools/ghecom-src-20260817/bin/ghecom P -ipdb /fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/input.pdb -opdbin /fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/results/assigned.pdb -opocpdb /fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/results/pockets.pdb
+#margin_width 13.600000 (angstrom)
+#Read_PDB_File('/fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/input.pdb' AtomSelect H ChainIDStr '-' AtomHetSelect A ReadTER F macro_exclude F)
+#Natom 4
+#Change_N_CA_C_O_Hetatom_to_Atom()
+#Ndelatm_suppose 0 Ndelatm 0
+#Natom 4
+#MinP -3.744000 -3.744000 -3.744000 MaxP 3.744000 3.744000 3.744000
+#Make_Residue_List(Ahead,Rhead)
+#Nresidue 4
+#setup_RESIDUE_Pos_as_center_of_gravity(Rhead)
+N_ATOM    4
+N_RESIDUE 4
+N_MODEL   1
+N_CHAIN   1
+#Write_PDB_File(mode w) -> "/fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/results/assigned.pdb"
+#Decide_Num_Grid_3D(OddEven -)
+#gwidth 0.800000 margin 13.600000 Width 34.688000 34.688000 34.688000 Ngrid 44 44 44 OrigPos -17.344000 -17.344000 -17.344000
+#Malloc_CHAR3DMAP(44 44 44) 85184.00 byte -> 0.08 Mbyte
+#Set_Bit_3DMAP_Inside_Atoms(res_bitmask 1 Rscale 1.000000 Natom 4) -->#Ngrid_inside 204
+#Ngrid_VdW 204
+VOL_VDW 104.447998
+/*** [1-4] Set up probeP  ***/
+#Malloc_CHAR3DMAP(17 17 17) 4913.00 byte -> 0.00 Mbyte
+#Make_Sphere_Probe_Map(Radius 6.000000 grid_width 0.800000) -> MapSize [17 17 17] Nvoxel_foreground 1791
+/*** [1-5] Set up probeS  ***/
+#Malloc_CHAR3DMAP(7 7 7) 343.00 byte -> 0.00 Mbyte
+#Make_Sphere_Probe_Map(Radius 1.870000 grid_width 0.800000) -> MapSize [7 7 7] Nvoxel_foreground 57
+#PAR.Min_Pocket_ProbeS 0.000000 Ngrid_probeS   57 probeL  1791
+PAR.Min_Pocket_ProbeS 0.000000 Min_Pocket_GridNum 0
+#Malloc_CHAR3DMAP(7 7 7) 343.00 byte -> 0.00 Mbyte
+#Make_Sphere_Probe_Map(Radius 1.870000 grid_width 0.800000) -> MapSize [7 7 7] Nvoxel_foreground 57
+#Malloc_CHAR3DMAP(17 17 17) 4913.00 byte -> 0.00 Mbyte
+#Make_Sphere_Probe_Map(Radius 6.000000 grid_width 0.800000) -> MapSize [17 17 17] Nvoxel_foreground 1791
+#Output_CHAR3DMAP_PDB_format(mode w min_val 1) -->"probeL.gdb" #M->N 17 17 17
+# Natom 1791
+#Ngrid_probeS   57 probeL  1791
+#Dilation(X[44 44 44] P[17 17 17] tar_bitmask 1 res_bitmask 2)
+#x 0/44
+#x 10/44
+#x 20/44
+#x 30/44
+#x 40/44
+#x 0/44
+#x 10/44
+#x 20/44
+#x 30/44
+#x 40/44
+#erosion Nsurvive:363 Ntry:7451
+#Dilation(X[44 44 44] P[7 7 7] tar_bitmask 1 res_bitmask 8)
+#x 0/44
+#x 10/44
+#x 20/44
+#x 30/44
+#x 40/44
+#Dilation(X[44 44 44] P[7 7 7] tar_bitmask 8 res_bitmask 16)
+#x 0/44
+#x 10/44
+#x 20/44
+#x 30/44
+#x 40/44
+##Extract_A_and_B_and_notC_3DMAP(Xmap,A 4 B 16 C 1 res 32)
+#Extract_Specific_3DMAP(Xmap,tar_bitmask 32)
+#Extract_Specific_Bitmap Nsurvive:159
+#x 0/44
+#x 10/44
+#x 20/44
+#x 30/44
+#x 40/44
+#erosion Nsurvive:0 Ntry:159
+#Dilation(X[44 44 44] P[7 7 7] tar_bitmask 16 res_bitmask 64)
+#x 0/44
+#x 10/44
+#x 20/44
+#x 30/44
+#x 40/44
+#PAR.opocmapfile ''
+#PAR.ClusPocketType 'T'
+#PAR.ClusPocketType T
+#Make_Cluster_for_Binary_CHAR3DMAP_Queue(Xmap,tar 64 mark 128 curr 2)
+#N 44 44 44 N012 85184 Q_MAX 1935
+#MALLOC_QUEUE_XYZ(Q_MAX:1935)
+#Label Neighbors with map==1
+#x 0/44
+#x 10/44
+#x 20/44
+#x 30/44
+#x 40/44
+#Q_STORE_MAX 0
+#Number_of_CHAR3DMAP_Clusters: 0
+#delete_small_Nforeground_CHAR3DMAP_from_the_list(minNforeground:0)
+#PAR.RankKeepCluster -1
+#assign_CHAR3DMAP_from_the_list_of_cluster_CHAR3DMAPs(X(44 44 44 RankKeepCluster 64)-->Npixel_assign 0
+#Output_Clusters_of_CHAR3DMAP_in_PDB_format(Ncluster 0 RankKeepCluster -1)-->'/fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/results/pockets.pdb'

@@ -1,0 +1,10 @@
+REMARK Output_Clusters_of_CHAR3DMAP_in_PDB_format()
+REMARK    COMMAND /fast_data/home/liliana/repos@uibcdf/topomt/.cache/third-party-expansion/tools/ghecom-src-20260817/bin/ghecom P -ipdb /fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/input.pdb -opdbin /fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/results/assigned.pdb -opocpdb /fast_data/home/liliana/repos@uibcdf/topomt/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/results/pockets.pdb
+REMARK  DATE_START Nov 8,2026 10:21:0
+REMARK  DATE_END   Nov 8,2026 10:21:0
+REMARK  COMP_TIME  0.022135 seconds
+REMARK  Ncluster 0
+REMARK  RankKeepCluster -1
+REMARK  grid_size   44   44   44
+REMARK  grid_width    0.800
+REMARK  OrigPos  -17.344  -17.344  -17.344

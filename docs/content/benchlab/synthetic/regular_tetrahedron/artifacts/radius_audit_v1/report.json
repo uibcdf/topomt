@@ -1,0 +1,594 @@
+{
+  "schema": "topomt.benchlab.effective-radius-observations/1",
+  "case_id": "regular_tetrahedron",
+  "owning_issue": "uibcdf/topomt#143",
+  "scope": "Original input-radius assignment; no new pocket/channel interpretation",
+  "protocol_sha256": "6110bc41adc7e3e2568ca417729464ae64733cc56c6d8ffe497b2d3c30503b94",
+  "producer_commit": "6808516",
+  "audit_driver_sha256": "07bfedf8439c7c113ea7e226b659b99765b36a86ad77f84688601204bf94101b",
+  "producer_state": "Declared protocol/helper commit plus this retained audit driver; pre-existing version-file edit preserved",
+  "observations": [
+    {
+      "id": "ghecom-original",
+      "method": "ghecom",
+      "input": "original",
+      "status": "completed",
+      "input_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+      "radii": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "atomic_radii",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4
+          ],
+          "blocks": [
+            4
+          ]
+        },
+        "values": [
+          1.87,
+          1.87,
+          1.87,
+          1.87
+        ],
+        "block_digests": [
+          "blake2b-128:31f700d30e051fad010189fdaefd222a"
+        ],
+        "digest": "blake2b-128:e56f93dd275417923ca3428077fa0780"
+      },
+      "coordinates": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "coordinates",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4,
+            3
+          ],
+          "blocks": [
+            12
+          ]
+        },
+        "values": [
+          [
+            1.874,
+            1.874,
+            1.874
+          ],
+          [
+            1.874,
+            -1.874,
+            -1.874
+          ],
+          [
+            -1.874,
+            1.874,
+            -1.874
+          ],
+          [
+            -1.874,
+            -1.874,
+            1.874
+          ]
+        ],
+        "block_digests": [
+          "blake2b-128:426204ac3a17abc92aea934470e9ee76"
+        ],
+        "digest": "blake2b-128:926efb27d4cd4feca151942c0b4e6f75"
+      },
+      "bundle": {
+        "file": "original_readers/ghecom-original/reader.zip",
+        "sha256": "4e1d9ca4b1715966b91d4855b3e0fbef56edb96db3173a9cafbf5ebccaeceba3",
+        "run_id": "734078a41df3d9b9ee828a87dfe6bd89defe06ba9e1a5601d0f8b1782b6fb7e5"
+      },
+      "ball_model_implication": {
+        "meaning": "Independent equal-ball geometry, not an original detector prediction",
+        "face_clearance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "face_clearance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.1902291853171172,
+          "block_digests": [
+            "blake2b-128:a95f45f8b616438918d268f66a810026"
+          ],
+          "digest": "blake2b-128:efb03af0cb1a7f27efd995b3ab786710"
+        },
+        "residence_clearance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "residence_clearance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.3758632133840756,
+          "block_digests": [
+            "blake2b-128:f637fc0043e7e4ef5f882c588b2824e9"
+          ],
+          "digest": "blake2b-128:2ab881b7f094629a076f21f5f87831e3"
+        }
+      }
+    },
+    {
+      "id": "ghecom-aligned",
+      "method": "ghecom",
+      "input": "aligned",
+      "status": "completed",
+      "input_sha256": "cd8c0ef7d219d302e817f53d6f7866a97991c4d5dae642d094b41b4653fa532c",
+      "radii": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "atomic_radii",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4
+          ],
+          "blocks": [
+            4
+          ]
+        },
+        "values": [
+          1.87,
+          1.87,
+          1.87,
+          1.87
+        ],
+        "block_digests": [
+          "blake2b-128:31f700d30e051fad010189fdaefd222a"
+        ],
+        "digest": "blake2b-128:e56f93dd275417923ca3428077fa0780"
+      },
+      "coordinates": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "coordinates",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4,
+            3
+          ],
+          "blocks": [
+            12
+          ]
+        },
+        "values": [
+          [
+            1.874,
+            1.874,
+            1.874
+          ],
+          [
+            1.874,
+            -1.874,
+            -1.874
+          ],
+          [
+            -1.874,
+            1.874,
+            -1.874
+          ],
+          [
+            -1.874,
+            -1.874,
+            1.874
+          ]
+        ],
+        "block_digests": [
+          "blake2b-128:426204ac3a17abc92aea934470e9ee76"
+        ],
+        "digest": "blake2b-128:926efb27d4cd4feca151942c0b4e6f75"
+      },
+      "bundle": {
+        "file": "original_readers/ghecom-aligned/reader.zip",
+        "sha256": "5a0349f36e3353f3d4a5b1979dcc3ce3d134ab48ecdbcbdf89c7eb593863a484",
+        "run_id": "5588be48853d156f1dccb54e7a06dbe6f8dde7f72be577d613f98b1d6a3e333f"
+      },
+      "ball_model_implication": {
+        "meaning": "Independent equal-ball geometry, not an original detector prediction",
+        "face_clearance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "face_clearance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.1902291853171172,
+          "block_digests": [
+            "blake2b-128:a95f45f8b616438918d268f66a810026"
+          ],
+          "digest": "blake2b-128:efb03af0cb1a7f27efd995b3ab786710"
+        },
+        "residence_clearance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "residence_clearance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.3758632133840756,
+          "block_digests": [
+            "blake2b-128:f637fc0043e7e4ef5f882c588b2824e9"
+          ],
+          "digest": "blake2b-128:2ab881b7f094629a076f21f5f87831e3"
+        }
+      }
+    },
+    {
+      "id": "caver-original",
+      "method": "caver",
+      "input": "original",
+      "status": "completed",
+      "input_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+      "radii": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "atomic_radii",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4
+          ],
+          "blocks": [
+            4
+          ]
+        },
+        "values": [
+          1.7,
+          1.7,
+          1.7,
+          1.7
+        ],
+        "block_digests": [
+          "blake2b-128:b316dc410c327ac77a1d87c296cadb45"
+        ],
+        "digest": "blake2b-128:7dd377cdcadef434a6b735bdbda12b67"
+      },
+      "coordinates": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "coordinates",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4,
+            3
+          ],
+          "blocks": [
+            12
+          ]
+        },
+        "values": [
+          [
+            1.874,
+            1.874,
+            1.874
+          ],
+          [
+            1.874,
+            -1.874,
+            -1.874
+          ],
+          [
+            -1.874,
+            1.874,
+            -1.874
+          ],
+          [
+            -1.874,
+            -1.874,
+            1.874
+          ]
+        ],
+        "block_digests": [
+          "blake2b-128:426204ac3a17abc92aea934470e9ee76"
+        ],
+        "digest": "blake2b-128:926efb27d4cd4feca151942c0b4e6f75"
+      },
+      "bundle": {
+        "file": "original_readers/caver-original/reader.zip",
+        "sha256": "b1d8d1ac5def3849c8096d0972c78c29c6def2a91c2c2c9eed432e927ca6f961",
+        "run_id": "408d215b02b94f87ce69eef654dd7b9ff7d0e090a9d88f41615e3982f81f0bb0"
+      },
+      "ball_model_implication": {
+        "meaning": "Independent equal-ball geometry, not an original detector prediction",
+        "face_clearance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "face_clearance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.3602291853171173,
+          "block_digests": [
+            "blake2b-128:328c7e7e909660c608cc44691664e01a"
+          ],
+          "digest": "blake2b-128:dbadd46dc461d3568fd8fe8f5ab293db"
+        },
+        "residence_clearance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "residence_clearance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.5458632133840757,
+          "block_digests": [
+            "blake2b-128:e21346c798a96af9f4210c651412c893"
+          ],
+          "digest": "blake2b-128:cea1f2a830f6784d39a27bc699f81aec"
+        }
+      }
+    },
+    {
+      "id": "caver-aligned",
+      "method": "caver",
+      "input": "aligned",
+      "status": "completed",
+      "input_sha256": "cd8c0ef7d219d302e817f53d6f7866a97991c4d5dae642d094b41b4653fa532c",
+      "radii": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "atomic_radii",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4
+          ],
+          "blocks": [
+            4
+          ]
+        },
+        "values": [
+          1.7,
+          1.7,
+          1.7,
+          1.7
+        ],
+        "block_digests": [
+          "blake2b-128:b316dc410c327ac77a1d87c296cadb45"
+        ],
+        "digest": "blake2b-128:7dd377cdcadef434a6b735bdbda12b67"
+      },
+      "coordinates": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "coordinates",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4,
+            3
+          ],
+          "blocks": [
+            12
+          ]
+        },
+        "values": [
+          [
+            1.874,
+            1.874,
+            1.874
+          ],
+          [
+            1.874,
+            -1.874,
+            -1.874
+          ],
+          [
+            -1.874,
+            1.874,
+            -1.874
+          ],
+          [
+            -1.874,
+            -1.874,
+            1.874
+          ]
+        ],
+        "block_digests": [
+          "blake2b-128:426204ac3a17abc92aea934470e9ee76"
+        ],
+        "digest": "blake2b-128:926efb27d4cd4feca151942c0b4e6f75"
+      },
+      "bundle": {
+        "file": "original_readers/caver-aligned/reader.zip",
+        "sha256": "070ae424819c7ca316c644a13a08ec8d9eacf1c2c1ed561e6b2e0e504c97296e",
+        "run_id": "c07006fad142678705b042f16e29cfcee1cf1f2358f7d0d3af2608c20e75bfcd"
+      },
+      "ball_model_implication": {
+        "meaning": "Independent equal-ball geometry, not an original detector prediction",
+        "face_clearance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "face_clearance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.3602291853171173,
+          "block_digests": [
+            "blake2b-128:328c7e7e909660c608cc44691664e01a"
+          ],
+          "digest": "blake2b-128:dbadd46dc461d3568fd8fe8f5ab293db"
+        },
+        "residence_clearance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "residence_clearance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.5458632133840757,
+          "block_digests": [
+            "blake2b-128:e21346c798a96af9f4210c651412c893"
+          ],
+          "digest": "blake2b-128:cea1f2a830f6784d39a27bc699f81aec"
+        }
+      }
+    }
+  ],
+  "compile": {
+    "command": [
+      "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/jvm/bin/javac",
+      "-J-Xmx128m",
+      "-J-XX:ActiveProcessorCount=1",
+      "-classpath",
+      "/fast_data/home/liliana/repos@uibcdf/topomt/.cache/third-party-expansion/tools/caver_3.0.2/caver_3.0/caver/caver.jar",
+      "-d",
+      "/tmp/topomt_radius_reader_z4s62p5c",
+      "/fast_data/home/liliana/repos@uibcdf/topomt/devtools/benchlab/CaverRadiusAudit.java"
+    ],
+    "returncode": 0,
+    "compiler_sha256": "4fa7d108d697b5c3cbe15678c3ad6003f612a481c6229b143cc30a80e8c638b7"
+  }
+}
