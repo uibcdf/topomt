@@ -7,6 +7,11 @@ not install them, and importing TopoMT does not import them.
 
 ## Supported routes and requirements
 
+The new [local cavity, channel and predicted-site routes](original_local_providers.md)
+cover pyKVFinder, GHECOM, CAVER and P2Rank through `get_provider_output`.
+That guide gives their exact protocols, access/licences, options and current
+mapping limits. Their results retain distinct scientific kinds.
+
 | Provider | Original engine route | Installation and runtime requirements | Other TopoMT routes and current limits |
 |---|---|---|---|
 | [fpocket](https://github.com/Discngine/fpocket) | `third_party.fpocket`, `backend='cli'` | `conda install -c conda-forge fpocket`; executable available on PATH, or supply `fpocket_cmd` | Persisted output loader; native implementation and TopoMT variant. Native equivalence is under validation. |

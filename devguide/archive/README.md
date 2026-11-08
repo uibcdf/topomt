@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (19)
+### Resolved (24)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
@@ -17,8 +17,13 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`castp3_oracle_alternate_location_identity.md`](castp3_oracle_alternate_location_identity.md) — [#83](https://github.com/uibcdf/topomt/issues/83) — Preserve original PDB atom serials after the parser removes alternate locations. *(resolved, reproduced)*
 - [`castp3_radius_coverage_and_void_panel.md`](castp3_radius_coverage_and_void_panel.md) — [#82](https://github.com/uibcdf/topomt/issues/82) — Audit radius-profile evidence across the archived corpus and expand analytical closed-void comparisons. *(resolved, measured)*
 - [`discussions_resource_organization.md`](discussions_resource_organization.md) — [#103](https://github.com/uibcdf/topomt/issues/103) — Organize resource Discussions with preserved history, facets and maintained guidance. *(resolved, inspected)*
+- [`expand_original_providers.md`](expand_original_providers.md) — [#135](https://github.com/uibcdf/topomt/issues/135) — Consolidate five original providers and add four no-cost local engines before BenchLab resumes. *(resolved, measured)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*
 - [`molsysviewer_topomt_init_exports.md`](molsysviewer_topomt_init_exports.md) — [#55](https://github.com/uibcdf/topomt/issues/55) — Restore MolSysViewer TopoMT add-on lifecycle exports. *(resolved, measured)*
+- [`original_caver_provider.md`](original_caver_provider.md) — [#138](https://github.com/uibcdf/topomt/issues/138) — Add source-bound original CAVER execution and engine-independent recovery. *(resolved, measured)*
+- [`original_ghecom_provider.md`](original_ghecom_provider.md) — [#137](https://github.com/uibcdf/topomt/issues/137) — Add source-bound original GHECOM execution and engine-independent recovery. *(resolved, measured)*
+- [`original_p2rank_provider.md`](original_p2rank_provider.md) — [#139](https://github.com/uibcdf/topomt/issues/139) — Add source-bound original P2Rank execution and engine-independent recovery. *(resolved, measured)*
+- [`original_pykvfinder_provider.md`](original_pykvfinder_provider.md) — [#136](https://github.com/uibcdf/topomt/issues/136) — Add source-bound original pyKVFinder execution and engine-independent recovery. *(resolved, measured)*
 - [`profile_memory_resource_lifecycle.md`](profile_memory_resource_lifecycle.md) — [#95](https://github.com/uibcdf/topomt/issues/95) — Preserve caller files and release memory-profile scratch and tracing. *(resolved, reproduced)*
 - [`provider_output_viewer_adoption.md`](provider_output_viewer_adoption.md) — [#66](https://github.com/uibcdf/topomt/issues/66) — Adopt original provider pocket outputs in the MolSysViewer addon. *(resolved, inspected)*
 - [`provider_pocket_outputs.md`](provider_pocket_outputs.md) — [#65](https://github.com/uibcdf/topomt/issues/65) — Expose original provider pocket outputs without DFND prerequisites. *(resolved, inspected)*

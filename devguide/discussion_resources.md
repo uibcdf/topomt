@@ -27,12 +27,12 @@ remain separately scoped in the thread and its evidence links.
 | AlphaSpace2 | [#71](https://github.com/uibcdf/topomt/discussions/71) | Existing optional provider and comparison; [technical overview](alphaspace2/overview.md). |
 | pyCASTA | [#72](https://github.com/uibcdf/topomt/discussions/72) | Existing optional provider and comparison; [technical overview](pycasta/overview.md). |
 | CASTp / CASTpFold | [#73](https://github.com/uibcdf/topomt/discussions/73) | Existing optional provider and comparison; [technical overview](castp/overview.md). |
-| CAVER | [#104](https://github.com/uibcdf/topomt/discussions/104) | Channel/tunnel method and intended path comparison. |
+| CAVER | [#104](https://github.com/uibcdf/topomt/discussions/104) | Original CLI/files source pilot; [overview](caver/overview.md), channel/tunnel method and intended path comparison. |
 | MOLE / MOLEonline | [#105](https://github.com/uibcdf/topomt/discussions/105) | Channel/tunnel/pore method and close DFND antecedent. |
 | PISA | [#106](https://github.com/uibcdf/topomt/discussions/106) | Interface comparison candidate. |
-| pyKVFinder | [#107](https://github.com/uibcdf/topomt/discussions/107) | Grid/dual-probe cavity comparison candidate. |
-| P2Rank / PrankWeb | [#108](https://github.com/uibcdf/topomt/discussions/108) | Site prediction and pocket-ranking comparison candidate. |
-| GHECOM | [#109](https://github.com/uibcdf/topomt/discussions/109) | Multiscale morphological cavity/pocket comparison candidate. |
+| pyKVFinder | [#107](https://github.com/uibcdf/topomt/discussions/107) | Original grid/dual-probe source pilot with the explicit compatibility fork; [overview](pykvfinder/overview.md). |
+| P2Rank / PrankWeb | [#108](https://github.com/uibcdf/topomt/discussions/108) | Original local CLI/files source pilot; [overview](p2rank/overview.md). Web route remains a candidate. |
+| GHECOM | [#109](https://github.com/uibcdf/topomt/discussions/109) | Original P-mode CLI/files source pilot; [overview](ghecom/overview.md). Other morphological modes remain candidates. |
 | DoGSite3 | [#110](https://github.com/uibcdf/topomt/discussions/110) | Pocket/subpocket and descriptor comparison candidate. |
 | HOLE | [#111](https://github.com/uibcdf/topomt/discussions/111) | Specialized pore-profile comparison candidate. |
 | CHAP | [#112](https://github.com/uibcdf/topomt/discussions/112) | Specialized channel structural/functional comparison candidate. |

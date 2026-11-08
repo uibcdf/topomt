@@ -51,5 +51,12 @@ classification; it is not package or production runtime. Public core metadata
 and its optional extras remain owner-defined. Optional original engines retain
 [their separate requirements](../../docs/content/user/third_party_engines.md).
 
+`original_local_env.yaml` lists opt-in Linux/Python 3.14 build/runtime tools
+for pyKVFinder source builds, GHECOM compilation and the CAVER/P2Rank Java
+routes. It does not install their external distributions or replace the shared
+daily workspace. Original pyKVFinder 0.9.6 requires NumPy <2.5; the separately
+identified compatibility source has its own evidence gate. See the
+[admission plan](../../devguide/external_provider_expansion_plan.md).
+
 [Shared API/CLI contract](https://github.com/uibcdf/molsyssuite/blob/8f00e6d9de943b6e4710ea62936e2ebea00fad24/devguide/conda_environment_tools.md).
 Tracking: uibcdf/topomt#78, uibcdf/topomt#16 and uibcdf/molsyssuite#45.

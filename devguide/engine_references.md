@@ -2,11 +2,21 @@
 
 **Historical reference notes.** Current installation, integration status and
 provider roadmaps are maintained in the [external-tool catalogue](external_tools_catalog.md)
-and its five provider overviews. The sections below preserve earlier reference
+and its provider overviews. The sections below preserve earlier reference
 decisions; their native-default recommendations and status summaries are not
 current original-provider delivery guidance or fresh parity certificates.
 
 ## Purpose
+
+Current pyKVFinder consultation checkout: `~/repos@others/pyKVFinder`, clean
+upstream `20add3537319ffd11e5e660a9181dd986651e928` (v0.9.6). Its `origin`
+still points to LBC-LNBio; the `uibcdf` remote exposes the explicitly separate
+compatibility branch at `e0f0fa6d32109ebd02d951ef4d7f84f3e1a88fb9`.
+The separate clean checkout `~/repos@others/pyKVFinder-uibcdf` tracks that fork
+branch while the original consultation checkout stays on upstream main.
+See [the new-provider checkpoint](original_provider_expansion_checkpoint.md)
+for the fork's bounded native/TOML qualification. Inspect revision and dirty
+state again before consulting or updating either source.
 
 This document records the external reference points used to design, validate,
 and compare the main TopoMT engine integrations.

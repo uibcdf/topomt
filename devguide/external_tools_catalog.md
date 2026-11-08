@@ -24,10 +24,23 @@ Datasets and validation references have their own
 | [AlphaSpace2 #71](https://github.com/uibcdf/topomt/discussions/71) | [Overview](alphaspace2/overview.md) |
 | [pyCASTA #72](https://github.com/uibcdf/topomt/discussions/72) | [Overview](pycasta/overview.md) |
 | [CASTp / CASTpFold #73](https://github.com/uibcdf/topomt/discussions/73) | [Overview](castp/overview.md) |
+| [pyKVFinder #107](https://github.com/uibcdf/topomt/discussions/107) | [Overview](pykvfinder/overview.md) |
+| [GHECOM #109](https://github.com/uibcdf/topomt/discussions/109) | [Overview](ghecom/overview.md) |
+| [CAVER #104](https://github.com/uibcdf/topomt/discussions/104) | [Overview](caver/overview.md) |
+| [P2Rank #108](https://github.com/uibcdf/topomt/discussions/108) | [Overview](p2rank/overview.md) |
 
 ## Ownership and current scope
 
-This catalogue and the five linked provider overviews are permanent, versioned
+The maintainer accepted [the expansion plan](external_provider_expansion_plan.md)
+on 2026-11-07 under [#135](https://github.com/uibcdf/topomt/issues/135), before
+further BenchLab work: pyKVFinder #136, GHECOM #137, CAVER 3.02 CLI #138 and
+P2Rank 2.5.1 #139. This is an implementation batch, not an execution certificate.
+Eligibility is currently restricted to no-payment routes: locally installable
+open source or no-cost services with reviewed terms and automation/disclosure
+conditions. Distinguish editions, academic-only permissions and unknown licences.
+Paid routes are excluded for now; unreviewed leads remain in the catalogue.
+
+This catalogue and the linked provider overviews are permanent, versioned
 navigation records outside the defect/proposal queues. Discussions host resource
 descriptions, discovery, reviews, evidence and scientific conversations; their
 opening posts also link relevant technical records. Independently closable
@@ -45,7 +58,7 @@ retain their provenance until separately admitted under that contract.
 
 ## Integrated providers
 
-All five are both optional providers and comparison references. Availability of
+Providers are both optional integrations and comparison references. Availability of
 a package or service, original-adapter fidelity, local reproduction and canonical
 Topography admission are separate statuses.
 The table and dated native receipt below retain their original review scope;
@@ -65,6 +78,14 @@ verification target for the new executable boundary.
 | [AlphaSpace2](alphaspace2/overview.md) | Python library and captured files; `AlphaSpace2Output` | Installed 0.1.2, including selected receptor/reference contacts | Selected geometry/contact/typed-score tests pass; broader semantics remain |
 | [pyCASTA](pycasta/overview.md) | Python library/scripts; `PyCASTAOutput` | Installed 1.0.8; separate original-score correction #35 closed | Native `1a6w` regression [#53](https://github.com/uibcdf/topomt/issues/53) remains open |
 | [CASTp / CASTpFold](castp/overview.md) | Servers/files; `CASTpOutput` | Archives and mocked transports; current live availability unverified | Historical CASTp1 closure; experimental CASTp3-like route |
+| [pyKVFinder](pykvfinder/overview.md) | Library/files; `PyKVFinderOutput`, cavity grids | Explicit compatibility source 0.9.6+uibcdf.2, NumPy 2.5.4; 266 unit cases and a 12-cavity direct-original/recovery pilot | No native reproduction |
+| [GHECOM](ghecom/overview.md) | CLI/files; `GhecomOutput`, P-mode grid pockets | Original 2026/08/17 source pilot: 41 clusters on one retained input | No native reproduction |
+| [CAVER](caver/overview.md) | CLI/files; `CaverOutput`, ordered tunnel paths | Original 3.02 + Java 21 source pilot: 47 profiles on one retained input | No native reproduction |
+| [P2Rank](p2rank/overview.md) | CLI/files; `P2RankOutput`, predicted sites | Original 2.5.1 + Java 21 source pilot: 5 sites on one retained input | No native reproduction |
+
+The [new-adapter checkpoint](original_provider_expansion_checkpoint.md) records
+exact inputs, archives, limits and engine-free recovery. These source pilots do
+not qualify public packages or establish scientific agreement between methods.
 
 Installation and user API requirements remain in the
 [user guide](../docs/content/user/third_party_engines.md).
@@ -89,12 +110,8 @@ A comparison reference can also become an optional provider.
 
 | Tool and official source | Capability / relationship | Route to assess | Priority / rationale |
 |---|---|---|---|
-| [CAVER](https://www.caver.cz/index.php) | Channel/tunnel candidate and path comparison | CLI/results | High: expands path and trajectory coverage |
 | [MOLE / MOLEonline](https://moleonline.cz/) | Channel/tunnel/pore candidate and close DFND antecedent | [Engine](https://github.com/sb-ncbr/MOLE), [Webchemistry](https://github.com/sb-ncbr/webchemistry), [web interface](https://github.com/sb-ncbr/moleonline-web); no runtime integration | High: [2026-11-07 source/method review](DFND/mole_comparison_2026_11_07.md) distinguishes operators and bounds originality claims; executable comparison remains pending |
 | [PISA](https://github.com/PDBe-KB/pisa) | Interface candidate and comparison | CLI/XML, including `--as-is` assembly-interface analysis | High: supplied-assembly interfaces without assembly prediction |
-| [pyKVFinder](https://lbc-lnbio.github.io/pyKVFinder/) | Grid/dual-probe cavity candidate and comparison | Optional Python package | High among cavity additions: complementary geometric support |
-| [P2Rank](https://github.com/rdk/p2rank) / [PrankWeb](https://prankweb.cz/) | ML site prediction and pocket rescoring comparison | Java CLI first; assess web automation separately | Medium-high: surface-site prediction is not automatically a closed region |
-| [GHECOM](https://pdbj.org/ghecom/README_ghecom.html) | Multiscale morphological pocket/cavity comparison | C executable and grid/map files | Medium: useful accessibility/scale comparison for DFND |
 | [DoGSite3](https://proteins.plus/help/dogsite3_rest) | Pocket/subpocket and descriptor candidate | Documented REST API and retained results | Medium: remote alternative with volumetric output |
 | [HOLE](https://www.holeprogram.org/) | Ion-channel pore dimension comparison | Executable/results | Specialized: pore profiles |
 | [CHAP](https://github.com/channotation/chap) | Ion-channel structural/functional annotation | Executable/results; trajectory-dependent analyses separately | Specialized: distinguish geometry from hydrophobic/water inference |
@@ -138,6 +155,19 @@ Literature and Resources. The POVME tool-family conversation is linked from
 the [resource register](discussion_resources.md); the two primary-paper threads
 retain their distinct reading histories. Literature discussion is not evidence
 that a provider is integrated.
+
+## New research intake — 2026-11-07
+
+These additional families expand the discovery catalogue, not the current
+implementation batch. Only the official repository/README and licence identity
+were reviewed; no local installation or original execution is claimed.
+Use the catalogue conversation #68 for initial intake until a dedicated resource
+review is opened, then add its canonical thread to the resource register.
+
+| Lead | Official access source | Scientific question and next gate |
+| --- | --- | --- |
+| [MoloVol](https://github.com/molovol/MoloVol) | MIT; [original method paper](https://journals.iucr.org/j/issues/2022/04/00/yr5079/yr5079.pdf) | Volumes/surfaces of molecules and unit cells; useful probe-center versus probe-occupied volume definitions for synthetic systems. Review exact CLI, radii, region definitions and selected version before admission. |
+| [PyVOL](https://github.com/schlessinger-lab/pyvol) | MIT wrapper/library; official README documents an MSMS executable dependency | Pocket/subpocket segmentation and surface/volume representations. Review the entire MSMS acquisition/licence chain and current Python compatibility before deciding whether a no-payment route meets our scope. The wrapper licence alone does not admit its backend. |
 
 ## Maintenance rule
 

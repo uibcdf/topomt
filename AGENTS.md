@@ -35,6 +35,16 @@ through the synthetic phase before starting new protein-characterization work.
 Use `devguide/DFND/notebook_laboratory_checkpoint.md` for the active sequence;
 catalog labels and agreement with other engines are not independent truth.
 
+Immediate priority (2026-11-07): consolidate the original providers and add four
+or five no-cost third-party engines before further BenchLab development. Follow
+`devguide/external_provider_expansion_plan.md` under #135. Preserve distinct
+cavity, channel and predicted-site semantics and require original-execution
+evidence before claiming an engine works; resume the native synthetic sequence
+after this batch.
+The bounded source batch is completed in
+`devguide/original_provider_expansion_checkpoint.md`; resume the native
+synthetic sequence while keeping installed/public qualification separate.
+
 Study-area direction (2026-11-07): use descriptive case names without numbering.
 Maintain one versioned study unit per system, including independent references,
 DFND observations and original third-party comparisons. Prepare the same case

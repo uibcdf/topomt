@@ -18,6 +18,23 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
+The later 2026-11-07 maintainer instruction prioritizes consolidating the five
+existing original providers and adding four or five no-cost third-party tools
+before further BenchLab development. Follow [the implementation plan](external_provider_expansion_plan.md)
+under [#135](https://github.com/uibcdf/topomt/issues/135), initially pyKVFinder,
+GHECOM, CAVER 3.02 CLI and P2Rank 2.5.1. This does not start new native DFND
+protein characterization or imply that documentary candidates already execute.
+
+The [new-provider source checkpoint](original_provider_expansion_checkpoint.md)
+records actual CAVER, P2Rank, GHECOM and pyKVFinder execute/save/recover controls.
+The four new adapters and distinct record kinds are implemented. The requested
+[compatibility fork](https://github.com/uibcdf/pyKVFinder/tree/uibcdf-compat)
+is qualified for this bounded Linux/Python 3.14/NumPy 2.5.4 source route, with
+266 upstream/compatibility unit cases and tomlkit floor/current controls.
+The four-engine source milestone is complete; the native synthetic BenchLab
+sequence can resume. Installed/public delivery and full scientific gates remain
+separate, including the earlier five-provider handoff work.
+
 On 2026-11-07 the user selected native DFND development guided one synthetic
 case at a time, with protein studies after that phase. The
 [laboratory checkpoint](DFND/notebook_laboratory_checkpoint.md) records the
