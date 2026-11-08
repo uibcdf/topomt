@@ -25,6 +25,7 @@ _SAVED_BACKENDS = {
     'ghecom': {'cli'},
     'caver': {'cli'},
     'p2rank': {'cli'},
+    'mole': {'cli'},
 }
 
 

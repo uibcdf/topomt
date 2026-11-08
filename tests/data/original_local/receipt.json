@@ -7,7 +7,10 @@
     "caver": 47,
     "p2rank": 5,
     "ghecom": 41,
-    "pykvfinder": 12
+    "pykvfinder": 12,
+    "mole": 15,
+    "mole-empty": 0,
+    "mole-1tqn": 36
   },
   "files": {
     "ghecom.zip": "8f3da42b373844c4503e45ac904b92a4f88db4eb01bcdabf3a192304ff890e3e",
@@ -16,6 +19,15 @@
     "caver.zip": "8217e2c371cf339c97cada736b18bd9c436297c61afe5542fe70b32207d25c22",
     "p2rank.zip": "1cb25c1368239ebc39ff3552c1921fc09a3e55185611a89d98f127941f0b314e",
     "pykvfinder.zip": "aec41a20d5e6c2afa3f2d83b3fe1a08d0cd48a1ef7cb17c135833d32cc3408c8",
-    "PYKVFINDER_LICENSE.txt": "b98fbb37db5b23bc5cfdcd16793206a5a7120a7b01f75374e5e0888376e4691c"
-  }
+    "PYKVFINDER_LICENSE.txt": "b98fbb37db5b23bc5cfdcd16793206a5a7120a7b01f75374e5e0888376e4691c",
+    "mole.zip": "0dc5a2abe09a1ed59cba5a0dcfa3b9b8052046dd8b4f3a1edad092a297b5c8cb",
+    "mole-empty.zip": "e634ad2519d90a03ae55604eca9b448e88621f54738f938a3401727b2d045a8c",
+    "mole-1tqn.zip": "f37cb4d92f514e084f5231e3e47f27794baa8ff78813d069ba3ecac0ab754ec4",
+    "mole_1tqn.cif": "486d39f7e7f6428b15acb9a31393cfcbc79720776280c520f33298d3f8d6ffb2",
+    "MOLE_LICENSE.txt": "047d584cd09a564eaec1f454fe2489f612d58d71fd5c7e4ccda9f937eb19f564"
+  },
+  "mole_review_date": "2026-11-08",
+  "mole_source_revision": "fe0e84582a6bd42bc69224fd3a3022bf5c51cec3",
+  "dotnet_sdk": "10.0.114",
+  "dotnet_runtime": "10.0.14"
 }

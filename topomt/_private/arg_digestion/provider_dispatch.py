@@ -19,6 +19,7 @@ DEFAULT_BACKENDS = {
     'ghecom': 'cli',
     'caver': 'cli',
     'p2rank': 'cli',
+    'mole': 'cli',
 }
 ORIGINAL_BACKENDS = {
     'fpocket': {'cli', 'wrapper', 'files'},
@@ -30,6 +31,7 @@ ORIGINAL_BACKENDS = {
     'ghecom': {'cli', 'files'},
     'caver': {'cli', 'files'},
     'p2rank': {'cli', 'files'},
+    'mole': {'cli', 'files'},
 }
 
 

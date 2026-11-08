@@ -11,6 +11,13 @@ LIBRARIES: dict[str, dict[str, str | None]] = {
     'alphaspace2': {'type': 'soft', 'pypi': 'alphaspace2', 'conda': None},
     'pycasta': {'type': 'soft', 'pypi': 'pycasta', 'conda': None},
     'pyKVFinder': {'type': 'soft', 'pypi': 'pyKVFinder', 'conda': None},
+    'mole': {
+        'type': 'soft',
+        'kind': 'executable',
+        'executable': 'mole2',
+        'pypi': None,
+        'conda': None,
+    },
     'ghecom': {
         'type': 'soft',
         'kind': 'executable',

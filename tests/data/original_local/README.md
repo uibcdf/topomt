@@ -31,3 +31,24 @@ licence is included in `CAVER_LICENSE.txt`. No engine executable is bundled here
 pyKVFinder source and vdW dictionary use GPL-3.0-or-later; its licence is retained
 as `PYKVFINDER_LICENSE.txt`. Fork source:
 https://github.com/uibcdf/pyKVFinder/tree/uibcdf-compat .
+
+MOLE continuation, captured 2026-11-08 from unchanged maintained Webchemistry
+`fe0e84582a6bd42bc69224fd3a3022bf5c51cec3`, CLI 2.5.26.10.26,
+.NET SDK 10.0.114/runtime 10.0.14:
+
+- `mole.zip`: existing 1AKD source, original defaults and automatic origins;
+  2 tunnels, 5 cavities and 8 voids.
+- `mole-empty.zip`: same source, interior threshold 1000000 angstroms;
+  all channel/cavity/void collections are empty after completed execution.
+- `mole-1tqn.zip`: byte-identical official example `mole_1tqn.cif`, original
+  defaults plus automatic and merged pores; 14 tunnels, 3 pores, 4 merged pores,
+  9 cavities and 6 voids. This is an original-adapter integration control,
+  not native DFND protein characterization or a molecular BenchLab comparison.
+
+The MIT source licence is retained in `MOLE_LICENSE.txt`. No MOLE executable or
+library is bundled. Volume fields sum original Delaunay tetrahedron volumes;
+they are not solvent-excluded free volumes. Complete original profiles, meshes,
+XML/JSON/CSV, configurations and source context remain in the captures.
+The upstream CIF's alignment spaces are retained; its exact-file Git attributes
+disable newline normalization and trailing-space warnings for this frozen input.
+See `devguide/mole/source_checkpoint.md` for qualification scope and limits.

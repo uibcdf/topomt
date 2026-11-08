@@ -15,6 +15,7 @@ import topomt as tmt
 | `ghecom` | `cli` | P-mode morphological grid pockets | `output.pockets` |
 | `caver` | `cli` | Tunnel paths and local free radii | `output.channels` |
 | `p2rank` | `cli` | Predicted ligand-binding sites | `output.sites` |
+| `mole` | `cli` | Channel profiles and original cavity/void decomposition | `output.channels`, `output.cavities` |
 
 All provide `output.records`, `output.run`, `output.save(path)` and
 `topomt.load_provider_output(path, molecular_system=source)`. Recovery verifies
@@ -33,6 +34,8 @@ retained separately. PDB's decimal precision remains a conversion limit.
 `workers=1` and `timeout=300` are conservative defaults. Timeout accepts seconds
 or a time quantity. The Java routes additionally use `memory_mb=1024` as their
 maximum heap and constrain the JVM's processor count. The GHECOM route is serial.
+MOLE uses `memory_mb=1024` as its .NET managed heap cap and sets the .NET
+processor count to `workers`. This is not a total-process RAM limit.
 `max_grid_points=4000000` limits a conservative preflight bounding-grid estimate
 for pyKVFinder/GHECOM. These controls are not a machine resource reservation or
 a substitute for a scheduler; memory outside a Java heap also exists.
@@ -41,6 +44,70 @@ Lengths below accept scalars in the documented angstrom protocol units or
 compatible PyUnitWizard quantities. Volume cutoff uses angstroms cubed.
 CAVER's origin requires an explicit three-coordinate length quantity. Geometry
 access always returns quantities and does not change the application's unit policy.
+
+## MOLE
+
+The reviewed local protocol is **2.5.26.10.26**, from the maintained
+[Webchemistry source](https://github.com/sb-ncbr/webchemistry/tree/fe0e84582a6bd42bc69224fd3a3022bf5c51cec3).
+It uses the MIT licence. Build this source with .NET SDK 10; running this
+framework-dependent build requires .NET runtime 10. The upstream README
+provides `dotnet publish` instructions. Select the resulting executable with
+`mole_cmd`, or place `mole2` on PATH. Availability is checked only for execution;
+saved recovery needs neither executable nor runtime. The Python MOLEonline API
+is a server around this engine, not a replacement for its local executable.
+
+```python
+output = tmt.get_provider_output(source, method='mole',
+    mole_cmd='/path/to/mole2', probe_radius=3.0, interior_threshold=1.25)
+channel = output.channels[0]
+profile = channel.geometries['centerline']
+coordinates, radii = profile.coordinates, profile.radii
+original_json = output.original_data
+```
+
+Omitting `origin` selects original automatic origins. Supply an explicit
+three-coordinate length quantity to request one point, for example
+`origin=tmt.pyunitwizard.quantity([10, 20, 30], 'angstroms')`. The original
+algorithm may locate an origin within `origin_radius`; retain its reported
+origins rather than assuming the requested point was used exactly.
+
+| Option | Default | Original meaning / unit |
+| --- | --- | --- |
+| `probe_radius` | 3.0 | Surface-detail probe, angstroms |
+| `interior_threshold` | 1.25 | Original interior filtering threshold, angstroms |
+| `min_depth`, `min_depth_length` | 8, 5.0 | Minimum tetrahedron depth and depth length in angstroms |
+| `min_tunnel_length`, `min_pore_length` | 0.0, 0.0 | Minimum reported path lengths, angstroms |
+| `surface_cover_radius` | 10.0 | Original exit-point coverage scale, angstroms |
+| `origin_radius` | 5.0 | Search around an explicit origin, angstroms |
+| `bottleneck_radius`, `bottleneck_tolerance` | 1.25, 0.0 | Original radius/allowed constriction-length controls, angstroms |
+| `auto_origin_cover_radius` | 10.0 | Automatic-origin separation, angstroms |
+| `max_auto_origins_per_cavity` | 5 | Positive maximum origin count per cavity |
+| `weight_function` | `VoronoiScale` | Also `LengthAndRadius`, `Length`, `Constant` |
+| `ignore_hetatoms`, `ignore_hydrogens` | `False`, `False` | Original engine atom filters |
+| `compute_pores`, `compute_merged_pores` | `False`, `False` | Original automatic pore and merged-tunnel calculations |
+
+The channel collections (`Tunnels`, `Pores`, `MergedPores`, `Paths`) retain
+distinct namespaced identities and original types; shared access uses
+`output.channels`. Explicit exit, arbitrary query/path and membrane-orientation
+controls are outside this initial execution interface. Profiles expose original
+`Radius`, `FreeRadius` and `BRadius` as `centerline`, `free_radius_centerline`
+and `b_radius_centerline`. `profile_length` is the original final approximate
+profile distance, rounded to 0.001 angstrom; it is not recomputed from points.
+
+The original `Cavities` and `Voids` collections use `output.cavities`, preserving
+their original type labels. **`tetrahedral_volume` sums retained Delaunay
+tetrahedron volumes; it is not solvent-excluded free volume.** Inner/boundary
+mesh vertices are quantity-aware geometries; `record.fields['mesh']` retains
+triangle topology and declared units. These representations do not establish
+an independently validated closed region. The full original surface, chemistry,
+lining labels, layers, settings and origins remain accessible in the detached
+`output.original_data` and raw artifacts. Its native protocol uses angstroms
+and angstroms cubed. Source atom memberships remain `None` until qualified.
+
+Execution keeps original XML/JSON/CSV, logs, input/configuration, companion-file
+hashes and selected resource settings. Completion checks require the reviewed
+version, the original completion marker and complete successful XML/JSON output.
+An empty successful decomposition stays empty; errors do not become zero features.
 
 ## pyKVFinder
 

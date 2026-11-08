@@ -1,0 +1,2 @@
+# Retain the upstream scientific fixture byte-for-byte, including alignment spaces.
+tests/data/original_local/mole_1tqn.cif -text whitespace=-blank-at-eol
