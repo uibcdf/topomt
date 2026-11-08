@@ -116,3 +116,59 @@ def test_opening_derivation_and_certificates_survive_rigid_motion():
     after_angles /= np.linalg.norm(transformed - transformed_origin, axis=1)
     np.testing.assert_allclose(before_angles, after_angles, rtol=0, atol=1e-14)
     assert before['origin_inside'] and after['origin_inside']
+
+
+def test_opening_reference_reproduces_the_independent_geometry():
+    fixture, protocol, parent = inputs()
+    reference = json.loads((DATA / 'system_reference.json').read_text())
+    assert reference['reference_checks'] == 'passed'
+    assert (
+        reference['protocol_sha256']
+        == hashlib.sha256((DATA / 'protocol.json').read_bytes()).hexdigest()
+    )
+    assert reference['input_sha256'] == protocol['input_sha256']
+    coordinates = decode(fixture['coordinates'], 'coordinates', 'angstroms')
+    radii = decode(fixture['atom_radii'], 'atom_radii', 'angstroms')
+    origin = decode(protocol['origin'], 'origin', 'angstroms')
+    axis = decode(fixture['derivation']['axis'], 'axis', 'dimensionless')
+    independent = geometry(coordinates, radii, origin, axis)
+    np.testing.assert_allclose(
+        decode(
+            reference['escape_witness']['per_atom_clearance'],
+            'per_atom_clearance',
+            'angstroms',
+        ),
+        independent['ray_clearance'],
+        rtol=0,
+        atol=1e-12,
+    )
+    np.testing.assert_allclose(
+        decode(
+            reference['certificates']['maximum_face_cover_radius'],
+            'maximum_face_cover_radius',
+            'angstroms',
+        ),
+        independent['face_cover'].max(),
+        rtol=0,
+        atol=1e-12,
+    )
+    assert [
+        float(decode(e['probe_radius'], 'probe_radius', 'angstroms'))
+        for e in reference['experiments']
+    ] == [1.4, 3.0, 5.0]
+    kept = fixture['derivation']['parent_atom_indices']
+    contact = reference['contact_reference']
+    assert set(map(tuple, contact['new_child_hull_faces_parent_ids'])).isdisjoint(
+        map(tuple, contact['unchanged_child_hull_faces_parent_ids'])
+    )
+    all_face_atoms = {
+        atom
+        for face in contact['new_child_hull_faces_parent_ids']
+        + contact['unchanged_child_hull_faces_parent_ids']
+        for atom in face
+    }
+    assert all_face_atoms <= set(kept)
+    np.testing.assert_array_equal(
+        decode(fixture['coordinates'], 'coordinates', 'angstroms'),
+        decode(parent['coordinates'], 'coordinates', 'angstroms')[kept],
+    )
