@@ -86,7 +86,7 @@ def test_dfnd_reports_a_sealed_component_containing_the_certified_center():
 
 
 def test_public_closed_shell_notebook_has_executed_reference_report():
-    notebook = json.loads((NOTEBOOK_DIR / 'index.ipynb').read_text())
+    notebook = json.loads((NOTEBOOK_DIR / 'historical.ipynb').read_text())
     report = json.loads((ARTIFACT_DIR / 'report.json').read_text())
     assert report['reference_checks'] == 'passed'
     assert (

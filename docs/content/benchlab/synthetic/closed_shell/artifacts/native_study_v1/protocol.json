@@ -1,0 +1,318 @@
+{
+  "schema": "topomt.benchlab.closed-shell-protocol/1",
+  "case_id": "closed_shell",
+  "case_version": 1,
+  "issue": "uibcdf/topomt#144",
+  "created_utc": "2026-11-08T16:47:51.650359+00:00",
+  "source_file": "artifacts/closed_shell_v1/input.json",
+  "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "preserved_files": {
+    "artifacts/closed_shell_v1/alphaspace2_original.zip": "e89975beb5e10ae4c53157409f24c7d579db2cf9d84a1b58eba87ca755bfe76f",
+    "artifacts/closed_shell_v1/castp3_observation.json": "047a9318d7b51eee6bc02ce65ad7613748d4cfdb9bb3fdd8f24361c44ddb4d1a",
+    "artifacts/closed_shell_v1/castpfold_observation.json": "9aafd816d9fad3b36be84830f9628b3b0cff0ce594031f07548fbb466371486c",
+    "artifacts/closed_shell_v1/input.json": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+    "artifacts/closed_shell_v1/input.pdb": "e77ad9034389008e5b9ed7d5e05403b9add397f1cae596c470c4c303fca8f3be",
+    "artifacts/closed_shell_v1/input_atom.pdb": "478b65b4bdfb9d7f8f3428d0ed382e2e5ca99c7d8c63a787ae655434c476d4b6",
+    "artifacts/closed_shell_v1/input_castp.pdb": "258ce42c8d51392b3d15b8720e90a5d1e632a2c7d17eb77e8ae161aa8d2d0875",
+    "artifacts/closed_shell_v1/pocketeer_original.zip": "d7caea21fbbc9208d23811f532bcc5411c1bda92d58254def292bfc666b27488",
+    "artifacts/closed_shell_v1/report.json": "c490ac61d8119a48d67fae458b4878207c6b01cc74eea6496979df9612304f4d",
+    "historical.ipynb": "15eae3d8ebf03aa6ecaaac3b0c9c7c2a3914a20cf467e965b6ae02b072d2c011"
+  },
+  "history_relocation": "index.ipynb becomes historical.ipynb without changing bytes; the index HTML route becomes a short Markdown overview.",
+  "native_execution_before_reference": false,
+  "provider_execution": false,
+  "workers": 1,
+  "tolerances": {
+    "length_absolute": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "length_absolute",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1e-06,
+      "block_digests": [
+        "blake2b-128:fdc4aee404c6c8d3af6c444a146a42d5"
+      ],
+      "digest": "blake2b-128:3f449f091f8964e5dd214f9b8a75f2e2"
+    },
+    "barycentric_absolute": 1e-08
+  },
+  "origin": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "origin",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "int64",
+      "shape": [
+        3
+      ],
+      "blocks": [
+        3
+      ]
+    },
+    "values": [
+      0,
+      0,
+      0
+    ],
+    "block_digests": [
+      "blake2b-128:94238cee6e6e269281baf1c01232768d"
+    ],
+    "digest": "blake2b-128:8ef37c9c5bf16a7a4f42e9317dc65203"
+  },
+  "escape_witness": {
+    "direction": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "direction",
+        "unit": "dimensionless",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {}
+        },
+        "dtype": "float64",
+        "shape": [
+          3
+        ],
+        "blocks": [
+          3
+        ]
+      },
+      "values": [
+        -0.19378261272660222,
+        -0.980361670462006,
+        -0.036596367221310704
+      ],
+      "block_digests": [
+        "blake2b-128:d1757be575efb057d8dbbc1cb14f6745"
+      ],
+      "digest": "blake2b-128:b77458be7d526d039539029ae310c832"
+    },
+    "selection": "Maximum minimum all-atom ray clearance among normalized hull-face centroids and outward normals, without invoking DFND. Frozen direction is used for verification; the search is not a completeness proof.",
+    "candidate_index": 260,
+    "candidate_count": 280,
+    "preflight_clearance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "minimum_clearance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.09528533437011233,
+      "block_digests": [
+        "blake2b-128:dde124b404fd14fa5490c963cfd64f22"
+      ],
+      "digest": "blake2b-128:d4f4b5c75d03c2700b7a687b62040ab1"
+    }
+  },
+  "experiments": [
+    {
+      "id": "small_probe_access",
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.05,
+        "block_digests": [
+          "blake2b-128:4b5217221be043884d11732eae43fcd7"
+        ],
+        "digest": "blake2b-128:5d533faf0ae670188161d0f9ddee8cd5"
+      },
+      "expectation": "origin_free_and_exterior_connected",
+      "proof": "strict all-atom straight-ray clearance"
+    },
+    {
+      "id": "certified_wall",
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+      },
+      "expectation": "origin_free_and_enclosed",
+      "proof": "all hull triangles covered by probe-expanded balls; free origin strictly inside hull"
+    },
+    {
+      "id": "no_finite_residence",
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 5.0,
+        "block_digests": [
+          "blake2b-128:f268dce3141bedeb49543617e25a607f"
+        ],
+        "digest": "blake2b-128:3283a855e6d9da2f2b31a228fe78c7a1"
+      },
+      "expectation": "no_free_probe_center_in_finite_hull",
+      "proof": "all atom centers in a ball of radius R; if min_atomic_radius + probe > R, the convex hull is covered by expanded atomic balls"
+    }
+  ],
+  "legacy_control": {
+    "probe_radius": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_radius",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.2,
+      "block_digests": [
+        "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+      ],
+      "digest": "blake2b-128:da572895dee1efc42511cbdc2cd754ea"
+    },
+    "expectation": "enclosure_unresolved_by_these_sufficient_bounds",
+    "interpretation": "negative coverage margin and failed fixed-candidate ray search prove neither a leak nor closure"
+  },
+  "query": {
+    "min_size": 0,
+    "transit_policy": "with_connectors",
+    "gate_intrusion_policy": "flag_only",
+    "dry_adjacency": "face",
+    "residence_tolerance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "residence_tolerance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:3ba2a05b6ed0bfc574a7a7c18c6a68e1"
+    },
+    "permeability_tolerance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "permeability_tolerance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:5776c109ac89c18e2c9b62bf36990ac4"
+    }
+  },
+  "sweep": "Reuse the unchanged input probe_sweep (49 points). Add the declared 0.05 angstrom anchor separately.",
+  "reporting_control": "At the certified anchor set min_size=observed central resident-node count+1; raw geometry/result key must remain unchanged. This is reporting characterization, not a scientific threshold fit.",
+  "scope_limits": [
+    "No exact global cavity count at the enclosed anchor",
+    "No numerical solvent-volume precision claim",
+    "No claim that DFND graph paths generally certify continuous access",
+    "No historical provider or server re-execution"
+  ]
+}
