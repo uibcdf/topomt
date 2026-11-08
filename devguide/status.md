@@ -18,6 +18,16 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
+The 2026-11-08 continuation returns to the first BenchLab synthetic unit under
+[#141](https://github.com/uibcdf/topomt/issues/141). Its separate
+`comparisons.ipynb` verifies retained original evidence without running providers.
+The [laboratory checkpoint](DFND/notebook_laboratory_checkpoint.md#original-comparison-stage--2026-11-08)
+records the different atomic models, genuine empty results, invalid zero-cutoff
+pyKVFinder files, original CAVER/MOLE failures and separately declared one-voxel
+diagnostic. Native scientific code and all earlier case artifacts remain unchanged.
+The observed invalid-result receipt defect is fixed under #142. This is source
+characterization; broader scientific, installed-package and matrix gates remain.
+
 The 2026-11-08 maintainer continuation selects MOLE as the next original local
 provider under [#140](https://github.com/uibcdf/topomt/issues/140). Its unchanged
 maintained source now compiles and executes with .NET 10. The

@@ -26,9 +26,11 @@ docs/content/benchlab/
       index.md
       system.ipynb
       dfnd.ipynb
+      comparisons.ipynb
       historical.ipynb
       artifacts/regular_tetrahedron_v1/...
       artifacts/native_study_v1/...
+      artifacts/comparisons_v1/...
     closed_shell/
       index.ipynb
       artifacts/closed_shell_v1/...
@@ -52,9 +54,10 @@ New cases and input versions enter the collection only after their declared
 reference assumptions and evidence have been reviewed.
 
 The maintainer selected a short case overview plus separate `system.ipynb`,
-`dfnd.ipynb` and, when prepared, `comparisons.ipynb` stages. The first two stages
-are delivered for the tetrahedron under #134; comparison remains pending as a new
-notebook. Each runs from a clean kernel using frozen inputs and, for DFND, the
+`dfnd.ipynb` and `comparisons.ipynb` stages. The first two stages are delivered
+for the tetrahedron under #134; #141 adds the independent comparison notebook,
+an atomic-model audit and original local evidence. Its ordinary execution only
+verifies/reconstructs stored outputs. Each runs from a clean kernel using frozen inputs and, for DFND, the
 committed independent reference rather than another notebook's live variables.
 The earlier combined tetrahedron notebook is retained unchanged as historical
 evidence. The closed shell keeps its existing combined notebook until reviewed.

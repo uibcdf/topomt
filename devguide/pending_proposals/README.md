@@ -46,10 +46,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (2)
+### Active (1)
 
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
-- [`tetrahedron_original_comparisons.md`](tetrahedron_original_comparisons.md) — [#141](https://github.com/uibcdf/topomt/issues/141) — Add a model-audited original-method comparison stage for the regular tetrahedron. *(active, inspected)*
 
 ### Partial (4)
 

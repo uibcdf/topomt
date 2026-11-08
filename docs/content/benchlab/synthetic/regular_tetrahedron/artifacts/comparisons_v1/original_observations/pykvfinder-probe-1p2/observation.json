@@ -1,0 +1,256 @@
+{
+  "id": "pykvfinder-probe-1p2",
+  "method": "pykvfinder",
+  "scenario": "small_system_control",
+  "options": {
+    "probe_in": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_in",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.2,
+      "block_digests": [
+        "blake2b-128:7f818a45feb71a60cf3effd121324813"
+      ],
+      "digest": "blake2b-128:69101f94dba106dc73718a1bb860f4cb"
+    },
+    "probe_out": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_out",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 4.0,
+      "block_digests": [
+        "blake2b-128:578778c53fb720d78464739f50d61fca"
+      ],
+      "digest": "blake2b-128:7c34621074a952d2271684078d4958ab"
+    },
+    "step": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "step",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.2,
+      "block_digests": [
+        "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+      ],
+      "digest": "blake2b-128:e040d0a07e621bfe93e7146a74a0b2bb"
+    },
+    "removal_distance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "removal_distance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:6f2d2c3aa6453ed89c6f1d93be3474ab"
+    },
+    "volume_cutoff": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "volume_cutoff",
+        "unit": "angstrom ** 3",
+        "si": {
+          "factor": 1e-30,
+          "offset": 0.0,
+          "exponents": {
+            "m": 3
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:6b6ae393d578552d8e7ef5398bd1c9ee"
+    }
+  },
+  "probe_label": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "probe_label",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1.2,
+    "block_digests": [
+      "blake2b-128:7f818a45feb71a60cf3effd121324813"
+    ],
+    "digest": "blake2b-128:28196ff8feff750e3a192a1792c3e463"
+  },
+  "interpretation": "Predeclared grid/refinement and cutoff control; original 1.66 angstrom carbon model is unchanged",
+  "evidence_mode": "current_original_execution",
+  "record_counts": null,
+  "original_bundle": {
+    "file": "pykvfinder-probe-1p2/failed.zip",
+    "sha256": "2240b1f103eaba78e18e0c4f810e467fa10d687897eb4e4b32841aee15021a32",
+    "run_id": "00997deccb7f90f043723a32cd6fc9136d9fa338f8fec1073f76d5f1c9086bb8"
+  },
+  "status": "execution_failed",
+  "error_type": "ProviderExecutionError",
+  "reason": "Original provider 'pykvfinder' failed: original result is invalid: pyKVFinder cavity grid and descriptor labels disagree",
+  "elapsed_time": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "elapsed_time",
+      "unit": "second",
+      "si": {
+        "factor": 1.0,
+        "offset": 0.0,
+        "exponents": {
+          "s": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 4.9250381300007575,
+    "block_digests": [
+      "blake2b-128:b921dd9dfb10efbda2e20f29edc84322"
+    ],
+    "digest": "blake2b-128:4b627fb0fa7d830d0f5944cf48172c39"
+  },
+  "original_backend": "library",
+  "original_version": "0.9.6+uibcdf.2",
+  "actual_input": {
+    "file": "submitted.pdb",
+    "sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "atom_count": 4,
+    "coordinates": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "coordinates",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          4,
+          3
+        ],
+        "blocks": [
+          12
+        ]
+      },
+      "values": [
+        [
+          1.8739999999999999,
+          1.8739999999999999,
+          1.8739999999999999
+        ],
+        [
+          1.8739999999999999,
+          -1.8739999999999999,
+          -1.8739999999999999
+        ],
+        [
+          -1.8739999999999999,
+          1.8739999999999999,
+          -1.8739999999999999
+        ],
+        [
+          -1.8739999999999999,
+          -1.8739999999999999,
+          1.8739999999999999
+        ]
+      ],
+      "block_digests": [
+        "blake2b-128:3b3993988e8e3351c0a5a90343d114ea"
+      ],
+      "digest": "blake2b-128:e85bb5f2f61d73680d552ae25f1cb2ff"
+    },
+    "record_types": [
+      "ATOM"
+    ],
+    "atom_name_columns": [
+      "C   ",
+      "C   ",
+      "C   ",
+      "C   "
+    ],
+    "residue_name_columns": [
+      "DUM",
+      "DUM",
+      "DUM",
+      "DUM"
+    ]
+  }
+}

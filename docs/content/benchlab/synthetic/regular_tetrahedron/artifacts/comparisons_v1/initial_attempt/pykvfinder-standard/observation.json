@@ -1,0 +1,113 @@
+{
+  "id": "pykvfinder-standard",
+  "method": "pykvfinder",
+  "scenario": "standard",
+  "options": {},
+  "probe_label": null,
+  "interpretation": "Original dual-probe defaults, including 5 cubic angstrom cutoff and 2.4 angstrom removal distance",
+  "evidence_mode": "current_original_execution",
+  "record_counts": {},
+  "original_bundle": {
+    "file": "pykvfinder-standard/original.zip",
+    "sha256": "4ad0f60d601909a3223d28dbd56422edf0acf85d8f201aa662ded63bbe64bc37",
+    "run_id": "b78fc720712915cdc367cd80751eca7e1aea58800aee2f517ee22c10a04afaa8"
+  },
+  "status": "completed",
+  "record_count": 0,
+  "record_ids": [],
+  "completed_empty": true,
+  "elapsed_time": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "elapsed_time",
+      "unit": "second",
+      "si": {
+        "factor": 1.0,
+        "offset": 0.0,
+        "exponents": {
+          "s": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1.6407306249966496,
+    "block_digests": [
+      "blake2b-128:e8416e2ea787e7cacd8ca0d7f100f99c"
+    ],
+    "digest": "blake2b-128:bcfe4f29923918a479de07fec8d5a8f9"
+  },
+  "original_backend": "library",
+  "original_version": "0.9.6+uibcdf.2",
+  "actual_input": {
+    "file": "submitted.pdb",
+    "sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "atom_count": 4,
+    "coordinates": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "coordinates",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          4,
+          3
+        ],
+        "blocks": [
+          12
+        ]
+      },
+      "values": [
+        [
+          1.8739999999999999,
+          1.8739999999999999,
+          1.8739999999999999
+        ],
+        [
+          1.8739999999999999,
+          -1.8739999999999999,
+          -1.8739999999999999
+        ],
+        [
+          -1.8739999999999999,
+          1.8739999999999999,
+          -1.8739999999999999
+        ],
+        [
+          -1.8739999999999999,
+          -1.8739999999999999,
+          1.8739999999999999
+        ]
+      ],
+      "block_digests": [
+        "blake2b-128:3b3993988e8e3351c0a5a90343d114ea"
+      ],
+      "digest": "blake2b-128:e85bb5f2f61d73680d552ae25f1cb2ff"
+    },
+    "record_types": [
+      "ATOM"
+    ],
+    "atom_name_columns": [
+      "C   ",
+      "C   ",
+      "C   ",
+      "C   "
+    ],
+    "residue_name_columns": [
+      "DUM",
+      "DUM",
+      "DUM",
+      "DUM"
+    ]
+  }
+}

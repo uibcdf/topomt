@@ -1,0 +1,213 @@
+{
+  "id": "ghecom-probe-1p2",
+  "method": "ghecom",
+  "scenario": "small_system_control",
+  "options": {
+    "probe_small": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_small",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.2,
+      "block_digests": [
+        "blake2b-128:7f818a45feb71a60cf3effd121324813"
+      ],
+      "digest": "blake2b-128:35d803ffe025b55c78ed7997e2fa0347"
+    },
+    "probe_large": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_large",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 6.0,
+      "block_digests": [
+        "blake2b-128:ae4a152dca59e5455be885d2d714b47a"
+      ],
+      "digest": "blake2b-128:12beaa42b8c538eda5f7124a3e87b3e3"
+    },
+    "grid_width": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "grid_width",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.4,
+      "block_digests": [
+        "blake2b-128:e8b340f91227773af02fd6c527a59474"
+      ],
+      "digest": "blake2b-128:407f6f965beabc1ab62ce436fa6732f1"
+    }
+  },
+  "probe_label": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "probe_label",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1.2,
+    "block_digests": [
+      "blake2b-128:7f818a45feb71a60cf3effd121324813"
+    ],
+    "digest": "blake2b-128:28196ff8feff750e3a192a1792c3e463"
+  },
+  "interpretation": "Predeclared morphological small-probe/grid control; not a DFND query-equivalence claim",
+  "evidence_mode": "current_original_execution",
+  "record_counts": {
+    "pocket": 1
+  },
+  "original_bundle": {
+    "file": "ghecom-probe-1p2/original.zip",
+    "sha256": "ecfd5a1976470b36c690f23eac0d55b2ed3eb91ccb20b55ae0bf085971026830",
+    "run_id": "0f56c793bb7ef1e8dba57e23b17c9aa694989a3da9c05e2907b7ce10de09ddb8"
+  },
+  "status": "completed",
+  "record_count": 1,
+  "record_ids": [
+    "1"
+  ],
+  "completed_empty": false,
+  "elapsed_time": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "elapsed_time",
+      "unit": "second",
+      "si": {
+        "factor": 1.0,
+        "offset": 0.0,
+        "exponents": {
+          "s": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1.6083581209968543,
+    "block_digests": [
+      "blake2b-128:f75c11ce594813bbf7c33103a144681e"
+    ],
+    "digest": "blake2b-128:da53c15e043e5aff36ecec21d5f8daa8"
+  },
+  "original_backend": "cli",
+  "original_version": "2026/08/17",
+  "actual_input": {
+    "file": "submitted.pdb",
+    "sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "atom_count": 4,
+    "coordinates": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "coordinates",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          4,
+          3
+        ],
+        "blocks": [
+          12
+        ]
+      },
+      "values": [
+        [
+          1.8739999999999999,
+          1.8739999999999999,
+          1.8739999999999999
+        ],
+        [
+          1.8739999999999999,
+          -1.8739999999999999,
+          -1.8739999999999999
+        ],
+        [
+          -1.8739999999999999,
+          1.8739999999999999,
+          -1.8739999999999999
+        ],
+        [
+          -1.8739999999999999,
+          -1.8739999999999999,
+          1.8739999999999999
+        ]
+      ],
+      "block_digests": [
+        "blake2b-128:3b3993988e8e3351c0a5a90343d114ea"
+      ],
+      "digest": "blake2b-128:e85bb5f2f61d73680d552ae25f1cb2ff"
+    },
+    "record_types": [
+      "ATOM"
+    ],
+    "atom_name_columns": [
+      "C   ",
+      "C   ",
+      "C   ",
+      "C   "
+    ],
+    "residue_name_columns": [
+      "DUM",
+      "DUM",
+      "DUM",
+      "DUM"
+    ]
+  }
+}

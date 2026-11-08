@@ -1,5 +1,7 @@
 """Independent model and evidence guards for the tetrahedron comparison stage."""
 
+import ast
+import base64
 import hashlib
 import json
 import sys
@@ -10,6 +12,7 @@ import pytest
 from pyunitwizard import QuantityRecord
 
 from topomt import pyunitwizard as puw
+from topomt.provider_output import ProviderRun
 
 CASE = (
     Path(__file__).resolve().parents[1]
@@ -135,3 +138,124 @@ def test_study_continues_controls_after_control_failure_and_stops_after_standard
     ]
     assert len(skipped) == 3
     assert {entry['cause_id'] for entry in skipped} == {'caver-standard'}
+
+
+def test_reviewed_comparison_notebook_displays_verified_records_without_execution():
+    notebook = json.loads((CASE / 'comparisons.ipynb').read_text())
+    cells = [cell for cell in notebook['cells'] if cell['cell_type'] == 'code']
+    assert cells and all(cell['execution_count'] is not None for cell in cells)
+    outputs = [output for cell in cells for output in cell['outputs']]
+    assert not any(output['output_type'] == 'error' for output in outputs)
+    pngs = [
+        output['data']['image/png']
+        for output in outputs
+        if 'image/png' in output.get('data', {})
+    ]
+    assert len(pngs) == 2
+    for png, name in zip(
+        pngs, ['atomic_models.png', 'original_grid_regions.png'], strict=True
+    ):
+        assert base64.b64decode(''.join(png)) == (DIRECTORY / name).read_bytes()
+    displayed = [
+        json.loads(''.join(output['data']['text/plain']))
+        for cell in cells
+        if 'topomt-comparison-study' in cell.get('metadata', {}).get('tags', [])
+        for output in cell['outputs']
+        if 'text/plain' in output.get('data', {})
+    ]
+    assert displayed == [json.loads((DIRECTORY / 'comparison_report.json').read_text())]
+    for cell in cells:
+        tree = ast.parse(''.join(cell['source']))
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                assert not any(
+                    alias.name.startswith(('subprocess', 'requests', 'urllib'))
+                    for alias in node.names
+                )
+            if isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute):
+                assert node.func.attr not in {
+                    'get_provider_output',
+                    'run',
+                    'Popen',
+                    'save',
+                    'write_text',
+                    'write_bytes',
+                }
+
+
+def test_original_comparison_receipts_preserve_failures_and_declared_diagnostics():
+    receipt = json.loads((DIRECTORY / 'evidence_receipt.json').read_text())
+    for relative, expected in receipt['files'].items():
+        assert (
+            hashlib.sha256((DIRECTORY / relative).read_bytes()).hexdigest() == expected
+        )
+    main = json.loads(
+        (DIRECTORY / 'original_observations/observations.json').read_text()
+    )
+    assert len(main['entries']) == 14
+    for entry in main['entries']:
+        if entry['original_bundle']:
+            run = ProviderRun.load(
+                DIRECTORY / 'original_observations' / entry['original_bundle']['file']
+            )
+            assert run.run_id == entry['original_bundle']['run_id']
+            assert run.metadata['execution_status'] == (
+                'completed' if entry['status'] == 'completed' else 'failed'
+            )
+            source = run.get_artifact('input/input.pdb')
+            assert hashlib.sha256(source).hexdigest() == main['source_sha256']
+        if entry['status'] != 'completed':
+            assert entry['record_counts'] is None
+            assert 'record_count' not in entry
+        if entry['status'] == 'not_executed_after_failure':
+            assert entry['cause_id'] == entry['method'] + '-standard'
+    diagnostic = json.loads((DIRECTORY / 'positive_cutoff_protocol.json').read_text())
+    assert diagnostic['frozen_before_original_topography'] is False
+    for row in diagnostic['runs']:
+        assert scalar(
+            row['options']['volume_cutoff'], 'volume_cutoff', 'angstroms**3'
+        ) == pytest.approx(0.2**3)
+
+
+@pytest.mark.parametrize('policy', [['nm', 'ps'], ['pm', 'fs']])
+def test_original_comparison_recovery_is_engine_free_and_retains_spatial_meaning(
+    policy, monkeypatch
+):
+    import subprocess
+
+    import topomt as tmt
+
+    def forbidden(*args, **kwargs):
+        pytest.fail('Comparison replay attempted original execution')
+
+    monkeypatch.setattr(subprocess, 'run', forbidden)
+    monkeypatch.setattr(subprocess, 'Popen', forbidden)
+    source = CASE / 'artifacts/regular_tetrahedron_v1/input_atom.pdb'
+    with puw.context(standard_units=[*policy, 'radians']):
+        for folder in ('original_observations', 'positive_cutoff_observations'):
+            report = json.loads((DIRECTORY / folder / 'observations.json').read_text())
+            for entry in report['entries']:
+                if not entry['original_bundle']:
+                    continue
+                bundle = DIRECTORY / folder / entry['original_bundle']['file']
+                if entry['status'] != 'completed':
+                    with pytest.raises(ValueError, match='protocol'):
+                        tmt.load_provider_output(bundle, molecular_system=source)
+                    continue
+                output = tmt.load_provider_output(bundle, molecular_system=source)
+                assert len(output.records) == entry['record_count']
+                if entry['id'] == 'ghecom-probe-1p2':
+                    xyz = puw.get_value(
+                        output.records[0].geometries['grid_points'].coordinates,
+                        to_unit='angstroms',
+                    )
+                    assert xyz.shape == (263, 3)
+                if entry['id'] == 'pykvfinder-one-voxel-1p4':
+                    xyz = puw.get_value(
+                        output.records[0].geometries['grid_points'].coordinates,
+                        to_unit='angstroms',
+                    )
+                    assert np.min(xyz) < -4 and np.max(xyz) > 5
+                    assert (
+                        output.records[0].measurements['volume'].original_value == 73.09
+                    )

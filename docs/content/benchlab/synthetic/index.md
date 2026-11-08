@@ -30,7 +30,7 @@ closed_shell/index
 
 | Case | Scientific question | Reference and study status |
 | --- | --- | --- |
-| [Regular tetrahedron](regular_tetrahedron/index.md) | How do residence and face transit differ as the probe grows? | Separate executed system and DFND notebooks; historical original-provider evidence is retained. |
+| [Regular tetrahedron](regular_tetrahedron/index.md) | How do residence and face transit differ as the probe grows? | Separate executed system, DFND and original-comparison notebooks; atomic-model audit and distinct failure states. |
 | [Sampled closed shell](closed_shell/index.ipynb) | Does a certified atomic-ball wall enclose a free central probe region? | Independent wall-coverage certificate and reviewed central-region observations; global cavity count and exact volume remain outside that certificate. |
 
 | Part | What the reader can inspect |
@@ -65,8 +65,10 @@ python -m jupyter nbconvert --to notebook --execute \
     --output-dir /tmp/topomt-notebook-rerun
 ```
 
-The tetrahedron's new `system.ipynb` and `dfnd.ipynb` run independently and do not
-execute original providers. Its comparison stage will be a separate notebook.
+The tetrahedron's `system.ipynb`, `dfnd.ipynb` and `comparisons.ipynb` run
+independently and do not execute original providers. The comparison stage
+verifies retained original bundles and reconstructs accepted results without
+external engines or requests; see its artifact guide to repeat original execution.
 The closed-shell notebook and the tetrahedron's historical combined notebook
 retain their earlier optional-provider code. Install original providers
 separately if deliberately rerunning those historical comparisons:

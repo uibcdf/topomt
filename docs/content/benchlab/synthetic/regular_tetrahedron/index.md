@@ -9,13 +9,15 @@ changes across the three principal experiments.
 | --- | --- | --- |
 | [System and independent expectations](system.ipynb) | Input geometry, visualization, analytic clearance references and three predictions fixed before inspecting DFND. | Executed in a fresh kernel; independent checks pass. |
 | [DFND experiments and analysis](dfnd.ipynb) | Primitive errors, the three probes, raw versus reported results, exterior grouping, a probe sweep and volume limits. | Executed in another fresh kernel; declared checks pass. |
-| Original-method comparisons | Compatible input models, original results and explanation of differences. | A new separate comparison notebook is pending. Earlier observations remain in the historical record below. |
+| [Original-method comparisons](comparisons.ipynb) | Atomic-model audit, original results, diagnostics and spatial interpretation. | Executed independently from retained evidence; earlier observations remain historical. |
 
 ```{toctree}
 :maxdepth: 1
 
 system
 dfnd
+comparisons
+Comparison evidence <artifacts/comparisons_v1/README>
 Historical combined record <historical>
 ```
 
@@ -48,8 +50,9 @@ it does not require executing `system.ipynb` first or sharing kernel state.
 The reviewed
 {download}`DFND observations <artifacts/native_study_v1/dfnd_observations.json>`
 record the actual software and source identities. Reruns display new observations
-in memory without replacing frozen artifacts. Neither new notebook runs a third
-party or contacts a server.
+in memory without replacing frozen artifacts. The separate comparison notebook
+also runs independently, verifies the retained original evidence and reconstructs
+accepted results without an original executable or server request.
 
 Standalone figures: {download}`system geometry <artifacts/native_study_v1/system_geometry.png>`,
 {download}`independent regimes <artifacts/native_study_v1/system_thresholds.png>`,
@@ -61,3 +64,13 @@ provider evidence retain their original bytes and dates. It includes optional
 provider execution code and is retained for reading earlier observations; it is
 not the execution route for the new system/native studies. Its comparisons have
 not been rerun or requalified by this split.
+
+The [comparison stage](comparisons.ipynb) adds a separately frozen protocol and
+new pyKVFinder/GHECOM/CAVER/MOLE observations. Atomic radii differ from the native
+reference; successful output, invalid files and original failures remain distinct.
+An explicitly declared positive-cutoff diagnostic follows pyKVFinder's failed
+zero-cutoff controls. Raw inputs, bundles, receipts, two figures and a
+{download}`quantity-aware report <artifacts/comparisons_v1/comparison_report.json>`
+are retained under `artifacts/comparisons_v1/`. The
+[artifact guide](artifacts/comparisons_v1/README.md) explains original execution
+and evidence history. This is characterization, without an accuracy ranking.

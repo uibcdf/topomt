@@ -1,0 +1,151 @@
+{
+  "schema": "topomt.benchlab.comparison-evidence/1",
+  "files": {
+    "initial_attempt/caver-standard/failed.zip": "c531916a9313886924ebad6ebc35f1a45fbb1269571f020103fb697baf5b08d1",
+    "initial_attempt/caver-standard/observation.json": "ddf5d5eafad2f98d8cf983d3206a9f243a66499c7d2be8bd758db9796231721f",
+    "initial_attempt/caver-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "initial_attempt/ghecom-probe-1p2/observation.json": "05e2f700a067849182419239c98e803268db5fb24ab436d6fa72d34baa3c9668",
+    "initial_attempt/ghecom-probe-1p2/original.zip": "16d6e964551d237163529ff834a1bfd914410ccd9df6713ce9156784fe3f0744",
+    "initial_attempt/ghecom-probe-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "initial_attempt/ghecom-probe-1p4/observation.json": "b8df5eb37a1482bc569c0b0baa849db5c73733904612ce4b3215ed3e79fad805",
+    "initial_attempt/ghecom-probe-1p4/original.zip": "49ba959f94ce340cf877d76420bc36449ae5c81a7a1dfcbb6793fa0488f08aa5",
+    "initial_attempt/ghecom-probe-1p4/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "initial_attempt/ghecom-probe-1p7/observation.json": "3779c68733bc1be804ca34032ecaeb4bda6257d712b677b745aabb5072de261e",
+    "initial_attempt/ghecom-probe-1p7/original.zip": "d6b73e420fdebf7849ffbb9add39da545de0e46d5af31f93ead2a10febc10ecb",
+    "initial_attempt/ghecom-probe-1p7/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "initial_attempt/ghecom-standard/observation.json": "27741c0e40caa69f6082c852812ae98132aefea2acd5fc6b15868c9f4147a4ec",
+    "initial_attempt/ghecom-standard/original.zip": "18d8b3674b10dc1fa9234671dd36dafd1520bd19ac9526d4b3612bcc9a2470dd",
+    "initial_attempt/ghecom-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "initial_attempt/mole-standard/failed.zip": "7a0f509e05e944bf8ccedf8e9b00fd4b35bfcf614a600110eba389b2b4b9d175",
+    "initial_attempt/mole-standard/observation.json": "cfa9d080c041d7a9492215dc7f2a495a4e7dc59e9cdedafc504fda31954a0fd8",
+    "initial_attempt/mole-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "initial_attempt/observations.json": "41fd29537d810c76c116f33dfeaf278dd25d21cb0cc57e6a0c3338f07bdd31d7",
+    "initial_attempt/pykvfinder-probe-1p2/failed.zip": "b6c6766da31201983ff8303f724301851821fb959a04f8b000c3d382299cc757",
+    "initial_attempt/pykvfinder-probe-1p2/observation.json": "f119b742cae34a7f724d29b3616e75df5514097ea6401b5ad823ad9a1f9be8ad",
+    "initial_attempt/pykvfinder-probe-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "initial_attempt/pykvfinder-standard/observation.json": "e9b5bab6255e5174538125d63cccc1b6dd589302a8a584d153b5904a58e713ec",
+    "initial_attempt/pykvfinder-standard/original.zip": "4ad0f60d601909a3223d28dbd56422edf0acf85d8f201aa662ded63bbe64bc37",
+    "initial_attempt/pykvfinder-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "model_audit.json": "3e3d59c2a2688fb9458b22209b9aa6eddaa678ec4faea0e03bc86eed13f3a9ec",
+    "original_observations/caver-standard/failed.zip": "76a68dd5e0219484f51acd5437cfb409c0b9080fb3b098b28cc9cbd0ae11c11d",
+    "original_observations/caver-standard/observation.json": "0d78704f217b3afcce459f4d4f09cc78316b53d17033c7e93363ea04d18e23ea",
+    "original_observations/caver-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/ghecom-probe-1p2/observation.json": "c8c769a44f34d6ad52edf3cdbd1caca494fb4dd307642279a7696320591a624f",
+    "original_observations/ghecom-probe-1p2/original.zip": "ecfd5a1976470b36c690f23eac0d55b2ed3eb91ccb20b55ae0bf085971026830",
+    "original_observations/ghecom-probe-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/ghecom-probe-1p4/observation.json": "1aa7c6d86200d92862f4da4f8bd4db285495228843b9369b7387571687dffb33",
+    "original_observations/ghecom-probe-1p4/original.zip": "86f8cace6276cc92b33f28bd3075c38280c1a0059f122dacd55db182026c7b82",
+    "original_observations/ghecom-probe-1p4/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/ghecom-probe-1p7/observation.json": "c5b47b78e1eafea33297b5a52970a4c41f157b8d690dd214e0d744e223f746aa",
+    "original_observations/ghecom-probe-1p7/original.zip": "1c8787104336f11519b55909f2ed2bae5d2d3da7f453865abd54eb45cb30f34c",
+    "original_observations/ghecom-probe-1p7/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/ghecom-standard/observation.json": "d2735fae4113a705ccf63b37edf37e18bdb0c056567f72db3f4261c33dcaae25",
+    "original_observations/ghecom-standard/original.zip": "7a1eb30bdfe2836b427d5da8c8240c87c6c92917bedfc08985fc5f342158ac81",
+    "original_observations/ghecom-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/mole-standard/failed.zip": "9aba769bad673dd8d7a4c138a259435a4cfcd7055609e8085d96e9aba56723a4",
+    "original_observations/mole-standard/observation.json": "798a3e4bc4e92371a573c56da341118365513ef5650ac221d76002b872a2c455",
+    "original_observations/mole-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/observations.json": "d95dcbad3eecd3f9f25a32cdc01a48a740250bed1707d593be337acc4ff558aa",
+    "original_observations/pykvfinder-probe-1p2/failed.zip": "2240b1f103eaba78e18e0c4f810e467fa10d687897eb4e4b32841aee15021a32",
+    "original_observations/pykvfinder-probe-1p2/observation.json": "5a9a71286e626bb36848554f238f93851b972d4b35b48d3f6d80cae58bc89893",
+    "original_observations/pykvfinder-probe-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/pykvfinder-probe-1p4/failed.zip": "6c0ac0fba2a18a631efc9fe16de5290ac6ea5876da71382ac03e0a94b2ad1a00",
+    "original_observations/pykvfinder-probe-1p4/observation.json": "d0793df0ef8c358e3083b7993b3701f309c948d26a6bdd6e703568e6861fefc8",
+    "original_observations/pykvfinder-probe-1p4/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/pykvfinder-probe-1p7/failed.zip": "9deedc7bb794954eb6100985419b11793ac3cce47104739f4df51d0bef8c49f0",
+    "original_observations/pykvfinder-probe-1p7/observation.json": "061e0f0371dc27ab707148f299cdd240aa61fe758504d832aebe4c2dadd747d1",
+    "original_observations/pykvfinder-probe-1p7/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "original_observations/pykvfinder-standard/observation.json": "4c8dc354879fe9a58c011e9351e15d50976aaadba7b5b1bd8dc9da92e7edcacc",
+    "original_observations/pykvfinder-standard/original.zip": "a42f42771e9949d71412e7b7f07f56c09993854d0a0125b2f2e62b4d631c9a2a",
+    "original_observations/pykvfinder-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "positive_cutoff_observations/observations.json": "72f4650490fe39fc6d7e82e9dcbec7fee18d302f3daea53e19728d3546820425",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p2/observation.json": "20334802ea5fcc82d9ace4bd57bbbb1fb547717adc0380fcdd28646309dd95d3",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p2/original.zip": "87a0710908ebfdc9694c5e57ea2e8c30f38b54bbfabdeccd5d02081ccce45249",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p4/observation.json": "c9ea0ef86ad214280dc54e30bf99768384ef2b9d90733e954d4be2652a484072",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p4/original.zip": "0bd8f208d3430ae71a5eb3d7ff0b4dc41e281a0f252e1a3e55b930e8946f390d",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p4/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p7/observation.json": "baa5afdcfeeba7a62cb16156c42c4a909c993016d5260ce5fa834bcb6bef3b0d",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p7/original.zip": "59ea0d9ab3e4608a42f2671b634be02b455ab8392846a7f6fa9d64bb9043e697",
+    "positive_cutoff_observations/pykvfinder-one-voxel-1p7/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "positive_cutoff_protocol.json": "2429bc1e5c21adb79f364ded7e44619497c80f4263a48f68f6a13ab4e058f5aa",
+    "protocol.json": "031c7e9ff386e0dc34c670ca2d8c745c01f3acd8344f022b02767ed00d6f4367"
+  },
+  "initial_attempt": "Initial stopping-rule implementation incorrectly skipped later pyKVFinder controls after the first control failed. Its original receipts are preserved unchanged, including the rejected completed-metadata receipt fixed by #142. The corrected, complete planned observation set is original_observations. Initial attempt is historical inspection only.",
+  "producer_commit": "a8065a7",
+  "producer_worktree_exception": "Pre-existing unrelated topomt/_version.py modification preserved; no scientific kernel or frozen input changes.",
+  "resource_limits": {
+    "os_cpu_affinity_count": 1,
+    "numerical_workers": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 180,
+    "timeout_seconds_per_engine": 45,
+    "managed_heap_mib": 512
+  },
+  "measurements": {
+    "original_observations": {
+      "wall_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "wall_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 25.73,
+        "block_digests": [
+          "blake2b-128:2bd703246c487a229685f51897dfbb5a"
+        ],
+        "digest": "blake2b-128:1857bd2b8a68cb0a5d5a6c12fde190fb"
+      },
+      "maximum_rss": {
+        "value": 273628,
+        "unit": "KiB",
+        "meaning": "Maximum observed process RSS from enclosing time -v receipt; not additive tree memory"
+      }
+    },
+    "positive_cutoff_observations": {
+      "wall_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "wall_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 22.6,
+        "block_digests": [
+          "blake2b-128:d28308703d3afaca50db580a4419e08a"
+        ],
+        "digest": "blake2b-128:61b576719e2f94806562c7e15782c3e7"
+      },
+      "maximum_rss": {
+        "value": 273800,
+        "unit": "KiB",
+        "meaning": "Maximum observed process RSS from enclosing time -v receipt; not additive tree memory"
+      }
+    }
+  },
+  "timing_limits": "Receipts only. The two bounded drivers briefly overlapped on the same single CPU; these timings are not comparative performance measurements. No memory pressure or active swapping observed.",
+  "source_qualification": "Source-workspace execution only; #16/#19/#81 retain full-matrix and installed/public qualification."
+}

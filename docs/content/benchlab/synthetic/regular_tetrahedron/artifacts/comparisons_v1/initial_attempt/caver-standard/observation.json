@@ -1,0 +1,143 @@
+{
+  "id": "caver-standard",
+  "method": "caver",
+  "scenario": "standard",
+  "options": {
+    "origin": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "origin",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          3
+        ],
+        "blocks": [
+          3
+        ]
+      },
+      "values": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "block_digests": [
+        "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+      ],
+      "digest": "blake2b-128:eb18cb501a2158fd31010a99c8d82566"
+    }
+  },
+  "probe_label": null,
+  "interpretation": "Required origin is the tetrahedron center; other scientific settings retain original defaults",
+  "evidence_mode": "current_original_execution",
+  "record_counts": null,
+  "original_bundle": {
+    "file": "caver-standard/failed.zip",
+    "sha256": "c531916a9313886924ebad6ebc35f1a45fbb1269571f020103fb697baf5b08d1",
+    "run_id": "179af904b98d1465f016f8ddc24034b86a7772e2bf22921e250bbaf9c1679389"
+  },
+  "status": "execution_failed",
+  "error_type": "ProviderExecutionError",
+  "reason": "Original provider 'caver' failed: original result is invalid: caver required artifact is absent: analysis/tunnel_profiles.csv",
+  "elapsed_time": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "elapsed_time",
+      "unit": "second",
+      "si": {
+        "factor": 1.0,
+        "offset": 0.0,
+        "exponents": {
+          "s": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 0.5096030339991557,
+    "block_digests": [
+      "blake2b-128:821566b4947931a47a29fa1d71cd2ac5"
+    ],
+    "digest": "blake2b-128:e4fdbf6f070595b343048ed2f3f92f3a"
+  },
+  "original_backend": "cli",
+  "original_version": "3.02",
+  "actual_input": {
+    "file": "submitted.pdb",
+    "sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "atom_count": 4,
+    "coordinates": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "coordinates",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [
+          4,
+          3
+        ],
+        "blocks": [
+          12
+        ]
+      },
+      "values": [
+        [
+          1.8739999999999999,
+          1.8739999999999999,
+          1.8739999999999999
+        ],
+        [
+          1.8739999999999999,
+          -1.8739999999999999,
+          -1.8739999999999999
+        ],
+        [
+          -1.8739999999999999,
+          1.8739999999999999,
+          -1.8739999999999999
+        ],
+        [
+          -1.8739999999999999,
+          -1.8739999999999999,
+          1.8739999999999999
+        ]
+      ],
+      "block_digests": [
+        "blake2b-128:3b3993988e8e3351c0a5a90343d114ea"
+      ],
+      "digest": "blake2b-128:e85bb5f2f61d73680d552ae25f1cb2ff"
+    },
+    "record_types": [
+      "ATOM"
+    ],
+    "atom_name_columns": [
+      "C   ",
+      "C   ",
+      "C   ",
+      "C   "
+    ],
+    "residue_name_columns": [
+      "DUM",
+      "DUM",
+      "DUM",
+      "DUM"
+    ]
+  }
+}

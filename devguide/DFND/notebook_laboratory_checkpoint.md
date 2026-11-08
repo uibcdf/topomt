@@ -88,7 +88,53 @@ not qualify new cases, volume precision, all synthetic cases or proteins.
 
 ## Delivered first case
 
-### Current split study — 2026-11-07
+### Original comparison stage — 2026-11-08
+
+Issue #141 adds `comparisons.ipynb`, executed in a fresh Python 3.14 kernel from
+retained evidence, with two reviewed figures. It verifies input/model/protocol
+hashes, reconstructs accepted outputs through the public source-bound readers
+and inspects failed originals without engines, servers or overwriting artifacts.
+All earlier system/native/historical notebook and evidence bytes remain unchanged.
+
+The fourteen-row original protocol was committed at `59bc96c` before new detector
+execution. Native radii 1.7 Å differ from original pyKVFinder fallback 1.66 Å and
+maintained MOLE default 1.61 Å. PDB rounding crosses 1.4 Å face clearance for the
+1.66 Å atomic-ball model; this independent implication is not a detector prediction.
+Effective GHECOM/CAVER DUM assignments remain unknown rather than assumed equal.
+
+GHECOM completes empty at defaults; its 0.4 Å-grid control reports one region
+(263 points) at small probe 1.2 Å and zero at 1.4/1.7 Å. pyKVFinder completes
+empty at defaults, but all three zero-cutoff controls export inconsistent
+descriptor/grid labels. CAVER logs an origin/shell failure and missing tunnels;
+MOLE reads four atoms then fails with a null reference. Their later controls are
+skipped after failed standards, with no invented cavity/channel counts. P2Rank
+is not selected for this dummy nonprotein system. Historical first-four/CASTp
+observations are read separately; no CASTp job is polled or submitted.
+
+A separately declared diagnostic (`a8065a7`) changes only pyKVFinder's volume
+cutoff to one 0.2 Å voxel. All three runs then complete with one region, including
+substantial support outside the atomic-centre hull. This supports cutoff
+dependence and demonstrates why an original cavity label does not identify the
+same finite-cell object as DFND. No count, volume or performance ranking follows.
+The first driver attempt and its erroneous control stopping are preserved as
+history; the corrected full planned set is explicit. #142 fixes the observed
+invalid-result completed-receipt defect with analytical workflow regressions.
+
+`artifacts/comparisons_v1/` retains all protocols, actual submitted PDBs,
+original/failed bundles, source-bound receipts, diagnostic history, figures and
+quantity-aware report. The case-specific serial reproduction tool accepts local
+engine paths only and refuses to overwrite a result directory. Measured driver
+peak RSS is below 268 MiB with a single OS CPU; brief overlap of the two bounded
+drivers prevents interpreting their wall times as serial performance evidence.
+
+The study/reference selection passes 26 cases, including source-bound engine-free
+recovery under nm/ps and pm/fs policies. It does not modify a DFND scientific
+kernel or complete #75/#76, the synthetic panel, installed delivery or proteins.
+The next native unit remains the certified shell and its opening, following the
+case-by-case reference gates above; unknown peer assignments do not supply new
+independent truth or require tuning native geometry to a peer count.
+
+### Split system and native study — 2026-11-07
 
 The tetrahedron now has a short `index.md`, independent `system.ipynb` and native
 `dfnd.ipynb`. They execute in separate fresh Python 3.14 kernels and share only
@@ -100,8 +146,8 @@ retains a one-node raw void while `min_size=2` hides its compatibility projectio
 New records and standalone figures live in `artifacts/native_study_v1/` within
 the case directory. The historical combined notebook is retained byte-for-byte
 as `historical.ipynb`, together with its unchanged original artifacts. A new
-comparison notebook remains pending; no original provider or server is executed
-by this increment. Work is tracked in #134; the following historical paragraphs
+comparison notebook was pending at that increment; #141 adds the stage below.
+No original provider or server was executed by #134. The following historical paragraphs
 retain their earlier producer/evidence scope rather than describing a new run.
 
 `regular_tetrahedron.ipynb` studies four equal-radius atomic balls, edge 5.3 Å,

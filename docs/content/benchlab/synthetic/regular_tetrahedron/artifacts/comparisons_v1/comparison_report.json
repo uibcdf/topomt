@@ -1,0 +1,312 @@
+{
+  "schema": "topomt.benchlab.comparison-report/1",
+  "case_id": "regular_tetrahedron",
+  "protocol_sha256": "031c7e9ff386e0dc34c670ca2d8c745c01f3acd8344f022b02767ed00d6f4367",
+  "diagnostic_protocol_sha256": "2429bc1e5c21adb79f364ded7e44619497c80f4263a48f68f6a13ab4e058f5aa",
+  "evidence_receipt_sha256": "3a17f8acf2dab58b80fd788f06f62e452a3d2a3443b2b3e350cee7242f434870",
+  "frozen_native_input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+  "verification": "All recorded input, original bundle and source-context checks passed",
+  "interpretation": "Model/operator characterization; no cross-method accuracy or performance ranking",
+  "rounded_pdb_edge": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "edge",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 5.30047243177436,
+    "block_digests": [
+      "blake2b-128:18c9c51577f90d3d07fcc67c34a918a9"
+    ],
+    "digest": "blake2b-128:5723008bdad72049e878d40c7ef1c568"
+  },
+  "atomic_ball_model_implications": [
+    {
+      "model": "native",
+      "rounded_pdb_face_clearance": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "face_clearance",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.3602291853171173,
+        "block_digests": [
+          "blake2b-128:328c7e7e909660c608cc44691664e01a"
+        ],
+        "digest": "blake2b-128:dbadd46dc461d3568fd8fe8f5ab293db"
+      },
+      "rounded_pdb_residence_clearance": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "residence_clearance",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.5458632133840757,
+        "block_digests": [
+          "blake2b-128:e21346c798a96af9f4210c651412c893"
+        ],
+        "digest": "blake2b-128:cea1f2a830f6784d39a27bc699f81aec"
+      }
+    },
+    {
+      "model": "pykvfinder",
+      "rounded_pdb_face_clearance": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "face_clearance",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4002291853171174,
+        "block_digests": [
+          "blake2b-128:22c0bb07c54c20c5522850c91bd601df"
+        ],
+        "digest": "blake2b-128:64e85580fe5eaa2fa18dcf82b8718fe5"
+      },
+      "rounded_pdb_residence_clearance": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "residence_clearance",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.5858632133840758,
+        "block_digests": [
+          "blake2b-128:4154771535285906595d67b674b2b06a"
+        ],
+        "digest": "blake2b-128:5c4b57f9bed55510d9588fe5a8ac854e"
+      }
+    },
+    {
+      "model": "mole",
+      "rounded_pdb_face_clearance": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "face_clearance",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4502291853171172,
+        "block_digests": [
+          "blake2b-128:859559c17138f98656f8c6789f45c2af"
+        ],
+        "digest": "blake2b-128:ae02de974d8a494f2543b8cae4f94ae9"
+      },
+      "rounded_pdb_residence_clearance": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "residence_clearance",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.6358632133840756,
+        "block_digests": [
+          "blake2b-128:f6e24d74665d1bb71b75be302df1da93"
+        ],
+        "digest": "blake2b-128:5f86b753fbc232ea7ba36b4a0ebca96e"
+      }
+    }
+  ],
+  "planned_statuses": {
+    "pykvfinder-standard": "completed",
+    "pykvfinder-probe-1p2": "execution_failed",
+    "pykvfinder-probe-1p4": "execution_failed",
+    "pykvfinder-probe-1p7": "execution_failed",
+    "ghecom-standard": "completed",
+    "ghecom-probe-1p2": "completed",
+    "ghecom-probe-1p4": "completed",
+    "ghecom-probe-1p7": "completed",
+    "caver-standard": "execution_failed",
+    "caver-probe-1p2": "not_executed_after_failure",
+    "caver-probe-1p4": "not_executed_after_failure",
+    "caver-probe-1p7": "not_executed_after_failure",
+    "mole-standard": "execution_failed",
+    "mole-minimum-depth": "not_executed_after_failure"
+  },
+  "diagnostic_statuses": {
+    "pykvfinder-one-voxel-1p2": "completed",
+    "pykvfinder-one-voxel-1p4": "completed",
+    "pykvfinder-one-voxel-1p7": "completed"
+  },
+  "original_spatial_observations": [
+    {
+      "id": "ghecom-probe-1p2",
+      "grid_point_count": 263,
+      "points_inside_atomic_centre_hull": 184,
+      "bounds": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "bounds",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            2,
+            3
+          ],
+          "blocks": [
+            6
+          ]
+        },
+        "values": [
+          [
+            -1.744,
+            -1.744,
+            -1.744
+          ],
+          [
+            1.456,
+            1.456,
+            1.456
+          ]
+        ],
+        "block_digests": [
+          "blake2b-128:f2900f4295a0727746a58825842aaf64"
+        ],
+        "digest": "blake2b-128:0caea20b6f7b260f1c10ca7eb20db55e"
+      }
+    },
+    {
+      "id": "pykvfinder-one-voxel-1p4",
+      "grid_point_count": 9136,
+      "points_inside_atomic_centre_hull": 1561,
+      "bounds": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "bounds",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            2,
+            3
+          ],
+          "blocks": [
+            6
+          ]
+        },
+        "values": [
+          [
+            -4.674,
+            -4.674,
+            -4.674
+          ],
+          [
+            5.326,
+            5.326,
+            5.326
+          ]
+        ],
+        "block_digests": [
+          "blake2b-128:60870b24a45116c52d0613f31c0718dc"
+        ],
+        "digest": "blake2b-128:5daeaf658a147e785e892d79f201c710"
+      }
+    }
+  ],
+  "historical_statuses": {
+    "fpocket": "execution_failed",
+    "pocketeer": "completed",
+    "alphaspace2": "execution_failed",
+    "pycasta": "execution_failed",
+    "castp3": "execution_failed",
+    "castpfold": "submitted_pending"
+  },
+  "unresolved": [
+    "Effective DUM radii for GHECOM and CAVER",
+    "General tiny-input support and grid-boundary effects",
+    "Native solvent-volume precision #75",
+    "Independent reference panel #76"
+  ]
+}

@@ -1,0 +1,797 @@
+{
+  "schema": "topomt.benchlab.original-observations/1",
+  "case_id": "regular_tetrahedron",
+  "study_version": "1-positive-cutoff-diagnostic",
+  "protocol_sha256": "2429bc1e5c21adb79f364ded7e44619497c80f4263a48f68f6a13ab4e058f5aa",
+  "model_audit_sha256": "3e3d59c2a2688fb9458b22209b9aa6eddaa678ec4faea0e03bc86eed13f3a9ec",
+  "created_utc": "2026-11-08T07:43:02.871621+00:00",
+  "topomt_version": "0.5.0+387.gcf4d475.dirty",
+  "source_file": "artifacts/regular_tetrahedron_v1/input_atom.pdb",
+  "source_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+  "entries": [
+    {
+      "id": "pykvfinder-one-voxel-1p2",
+      "method": "pykvfinder",
+      "scenario": "post_observation_positive_cutoff_diagnostic",
+      "options": {
+        "probe_in": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_in",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.2,
+          "block_digests": [
+            "blake2b-128:7f818a45feb71a60cf3effd121324813"
+          ],
+          "digest": "blake2b-128:69101f94dba106dc73718a1bb860f4cb"
+        },
+        "probe_out": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_out",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 4.0,
+          "block_digests": [
+            "blake2b-128:578778c53fb720d78464739f50d61fca"
+          ],
+          "digest": "blake2b-128:7c34621074a952d2271684078d4958ab"
+        },
+        "step": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "step",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.2,
+          "block_digests": [
+            "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+          ],
+          "digest": "blake2b-128:e040d0a07e621bfe93e7146a74a0b2bb"
+        },
+        "removal_distance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "removal_distance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6f2d2c3aa6453ed89c6f1d93be3474ab"
+        },
+        "volume_cutoff": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "volume_cutoff",
+            "unit": "angstrom ** 3",
+            "si": {
+              "factor": 1e-30,
+              "offset": 0.0,
+              "exponents": {
+                "m": 3
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.008000000000000002,
+          "block_digests": [
+            "blake2b-128:e7d557aa1774b0d37aab40e88b1806fc"
+          ],
+          "digest": "blake2b-128:4dcec2b0357410d955fdce8b6bd3e87a"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2,
+        "block_digests": [
+          "blake2b-128:7f818a45feb71a60cf3effd121324813"
+        ],
+        "digest": "blake2b-128:28196ff8feff750e3a192a1792c3e463"
+      },
+      "interpretation": "Same original small-system control except cutoff=one voxel (0.2 angstrom)^3; atomic model remains original, not native.",
+      "evidence_mode": "current_original_execution",
+      "record_counts": {
+        "cavity": 1
+      },
+      "original_bundle": {
+        "file": "pykvfinder-one-voxel-1p2/original.zip",
+        "sha256": "87a0710908ebfdc9694c5e57ea2e8c30f38b54bbfabdeccd5d02081ccce45249",
+        "run_id": "618ea2c77c7a14c3b8e7295422d45c7174e63b7ffbcc01f00c3e956802e53203"
+      },
+      "status": "completed",
+      "record_count": 1,
+      "record_ids": [
+        "KAA"
+      ],
+      "completed_empty": false,
+      "elapsed_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "elapsed_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 8.654590758000268,
+        "block_digests": [
+          "blake2b-128:bc22b510e14d13bb5203a384404ea366"
+        ],
+        "digest": "blake2b-128:1ca793058111ca76ef2d3306146ced93"
+      },
+      "original_backend": "library",
+      "original_version": "0.9.6+uibcdf.2",
+      "actual_input": {
+        "file": "submitted.pdb",
+        "sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+        "atom_count": 4,
+        "coordinates": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "coordinates",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [
+              4,
+              3
+            ],
+            "blocks": [
+              12
+            ]
+          },
+          "values": [
+            [
+              1.8739999999999999,
+              1.8739999999999999,
+              1.8739999999999999
+            ],
+            [
+              1.8739999999999999,
+              -1.8739999999999999,
+              -1.8739999999999999
+            ],
+            [
+              -1.8739999999999999,
+              1.8739999999999999,
+              -1.8739999999999999
+            ],
+            [
+              -1.8739999999999999,
+              -1.8739999999999999,
+              1.8739999999999999
+            ]
+          ],
+          "block_digests": [
+            "blake2b-128:3b3993988e8e3351c0a5a90343d114ea"
+          ],
+          "digest": "blake2b-128:e85bb5f2f61d73680d552ae25f1cb2ff"
+        },
+        "record_types": [
+          "ATOM"
+        ],
+        "atom_name_columns": [
+          "C   ",
+          "C   ",
+          "C   ",
+          "C   "
+        ],
+        "residue_name_columns": [
+          "DUM",
+          "DUM",
+          "DUM",
+          "DUM"
+        ]
+      }
+    },
+    {
+      "id": "pykvfinder-one-voxel-1p4",
+      "method": "pykvfinder",
+      "scenario": "post_observation_positive_cutoff_diagnostic",
+      "options": {
+        "probe_in": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_in",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.4,
+          "block_digests": [
+            "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+          ],
+          "digest": "blake2b-128:1ca887568eb7f67a247c965e684d006f"
+        },
+        "probe_out": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_out",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 4.0,
+          "block_digests": [
+            "blake2b-128:578778c53fb720d78464739f50d61fca"
+          ],
+          "digest": "blake2b-128:7c34621074a952d2271684078d4958ab"
+        },
+        "step": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "step",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.2,
+          "block_digests": [
+            "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+          ],
+          "digest": "blake2b-128:e040d0a07e621bfe93e7146a74a0b2bb"
+        },
+        "removal_distance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "removal_distance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6f2d2c3aa6453ed89c6f1d93be3474ab"
+        },
+        "volume_cutoff": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "volume_cutoff",
+            "unit": "angstrom ** 3",
+            "si": {
+              "factor": 1e-30,
+              "offset": 0.0,
+              "exponents": {
+                "m": 3
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.008000000000000002,
+          "block_digests": [
+            "blake2b-128:e7d557aa1774b0d37aab40e88b1806fc"
+          ],
+          "digest": "blake2b-128:4dcec2b0357410d955fdce8b6bd3e87a"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:44532127e7e7411f0ada1100307cd71a"
+      },
+      "interpretation": "Same original small-system control except cutoff=one voxel (0.2 angstrom)^3; atomic model remains original, not native.",
+      "evidence_mode": "current_original_execution",
+      "record_counts": {
+        "cavity": 1
+      },
+      "original_bundle": {
+        "file": "pykvfinder-one-voxel-1p4/original.zip",
+        "sha256": "0bd8f208d3430ae71a5eb3d7ff0b4dc41e281a0f252e1a3e55b930e8946f390d",
+        "run_id": "8745a969cbac1d1e599ec7e6f7e378520654b3f96fd67bb9be566874a4d61a7d"
+      },
+      "status": "completed",
+      "record_count": 1,
+      "record_ids": [
+        "KAA"
+      ],
+      "completed_empty": false,
+      "elapsed_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "elapsed_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 5.215266813997005,
+        "block_digests": [
+          "blake2b-128:cdfd280ca80beb5c7c102414ae9c7dc7"
+        ],
+        "digest": "blake2b-128:56770fbb43ed2ed1a8c4a4ea6a981f46"
+      },
+      "original_backend": "library",
+      "original_version": "0.9.6+uibcdf.2",
+      "actual_input": {
+        "file": "submitted.pdb",
+        "sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+        "atom_count": 4,
+        "coordinates": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "coordinates",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [
+              4,
+              3
+            ],
+            "blocks": [
+              12
+            ]
+          },
+          "values": [
+            [
+              1.8739999999999999,
+              1.8739999999999999,
+              1.8739999999999999
+            ],
+            [
+              1.8739999999999999,
+              -1.8739999999999999,
+              -1.8739999999999999
+            ],
+            [
+              -1.8739999999999999,
+              1.8739999999999999,
+              -1.8739999999999999
+            ],
+            [
+              -1.8739999999999999,
+              -1.8739999999999999,
+              1.8739999999999999
+            ]
+          ],
+          "block_digests": [
+            "blake2b-128:3b3993988e8e3351c0a5a90343d114ea"
+          ],
+          "digest": "blake2b-128:e85bb5f2f61d73680d552ae25f1cb2ff"
+        },
+        "record_types": [
+          "ATOM"
+        ],
+        "atom_name_columns": [
+          "C   ",
+          "C   ",
+          "C   ",
+          "C   "
+        ],
+        "residue_name_columns": [
+          "DUM",
+          "DUM",
+          "DUM",
+          "DUM"
+        ]
+      }
+    },
+    {
+      "id": "pykvfinder-one-voxel-1p7",
+      "method": "pykvfinder",
+      "scenario": "post_observation_positive_cutoff_diagnostic",
+      "options": {
+        "probe_in": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_in",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.7,
+          "block_digests": [
+            "blake2b-128:59a575c733de96d813e448f180437714"
+          ],
+          "digest": "blake2b-128:f8867fdd2538a66338e358e3d1dc6375"
+        },
+        "probe_out": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_out",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 4.0,
+          "block_digests": [
+            "blake2b-128:578778c53fb720d78464739f50d61fca"
+          ],
+          "digest": "blake2b-128:7c34621074a952d2271684078d4958ab"
+        },
+        "step": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "step",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.2,
+          "block_digests": [
+            "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+          ],
+          "digest": "blake2b-128:e040d0a07e621bfe93e7146a74a0b2bb"
+        },
+        "removal_distance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "removal_distance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6f2d2c3aa6453ed89c6f1d93be3474ab"
+        },
+        "volume_cutoff": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "volume_cutoff",
+            "unit": "angstrom ** 3",
+            "si": {
+              "factor": 1e-30,
+              "offset": 0.0,
+              "exponents": {
+                "m": 3
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.008000000000000002,
+          "block_digests": [
+            "blake2b-128:e7d557aa1774b0d37aab40e88b1806fc"
+          ],
+          "digest": "blake2b-128:4dcec2b0357410d955fdce8b6bd3e87a"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7,
+        "block_digests": [
+          "blake2b-128:59a575c733de96d813e448f180437714"
+        ],
+        "digest": "blake2b-128:70c09866fba8d9864e610e5e61eb5f88"
+      },
+      "interpretation": "Same original small-system control except cutoff=one voxel (0.2 angstrom)^3; atomic model remains original, not native.",
+      "evidence_mode": "current_original_execution",
+      "record_counts": {
+        "cavity": 1
+      },
+      "original_bundle": {
+        "file": "pykvfinder-one-voxel-1p7/original.zip",
+        "sha256": "59ea0d9ab3e4608a42f2671b634be02b455ab8392846a7f6fa9d64bb9043e697",
+        "run_id": "57e4c30601c0040386f08402d84b290b0a0e37e512942559bafe0aa88cbd5ce9"
+      },
+      "status": "completed",
+      "record_count": 1,
+      "record_ids": [
+        "KAA"
+      ],
+      "completed_empty": false,
+      "elapsed_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "elapsed_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 5.402526589001354,
+        "block_digests": [
+          "blake2b-128:c31253fb5a5dfe76a470c3b379823f1c"
+        ],
+        "digest": "blake2b-128:5b353cd949db4d4f335c90769f08badb"
+      },
+      "original_backend": "library",
+      "original_version": "0.9.6+uibcdf.2",
+      "actual_input": {
+        "file": "submitted.pdb",
+        "sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+        "atom_count": 4,
+        "coordinates": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "coordinates",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [
+              4,
+              3
+            ],
+            "blocks": [
+              12
+            ]
+          },
+          "values": [
+            [
+              1.8739999999999999,
+              1.8739999999999999,
+              1.8739999999999999
+            ],
+            [
+              1.8739999999999999,
+              -1.8739999999999999,
+              -1.8739999999999999
+            ],
+            [
+              -1.8739999999999999,
+              1.8739999999999999,
+              -1.8739999999999999
+            ],
+            [
+              -1.8739999999999999,
+              -1.8739999999999999,
+              1.8739999999999999
+            ]
+          ],
+          "block_digests": [
+            "blake2b-128:3b3993988e8e3351c0a5a90343d114ea"
+          ],
+          "digest": "blake2b-128:e85bb5f2f61d73680d552ae25f1cb2ff"
+        },
+        "record_types": [
+          "ATOM"
+        ],
+        "atom_name_columns": [
+          "C   ",
+          "C   ",
+          "C   ",
+          "C   "
+        ],
+        "residue_name_columns": [
+          "DUM",
+          "DUM",
+          "DUM",
+          "DUM"
+        ]
+      }
+    }
+  ],
+  "performance_interpretation": "Client wall times are receipts, not a cross-method performance benchmark"
+}
