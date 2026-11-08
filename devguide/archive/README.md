@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (28)
+### Resolved (29)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
@@ -16,6 +16,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`castp3_modern_predicate_grid.md`](castp3_modern_predicate_grid.md) — [#89](https://github.com/uibcdf/topomt/issues/89) — Align modern CASTp3 exact predicates and event ranks with its decimal weighted input geometry. *(resolved, measured)*
 - [`castp3_oracle_alternate_location_identity.md`](castp3_oracle_alternate_location_identity.md) — [#83](https://github.com/uibcdf/topomt/issues/83) — Preserve original PDB atom serials after the parser removes alternate locations. *(resolved, reproduced)*
 - [`castp3_radius_coverage_and_void_panel.md`](castp3_radius_coverage_and_void_panel.md) — [#82](https://github.com/uibcdf/topomt/issues/82) — Audit radius-profile evidence across the archived corpus and expand analytical closed-void comparisons. *(resolved, measured)*
+- [`closed_shell_split_study.md`](closed_shell_split_study.md) — [#144](https://github.com/uibcdf/topomt/issues/144) — Separate the closed-shell reference and native study with certified probe controls. *(resolved, measured)*
 - [`discussions_resource_organization.md`](discussions_resource_organization.md) — [#103](https://github.com/uibcdf/topomt/issues/103) — Organize resource Discussions with preserved history, facets and maintained guidance. *(resolved, inspected)*
 - [`expand_original_providers.md`](expand_original_providers.md) — [#135](https://github.com/uibcdf/topomt/issues/135) — Consolidate five original providers and add four no-cost local engines before BenchLab resumes. *(resolved, measured)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*

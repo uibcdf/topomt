@@ -13,7 +13,7 @@ Scientific groups and reading order can evolve as new systems are added.
 The publication target is a collection that can live inside the documentation
 or become a standalone study site using the same reviewed case sources.
 
-The collection is under development. Two controls are available: a regular
+The collection is under development. Two study units are available: a regular
 tetrahedron and a sampled shell with an independently certified wall. They do not
 establish general biological accuracy or numerical volume precision. Development
 resumed on 2026-11-07, guided by characterization of each synthetic case and its
@@ -31,7 +31,7 @@ closed_shell/index
 | Case | Scientific question | Reference and study status |
 | --- | --- | --- |
 | [Regular tetrahedron](regular_tetrahedron/index.md) | How do residence and face transit differ as the probe grows? | Separate executed system, DFND and original-comparison notebooks; atomic-model audit and distinct failure states. |
-| [Sampled closed shell](closed_shell/index.ipynb) | Does a certified atomic-ball wall enclose a free central probe region? | Independent wall-coverage certificate and reviewed central-region observations; global cavity count and exact volume remain outside that certificate. |
+| [Sampled closed shell](closed_shell/index.md) | How does access to the same sampled wall change with probe size? | Separate executed system/native notebooks; independent access, enclosure and finite-hull exclusion controls. Historical original-provider evidence is retained. |
 
 | Part | What the reader can inspect |
 | --- | --- |
@@ -69,7 +69,8 @@ The tetrahedron's `system.ipynb`, `dfnd.ipynb` and `comparisons.ipynb` run
 independently and do not execute original providers. The comparison stage
 verifies retained original bundles and reconstructs accepted results without
 external engines or requests; see its artifact guide to repeat original execution.
-The closed-shell notebook and the tetrahedron's historical combined notebook
+The closed shell's new `system.ipynb` and `dfnd.ipynb` also run independently
+without providers or server requests. Both cases' historical combined notebooks
 retain their earlier optional-provider code. Install original providers
 separately if deliberately rerunning those historical comparisons:
 
@@ -123,6 +124,8 @@ build. Execution and scientific review are separate checks.
 4. **Tube:** passage, bottlenecks and the limits of a graph skeleton.
 5. **Two chambers with a neck:** residence regions, communication and separation.
 
-The first two controls are available; the tetrahedron now separates its system
-reference and native analysis into independently executable notebooks. Later cases enter the collection
+The first two controls are available; both separate their system reference and
+native analysis into independently executable notebooks. The shell includes a
+separately declared small-probe escape witness on its unchanged atomic input.
+Later cases enter the collection
 after their input assumptions and independent expectations have been reviewed.

@@ -18,6 +18,14 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
+The synthetic sequence now returns to the sampled closed shell under #144.
+Its separate [system/native study](../docs/content/benchlab/synthetic/closed_shell/index.md)
+adds a certified 0.05 Å escape control and a sufficient 5 Å finite-hull exclusion
+bound alongside the adopted 1.4 Å enclosure certificate. Fresh DFND agrees at
+the justified scope; the older 0.2 Å enclosure remains explicitly unresolved.
+Independent references were committed before fresh native observation, with
+all earlier input/provider/notebook bytes preserved and no original-server run.
+
 The later first-case input audit under #143 resolves the remaining effective
 GHECOM/CAVER radii using original readers: 1.87/1.70 Å for the four DUM/C atoms.
 Name alignment alone leaves those numerical assignments unchanged. The

@@ -46,9 +46,8 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (2)
+### Active (1)
 
-- [`closed_shell_split_study.md`](closed_shell_split_study.md) — [#144](https://github.com/uibcdf/topomt/issues/144) — Separate the closed-shell reference and native study with certified probe controls. *(active, inspected)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
 ### Partial (4)

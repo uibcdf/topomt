@@ -258,6 +258,59 @@ and the executable checksum without personal filesystem paths.
 
 ## Second adopted reference and multi-provider comparisons
 
+### Current independent system/native study — 2026-11-08
+
+Issue #144 delivers a short closed-shell `index.md`, independent `system.ipynb`
+and `dfnd.ipynb`, and the unchanged original `historical.ipynb`. All nine old
+input/provider/report files and original notebook bytes retain their protocol
+hashes. No original provider or CASTp job is executed or polled by these stages.
+
+The protocol was frozen at `3a784df`, before the new staged native controls.
+An existing 1.4 Å receiving regression and historical outcomes were already
+known; this is characterization, not a blind evaluation panel. The independent
+reference and its initial system notebook were committed at `3172ac9` before
+fresh native observation. It provides three separately justified controls:
+
+- 0.05 Å: a fixed straight ray has minimum all-atom clearance 0.095285334 Å,
+  certifying access from the free origin to the exterior on the same atomic wall.
+- 1.4 Å: the original covered-hull-triangle/free-origin certificate proves at
+  least one enclosed probe-center component containing the origin.
+- 5 Å: an enclosing-ball/convex-combination bound proves every finite-hull point
+  covered by probe-expanded atomic balls, excluding finite resident support.
+
+The older 0.2 Å anchor remains in the sweep with an explicitly inconclusive
+reference disposition. A negative sufficient coverage margin does not prove a
+leak, and unsuccessful fixed-candidate ray search does not prove closure. The
+new small probe is a declared additional query, not a regenerated input or
+tolerance fitted to native output. Certificate bounds are not exact topology
+transition radii.
+
+Fresh native observation agrees with the three justified claims: the 0.05 Å
+central component has 128 resident cells and ten exterior-link clusters (current
+family `channel`); the 1.4 Å central `void` has 33 resident cells and no exterior
+link; the 5 Å query has no resident wet component. Ten contact clusters do not
+establish ten independently certified mouths. The 49-point original sweep
+exposes current states and nested resident-cell availability without asserting
+monotone component counts. A `min_size=34` control hides the reported void while
+retaining its raw support and physical result key.
+
+`artifacts/native_study_v1/` retains the protocol, independent reference,
+quantity-aware native observations, four reviewed standalone figures and an
+execution receipt. Both notebooks run in separate fresh kernels, read shared
+frozen inputs/reference files, and leave artifacts untouched on ordinary reruns.
+Complete reports are folded for reading; a final fresh replay verifies identical
+numerical records and all four figure bytes. No native scientific code changes
+were needed for these controls.
+
+This bounded notebook/reference extension does not complete #75/#76, the full
+synthetic inventory, protein characterization or installed/matrix gates. The
+0.2 Å enclosure remains unresolved at the stated reference scope. The next
+geometric variant should derive an opening from this exact wall, preserve atom
+correspondence and establish an independent access witness at the selected probe
+before observing DFND.
+
+### Historical combined study
+
 `closed_shell.ipynb` freezes 72 atomic balls near a 6 Å sphere, atom radius
 1.7 Å, spacing 2.5 Å, jitter 0.06 and seed 20261001. Its independent certificate
 covers every triangle of the convex-hull boundary with the probe-expanded

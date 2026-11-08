@@ -34,8 +34,12 @@ docs/content/benchlab/
       artifacts/comparisons_v1/...
       artifacts/radius_audit_v1/...
     closed_shell/
-      index.ipynb
+      index.md
+      system.ipynb
+      dfnd.ipynb
+      historical.ipynb
       artifacts/closed_shell_v1/...
+      artifacts/native_study_v1/...
   molecular/
     index.md
 ```
@@ -62,7 +66,12 @@ an atomic-model audit and original local evidence. Its ordinary execution only
 verifies/reconstructs stored outputs. Each runs from a clean kernel using frozen inputs and, for DFND, the
 committed independent reference rather than another notebook's live variables.
 The earlier combined tetrahedron notebook is retained unchanged as historical
-evidence. The closed shell keeps its existing combined notebook until reviewed.
+evidence. Under #144, the closed shell also has independent system/native
+notebooks, with its unchanged combined notebook retained as history. The new
+reference adds a separately declared 0.05 Å all-atom escape ray and 5 Å
+full-hull exclusion bound on the same frozen input; the old 0.2 Å reference
+remains explicitly inconclusive. New stages read committed records in clean
+kernels without original-provider execution or server requests.
 
 Use descriptive names as permanent case identities, without ordinal codes.
 Grouping and study order are editable navigation. Each frozen input retains its

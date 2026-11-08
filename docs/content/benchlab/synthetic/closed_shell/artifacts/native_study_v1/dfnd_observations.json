@@ -1,0 +1,7873 @@
+{
+  "schema": "topomt.benchlab.closed-shell-native/1",
+  "case_id": "closed_shell",
+  "case_version": 1,
+  "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "reference_sha256": "2cd156c8b30adf1729f3c5479dba75e6a4853f781f390eef008e9a0ea0176e58",
+  "protocol_sha256": "533fd978a20725c36c355e01ad6ed1f05268d61b31bd62f4e77bbddfd8596925",
+  "reference_checks": "passed",
+  "software": {
+    "python": "3.14.10",
+    "topomt": "0.5.0+387.gcf4d475.dirty",
+    "pyunitwizard": "0.29.1+6.gf82b618",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "numba": "0.68.1"
+  },
+  "topomt_source": {
+    "scope": "Sorted topomt/**/*.py relative paths and length-delimited bytes",
+    "file_count": 298,
+    "sha256": "15f17f0929574f9dae638fda8a4186a9932b2cd50e53c3231d97929bee7724b9"
+  },
+  "query": {
+    "min_size": 0,
+    "transit_policy": "with_connectors",
+    "gate_intrusion_policy": "flag_only",
+    "dry_adjacency": "face",
+    "residence_tolerance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "residence_tolerance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:3ba2a05b6ed0bfc574a7a7c18c6a68e1"
+    },
+    "permeability_tolerance": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "permeability_tolerance",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.0,
+      "block_digests": [
+        "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+      ],
+      "digest": "blake2b-128:5776c109ac89c18e2c9b62bf36990ac4"
+    }
+  },
+  "epsilon": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "epsilon",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1e-06,
+    "block_digests": [
+      "blake2b-128:fdc4aee404c6c8d3af6c444a146a42d5"
+    ],
+    "digest": "blake2b-128:afe0b5c20f12a97f318d2e509e8ae42b"
+  },
+  "origin_containing_tetrahedra": [
+    40
+  ],
+  "anchors": [
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.05,
+        "block_digests": [
+          "blake2b-128:4b5217221be043884d11732eae43fcd7"
+        ],
+        "digest": "blake2b-128:5d533faf0ae670188161d0f9ddee8cd5"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 128,
+      "resident_tetrahedron_ids": [
+        1,
+        2,
+        4,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        67,
+        69,
+        70,
+        71,
+        72,
+        73,
+        75,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        89,
+        91,
+        93,
+        97,
+        99,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        111,
+        114,
+        115,
+        116,
+        118,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        131,
+        133,
+        134,
+        136,
+        137,
+        138,
+        139,
+        141,
+        142,
+        143,
+        144,
+        145,
+        147,
+        148,
+        150,
+        151,
+        152,
+        153,
+        154,
+        158,
+        160,
+        162,
+        165,
+        166,
+        168,
+        169,
+        171,
+        172,
+        174,
+        176,
+        177,
+        179,
+        180,
+        181,
+        183,
+        184,
+        186,
+        187,
+        188,
+        189,
+        190
+      ],
+      "central_family": "channel",
+      "central_resident_nodes": 128,
+      "central_tetrahedron_ids": [
+        0,
+        1,
+        2,
+        4,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        67,
+        69,
+        70,
+        71,
+        72,
+        73,
+        75,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        89,
+        91,
+        93,
+        97,
+        99,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        111,
+        114,
+        115,
+        116,
+        118,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        131,
+        133,
+        134,
+        136,
+        137,
+        138,
+        139,
+        141,
+        142,
+        143,
+        144,
+        145,
+        147,
+        148,
+        150,
+        151,
+        152,
+        153,
+        154,
+        158,
+        160,
+        162,
+        165,
+        166,
+        168,
+        169,
+        171,
+        172,
+        174,
+        176,
+        177,
+        179,
+        180,
+        181,
+        183,
+        184,
+        186,
+        187,
+        188,
+        189,
+        190
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        2,
+        4,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        17,
+        18,
+        19,
+        20,
+        22,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        49,
+        50,
+        51,
+        52,
+        53,
+        54,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        67,
+        69,
+        70,
+        71,
+        72,
+        73,
+        75,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        89,
+        91,
+        93,
+        97,
+        99,
+        104,
+        105,
+        106,
+        107,
+        108,
+        109,
+        111,
+        114,
+        115,
+        116,
+        118,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        131,
+        133,
+        134,
+        136,
+        137,
+        138,
+        139,
+        141,
+        142,
+        143,
+        144,
+        145,
+        147,
+        148,
+        150,
+        151,
+        152,
+        153,
+        154,
+        158,
+        160,
+        162,
+        165,
+        166,
+        168,
+        169,
+        171,
+        172,
+        174,
+        176,
+        177,
+        179,
+        180,
+        181,
+        183,
+        184,
+        186,
+        187,
+        188,
+        189,
+        190
+      ],
+      "central_external_links": 10,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 545.6577496935074,
+        "block_digests": [
+          "blake2b-128:e17fe94ad0f349a743f11b30c257ea83"
+        ],
+        "digest": "blake2b-128:006eda215d199e1d7cb6de16f1bcfbf1"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 1,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      },
+      "experiment_id": "small_probe_access",
+      "reference_expectation": "origin_free_and_exterior_connected"
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 33,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        73,
+        82,
+        121,
+        122,
+        168,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 33,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        73,
+        82,
+        121,
+        122,
+        168,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        73,
+        82,
+        121,
+        122,
+        168,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 501.68051006470455,
+        "block_digests": [
+          "blake2b-128:dac131fde8f5a51e11b05944873a443e"
+        ],
+        "digest": "blake2b-128:78a1a11b2abb0f589d8541f35c19bd35"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      },
+      "experiment_id": "certified_wall",
+      "reference_expectation": "origin_free_and_enclosed"
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 5.0,
+        "block_digests": [
+          "blake2b-128:f268dce3141bedeb49543617e25a607f"
+        ],
+        "digest": "blake2b-128:3283a855e6d9da2f2b31a228fe78c7a1"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      },
+      "experiment_id": "no_finite_residence",
+      "reference_expectation": "no_free_probe_center_in_finite_hull"
+    }
+  ],
+  "legacy_control": {
+    "probe_radius": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_radius",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.2,
+      "block_digests": [
+        "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+      ],
+      "digest": "blake2b-128:da572895dee1efc42511cbdc2cd754ea"
+    },
+    "raw_component_count": 1,
+    "resident_node_count": 95,
+    "resident_tetrahedron_ids": [
+      1,
+      4,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      18,
+      19,
+      23,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      50,
+      51,
+      52,
+      53,
+      57,
+      58,
+      59,
+      60,
+      62,
+      63,
+      70,
+      71,
+      72,
+      73,
+      77,
+      78,
+      80,
+      81,
+      82,
+      83,
+      84,
+      88,
+      91,
+      97,
+      99,
+      105,
+      106,
+      107,
+      109,
+      111,
+      114,
+      115,
+      116,
+      121,
+      122,
+      125,
+      126,
+      128,
+      129,
+      130,
+      134,
+      137,
+      139,
+      141,
+      142,
+      143,
+      145,
+      150,
+      151,
+      152,
+      154,
+      158,
+      160,
+      166,
+      168,
+      169,
+      171,
+      172,
+      176,
+      179,
+      181,
+      188,
+      189
+    ],
+    "central_family": "void",
+    "central_resident_nodes": 95,
+    "central_tetrahedron_ids": [
+      1,
+      4,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      18,
+      19,
+      23,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      50,
+      51,
+      52,
+      53,
+      57,
+      58,
+      59,
+      60,
+      62,
+      63,
+      70,
+      71,
+      72,
+      73,
+      77,
+      78,
+      80,
+      81,
+      82,
+      83,
+      84,
+      88,
+      91,
+      93,
+      97,
+      99,
+      105,
+      106,
+      107,
+      109,
+      111,
+      114,
+      115,
+      116,
+      121,
+      122,
+      125,
+      126,
+      128,
+      129,
+      130,
+      134,
+      137,
+      139,
+      141,
+      142,
+      143,
+      145,
+      150,
+      151,
+      152,
+      154,
+      158,
+      160,
+      166,
+      168,
+      169,
+      171,
+      172,
+      174,
+      176,
+      177,
+      179,
+      181,
+      188,
+      189
+    ],
+    "central_resident_tetrahedron_ids": [
+      1,
+      4,
+      7,
+      9,
+      10,
+      11,
+      12,
+      13,
+      15,
+      18,
+      19,
+      23,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      50,
+      51,
+      52,
+      53,
+      57,
+      58,
+      59,
+      60,
+      62,
+      63,
+      70,
+      71,
+      72,
+      73,
+      77,
+      78,
+      80,
+      81,
+      82,
+      83,
+      84,
+      88,
+      91,
+      97,
+      99,
+      105,
+      106,
+      107,
+      109,
+      111,
+      114,
+      115,
+      116,
+      121,
+      122,
+      125,
+      126,
+      128,
+      129,
+      130,
+      134,
+      137,
+      139,
+      141,
+      142,
+      143,
+      145,
+      150,
+      151,
+      152,
+      154,
+      158,
+      160,
+      166,
+      168,
+      169,
+      171,
+      172,
+      176,
+      179,
+      181,
+      188,
+      189
+    ],
+    "central_external_links": 0,
+    "central_solvent_volume_estimate": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "central_solvent_volume_estimate",
+        "unit": "angstrom ** 3",
+        "si": {
+          "factor": 1e-30,
+          "offset": 0.0,
+          "exponents": {
+            "m": 3
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 545.5157126435016,
+      "block_digests": [
+        "blake2b-128:a1569a5b8755d4c6f7310cce62c2e13e"
+      ],
+      "digest": "blake2b-128:e49a2cb85f802643451eb47fd7034062"
+    },
+    "reported_counts": {
+      "pockets": 0,
+      "voids": 1,
+      "channels": 0,
+      "surface_concavities": 0,
+      "nonresident_passages": 0,
+      "degenerate_subprobes": 0,
+      "percolatings": 0
+    },
+    "reference_disposition": "enclosure_unresolved_by_these_sufficient_bounds"
+  },
+  "sweep": [
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.2,
+        "block_digests": [
+          "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+        ],
+        "digest": "blake2b-128:da572895dee1efc42511cbdc2cd754ea"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 95,
+      "resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        19,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        70,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        134,
+        137,
+        139,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        152,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        181,
+        188,
+        189
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 95,
+      "central_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        19,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        70,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        93,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        134,
+        137,
+        139,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        152,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        174,
+        176,
+        177,
+        179,
+        181,
+        188,
+        189
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        9,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        19,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        70,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        134,
+        137,
+        139,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        152,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        181,
+        188,
+        189
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 545.5157126435016,
+        "block_digests": [
+          "blake2b-128:a1569a5b8755d4c6f7310cce62c2e13e"
+        ],
+        "digest": "blake2b-128:e49a2cb85f802643451eb47fd7034062"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.3,
+        "block_digests": [
+          "blake2b-128:8d9080b5200472c82276854f33ca94f0"
+        ],
+        "digest": "blake2b-128:7aca801549d0beeb0f8e5ef4c8a537cb"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 89,
+      "resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        19,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        152,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 89,
+      "central_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        19,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        152,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        19,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        125,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        152,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 545.3842355447188,
+        "block_digests": [
+          "blake2b-128:46e79178a6da45395560545611ed55b0"
+        ],
+        "digest": "blake2b-128:52ba62e4a1ee682bcf74418f3c3b2b2f"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.4,
+        "block_digests": [
+          "blake2b-128:e8b340f91227773af02fd6c527a59474"
+        ],
+        "digest": "blake2b-128:ee293321d97787ccf9da5d403d69711f"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 86,
+      "resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 86,
+      "central_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 545.1859515916964,
+        "block_digests": [
+          "blake2b-128:6bd168fdb6a03f0956aababa222456f3"
+        ],
+        "digest": "blake2b-128:6c66f2034229ab516cce07db1b9cebcd"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.5,
+        "block_digests": [
+          "blake2b-128:2c13b4fc76c2e9a0bf2335e578e8ea32"
+        ],
+        "digest": "blake2b-128:cbc9e4b91e11ffb101c7ee1e0e3d3baa"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 85,
+      "resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 85,
+      "central_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        151,
+        154,
+        158,
+        160,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 545.1300062000763,
+        "block_digests": [
+          "blake2b-128:4a0715eb5e6e8e8d39ad9e87e19cc3fc"
+        ],
+        "digest": "blake2b-128:36e8ea464b78215eedf209cacf48fa98"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.6,
+        "block_digests": [
+          "blake2b-128:3f12f799d3be2f4ba0f7070f89914853"
+        ],
+        "digest": "blake2b-128:da7d007cd27c2912dbd38302070e5b41"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 82,
+      "resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        154,
+        158,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 82,
+      "central_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        97,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        154,
+        158,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        4,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        23,
+        27,
+        28,
+        29,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        88,
+        91,
+        99,
+        105,
+        106,
+        107,
+        109,
+        111,
+        114,
+        115,
+        116,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        154,
+        158,
+        166,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 544.2404473840932,
+        "block_digests": [
+          "blake2b-128:64ab527e4dcf416b1ef3f242d773d405"
+        ],
+        "digest": "blake2b-128:69c982897638b42ee7a9c4206b229b5b"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.7,
+        "block_digests": [
+          "blake2b-128:ade72418b2e3a693d9f1364fdc07cef2"
+        ],
+        "digest": "blake2b-128:c2bceb5cfe758078707525e27f3628d9"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 72,
+      "resident_tetrahedron_ids": [
+        1,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        27,
+        28,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        99,
+        106,
+        107,
+        109,
+        114,
+        115,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        154,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 72,
+      "central_tetrahedron_ids": [
+        1,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        27,
+        28,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        97,
+        99,
+        106,
+        107,
+        109,
+        114,
+        115,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        154,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        18,
+        27,
+        28,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        72,
+        73,
+        77,
+        78,
+        80,
+        81,
+        82,
+        83,
+        84,
+        99,
+        106,
+        107,
+        109,
+        114,
+        115,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        150,
+        154,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179,
+        189
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 541.4354585708332,
+        "block_digests": [
+          "blake2b-128:937abaa12d032e396b48914625a62eb7"
+        ],
+        "digest": "blake2b-128:53780bdbf09d966e95d19e97e2e7d19f"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.8,
+        "block_digests": [
+          "blake2b-128:a1ec3bb978bf85dc3a15352b4514a554"
+        ],
+        "digest": "blake2b-128:c999262f6db6b441e1affc33105c792b"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 64,
+      "resident_tetrahedron_ids": [
+        1,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        73,
+        80,
+        81,
+        82,
+        83,
+        84,
+        99,
+        106,
+        107,
+        109,
+        114,
+        115,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 64,
+      "central_tetrahedron_ids": [
+        1,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        73,
+        80,
+        81,
+        82,
+        83,
+        84,
+        97,
+        99,
+        106,
+        107,
+        109,
+        114,
+        115,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        7,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        60,
+        62,
+        63,
+        71,
+        73,
+        80,
+        81,
+        82,
+        83,
+        84,
+        99,
+        106,
+        107,
+        109,
+        114,
+        115,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        168,
+        169,
+        171,
+        172,
+        176,
+        179
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 537.140449858687,
+        "block_digests": [
+          "blake2b-128:e7823c6710cc6f4b665d136d4e676f1b"
+        ],
+        "digest": "blake2b-128:1b3c388ff6857178f439316748019869"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 0.8999999999999999,
+        "block_digests": [
+          "blake2b-128:a18c625f591d1a5c3756e435f4ae9193"
+        ],
+        "digest": "blake2b-128:5d28531b74d5ea03a52ba8995042672a"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 57,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        71,
+        73,
+        80,
+        82,
+        83,
+        84,
+        99,
+        106,
+        107,
+        109,
+        114,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        168,
+        169,
+        171,
+        172
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 57,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        71,
+        73,
+        80,
+        82,
+        83,
+        84,
+        97,
+        99,
+        106,
+        107,
+        109,
+        114,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        168,
+        169,
+        171,
+        172
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        71,
+        73,
+        80,
+        82,
+        83,
+        84,
+        99,
+        106,
+        107,
+        109,
+        114,
+        121,
+        122,
+        126,
+        128,
+        129,
+        130,
+        137,
+        141,
+        142,
+        143,
+        145,
+        168,
+        169,
+        171,
+        172
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 533.601994414436,
+        "block_digests": [
+          "blake2b-128:483c34300ae8d995f26c09fa539f9451"
+        ],
+        "digest": "blake2b-128:6ed9db41b9b03d6bed65d3029bd74a91"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.0,
+        "block_digests": [
+          "blake2b-128:cce003cb82d6981ca8f4f85e79904fc4"
+        ],
+        "digest": "blake2b-128:df17497732e12a1cc8280bf570dba8a2"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 50,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        84,
+        99,
+        106,
+        107,
+        109,
+        121,
+        122,
+        126,
+        128,
+        129,
+        141,
+        142,
+        143,
+        168,
+        169,
+        171,
+        172
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 50,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        31,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        84,
+        99,
+        106,
+        107,
+        109,
+        121,
+        122,
+        126,
+        128,
+        129,
+        141,
+        142,
+        143,
+        168,
+        169,
+        171,
+        172
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        84,
+        99,
+        106,
+        107,
+        109,
+        121,
+        122,
+        126,
+        128,
+        129,
+        141,
+        142,
+        143,
+        168,
+        169,
+        171,
+        172
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 526.1600017594782,
+        "block_digests": [
+          "blake2b-128:fb78dacb90a490fa8185d0a828b5c62b"
+        ],
+        "digest": "blake2b-128:bed0fb932220fa725ce51e962cb4f6d9"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.0999999999999999,
+        "block_digests": [
+          "blake2b-128:d1e7cebb155b3884dd1dd8a21fb82da9"
+        ],
+        "digest": "blake2b-128:fdaa1903c9a769257f9680c836739338"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 42,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        106,
+        121,
+        122,
+        126,
+        128,
+        129,
+        142,
+        168,
+        169,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 42,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        106,
+        121,
+        122,
+        126,
+        128,
+        129,
+        142,
+        168,
+        169,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        52,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        106,
+        121,
+        122,
+        126,
+        128,
+        129,
+        142,
+        168,
+        169,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 515.4058482719548,
+        "block_digests": [
+          "blake2b-128:267b1eb614a3d77a7eef0481fc699e4a"
+        ],
+        "digest": "blake2b-128:5acaa28b1fbf77f6f4df164067b685f1"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2,
+        "block_digests": [
+          "blake2b-128:7f818a45feb71a60cf3effd121324813"
+        ],
+        "digest": "blake2b-128:8ad14c1a9de655527fbef89a4dc29b85"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 38,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        106,
+        121,
+        122,
+        126,
+        142,
+        168,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 38,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        106,
+        121,
+        122,
+        126,
+        142,
+        168,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        106,
+        121,
+        122,
+        126,
+        142,
+        168,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 511.149958548133,
+        "block_digests": [
+          "blake2b-128:6d2a8625b50906f23ee8ac95198118dd"
+        ],
+        "digest": "blake2b-128:463f75b39694a3a50f6601a78e7c56be"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2999999999999998,
+        "block_digests": [
+          "blake2b-128:0863fc24bb1c60d00056b04639b9cd6a"
+        ],
+        "digest": "blake2b-128:b979bde7726f825dc16a0f2277949c42"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 37,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        121,
+        122,
+        126,
+        142,
+        168,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 37,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        28,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        121,
+        122,
+        126,
+        142,
+        168,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        59,
+        62,
+        63,
+        73,
+        80,
+        82,
+        121,
+        122,
+        126,
+        142,
+        168,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 510.28638168032387,
+        "block_digests": [
+          "blake2b-128:36e8dfdba8f46258ab32b5b2f0a5aaec"
+        ],
+        "digest": "blake2b-128:4be30497ed36ad4ddb6cc4a2b4b6bd28"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 33,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        73,
+        82,
+        121,
+        122,
+        168,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 33,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        73,
+        82,
+        121,
+        122,
+        168,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        73,
+        82,
+        121,
+        122,
+        168,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 501.68051006470455,
+        "block_digests": [
+          "blake2b-128:dac131fde8f5a51e11b05944873a443e"
+        ],
+        "digest": "blake2b-128:78a1a11b2abb0f589d8541f35c19bd35"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4999999999999998,
+        "block_digests": [
+          "blake2b-128:3df52224192652fc7992978a44f7bae0"
+        ],
+        "digest": "blake2b-128:1cea1d0e38f9241440f25f22f6d9e1ab"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 30,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 30,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 493.3543225815618,
+        "block_digests": [
+          "blake2b-128:e1fbafb6189137b391ccb2122952c6d5"
+        ],
+        "digest": "blake2b-128:c03f315b09727a898f64c753915df40f"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.5999999999999999,
+        "block_digests": [
+          "blake2b-128:0d5892b33e2085e666c19c4e8c9c3094"
+        ],
+        "digest": "blake2b-128:01e8bc371d00321482a91d70a2ae56ab"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 26,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        15,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 26,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        13,
+        15,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        15,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        62,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 466.0484105657205,
+        "block_digests": [
+          "blake2b-128:d17966c9645e143458afad524fb9c4b7"
+        ],
+        "digest": "blake2b-128:f6ef0cd9373c141f81629ce3902490de"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.6999999999999997,
+        "block_digests": [
+          "blake2b-128:c79731c55d63370f24e5466dbaa0ad86"
+        ],
+        "digest": "blake2b-128:9d5495dbdaa67edc1e1b639b50acb055"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 25,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        15,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 25,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        15,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        15,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        121,
+        122,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 462.68082883664226,
+        "block_digests": [
+          "blake2b-128:37a14a9735259ec72d07452e4134cdba"
+        ],
+        "digest": "blake2b-128:0be8d92cb37a30dc50a73ecd85130567"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7999999999999998,
+        "block_digests": [
+          "blake2b-128:9fa5f944e9aaebaa8b83543e0c634bc6"
+        ],
+        "digest": "blake2b-128:7b5091adbd253f2d9bf60eee6cd9f217"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 23,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 23,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        15,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 450.83046978039033,
+        "block_digests": [
+          "blake2b-128:1e025bf8abd2e5331b2c0f0922f93790"
+        ],
+        "digest": "blake2b-128:552f0decd78b594de455fafbe29a4416"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.9,
+        "block_digests": [
+          "blake2b-128:3f964afe31aee251c73ac7e0b3656dea"
+        ],
+        "digest": "blake2b-128:25d0b80992282995ff7d40f1850ba9ef"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 23,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122,
+        171
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 23,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        15,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122,
+        171
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        12,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122,
+        171
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 450.83046978039033,
+        "block_digests": [
+          "blake2b-128:1e025bf8abd2e5331b2c0f0922f93790"
+        ],
+        "digest": "blake2b-128:552f0decd78b594de455fafbe29a4416"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.9999999999999998,
+        "block_digests": [
+          "blake2b-128:6007991fbe29e916aa86d3fa5bacaddd"
+        ],
+        "digest": "blake2b-128:d537696faa075907c388b2e1cb13ff53"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 20,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 20,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        15,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 434.773944211894,
+        "block_digests": [
+          "blake2b-128:5f9f487f9811e19b4ee88fa6791e0c01"
+        ],
+        "digest": "blake2b-128:8b7f7776af4d951635e7a1d87f0db4d7"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.1,
+        "block_digests": [
+          "blake2b-128:6d260a9762923e0ba77a68abc54a7165"
+        ],
+        "digest": "blake2b-128:60fce93a8bc4f4c536f9caedbee880b0"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 19,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        63,
+        82,
+        122
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 19,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        15,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63,
+        82,
+        122
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        63,
+        82,
+        122
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 422.1190354470274,
+        "block_digests": [
+          "blake2b-128:9ecdaee3df78602b4f3562f039e27f68"
+        ],
+        "digest": "blake2b-128:b3a4f2c7233622f636af56b2a49c5b4f"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.1999999999999997,
+        "block_digests": [
+          "blake2b-128:42c66f5e280cfd5d600af69aa5a36a0f"
+        ],
+        "digest": "blake2b-128:c9e340697621a5baaecf1971d859f6fb"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 16,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51,
+        53,
+        57,
+        63
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 16,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        15,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58,
+        63
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51,
+        53,
+        57,
+        63
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 386.224929276799,
+        "block_digests": [
+          "blake2b-128:ac0d7a625fd85c863ae9a73d050327a4"
+        ],
+        "digest": "blake2b-128:603452172365e644f2e7c16ab3a44967"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.3,
+        "block_digests": [
+          "blake2b-128:df4484312b802ba19441cca85213fd91"
+        ],
+        "digest": "blake2b-128:371f2732a106d71eb86d8cbdd00c78d7"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 14,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51,
+        53,
+        57
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 14,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        15,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        50,
+        51,
+        53,
+        57,
+        58
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51,
+        53,
+        57
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 358.7662092547165,
+        "block_digests": [
+          "blake2b-128:939b9b2ed24daf8c9850e52872c58c59"
+        ],
+        "digest": "blake2b-128:13834728f7de5a7b763ee95e424a5806"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.4,
+        "block_digests": [
+          "blake2b-128:08dc9098581679f8fef373b585cd59e5"
+        ],
+        "digest": "blake2b-128:e38d37af90c920d37eb166e1ac90a562"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 13,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51,
+        53
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 13,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51,
+        53
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51,
+        53
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 337.3594051431424,
+        "block_digests": [
+          "blake2b-128:3d19a6cf3830bbb3ca97b9c0f880b697"
+        ],
+        "digest": "blake2b-128:587d0fc5de4ae7f931fb9e73b18b6c1f"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.5,
+        "block_digests": [
+          "blake2b-128:f21e97ac423dc3d26d4ebcd0b8c7adb3"
+        ],
+        "digest": "blake2b-128:5143dba07fb280e176d1ccf983799a7f"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 12,
+      "resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 12,
+      "central_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_resident_tetrahedron_ids": [
+        1,
+        10,
+        11,
+        36,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 325.684390202259,
+        "block_digests": [
+          "blake2b-128:c0dfdac0922ed8a7a4cd38a3c6f89854"
+        ],
+        "digest": "blake2b-128:87c307b18497cb200d54ca3adc094196"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.6,
+        "block_digests": [
+          "blake2b-128:17da59b77ce3b120e74ab89318e21937"
+        ],
+        "digest": "blake2b-128:acfbd9fa8391b827a0438e5a989a1670"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 10,
+      "resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 10,
+      "central_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 299.53962915569394,
+        "block_digests": [
+          "blake2b-128:f77c9902478341e0a4a42cc470384298"
+        ],
+        "digest": "blake2b-128:643c5be153de4ec24697fb1b79fb106c"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.7,
+        "block_digests": [
+          "blake2b-128:fa03eab5e74852c063c66e5928a92af4"
+        ],
+        "digest": "blake2b-128:2fa90ff7f3d05223bff35877d7bf904c"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 10,
+      "resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 10,
+      "central_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 299.53962915569394,
+        "block_digests": [
+          "blake2b-128:f77c9902478341e0a4a42cc470384298"
+        ],
+        "digest": "blake2b-128:643c5be153de4ec24697fb1b79fb106c"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.8,
+        "block_digests": [
+          "blake2b-128:d75a143bf51bda94426821177d8c66d7"
+        ],
+        "digest": "blake2b-128:2b699872078da60aec501fa1fb3c6179"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 10,
+      "resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 10,
+      "central_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        44,
+        51
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 299.53962915569394,
+        "block_digests": [
+          "blake2b-128:f77c9902478341e0a4a42cc470384298"
+        ],
+        "digest": "blake2b-128:643c5be153de4ec24697fb1b79fb106c"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 2.9,
+        "block_digests": [
+          "blake2b-128:f6f6b149bb25a3b44cd6eb54dfbbeba1"
+        ],
+        "digest": "blake2b-128:098a43991b54976b7ccc7e9f62267267"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 9,
+      "resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 9,
+      "central_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        38,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 272.31447077812106,
+        "block_digests": [
+          "blake2b-128:b2f65caf8d45133a4dddf9c2926f6e15"
+        ],
+        "digest": "blake2b-128:0d188434074022ca8d28c0793ec2febf"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.0,
+        "block_digests": [
+          "blake2b-128:7680177f7cc17b8a86589f0b5edfa0b3"
+        ],
+        "digest": "blake2b-128:d8b12b89c7dc260a92f9272e70014f49"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 8,
+      "resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 8,
+      "central_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 262.9896497339258,
+        "block_digests": [
+          "blake2b-128:747a6bc35ef91ca535f5950369317f74"
+        ],
+        "digest": "blake2b-128:89e41c37196dcf9514095ad24a5ab4ff"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.1,
+        "block_digests": [
+          "blake2b-128:3428a309cb94ddf6f22b79eba0ec0321"
+        ],
+        "digest": "blake2b-128:d84aa56197fdc7f71b718a3c6037f662"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 8,
+      "resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 8,
+      "central_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43,
+        51
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 262.9896497339258,
+        "block_digests": [
+          "blake2b-128:747a6bc35ef91ca535f5950369317f74"
+        ],
+        "digest": "blake2b-128:89e41c37196dcf9514095ad24a5ab4ff"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.1999999999999997,
+        "block_digests": [
+          "blake2b-128:94f78239221fef9c9f20d92f773b51bc"
+        ],
+        "digest": "blake2b-128:941004d9e5fe4ad596d3d98cdca2c003"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 7,
+      "resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 7,
+      "central_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        11,
+        36,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 238.47803573934277,
+        "block_digests": [
+          "blake2b-128:1fb29dce5fb394a2fde9947254ad81f5"
+        ],
+        "digest": "blake2b-128:2bfd827315eef84c912cf25a3f11c775"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.3,
+        "block_digests": [
+          "blake2b-128:d36a61776b9a5b95bf03db7da8f246a9"
+        ],
+        "digest": "blake2b-128:0169fe0956091e5490f3a9c6b9139b16"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 6,
+      "resident_tetrahedron_ids": [
+        10,
+        36,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 6,
+      "central_tetrahedron_ids": [
+        10,
+        36,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        36,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 207.8005840634566,
+        "block_digests": [
+          "blake2b-128:04c8451249c47d41f92d3a9d90e76985"
+        ],
+        "digest": "blake2b-128:95e39cba483b6735de44606877ee11ed"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.4,
+        "block_digests": [
+          "blake2b-128:79d7de58ef0c95b16aa50c65cab6676c"
+        ],
+        "digest": "blake2b-128:47922acf63f7c51d9f227aa91ef22594"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 5,
+      "resident_tetrahedron_ids": [
+        10,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 5,
+      "central_tetrahedron_ids": [
+        10,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 188.65216926131708,
+        "block_digests": [
+          "blake2b-128:384263c786368fcdafce226829ab092e"
+        ],
+        "digest": "blake2b-128:58d15278e4962012446449becf3f60ba"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.5,
+        "block_digests": [
+          "blake2b-128:b9b18a9900e3fc95ba3468c46a9fcfb1"
+        ],
+        "digest": "blake2b-128:b723082821449e8b300779a14db77d53"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 5,
+      "resident_tetrahedron_ids": [
+        10,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 5,
+      "central_tetrahedron_ids": [
+        10,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_resident_tetrahedron_ids": [
+        10,
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 188.65216926131708,
+        "block_digests": [
+          "blake2b-128:384263c786368fcdafce226829ab092e"
+        ],
+        "digest": "blake2b-128:58d15278e4962012446449becf3f60ba"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.6,
+        "block_digests": [
+          "blake2b-128:8c9cb88afb2bf571aeb9f812ea242cc3"
+        ],
+        "digest": "blake2b-128:b379f7984cdc54f5b1eded1e30b46381"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 4,
+      "resident_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 4,
+      "central_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_resident_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 169.6126976350823,
+        "block_digests": [
+          "blake2b-128:6dfeeea5d9c9cc33e8293b56a21c9deb"
+        ],
+        "digest": "blake2b-128:dbcc0556da3d0a2fa70b7c59fca0b1df"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.6999999999999997,
+        "block_digests": [
+          "blake2b-128:0119c2a74b45c44858da668d96c41558"
+        ],
+        "digest": "blake2b-128:e0cebe4023c4f3e543fc6dd7d6198d1a"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 4,
+      "resident_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 4,
+      "central_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_resident_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 169.6126976350823,
+        "block_digests": [
+          "blake2b-128:6dfeeea5d9c9cc33e8293b56a21c9deb"
+        ],
+        "digest": "blake2b-128:dbcc0556da3d0a2fa70b7c59fca0b1df"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.8,
+        "block_digests": [
+          "blake2b-128:4344d16812ea6a4a7e4d7d377b922984"
+        ],
+        "digest": "blake2b-128:9a0a83c56c2b8372f4f7696959130a7a"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 4,
+      "resident_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 4,
+      "central_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_resident_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 169.6126976350823,
+        "block_digests": [
+          "blake2b-128:6dfeeea5d9c9cc33e8293b56a21c9deb"
+        ],
+        "digest": "blake2b-128:dbcc0556da3d0a2fa70b7c59fca0b1df"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.9,
+        "block_digests": [
+          "blake2b-128:5b2c8c34958baefe8d56bf9c0e80bcaa"
+        ],
+        "digest": "blake2b-128:534963ef6975404d4019cb6c180eff64"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 4,
+      "resident_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 4,
+      "central_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_resident_tetrahedron_ids": [
+        40,
+        41,
+        42,
+        43
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 169.6126976350823,
+        "block_digests": [
+          "blake2b-128:6dfeeea5d9c9cc33e8293b56a21c9deb"
+        ],
+        "digest": "blake2b-128:dbcc0556da3d0a2fa70b7c59fca0b1df"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.0,
+        "block_digests": [
+          "blake2b-128:578778c53fb720d78464739f50d61fca"
+        ],
+        "digest": "blake2b-128:21695f76ab414088a7d2769867d84b12"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 2,
+      "resident_tetrahedron_ids": [
+        40,
+        41
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 2,
+      "central_tetrahedron_ids": [
+        40,
+        41
+      ],
+      "central_resident_tetrahedron_ids": [
+        40,
+        41
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 108.51659200289596,
+        "block_digests": [
+          "blake2b-128:be3288f40416005c330dff6516554520"
+        ],
+        "digest": "blake2b-128:0eeca529cea2c49f5fc698932ca5cdbb"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.1,
+        "block_digests": [
+          "blake2b-128:d934bb0187e29bf8fec965ffcde01b90"
+        ],
+        "digest": "blake2b-128:fcd7c43273accd0ec073f971061a9537"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 2,
+      "resident_tetrahedron_ids": [
+        40,
+        41
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 2,
+      "central_tetrahedron_ids": [
+        40,
+        41
+      ],
+      "central_resident_tetrahedron_ids": [
+        40,
+        41
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 108.51659200289596,
+        "block_digests": [
+          "blake2b-128:be3288f40416005c330dff6516554520"
+        ],
+        "digest": "blake2b-128:0eeca529cea2c49f5fc698932ca5cdbb"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.199999999999999,
+        "block_digests": [
+          "blake2b-128:ec305d78ede14475ddefb9db985b3972"
+        ],
+        "digest": "blake2b-128:f647ee1461507f5de3bfd9e2e30071ed"
+      },
+      "raw_component_count": 1,
+      "resident_node_count": 1,
+      "resident_tetrahedron_ids": [
+        40
+      ],
+      "central_family": "void",
+      "central_resident_nodes": 1,
+      "central_tetrahedron_ids": [
+        40
+      ],
+      "central_resident_tetrahedron_ids": [
+        40
+      ],
+      "central_external_links": 0,
+      "central_solvent_volume_estimate": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "central_solvent_volume_estimate",
+          "unit": "angstrom ** 3",
+          "si": {
+            "factor": 1e-30,
+            "offset": 0.0,
+            "exponents": {
+              "m": 3
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 55.60851007292532,
+        "block_digests": [
+          "blake2b-128:1d2f94249defce0837b97470ce4d9105"
+        ],
+        "digest": "blake2b-128:235a4e86e367cdc6d6f36d1ba20c407d"
+      },
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 1,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.3,
+        "block_digests": [
+          "blake2b-128:fb62cf9b336454c12d312c605a74c8fb"
+        ],
+        "digest": "blake2b-128:0eb94c706084132fc4c1816b12df9ba9"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.3999999999999995,
+        "block_digests": [
+          "blake2b-128:01f421c2e6a421d004e7d70beecb0288"
+        ],
+        "digest": "blake2b-128:26236be418918543fd166a9f80491c71"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.5,
+        "block_digests": [
+          "blake2b-128:04369df76c4e94fcbcce13194d2b52f7"
+        ],
+        "digest": "blake2b-128:703e81b8e5d88b814faabe7e614b0842"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.6,
+        "block_digests": [
+          "blake2b-128:4e1ee4befc13201819dc825c1a122247"
+        ],
+        "digest": "blake2b-128:1eebc5afc3f587f591c2b26b7dc71b9e"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.7,
+        "block_digests": [
+          "blake2b-128:f5771258542212aa0ac10e92fb72045c"
+        ],
+        "digest": "blake2b-128:d59468d41d379ed9586861a36cbe027b"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.8,
+        "block_digests": [
+          "blake2b-128:19869254c6d1f347b645d434764ed4ef"
+        ],
+        "digest": "blake2b-128:dea679a1b5a348614d3a6bbbc8f657bb"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 4.8999999999999995,
+        "block_digests": [
+          "blake2b-128:893dc9989522a6aeba5a7da3fc707fd9"
+        ],
+        "digest": "blake2b-128:7ad632ee9ff8bbedde46aa4eaa135190"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 5.0,
+        "block_digests": [
+          "blake2b-128:f268dce3141bedeb49543617e25a607f"
+        ],
+        "digest": "blake2b-128:3283a855e6d9da2f2b31a228fe78c7a1"
+      },
+      "raw_component_count": 0,
+      "resident_node_count": 0,
+      "resident_tetrahedron_ids": [],
+      "central_family": "no_wet_component",
+      "central_resident_nodes": 0,
+      "central_tetrahedron_ids": [],
+      "central_resident_tetrahedron_ids": [],
+      "central_external_links": null,
+      "central_solvent_volume_estimate": null,
+      "reported_counts": {
+        "pockets": 0,
+        "voids": 0,
+        "channels": 0,
+        "surface_concavities": 0,
+        "nonresident_passages": 0,
+        "degenerate_subprobes": 0,
+        "percolatings": 0
+      }
+    }
+  ],
+  "reporting_control": {
+    "probe_radius": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_radius",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.4,
+      "block_digests": [
+        "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+      ],
+      "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+    },
+    "min_size": 34,
+    "geometry_unchanged": true,
+    "raw_central_component_retained": true,
+    "raw_component_count": 1,
+    "reported_component_count": 0
+  },
+  "limits": [
+    "No exact global cavity count at the enclosed anchor",
+    "No numerical solvent-volume precision claim",
+    "No claim that DFND graph paths generally certify continuous access",
+    "No historical provider or server re-execution"
+  ]
+}

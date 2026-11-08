@@ -1,0 +1,167 @@
+{
+  "schema": "topomt.benchlab.closed-shell-execution/1",
+  "case_id": "closed_shell",
+  "protocol_commit": "3a784df",
+  "independent_reference_commit_before_native": "3172ac9",
+  "limits": {
+    "os_cpu_affinity_count": 1,
+    "numerical_workers": 1,
+    "process_address_space": {
+      "value": 6,
+      "unit": "GiB"
+    },
+    "system_cpu_budget": {
+      "value": 90,
+      "unit": "seconds"
+    },
+    "native_cpu_budget": {
+      "value": 120,
+      "unit": "seconds"
+    }
+  },
+  "scope": "Separate fresh Python 3.14 kernels; no original-provider execution or server request; source-workspace evidence only.",
+  "replay": "Final sequential fresh system/native kernels add folded report display. Both numerical records and all four PNGs match the earlier independent/reference/native executions exactly.",
+  "resource_observation": "Shared host checked before execution. No memory PSI or active vmstat swapping; Slurm local partitions inval and other nodes unk. Free resources were not treated as reserved.",
+  "measurements": {
+    "system": {
+      "elapsed_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "elapsed_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 5.35,
+        "block_digests": [
+          "blake2b-128:d34e8d03b193bd3a6bfc7ca6915c3d88"
+        ],
+        "digest": "blake2b-128:e476bfe1c8b4fd52e9a3f9e483227e53"
+      },
+      "maximum_observed_process_rss": {
+        "value": 152716,
+        "unit": "KiB"
+      }
+    },
+    "native_initial": {
+      "elapsed_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "elapsed_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 8.98,
+        "block_digests": [
+          "blake2b-128:1c35cb1349d86dac9f860dbcf8e1d10b"
+        ],
+        "digest": "blake2b-128:f7b444e5556723ca1a9c4403545acf43"
+      },
+      "maximum_observed_process_rss": {
+        "value": 223460,
+        "unit": "KiB"
+      }
+    },
+    "native_final": {
+      "elapsed_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "elapsed_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 7.16,
+        "block_digests": [
+          "blake2b-128:c2d0a87449ea9a6c7add85008345a577"
+        ],
+        "digest": "blake2b-128:1b8ebf6c4a9c539af81bed8e8b8e08d3"
+      },
+      "maximum_observed_process_rss": {
+        "value": 224116,
+        "unit": "KiB"
+      }
+    },
+    "final_sequential_display_replay": {
+      "elapsed_time": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "elapsed_time",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 9.69,
+        "block_digests": [
+          "blake2b-128:be88def999ec4056c79b73ddde855512"
+        ],
+        "digest": "blake2b-128:183dc8cc10e873909a5d8e2d0fad5431"
+      },
+      "maximum_observed_process_rss": {
+        "value": 223824,
+        "unit": "KiB"
+      }
+    }
+  },
+  "notebooks": {
+    "system": {
+      "sha256": "988c55ba5a4c21c1246eadab50c29e527f2a8f8814691896089a8375146d79fb",
+      "executed_code_cells": 5
+    },
+    "dfnd": {
+      "sha256": "5c7e0fde48039c4b53cfe3a5cdf0630136d3fe0c2daa9c120da0a88fd57c9140",
+      "executed_code_cells": 6
+    }
+  },
+  "artifact_sha256": {
+    "dfnd_observations.json": "bbce6d18840f0dd489a6ed028dddee33ebc662e65e9a79ea13a9f3856a323f93",
+    "dfnd_probes.png": "78c8af6e9b3a46e0ad76930d50b8c09f19c76515dad59d479befaf4e3413353f",
+    "dfnd_sweep.png": "58ad6855901a003e72d73f401303c6bbe2ac552bfd9f903c9a8c13bc6ce91112",
+    "protocol.json": "533fd978a20725c36c355e01ad6ed1f05268d61b31bd62f4e77bbddfd8596925",
+    "system_certificates.png": "b31fc77cc032f70d13f3bc0ba4c626e5192b92460765a56512a9fad9486fcf6c",
+    "system_geometry.png": "659048bbd160c31e96b2fa4021d0e3969a28fd8a517d72c86b923a3ea15d3156",
+    "system_reference.json": "2cd156c8b30adf1729f3c5479dba75e6a4853f781f390eef008e9a0ea0176e58"
+  },
+  "source_qualification": "Source-workspace evidence only. Pre-existing topomt/_version.py edit preserved and included in native source fingerprint. No installed artifact, full suite or untested platform/interpreter qualification."
+}
