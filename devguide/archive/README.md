@@ -5,10 +5,11 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (30)
+### Resolved (33)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
+- [`benchlab_public_topography.md`](benchlab_public_topography.md) — [#146](https://github.com/uibcdf/topomt/issues/146) — Audit the three frozen BenchLab cases through the public Topography registry. *(resolved, measured)*
 - [`castp3_1cge_missing_closed_voids.md`](castp3_1cge_missing_closed_voids.md) — [#85](https://github.com/uibcdf/topomt/issues/85) — Resolve three missing native closed cavities in the pinned 1CGE CASTpFold output. *(resolved, reproduced)*
 - [`castp3_closed_void_measurements.md`](castp3_closed_void_measurements.md) — [#79](https://github.com/uibcdf/topomt/issues/79) — Validate and expose local CASTp3 closed-void SA/MS measurements. *(resolved, measured)*
 - [`castp3_closed_void_radius_profile.md`](castp3_closed_void_radius_profile.md) — [#80](https://github.com/uibcdf/topomt/issues/80) — Identify an explicit modern CASTp radius profile and resolve two closed-void residuals. *(resolved, measured)*
@@ -17,6 +18,8 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`castp3_oracle_alternate_location_identity.md`](castp3_oracle_alternate_location_identity.md) — [#83](https://github.com/uibcdf/topomt/issues/83) — Preserve original PDB atom serials after the parser removes alternate locations. *(resolved, reproduced)*
 - [`castp3_radius_coverage_and_void_panel.md`](castp3_radius_coverage_and_void_panel.md) — [#82](https://github.com/uibcdf/topomt/issues/82) — Audit radius-profile evidence across the archived corpus and expand analytical closed-void comparisons. *(resolved, measured)*
 - [`closed_shell_split_study.md`](closed_shell_split_study.md) — [#144](https://github.com/uibcdf/topomt/issues/144) — Separate the closed-shell reference and native study with certified probe controls. *(resolved, measured)*
+- [`closed_shell_wall_cover.md`](closed_shell_wall_cover.md) — [#148](https://github.com/uibcdf/topomt/issues/148) — Certify the frozen closed-shell wall at the historical 0.2 angstrom probe. *(resolved, measured)*
+- [`dfnd_dispatch_lengths.md`](dfnd_dispatch_lengths.md) — [#147](https://github.com/uibcdf/topomt/issues/147) — Register the three missing native length digesters in the public dispatcher. *(resolved, reproduced)*
 - [`discussions_resource_organization.md`](discussions_resource_organization.md) — [#103](https://github.com/uibcdf/topomt/issues/103) — Organize resource Discussions with preserved history, facets and maintained guidance. *(resolved, inspected)*
 - [`expand_original_providers.md`](expand_original_providers.md) — [#135](https://github.com/uibcdf/topomt/issues/135) — Consolidate five original providers and add four no-cost local engines before BenchLab resumes. *(resolved, measured)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*

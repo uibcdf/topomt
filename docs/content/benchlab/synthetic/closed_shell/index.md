@@ -16,6 +16,8 @@ The construction name is not an independent closure certificate.
 
 system
 dfnd
+Public Topography receiving <topography>
+Stronger enclosure reference at 0.2 Å <closure_at_0p2>
 Historical combined record <historical>
 ```
 
@@ -33,10 +35,12 @@ free probe-center region containing the origin; it does not prescribe the exact
 global cavity count. Ten native exterior-link clusters do not by themselves
 establish ten physical mouths.
 
-The older 0.2 Å control remains visible. Its conservative wall-coverage margin
-is negative, which proves neither access nor closure. The native `void` label
-there is an observation with an unresolved reference, not another certified
-enclosure. The sufficient bounds are not exact transition radii.
+The older 0.2 Å control remains visible. Its original conservative wall-coverage
+margin is negative and proves neither access nor closure. A
+[stronger independent subdivision cover](closure_at_0p2.md) now certifies the
+enclosed free origin at that probe, consistent with the native/public `Void`.
+The earlier notebooks retain their originally inconclusive sufficient bounds.
+Neither certificate establishes an exact physical transition radius.
 
 ## Inputs, evidence and reproducibility
 

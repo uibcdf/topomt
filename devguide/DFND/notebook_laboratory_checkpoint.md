@@ -97,6 +97,54 @@ not qualify new cases, volume precision, all synthetic cases or proteins.
 
 ## Delivered first case
 
+### Three-case public receiving and 0.2 Å reference — 2026-11-08
+
+Under the new deepening priority, #146 follows the actual public dispatcher on
+the three unchanged atomic inputs. MolSysMT receives dummy topology from PDB,
+then restores full-precision JSON coordinates; every vdW radius is checked
+against the explicit frozen array. The opening selects parent atoms 6–71 from
+the parent input. The received geometry/radii/map, catalog refinements, actual
+Python classes, type/shape/dimensionality filters, Mouth relations, contextual
+support identity, reporting suppression and valid empty outputs are guarded
+under nm/ps and pm/fs policies. These controls use no mocked native engine.
+
+The public results are `Percolating`/`Void`/empty for the tetrahedron;
+`Channel` with ten `Mouth` children / `Void` / empty for the closed shell; and
+`Pocket` with one `Mouth` / `Void` / empty for the opening. A public Mouth is
+currently a discrete native contact cluster, not an independently validated
+physical opening. Dry components remain under `topography.dfnd`; their public
+convexity/interface promotion is not implemented. Complete neutral support and
+classification provenance adoption remain #60.
+
+#147 repairs three missing native length digesters discovered by real public
+receiving, including argument-specific errors for invalid inputs. Explicit
+quantities and finite nonnegative domains are checked without suppressing
+missing-digester warnings. Legacy bare-number angstrom conversion and native
+deprecation remain observable; no physical query or scientific kernel changes.
+
+#148 strengthens the historical 0.2 Å closed-shell reference independently:
+140 hull faces have a complete dyadic subdivision cover of 1037 leaf triangles.
+Each leaf lies inside one original atom ball expanded by the probe, with
+minimum vertex safety margin 0.000051742 Å against a 0.000001 Å requirement.
+Convexity covers each full leaf; complete prefix-free four-way trees certify
+the whole wall. The origin remains strictly interior and free. This resolves
+origin enclosure at that probe, consistent with the existing native/public
+Void. It does not establish an exact global cavity count or volume. The new
+offline verifier never imports/calls DFND and rejects incomplete/wrong covers.
+
+Protocol commit `3206fc6` precedes recorded public receiving and the retained
+wall certificate; initial receiving tests, geometric preflight and historical
+native labels were already known. This is retrospective characterization,
+not blind validation. All 145 earlier scientific artifacts/notebooks retain
+their protocol hashes. New case-local public pages/records and the independent
+wall certificate extend rather than overwrite them. The original weaker bounds
+and their inconclusive notebook outputs remain accurate historical records.
+
+Next work stays on physical mouth-patch connectivity and compatible continuous
+paths, then the tetrahedron analytic volume and #75 uncertainty/convergence
+contract. Consult the deepening plan for explicit acceptance evidence. The tube,
+other geometries and proteins remain deferred; #75/#76/#60 stay open.
+
 ### Effective-radius follow-up — 2026-11-08
 
 Under #143, the [public input-model follow-up](../../docs/content/benchlab/synthetic/regular_tetrahedron/atomic_models.md)

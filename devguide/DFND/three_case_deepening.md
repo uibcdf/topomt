@@ -24,6 +24,14 @@ keep the larger scientific gates open until their own criteria pass.
 
 ## Working order and stopping rule
 
+Delivered bounded progress: #146 verifies public receiving on all nine primary
+controls and the additional 0.2 Å closed-shell control. #147 fixes the reproduced
+missing length-argument admission. #148 provides a checkable complete convex
+wall cover, resolving the previously open 0.2 Å origin enclosure. Native dry
+structures remain native-only and general public support adoption is unfinished.
+The next scientific work is physical mouth-patch connectivity and compatible
+continuous paths on these same inputs, followed by the declared volume work.
+
 1. Audit the public projection and repair reproduced admission/registry defects.
 2. Resolve the historical 0.2 Å wall question with a checkable independent cover.
 3. Study actual free boundary patches and mouth connectivity, then compatible

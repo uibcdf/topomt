@@ -39,6 +39,16 @@ and native source/local label conversion. Standalone validation lives in
 neutral support, complete method/source provenance and registry write migration
 are not covered by these input guards.
 
+The later #146 three-case public receiving confirms actual classes, registry
+filters, Mouth relations, input/source mappings, raw-support identity and
+reporting behavior on adopted BenchLab inputs. It does not establish neutral
+public support/availability or complete classification provenance. One inspected
+typing inconsistency remains: `Percolating.shape_type` is `neutral` and works
+in runtime registry filters, but the current `ShapeType` Literal in
+`features/BaseFeature.py` omits `neutral`. Reconcile the declaration with the
+supported runtime catalog in the public-type follow-up; receiving evidence
+alone is not complete typing/schema qualification.
+
 ## Why
 
 Cached geometry, source identity and recoverable support must describe the

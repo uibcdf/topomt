@@ -16,6 +16,7 @@ the deletion. The geometry is nonperiodic and no coordinates are regenerated.
 
 system
 dfnd
+Public Topography receiving <topography>
 ```
 
 ## Independent controls and native observations
@@ -83,6 +84,9 @@ All parent scientific artifacts and notebook bytes remain unchanged.
 No DFND kernel change was needed for these controls. Solvent-volume precision,
 general continuous validity of graph paths, exact physical mouth counts, the
 full synthetic inventory and molecular characterization retain their own gates.
-The next geometric question is a tube with independently controlled passage
-and bottlenecks. Original-method comparisons can be added separately, after
+Development now stays with these three inputs to deepen public representation,
+physical mouth/path connectivity and volume references before adding the tube.
+The [public receiving audit](topography.md) checks the actual `Pocket`, child
+`Mouth`, `Void` and empty registry on this same atomic model.
+Original-method comparisons can be added separately, after
 reviewing each tool's input model and the observable being compared.

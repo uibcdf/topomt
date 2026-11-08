@@ -1,13 +1,13 @@
 ---
 summary: Register the three missing native length digesters in the public dispatcher.
 issue: uibcdf/topomt#147
-status: active
+status: resolved
 opened: 2026-11-08
-closed:
+closed: 2026-11-08
 severity: medium
 verification: reproduced
 area: [dfnd, api]
-guard:
+guard: tests/test_dfnd_dispatch_lengths.py::test_explicit_dfnd_lengths_have_digesters_and_preserve_the_probe_model
 normative:
 blocked_by: []
 supersedes: []
@@ -54,3 +54,20 @@ valid scalar/quantity and zero inputs retain their meaning. Invalid vectors,
 negative/nonfinite values and wrong-dimensional quantities identify the right
 argument. Bare-number warnings/conversion remain observable. Existing three-case
 raw/catalog/registry results stay unchanged.
+
+## Resolution
+
+Register three argument modules through existing ArgDigest package discovery.
+A shared native length adapter checks finite nonnegative scalars, explicit
+quantity dimension/conversion and argument-specific errors. Bare numbers retain
+their angstrom interpretation and native deprecation; zero remains valid.
+No warning suppression, digestion bypass, dependency change, default change or
+scientific-kernel change is introduced.
+
+Fifteen focused guards cover explicit lengths under nm/ps and pm/fs, invalid
+vectors/negative/nonfinite values, wrong dimensions and legacy conversion plus
+deprecation. All pass. Actual public receiving of all three cases passes
+without missing-digester warnings. The 100-check source selector, repository
+Ruff, scoped mypy and full HTML build pass as recorded under #146. Broader
+support-library and installed/matrix gates retain their owners; only the
+reproduced native admission/diagnostic defect is resolved here.

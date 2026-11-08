@@ -17,6 +17,7 @@ changes across the three principal experiments.
 system
 dfnd
 comparisons
+Public Topography receiving <topography>
 Effective atomic models <atomic_models>
 Comparison evidence <artifacts/comparisons_v1/README>
 Historical combined record <historical>
@@ -42,6 +43,10 @@ from a collection of independently identified physical mouths. Report filtering
 also changes what is displayed without changing the raw geometry.
 
 ## Inputs, results and reproducibility
+
+The [public receiving audit](topography.md) now follows these same controls
+through `get_topography(method='dfnd')`, checking the actual registry, Python
+types, classification and source correspondence rather than raw output alone.
 
 Both notebooks read the same
 {download}`frozen quantity-aware input <artifacts/regular_tetrahedron_v1/input.json>`.

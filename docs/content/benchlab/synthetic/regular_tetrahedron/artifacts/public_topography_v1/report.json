@@ -1,0 +1,596 @@
+{
+  "schema": "topomt.benchlab.public-topography-receiving/1",
+  "case_id": "regular_tetrahedron",
+  "protocol_sha256": "74df6fab18b741533a3103136792bca3b1b7bb66b3a18e7bb57f1c16cfe7fbed",
+  "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+  "receiving_checks": "passed",
+  "software": {
+    "python": "3.14.10",
+    "topomt": "0.5.0+387.gcf4d475.dirty",
+    "molsysmt": "0.23.0+687.g2325038e8",
+    "pyunitwizard": "0.29.1+6.gf82b618",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "topomt_source": {
+    "scope": "Sorted topomt/**/*.py relative paths and length-delimited bytes",
+    "file_count": 302,
+    "sha256": "c9a408ce8e1796625087eb27d2ce76c4151a2c2fe37c144b9b9d627e8887e89a"
+  },
+  "anchors": [
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2,
+        "block_digests": [
+          "blake2b-128:7f818a45feb71a60cf3effd121324813"
+        ],
+        "digest": "blake2b-128:8ad14c1a9de655527fbef89a4dc29b85"
+      },
+      "registry": {
+        "by_type": {
+          "percolating": 1
+        },
+        "by_shape": {
+          "concavity": 0,
+          "convexity": 0,
+          "mixed": 0,
+          "boundary": 0,
+          "point": 0,
+          "neutral": 1
+        },
+        "by_dimensionality": {
+          "0": 0,
+          "1": 0,
+          "2": 1
+        },
+        "total": 1
+      },
+      "features": [
+        {
+          "feature_id": "PRC-1",
+          "python_class": "Percolating",
+          "feature_type": "percolating",
+          "shape_type": "neutral",
+          "legacy_dimensionality": 2,
+          "atom_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "source": "dfnd",
+          "source_id": "component-18b61e095812b34fd7c9a3a9b9ef7908c3875181fe77f8ccb8962be95721fcb2",
+          "component_key": "component-18b61e095812b34fd7c9a3a9b9ef7908c3875181fe77f8ccb8962be95721fcb2",
+          "parent_feature_ids": [],
+          "child_feature_ids": [],
+          "native_family": "percolating",
+          "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+          "signature": {
+            "n_mouths": 1,
+            "resident": true,
+            "exposed": true,
+            "n_septa": 0,
+            "branched": false
+          },
+          "classification": {
+            "name": "percolating",
+            "marginal": false,
+            "threshold_confidence": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "threshold_confidence",
+                "unit": "dimensionless",
+                "si": {
+                  "factor": 1.0,
+                  "offset": 0.0,
+                  "exponents": {}
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 1.0,
+              "block_digests": [
+                "blake2b-128:cce003cb82d6981ca8f4f85e79904fc4"
+              ],
+              "digest": "blake2b-128:b5996939bfd334872ae43c375f382d45"
+            },
+            "meaning": "Classification-threshold contrast, not scientific probability or independent correctness."
+          },
+          "resident_tetrahedron_ids": [
+            0
+          ],
+          "tetrahedron_ids": [
+            0
+          ],
+          "center": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "center",
+              "unit": "angstrom",
+              "si": {
+                "factor": 1e-10,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "float64",
+              "shape": [
+                3
+              ],
+              "blocks": [
+                3
+              ]
+            },
+            "values": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "block_digests": [
+              "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+            ],
+            "digest": "blake2b-128:77a34178f46ccc72524de580d2aa076e"
+          },
+          "volume_topological_resident": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume_topological_resident",
+              "unit": "angstrom ** 3",
+              "si": {
+                "factor": 1e-30,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "float64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 17.5453227104516,
+            "block_digests": [
+              "blake2b-128:d28c0304bfcb5509f108f755f3acbd3f"
+            ],
+            "digest": "blake2b-128:cc505647438261ebc5f48e796de4d4f6"
+          },
+          "volume_solvent_estimate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume_solvent_estimate",
+              "unit": "angstrom ** 3",
+              "si": {
+                "factor": 1e-30,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "float64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 13.291911144281515,
+            "block_digests": [
+              "blake2b-128:c4c60eb17ba6486025a197eacf9e7d00"
+            ],
+            "digest": "blake2b-128:a1ede3379d05903282635840b3913e16"
+          },
+          "descriptors": {
+            "occlusion": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "occlusion",
+                "unit": "dimensionless",
+                "si": {
+                  "factor": 1.0,
+                  "offset": 0.0,
+                  "exponents": {}
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 1.136487815960707,
+              "block_digests": [
+                "blake2b-128:b087c1cf572fe9f03e69d6d583ae0c5f"
+              ],
+              "digest": "blake2b-128:15aedd6114537fab087e9448a03b8476"
+            }
+          }
+        }
+      ],
+      "raw_wet_component_count": 1,
+      "native_dry_component_count": 0,
+      "public_empty": false,
+      "substrate_retained": true,
+      "input_context": {
+        "source_id": "input-37509f995fa9426fa45ec1e30b853be8",
+        "atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "public_convexity_and_interface_promotion": "not_implemented_by_this_bridge"
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+      },
+      "registry": {
+        "by_type": {
+          "void": 1
+        },
+        "by_shape": {
+          "concavity": 1,
+          "convexity": 0,
+          "mixed": 0,
+          "boundary": 0,
+          "point": 0
+        },
+        "by_dimensionality": {
+          "0": 0,
+          "1": 0,
+          "2": 1
+        },
+        "total": 1
+      },
+      "features": [
+        {
+          "feature_id": "VOI-1",
+          "python_class": "Void",
+          "feature_type": "void",
+          "shape_type": "concavity",
+          "legacy_dimensionality": 2,
+          "atom_indices": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "source": "dfnd",
+          "source_id": "component-a1944fa77da53ed68727673973fb0d3e5ec3d0c0150b85cf626a4d174725bf20",
+          "component_key": "component-a1944fa77da53ed68727673973fb0d3e5ec3d0c0150b85cf626a4d174725bf20",
+          "parent_feature_ids": [],
+          "child_feature_ids": [],
+          "native_family": "void",
+          "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+          "signature": {
+            "n_mouths": 0,
+            "resident": true,
+            "exposed": false,
+            "n_septa": 0,
+            "branched": false
+          },
+          "classification": {
+            "name": "void",
+            "marginal": false,
+            "threshold_confidence": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "threshold_confidence",
+                "unit": "dimensionless",
+                "si": {
+                  "factor": 1.0,
+                  "offset": 0.0,
+                  "exponents": {}
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 1.0,
+              "block_digests": [
+                "blake2b-128:cce003cb82d6981ca8f4f85e79904fc4"
+              ],
+              "digest": "blake2b-128:b5996939bfd334872ae43c375f382d45"
+            },
+            "meaning": "Classification-threshold contrast, not scientific probability or independent correctness."
+          },
+          "resident_tetrahedron_ids": [
+            0
+          ],
+          "tetrahedron_ids": [
+            0
+          ],
+          "center": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "center",
+              "unit": "angstrom",
+              "si": {
+                "factor": 1e-10,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "float64",
+              "shape": [
+                3
+              ],
+              "blocks": [
+                3
+              ]
+            },
+            "values": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "block_digests": [
+              "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+            ],
+            "digest": "blake2b-128:77a34178f46ccc72524de580d2aa076e"
+          },
+          "volume_topological_resident": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume_topological_resident",
+              "unit": "angstrom ** 3",
+              "si": {
+                "factor": 1e-30,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "float64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 17.5453227104516,
+            "block_digests": [
+              "blake2b-128:d28c0304bfcb5509f108f755f3acbd3f"
+            ],
+            "digest": "blake2b-128:cc505647438261ebc5f48e796de4d4f6"
+          },
+          "volume_solvent_estimate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume_solvent_estimate",
+              "unit": "angstrom ** 3",
+              "si": {
+                "factor": 1e-30,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "float64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 13.291911144281515,
+            "block_digests": [
+              "blake2b-128:c4c60eb17ba6486025a197eacf9e7d00"
+            ],
+            "digest": "blake2b-128:a1ede3379d05903282635840b3913e16"
+          },
+          "descriptors": {}
+        }
+      ],
+      "raw_wet_component_count": 1,
+      "native_dry_component_count": 0,
+      "public_empty": false,
+      "substrate_retained": true,
+      "input_context": {
+        "source_id": "input-15f6081146754c4abd7bbef5f7a3a3b3",
+        "atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "public_convexity_and_interface_promotion": "not_implemented_by_this_bridge"
+    },
+    {
+      "probe_radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7,
+        "block_digests": [
+          "blake2b-128:59a575c733de96d813e448f180437714"
+        ],
+        "digest": "blake2b-128:5bf17f9b659bbe2231b77f2f17c15004"
+      },
+      "registry": {
+        "by_type": {},
+        "by_shape": {
+          "concavity": 0,
+          "convexity": 0,
+          "mixed": 0,
+          "boundary": 0,
+          "point": 0
+        },
+        "by_dimensionality": {
+          "0": 0,
+          "1": 0,
+          "2": 0
+        },
+        "total": 0
+      },
+      "features": [],
+      "raw_wet_component_count": 0,
+      "native_dry_component_count": 1,
+      "public_empty": true,
+      "substrate_retained": true,
+      "input_context": {
+        "source_id": "input-39980bdde70f46a6a9de28ce599ec521",
+        "atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ]
+      },
+      "public_convexity_and_interface_promotion": "not_implemented_by_this_bridge"
+    }
+  ],
+  "reporting_control": {
+    "probe_radius": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "probe_radius",
+        "unit": "angstrom",
+        "si": {
+          "factor": 1e-10,
+          "offset": 0.0,
+          "exponents": {
+            "m": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.4,
+      "block_digests": [
+        "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+      ],
+      "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+    },
+    "min_size": 2,
+    "public_feature_count": 0,
+    "raw_support_and_result_identity_retained": true
+  },
+  "execution": {
+    "started_utc": "2026-11-08T20:53:29.430238+00:00",
+    "elapsed_time": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "elapsed_time",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.0999978549953084,
+      "block_digests": [
+        "blake2b-128:57b9f46540aac1b3d9d32b541fcab8fd"
+      ],
+      "digest": "blake2b-128:12ccb696a506b57b3348840653cdbe64"
+    },
+    "maximum_observed_process_rss": {
+      "value": 276984,
+      "unit": "KiB"
+    },
+    "workers": 1,
+    "cpu_affinity_count": 1,
+    "process_address_space": {
+      "value": 6,
+      "unit": "GiB"
+    },
+    "process_cpu_budget": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "process_cpu_budget",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "int64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 90,
+      "block_digests": [
+        "blake2b-128:bbd149c6db35616d763a4499c630f687"
+      ],
+      "digest": "blake2b-128:8cd4b55294caa4ec595033173ac19193"
+    }
+  },
+  "limits": [
+    "No physical mouth count or aperture-area qualification.",
+    "No solvent-volume precision or complete neutral support schema.",
+    "No new geometry, original provider/server, installed/full-matrix or biological qualification."
+  ]
+}

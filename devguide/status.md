@@ -18,6 +18,16 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
+The maintainer now requests deeper work on the first three BenchLab inputs
+before adding the tube. Follow [the deepening plan](DFND/three_case_deepening.md)
+and the active laboratory checkpoint. #146 audits the actual public registry
+and its Mouth relations; #147 repairs three missing native length digesters
+without changing scientific kernels. #148 supplies an independently verified
+convex-ball wall cover that resolves origin enclosure at the old 0.2 Å
+closed-shell anchor. Earlier sufficient-bound records retain their original
+inconclusive scope. Broader physical mouth/path, volume/uncertainty #75,
+independent panel #76 and neutral support #60 gates remain open.
+
 The synthetic sequence adds the [shell-opening unit](../docs/content/benchlab/synthetic/shell_with_opening/index.md)
 under #145: an exact 66-ball subset of the frozen 72-ball wall, with parent atom
 IDs retained. Protocol `b6fe6e2` and independent reference `2ca133d` precede the
@@ -26,7 +36,7 @@ first child native observation. The 1.4 Å all-atom escape ray, 3 Å enclosure a
 native contact cluster lies on a newly exposed child hull triangle; this does
 not establish an exact physical mouth count. Both staged notebooks execute
 without providers/servers, and all parent scientific bytes remain unchanged.
-No native kernel change was needed; the next geometric question is a tube.
+No native kernel change was needed; the tube is deferred by the newer priority.
 #75/#76 and installed/full-matrix qualification remain separate.
 
 The preceding sampled closed-shell study is tracked under #144.

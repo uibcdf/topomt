@@ -1,13 +1,13 @@
 ---
 summary: Certify the frozen closed-shell wall at the historical 0.2 angstrom probe.
 issue: uibcdf/topomt#148
-status: active
+status: resolved
 opened: 2026-11-08
-closed:
+closed: 2026-11-08
 severity: medium
 verification: measured
 area: [dfnd, validation]
-guard:
+guard: tests/test_closed_shell_wall_cover.py::test_complete_convex_ball_cover_certifies_the_historical_probe
 normative:
 blocked_by: []
 supersedes: []
@@ -59,3 +59,36 @@ coverage, complete partitions, origin freedom/hull containment, explicit units
 and rejection of damaged/incomplete covers. Compare the existing native/public
 0.2 Å central region at the proved scope. Preserve all prior scientific bytes
 and update the current reference disposition without rewriting history.
+
+## Resolution
+
+Protocol `3206fc6` fixes the existing input/probe, 1e-6 Å safety margin,
+depth-eight/node-20000 limits and the convexity/complete-partition proof.
+Initial preflight and historical native labels were already known. The retained
+certificate covers 140 original hull faces with 1037 accepted leaves, 1336
+visited nodes, maximum depth five and no unresolved pieces. Minimum vertex
+safety margin is 0.000051741549 Å; origin free-space margin after expansion
+is 3.968062464 Å, with strict hull containment.
+
+The offline `devtools/verify_closed_shell_wall_cover.py` reconstructs every
+leaf from the original face and ordered midpoint path, verifies covering-atom
+inequalities, explicit units/input/protocol identity and complete prefix-free
+four-way trees. It imports no TopoMT/DFND and calls no detector. Convexity
+covers each full leaf; complete covered hull plus free strictly interior
+origin establishes a bounded origin-containing probe-center component.
+Floating-point distances retain the declared margin; this is not formal
+interval arithmetic.
+
+Five guards verify two non-default unit policies, missing-leaf and wrong-atom
+rejection and actual public receiving at 0.2 Å. That route produces one Void
+and no Mouth, consistent with the independent enclosure. The case extension
+page links protocol/certificate/verification records and a reviewed standalone
+plot. All earlier scientific files/notebooks retain their frozen bytes and
+originally inconclusive weaker bounds; the new conclusion is linked explicitly.
+
+The 100-check source selector, repository Ruff, scoped mypy and full HTML build
+pass with no new warning; ten new downloads match their source bytes. Small
+sequential one-CPU generation/verification changes no scientific kernel. This
+resolves 0.2 Å origin enclosure only: exact global cavity/mouth counts, volume,
+general path validity, #75/#76/#60 and installed/full-matrix gates remain open.
+The maintainer's deeper three-case priority continues before any new geometry.

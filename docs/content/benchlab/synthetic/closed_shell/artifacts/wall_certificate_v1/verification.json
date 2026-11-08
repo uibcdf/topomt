@@ -1,0 +1,55 @@
+{
+  "verification": "passed",
+  "conclusion": "origin_free_and_enclosed",
+  "hull_face_count": 140,
+  "leaf_count": 1037,
+  "maximum_depth": 5,
+  "minimum_coverage_margin": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "minimum_coverage_margin",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 5.174154912523932e-05,
+    "block_digests": [
+      "blake2b-128:77383c7f55d3413023bde4d079d48663"
+    ],
+    "digest": "blake2b-128:d63b03837c25e3953a4953ff72ebc9da"
+  },
+  "origin_free_margin": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "origin_free_margin",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 3.9680624637481587,
+    "block_digests": [
+      "blake2b-128:84121dc5928a534b3dbbfd8eead98a78"
+    ],
+    "digest": "blake2b-128:c55fa257774386ee6108c5629f4628c7"
+  }
+}

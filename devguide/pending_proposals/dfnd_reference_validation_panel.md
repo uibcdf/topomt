@@ -114,3 +114,26 @@ sweep intervals remain visible. This is characterized development evidence,
 not blind held-out evaluation. No native kernel change or original-provider
 execution was needed. Passage/neck cases, volume precision and the remainder
 of the independent panel keep this issue open.
+
+## Three-case deepening and stronger enclosure — 2026-11-08
+
+The maintainer now requests deeper work on these same inputs before adding
+the tube; follow [the deepening plan](../DFND/three_case_deepening.md).
+#146 audits actual public Topography receiving, catalog refinements, source
+correspondence, registry filters, Mouth relations and reporting under two unit
+policies. It does not promote native dry components into public convexities or
+close #60's neutral support contract.
+
+#148 resolves the old 0.2 Å origin enclosure using a stronger independent
+convex-ball wall cover: 1037 checked leaves completely partition all 140 hull
+faces; each is covered by one expanded atomic ball with strict positive safety
+margin. The origin is free and strictly inside the covered wall. The verifier
+does not import/call DFND and rejects missing leaves or wrong covering atoms.
+The actual public route yields one Void with no Mouth at that probe. This is
+retrospective reference strengthening; all earlier inconclusive-bound notebook
+and artifact bytes remain unchanged. It proves origin enclosure, not an exact
+global cavity count, volume or general physical graph-path guarantee.
+
+Physical mouth-patch connectivity and compatible paths, then analytic-volume
+references and #75 precision/uncertainty, remain necessary work on these inputs.
+This issue remains partial/open; the new priority defers further geometries.

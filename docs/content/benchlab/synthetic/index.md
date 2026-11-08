@@ -26,6 +26,7 @@ necessary variants. Protein studies follow completion of that synthetic phase.
 regular_tetrahedron/index
 closed_shell/index
 shell_with_opening/index
+Public Topography receiving <public_topography>
 ```
 
 ## What each study explains
@@ -119,6 +120,13 @@ executed outputs; it does not launch optional providers during a documentation
 build. Execution and scientific review are separate checks.
 
 ## Study sequence
+
+Current priority: deepen these three units before adding another geometry.
+The [public receiving audit](public_topography.md) follows their native results
+into `Topography`. The [stronger 0.2 Å wall cover](closed_shell/closure_at_0p2.md)
+resolves one earlier reference question. Physical mouth connectivity, continuous
+paths and volume accuracy require further work on these inputs; the tube and
+chambers below remain deferred.
 
 1. **Regular tetrahedron:** residence versus face transit and probe-dependent
    connectivity; independent circumradius formulas.
