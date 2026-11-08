@@ -6,13 +6,16 @@
   "counts": {
     "caver": 47,
     "p2rank": 5,
-    "ghecom": 41
+    "ghecom": 41,
+    "pykvfinder": 12
   },
   "files": {
     "ghecom.zip": "8f3da42b373844c4503e45ac904b92a4f88db4eb01bcdabf3a192304ff890e3e",
     "CAVER_LICENSE.txt": "1452cc75508c67f82c77a26efbf28342c6dfbd92ade8558d362c0eaf3ecea1ec",
     "source.pdb": "bbf1a133ba6f31a811eae6d74651c08c3947a4dd8a43c5bb371f6c313a042450",
     "caver.zip": "8217e2c371cf339c97cada736b18bd9c436297c61afe5542fe70b32207d25c22",
-    "p2rank.zip": "1cb25c1368239ebc39ff3552c1921fc09a3e55185611a89d98f127941f0b314e"
+    "p2rank.zip": "1cb25c1368239ebc39ff3552c1921fc09a3e55185611a89d98f127941f0b314e",
+    "pykvfinder.zip": "aec41a20d5e6c2afa3f2d83b3fe1a08d0cd48a1ef7cb17c135833d32cc3408c8",
+    "PYKVFINDER_LICENSE.txt": "b98fbb37db5b23bc5cfdcd16793206a5a7120a7b01f75374e5e0888376e4691c"
   }
 }

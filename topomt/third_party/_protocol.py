@@ -49,13 +49,16 @@ def points_geometry(
     kind: str, points: list, definition: str, radii: list | None = None
 ) -> ProviderGeometry:
     """Convert documented angstrom coordinates to an explicit nm representation."""
-    coords = tuple(tuple(finite(x) / 10 for x in row) for row in points)
+    coords: list[tuple[float, float, float]] = []
+    for row in points:
+        x, y, z = row
+        coords.append((finite(x) / 10, finite(y) / 10, finite(z) / 10))
     sizes = (
         None
         if radii is None
         else tuple(finite(r, nonnegative=True) / 10 for r in radii)
     )
-    return ProviderGeometry(kind, coords, definition, sizes)
+    return ProviderGeometry(kind, tuple(coords), definition, sizes)
 
 
 def pdb_points(data: bytes) -> list[tuple[str, str, tuple[float, float, float]]]:

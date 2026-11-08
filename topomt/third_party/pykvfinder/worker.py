@@ -25,7 +25,7 @@ def main(request_file: str) -> None:
     module_path = Path(pyKVFinder.__file__).resolve()
     if root is not None and not module_path.is_relative_to(Path(root).resolve()):
         raise ValueError('Requested pyKVFinder source root was shadowed')
-    if pyKVFinder.__version__ not in {'0.9.6', '0.9.6+uibcdf.1'}:
+    if pyKVFinder.__version__ not in {'0.9.6', '0.9.6+uibcdf.1', '0.9.6+uibcdf.2'}:
         raise ValueError('This adapter requires the reviewed pyKVFinder 0.9.6 protocol')
     output = Path(request['output'])
     dictionary = output.parent / 'vdw.dat'
@@ -52,11 +52,13 @@ def main(request_file: str) -> None:
         result.write(str(output / 'results.toml'), str(output / 'cavities.pdb'))
     import numpy
     import pyKVFinder._pyKVFinder as extension
+    import tomlkit
 
     receipt = {
         'version': pyKVFinder.__version__,
         'python_version': platform.python_version(),
         'numpy_version': numpy.__version__,
+        'tomlkit_version': tomlkit.__version__,
         'module': _identity(module_path),
         'native_extension': _identity(Path(extension.__file__)),
         'interpreter': _identity(Path(sys.executable)),

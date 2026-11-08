@@ -5,6 +5,7 @@ import io
 import json
 import re
 import subprocess
+import tomllib
 from pathlib import Path
 
 import molsysmt as msm
@@ -24,7 +25,12 @@ def original_source():
 
 @pytest.mark.parametrize(
     'provider,kind,count',
-    [('caver', 'channel', 47), ('p2rank', 'site', 5), ('ghecom', 'pocket', 41)],
+    [
+        ('caver', 'channel', 47),
+        ('p2rank', 'site', 5),
+        ('ghecom', 'pocket', 41),
+        ('pykvfinder', 'cavity', 12),
+    ],
 )
 @pytest.mark.parametrize('policy', [['nm', 'ps'], ['pm', 'fs']])
 def test_original_cli_evidence_reconstructs_without_engine(
@@ -87,7 +93,7 @@ def test_original_cli_evidence_reconstructs_without_engine(
                 first.geometries['predicted_center'].points_nm,
                 [[float(row[f'center_{axis}']) / 10 for axis in 'xyz']],
             )
-        else:
+        elif provider == 'ghecom':
             raw = output.run.get_artifact('output/pockets.pdb').decode()
             counts = re.findall(r'^#REMARK CLUSTER\[(\d+)\] NVOXEL\s+(\d+)', raw, re.M)
             assert len(counts) == count
@@ -95,6 +101,21 @@ def test_original_cli_evidence_reconstructs_without_engine(
             assert sum(int(size) for _, size in counts) == sum(
                 len(r.geometries['grid_points'].points_nm) for r in output.pockets
             )
+        else:
+            raw_toml = tomllib.loads(
+                output.run.get_artifact('output/results.toml').decode()
+            )
+            for cavity in output.cavities:
+                label = cavity.source_id
+                assert (
+                    cavity.measurements['volume'].original_value
+                    == raw_toml['RESULTS']['VOLUME'][label]
+                )
+                assert (
+                    cavity.measurements['area'].original_value
+                    == raw_toml['RESULTS']['AREA'][label]
+                )
+            assert output.run.metadata['version'] == '0.9.6+uibcdf.2'
 
 
 def test_original_evidence_receipt_checksums():
