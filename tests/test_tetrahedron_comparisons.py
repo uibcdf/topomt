@@ -2,9 +2,11 @@
 
 import hashlib
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
+import pytest
 from pyunitwizard import QuantityRecord
 
 from topomt import pyunitwizard as puw
@@ -80,3 +82,56 @@ def test_tetrahedron_radius_audit_separates_atomic_models_and_rounding_topology(
         audit['clearance_interpretation']
         == 'Independent ball-model implications, not detector predictions'
     )
+
+
+def test_original_study_runner_decodes_units_and_forbids_unfrozen_settings():
+    from devtools.benchlab.run_regular_tetrahedron_comparisons import _options
+
+    protocol = json.loads((DIRECTORY / 'protocol.json').read_text())
+    row = next(row for row in protocol['runs'] if row['id'] == 'pykvfinder-probe-1p4')
+    with puw.context(standard_units=['pm', 'fs', 'radians']):
+        options = _options(
+            row, {'pykvfinder': {'upstream_root': '/example/source'}}, protocol
+        )
+        assert options['workers'] == 1 and options['timeout'] == 45
+        assert puw.get_value(options['probe_in'], to_unit='angstroms') == 1.4
+        assert puw.get_value(options['volume_cutoff'], to_unit='angstroms**3') == 0
+    with pytest.raises(ValueError, match='location'):
+        _options(row, {'pykvfinder': {'probe_in': 10}}, protocol)
+
+
+def test_study_continues_controls_after_control_failure_and_stops_after_standard_failure(
+    tmp_path, monkeypatch
+):
+    from devtools.benchlab import run_regular_tetrahedron_comparisons as runner
+
+    executed = []
+
+    def observe(row, locations, protocol, output):
+        executed.append(row['id'])
+        failed = row['id'] in {'pykvfinder-probe-1p2', 'caver-standard'}
+        return {
+            **row,
+            'status': 'execution_failed' if failed else 'completed',
+            'record_counts': None if failed else {},
+            'original_bundle': None,
+        }
+
+    locations = tmp_path / 'tools.json'
+    locations.write_text('{}')
+    output = tmp_path / 'runs'
+    monkeypatch.setattr(runner, '_execute', observe)
+    monkeypatch.setattr(
+        sys, 'argv', ['study', '--tools', str(locations), '--output', str(output)]
+    )
+    assert runner.main() == 0
+    assert 'pykvfinder-probe-1p4' in executed and 'pykvfinder-probe-1p7' in executed
+    assert not any(name.startswith('caver-probe') for name in executed)
+    report = json.loads((output / 'observations.json').read_text())
+    skipped = [
+        entry
+        for entry in report['entries']
+        if entry['status'] == 'not_executed_after_failure'
+    ]
+    assert len(skipped) == 3
+    assert {entry['cause_id'] for entry in skipped} == {'caver-standard'}
