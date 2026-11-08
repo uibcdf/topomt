@@ -1,0 +1,145 @@
+{
+  "schema": "topomt.benchlab.radius-audit/1",
+  "case_id": "regular_tetrahedron",
+  "source_file": "artifacts/regular_tetrahedron_v1/input_atom.pdb",
+  "source_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+  "clearance_interpretation": "Independent ball-model implications, not detector predictions",
+  "radii": {
+    "native": {
+      "radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7,
+        "block_digests": [
+          "blake2b-128:59a575c733de96d813e448f180437714"
+        ],
+        "digest": "blake2b-128:c475c7d689481f497cf955a3fbf4dd1a"
+      },
+      "evidence_mode": "explicit_frozen_reference",
+      "meaning": "Atomic-ball radius fixed by the independent system reference"
+    },
+    "pykvfinder": {
+      "radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.66,
+        "block_digests": [
+          "blake2b-128:2de14f817f4039e70d398c9d89abb807"
+        ],
+        "digest": "blake2b-128:bd49ab6b1e272b7cade3c858caff66f2"
+      },
+      "evidence_mode": "original_read_pdb",
+      "atomic_radii": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "atomic_radii",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [
+            4
+          ],
+          "blocks": [
+            4
+          ]
+        },
+        "values": [
+          1.66,
+          1.66,
+          1.66,
+          1.66
+        ],
+        "block_digests": [
+          "blake2b-128:8d739d57442c3bf452eebf9ac73ccd25"
+        ],
+        "digest": "blake2b-128:3692d1c3fb271f04f299affed65dedc2"
+      },
+      "version": "0.9.6+uibcdf.2",
+      "rule": "Unknown DUM residue/C atom falls back to GEN C",
+      "source_revision": "e0f0fa6d32109ebd02d951ef4d7f84f3e1a88fb9",
+      "dictionary_sha256": "ffd0b11c88e594482d5564e37700bd5f291fb165b37e8cff563e46b3e7178641",
+      "source_url": "https://github.com/uibcdf/pyKVFinder/blob/e0f0fa6d32109ebd02d951ef4d7f84f3e1a88fb9/pyKVFinder/data/vdw.dat"
+    },
+    "mole": {
+      "radius": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "radius",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.61,
+        "block_digests": [
+          "blake2b-128:e4bde8343edc05635aee80005ef18190"
+        ],
+        "digest": "blake2b-128:aa9c5e6b8125ec81a6055a6cc5f86909"
+      },
+      "evidence_mode": "pinned_source_default_no_override",
+      "source_revision": "fe0e84582a6bd42bc69224fd3a3022bf5c51cec3",
+      "source_sha256": "352c0893cae520a538218804ebe1a312302970b4844ca154b8734286845f6b72",
+      "source_url": "https://github.com/sb-ncbr/webchemistry/blob/fe0e84582a6bd42bc69224fd3a3022bf5c51cec3/AppsAndServices/Tunnels/WebChemistry.Tunnels.Core/TunnelVdwRadii.cs",
+      "rule": "GetTunnelSpecificVdwRadius uses the C entry in geometry and tunnel profiles; no custom radii requested"
+    },
+    "ghecom": {
+      "radius": null,
+      "evidence_mode": "rule_known_effective_assignment_not_yet_audited",
+      "rule": "Original default Chothia1976 residue/atom-name pattern table; PDB name alignment matters"
+    },
+    "caver": {
+      "radius": null,
+      "evidence_mode": "table_known_effective_assignment_not_yet_audited",
+      "rule": "Distribution atom_radii.csv contains carbon row 170; actual DUM handling is not inferred from this row alone"
+    }
+  },
+  "limits": [
+    "This audit does not equate the methods different geometric operators",
+    "Unverified effective assignments remain unknown rather than assumed equal to the reference"
+  ]
+}

@@ -1,0 +1,1181 @@
+{
+  "schema": "topomt.benchlab.comparison-protocol/1",
+  "case_id": "regular_tetrahedron",
+  "case_version": 1,
+  "study_version": 1,
+  "created_utc": "2026-11-08T07:23:07.912637+00:00",
+  "owning_issue": "uibcdf/topomt#141",
+  "frozen_before_original_topography": true,
+  "source_file": "artifacts/regular_tetrahedron_v1/input_atom.pdb",
+  "source_sha256": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+  "preserved_files": {
+    "artifacts/regular_tetrahedron_v1/castp3_observation.json": "de50e0ced4671dd31d9cca8f63bf650a5ff26b1e5ddcfb2a794de810867bb542",
+    "artifacts/regular_tetrahedron_v1/castpfold_observation.json": "369d25510b6544234e46e9d900892b126fe41379dc998c09810a41073829640b",
+    "artifacts/regular_tetrahedron_v1/input.json": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+    "artifacts/regular_tetrahedron_v1/input.pdb": "481c34c20a847f91190bf94b94ab9cd25dddda577afefb3d0c4f919c7d6b409c",
+    "artifacts/regular_tetrahedron_v1/input_atom.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "artifacts/regular_tetrahedron_v1/input_castp.pdb": "e40db4e92eb260682c4e77e43873425efda37f96a55008da0e2a0721c57bc5cb",
+    "artifacts/regular_tetrahedron_v1/pocketeer_original.zip": "050d313f304b8a31fc7b8f081748f68ccdb757c30927b7f9499e97ff0bd5c440",
+    "artifacts/regular_tetrahedron_v1/report.json": "628872de83911c47e6c029c9055d370c70d43a4103e01af3539c0d8852f1ab5d",
+    "artifacts/native_study_v1/dfnd_observations.json": "863d00fd356ab2969aa3f64c7cf2801fe1265576f99a70b0abe544bd297c46b1",
+    "artifacts/native_study_v1/dfnd_probes.png": "80028ea86c94bbdc81161cb58a8fb3277183e5dae9a7035ffff74983c1b0b7b3",
+    "artifacts/native_study_v1/dfnd_sweep.png": "d13cd6a39be0c7e583a7c8451e7d047500cbe38627574da48796e2d164f5c426",
+    "artifacts/native_study_v1/system_geometry.png": "abcf8570575da8151ffa2d8a957b52c6219a98034778838877f3c12fa76f0891",
+    "artifacts/native_study_v1/system_reference.json": "cc60019cd121d352d1ddc9c700ec4c0684c43e3cfb229f721a11a368ecdabab3",
+    "artifacts/native_study_v1/system_thresholds.png": "7d0343c13f144229b0dcda406494ea2b1b08ac06b07204286113ca63e623838e",
+    "system.ipynb": "defe351edcdb417bcc3cc08672d17857b2f0ad600286134609244ef1425ee732",
+    "dfnd.ipynb": "7223b7ed0a42b779afaf29047e21afdf61c6b08bf6a42a1a87d68d758e1eefea",
+    "historical.ipynb": "33afeca04dcce90651879bcb7ccc1decb888468a4532f1321b809bac1d765a16"
+  },
+  "model_audit_sha256": "3e3d59c2a2688fb9458b22209b9aa6eddaa678ec4faea0e03bc86eed13f3a9ec",
+  "source_adaptation": "Reuse the frozen ATOM/DUM compatibility export; only HETATM record labels differ from canonical input. Retain and audit any adapter re-export separately.",
+  "execute_services": false,
+  "workers": 1,
+  "timeout_seconds": 45,
+  "managed_heap_mib": 512,
+  "max_grid_points": 4000000,
+  "cpu_affinity_count": 1,
+  "process_address_space_gib": 6,
+  "stopping_rule": "After a failed standard run, do not repeat the same input through its remaining controls; preserve a not_executed_after_failure entry linked to that failure.",
+  "runs": [
+    {
+      "id": "pykvfinder-standard",
+      "method": "pykvfinder",
+      "scenario": "standard",
+      "options": {},
+      "probe_label": null,
+      "interpretation": "Original dual-probe defaults, including 5 cubic angstrom cutoff and 2.4 angstrom removal distance"
+    },
+    {
+      "id": "pykvfinder-probe-1p2",
+      "method": "pykvfinder",
+      "scenario": "small_system_control",
+      "options": {
+        "probe_in": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_in",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.2,
+          "block_digests": [
+            "blake2b-128:7f818a45feb71a60cf3effd121324813"
+          ],
+          "digest": "blake2b-128:69101f94dba106dc73718a1bb860f4cb"
+        },
+        "probe_out": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_out",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 4.0,
+          "block_digests": [
+            "blake2b-128:578778c53fb720d78464739f50d61fca"
+          ],
+          "digest": "blake2b-128:7c34621074a952d2271684078d4958ab"
+        },
+        "step": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "step",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.2,
+          "block_digests": [
+            "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+          ],
+          "digest": "blake2b-128:e040d0a07e621bfe93e7146a74a0b2bb"
+        },
+        "removal_distance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "removal_distance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6f2d2c3aa6453ed89c6f1d93be3474ab"
+        },
+        "volume_cutoff": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "volume_cutoff",
+            "unit": "angstrom ** 3",
+            "si": {
+              "factor": 1e-30,
+              "offset": 0.0,
+              "exponents": {
+                "m": 3
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6b6ae393d578552d8e7ef5398bd1c9ee"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2,
+        "block_digests": [
+          "blake2b-128:7f818a45feb71a60cf3effd121324813"
+        ],
+        "digest": "blake2b-128:28196ff8feff750e3a192a1792c3e463"
+      },
+      "interpretation": "Predeclared grid/refinement and cutoff control; original 1.66 angstrom carbon model is unchanged"
+    },
+    {
+      "id": "pykvfinder-probe-1p4",
+      "method": "pykvfinder",
+      "scenario": "small_system_control",
+      "options": {
+        "probe_in": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_in",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.4,
+          "block_digests": [
+            "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+          ],
+          "digest": "blake2b-128:1ca887568eb7f67a247c965e684d006f"
+        },
+        "probe_out": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_out",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 4.0,
+          "block_digests": [
+            "blake2b-128:578778c53fb720d78464739f50d61fca"
+          ],
+          "digest": "blake2b-128:7c34621074a952d2271684078d4958ab"
+        },
+        "step": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "step",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.2,
+          "block_digests": [
+            "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+          ],
+          "digest": "blake2b-128:e040d0a07e621bfe93e7146a74a0b2bb"
+        },
+        "removal_distance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "removal_distance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6f2d2c3aa6453ed89c6f1d93be3474ab"
+        },
+        "volume_cutoff": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "volume_cutoff",
+            "unit": "angstrom ** 3",
+            "si": {
+              "factor": 1e-30,
+              "offset": 0.0,
+              "exponents": {
+                "m": 3
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6b6ae393d578552d8e7ef5398bd1c9ee"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:44532127e7e7411f0ada1100307cd71a"
+      },
+      "interpretation": "Predeclared grid/refinement and cutoff control; original 1.66 angstrom carbon model is unchanged"
+    },
+    {
+      "id": "pykvfinder-probe-1p7",
+      "method": "pykvfinder",
+      "scenario": "small_system_control",
+      "options": {
+        "probe_in": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_in",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.7,
+          "block_digests": [
+            "blake2b-128:59a575c733de96d813e448f180437714"
+          ],
+          "digest": "blake2b-128:f8867fdd2538a66338e358e3d1dc6375"
+        },
+        "probe_out": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_out",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 4.0,
+          "block_digests": [
+            "blake2b-128:578778c53fb720d78464739f50d61fca"
+          ],
+          "digest": "blake2b-128:7c34621074a952d2271684078d4958ab"
+        },
+        "step": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "step",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.2,
+          "block_digests": [
+            "blake2b-128:a7bf553309579ba8f336729db35b59dc"
+          ],
+          "digest": "blake2b-128:e040d0a07e621bfe93e7146a74a0b2bb"
+        },
+        "removal_distance": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "removal_distance",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6f2d2c3aa6453ed89c6f1d93be3474ab"
+        },
+        "volume_cutoff": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "volume_cutoff",
+            "unit": "angstrom ** 3",
+            "si": {
+              "factor": 1e-30,
+              "offset": 0.0,
+              "exponents": {
+                "m": 3
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:6b6ae393d578552d8e7ef5398bd1c9ee"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7,
+        "block_digests": [
+          "blake2b-128:59a575c733de96d813e448f180437714"
+        ],
+        "digest": "blake2b-128:70c09866fba8d9864e610e5e61eb5f88"
+      },
+      "interpretation": "Predeclared grid/refinement and cutoff control; original 1.66 angstrom carbon model is unchanged"
+    },
+    {
+      "id": "ghecom-standard",
+      "method": "ghecom",
+      "scenario": "standard",
+      "options": {},
+      "probe_label": null,
+      "interpretation": "Original P-mode defaults: grid 0.8, small probe 1.87 and large probe 6 angstroms; original Chothia radius assignment"
+    },
+    {
+      "id": "ghecom-probe-1p2",
+      "method": "ghecom",
+      "scenario": "small_system_control",
+      "options": {
+        "probe_small": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_small",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.2,
+          "block_digests": [
+            "blake2b-128:7f818a45feb71a60cf3effd121324813"
+          ],
+          "digest": "blake2b-128:35d803ffe025b55c78ed7997e2fa0347"
+        },
+        "probe_large": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_large",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 6.0,
+          "block_digests": [
+            "blake2b-128:ae4a152dca59e5455be885d2d714b47a"
+          ],
+          "digest": "blake2b-128:12beaa42b8c538eda5f7124a3e87b3e3"
+        },
+        "grid_width": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "grid_width",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.4,
+          "block_digests": [
+            "blake2b-128:e8b340f91227773af02fd6c527a59474"
+          ],
+          "digest": "blake2b-128:407f6f965beabc1ab62ce436fa6732f1"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2,
+        "block_digests": [
+          "blake2b-128:7f818a45feb71a60cf3effd121324813"
+        ],
+        "digest": "blake2b-128:28196ff8feff750e3a192a1792c3e463"
+      },
+      "interpretation": "Predeclared morphological small-probe/grid control; not a DFND query-equivalence claim"
+    },
+    {
+      "id": "ghecom-probe-1p4",
+      "method": "ghecom",
+      "scenario": "small_system_control",
+      "options": {
+        "probe_small": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_small",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.4,
+          "block_digests": [
+            "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+          ],
+          "digest": "blake2b-128:2f4b28d3fef927dd30ed72612273da73"
+        },
+        "probe_large": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_large",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 6.0,
+          "block_digests": [
+            "blake2b-128:ae4a152dca59e5455be885d2d714b47a"
+          ],
+          "digest": "blake2b-128:12beaa42b8c538eda5f7124a3e87b3e3"
+        },
+        "grid_width": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "grid_width",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.4,
+          "block_digests": [
+            "blake2b-128:e8b340f91227773af02fd6c527a59474"
+          ],
+          "digest": "blake2b-128:407f6f965beabc1ab62ce436fa6732f1"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:44532127e7e7411f0ada1100307cd71a"
+      },
+      "interpretation": "Predeclared morphological small-probe/grid control; not a DFND query-equivalence claim"
+    },
+    {
+      "id": "ghecom-probe-1p7",
+      "method": "ghecom",
+      "scenario": "small_system_control",
+      "options": {
+        "probe_small": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_small",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.7,
+          "block_digests": [
+            "blake2b-128:59a575c733de96d813e448f180437714"
+          ],
+          "digest": "blake2b-128:2a2135d227b612397dc517ee67c164bb"
+        },
+        "probe_large": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_large",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 6.0,
+          "block_digests": [
+            "blake2b-128:ae4a152dca59e5455be885d2d714b47a"
+          ],
+          "digest": "blake2b-128:12beaa42b8c538eda5f7124a3e87b3e3"
+        },
+        "grid_width": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "grid_width",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.4,
+          "block_digests": [
+            "blake2b-128:e8b340f91227773af02fd6c527a59474"
+          ],
+          "digest": "blake2b-128:407f6f965beabc1ab62ce436fa6732f1"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7,
+        "block_digests": [
+          "blake2b-128:59a575c733de96d813e448f180437714"
+        ],
+        "digest": "blake2b-128:70c09866fba8d9864e610e5e61eb5f88"
+      },
+      "interpretation": "Predeclared morphological small-probe/grid control; not a DFND query-equivalence claim"
+    },
+    {
+      "id": "caver-standard",
+      "method": "caver",
+      "scenario": "standard",
+      "options": {
+        "origin": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "origin",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [
+              3
+            ],
+            "blocks": [
+              3
+            ]
+          },
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "block_digests": [
+            "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+          ],
+          "digest": "blake2b-128:eb18cb501a2158fd31010a99c8d82566"
+        }
+      },
+      "probe_label": null,
+      "interpretation": "Required origin is the tetrahedron center; other scientific settings retain original defaults"
+    },
+    {
+      "id": "caver-probe-1p2",
+      "method": "caver",
+      "scenario": "probe_control",
+      "options": {
+        "origin": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "origin",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [
+              3
+            ],
+            "blocks": [
+              3
+            ]
+          },
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "block_digests": [
+            "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+          ],
+          "digest": "blake2b-128:eb18cb501a2158fd31010a99c8d82566"
+        },
+        "probe_radius": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_radius",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.2,
+          "block_digests": [
+            "blake2b-128:7f818a45feb71a60cf3effd121324813"
+          ],
+          "digest": "blake2b-128:8ad14c1a9de655527fbef89a4dc29b85"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.2,
+        "block_digests": [
+          "blake2b-128:7f818a45feb71a60cf3effd121324813"
+        ],
+        "digest": "blake2b-128:28196ff8feff750e3a192a1792c3e463"
+      },
+      "interpretation": "Predeclared CAVER path probe; radius assignment and required input geometry are assessed separately"
+    },
+    {
+      "id": "caver-probe-1p4",
+      "method": "caver",
+      "scenario": "probe_control",
+      "options": {
+        "origin": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "origin",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [
+              3
+            ],
+            "blocks": [
+              3
+            ]
+          },
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "block_digests": [
+            "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+          ],
+          "digest": "blake2b-128:eb18cb501a2158fd31010a99c8d82566"
+        },
+        "probe_radius": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_radius",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.4,
+          "block_digests": [
+            "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+          ],
+          "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.4,
+        "block_digests": [
+          "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+        ],
+        "digest": "blake2b-128:44532127e7e7411f0ada1100307cd71a"
+      },
+      "interpretation": "Predeclared CAVER path probe; radius assignment and required input geometry are assessed separately"
+    },
+    {
+      "id": "caver-probe-1p7",
+      "method": "caver",
+      "scenario": "probe_control",
+      "options": {
+        "origin": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "origin",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [
+              3
+            ],
+            "blocks": [
+              3
+            ]
+          },
+          "values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "block_digests": [
+            "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+          ],
+          "digest": "blake2b-128:eb18cb501a2158fd31010a99c8d82566"
+        },
+        "probe_radius": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "probe_radius",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 1.7,
+          "block_digests": [
+            "blake2b-128:59a575c733de96d813e448f180437714"
+          ],
+          "digest": "blake2b-128:5bf17f9b659bbe2231b77f2f17c15004"
+        }
+      },
+      "probe_label": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "probe_label",
+          "unit": "angstrom",
+          "si": {
+            "factor": 1e-10,
+            "offset": 0.0,
+            "exponents": {
+              "m": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 1.7,
+        "block_digests": [
+          "blake2b-128:59a575c733de96d813e448f180437714"
+        ],
+        "digest": "blake2b-128:70c09866fba8d9864e610e5e61eb5f88"
+      },
+      "interpretation": "Predeclared CAVER path probe; radius assignment and required input geometry are assessed separately"
+    },
+    {
+      "id": "mole-standard",
+      "method": "mole",
+      "scenario": "standard",
+      "options": {},
+      "probe_label": null,
+      "interpretation": "Original surface/interior/depth and automatic-origin defaults; ProbeRadius is not equated with the DFND probe"
+    },
+    {
+      "id": "mole-minimum-depth",
+      "method": "mole",
+      "scenario": "depth_control",
+      "options": {
+        "min_depth": 0,
+        "min_depth_length": {
+          "manifest": {
+            "format": "qrec/0.3",
+            "field": "min_depth_length",
+            "unit": "angstrom",
+            "si": {
+              "factor": 1e-10,
+              "offset": 0.0,
+              "exponents": {
+                "m": 1
+              }
+            },
+            "dtype": "float64",
+            "shape": [],
+            "blocks": [
+              1
+            ]
+          },
+          "values": 0.0,
+          "block_digests": [
+            "blake2b-128:589e43d024eb1b4ba623f81a50564bc8"
+          ],
+          "digest": "blake2b-128:27b0b77f28428d9804144a1af7bec8e2"
+        }
+      },
+      "probe_label": null,
+      "interpretation": "Predeclared removal of minimum cavity depth thresholds; original radius/operator settings are unchanged"
+    }
+  ],
+  "not_selected": [
+    {
+      "method": "p2rank",
+      "reason": "Learned protein binding-site prediction is not independent geometric truth for four dummy carbon balls"
+    }
+  ],
+  "historical_evidence": {
+    "file": "artifacts/regular_tetrahedron_v1/report.json",
+    "interpretation": "Read the earlier fpocket/Pocketeer/AlphaSpace2/pyCASTA and CASTp records at their original scope; no fresh execution or service completion is implied"
+  },
+  "interpretation_rules": [
+    "Different atomic radii/probe meanings and minimum-size settings are confounders, not algorithm defects",
+    "Empty successful, failed, unavailable, not selected and pending outcomes remain distinct",
+    "No cross-method pocket-count, volume-accuracy or performance ranking is inferred",
+    "Native solvent-volume precision and general continuous-path correctness remain outside this study"
+  ]
+}
