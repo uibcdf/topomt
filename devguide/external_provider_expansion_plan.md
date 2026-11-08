@@ -37,8 +37,11 @@ qualification. A parser fixture is evidence for parsing, not detection.
 | CAVER 3.02 CLI | Java executable; ordered tunnel profiles with local radii and explicit starting point | GPLv3 CLI distribution; distinct from Analyst's academic terms | [#138](https://github.com/uibcdf/topomt/issues/138) |
 | P2Rank 2.5.1 | Java CLI; predicted sites, scores, calibrated probabilities and adjacent surface atoms/residues | MIT; official release; Java 17–23 | [#139](https://github.com/uibcdf/topomt/issues/139) |
 
-Four additions meet the requested four-or-five scope. Keep MOLE (MIT) as the next
-channel candidate after its .NET/WebChemistry Linux build is reproducible. Keep
+Four additions meet the requested four-or-five scope. On 2026-11-08 the
+maintainer prioritized a separate MOLE follow-up under #140. Its original
+maintained .NET/Webchemistry Linux build and CLI/files source route are now
+recorded in the [MOLE overview](mole/overview.md) and
+[source checkpoint](mole/source_checkpoint.md). Keep
 POVME3 (MIT) for volume/ensemble review: its inspected README documents a Python-2
 installation and no regular maintainer. Investigate the actively maintained
 POVME family separately before choosing a current executable/version.

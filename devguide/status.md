@@ -18,6 +18,16 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
+The 2026-11-08 maintainer continuation selects MOLE as the next original local
+provider under [#140](https://github.com/uibcdf/topomt/issues/140). Its unchanged
+maintained source now compiles and executes with .NET 10. The
+[MOLE overview](mole/overview.md) and [source checkpoint](mole/source_checkpoint.md)
+record the CLI/files route, real empty and positive pore controls, direct-original
+comparison and remaining installed/public gates. This extends the original
+provider catalogue; native DFND retains its synthetic-first sequence.
+The MOLE source milestone is complete with 236 selected passing cases; its
+[archived record](archive/original_mole_provider.md) preserves the bounded outcome.
+
 The later 2026-11-07 maintainer instruction prioritizes consolidating the five
 existing original providers and adding four or five no-cost third-party tools
 before further BenchLab development. Follow [the implementation plan](external_provider_expansion_plan.md)

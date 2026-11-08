@@ -1,5 +1,10 @@
 # pyKVFinder original-provider overview
 
+Upstream collaboration: with explicit maintainer authorization, the packaging-only
+compatibility proposal and bounded evidence were published as
+[LBC-LNBio/pyKVFinder#222](https://github.com/LBC-LNBio/pyKVFinder/issues/222).
+This is a proposal for upstream review, not an accepted change or upstream release.
+
 Review: 2026-11-07. Implemented source boundary; runtime evidence retains its
 recorded inputs and limits. Full installed/platform qualification is separate.
 

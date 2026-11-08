@@ -1,6 +1,6 @@
 # External-tool catalogue and provider stewardship
 
-Organization updated: 2026-11-07; technical assessments retain their stated dates.
+Organization updated: 2026-11-08; technical assessments retain their stated dates.
 This is the maintained index for external integrations, comparison references
 and research candidates. Historical intake remains in
 [#8](https://github.com/uibcdf/topomt/issues/8); bounded reorganization is
@@ -28,6 +28,7 @@ Datasets and validation references have their own
 | [GHECOM #109](https://github.com/uibcdf/topomt/discussions/109) | [Overview](ghecom/overview.md) |
 | [CAVER #104](https://github.com/uibcdf/topomt/discussions/104) | [Overview](caver/overview.md) |
 | [P2Rank #108](https://github.com/uibcdf/topomt/discussions/108) | [Overview](p2rank/overview.md) |
+| [MOLE #105](https://github.com/uibcdf/topomt/discussions/105) | [Overview](mole/overview.md) |
 
 ## Ownership and current scope
 
@@ -39,6 +40,9 @@ Eligibility is currently restricted to no-payment routes: locally installable
 open source or no-cost services with reviewed terms and automation/disclosure
 conditions. Distinguish editions, academic-only permissions and unknown licences.
 Paid routes are excluded for now; unreviewed leads remain in the catalogue.
+The separately requested MOLE follow-up is owned by
+[#140](https://github.com/uibcdf/topomt/issues/140); its source evidence does not
+change the completed four-provider batch's scope.
 
 This catalogue and the linked provider overviews are permanent, versioned
 navigation records outside the defect/proposal queues. Discussions host resource
@@ -82,6 +86,7 @@ verification target for the new executable boundary.
 | [GHECOM](ghecom/overview.md) | CLI/files; `GhecomOutput`, P-mode grid pockets | Original 2026/08/17 source pilot: 41 clusters on one retained input | No native reproduction |
 | [CAVER](caver/overview.md) | CLI/files; `CaverOutput`, ordered tunnel paths | Original 3.02 + Java 21 source pilot: 47 profiles on one retained input | No native reproduction |
 | [P2Rank](p2rank/overview.md) | CLI/files; `P2RankOutput`, predicted sites | Original 2.5.1 + Java 21 source pilot: 5 sites on one retained input | No native reproduction |
+| [MOLE](mole/overview.md) | CLI/files; `MoleOutput`, channel profiles and cavity/void decomposition | Original 2.5.26.10.26 + .NET 10; source-bound 1AKD, official 1TQN pore and empty controls | No native reproduction; [DFND antecedent review](DFND/mole_comparison_2026_11_07.md) remains separate |
 
 The [new-adapter checkpoint](original_provider_expansion_checkpoint.md) records
 exact inputs, archives, limits and engine-free recovery. These source pilots do
@@ -110,7 +115,6 @@ A comparison reference can also become an optional provider.
 
 | Tool and official source | Capability / relationship | Route to assess | Priority / rationale |
 |---|---|---|---|
-| [MOLE / MOLEonline](https://moleonline.cz/) | Channel/tunnel/pore candidate and close DFND antecedent | [Engine](https://github.com/sb-ncbr/MOLE), [Webchemistry](https://github.com/sb-ncbr/webchemistry), [web interface](https://github.com/sb-ncbr/moleonline-web); no runtime integration | High: [2026-11-07 source/method review](DFND/mole_comparison_2026_11_07.md) distinguishes operators and bounds originality claims; executable comparison remains pending |
 | [PISA](https://github.com/PDBe-KB/pisa) | Interface candidate and comparison | CLI/XML, including `--as-is` assembly-interface analysis | High: supplied-assembly interfaces without assembly prediction |
 | [DoGSite3](https://proteins.plus/help/dogsite3_rest) | Pocket/subpocket and descriptor candidate | Documented REST API and retained results | Medium: remote alternative with volumetric output |
 | [HOLE](https://www.holeprogram.org/) | Ion-channel pore dimension comparison | Executable/results | Specialized: pore profiles |

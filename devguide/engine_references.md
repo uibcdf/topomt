@@ -1,5 +1,16 @@
 # Engine References
 
+Current MOLE execution reference: official maintained
+`sb-ncbr/webchemistry@fe0e84582a6bd42bc69224fd3a3022bf5c51cec3`, clean
+consultation clone at `.cache/mole-originality-review/reference/webchemistry`.
+The separate `~/repos@others/MOLE` clone remains clean at
+`e0df21c35a1116d712e5a09094aae62e130f698c` (legacy standalone project).
+The unchanged maintained source was compiled in `.cache/mole-integration/source`
+with .NET SDK 10.0.114/runtime 10.0.14; executable `dist/mole2` reports
+2.5.26.10.26. Keep those two source trees, the Python API server and a live
+MOLEonline deployment distinct. See [the source checkpoint](mole/source_checkpoint.md)
+and inspect exact revision/dirty state before updating a reference.
+
 **Historical reference notes.** Current installation, integration status and
 provider roadmaps are maintained in the [external-tool catalogue](external_tools_catalog.md)
 and its provider overviews. The sections below preserve earlier reference

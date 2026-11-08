@@ -45,6 +45,13 @@ The bounded source batch is completed in
 `devguide/original_provider_expansion_checkpoint.md`; resume the native
 synthetic sequence while keeping installed/public qualification separate.
 
+MOLE continuation (2026-11-08): the maintainer selected original local MOLE as
+the next provider under #140 and installed .NET SDK 10. Keep the original
+maintained Webchemistry source and legacy MOLE tree distinct. Follow
+`devguide/mole/overview.md` and its source checkpoint; preserve original
+profile/cavity definitions and scientific code. This integration's molecular
+smoke controls do not start native DFND protein characterization.
+
 Study-area direction (2026-11-07): use descriptive case names without numbering.
 Maintain one versioned study unit per system, including independent references,
 DFND observations and original third-party comparisons. Prepare the same case

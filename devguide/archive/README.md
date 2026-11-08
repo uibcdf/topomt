@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (24)
+### Resolved (25)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
@@ -22,6 +22,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`molsysviewer_topomt_init_exports.md`](molsysviewer_topomt_init_exports.md) — [#55](https://github.com/uibcdf/topomt/issues/55) — Restore MolSysViewer TopoMT add-on lifecycle exports. *(resolved, measured)*
 - [`original_caver_provider.md`](original_caver_provider.md) — [#138](https://github.com/uibcdf/topomt/issues/138) — Add source-bound original CAVER execution and engine-independent recovery. *(resolved, measured)*
 - [`original_ghecom_provider.md`](original_ghecom_provider.md) — [#137](https://github.com/uibcdf/topomt/issues/137) — Add source-bound original GHECOM execution and engine-independent recovery. *(resolved, measured)*
+- [`original_mole_provider.md`](original_mole_provider.md) — [#140](https://github.com/uibcdf/topomt/issues/140) — Add source-bound original MOLE execution and engine-independent recovery. *(resolved, measured)*
 - [`original_p2rank_provider.md`](original_p2rank_provider.md) — [#139](https://github.com/uibcdf/topomt/issues/139) — Add source-bound original P2Rank execution and engine-independent recovery. *(resolved, measured)*
 - [`original_pykvfinder_provider.md`](original_pykvfinder_provider.md) — [#136](https://github.com/uibcdf/topomt/issues/136) — Add source-bound original pyKVFinder execution and engine-independent recovery. *(resolved, measured)*
 - [`profile_memory_resource_lifecycle.md`](profile_memory_resource_lifecycle.md) — [#95](https://github.com/uibcdf/topomt/issues/95) — Preserve caller files and release memory-profile scratch and tracing. *(resolved, reproduced)*

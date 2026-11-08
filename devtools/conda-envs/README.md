@@ -58,5 +58,12 @@ daily workspace. Original pyKVFinder 0.9.6 requires NumPy <2.5; the separately
 identified compatibility source has its own evidence gate. See the
 [admission plan](../../devguide/external_provider_expansion_plan.md).
 
+MOLE is an additional optional system executable: its reviewed maintained build
+needs .NET SDK 10, with .NET runtime 10 for execution. On the reviewed Ubuntu
+26.04 host the maintainer installed `dotnet-sdk-10.0` from Ubuntu's repositories.
+It is deliberately separate from the Conda YAML and Python package dependencies.
+Select the compiled `mole2` with `mole_cmd`; saved recovery requires neither
+the executable nor .NET. See the [MOLE source checkpoint](../../devguide/mole/source_checkpoint.md).
+
 [Shared API/CLI contract](https://github.com/uibcdf/molsyssuite/blob/8f00e6d9de943b6e4710ea62936e2ebea00fad24/devguide/conda_environment_tools.md).
 Tracking: uibcdf/topomt#78, uibcdf/topomt#16 and uibcdf/molsyssuite#45.

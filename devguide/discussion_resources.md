@@ -28,7 +28,7 @@ remain separately scoped in the thread and its evidence links.
 | pyCASTA | [#72](https://github.com/uibcdf/topomt/discussions/72) | Existing optional provider and comparison; [technical overview](pycasta/overview.md). |
 | CASTp / CASTpFold | [#73](https://github.com/uibcdf/topomt/discussions/73) | Existing optional provider and comparison; [technical overview](castp/overview.md). |
 | CAVER | [#104](https://github.com/uibcdf/topomt/discussions/104) | Original CLI/files source pilot; [overview](caver/overview.md), channel/tunnel method and intended path comparison. |
-| MOLE / MOLEonline | [#105](https://github.com/uibcdf/topomt/discussions/105) | Channel/tunnel/pore method and close DFND antecedent. |
+| MOLE / MOLEonline | [#105](https://github.com/uibcdf/topomt/discussions/105) | Original CLI/files source route, channel/cavity method and close DFND antecedent; [overview](mole/overview.md), [source evidence](mole/source_checkpoint.md), #140. Hosted service remains separate. |
 | PISA | [#106](https://github.com/uibcdf/topomt/discussions/106) | Interface comparison candidate. |
 | pyKVFinder | [#107](https://github.com/uibcdf/topomt/discussions/107) | Original grid/dual-probe source pilot with the explicit compatibility fork; [overview](pykvfinder/overview.md). |
 | P2Rank / PrankWeb | [#108](https://github.com/uibcdf/topomt/discussions/108) | Original local CLI/files source pilot; [overview](p2rank/overview.md). Web route remains a candidate. |
