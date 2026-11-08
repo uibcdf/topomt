@@ -200,7 +200,7 @@ class ProviderOutput:
     run : ProviderRun
         Immutable original evidence, including selection/frame metadata.
     records : tuple of ProviderRecord
-        Ordered pocket and auxiliary records.
+        Ordered original feature and auxiliary records.
     input_points_nm : tuple of tuples of float, optional
         Snapshot of source-system coordinates at the selected frame. Exact
         submitted PDB bytes remain separately available in ``run``.
@@ -212,7 +212,8 @@ class ProviderOutput:
 
     Examples
     --------
-    ``output.pockets`` is the shared consumer access. Save original evidence with
+    Use ``output.pockets``, ``output.cavities``, ``output.channels`` or
+    ``output.sites`` according to the provider. Save original evidence with
     ``output.save('original.zip')`` and recover through
     ``topomt.load_provider_output('original.zip', molecular_system=source)``.
     """

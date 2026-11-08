@@ -37,6 +37,8 @@ def get_output(
     ------
     ArgumentError
         If the route, option or physical/resource constraint is invalid.
+    UnknownArgumentError
+        If an option is outside this provider's admitted contract.
     ProviderUnavailableError
         If a selected original executable is unavailable.
     LibraryNotFoundError
