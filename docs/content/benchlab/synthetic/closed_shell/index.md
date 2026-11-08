@@ -75,8 +75,8 @@ polls/submits a server job. A new comparison stage can be prepared separately,
 with its own atomic-model audit. Earlier failure, empty and pending outcomes
 keep their original scope.
 
-The next geometric variant is an opening derived from this same frozen wall,
-with atom correspondence and an independent access witness at the chosen probe.
+The [opening variant](../shell_with_opening/index.md) derives from this same frozen wall,
+with atom correspondence and an independent 1.4 Å access witness.
 Regenerating jitter after deleting atoms would change more than the opening.
 The full synthetic phase, independent panel #76, volume precision and later
 protein studies remain separate work.

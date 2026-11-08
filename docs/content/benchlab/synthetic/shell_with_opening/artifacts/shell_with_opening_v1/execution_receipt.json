@@ -1,0 +1,150 @@
+{
+  "schema": "topomt.benchlab.shell-opening-execution/1",
+  "case_id": "shell_with_opening",
+  "protocol_commit": "b6fe6e2",
+  "independent_reference_commit_before_native": "2ca133d",
+  "limits": {
+    "os_cpu_affinity_count": 1,
+    "numerical_workers": 1,
+    "process_address_space": {
+      "value": 6,
+      "unit": "GiB"
+    },
+    "process_cpu_budget": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "process_cpu_budget",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "int64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 90,
+      "block_digests": [
+        "blake2b-128:bbd149c6db35616d763a4499c630f687"
+      ],
+      "digest": "blake2b-128:8cd4b55294caa4ec595033173ac19193"
+    },
+    "cell_timeout": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "cell_timeout",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "int64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 60,
+      "block_digests": [
+        "blake2b-128:dbc31ec280e1976521748d1b07242311"
+      ],
+      "digest": "blake2b-128:f4e1edc0df406afeb10ea5504b07f95e"
+    }
+  },
+  "scope": "Separate fresh Python 3.14 kernels; no original-provider execution or server requests. Source-workspace evidence only.",
+  "resource_observation": "Shared host checked before execution: about 57 GiB available, no memory PSI or active vmstat swapping. Slurm local nodes inval and other nodes unk; no allocation used. Free resources were not treated as reserved.",
+  "measurements": {
+    "system": {
+      "started_utc": "2026-11-08T19:15:30.613059+00:00",
+      "fresh_kernel_execution_elapsed": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "fresh_kernel_execution_elapsed",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 3.0380638829956297,
+        "block_digests": [
+          "blake2b-128:da5d4e49a7b5996ea7a8f6f262af04a5"
+        ],
+        "digest": "blake2b-128:aacb8d6ae905c57b9ed0b16a742001e2"
+      },
+      "maximum_observed_kernel_process_rss": {
+        "value": 153636,
+        "unit": "KiB"
+      }
+    },
+    "dfnd": {
+      "started_utc": "2026-11-08T19:19:44.804355+00:00",
+      "fresh_kernel_execution_elapsed": {
+        "manifest": {
+          "format": "qrec/0.3",
+          "field": "fresh_kernel_execution_elapsed",
+          "unit": "second",
+          "si": {
+            "factor": 1.0,
+            "offset": 0.0,
+            "exponents": {
+              "s": 1
+            }
+          },
+          "dtype": "float64",
+          "shape": [],
+          "blocks": [
+            1
+          ]
+        },
+        "values": 5.503196892008418,
+        "block_digests": [
+          "blake2b-128:bbb9e9b23f4e0a1a37b9e0b9dfd5e14f"
+        ],
+        "digest": "blake2b-128:1ea4e6017d2047514d2caef3b76c7699"
+      },
+      "maximum_observed_kernel_process_rss": {
+        "value": 222816,
+        "unit": "KiB"
+      }
+    }
+  },
+  "notebooks": {
+    "system": {
+      "sha256": "70547d7afd9bcbc81323735c234cbbcbfcb057dbf79cd655e836edb2ad32ed02",
+      "executed_code_cells": 5
+    },
+    "dfnd": {
+      "sha256": "040cc560c51115eab69feff32d73722fadef2d234af68121d3428a96fc740250",
+      "executed_code_cells": 5
+    }
+  },
+  "artifact_sha256": {
+    "dfnd_contacts.png": "87738eb7daba39803a94bf533793a0c426e1d28b356c9eef741d94e6470f96d6",
+    "dfnd_observations.json": "1712827f0eb17808c475e2830329cacd8bb958086c60e5c4c1de6bd4c9f696a4",
+    "dfnd_sweep.png": "d1b499aaa5dff88a7e5985c5c55747248e728224ad923b5eeda61824f352e4cc",
+    "input.json": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+    "input.pdb": "cc4da10580190859cabe5c1839bd745d35c9606b532fe3e018defeb20721b9d5",
+    "protocol.json": "8bedb65df869ba10b5b57b65925fe5660fb0bd77c6486074d5dba176a991e74e",
+    "system_certificates.png": "ce7c7ac30b56ee672a16697404a786048fc131044903dc76703b2ae27da4e267",
+    "system_geometry.png": "3ebb60ef726a38d7f672a09d2bb506b6b9cb88378275661e008e347725aca7a2",
+    "system_reference.json": "df6017ba5798caac2fb1b73251f16c37dc2592aa53e67f4a558ef7cc79407835"
+  },
+  "source_qualification": "Native source/software fingerprint retained in dfnd_observations.json. The pre-existing topomt/_version.py edit was preserved and included in that fingerprint. No scientific kernel changes, full suite/matrix, installed artifact or biological qualification."
+}

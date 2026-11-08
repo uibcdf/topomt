@@ -1,11 +1,11 @@
 ---
 summary: Reconcile DFND synthetic reference assumptions and freeze independent validation evidence.
 issue: uibcdf/topomt#76
-status: open
+status: partial
 opened: 2026-10-01
 closed:
 severity: high
-verification: inspected
+verification: measured
 area: [dfnd, validation]
 guard:
 normative:
@@ -87,3 +87,30 @@ This is partial progress. The reviewed opening/passage/neck panel,
 independent solvent-volume reference and annotated molecular cases remain.
 No DFND kernel changes were needed for these controls. #75 and #60 retain
 their own unfinished numerical/public-model gates.
+
+## Subsequent synthetic-first continuation — 2026-11-08
+
+The later maintainer instruction resumes the synthetic-first route recorded in
+the laboratory checkpoint; it supersedes the two-case stopping boundary above.
+#144 adds separately executed system/native notebooks for the unchanged closed
+shell, with 0.05 Å ray access, 1.4 Å enclosure and 5 Å finite-hull exclusion.
+The old 0.2 Å enclosure remains unresolved by those sufficient bounds.
+
+#145 adds [shell_with_opening](../../docs/content/benchlab/synthetic/shell_with_opening/index.md),
+an exact 66-ball subset of that wall. The cap rule removes parent atoms 0–5;
+all retained coordinates/radii and parent IDs remain unchanged. Protocol
+`b6fe6e2` and independent reference `2ca133d` precede first child native execution.
+The +Y ray clearance 1.819726 Å certifies access at 1.4 Å, while the same-probe
+parent has a covered wall. The child also has a covered-wall/free-origin control
+at 3 Å and a full-hull exclusion bound at 5 Å. DFND agrees at these scopes.
+Its 1.4 Å contact cluster lies on new child hull face [6, 7, 8] in parent IDs;
+unchanged parent hull faces remain independently covered at that probe.
+
+`tests/test_shell_opening_study.py` guards exact subset/history, independent
+proofs and rigid motion, explicit-unit policies, live matched parent/child
+controls, mapped contacts and reviewed notebook/receipt records. One native
+cluster is not an independently established physical mouth count; unresolved
+sweep intervals remain visible. This is characterized development evidence,
+not blind held-out evaluation. No native kernel change or original-provider
+execution was needed. Passage/neck cases, volume precision and the remainder
+of the independent panel keep this issue open.

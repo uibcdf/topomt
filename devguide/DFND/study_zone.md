@@ -9,8 +9,8 @@ not a delivered independent deployment or scientific qualification.
 ## Existing foundation and identity
 
 Maintain `docs/content/benchlab/` as the dedicated public laboratory section.
-Its two existing synthetic studies combine frozen
-inputs, independent references, plots, native observations and original-provider
+Its three synthetic units retain frozen inputs, independent references, plots
+and native observations. The first two also preserve historical original-provider
 evidence. MyST-NB/Sphinx renders stored outputs without running calculations.
 Keep the [laboratory checkpoint](notebook_laboratory_checkpoint.md) as the active
 case-by-case continuation record.
@@ -40,6 +40,11 @@ docs/content/benchlab/
       historical.ipynb
       artifacts/closed_shell_v1/...
       artifacts/native_study_v1/...
+    shell_with_opening/
+      index.md
+      system.ipynb
+      dfnd.ipynb
+      artifacts/shell_with_opening_v1/...
   molecular/
     index.md
 ```
@@ -72,6 +77,13 @@ reference adds a separately declared 0.05 Å all-atom escape ray and 5 Å
 full-hull exclusion bound on the same frozen input; the old 0.2 Å reference
 remains explicitly inconclusive. New stages read committed records in clean
 kernels without original-provider execution or server requests.
+
+Under #145, `shell_with_opening` is an exact subset of that frozen wall. It
+retains parent atom IDs and introduces no fresh coordinate generation. Its
+protocol and independent reference are committed before child native execution.
+Separate system/native notebooks inspect the matched 1.4 Å parent/child access
+control, larger-probe enclosure/exclusion and mapped exterior contacts. A
+comparison stage remains planned; no original provider is run for this unit.
 
 Use descriptive names as permanent case identities, without ordinal codes.
 Grouping and study order are editable navigation. Each frozen input retains its
@@ -170,7 +182,7 @@ comparators and study/reference status. Registering a catalog input does not
 create a completed benchmark page. Publish studied units progressively, and
 retain the unresolved outcomes alongside successful ones.
 
-First apply this structure to the two delivered studies, preserving their
-original evidence. Continue with the independently grounded shell-opening case,
-then the agreed synthetic sequence. This design adds no new scientific run,
-provider integration, hosting deployment or closure of #75/#76/#16.
+The staged structure is delivered for the tetrahedron, closed shell and exact
+opening variant, preserving earlier evidence. Continue with a tube and the
+agreed synthetic sequence. This organization adds no separate hosting deployment
+or closure of #75/#76/#16; each new scientific run retains its own protocol.

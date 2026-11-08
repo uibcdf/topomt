@@ -256,6 +256,56 @@ and the executable checksum without personal filesystem paths.
    the case supports and what remains unresolved, rather than turning plausible
    construction labels into assertions.
 
+## Third adopted unit: exact shell opening — 2026-11-08
+
+Issue #145 adds `shell_with_opening` as an exact subset of the adopted closed
+wall. A strict 35-degree cap around +Y removes parent atom IDs 0–5, retaining
+the remaining 66 coordinates/radii exactly. PDB rows retain serial/residue IDs
+7–72. The public advanced constructor receives parent IDs through `atom_indices`;
+raw local array offsets and mapped IDs are checked separately. Carrier-cell IDs
+cannot be equated between the two retriangulated inputs.
+
+The input/protocol commit `b6fe6e2` and independent system/reference commit
+`2ca133d` precede first child native execution. Five independent-system code
+cells establish an all-atom +Y ray clearance 1.819726044 Å, with conservative
+cap bound 1.665782356 Å: both exceed the selected 1.4 Å probe. The same-probe
+parent remains independently enclosed. The child's maximum hull-triangle
+circumcover radius is 3.710130644 Å; 3 Å expanded balls cover that wall while
+the origin remains free (clearance 4.168062464 Å). At 5 Å, the enclosing-ball
+bound covers every finite-hull point. Bounds remain sufficient, with explicit
+unresolved intervals rather than exact physical transition claims.
+
+The separate native notebook has five code cells. At 1.4 Å the parent is a
+central `void` with 33 resident cells and zero exterior links; the child is a
+`pocket` with 35 resident cells and one exterior-link cluster. That cluster
+uses new child hull face [6, 7, 8] in parent IDs, with native gate 2.010130644 Å
+and geometric triangle area 16.148007904 Å². Unchanged parent hull triangles
+remain covered by retained vertex balls at this probe, providing an independent
+contact-location constraint. This is not a free aperture-area measurement or
+an independently established physical mouth count.
+
+At 3 Å the central child `void` has nine resident cells and no exterior link;
+at 5 Å no resident wet component remains. The original 49-point probe sweep
+retains nested resident availability and checks independently certified ranges,
+leaving the remaining intervals unresolved. `min_size=36`, selected from total
+central `n_nodes+1`, hides the child pocket while retaining its raw component,
+support, parent mapping and physical result key. No native contradiction or
+scientific-kernel fix was needed.
+
+The short case index, quantity-aware records, four reviewed standalone figures
+and execution receipt are versioned. Both notebooks run in fresh kernels
+without original-provider execution, server requests or artifact writes. All
+parent scientific artifacts/notebook bytes retain their protocol hashes.
+Ordinary guards include independent geometry, rigid motion, explicit units
+under nm/ps and pm/fs, live matched controls, mapped faces and reviewed records.
+This is characterized source-workspace evidence, not a held-out blind panel,
+volume qualification, general graph-path proof or installed/matrix qualification.
+
+The next geometric question is a tube with independently justified passage and
+bottleneck controls. Original comparisons for the opening can follow separately,
+with their own atomic-model audit. #75/#76, the remaining synthetic inventory
+and later molecular studies retain their gates.
+
 ## Second adopted reference and multi-provider comparisons
 
 ### Current independent system/native study — 2026-11-08

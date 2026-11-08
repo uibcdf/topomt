@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (29)
+### Resolved (30)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
@@ -31,6 +31,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`provider_output_viewer_adoption.md`](provider_output_viewer_adoption.md) — [#66](https://github.com/uibcdf/topomt/issues/66) — Adopt original provider pocket outputs in the MolSysViewer addon. *(resolved, inspected)*
 - [`provider_pocket_outputs.md`](provider_pocket_outputs.md) — [#65](https://github.com/uibcdf/topomt/issues/65) — Expose original provider pocket outputs without DFND prerequisites. *(resolved, inspected)*
 - [`publish_ackredit_portable_guide.md`](publish_ackredit_portable_guide.md) — [#91](https://github.com/uibcdf/topomt/issues/91) — Publish the canonical Ackredit portable-attribution guide in TopoMT. *(resolved, inspected)*
+- [`shell_opening_study.md`](shell_opening_study.md) — [#145](https://github.com/uibcdf/topomt/issues/145) — Derive a shell opening from the frozen wall and characterize native access. *(resolved, measured)*
 - [`tetrahedron_effective_radii.md`](tetrahedron_effective_radii.md) — [#143](https://github.com/uibcdf/topomt/issues/143) — Resolve effective GHECOM and CAVER input radii in the tetrahedron study. *(resolved, measured)*
 - [`tetrahedron_original_comparisons.md`](tetrahedron_original_comparisons.md) — [#141](https://github.com/uibcdf/topomt/issues/141) — Add a model-audited original-method comparison stage for the regular tetrahedron. *(resolved, measured)*
 - [`tetrahedron_split_study.md`](tetrahedron_split_study.md) — [#134](https://github.com/uibcdf/topomt/issues/134) — Separate independent tetrahedron expectations and native DFND experiments into executable notebooks. *(resolved, inspected)*

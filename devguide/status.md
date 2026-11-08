@@ -18,7 +18,18 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
-The synthetic sequence now returns to the sampled closed shell under #144.
+The synthetic sequence adds the [shell-opening unit](../docs/content/benchlab/synthetic/shell_with_opening/index.md)
+under #145: an exact 66-ball subset of the frozen 72-ball wall, with parent atom
+IDs retained. Protocol `b6fe6e2` and independent reference `2ca133d` precede the
+first child native observation. The 1.4 Å all-atom escape ray, 3 Å enclosure and
+5 Å finite-hull exclusion agree with DFND at their stated scopes. The single
+native contact cluster lies on a newly exposed child hull triangle; this does
+not establish an exact physical mouth count. Both staged notebooks execute
+without providers/servers, and all parent scientific bytes remain unchanged.
+No native kernel change was needed; the next geometric question is a tube.
+#75/#76 and installed/full-matrix qualification remain separate.
+
+The preceding sampled closed-shell study is tracked under #144.
 Its separate [system/native study](../docs/content/benchlab/synthetic/closed_shell/index.md)
 adds a certified 0.05 Å escape control and a sufficient 5 Å finite-hull exclusion
 bound alongside the adopted 1.4 Å enclosure certificate. Fresh DFND agrees at
