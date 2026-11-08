@@ -134,6 +134,13 @@ The next native unit remains the certified shell and its opening, following the
 case-by-case reference gates above; unknown peer assignments do not supply new
 independent truth or require tuning native geometry to a peer count.
 
+Follow-up on 2026-11-08: after explicit maintainer authorization, the pyKVFinder
+zero-cutoff reproduction and separately declared diagnostic were published as
+[upstream #223](https://github.com/LBC-LNBio/pyKVFinder/issues/223). Exact posted
+title/body were read back and verified. This hands off the suspected original
+limitation; it does not claim an upstream fix or change the frozen comparison
+artifacts, source kernel or the next native study.
+
 ### Split system and native study — 2026-11-07
 
 The tetrahedron now has a short `index.md`, independent `system.ipynb` and native

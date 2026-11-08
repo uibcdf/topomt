@@ -3,6 +3,9 @@
 The tetrahedron [zero-cutoff diagnostic](zero_cutoff_diagnostic.md) records a
 suspected original-export limitation and a separately declared one-voxel control.
 Its results do not change the scientific kernels or the molecular source pilot.
+After separate maintainer authorization, the report and frozen evidence were
+published as [upstream #223](https://github.com/LBC-LNBio/pyKVFinder/issues/223).
+Upstream confirmation and any fix remain pending.
 
 Upstream collaboration: with explicit maintainer authorization, the packaging-only
 compatibility proposal and bounded evidence were published as

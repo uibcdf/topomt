@@ -120,3 +120,16 @@ temporary directory was modified or removed. Both bounded original drivers
 briefly overlapped on the same single CPU; measured peak process RSS stayed below
 268 MiB and no memory pressure was observed. Wall times are not serial benchmark
 evidence. Native scientific code and #75/#76 remain unchanged.
+
+## Authorized upstream handoff — 2026-11-08
+
+After closure of this bounded study, the maintainer separately authorized
+publication of the prepared zero-cutoff report. It is now
+[LBC-LNBio/pyKVFinder#223](https://github.com/LBC-LNBio/pyKVFinder/issues/223).
+Read-back verification confirmed exact published title/body; the maintained
+`devguide/pykvfinder/zero_cutoff_diagnostic.md` records the body digest, frozen
+evidence links and build limitations. The earlier pending-authorization statement
+above describes the original checkpoint and is superseded by this dated handoff.
+No scientific code or frozen notebook, input or observation artifact changed.
+The upstream issue remains open; this is no claim of reproduction or acceptance
+by its maintainers. Original packaging issue #222 retains its separate scope.

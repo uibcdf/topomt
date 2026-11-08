@@ -1,11 +1,17 @@
-# Zero-cutoff diagnostic and proposed upstream report
+# Zero-cutoff diagnostic and upstream report
 
 Date: 2026-11-08. Observed during [TopoMT #141](https://github.com/uibcdf/topomt/issues/141).
 This records a suspected upstream limitation, not a scientific-kernel fix.
-The earlier explicit external publication authorization covered the separate
-[packaging issue #222](https://github.com/LBC-LNBio/pyKVFinder/issues/222).
-Publication of the report below requires its own maintainer authorization.
-No external scientific issue or comment has been sent at this checkpoint.
+With separate explicit maintainer authorization on 2026-11-08, the reviewed
+report was published as [pyKVFinder #223](https://github.com/LBC-LNBio/pyKVFinder/issues/223).
+The earlier [packaging issue #222](https://github.com/LBC-LNBio/pyKVFinder/issues/222)
+remains a distinct proposal. The new issue is open for upstream review; publication
+does not establish upstream reproduction, acceptance or a fix.
+
+Read-back verification confirmed the exact published title and body. Published
+UTF-8 body SHA-256: `ab17c5791e717ea86394c06d442fc7d77c6a8c98dd41e1a95d08bc10e3a2263c`.
+The initial GitHub connector returned a definite 403; the authorized report was
+then published through the authenticated CLI, without creating a duplicate.
 
 The [comparison notebook](../../docs/content/benchlab/synthetic/regular_tetrahedron/comparisons.ipynb)
 and `artifacts/comparisons_v1/` retain exact original input/output, the frozen
@@ -14,11 +20,11 @@ The fork remains clean at `e0f0fa6d32109ebd02d951ef4d7f84f3e1a88fb9`; its scient
 C, algorithm modules and data are unchanged from upstream 0.9.6. TopoMT refuses
 the inconsistent original exports; #142 fixes only the failed-receipt status.
 
-## Proposed issue title
+## Published issue title
 
 Zero volume cutoff on a four-atom input produces zero-volume labels and inconsistent exports
 
-## Proposed issue body
+## Published issue body
 
 While studying a tiny geometric control, we observed inconsistent exported cavity
 labels when `volume_cutoff=0`. Is zero a supported cutoff for this input, or should
@@ -78,3 +84,5 @@ The controlled input, original receipts and diagnosis are available in TopoMT's
 `docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/`,
 with the rejected zero-cutoff observations and the positive-cutoff diagnostic
 kept separate. No scientific kernel was modified to obtain the diagnostic.
+
+Frozen evidence: [original zero-cutoff observations](https://github.com/uibcdf/topomt/tree/1c691f2566b8ddf9873b28b3cd33383015c88827/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations), [separately declared positive-cutoff diagnostic](https://github.com/uibcdf/topomt/tree/1c691f2566b8ddf9873b28b3cd33383015c88827/docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations), and [comparison notebook](https://github.com/uibcdf/topomt/blob/1c691f2566b8ddf9873b28b3cd33383015c88827/docs/content/benchlab/synthetic/regular_tetrahedron/comparisons.ipynb).
