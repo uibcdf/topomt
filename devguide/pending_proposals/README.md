@@ -46,9 +46,10 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (1)
+### Active (2)
 
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
+- [`tetrahedron_boundary_connectivity.md`](tetrahedron_boundary_connectivity.md) — [#150](https://github.com/uibcdf/topomt/issues/150) — Independently certify four tetrahedron boundary patches and contrast native grouping. *(active, inspected)*
 
 ### Partial (5)
 
