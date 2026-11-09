@@ -5,6 +5,12 @@ understanding and comparing molecular-topography methods. Each named case asks
 a scientific question, explains its reference, shows DFND observations and
 records comparisons with original third-party software where appropriate.
 
+The [comparative-findings register](https://github.com/uibcdf/topomt/discussions/154)
+links scoped advantages and limitations to these reproducible studies. Consult
+each maintained card for its current conclusion, tested software profile and
+corrections. Pending review and resolved history are shown separately: an old
+notebook result does not automatically describe a current limitation.
+
 The collection has two sections:
 
 | Collection | What it investigates | Current scope |

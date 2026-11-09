@@ -42,4 +42,4 @@ body:
     id: related
     attributes:
       label: Related conversations and follow-up
-      description: Link existing methods, datasets, study results and actionable owning issues. A citation alone does not establish TopoMT validation.
+      description: Link existing methods, datasets and results. Every concrete future action needs an owning issue; link it or identify the action for maintainer triage. Informational reading alone does not establish TopoMT validation.

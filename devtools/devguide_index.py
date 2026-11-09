@@ -7,6 +7,7 @@ import os
 import sys
 from pathlib import Path
 
+from comparative_findings import check_repository
 from devguide_reports import CLOSED_STATUSES, OPEN_STATUSES, ROOT, Report, validate_all
 
 BEGIN = '<!-- generated: devguide_index -->'
@@ -64,6 +65,7 @@ def _replace(text: str, body: str) -> str:
 
 def process(check: bool) -> list[str]:
     reports, errors = validate_all()
+    errors.extend(check_repository())
     if errors:
         raise ValueError('\n'.join(errors))
     stale: list[str] = []

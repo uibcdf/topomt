@@ -58,9 +58,23 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 - [`topography_context_and_support.md`](topography_context_and_support.md) — [#60](https://github.com/uibcdf/topomt/issues/60) — Adopt explicit Topography analysis context and spatial support. *(partial, measured)*
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
-### Open (2)
+### Open (16)
 
+- [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Record reached third-party calculations through optional Ackredit attribution. *(open, inspected)*
 - [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
+- [`castpfold_pending_jobs.md`](castpfold_pending_jobs.md) — [#168](https://github.com/uibcdf/topomt/issues/168) — Resolve the disposition of retained pending CASTpFold synthetic jobs without resubmitting. *(open, inspected)*
+- [`caver_tetrahedron_applicability.md`](caver_tetrahedron_applicability.md) — [#155](https://github.com/uibcdf/topomt/issues/155) — Investigate the retained CAVER four-atom failure and supported input scope. *(open, inspected)*
 - [`dfnd_physical_boundary_refinement.md`](dfnd_physical_boundary_refinement.md) — [#151](https://github.com/uibcdf/topomt/issues/151) — Refine physical boundary patches beyond native whole-face exterior clusters. *(open, reproduced)*
+- [`dogsite_assessment.md`](dogsite_assessment.md) — [#160](https://github.com/uibcdf/topomt/issues/160) — Assess DoGSite3 service access and pocket/subpocket output semantics. *(open, inspected)*
+- [`fpocket_family_review.md`](fpocket_family_review.md) — [#162](https://github.com/uibcdf/topomt/issues/162) — Assess fpocketR, Scipion fpocket and P2C scientific and workflow contributions. *(open, inspected)*
+- [`grid_comparison_review.md`](grid_comparison_review.md) — [#158](https://github.com/uibcdf/topomt/issues/158) — Define eligible grid-based comparison questions for pyKVFinder, GHECOM and LIGSITE. *(open, inspected)*
+- [`historical_tool_triage.md`](historical_tool_triage.md) — [#163](https://github.com/uibcdf/topomt/issues/163) — Qualify the identity and comparison scope of four historical tool candidates. *(open, inspected)*
+- [`interface_reference_review.md`](interface_reference_review.md) — [#165](https://github.com/uibcdf/topomt/issues/165) — Assess PISA and PePrMint interface definitions and comparison eligibility. *(open, inspected)*
+- [`mole_tetrahedron_applicability.md`](mole_tetrahedron_applicability.md) — [#156](https://github.com/uibcdf/topomt/issues/156) — Investigate the retained MOLE four-atom complex failure and input scope. *(open, inspected)*
+- [`molecular_dataset_review.md`](molecular_dataset_review.md) — [#166](https://github.com/uibcdf/topomt/issues/166) — Qualify PocketPicker and COACH420 dataset provenance before molecular benchmark selection. *(open, inspected)*
+- [`related_application_review.md`](related_application_review.md) — [#164](https://github.com/uibcdf/topomt/issues/164) — Assess topography API and user-workflow lessons from MolModa, Pocket2Mol and SurfDock. *(open, inspected)*
+- [`specialist_pore_review.md`](specialist_pore_review.md) — [#161](https://github.com/uibcdf/topomt/issues/161) — Assess HOLE and CHAP as specialized pore-profile comparison references. *(open, inspected)*
+- [`volume_reference_review.md`](volume_reference_review.md) — [#159](https://github.com/uibcdf/topomt/issues/159) — Assess POVME, MoloVol and PyVOL as scoped region and volume references. *(open, inspected)*
+- [`zeopp_assessment.md`](zeopp_assessment.md) — [#167](https://github.com/uibcdf/topomt/issues/167) — Assess Zeo++ periodic accessibility definitions and source acquisition before comparison. *(open, inspected)*
 
 <!-- /generated -->

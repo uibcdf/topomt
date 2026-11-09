@@ -67,3 +67,12 @@ Publish the observable and compatibility decision, implement the selected bounde
 refinement, correct scientific descriptions and demonstrate independent and live
 receiving guards with explicit units, source correspondence and rigid motion.
 Documentation/tracking alone does not satisfy runtime acceptance.
+
+## Comparative finding navigation — 2026-11-08
+
+The [maintained finding card](https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186) carries the current
+scoped conclusion and dated correction/review history. This report retains its
+technical evidence; before manuscript reuse follow the
+[comparative-finding lifecycle](../comparative_findings.md) and review the actual
+target profile. Historical observations and source fixes do not automatically
+describe every current release.

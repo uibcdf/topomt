@@ -71,3 +71,12 @@ without missing-digester warnings. The 100-check source selector, repository
 Ruff, scoped mypy and full HTML build pass as recorded under #146. Broader
 support-library and installed/matrix gates retain their owners; only the
 reproduced native admission/diagnostic defect is resolved here.
+
+## Comparative finding navigation — 2026-11-08
+
+The [maintained finding card](https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482188) carries the current
+scoped conclusion and dated correction/review history. This report retains its
+technical evidence; before manuscript reuse follow the
+[comparative-finding lifecycle](../comparative_findings.md) and review the actual
+target profile. Historical observations and source fixes do not automatically
+describe every current release.

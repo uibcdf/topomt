@@ -27,6 +27,12 @@ Set a closed status and date, name a durable test in `guard` or policy in `norma
 move the record to `archive/`, regenerate indexes and close the issue with the outcome
 and archived path. Archive, never delete. Append corrections to archived records rather
 than rewriting their history.
+For an issue linked from the [comparative-findings register](comparative_findings.md),
+also reconcile its card, hub, lifecycle metadata and current method/case summaries.
+Follow the guide's same-scope fix/partial-fix and live-readback workflow; closing
+an issue does not by itself resolve a finding. An incomplete update becomes
+`needs_review` and cannot support a current scientific claim. Keep historical
+observations and fixing/source-release scope explicit.
 For resolved reports, the offline validator also checks that a `guard` names a
 statically declared pytest test in `tests/` or `devtools/tests/`. Reviewers must
 still decide whether the assertion protects the reported outcome.

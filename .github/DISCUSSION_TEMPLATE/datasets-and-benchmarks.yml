@@ -42,4 +42,4 @@ body:
     id: related
     attributes:
       label: Related methods, papers and work
-      description: Link canonical conversations, frozen inputs/results and owning issues. Maintainers apply supported feature/context/topic labels; labels do not qualify a reference.
+      description: Link canonical conversations and frozen inputs/results. Every concrete future action needs an owning issue; link it or identify the action for maintainer triage. Labels do not qualify a reference.

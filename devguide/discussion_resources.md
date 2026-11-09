@@ -5,6 +5,11 @@ This is contributor navigation for the Discussions area. Read
 triage and evidence boundaries. Substantive resource descriptions, reviews,
 scientific arguments and dated conclusions belong in their conversations;
 this register does not replace them or qualify their scientific evidence.
+Concrete future actions use the issue board; the
+[dated action-routing audit](discussion_actions.md) links every conversation's
+follow-up or explicit informational disposition. Read the
+[action-to-issue rule](discussions.md#every-future-action-has-an-owning-issue)
+before completing upkeep.
 
 ## Entry points
 
@@ -12,6 +17,7 @@ this register does not replace them or qualify their scientific evidence.
 - [#68](https://github.com/uibcdf/topomt/discussions/68): Methods and Tools index.
 - [#92](https://github.com/uibcdf/topomt/discussions/92): Datasets and Benchmarks index.
 - [#131](https://github.com/uibcdf/topomt/discussions/131): Literature and Resources index.
+- [#154](https://github.com/uibcdf/topomt/discussions/154): comparative findings, current scoped limits, review queue and resolved history; follow [the lifecycle instructions](comparative_findings.md).
 
 ## Methods and Tools
 
@@ -49,7 +55,7 @@ remain separately scoped in the thread and its evidence links.
 | LIGSITE in ENSPARA | [#123](https://github.com/uibcdf/topomt/discussions/123) | Pocket-detection comparison reference. |
 | PocketSCP | [#124](https://github.com/uibcdf/topomt/discussions/124) | Research-method intake; implementation and scope to assess. |
 | SurfDock | [#125](https://github.com/uibcdf/topomt/discussions/125) | Related project; domain ownership needs assessment. |
-| Zeo++ | [#152](https://github.com/uibcdf/topomt/discussions/152) | Candidate periodic pore-network/accessibility reference; documentary intake only. Compare definitions before any isolated-system benchmark or provider integration. |
+| Zeo++ | [#152](https://github.com/uibcdf/topomt/discussions/152) | Candidate periodic pore-network/accessibility reference; documentary assessment queued in [#167](https://github.com/uibcdf/topomt/issues/167). Compare definitions before any isolated-system benchmark or provider integration. |
 | DFND | [#130](https://github.com/uibcdf/topomt/discussions/130) | Native-method scientific conversation; current work is synthetic-first. |
 
 Historical CASTp auxiliary repositories share the CASTp/CASTpFold conversation
@@ -65,6 +71,7 @@ source link and its dated assessment scope. Unassessed leads stay Candidate.
 | COACH420 collection | [#127](https://github.com/uibcdf/topomt/discussions/127) | Ligand-site detection/ranking benchmark resource. |
 | TopoMT archived CASTpFold panel | [#128](https://github.com/uibcdf/topomt/discussions/128) | Original-provider output reference collection. |
 | DFND synthetic collection and system laboratory | [#129](https://github.com/uibcdf/topomt/discussions/129) | Controlled topography studies and independent geometric references. |
+| DFND comparative findings and limitations | [#154](https://github.com/uibcdf/topomt/discussions/154) | Scoped advantage/limitation cards linked to case evidence and owning issues; lifecycle metadata is checked separately from scientific validity. |
 
 Use the [benchmark catalogue](benchmark_catalog.md) for existing source and
 qualification records. Dataset discovery is separate from acquisition, execution

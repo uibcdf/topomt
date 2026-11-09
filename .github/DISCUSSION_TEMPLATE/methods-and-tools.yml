@@ -49,4 +49,4 @@ body:
     id: related
     attributes:
       label: Related conversations and evidence
-      description: Link existing papers, datasets, system studies, results or owning issues. Inclusion does not establish integration, equivalence or scientific qualification.
+      description: Link existing papers, datasets, system studies and results. Every concrete future action needs an owning issue; link it or identify the action for maintainer triage. Inclusion does not establish integration or scientific qualification.

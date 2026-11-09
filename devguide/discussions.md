@@ -25,6 +25,36 @@ Record decisions with date and reason, and an observable revisit condition for
 deferral. A listing, label, vote or thread closure does not accept a scientific
 claim, public API, dependency or integration.
 
+## Every future action has an owning issue
+
+Maintainer refinement — 2026-11-08: **the issue board is the authoritative work
+queue**. Every concrete future action in an opening post, comment or reply must
+have a corresponding owning issue: investigation, pending assessment, deferred
+implementation, validation, documentation correction or follow-up. Link both
+directions and identify which action the issue owns; an unrelated umbrella or a
+closed organization ticket does not cover a new review. Search/reuse a suitable
+issue before creating another. Split independently closable work when appropriate.
+
+Discussions retain analysis, evidence, questions and dated conclusions. A reference
+or exploratory question without a selected action can remain informational;
+say so explicitly when triaging, with scope/reason. Do not reword a promised task
+as a question to remove it from the queue. Candidate discovery still accepts a
+name/source/relevance without requiring an installation or full investigation.
+
+Before completing Discussion upkeep, inspect affected opening posts and all new
+comments/replies, list concrete actions, create/reuse their issues and add visible
+current follow-up links. Deferred work stays tracked, with its reason and revisit
+condition. For a closed task, reconcile the originating current summary and
+linked finding state; preserve the original request/results as history. If work
+remains, keep/reopen its issue or create an explicit follow-up before closing.
+
+The [dated action-routing audit](discussion_actions.md) maps all 42 conversations
+and five comments observed in this adoption. It records responsibility rather than
+copying issue open/closed status. Refresh affected rows as work changes; new
+conversations/actions need the same triage. No automatic monitoring is promised.
+All `needs_review` comparative findings require an open owning issue/local report,
+as enforced by [their lifecycle check](comparative_findings.md).
+
 ## Categories
 
 Keep these six categories. The first three retain the common names, slugs and
@@ -141,8 +171,9 @@ Keep substantive review findings and conclusions in the conversation, with
 dated updates and links to their evidence. Accepted/deferred/rejected decisions
 also retain the owning issue or named versioned record required by common policy;
 that requirement does not make every discussion contribution a devguide document.
-Use [current status](status.md) for scheduling; historical pauses and receipts
-do not override later maintainer decisions.
+Use [current status](status.md) for the scientific phase and the issue board for
+individual action ownership/scheduling; historical pauses and receipts do not
+override later maintainer decisions.
 
 For a comparison, freeze geometry, atom selection, radii, units, preparation,
 parameters and software identity. Explain differing feature definitions and
@@ -166,6 +197,14 @@ conversations for all catalogue entries. Continue synthetic-first development
 under the active laboratory checkpoint before new protein characterization.
 Improvements sought from DFND remain hypotheses until independent evidence
 supports them.
+
+Operate the comparative findings hub and its advantage/limitation cards under
+[the lifecycle instructions](comparative_findings.md). Keep their current state
+and dated history separate. A corrected limitation leaves the current view;
+update the card, index, lifecycle metadata and affected method/case summaries
+with its issue/report closeout. Incomplete reconciliation is `needs_review`.
+Preserve historical evidence and require target-specific review before a paper
+claim; a resolved issue, stale comment or label is not publication evidence.
 
 ## Maintainer upkeep
 

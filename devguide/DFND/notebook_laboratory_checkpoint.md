@@ -11,6 +11,13 @@ to a tube are deferred by this decision; initial passing anchors are not the
 completion rule. #146 owns the bounded public audit, #148 the 0.2 Å cover;
 #75/#76/#60 retain their broader numerical/scientific/public-support gates.
 
+Maintain advantages and limitations through the
+[comparative-finding lifecycle](../comparative_findings.md) and
+[canonical hub](https://github.com/uibcdf/topomt/discussions/154). A fix must
+reconcile its current card/index and owning issue/report while preserving the
+original observation as history. Manuscript reuse needs a target-specific review;
+resolved source-scoped history is not a current general limitation.
+
 The user refined the publication target on 2026-11-07: a
 [study and benchmark area](study_zone.md), with one named unit per system,
 DFND observations and original third-party comparisons. Case identities use

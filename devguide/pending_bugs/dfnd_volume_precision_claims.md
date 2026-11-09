@@ -64,3 +64,12 @@ metadata before changing code. Test all-hit/no-hit and partial-hit cases first;
 verify analytic examples and sampling coverage. Document quadrature order and
 unknown discretization error honestly. Reconcile maturity/metric wording without
 conflating numerical error with region/model error.
+
+## Comparative finding navigation — 2026-11-08
+
+The [maintained finding card](https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482187) carries the current
+scoped conclusion and dated correction/review history. This report retains its
+technical evidence; before manuscript reuse follow the
+[comparative-finding lifecycle](../comparative_findings.md) and review the actual
+target profile. Historical observations and source fixes do not automatically
+describe every current release.

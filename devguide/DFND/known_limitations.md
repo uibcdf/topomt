@@ -5,6 +5,12 @@ implementation sprint. It consolidates the conceptual weak points identified
 during the external geometric review and the project's own pre-implementation
 audit.
 
+Navigation update — 2026-11-08: use the maintained
+[comparative-findings hub](https://github.com/uibcdf/topomt/discussions/154)
+and [lifecycle instructions](../comparative_findings.md) for current scoped
+claims, corrections and manuscript review. This dated conceptual register is
+historical context, not an automatically current list of paper limitations.
+
 This is a contract, not a list of fears. Every entry is tagged with a v1 policy
 (`mitigate`, `flag`, or `defer`) and a validation hook so the team knows what is
 attacked now and what is documented and consciously postponed.

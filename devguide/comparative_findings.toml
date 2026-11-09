@@ -1,0 +1,67 @@
+# Navigation/lifecycle metadata only; scientific analysis is in the linked cards.
+schema_version = 1
+hub_url = "https://github.com/uibcdf/topomt/discussions/154"
+
+[[findings]]
+id = "tetrahedron-boundary-patches"
+kind = "dfnd_limitation"
+status = "current"
+summary = "Whole-face exterior clustering does not count disconnected free hull patches."
+scope = "Frozen regular tetrahedron at 1.2 angstroms; source-workspace profile recorded in boundary_connectivity_v1/native_correspondence.json; no general biological mouth claim."
+issue = "uibcdf/topomt#151"
+evidence = ["docs/content/benchlab/synthetic/regular_tetrahedron/boundary_connectivity.md", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/native_correspondence.json", "devguide/pending_proposals/dfnd_physical_boundary_refinement.md"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-08"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186"
+
+[[findings]]
+id = "dfnd-volume-precision"
+kind = "dfnd_limitation"
+status = "current"
+summary = "Volume exactness and finite-sample uncertainty are overstated for the recorded methods."
+scope = "Reproduction at source 7bd47faba6179a6e02444331e442acd251572564. Reviewed source file blob 838fec4a66bd84dc295f26a59a99a8995a217c29 is unchanged at a4f1be84197578e33c28ab62517933b2b54a6bd9; no fresh numerical or installed qualification is asserted."
+issue = "uibcdf/topomt#75"
+evidence = ["devguide/pending_bugs/dfnd_volume_precision_claims.md", "topomt/dfnd/core/solvent_volume.py"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-08"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482187"
+
+[[findings]]
+id = "dfnd-length-argument-admission"
+kind = "dfnd_limitation"
+status = "resolved"
+summary = "Historical missing length digesters in the DFND public dispatcher were corrected in source."
+scope = "epsilon, residence_tolerance and permeability_tolerance in get_topography(method=dfnd), explicit units and argument-specific diagnostics; source-only correction."
+issue = "uibcdf/topomt#147"
+evidence = ["devguide/archive/dfnd_dispatch_lengths.md", "tests/test_dfnd_dispatch_lengths.py"]
+fix_revision = "27478e65b916ba0e326c08ade13bf5ca24996b9c"
+regression_guard = "tests/test_dfnd_dispatch_lengths.py::test_explicit_dfnd_lengths_have_digesters_and_preserve_the_probe_model"
+resolution_scope = "The three public length adapters and diagnostics at the fixing source commit; no scientific-kernel, installed-package or complete support-matrix claim."
+resolution_evidence = ["devguide/archive/dfnd_dispatch_lengths.md", "tests/test_dfnd_dispatch_lengths.py"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-08"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482188"
+
+[[findings]]
+id = "mole-four-atom-execution"
+kind = "third_party_limitation"
+status = "needs_review"
+summary = "Retained MOLE four-atom standard execution failed; input applicability and cause remain unqualified."
+scope = "Original MOLE 2.5.26.10.26, retained regular-tetrahedron standard settings and submitted PDB. Execution failure, not demonstrated geometric inferiority."
+evidence = ["docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/mole-standard/observation.json", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/mole-standard/failed.zip", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/README.md", "devguide/pending_proposals/mole_tetrahedron_applicability.md"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-08"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482189"
+issue = "uibcdf/topomt#156"
+
+[[findings]]
+id = "caver-four-atom-execution"
+kind = "third_party_limitation"
+status = "needs_review"
+summary = "Retained CAVER four-atom standard execution produced no accepted tunnel-profile artifact; applicability/cause need review."
+scope = "Original CAVER 3.02 with Java 21, retained regular-tetrahedron standard settings and submitted PDB. No inferred tunnel count or percolation verdict."
+evidence = ["docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/caver-standard/observation.json", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/caver-standard/failed.zip", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/README.md", "devguide/pending_proposals/caver_tetrahedron_applicability.md"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-08"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482190"
+issue = "uibcdf/topomt#155"

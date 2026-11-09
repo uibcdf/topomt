@@ -73,6 +73,22 @@ conversations, read `devguide/discussions.md` and consult
 classify it by resource type and supported feature/context labels, and link
 relevant study records and actionable issues in both directions. Preserve thread
 history and distinguish documentary study, executed comparisons and integration.
+Every concrete future action in any Discussion, including pending assessment,
+needs an owning issue linked from its originating post/comment. The issue board
+owns scheduling and disposition. Before finishing upkeep, inspect new/revised
+posts and replies for untracked actions, reuse/create the owning issues and keep
+the current follow-up coherent when work closes. Use the dated coverage map in
+`devguide/discussion_actions.md`; a closed organization issue does not cover a
+new resource review. Pure informational material must not hide promised work.
+
+Comparative findings: before recording an advantage/limitation, changing behavior
+linked to one, closing its issue or writing a scientific claim, read
+`devguide/comparative_findings.md`. Reconcile the current card, hub, lifecycle
+register, method/case summaries and owning issue/report in the same delivery.
+Preserve historical evidence; mark incomplete reconciliation `needs_review`.
+Run the comparative-finding and report-index checks. A corrected source-scoped
+limitation cannot remain in the current view or be reused as a present-day paper
+claim without target-specific review; issue closure alone does not prove a fix.
 
 ---
 

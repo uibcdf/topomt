@@ -173,6 +173,9 @@ review is opened, then add its canonical thread to the resource register.
 | [MoloVol](https://github.com/molovol/MoloVol) | MIT; [original method paper](https://journals.iucr.org/j/issues/2022/04/00/yr5079/yr5079.pdf) | Volumes/surfaces of molecules and unit cells; useful probe-center versus probe-occupied volume definitions for synthetic systems. Review exact CLI, radii, region definitions and selected version before admission. |
 | [PyVOL](https://github.com/schlessinger-lab/pyvol) | MIT wrapper/library; official README documents an MSMS executable dependency | Pocket/subpocket segmentation and surface/volume representations. Review the entire MSMS acquisition/licence chain and current Python compatibility before deciding whether a no-payment route meets our scope. The wrapper licence alone does not admit its backend. |
 
+The documentary assessment of these volume/region references, together with
+POVME, is queued in [#159](https://github.com/uibcdf/topomt/issues/159).
+
 ## New research intake — 2026-11-08
 
 | Lead | Sources and access evidence | Scientific question and next gate |
@@ -193,7 +196,9 @@ No local installation, original execution, TopoMT provider or comparative
 advantage is established by this intake. Periodic channel connectivity cannot
 be equated directly with an isolated tetrahedron's hull-boundary patches or
 native `Percolating` object. Revisit for a separately defined connectivity/volume
-study; the active three-case DFND sequence remains unchanged.
+study under [#167](https://github.com/uibcdf/topomt/issues/167); the active
+three-case DFND sequence remains unchanged. Other concrete catalogue follow-up
+is routed through the [complete Discussion action audit](discussion_actions.md).
 
 ## Maintenance rule
 
