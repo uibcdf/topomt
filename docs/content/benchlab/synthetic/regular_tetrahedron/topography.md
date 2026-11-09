@@ -25,7 +25,11 @@ resident wet component; the mesh and native dry decomposition remain available.
 
 Native dry components are not already public convexity or interface objects.
 Mouth objects represent native contact clusters; their physical connectedness
-and exact mouth count retain separate validation requirements. Classification
+and exact mouth count retain separate validation requirements. The subsequent
+[independent boundary certificate](boundary_connectivity.md) establishes four
+separate free hull patches at 1.2 Å, versus the current single native face
+cluster and no public `Mouth`. Physical refinement is tracked in #151; the
+registry audit alone does not establish geometric completeness. Classification
 threshold confidence is not scientific probability, and volume estimates remain
 numerically unqualified under #75. Full neutral public support adoption is #60.
 

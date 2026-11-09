@@ -46,10 +46,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (2)
+### Active (1)
 
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
-- [`tetrahedron_boundary_connectivity.md`](tetrahedron_boundary_connectivity.md) — [#150](https://github.com/uibcdf/topomt/issues/150) — Independently certify four tetrahedron boundary patches and contrast native grouping. *(active, inspected)*
 
 ### Partial (5)
 
@@ -59,8 +58,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 - [`topography_context_and_support.md`](topography_context_and_support.md) — [#60](https://github.com/uibcdf/topomt/issues/60) — Adopt explicit Topography analysis context and spatial support. *(partial, measured)*
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
-### Open (1)
+### Open (2)
 
 - [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
+- [`dfnd_physical_boundary_refinement.md`](dfnd_physical_boundary_refinement.md) — [#151](https://github.com/uibcdf/topomt/issues/151) — Refine physical boundary patches beyond native whole-face exterior clusters. *(open, reproduced)*
 
 <!-- /generated -->

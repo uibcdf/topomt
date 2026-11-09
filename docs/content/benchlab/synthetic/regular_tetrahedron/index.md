@@ -18,6 +18,7 @@ system
 dfnd
 comparisons
 Public Topography receiving <topography>
+Four boundary openings <boundary_connectivity>
 Effective atomic models <atomic_models>
 Comparison evidence <artifacts/comparisons_v1/README>
 Historical combined record <historical>
@@ -27,7 +28,7 @@ Historical combined record <historical>
 
 | Probe radius | Geometry predicts | Current DFND observation |
 | --- | --- | --- |
-| 1.2 Å | Room inside and through all four faces. | One fully open (`percolating`) component; four permeable faces grouped into one exterior link. |
+| 1.2 Å | Room inside and through all four faces. | One native `percolating` component; four admitted faces grouped into one exterior link. |
 | 1.4 Å | Room inside, with all faces sealed to this probe. | One `void` component without an exterior link. |
 | 1.7 Å | No room for this probe inside the finite cell. | No resident wet component; the tetrahedron itself still exists. |
 
@@ -39,7 +40,11 @@ checksums.
 This control supports the declared symmetric clearances and nonmarginal query
 regimes. It does not certify solvent-volume precision, general continuous probe
 navigation or biological pocket accuracy. An exterior-link cluster is distinct
-from a collection of independently identified physical mouths. Report filtering
+from a collection of independently identified physical mouths. The new
+[boundary-connectivity certificate](boundary_connectivity.md) establishes four
+separate hull patches at 1.2 Å, while the current native result has one face
+cluster and the public `Percolating` has no `Mouth` children. This identifies
+physical-refinement work; it does not change the historical results. Report filtering
 also changes what is displayed without changing the raw geometry.
 
 ## Inputs, results and reproducibility

@@ -1,0 +1,29 @@
+{
+  "schema": "topomt.benchlab.reference-execution-receipt/1",
+  "created_utc": "2026-11-09T01:10:49.839422+00:00",
+  "python_executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "python_version": "3.14.10",
+  "protocol_commit": "c85549f",
+  "scope": "Source-workspace certificate verification and actual public receiving; no optimizer, optional provider or server call.",
+  "verifiers": {
+    "devtools/verify_tetrahedron_boundary.py": "a4c61c0d9f3387d2737c00da437b52f56a4c96706e2f26e66388a13c0146260b",
+    "devtools/verify_opening_connectivity.py": "04f7dfc990c5dc540a198736fc3abf13ed18f920067746ce76e3eaba4cd913d3"
+  },
+  "generator_sha256": "45d951081138bf4b8d729bf264296b65aa39a921a2399d817beb923367ba0563",
+  "source_sha256": "c9a408ce8e1796625087eb27d2ce76c4151a2c2fe37c144b9b9d627e8887e89a",
+  "limits": {
+    "cpu_affinity": [
+      0
+    ],
+    "numerical_workers": 1,
+    "address_space_bytes": 6442450944,
+    "cpu_seconds": 60
+  },
+  "peak_rss": {
+    "value": 275836,
+    "unit": "KiB",
+    "meaning": "Process peak RSS on this Linux execution, not a comparative benchmark."
+  },
+  "preserved_file_count": 161,
+  "qualification": "Single shared Python 3.14.10 source-workspace execution, not installed/matrix qualification."
+}

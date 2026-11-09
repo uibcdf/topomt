@@ -122,7 +122,7 @@ def first_betti(
     }
 
 
-def _verify_intersections(
+def verify_convex_intersections(
     coords: np.ndarray,
     parent_ids: list[int],
     triangle: np.ndarray,
@@ -130,7 +130,71 @@ def _verify_intersections(
     tolerance: float,
     records: list[dict],
     budget: int,
-) -> tuple[dict[str, int], float]:
+    *,
+    length_unit: str,
+) -> dict[str, Any]:
+    """Verify a complete two-skeleton of equal-ball intersections on a triangle.
+
+    Parameters
+    ----------
+    coords, triangle : numpy.ndarray
+        Atomic centers and three triangle vertices in ``length_unit``.
+    parent_ids : list[int]
+        Unique source IDs corresponding to rows of ``coords``.
+    expanded_radius, tolerance : float
+        Common closed-ball radius and positive decision margin in ``length_unit``.
+    records : list[dict]
+        Complete singleton, active-pair and clique-triple decisions. Positive
+        decisions carry barycentric witnesses; negative ones carry convex dual
+        weights and a unit separating direction, all dimensionless records.
+    budget : int
+        Maximum accepted number of records.
+    length_unit : str
+        Explicit length unit for every bare geometric argument.
+
+    Returns
+    -------
+    dict
+        Nerve ranks and a quantity-aware minimum decision margin in angstroms.
+
+    Raises
+    ------
+    ValueError
+        If geometry, a witness or the complete inventory cannot be verified.
+
+    Examples
+    --------
+    Both BenchLab hull-boundary checkers use this routine with explicit units.
+    """
+    coords = np.asarray(
+        puw.get_value(puw.quantity(coords, length_unit), to_unit='angstroms')
+    )
+    triangle = np.asarray(
+        puw.get_value(puw.quantity(triangle, length_unit), to_unit='angstroms')
+    )
+    expanded_radius = float(
+        puw.get_value(puw.quantity(expanded_radius, length_unit), to_unit='angstroms')
+    )
+    tolerance = float(
+        puw.get_value(puw.quantity(tolerance, length_unit), to_unit='angstroms')
+    )
+    if (
+        coords.shape != (len(parent_ids), 3)
+        or not parent_ids
+        or len(set(parent_ids)) != len(parent_ids)
+        or triangle.shape != (3, 3)
+        or not np.isfinite(coords).all()
+        or not np.isfinite(triangle).all()
+        or not np.isfinite(expanded_radius)
+        or not np.isfinite(tolerance)
+        or expanded_radius <= 0
+        or tolerance <= 0
+        or np.linalg.norm(
+            np.cross(triangle[1] - triangle[0], triangle[2] - triangle[0])
+        )
+        == 0
+    ):
+        raise ValueError('Invalid convex-intersection geometry or tolerance')
     if len(records) > budget:
         raise ValueError('Intersection certificate exceeds its budget')
     source_map = {atom: index for index, atom in enumerate(parent_ids)}
@@ -194,7 +258,12 @@ def _verify_intersections(
     if set(decisions) != required:
         raise ValueError('Incomplete or extraneous triangle intersection inventory')
     triangles = sorted(triple for triple in triples if decisions[triple])
-    return first_betti(vertices, edges, triangles), min(margins)
+    return {
+        'nerve': first_betti(vertices, edges, triangles),
+        'minimum_intersection_decision_margin': _length(
+            min(margins), 'minimum_intersection_decision_margin'
+        ),
+    }
 
 
 def verify_certificate(
@@ -278,7 +347,7 @@ def verify_certificate(
         recorded, distances, atol=1e-12, rtol=0
     ):
         raise ValueError('Wall vertex-distance witnesses differ')
-    nerve, decision_margin = _verify_intersections(
+    intersections = verify_convex_intersections(
         coords,
         parent_ids,
         triangle,
@@ -286,7 +355,9 @@ def verify_certificate(
         tolerance,
         certificate['intersections'],
         protocol['maximum_intersection_records'],
+        length_unit='angstroms',
     )
+    nerve = intersections['nerve']
     origin = _values(protocol['origin'], 'origin', 'angstroms')
     axis = _values(protocol['axis'], 'axis', 'dimensionless')
     if axis.shape != (3,) or abs(np.linalg.norm(axis) - 1) > 1e-12:
@@ -323,9 +394,9 @@ def verify_certificate(
         'opening_component_count': nerve['beta_1'],
         'origin_connected_to_opening': True,
         'minimum_coverage_margin': coverage['minimum_coverage_margin'],
-        'minimum_intersection_decision_margin': _length(
-            decision_margin, 'minimum_intersection_decision_margin'
-        ),
+        'minimum_intersection_decision_margin': intersections[
+            'minimum_intersection_decision_margin'
+        ],
         'ray_minimum_clearance': _length(ray_clearance, 'ray_minimum_clearance'),
         'ray_crossing': _length(crossing, 'ray_crossing'),
         'scope': 'Strict-clearance probe-center components on this convex-hull boundary; not an intrinsic biological mouth count or a general graph-path proof.',

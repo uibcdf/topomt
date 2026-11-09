@@ -45,6 +45,37 @@ relocation under #133 preserves scientific cells, reviewed outputs and artifact
 bytes; earlier Showcase addresses retain relocation links. Source layout changes
 do not constitute another scientific execution or qualification.
 
+### Tetrahedron boundary connectivity — 2026-11-08
+
+Issue #150 freezes the unchanged input and probes under protocol `c85549f`.
+The independent certificate proves four disconnected strict-clearance patches
+on the atomic-center hull at 1.2 Å. All six shared edges are covered (minimum
+margin 0.25 Å); each face has a complete convex-intersection nerve with beta1=1.
+There are 32 independently verified subset decisions, minimum decision margin
+0.159956427 Å against 1e-6 Å. Four all-atom rays connect the free centroid to
+the patches and infinity with minimum clearance 1.359956427 Å. The 1.4 Å
+covered-boundary/free-centroid and 1.7 Å no-finite-free-center controls also pass.
+
+Actual raw/public receiving still gives one exterior cluster joining the four
+admitted faces, zero native wall faces, native `percolating` and one public
+`Percolating` without Mouth children. This follows its discrete contract but
+does not count physical hull patches or prove a fully collision-free boundary.
+The source clusters whole faces by shared atomic edges without checking a free
+crossing of that edge. The [case page](../../docs/content/benchlab/synthetic/regular_tetrahedron/boundary_connectivity.md)
+retains the independent proof, reviewed figure and native correspondence; all
+161 earlier scientific files remain byte-identical.
+
+Issue #151 separately owns the physical-refinement and Mouth/Percolating
+contract decision. It remains open: documenting this limitation does not fix
+it. Begin with a failing physical-connectivity regression on the same input,
+using the opened shell one-patch and covered shell controls. Do not simply
+rename this case Channel or equate triangle area with free aperture area.
+Continue on these three cases before the tube/protein phase. #75/#76/#60 retain
+their wider gates. Tests cover unit policies, explicit-unit shared checking,
+rigid motion/source permutation, damaged witnesses, real public receiving and
+unchanged replay of the previous shell certificate. No runtime scientific
+kernel, classifier, public API or input model changes in this extension.
+
 ### Current sequence and completion rule
 
 1. Re-anchor the regular tetrahedron: independent residence/gate values,
