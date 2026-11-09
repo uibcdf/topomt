@@ -68,6 +68,26 @@ refinement, correct scientific descriptions and demonstrate independent and live
 receiving guards with explicit units, source correspondence and rigid motion.
 Documentation/tracking alone does not satisfy runtime acceptance.
 
+## Acceptance proposal and red regression — 2026-11-09
+
+The [bounded contract proposal](../DFND/boundary_connectivity_contract.md)
+separates carrier-face links, physical hull patches, path-supported component
+contacts and public Mouth promotion. Its proposed first increment adds an
+inspectable physical-contact observation while preserving the current catalog;
+it does not settle final Mouth promotion or reclassify the tetrahedron.
+
+`tests/test_dfnd_physical_boundary_contract.py` replays the three independent
+certificates and reconstructs five actual public controls. Before marking the
+pending candidate views, it produced **2 passed / 7 failed**, all failures due
+to absent physical observations. Only that custom missing-view exception is
+now a strict expected failure; other errors or present but wrong results fail
+normally. These are implementation acceptance targets, not a delivered fix.
+
+See the [source checkpoint](../DFND/boundary_contract_checkpoint.md) for bounded
+execution, scope and deferred gates. #151 and its comparative finding remain
+open/current; runtime patch decomposition, component paths, supports and public
+receiving still require implementation and verification.
+
 ## Comparative finding navigation — 2026-11-08
 
 The [maintained finding card](https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186) carries the current

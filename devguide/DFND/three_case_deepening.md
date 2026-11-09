@@ -32,6 +32,14 @@ structures remain native-only and general public support adoption is unfinished.
 The next scientific work is physical mouth-patch connectivity and compatible
 continuous paths on these same inputs, followed by the declared volume work.
 
+The [physical-boundary acceptance proposal](boundary_connectivity_contract.md)
+now specifies the observable, availability/support contract and five frozen
+controls under #151. Its [source checkpoint](boundary_contract_checkpoint.md)
+records the initial red regression and narrowly marked pending views. This is
+preimplementation work: native clustering/classification and the current scoped
+limitation are unchanged. Implement the bounded patch/path observation before
+advancing to the volume work; do not treat expected failures as qualification.
+
 Under #149, the opened shell at 1.4 Å now has a verified single connected
 strict-clearance probe-center patch on its atomic-center convex-hull boundary.
 A complete cover blocks the other 127 faces; verified positive/negative

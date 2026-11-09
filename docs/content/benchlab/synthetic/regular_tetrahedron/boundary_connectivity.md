@@ -85,6 +85,13 @@ question. The four-patch reference, the opened shell's
 [covered shell boundary](../closed_shell/closure_at_0p2.md) provide controls for
 the next bounded implementation decision.
 
+The [acceptance proposal](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/boundary_connectivity_contract.md)
+now separates physical boundary patches, their path-supported contact with a
+region, and public Mouth promotion. Its regression panel replays these
+references and the actual public route. Physical patch/contact reporting remains
+unimplemented under #151; the proposal and pending tests do not correct the
+current limitation or change this case's classification.
+
 This observable depends on the declared atomic-center hull. It does not define
 an intrinsic biological mouth, free aperture area, general native graph paths,
 exact solvent volume or detector accuracy on proteins. It neither validates

@@ -10,6 +10,13 @@ boundary. It is not an intrinsic biological mouth definition or a validation
 of every native graph path. The earlier input, notebooks and observation files
 retain their bytes and original, more limited reference scope.
 
+This certificate supplies the one-patch control in the
+[physical-boundary acceptance proposal](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/boundary_connectivity_contract.md)
+under [#151](https://github.com/uibcdf/topomt/issues/151). Agreement here does
+not establish a general physical-patch reporting capability: that new view is
+still unimplemented, and the tetrahedron exposes the difference from native
+whole-face clustering.
+
 ```{figure} artifacts/opening_connectivity_v1/opening_patch.png
 :alt: Blocked hull faces and the selected face, with expanded-ball intersections leaving one connected free patch and the origin-ray crossing.
 

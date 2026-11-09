@@ -74,8 +74,11 @@ retains the independent proof, reviewed figure and native correspondence; all
 
 Issue #151 separately owns the physical-refinement and Mouth/Percolating
 contract decision. It remains open: documenting this limitation does not fix
-it. Begin with a failing physical-connectivity regression on the same input,
-using the opened shell one-patch and covered shell controls. Do not simply
+it. The [acceptance proposal](boundary_connectivity_contract.md) and
+[source checkpoint](boundary_contract_checkpoint.md) now retain the initial
+failing physical-connectivity regression, using the opened shell one-patch and
+covered shell controls. The seven absent candidate observations remain narrowly
+marked expected failures, not delivered physical refinement. Do not simply
 rename this case Channel or equate triangle area with free aperture area.
 Continue on these three cases before the tube/protein phase. #75/#76/#60 retain
 their wider gates. Tests cover unit policies, explicit-unit shared checking,

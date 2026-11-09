@@ -7,6 +7,12 @@ notebook outputs and native observations retain their original bytes and scope.
 This is retrospective reference strengthening: the earlier native `void` label
 was already known, so this is not a blind evaluation.
 
+This complete cover supplies the zero-patch control in the
+[physical-boundary acceptance proposal](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/boundary_connectivity_contract.md)
+under [#151](https://github.com/uibcdf/topomt/issues/151). The new regression
+panel replays this certificate alongside actual public receiving; physical
+patch/contact reporting remains unimplemented. The reference is unchanged.
+
 ## Why the certificate proves enclosure
 
 Expand every explicit atomic radius by the 0.2 Å probe. Subdivide each original
