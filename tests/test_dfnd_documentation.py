@@ -102,3 +102,8 @@ def test_documented_public_inspection_and_query_blocks_execute(tmp_path, monkeyp
     assert namespace['topography'].get_features(by='type', value='void')
     assert namespace['source_atom_indices'] == [0, 1, 2, 3]
     assert not namespace['larger'].dfn.components.wet
+    # A successful result can have unavailable descriptors: the reader must
+    # recover None rather than inventing a zero mouth or a fitted shape.
+    metrics = namespace['metrics']
+    for name in ('mouth_radius', 'occlusion', 'elongation', 'funnel'):
+        assert metrics[name] is None

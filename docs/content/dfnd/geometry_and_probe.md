@@ -69,11 +69,50 @@ history {cite:p}`DFNDLeeRichards1971`.
 ## Delaunay as the carrier
 
 Ordinary Delaunay tetrahedra partition the atomic-center convex hull $H$ for a
-valid three-dimensional input. They do not tile all unbounded space. Internal
-faces connect neighboring cells; hull faces have no finite neighbor. The dual
-Voronoi construction helps explain the geometric family, but DFND uses its own
-radius-aware capacities rather than identifying every center with a Voronoi
-vertex or power center.
+valid three-dimensional input. A tetrahedron has four atom centers as vertices;
+its four triangular faces each use three of them. Sharing a face makes two cells
+neighbors. Hull faces have no finite neighbor. These finite cells do not tile
+all unbounded space.
+
+The defining **empty-circumsphere condition** says that no other input center
+lies strictly inside a cell's circumsphere. "Empty" here concerns atom centers,
+not atomic balls or probe clearance. Five cospherical centers can make the
+triangulation nonunique. See the [CGAL definition](https://doc.cgal.org/latest/Triangulation_3/index.html).
+
+The ordinary Voronoi cell of atom center $c_i$ is
+
+$$V_i=\{x:\|x-c_i\|\le\|x-c_j\|\text{ for every }j\}.$$
+
+It groups positions by nearest **center**. In a nondegenerate configuration,
+four meeting Voronoi cells identify a Delaunay tetrahedron; their meeting point
+is its circumcenter. Neighboring tetrahedra correspond to a Voronoi edge.
+[SciPy's spatial tutorial](https://docs.scipy.org/doc/scipy/tutorial/spatial.html#voronoi-diagrams)
+introduces both constructions. A circumcenter can lie outside its tetrahedron;
+it is not automatically an admissible residence center on the closed support.
+
+## Atomic radii do not make every construction equivalent
+
+DFND uses the ordinary triangulation as its carrier, then evaluates additive
+radius-aware clearance. Compare the fields:
+
+| Field | Per-atom expression | Role |
+| --- | --- | --- |
+| Ordinary nearest-center distance | $\|x-c_i\|$ | Defines ordinary Voronoi/Delaunay geometry. |
+| Additive clearance | $\|x-c_i\|-r_i$ | Minimum gives DFND's spherical-probe clearance. |
+| Power distance with weight $r_i^2$ | $\|x-c_i\|^2-r_i^2$ | Defines power diagrams and regular triangulations. |
+
+The [CGAL regular-triangulation definition](https://doc.cgal.org/latest/Triangulation_3/index.html)
+specifies the weighted construction. For unequal radii these fields need not
+choose the same limiting atom or the same candidate center. For example, atom
+distances 3 and 4 Å with radii 1 and 2.5 Å give clearances 2 and 1.5 Å, but powers
+8 and 9.75 Å²: the smaller value belongs to a different atom in the two fields.
+Tangency for a probe of radius $R$ requires distances $r_i+R$, as derived in the
+[clearance appendix](appendices/clearance_derivations.md). It cannot be replaced
+by equal power to the original balls.
+
+Thus an ordinary empty circumsphere is not a maximal physical probe sphere.
+DFND computes its own constrained capacities rather than treating every Voronoi
+vertex or power center as the answer.
 
 Alpha shapes provide a related geometric framework {cite:p}`DFNDAlphaShapes1994`.
 Current DFND does not construct a weighted alpha complex or inherit its pocket
@@ -100,3 +139,11 @@ it is not automatically a numerical resolution test.
 
 **Reading check:** which of these sets would you measure when asking for a
 cavity's empty volume, and which when asking whether a probe can enter it?
+
+```{dropdown} Check your reasoning
+For empty volume, integrate bare empty space over a declared finite region.
+For entry, ask whether admissible center positions connect to the exterior under
+the chosen strictness. A nonzero empty volume answers neither the probe-size
+test nor the path question. The [measurement chapter](measurements.md) keeps
+these integrals separate.
+```

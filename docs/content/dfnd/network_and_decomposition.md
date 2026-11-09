@@ -60,6 +60,35 @@ Residence regions answer another question: how resident nodes group inside one
 transit component. One component can contain several resident regions joined
 through the selected connector policy. Record those supports separately.
 
+## Follow a multi-cell graph by hand
+
+```{figure} figures/finite_decomposition.svg
+:alt: Before removing OCEAN, its edges join the A-C-B and D-E groups through the exterior. After removal these are separate finite components, alongside the isolated resident cell S. C is a connector.
+
+An abstract policy illustration, not a geometrically certified arrangement of
+atoms. Circles are resident cells; the diamond is a nonresident connector.
+Lines stand for admitted graph contacts, not center trajectories.
+```
+
+Assume only the drawn contacts are admitted, and enable connectors. The three
+finite components after removing OCEAN are $\{A,C,B\}$, $\{D,E\}$ and $\{S\}$.
+The first contains two separate residence regions, $\{A\}$ and $\{B\}$, joined
+through connector $C$. The sealed resident cell $S$ remains a component despite
+having no exterior contact. Keeping OCEAN would join the first two groups through
+the root and hide their finite separation.
+
+Switching to `resident_only` removes $C$ from the transit node set, yielding four
+finite components: $\{A\}$, $\{B\}$, $\{D,E\}$ and $\{S\}$. By contrast,
+`min_size=3` under the original connector policy leaves all three raw components
+intact, but includes only $\{A,C,B\}$ in the compatibility reporting view: the
+current size filter counts **transit cells**, including connectors.
+
+The diagram establishes the consequences of the stated graph rules. It supplies
+no atomic geometry realizing the nonresident connector, no count of physical
+boundary patches, and no physical crossing certificate. Those require the
+separate [local-capacity](local_capacities.md) and
+[boundary](exterior_and_boundaries.md) arguments.
+
 ## What the result retains
 
 The raw result includes all finite cell/face records, `wet_components`,
@@ -87,3 +116,10 @@ is assigned.
 
 **Reading check:** why can changing `min_size` remove a displayed finding without
 changing the raw decomposition, while changing transit policy can change it?
+
+```{dropdown} Check your reasoning
+`min_size` filters an already decomposed result. Transit policy determines which
+nodes enter that decomposition. In the diagram, filtering hides small groups;
+removing connector C actually separates A from B. Neither operation changes
+cached local capacities.
+```

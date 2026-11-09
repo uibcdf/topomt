@@ -2,6 +2,8 @@
 
 Date: 2026-11-09. Owner: [#170](https://github.com/uibcdf/topomt/issues/170).
 Status: **implemented in the public source documentation on 2026-11-09**.
+The subsequent reader/source refinement is tracked separately in
+[#172](https://github.com/uibcdf/topomt/issues/172) and the delivery checkpoint.
 Read [DFND: Theory and Method](../../docs/content/dfnd/index.md) and the
 [delivery checkpoint](documentation_checkpoint.md). The proposal and critical
 review below retain their historical planning wording; their unimplemented

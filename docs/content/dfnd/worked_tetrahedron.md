@@ -12,11 +12,20 @@ $a=5.3$ Å, with equal atomic radii $r=1.7$ Å. The JSON stores full-precision
 quantity records; the PDB supplies dummy topology but rounds coordinates.
 Restore the JSON coordinates before analysis.
 
-Download these files into the same local directory:
+Save the two input files inside `tetrahedron_input/`, and save the script next
+to that directory:
 
 - {download}`input.json <../benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json>`
 - {download}`input.pdb <../benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.pdb>`
 - {download}`tetrahedron.py <examples/tetrahedron.py>`
+
+```text
+tetrahedron_study/
+  tetrahedron.py
+  tetrahedron_input/
+    input.json
+    input.pdb
+```
 
 The script verifies the frozen JSON SHA-256 and received radii, uses and checks
 the current `vdw` radius policy, and explicitly selects probes 1.2/1.4/1.7 Å,
@@ -27,7 +36,8 @@ diagnostic-only intrusion, face bank adjacency and `min_size=0`.
 python tetrahedron.py tetrahedron_input
 ```
 
-Here `tetrahedron_input` is the directory containing the two input files. No
+Run the command from `tetrahedron_study/`. The Python snippets below use that
+same working directory, with `tetrahedron.py` available for import. No
 provider service, downloaded protein or additional engine is required.
 
 ## Predict the local capacities independently
@@ -104,6 +114,26 @@ capacities in nm. Compare those values after conversion rather than treating
 The complete carrier volume is $a^3/(6\sqrt2)$ in Å³. It includes atom-occupied
 sectors; the fast local empty estimate subtracts exclusion only approximately.
 Neither value is automatically a probe-center-accessible volume.
+
+## Read an unavailable descriptor correctly
+
+The Void has a valid interior capacity but no native exterior link. Consequently
+it has no mouth radius or occlusion ratio. Its single center also cannot define
+PCA elongation or a four-level access profile:
+
+```python
+metrics = component.morphometrics
+assert metrics['mouth_radius'] is None
+assert metrics['occlusion'] is None
+assert metrics['elongation'] is None
+assert metrics['funnel'] is None
+```
+
+These `None` values are expected availability states. They do not mean a zero
+mouth area, zero elongation or a failed analysis. The stored `buriedness` is 0
+under the no-exterior flat-depth convention, which does not imply shallow
+physical burial. [Classification](classification.md#reconstruct-the-morphology-record)
+specifies the full morphology record and its fallbacks.
 
 ## Reuse the geometry without mutating the public finding
 

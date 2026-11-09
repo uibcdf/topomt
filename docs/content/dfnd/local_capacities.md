@@ -39,14 +39,22 @@ not by themselves supply a formal completeness proof for every degenerate input.
 ## From capacities to states
 
 With numerical epsilon $\varepsilon$ and selected tolerances $\tau_r,\tau_g$,
-the current query admits
+the capacity tests are
 
 $$\text{resident}(T)\iff R_T\ge p-\varepsilon-\tau_r,$$
-$$\text{permeable}(f)\iff R_f\ge p-\varepsilon-\tau_g.$$
+$$\text{capacity-pass}(f)\iff R_f\ge p-\varepsilon-\tau_g.$$
+
+Under `flag_only`, a capacity-passing face is admitted. Under `block_suspect`,
+admission additionally requires no intrusion-suspect flag. Counts and local
+classes below use that **post-policy** admission decision. A face may pass its
+capacity threshold and still be blocked.
 
 A margin is the capacity minus $p$. Decisions close to the corresponding band
-are marked marginal. Epsilon favors admission at equality; a larger tolerance
-widens the band. That policy is inspectable and affects the discrete result.
+are marked marginal: $|R_T-p|\le\varepsilon+\tau_r$ for residence and
+$|R_f-p|\le\varepsilon+\tau_g$ for gate capacity. These flags retain the numerical
+proximity even when intrusion policy blocks a face. Epsilon widens admission
+below the nominal threshold; a larger tolerance widens the band further. That
+policy is inspectable and affects the discrete result.
 It is not a measured probability of passage or molecular flexibility.
 
 | Local permeability class | Admitted faces of a tetrahedron |

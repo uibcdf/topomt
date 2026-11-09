@@ -20,15 +20,26 @@ which the local, discrete construction is interpreted and tested.
 
 ## Choose a reading route
 
-**To understand a result:** read [the overview](overview.md),
-[the geometric model](geometry_and_probe.md), the summaries of
-[local capacities](local_capacities.md) and [decomposition](network_and_decomposition.md),
-then [classification](classification.md) and the [worked example](worked_tetrahedron.md).
-The example connects a public finding to its exact input and native support.
+**To start with a result:** read [the overview](overview.md), then follow the
+[worked example](worked_tetrahedron.md). It predicts three probe outcomes before
+running the analysis and traces one public finding back to its native support.
+Return to [the geometric model](geometry_and_probe.md) and
+[local capacities](local_capacities.md) for the definitions behind each step.
 
 **To study or implement the method:** follow the four parts below, then the
 derivations, conditional properties and pseudocode. The
 [notation sheet](appendices/notation.md) is available throughout.
+
+| Your question | Continue here |
+| --- | --- |
+| What exactly is empty or accessible, and why Delaunay? | [Geometry and the probe](geometry_and_probe.md) |
+| How do local cells become regions? | [Decomposition, with a multi-cell illustration](network_and_decomposition.md#follow-a-multi-cell-graph-by-hand) |
+| Why do links, physical patches and Mouth counts differ? | [Exterior and boundaries](exterior_and_boundaries.md) |
+| What makes a result a Pocket, Groove or Percolating? | [Classification and descriptor formulas](classification.md) |
+| What about protrusions or interfaces? | [Dry banks and relief](dry_topography.md), then [interfaces](interfaces.md) |
+| What do hierarchy, paths and a changing probe tell me? | [Internal structure](hierarchy_and_paths.md), then [scale and dynamics](scale_and_dynamics.md) |
+| What volume was measured, and how accurately? | [Measurements](measurements.md) |
+| How do I inspect and reproduce the result? | [Results and provenance](results_and_provenance.md), then [numerical policy](numerics_and_reproducibility.md) |
 
 ## Foundations and design
 
@@ -96,9 +107,9 @@ the distinction changes the interpretation.
 The account describes the source method reviewed in November 2026. Physical
 boundary refinement, general public support and several numerical/scientific
 questions remain under development; their current owners are linked in
-[validation and scope](validation_and_scope.md). This is a complete explanation
-of the present approach and its intended extensions, not a claim that every
-extension is implemented or every physical inference certified.
+[validation and scope](validation_and_scope.md). The chapters explain the present
+approach and identify intended extensions with their implementation status;
+they do not claim that every extension or physical inference is certified.
 
 For task-oriented geometry/query operations, use the
 [User guide](../user/dfnd_geometry.md). For fixed systems, independent references

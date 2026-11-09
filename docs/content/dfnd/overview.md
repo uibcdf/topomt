@@ -91,3 +91,10 @@ equivalence or superiority. [References](references.md) explain that context.
 
 **Reading check:** can a region admit a probe position without providing an
 entry path from outside? The next chapter defines both questions precisely.
+
+```{dropdown} Check your reasoning
+Yes. At 1.4 Å the tetrahedron has a free centroid and a completely covered hull.
+The probe fits mathematically inside, but no admissible center path can cross
+the hull from outside. The [worked example](worked_tetrahedron.md) follows that
+distinction from its independent geometry to a public Void.
+```

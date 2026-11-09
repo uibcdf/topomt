@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (39)
+### Resolved (40)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
@@ -22,6 +22,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`closed_shell_wall_cover.md`](closed_shell_wall_cover.md) — [#148](https://github.com/uibcdf/topomt/issues/148) — Certify the frozen closed-shell wall at the historical 0.2 angstrom probe. *(resolved, measured)*
 - [`comparative_findings_lifecycle.md`](comparative_findings_lifecycle.md) — [#153](https://github.com/uibcdf/topomt/issues/153) — Keep comparative findings current when DFND limitations are corrected. *(resolved, measured)*
 - [`dfnd_dispatch_lengths.md`](dfnd_dispatch_lengths.md) — [#147](https://github.com/uibcdf/topomt/issues/147) — Register the three missing native length digesters in the public dispatcher. *(resolved, reproduced)*
+- [`dfnd_documentation_review.md`](dfnd_documentation_review.md) — [#172](https://github.com/uibcdf/topomt/issues/172) — Strengthen the DFND method book after a reader and source audit. *(resolved, measured)*
 - [`dfnd_scientific_documentation.md`](dfnd_scientific_documentation.md) — [#170](https://github.com/uibcdf/topomt/issues/170) — Present DFND theory and method in a dedicated public documentation section. *(resolved, measured)*
 - [`discussions_resource_organization.md`](discussions_resource_organization.md) — [#103](https://github.com/uibcdf/topomt/issues/103) — Organize resource Discussions with preserved history, facets and maintained guidance. *(resolved, inspected)*
 - [`expand_original_providers.md`](expand_original_providers.md) — [#135](https://github.com/uibcdf/topomt/issues/135) — Consolidate five original providers and add four no-cost local engines before BenchLab resumes. *(resolved, measured)*

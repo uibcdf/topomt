@@ -90,6 +90,9 @@ derived view, not canonical exclusive membership.
 Mesh neighbors are also not automatically movement neighbors. The current
 `dfn.graph.neighbors` helper filters mesh adjacency by residence labels; a
 traversable route must respect the actual face `transit_edge` decisions.
+Similarly, `permeability_state='permeable'` records post-policy face admission,
+but an internal `transit_edge` also needs two finite transit endpoints. Passing
+the face test alone need not create an edge in the query graph.
 
 ## Attribution and availability
 

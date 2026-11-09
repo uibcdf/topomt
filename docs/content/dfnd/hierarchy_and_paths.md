@@ -15,7 +15,37 @@ This distance is dimensionless. Refining or changing the mesh can change its
 value without changing a physical length proportionally. For a sealed component
 with no exterior boundary, the current flat-depth convention does not mean its
 interior is physically shallow; the chosen exterior-distance construction has
-no starting boundary there.
+no starting boundary there. All of its stored node depths are zero. For an
+accessible component, propagation uses the admitted transit graph, including
+enabled connectors; a stored depth is not a count restricted to resident nodes.
+
+## Access profiles and the funnel descriptor
+
+At each represented depth $d$, the current descriptor selects the largest
+resident-node capacity at that depth:
+
+$$q_d=\max_{T\text{ resident},\ \operatorname{depth}(T)=d}R_T.$$
+
+Levels without eligible nodes are omitted. With at least four levels, fit
+$\hat q_d=a+bd$ by unweighted least squares and calculate
+
+$$g=\frac{b(d_{\max}-d_{\min})}{\max_d q_d},\qquad
+s=1-\frac{\sum_d(q_d-\hat q_d)^2}{\sum_d(q_d-\bar q)^2}.$$
+
+`gradient` is $g$, negative for narrowing inward; `steadiness` is the fit score
+$s$, stored rounded to four decimals. The implementation uses $s=0$ for a
+constant profile and $g=0$ if the maximum capacity is nonpositive. With fewer
+than four levels, `funnel` is `None`, not a negative detection. As elsewhere in
+the morphology diagnostics, the fallback for an empty resident list is the
+full component node list.
+
+The provisional `is_funnel` rule requires $g\le-0.4$ and the **unrounded**
+$s\ge0.8$. A constant-radius profile fails the narrowing test even if it looks
+like a well-defined tube. Multiple branches at one depth are collapsed to their
+maximum, so this profile is not a clearance measurement along one chosen path.
+It does not measure a physical transport gradient or free energy, and does not
+automatically promote a public Funnel feature. The single-cell tetrahedron has
+neither enough levels for this fit nor enough centers for PCA elongation.
 
 ## Capacity merge hierarchy
 

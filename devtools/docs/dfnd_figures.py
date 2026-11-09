@@ -57,7 +57,7 @@ def generate_figures(
     Parameters
     ----------
     output_directory
-        Destination for the three canonical SVG diagrams.
+        Destination for the four canonical SVG diagrams.
     preview_directory
         Optional destination for raster inspection copies.
 
@@ -229,6 +229,98 @@ def generate_figures(
         _arrow(ax, (0.5, 0.70), (0.5, 0.59))
         _arrow(ax, (0.5, 0.33), (0.5, 0.21))
     save(fig, 'persistence_axes')
+
+    fig, axes = plt.subplots(1, 2, figsize=(12.8, 4.8))
+    positions = {
+        'A': (0.10, 0.48),
+        'C': (0.26, 0.48),
+        'B': (0.42, 0.48),
+        'D': (0.67, 0.48),
+        'E': (0.84, 0.48),
+        'S': (0.84, 0.19),
+    }
+    ocean = (0.45, 0.86)
+    for index, ax in enumerate(axes):
+        ax.set(xlim=(-0.02, 1.02), ylim=(0.02, 1.02))
+        ax.axis('off')
+        ax.set_title(
+            'Include the common exterior root' if index == 0 else 'Remove OCEAN',
+            fontsize=12,
+            fontweight='bold',
+        )
+        if index == 0:
+            for name in ('A', 'D'):
+                point = positions[name]
+                ax.plot(
+                    [ocean[0], point[0]],
+                    [ocean[1], point[1]],
+                    '--',
+                    color='#64748b',
+                    linewidth=1.5,
+                )
+            ax.text(
+                *ocean,
+                'OCEAN',
+                ha='center',
+                va='center',
+                fontsize=10,
+                bbox={'boxstyle': 'round,pad=0.5', 'fc': '#f1f5f9', 'ec': '#64748b'},
+            )
+        else:
+            for x, y, width in [
+                (0.025, 0.37, 0.47),
+                (0.59, 0.37, 0.33),
+                (0.765, 0.08, 0.15),
+            ]:
+                ax.add_patch(
+                    FancyBboxPatch(
+                        (x, y),
+                        width,
+                        0.22,
+                        boxstyle='round,pad=0.01',
+                        facecolor='#f0fdf4',
+                        edgecolor='#16a34a',
+                        linewidth=1,
+                    )
+                )
+            ax.text(
+                0.5,
+                0.84,
+                'Three finite components',
+                ha='center',
+                fontsize=11,
+                color='#166534',
+            )
+        for left, right in [('A', 'C'), ('C', 'B'), ('D', 'E')]:
+            start, end = positions[left], positions[right]
+            ax.plot(
+                [start[0], end[0]], [start[1], end[1]], color='#334155', linewidth=2
+            )
+        for name, (x, y) in positions.items():
+            connector = name == 'C'
+            ax.scatter(
+                x,
+                y,
+                s=950,
+                marker='D' if connector else 'o',
+                facecolor='#ffedd5' if connector else '#dbeafe',
+                edgecolor='#9a3412' if connector else '#1e40af',
+                zorder=3,
+            )
+            ax.text(x, y, name, ha='center', va='center', fontsize=11, zorder=4)
+        ax.text(0.1, 0.28, 'Resident', ha='center', fontsize=10, color='#1e40af')
+        ax.text(0.32, 0.28, 'Connector', ha='center', fontsize=10, color='#9a3412')
+        ax.text(0.67, 0.16, 'Sealed', ha='right', fontsize=10, color='#475569')
+    fig.text(
+        0.5,
+        0.01,
+        'Abstract graph-policy illustration; edges are admitted contacts, '
+        'not certified physical paths.',
+        ha='center',
+        fontsize=10,
+        color='#475569',
+    )
+    save(fig, 'finite_decomposition')
     return paths
 
 

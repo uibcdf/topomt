@@ -8,7 +8,7 @@ all be correct answers to different questions.
 
 For a declared finite carrier union $R$, bare empty volume is
 
-$$V_{\rm empty}(R)=\int_R\mathbf1[c_{\rm all}(x)>0],dx.$$
+$$V_{\rm empty}(R)=\int_R\mathbf1[c_{\rm all}(x)>0]\,dx.$$
 
 Probe-center volume instead uses $\mathbf1[c_{\rm all}(x)>p]$. Exterior-accessible
 center volume further restricts to an exterior-reachable subset. Swept probe
@@ -50,6 +50,17 @@ volume and checks the relevant atom balls. A fixed seed supplies reproducibility
 Its reported error is approximately two estimated standard errors, not a
 deterministic error bound. In particular, all-hit or no-hit samples can produce
 zero estimated error without proving the true volume exact.
+
+If the carrier has volume $V_R$, $N$ samples are drawn and $K$ are empty,
+the current estimate and reported half-width are
+
+$$\hat f=K/N,\qquad \hat V=V_R\hat f,\qquad
+e_{\rm MC}=2V_R\sqrt{\hat f(1-\hat f)/N}.$$
+
+The last expression explains the endpoint problem: $K=0$ or $K=N$ sets it to
+zero regardless of whether unobserved small empty or occupied subsets remain.
+It also explains why changing the carrier changes both the target integral and
+the scaling of its sampling error.
 
 The compatibility `method='exact'` route performs nested numerical quadrature
 with a fixed order. Union of covered intervals handles overlaps along an

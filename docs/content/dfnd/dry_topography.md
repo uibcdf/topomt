@@ -72,3 +72,10 @@ relationship is developed in the [next chapter](interfaces.md).
 
 **Reading check:** if two molecular chains form one dry bank, has the molecular
 interface disappeared, or has the chosen geometric grouping fused its banks?
+
+```{dropdown} Check your reasoning
+The grouping has fused the bank support. It says nothing by itself about whether
+a participant-to-participant interface exists. Participant identity and the
+localized contact/patch criterion are additional observations, as the
+[interface chapter](interfaces.md) explains.
+```

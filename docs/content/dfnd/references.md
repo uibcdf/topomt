@@ -31,6 +31,11 @@ provider citations also remain available through
 
 - [SciPy Delaunay reference](https://docs.scipy.org/doc/scipy/reference/generated/scipy.spatial.Delaunay.html):
   backend, neighbor indexing and precision qualifications.
+- [SciPy spatial tutorial](https://docs.scipy.org/doc/scipy/tutorial/spatial.html):
+  introductory Delaunay and Voronoi constructions.
+- [CGAL 3D triangulations manual](https://doc.cgal.org/latest/Triangulation_3/index.html):
+  empty-sphere and regular-triangulation definitions. This is a geometric
+  reference; current DFND uses SciPy/Qhull, not the CGAL implementation.
 - [Current native source](https://github.com/uibcdf/topomt/tree/main/topomt/dfnd):
   clearance operators, query graph, catalog, typed results, measurements and
   lineage helpers. The book describes the November 2026 source account; inspect

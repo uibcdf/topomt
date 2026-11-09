@@ -7,6 +7,76 @@ The [proposal and critical review](documentation_section_plan.md) remain as
 dated design history. This checkpoint qualifies documentation/source examples,
 not an installed release, live-site deployment or scientific algorithm fix.
 
+## Post-delivery reader/source review — #172, 2026-11-09
+
+The follow-up review under [#172](https://github.com/uibcdf/topomt/issues/172)
+examined every chapter against the source and original proposal. The fourteen
+chapters and formal reference already covered the principal scientific topics;
+the gaps were foundational explanation, reconstructable descriptors and reader
+continuity. The refinement retains the original **21-page** organization.
+
+- Geometry now defines ordinary Voronoi cells and the empty-circumsphere
+  condition, distinguishes centers from atomic balls, and compares additive
+  clearance with power distance using an explicit unequal-radius example.
+  Definitions were checked against the official SciPy tutorial and CGAL manual;
+  CGAL is a reference, not a new dependency or runtime backend.
+- A fourth generated SVG walks through an abstract multi-cell graph before and
+  after removing OCEAN. The narrative compares resident regions, connectors,
+  `resident_only` and `min_size`, whose current count includes transit cells.
+  This is a policy illustration, not a new geometric certificate or BenchLab case.
+- Classification now specifies the actual morphology record, unweighted PCA
+  formula and degeneracy rule, no-mouth/diagnostic fallbacks, confidence and
+  marginality bands. The hierarchy chapter defines the depth-wise access fit
+  and provisional funnel thresholds. Stored `enclosable` is explained as a
+  current-support descriptor, not a proved future region history.
+- Gate threshold tests are now explicitly separated from post-intrusion-policy
+  admission and actual transit edges. Numerical marginality uses the recorded
+  absolute capacity margin even if policy blocks a face. Measurements show the
+  Monte Carlo estimate/error formula, including its known endpoint problem.
+- A shorter introductory route starts with the worked example; a question-to-
+  chapter table and six expandable answers support deeper reading. Downloads
+  now show the exact script/input-directory layout. The executed Void inspection
+  demonstrates unavailable mouth/occlusion/PCA/funnel values without replacing
+  them with zeros.
+
+These changes describe the existing scientific implementation; none changes a
+kernel, catalog threshold, physical interpretation claim or current finding
+status. Existing #151/#76/#75/#60/#61 scopes remain unchanged. No new empirical
+advantage or limitation was registered and no frozen scientific artifact was
+modified. The original delivery/check receipts below remain dated history.
+
+Review receipts live in `.cache/dfnd-documentation-review/`. The strengthened
+inline-reader guard first failed with the missing `metrics` observation, then
+all four documentation tests passed. The downloadable script was also copied
+from the built HTML into the documented directory layout and its actual command
+returned Percolating/Void/empty at the three adopted probes. All four SVGs
+regenerate byte-for-byte; the three original figures retain their bytes. The
+new graph figure was visually inspected.
+
+Fresh complete Sphinx build: exit 0, one worker, 10.07 s, peak RSS 275.1 MiB.
+All 21 pages and **1,872 local links/assets/anchors** pass the rendered audit;
+all six answer dropdowns render. There are zero warnings in the DFND section
+and the same eleven pre-existing whole-site warnings owned by #64. Ruff check,
+format check and local mypy pass for the two changed Python sources.
+
+The focused receiving/certificate/documentation/reporting/comparative panel gives
+**66 passed, 7 xfailed**, 10.64 s test time / 12.93 s process wall time, peak RSS
+313.0 MiB. Expected failures remain the narrowly declared #151 missing physical
+views; every executable documentation guard passes. The panel also protects
+the 161 frozen scientific files. The review's resolved record is
+[archived under #172](../archive/dfnd_documentation_review.md).
+
+Executions remain sequential, one CPU/numerical thread, with 6 GiB address-space
+and 60–120 s CPU limits. Live preflight found about 56.7 GiB available of
+60.5 GiB physical RAM, zero memory PSI and no active swapping in the sampled
+interval. No Slurm allocation was present; the prior socket-unavailable check
+still limits this session. Free resources were not considered reserved.
+
+### First-delivery evidence follows
+
+The counts, measurements and scope below describe the original #170 delivery,
+before the reader/source refinement above.
+
 ## Delivered reader path
 
 - Four navigation parts contain fourteen authored chapters: foundations/design;

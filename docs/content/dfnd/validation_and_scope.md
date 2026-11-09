@@ -92,3 +92,13 @@ platform/interpreter matrix or every provider route.
 
 **Reading check:** for a scientific claim you would make from a result, identify
 its measured set, model, inference, independent support and target software scope.
+
+```{dropdown} One worked answer
+Claim: the 1.4 Å tetrahedron has an enclosed admissible center region. The model
+is the four 1.7 Å atomic balls with the frozen coordinates and a strict center
+convention. Its centroid has clearance above 1.4 Å, while the complete hull is
+covered by expanded balls; any center path to infinity would have to cross that
+hull. The independent certificate supplies both statements. DFND's public Void
+agrees for the documented source/input, but this example gives no exact cavity
+volume and no blanket qualification of Void detection in arbitrary proteins.
+```
