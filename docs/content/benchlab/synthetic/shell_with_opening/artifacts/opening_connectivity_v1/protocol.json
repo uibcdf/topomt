@@ -1,0 +1,309 @@
+{
+  "schema": "topomt.benchlab.opening-connectivity-protocol/1",
+  "case_id": "shell_with_opening",
+  "owning_issue": "uibcdf/topomt#149",
+  "created_utc": "2026-11-09T00:08:46.230858+00:00",
+  "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+  "probe_radius": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "probe_radius",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1.4,
+    "block_digests": [
+      "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+    ],
+    "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+  },
+  "length_absolute": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "length_absolute",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1e-06,
+    "block_digests": [
+      "blake2b-128:fdc4aee404c6c8d3af6c444a146a42d5"
+    ],
+    "digest": "blake2b-128:3f449f091f8964e5dd214f9b8a75f2e2"
+  },
+  "barycentric_absolute": 1e-08,
+  "origin": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "origin",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "int64",
+      "shape": [
+        3
+      ],
+      "blocks": [
+        3
+      ]
+    },
+    "values": [
+      0,
+      0,
+      0
+    ],
+    "block_digests": [
+      "blake2b-128:94238cee6e6e269281baf1c01232768d"
+    ],
+    "digest": "blake2b-128:8ef37c9c5bf16a7a4f42e9317dc65203"
+  },
+  "axis": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "axis",
+      "unit": "dimensionless",
+      "si": {
+        "factor": 1.0,
+        "offset": 0.0,
+        "exponents": {}
+      },
+      "dtype": "float64",
+      "shape": [
+        3
+      ],
+      "blocks": [
+        3
+      ]
+    },
+    "values": [
+      0.0,
+      1.0,
+      0.0
+    ],
+    "block_digests": [
+      "blake2b-128:c59f901b90c5bef9e33d03d3ea3aa3e0"
+    ],
+    "digest": "blake2b-128:2e45c2803752a9f0c86109a7f7671b55"
+  },
+  "face_parent_atom_indices": [
+    6,
+    7,
+    8
+  ],
+  "observable": "Connected components of strict-clearance probe centers on the declared atomic-center convex-hull boundary.",
+  "proof": "Convex expanded-ball cover of every other hull face (including the selected face boundary); complete verified convex-intersection nerve 2-skeleton on the selected triangle; planar complement duality; positive all-atom origin ray.",
+  "intersection_positive": "Nonnegative normalized barycentric witness in the selected triangle, inside every ball of that subset by more than length_absolute.",
+  "intersection_negative": "Nonnegative normalized atom weights, a unit direction, weighted center variance plus squared positive minimum directional separation from the triangle; its square root exceeds common expanded radius by length_absolute.",
+  "maximum_depth": 8,
+  "maximum_visited_nodes": 20000,
+  "maximum_intersection_records": 2000,
+  "generation_solver": {
+    "method": "SLSQP dual witness search only",
+    "maximum_iterations": 100,
+    "ftol": 1e-12,
+    "status_is_not_proof": true
+  },
+  "known_before_protocol": "Native/public one-link outcome, selected triangle and successful independent preflight are already known. Every other hull face and all required intersections must still pass independent checks. Retrospective characterization, not blind evaluation.",
+  "preserved_files": {
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/atomic_models.png": "0c4572dd6f5675c3790c81913e12dddf050c07d0990911ee4883e39f1f145b8c",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/comparison_report.json": "2c46faeff614804fc005d6a21416642bb90a65984635cef40fd4fc6db529eaf6",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/evidence_receipt.json": "3a17f8acf2dab58b80fd788f06f62e452a3d2a3443b2b3e350cee7242f434870",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/caver-standard/failed.zip": "c531916a9313886924ebad6ebc35f1a45fbb1269571f020103fb697baf5b08d1",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/caver-standard/observation.json": "ddf5d5eafad2f98d8cf983d3206a9f243a66499c7d2be8bd758db9796231721f",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/caver-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p2/observation.json": "05e2f700a067849182419239c98e803268db5fb24ab436d6fa72d34baa3c9668",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p2/original.zip": "16d6e964551d237163529ff834a1bfd914410ccd9df6713ce9156784fe3f0744",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p4/observation.json": "b8df5eb37a1482bc569c0b0baa849db5c73733904612ce4b3215ed3e79fad805",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p4/original.zip": "49ba959f94ce340cf877d76420bc36449ae5c81a7a1dfcbb6793fa0488f08aa5",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p4/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p7/observation.json": "3779c68733bc1be804ca34032ecaeb4bda6257d712b677b745aabb5072de261e",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p7/original.zip": "d6b73e420fdebf7849ffbb9add39da545de0e46d5af31f93ead2a10febc10ecb",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p7/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-standard/observation.json": "27741c0e40caa69f6082c852812ae98132aefea2acd5fc6b15868c9f4147a4ec",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-standard/original.zip": "18d8b3674b10dc1fa9234671dd36dafd1520bd19ac9526d4b3612bcc9a2470dd",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/mole-standard/failed.zip": "7a0f509e05e944bf8ccedf8e9b00fd4b35bfcf614a600110eba389b2b4b9d175",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/mole-standard/observation.json": "cfa9d080c041d7a9492215dc7f2a495a4e7dc59e9cdedafc504fda31954a0fd8",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/mole-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/observations.json": "41fd29537d810c76c116f33dfeaf278dd25d21cb0cc57e6a0c3338f07bdd31d7",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/pykvfinder-probe-1p2/failed.zip": "b6c6766da31201983ff8303f724301851821fb959a04f8b000c3d382299cc757",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/pykvfinder-probe-1p2/observation.json": "f119b742cae34a7f724d29b3616e75df5514097ea6401b5ad823ad9a1f9be8ad",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/pykvfinder-probe-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/pykvfinder-standard/observation.json": "e9b5bab6255e5174538125d63cccc1b6dd589302a8a584d153b5904a58e713ec",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/pykvfinder-standard/original.zip": "4ad0f60d601909a3223d28dbd56422edf0acf85d8f201aa662ded63bbe64bc37",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/pykvfinder-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/model_audit.json": "3e3d59c2a2688fb9458b22209b9aa6eddaa678ec4faea0e03bc86eed13f3a9ec",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_grid_regions.png": "61a3fe0d6caf5d67cfb7475f33a6455b3031507d8b2e7c4fffb4af9268f400e0",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/caver-standard/failed.zip": "76a68dd5e0219484f51acd5437cfb409c0b9080fb3b098b28cc9cbd0ae11c11d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/caver-standard/observation.json": "0d78704f217b3afcce459f4d4f09cc78316b53d17033c7e93363ea04d18e23ea",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/caver-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p2/observation.json": "c8c769a44f34d6ad52edf3cdbd1caca494fb4dd307642279a7696320591a624f",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p2/original.zip": "ecfd5a1976470b36c690f23eac0d55b2ed3eb91ccb20b55ae0bf085971026830",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p4/observation.json": "1aa7c6d86200d92862f4da4f8bd4db285495228843b9369b7387571687dffb33",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p4/original.zip": "86f8cace6276cc92b33f28bd3075c38280c1a0059f122dacd55db182026c7b82",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p4/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p7/observation.json": "c5b47b78e1eafea33297b5a52970a4c41f157b8d690dd214e0d744e223f746aa",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p7/original.zip": "1c8787104336f11519b55909f2ed2bae5d2d3da7f453865abd54eb45cb30f34c",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p7/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-standard/observation.json": "d2735fae4113a705ccf63b37edf37e18bdb0c056567f72db3f4261c33dcaae25",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-standard/original.zip": "7a1eb30bdfe2836b427d5da8c8240c87c6c92917bedfc08985fc5f342158ac81",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/mole-standard/failed.zip": "9aba769bad673dd8d7a4c138a259435a4cfcd7055609e8085d96e9aba56723a4",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/mole-standard/observation.json": "798a3e4bc4e92371a573c56da341118365513ef5650ac221d76002b872a2c455",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/mole-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/observations.json": "d95dcbad3eecd3f9f25a32cdc01a48a740250bed1707d593be337acc4ff558aa",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p2/failed.zip": "2240b1f103eaba78e18e0c4f810e467fa10d687897eb4e4b32841aee15021a32",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p2/observation.json": "5a9a71286e626bb36848554f238f93851b972d4b35b48d3f6d80cae58bc89893",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p4/failed.zip": "6c0ac0fba2a18a631efc9fe16de5290ac6ea5876da71382ac03e0a94b2ad1a00",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p4/observation.json": "d0793df0ef8c358e3083b7993b3701f309c948d26a6bdd6e703568e6861fefc8",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p4/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p7/failed.zip": "9deedc7bb794954eb6100985419b11793ac3cce47104739f4df51d0bef8c49f0",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p7/observation.json": "061e0f0371dc27ab707148f299cdd240aa61fe758504d832aebe4c2dadd747d1",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p7/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-standard/observation.json": "4c8dc354879fe9a58c011e9351e15d50976aaadba7b5b1bd8dc9da92e7edcacc",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-standard/original.zip": "a42f42771e9949d71412e7b7f07f56c09993854d0a0125b2f2e62b4d631c9a2a",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-standard/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/observations.json": "72f4650490fe39fc6d7e82e9dcbec7fee18d302f3daea53e19728d3546820425",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p2/observation.json": "20334802ea5fcc82d9ace4bd57bbbb1fb547717adc0380fcdd28646309dd95d3",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p2/original.zip": "87a0710908ebfdc9694c5e57ea2e8c30f38b54bbfabdeccd5d02081ccce45249",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p2/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p4/observation.json": "c9ea0ef86ad214280dc54e30bf99768384ef2b9d90733e954d4be2652a484072",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p4/original.zip": "0bd8f208d3430ae71a5eb3d7ff0b4dc41e281a0f252e1a3e55b930e8946f390d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p4/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p7/observation.json": "baa5afdcfeeba7a62cb16156c42c4a909c993016d5260ce5fa834bcb6bef3b0d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p7/original.zip": "59ea0d9ab3e4608a42f2671b634be02b455ab8392846a7f6fa9d64bb9043e697",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p7/submitted.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_protocol.json": "2429bc1e5c21adb79f364ded7e44619497c80f4263a48f68f6a13ab4e058f5aa",
+    "synthetic/regular_tetrahedron/artifacts/comparisons_v1/protocol.json": "031c7e9ff386e0dc34c670ca2d8c745c01f3acd8344f022b02767ed00d6f4367",
+    "synthetic/regular_tetrahedron/artifacts/native_study_v1/dfnd_observations.json": "863d00fd356ab2969aa3f64c7cf2801fe1265576f99a70b0abe544bd297c46b1",
+    "synthetic/regular_tetrahedron/artifacts/native_study_v1/dfnd_probes.png": "80028ea86c94bbdc81161cb58a8fb3277183e5dae9a7035ffff74983c1b0b7b3",
+    "synthetic/regular_tetrahedron/artifacts/native_study_v1/dfnd_sweep.png": "d13cd6a39be0c7e583a7c8451e7d047500cbe38627574da48796e2d164f5c426",
+    "synthetic/regular_tetrahedron/artifacts/native_study_v1/system_geometry.png": "abcf8570575da8151ffa2d8a957b52c6219a98034778838877f3c12fa76f0891",
+    "synthetic/regular_tetrahedron/artifacts/native_study_v1/system_reference.json": "cc60019cd121d352d1ddc9c700ec4c0684c43e3cfb229f721a11a368ecdabab3",
+    "synthetic/regular_tetrahedron/artifacts/native_study_v1/system_thresholds.png": "7d0343c13f144229b0dcda406494ea2b1b08ac06b07204286113ca63e623838e",
+    "synthetic/regular_tetrahedron/artifacts/public_topography_v1/protocol.json": "74df6fab18b741533a3103136792bca3b1b7bb66b3a18e7bb57f1c16cfe7fbed",
+    "synthetic/regular_tetrahedron/artifacts/public_topography_v1/report.json": "2c04478b7130bdc3f98e2b3c70dfd4bf24f14f23e477edd0f3db3b0f390b317e",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/initial_reader_attempt/attempt_record.json": "395ef6acfe013186fc6d6dff5d073ee56d41cc68a591a59196afaae8b79c3990",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/initial_reader_attempt/ghecom-original/input.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/initial_reader_attempt/ghecom-original/results/assigned.pdb": "6b5684afcfb42cd66738264ffcb6ab69a6934b0424741c1523a4c08ed20096cd",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/initial_reader_attempt/ghecom-original/results/pockets.pdb": "2d11efb3f0d792bd3dbebc9f68d0ce49501e3f038d0b1fd5f8974fc2b3d0fe80",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/initial_reader_attempt/ghecom_input_model.zip": "a702062fdef123c746dfc3c710e18322855cfae9bae11ac32d9be116bfd1468f",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/input_aligned.pdb": "cd8c0ef7d219d302e817f53d6f7866a97991c4d5dae642d094b41b4653fa532c",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/caver-aligned/input.pdb": "cd8c0ef7d219d302e817f53d6f7866a97991c4d5dae642d094b41b4653fa532c",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/caver-aligned/reader.zip": "070ae424819c7ca316c644a13a08ec8d9eacf1c2c1ed561e6b2e0e504c97296e",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/caver-original/input.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/caver-original/reader.zip": "b1d8d1ac5def3849c8096d0972c78c29c6def2a91c2c2c9eed432e927ca6f961",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-aligned/input.pdb": "cd8c0ef7d219d302e817f53d6f7866a97991c4d5dae642d094b41b4653fa532c",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-aligned/reader.zip": "5a0349f36e3353f3d4a5b1979dcc3ce3d134ab48ecdbcbdf89c7eb593863a484",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-aligned/results/assigned.pdb": "47e87bf383cfdb1b7414b80ab3c7c0f95381d0c933a86227f959947ddf5032d7",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-aligned/results/pockets.pdb": "69c765606dfca1d30330f1eef032b9caa2243407507ea437746cd8e351f3b952",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/input.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/reader.zip": "4e1d9ca4b1715966b91d4855b3e0fbef56edb96db3173a9cafbf5ebccaeceba3",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/results/assigned.pdb": "ca3b085cc2fbcfbb8a580fa99d527b671557addc671fb0b3fc138b757bfe8360",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/results/pockets.pdb": "49942cb7c606b1593097f54cc083209640fa362138aa715133fe2062a3e41939",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/report.json": "2c5a318279f6271bad180190cb98d5273f024681814c611b232257bb0ab7c439",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/protocol.json": "6110bc41adc7e3e2568ca417729464ae64733cc56c6d8ffe497b2d3c30503b94",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/receipt.json": "41faf7ec2652a5ce217c17b4f619e01ace0d87f4814a4c40c0e25ce1eb30e4fe",
+    "synthetic/regular_tetrahedron/artifacts/radius_audit_v1/report.json": "2c5a318279f6271bad180190cb98d5273f024681814c611b232257bb0ab7c439",
+    "synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/castp3_observation.json": "de50e0ced4671dd31d9cca8f63bf650a5ff26b1e5ddcfb2a794de810867bb542",
+    "synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/castpfold_observation.json": "369d25510b6544234e46e9d900892b126fe41379dc998c09810a41073829640b",
+    "synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+    "synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.pdb": "481c34c20a847f91190bf94b94ab9cd25dddda577afefb3d0c4f919c7d6b409c",
+    "synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input_atom.pdb": "17eeb38f00de48c0db1d2ae0e28027f96f8b4f12da120e1e3b3a1c54683a841d",
+    "synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input_castp.pdb": "e40db4e92eb260682c4e77e43873425efda37f96a55008da0e2a0721c57bc5cb",
+    "synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/pocketeer_original.zip": "050d313f304b8a31fc7b8f081748f68ccdb757c30927b7f9499e97ff0bd5c440",
+    "synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/report.json": "628872de83911c47e6c029c9055d370c70d43a4103e01af3539c0d8852f1ab5d",
+    "synthetic/regular_tetrahedron/comparisons.ipynb": "8f0d16359ca729c6aeca939010e04909cdca090959658c27ce0bfc7ca35a9107",
+    "synthetic/regular_tetrahedron/dfnd.ipynb": "7223b7ed0a42b779afaf29047e21afdf61c6b08bf6a42a1a87d68d758e1eefea",
+    "synthetic/regular_tetrahedron/historical.ipynb": "33afeca04dcce90651879bcb7ccc1decb888468a4532f1321b809bac1d765a16",
+    "synthetic/regular_tetrahedron/system.ipynb": "defe351edcdb417bcc3cc08672d17857b2f0ad600286134609244ef1425ee732",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/alphaspace2_original.zip": "e89975beb5e10ae4c53157409f24c7d579db2cf9d84a1b58eba87ca755bfe76f",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/castp3_observation.json": "047a9318d7b51eee6bc02ce65ad7613748d4cfdb9bb3fdd8f24361c44ddb4d1a",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/castpfold_observation.json": "9aafd816d9fad3b36be84830f9628b3b0cff0ce594031f07548fbb466371486c",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/input.json": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/input.pdb": "e77ad9034389008e5b9ed7d5e05403b9add397f1cae596c470c4c303fca8f3be",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/input_atom.pdb": "478b65b4bdfb9d7f8f3428d0ed382e2e5ca99c7d8c63a787ae655434c476d4b6",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/input_castp.pdb": "258ce42c8d51392b3d15b8720e90a5d1e632a2c7d17eb77e8ae161aa8d2d0875",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/pocketeer_original.zip": "d7caea21fbbc9208d23811f532bcc5411c1bda92d58254def292bfc666b27488",
+    "synthetic/closed_shell/artifacts/closed_shell_v1/report.json": "c490ac61d8119a48d67fae458b4878207c6b01cc74eea6496979df9612304f4d",
+    "synthetic/closed_shell/artifacts/native_study_v1/dfnd_observations.json": "bbce6d18840f0dd489a6ed028dddee33ebc662e65e9a79ea13a9f3856a323f93",
+    "synthetic/closed_shell/artifacts/native_study_v1/dfnd_probes.png": "78c8af6e9b3a46e0ad76930d50b8c09f19c76515dad59d479befaf4e3413353f",
+    "synthetic/closed_shell/artifacts/native_study_v1/dfnd_sweep.png": "58ad6855901a003e72d73f401303c6bbe2ac552bfd9f903c9a8c13bc6ce91112",
+    "synthetic/closed_shell/artifacts/native_study_v1/execution_receipt.json": "6b9b9c286dd0c06fcf1e96b28fba3bc06054356d23f6d4dd189d6defae73644b",
+    "synthetic/closed_shell/artifacts/native_study_v1/protocol.json": "533fd978a20725c36c355e01ad6ed1f05268d61b31bd62f4e77bbddfd8596925",
+    "synthetic/closed_shell/artifacts/native_study_v1/system_certificates.png": "b31fc77cc032f70d13f3bc0ba4c626e5192b92460765a56512a9fad9486fcf6c",
+    "synthetic/closed_shell/artifacts/native_study_v1/system_geometry.png": "659048bbd160c31e96b2fa4021d0e3969a28fd8a517d72c86b923a3ea15d3156",
+    "synthetic/closed_shell/artifacts/native_study_v1/system_reference.json": "2cd156c8b30adf1729f3c5479dba75e6a4853f781f390eef008e9a0ea0176e58",
+    "synthetic/closed_shell/artifacts/public_topography_v1/protocol.json": "2a0179963d113699a69658ce58fa705d4fae609da628722e2d4916ffd2df8678",
+    "synthetic/closed_shell/artifacts/public_topography_v1/report.json": "7683101f35311e8fa75a5250c5d26dcdef1b33afb618d986226502b1411645e0",
+    "synthetic/closed_shell/artifacts/wall_certificate_v1/certificate.json": "daa6bc5f0c6d72a9002c49f5dacb21e3cc648f5d3e7f18ea9a7b187743d8628b",
+    "synthetic/closed_shell/artifacts/wall_certificate_v1/protocol.json": "a74e5f30d3b4552456a3fa66256cb54bc1d38d87b36fe64c0e7173d286bc9439",
+    "synthetic/closed_shell/artifacts/wall_certificate_v1/verification.json": "e460b04c92225eca8eb9103ca4606e8306b67a1384b0d0d41c3d44b3420b8a28",
+    "synthetic/closed_shell/artifacts/wall_certificate_v1/wall_cover.png": "e95d079ae4165d0af46f5c5c8bde87fb1437da8ba87e60a8ca91332467e5a3c9",
+    "synthetic/closed_shell/dfnd.ipynb": "5c7e0fde48039c4b53cfe3a5cdf0630136d3fe0c2daa9c120da0a88fd57c9140",
+    "synthetic/closed_shell/historical.ipynb": "15eae3d8ebf03aa6ecaaac3b0c9c7c2a3914a20cf467e965b6ae02b072d2c011",
+    "synthetic/closed_shell/system.ipynb": "988c55ba5a4c21c1246eadab50c29e527f2a8f8814691896089a8375146d79fb",
+    "synthetic/shell_with_opening/artifacts/public_topography_v1/protocol.json": "d54cdd4fa0acff34d554b4621bca9300442d2889b0ed5df7373e638009b1065e",
+    "synthetic/shell_with_opening/artifacts/public_topography_v1/report.json": "a20b3f4ba741f775a1ee00c051617efcbcc85b36b00c000115fdea0882957053",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/dfnd_contacts.png": "87738eb7daba39803a94bf533793a0c426e1d28b356c9eef741d94e6470f96d6",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/dfnd_observations.json": "1712827f0eb17808c475e2830329cacd8bb958086c60e5c4c1de6bd4c9f696a4",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/dfnd_sweep.png": "d1b499aaa5dff88a7e5985c5c55747248e728224ad923b5eeda61824f352e4cc",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/execution_receipt.json": "922b1536e19854abb02b72ed737dddd9a7c2f648054f034ce8213bf662cd9578",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/input.json": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/input.pdb": "cc4da10580190859cabe5c1839bd745d35c9606b532fe3e018defeb20721b9d5",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/protocol.json": "8bedb65df869ba10b5b57b65925fe5660fb0bd77c6486074d5dba176a991e74e",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/system_certificates.png": "ce7c7ac30b56ee672a16697404a786048fc131044903dc76703b2ae27da4e267",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/system_geometry.png": "3ebb60ef726a38d7f672a09d2bb506b6b9cb88378275661e008e347725aca7a2",
+    "synthetic/shell_with_opening/artifacts/shell_with_opening_v1/system_reference.json": "df6017ba5798caac2fb1b73251f16c37dc2592aa53e67f4a558ef7cc79407835",
+    "synthetic/shell_with_opening/dfnd.ipynb": "040cc560c51115eab69feff32d73722fadef2d234af68121d3428a96fc740250",
+    "synthetic/shell_with_opening/system.ipynb": "70547d7afd9bcbc81323735c234cbbcbfcb057dbf79cd655e836edb2ad32ed02"
+  },
+  "workers": 1,
+  "dfnd_execution_for_reference": false,
+  "sources": [
+    {
+      "title": "Bauer, Kerber, Roll, Rolle: closed-convex nerve theorem",
+      "url": "https://arxiv.org/pdf/2203.03571v6",
+      "location": "Theorems 3.1/3.9"
+    },
+    {
+      "title": "Hatcher, Algebraic Topology",
+      "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+      "location": "Corollary 3.45, printed page 255; planar compact locally contractible complement"
+    }
+  ],
+  "scope_limits": [
+    "Uniform frozen radii; one input/probe and this hull boundary.",
+    "No free-aperture area, intrinsic biological mouth count or exact global cavity count.",
+    "No general native graph-path, other probe/case, volume, provider or installed/full-matrix qualification."
+  ]
+}
