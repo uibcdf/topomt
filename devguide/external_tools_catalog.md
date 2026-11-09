@@ -173,6 +173,28 @@ review is opened, then add its canonical thread to the resource register.
 | [MoloVol](https://github.com/molovol/MoloVol) | MIT; [original method paper](https://journals.iucr.org/j/issues/2022/04/00/yr5079/yr5079.pdf) | Volumes/surfaces of molecules and unit cells; useful probe-center versus probe-occupied volume definitions for synthetic systems. Review exact CLI, radii, region definitions and selected version before admission. |
 | [PyVOL](https://github.com/schlessinger-lab/pyvol) | MIT wrapper/library; official README documents an MSMS executable dependency | Pocket/subpocket segmentation and surface/volume representations. Review the entire MSMS acquisition/licence chain and current Python compatibility before deciding whether a no-payment route meets our scope. The wrapper licence alone does not admit its backend. |
 
+## New research intake — 2026-11-08
+
+| Lead | Sources and access evidence | Scientific question and next gate |
+| --- | --- | --- |
+| [Zeo++ — discussion #152](https://github.com/uibcdf/topomt/discussions/152) | [Original method paper](https://doi.org/10.1016/j.micromeso.2011.08.020); [author-hosted source mirror](https://github.com/mharanczyk/zeoplusplus/tree/4f5c7bd52b4f5a10c562523c84b44f7cd9528492) | Candidate periodic pore-network/accessibility reference: compare residence, transit, channel dimensionality and volume definitions. Establish compatible boundary conditions and observables before proposing a controlled comparison or integration. |
+
+Documentary intake on 2026-11-08 inspected the paper's available description and
+the mirror's pinned README/LICENSE at
+`4f5c7bd52b4f5a10c562523c84b44f7cd9528492`. The mirror describes itself as
+unofficial; its revision is not asserted to be the latest canonical release.
+The README describes a periodic Voronoi-network method and a C++/Make source
+route with bundled Voro++. The [UC/LBNL licence](https://github.com/mharanczyk/zeoplusplus/blob/4f5c7bd52b4f5a10c562523c84b44f7cd9528492/LICENSE)
+permits source/binary redistribution with conditions and includes an enhancements
+provision. Full bundled-dependency terms and the acquisition route remain to be
+reviewed before integration; no standard SPDX identifier is assigned here.
+
+No local installation, original execution, TopoMT provider or comparative
+advantage is established by this intake. Periodic channel connectivity cannot
+be equated directly with an isolated tetrahedron's hull-boundary patches or
+native `Percolating` object. Revisit for a separately defined connectivity/volume
+study; the active three-case DFND sequence remains unchanged.
+
 ## Maintenance rule
 
 - Maintain one catalogue row per project family and one overview per integrated

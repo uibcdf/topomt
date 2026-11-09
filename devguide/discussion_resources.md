@@ -49,6 +49,7 @@ remain separately scoped in the thread and its evidence links.
 | LIGSITE in ENSPARA | [#123](https://github.com/uibcdf/topomt/discussions/123) | Pocket-detection comparison reference. |
 | PocketSCP | [#124](https://github.com/uibcdf/topomt/discussions/124) | Research-method intake; implementation and scope to assess. |
 | SurfDock | [#125](https://github.com/uibcdf/topomt/discussions/125) | Related project; domain ownership needs assessment. |
+| Zeo++ | [#152](https://github.com/uibcdf/topomt/discussions/152) | Candidate periodic pore-network/accessibility reference; documentary intake only. Compare definitions before any isolated-system benchmark or provider integration. |
 | DFND | [#130](https://github.com/uibcdf/topomt/discussions/130) | Native-method scientific conversation; current work is synthetic-first. |
 
 Historical CASTp auxiliary repositories share the CASTp/CASTpFold conversation
