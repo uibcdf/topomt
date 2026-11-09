@@ -1,19 +1,42 @@
 ---
 summary: Present DFND theory and method in a dedicated public documentation section.
 issue: uibcdf/topomt#170
-status: open
+status: resolved
 opened: 2026-11-09
-closed:
+closed: 2026-11-09
 severity: low
-verification: inspected
+verification: measured
 area: [docs, dfnd]
-guard:
+guard: tests/test_dfnd_documentation.py::test_worked_tetrahedron_matches_independent_reference_and_public_result
 normative:
 blocked_by: []
 supersedes: []
 ---
 
 # Dedicated DFND scientific documentation
+
+## Delivered outcome — 2026-11-09
+
+The [public section](../../docs/content/dfnd/index.md) is authored and integrated:
+fourteen chapters, four appendices, the complete worked example, bibliography,
+three generated figures and its landing page. The
+[source checkpoint](../DFND/documentation_checkpoint.md) records the scientific
+scope, source/evidence map, actual Sphinx/HTML/example checks and deferred gates.
+The proposal and review below retain their historical planning wording.
+
+The guard executes the downloadable source against independent tetrahedron
+formulas under two unit policies and follows the public/native support route.
+The section teaches the current graph/local approximations and unresolved
+physical/numerical interpretation; it does not fix #151/#75 or qualify a new
+scientific model. Source/HTML delivery completes #170's documentary scope;
+live-site identity/deployment remains #18 and installed/matrix delivery #16.
+
+Final receiving: **66 passed, 7 known #151 xfailed**, with all four new
+documentation/example guards passing. The complete fresh one-worker Sphinx
+build succeeds; all 21 section pages and 1,422 local links/assets/anchors pass
+receiving, with no DFND-section warnings. Eleven old whole-project diagnostics
+remain under #64. Ruff and local mypy pass; exact resources, verified references
+and preserved scientific scope are in the checkpoint.
 
 ## What
 

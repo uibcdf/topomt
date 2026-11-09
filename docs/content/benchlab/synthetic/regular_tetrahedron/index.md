@@ -5,6 +5,10 @@ This unit studies four equal atomic balls at the vertices of a regular
 tetrahedron, with edge **5.3 Å** and atomic radius **1.7 Å**. Only the probe radius
 changes across the three principal experiments.
 
+The method section supplies a
+[complete input-to-Topography reading](../../../dfnd/worked_tetrahedron.md)
+of this same frozen system, with definitions and source-support inspection.
+
 | Stage | What it explains | Current status |
 | --- | --- | --- |
 | [System and independent expectations](system.ipynb) | Input geometry, visualization, analytic clearance references and three predictions fixed before inspecting DFND. | Executed in a fresh kernel; independent checks pass. |

@@ -5,6 +5,9 @@ understanding and comparing molecular-topography methods. Each named case asks
 a scientific question, explains its reference, shows DFND observations and
 records comparisons with original third-party software where appropriate.
 
+[DFND: Theory and Method](../dfnd/index.md) explains the model and algorithm;
+BenchLab retains the independently justified systems and their observations.
+
 The [comparative-findings register](https://github.com/uibcdf/topomt/discussions/154)
 links scoped advantages and limitations to these reproducible studies. Consult
 each maintained card for its current conclusion, tested software profile and

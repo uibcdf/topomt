@@ -6,6 +6,9 @@ The internal `devguide/` in the repository is the source of truth for ongoing
 engineering decisions, project status, and roadmap details. The pages here are
 the public, curated version of that material.
 
+For the scientific model and native algorithm, see
+[DFND: Theory and Method](../dfnd/index.md).
+
 ## Current project
 
 ```{toctree}

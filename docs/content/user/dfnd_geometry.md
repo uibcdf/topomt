@@ -1,5 +1,9 @@
 # DFND geometry and probe queries
 
+For the scientific model, derivations, interpretation and a complete worked
+example, read [DFND: Theory and Method](../dfnd/index.md). This page describes
+the operational geometry and query lifecycle.
+
 A DFND network retains the selected coordinates, atomic radii and local-to-source
 atom map used to build its geometry. Coordinates and radii are stored internally
 in nanometers. Later edits to the input molecular system do not change that

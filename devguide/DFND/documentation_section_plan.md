@@ -1,11 +1,14 @@
 # DFND scientific documentation section: proposal
 
 Date: 2026-11-09. Owner: [#170](https://github.com/uibcdf/topomt/issues/170).
-Status: **section proposal, prepared for maintainer review; public pages are not
-yet authored or integrated**.
+Status: **implemented in the public source documentation on 2026-11-09**.
+Read [DFND: Theory and Method](../../docs/content/dfnd/index.md) and the
+[delivery checkpoint](documentation_checkpoint.md). The proposal and critical
+review below retain their historical planning wording; their unimplemented
+statements describe that earlier stage, not the delivered section.
 Reviewed checkout: `dc525ce63c6d30531f4924c9469511384394d9b3`.
 Critical review: 2026-11-09, against proposal commit
-`bf9900c9aad5fb24d5c16db4f8e156d1ce5f605a`; public section still unimplemented.
+`bf9900c9aad5fb24d5c16db4f8e156d1ce5f605a`; the section was unimplemented then.
 This is a code/documentation study, not a new numerical experiment, scientific
 validation, accepted API change or replacement algorithm specification.
 

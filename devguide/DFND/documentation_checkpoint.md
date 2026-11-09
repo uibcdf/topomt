@@ -1,0 +1,131 @@
+# DFND theory and method documentation: source checkpoint
+
+Date: 2026-11-09. Owner: [#170](https://github.com/uibcdf/topomt/issues/170).
+Scientific source reviewed: `a5a81deee74b97301b88425cee122e3f1f3e28d8`.
+Delivery: [DFND: Theory and Method](../../docs/content/dfnd/index.md).
+The [proposal and critical review](documentation_section_plan.md) remain as
+dated design history. This checkpoint qualifies documentation/source examples,
+not an installed release, live-site deployment or scientific algorithm fix.
+
+## Delivered reader path
+
+- Four navigation parts contain fourteen authored chapters: foundations/design;
+  construction of topography; quantification/changing systems; reliability/scope.
+- Four appendices provide notation, clearance derivations, conditional
+  properties/proof scope and the executed algorithm's pseudocode.
+- A complete tetrahedron input-to-Topography example, bibliography and landing
+  page bring the section to **21 rendered pages**, about 12,400 prose words.
+- Three deterministic SVG teaching figures illustrate the pipeline, probe-center
+  geometry and three persistence axes. The fourth reused figure is canonical
+  BenchLab boundary evidence, linked without copying or modifying its bytes.
+- Main navigation and the User guide, BenchLab, tetrahedron unit and public
+  developer guide link the section. No empty future pages were added.
+
+## Scientific/editorial receiving
+
+The account separates admissible center placement, exterior reachability and
+finite-region segmentation. It explains ordinary Delaunay/local-capacity graph
+decomposition independently of the historical weighted-alpha/directed-flow
+proposal, gives the rationale/assumptions of the chosen operators, and separates
+formal reference properties from numerical or physical guarantees.
+
+Native links, physical hull patches and public Mouth promotion retain distinct
+meanings. Dry banks, relief segmentation and molecular participants/interfaces
+have separate chapters. Capacity/probe/temporal persistence, actual skeleton
+objectives, existing matching/track helpers and their limits are explicit.
+Measurement support, obstacle lists, units, numerical error and biological
+interpretation remain distinct. Native neighbor helpers are not advertised as
+transit-edge traversal.
+
+No kernel, classifier, provider route or scientific default changed. The public
+boundary and volume explanations link the current #151/#75 records; neither is
+resolved by the book. #76/#60/#61 and source/public qualification #16 retain
+their separate scopes. Current finding cards/hub and local records receive the
+new documentary navigation without changing historical scientific artifacts.
+
+## Executable worked example
+
+`docs/content/dfnd/examples/tetrahedron.py` restores the full-precision frozen
+quantity records after loading dummy carbon topology, verifies JSON SHA-256 and
+assigned radii, and checks the retained `vdw` default. It runs three actual
+public-dispatcher queries with explicit units/policies. The CLI returns:
+
+```text
+1.2 angstrom: ['percolating']
+1.4 angstrom: ['void']
+1.7 angstrom: []
+```
+
+`tests/test_dfnd_documentation.py` was written first: three initial missing-source
+failures precede implementation. Its final guards compare capacities against
+independent regular-simplex formulas under nm/pm policies, verify native/public
+support and source mapping, demonstrate mesh reuse without mutating the earlier
+Topography, and reject modified frozen input. The example has no private/test
+imports, provider submission or new protein/geometry acquisition.
+
+The initial example also exposed the existing explicit `radii_model` dispatcher
+warning. It is independently tracked in [#171](https://github.com/uibcdf/topomt/issues/171)
+and [its report](../pending_bugs/dfnd_radius_model_dispatch.md); inner radius-model
+validation still works. The example uses and verifies the current default. No
+adapter workaround or scientific-default change is hidden in this delivery.
+
+## Documentation and code checks
+
+- Complete fresh Sphinx HTML build: **exit 0**, one worker, 10.03 s wall time,
+  peak RSS 274 MiB. All 21 section pages render, including four selected primary
+  bibliography entries and the downloadable/literal-included example.
+- All **1,422** local links/assets/anchors in those rendered pages were checked;
+  main-navigation entry is present and the section has **zero own warnings**.
+- The whole project emits eleven pre-existing warnings: old notebook H2 headings,
+  missing API index/toctree inclusion, an old transition, an installation link
+  and an unavailable PlantUML command in an old page. This delivery does not
+  silently qualify a warning-free whole site. Existing cleanup remains
+  [#64](https://github.com/uibcdf/topomt/issues/64); live deployment is #18.
+- Ruff check and format check pass repository-wide (564 files at this stage).
+  Local mypy passes the three new Python sources (example, figure generator,
+  example regression). Whitespace checks pass.
+- The final focused panel gives **66 passed, 7 xfailed**, 12.02 s wall time,
+  peak RSS 314 MiB. It covers the downloadable example, actual public receiving,
+  all three independent certificate families, reporting and comparative checks.
+  The seven expected failures are the pre-existing, narrowly scoped missing
+  #151 physical views; no new example guard is skipped. All **161** protected
+  historical scientific files retain their bytes. An earlier stale generated
+  issue-index failure was corrected by regeneration before this clean run.
+
+The four documentation-specific tests also execute the Python blocks from the
+worked, public-result, probe-reuse and numerical-policy chapters in order with
+download-style inputs. They verify the actual reader workflow, in addition to
+the independent formula and damaged-input guards.
+
+Primary reference metadata/content was checked against PubMed for Lee/Richards,
+the author's alpha-shape paper, ISTA's CAST publication record, the original
+MOLE article in PMC and official SciPy documentation. The ACM publisher endpoint
+was inaccessible; the author's copy supplied alpha-shape metadata. Existing
+unrelated bibliography content was preserved. No literature-priority or
+comparative-superiority claim follows from this selected reference list.
+
+## Execution and retained artifacts
+
+Numerical/example and documentation operations were sequential, one CPU and
+one numerical thread, with 6 GiB address-space and 60–120 s CPU limits.
+Preflight found about 56 GiB available of 60.5 GiB physical RAM, zero memory PSI
+and no active swap traffic in the sampled live interval. Slurm's socket remained
+unavailable under this session's permissions; no allocation was claimed.
+Observed peak RSS stayed below 320 MiB. Available resources were not treated as
+reserved.
+
+Local HTML, previews and raw logs remain in `.cache/dfnd-documentation/` for
+maintainer review and the separate #18/#16 publication/qualification routes.
+Committed source figures regenerate with `devtools/docs/dfnd_figures.py` using
+the existing Matplotlib development dependency. Ordinary Sphinx builds keep
+notebook execution off and never submit the studies to original providers.
+
+## Maintenance boundary
+
+Root `AGENTS.md` routes method/policy/catalog/unit changes to the corresponding
+chapters, derivations and executable example in the same delivery. Follow the
+comparative-finding lifecycle when a correction affects a current limitation;
+an old example remains dated history rather than an independently maintained
+current-limit list. This book is a curated scientific explanation; accepted
+developer contracts retain their authority, and adopting a new algorithm still
+requires its own scientific decision/evidence.

@@ -42,6 +42,15 @@ relations and recoverable supports, and resolve the open scientific questions
 for these inputs with explicit evidence. Keep unresolved outcomes and their
 owning issues visible; passing the initial controls is not the completion rule.
 
+DFND method documentation lives in `docs/content/dfnd/`. Changes to operators,
+query policies, catalog promotion, units or physical interpretation must review
+the corresponding chapters, derivations and worked example in the same delivery.
+Use `devguide/DFND/documentation_checkpoint.md` for the source/evidence map and
+the executable example guard. Keep mathematical reference objects, implemented
+approximations and tested observations distinct. Reconcile corrected limitations
+through the comparative-finding workflow below; dated examples remain historical
+evidence, not an independent current limitation list.
+
 Immediate priority (2026-11-07): consolidate the original providers and add four
 or five no-cost third-party engines before further BenchLab development. Follow
 `devguide/external_provider_expansion_plan.md` under #135. Preserve distinct

@@ -9,7 +9,7 @@ status = "current"
 summary = "Whole-face exterior clustering does not count disconnected free hull patches."
 scope = "Frozen regular tetrahedron at 1.2 angstroms; source-workspace profile recorded in boundary_connectivity_v1/native_correspondence.json; no general biological mouth claim."
 issue = "uibcdf/topomt#151"
-evidence = ["docs/content/benchlab/synthetic/regular_tetrahedron/boundary_connectivity.md", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/native_correspondence.json", "devguide/pending_proposals/dfnd_physical_boundary_refinement.md", "devguide/DFND/boundary_connectivity_contract.md", "devguide/DFND/boundary_contract_checkpoint.md", "tests/test_dfnd_physical_boundary_contract.py"]
+evidence = ["docs/content/benchlab/synthetic/regular_tetrahedron/boundary_connectivity.md", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/native_correspondence.json", "devguide/pending_proposals/dfnd_physical_boundary_refinement.md", "devguide/DFND/boundary_connectivity_contract.md", "devguide/DFND/boundary_contract_checkpoint.md", "tests/test_dfnd_physical_boundary_contract.py", "docs/content/dfnd/exterior_and_boundaries.md", "docs/content/dfnd/worked_tetrahedron.md"]
 owner = "TopoMT maintainers (LMMV/dprada)"
 reviewed_on = "2026-11-09"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186"
@@ -21,9 +21,9 @@ status = "current"
 summary = "Volume exactness and finite-sample uncertainty are overstated for the recorded methods."
 scope = "Reproduction at source 7bd47faba6179a6e02444331e442acd251572564. Reviewed source file blob 838fec4a66bd84dc295f26a59a99a8995a217c29 is unchanged at a4f1be84197578e33c28ab62517933b2b54a6bd9; no fresh numerical or installed qualification is asserted."
 issue = "uibcdf/topomt#75"
-evidence = ["devguide/pending_bugs/dfnd_volume_precision_claims.md", "topomt/dfnd/core/solvent_volume.py"]
+evidence = ["devguide/pending_bugs/dfnd_volume_precision_claims.md", "topomt/dfnd/core/solvent_volume.py", "docs/content/dfnd/measurements.md"]
 owner = "TopoMT maintainers (LMMV/dprada)"
-reviewed_on = "2026-11-08"
+reviewed_on = "2026-11-09"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482187"
 
 [[findings]]

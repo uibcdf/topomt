@@ -67,6 +67,11 @@ conflating numerical error with region/model error.
 
 ## Comparative finding navigation — 2026-11-08
 
+The public [measurement chapter](../../docs/content/dfnd/measurements.md) now
+explains the actual supports/estimators and the current uncertainty limits.
+#170's documentation delivery does not correct the numerical methods or close
+this precision issue.
+
 The [maintained finding card](https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482187) carries the current
 scoped conclusion and dated correction/review history. This report retains its
 technical evidence; before manuscript reuse follow the

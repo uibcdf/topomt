@@ -90,6 +90,11 @@ receiving still require implementation and verification.
 
 ## Comparative finding navigation — 2026-11-08
 
+The public [method explanation](../../docs/content/dfnd/exterior_and_boundaries.md)
+and [worked example](../../docs/content/dfnd/worked_tetrahedron.md) now teach the
+distinct observations and preserve this issue's pending runtime scope. #170's
+documentation delivery does not implement physical boundary refinement.
+
 The [maintained finding card](https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186) carries the current
 scoped conclusion and dated correction/review history. This report retains its
 technical evidence; before manuscript reuse follow the
