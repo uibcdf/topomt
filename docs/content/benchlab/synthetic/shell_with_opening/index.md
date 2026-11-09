@@ -17,6 +17,7 @@ the deletion. The geometry is nonperiodic and no coordinates are regenerated.
 system
 dfnd
 Public Topography receiving <topography>
+Connected opening at 1.4 Å <opening_connectivity>
 ```
 
 ## Independent controls and native observations
@@ -30,8 +31,10 @@ Public Topography receiving <topography>
 
 Deleting the cap isolates a change in access at the **same 1.4 Å probe**.
 The references establish origin access/enclosure and finite-hull exclusion,
-rather than an exact global cavity count or a physical mouth count. A failed
-sufficient bound leaves the corresponding question unresolved.
+rather than an exact global cavity count. The newer
+[boundary-connectivity certificate](opening_connectivity.md) additionally
+establishes one connected strict-clearance opening on the declared hull at
+1.4 Å. A failed sufficient bound leaves other questions unresolved.
 
 ## Contact location and interpretation
 
@@ -43,8 +46,10 @@ radius is **2.010131 Å**; its geometric triangle area is **16.148008 Å²**.
 That area is not a measured free aperture area.
 
 This agrees with the independent contact-location constraint. One deleted cap,
-one continuous ray and one native contact cluster still do not prove exactly
-one physical mouth. Likewise, the 49-point sweep's native change between 2.0
+one continuous ray and one native cluster alone do not prove mouth cardinality;
+the separate [connectivity study](opening_connectivity.md) now verifies one
+free boundary patch using complete wall and convex-intersection certificates.
+The result uses this explicit hull/probe convention. The 49-point sweep's native change between 2.0
 and 2.1 Å is an observation, not an independently established exact physical
 transition. Unresolved intervals remain visible in the report.
 

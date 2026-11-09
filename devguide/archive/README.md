@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (33)
+### Resolved (34)
 
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
@@ -24,6 +24,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`expand_original_providers.md`](expand_original_providers.md) — [#135](https://github.com/uibcdf/topomt/issues/135) — Consolidate five original providers and add four no-cost local engines before BenchLab resumes. *(resolved, measured)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*
 - [`molsysviewer_topomt_init_exports.md`](molsysviewer_topomt_init_exports.md) — [#55](https://github.com/uibcdf/topomt/issues/55) — Restore MolSysViewer TopoMT add-on lifecycle exports. *(resolved, measured)*
+- [`opening_boundary_connectivity.md`](opening_boundary_connectivity.md) — [#149](https://github.com/uibcdf/topomt/issues/149) — Certify the opened shell's connected probe-center boundary patch at 1.4 angstroms. *(resolved, measured)*
 - [`original_caver_provider.md`](original_caver_provider.md) — [#138](https://github.com/uibcdf/topomt/issues/138) — Add source-bound original CAVER execution and engine-independent recovery. *(resolved, measured)*
 - [`original_ghecom_provider.md`](original_ghecom_provider.md) — [#137](https://github.com/uibcdf/topomt/issues/137) — Add source-bound original GHECOM execution and engine-independent recovery. *(resolved, measured)*
 - [`original_mole_provider.md`](original_mole_provider.md) — [#140](https://github.com/uibcdf/topomt/issues/140) — Add source-bound original MOLE execution and engine-independent recovery. *(resolved, measured)*

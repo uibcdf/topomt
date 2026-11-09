@@ -1,0 +1,123 @@
+{
+  "verification": "passed",
+  "face_parent_atom_indices": [
+    6,
+    7,
+    8
+  ],
+  "covered_hull_face_count": 127,
+  "cover_leaf_count": 193,
+  "nerve": {
+    "vertices": 14,
+    "edges": 31,
+    "triangles": 24,
+    "components": 1,
+    "rank_boundary_2": 17,
+    "beta_1": 1
+  },
+  "opening_component_count": 1,
+  "origin_connected_to_opening": true,
+  "minimum_coverage_margin": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "minimum_coverage_margin",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 0.007968987977500674,
+    "block_digests": [
+      "blake2b-128:26c63375de7d7dba342808a4fa642fb7"
+    ],
+    "digest": "blake2b-128:bb5e2c8f4f69362beeb7ee6e6710076d"
+  },
+  "minimum_intersection_decision_margin": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "minimum_intersection_decision_margin",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 0.027267559778292316,
+    "block_digests": [
+      "blake2b-128:714012ad8ee2d80e63b40f9605e4c99e"
+    ],
+    "digest": "blake2b-128:d0a6795f6cb7a084c5291bda0a73a3c5"
+  },
+  "ray_minimum_clearance": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "ray_minimum_clearance",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1.8197260442757808,
+    "block_digests": [
+      "blake2b-128:254015bde5b9262560e9fe06ae237114"
+    ],
+    "digest": "blake2b-128:9952b57d50ac6bc4a3243061af6ed29b"
+  },
+  "ray_crossing": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "ray_crossing",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [
+        3
+      ],
+      "blocks": [
+        3
+      ]
+    },
+    "values": [
+      0.0,
+      4.770076948796144,
+      0.0
+    ],
+    "block_digests": [
+      "blake2b-128:93fa43dd2d992d0673aa1b972c6168e1"
+    ],
+    "digest": "blake2b-128:6b1bb535d8f61192c977e00c3f0451b0"
+  },
+  "scope": "Strict-clearance probe-center components on this convex-hull boundary; not an intrinsic biological mouth count or a general graph-path proof."
+}

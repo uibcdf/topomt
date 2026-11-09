@@ -1,0 +1,114 @@
+{
+  "schema": "topomt.benchlab.opening-native-correspondence/1",
+  "case_id": "shell_with_opening",
+  "certificate_sha256": "46623f3f7e90c6a31a513f12a424b94e420e08a88e0559d35d800f02352902b1",
+  "verification_sha256": "7df271fcc54616373fbc7310f688f0226a88ab1b584f240e74ffbdb8e796eaba",
+  "probe_radius": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "probe_radius",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 1.4,
+    "block_digests": [
+      "blake2b-128:ffd293f63c422caab3d4f99991ccd9b4"
+    ],
+    "digest": "blake2b-128:9d5159d3b6d9033cb4ca12f45c5c84e3"
+  },
+  "public_parent_type": "Pocket",
+  "public_mouth_count": 1,
+  "raw_external_link_count": 1,
+  "reference_opening_count": 1,
+  "face_parent_atom_indices": [
+    6,
+    7,
+    8
+  ],
+  "parent_feature_id": "POC-1",
+  "mouth_feature_id": "MOU-1",
+  "parent_component_key": "component-625c56c12a5e62bb4b29b730fa6fc7669c8dce32126a018eb80bd4cc9531d870",
+  "external_link_key": "external-link-3197c72a512bfbf1274636b1c309b5ffa1d9ab17221a1789eb7097c24a6426f7",
+  "native_geometric_triangle_area": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "native_geometric_triangle_area",
+      "unit": "angstrom ** 2",
+      "si": {
+        "factor": 1.0000000000000001e-20,
+        "offset": 0.0,
+        "exponents": {
+          "m": 2
+        }
+      },
+      "dtype": "float64",
+      "shape": [],
+      "blocks": [
+        1
+      ]
+    },
+    "values": 16.148007904312923,
+    "block_digests": [
+      "blake2b-128:446ab696ff46bf53765aa1f1d7fed6b7"
+    ],
+    "digest": "blake2b-128:c77d808adba5d3103da5e3eb130a3cb7"
+  },
+  "software": {
+    "python": "3.14.10",
+    "topomt": "0.5.0+387.gcf4d475.dirty",
+    "molsysmt": "0.23.0+687.g2325038e8",
+    "pyunitwizard": "0.29.1+6.gf82b618",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "topomt_source": {
+    "scope": "Sorted topomt/**/*.py paths and length-delimited bytes",
+    "file_count": 302,
+    "sha256": "c9a408ce8e1796625087eb27d2ce76c4151a2c2fe37c144b9b9d627e8887e89a"
+  },
+  "checks": "passed",
+  "scope": "Strict-clearance probe-center components on this convex-hull boundary; not an intrinsic biological mouth count or a general graph-path proof.",
+  "execution": {
+    "elapsed_time": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "elapsed_time",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.0521057789883344,
+      "block_digests": [
+        "blake2b-128:b59a7bd7cc853f834bb840edc247da13"
+      ],
+      "digest": "blake2b-128:a6fb51ceff294e9c2dde55c1ab669ef7"
+    },
+    "maximum_observed_process_rss": {
+      "value": 283644,
+      "unit": "KiB"
+    },
+    "workers": 1,
+    "cpu_affinity_count": 1
+  }
+}

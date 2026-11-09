@@ -18,6 +18,15 @@ producer, inputs and limits; documentation edits do not requalify them.
 
 ## Current work and delivery boundary
 
+The deeper boundary reference under #149 certifies one connected strict-clearance
+opening on the opened shell's declared hull at probe 1.4 Å. The other 127 faces
+have a complete convex-ball cover; 181 point/separation witnesses determine
+the selected face's convex nerve, whose first Betti number gives one free patch.
+The all-atom origin ray enters it and the existing public Mouth count/face agree.
+The [case extension](../docs/content/benchlab/synthetic/shell_with_opening/opening_connectivity.md)
+retains the protocol, checkable certificate and scope. This is a reference
+extension, not a native-kernel change or general mouth/path qualification.
+
 The maintainer now requests deeper work on the first three BenchLab inputs
 before adding the tube. Follow [the deepening plan](DFND/three_case_deepening.md)
 and the active laboratory checkpoint. #146 audits the actual public registry

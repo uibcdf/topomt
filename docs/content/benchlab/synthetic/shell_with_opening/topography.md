@@ -31,6 +31,12 @@ numerically unqualified under #75. Full neutral public support adoption is #60.
 
 ## Versioned evidence
 
+The subsequent [boundary-connectivity certificate](opening_connectivity.md)
+now verifies one connected strict-clearance opening on the declared hull at
+1.4 Å, accessible from the origin. Its count and face match this public Mouth.
+The earlier receiving report retains its original, narrower scope; free area,
+all-atom bottleneck thresholds and other probes remain unqualified here.
+
 Download the {download}`receiving protocol <artifacts/public_topography_v1/protocol.json>`
 and {download}`actual public receiving report <artifacts/public_topography_v1/report.json>`.
 The report retains Python classes, registry summaries, region/Mouth relations,

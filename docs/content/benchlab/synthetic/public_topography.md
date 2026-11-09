@@ -38,6 +38,12 @@ objects on the small-probe shell do not yet establish ten connected physical
 openings. A percolating region has neutral shape and no promoted `Mouth`
 children, even though its native graph has an exterior link.
 
+For the opened shell at 1.4 Å, the later
+[independent connectivity certificate](shell_with_opening/opening_connectivity.md)
+does establish one connected free patch on the declared hull, incident to the
+origin region. It matches that case's Mouth count/location; it does not qualify
+the ten small-probe shell Mouths, all gate thresholds or free aperture areas.
+
 The legacy public dimensionalities are 2 for these region objects and 1 for
 their boundary objects. They are catalog conventions, not a declaration that
 the recovered empty space is geometrically two-dimensional. Full neutral

@@ -1,0 +1,172 @@
+{
+  "schema": "topomt.benchlab.opening-connectivity-execution/1",
+  "case_id": "shell_with_opening",
+  "protocol_commit": "7f6c0ff",
+  "scope": "Retrospective one-input/probe hull-boundary certificate and scoped actual public receiving. No DFND kernel/classifier/API change.",
+  "limits": {
+    "workers": 1,
+    "cpu_affinity_count": 1,
+    "process_address_space": {
+      "value": 6,
+      "unit": "GiB"
+    },
+    "generation_process_cpu_budget": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "generation_process_cpu_budget",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "int64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 90,
+      "block_digests": [
+        "blake2b-128:bbd149c6db35616d763a4499c630f687"
+      ],
+      "digest": "blake2b-128:422c1634eb424afc6ba0dcc10c702cd9"
+    },
+    "verification_receiving_process_cpu_budget": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "verification_receiving_process_cpu_budget",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "int64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 60,
+      "block_digests": [
+        "blake2b-128:dbc31ec280e1976521748d1b07242311"
+      ],
+      "digest": "blake2b-128:4f0eb5c5ca28d8da09330c4b3639e277"
+    }
+  },
+  "generation": {
+    "started_utc": "2026-11-09T00:10:22.136925+00:00",
+    "elapsed_time": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "elapsed_time",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 0.22347042300680187,
+      "block_digests": [
+        "blake2b-128:55bf475671fb0b6b704fa256e8655b01"
+      ],
+      "digest": "blake2b-128:8c4ccd7ad4d522b9a7a4020c3b4fd2e0"
+    },
+    "visited_wall_nodes": 215,
+    "unresolved": 0,
+    "workers": 1,
+    "cpu_affinity_count": 1,
+    "process_address_space": {
+      "value": 6,
+      "unit": "GiB"
+    },
+    "process_cpu_budget": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "process_cpu_budget",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "int64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 90,
+      "block_digests": [
+        "blake2b-128:bbd149c6db35616d763a4499c630f687"
+      ],
+      "digest": "blake2b-128:8cd4b55294caa4ec595033173ac19193"
+    },
+    "maximum_observed_process_rss": {
+      "value": 91768,
+      "unit": "KiB"
+    },
+    "status_is_not_proof": true
+  },
+  "native_receiving": {
+    "elapsed_time": {
+      "manifest": {
+        "format": "qrec/0.3",
+        "field": "elapsed_time",
+        "unit": "second",
+        "si": {
+          "factor": 1.0,
+          "offset": 0.0,
+          "exponents": {
+            "s": 1
+          }
+        },
+        "dtype": "float64",
+        "shape": [],
+        "blocks": [
+          1
+        ]
+      },
+      "values": 1.0521057789883344,
+      "block_digests": [
+        "blake2b-128:b59a7bd7cc853f834bb840edc247da13"
+      ],
+      "digest": "blake2b-128:a6fb51ceff294e9c2dde55c1ab669ef7"
+    },
+    "maximum_observed_process_rss": {
+      "value": 283644,
+      "unit": "KiB"
+    },
+    "workers": 1,
+    "cpu_affinity_count": 1
+  },
+  "resource_observation": "Shared host checked: over 55 GiB available, no memory PSI or active vmstat swapping. Slurm local nodes inval and other nodes unk; no allocation used and free resources were not treated as reserved.",
+  "verifier_source_sha256": {
+    "devtools/verify_closed_shell_wall_cover.py": "06dd15dd095370dac48fb7888a26ebfa2a98c82615be4d855885dc61464a24a2",
+    "devtools/verify_opening_connectivity.py": "ff2f76662da94f49976255d6dcac666b913be7a901e041b26f56ebcf34dd3220"
+  },
+  "artifact_sha256": {
+    "certificate.json": "46623f3f7e90c6a31a513f12a424b94e420e08a88e0559d35d800f02352902b1",
+    "native_correspondence.json": "6c4dc026f95a617b138b09164c1e1f9c6433b220c5f62002cdbdfe4536c821f4",
+    "opening_patch.png": "dfdfb6c4ca2f400c4d0f987fbedd4529cf5768cda339c1df8dd26ed17f8e2d3f",
+    "protocol.json": "0b0d2307125feec7013b46233709ce595d35d4006c7c5d038b6dbc4a760fa516",
+    "verification.json": "7df271fcc54616373fbc7310f688f0226a88ab1b584f240e74ffbdb8e796eaba"
+  },
+  "source_qualification": "Certificate and versioned verifiers reproduce checking without an optimizer/DFND. Auxiliary search/plot scripts and logs remain task-owned cache for review. Original human version-file edit is preserved and included in native fingerprint. No installed artifact, full suite/matrix, other probe/case, area/volume or general path qualification.",
+  "final_verification_matches_stored": true
+}

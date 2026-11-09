@@ -32,6 +32,14 @@ structures remain native-only and general public support adoption is unfinished.
 The next scientific work is physical mouth-patch connectivity and compatible
 continuous paths on these same inputs, followed by the declared volume work.
 
+Under #149, the opened shell at 1.4 Å now has a verified single connected
+strict-clearance probe-center patch on its atomic-center convex-hull boundary.
+A complete cover blocks the other 127 faces; verified positive/negative
+convex-intersection witnesses and H1 count the free patches in the remaining
+face. The retained origin ray enters that patch, whose count/location match
+the existing native/public Mouth. Other probes/cases and arbitrary native
+paths remain unqualified; continue those controls before generalizing.
+
 1. Audit the public projection and repair reproduced admission/registry defects.
 2. Resolve the historical 0.2 Å wall question with a checkable independent cover.
 3. Study actual free boundary patches and mouth connectivity, then compatible

@@ -97,6 +97,42 @@ not qualify new cases, volume precision, all synthetic cases or proteins.
 
 ## Delivered first case
 
+### Opened-shell boundary connectivity — 2026-11-08
+
+#149 fixes the observable as connected strict-clearance probe-center patches
+on the unchanged 66-ball atomic-center hull at probe 1.4 Å. All other 127
+hull faces, including the selected face boundary, have a complete 193-leaf
+convex-ball cover. On parent-ID face [6,7,8], the ball/triangle intersections
+are compact convex sets. Positive point witnesses and negative convex-weight/
+separating-direction lower bounds decide all 66 single sets, 91 pairs among
+the 14 active sets and 24 necessary triples. No solver status is accepted as
+proof; the independent checker invokes neither DFND nor an optimizer.
+
+The verified nerve has 14 vertices, 31 edges, 24 triangles and boundary-two
+rank 17 over F2; beta1=1. Closed-convex nerve equivalence plus planar complement
+duality and the blocked triangle boundary establish exactly one free patch.
+The retained +Y ray crosses it with minimum all-atom clearance 1.819726044 Å.
+Minimum cover/intersection margins are 0.007968988/0.027267560 Å against the
+declared 1e-6 Å requirement. These are floating-point safety margins, not a
+formal interval-arithmetic proof. The sources/hypotheses are explicit in the
+public case extension and protocol.
+
+Protocol `7f6c0ff` precedes recorded certificate capture. Historical native
+counts and preflight were already known; this is retrospective characterization.
+All 155 earlier scientific files retain their hashes. Current public receiving
+gives one Pocket and one Mouth on the certified face. This validates that
+count/localization for this input/probe/hull convention, not an intrinsic
+biological mouth definition, its geometric triangle as a free area, its local
+gate as an all-atom bottleneck, other probes or every graph path.
+
+`devtools/verify_opening_connectivity.py` checks the complete certificate; it
+shares the explicit-unit convex triangle-cover checker extracted from the
+closed-shell verifier. The old closed-shell verification remains identical.
+Guards reject incomplete/false witnesses and preserve results under unit policy,
+rigid motion and source atom permutation. The native engine/classifier/API
+and all earlier data remain unchanged. Continue boundary/path controls on the
+same three systems, then the declared #75 volume work; #76/#60 remain open.
+
 ### Three-case public receiving and 0.2 Å reference — 2026-11-08
 
 Under the new deepening priority, #146 follows the actual public dispatcher on

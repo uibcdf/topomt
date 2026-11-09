@@ -50,6 +50,125 @@ def _check_partition(paths: list[list[int]]) -> None:
     complete(tree)
 
 
+def verify_triangle_cover(
+    coordinates: np.ndarray,
+    radii: np.ndarray,
+    faces: np.ndarray,
+    leaves: list[dict[str, Any]],
+    probe_radius: float,
+    tolerance: float,
+    *,
+    length_unit: str,
+    maximum_depth: int,
+    maximum_nodes: int,
+) -> dict[str, Any]:
+    """Verify complete convex-ball coverage of the supplied triangles.
+
+    Parameters
+    ----------
+    coordinates, radii : numpy.ndarray
+        Atomic centers and nonnegative radii, in ``length_unit``.
+    faces : numpy.ndarray
+        Local atom-index triples of the supplied triangles.
+    leaves : list of dict
+        Original face, ordered subdivision path and covering-atom witnesses.
+    probe_radius, tolerance : float
+        Nonnegative probe and positive safety margin, in ``length_unit``.
+    length_unit : str
+        Required explicit common input length unit.
+    maximum_depth, maximum_nodes : int
+        Bounds on subdivision depth and total verified tree nodes.
+
+    Returns
+    -------
+    dict
+        Counts, vertex distances and coverage margins with explicit units.
+        The caller establishes the boundary represented by these triangles;
+        coverage of a subset alone does not establish enclosure.
+
+    Raises
+    ------
+    ValueError
+        If geometry, bounds, covering inequalities or partitions are invalid.
+
+    Examples
+    --------
+    Both certificate checkers in this directory use this reference operation.
+    """
+    scale = float(puw.get_value(puw.quantity(1.0, length_unit), to_unit='angstroms'))
+    coords = np.asarray(coordinates, dtype=float) * scale
+    radii = np.asarray(radii, dtype=float) * scale
+    probe = float(probe_radius) * scale
+    tolerance = float(tolerance) * scale
+    faces = np.asarray(faces)
+    if coords.ndim != 2 or coords.shape[1] != 3 or radii.shape != (len(coords),):
+        raise ValueError('Invalid cover geometry shape')
+    if (
+        not np.isfinite(coords).all()
+        or not np.isfinite(radii).all()
+        or (radii < 0).any()
+    ):
+        raise ValueError('Invalid atomic cover geometry')
+    if (
+        not np.isfinite(probe)
+        or probe < 0
+        or not np.isfinite(tolerance)
+        or tolerance <= 0
+    ):
+        raise ValueError('Invalid probe or safety tolerance')
+    if (
+        faces.ndim != 2
+        or faces.shape[1] != 3
+        or faces.dtype.kind not in 'iu'
+        or (faces < 0).any()
+        or (faces >= len(coords)).any()
+    ):
+        raise ValueError('Invalid cover triangle indices')
+    partitions: list[list[list[int]]] = [[] for _ in faces]
+    distances = []
+    margins = []
+    if len(leaves) > maximum_nodes:
+        raise ValueError('Certificate exceeds the declared node budget')
+    for leaf in leaves:
+        face_index = leaf['hull_face_index']
+        path = leaf['subdivision_path']
+        atom = leaf['covering_atom_index']
+        if not isinstance(face_index, int) or not 0 <= face_index < len(faces):
+            raise ValueError('Invalid hull-face index')
+        if not isinstance(atom, int) or not 0 <= atom < len(coords):
+            raise ValueError('Invalid covering atom')
+        if len(path) > maximum_depth or any(
+            type(i) is not int or i not in range(4) for i in path
+        ):
+            raise ValueError('Invalid subdivision path')
+        triangle = coords[faces[face_index]]
+        for child in path:
+            a, b, c = triangle
+            ab, bc, ca = (a + b) / 2, (b + c) / 2, (c + a) / 2
+            triangle = np.asarray(
+                ((a, ab, ca), (ab, b, bc), (ca, bc, c), (ab, bc, ca))[child]
+            )
+        maximum_distance = float(np.linalg.norm(triangle - coords[atom], axis=1).max())
+        margin = float(radii[atom] + probe - maximum_distance)
+        if margin <= tolerance:
+            raise ValueError('A leaf is not covered with the declared safety margin')
+        partitions[face_index].append(path)
+        distances.append(maximum_distance)
+        margins.append(margin)
+    for paths in partitions:
+        _check_partition(paths)
+    if not margins:
+        raise ValueError('An empty cover proves no supplied boundary')
+    if (4 * len(leaves) - len(faces)) // 3 > maximum_nodes:
+        raise ValueError('Complete cover exceeds the declared node budget')
+    return {
+        'leaf_count': len(leaves),
+        'maximum_depth': max(len(leaf['subdivision_path']) for leaf in leaves),
+        'maximum_vertex_distances': _quantity(distances, 'maximum_vertex_distances'),
+        'minimum_coverage_margin': _quantity(min(margins), 'minimum_coverage_margin'),
+    }
+
+
 def verify_certificate(
     input_file: Path, protocol_file: Path, certificate: dict[str, Any]
 ) -> dict[str, Any]:
@@ -103,40 +222,21 @@ def verify_certificate(
         or {tuple(sorted(face)) for face in faces} != expected
     ):
         raise ValueError('Certificate does not cover the actual hull faces')
-    partitions: list[list[list[int]]] = [[] for _ in faces]
-    distances = []
-    margins = []
     leaves = certificate['leaves']
-    if len(leaves) > protocol['maximum_visited_nodes']:
-        raise ValueError('Certificate exceeds the declared node budget')
-    for leaf in leaves:
-        face_index = leaf['hull_face_index']
-        path = leaf['subdivision_path']
-        atom = leaf['covering_atom_index']
-        if not isinstance(face_index, int) or not 0 <= face_index < len(faces):
-            raise ValueError('Invalid hull-face index')
-        if not isinstance(atom, int) or not 0 <= atom < len(coords):
-            raise ValueError('Invalid covering atom')
-        if len(path) > protocol['maximum_depth'] or any(
-            type(i) is not int or i not in range(4) for i in path
-        ):
-            raise ValueError('Invalid subdivision path')
-        triangle = coords[faces[face_index]]
-        for child in path:
-            a, b, c = triangle
-            ab, bc, ca = (a + b) / 2, (b + c) / 2, (c + a) / 2
-            triangle = np.asarray(
-                ((a, ab, ca), (ab, b, bc), (ca, bc, c), (ab, bc, ca))[child]
-            )
-        maximum_distance = float(np.linalg.norm(triangle - coords[atom], axis=1).max())
-        margin = float(radii[atom] + probe - maximum_distance)
-        if margin <= tolerance:
-            raise ValueError('A leaf is not covered with the declared safety margin')
-        partitions[face_index].append(path)
-        distances.append(maximum_distance)
-        margins.append(margin)
-    for paths in partitions:
-        _check_partition(paths)
+    coverage = verify_triangle_cover(
+        coords,
+        radii,
+        faces,
+        leaves,
+        probe,
+        tolerance,
+        length_unit='angstroms',
+        maximum_depth=protocol['maximum_depth'],
+        maximum_nodes=protocol['maximum_visited_nodes'],
+    )
+    distances = _values(
+        coverage['maximum_vertex_distances'], 'maximum_vertex_distances', 'angstroms'
+    )
     recorded = _values(
         certificate['maximum_vertex_distances'], 'maximum_vertex_distances', 'angstroms'
     )
@@ -155,8 +255,8 @@ def verify_certificate(
         'conclusion': 'origin_free_and_enclosed',
         'hull_face_count': len(faces),
         'leaf_count': len(leaves),
-        'maximum_depth': max(map(len, (leaf['subdivision_path'] for leaf in leaves))),
-        'minimum_coverage_margin': _quantity(min(margins), 'minimum_coverage_margin'),
+        'maximum_depth': coverage['maximum_depth'],
+        'minimum_coverage_margin': coverage['minimum_coverage_margin'],
         'origin_free_margin': _quantity(origin_margin, 'origin_free_margin'),
     }
 

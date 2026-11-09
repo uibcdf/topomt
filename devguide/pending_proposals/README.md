@@ -46,9 +46,8 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (2)
+### Active (1)
 
-- [`opening_boundary_connectivity.md`](opening_boundary_connectivity.md) — [#149](https://github.com/uibcdf/topomt/issues/149) — Certify the opened shell's connected probe-center boundary patch at 1.4 angstroms. *(active, measured)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
 ### Partial (5)

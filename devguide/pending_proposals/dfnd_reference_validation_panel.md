@@ -137,3 +137,21 @@ global cavity count, volume or general physical graph-path guarantee.
 Physical mouth-patch connectivity and compatible paths, then analytic-volume
 references and #75 precision/uncertainty, remain necessary work on these inputs.
 This issue remains partial/open; the new priority defers further geometries.
+
+## Opened-shell boundary reference — 2026-11-08
+
+#149 now certifies one connected strict-clearance probe-center patch on the
+opened shell's declared hull at 1.4 Å. A complete convex-ball cover blocks all
+other 127 hull faces. Verified positive/negative intersection witnesses on
+parent-ID face [6,7,8] give a convex nerve with beta1=1; planar complement
+duality and the blocked triangle boundary identify the one free patch. The
+retained all-atom origin ray enters it. Its count/face match the actual public
+Mouth without changing the native engine or earlier scientific bytes.
+
+The versioned certificate and standalone verifier reproduce checking without
+DFND or an optimizer; unit-policy, rigid-motion, atom-permutation and damaged
+certificate guards pass. It is retrospective characterization, not a blind
+evaluation, a formal interval proof or an intrinsic biological mouth definition.
+The local triangle area/gate do not acquire free-area or all-atom threshold
+qualification. Other probes/cases and general graph paths still need evidence;
+#76 remains partial/open alongside #75/#60 and the three-case deepening plan.
