@@ -26,6 +26,11 @@ Relationships below describe the purpose of the conversation. Existing provider
 routes, documentary reviews, executed comparisons and scientific qualification
 remain separately scoped in the thread and its evidence links.
 
+Current scientific-attribution behavior and future contributor obligations are
+documented in the [attribution inventory](attribution.md); the
+[source checkpoint](attribution_checkpoint.md) separates #157's implementation
+from installed/public qualification and wider adoption under #16/#56.
+
 | Resource | Conversation | Relationship / study scope |
 | --- | --- | --- |
 | fpocket | [#69](https://github.com/uibcdf/topomt/discussions/69) | Existing optional provider and comparison; [technical overview](fpocket4/overview.md). |

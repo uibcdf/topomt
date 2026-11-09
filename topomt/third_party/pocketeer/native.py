@@ -1,9 +1,11 @@
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed
 from topomt.features import Pocket
 from topomt.third_party.pocketeer._native_impl import pocketeer as _native_pocketeer
 
 
+@attributed('pocketeer', route='native')
 def get_topography(
     molecular_system,
     *,

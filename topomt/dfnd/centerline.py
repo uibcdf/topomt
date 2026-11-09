@@ -15,7 +15,10 @@ from typing import Any
 import numpy as np
 from depdigest import dep_digest
 
+from topomt._ackredit import attributed, scientific_call
 
+
+@attributed('networkx', route='original', retain=False)
 def _permeable_resident_graph(raw, resident_ids, tetra_by_id):
     """Build a resident graph with distance weights and gate metadata."""
     import networkx as nx
@@ -94,6 +97,7 @@ def _skeleton_geometry_from_path(raw, component, path, graph):
     }
 
 
+@attributed('dfnd', route='native', retain=False)
 @dep_digest('networkx')
 def channel_skeleton(raw, component) -> dict[str, Any] | None:
     """Return the shortest-distance channel skeleton for a channel component.
@@ -129,7 +133,9 @@ def channel_skeleton(raw, component) -> dict[str, Any] | None:
     for node in mouth_b_nodes:
         graph.add_edge(mouth_b, node, weight=0.0)
     try:
-        path_with_mouths = nx.shortest_path(graph, mouth_a, mouth_b, weight='weight')
+        path_with_mouths = scientific_call(
+            'dijkstra', nx.shortest_path, graph, mouth_a, mouth_b, weight='weight'
+        )
     except (nx.NetworkXNoPath, nx.NodeNotFound):
         return None
     path = [node for node in path_with_mouths if not isinstance(node, tuple)]
@@ -148,6 +154,7 @@ def channel_skeleton(raw, component) -> dict[str, Any] | None:
     return result
 
 
+@attributed('dfnd', route='native', retain=False)
 @dep_digest('networkx')
 def channel_branch_skeletons(raw, component) -> list[dict[str, Any]]:
     """Return visual secondary branches from extra mouths to the primary path.
@@ -185,7 +192,9 @@ def channel_branch_skeletons(raw, component) -> list[dict[str, Any]]:
         for node in mouth_nodes:
             graph.add_edge(mouth, node, weight=0.0)
         try:
-            path_with_virtual = nx.shortest_path(graph, mouth, target, weight='weight')
+            path_with_virtual = scientific_call(
+                'dijkstra', nx.shortest_path, graph, mouth, target, weight='weight'
+            )
         except (nx.NetworkXNoPath, nx.NodeNotFound):
             continue
         path = [node for node in path_with_virtual if not isinstance(node, tuple)]

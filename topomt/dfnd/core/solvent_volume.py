@@ -2,6 +2,8 @@ from collections import namedtuple
 
 import numpy as np
 
+from topomt._ackredit import attributed
+
 from ..._private.jit import lazy_njit
 
 SolventVolumeResult = namedtuple(
@@ -10,6 +12,7 @@ SolventVolumeResult = namedtuple(
 )
 
 
+@attributed('geometry', route='native')
 def tetrahedron_volume(vertices) -> float:
     """Return the Euclidean volume of a tetrahedron."""
     vertices = np.asarray(vertices, dtype=float)
@@ -53,6 +56,7 @@ def _simplex_lattice_weights(resolution: int, alpha: float = 0.5) -> np.ndarray:
 _WEIGHT_CACHE: dict[int, np.ndarray] = {}
 
 
+@attributed('geometry', route='native')
 def tetrahedron_solvent_volume_estimate(
     vertices,
     radii,
@@ -96,6 +100,7 @@ def tetrahedron_solvent_volume_estimate(
     )
 
 
+@attributed('geometry', route='native')
 def tetrahedron_solvent_volume_estimate_batch(
     vertices,
     radii,
@@ -181,6 +186,7 @@ def _mc_result(total: float, fraction: float, n_samples: int) -> PreciseVolumeRe
     return PreciseVolumeResult(volume, 2.0 * std_err)
 
 
+@attributed('geometry', route='native')
 def tetrahedron_empty_volume(
     vertices,
     atom_positions,
@@ -206,6 +212,7 @@ def tetrahedron_empty_volume(
     return _mc_result(total, _empty_fraction(points, centers, radii), n_samples)
 
 
+@attributed('geometry', route='native')
 def region_empty_volume(
     tetrahedra,
     atom_positions,
@@ -262,6 +269,7 @@ def _points_in_tetra(points: np.ndarray, tet: np.ndarray) -> np.ndarray:
     return np.all(bary >= -1e-9, axis=1) & (last >= -1e-9)
 
 
+@attributed('geometry', route='native')
 def region_occupancy_grid(
     tetrahedra,
     atom_positions,
@@ -407,6 +415,7 @@ def _tet_plane_polygon(tet: np.ndarray, z: float) -> np.ndarray:
     return points[order]
 
 
+@attributed('geometry', route='native')
 def ball_tetrahedron_volume(vertices, center, radius, *, n_quad: int = 24) -> float:
     """Deterministic ``vol(ball ∩ tetrahedron)`` by exact-slice Gauss quadrature.
 
@@ -701,6 +710,7 @@ def _njit_tet_exact(tet, centers, radii, nodes, weights):
     return total
 
 
+@attributed('geometry', route='native')
 def tetrahedron_empty_volume_exact(
     vertices, atom_positions, atom_radii, *, n_quad: int = 24
 ) -> float:
@@ -719,6 +729,7 @@ def tetrahedron_empty_volume_exact(
     return float(_njit_tet_exact(tet, centers, radii, nodes, weights))
 
 
+@attributed('geometry', route='native')
 def region_empty_volume_exact(
     tetrahedra, atom_positions, atom_radii, *, n_quad: int = 24
 ) -> float:

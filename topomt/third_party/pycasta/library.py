@@ -12,6 +12,7 @@ from depdigest import dep_digest
 from scipy.spatial import Delaunay
 
 from topomt import Topography
+from topomt._ackredit import attributed, scientific_call
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.arg_digestion.pycasta_arguments import OPTIONS
 from topomt._private.smonitor import LibraryNotFoundError, signal
@@ -137,6 +138,7 @@ def _json_safe(value: Any) -> Any:
     return value
 
 
+@attributed('pycasta', route='original')
 @signal(tags=['provider', 'pycasta', 'library'])
 @arg_digest(**OPTIONS)
 @dep_digest('pycasta', when={'upstream_root': None})
@@ -257,7 +259,7 @@ def get_topography(
         )
         # The existing live-route proof is retained. Recovery consumes this exact
         # verified map and never repeats SciPy's tetrahedralization.
-        simplices = Delaunay(protein_coords).simplices
+        simplices = scientific_call('qhull', Delaunay, protein_coords).simplices
         index_path = output_dir / 'topomt_tetrahedron_indices.json'
         index_path.write_text(
             json.dumps(

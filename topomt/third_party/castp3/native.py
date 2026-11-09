@@ -1,8 +1,10 @@
 import numpy as np
 
+from topomt._ackredit import attributed
 from topomt.third_party.castp3._native_impl import castp as _native_castp
 
 
+@attributed('castp3', route='native')
 def get_topography(molecular_system, **kwargs):
     """Return local CASTp3 features, including unit-bearing void SA/MS metrics.
 

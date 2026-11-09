@@ -1,8 +1,10 @@
 import numpy as np
 
+from topomt._ackredit import attributed
 from topomt.third_party.castp._native_impl import castp as _native_castp
 
 
+@attributed('castp', route='native')
 def get_topography(molecular_system, **kwargs):
     """Run the local CASTp native implementation and return a Topography."""
 

@@ -14,6 +14,7 @@ from typing import Any
 import numpy as np
 from depdigest import check_dependency
 
+from topomt._ackredit import original_provider
 from topomt._depdigest import DOC_URL, LIBRARIES
 from topomt._private.arg_digestion.external_arguments import _error
 from topomt._private.smonitor import TopoMTException, signal
@@ -300,6 +301,7 @@ def recover(provider: str, molecular_system: Any, bundle_file: Path) -> Provider
 
 
 @signal(tags=['provider', 'original', 'source'])
+@original_provider
 def get_output(
     provider: str, molecular_system: Any, backend: str, options: dict[str, Any]
 ) -> ProviderOutput:

@@ -3,10 +3,12 @@ import numpy as np
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed
 from topomt.features import Pocket
 from topomt.third_party.pycasta._native_impl import pycasta as _native_pycasta
 
 
+@attributed('pycasta', route='native')
 def get_topography(
     molecular_system,
     *,

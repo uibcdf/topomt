@@ -10,6 +10,7 @@ from uuid import uuid4
 import molsysmt as msm
 
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed
 from topomt.third_party._common import prepare_wrapper_input_pdb
 from topomt.third_party.castp.files import load_topography as load_castp_topography
 from topomt.topography.Topography import Topography
@@ -136,6 +137,7 @@ class Castp3Client:
         return None
 
 
+@attributed('castp3', route='original')
 def get_topography(
     molecular_system,
     *,

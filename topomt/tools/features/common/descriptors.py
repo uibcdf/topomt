@@ -5,11 +5,14 @@ from typing import Sequence
 
 import numpy as np
 
+from topomt._ackredit import attributed
+
 
 def _to_numpy(points) -> np.ndarray:
     return np.asarray(points, dtype=float)
 
 
+@attributed('geometry', route='native')
 def bounding_metrics(
     points: Sequence[Sequence[float]],
 ) -> dict[str, float | np.ndarray]:
@@ -45,6 +48,7 @@ def bounding_metrics(
     }
 
 
+@attributed('geometry', route='native')
 def effective_center_radius(
     points: Sequence[Sequence[float]],
 ) -> tuple[np.ndarray, float, float]:

@@ -1,3 +1,4 @@
+from topomt._ackredit import attributed
 from topomt.third_party.fpocket._native_impl import (
     _build_native_state,
     _native_topography_from_state,
@@ -5,6 +6,7 @@ from topomt.third_party.fpocket._native_impl import (
 )
 
 
+@attributed('fpocket', route='native')
 def get_topography(
     molecular_system,
     *,

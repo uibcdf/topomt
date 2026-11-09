@@ -4,7 +4,10 @@ from collections.abc import Sequence
 
 import numpy as np
 
+from topomt._ackredit import attributed
 
+
+@attributed('geometry', route='native')
 def union_volume_monte_carlo(
     centers: Sequence[Sequence[float]],
     radii: Sequence[float],

@@ -9,6 +9,7 @@ from depdigest import dep_digest
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed, scientific_call
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.arg_digestion.pocketeer_arguments import OPTIONS, RADIUS_PIPELINES
 from topomt.provider_output import ProviderRun
@@ -61,6 +62,7 @@ def _normalize_upstream_pocketeer_kwargs(kwargs):
     return normalized
 
 
+@attributed('pocketeer', route='original')
 @arg_digest(**OPTIONS, map=RADIUS_PIPELINES)
 @dep_digest('pocketeer', when={'upstream_root': None})
 @dep_digest('biotite')
@@ -137,7 +139,7 @@ def get_topography(
         source_context = source_input_context(molecular_system, structure_indices)
 
         upstream = import_upstream_module('pocketeer', upstream_root=upstream_root)
-        atomarray = upstream.load_structure(str(input_pdb))
+        atomarray = scientific_call('biotite', upstream.load_structure, str(input_pdb))
         if len(atomarray) != len(selected_atom_indices):
             raise ValueError(
                 'Pocketeer input atom count differs from the selected molecular system; '

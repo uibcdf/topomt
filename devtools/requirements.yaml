@@ -45,6 +45,7 @@ development:
   dependencies:
     - *test_tools
     - *docs_tools
+    - ackredit >=0.9
     - ipykernel
     - nbformat
     - nbclient

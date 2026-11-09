@@ -392,3 +392,9 @@ def test_fpocket_provider_native_and_topomt_route():
     assert len(topomt_topography) > 0
     assert puw.is_quantity(native_topography['POC-1'].volume)
     assert puw.is_quantity(topomt_topography['POC-1'].volume)
+    for result in (native_topography, topomt_topography):
+        saved = result.attribution
+        assert saved is not None
+        assert 'doi:10.1021/jm100574m' in {
+            entry['item']['id'] for entry in saved['references']
+        }

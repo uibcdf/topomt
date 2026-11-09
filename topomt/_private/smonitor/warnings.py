@@ -14,6 +14,10 @@ class UserTopoMTWarning(TopoMTCatalogWarning):
     pass
 
 
+class AttributionTrackingWarning(UserTopoMTWarning):
+    catalog_key = 'AttributionTrackingWarning'
+
+
 class NotDigestedArgumentWarning(TopoMTCatalogWarning):
     catalog_key = 'NotDigestedArgumentWarning'
 
@@ -43,6 +47,7 @@ class PocketeerSasaBackendWarning(UserTopoMTWarning):
 
 
 __all__ = [
+    'AttributionTrackingWarning',
     'UserTopoMTWarning',
     'NotDigestedArgumentWarning',
     'PocketeerDelaunayWarning',

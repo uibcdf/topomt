@@ -6,10 +6,12 @@ import molsysmt as msm
 import numpy as np
 
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed
 from topomt._private.smonitor import signal
 from topomt.delaunay_mesh import DelaunayMesh
 
 
+@attributed('pycasta', route='native')
 @signal(tags=['method', 'pycasta', 'native'])
 def pycasta(
     molecular_system,

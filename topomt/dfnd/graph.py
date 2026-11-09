@@ -8,6 +8,7 @@ from scipy.sparse import coo_matrix
 from scipy.sparse.csgraph import connected_components
 
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed, scientific_call
 from topomt.delaunay_mesh import DelaunayMesh
 from topomt.tools.geometry.arrays import _GeometrySnapshot, immutable_array
 from topomt.tools.tessellation import mouth_area_from_faces
@@ -285,6 +286,7 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
             epsilon=epsilon,
         )
 
+    @attributed('geometry', route='native')
     def _initialize_geometry(self, atom_coords, atom_radii, atom_indices_map):
         self.atom_coords = immutable_array(np.asarray(atom_coords, dtype=float))
         self.atom_radii = immutable_array(np.asarray(atom_radii, dtype=float))
@@ -725,6 +727,7 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
             clusters.append(cluster)
         return clusters
 
+    @attributed('dfnd', route='native')
     def get_topography(
         self,
         probe_radius=1.4,
@@ -844,14 +847,18 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
         valid_sources = transit_edges.valid_sources
         valid_targets = transit_edges.valid_targets
 
-        adjacency = coo_matrix(
+        adjacency = scientific_call(
+            'scipy',
+            coo_matrix,
             (
                 np.ones(valid_sources.shape[0], dtype=np.int8),
                 (valid_sources.astype(int), valid_targets.astype(int)),
             ),
             shape=(self.n_tetrahedra, self.n_tetrahedra),
         )
-        _n_components, labels = connected_components(adjacency, directed=False)
+        _n_components, labels = scientific_call(
+            'scipy', connected_components, adjacency, directed=False
+        )
 
         transit_nodes = np.where(finite_transit)[0]
         nodes_by_label = {}
@@ -1703,14 +1710,18 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
                     sources.append(anchor)
                     targets.append(other)
 
-        adjacency = coo_matrix(
+        adjacency = scientific_call(
+            'scipy',
+            coo_matrix,
             (
                 np.ones(len(sources), dtype=np.int8),
                 (np.asarray(sources, dtype=int), np.asarray(targets, dtype=int)),
             ),
             shape=(self.n_tetrahedra, self.n_tetrahedra),
         )
-        _n_components, labels = connected_components(adjacency, directed=False)
+        _n_components, labels = scientific_call(
+            'scipy', connected_components, adjacency, directed=False
+        )
 
         nodes_by_label = {}
         for node in np.where(dry_mask)[0]:

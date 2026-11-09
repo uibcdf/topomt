@@ -1,25 +1,22 @@
 # Citation
 
-Citing the Zenodo DOI of TopoMT (coming soon) in addition to the scientific
-paper is a way to ensure that others can reproduce your results, as they will
-know exactly which version of the software you used.
+Use the exact TopoMT version and cite the scientific methods and third-party
+software used in your calculation. TopoMT's software record names Diego
+Prada-Gracia and Liliana M. Moreno-Vargas and links to the
+[repository](https://github.com/uibcdf/topomt). Its automatic records currently
+declare no TopoMT release DOI or DFND publication.
 
-<br/>
+[Scientific attribution](../user/scientific_attribution.md) explains how
+optional Ackredit collects the reached methods and renders their bibliography:
 
-````{tabs}
+```python
+import topomt as tmt
 
-```{tab} Paper
-
-Coming soon...
-
-```
-```{tab} Software
-
-Diego Prada-Gracia & Liliana M. Moreno-Vargas. (2023). uibcdf/TopoMT.
-Zenodo entry in preparation.
-
-[BibTeX](../../_bibtex/software.bib)
-
+bibliography = tmt.cite(result, format='bibtex')
+records = tmt.get_attribution(result)
 ```
 
-````
+The records preserve original producer versions and distinguish original
+software execution from a native adaptation or methodological criterion.
+`get_attribution` works without Ackredit; formatting with `cite` needs it.
+Review the retained references and recording status before publication.

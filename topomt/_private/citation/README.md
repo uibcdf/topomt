@@ -1,10 +1,9 @@
-In any place the following lines can be used:
+# Scientific attribution
 
-```python
-@scoped_usage("topomt.features.detect_pockets")
-def detect_pockets(...):
-    track_item("topomt:2024:concavity")
-```
+Runtime integration is centralized in `topomt/_ackredit.py`; public result
+inspection/rendering lives in `topomt/citation.py`. This private package only
+re-exports the readers. It neither imports Ackredit nor records method use.
 
-And nothing happens if the library flowcite is not installed.
-
+Read `ACKREDIT_GUIDE.md` and `devguide/attribution.md` before adding a scientific
+boundary. The unused Flowcite shim has been retired; decorators without actual
+completion-boundary instrumentation do not establish adoption.

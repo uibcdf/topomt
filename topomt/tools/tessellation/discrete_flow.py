@@ -4,7 +4,10 @@ from collections import defaultdict, deque
 
 import numpy as np
 
+from topomt._ackredit import attributed
 
+
+@attributed('geometry', route='native')
 def build_open_neighbor_dict(
     mesh,
     open_mask: np.ndarray,
@@ -28,6 +31,7 @@ def build_open_neighbor_dict(
     return neighbor_dict
 
 
+@attributed('geometry', route='native')
 def flow_targets_to_sinks(
     proxy_values: np.ndarray,
     neighbor_dict: dict[int, list[int]],
@@ -66,6 +70,7 @@ def flow_targets_to_sinks(
     return flow_target
 
 
+@attributed('geometry', route='native')
 def group_by_flow_sink(
     flow_target: dict[int, int],
     neighbor_dict: dict[int, list[int]],
@@ -101,6 +106,7 @@ def group_by_flow_sink(
     return final_components
 
 
+@attributed('geometry', route='native')
 def flow_components(
     mesh,
     open_mask: np.ndarray,
@@ -129,6 +135,7 @@ def flow_components(
     return group_by_flow_sink(flow_target, neighbor_dict)
 
 
+@attributed('geometry', route='native')
 def build_descending_flow_graph(
     proxy_values: np.ndarray,
     neighbor_dict: dict[int, list[int]],
@@ -150,6 +157,7 @@ def build_descending_flow_graph(
     return forward_graph, reverse_graph
 
 
+@attributed('geometry', route='native')
 def ancestors_of_exterior(
     reverse_graph: dict[int, list[int]],
     exterior_nodes: list[int] | set[int],

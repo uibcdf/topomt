@@ -2,7 +2,10 @@
 
 from collections.abc import Sequence
 
+from topomt._ackredit import attributed
 
+
+@attributed('geometry', route='native')
 def simple_ranking(
     volumes: Sequence[float],
     pockets: Sequence[Sequence[int]],

@@ -3,6 +3,7 @@
 from typing import Dict, List, Tuple
 
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed
 from topomt._private.smonitor import signal
 from topomt.third_party.castp.core.castp_core import (
     build_castp_feature_records,
@@ -108,6 +109,7 @@ def _component_to_record(
     }
 
 
+@attributed('castp', route='native')
 @signal(tags=['method', 'castp', 'native'])
 def castp(
     molecular_system,

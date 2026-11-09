@@ -4,9 +4,11 @@ from collections.abc import Sequence
 
 import numpy as np
 
+from topomt._ackredit import attributed
 from topomt.tools.geometry.primitives import triangle_area
 
 
+@attributed('geometry', route='native')
 def mouth_area_from_faces(
     faces: Sequence[tuple[int, int, int]],
     atom_coords: np.ndarray,
@@ -24,6 +26,7 @@ def mouth_area_from_faces(
     return float(total_area)
 
 
+@attributed('geometry', route='native')
 def mouth_metrics_from_tetrahedra(
     pocket_indices: Sequence[int],
     simplices: np.ndarray,

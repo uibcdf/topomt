@@ -33,7 +33,10 @@ from typing import Any
 
 import numpy as np
 
+from topomt._ackredit import attributed, scientific_call
 
+
+@attributed('networkx', route='original', retain=False)
 def _resident_permeable_graph(raw: dict[str, Any], resident_ids: set[int]):
     """Return an ``networkx.Graph`` over ``resident_ids`` with an edge per shared
     *permeable* face (the routes a probe can actually take inside the wet body)."""
@@ -51,6 +54,7 @@ def _resident_permeable_graph(raw: dict[str, Any], resident_ids: set[int]):
     return graph
 
 
+@attributed('dfnd', route='native', retain=False)
 def localize_interface_core(
     topography,
     component_id: int,
@@ -108,7 +112,9 @@ def localize_interface_core(
         }
 
     graph = _resident_permeable_graph(raw, resident_ids)
-    betweenness = nx.betweenness_centrality(graph, normalized=True)
+    betweenness = scientific_call(
+        'brandes', nx.betweenness_centrality, graph, normalized=True
+    )
     scores = np.array([betweenness[t] for t in graph.nodes])
     threshold = float(np.quantile(scores, quantile))
 
@@ -136,6 +142,7 @@ def localize_interface_core(
     return result
 
 
+@attributed('dfnd', route='native', retain=False)
 def peel_surface_rafts(
     topography,
     component_id: int,

@@ -66,7 +66,11 @@ Older candidate/no-execution and pause wording remains dated history; current
 opening-post routing and maintained provider records identify the later scope.
 
 The known CAVER/MOLE four-atom failures have dedicated investigations #155/#156.
-Actual third-party Ackredit attribution is missing and has its own issue #157.
+The attribution gap observed in this audit is addressed by the source delivery
+under [#157](https://github.com/uibcdf/topomt/issues/157), with its
+[inventory](attribution.md) and [checkpoint](attribution_checkpoint.md).
+Source, installed/public and broader adoption retain their distinct scopes;
+remaining qualification belongs to #16 and ecosystem adoption to #56.
 Zeo++ documentary assessment is tracked in #167.
 The previous #147 length-admission defect is resolved source history, excluded
 from the current limitation view. Native #75/#151 remain open in their scoped records.

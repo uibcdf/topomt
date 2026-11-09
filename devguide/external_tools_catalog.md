@@ -32,6 +32,11 @@ Datasets and validation references have their own
 
 ## Ownership and current scope
 
+All implemented scientific routes follow the
+[automatic attribution inventory](attribution.md). Candidate status alone earns
+no citation; a newly integrated method must add verified bibliography, reached
+completion tracking and detached result references alongside its adapter tests.
+
 The maintainer accepted [the expansion plan](external_provider_expansion_plan.md)
 on 2026-11-07 under [#135](https://github.com/uibcdf/topomt/issues/135), before
 further BenchLab work: pyKVFinder #136, GHECOM #137, CAVER 3.02 CLI #138 and

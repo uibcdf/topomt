@@ -6,6 +6,7 @@ import numpy as np
 from scipy.spatial import Delaunay
 
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed, scientific_call
 from topomt.tools.geometry.arrays import _GeometrySnapshot
 
 _SIMPLEX_FACE_LOCAL_INDICES = (
@@ -127,6 +128,7 @@ class DelaunayMesh(_GeometrySnapshot):
     arrays associated with the Delaunay simplices.
     """
 
+    @attributed('geometry', route='native')
     def __init__(self, points=None, atom_radii=None):
 
         self.points = None
@@ -181,7 +183,7 @@ class DelaunayMesh(_GeometrySnapshot):
 
             self.atom_radii = atom_radii_value
 
-        triangulation = Delaunay(points_value)
+        triangulation = scientific_call('qhull', Delaunay, points_value)
 
         self.oriented_simplices = np.asarray(triangulation.simplices, dtype=int)
         self.simplices = np.sort(self.oriented_simplices.copy(), axis=1)

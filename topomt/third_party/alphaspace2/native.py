@@ -11,6 +11,7 @@ from scipy.spatial.distance import cdist
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed, scientific_call
 from topomt._private.arg_digestion.argument.binder_coords import digest_binder_coords
 from topomt._private.smonitor import signal
 from topomt.delaunay_mesh import DelaunayMesh
@@ -221,7 +222,9 @@ def _compute_alpha_layer(
     alpha_radii_nm = mesh.radii
     alpha_space_nm3 = mesh.get_volumes()
 
-    sasa = msm.physchem.get_sasa(receptor, element='atom', engine='mdtraj')
+    sasa = scientific_call(
+        'mdtraj_sasa', msm.physchem.get_sasa, receptor, element='atom', engine='mdtraj'
+    )
     atom_sasa_nm2 = np.asarray(puw.get_value(sasa, to_unit='nm**2'))[0]
     atom_types = receptor.topology.atoms['atom_type'].to_numpy()
     is_nonpolar = np.array(
@@ -251,8 +254,19 @@ def _cluster_pockets(
     if len(alpha_centers_nm) == 1:
         pocket_alpha_index_list = [[0]]
     else:
-        linkage_matrix = linkage(alpha_centers_nm, method='average')
-        labels = fcluster(linkage_matrix, cluster_cutoff_nm, criterion='distance') - 1
+        linkage_matrix = scientific_call(
+            'scipy', linkage, alpha_centers_nm, method='average'
+        )
+        labels = (
+            scientific_call(
+                'scipy',
+                fcluster,
+                linkage_matrix,
+                cluster_cutoff_nm,
+                criterion='distance',
+            )
+            - 1
+        )
         pocket_alpha_index_list = _group_labels(labels)
 
     pocket_centers_nm = np.array(
@@ -290,9 +304,17 @@ def _cluster_betas(
         if len(pocket_alpha_indices) == 1:
             grouped_alpha_indices = [[int(pocket_alpha_indices[0])]]
         else:
-            linkage_matrix = linkage(pocket_alpha_centers, method='complete')
+            linkage_matrix = scientific_call(
+                'scipy', linkage, pocket_alpha_centers, method='complete'
+            )
             labels = (
-                fcluster(linkage_matrix, beta_cluster_cutoff_nm, criterion='distance')
+                scientific_call(
+                    'scipy',
+                    fcluster,
+                    linkage_matrix,
+                    beta_cluster_cutoff_nm,
+                    criterion='distance',
+                )
                 - 1
             )
             grouped_local = _group_labels(labels)
@@ -433,7 +455,7 @@ def _prepare_vina_typing(
     don_type = np.full(len(prot_types), 'UNK', dtype=object)
     acc_type = np.full(len(prot_types), 'UNK', dtype=object)
 
-    tree = cKDTree(coordinates_a)
+    tree = scientific_call('scipy', cKDTree, coordinates_a)
 
     for index in np.where(hp_type == 'UNK')[0]:
         neighbor_indices = np.array(
@@ -468,6 +490,7 @@ def _prepare_vina_typing(
     return prot_types, hp_type, acc_type, don_type
 
 
+@attributed('vina', route='criterion')
 def _get_probe_scores(
     prot_coord_a: np.ndarray,
     prot_types: np.ndarray,
@@ -492,7 +515,7 @@ def _get_probe_scores(
             return 0.0
         return -distance / 0.7
 
-    probe_prot_dist = cdist(probe_coords_a, prot_coord_a)
+    probe_prot_dist = scientific_call('scipy', cdist, probe_coords_a, prot_coord_a)
     probe_scores = np.zeros(
         (probe_coords_a.shape[0], len(PROBE_ELEMENTS)), dtype=np.float32
     )
@@ -633,7 +656,7 @@ def _contact_matrix(
 ) -> np.ndarray:
     if binder_coords_nm is None or len(binder_coords_nm) == 0:
         return np.zeros((len(alpha_centers_nm), 0), dtype=bool)
-    dist = cdist(alpha_centers_nm, binder_coords_nm)
+    dist = scientific_call('scipy', cdist, alpha_centers_nm, binder_coords_nm)
     return dist <= cutoff_nm
 
 
@@ -648,7 +671,7 @@ def _compute_contact_masks(
         alpha_contact = np.zeros(len(alpha_centers_nm), dtype=bool)
     else:
         binder_coords_nm = np.asarray(binder_coords_nm, dtype=float)
-        binder_tree = cKDTree(binder_coords_nm)
+        binder_tree = scientific_call('scipy', cKDTree, binder_coords_nm)
         alpha_contact = np.array(
             [
                 len(binder_tree.query_ball_point(center, r=cutoff_nm)) > 0
@@ -834,6 +857,7 @@ def _state_to_pocket_records(state: AlphaSpace2State) -> list[dict[str, object]]
     return pocket_records
 
 
+@attributed('alphaspace2', route='native')
 @signal(tags=['method', 'alphaspace2', 'native'])
 def alphaspace2(
     molecular_system,
@@ -944,6 +968,7 @@ def alphaspace2(
     return clusters, state.alpha_centers_nm, state.alpha_radii_nm, contacts
 
 
+@attributed('alphaspace2', route='native')
 def get_topography(
     molecular_system,
     *,
@@ -1013,7 +1038,7 @@ def get_topography(
 
     atom_coords = msm.get(molecular_system, selection=atom_indices, coordinates=True)[0]
     atom_coords = puw.get_value(atom_coords, to_unit='nm')
-    tree = cKDTree(atom_coords)
+    tree = scientific_call('scipy', cKDTree, atom_coords)
 
     for index, cluster in enumerate(clusters):
         if len(cluster) < min_vertices:

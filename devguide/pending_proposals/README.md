@@ -58,9 +58,8 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 - [`topography_context_and_support.md`](topography_context_and_support.md) — [#60](https://github.com/uibcdf/topomt/issues/60) — Adopt explicit Topography analysis context and spatial support. *(partial, measured)*
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
-### Open (16)
+### Open (15)
 
-- [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Record reached third-party calculations through optional Ackredit attribution. *(open, inspected)*
 - [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
 - [`castpfold_pending_jobs.md`](castpfold_pending_jobs.md) — [#168](https://github.com/uibcdf/topomt/issues/168) — Resolve the disposition of retained pending CASTpFold synthetic jobs without resubmitting. *(open, inspected)*
 - [`caver_tetrahedron_applicability.md`](caver_tetrahedron_applicability.md) — [#155](https://github.com/uibcdf/topomt/issues/155) — Investigate the retained CAVER four-atom failure and supported input scope. *(open, inspected)*

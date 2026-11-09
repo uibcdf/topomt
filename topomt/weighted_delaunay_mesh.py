@@ -4,6 +4,7 @@ import numpy as np
 from scipy.spatial import ConvexHull
 
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed, scientific_call
 from topomt.delaunay_mesh import (
     _SIMPLEX_FACE_LOCAL_INDICES,
     _tetrahedron_condition_numbers,
@@ -155,7 +156,7 @@ def _regular_triangulation_simplices(
         ),
         axis=1,
     )
-    hull = ConvexHull(lifted_points)
+    hull = scientific_call('qhull', ConvexHull, lifted_points)
 
     oriented_simplices = []
     simplices = []
@@ -197,6 +198,7 @@ class WeightedDelaunayMesh:
         Atomic radii aligned with ``points``. Stored for downstream methods.
     """
 
+    @attributed('geometry', route='native')
     def __init__(self, points=None, weights=None, atom_radii=None):
 
         self.points = None

@@ -25,6 +25,7 @@ dependencies:
 - sphinx-tabs
 - sphinxcontrib-plantuml
 - myst-nb
+- ackredit >=0.9
 - ipykernel
 - nbformat
 - nbclient

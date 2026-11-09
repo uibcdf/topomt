@@ -57,6 +57,12 @@ CATALOG = {
         },
     },
     'warnings': {
+        'AttributionTrackingWarning': {
+            'code': 'AttributionTrackingWarning',
+            'user_message': 'Optional scientific attribution failed during {operation}: {reason}',
+            'user_hint': 'The scientific result retains host bibliography. Inspect its attribution status and the Ackredit installation.',
+            'category': 'attribution',
+        },
         'ExperimentalMethodWarning': {
             'code': 'ExperimentalMethodWarning',
             'user_message': "The method '{method}' is experimental and its API may change in future versions.",

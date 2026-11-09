@@ -31,6 +31,12 @@ not a current package index or a justification to invent another minimum.
 
 Optional extras include `centerline` (`networkx`), `tools` (`scikit-image` and
 `scikit-learn`), and `viewer` (MolSysViewer plus the centerline extra).
+
+Scientific attribution uses optional Ackredit through its public portable
+contract (`>=0.9.0`). The development tooling group includes it for real-provider
+tests, from the `uibcdf` Conda channel. It is not a required runtime package or
+a newly qualified PyPI extra. Read the [attribution inventory](attribution.md)
+for source receiving evidence and the separate installed/public boundary.
 The `alphaspace2` and `pocketeer` extras provide supporting libraries, MDTraj
 and Biotite respectively. They do not install their original pocket engines.
 Original fpocket, Pocketeer, AlphaSpace2, pyCASTA and CASTp service/file routes

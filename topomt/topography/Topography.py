@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 from collections.abc import Iterator, Mapping
-from typing import Any
+from typing import Any, Optional
 
 import molsysmt as msm
 
@@ -172,6 +172,13 @@ class Topography(Mapping[str, BaseFeature]):
     @property
     def features(self) -> dict[FeatureID, BaseFeature]:
         return self._features
+
+    @property
+    def attribution(self) -> Optional[dict[str, Any]]:
+        """Return detached scientific bibliography, or None if unrecorded."""
+        from topomt._ackredit import attribution_of
+
+        return attribution_of(self)
 
     def add_provider_run(self, run: ProviderRun) -> None:
         """Register an independent, recoverable provider-result snapshot."""

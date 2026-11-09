@@ -4,6 +4,8 @@ import molsysmt as msm
 import numpy as np
 from scipy.spatial import cKDTree
 
+from topomt._ackredit import attributed, scientific_call
+
 from . import pyunitwizard as puw
 from ._private.arg_digestion import arg_digest
 from ._private.smonitor import signal
@@ -152,6 +154,7 @@ def get_topography(
     return topo
 
 
+@attributed('pocketeer', route='native')
 def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
     implementation = kwargs.pop('implementation', 'native').lower()
     if implementation not in {'wrapper', 'native', 'topomt'}:
@@ -168,6 +171,7 @@ def _run_pocketeer(topo: Topography, **kwargs) -> Topography:
     )
 
 
+@attributed('alphaspace2', route='native')
 def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topography:
     implementation = kwargs.pop('implementation', 'native').lower()
     if implementation not in {'wrapper', 'native', 'topomt'}:
@@ -236,7 +240,7 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
         topo.molecular_system, selection=atom_indices, coordinates=True
     )[0]
     atom_coords = puw.get_value(atom_coords, to_unit='nm')
-    tree = cKDTree(atom_coords)
+    tree = scientific_call('scipy', cKDTree, atom_coords)
 
     for i, cluster in enumerate(clusters):
         if len(cluster) < min_vertices:
@@ -268,6 +272,7 @@ def _run_alphaspace2(topo: Topography, min_vertices: int = 20, **kwargs) -> Topo
     return topo
 
 
+@attributed('castp', route='native')
 def _run_castp(topo: Topography, **kwargs) -> Topography:
     from .third_party.castp._native_impl import castp
 
@@ -334,6 +339,7 @@ def _run_castp(topo: Topography, **kwargs) -> Topography:
     return topo
 
 
+@attributed('pycasta', route='native')
 def _run_pycasta(topo: Topography, **kwargs) -> Topography:
     implementation = kwargs.pop('implementation', 'native').lower()
     if implementation not in {'wrapper', 'native', 'topomt'}:

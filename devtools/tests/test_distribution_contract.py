@@ -194,7 +194,7 @@ class TestDistributionContract(unittest.TestCase):
     def test_all_routes_source_roles_and_contexts_use_the_shared_preflight(self):
         result = self.routes.audit(self.root)
         self.assertEqual(result['qualification'], 'declared-only')
-        self.assertEqual(len(result['routes']), 19)
+        self.assertEqual(len(result['routes']), 20)
         self.assertEqual(len(result['contexts']), 7)
         self.assertEqual(len(result['source_routes']), 12)
         integrations = {

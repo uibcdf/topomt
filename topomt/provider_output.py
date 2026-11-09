@@ -3,9 +3,9 @@
 import hashlib
 import json
 import zipfile
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path, PurePosixPath
-from typing import Any
+from typing import Any, Optional
 
 
 def _canonical_json(value: dict[str, Any]) -> str:
@@ -73,6 +73,46 @@ def _validate_manifest(manifest: Any) -> dict[str, Any]:
     return manifest
 
 
+def _validate_attribution(value: Any) -> dict[str, Any]:
+    """Admit the host envelope without importing/crediting scientific providers."""
+    if not isinstance(value, dict) or set(value) != {
+        'schema',
+        'producer',
+        'status',
+        'references',
+        'ackredit',
+    }:
+        raise ValueError('Invalid TopoMT attribution envelope.')
+    if value['schema'] != 'topomt.scientific_attribution@1' or value['status'] not in (
+        'recorded',
+        'unavailable',
+        'failed',
+    ):
+        raise ValueError('Unsupported TopoMT attribution schema or recording status.')
+    if not isinstance(value['producer'], dict) or not isinstance(
+        value['references'], list
+    ):
+        raise ValueError('Invalid TopoMT attribution producer or references.')
+    for entry in value['references']:
+        if not isinstance(entry, dict) or set(entry) != {
+            'item',
+            'target',
+            'roles',
+            'context',
+        }:
+            raise ValueError('Invalid TopoMT bibliographic declaration.')
+        if (
+            not isinstance(entry['item'], dict)
+            or not isinstance(entry['item'].get('id'), str)
+            or not isinstance(entry['roles'], list)
+            or not isinstance(entry['context'], dict)
+        ):
+            raise ValueError('Invalid TopoMT bibliographic record.')
+    if value['ackredit'] is not None and not isinstance(value['ackredit'], dict):
+        raise ValueError('Invalid portable attribution snapshot.')
+    return value
+
+
 @dataclass(frozen=True)
 class ProviderRun:
     """An immutable in-memory snapshot of a provider's input and output files."""
@@ -82,6 +122,14 @@ class ProviderRun:
     run_id: str
     artifacts: tuple[tuple[str, bytes], ...]
     metadata_json: str
+    attribution_json: Optional[str] = field(default=None, repr=False)
+
+    @property
+    def attribution(self) -> Optional[dict[str, Any]]:
+        """Return detached original bibliography, or unrecorded legacy None."""
+        return (
+            None if self.attribution_json is None else json.loads(self.attribution_json)
+        )
 
     @property
     def metadata(self) -> dict[str, Any]:
@@ -194,6 +242,14 @@ class ProviderRun:
         body = {key: value for key, value in manifest.items() if key != 'run_id'}
         if _digest(_canonical_json(body).encode('utf-8')) != self.run_id:
             raise ValueError('Provider bundle manifest checksum mismatch.')
+        if self.attribution_json is not None:
+            attribution = _validate_attribution(self.attribution)
+            manifest = {
+                'schema_version': 2,
+                'run': manifest,
+                'attribution': attribution,
+                'attribution_sha256': _digest(_canonical_json(attribution).encode()),
+            }
         with zipfile.ZipFile(path, 'w', compression=zipfile.ZIP_DEFLATED) as archive:
             archive.writestr('manifest.json', _canonical_json(manifest))
             for name, data in self.artifacts:
@@ -219,9 +275,23 @@ class ProviderRun:
             names = [member.filename for member in members]
             if len(names) != len(set(names)) or 'manifest.json' not in names:
                 raise ValueError('Provider bundle has duplicate names or no manifest')
-            manifest = _validate_manifest(
-                read_json(archive.read('manifest.json'), provider='ProviderRun')
-            )
+            manifest = read_json(archive.read('manifest.json'), provider='ProviderRun')
+            attribution_json = None
+            if isinstance(manifest, dict) and manifest.get('schema_version') == 2:
+                if (
+                    set(manifest)
+                    != {'schema_version', 'run', 'attribution', 'attribution_sha256'}
+                    or type(manifest['schema_version']) is not int
+                ):
+                    raise ValueError(
+                        'Provider attribution envelope has unexpected fields.'
+                    )
+                attribution = _validate_attribution(manifest['attribution'])
+                attribution_json = _canonical_json(attribution)
+                if _digest(attribution_json.encode()) != manifest['attribution_sha256']:
+                    raise ValueError('Provider attribution checksum mismatch.')
+                manifest = manifest['run']
+            manifest = _validate_manifest(manifest)
             expected = manifest['artifacts']
             if set(names) != {'manifest.json', *expected}:
                 raise ValueError('Provider bundle has missing or unexpected artifacts')
@@ -242,6 +312,7 @@ class ProviderRun:
             run_id,
             tuple(artifacts),
             _canonical_json(manifest['metadata']),
+            attribution_json,
         )
 
 

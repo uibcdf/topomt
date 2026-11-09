@@ -4,6 +4,7 @@ from smonitor.integrations import CatalogException, CatalogWarning
 from .catalog import CATALOG, CODES, META, PACKAGE_ROOT, SIGNALS
 from .emitter import resolve, warn, warn_once
 from .warnings import (
+    AttributionTrackingWarning,
     NotDigestedArgumentWarning,
     PocketeerDelaunayWarning,
     PocketeerSasaBackendWarning,
@@ -68,6 +69,7 @@ class ArgumentError(TopoMTException):
 
 
 __all__ = [
+    'AttributionTrackingWarning',
     'CATALOG',
     'CODES',
     'SIGNALS',

@@ -2,6 +2,12 @@
 from topomt._private.smonitor import LibraryNotFoundError
 
 LIBRARIES: dict[str, dict[str, str | None]] = {
+    'ackredit': {
+        'type': 'soft',
+        'pypi': None,
+        'conda': 'ackredit',
+        'channel': 'uibcdf',
+    },
     'numpy': {'type': 'hard', 'pypi': 'numpy'},
     'scipy': {'type': 'hard', 'pypi': 'scipy'},
     'molsysmt': {'type': 'hard', 'pypi': 'molsysmt'},

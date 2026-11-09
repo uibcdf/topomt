@@ -3,7 +3,10 @@
 import numpy as np
 from scipy.spatial.distance import cdist
 
+from topomt._ackredit import attributed, scientific_call
 
+
+@attributed('geometry', route='native')
 def ligand_contact_distances(
     pocket_points: np.ndarray,
     ligand_coords: np.ndarray,
@@ -13,7 +16,7 @@ def ligand_contact_distances(
     if pocket_points.size == 0 or ligand_coords.size == 0:
         return {'min': None, 'mean': None, 'max': None}
 
-    distances = cdist(pocket_points, ligand_coords)
+    distances = scientific_call('scipy', cdist, pocket_points, ligand_coords)
     return {
         'min': float(distances.min()),
         'mean': float(distances.mean()),
@@ -21,6 +24,7 @@ def ligand_contact_distances(
     }
 
 
+@attributed('geometry', route='native')
 def ligand_contact_mask(
     vertices: np.ndarray, ligand_coords: np.ndarray, hit_dist: float
 ) -> np.ndarray:
@@ -29,10 +33,11 @@ def ligand_contact_mask(
     if len(vertices) == 0 or len(ligand_coords) == 0:
         return np.zeros(len(vertices), dtype=bool)
 
-    distances = cdist(vertices, ligand_coords)
+    distances = scientific_call('scipy', cdist, vertices, ligand_coords)
     return np.min(distances, axis=1) < hit_dist
 
 
+@attributed('geometry', route='native')
 def sasa_contact_validation(
     pocket_coords: np.ndarray,
     ligand_coords: np.ndarray,
@@ -58,7 +63,7 @@ def sasa_contact_validation(
         if radii.shape[0] != n_atoms:
             raise ValueError('atom_radii length must match pocket_coords')
 
-    distances = cdist(pocket_coords, ligand_coords)
+    distances = scientific_call('scipy', cdist, pocket_coords, ligand_coords)
     min_distance = distances.min(axis=1)
     contact_mask = min_distance < (radii + probe_radius + contact_threshold)
     n_contact = int(contact_mask.sum())
@@ -66,6 +71,7 @@ def sasa_contact_validation(
     return {'n_contact': n_contact, 'fraction': fraction}
 
 
+@attributed('geometry', route='native')
 def probe_scoring(
     vertices: np.ndarray,
     ligand_coords: np.ndarray,
@@ -81,7 +87,7 @@ def probe_scoring(
     if vertices.size == 0 or ligand_coords.size == 0:
         return {key: 0.0 for key in probe_weights}
 
-    distances = cdist(vertices, ligand_coords)
+    distances = scientific_call('scipy', cdist, vertices, ligand_coords)
     eps = 1e-6
     inv = (cutoff / np.maximum(distances, eps)) ** power
     inv[distances > cutoff] = 0.0

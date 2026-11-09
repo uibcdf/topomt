@@ -3,7 +3,10 @@
 import numpy as np
 from scipy.spatial import ConvexHull
 
+from topomt._ackredit import attributed, scientific_call
 
+
+@attributed('geometry', route='native')
 def mouth_area_on_plane(
     mouth_points: np.ndarray,
     plane_point: np.ndarray,
@@ -56,7 +59,7 @@ def mouth_area_on_plane(
         return 0.0
 
     try:
-        hull = ConvexHull(projected)
+        hull = scientific_call('qhull', ConvexHull, projected)
         return float(hull.volume)
     except Exception:
         order = np.argsort(np.arctan2(projected[:, 1], projected[:, 0]))

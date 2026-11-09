@@ -5,6 +5,8 @@ import math
 import numpy as np
 from depdigest import dep_digest
 
+from topomt._ackredit import attributed, scientific_call
+
 
 def _to_numpy(array: np.ndarray | list | tuple) -> np.ndarray:
     return np.asarray(array, dtype=float)
@@ -56,6 +58,7 @@ def _validate_neighbor_pairs(neighbor_pairs, n_points: int) -> np.ndarray:
     return pairs
 
 
+@attributed('geometry', route='native')
 def cross_section_profile(
     centers: np.ndarray,
     axis: np.ndarray,
@@ -112,6 +115,7 @@ def cross_section_profile(
     return bin_centers, radial_max
 
 
+@attributed('geometry', route='native')
 def min_cross_section_radius(
     centers: np.ndarray,
     axis: np.ndarray,
@@ -134,6 +138,7 @@ def min_cross_section_radius(
     return float(positive.min())
 
 
+@attributed('dijkstra', route='criterion')
 def shortest_path_length(
     centers: np.ndarray,
     neighbor_pairs: np.ndarray | list | tuple,
@@ -186,6 +191,7 @@ def shortest_path_length(
     return math.inf
 
 
+@attributed('geometry', route='native')
 @dep_digest('sklearn', when={'neighbor_pairs': None})
 def thickness_profile(
     centers: np.ndarray,
@@ -229,7 +235,7 @@ def thickness_profile(
         neighbors = NearestNeighbors(
             n_neighbors=min(3, len(points)), algorithm='auto'
         ).fit(points)
-        distances, _ = neighbors.kneighbors(points)
+        distances, _ = scientific_call('sklearn', neighbors.kneighbors, points)
         if distances.shape[1] > 1:
             local_radii = distances[:, 1] / 2.0
         else:

@@ -5,6 +5,8 @@ from collections.abc import Sequence
 import numpy as np
 from depdigest import dep_digest
 
+from topomt._ackredit import attributed, scientific_call
+
 
 def _mesh_volume_area(vertices: np.ndarray, faces: np.ndarray) -> tuple[float, float]:
     """Return volume and area of a triangular mesh."""
@@ -32,6 +34,7 @@ def _mesh_volume_area(vertices: np.ndarray, faces: np.ndarray) -> tuple[float, f
     return float(volume), float(area)
 
 
+@attributed('geometry', route='native')
 @dep_digest('skimage')
 def marching_cubes_union(
     centers: Sequence[Sequence[float]],
@@ -75,7 +78,9 @@ def marching_cubes_union(
 
     from skimage.measure import marching_cubes
 
-    verts, faces, _, _ = marching_cubes(
+    verts, faces, _, _ = scientific_call(
+        'marching_cubes',
+        marching_cubes,
         dist,
         level=iso_level,
         spacing=(grid_spacing,) * 3,

@@ -4,6 +4,8 @@ from typing import Any
 
 import numpy as np
 
+from topomt._ackredit import attributed
+
 from .. import pyunitwizard as puw
 from ..features import (
     Channel,
@@ -219,6 +221,7 @@ def _run_dfnd(
     return network, result
 
 
+@attributed('dfnd', route='native')
 def dfnd_to_topography(
     molecular_system,
     selection: str = 'all',
@@ -355,6 +358,7 @@ def dfnd_to_topography(
     return topography
 
 
+@attributed('dfnd', route='native')
 def dfnd(
     molecular_system,
     selection: str = 'all',

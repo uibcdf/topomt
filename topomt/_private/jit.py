@@ -13,6 +13,8 @@ TopoMT does not pull in numba/LLVM unless an accelerated kernel is actually used
 
 from functools import lru_cache, wraps
 
+from topomt._ackredit import scientific_call
+
 _WRAPPER_COMPILED: dict = {}
 _COMPILING: set = set()
 
@@ -52,7 +54,7 @@ def lazy_njit(signature=None, cache=True, **kwargs):
 
         @wraps(func)
         def wrapper(*args, **kwds):
-            return _compiled()(*args, **kwds)
+            return scientific_call('numba', _compiled(), *args, **kwds)
 
         _WRAPPER_COMPILED[wrapper] = _compiled
         return wrapper

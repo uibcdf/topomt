@@ -16,6 +16,20 @@ from topomt.third_party._execution import ProviderExecutionError
 __all__ = ['source']
 
 
+def test_recovery_retains_attribution_without_crediting_another_calculation(
+    protocol_case, tmp_path
+):
+    ackredit = pytest.importorskip('ackredit')
+    _, source, original, _ = protocol_case
+    bundle = tmp_path / 'attributed.zip'
+    original.save(bundle)
+    with ackredit.session('read saved result'):
+        restored = tmt.load_provider_output(bundle, molecular_system=source)
+        assert restored.attribution == original.attribution
+        assert tmt.cite(restored)
+        assert not ackredit.get_attribution().to_dict()['items']
+
+
 @pytest.fixture(params=['pykvfinder', 'ghecom', 'caver', 'p2rank'])
 def protocol_case(request, source, monkeypatch):
     provider = request.param
@@ -68,6 +82,7 @@ def test_new_provider_recovery_is_source_bound_and_engine_free(
     provider, source, original, _ = protocol_case
     path = tmp_path / 'original.zip'
     original.save(path)
+    assert original.attribution['references']
 
     def forbidden(*args, **kwargs):
         pytest.fail('Saved reconstruction attempted original execution')
@@ -78,6 +93,7 @@ def test_new_provider_recovery_is_source_bound_and_engine_free(
     with puw.context(standard_units=[*policy, 'radians']):
         recovered = tmt.load_provider_output(path, molecular_system=source)
         assert recovered.run == original.run
+        assert recovered.attribution == original.attribution
         assert [r.record_kind for r in recovered.records] == [
             r.record_kind for r in original.records
         ]

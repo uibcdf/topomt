@@ -4,7 +4,10 @@ from collections.abc import Sequence
 
 import numpy as np
 
+from topomt._ackredit import attributed
 
+
+@attributed('geometry', route='native')
 def representative_points_from_tetra(
     pockets: Sequence[Sequence[int]],
     tetra_positions: np.ndarray,

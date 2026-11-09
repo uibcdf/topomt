@@ -224,6 +224,11 @@ kind = "resolved-package"
 reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"
 
 [[environments]]
+path = "devtools/conda-envs/original_local_env.yaml"
+kind = "build-only"
+reason = "Opt-in external-provider source-build tools and compiler/Java inputs; does not install the TopoMT runtime or qualify a public receiving environment (#169)"
+
+[[environments]]
 path = "devtools/conda-envs/production_env.yaml"
 kind = "runtime"
 reason = "Reviewed owner environment; historical importable fixture is not a TopoMT public receiving claim"

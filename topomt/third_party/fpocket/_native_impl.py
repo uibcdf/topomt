@@ -9,6 +9,7 @@ from scipy.spatial import ConvexHull
 
 from topomt import Topography
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed, scientific_call
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.smonitor import signal
 from topomt.delaunay_mesh import DelaunayMesh
@@ -671,8 +672,19 @@ def _build_native_state(
     if mesh.n_alpha_spheres == 1:
         pocket_alpha_index_list = [[0]]
     else:
-        linkage_matrix = linkage(mesh.centers, method='single', metric='euclidean')
-        labels = fcluster(linkage_matrix, CLUST_MAX_DIST_NM, criterion='distance') - 1
+        linkage_matrix = scientific_call(
+            'scipy', linkage, mesh.centers, method='single', metric='euclidean'
+        )
+        labels = (
+            scientific_call(
+                'scipy',
+                fcluster,
+                linkage_matrix,
+                CLUST_MAX_DIST_NM,
+                criterion='distance',
+            )
+            - 1
+        )
         pocket_alpha_index_list = _group_labels(labels)
 
     pocket_alpha_index_list = [
@@ -806,7 +818,7 @@ def _safe_convex_hull_volume(points: np.ndarray) -> float:
     if len(points) < 4:
         return 0.0
     try:
-        return float(ConvexHull(points).volume)
+        return float(scientific_call('qhull', ConvexHull, points).volume)
     except Exception:
         return 0.0
 
@@ -857,6 +869,7 @@ def _compute_pocket_local_hydrophobic_density(
     return float(np.mean(local_values))
 
 
+@attributed('sasa', route='criterion', retain=False)
 def _compute_native_surface_descriptors(
     state: Fpocket4NativeState,
     alpha_indices_array: np.ndarray,
@@ -1182,7 +1195,9 @@ def _native_topography_from_state(
     _normalize_native_descriptors(descriptors)
     for descriptor in descriptors:
         descriptor.score = _score_native_pocket(descriptor)
-        descriptor.druggability_score = _drug_score_native_pocket(descriptor)
+        descriptor.druggability_score = scientific_call(
+            'fpocket_druggability', _drug_score_native_pocket, descriptor
+        )
     descriptors.sort(key=lambda descriptor: descriptor.score, reverse=True)
 
     for pocket_index, descriptor in enumerate(descriptors, start=1):
@@ -1215,6 +1230,7 @@ def _native_topography_from_state(
     return topography
 
 
+@attributed('fpocket', route='native')
 @signal(tags=['method', 'fpocket4', 'native'])
 @arg_digest()
 def fpocket4(

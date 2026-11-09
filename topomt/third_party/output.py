@@ -8,7 +8,7 @@ when adapters produce these records directly.
 import copy
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, ClassVar, TypeVar
+from typing import Any, ClassVar, Optional, TypeVar
 
 import numpy as np
 
@@ -225,6 +225,11 @@ class ProviderOutput:
     )
     provider: ClassVar[str] = ''
     schema_version: ClassVar[int] = 1
+
+    @property
+    def attribution(self) -> Optional[dict[str, Any]]:
+        """Return the original detached bibliography, without recording a use."""
+        return self.run.attribution
 
     def __post_init__(self) -> None:
         records = tuple(self.records)

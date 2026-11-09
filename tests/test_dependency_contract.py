@@ -135,7 +135,7 @@ def test_backend_entry_points_report_missing_optional_libraries(monkeypatch):
     )
 
     with pytest.raises(LibraryNotFoundError):
-        alphaspace2_library(molecular_system=None)
+        alphaspace2_library(molecular_system=object())
 
     with pytest.raises(LibraryNotFoundError):
         pocketeer(molecular_system=None)

@@ -5,7 +5,10 @@ from collections.abc import Sequence
 import numpy as np
 from scipy.spatial import ConvexHull
 
+from topomt._ackredit import attributed, scientific_call
 
+
+@attributed('geometry', route='native')
 def clip_mesh_with_plane(
     vertices: np.ndarray,
     faces: np.ndarray,
@@ -63,7 +66,7 @@ def clip_mesh_with_plane(
     x_coord = relative.dot(basis_u)
     y_coord = relative.dot(basis_v)
     projected = np.stack([x_coord, y_coord], axis=1)
-    hull = ConvexHull(projected)
+    hull = scientific_call('qhull', ConvexHull, projected)
     polygon_2d = projected[hull.vertices]
     perimeter = float(
         np.sum(

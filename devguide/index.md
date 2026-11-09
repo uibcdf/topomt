@@ -40,6 +40,9 @@ respective boundaries.
 
 ## Work records
 
+Scientific methods and provider additions follow the
+[attribution inventory and maintenance procedure](attribution.md).
+
 Use the [reporting protocol](reporting_protocol.md) and
 [report template](templates/report.md) for issue-backed work. The generated
 [bug queue](pending_bugs/README.md), [proposal queue](pending_proposals/README.md)

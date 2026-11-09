@@ -9,6 +9,7 @@ import numpy as np
 from depdigest import dep_digest
 
 from topomt import Topography
+from topomt._ackredit import attributed, scientific_call
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.arg_digestion.alphaspace2_arguments import (
     LIBRARY_PIPELINES,
@@ -92,7 +93,9 @@ def _patch_alphaspace2_mdtraj_sasa(upstream):
         atom_mapping = np.arange(xyz.shape[1], dtype=np.int32)
         atom_selection_mask = np.ones(xyz.shape[1], dtype=np.int32)
         out = np.zeros((1, xyz.shape[1]), dtype=np.float32)
-        _geometry._sasa(
+        scientific_call(
+            'mdtraj_sasa',
+            _geometry._sasa,
             xyz,
             radii,
             int(n_sphere_points),
@@ -147,6 +150,7 @@ def _validate_loaded_coordinates(
         )
 
 
+@attributed('alphaspace2', route='original')
 @arg_digest(**OPTIONS, map=LIBRARY_PIPELINES)
 @dep_digest('alphaspace2', when={'upstream_root': None})
 @dep_digest('mdtraj')
@@ -300,12 +304,12 @@ def get_topography(
 
         import mdtraj as md
 
-        receptor = md.load(str(input_pdb))
+        receptor = scientific_call('mdtraj', md.load, str(input_pdb))
         _validate_loaded_coordinates(
             receptor, selected_atom_indices, source_context, 'receptor'
         )
         if binder_source_context is not None:
-            binder_trajectory = md.load(str(binder_pdb))
+            binder_trajectory = scientific_call('mdtraj', md.load, str(binder_pdb))
             _validate_loaded_coordinates(
                 binder_trajectory, binder_atom_indices, binder_source_context, 'binder'
             )

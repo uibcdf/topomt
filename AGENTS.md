@@ -102,6 +102,12 @@ external tools must be used here.
 - `ACKREDIT_GUIDE.md` — Required guide for optional scientific attribution and citation
   reporting.
 
+For new or changed scientific methods and third-party routes, also follow
+`devguide/attribution.md`: verify offline bibliography, credit the reached
+completion boundary, preserve original result versions/references, and test
+selected branches, reuse, optional failure and saved reading with real Ackredit.
+Native adaptation must not be recorded as execution of the original software.
+
 ## 1. Purpose of This File
 
 This file defines how automated agents and human contributors must work with the **TopoMT** repository.  

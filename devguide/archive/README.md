@@ -5,8 +5,9 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (36)
+### Resolved (38)
 
+- [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
 - [`benchlab_public_topography.md`](benchlab_public_topography.md) — [#146](https://github.com/uibcdf/topomt/issues/146) — Audit the three frozen BenchLab cases through the public Topography registry. *(resolved, measured)*
@@ -30,6 +31,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`original_ghecom_provider.md`](original_ghecom_provider.md) — [#137](https://github.com/uibcdf/topomt/issues/137) — Add source-bound original GHECOM execution and engine-independent recovery. *(resolved, measured)*
 - [`original_mole_provider.md`](original_mole_provider.md) — [#140](https://github.com/uibcdf/topomt/issues/140) — Add source-bound original MOLE execution and engine-independent recovery. *(resolved, measured)*
 - [`original_p2rank_provider.md`](original_p2rank_provider.md) — [#139](https://github.com/uibcdf/topomt/issues/139) — Add source-bound original P2Rank execution and engine-independent recovery. *(resolved, measured)*
+- [`original_provider_inventory_reconciliation.md`](original_provider_inventory_reconciliation.md) — [#169](https://github.com/uibcdf/topomt/issues/169) — Reconcile original-provider tooling and current packaged-resource declarations. *(resolved, measured)*
 - [`original_pykvfinder_provider.md`](original_pykvfinder_provider.md) — [#136](https://github.com/uibcdf/topomt/issues/136) — Add source-bound original pyKVFinder execution and engine-independent recovery. *(resolved, measured)*
 - [`original_result_validation_receipt.md`](original_result_validation_receipt.md) — [#142](https://github.com/uibcdf/topomt/issues/142) — Rejected original-provider results retained a completed receipt. *(resolved, reproduced)*
 - [`profile_memory_resource_lifecycle.md`](profile_memory_resource_lifecycle.md) — [#95](https://github.com/uibcdf/topomt/issues/95) — Preserve caller files and release memory-profile scratch and tracing. *(resolved, reproduced)*

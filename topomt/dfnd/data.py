@@ -24,7 +24,9 @@ structured views over the existing records.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Optional
+
+from topomt._ackredit import scientific_call
 
 from .. import pyunitwizard as puw
 from ..tools.geometry.arrays import _GeometrySnapshot
@@ -212,11 +214,21 @@ class DFNDData:
     """Single ``topography.dfnd`` object holding all DFND substrate."""
 
     def __init__(self, network: Any, result: dict[str, Any]) -> None:
+        import json
+
+        self._attribution_json = json.dumps(result.get('scientific_attribution'))
         self._network = network  # holds the cached, probe-independent mesh
         self.mesh_config = getattr(network, 'mesh_config', None)
         self.raw = result['raw']
         self.mesh = Mesh(network, result['raw'])
         self.dfn = DFN(result, network)
+
+    @property
+    def attribution(self) -> Optional[dict[str, Any]]:
+        """Return detached query bibliography, preserving construction versions."""
+        from topomt._ackredit import attribution_of
+
+        return attribution_of(self)
 
     @property
     def network(self) -> Any:
@@ -311,7 +323,7 @@ class DFNDData:
         bounding = np.linalg.norm(tetrahedra - centroids[:, None, :], axis=2).max(
             axis=1
         )
-        tree = cKDTree(network.atom_coords)
+        tree = scientific_call('scipy', cKDTree, network.atom_coords)
         max_radius = float(np.max(network.atom_radii))
         neighbor_lists = tree.query_ball_point(centroids, bounding + max_radius)
         flat = [index for sublist in neighbor_lists for index in sublist]

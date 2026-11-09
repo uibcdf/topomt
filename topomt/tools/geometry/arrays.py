@@ -1,7 +1,7 @@
 """Owned array storage for reusable geometric snapshots."""
 
 import copy
-from typing import Any, Self
+from typing import Any, Optional, Self
 
 import numpy as np
 
@@ -49,6 +49,13 @@ def immutable_array(array: np.ndarray) -> np.ndarray:
 
 class _GeometrySnapshot:
     """Private ownership machinery behind supported mesh/network operations."""
+
+    @property
+    def attribution(self) -> Optional[dict[str, Any]]:
+        """Return detached construction bibliography without a fresh calculation."""
+        from topomt._ackredit import attribution_of
+
+        return attribution_of(self)
 
     def __getattribute__(self, name: str) -> Any:
         value = object.__getattribute__(self, name)

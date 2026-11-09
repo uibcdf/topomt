@@ -5,7 +5,10 @@ from typing import Dict, List, Sequence, Union
 import molsysmt as msm
 import numpy as np
 
+from topomt._ackredit import attributed
 
+
+@attributed('geometry', route='native')
 def apolar_ratio(
     indices: Sequence[int],
     apolar_mask: Sequence[bool] | None = None,
@@ -33,6 +36,7 @@ def apolar_ratio(
     )
 
 
+@attributed('geometry', route='native')
 def nonpolar_ratio_from_sasa(
     sasa: np.ndarray,
     atom_elements: Sequence[str],
@@ -53,6 +57,7 @@ def nonpolar_ratio_from_sasa(
     return float(nonpolar_sasa / total_sasa)
 
 
+@attributed('geometry', route='native')
 def get_physicochemical_properties(
     molecular_system,
     atom_indices: List[int],

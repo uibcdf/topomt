@@ -4,7 +4,10 @@ import numpy as np
 from scipy.cluster.hierarchy import fcluster, linkage
 from scipy.spatial.distance import squareform
 
+from topomt._ackredit import attributed, scientific_call
 
+
+@attributed('geometry', route='native')
 def jaccard_overlap_clusters(
     lining_lists: list[list[int]],
     overlap_cutoff: float,
@@ -29,9 +32,14 @@ def jaccard_overlap_clusters(
         jaccard = 1.0 - intersection / union
     jaccard[np.isnan(jaccard)] = 1.0
 
-    condensed = squareform(jaccard, checks=False)
-    linkage_matrix = linkage(condensed, method='average')
-    labels = fcluster(linkage_matrix, t=overlap_cutoff, criterion='distance') - 1
+    condensed = scientific_call('scipy', squareform, jaccard, checks=False)
+    linkage_matrix = scientific_call('scipy', linkage, condensed, method='average')
+    labels = (
+        scientific_call(
+            'scipy', fcluster, linkage_matrix, t=overlap_cutoff, criterion='distance'
+        )
+        - 1
+    )
     clusters: dict[int, list[int]] = {}
     for feature_index, label in enumerate(labels):
         clusters.setdefault(int(label), []).append(feature_index)

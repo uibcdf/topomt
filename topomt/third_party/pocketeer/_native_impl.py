@@ -11,6 +11,7 @@ from depdigest import dep_digest
 from scipy.spatial import cKDTree
 
 from topomt import pyunitwizard as puw
+from topomt._ackredit import attributed, operation, scientific_call
 from topomt._private.molsysmt_preparation import build_heavy_receptor_view
 from topomt._private.smonitor import (
     PocketeerDelaunayWarning,
@@ -43,6 +44,7 @@ class PocketeerPocket:
     score: float
 
 
+@attributed('pocketeer', route='native')
 @dep_digest('biotite')
 @signal(tags=['method', 'pocketeer', 'native'])
 def pocketeer(
@@ -167,7 +169,7 @@ def _extract_alpha_spheres(
     r_min: float,
     r_max: float,
 ) -> list[PocketeerSphere]:
-    tree = cKDTree(coords_nm)
+    tree = scientific_call('scipy', cKDTree, coords_nm)
     spheres: list[PocketeerSphere] = []
     for sphere_id, simplex in enumerate(mesh.simplices):
         center = mesh.alpha_sphere_centers[sphere_id] / 10.0
@@ -272,7 +274,8 @@ def _sasa_molsysmt(
         atomarray.chain_id = chain_ids
         atomarray.res_name = res_names
         polar_probe_radius_ang = polar_probe_radius_nm * 10.0
-        sasa_array = sasa(atomarray, probe_radius=polar_probe_radius_ang)
+        with operation('biotite_sasa', route='original'):
+            sasa_array = sasa(atomarray, probe_radius=polar_probe_radius_ang)
     except Exception as exc:
         warnings.warn(PocketeerSasaBackendWarning(reason=str(exc)))
         return np.zeros(coords_nm.shape[0], dtype=float)
@@ -305,7 +308,7 @@ def _sphere_graph(
     if not spheres:
         return {}
     centers = np.array([sphere.center for sphere in spheres])
-    tree = cKDTree(centers)
+    tree = scientific_call('scipy', cKDTree, centers)
     graph: dict[int, set[int]] = {i: set() for i in range(len(spheres))}
     for idx, center in enumerate(centers):
         neighbors = tree.query_ball_point(center, dist_th)

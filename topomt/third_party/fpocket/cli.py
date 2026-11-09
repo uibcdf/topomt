@@ -5,6 +5,7 @@ from pathlib import Path
 
 import numpy as np
 
+from topomt._ackredit import attributed
 from topomt._private.arg_digestion import arg_digest
 from topomt._private.arg_digestion.fpocket_arguments import OPTIONS
 from topomt.third_party._common import (
@@ -17,6 +18,7 @@ from topomt.third_party.fpocket.runner import run_fpocket
 from topomt.topography.Topography import Topography
 
 
+@attributed('fpocket', route='original')
 @arg_digest(**OPTIONS)
 def get_topography(
     molecular_system,

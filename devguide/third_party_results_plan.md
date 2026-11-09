@@ -58,6 +58,11 @@ fpocket's pocket total/polar/apolar SASA.
 
 ## Provider-run record
 
+Scientific citation/acknowledgement metadata follows the
+[attribution contract](attribution.md). It retains original producer versions
+separately from the scientific run ID and must survive source-bound recovery
+without crediting another calculation.
+
 The [attribute-origin register](third_party_attribute_origins.md) identifies
 feature attributes whose score, typing, normalization, or index space belongs
 to a particular application. General geometric descriptors keep neutral names;
