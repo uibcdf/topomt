@@ -4,6 +4,8 @@ Date: 2026-11-09. Owner: [#170](https://github.com/uibcdf/topomt/issues/170).
 Status: **section proposal, prepared for maintainer review; public pages are not
 yet authored or integrated**.
 Reviewed checkout: `dc525ce63c6d30531f4924c9469511384394d9b3`.
+Critical review: 2026-11-09, against proposal commit
+`bf9900c9aad5fb24d5c16db4f8e156d1ce5f605a`; public section still unimplemented.
 This is a code/documentation study, not a new numerical experiment, scientific
 validation, accepted API change or replacement algorithm specification.
 
@@ -34,6 +36,32 @@ to practical calls and canonical study units. Keep the existing
 reference and link it in both directions. Preserve BenchLab's system/reference,
 DFND and comparison notebook separation. Do not move or copy frozen artifacts.
 There is no need for another showcase or a single large theory notebook.
+
+## Critical review: completeness and explanatory structure
+
+The first proposal covered the major implementation topics. Its weak point was
+the connection between those topics: a reader could learn the names and steps
+without understanding why the construction addresses the scientific question.
+The revised plan strengthens that reasoning and the reading progression:
+
+- Make admissible placement, continuous exterior reachability and finite-region
+  segmentation explicit before introducing the DFN graph. These answer different
+  questions; an exterior-accessible indentation need not be a separate component
+  of the complete continuous free space.
+- Explain the purpose, assumptions and cost of each design choice, including the
+  local obstacle approximation and the finite exterior convention.
+- Give conditional mathematical properties and their justification a defined
+  place, alongside questions still requiring proof or validation. Passing graph
+  tests alone does not establish equivalence to physical free-space topology.
+- Give dry topography and molecular interfaces separate chapters. They have
+  different supports, operators and interpretation requirements.
+- Supply an end-to-end worked reading of an actual frozen result, a parameter
+  map and explicit reader outcomes. Figures alone do not complete that route.
+
+Keep the main narrative about the scientific method. Brief scope notes and links
+carry current implementation status; historical migrations, issue chronology and
+operational detail remain in the appropriate references. The public explanation
+should be readable as a scientific account, rather than as a development log.
 
 ## What the repository study establishes
 
@@ -92,6 +120,21 @@ introduces notation and the formal definition, describes the implemented
 operation, and ends with interpretation/evidence and related API/study links.
 Put long derivations in appendices, with links at the relevant definition.
 
+Group the fourteen chapters into four navigable parts, without numbering page
+slugs or making the count a constraint on future editorial improvements:
+
+| Part | Chapters | Reader outcome |
+| --- | --- | --- |
+| Foundations and design | Overview; geometry/probe; local capacities | Define the target geometric objects and explain why DFND uses these operators. |
+| Construction of topography | Network/decomposition; exterior/boundaries; classification; dry topography; interfaces; hierarchy/paths | Reconstruct the discrete method and distinguish its different topographic products. |
+| Quantification and changing systems | Scale/dynamics; measurements; results/provenance | Interpret contextual results, measurements and cross-query correspondences. |
+| Reliability and applicability | Numerics/reproducibility; validation/scope | Identify justified inferences, model dependence and evidence still needed. |
+
+These parts are navigation groups, not four extra required overview chapters.
+Short conceptual sketches may introduce a definition in two dimensions before
+its three-dimensional construction. Label them as teaching schematics, not new
+qualified synthetic systems or substitutes for 3D topological evidence.
+
 Proposed sources, all **planned**, not existing public pages:
 
 ```text
@@ -103,7 +146,8 @@ docs/content/dfnd/
   network_and_decomposition.md
   exterior_and_boundaries.md
   classification.md
-  dry_topography_and_interfaces.md
+  dry_topography.md
+  interfaces.md
   hierarchy_and_paths.md
   scale_and_dynamics.md
   measurements.md
@@ -114,6 +158,7 @@ docs/content/dfnd/
   appendices/
     notation.md
     clearance_derivations.md
+    mathematical_properties.md
     algorithm.md
 ```
 
@@ -129,16 +174,48 @@ connectivity, not a computed hydrodynamic flow or a solvent transport rate.
 Introduce motivations and intended contributions without a novelty or
 superiority claim. Link the historical/antecedent context from the references.
 
+Use an explicit design rationale: why a Delaunay carrier separates geometry
+from radius-aware queries; why residence and face capacity answer different
+local questions; why local obstacle lists are tractable approximations; why
+OCEAN is removed for finite decomposition; why wet and dry views are analyzed
+together; and why identity, measurements and catalog names are separated.
+For each choice state its purpose, assumptions, lost information and relevant
+alternative, without presenting the selected design as proved optimal.
+
 ### Geometry and probe: define the object being studied
 
 Introduce centers/radii, the molecular ball union, bare empty space and probe
 center space. Distinguish nonpenetrating centers (`clearance >= probe`) from
 strictly free centers (`clearance > probe`), the probe's swept occupied volume,
 and tetrahedral carrier volume. Name tangency and numerical conventions.
+
+Define three reference objects for reasoning, not new runtime outputs:
+
+1. `F_p`: all admissible probe-center positions under the all-atom ball model
+   and declared strictness convention, whether or not they are reachable.
+2. `A_p`: the subset reachable from the unbounded exterior by a continuous
+   collision-free center path under the same model/convention. A probe can fit
+   at a position in a sealed void without being able to enter it from outside.
+3. The finite carrier/envelope and the rule used to select and decompose
+   topographic regions within it. An open surface concavity may communicate
+   with the same exterior as other concavities; its finite segmentation needs
+   an explicit convention beyond connectivity of the full `F_p`.
+
+Separate these physical reference sets from their current graph surrogates.
+Use a diagram relating the atomic model, continuous reference sets, finite
+carrier/local graph, segmentation rule and public interpretation. Label the
+physical-reference implications separately from the executed pipeline; current
+DFND does not first construct exact `F_p` and `A_p`. Explain what removing OCEAN
+actually achieves without asserting a general graph/free-space topology theorem.
+
 Explain ordinary Delaunay, its Voronoi relationship and the finite atomic-center
 convex hull. Atomic radii enter the local operators; this is not a weighted
 alpha-complex construction. Include selection, hydrogen/radius policy,
 single-frame input and the current nonperiodic Cartesian interpretation.
+Explain selecting the probe scale from the steric question: a conventional
+water-sized default is a model choice, and a spherical probe does not represent
+every shape or conformational freedom of a ligand. Distinguish physical-model
+sensitivity from numerical sensitivity when comparing settings.
 
 ### Local capacities: residence, gates and cell states
 
@@ -184,17 +261,29 @@ interpretation changes. Include a decision diagram that matches `classify.py`
 and the actual promotion path; biological pore/tunnel labels require additional
 evidence. Reporting suppression is a separate operation from decomposition.
 
-### Dry topography and interfaces: the other half of the model
+### Dry topography: relief and the solid-side view
 
 Distinguish local nonresidence from the bank graph's complement of finite
 transit nodes; connectors make them different. Explain face/edge/vertex bank
 adjacency, wet/dry incidence, depth, exposed shells and core candidates.
 Present the intended grounding of protrusions, convex patches, rims, ridges,
-walls and solid septa, with implemented-versus-proposed status. A dry bank is
-not a molecular participant, and an entire bank is not one protrusion. Separate
-native multi-bank lining from a localized molecular interface; include tight
-contacts, buried interfaces and associations without a wet cavity. Chemical
-characterization belongs to an orthogonal overlay, not a geometric family.
+walls and solid septa, with implemented-versus-proposed status. An entire bank
+is not one protrusion. Explain what additional support, neighborhood/reference,
+segmentation, prominence and scale policy a relief detector would need; dry
+connectivity alone does not supply those operators.
+
+### Interfaces: molecular participants and localized geometry
+
+Start from named molecular participants and their explicit atom correspondence.
+A dry bank is not a participant: a participant can span banks and several
+participants can share a bank. Separate native multi-bank lining, a molecular
+association and a localized interface realization. Include tight contacts,
+buried interfaces and associations without a wet cavity. Explain analysis of
+the assembly versus characterization of a pre-existing region by another
+participant; changing the selected atoms changes the geometric question.
+Present shape complementarity and biological interpretation as named evaluation
+questions with required support/evidence, not automatic consequences of two
+bank labels. Chemical characterization belongs to an orthogonal overlay.
 
 ### Internal structure and paths: hierarchy inside a region
 
@@ -251,6 +340,18 @@ atoms, tetrahedra, faces, retained queries and selected metric work; measured
 performance needs a pinned input/backend/resource profile, not a blanket speed
 or complexity claim. Use bounded examples and the shared-resource policy.
 
+Include a parameter map that lets readers tell what changes the scientific
+question, discrete approximation, numerical evaluation or presentation:
+
+| Parameter/input role | Examples | Interpretation |
+| --- | --- | --- |
+| Molecular model and frame | Selection, coordinates, radii/hydrogen policy, included waters/ions/ligands, frame | Changes the modeled object; not a harmless numerical perturbation by default. |
+| Physical probe scale | `probe_radius` | Changes the probe-center question on fixed geometry. |
+| Graph/model policy | `transit_policy`, `gate_intrusion_policy`, `dry_adjacency` | Changes the discrete construction or bank interpretation. |
+| Numerical decisions | `epsilon`, residence/permeability tolerances | Changes decision bands; extra tolerance is not measured molecular flexibility. |
+| Metric evaluation | Sampling count/seed, quadrature order, grid spacing | Changes estimator resolution/error and reproducibility; specify the measured set. |
+| Reporting | `min_size` | Changes reported views while preserving the underlying raw decomposition. |
+
 ### Validation and scope: how an interpretation earns support
 
 Distinguish mathematical implications under stated assumptions, engineering
@@ -281,6 +382,29 @@ from demonstrated advantages; follow the comparative-finding lifecycle.
   Recheck metadata and attribution, including CAST/MOLE antecedents; identify
   unpublished project reasoning as such. Ackredit usage references complement
   this list. No fabricated DFND paper/DOI or automatic claim of priority.
+
+### Mathematical properties and proof scope
+
+Connect assumptions to conclusions and distinguish intended exact operators
+from numerical implementations. Use the
+[existing theoretical review](core_theory_review_2026_11_06.md) as a source to
+reconcile under #76, not an already adopted replacement specification:
+
+| Question to justify | Required scope distinction |
+| --- | --- |
+| How does adding obstacle atoms change clearance? | Compare exact fields/maxima over the same support; distinguish local exclusion bounds from positive accessibility claims. |
+| How are face and cell maxima ordered? | A subset bound uses the same obstacle field; the current three-/four-atom operators use different lists. |
+| What must hold along a valid probe-center path? | State the exact existential residence definition and resulting implication before interpreting connectors; numerical candidates/tolerances require separate evidence. |
+| When does a free hull point establish exterior access? | Specify the all-atom-free point and convex-hull/outward-ray assumptions. |
+| What is nested when the probe grows? | Distinguish continuous admissible sets, fixed-policy discrete node/edge availability, changing components, and a changing triangulation. |
+| What can a scalar maximum establish? | Existence of a free position does not establish connectivity between different ports or count free patches. |
+| Which transformations preserve the intended result? | Separate mathematical rigid-motion/reindexing/unit consistency from tested numerical/representation invariance with explicit maps. |
+
+State proofs, counterexamples, bounds or unresolved obligations as appropriate.
+Do not claim homotopy/topological equivalence of the DFN graph and full physical
+free space without its own assumptions and proof. This appendix organizes
+explanatory obligations; it neither supplies missing runtime certificates nor
+resolves #76/#151 by documentation.
 
 ## Evidence and maintenance conventions
 
@@ -352,13 +476,49 @@ not duplicate editable evidence directories. Prefer Markdown/MyST for the main
 narrative; a small dedicated notebook is useful only when interaction or an
 executed derivation materially helps and has its own input/output contract.
 
+### One complete worked reading, not only disconnected illustrations
+
+The introductory route needs one recoverable input-to-result trace. Reuse the
+frozen tetrahedron and existing receiving/certificate evidence, with its exact
+coordinates, radii, units, probe and query policy. Walk through candidate centers
+and capacities, threshold states, graph, finite component, boundary contacts,
+classification, available measurements and the promoted object. Follow a public
+finding back to its saved atom/face/tetrahedron support and reference evidence.
+Show the actual interpretation at each adopted probe, including the empty
+resident result, and the difference between absent capability and computed zero.
+All numbers must identify their frozen source or a separately qualified replay;
+do not fill missing physical observables with legacy link counts.
+
+Readers should finish able to explain why a locally resident closed cavity need
+not be exterior-accessible, why global exterior connectivity alone does not
+segment every pocket, why patch/link/Mouth counts can differ, and what the
+reported volume actually measures. Use the two shells as complementary controls,
+not as an excuse to infer untested hierarchy, relief or interface behavior.
+Include a small chapter-to-example cross-reference so this trace can be followed
+in one sitting or revisited as the definitions are introduced.
+
+### Application interpretation and conceptual checks
+
+Use a few motivating questions (buried cavities, entry paths, surface relief and
+interfaces) to connect the method to research. Label the computed observation,
+the geometric inference and the biological hypothesis separately. Geometry alone
+does not calculate binding affinity, transport kinetics, solvent occupancy probabilities or
+thermodynamic stability. Older illustrative biological prose, including
+`Interpretation.md`, needs this evidence review before reuse.
+
+Close each part with short reader questions: what was the modeled set, which
+obstacles were used, what establishes a connection, which parameter changes the
+question, and which conclusion is justified by the available result? These are
+conceptual reading checks; they do not require a new numerical benchmark.
+
 ## Authoring order and completion gates
 
 All documentary actions below belong to #170. They do not reorder the active
 scientific sequence or make #170 a replacement for scientific issues.
 
 1. Review the proposed scope, terminology and chapter dependency order. Build a
-   notation sheet and a source-to-claim checklist before writing the narrative.
+   notation sheet, the admissibility/accessibility/segmentation definitions, a
+   design-rationale outline and a source-to-claim checklist before writing.
 2. Author the overview/model/capacity/decomposition/result spine and the
    tetrahedron explanation together. Include local-versus-physical limitations
    at the relevant inference, not only in a final warnings page.
@@ -384,3 +544,10 @@ from the implemented approximation, interpret a real current Topography result,
 locate the independent evidence, and identify which intended topographic
 entities remain provisional or unimplemented. The source-backed proposal is
 the first deliverable under #170; authoring/integration remains open.
+
+The critical review adds an explicit completion audit: verify the complete
+worked trace and parameter map, the mathematical implication/proof-scope table,
+separate dry/interface treatment and both reading routes. Keep chapter-level
+status concise enough that readers can follow the argument without reading issue
+history. The chapter count and presence of every heading are not completion
+criteria by themselves.

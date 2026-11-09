@@ -22,10 +22,10 @@ of DFND and its theoretical basis. The proposed public destination is
 `docs/content/dfnd/`, titled **DFND: Theory and Method**, as a first-class section
 beside the User guide and BenchLab.
 
-The [section plan](../DFND/documentation_section_plan.md) supplies thirteen
-chapter briefs, appendices/references, reading routes, a source/evidence map,
-figures/examples and authoring/publication gates. It is a proposal, not a
-delivered public section or a scientific-kernel change.
+The [section plan](../DFND/documentation_section_plan.md) supplies fourteen
+chapter briefs in four parts, appendices/references, reading routes, a
+source/evidence map, figures/examples and authoring/publication gates. It is a
+proposal, not a delivered public section or a scientific-kernel change.
 
 ## How
 
@@ -96,3 +96,29 @@ authoring/integration and its Sphinx/example checks remain under #170; the full
 scientific suite, public-site deployment, installed artifacts and support matrix
 were not run or qualified by these checks. The pre-existing human version-file
 change is preserved outside this delivery.
+
+## Critical review of the proposal — 2026-11-09
+
+Reviewed proposal source `bf9900c9aad5fb24d5c16db4f8e156d1ce5f605a` for
+scientific completeness and reader progression. Topic coverage was broad;
+the physical-reference/segmentation bridge, design rationale and end-to-end
+learning route needed more explicit treatment.
+
+The revised plan distinguishes admissible probe placement, continuous exterior
+reachability and finite topographic segmentation; gives conditional properties
+and proof obligations their own appendix; separates dry topography from
+molecular interfaces; groups fourteen chapters into four parts; and specifies a
+complete frozen input-to-public-result trace, parameter map and reader checks.
+Biological interpretations require their own evidence. Keep issue/history
+detail in references and concise status notes so the public text remains a
+scientific explanation. These revisions are owned by #170 and do not adopt new
+scientific operators, assert missing guarantees or resolve #76/#151/#75.
+
+Review checks: **16 reporting/comparative tests passed**; both changed documents
+parse with MyST without warnings, their **63 local link targets** exist, and
+fourteen chapter briefs match fourteen planned main chapter pages. Generated
+indexes, comparative consistency and whitespace checks pass. The tests used the
+same one-CPU/thread and memory/CPU limits as the initial proposal checkpoint:
+2.31 s elapsed, peak RSS 153 MiB. Review logs remain in the task-owned cache.
+No scientific execution or public-section Sphinx build is claimed for these
+developer-document changes.
