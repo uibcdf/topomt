@@ -11,6 +11,18 @@ to a tube are deferred by this decision; initial passing anchors are not the
 completion rule. #146 owns the bounded public audit, #148 the 0.2 Å cover;
 #75/#76/#60 retain their broader numerical/scientific/public-support gates.
 
+**2026-11-10 review:** the
+[three-case assessment and reader-route proposal](../pending_proposals/benchlab_three_case_reader_route.md)
+confirms the initial controls and reproducibility: seven fresh-kernel notebooks,
+95 passing focused tests and seven pending #151 targets; no frozen evidence
+changed. The cases remain useful for physical patches/paths, volume references,
+public/dry support and bounded robustness studies before adding geometry.
+[#175](https://github.com/uibcdf/topomt/issues/175) owns current notebook/web
+reading continuity: older notebook conclusions predate delivered certificates
+and effective-radius follow-ups. The public URL still serves PocketMT and
+returns 404 for BenchLab; deployment remains #18. Review completion does not
+close those presentation, scientific or deployment tasks.
+
 Maintain advantages and limitations through the
 [comparative-finding lifecycle](../comparative_findings.md) and
 [canonical hub](https://github.com/uibcdf/topomt/discussions/154). A fix must
