@@ -78,3 +78,24 @@ One CPU/numerical thread, 6 GiB address-space and 120 s CPU limits; at most
 The pilot on canonical face [0,1,2] verifies a zero free-component count with
 100 decisions and a 0.0174 Å minimum margin, about 0.1 s / 89 MiB process RSS.
 Complete hull capture and falsification/actual DFND comparison remain pending.
+
+## First complete discovery and bounded-reference outcome
+
+Generator source `6bc0fb8` produced 13,960 independently checked intersection
+decisions with 212 bounded solver calls in 4.144 s. The complete face evidence
+is retained as `small_probe_boundary_v1/certificate_candidate.json`; its
+`unsupported_receipt.json` deliberately has no global count. Face [18,31,39]
+has two free components, outside v1's accepted seam mapping. This is a reference
+qualification limit; the scientific evidence is preserved, not discarded or
+rounded into the expected count.
+
+Protocol v2 retains those convex decisions and adds explicit local separation:
+closed polygons carried by covered convex sets supply winding signatures of
+strictly free interior witnesses. Distinct signatures prove distinct free
+components. Exactly beta_1 such witnesses exhaust each independently counted
+face. Every free edge interval gets an independently checked free segment to
+one of these labeled regions. The complete resulting face-region/seam graph
+then counts hull patches, including the multiple-region face. Missing witnesses,
+ambiguous winding or an exhausted discovery budget remain unresolved. No
+production region, label or path is an input. The known candidate13 remains
+retrospective and is not a reference acceptance constant.

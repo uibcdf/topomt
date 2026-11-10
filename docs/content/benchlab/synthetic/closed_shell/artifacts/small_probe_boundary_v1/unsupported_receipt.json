@@ -1,0 +1,2676 @@
+{
+  "status": "unsupported_global_seam_mapping",
+  "reason": "Multiple face components need independent seam localization",
+  "global_patch_count": null,
+  "source_revision": "6bc0fb88a4d4666b172a2abcf896d8dfa7dfa73c",
+  "generation_seconds": 4.144,
+  "peak_rss_kib": 98240,
+  "work": {
+    "intersection_decisions": 13960,
+    "solver_calls": 212
+  },
+  "face_verification": [
+    {
+      "face": [
+        0,
+        1,
+        2
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.01743446188832487,
+      "decision_count": 100
+    },
+    {
+      "face": [
+        0,
+        1,
+        3
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07679206097284075,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        0,
+        2,
+        5
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.20502270177429027,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        0,
+        3,
+        8
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 13,
+        "triangles": 9,
+        "components": 1,
+        "rank_boundary_2": 8,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.030928025640008183,
+      "decision_count": 102
+    },
+    {
+      "face": [
+        0,
+        5,
+        8
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 15,
+        "triangles": 9,
+        "components": 1,
+        "rank_boundary_2": 8,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.013754212617625772,
+      "decision_count": 107
+    },
+    {
+      "face": [
+        1,
+        2,
+        4
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 13,
+        "triangles": 6,
+        "components": 1,
+        "rank_boundary_2": 6,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.006078259538925712,
+      "decision_count": 103
+    },
+    {
+      "face": [
+        1,
+        3,
+        6
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.05554606883403257,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        1,
+        4,
+        9
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.15597008758638498,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        1,
+        6,
+        9
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 6,
+        "components": 1,
+        "rank_boundary_2": 6,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.007217526488595638,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        2,
+        4,
+        7
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.006078259538925712,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        2,
+        5,
+        10
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.18057673210072656,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        2,
+        7,
+        15
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.14684068249888416,
+      "decision_count": 100
+    },
+    {
+      "face": [
+        2,
+        10,
+        15
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 14,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.07172266130061766,
+      "decision_count": 104
+    },
+    {
+      "face": [
+        3,
+        6,
+        11
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.20246980544012616,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        3,
+        8,
+        16
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.015161812343616354,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        3,
+        11,
+        16
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0148009554784434,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        4,
+        7,
+        12
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0580765243828274,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        4,
+        9,
+        17
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.045896936547253464,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        4,
+        12,
+        17
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.015308432290594087,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        5,
+        8,
+        13
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.04342573184882892,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        5,
+        10,
+        18
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 13,
+        "triangles": 9,
+        "components": 1,
+        "rank_boundary_2": 8,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.013918115694444566,
+      "decision_count": 102
+    },
+    {
+      "face": [
+        5,
+        13,
+        18
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 15,
+        "triangles": 10,
+        "components": 1,
+        "rank_boundary_2": 9,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.026062067613526807,
+      "decision_count": 107
+    },
+    {
+      "face": [
+        6,
+        9,
+        14
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0014764501954664944,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        6,
+        11,
+        19
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0893801722974421,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        6,
+        14,
+        19
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.16478693253767163,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        7,
+        12,
+        20
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.12629397009271082,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        7,
+        15,
+        20
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.005004276902143445,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        8,
+        13,
+        21
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.2026030589816925,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        8,
+        16,
+        21
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.1420410985018281,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        9,
+        14,
+        22
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.08820425901186746,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        9,
+        17,
+        22
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.09874773843219598,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        10,
+        15,
+        23
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.14895208273686467,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        10,
+        18,
+        23
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0879723558985448,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        11,
+        16,
+        24
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.034834893637228026,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        11,
+        19,
+        24
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0811025004084669,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        12,
+        17,
+        25
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.028034692384060644,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        12,
+        20,
+        25
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07891752739731439,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        13,
+        18,
+        26
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.13088110032353883,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        13,
+        21,
+        26
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07931808051400702,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        14,
+        19,
+        27
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.13232328102101576,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        14,
+        22,
+        27
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0786090823861576,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        15,
+        20,
+        28
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.11257893594026891,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        15,
+        23,
+        36
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.03409580404211643,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        15,
+        28,
+        36
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0005891396089763301,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        16,
+        21,
+        29
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.023376522228102825,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        16,
+        24,
+        37
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.01840064331064295,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        16,
+        29,
+        37
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.01840064331064295,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        17,
+        22,
+        30
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.04028654188855607,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        17,
+        25,
+        38
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.05183665335270726,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        17,
+        30,
+        38
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.05183665335270726,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        18,
+        23,
+        31
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.10927465270774817,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        18,
+        26,
+        39
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.06137503948874401,
+      "decision_count": 100
+    },
+    {
+      "face": [
+        18,
+        31,
+        39
+      ],
+      "free_components": 2,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 15,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 2
+      },
+      "minimum_decision_margin_angstroms": 0.0002760350682613488,
+      "decision_count": 106
+    },
+    {
+      "face": [
+        19,
+        24,
+        32
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.1273471781890485,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        19,
+        27,
+        32
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.004114214643467173,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        20,
+        25,
+        33
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.06914117033493627,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        20,
+        28,
+        33
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.052086638323527,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        21,
+        26,
+        34
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.08829412139442616,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        21,
+        29,
+        34
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.0031045554850597235,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        22,
+        27,
+        35
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07613519606875574,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        22,
+        30,
+        35
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.030554459661885414,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        23,
+        31,
+        36
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.023454473502416695,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        24,
+        32,
+        37
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.005307304451872552,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        25,
+        33,
+        38
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.004797515328315072,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        26,
+        34,
+        39
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.016261810941237353,
+      "decision_count": 109
+    },
+    {
+      "face": [
+        27,
+        32,
+        40
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.004114214643467173,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        27,
+        35,
+        40
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.010260417773513053,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        28,
+        33,
+        41
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.052086638323527,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        28,
+        36,
+        41
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.004713552522436659,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        29,
+        34,
+        42
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.0031045554850597235,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        29,
+        37,
+        42
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.006466362077602428,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        30,
+        35,
+        43
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.03649933412433026,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        30,
+        38,
+        43
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 13,
+        "triangles": 9,
+        "components": 1,
+        "rank_boundary_2": 8,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.03185994688785332,
+      "decision_count": 102
+    },
+    {
+      "face": [
+        31,
+        36,
+        44
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.023454473502416695,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        31,
+        39,
+        52
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 14,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.006297149919572309,
+      "decision_count": 104
+    },
+    {
+      "face": [
+        31,
+        44,
+        52
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.006297149919572309,
+      "decision_count": 100
+    },
+    {
+      "face": [
+        32,
+        37,
+        45
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.005307304451872552,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        32,
+        40,
+        45
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.04520948450195528,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        33,
+        38,
+        46
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.004797515328315072,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        33,
+        41,
+        46
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.081079686044496,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        34,
+        39,
+        47
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 13,
+        "triangles": 9,
+        "components": 1,
+        "rank_boundary_2": 8,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.06631678610927572,
+      "decision_count": 102
+    },
+    {
+      "face": [
+        34,
+        42,
+        47
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.016334907134836207,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        35,
+        40,
+        48
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 11,
+        "triangles": 5,
+        "components": 1,
+        "rank_boundary_2": 5,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.010260417773513053,
+      "decision_count": 96
+    },
+    {
+      "face": [
+        35,
+        43,
+        48
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.010480021251602967,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        36,
+        41,
+        49
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.004713552522436659,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        36,
+        44,
+        49
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.10646904013931091,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        37,
+        42,
+        50
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.00646636207760265,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        37,
+        45,
+        50
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07349357712154725,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        38,
+        43,
+        51
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 15,
+        "triangles": 10,
+        "components": 1,
+        "rank_boundary_2": 9,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.031478609195436436,
+      "decision_count": 107
+    },
+    {
+      "face": [
+        38,
+        46,
+        51
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.020363476205940145,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        39,
+        47,
+        60
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.05373124074104618,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        39,
+        52,
+        60
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 16,
+        "triangles": 12,
+        "components": 1,
+        "rank_boundary_2": 10,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.05373124074103286,
+      "decision_count": 111
+    },
+    {
+      "face": [
+        40,
+        45,
+        53
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.036964656882873204,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        40,
+        48,
+        53
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.12807933171900054,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        41,
+        46,
+        54
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07983042314622835,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        41,
+        49,
+        54
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.1288631810756149,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        42,
+        47,
+        55
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.016334907134836207,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        42,
+        50,
+        55
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.007882207349018122,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        43,
+        48,
+        56
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.010480021251602967,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        43,
+        51,
+        56
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0333195289446353,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        44,
+        49,
+        57
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.11626601410491655,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        44,
+        52,
+        57
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0647263411035266,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        45,
+        50,
+        58
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.05394504784622223,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        45,
+        53,
+        58
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0714397005193903,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        46,
+        51,
+        59
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.04779735860425394,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        46,
+        54,
+        59
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.13837434893635936,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        47,
+        55,
+        60
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.09378235128590329,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        48,
+        53,
+        61
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.12482226849045919,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        48,
+        56,
+        61
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.09770905650716277,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        49,
+        54,
+        62
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.10623580069243266,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        49,
+        57,
+        62
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07636560751018484,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        50,
+        55,
+        63
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.10632842829883327,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        50,
+        58,
+        63
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07271080926892126,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        51,
+        56,
+        64
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.12407236330865468,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        51,
+        59,
+        64
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07276717284241885,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        52,
+        57,
+        65
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.09189763609434887,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        52,
+        60,
+        65
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.01895267004777379,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        53,
+        58,
+        66
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07663064702712696,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        53,
+        61,
+        66
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.07663064702712696,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        54,
+        59,
+        67
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.06910703228089266,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        54,
+        62,
+        67
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0270204869857249,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        55,
+        60,
+        68
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 15,
+        "triangles": 10,
+        "components": 1,
+        "rank_boundary_2": 9,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0016779385482901255,
+      "decision_count": 107
+    },
+    {
+      "face": [
+        55,
+        63,
+        68
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 13,
+        "triangles": 9,
+        "components": 1,
+        "rank_boundary_2": 8,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.05700071973528931,
+      "decision_count": 102
+    },
+    {
+      "face": [
+        56,
+        61,
+        69
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 15,
+        "triangles": 9,
+        "components": 1,
+        "rank_boundary_2": 9,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0006329682892474153,
+      "decision_count": 106
+    },
+    {
+      "face": [
+        56,
+        64,
+        69
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0011153461842732248,
+      "decision_count": 100
+    },
+    {
+      "face": [
+        57,
+        62,
+        65
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.02689135122871411,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        58,
+        63,
+        66
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.11689621983739285,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        59,
+        64,
+        67
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.05789606988527818,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        60,
+        65,
+        68
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.054093864918222545,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        61,
+        66,
+        69
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.19503786588449779,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        62,
+        65,
+        70
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.01885010004740173,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        62,
+        67,
+        70
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.15644354627790547,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        63,
+        66,
+        68
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 15,
+        "triangles": 9,
+        "components": 1,
+        "rank_boundary_2": 9,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.022051050038539133,
+      "decision_count": 106
+    },
+    {
+      "face": [
+        64,
+        67,
+        69
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 6,
+        "components": 1,
+        "rank_boundary_2": 6,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.011361776254214861,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        65,
+        68,
+        70
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.02287123932343671,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        66,
+        68,
+        71
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.06171910769900402,
+      "decision_count": 100
+    },
+    {
+      "face": [
+        66,
+        69,
+        71
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.23133730091953697,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        67,
+        69,
+        70
+      ],
+      "free_components": 1,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 7,
+        "edges": 14,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 1
+      },
+      "minimum_decision_margin_angstroms": 0.022266138070925257,
+      "decision_count": 104
+    },
+    {
+      "face": [
+        68,
+        70,
+        71
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.0011970464902508748,
+      "decision_count": 98
+    },
+    {
+      "face": [
+        69,
+        70,
+        71
+      ],
+      "free_components": 0,
+      "complete_two_skeleton": true,
+      "nerve": {
+        "vertices": 6,
+        "edges": 12,
+        "triangles": 7,
+        "components": 1,
+        "rank_boundary_2": 7,
+        "beta_1": 0
+      },
+      "minimum_decision_margin_angstroms": 0.023397528901675013,
+      "decision_count": 100
+    }
+  ],
+  "no_topomt_import": true,
+  "interpretation": "Complete per-face convex evidence retained; reference v1 supports only zero/one face components, so this does not establish a global count or a production defect."
+}
