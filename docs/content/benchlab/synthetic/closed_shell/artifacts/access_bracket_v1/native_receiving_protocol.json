@@ -1,0 +1,23 @@
+{
+  "schema": "topomt.benchlab.physical-source-protocol/1",
+  "date": "2026-11-10",
+  "case": "closed_shell",
+  "issue": "uibcdf/topomt#76",
+  "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "probe_angstroms": [
+    0.16968611126908423,
+    0.17468611126908423
+  ],
+  "independent_verification_sha256": "39dec7fa02db30e6167e2cea0133e038763d0eeaa3a1afa2592d83c1df9b7c3b",
+  "expected_physics": [
+    "Positive complete origin path; physical boundary nonempty",
+    "Free origin enclosed by a complete hull cover; zero physical hull patches"
+  ],
+  "native_receiving": "Record actual raw/public classifications, physical count/status, source supports, query and attribution. Do not impose native channel count or equality of catalog labels as geometric truth. Record disagreements explicitly under76.",
+  "resources": {
+    "cpu_count": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  }
+}
