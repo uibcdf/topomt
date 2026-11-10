@@ -54,7 +54,7 @@ is never an accepted decision. Numeric records declare a fixed angstrom schema;
 input quantities are decoded with the shared codec and explicit target units.
 These are floating witnesses with decision margins, not formal interval proofs.
 
-## Global hull count and paths
+## Initial v1 global hull restriction and paths
 
 This bounded reference accepts global joining only if every face has zero or
 one independently established free interior component. More complicated faces
@@ -77,7 +77,8 @@ One CPU/numerical thread, 6 GiB address-space and 120 s CPU limits; at most
 20,000 intersection decisions, 2,000 solver calls and 100 iterations per call.
 The pilot on canonical face [0,1,2] verifies a zero free-component count with
 100 decisions and a 0.0174 Å minimum margin, about 0.1 s / 89 MiB process RSS.
-Complete hull capture and falsification/actual DFND comparison remain pending.
+This was the pilot scope; the complete captures below supersede its pending
+state without changing that original evidence.
 
 ## First complete discovery and bounded-reference outcome
 
@@ -158,3 +159,36 @@ It compares compatible observables, preserving ten native links/Mouths as their
 original carrier clusters. Capture must retain its own exact source identity;
 a known matched result is not a held-out detector benchmark or a comparative
 advantage. Original protocols, failed/unsupported evidence and notebooks remain.
+
+## Actual native receiving and reader delivery
+
+Fresh actual-public receiving at `e1af4efee7e311765a3f0c9b8f4e362b0b45061e`
+matches all 140 source-face region counts, the 13 global patches and all 13
+supported component associations. Native ten links / ten Mouth children remain
+their original discrete observables. The process takes 2.768 s and 291,744 KiB
+peak RSS under the same one-CPU bounded policy. Its retained `native_receiving.json`
+records the source, quantities, raw support, query and scientific attribution.
+Production physical modules are unchanged since `4fc2353`.
+
+The [case explanation](../../docs/content/benchlab/synthetic/closed_shell/small_probe_connectivity.md)
+includes an illustrative full-face/two-detail plot. Its two free regions are
+counted by the independent certificate, not pixels. This completes the narrow
+0.05 Å count/path reference; transition bracketing and wider #76 remain open.
+
+Replay from the repository root without regenerating evidence:
+
+```python
+import json
+from pathlib import Path
+from devtools.verify_small_probe_regions import verify_region_certificate
+
+case = Path('docs/content/benchlab/synthetic/closed_shell')
+folder = case / 'artifacts/small_probe_boundary_v2'
+result = verify_region_certificate(
+    case / 'artifacts/closed_shell_v1/input.json',
+    folder / 'protocol.json',
+    json.loads((folder / 'certificate.json').read_text()),
+)
+assert result['opening_component_count'] == 13
+assert result['origin_connected_patch_count'] == 13
+```

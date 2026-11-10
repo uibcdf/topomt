@@ -169,3 +169,30 @@ def test_all_independent_patches_have_a_common_origin_path_witness(frozen_region
         break
     with pytest.raises(ValueError):
         verify_region_certificate(inputs, protocol, received)
+
+
+def test_retained_reference_replays_without_discovery_or_production(monkeypatch):
+    import json
+    from pathlib import Path
+
+    from devtools import verify_small_probe_regions as reference
+
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Retained verification must not discover new witnesses')
+
+    monkeypatch.setattr(reference, 'build_region_certificate', forbidden)
+    monkeypatch.setattr(reference, 'build_face_regions', forbidden)
+    case = (
+        Path(__file__).resolve().parents[1]
+        / 'docs/content/benchlab/synthetic/closed_shell'
+    )
+    folder = case / 'artifacts/small_probe_boundary_v2'
+    result = reference.verify_region_certificate(
+        case / 'artifacts/closed_shell_v1/input.json',
+        folder / 'protocol.json',
+        json.loads((folder / 'certificate.json').read_text()),
+    )
+    retained = json.loads((folder / 'verification.json').read_text())
+    assert result == retained
+    assert result['opening_component_count'] == 13
+    assert result['origin_connected_patch_count'] == 13

@@ -1,0 +1,38 @@
+{
+  "schema": "topomt.benchlab.origin-access-bracket-protocol/1",
+  "date": "2026-11-10",
+  "issue": "uibcdf/topomt#76",
+  "case": "closed_shell",
+  "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "length_unit": "angstroms",
+  "origin": [
+    0.0,
+    0.0,
+    0.0
+  ],
+  "known_access_probe": 0.05,
+  "known_covered_probe": 0.2,
+  "safety_margin": 1e-06,
+  "lower_safety_offset": 1e-05,
+  "desired_width": 0.005,
+  "width_attempts": [
+    0.005,
+    0.01,
+    0.02,
+    0.05,
+    0.1
+  ],
+  "upper_limit": 0.2,
+  "maximum_cover_depth": 18,
+  "maximum_cover_nodes_per_attempt": 150000,
+  "maximum_cover_nodes_total": 400000,
+  "maximum_path_candidates": 20000,
+  "cpu_seconds": 120,
+  "address_space_gib": 6,
+  "cpu_count": 1,
+  "numerical_threads": 1,
+  "discovery": "Restricted nearest-center bisectors on each hull triangle; all atoms are checked on the whole origin segment and outward-normal infinite ray. Candidate optimality is not assumed.",
+  "upper_proof": "Complete positive-margin midpoint-subdivision ball cover of every hull face; origin remains free. Failed search or exhausted cover budget supplies no closure proof.",
+  "acceptance": "Accept only a verified positive path at lower probe and a complete verified hull cover at upper probe. Report actual width and achieved ladder; a wider or unavailable result does not meet desired width. Exact transition and maximum bottleneck remain unavailable.",
+  "known_results": "Existing reference endpoints known before this refinement; no held-out or algorithm-superiority claim."
+}

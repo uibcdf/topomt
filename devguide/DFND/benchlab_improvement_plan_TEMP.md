@@ -264,7 +264,8 @@ qualified rows and actual public contacts. The [resolution report](../archive/df
 records 207 passing expanded tests plus 41 post-refactor/capture guards, source
 receipts and numerical/resource limits. Compatibility promotion is explicitly
 retained; broader geometry/path gates stay #76. PHY-C is still open: the 0.05 Å
-shell pilot's 13 patches need independent qualification and tighter transitions.
+shell's 13 patches now have an [independent complete region/path reference](small_probe_boundary_reference.md)
+and actual-public receiving at `e1af4ef`; tighter transitions remain pending.
 This first bounded milestone admits the independent volume sequence; it does
 not complete the three-case study.
 

@@ -34,7 +34,7 @@ including inputs, the parent shell, reference helpers and environment guidance.
 
 | Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
 | --- | --- | --- | --- |
-| Access, 0.05 Å | A continuous origin-to-exterior ray. | Central `Channel`, ten native links / `Mouth` children. | Ray qualifies access, not ten physical openings; [#151](https://github.com/uibcdf/topomt/issues/151), [#76](https://github.com/uibcdf/topomt/issues/76). |
+| Access, 0.05 Å | 13 independently counted hull patches, all reached from the common origin. | 13 resolved physical patches; central `Channel`, ten native links / `Mouth` children. | [Independent and actual-public receiving](small_probe_connectivity.md) agree; ten native clusters have a different meaning. Wider qualification: [#76](https://github.com/uibcdf/topomt/issues/76). |
 | Enclosure, 0.2 / 1.4 Å | Free origin and completely covered hull. | `Void` without exterior links / `Mouth` children. | Later certificate resolves 0.2 Å; volume precision [#75](https://github.com/uibcdf/topomt/issues/75). |
 | Exclusion, 5 Å | No free center in the finite hull. | No resident wet component or public feature. | Empty resident result; native dry structures remain, [#60](https://github.com/uibcdf/topomt/issues/60). |
 
@@ -52,6 +52,7 @@ system
 dfnd
 Public Topography receiving <topography>
 Stronger enclosure reference at 0.2 Å <closure_at_0p2>
+Thirteen small-probe openings <small_probe_connectivity>
 Historical combined record <historical>
 ```
 
