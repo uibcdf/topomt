@@ -1,0 +1,145 @@
+{
+  "schema": "topomt.benchlab.independent-volume-reference/1",
+  "issue": "uibcdf/topomt#75",
+  "case": "closed_shell",
+  "source_revision": "6f391436b1d7c694238ffdb3ec631738435a076f",
+  "program": "devtools/verify_volume_reference.py",
+  "program_sha256": "9552c8b85c6d466012b114c76b464ce33a2329ad27413bc0243167b9f0f42d3e",
+  "protocol_sha256": "d2a7f82796e6820102286837f327b1d0038e6b4a4f5b7373eb1598266c8910fe",
+  "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "numpy_version": "2.5.4",
+  "topomt_imported": false,
+  "domains": [
+    {
+      "domain_id": "0.2A_resident",
+      "probe_angstroms": 0.2,
+      "region": "resident",
+      "reference": {
+        "length_unit": "nm",
+        "volume_unit": "nm**3",
+        "carrier_volume": 0.7505379405925177,
+        "box_volume": 1.5642732811218207,
+        "n_samples": 524288,
+        "seed": 82371,
+        "confidence_level": 0.999,
+        "confidence_scope": "Per observable, conditional on IID sampling and the fixed geometry; floating membership is not a formal interval proof",
+        "sample_and_membership_sha256": "9159c370141ea7eb043c3059681d863f29783858f1aea814c41bbddd1ae0e075",
+        "criterion": {
+          "title": "Probability Inequalities for Sums of Bounded Random Variables",
+          "authors": [
+            "Wassily Hoeffding"
+          ],
+          "year": 1963,
+          "journal": "Journal of the American Statistical Association",
+          "volume": "58",
+          "issue": "301",
+          "pages": "13-30",
+          "doi": "10.1080/01621459.1963.10500830",
+          "url": "https://doi.org/10.1080/01621459.1963.10500830"
+        },
+        "carrier": {
+          "count": 251583,
+          "estimate": 0.750626687783186,
+          "interval": [
+            0.7464151058851254,
+            0.7505379405925177
+          ],
+          "unclipped_half_width": 0.004211581898060567,
+          "half_width_over_carrier": 0.005611417718251129
+        },
+        "bare_empty": {
+          "count": 137232,
+          "estimate": 0.409447385625667,
+          "interval": [
+            0.4052358037276064,
+            0.4136589675237276
+          ],
+          "unclipped_half_width": 0.004211581898060567,
+          "half_width_over_carrier": 0.005611417718251129
+        },
+        "probe_center": {
+          "count": 115189,
+          "estimate": 0.3436795711119488,
+          "interval": [
+            0.3394679892138882,
+            0.3478911530100094
+          ],
+          "unclipped_half_width": 0.004211581898060567,
+          "half_width_over_carrier": 0.005611417718251129
+        }
+      },
+      "wall_seconds": 6.862,
+      "target_met": true
+    },
+    {
+      "domain_id": "0.2A_transit",
+      "probe_angstroms": 0.2,
+      "region": "transit",
+      "reference": {
+        "length_unit": "nm",
+        "volume_unit": "nm**3",
+        "carrier_volume": 0.7551010910053692,
+        "box_volume": 1.5642732811218207,
+        "n_samples": 524288,
+        "seed": 82371,
+        "confidence_level": 0.999,
+        "confidence_scope": "Per observable, conditional on IID sampling and the fixed geometry; floating membership is not a formal interval proof",
+        "sample_and_membership_sha256": "5122666304988ab8bfdd6171be3c6e81ca363883fa82b95c2bb8a700d418b130",
+        "criterion": {
+          "title": "Probability Inequalities for Sums of Bounded Random Variables",
+          "authors": [
+            "Wassily Hoeffding"
+          ],
+          "year": 1963,
+          "journal": "Journal of the American Statistical Association",
+          "volume": "58",
+          "issue": "301",
+          "pages": "13-30",
+          "doi": "10.1080/01621459.1963.10500830",
+          "url": "https://doi.org/10.1080/01621459.1963.10500830"
+        },
+        "carrier": {
+          "count": 253106,
+          "estimate": 0.7551707326729193,
+          "interval": [
+            0.7509591507748588,
+            0.7551010910053692
+          ],
+          "unclipped_half_width": 0.004211581898060567,
+          "half_width_over_carrier": 0.005577507367196507
+        },
+        "bare_empty": {
+          "count": 137243,
+          "estimate": 0.409480205385212,
+          "interval": [
+            0.4052686234871514,
+            0.4136917872832726
+          ],
+          "unclipped_half_width": 0.004211581898060567,
+          "half_width_over_carrier": 0.005577507367196507
+        },
+        "probe_center": {
+          "count": 115189,
+          "estimate": 0.3436795711119488,
+          "interval": [
+            0.3394679892138882,
+            0.3478911530100094
+          ],
+          "unclipped_half_width": 0.004211581898060567,
+          "half_width_over_carrier": 0.005577507367196507
+        }
+      },
+      "wall_seconds": 7.036,
+      "target_met": true
+    }
+  ],
+  "execution": {
+    "wall_seconds": 13.903,
+    "peak_rss_kib": 88136,
+    "single_cpu": true,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds_limit": 120
+  },
+  "scope": "Independent numerical integration on frozen native supports. Per-observable statistical bounds conditional on the declared ball/support model; not a deterministic global free-volume proof."
+}

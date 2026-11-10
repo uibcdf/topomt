@@ -67,3 +67,45 @@ def test_cartesian_reference_checks_analytic_empty_support_without_topomt_sample
     for key in ('bare_empty', 'probe_center'):
         interval = result[key]['interval']
         assert interval[0] <= 1 / 6 <= interval[1]
+
+
+def test_cap_deletion_comparison_uses_common_parent_domain_and_paired_indicators():
+    from devtools.verify_volume_reference import compare_cap_deletion
+
+    parent = np.array(
+        [[0.0, 0.0, 0.0], [1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]]
+    )
+    radii = np.full(4, 0.2)
+    ids = [1, 2, 3]
+    result = compare_cap_deletion(
+        parent,
+        radii,
+        parent[ids],
+        radii[ids],
+        ids,
+        0.1,
+        n_samples=8192,
+        seed=82371,
+        confidence=0.999,
+        batch_size=512,
+    )
+    assert result['carrier_volume'] == pytest.approx(1 / 6)
+    for key in ('bare_empty', 'probe_center'):
+        assert result[key]['freed']['count'] >= 0
+        assert result[key]['freed']['interval'][0] >= 0
+        assert result[key]['child']['count'] >= result[key]['parent']['count']
+    changed = parent[ids].copy()
+    changed[0, 0] += 0.01
+    with pytest.raises(ValueError, match='subset'):
+        compare_cap_deletion(
+            parent,
+            radii,
+            changed,
+            radii[ids],
+            ids,
+            0.1,
+            n_samples=8192,
+            seed=82371,
+            confidence=0.999,
+            batch_size=512,
+        )

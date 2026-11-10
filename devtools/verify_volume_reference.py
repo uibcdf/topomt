@@ -318,3 +318,118 @@ def load_domains(
             {**domain, 'cells': cells, 'probe_nm': domain['probe_angstroms'] / 10}
         )
     return centers, radii, domains
+
+
+def compare_cap_deletion(
+    parent_centers: np.ndarray,
+    parent_radii: np.ndarray,
+    child_centers: np.ndarray,
+    child_radii: np.ndarray,
+    parent_atom_indices: list[int],
+    probe: float,
+    *,
+    n_samples: int,
+    seed: int,
+    confidence: float,
+    batch_size: int,
+) -> dict[str, Any]:
+    """Compare a ball subset on the same parent hull with paired IID indicators.
+
+    Parameters
+    ----------
+    parent_centers, parent_radii, child_centers, child_radii : numpy.ndarray
+        Full-precision balls in explicit nm units.
+    parent_atom_indices : list of int
+        Exact child-to-parent atom correspondence, preserving coordinates/radii.
+    probe : float
+        Declared expansion in nm; both bare and expanded exclusions are measured.
+    n_samples, seed, batch_size : int
+        Frozen positive sample count, seed and bounded point batch.
+    confidence : float
+        Per-observable Hoeffding confidence, not a joint familywise statement.
+
+    Returns
+    -------
+    dict
+        Parent/child/freed-space counts and conditional intervals on one hull.
+
+    Raises
+    ------
+    ValueError
+        Child correspondence is not an exact subset or sampling is invalid.
+    """
+    from scipy.spatial import ConvexHull
+
+    ids = np.asarray(parent_atom_indices)
+    if (
+        ids.dtype.kind not in 'iu'
+        or len(set(map(int, ids))) != len(ids)
+        or np.any(ids < 0)
+        or np.any(ids >= len(parent_centers))
+        or not np.array_equal(child_centers, parent_centers[ids])
+        or not np.array_equal(child_radii, parent_radii[ids])
+    ):
+        raise ValueError('The child must be an exact unchanged-radii parent subset')
+    if min(n_samples, batch_size) < 1 or probe < 0:
+        raise ValueError('Invalid paired reference sampling controls')
+    hull = ConvexHull(parent_centers)
+    carrier = float(hull.volume)
+    low, high = parent_centers.min(axis=0), parent_centers.max(axis=0)
+    box_volume = float(np.prod(high - low))
+    counts = {
+        key: {name: 0 for name in ('parent', 'child', 'freed')}
+        for key in ('bare_empty', 'probe_center')
+    }
+    rng = np.random.default_rng(seed)
+    digest = hashlib.sha256()
+    batch_size = min(batch_size, max(1, 262144 // len(parent_centers)))
+    for start in range(0, n_samples, batch_size):
+        points = rng.uniform(low, high, size=(min(batch_size, n_samples - start), 3))
+        inside = np.all(
+            points @ hull.equations[:, :3].T + hull.equations[:, 3] <= 0.0, axis=1
+        )
+        parent = free_at_probes(points, parent_centers, parent_radii, probe)
+        child = free_at_probes(points, child_centers, child_radii, probe)
+        digest.update(np.ascontiguousarray(points, dtype='<f8').tobytes())
+        for key, p_mask, c_mask in zip(
+            ('bare_empty', 'probe_center'), parent, child, strict=True
+        ):
+            if np.any(p_mask & ~c_mask):
+                raise ValueError(
+                    'Removing unchanged balls cannot reduce pointwise free space'
+                )
+            selected = {
+                'parent': inside & p_mask,
+                'child': inside & c_mask,
+                'freed': inside & c_mask & ~p_mask,
+            }
+            for name, mask in selected.items():
+                counts[key][name] += int(np.count_nonzero(mask))
+                digest.update(np.packbits(mask).tobytes())
+    result: dict[str, Any] = {
+        'length_unit': 'nm',
+        'volume_unit': 'nm**3',
+        'carrier_volume': carrier,
+        'box_volume': box_volume,
+        'n_samples': n_samples,
+        'seed': seed,
+        'confidence_level': confidence,
+        'sample_and_membership_sha256': digest.hexdigest(),
+        'criterion': HOEFFDING_REFERENCE,
+        'scope': 'Paired ball-union integrals on the common parent hull; each freed indicator is0or1. No natural-child-hull or exterior-accessible-volume equivalence.',
+    }
+    for key, items in counts.items():
+        rows = {}
+        for name, count in items.items():
+            lower, upper, width = hoeffding_interval(
+                count, n_samples, box_volume, confidence, carrier
+            )
+            rows[name] = {
+                'count': count,
+                'estimate': box_volume * count / n_samples,
+                'interval': [lower, upper],
+                'unclipped_half_width': width,
+                'half_width_over_carrier': width / carrier,
+            }
+        result[key] = rows
+    return result
