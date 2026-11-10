@@ -23,7 +23,8 @@ conversion when the native records are in nanometers.
 | $L,W$ | Native exterior-link and wall-face counts | Counts |
 | $o$ | Interior/mouth capacity ratio | Dimensionless |
 | $e$ | Largest/second-largest PCA standard-deviation ratio | Dimensionless |
-| $q_d,g,s$ | Depth-wise maximum residence capacity, normalized fitted gradient and fit score | Length / dimensionless / dimensionless |
+| $q_d,g_{\rm funnel},s$ | Depth-wise maximum residence capacity, normalized fitted gradient and fit score | Length / dimensionless / dimensionless |
+| $R_{\rm join},\pi$ | Joining gate capacity and lower-peak prominence in the current capacity hierarchy | Length |
 | $S,P(S,p)$ | Declared boundary surface and its strictly free probe-center subset | Spatial sets |
 
 ## Terms at different levels

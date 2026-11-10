@@ -43,6 +43,27 @@ the normal promotion path automatically ingests chain identities. Bank-derived
 labels can miss tightly packed molecular interfaces when banks fuse. The full
 public participant/relation/localized-support model is still being adopted.
 
+### Advanced reference: current prototype decisions
+
+The bank-label route ranks eligible dry banks by cell count and assigns a
+shared atom to the first/largest bank; atoms without a qualifying bank receive
+label `-1`. These are exclusive intermediate labels, even though canonical
+atom roles in TopoMT may overlap. The classifier retains body contributions
+with at least **3** atoms each. It calls the region interface-associated when
+at least two such bodies remain and the smallest retained contribution is at
+least **0.15** of their **retained-body total**, not of all component atoms.
+These defaults are arguments of the prototype helpers, not public DFND query
+parameters automatically ingesting chain selections.
+
+The normal annotation route consumes compatibility-filtered dry components,
+while wet typed components come from raw wet records. Consequently `min_size`
+can change the bank inputs available for this derived annotation, even while
+raw wet decomposition remains unchanged. The intended reporting/participant
+contract remains under [#60](https://github.com/uibcdf/topomt/issues/60) and
+[#61](https://github.com/uibcdf/topomt/issues/61); this is not evidence of a
+newly measured physical misclassification. Record reporting policy when using
+these prototype descriptors.
+
 Interface status is orthogonal to the primary Void/Pocket/Channel classification.
 A region can be both a pocket and an interface-associated finding. Future mixed
 interface features need their own support and promotion invariants.

@@ -10,9 +10,62 @@ not an installed release, live-site deployment or scientific algorithm fix.
 The later same-day [cross-source audit](approach_and_presentation_audit_2026_11_09.md)
 identifies a reproduced non-default shared-face admission discrepancy in the
 explanation and additional reference/pedagogy gaps. Their documentary correction
-is open under [#173](https://github.com/uibcdf/topomt/issues/173). Earlier delivery
+is delivered under [#173](https://github.com/uibcdf/topomt/issues/173), as recorded
+in the [archived report](../archive/dfnd_method_book_semantics.md). Earlier delivery
 and reader checks below remain valid within their scope; they did not exercise
 every described policy and are not exhaustive semantic qualification.
+
+## Audit-driven correction and reader pass — #173
+
+The book retains 21 pages. The landing now opens with fitting versus entry,
+an existing atomic-geometry picture and public/native/developing availability.
+The worked tetrahedron shows predictions and the stored three-probe visual
+before optional execution; critical physical-boundary qualifications remain
+beside the 1.2 Å interpretation. No scientific artifact or geometry was added.
+
+The network/local-capacity/dry chapters and pseudocode now distinguish shared
+capacity, incidence-specific apex flags and both-sided adjacency. A new
+downloadable `closed_shell.py` restores/checks the frozen input and supports
+executed chapter inspections of a mixed-admission face and the many-cell public
+carrier centroid. Operator defaults, interface/reporting scope, secondary
+skeletons and unambiguous hierarchy notation complete the advanced reference.
+Developer contracts and source comments/docstrings are reconciled with the
+current account; physical/numerical decisions remain with #75/#76/#151 and
+public adoption with #60/#61. The audit's dated F1–F7 history is preserved with
+a prominent documentary disposition map.
+
+The new documentation guard started red (2 failed / 4 passed). Its final six
+tests execute both downloadable examples and actual public-inspection snippets.
+The full focused receiving/certificate/report panel gives **68 passed, 7 xfailed**,
+10.52 s test time / 12.91 s process wall time, peak RSS 314.8 MiB. Seven narrowly
+declared #151 missing-view targets remain unimplemented; historical frozen
+scientific files retain their bytes. Checks are source-workspace Python 3.14,
+not installed/matrix, live-site deployment or biological qualification.
+
+Execution was sequential, one CPU/numerical thread, 6 GiB address-space and
+60–120 s CPU limits. Available RAM was about 53.3 GiB with zero memory PSI/no
+active swapping; sampled CPU activity left about half the machine idle. Slurm
+remains unavailable to this session (no allocation claimed). Raw receipts and
+HTML are in `.cache/dfnd-173/`.
+
+Fresh complete HTML: exit 0, 9.68 s, peak RSS 274.8 MiB; a final incremental
+render receives the sampling-cutoff clarification. All **1,920 local book
+links/assets/anchors** pass, including both downloadable scripts with bytes
+identical to their tested sources. The 21 pages have zero own warnings; the
+eleven prior project warnings remain #64. Forty-one local links in the audit,
+checkpoint and archived record resolve, and their standalone MyST renders are
+clean. Source/default checks and the six-question introductory-reader review
+receive F1–F7 without claiming an observed user study.
+
+Ruff check/format pass for seven changed Python sources. Scoped mypy passes
+the new example and revised documentation tests. AST comparison, ignoring only
+docstrings/comments, confirms identical executable semantics for `api`,
+`classify`, `components`, `graph` and `output_status`; historical BenchLab bytes
+are unchanged. Final archived-lifecycle checks give 16 passed and indexes are
+current. Live comparative readback retains the same two current findings and
+open #75/#151: developer prose is corrected, but their numerical/physical
+limitations are not resolved. No remote CI, installed release or deployment
+result is inferred from the maintainer-authorized skipped incremental push.
 
 ## Post-delivery reader/source review — #172, 2026-11-09
 

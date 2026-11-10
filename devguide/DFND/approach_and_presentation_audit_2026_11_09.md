@@ -3,8 +3,28 @@
 Date: **2026-11-09, America/Mexico_City**. Audited source:
 `9c8fbc4b447212b5704c2b2f5df4280e01ea4ad4`.
 Public entry: [DFND: Theory and Method](../../docs/content/dfnd/index.md).
-New documentary follow-up: [#173](https://github.com/uibcdf/topomt/issues/173),
-with an [open report](../pending_bugs/dfnd_method_book_semantics.md).
+Documentary follow-up: [#173](https://github.com/uibcdf/topomt/issues/173),
+with its [resolution record](../archive/dfnd_method_book_semantics.md).
+
+## Documentary resolution — 2026-11-09
+
+The requested correction/editorial pass is delivered in source. The historical
+audit below targets `9c8fbc4`; its statements of missing prose or open #173 work
+describe that earlier stage. They must not be reused as current deficiencies
+without checking the target revision. The [checkpoint](documentation_checkpoint.md)
+records validation and publication scope.
+
+| Finding | Documentary disposition | Scientific/runtime boundary retained |
+| --- | --- | --- |
+| F1 | Capacity versus owner admission, exact apex heuristic and two-sided wet/dry predicates are explicit in chapters/pseudocode. A frozen shell example is guarded by an executed chapter test. | No graph policy or physical path claim changed. |
+| F2 | Advanced defaults table and chapter definitions give the fixed motif floor, 165-point sampling stencil, interface contribution/label rules and lineage threshold/control scope. | No threshold calibration or new public controls. |
+| F3 | Transit-carrier centroid formula and many-cell recovery are documented and executed through the actual public result. | No guaranteed free placement point. |
+| F4 | Primary/secondary skeleton helpers, objectives and unavailable/empty outcomes are named. | No exhaustive/collision-certified channel tracing. |
+| F5 | Developer definitions, numerical/metric contracts and source comments have explicit current-versus-historical scope and corrected overstatements. Current prototype reporting behavior is disclosed. | #75/#76 retain numerical/scientific decisions; #60/#61 retain public/interface contract adoption. |
+| F6 | Landing starts with a scientific question, a stored atomic picture and an availability map. The worked example presents predictions/visual outcomes before optional downloads/code. First-use terms and deeper/Mouth routes are linked. | Editorial review, not a measured user study or biological qualification. |
+| F7 | `g_funnel` and `R_join` have separate symbols/dimensions in chapter and notation. | Arithmetic unchanged. |
+
+### Original audit and subsequent review history
 
 This is the requested audit, not another implementation pass. The public book,
 scientific kernels, catalog rules and historical study artifacts are unchanged.

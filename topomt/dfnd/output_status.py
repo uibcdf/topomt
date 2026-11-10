@@ -87,8 +87,9 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
     # --- catalog morphological refinements (classify names on top of the family) ---
     # ``open_concavity`` is the open (occlusion<=1) refinement of a 1-mouth resident
     # family -- a GENERIC placeholder (aperture measured, shape not yet), refined
-    # later into a leaf (groove/dish/funnel) when shape metrics land. The occluded
-    # case keeps the name ``pocket``. Additive; not yet driving feature_type.
+    # later into a leaf (groove/dish/funnel) as metrics qualify. The occluded
+    # case keeps the name ``pocket``. Public promotion uses the refined name;
+    # the raw component family remains separately available.
     OPEN_CONCAVITY: OutputStatus(
         'provisional',
         'classification',

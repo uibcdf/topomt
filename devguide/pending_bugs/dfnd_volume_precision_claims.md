@@ -19,7 +19,11 @@ supersedes: []
 
 Fixed-order quadrature is exposed as `exact` and returns no error estimate.
 MC normal-approximation widths collapse to zero in all-hit/no-hit samples.
-Developer prose overstates these as exact integration or rigorous uncertainty.
+Developer prose originally overstated these as exact integration or rigorous
+uncertainty. Under #173 (2026-11-09), the public/developer explanations and source
+docstrings are reconciled: the legacy method name and numeric error calculation
+are unchanged. This remains an open numerical accuracy/uncertainty finding,
+not a current claim that the corrected text still makes those overstatements.
 
 ## How
 

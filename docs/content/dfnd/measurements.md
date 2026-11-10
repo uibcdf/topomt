@@ -31,8 +31,16 @@ make its empty-volume integral equal to probe-center-accessible volume.
 
 ## Fast local estimation
 
-The bulk pass uses deterministic barycentric sampling with its recorded local
-resolution. It avoids statistical randomness but still has discretization error.
+The bulk pass fixes resolution 8. It enumerates four nonnegative integers
+$i_0+\cdots+i_3=8$ and samples barycentric weights
+$w_j=(i_j+0.5)/10$, giving a stencil of **165 interior points** per cell. The
+estimate is the complete cell volume times the fraction outside its four vertex
+balls, with epsilon included in that exclusion decision. The half-step shift
+avoids sampling directly on vertex atoms. This resolution is an internal fixed
+choice, not a public query control. Cells at or below the current numeric volume
+cutoff return zero samples; records retain the actual count rather than
+guaranteeing 165 evaluations for every cell.
+It avoids statistical randomness but still has discretization error.
 Testing the four vertex balls can miss nonlocal intruders. Resident-only
 aggregation excludes connector support, intentionally keeping the two roles
 separate.
@@ -83,6 +91,25 @@ surface, with its own geometric and accuracy contract.
 along a selected skeleton is conditional to that route; it is not automatically
 the maximum achievable bottleneck among all physical paths. Graph depth counts
 edges and has no length unit.
+
+## Centers and placement
+
+For component transit cells $T$ with volumes $v_T$ and vertex barycenters $b_T$,
+the public `feature.center` is the carrier centroid
+
+$$\bar x=\frac{\sum_T v_T b_T}{\sum_T v_T}.$$
+
+The sum includes selected connectors, not just resident cells, and uses complete
+tetrahedra without atomic exclusion. If the total carrier volume is zero, the
+implementation falls back to the unweighted mean of their barycenters.
+
+This averaging is distinct from the optimized residence center stored for each
+cell and used by PCA. It supplies a geometric summary, not a guaranteed free
+placement point, maximum-clearance location or skeleton station. In a nonconvex
+region a centroid need not even lie inside the carrier union. The single-cell
+tetrahedron has coincident centers, so use the
+[many-cell recovery example](network_and_decomposition.md#advanced-inspection-a-many-cell-center)
+to inspect the general definition.
 
 ## Units and comparison
 

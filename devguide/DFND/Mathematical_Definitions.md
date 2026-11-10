@@ -1,5 +1,12 @@
 # Delaunay Flow Network Decomposition (DFND): Mathematical Definitions
 
+Current reading note — 2026-11-09, #173: the maxima below define local reference
+operators. Numerical candidates, incidence policies and physical interpretation
+have separate scope; use the [public account](../../docs/content/dfnd/index.md)
+and [theory review](core_theory_review_2026_11_06.md) alongside this document.
+The graph policy remains implemented; its continuous-path reconciliation is
+open under #76. This update changes no kernel or accepted query predicate.
+
 This document provides the formal mathematical specifications for the geometric primitives used in DFND. It serves as the definitive reference for implementation, ensuring that concepts like "permeability" and "habitability" are calculated consistently.
 
 ## 1. Preliminaries
@@ -137,11 +144,14 @@ transit   = controlled by permeable contacts from R_gate
 contact   = one-sided access without through-transit
 ```
 
-A resident sealed tetrahedron is physically interpretable: the probe can reside
-inside the local cell but cannot exit through any face at the selected probe
-radius. A non-resident open tetrahedron is also physically interpretable: the
-probe cannot reside there, but it may pass through if at least two contacts are
-permeable.
+A resident sealed cell has local accommodation without an admitted local gate.
+All-atom enclosure needs independent evidence. The historical room/window
+rationale described a nonresident open cell as allowing passage without
+residence. Under the exact existential closed-cell maximum, any valid all-atom
+center path inside that cell implies local residence at that point. The current
+connector rule therefore describes a discrete policy, not a certified physical
+passage. #76 owns reconciliation; the historical rationale supplies no exception
+to the maximum definition.
 
 ---
 

@@ -131,7 +131,7 @@ def classify(
     occluded case keeps the community name ``pocket``. Occlusion is
     name-determining only for one mouth (S5 criterion); all other families pass
     through. This is the **additive** morphology layer (coexists with the kernel
-    ``family``; does not yet drive ``feature_type``).
+    ``family``; public promotion uses this refined name for ``feature_type``).
 
     **Confidence is per-threshold** (decision S7): the topological names are exact
     given the grounded signature, so ``confidence = 1.0`` (their probe-margin is a

@@ -1,5 +1,11 @@
 # DFND Abstract Contract
 
+Source reconciliation — 2026-11-09, #173: the discrete incidence/bank definitions
+below match current source. Physical-transit language and the earlier broader
+feature inventory retain design-history scope; neither establishes continuous
+paths or completed public promotion. See the [public method account](../../docs/content/dfnd/index.md),
+#76 for scientific reconciliation and #60/#61 for neutral public adoption.
+
 This document closes the current abstract contract for DFND before implementation
 hardening. It defines object layers, transformations, invariants, edge cases,
 confidence flags, identity rules, and terminology boundaries.
@@ -32,7 +38,8 @@ DFND separates objects by layer.
 - `TransitNode`: finite tetrahedron that can participate in probe movement. It
   may be resident or a non-resident transit connector.
 - `TransitEdge`: connection between two transit nodes through a shared face
-  classified as permeable by the single canonical face decision. Marginality is
+  with both owner incidences admitted after policy. Its capacity is shared;
+  apex-dependent admission need not be. Marginality is
   diagnostic and does not trigger a second gate threshold.
 - `ExternalEdge`: permeable connection from a transit node to `OCEAN` through a
   hull face.
@@ -48,8 +55,10 @@ DFND separates objects by layer.
 
 ### 1.5. Dry Layer
 
-- `DryNode`: finite dry tetrahedron where the probe cannot reside.
-- `DryEdge`: connection between two dry nodes through a non-permeable face.
+- `DryNode`: finite node outside the selected transit node set. This excludes
+  enabled nonresident connectors and is not simply local nonresidence.
+- `DryEdge`: in face mode, connection between bank nodes through a face whose
+  two owner incidences are nonpermeable; edge/vertex modes use other groupings.
 - `DryComponent`: connected component of the dry graph.
 - `DryInterface`: contact record between a dry component and wet components,
   external links, `OCEAN`, or the hull/exterior context.

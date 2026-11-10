@@ -1,5 +1,13 @@
 # DFND Residence, Transit, and Contact Contract
 
+Current scope note — 2026-11-09, #173: retain the implemented graph predicates
+in this contract while reading physical-transit language as historical rationale.
+The [theory review](core_theory_review_2026_11_06.md) and
+[public conditional properties](../../docs/content/dfnd/appendices/mathematical_properties.md)
+state why exact existential nonresidence cannot certify physical pass-through.
+That scientific decision remains #76. Incidence admission and tolerance wording
+below are reconciled with current source, without changing runtime policy.
+
 This document records the core correction introduced after the external
 geometric review: DFND must separate probe residence, probe transit, and probe
 contact.
@@ -49,23 +57,29 @@ marginal_residence(T) = abs(R_residence(T) - R_probe) <= epsilon + residence_tol
 
 Policy is **generous toward residence**. The numerical `epsilon` is applied in
 favour of resident, so the `>=` equality is robust to floating-point error.
-`residence_tolerance` (physical, default `0.0`, user-controllable) widens the
-threshold further to absorb structural flexibility / coordinate imprecision.
+`residence_tolerance` (a length band, default `0.0`, user-controllable) widens
+the threshold. It can be varied in declared sensitivity studies; it is not a
+calibrated model of structural flexibility or coordinate uncertainty.
 Marginal tetrahedra (within the slack of the threshold) are counted resident but
 still flagged in raw records.
 
 ### 2.2. Face State
 
 ```text
-permeable(F)     = R_gate(F) >= R_probe - epsilon - permeability_tolerance
-non_permeable(F) = not permeable(F)
+capacity_pass(F) = R_gate(F) >= R_probe - epsilon - permeability_tolerance
+admitted(T, F) = capacity_pass(F) and (
+    gate_intrusion_policy == 'flag_only' or not intrusion_suspect(T, F))
+non_permeable(T, F) = not admitted(T, F)
 marginal_face(F) = abs(R_gate(F) - R_probe) <= epsilon + permeability_tolerance
 ```
 
 Policy is **generous toward permeability** (same rationale as residence): the
-numerical `epsilon` favours permeable, and `permeability_tolerance` (physical,
-default `0.0`, user-controllable) widens it further. Marginal faces are counted
-permeable but still flagged. Both tolerances are query parameters of
+numerical `epsilon` favours permeable, and `permeability_tolerance` (a length
+band, default `0.0`, user-controllable) widens it further.
+The capacity predicate is shared, but `block_suspect` additionally blocks an
+owner incidence according to its opposite-apex flag. Internal edges require
+both incidences admitted; marginality remains recorded even if policy blocks
+one. Both tolerances are query parameters of
 `get_topography(...)` / `dfnd(...)` and are recorded in `raw['parameters']`.
 
 ### 2.3. Permeable Contacts
@@ -106,15 +120,15 @@ Interpretation:
 
 - `resident_transit`: the probe can reside and can also move through permeable
   contacts.
-- `transit_connector`: the probe cannot reside, but can pass through from one
-  permeable contact to another. This captures dry-open or dry-transit throats.
+- `transit_connector`: nonresident node admitted by the selected multiple-contact
+  policy. This is graph connectivity; continuous all-atom passage remains unproved.
 - `terminal_contact`: the probe can touch or enter from one side, but cannot
   cross through because there is no second permeable contact.
 - `non_transit`: no residence and no passage.
 
 ## 4. Transit Graph
 
-The transit graph is the primary movement graph.
+The transit graph is the primary discrete connectivity graph.
 
 Nodes:
 
@@ -127,10 +141,11 @@ Edges:
 ```text
 transit_edge(T_i, T_j) =
     T_i and T_j are transit_nodes
-    and they share a permeable finite face
+    and both owner incidences of their shared finite face are admitted
 ```
 
-This is the single canonical transit-edge predicate. Implementations must not
+Face capacity is unique; owner admission can differ under `block_suspect`.
+This is the canonical two-sided transit-edge predicate. Implementations must not
 apply a second threshold to `R_gate` after the shared face has been classified.
 A marginal face admitted by the generous permeability policy remains flagged as
 marginal and creates a transit edge when both incident tetrahedra are transit

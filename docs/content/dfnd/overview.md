@@ -10,7 +10,22 @@ DFND organizes those observations on one geometric substrate. It produces
 regions and supporting records that can be inspected, measured, named and related
 through TopoMT. A pocket is one possible interpretation of those records.
 
+For example, the four-atom tetrahedron accommodates a 1.4 Å probe at its center
+while its complete hull blocks entry. The public result is a Void. Increasing
+the probe to 1.7 Å removes residence from this finite system. The
+[worked example](worked_tetrahedron.md) shows the geometry, predictions and
+retained records; you can read it before the construction details below.
+
+Three terms will recur. The **carrier** is the tetrahedral partition used to
+organize the geometry. A finding's **support** records the cells/faces and atom
+mapping behind it. **Promotion** means including a native result as a public
+TopoMT feature. A carrier or atom list alone does not reconstruct a clipped
+physical free-space region.
+
 ## The construction in seven steps
+
+This is the deeper reading route. Each step is developed in the following
+chapters; it is not a prerequisite for understanding the first example.
 
 1. Capture selected atom coordinates, effective radii and their source mapping.
 2. Partition their finite convex hull into ordinary Delaunay tetrahedra.
@@ -22,6 +37,13 @@ through TopoMT. A pocket is one possible interpretation of those records.
    root separately. Build a complementary bank graph.
 6. Derive boundaries, depth, morphology, interface descriptors and internal motifs.
 7. Apply catalog rules and promote supported results into `Topography` features.
+
+```{figure} figures/method_pipeline.svg
+:alt: Selected atoms feed a Delaunay mesh, local capacities, a probe query, finite components, descriptors and public Topography findings.
+
+The implemented construction. The continuous all-atom free space is the
+physical reference used to interpret and test its local graph observations.
+```
 
 The name *flow network* refers to geometric connectivity in this construction.
 The current DFN is undirected. It does not solve fluid flow, solvent diffusion,

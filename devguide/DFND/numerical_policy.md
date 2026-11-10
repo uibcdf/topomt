@@ -1,5 +1,10 @@
 # DFND Numerical Policy
 
+Reading correction — 2026-11-09, #173: query tolerances are declared length
+decision bands. Historical flexibility language is not a calibrated physical
+uncertainty model. See the [public numerical account](../../docs/content/dfnd/numerics_and_reproducibility.md);
+scientific sensitivity/conditioning remains #76. No numerical predicate changed.
+
 This document defines the first working numerical policy for DFND.
 
 The goal is not to hide fragile geometric decisions behind arbitrary constants.
@@ -68,10 +73,11 @@ Applied to DFND:
 
 Marginal states should be reported in raw records. The deterministic side is
 **generous**: `epsilon` is applied in favour of open/permeable/resident (so the
-`>=` threshold holds inclusively), and physical tolerances
+`>=` threshold holds inclusively), and additional length tolerances
 (`residence_tolerance`, `permeability_tolerance`, default `0.0`,
-user-controllable) widen it further for structural flexibility / coordinate
-imprecision. The diagnostic must retain that the decision was near-threshold.
+user-controllable) widen it further for a declared sensitivity question. They
+do not quantify flexibility or uncertainty without an additional model. The
+diagnostic retains proximity to threshold even if intrusion policy blocks an incidence.
 
 ## 4. Tolerance Types
 
@@ -187,7 +193,7 @@ Numerical policy:
 - expose `open`, `coast`, `sealed`, and the six wet/dry combined labels in raw
   records;
 - keep primary transit connectivity based on transit nodes and the single
-  canonical shared-face permeability decision;
+  canonical two-sided shared-face admission rule;
 - never re-threshold `R_gate` when deriving a transit edge from a face already
   classified as permeable;
 - preserve both physical `gate_margin` and effective-policy

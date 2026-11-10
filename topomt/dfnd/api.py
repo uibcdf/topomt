@@ -40,8 +40,8 @@ _FEATURE_CLASS_BY_NAME = {
 }
 
 # Families whose external links are promoted to child Mouth features. Voids have
-# no mouths; percolating regions are fully open (their single external link is the
-# whole boundary, not a real mouth), so neither gets Mouth children.
+# no native links; the compatibility Percolating family also gets no Mouth
+# children. This is promotion policy, not a physical free-patch count (#151).
 _FAMILIES_WITH_MOUTHS = {'pockets', 'channels'}
 
 

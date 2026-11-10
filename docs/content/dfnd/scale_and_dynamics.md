@@ -58,6 +58,8 @@ without recomputing those relationships.
 `support_key` equality and, when support differs, lining-atom Jaccard overlap.
 `assign_tracks` chains pairwise correspondences into one-to-one tracks and
 birth/death/split/merge events. These are implemented post-processing helpers.
+Both helpers default to `min_jaccard=0.2`; it is an explicit helper argument,
+not a `DFNDQuery` parameter or a calibrated biological identity threshold.
 
 An exact support match is strong evidence of equal tetrahedral support on the
 same atom-index substrate. It is not equality of coordinates or proof of an

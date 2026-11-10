@@ -29,17 +29,17 @@ $$q_d=\max_{T\text{ resident},\ \operatorname{depth}(T)=d}R_T.$$
 Levels without eligible nodes are omitted. With at least four levels, fit
 $\hat q_d=a+bd$ by unweighted least squares and calculate
 
-$$g=\frac{b(d_{\max}-d_{\min})}{\max_d q_d},\qquad
+$$g_{\rm funnel}=\frac{b(d_{\max}-d_{\min})}{\max_d q_d},\qquad
 s=1-\frac{\sum_d(q_d-\hat q_d)^2}{\sum_d(q_d-\bar q)^2}.$$
 
-`gradient` is $g$, negative for narrowing inward; `steadiness` is the fit score
+`gradient` is $g_{\rm funnel}$, negative for narrowing inward; `steadiness` is the fit score
 $s$, stored rounded to four decimals. The implementation uses $s=0$ for a
-constant profile and $g=0$ if the maximum capacity is nonpositive. With fewer
+constant profile and $g_{\rm funnel}=0$ if the maximum capacity is nonpositive. With fewer
 than four levels, `funnel` is `None`, not a negative detection. As elsewhere in
 the morphology diagnostics, the fallback for an empty resident list is the
 full component node list.
 
-The provisional `is_funnel` rule requires $g\le-0.4$ and the **unrounded**
+The provisional `is_funnel` rule requires $g_{\rm funnel}\le-0.4$ and the **unrounded**
 $s\ge0.8$. A constant-radius profile fails the narrowing test even if it looks
 like a well-defined tube. Multiple branches at one depth are collapsed to their
 maximum, so this profile is not a clearance measurement along one chosen path.
@@ -51,13 +51,15 @@ neither enough levels for this fit nor enough centers for PCA elongation.
 
 Inside each current component, the implementation processes its admitted
 internal transit edges in descending gate capacity. Basins carry their largest
-node residence capacity. When two basins join at capacity $g$, a prominence-like
+node residence capacity. When two basins join at capacity $R_{\rm join}$, a prominence-like
 quantity is
 
-$$\pi=R_{\rm peak,lower}-g.$$
+$$\pi=R_{\rm peak,lower}-R_{\rm join}.$$
 
-Joins above the selected persistence floor produce throat candidates and
-associated chamber candidates. Supports, parent-component keys and navigable
+Joins with $\pi\ge0.1$ nm (1 Å) produce throat candidates and associated chamber
+candidates. This is the current fixed default of the internal builder; it is
+not exposed as a public `DFNDQuery` setting. The floor has length units, whereas
+the funnel gradient is dimensionless. Supports, parent-component keys and navigable
 motif relations retain the basins and joining faces. Symmetric lobes can be
 siblings under the same throat rather than an arbitrary nested parent/child pair.
 
@@ -93,6 +95,14 @@ every branch of a channel, and from validating an all-atom collision-free center
 trajectory. Straight segments between cell centers can encounter obstacles.
 A resident-only skeleton may also omit connectivity that the full component
 obtained through nonresident connectors.
+
+The existing `topomt.dfnd.centerline.channel_branch_skeletons(raw, component)`
+helper adds visual secondary routes from extra usable mouths to the primary
+path, using shortest resident-graph distances. It returns an empty list when
+there is no primary skeleton or no qualifying extra route. The primary helper
+`channel_skeleton` returns `None` when it cannot construct its selected path.
+Neither helper enumerates every internal branch or validates collisions; a
+completed component analysis need not yield a skeleton.
 
 ```{figure} figures/persistence_axes.svg
 :alt: Capacity hierarchy within one query, probe changes on fixed coordinates and temporal changes on different coordinates form three distinct analysis axes.

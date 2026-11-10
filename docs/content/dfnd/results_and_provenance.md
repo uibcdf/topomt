@@ -19,6 +19,8 @@ Topography
       components: typed wet and dry registry
 ```
 
+A finding's **support** identifies the cells/faces and source atoms behind it.
+Its carrier cells need not be entirely free of atomic balls.
 A native component is a graph support with a spatial representation. A motif
 is an internal substructure or descriptor. A promoted feature is a public
 scientific finding. Dynamic attributes containing raw motif dictionaries do not
@@ -49,6 +51,11 @@ This is a trace from public interpretation to native occurrence/support. It is
 not a requirement that users rely on display labels or private implementation
 functions. Follow [the API reference](../../api/users/api_users.rst) for callable
 details and [the geometry guide](../user/dfnd_geometry.md) for operational context.
+The [many-cell public walkthrough](../benchlab/synthetic/public_topography.md)
+continues to a Mouth and its parent/source mapping. The
+[shell inspection](network_and_decomposition.md#advanced-inspection-a-many-cell-center)
+also recovers a public center from its full transit-cell support; that center
+is a carrier centroid, not a guaranteed free placement point.
 
 ## Different identities answer different questions
 
@@ -91,7 +98,8 @@ Mesh neighbors are also not automatically movement neighbors. The current
 `dfn.graph.neighbors` helper filters mesh adjacency by residence labels; a
 traversable route must respect the actual face `transit_edge` decisions.
 Similarly, `permeability_state='permeable'` records post-policy face admission,
-but an internal `transit_edge` also needs two finite transit endpoints. Passing
+but an internal `transit_edge` also needs the other owner's admission and two
+finite transit endpoints. Passing
 the face test alone need not create an edge in the query graph.
 
 ## Attribution and availability

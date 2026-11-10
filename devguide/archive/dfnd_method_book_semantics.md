@@ -1,19 +1,44 @@
 ---
 summary: Correct shared-face admission and complete the DFND method book's operator definitions.
 issue: uibcdf/topomt#173
-status: open
+status: resolved
 opened: 2026-11-09
-closed:
+closed: 2026-11-09
 severity: medium
-verification: reproduced
+verification: measured
 area: [docs, dfnd]
-guard:
+guard: tests/test_dfnd_documentation.py::test_documented_shared_face_and_many_cell_centroid_execute
 normative:
 blocked_by: []
 supersedes: []
 ---
 
 # DFND method-book semantics
+
+## Delivered documentary correction — 2026-11-09
+
+The public book now leads with the scientific question, stored geometry/results
+and an availability map. Execution is optional on the introductory route.
+The shared-face explanation and pseudocode distinguish unique capacities from
+owner admission, with the actual bare-apex heuristic and both-sided wet/dry
+predicates. Defaults, sampling, interface labels, carrier centers and secondary
+skeletons are defined; funnel/joining notation is distinct. Existing many-cell
+Mouth receiving is linked directly.
+
+A downloadable closed-shell example and two new tests were added test-first
+(initially 2 failed / 4 passed). All six documentation tests now pass, including
+actual chapter blocks for the non-default incidence and many-cell public center.
+Developer contracts and source docstrings/comments receive dated reconciliation;
+no numerical or decision logic changes. The audit's F1–F7 disposition map and
+documentation checkpoint record the evidence. Prior analysis below is history,
+not a present claim that the correction remains unimplemented.
+
+The focused documentation/public/certificate/reporting panel gives **68 passed,
+7 xfailed**, 10.52 s test time / 12.91 s process wall time, peak RSS 314.8 MiB.
+Expected failures remain #151's missing physical views. The fresh HTML build
+has zero DFND warnings and eleven pre-existing project warnings (#64).
+Scientific gates #75/#76/#151 and public-contract gates #60/#61 remain open;
+this resolves documentary correctness/completeness only.
 
 ## What
 

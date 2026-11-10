@@ -1,5 +1,11 @@
 # DFND Metrics Contract
 
+Precision correction — 2026-11-09, #173: descriptions below now agree with the
+[public measurement definitions](../../docs/content/dfnd/measurements.md).
+Earlier rigorous-MC/exact-oracle wording was overstated; Git history and #75
+retain that observation. No numerical implementation changed. #75 remains open
+for its actual accuracy and uncertainty contract.
+
 This document defines the first working contract for DFND volumes, areas, and
 related metrics.
 
@@ -199,30 +205,31 @@ Three methods, offered for richness — each honest about its own error mode:
 
 - **Monte Carlo** (`method='mc'`, the production default). Seeded
   stratified-barycentric sampling per tetrahedron; returns the volume **and a
-  rigorous 2σ statistical half-width** as the error. Cost scales with the
-  *surface* of the excluding union (roughly constant per tetrahedron), so it
-  stays cheap on large components. Reproducible for a fixed seed.
+  normal-approximation two-standard-error half-width** as the error. All-hit
+  or no-hit samples can return zero error without proving exactness. Sampling
+  and exclusion costs depend on sample/obstacle counts, not a universal
+  surface-scaling guarantee. Reproducible for a fixed seed/implementation.
 - **Voxel occupancy grid** (its own entry point `DFNDData.occupancy_grid`, not a
   `method=` of `solvent_volume`). Rasterises the region onto a boolean grid at a
   chosen `spacing`,
   subtracting the atom union; returns both the **volume and the 3-D shape**
   (the grid + origin), which Monte Carlo cannot give. Cost scales with
   *volume / spacing³*. Use it when the shape itself is wanted.
-- **Exact** (`method='exact'`, the oracle). Deterministic nested (z, y) Gauss
+- **Fixed-order quadrature** (compatibility `method='exact'`). Nested (z, y) Gauss
   quadrature with an analytic 1-D interval-union along x — no Monte Carlo, no
   3-D spherical geometry. numba-accelerated (`topomt/_private/jit.py`,
-  `lazy_njit`, lazy import). No statistical error; converges with `n_quad`.
-  Cost scales with *volume / tetrahedra* (O(L³)), so it is the **slowest on
-  large regions** — it is a per-tetrahedron ground truth and a cross-check for
-  the other two, not the production path. (Correcting an early intuition that
-  "exact" might be fastest for large cavities: it is not; MC stays production.)
+  `lazy_njit`, lazy import). Returns no statistical error estimate; that is not
+  zero integration error. Order and tetrahedron/obstacle counts affect cost.
+  Convergence/error evidence is required before using a value as a reference;
+  this is not a general exact oracle or a universal performance ranking.
 
 The validation battery (1–7 above) is met by
 `tests/test_dfnd_solvent_volume_precise.py`: zero-radius and fully occupied
 tetrahedra; single-sphere vs the analytic ball volume; overlapping spheres vs
 the closed-form lens, where naive independent subtraction provably fails;
 unequal/near-tangent radii and slivers; synthetic tetrahedra with analytic empty
-volume; MC↔voxel↔exact cross-agreement within MC's error bound. Comparison
+volume; MC↔voxel↔quadrature comparisons at the sampled settings. A passing
+comparison within a reported half-width is not a finite-sample coverage proof. Comparison
 against external CASTp/VOLBL references (item 6) is deferred to the validation
 program, since semantics (solvent vs molecular-surface) must be matched first.
 

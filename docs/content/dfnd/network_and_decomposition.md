@@ -28,9 +28,12 @@ cannot be settled by naming the cell a connector.
 ## Edges and the common exterior
 
 An internal transit edge requires both incident cells to be finite transit
-nodes and their shared face to be admitted. The two sides use the same face
-capacity/permeability decision. Marginality is recorded without imposing a
-second, stricter edge threshold.
+nodes and **both incidences** of their shared face to be admitted. An incidence
+is the face as seen from one of its two neighboring cells. Its cached capacity
+is identical on both sides, but intrusion policy can give different admission
+states: each cell has its own opposite apex. Under `block_suspect`, one side
+can be blocked while the other passes. The edge then remains absent on both
+records. Marginality does not impose a second, stricter capacity threshold.
 
 OCEAN is a virtual exterior node, represented natively by `-1`. It has no finite
 tetrahedral geometry, residence capacity or volume. An admitted hull contact of
@@ -123,3 +126,72 @@ nodes enter that decomposition. In the diagram, filtering hides small groups;
 removing connector C actually separates A from B. Neither operation changes
 cached local capacities.
 ```
+
+## Advanced inspection: one face, two owner states
+
+The existing closed shell makes the distinction concrete. At 0.2 Å, face support
+`[13, 23, 26]` has shared gate capacity 0.1198879391121351 nm. With `flag_only`
+both incidences pass. Switching to `block_suspect` blocks one incidence; neither
+record then has a transit edge. This describes the implemented graph policy,
+without certifying a physical path through the face.
+
+To reproduce it, save {download}`closed_shell.py <examples/closed_shell.py>` in
+your working directory, and put the canonical
+{download}`input.json <../benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/input.json>`
+and {download}`input.pdb <../benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/input.pdb>`
+in `shell_input/`. The script restores full-precision coordinates, checks the
+frozen input hash/radii and runs the public molecular route. The PDB supplies
+dummy topology; no new molecular system or external engine is downloaded.
+
+```python
+from pathlib import Path
+from closed_shell import analyze_closed_shell
+from topomt import pyunitwizard as puw
+
+shell_topography = analyze_closed_shell(Path('shell_input'))
+blocked = shell_topography.dfnd.at_probe(
+    puw.quantity(0.2, 'angstroms'), gate_intrusion_policy='block_suspect'
+)
+face_pair = [f for f in blocked.raw['faces']
+             if sorted(f['atom_indices']) == [13, 23, 26]]
+assert len(face_pair) == 2
+assert face_pair[0]['R_gate'] == face_pair[1]['R_gate']
+assert {f['permeability_state'] for f in face_pair} == {'permeable', 'non_permeable'}
+assert not any(f['transit_edge'] for f in face_pair)
+assert any('blocked_by_intrusion_policy' in f['flags'] for f in face_pair)
+baseline = [f for f in shell_topography.dfnd.raw['faces']
+            if sorted(f['atom_indices']) == [13, 23, 26]]
+assert all(f['permeability_state'] == 'permeable' for f in baseline)
+```
+
+The records keep their owner/neighbor IDs and source atoms. Locate the support
+by its atoms rather than assuming a local face number survives another mesh
+revision. [Local capacities](local_capacities.md#the-apex-intrusion-policy)
+define the exact heuristic behind the flags.
+
+## Advanced inspection: a many-cell center
+
+On the same result, the reported Void with the most transit cells has several carrier cells. Its
+public center can be recovered from their geometry:
+
+```python
+import numpy as np
+
+shell_void = max(shell_topography.get_features(by='type', value='void'),
+                 key=lambda feature: len(feature.tetrahedron_indices))
+shell_component = shell_topography.dfnd.dfn.components[shell_void.component_id]
+network = shell_topography.dfnd.network
+nodes = shell_component.node_indices
+cell_vertices = network.atom_coords[network.tetra_atoms[nodes]]
+cell_volumes = network.mesh.simplex_volumes[nodes]
+centroid_nm = np.average(cell_vertices.mean(axis=1), axis=0, weights=cell_volumes)
+np.testing.assert_allclose(
+    puw.get_value(shell_void.center, to_unit='nm'), centroid_nm, rtol=0, atol=1e-13
+)
+```
+
+This is a **carrier centroid**, distinct from the optimized residence centers
+of individual cells. The [measurement definition](measurements.md#centers-and-placement)
+explains why it is not a guaranteed free placement point. For a many-cell public
+Mouth and its parent/support mapping, follow the existing
+[three-case walkthrough](../benchlab/synthetic/public_topography.md).

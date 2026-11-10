@@ -23,8 +23,11 @@ for each cell:
 
 for each unique face:
     generate/validate local gate candidates against its three atoms
-    retain gate capacity, support correspondence and intrusion diagnostics
+    retain gate capacity and support correspondence
 scatter shared-face capacities consistently to their cell-face occurrences
+for each cell-face incidence:
+    inspect that cell's opposite apex against the supporting face plane
+    retain its incidence-specific intrusion diagnostic
 retain substrate identity and recoverable atom-defined supports
 ```
 
@@ -36,9 +39,10 @@ or numerical failure must remain distinguishable from an empty analysis result.
 
 ```text
 resident := residence_capacity >= probe - epsilon - residence_tolerance
-permeable := gate_capacity >= probe - epsilon - permeability_tolerance
+capacity_pass[f] := gate_capacity[f] >= probe - epsilon - permeability_tolerance
+permeable[T, f] := capacity_pass[f]
 if intrusion policy blocks suspected faces:
-    permeable := permeable and not suspected
+    permeable[T, f] := capacity_pass[f] and not suspected[T, f]
 record margins and local open/coast/sealed classes
 
 if transit policy enables connectors:
@@ -47,7 +51,7 @@ else:
     transit := resident
 record nonresident connector/contact/non-transit roles separately
 
-internal edges := shared admitted faces with two transit endpoints
+internal edges := shared faces with two transit endpoints and BOTH incidences admitted
 exterior edges := admitted hull contacts of transit nodes to virtual OCEAN
 components := connected components after removing OCEAN
 
@@ -60,12 +64,14 @@ for each component:
 
 bank nodes := complement of finite transit nodes
 group banks by the selected face/edge/vertex adjacency policy
+for face adjacency require BOTH incidences nonpermeable and BOTH nodes banks
 retain bank interfaces, depth and candidate supports
 ```
 
 No second strict gate threshold is added when creating an internal edge.
 `flag_only` records suspected intrusion without removing it. Default face bank
-adjacency requires a nonpermeable shared face; edge/vertex modes differ.
+adjacency requires nonpermeability on both sides; a mixed incidence pair is
+neither a wet edge nor a dry face edge. Edge/vertex modes differ.
 
 ## Interpretation and promotion
 
@@ -84,6 +90,27 @@ attach the complete method-specific result under topography.dfnd
 Classification delegates to the catalog; raw compatibility family records
 remain available. Morphological refinement and public feature type can differ
 from a component's coarse family without changing its exact support.
+This is a logical-stage summary, not a claim that all derived descriptors are
+independent of reporting. Current bank-based interface annotation consumes
+compatibility-filtered dry records; see [interfaces](../interfaces.md).
+
+## Advanced operator defaults
+
+These values describe the current source and controls; they are not suggested
+physical calibration. Query settings belong to `DFNDQuery`; the following
+derived choices have their own scope.
+
+| Operation | Current choice | Control/meaning |
+| --- | --- | --- |
+| Intrusion suspicion | Opposite apex plane distance at most bare apex radius plus epsilon; degenerate normal also suspect. | Cached per incidence; `gate_intrusion_policy` selects flag-only or blocking. |
+| Capacity motifs | Inclusive prominence floor 0.1 nm (1 Å). | Fixed internal default, not a public query argument. |
+| Fast empty estimate | Resolution 8, half-shifted barycentric lattice, 165 interior samples. | Fixed in the geometry pass; actual count retained per cell. |
+| Prototype interfaces | At least 3 atoms per retained body, smallest retained fraction at least 0.15; largest bank wins shared intermediate labels. | Helper arguments; normal promotion uses defaults, not automatic chain labels. |
+| Lineage | `min_jaccard=0.2`, with exact support matches preferred. | Explicit argument of matching/track helpers, not the geometry query. |
+
+Definitions and limits live in [local capacities](../local_capacities.md),
+[hierarchy](../hierarchy_and_paths.md), [measurements](../measurements.md),
+[interfaces](../interfaces.md) and [scale](../scale_and_dynamics.md).
 
 ## Optional downstream operations
 

@@ -1021,28 +1021,17 @@ def _union_find_root(parent: dict[int, int], node: int) -> int:
 def _attach_capacity_motifs(
     components: Components, result: dict[str, Any], min_persistence: float = 0.1
 ) -> None:
-    """Attach the internal sub-chamber hierarchy (a merge tree) to each wet component.
+    """Attach a provisional capacity hierarchy to the current transit component.
 
-    The component is **not** re-segmented: it stays one probe-connected region,
-    preserving the wet-component invariant and avoiding shared-owner ambiguity
-    (cf. Q17). Its internal topographic hierarchy is exposed as a descriptor --
-    the resolution of L1.3 (nested concavities under a single-scale ``OCEAN``).
+    Internal transit faces are processed in descending gate capacity. Basins
+    carry their node-residence peak; joins whose lower-peak-minus-gate value
+    reaches min_persistence produce sibling chamber/throat descriptors.
+    The internal default is 0.1 nm, not a public query control.
 
-    A merge tree is built over the component's internal **transit** faces ordered
-    by capacity (``R_gate``, descending). Using ``transit_edge`` rather than raw
-    face geometry excludes non-permeable and intrusion-suspect faces by
-    construction, so a sliver's spurious wide face cannot forge a throat. Each
-    tetrahedron starts as a basin with ``peak = R_residence``; when two basins
-    join, the shallower basin's prominence is ``peak - capacity``. A join that
-    clears ``min_persistence`` is a ``throat_candidate``; the two basins it
-    separates are sibling ``chamber_candidate``s -- symmetric lobes are co-equal
-    (same ``separation_radius``), never a forced parent/child. ``min_persistence``
-    is only a mesh-noise floor in length units; the physical scale is reported per
-    feature as ``separation_radius`` -- the probe radius at which the sub-feature
-    detaches from its sibling (the throat ``R_gate``). Throats/chambers are
-    provisional: the scoring policy is fixed and toy-validated, real-system
-    validation remains for canonical (component_motifs.md sections 2/4/6;
-    output_status.py / Q25).
+    Transit edges respect the selected intrusion policy: flag_only retains
+    suspects and block_suspect blocks owner incidences. A joining capacity is
+    conditional to this support/query, not a certified future detachment radius
+    or physical path. No component is resegmented by these descriptors.
     """
     raw = result['raw']
     node_capacity = {t['tetrahedron_id']: t['R_residence'] for t in raw['tetrahedra']}
@@ -1054,8 +1043,8 @@ def _attach_capacity_motifs(
             node_to_component[node] = component.component_id
 
     # internal navigable (transit) faces per component; transit_edge already
-    # excludes non-permeable and intrusion-suspect faces, so a sliver cannot
-    # forge a throat. Keep the widest face per node pair, with its atoms.
+    # excludes non-admitted incidences. Under flag_only, suspects remain
+    # admitted; this is not a physical throat certificate. Keep the widest face per node pair, with its atoms.
     edges_by_component: dict[str, dict[tuple[int, int], tuple[float, list[int]]]] = (
         defaultdict(dict)
     )
@@ -1337,39 +1326,18 @@ def _elongation_and_axis(points: list) -> tuple:
 
 
 def _attach_morphometrics(components: Components, result: dict[str, Any]) -> None:
-    """Attach morphology discriminators to each wet component -- the topology ->
-    morphology bridge that the public feature layer (``dfnd_to_topography``,
-    feature_definitions.md) uses to refine a topological family (e.g. ``pocket``)
-    into a morphological type (groove / occluded pocket / funnel / ...).
+    """Attach current-support morphology observations before catalog naming.
 
-    All are assembled from quantities DFND already computes; none introduces a new
-    geometric primitive:
+    Interior radius is the maximum eligible residence capacity; mouth radius
+    is the largest native-link gate summary. Positive mouth radius defines
+    occlusion, gap and enclosable; missing mouth gives None for those fields.
+    Empty resident lists use the full component list as a diagnostic fallback.
 
-    - ``mouth_radius``    -- the widest aperture (max external-link ``R_gate_max``).
-      It is the **seal radius**: the probe radius above which every mouth face
-      closes and the cavity becomes an enclosed void.
-    - ``interior_radius`` -- the widest interior clearance (max ``R_residence`` over
-      the resident nodes). It is the **residence-death radius**: the largest probe
-      that still resides; above it there is no residence.
-    - ``occlusion``       -- ``interior_radius / mouth_radius``. ``<=1`` is an open
-      groove/dent (the mouth is at the widest point, clearance only narrows inward,
-      so the cavity loses residence and mouth together and never becomes a void);
-      ``>1`` narrows at the mouth and widens inside (the enclosed / "druggable"
-      kind -- the interior holds the probe after the mouth has sealed).
-    - ``occlusion_gap``   -- ``interior_radius - mouth_radius`` in length units: the
-      width of the probe-radius window in which this cavity exists as an enclosed
-      **void** (mouth sealed, residence alive). This is the probe sweep's
-      pocket -> void interval, compressed -- no sweep is run because ``R_residence``
-      and ``R_gate`` are probe-independent, so the endpoints are read directly.
-    - ``enclosable``      -- ``occlusion_gap > 0``: becomes a void as the probe grows
-      (the robust groove vs occluded-pocket discriminator).
-    - ``buriedness``      -- the deepest residence depth from the mouth
-      (max ``topological_depth``).
-
-    These are descriptors only; the morphological *naming* and its thresholds are
-    a public-layer policy, deliberately not fixed here. Note the global ratio can
-    miss a deep narrow sub-pocket behind a wide mouth; the merge-tree hierarchy and
-    the depth-ordered access profile cover that compound case.
+    PCA uses equally weighted residence centers. Buriedness is the maximum
+    stored transit-node depth. Funnel and deepest-chamber fields retain their
+    provisional definitions. These describe this query; they do not prove a
+    future sealing/death interval, biological druggability or physical access.
+    See docs/content/dfnd/classification.md and hierarchy_and_paths.md.
     """
     raw = result['raw']
     node_residence = {t['tetrahedron_id']: t['R_residence'] for t in raw['tetrahedra']}

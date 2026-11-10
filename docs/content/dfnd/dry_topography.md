@@ -22,8 +22,11 @@ a physical partition into molecular solid and accessible liquid.
 
 ## Bank connectivity
 
-Under the default `dry_adjacency='face'`, bank nodes connect through a shared
-nonpermeable face. Alternative edge/vertex adjacency groups nodes through shared
+Under the default `dry_adjacency='face'`, two bank nodes connect only when
+**both owner incidences** of their shared face are nonpermeable. Incidence
+states can differ under `block_suspect`; a mixed pair therefore supplies neither
+a wet edge nor a face-adjacent dry edge. The dry edge set is not the logical
+complement of the wet edge set. Alternative edge/vertex adjacency groups nodes through shared
 atom pairs or individual atoms and does not apply that face-permeability filter.
 Those alternatives answer different grouping questions.
 

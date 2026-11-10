@@ -1,22 +1,42 @@
 (dfnd-theory)=
 # DFND: Theory and Method
 
+A cavity may accommodate a probe even when access from outside is blocked.
+Changing the probe size can change both accommodation and the contacts between
+regions. These distinctions matter when interpreting a buried cavity, an open
+depression or a possible access route in a molecular structure.
+
 **Delaunay Flow Network Decomposition (DFND)** is TopoMT's native approach to
-characterizing molecular topography with atomic geometry, a spherical probe
-and a network of local spatial capacities. Its questions include where a probe
-can be accommodated, how regions communicate, which boundaries delimit them,
-and how their internal structure changes with the scale of observation.
+organizing these geometric observations. It represents atoms as balls, measures
+local accommodation and face contacts for a spherical probe, and groups the
+resulting graph into regions that you can inspect through `Topography`.
 
-This section develops the model and the implemented method together. Start with
-the intuition, follow the mathematical definitions when needed, and inspect the
-same small system throughout the [worked tetrahedron example](worked_tetrahedron.md).
+```{figure} ../benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/system_geometry.png
+:alt: Four equal atomic balls at tetrahedron vertices, with a central position and four face centers marked.
+:width: 460px
 
-```{figure} figures/method_pipeline.svg
-:alt: Atomic input and a Delaunay mesh feed local capacities, a probe query, region decomposition, descriptors and a public Topography result.
-
-The executed pipeline. Continuous free space is the physical reference against
-which the local, discrete construction is interpreted and tested.
+Four atoms are enough to separate two questions: can a probe fit inside, and
+can it enter? The [worked example](worked_tetrahedron.md) answers them at three
+probe sizes using independently justified geometry. Its simplicity lets us
+understand the observations before studying proteins.
 ```
+
+You can follow the explanation without executing code. The examples provide
+stored outcomes first, with downloads and Python inspection available when you
+want to reproduce them.
+
+## What you can obtain today
+
+| Layer | Present scope | Read more |
+| --- | --- | --- |
+| Public findings | Void, Pocket/Channel, Percolating and supported morphological refinements; native-link Mouth children on pocket/channel families. | [Classification](classification.md), [public results](results_and_provenance.md) |
+| Native descriptions | Resident/transit supports, dry banks, boundaries, depth, provisional chamber/throat and interface descriptors; skeleton and matching helpers. | [Decomposition](network_and_decomposition.md), [dry side](dry_topography.md), [paths](hierarchy_and_paths.md) |
+| Developing extensions | Complete physical boundary patches and their attachment; general relief features and localized molecular interface relations. | [Boundaries](exterior_and_boundaries.md), [interfaces](interfaces.md) |
+
+These are availability statements. A software output called canonical is not
+thereby a certified physical path or a validated biological detector. Current
+graph connectivity is a local construction; [validation and scope](validation_and_scope.md)
+explain the independent evidence and outstanding questions.
 
 ## Choose a reading route
 
@@ -29,6 +49,11 @@ Return to [the geometric model](geometry_and_probe.md) and
 **To study or implement the method:** follow the four parts below, then the
 derivations, conditional properties and pseudocode. The
 [notation sheet](appendices/notation.md) is available throughout.
+
+For a many-cell example with a public Mouth, use the
+[three-case public walkthrough](../benchlab/synthetic/public_topography.md).
+For task-oriented calls and installation context, use the
+[User guide](../user/dfnd_geometry.md).
 
 | Your question | Continue here |
 | --- | --- |

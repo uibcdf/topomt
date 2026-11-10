@@ -75,16 +75,33 @@ maximum clearance. A successful three-atom gate calculation is therefore a
 candidate for an all-atom crossing, not its certificate. Even two genuine free
 face positions do not prove that a free path joins them inside the cell.
 
-The intrusion diagnostic inspects selected opposite-apex geometry. Under
-`flag_only` it is diagnostic; under `block_suspect` suspected faces are blocked.
-This is a policy, not a complete all-atom path calculation. Do not interpret
-absence of a flag as collision certification.
+The intrusion diagnostic adds a separate decision about the cell's opposite
+atom, explained below. Its absence is not collision certification.
 
 For an exact all-atom-valid path, any point of the path inside a closed cell
 implies that cell's exact local residence maximum is at least $p$. This
 {ref}`conditional implication <residence-and-paths>`
 is important when interpreting nonresident connectors. The code's connector
 rule remains a discrete construction whose physical reconciliation is open.
+
+## The apex intrusion policy
+
+For each incidence `(T, f)`, let $a$ be the vertex of $T$ opposite face $f$,
+and $h$ its absolute distance to the face's supporting plane. The current
+heuristic marks `intrusion_suspect` when $h\le r_a+\varepsilon$; a face normal
+with norm at most epsilon is also marked suspect. This uses the **bare apex
+radius**, not $r_a+p$. It does not check where the projected disk falls on the
+triangle or search every nonlocal atom.
+
+Under `flag_only`, the flag is retained without blocking. Under `block_suspect`,
+that owner's incidence is blocked. The two cells sharing an internal face have
+different opposite apices, so they can disagree after this policy even though
+their `R_gate` is bit-identical. An internal transit edge needs both admissions.
+See the [executed shell inspection](network_and_decomposition.md#advanced-inspection-one-face-two-owner-states).
+
+This heuristic may add blocking beyond the local capacity test and omits
+probe-expanded obstacles that do not intersect the plane at their bare radius.
+It is a declared graph policy with limited scope, not a complete path test.
 
 ## Worked scale
 

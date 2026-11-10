@@ -21,8 +21,10 @@ INPUT = ROOT / (
 )
 
 
-def example_module():
-    spec = importlib.util.spec_from_file_location('dfnd_documentation_example', EXAMPLE)
+def example_module(filename='tetrahedron.py'):
+    spec = importlib.util.spec_from_file_location(
+        'dfnd_documentation_example', EXAMPLE.parent / filename
+    )
     assert spec is not None and spec.loader is not None
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
@@ -107,3 +109,42 @@ def test_documented_public_inspection_and_query_blocks_execute(tmp_path, monkeyp
     metrics = namespace['metrics']
     for name in ('mouth_radius', 'occlusion', 'elongation', 'funnel'):
         assert metrics[name] is None
+
+
+def test_documented_shared_face_and_many_cell_centroid_execute(tmp_path, monkeypatch):
+    source = (
+        ROOT / 'docs/content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1'
+    )
+    inputs = tmp_path / 'shell_input'
+    inputs.mkdir()
+    for name in ('input.json', 'input.pdb'):
+        shutil.copyfile(source / name, inputs / name)
+    monkeypatch.chdir(tmp_path)
+    monkeypatch.syspath_prepend(str(EXAMPLE.parent))
+    namespace: dict[str, Any] = {}
+    page = EXAMPLE.parent.parent / 'network_and_decomposition.md'
+    blocks = re.findall(r'^```python\n(.*?)^```$', page.read_text(), re.M | re.S)
+    assert blocks, 'The shared-face explanation needs its executable example'
+    for code in blocks:
+        exec(compile(code, str(page), 'exec'), namespace)
+    pair = namespace['face_pair']
+    assert {tuple(sorted(face['atom_indices'])) for face in pair} == {(13, 23, 26)}
+    assert {face['permeability_state'] for face in pair} == {
+        'permeable',
+        'non_permeable',
+    }
+    assert not any(face['transit_edge'] for face in pair)
+    component = namespace['shell_component']
+    assert len(component.node_indices) > 1
+    np.testing.assert_allclose(
+        puw.get_value(namespace['shell_void'].center, to_unit='nm'),
+        namespace['centroid_nm'],
+        rtol=0,
+        atol=1e-13,
+    )
+
+
+def test_closed_shell_example_rejects_a_changed_input(tmp_path):
+    (tmp_path / 'input.json').write_text('{}')
+    with pytest.raises(ValueError, match='frozen input'):
+        example_module('closed_shell.py').analyze_closed_shell(tmp_path)

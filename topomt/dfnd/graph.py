@@ -515,8 +515,9 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
 
     def _build_transit_edges(self, states: _QueryStates) -> _TransitEdges:
         # Canonical transit-edge decision: two transit nodes connected through one
-        # shared face whose single permeability decision is open. Marginality is
-        # diagnostic and must not trigger a second, stricter R_gate threshold.
+        # shared face with both owner incidences admitted. Capacity is shared;
+        # intrusion policy can distinguish owners. Marginality never adds a
+        # second, stricter R_gate threshold.
         valid_edge_mask = (
             states.finite_transit[self.sources]
             & states.finite_transit[self.targets]
