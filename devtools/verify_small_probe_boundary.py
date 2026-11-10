@@ -398,7 +398,7 @@ def _edge_intervals(start, end, centers, radius, tolerance):
     return intervals
 
 
-def _model(input_file, protocol_file):
+def _model(input_file, protocol_file, protocol_version=1):
     import hashlib
     import json
 
@@ -410,7 +410,10 @@ def _model(input_file, protocol_file):
     protocol_bytes = protocol_file.read_bytes()
     fixture = json.loads(input_bytes)
     protocol = json.loads(protocol_bytes)
-    if protocol.get('schema') != 'topomt.benchlab.small-probe-boundary-protocol/1':
+    if (
+        protocol.get('schema')
+        != f'topomt.benchlab.small-probe-boundary-protocol/{protocol_version}'
+    ):
         raise ValueError('Unrecognized small-probe reference protocol')
     if protocol['budgets']['optimizer_iterations_per_call'] != 100:
         raise ValueError('Unsupported reference optimizer iteration policy')

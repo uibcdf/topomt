@@ -99,3 +99,37 @@ then counts hull patches, including the multiple-region face. Missing witnesses,
 ambiguous winding or an exhausted discovery budget remain unresolved. No
 production region, label or path is an input. The known candidate13 remains
 retrospective and is not a reference acceptance constant.
+
+## Region localization and received source controls
+
+Reference v2 retains the full v1 convex evidence by exact predecessor SHA-256.
+A spanning forest of each positive nerve graph supplies fundamental cycles.
+Represent each convex set by a verified point, and each positive pair by its
+verified intersection point. The two segments through that pair point remain
+in the covered convex sets. Thus every resulting closed polygon is covered.
+Winding parity around a free interior point is constant on its free component.
+Exactly beta_1 points with distinct winding vectors therefore exhaust the
+independently counted components, including the two-region face.
+
+A coarse grid alone missed one narrow component on [18,31,39]. Its new regression
+first failed. Witness discovery now also tries restricted nearest-center diagram
+vertices: triple squared-distance bisectors and pair bisectors on triangle edges,
+including out-of-plane offsets, over independently active balls. These are only
+candidates; every accepted point is checked against all atoms and the covered
+cycles. Inactive balls already have whole-triangle exclusion margins. Grid and
+point/cycle work ceilings remain explicit; discovery failure supplies no count.
+
+Every free seam is assigned on both sides by a positive-clearance segment to a
+strict interior point whose winding vector matches exactly one exhaustive region
+witness. The complete graph uses face-region nodes rather than whole triangles.
+Whole origin-to-patch segments and infinite outward-normal rays are checked
+separately, with the same fixed model and strict margin. They do not prove all
+native graph paths or an exact global cavity count.
+
+The analytic, frozen-face, actual-public comparison and falsification selector
+gives **19 passed**. It rejects missing/duplicate/blocked witnesses, wrong winding
+labels/cycles, incomplete seams and false attachments/rays. The complete
+independent count matches source DFND, and all patches have positive paths from
+the original common origin. Formal exact-revision capture, final source identities
+and publication of these observations follow the frozen source checkpoint.
+No production geometry, output or witness is used by the reference itself.
