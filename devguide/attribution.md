@@ -55,6 +55,7 @@ subprocesses/services are not inferred from imports or automatically observed.
 | DFND | Executed TopoMT and actual numerical/geometry children; no invented DFND publication | `dfnd`, `dfnd_to_topography`, direct network queries and derived-data queries |
 | Delaunay / regular triangulation | TopoMT construction; Qhull and SciPy only when actually called | Mesh constructor and successful tessellation backend; the weighted four-point shortcut does not cite a fresh Qhull execution |
 | Cached mesh use | Original construction records/versions, roles `reused_result` | Successful query using that mesh; no claim of rebuilding it |
+| Binomial volume uncertainty | Clopper–Pearson 1934 criterion, executed TopoMT and actually reached SciPy quantiles | Completed conditional interval only; geometric proofs and quadrature bypass the criterion |
 | Numerical kernels | NumPy for native array methods; SciPy and Numba at directly reached calls | Successful Python/backend boundary, once per enclosing meaningful operation rather than scalar iteration |
 | Native fpocket SASA | Shrake–Rupley criterion and TopoMT implementation | Native surface descriptor computation |
 | fpocket druggability | Schmidtke–Barril 2010 criterion, separately from the 2009 detector | Native score call, or an accepted original run reporting the score; no automatic credit in Pocketeer or other detectors |
@@ -134,3 +135,15 @@ development was received with editable Ackredit `0.12.1+10.g4beb850` at clean
 source `4beb850c8ba814e6103b4d303128a1a36eb57610`, Python 3.14.10. That evidence
 does not qualify every older provider, Python minor, optional engine, wheel or
 Conda package. Broader adoption remains under #56 and delivery/support under #16.
+
+## Volume precision criterion — 2026-11-10
+
+The Clopper–Pearson record was checked against the original 1934 paper
+([original-paper copy](https://www.barestatistics.nl/uploads/1/1/7/9/11797954/clopper__pearson_1934.pdf))
+and [SciPy's primary API reference](https://docs.scipy.org/doc/scipy/reference/generated/scipy.stats._result_classes.BinomTestResult.proportion_ci.html).
+Offline DOI/title/authors/year/volume/pages identify that interval criterion.
+`binomial_interval` credits it only after successful numerical bounds, plus
+actually used SciPy. Fixed-order/refined quadrature and geometric full/empty
+proofs earn no binomial citation. Structured public measurements retain their
+own detached envelope and reused construction references; legacy scalar/tuple
+returns preserve the application-owned capture contract.

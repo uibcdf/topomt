@@ -162,7 +162,8 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
     ),
     # --- metrics (raw-record fields; documentation-level, not runtime-guarded) ---
     'volume_topological_resident': OutputStatus('canonical', 'metric', None, None),
-    # Precise on-demand solvent volume (seeded Monte Carlo, DFNDData.solvent_volume).
+    # On-demand empty-volume semantics. Canonical meaning does not certify a
+    # numerical setting: inspect the conditional interval/convergence status.
     'volume_solvent_resident': OutputStatus('canonical', 'metric', None, None),
     'volume_solvent_transit': OutputStatus('canonical', 'metric', None, None),
     # Fast bulk estimate kept for provenance/speed; the precise metric above now

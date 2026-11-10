@@ -1,7 +1,7 @@
 ---
 summary: DFND solvent-volume precision and finite-sample uncertainty are overstated.
 issue: uibcdf/topomt#75
-status: open
+status: partial
 opened: 2026-10-01
 closed:
 severity: medium
@@ -24,6 +24,16 @@ uncertainty. Under #173 (2026-11-09), the public/developer explanations and sour
 docstrings are reconciled: the legacy method name and numeric error calculation
 are unchanged. This remains an open numerical accuracy/uncertainty finding,
 not a current claim that the corrected text still makes those overstatements.
+
+Source implementation continuation — 2026-11-10: test-first changes replace the
+sampling width with a boundary-safe Clopper–Pearson interval and add bounded
+order-refinement diagnostics while preserving fixed-order compatibility.
+Structured public measurements retain observable/support/units and attribution.
+The frozen [qualification protocol](../DFND/volume_validation_protocol_v1.json)
+predates these changes. Initial numerical, public and real-Ackredit selector:
+64 passed, 13.02 s pytest / 14.75 s wall, peak RSS 539,252 KiB, one CPU/thread.
+Independent three-case volume references and the prescribed repeated-seed
+receiving are still pending; this is not yet a resolved finding.
 
 ## How
 

@@ -1,6 +1,19 @@
 """Offline bibliographic records verified for #157; see devguide/attribution.md."""
 
 ARTICLES = {
+    'clopper_pearson': {
+        'id': 'doi:10.1093/biomet/26.4.404',
+        'type': 'article',
+        'title': 'The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial',
+        'authors': ['C. J. Clopper', 'E. S. Pearson'],
+        'year': 1934,
+        'doi': '10.1093/biomet/26.4.404',
+        'journal': 'Biometrika',
+        'volume': '26',
+        'issue': '4',
+        'pages': '404-413',
+        'url': 'https://doi.org/10.1093/biomet/26.4.404',
+    },
     'fpocket_druggability': {
         'id': 'doi:10.1021/jm100574m',
         'type': 'article',

@@ -142,8 +142,9 @@ def tetrahedron_solvent_volume_estimate_batch(
 # bond puts each atom's centre inside its neighbour's sphere) and non-local
 # intruder atoms reach into a tetrahedron -- a sample is empty iff it lies
 # outside *every* ball, so overlap and non-local intrusion are handled natively
-# with no double subtraction. The error is the honest statistical half-width
-# (~2 standard errors, ~95%); a fixed seed makes it reproducible. The analytic
+# with no double subtraction. The error encloses the asymmetric Clopper–Pearson
+# confidence interval around the point estimate; it is conditional sampling
+# uncertainty, not a deterministic or physical-model bound. The analytic
 # closed-form cases in tests are the oracle. See metrics_contract.md.
 
 PreciseVolumeResult = namedtuple('PreciseVolumeResult', ['volume', 'error'])
@@ -170,20 +171,36 @@ def _sample_simplex(rng, vertices: np.ndarray, n_samples: int) -> np.ndarray:
 
 
 def _empty_fraction(
-    points: np.ndarray, centers: np.ndarray, radii: np.ndarray
+    points: np.ndarray,
+    centers: np.ndarray,
+    radii: np.ndarray,
+    *,
+    max_distance_pairs: int = 262144,
 ) -> float:
-    """Fraction of ``points`` lying outside *every* ball."""
+    """All-atom empty fraction with a bounded distance-pair temporary."""
+    from .volume_precision import _integer
+
+    maximum = _integer(max_distance_pairs, 'max_distance_pairs')
+    if not len(points):
+        raise ValueError('At least one sample point is required')
     if centers.shape[0] == 0:
         return 1.0
-    squared = np.sum((points[:, None, :] - centers[None, :, :]) ** 2, axis=2)
-    inside_any = np.any(squared <= radii[None, :] ** 2, axis=1)
-    return float(np.mean(~inside_any))
-
-
-def _mc_result(total: float, fraction: float, n_samples: int) -> PreciseVolumeResult:
-    volume = total * fraction
-    std_err = total * np.sqrt(max(fraction * (1.0 - fraction), 0.0) / max(n_samples, 1))
-    return PreciseVolumeResult(volume, 2.0 * std_err)
+    atom_chunk = min(len(centers), maximum)
+    point_chunk = max(1, maximum // atom_chunk)
+    count = 0
+    for start in range(0, len(points), point_chunk):
+        batch = points[start : start + point_chunk]
+        occupied = np.zeros(len(batch), dtype=bool)
+        for atom in range(0, len(centers), atom_chunk):
+            stop = atom + atom_chunk
+            squared = np.sum(
+                (batch[:, None, :] - centers[None, atom:stop, :]) ** 2, axis=2
+            )
+            occupied |= np.any(squared <= radii[None, atom:stop] ** 2, axis=1)
+            if occupied.all():
+                break
+        count += int(np.count_nonzero(~occupied))
+    return count / len(points)
 
 
 @attributed('geometry', route='native')
@@ -198,18 +215,18 @@ def tetrahedron_empty_volume(
     """Empty volume inside one tetrahedron by seeded Monte Carlo.
 
     ``atom_positions`` / ``atom_radii`` must include the four vertex atoms *and*
-    any non-local intruders. ``error`` is ~2 standard errors (≈95% CI
-    half-width); a fixed ``seed`` makes the result reproducible.
+    any non-local intruders. ``error`` is the maximum distance to the two-sided
+    95% Clopper–Pearson bounds, conditional on this fixed geometric model.
+    A fixed ``seed`` supplies reproducibility, not guaranteed interval coverage
+    in any individual run. Analytically established full/empty cells have zero
+    sampling uncertainty; sampled endpoints alone retain positive width.
     """
     vertices = np.asarray(vertices, dtype=float)
-    centers = np.asarray(atom_positions, dtype=float).reshape(-1, 3)
-    radii = np.asarray(atom_radii, dtype=float).reshape(-1)
-    total = float(_cell_volumes(vertices[None])[0])
-    if total <= 0.0:
-        return PreciseVolumeResult(0.0, 0.0)
-    rng = np.random.default_rng(seed)
-    points = _sample_simplex(rng, vertices, n_samples)
-    return _mc_result(total, _empty_fraction(points, centers, radii), n_samples)
+    if vertices.shape != (4, 3):
+        raise ValueError('vertices must have shape (4, 3)')
+    return region_empty_volume(
+        vertices[None], atom_positions, atom_radii, n_samples=n_samples, seed=seed
+    )
 
 
 @attributed('geometry', route='native')
@@ -221,27 +238,18 @@ def region_empty_volume(
     n_samples: int = 40000,
     seed: int = 0,
 ) -> PreciseVolumeResult:
-    """Empty volume of a union of tetrahedra ``(K, 4, 3)`` by seeded Monte Carlo.
+    """Empty volume of disjoint-interior tetrahedra by seeded Monte Carlo.
 
     Samples are spread across the tetrahedra in proportion to their volume (so
     the estimate is uniform over the region) and tested against every ball. This
     is the component-level aggregation (e.g. resident, or resident+transit).
     """
-    tetrahedra = np.asarray(tetrahedra, dtype=float).reshape(-1, 4, 3)
-    centers = np.asarray(atom_positions, dtype=float).reshape(-1, 3)
-    radii = np.asarray(atom_radii, dtype=float).reshape(-1)
-    volumes = _cell_volumes(tetrahedra)
-    total = float(volumes.sum())
-    if total <= 0.0:
-        return PreciseVolumeResult(0.0, 0.0)
-    rng = np.random.default_rng(seed)
-    counts = rng.multinomial(n_samples, volumes / total)
-    chunks = [
-        _sample_simplex(rng, tetrahedra[k], int(counts[k]))
-        for k in np.nonzero(counts)[0]
-    ]
-    points = np.concatenate(chunks) if chunks else np.empty((0, 3))
-    return _mc_result(total, _empty_fraction(points, centers, radii), n_samples)
+    from .volume_precision import measure_region_volume
+
+    result = measure_region_volume(
+        tetrahedra, atom_positions, atom_radii, n_samples=n_samples, seed=seed
+    )
+    return PreciseVolumeResult(result.volume, result.error)
 
 
 # --- Voxel occupancy grid (the 3D shape of the empty space) ------------------
@@ -334,14 +342,15 @@ def region_occupancy_grid(
     return OccupancyGridResult(volume, grid, origin, float(spacing))
 
 
-# --- Deterministic slice quadrature (step 1 of the exact route) --------------
+# --- Deterministic slice quadrature (legacy fixed-order route) --------------
 #
 # vol(ball ∩ tetrahedron) by integrating exact 2D cross-sections along z:
 # at height z the tetrahedron cross-section is a convex polygon and the ball
 # cross-section is a disk; their intersection area is computed in closed form,
 # then integrated with Gauss-Legendre in z. Deterministic and exact in the
 # cross-section; the only error is the 1D quadrature. The building block of the
-# overlapping-union exact volume (ARVO-class) -- see metrics_contract.md.
+# numerical union volume -- see metrics_contract.md. The full integral is not
+# exact; adaptive-order diagnostics live in volume_precision.py.
 
 
 def _disk_polygon_area(polygon: np.ndarray, radius: float) -> float:
@@ -399,15 +408,15 @@ def _edge_term(a: np.ndarray, b: np.ndarray, radius: float, r2: float) -> float:
 def _tet_plane_polygon(tet: np.ndarray, z: float) -> np.ndarray:
     """Convex cross-section polygon (in xy) of ``tet`` cut by the plane Z=``z``."""
     edges = ((0, 1), (0, 2), (0, 3), (1, 2), (1, 3), (2, 3))
-    points = []
+    intersections = []
     for i, j in edges:
         zi, zj = tet[i, 2], tet[j, 2]
         if (zi - z) * (zj - z) < 0.0:
             s = (z - zi) / (zj - zi)
-            points.append((tet[i] + s * (tet[j] - tet[i]))[:2])
-    if len(points) < 3:
+            intersections.append((tet[i] + s * (tet[j] - tet[i]))[:2])
+    if len(intersections) < 3:
         return np.empty((0, 2))
-    points = np.array(points)
+    points = np.array(intersections)
     centroid = points.mean(axis=0)
     order = np.argsort(
         np.arctan2(points[:, 1] - centroid[1], points[:, 0] - centroid[0])
@@ -453,15 +462,15 @@ def ball_tetrahedron_volume(vertices, center, radius, *, n_quad: int = 24) -> fl
     return float(total)
 
 
-# --- Deterministic exact empty volume with overlap, via nested quadrature ----
+# --- Deterministic empty volume with overlap, via nested quadrature ---------
 #
 # vol(tet \ union(balls)) by integrating the empty length along x over a (z, y)
 # Gauss grid: at each (z, y) the tetrahedron gives an x-span and each ball gives
 # an x-interval; the empty length is the span minus the *union* of those
 # intervals (a trivial 1D merge -- so overlap and non-local intruders are handled
 # natively, with no 2D circle geometry). Deterministic; the only error is the 2D
-# quadrature, controlled by breakpoint splitting + Gauss order. This is the
-# overlapping-union exact route (the ARVO-class goal) reduced to 1D primitives.
+# quadrature, affected by breakpoint splitting + Gauss order. The legacy exact
+# name does not supply a numerical error estimate or certified error bound.
 
 
 # The hot loop is a numba kernel (lazy-compiled, cached) with a pure-Python
@@ -733,7 +742,7 @@ def tetrahedron_empty_volume_exact(
 def region_empty_volume_exact(
     tetrahedra, atom_positions, atom_radii, *, n_quad: int = 24
 ) -> float:
-    """Deterministic exact empty volume of a union of tetrahedra (sum per tet).
+    """Legacy fixed-order empty volume of disjoint-interior tetrahedra.
 
     Each tetrahedron is evaluated against only the balls that can reach it (those
     whose ball intersects its bounding box) -- a ball that does not reach the tet

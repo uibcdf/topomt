@@ -181,13 +181,15 @@ current estimate for provenance and comparison.
 
 #### Implemented high-precision methods (on-demand)
 
-The plan above is now realized. The publication-grade metric uses new explicit
-names (`volume_solvent_resident`, `volume_solvent_transit`, both `canonical`);
-the old `volume_solvent_estimate` is preserved as a `provisional` fast bulk
-field for provenance. The precise quantity is computed **on demand** (never in
-the bulk pass) and lives in `topomt/dfnd/core/solvent_volume.py`, wired through
-`DFNDData.solvent_volume(component_id, *, region, method)` and
-`DFNDData.occupancy_grid(component_id, *, region, spacing)`.
+On-demand methods use the semantic names `volume_solvent_resident` and
+`volume_solvent_transit`; their `canonical` status does not certify exactness
+or every numerical setting. The fast `volume_solvent_estimate` remains a
+`provisional` local four-ball bulk estimate. Numerical implementation lives in
+`topomt/dfnd/core/solvent_volume.py` and `volume_precision.py`, exposed through
+`DFNDData.solvent_volume` and the structured `solvent_volume_measurement` route.
+The latter retains uncertainty kind/status, sample/order evidence, source maps,
+quantities and attribution. Three-case qualification follows the frozen
+[volume protocol](volume_validation_protocol_v1.json) under #75/#76.
 
 Target quantity (all three methods agree on it):
 
@@ -201,27 +203,30 @@ common, not the corner, case. Atom gathering uses a KD-tree, so non-vertex
 intruder atoms are subtracted too. `region` is `'resident'` (resident tetrahedra
 only) or `'transit'` (resident + transit connectors); volumes are nm³ quantities.
 
-Three methods, offered for richness — each honest about its own error mode:
+The numerical routes have different uncertainty contracts:
 
-- **Monte Carlo** (`method='mc'`, the production default). Seeded
-  stratified-barycentric sampling per tetrahedron; returns the volume **and a
-  normal-approximation two-standard-error half-width** as the error. All-hit
-  or no-hit samples can return zero error without proving exactness. Sampling
-  and exclusion costs depend on sample/obstacle counts, not a universal
-  surface-scaling guarantee. Reproducible for a fixed seed/implementation.
-- **Voxel occupancy grid** (its own entry point `DFNDData.occupancy_grid`, not a
-  `method=` of `solvent_volume`). Rasterises the region onto a boolean grid at a
-  chosen `spacing`,
-  subtracting the atom union; returns both the **volume and the 3-D shape**
-  (the grid + origin), which Monte Carlo cannot give. Cost scales with
-  *volume / spacing³*. Use it when the shape itself is wanted.
-- **Fixed-order quadrature** (compatibility `method='exact'`). Nested (z, y) Gauss
-  quadrature with an analytic 1-D interval-union along x — no Monte Carlo, no
-  3-D spherical geometry. numba-accelerated (`topomt/_private/jit.py`,
-  `lazy_njit`, lazy import). Returns no statistical error estimate; that is not
-  zero integration error. Order and tetrahedron/obstacle counts affect cost.
-  Convergence/error evidence is required before using a value as a reference;
-  this is not a general exact oracle or a universal performance ranking.
+- **Monte Carlo** (`method='mc'`, default) uses an IID volume-weighted simplex
+  mixture. The 95% Clopper–Pearson interval is conditional on the fixed support
+  and excluding balls. The compatibility `error` is the maximum distance from
+  the estimate to its asymmetric endpoints. Sampled all-hit/no-hit endpoints
+  retain nonzero uncertainty; only separately proved geometric empty/full
+  domains get zero. Seed reproducibility does not establish calibration.
+- **Order refinement** (`method='quadrature'`) requires two successive Gauss-order
+  differences within `atol + rtol*carrier_volume`. Retained history and a
+  `converged`/`unresolved` status distinguish observed convergence from unknown
+  error. Differences are estimates, never rigorous deterministic bounds. Order
+  and the explicit K*order²*max(1,A) work proxy have ceilings.
+- **Legacy fixed order** (`method='exact'`) preserves numerical values and
+  `(volume, None)`, explicitly `fixed_order_error_unknown`. Analytic 1-D union
+  handles overlapping intervals; the surrounding quadrature is numerical.
+- **Voxel occupancy grid**, its own `occupancy_grid` entry, retains spacing,
+  sampled shape and discretization error. It has no inherited MC interval or
+  quadrature convergence guarantee.
+
+The structured route additionally distinguishes `observable='carrier'`,
+`'bare_empty'` and `'probe_center'` on one declared finite support. Probe-center
+exclusion expands every relevant atomic radius, including nonlocal intruders.
+No exterior-accessible-volume integral or exact global cavity volume is supplied.
 
 The validation battery (1–7 above) is met by
 `tests/test_dfnd_solvent_volume_precise.py`: zero-radius and fully occupied

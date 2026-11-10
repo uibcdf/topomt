@@ -53,33 +53,63 @@ likewise does not prove contact by a particular ligand.
 
 ## On-demand evaluations
 
-The Monte Carlo route spreads samples over carrier cells in proportion to cell
-volume and checks the relevant atom balls. A fixed seed supplies reproducibility.
-Its reported error is approximately two estimated standard errors, not a
-deterministic error bound. In particular, all-hit or no-hit samples can produce
-zero estimated error without proving the true volume exact.
+The Monte Carlo route draws an IID uniform mixture over disjoint-interior
+carrier cells, with cell probabilities proportional to volume, then checks all
+relevant balls. If the carrier volume is $V_R$ and $K$ of $N$ points are empty,
+$\hat V=V_R K/N$. Its **95% Clopper–Pearson interval** is the binomial
+proportion interval multiplied by $V_R$. The compatibility scalar `error` is
+the larger distance from $\hat V$ to either endpoint. It therefore encloses
+the asymmetric interval around the estimate; it is not a standard deviation.
+The interval method follows {cite:t}`DFNDClopperPearson1934`.
 
-If the carrier has volume $V_R$, $N$ samples are drawn and $K$ are empty,
-the current estimate and reported half-width are
+Sampled $K=0$ or $K=N$ still gives positive uncertainty. Zero sampling error
+is reserved for separately established geometric cases: zero-volume support,
+no positive-radius ball reaching the carrier bounding box, or one ball covering
+all vertices of each carrier cell. A fixed seed makes the run repeatable; a
+confidence interval describes repeated sampling, not the probability that a
+fixed unknown volume lies in one already observed interval. It excludes physical
+model error and errors in selecting the carrier or its accessible subset.
+Distance temporaries are batched, with at most 262,144 point/atom pairs each.
 
-$$\hat f=K/N,\qquad \hat V=V_R\hat f,\qquad
-e_{\rm MC}=2V_R\sqrt{\hat f(1-\hat f)/N}.$$
+`method='quadrature'` performs bounded successive Gauss-order doubling. Two
+consecutive differences must meet `absolute_tolerance + relative_tolerance *
+carrier_volume`. The reported error is the larger of those two differences:
+**a convergence diagnostic, not a rigorous integration bound**. A record keeps
+all evaluated orders/values. An exhausted order/work ceiling is `unresolved`,
+with unknown error; if no order could run, the estimate is also unavailable.
+The work ceiling is the declared sum of $K q^2\max(1,A)$ across orders, for
+$K$ cells, order $q$ and $A$ obstacle balls. It is a budget proxy, not wall time.
 
-The last expression explains the endpoint problem: $K=0$ or $K=N$ sets it to
-zero regardless of whether unobserved small empty or occupied subsets remain.
-It also explains why changing the carrier changes both the target integral and
-the scaling of its sampling error.
+Legacy `method='exact'` preserves the fixed-order numerical result and
+`(volume, None)`. Exact interval union along a line handles overlapping balls;
+the surrounding two-dimensional quadrature still has unknown error. This
+compatibility name does not establish exact integration. The new refinement
+route is available when a convergence history is needed.
 
-The compatibility `method='exact'` route performs nested numerical quadrature
-with a fixed order. Union of covered intervals handles overlaps along an
-integration line, but exact interval union does not make the surrounding
-quadrature exact. A returned `None` uncertainty means no statistical error
-estimate is supplied, not zero integration error.
+For detailed inspection use `DFNDData.solvent_volume_measurement`. Its
+`dfnd.volume_measurement.v1` dictionary retains quantity-valued volume,
+interval/error, method, status, sample/order evidence, finite carrier support,
+source correspondence and attribution. `observable='carrier'`, `'bare_empty'`
+and `'probe_center'` select distinct integrals on the same declared support.
+The last expands excluding radii by this query's probe and gathers nonlocal
+balls using that expansion. It does not restrict the integral to an
+exterior-reachable subset. The shorter `solvent_volume` tuple route continues
+to measure bare empty volume.
 
-These accuracy/uncertainty questions remain tracked under
-[#75](https://github.com/uibcdf/topomt/issues/75). Increase resolution only within
-an explicit convergence/error protocol; a visually stable result is not a
-publication-grade bound.
+```python
+component_id = next(c.component_id for c in topography.dfnd.dfn.components.values()
+                    if c.side == 'wet')
+measurement = topography.dfnd.solvent_volume_measurement(
+    component_id, observable='bare_empty', n_samples=40000, seed=0)
+print(measurement['volume'], measurement['interval'], measurement['status'])
+```
+
+Use the selected method's status before interpreting its error. Software
+maturity describes the metric's meaning; it does not certify a particular
+numerical error, every release or biological accuracy. The frozen three-case
+volume protocol and scoped qualification remain owned by
+[#75](https://github.com/uibcdf/topomt/issues/75) and
+[#76](https://github.com/uibcdf/topomt/issues/76).
 
 ## Areas, radii and depth
 

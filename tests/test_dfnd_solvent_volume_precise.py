@@ -1,8 +1,8 @@
 """Analytic validation of the precise empty-volume integrator.
 
-Each case has a closed-form answer; the integrator's rigorous error half-width
-must bound the deviation, and the estimate must be accurate at a small
-tolerance. Mirrors the metrics_contract.md validation battery (zero radius,
+Each case has a closed-form answer. Sampling confidence and quadrature error
+are distinct; fixed-seed proximity is a diagnostic, not a universal bound.
+Mirrors the metrics_contract.md validation battery (zero radius,
 single sphere, overlapping spheres, convergence).
 """
 
@@ -64,7 +64,7 @@ def test_single_interior_ball_matches_analytic_within_error():
     r = 1.0
     analytic = _TET_VOLUME - _ball_volume(r)
     result = tetrahedron_empty_volume(_TET, _CENTROID[None, :], np.array([r]))
-    # accurate estimate with a small, honest statistical error bound
+    # Accurate fixed-seed estimate with conditional sampling uncertainty.
     assert abs(result.volume - analytic) < 0.02 * _TET_VOLUME
     assert 0.0 < result.error < 0.02 * _TET_VOLUME
     assert abs(result.volume - analytic) <= 3.0 * result.error

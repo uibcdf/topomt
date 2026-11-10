@@ -37,6 +37,7 @@ _METHODS = {
     'mole': ('mole',),
     'dfnd': (),  # No published DFND paper exists; cite the executed software.
     'geometry': (),
+    'clopper_pearson': ('clopper_pearson',),
     'qhull': ('qhull',),
     'numpy': ('numpy',),
     'scipy': ('scipy',),

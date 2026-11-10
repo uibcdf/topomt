@@ -26,12 +26,12 @@ from __future__ import annotations
 
 from typing import Any, Optional
 
-from topomt._ackredit import scientific_call
+from topomt._ackredit import attributed, scientific_call
 
 from .. import pyunitwizard as puw
 from ..tools.geometry.arrays import _GeometrySnapshot
 from ..topography.input_context import InputContext
-from .components import build_components
+from .components import WetComponent, build_components
 from .config import DFNDQuery
 
 
@@ -298,7 +298,9 @@ class DFNDData:
         result = self._network.get_topography(query=query, min_size=min_size)
         return DFNDData(self._network, result)
 
-    def _region_geometry(self, component_id: str, region: str):
+    def _region_geometry(
+        self, component_id: str, region: str, probe_radius: float = 0.0
+    ):
         """Tetrahedra ``(K,4,3)`` and the reaching atoms (centers, radii) for a
         wet component's ``'resident'`` or ``'transit'`` region. ``None`` if empty.
 
@@ -311,10 +313,12 @@ class DFNDData:
         if region not in {'resident', 'transit'}:
             raise ValueError("region must be 'resident' or 'transit'")
         component = self.dfn.components[component_id]
-        nodes = list(component.resident_node_indices)
+        if not isinstance(component, WetComponent) or component.side != 'wet':
+            raise ValueError('A wet component is required for this volume measurement')
+        node_indices = list(component.resident_node_indices)
         if region == 'transit':
-            nodes += list(component.transit_connector_node_indices)
-        nodes = np.asarray(nodes, dtype=int)
+            node_indices += list(component.transit_connector_node_indices)
+        nodes = np.asarray(node_indices, dtype=int)
         if nodes.size == 0:
             return None
 
@@ -325,7 +329,7 @@ class DFNDData:
             axis=1
         )
         tree = scientific_call('scipy', cKDTree, network.atom_coords)
-        max_radius = float(np.max(network.atom_radii))
+        max_radius = float(np.max(network.atom_radii)) + probe_radius
         neighbor_lists = tree.query_ball_point(centroids, bounding + max_radius)
         flat = [index for sublist in neighbor_lists for index in sublist]
         atom_index = (
@@ -334,8 +338,175 @@ class DFNDData:
         return (
             tetrahedra,
             network.atom_coords[atom_index],
-            network.atom_radii[atom_index],
+            network.atom_radii[atom_index] + probe_radius,
         )
+
+    @attributed('dfnd')
+    def solvent_volume_measurement(
+        self,
+        component_id: str,
+        *,
+        region: str = 'resident',
+        observable: str = 'bare_empty',
+        method: str = 'mc',
+        n_samples: int = 40000,
+        seed: int = 0,
+        confidence_level: float = 0.95,
+        n_quad: int = 24,
+        max_order: int = 96,
+        relative_tolerance: float = 1e-4,
+        absolute_tolerance: Any = None,
+        max_work: int = 2000000,
+    ) -> dict[str, Any]:
+        """Measure a declared finite support with explicit numerical availability.
+
+        Parameters
+        ----------
+        component_id : str
+            Native wet component identity from this result.
+        region : {'resident', 'transit'}
+            Resident cells, or resident cells plus transit connectors.
+        observable : {'carrier', 'bare_empty', 'probe_center'}
+            Complete carrier, original-ball exclusion, or exclusion expanded by
+            this query's probe. No globally accessible-volume integral is implied.
+        method : {'mc', 'quadrature', 'exact'}
+            Seeded IID sampling, bounded order refinement, or legacy fixed order.
+        n_samples, seed : int
+            Positive sample count and reproducible seed for Monte Carlo.
+        confidence_level : float
+            Conditional binomial confidence, default 0.95.
+        n_quad, max_order : int
+            Initial/legacy order and bounded refinement ceiling.
+        relative_tolerance : float
+            Order-difference target relative to complete carrier volume.
+        absolute_tolerance : quantity, optional
+            Additional volume tolerance, converted to nm**3; None means zero.
+        max_work : int
+            Sum K*order**2*max(1,A) quadrature-work proxy ceiling.
+
+        Returns
+        -------
+        dict
+            ``dfnd.volume_measurement.v1`` record with quantity-valued volume,
+            uncertainty/interval/history, method/status, recoverable support and
+            detached attribution. Unavailable values are None. Sampling error
+            excludes model/support bias; order differences are not rigorous bounds.
+
+        Raises
+        ------
+        KeyError
+            The component identity is absent.
+        ValueError
+            Observable, wet support, units or numerical controls are invalid.
+
+        Examples
+        --------
+        ``data.solvent_volume_measurement(cid, observable='probe_center')``
+        measures admissible centers inside the same declared carrier support.
+        """
+        import numpy as np
+
+        from .core.solvent_volume import _cell_volumes
+        from .core.volume_precision import VolumeMeasurement, measure_region_volume
+
+        if observable not in {'carrier', 'bare_empty', 'probe_center'}:
+            raise ValueError(
+                "observable must be 'carrier', 'bare_empty' or 'probe_center'"
+            )
+        if region not in {'resident', 'transit'}:
+            raise ValueError("region must be 'resident' or 'transit'")
+        if method not in {'mc', 'quadrature', 'exact'}:
+            raise ValueError("method must be 'mc', 'quadrature' or 'exact'")
+        component = self.dfn.components[component_id]
+        if not isinstance(component, WetComponent) or component.side != 'wet':
+            raise ValueError('A wet component is required for this volume measurement')
+        nodes = list(component.resident_node_indices)
+        if region == 'transit':
+            nodes += list(component.transit_connector_node_indices)
+        nodes = sorted(set(map(int, nodes)))
+        network = self._network
+        cell_atoms = network.tetra_atoms[np.asarray(nodes, dtype=int)]
+        cells = network.atom_coords[cell_atoms]
+        carrier = float(_cell_volumes(cells).sum())
+        probe = (
+            float(self.dfn.query.probe_radius) if observable == 'probe_center' else 0.0
+        )
+        if absolute_tolerance is None:
+            atol = 0.0
+        elif puw.is_quantity(absolute_tolerance):
+            atol = float(puw.get_value(absolute_tolerance, to_unit='nm**3'))
+        else:
+            raise ValueError('absolute_tolerance requires explicit volume units')
+        geometry = self._region_geometry(component_id, region, probe_radius=probe)
+        if geometry is None or observable == 'carrier':
+            measured = VolumeMeasurement(
+                carrier,
+                0.0,
+                'carrier' if observable == 'carrier' else method,
+                'analytic',
+                'geometric_proof',
+            )
+            n_balls = 0
+        else:
+            tetrahedra, centers, radii = geometry
+            n_balls = len(centers)
+            measured = measure_region_volume(
+                tetrahedra,
+                centers,
+                radii,
+                method=method,
+                n_samples=n_samples,
+                seed=seed,
+                confidence_level=confidence_level,
+                n_quad=n_quad,
+                max_order=max_order,
+                relative_tolerance=relative_tolerance,
+                absolute_tolerance=atol,
+                max_work=max_work,
+            )
+
+        def volume_quantity(value):
+            return None if value is None else puw.quantity(value, 'nm**3')
+
+        context = self.input_context
+        return {
+            'schema': 'dfnd.volume_measurement.v1',
+            'observable': observable,
+            'region': region,
+            'method': measured.method,
+            'status': measured.status,
+            'error_kind': measured.error_kind,
+            'volume': volume_quantity(measured.volume),
+            'error': volume_quantity(measured.error),
+            'interval': None
+            if measured.interval is None
+            else tuple(volume_quantity(v) for v in measured.interval),
+            'confidence_level': measured.confidence_level,
+            'n_samples': measured.n_samples,
+            'n_empty': measured.n_empty,
+            'seed': seed if measured.n_samples else None,
+            'quadrature_history': [
+                {'order': order, 'volume': volume_quantity(value)}
+                for order, value in measured.history
+            ],
+            'reason': measured.reason,
+            'carrier_volume': volume_quantity(carrier),
+            'exclusion_expansion': puw.quantity(probe, 'nm'),
+            'support': {
+                'source_id': None if context is None else context.source_id,
+                'result_key': self.raw['parameters'].get('result_key'),
+                'mesh_key': self.raw['parameters'].get('mesh_key'),
+                'component_id': component_id,
+                'tetrahedron_ids': nodes,
+                'tetrahedra_source_atom_indices': network.atom_indices_map[
+                    cell_atoms
+                ].tolist(),
+                'selected_source_atom_indices': network.atom_indices_map.tolist(),
+                'n_excluding_balls': n_balls,
+                'boundary_convention': 'nonperiodic_cartesian',
+            },
+            'uncertainty_scope': 'Conditional numerical/sampling uncertainty on the declared support and ball model; excludes support/model error',
+        }
 
     def solvent_volume(
         self,
@@ -347,7 +518,7 @@ class DFNDData:
         seed: int = 0,
         n_quad: int = 24,
     ):
-        """Precise solvent (empty) volume of a wet component.
+        """Return bare empty volume and conditional numerical uncertainty.
 
         On-demand: this is *not* computed during ``get_topography``; call it on the
         cavities of interest. ``region='resident'`` measures the holding capacity
@@ -355,34 +526,23 @@ class DFNDData:
         i.e. the through-volume (the meaningful one for channels). Overlapping van
         der Waals spheres and non-local intruder atoms are handled natively.
 
-        ``method='mc'`` (default) is seeded Monte Carlo: fast, scales with surface,
-        returns ``(volume, error)`` with ``error`` the ~2-sigma statistical
-        half-width (reproducible via ``seed``). ``method='exact'`` is the
-        deterministic nested-quadrature method: no statistical error (returns
-        ``(volume, None)``), scales with the number of tetrahedra; ``n_quad`` sets
-        the quadrature order. Both return ``nm**3`` PyUnitWizard quantities.
+        ``method='mc'`` returns the volume and maximum distance to its asymmetric
+        95% Clopper–Pearson interval endpoints. ``method='quadrature'`` uses bounded
+        order refinement; its error is a convergence diagnostic or None if
+        unresolved. Legacy ``method='exact'`` preserves fixed-order values and
+        ``(volume, None)`` with explicitly unknown quadrature error. Values use
+        nm**3 quantities; no first quadrature estimate is None. Inspect
+        ``solvent_volume_measurement`` for the full status, support and history.
         """
-        from .core.solvent_volume import region_empty_volume, region_empty_volume_exact
-
-        if method not in {'mc', 'exact'}:
-            raise ValueError("method must be 'mc' or 'exact'")
-        geometry = self._region_geometry(component_id, region)
-        if geometry is None:
-            zero = puw.quantity(0.0, 'nm**3')
-            return (zero, None) if method == 'exact' else (zero, zero)
-        tetrahedra, centers, radii = geometry
-        if method == 'exact':
-            volume = region_empty_volume_exact(
-                tetrahedra, centers, radii, n_quad=n_quad
-            )
-            return puw.quantity(volume, 'nm**3'), None
-        result = region_empty_volume(
-            tetrahedra, centers, radii, n_samples=n_samples, seed=seed
+        result = self.solvent_volume_measurement(
+            component_id,
+            region=region,
+            method=method,
+            n_samples=n_samples,
+            seed=seed,
+            n_quad=n_quad,
         )
-        return (
-            puw.quantity(result.volume, 'nm**3'),
-            puw.quantity(result.error, 'nm**3'),
-        )
+        return result['volume'], None if method == 'exact' else result['error']
 
     def occupancy_grid(
         self,

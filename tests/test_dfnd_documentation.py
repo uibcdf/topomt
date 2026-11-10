@@ -91,6 +91,7 @@ def test_documented_public_inspection_and_query_blocks_execute(tmp_path, monkeyp
         'results_and_provenance.md',
         'scale_and_dynamics.md',
         'numerics_and_reproducibility.md',
+        'measurements.md',
     ):
         if page == 'numerics_and_reproducibility.md':
             namespace['molecular_system'] = namespace[

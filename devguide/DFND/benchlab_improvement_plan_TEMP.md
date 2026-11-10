@@ -275,10 +275,14 @@ not complete the three-case study.
 
 ## VOL — establish what the volumes mean and how accurate they are
 
-- [ ] **VOL-A: freeze the measurement questions under #75/#76.** Keep carrier
+- [x] **VOL-A: freeze the measurement questions under #75/#76.** Keep carrier
   volume, bare free volume, free probe-center volume and exterior-accessible
   volume separate. State domain, atomic exclusion, probe, units, required
   error and computational budget before generating a reference.
+  Delivered protocol: [v1](volume_validation_protocol_v1.json), frozen in
+  `8fd2906` before numerical changes or new reference generation. It fixes
+  finite supports/observables, errors, seed coverage, quadrature convergence,
+  independent sampling and conservative one-CPU resource ceilings.
 - [ ] **VOL-B: start with the tetrahedron.** Establish the analytic bare
   vertex-ball-sector reference only after checking its nonoverlap/truncation
   hypotheses. Validate carrier volume separately. Probe-expanded balls may
