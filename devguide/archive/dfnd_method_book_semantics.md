@@ -15,6 +15,10 @@ supersedes: []
 
 # DFND method-book semantics
 
+**Status: resolved; #173 is closed.** The completed
+[cross-source audit](dfnd_approach_and_presentation_audit_2026_11_09.md) is also
+archived, with the disposition of F1–F7 and its original review history.
+
 ## Delivered documentary correction — 2026-11-09
 
 The public book now leads with the scientific question, stored geometry/results
@@ -73,6 +77,13 @@ aggregate-inspection guard failed on its missing named observation. Ruff/format,
 indexes and the incremental HTML build pass with no DFND warning. No runtime
 module or frozen scientific artifact changed in this follow-up.
 
+## Original report and review history — before resolution
+
+The sections below preserve the diagnosis, acceptance criteria and audit reviews
+before the delivered corrections. Their references to an open #173 or missing
+prose describe that earlier stage; the resolution and completion follow-up above
+record the outcome.
+
 ## What
 
 The public network chapter equates shared-face capacity with a shared
@@ -83,7 +94,7 @@ requires both nonpermeable incidences. The single-decision account is incomplete
 
 ## How
 
-The [cross-source audit](../DFND/approach_and_presentation_audit_2026_11_09.md)
+The [cross-source audit](dfnd_approach_and_presentation_audit_2026_11_09.md)
 retains the source map, exact frozen input hashes and a replay using the existing
 public receiving helper. At `closed_shell`, probe 0.2 Å, internal face 6 has
 identical `R_gate=0.1198879391121351` nm on owners 1/7 but differing post-policy

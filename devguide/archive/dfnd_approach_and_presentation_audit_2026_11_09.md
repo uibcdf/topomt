@@ -1,17 +1,48 @@
-# DFND approach and public presentation: cross-source audit
+---
+summary: Resolved documentary audit of the DFND theory and method presentation.
+issue: uibcdf/topomt#173
+status: resolved
+opened: 2026-11-09
+closed: 2026-11-09
+severity: medium
+verification: measured
+area: [docs, dfnd]
+guard: tests/test_dfnd_documentation.py::test_documented_shared_face_and_many_cell_centroid_execute
+normative:
+blocked_by: []
+supersedes: []
+---
+
+# Archived DFND approach and public presentation audit — resolved
+
+**Status: resolved; archived on 2026-11-09.** The documentary findings F1–F7
+were addressed in `fc45997`, with completion corrections in `84f963a`.
+[#173](https://github.com/uibcdf/topomt/issues/173) is closed. This file preserves
+the completed audit and its dated review history; it is not an active work list.
+Use the [public method book](../../docs/content/dfnd/index.md) and
+[documentation checkpoint](../DFND/documentation_checkpoint.md) for the current
+presentation and validation scope.
+
+The independent scientific/runtime questions in
+[#75](https://github.com/uibcdf/topomt/issues/75),
+[#76](https://github.com/uibcdf/topomt/issues/76),
+[#151](https://github.com/uibcdf/topomt/issues/151),
+[#60](https://github.com/uibcdf/topomt/issues/60) and
+[#61](https://github.com/uibcdf/topomt/issues/61) remain with their own issues;
+archiving this documentary audit does not resolve those questions.
 
 Date: **2026-11-09, America/Mexico_City**. Audited source:
 `9c8fbc4b447212b5704c2b2f5df4280e01ea4ad4`.
 Public entry: [DFND: Theory and Method](../../docs/content/dfnd/index.md).
 Documentary follow-up: [#173](https://github.com/uibcdf/topomt/issues/173),
-with its [resolution record](../archive/dfnd_method_book_semantics.md).
+with its [resolution record](dfnd_method_book_semantics.md).
 
 ## Documentary resolution — 2026-11-09
 
 The requested correction/editorial pass is delivered in source. The historical
 audit below targets `9c8fbc4`; its statements of missing prose or open #173 work
 describe that earlier stage. They must not be reused as current deficiencies
-without checking the target revision. The [checkpoint](documentation_checkpoint.md)
+without checking the target revision. The [checkpoint](../DFND/documentation_checkpoint.md)
 records validation and publication scope.
 
 Completion check after `fc45997` corrected remaining developer wall-count
@@ -105,8 +136,8 @@ every supported provider, all protein behavior or the entire test suite.
 | Local geometry | [Clearance solvers](../../topomt/dfnd/core/clearance.py), scalar/batch active-set construction and [volume operators](../../topomt/dfnd/core/solvent_volume.py). |
 | Interpretation | [Typed components and descriptors](../../topomt/dfnd/components.py), [classifier](../../topomt/dfnd/classify.py), [public promotion](../../topomt/dfnd/api.py), [maturity declarations](../../topomt/dfnd/output_status.py). |
 | Relations/time | [Interface prototype](../../topomt/dfnd/interfaces.py), [skeleton helpers](../../topomt/dfnd/centerline.py), [lineage](../../topomt/dfnd/lineage.py), [identity](../../topomt/dfnd/identity.py), [data/query views](../../topomt/dfnd/data.py). |
-| Theory/design | [Core reconstruction](core_theory_review_2026_11_06.md), [mathematical definitions](Mathematical_Definitions.md), [residence/transit contract](residence_transit_contract.md), [abstract contract](abstract_contract.md), [metrics](metrics_contract.md), [numerical policy](numerical_policy.md), [justification](Justification.md), [MOLE analysis](mole_comparison_2026_11_07.md). |
-| Current work/evidence | [Three-case direction](three_case_deepening.md), [boundary proposal](boundary_connectivity_contract.md), [boundary checkpoint](boundary_contract_checkpoint.md), [documentation plan](documentation_section_plan.md), [delivery/review checkpoint](documentation_checkpoint.md), frozen BenchLab records and reader/public receiving tests. |
+| Theory/design | [Core reconstruction](../DFND/core_theory_review_2026_11_06.md), [mathematical definitions](../DFND/Mathematical_Definitions.md), [residence/transit contract](../DFND/residence_transit_contract.md), [abstract contract](../DFND/abstract_contract.md), [metrics](../DFND/metrics_contract.md), [numerical policy](../DFND/numerical_policy.md), [justification](../DFND/Justification.md), [MOLE analysis](../DFND/mole_comparison_2026_11_07.md). |
+| Current work/evidence | [Three-case direction](../DFND/three_case_deepening.md), [boundary proposal](../DFND/boundary_connectivity_contract.md), [boundary checkpoint](../DFND/boundary_contract_checkpoint.md), [documentation plan](../DFND/documentation_section_plan.md), [delivery/review checkpoint](../DFND/documentation_checkpoint.md), frozen BenchLab records and reader/public receiving tests. |
 
 Remote inspection fetched 21 owning/relevant issues and comments from six of
 their threads, rather than inferring state from historical prose. The dated

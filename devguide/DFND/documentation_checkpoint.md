@@ -7,11 +7,12 @@ The [proposal and critical review](documentation_section_plan.md) remain as
 dated design history. This checkpoint qualifies documentation/source examples,
 not an installed release, live-site deployment or scientific algorithm fix.
 
-The later same-day [cross-source audit](approach_and_presentation_audit_2026_11_09.md)
-identifies a reproduced non-default shared-face admission discrepancy in the
-explanation and additional reference/pedagogy gaps. Their documentary correction
-is delivered under [#173](https://github.com/uibcdf/topomt/issues/173), as recorded
-in the [archived report](../archive/dfnd_method_book_semantics.md). Earlier delivery
+The later same-day [cross-source audit](../archive/dfnd_approach_and_presentation_audit_2026_11_09.md)
+is **resolved and archived**. It identified a non-default shared-face admission
+discrepancy in the explanation and additional reference/pedagogy gaps. Their
+documentary corrections were delivered in `fc45997` and `84f963a` under the
+closed [#173](https://github.com/uibcdf/topomt/issues/173), as recorded in the
+[resolution report](../archive/dfnd_method_book_semantics.md). Earlier delivery
 and reader checks below remain valid within their scope; they did not exercise
 every described policy and are not exhaustive semantic qualification.
 
