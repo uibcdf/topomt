@@ -80,3 +80,16 @@ for action commitments and add/reuse an owning issue, then update this navigatio
 where affected. A question/idea/reference may remain informational, but concrete
 pending assessment, promised investigation, deferred implementation or validation
 cannot be hidden in Discussion prose or satisfied by an unrelated umbrella issue.
+
+## Bounded physical delivery — 2026-11-10
+
+The #151 action from DFND #130, synthetic laboratory #129 and finding hub #154
+is delivered at source `4fc2353`: separate physical patches and compatible public
+contacts on the five independent frozen rows, with retained native compatibility.
+The current card/hub move that missing-view finding to source-resolved history;
+original failure evidence is retained. Wider geometry/paths, the independent
+0.05 Å shell count and tighter transitions remain owned by open #76; volume
+precision remains #75, neutral support #60, interfaces #61 and installed/matrix
+qualification #16/#58. No new comment or reply supplied an untracked action.
+Exact live readback accompanies the implementation record; this dated note
+does not infer installed delivery from issue closure.

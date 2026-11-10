@@ -8,7 +8,12 @@ promotion are preserved. The [method chapter](../../../dfnd/exterior_and_boundar
 explains recovery and unresolved availability; wider path/geometry qualification
 remains [#76](https://github.com/uibcdf/topomt/issues/76). Earlier versioned
 reader outputs retain their source/date; they do not establish a present absence
-of this capability.
+of this capability. The fixing source is `4fc2353`.
+
+Formal source receiving: {download}`protocol <artifacts/physical_refinement_v1/protocol.json>`
+and {download}`complete physical observations <artifacts/physical_refinement_v1/observations.json>`.
+These records are fixed-unit nm evidence with explicit schema, source context,
+clipped support and attribution; they are not a saved Topography interchange API.
 
 
 Can a probe fit inside a gap while being too large to pass through its faces?
@@ -33,7 +38,7 @@ including inputs, the parent shell, reference helpers and environment guidance.
 
 | Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
 | --- | --- | --- | --- |
-| Access, 1.2 Å | Four disconnected hull patches, all reached from the centroid. | One face cluster; `Percolating`, zero `Mouth` children. | Native count differs from physical patch count; [#151](https://github.com/uibcdf/topomt/issues/151). |
+| Access, 1.2 Å | Four disconnected hull patches, all reached from the centroid. | One face cluster; `Percolating`, zero `Mouth` children. | Separate physical view resolves four; native/Mouth compatibility retained; [#151](https://github.com/uibcdf/topomt/issues/151). |
 | Enclosure, 1.4 Å | Free centroid, completely covered hull. | One `Void`, no exterior link or `Mouth`. | Enclosure qualified; general paths [#76](https://github.com/uibcdf/topomt/issues/76). |
 | Exclusion, 1.7 Å | No free center in the finite hull. | No resident wet component or public feature. | Genuine empty resident result; volume precision [#75](https://github.com/uibcdf/topomt/issues/75). |
 

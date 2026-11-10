@@ -1,7 +1,7 @@
 # Bounded physical-boundary implementation decision
 
 Date: **2026-11-10**. Owner: [#151](https://github.com/uibcdf/topomt/issues/151).
-Status: **bounded source implementation received; final revision/lifecycle reconciliation pending**.
+Status: **bounded source implementation received at `4fc235335446d97125ea5315600c463c5e41f4e9`; source-only scope**.
 The design below was recorded before scientific changes. The later receiving
 section separates implemented behavior from the original decision.
 The [boundary contract](boundary_connectivity_contract.md) retains the observable
@@ -130,3 +130,10 @@ while recovery retains complete clipped selectors. The six-file core/config/grap
 and new tests pass mypy. This does not promise IDs across arbitrary remeshing.
 The strict complete Sphinx build passes; 83 pages and 7,038 local targets validate
 at the local candidate (not a newly served artifact).
+
+Formal per-case capture at the committed fixing revision matches all five
+independent counts, in 2.097 / 0.960 / 0.639 s respectively, peak RSS below
+289,000 KiB. The protocols preceded capture in that same source commit. Complete
+records are retained under each case's `physical_refinement_v1/observations.json`.
+Historical package-version metadata reflects the preserved human version-file
+change; the explicit source revision, not that mutable string, identifies this fix.

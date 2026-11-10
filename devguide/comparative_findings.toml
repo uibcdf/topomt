@@ -5,14 +5,19 @@ hub_url = "https://github.com/uibcdf/topomt/discussions/154"
 [[findings]]
 id = "tetrahedron-boundary-patches"
 kind = "dfnd_limitation"
-status = "current"
-summary = "Whole-face exterior clustering does not count disconnected free hull patches."
+status = "resolved"
+summary = "Separate bounded physical hull patches and path-supported contacts correct the historical missing-view limitation in source."
 scope = "Frozen regular tetrahedron at 1.2 angstroms; source-workspace profile recorded in boundary_connectivity_v1/native_correspondence.json; no general biological mouth claim."
 issue = "uibcdf/topomt#151"
-evidence = ["docs/content/benchlab/synthetic/regular_tetrahedron/boundary_connectivity.md", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/native_correspondence.json", "devguide/pending_proposals/dfnd_physical_boundary_refinement.md", "devguide/DFND/boundary_connectivity_contract.md", "devguide/DFND/boundary_contract_checkpoint.md", "tests/test_dfnd_physical_boundary_contract.py", "docs/content/dfnd/exterior_and_boundaries.md", "docs/content/dfnd/worked_tetrahedron.md"]
+evidence = ["docs/content/benchlab/synthetic/regular_tetrahedron/boundary_connectivity.md", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/native_correspondence.json", "devguide/archive/dfnd_physical_boundary_refinement.md", "devguide/DFND/boundary_connectivity_contract.md", "devguide/DFND/boundary_contract_checkpoint.md", "tests/test_dfnd_physical_boundary_contract.py", "docs/content/dfnd/exterior_and_boundaries.md", "docs/content/dfnd/worked_tetrahedron.md"]
 owner = "TopoMT maintainers (LMMV/dprada)"
-reviewed_on = "2026-11-09"
+reviewed_on = "2026-11-10"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186"
+
+fix_revision = "4fc235335446d97125ea5315600c463c5e41f4e9"
+regression_guard = "tests/test_dfnd_physical_boundary_contract.py::test_proposed_physical_patches_reach_the_actual_raw_result"
+resolution_scope = "Bounded source physical hull decomposition and compatible public contacts on the five frozen controls; native links/catalog/Mouth compatibility retained. No installed release or biological/general-path claim."
+resolution_evidence = ["devguide/archive/dfnd_physical_boundary_refinement.md", "devguide/DFND/physical_boundary_implementation.md", "tests/test_dfnd_physical_receiving.py", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/physical_refinement_v1/observations.json", "docs/content/benchlab/synthetic/closed_shell/artifacts/physical_refinement_v1/observations.json", "docs/content/benchlab/synthetic/shell_with_opening/artifacts/physical_refinement_v1/observations.json"]
 
 [[findings]]
 id = "dfnd-volume-precision"

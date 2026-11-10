@@ -1,17 +1,55 @@
 ---
 summary: Refine physical boundary patches beyond native whole-face exterior clusters.
 issue: uibcdf/topomt#151
-status: open
+status: resolved
 opened: 2026-11-08
-closed:
+closed: 2026-11-10
 severity: medium
-verification: reproduced
+verification: measured
 area: [dfnd, classification]
-guard:
+guard: tests/test_dfnd_physical_boundary_contract.py::test_proposed_physical_patches_reach_the_actual_raw_result
 normative:
 blocked_by: []
 supersedes: []
 ---
+
+# Physical hull patches: bounded source resolution
+
+Resolved in source **`4fc235335446d97125ea5315600c463c5e41f4e9`**, after the independent
+five-row panel and actual public receiving. Physical patches and compatible
+component contacts are now separate observations with clipped support, complete
+seam/cover evidence, explicit numerical/work policy and honest availability.
+Native face links, catalog classes and compatibility Mouth promotion are kept.
+The tetrahedron therefore has four physical contacts, one native link and zero
+Mouth children. This closes the missing physical-reporting capability for the
+recorded scope, not all continuous paths or every geometry.
+
+The [implementation and executed guards](../DFND/physical_boundary_implementation.md)
+record 207 passing selected tests, then 41 passing focused post-refactor/capture
+guards, scoped type checks and a strict complete documentation build. All seven
+previously pending targets now pass without expected-failure markers. The
+original references and frozen historical evidence remain independent and intact.
+
+Formal capture at the exact fixing revision receives 4/0/0 tetrahedron patches,
+zero at closed-shell 0.2 Å and one at opened-shell 1.4 Å. The actual raw/typed/public
+positive paths include entire all-atom segments, carrier-interval coverage and
+exterior-ray evidence. New per-case `physical_refinement_v1/protocol.json` files
+were committed before this formal capture; matching `observations.json` files
+retain the full record, component supports, source identities and attribution.
+Known controls were used during development, not held out.
+
+Remaining work: independent small-probe shell count/transition and broader paths
+under [#76](https://github.com/uibcdf/topomt/issues/76), volume accuracy #75,
+neutral support/persistence #60 and installed/matrix qualification #16/#58. The
+13-patch small-probe pilot remains a runtime candidate under #76. Free aperture
+area and globally optimal bottlenecks remain unavailable. This resolution makes
+no biological, comparative superiority or public installed-release claim.
+
+## Historical proposal and red regression
+
+The following record describes the original, now corrected source scope. Its
+future-tense implementation steps and missing-view status are retained history.
+
 
 # Physical connectivity beyond admitted carrier faces
 

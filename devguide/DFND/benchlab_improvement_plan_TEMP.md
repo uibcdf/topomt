@@ -212,7 +212,7 @@ not a retroactive fresh observation or a held-out benchmark.
 
 ## PHY — settle boundary observations and compatible continuous paths
 
-- [ ] **PHY-A: implement #151's first bounded contract.** Review and record
+- [x] **PHY-A: implement #151's first bounded contract.** Review and record
   the chosen contract against `tests/test_dfnd_physical_boundary_contract.py`
   and the current proposal before implementation.
   Add recoverable all-atom free patches on the declared atomic-center hull,
@@ -225,7 +225,7 @@ not a retroactive fresh observation or a held-out benchmark.
   count or guessed patch. Production code must not import BenchLab witnesses
   or `devtools`, dispatch by case name or hard-code the expected four/one/zero.
   Numerical samples, images and optimizer success alone are not certificates.
-- [ ] **PHY-B: qualify contacts through actual raw and public results.** Use
+- [x] **PHY-B: qualify contacts through actual raw and public results.** Use
   the frozen four/one/zero panel: tetrahedron 1.2/1.4/1.7 Å, closed shell
   0.2 Å, opened shell 1.4 Å. Attach patches to regions only with compatible
   continuous all-atom paths. All seven pending acceptance targets must pass
@@ -242,7 +242,7 @@ not a retroactive fresh observation or a held-out benchmark.
   brackets on the fixed shell/opening. Record positive witnesses, justified
   exclusions and unresolved intervals separately. A failed ray search is not
   proof against a curved path, and a local gate is not a global bottleneck.
-- [ ] **PHY-D: make the promotion decision explicitly.** After inspecting the
+- [x] **PHY-D: make the promotion decision explicitly.** After inspecting the
   supported contacts, decide under #151 how they relate to public `Mouth` and
   `Percolating`, including compatibility and classification provenance.
   Four hull patches can join the same volumetric region and exterior; they
@@ -250,7 +250,7 @@ not a retroactive fresh observation or a held-out benchmark.
   free aperture area and transport interpretation. Reconcile the public book,
   current case narrative, issue/report and comparative record in the same
   delivery; documentation alone does not resolve the runtime limitation.
-- [ ] **PHY-E: falsify and test the fallback, under #151/#76.** Add focused
+- [x] **PHY-E: falsify and test the fallback, under #151/#76.** Add focused
   guards for incomplete face/seam inventories, false witnesses, near-tangency
   ambiguity, degenerate or unsupported hulls and exhausted budgets. Require
   honest status/reason and inspectable supported bounds rather than an accepted
@@ -258,6 +258,15 @@ not a retroactive fresh observation or a held-out benchmark.
   atom changes. Choose within-face/seam controls needed to challenge the
   algorithm without relying only on the known positive certificates; a new
   geometry variant needs its own frozen identity and justification before use.
+
+Execution: the bounded physical source at `4fc2353` supplies all five independently
+qualified rows and actual public contacts. The [resolution report](../archive/dfnd_physical_boundary_refinement.md)
+records 207 passing expanded tests plus 41 post-refactor/capture guards, source
+receipts and numerical/resource limits. Compatibility promotion is explicitly
+retained; broader geometry/path gates stay #76. PHY-C is still open: the 0.05 Å
+shell pilot's 13 patches need independent qualification and tighter transitions.
+This first bounded milestone admits the independent volume sequence; it does
+not complete the three-case study.
 
 ## VOL — establish what the volumes mean and how accurate they are
 
@@ -436,4 +445,4 @@ entire shape catalog.
   history and replace active checkpoint/index links with the delivered records;
   it must not remain an apparently current pending-work list after completion.
 
-**Next executable slice:** implement and qualify the bounded #151 physical-observation contract before the volume sequence.
+**Next executable slices:** finish independent small-probe shell/path receiving under PHY-C/#76, and freeze the volume questions under #75/#76. The first bounded physical milestone is delivered; remaining blocks are still open.

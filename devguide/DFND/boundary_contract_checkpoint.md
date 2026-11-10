@@ -1,3 +1,10 @@
+**Source continuation — 2026-11-10:** the bounded physical implementation is
+received at `4fc2353`; its five controls and seven former missing-view targets
+now pass. See [the implementation record](physical_boundary_implementation.md)
+and [resolved report](../archive/dfnd_physical_boundary_refinement.md). Earlier
+checkpoint statements below are dated evidence, not current capability status.
+Wider paths/small-probe shell references remain #76 and volume precision #75.
+
 # Physical-boundary acceptance checkpoint
 
 Date: 2026-11-09. Owner: [#151](https://github.com/uibcdf/topomt/issues/151).

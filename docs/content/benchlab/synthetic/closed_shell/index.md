@@ -8,7 +8,12 @@ promotion are preserved. The [method chapter](../../../dfnd/exterior_and_boundar
 explains recovery and unresolved availability; wider path/geometry qualification
 remains [#76](https://github.com/uibcdf/topomt/issues/76). Earlier versioned
 reader outputs retain their source/date; they do not establish a present absence
-of this capability.
+of this capability. The fixing source is `4fc2353`.
+
+Formal source receiving: {download}`protocol <artifacts/physical_refinement_v1/protocol.json>`
+and {download}`complete physical observations <artifacts/physical_refinement_v1/observations.json>`.
+These records are fixed-unit nm evidence with explicit schema, source context,
+clipped support and attribution; they are not a saved Topography interchange API.
 
 
 Does a wall of discrete atomic balls really enclose a probe, and how does that
