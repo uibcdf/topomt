@@ -1,0 +1,108 @@
+{
+  "schema": "topomt.benchlab.paired-shell-volume-reference/1",
+  "issue": "uibcdf/topomt#76",
+  "source_revision": "d7aad00d3762c307314fb4bf84705a0a420bac05",
+  "program_sha256": "cf73afe86ea12efef2fd4e985f978280f307280c98afecaf99bb3481df5df13f",
+  "protocol_sha256": "8ac7506ce9655e38f26311c1a7d1aad9e1cc53723afb15cd6f229183ed36001a",
+  "parent_input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "child_input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+  "topomt_imported": false,
+  "numpy_version": "2.5.4",
+  "scipy_version": "1.18.1",
+  "executed_geometry_backend": "scipy.spatial.ConvexHull / bundled Qhull; no DFND query",
+  "reference": {
+    "length_unit": "nm",
+    "volume_unit": "nm**3",
+    "carrier_volume": 0.8398750754136796,
+    "box_volume": 1.7123220640723917,
+    "n_samples": 524288,
+    "seed": 82371,
+    "confidence_level": 0.999,
+    "sample_and_membership_sha256": "88c2ffc5c4e86fd049fe12bc8f1438b7256ed5ac0fd0521c159afba184aac1bf",
+    "criterion": {
+      "title": "Probability Inequalities for Sums of Bounded Random Variables",
+      "authors": [
+        "Wassily Hoeffding"
+      ],
+      "year": 1963,
+      "journal": "Journal of the American Statistical Association",
+      "volume": "58",
+      "issue": "301",
+      "pages": "13-30",
+      "doi": "10.1080/01621459.1963.10500830",
+      "url": "https://doi.org/10.1080/01621459.1963.10500830"
+    },
+    "scope": "Paired ball-union integrals on the common parent hull; each freed indicator is0or1. No natural-child-hull or exterior-accessible-volume equivalence.",
+    "bare_empty": {
+      "parent": {
+        "count": 125577,
+        "estimate": 0.4101338726806998,
+        "interval": [
+          0.40552369062636895,
+          0.4147440547350306
+        ],
+        "unclipped_half_width": 0.004610182054330809,
+        "half_width_over_carrier": 0.005489128311207555
+      },
+      "child": {
+        "count": 134718,
+        "estimate": 0.4399883343271341,
+        "interval": [
+          0.43537815227280324,
+          0.4445985163814649
+        ],
+        "unclipped_half_width": 0.004610182054330809,
+        "half_width_over_carrier": 0.005489128311207555
+      },
+      "freed": {
+        "count": 9141,
+        "estimate": 0.029854461646434273,
+        "interval": [
+          0.025244279592103465,
+          0.03446464370076508
+        ],
+        "unclipped_half_width": 0.004610182054330809,
+        "half_width_over_carrier": 0.005489128311207555
+      }
+    },
+    "probe_center": {
+      "parent": {
+        "count": 34230,
+        "estimate": 0.11179501391067118,
+        "interval": [
+          0.10718483185634037,
+          0.11640519596500198
+        ],
+        "unclipped_half_width": 0.004610182054330809,
+        "half_width_over_carrier": 0.005489128311207555
+      },
+      "child": {
+        "count": 37265,
+        "estimate": 0.12170730918437515,
+        "interval": [
+          0.11709712713004435,
+          0.12631749123870598
+        ],
+        "unclipped_half_width": 0.004610182054330809,
+        "half_width_over_carrier": 0.005489128311207555
+      },
+      "freed": {
+        "count": 3035,
+        "estimate": 0.009912295273703974,
+        "interval": [
+          0.005302113219373165,
+          0.014522477328034782
+        ],
+        "unclipped_half_width": 0.004610182054330809,
+        "half_width_over_carrier": 0.005489128311207555
+      }
+    }
+  },
+  "target_met": true,
+  "execution": {
+    "wall_seconds": 3.161,
+    "peak_rss_kib": 87156,
+    "single_cpu": true,
+    "numerical_threads": 1
+  }
+}
