@@ -72,3 +72,13 @@ three frozen-case summary rows and locates the witness by source atoms before
 checking this mesh's IDs, reciprocal owners, flags and capacities. The priority
 rubric is documentary work order, not incident severity. This strengthens the
 evidence/acceptance record; #173 remains open for the actual book corrections.
+
+## Final scientific-reader review — 2026-11-09
+
+F6 now includes a prospective scientific-user walkthrough, page-specific reading
+friction, inspected existing visuals, a proposed opening and a six-question
+editorial completion check. The recommended introductory route presents the
+scientific question and stored result before optional execution/provenance
+detail, defines internal terms at first use and retains critical limits beside
+their interpretation. This completes the requested audit reviews. Its judgments
+are not a reader study, and the public corrections remain open under #173.

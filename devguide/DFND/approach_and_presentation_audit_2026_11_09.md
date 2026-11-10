@@ -20,6 +20,10 @@ below make the mathematical checks, execution coverage and closure criteria
 explicit and strengthen the reproduction. F1–F7 retain their conclusions; no
 public-method correction or scientific issue closure is claimed.
 
+The final scientific-reader pass below completes the requested audit reviews.
+It expands F6's assessment of approachability, appeal and reading flow; #173
+retains the actual documentary implementation work.
+
 ## Assessment
 
 The presentation has **broad topic coverage, a useful conceptual order and good
@@ -316,6 +320,88 @@ qualification, then link detailed assumptions and boundaries. The necessary
 cautions should remain explicit without making the reader reconstruct the
 positive algorithm from a succession of exclusions.
 
+#### Final scientific-reader pass — 2026-11-09
+
+**Editorial verdict:** a scientifically literate potential user can follow the
+text through its suggested overview/example route. The prose is generally
+precise and orderly. Its scientific question is appealing, but the opening and
+some transitions still demand more effort than an inviting first encounter
+should. The current account is stronger as a method reference than as an
+introduction that quickly makes a researcher want to try the method.
+
+The assumed reader knows molecular coordinates, atomic radii and the usual
+questions about cavities, pockets or access. They need not already know Delaunay
+geometry, graph decomposition or TopoMT's internal object vocabulary. The pass
+follows `index → overview → worked tetrahedron`, then samples the geometry,
+classification, measurement and public-result chapters. This is an editorial
+walkthrough and inspection of existing figures, not observed reader feedback
+or a measured comprehension/accessibility study.
+
+| Reading moment | What works | Friction and bounded improvement under F6 |
+| --- | --- | --- |
+| First contact in `index.md` | The scope, navigation and question table are clear. | The first paragraph starts with the method name and abstract capacities before showing the scientific payoff. Lead with a concrete fitting/access question and say what the reader will learn from the small example. |
+| First paragraphs of `overview.md` | Moving a probe among atom balls is an effective, accessible image. | The seven-step implementation pipeline quickly introduces several new terms. Let the fitting-versus-entry distinction and one observed outcome establish context before asking the reader to learn the full pipeline. |
+| Beginning of `worked_tetrahedron.md` | The exact input and reproducible workflow inspire trust. | Downloads, JSON precision, directory layout and query policies precede the first result. Present the geometry and three-probe prediction first; mark execution and provenance details as an optional reproducibility route. Reading the explanation should not require running Python. |
+| Formal and advanced chapters | Definitions, short sections, tables and answered checks support careful study. | Terms such as carrier, support, incidence and promotion arrive in clusters. Explain each at first use; explicitly mark advanced reference passages as optional on a first reading. |
+| Paragraph endings and transitions | Qualifications prevent unsupported physical or biological conclusions. | Repeated warnings can leave the positive result less memorable than its limits. State the supported observation and its meaning, retain the relevant qualification beside it, then link deeper implementation/proof details. |
+| Visual understanding | The atom/probe and abstract graph figures support the argument. | Much of the initial visual emphasis is on software flow rather than the geometric question. Bring a reviewed view of the existing system/probe outcomes into the introductory route, with a plain-language caption. |
+
+The existing [system geometry figure](../../docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/system_geometry.png)
+and [three-probe figure](../../docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/dfnd_probes.png)
+were visually inspected for this pass. They provide useful material without a
+new geometry or calculation. They still need introductory captions: in
+particular, the 1.2 Å Percolating/permeable labels describe the current native
+construction and must retain the physical-patch qualification. Their presence
+is not a substitute for explaining what the reader should notice.
+
+An opening along these lines would be more direct. This is an **editorial
+proposal**, not text already installed in the public book:
+
+> A cavity may accommodate a probe even when access from outside is blocked.
+> DFND describes local accommodation and contacts at a chosen probe size, then
+> organizes them into regions you can inspect in TopoMT. A small tetrahedron
+> will show why those questions differ and how changing the probe changes the
+> result.
+
+This motivates a geometric question without promising certified physical
+transport, a validated protein detector or completed relief/interface features.
+The index should also give a brief, explicit availability map and a link to the
+User guide, keeping this section focused on understanding the method.
+
+Recommended reading order inside that first encounter:
+
+1. Pose the scientific question and show the atomic/probe picture.
+2. Explain why a deliberately simple synthetic system makes the distinction
+   independently checkable before proteins; it is not presented as biological
+   performance evidence.
+3. Show the three outcomes and interpret the sealed 1.4 Å example in plain
+   language, with its model and relevant boundary qualification.
+4. Introduce the local-capacity/network construction and the native/public
+   distinction needed to read those results.
+5. Offer optional links to execution, source/support recovery and derivations.
+
+Use plain first-use glosses: a **carrier** is the tetrahedral partition used to
+organize the geometry; **support** identifies the cells/faces and atom mapping
+behind a finding; **promotion** means reporting a native result as a public
+TopoMT feature. The precise definitions remain in the corresponding reference
+chapters. Preserve established API names and distinguish support from a clipped
+physical region.
+
+The editorial completion check is whether a scientist can read this route
+without executing code and answer: what question is being asked, what the
+chosen probe means, what the example returned, which conclusions are supported,
+which capabilities remain pending, and where to inspect or reproduce the
+result. This is an author/reviewer check until actual reader feedback exists.
+Critical limitations must remain beside the inference they qualify; improving
+reading flow must not hide #151's boundary discrepancy or imply #75/#76 are
+resolved. The public correction remains owned by #173 alongside F1–F7.
+
+For this final editorial addition, both revised documents render without
+warnings and all **34 local audit/report links** resolve. Reporting/comparative
+checks give **16 passed**. The previously executed scientific reproduction block
+is byte-identical; no molecular replay or new public-site build was needed for
+this prose-only pass. Receipts are in `.cache/dfnd-scientific-reader-review/`.
+
 ### F7 — One symbol changes dimension inside the hierarchy chapter
 
 **Priority: P2, notation. Verification: inspected. Owner: #173.**
@@ -338,7 +424,7 @@ for their executed workflow; they are not guards for every assertion in the book
 | F3 | State the transit-carrier centroid formula and its distinction from residence centers. A many-cell illustration must trace the existing field to that definition without claiming admissibility. | #173; a new guaranteed placement-point algorithm would be different work. |
 | F4 | Link the existing primary and secondary helpers, their endpoint objectives and empty/failure scope. Check the named callables and rendered navigation. | #173; no general physical-path guarantee is required to document the existing helper. |
 | F5 | Identify authoritative versus historical accounts and reconcile the listed conflicting statements with a dated disposition. Review the reporting/interface contract question explicitly. | #75/#76 own scientific/precision decisions; #60/#61 public contract adoption; #173 only documentary coordination. Closing #173 cannot close these gates. |
-| F6 | Put implemented/provisional/proposed availability near the entry and link the existing many-cell/Mouth walkthrough. A reader should locate the returned support, pending capabilities and deeper reference from that route. | #173; this is an editorial acceptance check, not a measured usability claim. |
+| F6 | Lead with a concrete scientific question and a visible stored result; put implemented/provisional/proposed availability near the entry. Let the conceptual route work without running Python, explain internal terms at first use and link the existing many-cell/Mouth walkthrough and deeper reference. Keep relevant limitations beside their inference. | #173; apply the six-question reader check above. This is editorial acceptance, not a measured usability claim. |
 | F7 | Use distinct symbols for funnel gradient and joining capacity, with consistent dimensions in the chapter and notation sheet. | #173; source/render review suffices for this prose-only change. |
 
 F1–F7 are not seven confirmed runtime bugs. F1 is a reproduced documentary
