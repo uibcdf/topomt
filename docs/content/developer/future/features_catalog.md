@@ -95,6 +95,3 @@ To be considered for future inclusion:
 | Bifurcation  | 0   | concavity, mixed              | Junction point of branching pathways          | Transport path topology. |
 | SaddlePoint  | 0   | mixed                         | Point of zero mean curvature in saddle patch  | Mechanical leverage point. |
 | RidgeTip     | 0   | convexity                     | Tip along a ridge                             | Protrusive epitope geometry. |
-
-
----

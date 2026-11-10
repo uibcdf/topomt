@@ -1,5 +1,14 @@
 # Feature Hierarchy in TopoMT
 
+```{important}
+This page preserves an earlier taxonomy design. Its catalog and diagram do not
+establish that every named detector or public feature is implemented. Use
+[DFND: Theory and Method](../dfnd/index.md) and
+[the public receiving study](../benchlab/synthetic/public_topography.md) for
+current behavior and availability. Legacy feature dimensionality is a catalog
+convention, distinct from the geometric dimension of recovered support.
+```
+
 ```{admonition} Conceptual overview
 :class: tip
 The topographic entities in **TopoMT** are organized according to their **geometrical dimensionality** and **shape type**.  

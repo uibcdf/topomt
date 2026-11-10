@@ -19,7 +19,7 @@ Run from the intended clone; verify Python 3.14, `pip check` and import origins
 before testing. This command assumes an already provisioned environment. It is
 not a standalone public install recipe or proof of supported scientific backends.
 Optional owner Conda environments use the reviewed
-[development commands](../../../devtools/conda-envs/README.md).
+[development commands](https://github.com/uibcdf/topomt/blob/main/devtools/conda-envs/README.md).
 
 A future public Conda install requires an authorized real candidate, successful
 exact-source and installed gates, promotion of the same bytes, and clean public

@@ -1,7 +1,7 @@
 # Temporary BenchLab improvement workplan
 
-Created: **2026-11-10**. Status: **active coordination plan; implementation
-pending**. Scope: `regular_tetrahedron`, `closed_shell`, `shell_with_opening`
+Created: **2026-11-10**. Status: **active coordination plan; execution
+in progress**. Scope: `regular_tetrahedron`, `closed_shell`, `shell_with_opening`
 and publication of the actual TopoMT documentation.
 Second-pass plan review: **2026-11-10**; execution gates, portable delivery,
 bounded physical algorithms and case-level acceptance clarified below.
@@ -74,13 +74,20 @@ earlier physical or reader delivery depends on them.
 
 ## WEB — restore a usable public reading route first
 
-- [ ] **WEB-A: establish the publishing route.** Under #18, inspect Pages
+- [x] **WEB-A: establish the publishing route.** Under #18, inspect Pages
   settings, domain/redirects, publishing branch or artifact and the last actual
   deployment. Trace `.github/workflows/sphinx_docs_to_gh_pages.yaml` and its
   called action before changing them. The current workflow is release/manual
   dispatch triggered; ordinary `[skip ci]` commits do not publish this site.
   Record the exact source and deployed identities; do not infer them from a
   successful local build or a green unrelated workflow.
+  Execution: Pages was legacy branch publishing from `gh-pages` at
+  `f91fe8438c74f083fd605ba44d3c5a3e2595be7e`, with no runs of the current
+  documentation workflow. The replacement uses official Pages artifacts,
+  exact checked-out source, one worker and a checked build manifest; it keeps
+  the old publishing branch as retained history. Deployment/served receiving
+  remain WEB-D/E. gh-run-receptor is unavailable in this workspace; bounded
+  native GitHub status/log inspection is the documented fallback for this run.
 - [ ] **WEB-B: prepare one reviewed documentation candidate.** Check the root
   identity, navigation, install/import examples, BenchLab and DFND links. Keep
   historical PocketMT references explicitly historical. Validate the dependency
