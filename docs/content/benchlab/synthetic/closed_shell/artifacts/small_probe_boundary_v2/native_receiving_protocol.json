@@ -1,0 +1,25 @@
+{
+  "schema": "topomt.benchlab.physical-source-protocol/1",
+  "date": "2026-11-10",
+  "case": "closed_shell",
+  "issue": "uibcdf/topomt#76",
+  "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "probe_angstroms": [
+    0.05
+  ],
+  "reference_patch_counts": [
+    13
+  ],
+  "reference_verification_sha256": "a722e540359f9342f2529c9dcab920e441ed75f5b10c38c07d6486947ef4dd0c",
+  "reference_source_revision": "3720b19bf0f02c0fc399c1c744aa2b3449da3e2c",
+  "capture_program": "devtools/benchlab/capture_physical.py",
+  "known_before_capture": "The runtime candidate was known before independent reference development. The reference now establishes its own count/localization/paths. This receiving is retrospective source qualification, not held out.",
+  "comparison": "Actual raw/typed/public physical counts and source face-region supports; native links/classes/Mouth compatibility remain distinct.",
+  "native_source_scope": "Scientific production modules unchanged since4fc235335446d97125ea5315600c463c5e41f4e9; exact receiving source revision and package version recorded separately.",
+  "resources": {
+    "single_cpu": true,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  }
+}

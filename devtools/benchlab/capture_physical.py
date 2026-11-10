@@ -65,7 +65,7 @@ def capture_case(directory: Path, protocol_file: Path) -> dict[str, Any]:
     root = Path(__file__).resolve().parents[2]
     return {
         'schema': 'topomt.benchlab.physical-source-receiving/1',
-        'issue': 'uibcdf/topomt#151',
+        'issue': protocol['issue'],
         'case': case,
         'source_revision': subprocess.check_output(
             ['git', 'rev-parse', 'HEAD'], cwd=root, text=True

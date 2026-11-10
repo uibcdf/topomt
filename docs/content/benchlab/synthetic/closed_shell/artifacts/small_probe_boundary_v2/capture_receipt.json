@@ -1,0 +1,18 @@
+{
+  "source_revision": "3720b19bf0f02c0fc399c1c744aa2b3449da3e2c",
+  "generation_seconds": 3.017,
+  "verification_seconds": 1.715,
+  "peak_rss_kib": 88712,
+  "no_topomt_module_imported": true,
+  "single_cpu": true,
+  "numerical_threads": 1,
+  "work": {
+    "point_tests": 38
+  },
+  "opening_component_count": 13,
+  "origin_path_status": "resolved",
+  "origin_connected_patch_count": 13,
+  "free_face_count": 17,
+  "face_region_count": 18,
+  "free_seam_count": 5
+}

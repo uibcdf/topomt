@@ -34,3 +34,11 @@ def test_physical_capture_rejects_a_changed_input_identity(tmp_path):
     path.write_text(json.dumps(protocol))
     with pytest.raises(ValueError, match='input identity'):
         capture_case(CASE, path)
+
+
+def test_capture_retains_the_selected_study_owner(tmp_path):
+    protocol = json.loads(PROTOCOL.read_text())
+    protocol['issue'] = 'uibcdf/topomt#76'
+    path = tmp_path / 'protocol.json'
+    path.write_text(json.dumps(protocol))
+    assert capture_case(CASE, path)['issue'] == 'uibcdf/topomt#76'

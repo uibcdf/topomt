@@ -1,7 +1,7 @@
 # Independent reference for the small-probe shell
 
 Date: 2026-11-10. Owner: [#76](https://github.com/uibcdf/topomt/issues/76).
-Status: **protocol frozen; reference implementation being received**.
+Status: **fixed-shell reference received at `3720b19`; wider #76 work remains open**.
 The production pilot reports 13 patches at 0.05 Å; that known candidate is not
 the reference's expected answer. Native ten-link grouping is also not an oracle.
 The frozen protocol in `closed_shell/artifacts/small_probe_boundary_v1/` fixes
@@ -133,3 +133,28 @@ independent count matches source DFND, and all patches have positive paths from
 the original common origin. Formal exact-revision capture, final source identities
 and publication of these observations follow the frozen source checkpoint.
 No production geometry, output or witness is used by the reference itself.
+
+## Formal independent capture at the frozen source
+
+At source `3720b19bf0f02c0fc399c1c744aa2b3449da3e2c`, a fresh process
+imports no TopoMT module and verifies **13 connected hull patches**, formed from
+**18 free regions on 17 faces** joined across **five free hull edges**. Both
+regions on [18,31,39] are interior face openings, without free edge contacts.
+All thirteen patches have independently checked positive paths from the original
+origin and outward-normal continuations. The smallest origin-segment margin is
+0.0009523859 Å, above the declared 1e-6 Å requirement. This does not count every
+interior cavity or qualify all native graph paths.
+
+Generation takes 3.017 s, fresh verification 1.715 s, peak RSS 88,712 KiB on
+one CPU/thread; only 38 free-point tests are needed after the retained convex
+reference. The initial v1 evidence used 13,960 decisions and 212 bounded solver
+calls; v2 reuses and verifies it rather than executing that optimizer again.
+The source, resource and independence receipt is in
+`closed_shell/artifacts/small_probe_boundary_v2/capture_receipt.json`.
+
+Actual-public receiving is separately frozen in that directory's
+`native_receiving_protocol.json`, with input/reference hashes and issue #76.
+It compares compatible observables, preserving ten native links/Mouths as their
+original carrier clusters. Capture must retain its own exact source identity;
+a known matched result is not a held-out detector benchmark or a comparative
+advantage. Original protocols, failed/unsupported evidence and notebooks remain.
