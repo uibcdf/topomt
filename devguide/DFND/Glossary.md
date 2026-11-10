@@ -119,9 +119,9 @@ Faces should be called permeable or non-permeable. Wet and dry are reserved for 
     *   `surface_concavity` — exactly one `external_link`, no resident nodes (a one-mouth non-resident contact/dent, not simply a shallow pocket).
     *   `nonresident_passage` — two or more `external_links`, no resident nodes; provisional raw label, not a biological channel by default.
     *   `degenerate_subprobe` — zero `external_links`, no resident nodes; raw/filter label, not a void.
-    *   `percolating` — resident with `n_wall_faces == 0` (fully permeable/exposed). Promoted to a `Percolating` feature with `shape_type` `neutral`; no `Mouth` child. Added for completeness; rare in real proteins.
-*   **n_wall_faces:** Number of non-permeable boundary faces of a component (boundary toward `OCEAN` or another component). `n_wall_faces == 0` means fully open/exposed; it is the criterion for the `percolating` enclosure override.
-*   **neutral (shape_type):** Feature `shape_type` that is neither concave, convex nor mixed — a fully permeable/exposed region. Currently only the `Percolating` feature.
+    *   `percolating` — resident with `n_wall_faces == 0` (all boundary carrier faces admitted). Promoted to a `Percolating` with `shape_type=neutral`; no compatibility `Mouth` child. Physical patches/paths have their own availability and support.
+*   **n_wall_faces:** Number of non-permeable boundary faces of a component (boundary toward `OCEAN` or another component). `n_wall_faces == 0` means every boundary carrier face passes the native predicate; it is the criterion for the `percolating` enclosure override.
+*   **neutral (shape_type):** Feature `shape_type` that is neither concave, convex nor mixed — the native zero-wall resident interpretation. Currently only the `Percolating` feature; it does not assert a fully free physical boundary.
 *   **Has open interior:** Component descriptor indicating that at least one resident node is `wet_open`; not a family discriminator.
 *   **Dry component:** A connected component of dry tetrahedra connected through non-permeable faces (family `dry_bank`). A raw dry-graph object, not automatically a public feature.
 *   **Dry interface:** A contact record between a dry component and wet components, external links, `OCEAN`, or the hull/exterior context.

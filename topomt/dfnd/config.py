@@ -67,14 +67,36 @@ class DFNDQuery:
     transit_policy: str = 'with_connectors'
     gate_intrusion_policy: str = 'flag_only'
     dry_adjacency: str = 'face'
+    physical_boundary: bool = True
+    boundary_tolerance: float = 1e-7
+    boundary_max_atoms: int = 512
+    boundary_max_faces: int = 512
+    boundary_max_events: int = 100_000
+    boundary_max_path_tests: int = 4096
+    boundary_max_associations: int = 4096
 
     def __post_init__(self) -> None:
         for name in (
             'probe_radius',
             'residence_tolerance',
             'permeability_tolerance',
+            'boundary_tolerance',
         ):
             object.__setattr__(self, name, _quantity_to_nm(name, getattr(self, name)))
+        if type(self.physical_boundary) is not bool:
+            raise ValueError('physical_boundary must be a boolean')
+        if self.boundary_tolerance <= 0:
+            raise ValueError('boundary_tolerance must be positive')
+        for name in (
+            'boundary_max_atoms',
+            'boundary_max_faces',
+            'boundary_max_events',
+            'boundary_max_path_tests',
+            'boundary_max_associations',
+        ):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not isinstance(value, int) or value <= 0:
+                raise ValueError(f'{name} must be a positive integer')
         if self.transit_policy not in {'resident_only', 'with_connectors'}:
             raise ValueError(
                 "transit_policy must be 'resident_only' or 'with_connectors'"

@@ -180,6 +180,13 @@ OUTPUT_STATUS: dict[str, OutputStatus] = {
     'R_gate_mean': OutputStatus('canonical', 'metric', None, None),
     'R_gate_max': OutputStatus('canonical', 'metric', None, None),
     'n_mouths': OutputStatus('canonical', 'metric', None, None),
+    'physical_openings': OutputStatus(
+        'provisional',
+        'metric',
+        'bounded five-row physical controls qualified; extend independent hull/path '
+        'qualification beyond that panel, preserving unresolved geometry and budgets',
+        '#76',
+    ),
     'face_depth': OutputStatus('canonical', 'metric', None, None),
 }
 

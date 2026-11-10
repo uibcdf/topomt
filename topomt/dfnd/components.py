@@ -680,8 +680,59 @@ def build_components(result: dict[str, Any], network: Any = None) -> Components:
     _attach_capacity_motifs(components, result)
     _attach_morphometrics(components, result)
     _attach_boundary_helpers(components, result, network)
+    _attach_physical_openings(components, result)
     _attach_classification(components)
     return components
+
+
+def _attach_physical_openings(components: Components, result: dict[str, Any]) -> None:
+    """Reference canonical physical patches without changing native Mouth policy."""
+    physical = result['raw'].get('boundary_connectivity')
+    for component in components.wet:
+        if not isinstance(component, WetComponent):
+            raise TypeError('The wet registry contains a non-wet component')
+        view: dict[str, Any]
+        if physical is None:
+            view = {
+                'status': 'not_computed',
+                'n_patches': None,
+                'patch_ids': [],
+                'reason': 'physical boundary record unavailable in this result',
+            }
+        elif physical['status'] != 'resolved':
+            view = {
+                'status': physical['status'],
+                'n_patches': None,
+                'patch_ids': [],
+                'reason': physical.get('reason'),
+            }
+        else:
+            records = [
+                record
+                for record in physical['component_associations']['records']
+                if record['component_key'] == component.component_key
+            ]
+            resolved = len(records) == physical['n_patches'] and all(
+                record['status'] == 'resolved' for record in records
+            )
+            patch_ids = [
+                record['patch_id']
+                for record in records
+                if record['status'] == 'resolved'
+            ]
+            view = {
+                'status': 'resolved' if resolved else 'unresolved',
+                'n_patches': len(patch_ids) if resolved else None,
+                'patch_ids': patch_ids,
+                'association_evidence': {
+                    'status': 'resolved' if resolved else 'unresolved',
+                    'records': records,
+                },
+                'surface_reference': 'dfnd.dfn.boundary_connectivity.surface',
+                'patch_reference': 'dfnd.dfn.boundary_connectivity.patches',
+                'meaning': 'path-supported physical hull contacts; native class and Mouth promotion unchanged',
+            }
+        component.boundary['physical_openings'] = view
 
 
 def _attach_coast_and_lining(

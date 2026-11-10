@@ -378,3 +378,20 @@ This registry resolves the open questions on confidence flags (Q19) and
 promotion strategy (Q25): each non-canonical entry carries the explicit gate it
 must clear and the consolidation item that tracks it, so "experimental" means
 "tracked with a path to canonical", not "abandoned in place".
+
+## Physical hull contacts — bounded source increment, 2026-11-10
+
+`physical_openings` is a separate provisional metric, qualified on the five
+frozen independent rows under #151, with wider geometry/path acceptance under
+#76. The raw canonical `boundary_connectivity` and typed
+`dfnd.dfn.boundary_connectivity` retain complete hull geometry, clipped support,
+seams, explicit nm units, numerical/work policy and path associations. A public
+wet feature references the same patch IDs through its boundary description.
+`resolved` permits a count; `unresolved`/`not_computed` keep it `None`.
+Global patches and per-component path associations have independent statuses.
+
+The compatibility promotion decision preserves native links, catalog classes,
+`n_mouths` and carrier areas. Physical contacts do not automatically become Mouth
+children. Neither a free aperture area nor a global bottleneck follows from
+this result. See the [implemented boundary contract](boundary_connectivity_contract.md)
+and [method explanation](../../docs/content/dfnd/exterior_and_boundaries.md).

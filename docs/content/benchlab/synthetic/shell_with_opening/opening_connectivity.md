@@ -13,9 +13,10 @@ retain their bytes and original, more limited reference scope.
 This certificate supplies the one-patch control in the
 [physical-boundary acceptance proposal](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/boundary_connectivity_contract.md)
 under [#151](https://github.com/uibcdf/topomt/issues/151). Agreement here does
-not establish a general physical-patch reporting capability: that new view is
-still unimplemented, and the tetrahedron exposes the difference from native
-whole-face clustering.
+not alone establish a general capability. The bounded source implementation
+now supplies one physical patch and a compatible component path on this row,
+with wider qualification under #76. Native whole-face clustering retains its
+separate meaning, as the tetrahedron demonstrates.
 
 ```{figure} artifacts/opening_connectivity_v1/opening_patch.png
 :alt: Blocked hull faces and the selected face, with expanded-ball intersections leaving one connected free patch and the origin-ray crossing.

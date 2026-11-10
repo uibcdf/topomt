@@ -130,8 +130,9 @@ These have different evidential roles. Each chapter distinguishes them where
 the distinction changes the interpretation.
 
 The account describes the source method reviewed in November 2026. Physical
-boundary refinement, general public support and several numerical/scientific
-questions remain under development; their current owners are linked in
+boundary analysis has a bounded source implementation and independent five-row
+receiving panel. General public support, wider paths/geometry and several
+numerical/scientific questions remain under development; their current owners are linked in
 [validation and scope](validation_and_scope.md). The chapters explain the present
 approach and identify intended extensions with their implementation status;
 they do not claim that every extension or physical inference is certified.

@@ -28,8 +28,9 @@ Mouth objects represent native contact clusters; their physical connectedness
 and exact mouth count retain separate validation requirements. The subsequent
 [independent boundary certificate](boundary_connectivity.md) establishes four
 separate free hull patches at 1.2 Å, versus the current single native face
-cluster and no public `Mouth`. Physical refinement is tracked in #151; the
-registry audit alone does not establish geometric completeness. Classification
+cluster and no public `Mouth`. The bounded source refinement under #151 now
+exposes those physical patches and supported contacts separately. This original
+registry audit alone did not establish that geometric capability. Classification
 threshold confidence is not scientific probability, and volume estimates remain
 numerically unqualified under #75. Full neutral public support adoption is #60.
 

@@ -1,5 +1,16 @@
 # Sampled closed shell
 
+**Physical source increment — 2026-11-10:** the bounded DFND record now
+computes separate hull patches and path-supported contacts. The independent
+five-row panel gives tetrahedron 4/0/0 at 1.2/1.4/1.7 Å, closed shell zero at
+0.2 Å and opened shell one at 1.4 Å. Native links, public classes and Mouth
+promotion are preserved. The [method chapter](../../../dfnd/exterior_and_boundaries.md)
+explains recovery and unresolved availability; wider path/geometry qualification
+remains [#76](https://github.com/uibcdf/topomt/issues/76). Earlier versioned
+reader outputs retain their source/date; they do not establish a present absence
+of this capability.
+
+
 Does a wall of discrete atomic balls really enclose a probe, and how does that
 answer change with probe size? This unit retains the same **72 balls**, radii
 **1.7 Å**, fixed-seed coordinates near a **6 Å** sphere and no periodic boundary.

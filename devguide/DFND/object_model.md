@@ -368,3 +368,18 @@ Implementation: `mesh.neighbors` / `graph.neighbors` in `data.py`;
 `coast_faces` + `*_lining` + `interface_walls` in `components.py`
 (`_attach_coast_and_lining`); areas use `tools.tessellation` triangle area and
 need coordinates (the `network`, threaded into `build_components`).
+
+## Physical boundary observation — source increment 2026-11-10
+
+`dfnd.dfn.boundary_connectivity` references the canonical raw
+`boundary_connectivity` record (`dfnd.physical_boundary.nm.v1`). It owns the
+atomic-center hull, all-atom exclusion/query identity, analytic face-region
+selectors, complete seam decisions and supported component paths. Wet component
+and feature boundaries expose `physical_openings` referencing those patch IDs.
+
+Global decomposition and component attachment statuses are independent. A
+complete covered hull has count zero even if a free interior remains; absence,
+marginality and work exhaustion have no total count. Native `external_links`,
+classification signatures and compatibility Mouth promotion retain their meaning.
+The five independent controls qualify this bounded observation; wider paths and
+geometry remain #76, neutral support/persistence adoption #60.

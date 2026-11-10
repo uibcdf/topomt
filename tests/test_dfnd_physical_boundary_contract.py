@@ -1,7 +1,6 @@
-"""Executable acceptance proposal for #151, before scientific-kernel changes.
+"""Receiving guards for #151 physical hull patches and public contacts.
 
-Only absence of the proposed view is an expected failure. Once supplied, wrong
-counts, incomplete supports or unrelated exceptions must fail normally. These
+Missing observations, wrong counts and incomplete supports fail normally. These
 tests do not reinterpret legacy external-link counts as physical patch counts.
 """
 
@@ -93,11 +92,6 @@ def test_source_observables_keep_their_discrete_meaning(public_panel):
     assert not public_panel['regular_tetrahedron', 1.7].dfnd.raw['wet_components']
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=PhysicalBoundaryViewAbsent,
-    reason='#151: proposed physical-boundary view is not implemented',
-)
 @pytest.mark.parametrize('case,probe,expected_count', CONTROLS)
 def test_proposed_physical_patches_reach_the_actual_raw_result(
     case, probe, expected_count, reference_panel, public_panel
@@ -116,11 +110,6 @@ def test_proposed_physical_patches_reach_the_actual_raw_result(
         assert patch['evidence']['connectivity'] == 'resolved'
 
 
-@pytest.mark.xfail(
-    strict=True,
-    raises=PhysicalBoundaryViewAbsent,
-    reason='#151: proposed public physical-contact view is not implemented',
-)
 @pytest.mark.parametrize(
     'case,probe,expected_count',
     [('regular_tetrahedron', 1.2, 4), ('shell_with_opening', 1.4, 1)],

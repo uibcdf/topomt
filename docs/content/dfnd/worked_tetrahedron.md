@@ -48,8 +48,11 @@ All six shared edges are covered. The independent certificate verifies one
 connected strict-free patch inside each face and four collision-free centroid
 rays to infinity. Thus the physical hull has four patches attached to the same
 free central region. Current output has one native link and zero public Mouth
-children. Their definitions explain the different counts; physical refinement
-is still pending.
+children. The bounded physical record now supplies four patches and four
+path-supported contacts separately. Its complete-cover controls supply zero
+at 1.4 and 1.7 Å. Their definitions explain the different counts without
+changing the compatibility class or promoting additional Mouth children.
+See [physical support and availability](exterior_and_boundaries.md#inspect-the-physical-observation).
 
 At 1.4 Å every hull face is covered, while the centroid remains free. At 1.7 Å
 the whole finite hull is covered. These are independently justified geometric

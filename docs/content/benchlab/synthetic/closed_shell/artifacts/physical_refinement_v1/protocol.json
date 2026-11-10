@@ -1,0 +1,27 @@
+{
+  "schema": "topomt.benchlab.physical-source-protocol/1",
+  "case": "closed_shell",
+  "issue": "uibcdf/topomt#151",
+  "frozen_before_capture": true,
+  "date": "2026-11-10",
+  "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "probe_angstroms": [
+    0.2
+  ],
+  "reference_patch_counts": [
+    0
+  ],
+  "expected_counts_origin": "Existing independently verified certificates; known before this runtime refinement, not held out",
+  "native_compatibility": "Preserve existing native links, classes, Mouth counts and carrier areas",
+  "capture_program": "devtools/benchlab/capture_physical.py",
+  "source_base_before_implementation": "7031181",
+  "source_claim": "Exact committed fixing revision must be recorded by capture; mutable package version is retained separately",
+  "small_probe_shell_13": "Not part of this independently qualified panel; separate candidate under #76",
+  "resource_budget": {
+    "cpu_affinity_count": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  },
+  "numerical_contract": "Strict all-atom hull free set, explicit nm record and default bounded DFNDQuery policy; unresolved is not zero"
+}

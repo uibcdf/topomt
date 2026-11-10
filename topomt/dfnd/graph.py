@@ -22,6 +22,7 @@ from .core.clearance import (
     face_gate_radius_batch,
     tetrahedron_residence_radius_batch,
 )
+from .core.physical_boundary import compute_boundary_connectivity
 from .core.solvent_volume import tetrahedron_solvent_volume_estimate_batch
 from .identity import (
     canonical_tetrahedron_support,
@@ -976,7 +977,8 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
             n_external_links = len(component_external_link_ids)
             # Walls = non-permeable boundary faces of the component (faces whose other
             # side is OCEAN or another component). A resident component with zero walls
-            # is fully permeable/exposed (porous), not a concavity -> percolating.
+            # has every boundary carrier face admitted -> percolating. Physical
+            # hull patches and all-atom path evidence are separate observations.
             n_wall_faces = 0
             for node in nodes:
                 for face_index in range(4):
@@ -1285,6 +1287,9 @@ class DelaunayFlowNetwork(_GeometrySnapshot):
         return {
             'raw': {
                 'schema_version': 'dfnd.raw.nm.v2',
+                'boundary_connectivity': compute_boundary_connectivity(
+                    self, wet_components, query, parameters['result_key']
+                ),
                 'units': {
                     'length': 'nm',
                     'area': 'nm**2',

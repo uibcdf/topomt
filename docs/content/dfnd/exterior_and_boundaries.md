@@ -69,10 +69,73 @@ relation. A Mouth is a legacy 1D boundary feature in the public hierarchy even
 though a possible aperture realization is a two-dimensional patch; that class
 dimension does not define the mathematical dimension of every support.
 
-Physical patch decomposition and the relation to Mouth/Percolating remain
-tracked in [#151](https://github.com/uibcdf/topomt/issues/151). Candidate physical
-contact views are not an implemented public API. No code example here invents
-their counts or substitutes native links for missing physical observations.
+The compatibility decision under [#151](https://github.com/uibcdf/topomt/issues/151)
+keeps that promotion policy. The bounded physical analysis adds a separate
+observation; four contacts on a Percolating therefore do not create four Mouth
+children or rename it Channel. Mouth areas retain their carrier meaning.
+
+## Inspect the physical observation
+
+The source implementation exposes the canonical record at
+`topography.dfnd.dfn.boundary_connectivity`, also retained in
+`topography.dfnd.raw['boundary_connectivity']`. Its schema is
+`dfnd.physical_boundary.nm.v1`: numeric coordinates, lengths and margins are nm.
+A wet feature's `boundary['physical_openings']` refers to the same patch IDs
+and retains its component-path evidence. It is not a second aperture geometry.
+
+| State | Permitted reading |
+| --- | --- |
+| `resolved` | A complete hull decomposition supplies `n_patches`, including a justified zero. |
+| `unresolved` | The selected analysis encountered marginal geometry, incomplete evidence or a work ceiling; `n_patches` is `None`. |
+| `not_computed` | Physical analysis was disabled or absent in historical data; no count is implied. |
+
+Global patches and component attachments have separate availability. A complete
+hull decomposition can coexist with an unresolved attachment search. Failure to
+find a straight segment does not exclude a curved route. A zero boundary count
+can also coexist with positive enclosed free volume, as at 1.4 Å in the tetrahedron.
+
+The first independent receiving panel qualifies 4/0/0 patches for the tetrahedron
+at 1.2/1.4/1.7 Å, zero for the 0.2 Å closed shell and one for the 1.4 Å opened
+shell. The two positive controls include compatible continuous component paths.
+This bounded source evidence is distinct from general biological qualification.
+
+## How the bounded decomposition works
+
+On each hull triangle, all selected probe-expanded balls become plane disks.
+The algorithm inventories circle extrema, circle intersections, circle/edge
+intersections and triangle vertices. These critical sections delimit strips
+whose analytic arc/line endpoint ordering is fixed. Their strict-free intervals
+are connected across event sections and across independently checked free hull
+edge intervals. Several free regions inside one face remain distinct.
+
+Support retains triangle frames, circle constraints, analytic cell selectors,
+source atom maps and seam intervals. Covered faces additionally retain a complete
+positive-margin ball cover, using at most twelve subdivision levels. Thus an
+empty candidate inventory alone cannot establish zero. Marginal arrangements
+can use that cover to establish an empty face; they cannot guess a positive count.
+The numerical margins are inspectable floating evidence, not formal interval arithmetic.
+
+For a component contact, DFND checks the entire segment against all expanded
+balls and covers its complete parameter interval with tetrahedra of that
+component's carrier. The outward-normal continuation is checked as an infinite
+all-atom ray. Endpoints, minimum margins, carrier intervals and support identities
+are retained. These particular paths do not certify every edge of the native graph.
+
+## Work policy and limits
+
+`DFNDQuery` enables physical analysis by default with `physical_boundary=True`
+and a separate `boundary_tolerance=1e-7` nm. This numerical margin does not widen
+the strict physical set or reuse mesh epsilon. The default ceilings are 512
+selected atoms, 512 hull faces, 100,000 arrangement work units, 4,096 association
+records and 4,096 path attempts. The work units include tested intersections,
+section/cell evaluation, joins and cover subdivision; they are not just the
+number of final critical sections. Configure these limits through the query.
+
+Exhaustion reports unresolved availability. Disabling the analysis reports
+not computed. Broad hull families, numerical degeneracies and path searches
+without a validated segment remain outside the qualified panel under
+[#76](https://github.com/uibcdf/topomt/issues/76). Free aperture area and a globally
+optimal bottleneck are not supplied by this connectivity observation.
 
 ## Other boundary roles
 

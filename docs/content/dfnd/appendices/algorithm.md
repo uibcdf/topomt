@@ -75,6 +75,27 @@ No second strict gate threshold is added when creating an internal edge.
 adjacency requires nonpermeability on both sides; a mixed incidence pair is
 neither a wet edge nor a dry face edge. Edge/vertex modes differ.
 
+## Bounded physical observation
+
+```text
+if requested and within the selected atom/face/work ceilings:
+    inventory all-atom disk/triangle arrangements on every hull face
+    retain strict-free regions with analytic selectors and checked witnesses
+    require complete positive-margin covers for empty faces
+    join regions only through all-atom-free intervals on shared hull edges
+    retain the complete global patch count or an explicit unresolved result
+    attempt bounded segment paths inside each component carrier
+    validate entire segments, carrier coverage and exterior continuation
+    retain association availability separately from the global count
+else:
+    retain not-computed or unresolved availability; never manufacture zero
+```
+
+The [physical-boundary chapter](../exterior_and_boundaries.md) gives the strict
+set, work limits, recovery and compatibility policy. Native graph edges retain
+their original meaning; these particular contact paths do not strengthen them
+into general physical navigation certificates.
+
 ## Interpretation and promotion
 
 ```text

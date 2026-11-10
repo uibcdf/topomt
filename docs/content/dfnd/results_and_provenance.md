@@ -17,6 +17,7 @@ Topography
       query / parameters
       graph: query states and native exterior links
       components: typed wet and dry registry
+      boundary_connectivity: bounded physical hull patches and path evidence
 ```
 
 A finding's **support** identifies the cells/faces and source atoms behind it.
@@ -109,6 +110,7 @@ integration; see [scientific attribution](../user/scientific_attribution.md).
 Reading a retained result does not re-execute an original provider.
 
 Distinguish a computed empty result, filtered output, unsupported/uncomputed
-geometry and execution failure. An absent physical-patch capability has no
-implied count of zero. Full neutral support/provenance adoption remains under
+geometry and execution failure. A physical record with `not_computed` or `unresolved` availability has no
+implied count of zero; its global decomposition and component associations
+have separate statuses. Full neutral support/provenance adoption remains under
 development even though the native context and source traces are already useful.

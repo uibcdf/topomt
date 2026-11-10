@@ -294,7 +294,15 @@ A `percolating` component is a resident component with **zero walls**: every bou
 percolating(D) = has_residence(D) and n_wall_faces(D) == 0
 ```
 
-Interpretation: a fully solvent-permeable / exposed wet region — porous, not a concavity. The selected probe resides but the boundary offers no enclosing wall. Mathematically such a component always presents exactly one external link, but that is a consequence, not the criterion, so no `Mouth` child is promoted. At the `Topography` level it becomes a `Percolating` feature with `shape_type` `neutral` (neither concave, convex nor mixed). Added for completeness; rarely encountered when analysing real proteins.
+Interpretation: the selected probe resides and every boundary carrier face
+passes the native admission predicate. This discrete signature does not require
+the whole hull boundary to be collision-free or a theorem of one physical
+opening. At the public level it becomes `Percolating` with `shape_type='neutral'`;
+the compatibility policy promotes no native-link Mouth children. The bounded
+physical record now supplies separate patch counts and path-supported contacts
+through `boundary['physical_openings']`, with explicit availability and clipped
+support. Four physical contacts coexist with one native cluster on the qualified
+tetrahedron. No prevalence or biological claim follows from these controls.
 
 `wet_open` is retained as `has_open_interior`, a descriptor of open resident interior. It must not be used as the primary family discriminator.
 

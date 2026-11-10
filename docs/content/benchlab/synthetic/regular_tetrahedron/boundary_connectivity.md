@@ -1,5 +1,13 @@
 # Four openings on the tetrahedron boundary
 
+**Source correction — 2026-11-10:** DFND's separate physical record now
+resolves four hull patches and four compatible component contacts for this
+frozen 1.2 Å control. Native clustering and Mouth promotion retain their
+original counts. The original reference and historical missing-view diagnosis
+below remain evidence of their dated source. See the
+[implemented observable](../../../dfnd/exterior_and_boundaries.md).
+
+
 At probe radius **1.2 Å**, the frozen tetrahedron has **four separate free
 patches on its hull boundary**. Each patch has a collision-free straight path
 from the center. The six shared edges are blocked, so the patches cannot join
@@ -78,19 +86,19 @@ boundary. The classifier's `percolating` override and the public bridge preserve
 these native semantics.
 
 [Issue #151](https://github.com/uibcdf/topomt/issues/151) owns physical boundary
-refinement and its relation to `Mouth` and `Percolating`. That work remains
-open. Renaming this case `Channel` alone would not resolve the geometric
+refinement and its relation to `Mouth` and `Percolating`. The bounded source implementation now supplies the separate physical view;
+wider paths and geometries remain #76. Renaming this case `Channel` alone would not resolve the geometric
 question. The four-patch reference, the opened shell's
 [one-patch certificate](../shell_with_opening/opening_connectivity.md) and the
 [covered shell boundary](../closed_shell/closure_at_0p2.md) provide controls for
-the next bounded implementation decision.
+the bounded source implementation.
 
-The [acceptance proposal](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/boundary_connectivity_contract.md)
-now separates physical boundary patches, their path-supported contact with a
-region, and public Mouth promotion. Its regression panel replays these
-references and the actual public route. Physical patch/contact reporting remains
-unimplemented under #151; the proposal and pending tests do not correct the
-current limitation or change this case's classification.
+The [adopted contract](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/boundary_connectivity_contract.md)
+separates physical boundary patches, path-supported component contacts and
+compatibility Mouth promotion. The original missing-view targets are now passing
+source regressions, independently checked against these retained references.
+The new physical observation supplies the missing count without changing this
+case's native classification; a proposal alone did not supply that correction.
 
 This observable depends on the declared atomic-center hull. It does not define
 an intrinsic biological mouth, free aperture area, general native graph paths,

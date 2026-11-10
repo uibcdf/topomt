@@ -4,10 +4,11 @@ from .Feature2D import Feature2D
 
 
 class Percolating(Feature2D):
-    """A fully solvent-permeable (wall-less) resident region: shape_type ``neutral``.
+    """A resident region with zero native nonpermeable boundary carrier faces.
 
-    Neither concave nor convex nor mixed -- a porous/exposed wet region whose
-    boundary has zero walls (every boundary face permeable). See
+    The compatibility class has shape_type ``neutral``. Every boundary carrier
+    face passes the native predicate; physical contacts are described separately
+    by ``boundary['physical_openings']`` when computed. See
     ``devguide/DFND/object_model.md`` and ``feature_definitions.md``.
     """
 

@@ -1,13 +1,18 @@
 # Physical boundary connectivity: implementation proposal
 
 Date: 2026-11-09. Owner: [#151](https://github.com/uibcdf/topomt/issues/151).
-Status: **concrete acceptance proposal; no runtime adoption or scientific fix**.
+Status: **bounded contract adopted in source on 2026-11-10; wider qualification remains #76**.
+The [implementation decision and receiving](physical_boundary_implementation.md)
+records the source increment; the original 2026-11-09 red targets below retain
+their historical scope. Seven narrowly marked expected failures have become
+required passing guards.
 The [public conceptual contract](../topography_conceptual_contract.md) and
-[native object model](object_model.md) retain authority. The Python/dictionary
-names below are candidate spellings for this bounded implementation, not an
-announced public API or a new serialized schema. Broader support adoption is #60.
+[native object model](object_model.md) retain authority. The physical record is versioned `dfnd.physical_boundary.nm.v1`, with explicit
+fixed nm units; broader public support adoption and cross-version persistence
+remain #60. The canonical view is under `dfnd.dfn.boundary_connectivity`, with
+the same record retained in raw output. Broader support adoption is #60.
 
-## Decision proposed for the next implementation
+## Adopted bounded compatibility decision
 
 Keep three distinct observations:
 
@@ -64,12 +69,12 @@ native graph edge physically realizable.
 
 ## Candidate result and availability contract
 
-The native raw result would gain `boundary_connectivity`; a typed native view
-would belong under `topography.dfnd.dfn`, not a new `dfnd_*` root attribute.
+The native raw result gains `boundary_connectivity`; a typed native view
+belongs under `topography.dfnd.dfn`, not a new `dfnd_*` root attribute.
 The first acceptance test reads raw data received through the actual public
 dispatcher, avoiding a new API dependency before the typed view is decided.
 
-| Candidate field | Meaning and required evidence |
+| Field | Meaning and required evidence |
 | --- | --- |
 | `status` | `not_computed`, `unresolved`, or `resolved`; only the last permits a total count. |
 | `surface` | `kind: atomic_center_convex_hull`, input snapshot, selected source atom map, recoverable hull geometry, surface identity and definition/version. |
@@ -94,7 +99,7 @@ observable: the excluded tetrahedron has zero hull patches independently of its
 lack of resident components. A missing/degenerate surface is an unresolved or
 unsupported geometry, not proof of a covered surface.
 
-The public feature would gain the method-neutral boundary entry
+The public feature supplies the method-neutral boundary entry
 `physical_openings`, with `status`, `n_patches`, `patch_ids`, surface/support
 references and `association_evidence`. The two positive controls require
 `association_evidence.status: resolved`. The view refers to the same canonical
@@ -163,5 +168,9 @@ source-contract guards remain ordinary required passing tests.
    artifacts/matrix (#16); retain the broader support (#60), independent-path
    (#76), and volume-precision (#75) gates.
 
-All concrete next steps above belong to #151 within the stated boundaries;
-this design slice does not close that issue or resolve its current finding.
+The six gates above describe the original acceptance sequence. The bounded
+source implementation now supplies the five-row panel, supports, statuses and
+paths with native catalog/Mouth compatibility preserved. See the implementation
+record for delivered guards and source-only limits. Broader physical graph paths,
+small-probe shell references and geometry families retain #76; an incompatible
+public support/promotion migration is not silently included.

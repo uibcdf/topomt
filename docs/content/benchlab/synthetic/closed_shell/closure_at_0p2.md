@@ -9,9 +9,10 @@ was already known, so this is not a blind evaluation.
 
 This complete cover supplies the zero-patch control in the
 [physical-boundary acceptance proposal](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/boundary_connectivity_contract.md)
-under [#151](https://github.com/uibcdf/topomt/issues/151). The new regression
-panel replays this certificate alongside actual public receiving; physical
-patch/contact reporting remains unimplemented. The reference is unchanged.
+under [#151](https://github.com/uibcdf/topomt/issues/151). The bounded source
+implementation now resolves zero global hull patches at this probe, alongside
+actual public receiving. The independent reference is unchanged; it does not
+become a production input. Wider geometry/path qualification remains #76.
 
 ## Why the certificate proves enclosure
 

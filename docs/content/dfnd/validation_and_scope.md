@@ -41,8 +41,10 @@ development and are not a held-out biological detector benchmark.
 
 At the documented source, the following owners retain the unresolved work:
 
-- [#151](https://github.com/uibcdf/topomt/issues/151): physical boundary patches,
-  component attachment and their relation to native links/Mouth/Percolating.
+- [#151](https://github.com/uibcdf/topomt/issues/151): the bounded source delivery
+  of separate physical hull patches and compatible contact paths. The five
+  independent controls qualify that scope; wider geometry and continuous-path
+  validation remain under #76. Native Mouth/catalog compatibility is retained.
 - [#76](https://github.com/uibcdf/topomt/issues/76): independent reference
   assumptions, physical graph/path interpretation and the broader panel.
 - [#75](https://github.com/uibcdf/topomt/issues/75): volume precision and

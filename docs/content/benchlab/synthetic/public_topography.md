@@ -49,6 +49,19 @@ their boundary objects. They are catalog conventions, not a declaration that
 the recovered empty space is geometrically two-dimensional. Full neutral
 support/availability adoption remains under [#60](https://github.com/uibcdf/topomt/issues/60).
 
+## Physical contacts alongside the public catalog
+
+The bounded source increment under #151 exposes
+`topography.dfnd.dfn.boundary_connectivity` and
+`feature.boundary['physical_openings']`. The five independent controls qualify
+4/0/0 tetrahedron patches, zero at closed-shell 0.2 Å and one at opened-shell
+1.4 Å, with supported component paths on the positive rows. Status, clipped
+support, all-atom constraints and work/numerical policy remain inspectable.
+Native-link Mouths and catalog classes retain their earlier meaning. Wider
+small-probe shell counts and path/geometry qualification remain #76.
+See the [method chapter](../../dfnd/exterior_and_boundaries.md) for exact fields
+and the distinction between a global count and unresolved component attachment.
+
 ## Repeat the public receiving
 
 Run this example from `docs/content/benchlab/synthetic/`. Change `case` to any

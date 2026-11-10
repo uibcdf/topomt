@@ -201,6 +201,7 @@ class DFN:
         self.query = DFNDQuery(**query_parameters)
         adjacency = getattr(network, 'simplex_neighbors', None)
         self.graph = Graph(result['raw'], adjacency=adjacency)
+        self.boundary_connectivity = result['raw'].get('boundary_connectivity')
         self.components = build_components(result, network)
 
     def __repr__(self) -> str:

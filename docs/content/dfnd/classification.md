@@ -29,7 +29,9 @@ been promoted as a biological feature family.
 
 Zero wall faces means no carrier face counted as a nonpermeable boundary wall.
 It does not mean that every boundary point is collision-free. This is why the
-tetrahedron's current Percolating label must retain its discrete meaning.
+tetrahedron's current Percolating label retains its discrete meaning. The
+separate `boundary['physical_openings']` observation does not replace the
+native signature or the compatibility Mouth promotion policy.
 
 ## Morphological refinement
 
