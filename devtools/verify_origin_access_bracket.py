@@ -98,7 +98,11 @@ def _model(input_file, protocol_file):
     protocol = json.loads(protocol_bytes)
     digest = hashlib.sha256(input_bytes).hexdigest()
     if (
-        protocol['schema'] != 'topomt.benchlab.origin-access-bracket-protocol/1'
+        protocol['schema']
+        not in {
+            'topomt.benchlab.origin-access-bracket-protocol/1',
+            'topomt.benchlab.origin-access-bracket-protocol/2',
+        }
         or protocol['input_sha256'] != digest
         or protocol['case'] != fixture['case_id']
         or protocol['length_unit'] != 'angstroms'
@@ -134,6 +138,29 @@ def _model(input_file, protocol_file):
     )
 
 
+def _discovery_faces(input_file, protocol_file, protocol, centers, radii, faces):
+    if protocol['schema'].endswith('/1'):
+        return list(range(len(faces)))
+    from devtools.verify_opening_connectivity import verify_certificate
+
+    reference = protocol['covered_wall_reference']
+    files = {
+        name: protocol_file.parent / record['path']
+        for name, record in reference.items()
+    }
+    for name, file in files.items():
+        if hashlib.sha256(file.read_bytes()).hexdigest() != reference[name]['sha256']:
+            raise ValueError('Preverified wall reference identity differs')
+    prior = json.loads(files['protocol'].read_text())
+    prior_probe = float(_values(prior['probe_radius'], 'probe_radius', 'angstroms'))
+    if prior_probe > protocol['known_access_probe']:
+        raise ValueError('A larger-probe cover cannot prune smaller-probe faces')
+    certificate = json.loads(files['certificate'].read_text())
+    verify_certificate(input_file, files['protocol'], certificate)
+    covered = {tuple(sorted(face)) for face in certificate['wall_cover']['hull_faces']}
+    return [i for i, face in enumerate(faces) if tuple(face) not in covered]
+
+
 def build_access_bracket(input_file: Path, protocol_file: Path) -> dict[str, Any]:
     """Discover a positive path and complete boundary cover within frozen budgets.
 
@@ -159,7 +186,11 @@ def build_access_bracket(input_file: Path, protocol_file: Path) -> dict[str, Any
     best = None
     best_clearance = protocol['known_access_probe']
     tests = 0
-    for index, face in enumerate(faces):
+    selected = _discovery_faces(
+        input_file, protocol_file, protocol, centers, radii, faces
+    )
+    for index in selected:
+        face = faces[index]
         triangle = centers[face]
         active = [
             i
