@@ -134,3 +134,12 @@ tracked in [#75](https://github.com/uibcdf/topomt/issues/75), and independent
 reference progress in [#76](https://github.com/uibcdf/topomt/issues/76).
 The public receiving increment [#146](https://github.com/uibcdf/topomt/issues/146)
 does not close those broader questions.
+
+## Current executable reader stages
+
+The independently executed [tetrahedron](regular_tetrahedron/public_topography.ipynb),
+[closed shell](closed_shell/public_topography.ipynb) and
+[opened shell](shell_with_opening/public_topography.ipynb) stages replay later
+references and inspect actual public objects. Use the
+[complete download](index.md#download-and-run-the-current-reader-stage) for
+Jupyter; the retained Markdown receiving pages keep their existing addresses.

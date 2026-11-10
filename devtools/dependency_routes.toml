@@ -307,7 +307,7 @@ reason = "Reviewed actual source, documentation, optional-contract or publicatio
 
 [[workflows]]
 path = ".github/workflows/sphinx_docs_to_gh_pages.yaml"
-sha256 = "29a6021218d92774a610b1f1345353ae585b205028d46812c6c01399c7eb82bb"
+sha256 = "626ebf9751532e8420d0c2e6697ddc1a730945b0ea726ea3ab6a466d710a2790"
 reason = "Reviewed #18 Python 3.14 docs environment plus controlled_suite_dependencies_py314 source pins; stored notebook rendering, checked HTML manifest and official Pages artifact deployment; no package publication"
 
 [[workflows]]

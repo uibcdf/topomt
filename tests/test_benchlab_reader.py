@@ -1,6 +1,7 @@
 """The portable reader stage receives real public findings and references."""
 
 import importlib.util
+import json
 from pathlib import Path
 
 import pytest
@@ -58,3 +59,42 @@ def test_reader_suppression_retains_raw_geometry_and_support():
         before.dfnd.raw['wet_components'][0]['support_key']
         == after.dfnd.raw['wet_components'][0]['support_key']
     )
+
+
+@pytest.mark.parametrize(
+    'case', ['regular_tetrahedron', 'closed_shell', 'shell_with_opening']
+)
+def test_actual_reader_notebook_inspects_support_without_inventing_neutral_support(
+    case,
+):
+    study = study_module()
+    directory = SYNTHETIC / case
+    notebook = json.loads((directory / 'public_topography.ipynb').read_text())
+    namespace = {'case_directory': directory, 'study': study}
+    from IPython.display import Markdown, display
+
+    namespace.update(Markdown=Markdown, display=display)
+    exec(''.join(notebook['cells'][3]['source']), namespace)
+    expected = 1 if case == 'shell_with_opening' else 0
+    assert (
+        len(namespace['topography'].get_features(by='type', value='mouth')) == expected
+    )
+    assert namespace['vertices'].shape[1:] == (4, 3)
+
+
+def test_study_notebooks_never_shadow_a_retained_sphinx_page():
+    sources = [
+        path
+        for path in SYNTHETIC.rglob('*')
+        if path.suffix in ('.md', '.rst', '.ipynb')
+    ]
+    names = [path.with_suffix('') for path in sources]
+    assert len(names) == len(set(names)), (
+        'Two source formats shadow the same public document URL'
+    )
+
+
+def test_public_summary_rejects_an_uncomputed_container():
+    study = study_module()
+    with pytest.raises(ValueError, match='DFND'):
+        study.describe(study.tmt.Topography())

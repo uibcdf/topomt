@@ -31,7 +31,7 @@ def build_bundle(root: Path, output: Path) -> dict:
         'Use the qualified TopoMT Python 3.14 source-development environment. '
         'Environment inputs and exact suite source pins are included under devtools/. '
         'They describe the tested source route, not a newly qualified public installation.\n\n'
-        'Open docs/content/benchlab/synthetic/CASE/topography.ipynb in Jupyter; '
+        'Open docs/content/benchlab/synthetic/CASE/public_topography.ipynb in Jupyter; '
         'run from that notebook directory in a fresh kernel. Start with regular_tetrahedron, '
         'then closed_shell and shell_with_opening. Original providers and servers are not run. '
         'The closed parent is included for the opening subset. The older notebooks are '

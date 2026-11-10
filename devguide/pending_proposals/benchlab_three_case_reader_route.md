@@ -1,7 +1,7 @@
 ---
 summary: Bring the completed three-case BenchLab review into a coherent current web and notebook reading route.
 issue: uibcdf/topomt#175
-status: open
+status: active
 opened: 2026-11-10
 closed:
 severity: medium
@@ -14,6 +14,32 @@ supersedes: []
 ---
 
 # Three-case BenchLab review and reader-route proposal
+
+## Reader candidate execution — 2026-11-10
+
+Source scaffolding/protocols were committed at `601b295` before capture. Three
+new `public_topography.ipynb` notebooks execute actual public receiving,
+reference-certificate replay and reporting controls independently. Fresh
+kernels passed inside the checkout and from the manifest-verified extracted
+source bundle. The opening's parent and three independent verifier sources are
+included. The actual imported Python/library identities are retained with the
+receiving receipts; this is source-bound evidence, not an installed matrix.
+
+The initial opening capture failed on a reader assumption that Mouth exposes
+neutral `support_key`; a regression now executes the actual notebook inspection
+and the reader reports the existing #60 availability honestly. A strict Sphinx
+build then exposed collision with the retained `topography.md` document names;
+the new notebooks use `public_topography.ipynb`, preserving those old URLs.
+The correction protocol and Git history preserve both initial states.
+
+The opening has a new contact illustration with an unclipped legend and a
+retained rendering script. Authenticated local JupyterLab displayed the
+extracted opening notebook and its ordinary links/figure in Chrome. All owned
+server/kernel processes and the temporary authentication token were cleaned
+after inspection. A fresh warning-fatal Sphinx build succeeds. The selected documentation/reader/public/lifecycle panel passes 45 tests; scoped
+Ruff, formatting, six-file mypy and declaration checks pass. The final download
+was manifest-verified in `/tmp`; its notebook bytes match the three independently
+executed kernels. Public READ-F receiving is still pending. The public baseline already published under #18 is separate.
 
 **Review completed on 2026-11-10; reader-route improvements remain open under
 [#175](https://github.com/uibcdf/topomt/issues/175).** This record separates the

@@ -9,6 +9,23 @@ The method section supplies a
 [complete input-to-Topography reading](../../../dfnd/worked_tetrahedron.md)
 of this same frozen system, with definitions and source-support inspection.
 
+**Current reading route — 2026-11-10:** open the independently executed
+[public Topography study](public_topography.ipynb) for the current status, actual
+objects and replay of the later reference certificate. It links the frozen
+system/native notebooks with their updated interpretation. Those earlier
+notebook bytes and reports remain historical evidence.
+
+Download the complete study bundle from the [synthetic collection](../index.md#download-and-run-the-current-reader-stage),
+including inputs, the parent shell, reference helpers and environment guidance.
+
+## Current observations
+
+| Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
+| --- | --- | --- | --- |
+| Access, 1.2 Å | Four disconnected hull patches, all reached from the centroid. | One face cluster; `Percolating`, zero `Mouth` children. | Native count differs from physical patch count; [#151](https://github.com/uibcdf/topomt/issues/151). |
+| Enclosure, 1.4 Å | Free centroid, completely covered hull. | One `Void`, no exterior link or `Mouth`. | Enclosure qualified; general paths [#76](https://github.com/uibcdf/topomt/issues/76). |
+| Exclusion, 1.7 Å | No free center in the finite hull. | No resident wet component or public feature. | Genuine empty resident result; volume precision [#75](https://github.com/uibcdf/topomt/issues/75). |
+
 | Stage | What it explains | Current status |
 | --- | --- | --- |
 | [System and independent expectations](system.ipynb) | Input geometry, visualization, analytic clearance references and three predictions fixed before inspecting DFND. | Executed in a fresh kernel; independent checks pass. |
@@ -18,6 +35,7 @@ of this same frozen system, with definitions and source-support inspection.
 ```{toctree}
 :maxdepth: 1
 
+public_topography
 system
 dfnd
 comparisons

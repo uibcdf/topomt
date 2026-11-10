@@ -1,0 +1,22 @@
+{
+  "notebook": "docs/content/benchlab/synthetic/regular_tetrahedron/public_topography.ipynb",
+  "source_sha256": "e482ddbad2fc69f5ab8428e12f1de2556e0643d7a3cd8e0ce73c52152afc8cb3",
+  "status": "passed",
+  "fresh_kernel": true,
+  "code_cells": 4,
+  "elapsed_seconds": 7.595,
+  "parent_peak_rss_kib": 78616,
+  "child_peak_rss_kib": 302664,
+  "preserved_benchlab_files": 212,
+  "scope": "Manifest-verified bundle, outside checkout; real public receiving and independent certificate replay",
+  "source_base": "601b295",
+  "source_correction": "synthetic/reader_capture_correction.json",
+  "versions": {
+    "topomt": "0.5.0+387.gcf4d475.dirty",
+    "molsysmt": "0.23.0+687.g2325038e8",
+    "pyunitwizard": "0.29.1+6.gf82b618",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "python": "3.14.10"
+}

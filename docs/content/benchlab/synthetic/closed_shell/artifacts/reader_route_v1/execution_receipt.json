@@ -1,0 +1,15 @@
+{
+  "notebook": "docs/content/benchlab/synthetic/closed_shell/public_topography.ipynb",
+  "source_sha256": "8fb1d3926b75d335d23c031c7d5f05688bd031dc4ed4860e31609fd92bd317e2",
+  "status": "passed",
+  "fresh_kernel": true,
+  "code_cells": 4,
+  "elapsed_seconds": 5.223,
+  "parent_peak_rss_kib": 78360,
+  "child_peak_rss_kib": 319260,
+  "preserved_benchlab_files": 215,
+  "capture_source_base": "601b295",
+  "correction_protocol": "synthetic/reader_capture_correction.json",
+  "retrospective_scope": "Public reader qualification; no new independent geometry or scientific-policy fix",
+  "executed_notebook_sha256": "43762dcdd5c47847064d27083ae48d11e15e04831a61fabbbca4d7160df49cc6"
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "topomt.benchlab.reader-capture-correction/1",
+  "owning_issue": "uibcdf/topomt#175",
+  "predecessor_source": "601b295",
+  "known_before_capture": "The opening notebook failed when assuming every public feature has a neutral support_key; Mouth exposes a native contact key. This is reader correction over the existing #60 partial contract, not a new support implementation.",
+  "notebook_sources_sha256": {
+    "regular_tetrahedron": "01df4715dbd5f1ae49638277fa06cdfc665efd83384ed55153e731dda637aa39",
+    "closed_shell": "8fb1d3926b75d335d23c031c7d5f05688bd031dc4ed4860e31609fd92bd317e2",
+    "shell_with_opening": "ee6b09a69d3e0a50f2f72e1965da1c7821f8e8936a7d7f4ff3ffe0aea4211f33"
+  },
+  "input_model_changed": false,
+  "notebook_filename": "public_topography.ipynb",
+  "filename_reason": "Keep the retained topography.md at its existing public URL; Sphinx formats share a document namespace.",
+  "added_inspection": "Recover native transit carrier vertices and atom maps; distinguish Mouth carrier area from unavailable free aperture area.",
+  "typed_support_note": "Typed WetComponent.node_indices, corresponding to raw tetrahedron_ids, is used for carrier recovery."
+}

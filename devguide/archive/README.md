@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (42)
+### Resolved (43)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
@@ -27,6 +27,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`dfnd_method_book_semantics.md`](dfnd_method_book_semantics.md) — [#173](https://github.com/uibcdf/topomt/issues/173) — Correct shared-face admission and complete the DFND method book's operator definitions. *(resolved, measured)*
 - [`dfnd_scientific_documentation.md`](dfnd_scientific_documentation.md) — [#170](https://github.com/uibcdf/topomt/issues/170) — Present DFND theory and method in a dedicated public documentation section. *(resolved, measured)*
 - [`discussions_resource_organization.md`](discussions_resource_organization.md) — [#103](https://github.com/uibcdf/topomt/issues/103) — Organize resource Discussions with preserved history, facets and maintained guidance. *(resolved, inspected)*
+- [`documentation_public_identity.md`](documentation_public_identity.md) — [#18](https://github.com/uibcdf/topomt/issues/18) — Publish verified TopoMT documentation instead of the old PocketMT site. *(resolved, measured)*
 - [`expand_original_providers.md`](expand_original_providers.md) — [#135](https://github.com/uibcdf/topomt/issues/135) — Consolidate five original providers and add four no-cost local engines before BenchLab resumes. *(resolved, measured)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*
 - [`molsysviewer_topomt_init_exports.md`](molsysviewer_topomt_init_exports.md) — [#55](https://github.com/uibcdf/topomt/issues/55) — Restore MolSysViewer TopoMT add-on lifecycle exports. *(resolved, measured)*

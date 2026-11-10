@@ -5,6 +5,23 @@ This unit keeps the remaining **66 atomic balls**, their **1.7 Å** radii and
 their parent atom identities unchanged. A strict **35° cap around +Y** defines
 the deletion. The geometry is nonperiodic and no coordinates are regenerated.
 
+**Current reading route — 2026-11-10:** open the independently executed
+[public Topography study](public_topography.ipynb) for the current status, actual
+objects and replay of the later reference certificate. It links the frozen
+system/native notebooks with their updated interpretation. Those earlier
+notebook bytes and reports remain historical evidence.
+
+Download the complete study bundle from the [synthetic collection](../index.md#download-and-run-the-current-reader-stage),
+including inputs, the parent shell, reference helpers and environment guidance.
+
+## Current observations
+
+| Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
+| --- | --- | --- | --- |
+| Access and localization, 1.4 Å | One connected hull patch and an origin-to-exterior ray. | One `Pocket`, one `Mouth` on the certified face. | Count/location qualified; physical support [#151](https://github.com/uibcdf/topomt/issues/151); aperture area and global bottleneck unavailable. |
+| Enclosure, 3 Å | Free origin and covered hull. | `Void`, no exterior link / `Mouth`. | Enclosure qualified; tighter transition/path scope [#76](https://github.com/uibcdf/topomt/issues/76). |
+| Exclusion, 5 Å | No free center in the finite hull. | No resident wet component or public feature. | Empty resident result; domain-aware volume work [#75](https://github.com/uibcdf/topomt/issues/75). |
+
 | Stage | Question | Status |
 | --- | --- | --- |
 | [System and independent references](system.ipynb) | Does the deletion permit a continuous escape path, and which larger probes remain enclosed or excluded? | Executed in a fresh kernel without importing DFND; reference committed before native observation. |
@@ -14,6 +31,7 @@ the deletion. The geometry is nonperiodic and no coordinates are regenerated.
 ```{toctree}
 :maxdepth: 1
 
+public_topography
 system
 dfnd
 Public Topography receiving <topography>

@@ -1,0 +1,22 @@
+{
+  "notebook": "docs/content/benchlab/synthetic/shell_with_opening/public_topography.ipynb",
+  "source_sha256": "cf0e3a4933b5b6ae0a59beba66ff17382eb3570cee756601e5526e8d30a4f9c7",
+  "status": "passed",
+  "fresh_kernel": true,
+  "code_cells": 4,
+  "elapsed_seconds": 4.718,
+  "parent_peak_rss_kib": 78368,
+  "child_peak_rss_kib": 318316,
+  "preserved_benchlab_files": 212,
+  "scope": "Manifest-verified bundle, outside checkout; real public receiving and independent certificate replay",
+  "source_base": "601b295",
+  "source_correction": "synthetic/reader_capture_correction.json",
+  "versions": {
+    "topomt": "0.5.0+387.gcf4d475.dirty",
+    "molsysmt": "0.23.0+687.g2325038e8",
+    "pyunitwizard": "0.29.1+6.gf82b618",
+    "numpy": "2.5.4",
+    "scipy": "1.18.1"
+  },
+  "python": "3.14.10"
+}

@@ -48,7 +48,7 @@ jobs:
         shell: bash -l {0}
         run: |
           set -euo pipefail
-          python -m sphinx -E -a -b html -j 1 docs docs/_build/html
+          python -m sphinx -W --keep-going -E -a -b html -j 1 docs docs/_build/html
           python devtools/docs_site.py docs/_build/html --commit "$GITHUB_SHA"
       - uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
       - uses: actions/upload-pages-artifact@56afc609e74202658d3ffba0e8f6dda462b719fa # v3

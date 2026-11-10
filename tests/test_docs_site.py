@@ -1,6 +1,7 @@
 """Public documentation candidates must be attributable and navigable."""
 
 import json
+from pathlib import Path
 
 import pytest
 
@@ -52,3 +53,27 @@ def test_theme_template_is_an_asset_rather_than_a_rendered_page(tmp_path):
     result = verify_site(tmp_path, 'a' * 40, required=('index.html',))
     assert result['html_pages'] == 1
     assert '_static/template.html' in result['files']
+
+
+def test_pages_producer_treats_build_warnings_as_failures_before_upload():
+    import yaml
+
+    root = Path(__file__).resolve().parents[1]
+    workflow = yaml.load(
+        (root / '.github/workflows/sphinx_docs_to_gh_pages.yaml').read_text(),
+        Loader=yaml.BaseLoader,
+    )
+    steps = workflow['jobs']['documentation']['steps']
+    index = next(
+        i for i, step in enumerate(steps) if 'python -m sphinx' in step.get('run', '')
+    )
+    script = steps[index]['run']
+    assert 'set -euo pipefail' in script
+    assert 'sphinx -W --keep-going' in script
+    assert 'devtools/docs_site.py' in script
+    upload = next(
+        i
+        for i, step in enumerate(steps)
+        if step.get('uses', '').startswith('actions/upload-pages-artifact@')
+    )
+    assert index < upload

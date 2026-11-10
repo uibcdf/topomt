@@ -141,3 +141,17 @@ separately declared small-probe escape witness on its unchanged atomic input.
 The opening variant derives from that same wall and retains parent atom IDs.
 Later cases enter the collection
 after their input assumptions and independent expectations have been reviewed.
+
+## Download and run the current reader stage
+
+The per-case `public_topography.ipynb` notebooks provide the current reading map,
+actual public objects and replay of the retained later certificates. They run
+independently of the historical notebooks and do not execute original providers.
+The closed-shell parent is included for the exact opening subset.
+
+Download the {download}`complete source-bound study bundle <../../../_static/benchlab/three_cases_v1.zip>`,
+extract it, read `README_STUDY.md` and open a case's `public_topography.ipynb` in Jupyter.
+A manifest identifies every included file. Use the qualified Python 3.14 source
+route and the supplied environment/source-pin inputs; this download is not an
+installed-package or support-matrix qualification. Each current entry uses
+ordinary notebook links and displays its date and availability limits.

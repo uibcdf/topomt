@@ -5,6 +5,23 @@ answer change with probe size? This unit retains the same **72 balls**, radii
 **1.7 Å**, fixed-seed coordinates near a **6 Å** sphere and no periodic boundary.
 The construction name is not an independent closure certificate.
 
+**Current reading route — 2026-11-10:** open the independently executed
+[public Topography study](public_topography.ipynb) for the current status, actual
+objects and replay of the later reference certificate. It links the frozen
+system/native notebooks with their updated interpretation. Those earlier
+notebook bytes and reports remain historical evidence.
+
+Download the complete study bundle from the [synthetic collection](../index.md#download-and-run-the-current-reader-stage),
+including inputs, the parent shell, reference helpers and environment guidance.
+
+## Current observations
+
+| Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
+| --- | --- | --- | --- |
+| Access, 0.05 Å | A continuous origin-to-exterior ray. | Central `Channel`, ten native links / `Mouth` children. | Ray qualifies access, not ten physical openings; [#151](https://github.com/uibcdf/topomt/issues/151), [#76](https://github.com/uibcdf/topomt/issues/76). |
+| Enclosure, 0.2 / 1.4 Å | Free origin and completely covered hull. | `Void` without exterior links / `Mouth` children. | Later certificate resolves 0.2 Å; volume precision [#75](https://github.com/uibcdf/topomt/issues/75). |
+| Exclusion, 5 Å | No free center in the finite hull. | No resident wet component or public feature. | Empty resident result; native dry structures remain, [#60](https://github.com/uibcdf/topomt/issues/60). |
+
 | Stage | What it explains | Current status |
 | --- | --- | --- |
 | [System and independent references](system.ipynb) | Input geometry, an all-atom escape ray, a covered-wall certificate and a full-hull exclusion bound. | Executed in its own fresh kernel, without importing DFND. |
@@ -14,6 +31,7 @@ The construction name is not an independent closure certificate.
 ```{toctree}
 :maxdepth: 1
 
+public_topography
 system
 dfnd
 Public Topography receiving <topography>

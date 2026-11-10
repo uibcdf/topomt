@@ -86,10 +86,13 @@ def receive(directory: Path, probe: float, min_size: int = 0) -> tmt.Topography:
 
 def describe(topo: tmt.Topography) -> dict:
     """Summarize actual results without equating native links with free patches."""
-    raw = topo.dfnd.raw
+    native = getattr(topo, 'dfnd', None)
+    if native is None:
+        raise ValueError('This reader expects a computed DFND result')
+    raw = native.raw
     return {
         'public_types': [type(feature).__name__ for feature in topo.values()],
-        'raw_resident_regions': len(raw['wet_components']),
+        'raw_wet_components': len(raw['wet_components']),
         'native_exterior_links': len(raw['external_links']),
         'public_mouths': len(topo.get_features(by='type', value='mouth')),
         'physical_view_status': 'present'

@@ -88,7 +88,7 @@ earlier physical or reader delivery depends on them.
   the old publishing branch as retained history. Deployment/served receiving
   remain WEB-D/E. gh-run-receptor is unavailable in this workspace; bounded
   native GitHub status/log inspection is the documented fallback for this run.
-- [ ] **WEB-B: prepare one reviewed documentation candidate.** Check the root
+- [x] **WEB-B: prepare one reviewed documentation candidate.** Check the root
   identity, navigation, install/import examples, BenchLab and DFND links. Keep
   historical PocketMT references explicitly historical. Validate the dependency
   closure actually used by the documentation workflow. Review its current
@@ -99,13 +99,13 @@ earlier physical or reader delivery depends on them.
   maintainer to install anything. Use one Sphinx worker, execution off for
   stored notebooks, and a bounded workflow timeout. Replace the current
   `-j auto` invocation when preparing that controlled route.
-- [ ] **WEB-C: receive build diagnostics under #64.** Fix blockers to the
+- [x] **WEB-C: receive build diagnostics under #64.** Fix blockers to the
   published reading route, including identity, missing navigation/downloads
   and any required diagram runtime. Keep reviewed nonblocking whole-site
   defects explicitly owned if not included in this delivery. Never describe
   a build with those diagnostics as a clean whole-site build. Do not make
   closure of every unrelated warning a prerequisite to useful BenchLab access.
-- [ ] **WEB-D: publish a bounded documentation checkpoint.** Commit the candidate
+- [x] **WEB-D: publish a bounded documentation checkpoint.** Commit the candidate
   before dispatch. When executing this block, run one documentation deployment
   for that exact candidate and inspect its result with the registered
   gh-run-receptor/native fallback. Retain checkout SHA, run/attempt, build
@@ -117,7 +117,7 @@ earlier physical or reader delivery depends on them.
   and retain the failed evidence; do not rewrite source history or declare #18
   fixed by rollback. Diagnose a failed run before retrying instead of repeatedly
   dispatching unchanged inputs.
-- [ ] **WEB-E: check the served site independently.** Verify both advertised
+- [x] **WEB-E: check the served site independently.** Verify both advertised
   host forms and redirects, TopoMT identity, BenchLab's two collection indexes,
   all three case entries, DFND, notebook pages, downloadable notebooks and
   representative JSON/PDB/figure resources. Compare downloaded evidence bytes
@@ -129,6 +129,13 @@ If hosted execution or domain access is unavailable, record the actual block
 under #18 and provide the tested local HTML/bundle for review. A local preview
 is useful access, not evidence that the public deployment is fixed.
 
+Execution receipt: [the archived #18 delivery](../archive/documentation_public_identity.md)
+retains successful run `42895119243`, source `b57d533`, independent served-manifest
+and eighteen page/download checks, and actual Chrome views. The hosted baseline
+has zero warnings. The old non-www alias's HTTP redirect was recorded; the
+canonical advertised route uses `https://www.uibcdf.org/topomt/`. This completes
+the baseline WEB checkpoint, not READ-F's later publication or scientific work.
+
 **First usable delivery:** the current reviewed baseline is
 readable on the public site, with its current limits visible. Do not wait for
 #151 or #75 to claim completion before providing that access. Do not publish
@@ -136,15 +143,15 @@ unimplemented physical observations as already available.
 
 ## READ — make web and Jupyter tell the same current story
 
-- [ ] **READ-A: fix the study narrative under #175.** Give each mutable case
+- [x] **READ-A: fix the study narrative under #175.** Give each mutable case
   overview a compact table: question, probe, independent expectation, native
   observation, public objects, current conclusion and owning open issue.
   Mark dated outputs and later follow-ups clearly. The reader should see a
   geometry/result figure and its interpretation before long code/provenance.
-- [ ] **READ-B: preserve the frozen notebook contract.** Existing protocols
+- [x] **READ-B: preserve the frozen notebook contract.** Existing protocols
   hash the original `system.ipynb`, `dfnd.ipynb` and comparison notebooks at
   their current paths. Keep those bytes and paths. Add an independently
-  executable **`topography.ipynb` per case**, with a dated current-reading map
+  executable **`public_topography.ipynb` per case**, with a dated current-reading map
   linking system → native study → public receiving → later certificates →
   eligible comparisons. Link it prominently from the case overview and the
   cross-case public page. Its opening makes the original notebooks' dated
@@ -154,7 +161,7 @@ unimplemented physical observations as already available.
   Put a visible date/status on the new entry point and in its downloadable
   bundle guide. Browser presentation around frozen notebook pages may link
   that current entry without changing the frozen notebook source.
-- [ ] **READ-C: add real public inspection.** In the new stage use the actual
+- [x] **READ-C: add real public inspection.** In the new stage use the actual
   public `get_topography(method='dfnd')` route, full-precision frozen input,
   verified radii and parent/source atom correspondence. Show region classes,
   grounded signature versus catalog refinement, child/parent relations,
@@ -162,14 +169,14 @@ unimplemented physical observations as already available.
   separate executed receiving from loading retained reference evidence.
   Physical views that are still absent remain unavailable; do not insert
   proposed field names as if they were implemented public API.
-- [ ] **READ-D: bring the later conclusions into that route.** For the
+- [x] **READ-D: bring the later conclusions into that route.** For the
   tetrahedron, show four physical patches / one native cluster / zero current
   Mouth children, and resolve the historical comparison's radius unknowns with
   the original-reader follow-up. For the closed shell, link/replay the stronger
   0.2 Å cover and the already delivered opening unit. For the opened shell,
   expose the one-patch 1.4 Å certificate and defer the tube consistently.
   Retained historical reports keep their original dispositions and dates.
-- [ ] **READ-E: make presentation portable.** Supply ordinary relative links
+- [x] **READ-E: make presentation portable.** Supply ordinary relative links
   alongside Sphinx-specific downloads, explicit case working directories,
   tested kernel/environment requirements and a fresh-kernel Run All route.
   Publish a runnable study bundle with a manifest, dependency instructions,
@@ -188,13 +195,15 @@ unimplemented physical observations as already available.
   must pass before this publication/closure. Publish a second bounded docs
   checkpoint using WEB-D/E. Close/archive #175 only after its reader acceptance
   criteria pass. Runtime refinement and its scientific issues remain separate.
-- [ ] **READ-G: receive the download outside this checkout, under #175.**
+- [x] **READ-G: receive the download outside this checkout, under #175.**
   Extract each bundle into a fresh temporary directory, verify its manifest,
   links and chosen environment, then execute its entry notebook in a new
   kernel. Record the actual imported TopoMT/dependency identities and working
   directory. Distinguish a deliberately source-bound study from an installed
   package claim. This checks portability separately from execution inside the
   repository; original providers and network jobs remain outside Run All.
+
+Execution: reader sources were frozen at `601b295`; the new notebooks each passed four code cells in fresh kernels inside the checkout and from `/tmp`. The [exact bundle receiving receipt](../evidence/benchlab_reader_receiving_2026_11_10.json) records hashes, environment and resource use. Actual JupyterLab and strict Sphinx rendering were checked. READ-F awaits the exact-source hosted candidate and independently served reader pages/download.
 
 New narrative/evidence belongs in a new versioned directory, for example
 `artifacts/reader_route_v1/`. Its protocol identifies the earlier inputs,
@@ -427,6 +436,4 @@ entire shape catalog.
   history and replace active checkpoint/index links with the delivered records;
   it must not remain an apparently current pending-work list after completion.
 
-**Next executable slice:** WEB-A/B/C, followed by the reviewed baseline's
-WEB-D/E. Then implement READ-A through READ-G as one coherent reader delivery.
-Resume the bounded #151 physical-observation work before the volume sequence.
+**Next executable slice:** publish and independently receive READ-F, then implement the bounded #151 physical-observation contract before the volume sequence.

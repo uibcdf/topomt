@@ -34,7 +34,7 @@ dependencies = [
 # Update the urls once the hosting is set up.
 [project.urls]
 "Source" = "https://github.com/uibcdf/topomt/"
-"Documentation" = "https://uibcdf.org/topomt/"
+"Documentation" = "https://www.uibcdf.org/topomt/"
 
 [project.optional-dependencies]
 alphaspace2 = [

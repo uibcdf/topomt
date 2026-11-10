@@ -46,8 +46,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (1)
+### Active (2)
 
+- [`benchlab_three_case_reader_route.md`](benchlab_three_case_reader_route.md) — [#175](https://github.com/uibcdf/topomt/issues/175) — Bring the completed three-case BenchLab review into a coherent current web and notebook reading route. *(active, measured)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
 ### Partial (5)
@@ -58,10 +59,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 - [`topography_context_and_support.md`](topography_context_and_support.md) — [#60](https://github.com/uibcdf/topomt/issues/60) — Adopt explicit Topography analysis context and spatial support. *(partial, measured)*
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
-### Open (16)
+### Open (15)
 
 - [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
-- [`benchlab_three_case_reader_route.md`](benchlab_three_case_reader_route.md) — [#175](https://github.com/uibcdf/topomt/issues/175) — Bring the completed three-case BenchLab review into a coherent current web and notebook reading route. *(open, measured)*
 - [`castpfold_pending_jobs.md`](castpfold_pending_jobs.md) — [#168](https://github.com/uibcdf/topomt/issues/168) — Resolve the disposition of retained pending CASTpFold synthetic jobs without resubmitting. *(open, inspected)*
 - [`caver_tetrahedron_applicability.md`](caver_tetrahedron_applicability.md) — [#155](https://github.com/uibcdf/topomt/issues/155) — Investigate the retained CAVER four-atom failure and supported input scope. *(open, inspected)*
 - [`dfnd_physical_boundary_refinement.md`](dfnd_physical_boundary_refinement.md) — [#151](https://github.com/uibcdf/topomt/issues/151) — Refine physical boundary patches beyond native whole-face exterior clusters. *(open, reproduced)*

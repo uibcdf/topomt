@@ -1,0 +1,62 @@
+{
+  "schema": "topomt.benchlab.reader-receiving/1",
+  "date": "2026-11-10",
+  "issue": "uibcdf/topomt#175",
+  "bundle_sha256": "4665299eed1510826ce82fdb54499fd468153bf610e7b3f016f049e8e751cf9c",
+  "manifest_files": 248,
+  "working_directory": "/tmp/topomt-benchlab-reader-suimf5wy",
+  "outside_checkout": true,
+  "cleanup": "temporary directory removed after receiving",
+  "source_identity": {
+    "python": "3.14.10",
+    "interpreter": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "topomt_origin": "/fast_data/home/liliana/repos@uibcdf/topomt/topomt/__init__.py",
+    "versions": {
+      "topomt": "0.5.0+387.gcf4d475.dirty",
+      "molsysmt": "0.23.0+687.g2325038e8",
+      "pyunitwizard": "0.29.1+6.gf82b618",
+      "numpy": "2.5.4",
+      "scipy": "1.18.1"
+    },
+    "qualification": "source-bound workspace; no installed support-matrix claim"
+  },
+  "notebooks": [
+    {
+      "notebook": "docs/content/benchlab/synthetic/regular_tetrahedron/public_topography.ipynb",
+      "source_sha256": "a8c8bd882a0a4db6a868699505b48e321459b381a566c159dc751c0ebfaf0e7b",
+      "status": "passed",
+      "fresh_kernel": true,
+      "code_cells": 4,
+      "elapsed_seconds": 3.837,
+      "parent_peak_rss_kib": 78168,
+      "child_peak_rss_kib": 302944,
+      "preserved_benchlab_files": 215
+    },
+    {
+      "notebook": "docs/content/benchlab/synthetic/closed_shell/public_topography.ipynb",
+      "source_sha256": "43762dcdd5c47847064d27083ae48d11e15e04831a61fabbbca4d7160df49cc6",
+      "status": "passed",
+      "fresh_kernel": true,
+      "code_cells": 4,
+      "elapsed_seconds": 5.081,
+      "parent_peak_rss_kib": 78212,
+      "child_peak_rss_kib": 318980,
+      "preserved_benchlab_files": 215
+    },
+    {
+      "notebook": "docs/content/benchlab/synthetic/shell_with_opening/public_topography.ipynb",
+      "source_sha256": "cee88672d2d479ddc0d6fe005107278f6205cee1c90f61b44de2d0114a6da70a",
+      "status": "passed",
+      "fresh_kernel": true,
+      "code_cells": 4,
+      "elapsed_seconds": 4.718,
+      "parent_peak_rss_kib": 78164,
+      "child_peak_rss_kib": 317984,
+      "preserved_benchlab_files": 215
+    }
+  ],
+  "scope": "Source-bound development environment; no installed package or support-matrix claim",
+  "network_jobs": false,
+  "preceding_bundle_sha256": "be518f491d5d0b4bfd1b060803bd7d6cc09210e3afb9cc75fd572cfd2fb9016d",
+  "final_packaging_check": "Only mutable case-overview Markdown tables changed after kernel capture; final ZIP manifest verified outside checkout and every executed notebook byte matched the preceding three fresh-kernel receipts."
+}

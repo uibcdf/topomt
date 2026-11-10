@@ -1,0 +1,15 @@
+{
+  "notebook": "docs/content/benchlab/synthetic/regular_tetrahedron/public_topography.ipynb",
+  "source_sha256": "01df4715dbd5f1ae49638277fa06cdfc665efd83384ed55153e731dda637aa39",
+  "status": "passed",
+  "fresh_kernel": true,
+  "code_cells": 4,
+  "elapsed_seconds": 3.848,
+  "parent_peak_rss_kib": 78156,
+  "child_peak_rss_kib": 302388,
+  "preserved_benchlab_files": 215,
+  "capture_source_base": "601b295",
+  "correction_protocol": "synthetic/reader_capture_correction.json",
+  "retrospective_scope": "Public reader qualification; no new independent geometry or scientific-policy fix",
+  "executed_notebook_sha256": "a8c8bd882a0a4db6a868699505b48e321459b381a566c159dc751c0ebfaf0e7b"
+}

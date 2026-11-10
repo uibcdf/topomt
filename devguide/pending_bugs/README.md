@@ -7,7 +7,7 @@ Read [the reporting protocol](../reporting_protocol.md) before filing.
 
 ### Active (1)
 
-- [`documentation_public_identity.md`](documentation_public_identity.md) — [#18](https://github.com/uibcdf/topomt/issues/18) — Publish verified TopoMT documentation instead of the old PocketMT site. *(active, measured)*
+- [`sphinx_diagnostics.md`](sphinx_diagnostics.md) — [#64](https://github.com/uibcdf/topomt/issues/64) — Resolve existing whole-site markup, navigation and diagram-runtime diagnostics. *(active, measured)*
 
 ### Partial (1)
 
