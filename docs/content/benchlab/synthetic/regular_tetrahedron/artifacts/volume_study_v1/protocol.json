@@ -1,0 +1,188 @@
+{
+  "schema": "topomt.benchlab.volume-domain-protocol/1",
+  "date": "2026-11-10",
+  "issue": "uibcdf/topomt#75",
+  "case": "regular_tetrahedron",
+  "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+  "common_protocol_sha256": "00631fbe7cc6ad42401b41ce92452d23bebe87ee9d29b540bf569566e5d0fd88",
+  "source_revision": "1ae695882b04921084e08de69adb06f621512074",
+  "source_atom_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "domains": [
+    {
+      "id": "1.2A_resident",
+      "probe_angstroms": 1.2,
+      "region": "resident",
+      "native_component_id_at_freeze": "WET-1",
+      "source_id_at_freeze": "input-d572129369fd4f10a03ee6b710192849",
+      "result_key_at_freeze": "result-300ea2bef388ce41d9baec077523ffa608eca463604664b69be0dcb7d8ac530e",
+      "tetrahedron_ids_at_freeze": [
+        0
+      ],
+      "tetrahedra_source_atom_indices": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "query_at_freeze": {
+        "probe_radius": 0.11999999999999998,
+        "residence_tolerance": 0.0,
+        "permeability_tolerance": 0.0,
+        "transit_policy": "with_connectors",
+        "gate_intrusion_policy": "flag_only",
+        "dry_adjacency": "face",
+        "physical_boundary": true,
+        "boundary_tolerance": 1e-07,
+        "boundary_max_atoms": 512,
+        "boundary_max_faces": 512,
+        "boundary_max_events": 100000,
+        "boundary_max_path_tests": 4096,
+        "boundary_max_associations": 4096
+      }
+    },
+    {
+      "id": "1.2A_transit",
+      "probe_angstroms": 1.2,
+      "region": "transit",
+      "native_component_id_at_freeze": "WET-1",
+      "source_id_at_freeze": "input-d572129369fd4f10a03ee6b710192849",
+      "result_key_at_freeze": "result-300ea2bef388ce41d9baec077523ffa608eca463604664b69be0dcb7d8ac530e",
+      "tetrahedron_ids_at_freeze": [
+        0
+      ],
+      "tetrahedra_source_atom_indices": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "query_at_freeze": {
+        "probe_radius": 0.11999999999999998,
+        "residence_tolerance": 0.0,
+        "permeability_tolerance": 0.0,
+        "transit_policy": "with_connectors",
+        "gate_intrusion_policy": "flag_only",
+        "dry_adjacency": "face",
+        "physical_boundary": true,
+        "boundary_tolerance": 1e-07,
+        "boundary_max_atoms": 512,
+        "boundary_max_faces": 512,
+        "boundary_max_events": 100000,
+        "boundary_max_path_tests": 4096,
+        "boundary_max_associations": 4096
+      }
+    },
+    {
+      "id": "1.4A_resident",
+      "probe_angstroms": 1.4,
+      "region": "resident",
+      "native_component_id_at_freeze": "WET-1",
+      "source_id_at_freeze": "input-0f8478e422dc4e76a1e490f152dc9e89",
+      "result_key_at_freeze": "result-775509d716112199f65ac0fb7a2de0b2be5b7604f07e2900025967afae5389b9",
+      "tetrahedron_ids_at_freeze": [
+        0
+      ],
+      "tetrahedra_source_atom_indices": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "query_at_freeze": {
+        "probe_radius": 0.13999999999999999,
+        "residence_tolerance": 0.0,
+        "permeability_tolerance": 0.0,
+        "transit_policy": "with_connectors",
+        "gate_intrusion_policy": "flag_only",
+        "dry_adjacency": "face",
+        "physical_boundary": true,
+        "boundary_tolerance": 1e-07,
+        "boundary_max_atoms": 512,
+        "boundary_max_faces": 512,
+        "boundary_max_events": 100000,
+        "boundary_max_path_tests": 4096,
+        "boundary_max_associations": 4096
+      }
+    },
+    {
+      "id": "1.4A_transit",
+      "probe_angstroms": 1.4,
+      "region": "transit",
+      "native_component_id_at_freeze": "WET-1",
+      "source_id_at_freeze": "input-0f8478e422dc4e76a1e490f152dc9e89",
+      "result_key_at_freeze": "result-775509d716112199f65ac0fb7a2de0b2be5b7604f07e2900025967afae5389b9",
+      "tetrahedron_ids_at_freeze": [
+        0
+      ],
+      "tetrahedra_source_atom_indices": [
+        [
+          0,
+          1,
+          2,
+          3
+        ]
+      ],
+      "query_at_freeze": {
+        "probe_radius": 0.13999999999999999,
+        "residence_tolerance": 0.0,
+        "permeability_tolerance": 0.0,
+        "transit_policy": "with_connectors",
+        "gate_intrusion_policy": "flag_only",
+        "dry_adjacency": "face",
+        "physical_boundary": true,
+        "boundary_tolerance": 1e-07,
+        "boundary_max_atoms": 512,
+        "boundary_max_faces": 512,
+        "boundary_max_events": 100000,
+        "boundary_max_path_tests": 4096,
+        "boundary_max_associations": 4096
+      }
+    }
+  ],
+  "reference_controls": {
+    "domain_freeze": "Freeze actual resident/transit cells and atom/source correspondence before reference evaluation. Keep common parent hull for shell cap-deletion comparison.",
+    "method": "Independent IID Cartesian bounding-box sampling with direct simplex halfspace membership and all-atom exclusion; Hoeffding two-sided finite-sample bounds, distinct from production simplex sampler and CP interval.",
+    "n_samples": 524288,
+    "seed": 82371,
+    "confidence_level": 0.999,
+    "maximum_batch_size": 4096,
+    "acceptance": "Reference half-width <=2.5% of declared carrier volume and production95% interval overlaps reference99.9% interval; analytic tetrahedron target remains stronger.",
+    "tetrahedron": "Independently check all six equal edges, radius-sector nonoverlap and opposite-face truncation before subtracting four solid-angle sectors. Expanded radii overlap and require the independent union exclusion reference.",
+    "shell_pair": "Common parent hull and identical sample points for original/deleted-cap atom unions, both bare and1.4\u00c5-expanded. Report nonnegative freed volume with uncertainty, not exterior-accessible volume.",
+    "resources": {
+      "cpu_count": 1,
+      "numerical_threads": 1,
+      "address_space_gib": 6,
+      "cpu_seconds_per_pilot": 120
+    }
+  },
+  "native_controls": {
+    "method": "mc",
+    "n_samples": 40000,
+    "seed": 0,
+    "confidence_level": 0.95
+  },
+  "observables": [
+    "carrier",
+    "bare_empty",
+    "probe_center"
+  ],
+  "scope": "Frozen native integration supports, not independent truth for global free-space membership; no global accessible-volume claim",
+  "preparation_resources": {
+    "wall_seconds": 1.733,
+    "peak_rss_kib": 273312,
+    "single_cpu": true,
+    "numerical_threads": 1
+  }
+}

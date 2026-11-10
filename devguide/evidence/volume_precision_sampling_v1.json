@@ -1,0 +1,2043 @@
+{
+  "schema": "topomt.benchlab.volume-precision-receiving/1",
+  "issue": "uibcdf/topomt#75",
+  "source_revision": "1ae695882b04921084e08de69adb06f621512074",
+  "production_fix_revision": "b7b5a60",
+  "protocol_sha256": "00631fbe7cc6ad42401b41ce92452d23bebe87ee9d29b540bf569566e5d0fd88",
+  "length_unit": "nm",
+  "volume_unit": "nm**3",
+  "coverage": {
+    "nominal_confidence_level": 0.95,
+    "analytic_volume": 0.16247787646188028,
+    "n_samples_per_seed": 2048,
+    "seed_count": 128,
+    "covered_seed_count": 125,
+    "observed_coverage_fraction": 0.9765625,
+    "predeclared_minimum_fraction": 0.9,
+    "target_met": true,
+    "rows": [
+      {
+        "seed": 0,
+        "n_empty": 1988,
+        "volume": 0.16178385416666666,
+        "interval": [
+          0.1604080746467616,
+          0.16292842736757032
+        ],
+        "error": 0.001375779519905057,
+        "covered": true
+      },
+      {
+        "seed": 1,
+        "n_empty": 1992,
+        "volume": 0.162109375,
+        "interval": [
+          0.16077289716818718,
+          0.16321336630966332
+        ],
+        "error": 0.0013364778318128157,
+        "covered": true
+      },
+      {
+        "seed": 2,
+        "n_empty": 1996,
+        "volume": 0.16243489583333331,
+        "interval": [
+          0.16113927531493044,
+          0.1634967108007989
+        ],
+        "error": 0.0012956205184028735,
+        "covered": true
+      },
+      {
+        "seed": 3,
+        "n_empty": 1991,
+        "volume": 0.16202799479166666,
+        "interval": [
+          0.16068155187103886,
+          0.16314227461978598
+        ],
+        "error": 0.0013464429206277995,
+        "covered": true
+      },
+      {
+        "seed": 4,
+        "n_empty": 2003,
+        "volume": 0.16300455729166666,
+        "interval": [
+          0.16178472790676424,
+          0.1639881548151998
+        ],
+        "error": 0.001219829384902421,
+        "covered": true
+      },
+      {
+        "seed": 5,
+        "n_empty": 2006,
+        "volume": 0.16324869791666666,
+        "interval": [
+          0.1620632698110543,
+          0.16419679619495242
+        ],
+        "error": 0.0011854281056123683,
+        "covered": true
+      },
+      {
+        "seed": 6,
+        "n_empty": 1990,
+        "volume": 0.16194661458333331,
+        "interval": [
+          0.16059030122577236,
+          0.16307108596205758
+        ],
+        "error": 0.001356313357560951,
+        "covered": true
+      },
+      {
+        "seed": 7,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 8,
+        "n_empty": 1982,
+        "volume": 0.16129557291666666,
+        "interval": [
+          0.15986344230837146,
+          0.16249835758737524
+        ],
+        "error": 0.0014321306082951957,
+        "covered": true
+      },
+      {
+        "seed": 9,
+        "n_empty": 1988,
+        "volume": 0.16178385416666666,
+        "interval": [
+          0.1604080746467616,
+          0.16292842736757032
+        ],
+        "error": 0.001375779519905057,
+        "covered": true
+      },
+      {
+        "seed": 10,
+        "n_empty": 1986,
+        "volume": 0.16162109375,
+        "interval": [
+          0.1602261998776239,
+          0.16278540878735354
+        ],
+        "error": 0.0013948938723760962,
+        "covered": true
+      },
+      {
+        "seed": 11,
+        "n_empty": 1990,
+        "volume": 0.16194661458333331,
+        "interval": [
+          0.16059030122577236,
+          0.16307108596205758
+        ],
+        "error": 0.001356313357560951,
+        "covered": true
+      },
+      {
+        "seed": 12,
+        "n_empty": 1997,
+        "volume": 0.16251627604166666,
+        "interval": [
+          0.1612311327329493,
+          0.1635672771142806
+        ],
+        "error": 0.0012851433087173458,
+        "covered": true
+      },
+      {
+        "seed": 13,
+        "n_empty": 1999,
+        "volume": 0.16267903645833331,
+        "interval": [
+          0.16141518397894222,
+          0.16370806406053917
+        ],
+        "error": 0.0012638524793910921,
+        "covered": true
+      },
+      {
+        "seed": 14,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 15,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 16,
+        "n_empty": 2004,
+        "volume": 0.1630859375,
+        "interval": [
+          0.1618774362897774,
+          0.16405784530435438
+        ],
+        "error": 0.00120850121022259,
+        "covered": true
+      },
+      {
+        "seed": 17,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      },
+      {
+        "seed": 18,
+        "n_empty": 2003,
+        "volume": 0.16300455729166666,
+        "interval": [
+          0.16178472790676424,
+          0.1639881548151998
+        ],
+        "error": 0.001219829384902421,
+        "covered": true
+      },
+      {
+        "seed": 19,
+        "n_empty": 1992,
+        "volume": 0.162109375,
+        "interval": [
+          0.16077289716818718,
+          0.16321336630966332
+        ],
+        "error": 0.0013364778318128157,
+        "covered": true
+      },
+      {
+        "seed": 20,
+        "n_empty": 2006,
+        "volume": 0.16324869791666666,
+        "interval": [
+          0.1620632698110543,
+          0.16419679619495242
+        ],
+        "error": 0.0011854281056123683,
+        "covered": true
+      },
+      {
+        "seed": 21,
+        "n_empty": 1995,
+        "volume": 0.162353515625,
+        "interval": [
+          0.16104752590333934,
+          0.16342603358184665
+        ],
+        "error": 0.0013059897216606553,
+        "covered": true
+      },
+      {
+        "seed": 22,
+        "n_empty": 1988,
+        "volume": 0.16178385416666666,
+        "interval": [
+          0.1604080746467616,
+          0.16292842736757032
+        ],
+        "error": 0.001375779519905057,
+        "covered": true
+      },
+      {
+        "seed": 23,
+        "n_empty": 1981,
+        "volume": 0.16121419270833331,
+        "interval": [
+          0.1597729489871475,
+          0.16242639451390356
+        ],
+        "error": 0.0014412437211858142,
+        "covered": false
+      },
+      {
+        "seed": 24,
+        "n_empty": 2010,
+        "volume": 0.16357421875,
+        "interval": [
+          0.1624367434076999,
+          0.16447283026325116
+        ],
+        "error": 0.0011374753423001038,
+        "covered": true
+      },
+      {
+        "seed": 25,
+        "n_empty": 1988,
+        "volume": 0.16178385416666666,
+        "interval": [
+          0.1604080746467616,
+          0.16292842736757032
+        ],
+        "error": 0.001375779519905057,
+        "covered": true
+      },
+      {
+        "seed": 26,
+        "n_empty": 1998,
+        "volume": 0.16259765625,
+        "interval": [
+          0.16132310121739518,
+          0.16363772932134368
+        ],
+        "error": 0.0012745550326048183,
+        "covered": true
+      },
+      {
+        "seed": 27,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      },
+      {
+        "seed": 28,
+        "n_empty": 1999,
+        "volume": 0.16267903645833331,
+        "interval": [
+          0.16141518397894222,
+          0.16370806406053917
+        ],
+        "error": 0.0012638524793910921,
+        "covered": true
+      },
+      {
+        "seed": 29,
+        "n_empty": 1999,
+        "volume": 0.16267903645833331,
+        "interval": [
+          0.16141518397894222,
+          0.16370806406053917
+        ],
+        "error": 0.0012638524793910921,
+        "covered": true
+      },
+      {
+        "seed": 30,
+        "n_empty": 1997,
+        "volume": 0.16251627604166666,
+        "interval": [
+          0.1612311327329493,
+          0.1635672771142806
+        ],
+        "error": 0.0012851433087173458,
+        "covered": true
+      },
+      {
+        "seed": 31,
+        "n_empty": 2003,
+        "volume": 0.16300455729166666,
+        "interval": [
+          0.16178472790676424,
+          0.1639881548151998
+        ],
+        "error": 0.001219829384902421,
+        "covered": true
+      },
+      {
+        "seed": 32,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 33,
+        "n_empty": 2008,
+        "volume": 0.16341145833333331,
+        "interval": [
+          0.16224969122972382,
+          0.16433513962688087
+        ],
+        "error": 0.00116176710360949,
+        "covered": true
+      },
+      {
+        "seed": 34,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      },
+      {
+        "seed": 35,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 36,
+        "n_empty": 1982,
+        "volume": 0.16129557291666666,
+        "interval": [
+          0.15986344230837146,
+          0.16249835758737524
+        ],
+        "error": 0.0014321306082951957,
+        "covered": true
+      },
+      {
+        "seed": 37,
+        "n_empty": 1988,
+        "volume": 0.16178385416666666,
+        "interval": [
+          0.1604080746467616,
+          0.16292842736757032
+        ],
+        "error": 0.001375779519905057,
+        "covered": true
+      },
+      {
+        "seed": 38,
+        "n_empty": 1985,
+        "volume": 0.16153971354166666,
+        "interval": [
+          0.16013538931787347,
+          0.1627137698063241
+        ],
+        "error": 0.0014043242237931908,
+        "covered": true
+      },
+      {
+        "seed": 39,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      },
+      {
+        "seed": 40,
+        "n_empty": 1991,
+        "volume": 0.16202799479166666,
+        "interval": [
+          0.16068155187103886,
+          0.16314227461978598
+        ],
+        "error": 0.0013464429206277995,
+        "covered": true
+      },
+      {
+        "seed": 41,
+        "n_empty": 1996,
+        "volume": 0.16243489583333331,
+        "interval": [
+          0.16113927531493044,
+          0.1634967108007989
+        ],
+        "error": 0.0012956205184028735,
+        "covered": true
+      },
+      {
+        "seed": 42,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 43,
+        "n_empty": 2001,
+        "volume": 0.162841796875,
+        "interval": [
+          0.1615997059941485,
+          0.16384836681678516
+        ],
+        "error": 0.001242090880851504,
+        "covered": true
+      },
+      {
+        "seed": 44,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      },
+      {
+        "seed": 45,
+        "n_empty": 1998,
+        "volume": 0.16259765625,
+        "interval": [
+          0.16132310121739518,
+          0.16363772932134368
+        ],
+        "error": 0.0012745550326048183,
+        "covered": true
+      },
+      {
+        "seed": 46,
+        "n_empty": 1990,
+        "volume": 0.16194661458333331,
+        "interval": [
+          0.16059030122577236,
+          0.16307108596205758
+        ],
+        "error": 0.001356313357560951,
+        "covered": true
+      },
+      {
+        "seed": 47,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      },
+      {
+        "seed": 48,
+        "n_empty": 2006,
+        "volume": 0.16324869791666666,
+        "interval": [
+          0.1620632698110543,
+          0.16419679619495242
+        ],
+        "error": 0.0011854281056123683,
+        "covered": true
+      },
+      {
+        "seed": 49,
+        "n_empty": 1995,
+        "volume": 0.162353515625,
+        "interval": [
+          0.16104752590333934,
+          0.16342603358184665
+        ],
+        "error": 0.0013059897216606553,
+        "covered": true
+      },
+      {
+        "seed": 50,
+        "n_empty": 1996,
+        "volume": 0.16243489583333331,
+        "interval": [
+          0.16113927531493044,
+          0.1634967108007989
+        ],
+        "error": 0.0012956205184028735,
+        "covered": true
+      },
+      {
+        "seed": 51,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 52,
+        "n_empty": 1992,
+        "volume": 0.162109375,
+        "interval": [
+          0.16077289716818718,
+          0.16321336630966332
+        ],
+        "error": 0.0013364778318128157,
+        "covered": true
+      },
+      {
+        "seed": 53,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 54,
+        "n_empty": 2001,
+        "volume": 0.162841796875,
+        "interval": [
+          0.1615997059941485,
+          0.16384836681678516
+        ],
+        "error": 0.001242090880851504,
+        "covered": true
+      },
+      {
+        "seed": 55,
+        "n_empty": 1997,
+        "volume": 0.16251627604166666,
+        "interval": [
+          0.1612311327329493,
+          0.1635672771142806
+        ],
+        "error": 0.0012851433087173458,
+        "covered": true
+      },
+      {
+        "seed": 56,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 57,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 58,
+        "n_empty": 1990,
+        "volume": 0.16194661458333331,
+        "interval": [
+          0.16059030122577236,
+          0.16307108596205758
+        ],
+        "error": 0.001356313357560951,
+        "covered": true
+      },
+      {
+        "seed": 59,
+        "n_empty": 2001,
+        "volume": 0.162841796875,
+        "interval": [
+          0.1615997059941485,
+          0.16384836681678516
+        ],
+        "error": 0.001242090880851504,
+        "covered": true
+      },
+      {
+        "seed": 60,
+        "n_empty": 2003,
+        "volume": 0.16300455729166666,
+        "interval": [
+          0.16178472790676424,
+          0.1639881548151998
+        ],
+        "error": 0.001219829384902421,
+        "covered": true
+      },
+      {
+        "seed": 61,
+        "n_empty": 1992,
+        "volume": 0.162109375,
+        "interval": [
+          0.16077289716818718,
+          0.16321336630966332
+        ],
+        "error": 0.0013364778318128157,
+        "covered": true
+      },
+      {
+        "seed": 62,
+        "n_empty": 1999,
+        "volume": 0.16267903645833331,
+        "interval": [
+          0.16141518397894222,
+          0.16370806406053917
+        ],
+        "error": 0.0012638524793910921,
+        "covered": true
+      },
+      {
+        "seed": 63,
+        "n_empty": 2006,
+        "volume": 0.16324869791666666,
+        "interval": [
+          0.1620632698110543,
+          0.16419679619495242
+        ],
+        "error": 0.0011854281056123683,
+        "covered": true
+      },
+      {
+        "seed": 64,
+        "n_empty": 2003,
+        "volume": 0.16300455729166666,
+        "interval": [
+          0.16178472790676424,
+          0.1639881548151998
+        ],
+        "error": 0.001219829384902421,
+        "covered": true
+      },
+      {
+        "seed": 65,
+        "n_empty": 2003,
+        "volume": 0.16300455729166666,
+        "interval": [
+          0.16178472790676424,
+          0.1639881548151998
+        ],
+        "error": 0.001219829384902421,
+        "covered": true
+      },
+      {
+        "seed": 66,
+        "n_empty": 1984,
+        "volume": 0.16145833333333331,
+        "interval": [
+          0.16004466074507762,
+          0.16264204702554177
+        ],
+        "error": 0.0014136725882556989,
+        "covered": true
+      },
+      {
+        "seed": 67,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 68,
+        "n_empty": 1987,
+        "volume": 0.16170247395833331,
+        "interval": [
+          0.1603170943273023,
+          0.16285696199323788
+        ],
+        "error": 0.0013853796310310251,
+        "covered": true
+      },
+      {
+        "seed": 69,
+        "n_empty": 1992,
+        "volume": 0.162109375,
+        "interval": [
+          0.16077289716818718,
+          0.16321336630966332
+        ],
+        "error": 0.0013364778318128157,
+        "covered": true
+      },
+      {
+        "seed": 70,
+        "n_empty": 1995,
+        "volume": 0.162353515625,
+        "interval": [
+          0.16104752590333934,
+          0.16342603358184665
+        ],
+        "error": 0.0013059897216606553,
+        "covered": true
+      },
+      {
+        "seed": 71,
+        "n_empty": 1997,
+        "volume": 0.16251627604166666,
+        "interval": [
+          0.1612311327329493,
+          0.1635672771142806
+        ],
+        "error": 0.0012851433087173458,
+        "covered": true
+      },
+      {
+        "seed": 72,
+        "n_empty": 1982,
+        "volume": 0.16129557291666666,
+        "interval": [
+          0.15986344230837146,
+          0.16249835758737524
+        ],
+        "error": 0.0014321306082951957,
+        "covered": true
+      },
+      {
+        "seed": 73,
+        "n_empty": 1987,
+        "volume": 0.16170247395833331,
+        "interval": [
+          0.1603170943273023,
+          0.16285696199323788
+        ],
+        "error": 0.0013853796310310251,
+        "covered": true
+      },
+      {
+        "seed": 74,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      },
+      {
+        "seed": 75,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 76,
+        "n_empty": 1983,
+        "volume": 0.161376953125,
+        "interval": [
+          0.1599540123290154,
+          0.16257024234379508
+        ],
+        "error": 0.0014229407959845952,
+        "covered": true
+      },
+      {
+        "seed": 77,
+        "n_empty": 1997,
+        "volume": 0.16251627604166666,
+        "interval": [
+          0.1612311327329493,
+          0.1635672771142806
+        ],
+        "error": 0.0012851433087173458,
+        "covered": true
+      },
+      {
+        "seed": 78,
+        "n_empty": 1987,
+        "volume": 0.16170247395833331,
+        "interval": [
+          0.1603170943273023,
+          0.16285696199323788
+        ],
+        "error": 0.0013853796310310251,
+        "covered": true
+      },
+      {
+        "seed": 79,
+        "n_empty": 2004,
+        "volume": 0.1630859375,
+        "interval": [
+          0.1618774362897774,
+          0.16405784530435438
+        ],
+        "error": 0.00120850121022259,
+        "covered": true
+      },
+      {
+        "seed": 80,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 81,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      },
+      {
+        "seed": 82,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 83,
+        "n_empty": 2004,
+        "volume": 0.1630859375,
+        "interval": [
+          0.1618774362897774,
+          0.16405784530435438
+        ],
+        "error": 0.00120850121022259,
+        "covered": true
+      },
+      {
+        "seed": 84,
+        "n_empty": 1990,
+        "volume": 0.16194661458333331,
+        "interval": [
+          0.16059030122577236,
+          0.16307108596205758
+        ],
+        "error": 0.001356313357560951,
+        "covered": true
+      },
+      {
+        "seed": 85,
+        "n_empty": 2004,
+        "volume": 0.1630859375,
+        "interval": [
+          0.1618774362897774,
+          0.16405784530435438
+        ],
+        "error": 0.00120850121022259,
+        "covered": true
+      },
+      {
+        "seed": 86,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 87,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 88,
+        "n_empty": 1995,
+        "volume": 0.162353515625,
+        "interval": [
+          0.16104752590333934,
+          0.16342603358184665
+        ],
+        "error": 0.0013059897216606553,
+        "covered": true
+      },
+      {
+        "seed": 89,
+        "n_empty": 2001,
+        "volume": 0.162841796875,
+        "interval": [
+          0.1615997059941485,
+          0.16384836681678516
+        ],
+        "error": 0.001242090880851504,
+        "covered": true
+      },
+      {
+        "seed": 90,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 91,
+        "n_empty": 1989,
+        "volume": 0.161865234375,
+        "interval": [
+          0.16049914289716863,
+          0.16299980276818646
+        ],
+        "error": 0.0013660914778313715,
+        "covered": true
+      },
+      {
+        "seed": 92,
+        "n_empty": 1992,
+        "volume": 0.162109375,
+        "interval": [
+          0.16077289716818718,
+          0.16321336630966332
+        ],
+        "error": 0.0013364778318128157,
+        "covered": true
+      },
+      {
+        "seed": 93,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 94,
+        "n_empty": 1984,
+        "volume": 0.16145833333333331,
+        "interval": [
+          0.16004466074507762,
+          0.16264204702554177
+        ],
+        "error": 0.0014136725882556989,
+        "covered": true
+      },
+      {
+        "seed": 95,
+        "n_empty": 1990,
+        "volume": 0.16194661458333331,
+        "interval": [
+          0.16059030122577236,
+          0.16307108596205758
+        ],
+        "error": 0.001356313357560951,
+        "covered": true
+      },
+      {
+        "seed": 96,
+        "n_empty": 1984,
+        "volume": 0.16145833333333331,
+        "interval": [
+          0.16004466074507762,
+          0.16264204702554177
+        ],
+        "error": 0.0014136725882556989,
+        "covered": true
+      },
+      {
+        "seed": 97,
+        "n_empty": 1988,
+        "volume": 0.16178385416666666,
+        "interval": [
+          0.1604080746467616,
+          0.16292842736757032
+        ],
+        "error": 0.001375779519905057,
+        "covered": true
+      },
+      {
+        "seed": 98,
+        "n_empty": 2004,
+        "volume": 0.1630859375,
+        "interval": [
+          0.1618774362897774,
+          0.16405784530435438
+        ],
+        "error": 0.00120850121022259,
+        "covered": true
+      },
+      {
+        "seed": 99,
+        "n_empty": 1987,
+        "volume": 0.16170247395833331,
+        "interval": [
+          0.1603170943273023,
+          0.16285696199323788
+        ],
+        "error": 0.0013853796310310251,
+        "covered": true
+      },
+      {
+        "seed": 100,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 101,
+        "n_empty": 1982,
+        "volume": 0.16129557291666666,
+        "interval": [
+          0.15986344230837146,
+          0.16249835758737524
+        ],
+        "error": 0.0014321306082951957,
+        "covered": true
+      },
+      {
+        "seed": 102,
+        "n_empty": 1992,
+        "volume": 0.162109375,
+        "interval": [
+          0.16077289716818718,
+          0.16321336630966332
+        ],
+        "error": 0.0013364778318128157,
+        "covered": true
+      },
+      {
+        "seed": 103,
+        "n_empty": 1998,
+        "volume": 0.16259765625,
+        "interval": [
+          0.16132310121739518,
+          0.16363772932134368
+        ],
+        "error": 0.0012745550326048183,
+        "covered": true
+      },
+      {
+        "seed": 104,
+        "n_empty": 1999,
+        "volume": 0.16267903645833331,
+        "interval": [
+          0.16141518397894222,
+          0.16370806406053917
+        ],
+        "error": 0.0012638524793910921,
+        "covered": true
+      },
+      {
+        "seed": 105,
+        "n_empty": 2005,
+        "volume": 0.16316731770833331,
+        "interval": [
+          0.16197028204888336,
+          0.16412739405715557
+        ],
+        "error": 0.001197035659449952,
+        "covered": true
+      },
+      {
+        "seed": 106,
+        "n_empty": 2000,
+        "volume": 0.16276041666666666,
+        "interval": [
+          0.16150738438956502,
+          0.16377827779839155
+        ],
+        "error": 0.0012530322771016345,
+        "covered": true
+      },
+      {
+        "seed": 107,
+        "n_empty": 1989,
+        "volume": 0.161865234375,
+        "interval": [
+          0.16049914289716863,
+          0.16299980276818646
+        ],
+        "error": 0.0013660914778313715,
+        "covered": true
+      },
+      {
+        "seed": 108,
+        "n_empty": 2002,
+        "volume": 0.16292317708333331,
+        "interval": [
+          0.1616921525231958,
+          0.1639183271991358
+        ],
+        "error": 0.001231024560137517,
+        "covered": true
+      },
+      {
+        "seed": 109,
+        "n_empty": 1986,
+        "volume": 0.16162109375,
+        "interval": [
+          0.1602261998776239,
+          0.16278540878735354
+        ],
+        "error": 0.0013948938723760962,
+        "covered": true
+      },
+      {
+        "seed": 110,
+        "n_empty": 1999,
+        "volume": 0.16267903645833331,
+        "interval": [
+          0.16141518397894222,
+          0.16370806406053917
+        ],
+        "error": 0.0012638524793910921,
+        "covered": true
+      },
+      {
+        "seed": 111,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 112,
+        "n_empty": 2011,
+        "volume": 0.16365559895833331,
+        "interval": [
+          0.16253052092432904,
+          0.16454141499294994
+        ],
+        "error": 0.0011250780340042732,
+        "covered": false
+      },
+      {
+        "seed": 113,
+        "n_empty": 2002,
+        "volume": 0.16292317708333331,
+        "interval": [
+          0.1616921525231958,
+          0.1639183271991358
+        ],
+        "error": 0.001231024560137517,
+        "covered": true
+      },
+      {
+        "seed": 114,
+        "n_empty": 1989,
+        "volume": 0.161865234375,
+        "interval": [
+          0.16049914289716863,
+          0.16299980276818646
+        ],
+        "error": 0.0013660914778313715,
+        "covered": true
+      },
+      {
+        "seed": 115,
+        "n_empty": 1988,
+        "volume": 0.16178385416666666,
+        "interval": [
+          0.1604080746467616,
+          0.16292842736757032
+        ],
+        "error": 0.001375779519905057,
+        "covered": true
+      },
+      {
+        "seed": 116,
+        "n_empty": 1995,
+        "volume": 0.162353515625,
+        "interval": [
+          0.16104752590333934,
+          0.16342603358184665
+        ],
+        "error": 0.0013059897216606553,
+        "covered": true
+      },
+      {
+        "seed": 117,
+        "n_empty": 1999,
+        "volume": 0.16267903645833331,
+        "interval": [
+          0.16141518397894222,
+          0.16370806406053917
+        ],
+        "error": 0.0012638524793910921,
+        "covered": true
+      },
+      {
+        "seed": 118,
+        "n_empty": 1994,
+        "volume": 0.16227213541666666,
+        "interval": [
+          0.16095588157911023,
+          0.16335524850842226
+        ],
+        "error": 0.0013162538375564303,
+        "covered": true
+      },
+      {
+        "seed": 119,
+        "n_empty": 1998,
+        "volume": 0.16259765625,
+        "interval": [
+          0.16132310121739518,
+          0.16363772932134368
+        ],
+        "error": 0.0012745550326048183,
+        "covered": true
+      },
+      {
+        "seed": 120,
+        "n_empty": 1997,
+        "volume": 0.16251627604166666,
+        "interval": [
+          0.1612311327329493,
+          0.1635672771142806
+        ],
+        "error": 0.0012851433087173458,
+        "covered": true
+      },
+      {
+        "seed": 121,
+        "n_empty": 1986,
+        "volume": 0.16162109375,
+        "interval": [
+          0.1602261998776239,
+          0.16278540878735354
+        ],
+        "error": 0.0013948938723760962,
+        "covered": true
+      },
+      {
+        "seed": 122,
+        "n_empty": 1985,
+        "volume": 0.16153971354166666,
+        "interval": [
+          0.16013538931787347,
+          0.1627137698063241
+        ],
+        "error": 0.0014043242237931908,
+        "covered": true
+      },
+      {
+        "seed": 123,
+        "n_empty": 1991,
+        "volume": 0.16202799479166666,
+        "interval": [
+          0.16068155187103886,
+          0.16314227461978598
+        ],
+        "error": 0.0013464429206277995,
+        "covered": true
+      },
+      {
+        "seed": 124,
+        "n_empty": 1991,
+        "volume": 0.16202799479166666,
+        "interval": [
+          0.16068155187103886,
+          0.16314227461978598
+        ],
+        "error": 0.0013464429206277995,
+        "covered": true
+      },
+      {
+        "seed": 125,
+        "n_empty": 2001,
+        "volume": 0.162841796875,
+        "interval": [
+          0.1615997059941485,
+          0.16384836681678516
+        ],
+        "error": 0.001242090880851504,
+        "covered": true
+      },
+      {
+        "seed": 126,
+        "n_empty": 2011,
+        "volume": 0.16365559895833331,
+        "interval": [
+          0.16253052092432904,
+          0.16454141499294994
+        ],
+        "error": 0.0011250780340042732,
+        "covered": false
+      },
+      {
+        "seed": 127,
+        "n_empty": 1993,
+        "volume": 0.16219075520833331,
+        "interval": [
+          0.16086433955516538,
+          0.1632843584912494
+        ],
+        "error": 0.0013264156531679339,
+        "covered": true
+      }
+    ],
+    "scope": "Bounded predeclared diagnostic, not a proof of all finite-sample coverage or all geometries"
+  },
+  "quadrature": {
+    "unit_interior_sphere": {
+      "volume_nm3": 0.1624778572018284,
+      "reference_nm3": 0.16247787646188028,
+      "actual_absolute_error_nm3": 1.926005188668256e-08,
+      "accepted_absolute_error_nm3": 1.6666666666666667e-05,
+      "target_met": true,
+      "status": "converged",
+      "error_kind": "successive_order_difference",
+      "convergence_diagnostic_nm3": 9.81784673531605e-07,
+      "history": [
+        [
+          12,
+          0.16247674509070278
+        ],
+        [
+          24,
+          0.16247772687537632
+        ],
+        [
+          48,
+          0.1624778572018284
+        ]
+      ]
+    },
+    "frozen_regular_tetrahedron_bare": {
+      "volume_nm3": 0.013934137995114743,
+      "reference_nm3": 0.01393403451698623,
+      "actual_absolute_error_nm3": 1.0347812851377314e-07,
+      "accepted_absolute_error_nm3": 1.7545322710451597e-06,
+      "target_met": true,
+      "status": "converged",
+      "error_kind": "successive_order_difference",
+      "convergence_diagnostic_nm3": 1.4165614609616684e-07,
+      "history": [
+        [
+          12,
+          0.013934275096333396
+        ],
+        [
+          24,
+          0.01393427965126084
+        ],
+        [
+          48,
+          0.013934137995114743
+        ]
+      ]
+    }
+  },
+  "tetrahedron_sector_hypotheses": {
+    "edge": 0.5299999999999999,
+    "radius": 0.16999999999999998,
+    "solid_angle": 0.5512855984325311,
+    "carrier_volume": 0.017545322710451595,
+    "empty_volume": 0.01393403451698623,
+    "pair_nonoverlap_margin": 0.18999999999999995,
+    "opposite_face_margin": 0.26274318789169476
+  },
+  "attribution": {
+    "schema": "ackredit.attribution@1",
+    "name": "predeclared controls",
+    "context": {},
+    "items": [
+      {
+        "id": "topomt:software:0.5.0+387.gcf4d475.dirty",
+        "type": "software",
+        "title": "TopoMT",
+        "version": "0.5.0+387.gcf4d475.dirty",
+        "url": "https://github.com/uibcdf/topomt",
+        "authors": [
+          "Diego Prada-Gracia",
+          "Liliana M. Moreno-Vargas"
+        ]
+      },
+      {
+        "id": "doi:10.1038/s41592-019-0686-2",
+        "type": "article",
+        "title": "SciPy 1.0: fundamental algorithms for scientific computing in Python",
+        "authors": [
+          "Pauli Virtanen",
+          "Ralf Gommers",
+          "Travis E. Oliphant",
+          "Matt Haberland",
+          "Tyler Reddy",
+          "David Cournapeau",
+          "Evgeni Burovski",
+          "Pearu Peterson",
+          "Warren Weckesser",
+          "Jonathan Bright",
+          "St\u00e9fan J. van der Walt",
+          "Matthew Brett",
+          "Joshua Wilson",
+          "K. Jarrod Millman",
+          "Nikolay Mayorov",
+          "Andrew R. J. Nelson",
+          "Eric Jones",
+          "Robert Kern",
+          "Eric Larson",
+          "C J Carey",
+          "\u0130lhan Polat",
+          "Yu Feng",
+          "Eric W. Moore",
+          "Jake VanderPlas",
+          "Denis Laxalde",
+          "Josef Perktold",
+          "Robert Cimrman",
+          "Ian Henriksen",
+          "E. A. Quintero",
+          "Charles R. Harris",
+          "Anne M. Archibald",
+          "Ant\u00f4nio H. Ribeiro",
+          "Fabian Pedregosa",
+          "Paul van Mulbregt",
+          "SciPy 1.0 Contributors",
+          "Aditya Vijaykumar",
+          "Alessandro Pietro Bardelli",
+          "Alex Rothberg",
+          "Andreas Hilboll",
+          "Andreas Kloeckner",
+          "Anthony Scopatz",
+          "Antony Lee",
+          "Ariel Rokem",
+          "C. Nathan Woods",
+          "Chad Fulton",
+          "Charles Masson",
+          "Christian H\u00e4ggstr\u00f6m",
+          "Clark Fitzgerald",
+          "David A. Nicholson",
+          "David R. Hagen",
+          "Dmitrii V. Pasechnik",
+          "Emanuele Olivetti",
+          "Eric Martin",
+          "Eric Wieser",
+          "Fabrice Silva",
+          "Felix Lenders",
+          "Florian Wilhelm",
+          "G. Young",
+          "Gavin A. Price",
+          "Gert-Ludwig Ingold",
+          "Gregory E. Allen",
+          "Gregory R. Lee",
+          "Herv\u00e9 Audren",
+          "Irvin Probst",
+          "J\u00f6rg P. Dietrich",
+          "Jacob Silterra",
+          "James T Webber",
+          "Janko Slavi\u010d",
+          "Joel Nothman",
+          "Johannes Buchner",
+          "Johannes Kulick",
+          "Johannes L. Sch\u00f6nberger",
+          "Jos\u00e9 Vin\u00edcius de Miranda Cardoso",
+          "Joscha Reimer",
+          "Joseph Harrington",
+          "Juan Luis Cano Rodr\u00edguez",
+          "Juan Nunez-Iglesias",
+          "Justin Kuczynski",
+          "Kevin Tritz",
+          "Martin Thoma",
+          "Matthew Newville",
+          "Matthias K\u00fcmmerer",
+          "Maximilian Bolingbroke",
+          "Michael Tartre",
+          "Mikhail Pak",
+          "Nathaniel J. Smith",
+          "Nikolai Nowaczyk",
+          "Nikolay Shebanov",
+          "Oleksandr Pavlyk",
+          "Per A. Brodtkorb",
+          "Perry Lee",
+          "Robert T. McGibbon",
+          "Roman Feldbauer",
+          "Sam Lewis",
+          "Sam Tygier",
+          "Scott Sievert",
+          "Sebastiano Vigna",
+          "Stefan Peterson",
+          "Surhud More",
+          "Tadeusz Pudlik",
+          "Takuya Oshima",
+          "Thomas J. Pingel",
+          "Thomas P. Robitaille",
+          "Thomas Spura",
+          "Thouis R. Jones",
+          "Tim Cera",
+          "Tim Leslie",
+          "Tiziano Zito",
+          "Tom Krauss",
+          "Utkarsh Upadhyay",
+          "Yaroslav O. Halchenko",
+          "Yoshiki V\u00e1zquez-Baeza"
+        ],
+        "year": 2020,
+        "doi": "10.1038/s41592-019-0686-2",
+        "journal": "Nature Methods",
+        "volume": "17",
+        "issue": "3",
+        "pages": "261-272",
+        "url": "https://doi.org/10.1038/s41592-019-0686-2"
+      },
+      {
+        "id": "topomt:reference:scipy:1.18.1",
+        "type": "software",
+        "title": "scipy",
+        "url": "https://scipy.org/",
+        "version": "1.18.1"
+      },
+      {
+        "id": "doi:10.1093/biomet/26.4.404",
+        "type": "article",
+        "title": "The Use of Confidence or Fiducial Limits Illustrated in the Case of the Binomial",
+        "authors": [
+          "C. J. Clopper",
+          "E. S. Pearson"
+        ],
+        "year": 1934,
+        "doi": "10.1093/biomet/26.4.404",
+        "journal": "Biometrika",
+        "volume": "26",
+        "issue": "4",
+        "pages": "404-413",
+        "url": "https://doi.org/10.1093/biomet/26.4.404"
+      },
+      {
+        "id": "doi:10.1038/s41586-020-2649-2",
+        "type": "article",
+        "title": "Array programming with NumPy",
+        "authors": [
+          "Charles R. Harris",
+          "K. Jarrod Millman",
+          "St\u00e9fan J. van der Walt",
+          "Ralf Gommers",
+          "Pauli Virtanen",
+          "David Cournapeau",
+          "Eric Wieser",
+          "Julian Taylor",
+          "Sebastian Berg",
+          "Nathaniel J. Smith",
+          "Robert Kern",
+          "Matti Picus",
+          "Stephan Hoyer",
+          "Marten H. van Kerkwijk",
+          "Matthew Brett",
+          "Allan Haldane",
+          "Jaime Fern\u00e1ndez del R\u00edo",
+          "Mark Wiebe",
+          "Pearu Peterson",
+          "Pierre G\u00e9rard-Marchant",
+          "Kevin Sheppard",
+          "Tyler Reddy",
+          "Warren Weckesser",
+          "Hameer Abbasi",
+          "Christoph Gohlke",
+          "Travis E. Oliphant"
+        ],
+        "year": 2020,
+        "doi": "10.1038/s41586-020-2649-2",
+        "journal": "Nature",
+        "volume": "585",
+        "issue": "7825",
+        "pages": "357-362",
+        "url": "https://doi.org/10.1038/s41586-020-2649-2"
+      },
+      {
+        "id": "topomt:reference:numpy:2.5.4",
+        "type": "software",
+        "title": "numpy",
+        "url": "https://numpy.org/",
+        "version": "2.5.4"
+      },
+      {
+        "id": "doi:10.1145/2833157.2833162",
+        "type": "article",
+        "title": "Numba",
+        "authors": [
+          "Siu Kwan Lam",
+          "Antoine Pitrou",
+          "Stanley Seibert"
+        ],
+        "year": 2015,
+        "doi": "10.1145/2833157.2833162",
+        "journal": "Proceedings of the Second Workshop on the LLVM Compiler Infrastructure in HPC",
+        "pages": "1-6",
+        "url": "https://doi.org/10.1145/2833157.2833162"
+      },
+      {
+        "id": "topomt:reference:numba:0.68.1",
+        "type": "software",
+        "title": "numba",
+        "url": "https://numba.pydata.org/",
+        "version": "0.68.1"
+      }
+    ],
+    "uses": [
+      {
+        "item_id": "topomt:software:0.5.0+387.gcf4d475.dirty",
+        "used_by": "topomt.scipy",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "scipy",
+          "route": "original",
+          "software": "TopoMT",
+          "version": "0.5.0+387.gcf4d475.dirty",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "doi:10.1038/s41592-019-0686-2",
+        "used_by": "topomt.scipy",
+        "roles": [
+          "software_description"
+        ],
+        "context": {
+          "method": "scipy",
+          "route": "original",
+          "software": "scipy",
+          "version": "1.18.1",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:reference:scipy:1.18.1",
+        "used_by": "topomt.scipy",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "scipy",
+          "route": "original",
+          "software": "scipy",
+          "version": "1.18.1",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:software:0.5.0+387.gcf4d475.dirty",
+        "used_by": "topomt.dfnd.core.volume_precision.binomial_interval",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "clopper_pearson",
+          "route": "criterion",
+          "software": "TopoMT",
+          "version": "0.5.0+387.gcf4d475.dirty",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "doi:10.1093/biomet/26.4.404",
+        "used_by": "topomt.dfnd.core.volume_precision.binomial_interval",
+        "roles": [
+          "scientific_criterion"
+        ],
+        "context": {
+          "method": "clopper_pearson",
+          "route": "criterion",
+          "software": "TopoMT",
+          "version": "0.5.0+387.gcf4d475.dirty",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:software:0.5.0+387.gcf4d475.dirty",
+        "used_by": "topomt.dfnd.core.volume_precision.binomial_interval",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "numpy",
+          "route": "original",
+          "software": "TopoMT",
+          "version": "0.5.0+387.gcf4d475.dirty",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "doi:10.1038/s41586-020-2649-2",
+        "used_by": "topomt.dfnd.core.volume_precision.binomial_interval",
+        "roles": [
+          "software_description"
+        ],
+        "context": {
+          "method": "numpy",
+          "route": "original",
+          "software": "numpy",
+          "version": "2.5.4",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:reference:numpy:2.5.4",
+        "used_by": "topomt.dfnd.core.volume_precision.binomial_interval",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "numpy",
+          "route": "original",
+          "software": "numpy",
+          "version": "2.5.4",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:software:0.5.0+387.gcf4d475.dirty",
+        "used_by": "topomt.dfnd.core.volume_precision.measure_region_volume",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "geometry",
+          "route": "native",
+          "software": "TopoMT",
+          "version": "0.5.0+387.gcf4d475.dirty",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:software:0.5.0+387.gcf4d475.dirty",
+        "used_by": "topomt.dfnd.core.volume_precision.measure_region_volume",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "numpy",
+          "route": "original",
+          "software": "TopoMT",
+          "version": "0.5.0+387.gcf4d475.dirty",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "doi:10.1038/s41586-020-2649-2",
+        "used_by": "topomt.dfnd.core.volume_precision.measure_region_volume",
+        "roles": [
+          "software_description"
+        ],
+        "context": {
+          "method": "numpy",
+          "route": "original",
+          "software": "numpy",
+          "version": "2.5.4",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:reference:numpy:2.5.4",
+        "used_by": "topomt.dfnd.core.volume_precision.measure_region_volume",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "numpy",
+          "route": "original",
+          "software": "numpy",
+          "version": "2.5.4",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:software:0.5.0+387.gcf4d475.dirty",
+        "used_by": "topomt.numba",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "numba",
+          "route": "original",
+          "software": "TopoMT",
+          "version": "0.5.0+387.gcf4d475.dirty",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "doi:10.1145/2833157.2833162",
+        "used_by": "topomt.numba",
+        "roles": [
+          "software_description"
+        ],
+        "context": {
+          "method": "numba",
+          "route": "original",
+          "software": "numba",
+          "version": "0.68.1",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      },
+      {
+        "item_id": "topomt:reference:numba:0.68.1",
+        "used_by": "topomt.numba",
+        "roles": [
+          "executed_software"
+        ],
+        "context": {
+          "method": "numba",
+          "route": "original",
+          "software": "numba",
+          "version": "0.68.1",
+          "producer": {
+            "name": "TopoMT",
+            "version": "0.5.0+387.gcf4d475.dirty"
+          },
+          "identity": {}
+        }
+      }
+    ],
+    "usage_tree": {
+      "topomt.dfnd.core.volume_precision.measure_region_volume": {
+        "items": [
+          "doi:10.1038/s41586-020-2649-2",
+          "topomt:reference:numpy:2.5.4",
+          "topomt:software:0.5.0+387.gcf4d475.dirty"
+        ],
+        "children": [
+          "topomt.dfnd.core.volume_precision.binomial_interval",
+          "topomt.numba"
+        ]
+      },
+      "topomt.dfnd.core.volume_precision.binomial_interval": {
+        "items": [
+          "doi:10.1038/s41586-020-2649-2",
+          "doi:10.1093/biomet/26.4.404",
+          "topomt:reference:numpy:2.5.4",
+          "topomt:software:0.5.0+387.gcf4d475.dirty"
+        ],
+        "children": [
+          "topomt.scipy"
+        ]
+      },
+      "topomt.scipy": {
+        "items": [
+          "doi:10.1038/s41592-019-0686-2",
+          "topomt:reference:scipy:1.18.1",
+          "topomt:software:0.5.0+387.gcf4d475.dirty"
+        ],
+        "children": []
+      },
+      "topomt.numba": {
+        "items": [
+          "doi:10.1145/2833157.2833162",
+          "topomt:reference:numba:0.68.1",
+          "topomt:software:0.5.0+387.gcf4d475.dirty"
+        ],
+        "children": []
+      }
+    }
+  },
+  "execution": {
+    "wall_seconds": 1.621,
+    "peak_rss_kib": 260788,
+    "single_cpu": true,
+    "numerical_threads": 1
+  }
+}

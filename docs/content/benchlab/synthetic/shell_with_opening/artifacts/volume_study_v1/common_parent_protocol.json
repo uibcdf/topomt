@@ -1,0 +1,27 @@
+{
+  "schema": "topomt.benchlab.shell-pair-volume-protocol/1",
+  "date": "2026-11-10",
+  "issue": "uibcdf/topomt#76",
+  "common_protocol_sha256": "00631fbe7cc6ad42401b41ce92452d23bebe87ee9d29b540bf569566e5d0fd88",
+  "parent_input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "child_input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+  "domain": "Convex hull of unchanged parent atomic centers, shared by both ball-union integrals",
+  "length_unit": "nm",
+  "probe_angstroms": 1.4,
+  "n_samples": 524288,
+  "seed": 82371,
+  "confidence_level": 0.999,
+  "batch_size": 4096,
+  "observables": [
+    "bare_empty",
+    "probe_center"
+  ],
+  "comparison": "Use identical Cartesian points and direct parent-hull membership for both atom unions. Child must be an exact unchanged-radii coordinate subset. Each freed-space indicator is0or1; apply its own Hoeffding confidence bound, not an independence formula for the two estimates.",
+  "acceptance": "Reference half-width <=2.5% of common carrier volume; nonnegative pointwise freed-space indicators. No claim that a natural child hull is the same domain, or that either empty set is globally reachable.",
+  "resources": {
+    "cpu_count": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  }
+}
