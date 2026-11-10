@@ -20,6 +20,11 @@ supersedes: []
 review's findings from that bounded implementation task. The scientific gates
 retain their existing owners; this proposal does not replace them.
 
+The maintainer-requested [temporary execution workplan](../DFND/benchlab_improvement_plan_TEMP.md)
+orders publication, reader improvements and the later scientific slices. This
+report retains #175's bounded reader-route acceptance; the workplan does not
+expand it into an umbrella scientific issue.
+
 Reviewed source: `09d07b12d1088b2eb8d3e1cf7868ce122fb75c03`, with the pre-existing
 human modification to `topomt/_version.py` preserved. The scope is the first
 three [BenchLab units](../../docs/content/benchlab/synthetic/index.md), their

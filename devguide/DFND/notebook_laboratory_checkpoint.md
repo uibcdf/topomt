@@ -2,6 +2,12 @@
 
 ## Active direction
 
+**Temporary execution script (2026-11-10):** follow the
+[BenchLab improvement workplan](benchlab_improvement_plan_TEMP.md) for the
+publication, reader-route and three-case scientific sequence, with separate
+owners and acceptance evidence. The plan coordinates pending work; it does not
+claim a deployment or scientific correction has already happened.
+
 **2026-11-08 refinement:** the maintainer requests deeper study of the existing
 three units before adding a tube. Follow [the three-case deepening plan](three_case_deepening.md).
 Audit the actual public `Topography` projection, resolve the historical 0.2 Å
