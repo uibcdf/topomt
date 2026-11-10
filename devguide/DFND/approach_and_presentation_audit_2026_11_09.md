@@ -15,6 +15,11 @@ Findings below describe this fixed revision. For current status use the owning
 issues and maintained comparative register; this dated audit is not a separate
 present-day limitation list or a paper-ready claim register.
 
+Audit-quality review: **2026-11-09**, reviewing delivery `091f895`. The additions
+below make the mathematical checks, execution coverage and closure criteria
+explicit and strengthen the reproduction. F1–F7 retain their conclusions; no
+public-method correction or scientific issue closure is claimed.
+
 ## Assessment
 
 The presentation has **broad topic coverage, a useful conceptual order and good
@@ -43,6 +48,14 @@ rewrite is unnecessary.
 | Is the theoretical justification complete? | No. Its outstanding physical/numerical gates are real research work, mostly acknowledged explicitly. |
 | Can a reader follow the basic example? | Yes; the executable reader guards cover the tetrahedron workflow. |
 | Is the account a completed biological validation or originality argument? | No, and it appropriately avoids claiming either. |
+
+Here completeness means coverage of the declared source account and traceable
+recommendations. It does not mean every scientific hypothesis or runtime branch
+has been independently validated. The priorities order the documentary work:
+**P0** correct misleading semantics before stronger scientific reuse, **P1**
+complete information needed for advanced interpretation/reproduction, **P2**
+improve discovery and notation. They are not operational incident severities;
+#173 remains a medium-severity documentation defect.
 
 ## Review boundary and sources
 
@@ -103,6 +116,44 @@ This is a coherent architecture for explicit supports, repeated probe questions
 and coupled topographic descriptions. Its physical fidelity depends on the
 uncompleted gates below; the architecture alone supplies no topology-equivalence
 theorem, universal performance claim or demonstrated novelty.
+
+## Mathematical checks and assumption boundaries
+
+The audit-quality review re-derived the following displayed arguments and
+compared the numerical definitions with their source operators. This supplies
+the explicit proof-scope record missing from the first audit delivery.
+
+| Statement checked | Reasoning/definition checked | Boundary retained |
+| --- | --- | --- |
+| Atomic expansion and strictness | `min_i(distance-r_i) >= p` requires every distance to be at least `r_i+p`; strict `>` excludes all closed expanded balls. | Tangent connections in the closed convention need not survive strict clearance. |
+| Existence of local maxima | A finite minimum of continuous distance fields is continuous on a compact closed simplex. | Its signed maximum can be negative; the solver's initialized zero is a different numeric representation. Existence does not prove candidate completeness. |
+| Tangency algebra | Subtracting squared tangency equations gives the stated affine dependence on radius; substitution yields the appendix's quadratic coefficients. | Positive roots still require support membership and actual-clearance checks. Singular systems and missing strata are not certified by this algebra. |
+| Obstacle and support bounds | Adding obstacles lowers clearance on a fixed support; restricting the same field from a cell to its face cannot raise the maximum. | The current three-/four-atom fields differ, so no universal ordering of their reported capacities follows. |
+| Residence along a physical path | At a path point in a closed cell, local clearance bounds all-atom clearance from above; the exact local maximum therefore bounds the probe radius. | This qualifies connector interpretation; it does not show that every computed connector is a solver error or supply a replacement policy. |
+| Hull-to-infinity ray | The outward-normal squared-distance expansion has nonnegative linear and quadratic terms because all selected centers lie inward. | The starting point must already be all-atom-free. It does not certify attachment from a particular native component. |
+| Probe nesting | Exact admissible sets shrink with probe size. Fixed-policy threshold states, incidence admissions and both-sided edge conjunctions also shrink. | Policies, tolerances and geometry must stay fixed. Component counts and derived names need not be monotone. |
+| Regular-simplex reference | The barycentric weighted squared-distance identity bounds the minimum vertex distance; the centroid attains that bound. The cell/face formulas match the adopted tetrahedron values. | This is an independent reference for this geometry, not a proof of arbitrary solver inputs or arbitrary physical contact counts. |
+| Morphometry and uncertainty expressions | PCA normalization/axis ratio, depth-profile fit, catalog score and MC volume/half-width formulas agree with the inspected source definitions. | Mesh weighting, degeneracy fallbacks and provisional policies remain part of their meaning. The normal half-width is not a rigorous finite-sample bound. |
+
+No additional algebraic error was found in these checked expressions. F7 remains
+a dimension-changing notation collision. This is a mathematical/source review,
+not formal proof verification, an exhaustive numerical analysis or a new theorem
+equating the graph with continuous free space. General active-set completeness,
+conditioning, physical path compatibility and volume accuracy remain #76/#75.
+
+## Execution coverage of this audit
+
+| Scope | Evidence actually obtained | What was not exercised |
+| --- | --- | --- |
+| Worked public reader | Existing four documentation tests execute the tetrahedron at 1.2/1.4/1.7 Å, including nm/pm policy checks, public/native tracing and native re-query. | A single-cell example has no internal face, many-cell Mouth or hierarchy fit. |
+| Intrusion branch | Fresh replays on the same three frozen inputs compare owner incidences under `block_suspect`; the strengthened code below checks the complete summary and named witness. | This does not exhaust intrusion configurations or certify a physical crossing or dry-bank partition. |
+| Other graph/query policies | `resident_only`, edge/vertex bank grouping and nonzero tolerances were inspected in the source/contracts. | No new runtime sweep of these alternatives, near-zero probes or degenerate inputs was performed. Historical engineering tests are not silently counted as new executions. |
+| Physical references and public contracts | Existing frozen certificates, public receiving records and issue dispositions were inspected and linked. | The audit's 20-test selector does not rerun the complete certificate or input-mutation/support matrix. |
+| Rendering and lifecycle | Full public HTML, local links, standalone audit rendering, report checks and live comparative readback were checked. | These checks do not decide scientific wording correctness, novice comprehension, installed qualification or biological performance. |
+
+Thus passing the reader tests and reproducing F1 are compatible observations.
+The audit has useful coverage within its stated boundary; it is not an exhaustive
+validation of DFND or every supported configuration.
 
 ## Coverage of the public book
 
@@ -274,6 +325,27 @@ with units of length in `peak - g`. The notation appendix lists only the first
 meaning. Use distinct symbols, such as `g_funnel` and `R_join`, and synchronize
 the sheet and formulas. This is not an error in the executed arithmetic.
 
+## Observable completion criteria for the findings
+
+This table makes recommendations reviewable without turning every prose edit
+into a test that merely mirrors headings. Existing reader tests are evidence
+for their executed workflow; they are not guards for every assertion in the book.
+
+| Finding | Completion evidence required | Owning boundary |
+| --- | --- | --- |
+| F1 | Explain unique-face capacity and per-owner admission with both-sided wet/dry predicates. Include a frozen-input example that locates support by atom mapping and checks both records, flags and edge decisions under the non-default policy. Verify chapter/pseudocode agreement. | #173, documentary correctness; the audit's reproduction is not yet a durable product regression. |
+| F2 | Publish the actual defaults, support/denominator, units and public-versus-fixed control status, with source correspondence. Cross-check the five rows against the reached functions. | #173; changing or calibrating scientific policies requires its separate owner. |
+| F3 | State the transit-carrier centroid formula and its distinction from residence centers. A many-cell illustration must trace the existing field to that definition without claiming admissibility. | #173; a new guaranteed placement-point algorithm would be different work. |
+| F4 | Link the existing primary and secondary helpers, their endpoint objectives and empty/failure scope. Check the named callables and rendered navigation. | #173; no general physical-path guarantee is required to document the existing helper. |
+| F5 | Identify authoritative versus historical accounts and reconcile the listed conflicting statements with a dated disposition. Review the reporting/interface contract question explicitly. | #75/#76 own scientific/precision decisions; #60/#61 public contract adoption; #173 only documentary coordination. Closing #173 cannot close these gates. |
+| F6 | Put implemented/provisional/proposed availability near the entry and link the existing many-cell/Mouth walkthrough. A reader should locate the returned support, pending capabilities and deeper reference from that route. | #173; this is an editorial acceptance check, not a measured usability claim. |
+| F7 | Use distinct symbols for funnel gradient and joining capacity, with consistent dimensions in the chapter and notation sheet. | #173; source/render review suffices for this prose-only change. |
+
+F1–F7 are not seven confirmed runtime bugs. F1 is a reproduced documentary
+error; F2–F4/F7 are source-inspected omissions or ambiguity; F5 contains existing
+scientific/contract questions and documentary drift; F6 is an editorial judgment.
+Their evidence strength and closure conditions should stay distinct.
+
 ## Scientific questions that prose cannot close
 
 The book's caution is appropriate. The following boundaries should stay visible
@@ -336,19 +408,62 @@ Execution environment: Linux, Python **3.14.10**, NumPy **2.5.4**, SciPy
 given so the observation is not identified only by a local integer.
 
 ```python
+from collections import defaultdict
 import runpy
+
+import numpy as np
 from topomt import pyunitwizard as puw
 
 receiving = runpy.run_path('tests/test_benchlab_public_topography.py')
-topography, _, _ = receiving['public_result']('closed_shell', 0.2)
-query = topography.dfnd.at_probe(
-    puw.quantity(0.2, 'angstroms'), gate_intrusion_policy='block_suspect'
-)
-pair = [f for f in query.raw['faces'] if f['face_id'] == 6]
-assert len(pair) == 2
-assert pair[0]['R_gate'] == pair[1]['R_gate']
-assert {f['permeability_state'] for f in pair} == {'permeable', 'non_permeable'}
-assert not any(f['transit_edge'] for f in pair)
+expected = {
+    'regular_tetrahedron': (1.2, (0, 0, 0)),
+    'closed_shell': (0.2, (312, 110, 75)),
+    'shell_with_opening': (1.4, (282, 101, 27)),
+}
+observed = {}
+for case, (probe, counts) in expected.items():
+    topography, _, _ = receiving['public_result'](case, probe)
+    query = topography.dfnd.at_probe(
+        puw.quantity(probe, 'angstroms'), gate_intrusion_policy='block_suspect'
+    )
+    pairs = defaultdict(list)
+    for face in query.raw['faces']:
+        if face['neighbor_tetrahedron_id'] >= 0:
+            pairs[face['face_id']].append(face)
+    unequal_flags = unequal_states = 0
+    for pair in pairs.values():
+        assert len(pair) == 2
+        assert pair[0]['R_gate'] == pair[1]['R_gate']
+        flags = ['intrusion_suspect' in f['flags'] for f in pair]
+        unequal_flags += flags[0] != flags[1]
+        unequal_states += pair[0]['permeability_state'] != pair[1]['permeability_state']
+    observed[case] = (len(pairs), unequal_flags, unequal_states)
+    assert observed[case] == counts
+    if case == 'closed_shell':
+        # Locate the support by source atoms, then check this mesh's record IDs.
+        witness = [f for f in query.raw['faces']
+                   if sorted(f['atom_indices']) == [13, 23, 26]]
+        assert len(witness) == 2
+        assert {f['face_id'] for f in witness} == {6}
+        by_owner = {f['owner_tetrahedron_id']: f for f in witness}
+        assert set(by_owner) == {1, 7}
+        assert by_owner[1]['neighbor_tetrahedron_id'] == 7
+        assert by_owner[7]['neighbor_tetrahedron_id'] == 1
+        np.testing.assert_allclose(
+            [f['R_gate'] for f in witness], 0.1198879391121351,
+            rtol=0, atol=1e-14,
+        )
+        assert by_owner[1]['permeability_state'] == 'permeable'
+        assert by_owner[1]['flags'] == []
+        assert by_owner[7]['permeability_state'] == 'non_permeable'
+        assert 'blocked_by_intrusion_policy' in by_owner[7]['flags']
+        assert 'intrusion_suspect' in by_owner[7]['flags']
+        assert not any(f['transit_edge'] for f in witness)
+        baseline = [f for f in topography.dfnd.raw['faces']
+                    if sorted(f['atom_indices']) == [13, 23, 26]]
+        assert len(baseline) == 2
+        assert all(f['permeability_state'] == 'permeable' for f in baseline)
+        assert all(f['R_gate'] == witness[0]['R_gate'] for f in baseline)
 ```
 
 Input JSON SHA-256 values, unchanged during the audit:
@@ -358,6 +473,12 @@ Input JSON SHA-256 values, unchanged during the audit:
 | `regular_tetrahedron` | `8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3` |
 | `closed_shell` | `ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157` |
 | `shell_with_opening` | `3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77` |
+
+### Initial delivery receipts — 091f895
+
+The following receipts describe the first audit delivery. Its original short
+reproduction remains in [that revision](https://github.com/uibcdf/topomt/blob/091f8958abadacf03ba39f44ad56cacd6c36a074/devguide/DFND/approach_and_presentation_audit_2026_11_09.md).
+The strengthened listing above receives its separate quality-review check below.
 
 The three-case replay completed in **3.11 s**, peak RSS **285 MiB**. It ran
 sequentially on one CPU with one numerical thread, 6 GiB address-space and 60 s
@@ -375,7 +496,7 @@ Executed checks for this delivery:
   `tests/test_comparative_findings.py`, with Pytest Receptor and one CPU/thread.
   This includes all four executable book-reader tests. It is not a full DFND or
   scientific qualification panel.
-- The exact Python reproduction printed above executed successfully. All
+- The original short Python reproduction executed successfully. All
   **32 local Markdown links** in the audit/open report resolve. Standalone MyST
   rendering of the audit, with relative links kept as ordinary hyperlinks and
   their targets checked separately, reports zero warnings.
@@ -394,3 +515,33 @@ No Python product code changed, so no new lint/type or full-matrix qualification
 is claimed. Existing missing physical-view targets remain pending acceptance;
 no passing test is used to deny the reproduced F1 prose mismatch. The #173
 correction itself remains unimplemented and open.
+
+### Audit-quality review — 2026-11-09
+
+The original assessment and F1 counterexample withstand review. The first
+delivery was weaker in recording mathematical assumptions, distinguishing
+inspected from executed policies and specifying how recommendations can close.
+Those omissions are now addressed by the proof-scope map, execution-coverage
+table and per-finding completion criteria. The reproduction now checks all
+three summary rows and locates the named face by source atoms before checking
+this mesh's IDs, capacities, owner-specific flags, reciprocal neighbors and
+unchanged default-branch capacities.
+
+These additions strengthen the audit as a source-scoped basis for #173 and the
+existing scientific owners. They do not supply exhaustive branch validation,
+an independent usability study or the unresolved scientific proofs. No F1–F7
+correction in the public book is delivered here. Fresh verification receipts
+for the revised audit are retained in `.cache/dfnd-audit-quality-review/`.
+
+The strengthened code executes successfully and reproduces all three count rows,
+the atom-defined witness and its default-versus-blocked capacity comparison.
+The three recorded input SHA-256 values match. Both revised documents render
+without warnings and all 32 local audit/report links resolve. Reporting and
+comparative checks give **16 passed**; generated indexes and the offline
+comparative validator pass. These checks do not rerun the unchanged public-book
+or full scientific suite; their earlier receipts remain explicitly historical.
+
+The audit verification used one CPU/thread with 6 GiB address-space and 60 s CPU
+limits, completing in **4.63 s**, peak RSS **299.3 MiB**. Live preflight showed
+about 54.5 GiB available, zero memory PSI and no active swapping, with roughly
+half the CPU capacity idle in the sample. No parallel worker batch was started.

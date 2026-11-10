@@ -62,3 +62,13 @@ Add a concise status/reading map and link the existing many-cell public example.
 Exercise the non-default policy on frozen inputs alongside reader examples;
 validate rendered links and report lifecycle. This issue remains open: the audit
 records the findings and does not implement those corrections.
+
+## Audit-quality refinement — 2026-11-09
+
+The reviewed audit now states its mathematical checks and assumption boundaries,
+distinguishes runtime replays from source inspection, and gives an observable
+completion criterion for each F1–F7 recommendation. Its reproduction checks all
+three frozen-case summary rows and locates the witness by source atoms before
+checking this mesh's IDs, reciprocal owners, flags and capacities. The priority
+rubric is documentary work order, not incident severity. This strengthens the
+evidence/acceptance record; #173 remains open for the actual book corrections.
