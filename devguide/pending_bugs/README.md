@@ -5,10 +5,6 @@ Read [the reporting protocol](../reporting_protocol.md) before filing.
 
 <!-- generated: devguide_index -->
 
-### Active (1)
-
-- [`sphinx_diagnostics.md`](sphinx_diagnostics.md) — [#64](https://github.com/uibcdf/topomt/issues/64) — Resolve existing whole-site markup, navigation and diagram-runtime diagnostics. *(active, measured)*
-
 ### Partial (1)
 
 - [`full_ci_routes_and_skipped_push_recovery.md`](full_ci_routes_and_skipped_push_recovery.md) — [#58](https://github.com/uibcdf/topomt/issues/58) — Complete contributor full-CI routes and skipped-push recovery. *(partial, measured)*

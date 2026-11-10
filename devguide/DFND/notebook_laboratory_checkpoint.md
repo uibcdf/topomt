@@ -18,7 +18,7 @@ completion rule. #146 owns the bounded public audit, #148 the 0.2 Å cover;
 #75/#76/#60 retain their broader numerical/scientific/public-support gates.
 
 **2026-11-10 review:** the
-[three-case assessment and reader-route proposal](../pending_proposals/benchlab_three_case_reader_route.md)
+[three-case assessment and reader-route proposal](../archive/benchlab_three_case_reader_route.md)
 confirms the initial controls and reproducibility: seven fresh-kernel notebooks,
 95 passing focused tests and seven pending #151 targets; no frozen evidence
 changed. The cases remain useful for physical patches/paths, volume references,

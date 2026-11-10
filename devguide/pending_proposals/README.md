@@ -46,9 +46,8 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (2)
+### Active (1)
 
-- [`benchlab_three_case_reader_route.md`](benchlab_three_case_reader_route.md) — [#175](https://github.com/uibcdf/topomt/issues/175) — Bring the completed three-case BenchLab review into a coherent current web and notebook reading route. *(active, measured)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
 ### Partial (5)

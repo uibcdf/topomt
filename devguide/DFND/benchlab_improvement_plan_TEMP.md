@@ -8,7 +8,7 @@ bounded physical algorithms and case-level acceptance clarified below.
 
 This is the requested temporary execution checklist. It coordinates existing
 issues, not a new umbrella issue or a replacement scientific contract. The
-[completed review](../pending_proposals/benchlab_three_case_reader_route.md)
+[completed review](../archive/benchlab_three_case_reader_route.md)
 contains the diagnosis and measurements. The
 [laboratory checkpoint](notebook_laboratory_checkpoint.md),
 [three-case direction](three_case_deepening.md) and
@@ -189,7 +189,7 @@ unimplemented physical observations as already available.
   legend clipping; keep the original figure. Use consistent units, matched
   view ranges where comparison needs them, and captions distinguishing atomic
   balls, carrier centroids, contact triangles and physical free patches.
-- [ ] **READ-F: qualify and republish this reader checkpoint.** Execute new
+- [x] **READ-F: qualify and republish this reader checkpoint.** Execute new
   notebooks independently, verify preservation hashes, links and rendering,
   and review the actual browser/Jupyter flow. READ-G's out-of-checkout receiving
   must pass before this publication/closure. Publish a second bounded docs
@@ -203,7 +203,7 @@ unimplemented physical observations as already available.
   package claim. This checks portability separately from execution inside the
   repository; original providers and network jobs remain outside Run All.
 
-Execution: reader sources were frozen at `601b295`; the new notebooks each passed four code cells in fresh kernels inside the checkout and from `/tmp`. The [exact bundle receiving receipt](../evidence/benchlab_reader_receiving_2026_11_10.json) records hashes, environment and resource use. Actual JupyterLab and strict Sphinx rendering were checked. READ-F awaits the exact-source hosted candidate and independently served reader pages/download.
+Execution: reader sources were frozen at `601b295`; the new notebooks each passed four code cells in fresh kernels inside the checkout and from `/tmp`. The [exact bundle receiving receipt](../evidence/benchlab_reader_receiving_2026_11_10.json) records hashes, environment and resource use. Actual JupyterLab and strict Sphinx rendering were checked. READ-F passed exact-source hosted run `42906050055` at `0af23bc`; 22 independently served pages/downloads and the actual Chrome notebook view agree with the original artifact. #175 and #64 are archived for their own bounded delivery; scientific work remains open.
 
 New narrative/evidence belongs in a new versioned directory, for example
 `artifacts/reader_route_v1/`. Its protocol identifies the earlier inputs,
@@ -436,4 +436,4 @@ entire shape catalog.
   history and replace active checkpoint/index links with the delivered records;
   it must not remain an apparently current pending-work list after completion.
 
-**Next executable slice:** publish and independently receive READ-F, then implement the bounded #151 physical-observation contract before the volume sequence.
+**Next executable slice:** implement and qualify the bounded #151 physical-observation contract before the volume sequence.

@@ -1,13 +1,13 @@
 ---
 summary: Bring the completed three-case BenchLab review into a coherent current web and notebook reading route.
 issue: uibcdf/topomt#175
-status: active
+status: resolved
 opened: 2026-11-10
-closed:
+closed: 2026-11-10
 severity: medium
 verification: measured
 area: [docs, benchlab, dfnd]
-guard:
+guard: tests/test_benchlab_reader.py::test_actual_reader_notebook_inspects_support_without_inventing_neutral_support
 normative:
 blocked_by: []
 supersedes: []
@@ -41,8 +41,9 @@ Ruff, formatting, six-file mypy and declaration checks pass. The final download
 was manifest-verified in `/tmp`; its notebook bytes match the three independently
 executed kernels. Public READ-F receiving is still pending. The public baseline already published under #18 is separate.
 
-**Review completed on 2026-11-10; reader-route improvements remain open under
-[#175](https://github.com/uibcdf/topomt/issues/175).** This record separates the
+**Review and bounded reader-route delivery completed on 2026-11-10 under
+[#175](https://github.com/uibcdf/topomt/issues/175).** The dated review below is
+retained history; the final delivery section gives its resolved disposition. This record separates the
 review's findings from that bounded implementation task. The scientific gates
 retain their existing owners; this proposal does not replace them.
 
@@ -276,3 +277,25 @@ limitation resolution is claimed.
    historical receipts and keep every scientific pending action with its
    existing issue. Resolve/archive this bounded proposal only when those
    reader-route changes are delivered; completed review alone does not close it.
+
+## Delivered source and public receiving — 2026-11-10
+
+Reader candidate `0af23bc4aeaab3c7c6f088a68867bed613d9612f` passed
+[Documentation run 42906050055](https://github.com/uibcdf/topomt/actions/runs/42906050055)
+with warnings fatal and zero warnings. Its served `build.json` identifies the
+exact source, 83 HTML pages and 7,021 checked local targets. Independent receiving
+checked 22 public pages/downloads against the original Pages artifact, including
+all three new notebook pages and the complete ZIP. Binary download bytes match;
+HTML differs only by independently decoded/verified Cloudflare email protection.
+Actual Chrome displayed the served opening notebook and figure (1.51 s,
+1,072.5 MiB peak owned browser tree). Earlier desktop/mobile/math and actual
+JupyterLab inspection remain valid for their recorded presentation scope.
+
+The [portable receiving receipt](../evidence/benchlab_reader_receiving_2026_11_10.json)
+and [publication receipt](../evidence/benchlab_reader_publication_2026_11_10.json)
+retain exact identities and limits. The selected panel gives **45 passed**;
+scoped Ruff/format, six-file mypy, report/comparative indexes and dependency
+declarations pass. This resolves this record's bounded acceptance. Physical
+refinement #151, volume #75, broader science #76 and support #60/#61 remain open.
+Original frozen notebooks, input files, certificates and provider evidence were
+not rewritten. This is source-bound receiving, not a release/full-matrix claim.

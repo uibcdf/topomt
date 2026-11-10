@@ -1,0 +1,149 @@
+{
+  "source_commit": "0af23bc4aeaab3c7c6f088a68867bed613d9612f",
+  "received": [
+    {
+      "file": "index.html",
+      "sha256": "4b90991ddf51d72d196ee938d0775d76050cb5ab73ec8f087562354df9557b99",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/index.html",
+      "sha256": "7f77ffeac8bb19aa12aa56cdeb1df5d53f5c45338aed6bb0f8f8abaf4beb4cf0",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/index.html",
+      "sha256": "d4fb2aff8021cba1a67feacfdb15fd855f9e26980bc4fcbdc11cc6871dcf742a",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/molecular/index.html",
+      "sha256": "df6c8ad6a242628979a9efc670bab4dffae069c18d7cd01ee2e402e8213a8690",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/dfnd/index.html",
+      "sha256": "4a7873458723c8e853bc989a057f835efec4548feafba93c471ab9aea7bd3d82",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/regular_tetrahedron/index.html",
+      "sha256": "4ac83bf85220cef30b2d4b1e878e863083b03ae56bed63801fa15ceb0c59bae5",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/regular_tetrahedron/system.html",
+      "sha256": "3fb3e2aba2c09ff78570b50fedc0a7d3643dcd516c1902abc911f1e135986ec4",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/regular_tetrahedron/dfnd.html",
+      "sha256": "e031b974549110edab413d8eb69d769534514ea177ed5c0e17f51ffdbdc1f150",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/regular_tetrahedron/public_topography.html",
+      "sha256": "0b3ae556f1ea7ddc5e4298facf358a76359ebcf45e4a9bb7256a6bb6eebc9d7b",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/index.html",
+      "sha256": "8a6d7e303acb26f861740b3245fc33383411f56e33c1e57f3f993c209fb1ee2f",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/system.html",
+      "sha256": "ecd1bef2262085fefc5babd3074d41e3807b323f4c15bd14e622e3083426d635",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/dfnd.html",
+      "sha256": "f5107e8228c558a0c6f449d3e9a8316045dfa03834f6ca768c518fb2be517ca9",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/public_topography.html",
+      "sha256": "cc95a2ede731a229f1aacfcb6df71ca9c38c714f7942d80932667d69528e601e",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/shell_with_opening/index.html",
+      "sha256": "f485ccafdc55e8e91217d797ad4aa3c1f10cc6365a9058b955d1f79b5e54577c",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/shell_with_opening/system.html",
+      "sha256": "3ee99024e21df0f132bca5c4444fd6fd1df97b2297bafb50b8a08e696577bd51",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/shell_with_opening/dfnd.html",
+      "sha256": "76b8c9508b364a0b51fb63573c53407c5a9a93d4117a5077375478e71ff8ff41",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "content/benchlab/synthetic/shell_with_opening/public_topography.html",
+      "sha256": "ec53b0d82659af9520872bcfa85d7d2411e049daff9d2f1c787086a1d1a7e0dc",
+      "http": 200,
+      "byte_identical": false
+    },
+    {
+      "file": "_downloads/15a8eca7d90f8db9b6039668d97b7339/input.json",
+      "sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+      "http": 200,
+      "byte_identical": true
+    },
+    {
+      "file": "_downloads/3ecb9864c95ec44fdfef0a1488147fe5/input.pdb",
+      "sha256": "cc4da10580190859cabe5c1839bd745d35c9606b532fe3e018defeb20721b9d5",
+      "http": 200,
+      "byte_identical": true
+    },
+    {
+      "file": "_sources/content/benchlab/synthetic/closed_shell/system.ipynb.txt",
+      "sha256": "988c55ba5a4c21c1246eadab50c29e527f2a8f8814691896089a8375146d79fb",
+      "http": 200,
+      "byte_identical": true
+    },
+    {
+      "file": "_downloads/06cdc5026e0062dcbc4b6971a0e6c39e/boundary_patches.png",
+      "sha256": "713c692e37992f4cfbd7cf76d5255350b17399f5f768c24a1e6306a50c6fbe9e",
+      "http": 200,
+      "byte_identical": true
+    },
+    {
+      "file": "_static/benchlab/three_cases_v1.zip",
+      "sha256": "4665299eed1510826ce82fdb54499fd468153bf610e7b3f016f049e8e751cf9c",
+      "http": 200,
+      "byte_identical": true
+    }
+  ],
+  "date": "2026-11-10",
+  "run": "https://github.com/uibcdf/topomt/actions/runs/42906050055",
+  "warning_fatal": true,
+  "sphinx_warnings": 0,
+  "html_pages": 83,
+  "local_targets": 7021,
+  "html_transform": "Only independently verified Cloudflare email-link rewriting/script insertion; original artifact retained locally",
+  "browser": {
+    "browser_exit": 0,
+    "peak_own_tree_rss_mib": 1072.5,
+    "elapsed_s": 1.51
+  }
+}

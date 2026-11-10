@@ -5,12 +5,13 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (43)
+### Resolved (45)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
 - [`benchlab_public_topography.md`](benchlab_public_topography.md) — [#146](https://github.com/uibcdf/topomt/issues/146) — Audit the three frozen BenchLab cases through the public Topography registry. *(resolved, measured)*
+- [`benchlab_three_case_reader_route.md`](benchlab_three_case_reader_route.md) — [#175](https://github.com/uibcdf/topomt/issues/175) — Bring the completed three-case BenchLab review into a coherent current web and notebook reading route. *(resolved, measured)*
 - [`castp3_1cge_missing_closed_voids.md`](castp3_1cge_missing_closed_voids.md) — [#85](https://github.com/uibcdf/topomt/issues/85) — Resolve three missing native closed cavities in the pinned 1CGE CASTpFold output. *(resolved, reproduced)*
 - [`castp3_closed_void_measurements.md`](castp3_closed_void_measurements.md) — [#79](https://github.com/uibcdf/topomt/issues/79) — Validate and expose local CASTp3 closed-void SA/MS measurements. *(resolved, measured)*
 - [`castp3_closed_void_radius_profile.md`](castp3_closed_void_radius_profile.md) — [#80](https://github.com/uibcdf/topomt/issues/80) — Identify an explicit modern CASTp radius profile and resolve two closed-void residuals. *(resolved, measured)*
@@ -44,6 +45,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`provider_pocket_outputs.md`](provider_pocket_outputs.md) — [#65](https://github.com/uibcdf/topomt/issues/65) — Expose original provider pocket outputs without DFND prerequisites. *(resolved, inspected)*
 - [`publish_ackredit_portable_guide.md`](publish_ackredit_portable_guide.md) — [#91](https://github.com/uibcdf/topomt/issues/91) — Publish the canonical Ackredit portable-attribution guide in TopoMT. *(resolved, inspected)*
 - [`shell_opening_study.md`](shell_opening_study.md) — [#145](https://github.com/uibcdf/topomt/issues/145) — Derive a shell opening from the frozen wall and characterize native access. *(resolved, measured)*
+- [`sphinx_diagnostics.md`](sphinx_diagnostics.md) — [#64](https://github.com/uibcdf/topomt/issues/64) — Resolve existing whole-site markup, navigation and diagram-runtime diagnostics. *(resolved, measured)*
 - [`tetrahedron_boundary_connectivity.md`](tetrahedron_boundary_connectivity.md) — [#150](https://github.com/uibcdf/topomt/issues/150) — Independently certify four tetrahedron boundary patches and contrast native grouping. *(resolved, measured)*
 - [`tetrahedron_effective_radii.md`](tetrahedron_effective_radii.md) — [#143](https://github.com/uibcdf/topomt/issues/143) — Resolve effective GHECOM and CAVER input radii in the tetrahedron study. *(resolved, measured)*
 - [`tetrahedron_original_comparisons.md`](tetrahedron_original_comparisons.md) — [#141](https://github.com/uibcdf/topomt/issues/141) — Add a model-audited original-method comparison stage for the regular tetrahedron. *(resolved, measured)*

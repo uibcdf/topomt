@@ -1,13 +1,13 @@
 ---
 summary: Resolve existing whole-site markup, navigation and diagram-runtime diagnostics.
 issue: uibcdf/topomt#64
-status: active
+status: resolved
 opened: 2026-09-30
-closed:
+closed: 2026-11-10
 severity: medium
 verification: measured
 area: [docs]
-guard:
+guard: tests/test_docs_site.py::test_pages_producer_treats_build_warnings_as_failures_before_upload
 normative:
 blocked_by: []
 supersedes: []
@@ -58,3 +58,25 @@ qualification, reader-route acceptance #175 and source identity #18 are distinct
 A complete fresh one-worker warning-fatal Sphinx build in the declared docs
 route, source-scoped hosted evidence and the producer regression
 `tests/test_docs_site.py::test_pages_producer_treats_build_warnings_as_failures_before_upload`.
+
+## Delivered source and public receiving — 2026-11-10
+
+Reader candidate `0af23bc4aeaab3c7c6f088a68867bed613d9612f` passed
+[Documentation run 42906050055](https://github.com/uibcdf/topomt/actions/runs/42906050055)
+with warnings fatal and zero warnings. Its served `build.json` identifies the
+exact source, 83 HTML pages and 7,021 checked local targets. Independent receiving
+checked 22 public pages/downloads against the original Pages artifact, including
+all three new notebook pages and the complete ZIP. Binary download bytes match;
+HTML differs only by independently decoded/verified Cloudflare email protection.
+Actual Chrome displayed the served opening notebook and figure (1.51 s,
+1,072.5 MiB peak owned browser tree). Earlier desktop/mobile/math and actual
+JupyterLab inspection remain valid for their recorded presentation scope.
+
+The [portable receiving receipt](../evidence/benchlab_reader_receiving_2026_11_10.json)
+and [publication receipt](../evidence/benchlab_reader_publication_2026_11_10.json)
+retain exact identities and limits. The selected panel gives **45 passed**;
+scoped Ruff/format, six-file mypy, report/comparative indexes and dependency
+declarations pass. This resolves this record's bounded acceptance. Physical
+refinement #151, volume #75, broader science #76 and support #60/#61 remain open.
+Original frozen notebooks, input files, certificates and provider evidence were
+not rewritten. This is source-bound receiving, not a release/full-matrix claim.
