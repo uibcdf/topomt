@@ -3,7 +3,11 @@ received at `4fc2353`; its five controls and seven former missing-view targets
 now pass. See [the implementation record](physical_boundary_implementation.md)
 and [resolved report](../archive/dfnd_physical_boundary_refinement.md). Earlier
 checkpoint statements below are dated evidence, not current capability status.
-Wider paths/small-probe shell references remain #76 and volume precision #75.
+The independent small-probe reference now establishes 13 patches, all with
+common-origin paths; actual-public receiving agrees. Both shells have verified
+0.005 Å origin-access/enclosure brackets, with their narrower source scope in
+[the case comparison](../../docs/content/benchlab/synthetic/origin_access_brackets.md).
+Wider native paths remain #76 and volume precision #75.
 
 # DFND notebook laboratory checkpoint
 

@@ -1,5 +1,10 @@
 # Shell with an opening
 
+The later [origin-access bracket](../origin_access_brackets.md) narrows the
+access-to-enclosure transition to 2.009745–2.014745 Å. Independent full-path and
+complete-cover certificates agree with actual public DFND at both endpoints;
+an exact maximum bottleneck remains unavailable.
+
 **Physical source increment — 2026-11-10:** the bounded DFND record now
 computes separate hull patches and path-supported contacts. The independent
 five-row panel gives tetrahedron 4/0/0 at 1.2/1.4/1.7 Å, closed shell zero at

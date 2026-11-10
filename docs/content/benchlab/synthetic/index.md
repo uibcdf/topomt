@@ -27,6 +27,7 @@ regular_tetrahedron/index
 closed_shell/index
 shell_with_opening/index
 Public Topography receiving <public_topography>
+Origin-access transition brackets <origin_access_brackets>
 ```
 
 ## What each study explains

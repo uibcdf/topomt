@@ -236,7 +236,7 @@ not a retroactive fresh observation or a held-out benchmark.
   The reference verifiers remain independent of DFND. A complete zero boundary
   count can coexist with positive enclosed free volume; absent capability or
   an absent resident component is not a computed zero physical observation.
-- [ ] **PHY-C: deepen the same systems under #76.** Count the physical contacts
+- [x] **PHY-C: deepen the same systems under #76.** Count the physical contacts
   on the 0.05 Å shell rather than assuming its ten native links are ten mouths.
   Examine compatible within-cell/face paths and tighten access/closure
   brackets on the fixed shell/opening. Record positive witnesses, justified
@@ -265,7 +265,11 @@ records 207 passing expanded tests plus 41 post-refactor/capture guards, source
 receipts and numerical/resource limits. Compatibility promotion is explicitly
 retained; broader geometry/path gates stay #76. PHY-C is still open: the 0.05 Å
 shell's 13 patches now have an [independent complete region/path reference](small_probe_boundary_reference.md)
-and actual-public receiving at `e1af4ef`; tighter transitions remain pending.
+and actual-public receiving at `e1af4ef`. Both fixed shells now have independently
+verified 0.005 Å [origin-access/enclosure brackets](../../docs/content/benchlab/synthetic/origin_access_brackets.md),
+received through actual public DFND at `8bc1a7e`. Full paths and complete hull
+covers establish the endpoints; exact bottlenecks, aperture area and arbitrary
+curved/native paths remain explicitly unavailable under #76.
 This first bounded milestone admits the independent volume sequence; it does
 not complete the three-case study.
 

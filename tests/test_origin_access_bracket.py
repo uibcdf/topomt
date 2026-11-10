@@ -100,3 +100,39 @@ def test_path_checks_segment_interior_and_infinite_ray():
         )
         == 0.5
     )
+
+
+@pytest.mark.parametrize(
+    'case,version', [('closed_shell', 1), ('shell_with_opening', 2)]
+)
+def test_frozen_access_brackets_and_actual_native_endpoints(case, version):
+    import copy
+    import json
+    from pathlib import Path
+
+    from devtools.verify_origin_access_bracket import verify_access_bracket
+
+    directory = (
+        Path(__file__).resolve().parents[1] / 'docs/content/benchlab/synthetic' / case
+    )
+    folder = directory / f'artifacts/access_bracket_v{version}'
+    inputs = directory / f'artifacts/{case}_v1/input.json'
+    certificate = json.loads((folder / 'certificate.json').read_text())
+    result = verify_access_bracket(inputs, folder / 'protocol.json', certificate)
+    assert result['desired_width_met']
+    assert result['bracket_width'] == pytest.approx(0.005)
+    native = json.loads((folder / 'native_receiving.json').read_text())
+    lower, upper = native['queries']
+    assert lower['probe_angstroms'] == result['origin_access_lower_probe']
+    assert upper['probe_angstroms'] == result['origin_enclosed_upper_probe']
+    assert lower['physical']['status'] == upper['physical']['status'] == 'resolved'
+    assert lower['physical']['n_patches'] >= 1
+    assert upper['physical']['n_patches'] == 0
+    broken = copy.deepcopy(certificate)
+    broken['origin_path']['ray_direction'] = [0.0, 0.0, 0.0]
+    with pytest.raises(ValueError):
+        verify_access_bracket(inputs, folder / 'protocol.json', broken)
+    broken = copy.deepcopy(certificate)
+    broken['cover_leaves'].pop()
+    with pytest.raises(ValueError):
+        verify_access_bracket(inputs, folder / 'protocol.json', broken)

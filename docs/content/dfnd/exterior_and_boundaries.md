@@ -99,6 +99,15 @@ at 1.2/1.4/1.7 Å, zero for the 0.2 Å closed shell and one for the 1.4 Å opene
 shell. The two positive controls include compatible continuous component paths.
 This bounded source evidence is distinct from general biological qualification.
 
+The fixed closed shell at 0.05 Å adds a more demanding control: the
+[independent reference](../benchlab/synthetic/closed_shell/small_probe_connectivity.md)
+establishes thirteen patches, including two disconnected regions on one face.
+All thirteen have common-origin access. DFND's physical view agrees, while ten
+native exterior clusters / Mouth children retain their compatibility meaning.
+Independently checked [access/enclosure brackets](../benchlab/synthetic/origin_access_brackets.md)
+also narrow the two shell transitions to 0.005 Å intervals. These are fixed-input
+path/cover bounds, rather than exact bottlenecks or general path qualification.
+
 ## How the bounded decomposition works
 
 On each hull triangle, all selected probe-expanded balls become plane disks.

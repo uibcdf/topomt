@@ -79,6 +79,11 @@ Neither certificate establishes an exact physical transition radius.
 
 ## Inputs, evidence and reproducibility
 
+The later [origin-access bracket](../origin_access_brackets.md) narrows the
+access-to-enclosure transition to 0.169686–0.174686 Å with full positive-path
+and complete-cover certificates. It bounds this fixed-origin question without
+claiming an exact maximum bottleneck.
+
 Both notebooks read the unchanged
 {download}`quantity-aware input <artifacts/closed_shell_v1/input.json>`.
 The 0.05 Å query is an explicitly declared reference extension on those same
