@@ -142,9 +142,9 @@ validated by these three studies.
 
 Development stays with these inputs before adding the tube. Physical mouth
 connectivity, compatible continuous paths and exact-volume references retain
-their own evidence requirements. The numerical volume/uncertainty contract is
-tracked in [#75](https://github.com/uibcdf/topomt/issues/75), and independent
-reference progress in [#76](https://github.com/uibcdf/topomt/issues/76).
+their own evidence requirements. The numerical contract is corrected in source `b7b5a60` under
+[#75](https://github.com/uibcdf/topomt/issues/75), with [matched volume receiving](volume_measurements.md).
+Wider physical/support reference progress remains [#76](https://github.com/uibcdf/topomt/issues/76).
 The public receiving increment [#146](https://github.com/uibcdf/topomt/issues/146)
 does not close those broader questions.
 

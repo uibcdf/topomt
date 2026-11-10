@@ -22,14 +22,19 @@ resolution_evidence = ["devguide/archive/dfnd_physical_boundary_refinement.md", 
 [[findings]]
 id = "dfnd-volume-precision"
 kind = "dfnd_limitation"
-status = "current"
-summary = "Volume exactness and finite-sample uncertainty are overstated for the recorded methods."
+status = "resolved"
+summary = "Boundary-safe conditional sampling intervals and explicit quadrature error/convergence states correct the historical source precision contract."
 scope = "Reproduction at source 7bd47faba6179a6e02444331e442acd251572564. Reviewed source file blob 838fec4a66bd84dc295f26a59a99a8995a217c29 is unchanged at a4f1be84197578e33c28ab62517933b2b54a6bd9; no fresh numerical or installed qualification is asserted."
 issue = "uibcdf/topomt#75"
-evidence = ["devguide/pending_bugs/dfnd_volume_precision_claims.md", "topomt/dfnd/core/solvent_volume.py", "docs/content/dfnd/measurements.md"]
+evidence = ["devguide/archive/dfnd_volume_precision_claims.md", "topomt/dfnd/core/solvent_volume.py", "docs/content/dfnd/measurements.md"]
 owner = "TopoMT maintainers (LMMV/dprada)"
-reviewed_on = "2026-11-09"
+reviewed_on = "2026-11-10"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482187"
+
+fix_revision = "b7b5a60d8d46b84ca2a9f44bcb01eeac98a4b8b2"
+regression_guard = "tests/test_dfnd_volume_precision_contract.py"
+resolution_scope = "Source conditional numerical contract on fixed finite carriers: Clopper-Pearson endpoint safety, bounded quadrature diagnostics and legacy fixed-order error-unknown compatibility, analytic and three-case matched receiving. No universal deterministic bound, model/support/biological or installed-matrix claim."
+resolution_evidence = ["devguide/archive/dfnd_volume_precision_claims.md", "devguide/DFND/volume_validation_protocol_v1.json", "devguide/evidence/volume_precision_sampling_v1.json", "docs/content/benchlab/synthetic/volume_measurements.md", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/volume_study_v1/native_receiving.json", "docs/content/benchlab/synthetic/closed_shell/artifacts/volume_study_v1/native_receiving.json", "docs/content/benchlab/synthetic/shell_with_opening/artifacts/volume_study_v1/native_receiving.json"]
 
 [[findings]]
 id = "dfnd-length-argument-admission"

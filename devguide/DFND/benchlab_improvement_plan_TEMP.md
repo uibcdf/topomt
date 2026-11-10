@@ -283,12 +283,12 @@ not complete the three-case study.
   `8fd2906` before numerical changes or new reference generation. It fixes
   finite supports/observables, errors, seed coverage, quadrature convergence,
   independent sampling and conservative one-CPU resource ceilings.
-- [ ] **VOL-B: start with the tetrahedron.** Establish the analytic bare
+- [x] **VOL-B: start with the tetrahedron.** Establish the analytic bare
   vertex-ball-sector reference only after checking its nonoverlap/truncation
   hypotheses. Validate carrier volume separately. Probe-expanded balls may
   overlap, so they need an appropriate different reference or justified bounds;
   do not subtract those sectors as though disjointness persisted.
-- [ ] **VOL-C: correct the numerical contract.** Add meaningful failing tests
+- [x] **VOL-C: correct the numerical contract.** Add meaningful failing tests
   for the known quadrature/Monte Carlo issues, then implement the chosen
   convergence/error and boundary-safe sampling rules. Preserve a documented
   compatibility path for existing `exact` callers. Compare matched quantities
@@ -302,6 +302,13 @@ not complete the three-case study.
   the atomic union and the hull; use a common comparison domain or explicitly
   account for the domain change. Qualify only the measured scope, then update
   the new reader stage and method/metric documentation.
+
+Execution: numerical source `b7b5a60` and [resolved #75 report](../archive/dfnd_volume_precision_claims.md)
+retain the predeclared calibration, analytic quadrature errors and matched
+independent/public receiving on all eight domain rows. The common parent-hull
+cap comparison preserves its own domain and paired uncertainty. VOL-D's
+numerical/reference portion is delivered; the final executable reader refresh
+remains under #76 before that checklist item is complete.
 
 ## PUB and ROB — exploit the remaining information without inventing features
 

@@ -73,7 +73,8 @@ Source, installed/public and broader adoption retain their distinct scopes;
 remaining qualification belongs to #16 and ecosystem adoption to #56.
 Zeo++ documentary assessment is tracked in #167.
 The previous #147 length-admission defect is resolved source history, excluded
-from the current limitation view. Native #75/#151 remain open in their scoped records.
+from the current limitation view. At that original intake #75/#151 remained open; the dated source deliveries
+below supersede that pending state.
 
 Before future upkeep finishes, inspect every new/revised opening post and reply
 for action commitments and add/reuse an owning issue, then update this navigation
@@ -93,3 +94,15 @@ precision remains #75, neutral support #60, interfaces #61 and installed/matrix
 qualification #16/#58. No new comment or reply supplied an untracked action.
 Exact live readback accompanies the implementation record; this dated note
 does not infer installed delivery from issue closure.
+
+## Precision and extended physical receiving — 2026-11-10
+
+The source correction under #75 at `b7b5a60` supplies boundary-safe conditional
+intervals, honest quadrature states and actual matched three-case receiving.
+Its card/hub move the original finding to resolved source history; wider volume
+model/support/geometry work remains #76 and installed delivery #16/#58. The
+0.05 Å shell now has an independent 13-patch/common-origin-path reference, and
+both shells have certified 0.005 Å access/enclosure brackets. Those bounded
+questions are received, while broader paths/support/interface work stays
+#76/#60/#61 and comparative reviews #155/#156/#158/#159/#168. No new comment or
+reply in the affected hub/method/lab readback supplied an untracked action.

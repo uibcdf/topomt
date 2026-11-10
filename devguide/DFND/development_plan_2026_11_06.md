@@ -19,7 +19,7 @@ measurements against stable numerical contracts.
 This plan consolidates the existing [joint audit](audit_topography_2026_10_01.md),
 [Topography implementation route](../topography_implementation_route.md),
 [reference gate](../pending_proposals/dfnd_reference_validation_panel.md) and
-[volume defect](../pending_bugs/dfnd_volume_precision_claims.md).
+[volume defect](../archive/dfnd_volume_precision_claims.md).
 It proposes work; it does not accept a new scientific definition, change defaults,
 resume the paused notebook laboratory or close an issue. The accompanying
 [review evidence](review_2026_11_06.md) records scope, reproductions and limits.

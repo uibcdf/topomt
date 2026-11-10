@@ -130,7 +130,7 @@ can be zero for a finite sample missing a small excluded ball even though the
 true empty volume is smaller. Neither behavior establishes rigorous certainty.
 
 Owner: [#75](https://github.com/uibcdf/topomt/issues/75), with
-[numeric evidence](../pending_bugs/dfnd_volume_precision_claims.md).
+[numeric evidence](../archive/dfnd_volume_precision_claims.md).
 Keep semantic maturity, numerical uncertainty and biological validity separate.
 Past-beach volume is an estimate/bracket; current local sampling does not certify
 a rigorous upper bound. It must not become an exact occupancy denominator.

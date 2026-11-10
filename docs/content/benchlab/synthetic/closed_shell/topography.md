@@ -26,8 +26,10 @@ resident wet component; the mesh and native dry decomposition remain available.
 Native dry components are not already public convexity or interface objects.
 Mouth objects represent native contact clusters; their physical connectedness
 and exact mouth count retain separate validation requirements. Classification
-threshold confidence is not scientific probability, and volume estimates remain
-numerically unqualified under #75. Full neutral public support adoption is #60.
+threshold confidence is not scientific probability, and the original volume estimates were
+unqualified at this audit checkpoint. The later [volume receiving](../volume_measurements.md)
+qualifies the new conditional on-demand contract in source `b7b5a60`; the fast
+local stencil remains provisional. Full neutral public support adoption is #60.
 
 ## Versioned evidence
 

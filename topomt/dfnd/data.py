@@ -521,17 +521,17 @@ class DFNDData:
         """Return bare empty volume and conditional numerical uncertainty.
 
         On-demand: this is *not* computed during ``get_topography``; call it on the
-        cavities of interest. ``region='resident'`` measures the holding capacity
-        (resident tetrahedra); ``region='transit'`` adds the transit connectors,
-        i.e. the through-volume (the meaningful one for channels). Overlapping van
-        der Waals spheres and non-local intruder atoms are handled natively.
+        components of interest. ``region='resident'`` selects resident tetrahedra;
+        ``region='transit'`` adds the transit connectors. These are finite carrier
+        domains, not globally reachable or swept solvent volumes. Overlapping
+        van der Waals spheres and non-local intruder atoms are handled natively.
 
         ``method='mc'`` returns the volume and maximum distance to its asymmetric
         95% Clopper–Pearson interval endpoints. ``method='quadrature'`` uses bounded
         order refinement; its error is a convergence diagnostic or None if
         unresolved. Legacy ``method='exact'`` preserves fixed-order values and
         ``(volume, None)`` with explicitly unknown quadrature error. Values use
-        nm**3 quantities; no first quadrature estimate is None. Inspect
+        nm**3 quantities; if no order could run, volume is None. Inspect
         ``solvent_volume_measurement`` for the full status, support and history.
         """
         result = self.solvent_volume_measurement(

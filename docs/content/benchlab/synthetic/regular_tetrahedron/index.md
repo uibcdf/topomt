@@ -34,13 +34,20 @@ notebook bytes and reports remain historical evidence.
 Download the complete study bundle from the [synthetic collection](../index.md#download-and-run-the-current-reader-stage),
 including inputs, the parent shell, reference helpers and environment guidance.
 
+**Volume continuation — 2026-11-10:** [matched independent and public measurements](../volume_measurements.md)
+now distinguish carrier, bare empty and probe-center volumes, with conditional
+intervals, convergence/error states and recoverable support. The #75 source
+correction is `b7b5a60`; it does not make the fast local stencil an exact integral
+or qualify every installed release. Earlier frozen notebook values keep their
+original date/source. Wider model/support qualification remains #76.
+
 ## Current observations
 
 | Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
 | --- | --- | --- | --- |
 | Access, 1.2 Å | Four disconnected hull patches, all reached from the centroid. | One face cluster; `Percolating`, zero `Mouth` children. | Separate physical view resolves four; native/Mouth compatibility retained; [#151](https://github.com/uibcdf/topomt/issues/151). |
 | Enclosure, 1.4 Å | Free centroid, completely covered hull. | One `Void`, no exterior link or `Mouth`. | Enclosure qualified; general paths [#76](https://github.com/uibcdf/topomt/issues/76). |
-| Exclusion, 1.7 Å | No free center in the finite hull. | No resident wet component or public feature. | Genuine empty resident result; volume precision [#75](https://github.com/uibcdf/topomt/issues/75). |
+| Exclusion, 1.7 Å | No free center in the finite hull. | No resident wet component or public feature. | Genuine empty resident result; [conditional volume receiving](../volume_measurements.md) uses the smaller-probe finite supports. |
 
 | Stage | What it explains | Current status |
 | --- | --- | --- |

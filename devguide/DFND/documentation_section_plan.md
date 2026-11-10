@@ -96,7 +96,7 @@ should be readable as a scientific account, rather than as a development log.
 - The [theory review](core_theory_review_2026_11_06.md),
   [boundary proposal](boundary_connectivity_contract.md),
   [reference audit](../pending_proposals/dfnd_reference_validation_panel.md) and
-  [volume report](../pending_bugs/dfnd_volume_precision_claims.md) qualify physical
+  [volume report](../archive/dfnd_volume_precision_claims.md) qualify physical
   interpretations. Explain the actual local/discrete operators and their
   assumptions instead of importing stronger claims from older prose.
 - Sphinx already supports MyST, mathematics, figures, notebooks and bibliography.

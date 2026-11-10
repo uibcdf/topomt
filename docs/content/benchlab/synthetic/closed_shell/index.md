@@ -30,12 +30,19 @@ notebook bytes and reports remain historical evidence.
 Download the complete study bundle from the [synthetic collection](../index.md#download-and-run-the-current-reader-stage),
 including inputs, the parent shell, reference helpers and environment guidance.
 
+**Volume continuation — 2026-11-10:** [matched independent and public measurements](../volume_measurements.md)
+now distinguish carrier, bare empty and probe-center volumes, with conditional
+intervals, convergence/error states and recoverable support. The #75 source
+correction is `b7b5a60`; it does not make the fast local stencil an exact integral
+or qualify every installed release. Earlier frozen notebook values keep their
+original date/source. Wider model/support qualification remains #76.
+
 ## Current observations
 
 | Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
 | --- | --- | --- | --- |
 | Access, 0.05 Å | 13 independently counted hull patches, all reached from the common origin. | 13 resolved physical patches; central `Channel`, ten native links / `Mouth` children. | [Independent and actual-public receiving](small_probe_connectivity.md) agree; ten native clusters have a different meaning. Wider qualification: [#76](https://github.com/uibcdf/topomt/issues/76). |
-| Enclosure, 0.2 / 1.4 Å | Free origin and completely covered hull. | `Void` without exterior links / `Mouth` children. | Later certificate resolves 0.2 Å; volume precision [#75](https://github.com/uibcdf/topomt/issues/75). |
+| Enclosure, 0.2 / 1.4 Å | Free origin and completely covered hull. | `Void` without exterior links / `Mouth` children. | Later certificate resolves 0.2 Å; [matched volume receiving](../volume_measurements.md) has its own defined support and uncertainty. |
 | Exclusion, 5 Å | No free center in the finite hull. | No resident wet component or public feature. | Empty resident result; native dry structures remain, [#60](https://github.com/uibcdf/topomt/issues/60). |
 
 | Stage | What it explains | Current status |
@@ -109,9 +116,10 @@ Standalone figures: {download}`input geometry <artifacts/native_study_v1/system_
 
 The input is a sampled atomic wall, rather than a continuum sphere with an
 exact inner radius. Bare free space, free probe-center space and the finite
-hull have different volume definitions. DFND's central solvent estimate remains
-numerically unqualified under #75; it is not accepted by matching an unrelated
-volume or another detector.
+hull have different volume definitions. The fast central stencil remains a provisional local proxy. The later
+[on-demand volume study](../volume_measurements.md) qualifies explicit all-atom
+integrals on frozen finite supports, rather than matching an unrelated volume
+or another detector.
 
 The historical notebook retains its original fpocket/Pocketeer/AlphaSpace2/
 pyCASTA and CASTp records. This split neither re-executes those providers nor
@@ -122,5 +130,6 @@ keep their original scope.
 The [opening variant](../shell_with_opening/index.md) derives from this same frozen wall,
 with atom correspondence and an independent 1.4 Å access witness.
 Regenerating jitter after deleting atoms would change more than the opening.
-The full synthetic phase, independent panel #76, volume precision and later
-protein studies remain separate work.
+The full synthetic phase, wider independent panel #76 and later protein
+studies remain separate work. Source volume qualification has its bounded
+meaning in the linked study, rather than certifying every numerical setting.

@@ -60,6 +60,22 @@ controls, not just interpretations inferred from the returned class names.
 The [certificate page](../benchlab/synthetic/regular_tetrahedron/boundary_connectivity.md)
 retains witnesses, margins and verification scope.
 
+## Measure three different volumes
+
+The same single-cell carrier also makes volume definitions visible. Its volume
+is **17.545323 Å³**. Original vertex balls are disjoint and do not reach an
+opposite face, so independently subtracting four solid-angle sectors gives
+**13.934035 Å³** of bare empty space. The
+[volume study](../benchlab/synthetic/volume_measurements.md) checks those
+hypotheses and the numerical quadrature error. Probe-expanded balls overlap;
+the disjoint-sector formula cannot be reused for that different integral.
+
+Actual public sampling gives about **0.914 Å³** of probe-center space at 1.2 Å
+and **0.050 Å³** at 1.4 Å, on the same finite support. Each has its own conditional
+confidence interval. The positive enclosed volume at 1.4 Å is consistent with
+zero free hull patches. These measurements do not reconstruct swept or globally
+exterior-accessible volume.
+
 ## Optional: reproduce and inspect the result
 
 The JSON stores full-precision quantity records; the PDB rounds coordinates and

@@ -106,8 +106,8 @@ print(measurement['volume'], measurement['interval'], measurement['status'])
 
 Use the selected method's status before interpreting its error. Software
 maturity describes the metric's meaning; it does not certify a particular
-numerical error, every release or biological accuracy. The frozen three-case
-volume protocol and scoped qualification remain owned by
+numerical error, every release or biological accuracy. The bounded three-case
+volume protocol and [matched receiving](../benchlab/synthetic/volume_measurements.md) are owned by
 [#75](https://github.com/uibcdf/topomt/issues/75) and
 [#76](https://github.com/uibcdf/topomt/issues/76).
 

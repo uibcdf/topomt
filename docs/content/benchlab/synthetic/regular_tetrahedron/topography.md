@@ -31,8 +31,10 @@ separate free hull patches at 1.2 Å, versus the current single native face
 cluster and no public `Mouth`. The bounded source refinement under #151 now
 exposes those physical patches and supported contacts separately. This original
 registry audit alone did not establish that geometric capability. Classification
-threshold confidence is not scientific probability, and volume estimates remain
-numerically unqualified under #75. Full neutral public support adoption is #60.
+threshold confidence is not scientific probability, and the original volume estimates were
+unqualified at this audit checkpoint. The later [volume receiving](../volume_measurements.md)
+qualifies the new conditional on-demand contract in source `b7b5a60`; the fast
+local stencil remains provisional. Full neutral public support adoption is #60.
 
 ## Versioned evidence
 

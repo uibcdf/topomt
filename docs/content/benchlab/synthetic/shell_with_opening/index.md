@@ -35,13 +35,20 @@ notebook bytes and reports remain historical evidence.
 Download the complete study bundle from the [synthetic collection](../index.md#download-and-run-the-current-reader-stage),
 including inputs, the parent shell, reference helpers and environment guidance.
 
+**Volume continuation — 2026-11-10:** [matched independent and public measurements](../volume_measurements.md)
+now distinguish carrier, bare empty and probe-center volumes, with conditional
+intervals, convergence/error states and recoverable support. The #75 source
+correction is `b7b5a60`; it does not make the fast local stencil an exact integral
+or qualify every installed release. Earlier frozen notebook values keep their
+original date/source. Wider model/support qualification remains #76.
+
 ## Current observations
 
 | Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
 | --- | --- | --- | --- |
 | Access and localization, 1.4 Å | One connected hull patch and an origin-to-exterior ray. | One `Pocket`, one `Mouth` on the certified face. | Count/location qualified; physical support [#151](https://github.com/uibcdf/topomt/issues/151); aperture area and global bottleneck unavailable. |
 | Enclosure, 3 Å | Free origin and covered hull. | `Void`, no exterior link / `Mouth`. | Enclosure qualified; tighter transition/path scope [#76](https://github.com/uibcdf/topomt/issues/76). |
-| Exclusion, 5 Å | No free center in the finite hull. | No resident wet component or public feature. | Empty resident result; domain-aware volume work [#75](https://github.com/uibcdf/topomt/issues/75). |
+| Exclusion, 5 Å | No free center in the finite hull. | No resident wet component or public feature. | Empty resident result; [domain-aware volume comparison](../volume_measurements.md) preserves the parent hull separately. |
 
 | Stage | Question | Status |
 | --- | --- | --- |
@@ -125,9 +132,11 @@ All parent scientific artifacts and notebook bytes remain unchanged.
 
 ## What follows
 
-No DFND kernel change was needed for these controls. Solvent-volume precision,
-general continuous validity of graph paths, exact physical mouth counts, the
-full synthetic inventory and molecular characterization retain their own gates.
+The original controls required no kernel change at their recorded source.
+Later physical and numerical deliveries qualify separate hull patches, supported
+paths and conditional volumes on these inputs. General native-path validity,
+exact aperture areas, the full synthetic inventory and molecular characterization
+retain their own gates under #76 and the relevant support/interface owners.
 Development now stays with these three inputs to deepen public representation,
 physical mouth/path connectivity and volume references before adding the tube.
 The [public receiving audit](topography.md) checks the actual `Pocket`, child

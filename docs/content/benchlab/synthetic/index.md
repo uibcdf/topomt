@@ -16,7 +16,9 @@ or become a standalone study site using the same reviewed case sources.
 The collection is under development. Three study units are available: a regular
 tetrahedron, a sampled shell with an independently certified wall, and an exact
 subset with a certified opening. They do not
-establish general biological accuracy or numerical volume precision. Development
+establish general biological accuracy or uniform precision for every numerical
+setting. The later [volume study](volume_measurements.md) qualifies declared
+finite supports and uncertainties. Development
 resumed on 2026-11-07, guided by characterization of each synthetic case and its
 necessary variants. Protein studies follow completion of that synthetic phase.
 
@@ -28,6 +30,7 @@ closed_shell/index
 shell_with_opening/index
 Public Topography receiving <public_topography>
 Origin-access transition brackets <origin_access_brackets>
+Volume definitions and precision <volume_measurements>
 ```
 
 ## What each study explains

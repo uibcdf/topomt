@@ -16,6 +16,18 @@ closed [#173](https://github.com/uibcdf/topomt/issues/173), as recorded in the
 and reader checks below remain valid within their scope; they did not exercise
 every described policy and are not exhaustive semantic qualification.
 
+## Later runtime deliveries — 2026-11-10
+
+The original sections below retain their dated source scope. Bounded physical
+refinement is resolved under #151 at `4fc2353`; the small-probe shell now has
+an independent 13-patch reference, and both shells have 0.005 Å origin-access
+brackets. Volume precision is corrected under #75 at `b7b5a60`, with boundary-
+safe conditional intervals, honest quadrature states and matched three-case
+receiving. See [the resolved report](../archive/dfnd_volume_precision_claims.md),
+[volume definitions](../../docs/content/dfnd/measurements.md), updated conditional
+properties and the worked tetrahedron. Wider #76/#60/#61 and installed #16/#58
+remain separate; historical pending statements below are not current findings.
+
 ## Audit-driven correction and reader pass — #173
 
 Completion follow-up after `fc45997`: remaining zero-native-wall/fully-permeable

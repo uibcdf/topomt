@@ -109,3 +109,63 @@ def test_cap_deletion_comparison_uses_common_parent_domain_and_paired_indicators
             confidence=0.999,
             batch_size=512,
         )
+
+
+@pytest.mark.parametrize(
+    'case', ['regular_tetrahedron', 'closed_shell', 'shell_with_opening']
+)
+def test_retained_public_volumes_are_bound_to_the_same_inputs_supports_and_units(case):
+    import hashlib
+    import json
+    from pathlib import Path
+
+    import pyunitwizard as puw
+    from pyunitwizard import QuantityRecord
+
+    from devtools.verify_volume_reference import load_domains
+
+    directory = (
+        Path(__file__).resolve().parents[1] / 'docs/content/benchlab/synthetic' / case
+    )
+    folder = directory / 'artifacts/volume_study_v1'
+    protocol_file, reference_file = (
+        folder / 'protocol.json',
+        folder / 'independent_reference.json',
+    )
+    _, _, domains = load_domains(
+        directory / f'artifacts/{case}_v1/input.json', protocol_file
+    )
+    native = json.loads((folder / 'native_receiving.json').read_bytes())
+    assert (
+        native['protocol_sha256']
+        == hashlib.sha256(protocol_file.read_bytes()).hexdigest()
+    )
+    assert (
+        native['reference_sha256']
+        == hashlib.sha256(reference_file.read_bytes()).hexdigest()
+    )
+    assert native['target_met']
+    for domain, row in zip(domains, native['domains'], strict=True):
+        assert domain['id'] == row['domain_id']
+        expected = {
+            tuple(sorted(tet)) for tet in domain['tetrahedra_source_atom_indices']
+        }
+        for name, measured in row['measurements'].items():
+            assert measured['observable'] == name
+            assert {
+                tuple(sorted(tet))
+                for tet in measured['support']['tetrahedra_source_atom_indices']
+            } == expected
+            value = QuantityRecord.from_dict(measured['volume']).to_quantity(
+                field='volume', unit='nm**3'
+            )
+            assert (
+                puw.get_value(value, to_unit='nm**3')
+                == row['comparisons'][name]['actual_volume_nm3']
+            )
+            if name != 'carrier':
+                assert measured['error_kind'] == 'binomial_confidence_interval'
+                refs = measured['scientific_attribution']['references']
+                assert 'doi:10.1093/biomet/26.4.404' in {
+                    record['item']['id'] for record in refs
+                }

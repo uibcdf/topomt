@@ -101,6 +101,36 @@ candidate conditioning, floating arithmetic and stable source maps need their
 own guards. Equality of a digest after dropping correspondence is not an
 invariance proof.
 
+## Fixed-support volume and conditional uncertainty
+
+For one finite carrier union $C$, define
+
+$$V(C,p)=\int_C\mathbf 1[c_{\rm all}(x)>p],dx.$$
+
+Then $V(C,p_2)\le V(C,p_1)$ for $p_2\ge p_1$; this follows pointwise from
+indicator inclusion. Changing the carrier changes the integral. Bare empty
+volume is $V(C,0)$; removing balls can only increase this volume on the same
+carrier. Different Monte Carlo allocations can reverse the order of point
+estimates despite an exact set inclusion. Use conditional intervals or a
+predeclared paired experiment before interpreting such a difference.
+
+For the regular tetrahedron, the vertex solid angle is
+$\Omega=3\arccos(1/3)-\pi$. If equal radius $r$ balls do not overlap and do not
+reach an opposite face, their sectors occupy $4\Omega r^3/3$, giving
+
+$$V(C,0)=\frac{a^3}{6\sqrt2}-\frac{4\Omega r^3}{3}.$$
+
+Sufficient checked conditions here are $2r<a$ and $r<a\sqrt{2/3}$. The frozen
+bare input satisfies them; its probe-expanded balls do not satisfy nonoverlap.
+The [volume study](../../benchlab/synthetic/volume_measurements.md) retains
+independent union-exclusion bounds for that expanded model.
+
+Binomial confidence assumes uniform IID mixture sampling on disjoint-interior
+carrier cells and a fixed indicator. It excludes geometry/selection bias.
+Two successive quadrature-order differences likewise do not bound every
+integration error. The [measurement chapter](../measurements.md) distinguishes
+these numerical statements from exact properties of the measured sets.
+
 ## The graph has an exact discrete meaning
 
 Given its admitted node/edge sets, connected-component search partitions the

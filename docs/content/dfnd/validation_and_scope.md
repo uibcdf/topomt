@@ -37,9 +37,9 @@ inner radius. A certificate for the origin-containing region does not prescribe
 every cavity or its exact volume. These references were strengthened during
 development and are not a held-out biological detector benchmark.
 
-## Current scientific and public-support boundaries
+## Source deliveries and remaining scientific/public boundaries
 
-At the documented source, the following owners retain the unresolved work:
+Keep completed bounded deliveries distinct from their broader follow-up:
 
 - [#151](https://github.com/uibcdf/topomt/issues/151): the bounded source delivery
   of separate physical hull patches and compatible contact paths. The five
@@ -47,8 +47,11 @@ At the documented source, the following owners retain the unresolved work:
   validation remain under #76. Native Mouth/catalog compatibility is retained.
 - [#76](https://github.com/uibcdf/topomt/issues/76): independent reference
   assumptions, physical graph/path interpretation and the broader panel.
-- [#75](https://github.com/uibcdf/topomt/issues/75): volume precision and
-  finite-sample uncertainty claims.
+- [#75](https://github.com/uibcdf/topomt/issues/75): source correction of endpoint
+  uncertainty and explicit quadrature error states at `b7b5a60`, with
+  [matched three-case receiving](../benchlab/synthetic/volume_measurements.md).
+  Conditional intervals and convergence diagnostics do not certify every
+  setting, global accessible volume or physical model/support accuracy.
 - [#60](https://github.com/uibcdf/topomt/issues/60) and
   [#61](https://github.com/uibcdf/topomt/issues/61): full public support/context
   and localized interface/relation adoption.
