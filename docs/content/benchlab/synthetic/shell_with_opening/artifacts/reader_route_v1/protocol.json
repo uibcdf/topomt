@@ -1,0 +1,16 @@
+{
+  "schema": "topomt.benchlab.reader-protocol/1",
+  "owning_issue": "uibcdf/topomt#175",
+  "case_id": "shell_with_opening",
+  "created": "2026-11-10",
+  "known_before_execution": "Existing native/public observations and later independent certificates; retrospective reader qualification",
+  "notebook_source_sha256": "2b7d81e6bca487b8d639fe5fa0625fb02dd305cd60dc6a8853d127a0dba88f70",
+  "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+  "probes_angstroms": [
+    1.4,
+    3.0,
+    5.0
+  ],
+  "original_provider_execution": false,
+  "frozen_files_rewritten": false
+}
