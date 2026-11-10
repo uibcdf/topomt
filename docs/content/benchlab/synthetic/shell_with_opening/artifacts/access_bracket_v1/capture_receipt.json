@@ -1,0 +1,14 @@
+{
+  "schema": "topomt.benchlab.reference-capture/1",
+  "issue": "uibcdf/topomt#76",
+  "case": "shell_with_opening",
+  "source_revision": "863d5a793bf628720a986a0ee630c205d96eca14",
+  "status": "unresolved",
+  "reason": "Origin path candidate budget exhausted",
+  "generation_seconds": 5.992,
+  "single_cpu": true,
+  "numerical_threads": 1,
+  "peak_rss_kib": 78276,
+  "address_space_gib": 6,
+  "cpu_seconds_limit": 120
+}

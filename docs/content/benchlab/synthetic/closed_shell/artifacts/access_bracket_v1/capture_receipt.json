@@ -1,0 +1,26 @@
+{
+  "schema": "topomt.benchlab.reference-capture/1",
+  "issue": "uibcdf/topomt#76",
+  "case": "closed_shell",
+  "source_revision": "863d5a793bf628720a986a0ee630c205d96eca14",
+  "status": "verified",
+  "generation_seconds": 1.649,
+  "verification_seconds": 0.052,
+  "certificate_sha256": "c16040d53e06aa5da9b752735fa947077d5be6c82f974f2534e88112323f1cf5",
+  "verification_sha256": "39dec7fa02db30e6167e2cea0133e038763d0eeaa3a1afa2592d83c1df9b7c3b",
+  "path_tests": 1583,
+  "cover_trials": [
+    {
+      "width": 0.005,
+      "status": "covered",
+      "nodes": 1632,
+      "charged_node_budget": 1632
+    }
+  ],
+  "independence": "No TopoMT modules, scientific outputs or native witnesses imported; solver-free path/convex-cover reference",
+  "single_cpu": true,
+  "numerical_threads": 1,
+  "peak_rss_kib": 79092,
+  "address_space_gib": 6,
+  "cpu_seconds_limit": 120
+}
