@@ -59,9 +59,13 @@ components through one shared node. It is a finite-region construction, not a
 proof that each result is a separate connected component of the complete
 physical admissible set $F_p$.
 
-Residence regions answer another question: how resident nodes group inside one
-transit component. One component can contain several resident regions joined
-through the selected connector policy. Record those supports separately.
+Resident-only connectivity answers another question: how resident nodes group
+when connector nodes are excluded. A transit component can contain several such
+connected subsets. The current raw `residence_regions` field instead stores
+**one resident aggregate per transit component with resident content**, with
+connectors listed separately. It does not export one record per resident-only
+connected subset. Use the recorded supports rather than inferring that count
+from the length of the field.
 
 ## Follow a multi-cell graph by hand
 
@@ -75,8 +79,9 @@ Lines stand for admitted graph contacts, not center trajectories.
 
 Assume only the drawn contacts are admitted, and enable connectors. The three
 finite components after removing OCEAN are $\{A,C,B\}$, $\{D,E\}$ and $\{S\}$.
-The first contains two separate residence regions, $\{A\}$ and $\{B\}$, joined
-through connector $C$. The sealed resident cell $S$ remains a component despite
+The first contains two resident-only connected subsets, $\{A\}$ and $\{B\}$,
+joined through connector $C$. Its current raw residence record would aggregate
+$\{A,B\}$, retaining $C$ separately. The sealed resident cell $S$ remains a component despite
 having no exterior contact. Keeping OCEAN would join the first two groups through
 the root and hide their finite separation.
 
@@ -180,6 +185,11 @@ import numpy as np
 shell_void = max(shell_topography.get_features(by='type', value='void'),
                  key=lambda feature: len(feature.tetrahedron_indices))
 shell_component = shell_topography.dfnd.dfn.components[shell_void.component_id]
+resident_aggregate = next(
+    region for region in shell_topography.dfnd.raw['residence_regions']
+    if region['component_key'] == shell_component.component_key
+)
+assert resident_aggregate['tetrahedron_ids'] == shell_component.resident_node_indices
 network = shell_topography.dfnd.network
 nodes = shell_component.node_indices
 cell_vertices = network.atom_coords[network.tetra_atoms[nodes]]

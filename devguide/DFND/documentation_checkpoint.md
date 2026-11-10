@@ -17,6 +17,14 @@ every described policy and are not exhaustive semantic qualification.
 
 ## Audit-driven correction and reader pass — #173
 
+Completion follow-up after `fc45997`: remaining zero-native-wall/fully-permeable
+developer wording and the unqualified one-link assertion are corrected, and
+ideal local capacity-state formulas are distinguished from actual owner
+admission. The raw residence record is now explicitly a per-component resident
+aggregate, with connectors separate; it is not a resident-only connected-subset
+enumeration. The existing shell chapter/guard recovers and checks that record.
+No runtime algorithm or physical boundary refinement changed.
+
 The book retains 21 pages. The landing now opens with fitting versus entry,
 an existing atomic-geometry picture and public/native/developing availability.
 The worked tetrahedron shows predictions and the stored three-probe visual

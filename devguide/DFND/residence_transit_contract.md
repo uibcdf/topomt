@@ -187,9 +187,12 @@ Non-resident transit nodes contribute to connectivity, not to resident volume.
 
 ## 6. ResidenceRegion
 
-A `ResidenceRegion` is a connected subset of resident nodes inside one
-`Component`. Connectivity between resident nodes may be direct or may be
-mediated by transit connectors, depending on the analysis view.
+A current raw `ResidenceRegion` record aggregates the resident nodes of one
+`Component`, with its connectors retained separately. The implementation emits
+one such record per transit component with resident content. It does not split
+that resident subset into connected components of the resident-only subgraph.
+Several resident-only connected subsets can therefore share one aggregate
+through transit connectors. Do not infer their count from the raw record count.
 
 For v1, store both:
 
@@ -223,12 +226,15 @@ has_open_interior = any resident node is wet_open
 n_wall_faces = non-permeable boundary faces of the component (to OCEAN or another component)
 ```
 
-**Enclosure override (checked first):** a resident component with **`n_wall_faces == 0`**
-is fully permeable / exposed (porous) — not a concavity — and is classified
-`percolating`, regardless of access. (Mathematically such a component always has
-exactly one external link, but that is a consequence, not the criterion.) Voids
-always have walls (0 mouths => all boundary non-permeable), so they are never
-percolating. Otherwise the access × residence table applies:
+**Native wall-count override (checked first):** a resident component with
+**`n_wall_faces == 0`** is classified `percolating`, regardless of access.
+This counts complete carrier faces under the discrete owner-admission rules;
+it does not mean every boundary point is physically free. The earlier
+fully-permeable/porous interpretation and unqualified one-link consequence are
+historical rationale, not a physical guarantee or an additional classifier
+predicate. The four physical patches versus one native link on the frozen
+tetrahedron illustrate the distinction; #151 owns physical refinement. Otherwise
+the access × residence table applies. No runtime classification is changed.
 
 | Access | Residence | Raw label | v1 interpretation |
 |---:|---|---|---|
@@ -238,18 +244,18 @@ percolating. Otherwise the access × residence table applies:
 | 1 | no | `surface_concavity` | one-mouth non-resident contact/dent |
 | >=2 | yes | `channel` | multi-mouth resident component (maps to the public `Channel`) |
 | >=2 | no | `nonresident_passage` | provisional pass-through contact |
-| any | yes, **0 walls** | `percolating` | fully permeable/exposed resident region (shape_type `neutral`) |
+| any | yes, **0 native walls** | `percolating` | native wall-count override (shape_type `neutral`), not physical patch topology |
 
 `has_open_interior` is a descriptor, not the family gate. The graph substrate
 must no longer be restricted to resident nodes only. The exact
 `surface_concavity` and pocket boundary remains a validation item.
 
-## 8. Dry Components After Transit Separation
+## 8. Dry Banks and Local Nonresidence Diagnostics
 
-Dry graph construction remains useful, but it should not steal transit
-connectors from the movement graph.
-
-Dry records should preserve:
+The bank node set is the complement of finite transit, excluding enabled
+connectors. Its face adjacency requires both nonpermeable owner incidences;
+edge/vertex modes are different groupings. The historical three-role inventory
+below describes local nonresidence diagnostics, not bank membership:
 
 ```text
 non_resident terminal_contact nodes
@@ -257,9 +263,9 @@ non_resident non_transit nodes
 non_resident transit_connector nodes
 ```
 
-`transit_connector` nodes may appear both in transit-component provenance and in
-dry diagnostics. They should be marked clearly so that dry components do not
-hide movement connectivity.
+Raw per-cell residence/transit roles preserve this distinction. A connector can
+therefore be locally nonresident while belonging to transit-component support
+and to no bank. Local diagnostic labels must not be counted as extra bank nodes.
 
 ## 9. Required Toys
 

@@ -136,6 +136,20 @@ def test_documented_shared_face_and_many_cell_centroid_execute(tmp_path, monkeyp
     assert not any(face['transit_edge'] for face in pair)
     component = namespace['shell_component']
     assert len(component.node_indices) > 1
+    aggregate = namespace['resident_aggregate']
+    assert aggregate['component_key'] == component.component_key
+    assert aggregate['tetrahedron_ids'] == component.resident_node_indices
+    assert (
+        aggregate['transit_connector_tetrahedron_ids']
+        == component.transit_connector_node_indices
+    )
+    assert (
+        sum(
+            row['component_key'] == component.component_key
+            for row in namespace['shell_topography'].dfnd.raw['residence_regions']
+        )
+        == 1
+    )
     np.testing.assert_allclose(
         puw.get_value(namespace['shell_void'].center, to_unit='nm'),
         namespace['centroid_nm'],

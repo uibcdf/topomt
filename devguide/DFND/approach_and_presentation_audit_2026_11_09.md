@@ -14,6 +14,16 @@ describe that earlier stage. They must not be reused as current deficiencies
 without checking the target revision. The [checkpoint](documentation_checkpoint.md)
 records validation and publication scope.
 
+Completion check after `fc45997` corrected remaining developer wall-count
+wording and qualified ideal capacity-state formulas. It also clarifies current
+raw `residence_regions`: one resident aggregate per transit component with
+resident content, not a resident-only connected-component decomposition. The
+public chapter/pseudocode and executed shell inspection now state/check that
+distinction. These are additional documentary corrections under #173, with no
+runtime policy or scientific finding change. Earlier review prose below remains
+dated analysis, including broad uses of the word region rather than this exact
+raw-field contract.
+
 | Finding | Documentary disposition | Scientific/runtime boundary retained |
 | --- | --- | --- |
 | F1 | Capacity versus owner admission, exact apex heuristic and two-sided wet/dry predicates are explicit in chapters/pseudocode. A frozen shell example is guarded by an executed chapter test. | No graph policy or physical path claim changed. |

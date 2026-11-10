@@ -56,7 +56,9 @@ exterior edges := admitted hull contacts of transit nodes to virtual OCEAN
 components := connected components after removing OCEAN
 
 for each component:
-    retain transit, resident and connector supports and residence regions
+    retain transit, resident and connector supports
+    if residence exists, emit one resident aggregate for this transit component
+        (not a decomposition of its resident-only induced subgraph)
     collect hull contacts and cluster whole faces by shared atomic edges
     retain exterior-link support, carrier areas and gate summaries
     count nonpermeable boundary wall faces

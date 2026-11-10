@@ -40,6 +40,39 @@ has zero DFND warnings and eleven pre-existing project warnings (#64).
 Scientific gates #75/#76/#151 and public-contract gates #60/#61 remain open;
 this resolves documentary correctness/completeness only.
 
+## Completion-check follow-up — 2026-11-09
+
+After `fc45997`, the maintainer requested an explicit check against the audit's
+closure criteria. The main delivery held, but residual developer prose still
+equated zero native walls with a physically fully permeable boundary and made
+an unqualified one-link assertion. That passage/table are corrected to the
+implemented wall-count override, with the earlier interpretation retained as
+historical rationale. The ideal zero-tolerance capacity predicates now have
+explicit scope separate from post-policy query admission and dry banks.
+
+Source inspection also established that current raw `residence_regions` emits
+one resident aggregate per transit component with resident content, not one
+record per resident-only connected subset. The public graph chapter, abstract
+graph explanation, pseudocode and developer contract now say so. The existing
+executed shell example recovers that aggregate by its component key; its guard
+checks the resident and connector supports and the one-record contract. It
+first failed on the missing documented `resident_aggregate` observation.
+
+This is a documentary clarification of existing output, not a new segmentation
+algorithm or physical result. #173 was reopened for this bounded follow-up;
+earlier receipts/history remain valid for their scope. #75/#76/#151/#60/#61
+remain separate open scientific/runtime work.
+
+The companion formal overview is also explicit about two-sided graph admission,
+the native Percolating override and the nonresident diagnostic criterion.
+OCEAN and native exterior links are not described as proofs of free physical
+space. Bank membership is separated from the historical local-nonresidence
+diagnostic inventory. Validation for this follow-up gives **22 passed** (all
+six executed documentation tests plus reporting/comparative checks); the initial
+aggregate-inspection guard failed on its missing named observation. Ruff/format,
+indexes and the incremental HTML build pass with no DFND warning. No runtime
+module or frozen scientific artifact changed in this follow-up.
+
 ## What
 
 The public network chapter equates shared-face capacity with a shared

@@ -158,27 +158,28 @@ to the maximum definition.
 ## 4. Geometric Classifications
 
 ### 4.1. Local Permeability Class
-DFND separates volumetric habitability from face permeability. A tetrahedron is
-classified as wet or dry from its habitability radius, while each face is
-classified as permeable or non-permeable from its gate radius.
+DFND separates local residence from face capacity. The following are ideal
+local capacity predicates with zero epsilon/extra tolerances and no intrusion
+blocking. The cell's local dry label is not the bank transit complement.
 
 ```text
 tetrahedron_wet(T) = R_residence(T) >= R_probe
 tetrahedron_dry(T) = R_residence(T) < R_probe
 
-face_permeable(F) = R_gate(F) >= R_probe
-face_non_permeable(F) = R_gate(F) < R_probe
+face_capacity_pass(F) = R_gate(F) >= R_probe
+face_capacity_fail(F) = R_gate(F) < R_probe
 ```
 
-The local permeability class of a finite tetrahedron is:
+Actual query states include epsilon, query tolerances and owner-specific
+intrusion admission; the two incidences of one face need not agree. The
+[residence/transit contract](residence_transit_contract.md) defines that route.
+The following local classes count post-policy owner incidences, including hull
+contacts, rather than applying the ideal capacity predicate again:
 
 ```text
-open(T) = all finite faces of T are permeable
-
-coast(T) = at least one finite face of T is permeable
-           and at least one finite face of T is non-permeable
-
-sealed(T) = all finite faces of T are non-permeable
+open(T) = all four owner incidences are admitted
+coast(T) = one to three owner incidences are admitted
+sealed(T) = no owner incidence is admitted
 ```
 
 `non-coast` is only a derived complement, not a primary label:
@@ -199,23 +200,22 @@ dry_coast(T) = tetrahedron_dry(T) and coast(T)
 dry_sealed(T) = tetrahedron_dry(T) and sealed(T)
 ```
 
-These labels do not create flow connectivity by themselves. Primary movement
-connectivity is the transit graph: resident tetrahedra plus non-resident
-transit connectors connected through permeable faces. Local class labels are
+These labels do not create flow connectivity by themselves. The transit graph
+uses resident nodes plus enabled nonresident connectors, with both incidences
+admitted for each shared-face edge. Local class labels are
 retained as boundary, lining, pharmacophore, and diagnostic metadata. Whether
 any local class contributes to a reported feature volume is a metric-policy
 decision, not part of the topological classification itself.
 
 ### 4.2. Exterior
-The baseline DFND exterior is probe-dependent. A wet component contacts the
-exterior when it has one or more permeable boundary or hull faces connected to
-the outside root.
+The baseline exterior contacts are probe-dependent: admitted hull incidences
+of finite transit nodes connect to the common virtual root.
 
-`OCEAN` is the virtual exterior node of the DFND graph. Geometrically, it
-represents the unbounded region outside the convex hull. It is wet by
-definition because the probe is assumed to fit freely in the exterior. It is
-not a finite Delaunay tetrahedron, has no `R_residence`, has no volume, and
-cannot be `COAST`.
+`OCEAN` has no finite geometry, `R_residence`, volume or local class. Its virtual
+exterior role does not assert that every point outside the center hull is free
+of expanded atomic balls. An all-atom-free hull point has an outward-normal
+route to infinity; a locally admitted contact alone does not establish that
+physical starting point or the route from a native region to it.
 
 No separate `sea_level` scale or parameter is part of DFND. A future optional
 macro-surface mode would require a separate scientific contract.
@@ -226,7 +226,10 @@ macro-surface mode would require a separate scientific contract.
 
 ### 5.1. Delaunay Flow Network
 Let `DFN` be the probe-specific graph built over the Delaunay triangulation.
-Finite transit tetrahedra are graph nodes. Resident tetrahedra are transit nodes. Non-resident tetrahedra with at least two permeable contacts are transit connectors. Two finite transit tetrahedra are connected when they share a permeable face.
+Finite resident nodes and enabled nonresident connector candidates form its
+node set. Connector candidates have at least two locally admitted contacts.
+An internal edge requires both endpoints and both owner admissions. Under
+`resident_only`, nonresident candidates do not enter that graph.
 
 Let `OCEAN` be the virtual wet exterior root. It is connected to a finite transit tetrahedron only through a permeable boundary or hull face.
 
@@ -234,8 +237,10 @@ Let `OCEAN` be the virtual wet exterior root. It is connected to a finite transi
 An `external_link` of a concavity component is a connected cluster of
 permeable boundary or hull contacts between that component and `OCEAN`.
 
-A single wide exterior opening may contain many boundary faces, but it should
-count as one `external_link` if those faces form one connected cluster.
+Native clustering joins whole admitted hull triangles through shared atomic
+edges. Such a cluster can merge physically separated free patches: native
+triangle adjacency is not a clipped free-surface connectivity test. #151 owns
+physical patch decomposition, attachment and Mouth interpretation.
 
 `mouth` is a geometric descriptor that may be derived from an `external_link`;
 it is not the primitive used to define primary DFN feature families.
@@ -251,7 +256,10 @@ has_residence(D) = n_resident_nodes(D) >= 1
 has_open_interior(D) = exists t in D such that t is wet_open
 ```
 
-Primary family classification uses access and residence:
+The classifier first assigns `percolating` when residence is present and the
+native nonpermeable wall-face count is zero. This is a discrete count override,
+not proof that the entire boundary is physically free. Only otherwise does
+the access/residence cross-product apply:
 
 ```text
 void(D) = L(D) == 0 and has_residence(D)
@@ -266,10 +274,10 @@ channel(D) = L(D) >= 2 and has_residence(D)
 
 `has_open_interior(D)` is a descriptor, not the classifier. The resident multi-mouth family is named `channel` (mapping to the public `Channel` feature), but biological channel, tunnel, or pore labels should be assigned only after additional path, depth, geometry, or morphology analysis.
 
-`surface_concavity` remains provisional until explicit toy systems or
-geometric sweeps demonstrate the realizability and utility of accessible
-wet components without wet-open tetrahedra under the current `R_residence` and
-`R_gate` definitions.
+`surface_concavity` is the one-link **nonresident** diagnostic; absence of a
+wet-open cell alone does not select it. Realizability and physical interpretation
+of diagnostic branches remain #76. Morphological refinement and public promotion
+have their separate rules in the [classification chapter](../../docs/content/dfnd/classification.md).
 
 ### 5.4. Component Volume
 The topological volume of a concavity component `D` is the sum of the Euclidean
