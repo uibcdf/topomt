@@ -3,6 +3,8 @@
 Created: **2026-11-10**. Status: **active coordination plan; implementation
 pending**. Scope: `regular_tetrahedron`, `closed_shell`, `shell_with_opening`
 and publication of the actual TopoMT documentation.
+Second-pass plan review: **2026-11-10**; execution gates, portable delivery,
+bounded physical algorithms and case-level acceptance clarified below.
 
 This is the requested temporary execution checklist. It coordinates existing
 issues, not a new umbrella issue or a replacement scientific contract. The
@@ -50,6 +52,26 @@ not wait for the scientific implementation to finish.
 | ROB: thresholds and invariance | #76, with #151/#75/#60 as affected | Meaningful mapped-support and numerical acceptance checks. |
 | CMP: original comparators | [#155](https://github.com/uibcdf/topomt/issues/155), [#156](https://github.com/uibcdf/topomt/issues/156), [#158](https://github.com/uibcdf/topomt/issues/158), [#159](https://github.com/uibcdf/topomt/issues/159), [#168](https://github.com/uibcdf/topomt/issues/168) | Applicability/diagnosis first; new original execution gets a bounded owner when selected. |
 
+## Dependencies and bounded delivery gates
+
+| Delivery | Required first | Not a prerequisite |
+| --- | --- | --- |
+| Reviewed baseline online | WEB-A/B/C and verified publishing candidate. | #151/#75 implementation or all of #64. |
+| Current reader route | Preserved input/history, declared environment, public receiving and portable bundle checks. | New physical fields or complete #60/#61 adoption. |
+| Physical public contacts | A chosen #151 contract, recoverable input/support identity and the minimum #60 availability/context slice it consumes. Move that slice forward if needed. | Finishing unrelated public/dry/interface architecture first. |
+| Volume sequence | The first bounded #151 patch/path receiving milestone on its five frozen controls, then an independently defined volume question. | A general theorem for all native paths, all #76 work or final Mouth promotion. |
+| Typed participant/interface work | Relevant #60 support/context contract and meaningful positive/negative evidence under #61. | Inventing that evidence from these three single-wall controls. |
+| New original comparison | Eligible matched observable, bounded owner/protocol and original input-model audit. | Running every tool or obtaining a successful server result. |
+| Next synthetic geometry | Explicit per-case disposition against the required evidence below. | Closing every broader issue or proving all DFND properties with three examples. |
+
+For each slice, record the issue, selected observable/control rows, intended
+output and availability, predeclared numerical criteria/budget, dependencies,
+and concrete checks **before** changing the implementation. A task may have
+several bounded deliveries. Keep its unchecked state until its stated scope is
+delivered; a partial slice needs its own evidence and explicit remaining work.
+These gates refine the order above; PUB and ROB are not postponed when an
+earlier physical or reader delivery depends on them.
+
 ## WEB — restore a usable public reading route first
 
 - [ ] **WEB-A: establish the publishing route.** Under #18, inspect Pages
@@ -62,9 +84,11 @@ not wait for the scientific implementation to finish.
 - [ ] **WEB-B: prepare one reviewed documentation candidate.** Check the root
   identity, navigation, install/import examples, BenchLab and DFND links. Keep
   historical PocketMT references explicitly historical. Validate the dependency
-  closure actually used by the documentation workflow: its current Python 3.13
-  route is not qualified by the local Python 3.14 result. Retain reviewed source
-  pins where needed; diagnose missing tools/packages before asking the
+  closure actually used by the documentation workflow. Review its current
+  Python 3.13 setting against the common routine Python 3.14 baseline and
+  record the chosen route and evidence; the local 3.14 run does not qualify
+  the old hosted route. Retain reviewed source pins where needed, including
+  required quantity-codec APIs; diagnose missing tools/packages before asking the
   maintainer to install anything. Use one Sphinx worker, execution off for
   stored notebooks, and a bounded workflow timeout. Replace the current
   `-j auto` invocation when preparing that controlled route.
@@ -79,7 +103,13 @@ not wait for the scientific implementation to finish.
   for that exact candidate and inspect its result with the registered
   gh-run-receptor/native fallback. Retain checkout SHA, run/attempt, build
   result and deployed identity. No package release or new scientific run is
-  needed merely to publish stored reviewed content.
+  needed merely to publish stored reviewed content. Retain the previous
+  publishing identity/artifact when recoverable. Prevent overlapping deployments
+  from replacing a newer checked candidate with an older one. If a candidate
+  fails after publication, restore the known prior artifact when appropriate
+  and retain the failed evidence; do not rewrite source history or declare #18
+  fixed by rollback. Diagnose a failed run before retrying instead of repeatedly
+  dispatching unchanged inputs.
 - [ ] **WEB-E: check the served site independently.** Verify both advertised
   host forms and redirects, TopoMT identity, BenchLab's two collection indexes,
   all three case entries, DFND, notebook pages, downloadable notebooks and
@@ -87,6 +117,10 @@ not wait for the scientific implementation to finish.
   with the publishing source where applicable. Check figure/math display and
   a normal desktop/narrow-window reading route in a real browser. Close #18
   only with served-site evidence; #64 keeps any separate remaining defects.
+
+If hosted execution or domain access is unavailable, record the actual block
+under #18 and provide the tested local HTML/bundle for review. A local preview
+is useful access, not evidence that the public deployment is fixed.
 
 **First usable delivery:** the current reviewed baseline is
 readable on the public site, with its current limits visible. Do not wait for
@@ -110,6 +144,9 @@ unimplemented physical observations as already available.
   scope clear to a Jupyter reader; do not silently overwrite them to remove
   an earlier conclusion. Keep stages separate rather than combining the
   entire study into a large notebook.
+  Put a visible date/status on the new entry point and in its downloadable
+  bundle guide. Browser presentation around frozen notebook pages may link
+  that current entry without changing the frozen notebook source.
 - [ ] **READ-C: add real public inspection.** In the new stage use the actual
   public `get_topography(method='dfnd')` route, full-precision frozen input,
   verified radii and parent/source atom correspondence. Show region classes,
@@ -128,15 +165,29 @@ unimplemented physical observations as already available.
 - [ ] **READ-E: make presentation portable.** Supply ordinary relative links
   alongside Sphinx-specific downloads, explicit case working directories,
   tested kernel/environment requirements and a fresh-kernel Run All route.
+  Publish a runnable study bundle with a manifest, dependency instructions,
+  inputs, reference helpers and linked resources, not just an isolated notebook.
+  Include the closed-shell parent required by the opening's relative paths and
+  public source selection. Pin tested source dependencies honestly where a
+  published release lacks an API. Do not require a sibling checkout, hidden
+  `.cache` data, a `tests.*` import or an absolute home-directory path.
   Produce a new versioned presentation figure fixing the opening-contact
   legend clipping; keep the original figure. Use consistent units, matched
   view ranges where comparison needs them, and captions distinguishing atomic
   balls, carrier centroids, contact triangles and physical free patches.
 - [ ] **READ-F: qualify and republish this reader checkpoint.** Execute new
   notebooks independently, verify preservation hashes, links and rendering,
-  and review the actual browser/Jupyter flow. Publish a second bounded docs
+  and review the actual browser/Jupyter flow. READ-G's out-of-checkout receiving
+  must pass before this publication/closure. Publish a second bounded docs
   checkpoint using WEB-D/E. Close/archive #175 only after its reader acceptance
   criteria pass. Runtime refinement and its scientific issues remain separate.
+- [ ] **READ-G: receive the download outside this checkout, under #175.**
+  Extract each bundle into a fresh temporary directory, verify its manifest,
+  links and chosen environment, then execute its entry notebook in a new
+  kernel. Record the actual imported TopoMT/dependency identities and working
+  directory. Distinguish a deliberately source-bound study from an installed
+  package claim. This checks portability separately from execution inside the
+  repository; original providers and network jobs remain outside Run All.
 
 New narrative/evidence belongs in a new versioned directory, for example
 `artifacts/reader_route_v1/`. Its protocol identifies the earlier inputs,
@@ -152,13 +203,23 @@ not a retroactive fresh observation or a held-out benchmark.
   within-face connectivity, seam decisions and explicit unresolved/computed
   states. Preserve native whole-face links and catalog classes in this first
   increment. Do not glue across a blocked atomic edge or treat a whole
-  triangle as exact patch support.
+  triangle as exact patch support. Set explicit work/subdivision/memory budgets
+  and termination rules before execution; exhausted, degenerate or marginal
+  decisions return an explained unresolved/unsupported outcome, not a zero
+  count or guessed patch. Production code must not import BenchLab witnesses
+  or `devtools`, dispatch by case name or hard-code the expected four/one/zero.
+  Numerical samples, images and optimizer success alone are not certificates.
 - [ ] **PHY-B: qualify contacts through actual raw and public results.** Use
   the frozen four/one/zero panel: tetrahedron 1.2/1.4/1.7 Å, closed shell
   0.2 Å, opened shell 1.4 Å. Attach patches to regions only with compatible
   continuous all-atom paths. All seven pending acceptance targets must pass
   for their delivered scope; remove expected-failure markers as capabilities
-  land. The reference verifiers remain independent of DFND.
+  land. These are a minimum receiving panel, not the complete acceptance suite.
+  Path associations must stay compatible with the claimed component's support;
+  the retained global origin rays alone do not prove every local attachment.
+  The reference verifiers remain independent of DFND. A complete zero boundary
+  count can coexist with positive enclosed free volume; absent capability or
+  an absent resident component is not a computed zero physical observation.
 - [ ] **PHY-C: deepen the same systems under #76.** Count the physical contacts
   on the 0.05 Å shell rather than assuming its ten native links are ten mouths.
   Examine compatible within-cell/face paths and tighten access/closure
@@ -173,6 +234,14 @@ not a retroactive fresh observation or a held-out benchmark.
   free aperture area and transport interpretation. Reconcile the public book,
   current case narrative, issue/report and comparative record in the same
   delivery; documentation alone does not resolve the runtime limitation.
+- [ ] **PHY-E: falsify and test the fallback, under #151/#76.** Add focused
+  guards for incomplete face/seam inventories, false witnesses, near-tangency
+  ambiguity, degenerate or unsupported hulls and exhausted budgets. Require
+  honest status/reason and inspectable supported bounds rather than an accepted
+  total count. Exercise reporting suppression, cached-query reuse and mapped
+  atom changes. Choose within-face/seam controls needed to challenge the
+  algorithm without relying only on the known positive certificates; a new
+  geometry variant needs its own frozen identity and justification before use.
 
 ## VOL — establish what the volumes mean and how accurate they are
 
@@ -190,7 +259,10 @@ not a retroactive fresh observation or a held-out benchmark.
   convergence/error and boundary-safe sampling rules. Preserve a documented
   compatibility path for existing `exact` callers. Compare matched quantities
   and disclose unresolved numerical error; fixed-order quadrature and an
-  all-hit/no-hit sample are not zero-error proofs.
+  all-hit/no-hit sample are not zero-error proofs. A deterministic seed makes
+  a run repeatable, not its interval calibrated: predeclare a bounded repeated-
+  seed coverage experiment and its acceptance, separately from deterministic
+  convergence and physical model/support error.
 - [ ] **VOL-D: extend to the two shells.** Use independent bounds/reference
   calculations and the same declared observable. Cap deletion changes both
   the atomic union and the hull; use a common comparison domain or explicitly
@@ -209,13 +281,20 @@ not a retroactive fresh observation or a held-out benchmark.
   and relation behaviour through the selected public contracts. Keep native
   banks separate from molecular participants. These three controls do not
   supply every positive interface/convexity case; record honest native-only
-  outcomes and leave broader participant/interface gates open.
+  outcomes and leave broader participant/interface gates open. Test snapshot
+  behaviour after live-input mutation and deep versus shallow copy semantics.
+  For an existing persistence route, qualify saved reading, schema/version and
+  explicit units: an old carrier area/link must not silently become a physical
+  aperture/patch. If no supported saved route exists, record that availability
+  under #60 rather than inventing or claiming it here.
 - [ ] **ROB-A, #76 with affected owners:** choose below/at/above-threshold
   controls with explicit physical tolerance and mesh epsilon, then extend
   missing observables under unit-policy changes, rigid motion and source
   permutation. Use explicit correspondence, not equality of mesh IDs. For
   similarity scaling, scale every relevant length and tolerance together.
   Reuse already valid guards; do not label all invariance work absent.
+  Compare reuse of a compatible mesh across probes with fresh construction;
+  radii/coordinates/source-selection changes must invalidate incompatible reuse.
 - [ ] **ROB-B:** require nested primitive availability only where the fixed
   model/policy justifies it. Connected-component or mouth counts need not be
   monotone with increasing probe. Retain numerical marginality rather than
@@ -263,6 +342,13 @@ policies, metrics or public interpretation change.
 | Documentation publication | Fresh one-worker candidate build and relevant links/downloads, exact-source remote run evidence, then independent checks of served content. |
 | Comparative limitation correction | Card, hub, lifecycle metadata, current method/case summaries, issue/report and affected DFND chapters reconciled, with live readback. |
 
+Retain modest per-slice wall-time/peak-memory measurements, separating mesh
+construction, cached query, reference verification and data loading. Use the
+small pilot to justify algorithm budgets and detect a substantial regression;
+record new optimization work in its own issue if needed. Three small systems
+and notebook startup timings do not establish scaling or a fair performance
+ranking against third parties.
+
 Useful repository-root commands, to run within the resource controls selected
 after preflight and with the intended environment active:
 
@@ -296,6 +382,24 @@ does not dispatch a workflow, start a server or execute those later stages.
 
 ## Final disposition and retirement of this temporary file
 
+Use this case-level ledger under #76 and the affected issue owners. Numerical
+targets must be chosen before the corresponding experiment; these are evidence
+requirements, not newly measured answers.
+
+| Case | Required disposition before moving on |
+| --- | --- |
+| Regular tetrahedron | Analytic primitive/threshold controls; physical four/zero/zero hull-patch controls and supported associations; current public classification/availability; matched volume reference and numerical acceptance; mapped support, reporting and relevant robustness checks. Keep bare versus expanded-ball reference hypotheses distinct. |
+| Closed shell | The 0.05 Å access witness, 0.2/1.4 Å enclosure and 5 Å exclusion controls; resolve or explicitly scope physical opening counts at the small probe without equating ten links with ten mouths; independent volume evidence on a declared domain; public/raw/dry and relevant robustness dispositions. |
+| Shell with opening | Exact parent correspondence, matched 1.4 Å access and one-patch localization, 3/5 Å controls; explicit path/transition, aperture-area and bottleneck availability; domain-aware volume comparison; public relations, reporting and relevant robustness dispositions. |
+
+Each row records **reference → native observation → public representation →
+measured error/status → supporting test/receipt → unresolved issue/disposition**.
+An exact area, maximum bottleneck or global cavity count is not mandatory if it
+is neither established nor needed by the next claim; keep it explicitly
+unavailable. A necessary unresolved question still blocks that next claim.
+Finite per-case acceptance is not closure of all #76 or calibration of the
+entire shape catalog.
+
 - [ ] **CLOSE-A:** each case has a concise current conclusion, qualified probe
   regimes, remaining limits, reproducible evidence and an owning issue for
   each concrete pending action. Presentation, native implementation and
@@ -317,5 +421,5 @@ does not dispatch a workflow, start a server or execute those later stages.
   it must not remain an apparently current pending-work list after completion.
 
 **Next executable slice:** WEB-A/B/C, followed by the reviewed baseline's
-WEB-D/E. Then implement READ-A through READ-F as one coherent reader delivery.
+WEB-D/E. Then implement READ-A through READ-G as one coherent reader delivery.
 Resume the bounded #151 physical-observation work before the volume sequence.
