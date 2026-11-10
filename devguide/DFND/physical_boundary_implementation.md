@@ -137,3 +137,15 @@ independent counts, in 2.097 / 0.960 / 0.639 s respectively, peak RSS below
 records are retained under each case's `physical_refinement_v1/observations.json`.
 Historical package-version metadata reflects the preserved human version-file
 change; the explicit source revision, not that mutable string, identifies this fix.
+
+## Live lifecycle receiving
+
+After source/evidence publication, the maintained finding card, hub and DFND/lab
+opening summaries were updated and independently read back. #151 is closed for
+its bounded source correction; #75/#76 and other wider owners remain open.
+The [complete five-card live snapshot](../evidence/physical_boundary_live_readback_2026_11_10.json)
+passes `comparative_findings.py --check --snapshot ...`: the sole remaining
+current DFND limitation in this register is volume precision. The historical
+boundary card is retained as source-resolved history, with explicit fixing
+revision and no installed-package/biological claim. This evidence is distinct
+from an updated hosted website or a new package publication.

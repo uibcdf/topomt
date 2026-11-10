@@ -1,0 +1,25 @@
+{
+  "schema": "topomt.benchlab.small-probe-boundary-protocol/1",
+  "date": "2026-11-10",
+  "issue": "uibcdf/topomt#76",
+  "case": "closed_shell",
+  "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+  "probe_angstroms": 0.05,
+  "length_unit": "angstrom",
+  "decision_margin_angstroms": 1e-06,
+  "reference_method": "Complete convex-nerve two-skeleton per triangle, augmented by three compact exterior halfplane pieces; independent analytic edge intervals and a face-component graph",
+  "qualification_gate": "Only accept a total if every face has independently justified zero or one free interior component, all intersections and seams are inventoried, and hull vertices are excluded. More than one free component per face is unsupported by this bounded reference, never rounded down.",
+  "known_before_reference": "Runtime candidate at fixing source4fc2353 reports13 physical patches and10 native clusters. The reference must derive and verify its own answer; no expected13 acceptance constant. Retrospective characterization, not held out.",
+  "witness_discovery": "Bounded convex primal/dual optimization may discover witnesses. Only independently checked point margins or convex lower bounds count as decisions; optimizer success alone is insufficient.",
+  "budgets": {
+    "intersection_decisions": 20000,
+    "solver_calls": 2000,
+    "optimizer_iterations_per_call": 100,
+    "single_cpu": true,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  },
+  "independence": "No production DFND geometry routine, result or witness may be an input to reference generation/verification. Existing input codec and independent first_betti linear algebra may be reused.",
+  "scope": "Fixed equal-radius shell/hull at0.05\u00c5; no intrinsic mouth definition, aperture area or globally optimal bottleneck. Positive continuous paths are independently checked witnesses, not an exclusion of curved paths."
+}
