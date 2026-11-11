@@ -28,12 +28,17 @@ states can differ under `block_suspect`; a mixed pair therefore supplies neither
 a wet edge nor a face-adjacent dry edge. The dry edge set is not the logical
 complement of the wet edge set. Alternative edge/vertex adjacency groups nodes through shared
 atom pairs or individual atoms and does not apply that face-permeability filter.
-Those alternatives answer different grouping questions.
+Those alternatives answer different grouping questions. The
+[neighbor selectors](network_and_decomposition.md#advanced-inspection-residence-and-component-side-neighbors)
+also distinguish residence-state filtering from actual wet-carrier/bank membership;
+nonresident connectors belong to the former nonresident set and the latter wet set.
 
 Connected bank components retain atom-defined tetrahedral support. Their
 interfaces record hull exposure and contacts with resident/transit cells or
 other banks. Unweighted face-depth propagation measures distance from selected
 boundary nodes into the bank graph; it is not a physical burial distance.
+A wet component without exterior-link roots retains zero depth by compatibility
+convention. It has no measured exterior-distance reference at that value.
 
 ## What is implemented
 

@@ -134,11 +134,9 @@ class WetComponent(Component):
         self.has_open_interior = False
         self.volume_topological_resident = None
         self.volume_solvent_estimate = None
-        # interface descriptor (orthogonal axis, see devguide/DFND/interfaces.md):
-        # set when the component's lining is contributed by >=2 dry banks. ``family``
-        # stays the mouth-topology family; ``interface_family`` is the cross-product
-        # label (interface_pocket / interface_void / …). ``lining_bodies`` names the
-        # dry banks (DRY-ids) that line it.
+        # Native bank-derived descriptor, not supplied molecular participants.
+        # ``family`` retains its mouth-topology meaning; ``lining_bodies`` contains
+        # dry-bank IDs. Public participant/interface adoption remains #61.
         self.is_interface = False
         self.interface_family: str | None = None
         self.lining_bodies: list[str] = []
@@ -162,10 +160,10 @@ class WetComponent(Component):
         # Catalog morphological classification {name, marginal}; additive, coexists
         # with ``family`` (see _attach_classification, classify.classify).
         self.classification: dict[str, Any] = {}
-        # The wetted dry pockets reached THROUGH beach (permeable wet-dry) faces --
-        # past-beach contact the residence-only model misses (see _attach_beach_pockets).
+        # Adjacent dry-coast candidate support behind native permeable faces.
+        # These compatibility proxies do not certify actual swept/contact regions.
         self.beach_pocket: dict[str, Any] = {}
-        # Solvent volume the probe can reach: residence + the wetted beach pockets.
+        # Sum of local stencil estimates, not an accessible-volume integral/bound.
         self.volume_solvent_accessible: float | None = None
 
     @property
@@ -195,9 +193,12 @@ class WetComponent(Component):
 
     @property
     def characteristic_radii(self) -> dict[str, Any]:
-        """The component's classification transitions over probe, read directly from
-        the probe-independent grounded values (no sweep). All in nm-internal units;
-        ``decision S7``:
+        """Return native capacity summaries on the current selected support.
+
+        No new probe query or continuation is executed. Values use explicit nm
+        internally; they are not certified global physical transitions or maximum
+        path bottlenecks. Query slack and changes of component support matter.
+        Historical ``decision S7`` names are retained:
 
         - ``residence_death_radius`` -- max ``R_residence``; above it the probe loses
           residence (the component degenerates).
@@ -208,9 +209,9 @@ class WetComponent(Component):
         - ``split_radii`` -- internal throat ``separation_radius``es, descending; probe
           values at which it splits internally.
 
-        These are the major transitions; the full trajectory is the entire sorted set
-        of face ``R_gate`` / tet ``R_residence`` (mouth clusters also split/merge at
-        intermediate values), so this is the backbone, not the complete spectrum.
+        These summaries do not replace a probe sweep or independently checked
+        continuous access/closure bounds. Mouth clusters and selected supports
+        can change at other native thresholds.
         """
         morph = self.morphometrics or {}
         merge = sorted(
@@ -238,20 +239,13 @@ class WetComponent(Component):
 
     @property
     def accessible_atom_indices(self) -> list[int]:
-        """The atoms a probe -- hence a **ligand** -- in this component can contact:
-        the full interaction surface, not just the residence lining.
+        """Return the compatibility union of lining and dry-coast candidate atoms.
 
-        This is the answer to "which atoms can a ligand sitting in this pocket / void
-        / channel interact with?". It is the union of:
-
-        - ``atom_indices`` -- the atoms lining the component's own (residable) space;
-        - ``beach_pocket['atom_indices']`` -- the atoms the probe can additionally
-          **'kiss'** in the dry coast tets by crossing a permeable (``beach``) face
-          (the past-beach contact, see _attach_beach_pockets and
-          taxonomy_architecture_decision.md S6.2). The residence-only atom set would
-          miss these dry-coast vertices (e.g. the tet apex) the probe still touches.
-
-        Global atom indices (the molecular-system space), sorted and de-duplicated.
+        The additional atoms come from tetrahedra behind native permeable
+        wet/dry faces. This is a source-indexed candidate set, not a checked
+        all-atom contact surface, ligand interaction or reachability certificate.
+        Indices use the original molecular-system namespace and are sorted and
+        de-duplicated. Physical contact/context evaluation has its own contract.
         """
         beach = (self.beach_pocket or {}).get('atom_indices', [])
         return sorted(set(self.atom_indices) | set(beach))
@@ -811,9 +805,8 @@ def _attach_coast_and_lining(
                 'R_gate': face.get('R_gate'),
                 'permeability_state': face.get('permeability_state'),
                 # the wet-dry contact splits by permeability (coast/shore/beach
-                # decision): a non-permeable face is a ``shore`` (the real wall); a
-                # permeable one is a ``beach`` (the probe wets through it into the
-                # dry coast tet). ``coast`` stays the tetrahedron permeability class.
+                # decision): non-permeable is ``shore``, permeable is ``beach``.
+                # These are incidence roles, not physical wetting certificates.
                 'kind': (
                     'beach'
                     if face.get('permeability_state') == 'permeable'
@@ -846,27 +839,14 @@ def _attach_coast_and_lining(
 
 
 def _attach_beach_pockets(components: Components, result: dict[str, Any]) -> None:
-    """The wetted dry pockets a wet component reaches THROUGH its beach (permeable
-    wet-dry) faces -- the past-beach contact the residence-only model misses (the
-    coast/shore/beach decision; see taxonomy_architecture_decision.md).
+    """Attach compatibility candidate supports behind native beach incidences.
 
-    A *beach* is a permeable wet-dry coast face: the probe passes through it into the
-    adjacent dry coast tet (non-residable, yet the probe wets it). That dry tet's
-    interior (its apex atom, its sub-volume) is touched by the probe but sits outside
-    the resident set, so the residence-only volume and the wet component's own atoms
-    miss it. Per wet component we attach:
-
-    - ``beach_pocket['dry_tetrahedron_ids']`` -- the dry tets directly behind its
-      beach faces (the wetted cul-de-sacs / connectors);
-    - ``beach_pocket['atom_indices']`` -- their atoms (probe-touchable past the beach);
-    - ``beach_pocket['volume_wetted_estimate']`` -- the sum of their per-tet solvent
-      volume, an **upper bound** on the wetted contribution (the probe need not fill
-      the whole tet);
-    - ``volume_solvent_accessible`` -- ``volume_solvent_estimate`` (residence) **+**
-      the wetted-pocket estimate; residence <= accessible <= this bracket.
-
-    Additive: it changes neither the residence volume nor the ``shore`` wall (both
-    correct for what they are).
+    ``beach_pocket`` stores adjacent dry tetrahedra, their source vertices and
+    the sum of their local four-ball volume estimates. The compatibility
+    ``volume_solvent_accessible`` adds that proxy to the resident local estimate.
+    It does not integrate an actually swept/reachable subset, guarantee contact
+    with every listed atom or provide a rigorous physical volume bound. Native
+    residence, incidence roles and their historical descriptor names are retained.
     """
     raw = result['raw']
     tet_solvent = {
@@ -895,7 +875,8 @@ def _attach_beach_pockets(components: Components, result: dict[str, Any]) -> Non
 def _attach_interface_labels(components: Components, result: dict[str, Any]) -> None:
     """Tag each wet component as an interface when its lining spans >=2 dry banks.
 
-    Native (label-free) route of ``interfaces.py``: bodies are the dry banks. The
+    Native route of ``interfaces.py``: legacy bodies are dry banks, not supplied
+    molecular participants. This does not validate a public molecular interface. The
     ``family`` (mouth topology) is untouched; this only adds the orthogonal
     interface descriptor (``is_interface`` / ``interface_family`` / lining split /
     the DRY banks it interfaces). See devguide/DFND/interfaces.md §2-3.

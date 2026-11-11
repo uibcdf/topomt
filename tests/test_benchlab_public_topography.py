@@ -16,6 +16,17 @@ ROOT = Path(__file__).resolve().parents[1] / 'docs/content/benchlab/synthetic'
 CASES = ('regular_tetrahedron', 'closed_shell', 'shell_with_opening')
 
 
+def test_reported_neutral_shape_is_accepted_by_the_public_type_contract():
+    from typing import get_args
+
+    from topomt.features.BaseFeature import ShapeType
+
+    topo = public_result('regular_tetrahedron', 1.2)[0]
+    reported = next(iter(topo.values()))
+    assert reported.shape_type == 'neutral'
+    assert reported.shape_type in get_args(ShapeType)
+
+
 def values(record, field, unit):
     quantity = QuantityRecord.from_dict(record).to_quantity(field=field, unit=unit)
     return np.asarray(puw.get_value(quantity, to_unit=unit))

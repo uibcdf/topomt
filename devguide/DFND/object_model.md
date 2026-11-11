@@ -329,9 +329,14 @@ record: the single `(N, 4)` Delaunay adjacency array backs all of it.
 
 - `mesh.neighbors(tetra_id, include_ocean=False) -> list[int]` — bare face-
   neighbors (probe-independent topology; `-1` = OCEAN / convex hull).
-- `dfn.graph.neighbors(node_id, side=None|'wet'|'dry') -> list[int]` — the same,
-  filtered by the neighbor's residence side. Answers, in one call, *which dry
-  tetrahedra border this wet one* (`side='dry'`) and the reverse (`side='wet'`).
+- `dfn.graph.neighbors(node_id, side=None|'wet'|'dry', component_side=None|'wet'|'dry')`
+  returns face-neighbors with two explicit filters. Compatibility `side` selects
+  local residence/nonresidence; nonresident connectors can still belong to a wet
+  component. `component_side` selects actual native wet carriers (including
+  connectors) or dry banks. Both filters combine by intersection. These remain
+  face incidences, not an admitted-transit-edge traversal. Missing role context
+  is explicitly unavailable for the new filter; no scientific calculation credit
+  is added by selection. See the executed shell example in the method book.
 
 No `Tetrahedron`/`Node` class and no stored `neighbors` attribute: tetrahedra are
 records, and the accessor reads the shared adjacency array (O(1)). Storing

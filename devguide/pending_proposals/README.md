@@ -46,8 +46,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (1)
+### Active (2)
 
+- [`dfnd_component_side_neighbors.md`](dfnd_component_side_neighbors.md) — [#176](https://github.com/uibcdf/topomt/issues/176) — Query component-side neighbors separately from legacy residence-side filtering. *(active, inspected)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
 ### Partial (5)

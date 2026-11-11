@@ -293,9 +293,9 @@ def dfnd_to_topography(
             feature = _feature_from_component_record(record, feature_class)
             feature.component_id = f'WET-{record["id"]}'
             feature.source_id = feature.component_key
-            # Carry the interface descriptor (orthogonal axis) from the typed
-            # component onto the public feature, so an interface is catalogued as
-            # one. See devguide/DFND/interfaces.md.
+            # Preserve the compatibility native-bank descriptor. This flag does
+            # not supply molecular participant identity or promote an Interface
+            # feature; the public interface contract remains a separate gate.
             if component is not None:
                 feature.is_interface = bool(getattr(component, 'is_interface', False))
                 feature.interface_family = getattr(component, 'interface_family', None)
@@ -314,17 +314,15 @@ def dfnd_to_topography(
                 signature = getattr(component, 'signature', None)
                 if signature is not None:
                     feature.signature = dict(signature)
-                # Past-beach wetted contact (coast/shore/beach): the dry pockets the
-                # probe wets THROUGH permeable wet-dry faces, and the solvent volume
-                # the probe can reach (residence + those pockets).
+                # Preserve candidate dry-coast support and its additive stencil
+                # proxy, separately from actual contact or accessible-volume work.
                 feature.beach_pocket = dict(getattr(component, 'beach_pocket', {}))
                 accessible = getattr(component, 'volume_solvent_accessible', None)
                 if accessible is not None:
                     feature.volume_solvent_accessible = puw.quantity(
                         accessible, 'nm**3'
                     )
-                # The probe-accessible atoms a ligand here can interact with: the
-                # component lining + the past-beach atoms 'kissed' in the dry coast.
+                # Source-indexed candidate union, not guaranteed ligand contacts.
                 feature.accessible_atom_indices = list(
                     getattr(component, 'accessible_atom_indices', [])
                 )

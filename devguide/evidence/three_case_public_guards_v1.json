@@ -1,0 +1,56 @@
+{
+  "schema": "topomt.benchlab.public-guards/1",
+  "captured_at": "2026-11-11T00:40:33.556235+00:00",
+  "source_parent": "042db04",
+  "changed_sources_sha256": {
+    "topomt/dfnd/data.py": "253b0d5be5633915c282f51bf5846c3756e8f916d64101b94564b2f7deb562a1",
+    "topomt/features/BaseFeature.py": "6c04d508008650a9b7e709f2a752c23618a9094d4a128f3dafae1e42bc703d0b",
+    "devtools/benchlab/public_contract.py": "846c92df82dd4bac1f6ab23b6a0befb5c44f0d7d7c76a6672599387914e76989",
+    "devtools/benchlab/capture_public_contract.py": "900a7ddb0886485f5e5cb8186e4b93e884b071c1bd5b06d8d81d57c780dcab16",
+    "tests/test_three_case_robustness.py": "c0fc774ad23b4b03610effd4d6fbc054a69ce2f970386aed0e9c9e054c2d0f96",
+    "tests/test_dfnd_component_neighbors.py": "8822e6c642adfa95bb8ad318b5b4861511cee7795d5a7a53ab2758e49b2583c6",
+    "tests/test_three_case_public_contract.py": "de6f9c2e854507d9be0421a77398ed33d44de20bb09daa9a808cf827fea25c11"
+  },
+  "checks": [
+    {
+      "selector": "Three-case robustness and component-side neighbors",
+      "passed": 20,
+      "pytest_seconds": 6.59,
+      "wall_seconds": 8.387,
+      "peak_rss_kib": 422808
+    },
+    {
+      "selector": [
+        "test_three_case_robustness",
+        "test_dfnd_component_neighbors",
+        "test_three_case_public_contract",
+        "test_benchlab_public_topography",
+        "test_dfnd_geometry_snapshot",
+        "test_topography_registry",
+        "test_topography_input_binding",
+        "test_topography_input_context",
+        "test_dfnd_input_context",
+        "test_dfnd_wet_dry_adjacency",
+        "test_dfnd_documentation",
+        "test_reporting_protocol",
+        "test_comparative_findings"
+      ],
+      "passed": 161,
+      "pytest_seconds": 47.66,
+      "wall_seconds": 49.589,
+      "peak_rss_kib": 641412,
+      "warnings": "Two NumPy 2.5 deprecated shape-setter warnings in existing snapshot guard"
+    },
+    {
+      "selector": "tests/test_benchlab_reader.py",
+      "passed": 9,
+      "pytest_seconds": 5.02,
+      "wall_seconds": 6.757,
+      "peak_rss_kib": 310480
+    }
+  ],
+  "lint": "Ruff check and format on changed executable files",
+  "typing": "Scoped mypy: data.py, public_contract.py, capture_public_contract.py and three new test modules; six files pass",
+  "resources": "One CPU/numerical thread, address space <=6 GiB, CPU <=120 s per selector; available RAM 56.7 GiB of 60.5 GiB, memory PSI zero and sampled swap I/O zero before execution",
+  "deferred": "Full suite/support matrix/installed release remain #16; unrelated existing component typing debt #77. Final current-source reader receiving/publication remains #76."
+}

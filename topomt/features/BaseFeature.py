@@ -15,7 +15,7 @@ from ._feature_constants import (
 FeatureID = str
 FeatureIndex = int
 FeatureType = str
-ShapeType = Literal['concavity', 'convexity', 'mixed', 'boundary', 'point']
+ShapeType = Literal['concavity', 'convexity', 'mixed', 'boundary', 'point', 'neutral']
 Dimensionality = Literal[0, 1, 2, None]
 
 if TYPE_CHECKING:

@@ -148,7 +148,7 @@ def test_public_measurement_preserves_support_units_and_separate_observables():
 
 
 def test_precision_method_credits_only_reached_interval_and_preserves_saved_reading():
-    import ackredit
+    ackredit = pytest.importorskip('ackredit')
 
     from topomt.dfnd.core.volume_precision import measure_region_volume
 
@@ -175,7 +175,7 @@ def test_precision_method_credits_only_reached_interval_and_preserves_saved_read
 def test_public_precision_reuses_references_and_survives_optional_recorder_failure(
     monkeypatch,
 ):
-    import ackredit
+    ackredit = pytest.importorskip('ackredit')
 
     import topomt as tmt
     from tests.test_benchlab_public_topography import public_result

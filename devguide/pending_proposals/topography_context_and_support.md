@@ -42,12 +42,16 @@ are not covered by these input guards.
 The later #146 three-case public receiving confirms actual classes, registry
 filters, Mouth relations, input/source mappings, raw-support identity and
 reporting behavior on adopted BenchLab inputs. It does not establish neutral
-public support/availability or complete classification provenance. One inspected
-typing inconsistency remains: `Percolating.shape_type` is `neutral` and works
-in runtime registry filters, but the current `ShapeType` Literal in
-`features/BaseFeature.py` omits `neutral`. Reconcile the declaration with the
-supported runtime catalog in the public-type follow-up; receiving evidence
-alone is not complete typing/schema qualification.
+public support/availability or complete classification provenance. The subsequent three-case public audit reconciles the runtime `neutral` shape
+with the public `ShapeType` Literal and guards the actual Percolating result
+in `tests/test_benchlab_public_topography.py`. Native residence/component-side
+neighbor filters are separated under #176 without changing the old selector.
+`tests/test_three_case_public_contract.py` checks recoverable source-mapped
+resident/connector/bank supports, coast incidence and carrier areas, graph-depth
+context and catalog/parent relations; these remain native receiving contracts.
+The broader neutral support/availability and versioned public Topography
+interchange gates remain open. Existing source-bound native pickle restoration
+is not such a format.
 
 ## Why
 

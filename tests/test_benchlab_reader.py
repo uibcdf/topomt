@@ -34,7 +34,16 @@ def test_public_reader_keeps_native_physical_and_reference_observations_separate
     topo = study.receive(SYNTHETIC / case, probe)
     assert len(topo.get_features(by='type', value=kind)) == 1
     assert len(topo.get_features(by='type', value='mouth')) == mouths
-    assert study.describe(topo)['physical_view_status'] == 'not_available'
+    assert study.describe(topo)['physical_view_status'] == 'present'
+    assert topo.dfnd.raw['boundary_connectivity']['status'] == 'resolved'
+    assert (
+        topo.dfnd.raw['boundary_connectivity']['n_patches']
+        == {
+            'regular_tetrahedron': 4,
+            'closed_shell': 0,
+            'shell_with_opening': 1,
+        }[case]
+    )
     verified = study.reference(SYNTHETIC / case)
     if case == 'regular_tetrahedron':
         assert verified['opening_component_count'] == 4

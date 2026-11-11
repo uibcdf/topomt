@@ -205,3 +205,30 @@ of individual cells. The [measurement definition](measurements.md#centers-and-pl
 explains why it is not a guaranteed free placement point. For a many-cell public
 Mouth and its parent/support mapping, follow the existing
 [three-case walkthrough](../benchlab/synthetic/public_topography.md).
+
+## Advanced inspection: residence and component-side neighbors
+
+On that 0.2 Å result, the origin component has 95 resident cells and three
+nonresident connectors. The native graph neighbor view exposes both meanings:
+
+| Filter | Neighbor selection |
+| --- | --- |
+| `side='wet'` / `side='dry'` | Compatibility local residence / nonresidence. |
+| `component_side='wet'` | Wet carrier nodes, including nonresident connectors. |
+| `component_side='dry'` | Bank nodes outside the finite transit set. |
+
+```python
+graph = shell_topography.dfnd.dfn.graph
+connector = shell_component.transit_connector_node_indices[0]
+adjacent = shell_topography.dfnd.mesh.neighbors(connector)[0]
+assert connector in graph.neighbors(adjacent, side='dry')
+assert connector in graph.neighbors(adjacent, component_side='wet')
+assert connector not in graph.neighbors(adjacent, component_side='dry')
+assert connector in graph.neighbors(adjacent, side='dry', component_side='wet')
+```
+
+Both filters select from face adjacency, rather than restricting to admitted
+transit edges. Check recorded `transit_edge` for flow connectivity and graph
+depth. A missing transit-role context in older diagnostic records makes the
+component-side filter explicitly unavailable. Existing residence-side behavior
+is preserved; repeated selections inspect only the at-most-four neighbors.

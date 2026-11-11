@@ -77,8 +77,9 @@ reference region. Do not treat the disappearance of empty space after adding
 ligand atoms as the same operation as measuring occupancy of the old region.
 
 Contact and complementarity evaluations must state their supports, atom roles,
-pose, distances and numerical policy. `accessible_atom_indices` is a declared
-probe-related atom role, not a list of contacts measured for an arbitrary ligand.
+pose, distances and numerical policy. `accessible_atom_indices` is a compatibility candidate role: a union of lining
+and adjacent dry-coast vertices. It does not certify all-atom contact, continuous
+reachability or contacts measured for an arbitrary ligand.
 
 ## Biological interpretation
 

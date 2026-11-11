@@ -24,7 +24,7 @@ structured views over the existing records.
 
 from __future__ import annotations
 
-from typing import Any, Optional
+from typing import Any, Literal, Optional
 
 from topomt._ackredit import attributed, scientific_call
 
@@ -164,14 +164,60 @@ class Graph:
         self._state_by_id = {
             node['tetrahedron_id']: node.get('residence_state') for node in self.nodes
         }
+        component_side_by_role = {
+            'resident_transit': 'wet',
+            'transit_connector': 'wet',
+            'terminal_contact': 'dry',
+            'non_transit': 'dry',
+        }
+        # Freeze the query's native roles once. Repeated adjacency selections
+        # then inspect only the at-most-four neighbors, rather than every node.
+        self._component_side_by_id: dict[int, Optional[str]] = {}
+        for node in self.nodes:
+            role = node.get('transit_role')
+            self._component_side_by_id[node['tetrahedron_id']] = (
+                component_side_by_role.get(role) if isinstance(role, str) else None
+            )
 
-    def neighbors(self, node_id: int, side: str | None = None) -> list[int]:
-        """Face-neighbors of a node, optionally filtered by ``side``.
+    def neighbors(
+        self,
+        node_id: int,
+        side: Optional[str] = None,
+        *,
+        component_side: Optional[Literal['wet', 'dry']] = None,
+    ) -> list[int]:
+        """Return face neighbors filtered by residence or native component side.
 
-        ``side=None`` returns every (non-OCEAN) neighbor; ``side='wet'`` keeps only
-        resident neighbors and ``side='dry'`` only non-resident ones. This is the
-        probe-dependent counterpart of ``mesh.neighbors`` -- it answers "which dry
-        tetrahedra border this wet one" (and vice versa) in one call.
+        Parameters
+        ----------
+        node_id : int
+            Finite native tetrahedron/node identity in this captured graph.
+        side : {'wet', 'dry'}, optional
+            Compatibility residence filter: wet selects resident neighbors and
+            dry selects nonresident neighbors, including transit connectors.
+        component_side : {'wet', 'dry'}, optional
+            Native membership filter: wet includes resident and connector nodes;
+            dry selects bank nodes outside the finite transit set. Both filters
+            may be combined, selecting their intersection.
+
+        Returns
+        -------
+        list of int
+            Matching finite neighbors in stored adjacency order; OCEAN is omitted.
+            Face incidence does not imply an admitted transit edge.
+            Selection performs no new scientific calculation or attribution.
+
+        Raises
+        ------
+        ValueError
+            Either selector has an unsupported value.
+        RuntimeError
+            Adjacency or requested component-role context is unavailable.
+
+        Examples
+        --------
+        ``graph.neighbors(node, component_side='wet')`` includes nonresident wet
+        connectors. Adding ``side='dry'`` selects precisely those connectors.
         """
         if self._adjacency is None:
             raise RuntimeError(
@@ -179,11 +225,20 @@ class Graph:
             )
         if side not in (None, 'wet', 'dry'):
             raise ValueError("side must be None, 'wet' or 'dry'")
+        if component_side not in (None, 'wet', 'dry'):
+            raise ValueError("component_side must be None, 'wet' or 'dry'")
         ids = [int(n) for n in self._adjacency[int(node_id)] if int(n) != self.OCEAN]
-        if side is None:
-            return ids
-        want = self._WET_STATE if side == 'wet' else self._DRY_STATE
-        return [i for i in ids if self._state_by_id.get(i) == want]
+        if side is not None:
+            want = self._WET_STATE if side == 'wet' else self._DRY_STATE
+            ids = [i for i in ids if self._state_by_id.get(i) == want]
+        if component_side is not None:
+            memberships = getattr(self, '_component_side_by_id', {})
+            if any(memberships.get(i) is None for i in ids):
+                raise RuntimeError(
+                    'Component-side filtering requires captured transit-role context'
+                )
+            ids = [i for i in ids if memberships[i] == component_side]
+        return ids
 
 
 class DFN:
