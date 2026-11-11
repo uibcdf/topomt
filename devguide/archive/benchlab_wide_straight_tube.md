@@ -93,3 +93,11 @@ for presentation by v2; both retain their original candidate identities.
 Public run 42970866204 and actual hosted-byte receiving qualify the site/download
 only. Full-suite, historical saved-bibliography and installed/matrix questions
 remain #16. This closes unit establishment, not scientific #180/#181/#184/#76.
+
+### Final discussion reconciliation
+
+After unit closure, the originating #129/#130/#154 summaries were updated with
+actual publication evidence and the distinct open scientific owners. Complete
+readback `devguide/evidence/wide_tube_findings_readback_v2.json` confirms all
+eight registered cards/issues and the two current scoped availability limits.
+No scientific finding was closed by the establishment task.

@@ -1,5 +1,16 @@
 # Discussion action routing audit
 
+## Wide/sparse publication closeout — 2026-11-11
+
+The delivery action #183 is complete, with #185's source serializer correction
+separately resolved. Current originating summaries in #129/#130/#154 link the
+hosted unit, archived establishment report and its receipts. Scientific action
+ownership remains #180/#181/#184/#76; broader historical/source/installed
+qualification remains #16. The complete eight-card/current-hub readback is
+`evidence/wide_tube_findings_readback_v2.json`. This dated closure does not
+promote pending targets, repair historical metadata or promise an original-engine
+comparison. Consult the issue board for subsequent action state.
+
 ## Wide/sparse companion — 2026-11-10
 
 Discussions #129/#130/#154 now link the independently referenced wide unit #183,
