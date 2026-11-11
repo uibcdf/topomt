@@ -1,0 +1,48 @@
+{
+  "temporary_root": "/tmp/topomt-tube-reader-ilnxgp41",
+  "source_checkout": "/tmp/topomt-tube-reader-ilnxgp41/source",
+  "extracted_study": "/tmp/topomt-tube-reader-ilnxgp41/study",
+  "source_revision": "b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4",
+  "files_verified": 362,
+  "bundle_sha256": "a077c948b058e644e7105d39f6af67e7547397b08f544d47012c9786b22b609d",
+  "committed_version_sha256": "c63a97ae89338cff1d0a778054f8bfbcaea51ea974b281d062073f2eba5b2f1a",
+  "fresh_kernels_passed": [
+    "system",
+    "dfnd"
+  ],
+  "clean_committed_topomt_origin_verified": true,
+  "scope": "Exact downloaded study in /tmp and clean committed source on PYTHONPATH, Python 3.14; no installed-package or support-matrix qualification",
+  "schema": "topomt.benchlab.tube-portable-receiving/1",
+  "issue": "uibcdf/topomt#178",
+  "captured_at": "2026-11-11T02:37:17.973337+00:00",
+  "notebooks": {
+    "system": {
+      "schema": "topomt.benchlab.tube-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/cylinder_tube/system.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "6ca194a80da6252ce301ee9f1e0b6585ced322b984dc4fe629b7a62210facee1",
+      "source_protocol_sha256": "23407af22636ccda475fc5c1e718b23a9715c5c0366ecc420cb06ebcb904a9e8",
+      "wall_seconds": 6.592,
+      "parent_peak_rss_kib": 81612,
+      "child_peak_rss_kib": 151704,
+      "preserved_evidence_files": 320,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    },
+    "dfnd": {
+      "schema": "topomt.benchlab.tube-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/cylinder_tube/dfnd.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "88b11892f69a2a03a7c622ab126ccf3523125f1701ccf3ee31548502f5055904",
+      "source_protocol_sha256": "23407af22636ccda475fc5c1e718b23a9715c5c0366ecc420cb06ebcb904a9e8",
+      "wall_seconds": 8.314,
+      "parent_peak_rss_kib": 81324,
+      "child_peak_rss_kib": 372796,
+      "preserved_evidence_files": 320,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    }
+  },
+  "presentation": "Escaped semantic HTML tables, expandable web code inputs, identical actual table values inside and outside checkout; unchanged original scientific input/reference/native evidence.",
+  "resources": "One CPU/numerical thread,6GiB address-space/120CPU-second ceilings per kernel runner."
+}

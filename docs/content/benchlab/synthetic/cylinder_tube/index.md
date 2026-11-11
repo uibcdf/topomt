@@ -8,6 +8,8 @@ and the interpretation of graph-derived channels and paths.
 Both notebooks run independently in fresh kernels from this directory. They
 replay independent references and run actual public receiving without original
 providers, server submissions or changes to retained evidence.
+On the web, expand a code block when you want its implementation; the default
+reading route keeps the explanations, tables and figures together.
 
 ```{figure} artifacts/cylinder_tube_v1/system_study.png
 :alt: Atomic tube centers and a verified bent path, with separately labeled lateral displacement along z.

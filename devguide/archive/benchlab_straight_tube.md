@@ -93,3 +93,17 @@ owns the local-candidate/all-atom diagnosis and public policy decision, and #76
 retains certified physical paths. Current cards/hub/lifecycle/method/case summaries
 are reconciled. No original-provider comparison, protein characterization,
 optimal bottleneck, aperture area or free-volume precision is claimed.
+
+## Presentation correction before final publication — 2026-11-10
+
+Actual Chrome review exposed rich Markdown tables rendered as literal pipes in
+Sphinx and long plotting inputs between explanations and figures. The same #178
+delivery replaces only table serialization with escaped semantic HTML and folds
+web code inputs. The prior cell protocol is preserved; a new notebook-output
+guard checks actual HTML tables. Source/native/reference semantics and all old
+three-case bytes remain unchanged. Fresh source and extracted-download kernels
+and a strict clean-source documentation build are repeated for the revised reader.
+Later v2 portable/documentation receipts supersede the v1 reader receipts for
+presentation only; the original b07a20e scientific observations remain retained.
+The first own Pages attempt 42946451225 was cancelled before final delivery so
+that the corrected reader could be published together.

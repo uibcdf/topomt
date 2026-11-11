@@ -1,0 +1,13 @@
+{
+  "schema": "topomt.benchlab.tube-notebook-receiving/1",
+  "notebook": "docs/content/benchlab/synthetic/cylinder_tube/system.ipynb",
+  "fresh_kernel": true,
+  "code_and_markdown_sha256": "6ca194a80da6252ce301ee9f1e0b6585ced322b984dc4fe629b7a62210facee1",
+  "source_protocol_sha256": "23407af22636ccda475fc5c1e718b23a9715c5c0366ecc420cb06ebcb904a9e8",
+  "wall_seconds": 3.289,
+  "parent_peak_rss_kib": 81180,
+  "child_peak_rss_kib": 151064,
+  "preserved_evidence_files": 318,
+  "execution_tree": "source checkout",
+  "passed": true
+}

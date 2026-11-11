@@ -35,6 +35,13 @@ The initial notebook-table attempts and prior cell protocols are retained in
 and no region `component_id` or region support key. Corrected presentation
 displays that relationship without altering the native result or references.
 
+The final visual review also found that rich `text/markdown` table outputs
+rendered as literal pipes under Sphinx. `notebook_protocol_markdown_tables.json`
+preserves that earlier cell protocol. Current notebooks emit escaped semantic
+HTML tables, render in both Jupyter and Sphinx, and fold their long code inputs
+on the web. Later HTML-reader receipts identify the revised cells; the input,
+reference certificates and original native observations are unchanged.
+
 The typed-query investigation also found a missing public argument adapter,
 separately fixed under [#179](https://github.com/uibcdf/topomt/issues/179) at
 `b07a20e`. Scientific query defaults and kernels are unchanged by that correction.

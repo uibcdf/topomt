@@ -28,6 +28,11 @@ def test_tube_notebooks_retain_the_frozen_sources_and_successful_outputs():
         assert not any(
             output.output_type == 'error' for cell in cells for output in cell.outputs
         )
+        assert any(
+            '<table' in output.get('data', {}).get('text/html', '')
+            for cell in cells
+            for output in cell.outputs
+        ), 'Generated tables must render semantically in Jupyter and Sphinx'
 
 
 def test_downloaded_tube_references_replay_with_only_the_supplied_helper_tree(tmp_path):

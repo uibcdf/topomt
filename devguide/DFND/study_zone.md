@@ -186,3 +186,22 @@ The staged structure is delivered for the tetrahedron, closed shell and exact
 opening variant, preserving earlier evidence. Continue with a tube and the
 agreed synthetic sequence. This organization adds no separate hosting deployment
 or closure of #75/#76/#16; each new scientific run retains its own protocol.
+
+## Tube continuation and notebook reading — 2026-11-10
+
+The maintainer selects `cylinder_tube` after the finite three-case checkpoint.
+Its #178 system/native unit has independent path/wall/exclusion references and
+retained initial observations. Stay on this input for physical budget #180,
+all-atom/public qualification #181 and wider paths #76 before another geometry.
+The initial study is not complete scientific qualification or a provider benchmark.
+
+Present explanations, reference/result tables and figures as the primary web
+reading route. Tag long code inputs `hide-input` so MyST-NB offers an expandable
+source view while the downloaded notebook keeps executable code. Generated
+tables use escaped semantic HTML (for example IPython.display.HTML): rich
+text/markdown pipe tables currently render as literal text in this Sphinx route.
+Ordinary source Markdown tables retain their existing authoring convention.
+Inspect actual notebook and browser outputs, including a mobile viewport;
+successful execution and a warning-free build do not prove readable output.
+Preserve earlier protocols/observations and refresh the current cell protocol,
+fresh-kernel receipts and complete download manifest for a reader change.
