@@ -13,9 +13,12 @@ Scientific groups and reading order can evolve as new systems are added.
 The publication target is a collection that can live inside the documentation
 or become a standalone study site using the same reviewed case sources.
 
-The collection is under development. Three study units are available: a regular
+The collection is under development. Four study units are available: a regular
 tetrahedron, a sampled shell with an independently certified wall, and an exact
-subset with a certified opening. They do not
+subset with a certified opening, followed by a straight atomic tube. The tube
+has independent passage/wall/exclusion references and actual native/public
+observations; its open physical/all-atom receiving questions remain #180/#181.
+These studies do not
 establish general biological accuracy or uniform precision for every numerical
 setting. The later [volume study](volume_measurements.md) qualifies declared
 finite supports and uncertainties. Development
@@ -28,6 +31,7 @@ necessary variants. Protein studies follow completion of that synthetic phase.
 regular_tetrahedron/index
 closed_shell/index
 shell_with_opening/index
+cylinder_tube/index
 Public Topography receiving <public_topography>
 Supports and robustness <public_support_and_robustness>
 Comparison disposition <comparison_disposition>
@@ -43,6 +47,7 @@ Volume definitions and precision <volume_measurements>
 | [Regular tetrahedron](regular_tetrahedron/index.md) | How do residence and face transit differ as the probe grows? | Separate executed system, DFND and original-comparison notebooks; atomic-model audit and distinct failure states. |
 | [Sampled closed shell](closed_shell/index.md) | How does access to the same sampled wall change with probe size? | Separate executed system/native notebooks; independent access, enclosure and finite-hull exclusion controls. Historical original-provider evidence is retained. |
 | [Shell with an opening](shell_with_opening/index.md) | Does deleting a cap change access at the same probe, and where are the exterior contacts? | Separate executed system/native notebooks; exact parent subset, independent ray/enclosure/exclusion controls and mapped contacts. Original comparisons remain planned. |
+| [Straight tube](cylinder_tube/index.md) | Can a bent passage remain open after its straight axis is blocked, and is a graph skeleton physically valid? | Separate system/native notebooks; independent two-end paths, complete wall/opening certificates and finite-hull exclusion. Native boundary/all-atom questions remain open; no original comparisons yet. |
 
 | Part | What the reader can inspect |
 | --- | --- |
@@ -128,13 +133,15 @@ build. Execution and scientific review are separate checks.
 
 ## Study sequence
 
-Current priority: deepen these three units before adding another geometry.
+Current priority: the [straight tube](cylinder_tube/index.md), selected after
+the finite three-case acceptance. Resolve its bounded physical receiving and
+all-atom/public questions before adding another geometry.
 The [public receiving audit](public_topography.md) follows their native results
 into `Topography`. The [stronger 0.2 Å wall cover](closed_shell/closure_at_0p2.md)
 resolves one earlier reference question. The [finite three-case acceptance](three_case_disposition.md) records delivered
 physical patches/paths and conditional-volume references, the remaining
 unavailable quantities and the conditions for a next synthetic study. The tube
-and chambers below have not been started.
+has now started; the chambers below have not.
 
 1. **Regular tetrahedron:** residence versus face transit and probe-dependent
    connectivity; independent circumradius formulas.
@@ -143,7 +150,7 @@ and chambers below have not been started.
 4. **Tube:** passage, bottlenecks and the limits of a graph skeleton.
 5. **Two chambers with a neck:** residence regions, communication and separation.
 
-The first three units are available; each separates its system reference and
+The four units are available; each separates its system reference and
 native analysis into independently executable notebooks. The closed shell includes a
 separately declared small-probe escape witness on its unchanged atomic input.
 The opening variant derives from that same wall and retains parent atom IDs.

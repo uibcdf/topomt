@@ -1,5 +1,26 @@
 # DFND notebook laboratory checkpoint
 
+## Active straight-tube study — 2026-11-10
+
+After the finite three-case disposition, the maintainer selects the next tube
+unit under [#178](https://github.com/uibcdf/topomt/issues/178). Canonical sources
+are [cylinder_tube](../../docs/content/benchlab/synthetic/cylinder_tube/index.md),
+with independent `system.ipynb` and actual-public `dfnd.ipynb`. Full-precision
+81-ball inputs and protocols precede new native receiving. Independent complete
+segment/tail certificates establish a bent route at 1.2/1.4 Å; separate complete
+wall/end/seam certificates establish two physical patches. A conservative
+all-atom bound excludes every finite-hull center at 2.5 Å.
+
+The initial source b07a20e is **not qualified on this tube**: physical hull
+arrangements exhaust their budget (#180), the selected 1.4 Å graph skeleton
+collides, and local/public candidates survive the independently covered 2.5 Å
+carrier (#181, needs_review). Actual observations and initial failed reference
+attempts remain retained; strict expected-failure targets keep unresolved
+questions visible. General physical paths remain #76. Stay on this input before
+another geometry; comparisons need their own eligible model/protocol. Earlier
+three-case qualification and #151/#75 resolutions retain their narrower scopes.
+This current selection supersedes dated instructions below that deferred the tube.
+
 ## Current three-case disposition — 2026-11-10
 
 The [finite acceptance ledger](../../docs/content/benchlab/synthetic/three_case_disposition.md)
@@ -13,7 +34,7 @@ The [current v2 readers](../../docs/content/benchlab/synthetic/index.md#download
 run public receiving, reference replay and declared volumes in fresh kernels.
 
 These questions admit the next independently justified synthetic study when
-selected; no additional geometry or protein study is started here. Exact
+selected; the straight-tube selection is recorded above. Exact
 aperture area, optimal global bottleneck, general continuous navigation and
 versioned public interchange are not required by the established conclusions
 and remain explicitly unavailable. Broader #76/#60/#61, original-comparator
