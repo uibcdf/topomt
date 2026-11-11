@@ -1,0 +1,19 @@
+{
+  "source_revision": "5e0943e983b7a3c2fad3c00e5b5d3172f520f977",
+  "input_protocol_revision": "d3cec53",
+  "generation_seconds": 0.6578461620374583,
+  "verification_seconds": 0.0030982029857113957,
+  "peak_rss_kib": 77240,
+  "no_topomt_module_imported": true,
+  "cpus": 1,
+  "numerical_threads": 1,
+  "versions": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pyunitwizard": "0.29.1+6.gf82b618"
+  },
+  "path_work": {
+    "points": 1299,
+    "edges": 28026
+  }
+}

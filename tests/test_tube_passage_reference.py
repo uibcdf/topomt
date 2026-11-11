@@ -107,3 +107,24 @@ def test_bounded_discovery_returns_a_checked_witness_and_refuses_work_overrun():
     controls['maximum_edge_tests'] = 1
     with pytest.raises(ValueError, match='budget'):
         _discover_path(centers, radii, controls)
+
+
+def test_an_occupied_origin_does_not_exclude_a_bent_end_to_end_witness():
+    from devtools.verify_tube_passage import _discover_path
+
+    controls = {
+        'z_stations_angstroms': [-2.0, 0.0, 2.0],
+        'xy_values_angstroms': [-1.0, 0.0, 1.0],
+        'mandatory_origin': True,
+        'maximum_points': 20,
+        'maximum_edge_tests': 100,
+        'max_lateral_step_angstroms': 1.5,
+    }
+    centers = np.array([[0.0, 0.0, 0.0]])
+    radii = np.array([0.2])
+    origin = _discover_path(centers, radii, controls)
+    assert origin['minimum_clearance_angstroms'] == pytest.approx(-0.2)
+    controls['mandatory_origin'] = False
+    bent = _discover_path(centers, radii, controls)
+    assert bent['minimum_clearance_angstroms'] > 0.9
+    assert [0.0, 0.0, 0.0] not in bent['points_angstroms']

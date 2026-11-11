@@ -1,0 +1,65 @@
+{
+  "schema": "topomt.benchlab.straight-tube-verification/1",
+  "length_unit": "angstroms",
+  "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+  "protocol_sha256": "4cd54bb7f3bd00059c41e40af619868d978fde27b985c745d09a106cccda100c",
+  "model_reference": {
+    "length_unit": "angstroms",
+    "axis_clearance_angstroms": 1.3952137863301655,
+    "axis_limiting_source_atom": 36,
+    "axis_limiting_point_angstroms": [
+      0.0,
+      0.0,
+      -0.05816408364095032
+    ],
+    "axis_clearance_is_global_bottleneck": false,
+    "maximum_nominal_displacement_angstroms": 0.36706244540940697,
+    "finite_hull_radial_bound_angstroms": 3.7921002831252344,
+    "nearest_nominal_ring_z_bound_angstroms": 1.25,
+    "finite_hull_cover_distance_bound_angstroms": 4.083579632239034,
+    "exclusion": {
+      "1.2": {
+        "probe_angstroms": 1.2,
+        "coverage_margin_angstroms": -1.0035796322390338,
+        "strictly_covered": false
+      },
+      "1.4": {
+        "probe_angstroms": 1.4,
+        "coverage_margin_angstroms": -0.8035796322390341,
+        "strictly_covered": false
+      },
+      "2.5": {
+        "probe_angstroms": 2.5,
+        "coverage_margin_angstroms": 0.29642036776096603,
+        "strictly_covered": true
+      }
+    },
+    "proof": "Hull convexity bounds radial norm and z; choose nearest nominal ring and angular column. Squared radial distance is convex in rho, so its maximum on [0,rho_max] is an endpoint. Add the measured maximum atom displacement by the triangle inequality. Every hull point is within this bound of an actual selected atomic center."
+  },
+  "path_minimum_clearance_angstroms": 1.3957302097079012,
+  "outward_tails": "All centers lie between the two endpoint z planes; distance to every atom increases on the outward axial rays. Segment minima include endpoints.",
+  "controls": [
+    {
+      "probe_angstroms": 1.2,
+      "fixed_axis": "clear",
+      "end_to_end_path": "certified",
+      "path_margin_angstroms": 0.19573020970790123,
+      "finite_hull": "not_established"
+    },
+    {
+      "probe_angstroms": 1.4,
+      "fixed_axis": "blocked",
+      "end_to_end_path": "not_established",
+      "path_margin_angstroms": -0.00426979029209873,
+      "finite_hull": "not_established"
+    },
+    {
+      "probe_angstroms": 2.5,
+      "fixed_axis": "blocked",
+      "end_to_end_path": "not_established",
+      "path_margin_angstroms": -1.1042697902920988,
+      "finite_hull": "strictly_covered"
+    }
+  ],
+  "scope": "Checked known ball model, finite-grid passage witness and sufficient hull cover; no physical aperture area, global optimum bottleneck or biological claim"
+}

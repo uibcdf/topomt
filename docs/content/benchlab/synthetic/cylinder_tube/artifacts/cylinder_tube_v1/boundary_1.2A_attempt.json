@@ -1,0 +1,8 @@
+{
+  "source_revision": "5e0943e983b7a3c2fad3c00e5b5d3172f520f977",
+  "status": "unresolved",
+  "error_type": "ReferenceUnresolved",
+  "reason": "Reference solver budget exhausted",
+  "elapsed_seconds": 14.60639089497272,
+  "peak_rss_kib": 104980
+}

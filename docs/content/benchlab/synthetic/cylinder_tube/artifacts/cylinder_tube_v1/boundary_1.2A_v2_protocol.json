@@ -1,0 +1,27 @@
+{
+  "schema": "topomt.benchlab.tube-boundary-protocol/1",
+  "date": "2026-11-10",
+  "issue": "uibcdf/topomt#178",
+  "case": "cylinder_tube",
+  "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+  "probe_angstroms": 1.2,
+  "length_unit": "angstroms",
+  "decision_margin_angstroms": 1e-06,
+  "wall_partition": "All convex-hull triangles except those whose three source vertices belong to the first or last nominal ring. Their complete all-atom ball cover must be independently verified.",
+  "end_partition": "All remaining hull triangles, including covered end triangles; complete convex-intersection/edge inventory before accepting a patch count.",
+  "predecessor": "boundary_1.2A_attempt.json",
+  "predecessor_sha256": "d5103e99247539b7d6eaa537be1fd938d978f7c2208d6f4bb55320841d2c3dc3",
+  "reason": "The first complete convex-nerve discovery exhausted4000solver calls. Reuse independent convex-ball subdivision coverage for the extensive wall and reserve convex-intersection work for the end inventory; no native outcome has been observed.",
+  "budgets": {
+    "maximum_cover_depth": 12,
+    "maximum_cover_nodes": 50000,
+    "intersection_decisions": 40000,
+    "solver_calls": 4000,
+    "optimizer_iterations_per_call": 100,
+    "cpu_seconds": 120,
+    "address_space_gib": 6,
+    "cpus": 1,
+    "numerical_threads": 1
+  },
+  "scope": "Count strict-clearance free patches on the complete atomic-center hull. No aperture area, continuous-volume count or globally optimal bottleneck. Zero/one free region per end face is the declared receiving scope; multiple regions remain unresolved."
+}

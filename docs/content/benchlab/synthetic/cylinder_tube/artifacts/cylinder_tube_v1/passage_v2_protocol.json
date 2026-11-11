@@ -1,0 +1,94 @@
+{
+  "schema": "topomt.benchlab.straight-tube-protocol/1",
+  "case": "cylinder_tube",
+  "issue": "uibcdf/topomt#178",
+  "date": "2026-11-10",
+  "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+  "length_unit": "angstroms",
+  "source_before_study": "86673475debd8a7cc05e9d245de58830275fb629",
+  "selected_controls": [
+    {
+      "probe_angstroms": 1.2,
+      "question": "Two-end passage; lateral-wall/hull openings verified independently"
+    },
+    {
+      "probe_angstroms": 1.4,
+      "question": "Fixed-axis obstruction versus a separately certified bent passage; not a global critical-radius assertion"
+    },
+    {
+      "probe_angstroms": 2.5,
+      "question": "No strict free center anywhere in the finite hull, using a conservative nominal-grid perturbation bound"
+    }
+  ],
+  "path_reference": {
+    "z_stations_angstroms": [
+      -16.0,
+      -10.0,
+      -8.75,
+      -7.5,
+      -6.25,
+      -5.0,
+      -3.75,
+      -2.5,
+      -1.25,
+      0.0,
+      1.25,
+      2.5,
+      3.75,
+      5.0,
+      6.25,
+      7.5,
+      8.75,
+      10.0,
+      16.0
+    ],
+    "xy_values_angstroms": [
+      -0.4,
+      -0.30000000000000004,
+      -0.2,
+      -0.09999999999999998,
+      0.0,
+      0.09999999999999998,
+      0.20000000000000007,
+      0.30000000000000004,
+      0.4
+    ],
+    "max_lateral_step_angstroms": 0.35,
+    "mandatory_origin": false,
+    "maximum_points": 2000,
+    "maximum_edge_tests": 60000,
+    "decision_margin_angstroms": 1e-06,
+    "discovery": "Layered finite widest-witness search; success is verified by complete all-atom segment clearance, not its score or alleged global optimality."
+  },
+  "query": {
+    "transit_policy": "with_connectors",
+    "gate_intrusion_policy": "flag_only",
+    "dry_adjacency": "face",
+    "min_size": 0,
+    "residence_tolerance_angstroms": 0.0,
+    "permeability_tolerance_angstroms": 0.0,
+    "boundary_tolerance_angstroms": 1e-06
+  },
+  "threshold_extension": {
+    "observable": "Infinite designated axis clearance, not globally optimal passage capacity",
+    "offset_angstroms": 0.0001,
+    "predicates": "Strict positive-margin availability below; equality marginal; above certifies only that this fixed axis is blocked."
+  },
+  "acceptance": {
+    "positive_path": "Every selected atom-ball margin on every complete segment exceeds1e-6A; the two outward infinite axial tails are verified. The path may avoid an occupied origin.",
+    "physical_openings": "Accept only complete independent convex-face/seam inventory, and identify free faces at the two ends. Do not infer this count from path endpoints or native links.",
+    "negative": "Accept finite-hull exclusion only if the original minimum radius plus probe exceeds the complete nominal-grid perturbation bound with positive margin.",
+    "native": "Record actual raw, typed and public results, supports, units, source IDs, physical unresolved reasons and graph-candidate path margins; never substitute expected classes for observations."
+  },
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds_per_capture": 120,
+    "notebook_cell_timeout_seconds": 90
+  },
+  "scope": "Known development input. The original catalog has prior native observations; new reference/receiving is retrospective characterization, not a blind held-out benchmark. No original provider or remote coordinate submission. Reference v2 changes only the origin constraint, not the input, probes, candidate xy/z grid or resource budgets.",
+  "reference_revision": 2,
+  "supersedes_only_reference_question": "The initial mandatory-origin witness is retained. The origin itself is excluded at1.4A; existence of a path through that point is a different question from arbitrary end-to-end passage.",
+  "no_native_query_observed": true
+}
