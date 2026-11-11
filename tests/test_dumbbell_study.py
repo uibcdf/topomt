@@ -130,3 +130,15 @@ def test_excluded_dumbbell_retains_complete_dry_support_and_empty_public_result(
     assert nodes['wet_nodes'] == 0 and nodes['dry_nodes'] == nodes['total'] > 0
     assert topo.input_context.atom_indices.tolist() == list(range(94))
     assert topo.attribution['producer'] and topo.attribution['references']
+
+
+def test_current_dumbbell_notebook_code_cells_parse_before_execution():
+    import ast
+
+    import nbformat
+
+    for name in ('system', 'dfnd'):
+        notebook = nbformat.read(CASE / f'{name}.ipynb', 4)
+        for index, cell in enumerate(notebook.cells):
+            if cell.cell_type == 'code':
+                ast.parse(cell.source, filename=f'{name}.ipynb cell {index}')

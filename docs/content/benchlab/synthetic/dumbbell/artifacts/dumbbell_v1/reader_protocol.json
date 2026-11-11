@@ -2,13 +2,16 @@
   "schema": "topomt.benchlab.dumbbell-reader-protocol/1",
   "issue": "uibcdf/topomt#186",
   "case_id": "dumbbell",
+  "reader_revision": 2,
   "topomt_source_revision": "17a4c9a521c89a64efb12ba339161e15c85d4ce0",
   "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63",
   "native_observations_sha256": "30e9dd64a9250aba576203dc77800d7f68b68e17c7ff20a5ebbbcf9db46c4e72",
   "notebooks": {
     "system": "0217874189eefd48a6a063c5609958cd57339b7af004d4918064e5f42159d81d",
-    "dfnd": "93d5fe21974be0fc731f57639e8efdd6bdc80b4c9878be961780f87cc3aa037c"
+    "dfnd": "3b8f16e492affc3a0b5c467853c19f926f4c0a086e28bc07ba0a199af270c5ad"
   },
+  "supersedes_reader_protocol_sha256": "4ec0e723270350b2de76efc661238a2bc215bb6c8bfaae3cbaf6a27f2565c286",
+  "revision_reason": "Correct escaped newlines in diagram labels; original source/protocol/failed attempt retained. No scientific change.",
   "resources": "One CPU/numerical thread, 6 GiB address-space /120 CPU seconds per fresh runner",
   "execution": "Separate independent Python3.14 kernels, no evidence writes or original-provider/server calls, escaped HTML tables and hide-input tags",
   "scope": "Named-anchor/reference/hierarchy source receiving; physical hull #180/#184 and later review #187/#188 remain open, earlier tube profiles unchanged."

@@ -1,0 +1,10 @@
+{
+  "schema": "topomt.benchlab.reader-attempt/1",
+  "issue": "uibcdf/topomt#186",
+  "source_revision": "3c0f0b3e09f7015e0c14f1cf9021f60af5c24b13",
+  "protocol_sha256": "4ec0e723270350b2de76efc661238a2bc215bb6c8bfaae3cbaf6a27f2565c286",
+  "system": "Fresh kernel passed; original receipt retained",
+  "dfnd": "Full execution reached the diagram cell and failed with SyntaxError: unterminated string literal in multiline plot labels. Earlier scientific cells passed. Original source is retained, not accepted as the current executed reader.",
+  "guard": "tests/test_dumbbell_study.py::test_current_dumbbell_notebook_code_cells_parse_before_execution",
+  "scientific_change": false
+}

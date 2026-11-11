@@ -1,0 +1,315 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "eb69fbb1",
+   "metadata": {},
+   "source": [
+    "# Two chambers and a narrow neck\n",
+    "\n",
+    "A probe can fit inside both chambers yet fail to move between them. This\n",
+    "symmetric **dumbbell** asks when one enclosed region becomes two, and prepares\n",
+    "an independent reference for DFND's chamber/throat hierarchy.\n",
+    "\n",
+    "We keep one fixed atomic input and use probes of **1.4, 2.2 and 6 Å**. This\n",
+    "notebook checks the geometry without importing or running DFND. The separate\n",
+    "[DFND notebook](dfnd.ipynb) executes the public API and inspects its actual\n",
+    "`Topography`, including native supports and copied hierarchy motifs.\n",
+    "\n",
+    "Run each notebook independently from this directory in a fresh Python 3.14\n",
+    "kernel. Expand code inputs on the website when useful. Run All does not rewrite\n",
+    "retained evidence or submit coordinates to an external provider."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "bb109abb",
+   "metadata": {
+    "tags": [
+     "hide-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "from pathlib import Path\n",
+    "from html import escape\n",
+    "import hashlib\n",
+    "import sys\n",
+    "import numpy as np\n",
+    "import matplotlib.pyplot as plt\n",
+    "from IPython.display import HTML, display\n",
+    "import pyunitwizard as puw\n",
+    "import study\n",
+    "\n",
+    "CASE = Path.cwd()\n",
+    "ARTIFACTS = CASE / 'artifacts/dumbbell_v1'\n",
+    "fixture = study.read(ARTIFACTS / 'input.json')\n",
+    "policy = study.read(ARTIFACTS / 'protocol.json')\n",
+    "assert hashlib.sha256((ARTIFACTS / 'input.json').read_bytes()).hexdigest() == policy['input_sha256']\n",
+    "centers = np.asarray(puw.get_value(study.quantity(fixture['coordinates'], 'coordinates'), to_unit='angstroms'))\n",
+    "radii = np.asarray(puw.get_value(study.quantity(fixture['atom_radii'], 'atom_radii'), to_unit='angstroms'))\n",
+    "anchors = study.quantity(policy['anchors'], 'anchors')\n",
+    "anchor_values = np.asarray(puw.get_value(anchors, to_unit='angstroms'))\n",
+    "assert centers.shape == (94, 3) and np.allclose(radii, 1.88, rtol=0, atol=1e-14)\n",
+    "assert fixture['source_atom_indices'] == list(range(94))\n",
+    "\n",
+    "def table(headers, rows):\n",
+    "    def cells(values, tag):\n",
+    "        return ''.join(f'<{tag}>{escape(str(value))}</{tag}>' for value in values)\n",
+    "    display(HTML('<table><thead><tr>' + cells(headers, 'th') + '</tr></thead><tbody>' +\n",
+    "                 ''.join('<tr>' + cells(row, 'td') + '</tr>' for row in rows) + '</tbody></table>'))\n",
+    "\n",
+    "assert 'topomt' not in sys.modules"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "b762e027",
+   "metadata": {},
+   "source": [
+    "## The fixed atomic input\n",
+    "\n",
+    "The system contains **94 argon balls of radius 1.88 Å**. The generator starts\n",
+    "from two sampled nominal spheres of radius 7 Å, with centers 12.5 Å apart on\n",
+    "the x axis. It removes the overlapping caps and applies fixed jitter of 0.1 Å\n",
+    "with seed zero. The nominal sampling parameter is 3.5 Å.\n",
+    "\n",
+    "Those construction parameters explain the shape; the **actual full-precision\n",
+    "ball coordinates and radii** define the physical obstacle set. We do not assume\n",
+    "that an ideal smooth peanut is sealed. The rounded PDB supplies topology only;\n",
+    "native receiving restores the coordinates from `input.json` and verifies radii.\n",
+    "\n",
+    "The two reference points are the nominal chamber centers, x = −6.25 and +6.25 Å.\n",
+    "We will call them the left and right **anchors**. Their behavior makes a precise,\n",
+    "bounded question: are these free points enclosed, and can they communicate?\n",
+    "It does not count every possible region in the system."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "daef1643",
+   "metadata": {
+    "tags": [
+     "hide-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "refs = study.references(CASE)\n",
+    "assert 'topomt' not in sys.modules\n",
+    "anchor_clearances = puw.get_value(refs['anchor_clearances'], to_unit='angstroms')\n",
+    "path_clearance = float(puw.get_value(refs['connecting_axis_minimum_clearance'], to_unit='angstroms'))\n",
+    "table(['Probe (Å)', 'Independent statement', 'Scope'], [\n",
+    "    [1.4, 'Both anchors are free, enclosed and connected', 'One common named region; not every global region'],\n",
+    "    [2.2, 'Both anchors remain free, enclosed and separated', 'At least two distinct enclosed regions'],\n",
+    "    [6.0, 'No strict-free center anywhere in the finite native hull', 'The unbounded exterior still exists']])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "063f370f",
+   "metadata": {},
+   "source": [
+    "## Communication needs a complete path\n",
+    "\n",
+    "For a probe center x, clearance is the smallest distance to any atomic center\n",
+    "minus that atom's radius. Strict freedom requires clearance greater than the\n",
+    "probe radius. The reference checks each **complete segment** of the axial\n",
+    "polyline against every atom, including closest points between its stations.\n",
+    "\n",
+    "The minimum path clearance is **1.432602186 Å**, leaving a **0.032602186 Å**\n",
+    "margin at 1.4 Å. Both anchors have much larger clearances, about 4.97 and 4.89 Å.\n",
+    "The neck therefore controls this particular connecting witness. We have proved\n",
+    "one route, not a globally optimal bottleneck or an exact transition radius."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "1e865777",
+   "metadata": {
+    "tags": [
+     "hide-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "geometry = study.read(ARTIFACTS / 'reference_geometry.json')\n",
+    "profile = puw.get_value(study.quantity(geometry['barrier_profile'], 'barrier_profile'), to_unit='angstroms')\n",
+    "x = np.linspace(-6.25, 6.25, 501)\n",
+    "points = np.column_stack([x, np.zeros_like(x), np.zeros_like(x)])\n",
+    "clearance = (np.linalg.norm(points[:, None] - centers[None], axis=2) - radii).min(axis=1)\n",
+    "fig, axes = plt.subplots(1, 2, figsize=(11, 4.2), layout='constrained')\n",
+    "axes[0].scatter(centers[:, 0], centers[:, 1], s=18, color='#567792', alpha=.65, label='Atomic centers')\n",
+    "for sign in (-1, 1):\n",
+    "    axes[0].plot(profile[:, 0], sign * profile[:, 1], color='#3564a3', lw=1.7,\n",
+    "                 label='Covered reference barrier' if sign == 1 else None)\n",
+    "axes[0].plot([-6.25, 6.25], [0, 0], color='#007c57', lw=2, label='Verified connecting axis')\n",
+    "axes[0].scatter(anchor_values[:, 0], anchor_values[:, 1], color='#007c57', marker='*', s=95)\n",
+    "neck_radius = profile[np.argmin(abs(profile[:, 0])), 1]\n",
+    "axes[0].plot([0, 0], [-neck_radius, neck_radius], color='#b04148', ls='--', label='Neck section')\n",
+    "axes[0].set(xlabel='x (Å)', ylabel='y (Å)', title='Atomic input and independent barrier', aspect='equal')\n",
+    "axes[0].legend(fontsize=7, loc='lower center')\n",
+    "axes[1].plot(x, clearance, color='#007c57', label='All-atom axis clearance')\n",
+    "for probe, color in [(1.4, '#2585ad'), (2.2, '#ba7b20'), (6, '#b04148')]:\n",
+    "    axes[1].axhline(probe, color=color, ls='--', label=f'{probe:g} Å probe')\n",
+    "axes[1].set(xlabel='x (Å)', ylabel='Clearance (Å)', title='Room in the lobes, restriction at the neck')\n",
+    "axes[1].legend(fontsize=8); axes[1].grid(alpha=.2)\n",
+    "plt.show()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7fcf45ec",
+   "metadata": {},
+   "source": [
+    "The left panel is a projection: markers show atomic centers, rather than full\n",
+    "ball radii. The blue outline belongs to the separate reference polyhedron.\n",
+    "The plotted clearance samples illustrate the shape; the continuous segment\n",
+    "calculation certifies the path.\n",
+    "\n",
+    "## Enclosure needs a complete wall\n",
+    "\n",
+    "A free path between the anchors would not rule out a leak to the exterior.\n",
+    "We therefore construct a **closed, nonconvex polygonal barrier** around them:\n",
+    "32 angular columns and 16 polar intervals per lobe give 994 reference vertices\n",
+    "and 1,984 triangular faces. The frusta join at the neck; every mesh edge belongs\n",
+    "to exactly two faces, and the positive radial profile defines a simple closed\n",
+    "surface containing both anchors and their connecting axis.\n",
+    "\n",
+    "Every boundary triangle is independently checked to lie inside the union of\n",
+    "actual expanded atomic balls at 1.4 Å. A leaf certificate names one real atom\n",
+    "whose expanded ball covers all vertices of that leaf simplex. Convexity then\n",
+    "covers its **entire interior**. Explicit binary subdivisions include both\n",
+    "children at every split, so no uncovered gap can be omitted from a certificate.\n",
+    "Reference vertices never become extra obstacle atoms.\n",
+    "\n",
+    "Any continuous escape from an anchor must cross that covered wall. Together\n",
+    "with the connecting path, this proves one **enclosed connected region containing\n",
+    "both anchors**. The barrier is a sufficient enclosure witness, not a physical\n",
+    "surface reconstruction or a free-volume boundary."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "4256d343",
+   "metadata": {
+    "tags": [
+     "hide-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "rows = []\n",
+    "for name, meaning in [('wall', 'Complete enclosing wall, 1.4 Å'),\n",
+    "                      ('separator', 'Complete neck section, 2.2 Å'),\n",
+    "                      ('finite_hull', 'Whole native finite carrier, 6 Å')]:\n",
+    "    result = refs['covers'][name]\n",
+    "    rows.append([meaning, result['visited_nodes'], result['leaf_count'],\n",
+    "                 f\"{float(puw.get_value(result['minimum_coverage_margin'], to_unit='angstroms')):.9f}\"])\n",
+    "table(['Certificate', 'Visited tree nodes', 'Covering leaves', 'Minimum cover margin (Å)'], rows)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5d1614b0",
+   "metadata": {},
+   "source": [
+    "## Separation needs a complete section\n",
+    "\n",
+    "At 2.2 Å both anchors remain free, but the entire polygonal neck section at\n",
+    "x = 0 is covered by expanded balls. Its 32 triangles fill the complete section;\n",
+    "they are not just selected points or an axial obstruction. The outer wall is\n",
+    "still covered because increasing the probe expands every obstacle ball.\n",
+    "\n",
+    "A path between the two anchors would have to cross the covered section while\n",
+    "inside the barrier, or cross the covered outer wall to leave it. Both routes\n",
+    "are excluded. The anchors therefore occupy **distinct enclosed regions**.\n",
+    "This proves at least two regions, without claiming exactly two throughout the\n",
+    "whole free set.\n",
+    "\n",
+    "The existing path and separator give bounds on neck closure; they do not supply\n",
+    "the optimal passage radius. At one fixed probe, describing two chambers inside\n",
+    "one connected region is also different from observing two disconnected regions\n",
+    "at a larger probe.\n",
+    "\n",
+    "## Exclusion needs the whole finite carrier\n",
+    "\n",
+    "For 6 Å we use the **atomic-center convex hull H**, which is the native finite\n",
+    "carrier. It differs from the nonconvex reference barrier above. Its 128 hull-face\n",
+    "tetrahedra form a complete fan from an interior point. Every entire tetrahedron\n",
+    "has a sufficient all-atom expanded-ball cover, verified with the same complete\n",
+    "subdivision-tree principle. Thus no strict-free center remains anywhere in H.\n",
+    "\n",
+    "This conclusion does not follow merely because the axis is blocked. Nor does\n",
+    "it remove the unbounded exterior of this isolated, nonperiodic system."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "id": "94e845fc",
+   "metadata": {
+    "tags": [
+     "hide-input"
+    ]
+   },
+   "outputs": [],
+   "source": [
+    "table(['Reference quantity', 'Value'], [\n",
+    "    ['Left anchor clearance (Å)', f'{anchor_clearances[0]:.9f}'],\n",
+    "    ['Right anchor clearance (Å)', f'{anchor_clearances[1]:.9f}'],\n",
+    "    ['Continuous connecting-axis minimum (Å)', f'{path_clearance:.9f}'],\n",
+    "    ['Covered reference wall faces', refs['barrier_faces']],\n",
+    "    ['Complete neck-section triangles', refs['separator_triangles']],\n",
+    "    ['Native-hull tetrahedra covered', refs['finite_hull_tetrahedra']],\n",
+    "    ['Exact global physical component count', refs['exact_global_free_component_count']],\n",
+    "    ['Reference barrier equals native hull', refs['barrier_equals_native_hull']]])\n",
+    "assert 'topomt' not in sys.modules\n",
+    "print('All independent certificates replayed without importing DFND.')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "61bd1963",
+   "metadata": {},
+   "source": [
+    "## What to ask of DFND\n",
+    "\n",
+    "The [next notebook](dfnd.ipynb) follows these exact anchors into actual native\n",
+    "and public supports. At 1.4 Å it looks for their common parent and recoverable\n",
+    "chamber/throat motifs; at 2.2 Å it checks their separation; at 6 Å it checks\n",
+    "finite-carrier exclusion and the availability of physical hull decomposition.\n",
+    "Additional catalog objects must be interpreted separately.\n",
+    "\n",
+    "An increase in component count as a probe grows is **not inherently a defect**:\n",
+    "the free set shrinks, but a connected region can fragment. The older two-versus-five\n",
+    "native-domain observation at 1.4/2.0 Å needs its own support diagnosis under\n",
+    "[#188](https://github.com/uibcdf/topomt/issues/188). These 1.4/2.2 Å references\n",
+    "do not diagnose all five domains at that different intermediate probe.\n",
+    "\n",
+    "This known catalog input is a retrospective development case, not a blind\n",
+    "benchmark or a comparison with another engine. Exact global counts/volumes,\n",
+    "physical chamber boundaries, optimal bottlenecks and biological accuracy remain\n",
+    "outside the established reference scope. See the\n",
+    "[evidence guide](artifacts/dumbbell_v1/README.md) for protocols and replay."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "name": "python",
+   "version": "3.14"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}

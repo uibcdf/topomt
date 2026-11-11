@@ -1,0 +1,13 @@
+{
+  "schema": "topomt.benchlab.dumbbell-notebook-receiving/1",
+  "notebook": "docs/content/benchlab/synthetic/dumbbell/system.ipynb",
+  "fresh_kernel": true,
+  "code_and_markdown_sha256": "0217874189eefd48a6a063c5609958cd57339b7af004d4918064e5f42159d81d",
+  "source_protocol_sha256": "4ec0e723270350b2de76efc661238a2bc215bb6c8bfaae3cbaf6a27f2565c286",
+  "wall_seconds": 3.268,
+  "parent_peak_rss_kib": 81144,
+  "child_peak_rss_kib": 149004,
+  "preserved_evidence_files": 376,
+  "execution_tree": "source checkout",
+  "passed": true
+}

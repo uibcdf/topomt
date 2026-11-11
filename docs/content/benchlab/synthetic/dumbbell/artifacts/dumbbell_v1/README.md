@@ -30,7 +30,11 @@ ZIP and explains scientific outcomes separately from unavailable quantities.
   The pre-existing human version-file edit is preserved and separately hashed.
 - `reader_protocol.json` freezes notebook code/Markdown, original observation
   hash and scientific source **17a4c9a521c89a64efb12ba339161e15c85d4ce0** before
-  fresh-kernel execution. The system and DFND receipts record independent runs;
+  fresh-kernel execution. Reader revision 2 corrects escaped newlines in the
+  diagram labels; `reader_attempt_v1/` retains the first frozen sources/protocol,
+  successful system receipt and failed full-DFND attempt. A code-cell parsing
+  regression first failed and now passes; no scientific observation changed.
+  The system and DFND receipts record independent runs;
   clean-source receiving keeps its own actual producer version and module origin.
 
 ## Independent proof objects
