@@ -1,5 +1,5 @@
 ---
-summary: Reconcile local tube candidates with an independently empty all-atom carrier.
+summary: Reconcile local tube candidates with independently empty all-atom carriers.
 issue: uibcdf/topomt#181
 status: active
 opened: 2026-11-10
@@ -54,7 +54,8 @@ biological failure, comparative inferiority or global optimal bottleneck.
 
 ## Scope and exclusions
 
-The exact #178 ball input, 2.5 Å probe, zero physical tolerances, epsilon 1e-6 Å,
+The exact #178 narrow ball input at 2.5 Å and #183 wide input at 5 Å,
+zero physical tolerances, epsilon 1e-6 Å,
 with_connectors/flag_only/dryface. No silent change to local capacity definitions,
 default scientific policy, input radii or expected reference. #180 separately
 owns physical boundary budget; #60/#76 retain broader public/reference work.

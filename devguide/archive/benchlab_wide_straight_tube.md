@@ -1,13 +1,13 @@
 ---
 summary: Establish the wide, sparsely sampled straight-tube BenchLab companion.
 issue: uibcdf/topomt#183
-status: active
+status: resolved
 opened: 2026-11-10
-closed:
+closed: 2026-11-11
 severity: medium
-verification: inspected
+verification: measured
 area: [dfnd, validation, docs]
-guard:
+guard: tests/test_wide_tube_study.py::test_wide_complete_download_is_byte_identified_and_contains_shared_receiving
 normative:
 blocked_by: []
 supersedes: []
@@ -64,3 +64,32 @@ figures, case navigation, source-bound ZIP and matching outside-kernel receiving
 Run bounded appropriate tests, Ruff/scoped typing, report/finding and strict
 docs/navigation checks; reconcile issues/cards with any observed discrepancies.
 Publish [skip ci] commits and verify actual hosted pages and download bytes.
+
+## Delivery and verification — 2026-11-11
+
+Separate executed system/DFND notebooks, two figures, case/evidence navigation,
+paired-tube interpretation and complete source-bound download are delivered.
+Inputs/query preceded reference generation at 1cd0f18; independent references
+and native protocol were committed at fdb253c; metadata correction/new capture
+used 3ad9515; reader sources were frozen at 06fc812 before fresh kernels.
+The current scientific source pin is 3ad9515019e722c0ccf4ade7a3024de4166e217e.
+The final documentation candidate is 6ec3b371f44da621e37c1caab48bd594c1491e64.
+
+Sixty-five selected tests pass; five scientific targets remain strict expected
+failures under #180/#181/#184. Scoped typing and Ruff pass. Both notebooks run
+independently inside/outside the checkout, reproducing the same semantic tables;
+the 398-file ZIP is SHA-256 identified in the portable/public receipts. Strict
+Sphinx validates 104 pages and 9,813 local links without Sphinx warnings. Actual
+Chrome desktop/mobile receiving verifies tables, figures and no horizontal page
+overflow. Startup library/cache warnings are retained rather than hidden.
+The original 297 prior artifact/notebook/download files and the human version
+edit remain byte-identical.
+
+See `devguide/evidence/wide_tube_local_validation_v1.json`,
+`wide_tube_portable_v1.json`, `wide_tube_documentation_v2.json`,
+`wide_tube_visual_v1.json`, `wide_tube_findings_readback_v1.json` and
+`wide_tube_public_v1.json`. The initial documentation receipt v1 is superseded
+for presentation by v2; both retain their original candidate identities.
+Public run 42970866204 and actual hosted-byte receiving qualify the site/download
+only. Full-suite, historical saved-bibliography and installed/matrix questions
+remain #16. This closes unit establishment, not scientific #180/#181/#184/#76.

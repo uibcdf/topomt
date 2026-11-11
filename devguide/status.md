@@ -11,8 +11,14 @@ remain unknown. At 2.5 Å the interior native candidate is clear but physical
 ordering is numerically unresolved (#184). At 5 Å budget #180 and local versus
 all-atom/public review #181 remain open. Scientific operators were unchanged.
 The first bibliography-encoding attempt is retained; #185 corrects new evidence
-serialization only. Source-bound reader/download/site evidence is recorded
-separately; no original comparator, installed matrix or protein claim follows.
+serialization only. Both source-bound readers and the 398-file download pass
+fresh kernels inside/outside the checkout. Public run 42970866204 serves source
+6ec3b371f44da621e37c1caab48bd594c1491e64: 104 pages, 9,813 checked local links,
+zero Sphinx warnings. The four hosted case pages and byte-identical ZIP are
+received in `devguide/evidence/wide_tube_public_v1.json`. Unit establishment #183
+is complete; #180/#181/#184/#76 remain open. No original comparator, installed
+matrix or protein claim follows. Historical saved-bibliography qualification
+remains #16; new capture serialization does not repair old frozen records.
 
 ## Earlier finite three-case checkpoint — 2026-11-10
 

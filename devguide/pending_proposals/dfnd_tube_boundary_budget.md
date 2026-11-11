@@ -1,5 +1,5 @@
 ---
-summary: Resolve bounded physical boundary receiving on the frozen straight tube.
+summary: Resolve bounded physical boundary receiving on the frozen straight tubes.
 issue: uibcdf/topomt#180
 status: active
 opened: 2026-11-10
@@ -48,7 +48,8 @@ accepting a face-cluster count would not establish the missing physical result.
 
 ## Scope and exclusions
 
-One newly selected fixed tube and its public physical receiving. No change to
+The explicitly pinned narrow and wide budget profiles and their public physical
+receiving. The wide 2.5 Å numerical-margin profile is separately #184. No change to
 native link grouping, local capacity definitions, public catalog promotion,
 biological validation or installed-release qualification. #181 owns the
 separate high-probe candidate/free-set discrepancy; #76 retains wider paths.

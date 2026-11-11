@@ -1,0 +1,59 @@
+{
+  "browser": "actual headless Google Chrome, CDP after DOM/layout readiness",
+  "pages": [
+    {
+      "screenshot": "wide-system-desktop",
+      "title": "A wide tube with a sparsely sampled wall \u2013 TopoMT 1.0.0",
+      "mainCharacters": 6262,
+      "mainWidth": 1077.3125,
+      "viewportWidth": 1440,
+      "bodyScrollWidth": 1425,
+      "tables": 3
+    },
+    {
+      "screenshot": "wide-dfnd-desktop",
+      "title": "DFND on the wide, sparsely sampled tube \u2013 TopoMT 1.0.0",
+      "mainCharacters": 9281,
+      "mainWidth": 1077.3125,
+      "viewportWidth": 1440,
+      "bodyScrollWidth": 1425,
+      "tables": 4
+    },
+    {
+      "screenshot": "wide-index-mobile",
+      "title": "Straight tube: wide, sparse sampling \u2013 TopoMT 1.0.0",
+      "mainCharacters": 6198,
+      "mainWidth": 351,
+      "viewportWidth": 390,
+      "bodyScrollWidth": 390,
+      "tables": 2
+    },
+    {
+      "screenshot": "wide-system-mobile",
+      "title": "A wide tube with a sparsely sampled wall \u2013 TopoMT 1.0.0",
+      "mainCharacters": 6068,
+      "mainWidth": 351,
+      "viewportWidth": 390,
+      "bodyScrollWidth": 390,
+      "tables": 3
+    },
+    {
+      "screenshot": "wide-dfnd-mobile",
+      "title": "DFND on the wide, sparsely sampled tube \u2013 TopoMT 1.0.0",
+      "mainCharacters": 9081,
+      "mainWidth": 351,
+      "viewportWidth": 390,
+      "bodyScrollWidth": 390,
+      "tables": 4
+    }
+  ],
+  "peak_own_tree_rss_mib": 1358.6,
+  "wall_seconds": 4.96,
+  "schema": "topomt.benchlab.wide-tube-visual-receiving/1",
+  "issue": "uibcdf/topomt#183",
+  "source_revision": "6ec3b371f44da621e37c1caab48bd594c1491e64",
+  "all_five_cases_in_semantic_table": true,
+  "all_nine_method_controls_in_semantic_table": true,
+  "mobile_horizontal_page_overflow": false,
+  "notebook_tables_and_expandable_inputs_visible": true
+}

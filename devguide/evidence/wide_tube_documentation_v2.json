@@ -1,0 +1,19 @@
+{
+  "schema": "topomt.benchlab.tube-documentation-receiving/1",
+  "issue": "uibcdf/topomt#183",
+  "source_revision": "6ec3b371f44da621e37c1caab48bd594c1491e64",
+  "strict_sphinx_zero_warnings": true,
+  "topomt_import_origin": "Temporary clean git archive of the committed candidate",
+  "committed_version_sha256": "c63a97ae89338cff1d0a778054f8bfbcaea51ea974b281d062073f2eba5b2f1a",
+  "site_checks": {
+    "schema": "topomt.documentation-build/1",
+    "source_commit": "6ec3b371f44da621e37c1caab48bd594c1491e64",
+    "html_pages": 104,
+    "local_links": 9813,
+    "notebook_execution": "off"
+  },
+  "wall_seconds": 19.381,
+  "peak_rss_kib": 301052,
+  "resources": "One CPU/numerical thread, one Sphinx worker, 6 GiB address-space / 120 CPU second ceilings",
+  "scope": "Clean committed-source documentation and local navigation, not installed release or public deployment"
+}

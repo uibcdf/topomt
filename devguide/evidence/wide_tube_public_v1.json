@@ -1,0 +1,57 @@
+{
+  "schema": "topomt.benchlab.tube-public-receiving/1",
+  "issue": "uibcdf/topomt#183",
+  "captured_at": "2026-11-11T06:18:41.826246+00:00",
+  "workflow_run": 42970866204,
+  "documentation_source_revision": "6ec3b371f44da621e37c1caab48bd594c1491e64",
+  "native_scientific_source_revision": "3ad9515019e722c0ccf4ade7a3024de4166e217e",
+  "served_build": {
+    "schema": "topomt.documentation-build/1",
+    "source_commit": "6ec3b371f44da621e37c1caab48bd594c1491e64",
+    "html_pages": 104,
+    "local_links": 9813,
+    "notebook_execution": "off"
+  },
+  "pages": [
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_wide_sparse/index.html",
+      "status": 200,
+      "bytes": 39380,
+      "title": "Straight tube: wide, sparse sampling \u2013 TopoMT 0.5.0",
+      "tables": 2,
+      "expandable_code_blocks": 0
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_wide_sparse/system.html",
+      "status": 200,
+      "bytes": 63294,
+      "title": "A wide tube with a sparsely sampled wall \u2013 TopoMT 0.5.0",
+      "tables": 3,
+      "expandable_code_blocks": 5
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_wide_sparse/dfnd.html",
+      "status": 200,
+      "bytes": 83742,
+      "title": "DFND on the wide, sparsely sampled tube \u2013 TopoMT 0.5.0",
+      "tables": 4,
+      "expandable_code_blocks": 7
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/README.html",
+      "status": 200,
+      "bytes": 38488,
+      "title": "Wide straight-tube evidence and replay \u2013 TopoMT 0.5.0",
+      "tables": 0,
+      "expandable_code_blocks": 0
+    }
+  ],
+  "download": {
+    "url": "https://www.uibcdf.org/topomt/_downloads/63fb0d7bafef89efc1b332d1e1e44c1c/straight_tube_wide_sparse_v1.zip",
+    "status": 200,
+    "bytes": 12106303,
+    "sha256": "271b354aa3ee2efa56073deb0d2b6987977fe35632caa10a19c3280e20576525"
+  },
+  "fresh_kernel_evidence_reused": "devguide/evidence/wide_tube_portable_v1.json; byte-identical served ZIP",
+  "scope": "Actual public Pages and complete source-bound study download; native physical/all-atom qualification remains open under #180/#181/#184, broader installed/platform qualification under #16"
+}

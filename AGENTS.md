@@ -49,12 +49,14 @@ all-atom/public-candidate qualification #181; general paths remain #76. Stay
 with this tube before another geometry. Use the current laboratory checkpoint
 and preserve all earlier frozen case evidence and source-scoped resolutions.
 
-DFND companion selection (2026-11-10): the maintainer now requests the BenchLab
-unit for `straight_tube_wide_sparse` under #183. Characterize this existing
-second tube with independent references and actual public receiving, preserving
-the narrow/dense study and its open #180/#181 findings. This selected companion
-extends the current tube phase; it does not qualify the narrow input or start
-another geometry family, original-provider run or protein phase.
+DFND companion delivery (2026-11-11): the maintainer-selected BenchLab unit for
+`straight_tube_wide_sparse` is established under #183, with independent references,
+actual public receiving, executed readers and a verified hosted download. See
+`devguide/archive/benchlab_wide_straight_tube.md`. Preserve both tube inputs and
+their original evidence. Scientific follow-up remains physical budget #180,
+local/all-atom qualification #181, wide numerical boundary ambiguity #184 and
+wider paths #76. The wide 1.4 Å positive profile does not qualify the narrow
+input or start another geometry family, original-provider run or protein phase.
 
 DFND method documentation lives in `docs/content/dfnd/`. Changes to operators,
 query policies, catalog promotion, units or physical interpretation must review

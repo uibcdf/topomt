@@ -12,7 +12,11 @@ Both radius and sampling change between these companions; this comparison
 does not isolate either parameter or close broader #76/#16 qualification.
 This user-selected companion refines the earlier one-tube-only continuation.
 
-The wide unit now establishes independent axis/two-end/exclusion references.
+The wide unit is established under #183, with two executed source-bound readers,
+a byte-verified portable download and hosted run 42970866204. See
+`devguide/evidence/wide_tube_public_v1.json` and the archived establishment report.
+Its independent axis/two-end/exclusion references remain separate from native
+qualification.
 At 1.4 Å native global patches and Channel contacts resolve; other associations
 remain unknown. At 2.5 Å physical ordering is numerically unresolved (#184),
 and at 5 Å budget/local-public questions recur under #180/#181. The first metadata

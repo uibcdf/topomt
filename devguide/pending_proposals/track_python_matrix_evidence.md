@@ -251,3 +251,17 @@ its existing measured 3.13 lane. A configured development environment is
 not fresh installed-artifact or public-channel qualification. Scientific
 failures and remaining distribution gates remain owned by their existing issues.
 
+
+## Wide-tube receiving scope — 2026-11-11
+
+The #183 source study has 65 passing selected tests and five explicit strict
+pending scientific targets under #180/#181/#184; full suite/GUI/installed/matrix
+qualification is not inferred. See `devguide/evidence/wide_tube_local_validation_v1.json`
+and `wide_tube_portable_v1.json`. The #185 encoder fix at 3ad9515 preserves
+bibliographic strings in new captures; the first wide attempt remains historical
+and is not accepted for portable attribution. Audit/reconstruct older saved
+bibliographic metadata from original identities/offline declarations before
+qualifying it, preserving frozen bytes. Startup Pint-cache and pre-existing
+atom-label SyntaxWarnings remain visible; clean-source module identity and
+actual producer version are recorded separately. This issue retains that broader
+source/delivery qualification; #185 closes only its bounded serializer correction.

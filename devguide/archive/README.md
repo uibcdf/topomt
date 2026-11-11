@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (52)
+### Resolved (53)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
@@ -14,6 +14,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`benchlab_public_topography.md`](benchlab_public_topography.md) — [#146](https://github.com/uibcdf/topomt/issues/146) — Audit the three frozen BenchLab cases through the public Topography registry. *(resolved, measured)*
 - [`benchlab_straight_tube.md`](benchlab_straight_tube.md) — [#178](https://github.com/uibcdf/topomt/issues/178) — Establish the straight-tube BenchLab unit with independent passage and wall references. *(resolved, measured)*
 - [`benchlab_three_case_reader_route.md`](benchlab_three_case_reader_route.md) — [#175](https://github.com/uibcdf/topomt/issues/175) — Bring the completed three-case BenchLab review into a coherent current web and notebook reading route. *(resolved, measured)*
+- [`benchlab_wide_straight_tube.md`](benchlab_wide_straight_tube.md) — [#183](https://github.com/uibcdf/topomt/issues/183) — Establish the wide, sparsely sampled straight-tube BenchLab companion. *(resolved, measured)*
 - [`castp3_1cge_missing_closed_voids.md`](castp3_1cge_missing_closed_voids.md) — [#85](https://github.com/uibcdf/topomt/issues/85) — Resolve three missing native closed cavities in the pinned 1CGE CASTpFold output. *(resolved, reproduced)*
 - [`castp3_closed_void_measurements.md`](castp3_closed_void_measurements.md) — [#79](https://github.com/uibcdf/topomt/issues/79) — Validate and expose local CASTp3 closed-void SA/MS measurements. *(resolved, measured)*
 - [`castp3_closed_void_radius_profile.md`](castp3_closed_void_radius_profile.md) — [#80](https://github.com/uibcdf/topomt/issues/80) — Identify an explicit modern CASTp radius profile and resolve two closed-void residuals. *(resolved, measured)*
