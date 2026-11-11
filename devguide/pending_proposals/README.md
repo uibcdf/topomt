@@ -46,13 +46,10 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (7)
+### Active (4)
 
 - [`dfnd_tube_all_atom_receiving.md`](dfnd_tube_all_atom_receiving.md) — [#181](https://github.com/uibcdf/topomt/issues/181) — Reconcile local tube candidates with independently empty all-atom carriers. *(active, measured)*
 - [`dfnd_tube_boundary_budget.md`](dfnd_tube_boundary_budget.md) — [#180](https://github.com/uibcdf/topomt/issues/180) — Resolve bounded physical boundary receiving on the frozen straight tubes. *(active, measured)*
-- [`integrate_hole.md`](integrate_hole.md) — [#192](https://github.com/uibcdf/topomt/issues/192) — Integrate original HOLE with source-bound results and scientific attribution. *(active, inspected)*
-- [`integrate_pisa.md`](integrate_pisa.md) — [#194](https://github.com/uibcdf/topomt/issues/194) — Integrate original PISA with source-bound results and scientific attribution. *(active, inspected)*
-- [`integrate_povme.md`](integrate_povme.md) — [#193](https://github.com/uibcdf/topomt/issues/193) — Integrate original POVME with source-bound results and scientific attribution. *(active, inspected)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 - [`wide_tube_boundary_numerics.md`](wide_tube_boundary_numerics.md) — [#184](https://github.com/uibcdf/topomt/issues/184) — Resolve wide-tube physical boundary ordering within the numerical margin. *(active, measured)*
 

@@ -1,13 +1,13 @@
 ---
 summary: Integrate original PISA with source-bound results and scientific attribution.
 issue: uibcdf/topomt#194
-status: active
+status: resolved
 opened: 2026-11-11
-closed:
+closed: 2026-11-11
 severity: medium
-verification: inspected
+verification: measured
 area: [third-party, api, attribution]
-guard:
+guard: tests/test_specialist_original_execution.py::test_specialist_original_execution_matches_direct_and_recovers
 normative:
 blocked_by: []
 supersedes: []
@@ -67,5 +67,37 @@ unconfirmed; do not relabel it Apache-2.0 or infer that academic use is paid.
 Keep the optional external executable selected and continue independent adapter
 and saved-result contracts without bundling the engine/resources. No original
 PISA execution or installed/public qualification is established by this review.
-The retained external question is deferred under this issue; the maintainer
+The retained external question was initially queued here and now stays deferred under #165; the maintainer
 requested further research and did not authorize posting in PDBe-KB/pisa.
+
+## Resolution — 2026-11-11
+
+The bounded external PISA adapter, source-bound original result model,
+engine-free recovery, optional attribution and user/developer guides are delivered
+in source `a816e7a712d1f1da1653114a185b375f846018a2`. Read the
+[exact source/build/execution checkpoint](../specialist_provider_checkpoint.md)
+and [validation receipt](../evidence/specialist_provider_validation_v1.json).
+
+The selected guard actually executes the original external engine, compares the
+original/direct control with the adapter and recovers its saved result without
+execution. The complete specialist selection passed 87 tests, including thirteen
+actual-execution gates, valid empty/unavailable/error distinctions, resource/query
+and wrong-source guards, non-default units, real Ackredit branch/reuse, genuine
+absence and labelled optional-failure/replay/fresh-reading controls. Existing
+regressions passed 401 tests and four additional MoloVol original/direct gates.
+Ruff and scoped Mypy passed; strict clean-archive documentation produced 112 pages,
+10807 verified local links and zero warnings. The receipt records timings, memory,
+initial Xvfb sandbox failure/recovery and exact evidence scope.
+
+The engine and any compatibility fork remain separate from TopoMT. There is no
+native scientific algorithm copy or new Topography admission. Broader fidelity
+#19, installed/public delivery #101/#16 and assessments #161/#159/#165 remain
+separate; this closure does not qualify a release, platform matrix, full suite,
+coverage, hosted publication or DFND comparison. User version edits and all
+392 frozen study/history files remain unchanged.
+
+Documented local research/free academic acquisition remains distinct from the
+unconfirmed standalone modification/redistribution grant. The outstanding
+licence question is explicitly owned by open assessment #165, not this closed
+integration. The adapter ships neither engine nor runtime datasets. The external
+question remains unpublished and requires separate authorization if selected.

@@ -136,8 +136,13 @@ The 392 frozen study/history/human-version files match their pre-task hashes.
 The human `topomt/_version.py` edit is preserved and excluded from commits.
 Full suite, coverage, supported-runtime/platform matrix, installed/public package
 qualification and hosted documentation deployment remain under #19/#101/#16;
-these focused checks do not clear them. The source documentation build and
-closure receipts are recorded separately after the committed candidate exists.
+these focused checks do not clear them. The
+[validation receipt](evidence/specialist_provider_validation_v1.json) records
+the committed candidate and clean-archive strict documentation build: 112 pages,
+10807 verified local links and zero warnings, wall 20.377 s, peak parent RSS
+313240 KiB. It used the committed version file, separately from the preserved
+human edit. Source integrations #192/#193/#194 are complete; the independent
+review/qualification owners above remain open. Hosted deployment is not claimed.
 
 Broader reviews remain #161 (HOLE/CHAP), #159 (POVME/PyVOL) and #165
 (PISA/PePrMint, including unresolved standalone redistribution clarification).

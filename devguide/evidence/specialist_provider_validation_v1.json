@@ -1,0 +1,133 @@
+{
+  "schema": "topomt.specialist-source-validation/1",
+  "date": "2026-11-11",
+  "source_revision": "a816e7a712d1f1da1653114a185b375f846018a2",
+  "routes": {
+    "hole": "Original 2.3.1 CLI",
+    "povme": "External 2.2.2+uibcdf.1 serial compatibility fork; unchanged scientific modules/methods",
+    "pisa": "Original 2.1.2 supplied-assembly CLI"
+  },
+  "execution_policy": {
+    "cpu_affinity": "One CPU",
+    "numerical_threads": 1,
+    "concurrency": "Sequential selections; one provider worker",
+    "address_space_limit_gib": 6,
+    "cpu_time_limit_seconds": 120,
+    "shared_host_available_gib": 54,
+    "memory_pressure": "Zero PSI; sampled swap I/O zero; free resources were not reserved",
+    "scheduler": "sbatch present, no allocation; direct bounded execution"
+  },
+  "selected_checks": [
+    {
+      "selection": [
+        "tests/test_specialist_provider_contracts.py",
+        "tests/test_specialist_provider_parsers.py",
+        "tests/test_povme_provider.py",
+        "tests/test_specialist_original_execution.py",
+        "tests/test_specialist_provider_recovery.py"
+      ],
+      "passed": 87,
+      "pytest_seconds": 34.18,
+      "runner_wall_seconds": 35.617,
+      "peak_parent_rss_kib": 296652,
+      "actual_external_execution_gates": 13,
+      "scope": "Seven successful original/direct branches, three real failures, three genuine no-Ackredit executions; labelled replay and fresh-reader controls are distinct"
+    },
+    {
+      "selection": [
+        "tests/test_molovol_provider.py",
+        "tests/test_new_provider_arguments.py",
+        "tests/test_new_provider_parsers.py",
+        "tests/test_new_provider_workflows.py",
+        "tests/test_provider_output.py",
+        "tests/test_provider_output_persistence.py",
+        "tests/test_provider_run_schema.py",
+        "tests/test_provider_dispatch_arguments.py",
+        "tests/test_provider_feature_kinds.py",
+        "tests/test_saved_provider_workflows.py",
+        "tests/test_mole_provider.py",
+        "tests/test_scientific_attribution.py",
+        "tests/test_comparative_findings.py",
+        "tests/test_reporting_protocol.py",
+        "devtools/tests/test_environment_tools.py"
+      ],
+      "passed": 401,
+      "pytest_seconds": 29.67,
+      "runner_wall_seconds": 31.203,
+      "peak_parent_rss_kib": 353372
+    },
+    {
+      "selection": [
+        "tests/methods/molovol/test_original_cli.py"
+      ],
+      "passed": 4,
+      "pytest_seconds": 23.03,
+      "runner_wall_seconds": 24.563,
+      "peak_parent_rss_kib": 289964,
+      "initial_attempt": "Four failures creating Xvfb sockets inside sandbox; identical bounded repeat outside the socket restriction passed. No host permission/display changes."
+    }
+  ],
+  "quality": {
+    "ruff_check": "passed",
+    "ruff_format_check": "passed",
+    "mypy": {
+      "source_files": 26,
+      "static_python_targets": [
+        "3.11",
+        "3.14"
+      ],
+      "result": "passed; not runtime qualification"
+    }
+  },
+  "documentation": {
+    "schema": "topomt.specialist-documentation/1",
+    "issues": [
+      "uibcdf/topomt#192",
+      "uibcdf/topomt#193",
+      "uibcdf/topomt#194"
+    ],
+    "source_revision": "a816e7a712d1f1da1653114a185b375f846018a2",
+    "strict_sphinx_zero_warnings": true,
+    "topomt_import_origin": "Temporary clean git archive of the committed candidate",
+    "committed_version_sha256": "c63a97ae89338cff1d0a778054f8bfbcaea51ea974b281d062073f2eba5b2f1a",
+    "site_checks": {
+      "schema": "topomt.documentation-build/1",
+      "source_commit": "a816e7a712d1f1da1653114a185b375f846018a2",
+      "html_pages": 112,
+      "local_links": 10807,
+      "notebook_execution": "off"
+    },
+    "wall_seconds": 20.377,
+    "peak_rss_kib": 313240,
+    "resources": "One CPU/numerical thread, one Sphinx worker, 6 GiB address-space / 120 CPU second ceilings",
+    "scope": "Clean committed-source documentation and local navigation, not installed release or public deployment"
+  },
+  "comparative_reconciliation": {
+    "finding_cards": 10,
+    "linked_issues": 10,
+    "current_ids": [
+      "tube-physical-boundary-budget",
+      "wide-tube-boundary-numerical-margin"
+    ],
+    "result": "Complete direct GitHub readback passed lifecycle snapshot check",
+    "new_finding": "povme-empty-initial-region",
+    "new_finding_status": "needs_review",
+    "open_consumer_owner": "uibcdf/topomt#195",
+    "open_provider_owner": "uibcdf/POVME#1"
+  },
+  "preservation": {
+    "frozen_files": 392,
+    "changed_frozen_files": 0,
+    "human_version_sha256": "d76f39e77bb54929c2d4a02f55ec04d61534ec09df776d2fe89ef731626a88b5",
+    "human_version": "Preserved; excluded from commit and clean documentation archive"
+  },
+  "deferred": {
+    "source_route_fidelity": "uibcdf/topomt#19",
+    "installed_public_qualification": "uibcdf/topomt#101 / uibcdf/topomt#16",
+    "broader_assessments": "uibcdf/topomt#161 / #159 / #165",
+    "pisa_standalone_redistribution_terms": "uibcdf/topomt#165",
+    "povme_empty_initial_region": "uibcdf/topomt#195 / uibcdf/POVME#1",
+    "native_joint_benchlab_review": "uibcdf/topomt#187"
+  },
+  "limits": "Focused Linux/Python 3.14 source controls, not full suite, coverage, runtime/platform matrix, installed release, hosted documentation deployment, DFND comparison or scientific-kernel correction. Incremental commits carry [skip ci]."
+}

@@ -28,6 +28,9 @@ exclusion removes points later returns a valid evaluated zero.
 Provider/fork follow-up: [uibcdf/POVME#1](https://github.com/uibcdf/POVME/issues/1).
 Broader family/observable assessment remains [#159](https://github.com/uibcdf/topomt/issues/159).
 The compatibility integration #193 does not resolve this finding.
+The maintained [finding card](https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19552378)
+is linked from the hub's review queue and the canonical POVME resource thread.
+It remains `needs_review`; no current scientific limitation claim is admitted.
 
 ## How
 

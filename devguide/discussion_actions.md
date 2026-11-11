@@ -2,8 +2,9 @@
 
 ## Specialist source controls and POVME operational review — 2026-11-11
 
-HOLE #192, POVME #193 and PISA #194 retain their bounded source integration
-scope in [the checkpoint](specialist_provider_checkpoint.md). Their canonical
+HOLE #192, POVME #193 and PISA #194 complete their bounded source integration
+scope in [the checkpoint](specialist_provider_checkpoint.md), with
+[validation receipts](evidence/specialist_provider_validation_v1.json). Their canonical
 threads #111/#119/#106 link the corresponding overviews and original controls;
 broader #161/#159/#165 and installed/public #101/#16 remain separate.
 The POVME initial-region execution observation has a needs_review card in
@@ -26,8 +27,8 @@ BenchLab comparison is established by selection or compilation.
 
 PISA's [extended primary-source review](pisa/license_review.md) records
 documented local research use/free academic acquisition and the unresolved
-standalone engine/resource redistribution grant. #194 owns that remaining
-question and adapter qualification. The proposed external question is deferred;
+standalone engine/resource redistribution grant. That remaining question is now
+owned by #165 independently of the completed adapter #194. The proposed external question is deferred;
 the maintainer requested research rather than authorizing publication outside
 UIBCDF. Do not treat wrapper/data licences as the engine's licence or create an
 untracked request to contact maintainers.
