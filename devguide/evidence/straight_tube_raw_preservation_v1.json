@@ -1,0 +1,25 @@
+{
+  "schema": "topomt.dfnd.raw-characterization-baseline/1",
+  "baseline_source": "87af3c8",
+  "controls": {
+    "straight_tube_narrow_dense.pdb": {
+      "actual": "4a44ad23001c54f99f1521c940d08cd897427542428ff29f335964f72aa426e8",
+      "stale_expected": "419e09116f1bb8f013090bb57bc504d01c005c8745e6f64b15276f7ee6f16743"
+    },
+    "hollow_sphere_void.pdb": {
+      "actual": "c513e12307ac0cc946c5b522ce4ba9d805b6e1ba9602b8444705544c7cda7e04",
+      "stale_expected": "3cfa230bc8bac330ab39a59f2147e24707acb4d076e1d296e7861514a1815b8a"
+    },
+    "hollow_sphere_pocket.pdb": {
+      "actual": "9cb64185bd0a0ab0a8a7f83ecb4330728515c8805caf50db5adbd46a7a9e0487",
+      "stale_expected": "0cfbb19dea266ccdd1a46c19656972b1a25a65f91c08a710d9aebd59284dfc87"
+    },
+    "two_blocks_interface.pdb": {
+      "actual": "a7fcb15aad2e6c8a7be7864527fb8e9a50cde569028661030b6810c06923cbf0",
+      "stale_expected": "f29e462c930385e6ee8fde328c4f894672b035e14ff74ac5a41cc4a5ea340062"
+    }
+  },
+  "raw_before_after_identical": true,
+  "scientific_dfnd_source_files_unchanged": 24,
+  "scope": "Existing canonical-nm regression inputs; four stale whole-record expected hashes predate this naming change. No independent physical or support-matrix qualification."
+}

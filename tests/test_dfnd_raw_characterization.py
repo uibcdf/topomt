@@ -17,7 +17,7 @@ from topomt.dfnd.graph import DelaunayFlowNetwork
 _DATA = Path(__file__).resolve().parents[1] / 'topomt' / 'data' / 'synthetic'
 
 _RAW_HASHES = {
-    'tube_channel_clean.pdb': '419e09116f1bb8f013090bb57bc504d01c005c8745e6f64b15276f7ee6f16743',
+    'straight_tube_narrow_dense.pdb': '419e09116f1bb8f013090bb57bc504d01c005c8745e6f64b15276f7ee6f16743',
     'hollow_sphere_void.pdb': '3cfa230bc8bac330ab39a59f2147e24707acb4d076e1d296e7861514a1815b8a',
     'hollow_sphere_pocket.pdb': '0cfbb19dea266ccdd1a46c19656972b1a25a65f91c08a710d9aebd59284dfc87',
     'two_blocks_interface.pdb': 'f29e462c930385e6ee8fde328c4f894672b035e14ff74ac5a41cc4a5ea340062',

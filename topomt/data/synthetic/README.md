@@ -26,8 +26,8 @@ the DFND family summary at the listed probe (significant = >= 5 resident nodes).
 | `hollow_sphere_void.pdb` | 103 | 1.4 | one enclosed void (0 mouths) | 1x void |
 | `hollow_sphere_pocket.pdb` | 96 | 1.4 | one polar opening -> pocket (1 mouth) | 1x pocket |
 | `hollow_sphere_leaky.pdb` | 89 | 1.8 | wall seals a 1.8 A probe, leaks a 1.0 A probe (sweep) | 1x void |
-| `tube_channel.pdb` | 77 | 1.4 | open tube -> channel (>=2 mouths). Wide/sparsely-walled: the lumen channel (channel, 2 mouths) is the dominant feature, alongside several shallow side-pockets at the wall windows. | 1x channel, 2x pocket |
-| `tube_channel_clean.pdb` | 81 | 1.4 | narrow, densely-walled tube -> a single clean channel (channel, 2 mouths) with minimal side-pocket noise; the canonical two-mouth-channel fixture. | 1x channel, 1x pocket |
+| `straight_tube_wide_sparse.pdb` | 77 | 1.4 | straight tube, ring radius 6 A and nominal sampling 3.5 A; characterize passage and lateral coverage independently of graph labels | 1x channel, 2x pocket |
+| `straight_tube_narrow_dense.pdb` | 81 | 1.4 | straight tube, ring radius 3.5 A and nominal sampling 2.5 A; independent BenchLab references and unresolved physical/public receiving | 1x channel, 1x pocket |
 | `dumbbell.pdb` | 94 | 1.4 | two chambers + throat: 1 void @1.4, 2 voids @2.2 (volume != connectivity) | 1x pocket, 1x void |
 | `solid_ball_control.pdb` | 56 | 1.4 | negative control: no cavity | (none significant) |
 | `blind_well_d6_r6.pdb` | 135 | 1.4 | shallow bored well -> pocket (1 mouth) | 3x pocket |

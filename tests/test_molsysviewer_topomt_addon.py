@@ -1618,7 +1618,7 @@ def test_pipe_renders_channel_as_variable_radius_tube():
         / 'topomt'
         / 'data'
         / 'synthetic'
-        / 'tube_channel_clean.pdb'
+        / 'straight_tube_narrow_dense.pdb'
     )
     coords = np.array(
         [
@@ -1775,7 +1775,7 @@ def test_channel_representation_aliases_emit_expected_shapes():
 def test_scalar_isosurface_uses_generic_molsysviewer_primitive():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(comp for comp in topo.dfnd.dfn.components.wet)
     view = topomt_test_view()
 
@@ -1833,7 +1833,7 @@ def test_interface_surface_aliases_are_explicit():
 def test_interface_links_connect_wet_and_dry_sides():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
     view = topomt_test_view()
 
@@ -1858,7 +1858,7 @@ def test_interface_links_connect_wet_and_dry_sides():
 def test_interface_ribbon_summarizes_coast_face_centroids():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
     view = topomt_test_view()
 
@@ -1884,7 +1884,7 @@ def test_dfnd_cutaway_helpers_add_scene_sections():
         show_dfnd_pocket_cutaway,
     )
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
 
     pocket_view = topomt_test_view()
@@ -1931,7 +1931,7 @@ def test_dfnd_cutaway_helpers_add_scene_sections():
 def test_pocket_depth_map_uses_topological_depth_values():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
     view = topomt_test_view()
 
@@ -1955,7 +1955,7 @@ def test_pocket_depth_map_uses_topological_depth_values():
 def test_mouth_stubs_render_external_links_as_segments():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(comp for comp in topo.dfnd.dfn.components.wet if comp.n_mouths > 0)
     view = topomt_test_view()
     layer = show_dfnd_components(
@@ -1981,7 +1981,7 @@ def test_mouth_stubs_render_external_links_as_segments():
 def test_mouth_and_bottleneck_rings_are_explicit():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(
         comp
         for comp in topo.dfnd.dfn.components.wet
@@ -2021,7 +2021,7 @@ def test_mouth_and_bottleneck_rings_are_explicit():
 def test_shape_ellipsoids_summarize_component_orientation():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     view = topomt_test_view()
     layer = show_dfnd_components(
         view,
@@ -2050,7 +2050,7 @@ def test_shape_ellipsoids_summarize_component_orientation():
 def test_dry_face_representations_are_explicit():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     dry_component = topo.dfnd.dfn.components.dry[0]
 
     interface_view = topomt_test_view()
@@ -2109,7 +2109,7 @@ def test_dry_face_representations_are_explicit():
 def test_dry_shell_collects_boundary_faces_without_semantic_coloring():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     dry_component = topo.dfnd.dfn.components.dry[0]
     view = topomt_test_view()
 
@@ -2135,7 +2135,7 @@ def test_dry_shell_collects_boundary_faces_without_semantic_coloring():
 def test_dry_cage_draws_edge_only_tetrahedral_scaffold():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     dry_component = topo.dfnd.dfn.components.dry[0]
     view = topomt_test_view()
 
@@ -2216,7 +2216,7 @@ def test_groove_diagnostics_reuse_component_geometry_primitives():
 def test_clearance_map_colours_envelope_by_residence_radius():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(
         comp
         for comp in topo.dfnd.dfn.components.wet
@@ -2255,7 +2255,7 @@ def test_clearance_map_colours_envelope_by_residence_radius():
 def test_semantic_face_representations_emit_filtered_triangle_faces():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    pocket_topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    pocket_topography = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     pocket_component = next(
         comp for comp in pocket_topography.dfnd.dfn.components.wet if comp.n_mouths > 0
     )
@@ -2363,7 +2363,7 @@ def test_contact_sheet_splits_interface_lining_by_body():
 def test_auto_renders_each_family_with_its_mode():
     """Phase 0/2: representation='auto' draws each family with its default mode.
 
-    tube_channel_clean has a channel (-> pipe / add_channel_tube) and a pocket
+    straight_tube_narrow_dense has a channel (-> pipe / add_channel_tube) and a pocket
     (-> cloud / add_pocket_blob); both must appear in one 'auto' call.
     """
     from pathlib import Path
@@ -2378,7 +2378,7 @@ def test_auto_renders_each_family_with_its_mode():
         / 'topomt'
         / 'data'
         / 'synthetic'
-        / 'tube_channel_clean.pdb'
+        / 'straight_tube_narrow_dense.pdb'
     )
     coords = np.array(
         [
@@ -2442,7 +2442,7 @@ def test_top_n_limits_rendered_components():
         / 'topomt'
         / 'data'
         / 'synthetic'
-        / 'tube_channel_clean.pdb'
+        / 'straight_tube_narrow_dense.pdb'
     )
     coords = np.array(
         [
@@ -2524,7 +2524,7 @@ def test_rings_renders_hole_clearance_profile():
         / 'topomt'
         / 'data'
         / 'synthetic'
-        / 'tube_channel_clean.pdb'
+        / 'straight_tube_narrow_dense.pdb'
     )
     coords = np.array(
         [
@@ -2623,7 +2623,7 @@ def test_carve_voids_focuses_on_void_lining():
 def test_wire_contour_uses_pocket_blob_wireframe():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    topography = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     view = topomt_test_view()
     result = show_dfnd_components(view, topography, representation='wire_contour')
 
@@ -2863,7 +2863,7 @@ def test_show_dfnd_labels_annotates_each_component():
 
     from molsysviewer_topomt.render import show_dfnd_labels
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
 
     captured = []
 
@@ -3062,7 +3062,7 @@ def test_show_features_replaces_previous_group_by_default_and_can_be_additive():
 def test_show_dfnd_components_reports_rendered_ids_for_channel_aliases():
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    topography = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     result = show_dfnd_components(
         topomt_test_view(), topography, representation='channel_lumen'
     )
@@ -3126,7 +3126,7 @@ def test_affinity_spheres_neutral_on_dummy_system():
     from molsysviewer_topomt.render import _components as c
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     view = (
         topomt_test_view()
     )  # topomt_test_view has no loaded _molsys -> chemistry unavailable
@@ -3283,7 +3283,7 @@ def test_show_dfnd_legend_lists_present_families():
     from molsysviewer_topomt.render import _components as c
     from molsysviewer_topomt.render import show_dfnd_legend
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')  # through + one-mouth
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')  # through + one-mouth
     captured = {}
 
     class FakeScene:
@@ -3318,7 +3318,7 @@ def test_pharmacophore_map_places_typed_sites(monkeypatch):
     from molsysviewer_topomt.render import _components as c
     from molsysviewer_topomt.render import show_dfnd_pharmacophore
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     n_atoms = len(topo.dfnd.mesh.atoms.coords)
     # pretend every atom is hydrophobic (chemistry available)
     monkeypatch.setattr(
@@ -3343,7 +3343,7 @@ def test_chemistry_overlay_is_a_separate_surface(monkeypatch):
     from molsysviewer_topomt import show_affinity, show_pharmacophore
     from molsysviewer_topomt.render import _components as c
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     n_atoms = len(topo.dfnd.mesh.atoms.coords)
     monkeypatch.setattr(
         c, '_atom_pharmacophore_kinds', lambda molsys: ['hydrophobic'] * n_atoms
@@ -3363,7 +3363,7 @@ def test_pharmacophore_map_none_on_dummy_system():
     """No chemistry (dummy) -> no sites, no crash."""
     from molsysviewer_topomt.render import show_dfnd_pharmacophore
 
-    topo = _build_dfnd_topo('tube_channel_clean.pdb')
+    topo = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     view = topomt_test_view()  # no _molsys
     assert show_dfnd_pharmacophore(view, topo) is None
 
@@ -3765,7 +3765,7 @@ def test_every_component_representation_returns_render_result_and_repeats(
 ):
     from molsysviewer_topomt.render import RenderResult, show_dfnd_components
 
-    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    topography = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     view = topomt_test_view()
     first = show_dfnd_components(
         view,
@@ -4217,7 +4217,7 @@ def test_wp18_envelope_mouth_cap_emits_canonical_face_geometry():
     from molsysviewer_topomt.geometry import face_geometry
     from molsysviewer_topomt.render import show_dfnd_components
 
-    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    topography = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(
         comp for comp in topography.dfnd.dfn.components.wet if comp.family == 'pocket'
     )
@@ -4280,7 +4280,7 @@ def test_wp18_centerline_and_ring_geometry_preserve_structural_identity():
         mouth_ring_geometry,
     )
 
-    topography = _build_dfnd_topo('tube_channel_clean.pdb')
+    topography = _build_dfnd_topo('straight_tube_narrow_dense.pdb')
     component = next(
         comp for comp in topography.dfnd.dfn.components.wet if comp.family == 'channel'
     )

@@ -37,7 +37,7 @@ def _channel(raw):
 
 
 def test_channel_skeleton_on_clean_two_mouth_channel():
-    raw = _raw_for('tube_channel_clean.pdb')
+    raw = _raw_for('straight_tube_narrow_dense.pdb')
     comp = _channel(raw)
     cl = channel_skeleton(raw, comp)
     assert cl is not None

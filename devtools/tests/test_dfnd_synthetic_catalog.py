@@ -32,6 +32,40 @@ def test_catalog_covers_every_stored_pdb_and_readme_entry() -> None:
     assert set(rows) == set(names)
 
 
+@pytest.mark.parametrize(
+    'name, radius, spacing, atom_count, digest',
+    [
+        (
+            'straight_tube_narrow_dense',
+            3.5,
+            2.5,
+            81,
+            'd5711d5755925bf1ae2400f21d96e656ff50b4b226f97e708abf4770b3eeccb8',
+        ),
+        (
+            'straight_tube_wide_sparse',
+            6.0,
+            3.5,
+            77,
+            '73fc166e0c0bd3e06da852774aaeca737c9adf59aff7627273f46f8bb4e17eb1',
+        ),
+    ],
+)
+def test_straight_tube_names_preserve_exact_input_and_generator(
+    name, radius, spacing, atom_count, digest, tmp_path
+):
+    builder = next(builder for case, builder, *_ in catalog.CATALOG if case == name)
+    actual = builder()
+    expected = synthetic.cylinder_tube(20.0, radius, spacing, jitter=0.1, seed=0)
+    assert actual.coords.shape == (atom_count, 3)
+    np.testing.assert_array_equal(actual.coords, expected.coords)
+    np.testing.assert_array_equal(actual.radii, expected.radii)
+    payload = (INPUT_DIR / f'{name}.pdb').read_bytes()
+    assert hashlib.sha256(payload).hexdigest() == digest
+    expected.to_pdb(tmp_path / f'{name}.pdb')
+    assert (tmp_path / f'{name}.pdb').read_bytes() == payload
+
+
 @pytest.mark.parametrize('name', ['surface_groove', 'surface_cleft', 'surface_funnel'])
 def test_morphology_entries_preserve_generator_geometry(
     name: str, tmp_path: Path

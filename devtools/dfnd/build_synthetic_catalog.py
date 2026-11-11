@@ -72,20 +72,18 @@ CATALOG = [
         'wall seals a 1.8 A probe, leaks a 1.0 A probe (sweep)',
     ),
     (
-        'tube_channel',
+        'straight_tube_wide_sparse',
         lambda: syn.cylinder_tube(20.0, 6.0, 3.5, jitter=0.1, seed=0),
         1.4,
-        'open tube -> channel (>=2 mouths). Wide/sparsely-walled: the lumen channel '
-        '(channel, 2 mouths) is the dominant feature, alongside several '
-        'shallow side-pockets at the wall windows.',
+        'straight tube, ring radius 6 A and nominal sampling 3.5 A; '
+        'characterize passage and lateral coverage independently of graph labels',
     ),
     (
-        'tube_channel_clean',
+        'straight_tube_narrow_dense',
         lambda: syn.cylinder_tube(20.0, 3.5, 2.5, jitter=0.1, seed=0),
         1.4,
-        'narrow, densely-walled tube -> a single clean channel (channel, '
-        '2 mouths) with minimal side-pocket noise; the canonical two-mouth-channel '
-        'fixture.',
+        'straight tube, ring radius 3.5 A and nominal sampling 2.5 A; '
+        'independent BenchLab references and unresolved physical/public receiving',
     ),
     (
         'dumbbell',

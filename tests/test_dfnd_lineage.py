@@ -36,7 +36,7 @@ def test_jaccard_basic():
 
 
 def test_same_result_matches_every_component_exactly():
-    comps = _wet_components('tube_channel_clean.pdb')
+    comps = _wet_components('straight_tube_narrow_dense.pdb')
     matches = match_results(comps, comps)
     # every component matches itself by support_key, exactly
     by_a = {m['a']: m for m in matches}
@@ -49,8 +49,8 @@ def test_same_result_matches_every_component_exactly():
 
 
 def test_jittered_frame_matches_by_lining_overlap():
-    frame_a = _wet_components('tube_channel_clean.pdb', jitter=0.0)
-    frame_b = _wet_components('tube_channel_clean.pdb', jitter=0.15, seed=1)
+    frame_a = _wet_components('straight_tube_narrow_dense.pdb', jitter=0.0)
+    frame_b = _wet_components('straight_tube_narrow_dense.pdb', jitter=0.15, seed=1)
     matches = match_results(frame_a, frame_b, min_jaccard=0.2)
     assert matches  # something matched across the perturbed frame
     # the largest component of A should correspond to a component of B by overlap
@@ -75,7 +75,7 @@ def test_match_accepts_dict_records():
 def test_assign_tracks_continues_identical_frames():
     from topomt.dfnd.lineage import assign_tracks
 
-    comps = _wet_components('tube_channel_clean.pdb')
+    comps = _wet_components('straight_tube_narrow_dense.pdb')
     result = assign_tracks([comps, comps, comps])  # three identical frames
     track_of = result['track_of']
     # each component keeps the same track across all three frames (1:1 exact)
