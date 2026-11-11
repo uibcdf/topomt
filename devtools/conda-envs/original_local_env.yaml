@@ -13,3 +13,7 @@ dependencies:
 - swig>=4.4.1
 - gcc_linux-64
 - openjdk>=21,<22
+# Original MoloVol CMake source build and Linux headless CLI runtime.
+- cmake>=3.20
+- wxwidgets>=3.3
+- xorg-xvfb-server

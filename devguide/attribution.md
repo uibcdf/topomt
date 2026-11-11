@@ -49,7 +49,7 @@ subprocesses/services are not inferred from imports or automatically observed.
 | Original AlphaSpace2 | AlphaSpace2 software and article; original distribution version | `alphaspace2/library.py` returns accepted Topography |
 | Original pyCASTA | pyCAST software/article and CAST construction criterion; original recorded identity | `pycasta/library.py` returns accepted Topography |
 | CASTp3 / CASTpFold services | Selected service software/article and CAST criterion, without substituting one service's paper for the other | Selected server adapter obtains and accepts its output; a submission receipt alone is insufficient |
-| Original pyKVFinder, GHECOM, CAVER, P2Rank, MOLE | Selected software/article and adapter-recorded identity/version | Shared `_execution.get_output` returns parsed, validated ProviderOutput; `files` bypasses tracking |
+| Original pyKVFinder, GHECOM, CAVER, P2Rank, MOLE, MoloVol | Selected software/article and adapter-recorded identity/version; MoloVol additionally credits actually selected recognized input data | Shared `_execution.get_output` returns parsed, validated ProviderOutput; `files` bypasses tracking |
 | Native fpocket / TopoMT variant | fpocket scientific criterion and reference implementation; executed TopoMT software | Both direct implementations and their Topography wrappers |
 | Native Pocketeer, AlphaSpace2, pyCASTA, CASTp and CASTp3 | Selected method/criterion and reference implementation; executed TopoMT | Direct native functions, wrappers and main dispatcher helpers |
 | DFND | Executed TopoMT and actual numerical/geometry children; no invented DFND publication | `dfnd`, `dfnd_to_topography`, direct network queries and derived-data queries |
@@ -73,6 +73,14 @@ quadrature code does not by itself justify citing a particular unrelated
 Monte Carlo algorithm. Method claims must follow the inspected implementation.
 
 ## Persistence and compatibility
+
+MoloVol's [source overview](molovol/overview.md) records verified bibliography,
+original element-resource identity and conditional `input_data_reference`
+roles. The neutral route credits selected non-overridden Alvarez radii and
+referenced natural-element atomic weights from the recognized resource.
+All-radii overrides omit the unused radii paper; custom tables retain their
+identity without invented citations. An ionic route has not been admitted and
+earns no Shannon citation. Original source/table choices remain recoverable.
 
 An attributed `ProviderRun.save` writes a version-2 ZIP envelope around the exact
 version-1 scientific manifest plus detached attribution and its SHA-256. The

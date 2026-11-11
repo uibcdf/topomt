@@ -35,6 +35,7 @@ _METHODS = {
     'caver': ('caver',),
     'p2rank': ('p2rank',),
     'mole': ('mole',),
+    'molovol': ('molovol',),
     'dfnd': (),  # No published DFND paper exists; cite the executed software.
     'geometry': (),
     'clopper_pearson': ('clopper_pearson',),
@@ -67,6 +68,7 @@ _URLS = {
     'caver': 'https://www.caver.cz/',
     'p2rank': 'https://github.com/rdk/p2rank',
     'mole': 'https://github.com/sb-ncbr/webchemistry',
+    'molovol': 'https://github.com/molovol/MoloVol',
     'numpy': 'https://numpy.org/',
     'scipy': 'https://scipy.org/',
     'numba': 'https://numba.pydata.org/',
@@ -220,6 +222,18 @@ def _references(method: str, route: str, target: str, metadata: dict) -> list[di
                 'context': deepcopy(context),
             }
         )
+    if method == 'molovol' and route == 'original':
+        for key in metadata.get('input_data_references', ()):
+            if key not in {'alvarez_radii', 'atomic_weights_2013'}:
+                raise ValueError('Undeclared MoloVol input-data reference')
+            entries.append(
+                {
+                    'item': deepcopy(ARTICLES[key]),
+                    'target': target,
+                    'roles': ['input_data_reference'],
+                    'context': deepcopy(context),
+                }
+            )
     if native and method != 'sasa':
         entries.extend(_references('numpy', 'original', target, {}))
     if method == 'qhull':
@@ -289,6 +303,9 @@ def _metadata(result: Any) -> dict:
             'distribution_files',
             'source_revision',
             'package_source',
+            'input_data_references',
+            'elements_source',
+            'elements_effective',
         )
     }
 

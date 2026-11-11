@@ -8,7 +8,7 @@ not install them, and importing TopoMT does not import them.
 ## Supported routes and requirements
 
 The new [local cavity, channel and predicted-site routes](original_local_providers.md)
-cover pyKVFinder, GHECOM, CAVER, P2Rank and MOLE through `get_provider_output`.
+cover pyKVFinder, GHECOM, CAVER, P2Rank, MOLE and [MoloVol](molovol.md) through `get_provider_output`.
 That guide gives their exact protocols, access/licences, options and current
 mapping limits. Their results retain distinct scientific kinds.
 

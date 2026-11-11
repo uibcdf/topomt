@@ -29,6 +29,7 @@ Datasets and validation references have their own
 | [CAVER #104](https://github.com/uibcdf/topomt/discussions/104) | [Overview](caver/overview.md) |
 | [P2Rank #108](https://github.com/uibcdf/topomt/discussions/108) | [Overview](p2rank/overview.md) |
 | [MOLE #105](https://github.com/uibcdf/topomt/discussions/105) | [Overview](mole/overview.md) |
+| [MoloVol #191](https://github.com/uibcdf/topomt/discussions/191) | [Overview](molovol/overview.md) |
 
 ## Ownership and current scope
 
@@ -92,6 +93,7 @@ verification target for the new executable boundary.
 | [CAVER](caver/overview.md) | CLI/files; `CaverOutput`, ordered tunnel paths | Original 3.02 + Java 21 source pilot: 47 profiles on one retained input | No native reproduction |
 | [P2Rank](p2rank/overview.md) | CLI/files; `P2RankOutput`, predicted sites | Original 2.5.1 + Java 21 source pilot: 5 sites on one retained input | No native reproduction |
 | [MOLE](mole/overview.md) | CLI/files; `MoleOutput`, channel profiles and cavity/void decomposition | Original 2.5.26.10.26 + .NET 10; source-bound 1AKD, official 1TQN pore and empty controls | No native reproduction; [DFND antecedent review](DFND/mole_comparison_2026_11_07.md) remains separate |
+| [MoloVol](molovol/overview.md) | CLI/files; `MoloVolOutput`, original internal regions and distinct volume/surface measures | Original 1.2.0 at pinned `76693ae9`, four synthetic direct/API controls and recoverable reports | No native reproduction or DFND equivalence; #190, resource discussion #191 |
 
 The [new-adapter checkpoint](original_provider_expansion_checkpoint.md) records
 exact inputs, archives, limits and engine-free recovery. These source pilots do
@@ -167,15 +169,16 @@ that a provider is integrated.
 
 ## New research intake — 2026-11-07
 
-These additional families expand the discovery catalogue, not the current
-implementation batch. Only the official repository/README and licence identity
-were reviewed; no local installation or original execution is claimed.
+These additional families originally expanded the discovery catalogue outside
+the four-engine batch. The MoloVol lead was subsequently selected under #190;
+its 2026-11-11 source integration is in the table above and discussion #191.
+PyVOL remains at documentary intake; no local execution of it is claimed.
 Use the catalogue conversation #68 for initial intake until a dedicated resource
 review is opened, then add its canonical thread to the resource register.
 
 | Lead | Official access source | Scientific question and next gate |
 | --- | --- | --- |
-| [MoloVol](https://github.com/molovol/MoloVol) | MIT; [original method paper](https://journals.iucr.org/j/issues/2022/04/00/yr5079/yr5079.pdf) | Volumes/surfaces of molecules and unit cells; useful probe-center versus probe-occupied volume definitions for synthetic systems. Review exact CLI, radii, region definitions and selected version before admission. |
+| [MoloVol](https://github.com/molovol/MoloVol) | MIT; [original method paper](https://doi.org/10.1107/S1600576722004988) | Isolated neutral-element CLI/files source integration under #190; [overview](molovol/overview.md) and [canonical discussion #191](https://github.com/uibcdf/topomt/discussions/191). Periodic support and full volume accuracy are not established by the small pilot. |
 | [PyVOL](https://github.com/schlessinger-lab/pyvol) | MIT wrapper/library; official README documents an MSMS executable dependency | Pocket/subpocket segmentation and surface/volume representations. Review the entire MSMS acquisition/licence chain and current Python compatibility before deciding whether a no-payment route meets our scope. The wrapper licence alone does not admit its backend. |
 
 The documentary assessment of these volume/region references, together with

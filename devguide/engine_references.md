@@ -1,5 +1,12 @@
 # Engine References
 
+Current MoloVol consultation/execution reference: `~/repos@others/MoloVol`,
+clean detached original `76693ae9c2b44270ae0875cefd96f8c0e9c61246`, printed CLI
+version 1.2.0. The later master/tag commit is not the qualified Linux build.
+See [the MoloVol overview](molovol/overview.md) for exact build, element-resource,
+original-execution and saved-reading scope. Inspect revision/dirty state again
+before updating it; this integration uses unchanged original scientific code.
+
 Current MOLE execution reference: official maintained
 `sb-ncbr/webchemistry@fe0e84582a6bd42bc69224fd3a3022bf5c51cec3`, clean
 consultation clone at `.cache/mole-originality-review/reference/webchemistry`.

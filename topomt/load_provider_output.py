@@ -26,6 +26,7 @@ _SAVED_BACKENDS = {
     'caver': {'cli'},
     'p2rank': {'cli'},
     'mole': {'cli'},
+    'molovol': {'cli'},
 }
 
 

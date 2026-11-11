@@ -33,9 +33,9 @@ def get_provider_output(
         MolSysMT-compatible source. CASTp file imports can supply their own PDB.
     method : str
         fpocket/fpocket4, pocketeer, alphaspace2, pycasta, castp/castp3/castpfold.
-        Also pykvfinder, ghecom, caver, p2rank and mole for local original routes.
+        Also pykvfinder, ghecom, caver, p2rank, mole and molovol for local routes.
     backend : str, optional
-        Defaults to cli for fpocket/GHECOM/CAVER/P2Rank/MOLE, library for the Python
+        Defaults to cli for fpocket/GHECOM/CAVER/P2Rank/MOLE/MoloVol, library for the Python
         engines and server for CASTp.
         Files are supported for every provider; required source context varies.
         Local reproductions are not admitted through this original-output entry point.

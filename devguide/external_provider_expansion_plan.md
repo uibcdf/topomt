@@ -1,5 +1,10 @@
 # Original-provider implementation plan
 
+The separate maintainer-selected MoloVol follow-up is #190 (2026-11-11), with
+[source/build/evidence overview](molovol/overview.md) and resource #191. It does
+not reopen or widen the completed four-provider batch. Broader POVME/PyVOL
+assessment remains #159 and native joint BenchLab review remains #187.
+
 Accepted direction: 2026-11-07; owner [#135](https://github.com/uibcdf/topomt/issues/135).
 This work precedes further BenchLab development. After this batch, resume
 [the synthetic sequence](DFND/notebook_laboratory_checkpoint.md); native protein

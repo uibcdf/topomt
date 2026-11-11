@@ -1,2 +1,5 @@
 # Retain the upstream scientific fixture byte-for-byte, including alignment spaces.
 tests/data/original_local/mole_1tqn.cif -text whitespace=-blank-at-eol
+# Original MoloVol data/report bytes include CRLF, alignment and a final blank line.
+tests/data/original_local/molovol/elements.txt -text whitespace=-blank-at-eol,-blank-at-eof
+tests/data/original_local/molovol/*_MoloVol-report_*.txt -text whitespace=-blank-at-eol,-blank-at-eof

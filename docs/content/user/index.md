@@ -5,6 +5,7 @@
 
 third_party_engines
 original_local_providers
+molovol
 scientific_attribution
 dfnd_geometry
 feature_hierarchy_doc

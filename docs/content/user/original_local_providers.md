@@ -16,6 +16,7 @@ import topomt as tmt
 | `caver` | `cli` | Tunnel paths and local free radii | `output.channels` |
 | `p2rank` | `cli` | Predicted ligand-binding sites | `output.sites` |
 | `mole` | `cli` | Channel profiles and original cavity/void decomposition | `output.channels`, `output.cavities` |
+| `molovol` | `cli` | Original probe-defined internal regions, volumes and surfaces | `output.cavities`, `output.measurements` |
 
 All provide `output.records`, `output.run`, `output.save(path)` and
 `topomt.load_provider_output(path, molecular_system=source)`. Recovery verifies
@@ -31,7 +32,7 @@ PDB export and molecular preparation; these adapters perform no protonation or
 chemical-state inference. Source coordinates and exact submitted PDB bytes are
 retained separately. PDB's decimal precision remains a conversion limit.
 
-`workers=1` and `timeout=300` are conservative defaults. Timeout accepts seconds
+`workers=1` and `timeout=300` are conservative defaults (MoloVol: 120 seconds). Timeout accepts seconds
 or a time quantity. The Java routes additionally use `memory_mb=1024` as their
 maximum heap and constrain the JVM's processor count. The GHECOM route is serial.
 MOLE uses `memory_mb=1024` as its .NET managed heap cap and sets the .NET
@@ -40,10 +41,19 @@ processor count to `workers`. This is not a total-process RAM limit.
 for pyKVFinder/GHECOM. These controls are not a machine resource reservation or
 a substitute for a scheduler; memory outside a Java heap also exists.
 
+MoloVol is serial. Its `max_grid_points=20000000` preflight estimate includes
+octree alignment and all allocated grid levels. It is a grid-cell admission
+limit, not a process memory cap or resource reservation.
+
 Lengths below accept scalars in the documented angstrom protocol units or
 compatible PyUnitWizard quantities. Volume cutoff uses angstroms cubed.
 CAVER's origin requires an explicit three-coordinate length quantity. Geometry
 access always returns quantities and does not change the application's unit policy.
+
+## MoloVol
+
+See [the MoloVol guide](molovol.md) for its distinct volume/region definitions,
+element radii, original Linux execution and headless requirements.
 
 ## MOLE
 

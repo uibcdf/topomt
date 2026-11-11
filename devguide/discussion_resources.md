@@ -44,6 +44,7 @@ from installed/public qualification and wider adoption under #16/#56.
 | pyKVFinder | [#107](https://github.com/uibcdf/topomt/discussions/107) | Original grid/dual-probe source pilot with the explicit compatibility fork; [overview](pykvfinder/overview.md). |
 | P2Rank / PrankWeb | [#108](https://github.com/uibcdf/topomt/discussions/108) | Original local CLI/files source pilot; [overview](p2rank/overview.md). Web route remains a candidate. |
 | GHECOM | [#109](https://github.com/uibcdf/topomt/discussions/109) | Original P-mode CLI/files source pilot; [overview](ghecom/overview.md). Other morphological modes remain candidates. |
+| MoloVol | [#191](https://github.com/uibcdf/topomt/discussions/191) | Original isolated neutral-element CLI/files volume/region provider; [overview](molovol/overview.md), bounded implementation #190. Broader reference assessment remains #159. |
 | DoGSite3 | [#110](https://github.com/uibcdf/topomt/discussions/110) | Pocket/subpocket and descriptor comparison candidate. |
 | HOLE | [#111](https://github.com/uibcdf/topomt/discussions/111) | Specialized pore-profile comparison candidate. |
 | CHAP | [#112](https://github.com/uibcdf/topomt/discussions/112) | Specialized channel structural/functional comparison candidate. |

@@ -1,0 +1,31 @@
+{
+  "schema": "topomt.molovol-pilot/1",
+  "source_revision": "76693ae9c2b44270ae0875cefd96f8c0e9c61246",
+  "geometry": "Exact submitted four-carbon PDB decimal coordinates; not the full-precision BenchLab JSON model",
+  "input_pdb_sha256": "481c34c20a847f91190bf94b94ab9cd25dddda577afefb3d0c4f919c7d6b409c",
+  "elements_file_sha256": "a5f7f1f65a12000058871c2498bb4eb7446ebb10cce4124cca1623f68abb6e88",
+  "radius_override": {
+    "C": {
+      "value": 1.7,
+      "unit": "angstroms"
+    }
+  },
+  "probe": {
+    "value": 1.4,
+    "unit": "angstroms"
+  },
+  "grid_step": {
+    "value": 0.1,
+    "unit": "angstroms"
+  },
+  "octree_depth": 4,
+  "surfaces": true,
+  "mode": "one-probe isolated structure",
+  "purpose": "Small original execution/adapter reference, not DFND equivalence or a new BenchLab comparison",
+  "limits": {
+    "workers": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120,
+    "wall_timeout_seconds": 60
+  }
+}

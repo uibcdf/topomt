@@ -187,7 +187,14 @@ def run_command(
     return result.returncode
 
 
-def check_grid_budget(pdb: Path, *, step: float, padding: float, limit: int) -> int:
+def check_grid_budget(
+    pdb: Path,
+    *,
+    step: float,
+    padding: float,
+    limit: int,
+    octree_depth: int | None = None,
+) -> int:
     """Reject a conservative bounding-grid estimate before a grid engine runs."""
     rows = [
         line
@@ -196,9 +203,20 @@ def check_grid_budget(pdb: Path, *, step: float, padding: float, limit: int) -> 
     ]
     points = np.array([[float(line[i : i + 8]) for i in (30, 38, 46)] for line in rows])
     dimensions = np.ceil((np.ptp(points, axis=0) + 2 * padding) / step) + 3
-    estimate = 1
-    for dimension in dimensions:
-        estimate *= int(dimension)
+    if not np.isfinite(dimensions).all():
+        _error(
+            'max_grid_points', limit, None, 'Grid dimensions exceed finite arithmetic.'
+        )
+    sizes = [int(dimension) for dimension in dimensions]
+    if octree_depth is not None:
+        quantum = 2**octree_depth
+        sizes = [((size + quantum - 1) // quantum) * quantum for size in sizes]
+        estimate = sum(
+            int(np.prod([size // 2**level for size in sizes], dtype=object))
+            for level in range(octree_depth + 1)
+        )
+    else:
+        estimate = int(np.prod(sizes, dtype=object))
     if estimate > limit:
         _error(
             'max_grid_points',

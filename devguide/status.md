@@ -1,5 +1,17 @@
 # TopoMT development status
 
+## MoloVol provider follow-up — 2026-11-11
+
+The maintainer selects original local MoloVol under #190, separately from
+native joint review #187. The [source overview](molovol/overview.md) records the
+unchanged pinned 1.2.0 CLI, one-worker Linux build, four direct/API synthetic
+controls, source-bound saved reports and conditional input-data attribution.
+Distinct probe-core/occupied and molecular totals retain original definitions;
+Outside does not become an internal cavity. Resource discussion #191 and the
+catalogue link its scope. BenchLab models/notebooks/results remain unchanged.
+Broader POVME/PyVOL review stays #159, exhaustive fidelity #19 and installed/
+public qualification #101/#16. This does not resolve any native scientific gate.
+
 ## Current dumbbell checkpoint — 2026-11-11
 
 The maintainer selects [dumbbell](../docs/content/benchlab/synthetic/dumbbell/index.md)

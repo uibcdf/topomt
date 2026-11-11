@@ -1,5 +1,6 @@
 """Closed, provider-owned options for the new original-engine routes."""
 
+import re
 from numbers import Integral
 from typing import Any
 
@@ -76,6 +77,20 @@ PARAMETERS = {
         'compute_pores',
         'compute_merged_pores',
     },
+    'molovol': COMMON
+    | {
+        'molovol_cmd',
+        'xvfb_cmd',
+        'virtual_display',
+        'elements_file',
+        'element_radii',
+        'probe_radius',
+        'large_probe_radius',
+        'grid_step',
+        'octree_depth',
+        'calculate_surfaces',
+        'max_grid_points',
+    },
 }
 
 
@@ -102,6 +117,60 @@ def positive_integer(value: Any, name: str) -> int:
     if isinstance(value, Integral) and not isinstance(value, bool) and int(value) > 0:
         return int(value)
     _error(name, value, None, 'Expected a positive integer.')
+
+
+def digest_element_radii(
+    element_radii: Any, caller: str | None = None
+) -> dict[str, float]:
+    if not isinstance(element_radii, dict) or not element_radii:
+        _error(
+            'element_radii',
+            element_radii,
+            caller,
+            'Expected a nonempty element-to-radius mapping.',
+        )
+    result = {}
+    for symbol, radius in element_radii.items():
+        if (
+            not isinstance(symbol, str)
+            or re.fullmatch(r'[A-Z][a-z]?(?:\d*[+-])?', symbol) is None
+        ):
+            _error(
+                'element_radii',
+                element_radii,
+                caller,
+                'Expected element symbols without whitespace.',
+            )
+        result[symbol] = scalar(radius, 'element_radii', 'angstroms')
+    return result
+
+
+def digest_octree_depth(octree_depth: Any, caller: str | None = None) -> int:
+    if (
+        isinstance(octree_depth, Integral)
+        and not isinstance(octree_depth, bool)
+        and 0 <= int(octree_depth) <= 8
+    ):
+        return int(octree_depth)
+    _error(
+        'octree_depth',
+        octree_depth,
+        caller,
+        'Expected an integer from 0 through 8 in the admitted MoloVol route.',
+    )
+
+
+def digest_virtual_display(
+    virtual_display: Any, caller: str | None = None
+) -> bool | None:
+    if virtual_display is None or type(virtual_display) is bool:
+        return virtual_display
+    _error(
+        'virtual_display',
+        virtual_display,
+        caller,
+        'Expected a boolean or None for automatic headless Linux selection.',
+    )
 
 
 def digest_origin(origin: Any, caller: str | None = None) -> list[float]:
@@ -197,6 +266,24 @@ def _backend_rule(provider: str):
     def admit(value: Any, context: Context) -> str:
         allowed = {'files', 'library' if provider == 'pykvfinder' else 'cli'}
         if value in allowed:
+            if provider == 'molovol' and value == 'cli':
+                options = context.all_args
+                if options.get('workers', 1) != 1:
+                    _error(
+                        'workers',
+                        options['workers'],
+                        context.function_name,
+                        'The admitted MoloVol route is serial; use workers=1.',
+                    )
+                if options.get('large_probe_radius') is not None and options[
+                    'large_probe_radius'
+                ] <= options.get('probe_radius', 1.4):
+                    _error(
+                        'large_probe_radius',
+                        options['large_probe_radius'],
+                        context.function_name,
+                        'large_probe_radius must exceed probe_radius.',
+                    )
             return value
         _error(
             'backend',
@@ -258,6 +345,9 @@ ARGUMENT_DIGESTERS = {
     'model': digest_model,
     'weight_function': digest_weight_function,
     'min_depth': digest_min_depth,
+    'element_radii': digest_element_radii,
+    'octree_depth': digest_octree_depth,
+    'virtual_display': digest_virtual_display,
     **{
         name: _boolean(name)
         for name in (
@@ -265,6 +355,7 @@ ARGUMENT_DIGESTERS = {
             'ignore_hydrogens',
             'compute_pores',
             'compute_merged_pores',
+            'calculate_surfaces',
         )
     },
     'timeout': lambda value, caller=None: scalar(value, 'timeout', 'seconds'),
@@ -293,6 +384,8 @@ ARGUMENT_DIGESTERS = {
             'bottleneck_radius',
             'bottleneck_tolerance',
             'auto_origin_cover_radius',
+            'large_probe_radius',
+            'grid_step',
         )
     },
     **{
@@ -306,11 +399,24 @@ ARGUMENT_DIGESTERS = {
     },
     **{
         name: _path(name)
-        for name in ('bundle_file', 'caver_home', 'p2rank_home', 'upstream_root')
+        for name in (
+            'bundle_file',
+            'caver_home',
+            'p2rank_home',
+            'upstream_root',
+            'elements_file',
+        )
     },
     **{
         name: _command(name)
-        for name in ('java_cmd', 'ghecom_cmd', 'python_cmd', 'mole_cmd')
+        for name in (
+            'java_cmd',
+            'ghecom_cmd',
+            'python_cmd',
+            'mole_cmd',
+            'molovol_cmd',
+            'xvfb_cmd',
+        )
     },
 }
 OPTIONS = {

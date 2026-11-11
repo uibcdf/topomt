@@ -65,5 +65,12 @@ It is deliberately separate from the Conda YAML and Python package dependencies.
 Select the compiled `mole2` with `mole_cmd`; saved recovery requires neither
 the executable nor .NET. See the [MOLE source checkpoint](../../devguide/mole/source_checkpoint.md).
 
+The opt-in original-local input also includes CMake, wxWidgets and Xvfb for
+MoloVol's original Linux CLI. This compiles/runs the external executable; it
+adds no mandatory Python runtime dependency. Its renderer can be disabled to
+avoid VTK, while its wxWidgets initialization still needs a display. See the
+[MoloVol overview](../../devguide/molovol/overview.md) for the pinned source,
+bounded one-worker build and original-execution evidence.
+
 [Shared API/CLI contract](https://github.com/uibcdf/molsyssuite/blob/8f00e6d9de943b6e4710ea62936e2ebea00fad24/devguide/conda_environment_tools.md).
 Tracking: uibcdf/topomt#78, uibcdf/topomt#16 and uibcdf/molsyssuite#45.

@@ -20,6 +20,7 @@ DEFAULT_BACKENDS = {
     'caver': 'cli',
     'p2rank': 'cli',
     'mole': 'cli',
+    'molovol': 'cli',
 }
 ORIGINAL_BACKENDS = {
     'fpocket': {'cli', 'wrapper', 'files'},
@@ -32,6 +33,7 @@ ORIGINAL_BACKENDS = {
     'caver': {'cli', 'files'},
     'p2rank': {'cli', 'files'},
     'mole': {'cli', 'files'},
+    'molovol': {'cli', 'files'},
 }
 
 

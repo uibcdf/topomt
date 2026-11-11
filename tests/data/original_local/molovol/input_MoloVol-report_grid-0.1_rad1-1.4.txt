@@ -1,0 +1,132 @@
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+   MM           MM            LL           VV           VV           LL   
+   MMM         MMM            LL            VV         VV            LL   
+   MMMM       MMMM            LL             VV       VV             LL   
+   MM MM     MM MM            LL              VV     VV              LL   
+   MM  MM   MM  MM    OOOO    LL    OOOO       VV   VV       OOOO    LL   
+   MM   MM MM   MM   OO  OO   LL   OO  OO       VV VV       OO  OO   LL   
+   MM    MMM    MM   OO  OO   LL   OO  OO        VVV        OO  OO   LL   
+   MM     M     MM    OOOO    LL    OOOO          V          OOOO    LL   
+
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Website: https://molovol.com
+Source code available at https://github.com/molovol/MoloVol under the MIT licence
+Copyright © 2020-2025 Jasmin B. Maglic, Roy Lavendomme
+
+MoloVol program: calculation results report
+version: 1.2.0
+
+Time of the calculation: 2026-11-11_13h52m53s
+Duration of the calculation: 4.71405 s
+
+Structure file analyzed: /fast_data/home/liliana/repos@uibcdf/topomt/.cache/molovol/direct_pilot/input.pdb
+Chemical formula: C4
+Molar mass: 48.044 g/mol
+
+Please cite the following reference and include the calculation parameters below in the methods when reporting results.
+MoloVol: an easy-to-use program for analyzing cavities, volumes and surface areas of chemical structures.
+J. B. Maglic, R. Lavendomme, J. Appl. Cryst. 2022, 55, 1033–1044. DOI: 10.1107/S1600576722004988
+
+
+	////////////////////////////
+	// Calculation parameters //
+	////////////////////////////
+
+Include HETATM from pdb file
+Crystal unit cell analysis: No
+Probe mode: one probe
+Probe radius: 1.4 A
+Grid resolution: 0.1 A
+Optimization depth: 4
+Elements radii:
+C : 1.7 A
+
+
+	//////////////////////////////
+	// Total Volumes calculated //
+	//////////////////////////////
+
+Van der Waals volume:                  82.436000 A^3
+                                        1.033305 cm^3/g
+
+Probe excluded void volume:             4.404000 A^3
+                                        0.055203 cm^3/g
+
+Molecular volume:                      86.840000 A^3
+(vdw + probe excluded void)             1.088508 cm^3/g
+
+Molecular volume:                      98.876000 A^3
+with isolated cavities                  1.239375 cm^3/g
+
+Probe core volume: No physical meaning, contains all volume outside the structure.
+
+Probe shell volume:                   389.764000 A^3
+                                        4.885550 cm^3/g
+
+
+	////////////////////////////////////
+	// Total Surface Areas calculated //
+	////////////////////////////////////
+
+Van der Waals surface:                145.542520 A^2
+                                    18243.225835 m^2/g
+
+Probe excluded surface:               160.032676 A^2
+(similar to Connolly surface)       20059.514218 m^2/g
+
+Probe accessible surface:             380.033620 A^2
+(similar to Lee-Richards surface)   47635.832844 m^2/g
+
+Molecular open surface (reachable from outside): see outside space surface data in cavities list below.
+
+
+	///////////////////
+	// Cavities data //
+	///////////////////
+
+Note 1:	Separate cavities are defined by space accessible to the core of the small probe.
+	Two cavities can be in contact but if a probe cannot pass from one to the other, they are considered separated.
+Note 2:	Cavities are listed in decreasing order of volume and cavity surface map file names match the IDs.
+Note 3:	In single probe mode, pockets and tunnels are counted in the 'outside space'.
+Note 4:	Some very small isolated chunks of small probe cores can be detected and lead to small cavities.
+Note 5:	Probe occupied volume corresponds to empty space as defined by the molecular surface (similar to the Connolly surface).
+	This occupied volume is typically the volume reported for cavities in cage compounds.
+Note 6:	Probe accessible volume corresponds to empty space as defined
+	by the surface accessible to its core (similar to the Lee-Richards surface).
+Note 7:	For a detailed shape of each cavity, check the surface maps.
+
+Cavity ID Occupied      Accessible    Excluded      Accessible    Cavity Type   Cavity center coordinates (A)
+          Volume (A^3)  Volume (A^3)  Surface (A^2) Surface (A^2)               x       y       z
+1         Outside       Outside       173.568       378.542       Outside       0.5     0.5     0.5
+2         12.036        0.076         29.4391       1.49176       Isolated      0       0       0
+
+
+	/////////////////////////////
+	// Surface map information //
+	/////////////////////////////
+
+The surface map files generated (.dx, OpenDX format) can be opened with
+PyMOL, USCF Chimera or USCF ChimeraX.
+
+Use the following isosurface levels to visualize the desired surface:
+Level 0.5 : Van der Waals surface
+Level 2.0 : Molecular and cavity surface (probe excluded, similar to the Connolly surface)
+Level 5.0 : Probe accessible surface (similar to the Lee-Richards molecular surface)
+
+For help on how to vizualize maps check the user manual or:
+ - in PyMOL, simply open the map file then click 'A' in the right panel, choose mesh or surface and select the level.
+   For more information, check https://pymolwiki.org/index.php/Isomesh and https://pymolwiki.org/index.php/Isosurface 
+ - in USCF Chimera, check https://www.cgl.ucsf.edu/chimera/docs/ContributedSoftware/volumeviewer/volumeviewer.html 
+ - in USCF ChimeraX, check https://www.cgl.ucsf.edu/chimerax/docs/user/tools/volumeviewer.html 
+
+If you wish to visualize the structure file in PyMOL with the same element radii as in the MoloVol calculation,
+paste the following command lines (all at once) in the command prompt of PyMOL after opening the structure file.
+Note: remove charges from ions before copying the command because only alphabetic characters are used for element symbols in PyMOL.
+If an element is present in more than one oxidation state, it is necessary to select atoms separately in PyMOL to apply different radii
+
+alter (elem C),vdw=1.7
+rebuild
+

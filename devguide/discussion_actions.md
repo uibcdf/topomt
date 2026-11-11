@@ -1,5 +1,18 @@
 # Discussion action routing audit
 
+## MoloVol source integration — 2026-11-11
+
+New canonical resource [#191](https://github.com/uibcdf/topomt/discussions/191)
+is in Methods and Tools with void/pocket/channel, synthetic/molecular and
+provider/comparison facets. #190 owns its bounded original neutral-element
+CLI/files implementation, evidence and completion. The catalogue #68 links
+this resource; broader POVME/PyVOL review stays #159. No periodic/ionic/OpenDX
+implementation or new BenchLab comparison is selected by this intake.
+Exhaustive provider fidelity remains #19 and installed/public qualification
+#101/#16. The separate joint native review #187 and its scientific owners stay
+unchanged. This updates affected navigation rather than repeating the full
+historical census; issue state is read back at delivery.
+
 ## Dumbbell publication closeout — 2026-11-11
 
 Unit #186 is complete; originating #129/#130/#154 summaries now link the
