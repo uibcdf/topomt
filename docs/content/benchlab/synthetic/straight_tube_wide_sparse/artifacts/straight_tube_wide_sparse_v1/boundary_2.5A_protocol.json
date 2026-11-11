@@ -1,0 +1,24 @@
+{
+  "schema": "topomt.benchlab.tube-boundary-protocol/1",
+  "case": "straight_tube_wide_sparse",
+  "issue": "uibcdf/topomt#183",
+  "date": "2026-11-10",
+  "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+  "probe_angstroms": 2.5,
+  "length_unit": "angstroms",
+  "decision_margin_angstroms": 1e-06,
+  "wall_partition": "All hull triangles except complete first/last-ring end triangles; every lateral face needs a complete all-atom cover.",
+  "end_partition": "Complete remaining hull triangles, intersections, seams and vertices, including covered subsets.",
+  "budgets": {
+    "maximum_cover_depth": 12,
+    "maximum_cover_nodes": 50000,
+    "intersection_decisions": 40000,
+    "solver_calls": 4000,
+    "optimizer_iterations_per_call": 100,
+    "cpu_seconds": 120,
+    "address_space_gib": 6,
+    "cpus": 1,
+    "numerical_threads": 1
+  },
+  "scope": "Complete independent strict-free hull patch count only; unresolved on incomplete proof or unsupported multiple face regions."
+}

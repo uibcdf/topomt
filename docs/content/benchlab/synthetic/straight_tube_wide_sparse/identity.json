@@ -1,0 +1,8 @@
+{
+  "schema": "topomt.benchlab.study-identity/1",
+  "case_id": "straight_tube_wide_sparse",
+  "catalog_entry": "straight_tube_wide_sparse",
+  "issue": "uibcdf/topomt#183",
+  "input": "artifacts/straight_tube_wide_sparse_v1/input.json",
+  "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855"
+}

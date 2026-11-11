@@ -1,5 +1,17 @@
 # DFND notebook laboratory checkpoint
 
+## Selected wide/sparse companion — 2026-11-10
+
+The maintainer explicitly selects `straight_tube_wide_sparse` under #183 after
+the #182 naming migration. Freeze the existing full-precision 77-ball model and
+three controls (1.4/2.5/5 Å) before new native observation. Reuse complete
+independent axis/path, finite-hull and wall/end/seam checks; retain bounded
+failures as unresolved. Deliver separate system/native notebooks and a complete
+download. The narrow/dense model and #180/#181 remain open and unchanged.
+Both radius and sampling change between these companions; this comparison
+does not isolate either parameter or close broader #76/#16 qualification.
+This user-selected companion refines the earlier one-tube-only continuation.
+
 ## Active straight-tube study — 2026-11-10
 
 After the finite three-case disposition, the maintainer selects the next tube

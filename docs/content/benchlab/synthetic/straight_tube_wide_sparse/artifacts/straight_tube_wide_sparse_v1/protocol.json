@@ -1,0 +1,60 @@
+{
+  "schema": "topomt.benchlab.straight-tube-protocol/1",
+  "case": "straight_tube_wide_sparse",
+  "issue": "uibcdf/topomt#183",
+  "date": "2026-11-10",
+  "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+  "length_unit": "angstroms",
+  "source_before_study": "82036a33fcf1579a93b9d539f847edc40f57ab89",
+  "selected_controls": [
+    {
+      "probe_angstroms": 1.4,
+      "question": "Matched small-probe passage and complete physical wall/end inventory"
+    },
+    {
+      "probe_angstroms": 2.5,
+      "question": "Matched intermediate passage versus narrow-tube finite exclusion"
+    },
+    {
+      "probe_angstroms": 5.0,
+      "question": "Sufficient all-atom finite-hull exclusion; not a global critical probe"
+    }
+  ],
+  "path_reference": {
+    "z_stations_angstroms": [
+      -16.0,
+      -10.0,
+      -5.0,
+      0.0,
+      5.0,
+      10.0,
+      16.0
+    ],
+    "xy_values_angstroms": [
+      0.0
+    ],
+    "max_lateral_step_angstroms": 0.35,
+    "mandatory_origin": true,
+    "maximum_points": 20,
+    "maximum_edge_tests": 20,
+    "decision_margin_angstroms": 1e-06,
+    "discovery": "Designated axis witness only; complete all-atom segments and unbounded outward tails are independently verified."
+  },
+  "query": {
+    "transit_policy": "with_connectors",
+    "gate_intrusion_policy": "flag_only",
+    "dry_adjacency": "face",
+    "min_size": 0,
+    "residence_tolerance_angstroms": 0.0,
+    "permeability_tolerance_angstroms": 0.0,
+    "boundary_tolerance_angstroms": 1e-06
+  },
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds_per_capture": 120,
+    "notebook_cell_timeout_seconds": 90
+  },
+  "scope": "Retrospective characterization of a known catalog model, not held-out evaluation. No original provider/server or new protein work."
+}
