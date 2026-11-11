@@ -39,6 +39,12 @@ public morphological finding must communicate that distinction if it survives
 inside an independently covered finite carrier. Do not assume a local solver
 defect from this result alone. The interpretation remains `needs_review`.
 
+The pending empty-public target is a proposed reporting outcome, contingent on
+the qualification policy selected here. The independent oracle concerns the
+physical all-atom free set; it does not require the existing local wet bank to
+be empty. Reconcile that proposed guard with the explicit policy decision,
+without weakening or replacing the independent finite-hull exclusion.
+
 ## What was refuted
 
 The catalog name and graph labels are not independent truth. A plotted path,

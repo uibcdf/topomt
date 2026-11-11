@@ -60,16 +60,18 @@ def test_actual_public_physical_counts_match_the_independent_two_end_reference(p
 
 @pytest.mark.xfail(
     strict=True,
-    reason='topomt#181: local candidates persist in an independently covered hull',
+    reason='topomt#181: proposed public exclusion awaits all-atom qualification policy',
 )
-def test_large_probe_is_empty_without_erasing_dry_support_or_input_context():
+def test_proposed_large_probe_public_exclusion_preserves_native_support():
     study = study_module()
     topo = study.receive(CASE, 2.5)
-    assert not topo
     assert topo.input_context is not None
-    assert not topo.dfnd.dfn.components.wet
     assert topo.dfnd.dfn.components.dry
-    assert topo.dfnd.raw['boundary_connectivity']['n_patches'] == 0
+    assert len(topo.dfnd.mesh.tetrahedra) == 445
+    # The independent oracle concerns physical all-atom free space. It does
+    # not require the existing local wet bank to be empty. This proposed public
+    # target must be reconciled with the qualification policy selected in #181.
+    assert not topo
 
 
 def test_unresolved_physical_receiving_preserves_support_and_unknown_counts():
