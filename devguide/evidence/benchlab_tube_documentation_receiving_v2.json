@@ -15,5 +15,31 @@
   "wall_seconds": 14.522,
   "peak_rss_kib": 297436,
   "resources": "One CPU/numerical thread, one Sphinx worker, 6 GiB address-space / 120 CPU second ceilings",
-  "scope": "Clean committed-source documentation and local navigation, not installed release or public deployment"
+  "scope": "Clean committed-source documentation and local navigation, not installed release or public deployment",
+  "visual_review": {
+    "browser": "actual headless Google Chrome, CDP after DOM/layout readiness",
+    "pages": [
+      {
+        "title": "Straight tube: the system and its independent references \u2013 TopoMT 1.0.0",
+        "mainCharacters": 6600,
+        "mainWidth": 1077.3125
+      },
+      {
+        "title": "Straight tube: actual DFND and public observations \u2013 TopoMT 1.0.0",
+        "mainCharacters": 8657,
+        "mainWidth": 1077.3125
+      }
+    ],
+    "peak_own_tree_rss_mib": 1285.8,
+    "wall_seconds": 4.26
+  },
+  "semantic_tables": {
+    "system": 2,
+    "dfnd": 4
+  },
+  "expandable_code_blocks": {
+    "system": 5,
+    "dfnd": 6
+  },
+  "temporary_browser_profiles": "Removed after the actual Chrome review"
 }

@@ -1,0 +1,60 @@
+{
+  "captured_at": "2026-11-11T02:44:22.953170+00:00",
+  "issues": {
+    "uibcdf/topomt#75": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#147": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#151": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#155": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#156": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#180": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#181": {
+      "state": "OPEN"
+    }
+  },
+  "findings": {
+    "tube-physical-boundary-budget": {
+      "status": "current",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19533340"
+    },
+    "tube-local-candidates-covered-hull": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19533341"
+    },
+    "tetrahedron-boundary-patches": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186"
+    },
+    "dfnd-volume-precision": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482187"
+    },
+    "dfnd-length-argument-admission": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482188"
+    },
+    "mole-four-atom-execution": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482189"
+    },
+    "caver-four-atom-execution": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482190"
+    }
+  },
+  "current_ids": [
+    "tube-physical-boundary-budget"
+  ],
+  "scope": "Complete registered card/issue/current-hub readback; bookkeeping consistency, not new scientific qualification"
+}

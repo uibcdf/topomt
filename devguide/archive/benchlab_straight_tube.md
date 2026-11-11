@@ -107,3 +107,17 @@ Later v2 portable/documentation receipts supersede the v1 reader receipts for
 presentation only; the original b07a20e scientific observations remain retained.
 The first own Pages attempt 42946451225 was cancelled before final delivery so
 that the corrected reader could be published together.
+
+## Public receiving — 2026-11-10
+
+Final Pages run 42947682435 succeeds at d62d4f3. Four actual case pages and the
+served complete ZIP are received; its SHA-256 matches the final 362-file bundle
+executed in fresh outside kernels. The public receipt, current v2 portable and
+documentation receipts, and complete seven-card/issue/hub live readback are in
+devguide/evidence/benchlab_tube_*_receiving_v*.json and
+benchlab_tube_findings_readback_v1.json. Actual Chrome confirms semantic tables
+and expandable inputs. The first superseded own Pages attempt was cancelled.
+All three owned /tmp reader/source trees and temporary browser profiles were
+removed after receiving; the human version-file edit remains untouched.
+Initial unit #178 and query-admission #179 are source-resolved; #180/#181 and
+wider #76/#16 remain open on their explicit scopes.

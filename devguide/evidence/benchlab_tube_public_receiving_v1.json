@@ -1,0 +1,78 @@
+{
+  "schema": "topomt.benchlab.tube-public-receiving/1",
+  "issue": "uibcdf/topomt#178",
+  "captured_at": "2026-11-11T02:47:22.127978+00:00",
+  "workflow_run": 42947682435,
+  "documentation_source_revision": "d62d4f3b13b8a87270a5d90421f86ea31eb3235c",
+  "native_scientific_source_revision": "b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4",
+  "served_build": {
+    "schema": "topomt.documentation-build/1",
+    "source_commit": "d62d4f3b13b8a87270a5d90421f86ea31eb3235c",
+    "html_pages": 96,
+    "local_links": 8975,
+    "notebook_execution": "off"
+  },
+  "pages": [
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/cylinder_tube/index.html",
+      "status": 200,
+      "bytes": 36494,
+      "title": "Straight tube \u2013 TopoMT 0.5.0",
+      "tables": 1,
+      "expandable_code_blocks": 0
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/cylinder_tube/system.html",
+      "status": 200,
+      "bytes": 62218,
+      "title": "Straight tube: the system and its independent references \u2013 TopoMT 0.5.0",
+      "tables": 2,
+      "expandable_code_blocks": 5
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/cylinder_tube/dfnd.html",
+      "status": 200,
+      "bytes": 75565,
+      "title": "Straight tube: actual DFND and public observations \u2013 TopoMT 0.5.0",
+      "tables": 4,
+      "expandable_code_blocks": 6
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/README.html",
+      "status": 200,
+      "bytes": 40884,
+      "title": "Straight-tube evidence v1 \u2013 TopoMT 0.5.0",
+      "tables": 1,
+      "expandable_code_blocks": 0
+    }
+  ],
+  "download": {
+    "url": "https://www.uibcdf.org/topomt/_downloads/72de31f42a8131835c663442fb70b92e/cylinder_tube_v1.zip",
+    "status": 200,
+    "bytes": 10371693,
+    "sha256": "a077c948b058e644e7105d39f6af67e7547397b08f544d47012c9786b22b609d"
+  },
+  "fresh_kernel_evidence_reused": "devguide/evidence/benchlab_tube_portable_receiving_v2.json; byte-identical served ZIP",
+  "scope": "Actual public Pages and complete source-bound study download; initial native physical/all-atom qualification remains open under #180/#181, broader installed/platform qualification under #16",
+  "issue_states_at_closeout": {
+    "uibcdf/topomt#178": "closed",
+    "uibcdf/topomt#179": "closed",
+    "uibcdf/topomt#180": "open",
+    "uibcdf/topomt#181": "open"
+  },
+  "issue_readback_at": "2026-11-11T02:51:39.049815+00:00",
+  "run_receptor": {
+    "version": "1.4.0",
+    "entrypoint": "Python module already available in active development environment",
+    "conclusion": "success",
+    "profile": "docs",
+    "jobs": "1/1",
+    "artifacts": 1,
+    "phases": {
+      "artifact": 1,
+      "deploy": 1,
+      "setup": 7,
+      "other": 2
+    }
+  }
+}
