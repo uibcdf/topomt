@@ -17,6 +17,21 @@
   max-width: 78%;  /* default is 60em */
 }
 
+/* Keep scientific explanations and case titles readable on narrow screens. */
+@media (max-width: 767.98px) {
+  .bd-main .bd-content .bd-article-container {
+    max-width: 100%;
+  }
+
+  .bd-article h1 {
+    font-size: 2rem;
+  }
+
+  .bd-article h2 {
+    font-size: 1.5rem;
+  }
+}
+
 
 
 /* To change the left bar of executable cells in markdown and executable cells in jupyter notebooks */

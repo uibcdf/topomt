@@ -49,7 +49,6 @@ Volume definitions and precision <volume_measurements>
 | [Sampled closed shell](closed_shell/index.md) | How does access to the same sampled wall change with probe size? | Separate executed system/native notebooks; independent access, enclosure and finite-hull exclusion controls. Historical original-provider evidence is retained. |
 | [Shell with an opening](shell_with_opening/index.md) | Does deleting a cap change access at the same probe, and where are the exterior contacts? | Separate executed system/native notebooks; exact parent subset, independent ray/enclosure/exclusion controls and mapped contacts. Original comparisons remain planned. |
 | [Narrow straight tube, dense sampling](straight_tube_narrow_dense/index.md) | Can a bent passage remain open after its straight axis is blocked, and is a graph skeleton physically valid? | Separate system/native notebooks; independent two-end paths, complete wall/opening certificates and finite-hull exclusion. Native boundary/all-atom questions remain open; no original comparisons yet. |
-
 | [Wide straight tube, sparse sampling](straight_tube_wide_sparse/index.md) | Can a sparsely sampled wall retain two physical ends and a clear passage at the same probe sizes? | Separate executed system/native notebooks; independent axis, complete wall/end certificates and a 5 Å exclusion control. Channel contacts resolve at 1.4 Å; boundary numerics and local/all-atom questions remain open. |
 
 | Part | What the reader can inspect |

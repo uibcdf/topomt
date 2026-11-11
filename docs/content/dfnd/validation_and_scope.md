@@ -33,7 +33,6 @@ inputs, independent reasoning, native/public observations and versioned evidence
 | Shell with opening, 1.4 Å | One free hull patch and an origin-to-exterior witness. |
 | Narrow straight tube, 1.2/1.4 Å | Complete lateral-wall cover, two strict-free end patches and a verified bent end-to-end path; the fixed axis is blocked at 1.4 Å. |
 | Narrow straight tube, 2.5 Å | A conservative all-atom bound covers every center position in the finite hull. |
-
 | Wide straight tube, 1.4/2.5 Å | Clear axis and complete wall/end certificates proving two strict-free hull patches. Native physical count resolves only at 1.4 Å in this study. |
 | Wide straight tube, 5 Å | Every finite-hull point is covered by expanded balls; local/public candidates still require qualification. |
 

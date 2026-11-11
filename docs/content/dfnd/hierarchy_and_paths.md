@@ -111,6 +111,12 @@ there is no primary skeleton or no qualifying extra route. The primary helper
 Neither helper enumerates every internal branch or validates collisions; a
 completed component analysis need not yield a skeleton.
 
+In the [wide/sparse tube](../benchlab/synthetic/straight_tube_wide_sparse/dfnd.ipynb),
+the selected interior candidates at 1.4 and 2.5 Å pass complete all-atom segment
+checks, with minimum clearance 3.607542780 Å. Their native validation flags stay
+false. The independently verified axis has clearance 3.906596981 Å and separate
+outward tails; neither candidate construction claims a globally optimal path.
+
 ```{figure} figures/persistence_axes.svg
 :alt: Capacity hierarchy within one query, probe changes on fixed coordinates and temporal changes on different coordinates form three distinct analysis axes.
 
@@ -128,9 +134,3 @@ public child feature each require their declared invariants.
 Historical hierarchy toys provide engineering evidence for these descriptors.
 They are not automatically new qualified BenchLab cases or a guarantee of
 biological transport through every detected narrowing.
-
-In the [wide/sparse tube](../benchlab/synthetic/straight_tube_wide_sparse/dfnd.ipynb),
-the selected interior candidates at 1.4 and 2.5 Å pass complete all-atom segment
-checks, with minimum clearance 3.607542780 Å. Their native validation flags stay
-false. The independently verified axis has clearance 3.906596981 Å and separate
-outward tails; neither candidate construction claims a globally optimal path.

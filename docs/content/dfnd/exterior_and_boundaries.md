@@ -152,6 +152,13 @@ budget despite independently certified two-end hull patches. The count remains
 unknown; [#180](https://github.com/uibcdf/topomt/issues/180) owns this bounded
 extension. The earlier five-control qualification does not cover this tube.
 
+The [wide/sparse companion](../benchlab/synthetic/straight_tube_wide_sparse/dfnd.ipynb)
+resolves two global patches and the Channel's two contacts at 1.4 Å, while other
+component associations remain unknown. At 2.5 Å a distinct critical-section
+numerical ambiguity leaves the boundary unknown ([#184](https://github.com/uibcdf/topomt/issues/184));
+at 5 Å it exhausts arrangement work (#180). A positive profile does not correct
+the narrower input's budget limitation or qualify every association.
+
 ## Other boundary roles
 
 | Native relation | Interpretation in the discrete construction |
@@ -164,10 +171,3 @@ extension. The earlier five-control qualification does not cover this tube.
 `coast` is a local tetrahedron permeability class; it is not a synonym for every
 boundary face. Wall clustering also uses carrier adjacency. Neither a whole
 face nor an atom list by itself reconstructs a clipped physical free surface.
-
-The [wide/sparse companion](../benchlab/synthetic/straight_tube_wide_sparse/dfnd.ipynb)
-resolves two global patches and the Channel's two contacts at 1.4 Å, while other
-component associations remain unknown. At 2.5 Å a distinct critical-section
-numerical ambiguity leaves the boundary unknown ([#184](https://github.com/uibcdf/topomt/issues/184));
-at 5 Å it exhausts arrangement work (#180). A positive profile does not correct
-the narrower input's budget limitation or qualify every association.
