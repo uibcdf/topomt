@@ -1,0 +1,9 @@
+{
+  "source_revision": "cabd622",
+  "status": "rejected_before_native_calculation",
+  "type": "TypeError",
+  "reason": "The new study helper passed boundary_tolerance as a public dfnd_to_topography keyword; it is an advanced DFNDQuery field. The helper is corrected to use the supported query object, preserving the frozen numeric query.",
+  "probe_angstroms": 1.2,
+  "scientific_native_observation_produced": false,
+  "input_and_reference_bytes_changed": false
+}

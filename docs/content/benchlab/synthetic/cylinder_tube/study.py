@@ -62,6 +62,7 @@ def receive(directory: Path, probe: float, min_size: int = 0) -> Any:
     import molsysmt as msm
 
     import topomt
+    from topomt.dfnd.config import DFNDQuery
 
     folder = directory / 'artifacts/cylinder_tube_v1'
     protocol = read(folder / 'protocol.json')
@@ -95,6 +96,19 @@ def receive(directory: Path, probe: float, min_size: int = 0) -> Any:
         atol=1e-14,
     )
     query = protocol['query']
+
+    def nm(value):
+        return float(puw.get_value(puw.quantity(value, 'angstroms'), to_unit='nm'))
+
+    configured = DFNDQuery(
+        probe_radius=nm(probe),
+        residence_tolerance=nm(query['residence_tolerance_angstroms']),
+        permeability_tolerance=nm(query['permeability_tolerance_angstroms']),
+        boundary_tolerance=nm(query['boundary_tolerance_angstroms']),
+        transit_policy=query['transit_policy'],
+        gate_intrusion_policy=query['gate_intrusion_policy'],
+        dry_adjacency=query['dry_adjacency'],
+    )
     topo = topomt.get_topography(
         system,
         method='dfnd',
@@ -111,9 +125,7 @@ def receive(directory: Path, probe: float, min_size: int = 0) -> Any:
         permeability_tolerance=puw.quantity(
             query['permeability_tolerance_angstroms'], 'angstroms'
         ),
-        boundary_tolerance=puw.quantity(
-            query['boundary_tolerance_angstroms'], 'angstroms'
-        ),
+        query=configured,
     )
     np.testing.assert_allclose(
         puw.get_value(topo.input_context.coordinates, to_unit='angstroms'),
@@ -185,9 +197,7 @@ def inspect_centerlines(topo: Any) -> list[dict]:
         centers = np.asarray(
             puw.get_value(topo.input_context.coordinates, to_unit='angstroms')
         )
-        radii = np.asarray(
-            puw.get_value(topo.input_context.atom_radii, to_unit='angstroms')
-        )
+        radii = np.asarray(puw.get_value(topo.input_context.radii, to_unit='angstroms'))
         probe = float(
             puw.get_value(
                 puw.quantity(

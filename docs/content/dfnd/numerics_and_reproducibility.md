@@ -41,6 +41,23 @@ their bare numbers must not be confused with that public compatibility rule.
 The advanced array constructor has its separately documented angstrom
 compatibility convention. Explicit quantities avoid the ambiguity.
 
+Advanced settings such as physical-boundary tolerance belong to the typed
+query. This example uses its **canonical nm fields** explicitly:
+
+```python
+from topomt.dfnd.config import DFNDQuery
+
+query = DFNDQuery(probe_radius=0.14, boundary_tolerance=1e-7)
+configured_result = get_topography(molecular_system, method='dfnd', query=query)
+assert configured_result.dfnd.dfn.query == query
+```
+
+The shared gateway accepts an existing `DFNDQuery` or `None`, preserving its
+identity and the native checks for conflicting explicit arguments. Supply
+`boundary_tolerance` through this object; it is not a separate dispatcher
+keyword. The immutable query validates its physical/numerical policies when
+constructed, while the gateway rejects an unrelated object before execution.
+
 The typical public epsilon of $10^{-6}$ Å is $10^{-7}$ nm. Epsilon also enters
 geometric computations; one parameter name does not prove that every internal
 predicate has a rigorous dimensionally uniform error analysis. Near-degenerate
