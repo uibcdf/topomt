@@ -82,6 +82,7 @@ def analyze_tetrahedron(input_directory: Path) -> dict[float, Topography]:
             selection='all',
             structure_indices=0,
             hydrogen_policy='exclude',
+            radii_model='vdw',
             probe_radius=puw.quantity(probe, 'angstroms'),
             epsilon=epsilon,
             residence_tolerance=puw.quantity(0.0, 'angstroms'),
@@ -93,7 +94,7 @@ def analyze_tetrahedron(input_directory: Path) -> dict[float, Topography]:
         )
         for probe in (1.2, 1.4, 1.7)
     }
-    # Use and verify the documented default instead of assuming a radius model.
+    # Verify that the dispatcher retained the explicitly selected radius model.
     if any(t.dfnd.network.mesh_config.radii_model != 'vdw' for t in results.values()):
         raise ValueError('DFND radius policy differs from the frozen model')
     return results
