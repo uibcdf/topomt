@@ -60,3 +60,13 @@ critical-section ambiguity. Make the same-source physical targets pass without
 retuning the frozen profile; verify prior controls and explicit unknown behavior.
 Review the matching DFND book and reconcile card/hub/lifecycle/case/report before
 closure. Do not count a strict expected failure as passing qualification.
+
+## Repeated source receiving
+
+The metadata-corrected new original execution at
+3ad9515019e722c0ccf4ade7a3024de4166e217e reproduces the same physical states.
+The first fdb253c attempt is preserved as `native_attempt_metadata_encoding.json`;
+its bibliographic strings are not accepted as portable attribution. #185 corrects
+new evidence serialization only; it changes no scientific DFND operator.
+The maintained card is
+https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19535683.

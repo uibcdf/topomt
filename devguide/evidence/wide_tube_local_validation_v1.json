@@ -1,0 +1,25 @@
+{
+  "schema": "topomt.benchlab.wide-tube-local-validation/1",
+  "issue": "uibcdf/topomt#183",
+  "frozen_scientific_source": "3ad9515019e722c0ccf4ade7a3024de4166e217e",
+  "selected_tests": {
+    "passed": 65,
+    "strict_expected_failures": 5,
+    "wall_seconds": 24.26,
+    "peak_rss_kib": 386560,
+    "log_scope": "Wide/narrow actual public receiving, both independent reference families, both tube notebook/download guards, generic bundle v2, quantity serializer, reporting/findings/docs-site and selected real-Ackredit reuse/rendering"
+  },
+  "pending_targets": {
+    "uibcdf/topomt#180": 3,
+    "uibcdf/topomt#181": 1,
+    "uibcdf/topomt#184": 1
+  },
+  "ruff": "Repository check passed; eight changed executable files formatted",
+  "typing": "Six modified source/helper files passed scoped mypy across two invocations",
+  "preserved_prior_artifact_notebook_download_files": 297,
+  "all_previous_sha256_unchanged": true,
+  "human_version_file_sha256_unchanged": "d76f39e77bb54929c2d4a02f55ec04d61534ec09df776d2fe89ef731626a88b5",
+  "resources": "One CPU/numerical thread, 6 GiB address space / 120 CPU seconds; sequential numerical and kernel runs",
+  "deferred": "Full suite, source characterization goldens and broad viewer receiving/installed-platform qualification remain #16; no new original providers or proteins",
+  "scope": "Bounded source/study qualification with explicit failing scientific targets; no algorithmic correction or release qualification"
+}

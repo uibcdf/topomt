@@ -193,6 +193,11 @@ The maintainer selects `straight_tube_narrow_dense` after the finite three-case 
 Its #178 system/native unit has independent path/wall/exclusion references and
 retained initial observations. Stay on this input for physical budget #180,
 all-atom/public qualification #181 and wider paths #76 before another geometry.
+The maintainer subsequently selected `straight_tube_wide_sparse` as its explicit
+companion under #183. Its two smaller probes have independently certified end
+patches and a clear axis; native 1.4 Å Channel contacts resolve, while 2.5 Å
+boundary numerics remain #184. Both tubes' questions remain active; the wider
+positive result does not qualify the narrow input.
 The initial study is not complete scientific qualification or a provider benchmark.
 
 Present explanations, reference/result tables and figures as the primary web

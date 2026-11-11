@@ -1,6 +1,20 @@
 # TopoMT development status
 
-## Current BenchLab checkpoint — 2026-11-10
+## Current paired-tube checkpoint — 2026-11-11
+
+The maintainer selected the [wide/sparse companion](../docs/content/benchlab/synthetic/straight_tube_wide_sparse/index.md)
+under #183 while retaining the narrow unit's unresolved #180/#181 profiles.
+The 77-ball input has independent complete axial/wall/end certificates at
+1.4/2.5 Å and whole finite-hull exclusion at 5 Å. Native source 3ad9515 resolves
+two global patches and the Channel's two contacts at 1.4 Å; other associations
+remain unknown. At 2.5 Å the interior native candidate is clear but physical
+ordering is numerically unresolved (#184). At 5 Å budget #180 and local versus
+all-atom/public review #181 remain open. Scientific operators were unchanged.
+The first bibliography-encoding attempt is retained; #185 corrects new evidence
+serialization only. Source-bound reader/download/site evidence is recorded
+separately; no original comparator, installed matrix or protein claim follows.
+
+## Earlier finite three-case checkpoint — 2026-11-10
 
 The [finite three-case acceptance](../docs/content/benchlab/synthetic/three_case_disposition.md)
 records independent physical boundaries/paths, volume references and actual

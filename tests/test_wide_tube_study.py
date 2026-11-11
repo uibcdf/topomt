@@ -182,3 +182,31 @@ def test_wide_reviewed_readers_bind_frozen_sources_and_execute_without_errors():
         ]
         assert sum('<table' in output for output in html) >= 3
         assert all('hide-input' in cell.metadata['tags'] for cell in cells)
+
+
+def test_wide_complete_download_is_byte_identified_and_contains_shared_receiving(
+    tmp_path,
+):
+    import zipfile
+
+    from devtools.benchlab.study_bundle import verify_manifest
+
+    with zipfile.ZipFile(
+        ROOT / 'docs/_static/benchlab/straight_tube_wide_sparse_v1.zip'
+    ) as archive:
+        archive.extractall(tmp_path)
+    manifest = verify_manifest(tmp_path)
+    assert manifest['case'] == 'straight_tube_wide_sparse'
+    assert (
+        manifest['topomt_source_revision']
+        == json.loads((ARTIFACTS / 'reader_protocol.json').read_text())[
+            'topomt_source_revision'
+        ]
+    )
+    assert 'devtools/benchlab/tube_study.py' in manifest['files']
+    for name in ('system', 'dfnd'):
+        relative = str((CASE / f'{name}.ipynb').relative_to(ROOT))
+        assert relative in manifest['entry_notebooks']
+        assert (tmp_path / relative).read_bytes() == (ROOT / relative).read_bytes()
+    for helper in ('verify_tube_boundary.py', 'verify_tube_passage.py'):
+        assert f'devtools/{helper}' in manifest['files']

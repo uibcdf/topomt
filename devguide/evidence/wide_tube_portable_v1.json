@@ -1,0 +1,44 @@
+{
+  "schema": "topomt.benchlab.wide-tube-portable-receiving/1",
+  "issue": "uibcdf/topomt#183",
+  "case_id": "straight_tube_wide_sparse",
+  "source_revision": "3ad9515019e722c0ccf4ade7a3024de4166e217e",
+  "download_sha256": "271b354aa3ee2efa56073deb0d2b6987977fe35632caa10a19c3280e20576525",
+  "verified_files": 398,
+  "fresh_kernels": [
+    "system",
+    "dfnd"
+  ],
+  "inside_outside_tables_identical": true,
+  "temporary_extraction_removed": true,
+  "resources": "One CPU/numerical thread, 6 GiB address-space / 120 CPU second ceilings per kernel runner",
+  "scope": "Wide-tube independent/native source receiving; #180/#181/#184 remain open, no installed/support-matrix qualification; startup library/cache warnings are retained, producer version is reported as observed rather than inferred from source identity",
+  "receipts": {
+    "system": {
+      "schema": "topomt.benchlab.tube-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/system.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "98dbc55732cc4106db4ff79b250bc21cbae712f9472503fee341d3b60632a070",
+      "source_protocol_sha256": "e33ae16e62524a8cb79c640cba7b42d3ffb79e31c3c2c9f9df51ac51e956090b",
+      "wall_seconds": 4.609,
+      "parent_peak_rss_kib": 83528,
+      "child_peak_rss_kib": 150476,
+      "preserved_evidence_files": 355,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    },
+    "dfnd": {
+      "schema": "topomt.benchlab.tube-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/dfnd.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "b5a6047f362989c2cc8cb9848d2e587b4dda832ef326f2990ae1ee1a279e29d2",
+      "source_protocol_sha256": "e33ae16e62524a8cb79c640cba7b42d3ffb79e31c3c2c9f9df51ac51e956090b",
+      "wall_seconds": 10.09,
+      "parent_peak_rss_kib": 83436,
+      "child_peak_rss_kib": 376140,
+      "preserved_evidence_files": 355,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    }
+  }
+}
