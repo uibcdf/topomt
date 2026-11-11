@@ -1,0 +1,44 @@
+{
+  "schema": "topomt.benchlab.naming-portable-receiving/1",
+  "issue": "uibcdf/topomt#182",
+  "case_id": "straight_tube_narrow_dense",
+  "source_revision": "107c291cf8c6fa0663793fa32a96cd975e49589e",
+  "download_sha256": "de01c2fc1969fe87dc976d79dc39523cad38463ef515a520dc9221f0109e2636",
+  "verified_files": 368,
+  "fresh_kernels": [
+    "system",
+    "dfnd"
+  ],
+  "inside_outside_tables_identical": true,
+  "temporary_extraction_removed": true,
+  "resources": "One CPU/numerical thread, 6 GiB address-space / 120 CPU second ceilings per kernel runner",
+  "scope": "Descriptive naming and source-bound receiving; no scientific fix or installed/support-matrix qualification",
+  "receipts": {
+    "system": {
+      "schema": "topomt.benchlab.tube-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/system.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "52af4594ecf5dbbdaacb4fbefaebb32dc85af7764915e5d8c49645479125c702",
+      "source_protocol_sha256": "8c9fba8c8b666747afe265d522c87f947534646656dcf3bd7dcbd9547dec55ff",
+      "wall_seconds": 4.222,
+      "parent_peak_rss_kib": 81464,
+      "child_peak_rss_kib": 152004,
+      "preserved_evidence_files": 326,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    },
+    "dfnd": {
+      "schema": "topomt.benchlab.tube-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/dfnd.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "5b76ddbffd999ed95f89a0f13376a11bc5e8a05a965f27e6ac7f4867ad32263f",
+      "source_protocol_sha256": "8c9fba8c8b666747afe265d522c87f947534646656dcf3bd7dcbd9547dec55ff",
+      "wall_seconds": 9.896,
+      "parent_peak_rss_kib": 81076,
+      "child_peak_rss_kib": 372128,
+      "preserved_evidence_files": 326,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    }
+  }
+}
