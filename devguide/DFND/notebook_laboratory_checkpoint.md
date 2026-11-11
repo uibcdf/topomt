@@ -4,7 +4,7 @@
 
 After the finite three-case disposition, the maintainer selects the next tube
 unit under [#178](https://github.com/uibcdf/topomt/issues/178). Canonical sources
-are [cylinder_tube](../../docs/content/benchlab/synthetic/cylinder_tube/index.md),
+are [straight_tube_narrow_dense](../../docs/content/benchlab/synthetic/straight_tube_narrow_dense/index.md),
 with independent `system.ipynb` and actual-public `dfnd.ipynb`. Full-precision
 81-ball inputs and protocols precede new native receiving. Independent complete
 segment/tail certificates establish a bent route at 1.2/1.4 Å; separate complete

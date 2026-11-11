@@ -64,8 +64,13 @@ def receive(directory: Path, probe: float, min_size: int = 0) -> Any:
     import topomt
     from topomt.dfnd.config import DFNDQuery
 
-    folder = directory / 'artifacts/cylinder_tube_v1'
+    folder = directory / 'artifacts/straight_tube_narrow_dense_v1'
+    identity = read(directory / 'identity.json')
+    if identity['case_id'] != 'straight_tube_narrow_dense':
+        raise ValueError('Current straight-tube study identity differs')
     protocol = read(folder / 'protocol.json')
+    if identity['input_sha256'] != protocol['input_sha256']:
+        raise ValueError('Current identity does not identify the frozen input')
     payload = (folder / 'input.json').read_bytes()
     if hashlib.sha256(payload).hexdigest() != protocol['input_sha256']:
         raise ValueError('Frozen tube input identity differs')
@@ -152,7 +157,7 @@ def references(directory: Path) -> dict:
         from devtools.verify_tube_boundary import verify_boundary
         from devtools.verify_tube_passage import verify_reference
 
-        folder = directory / 'artifacts/cylinder_tube_v1'
+        folder = directory / 'artifacts/straight_tube_narrow_dense_v1'
         passage = verify_reference(
             folder / 'input.json',
             folder / 'passage_v2_protocol.json',

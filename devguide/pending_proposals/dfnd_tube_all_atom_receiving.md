@@ -25,7 +25,7 @@ anywhere in its finite atomic-center convex hull. The cover distance bound is
 
 ## How
 
-Retain `cylinder_tube/artifacts/cylinder_tube_v1/native_observations.json`, the
+Retain `straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/native_observations.json`, the
 original full-precision quantity-aware input, frozen query and independently
 replayable passage/model certificate. The negative public target first failed
 and remains a strict expected failure under this issue. Inspect responsible

@@ -96,7 +96,7 @@ trajectory. Straight segments between cell centers can encounter obstacles.
 A resident-only skeleton may also omit connectivity that the full component
 obtained through nonresident connectors.
 
-The [straight-tube notebook](../benchlab/synthetic/cylinder_tube/dfnd.ipynb)
+The [straight-tube notebook](../benchlab/synthetic/straight_tube_narrow_dense/dfnd.ipynb)
 checks the selected candidate's complete segments against all balls. At its
 initial source `b07a20e`, the 1.4 Å skeleton has a negative clearance margin
 although a different independently certified bent route exists. The native

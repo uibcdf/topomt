@@ -146,7 +146,7 @@ without a validated segment remain outside the qualified panel under
 [#76](https://github.com/uibcdf/topomt/issues/76). Free aperture area and a globally
 optimal bottleneck are not supplied by this connectivity observation.
 
-The [new straight-tube control](../benchlab/synthetic/cylinder_tube/index.md)
+The [new straight-tube control](../benchlab/synthetic/straight_tube_narrow_dense/index.md)
 exercises that work ceiling: initial source `b07a20e` exhausts its arrangement
 budget despite independently certified two-end hull patches. The count remains
 unknown; [#180](https://github.com/uibcdf/topomt/issues/180) owns this bounded

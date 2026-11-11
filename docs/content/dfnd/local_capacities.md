@@ -78,7 +78,7 @@ face positions do not prove that a free path joins them inside the cell.
 The intrusion diagnostic adds a separate decision about the cell's opposite
 atom, explained below. Its absence is not collision certification.
 
-The [straight-tube study](../benchlab/synthetic/cylinder_tube/index.md) makes
+The [straight-tube study](../benchlab/synthetic/straight_tube_narrow_dense/index.md) makes
 this distinction concrete. At its initial source `b07a20e`, a 2.5 Å probe has
 local wet components and public candidates although an independent all-atom
 bound covers the entire finite hull. Diagnosis and public qualification remain

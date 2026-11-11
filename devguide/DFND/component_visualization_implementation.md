@@ -199,7 +199,7 @@ Makes pocket/void/channel distinguishable using mostly existing primitives.
   color_map=…)`; **bottleneck ring** at the minimum-radius station / lowest gate
   along the primary path; secondary branches render as lower-opacity tubes.
 - **Degenerate**: no path / single resident node → fall back to `cloud` and flag.
-- **Tests**: a synthetic two-mouth channel (`tube_channel_clean`) yields one
+- **Tests**: a synthetic two-mouth channel (`straight_tube_narrow_dense`) yields one
   `add_channel_tube` with ≥2 centers and radii bounded by `R_residence`; the
   bottleneck station is the global radius minimum. `branched_tube_y` yields one
   primary tube plus one secondary branch for its third mouth.
@@ -260,7 +260,7 @@ remaining visualization work is dynamic and depends on trajectory-level data:
 ## 10. Testing strategy
 
 - **Geometry helpers (D3) unit-tested without a viewer** — `channel_skeleton`,
-  `mouth_caps`, ring sampling on the synthetic catalog (`tube_channel_clean`,
+  `mouth_caps`, ring sampling on the synthetic catalog (`straight_tube_narrow_dense`,
   `two_blocks_interface*`, `nested_spheres`), asserting on coordinates/radii.
 - **Render branches via `DummyView`** — the existing pattern (`view.messages`
   capturing `op` + `options`): assert the right `add_*` op, layer tags, colours,
@@ -320,3 +320,5 @@ future: the 2D–3D synchronized trajectory widget.
   The upstream primitives in §2 D6 are logged in MolSysViewer's own
   `devguide/pending_proposals/topomt_requested_visualization_primitives.md`.
 - Current renderer: `molsysviewer_topomt/render/_components.py`.
+
+Naming maintenance — 2026-11-10 (#182): current resource paths use descriptive straight-tube identifiers; historical observations retain their original scope and are not new physical qualification.

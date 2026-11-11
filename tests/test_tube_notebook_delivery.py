@@ -10,12 +10,12 @@ import nbformat
 from devtools.benchlab.study_bundle import verify_manifest
 
 ROOT = Path(__file__).resolve().parents[1]
-CASE = ROOT / 'docs/content/benchlab/synthetic/cylinder_tube'
+CASE = ROOT / 'docs/content/benchlab/synthetic/straight_tube_narrow_dense'
 
 
 def test_tube_notebooks_retain_the_frozen_sources_and_successful_outputs():
-    folder = CASE / 'artifacts/cylinder_tube_v1'
-    protocol = json.loads((folder / 'notebook_protocol.json').read_text())
+    folder = CASE / 'artifacts/straight_tube_narrow_dense_v1'
+    protocol = json.loads((folder / 'reader_naming_protocol.json').read_text())
     for name in ('system', 'dfnd'):
         notebook = nbformat.read(CASE / f'{name}.ipynb', 4)
         sources = [(cell.cell_type, cell.source) for cell in notebook.cells]
@@ -37,13 +37,19 @@ def test_tube_notebooks_retain_the_frozen_sources_and_successful_outputs():
 
 def test_downloaded_tube_references_replay_with_only_the_supplied_helper_tree(tmp_path):
     with zipfile.ZipFile(
-        ROOT / 'docs/_static/benchlab/cylinder_tube_v1.zip'
+        ROOT / 'docs/_static/benchlab/straight_tube_narrow_dense_v1.zip'
     ) as archive:
         archive.extractall(tmp_path)
     manifest = verify_manifest(tmp_path)
-    assert manifest['case'] == 'cylinder_tube'
+    assert manifest['case'] == 'straight_tube_narrow_dense'
     assert (
-        manifest['topomt_source_revision'] == 'b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4'
+        manifest['topomt_source_revision']
+        == json.loads(
+            (
+                CASE
+                / 'artifacts/straight_tube_narrow_dense_v1/reader_naming_protocol.json'
+            ).read_text()
+        )['topomt_source_revision']
     )
     assert len(manifest['entry_notebooks']) == 2
     import importlib.util

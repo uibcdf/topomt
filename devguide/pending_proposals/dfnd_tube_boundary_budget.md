@@ -24,7 +24,7 @@ patches at 1.2 and 1.4 Å. At 2.5 Å the entire finite hull is covered.
 
 ## How
 
-Preserve `cylinder_tube/artifacts/cylinder_tube_v1/native_observations.json` and
+Preserve `straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/native_observations.json` and
 the separate wall/end certificates and receipts. The actual-public two-end
 targets in `tests/test_tube_study.py` first failed; they remain strict expected
 failures with this owner. They are pending scientific targets, not passing

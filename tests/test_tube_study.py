@@ -7,7 +7,7 @@ import numpy as np
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-CASE = ROOT / 'docs/content/benchlab/synthetic/cylinder_tube'
+CASE = ROOT / 'docs/content/benchlab/synthetic/straight_tube_narrow_dense'
 
 
 def study_module():
@@ -24,7 +24,7 @@ def test_public_tube_keeps_full_precision_argon_radii_and_source_mapping():
     topo = study.receive(CASE, 1.2)
     from topomt import pyunitwizard as puw
 
-    fixture = study.read(CASE / 'artifacts/cylinder_tube_v1/input.json')
+    fixture = study.read(CASE / 'artifacts/straight_tube_narrow_dense_v1/input.json')
     coords = study.quantity(fixture['coordinates'], 'coordinates')
     np.testing.assert_allclose(
         puw.get_value(topo.input_context.coordinates, to_unit='angstroms'),

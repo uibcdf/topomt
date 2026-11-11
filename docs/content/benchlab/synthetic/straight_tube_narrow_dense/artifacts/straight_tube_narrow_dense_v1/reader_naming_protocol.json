@@ -1,0 +1,18 @@
+{
+  "schema": "topomt.benchlab.tube-notebook-protocol/1",
+  "issue": "uibcdf/topomt#182",
+  "case_id": "straight_tube_narrow_dense",
+  "topomt_source_revision": "107c291cf8c6fa0663793fa32a96cd975e49589e",
+  "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+  "notebooks": {
+    "system": "52af4594ecf5dbbdaacb4fbefaebb32dc85af7764915e5d8c49645479125c702",
+    "dfnd": "5b76ddbffd999ed95f89a0f13376a11bc5e8a05a965f27e6ac7f4867ad32263f"
+  },
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  },
+  "scope": "Descriptive naming around byte-identical original input/references/native evidence; physical/all-atom qualification remains #180/#181."
+}

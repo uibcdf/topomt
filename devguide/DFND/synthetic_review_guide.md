@@ -55,7 +55,7 @@ Each table is `PDB | case (what it is) | probe | check | expected`.
 | `hollow_sphere_void` | sealed Fibonacci sphere | 1.4 | family, links, volume | 1 void, 0 links, 1000<vol<5000 |
 | `hollow_sphere_pocket` | sphere with one polar cap removed | 1.4 | family, links | 1 pocket, 1 mouth |
 | `hollow_sphere_leaky` | sphere whose wall leaks small probes | 1.0 & 1.8 | probe sweep | 1.0 leaks (0 voids); 1.8 sealed (>=1 void) |
-| `tube_channel` | open cylinder | 1.4 | dominant family, mouths | channel, >=2 mouths |
+| `straight_tube_wide_sparse` | open cylinder | 1.4 | dominant family, mouths | channel, >=2 mouths |
 | `dumbbell` | two chambers + throat | 1.4 & 2.2 | significant voids | 1 void @1.4, 2 @2.2 (volume != connectivity) |
 | `solid_ball_control` | filled ball | 1.4 | negative control | no void; all vol<5 |
 | `blind_well_d6_r6` | shallow bored well | 1.4 | family count | **fragments to ~3 pockets** (mild over-seg; cf. Disease 1) |
@@ -189,3 +189,5 @@ documented tolerance band around the threshold instead of a hard `>=`.
 Coverage note: every catalogued PDB appears in exactly one Phase 1/2/3/4 row;
 property-based checks that are not a single PDB (probe/seed/epsilon sweeps,
 volume, outlier) are listed inline in the relevant disease.
+
+Naming maintenance — 2026-11-10 (#182): current resource paths use descriptive straight-tube identifiers; historical observations retain their original scope and are not new physical qualification.

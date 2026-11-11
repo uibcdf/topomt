@@ -31,7 +31,7 @@ necessary variants. Protein studies follow completion of that synthetic phase.
 regular_tetrahedron/index
 closed_shell/index
 shell_with_opening/index
-cylinder_tube/index
+straight_tube_narrow_dense/index
 Public Topography receiving <public_topography>
 Supports and robustness <public_support_and_robustness>
 Comparison disposition <comparison_disposition>
@@ -47,7 +47,7 @@ Volume definitions and precision <volume_measurements>
 | [Regular tetrahedron](regular_tetrahedron/index.md) | How do residence and face transit differ as the probe grows? | Separate executed system, DFND and original-comparison notebooks; atomic-model audit and distinct failure states. |
 | [Sampled closed shell](closed_shell/index.md) | How does access to the same sampled wall change with probe size? | Separate executed system/native notebooks; independent access, enclosure and finite-hull exclusion controls. Historical original-provider evidence is retained. |
 | [Shell with an opening](shell_with_opening/index.md) | Does deleting a cap change access at the same probe, and where are the exterior contacts? | Separate executed system/native notebooks; exact parent subset, independent ray/enclosure/exclusion controls and mapped contacts. Original comparisons remain planned. |
-| [Straight tube](cylinder_tube/index.md) | Can a bent passage remain open after its straight axis is blocked, and is a graph skeleton physically valid? | Separate system/native notebooks; independent two-end paths, complete wall/opening certificates and finite-hull exclusion. Native boundary/all-atom questions remain open; no original comparisons yet. |
+| [Narrow straight tube, dense sampling](straight_tube_narrow_dense/index.md) | Can a bent passage remain open after its straight axis is blocked, and is a graph skeleton physically valid? | Separate system/native notebooks; independent two-end paths, complete wall/opening certificates and finite-hull exclusion. Native boundary/all-atom questions remain open; no original comparisons yet. |
 
 | Part | What the reader can inspect |
 | --- | --- |
@@ -133,7 +133,7 @@ build. Execution and scientific review are separate checks.
 
 ## Study sequence
 
-Current priority: the [straight tube](cylinder_tube/index.md), selected after
+Current priority: the [straight tube](straight_tube_narrow_dense/index.md), selected after
 the finite three-case acceptance. Resolve its bounded physical receiving and
 all-atom/public questions before adding another geometry.
 The [public receiving audit](public_topography.md) follows their native results

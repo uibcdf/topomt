@@ -43,7 +43,7 @@ for these inputs with explicit evidence. Keep unresolved outcomes and their
 owning issues visible; passing the initial controls is not the completion rule.
 
 DFND continuation (2026-11-10): after the completed finite three-case checkpoint,
-the maintainer selects `cylinder_tube` under #178. Its independent references
+the maintainer selects `straight_tube_narrow_dense` under #178. Its independent references
 and initial source observations expose physical-boundary budget #180 and
 all-atom/public-candidate qualification #181; general paths remain #76. Stay
 with this tube before another geometry. Use the current laboratory checkpoint

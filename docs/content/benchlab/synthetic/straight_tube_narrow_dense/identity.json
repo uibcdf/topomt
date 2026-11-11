@@ -1,0 +1,9 @@
+{
+  "schema": "topomt.benchlab.study-identity/1",
+  "case_id": "straight_tube_narrow_dense",
+  "catalog_entry": "straight_tube_narrow_dense",
+  "issue": "uibcdf/topomt#182",
+  "input": "artifacts/straight_tube_narrow_dense_v1/input.json",
+  "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+  "scope": "Current descriptive identity around the unchanged original frozen ball model; no scientific reclassification"
+}

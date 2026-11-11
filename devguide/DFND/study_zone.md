@@ -189,7 +189,7 @@ or closure of #75/#76/#16; each new scientific run retains its own protocol.
 
 ## Tube continuation and notebook reading — 2026-11-10
 
-The maintainer selects `cylinder_tube` after the finite three-case checkpoint.
+The maintainer selects `straight_tube_narrow_dense` after the finite three-case checkpoint.
 Its #178 system/native unit has independent path/wall/exclusion references and
 retained initial observations. Stay on this input for physical budget #180,
 all-atom/public qualification #181 and wider paths #76 before another geometry.

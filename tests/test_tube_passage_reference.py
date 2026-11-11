@@ -7,8 +7,8 @@ import numpy as np
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-CASE = ROOT / 'docs/content/benchlab/synthetic/cylinder_tube'
-DATA = CASE / 'artifacts/cylinder_tube_v1'
+CASE = ROOT / 'docs/content/benchlab/synthetic/straight_tube_narrow_dense'
+DATA = CASE / 'artifacts/straight_tube_narrow_dense_v1'
 
 
 def test_all_atom_path_clearance_checks_segments_between_safe_stations():

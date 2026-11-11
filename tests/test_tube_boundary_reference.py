@@ -7,7 +7,10 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-DATA = ROOT / 'docs/content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1'
+DATA = (
+    ROOT
+    / 'docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1'
+)
 
 
 def test_tube_hull_partition_is_complete_and_disjoint():
