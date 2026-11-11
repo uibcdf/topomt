@@ -1,0 +1,19 @@
+{
+  "schema": "topomt.benchlab.dumbbell-reference-receiving/1",
+  "issue": "uibcdf/topomt#186",
+  "captured_at": "2026-11-11T06:47:29.953597+00:00",
+  "input_protocol_source_revision": "1547a21fda21ec431d1fcccedbb030b9225ea1fc",
+  "source_scope": "Input/query committed before generation; new independent checker bytes identified below and committed with this evidence before native observation.",
+  "reference_code_sha256": {
+    "devtools/verify_dumbbell_reference.py": "ff938ab16c45d415b1366d2a2005181314cb534d585bf65b8dd06f4137438514",
+    "devtools/verify_tube_passage.py": "f37aeea566364cc912ce9eb241e3dbef1eaef70b5798b4ad2f2fb14b021318bb",
+    "devtools/verify_closed_shell_wall_cover.py": "06dd15dd095370dac48fb7888a26ebfa2a98c82615be4d855885dc61464a24a2"
+  },
+  "certificate_sha256": "5f563197f64820f4e14f4a0c177d8df042acc3f94bb1eb1def5ec42b4dffbcf1",
+  "generation_seconds": 0.5157355830306187,
+  "verification_seconds": 0.11279214598471299,
+  "peak_rss_kib": 80356,
+  "topomt_imported": false,
+  "resources": "One CPU/numerical thread, 6 GiB address-space / 120 CPU seconds; preflight 55.4 GiB available of60.5, PSI0 and sampled swapIO0. Slurm sockets unavailable, no allocation.",
+  "scope": "One enclosed connected region containing both anchors at 1.4 A; at least two distinct enclosed regions at 2.2 A; no free center anywhere in the finite native hull at 6 A. Other regions/volumes and physical aperture area are not counted."
+}

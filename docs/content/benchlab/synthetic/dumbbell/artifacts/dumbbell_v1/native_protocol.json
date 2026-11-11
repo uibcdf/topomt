@@ -1,0 +1,42 @@
+{
+  "schema": "topomt.benchlab.dumbbell-native-protocol/1",
+  "issue": "uibcdf/topomt#186",
+  "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63",
+  "control_probes_angstroms": [
+    1.4,
+    2.2,
+    6.0
+  ],
+  "independent_reference_sha256": {
+    "protocol.json": "a0305dd7b749a70189b848e7926021bb143e6929533fb807fbdcd69e0844eb8c",
+    "reference_certificate.json": "5f563197f64820f4e14f4a0c177d8df042acc3f94bb1eb1def5ec42b4dffbcf1",
+    "reference_verification.json": "f61b92500e07e947cbe618ee79cf7f2adc1adf70c88b75ceb466f570c7fbf943",
+    "reference_geometry.json": "9085c3c06eb225fb0086f4473328f95dfd76a53b62d123956eca1c7e8f6599b6",
+    "reference_receipt.json": "ffac0d24b2a045f9eb04201a6d57fe7a5b25470ab02ff6ca1569e963e8a7a808"
+  },
+  "scientific_query": {
+    "transit_policy": "with_connectors",
+    "gate_intrusion_policy": "flag_only",
+    "dry_adjacency": "face",
+    "min_size": 0,
+    "residence_tolerance_angstroms": 0.0,
+    "permeability_tolerance_angstroms": 0.0,
+    "boundary_tolerance_angstroms": 1e-06
+  },
+  "capture": [
+    "Unmodified raw DFND, actual complete public contract",
+    "All containing cells and source supports of the two physical anchors",
+    "Original typed hierarchy, recoverable motifs and actual public copies",
+    "Separate physical hull availability/count and association status",
+    "Original detached real-Ackredit result and completed-operation attribution, round-trip JSON unchanged"
+  ],
+  "expected_reference_scope": "Connected/enclosed named anchors at1.4; distinct enclosed named anchors at2.2; empty finite native hull at6. No exact global count/volume/optimal bottleneck oracle.",
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds_per_capture": 120,
+    "notebook_cell_timeout_seconds": 90
+  },
+  "scope": "No scientific operator changes or new original external provider/server; retained tube findings stay open; later joint review #187."
+}
