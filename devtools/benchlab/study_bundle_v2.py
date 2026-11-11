@@ -46,6 +46,7 @@ def build_bundle(root: Path, output: Path, source_revision: str) -> dict:
         for path in (
             'benchlab/public_contract.py',
             'benchlab/capture_volume.py',
+            'benchlab/tube_study.py',
             'conda-envs/development_env.yaml',
             'requirements/controlled_suite_dependencies_py314.txt',
         )

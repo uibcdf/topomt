@@ -1,0 +1,30 @@
+{
+  "schema": "topomt.benchlab.tube-native-protocol/1",
+  "case_id": "straight_tube_wide_sparse",
+  "issue": "uibcdf/topomt#183",
+  "source_before_native": "1cd0f185e1f09d278e3b079c6a82009962b2d825",
+  "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+  "control_probes_angstroms": [
+    1.4,
+    2.5,
+    5.0
+  ],
+  "independent_reference_sha256": {
+    "protocol.json": "818e1cb2c392457fc564837e4b7e2592104f38faa2775373bf646eb190fec9e3",
+    "reference_certificate.json": "8f1dc42607033eeaea6ad912ea7b654fcc8cc3b7be6036eacdaa997cfbe162d5",
+    "reference_verification.json": "276aa57507545d045c640e7bab808b6968e6e48ed0cc5491443729ca906d49c6",
+    "boundary_1.4A_protocol.json": "dddcc575e9da9f578487ddf2bde99ecaea7c4fa18abf2a5f45f85224a4e12cfd",
+    "boundary_1.4A_certificate.json": "6dcf8dc8833a40e757de8e74554289a24c348016e93e05dff6a41fdcb5d5e479",
+    "boundary_1.4A_verification.json": "fd540fc3d6aff96b557227805f5d5422e195fc92a855687c1c7d9847c6ff7976",
+    "boundary_2.5A_protocol.json": "04b8ba1616897f7495ba8c5fbbaba0bf78f28c0ced7ed38339ecc901c63a38c3",
+    "boundary_2.5A_certificate.json": "a24b586c286bca940c0b1a93238547ba035238f4995e558ec65b1030f9b2c4e7",
+    "boundary_2.5A_verification.json": "cb228148ed29ecf1367743974de1dd9c0420c7d9b3f3a6bd152c78d1fc1282e6"
+  },
+  "observation_scope": "Actual public Topography, raw/typed wet/dry support, physical availability, all-segment candidate checks and completed attribution. Do not change scientific expectations to match native labels.",
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  }
+}

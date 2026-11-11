@@ -1,0 +1,10 @@
+{
+  "source_revision": "1cd0f185e1f09d278e3b079c6a82009962b2d825",
+  "protocol_sha256": "dddcc575e9da9f578487ddf2bde99ecaea7c4fa18abf2a5f45f85224a4e12cfd",
+  "accepted": true,
+  "generation_seconds": 2.1518703519832343,
+  "verification_seconds": 0.8273628299939446,
+  "peak_rss_kib": 92808,
+  "topomt_imported": false,
+  "resources": "One CPU/numerical thread,6GiB address-space/120CPU-second limits"
+}
