@@ -1,0 +1,15 @@
+{
+  "notebook": "docs/content/benchlab/synthetic/closed_shell/public_topography_v2.ipynb",
+  "protocol_sha256": "f0d08315d1cdadbfba887867341107aa6c8a58a9839a184424306001fd0bed54",
+  "source_sha256": "c4eb8a272597fbfe280d4667f2c99730c7730e638a1a6ed18af9b5e7cdcaebaa",
+  "code_and_markdown_sha256": "a281e85dd58c115d8b6a75e4611b7e6234c2e04b440962022f68021322dffa1a",
+  "fresh_kernel": true,
+  "code_cells": 7,
+  "wall_seconds": 13.384,
+  "parent_peak_rss_kib": 822492,
+  "child_peak_rss_kib": 371900,
+  "preserved_files": 274,
+  "passed": true,
+  "source_revision": "d75d98363960f17135908b1b6af472827b4086c3",
+  "execution_scope": "Source-bound checkout receiving; initial sandbox blocked loopback before kernel startup; accepted runs used authorized local kernels under the same resource limits"
+}

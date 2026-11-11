@@ -70,3 +70,28 @@ def test_volume_receiving_rejects_a_reference_from_another_protocol(tmp_path):
     )
     with pytest.raises(ValueError, match='protocol'):
         study.volumes(tmp_path)
+
+
+def test_current_notebooks_preserve_frozen_cell_sources_and_passed_outputs():
+    import hashlib
+    import json
+
+    import nbformat
+
+    base = ROOT / 'docs/content/benchlab/synthetic'
+    for case in ('regular_tetrahedron', 'closed_shell', 'shell_with_opening'):
+        directory = base / case
+        notebook = nbformat.read(directory / 'public_topography_v2.ipynb', 4)
+        protocol = json.loads(
+            (directory / 'artifacts/reader_route_v2/protocol.json').read_text()
+        )
+        sources = [(cell.cell_type, cell.source) for cell in notebook.cells]
+        assert (
+            hashlib.sha256(json.dumps(sources, sort_keys=True).encode()).hexdigest()
+            == protocol['code_and_markdown_sha256']
+        )
+        codes = [cell for cell in notebook.cells if cell.cell_type == 'code']
+        assert all(cell.execution_count is not None for cell in codes)
+        assert not any(
+            output.output_type == 'error' for cell in codes for output in cell.outputs
+        )

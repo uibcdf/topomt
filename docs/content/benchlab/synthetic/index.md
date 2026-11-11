@@ -31,6 +31,7 @@ shell_with_opening/index
 Public Topography receiving <public_topography>
 Supports and robustness <public_support_and_robustness>
 Comparison disposition <comparison_disposition>
+Three-case acceptance <three_case_disposition>
 Origin-access transition brackets <origin_access_brackets>
 Volume definitions and precision <volume_measurements>
 ```
@@ -130,9 +131,10 @@ build. Execution and scientific review are separate checks.
 Current priority: deepen these three units before adding another geometry.
 The [public receiving audit](public_topography.md) follows their native results
 into `Topography`. The [stronger 0.2 Å wall cover](closed_shell/closure_at_0p2.md)
-resolves one earlier reference question. Physical mouth connectivity, continuous
-paths and volume accuracy require further work on these inputs; the tube and
-chambers below remain deferred.
+resolves one earlier reference question. The [finite three-case acceptance](three_case_disposition.md) records delivered
+physical patches/paths and conditional-volume references, the remaining
+unavailable quantities and the conditions for a next synthetic study. The tube
+and chambers below have not been started.
 
 1. **Regular tetrahedron:** residence versus face transit and probe-dependent
    connectivity; independent circumradius formulas.
@@ -150,14 +152,19 @@ after their input assumptions and independent expectations have been reviewed.
 
 ## Download and run the current reader stage
 
-The per-case `public_topography.ipynb` notebooks provide the current reading map,
-actual public objects and replay of the retained later certificates. They run
-independently of the historical notebooks and do not execute original providers.
-The closed-shell parent is included for the exact opening subset.
+The current per-case **`public_topography_v2.ipynb`** notebooks independently
+receive public/physical results, inspect wet/dry supports, replay later reference
+certificates and recompute the declared conditional volume measurements.
+They run in separate fresh kernels and make no original-provider/server calls.
+The exact closed-shell parent is included for the opening subset.
 
-Download the {download}`complete source-bound study bundle <../../../_static/benchlab/three_cases_v1.zip>`,
-extract it, read `README_STUDY.md` and open a case's `public_topography.ipynb` in Jupyter.
-A manifest identifies every included file. Use the qualified Python 3.14 source
-route and the supplied environment/source-pin inputs; this download is not an
-installed-package or support-matrix qualification. Each current entry uses
-ordinary notebook links and displays its date and availability limits.
+Download the {download}`current source-bound v2 study bundle <../../../_static/benchlab/three_cases_v2.zip>`,
+extract it, read `README_STUDY.md` and open a case's `public_topography_v2.ipynb`
+from its own directory. `MANIFEST.json` identifies every included byte and the
+TopoMT source revision. The tested Python 3.14 source route and supplied
+source/environment inputs are explicit; this is not installed-release or
+platform-matrix qualification. Run All does not overwrite retained evidence.
+
+The {download}`reader v1 bundle <../../../_static/benchlab/three_cases_v1.zip>`
+and original system/native/comparison/v1 notebook sources remain dated history.
+Their fixed bytes do not claim that later source capabilities were absent forever.

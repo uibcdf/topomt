@@ -1,5 +1,10 @@
 # From DFND to the public Topography object
 
+**Current continuation:** the [support/robustness study](public_support_and_robustness.md)
+and [v2 reader notebooks](index.md#download-and-run-the-current-reader-stage)
+include later physical, numerical and support receiving. The original audit
+below and v1 notebooks retain their original source/date.
+
 The first three units now have an actual public receiving check through
 `get_topography(method='dfnd')`. The native engine is not mocked. Coordinates
 are restored from the frozen full-precision JSON, received atomic radii are

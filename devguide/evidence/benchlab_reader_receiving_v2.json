@@ -1,0 +1,121 @@
+{
+  "schema": "topomt.benchlab.reader-receiving/2",
+  "captured_at": "2026-11-11T00:57:53.978043+00:00",
+  "issue": "uibcdf/topomt#76",
+  "bundle_sha256": "4edefaf16f31bcad45776408035ddeb06aec65bf79080efd52aff7331e768e8a",
+  "manifest_files": 317,
+  "source_contract": "d75d98363960f17135908b1b6af472827b4086c3",
+  "notebooks": [
+    {
+      "case": "regular_tetrahedron",
+      "fresh_kernel": true,
+      "code_cells": 7,
+      "passed": true,
+      "working_directory": "/tmp/topomt-reader-v2-mqn13evc/docs/content/benchlab/synthetic/regular_tetrahedron",
+      "outside_checkout": true,
+      "code_and_markdown_sha256": "3aacd845631ef879721e2ffd80e92f270fc9bbeb2a551552fc0ebbfcc4416f84",
+      "bundle_notebook_sha256": "2a46f2b22b66047982d2b75046ce24b6277ad5da3a4b4a3c5d682f68800328e2",
+      "actual_imported_identity": {
+        "runtime": {
+          "python": "3.14.10",
+          "topomt_origin": "/fast_data/home/liliana/repos@uibcdf/topomt/topomt/__init__.py",
+          "versions": {
+            "topomt": "0.5.0+387.gcf4d475.dirty",
+            "molsysmt": "0.23.0+687.g2325038e8",
+            "pyunitwizard": "0.29.1+6.gf82b618",
+            "numpy": "2.5.4",
+            "scipy": "1.18.1"
+          }
+        },
+        "study_helper": "/tmp/topomt-reader-v2-mqn13evc/docs/content/benchlab/synthetic/public_study_v2.py",
+        "devtools_modules": {
+          "devtools.benchlab.capture_volume": "/tmp/topomt-reader-v2-mqn13evc/devtools/benchlab/capture_volume.py",
+          "devtools.benchlab.public_contract": "/tmp/topomt-reader-v2-mqn13evc/devtools/benchlab/public_contract.py"
+        }
+      },
+      "wall_seconds": 8.16,
+      "parent_peak_rss_kib": 822492,
+      "kernel_peak_rss_kib": 343372,
+      "extra_receiver_cell": "One transient identity-only cell after all original cells; excluded from the notebook source and saved outputs"
+    },
+    {
+      "case": "closed_shell",
+      "fresh_kernel": true,
+      "code_cells": 7,
+      "passed": true,
+      "working_directory": "/tmp/topomt-reader-v2-mqn13evc/docs/content/benchlab/synthetic/closed_shell",
+      "outside_checkout": true,
+      "code_and_markdown_sha256": "a281e85dd58c115d8b6a75e4611b7e6234c2e04b440962022f68021322dffa1a",
+      "bundle_notebook_sha256": "2d7dcb3dfef10551e9b058cbf287feab1119c1c8ff881f9f8437e9c2d1afa2cc",
+      "actual_imported_identity": {
+        "runtime": {
+          "python": "3.14.10",
+          "topomt_origin": "/fast_data/home/liliana/repos@uibcdf/topomt/topomt/__init__.py",
+          "versions": {
+            "topomt": "0.5.0+387.gcf4d475.dirty",
+            "molsysmt": "0.23.0+687.g2325038e8",
+            "pyunitwizard": "0.29.1+6.gf82b618",
+            "numpy": "2.5.4",
+            "scipy": "1.18.1"
+          }
+        },
+        "study_helper": "/tmp/topomt-reader-v2-mqn13evc/docs/content/benchlab/synthetic/public_study_v2.py",
+        "devtools_modules": {
+          "devtools.benchlab.capture_volume": "/tmp/topomt-reader-v2-mqn13evc/devtools/benchlab/capture_volume.py",
+          "devtools.benchlab.public_contract": "/tmp/topomt-reader-v2-mqn13evc/devtools/benchlab/public_contract.py",
+          "devtools.verify_closed_shell_wall_cover": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_closed_shell_wall_cover.py",
+          "devtools.verify_opening_connectivity": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_opening_connectivity.py",
+          "devtools.verify_small_probe_boundary": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_small_probe_boundary.py",
+          "devtools.verify_small_probe_regions": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_small_probe_regions.py",
+          "devtools.verify_origin_access_bracket": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_origin_access_bracket.py"
+        }
+      },
+      "wall_seconds": 13.597,
+      "parent_peak_rss_kib": 822492,
+      "kernel_peak_rss_kib": 371820,
+      "extra_receiver_cell": "One transient identity-only cell after all original cells; excluded from the notebook source and saved outputs"
+    },
+    {
+      "case": "shell_with_opening",
+      "fresh_kernel": true,
+      "code_cells": 7,
+      "passed": true,
+      "working_directory": "/tmp/topomt-reader-v2-mqn13evc/docs/content/benchlab/synthetic/shell_with_opening",
+      "outside_checkout": true,
+      "code_and_markdown_sha256": "2f1d9fd6ea88e887bb52f0541a9995663dfe3ff1c8ec519a784d2155ccdd5bca",
+      "bundle_notebook_sha256": "f761ee78b19b889910bca89c490573c59c85e2faea0bf328cf0f73ccde7bc384",
+      "actual_imported_identity": {
+        "runtime": {
+          "python": "3.14.10",
+          "topomt_origin": "/fast_data/home/liliana/repos@uibcdf/topomt/topomt/__init__.py",
+          "versions": {
+            "topomt": "0.5.0+387.gcf4d475.dirty",
+            "molsysmt": "0.23.0+687.g2325038e8",
+            "pyunitwizard": "0.29.1+6.gf82b618",
+            "numpy": "2.5.4",
+            "scipy": "1.18.1"
+          }
+        },
+        "study_helper": "/tmp/topomt-reader-v2-mqn13evc/docs/content/benchlab/synthetic/public_study_v2.py",
+        "devtools_modules": {
+          "devtools.benchlab.capture_volume": "/tmp/topomt-reader-v2-mqn13evc/devtools/benchlab/capture_volume.py",
+          "devtools.benchlab.public_contract": "/tmp/topomt-reader-v2-mqn13evc/devtools/benchlab/public_contract.py",
+          "devtools.verify_closed_shell_wall_cover": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_closed_shell_wall_cover.py",
+          "devtools.verify_opening_connectivity": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_opening_connectivity.py",
+          "devtools.verify_small_probe_boundary": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_small_probe_boundary.py",
+          "devtools.verify_small_probe_regions": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_small_probe_regions.py",
+          "devtools.verify_origin_access_bracket": "/tmp/topomt-reader-v2-mqn13evc/devtools/verify_origin_access_bracket.py"
+        }
+      },
+      "wall_seconds": 9.109,
+      "parent_peak_rss_kib": 822492,
+      "kernel_peak_rss_kib": 371820,
+      "extra_receiver_cell": "One transient identity-only cell after all original cells; excluded from the notebook source and saved outputs"
+    }
+  ],
+  "cleanup": "Managed /tmp extraction and all owned kernels removed after receiving",
+  "resources": "One CPU/numerical thread, <=6 GiB address space, <=120 CPU seconds per process and 90 seconds per cell; preflight available RAM ~56.6 GiB of60.5GiB, memory PSI zero",
+  "network_jobs": false,
+  "source_scope": "Actual TopoMT imports come from the declared source workspace; all study/reference helpers import from the extracted bundle. No installed/support-matrix qualification. Human worktree version bytes are retained and recorded separately from source identity.",
+  "initial_sandbox_attempt": "Loopback socket creation blocked before a kernel started; accepted bounded receiving uses authorized local kernels"
+}

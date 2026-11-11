@@ -1,3 +1,27 @@
+# DFND notebook laboratory checkpoint
+
+## Current three-case disposition — 2026-11-10
+
+The [finite acceptance ledger](../../docs/content/benchlab/synthetic/three_case_disposition.md)
+records sufficient evidence for the selected questions on the tetrahedron,
+closed shell and opened shell. Physical patches/path associations (#151) and
+conditional volume precision (#75) are source-resolved, with archived reports
+and fully reconciled finding history. The small shell has 13 independently
+verified origin-connected patches; both shells have 0.005 Å access/enclosure
+brackets. Actual public support/dry/coast/depth receiving covers 16 queries.
+The [current v2 readers](../../docs/content/benchlab/synthetic/index.md#download-and-run-the-current-reader-stage)
+run public receiving, reference replay and declared volumes in fresh kernels.
+
+These questions admit the next independently justified synthetic study when
+selected; no additional geometry or protein study is started here. Exact
+aperture area, optimal global bottleneck, general continuous navigation and
+versioned public interchange are not required by the established conclusions
+and remain explicitly unavailable. Broader #76/#60/#61, original-comparator
+investigations and installed/platform #16 remain open under their own gates.
+The temporary coordination plan records publication/portable receiving before
+its dated retirement. The material below retains dated earlier checkpoints;
+its old pending statements are historical where superseded by this section.
+
 **Source continuation — 2026-11-10:** the bounded physical implementation is
 received at `4fc2353`; its five controls and seven former missing-view targets
 now pass. See [the implementation record](physical_boundary_implementation.md)
@@ -7,9 +31,9 @@ The independent small-probe reference now establishes 13 patches, all with
 common-origin paths; actual-public receiving agrees. Both shells have verified
 0.005 Å origin-access/enclosure brackets, with their narrower source scope in
 [the case comparison](../../docs/content/benchlab/synthetic/origin_access_brackets.md).
-Wider native paths remain #76 and volume precision #75.
+Wider native paths remain #76; #75 precision is source-resolved in the current disposition above.
 
-# DFND notebook laboratory checkpoint
+
 
 ## Active direction
 

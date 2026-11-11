@@ -1,0 +1,15 @@
+{
+  "notebook": "docs/content/benchlab/synthetic/regular_tetrahedron/public_topography_v2.ipynb",
+  "protocol_sha256": "ee3218c11a1092c5088d1d933200a619c94896a7c42c146315695b30e489199b",
+  "source_sha256": "29aea1b0ea7ea2255084ce7b2f73ab31176a1278a0157c0c70c17d09a64d596f",
+  "code_and_markdown_sha256": "3aacd845631ef879721e2ffd80e92f270fc9bbeb2a551552fc0ebbfcc4416f84",
+  "fresh_kernel": true,
+  "code_cells": 7,
+  "wall_seconds": 8.183,
+  "parent_peak_rss_kib": 822492,
+  "child_peak_rss_kib": 343352,
+  "preserved_files": 274,
+  "passed": true,
+  "source_revision": "d75d98363960f17135908b1b6af472827b4086c3",
+  "execution_scope": "Source-bound checkout receiving; initial sandbox blocked loopback before kernel startup; accepted runs used authorized local kernels under the same resource limits"
+}

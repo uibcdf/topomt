@@ -1,25 +1,33 @@
 # Regular tetrahedron
 
+Can a probe fit inside a gap but fail to pass through its faces? Four equal
+atomic balls separate residence from access as we change only the probe radius.
+
+**Start here:** [current public study v2](public_topography_v2.ipynb), then use
+[the system](system.ipynb) and [original DFND study](dfnd.ipynb) for their
+frozen predictions and dated observations. The [complete v2 download](../index.md#download-and-run-the-current-reader-stage)
+includes the parent, independent checkers and declared source environment.
+
+```{figure} artifacts/native_study_v1/system_geometry.png
+:alt: Atomic-ball geometry of the unchanged regular tetrahedron input.
+:width: 75%
+
+The frozen atomic-ball input; full-precision quantities, source mapping and
+probe-specific reference statements are retained in the system stage.
+```
+
+## Current observations
+
+| Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
+| --- | --- | --- | --- |
+| Access, 1.2 Å | Four disconnected hull patches, all reached from the centroid. | One face cluster; `Percolating`, zero `Mouth` children. | Separate physical view resolves four; native/Mouth compatibility retained; [#151](https://github.com/uibcdf/topomt/issues/151). |
+| Enclosure, 1.4 Å | Free centroid, completely covered hull. | One `Void`, no exterior link or `Mouth`. | Enclosure qualified; general paths [#76](https://github.com/uibcdf/topomt/issues/76). |
+| Exclusion, 1.7 Å | No free center in the finite hull. | No resident wet component or public feature. | Genuine empty resident result; [conditional volume receiving](../volume_measurements.md) uses the smaller-probe finite supports. |
+
 The [public support and robustness continuation](../public_support_and_robustness.md)
 recovers resident/connector supports, dry banks, coast relations, depth context
 and source identities on this same input. Its availability table separates native
 proxies, physical certificates and broader public/interface work.
-
-**Physical source increment — 2026-11-10:** the bounded DFND record now
-computes separate hull patches and path-supported contacts. The independent
-five-row panel gives tetrahedron 4/0/0 at 1.2/1.4/1.7 Å, closed shell zero at
-0.2 Å and opened shell one at 1.4 Å. Native links, public classes and Mouth
-promotion are preserved. The [method chapter](../../../dfnd/exterior_and_boundaries.md)
-explains recovery and unresolved availability; wider path/geometry qualification
-remains [#76](https://github.com/uibcdf/topomt/issues/76). Earlier versioned
-reader outputs retain their source/date; they do not establish a present absence
-of this capability. The fixing source is `4fc2353`.
-
-Formal source receiving: {download}`protocol <artifacts/physical_refinement_v1/protocol.json>`
-and {download}`complete physical observations <artifacts/physical_refinement_v1/observations.json>`.
-These records are fixed-unit nm evidence with explicit schema, source context,
-clipped support and attribution; they are not a saved Topography interchange API.
-
 
 Can a probe fit inside a gap while being too large to pass through its faces?
 This unit studies four equal atomic balls at the vertices of a regular
@@ -30,11 +38,9 @@ The method section supplies a
 [complete input-to-Topography reading](../../../dfnd/worked_tetrahedron.md)
 of this same frozen system, with definitions and source-support inspection.
 
-**Current reading route — 2026-11-10:** open the independently executed
-[public Topography study](public_topography.ipynb) for the current status, actual
-objects and replay of the later reference certificate. It links the frozen
-system/native notebooks with their updated interpretation. Those earlier
-notebook bytes and reports remain historical evidence.
+The [earlier reader v1](public_topography.ipynb) is retained with its original
+source/date. The current v2 stage independently reruns public, physical,
+support and conditional-volume receiving without overwriting original evidence.
 
 Download the complete study bundle from the [synthetic collection](../index.md#download-and-run-the-current-reader-stage),
 including inputs, the parent shell, reference helpers and environment guidance.
@@ -46,14 +52,6 @@ correction is `b7b5a60`; it does not make the fast local stencil an exact integr
 or qualify every installed release. Earlier frozen notebook values keep their
 original date/source. Wider model/support qualification remains #76.
 
-## Current observations
-
-| Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
-| --- | --- | --- | --- |
-| Access, 1.2 Å | Four disconnected hull patches, all reached from the centroid. | One face cluster; `Percolating`, zero `Mouth` children. | Separate physical view resolves four; native/Mouth compatibility retained; [#151](https://github.com/uibcdf/topomt/issues/151). |
-| Enclosure, 1.4 Å | Free centroid, completely covered hull. | One `Void`, no exterior link or `Mouth`. | Enclosure qualified; general paths [#76](https://github.com/uibcdf/topomt/issues/76). |
-| Exclusion, 1.7 Å | No free center in the finite hull. | No resident wet component or public feature. | Genuine empty resident result; [conditional volume receiving](../volume_measurements.md) uses the smaller-probe finite supports. |
-
 | Stage | What it explains | Current status |
 | --- | --- | --- |
 | [System and independent expectations](system.ipynb) | Input geometry, visualization, analytic clearance references and three predictions fixed before inspecting DFND. | Executed in a fresh kernel; independent checks pass. |
@@ -63,7 +61,8 @@ original date/source. Wider model/support qualification remains #76.
 ```{toctree}
 :maxdepth: 1
 
-public_topography
+Current public study v2 <public_topography_v2>
+Reader v1 (historical) <public_topography>
 system
 dfnd
 comparisons
@@ -144,3 +143,23 @@ for GHECOM's atomic-ball model, without revising earlier observed outputs.
 
 See the [current comparator disposition](../comparison_disposition.md) for retained
 original results, unmatched observables and issue-owned eligibility work.
+
+## Physical implementation and retained receiving
+
+**Physical source increment — 2026-11-10:** the bounded DFND record now
+computes separate hull patches and path-supported contacts. The independent
+five-row panel gives tetrahedron 4/0/0 at 1.2/1.4/1.7 Å, closed shell zero at
+0.2 Å and opened shell one at 1.4 Å. Native links, public classes and Mouth
+promotion are preserved. The [method chapter](../../../dfnd/exterior_and_boundaries.md)
+explains recovery and unresolved availability; wider path/geometry qualification
+remains [#76](https://github.com/uibcdf/topomt/issues/76). Earlier versioned
+reader outputs retain their source/date; they do not establish a present absence
+of this capability. The fixing source is `4fc2353`.
+
+Formal source receiving: {download}`protocol <artifacts/physical_refinement_v1/protocol.json>`
+and {download}`complete physical observations <artifacts/physical_refinement_v1/observations.json>`.
+These records are fixed-unit nm evidence with explicit schema, source context,
+clipped support and attribution; they are not a saved Topography interchange API.
+
+The [finite three-case acceptance](../three_case_disposition.md) records what
+these controls establish and the explicit boundaries for the next study.
