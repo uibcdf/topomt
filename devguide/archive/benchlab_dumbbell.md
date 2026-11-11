@@ -102,3 +102,13 @@ qualify publication/download only. Native global physical availability stays
 #180/#184; older tube #181 and broader #76/#60/#16 remain open. The historical
 count-monotonicity diagnosis is needs_review under #188. This closes unit
 establishment, while the maintainer-requested six-case review remains #187.
+
+### Final originating-record reconciliation
+
+After unit closure, the current #129/#130/#154 entry points were reconciled
+with the exact hosted receipt and #187's unblocked review. Complete readback
+`devguide/evidence/dumbbell_findings_readback_v2.json` checks all nine registered
+cards/owners and the two current scoped availability limits. No scientific
+finding was closed by this establishment task. The original monotonicity
+inference remains excluded from present-day claims while #188 diagnoses the
+five domains; original numerical observations remain preserved.

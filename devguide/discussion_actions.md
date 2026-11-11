@@ -1,5 +1,16 @@
 # Discussion action routing audit
 
+## Dumbbell publication closeout — 2026-11-11
+
+Unit #186 is complete; originating #129/#130/#154 summaries now link the
+received hosted pages/download, archived report and exact source/receipts.
+The current entry point names #187 as the next joint review. Scientific owners
+#180/#181/#184/#188/#76 remain open, with #60/#16 retaining their broader scope.
+Complete nine-card/issue/current-hub readback is
+`evidence/dumbbell_findings_readback_v2.json`. This delivery does not promote
+pending targets or turn the five-domain interpretation into a current defect.
+Consult the issue board for later state; no original-engine comparison is promised.
+
 ## Dumbbell selection and receiving — 2026-11-11
 
 The maintainer selects #186 before the later joint six-case review #187.
