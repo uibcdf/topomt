@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (54)
+### Resolved (57)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
@@ -33,6 +33,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`dfnd_method_book_semantics.md`](dfnd_method_book_semantics.md) — [#173](https://github.com/uibcdf/topomt/issues/173) — Correct shared-face admission and complete the DFND method book's operator definitions. *(resolved, measured)*
 - [`dfnd_physical_boundary_refinement.md`](dfnd_physical_boundary_refinement.md) — [#151](https://github.com/uibcdf/topomt/issues/151) — Refine physical boundary patches beyond native whole-face exterior clusters. *(resolved, measured)*
 - [`dfnd_query_gateway.md`](dfnd_query_gateway.md) — [#179](https://github.com/uibcdf/topomt/issues/179) — Validate explicit DFNDQuery objects at the shared public dispatcher. *(resolved, measured)*
+- [`dfnd_radius_model_dispatch.md`](dfnd_radius_model_dispatch.md) — [#171](https://github.com/uibcdf/topomt/issues/171) — Register explicit DFND radius-model validation at the public dispatcher. *(resolved, reproduced)*
 - [`dfnd_scientific_documentation.md`](dfnd_scientific_documentation.md) — [#170](https://github.com/uibcdf/topomt/issues/170) — Present DFND theory and method in a dedicated public documentation section. *(resolved, measured)*
 - [`dfnd_volume_precision_claims.md`](dfnd_volume_precision_claims.md) — [#75](https://github.com/uibcdf/topomt/issues/75) — DFND solvent-volume precision and finite-sample uncertainty are overstated. *(resolved, measured)*
 - [`discussions_resource_organization.md`](discussions_resource_organization.md) — [#103](https://github.com/uibcdf/topomt/issues/103) — Organize resource Discussions with preserved history, facets and maintained guidance. *(resolved, inspected)*
@@ -60,7 +61,9 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`tetrahedron_original_comparisons.md`](tetrahedron_original_comparisons.md) — [#141](https://github.com/uibcdf/topomt/issues/141) — Add a model-audited original-method comparison stage for the regular tetrahedron. *(resolved, measured)*
 - [`tetrahedron_split_study.md`](tetrahedron_split_study.md) — [#134](https://github.com/uibcdf/topomt/issues/134) — Separate independent tetrahedron expectations and native DFND experiments into executable notebooks. *(resolved, inspected)*
 - [`topography_conceptual_contract.md`](topography_conceptual_contract.md) — [#59](https://github.com/uibcdf/topomt/issues/59) — Define the DFND-grounded public Topography conceptual contract and bounded adoption gates. *(resolved, inspected)*
+- [`topography_public_typing.md`](topography_public_typing.md) — [#77](https://github.com/uibcdf/topomt/issues/77) — Correct Topography's public result annotations and qualify bounded typing. *(resolved, reproduced)*
 - [`topography_shallow_copy_indexes.md`](topography_shallow_copy_indexes.md) — [#74](https://github.com/uibcdf/topomt/issues/74) — Shallow Topography copies share nested registry indexes and relation sets. *(resolved, measured)*
+- [`unit_initialization_loaded_pint.md`](unit_initialization_loaded_pint.md) — [#174](https://github.com/uibcdf/topomt/issues/174) — Preserve an existing Pint registry when initializing TopoMT's unit policy. *(resolved, reproduced)*
 
 ### Superseded (1)
 

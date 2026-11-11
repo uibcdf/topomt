@@ -152,7 +152,8 @@ debt. #16 owns scientific/platform qualification, #58 full-CI recovery, #78
 distribution and #81 accepted coverage evidence. Public support, release and
 publication claims require actual candidate gates.
 
-Keep tooling/type/docs debt visible under #56/#57/#64/#77/#86/#94/#96. Report
+Keep tooling/type/docs debt visible under #56/#57/#64/#189/#86/#94/#96. The
+bounded public-registry typing acceptance is delivered under #77. Report
 cross-component limitations to their owner, and follow
 [the reporting protocol](reporting_protocol.md) when filing or resolving a
 tracked record. A queue item, preliminary study or future phase becomes active

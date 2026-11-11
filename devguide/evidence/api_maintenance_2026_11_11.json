@@ -1,0 +1,181 @@
+{
+  "schema": "topomt.api-maintenance-evidence/1",
+  "date": "2026-11-11",
+  "issues": [
+    "uibcdf/topomt#171",
+    "uibcdf/topomt#174",
+    "uibcdf/topomt#77"
+  ],
+  "base_revision": "13b12f29ee24da69165e178c5a57f613048f5aec",
+  "verified_source_revision": "3d72725991c192103501b2f7c538e345fb04e09e",
+  "fix_revisions": {
+    "171": "335f7767bf8997cb7eaae97e7e1cc14aad7ae9f9",
+    "174": "a1f296d46c9e4ca03096a0a3fc02b1bdbcc9136c",
+    "77": "3d72725991c192103501b2f7c538e345fb04e09e"
+  },
+  "source_sha256": {
+    "topomt/topography/Topography.py": "bf75a55c77107ce331bf0e58acc7815ef77ce45256e73383a726fa0a0cb0961c",
+    "topomt/_pyunitwizard.py": "2a961d04879d7c5ad576f508dea2ff22e739103df2c44c8ef5a90fefb0cec482",
+    "topomt/_private/arg_digestion/argument/radii_model.py": "d0251e0370b4b86e12accdbabf50f0bf3f16bedea5953c19e48b1bd92198fe39",
+    "tests/typing/topography_queries.py": "5e908c55a2c40dccb05b7f529b2f2ac372b0b852ee275262342af9e5c2f21a5a",
+    "docs/content/dfnd/examples/tetrahedron.py": "4bb07c4ec45adeed68096b2439aa4333ee5aff6f70702c12353ff49204680f54",
+    "devtools/mypy_topography.ini": "c110c5894efbbf119a282ee3eb93ecdc4fcd7365eddffd466a37e150fd71671b"
+  },
+  "environment": {
+    "python": "3.14.10",
+    "name": "molsyssuite@uibcdf_3.14",
+    "package_versions": {
+      "topomt": "0.5.0+387.gcf4d475.dirty",
+      "molsysmt": "0.23.0+860.g9df62445e",
+      "pyunitwizard": "0.29.3",
+      "argdigest": "0.17.1+3.g0712641",
+      "smonitor": "0.23.0+2.gc401281",
+      "depdigest": "0.15.2+2.g032d345",
+      "ackredit": "0.12.1+10.g4beb850"
+    },
+    "runtime_origins": "Verified editable UIBCDF workspace source checkouts; not installed artifact qualification",
+    "mypy": "2.4.1 in topomt-dev, scientific interpreter explicitly selected",
+    "pip_check": "No broken requirements found",
+    "consulted_pyunitwizard_revision": "c81916e65ce61e905008e8931af3c0e527157251",
+    "consulted_provider_clean_and_unchanged": true
+  },
+  "test_first": {
+    "171": "11 initial adapter/diagnostic failures; context review additionally exposes six CASTp admission rejections and three missing dependency parameters. Final 52-test dispatch/input/book selection passes.",
+    "174": "Only the loaded-no-policy case fails before; all four real-process cases pass after.",
+    "77": "Six original errors reproduced; following imports and adding positive consumers yields 23 errors before correction. Twenty-four runtime query controls pass before and after."
+  },
+  "source_tests": {
+    "selectors": [
+      "tests/test_dfnd_dispatch_lengths.py",
+      "tests/test_unit_initialization.py",
+      "tests/test_topography_queries.py",
+      "tests/test_topography_registry.py",
+      "tests/test_topography_input_context.py",
+      "tests/test_topography_input_binding.py",
+      "tests/test_get_topography_api.py",
+      "tests/test_topography.py",
+      "tests/test_dfnd_documentation.py",
+      "tests/test_dfnd_input_policy.py",
+      "tests/test_benchlab_public_topography.py",
+      "tests/test_tube_study.py",
+      "tests/test_wide_tube_study.py",
+      "tests/test_dumbbell_study.py",
+      "tests/test_scientific_attribution.py",
+      "tests/test_reporting_protocol.py"
+    ],
+    "passed": 209,
+    "strict_xfailed": 6,
+    "existing_xfail_owners": [
+      "uibcdf/topomt#180",
+      "uibcdf/topomt#181",
+      "uibcdf/topomt#184"
+    ],
+    "exit": 0,
+    "wall_seconds": 57.528,
+    "peak_rss_kib": 523956,
+    "attribution": "Real Ackredit source guards included; scientific credit/completion logic unchanged"
+  },
+  "typing": {
+    "source_files": [
+      "topomt/topography/Topography.py",
+      "topomt/_pyunitwizard.py",
+      "topomt/_private/arg_digestion/argument/radii_model.py",
+      "tests/typing/topography_queries.py",
+      "docs/content/dfnd/examples/tetrahedron.py"
+    ],
+    "python_targets": [
+      "3.11",
+      "3.14"
+    ],
+    "result": "No issues found in five selected source/consumer files for both targets",
+    "dependency_policy": "Follow imports silently; missing-import exceptions specifically name MolSysMT and PyUnitWizard. Untyped bodies and imported implementations are not fully qualified."
+  },
+  "native_typing_handoff": {
+    "issue": "uibcdf/topomt#189",
+    "diagnostics": {
+      "topomt/features/BaseFeature.py": 1,
+      "topomt/dfnd/components.py": 51,
+      "topomt/delaunay_mesh.py": 3,
+      "topomt/dfnd/data.py": 1
+    },
+    "error_count": 56,
+    "source_sha256": {
+      "topomt/features/BaseFeature.py": "6c04d508008650a9b7e709f2a752c23618a9094d4a128f3dafae1e42bc703d0b",
+      "topomt/delaunay_mesh.py": "4efeee62de57b0b43e22964f47a921366401f7b919329f114c36813e5c1f99fc",
+      "topomt/dfnd/components.py": "183edc97991b9ff75fb85eac3a9d871d3c76d0f1f46f5231bb9cb2c87c2daa9a",
+      "topomt/dfnd/data.py": "253b0d5be5633915c282f51bf5846c3756e8f916d64101b94564b2f7deb562a1"
+    },
+    "unchanged_from_base": true,
+    "not_resolved_by_public_registry_fix": true
+  },
+  "documentation": {
+    "schema": "topomt.api-maintenance-documentation/1",
+    "issues": [
+      "uibcdf/topomt#171",
+      "uibcdf/topomt#174",
+      "uibcdf/topomt#77"
+    ],
+    "source_revision": "3d72725991c192103501b2f7c538e345fb04e09e",
+    "strict_sphinx_zero_warnings": true,
+    "topomt_import_origin": "Temporary clean git archive of the committed candidate",
+    "committed_version_sha256": "c63a97ae89338cff1d0a778054f8bfbcaea51ea974b281d062073f2eba5b2f1a",
+    "site_checks": {
+      "schema": "topomt.documentation-build/1",
+      "source_commit": "3d72725991c192103501b2f7c538e345fb04e09e",
+      "html_pages": 108,
+      "local_links": 10475,
+      "notebook_execution": "off"
+    },
+    "wall_seconds": 18.57,
+    "peak_rss_kib": 309944,
+    "resources": "One CPU/numerical thread, one Sphinx worker, 6 GiB address-space / 120 CPU second ceilings",
+    "scope": "Clean committed-source documentation and local navigation, not installed release or public deployment"
+  },
+  "documentation_python_warning": "Existing invalid escape in topomt/_private/atom_label.py:11 remains under #16. It is separate from Sphinx warning counts.",
+  "preservation": {
+    "benchlab_files": 385,
+    "download_zips": 6,
+    "changed_or_added_frozen_files": 0,
+    "human_version_file_sha256": "d76f39e77bb54929c2d4a02f55ec04d61534ec09df776d2fe89ef731626a88b5",
+    "human_version_file_unmodified_unstaged": true,
+    "scope": "Existing non-cache BenchLab files and ZIPs retain their inventory and SHA-256 bytes; native scientific kernels and definitions are unchanged."
+  },
+  "resources": {
+    "cpu_affinity": [
+      0
+    ],
+    "numerical_threads": 1,
+    "address_space_limit_gib": 6,
+    "cpu_limit_seconds": 120,
+    "sphinx_workers": 1,
+    "scheduler": "No Slurm allocation; prior bounded discovery was unavailable in this sandbox",
+    "preflight_mem_total_kib": 63455508,
+    "preflight_mem_available_kib": 57672696,
+    "during_test_mem_available_kib": 57627516,
+    "memory_pressure_avg10": 0.0,
+    "sampled_swap_in_out_kib_per_second": [
+      0,
+      0
+    ],
+    "reservation_claimed": false
+  },
+  "checks": {
+    "ruff_check": "passed, repository-wide",
+    "ruff_format": "passed, 612 files",
+    "explicit_example_ruff": "passed",
+    "report_indexes": "passed",
+    "reporting_protocol": "Included in successful source selection",
+    "comparative_findings": "offline consistency passed; no scientific finding or current limitation changed",
+    "public_registry_doctests": "Three Topography source doctests pass, including copy, get_features and info examples",
+    "reporting_closeout": "Two report protocol/index guards pass after final lifecycle edits"
+  },
+  "deferred": {
+    "full_scientific_and_platform_qualification": "uibcdf/topomt#16",
+    "remote_full_ci_recovery": "uibcdf/topomt#58",
+    "version_and_distribution_identity": "uibcdf/topomt#78",
+    "internal_native_typing": "uibcdf/topomt#189",
+    "castp_typing": "uibcdf/topomt#86",
+    "documentation_deployment": "No new deployment requested or executed in this API batch; existing BenchLab public evidence remains unchanged."
+  },
+  "publication_scope": "Authorized direct source commits with [skip ci], not release/package/installed-matrix or scientific-limitation resolution."
+}

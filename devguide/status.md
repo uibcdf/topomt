@@ -358,7 +358,9 @@ source or installed pilots. Qualification remains
 [#78](https://github.com/uibcdf/topomt/issues/78), and coverage
 [#81](https://github.com/uibcdf/topomt/issues/81). The clean-build version/metadata
 mismatch belongs to #78; existing Sphinx/reference diagnostics remain
-[#64](https://github.com/uibcdf/topomt/issues/64), and typing debt is #77/#86.
+[#64](https://github.com/uibcdf/topomt/issues/64). The bounded public-registry
+typing gate is delivered under #77; remaining native internal typing is
+[#189](https://github.com/uibcdf/topomt/issues/189), and CASTp typing remains #86.
 
 Further open work includes support-library adoption #56, temporary-resource
 lifecycle #96, Numba-to-Rust migration #93, optional OpenCASTp transition #90 and

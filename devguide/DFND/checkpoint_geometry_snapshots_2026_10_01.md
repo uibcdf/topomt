@@ -114,3 +114,8 @@ Scientific reference validation and numerical precision remain #76/#75.
 The new array utility passes its bounded mypy check. Checking the touched legacy
 mesh/DFND modules also reports eight pre-existing diagnostics, reproduced using
 the exact baseline files with `--shadow-file`; evidence is linked in #77.
+
+Later disposition, 2026-11-11: #77's public-registry acceptance is resolved.
+[#189](https://github.com/uibcdf/topomt/issues/189) retains the independent
+native mesh/component/data and BaseFeature typing scope, including these dated
+baselines. The eight-diagnostic observation above is historical evidence.

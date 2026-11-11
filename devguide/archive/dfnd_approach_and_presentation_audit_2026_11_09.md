@@ -538,6 +538,13 @@ relevant comments, so an earlier open comment does not supersede later closure.
 | #16, #18, #64 | Open | Qualification, deployment and pre-existing whole-site documentation diagnostics. |
 | #173 | Open, created by this audit | Bounded public-book correctness/completeness follow-up F1–F4/F6/F7; no runtime fix claimed. |
 
+**Later disposition, 2026-11-11:** the #171 dispatcher follow-up is resolved in
+the [archived radius-model report](dfnd_radius_model_dispatch.md). The maintained
+worked script explicitly selects and verifies `vdw`; valid/invalid and nm/pm
+guards pass without the missing-adapter warning. The table above preserves the
+2026-11-09 audit readback, not a current limitation list. The radius default and
+frozen study evidence were not changed by that correction.
+
 Recommended order: first correct F1 and mark the competing developer accounts
 through #173/#76/#75; next complete the operator/center reference F2/F3; then
 add the small navigation/example/notation improvements F4/F6/F7. Scientific

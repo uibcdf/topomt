@@ -122,7 +122,11 @@ eight existing warnings tracked by #64. The new module passes isolated mypy with
 missing external imports ignored. Unfiltered checking reports its two missing
 MolSysMT stub imports plus 17 diagnostics in touched legacy modules; all 17
 reproduce with baseline shadow files. Those existing typing/stub limitations
-remain under #77; this is not a clean repository-wide typing claim.
+were recorded under #77; this is not a clean repository-wide typing claim.
+Follow-up, 2026-11-11: the public registry now passes its bounded check and typed
+consumer examples. [#189](https://github.com/uibcdf/topomt/issues/189) retains
+the separate BaseFeature/native mesh/component/data typing scope and the dated
+baseline evidence; the public fix does not claim to clear those diagnostics.
 
 The additional feature/atom-label/provider/addon compatibility selection reports
 **249 passed, 3 failed, 6 skipped, 205.70 s**. All three failures are fpocket CLI

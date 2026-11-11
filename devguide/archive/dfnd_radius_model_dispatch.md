@@ -1,13 +1,13 @@
 ---
 summary: Register explicit DFND radius-model validation at the public dispatcher.
 issue: uibcdf/topomt#171
-status: open
+status: resolved
 opened: 2026-11-09
-closed:
+closed: 2026-11-11
 severity: low
 verification: reproduced
 area: [api, dfnd]
-guard:
+guard: tests/test_dfnd_dispatch_lengths.py::test_explicit_dfnd_radii_model_has_a_digester_and_preserves_geometry
 normative:
 blocked_by: []
 supersedes: []
@@ -56,3 +56,34 @@ changing the scientific core or dispatcher in the same patch.
 Test the explicit valid/invalid keyword first, register/reuse its adapter,
 preserve inner configuration validation, and verify argument-specific diagnostics
 without a spurious missing-digester warning. Run existing length/query guards.
+
+## Resolution — 2026-11-11
+
+Register `digest_radii_model` through the existing ArgDigest discovery route.
+For the selected DFND route, accept exactly `vdw`, `protor` and `provided`,
+matching the unchanged inner
+`DFNDMeshConfig` name contract; other values produce the argument-specific
+SMonitor `ArgumentError`, including unhashable containers. This does not extend
+the scientific input routes supported by any individual model.
+
+The regression selection first fails 11 cases: two valid explicit nm/pm calls
+emit the missing-adapter warning, three supported-name adapter imports are
+absent, and six invalid values escape the expected public diagnostic. After
+registration, **37 tests pass** across dispatch, input policy and the executable
+method-book example. They preserve received atom radii and the tetrahedron's
+1.4 Å public Void under nm/ps and pm/fs. The maintained example now explicitly
+selects `vdw` instead of avoiding the warning by omitting the keyword.
+
+Final cross-route review adds 15 controls and scopes validation through the
+digested method/engine arguments, including the dispatcher's engine override.
+The first context controls expose six rejected CASTp calls and three missing
+adapter dependency parameters. After correction, the **52-test** dispatch,
+input-policy and method-book selection passes. CASTp's distinct model names
+remain forwarded to their existing owner; these admission-only controls do not
+claim CASTp execution. Invalid DFND names are rejected through canonical,
+case-normalized and legacy/overriding engine selectors.
+
+Only the public admission/diagnostic gap is resolved. Defaults, numerical core,
+inner validation, frozen BenchLab notebooks and downloads retain their prior
+bytes. Shared-source verification and remaining qualification boundaries are
+recorded in [the batch receipt](../evidence/api_maintenance_2026_11_11.json).

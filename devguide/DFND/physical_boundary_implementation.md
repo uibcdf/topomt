@@ -114,7 +114,9 @@ is retained without inventing a DFND publication or execution of another engine.
 The core/config/graph and new test selector passes scoped mypy. The broader
 legacy registry/data invocation still has 55 diagnostics, reproduced exactly by
 shadowing the unchanged `7031181` files; this is not a clean legacy-module typing
-claim. Its separate typing follow-up is tracked with #77. Full CI, Python/OS
+claim. Its separate typing evidence was recorded with #77; following the bounded
+public-registry correction on 2026-11-11, the native internal follow-up is
+[#189](https://github.com/uibcdf/topomt/issues/189). Full CI, Python/OS
 matrix and installed/release qualification remain #16/#58.
 
 Execution used one CPU and numerical thread, 6 GiB address-space and 120 s CPU

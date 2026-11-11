@@ -33,7 +33,9 @@ with the added input-policy operations; diagnostic operations do not change.
 ## Why
 
 Runtime scientific parity and Ruff passes cannot be represented as a clean
-geometry typing gate. #77 separately owns the existing Topography annotations.
+geometry typing gate. #77 separately delivers the bounded public Topography
+annotations; #189 retains native internal typing. Neither clears this CASTp
+geometry scope.
 
 ## What was refuted
 

@@ -284,6 +284,12 @@ Public annotation/narrowing and checker dependency resolution are recorded in
 [#77](https://github.com/uibcdf/topomt/issues/77); this slice does not claim a
 clean typing gate.
 
+Later disposition, 2026-11-11: the bounded public-registry correction and positive
+consumer examples resolve #77's original acceptance. The
+[archived report](../archive/topography_public_typing.md) records that scope;
+[#189](https://github.com/uibcdf/topomt/issues/189) retains native internal
+typing. The six-diagnostic observation above remains this slice's history.
+
 Publication preparation: generated report indexes are current; full Ruff lint
 and format checks pass. The eight authored/updated guide pages render with
 warnings treated as errors, and their local Markdown targets exist. Public

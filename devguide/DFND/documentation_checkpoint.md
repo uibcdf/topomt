@@ -219,10 +219,13 @@ Topography, and reject modified frozen input. The example has no private/test
 imports, provider submission or new protein/geometry acquisition.
 
 The initial example also exposed the existing explicit `radii_model` dispatcher
-warning. It is independently tracked in [#171](https://github.com/uibcdf/topomt/issues/171)
-and [its report](../pending_bugs/dfnd_radius_model_dispatch.md); inner radius-model
-validation still works. The example uses and verifies the current default. No
-adapter workaround or scientific-default change is hidden in this delivery.
+warning, independently tracked in [#171](https://github.com/uibcdf/topomt/issues/171).
+That initial delivery used and verified the default while preserving inner
+radius-model validation. **Follow-up, 2026-11-11:** the dispatcher now has its
+own adapter, with valid/invalid and nm/pm geometry guards. The maintained example
+explicitly selects and verifies `radii_model='vdw'`; see the
+[resolved report](../archive/dfnd_radius_model_dispatch.md). The scientific
+default and frozen BenchLab captures are unchanged.
 
 ## Documentation and code checks
 

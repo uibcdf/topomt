@@ -81,6 +81,39 @@ For Python changes, run the repository's Ruff checks and applicable local type c
 Select type-check targets around the changed API and record their scope; a small mypy
 selection does not establish whole-repository typing.
 
+For the public registry, use the maintained
+[`devtools/mypy_topography.ini`](../devtools/mypy_topography.ini):
+
+~~~bash
+python -m mypy --config-file devtools/mypy_topography.ini
+~~~
+
+This checks `Topography.py` and the positive public-call examples under
+`tests/typing/`, targets Python 3.11 and follows imports silently for their type
+information. Missing-import exceptions name MolSysMT and PyUnitWizard; they are
+not a blanket local-error exemption. When the checker is in a separate environment,
+pass `--python-executable /path/to/scientific/python`. The
+[public typing guide](../docs/content/developer/type_annotations_guidelines.md)
+explains the set/group/count contracts. #77 owns this bounded registry delivery;
+[#189](https://github.com/uibcdf/topomt/issues/189) retains the native internal
+typing evidence formerly appended to that issue. #86 retains CASTp typing.
+
+Fresh-process unit initialization is exercised by
+[`test_unit_initialization.py`](../tests/test_unit_initialization.py): a fresh
+backend, previously loaded Pint without a policy, an application pm/fs policy
+and an existing suite policy. These are real independent imports, including
+registry/cache preservation and named fast tracks; they do not reset the
+running application's kernel to obtain a pass.
+
+The 2026-11-11 API-maintenance checkpoint for #171/#174/#77 records **209 passed
+and six existing strict xfails**, five selected files passing mypy at Python
+3.11/3.14 targets, and a clean-source strict Sphinx build with 108 pages and
+10,475 checked local links. See the
+[source-bound receipt](evidence/api_maintenance_2026_11_11.json) for exact inputs,
+preserved BenchLab evidence, resource limits and deferred #16/#58/#78 gates.
+This is a local source checkpoint, with remote CI skipped at the maintainer's
+request; it is not a full-suite, release or new website-deployment claim.
+
 ~~~bash
 ruff check .
 ruff format --check .

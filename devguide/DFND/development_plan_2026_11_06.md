@@ -343,7 +343,9 @@ Live owners remain [#60](https://github.com/uibcdf/topomt/issues/60),
 [#61–#63](../topography_implementation_route.md).
 [#97](https://github.com/uibcdf/topomt/issues/97) and
 [#100](https://github.com/uibcdf/topomt/issues/100) retain consumer receiving.
-[#77](https://github.com/uibcdf/topomt/issues/77) tracks bounded typing;
+[#77](https://github.com/uibcdf/topomt/issues/77) delivers bounded public-registry
+typing; [#189](https://github.com/uibcdf/topomt/issues/189) retains the separate
+native internal typing scope.
 [#16](https://github.com/uibcdf/topomt/issues/16) and
 [#58](https://github.com/uibcdf/topomt/issues/58) retain qualification/checkpoint
 evidence. Reconcile #15 against current SMonitor configuration before treating

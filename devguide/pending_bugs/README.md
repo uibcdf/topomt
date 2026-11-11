@@ -13,6 +13,6 @@ Read [the reporting protocol](../reporting_protocol.md) before filing.
 
 - [`castp3_residual_pocket_memberships.md`](castp3_residual_pocket_memberships.md) — [#88](https://github.com/uibcdf/topomt/issues/88) — Resolve residual lining, rim and component-count discrepancies in the corrected CASTp3 forty-system panel. *(open, measured)*
 - [`castp_geometry_existing_typing_errors.md`](castp_geometry_existing_typing_errors.md) — [#86](https://github.com/uibcdf/topomt/issues/86) — Correct the preexisting typing errors in the two CASTp geometry modules without changing scientific behavior. *(open, reproduced)*
-- [`dfnd_radius_model_dispatch.md`](dfnd_radius_model_dispatch.md) — [#171](https://github.com/uibcdf/topomt/issues/171) — Register explicit DFND radius-model validation at the public dispatcher. *(open, reproduced)*
+- [`native_dfnd_typing.md`](native_dfnd_typing.md) — [#189](https://github.com/uibcdf/topomt/issues/189) — Qualify native DFND component, data, base-feature and mesh annotations. *(open, reproduced)*
 
 <!-- /generated -->
