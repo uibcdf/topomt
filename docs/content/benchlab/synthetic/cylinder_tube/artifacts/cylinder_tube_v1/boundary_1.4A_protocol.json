@@ -1,0 +1,25 @@
+{
+  "schema": "topomt.benchlab.small-probe-boundary-protocol/1",
+  "date": "2026-11-10",
+  "issue": "uibcdf/topomt#178",
+  "case": "cylinder_tube",
+  "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+  "probe_angstroms": 1.4,
+  "length_unit": "angstrom",
+  "decision_margin_angstroms": 1e-06,
+  "reference_method": "Existing independent complete convex-nerve face two-skeleton and analytic all-atom free edge intervals; geometry-independent receiving, despite historical small-probe schema name.",
+  "qualification_gate": "A global count is accepted only if every face has zero/one independently justified free interior region and all seams/vertices are inventoried. Multiple regions remain unsupported by this bounded verifier.",
+  "known_before_reference": "Catalog includes earlier channel observations at rounded coordinates. No new native query has run. Two physical ends are a construction hypothesis to verify, not an acceptance constant.",
+  "witness_discovery": "Bounded convex primal/dual witnesses, then independent explicit margin verification.",
+  "budgets": {
+    "intersection_decisions": 40000,
+    "solver_calls": 4000,
+    "optimizer_iterations_per_call": 100,
+    "single_cpu": true,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  },
+  "independence": "No production DFND geometry/result/path is an input; only frozen ball coordinates/radii and independent convex-reference operators.",
+  "scope": "Complete hull boundary patch count at the stated probe; no aperture area or globally maximal bottleneck."
+}

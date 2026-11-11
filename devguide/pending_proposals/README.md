@@ -46,8 +46,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (1)
+### Active (2)
 
+- [`benchlab_straight_tube.md`](benchlab_straight_tube.md) — [#178](https://github.com/uibcdf/topomt/issues/178) — Establish the straight-tube BenchLab unit with independent passage and wall references. *(active, inspected)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
 
 ### Partial (5)
