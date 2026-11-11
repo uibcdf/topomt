@@ -1,5 +1,39 @@
 # TopoMT development status
 
+## Current BenchLab checkpoint — 2026-11-10
+
+The [finite three-case acceptance](../docs/content/benchlab/synthetic/three_case_disposition.md)
+records independent physical boundaries/paths, volume references and actual
+public wet/dry/support receiving on the same three frozen inputs. Physical
+refinement #151 and numerical precision #75 are source-resolved. The small
+closed-shell reference gives 13 origin-connected patches, both shells have
+0.005 Å origin-access/enclosure brackets, and 16 public/threshold queries retain
+source supports, coast/depth context and availability. Explicit component-side
+neighbors #176 preserve the legacy residence filter.
+
+The current [v2 readers and download](../docs/content/benchlab/synthetic/index.md#download-and-run-the-current-reader-stage)
+pass three independent kernels inside and outside the checkout. The original
+200 non-Markdown BenchLab files, including 12 notebooks, and the v1 ZIP remain
+byte-identical. Current documentation is received in successful hosted run
+`42935688025`, source `63e0897`: 92 pages, 8,380 local targets, zero Sphinx
+warnings. Publication and served download checks have their separate receipt.
+
+The selected questions admit the next independently specified synthetic study;
+no new geometry/protein study is started here. General paths/remaining panel
+#76, neutral support/public interchange #60, supplied participants/interfaces
+#61, comparator investigations #155/#156/#158/#159/#168 and installed/matrix
+#16 remain open with explicit scope dispositions. The hosted Action runtime
+notice is owned by #177; the previous shared action's source defects were
+handed to uibcdf/action-sphinx-docs-to-gh-pages#12. Source versions and tested
+profiles are not unqualified release claims.
+
+## Earlier increments and retained delivery history
+
+Earlier “latest”, pending and next-step statements below describe their dated
+producer scopes; the current ledger above supersedes conflicting scheduling
+or resolved-defect wording.
+
+
 Latest source workflow increment: [public result persistence](provider_persistence_checkpoint.md)
 adds `output.save()` and `load_provider_output()` with 323 passing source/contract
 cases, including all five saved readers under both unit policies. It preserves

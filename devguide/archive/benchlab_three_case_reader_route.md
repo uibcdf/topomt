@@ -47,7 +47,7 @@ retained history; the final delivery section gives its resolved disposition. Thi
 review's findings from that bounded implementation task. The scientific gates
 retain their existing owners; this proposal does not replace them.
 
-The maintainer-requested [temporary execution workplan](../DFND/benchlab_improvement_plan_TEMP.md)
+The maintainer-requested [execution workplan, now completed and archived](../DFND/history/benchlab_improvement_plan_2026_11_10.md)
 orders publication, reader improvements and the later scientific slices. This
 report retains #175's bounded reader-route acceptance; the workplan does not
 expand it into an umbrella scientific issue.

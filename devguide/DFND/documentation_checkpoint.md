@@ -25,7 +25,11 @@ brackets. Volume precision is corrected under #75 at `b7b5a60`, with boundary-
 safe conditional intervals, honest quadrature states and matched three-case
 receiving. See [the resolved report](../archive/dfnd_volume_precision_claims.md),
 [volume definitions](../../docs/content/dfnd/measurements.md), updated conditional
-properties and the worked tetrahedron. Wider #76/#60/#61 and installed #16/#58
+properties and the worked tetrahedron. The later public/support receiving at
+`80855e5` separates residence/component-side neighbor filters, corrects beach
+proxy/contact/bank interpretation and records unavailable public persistence/
+participant roles; its method example is executed. Current v2 reader/publication
+evidence is linked from the laboratory checkpoint. Wider #76/#60/#61 and installed #16/#58
 remain separate; historical pending statements below are not current findings.
 
 ## Audit-driven correction and reader pass — #173

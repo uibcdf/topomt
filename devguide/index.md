@@ -22,7 +22,7 @@ respective boundaries.
 
 | Subject | Starting point |
 | --- | --- |
-| Public system laboratory | [Topography BenchLab](../docs/content/benchlab/index.md), [synthetic cases](../docs/content/benchlab/synthetic/index.md), [planned molecular collection](../docs/content/benchlab/molecular/index.md), [three-case review / reader-route follow-up #175](archive/benchlab_three_case_reader_route.md) and [temporary improvement workplan](DFND/benchlab_improvement_plan_TEMP.md) |
+| Public system laboratory | [Topography BenchLab](../docs/content/benchlab/index.md), [synthetic cases](../docs/content/benchlab/synthetic/index.md), [planned molecular collection](../docs/content/benchlab/molecular/index.md), [three-case review / reader-route follow-up #175](archive/benchlab_three_case_reader_route.md) and [completed three-case execution](DFND/history/benchlab_improvement_plan_2026_11_10.md), [finite acceptance ledger](../docs/content/benchlab/synthetic/three_case_disposition.md) and [current laboratory checkpoint](DFND/notebook_laboratory_checkpoint.md) |
 | Discussions and scientific resources | [Maintenance instructions](discussions.md), [resource conversations](discussion_resources.md), [tools](external_tools_catalog.md) and [benchmarks](benchmark_catalog.md) |
 | Comparative advantages and limitations | [Finding lifecycle, corrections and manuscript review](comparative_findings.md), [metadata register](comparative_findings.toml) and [card template](templates/comparative_finding.md) |
 | Actions originating in Discussions | [Action-to-issue rule](discussions.md#every-future-action-has-an-owning-issue) and [dated complete-area routing audit](discussion_actions.md) |

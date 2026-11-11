@@ -18,8 +18,8 @@ aperture area, optimal global bottleneck, general continuous navigation and
 versioned public interchange are not required by the established conclusions
 and remain explicitly unavailable. Broader #76/#60/#61, original-comparator
 investigations and installed/platform #16 remain open under their own gates.
-The temporary coordination plan records publication/portable receiving before
-its dated retirement. The material below retains dated earlier checkpoints;
+The [completed coordination history](history/benchlab_improvement_plan_2026_11_10.md)
+retains exact hosted/portable receiving and its dated retirement. The material below retains dated earlier checkpoints;
 its old pending statements are historical where superseded by this section.
 
 **Source continuation — 2026-11-10:** the bounded physical implementation is
@@ -37,11 +37,10 @@ Wider native paths remain #76; #75 precision is source-resolved in the current d
 
 ## Active direction
 
-**Temporary execution script (2026-11-10):** follow the
-[BenchLab improvement workplan](benchlab_improvement_plan_TEMP.md) for the
-publication, reader-route and three-case scientific sequence, with separate
-owners and acceptance evidence. The plan coordinates pending work; it does not
-claim a deployment or scientific correction has already happened.
+**Completed execution (2026-11-10):** the
+[archived BenchLab workplan](history/benchlab_improvement_plan_2026_11_10.md)
+records the delivered publication/reader/scientific sequence and scoped open
+owners. Use the current finite ledger above for new work.
 
 **2026-11-08 refinement:** the maintainer requests deeper study of the existing
 three units before adding a tube. Follow [the three-case deepening plan](three_case_deepening.md).

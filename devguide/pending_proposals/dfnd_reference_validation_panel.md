@@ -15,6 +15,36 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Current three-case acceptance — 2026-11-10
+
+The [finite case ledger](../../docs/content/benchlab/synthetic/three_case_disposition.md)
+records the completed selected questions on the tetrahedron and two shells.
+Independent physical-patch/common-origin path references, tight shell access
+brackets, analytic/Cartesian/common-hull volume references and 16-query public
+support/dry/coast/depth receiving are delivered. #151/#75/#176 are source-resolved
+at their own gates. The 161-test selected panel, nine reader guards and later
+27-test bundle/lifecycle/navigation selection pass; current v2 notebooks pass
+three fresh kernels both inside the checkout and from the exact manifest-bound
+ZIP in /tmp. All earlier frozen non-Markdown BenchLab bytes remain unchanged.
+
+The selected margin-separated questions admit a next independently specified
+synthetic study when selected; none is started here. Near-threshold numerical
+unresolved states, exact aperture area, globally optimal bottleneck, arbitrary
+continuous-path validation and exact global cavity count remain explicitly
+scoped/unavailable and cannot support a later claim needing them. Wider
+passage/neck/path/reference admission retains this issue; public neutral support
+and supplied participants remain #60/#61. Protein characterization remains after
+the synthetic phase. Comparator investigations keep #155/#156/#158/#159/#168.
+
+Publication `63e0897`, hosted run42935688025, delivers 92 pages/8,380 local
+targets with zero Sphinx warnings, plus 33 independently served page/download
+checks against the original artifact. Exact receiving/rendering/history receipts
+are linked from the [completed coordination history](../DFND/history/benchlab_improvement_plan_2026_11_10.md).
+This is source-bound development evidence, not installed/platform qualification
+(#16), a held-out benchmark or an accuracy/performance superiority claim.
+The historical sections below retain their original source/dates; their old
+pending #75 and two-case pause statements are superseded by this disposition.
+
 ## What
 
 Classify the physical assumptions in the synthetic/pathological suite and freeze

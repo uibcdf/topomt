@@ -1,0 +1,32 @@
+{
+  "schema": "topomt.benchlab.coordination-completion/1",
+  "captured_at": "2026-11-11T01:18:00.635587+00:00",
+  "issue": "uibcdf/topomt#76",
+  "status": "completed_with_explicit_scoped_dispositions",
+  "archived_plan": "devguide/DFND/history/benchlab_improvement_plan_2026_11_10.md",
+  "completed_checklist_items": 33,
+  "pending_checklist_items": 0,
+  "published_source_revision": "63e0897309ec6c552852ed9c7cb74a14f411e921",
+  "publication_run": 42935688025,
+  "published_docs_and_runtime_unchanged_by_closeout": true,
+  "preserved_human_version_file_sha256": "d76f39e77bb54929c2d4a02f55ec04d61534ec09df776d2fe89ef731626a88b5",
+  "evidence_sha256": {
+    "three_case_public_guards_v1.json": "64a98e320f795087b19eb16f468411713f787e0c7a5d7f23102268618519b1dd",
+    "benchlab_history_preservation_v2.json": "0da01761bdfacbb53f1d7d021056e291a2bdb17e09f1a438a4f2f7d6cfae2a3d",
+    "benchlab_reader_receiving_v2.json": "98d7a87858593626d71db5d5f2634c65f3ff8fef9a0f0ec0944303226428bf96",
+    "benchlab_documentation_receiving_v2.json": "cdfc957a8611144e3c3f8d2d3b3d72c5d9860491eb4495483dae4c640b6bc077",
+    "benchlab_reader_visual_v2.json": "2d1992afbe91b271a09e11a7c59125b985e1589fbf72c1d64cce91e20254d022",
+    "benchlab_reader_publication_v2.json": "0a696e0d9bbf50b1227c26df5cb9686f38ad24d38ef33a540730aba851cd7865",
+    "castpfold_retained_job_recovery_v1.json": "df2c72a0cc3049d297f06630e144b6f1cfc4a91d2636dd24714ea423603d5a5a"
+  },
+  "closeout_validation": {
+    "local_links_checked": 221,
+    "missing_links": 0,
+    "pytest": "19 final reporting/comparative/bundle tests pass, 4.48 s pytest /6.09 s wall, peak195340KiB; earlier scoped scientific/ownership results retain their recorded sources and selectors",
+    "report_index": "current",
+    "comparative_findings": "consistent offline; no new state change beyond the earlier complete source-fix lifecycle reconciliation",
+    "lint": "Repository-wide Ruff check/format: pass,593 files formatted; three current-reader packaging/type files pass scoped mypy",
+    "deferred": "Full scientific/support matrix and installed release are not qualified by this delivery; owners #76/#16. Public neutral support/persistence #60, supplied interfaces/participants #61. Comparator investigations remain #155/#156/#158/#159/#168; workflow runtime maintenance #177."
+  },
+  "scope": "Three existing synthetic studies and their source-bound public reader; no new geometry/protein characterization, package release, unreviewed comparator support or superiority claim"
+}

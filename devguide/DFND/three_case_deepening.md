@@ -1,5 +1,14 @@
 # Deepen the first three BenchLab cases
 
+**Disposition — 2026-11-10:** the selected questions are delivered or explicitly
+scoped in the [finite case ledger](../../docs/content/benchlab/synthetic/three_case_disposition.md).
+Independent physical/volume evidence, actual public support/dry receiving and
+bounded robustness now admit a next independently specified synthetic study
+when selected. Exact/global quantities and broader #76/#60/#61 gates remain
+explicitly unavailable/open; no new geometry or protein study starts here.
+The plan below retains its original order and preimplementation history.
+
+
 Maintainer decision: 2026-11-08. Remain with `regular_tetrahedron`,
 `closed_shell` and `shell_with_opening` before adding the planned tube.
 Initial probe controls establish a starting point, not exhaustive case closure.

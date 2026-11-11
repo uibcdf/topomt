@@ -1,0 +1,31 @@
+{
+  "schema": "topomt.benchlab.reader-visual/2",
+  "source_revision": "63e0897309ec6c552852ed9c7cb74a14f411e921",
+  "strict_html": "92 pages/8380 local targets, zero warnings",
+  "browser": "Actual Chrome headless: opening v2 notebook, closed case mobile390px, volume figure/table desktop1400px",
+  "jupyter": "Authenticated local JupyterLab opened closed-shell v2 from a new managed /tmp extraction of the exact ZIP",
+  "checks": "Geometry and volume figures, current navigation, readable Markdown/units and horizontal table/code scrolling; notebook first cells visible in actual JupyterLab",
+  "cleanup": "Owned HTTP/Jupyter/browser processes stopped; temporary extraction, private token/server logs and browser profile removed",
+  "scope": "Source-bound reader rendering/portability, not a deployed or installed-matrix claim",
+  "public_math_browser": {
+    "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/volume_measurements.html",
+    "rendered_title": "Three volumes on the same finite support \u2013 TopoMT 0.5.0",
+    "rendered_math_containers": 2,
+    "math_rendering": [
+      {
+        "width": 192.65625,
+        "height": 33.609375,
+        "visibility": "visible",
+        "fonts": "loaded"
+      },
+      {
+        "width": 40.421875,
+        "height": 33.609375,
+        "visibility": "visible",
+        "fonts": "loaded"
+      }
+    ],
+    "actual_dom_and_screenshot_checked": true,
+    "initial_headless_screenshot": "The fixed virtual-time capture was blank; accepted capture waits for actual page/MathJax DOM under a 55-second browser/resource watchdog"
+  }
+}

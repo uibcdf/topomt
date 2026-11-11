@@ -1,5 +1,15 @@
 # DFND Implementation Status
 
+**Current source continuation — 2026-11-10:** physical patch/path observations
+#151, volume precision #75 and explicit native component-side neighbors #176
+are delivered within their bounded source scope. The [three-case ledger](../../docs/content/benchlab/synthetic/three_case_disposition.md)
+and [current laboratory checkpoint](notebook_laboratory_checkpoint.md) record
+independent references, actual public support/dry receiving, numerical and
+unavailable states, guards and next-study conditions. Broader #76/#60/#61 and
+installed/platform gates remain open. The dated audit/status material below
+retains history; old pending #75 statements are not current source limitations.
+
+
 Current evidence (2026-10-01): [the joint DFND/Topography audit](audit_topography_2026_10_01.md)
 supersedes conflicting implementation/status and scheduling wording below.
 Promotion includes percolating and provisional morphological classes; lineage

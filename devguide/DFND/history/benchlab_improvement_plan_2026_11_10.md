@@ -1,18 +1,19 @@
-# Temporary BenchLab improvement workplan
+# Completed BenchLab improvement workplan
 
-Created: **2026-11-10**. Status: **active coordination plan; execution
-in progress**. Scope: `regular_tetrahedron`, `closed_shell`, `shell_with_opening`
+Created: **2026-11-10**. Status: **completed and archived** (working date
+2026-11-10; final served receiving 2026-11-11 UTC). Scope: `regular_tetrahedron`, `closed_shell`, `shell_with_opening`
 and publication of the actual TopoMT documentation.
 Second-pass plan review: **2026-11-10**; execution gates, portable delivery,
 bounded physical algorithms and case-level acceptance clarified below.
 
-This is the requested temporary execution checklist. It coordinates existing
+This is the preserved, completed execution checklist. It is dated history;
+use the maintained laboratory checkpoint and finite case ledger for new work. It coordinates existing
 issues, not a new umbrella issue or a replacement scientific contract. The
-[completed review](../archive/benchlab_three_case_reader_route.md)
+[completed review](../../archive/benchlab_three_case_reader_route.md)
 contains the diagnosis and measurements. The
-[laboratory checkpoint](notebook_laboratory_checkpoint.md),
-[three-case direction](three_case_deepening.md) and
-[physical-boundary proposal](boundary_connectivity_contract.md) retain authority
+[laboratory checkpoint](../notebook_laboratory_checkpoint.md),
+[three-case direction](../three_case_deepening.md) and
+[physical-boundary proposal](../boundary_connectivity_contract.md) retain authority
 for scientific scope. The DFND method-book audit under #173 remains resolved.
 
 Update a checkbox only with its delivered commit and verification, or record an
@@ -27,12 +28,13 @@ task. Keep unresolved work visible on the issue board.
   remain expected failures. All 199 existing BenchLab files were preserved.
   Fresh HTML has 24 BenchLab pages and 2,273 valid local links/assets/anchors.
   No BenchLab warning; eleven pre-existing whole-site warnings remain #64.
-- Last observed public state, 2026-11-10: the home returns HTTP 200 with title
+- Historical starting observation, 2026-11-10: the home returns HTTP 200 with title
   `PocketMT 1.0.0`; the synthetic BenchLab index returns 404. This is #18,
   independently of the successful local source build.
 - The initial independent controls, later wall/boundary certificates and public
-  receiving are delivered. Physical refinement, general path validity, volume
-  precision and broader public support are separate pending work.
+  receiving are delivered. The initial plan kept physical refinement, paths, volumes and public support
+  separate. Their delivered/scoped outcomes appear below; this starting description
+  is not the current pending-work list.
 
 Work in this order: **publish the reviewed baseline → improve the reader route
 and republish → physical boundaries and paths → volumes → remaining public/dry
@@ -129,7 +131,7 @@ If hosted execution or domain access is unavailable, record the actual block
 under #18 and provide the tested local HTML/bundle for review. A local preview
 is useful access, not evidence that the public deployment is fixed.
 
-Execution receipt: [the archived #18 delivery](../archive/documentation_public_identity.md)
+Execution receipt: [the archived #18 delivery](../../archive/documentation_public_identity.md)
 retains successful run `42895119243`, source `b57d533`, independent served-manifest
 and eighteen page/download checks, and actual Chrome views. The hosted baseline
 has zero warnings. The old non-www alias's HTTP redirect was recorded; the
@@ -203,7 +205,7 @@ unimplemented physical observations as already available.
   package claim. This checks portability separately from execution inside the
   repository; original providers and network jobs remain outside Run All.
 
-Execution: reader sources were frozen at `601b295`; the new notebooks each passed four code cells in fresh kernels inside the checkout and from `/tmp`. The [exact bundle receiving receipt](../evidence/benchlab_reader_receiving_2026_11_10.json) records hashes, environment and resource use. Actual JupyterLab and strict Sphinx rendering were checked. READ-F passed exact-source hosted run `42906050055` at `0af23bc`; 22 independently served pages/downloads and the actual Chrome notebook view agree with the original artifact. #175 and #64 are archived for their own bounded delivery; scientific work remains open.
+Execution: reader sources were frozen at `601b295`; the new notebooks each passed four code cells in fresh kernels inside the checkout and from `/tmp`. The [exact bundle receiving receipt](../../evidence/benchlab_reader_receiving_2026_11_10.json) records hashes, environment and resource use. Actual JupyterLab and strict Sphinx rendering were checked. READ-F passed exact-source hosted run `42906050055` at `0af23bc`; 22 independently served pages/downloads and the actual Chrome notebook view agree with the original artifact. #175 and #64 are archived for their own bounded delivery; scientific work remains open.
 
 New narrative/evidence belongs in a new versioned directory, for example
 `artifacts/reader_route_v1/`. Its protocol identifies the earlier inputs,
@@ -260,13 +262,13 @@ not a retroactive fresh observation or a held-out benchmark.
   geometry variant needs its own frozen identity and justification before use.
 
 Execution: the bounded physical source at `4fc2353` supplies all five independently
-qualified rows and actual public contacts. The [resolution report](../archive/dfnd_physical_boundary_refinement.md)
+qualified rows and actual public contacts. The [resolution report](../../archive/dfnd_physical_boundary_refinement.md)
 records 207 passing expanded tests plus 41 post-refactor/capture guards, source
 receipts and numerical/resource limits. Compatibility promotion is explicitly
 retained; broader geometry/path gates stay #76. PHY-C is still open: the 0.05 Å
-shell's 13 patches now have an [independent complete region/path reference](small_probe_boundary_reference.md)
+shell's 13 patches now have an [independent complete region/path reference](../small_probe_boundary_reference.md)
 and actual-public receiving at `e1af4ef`. Both fixed shells now have independently
-verified 0.005 Å [origin-access/enclosure brackets](../../docs/content/benchlab/synthetic/origin_access_brackets.md),
+verified 0.005 Å [origin-access/enclosure brackets](../../../docs/content/benchlab/synthetic/origin_access_brackets.md),
 received through actual public DFND at `8bc1a7e`. Full paths and complete hull
 covers establish the endpoints; exact bottlenecks, aperture area and arbitrary
 curved/native paths remain explicitly unavailable under #76.
@@ -279,7 +281,7 @@ not complete the three-case study.
   volume, bare free volume, free probe-center volume and exterior-accessible
   volume separate. State domain, atomic exclusion, probe, units, required
   error and computational budget before generating a reference.
-  Delivered protocol: [v1](volume_validation_protocol_v1.json), frozen in
+  Delivered protocol: [v1](../volume_validation_protocol_v1.json), frozen in
   `8fd2906` before numerical changes or new reference generation. It fixes
   finite supports/observables, errors, seed coverage, quadrature convergence,
   independent sampling and conservative one-CPU resource ceilings.
@@ -297,28 +299,30 @@ not complete the three-case study.
   a run repeatable, not its interval calibrated: predeclare a bounded repeated-
   seed coverage experiment and its acceptance, separately from deterministic
   convergence and physical model/support error.
-- [ ] **VOL-D: extend to the two shells.** Use independent bounds/reference
+- [x] **VOL-D: extend to the two shells.** Use independent bounds/reference
   calculations and the same declared observable. Cap deletion changes both
   the atomic union and the hull; use a common comparison domain or explicitly
   account for the domain change. Qualify only the measured scope, then update
   the new reader stage and method/metric documentation.
 
-Execution: numerical source `b7b5a60` and [resolved #75 report](../archive/dfnd_volume_precision_claims.md)
+Execution: numerical source `b7b5a60` and [resolved #75 report](../../archive/dfnd_volume_precision_claims.md)
 retain the predeclared calibration, analytic quadrature errors and matched
 independent/public receiving on all eight domain rows. The common parent-hull
 cap comparison preserves its own domain and paired uncertainty. VOL-D's
-numerical/reference portion is delivered; the final executable reader refresh
-remains under #76 before that checklist item is complete.
+numerical/reference portion and current executable v2 reader are delivered.
+The exact v2 ZIP passes all three fresh kernels outside the checkout, including
+conditional volume receiving on the declared frozen domains. Wider #76 remains
+open independently of this completed volume slice.
 
 ## PUB and ROB — exploit the remaining information without inventing features
 
-- [ ] **PUB-A, #60/#76:** inspect resident versus connector supports, native
+- [x] **PUB-A, #60/#76:** inspect resident versus connector supports, native
   dry components, wet/dry boundaries, depths and refinement provenance. Make
   recovery, units, source mappings, input/query identity and unavailable
   operations inspectable. Preserve the distinction between lining atoms and
   actual geometric support, and between catalog dimensionality and geometric
   dimension. Existing registry/relation/filter checks are a starting point.
-- [ ] **PUB-B, #60/#61:** exercise relevant result ownership, reuse, copy/read
+- [x] **PUB-B, #60/#61:** exercise relevant result ownership, reuse, copy/read
   and relation behaviour through the selected public contracts. Keep native
   banks separate from molecular participants. These three controls do not
   supply every positive interface/convexity case; record honest native-only
@@ -328,7 +332,7 @@ remains under #76 before that checklist item is complete.
   explicit units: an old carrier area/link must not silently become a physical
   aperture/patch. If no supported saved route exists, record that availability
   under #60 rather than inventing or claiming it here.
-- [ ] **ROB-A, #76 with affected owners:** choose below/at/above-threshold
+- [x] **ROB-A, #76 with affected owners:** choose below/at/above-threshold
   controls with explicit physical tolerance and mesh epsilon, then extend
   missing observables under unit-policy changes, rigid motion and source
   permutation. Use explicit correspondence, not equality of mesh IDs. For
@@ -336,20 +340,49 @@ remains under #76 before that checklist item is complete.
   Reuse already valid guards; do not label all invariance work absent.
   Compare reuse of a compatible mesh across probes with fresh construction;
   radii/coordinates/source-selection changes must invalidate incompatible reuse.
-- [ ] **ROB-B:** require nested primitive availability only where the fixed
+- [x] **ROB-B:** require nested primitive availability only where the fixed
   model/policy justifies it. Connected-component or mouth counts need not be
   monotone with increasing probe. Retain numerical marginality rather than
   rounding it into a physical decision.
 
+Execution / scoped disposition: `80855e5` implements explicit native component-side
+neighbors without changing the residence selector, admits the existing `neutral`
+runtime shape in the public type declaration, and qualifies native/public
+supports. Formal receiving retained at `d75d983` covers 16 original/threshold
+queries; complete resident/connector/bank partitions, reciprocal coast faces and
+source triangle areas, graph/depth-region context and public refinement/relations
+pass. #176 is resolved with its archived report and seven durable guards.
+The combined 161-test selected panel, nine reader guards and subsequent 27-test
+bundle/lifecycle/navigation selector pass; scoped mypy and repository-wide Ruff
+(593 files formatted) pass. Resource/guard records retain timing and RSS.
+
+PUB-B reuses and re-executes valid input-mutation, snapshot, source-rebinding,
+shallow/deep copy and source-bound native pickle guards. No versioned public
+Topography interchange route is implemented; its absence and wider neutral
+support/participant/dry-promotion gates remain explicit under #60/#61, with
+owner comments. Beach/candidate/characteristic-radius/depth conventions were
+reconciled in native comments, metrics guidance and the DFND book.
+
+ROB-A/B use the predeclared protocol committed before execution: below/at/above
+both analytic tetrahedron capacities; selected rigid motion/source permutation,
+unit policies and factor-three similarity with every active length scaled;
+analytic-volume accuracy and conditional intervals; compatible mesh reuse versus
+fresh shell support. Marginal states and two near-threshold physical unresolved
+records remain explicit. The latter are conservative numerical availability,
+owned by #76, and do not block the margin-separated conclusions. Fixed-policy
+primitive nesting is guarded without requiring component/Mouth/sample-point
+estimate monotonicity. The [support/robustness page](../../../docs/content/benchlab/synthetic/public_support_and_robustness.md)
+records exact scope, observations and limits.
+
 ## CMP — compare original methods only on qualified questions
 
-- [ ] **CMP-A:** resolve or explicitly scope existing investigations: CAVER
+- [x] **CMP-A:** resolve or explicitly scope existing investigations: CAVER
   tiny-input applicability (#155), MOLE four-atom failure (#156), grid/operator
   eligibility (#158), volume-reference candidates (#159), retained CASTpFold
   job disposition (#168). Reuse original evidence first. Retrieve an existing
   remote job only by its receipt; never replace unavailable results with a
   fresh submission or an invented empty result.
-- [ ] **CMP-B:** when a new execution is selected, open/reuse a bounded owning
+- [x] **CMP-B:** when a new execution is selected, open/reuse a bounded owning
   issue and freeze its protocol. Audit parser/selection, effective radii,
   coordinate rounding, units, probe/operator, grid spacing/orientation,
   required origins and output domain. Start with the same question, not merely
@@ -357,11 +390,30 @@ remains under #76 before that checklist item is complete.
   inspect exact upstream revisions and local changes before using/updating a
   reference checkout. Original executions, native adaptations and evidence
   recovery remain distinct, with the appropriate Ackredit attribution.
-- [ ] **CMP-C:** expose comparable observations and incompatible definitions
+- [x] **CMP-C:** expose comparable observations and incompatible definitions
   side by side. Retain completed-empty/nonempty, unsupported, unavailable,
   failed and pending outcomes. Add comparisons progressively to the two shell
   units where eligible. Do not require every detector to support four dummy
   atoms or derive superiority from another program's crash.
+
+Execution / scoped disposition: [the comparison matrix](../../../docs/content/benchlab/synthetic/comparison_disposition.md)
+reuses original tetrahedron and closed-shell evidence and keeps opened-shell
+executions unselected. Retained CAVER/MOLE logs and exact clean maintained MOLE,
+upstream/fork pyKVFinder reference revisions were inspected without modifying or
+updating them. Findings #155/#156 remain `needs_review`; configuration/applicability
+and wider grid/volume-candidate reviews #158/#159 remain open, with explicit
+case/report/issue dispositions. They are not needed as truth for the completed
+independent native references. CMP-B's new local-execution gate is not activated:
+no additional detector or candidate run was selected, and no unreviewed licence,
+probe or backend route is advertised as supported.
+
+A bounded GET recovery uses only the two existing CASTpFold receipts; both
+return the same 713-byte HTTP-200 HTML instead of a result ZIP. Counts are
+unavailable, with digests/timeouts retained; no coordinate submission or new
+job. #168 stays open with a concrete recovery condition rather than repeated
+polling. All five owning issues received the current scoped disposition.
+No crash, mismatched operator, empty output or unavailable service is promoted
+to a demonstrated DFND advantage.
 
 ## Verification, publication and resource discipline
 
@@ -370,8 +422,8 @@ checks, figures/results, limits and the next owning issue. Runtime changes are
 test-first; prose-only maintenance uses documentation/governance checks.
 Executable changes also need applicable Ruff/format and scoped type checks;
 changed scientific routes need the real-provider attribution checks in
-[the attribution guide](../attribution.md). Review affected
-[DFND chapters](../../docs/content/dfnd/index.md) whenever operators, query
+[the attribution guide](../../attribution.md). Review affected
+[DFND chapters](../../../docs/content/dfnd/index.md) whenever operators, query
 policies, metrics or public interpretation change.
 
 | Change | Minimum relevant verification |
@@ -418,8 +470,9 @@ Normal incremental commits retain `[skip ci]` under the maintainer's standing
 instruction. Group remote validation/publication into explicit checkpoints;
 a skip marker is neither a deployment nor release/full-matrix evidence.
 Package installation, new remote coordinate submissions and broader scientific
-qualification keep their own scope and authorization. This workplan itself
-does not dispatch a workflow, start a server or execute those later stages.
+qualification keep their own scope and authorization. The execution of this plan includes the authorized bounded notebook, local
+preview and manual documentation-publication checkpoints recorded here; these
+do not qualify an installed package, a release or the full support matrix.
 
 ## Final disposition and retirement of this temporary file
 
@@ -441,24 +494,76 @@ unavailable. A necessary unresolved question still blocks that next claim.
 Finite per-case acceptance is not closure of all #76 or calibration of the
 entire shape catalog.
 
-- [ ] **CLOSE-A:** each case has a concise current conclusion, qualified probe
+- [x] **CLOSE-A:** each case has a concise current conclusion, qualified probe
   regimes, remaining limits, reproducible evidence and an owning issue for
   each concrete pending action. Presentation, native implementation and
   independent-reference status are distinguishable.
-- [ ] **CLOSE-B:** the public site serves the verified reader checkpoint.
+- [x] **CLOSE-B:** the public site serves the verified reader checkpoint.
   #18/#175 can close for their own delivered scope even while scientific work
   continues. Broader #75/#76/#60/#61 close only against their own acceptance,
   not because three examples pass. The current three-case boundary limitation
   changes state only through the comparative-finding workflow.
-- [ ] **CLOSE-C:** decide whether the necessary questions on these inputs have
+- [x] **CLOSE-C:** decide whether the necessary questions on these inputs have
   sufficient evidence to admit the next synthetic geometry. If a necessary
   question remains unresolved, retain that block or obtain an explicit scoped
   disposition; do not silently advance. These three cases cannot validate all
   DFND properties, every catalog entry, protein accuracy or a held-out benchmark.
-- [ ] **CLOSE-D:** transfer decisions, regression guards and final receipts to
+- [x] **CLOSE-D:** transfer decisions, regression guards and final receipts to
   their maintained contracts, issue-backed reports and case pages. Give every
   checklist item a disposition. Archive this coordination file as dated
   history and replace active checkpoint/index links with the delivered records;
   it must not remain an apparently current pending-work list after completion.
 
-**Next executable slices:** finish independent small-probe shell/path receiving under PHY-C/#76, and freeze the volume questions under #75/#76. The first bounded physical milestone is delivered; remaining blocks are still open.
+## Completion receipt and retirement
+
+CLOSE-A/C: [the finite three-case ledger](../../../docs/content/benchlab/synthetic/three_case_disposition.md)
+records reference → native → public → numerical/availability state → evidence →
+remaining owner. The selected questions admit a next independently specified
+synthetic study when selected. No new geometry or protein characterization is
+started. Exact aperture area, globally optimal bottleneck, exact global cavity count, arbitrary
+continuous navigation, neutral public persistence and participant/interface
+qualification remain unavailable/open; none is silently required or claimed by
+the current conclusions. #76/#60/#61 and installed/matrix #16 remain open.
+
+CLOSE-B: source `63e0897309ec6c552852ed9c7cb74a14f411e921` publishes through
+successful hosted run **42935688025**, attempt 1. Clean local and hosted strict
+Sphinx give **92 pages / 8,380 local targets / zero Sphinx warnings**. The public
+build manifest equals the original Pages artifact, and **33 served pages and
+downloads** match it. Binary resources use raw SHA-256; HTML matches after only
+verified Cloudflare email obfuscation/script normalization. The three v2 notebook
+sources are served as Sphinx `.ipynb.txt`; the verified ZIP provides proper
+`.ipynb` files. An initial redundant static ZIP transfer reached 20 seconds;
+the bounded repeat with a 60-second ZIP ceiling passed, without redeployment.
+
+The exact v2 ZIP contains 317 manifest-bound files and passes all three fresh
+kernels outside the checkout: 8.16 / 13.60 / 9.11 seconds; maximum kernel RSS
+about 363 MiB. Study/reference modules import from that extraction; TopoMT uses
+the explicitly declared source-development environment. It is not an installed
+release/platform claim. Chrome desktop/mobile/math and authenticated JupyterLab
+views were checked. Owned preview/kernel processes, private tokens and temporary
+extractions were cleaned. All **200 earlier non-Markdown BenchLab files**, including
+12 notebooks, and the v1 ZIP remain byte-identical.
+
+CLOSE-D: maintained contracts, current case pages, laboratory/implementation/status
+navigation, archived #151/#75/#176 reports and the issue board retain delivered
+and scoped work. The comparative-finding lifecycle is reconciled for source-only
+fixes with historical evidence retained. The shared old action's source defects
+are handed to `uibcdf/action-sphinx-docs-to-gh-pages#12`; the successful run's
+Node.js deprecation notice is a separate nonblocking owner #177, not a Sphinx
+warning. The unavailable gh-run-receptor extension uses its documented bounded
+native inspection fallback. This coordination file is archived and active links
+now point to the delivered ledger/checkpoint.
+
+Final durable receipts:
+
+- [Source/public and robustness guards](../../evidence/three_case_public_guards_v1.json).
+- [Frozen history preservation](../../evidence/benchlab_history_preservation_v2.json).
+- [Exact portable v2 receiving](../../evidence/benchlab_reader_receiving_v2.json).
+- [Clean committed-source documentation](../../evidence/benchlab_documentation_receiving_v2.json).
+- [Actual browser/Jupyter rendering](../../evidence/benchlab_reader_visual_v2.json).
+- [Exact-source hosted and served receiving](../../evidence/benchlab_reader_publication_v2.json).
+- [Retained server-job recovery](../../evidence/castpfold_retained_job_recovery_v1.json).
+
+All checklist items have a delivered or explicit scoped disposition. They do
+not close the broader gates or convert historical/source evidence into a general
+scientific superiority or released-package claim.

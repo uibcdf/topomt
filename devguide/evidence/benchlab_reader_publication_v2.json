@@ -1,0 +1,294 @@
+{
+  "schema": "topomt.benchlab.publication-receiving/2",
+  "captured_at": "2026-11-11T01:11:02.887129+00:00",
+  "issue": "uibcdf/topomt#76",
+  "source_revision": "63e0897309ec6c552852ed9c7cb74a14f411e921",
+  "run": {
+    "conclusion": "success",
+    "created_at": "2026-11-11T01:00:15Z",
+    "head_sha": "63e0897309ec6c552852ed9c7cb74a14f411e921",
+    "html_url": "https://github.com/uibcdf/topomt/actions/runs/42935688025",
+    "id": 42935688025,
+    "run_attempt": 1,
+    "status": "completed",
+    "updated_at": "2026-11-11T01:03:25Z"
+  },
+  "hosted_strict_build": {
+    "html_pages": 92,
+    "local_links": 8380,
+    "warnings": 0,
+    "notebook_execution": "off"
+  },
+  "served_manifest_matches_original_artifact": true,
+  "checks": [
+    {
+      "file": "index.html",
+      "http_status": 200,
+      "served_sha256": "fb5e029bfdf3883de5cf6b4757b32d487a9e8896978859fb87c76cf027f3585b",
+      "artifact_sha256": "b3ca8f87e66265d370f913022a20e41411de5db9afbc23165a408c9be324a934",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/index.html",
+      "http_status": 200,
+      "served_sha256": "63e0bbf05b9ce0c30c348f5ae48507770140792c25ebe89b1136a58438ee47de",
+      "artifact_sha256": "192e5a0697aab393cb0b73f371483e134c8b8807259da37f68403dfbf12dd20c",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/index.html",
+      "http_status": 200,
+      "served_sha256": "ae42afff542c5dc6bd243a2120626d1d5046b98edb6bcf51fbcea63468c74f17",
+      "artifact_sha256": "00bf706e863b80c998960da788d4ff3b3ab4656ef515fe2907deffc30744495c",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/molecular/index.html",
+      "http_status": 200,
+      "served_sha256": "0f12e72cf8c281d08841e5a3ca702d68bc7df5642cbc033908a190d9733adfb5",
+      "artifact_sha256": "ce1db8c07bca81affba4a5ccb11c6de10ae1e9de191ea710c1bc93f2346ce5b0",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/dfnd/index.html",
+      "http_status": 200,
+      "served_sha256": "8e24f16ec60f680313a6354a7fc707bd3dda7955987cc8629981268c40590da7",
+      "artifact_sha256": "61b89fb6b94fe6120b7cd1892e3b362c5da9c95f27d15dae869c894a0e50d00e",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/regular_tetrahedron/index.html",
+      "http_status": 200,
+      "served_sha256": "74cbf487351ce92a8f6ee79cedd6425b5eda4acc54e31c243ca772140727992f",
+      "artifact_sha256": "637e20f8c16f9c55a1213a835e4ce2639a0896de7556419fb6658c371103cc42",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/regular_tetrahedron/system.html",
+      "http_status": 200,
+      "served_sha256": "c0cace0ed23a331f6edb03d5c67033cdaa8fea978ef3c13ed714a50439427f17",
+      "artifact_sha256": "bf3fdd3992dad0b92796270799813bad97bcfdaf7bcf9f7580c9ba918daca4f3",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/regular_tetrahedron/dfnd.html",
+      "http_status": 200,
+      "served_sha256": "6ae52ef10978b2ae8a837736ee5897a241381355088bfb1cdf03f5b89c851d81",
+      "artifact_sha256": "7263ec3805336288861816a83ba5b3a737e755f1422f47e827bfacb07a675131",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/regular_tetrahedron/public_topography_v2.html",
+      "http_status": 200,
+      "served_sha256": "07aeb7461ef8e08481ce69da15b5d2f63c39fe18f097a4ce6805b13ae075d4e5",
+      "artifact_sha256": "6bb3624ee5aa2bb03cebf8994a6e962fed3d804b2fec04d437e4dc72159c88a6",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/index.html",
+      "http_status": 200,
+      "served_sha256": "074750cfae007286844d8df7f399fe7253de07257aed59310f0ea92dd8634cc4",
+      "artifact_sha256": "2a457737062e27bba0d3f1ef167e6d7a802038d275e48636a5b69e1c5f3a6933",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/system.html",
+      "http_status": 200,
+      "served_sha256": "17f84a8bddfacd537629107ccc406cf7ea47d9c1232ec737d6271bb0fd69d718",
+      "artifact_sha256": "7b793bf27ec433f875fe23edee196f29297ae520144622b384be03f408ecdc3e",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/dfnd.html",
+      "http_status": 200,
+      "served_sha256": "4c7f68da04025e15958ee494f1a52958b1ebfb881163bb6cca69240ea76df0e4",
+      "artifact_sha256": "0c0d9aa95de776e1aa8b3b82a3d203c501fa37f8a2ff874dd548e7f77a2283f8",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/public_topography_v2.html",
+      "http_status": 200,
+      "served_sha256": "cb5948f647b74a6589ef7df15d560dba191188827a264fea3dd15be8131b7652",
+      "artifact_sha256": "540c6d1e182b37776d4747edc06881f85bea8e92097aeec81c40791d8f07a0d2",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/shell_with_opening/index.html",
+      "http_status": 200,
+      "served_sha256": "d678f11eb94f679ba7bee95fc45715c490c55ef5de9b6ba93b6035fdca7b77f7",
+      "artifact_sha256": "82173eabd36570ace3d2718acdec5900742d08980e25291a2419c989f761077d",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/shell_with_opening/system.html",
+      "http_status": 200,
+      "served_sha256": "d47d483da8d93f25166605f1780c2ee6b5aae66db2eb84419be0e843c86aed64",
+      "artifact_sha256": "2e992245af705ba11b626137b0f04699599ac597914cce6300887c79dd3a53c8",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/shell_with_opening/dfnd.html",
+      "http_status": 200,
+      "served_sha256": "56aeafa2777bb203f3b4e9db060742bda63cfaf576fdb83003bfd951b5116aed",
+      "artifact_sha256": "0a0e36f7f232033ea6496c38d764700c17df026746375e0b457a9290379adf40",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/shell_with_opening/public_topography_v2.html",
+      "http_status": 200,
+      "served_sha256": "73b43818505d6f41f5cbeb65840d56498524fc58ea5dac4a3845c0e22f28638b",
+      "artifact_sha256": "8f589ef19c5f1ff0f6a389a456e857197726f49e9380dfd7268c89b19f7affff",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/volume_measurements.html",
+      "http_status": 200,
+      "served_sha256": "d4277de20c8474b873e8a388253696a834542d40ecefbb50b6aab38f10707cd1",
+      "artifact_sha256": "40c9df1ffebf29c81519ece00e9659257d393ead46e59c15c6a417aeec6f5d6c",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/public_support_and_robustness.html",
+      "http_status": 200,
+      "served_sha256": "2973996d6bf2f0f859f8e1d251cee5325c7e9136a84384d1c29d2664c4894ea0",
+      "artifact_sha256": "08a98fa95aa5bc5e42e3e988ada3bb7a02fd39597497fe66c65bf3d41dc73829",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/comparison_disposition.html",
+      "http_status": 200,
+      "served_sha256": "30bfeff03840d41aa2b508cc07ff2d977ab0cfc3593ed2ffc94297ece188553e",
+      "artifact_sha256": "6b420f9c7b1e0562a12a412a1c257f3aca20464c0f88d6b314aa5d14b6159242",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/three_case_disposition.html",
+      "http_status": 200,
+      "served_sha256": "ed1aa57596457eb2335412cfd9702f465eea0507079f9dd0c37d63c95cd5250c",
+      "artifact_sha256": "53db0fa37ed12a3d9614c7a0b2fc4f98007576f17e7051c2ddbfa3573fba2be4",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/origin_access_brackets.html",
+      "http_status": 200,
+      "served_sha256": "6dc1317b6d265bd467620f7fbb95221600cd71a806084d51722cf561013dc609",
+      "artifact_sha256": "7cebaa791fa72013f977e0bd9c31d1e7d8a6e37489e9f34f15fafd6fbb2ff1e4",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "content/benchlab/synthetic/closed_shell/small_probe_connectivity.html",
+      "http_status": 200,
+      "served_sha256": "8f4d120874a59af38c2e314740d2fe3895f1825f5997241cab9f94e65db96665",
+      "artifact_sha256": "42c6307285aa32fdfc3adb42477b6fe3c1a0274f1c30b2ee13f8e3146d8e7e30",
+      "byte_identical": false,
+      "comparison": "Only verified Cloudflare email obfuscation/script normalized"
+    },
+    {
+      "file": "_sources/content/benchlab/synthetic/closed_shell/public_topography_v2.ipynb.txt",
+      "http_status": 200,
+      "served_sha256": "2d7dcb3dfef10551e9b058cbf287feab1119c1c8ff881f9f8437e9c2d1afa2cc",
+      "artifact_sha256": "2d7dcb3dfef10551e9b058cbf287feab1119c1c8ff881f9f8437e9c2d1afa2cc",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_sources/content/benchlab/synthetic/regular_tetrahedron/public_topography_v2.ipynb.txt",
+      "http_status": 200,
+      "served_sha256": "2a46f2b22b66047982d2b75046ce24b6277ad5da3a4b4a3c5d682f68800328e2",
+      "artifact_sha256": "2a46f2b22b66047982d2b75046ce24b6277ad5da3a4b4a3c5d682f68800328e2",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_sources/content/benchlab/synthetic/shell_with_opening/public_topography_v2.ipynb.txt",
+      "http_status": 200,
+      "served_sha256": "f761ee78b19b889910bca89c490573c59c85e2faea0bf328cf0f73ccde7bc384",
+      "artifact_sha256": "f761ee78b19b889910bca89c490573c59c85e2faea0bf328cf0f73ccde7bc384",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_downloads/57b3da8b650b38038c4e21c5645e4f53/observations.json",
+      "http_status": 200,
+      "served_sha256": "d4064c2e955125c42edcccf1507b558dab79d44de9a5c9f66bba5c6e3450b725",
+      "artifact_sha256": "d4064c2e955125c42edcccf1507b558dab79d44de9a5c9f66bba5c6e3450b725",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_downloads/8987fa09883cb60f9df126d6b413b162/observations.json",
+      "http_status": 200,
+      "served_sha256": "c35ee0c0063ee6ac223211855a54aff2ba966d3d895d3bfec5a1cc8e88ea64de",
+      "artifact_sha256": "c35ee0c0063ee6ac223211855a54aff2ba966d3d895d3bfec5a1cc8e88ea64de",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_downloads/f57bbb102e40e776fde8e1053064bd97/observations.json",
+      "http_status": 200,
+      "served_sha256": "50dd3a45efc1662b2dd0c50c2b83f6a84e9aff9cfe71de06c660de2619e49a83",
+      "artifact_sha256": "50dd3a45efc1662b2dd0c50c2b83f6a84e9aff9cfe71de06c660de2619e49a83",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_downloads/3ecb9864c95ec44fdfef0a1488147fe5/input.pdb",
+      "http_status": 200,
+      "served_sha256": "cc4da10580190859cabe5c1839bd745d35c9606b532fe3e018defeb20721b9d5",
+      "artifact_sha256": "cc4da10580190859cabe5c1839bd745d35c9606b532fe3e018defeb20721b9d5",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_images/volume_definitions_v1.png",
+      "http_status": 200,
+      "served_sha256": "50598a128cf1d671b53c604ff2c74ad93e5aedc47fb36d201e31f6c036ed759b",
+      "artifact_sha256": "50598a128cf1d671b53c604ff2c74ad93e5aedc47fb36d201e31f6c036ed759b",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_downloads/6c647d7fa8572d7b887ff639fb63d8d5/three_cases_v2.zip",
+      "http_status": 200,
+      "served_sha256": "4edefaf16f31bcad45776408035ddeb06aec65bf79080efd52aff7331e768e8a",
+      "artifact_sha256": "4edefaf16f31bcad45776408035ddeb06aec65bf79080efd52aff7331e768e8a",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    },
+    {
+      "file": "_static/benchlab/three_cases_v2.zip",
+      "http_status": 200,
+      "served_sha256": "4edefaf16f31bcad45776408035ddeb06aec65bf79080efd52aff7331e768e8a",
+      "artifact_sha256": "4edefaf16f31bcad45776408035ddeb06aec65bf79080efd52aff7331e768e8a",
+      "byte_identical": true,
+      "comparison": "raw SHA-256"
+    }
+  ],
+  "download_bundle_sha256": "4edefaf16f31bcad45776408035ddeb06aec65bf79080efd52aff7331e768e8a",
+  "initial_attempt": "All earlier selected resources matched; a duplicate static ZIP transfer reached its 20-second timeout. Rechecked below with a 60-second ZIP transfer ceiling; no build/deployment rerun.",
+  "nonblocking_platform_notice": "Action Node.js20 declarations forced onto24; workflow follow-up #177, distinct from Sphinx warnings.",
+  "run_inspection": "gh-run-receptor unavailable (gh extension inventory empty); bounded native status/log/original-artifact fallback used.",
+  "scope": "Exact-source public documentation and current source-bound reader download; not installed-release or full scientific/support qualification"
+}
