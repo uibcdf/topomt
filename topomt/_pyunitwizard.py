@@ -34,7 +34,10 @@ if not pyunitwizard.configure.has_active_policy():
     # because writing to a user's filesystem is not something importing a units
     # library should do uninvited; the suite opts in on its users' behalf, and
     # a folder that cannot be written simply falls back to no cache.
-    pyunitwizard.configure.set_pint_registry_cache(True)
+    # Quantities may already have loaded Pint without declaring a policy.
+    # A late cache setting cannot affect that registry; preserve its setting.
+    if 'pint' not in pyunitwizard.configure.get_libraries_loaded():
+        pyunitwizard.configure.set_pint_registry_cache(True)
 
     pyunitwizard.configure.set_default_form('pint')
     pyunitwizard.configure.set_default_parser('pint')
