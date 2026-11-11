@@ -1,5 +1,16 @@
 # Discussion action routing audit
 
+## Wide/sparse companion — 2026-11-10
+
+Discussions #129/#130/#154 now link the independently referenced wide unit #183,
+the existing #180 budget / #181 local-all-atom review, and new #184 numerical
+boundary availability. Wider path/association work remains #76. Study metadata
+serialization is #185; its completion does not close scientific findings.
+The wide positive profile is not a correction of narrow unresolved outcomes.
+No original-provider comparison action is promised. The paired units retain
+separate source/probe scopes and original evidence; the register tracks their
+maintained cards rather than duplicating action state here.
+
 ## Straight-tube continuation — 2026-11-10
 
 New current summaries in DFND #130 and laboratory #129 link the selected unit

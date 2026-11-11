@@ -12,6 +12,13 @@ Both radius and sampling change between these companions; this comparison
 does not isolate either parameter or close broader #76/#16 qualification.
 This user-selected companion refines the earlier one-tube-only continuation.
 
+The wide unit now establishes independent axis/two-end/exclusion references.
+At 1.4 Å native global patches and Channel contacts resolve; other associations
+remain unknown. At 2.5 Å physical ordering is numerically unresolved (#184),
+and at 5 Å budget/local-public questions recur under #180/#181. The first metadata
+serialization attempt is retained; #185 corrects new capture metadata without
+rewriting earlier evidence. Both tubes remain scientific development inputs.
+
 ## Active straight-tube study — 2026-11-10
 
 After the finite three-case disposition, the maintainer selects the next tube

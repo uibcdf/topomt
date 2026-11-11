@@ -127,3 +127,58 @@ def test_wide_physical_boundary_matches_the_independent_reference(probe, expecte
     physical = topo.dfnd.raw['boundary_connectivity']
     assert physical['status'] == 'resolved'
     assert physical['n_patches'] == expected
+
+
+def test_wide_original_capture_preserves_bibliographic_metadata():
+    original = json.loads((ARTIFACTS / 'native_observations.json').read_text())
+    assert (
+        original['input_sha256']
+        == json.loads((ARTIFACTS / 'protocol.json').read_text())['input_sha256']
+    )
+    for row in original['probes']:
+        credit = row['topography_attribution']
+        assert credit['status'] == 'recorded'
+        assert isinstance(credit['producer']['version'], str)
+        numpy_record = next(
+            record['item']
+            for record in credit['references']
+            if record['item']['id'].startswith('topomt:reference:numpy:')
+        )
+        assert numpy_record['version'] == '2.5.4'
+        paper = next(
+            record['item']
+            for record in credit['references']
+            if record['item']['id'] == 'doi:10.1038/s41586-020-2649-2'
+        )
+        assert paper['pages'] == '357-362'
+
+
+def test_wide_reviewed_readers_bind_frozen_sources_and_execute_without_errors():
+    import hashlib
+
+    import nbformat
+
+    protocol = json.loads((ARTIFACTS / 'reader_protocol.json').read_text())
+    assert (
+        hashlib.sha256(
+            (ARTIFACTS / 'native_observations.json').read_bytes()
+        ).hexdigest()
+        == protocol['native_observations_sha256']
+    )
+    for name in ('system', 'dfnd'):
+        notebook = nbformat.read(CASE / f'{name}.ipynb', 4)
+        sources = [(cell.cell_type, cell.source) for cell in notebook.cells]
+        assert (
+            hashlib.sha256(json.dumps(sources, sort_keys=True).encode()).hexdigest()
+            == protocol['notebooks'][name]
+        )
+        cells = [cell for cell in notebook.cells if cell.cell_type == 'code']
+        assert all(cell.execution_count is not None for cell in cells)
+        assert not any(o.output_type == 'error' for cell in cells for o in cell.outputs)
+        html = [
+            o.get('data', {}).get('text/html', '')
+            for cell in cells
+            for o in cell.outputs
+        ]
+        assert sum('<table' in output for output in html) >= 3
+        assert all('hide-input' in cell.metadata['tags'] for cell in cells)

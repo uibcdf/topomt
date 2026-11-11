@@ -46,9 +46,8 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (6)
+### Active (5)
 
-- [`benchlab_metadata_encoding.md`](benchlab_metadata_encoding.md) — [#185](https://github.com/uibcdf/topomt/issues/185) — Preserve bibliographic strings in quantity-aware study evidence. *(active, measured)*
 - [`benchlab_wide_straight_tube.md`](benchlab_wide_straight_tube.md) — [#183](https://github.com/uibcdf/topomt/issues/183) — Establish the wide, sparsely sampled straight-tube BenchLab companion. *(active, inspected)*
 - [`dfnd_tube_all_atom_receiving.md`](dfnd_tube_all_atom_receiving.md) — [#181](https://github.com/uibcdf/topomt/issues/181) — Reconcile local tube candidates with an independently empty all-atom carrier. *(active, measured)*
 - [`dfnd_tube_boundary_budget.md`](dfnd_tube_boundary_budget.md) — [#180](https://github.com/uibcdf/topomt/issues/180) — Resolve bounded physical boundary receiving on the frozen straight tube. *(active, measured)*

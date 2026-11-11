@@ -1,0 +1,15 @@
+{
+  "schema": "topomt.benchlab.wide-tube-reader-protocol/1",
+  "issue": "uibcdf/topomt#183",
+  "case_id": "straight_tube_wide_sparse",
+  "topomt_source_revision": "3ad9515019e722c0ccf4ade7a3024de4166e217e",
+  "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+  "native_observations_sha256": "be17bcd92ac2fb3c7b9d69301cecf5e9c608932576a4560f70070bcca8ec2c55",
+  "notebooks": {
+    "system": "98dbc55732cc4106db4ff79b250bc21cbae712f9472503fee341d3b60632a070",
+    "dfnd": "b5a6047f362989c2cc8cb9848d2e587b4dda832ef326f2990ae1ee1a279e29d2"
+  },
+  "execution": "Separate fresh Python 3.14 kernels, no providers/servers or artifact writes; escaped HTML tables and expandable web code inputs",
+  "resources": "One CPU/numerical thread, 6 GiB address-space and 120 CPU second ceilings per runner",
+  "scope": "Source-bound system/native/public observations; scientific pending targets #180/#181/#184 and #76 remain open"
+}

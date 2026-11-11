@@ -68,9 +68,9 @@ accepted certificates.
 
 ## Current development boundary
 
-This is a useful diagnostic unit, **not a completed tube qualification**. Stay
-with its physical boundary and all-atom/public questions under #180/#181 before
-adding another geometry. The [finding register](https://github.com/uibcdf/topomt/discussions/154)
+This is a useful diagnostic unit, **not a completed tube qualification**. Its physical boundary and all-atom/public questions remain under #180/#181.
+The maintainer has selected the [wide/sparse companion](../straight_tube_wide_sparse/index.md)
+to compare matched probe sizes while preserving those unresolved targets. The [finding register](https://github.com/uibcdf/topomt/discussions/154)
 maintains version-scoped conclusions; the case's original observations remain
 historical evidence when later fixes arrive.
 
@@ -103,5 +103,7 @@ The current study and catalog identifier is `straight_tube_narrow_dense`.
 The captured input, certificates and original native results keep their
 original bytes and source identities; `identity.json` links the present name to
 the frozen model hash. The wider, sparsely sampled catalog input is
-`straight_tube_wide_sparse` (ring radius 6 Å, nominal spacing 3.5 Å); no new
-independent study of that input is claimed here.
+[`straight_tube_wide_sparse`](../straight_tube_wide_sparse/index.md) (ring radius 6 Å,
+nominal spacing 3.5 Å). Its separate unit now has independent references and
+actual native/public observations under #183; the original narrow evidence
+and download remain unchanged.

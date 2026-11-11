@@ -23,3 +23,11 @@ collision-free paths. Avoid treating a sparse array as an ideal continuous wall.
 
 For the active, separately parameterized narrower input, see
 [`straight_tube_narrow_dense`](straight_tube_narrow_dense.md).
+
+## BenchLab study
+
+See the [wide/sparse tube unit](https://uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_wide_sparse/index.html)
+for full-precision input, independent passage/wall/exclusion references and
+actual native/public observations. Its 1.4 Å physical Channel contacts resolve;
+2.5 Å boundary numerics (#184) and 5 Å budget/all-atom qualification (#180/#181)
+remain open. Catalog classification is not independent physical truth.

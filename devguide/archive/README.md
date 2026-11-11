@@ -5,11 +5,12 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (51)
+### Resolved (52)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
 - [`benchlab_documentation_section.md`](benchlab_documentation_section.md) — [#133](https://github.com/uibcdf/topomt/issues/133) — Give system studies a dedicated BenchLab section with synthetic and molecular collections. *(resolved, inspected)*
+- [`benchlab_metadata_encoding.md`](benchlab_metadata_encoding.md) — [#185](https://github.com/uibcdf/topomt/issues/185) — Preserve bibliographic strings in quantity-aware study evidence. *(resolved, measured)*
 - [`benchlab_public_topography.md`](benchlab_public_topography.md) — [#146](https://github.com/uibcdf/topomt/issues/146) — Audit the three frozen BenchLab cases through the public Topography registry. *(resolved, measured)*
 - [`benchlab_straight_tube.md`](benchlab_straight_tube.md) — [#178](https://github.com/uibcdf/topomt/issues/178) — Establish the straight-tube BenchLab unit with independent passage and wall references. *(resolved, measured)*
 - [`benchlab_three_case_reader_route.md`](benchlab_three_case_reader_route.md) — [#175](https://github.com/uibcdf/topomt/issues/175) — Bring the completed three-case BenchLab review into a coherent current web and notebook reading route. *(resolved, measured)*

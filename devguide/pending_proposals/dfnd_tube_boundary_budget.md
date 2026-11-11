@@ -60,3 +60,16 @@ qualify the independently excluded control; preserve explicit unknown results
 outside proved scope. Run prior physical controls, certificate/support and unit
 guards, measure resources and review the matching DFND book chapter. Reconcile
 the comparative card, hub, register, current case and report before closure.
+
+## Additional wide-tube profile — 2026-11-10
+
+The maintainer-selected companion #183 preserves this issue's original narrow
+scope and adds `straight_tube_wide_sparse` at 5 Å. Actual original source
+3ad9515019e722c0ccf4ade7a3024de4166e217e reports `face 10: arrangement work budget
+exhausted`, with unknown physical count. The independent whole-hull distance
+bound is 6.594243009499208 Å, below expanded radius 6.88 Å; its finite carrier
+is completely covered. The corresponding target in `tests/test_wide_tube_study.py`
+first fails and remains strict xfail under #180. The same source resolves two
+wide patches at 1.4 Å. Its 2.5 Å reason is numerical, separately owned by #184;
+do not describe that outcome as a budget failure. Original evidence lives in
+`straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/`.

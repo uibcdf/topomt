@@ -67,3 +67,18 @@ control plus adopted earlier cases, units/maps/reuse and source provenance.
 Review matching DFND chapters, retain the original observations and reconcile
 the card/hub/lifecycle/case/report before closing. Pending diagnosis is not a
 present-tense paper claim.
+
+## Additional wide-tube profile — 2026-11-10
+
+Companion #183 adds `straight_tube_wide_sparse` at 5 Å, source
+3ad9515019e722c0ccf4ade7a3024de4166e217e: one wet component and a public
+OpenConcavity/Mouth survive the independently covered finite hull. The cover
+margin is 0.28575699050079173 Å (6.594243009499208 Å bound versus expanded
+radius 6.88 Å). This remains needs_review, not a diagnosed local solver error.
+The original narrow target stays pending; the new observation extends support
+and public-qualification diagnosis without silently adopting empty local banks
+as an oracle. At positive probes extra local candidates also need diagnosis:
+1.4 Å has two global patches and resolved Channel contacts but ten unknown
+associations for other candidates; do not infer side-wall holes or all physical
+3D components from them. Wider paths remain #76; budget #180 and numerical
+boundary availability #184 are separate. Keep both original evidence profiles.
