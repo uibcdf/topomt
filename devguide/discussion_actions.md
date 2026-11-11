@@ -1,5 +1,16 @@
 # Discussion action routing audit
 
+## Straight-tube continuation — 2026-11-10
+
+New current summaries in DFND #130 and laboratory #129 link the selected unit
+#178 and its open physical budget #180 / local-all-atom qualification #181.
+General certified paths (including the colliding selected 1.4 Å candidate)
+remain #76. Hub #154 now links the current source-scoped physical budget card
+and the separate needs_review all-atom interpretation card, each with its open
+owner and local report. Earlier #151/#75 resolutions retain their frozen scopes.
+No original-provider execution/comparison action is promised in this stage.
+The rows below retain the earlier dated routing inventory.
+
 Audit date: 2026-11-08, under [#153](https://github.com/uibcdf/topomt/issues/153).
 The audit read all **42** Discussion opening posts and **five** current comments;
 all reply counts were zero. The complete then-current issue inventory contained

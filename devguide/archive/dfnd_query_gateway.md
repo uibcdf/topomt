@@ -1,13 +1,13 @@
 ---
 summary: Validate explicit DFNDQuery objects at the shared public dispatcher.
 issue: uibcdf/topomt#179
-status: active
+status: resolved
 opened: 2026-11-10
-closed:
+closed: 2026-11-10
 severity: low
 verification: measured
 area: [dfnd, api]
-guard:
+guard: tests/test_dfnd_query_gateway.py::test_valid_explicit_query_is_digested_and_preserves_the_canonical_result
 normative:
 blocked_by: []
 supersedes: []
@@ -55,3 +55,18 @@ query/result identities. Invalid types raise argument-specific diagnostics befor
 native execution. Preserve existing conflicting-legacy-value checks. Name and
 run durable guards, applicable lint/scoped typing and documentation/report checks,
 then archive and close this bounded defect with source scope.
+
+## Resolution — 2026-11-10
+
+Corrected in source b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4. The lazy public
+adapter retains a valid DFNDQuery object or None and rejects invalid types with
+the owning ArgumentError before native execution. Conflicting legacy values
+retain their existing inner diagnostics; exact normalized query identity is
+unchanged. The method book now shows the supported advanced-query call.
+
+Six gateway guards and the existing query/length/documentation controls pass.
+The combined tube/reference/physical/public/query/book/report/finding selection
+passes 106 tests; three strict pending tube targets belong to #180/#181 and are
+unrelated to this adapter. Full tests, installed delivery, interpreter/platform
+qualification and release evidence retain #16; no such qualification is inferred
+from this focused run or skip-ci commit. Ruff and scoped typing pass.

@@ -81,7 +81,10 @@ def test_unresolved_physical_receiving_preserves_support_and_unknown_counts():
         assert physical['n_patches'] is None
         assert physical['reason']
     assert observed['node_inventory']['total'] == 445
-    assert sum(observed['node_inventory'][key] for key in ('wet_nodes', 'dry_nodes')) == 445
+    assert (
+        sum(observed['node_inventory'][key] for key in ('wet_nodes', 'dry_nodes'))
+        == 445
+    )
     assert observed['public_features']
     candidates = study.inspect_centerlines(topo)
     assert candidates

@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (48)
+### Resolved (49)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
@@ -28,6 +28,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`dfnd_documentation_review.md`](dfnd_documentation_review.md) — [#172](https://github.com/uibcdf/topomt/issues/172) — Strengthen the DFND method book after a reader and source audit. *(resolved, measured)*
 - [`dfnd_method_book_semantics.md`](dfnd_method_book_semantics.md) — [#173](https://github.com/uibcdf/topomt/issues/173) — Correct shared-face admission and complete the DFND method book's operator definitions. *(resolved, measured)*
 - [`dfnd_physical_boundary_refinement.md`](dfnd_physical_boundary_refinement.md) — [#151](https://github.com/uibcdf/topomt/issues/151) — Refine physical boundary patches beyond native whole-face exterior clusters. *(resolved, measured)*
+- [`dfnd_query_gateway.md`](dfnd_query_gateway.md) — [#179](https://github.com/uibcdf/topomt/issues/179) — Validate explicit DFNDQuery objects at the shared public dispatcher. *(resolved, measured)*
 - [`dfnd_scientific_documentation.md`](dfnd_scientific_documentation.md) — [#170](https://github.com/uibcdf/topomt/issues/170) — Present DFND theory and method in a dedicated public documentation section. *(resolved, measured)*
 - [`dfnd_volume_precision_claims.md`](dfnd_volume_precision_claims.md) — [#75](https://github.com/uibcdf/topomt/issues/75) — DFND solvent-volume precision and finite-sample uncertainty are overstated. *(resolved, measured)*
 - [`discussions_resource_organization.md`](discussions_resource_organization.md) — [#103](https://github.com/uibcdf/topomt/issues/103) — Organize resource Discussions with preserved history, facets and maintained guidance. *(resolved, inspected)*

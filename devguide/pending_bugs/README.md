@@ -5,10 +5,6 @@ Read [the reporting protocol](../reporting_protocol.md) before filing.
 
 <!-- generated: devguide_index -->
 
-### Active (1)
-
-- [`dfnd_query_gateway.md`](dfnd_query_gateway.md) — [#179](https://github.com/uibcdf/topomt/issues/179) — Validate explicit DFNDQuery objects at the shared public dispatcher. *(active, measured)*
-
 ### Partial (1)
 
 - [`full_ci_routes_and_skipped_push_recovery.md`](full_ci_routes_and_skipped_push_recovery.md) — [#58](https://github.com/uibcdf/topomt/issues/58) — Complete contributor full-CI routes and skipped-push recovery. *(partial, measured)*
