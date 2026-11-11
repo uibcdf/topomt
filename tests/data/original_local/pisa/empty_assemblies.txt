@@ -1,0 +1,32 @@
+<pisa_results>
+  <name>canonical</name>
+  <status>Ok</status>
+  <status_description>
+    Results are not available due to the following reason: Assemblies
+    not calculated
+  </status_description>
+  <status_note>
+    If you think that this message is issued in error, please report it
+    to author Eugene Krissinel at eugene.krissinel@stfc.ac.uk,
+    providing all details of your input.
+  </status_note>
+  <asu_complex>
+    <assembly>
+      <id>1</id>
+      <size>2</size>
+      <mmsize>2</mmsize>
+      <freesize>2</freesize>
+      <diss_energy>0</diss_energy>
+      <asa>1036.4092368</asa>
+      <bsa>0</bsa>
+      <entropy>0</entropy>
+      <diss_area>0</diss_area>
+      <int_energy>0</int_energy>
+      <n_uc>0</n_uc>
+      <n_diss>1</n_diss>
+      <symNumber>1</symNumber>
+      <formula>A(2)</formula>
+      <composition>AB</composition>
+    </assembly>
+  </asu_complex>
+</pisa_results>

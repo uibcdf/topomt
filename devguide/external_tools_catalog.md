@@ -30,6 +30,9 @@ Datasets and validation references have their own
 | [P2Rank #108](https://github.com/uibcdf/topomt/discussions/108) | [Overview](p2rank/overview.md) |
 | [MOLE #105](https://github.com/uibcdf/topomt/discussions/105) | [Overview](mole/overview.md) |
 | [MoloVol #191](https://github.com/uibcdf/topomt/discussions/191) | [Overview](molovol/overview.md) |
+| [HOLE #111](https://github.com/uibcdf/topomt/discussions/111) | [Overview](hole/overview.md) |
+| [POVME #119](https://github.com/uibcdf/topomt/discussions/119) | [Overview](povme/overview.md) |
+| [PISA #106](https://github.com/uibcdf/topomt/discussions/106) | [Overview](pisa/overview.md) |
 
 ## Ownership and current scope
 
@@ -52,8 +55,9 @@ change the completed four-provider batch's scope.
 
 Maintainer selection on 2026-11-11 adds HOLE [#192](https://github.com/uibcdf/topomt/issues/192),
 modern-source POVME [#193](https://github.com/uibcdf/topomt/issues/193), and PISA
-[#194](https://github.com/uibcdf/topomt/issues/194) as active work, not delivered
-providers. See [exact consultation sources](engine_references.md). PISA's
+[#194](https://github.com/uibcdf/topomt/issues/194). Their bounded source
+controls and adapter/reader contracts are in [the specialist checkpoint](specialist_provider_checkpoint.md);
+installed/public qualification remains separate. See [exact consultation sources](engine_references.md). PISA's
 [availability/licence review](pisa/license_review.md) establishes documented
 local research use and free academic acquisition; precise standalone
 redistribution terms remain unresolved. Preserve this academic scope rather
@@ -106,6 +110,9 @@ verification target for the new executable boundary.
 | [P2Rank](p2rank/overview.md) | CLI/files; `P2RankOutput`, predicted sites | Original 2.5.1 + Java 21 source pilot: 5 sites on one retained input | No native reproduction |
 | [MOLE](mole/overview.md) | CLI/files; `MoleOutput`, channel profiles and cavity/void decomposition | Original 2.5.26.10.26 + .NET 10; source-bound 1AKD, official 1TQN pore and empty controls | No native reproduction; [DFND antecedent review](DFND/mole_comparison_2026_11_07.md) remains separate |
 | [MoloVol](molovol/overview.md) | CLI/files; `MoloVolOutput`, original internal regions and distinct volume/surface measures | Original 1.2.0 at pinned `76693ae9`, four synthetic direct/API controls and recoverable reports | No native reproduction or DFND equivalence; #190, resource discussion #191 |
+| [HOLE](hole/overview.md) | CLI/files; `HoleOutput`, steered spherical pore profiles | Original 2.3.1; custom/recognized-AMBER source controls, original failure and engine-free recovery | No native reproduction, swept-volume or transport claim; #192, broader #161 |
+| [POVME](povme/overview.md) | Library/files; `PovmeOutput`, supplied-region grid volume | Separate modern-source compatibility fork 2.2.2+uibcdf.1; positive/zero/unavailable-support controls and explicit original error rejection | No automatic cavity detection or native reproduction; empty-initial-region needs_review #195 / UIBCDF/POVME#1, broader #159 |
+| [PISA](pisa/overview.md) | CLI/files; `PisaOutput`, supplied-assembly interfaces/contact atoms and ASU summary | Original 2.1.2; contacting/separated synthetic chains, original failure and engine-free recovery; external acquisition/resources | No native admission, assembly prediction or biological relevance claim; #194, broader/licence #165 |
 
 The [new-adapter checkpoint](original_provider_expansion_checkpoint.md) records
 exact inputs, archives, limits and engine-free recovery. These source pilots do

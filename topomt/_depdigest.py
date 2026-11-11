@@ -17,6 +17,28 @@ LIBRARIES: dict[str, dict[str, str | None]] = {
     'alphaspace2': {'type': 'soft', 'pypi': 'alphaspace2', 'conda': None},
     'pycasta': {'type': 'soft', 'pypi': 'pycasta', 'conda': None},
     'pyKVFinder': {'type': 'soft', 'pypi': 'pyKVFinder', 'conda': None},
+    'povme': {'type': 'soft', 'pypi': None, 'conda': None},
+    'hole': {
+        'type': 'soft',
+        'kind': 'executable',
+        'executable': 'hole',
+        'pypi': None,
+        'conda': None,
+    },
+    'pisa': {
+        'type': 'soft',
+        'kind': 'executable',
+        'executable': 'pisa',
+        'pypi': None,
+        'conda': None,
+    },
+    'povme_python': {
+        'type': 'soft',
+        'kind': 'executable',
+        'executable': 'python',
+        'pypi': None,
+        'conda': None,
+    },
     'molovol': {
         'type': 'soft',
         'kind': 'executable',

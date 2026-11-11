@@ -1,0 +1,11 @@
+{
+  "schema": "topomt.specialist-fixtures/1",
+  "provider": "povme",
+  "scope": "Original execution captures; not independent scientific truth or installed/platform qualification",
+  "files": {
+    "povme-empty.zip": "be335ec5cb8efb515b81e03d2988f4eeb01674e0213b3b02034ad79abb6a47c2",
+    "povme-failed.zip": "d3f76fdfa683f40688e5d68981c3a413d6128fb8f6d115a33ca41ec6ddf7a106",
+    "povme-outside.zip": "1c9ebbc8165a8e5adbd28e9a218ecc427a948d34b0f5a501b0203fcff3e2590f",
+    "povme-positive.zip": "415e6d5ac129d37892c7ecc941a125514e5ad50d3ad169dc6fe38505e2216efb"
+  }
+}

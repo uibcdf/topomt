@@ -102,9 +102,9 @@ class ProviderRecord:
     source_id : str
         Original source identifier; not a Topography registry identifier.
     record_kind : str
-        Provider-reported ``pocket``, ``cavity``, ``channel``, ``site`` or
-        ``mouth_aggregate``. These are original-result kinds, not native DFND
-        classifications or assertions of biological function.
+        Provider-reported ``pocket``, ``cavity``, ``channel``, ``site``,
+        ``mouth_aggregate``, ``region`` or ``interface``. These are original-result
+        kinds, not native DFND classifications or assertions of biological function.
     run : ProviderRun
         Recoverable original inputs, outputs and execution metadata.
     atom_indices : tuple of int, optional
@@ -146,7 +146,15 @@ class ProviderRecord:
             not self.source_id
             or not self.atom_role
             or self.record_kind
-            not in {'pocket', 'cavity', 'channel', 'site', 'mouth_aggregate'}
+            not in {
+                'pocket',
+                'cavity',
+                'channel',
+                'site',
+                'mouth_aggregate',
+                'region',
+                'interface',
+            }
         ):
             raise ValueError(
                 'Provider record requires source identity and a supported kind'
@@ -271,6 +279,16 @@ class ProviderOutput:
     def sites(self) -> tuple[ProviderRecord, ...]:
         """Return provider-predicted sites, without asserting binding relevance."""
         return tuple(r for r in self.records if r.record_kind == 'site')
+
+    @property
+    def regions(self) -> tuple[ProviderRecord, ...]:
+        """Return original analysis regions without asserting cavity detection."""
+        return tuple(r for r in self.records if r.record_kind == 'region')
+
+    @property
+    def interfaces(self) -> tuple[ProviderRecord, ...]:
+        """Return original participant interfaces without native admission."""
+        return tuple(r for r in self.records if r.record_kind == 'interface')
 
     @property
     def input_coordinates(self) -> Any | None:

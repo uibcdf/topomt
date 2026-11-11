@@ -12,6 +12,14 @@ cover pyKVFinder, GHECOM, CAVER, P2Rank, MOLE and [MoloVol](molovol.md) through 
 That guide gives their exact protocols, access/licences, options and current
 mapping limits. Their results retain distinct scientific kinds.
 
+[HOLE](hole.md), [POVME](povme.md) and [PISA](pisa.md) add external pore-profile,
+supplied-region volume and supplied-assembly interface routes. Use
+`output.channels`, `output.regions` and `output.interfaces`, respectively. Their
+executables/libraries remain external; compatibility forks also stay separate
+from TopoMT. Each guide identifies the qualified source/runtime and acquisition
+scope. These adapters do not add native reproductions or automatic Topography
+admission.
+
 | Provider | Original engine route | Installation and runtime requirements | Other TopoMT routes and current limits |
 |---|---|---|---|
 | [fpocket](https://github.com/Discngine/fpocket) | `third_party.fpocket`, `backend='cli'` | `conda install -c conda-forge fpocket`; executable available on PATH, or supply `fpocket_cmd` | Persisted output loader; native implementation and TopoMT variant. Native equivalence is under validation. |

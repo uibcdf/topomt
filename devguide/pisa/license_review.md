@@ -60,15 +60,16 @@ The API serves precomputed structures and cannot replace analysis of a novel
 supplied assembly. An installed external executable and an independent reader
 can be integrated without publishing a copy of the engine or datasets.
 
-The unresolved standalone engine/resource grant stays visible in #194. Broader
-interface/PePrMint assessment remains #165. Do not advertise the unresolved
+The unresolved standalone engine/resource grant stays visible under assessment
+#165, independently of the bounded adapter delivery #194. Broader
+interface/PePrMint assessment also remains #165. Do not advertise the unresolved
 standalone route as universally open source. Any execution/admission receipt
 must identify its acquisition and terms; no installed/public qualification or
 institutional licence acceptance is claimed here. Independent parser and adapter
 development remains within #194's authorized scope.
 
 The external question is optional and deferred after this extended review.
-Revisit it under #194 if a precise standalone grant is needed for redistribution,
+Revisit it under #165 if a precise standalone grant is needed for redistribution,
 a fork, or an acquisition route that the documented terms do not establish.
 No new external publication is authorized by the maintainer's search request.
 

@@ -8,12 +8,15 @@ states. Inspect revision/dirty state again before using or updating a source.
 
 | Source checkout | Exact original revision | Current scope and owner |
 | --- | --- | --- |
-| `~/repos@others/hole2` | `a8eaf6121ba66625446933f4acd7d6aa336dbb47` | Apache-2.0 original source; serial build completed in a separate task cache. Original calculations and adapter qualification remain under #192. Broader HOLE/CHAP assessment stays #161. |
+| `~/repos@others/hole2` | `a8eaf6121ba66625446933f4acd7d6aa336dbb47` | Apache-2.0 original source; serial build and custom/recognized-AMBER original controls under #192. See [the overview](hole/overview.md). Broader HOLE/CHAP assessment stays #161. |
 | `~/repos@others/POVME` | `8a9f1973c25eb52e36e0d7b20183bf896cb66729` | Modern source reports 2.2.2 but differs from the historical tag of that name. README/LICENSE.md state GPLv3-or-later while package metadata says Apache-2.0; preserve the discrepancy. Python 3.14/serial compatibility work is separate from unchanged original science and remains under #193; broader family review stays #159. |
-| `~/repos@others/pymolecule` | `614a95a0b792f83fbee77e4c7eed7d5ce046dee1` | Original dependency revision named by the inspected POVME environment. No import/execution qualification is implied; #193 owns the selected route. |
-| `~/repos@others/pisa` | `6d6f7d09ea5bf0f3f8a1602dd56fa896e6aca401` | Original supplied-assembly interface route selected under #194. [Availability/licence review](pisa/license_review.md) establishes documented local research use/free academic acquisition while preserving unresolved standalone redistribution terms. Broader PISA/PePrMint assessment stays #165. |
+| `~/repos@others/POVME-uibcdf` | `0c55f591dea3156e1ca76a486cf1f71d56c3a192` | Separate compatibility branch, version 2.2.2+uibcdf.1, unchanged original scientific modules/serial methods. Positive/zero/unavailable-support source controls in Python 3.14 under #193; empty-initial-region review #195 / UIBCDF/POVME#1 remains open. See [the overview](povme/overview.md). |
+| `~/repos@others/pymolecule` | `614a95a0b792f83fbee77e4c7eed7d5ce046dee1` | Original dependency revision, version 0.0.1, actually executed in the serial POVME source controls. No wider interpreter/platform qualification follows; #193 owns the selected route. |
+| `~/repos@others/pisa` | `6d6f7d09ea5bf0f3f8a1602dd56fa896e6aca401` | Original supplied-assembly positive/zero/error controls under #194; [overview](pisa/overview.md). [Availability/licence review](pisa/license_review.md) establishes documented local research use/free academic acquisition while preserving unresolved standalone redistribution terms. Broader PISA/PePrMint and licensing assessment stays #165. |
 
 No scientific kernel was changed in these original consultation checkouts.
+The [specialist checkpoint](specialist_provider_checkpoint.md) records exact
+execution and recovery evidence; source controls do not establish public delivery.
 
 ## Existing execution references
 

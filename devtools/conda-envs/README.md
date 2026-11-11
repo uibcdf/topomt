@@ -72,5 +72,12 @@ avoid VTK, while its wxWidgets initialization still needs a display. See the
 [MoloVol overview](../../devguide/molovol/overview.md) for the pinned source,
 bounded one-worker build and original-execution evidence.
 
+The optional input also lists Fortran/C++ build tools for HOLE/PISA and the
+Pydantic, Loguru, SciPy and YAML dependencies consumed by the separate modern
+POVME serial fork. Those packages are external-engine tooling, not new required
+TopoMT dependencies. POVME/pymolecule sources remain independently acquired
+and pinned; PISA's supplied runtime data remains external. See the
+[specialist source checkpoint](../../devguide/specialist_provider_checkpoint.md).
+
 [Shared API/CLI contract](https://github.com/uibcdf/molsyssuite/blob/8f00e6d9de943b6e4710ea62936e2ebea00fad24/devguide/conda_environment_tools.md).
 Tracking: uibcdf/topomt#78, uibcdf/topomt#16 and uibcdf/molsyssuite#45.

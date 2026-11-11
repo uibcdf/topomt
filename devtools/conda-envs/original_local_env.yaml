@@ -17,3 +17,10 @@ dependencies:
 - cmake>=3.20
 - wxwidgets>=3.3
 - xorg-xvfb-server
+# Original HOLE/PISA source builds; POVME's separate serial compatibility fork.
+- gfortran_linux-64
+- gxx_linux-64
+- scipy>=1.14.1
+- pydantic>=2.10.2
+- loguru>=0.7.2
+- pyyaml>=6.0.2

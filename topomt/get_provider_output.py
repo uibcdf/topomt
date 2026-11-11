@@ -33,7 +33,8 @@ def get_provider_output(
         MolSysMT-compatible source. CASTp file imports can supply their own PDB.
     method : str
         fpocket/fpocket4, pocketeer, alphaspace2, pycasta, castp/castp3/castpfold.
-        Also pykvfinder, ghecom, caver, p2rank, mole and molovol for local routes.
+        Also pykvfinder, ghecom, caver, p2rank, mole, molovol, hole, povme and pisa
+        for local external routes.
     backend : str, optional
         Defaults to cli for fpocket/GHECOM/CAVER/P2Rank/MOLE/MoloVol, library for the Python
         engines and server for CASTp.
@@ -46,7 +47,8 @@ def get_provider_output(
     -------
     ProviderOutput
         Provider-specific object with original records, representations and run.
-        Use pockets, cavities, channels or sites according to the provider.
+        Use pockets, cavities, channels, sites, regions or interfaces according
+        to the provider.
 
     Raises
     ------

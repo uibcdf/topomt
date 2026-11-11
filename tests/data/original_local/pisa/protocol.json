@@ -1,0 +1,22 @@
+{
+  "schema": "topomt.specialist-fixtures/1",
+  "provider": "pisa",
+  "scope": "Original execution captures; not independent scientific truth or installed/platform qualification",
+  "files": {
+    "analysis.txt": "e76df51e03905b207e33e47bb2aeaa6b2393c1a3ef6e329985826cafe8b42948",
+    "assemblies.txt": "5ed01894738f7a97985ce8dda8e111cdd6ce15ead5e03a6834f56315b2a40c87",
+    "empty_analysis.txt": "b3468d2e8712a86c613d23f602c55345e90f3ed5a7294e2378569921680afc39",
+    "empty_assemblies.txt": "5f56292c45301b54e03fd8728926c7b963378a3e0aa5430b50be4d24f1a9bb1b",
+    "empty_input.pdb": "a39034567a0d043d2cbd5ca3df936cd0a41bee6d0b3421ec18bbda5c5b476504",
+    "empty_interfaces.txt": "b550abadfb21d63a26bd2a65005d47c42c4b9d17001d0acec4b950f3ae45d197",
+    "empty_monomers.txt": "b8a686c0f07f6f8986093996d570295e1a336066d595ae6ad0af08fa1db9f95d",
+    "empty_receipt.json": "39da97d479334a88fdc4509865bdae1fd1e52942f8c9ffeaa5c9d454adff349f",
+    "input.pdb": "9d23b0a83f59f67306961874d8f4879ab51768d9d409b594f2909da248e6194d",
+    "interfaces.txt": "8d7919a65c87ec7d7680843ac40155499891005b548d01c064e27a9d8d008c68",
+    "monomers.txt": "b8a686c0f07f6f8986093996d570295e1a336066d595ae6ad0af08fa1db9f95d",
+    "pisa-empty.zip": "7ece5e4227baf674acac761e6bd7f0aaf5ddce7841749b1ce2358a02d232fcf7",
+    "pisa-failed.zip": "08d7ec9b0c8d7fead453a36c1b841057a75591c575d64522b9cff0df0c8395fd",
+    "pisa.zip": "7bbfa0aa23e62384b301096c4b0a80ee85c0367d07e87b6ad72c9f973bc30770",
+    "receipt.json": "617dcae5c5c54882f7fd0ab66f0307a0a2f82bd3a07050cbd6c46ff7c592e00b"
+  }
+}

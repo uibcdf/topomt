@@ -1,0 +1,17 @@
+{
+  "schema": "topomt.specialist-fixtures/1",
+  "provider": "hole",
+  "scope": "Original execution captures; not independent scientific truth or installed/platform qualification",
+  "files": {
+    "carbon_input.pdb": "0f35e8ca4282e489d306a30e063126af7846a1bf571bf32b16e6bc49548fa750",
+    "control.in": "1e4f439069a2360602acb8bc6805d4b2bb9836853b900ea6d0787037c80931e3",
+    "hole-amber.zip": "aea6c18d11a7360fdab551cecf7aa2a5d41cd1c44e8bbf11a379349afdd06e65",
+    "hole-failed.zip": "4cec053c11127586fcfa70446e0808177d57258d2927b9119da52e1da2ef39b4",
+    "hole.zip": "0a083ecb04d0c3265ea6b0256a2141079e32bf36b990a70c44bd08c59c070dd5",
+    "input.pdb": "73fc166e0c0bd3e06da852774aaeca737c9adf59aff7627273f46f8bb4e17eb1",
+    "profile.sph": "3d96b732c23b1018f1b1ba344e728d565b0c1e7b65e9b2abd24bb1fa3babaaf7",
+    "radii.rad": "5acb99d1ec798a44623f75b804f7be6f395a8fa67f03d7a85f5a30f88960b134",
+    "receipt.json": "9a5078a8d0ba89431584732d3d11b4ef89f9d3ec23f29f722f333fbb9e9a2449",
+    "stdout.txt": "7c0462df674ac310c6407078d90ab43436927ab3a5f545152ad719d8d2039953"
+  }
+}

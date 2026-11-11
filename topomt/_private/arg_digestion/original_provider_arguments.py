@@ -91,7 +91,123 @@ PARAMETERS = {
         'calculate_surfaces',
         'max_grid_points',
     },
+    'hole': COMMON
+    | {
+        'hole_cmd',
+        'radii_file',
+        'origin',
+        'direction',
+        'sample_step',
+        'end_radius',
+        'random_seed',
+        'max_atoms',
+    },
+    'povme': COMMON
+    | {
+        'upstream_root',
+        'pymolecule_root',
+        'python_cmd',
+        'grid_step',
+        'distance_cutoff',
+        'inclusion_regions',
+        'exclusion_regions',
+        'seed_regions',
+        'convex_hull_exclusion',
+        'contiguous_points_criteria',
+        'max_grid_points',
+        'max_candidate_pairs',
+    },
+    'pisa': COMMON | {'pisa_cmd', 'pisa_home', 'max_atoms'},
 }
+
+
+def digest_direction(direction: Any, caller: str | None = None) -> list[float]:
+    try:
+        raw = (
+            puw.get_value(direction, to_unit='dimensionless')
+            if puw.is_quantity(direction)
+            else direction
+        )
+        array = np.asarray(raw, dtype=float)
+        if array.shape == (3,) and np.isfinite(array).all():
+            scale = float(np.max(np.abs(array)))
+            if scale > 0:
+                unit = array / scale
+                return (unit / np.linalg.norm(unit)).tolist()
+    except (ValueError, TypeError):
+        pass
+    _error(
+        'direction',
+        direction,
+        caller,
+        'Expected a finite nonzero dimensionless three-vector.',
+    )
+
+
+def digest_random_seed(random_seed: Any, caller: str | None = None) -> int:
+    if (
+        isinstance(random_seed, Integral)
+        and not isinstance(random_seed, bool)
+        and 0 < int(random_seed) <= 2147483647
+    ):
+        return int(random_seed)
+    _error(
+        'random_seed', random_seed, caller, 'Expected a positive signed 32-bit seed.'
+    )
+
+
+def digest_contiguous_points_criteria(value: Any, caller: str | None = None) -> int:
+    if isinstance(value, Integral) and not isinstance(value, bool) and int(value) >= 0:
+        return int(value)
+    _error(
+        'contiguous_points_criteria',
+        value,
+        caller,
+        'Expected a nonnegative neighbor-count threshold.',
+    )
+
+
+def _regions(value: Any, name: str, caller: str | None) -> list[dict]:
+    if not isinstance(value, (list, tuple)) or (
+        name == 'inclusion_regions' and not value
+    ):
+        _error(
+            name,
+            value,
+            caller,
+            'Expected explicit sphere/box analysis regions; inclusion cannot be empty.',
+        )
+    result = []
+    for region in value:
+        if not isinstance(region, dict) or region.get('shape') not in {'sphere', 'box'}:
+            _error(name, region, caller, 'Expected shape=sphere or shape=box.')
+        shape = region['shape']
+        field = 'radius' if shape == 'sphere' else 'lengths'
+        if set(region) != {'shape', 'center', field}:
+            _error(
+                name,
+                region,
+                caller,
+                'Region requires exactly shape, center and radius/lengths.',
+            )
+        try:
+            center = digest_origin(region['center'], caller)
+            size: float | list[float]
+            if shape == 'sphere':
+                size = scalar(region[field], name, 'angstroms')
+            else:
+                lengths = digest_origin(region[field], caller)
+                if any(item <= 0 for item in lengths):
+                    raise ValueError('Nonpositive box length')
+                size = lengths
+        except (ValueError, TypeError) as cause:
+            _error(name, region, caller, f'Invalid region lengths/coordinates: {cause}')
+        result.append({'shape': shape, 'center': center, field: size})
+    return result
+
+
+def _region_digester(name: str):
+    return lambda value, caller=None: _regions(value, name, caller)
 
 
 def scalar(value: Any, name: str, unit: str, *, zero: bool = False) -> float:
@@ -264,8 +380,33 @@ def digest_min_depth(min_depth: Any, caller: str | None = None) -> int:
 
 def _backend_rule(provider: str):
     def admit(value: Any, context: Context) -> str:
-        allowed = {'files', 'library' if provider == 'pykvfinder' else 'cli'}
+        allowed = {'files', 'library' if provider in {'pykvfinder', 'povme'} else 'cli'}
         if value in allowed:
+            if provider in {'hole', 'povme', 'pisa'} and value != 'files':
+                options = context.all_args
+                if options.get('workers', 1) != 1:
+                    _error(
+                        'workers',
+                        options['workers'],
+                        context.function_name,
+                        'This admitted original route is serial; use workers=1.',
+                    )
+                if provider == 'hole':
+                    for required in ('origin', 'direction'):
+                        if required not in options:
+                            _error(
+                                required,
+                                None,
+                                context.function_name,
+                                'HOLE requires explicit starting point and direction.',
+                            )
+                if provider == 'povme' and 'inclusion_regions' not in options:
+                    _error(
+                        'inclusion_regions',
+                        None,
+                        context.function_name,
+                        'POVME requires explicit inclusion regions.',
+                    )
             if provider == 'molovol' and value == 'cli':
                 options = context.all_args
                 if options.get('workers', 1) != 1:
@@ -315,6 +456,7 @@ def _length(name: str):
             'origin_radius',
             'bottleneck_radius',
             'bottleneck_tolerance',
+            'distance_cutoff',
         },
     )
 
@@ -348,6 +490,13 @@ ARGUMENT_DIGESTERS = {
     'element_radii': digest_element_radii,
     'octree_depth': digest_octree_depth,
     'virtual_display': digest_virtual_display,
+    'direction': digest_direction,
+    'random_seed': digest_random_seed,
+    'contiguous_points_criteria': digest_contiguous_points_criteria,
+    **{
+        name: _region_digester(name)
+        for name in ('inclusion_regions', 'exclusion_regions', 'seed_regions')
+    },
     **{
         name: _boolean(name)
         for name in (
@@ -356,6 +505,7 @@ ARGUMENT_DIGESTERS = {
             'compute_pores',
             'compute_merged_pores',
             'calculate_surfaces',
+            'convex_hull_exclusion',
         )
     },
     'timeout': lambda value, caller=None: scalar(value, 'timeout', 'seconds'),
@@ -386,6 +536,9 @@ ARGUMENT_DIGESTERS = {
             'auto_origin_cover_radius',
             'large_probe_radius',
             'grid_step',
+            'sample_step',
+            'end_radius',
+            'distance_cutoff',
         )
     },
     **{
@@ -394,7 +547,9 @@ ARGUMENT_DIGESTERS = {
             'workers',
             'memory_mb',
             'max_grid_points',
+            'max_candidate_pairs',
             'max_auto_origins_per_cavity',
+            'max_atoms',
         )
     },
     **{
@@ -405,6 +560,9 @@ ARGUMENT_DIGESTERS = {
             'p2rank_home',
             'upstream_root',
             'elements_file',
+            'radii_file',
+            'pymolecule_root',
+            'pisa_home',
         )
     },
     **{
@@ -416,6 +574,8 @@ ARGUMENT_DIGESTERS = {
             'mole_cmd',
             'molovol_cmd',
             'xvfb_cmd',
+            'hole_cmd',
+            'pisa_cmd',
         )
     },
 }

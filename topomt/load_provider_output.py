@@ -27,6 +27,9 @@ _SAVED_BACKENDS = {
     'p2rank': {'cli'},
     'mole': {'cli'},
     'molovol': {'cli'},
+    'hole': {'cli'},
+    'povme': {'library'},
+    'pisa': {'cli'},
 }
 
 

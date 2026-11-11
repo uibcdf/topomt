@@ -40,13 +40,13 @@ from installed/public qualification and wider adoption under #16/#56.
 | CASTp / CASTpFold | [#73](https://github.com/uibcdf/topomt/discussions/73) | Existing optional provider and comparison; [technical overview](castp/overview.md). |
 | CAVER | [#104](https://github.com/uibcdf/topomt/discussions/104) | Original CLI/files source pilot; [overview](caver/overview.md), channel/tunnel method and intended path comparison. |
 | MOLE / MOLEonline | [#105](https://github.com/uibcdf/topomt/discussions/105) | Original CLI/files source route, channel/cavity method and close DFND antecedent; [overview](mole/overview.md), [source evidence](mole/source_checkpoint.md), #140. Hosted service remains separate. |
-| PISA | [#106](https://github.com/uibcdf/topomt/discussions/106) | Selected supplied-assembly integration [#194](https://github.com/uibcdf/topomt/issues/194); [availability/licence review](pisa/license_review.md). Broader interface/PePrMint assessment remains #165; original execution remains unqualified. |
+| PISA | [#106](https://github.com/uibcdf/topomt/discussions/106) | Original supplied-assembly CLI/files source controls, [overview](pisa/overview.md), integration #194 and [availability/licence review](pisa/license_review.md). Broader interface/PePrMint and standalone redistribution assessment remains #165. |
 | pyKVFinder | [#107](https://github.com/uibcdf/topomt/discussions/107) | Original grid/dual-probe source pilot with the explicit compatibility fork; [overview](pykvfinder/overview.md). |
 | P2Rank / PrankWeb | [#108](https://github.com/uibcdf/topomt/discussions/108) | Original local CLI/files source pilot; [overview](p2rank/overview.md). Web route remains a candidate. |
 | GHECOM | [#109](https://github.com/uibcdf/topomt/discussions/109) | Original P-mode CLI/files source pilot; [overview](ghecom/overview.md). Other morphological modes remain candidates. |
 | MoloVol | [#191](https://github.com/uibcdf/topomt/discussions/191) | Original isolated neutral-element CLI/files volume/region provider; [overview](molovol/overview.md), bounded implementation #190. Broader reference assessment remains #159. |
 | DoGSite3 | [#110](https://github.com/uibcdf/topomt/discussions/110) | Pocket/subpocket and descriptor comparison candidate. |
-| HOLE | [#111](https://github.com/uibcdf/topomt/discussions/111) | Selected original pore-profile integration [#192](https://github.com/uibcdf/topomt/issues/192); broader HOLE/CHAP assessment remains #161. Source build is distinct from calculation/adapter qualification. |
+| HOLE | [#111](https://github.com/uibcdf/topomt/discussions/111) | Original spherical-profile CLI/files source controls, [overview](hole/overview.md), integration #192; broader HOLE/CHAP assessment remains #161. |
 | CHAP | [#112](https://github.com/uibcdf/topomt/discussions/112) | Specialized channel structural/functional comparison candidate. |
 | fpocketR | [#113](https://github.com/uibcdf/topomt/discussions/113) | RNA-oriented reference imported from historical intake. |
 | Scipion fpocket integration | [#114](https://github.com/uibcdf/topomt/discussions/114) | Workflow/wrapper reference. |
@@ -54,7 +54,7 @@ from installed/public qualification and wider adoption under #16/#56.
 | pfnet-research/pocket_detection | [#116](https://github.com/uibcdf/topomt/discussions/116) | Unassessed historical method/tool candidate. |
 | MolModa | [#117](https://github.com/uibcdf/topomt/discussions/117) | Application and interaction-design reference. |
 | PePrMint | [#118](https://github.com/uibcdf/topomt/discussions/118) | Historical surface/interface-related reference. |
-| POVME family | [#119](https://github.com/uibcdf/topomt/discussions/119) | Selected modern-source serial integration [#193](https://github.com/uibcdf/topomt/issues/193); broader family/PyVOL assessment remains #159. Compatibility-fork work does not qualify every family version. |
+| POVME family | [#119](https://github.com/uibcdf/topomt/discussions/119) | Original modern-source serial library/files controls via a separate compatibility fork, [overview](povme/overview.md), integration #193. Empty-initial-region review is #195 / UIBCDF/POVME#1; broader family/PyVOL remains #159. |
 | AlphaTraj | [#120](https://github.com/uibcdf/topomt/discussions/120) | Unassessed historical tool/reference candidate. |
 | Pocket2Mol | [#121](https://github.com/uibcdf/topomt/discussions/121) | Related project; domain ownership needs assessment. |
 | PPD | [#122](https://github.com/uibcdf/topomt/discussions/122) | Unassessed historical tool/reference candidate. |

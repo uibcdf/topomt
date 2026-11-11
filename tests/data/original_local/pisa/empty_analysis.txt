@@ -1,0 +1,8 @@
+
+ ... session 'canonical' Created
+ ... structure read and understood
+ ... structural equivalence analysed
+ ... molecular surfaces analysed
+ ... no crystal contacts found
+ ... assembly analysis: status 'as is': Assemblies not calculated
+ ... results written

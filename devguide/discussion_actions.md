@@ -1,5 +1,18 @@
 # Discussion action routing audit
 
+## Specialist source controls and POVME operational review — 2026-11-11
+
+HOLE #192, POVME #193 and PISA #194 retain their bounded source integration
+scope in [the checkpoint](specialist_provider_checkpoint.md). Their canonical
+threads #111/#119/#106 link the corresponding overviews and original controls;
+broader #161/#159/#165 and installed/public #101/#16 remain separate.
+The POVME initial-region execution observation has a needs_review card in
+hub #154, consumer applicability/reconciliation owner [#195](https://github.com/uibcdf/topomt/issues/195),
+[local report](pending_bugs/povme_empty_initial_roi.md) and provider/fork
+[UIBCDF/POVME#1](https://github.com/uibcdf/POVME/issues/1). Closing integration
+#193 does not fix the scientific frame code or promote a paper claim. No
+external upstream issue/PR, new category or native DFND comparison is selected.
+
 ## HOLE, POVME and PISA selection — 2026-11-11
 
 The maintainer selected three optional integrations. Their originating resource

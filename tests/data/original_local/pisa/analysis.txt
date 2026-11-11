@@ -1,0 +1,10 @@
+
+ ... session 'canonical' Created
+ ... structure read and understood
+ ... structural equivalence analysed
+ ... molecular surfaces analysed
+ ... 1 potential contacts identified, now processing:
+     |
+ ... total 1 interfaces calculated
+ ... assembly analysis: status 'as is': Assemblies not calculated
+ ... results written

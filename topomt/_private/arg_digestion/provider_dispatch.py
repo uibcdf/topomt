@@ -21,6 +21,9 @@ DEFAULT_BACKENDS = {
     'p2rank': 'cli',
     'mole': 'cli',
     'molovol': 'cli',
+    'hole': 'cli',
+    'povme': 'library',
+    'pisa': 'cli',
 }
 ORIGINAL_BACKENDS = {
     'fpocket': {'cli', 'wrapper', 'files'},
@@ -34,6 +37,9 @@ ORIGINAL_BACKENDS = {
     'p2rank': {'cli', 'files'},
     'mole': {'cli', 'files'},
     'molovol': {'cli', 'files'},
+    'hole': {'cli', 'files'},
+    'povme': {'library', 'files'},
+    'pisa': {'cli', 'files'},
 }
 
 

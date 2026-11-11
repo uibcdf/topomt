@@ -36,6 +36,9 @@ _METHODS = {
     'p2rank': ('p2rank',),
     'mole': ('mole',),
     'molovol': ('molovol',),
+    'hole': ('hole',),
+    'pisa': ('pisa', 'pisa_enhanced'),
+    'povme': ('povme', 'povme2'),
     'dfnd': (),  # No published DFND paper exists; cite the executed software.
     'geometry': (),
     'clopper_pearson': ('clopper_pearson',),
@@ -69,6 +72,9 @@ _URLS = {
     'p2rank': 'https://github.com/rdk/p2rank',
     'mole': 'https://github.com/sb-ncbr/webchemistry',
     'molovol': 'https://github.com/molovol/MoloVol',
+    'hole': 'https://github.com/osmart/hole2',
+    'pisa': 'https://github.com/PDBe-KB/pisa',
+    'povme': 'https://github.com/durrantlab/POVME',
     'numpy': 'https://numpy.org/',
     'scipy': 'https://scipy.org/',
     'numba': 'https://numba.pydata.org/',
@@ -222,10 +228,14 @@ def _references(method: str, route: str, target: str, metadata: dict) -> list[di
                 'context': deepcopy(context),
             }
         )
-    if method == 'molovol' and route == 'original':
+    if method in {'molovol', 'hole'} and route == 'original':
+        allowed_data = {
+            'molovol': {'alvarez_radii', 'atomic_weights_2013'},
+            'hole': {'amber_1984'},
+        }[method]
         for key in metadata.get('input_data_references', ()):
-            if key not in {'alvarez_radii', 'atomic_weights_2013'}:
-                raise ValueError('Undeclared MoloVol input-data reference')
+            if key not in allowed_data:
+                raise ValueError(f'Undeclared {method} input-data reference')
             entries.append(
                 {
                     'item': deepcopy(ARTICLES[key]),
@@ -257,6 +267,15 @@ def _references(method: str, route: str, target: str, metadata: dict) -> list[di
             'title': software,
             'url': _URLS[software],
         }
+        if (
+            software == 'povme'
+            and observed_version
+            and '+uibcdf.' in str(observed_version)
+        ):
+            item['title'] = 'POVME (UIBCDF compatibility fork)'
+            item['url'] = (
+                'https://github.com/uibcdf/POVME/tree/compatibility/python314-serial'
+            )
         if observed_version:
             item['version'] = str(observed_version)
         entries.append(

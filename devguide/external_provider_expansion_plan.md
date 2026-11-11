@@ -1,5 +1,13 @@
 # Original-provider implementation plan
 
+Maintainer-selected specialist follow-up (2026-11-11): HOLE #192, modern-source
+POVME #193 and PISA #194 now have bounded original-execution/adapter/recovery
+controls in [the specialist checkpoint](specialist_provider_checkpoint.md).
+Their engines and compatibility forks remain external; TopoMT contains adapters,
+not copied scientific kernels. Empty-initial-region review #195 / UIBCDF/POVME#1
+remains needs_review. This does not widen or rewrite the completed four-provider
+batch, qualify public artifacts or initiate a new BenchLab comparison.
+
 The separate maintainer-selected MoloVol follow-up is #190 (2026-11-11), with
 [source/build/evidence overview](molovol/overview.md) and resource #191. It does
 not reopen or widen the completed four-provider batch. Broader POVME/PyVOL

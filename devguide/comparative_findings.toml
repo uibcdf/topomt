@@ -125,3 +125,15 @@ evidence = ["docs/content/benchlab/synthetic/dumbbell/index.md", "docs/content/b
 owner = "TopoMT maintainers (LMMV/dprada)"
 reviewed_on = "2026-11-11"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19536753"
+
+[[findings]]
+id = "povme-empty-initial-region"
+kind = "third_party_limitation"
+status = "needs_review"
+summary = "Captured modern-source serial POVME fails on a fully excluded initial point field; intended empty-input scope and applicability remain under review."
+scope = "UIBCDF POVME 2.2.2+uibcdf.1 at 0c55f591dea3156e1ca76a486cf1f71d56c3a192, original scientific modules/serial methods unchanged from 8a9f1973c25eb52e36e0d7b20183bf896cb66729; pymolecule 614a95a0b792f83fbee77e4c7eed7d5ce046dee1; Python 3.14.10, NumPy 2.5.4, SciPy 1.18.1, Pydantic 2.14.3, Loguru 0.7.3, no Ray. Synthetic 40-atom input; inclusion/exclusion spheres at zero, radii 1/4 angstrom, grid 1 angstrom, cutoff 1.09 angstrom, hull disabled. Operational failure, not a DFND comparison or demonstrated geometric inferiority."
+issue = "uibcdf/topomt#195"
+evidence = ["tests/data/original_local/povme/povme-failed.zip", "tests/data/original_local/pisa/input.pdb", "devguide/pending_bugs/povme_empty_initial_roi.md", "devguide/specialist_provider_checkpoint.md", "tests/test_specialist_original_execution.py"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-11"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19552378"

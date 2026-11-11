@@ -1,0 +1,9 @@
+COORD input.pdb
+RADIUS radii.rad
+SPHPDB profile.sph
+CPOINT 0 0 0
+CVECT 0 0 1
+SAMPLE 0.5
+ENDRAD 7.0
+RASEED 12345
+SHORTO 0

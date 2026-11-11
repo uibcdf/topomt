@@ -41,6 +41,8 @@ class ProviderExecutionError(TopoMTException, RuntimeError):
 
     catalog_key = 'ProviderExecutionError'
     run: ProviderRun | None = None
+    execution_metadata: dict
+    additional_inputs: dict
 
     def __init__(
         self,
@@ -49,6 +51,8 @@ class ProviderExecutionError(TopoMTException, RuntimeError):
         provider: str | None = None,
         reason: str | None = None,
     ) -> None:
+        self.execution_metadata = {}
+        self.additional_inputs = {}
         fields = {
             key: value
             for key, value in {'provider': provider, 'reason': reason}.items()
@@ -141,6 +145,8 @@ def run_command(
     workers: int,
     extra_env: dict[str, str] | None = None,
     allowed_returncodes: tuple[int, ...] = (0,),
+    stdin_file: Path | None = None,
+    provider: str | None = None,
 ) -> int:
     """Run without a shell; cap worker defaults and retain bounded log files."""
     environment = dict(os.environ)
@@ -164,6 +170,7 @@ def run_command(
         try:
             result = subprocess.run(
                 command,
+                input=None if stdin_file is None else stdin_file.read_bytes(),
                 cwd=directory,
                 env=environment,
                 stdout=stdout,
@@ -173,7 +180,7 @@ def run_command(
             )
         except subprocess.TimeoutExpired as error:
             raise ProviderExecutionError(
-                provider=Path(command[0]).name,
+                provider=provider or Path(command[0]).name,
                 reason=f'timeout after {timeout} seconds',
             ) from error
     if result.returncode not in allowed_returncodes:
@@ -182,7 +189,8 @@ def run_command(
             for name in ('stdout.txt', 'stderr.txt')
         ).decode('utf-8', errors='replace')
         raise ProviderExecutionError(
-            provider=Path(command[0]).name, reason=f'exit {result.returncode}: {tail}'
+            provider=provider or Path(command[0]).name,
+            reason=f'exit {result.returncode}: {tail}',
         )
     return result.returncode
 
@@ -264,7 +272,7 @@ def recover(provider: str, molecular_system: Any, bundle_file: Path) -> Provider
     """Verify source context and input row mapping before engine-free parsing."""
     run = ProviderRun.load(bundle_file)
     if run.provider != provider or run.backend != (
-        'library' if provider == 'pykvfinder' else 'cli'
+        'library' if provider in {'pykvfinder', 'povme'} else 'cli'
     ):
         raise ValueError(
             'Saved provider/backend identity disagrees with the selected reader'
@@ -423,7 +431,12 @@ def get_output(
                     backend,
                     submitted,
                     output,
-                    metadata={**base_metadata, 'execution_status': 'failed'},
+                    metadata={
+                        **error.execution_metadata,
+                        **base_metadata,
+                        'execution_status': 'failed',
+                    },
+                    additional_inputs=error.additional_inputs,
                 )
             raise
         total = sum(path.stat().st_size for path in output.rglob('*') if path.is_file())
