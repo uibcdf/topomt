@@ -1,0 +1,36 @@
+{
+  "schema": "topomt.benchlab.tube-documentation-receiving/1",
+  "issue": "uibcdf/topomt#182",
+  "source_revision": "4812811835238eae575d04dffbca85f94910f118",
+  "strict_sphinx_zero_warnings": true,
+  "topomt_import_origin": "Temporary clean git archive of the committed candidate",
+  "committed_version_sha256": "c63a97ae89338cff1d0a778054f8bfbcaea51ea974b281d062073f2eba5b2f1a",
+  "site_checks": {
+    "schema": "topomt.documentation-build/1",
+    "source_commit": "4812811835238eae575d04dffbca85f94910f118",
+    "html_pages": 100,
+    "local_links": 9185,
+    "notebook_execution": "off"
+  },
+  "wall_seconds": 19.405,
+  "peak_rss_kib": 296400,
+  "resources": "One CPU/numerical thread, one Sphinx worker, 6 GiB address-space / 120 CPU second ceilings",
+  "scope": "Clean committed-source documentation and local navigation, not installed release or public deployment",
+  "visual_review": {
+    "browser": "actual headless Google Chrome, CDP after DOM/layout readiness",
+    "pages": [
+      {
+        "title": "Narrow, densely sampled straight tube: system and independent references \u2013 TopoMT 1.0.0",
+        "mainCharacters": 6694,
+        "mainWidth": 1077.3125
+      },
+      {
+        "title": "Narrow, densely sampled straight tube: DFND observations \u2013 TopoMT 1.0.0",
+        "mainCharacters": 8989,
+        "mainWidth": 1077.3125
+      }
+    ],
+    "peak_own_tree_rss_mib": 1278.1,
+    "wall_seconds": 3.76
+  }
+}

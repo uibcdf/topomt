@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (50)
+### Resolved (51)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
@@ -51,6 +51,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`publish_ackredit_portable_guide.md`](publish_ackredit_portable_guide.md) — [#91](https://github.com/uibcdf/topomt/issues/91) — Publish the canonical Ackredit portable-attribution guide in TopoMT. *(resolved, inspected)*
 - [`shell_opening_study.md`](shell_opening_study.md) — [#145](https://github.com/uibcdf/topomt/issues/145) — Derive a shell opening from the frozen wall and characterize native access. *(resolved, measured)*
 - [`sphinx_diagnostics.md`](sphinx_diagnostics.md) — [#64](https://github.com/uibcdf/topomt/issues/64) — Resolve existing whole-site markup, navigation and diagram-runtime diagnostics. *(resolved, measured)*
+- [`straight_tube_names.md`](straight_tube_names.md) — [#182](https://github.com/uibcdf/topomt/issues/182) — Give the two straight-tube inputs descriptive identities and migrate the active reader. *(resolved, measured)*
 - [`tetrahedron_boundary_connectivity.md`](tetrahedron_boundary_connectivity.md) — [#150](https://github.com/uibcdf/topomt/issues/150) — Independently certify four tetrahedron boundary patches and contrast native grouping. *(resolved, measured)*
 - [`tetrahedron_effective_radii.md`](tetrahedron_effective_radii.md) — [#143](https://github.com/uibcdf/topomt/issues/143) — Resolve effective GHECOM and CAVER input radii in the tetrahedron study. *(resolved, measured)*
 - [`tetrahedron_original_comparisons.md`](tetrahedron_original_comparisons.md) — [#141](https://github.com/uibcdf/topomt/issues/141) — Add a model-audited original-method comparison stage for the regular tetrahedron. *(resolved, measured)*

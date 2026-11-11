@@ -1,0 +1,26 @@
+{
+  "schema": "topomt.naming-source-checkpoint/1",
+  "issue": "uibcdf/topomt#182",
+  "catalog_and_generator_guards": "passed; exact PDB bytes, full-precision coordinates/radii and 73-entry inventory",
+  "focused_tests": {
+    "passed": 67,
+    "pending_strict_xfails": 3,
+    "owners": [
+      "uibcdf/topomt#180",
+      "uibcdf/topomt#181"
+    ]
+  },
+  "viewer_tests_passed": 7,
+  "broader_viewer_evidence": "Incomplete: 149-item combined selector and later58-item group ended at the configured120CPU-second ceiling; no passing whole-selector claim",
+  "preexisting_raw_hash_failures": {
+    "count": 4,
+    "owner": "uibcdf/topomt#16",
+    "evidence": "devguide/evidence/straight_tube_raw_preservation_v1.json",
+    "before_after_entire_raw_hashes_equal": true
+  },
+  "ruff": "Global check passed",
+  "scoped_mypy": "Renamed reader helper passed",
+  "source_resources_present": 692,
+  "resources": "One CPU/numerical thread,6GiB address space,120CPU-second ceilings per numerical runner; >52GiB available of60.5GiB host RAM before work, zero PSI and sampled swap I/O; no allocation assumed",
+  "scope": "Naming/resource/reader continuity, not full-suite or installed/platform qualification"
+}
