@@ -5,7 +5,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 
 <!-- generated: devguide_index -->
 
-### Resolved (57)
+### Resolved (58)
 
 - [`ackredit_third_party_attribution.md`](ackredit_third_party_attribution.md) — [#157](https://github.com/uibcdf/topomt/issues/157) — Attribute all reached TopoMT scientific methods and third-party routes through Ackredit. *(resolved, measured)*
 - [`adopt_issue_backed_reporting_lifecycle.md`](adopt_issue_backed_reporting_lifecycle.md) — [#54](https://github.com/uibcdf/topomt/issues/54) — Adopt the MolSysSuite issue-backed reporting lifecycle in TopoMT. *(resolved, inspected)*
@@ -40,6 +40,7 @@ permanently. See [the reporting protocol](../reporting_protocol.md).
 - [`documentation_public_identity.md`](documentation_public_identity.md) — [#18](https://github.com/uibcdf/topomt/issues/18) — Publish verified TopoMT documentation instead of the old PocketMT site. *(resolved, measured)*
 - [`expand_original_providers.md`](expand_original_providers.md) — [#135](https://github.com/uibcdf/topomt/issues/135) — Consolidate five original providers and add four no-cost local engines before BenchLab resumes. *(resolved, measured)*
 - [`external_tool_stewardship.md`](external_tool_stewardship.md) — [#67](https://github.com/uibcdf/topomt/issues/67) — Centralize external-tool discovery and integrated-provider stewardship. *(resolved, inspected)*
+- [`integrate_molovol.md`](integrate_molovol.md) — [#190](https://github.com/uibcdf/topomt/issues/190) — Integrate original local MoloVol with source-bound cavity and volume results. *(resolved, measured)*
 - [`molsysviewer_topomt_init_exports.md`](molsysviewer_topomt_init_exports.md) — [#55](https://github.com/uibcdf/topomt/issues/55) — Restore MolSysViewer TopoMT add-on lifecycle exports. *(resolved, measured)*
 - [`opening_boundary_connectivity.md`](opening_boundary_connectivity.md) — [#149](https://github.com/uibcdf/topomt/issues/149) — Certify the opened shell's connected probe-center boundary patch at 1.4 angstroms. *(resolved, measured)*
 - [`original_caver_provider.md`](original_caver_provider.md) — [#138](https://github.com/uibcdf/topomt/issues/138) — Add source-bound original CAVER execution and engine-independent recovery. *(resolved, measured)*

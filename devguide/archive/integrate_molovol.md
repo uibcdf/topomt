@@ -1,13 +1,13 @@
 ---
 summary: Integrate original local MoloVol with source-bound cavity and volume results.
 issue: uibcdf/topomt#190
-status: active
+status: resolved
 opened: 2026-11-11
-closed:
+closed: 2026-11-11
 severity: medium
-verification: tested
+verification: measured
 area: [third-party, api, attribution]
-guard:
+guard: tests/test_molovol_provider.py::test_molovol_original_evidence_is_engine_free_and_source_bound
 normative:
 blocked_by: []
 supersedes: []
@@ -93,3 +93,26 @@ Full suite, coverage, remote CI, installed distributions, other platforms and
 scientific BenchLab comparisons are deferred under their existing owners. The
 shared editable workspace preserves the human version edit. The documentation
 candidate and delivery/readback are recorded at closeout before resolving #190.
+
+## Resolution
+
+Implemented in source commit `05910720ee95e9e9bd14a2421bb7c17bcae08a5f`.
+The original direct/API gate, four committed original bundles and 294 selected
+checks establish the bounded CLI/files contract. The offline guard reconstructs
+all four original outcomes under two unit policies without subprocesses or new
+credit; separate query/resource/source-change and failure/display controls
+protect the rejected paths. The explicit original gate verifies direct agreement
+and real Ackredit branches rather than substituting parser fixtures.
+
+Strict Sphinx built a clean git archive of that exact commit, importing its
+committed version file rather than the human workspace edit: 109 pages, 10561
+local links, no warnings; 21.913 seconds and 310552 KiB peak RSS with one worker.
+The source receipt is `devguide/evidence/molovol_documentation_2026_11_11.json`.
+This qualifies source documentation/navigation, not a public deployment.
+
+The closing follow-up uses the schema's `measured` verification value (the
+initial implementation record used an invalid `tested` value), regenerates the
+indexes, archives this report and records documentation evidence;
+it does not change scientific code or frozen controls. Catalogue #68, resource
+#191, issue #190 and assessment #159 retain explicit cross-links and scope.
+No BenchLab comparison or DFND limitation is resolved by this integration.

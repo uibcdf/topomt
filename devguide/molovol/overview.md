@@ -139,3 +139,11 @@ human version edit. Ruff passes and all 620 Python files are formatted; scoped
 mypy passes 13 affected source files for 3.11 and 3.14 static targets. These
 checks do not execute every supported minor. Full suite/coverage/hosted CI and
 installed matrices remain under #16/#58/#81/#101; this increment uses `[skip ci]`.
+
+Clean committed-source documentation at
+`05910720ee95e9e9bd14a2421bb7c17bcae08a5f` passes strict Sphinx with zero
+warnings: **109 pages and 10561 local links**, 21.913 seconds, peak RSS
+310552 KiB, one worker. The clean archive imports the committed version, not the
+human workspace edit. The [receipt](../evidence/molovol_documentation_2026_11_11.json)
+and [archived completion record](../archive/integrate_molovol.md) retain exact
+scope. This is not a deployed-site or installed-distribution certificate.

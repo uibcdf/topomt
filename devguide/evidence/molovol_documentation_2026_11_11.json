@@ -1,0 +1,21 @@
+{
+  "schema": "topomt.molovol-documentation/1",
+  "issues": [
+    "uibcdf/topomt#190"
+  ],
+  "source_revision": "05910720ee95e9e9bd14a2421bb7c17bcae08a5f",
+  "strict_sphinx_zero_warnings": true,
+  "topomt_import_origin": "Temporary clean git archive of the committed candidate",
+  "committed_version_sha256": "c63a97ae89338cff1d0a778054f8bfbcaea51ea974b281d062073f2eba5b2f1a",
+  "site_checks": {
+    "schema": "topomt.documentation-build/1",
+    "source_commit": "05910720ee95e9e9bd14a2421bb7c17bcae08a5f",
+    "html_pages": 109,
+    "local_links": 10561,
+    "notebook_execution": "off"
+  },
+  "wall_seconds": 21.913,
+  "peak_rss_kib": 310552,
+  "resources": "One CPU/numerical thread, one Sphinx worker, 6 GiB address-space / 120 CPU second ceilings",
+  "scope": "Clean committed-source documentation and local navigation, not installed release or public deployment"
+}
