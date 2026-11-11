@@ -34,7 +34,7 @@ discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncom
 fix_revision = "b7b5a60d8d46b84ca2a9f44bcb01eeac98a4b8b2"
 regression_guard = "tests/test_dfnd_volume_precision_contract.py"
 resolution_scope = "Source conditional numerical contract on fixed finite carriers: Clopper-Pearson endpoint safety, bounded quadrature diagnostics and legacy fixed-order error-unknown compatibility, analytic and three-case matched receiving. No universal deterministic bound, model/support/biological or installed-matrix claim."
-resolution_evidence = ["devguide/archive/dfnd_volume_precision_claims.md", "devguide/DFND/volume_validation_protocol_v1.json", "devguide/evidence/volume_precision_sampling_v1.json", "docs/content/benchlab/synthetic/volume_measurements.md", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/volume_study_v1/native_receiving.json", "docs/content/benchlab/synthetic/closed_shell/artifacts/volume_study_v1/native_receiving.json", "docs/content/benchlab/synthetic/shell_with_opening/artifacts/volume_study_v1/native_receiving.json"]
+resolution_evidence = ["devguide/archive/dfnd_volume_precision_claims.md", "devguide/DFND/volume_validation_protocol_v1.json", "devguide/evidence/volume_precision_sampling_v1.json", "devguide/evidence/volume_documentation_receiving_v1.json", "docs/content/benchlab/synthetic/volume_measurements.md", "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/volume_study_v1/native_receiving.json", "docs/content/benchlab/synthetic/closed_shell/artifacts/volume_study_v1/native_receiving.json", "docs/content/benchlab/synthetic/shell_with_opening/artifacts/volume_study_v1/native_receiving.json"]
 
 [[findings]]
 id = "dfnd-length-argument-admission"

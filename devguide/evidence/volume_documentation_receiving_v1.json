@@ -1,0 +1,24 @@
+{
+  "schema": "topomt.benchlab.clean-documentation-receiving/1",
+  "issue": "uibcdf/topomt#75",
+  "source_revision": "834bdc105b5d06727325cb91aa16edce67e0078d",
+  "topomt_import_origin": "Temporary clean git archive of the committed candidate; human worktree version is not imported",
+  "committed_version_file_sha256": "c63a97ae89338cff1d0a778054f8bfbcaea51ea974b281d062073f2eba5b2f1a",
+  "package_version_observed": "1.0.0+70.g303bd33.dirty",
+  "strict_sphinx_zero_warnings": true,
+  "site_checks": {
+    "schema": "topomt.documentation-build/1",
+    "source_commit": "834bdc105b5d06727325cb91aa16edce67e0078d",
+    "html_pages": 86,
+    "local_links": 7471,
+    "notebook_execution": "off"
+  },
+  "execution": {
+    "wall_seconds": 17.334,
+    "peak_rss_kib": 287656,
+    "single_cpu": true,
+    "numerical_threads": 1,
+    "sphinx_workers": 1
+  },
+  "scope": "Clean source documentation candidate and local navigation, not public deployment or installed/support qualification"
+}

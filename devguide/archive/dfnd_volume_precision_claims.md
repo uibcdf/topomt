@@ -59,6 +59,15 @@ Ruff/format and scoped core/data/test typing pass. Strict whole Sphinx build
 passes with zero warnings (15.056 s, 278,848 KiB peakRSS), one worker/CPU; final
 exact-source publication has its separate reader checkpoint.
 
+A second receiving exports clean committed source `834bdc1` into a managed
+`/tmp` directory and verifies that TopoMT is imported there, with the committed
+version-file digest. Strict Sphinx and local navigation pass: 86 HTML pages,
+7,471 targets, zero warnings, 17.334 s / 287,656 KiB. The
+[clean-source receipt](../evidence/volume_documentation_receiving_v1.json)
+retains the observed cached package-version string separately from the source
+SHA; this is no release-version or installed-delivery claim. The temporary
+source copy is cleaned and the human worktree version stays untouched.
+
 This is a **source-bound correction**, not qualification of every installed
 release, all numerical settings, a certified general quadrature bound, physical
 support/model error, global accessible volume or biological accuracy. The fast
