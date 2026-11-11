@@ -124,6 +124,14 @@ Internal capacity hierarchy, probe-scale correspondence and temporal tracking
 are separate analyses, even when they share support identifiers.
 ```
 
+The [dumbbell reader](../benchlab/synthetic/dumbbell/dfnd.ipynb) checks this
+distinction on named physical anchors. At 1.4 Å they share a public Void whose
+two provisional chamber candidates and one throat retain source supports and
+reach the parent's `.motifs`; they are not standalone Chamber children. At 2.2 Å
+the anchors reach distinct Voids, each without an internal hierarchy in that
+profile. A local gate descriptor is not an independently optimal physical
+bottleneck, and query-local display IDs do not establish cross-probe identity.
+
 ## Public interpretation
 
 Native motifs are inspectable under the DFND result. Passing motif dictionaries

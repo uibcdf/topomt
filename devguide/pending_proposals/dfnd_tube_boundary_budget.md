@@ -74,3 +74,16 @@ first fails and remains strict xfail under #180. The same source resolves two
 wide patches at 1.4 Å. Its 2.5 Å reason is numerical, separately owned by #184;
 do not describe that outcome as a budget failure. Original evidence lives in
 `straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/`.
+
+## Dumbbell receiving profile — 2026-11-11
+
+The #186 source 17a4c9a521c89a64efb12ba339161e15c85d4ce0 adds the frozen
+94-argon-ball dumbbell. At 2.2 Å, face 86 exhausts arrangement work; at 6 Å,
+face 71 does so. The complete native physical-hull count remains unknown.
+Independent wall/separator proofs at 2.2 Å concern named enclosed anchors,
+not the entire native hull's patch count. At 6 Å, a complete all-atom tetrahedral
+cover proves the whole finite hull excluded, so zero physical hull patches is
+an independent target. That actual-public target first fails and remains strict
+xfail under #180. Native wet components and public features are already empty
+at 6 Å; do not diagnose local-candidate failure on this successful control.
+At 1.4 Å the separate numerical-margin reason belongs to #184.

@@ -13,10 +13,10 @@ Scientific groups and reading order can evolve as new systems are added.
 The publication target is a collection that can live inside the documentation
 or become a standalone study site using the same reviewed case sources.
 
-The collection is under development. Five study units are available: a regular
+The collection is under development. Six study units are available: a regular
 tetrahedron, a sampled shell with an independently certified wall, and an exact
-subset with a certified opening, followed by two straight atomic tubes. The tube
-has independent passage/wall/exclusion references and actual native/public
+subset with a certified opening, followed by two straight atomic tubes and a
+two-chamber dumbbell. The tubes have independent passage/wall/exclusion references and actual native/public
 observations; their open physical/all-atom receiving questions remain #180/#181/#184.
 These studies do not
 establish general biological accuracy or uniform precision for every numerical
@@ -33,6 +33,7 @@ closed_shell/index
 shell_with_opening/index
 straight_tube_narrow_dense/index
 straight_tube_wide_sparse/index
+dumbbell/index
 Public Topography receiving <public_topography>
 Supports and robustness <public_support_and_robustness>
 Comparison disposition <comparison_disposition>
@@ -50,6 +51,7 @@ Volume definitions and precision <volume_measurements>
 | [Shell with an opening](shell_with_opening/index.md) | Does deleting a cap change access at the same probe, and where are the exterior contacts? | Separate executed system/native notebooks; exact parent subset, independent ray/enclosure/exclusion controls and mapped contacts. Original comparisons remain planned. |
 | [Narrow straight tube, dense sampling](straight_tube_narrow_dense/index.md) | Can a bent passage remain open after its straight axis is blocked, and is a graph skeleton physically valid? | Separate system/native notebooks; independent two-end paths, complete wall/opening certificates and finite-hull exclusion. Native boundary/all-atom questions remain open; no original comparisons yet. |
 | [Wide straight tube, sparse sampling](straight_tube_wide_sparse/index.md) | Can a sparsely sampled wall retain two physical ends and a clear passage at the same probe sizes? | Separate executed system/native notebooks; independent axis, complete wall/end certificates and a 5 Å exclusion control. Channel contacts resolve at 1.4 Å; boundary numerics and local/all-atom questions remain open. |
+| [Dumbbell: two chambers and a neck](dumbbell/index.md) | When does one enclosed region split into two, and what hierarchy reaches Topography? | Separate system/native readers; independent covered wall, connecting path, neck separator and finite-hull exclusion. Anchored native/public transition and provisional hierarchy agree; global physical hull availability and five-domain diagnosis remain open. |
 
 | Part | What the reader can inspect |
 | --- | --- |
@@ -135,16 +137,17 @@ build. Execution and scientific review are separate checks.
 
 ## Study sequence
 
-Current priority: the [paired straight tubes](straight_tube_wide_sparse/index.md#compare-the-two-tubes),
-selected after the finite three-case acceptance. The maintainer selected the
-wide/sparse companion while the narrow tube remains unqualified. Resolve their
-bounded physical and all-atom/public questions before adding another geometry.
+Current selection: the [dumbbell](dumbbell/index.md) under #186, explicitly
+chosen before the [joint six-case review](https://github.com/uibcdf/topomt/issues/187).
+This supersedes the earlier scheduling gate to fix the tubes first, while their
+#180/#181/#184/#76 profiles remain open. The new unit preserves all older evidence
+and does not claim complete scientific qualification.
 The [public receiving audit](public_topography.md) follows their native results
 into `Topography`. The [stronger 0.2 Å wall cover](closed_shell/closure_at_0p2.md)
 resolves one earlier reference question. The [finite three-case acceptance](three_case_disposition.md) records delivered
 physical patches/paths and conditional-volume references, the remaining
 unavailable quantities and the conditions for a next synthetic study. The tube
-has now started; the chambers below have not.
+and dumbbell units are established; their open scientific questions remain visible.
 
 1. **Regular tetrahedron:** residence versus face transit and probe-dependent
    connectivity; independent circumradius formulas.
@@ -153,7 +156,7 @@ has now started; the chambers below have not.
 4. **Tube:** passage, bottlenecks and the limits of a graph skeleton.
 5. **Two chambers with a neck:** residence regions, communication and separation.
 
-The five units are available; each separates its system reference and
+The six units are available; each separates its system reference and
 native analysis into independently executable notebooks. The closed shell includes a
 separately declared small-probe escape witness on its unchanged atomic input.
 The opening variant derives from that same wall and retains parent atom IDs.

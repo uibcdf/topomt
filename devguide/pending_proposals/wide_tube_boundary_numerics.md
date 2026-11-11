@@ -70,3 +70,16 @@ its bibliographic strings are not accepted as portable attribution. #185 correct
 new evidence serialization only; it changes no scientific DFND operator.
 The maintained card is
 https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19535683.
+
+## Dumbbell receiving profile — 2026-11-11
+
+Source 17a4c9a521c89a64efb12ba339161e15c85d4ce0 adds the #186 frozen 94-ball
+dumbbell at 1.4 Å: `face 98: critical-section ordering within numerical margin`,
+with unknown physical hull count. Unlike the original wide 2.5 Å control, this
+new reference proves a covered nonconvex barrier enclosing connected named
+anchors; it does not count every strict-free patch on the native convex hull.
+Native/public anchor communication and its hierarchy agree with those bounded
+references. This is another observed availability profile, not a wrong computed
+count or a proof that the entire physical boundary is known independently.
+Keep the original wide two-end target and all exact source scopes. Budget
+exhaustion at dumbbell 2.2/6 Å remains #180.

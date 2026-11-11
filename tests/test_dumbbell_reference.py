@@ -160,3 +160,19 @@ def test_accepted_reference_replays_without_native_dfnd():
     assert result['anchor_separation_2.2A'] == 'certified'
     assert result['finite_hull_exclusion_6A'] == 'certified'
     assert result['exact_global_free_component_count'] == 'not_established'
+
+
+def test_reference_replay_respects_nondefault_application_units():
+    from devtools.verify_dumbbell_reference import verify_reference
+
+    with puw.context(standard_units=['pm', 'fs', 'radians']):
+        observed = verify_reference(
+            ARTIFACTS / 'input.json',
+            ARTIFACTS / 'protocol.json',
+            json.loads((ARTIFACTS / 'reference_certificate.json').read_text()),
+        )
+        clearance = puw.get_value(
+            observed['connecting_axis_minimum_clearance'], to_unit='angstroms'
+        )
+        assert 1.43 < clearance < 1.44
+        assert observed['anchor_separation_2.2A'] == 'certified'

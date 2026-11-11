@@ -35,6 +35,8 @@ inputs, independent reasoning, native/public observations and versioned evidence
 | Narrow straight tube, 2.5 Å | A conservative all-atom bound covers every center position in the finite hull. |
 | Wide straight tube, 1.4/2.5 Å | Clear axis and complete wall/end certificates proving two strict-free hull patches. Native physical count resolves only at 1.4 Å in this study. |
 | Wide straight tube, 5 Å | Every finite-hull point is covered by expanded balls; local/public candidates still require qualification. |
+| Dumbbell, 1.4/2.2 Å | Complete covered nonconvex barrier, connecting-axis witness, and covered neck section prove connected then distinct enclosed named anchors; not every global region. |
+| Dumbbell, 6 Å | A complete tetrahedral cover excludes every strict-free center in the finite native hull; native wet/public results are empty while physical hull counting remains unavailable. |
 
 The wall is a sampled union of balls, not a continuum sphere with an assumed
 inner radius. A certificate for the origin-containing region does not prescribe
@@ -103,8 +105,9 @@ rates, solvent populations or folding free energy. These need additional
 physical/chemical models and biological evidence.
 
 The current teaching work does not initiate new native protein characterization.
-The [paired tubes](../benchlab/synthetic/straight_tube_wide_sparse/index.md#compare-the-two-tubes)
-follow the finite three-case checkpoint; stay with their open questions before adding another geometry. Source-level
+The [dumbbell](../benchlab/synthetic/dumbbell/index.md) follows the paired tubes
+by explicit maintainer selection. Their open questions remain for the subsequent
+[joint review #187](https://github.com/uibcdf/topomt/issues/187). Source-level
 examples and a built documentation site also do not qualify an installed package,
 platform/interpreter matrix or every provider route.
 

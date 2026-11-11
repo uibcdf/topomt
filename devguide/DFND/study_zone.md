@@ -210,3 +210,16 @@ Inspect actual notebook and browser outputs, including a mobile viewport;
 successful execution and a warning-free build do not prove readable output.
 Preserve earlier protocols/observations and refresh the current cell protocol,
 fresh-kernel receipts and complete download manifest for a reader change.
+
+
+## Dumbbell before joint review — 2026-11-11
+
+The maintainer explicitly selects the existing symmetric dumbbell under #186,
+then the later six-case review #187. This supersedes tube-first scheduling;
+prior findings and all original artifacts/notebooks/downloads remain unchanged.
+The new references distinguish a covered nonconvex barrier from the native hull,
+and certify named communication/enclosure/separation plus a finite-hull empty
+control. Native/public anchor correspondence and provisional hierarchy have
+separate source support. #180/#184 retain physical availability, while the
+historical component-count inference is needs_review under #188. An increasing
+component count alone is not a violation of free-set inclusion.

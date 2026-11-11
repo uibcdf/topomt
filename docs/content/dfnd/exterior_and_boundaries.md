@@ -159,6 +159,14 @@ numerical ambiguity leaves the boundary unknown ([#184](https://github.com/uibcd
 at 5 Å it exhausts arrangement work (#180). A positive profile does not correct
 the narrower input's budget limitation or qualify every association.
 
+The [dumbbell reference](../benchlab/synthetic/dumbbell/system.ipynb) adds a
+separate covered nonconvex barrier P and a covered neck section. These prove
+enclosure and separation of named free anchors, without counting every free
+patch on the native convex hull H. At 6 Å a different complete cover of H does
+prove zero physical patches; native counting remains budget-unresolved (#180).
+At 1.4 Å numerical-margin availability is #184. A successful anchor/region
+observation does not silently complete global hull decomposition.
+
 ## Other boundary roles
 
 | Native relation | Interpretation in the discrete construction |

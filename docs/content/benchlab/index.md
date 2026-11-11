@@ -18,7 +18,7 @@ The collection has two sections:
 
 | Collection | What it investigates | Current scope |
 | --- | --- | --- |
-| [Synthetic systems](synthetic/index.md) | Controlled geometries that isolate residence, access, openings, constrictions, boundaries, surface relief and interfaces. | Regular tetrahedron, sampled closed shell, its exact opening variant, and narrow/dense and wide/sparse straight tubes. Scientific qualification remains profile-specific. |
+| [Synthetic systems](synthetic/index.md) | Controlled geometries that isolate residence, access, openings, constrictions, boundaries, surface relief and interfaces. | Regular tetrahedron, sampled closed shell, its exact opening variant, narrow/dense and wide/sparse straight tubes, and a two-chamber dumbbell. Scientific qualification remains profile-specific. |
 | [Molecular systems](molecular/index.md) | Real molecular structures and, later, ensembles or trajectories, with explicit preparation and biological context. | Planned. New molecular characterization follows the synthetic phase. |
 
 ```{toctree}

@@ -214,9 +214,10 @@ def test_known_failure_marginal_gate_flickers_under_noise():
 
 
 def test_known_failure_more_features_appear_at_a_larger_probe():
-    # SHOULD BE: a bigger probe finds no MORE features. CURRENTLY: the dumbbell
-    # yields 2 significant domains at probe 1.4 but 5 at probe 2.0 -- spurious
-    # over-fragmentation grows with probe, so feature count is not monotone.
+    # Historical observation, not an independent failure oracle (#188): the
+    # native count grows between these probes. Physical free sets can fragment
+    # as a probe grows; diagnose the individual supports before calling the
+    # extra domains spurious. The historical test name is retained for now.
     coords, radii = syn.dumbbell(7.0, 12.5, 3.5, jitter=0.1, seed=0)
     n_small = sum(
         1
@@ -228,7 +229,7 @@ def test_known_failure_more_features_appear_at_a_larger_probe():
         for d in _domains(coords, radii, probe_radius=2.0)
         if d['n_resident_nodes'] >= 5
     )
-    assert n_big > n_small  # more features at bigger probe (ideal: <=)
+    assert n_big > n_small  # retained native observation; physical diagnosis is #188
 
 
 def test_known_failure_isolated_outlier_atom_creates_a_phantom_pocket():

@@ -167,9 +167,14 @@ a few are handled (see the next section). Pinned in `test_dfnd_pathological.py`.
   6/10 seeds). The cavity exists or not depending on noise.
 - **Marginal gate flicker.** A sphere whose wall gate sits at the probe threshold
   (spacing 4.2) is classified void / pocket / channel depending only on the seed.
-- **Non-monotone probe response.** The dumbbell yields 2 significant components at
-  probe 1.4 but **5 at probe 2.0** — a *larger* probe finds *more* features
-  (spurious over-fragmentation grows with probe).
+- **Probe-dependent component counts — needs_review, #188.** The historical
+  observation is 2 significant native domains at 1.4 Å and 5 at 2.0 Å. An
+  increase alone does not establish spurious fragmentation: shrinking physical
+  free sets can split. The new independently referenced dumbbell connects its
+  named anchors at 1.4 Å and separates them at 2.2 Å. Diagnose the original five
+  supports before reusing this observation as a current limitation; #187 owns
+  the joint review and #188 this specific interpretation. Earlier wording
+  called the increase intrinsically spurious; that inference is withdrawn.
 
 **Anisotropy / segmentation (more of disease 1)**
 - **Oblate slit void** → splits into 2 voids (ideal 1).

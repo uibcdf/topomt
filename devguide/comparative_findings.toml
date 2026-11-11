@@ -6,12 +6,12 @@ hub_url = "https://github.com/uibcdf/topomt/discussions/154"
 id = "tube-physical-boundary-budget"
 kind = "dfnd_limitation"
 status = "current"
-summary = "Pinned narrow profiles and the wide 5 angstrom profile exhaust bounded physical hull decomposition; physical counts remain unknown despite independent references."
-scope = "Frozen 81-argon-ball straight_tube_narrow_dense model, source b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4, probes 1.2/1.4/2.5 angstroms, flag_only/with_connectors and zero physical tolerances. Also 77-ball straight_tube_wide_sparse at 5 angstroms, source 3ad9515019e722c0ccf4ade7a3024de4166e217e, same physical conventions. No revision of the earlier five-control #151 resolution."
+summary = "Pinned tube profiles and dumbbell 2.2/6 angstrom profiles exhaust bounded physical hull decomposition; physical counts remain unknown despite independent references."
+scope = "Frozen 81-argon-ball straight_tube_narrow_dense model, source b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4, probes 1.2/1.4/2.5 angstroms, flag_only/with_connectors and zero physical tolerances. Also 77-ball straight_tube_wide_sparse at 5 angstroms, source 3ad9515019e722c0ccf4ade7a3024de4166e217e, same physical conventions. Also 94-ball dumbbell at 2.2/6 angstroms, source 17a4c9a521c89a64efb12ba339161e15c85d4ce0; at 6 its complete finite hull is independently excluded. At2.2 named enclosure does not count every hull patch. No revision of the earlier five-control #151 resolution."
 issue = "uibcdf/topomt#180"
-evidence = ["docs/content/benchlab/synthetic/straight_tube_narrow_dense/index.md", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/native_observations.json", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/boundary_1.2A_v2_verification.json", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/boundary_1.4A_v2_verification.json", "devguide/pending_proposals/dfnd_tube_boundary_budget.md", "tests/test_tube_study.py", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/index.md", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/native_observations.json", "tests/test_wide_tube_study.py"]
+evidence = ["docs/content/benchlab/synthetic/straight_tube_narrow_dense/index.md", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/native_observations.json", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/boundary_1.2A_v2_verification.json", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/boundary_1.4A_v2_verification.json", "devguide/pending_proposals/dfnd_tube_boundary_budget.md", "tests/test_tube_study.py", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/index.md", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/native_observations.json", "tests/test_wide_tube_study.py", "docs/content/benchlab/synthetic/dumbbell/index.md", "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/native_observations.json", "tests/test_dumbbell_study.py"]
 owner = "TopoMT maintainers (LMMV/dprada)"
-reviewed_on = "2026-11-10"
+reviewed_on = "2026-11-11"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19533340"
 
 [[findings]]
@@ -105,10 +105,23 @@ issue = "uibcdf/topomt#155"
 id = "wide-tube-boundary-numerical-margin"
 kind = "dfnd_limitation"
 status = "current"
-summary = "The wide tube at 2.5 angstroms returns unknown physical patches within a numerical margin despite two independently established end patches."
-scope = "77 full-precision argon balls, straight_tube_wide_sparse, probe 2.5 angstroms, source 3ad9515019e722c0ccf4ade7a3024de4166e217e. with_connectors/flag_only/dryface, zero physical tolerances and epsilon/boundary margin 1e-6 angstroms. An availability limitation, not an incorrect computed count or budget-exhaustion diagnosis."
+summary = "Wide 2.5 angstroms and dumbbell 1.4 angstroms return unknown physical patches within a numerical margin; independent references have different exact-patch versus named-anchor scopes."
+scope = "77 full-precision argon balls, straight_tube_wide_sparse, probe 2.5 angstroms, source 3ad9515019e722c0ccf4ade7a3024de4166e217e. with_connectors/flag_only/dryface, zero physical tolerances and epsilon/boundary margin 1e-6 angstroms. Also 94-ball dumbbell at 1.4 angstroms, source 17a4c9a521c89a64efb12ba339161e15c85d4ce0: independent named-anchor enclosure is not an exact global hull-patch oracle. An availability limitation, not an incorrect computed count or budget-exhaustion diagnosis."
 issue = "uibcdf/topomt#184"
-evidence = ["docs/content/benchlab/synthetic/straight_tube_wide_sparse/index.md", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/native_observations.json", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/boundary_2.5A_verification.json", "devguide/pending_proposals/wide_tube_boundary_numerics.md", "tests/test_wide_tube_study.py"]
+evidence = ["docs/content/benchlab/synthetic/straight_tube_wide_sparse/index.md", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/native_observations.json", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/boundary_2.5A_verification.json", "devguide/pending_proposals/wide_tube_boundary_numerics.md", "tests/test_wide_tube_study.py", "docs/content/benchlab/synthetic/dumbbell/index.md", "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/native_observations.json", "tests/test_dumbbell_study.py"]
 owner = "TopoMT maintainers (LMMV/dprada)"
-reviewed_on = "2026-11-10"
+reviewed_on = "2026-11-11"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19535683"
+
+
+[[findings]]
+id = "dumbbell-probe-fragmentation-diagnosis"
+kind = "dfnd_limitation"
+status = "needs_review"
+summary = "A probe-dependent native count increase alone does not diagnose a defect; the original five-domain physical interpretation needs review."
+scope = "Historical dumbbell two-versus-five native-domain observation at 1.4/2.0 angstroms. New frozen 94-ball references/source 17a4c9a521c89a64efb12ba339161e15c85d4ce0 establish one real named-anchor fragmentation event at 1.4/2.2, not every component at 2.0. No diagnosed overfragmentation or current paper limitation."
+issue = "uibcdf/topomt#188"
+evidence = ["docs/content/benchlab/synthetic/dumbbell/index.md", "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/reference_verification.json", "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/native_observations.json", "devguide/DFND/pathological_systems.md", "devguide/pending_proposals/dfnd_component_count_diagnosis.md", "tests/test_dfnd_pathological.py"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-11"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19536753"
