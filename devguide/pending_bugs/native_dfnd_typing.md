@@ -54,6 +54,28 @@ mesh face/tuple types should be truthful without changing runtime structures or
 the scientific result. BaseFeature's TYPE_CHECKING import currently treats the
 Topography module as a type.
 
+## Policy and priority clarification — 2026-11-11
+
+The [MolSysSuite quality-tooling policy](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_tooling_policy.md#type-checking-and-runtime-validation)
+leaves static checking to each member. Its
+[ecosystem policy](https://github.com/uibcdf/molsyssuite/blob/main/devguide/python_ecosystem_policy.md#applicability-and-behavior)
+assigns nontrivial public argument validation/normalization to ArgDigest.
+Neither requires blanket internal annotations or a clean whole-package mypy
+gate. TopoMT's [local instructions](../../AGENTS.md) require public annotations
+and applicable local type checks; they do not impose complete private coverage.
+
+ArgDigest validates executed boundary calls. Static checking helps developers
+inspect declared types and their use inside implementations. These roles can
+complement each other; neither replaces scientific tests or independent
+geometric evidence. The 56 recorded diagnostics therefore do not establish
+56 runtime/scientific defects, an ArgDigest failure or suite noncompliance.
+
+This issue retains local annotation-maintenance work for deliberate selection,
+not a prerequisite for BenchLab or the native scientific sequence. Prefer
+focused corrections that clarify the actual object model or prevent a concrete
+error. Do not turn this handoff into universal annotation coverage, duplicate
+runtime type validation or decorating every internal helper with ArgDigest.
+
 ## What was refuted
 
 These are not new diagnostics caused by a scientific-kernel change in the public
