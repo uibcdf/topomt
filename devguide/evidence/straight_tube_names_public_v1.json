@@ -1,0 +1,89 @@
+{
+  "schema": "topomt.benchlab.tube-public-receiving/1",
+  "issue": "uibcdf/topomt#182",
+  "captured_at": "2026-11-11T05:14:49.542682+00:00",
+  "workflow_run": 42963825201,
+  "documentation_source_revision": "99e5b80255019d86e94cd15cb43c30076e033d42",
+  "native_scientific_source_revision": "b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4",
+  "served_build": {
+    "schema": "topomt.documentation-build/1",
+    "source_commit": "99e5b80255019d86e94cd15cb43c30076e033d42",
+    "html_pages": 100,
+    "local_links": 9185,
+    "notebook_execution": "off"
+  },
+  "pages": [
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_narrow_dense/index.html",
+      "status": 200,
+      "bytes": 37771,
+      "title": "Straight tube: narrow, dense sampling \u2013 TopoMT 0.5.0",
+      "tables": 1,
+      "expandable_code_blocks": 0
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_narrow_dense/system.html",
+      "status": 200,
+      "bytes": 62486,
+      "title": "Narrow, densely sampled straight tube: system and independent references \u2013 TopoMT 0.5.0",
+      "tables": 2,
+      "expandable_code_blocks": 5
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_narrow_dense/dfnd.html",
+      "status": 200,
+      "bytes": 76186,
+      "title": "Narrow, densely sampled straight tube: DFND observations \u2013 TopoMT 0.5.0",
+      "tables": 4,
+      "expandable_code_blocks": 6
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/README.html",
+      "status": 200,
+      "bytes": 40992,
+      "title": "Straight-tube evidence v1 \u2013 TopoMT 0.5.0",
+      "tables": 1,
+      "expandable_code_blocks": 0
+    }
+  ],
+  "download": {
+    "url": "https://www.uibcdf.org/topomt/_downloads/f3906b24bf2e0aa03c98ad3f46687cfc/straight_tube_narrow_dense_v1.zip",
+    "status": 200,
+    "bytes": 10379141,
+    "sha256": "de01c2fc1969fe87dc976d79dc39523cad38463ef515a520dc9221f0109e2636"
+  },
+  "fresh_kernel_evidence_reused": "devguide/evidence/straight_tube_names_portable_v1.json; byte-identical served ZIP",
+  "scope": "Actual public Pages and complete source-bound study download; initial native physical/all-atom qualification remains open under #180/#181, broader installed/platform qualification under #16",
+  "relocation_pages": [
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/cylinder_tube/index.html",
+      "status": 200,
+      "current_study_link_present": true
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/cylinder_tube/system.html",
+      "status": 200,
+      "current_study_link_present": true
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/cylinder_tube/dfnd.html",
+      "status": 200,
+      "current_study_link_present": true
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/README.html",
+      "status": 200,
+      "current_study_link_present": true
+    }
+  ],
+  "current_case_id": "straight_tube_narrow_dense",
+  "reader_runtime_source_revision": "107c291cf8c6fa0663793fa32a96cd975e49589e",
+  "owning_issue_state": "closed",
+  "run_receptor": {
+    "version": "1.4.0",
+    "conclusion": "success",
+    "profile": "docs",
+    "jobs": "1/1",
+    "artifacts": 1
+  }
+}

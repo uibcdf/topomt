@@ -121,3 +121,13 @@ All three owned /tmp reader/source trees and temporary browser profiles were
 removed after receiving; the human version-file edit remains untouched.
 Initial unit #178 and query-admission #179 are source-resolved; #180/#181 and
 wider #76/#16 remain open on their explicit scopes.
+
+## Descriptive identity maintenance — 2026-11-10
+
+Naming migration #182 relocates the same frozen evidence to
+`docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/`.
+The current study is `straight_tube_narrow_dense`; its wider catalog counterpart
+is `straight_tube_wide_sparse`. Earlier source/path references above retain
+their historical meaning. Use `devguide/archive/straight_tube_names.md` and the
+current case index for maintained paths and the replacement reader/download.
+This naming update preserves original bytes and does not resolve #180/#181.

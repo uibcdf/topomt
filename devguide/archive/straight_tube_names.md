@@ -104,3 +104,11 @@ links checked. Exact portable, preservation, raw-before/after, checks and live
 finding readback receipts are in devguide/evidence/straight_tube_*_v1.json.
 This closes the naming migration, not physical/all-atom or full-suite work;
 #180/#181 and wider #76/#16 retain their current owners and dispositions.
+
+## Public closeout
+
+Pages run 42963825201 succeeds at source 99e5b80. Actual current case pages
+and the new download verify; its SHA-256 matches the exact 368-file ZIP tested
+outside the checkout. Four published prior URLs expose current relocation links.
+See devguide/evidence/straight_tube_names_public_v1.json. Issue #182 is closed;
+#180/#181 and the broader #76/#16 scopes remain open.
