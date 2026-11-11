@@ -1,8 +1,6 @@
-from __future__ import annotations
-
 import copy
 from collections.abc import Iterator, Mapping
-from typing import Any, Optional
+from typing import Any, Literal, Optional, TypedDict, cast, overload
 
 import molsysmt as msm
 
@@ -16,6 +14,19 @@ from ..features.BaseFeature import (
     FeatureType,
     ShapeType,
 )
+from ..features.Feature0D import Feature0D
+from ..features.Feature1D import Feature1D
+from ..features.Feature2D import Feature2D
+
+
+class TopographyInfo(TypedDict):
+    """Counts returned by ``Topography.info()``, retaining integer dimensions."""
+
+    by_type: dict[FeatureType, int]
+    by_shape: dict[ShapeType, int]
+    by_dimensionality: dict[int, int]
+    total: int
+
 
 # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 # Main class
@@ -98,7 +109,7 @@ class Topography(Mapping[str, BaseFeature]):
     def __len__(self) -> int:
         return len(self._features)
 
-    def copy(self, deep: bool = True) -> Topography:
+    def copy(self, deep: bool = True) -> 'Topography':
         """Copy the analysis state into an independent feature registry.
 
         Parameters
@@ -409,11 +420,14 @@ class Topography(Mapping[str, BaseFeature]):
             parent = self._features[parent_id]
             for child_id in child_ids:
                 child = self._features[child_id]
-                child._add_surface_id(parent_id)
+                # Connections have already passed the dimensionality contract.
+                # These casts describe the concrete relation methods without
+                # imposing a new runtime class restriction on custom features.
+                cast(Feature0D | Feature1D, child)._add_surface_id(parent_id)
                 if child.dimensionality == 0:
-                    parent._add_point_id(child_id)
+                    cast(Feature2D, parent)._add_point_id(child_id)
                 elif child.dimensionality == 1:
-                    parent._add_boundary_id(child_id)
+                    cast(Feature2D, parent)._add_boundary_id(child_id)
 
     def add_new_feature(
         self,
@@ -423,7 +437,7 @@ class Topography(Mapping[str, BaseFeature]):
         atom_labels: list[str] | None = None,
         atom_label_format: str | None = None,
         **kwargs,
-    ) -> FeatureType | None:
+    ) -> FeatureID | None:
         """Create a feature of the given type and add it to the topography.
 
         Parameters
@@ -437,8 +451,9 @@ class Topography(Mapping[str, BaseFeature]):
 
         Returns
         -------
-        BaseFeature
-            The created feature instance.
+        str or None
+            The generated feature ID, or None when an explicit ID was supplied.
+            Retrieve the registered instance with ``topography[feature_id]``.
         """
         feature_class = _FEATURE_TYPE_REGISTRY.get(feature_type.lower())
         if feature_class is None:
@@ -529,42 +544,130 @@ class Topography(Mapping[str, BaseFeature]):
     # public: lookups
     # ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
+    @overload
     def get_features(
         self,
         *,
         by: str | None = None,
-        value: str | int | list | tuple | set | None = None,
+        value: str | int | list[str] | tuple[str, ...] | set[str] | None = None,
+        grouped_by: None = None,
+        as_feature_ids: Literal[False] = False,
+    ) -> set[BaseFeature]: ...
+
+    @overload
+    def get_features(
+        self,
+        *,
+        by: str | None = None,
+        value: str | int | list[str] | tuple[str, ...] | set[str] | None = None,
+        grouped_by: None = None,
+        as_feature_ids: Literal[True],
+    ) -> set[FeatureID]: ...
+
+    @overload
+    def get_features(
+        self,
+        *,
+        by: str | None = None,
+        value: str | int | list[str] | tuple[str, ...] | set[str] | None = None,
+        grouped_by: str,
+        as_feature_ids: Literal[False] = False,
+    ) -> dict[str | int, set[BaseFeature]]: ...
+
+    @overload
+    def get_features(
+        self,
+        *,
+        by: str | None = None,
+        value: str | int | list[str] | tuple[str, ...] | set[str] | None = None,
+        grouped_by: str,
+        as_feature_ids: Literal[True],
+    ) -> dict[str | int, set[FeatureID]]: ...
+
+    @overload
+    def get_features(
+        self,
+        *,
+        by: str | None = None,
+        value: str | int | list[str] | tuple[str, ...] | set[str] | None = None,
         grouped_by: str | None = None,
         as_feature_ids: bool = False,
+    ) -> (
+        set[BaseFeature]
+        | set[FeatureID]
+        | dict[str | int, set[BaseFeature]]
+        | dict[str | int, set[FeatureID]]
+    ): ...
+
+    def get_features(
+        self,
+        *,
+        by: str | None = None,
+        value: str | int | list[str] | tuple[str, ...] | set[str] | None = None,
+        grouped_by: str | None = None,
+        as_feature_ids: bool = False,
+    ) -> (
+        set[BaseFeature]
+        | set[FeatureID]
+        | dict[str | int, set[BaseFeature]]
+        | dict[str | int, set[FeatureID]]
     ):
-        """Devuelve features filtradas y opcionalmente agrupadas.
+        """Return matching features or IDs, optionally grouped into sets.
 
         Parameters
         ----------
         by : {"id", "type", "shape", "dimensionality", None}
-            Criterio de filtrado. Si es None, se consideran todas.
-        value : any
-            Valor del criterio. Para "id" puede ser str o iterable de str.
+            Filter criterion. None selects every registered feature.
+        value : str, int, list of str, tuple of str or set of str, optional
+            Feature type, shape, dimensionality or ID to match. ID filtering
+            also accepts a list, tuple or set of IDs; unknown IDs are omitted.
         grouped_by : {"type", "shape", "dimensionality", None}
-            Si se indica, la salida es un dict agrupado por ese criterio.
+            Group criterion. Dimensionality keys are integers; type and shape
+            keys are strings.
         as_feature_ids : bool
-            Si True, se devuelven ids; si False, objetos.
+            Return IDs instead of the registered feature objects.
+
+        Returns
+        -------
+        set or dict of sets
+            A set of matching objects or IDs, or a dictionary of such sets when
+            grouped. Sets are newly constructed; feature objects retain their
+            identity in this registry. Their iteration order is unspecified.
+
+        Raises
+        ------
+        ValueError
+            For an unknown filter criterion, or an unknown grouping criterion
+            when there are matching features to group.
+        TypeError
+            If a type, shape or dimensionality lookup uses an unhashable value.
+
+        Examples
+        --------
+        >>> from topomt import Topography
+        >>> topo = Topography()
+        >>> topo.add_new_feature('pocket')
+        'POC-1'
+        >>> topo.get_features(by='type', value='pocket', as_feature_ids=True)
+        {'POC-1'}
+        >>> topo.get_features(grouped_by='dimensionality', as_feature_ids=True)
+        {2: {'POC-1'}}
         """
-        # 1) obtener el conjunto inicial de ids
+        # Describe each index's key domain without changing dict.get semantics:
+        # nonmatching hashable keys miss; unhashable values still raise TypeError.
         if by is None:
             feature_ids = set(self._features.keys())
 
         elif by == 'type':
-            feature_ids = set(self._by_type.get(value, ()))
+            feature_ids = set(self._by_type.get(cast(FeatureType, value), ()))
 
         elif by == 'shape':
-            feature_ids = set(self._by_shape.get(value, ()))
+            feature_ids = set(self._by_shape.get(cast(ShapeType, value), ()))
 
         elif by == 'dimensionality':
-            feature_ids = set(self._by_dimensionality.get(value, ()))
+            feature_ids = set(self._by_dimensionality.get(cast(int, value), ()))
 
         elif by == 'id':
-            # value puede ser un id o un iterable de ids
             feature_ids = set()
             if isinstance(value, str):
                 if value in self._features:
@@ -574,20 +677,17 @@ class Topography(Mapping[str, BaseFeature]):
                     if fid in self._features:
                         feature_ids.add(fid)
             else:
-                # nada válido
                 feature_ids = set()
         else:
             raise ValueError(f"Unknown 'by' criterion: {by!r}")
 
-        # 2) si no hay agrupamiento, devolvemos lista plana
         if grouped_by is None:
             if as_feature_ids:
                 return feature_ids
             else:
-                return set([self._features[fid] for fid in feature_ids])
+                return {self._features[fid] for fid in feature_ids}
 
-        # 3) salida agrupada
-        out: dict[str | int, list] = {}
+        grouped_ids: dict[str | int, set[FeatureID]] = {}
         for fid in feature_ids:
             feat = self._features[fid]
             if grouped_by == 'type':
@@ -599,10 +699,14 @@ class Topography(Mapping[str, BaseFeature]):
             else:
                 raise ValueError(f"Unknown 'grouped_by' criterion: {grouped_by!r}")
 
-            out.setdefault(key, set())
-            out[key].add(fid if as_feature_ids else feat)
+            grouped_ids.setdefault(key, set()).add(fid)
 
-        return out
+        if as_feature_ids:
+            return grouped_ids
+        return {
+            key: {self._features[fid] for fid in members}
+            for key, members in grouped_ids.items()
+        }
 
     def get_feature_by_id(self, feature_id: FeatureID) -> BaseFeature:
         if feature_id not in self._features:
@@ -628,7 +732,21 @@ class Topography(Mapping[str, BaseFeature]):
         else:
             return set([self._features[fid] for fid in self._parents_of[feature_id]])
 
-    def info(self) -> dict[str, dict[str, int]]:
+    def info(self) -> TopographyInfo:
+        """Return counts by type, shape and integer dimension, plus the total.
+
+        Returns
+        -------
+        TopographyInfo
+            Detached count dictionaries and an integer ``total``. Empty
+            dimensionality indexes remain visible with zero counts.
+
+        Examples
+        --------
+        >>> from topomt import Topography
+        >>> Topography().info()['by_dimensionality']
+        {0: 0, 1: 0, 2: 0}
+        """
         return {
             'by_type': {ftype: len(ids) for ftype, ids in self._by_type.items()},
             'by_shape': {shape: len(ids) for shape, ids in self._by_shape.items()},
