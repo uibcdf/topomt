@@ -18,8 +18,13 @@ zero-count target under #180. Global physical availability remains #184 at 1.4 �
 and #180 at 2.2/6 Å. The old component-count inference is needs_review under #188;
 more components at a larger probe need not be spurious. Earlier tube #181 and
 all prior source scopes remain unchanged. No scientific operator was retuned.
-Source/publication receipts retain their own candidate identities. Original
-comparators, installed matrices and protein characterization are not qualified.
+Hosted run 42981097024 serves source 785b0848af09a5a62914a43f95119f10f9a52e93:
+108 pages, 10,473 checked local links and zero Sphinx warnings. Four actual
+case pages and the exact tested ZIP are received in
+`devguide/evidence/dumbbell_public_v1.json`. Unit establishment #186 is complete;
+#187's joint review is next. Publication and source/portable receipts keep their
+own exact identities. Original comparators, installed matrices and protein
+characterization are not qualified.
 
 ## Earlier paired-tube checkpoint — 2026-11-11
 

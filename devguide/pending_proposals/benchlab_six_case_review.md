@@ -9,7 +9,7 @@ verification: asserted
 area: [dfnd, validation, docs]
 guard:
 normative:
-blocked_by: [uibcdf/topomt#186]
+blocked_by: []
 supersedes: []
 ---
 
@@ -57,3 +57,12 @@ established results, remaining failure/unknown owners, proposed correction order
 and meaningful acceptance guards. Reconcile corrected findings across their
 cards/hub/lifecycle/cases/reports and preserve historical evidence. Current
 method documentation and study presentation must reflect the resulting scope.
+
+## Establishment prerequisite completed — 2026-11-11
+
+Dumbbell #186 is published and received at source 785b0848af09a5a62914a43f95119f10f9a52e93,
+with actual hosted pages and a byte-identical tested ZIP. Its archived report is
+`devguide/archive/benchlab_dumbbell.md`. This review is now the next selected
+phase, not completed by that delivery. Include specific interpretation #188,
+existing #180/#181/#184/#76/#60 and broader qualification #16; keep independent
+references, physical claims and native/public graph objects distinct.

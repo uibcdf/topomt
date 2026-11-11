@@ -58,13 +58,16 @@ local/all-atom qualification #181, wide numerical boundary ambiguity #184 and
 wider paths #76. The wide 1.4 Å positive profile does not qualify the narrow
 input or start another geometry family, original-provider run or protein phase.
 
-DFND selection (2026-11-11): the maintainer explicitly requests the `dumbbell`
-BenchLab unit (#186) before a later joint review of all six units (#187). This
-supersedes the earlier scheduling gate to fix the tubes before a new family.
-Freeze independent references and characterize the existing symmetric input;
-keep #180/#181/#184/#76 open and preserve every earlier evidence/download byte.
-Unit establishment is distinct from scientific correction and from the later
-cross-case review. No original-provider/server or protein work is selected.
+DFND continuation (2026-11-11): the maintainer-selected `dumbbell` BenchLab
+unit is delivered under #186, including independent named-anchor references,
+actual native/public hierarchy receiving, executed readers and verified hosted
+download. See `devguide/archive/benchlab_dumbbell.md`. The next selected phase
+is the joint six-case review #187. Retain physical availability #180/#184,
+the older tube #181 profiles, five-domain diagnosis #188 and broader #76/#60/#16.
+Do not impose monotone component counts: shrinking physical free sets can
+fragment. Preserve earlier source/evidence scopes and all prior artifacts;
+new unit delivery does not resolve those scientific questions or select another
+geometry, original provider/server run or protein phase.
 
 DFND method documentation lives in `docs/content/dfnd/`. Changes to operators,
 query policies, catalog promotion, units or physical interpretation must review

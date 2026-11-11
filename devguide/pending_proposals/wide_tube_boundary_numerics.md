@@ -50,7 +50,9 @@ component/patch associations remain unknown. Wider path work remains #76.
 
 Input SHA-256 77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855,
 1.88 Å atomic radii, 2.5 Å probe, with_connectors/flag_only/dryface, zero physical
-tolerances and epsilon/boundary margin 1e-6 Å. No scientific fix, original-engine
+tolerances and epsilon/boundary margin 1e-6 Å. The dated extension adds the
+94-ball dumbbell at 1.4 Å, source 17a4c9a, with the explicitly different
+named-anchor reference scope. No scientific fix, original-engine
 comparison, all-atom component-count or installed/platform qualification.
 
 ## Acceptance criteria

@@ -46,9 +46,8 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (5)
+### Active (4)
 
-- [`benchlab_dumbbell.md`](benchlab_dumbbell.md) — [#186](https://github.com/uibcdf/topomt/issues/186) — Establish the symmetric dumbbell BenchLab before the joint case review. *(active, inspected)*
 - [`dfnd_tube_all_atom_receiving.md`](dfnd_tube_all_atom_receiving.md) — [#181](https://github.com/uibcdf/topomt/issues/181) — Reconcile local tube candidates with independently empty all-atom carriers. *(active, measured)*
 - [`dfnd_tube_boundary_budget.md`](dfnd_tube_boundary_budget.md) — [#180](https://github.com/uibcdf/topomt/issues/180) — Resolve bounded physical boundary receiving on the frozen straight tubes. *(active, measured)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*

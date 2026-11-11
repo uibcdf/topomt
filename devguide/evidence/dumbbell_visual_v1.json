@@ -1,0 +1,58 @@
+{
+  "browser": "actual headless Google Chrome, CDP after DOM/layout readiness",
+  "pages": [
+    {
+      "screenshot": "dumbbell-system-desktop",
+      "title": "Two chambers and a narrow neck \u2013 TopoMT 1.0.0",
+      "mainCharacters": 7788,
+      "mainWidth": 1077.3125,
+      "viewportWidth": 1440,
+      "bodyScrollWidth": 1425,
+      "tables": 3
+    },
+    {
+      "screenshot": "dumbbell-dfnd-desktop",
+      "title": "DFND: one enclosed region becomes two \u2013 TopoMT 1.0.0",
+      "mainCharacters": 8913,
+      "mainWidth": 1077.3125,
+      "viewportWidth": 1440,
+      "bodyScrollWidth": 1425,
+      "tables": 4
+    },
+    {
+      "screenshot": "dumbbell-index-mobile",
+      "title": "Dumbbell: two chambers and a neck \u2013 TopoMT 1.0.0",
+      "mainCharacters": 5958,
+      "mainWidth": 351,
+      "viewportWidth": 390,
+      "bodyScrollWidth": 390,
+      "tables": 1
+    },
+    {
+      "screenshot": "dumbbell-system-mobile",
+      "title": "Two chambers and a narrow neck \u2013 TopoMT 1.0.0",
+      "mainCharacters": 7585,
+      "mainWidth": 351,
+      "viewportWidth": 390,
+      "bodyScrollWidth": 390,
+      "tables": 3
+    },
+    {
+      "screenshot": "dumbbell-dfnd-mobile",
+      "title": "DFND: one enclosed region becomes two \u2013 TopoMT 1.0.0",
+      "mainCharacters": 8688,
+      "mainWidth": 351,
+      "viewportWidth": 390,
+      "bodyScrollWidth": 390,
+      "tables": 4
+    }
+  ],
+  "peak_own_tree_rss_mib": 1322.5,
+  "wall_seconds": 4.69,
+  "schema": "topomt.benchlab.dumbbell-visual-receiving/1",
+  "issue": "uibcdf/topomt#186",
+  "source_revision": "785b0848af09a5a62914a43f95119f10f9a52e93",
+  "six_case_rows_semantic": true,
+  "eleven_reference_controls_semantic": true,
+  "mobile_horizontal_page_overflow": false
+}

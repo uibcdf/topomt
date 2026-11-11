@@ -48,8 +48,9 @@ accepting a face-cluster count would not establish the missing physical result.
 
 ## Scope and exclusions
 
-The explicitly pinned narrow and wide budget profiles and their public physical
-receiving. The wide 2.5 Å numerical-margin profile is separately #184. No change to
+The explicitly pinned narrow/wide tube profiles and added 94-ball dumbbell
+profiles at 2.2/6 Å, with their public physical receiving. Wide 2.5 Å and
+dumbbell 1.4 Å numerical-margin availability are separately #184. No change to
 native link grouping, local capacity definitions, public catalog promotion,
 biological validation or installed-release qualification. #181 owns the
 separate high-probe candidate/free-set discrepancy; #76 retains wider paths.

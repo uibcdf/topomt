@@ -1,5 +1,17 @@
 # DFND notebook laboratory checkpoint
 
+## Dumbbell delivered; joint review next — 2026-11-11
+
+Unit establishment #186 is complete. Hosted run 42981097024 serves source
+785b0848af09a5a62914a43f95119f10f9a52e93; four case pages and the exact 430-file
+ZIP were received after successful local/outside fresh kernels. See
+`devguide/archive/benchlab_dumbbell.md` and `devguide/evidence/dumbbell_public_v1.json`.
+The next selected phase is #187's joint review, now unblocked. Keep scientific
+#180/#181/#184/#76 and specific interpretation #188 open. The independent
+reference certifies connected/separated named anchors and whole-hull exclusion;
+it does not count every physical region or certify every native motif/class.
+Earlier selection/protocol statements below retain their historical scopes.
+
 ## Selected dumbbell unit — 2026-11-11
 
 The maintainer explicitly selects the existing symmetric `dumbbell` under #186,

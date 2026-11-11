@@ -1,0 +1,57 @@
+{
+  "schema": "topomt.benchlab.tube-public-receiving/1",
+  "issue": "uibcdf/topomt#186",
+  "captured_at": "2026-11-11T07:45:26.213094+00:00",
+  "workflow_run": 42981097024,
+  "documentation_source_revision": "785b0848af09a5a62914a43f95119f10f9a52e93",
+  "native_scientific_source_revision": "17a4c9a521c89a64efb12ba339161e15c85d4ce0",
+  "served_build": {
+    "schema": "topomt.documentation-build/1",
+    "source_commit": "785b0848af09a5a62914a43f95119f10f9a52e93",
+    "html_pages": 108,
+    "local_links": 10473,
+    "notebook_execution": "off"
+  },
+  "pages": [
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/dumbbell/index.html",
+      "status": 200,
+      "bytes": 39934,
+      "title": "Dumbbell: two chambers and a neck \u2013 TopoMT 0.5.0",
+      "tables": 1,
+      "expandable_code_blocks": 0
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/dumbbell/system.html",
+      "status": 200,
+      "bytes": 71181,
+      "title": "Two chambers and a narrow neck \u2013 TopoMT 0.5.0",
+      "tables": 3,
+      "expandable_code_blocks": 5
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/dumbbell/dfnd.html",
+      "status": 200,
+      "bytes": 92604,
+      "title": "DFND: one enclosed region becomes two \u2013 TopoMT 0.5.0",
+      "tables": 4,
+      "expandable_code_blocks": 7
+    },
+    {
+      "url": "https://www.uibcdf.org/topomt/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/README.html",
+      "status": 200,
+      "bytes": 39800,
+      "title": "Dumbbell evidence and replay \u2013 TopoMT 0.5.0",
+      "tables": 0,
+      "expandable_code_blocks": 0
+    }
+  ],
+  "download": {
+    "url": "https://www.uibcdf.org/topomt/_downloads/e91eb2055a5b0ebbe9106226fe9f0942/dumbbell_v1.zip",
+    "status": 200,
+    "bytes": 12947604,
+    "sha256": "aa50887f8393a63034d937752a025cd9a5e118a9b0b53f2caaee279a1940df84"
+  },
+  "fresh_kernel_evidence_reused": "devguide/evidence/dumbbell_portable_v1.json; byte-identical served ZIP",
+  "scope": "Actual public Pages and complete source-bound study download; global physical availability remains #180/#184 and joint review #187/#188; prior tube profiles unchanged, broader installed/platform qualification under #16"
+}
