@@ -1,13 +1,13 @@
 ---
 summary: Establish the straight-tube BenchLab unit with independent passage and wall references.
 issue: uibcdf/topomt#178
-status: active
+status: resolved
 opened: 2026-11-10
-closed:
+closed: 2026-11-10
 severity: medium
-verification: inspected
+verification: measured
 area: [dfnd, validation, docs]
-guard:
+guard: tests/test_tube_notebook_delivery.py::test_downloaded_tube_references_replay_with_only_the_supplied_helper_tree
 normative:
 blocked_by: []
 supersedes: []
@@ -63,3 +63,33 @@ applicable Ruff/scoped typing, reporting/comparative and strict documentation
 checks. Record actual source identities and measured one-CPU resource use.
 Preserve all earlier study bytes. A new defect gets its own owner and test-first
 scope rather than a revised expected scientific answer.
+
+## Delivery and bounded disposition — 2026-11-10
+
+The first study unit is delivered at source 7f2e2a84ee2a1f9bcf34a5680426a888de36e0ce:
+separate executed system/native notebooks, independent references and preserved
+initial attempts, actual raw/typed/public receiving, two reviewed figures and
+a complete source-bound ZIP. Inputs/protocols precede new queries; the native
+scientific source is b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4. Both notebooks
+run independently inside the checkout and from the exact final ZIP extracted
+in /tmp with clean committed TopoMT imports. All 359 download files verify.
+
+The selected checks pass 106 tests with three strict expected failures owning
+unfinished scientific targets (#180 twice and #181 once). Pure reference guards
+include corrupt support/units/claimed clearance, complete segments rather than
+station samples, independent two-end wall inventory and rigid/source permutation.
+Ruff passes globally; scoped mypy passes four changed source modules. Full tests,
+installed-release/platform support and broader validation remain #16/#76.
+
+Strict Sphinx on a clean committed source succeeds without warnings: 96 HTML
+pages and 8,975 local targets checked. Exact documentation and portable receipts
+are in devguide/evidence/benchlab_tube_{documentation,portable}_receiving_v1.json.
+No prior three-case notebook/input/archive changed. Actual one-CPU resource
+measurements and kernel/source identities are retained.
+
+This closes establishment of the study unit, not qualification of DFND on this
+tube. Stay on this input: #180 owns native physical arrangement budget, #181
+owns the local-candidate/all-atom diagnosis and public policy decision, and #76
+retains certified physical paths. Current cards/hub/lifecycle/method/case summaries
+are reconciled. No original-provider comparison, protein characterization,
+optimal bottleneck, aperture area or free-volume precision is claimed.

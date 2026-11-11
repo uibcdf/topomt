@@ -1,0 +1,47 @@
+{
+  "temporary_root": "/tmp/topomt-tube-reader-j0qz445q",
+  "source_checkout": "/tmp/topomt-tube-reader-j0qz445q/source",
+  "extracted_study": "/tmp/topomt-tube-reader-j0qz445q/study",
+  "source_revision": "b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4",
+  "files_verified": 359,
+  "bundle_sha256": "f36816d73c2da7f1fce4f6b81565d3454dc33273fb52be9a52126c692ecfca40",
+  "committed_version_sha256": "c63a97ae89338cff1d0a778054f8bfbcaea51ea974b281d062073f2eba5b2f1a",
+  "fresh_kernels_passed": [
+    "system",
+    "dfnd"
+  ],
+  "clean_committed_topomt_origin_verified": true,
+  "scope": "Exact downloaded study in /tmp and clean committed source on PYTHONPATH, Python 3.14; no installed-package or support-matrix qualification",
+  "schema": "topomt.benchlab.tube-portable-receiving/1",
+  "issue": "uibcdf/topomt#178",
+  "captured_at": "2026-11-11T02:26:27.965267+00:00",
+  "notebooks": {
+    "system": {
+      "schema": "topomt.benchlab.tube-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/cylinder_tube/system.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "03a0bee887178bfddbe3fde07a6254f203d57f54f9b42006f306fefe99d67753",
+      "source_protocol_sha256": "769d1f812d8898b355933f5fa9da45f7d28765f9cd6213bb9a87d554aa54105d",
+      "wall_seconds": 3.369,
+      "parent_peak_rss_kib": 81488,
+      "child_peak_rss_kib": 151928,
+      "preserved_evidence_files": 317,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    },
+    "dfnd": {
+      "schema": "topomt.benchlab.tube-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/cylinder_tube/dfnd.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "6fb4c277bf5cede28d01dd1d36965eef9d0eee1be6a287ec6527401e9c70ae72",
+      "source_protocol_sha256": "769d1f812d8898b355933f5fa9da45f7d28765f9cd6213bb9a87d554aa54105d",
+      "wall_seconds": 8.123,
+      "parent_peak_rss_kib": 81076,
+      "child_peak_rss_kib": 372416,
+      "preserved_evidence_files": 317,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    }
+  },
+  "resources": "One CPU/numerical thread,6GiB address-space/120CPU-second ceilings per kernel runner; original input tables and figures matched between source and first clean outside receiving."
+}
