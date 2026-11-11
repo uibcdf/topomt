@@ -1,5 +1,24 @@
 # Discussion action routing audit
 
+## HOLE, POVME and PISA selection — 2026-11-11
+
+The maintainer selected three optional integrations. Their originating resource
+threads now route implementation to HOLE [#192](https://github.com/uibcdf/topomt/issues/192),
+POVME [#193](https://github.com/uibcdf/topomt/issues/193) and
+PISA [#194](https://github.com/uibcdf/topomt/issues/194). Broader assessments
+#161 (including CHAP), #159 (including PyVOL) and #165 (including PePrMint)
+retain their separate scope. The [source inventory](engine_references.md)
+identifies clean consultation revisions; no new original calculation or
+BenchLab comparison is established by selection or compilation.
+
+PISA's [extended primary-source review](pisa/license_review.md) records
+documented local research use/free academic acquisition and the unresolved
+standalone engine/resource redistribution grant. #194 owns that remaining
+question and adapter qualification. The proposed external question is deferred;
+the maintainer requested research rather than authorizing publication outside
+UIBCDF. Do not treat wrapper/data licences as the engine's licence or create an
+untracked request to contact maintainers.
+
 ## MoloVol source integration — 2026-11-11
 
 New canonical resource [#191](https://github.com/uibcdf/topomt/discussions/191)

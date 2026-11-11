@@ -50,6 +50,18 @@ The separately requested MOLE follow-up is owned by
 [#140](https://github.com/uibcdf/topomt/issues/140); its source evidence does not
 change the completed four-provider batch's scope.
 
+Maintainer selection on 2026-11-11 adds HOLE [#192](https://github.com/uibcdf/topomt/issues/192),
+modern-source POVME [#193](https://github.com/uibcdf/topomt/issues/193), and PISA
+[#194](https://github.com/uibcdf/topomt/issues/194) as active work, not delivered
+providers. See [exact consultation sources](engine_references.md). PISA's
+[availability/licence review](pisa/license_review.md) establishes documented
+local research use and free academic acquisition; precise standalone
+redistribution terms remain unresolved. Preserve this academic scope rather
+than classifying the engine as Apache-2.0 or universally open source. The
+selected route uses an externally acquired executable without bundling its
+code/data. Broader assessments #161/#159/#165 and execution/public qualification
+retain separate ownership.
+
 This catalogue and the linked provider overviews are permanent, versioned
 navigation records outside the defect/proposal queues. Discussions host resource
 descriptions, discovery, reviews, evidence and scientific conversations; their
