@@ -1,0 +1,43 @@
+{
+  "captured_at": "2026-11-11T00:04:36.013917+00:00",
+  "issues": {
+    "uibcdf/topomt#151": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#75": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#147": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#155": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#156": {
+      "state": "OPEN"
+    }
+  },
+  "findings": {
+    "tetrahedron-boundary-patches": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186"
+    },
+    "dfnd-volume-precision": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482187"
+    },
+    "dfnd-length-argument-admission": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482188"
+    },
+    "mole-four-atom-execution": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482189"
+    },
+    "caver-four-atom-execution": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482190"
+    }
+  },
+  "current_ids": []
+}
