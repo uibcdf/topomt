@@ -176,3 +176,35 @@ def test_reference_replay_respects_nondefault_application_units():
         )
         assert 1.43 < clearance < 1.44
         assert observed['anchor_separation_2.2A'] == 'certified'
+
+
+@pytest.mark.parametrize('damage', ['input', 'protocol', 'stage', 'budget'])
+def test_complete_reference_rejects_changed_bindings_or_incomplete_proof(
+    tmp_path, damage
+):
+    import hashlib
+
+    from devtools.verify_dumbbell_reference import verify_reference
+
+    fixture = json.loads((ARTIFACTS / 'input.json').read_text())
+    protocol = json.loads((ARTIFACTS / 'protocol.json').read_text())
+    certificate = json.loads((ARTIFACTS / 'reference_certificate.json').read_text())
+    input_file, protocol_file = tmp_path / 'input.json', tmp_path / 'protocol.json'
+    input_file.write_bytes((ARTIFACTS / 'input.json').read_bytes())
+    protocol_file.write_bytes((ARTIFACTS / 'protocol.json').read_bytes())
+    if damage == 'input':
+        fixture['coordinates']['values'][0][0] += 0.1
+        input_file.write_text(json.dumps(fixture))
+    elif damage == 'protocol':
+        protocol['barrier']['angular_columns'] += 1
+        protocol_file.write_text(json.dumps(protocol))
+    elif damage == 'stage':
+        certificate['stages'].pop('separator')
+    else:
+        protocol['reference_limits']['maximum_visited_nodes'] = 1
+        protocol_file.write_text(json.dumps(protocol))
+        certificate['protocol_sha256'] = hashlib.sha256(
+            protocol_file.read_bytes()
+        ).hexdigest()
+    with pytest.raises(ValueError):
+        verify_reference(input_file, protocol_file, certificate)

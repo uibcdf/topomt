@@ -242,7 +242,10 @@ def inspect_hierarchy(topo: Any) -> dict:
                 for m in feature.motifs
                 if m.get('motif_type') in ('chamber_candidate', 'throat_candidate')
             ]
-            expected_motifs = [*component.throat_candidates, *component.chamber_candidates]
+            expected_motifs = [
+                *component.throat_candidates,
+                *component.chamber_candidates,
+            ]
             if encode_quantities(actual) != encode_quantities(expected_motifs):
                 raise ValueError(
                     'Public hierarchy motifs differ from their native parent'

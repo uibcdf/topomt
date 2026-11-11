@@ -1,5 +1,16 @@
 # Discussion action routing audit
 
+## Dumbbell selection and receiving — 2026-11-11
+
+The maintainer selects #186 before the later joint six-case review #187.
+Discussions #129/#130/#154 link the new unit and all concrete follow-up: #180
+for budget profiles, #184 for numerical-margin availability, #188 for the
+historical component-count diagnosis, #76 for wider paths, and the retained
+#181 tube profiles. The new anchored transition/hierarchy and successful 6 Å
+empty native/public control do not resolve old findings. The count-increase
+inference is withdrawn as a general oracle; its five-domain physical diagnosis
+remains needs_review under #188. No original-engine comparison is committed.
+
 ## Wide/sparse publication closeout — 2026-11-11
 
 The delivery action #183 is complete, with #185's source serializer correction

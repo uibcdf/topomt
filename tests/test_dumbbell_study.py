@@ -142,3 +142,61 @@ def test_current_dumbbell_notebook_code_cells_parse_before_execution():
         for index, cell in enumerate(notebook.cells):
             if cell.cell_type == 'code':
                 ast.parse(cell.source, filename=f'{name}.ipynb cell {index}')
+
+
+def test_reviewed_dumbbell_readers_bind_sources_and_have_successful_outputs():
+    import hashlib
+    import json
+
+    import nbformat
+
+    protocol = study_module().read(ARTIFACTS / 'reader_protocol.json')
+    assert protocol['reader_revision'] == 2
+    assert (
+        hashlib.sha256(
+            (ARTIFACTS / 'native_observations.json').read_bytes()
+        ).hexdigest()
+        == protocol['native_observations_sha256']
+    )
+    for name in ('system', 'dfnd'):
+        notebook = nbformat.read(CASE / f'{name}.ipynb', 4)
+        source = [(cell.cell_type, cell.source) for cell in notebook.cells]
+        assert (
+            hashlib.sha256(json.dumps(source, sort_keys=True).encode()).hexdigest()
+            == protocol['notebooks'][name]
+        )
+        cells = [cell for cell in notebook.cells if cell.cell_type == 'code']
+        assert all(cell.execution_count is not None for cell in cells)
+        assert not any(o.output_type == 'error' for c in cells for o in c.outputs)
+        html = [
+            o.get('data', {}).get('text/html', '') for c in cells for o in c.outputs
+        ]
+        assert sum('<table' in output for output in html) >= 3
+        assert all('hide-input' in c.metadata['tags'] for c in cells)
+
+
+def test_complete_dumbbell_download_preserves_manifest_and_executable_case(tmp_path):
+    import zipfile
+
+    from devtools.benchlab.study_bundle import verify_manifest
+
+    with zipfile.ZipFile(ROOT / 'docs/_static/benchlab/dumbbell_v1.zip') as archive:
+        archive.extractall(tmp_path)
+    manifest = verify_manifest(tmp_path)
+    assert manifest['case'] == 'dumbbell'
+    assert (
+        manifest['topomt_source_revision']
+        == study_module().read(ARTIFACTS / 'reader_protocol.json')[
+            'topomt_source_revision'
+        ]
+    )
+    for path in [
+        'devtools/benchlab/ball_study.py',
+        'devtools/verify_dumbbell_reference.py',
+        'devtools/verify_tube_passage.py',
+    ]:
+        assert path in manifest['files']
+    for name in ('system', 'dfnd'):
+        path = str((CASE / f'{name}.ipynb').relative_to(ROOT))
+        assert path in manifest['entry_notebooks']
+        assert (tmp_path / path).read_bytes() == (ROOT / path).read_bytes()

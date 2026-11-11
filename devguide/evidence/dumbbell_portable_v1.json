@@ -1,0 +1,44 @@
+{
+  "schema": "topomt.benchlab.dumbbell-portable-receiving/1",
+  "issue": "uibcdf/topomt#186",
+  "case_id": "dumbbell",
+  "source_revision": "17a4c9a521c89a64efb12ba339161e15c85d4ce0",
+  "download_sha256": "aa50887f8393a63034d937752a025cd9a5e118a9b0b53f2caaee279a1940df84",
+  "verified_files": 430,
+  "fresh_kernels": [
+    "system",
+    "dfnd"
+  ],
+  "inside_outside_tables_identical": true,
+  "temporary_extraction_removed": true,
+  "resources": "One CPU/numerical thread, 6 GiB address-space / 120 CPU second ceilings per kernel runner",
+  "scope": "Dumbbell independent/native/hierarchy source receiving; physical availability #180/#184 and later review #187/#188 remain open, no installed matrix qualification",
+  "receipts": {
+    "system": {
+      "schema": "topomt.benchlab.dumbbell-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/dumbbell/system.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "0217874189eefd48a6a063c5609958cd57339b7af004d4918064e5f42159d81d",
+      "source_protocol_sha256": "b3a8a728d7270400a953dca8b77c85232e081b08b43704c736d727d2b2ab66d1",
+      "wall_seconds": 2.645,
+      "parent_peak_rss_kib": 83400,
+      "child_peak_rss_kib": 148928,
+      "preserved_evidence_files": 385,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    },
+    "dfnd": {
+      "schema": "topomt.benchlab.dumbbell-notebook-receiving/1",
+      "notebook": "docs/content/benchlab/synthetic/dumbbell/dfnd.ipynb",
+      "fresh_kernel": true,
+      "code_and_markdown_sha256": "3b8f16e492affc3a0b5c467853c19f926f4c0a086e28bc07ba0a199af270c5ad",
+      "source_protocol_sha256": "b3a8a728d7270400a953dca8b77c85232e081b08b43704c736d727d2b2ab66d1",
+      "wall_seconds": 7.392,
+      "parent_peak_rss_kib": 83208,
+      "child_peak_rss_kib": 370228,
+      "preserved_evidence_files": 385,
+      "execution_tree": "extracted bundle outside checkout",
+      "passed": true
+    }
+  }
+}

@@ -1,6 +1,27 @@
 # TopoMT development status
 
-## Current paired-tube checkpoint — 2026-11-11
+## Current dumbbell checkpoint — 2026-11-11
+
+The maintainer selects [dumbbell](../docs/content/benchlab/synthetic/dumbbell/index.md)
+under #186 before the later joint six-case review #187, superseding tube-first
+scheduling. The frozen 94-ball model has independent wall/path/section/hull
+references: connected enclosed named anchors at 1.4 Å, distinct enclosed anchors
+at 2.2 Å and no strict-free center in the finite native hull at 6 Å. Source 17a4c9a
+receives one anchored Void with two provisional chamber motifs/one throat, then
+two anchored Voids, then no wet/public result. Source supports and actual public
+motif copies pass. These are named-region statements, not exact global counts.
+
+Both current reader notebooks pass fresh kernels inside/outside the checkout;
+the 430-file ZIP has a verified manifest. Selected local checks give 85 passing
+tests and six strict pending targets, including the dumbbell 6 Å physical-hull
+zero-count target under #180. Global physical availability remains #184 at 1.4 Å
+and #180 at 2.2/6 Å. The old component-count inference is needs_review under #188;
+more components at a larger probe need not be spurious. Earlier tube #181 and
+all prior source scopes remain unchanged. No scientific operator was retuned.
+Source/publication receipts retain their own candidate identities. Original
+comparators, installed matrices and protein characterization are not qualified.
+
+## Earlier paired-tube checkpoint — 2026-11-11
 
 The maintainer selected the [wide/sparse companion](../docs/content/benchlab/synthetic/straight_tube_wide_sparse/index.md)
 under #183 while retaining the narrow unit's unresolved #180/#181 profiles.

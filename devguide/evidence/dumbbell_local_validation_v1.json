@@ -1,0 +1,26 @@
+{
+  "schema": "topomt.benchlab.dumbbell-local-validation/1",
+  "issue": "uibcdf/topomt#186",
+  "scientific_source_revision": "17a4c9a521c89a64efb12ba339161e15c85d4ce0",
+  "selected_tests": {
+    "passed": 85,
+    "strict_expected_failures": 6,
+    "wall_seconds": 36.51,
+    "peak_rss_kib": 400924,
+    "scope": "Independent simplex/barrier/reference corruption and unit checks; actual dumbbell anchor/public/hierarchy/exclusion and executable readers/download; established tube reference/receiving/bundles; complete DFND book example guards; report/findings and retained pathology observation"
+  },
+  "pending_targets": {
+    "uibcdf/topomt#180": 4,
+    "uibcdf/topomt#181": 1,
+    "uibcdf/topomt#184": 1
+  },
+  "ruff": "Global lint passed; seven canonical current executable files formatted. Original archived checker snapshot remains byte preserved.",
+  "mypy": "Five current source/helper modules passed scoped typing",
+  "case_helper_final_formatting": "Executable AST identical before/after final wrapping; original pinned helper bytes remain in the accepted download.",
+  "preserved_prior_case_notebook_artifact_download_files": 342,
+  "all_prior_sha256_unchanged": true,
+  "human_version_sha256_unchanged": "d76f39e77bb54929c2d4a02f55ec04d61534ec09df776d2fe89ef731626a88b5",
+  "resources": "One CPU/numerical thread, 6 GiB address-space /120 CPU seconds; numerical and kernel workloads sequential",
+  "deferred": "Joint review #187 and five-domain diagnosis #188; physical availability #180/#184; old tube #181; broader paths/support #76/#60 and full-suite/GUI/historical/installed matrix #16. No original provider/server or protein work.",
+  "scope": "Bounded source/study receiving; no algorithmic correction, complete physical global-count or installed release qualification"
+}

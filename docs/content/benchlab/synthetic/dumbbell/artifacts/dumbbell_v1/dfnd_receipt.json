@@ -1,0 +1,16 @@
+{
+  "schema": "topomt.benchlab.dumbbell-notebook-receiving/1",
+  "notebook": "docs/content/benchlab/synthetic/dumbbell/dfnd.ipynb",
+  "fresh_kernel": true,
+  "code_and_markdown_sha256": "3b8f16e492affc3a0b5c467853c19f926f4c0a086e28bc07ba0a199af270c5ad",
+  "source_protocol_sha256": "b3a8a728d7270400a953dca8b77c85232e081b08b43704c736d727d2b2ab66d1",
+  "wall_seconds": 9.315,
+  "parent_peak_rss_kib": 80912,
+  "child_peak_rss_kib": 370304,
+  "preserved_evidence_files": 381,
+  "execution_tree": "source checkout",
+  "passed": true,
+  "runtime_source_revision": "17a4c9a521c89a64efb12ba339161e15c85d4ce0",
+  "runtime_source_tree": "Clean temporary git archive of the committed scientific source",
+  "actual_import_origin_confirmed": true
+}
