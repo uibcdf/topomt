@@ -54,3 +54,13 @@ Retain original artifacts and exact affected/corrected profiles. Investigation
 closure alone must not be presented as a scientific fix or superiority result.
 
 Maintained finding card: https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482189 .
+
+## Three-case checkpoint disposition — 2026-11-10
+
+The retained stdout/stderr confirms four atoms/four residues read and an object-reference failure during complex construction; the clean maintained source reference remains fe0e84582a6bd42bc69224fd3a3022bf5c51cec3. No tiny-input support or cause is inferred.
+
+No additional execution is selected for the current native acceptance. The
+[comparison disposition](../../docs/content/benchlab/synthetic/comparison_disposition.md)
+retains this investigation under its open owner and the finding stays
+`needs_review`. Before any rerun, establish an eligible input/operator/origin
+question and freeze a bounded protocol. No comparative disadvantage is established.

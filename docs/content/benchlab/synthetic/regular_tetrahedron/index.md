@@ -1,5 +1,10 @@
 # Regular tetrahedron
 
+The [public support and robustness continuation](../public_support_and_robustness.md)
+recovers resident/connector supports, dry banks, coast relations, depth context
+and source identities on this same input. Its availability table separates native
+proxies, physical certificates and broader public/interface work.
+
 **Physical source increment — 2026-11-10:** the bounded DFND record now
 computes separate hull patches and path-supported contacts. The independent
 five-row panel gives tetrahedron 4/0/0 at 1.2/1.4/1.7 Å, closed shell zero at
@@ -136,3 +141,6 @@ were still unknown at the comparison checkpoint: GHECOM uses 1.87 Å and CAVER
 uses 1.70 Å for these four carbon rows. A separate atom-name-alignment control
 leaves both assignments unchanged. This changes the independent probe regimes
 for GHECOM's atomic-ball model, without revising earlier observed outputs.
+
+See the [current comparator disposition](../comparison_disposition.md) for retained
+original results, unmatched observables and issue-owned eligibility work.

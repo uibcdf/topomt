@@ -48,3 +48,19 @@ Retain dated retrieval/status evidence and original results when available, or a
 
 Before closing, reconcile current follow-up in the linked Discussions and any
 finding lifecycle metadata. Retain dated decisions and the exact evidence scope.
+
+## Three-case checkpoint disposition — 2026-11-10
+
+The [current comparison disposition](../../docs/content/benchlab/synthetic/comparison_disposition.md)
+explicitly scopes this review outside the completed three-case native acceptance.
+No replacement submission is selected for this acceptance. Existing receipt
+retrieval is separate from original calculation completion. This owner remains
+open for the wider service/job investigation; no superiority or inferred count
+is claimed.
+
+One GET of each existing result URL on 2026-11-11 UTC returned HTTP 200,
+713-byte text/html, not a result ZIP; counts remain unavailable. The [recovery
+receipt](../evidence/castpfold_retained_job_recovery_v1.json) preserves identity,
+response digests and limits. No upload or replacement job was created.
+Revisit when service recovery or an original archive makes recovery meaningful;
+no repeated polling is scheduled.

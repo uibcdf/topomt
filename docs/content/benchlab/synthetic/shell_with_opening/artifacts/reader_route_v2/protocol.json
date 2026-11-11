@@ -1,0 +1,37 @@
+{
+  "schema": "topomt.benchlab.reader-protocol/2",
+  "owning_issue": "uibcdf/topomt#76",
+  "case_id": "shell_with_opening",
+  "created": "2026-11-10",
+  "known_before_execution": "Retrospective receiving of committed physical, volume and support observations; not a held-out prediction",
+  "code_and_markdown_sha256": "2f1d9fd6ea88e887bb52f0541a9995663dfe3ff1c8ec519a784d2155ccdd5bca",
+  "code_and_markdown_hash_definition": "SHA-256 of json.dumps([(cell_type, source) for each cell], sort_keys=True), excluding execution counts/outputs",
+  "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+  "probes_angstroms": [
+    1.4,
+    3.0,
+    5.0
+  ],
+  "expected_physical_patches": [
+    1,
+    0,
+    0
+  ],
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cell_timeout_seconds": 90,
+    "cpu_seconds_per_kernel": 120
+  },
+  "source_bound": true,
+  "original_provider_execution": false,
+  "network_jobs": false,
+  "preserved_history": [
+    "system.ipynb",
+    "dfnd.ipynb",
+    "public_topography.ipynb",
+    "public_study.py",
+    "three_cases_v1.zip"
+  ]
+}

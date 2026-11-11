@@ -48,3 +48,13 @@ Record exact original sources, eligible inputs/operators and accessible no-payme
 
 Before closing, reconcile current follow-up in the linked Discussions and any
 finding lifecycle metadata. Retain dated decisions and the exact evidence scope.
+
+## Three-case checkpoint disposition — 2026-11-10
+
+The [current comparison disposition](../../docs/content/benchlab/synthetic/comparison_disposition.md)
+explicitly scopes this review outside the completed three-case native acceptance.
+No new detector/volume-candidate execution is selected: independent analytic,
+Cartesian and common-parent-domain references cover the present question.
+The broader assessment remains open under this issue; matched inputs/operators,
+licence/backend acquisition and a bounded protocol are required before selecting
+an additional comparison. No scientific inferiority or new engine support is claimed.

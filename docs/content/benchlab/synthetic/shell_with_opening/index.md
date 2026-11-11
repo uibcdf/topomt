@@ -1,5 +1,10 @@
 # Shell with an opening
 
+The [public support and robustness continuation](../public_support_and_robustness.md)
+recovers resident/connector supports, dry banks, coast relations, depth context
+and source identities on this same input. Its availability table separates native
+proxies, physical certificates and broader public/interface work.
+
 The later [origin-access bracket](../origin_access_brackets.md) narrows the
 access-to-enclosure transition to 2.009745–2.014745 Å. Independent full-path and
 complete-cover certificates agree with actual public DFND at both endpoints;
@@ -143,3 +148,6 @@ The [public receiving audit](topography.md) checks the actual `Pocket`, child
 `Mouth`, `Void` and empty registry on this same atomic model.
 Original-method comparisons can be added separately, after
 reviewing each tool's input model and the observable being compared.
+
+See the [current comparator disposition](../comparison_disposition.md) for retained
+original results, unmatched observables and issue-owned eligibility work.

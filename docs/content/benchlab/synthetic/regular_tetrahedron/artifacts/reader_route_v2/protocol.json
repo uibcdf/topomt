@@ -1,0 +1,37 @@
+{
+  "schema": "topomt.benchlab.reader-protocol/2",
+  "owning_issue": "uibcdf/topomt#76",
+  "case_id": "regular_tetrahedron",
+  "created": "2026-11-10",
+  "known_before_execution": "Retrospective receiving of committed physical, volume and support observations; not a held-out prediction",
+  "code_and_markdown_sha256": "3aacd845631ef879721e2ffd80e92f270fc9bbeb2a551552fc0ebbfcc4416f84",
+  "code_and_markdown_hash_definition": "SHA-256 of json.dumps([(cell_type, source) for each cell], sort_keys=True), excluding execution counts/outputs",
+  "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+  "probes_angstroms": [
+    1.2,
+    1.4,
+    1.7
+  ],
+  "expected_physical_patches": [
+    4,
+    0,
+    0
+  ],
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cell_timeout_seconds": 90,
+    "cpu_seconds_per_kernel": 120
+  },
+  "source_bound": true,
+  "original_provider_execution": false,
+  "network_jobs": false,
+  "preserved_history": [
+    "system.ipynb",
+    "dfnd.ipynb",
+    "public_topography.ipynb",
+    "public_study.py",
+    "three_cases_v1.zip"
+  ]
+}

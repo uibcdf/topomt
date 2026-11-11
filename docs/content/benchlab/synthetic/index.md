@@ -29,6 +29,8 @@ regular_tetrahedron/index
 closed_shell/index
 shell_with_opening/index
 Public Topography receiving <public_topography>
+Supports and robustness <public_support_and_robustness>
+Comparison disposition <comparison_disposition>
 Origin-access transition brackets <origin_access_brackets>
 Volume definitions and precision <volume_measurements>
 ```

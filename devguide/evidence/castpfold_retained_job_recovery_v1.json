@@ -1,0 +1,39 @@
+{
+  "schema": "topomt.benchlab.retained-job-recovery/1",
+  "issue": "uibcdf/topomt#168",
+  "records": [
+    {
+      "case": "regular_tetrahedron",
+      "jobid": "j_6abe78a311665",
+      "original_receipt_sha256": "369d25510b6544234e46e9d900892b126fe41379dc998c09810a41073829640b",
+      "result_url": "https://cfold.bme.uic.edu/castpfold/data/tmppdb/j_6abe78a311665/processed/j_6abe78a311665.zip",
+      "operation": "One GET of the existing result URL; no coordinate upload or job submission",
+      "observed_utc": "2026-11-11T00:44:08.419392+00:00",
+      "http_status": 200,
+      "final_url": "https://cfold.bme.uic.edu/castpfold/data/tmppdb/j_6abe78a311665/processed/j_6abe78a311665.zip",
+      "response_bytes": 713,
+      "response_sha256": "0f032b4f03af8a168aef3dbaa94b1207ba906bbbf818d376dfb9291adb1aa42c",
+      "content_type": "text/html",
+      "status": "unavailable_non_zip_response",
+      "pocket_count": null,
+      "wall_seconds": 0.47266964201116934
+    },
+    {
+      "case": "closed_shell",
+      "jobid": "j_6abe78a074161",
+      "original_receipt_sha256": "9aafd816d9fad3b36be84830f9628b3b0cff0ce594031f07548fbb466371486c",
+      "result_url": "https://cfold.bme.uic.edu/castpfold/data/tmppdb/j_6abe78a074161/processed/j_6abe78a074161.zip",
+      "operation": "One GET of the existing result URL; no coordinate upload or job submission",
+      "observed_utc": "2026-11-11T00:44:08.892409+00:00",
+      "http_status": 200,
+      "final_url": "https://cfold.bme.uic.edu/castpfold/data/tmppdb/j_6abe78a074161/processed/j_6abe78a074161.zip",
+      "response_bytes": 713,
+      "response_sha256": "0f032b4f03af8a168aef3dbaa94b1207ba906bbbf818d376dfb9291adb1aa42c",
+      "content_type": "text/html",
+      "status": "unavailable_non_zip_response",
+      "pocket_count": null,
+      "wall_seconds": 0.41056956799002364
+    }
+  ],
+  "qualification": "Existing acceptance does not prove calculation completion; non-ZIP/unavailable responses are not empty results or proof of permanent expiry. Revisit under #168 if service recovery or original archive availability makes retrieval meaningful."
+}

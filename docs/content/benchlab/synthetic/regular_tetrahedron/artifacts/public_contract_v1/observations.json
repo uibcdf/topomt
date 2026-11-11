@@ -1,0 +1,5401 @@
+{
+  "schema": "topomt.benchlab.public-contract-receiving/1",
+  "case": "regular_tetrahedron",
+  "protocol_sha256": "20b1903e0ecad7c021a6d56dce1c2eaf4f359e8d905fa95b19873c28247ebfdf",
+  "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+  "controls": [
+    {
+      "name": "control_1.2A",
+      "probe_angstroms": 1.2,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-697e878e6abf4a6bb6abd2dd31a3d766",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.11999999999999998,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-300ea2bef388ce41d9baec077523ffa608eca463604664b69be0dcb7d8ac530e",
+        "node_inventory": {
+          "wet_nodes": 1,
+          "dry_nodes": 0,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "resident",
+            "transit_role": "resident_transit",
+            "flags": [],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [
+          {
+            "component_id": "WET-1",
+            "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "resident_node_indices": [
+              0
+            ],
+            "connector_node_indices": [],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "signature": {
+              "n_mouths": 1,
+              "resident": true,
+              "exposed": true,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "percolating",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "native_external_link_ids": [
+              1
+            ],
+            "topological_depth": {
+              "0": 0
+            },
+            "depth_reference": "native_exterior_graph_hops",
+            "depth_regions": [
+              {
+                "motif_type": "depth_region",
+                "parent_component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                "motif_support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                "motif_key": "motif-0aa930e45aa14b462a68a7def3325f4c8496aa4fec83f6ac1ee8abe5bc903e25",
+                "depth": 0,
+                "node_ids": [
+                  0
+                ],
+                "atom_indices": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "boundary": {
+              "n_connected_walls": 0,
+              "n_dry_contacts": 0,
+              "n_septa": 0,
+              "walls": [],
+              "physical_openings": {
+                "status": "resolved",
+                "n_patches": 4,
+                "patch_ids": [
+                  "physical-patch-abafce5063aae01b55262f0bf4c765fc65adfc48cc7f59c06ef6fcc6a5f2cfec",
+                  "physical-patch-11a2ffeb52495db63a8e4863036dfe2abc590ad275c86c35718eb9d30e4847cd",
+                  "physical-patch-2209fc6efbb3770cd478fdf6bfabebb4276c9b2e637c0b288de98d4278f30ad6",
+                  "physical-patch-0efdabdc88a6f7e7ef9a57118b3e073417f41e5b6289b84d910101c8b51536c9"
+                ],
+                "association_evidence": {
+                  "status": "resolved",
+                  "records": [
+                    {
+                      "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                      "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                      "patch_id": "physical-patch-abafce5063aae01b55262f0bf4c765fc65adfc48cc7f59c06ef6fcc6a5f2cfec",
+                      "status": "resolved",
+                      "reason": null,
+                      "path": {
+                        "start": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "attachment": [
+                          0.0703035440803419,
+                          0.05853987646704659,
+                          -0.05853987646704659
+                        ],
+                        "surface_face_index": 0,
+                        "all_atom_clearance_margin": 0.011307986652631608,
+                        "carrier_cover": [
+                          {
+                            "t_interval": [
+                              0.0,
+                              1.0
+                            ],
+                            "tetrahedron_id": 0
+                          }
+                        ],
+                        "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                        "exterior_ray_direction": [
+                          0.5773502691896257,
+                          0.5773502691896257,
+                          -0.5773502691896257
+                        ],
+                        "exterior_ray_clearance_margin": 0.011307986652631608,
+                        "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                      }
+                    },
+                    {
+                      "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                      "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                      "patch_id": "physical-patch-11a2ffeb52495db63a8e4863036dfe2abc590ad275c86c35718eb9d30e4847cd",
+                      "status": "resolved",
+                      "reason": null,
+                      "path": {
+                        "start": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "attachment": [
+                          -0.05853987646704659,
+                          0.0703035440803419,
+                          0.05853987646704659
+                        ],
+                        "surface_face_index": 1,
+                        "all_atom_clearance_margin": 0.011307986652631608,
+                        "carrier_cover": [
+                          {
+                            "t_interval": [
+                              0.0,
+                              1.0
+                            ],
+                            "tetrahedron_id": 0
+                          }
+                        ],
+                        "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                        "exterior_ray_direction": [
+                          -0.5773502691896257,
+                          0.5773502691896257,
+                          0.5773502691896257
+                        ],
+                        "exterior_ray_clearance_margin": 0.011307986652631608,
+                        "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                      }
+                    },
+                    {
+                      "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                      "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                      "patch_id": "physical-patch-2209fc6efbb3770cd478fdf6bfabebb4276c9b2e637c0b288de98d4278f30ad6",
+                      "status": "resolved",
+                      "reason": null,
+                      "path": {
+                        "start": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "attachment": [
+                          -0.05853987646704659,
+                          -0.05853987646704659,
+                          -0.0703035440803419
+                        ],
+                        "surface_face_index": 2,
+                        "all_atom_clearance_margin": 0.011307986652631663,
+                        "carrier_cover": [
+                          {
+                            "t_interval": [
+                              0.0,
+                              1.0
+                            ],
+                            "tetrahedron_id": 0
+                          }
+                        ],
+                        "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                        "exterior_ray_direction": [
+                          -0.5773502691896257,
+                          -0.5773502691896257,
+                          -0.5773502691896257
+                        ],
+                        "exterior_ray_clearance_margin": 0.011307986652631663,
+                        "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                      }
+                    },
+                    {
+                      "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                      "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                      "patch_id": "physical-patch-0efdabdc88a6f7e7ef9a57118b3e073417f41e5b6289b84d910101c8b51536c9",
+                      "status": "resolved",
+                      "reason": null,
+                      "path": {
+                        "start": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "attachment": [
+                          0.0703035440803419,
+                          -0.05853987646704659,
+                          0.05853987646704659
+                        ],
+                        "surface_face_index": 3,
+                        "all_atom_clearance_margin": 0.011307986652631608,
+                        "carrier_cover": [
+                          {
+                            "t_interval": [
+                              0.0,
+                              1.0
+                            ],
+                            "tetrahedron_id": 0
+                          }
+                        ],
+                        "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                        "exterior_ray_direction": [
+                          0.5773502691896257,
+                          -0.5773502691896257,
+                          0.5773502691896257
+                        ],
+                        "exterior_ray_clearance_margin": 0.011307986652631608,
+                        "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                      }
+                    }
+                  ]
+                },
+                "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+                "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+                "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+              }
+            },
+            "dry_lining": {},
+            "characteristic_radii_nm": {
+              "residence_death_radius": 0.15455739091877105,
+              "seal_radius": 0.13599564267050154,
+              "merge_radii": [],
+              "split_radii": []
+            },
+            "native_bank_interface_flag": false,
+            "native_bank_ids": [],
+            "candidate_atom_union": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "beach_candidate_proxy": {
+              "dry_tetrahedron_ids": [],
+              "atom_indices": [],
+              "volume_wetted_estimate": 0.0
+            }
+          }
+        ],
+        "dry_components": [],
+        "coast_faces": [],
+        "public_features": [
+          {
+            "feature_id": "PRC-1",
+            "python_class": "Percolating",
+            "feature_type": "percolating",
+            "shape_type": "neutral",
+            "legacy_dimensionality": 2,
+            "parent_ids": [],
+            "child_ids": [],
+            "source_id": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "component_id": "WET-1",
+            "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+            "signature": {
+              "n_mouths": 1,
+              "resident": true,
+              "exposed": true,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "percolating",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "center": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "center",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer",
+                    "si": {
+                      "factor": 1e-09,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 1
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:6ff0cfd361b295748c541481d8f51a0f"
+                },
+                "si": {
+                  "factor": 1e-09,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 1
+                  }
+                },
+                "dtype": "float64",
+                "shape": [
+                  3
+                ],
+                "blocks": [
+                  3
+                ]
+              },
+              "values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "block_digests": [
+                "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+              ],
+              "digest": "blake2b-128:a828807490b283b7df236186c601bd84"
+            },
+            "carrier_volume": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "carrier_volume",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.0175453227104516,
+              "block_digests": [
+                "blake2b-128:7ce6169b9cff94b41d433e43a162f75d"
+              ],
+              "digest": "blake2b-128:c0ab362f8f43c6bea26f10b839f92ca0"
+            },
+            "local_solvent_proxy": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "local_solvent_proxy",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.013291911144281514,
+              "block_digests": [
+                "blake2b-128:677238b301959db51c0b17ffae72955c"
+              ],
+              "digest": "blake2b-128:f6e1042619bcfc21a31662e97adc13fa"
+            },
+            "native_bank_interface_flag": false,
+            "physical_openings": {
+              "status": "resolved",
+              "n_patches": 4,
+              "patch_ids": [
+                "physical-patch-abafce5063aae01b55262f0bf4c765fc65adfc48cc7f59c06ef6fcc6a5f2cfec",
+                "physical-patch-11a2ffeb52495db63a8e4863036dfe2abc590ad275c86c35718eb9d30e4847cd",
+                "physical-patch-2209fc6efbb3770cd478fdf6bfabebb4276c9b2e637c0b288de98d4278f30ad6",
+                "physical-patch-0efdabdc88a6f7e7ef9a57118b3e073417f41e5b6289b84d910101c8b51536c9"
+              ],
+              "association_evidence": {
+                "status": "resolved",
+                "records": [
+                  {
+                    "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                    "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                    "patch_id": "physical-patch-abafce5063aae01b55262f0bf4c765fc65adfc48cc7f59c06ef6fcc6a5f2cfec",
+                    "status": "resolved",
+                    "reason": null,
+                    "path": {
+                      "start": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "attachment": [
+                        0.0703035440803419,
+                        0.05853987646704659,
+                        -0.05853987646704659
+                      ],
+                      "surface_face_index": 0,
+                      "all_atom_clearance_margin": 0.011307986652631608,
+                      "carrier_cover": [
+                        {
+                          "t_interval": [
+                            0.0,
+                            1.0
+                          ],
+                          "tetrahedron_id": 0
+                        }
+                      ],
+                      "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                      "exterior_ray_direction": [
+                        0.5773502691896257,
+                        0.5773502691896257,
+                        -0.5773502691896257
+                      ],
+                      "exterior_ray_clearance_margin": 0.011307986652631608,
+                      "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                    }
+                  },
+                  {
+                    "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                    "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                    "patch_id": "physical-patch-11a2ffeb52495db63a8e4863036dfe2abc590ad275c86c35718eb9d30e4847cd",
+                    "status": "resolved",
+                    "reason": null,
+                    "path": {
+                      "start": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "attachment": [
+                        -0.05853987646704659,
+                        0.0703035440803419,
+                        0.05853987646704659
+                      ],
+                      "surface_face_index": 1,
+                      "all_atom_clearance_margin": 0.011307986652631608,
+                      "carrier_cover": [
+                        {
+                          "t_interval": [
+                            0.0,
+                            1.0
+                          ],
+                          "tetrahedron_id": 0
+                        }
+                      ],
+                      "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                      "exterior_ray_direction": [
+                        -0.5773502691896257,
+                        0.5773502691896257,
+                        0.5773502691896257
+                      ],
+                      "exterior_ray_clearance_margin": 0.011307986652631608,
+                      "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                    }
+                  },
+                  {
+                    "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                    "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                    "patch_id": "physical-patch-2209fc6efbb3770cd478fdf6bfabebb4276c9b2e637c0b288de98d4278f30ad6",
+                    "status": "resolved",
+                    "reason": null,
+                    "path": {
+                      "start": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "attachment": [
+                        -0.05853987646704659,
+                        -0.05853987646704659,
+                        -0.0703035440803419
+                      ],
+                      "surface_face_index": 2,
+                      "all_atom_clearance_margin": 0.011307986652631663,
+                      "carrier_cover": [
+                        {
+                          "t_interval": [
+                            0.0,
+                            1.0
+                          ],
+                          "tetrahedron_id": 0
+                        }
+                      ],
+                      "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                      "exterior_ray_direction": [
+                        -0.5773502691896257,
+                        -0.5773502691896257,
+                        -0.5773502691896257
+                      ],
+                      "exterior_ray_clearance_margin": 0.011307986652631663,
+                      "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                    }
+                  },
+                  {
+                    "component_key": "component-e6a9c8f0ed4034956734677f15ad0b19d7ff2090e5b28a6eed7a3dac9617b3b5",
+                    "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                    "patch_id": "physical-patch-0efdabdc88a6f7e7ef9a57118b3e073417f41e5b6289b84d910101c8b51536c9",
+                    "status": "resolved",
+                    "reason": null,
+                    "path": {
+                      "start": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "attachment": [
+                        0.0703035440803419,
+                        -0.05853987646704659,
+                        0.05853987646704659
+                      ],
+                      "surface_face_index": 3,
+                      "all_atom_clearance_margin": 0.011307986652631608,
+                      "carrier_cover": [
+                        {
+                          "t_interval": [
+                            0.0,
+                            1.0
+                          ],
+                          "tetrahedron_id": 0
+                        }
+                      ],
+                      "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                      "exterior_ray_direction": [
+                        0.5773502691896257,
+                        -0.5773502691896257,
+                        0.5773502691896257
+                      ],
+                      "exterior_ray_clearance_margin": 0.011307986652631608,
+                      "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                    }
+                  }
+                ]
+              },
+              "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+              "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+              "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+            }
+          }
+        ],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "resolved",
+          "reason": null,
+          "n_patches": 4,
+          "query": {
+            "result_key": "result-300ea2bef388ce41d9baec077523ffa608eca463604664b69be0dcb7d8ac530e",
+            "probe_radius": 0.11999999999999998,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    },
+    {
+      "name": "control_1.4A",
+      "probe_angstroms": 1.4,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-250ce749c86f4d4891b533fa36cfb1d9",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.13999999999999999,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-775509d716112199f65ac0fb7a2de0b2be5b7604f07e2900025967afae5389b9",
+        "node_inventory": {
+          "wet_nodes": 1,
+          "dry_nodes": 0,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "resident",
+            "transit_role": "resident_transit",
+            "flags": [],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [
+          {
+            "component_id": "WET-1",
+            "component_key": "component-d77052e6f99fdd7733ff7212ec997b51df4fe0b6461c8fab46fb0ff5bffa1ab7",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "resident_node_indices": [
+              0
+            ],
+            "connector_node_indices": [],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "signature": {
+              "n_mouths": 0,
+              "resident": true,
+              "exposed": false,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "void",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "native_external_link_ids": [],
+            "topological_depth": {
+              "0": 0
+            },
+            "depth_reference": "no_exterior_zero_convention",
+            "depth_regions": [
+              {
+                "motif_type": "depth_region",
+                "parent_component_key": "component-d77052e6f99fdd7733ff7212ec997b51df4fe0b6461c8fab46fb0ff5bffa1ab7",
+                "motif_support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                "motif_key": "motif-604b49b908374f8bdae4aeaa5cb73f67b71540756f12809a6294461244af298c",
+                "depth": 0,
+                "node_ids": [
+                  0
+                ],
+                "atom_indices": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "boundary": {
+              "n_connected_walls": 1,
+              "n_dry_contacts": 0,
+              "n_septa": 0,
+              "walls": [
+                {
+                  "kind": "exterior",
+                  "n_faces": 4,
+                  "composition": {
+                    "exterior": 4
+                  },
+                  "R_gate": 0.13599564267050154
+                }
+              ],
+              "physical_openings": {
+                "status": "resolved",
+                "n_patches": 0,
+                "patch_ids": [],
+                "association_evidence": {
+                  "status": "resolved",
+                  "records": []
+                },
+                "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+                "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+                "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+              }
+            },
+            "dry_lining": {},
+            "characteristic_radii_nm": {
+              "residence_death_radius": 0.15455739091877105,
+              "seal_radius": null,
+              "merge_radii": [],
+              "split_radii": []
+            },
+            "native_bank_interface_flag": false,
+            "native_bank_ids": [],
+            "candidate_atom_union": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "beach_candidate_proxy": {
+              "dry_tetrahedron_ids": [],
+              "atom_indices": [],
+              "volume_wetted_estimate": 0.0
+            }
+          }
+        ],
+        "dry_components": [],
+        "coast_faces": [],
+        "public_features": [
+          {
+            "feature_id": "VOI-1",
+            "python_class": "Void",
+            "feature_type": "void",
+            "shape_type": "concavity",
+            "legacy_dimensionality": 2,
+            "parent_ids": [],
+            "child_ids": [],
+            "source_id": "component-d77052e6f99fdd7733ff7212ec997b51df4fe0b6461c8fab46fb0ff5bffa1ab7",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "component_id": "WET-1",
+            "component_key": "component-d77052e6f99fdd7733ff7212ec997b51df4fe0b6461c8fab46fb0ff5bffa1ab7",
+            "signature": {
+              "n_mouths": 0,
+              "resident": true,
+              "exposed": false,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "void",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "center": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "center",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer",
+                    "si": {
+                      "factor": 1e-09,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 1
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:6ff0cfd361b295748c541481d8f51a0f"
+                },
+                "si": {
+                  "factor": 1e-09,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 1
+                  }
+                },
+                "dtype": "float64",
+                "shape": [
+                  3
+                ],
+                "blocks": [
+                  3
+                ]
+              },
+              "values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "block_digests": [
+                "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+              ],
+              "digest": "blake2b-128:a828807490b283b7df236186c601bd84"
+            },
+            "carrier_volume": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "carrier_volume",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.0175453227104516,
+              "block_digests": [
+                "blake2b-128:7ce6169b9cff94b41d433e43a162f75d"
+              ],
+              "digest": "blake2b-128:c0ab362f8f43c6bea26f10b839f92ca0"
+            },
+            "local_solvent_proxy": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "local_solvent_proxy",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.013291911144281514,
+              "block_digests": [
+                "blake2b-128:677238b301959db51c0b17ffae72955c"
+              ],
+              "digest": "blake2b-128:f6e1042619bcfc21a31662e97adc13fa"
+            },
+            "native_bank_interface_flag": false,
+            "physical_openings": {
+              "status": "resolved",
+              "n_patches": 0,
+              "patch_ids": [],
+              "association_evidence": {
+                "status": "resolved",
+                "records": []
+              },
+              "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+              "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+              "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+            }
+          }
+        ],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "resolved",
+          "reason": null,
+          "n_patches": 0,
+          "query": {
+            "result_key": "result-775509d716112199f65ac0fb7a2de0b2be5b7604f07e2900025967afae5389b9",
+            "probe_radius": 0.13999999999999999,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    },
+    {
+      "name": "control_1.7A",
+      "probe_angstroms": 1.7,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-480f9b21c5e84ea88845387c87b9f9ef",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.16999999999999998,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-2c60d694debd808279c995b97a5eed47947d2b6233ecd7f871fa47c70ebd4463",
+        "node_inventory": {
+          "wet_nodes": 0,
+          "dry_nodes": 1,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "non_resident",
+            "transit_role": "non_transit",
+            "flags": [],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [],
+        "dry_components": [
+          {
+            "component_id": "DRY-1",
+            "component_key": "component-fe878bab8ea550375d79cf7dfb946df66233fd411a507e3a0504ac3a743df73e",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "wet_lining": {},
+            "raw_bank_record": {
+              "id": 1,
+              "graph_label": 0,
+              "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+              "tetrahedron_support": [
+                [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "tetrahedron_indices": [
+                0
+              ],
+              "atom_indices": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "size": 1,
+              "include_in_compatibility_view": true,
+              "dry_edges": [],
+              "dry_edge_face_ids": [],
+              "flags": [],
+              "component_key": "component-fe878bab8ea550375d79cf7dfb946df66233fd411a507e3a0504ac3a743df73e",
+              "component_index": 0,
+              "node_count_rank": 1,
+              "size_rank": 1,
+              "dry_interface_ids": [
+                1,
+                2,
+                3,
+                4
+              ],
+              "dry_boundary_tetrahedron_ids": [
+                0
+              ],
+              "face_depth_by_tetrahedron": {
+                "0": 0
+              },
+              "face_depth_min": 0,
+              "face_depth_max": 0,
+              "face_depth_mean": 0.0,
+              "dry_motif_ids": [
+                1
+              ],
+              "motif_keys": [
+                "motif-b4c5c436c9d6ef24f8d36e680906ad43e470e2383fa276600bfd1059ce85c52a"
+              ]
+            }
+          }
+        ],
+        "coast_faces": [],
+        "public_features": [],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "resolved",
+          "reason": null,
+          "n_patches": 0,
+          "query": {
+            "result_key": "result-2c60d694debd808279c995b97a5eed47947d2b6233ecd7f871fa47c70ebd4463",
+            "probe_radius": 0.16999999999999998,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    },
+    {
+      "name": "gate_below",
+      "probe_angstroms": 1.3598564267050168,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-d6a1bb3608b0461d96d5066c8bd72fc6",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.13598564267050167,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-2cf7de90f3a891e92106ec39451a7f4cf5df1de38ccd3338338db25fab29160d",
+        "node_inventory": {
+          "wet_nodes": 1,
+          "dry_nodes": 0,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "resident",
+            "transit_role": "resident_transit",
+            "flags": [],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [
+          {
+            "component_id": "WET-1",
+            "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "resident_node_indices": [
+              0
+            ],
+            "connector_node_indices": [],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "signature": {
+              "n_mouths": 1,
+              "resident": true,
+              "exposed": true,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "percolating",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "native_external_link_ids": [
+              1
+            ],
+            "topological_depth": {
+              "0": 0
+            },
+            "depth_reference": "native_exterior_graph_hops",
+            "depth_regions": [
+              {
+                "motif_type": "depth_region",
+                "parent_component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                "motif_support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                "motif_key": "motif-088c350e1d2eb60bf333d5b503c0bfda0aa6c2eccd8dc552537341105f0d2063",
+                "depth": 0,
+                "node_ids": [
+                  0
+                ],
+                "atom_indices": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "boundary": {
+              "n_connected_walls": 0,
+              "n_dry_contacts": 0,
+              "n_septa": 0,
+              "walls": [],
+              "physical_openings": {
+                "status": "resolved",
+                "n_patches": 4,
+                "patch_ids": [
+                  "physical-patch-779752535ce975c1986b245c565a22896ce3833f7e666e39c566dc3e9c63caa2",
+                  "physical-patch-f3b90ea7f2edd9bc00edc213d15289f692c45fcb295fc7abb7d3f6d0ff839eb4",
+                  "physical-patch-62f86dda829f707cb6dc2d1d06967f05ec59566d8db105ce910994be1c8b3dc0",
+                  "physical-patch-29f9015c278eef52e6d69a9798d97c4944938f70cc95d12f64869bb268d01c8a"
+                ],
+                "association_evidence": {
+                  "status": "resolved",
+                  "records": [
+                    {
+                      "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                      "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                      "patch_id": "physical-patch-779752535ce975c1986b245c565a22896ce3833f7e666e39c566dc3e9c63caa2",
+                      "status": "resolved",
+                      "reason": null,
+                      "path": {
+                        "start": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "attachment": [
+                          0.062465181888017765,
+                          0.06245905756320866,
+                          -0.06245905756320866
+                        ],
+                        "surface_face_index": 0,
+                        "all_atom_clearance_margin": 7.499785510345358e-06,
+                        "carrier_cover": [
+                          {
+                            "t_interval": [
+                              0.0,
+                              1.0
+                            ],
+                            "tetrahedron_id": 0
+                          }
+                        ],
+                        "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                        "exterior_ray_direction": [
+                          0.5773502691896257,
+                          0.5773502691896257,
+                          -0.5773502691896257
+                        ],
+                        "exterior_ray_clearance_margin": 7.499785510345358e-06,
+                        "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                      }
+                    },
+                    {
+                      "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                      "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                      "patch_id": "physical-patch-f3b90ea7f2edd9bc00edc213d15289f692c45fcb295fc7abb7d3f6d0ff839eb4",
+                      "status": "resolved",
+                      "reason": null,
+                      "path": {
+                        "start": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "attachment": [
+                          -0.06245905756320866,
+                          0.062465181888017765,
+                          0.06245905756320866
+                        ],
+                        "surface_face_index": 1,
+                        "all_atom_clearance_margin": 7.499785510345358e-06,
+                        "carrier_cover": [
+                          {
+                            "t_interval": [
+                              0.0,
+                              1.0
+                            ],
+                            "tetrahedron_id": 0
+                          }
+                        ],
+                        "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                        "exterior_ray_direction": [
+                          -0.5773502691896257,
+                          0.5773502691896257,
+                          0.5773502691896257
+                        ],
+                        "exterior_ray_clearance_margin": 7.499785510345358e-06,
+                        "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                      }
+                    },
+                    {
+                      "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                      "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                      "patch_id": "physical-patch-62f86dda829f707cb6dc2d1d06967f05ec59566d8db105ce910994be1c8b3dc0",
+                      "status": "resolved",
+                      "reason": null,
+                      "path": {
+                        "start": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "attachment": [
+                          -0.06245905756320866,
+                          -0.06245905756320866,
+                          -0.062465181888017765
+                        ],
+                        "surface_face_index": 2,
+                        "all_atom_clearance_margin": 7.499785510345358e-06,
+                        "carrier_cover": [
+                          {
+                            "t_interval": [
+                              0.0,
+                              1.0
+                            ],
+                            "tetrahedron_id": 0
+                          }
+                        ],
+                        "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                        "exterior_ray_direction": [
+                          -0.5773502691896257,
+                          -0.5773502691896257,
+                          -0.5773502691896257
+                        ],
+                        "exterior_ray_clearance_margin": 7.499785510345358e-06,
+                        "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                      }
+                    },
+                    {
+                      "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                      "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                      "patch_id": "physical-patch-29f9015c278eef52e6d69a9798d97c4944938f70cc95d12f64869bb268d01c8a",
+                      "status": "resolved",
+                      "reason": null,
+                      "path": {
+                        "start": [
+                          0.0,
+                          0.0,
+                          0.0
+                        ],
+                        "attachment": [
+                          0.062465181888017765,
+                          -0.06245905756320866,
+                          0.06245905756320866
+                        ],
+                        "surface_face_index": 3,
+                        "all_atom_clearance_margin": 7.499785510345358e-06,
+                        "carrier_cover": [
+                          {
+                            "t_interval": [
+                              0.0,
+                              1.0
+                            ],
+                            "tetrahedron_id": 0
+                          }
+                        ],
+                        "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                        "exterior_ray_direction": [
+                          0.5773502691896257,
+                          -0.5773502691896257,
+                          0.5773502691896257
+                        ],
+                        "exterior_ray_clearance_margin": 7.499785510345358e-06,
+                        "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                      }
+                    }
+                  ]
+                },
+                "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+                "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+                "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+              }
+            },
+            "dry_lining": {},
+            "characteristic_radii_nm": {
+              "residence_death_radius": 0.15455739091877105,
+              "seal_radius": 0.13599564267050154,
+              "merge_radii": [],
+              "split_radii": []
+            },
+            "native_bank_interface_flag": false,
+            "native_bank_ids": [],
+            "candidate_atom_union": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "beach_candidate_proxy": {
+              "dry_tetrahedron_ids": [],
+              "atom_indices": [],
+              "volume_wetted_estimate": 0.0
+            }
+          }
+        ],
+        "dry_components": [],
+        "coast_faces": [],
+        "public_features": [
+          {
+            "feature_id": "PRC-1",
+            "python_class": "Percolating",
+            "feature_type": "percolating",
+            "shape_type": "neutral",
+            "legacy_dimensionality": 2,
+            "parent_ids": [],
+            "child_ids": [],
+            "source_id": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "component_id": "WET-1",
+            "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+            "signature": {
+              "n_mouths": 1,
+              "resident": true,
+              "exposed": true,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "percolating",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "center": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "center",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer",
+                    "si": {
+                      "factor": 1e-09,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 1
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:6ff0cfd361b295748c541481d8f51a0f"
+                },
+                "si": {
+                  "factor": 1e-09,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 1
+                  }
+                },
+                "dtype": "float64",
+                "shape": [
+                  3
+                ],
+                "blocks": [
+                  3
+                ]
+              },
+              "values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "block_digests": [
+                "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+              ],
+              "digest": "blake2b-128:a828807490b283b7df236186c601bd84"
+            },
+            "carrier_volume": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "carrier_volume",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.0175453227104516,
+              "block_digests": [
+                "blake2b-128:7ce6169b9cff94b41d433e43a162f75d"
+              ],
+              "digest": "blake2b-128:c0ab362f8f43c6bea26f10b839f92ca0"
+            },
+            "local_solvent_proxy": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "local_solvent_proxy",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.013291911144281514,
+              "block_digests": [
+                "blake2b-128:677238b301959db51c0b17ffae72955c"
+              ],
+              "digest": "blake2b-128:f6e1042619bcfc21a31662e97adc13fa"
+            },
+            "native_bank_interface_flag": false,
+            "physical_openings": {
+              "status": "resolved",
+              "n_patches": 4,
+              "patch_ids": [
+                "physical-patch-779752535ce975c1986b245c565a22896ce3833f7e666e39c566dc3e9c63caa2",
+                "physical-patch-f3b90ea7f2edd9bc00edc213d15289f692c45fcb295fc7abb7d3f6d0ff839eb4",
+                "physical-patch-62f86dda829f707cb6dc2d1d06967f05ec59566d8db105ce910994be1c8b3dc0",
+                "physical-patch-29f9015c278eef52e6d69a9798d97c4944938f70cc95d12f64869bb268d01c8a"
+              ],
+              "association_evidence": {
+                "status": "resolved",
+                "records": [
+                  {
+                    "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                    "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                    "patch_id": "physical-patch-779752535ce975c1986b245c565a22896ce3833f7e666e39c566dc3e9c63caa2",
+                    "status": "resolved",
+                    "reason": null,
+                    "path": {
+                      "start": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "attachment": [
+                        0.062465181888017765,
+                        0.06245905756320866,
+                        -0.06245905756320866
+                      ],
+                      "surface_face_index": 0,
+                      "all_atom_clearance_margin": 7.499785510345358e-06,
+                      "carrier_cover": [
+                        {
+                          "t_interval": [
+                            0.0,
+                            1.0
+                          ],
+                          "tetrahedron_id": 0
+                        }
+                      ],
+                      "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                      "exterior_ray_direction": [
+                        0.5773502691896257,
+                        0.5773502691896257,
+                        -0.5773502691896257
+                      ],
+                      "exterior_ray_clearance_margin": 7.499785510345358e-06,
+                      "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                    }
+                  },
+                  {
+                    "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                    "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                    "patch_id": "physical-patch-f3b90ea7f2edd9bc00edc213d15289f692c45fcb295fc7abb7d3f6d0ff839eb4",
+                    "status": "resolved",
+                    "reason": null,
+                    "path": {
+                      "start": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "attachment": [
+                        -0.06245905756320866,
+                        0.062465181888017765,
+                        0.06245905756320866
+                      ],
+                      "surface_face_index": 1,
+                      "all_atom_clearance_margin": 7.499785510345358e-06,
+                      "carrier_cover": [
+                        {
+                          "t_interval": [
+                            0.0,
+                            1.0
+                          ],
+                          "tetrahedron_id": 0
+                        }
+                      ],
+                      "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                      "exterior_ray_direction": [
+                        -0.5773502691896257,
+                        0.5773502691896257,
+                        0.5773502691896257
+                      ],
+                      "exterior_ray_clearance_margin": 7.499785510345358e-06,
+                      "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                    }
+                  },
+                  {
+                    "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                    "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                    "patch_id": "physical-patch-62f86dda829f707cb6dc2d1d06967f05ec59566d8db105ce910994be1c8b3dc0",
+                    "status": "resolved",
+                    "reason": null,
+                    "path": {
+                      "start": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "attachment": [
+                        -0.06245905756320866,
+                        -0.06245905756320866,
+                        -0.062465181888017765
+                      ],
+                      "surface_face_index": 2,
+                      "all_atom_clearance_margin": 7.499785510345358e-06,
+                      "carrier_cover": [
+                        {
+                          "t_interval": [
+                            0.0,
+                            1.0
+                          ],
+                          "tetrahedron_id": 0
+                        }
+                      ],
+                      "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                      "exterior_ray_direction": [
+                        -0.5773502691896257,
+                        -0.5773502691896257,
+                        -0.5773502691896257
+                      ],
+                      "exterior_ray_clearance_margin": 7.499785510345358e-06,
+                      "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                    }
+                  },
+                  {
+                    "component_key": "component-d045263ddde337990856d505f54fa3c5a5f5fdbb4d6c48de1c890bc02e854052",
+                    "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                    "patch_id": "physical-patch-29f9015c278eef52e6d69a9798d97c4944938f70cc95d12f64869bb268d01c8a",
+                    "status": "resolved",
+                    "reason": null,
+                    "path": {
+                      "start": [
+                        0.0,
+                        0.0,
+                        0.0
+                      ],
+                      "attachment": [
+                        0.062465181888017765,
+                        -0.06245905756320866,
+                        0.06245905756320866
+                      ],
+                      "surface_face_index": 3,
+                      "all_atom_clearance_margin": 7.499785510345358e-06,
+                      "carrier_cover": [
+                        {
+                          "t_interval": [
+                            0.0,
+                            1.0
+                          ],
+                          "tetrahedron_id": 0
+                        }
+                      ],
+                      "carrier_roundoff_barycentric": 2.2737367544323206e-13,
+                      "exterior_ray_direction": [
+                        0.5773502691896257,
+                        -0.5773502691896257,
+                        0.5773502691896257
+                      ],
+                      "exterior_ray_clearance_margin": 7.499785510345358e-06,
+                      "exterior_rule": "convex-hull outward normal; every atom lies in inward halfspace"
+                    }
+                  }
+                ]
+              },
+              "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+              "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+              "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+            }
+          }
+        ],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "resolved",
+          "reason": null,
+          "n_patches": 4,
+          "query": {
+            "result_key": "result-2cf7de90f3a891e92106ec39451a7f4cf5df1de38ccd3338338db25fab29160d",
+            "probe_radius": 0.13598564267050167,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    },
+    {
+      "name": "gate_at",
+      "probe_angstroms": 1.3599564267050168,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-08bb251cfbfd4b048044737ba1abf307",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.13599564267050168,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-91811302c78349ffc1f5fa29e44fd7aceba76488fb09b7674aaeb60951f89f44",
+        "node_inventory": {
+          "wet_nodes": 1,
+          "dry_nodes": 0,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "resident",
+            "transit_role": "resident_transit",
+            "flags": [
+              "marginal"
+            ],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [
+          {
+            "component_id": "WET-1",
+            "component_key": "component-6a1640f11b4b54015f4b952b2ef7de6eb942f3f946b8a7223e67860d45d223f2",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "resident_node_indices": [
+              0
+            ],
+            "connector_node_indices": [],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "signature": {
+              "n_mouths": 1,
+              "resident": true,
+              "exposed": true,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "percolating",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "native_external_link_ids": [
+              1
+            ],
+            "topological_depth": {
+              "0": 0
+            },
+            "depth_reference": "native_exterior_graph_hops",
+            "depth_regions": [
+              {
+                "motif_type": "depth_region",
+                "parent_component_key": "component-6a1640f11b4b54015f4b952b2ef7de6eb942f3f946b8a7223e67860d45d223f2",
+                "motif_support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                "motif_key": "motif-5419987756e2ef42fb0b2c5489cc321e59ba22c27129ab55121e3f038171f34d",
+                "depth": 0,
+                "node_ids": [
+                  0
+                ],
+                "atom_indices": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "boundary": {
+              "n_connected_walls": 0,
+              "n_dry_contacts": 0,
+              "n_septa": 0,
+              "walls": [],
+              "physical_openings": {
+                "status": "unresolved",
+                "n_patches": null,
+                "patch_ids": [],
+                "reason": "face 0: zero lacks a complete positive-margin cover"
+              }
+            },
+            "dry_lining": {},
+            "characteristic_radii_nm": {
+              "residence_death_radius": 0.15455739091877105,
+              "seal_radius": 0.13599564267050154,
+              "merge_radii": [],
+              "split_radii": []
+            },
+            "native_bank_interface_flag": false,
+            "native_bank_ids": [],
+            "candidate_atom_union": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "beach_candidate_proxy": {
+              "dry_tetrahedron_ids": [],
+              "atom_indices": [],
+              "volume_wetted_estimate": 0.0
+            }
+          }
+        ],
+        "dry_components": [],
+        "coast_faces": [],
+        "public_features": [
+          {
+            "feature_id": "PRC-1",
+            "python_class": "Percolating",
+            "feature_type": "percolating",
+            "shape_type": "neutral",
+            "legacy_dimensionality": 2,
+            "parent_ids": [],
+            "child_ids": [],
+            "source_id": "component-6a1640f11b4b54015f4b952b2ef7de6eb942f3f946b8a7223e67860d45d223f2",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "component_id": "WET-1",
+            "component_key": "component-6a1640f11b4b54015f4b952b2ef7de6eb942f3f946b8a7223e67860d45d223f2",
+            "signature": {
+              "n_mouths": 1,
+              "resident": true,
+              "exposed": true,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "percolating",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "center": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "center",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer",
+                    "si": {
+                      "factor": 1e-09,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 1
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:6ff0cfd361b295748c541481d8f51a0f"
+                },
+                "si": {
+                  "factor": 1e-09,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 1
+                  }
+                },
+                "dtype": "float64",
+                "shape": [
+                  3
+                ],
+                "blocks": [
+                  3
+                ]
+              },
+              "values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "block_digests": [
+                "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+              ],
+              "digest": "blake2b-128:a828807490b283b7df236186c601bd84"
+            },
+            "carrier_volume": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "carrier_volume",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.0175453227104516,
+              "block_digests": [
+                "blake2b-128:7ce6169b9cff94b41d433e43a162f75d"
+              ],
+              "digest": "blake2b-128:c0ab362f8f43c6bea26f10b839f92ca0"
+            },
+            "local_solvent_proxy": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "local_solvent_proxy",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.013291911144281514,
+              "block_digests": [
+                "blake2b-128:677238b301959db51c0b17ffae72955c"
+              ],
+              "digest": "blake2b-128:f6e1042619bcfc21a31662e97adc13fa"
+            },
+            "native_bank_interface_flag": false,
+            "physical_openings": {
+              "status": "unresolved",
+              "n_patches": null,
+              "patch_ids": [],
+              "reason": "face 0: zero lacks a complete positive-margin cover"
+            }
+          }
+        ],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "unresolved",
+          "reason": "face 0: zero lacks a complete positive-margin cover",
+          "n_patches": null,
+          "query": {
+            "result_key": "result-91811302c78349ffc1f5fa29e44fd7aceba76488fb09b7674aaeb60951f89f44",
+            "probe_radius": 0.13599564267050168,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    },
+    {
+      "name": "gate_above",
+      "probe_angstroms": 1.3600564267050168,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-aa13abc03c9c4792b65bd6bee0d2a3e2",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.13600564267050166,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-b843926b1db6ae32028c074693446bb0684b6cad19617bd09e17e7620be0d658",
+        "node_inventory": {
+          "wet_nodes": 1,
+          "dry_nodes": 0,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "resident",
+            "transit_role": "resident_transit",
+            "flags": [],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [
+          {
+            "component_id": "WET-1",
+            "component_key": "component-7b365b943c6d4ec030285d822ede59ebc53987daeb0419ad1631bf78feda29e3",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "resident_node_indices": [
+              0
+            ],
+            "connector_node_indices": [],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "signature": {
+              "n_mouths": 0,
+              "resident": true,
+              "exposed": false,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "void",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "native_external_link_ids": [],
+            "topological_depth": {
+              "0": 0
+            },
+            "depth_reference": "no_exterior_zero_convention",
+            "depth_regions": [
+              {
+                "motif_type": "depth_region",
+                "parent_component_key": "component-7b365b943c6d4ec030285d822ede59ebc53987daeb0419ad1631bf78feda29e3",
+                "motif_support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                "motif_key": "motif-3efa03f0ea93592a2d141c08039797d1699e002765132769eb0c5e81afb1f3d7",
+                "depth": 0,
+                "node_ids": [
+                  0
+                ],
+                "atom_indices": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "boundary": {
+              "n_connected_walls": 1,
+              "n_dry_contacts": 0,
+              "n_septa": 0,
+              "walls": [
+                {
+                  "kind": "exterior",
+                  "n_faces": 4,
+                  "composition": {
+                    "exterior": 4
+                  },
+                  "R_gate": 0.13599564267050154
+                }
+              ],
+              "physical_openings": {
+                "status": "unresolved",
+                "n_patches": null,
+                "patch_ids": [],
+                "reason": "face 0: zero lacks a complete positive-margin cover"
+              }
+            },
+            "dry_lining": {},
+            "characteristic_radii_nm": {
+              "residence_death_radius": 0.15455739091877105,
+              "seal_radius": null,
+              "merge_radii": [],
+              "split_radii": []
+            },
+            "native_bank_interface_flag": false,
+            "native_bank_ids": [],
+            "candidate_atom_union": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "beach_candidate_proxy": {
+              "dry_tetrahedron_ids": [],
+              "atom_indices": [],
+              "volume_wetted_estimate": 0.0
+            }
+          }
+        ],
+        "dry_components": [],
+        "coast_faces": [],
+        "public_features": [
+          {
+            "feature_id": "VOI-1",
+            "python_class": "Void",
+            "feature_type": "void",
+            "shape_type": "concavity",
+            "legacy_dimensionality": 2,
+            "parent_ids": [],
+            "child_ids": [],
+            "source_id": "component-7b365b943c6d4ec030285d822ede59ebc53987daeb0419ad1631bf78feda29e3",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "component_id": "WET-1",
+            "component_key": "component-7b365b943c6d4ec030285d822ede59ebc53987daeb0419ad1631bf78feda29e3",
+            "signature": {
+              "n_mouths": 0,
+              "resident": true,
+              "exposed": false,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "void",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "center": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "center",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer",
+                    "si": {
+                      "factor": 1e-09,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 1
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:6ff0cfd361b295748c541481d8f51a0f"
+                },
+                "si": {
+                  "factor": 1e-09,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 1
+                  }
+                },
+                "dtype": "float64",
+                "shape": [
+                  3
+                ],
+                "blocks": [
+                  3
+                ]
+              },
+              "values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "block_digests": [
+                "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+              ],
+              "digest": "blake2b-128:a828807490b283b7df236186c601bd84"
+            },
+            "carrier_volume": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "carrier_volume",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.0175453227104516,
+              "block_digests": [
+                "blake2b-128:7ce6169b9cff94b41d433e43a162f75d"
+              ],
+              "digest": "blake2b-128:c0ab362f8f43c6bea26f10b839f92ca0"
+            },
+            "local_solvent_proxy": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "local_solvent_proxy",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.013291911144281514,
+              "block_digests": [
+                "blake2b-128:677238b301959db51c0b17ffae72955c"
+              ],
+              "digest": "blake2b-128:f6e1042619bcfc21a31662e97adc13fa"
+            },
+            "native_bank_interface_flag": false,
+            "physical_openings": {
+              "status": "unresolved",
+              "n_patches": null,
+              "patch_ids": [],
+              "reason": "face 0: zero lacks a complete positive-margin cover"
+            }
+          }
+        ],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "unresolved",
+          "reason": "face 0: zero lacks a complete positive-margin cover",
+          "n_patches": null,
+          "query": {
+            "result_key": "result-b843926b1db6ae32028c074693446bb0684b6cad19617bd09e17e7620be0d658",
+            "probe_radius": 0.13600564267050166,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    },
+    {
+      "name": "residence_below",
+      "probe_angstroms": 1.5454739091877108,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-7d7211b9a7fc408286dbbad3b020a677",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.15454739091877107,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-5bdbd7ac291f5f5ee8a48017759fcba28b611866f0aa90c280fbca145defae1f",
+        "node_inventory": {
+          "wet_nodes": 1,
+          "dry_nodes": 0,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "resident",
+            "transit_role": "resident_transit",
+            "flags": [],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [
+          {
+            "component_id": "WET-1",
+            "component_key": "component-a430bf70943997e058b395757823c3965e0b6ed48104bc1188bb54a2f8c75235",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "resident_node_indices": [
+              0
+            ],
+            "connector_node_indices": [],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "signature": {
+              "n_mouths": 0,
+              "resident": true,
+              "exposed": false,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "void",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "native_external_link_ids": [],
+            "topological_depth": {
+              "0": 0
+            },
+            "depth_reference": "no_exterior_zero_convention",
+            "depth_regions": [
+              {
+                "motif_type": "depth_region",
+                "parent_component_key": "component-a430bf70943997e058b395757823c3965e0b6ed48104bc1188bb54a2f8c75235",
+                "motif_support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                "motif_key": "motif-f685f93cf1d58450b1feee5e968a9a9e9ffc58f34faabb830cdcc7889b159393",
+                "depth": 0,
+                "node_ids": [
+                  0
+                ],
+                "atom_indices": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "boundary": {
+              "n_connected_walls": 1,
+              "n_dry_contacts": 0,
+              "n_septa": 0,
+              "walls": [
+                {
+                  "kind": "exterior",
+                  "n_faces": 4,
+                  "composition": {
+                    "exterior": 4
+                  },
+                  "R_gate": 0.13599564267050154
+                }
+              ],
+              "physical_openings": {
+                "status": "resolved",
+                "n_patches": 0,
+                "patch_ids": [],
+                "association_evidence": {
+                  "status": "resolved",
+                  "records": []
+                },
+                "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+                "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+                "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+              }
+            },
+            "dry_lining": {},
+            "characteristic_radii_nm": {
+              "residence_death_radius": 0.15455739091877105,
+              "seal_radius": null,
+              "merge_radii": [],
+              "split_radii": []
+            },
+            "native_bank_interface_flag": false,
+            "native_bank_ids": [],
+            "candidate_atom_union": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "beach_candidate_proxy": {
+              "dry_tetrahedron_ids": [],
+              "atom_indices": [],
+              "volume_wetted_estimate": 0.0
+            }
+          }
+        ],
+        "dry_components": [],
+        "coast_faces": [],
+        "public_features": [
+          {
+            "feature_id": "VOI-1",
+            "python_class": "Void",
+            "feature_type": "void",
+            "shape_type": "concavity",
+            "legacy_dimensionality": 2,
+            "parent_ids": [],
+            "child_ids": [],
+            "source_id": "component-a430bf70943997e058b395757823c3965e0b6ed48104bc1188bb54a2f8c75235",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "component_id": "WET-1",
+            "component_key": "component-a430bf70943997e058b395757823c3965e0b6ed48104bc1188bb54a2f8c75235",
+            "signature": {
+              "n_mouths": 0,
+              "resident": true,
+              "exposed": false,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "void",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "center": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "center",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer",
+                    "si": {
+                      "factor": 1e-09,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 1
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:6ff0cfd361b295748c541481d8f51a0f"
+                },
+                "si": {
+                  "factor": 1e-09,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 1
+                  }
+                },
+                "dtype": "float64",
+                "shape": [
+                  3
+                ],
+                "blocks": [
+                  3
+                ]
+              },
+              "values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "block_digests": [
+                "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+              ],
+              "digest": "blake2b-128:a828807490b283b7df236186c601bd84"
+            },
+            "carrier_volume": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "carrier_volume",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.0175453227104516,
+              "block_digests": [
+                "blake2b-128:7ce6169b9cff94b41d433e43a162f75d"
+              ],
+              "digest": "blake2b-128:c0ab362f8f43c6bea26f10b839f92ca0"
+            },
+            "local_solvent_proxy": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "local_solvent_proxy",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.013291911144281514,
+              "block_digests": [
+                "blake2b-128:677238b301959db51c0b17ffae72955c"
+              ],
+              "digest": "blake2b-128:f6e1042619bcfc21a31662e97adc13fa"
+            },
+            "native_bank_interface_flag": false,
+            "physical_openings": {
+              "status": "resolved",
+              "n_patches": 0,
+              "patch_ids": [],
+              "association_evidence": {
+                "status": "resolved",
+                "records": []
+              },
+              "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+              "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+              "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+            }
+          }
+        ],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "resolved",
+          "reason": null,
+          "n_patches": 0,
+          "query": {
+            "result_key": "result-5bdbd7ac291f5f5ee8a48017759fcba28b611866f0aa90c280fbca145defae1f",
+            "probe_radius": 0.15454739091877107,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    },
+    {
+      "name": "residence_at",
+      "probe_angstroms": 1.5455739091877108,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-56d685f649ce4ae8b4100d87eccfc12a",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.15455739091877108,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-443ce10a052389916bea81169ae57de710d61c3cc50f15554080247172d8962d",
+        "node_inventory": {
+          "wet_nodes": 1,
+          "dry_nodes": 0,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "resident",
+            "transit_role": "resident_transit",
+            "flags": [
+              "marginal"
+            ],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [
+          {
+            "component_id": "WET-1",
+            "component_key": "component-7a270ebc91de3039de6433cb7c2a1b2b646d3a877b5526b32df2eaa5c7745577",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "resident_node_indices": [
+              0
+            ],
+            "connector_node_indices": [],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "signature": {
+              "n_mouths": 0,
+              "resident": true,
+              "exposed": false,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "void",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "native_external_link_ids": [],
+            "topological_depth": {
+              "0": 0
+            },
+            "depth_reference": "no_exterior_zero_convention",
+            "depth_regions": [
+              {
+                "motif_type": "depth_region",
+                "parent_component_key": "component-7a270ebc91de3039de6433cb7c2a1b2b646d3a877b5526b32df2eaa5c7745577",
+                "motif_support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+                "motif_key": "motif-83778b288387b9042f751967e4ac8b6d9264d9ab289e079030b503ee88a0591d",
+                "depth": 0,
+                "node_ids": [
+                  0
+                ],
+                "atom_indices": [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              }
+            ],
+            "boundary": {
+              "n_connected_walls": 1,
+              "n_dry_contacts": 0,
+              "n_septa": 0,
+              "walls": [
+                {
+                  "kind": "exterior",
+                  "n_faces": 4,
+                  "composition": {
+                    "exterior": 4
+                  },
+                  "R_gate": 0.13599564267050154
+                }
+              ],
+              "physical_openings": {
+                "status": "resolved",
+                "n_patches": 0,
+                "patch_ids": [],
+                "association_evidence": {
+                  "status": "resolved",
+                  "records": []
+                },
+                "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+                "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+                "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+              }
+            },
+            "dry_lining": {},
+            "characteristic_radii_nm": {
+              "residence_death_radius": 0.15455739091877105,
+              "seal_radius": null,
+              "merge_radii": [],
+              "split_radii": []
+            },
+            "native_bank_interface_flag": false,
+            "native_bank_ids": [],
+            "candidate_atom_union": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "beach_candidate_proxy": {
+              "dry_tetrahedron_ids": [],
+              "atom_indices": [],
+              "volume_wetted_estimate": 0.0
+            }
+          }
+        ],
+        "dry_components": [],
+        "coast_faces": [],
+        "public_features": [
+          {
+            "feature_id": "VOI-1",
+            "python_class": "Void",
+            "feature_type": "void",
+            "shape_type": "concavity",
+            "legacy_dimensionality": 2,
+            "parent_ids": [],
+            "child_ids": [],
+            "source_id": "component-7a270ebc91de3039de6433cb7c2a1b2b646d3a877b5526b32df2eaa5c7745577",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "component_id": "WET-1",
+            "component_key": "component-7a270ebc91de3039de6433cb7c2a1b2b646d3a877b5526b32df2eaa5c7745577",
+            "signature": {
+              "n_mouths": 0,
+              "resident": true,
+              "exposed": false,
+              "n_septa": 0,
+              "branched": false
+            },
+            "classification": {
+              "name": "void",
+              "confidence": 1.0,
+              "marginal": false
+            },
+            "center": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "center",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer",
+                    "si": {
+                      "factor": 1e-09,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 1
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:6ff0cfd361b295748c541481d8f51a0f"
+                },
+                "si": {
+                  "factor": 1e-09,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 1
+                  }
+                },
+                "dtype": "float64",
+                "shape": [
+                  3
+                ],
+                "blocks": [
+                  3
+                ]
+              },
+              "values": [
+                0.0,
+                0.0,
+                0.0
+              ],
+              "block_digests": [
+                "blake2b-128:afbcb3a85cfb87bffed6f2d5f2709be5"
+              ],
+              "digest": "blake2b-128:a828807490b283b7df236186c601bd84"
+            },
+            "carrier_volume": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "carrier_volume",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.0175453227104516,
+              "block_digests": [
+                "blake2b-128:7ce6169b9cff94b41d433e43a162f75d"
+              ],
+              "digest": "blake2b-128:c0ab362f8f43c6bea26f10b839f92ca0"
+            },
+            "local_solvent_proxy": {
+              "manifest": {
+                "format": "qrec/0.3",
+                "field": "local_solvent_proxy",
+                "unit": {
+                  "manifest": {
+                    "format": "qrec/0.3",
+                    "field": "unit",
+                    "unit": "nanometer ** 3",
+                    "si": {
+                      "factor": 1.0000000000000002e-27,
+                      "offset": 0.0,
+                      "exponents": {
+                        "m": 3
+                      }
+                    },
+                    "dtype": "int64",
+                    "shape": [],
+                    "blocks": [
+                      1
+                    ]
+                  },
+                  "values": 1,
+                  "block_digests": [
+                    "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+                  ],
+                  "digest": "blake2b-128:629053a35c29e0d458b51a33db809aea"
+                },
+                "si": {
+                  "factor": 1.0000000000000002e-27,
+                  "offset": 0.0,
+                  "exponents": {
+                    "m": 3
+                  }
+                },
+                "dtype": "float64",
+                "shape": [],
+                "blocks": [
+                  1
+                ]
+              },
+              "values": 0.013291911144281514,
+              "block_digests": [
+                "blake2b-128:677238b301959db51c0b17ffae72955c"
+              ],
+              "digest": "blake2b-128:f6e1042619bcfc21a31662e97adc13fa"
+            },
+            "native_bank_interface_flag": false,
+            "physical_openings": {
+              "status": "resolved",
+              "n_patches": 0,
+              "patch_ids": [],
+              "association_evidence": {
+                "status": "resolved",
+                "records": []
+              },
+              "surface_reference": "dfnd.dfn.boundary_connectivity.surface",
+              "patch_reference": "dfnd.dfn.boundary_connectivity.patches",
+              "meaning": "path-supported physical hull contacts; native class and Mouth promotion unchanged"
+            }
+          }
+        ],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "resolved",
+          "reason": null,
+          "n_patches": 0,
+          "query": {
+            "result_key": "result-443ce10a052389916bea81169ae57de710d61c3cc50f15554080247172d8962d",
+            "probe_radius": 0.15455739091877108,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    },
+    {
+      "name": "residence_above",
+      "probe_angstroms": 1.5456739091877107,
+      "observation": {
+        "schema": "topomt.benchlab.public-contract-observation/1",
+        "units": {
+          "length": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "length",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:fc145504517c2f8c8b4c6834b22d9add"
+          },
+          "area": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "area",
+              "unit": "nanometer ** 2",
+              "si": {
+                "factor": 1e-18,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 2
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:5015bd482d2eab76c68217b9ff9b4090"
+          },
+          "volume": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "volume",
+              "unit": "nanometer ** 3",
+              "si": {
+                "factor": 1.0000000000000002e-27,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 3
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:60d713c1e04ae839cf4aa03e585156b7"
+          },
+          "coordinates": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "coordinates",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:074ba1a49c0e16a845a099f530ed814f"
+          },
+          "R_residence": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_residence",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:2d715f69320f6445472f2e7c41a4e323"
+          },
+          "R_gate": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "R_gate",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:9c051a687b2863651015515a83b6d95d"
+          },
+          "probe_radius": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "probe_radius",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:548d241f7485c39957bb1b4044698e81"
+          },
+          "epsilon": {
+            "manifest": {
+              "format": "qrec/0.3",
+              "field": "epsilon",
+              "unit": "nanometer",
+              "si": {
+                "factor": 1e-09,
+                "offset": 0.0,
+                "exponents": {
+                  "m": 1
+                }
+              },
+              "dtype": "int64",
+              "shape": [],
+              "blocks": [
+                1
+              ]
+            },
+            "values": 1,
+            "block_digests": [
+              "blake2b-128:f96e083098eb87ed4301f91e2322f18e"
+            ],
+            "digest": "blake2b-128:1b7d5a0e89b275a590a711dddb6453dd"
+          }
+        },
+        "neighbor_filters": {
+          "side": "Legacy local residence state; nonresident can include wet connectors",
+          "component_side": "Captured native wet carrier or dry bank, including connector membership",
+          "admitted_edges": "These are filtered face incidences; graph depth uses transit_edge separately",
+          "all_node_memberships_verified": true
+        },
+        "input_source_id": "input-d5ac01d523f94980934745e603b63063",
+        "source_atom_indices": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "query": {
+          "probe_radius": 0.15456739091877106,
+          "residence_tolerance": 0.0,
+          "permeability_tolerance": 0.0,
+          "transit_policy": "with_connectors",
+          "gate_intrusion_policy": "flag_only",
+          "dry_adjacency": "face",
+          "physical_boundary": true,
+          "boundary_tolerance": 1e-07,
+          "boundary_max_atoms": 512,
+          "boundary_max_faces": 512,
+          "boundary_max_events": 100000,
+          "boundary_max_path_tests": 4096,
+          "boundary_max_associations": 4096
+        },
+        "result_key": "result-f60bd8f644bc688ddf58f127fe992d4db916d65fa485c5b0e4d5e40d8c2b1d76",
+        "node_inventory": {
+          "wet_nodes": 0,
+          "dry_nodes": 1,
+          "total": 1
+        },
+        "tetrahedron_source_atoms": {
+          "0": [
+            0,
+            1,
+            2,
+            3
+          ]
+        },
+        "node_roles": [
+          {
+            "tetrahedron_id": 0,
+            "residence_state": "non_resident",
+            "transit_role": "non_transit",
+            "flags": [],
+            "R_residence": 0.15455739091877105
+          }
+        ],
+        "wet_components": [],
+        "dry_components": [
+          {
+            "component_id": "DRY-1",
+            "component_key": "component-acc9759cad5d2e251661a8a1c612ffdb6222a5e494be23dda2874c29bf4c4936",
+            "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+            "node_indices": [
+              0
+            ],
+            "tetrahedron_source_support": [
+              [
+                0,
+                1,
+                2,
+                3
+              ]
+            ],
+            "lining_source_atom_indices": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "wet_lining": {},
+            "raw_bank_record": {
+              "id": 1,
+              "graph_label": 0,
+              "support_key": "support-24d62856bfcf1370a5afefd9c5686c620ab4194469cd4b98405aa627030b7d70",
+              "tetrahedron_support": [
+                [
+                  0,
+                  1,
+                  2,
+                  3
+                ]
+              ],
+              "tetrahedron_indices": [
+                0
+              ],
+              "atom_indices": [
+                0,
+                1,
+                2,
+                3
+              ],
+              "size": 1,
+              "include_in_compatibility_view": true,
+              "dry_edges": [],
+              "dry_edge_face_ids": [],
+              "flags": [],
+              "component_key": "component-acc9759cad5d2e251661a8a1c612ffdb6222a5e494be23dda2874c29bf4c4936",
+              "component_index": 0,
+              "node_count_rank": 1,
+              "size_rank": 1,
+              "dry_interface_ids": [
+                1,
+                2,
+                3,
+                4
+              ],
+              "dry_boundary_tetrahedron_ids": [
+                0
+              ],
+              "face_depth_by_tetrahedron": {
+                "0": 0
+              },
+              "face_depth_min": 0,
+              "face_depth_max": 0,
+              "face_depth_mean": 0.0,
+              "dry_motif_ids": [
+                1
+              ],
+              "motif_keys": [
+                "motif-1c0b4f9261c0b20df36dd78b738237b7583d36ca431da451e9b60988a7939c25"
+              ]
+            }
+          }
+        ],
+        "coast_faces": [],
+        "public_features": [],
+        "physical_boundary": {
+          "schema": "dfnd.physical_boundary.nm.v1",
+          "status": "resolved",
+          "reason": null,
+          "n_patches": 0,
+          "query": {
+            "result_key": "result-f60bd8f644bc688ddf58f127fe992d4db916d65fa485c5b0e4d5e40d8c2b1d76",
+            "probe_radius": 0.15456739091877106,
+            "strict_inequality": "clearance > probe_radius",
+            "exclusion_scope": "all_selected_atoms",
+            "tolerance": 1e-07,
+            "algorithm": "analytic_circle_sections_v1",
+            "budget": {
+              "atoms": 512,
+              "faces": 512,
+              "events": 100000,
+              "path_tests": 4096,
+              "associations": 4096
+            }
+          }
+        },
+        "public_molecular_interface_validation": "not_established",
+        "public_dry_relief_promotion": "not_implemented_by_this_bridge",
+        "versioned_public_topography_interchange": "not_implemented",
+        "native_pickle": "Existing source-bound Python restoration guards, not a versioned public interchange schema",
+        "scope": "Native banks/incidences/depth/candidate proxies and public registry receiving; no supplied molecular participant, physical wetting or exact burial claim"
+      }
+    }
+  ],
+  "scope": "Source-bound three-case receiving. Broader neutral support/persistence and participant/interface adoption remain #60/#61; no biological/promoted dry-convexity claim.",
+  "source_revision": "80855e5dc23a94031ad95c90a76a6d307df98e82",
+  "captured_at": "2026-11-11T00:40:59.525462+00:00",
+  "wall_seconds": 1.7743161270045675,
+  "peak_rss_kib": 274228
+}

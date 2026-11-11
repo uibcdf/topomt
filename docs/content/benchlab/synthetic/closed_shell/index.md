@@ -1,5 +1,10 @@
 # Sampled closed shell
 
+The [public support and robustness continuation](../public_support_and_robustness.md)
+recovers resident/connector supports, dry banks, coast relations, depth context
+and source identities on this same input. Its availability table separates native
+proxies, physical certificates and broader public/interface work.
+
 **Physical source increment — 2026-11-10:** the bounded DFND record now
 computes separate hull patches and path-supported contacts. The independent
 five-row panel gives tetrahedron 4/0/0 at 1.2/1.4/1.7 Å, closed shell zero at
@@ -133,3 +138,6 @@ Regenerating jitter after deleting atoms would change more than the opening.
 The full synthetic phase, wider independent panel #76 and later protein
 studies remain separate work. Source volume qualification has its bounded
 meaning in the linked study, rather than certifying every numerical setting.
+
+See the [current comparator disposition](../comparison_disposition.md) for retained
+original results, unmatched observables and issue-owned eligibility work.
