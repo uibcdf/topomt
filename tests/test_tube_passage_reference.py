@@ -128,3 +128,39 @@ def test_an_occupied_origin_does_not_exclude_a_bent_end_to_end_witness():
     bent = _discover_path(centers, radii, controls)
     assert bent['minimum_clearance_angstroms'] > 0.9
     assert [0.0, 0.0, 0.0] not in bent['points_angstroms']
+
+
+def test_retained_witnesses_separate_origin_access_from_end_to_end_passage():
+    from devtools.verify_tube_passage import verify_reference
+
+    old = json.loads((DATA / 'reference_certificate.json').read_text())
+    new = json.loads((DATA / 'reference_v2_certificate.json').read_text())
+    first = verify_reference(DATA / 'input.json', DATA / 'protocol.json', old)
+    later = verify_reference(
+        DATA / 'input.json', DATA / 'passage_v2_protocol.json', new
+    )
+    assert first['controls'][1]['end_to_end_path'] == 'not_established'
+    assert later['controls'][1]['fixed_axis'] == 'blocked'
+    assert later['controls'][1]['end_to_end_path'] == 'certified'
+    assert later['controls'][1]['path_margin_angstroms'] > 0.04
+    assert later['controls'][2]['finite_hull'] == 'strictly_covered'
+    assert first['input_sha256'] == later['input_sha256']
+
+
+@pytest.mark.parametrize('damage', ['unit', 'point', 'claimed_clearance', 'context'])
+def test_retained_path_cannot_accept_changed_units_support_or_claimed_clearance(damage):
+    from devtools.verify_tube_passage import verify_reference
+
+    candidate = json.loads((DATA / 'reference_v2_certificate.json').read_text())
+    if damage == 'unit':
+        candidate['path_candidate']['length_unit'] = 'nm'
+    elif damage == 'point':
+        candidate['path_candidate']['points_angstroms'][1][0] = 4.0
+    elif damage == 'claimed_clearance':
+        candidate['path_candidate']['minimum_clearance_angstroms'] += 0.1
+    else:
+        candidate['protocol_sha256'] = '0' * 64
+    with pytest.raises(ValueError):
+        verify_reference(
+            DATA / 'input.json', DATA / 'passage_v2_protocol.json', candidate
+        )
