@@ -151,6 +151,9 @@ def encode_quantities(value: Any, field: str = 'value') -> Any:
     import pyunitwizard as puw
     from pyunitwizard import QuantityRecord
 
+    # Numeric-looking bibliography strings are JSON metadata, not expressions.
+    if value is None or isinstance(value, (str, int, float, bool)):
+        return value
     if puw.is_quantity(value):
         return QuantityRecord.from_quantity(value, field=field).to_dict()
     if isinstance(value, dict):

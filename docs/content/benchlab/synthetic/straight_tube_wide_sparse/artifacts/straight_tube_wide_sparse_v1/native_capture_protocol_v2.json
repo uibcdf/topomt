@@ -1,0 +1,14 @@
+{
+  "schema": "topomt.benchlab.tube-native-recapture-protocol/1",
+  "issue": "uibcdf/topomt#185",
+  "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+  "native_protocol_sha256": "3ddc32638c162bf19fd2600b52d1bfd4a6376ebe8fa8c3b7df747fe1b69a5ca0",
+  "retained_first_attempt_sha256": "4e50a6ce8a63c122aa45260d924370857ed1ce44638b9daa847961fe8fdf58b0",
+  "purpose": "Same query/scientific input; preserve all original attribution JSON strings before quantity detection. New original execution, not a silent rewrite.",
+  "assertions": [
+    "Whole completed-operation and result attribution dictionaries survive encode/decode unchanged",
+    "Scientific graph/physical outcomes remain independently inspectable",
+    "No original providers or server submissions"
+  ],
+  "resources": "One CPU/numerical thread, 6 GiB address-space ceiling and 120 CPU seconds"
+}
