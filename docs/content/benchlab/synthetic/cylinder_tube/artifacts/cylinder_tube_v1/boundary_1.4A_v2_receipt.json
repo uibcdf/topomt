@@ -1,0 +1,23 @@
+{
+  "source_revision": "85c0753d683e1c3471088e56989248739aff716c",
+  "generation_seconds": 4.269213785999455,
+  "verification_seconds": 0.6151115740067326,
+  "peak_rss_kib": 93368,
+  "cpus": 1,
+  "numerical_threads": 1,
+  "work": {
+    "wall_cover_nodes": 752,
+    "intersection_decisions": 4302,
+    "solver_calls": 515
+  },
+  "no_topomt_module_imported": true,
+  "patches": 2,
+  "end_labels": [
+    "negative_z",
+    "positive_z"
+  ],
+  "wall_faces": 32,
+  "end_faces": 14,
+  "free_end_faces": 2,
+  "free_seams": 0
+}

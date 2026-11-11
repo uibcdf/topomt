@@ -1,0 +1,44 @@
+{
+  "schema": "topomt.benchlab.tube-native-protocol/1",
+  "date": "2026-11-10",
+  "issue": "uibcdf/topomt#178",
+  "case": "cylinder_tube",
+  "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+  "independent_reference_sha256": {
+    "passage_v2_protocol.json": "d4431b49aa7c7f054cead8ecae95a7b11e77b39d222331f0322719d4049d0c9e",
+    "reference_v2_certificate.json": "dfba30cee007d38cebf3f402b5394673aa1a93f343d3fbc5108f0c81b6d39afb",
+    "reference_v2_verification.json": "29223ba9c159e19401643c65b60c10a0bb61c464a0114b84e1e70f1d4245bf6c",
+    "boundary_1.2A_v2_protocol.json": "92a42f81740e7228468e29a78de7f13e3f7a2acc05e18df4853883d4b8dda871",
+    "boundary_1.2A_v2_certificate.json": "e12f213d99dbd0a2cbb05bbaf16e3eb946dd5d90a22780f0141be43608512ff3",
+    "boundary_1.2A_v2_verification.json": "68b2dbc2388bb2ab4eb1714575236dd2283119ac126580274b2dd1b874f5b417",
+    "boundary_1.4A_v2_protocol.json": "5ae90b3d1ebd6ad45038f27877551a8f155c9a379ff2346865cf86cb2d2270f0",
+    "boundary_1.4A_v2_certificate.json": "9bda84d0426ea1630f7897cdf8ae457e9876c2fb63601eb9497fd4aad1a1f5fe",
+    "boundary_1.4A_v2_verification.json": "64a7d639124759f2936a1283bdc12686e3c780ead5dfaf16dc310aa5e652cc69"
+  },
+  "native_query_executed_before_reference_freeze": false,
+  "control_probes_angstroms": [
+    1.2,
+    1.4,
+    2.5
+  ],
+  "independently_established": {
+    "1.2": "Certified end-to-end passage, axis clear, exactly two hull patches localized to opposite ends; wall covered.",
+    "1.4": "Certified bent end-to-end passage despite occupied origin/blocked fixed axis; exactly two end patches and covered wall.",
+    "2.5": "The complete finite hull is covered by expanded atomic balls with positive conservative margin; no finite strict-free center."
+  },
+  "observations_to_record": [
+    "Actual raw/typed/public components and hierarchy, source mapped residents/connectors/banks/coast/depth/support",
+    "Physical patch availability/count/associations without equating native links/Mouths",
+    "Current native shortest-distance candidate paths, complete all-atom segment clearance and unchanged native false validation flag",
+    "Input/query/result identity, raw explicit nm units/public quantities and actual selected-operation attribution",
+    "Reporting suppression preserving raw/support/physical identity and compatible requery controls"
+  ],
+  "interpretation": "Independent truth controls physical meaning. Catalog names/counts and graph station/gate radii do not by themselves certify whole-segment clearance, external tails, globally optimal transport radius or physical aperture area.",
+  "resources": {
+    "cpu_count": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  },
+  "comparators": "No additional original detector/provider or remote service call selected in this delivery; eligibility and future matched comparisons retain existing owners."
+}
