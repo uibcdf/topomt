@@ -1,0 +1,117 @@
+{
+  "schema": "topomt.benchlab.dumbbell-protocol/1",
+  "case": "dumbbell",
+  "issue": "uibcdf/topomt#186",
+  "date": "2026-11-11",
+  "source_before_study": "990af14990960d850beb86424a53fc09a218876a",
+  "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63",
+  "length_unit": "angstroms",
+  "selected_controls": [
+    {
+      "probe_angstroms": 1.4,
+      "question": "Are both free chamber anchors enclosed and connected?"
+    },
+    {
+      "probe_angstroms": 2.2,
+      "question": "Can a complete barrier and covered neck section prove anchor separation while both remain free?"
+    },
+    {
+      "probe_angstroms": 6.0,
+      "question": "Can a sufficient all-atom cover exclude every free center in the finite native hull?"
+    }
+  ],
+  "anchors": {
+    "manifest": {
+      "format": "qrec/0.3",
+      "field": "anchors",
+      "unit": "angstrom",
+      "si": {
+        "factor": 1e-10,
+        "offset": 0.0,
+        "exponents": {
+          "m": 1
+        }
+      },
+      "dtype": "float64",
+      "shape": [
+        2,
+        3
+      ],
+      "blocks": [
+        6
+      ]
+    },
+    "values": [
+      [
+        -6.25,
+        0.0,
+        0.0
+      ],
+      [
+        6.25,
+        0.0,
+        0.0
+      ]
+    ],
+    "block_digests": [
+      "blake2b-128:8412fbabebd87e323beedef76aebfb3a"
+    ],
+    "digest": "blake2b-128:e9eeaf1f38446aa2534e8acc1d5453bb"
+  },
+  "barrier": {
+    "construction": "Closed surface of revolution made of convex polygonal frusta, approximating the nominal two-sphere union, checked against actual atomic balls.",
+    "nominal_lobe_radius_angstroms": 7.0,
+    "nominal_separation_angstroms": 12.5,
+    "polar_intervals_per_lobe": 16,
+    "angular_columns": 32,
+    "wall_probe_angstroms": 1.4,
+    "separator_probe_angstroms": 2.2,
+    "separator_plane_x_angstroms": 0.0,
+    "meaning": "A covered enclosing polyhedron establishes enclosure of named interior anchors, not exact counts or volume of every physical free region."
+  },
+  "axis_reference": {
+    "stations_angstroms": [
+      [
+        -6.25,
+        0.0,
+        0.0
+      ],
+      [
+        0.0,
+        0.0,
+        0.0
+      ],
+      [
+        6.25,
+        0.0,
+        0.0
+      ]
+    ],
+    "probe_angstroms": 1.4,
+    "meaning": "Complete all-atom segments, not sampled-waypoint clearance; no optimal bottleneck claim."
+  },
+  "reference_limits": {
+    "maximum_depth": 24,
+    "maximum_visited_nodes": 100000,
+    "length_margin_angstroms": 1e-06,
+    "cpu_seconds": 120,
+    "address_space_gib": 6
+  },
+  "query": {
+    "transit_policy": "with_connectors",
+    "gate_intrusion_policy": "flag_only",
+    "dry_adjacency": "face",
+    "min_size": 0,
+    "residence_tolerance_angstroms": 0.0,
+    "permeability_tolerance_angstroms": 0.0,
+    "boundary_tolerance_angstroms": 1e-06
+  },
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds_per_capture": 120,
+    "notebook_cell_timeout_seconds": 90
+  },
+  "scope": "Retrospective independently justified development on a known catalog input; no exact global physical component count, original-provider/server, optimal path, volume or protein claim."
+}

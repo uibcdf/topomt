@@ -1,5 +1,18 @@
 # DFND notebook laboratory checkpoint
 
+## Selected dumbbell unit — 2026-11-11
+
+The maintainer explicitly selects the existing symmetric `dumbbell` under #186,
+then a later joint six-case review under #187. This supersedes the earlier
+resolve-tubes-first scheduling rule; it does not qualify their unresolved
+#180/#181/#184/#76 profiles. Freeze the 94-ball input and independent
+communication/enclosure/separation/exclusion references before actual native
+receiving, and keep reference barriers distinct from the native finite hull.
+Deliver separate system/DFND readers and a complete tested download, preserving
+all earlier units. The joint review follows this establishment and has its own
+issue/report. No original provider/server, protein or other new case is selected.
+
+
 ## Selected wide/sparse companion — 2026-11-10
 
 The maintainer explicitly selects `straight_tube_wide_sparse` under #183 after

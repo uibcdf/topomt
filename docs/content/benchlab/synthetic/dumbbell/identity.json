@@ -1,0 +1,8 @@
+{
+  "schema": "topomt.benchlab.study-identity/1",
+  "case_id": "dumbbell",
+  "catalog_entry": "dumbbell",
+  "issue": "uibcdf/topomt#186",
+  "input": "artifacts/dumbbell_v1/input.json",
+  "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63"
+}
