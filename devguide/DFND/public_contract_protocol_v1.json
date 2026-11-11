@@ -1,0 +1,89 @@
+{
+  "schema": "topomt.benchlab.public-contract-protocol/1",
+  "date": "2026-11-10",
+  "issues": [
+    "uibcdf/topomt#76",
+    "uibcdf/topomt#60",
+    "uibcdf/topomt#61"
+  ],
+  "source_before_delivery": "e6b48ab",
+  "input_sha256": {
+    "regular_tetrahedron": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+    "closed_shell": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+    "shell_with_opening": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77"
+  },
+  "controls": {
+    "regular_tetrahedron": [
+      1.2,
+      1.4,
+      1.7
+    ],
+    "closed_shell": [
+      0.05,
+      0.2,
+      1.4,
+      5.0
+    ],
+    "shell_with_opening": [
+      1.4,
+      3.0,
+      5.0
+    ]
+  },
+  "threshold_extension": {
+    "case": "regular_tetrahedron",
+    "independent_gate_formula": "edge/sqrt(3)-radius",
+    "independent_residence_formula": "sqrt(6)*edge/4-radius",
+    "offset_angstroms": 0.0001,
+    "probes": "Below, exactly at and above both analytic capacities",
+    "epsilon_angstroms": 1e-06,
+    "boundary_tolerance_angstroms": 1e-06,
+    "expectation": "Below/above native availability follows the margin-separated reference; equality stays explicitly marginal under the native slack policy. Strict physical hull patches can remain unresolved at zero clearance margin. A zero-volume boundary configuration is not a positive-volume or positive-margin certificate."
+  },
+  "public_and_native_checks": [
+    "Actual public shape values admitted by public typing and registry filters",
+    "Resident/connector support recoverable from frozen source-mapped tetrahedra, not inferred from lining atoms",
+    "Complete wet/dry node inventory on the selected controls, complementary native bank meaning",
+    "Unique coast faces; source triples and carrier areas; symmetric wet/dry lining relations",
+    "Depth motifs cover declared nodes; no-exterior zero is a compatibility convention, not measured exterior burial",
+    "Grounded signature versus catalog refinement, native bank-derived interface flag versus supplied molecular participants",
+    "Public parent/child Mouth relations; physical patch IDs and clipped supports retained separately",
+    "Historical input snapshot survives live mutation; deep versus shallow registry/payload semantics",
+    "Native pickle restoration only within its existing source scope; no versioned public Topography interchange route asserted"
+  ],
+  "robustness": [
+    "Reuse valid source/unit/map/rigid-motion guards, then add missing observable checks",
+    "Scale coordinates, radii, probe, epsilon and every active length tolerance together",
+    "Compare compatible probe reuse with fresh computation on the same mesh/query; new geometry requires new source identity",
+    "Fixed-model primitive residence/admitted-face/transit availability is nested where policy establishes it; component/mouth counts and independently sampled volume point estimates need not be monotone"
+  ],
+  "numerical_receiving": "Explicit nm/nm2/nm3 numeric schemas and quantity-valued public primaries; dimensionless graph depth. No new area/bottleneck/participant/saved-result capability inferred from absent fields.",
+  "native_measurement_transform_control": {
+    "case": "regular_tetrahedron",
+    "rotation_radians": 0.413,
+    "translation_angstroms": [
+      2.5,
+      -7.2,
+      1.1
+    ],
+    "similarity_factor": 3.0,
+    "source_permutation": [
+      2,
+      0,
+      3,
+      1
+    ],
+    "mc_samples": 4096,
+    "quadrature_initial_order": 12,
+    "quadrature_max_order": 96,
+    "quadrature_relative_carrier_target": 0.0001,
+    "scope": "Same unchanged geometric model under mapped transformations, not a new catalog system or bitwise remeshing-ID invariant"
+  },
+  "resources": {
+    "cpu_count": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds_per_selector": 120
+  },
+  "qualification": "Source-bound three-case receiving. Broader neutral support/persistence and participant/interface adoption remain #60/#61; no biological/promoted dry-convexity claim."
+}
