@@ -5,5 +5,10 @@
   "stage": "presentation table after successful native receiving",
   "error": "KeyError: component_id",
   "reason": "A Mouth has parent_component_key/parent_ids, rather than the region component_id; the table must display the parent relation. No scientific computation/reference was changed.",
-  "disposition": "Correct table access and freeze revised cell protocol before fresh-kernel rerun."
+  "disposition": "Correct table access and freeze revised cell protocol before fresh-kernel rerun.",
+  "second_attempt": {
+    "source_revision": "282e732",
+    "error": "TypeError: NoneType support_key cannot be sliced",
+    "reason": "Mouth native-link support is supplied by parent/face relationships; display its role instead of a nonexistent region support key."
+  }
 }

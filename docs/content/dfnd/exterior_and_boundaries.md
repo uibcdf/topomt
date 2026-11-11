@@ -146,6 +146,12 @@ without a validated segment remain outside the qualified panel under
 [#76](https://github.com/uibcdf/topomt/issues/76). Free aperture area and a globally
 optimal bottleneck are not supplied by this connectivity observation.
 
+The [new straight-tube control](../benchlab/synthetic/cylinder_tube/index.md)
+exercises that work ceiling: initial source `b07a20e` exhausts its arrangement
+budget despite independently certified two-end hull patches. The count remains
+unknown; [#180](https://github.com/uibcdf/topomt/issues/180) owns this bounded
+extension. The earlier five-control qualification does not cover this tube.
+
 ## Other boundary roles
 
 | Native relation | Interpretation in the discrete construction |

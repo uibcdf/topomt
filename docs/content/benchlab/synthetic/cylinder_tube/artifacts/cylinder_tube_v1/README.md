@@ -29,6 +29,12 @@ stage is retrospective characterization, not a blind held-out benchmark.
 | `b07a20e` | `native_observations.json` | Actual typed-query public results, full raw/typed support audit, candidate-path segment checks, per-Topography attribution and full completed-operation attribution. |
 | Reader delivery | `notebook_protocol.json`, notebook receipts | Freeze all code/prose before executing the separate system/native notebooks. Run All reads evidence and recomputes observations in memory. |
 
+The initial notebook-table attempts and prior cell protocols are retained in
+`notebook_initial_attempt.json` / `notebook_protocol_initial.json` and
+`notebook_protocol_parent_table.json`. A native-link Mouth has a parent relation
+and no region `component_id` or region support key. Corrected presentation
+displays that relationship without altering the native result or references.
+
 The typed-query investigation also found a missing public argument adapter,
 separately fixed under [#179](https://github.com/uibcdf/topomt/issues/179) at
 `b07a20e`. Scientific query defaults and kernels are unchanged by that correction.

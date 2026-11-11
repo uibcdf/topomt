@@ -31,6 +31,8 @@ inputs, independent reasoning, native/public observations and versioned evidence
 | Regular tetrahedron, 1.7 Å | No free center anywhere in the finite hull. |
 | Closed shell, 0.2 Å | Complete expanded-ball cover of the hull and a free enclosed origin. |
 | Shell with opening, 1.4 Å | One free hull patch and an origin-to-exterior witness. |
+| Straight tube, 1.2/1.4 Å | Complete lateral-wall cover, two strict-free end patches and a verified bent end-to-end path; the fixed axis is blocked at 1.4 Å. |
+| Straight tube, 2.5 Å | A conservative all-atom bound covers every center position in the finite hull. |
 
 The wall is a sampled union of balls, not a continuum sphere with an assumed
 inner radius. A certificate for the origin-containing region does not prescribe
@@ -40,6 +42,12 @@ development and are not a held-out biological detector benchmark.
 ## Source deliveries and remaining scientific/public boundaries
 
 Keep completed bounded deliveries distinct from their broader follow-up:
+
+- [#180](https://github.com/uibcdf/topomt/issues/180) and
+  [#181](https://github.com/uibcdf/topomt/issues/181): the new tube's bounded
+  physical arrangement and local-candidate/all-atom qualification questions.
+  Independent references are established; initial source receiving is not fully
+  qualified. The case retains unresolved states and strict pending targets.
 
 - [#151](https://github.com/uibcdf/topomt/issues/151): the bounded source delivery
   of separate physical hull patches and compatible contact paths. The five
@@ -91,7 +99,8 @@ rates, solvent populations or folding free energy. These need additional
 physical/chemical models and biological evidence.
 
 The current teaching work does not initiate new native protein characterization.
-The selected three synthetic systems remain the development focus. Source-level
+The selected straight tube follows the finite three-case checkpoint; stay with
+its open questions before adding another geometry. Source-level
 examples and a built documentation site also do not qualify an installed package,
 platform/interpreter matrix or every provider route.
 

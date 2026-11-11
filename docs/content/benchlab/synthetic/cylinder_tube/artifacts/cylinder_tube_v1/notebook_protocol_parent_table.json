@@ -1,0 +1,17 @@
+{
+  "schema": "topomt.benchlab.tube-notebook-protocol/1",
+  "issue": "uibcdf/topomt#178",
+  "source_revision": "b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4",
+  "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+  "notebooks": {
+    "system": "03a0bee887178bfddbe3fde07a6254f203d57f54f9b42006f306fefe99d67753",
+    "dfnd": "1d591e49d6282d406fa2dd2c699422db1b411f7748dd26e433e0663ed05f2d77"
+  },
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "address_space_gib": 6,
+    "cpu_seconds": 120
+  },
+  "acceptance": "Independent fresh kernels, no retained-evidence writes or provider/server calls; system imports no TopoMT; incomplete native physical/all-atom targets remain visible under #180/#181."
+}

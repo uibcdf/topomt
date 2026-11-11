@@ -96,6 +96,13 @@ trajectory. Straight segments between cell centers can encounter obstacles.
 A resident-only skeleton may also omit connectivity that the full component
 obtained through nonresident connectors.
 
+The [straight-tube notebook](../benchlab/synthetic/cylinder_tube/dfnd.ipynb)
+checks the selected candidate's complete segments against all balls. At its
+initial source `b07a20e`, the 1.4 Å skeleton has a negative clearance margin
+although a different independently certified bent route exists. The native
+`is_collision_validated=False` flag remains accurate; a graph visualization
+is insufficient for physical navigation. General certified paths remain #76.
+
 The existing `topomt.dfnd.centerline.channel_branch_skeletons(raw, component)`
 helper adds visual secondary routes from extra usable mouths to the primary
 path, using shortest resident-graph distances. It returns an empty list when
