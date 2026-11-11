@@ -3,6 +3,30 @@ schema_version = 1
 hub_url = "https://github.com/uibcdf/topomt/discussions/154"
 
 [[findings]]
+id = "tube-physical-boundary-budget"
+kind = "dfnd_limitation"
+status = "current"
+summary = "The newly selected straight tube exhausts bounded physical hull decomposition; its physical patch count remains unknown despite independent references."
+scope = "Frozen 81-argon-ball cylinder_tube v1, source b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4, probes 1.2/1.4/2.5 angstroms, flag_only/with_connectors and zero physical tolerances. No revision of the earlier five-control #151 resolution."
+issue = "uibcdf/topomt#180"
+evidence = ["docs/content/benchlab/synthetic/cylinder_tube/index.md", "docs/content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/native_observations.json", "docs/content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/boundary_1.2A_v2_verification.json", "docs/content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/boundary_1.4A_v2_verification.json", "devguide/pending_proposals/dfnd_tube_boundary_budget.md", "tests/test_tube_study.py"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-10"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19533340"
+
+[[findings]]
+id = "tube-local-candidates-covered-hull"
+kind = "dfnd_limitation"
+status = "needs_review"
+summary = "At 2.5 angstroms, local/public tube candidates survive an independently covered finite hull; solver/support diagnosis and public qualification remain under review."
+scope = "Frozen 81-argon-ball cylinder_tube v1 at 2.5 angstroms, source b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4. Local three/four-atom operators are not all-atom certificates; no diagnosed solver defect or general failure claim."
+issue = "uibcdf/topomt#181"
+evidence = ["docs/content/benchlab/synthetic/cylinder_tube/index.md", "docs/content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/native_observations.json", "docs/content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/reference_v2_verification.json", "devguide/pending_proposals/dfnd_tube_all_atom_receiving.md", "tests/test_tube_study.py"]
+owner = "TopoMT maintainers (LMMV/dprada)"
+reviewed_on = "2026-11-10"
+discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19533341"
+
+[[findings]]
 id = "tetrahedron-boundary-patches"
 kind = "dfnd_limitation"
 status = "resolved"

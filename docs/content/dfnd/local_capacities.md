@@ -78,6 +78,14 @@ face positions do not prove that a free path joins them inside the cell.
 The intrusion diagnostic adds a separate decision about the cell's opposite
 atom, explained below. Its absence is not collision certification.
 
+The [straight-tube study](../benchlab/synthetic/cylinder_tube/index.md) makes
+this distinction concrete. At its initial source `b07a20e`, a 2.5 Å probe has
+local wet components and public candidates although an independent all-atom
+bound covers the entire finite hull. Diagnosis and public qualification remain
+under [#181](https://github.com/uibcdf/topomt/issues/181); this observation alone
+does not identify a capacity-solver error. Do not interpret those candidates
+as certified physical free regions.
+
 For an exact all-atom-valid path, any point of the path inside a closed cell
 implies that cell's exact local residence maximum is at least $p$. This
 {ref}`conditional implication <residence-and-paths>`
