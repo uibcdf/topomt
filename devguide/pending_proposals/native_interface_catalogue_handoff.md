@@ -1,7 +1,7 @@
 ---
 summary: Review and hand off a native BindingMT interface catalogue with explicit MolSysMT and TopoMT ownership.
 issue: uibcdf/topomt#197
-status: active
+status: open
 opened: 2026-11-12
 closed:
 verification: inspected
@@ -69,13 +69,29 @@ Source/native/installed qualification and actual consumer adoption remain separa
 
 ## Delivery state
 
-Revision 1 has been written and reviewed for publication. It includes explicit
+Revision 1 is published and shared for owner review. It includes explicit
 initial chemistry/environment restrictions, a descriptive candidate catalogue,
 contact/surface recipes, numerical edge cases, resource and attribution rules,
 independently useful increments and issue-backed owner actions. Runtime
-implementation and owner adoption remain pending. The publication response will
-supply exact source and readback identities; `inspected` is not executed native
-receiving.
+implementation and owner adoption remain pending; `inspected` is not executed
+native receiving.
+
+- [Published complete plan](https://github.com/uibcdf/topomt/blob/a13b9b2725bd8a4edd851441d1a5a53720e0f3ea/devguide/binding_interface_native_catalogue_plan.md),
+  source `a13b9b2725bd8a4edd851441d1a5a53720e0f3ea`, Git blob
+  `722d7ea7f2b37cf257b7be0044b81a83433f3e26` independently read back exactly.
+- [BindingMT #112 response](https://github.com/uibcdf/bindingmt/issues/112#issuecomment-6836773833),
+  [MolSysSuite #195 handoff](https://github.com/uibcdf/molsyssuite/issues/195#issuecomment-6836783376)
+  and [TopoMT #197 delivery](https://github.com/uibcdf/topomt/issues/197#issuecomment-6836788574):
+  each independently read back with its complete body matching the prepared text.
+- The initial document commit `90e154b` remains historical. Before sharing, the
+  final review received BindingMT's newly updated work plan at `d69315d` and
+  retained derived-footprint persistence, aligned maps and crossed original-
+  outcome/asset/current-use controls. Both publication commits carry `[skip ci]`.
+
+The writing/publication portion is delivered. Keep #197 open for owner-review
+disposition and scoped TopoMT follow-ups; BindingMT #112 and MolSysSuite #195
+retain scientific implementation and shared agreement respectively. No response
+or accepted new shared contract is inferred from publication.
 
 Local documentation validation (2026-11-12):
 

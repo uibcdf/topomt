@@ -12,6 +12,8 @@ bridge and evidence retain their own receiving. The bounded local review is
 agreement under [MolSysSuite #195](https://github.com/uibcdf/molsyssuite/issues/195).
 This is a documentation proposal, not native calculation, shared acceptance or
 a change to the current DFND laboratory sequence.
+The [source-pinned plan and proposed native milestones are shared in #112](https://github.com/uibcdf/bindingmt/issues/112#issuecomment-6836773833);
+owner review and adoption remain pending in their respective issues.
 
 ## MoloVol provider follow-up — 2026-11-11
 
