@@ -9,6 +9,15 @@ The migration publication is complete, and the user selected the AlphaSpace2
 and pyCASTA continuations recorded below. The earlier automated implementation goal remains
 cleared; the five-provider programme retains its unfinished gates.
 
+Cross-component proposal (2026-11-12): the
+[native binding-interface catalogue plan](binding_interface_native_catalogue_plan.md)
+proposes an ordinary native BindingMT calculation workflow using MolSysMT tools
+and optional TopoMT topographic results. [Local review #197](pending_proposals/native_interface_catalogue_handoff.md)
+and [shared coordination #195](https://github.com/uibcdf/molsyssuite/issues/195)
+track owner dispositions. This adds a proposed consumer roadmap; it changes no
+scientific operator or current DFND case selection and preserves original-provider
+evidence and existing native adoption gates.
+
 Current scheduling (2026-11-07): the user selected the native DFND laboratory
 in section 3 as the immediate focus, developing from synthetic characterization
 one case at a time before proteins. The numbered programme retains its broader
