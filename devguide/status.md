@@ -5,7 +5,8 @@
 The maintainer requests the [native catalogue and detailed cross-component plan](binding_interface_native_catalogue_plan.md)
 as a contribution to [BindingMT #112](https://github.com/uibcdf/bindingmt/issues/112).
 BindingMT leads binding-domain characterization, MolSysMT supplies reusable
-molecular tools and TopoMT supplies optional topographic enrichment. Ordinary
+molecular tools and TopoMT supplies optional topographic and regional
+physicochemical observations. Ordinary
 native contacts/SASA/burial should be independent of PISA; the existing provider
 bridge and evidence retain their own receiving. The bounded local review is
 [#197](pending_proposals/native_interface_catalogue_handoff.md), with shared
@@ -14,6 +15,9 @@ This is a documentation proposal, not native calculation, shared acceptance or
 a change to the current DFND laboratory sequence.
 The [source-pinned plan and proposed native milestones are shared in #112](https://github.com/uibcdf/bindingmt/issues/112#issuecomment-6836773833);
 owner review and adoption remain pending in their respective issues.
+TopoMT's standalone regional physicochemistry has its own
+[#198 proposal and staged plan](pending_proposals/topographic_physicochemistry.md);
+the catalogue refinement preserves the original BindingMT contribution.
 
 ## MoloVol provider follow-up — 2026-11-11
 

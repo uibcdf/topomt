@@ -1,5 +1,10 @@
 # Chemistry overlay — analysis (a deferred, not forgotten, layer)
 
+Current follow-up (2026-11-12): [TopoMT #198](https://github.com/uibcdf/topomt/issues/198)
+and the [regional physicochemistry proposal](../pending_proposals/topographic_physicochemistry.md)
+own the maintained direction. The June analysis below is retained as historical
+reasoning, not a current qualification of its thresholds or renderer labels.
+
 Status: **analysis / parked** (2026-06-25). The physicochemical layer is real and
 partly implemented, but **deferred** while the topology/morphology work lands. This
 file narrates *what it is, how it is fed, where it sits today, and the target* so it
@@ -105,3 +110,15 @@ already landed). Deferring it is fine; losing it is not.
 - **molsysmt**: the `physchem_support_dummy_atoms` proposal (dummy systems currently skip
   chemistry).
 - Validate the (hydrophobicity, charge) thresholds against known druggable sites.
+
+## Dated clarification — 2026-11-12
+
+The maintainer consolidates the independent TopoMT chemical-characterization
+layer under #198, complementary to BindingMT's binding-domain catalogue. Reassess
+the old atom/residue classifications, support choices and renderer/data coupling
+against the actual current source before reuse. Residue hydrophobicity/charge
+scales do not establish atom-level donor/acceptor roles, a native pharmacophore,
+binding affinity or validated druggability. Generic chemistry remains MolSysMT-
+owned; supported spatial reductions and annotations of topographic regions
+belong in TopoMT. The new proposal owns staged implementation, current acceptance
+and any profile-specific follow-ups while preserving this historical analysis.

@@ -109,6 +109,12 @@ phase. Start with
 [the DFND roadmap](DFND/roadmap.md). Provider integration or documentation
 maintenance does not silently resume kernel or reference changes.
 
+Regional physicochemistry is an independent TopoMT capability under
+[#198's staged proposal](pending_proposals/topographic_physicochemistry.md),
+using MolSysMT chemical tools and remaining complementary to BindingMT. Begin
+with source/definition/support audit and an explicitly admitted profile; this
+does not select new DFND cases or resume the protein phase.
+
 The longer native programme retains independent gates:
 
 - Complete #60's public context/support, provenance and remaining mutation

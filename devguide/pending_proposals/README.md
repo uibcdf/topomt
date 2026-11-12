@@ -61,7 +61,7 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 - [`topography_context_and_support.md`](topography_context_and_support.md) — [#60](https://github.com/uibcdf/topomt/issues/60) — Adopt explicit Topography analysis context and spatial support. *(partial, measured)*
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
-### Open (18)
+### Open (19)
 
 - [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
 - [`benchlab_six_case_review.md`](benchlab_six_case_review.md) — [#187](https://github.com/uibcdf/topomt/issues/187) — Review the six initial BenchLab units after establishing dumbbell. *(open, asserted)*
@@ -79,6 +79,7 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 - [`native_interface_catalogue_handoff.md`](native_interface_catalogue_handoff.md) — [#197](https://github.com/uibcdf/topomt/issues/197) — Review and hand off a native BindingMT interface catalogue with explicit MolSysMT and TopoMT ownership. *(open, inspected)*
 - [`related_application_review.md`](related_application_review.md) — [#164](https://github.com/uibcdf/topomt/issues/164) — Assess topography API and user-workflow lessons from MolModa, Pocket2Mol and SurfDock. *(open, inspected)*
 - [`specialist_pore_review.md`](specialist_pore_review.md) — [#161](https://github.com/uibcdf/topomt/issues/161) — Assess HOLE and CHAP as specialized pore-profile comparison references. *(open, inspected)*
+- [`topographic_physicochemistry.md`](topographic_physicochemistry.md) — [#198](https://github.com/uibcdf/topomt/issues/198) — Develop explicit physicochemical observations on topographic feature supports, complementary to BindingMT. *(open, inspected)*
 - [`volume_reference_review.md`](volume_reference_review.md) — [#159](https://github.com/uibcdf/topomt/issues/159) — Assess POVME, MoloVol and PyVOL as scoped region and volume references. *(open, inspected)*
 - [`zeopp_assessment.md`](zeopp_assessment.md) — [#167](https://github.com/uibcdf/topomt/issues/167) — Assess Zeo++ periodic accessibility definitions and source acquisition before comparison. *(open, inspected)*
 

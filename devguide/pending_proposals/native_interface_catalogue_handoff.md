@@ -93,6 +93,13 @@ disposition and scoped TopoMT follow-ups; BindingMT #112 and MolSysSuite #195
 retain scientific implementation and shared agreement respectively. No response
 or accepted new shared contract is inferred from publication.
 
+Maintainer refinement on 2026-11-12: regional physicochemistry is also a
+standalone TopoMT responsibility. The dedicated issue
+[#198](https://github.com/uibcdf/topomt/issues/198) and
+[local staged proposal](topographic_physicochemistry.md) own that work. Catalogue
+revision 2 makes this complementary boundary explicit without withdrawing the
+published BindingMT contribution or changing its historical source.
+
 Local documentation validation (2026-11-12):
 
 - `python devtools/devguide_index.py --check`: generated lifecycle indexes current.

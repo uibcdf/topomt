@@ -1,7 +1,13 @@
 # Native binding-interface characterization catalogue
 
-Revision **1**, 2026-11-12. **Cross-component proposal; no new scientific
+Revision **2**, 2026-11-12. **Cross-component proposal; no new scientific
 implementation or qualified native workflow is delivered by this document.**
+
+Revision 2 clarifies TopoMT's independent regional physicochemistry under
+[#198](https://github.com/uibcdf/topomt/issues/198). The
+[published first edition](https://github.com/uibcdf/topomt/blob/a13b9b2725bd8a4edd851441d1a5a53720e0f3ea/devguide/binding_interface_native_catalogue_plan.md)
+and its BindingMT handoff remain intact; BindingMT's catalogue leadership is not
+withdrawn and new shared acceptance is not inferred from this local refinement.
 
 Scientific lead and implementation roadmap:
 [BindingMT #112](https://github.com/uibcdf/bindingmt/issues/112).
@@ -76,7 +82,7 @@ optional exact site references need not require a live BindingSite instance.
 | --- | --- |
 | Binding question and characterization | BindingMT: participants/grouping, relevant states/process, catalogue, binding-specific compositions, comparisons, interpretation and public workflow. |
 | Molecular operations | MolSysMT: representation, chemistry, selections, coordinates, correspondence, generic contacts/interactions, radii and surface calculations. |
-| Topographic organization | TopoMT: DFND and other topographic methods, spatial supports, classifications, relations and evaluations it produces. |
+| Topographic organization and regional physicochemistry | TopoMT: DFND and other topographic methods, spatial supports, classifications, feature-specific physicochemical observations, relations and evaluations it produces. |
 | Other specialist observations | Their scientific owners; for example PharmacophoreMT retains native hypotheses and matching semantics. |
 | Shared meanings and receiving | MolSysSuite coordinates exercised contracts; each component owns its implementation and adoption evidence. |
 
@@ -97,6 +103,15 @@ TopoMT enrichment is selected explicitly. Neither MolSysMT nor TopoMT needs a
 mandatory BindingMT import. The current PISA adapter can be reused without
 relocation or duplicated parsing; any later adapter-ownership change needs its
 own migration decision and consumer evidence.
+
+TopoMT's responsibility includes the chemical character presented by a pocket,
+wall, channel or spatial interface independently of a chosen ligand. MolSysMT
+provides molecular chemistry; TopoMT maps it onto its actual supports and can
+provide spatial distributions, appropriate area-weighted summaries and chemical
+patches. BindingMT can consume these results and add association-specific
+observations. These are complementary contexts, not exclusive ownership of every
+chemical aggregation. The standalone TopoMT layer is tracked in
+[#198's staged proposal](pending_proposals/topographic_physicochemistry.md).
 
 ## 4. Inspected starting capabilities and remaining qualification
 
@@ -161,10 +176,11 @@ The identifiers below are proposed descriptive entries, not frozen API names.
 | `solvent_accessibility` | Atomic/aggregated SASA for the declared structure and occluder population. | Reuse native MolSysMT; qualify composed receiving. |
 | `interface_burial` | Per-participant SASA loss, total loss, optional mean-side area and mapped contributions. | Surface milestone; close the reusable decomposition contract with MolSysMT. |
 | `chemical_interactions` | Admitted H-bond, ionic, hydrophobic, aromatic and other chemical observations. | Family-specific native receiving, not a universal count from distance alone. |
-| `physicochemical_partition` | Explicit polar/apolar/charge-class composition of a stated membership or surface measure. | Owner chemical classifications plus BindingMT binding-domain aggregation. |
+| `physicochemical_partition` | Explicit polar/apolar/charge-class composition of a stated membership or surface measure. | Owner chemical classifications, BindingMT binding-domain aggregation and reuse of qualified TopoMT regional observations. |
 | `buried_unsatisfied_polar_sites` | Buried polar recognition sites lacking a partner under an explicitly evaluated interaction/environment criterion. | Later candidate requiring qualified burial, complete chemistry and evaluated partner coverage; missing evidence cannot become unsatisfied-site evidence. |
 | `interaction_network` | Declared residue/group network and scoped connectivity/contribution descriptors. | Later profile retaining edge definitions, multiplicity and comparison policy. |
 | `topographic_organization` | Supported patches, gaps, concavities, cavities, channels and accessibility related to the binding question. | Optional qualified TopoMT results; availability is descriptor-specific. |
+| `topographic_physicochemistry` | Spatial chemical characterization conditioned on a stated topographic support, including regional wall contributions and chemical patches. | Independent TopoMT capability under #198, reusable by BindingMT; generic chemical tools remain in MolSysMT. |
 | `geometric_complementarity` | A stated surface-fit, orientation, separation or shape-complementarity measure on admitted geometric supports. | Later TopoMT-supported candidate with its own surface model, numerical reference and comparison eligibility. |
 | `pose_comparison` | Differences in compatible contacts, surfaces or topographic findings. | Explicit observable/correspondence/coverage and normalization policy. |
 | `ensemble_statistics` | Per-structure results and later contact/burial persistence summaries. | Separate sampling, correspondence and weighting qualification. |
@@ -487,6 +503,7 @@ or current third-party limitation.
 | Publish this contribution and reconcile TopoMT-specific review/follow-ups. | TopoMT #197 and its local handoff record. |
 | Audit/select the exact MolSysMT tools and report a demonstrated reusable gap before implementing a workaround. | BindingMT #112 owns the finite request; open/reuse the concrete MolSysMT provider issue when its missing operation is established and link it here. |
 | Deliver neutral TopoMT context/support/participant/evaluation adoption. | Existing TopoMT #60/#61/#62, with source-specific acceptance unchanged. |
+| Develop physicochemical observations on topographic regions as a standalone TopoMT capability. | TopoMT #198; preserve BindingMT's binding-domain catalogue and route reusable chemical tools to MolSysMT. |
 | Preserve optional PISA T0/T1 and independent H/P receiving obligations or explicitly rescope priority. | BindingMT #112 implementation plan; preserve original evidence and current status. |
 
 The broad catalogue lives outside TopoMT's defect/proposal queues. Its bounded
