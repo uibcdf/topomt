@@ -44,10 +44,12 @@ cavities, channels or other supported spatial organization.
 
 The starting design is BindingMT's
 [revision 2 at 5aa21b1](https://github.com/uibcdf/bindingmt/blob/5aa21b1aaf27ee7708e5a7bb4fe58bd0300d49f0/devguide/binding_interface_design.md).
-Its [implementation plan at dd089db](https://github.com/uibcdf/bindingmt/blob/dd089dbb096c1b8b1fa20c55317cf8d47a769de2/devguide/binding_interface_implementation_plan.md)
+Its [reviewed implementation plan at d69315d](https://github.com/uibcdf/bindingmt/blob/d69315dfebc49ddd8c2da1999955edc078fd8893/devguide/binding_interface_implementation_plan.md)
 already separates the data core, molecular correspondence, optional PISA intake,
 native pharmacophoric receiving and consumer controls. Our favorable reviews of
-that model stand. This proposal extends the calculation roadmap.
+that model stand. This proposal extends the calculation roadmap. Work-plan
+revision 2's independent footprint persistence, historical/current-use controls
+and aligned-map requirements are retained for the native calculation track.
 
 Proposed decisions for BindingMT to record:
 
@@ -104,7 +106,7 @@ own migration decision and consumer evidence.
 | Same MolSysMT source | Public `physchem.get_sasa` implements Shrake-Rupley sampling with a native Rust route, explicit probe, sampling and periodic controls. | Source inspection does not qualify the installed extension or the composed BindingMT calculation. |
 | Same MolSysMT source | Native interaction families and analysis/query objects exist. | Chemical recognition, state, complete feature participation and each receiving route retain their own requirements. |
 | Same MolSysMT source | `physchem.get_area_buried` looks up a Rose residue reference table. | This is not geometric interface burial. Similarly, tabulated `get_surface_area` is not conformational SASA. |
-| BindingMT `dd089db` | The cited plan describes data, correspondence, optional provider and native consumer increments. | Its proposed interface APIs and new native catalogue are not runtime qualification. |
+| BindingMT `d69315d` | The cited plan describes data, correspondence, optional provider and native consumer increments, including derived-footprint persistence and crossed historical/current-use controls. | Its proposed interface APIs and new native catalogue are not runtime qualification. |
 | TopoMT `3a8ee979` | Original PISA saved receiving and source-scoped DFND evidence exist. | Complete neutral participant/support/evaluation adoption remains separate under #60/#61/#62; saved PISA records are not native Topography promotion. |
 
 These are reproducible review baselines, not dependency floors or a claim that
@@ -228,6 +230,14 @@ foreign-asset discovery or automatic remote lookup. Explicit native recovery use
 the admitted owner reader. Preserve completed-empty analysis independently of
 finding count and preserve original failures independently of current read errors.
 
+Persist derived footprint results themselves through an admitted public save/read
+route, including positive and evaluated-empty cases. Saving only their parent
+characterization is insufficient. Independent core inspection must retain enough
+membership, criterion, provenance and coverage without recovering optional owner
+assets or repeating calculation. Preserve an original C0 match as historical
+evidence; fresh read does not endorse a changed C1 context. Explicit new use checks
+the admitted facts or refuses.
+
 Preservation, molecular correspondence and current-finding applicability retain
 their distinct requested guarantees. A molecular handle alone upgrades none of
 them. Refuse unqualified stronger requests without returning weaker success.
@@ -247,6 +257,13 @@ Repeated source selections or copied observations must not create extra atoms
 or independent evidence. Retain request/delivery multiplicity separately when
 it is meaningful. Reduce to residues through MolSysMT correspondence, preserving
 the original atom contacts and chosen aggregation rule.
+
+For the initial footprint profile, unique original-source membership is ascending
+within its identified source axis. Local indices follow that order through the
+qualified map; never sort those vectors independently. Preserve every contributing
+contact/occurrence separately. An independently authored two-nonempty-group overlap
+control checks union, repeated contributors and aligned nonidentity maps without
+borrowing an original provider's run identity.
 
 For two disjoint nonempty participants, completed no-contact is valid evaluated
 zero with empty footprints. A required empty/unresolved participant or failed
@@ -411,6 +428,8 @@ specifically admitted owner calculation profiles.
 | Grouping and chemical completeness | Internal A-B and unrelated C-D observations are excluded from a requested receptor-C projection, while admitted full chemical participants remain intact. |
 | Known empty / missing / failed | A completed no-contact result, unknown chemistry, unrequested measure, unsupported method and failed calculation retain different states and causes. |
 | Maps and multiplicity | Reordering/extraction, original structure 2 to local 0 and repeated delivery preserve correspondence without fabricated independence. |
+| Derived footprint persistence | Actual positive/empty footprint save/read preserves ordered source membership, aligned local maps, all contributors and exact parents; independent core inspection needs no optional recovery. |
+| Crossed outcome/availability/use | Completed-zero with an unavailable asset, accessible failed evidence and saved C0 match with edited C1 retain distinct original outcomes and fresh-use assessments. Default read performs no discovery/reassessment. |
 | Context changes | Relevant source/chemistry/frame edits reassess affected uses; unchanged footprint positions do not authenticate a complete original finding. |
 | Units and persistence | Default and nondefault pm/fs policies preserve physical areas/distances, definitions, identities and reader dimensional checks. Malformed/tampered records refuse appropriately. |
 | Optional dependencies | Native molecular calculation runs without PISA or TopoMT; topographic enrichment and external receiving use their explicit dependency routes. |
@@ -489,9 +508,9 @@ local review later must not hide remaining scientific/implementation work.
 
 ## 15. Review baselines and primary references
 
-- [BindingMT scientific scope at dd089db](https://github.com/uibcdf/bindingmt/blob/dd089dbb096c1b8b1fa20c55317cf8d47a769de2/devguide/SCIENTIFIC_SCOPE.md),
+- [BindingMT scientific scope at d69315d](https://github.com/uibcdf/bindingmt/blob/d69315dfebc49ddd8c2da1999955edc078fd8893/devguide/SCIENTIFIC_SCOPE.md),
   [interface design revision 2](https://github.com/uibcdf/bindingmt/blob/5aa21b1aaf27ee7708e5a7bb4fe58bd0300d49f0/devguide/binding_interface_design.md)
-  and [implementation plan](https://github.com/uibcdf/bindingmt/blob/dd089dbb096c1b8b1fa20c55317cf8d47a769de2/devguide/binding_interface_implementation_plan.md).
+  and [reviewed implementation plan](https://github.com/uibcdf/bindingmt/blob/d69315dfebc49ddd8c2da1999955edc078fd8893/devguide/binding_interface_implementation_plan.md).
 - MolSysMT `ff25f120243319ca9515009b4971e24a2eb0dc22`:
   [contacts](https://github.com/uibcdf/molsysmt/blob/ff25f120243319ca9515009b4971e24a2eb0dc22/molsysmt/structure/get_contacts.py),
   [SASA](https://github.com/uibcdf/molsysmt/blob/ff25f120243319ca9515009b4971e24a2eb0dc22/molsysmt/physchem/get_sasa.py),
