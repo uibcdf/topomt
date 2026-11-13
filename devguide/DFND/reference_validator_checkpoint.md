@@ -35,24 +35,45 @@ no original sources, reports no original qualification, and claims no Slurm
 reservation. Earlier pre-commit original-source probes only sized the requested
 envelope; they are not a retained, source-pinned six-case receiving.
 
-The full original-source batch is **pending**. The
+The full original-source batch is now **received and checked**, at source
+`9a276cd9827f4d84fc048d94e06ee6d043779106`. The maintainer selected local
+execution without Slurm for this phase. The
+[additive local receiving](../evidence/reference_validator_hulls_v1/local_receiving/receipt.json)
+retains all six original center sources, their hull certificates and independent
+saved-file checks, alongside the small controls: 52 JSON files, 682,226 bytes.
+One CPU, one numerical thread, a 2 GiB cap and individual 30 CPU/40 wall-second
+limits contain the sequential work. The whole process takes 90.94 seconds;
+peak child RSS is 56,816 KiB. Host samples show no memory pressure or active
+swap, with more than 51 GiB available. The
+[execution record](../evidence/reference_validator_hulls_v1/local_execution.json)
+binds the receipt and external limits; no scheduler allocation is claimed.
+
+This supersedes the earlier receiving deferral, not its historical evidence. The
 [managed allocation attempt](../evidence/reference_validator_hulls_v1/scheduler_attempt.json)
 requested one CPU/2 GiB in Slurm `tests` with immediate admission. Job 5 failed
 allocation; execution never started and no queued job remained. The observed
 node states were `inval` for `tests` and `unk*` for `normal`; their cause is not
-diagnosed. The batch was not rerouted to unmanaged computation. Retry in a new
-additive receiving directory when a usable managed allocation is available.
-#76 owns the receiving follow-up; infrastructure context is
+diagnosed. No calculation started in that attempt. Its former managed-retry
+action is superseded by the maintainer's local execution decision and successful
+receiving; Slurm availability is not a prerequisite for this phase. Context is
 [uibcdf-infrastructure#1](https://github.com/uibcdf/uibcdf-infrastructure/issues/1).
-The failed attempt remains historical evidence, not a permanent infrastructure
-or algorithmic limitation. Reconcile this current pending state after successful
-receiving rather than rewriting the original failed attempt.
+The failed attempt remains history, not a current blocker or algorithmic
+limitation. Full steric Model integration, general connected-region construction
+and region-assigned volume precision remain open under #76.
 
-The selection passes **202 tests**: prior 161 plus 41 hull/source/clip/worker
-controls. Ruff/format and scoped mypy on 26 source files pass. Tests use one CPU
-and a 2 GiB cap (14.19 seconds, peak RSS 95,208 KiB); all 355 original case files
-remain unchanged. Full-suite/installed/minor/platform evidence remains separate
-under #16. No native/finding disposition or public P6 admission changes.
+The continuation selection passes **211 tests**: the previous 202 plus nine
+original-source receiving, integrity, resource/scope and representative saved
+replay guards. The selected process uses one CPU and a 2 GiB cap (18.27 seconds,
+peak RSS 95,692 KiB); all 355 original case files remain unchanged. The full
+capture already independently checked every saved original hull; routine tests
+replay the tetrahedron and narrow tube to keep that selection small. Full-suite/
+installed/minor/platform evidence remains separate under #16. No native/finding
+disposition or public P6 admission changes.
+
+Repository Ruff/format, report indexes, offline finding consistency and all
+274 local Markdown file targets in the nine changed guidance files pass.
+Scientific implementation bytes are unchanged from the qualified source above;
+this delivery adds retained execution evidence, regression guards and guidance.
 
 ## Actual requested volume precision — 2026-11-13 UTC
 
@@ -273,13 +294,13 @@ qualification.
 The bounded P0 model/proof and operational run/checkpoint contracts above are
 source-delivered; their initial absence is superseded by the continuation.
 Center-hull geometry/clipping now has its separate checked developer route;
-full steric-domain integration and original-source receiving remain P1/P2 work.
-P1 still needs the
-local/global geometry feasibility decision and a general exhaustive free-region
+full steric-domain integration remains P1/P2 work; the six original center-only
+hulls now have retained receiving above. P1 still needs the local/global
+geometry feasibility decision and a general exhaustive free-region
 construction. P4 needs general clipped/region-assigned precision and validated
 integration; the earlier partition enclosures do not meet k=24, while the
-analytic route above passes it only for its separate total-volume scope. Other
-five-case hulls, all 19 profiles, complete apertures/attachments, biological
+analytic route above passes it only for its separate total-volume scope.
+All 19 steric profiles, complete apertures/attachments, biological
 classification and public API/package qualification remain subsequent gates.
 
 This standalone developer checker retains host/source/model provenance; it adds

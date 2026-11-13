@@ -28,8 +28,10 @@ now passes the frozen k=8/16/24/32 total-volume ladder on contained singleton/pa
 clusters. General construction and clipped/per-region precision remain unqualified.
 The [hull domain route](reference_validator_hull_checkpoint.md) now proves exact
 center-hull identity and closed box intersections on retained small controls.
-Its six-original-source managed capture awaits a usable Slurm allocation;
-steric Model integration and complete sphere-cut region construction remain open.
+All six original center hulls now have independently checked saved receiving
+at `9a276cd`, using the maintainer's selected bounded local execution without
+Slurm. Steric Model integration and complete sphere-cut region construction
+remain open.
 
 ## Scope and acceptance of the first complete validator
 
@@ -464,6 +466,10 @@ Before costly builds/runs, inspect scheduler availability and actual allocation,
 CPU load, available RAM, swap activity and memory pressure. Plan a conservative
 reserve and honor stricter infrastructure rules. If Slurm is applicable, obtain
 and stay within a suitable allocation. Free resources are not reserved ones.
+For the present phase the maintainer explicitly selects bounded local execution
+without Slurm; the [hull checkpoint](reference_validator_hull_checkpoint.md)
+records its limits, host observations and actual six-source receiving. Scheduler
+availability is not an execution gate for this selected phase.
 Increase pilot budgets only after measuring a representative case and checking
 the current conditions; otherwise stop with recoverable unresolved work.
 

@@ -1,0 +1,376 @@
+{
+  "schema": "topomt.reference-validator.hull-receiving/1",
+  "protocol_sha256": "5a70cd6f26dfa3f1c7927a2897c1fed1d86fd326983a0177d633d2539ef7d6f7",
+  "source_revision": "9a276cd9827f4d84fc048d94e06ee6d043779106",
+  "producer_files_sha256": {
+    "center_hull.py": "a67575ca843b74e1a24f0e50ca6b791358c28ba272d09996baeda9f82b23ff62",
+    "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "capture_hulls.py": "fba7f2d34cec48017013f108b6609b864f3fcef68c038860ecc73af0b9893d7d",
+    "receiving.py": "2a86396f5dc75c28c95ec252557e9b5fbe71afa0975ef500947de42761094051",
+    "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04",
+    "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72"
+  },
+  "fixtures": {
+    "cube": {
+      "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+      "certificate_sha256": "c9a51b217b387dbbd399e34ff74687bb4179b6068d71f0a96a0bcafd31f13c84",
+      "verification_sha256": "81872621e9f87671856b982df7601723270ed05947058757b0ae97ae0628be59",
+      "geometric_volume": [
+        "8",
+        "1"
+      ]
+    },
+    "tetrahedron": {
+      "source_sha256": "11e8488793fc5a6b236f3197694f2d17186bdb96d3b664c038d42738935c0cd7",
+      "certificate_sha256": "7e7faa2d8ea7b3933c00e106870aed3291cd8407ec69e4321b75286a535e2410",
+      "verification_sha256": "041b991f6ec76fa4af1a4428bd921903af6140e12a110588de9b6087e98f4170",
+      "geometric_volume": [
+        "1",
+        "6"
+      ]
+    },
+    "octahedron": {
+      "source_sha256": "8b52b8b193b637fca32b2f7c0b91ba0abd780da32e98384d03d1aee30fdf527e",
+      "certificate_sha256": "9d3fd326be060ab1450c083e692d3c34c707b6343ef57228aa1ec0337e808a2f",
+      "verification_sha256": "cc41e45e8ab1ab150f4a2adc3d651271bea8c1911193ee51d0535b3ac65c7b33",
+      "geometric_volume": [
+        "4",
+        "3"
+      ]
+    }
+  },
+  "clips": {
+    "half_cube": {
+      "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+      "certificate_sha256": "ec47f22da4eeda5993412311115d17aa303521ab8dfaf82629332fc0c6b1bf8a",
+      "verification_sha256": "a0ae704cfd228745ed655109dd9c3d9e7e84684eeac4710071046be2ca0a6b1e",
+      "geometric_volume": [
+        "4",
+        "1"
+      ],
+      "geometric_dimension": 3
+    },
+    "face_contact": {
+      "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+      "certificate_sha256": "371d89418d47d6bc7cc7832fb85c2a02c0f52ea5415be9428d05e6b597b8faa1",
+      "verification_sha256": "2f9c4cdc9eed8fd1a2fa3ce6be831dcbdae7ad3110b709d30adeefc7c6bdd0fd",
+      "geometric_volume": [
+        "0",
+        "1"
+      ],
+      "geometric_dimension": 2
+    },
+    "edge_contact": {
+      "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+      "certificate_sha256": "156e2c3491b00b60e2efdb4f860a7a4c63c16cf2d147b3a9a6b85d177aade5a0",
+      "verification_sha256": "a70289843e38df0ab8ac897754abf51bbb2de0432a10af1eae30e5be555905c1",
+      "geometric_volume": [
+        "0",
+        "1"
+      ],
+      "geometric_dimension": 1
+    },
+    "vertex_contact": {
+      "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+      "certificate_sha256": "50def8c6ae2c7bc11daad264170ed6dea97c8fdbdeb9921cec3820324ba0df35",
+      "verification_sha256": "bca4777a0e730e3eca70ebee0dbea1b15db7bb228bb4a630ff3372cdbd7121a5",
+      "geometric_volume": [
+        "0",
+        "1"
+      ],
+      "geometric_dimension": 0
+    },
+    "empty_clip": {
+      "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+      "certificate_sha256": "79d41ba98fa37b63d825ab8a5475b73bbcaae024bee1a80daf146a354f741fd6",
+      "verification_sha256": "33579e090de58f597cdd628e12d6684f194d1d6bfe34b2fffd4f0d28bbf3a63d",
+      "geometric_volume": [
+        "0",
+        "1"
+      ],
+      "geometric_dimension": -1
+    },
+    "thin_positive_clip": {
+      "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+      "certificate_sha256": "7b8660c5d97c2770ce205f11c7ac0e4ba4dc76636837a250f935d9953e512b56",
+      "verification_sha256": "c618b8791333a8680be80c3229584cf4609b23edd537212b5d70ccf1792dfca4",
+      "geometric_volume": [
+        "1",
+        "302231454903657293676544"
+      ],
+      "geometric_dimension": 3
+    }
+  },
+  "originals": {
+    "regular_tetrahedron": {
+      "schema": "topomt.reference-validator.hull-case-receiving/1",
+      "status": "accepted",
+      "source_sha256": "3a082a828c1bd5a3e1a28e1d3ec1f022788a6055aa8b37c62186b7bd23865ac9",
+      "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+      "certificate_sha256": "6d2227390ab84cee56c52d4b90576876744c93dd93da1bee27d6284b3fb83b02",
+      "verification_sha256": "aa277b16991f8b8631f0ce8a997dd20406df657269035e2138f07e3da8305ccc",
+      "n_centers": 4,
+      "n_vertices": 4,
+      "n_facets": 4,
+      "geometric_volume": [
+        "38463776803236130720331542115778415558917425179",
+        "2192252455996354377305527249074424529483898814464"
+      ],
+      "volume_unit": "nm**3",
+      "elapsed_seconds": 0.438141057966277,
+      "peak_rss_kib_linux": 52212,
+      "cpu_affinity": [
+        0
+      ],
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_seconds": 30,
+      "slurm_allocation": null,
+      "quantity_receiving": {
+        "dependency_versions": {
+          "pyunitwizard": "0.29.5+2.gcc51c8e",
+          "numpy": "2.5.4"
+        },
+        "quantity_codec_source_revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+        "quantity_record_definition_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e"
+      }
+    },
+    "closed_shell": {
+      "schema": "topomt.reference-validator.hull-case-receiving/1",
+      "status": "accepted",
+      "source_sha256": "df4c1172bb9d2b12561f493256ffabce6afc3a284cac9c43e01c30d6bdf40711",
+      "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+      "certificate_sha256": "d5187394e7aed414351f77d8e00f5c3a642761cd5e9329f6a9bd77a16c8dca1f",
+      "verification_sha256": "93c1176cce6be8a95b5e98ca487611205de4cbcb8be0e184d4f672a34a892bee",
+      "n_centers": 72,
+      "n_vertices": 72,
+      "n_facets": 140,
+      "geometric_volume": [
+        "30166518936465615693197155390431984229245838347701735",
+        "35917864239044270117773758448835371491064198176178176"
+      ],
+      "volume_unit": "nm**3",
+      "elapsed_seconds": 31.358390451059677,
+      "peak_rss_kib_linux": 56816,
+      "cpu_affinity": [
+        0
+      ],
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_seconds": 30,
+      "slurm_allocation": null,
+      "quantity_receiving": {
+        "dependency_versions": {
+          "pyunitwizard": "0.29.5+2.gcc51c8e",
+          "numpy": "2.5.4"
+        },
+        "quantity_codec_source_revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+        "quantity_record_definition_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e"
+      }
+    },
+    "shell_with_opening": {
+      "schema": "topomt.reference-validator.hull-case-receiving/1",
+      "status": "accepted",
+      "source_sha256": "249fb3e86999e5dc5688a21b8dcbf1768f42bcbe245f2b387b48f937ad8a213a",
+      "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+      "certificate_sha256": "8921133b6736b4a19c549b434a398bd854dbfff15a1aec4b80bb27670ba006f7",
+      "verification_sha256": "f71c7a73c1e43308c63aa2651f535be434c321001315f4c7ad49b8503235adc5",
+      "n_centers": 66,
+      "n_vertices": 66,
+      "n_facets": 128,
+      "geometric_volume": [
+        "9732314004506174705096074063151998594527833395968905",
+        "11972621413014756705924586149611790497021399392059392"
+      ],
+      "volume_unit": "nm**3",
+      "elapsed_seconds": 22.392427065991797,
+      "peak_rss_kib_linux": 56076,
+      "cpu_affinity": [
+        0
+      ],
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_seconds": 30,
+      "slurm_allocation": null,
+      "quantity_receiving": {
+        "dependency_versions": {
+          "pyunitwizard": "0.29.5+2.gcc51c8e",
+          "numpy": "2.5.4"
+        },
+        "quantity_codec_source_revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+        "quantity_record_definition_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e"
+      }
+    },
+    "straight_tube_narrow_dense": {
+      "schema": "topomt.reference-validator.hull-case-receiving/1",
+      "status": "accepted",
+      "source_sha256": "95a662700670d2b862c5e5c7b47a838fcd5718a4f79cb5c4def0809b2bbf83f7",
+      "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+      "certificate_sha256": "c75f4524f0b868073a52e9ba399b398fc4071622d3d07203754eb407f491d4cd",
+      "verification_sha256": "93cd706d3b1374c0a1ac13896c162dda40cb284cc48651fe7882d5c7298997b8",
+      "n_centers": 81,
+      "n_vertices": 25,
+      "n_facets": 46,
+      "geometric_volume": [
+        "6837102936632438928635571155971563018418612823693483",
+        "8979466059761067529443439612208842872766049544044544"
+      ],
+      "volume_unit": "nm**3",
+      "elapsed_seconds": 1.5654193439986557,
+      "peak_rss_kib_linux": 52904,
+      "cpu_affinity": [
+        0
+      ],
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_seconds": 30,
+      "slurm_allocation": null,
+      "quantity_receiving": {
+        "dependency_versions": {
+          "pyunitwizard": "0.29.5+2.gcc51c8e",
+          "numpy": "2.5.4"
+        },
+        "quantity_codec_source_revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+        "quantity_record_definition_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e"
+      }
+    },
+    "straight_tube_wide_sparse": {
+      "schema": "topomt.reference-validator.hull-case-receiving/1",
+      "status": "accepted",
+      "source_sha256": "1eed2d5f54943b0e64ea6731668970e3ea97926e315e9eaf440d0cb2d82bfe0f",
+      "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+      "certificate_sha256": "1f3bd415f53ba98a96bbc162132552b9e86d43e33717306b4d34edc698bb1ce0",
+      "verification_sha256": "f46f8c865140887541ec9a201cecde25cbcd49cc80ab0be7f9a083e7c8d2025d",
+      "n_centers": 77,
+      "n_vertices": 45,
+      "n_facets": 86,
+      "geometric_volume": [
+        "6620533166212162263949896980673976813709886370954005",
+        "2993155353253689176481146537402947624255349848014848"
+      ],
+      "volume_unit": "nm**3",
+      "elapsed_seconds": 7.438611697987653,
+      "peak_rss_kib_linux": 54052,
+      "cpu_affinity": [
+        0
+      ],
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_seconds": 30,
+      "slurm_allocation": null,
+      "quantity_receiving": {
+        "dependency_versions": {
+          "pyunitwizard": "0.29.5+2.gcc51c8e",
+          "numpy": "2.5.4"
+        },
+        "quantity_codec_source_revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+        "quantity_record_definition_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e"
+      }
+    },
+    "dumbbell": {
+      "schema": "topomt.reference-validator.hull-case-receiving/1",
+      "status": "accepted",
+      "source_sha256": "b511a98faed47d9fb8b4328c8feb6c24232820380909504cdad331dab76a2437",
+      "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63",
+      "certificate_sha256": "c7d61b93906115c35ccd558a3f0680a42947ad323c0185a9d8b106b05ab04cb6",
+      "verification_sha256": "e92df8d2834e722e990b4b267b3dc40695be7a7575d1fcd177c75e458578066d",
+      "n_centers": 94,
+      "n_vertices": 66,
+      "n_facets": 128,
+      "geometric_volume": [
+        "859552951996342119360734190240810717792142808751095",
+        "280608314367533360295107487881526339773939048251392"
+      ],
+      "volume_unit": "nm**3",
+      "elapsed_seconds": 26.659086372004822,
+      "peak_rss_kib_linux": 56760,
+      "cpu_affinity": [
+        0
+      ],
+      "address_space_limit_bytes": 2147483648,
+      "cpu_limit_seconds": 30,
+      "slurm_allocation": null,
+      "quantity_receiving": {
+        "dependency_versions": {
+          "pyunitwizard": "0.29.5+2.gcc51c8e",
+          "numpy": "2.5.4"
+        },
+        "quantity_codec_source_revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+        "quantity_record_definition_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e"
+      }
+    }
+  },
+  "original_selection": [
+    "regular_tetrahedron",
+    "closed_shell",
+    "shell_with_opening",
+    "straight_tube_narrow_dense",
+    "straight_tube_wide_sparse",
+    "dumbbell"
+  ],
+  "per_case_resources": {
+    "cpu_seconds": 30,
+    "wall_seconds": 40,
+    "address_space_limit_bytes": 2147483648,
+    "cpus": 1
+  },
+  "concurrency": 1,
+  "slurm_allocation": null,
+  "files": {
+    "clips/edge_contact/certificate.json": "52d63184f92e4c7513264007ac4f887c7a43a2c1381fc89a5ccfca33fa607fa4",
+    "clips/edge_contact/source.json": "fbec40133c6e2df4c4c3c16312d5c7ccb90c82b469ee986985d67ee8ad344992",
+    "clips/edge_contact/verification.json": "f0460afbeaca51c5791d5aa6b73390f976cf4652b92ae48e898fbe9c2a50d4b2",
+    "clips/empty_clip/certificate.json": "4037784e089ca62fbadbff3ff8d205dad3ccf605d4c953cd6e45a878a9e6a83e",
+    "clips/empty_clip/source.json": "fbec40133c6e2df4c4c3c16312d5c7ccb90c82b469ee986985d67ee8ad344992",
+    "clips/empty_clip/verification.json": "74f3050ecee436b91f70873c46b2a1cb2e34637745e1302052094f287e410f5a",
+    "clips/face_contact/certificate.json": "86c576d6bd6abbfac23632a7336c07d55630895dd6f46d0507ee3c21c29c914f",
+    "clips/face_contact/source.json": "fbec40133c6e2df4c4c3c16312d5c7ccb90c82b469ee986985d67ee8ad344992",
+    "clips/face_contact/verification.json": "c7423a27247f264463bfef8d2544b9653c3e75b3e2d669100886ba3870484f20",
+    "clips/half_cube/certificate.json": "6faef4b41223fd07d863d3fcd09db1aafcf05bdee9367bc2f64c6c69acab4526",
+    "clips/half_cube/source.json": "fbec40133c6e2df4c4c3c16312d5c7ccb90c82b469ee986985d67ee8ad344992",
+    "clips/half_cube/verification.json": "25b858f8cb6f7dbafd683ca697dfd0650986f4454867ce47d3ce29dfe7c9308d",
+    "clips/thin_positive_clip/certificate.json": "edf123be69fffca4c7a925399757837bb396b77895545cf26ad71a1aa37182ef",
+    "clips/thin_positive_clip/source.json": "fbec40133c6e2df4c4c3c16312d5c7ccb90c82b469ee986985d67ee8ad344992",
+    "clips/thin_positive_clip/verification.json": "0fb9b7df78b0944da0201702e8645a191b4820c7dd99071719014ad175e23924",
+    "clips/vertex_contact/certificate.json": "fa6276414a72b1f0d199f50562af3a95bb8c38b88d2d3944925d361477684a83",
+    "clips/vertex_contact/source.json": "fbec40133c6e2df4c4c3c16312d5c7ccb90c82b469ee986985d67ee8ad344992",
+    "clips/vertex_contact/verification.json": "7cc40b7f485e193d9110e18f82cb5c2cb77630ad983d232e7a0d2161af34f840",
+    "fixtures/cube/certificate.json": "bbd0417741715ba4704010e188d8dec47c64aafbbab278fcce444f1edbee8ad3",
+    "fixtures/cube/source.json": "fbec40133c6e2df4c4c3c16312d5c7ccb90c82b469ee986985d67ee8ad344992",
+    "fixtures/cube/verification.json": "d5f6c6f113855fd29bad1718cbd034c0fa5c1b05ee674f5bd07e9fe21aeeae74",
+    "fixtures/octahedron/certificate.json": "600d0a25d06378ee1cf4ba797088eb0f91d4c8a73ca1e3d907e99a97fb769bcb",
+    "fixtures/octahedron/source.json": "89be742ed3b6fc487367dbb612d60f7da4087c17c4b8b8a9e1b03e1adce7e126",
+    "fixtures/octahedron/verification.json": "9050abea82b754b5ab8b1fb33fe6bd35cf859c3fec11296f4513154dc9649c07",
+    "fixtures/tetrahedron/certificate.json": "317fc986f20d1b8a18c6969d0156487baf678998b6927bd21794c876f4bf9742",
+    "fixtures/tetrahedron/source.json": "7c6aea8b8b86e5d803c9deefd7c7e0f56df99b2adff35ac3e92f78f21e46dbe4",
+    "fixtures/tetrahedron/verification.json": "ad006b55da3672d1e51d3ed59ec60f76c927939d0d50b5eaa586943f37443a3d",
+    "originals/closed_shell/certificate.json": "2afa6b0adb760f26481d24509fdd6ce8018e6fcf0cd4113c87e839b89f0f513f",
+    "originals/closed_shell/result.json": "6cbdeecddbfb2451011f79a71c50220e7257483cad4ede66ad10efd05132970d",
+    "originals/closed_shell/source.json": "92b7245757f9310de085243795948b312bd40c47497755b1fc35076d432253a3",
+    "originals/closed_shell/verification.json": "9334a44f46fd2deab1bd3e624be5733dc6e5f439d03c08fa13966defb150f629",
+    "originals/dumbbell/certificate.json": "01fd039c6450be1427ee00cee436dd21a838ffbfa4d51dd0cf27b1674ca0b283",
+    "originals/dumbbell/result.json": "c3557644774395efc3dd39f8d3394c3d9a67ae2b3be2edfc6399d9f3d6fee007",
+    "originals/dumbbell/source.json": "40cba42c0eaa163b5de667124e0d84b496e8658df080fbfe054772483a250d97",
+    "originals/dumbbell/verification.json": "83f044bf26c95b7c6cc6ea0e4797500bddafe1ec4de54504b09d59585dd0afb3",
+    "originals/regular_tetrahedron/certificate.json": "d2b858a03d2873c3acd97f3dc1fa9bdbf01c74da5095f96f365e197c730e4481",
+    "originals/regular_tetrahedron/result.json": "e77c337c6c49b34b5a797c6d0138674c4948071bb4362287c9d346594fa12cdb",
+    "originals/regular_tetrahedron/source.json": "19fa9e53a1192a88405b14ad3f5bbeadc9a5de37d6d97a74a09f227610930764",
+    "originals/regular_tetrahedron/verification.json": "901a7e1633a86400a8187daa24e017b9b8b620a1df8082fb59c28b1d3d433ee5",
+    "originals/shell_with_opening/certificate.json": "d793fa97e346ff6bc7295902d844158f04fcd58f6790fd2c365768b2948494bc",
+    "originals/shell_with_opening/result.json": "c42cc24b99871f92f626278e66880dca399713d5b7a07bfb6617de178bd0466e",
+    "originals/shell_with_opening/source.json": "d18a9c2943c9766c961a2803a05a244affd6ba61b410ec1079b57091b97a9b96",
+    "originals/shell_with_opening/verification.json": "9a33316c94bd293ea9395ec3a71930f44b94e891035b056ee0257fe5b0a3ece7",
+    "originals/straight_tube_narrow_dense/certificate.json": "ee4d8c484e980b11bfc59d63c7bfac74315c6846e255ed8b5483aee40a7b6e47",
+    "originals/straight_tube_narrow_dense/result.json": "428cc5cf7079642698071071b8d0ac3821a6f190da2f6ab92169e67dab1e5b33",
+    "originals/straight_tube_narrow_dense/source.json": "f5ea10b838b7f8da81447997820b6fd0c581d198b08c68b5b2470abd1eba5328",
+    "originals/straight_tube_narrow_dense/verification.json": "798f52ce95fc9ab169ea11e67d9c3b333cbae73b2cd6b1e0aaae95938b2beaf3",
+    "originals/straight_tube_wide_sparse/certificate.json": "1e8c1c37cde109fc347cec64b8f52e550c4e8ab44f8b36caef314edec4b5880c",
+    "originals/straight_tube_wide_sparse/result.json": "a4aec4a3336d77dc0181a131c75862bbaad67fc43f54bfb8eb6ff6941a317aba",
+    "originals/straight_tube_wide_sparse/source.json": "8f130af647246541baa829b4efe46242b6cbea4b929e3a2c07af271296c9f3ca",
+    "originals/straight_tube_wide_sparse/verification.json": "0d5eae96446ecd2d7d275b4ef55de57d643607e1821f91312ce90f6f095254d0"
+  },
+  "elapsed_seconds": 90.93710206600372,
+  "parent_peak_rss_kib_linux": 24012,
+  "child_peak_rss_kib_linux": 56816,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "free_volume_status": "not_computed",
+  "free_topology_status": "not_computed"
+}

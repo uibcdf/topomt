@@ -1,0 +1,189 @@
+{
+  "schema": "topomt.reference-validator.hull-certificate/1",
+  "kind": "center_hull_clip",
+  "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+  "hull": {
+    "schema": "topomt.reference-validator.hull-certificate/1",
+    "kind": "center_hull",
+    "source_sha256": "17cebd0ee755652dfa5f91c84f4561c6224248a857a808ec319b91a228e95cc9",
+    "facets": [
+      {
+        "coefficients": [
+          "-1",
+          "0",
+          "0",
+          "1"
+        ],
+        "source_ids": [
+          0,
+          1,
+          2
+        ]
+      },
+      {
+        "coefficients": [
+          "0",
+          "-1",
+          "0",
+          "1"
+        ],
+        "source_ids": [
+          0,
+          1,
+          4
+        ]
+      },
+      {
+        "coefficients": [
+          "0",
+          "0",
+          "-1",
+          "1"
+        ],
+        "source_ids": [
+          0,
+          2,
+          4
+        ]
+      },
+      {
+        "coefficients": [
+          "0",
+          "0",
+          "1",
+          "1"
+        ],
+        "source_ids": [
+          1,
+          3,
+          5
+        ]
+      },
+      {
+        "coefficients": [
+          "0",
+          "1",
+          "0",
+          "1"
+        ],
+        "source_ids": [
+          2,
+          3,
+          6
+        ]
+      },
+      {
+        "coefficients": [
+          "1",
+          "0",
+          "0",
+          "1"
+        ],
+        "source_ids": [
+          4,
+          5,
+          6
+        ]
+      }
+    ],
+    "positive_weights": [
+      [
+        "1",
+        "6"
+      ],
+      [
+        "1",
+        "6"
+      ],
+      [
+        "1",
+        "6"
+      ],
+      [
+        "1",
+        "6"
+      ],
+      [
+        "1",
+        "6"
+      ],
+      [
+        "1",
+        "6"
+      ]
+    ],
+    "normal_rank_witness": [
+      0,
+      1,
+      2
+    ],
+    "affine_witness": [
+      0,
+      1,
+      2,
+      4
+    ],
+    "vertex_source_ids": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ]
+  },
+  "clip_box": {
+    "length_unit": "nm",
+    "lower": [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    "upper": [
+      [
+        "2",
+        "1"
+      ],
+      [
+        "2",
+        "1"
+      ],
+      [
+        "2",
+        "1"
+      ]
+    ]
+  },
+  "claimed_vertices": [
+    [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ]
+  ],
+  "claimed_dimension": 0,
+  "claimed_volume": [
+    "0",
+    "1"
+  ]
+}

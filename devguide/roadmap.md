@@ -101,10 +101,11 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 Hull continuation (2026-11-13 UTC): the
 [domain proof tranche](DFND/reference_validator_hull_checkpoint.md) now checks
-source-hull equality and closed box clipping on retained small controls. Retry
-the six-original-source capture under #76 when a managed Slurm allocation is
-usable; the immediate job 5 request did not execute. Integrate checked geometric
-domains into the full steric construction after the remaining admission work.
+source-hull equality and closed box clipping. Source `9a276cd` completes saved
+independent receiving of all six original center hulls, using the maintainer's
+selected sequential local execution with one CPU and finite resource limits.
+The failed Slurm attempt is historical, not a current blocker. Integrate these
+checked geometric domains into the full steric construction under #76.
 This does not compute probe-free regions or alter the original findings.
 
 Precision continuation (2026-11-13 UTC): the

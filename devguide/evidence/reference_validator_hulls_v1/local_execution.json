@@ -1,0 +1,42 @@
+{
+  "schema": "topomt.reference-validator.local-execution/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-13T17:11:07.357777+00:00",
+  "source_revision": "9a276cd9827f4d84fc048d94e06ee6d043779106",
+  "protocol_sha256": "5a70cd6f26dfa3f1c7927a2897c1fed1d86fd326983a0177d633d2539ef7d6f7",
+  "receipt": "local_receiving/receipt.json",
+  "receipt_sha256": "690994ae20711c0d8b1ac15875f876d389198c1d272abb678cb16b6942c79a9f",
+  "execution_mode": "local_sequential",
+  "scheduler_used": false,
+  "decision": "The maintainer explicitly directed local work without Slurm for the present phase. Conservative local limits remain in force.",
+  "external_limits": {
+    "cpu_affinity": [
+      0
+    ],
+    "threads_per_numerical_library": 1,
+    "parent_address_space_bytes": 2147483648,
+    "parent_cpu_seconds": 50,
+    "parent_wall_seconds": 280,
+    "per_case": {
+      "cpu_seconds": 30,
+      "wall_seconds": 40,
+      "address_space_limit_bytes": 2147483648,
+      "cpus": 1
+    }
+  },
+  "observed": {
+    "elapsed_seconds": 90.93855785101186,
+    "parent_peak_rss_kib_linux": 24012,
+    "child_peak_rss_kib_linux": 56816,
+    "mem_total_mib": 61968,
+    "mem_available_before_mib": 52944,
+    "mem_available_during_mib": 53259,
+    "mem_available_after_mib": 53135,
+    "memory_pressure_some_avg10": 0.0,
+    "memory_pressure_full_avg10": 0.0,
+    "sampled_active_swap_in_kib_per_second": 0,
+    "sampled_active_swap_out_kib_per_second": 0
+  },
+  "historical_attempt": "scheduler_attempt.json",
+  "disposition": "All six original center-hull proofs accepted; no probe-free volume or region enumeration is inferred."
+}

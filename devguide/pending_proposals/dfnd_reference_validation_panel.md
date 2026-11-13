@@ -15,18 +15,24 @@ supersedes: []
 
 # Independent DFND reference panel
 
-## Hull geometry delivered; source batch deferred — 2026-11-13 UTC
+## Hull geometry and original-source receiving — 2026-11-13 UTC
 
 The [hull checkpoint](../DFND/reference_validator_hull_checkpoint.md) at `2b6985b`
 implements complete center-hull equality proofs and exact closed box clipping.
 Three analytic hulls and six clips are retained; empty/point/edge/face/positive
 3D states stay distinct. Full steric Model/region integration remains pending.
-The six-original-source receiving did not start: Slurm job 5 could not allocate
-one CPU/2 GiB, with `tests=inval`, `normal=unk*`, and no queued job left. #76 owns
-the managed retry in a new additive directory. Preserve the
+The maintainer subsequently selected local execution without Slurm. Source
+`9a276cd` now retains all six original center hulls with independent saved-file
+checks, one CPU and 2 GiB/30 CPU-second/40 wall-second per-worker caps. The batch
+takes 90.94 seconds, peak child RSS 56,816 KiB; 211 selected tests pass.
+See the [local receipt](../evidence/reference_validator_hulls_v1/local_receiving/receipt.json)
+and [execution record](../evidence/reference_validator_hulls_v1/local_execution.json).
+The earlier Slurm job 5 did not execute or leave a queued job. Preserve the
 [failed-attempt record](../evidence/reference_validator_hulls_v1/scheduler_attempt.json)
-as history; update the current pending state after successful receiving. This
-is operational availability, not a new scientific limitation or native fix.
+as history; it is no longer a blocker or a pending managed-retry action. No
+steric regions or native fix are inferred. This issue stays partial/open for
+full steric Model integration, general connected regions and region-assigned
+precision, followed by the later public receiving gates.
 
 ## Actual analytic volume precision — 2026-11-13 UTC
 

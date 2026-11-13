@@ -122,11 +122,11 @@ source/certificate/checker hashes and resources. Saved checking needs neither
 the producer nor PyUnitWizard/NumPy/floating geometry. This is source/domain
 evidence, not installed/public/platform qualification or any DFND correction.
 
-On 2026-11-13 the receiving host's Slurm controller was observed available.
-The selected full capture uses a one-CPU, 2 GiB allocation. The helper records only
-the reported job/partition/CPU/memory identifiers, not the environment; numerical
-certificates do not depend on Slurm. Ordinary local controls retain their own
-external limits and do not reserve resources for a later run.
+For the present phase the maintainer selects sequential local execution,
+without Slurm. One CPU, explicit time/address-space limits and host pressure
+checks remain required for these pilots. The helper can retain allowlisted
+scheduler identifiers if later run in an allocation; numerical certificates
+do not depend on Slurm. Free resources observed now are not a reservation.
 
 ## Actual receiving and current resource disposition
 
@@ -138,27 +138,62 @@ control uses one CPU, 2 GiB, 0.25 seconds and peak RSS 23,512 KiB; the receipt
 retains its distinct internal sample. It explicitly selects no original inputs.
 No managed allocation or six-case qualification is inferred from this run.
 
-The [Slurm attempt](../evidence/reference_validator_hulls_v1/scheduler_attempt.json)
+The earlier [Slurm attempt](../evidence/reference_validator_hulls_v1/scheduler_attempt.json)
 requested one CPU, 2 GiB and five minutes on `tests`, with five-second immediate
 admission. Job 5 failed before execution; queue readback was empty. Node state
 readback showed `tests=inval` and `normal=unk*`, despite a responding controller.
-The allocation failed; its node/configuration cause is not diagnosed. The full batch was not
-run outside Slurm. Its six source-hull qualifications remain pending under #76
-until a usable managed allocation is available. General infrastructure context
+The allocation failed; its node/configuration cause is not diagnosed. That
+attempt ran no calculation. Its managed-retry disposition is superseded by
+the maintainer's subsequent local-execution decision and receiving below.
+General infrastructure context
 is [uibcdf-infrastructure#1](https://github.com/uibcdf/uibcdf-infrastructure/issues/1).
 
-Use a fresh additive receiving directory for that later batch. Preserve this
-failed-attempt history, and update current checkpoint/report/issue disposition
-when successful receiving supersedes the pending state. Preliminary pre-commit
-probes only informed resource sizing, not the retained source qualification.
+The failed-attempt record and first small receiving keep their original bytes.
+Preliminary pre-commit probes only informed resource sizing, not source
+qualification. The new batch uses a fresh additive directory.
 
-The final selection passes 202 tests (prior 161 plus 41 hull controls), including
-the successful bounded tetrahedron worker control and deliberate timeout handling.
-Ruff/format, mypy on 26 source files (3.11 syntax/actual 3.14 dependency target),
-report indexes and offline finding checks pass. The existing `topomt-dev` prefix
-supplies mypy; no environment is changed. Tests use one CPU/2 GiB, 14.19 seconds
-and peak RSS 95,208 KiB. All 355 original case files remain unchanged. This is
-selected Linux source evidence, not a full suite or public/platform qualification.
+## Actual local six-source receiving — 2026-11-13 UTC
+
+Source `9a276cd9827f4d84fc048d94e06ee6d043779106` captures the unchanged protocol
+in [local_receiving](../evidence/reference_validator_hulls_v1/local_receiving/receipt.json).
+All six original sources are accepted after exact hull construction, saving,
+reading and independent checking. Every original center remains in its source,
+including centers that are not extreme vertices. Geometric facet counts below
+refer to exact normalized binary64 input geometry, with coplanar planes merged.
+
+| Original input | Centers | Hull vertices | Facets | Worker wall seconds |
+| --- | ---: | ---: | ---: | ---: |
+| `regular_tetrahedron` | 4 | 4 | 4 | 0.44 |
+| `closed_shell` | 72 | 72 | 140 | 31.36 |
+| `shell_with_opening` | 66 | 66 | 128 | 22.39 |
+| `straight_tube_narrow_dense` | 81 | 25 | 46 | 1.57 |
+| `straight_tube_wide_sparse` | 77 | 45 | 86 | 7.44 |
+| `dumbbell` | 94 | 66 | 128 | 26.66 |
+
+These are observed source-domain results, not independently predicted counts
+or accessible-volume references. Each saved verification includes exact positive
+rational geometric volume and a complete source-vertex map; all retain
+`free_volume_status=not_computed` and `free_topology_status=not_computed`.
+Radii/probe are not consumed, and no fresh DFND-input equality is claimed.
+
+The new receiving contains 52 JSON files and 682,226 bytes, including repeated
+small controls, raw SHA-256 bindings and producer/checker/dependency identities.
+The [execution record](../evidence/reference_validator_hulls_v1/local_execution.json)
+binds this receipt to the conservative local policy. The whole process takes
+90.94 seconds with one CPU and peak child RSS 56,816 KiB; each worker has a
+2 GiB address-space, 30 CPU-second and 40 wall-second cap. Samples before,
+during and after show over 51 GiB available and no memory pressure/active swap.
+No scheduler job or reserved machine resources are claimed.
+
+The continuation selection passes 211 tests (previous 202 plus nine retained
+receiving/replay controls), including original artifact integrity. Every saved
+original was independently verified by the full capture; the routine regression
+selection replays two representative originals to avoid repeating that cost.
+The selected process uses one CPU/2 GiB, 18.27 seconds and peak RSS 95,692 KiB.
+All 355 original case files remain unchanged. This is Linux source evidence,
+not a full suite or public/platform qualification. No environment is changed.
+Repository Ruff/format, report indexes, offline finding consistency and 274 local
+file targets pass; scientific source is unchanged from `9a276cd`.
 
 ## Developer route
 

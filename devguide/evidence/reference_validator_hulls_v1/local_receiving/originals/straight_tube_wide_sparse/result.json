@@ -1,0 +1,32 @@
+{
+  "schema": "topomt.reference-validator.hull-case-receiving/1",
+  "status": "accepted",
+  "source_sha256": "1eed2d5f54943b0e64ea6731668970e3ea97926e315e9eaf440d0cb2d82bfe0f",
+  "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+  "certificate_sha256": "1f3bd415f53ba98a96bbc162132552b9e86d43e33717306b4d34edc698bb1ce0",
+  "verification_sha256": "f46f8c865140887541ec9a201cecde25cbcd49cc80ab0be7f9a083e7c8d2025d",
+  "n_centers": 77,
+  "n_vertices": 45,
+  "n_facets": 86,
+  "geometric_volume": [
+    "6620533166212162263949896980673976813709886370954005",
+    "2993155353253689176481146537402947624255349848014848"
+  ],
+  "volume_unit": "nm**3",
+  "elapsed_seconds": 7.438611697987653,
+  "peak_rss_kib_linux": 54052,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "cpu_limit_seconds": 30,
+  "slurm_allocation": null,
+  "quantity_receiving": {
+    "dependency_versions": {
+      "pyunitwizard": "0.29.5+2.gcc51c8e",
+      "numpy": "2.5.4"
+    },
+    "quantity_codec_source_revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+    "quantity_record_definition_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e"
+  }
+}

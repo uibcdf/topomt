@@ -1,14 +1,16 @@
 # TopoMT development status
 
-## Certified hull/box domain controls — 2026-11-13 UTC
+## Certified hull/box domains and six original sources — 2026-11-13 UTC
 
 The [hull tranche](DFND/reference_validator_hull_checkpoint.md) at `2b6985b`
 proves center-hull equality and exact geometric clipping, retaining three
-analytic hulls/six clips. The selection passes 202 tests; free volume/topology
-and steric Model integration remain separate. The full six-original-source
-capture is pending: Slurm did not allocate job 5 (`tests=inval`, `normal=unk*`),
-and no queued job remained. Keep the managed retry owned by #76; no unexecuted
-case acquires an empty result. [Current source/receiving state](DFND/reference_validator_checkpoint.md).
+analytic hulls/six clips. The maintainer selects local execution without Slurm;
+source `9a276cd` now retains all six original source hulls with saved independent
+verification. The sequential one-CPU batch takes 90.94 seconds, peak child RSS
+56,816 KiB, with a 2 GiB/30 CPU-second/40 wall-second per-worker cap. The
+continuation selection passes 211 tests. The former failed Slurm attempt stays
+historical; no retry is required for this phase. Free volume/topology and steric
+Model integration remain separate under #76. [Current source/receiving state](DFND/reference_validator_checkpoint.md).
 
 ## Actual certified volume requests — 2026-11-13 UTC
 

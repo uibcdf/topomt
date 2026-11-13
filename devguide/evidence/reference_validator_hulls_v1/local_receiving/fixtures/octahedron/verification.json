@@ -1,0 +1,224 @@
+{
+  "geometric_dimension": 3,
+  "geometric_state": "full_dimensional",
+  "vertices": [
+    [
+      [
+        "-1",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "-1",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "-1",
+        "1"
+      ]
+    ],
+    [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ]
+    ],
+    [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ]
+  ],
+  "facets": [
+    {
+      "coefficients": [
+        "-1",
+        "-1",
+        "-1",
+        "1"
+      ],
+      "vertex_indices": [
+        2,
+        1,
+        0
+      ]
+    },
+    {
+      "coefficients": [
+        "-1",
+        "-1",
+        "1",
+        "1"
+      ],
+      "vertex_indices": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "coefficients": [
+        "-1",
+        "1",
+        "-1",
+        "1"
+      ],
+      "vertex_indices": [
+        2,
+        0,
+        4
+      ]
+    },
+    {
+      "coefficients": [
+        "-1",
+        "1",
+        "1",
+        "1"
+      ],
+      "vertex_indices": [
+        4,
+        0,
+        3
+      ]
+    },
+    {
+      "coefficients": [
+        "1",
+        "-1",
+        "-1",
+        "1"
+      ],
+      "vertex_indices": [
+        5,
+        1,
+        2
+      ]
+    },
+    {
+      "coefficients": [
+        "1",
+        "-1",
+        "1",
+        "1"
+      ],
+      "vertex_indices": [
+        3,
+        1,
+        5
+      ]
+    },
+    {
+      "coefficients": [
+        "1",
+        "1",
+        "-1",
+        "1"
+      ],
+      "vertex_indices": [
+        4,
+        5,
+        2
+      ]
+    },
+    {
+      "coefficients": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "vertex_indices": [
+        3,
+        5,
+        4
+      ]
+    }
+  ],
+  "geometric_volume": [
+    "4",
+    "3"
+  ],
+  "volume_unit": "nm**3",
+  "length_unit": "nm",
+  "free_volume_status": "not_computed",
+  "free_topology_status": "not_computed",
+  "hull_equality_status": "resolved",
+  "schema": "topomt.reference-validator.hull-verification/1",
+  "verification_status": "accepted",
+  "kind": "center_hull",
+  "source_sha256": "8b52b8b193b637fca32b2f7c0b91ba0abd780da32e98384d03d1aee30fdf527e",
+  "certificate_sha256": "9d3fd326be060ab1450c083e692d3c34c707b6343ef57228aa1ec0337e808a2f",
+  "trusted_geometry": "rational-halfspace-vertices/1",
+  "checker_limits": {
+    "max_centers": 128,
+    "max_facets": 192,
+    "max_plane_triples": 1200000
+  },
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "26061a63e906c8da7d2bbbec82b62036c172138fbf3252d3c396d66ff70c6367",
+    "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "contracts.py": "8dec50a1d72a62df95430c5deb4a5f8dbd18f7ae2a88b0e81ace96205d139d7f",
+    "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04",
+    "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72"
+  }
+}

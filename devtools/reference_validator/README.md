@@ -30,8 +30,8 @@ the upper bound. Those bounds do not imply requested numerical precision.
 In the subdivision route, only complete exclusion and completely free convex
 domains receive proved component counts (zero/one). A blocked point does not exclude its carrier.
 Mixed partitions and positive paths do not acquire a general component count,
-enclosure, aperture inventory or morphological label. Exact geometry completion,
-all six hulls, general clipped/per-region high precision and production
+enclosure, aperture inventory or morphological label. General steric geometry
+completion, clipped/per-region high precision and production
 attribution/API admission remain pending. Run/checkpoint records and same-kernel
 resumption are now implemented within the admitted partition envelope. No
 original external scientific kernel is used by this rational developer route.
@@ -71,8 +71,9 @@ The finite domain is an observation context, not another obstacle. The three
 sphere inputs define the nonperiodic excluded set globally; a hull or box
 specifies which finite volume and connectivity question is being asked. The
 global exterior volume is unbounded. Units and boundary conditions must be
-declared; this prototype admits only nonperiodic boxes/tetrahedra and must not
-pretend to construct an arbitrary hull.
+declared; this steric prototype admits only nonperiodic boxes/tetrahedra. The
+separate exact center-hull route below constructs certified domains; integrating
+them into steric occupancy/connectivity remains pending.
 
 For direct numerical inputs, the developer factory generates row IDs and a
 canonical sphere-source digest automatically:
@@ -227,3 +228,11 @@ The default schedules only small controls. `--original-case NAME` or
 unresolved; no geometric empty result is inferred. The pilot limits source count
 to 128, facets to 192 and plane triples to 1,200,000 per enumeration. General
 many-atom free regions and region-assigned precision remain pending.
+
+The [retained local batch](../../devguide/evidence/reference_validator_hulls_v1/local_receiving/receipt.json)
+at source `9a276cd` accepts all six original center hulls with independent
+saved-file checking. The maintainer selected sequential local execution without
+Slurm for this phase. It takes 90.94 seconds, peak child RSS 56,816 KiB, within
+the limits above. This qualifies source hull geometry only; radii/probe, free
+volumes and connected-region inventories remain separate work. See the
+[execution record](../../devguide/evidence/reference_validator_hulls_v1/local_execution.json).

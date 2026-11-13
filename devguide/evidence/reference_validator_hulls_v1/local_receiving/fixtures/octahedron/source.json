@@ -1,0 +1,111 @@
+{
+  "schema": "topomt.reference-validator.center-source/1",
+  "length_unit": "nm",
+  "source_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  "frame_index": 0,
+  "interpretation": "exact_rational_nm",
+  "centers": [
+    {
+      "source_id": 0,
+      "point": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "source_id": 1,
+      "point": [
+        [
+          "-1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "source_id": 2,
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "source_id": 3,
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "-1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "source_id": 4,
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ]
+    },
+    {
+      "source_id": 5,
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "-1",
+          "1"
+        ]
+      ]
+    }
+  ]
+}

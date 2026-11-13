@@ -1,0 +1,94 @@
+{
+  "schema": "topomt.reference-validator.hull-certificate/1",
+  "kind": "center_hull",
+  "source_sha256": "11e8488793fc5a6b236f3197694f2d17186bdb96d3b664c038d42738935c0cd7",
+  "facets": [
+    {
+      "coefficients": [
+        "-1",
+        "0",
+        "0",
+        "0"
+      ],
+      "source_ids": [
+        0,
+        2,
+        3
+      ]
+    },
+    {
+      "coefficients": [
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      "source_ids": [
+        0,
+        1,
+        3
+      ]
+    },
+    {
+      "coefficients": [
+        "0",
+        "0",
+        "-1",
+        "0"
+      ],
+      "source_ids": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "coefficients": [
+        "1",
+        "1",
+        "1",
+        "1"
+      ],
+      "source_ids": [
+        1,
+        2,
+        3
+      ]
+    }
+  ],
+  "positive_weights": [
+    [
+      "1",
+      "4"
+    ],
+    [
+      "1",
+      "4"
+    ],
+    [
+      "1",
+      "4"
+    ],
+    [
+      "1",
+      "4"
+    ]
+  ],
+  "normal_rank_witness": [
+    0,
+    1,
+    2
+  ],
+  "affine_witness": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "vertex_source_ids": [
+    0,
+    1,
+    2,
+    3
+  ]
+}
