@@ -7,9 +7,14 @@ Critical design review: 2026-11-12. Owner:
 **Status: proposed implementation and acceptance plan, not a delivered validator.**
 Source inspection baseline: `bc69b608dfbd7f6a5c40b0773e7f3570563ec5e8`,
 the current #76/#181 records and the retained six-case protocols.
-The maintainer prioritizes reliability and precision over execution speed and
-accepts a reference calculation costing substantially more than DFND or a peer
-detector. The existing [six-case review](../../docs/content/benchlab/synthetic/six_case_review.md)
+The maintainer prioritizes correctness, justified exact geometric/topological
+decisions and certified numerical precision over execution speed. Matching or
+beating DFND or peer-detector runtime is not an acceptance criterion; materially
+costlier calculations are acceptable. Optimize only while preserving the
+justified guarantees. "Exact" remains scoped to supported decisions/model;
+numerical volume integrals require certified error bounds. A goal of maximal
+precision does not establish superiority over another method without evidence.
+The existing [six-case review](../../docs/content/benchlab/synthetic/six_case_review.md)
 and its frozen inputs remain the starting panel. This proposal does not change
 DFND, previous observations, finding dispositions or the synthetic-first scope.
 
@@ -385,9 +390,11 @@ previously unknown complete inventories. Do not fit counts to DFND.
 
 Measure producer plus verifier time, memory and certificate size in a small
 bounded pilot. Cost is secondary to reliability, but it must be predictable
-enough to execute safely. A shared unverified topology routine in producer
-and checker does not resolve that routine's proof obligation. Record the trusted
-base explicitly and use analytic/corruption controls and independent checks
+enough to execute safely. Use those measurements to plan feasible resource
+allocations, not to prefer weaker guarantees for competitive speed. A shared
+unverified topology routine in producer and checker does not resolve that
+routine's proof obligation. Record the trusted base explicitly and use
+analytic/corruption controls and independent checks
 where they address that boundary.
 
 Exit with a justified concrete construction and its remaining qualification

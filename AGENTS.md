@@ -77,6 +77,14 @@ operators/supports and the distinction between point checks and complete
 carrier/path proofs. Boundary #180/#184, five-domain diagnosis #188 and broader
 #60/#76/#16 retain their scopes; this review selects no new geometry or protein.
 
+Independent reference-validator priority (2026-11-12): correctness, justified
+exact geometric/topological decisions and certified numerical precision take
+precedence over runtime. Matching or beating DFND or third-party execution
+speed is not an acceptance criterion. Accept costlier calculations; optimize
+only while preserving the justified guarantees. Follow
+`devguide/DFND/physical_reference_validator_plan.md` under #76, with #181 as
+first consumer. Comparative precision/exactness claims still require evidence.
+
 DFND method documentation lives in `docs/content/dfnd/`. Changes to operators,
 query policies, catalog promotion, units or physical interpretation must review
 the corresponding chapters, derivations and worked example in the same delivery.
