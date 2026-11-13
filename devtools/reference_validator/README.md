@@ -280,5 +280,10 @@ python -m devtools.reference_validator.capture_hull_sterics PROTOCOL.json NEW_DI
 
 Default capture runs only four small analytic fixtures; `--originals` explicitly
 adds six tetrahedron/narrow-tube profiles. An invalid path candidate is retained
-as such, never as proof of physical disconnection. Original-profile receiving
-remains to be executed at this source checkpoint.
+as such, never as proof of physical disconnection. Source `833a774` now retains
+[all ten profiles and forty outcomes](../../devguide/evidence/reference_validator_hull_sterics_v1/receiving/receipt.json),
+with 35 accepted proofs and five deliberately rejected path candidates. The
+local one-CPU/2 GiB capture takes 3.55 seconds, peak RSS 53,576 KiB; all-profile
+saved replay is guarded. See the
+[execution record](../../devguide/evidence/reference_validator_hull_sterics_v1/execution.json)
+for external ceilings and the preserved earlier equivalent capture.

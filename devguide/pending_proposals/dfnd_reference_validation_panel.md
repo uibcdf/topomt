@@ -22,7 +22,13 @@ source-delivers verified hull domains with all-atom point/continuous-path
 checking and sufficient whole-domain proofs. It consumes both coordinate/radius
 quantity records and an explicit probe; interior atoms remain present. General
 hull subdivision, mixed-region enumeration and per-region precision stay open.
-229 selected tests pass; the frozen ten-profile pilot awaits retained execution.
+Source `833a774` retains the ten-profile/forty-control pilot: 35 accepted proofs,
+five deliberately rejected candidates, and all-profile saved replay. 240
+selected tests pass. The tube interior path is checked exactly against every
+atomic ball at 1.2/1.4 Å,
+while the full old exterior path is rejected specifically in the finite H
+context. This does not enumerate regions or prove hull-boundary attachment.
+See the [receiving receipt](../evidence/reference_validator_hull_sterics_v1/receiving/receipt.json).
 No #181/#180/#184/#188/native finding disposition changes. This supersedes the
 earlier missing primitive Model integration, not later public admission.
 
@@ -31,7 +37,8 @@ earlier missing primitive Model integration, not later public admission.
 The [hull checkpoint](../DFND/reference_validator_hull_checkpoint.md) at `2b6985b`
 implements complete center-hull equality proofs and exact closed box clipping.
 Three analytic hulls and six clips are retained; empty/point/edge/face/positive
-3D states stay distinct. Full steric Model/region integration remains pending.
+3D states stay distinct. Primitive steric Model integration is delivered above;
+general mixed-region construction and later public admission remain pending.
 The maintainer subsequently selected local execution without Slurm. Source
 `9a276cd` now retains all six original center hulls with independent saved-file
 checks, one CPU and 2 GiB/30 CPU-second/40 wall-second per-worker caps. The batch

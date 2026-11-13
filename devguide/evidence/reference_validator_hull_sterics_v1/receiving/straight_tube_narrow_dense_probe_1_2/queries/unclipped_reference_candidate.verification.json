@@ -1,0 +1,7 @@
+{
+  "verification_status": "rejected_candidate",
+  "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+  "certificate_sha256": "bfa0f2c238ebf88bc55aa54defb7371df29aca8e7a8f6f94584dba05ee5f5757",
+  "reason": "Path collides or leaves its declared domain",
+  "scope": "This candidate is invalid; no physical disconnection or empty free set is proved."
+}

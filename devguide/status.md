@@ -4,10 +4,13 @@
 
 The [physical hull integration](DFND/reference_validator_hull_sterics_checkpoint.md)
 adds all-atom point/continuous-path checking and sufficient whole-domain proofs
-on independently verified center hulls. Source tests pass (229 selected),
-Ruff/format and scoped mypy on 27 modules pass. The frozen ten-profile receiving
-is the next execution; mixed regions, per-region precision and native-carrier
-qualification remain pending under #76/#181. No Slurm or environment change.
+on independently verified center hulls. Source `833a774` now retains ten profiles
+and forty outcomes: 35 proofs accepted, five invalid candidates rejected.
+The narrow tube's bent interior path is continuously free at 1.2/1.4 Å against
+all 81 atoms. All-profile saved replay is included in 240 passing selected
+tests; Ruff/format and scoped mypy on 27 modules pass. The bounded local capture
+takes 3.55 seconds, peak RSS 53,576 KiB. Mixed regions, per-region precision and
+native-carrier qualification remain under #76/#181. No Slurm/environment change.
 
 ## Certified hull/box domains and six original sources — 2026-11-13 UTC
 

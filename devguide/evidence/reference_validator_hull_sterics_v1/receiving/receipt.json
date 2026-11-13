@@ -1,0 +1,1155 @@
+{
+  "schema": "topomt.reference-validator.hull-steric-receiving/1",
+  "protocol_sha256": "cb342b54505862e75727103c47b1e2e5a2e8d145e4c951a486d3c6cc921160e0",
+  "source_revision": "833a774e52932d7d9dad7335218f2b0933bb9dcc",
+  "producer_files_sha256": {
+    "capture_hull_sterics.py": "0621d794aac3358664e0d055db306d1f9cb0411d5510dbac24dea60dcb128375",
+    "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+    "producer.py": "8c362618b0d69f92882f4c393ca0bddc91bec3a0c8a870f851920eaf6f134873",
+    "receiving.py": "53a60cc37f7104268e1bfd23d6a80ca84f463d0262cce33d41d489ffb465c4f3",
+    "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "center_hull.py": "a67575ca843b74e1a24f0e50ca6b791358c28ba272d09996baeda9f82b23ff62",
+    "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+    "storage.py": "b448f221f85e85ee0657b156512e7316afee6b0fd8957b0eaaf27194cdfa0aa4",
+    "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+    "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+    "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+    "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+  },
+  "profiles": [
+    {
+      "name": "cube_permeable",
+      "original_source": false,
+      "model_sha256": "9b3ad306528e2af7644bea1d5f05ec8c757e82cbe56e38a7faee8ad65afed723",
+      "n_atoms": 8,
+      "queries": {
+        "center": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "9b3ad306528e2af7644bea1d5f05ec8c757e82cbe56e38a7faee8ad65afed723",
+          "certificate_sha256": "69981fcafefb25da6b2ff90ddbfb8e6c8e64bcb612f2fce58530afd22693869a",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "free_hull_boundary": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "9b3ad306528e2af7644bea1d5f05ec8c757e82cbe56e38a7faee8ad65afed723",
+          "certificate_sha256": "89983c3f4b1590da0a12ab9a59b2e9118c36ecd95d120e620aa69c40deac883a",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "outside_hull": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "9b3ad306528e2af7644bea1d5f05ec8c757e82cbe56e38a7faee8ad65afed723",
+          "certificate_sha256": "9ba455abb7c950f94ebfb2d9089bd97aa5314dc249013460f4de06bc9b1a6097",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "outside_domain",
+          "occupancy_status": "resolved"
+        },
+        "center_to_face": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "path",
+          "model_sha256": "9b3ad306528e2af7644bea1d5f05ec8c757e82cbe56e38a7faee8ad65afed723",
+          "certificate_sha256": "98bf817f4b601ab068c2bb2af9c019c6378478dddb2638a857d417bce7efbb1f",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "path_validated": true,
+          "connectivity_status": "resolved",
+          "connected": true
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "9b3ad306528e2af7644bea1d5f05ec8c757e82cbe56e38a7faee8ad65afed723",
+          "certificate_sha256": "8ae310d1e6870f84099915980f7ecc1a2da320a93349eb30c2df1fe06b7ec315",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "8",
+            "1"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        }
+      }
+    },
+    {
+      "name": "cube_interior_obstacle",
+      "original_source": false,
+      "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+      "n_atoms": 9,
+      "queries": {
+        "interior_atom_center": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "335c04498168da0da7b207d6d3e30dfa1575596eb954949b5f06f6236a886b81",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "blocked",
+          "occupancy_status": "resolved"
+        },
+        "start": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "d67d26262231687069baec11864f66f87894b8ddee5c1ef2f62b4f069f474acb",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "end": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "87841d03beb5a4e4af82ae44fb5de04e05df642b1e0d1ed734fd9458780ab12d",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "colliding_straight": {
+          "verification_status": "rejected_candidate",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "7d7176af6d45ce7021b34ebac7aa49ff44a0314d546870639413a41cf4a3a107",
+          "reason": "Path collides or leaves its declared domain",
+          "scope": "This candidate is invalid; no physical disconnection or empty free set is proved."
+        },
+        "bent_clearance": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "path",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "70a5bf45f71f20e088d1438581bcded3611ebd3a74a53f6fe030750a647a6b36",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "path_validated": true,
+          "connectivity_status": "resolved",
+          "connected": true
+        },
+        "below_contact": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "54df4db01579ebd36d726bd74276eef4cfa9101d298df6d801ac7fb362799146",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "blocked",
+          "occupancy_status": "resolved"
+        },
+        "exact_contact": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "26a4994e8ef235ad7af7027867a5afecb50fec49a66fe4dba8815be5f5f14bbb",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "blocked",
+          "occupancy_status": "resolved"
+        },
+        "above_contact": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "234d13abfe6b3466f3f393d5a4167e54e8d8fca945201d7c98634cf5ab0f3e07",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "beff0193103ed6e13491a461d5e35ce9c6ddd51c42f59fd984f537602641f09d",
+          "certificate_sha256": "780b2e9f0a81acb019237b39852f067e1eedf5f96864d531d49901661b81157f",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "8",
+            "1"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        }
+      }
+    },
+    {
+      "name": "cube_complete_cover",
+      "original_source": false,
+      "model_sha256": "f4729dc90104265e50985ad13600da7ce7b39f947b4fd0562e088a83069763cc",
+      "n_atoms": 8,
+      "queries": {
+        "center": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "f4729dc90104265e50985ad13600da7ce7b39f947b4fd0562e088a83069763cc",
+          "certificate_sha256": "4f17e1ce57434d39b64d836cf22c8bc65a21e6f146508928babafb4f55097dd4",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "blocked",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "f4729dc90104265e50985ad13600da7ce7b39f947b4fd0562e088a83069763cc",
+          "certificate_sha256": "ae3456b63ae997e0b66cbcd28d33505ee9d37a74b168e53b43b2892f6da34f20",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": true,
+          "n_components": 0,
+          "topology_status": "resolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "blocked",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        }
+      }
+    },
+    {
+      "name": "tetrahedron_domain",
+      "original_source": false,
+      "model_sha256": "5732668657f50dee55dcc1ac67dcb6327401ee73d8c054dca1c760052a25f938",
+      "n_atoms": 4,
+      "queries": {
+        "inside_bbox_outside_hull": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "5732668657f50dee55dcc1ac67dcb6327401ee73d8c054dca1c760052a25f938",
+          "certificate_sha256": "7c16a7023f81d05f900014be4512d0493d5aeda15da7c42a923cefb065cffbb6",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "outside_domain",
+          "occupancy_status": "resolved"
+        },
+        "centroid": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "5732668657f50dee55dcc1ac67dcb6327401ee73d8c054dca1c760052a25f938",
+          "certificate_sha256": "9443f1ee10d57f70b391d72c0ab63c72b6ed2e1ae2aaaa6c660b6765f46b951b",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "5732668657f50dee55dcc1ac67dcb6327401ee73d8c054dca1c760052a25f938",
+          "certificate_sha256": "89a72a98d6c4ec195e021b0050a226562a019ceabf50413e35ce11407314be72",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "1",
+            "6"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        }
+      }
+    },
+    {
+      "name": "regular_tetrahedron_probe_1_2",
+      "original_source": true,
+      "model_sha256": "c09bf42d90f1609887a54fa4790d3074c39f7161a0e00028ad0ba1665429452e",
+      "n_atoms": 4,
+      "queries": {
+        "origin": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "c09bf42d90f1609887a54fa4790d3074c39f7161a0e00028ad0ba1665429452e",
+          "certificate_sha256": "26e0475d048ad29bddc7a71320054706687830706388c3cb5a1f26e534772b35",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "c09bf42d90f1609887a54fa4790d3074c39f7161a0e00028ad0ba1665429452e",
+          "certificate_sha256": "9824ce398d30585f27f91dcb0b3de1b3a02a39054ecf5e85c9e9eb2bf9a8e366",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        }
+      }
+    },
+    {
+      "name": "regular_tetrahedron_probe_1_4",
+      "original_source": true,
+      "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+      "n_atoms": 4,
+      "queries": {
+        "origin": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+          "certificate_sha256": "3d443ef6aa8a65b98f517e7f1d3a74b9c27a6d28c7b11aaa6c8af42621da91e6",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+          "certificate_sha256": "356755177d40f3a2a136141eaca58ab97cc9e678909714b546c1bc5d580e5240",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        }
+      }
+    },
+    {
+      "name": "regular_tetrahedron_probe_1_7",
+      "original_source": true,
+      "model_sha256": "d4f7a65441c38620ba281234c8faafd6d8d135122e5d487d6e2e0d60c68251f5",
+      "n_atoms": 4,
+      "queries": {
+        "origin": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "d4f7a65441c38620ba281234c8faafd6d8d135122e5d487d6e2e0d60c68251f5",
+          "certificate_sha256": "a88f89376351d652b2316d85d5c860b283ab50bcf0cc6146d4cfc2e02b7b061c",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "blocked",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "d4f7a65441c38620ba281234c8faafd6d8d135122e5d487d6e2e0d60c68251f5",
+          "certificate_sha256": "796bb1944ca7befda9e603f69fa09a4beee3c001ab20b67d64daf87a5d368926",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        }
+      }
+    },
+    {
+      "name": "straight_tube_narrow_dense_probe_1_2",
+      "original_source": true,
+      "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+      "n_atoms": 81,
+      "queries": {
+        "origin": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+          "certificate_sha256": "7f27013cf06a140d81cee2ec3ad8753c626d881db0f7e6d1c8e4b0e5e42b10f0",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "free",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+          "certificate_sha256": "fd3822ccd973793fed7306fa0b700ee3df2e55a9aa94558d67635c76a9031064",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6837102936632438928635571155971563018418612823693483",
+            "8979466059761067529443439612208842872766049544044544"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        },
+        "interior_reference_segment": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "path",
+          "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+          "certificate_sha256": "2eccb9c1afe4caa977de9a43d233d507629720e55793e52d149cf4a037c3d110",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "path_validated": true,
+          "connectivity_status": "resolved",
+          "connected": true
+        },
+        "unclipped_reference_candidate": {
+          "verification_status": "rejected_candidate",
+          "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+          "certificate_sha256": "bfa0f2c238ebf88bc55aa54defb7371df29aca8e7a8f6f94584dba05ee5f5757",
+          "reason": "Path collides or leaves its declared domain",
+          "scope": "This candidate is invalid; no physical disconnection or empty free set is proved."
+        },
+        "external_reference_endpoint": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+          "certificate_sha256": "ff2c043684b97d5e795184feb33804e2728aa5ff0da56a076d1b6ca480f1e862",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "outside_domain",
+          "occupancy_status": "resolved"
+        }
+      }
+    },
+    {
+      "name": "straight_tube_narrow_dense_probe_1_4",
+      "original_source": true,
+      "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+      "n_atoms": 81,
+      "queries": {
+        "origin": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+          "certificate_sha256": "66ac6cabf94671e759e47abdfe65e8fff01db3a8ea4e570d2510fd9d80a0bc7f",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "blocked",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+          "certificate_sha256": "10f3cf2f712c7680726034222ab2d57c5a1b12145a8428628a60071e42afe50f",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6837102936632438928635571155971563018418612823693483",
+            "8979466059761067529443439612208842872766049544044544"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        },
+        "interior_reference_segment": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "path",
+          "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+          "certificate_sha256": "0907e0d59fae74cec3aefc7285fc8e6c495767bbe299ae0b85a2240ff9a9c20c",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "path_validated": true,
+          "connectivity_status": "resolved",
+          "connected": true
+        },
+        "unclipped_reference_candidate": {
+          "verification_status": "rejected_candidate",
+          "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+          "certificate_sha256": "ca5668e46227ae231af93e2ece6c023e40222881a9226769d88c54c9f00d1a5e",
+          "reason": "Path collides or leaves its declared domain",
+          "scope": "This candidate is invalid; no physical disconnection or empty free set is proved."
+        },
+        "external_reference_endpoint": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+          "certificate_sha256": "b19d55ecb42650bfd4917c8b1e9825a07363b5af23c1d12f00d19a3aeceb1310",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "outside_domain",
+          "occupancy_status": "resolved"
+        }
+      }
+    },
+    {
+      "name": "straight_tube_narrow_dense_probe_2_5",
+      "original_source": true,
+      "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+      "n_atoms": 81,
+      "queries": {
+        "origin": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+          "certificate_sha256": "32f61872d0582775b7bd146f89a808cc027c7cd5f2c0db41040d17f94dd3b0a6",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "blocked",
+          "occupancy_status": "resolved"
+        },
+        "whole_domain": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "convex_domain",
+          "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+          "certificate_sha256": "e18085d6098c2551324b0ca9a382047dcad7af45dbab51b0871cf6b38442c747",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "unresolved",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "domain_state": "unknown",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6837102936632438928635571155971563018418612823693483",
+            "8979466059761067529443439612208842872766049544044544"
+          ],
+          "volume_unit": "nm**3",
+          "volume_enclosure_status": "resolved",
+          "precision_status": "not_requested"
+        },
+        "interior_reference_segment": {
+          "verification_status": "rejected_candidate",
+          "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+          "certificate_sha256": "ebbf2dd4995f00a1ca2956bf8383adad16fee6d2669d987edcd2335154abaf0b",
+          "reason": "Path collides or leaves its declared domain",
+          "scope": "This candidate is invalid; no physical disconnection or empty free set is proved."
+        },
+        "unclipped_reference_candidate": {
+          "verification_status": "rejected_candidate",
+          "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+          "certificate_sha256": "00faeae5d8bc8913ff54d7ea5d15889faa065e72240e65a6faed9eb0f55a5535",
+          "reason": "Path collides or leaves its declared domain",
+          "scope": "This candidate is invalid; no physical disconnection or empty free set is proved."
+        },
+        "external_reference_endpoint": {
+          "schema": "topomt.reference-validator.verification/1",
+          "verification_status": "accepted",
+          "kind": "point",
+          "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+          "certificate_sha256": "4c1bc43bf7cd5f553de4579c21cb9c5fe854f9296b5a2296845705a2bcfe00ca",
+          "trusted_arithmetic": "stdlib-fraction/1",
+          "topology_complete": false,
+          "n_components": null,
+          "topology_status": "not_computed",
+          "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+          "verifier_files_sha256": {
+            "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+            "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+            "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+            "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+            "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+            "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+            "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+          },
+          "point_state": "outside_domain",
+          "occupancy_status": "resolved"
+        }
+      }
+    }
+  ],
+  "originals_selected": true,
+  "quantity_receiving": {
+    "dependency_versions": {
+      "numpy": "2.5.4",
+      "pyunitwizard": "0.29.5+2.gcc51c8e"
+    },
+    "quantity_record_definition_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e"
+  },
+  "files": {
+    "cube_complete_cover/model.json": "c9b2bfc2f672c49e9068e883d3d12ae754971282161024cdb251f9c62027262a",
+    "cube_complete_cover/queries/center.certificate.json": "fee0109640e5ce12379d7c6212f0d1cbaf4d6be28c378a47d5dbb6294d2b47d4",
+    "cube_complete_cover/queries/center.verification.json": "0c49150497c47829ac918c5f6d02c77e7c12c19b3ab22c09b0e099d6a866dc6c",
+    "cube_complete_cover/queries/whole_domain.certificate.json": "dd634e28dee32fec120622f2acb202775c03db3d72a1bb29c26f2bb2691bfb8a",
+    "cube_complete_cover/queries/whole_domain.verification.json": "aa0886aabac7eeac28f2cef6fa193286325fc2b76556af1c05664c82f5c9b8d9",
+    "cube_interior_obstacle/model.json": "4ca184cbbcf80c7b6e0e558d984a5bd15a61434eb34770cb1dd9164a064fb7cb",
+    "cube_interior_obstacle/queries/above_contact.certificate.json": "d83906ebc1862de459b01a1128a314d844f8dd98347938a2f4260b9768205ec6",
+    "cube_interior_obstacle/queries/above_contact.verification.json": "7e3445b491c0871d588c1c82d5b2c82b71389b179fc54a88e06bfc9e684be4a1",
+    "cube_interior_obstacle/queries/below_contact.certificate.json": "4a2d535f31049055e7907099d92c27abff017c1b9c1354f4f8ad195ed08c9cd6",
+    "cube_interior_obstacle/queries/below_contact.verification.json": "208fc1c3adb4e66f52b63c20379f8fe54c6ce4e39c326e513b27059fee99eb93",
+    "cube_interior_obstacle/queries/bent_clearance.certificate.json": "2dbd4c500ff44caa4f4e31a381e5d572ca5fbc32fa94fd9b811d68701906a761",
+    "cube_interior_obstacle/queries/bent_clearance.verification.json": "7ed93be5363b66b3f6f187c95bc58f3edfe900b9fea0a8d29d535567d1755c08",
+    "cube_interior_obstacle/queries/colliding_straight.certificate.json": "c469ef38fd462330c9632be7a86e9c10478e7cb287324514179699bc70b47286",
+    "cube_interior_obstacle/queries/colliding_straight.verification.json": "6c208f28a555588531f7099c164bd9375246aeb97ddac41eb4676c732176072a",
+    "cube_interior_obstacle/queries/end.certificate.json": "3968cb407a2c8a8464994b1ba0ff74f5b26d1735e962c61a4892a74976731eb0",
+    "cube_interior_obstacle/queries/end.verification.json": "fcd93aaa0d7f9376743ca10074b1031e53ee1315e5ca0c4a4bc9a3022e7cc06a",
+    "cube_interior_obstacle/queries/exact_contact.certificate.json": "16edbcae701c577b0e0cd5fa4b49b1c0c8c3b24d8edc2cf85ab2f29cbb4ca625",
+    "cube_interior_obstacle/queries/exact_contact.verification.json": "c32788aa7da1edf1157c85f3df585e5424fcab3d6643c2470bfd964302bf5293",
+    "cube_interior_obstacle/queries/interior_atom_center.certificate.json": "1766544d5d33d94dda700755dfc92d3a5ef36952517e64f683333b168601a315",
+    "cube_interior_obstacle/queries/interior_atom_center.verification.json": "e882b5207c7e95874927dee0465a6691fa3165ca7d413983174f98c3ccddf2ad",
+    "cube_interior_obstacle/queries/start.certificate.json": "3011e51ca133588f7ec9bb179b85866e069bd9ecc3b9e66190e7a8ea3df4d8e8",
+    "cube_interior_obstacle/queries/start.verification.json": "660fd6d2190585e402fd76671a12df9ff301f06f1b8909203a3a9dda74171aa2",
+    "cube_interior_obstacle/queries/whole_domain.certificate.json": "4050ca9d4a63c318e156786fa6e35bbcc9a59352f176d541cb44d5cce93b4683",
+    "cube_interior_obstacle/queries/whole_domain.verification.json": "22b48bc7c9b3e271930e2dc9398caf4560ca765ead2f0d981d02b0c6169a76a5",
+    "cube_permeable/model.json": "ad8d31ba1c9f76058cc31b3ddcf52d733099ff93416e35b3e42692126471860f",
+    "cube_permeable/queries/center.certificate.json": "7aed05a858ab27812b218394d1f616bd5f51c9ddf236a1916c9edb1573da8123",
+    "cube_permeable/queries/center.verification.json": "bcbef9b206f04b7ef1decc9a7da015a7a88a640ba86ff4c056391f18193549e4",
+    "cube_permeable/queries/center_to_face.certificate.json": "e8d8c33ee9a9e7d4a1e4da7ad7ca50759b49d702cb779a8bf8172e77c9d4f747",
+    "cube_permeable/queries/center_to_face.verification.json": "df10fce52d65900afca44dd255a378db2d0f147683d24a82664fa52943fabe5d",
+    "cube_permeable/queries/free_hull_boundary.certificate.json": "8c8d3a7c1d399d834e54941030a0cc906177159485ed9a27fd8c86031f40e205",
+    "cube_permeable/queries/free_hull_boundary.verification.json": "0918fb7b808c851ebeb89eb953045b24fe9d955674da019f2b3adfddd0bdb291",
+    "cube_permeable/queries/outside_hull.certificate.json": "3981a2dcaabea1001cf3dabb71f5dc62173c70191aa32b54e1faa536ea9c2b43",
+    "cube_permeable/queries/outside_hull.verification.json": "33fcab794d6c1a66c764ccf917680c57d322d865e350423d8c3a1753ad66ce6c",
+    "cube_permeable/queries/whole_domain.certificate.json": "9476b8681ba9c74e8411160dfd6c5f01ce89d6b599639d93a772c7a89f70adb1",
+    "cube_permeable/queries/whole_domain.verification.json": "c3946554d930fb096531ab40b8a5f3e07397ab9f5caff7723bfb6eeff4c389b4",
+    "regular_tetrahedron_probe_1_2/model.json": "22a8bb663ebfb1f0f9f39881b77462fd7a9502356e72c5fa627db6193bd392ec",
+    "regular_tetrahedron_probe_1_2/queries/origin.certificate.json": "0faa5a414e487d181431d759952bcadcc1a2a51720b7e659961a183dad5617a1",
+    "regular_tetrahedron_probe_1_2/queries/origin.verification.json": "aa624f8c3d97f2ea55948d7d7546e9863b2f7cbddd031bd86a17047e20df2dee",
+    "regular_tetrahedron_probe_1_2/queries/whole_domain.certificate.json": "028afc619ccdb34b8762371e124d584139407584eca23b2a625d81cdce8c07a0",
+    "regular_tetrahedron_probe_1_2/queries/whole_domain.verification.json": "d0775a234c776d46aedc7f7a60735c5dc1dba1b2a48dd9f718bd5cccb1fec63d",
+    "regular_tetrahedron_probe_1_4/model.json": "92b9ecf212840a5975aff92b47ad718ec29ff1629be09fbd73d2bee4da013174",
+    "regular_tetrahedron_probe_1_4/queries/origin.certificate.json": "657486330a1fee6feee0b88609206df62c3de0bd893437e036d854399863fb5a",
+    "regular_tetrahedron_probe_1_4/queries/origin.verification.json": "8d03b7b34caa0014f8c159687785546f7bc523b647fb92d8df1b63fd3c9545e8",
+    "regular_tetrahedron_probe_1_4/queries/whole_domain.certificate.json": "cd324f11b93aded1ffb5c36b4a61e86ccf1d596616d5b0c3c03cd5c9f299a903",
+    "regular_tetrahedron_probe_1_4/queries/whole_domain.verification.json": "0e33105ee3bd7f3b628f9e4205ad7bbb18251d13679d46b9fc7f85910e305f6d",
+    "regular_tetrahedron_probe_1_7/model.json": "ed18768a6a63e2006c1cf4d8ca0ab48579f379a32aed6f9c234817b07d93c6ea",
+    "regular_tetrahedron_probe_1_7/queries/origin.certificate.json": "c89b59e134e21b4875918980df316d0f621cf54acda59cdd7440065d274dd042",
+    "regular_tetrahedron_probe_1_7/queries/origin.verification.json": "5c36df3842c4a71f67e7a3016eb39f18955fefced8d27d90298762386190bde0",
+    "regular_tetrahedron_probe_1_7/queries/whole_domain.certificate.json": "ec96d56d01f2c80c943ede4dc4fbd74886ce3d9345687848f765511dc51bcad4",
+    "regular_tetrahedron_probe_1_7/queries/whole_domain.verification.json": "62e0aab7ac1e967b4b16e8383b18550a2a3e550c5551796514fe063229e632f9",
+    "straight_tube_narrow_dense_probe_1_2/model.json": "68207dea251e6b54eccc3acddb83685a2c3e468c7dd33f8deaf9a21837e1ba09",
+    "straight_tube_narrow_dense_probe_1_2/queries/external_reference_endpoint.certificate.json": "590352b5da38a52c42eac5860961d07aaeb1a8604698c1e00c26062a024c1b67",
+    "straight_tube_narrow_dense_probe_1_2/queries/external_reference_endpoint.verification.json": "135f9f5f8906995ac308912b61dd5e699b76ce24d4e737aa4a0a792946dbc299",
+    "straight_tube_narrow_dense_probe_1_2/queries/interior_reference_segment.certificate.json": "0dda2aeb8d2e5a775e6b956362cbf8f40e9bd788cb9bd53268800e57e7d5f1de",
+    "straight_tube_narrow_dense_probe_1_2/queries/interior_reference_segment.verification.json": "ce4da14f602f25ea77da612daa025f1e25a4c38738b329facdcdc799d340a29e",
+    "straight_tube_narrow_dense_probe_1_2/queries/origin.certificate.json": "deeed48aa51657f5ae28d2e11e2da722df2c6585dfe4a053a2f1b1d7a83715fd",
+    "straight_tube_narrow_dense_probe_1_2/queries/origin.verification.json": "9258183e20dfbd0c91d460cd7ca5e1568e5b8f7f345d1a2ce88a4b41b6827281",
+    "straight_tube_narrow_dense_probe_1_2/queries/unclipped_reference_candidate.certificate.json": "b2fbe3223174170aa482bd92b796c754eda49317f0378255a82cd1b33588a620",
+    "straight_tube_narrow_dense_probe_1_2/queries/unclipped_reference_candidate.verification.json": "2f35c3d5e2d8143d6672cf6809c71d447bb80b1a1a3b101d0837ed682864647b",
+    "straight_tube_narrow_dense_probe_1_2/queries/whole_domain.certificate.json": "2de637a0f094e852597f53b3d63b2dfb54030e1e2d9679823e253ca0f0df1212",
+    "straight_tube_narrow_dense_probe_1_2/queries/whole_domain.verification.json": "1c606ef0ceac688ff43f6fe569b0df587e1ae99483b595a03eb1971b45ea999d",
+    "straight_tube_narrow_dense_probe_1_4/model.json": "1a86eb52531c99911a4b1ea5d58ea4bf9a4914bc65f362089fe8930f1bfa5530",
+    "straight_tube_narrow_dense_probe_1_4/queries/external_reference_endpoint.certificate.json": "261f676028aa295e2dcb5d9033674d84144e0806f9637d3ab22215339440492d",
+    "straight_tube_narrow_dense_probe_1_4/queries/external_reference_endpoint.verification.json": "80f18be9eecc4f7fb592ac8db79056a7df010a4910189342739bd2c8c8fe1beb",
+    "straight_tube_narrow_dense_probe_1_4/queries/interior_reference_segment.certificate.json": "a8ca06d384f40d38e9103ad3db1543147a56077c53aa1d25143f418a1e5b8118",
+    "straight_tube_narrow_dense_probe_1_4/queries/interior_reference_segment.verification.json": "122b825dbf1931e507cb382d012832e382a04b17ff43a47a2f825a5669d322b4",
+    "straight_tube_narrow_dense_probe_1_4/queries/origin.certificate.json": "5854f27d4fdd2c30aa77d2395b5a98ed83305f3e32bf8d0b86605f9e2bab50c0",
+    "straight_tube_narrow_dense_probe_1_4/queries/origin.verification.json": "784b3c1ddd661436ed1bad970e3f87417c4b1ce1c4107fc48cb87c8ac18d8273",
+    "straight_tube_narrow_dense_probe_1_4/queries/unclipped_reference_candidate.certificate.json": "a0f061f84e14378356d579c2500f79c61817cafd685dfcf026e018e357aee85b",
+    "straight_tube_narrow_dense_probe_1_4/queries/unclipped_reference_candidate.verification.json": "957cbc90d9fbc9663013fc867d49613139fec4c20f502942ab5431fe73f59d98",
+    "straight_tube_narrow_dense_probe_1_4/queries/whole_domain.certificate.json": "1b4e7f25fc56f01ddf8150ec20659584738c720e7e526ee9a2e077fd797252ab",
+    "straight_tube_narrow_dense_probe_1_4/queries/whole_domain.verification.json": "178fe3d5320584ea4a4bb5ea5b0aa04c68cbd5f36e0b34efd2d300735bd8cca7",
+    "straight_tube_narrow_dense_probe_2_5/model.json": "297774182804e0915cc6be6d264fffe74c4f79c7488b366ea04a41c4edd5eb8c",
+    "straight_tube_narrow_dense_probe_2_5/queries/external_reference_endpoint.certificate.json": "b6c2e83d22a90fa6e189f728b8d1ddbe97c32e3eac85784542deb4b3c0b32d82",
+    "straight_tube_narrow_dense_probe_2_5/queries/external_reference_endpoint.verification.json": "c7c57675fa23609955037088ede1af00f45b29ea07f18c7aba806eabb6e3ff67",
+    "straight_tube_narrow_dense_probe_2_5/queries/interior_reference_segment.certificate.json": "0b7a4896822d9577eacb947492233936f4cbeacc920abb8f0ff9be4d664ba7b2",
+    "straight_tube_narrow_dense_probe_2_5/queries/interior_reference_segment.verification.json": "c239e1861b0688a38acf98c67ad8d9795af7c947b8ebb2be110571a737701d12",
+    "straight_tube_narrow_dense_probe_2_5/queries/origin.certificate.json": "5a4645668506ba63b313634a7134a67cd26a37f35047d266788c859af70a25f9",
+    "straight_tube_narrow_dense_probe_2_5/queries/origin.verification.json": "84989cf1ca188f85c3293e383d6f026126153f85240d6f9877a774eb916a9866",
+    "straight_tube_narrow_dense_probe_2_5/queries/unclipped_reference_candidate.certificate.json": "cfa829ab78d45e55f80b17cc37d7459c0f3c9521ab7ec39d0bb838f98f958dba",
+    "straight_tube_narrow_dense_probe_2_5/queries/unclipped_reference_candidate.verification.json": "f1063b0121c6b24db0ef39c22b1935965253caedb99829f0fafaf4774aa2ccc7",
+    "straight_tube_narrow_dense_probe_2_5/queries/whole_domain.certificate.json": "01feb468e83d738630385ce6d126f1a7597dfd72a2ede828b46a6c60c96f6e49",
+    "straight_tube_narrow_dense_probe_2_5/queries/whole_domain.verification.json": "8ce12b4010f62cba94cfb803c968aec59e9e1af9213a52e502d553ef31366ac5",
+    "tetrahedron_domain/model.json": "e4e1d6ccc7fb9a906fac2b216ab0f1a1aa8a5d86c8f9e1f7ac141aa9549dae0c",
+    "tetrahedron_domain/queries/centroid.certificate.json": "a7177a414a35ddf3d86dbe9c975f51589a25744b4dee77495fe73fd7b817da80",
+    "tetrahedron_domain/queries/centroid.verification.json": "aaefef17643786ed1073e3de88585e1dbe2c2906b58d71ac8b3e61c4137e9d3d",
+    "tetrahedron_domain/queries/inside_bbox_outside_hull.certificate.json": "11c270c164bc9fd851f58ba485d9da900b9e50ec0e0ba82b8711abd014b53b59",
+    "tetrahedron_domain/queries/inside_bbox_outside_hull.verification.json": "d3acc4ec7bb3bee69aeab14270d5b34bfd7182c361803c875fc25df20a174fad",
+    "tetrahedron_domain/queries/whole_domain.certificate.json": "88e45a35b8d49803f551bc510693a29fefd80c948e0ef8b5bac5b2b20fe424c2",
+    "tetrahedron_domain/queries/whole_domain.verification.json": "2631d7513d0ee87a649d4a289aa4035156fb8ad716b734ee71ede4958436b20e"
+  },
+  "elapsed_seconds": 3.542544240015559,
+  "peak_rss_kib_linux": 53576,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "cpu_limit_seconds": 50,
+  "concurrency": 1,
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "scope": "Selected hull/steric facts; general mixed free regions, boundary incidence and requested volume precision remain unqualified."
+}

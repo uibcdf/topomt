@@ -1,0 +1,23 @@
+{
+  "schema": "topomt.reference-validator.verification/1",
+  "verification_status": "accepted",
+  "kind": "point",
+  "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+  "certificate_sha256": "7f27013cf06a140d81cee2ec3ad8753c626d881db0f7e6d1c8e4b0e5e42b10f0",
+  "trusted_arithmetic": "stdlib-fraction/1",
+  "topology_complete": false,
+  "n_components": null,
+  "topology_status": "not_computed",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+    "verify/__init__.py": "8a95a654374e1ff2b8a2b6f4bc83a1c5a7acff843e949151f7bcb00cc4c0ffa0",
+    "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+    "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+    "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+    "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04"
+  },
+  "point_state": "free",
+  "occupancy_status": "resolved"
+}

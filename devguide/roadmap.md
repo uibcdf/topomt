@@ -102,8 +102,8 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 Steric-hull continuation (2026-11-13 UTC): the
 [physical integration](DFND/reference_validator_hull_sterics_checkpoint.md)
 source-delivers exact all-atom point/path and sufficient whole-domain proofs
-on independently certified center hulls. Execute its frozen analytic/original
-pilot locally within finite resource limits, then continue complete mixed-region
+on independently certified center hulls. Source `833a774` retains its ten-profile,
+forty-control pilot with all-profile saved replay. Continue complete mixed-region
 construction and certified hull clipping under #76. A physical path in H alone
 does not qualify its support in a particular native carrier under #181.
 

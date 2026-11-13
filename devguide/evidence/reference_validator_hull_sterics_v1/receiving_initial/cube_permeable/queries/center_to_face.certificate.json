@@ -1,0 +1,36 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "model_sha256": "9b3ad306528e2af7644bea1d5f05ec8c757e82cbe56e38a7faee8ad65afed723",
+  "arithmetic": "rational-exact/1",
+  "kind": "path",
+  "points": [
+    [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    [
+      [
+        "1",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ]
+  ]
+}

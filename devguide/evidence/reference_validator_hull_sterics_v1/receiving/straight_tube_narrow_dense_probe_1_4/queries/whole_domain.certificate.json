@@ -1,0 +1,7 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "kind": "convex_domain",
+  "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+  "arithmetic": "rational-exact/1",
+  "claim": "unknown"
+}

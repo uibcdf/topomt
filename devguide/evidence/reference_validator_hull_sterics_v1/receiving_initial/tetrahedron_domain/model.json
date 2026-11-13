@@ -1,0 +1,272 @@
+{
+  "schema": "topomt.reference-validator.model/1",
+  "length_unit": "nm",
+  "contact_policy": "strict",
+  "interpretation": "exact_rational_nm",
+  "source_sha256": "e10dc3394754aefe6663eeeb13e616836d47c75078bb78605d1d86581e5a6f82",
+  "frame_index": 0,
+  "probe": [
+    "0",
+    "1"
+  ],
+  "domain": {
+    "kind": "center_hull",
+    "source": {
+      "centers": [
+        {
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "source_id": 0
+        },
+        {
+          "point": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "source_id": 1
+        },
+        {
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "source_id": 2
+        },
+        {
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ],
+          "source_id": 3
+        }
+      ],
+      "frame_index": 0,
+      "interpretation": "exact_rational_nm",
+      "length_unit": "nm",
+      "schema": "topomt.reference-validator.center-source/1",
+      "source_sha256": "e10dc3394754aefe6663eeeb13e616836d47c75078bb78605d1d86581e5a6f82"
+    },
+    "certificate": {
+      "affine_witness": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "facets": [
+        {
+          "coefficients": [
+            "-1",
+            "0",
+            "0",
+            "0"
+          ],
+          "source_ids": [
+            0,
+            2,
+            3
+          ]
+        },
+        {
+          "coefficients": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "source_ids": [
+            0,
+            1,
+            3
+          ]
+        },
+        {
+          "coefficients": [
+            "0",
+            "0",
+            "-1",
+            "0"
+          ],
+          "source_ids": [
+            0,
+            1,
+            2
+          ]
+        },
+        {
+          "coefficients": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "source_ids": [
+            1,
+            2,
+            3
+          ]
+        }
+      ],
+      "kind": "center_hull",
+      "normal_rank_witness": [
+        0,
+        1,
+        2
+      ],
+      "positive_weights": [
+        [
+          "1",
+          "4"
+        ],
+        [
+          "1",
+          "4"
+        ],
+        [
+          "1",
+          "4"
+        ],
+        [
+          "1",
+          "4"
+        ]
+      ],
+      "schema": "topomt.reference-validator.hull-certificate/1",
+      "source_sha256": "e7a0f338e00441734d1daa50b264dd000c82bb76a13af2fe2ee1b7369689d2b3",
+      "vertex_source_ids": [
+        0,
+        1,
+        2,
+        3
+      ]
+    }
+  },
+  "atoms": [
+    {
+      "source_id": 0,
+      "center": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "radius": [
+        "0",
+        "1"
+      ]
+    },
+    {
+      "source_id": 1,
+      "center": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "radius": [
+        "0",
+        "1"
+      ]
+    },
+    {
+      "source_id": 2,
+      "center": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "radius": [
+        "0",
+        "1"
+      ]
+    },
+    {
+      "source_id": 3,
+      "center": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ],
+      "radius": [
+        "0",
+        "1"
+      ]
+    }
+  ]
+}

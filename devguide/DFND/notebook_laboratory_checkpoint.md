@@ -6,9 +6,12 @@ The [steric integration](reference_validator_hull_sterics_checkpoint.md) now
 retains a verified original center hull with every atom/radius and probe in
 the physical Model. Exact point and whole-segment proofs preserve strict
 contact; broad whole-domain bounds remain unknown unless a complete sufficient
-proof succeeds. 229 selected tests pass; retained original-profile execution
-of the frozen tetrahedron/narrow-tube pilot follows. General mixed-region
-enumeration and #181's native-carrier qualification remain separate.
+proof succeeds. Source `833a774` retains the ten-profile, forty-control pilot:
+35 proofs accepted and five invalid candidates explicitly rejected. The tube's
+15-waypoint interior path is free at 1.2/1.4 Å against all atoms; the original
+exterior tails are not admitted as a finite-hull path. 240 selected tests pass,
+including every new saved profile. General mixed-region enumeration and #181's
+native-carrier qualification remain separate.
 
 ## Checked hull geometry and six-source receiving — 2026-11-13 UTC
 

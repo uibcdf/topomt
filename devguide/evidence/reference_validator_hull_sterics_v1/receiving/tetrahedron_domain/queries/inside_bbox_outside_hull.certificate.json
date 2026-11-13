@@ -1,0 +1,21 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "model_sha256": "5732668657f50dee55dcc1ac67dcb6327401ee73d8c054dca1c760052a25f938",
+  "arithmetic": "rational-exact/1",
+  "kind": "point",
+  "point": [
+    [
+      "4",
+      "5"
+    ],
+    [
+      "4",
+      "5"
+    ],
+    [
+      "0",
+      "1"
+    ]
+  ],
+  "claim": "outside_domain"
+}

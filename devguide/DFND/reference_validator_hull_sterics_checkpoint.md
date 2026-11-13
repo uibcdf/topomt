@@ -4,6 +4,7 @@ Owner [#76](https://github.com/uibcdf/topomt/issues/76); first native consumer
 [#181](https://github.com/uibcdf/topomt/issues/181). This extends the
 [exact hull checkpoint](reference_validator_hull_checkpoint.md) into the
 physical Model. It does not enumerate general connected free regions.
+Implemented producer/protocol: `833a774e52932d7d9dad7335218f2b0933bb9dcc`.
 
 ## Admitted model and immutable proof
 
@@ -101,12 +102,59 @@ bound this pilot; Slurm is not used in the maintainer-selected present phase.
 Rejected candidates are recorded separately from positive proofs and never
 become disconnection/empty-region results. New directories preserve old evidence.
 
-At this source checkpoint 229 selected tests pass (211 earlier plus 18 new
+Before retained execution, 229 selected tests pass (211 earlier plus 18 new
 model/geometry/source/path/CLI/capture controls), in 17.04 seconds with peak RSS
 96,324 KiB, one CPU and 2 GiB. Ruff/format and mypy on 27 source modules pass
 with Python 3.11 syntax and the actual 3.14 dependency target. All 355 original
-case files remain unchanged. Original-profile receiving is the next execution;
-the protocol alone does not qualify it.
+case files remain unchanged. The subsequent actual receiving below supplies
+the original-profile evidence; the protocol alone does not qualify it.
+
+## Actual frozen receiving and replay — 2026-11-13 UTC
+
+Source `833a774` executes all ten profiles and forty controls. The
+[current receiving](../evidence/reference_validator_hull_sterics_v1/receiving/receipt.json)
+retains 91 JSON files, 448,941 bytes: ten full models, forty proposed
+certificates, forty independent outcomes and the receipt. Thirty-five proofs
+are accepted; five intentionally invalid path candidates are rejected with
+their original files and a scope that forbids interpreting rejection as
+physical disconnection. Expected dispositions were frozen before execution.
+
+| Model/probe | Actual physical checks | Whole-domain certificate |
+| --- | --- | --- |
+| Permeable cube | Free center and hull face, valid center-to-face segment, outside point rejected by H. | Unknown, `[0,8]` nm³; no component count. |
+| Cube/interior obstacle | Free endpoints, colliding straight segment, valid bent path; contact and both `2^-80` offsets checked. | Unknown; nine source atoms retained, eight hull vertices. |
+| Completely covered cube | Occupied center and one-ball proof covering the complete H. | Exact zero free volume and zero components. |
+| Unit tetrahedron | Free centroid; a point in the bounding box but outside H has `outside_domain`. | Unknown. |
+| Original tetrahedron, 1.2/1.4 Å | Origin free at both probes. | Unknown with this sufficient one-ball route. |
+| Original tetrahedron, 1.7 Å | Origin occupied. | Unknown here; the earlier complete tetrahedral partition proof remains valid in its own model/certificate. |
+| Original narrow tube, 1.2 Å | Origin free; the 15-waypoint interior path is continuously free against all 81 atoms. | Unknown. |
+| Original narrow tube, 1.4 Å | Origin occupied; the same bent interior path remains free. | Unknown. |
+| Original narrow tube, 2.5 Å | Origin occupied and that interior path candidate collides. | Unknown here; the previous independent union-cover reference retains its stronger distinct scope. |
+
+For every tube probe, the first full-reference endpoint is outside H; the
+complete 19-waypoint candidate is correctly rejected as a finite-hull path.
+The positive 15-waypoint slice proves interior connectivity only. It is not
+an exact clip to hull-boundary patches or a replacement for the original
+exterior-tail reference. All 81 tube atoms participate, although only 25 are
+extreme hull vertices. No original reference/artifact is rewritten.
+
+The bounded local capture takes 3.55 seconds and peak RSS 53,576 KiB, using one
+CPU, one numerical thread, 2 GiB, 50 CPU seconds and a 60-second external wall
+deadline. The [execution record](../evidence/reference_validator_hull_sterics_v1/execution.json)
+binds its receipt and controls. An initial equivalent 3.47-second run had a
+65-second outer deadline; its original bytes remain in `receiving_initial`.
+The fresh current capture applies the exact protocol ceiling. Every supporting
+model/certificate/verification file is byte-identical between the two runs;
+only receipts retain their own resource samples. No Slurm or shared-environment
+change occurs.
+
+The final selection passes **240 tests**: the previous 229 plus eleven retained
+receiving/integrity/all-profile replay guards. It takes 19.10 seconds, peak RSS
+96,552 KiB, one CPU/2 GiB. Saved verification replays all ten physical models and
+forty outcomes. All 355 original case files remain unchanged. These are selected
+Linux source checks, not full-suite, installed or support-matrix qualification.
+Repository Ruff/format, report indexes, offline comparative metadata and all
+294 local Markdown file targets across the ten changed guidance files pass.
 
 ## Developer commands and remaining work
 

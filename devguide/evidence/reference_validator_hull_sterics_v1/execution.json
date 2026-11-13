@@ -1,0 +1,31 @@
+{
+  "schema": "topomt.reference-validator.hull-steric-execution/1",
+  "owner": "uibcdf/topomt#76",
+  "source_revision": "833a774e52932d7d9dad7335218f2b0933bb9dcc",
+  "protocol_sha256": "cb342b54505862e75727103c47b1e2e5a2e8d145e4c951a486d3c6cc921160e0",
+  "execution_mode": "local_sequential",
+  "scheduler_used": false,
+  "current": {
+    "receipt": "receiving/receipt.json",
+    "receipt_sha256": "3734974af9a4a2e688ad5e018f5ca0d1a10eb82cf1581f22af123af80b1e0e7a",
+    "external_wall_limit_seconds": 60,
+    "cpu_limit_seconds": 50,
+    "address_space_limit_bytes": 2147483648,
+    "cpus": 1,
+    "numerical_threads": 1,
+    "elapsed_seconds": 3.546476742019877,
+    "peak_rss_kib_linux": 53576,
+    "initial_memory_available_kib": 53429184
+  },
+  "initial": {
+    "receipt": "receiving_initial/receipt.json",
+    "receipt_sha256": "478736c97dd02d64f7c74b1d10d74db44741c3bdc8b566631a16d2d54c527dcd",
+    "external_wall_limit_seconds": 65,
+    "elapsed_seconds": 3.4735785060329363,
+    "peak_rss_kib_linux": 53516,
+    "initial_memory_available_kib": 53948940,
+    "disposition": "Preserved initial run; a fresh additive capture applies the exact 60-second external protocol ceiling."
+  },
+  "same_supporting_file_hashes": true,
+  "scope": "Selected exact hull/steric controls; no exhaustive mixed-region or native-carrier qualification."
+}

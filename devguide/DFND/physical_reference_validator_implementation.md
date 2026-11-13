@@ -32,7 +32,8 @@ All six original center hulls now have independently checked saved receiving
 at `9a276cd`, using the maintainer's selected bounded local execution without
 Slurm. The [steric integration](reference_validator_hull_sterics_checkpoint.md)
 now source-delivers verified HullDomain, full-sphere receiving and exact
-point/path/whole-convex-domain checking. Original-profile receiving follows;
+point/path/whole-convex-domain checking. Source `833a774` retains all ten selected
+analytic/original profiles and forty outcomes with independent saved replay;
 complete sphere-cut region construction remains open.
 
 ## Scope and acceptance of the first complete validator

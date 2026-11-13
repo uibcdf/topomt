@@ -21,10 +21,21 @@ run/resume explicitly reject hulls until certified clipping is implemented.
 
 The [frozen pilot](../evidence/reference_validator_hull_sterics_v1/protocol.json)
 contains four analytic fixtures and six original tetrahedron/narrow-tube
-profiles. 229 selected tests pass, in 17.04 seconds with peak RSS 96,324 KiB,
-one CPU and 2 GiB; Ruff/format and scoped mypy on 27 modules pass. Original-profile
-receiving is the next execution, not established by that protocol or source
-tests. All 355 original files and native/finding dispositions remain unchanged.
+profiles. Actual source `833a774` receiving now retains all ten models and forty
+outcomes: 35 accepted proofs and five deliberately rejected path candidates.
+The original narrow tube has a free bent interior path at 1.2/1.4 Å against
+all 81 atoms; its occupied origin at 1.4 Å does not exclude that path. The full
+reference path's exterior tails are rejected in the finite-hull context;
+boundary incidence and native-carrier qualification are not inferred.
+
+The [retained receipt](../evidence/reference_validator_hull_sterics_v1/receiving/receipt.json)
+contains 91 JSON files, 448,941 bytes. The one-CPU/2 GiB capture takes 3.55 seconds,
+peak RSS 53,576 KiB, with a 50 CPU-second/60 wall-second ceiling. The
+[execution record](../evidence/reference_validator_hull_sterics_v1/execution.json)
+preserves both this run and an earlier equivalent capture. All-profile saved
+replay is included in **240 passing selected tests** (19.10 seconds, peak RSS
+96,552 KiB); Ruff/format and scoped mypy on 27 modules pass. All 355 original
+files and native/finding dispositions remain unchanged.
 General mixed-region construction, boundary incidence and per-region precision
 remain open under #76. Earlier tranche statements below retain their dates and
 source scopes; this integration supersedes the former missing steric-hull API.
@@ -77,8 +88,8 @@ action is superseded by the maintainer's local execution decision and successful
 receiving; Slurm availability is not a prerequisite for this phase. Context is
 [uibcdf-infrastructure#1](https://github.com/uibcdf/uibcdf-infrastructure/issues/1).
 The failed attempt remains history, not a current blocker or algorithmic
-limitation. Full steric Model integration, general connected-region construction
-and region-assigned volume precision remain open under #76.
+limitation. Steric primitive Model integration is now delivered above; general
+connected-region construction and region-assigned precision remain under #76.
 
 The continuation selection passes **211 tests**: the previous 202 plus nine
 original-source receiving, integrity, resource/scope and representative saved
