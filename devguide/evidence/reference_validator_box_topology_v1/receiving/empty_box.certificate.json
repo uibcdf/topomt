@@ -1,0 +1,16 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "kind": "partition",
+  "model_sha256": "12d5f2aeb4d2bb73e4593cd7842b103b1d4152f74e5d2e03b352ac4880234116",
+  "arithmetic": "rational-exact/1",
+  "refinement": {
+    "max_depth": 0,
+    "max_leaves": 4096
+  },
+  "leaves": [
+    {
+      "path": "",
+      "state": "free"
+    }
+  ]
+}

@@ -99,6 +99,13 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+P1 control continuation (2026-11-13 UTC): the
+[one-ball box feasibility tranche](DFND/reference_validator_p1_feasibility.md)
+now certifies exhaustive corner/throat regions with actual saved receiving.
+Continue the general multi-ball clipping/construction and high-precision
+integration feasibility work under #76. This analytic scope does not select
+the general engine or qualify native #181; preserve all original case evidence.
+
 Operational continuation (2026-11-13 UTC): direct sphere inputs and bounded
 run/checkpoint/resume contracts are delivered in the
 [current P0 checkpoint](DFND/reference_validator_checkpoint.md). Continue with

@@ -1,0 +1,66 @@
+{
+  "schema": "topomt.reference-validator.model/1",
+  "length_unit": "nm",
+  "contact_policy": "strict",
+  "interpretation": "exact_rational_nm",
+  "source_sha256": "4e5ea82a8173473d1ad252b7419a60b4d666a73caaf303c58301ed739b6d7495",
+  "frame_index": 0,
+  "probe": [
+    "0",
+    "1"
+  ],
+  "domain": {
+    "kind": "box",
+    "lower": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "upper": [
+      [
+        "2",
+        "1"
+      ],
+      [
+        "3",
+        "1"
+      ],
+      [
+        "6",
+        "1"
+      ]
+    ]
+  },
+  "atoms": [
+    {
+      "source_id": 0,
+      "center": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "radius": [
+        "7",
+        "1"
+      ]
+    }
+  ]
+}

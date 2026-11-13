@@ -1,0 +1,52 @@
+{
+  "schema": "topomt.reference-validator.verification/1",
+  "verification_status": "accepted",
+  "kind": "single_ball_box_topology",
+  "model_sha256": "edd87ef76d6b0bec06c6df5f40590c675e3337975f2427c51c160405bf7c07db",
+  "certificate_sha256": "ba47a87ac41c2db393bdd2b5394b51bb575a9ad6176f60c2ddbe5262eee5332f",
+  "trusted_arithmetic": "stdlib-fraction/1",
+  "topology_complete": true,
+  "n_components": 1,
+  "topology_status": "resolved",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "af0ae99a01ada3da6a39b7a3fe254c52b0ffe38d56afa775c11024a862949900",
+    "verify/__init__.py": "ecd603462a3994994938991f81e58b364c920426ca5ef26286cb7559fd6189bb",
+    "verify/geometry.py": "cc2d52c1502a5bf6b06ce7a84e04712ea28407c68cb3e9e8862aa058d4cd8258",
+    "verify/box_topology.py": "eefacfdaa9f704588bc57ae993a515d24eb85b631e63c9c1ecaf461ff2ee2067"
+  },
+  "topology_scope": "single-ball-axis-box/1",
+  "regions": [
+    {
+      "id": "r0",
+      "piece_ids": [
+        "000",
+        "001",
+        "010",
+        "011",
+        "100",
+        "101",
+        "110",
+        "111"
+      ],
+      "representative": [
+        [
+          "-10",
+          "1"
+        ],
+        [
+          "-3",
+          "1"
+        ],
+        [
+          "-4",
+          "1"
+        ]
+      ]
+    }
+  ],
+  "length_unit": "nm",
+  "boundary_incidence_status": "not_computed",
+  "volume_status": "not_computed",
+  "precision_status": "not_requested"
+}

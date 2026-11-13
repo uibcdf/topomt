@@ -19,7 +19,11 @@ new validator. The [first implemented P0 checkpoint](reference_validator_checkpo
 now delivers exact model/primitive checking, a bounded partition pilot and ten
 retained tetrahedron proofs. The bounded P0 input/proof/run/checkpoint contracts
 and checked resume are now source-delivered; P1's geometry construction is
-unselected. The checkpoint states the remaining scientific gates explicitly.
+unselected. The [one-ball box feasibility tranche](reference_validator_p1_feasibility.md)
+now proves nontrivial exhaustive region inventories on its admitted analytic
+scope, including exact throat closure. It does not select the general multi-ball
+construction or pass P1's precision gate. The checkpoint states the remaining
+scientific gates explicitly.
 
 ## Scope and acceptance of the first complete validator
 
@@ -270,6 +274,12 @@ and licence, precision strategy, resource envelope and remaining qualification.
 An implementation stub, black-box agreement or volume-only demonstration cannot
 pass this gate. No wall-time speed target is part of the scientific acceptance.
 
+Current bounded evidence: the [one-ball box tranche](reference_validator_p1_feasibility.md)
+implements a complete finite monotone-sector cover and independently checked
+incidences for the decisive corner/throat fixtures. Its retained thirteen controls
+do not qualify additional obstacles, general clipping or high-precision volume.
+General candidate selection and the precision prototype remain open under #76.
+
 ## Planned module boundaries
 
 Develop outside the production namespace. Model, bounded producer, checker,
@@ -284,8 +294,9 @@ supported production export.
 | `devtools/reference_validator/producer.py` | Selected backend orchestration, partition/frontier, budgets and checkpointing. |
 | `devtools/reference_validator/verify/` | Separately runnable parser, exact primitive/domain/coverage checks, topology obligations and volume verification. No import of producer search code. |
 | `devtools/reference_validator/receiving.py` | Read original protocols, freeze the actual validated model and create additive source-bound results. |
+| `devtools/reference_validator/box_topology.py`, `verify/box_topology.py` | Implemented scoped one-ball/axis-box completeness construction and its standalone sector/incidence checker. This is P1 control evidence, not the selected general engine. |
 | `devtools/reference_validator/compare.py` | Mapped occupancy/connectivity comparisons; keeps morphology/count semantics distinct. |
-| `devtools/reference_validator/__main__.py` | Implemented developer commands `freeze-tetrahedron`, `produce`, `verify`, `start`, `resume` and `verify-run`; native comparison remains planned. |
+| `devtools/reference_validator/__main__.py` | Implemented developer commands `freeze-tetrahedron`, `produce`, `box-topology`, `verify`, `start`, `resume` and `verify-run`; native comparison remains planned. |
 | `devtools/reference_validator/native/` | Optional Rust crate/backend after P1, with exact arithmetic strategy and a bounded standalone process interface. |
 | `tests/test_reference_validator_*.py` | Model, exact arithmetic, certificate rejection, topology, precision, receiving and resource/resume controls. |
 

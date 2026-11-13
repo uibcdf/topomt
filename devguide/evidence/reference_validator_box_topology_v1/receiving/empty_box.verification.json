@@ -1,0 +1,29 @@
+{
+  "schema": "topomt.reference-validator.verification/1",
+  "verification_status": "accepted",
+  "kind": "partition",
+  "model_sha256": "12d5f2aeb4d2bb73e4593cd7842b103b1d4152f74e5d2e03b352ac4880234116",
+  "certificate_sha256": "5b7107b07cb725b32223f089281688486e833e474f4265f9730a7c597fb7ee11",
+  "trusted_arithmetic": "stdlib-fraction/1",
+  "topology_complete": true,
+  "n_components": 1,
+  "topology_status": "resolved",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "af0ae99a01ada3da6a39b7a3fe254c52b0ffe38d56afa775c11024a862949900",
+    "verify/__init__.py": "ecd603462a3994994938991f81e58b364c920426ca5ef26286cb7559fd6189bb",
+    "verify/geometry.py": "cc2d52c1502a5bf6b06ce7a84e04712ea28407c68cb3e9e8862aa058d4cd8258"
+  },
+  "volume_lower": [
+    "8",
+    "1"
+  ],
+  "volume_upper": [
+    "8",
+    "1"
+  ],
+  "volume_unit": "nm**3",
+  "volume_enclosure_status": "resolved",
+  "precision_status": "not_requested",
+  "unresolved_leaves": 0
+}

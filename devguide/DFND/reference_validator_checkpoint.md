@@ -3,9 +3,50 @@
 Owner [#76](https://github.com/uibcdf/topomt/issues/76); first consumer #181.
 Initial proof producer: `3b75f595eb6f52d9e6ff66a8f02bdcb0efb4633a`.
 Operational continuation: `997f69b3d496333d7c89e2fc18dcd5a487ab38c1`.
-These are bounded implemented P0 tranches of the
+One-ball topology feasibility: `0aac0c04e1ea49f0ca3f8c485f9b508c4d840e9e`.
+These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete connected-region validator or a supported public TopoMT detector.
+
+## Exact nontrivial region inventories — 2026-11-13 UTC
+
+The [P1 feasibility result](reference_validator_p1_feasibility.md) now contains
+an executable completeness construction for exactly one expanded ball clipped
+by an axis-aligned box. A finite monotone-sector cover, every pair intersection
+and checked continuous witnesses recover all connected regions. The independently
+runnable checker imports no topology producer, DFND or NumPy. It rejects multiple
+atoms and other domains rather than dropping obstacles or substituting a box.
+
+The [pre-execution protocol](../evidence/reference_validator_box_topology_v1/protocol.json)
+and [retained receipt](../evidence/reference_validator_box_topology_v1/receiving/receipt.json)
+record thirteen controls. Both the ordinary and tiny corner controls have eight
+proved regions. The throat's probes `1-2^-80`, `1`, `1+2^-80` give one, two and
+two regions, including exact contact; a barely free corner is also retained.
+Other controls cover empty/full domains, internal/external/boundary centers and
+a zero-radius obstacle. No size cutoff discards a region. Each region's piece
+supports, strict inequality and representative remain recoverable from the
+model/certificate, rather than only a returned count.
+
+The receiving retains 40 JSON files, 158,395 bytes, with source/code
+identities and raw checksums. It takes 0.21 seconds as a bounded process, peak
+RSS 21,548 KiB, one CPU and a 2 GiB address-space cap. These are tiny-control
+resource receipts, not competitive benchmarks. All earlier evidence stays intact.
+
+The new route does not compute region volumes or boundary-patch incidence.
+`nonempty` refers to the sector's strict free subset; it never declares the
+whole sector free. The [elementary completeness proof](reference_validator_p1_feasibility.md#completeness-argument-checked-by-this-construction)
+uses one-obstacle outward monotonicity and a finite relatively closed cover.
+Multiple atoms can destroy that monotonicity. P1 remains partial: no general
+local/global architecture is selected or qualified, and multi-ball clipping,
+exhaustive regions and validated high-precision integration remain open.
+Original six-case/DFND/finding dispositions are unchanged.
+
+The final continuation passes **106 selected tests**, including 27 new topology,
+capture and retained-reading controls, plus repository Ruff/format and scoped
+mypy on sixteen validator files. The bounded process uses one CPU and a 2 GiB
+address cap (10.78 seconds, peak RSS 91,980 KiB). All 355 original case files
+remain unchanged. See the feasibility record for scope and deferred evidence;
+these checks do not qualify a full suite, installed package or support matrix.
 
 ## Direct inputs and checked resume — 2026-11-13 UTC
 
@@ -65,8 +106,9 @@ resource receipts for a small operational control, not competitive benchmarks.
   DFND, NumPy or the quantity codec. Shared trusted primitives are exact rational
   arithmetic and convexity, not an unchecked topology result.
 - Exact total probe-center volume enclosures. Unknown cells remain in the upper
-  bound; no requested volume precision is claimed. Only complete exclusion or
-  an entirely free convex domain supplies an exhaustive zero/one component count.
+  bound; no requested volume precision is claimed. In this original partition
+  route, only complete exclusion or an entirely free convex domain supplies an
+  exhaustive zero/one component count; the P1 analytic route has its own scope.
 - Standalone point/path and partition verification, schema/model/arithmetic
   binding, checker source fingerprints, finite work/input limits and saved CLI
   reading. Corrupt/missing/overlapping leaves, false covers/free claims and
@@ -140,7 +182,7 @@ qualification.
 The bounded P0 model/proof and operational run/checkpoint contracts above are
 source-delivered; their initial absence is superseded by the continuation.
 Complete general domain admission remains P1/P2 work. P1 still needs the
-local/global geometry feasibility decision and an exhaustive free-region
+local/global geometry feasibility decision and a general exhaustive free-region
 construction. P4 needs volume precision targets and curved/high-order validated
 integration; these broad enclosures do not meet the plan's k=24 target. Other
 five-case hulls, all 19 profiles, complete apertures/attachments, biological

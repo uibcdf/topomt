@@ -1,0 +1,56 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "kind": "single_ball_box_topology",
+  "arithmetic": "rational-exact/1",
+  "model_sha256": "4f56386ecae26e24fb6110ccc54977e167edd9aa593357fa26cc99c75d2e06d8",
+  "pieces": [
+    {
+      "id": "111",
+      "lower": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "upper": [
+        [
+          "2",
+          "1"
+        ],
+        [
+          "3",
+          "1"
+        ],
+        [
+          "6",
+          "1"
+        ]
+      ],
+      "corner": [
+        [
+          "2",
+          "1"
+        ],
+        [
+          "3",
+          "1"
+        ],
+        [
+          "6",
+          "1"
+        ]
+      ],
+      "free_set_state": "empty"
+    }
+  ],
+  "joins": [],
+  "components": []
+}

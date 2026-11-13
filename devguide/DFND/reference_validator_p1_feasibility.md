@@ -112,6 +112,32 @@ The `2^-80` differences and translated/scaled tests never pass through float.
 They demonstrate exact decisions for these particular rational models, not
 accuracy of the source's physical atomic radii or uncertain experimental data.
 
+## Retained receiving
+
+Source/protocol `0aac0c04e1ea49f0ca3f8c485f9b508c4d840e9e` produces the
+[captured controls](../evidence/reference_validator_box_topology_v1/receiving/receipt.json).
+All thirteen expected results above are independently accepted from saved
+models/certificates. The capture retains original checker identities, 39 proof/
+model/verification files and its receipt (158,395 bytes total), with raw-byte
+checksums. It uses one CPU and a 2 GiB address-space cap: 0.21 seconds for the
+bounded process, peak RSS 21,548 KiB. These measurements only establish safe
+execution of this tiny pilot, not comparative speed or whole-engine feasibility.
+
+Verification passes **106 selected tests**: the prior 79 controls plus 27 new
+topology/CLI/capture/retained-evidence controls. These include deliberate false
+merges/separations, missing pieces/intersections, changed model binding, extra
+obstacles, exact contact and sub-float scales, translation/axis permutations,
+saved checking without the producer, and rejection of output overwrite. The
+bounded test process uses one CPU and a 2 GiB address cap (10.78 seconds,
+peak RSS 91,980 KiB). All 355 original six-case files remain unchanged.
+
+Repository Ruff/format and scoped mypy pass on sixteen validator source files,
+using Python 3.11 syntax with the actual 3.14 development interpreter as the
+dependency target. Mypy itself runs from the existing `topomt-dev` tool prefix;
+no shared environment was changed. Report indexes and offline finding checks
+pass. This is selected Linux source evidence, not a full suite, installed
+candidate, supported-minor matrix or platform qualification.
+
 ## General candidate review and disposition
 
 The planning leads were reread on 2026-11-13. This is documentary review of

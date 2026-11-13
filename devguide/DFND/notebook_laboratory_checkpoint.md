@@ -1,5 +1,15 @@
 # DFND notebook laboratory checkpoint
 
+## Exact connected-region controls — 2026-11-13 UTC
+
+Source `0aac0c0` adds a [bounded P1 completeness construction](reference_validator_p1_feasibility.md)
+for one ball clipped by an axis box: thirteen saved/read-back controls include
+eight tiny corner regions and the one/two/two exact throat transition. No
+multi-ball model is admitted by that route. General geometry/precision gates,
+all earlier six-case artifacts and native/finding dispositions retain their
+scopes. The [validator checkpoint](reference_validator_checkpoint.md) owns the
+current achieved/pending split; this does not start another BenchLab family.
+
 ## Validator inputs and operational contracts — 2026-11-13 UTC
 
 Source `997f69b` adds direct sphere-array inputs, checked run/checkpoint records

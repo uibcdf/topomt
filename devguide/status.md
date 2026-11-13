@@ -1,5 +1,15 @@
 # TopoMT development status
 
+## Exact region feasibility controls — 2026-11-13 UTC
+
+The [P1 one-ball box tranche](DFND/reference_validator_p1_feasibility.md) at source
+`0aac0c0` now proves complete nontrivial connected-region inventories with a
+standalone checker. Thirteen retained controls include eight small corner
+regions and exact throat closure. The route rejects multiple atoms/general
+hulls and computes no boundary patches or volumes. General topology/precision
+feasibility remains open under #76; no original BenchLab evidence or native
+finding disposition changes. See the [current checkpoint](DFND/reference_validator_checkpoint.md).
+
 ## Validator execution/resume contracts — 2026-11-13 UTC
 
 The [current validator checkpoint](DFND/reference_validator_checkpoint.md)

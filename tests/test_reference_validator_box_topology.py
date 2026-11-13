@@ -1,6 +1,7 @@
 """Exact corner/gate controls require complete regions, not sampled counts."""
 
 import copy
+import hashlib
 import json
 import subprocess
 import sys
@@ -19,6 +20,7 @@ from devtools.reference_validator.model import (
     Tetrahedron,
     decode_point,
     point,
+    record_digest,
 )
 from devtools.reference_validator.verify import verify
 from devtools.reference_validator.verify.geometry import point_is_free, segment_is_free
@@ -249,3 +251,48 @@ def test_frozen_topology_protocol_captures_replayable_qualified_scope(tmp_path):
         assert checked['topology_complete']
     with pytest.raises(FileExistsError):
         capture(protocol, output)
+
+
+def test_retained_topology_evidence_keeps_original_bytes_and_exact_regions():
+    base = (
+        Path(__file__).resolve().parents[1]
+        / 'devguide/evidence/reference_validator_box_topology_v1'
+    )
+    protocol = json.loads((base / 'protocol.json').read_text())
+    saved = base / 'receiving'
+    receipt = json.loads((saved / 'receipt.json').read_text())
+    assert (
+        hashlib.sha256((base / 'protocol.json').read_bytes()).hexdigest()
+        == receipt['protocol_sha256']
+    )
+    expected_files = {
+        f'{case["name"]}.{suffix}.json'
+        for case in protocol['cases']
+        for suffix in ['model', 'certificate', 'verification']
+    }
+    assert set(receipt['files']) == expected_files
+    for name, digest in receipt['files'].items():
+        assert hashlib.sha256((saved / name).read_bytes()).hexdigest() == digest
+    for case in protocol['cases']:
+        name = case['name']
+        model = Model.from_record(
+            json.loads((saved / f'{name}.model.json').read_text())
+        )
+        assert model.to_record() == case['model']
+        cert = json.loads((saved / f'{name}.certificate.json').read_text())
+        original = json.loads((saved / f'{name}.verification.json').read_text())
+        row = receipt['cases'][name]
+        assert model.digest == row['model_sha256']
+        assert record_digest(cert) == row['certificate_sha256']
+        assert record_digest(original) == row['verification_sha256']
+        checked = verify(model, cert)
+        assert checked['topology_complete']
+        assert (
+            checked['n_components']
+            == original['n_components']
+            == case['expected_components']
+        )
+        if case['method'] == 'single_ball_box':
+            assert checked['regions'] == original['regions']
+            assert checked['boundary_incidence_status'] == 'not_computed'
+            assert checked['volume_status'] == 'not_computed'

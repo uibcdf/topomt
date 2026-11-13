@@ -15,6 +15,18 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Nontrivial exact region controls — 2026-11-13 UTC
+
+The [P1 feasibility tranche](../DFND/reference_validator_p1_feasibility.md)
+at source `0aac0c0` proves exhaustive regions for exactly one ball clipped by
+an axis box, with recoverable supports and independently checked incidences.
+Thirteen retained controls include eight tiny corner components and the exact
+throat transition at probes `1-2^-80`, `1`, `1+2^-80`. Volume and boundary-patch
+incidence are explicitly not computed by that route. Multiple atoms/other
+domains are rejected. The issue remains partial/open for general construction,
+clipping, requested precision and later receiving/public admission; no native
+#181/#180/#184/#188 disposition changes.
+
 ## Operational validator continuation — 2026-11-13 UTC
 
 Source `997f69b` now delivers direct center/radius/probe inputs plus explicit
