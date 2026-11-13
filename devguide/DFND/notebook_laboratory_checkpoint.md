@@ -1,5 +1,21 @@
 # DFND notebook laboratory checkpoint
 
+## Reference-validator implementation planning — 2026-11-12
+
+The maintainer selects the
+[detailed implementation plan](physical_reference_validator_implementation.md)
+under #76, with #181 as first consumer. Immediate stages P0/P1 define exact
+models/certificates and prove feasibility of a complete local/global geometric
+construction before extensive native implementation. Precision takes priority
+over runtime; high-precision integration is not tied to grid spacing alone.
+
+The [planning inventory](../evidence/reference_validator_planning_inventory_v1.json)
+checks six original inputs/19 profiles and all 355 frozen files unchanged.
+It also records source/tool discovery, not numerical qualification. No new
+validator model, hull/topology certificate, backend execution or native fix is
+claimed. Existing boundary/physical/interpretation issues and synthetic-first
+scope remain; the next source tranche is P0 tests and the minimal checker.
+
 ## Independent reference-validator review — 2026-11-12
 
 The maintainer selects a precision-first assessment of connected probe-habitable

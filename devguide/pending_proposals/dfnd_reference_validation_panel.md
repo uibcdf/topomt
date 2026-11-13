@@ -15,6 +15,19 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Detailed validator implementation plan — 2026-11-12
+
+The [implementation plan](../DFND/physical_reference_validator_implementation.md)
+now defines P0–P7, immediate model/checker tests, proof schemas, local/global
+geometry feasibility, separate topology/volume gates, a precision ladder,
+independent saved verification, resources, packaging and public admission.
+P0/P1 are next; no geometry backend is yet selected or qualified. The
+[planning inventory](../evidence/reference_validator_planning_inventory_v1.json)
+checks all six original models, 19 profiles and 355 unchanged frozen files.
+This is source/input discovery, not a new validator calculation or #181 fix.
+The issue remains partial/open; all implementation stages stay owned here
+until genuinely independent follow-ups are separately scheduled.
+
 ## Reference-validator design review — 2026-11-12
 
 The maintainer prioritizes reliability/precision over detector-like speed for

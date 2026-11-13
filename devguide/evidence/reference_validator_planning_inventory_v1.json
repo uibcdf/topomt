@@ -1,0 +1,185 @@
+{
+  "schema": "topomt.reference-validator.planning-inventory/1",
+  "recorded_at_utc": "2026-11-13T04:08:36.403335+00:00",
+  "issue": "uibcdf/topomt#76",
+  "first_consumer_issue": "uibcdf/topomt#181",
+  "source_revision": "0b68206b0af2210b3f27fc3d70fd5837512148c5",
+  "scope": "Read-only input/tool/source inventory for implementation planning; no reference validator or geometric backend executed.",
+  "baseline_protocol": {
+    "path": "docs/content/benchlab/synthetic/artifacts/six_case_review_v1/protocol.json",
+    "sha256": "17b6cab2e8379a66b3450fb35c28a00c92ff99c5dd4a57d9d2d2c9ac29507dc0",
+    "frozen_files_verified": 355,
+    "frozen_file_bytes_verified": 106301312,
+    "all_original_files_unchanged": true
+  },
+  "case_count": 6,
+  "profile_count": 19,
+  "cases": [
+    {
+      "name": "regular_tetrahedron",
+      "input": "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json",
+      "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+      "n_atoms": 4,
+      "coordinate_shape": [
+        4,
+        3
+      ],
+      "coordinate_unit": "angstrom",
+      "radius_unit": "angstrom",
+      "probe_unit": "angstrom",
+      "probes": [
+        1.2,
+        1.4,
+        1.7
+      ],
+      "domain": "atomic_center_convex_hull",
+      "domain_certificate_status": "not_produced",
+      "canonical_reference_model_status": "not_produced"
+    },
+    {
+      "name": "closed_shell",
+      "input": "docs/content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/input.json",
+      "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+      "n_atoms": 72,
+      "coordinate_shape": [
+        72,
+        3
+      ],
+      "coordinate_unit": "angstrom",
+      "radius_unit": "angstrom",
+      "probe_unit": "angstrom",
+      "probes": [
+        0.05,
+        0.2,
+        1.4,
+        5
+      ],
+      "domain": "atomic_center_convex_hull",
+      "domain_certificate_status": "not_produced",
+      "canonical_reference_model_status": "not_produced"
+    },
+    {
+      "name": "shell_with_opening",
+      "input": "docs/content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/input.json",
+      "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+      "n_atoms": 66,
+      "coordinate_shape": [
+        66,
+        3
+      ],
+      "coordinate_unit": "angstrom",
+      "radius_unit": "angstrom",
+      "probe_unit": "angstrom",
+      "probes": [
+        1.4,
+        3,
+        5
+      ],
+      "domain": "atomic_center_convex_hull",
+      "domain_certificate_status": "not_produced",
+      "canonical_reference_model_status": "not_produced"
+    },
+    {
+      "name": "straight_tube_narrow_dense",
+      "input": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/input.json",
+      "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+      "n_atoms": 81,
+      "coordinate_shape": [
+        81,
+        3
+      ],
+      "coordinate_unit": "angstrom",
+      "radius_unit": "angstrom",
+      "probe_unit": "angstrom",
+      "probes": [
+        1.2,
+        1.4,
+        2.5
+      ],
+      "domain": "atomic_center_convex_hull",
+      "domain_certificate_status": "not_produced",
+      "canonical_reference_model_status": "not_produced"
+    },
+    {
+      "name": "straight_tube_wide_sparse",
+      "input": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/input.json",
+      "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+      "n_atoms": 77,
+      "coordinate_shape": [
+        77,
+        3
+      ],
+      "coordinate_unit": "angstrom",
+      "radius_unit": "angstrom",
+      "probe_unit": "angstrom",
+      "probes": [
+        1.4,
+        2.5,
+        5
+      ],
+      "domain": "atomic_center_convex_hull",
+      "domain_certificate_status": "not_produced",
+      "canonical_reference_model_status": "not_produced"
+    },
+    {
+      "name": "dumbbell",
+      "input": "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/input.json",
+      "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63",
+      "n_atoms": 94,
+      "coordinate_shape": [
+        94,
+        3
+      ],
+      "coordinate_unit": "angstrom",
+      "radius_unit": "angstrom",
+      "probe_unit": "angstrom",
+      "probes": [
+        1.4,
+        2.2,
+        6
+      ],
+      "domain": "atomic_center_convex_hull",
+      "domain_certificate_status": "not_produced",
+      "canonical_reference_model_status": "not_produced"
+    }
+  ],
+  "tools": {
+    "python": "3.14.10",
+    "rustc": "rustc 1.99.1 (58cf8f9c3 2026-10-13)",
+    "cargo_found": true,
+    "cmake_found": true,
+    "optional_python_modules": {
+      "gmpy2": {
+        "module_spec_found": true,
+        "installed_metadata_version": "2.3.2",
+        "numerical_qualification": "not_executed"
+      },
+      "mpmath": {
+        "module_spec_found": true,
+        "installed_metadata_version": "1.4.1",
+        "numerical_qualification": "not_executed"
+      },
+      "sympy": {
+        "module_spec_found": true,
+        "installed_metadata_version": "1.14.0",
+        "numerical_qualification": "not_executed"
+      }
+    }
+  },
+  "molsysmt_source_inspection": {
+    "revision": "ff25f120243319ca9515009b4971e24a2eb0dc22",
+    "tracking_snapshot_without_fetch": "## main...origin/main [behind 50]",
+    "public_operations_consulted": [
+      "molsysmt.basic.convert",
+      "molsysmt.structure.get_distances",
+      "molsysmt.structure.get_neighbors"
+    ],
+    "executed_compatibility": "not_executed"
+  },
+  "verification_limits": [
+    "File hashes, declared units and array lengths checked; qrec numeric decoding and block digests not independently qualified here.",
+    "Frozen protocol case names are authoritative; historical embedded identifiers are not rewritten.",
+    "Tool/module discovery and provider source inspection do not qualify scientific APIs or exact arithmetic.",
+    "No nominal/captured-binary canonical model, convex-hull certificate or topology completeness certificate has been produced."
+  ]
+}

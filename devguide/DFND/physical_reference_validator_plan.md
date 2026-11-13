@@ -1,5 +1,10 @@
 # Independent physical reference validator
 
+The [detailed implementation plan](physical_reference_validator_implementation.md)
+now owns the executable work breakdown, module boundaries, certificate/test
+contracts, precision ladder and delivery gates. This document retains the
+critical scientific requirements and review history.
+
 Critical design review: 2026-11-12. Owner:
 [#76](https://github.com/uibcdf/topomt/issues/76); first DFND consumer:
 [#181](https://github.com/uibcdf/topomt/issues/181).

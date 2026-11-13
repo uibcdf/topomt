@@ -82,8 +82,11 @@ exact geometric/topological decisions and certified numerical precision take
 precedence over runtime. Matching or beating DFND or third-party execution
 speed is not an acceptance criterion. Accept costlier calculations; optimize
 only while preserving the justified guarantees. Follow
-`devguide/DFND/physical_reference_validator_plan.md` under #76, with #181 as
-first consumer. Comparative precision/exactness claims still require evidence.
+`devguide/DFND/physical_reference_validator_plan.md` and the detailed stages in
+`devguide/DFND/physical_reference_validator_implementation.md` under #76, with
+#181 as first consumer. Start with P0/P1 model/checker and construction
+feasibility; neither a plan nor a volume-only prototype qualifies the complete
+validator. Comparative precision/exactness claims still require evidence.
 
 DFND method documentation lives in `docs/content/dfnd/`. Changes to operators,
 query policies, catalog promotion, units or physical interpretation must review

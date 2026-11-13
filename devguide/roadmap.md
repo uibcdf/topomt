@@ -99,6 +99,13 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+Selected reference work (2026-11-12): the
+[precision-first validator implementation plan](DFND/physical_reference_validator_implementation.md)
+under #76 starts with P0 model/certificate tests and P1's local/global geometry
+feasibility gate. Its first consumer is #181's physical qualification. Preserve
+all six original cases and use the separate topology/volume proof obligations;
+no runtime competition or grid-spacing convergence can replace them.
+
 Current checkpoint (2026-11-12): [the joint six-case review](../docs/content/benchlab/synthetic/six_case_review.md)
 records 19 actual public profiles and a concrete nonlocal-blocking diagnosis.
 Next decide/implement #181's all-atom public qualification, retaining local

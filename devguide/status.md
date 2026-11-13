@@ -1,5 +1,14 @@
 # TopoMT development status
 
+## Precision-first reference-validator plan — 2026-11-12
+
+The [detailed implementation plan](DFND/physical_reference_validator_implementation.md)
+under #76 is prepared, with #181 as first consumer. Next implement P0's exact
+model/checker tests, then P1's completeness/integration feasibility gate before
+an extensive native engine. The planning inventory verifies six inputs,
+19 profiles and all 355 frozen files unchanged. No new validator calculation,
+geometry backend, native fix or public API is qualified by this plan.
+
 ## Joint six-case DFND review — 2026-11-12
 
 The [public disposition](../docs/content/benchlab/synthetic/six_case_review.md)
