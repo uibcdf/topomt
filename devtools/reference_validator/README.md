@@ -31,7 +31,7 @@ In the subdivision route, only complete exclusion and completely free convex
 domains receive proved component counts (zero/one). A blocked point does not exclude its carrier.
 Mixed partitions and positive paths do not acquire a general component count,
 enclosure, aperture inventory or morphological label. Exact geometry completion,
-all six hulls, high-precision curved-volume integration and production
+all six hulls, general clipped/per-region high precision and production
 attribution/API admission remain pending. Run/checkpoint records and same-kernel
 resumption are now implemented within the admitted partition envelope. No
 original external scientific kernel is used by this rational developer route.
@@ -161,4 +161,38 @@ python -m devtools.reference_validator.capture_box_topology PROTOCOL.json NEW_DI
 ```
 
 The standalone saved checker needs no topology producer, DFND or NumPy. General
-multi-ball regions and requested high-precision integration remain unresolved.
+multi-ball regions and clipped per-region high precision remain unresolved.
+
+## Scoped certified volume integration
+
+```bash
+python -m devtools.reference_validator volume MODEL.json CERTIFICATE.json --absolute-nm3 1/16777216 --relative 1/16777216
+python -m devtools.reference_validator verify MODEL.json CERTIFICATE.json
+```
+
+Every expanded ball must lie strictly inside an axis box. After exact containment
+reduction, each positive-overlap cluster must have one/two maximal balls, with
+distinct cluster interiors disjoint. Every source atom remains mapped. Larger
+clusters and domain clipping are rejected. Sphere/cap formulas, exact rational
+intervals, a bounded pi series and dyadic square-root enclosures provide rigorous
+total free-volume bounds. This route computes no region inventory or boundary
+incidence. See the [proof and scope](../../devguide/DFND/reference_validator_precision_feasibility.md).
+
+Every enabled tolerance must pass. Zero error stays literal;
+`--max-atan-terms 0 --max-distance-bits 0` may retain valid coarse bounds with
+unresolved precision. The reader checks units and actual/maximum refinement.
+
+The [volume protocol](../../devguide/evidence/reference_validator_analytic_volume_v1/protocol.json)
+contains 23 profiles. Capture under one CPU affinity and external resource limits:
+
+```bash
+python -m devtools.reference_validator.capture_volume PROTOCOL.json NEW_DIRECTORY --crosscheck-mpfr
+```
+
+Omit `--crosscheck-mpfr` to run without gmpy2/MPFR. That flag adds a secondary
+directed-rounding constant audit; the producer and saved checker do not need it.
+General clipped/multi-region precision qualification remains pending.
+
+The exact scalar codec admits at most 20,000 decimal digits per numerator or
+denominator and keeps Python's global conversion guard unchanged. This supports
+the tested maximal-refinement certificate; larger records are explicitly rejected.

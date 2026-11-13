@@ -2,6 +2,7 @@
 
 import copy
 import json
+import sys
 from fractions import Fraction
 
 import pytest
@@ -12,9 +13,24 @@ from devtools.reference_validator.model import (
     Model,
     Tetrahedron,
     decode_scalar,
+    encode_scalar,
     point,
     scalar,
 )
+
+
+def test_large_exact_scalars_round_trip_without_global_integer_policy_changes():
+    original_limit = sys.get_int_max_str_digits()
+    value = Fraction(10**5000 + 17, 10**5001 + 19)
+    encoded = encode_scalar(value)
+    assert len(encoded[0]) > 4300
+    assert decode_scalar(json.loads(json.dumps(encoded))) == value
+    assert sys.get_int_max_str_digits() == original_limit
+
+
+def test_exact_scalar_codec_rejects_oversized_inputs_before_conversion():
+    with pytest.raises(ValueError, match='codec budget'):
+        decode_scalar(['1' + '0' * 20000, '1'])
 
 
 def test_float_values_are_not_replaced_by_nearby_decimals():

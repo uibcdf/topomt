@@ -9,6 +9,7 @@ DFND module is imported by the verification command.
 import argparse
 import json
 import sys
+from fractions import Fraction
 from pathlib import Path
 
 from .model import Model
@@ -33,6 +34,13 @@ def main() -> int:
     topology = commands.add_parser('box-topology')
     topology.add_argument('model', type=Path)
     topology.add_argument('output', type=Path)
+    integral = commands.add_parser('volume')
+    integral.add_argument('model', type=Path)
+    integral.add_argument('output', type=Path)
+    integral.add_argument('--absolute-nm3')
+    integral.add_argument('--relative')
+    integral.add_argument('--max-atan-terms', type=int, default=64)
+    integral.add_argument('--max-distance-bits', type=int, default=256)
     freeze = commands.add_parser('freeze-tetrahedron')
     freeze.add_argument('input', type=Path)
     freeze.add_argument('output', type=Path)
@@ -90,7 +98,21 @@ def main() -> int:
                 result = verify_transition(model, parent, cp, run)
             save_bundle(args.output, model, cp, run)
         else:
-            if args.command == 'box-topology':
+            if args.command == 'volume':
+                from .analytic_volume import volume_certificate
+                from .volume_request import VolumeRequest
+
+                request = VolumeRequest(
+                    None if args.absolute_nm3 is None else Fraction(args.absolute_nm3),
+                    None if args.relative is None else Fraction(args.relative),
+                )
+                certificate = volume_certificate(
+                    model,
+                    request,
+                    max_atan_terms=args.max_atan_terms,
+                    max_distance_bits=args.max_distance_bits,
+                )
+            elif args.command == 'box-topology':
                 from .box_topology import single_ball_box
 
                 certificate = single_ball_box(model)
@@ -105,7 +127,7 @@ def main() -> int:
                 json.dump(certificate, stream, indent=2, allow_nan=False)
                 stream.write('\n')
         print(json.dumps(result, sort_keys=True, allow_nan=False))
-    except (ValueError, TypeError, OverflowError, OSError) as exc:
+    except (ValueError, TypeError, OverflowError, ZeroDivisionError, OSError) as exc:
         print(f'Reference validation failed: {exc}', file=sys.stderr)
         return 2
     return 0

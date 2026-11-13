@@ -29,9 +29,46 @@ def point(
     return scalar(values[0]), scalar(values[1]), scalar(values[2])
 
 
+_MAX_INTEGER_DIGITS = 20000
+
+
+def _integer_text(value: int) -> str:
+    """Encode bounded exact integers without changing Python's global guard."""
+    negative = value < 0
+    value = abs(value)
+    # Reject grossly oversized operands before quadratic decimal conversion.
+    if value.bit_length() > 4 * _MAX_INTEGER_DIGITS:
+        raise ValueError('Exact integer codec budget exceeded')
+    chunks = []
+    while value:
+        value, remainder = divmod(value, 10**9)
+        chunks.append(remainder)
+    digits = (
+        str(chunks[-1]) + ''.join(f'{c:09d}' for c in reversed(chunks[:-1]))
+        if chunks
+        else '0'
+    )
+    if len(digits) > _MAX_INTEGER_DIGITS:
+        raise ValueError('Exact integer codec budget exceeded')
+    return '-' + digits if negative else digits
+
+
+def _parse_integer(value: str) -> int:
+    """Parse canonical integer chunks within an explicit per-scalar budget."""
+    negative = value.startswith('-')
+    digits = value[1:] if negative else value
+    if len(digits) > _MAX_INTEGER_DIGITS:
+        raise ValueError('Exact integer codec budget exceeded')
+    result = 0
+    for start in range(0, len(digits), 9):
+        chunk = digits[start : start + 9]
+        result = result * 10 ** len(chunk) + int(chunk)
+    return -result if negative else result
+
+
 def encode_scalar(value: Fraction) -> list[str]:
     """Encode an exact scalar without JSON floating-point conversion."""
-    return [str(value.numerator), str(value.denominator)]
+    return [_integer_text(value.numerator), _integer_text(value.denominator)]
 
 
 def decode_scalar(value: object) -> Fraction:
@@ -42,7 +79,7 @@ def decode_scalar(value: object) -> Fraction:
         isinstance(v, str) and re.fullmatch(r'-?(0|[1-9][0-9]*)', v) for v in value
     ):
         raise ValueError('Invalid rational integer encoding')
-    numerator, denominator = map(int, value)
+    numerator, denominator = map(_parse_integer, value)
     if denominator <= 0:
         raise ValueError('Denominator must be positive')
     result = Fraction(numerator, denominator)

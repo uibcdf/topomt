@@ -1,0 +1,2482 @@
+{
+  "schema": "topomt.reference-validator.analytic-volume-pilot/1",
+  "owner": "uibcdf/topomt#76",
+  "scope": "P1 total-volume precision feasibility for strictly contained singleton/pair clusters; no general topology, boundary clipping or P5 per-region qualification",
+  "profiles": [
+    {
+      "name": "unit_ball_k8",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "783e07fd6ac9e323768af95b3148f167de4099844cc6fbe391d754f3a87d6d67",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "2",
+          "1"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "256"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 4*pi/3"
+    },
+    {
+      "name": "unit_ball_k16",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "783e07fd6ac9e323768af95b3148f167de4099844cc6fbe391d754f3a87d6d67",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "128"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "65536"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 4*pi/3"
+    },
+    {
+      "name": "unit_ball_k24",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "783e07fd6ac9e323768af95b3148f167de4099844cc6fbe391d754f3a87d6d67",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "32768"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 4*pi/3"
+    },
+    {
+      "name": "unit_ball_k32",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "783e07fd6ac9e323768af95b3148f167de4099844cc6fbe391d754f3a87d6d67",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "8388608"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "4294967296"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 4*pi/3"
+    },
+    {
+      "name": "disjoint_balls_k8",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "46b645ede6b36c4a970381a7df8c225de375be15d17f5059b50e50293fc27603",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "2",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "2",
+          "1"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "256"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 8*pi/3"
+    },
+    {
+      "name": "disjoint_balls_k16",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "46b645ede6b36c4a970381a7df8c225de375be15d17f5059b50e50293fc27603",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "2",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "128"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "65536"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 8*pi/3"
+    },
+    {
+      "name": "disjoint_balls_k24",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "46b645ede6b36c4a970381a7df8c225de375be15d17f5059b50e50293fc27603",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "2",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "32768"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 8*pi/3"
+    },
+    {
+      "name": "disjoint_balls_k32",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "46b645ede6b36c4a970381a7df8c225de375be15d17f5059b50e50293fc27603",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "2",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "8388608"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "4294967296"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 8*pi/3"
+    },
+    {
+      "name": "nested_coincident_balls_k8",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "feeb5912516f7821c9ed2e827cd1d81e8f57f065eabaeaec8d899811ce9267e4",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "2",
+          "1"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "256"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 32*pi/3"
+    },
+    {
+      "name": "nested_coincident_balls_k16",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "feeb5912516f7821c9ed2e827cd1d81e8f57f065eabaeaec8d899811ce9267e4",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "128"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "65536"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 32*pi/3"
+    },
+    {
+      "name": "nested_coincident_balls_k24",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "feeb5912516f7821c9ed2e827cd1d81e8f57f065eabaeaec8d899811ce9267e4",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "32768"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 32*pi/3"
+    },
+    {
+      "name": "nested_coincident_balls_k32",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "feeb5912516f7821c9ed2e827cd1d81e8f57f065eabaeaec8d899811ce9267e4",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "8388608"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "4294967296"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 32*pi/3"
+    },
+    {
+      "name": "rational_pair_k8",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "87cf52bcd00f6eb0172e5a4abd76fa64f0167b117f250144ba6476828279a42c",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "2",
+          "1"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "256"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 9*pi/4"
+    },
+    {
+      "name": "rational_pair_k16",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "87cf52bcd00f6eb0172e5a4abd76fa64f0167b117f250144ba6476828279a42c",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "128"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "65536"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 9*pi/4"
+    },
+    {
+      "name": "rational_pair_k24",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "87cf52bcd00f6eb0172e5a4abd76fa64f0167b117f250144ba6476828279a42c",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "32768"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 9*pi/4"
+    },
+    {
+      "name": "rational_pair_k32",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "87cf52bcd00f6eb0172e5a4abd76fa64f0167b117f250144ba6476828279a42c",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "8388608"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "4294967296"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - 9*pi/4"
+    },
+    {
+      "name": "irrational_pair_k8",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "62a6f26c927c5b1135c8976e6002e24835bb392df0c0cc7c94b91eba2dd51cc7",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "2",
+          "1"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "256"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - (4/3+5*sqrt(2)/6)*pi"
+    },
+    {
+      "name": "irrational_pair_k16",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "62a6f26c927c5b1135c8976e6002e24835bb392df0c0cc7c94b91eba2dd51cc7",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "128"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "65536"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - (4/3+5*sqrt(2)/6)*pi"
+    },
+    {
+      "name": "irrational_pair_k24",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "62a6f26c927c5b1135c8976e6002e24835bb392df0c0cc7c94b91eba2dd51cc7",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "32768"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - (4/3+5*sqrt(2)/6)*pi"
+    },
+    {
+      "name": "irrational_pair_k32",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "62a6f26c927c5b1135c8976e6002e24835bb392df0c0cc7c94b91eba2dd51cc7",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "8388608"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "4294967296"
+        ]
+      },
+      "max_atan_terms": 64,
+      "max_distance_bits": 256,
+      "expected_precision": "resolved",
+      "independent_reference": "512 - (4/3+5*sqrt(2)/6)*pi"
+    },
+    {
+      "name": "empty_exact_zero_error",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "05a1420ad84d256f130ea4958a85f9cf0f1037780ad848630e5617c3e9e67296",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": []
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "0",
+          "1"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": null
+      },
+      "max_atan_terms": 0,
+      "max_distance_bits": 0,
+      "expected_precision": "resolved",
+      "independent_reference": "512 exactly"
+    },
+    {
+      "name": "stopped_irrational_pair",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "62a6f26c927c5b1135c8976e6002e24835bb392df0c0cc7c94b91eba2dd51cc7",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "2361183241434822606848"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "1208925819614629174706176"
+        ]
+      },
+      "max_atan_terms": 0,
+      "max_distance_bits": 0,
+      "expected_precision": "unresolved",
+      "independent_reference": "512 - (4/3+5*sqrt(2)/6)*pi"
+    },
+    {
+      "name": "unit_ball_zero_error",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "783e07fd6ac9e323768af95b3148f167de4099844cc6fbe391d754f3a87d6d67",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "0",
+          "1"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": null
+      },
+      "max_atan_terms": 4,
+      "max_distance_bits": 4,
+      "expected_precision": "unresolved",
+      "independent_reference": "512 - 4*pi/3"
+    }
+  ]
+}
