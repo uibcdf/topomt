@@ -45,6 +45,25 @@ def main() -> int:
     freeze.add_argument('input', type=Path)
     freeze.add_argument('output', type=Path)
     freeze.add_argument('--probe-angstroms', type=float, required=True)
+    hull_source = commands.add_parser('freeze-hull-source')
+    hull_source.add_argument('input', type=Path)
+    hull_source.add_argument('output', type=Path)
+    hull = commands.add_parser('hull')
+    hull.add_argument('source', type=Path)
+    hull.add_argument('output', type=Path)
+    clipped = commands.add_parser('clip-hull')
+    clipped.add_argument('source', type=Path)
+    clipped.add_argument('hull', type=Path)
+    clipped.add_argument('output', type=Path)
+    clipped.add_argument('--lower-nm', nargs=3, required=True)
+    clipped.add_argument('--upper-nm', nargs=3, required=True)
+    hull_check = commands.add_parser('verify-hull')
+    hull_check.add_argument('source', type=Path)
+    hull_check.add_argument('certificate', type=Path)
+    for hull_command in (hull, clipped, hull_check):
+        hull_command.add_argument('--max-centers', type=int, default=128)
+        hull_command.add_argument('--max-facets', type=int, default=192)
+        hull_command.add_argument('--max-plane-triples', type=int, default=1200000)
     start = commands.add_parser('start')
     start.add_argument('model', type=Path)
     start.add_argument('output', type=Path)
@@ -62,6 +81,46 @@ def main() -> int:
     saved.add_argument('--parent', type=Path)
     args = parser.parse_args()
     try:
+        if args.command == 'freeze-hull-source':
+            from .receiving import freeze_centers
+
+            source = freeze_centers(args.input)
+            with args.output.open('x') as stream:
+                json.dump(source.to_record(), stream, indent=2, allow_nan=False)
+                stream.write('\n')
+            print(json.dumps({'source_sha256': source.digest}))
+            return 0
+        if args.command in {'hull', 'clip-hull', 'verify-hull'}:
+            from .hull_model import CenterSource, HullLimits
+            from .verify.center_hull import verify_hull
+
+            source = CenterSource.from_record(_read(args.source))
+            limits = HullLimits(
+                args.max_centers, args.max_facets, args.max_plane_triples
+            )
+            if args.command == 'verify-hull':
+                certificate = _read(args.certificate)
+            else:
+                from .center_hull import clip_certificate, hull_certificate
+                from .model import Box, point
+
+                if args.command == 'hull':
+                    certificate = hull_certificate(source, limits=limits)
+                else:
+                    box = Box(
+                        point([Fraction(v) for v in args.lower_nm]),
+                        point([Fraction(v) for v in args.upper_nm]),
+                    )
+                    certificate = clip_certificate(
+                        source, _read(args.hull), box, limits=limits
+                    )
+            result = verify_hull(source, certificate, limits=limits)
+            if args.command != 'verify-hull':
+                with args.output.open('x') as stream:
+                    json.dump(certificate, stream, indent=2, allow_nan=False)
+                    stream.write('\n')
+            print(json.dumps(result, sort_keys=True, allow_nan=False))
+            return 0
         if args.command == 'freeze-tetrahedron':
             from .receiving import freeze_tetrahedron
 

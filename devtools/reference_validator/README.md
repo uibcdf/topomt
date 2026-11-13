@@ -196,3 +196,34 @@ General clipped/multi-region precision qualification remains pending.
 The exact scalar codec admits at most 20,000 decimal digits per numerator or
 denominator and keeps Python's global conversion guard unchanged. This supports
 the tested maximal-refinement certificate; larger records are explicitly rejected.
+
+## Exact source hulls and geometric clipping
+
+```bash
+python -m devtools.reference_validator freeze-hull-source INPUT.json SOURCE.json
+python -m devtools.reference_validator hull SOURCE.json HULL.json
+python -m devtools.reference_validator verify-hull SOURCE.json HULL.json
+python -m devtools.reference_validator clip-hull SOURCE.json HULL.json CLIP.json --lower-nm 0 -2 -2 --upper-nm 2 2 2
+```
+
+The immutable center-only source retains units, original row/frame/file identity
+and exact coordinates. Its hull is independent of probe/radii. Incremental exact
+construction proposes supporting planes; the saved checker independently proves
+boundedness and exhaustive vertex/source equality. Exact box clipping retains
+empty, point, edge, face and full-dimensional outcomes. Returned geometric
+volume is not probe-accessible volume; physical free topology is not computed.
+
+See the [proof, receiving and scope](../../devguide/DFND/reference_validator_hull_checkpoint.md).
+This separate domain route does not yet extend the earlier box/tetrahedron
+steric Model or its complete partition engine. All original atoms remain in
+the later physical question; this center-hull stage consumes only coordinates.
+
+Capture the [frozen hull protocol](../../devguide/evidence/reference_validator_hulls_v1/protocol.json)
+under one CPU affinity and external parent limits with
+`python -m devtools.reference_validator.capture_hulls PROTOCOL.json NEW_DIRECTORY`.
+The default schedules only small controls. `--original-case NAME` or
+`--all-originals` selects original inputs, always sequentially. Each worker has
+30 CPU seconds, a 40-second wall deadline and a 2 GiB address cap. A stop remains
+unresolved; no geometric empty result is inferred. The pilot limits source count
+to 128, facets to 192 and plane triples to 1,200,000 per enumeration. General
+many-atom free regions and region-assigned precision remain pending.

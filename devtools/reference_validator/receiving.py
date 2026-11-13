@@ -8,7 +8,48 @@ import hashlib
 import json
 from pathlib import Path
 
+from .hull_model import CenterSource
 from .model import Atom, Model, Tetrahedron, point, scalar
+
+
+def freeze_centers(path: Path) -> CenterSource:
+    """Freeze original coordinates as an exact nm center-only proof source.
+
+    Parameters
+    ----------
+    path : Path
+        Original JSON case with its integrity-bearing coordinate quantity record.
+
+    Returns
+    -------
+    CenterSource
+        Exact normalized binary64 centers, original row IDs and input hash.
+        Radii/probe are not consumed by a center-hull proof. This is not a
+        molecular model, free-volume receiving or fresh DFND input comparison.
+
+    Raises
+    ------
+    ValueError, TypeError
+        Record, coordinates or input/work representation is invalid.
+    pyunitwizard.record.RecordError
+        The owning quantity codec rejects corrupted/incompatible coordinates.
+    """
+    import pyunitwizard as puw
+    from pyunitwizard import QuantityRecord
+
+    from .storage import read_record_with_digest
+
+    data, digest = read_record_with_digest(path)
+    quantity = QuantityRecord.from_dict(data['coordinates']).to_quantity(
+        field='coordinates', unit='nm'
+    )
+    coordinates = puw.get_value(quantity, to_unit='nm', value_type=list, dtype=float)
+    return CenterSource(
+        tuple(point(row) for row in coordinates),
+        tuple(range(len(coordinates))),
+        digest,
+        interpretation='received_binary64_nm',
+    )
 
 
 def freeze_tetrahedron(path: Path, *, probe_angstroms: float) -> Model:
