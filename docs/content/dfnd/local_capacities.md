@@ -86,6 +86,14 @@ under [#181](https://github.com/uibcdf/topomt/issues/181); this observation alon
 does not identify a capacity-solver error. Do not interpret those candidates
 as certified physical free regions.
 
+The later [joint six-case diagnosis](../benchlab/synthetic/six_case_review.md#a-concrete-explanation-of-the-tube-candidates)
+recomputes the stored local values and identifies nonlocal blocking atoms for
+all 30 narrow-tube resident centers at 2.5 Å and the wide-tube center at 5 Å.
+It explains those point observations without changing either operator.
+A blocked local maximizer does not by itself exclude another all-atom free point
+in the cell: point checks, complete carrier exclusion and connectivity retain
+different proof obligations. Public qualification remains #181.
+
 For an exact all-atom-valid path, any point of the path inside a closed cell
 implies that cell's exact local residence maximum is at least $p$. This
 {ref}`conditional implication <residence-and-paths>`

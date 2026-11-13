@@ -1,5 +1,6 @@
 """Point diagnostics must not certify an entire local DFND component."""
 
+import json
 from copy import deepcopy
 from pathlib import Path
 from types import SimpleNamespace
@@ -66,6 +67,13 @@ def test_nonlocal_atom_blocks_a_locally_clear_point_without_mutating_evidence():
     assert row['local_capacity_residual'] == pytest.approx(0)
     assert row['center_in_support'] is True
     assert row['point_status'] == 'blocked'
+    # A different point in this authored carrier is clear. Rejecting its
+    # stored local center cannot by itself justify discarding the whole cell.
+    alternative = np.array([0.1, 0.1, 0.5])
+    coordinates = puw.get_value(topo.input_context.coordinates, to_unit='nm')
+    radii = puw.get_value(topo.input_context.radii, to_unit='nm')
+    assert alternative.min() > 0 and alternative.sum() < 1
+    assert (np.linalg.norm(coordinates - alternative, axis=1) - radii).min() > 0.2
     assert result['component_existence'] == 'not_determined_by_point_checks'
     assert result['unexamined_connector_component_ids'] == ['WET-8']
     assert topo.dfnd.raw == before
@@ -83,11 +91,12 @@ def test_clear_point_retains_only_its_point_guarantee():
 def test_quantity_policy_and_nonidentity_source_maps_preserve_the_diagnosis():
     topo = authored_observation()
     reference = inspect_residence_witnesses(topo)
-    topo.input_context.coordinates = puw.convert(
-        topo.input_context.coordinates, to_unit='pm'
-    )
-    topo.input_context.radii = puw.convert(topo.input_context.radii, to_unit='pm')
-    result = inspect_residence_witnesses(topo)
+    with puw.context(standard_units=['pm', 'fs', 'radians']):
+        topo.input_context.coordinates = puw.convert(
+            topo.input_context.coordinates, to_unit='pm'
+        )
+        topo.input_context.radii = puw.convert(topo.input_context.radii, to_unit='pm')
+        result = inspect_residence_witnesses(topo)
     assert result['witnesses'] == reference['witnesses']
     assert result['length_unit'] == 'nm'
     assert result['witnesses'][0]['source_atom_indices'] == [90, 4, 30, 15]
@@ -154,3 +163,18 @@ def test_frozen_public_exclusion_profiles_expose_nonlocal_blocked_centers(
     assert max(abs(row['local_capacity_residual']) for row in result['witnesses']) < (
         1e-12
     )
+    # Historical capture uses QuantityRecord unit metadata; reading it with the
+    # same frozen geometry preserves its original result identity and meaning.
+    captured = json.loads(
+        (directory / 'artifacts' / f'{case}_v1/native_observations.json').read_text()
+    )
+    old_raw = next(
+        r['raw'] for r in captured['probes'] if r['probe_angstroms'] == probe
+    )
+    old_view = SimpleNamespace(
+        dfnd=SimpleNamespace(raw=old_raw), input_context=topo.input_context
+    )
+    old = inspect_residence_witnesses(old_view)
+    assert old['result_key'] == old_raw['parameters']['result_key']
+    assert len(old['witnesses']) == count
+    assert all(r['point_status'] == 'blocked' for r in old['witnesses'])

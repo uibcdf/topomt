@@ -5,6 +5,11 @@ leaking through its sides? This wider companion to the narrow tube lets us
 separate a successful channel observation from incomplete physical-boundary
 receiving and the limits of local candidates.
 
+The [joint six-case review](../six_case_review.md#a-concrete-explanation-of-the-tube-candidates)
+adds a source-bound diagnosis of the 5 Å candidate: nonlocal atom 24 blocks its
+stored residence center. Its local value recomputes correctly; complete-hull
+exclusion still comes from the independent cover, and #181 remains open.
+
 **Start with [the system](system.ipynb)**, then read [DFND observations](dfnd.ipynb).
 The notebooks run independently in fresh kernels. The website keeps long code
 inputs expandable, with explanations, tables and figures visible by default.

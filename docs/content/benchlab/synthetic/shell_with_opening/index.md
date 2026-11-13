@@ -3,6 +3,9 @@
 Does removing a cap open a path through the same atomic wall? This exact
 66-atom subset preserves its parent coordinates, radii and source atom identities.
 
+The [joint six-case review](../six_case_review.md) adds current source receiving
+while preserving the parent/child references and original notebook outputs.
+
 **Start here:** [current public study v2](public_topography_v2.ipynb), then use
 [the system](system.ipynb) and [original DFND study](dfnd.ipynb) for their
 frozen predictions and dated observations. The [complete v2 download](../index.md#download-and-run-the-current-reader-stage)
@@ -141,8 +144,8 @@ Later physical and numerical deliveries qualify separate hull patches, supported
 paths and conditional volumes on these inputs. General native-path validity,
 exact aperture areas, the full synthetic inventory and molecular characterization
 retain their own gates under #76 and the relevant support/interface owners.
-Development now stays with these three inputs to deepen public representation,
-physical mouth/path connectivity and volume references before adding the tube.
+The [joint six-case review](../six_case_review.md) now includes both tubes and
+the dumbbell, with explicit remaining scientific owners and correction order.
 The [public receiving audit](topography.md) checks the actual `Pocket`, child
 `Mouth`, `Void` and empty registry on this same atomic model.
 Original-method comparisons can be added separately, after

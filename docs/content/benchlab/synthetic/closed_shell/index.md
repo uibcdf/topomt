@@ -3,6 +3,9 @@
 When does a sampled atomic wall become impermeable to a probe? The same
 72 balls expose small-probe access, enclosure and eventual finite-hull exclusion.
 
+The [joint six-case review](../six_case_review.md) retains these physical
+references and adds current public/support and local-center receiving.
+
 **Start here:** [current public study v2](public_topography_v2.ipynb), then use
 [the system](system.ipynb) and [original DFND study](dfnd.ipynb) for their
 frozen predictions and dated observations. The [complete v2 download](../index.md#download-and-run-the-current-reader-stage)

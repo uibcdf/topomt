@@ -83,3 +83,76 @@ as an oracle. At positive probes extra local candidates also need diagnosis:
 associations for other candidates; do not infer side-wall holes or all physical
 3D components from them. Wider paths remain #76; budget #180 and numerical
 boundary availability #184 are separate. Keep both original evidence profiles.
+
+## Residence-point diagnosis and current public receiving — 2026-11-12
+
+The [six-case review](../../docs/content/benchlab/synthetic/six_case_review.md)
+adds 19 actual public profiles at source
+`1510e007d96da8a3c569f626a1b263fb59a54533`, with original case/reference/download
+bytes preserved. The [protocol](../../docs/content/benchlab/synthetic/artifacts/six_case_review_v1/protocol.json),
+[summary](../../docs/content/benchlab/synthetic/artifacts/six_case_review_v1/summary.json)
+and [full compressed capture](../../docs/content/benchlab/synthetic/artifacts/six_case_review_v1/receiving.zip)
+retain the exact input, maps, local query, current raw/typed/public correspondence,
+point diagnostics, actual attribution and execution identities. No native
+scientific or promotion code changed.
+
+The causal route is now explicit:
+
+1. `tetrahedron_residence_radius_batch` evaluates its four local atoms. In the
+   two excluded tube profiles every recorded resident center is within its
+   carrier under the declared barycentric tolerance, and its local clearance
+   recomputes with no residual at captured precision.
+2. Narrow 2.5 Å has 24 resident centers in WET-1 and six in WET-2. **All 30 are
+   blocked by nonlocal atoms.** Tetrahedron 64, source vertices [4,67,76,77],
+   has local clearance 7.016483499 Å and all-atom clearance -0.358693175 Å at
+   its stored center; source atom 31 is the nearest blocker.
+3. Wide 5 Å has one resident center. Tetrahedron 115, source vertices
+   [2,45,56,57], has local clearance 5.299843470 Å but all-atom clearance
+   -1.575928567 Å; source atom 24 blocks it.
+4. Graph admission still uses the declared local capacities/policies. The narrow
+   resident banks enter the one-link compatibility family; catalog refinement
+   classifies them OpenConcavity and Groove. `dfnd_to_topography` promotes these
+   two parents and their MOU-1/MOU-2 links without an all-atom free-carrier test.
+   WET-3 is connector-only `surface_concavity` and remains native-only. The wide
+   resident bank becomes OpenConcavity/Mouth. Classification confidence does
+   not supply the missing physical guarantee.
+
+This diagnoses the stored-point discrepancy, **not** a global completeness or
+accuracy proof for the local solver. The original whole-hull cover remains the
+independent reason no physical free point can exist in those two controls.
+Positive shell/tube/dumbbell profiles contain both clear and blocked stored
+centers; their independently established named regions remain valid.
+
+### Qualification decision still required
+
+The next implementation must explicitly distinguish local-candidate reporting
+from an admitted all-atom physical guarantee while preserving raw/local supports
+and source history. The existing proposed empty-public xfail remains a proposed
+policy, not an independent reference for the local bank.
+
+Do not merely remove every tetrahedron whose stored local center collides. A
+different point can remain physically free; the diagnostic's authored control
+exhibits that distinction. Conversely, a clear center does not establish region
+connectivity, mouth attachment, morphology or a valid path. A complete-cover
+certificate or another admitted complete qualification needs its own bounded,
+recoverable evidence and unresolved state. Coordinate the public support seam
+with #60 rather than redefining the local operators silently.
+
+The finding remains `needs_review`, and #181 stays active. No general DFND
+failure or paper limitation is established. Point diagnosis is delivered;
+qualification policy and its implementation remain this issue's next work.
+
+### Guards and resources
+
+- `tests/test_benchlab_residence_witnesses.py` covers nonlocal blocking,
+  alternative clear points, local residuals, source maps, equivalent units,
+  numerical/support ambiguity, empty banks, work refusal and both actual public
+  exclusion profiles. The module first failed for the missing diagnostic before
+  implementation; all eight cases pass at this checkpoint.
+- `tests/test_benchlab_six_case_review.py::test_review_receipt_retains_frozen_models_and_actual_public_profiles`
+  protects the complete archived capture, model hashes and 19-profile review
+  coverage; it does not certify all physical objects.
+- One logical CPU, one native worker/thread, 4 GiB address-space ceiling and
+  90-second deadline. Actual full capture: 17.02 s, peak 336484 KiB RSS. Earlier
+  Slurm discovery was unavailable; memory pressure was zero and about 53 GiB
+  available before this small direct run. No shared environment/native rebuild.

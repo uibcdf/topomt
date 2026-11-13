@@ -62,7 +62,7 @@ from installed/public qualification and wider adoption under #16/#56.
 | PocketSCP | [#124](https://github.com/uibcdf/topomt/discussions/124) | Research-method intake; implementation and scope to assess. |
 | SurfDock | [#125](https://github.com/uibcdf/topomt/discussions/125) | Related project; domain ownership needs assessment. |
 | Zeo++ | [#152](https://github.com/uibcdf/topomt/discussions/152) | Candidate periodic pore-network/accessibility reference; documentary assessment queued in [#167](https://github.com/uibcdf/topomt/issues/167). Compare definitions before any isolated-system benchmark or provider integration. |
-| DFND | [#130](https://github.com/uibcdf/topomt/discussions/130) | Native-method scientific conversation; current work is synthetic-first. |
+| DFND | [#130](https://github.com/uibcdf/topomt/discussions/130) | Native-method scientific conversation; [six-case source review](../docs/content/benchlab/synthetic/six_case_review.md), with public qualification #181 and synthetic-first development. |
 
 Historical CASTp auxiliary repositories share the CASTp/CASTpFold conversation
 #73; their relationship to exact deployed server internals remains unqualified.
@@ -76,7 +76,7 @@ source link and its dated assessment scope. Unassessed leads stay Candidate.
 | PocketPicker bound/unbound collection | [#126](https://github.com/uibcdf/topomt/discussions/126) | Historical paired ligand-site evaluation collection. |
 | COACH420 collection | [#127](https://github.com/uibcdf/topomt/discussions/127) | Ligand-site detection/ranking benchmark resource. |
 | TopoMT archived CASTpFold panel | [#128](https://github.com/uibcdf/topomt/discussions/128) | Original-provider output reference collection. |
-| DFND synthetic collection and system laboratory | [#129](https://github.com/uibcdf/topomt/discussions/129) | Controlled topography studies and independent geometric references. |
+| DFND synthetic collection and system laboratory | [#129](https://github.com/uibcdf/topomt/discussions/129) | Controlled topography studies and independent geometric references; [19-profile six-case disposition](../docs/content/benchlab/synthetic/six_case_review.md) preserves all earlier case evidence. |
 | DFND comparative findings and limitations | [#154](https://github.com/uibcdf/topomt/discussions/154) | Scoped advantage/limitation cards linked to case evidence and owning issues; lifecycle metadata is checked separately from scientific validity. |
 
 Use the [benchmark catalogue](benchmark_catalog.md) for existing source and

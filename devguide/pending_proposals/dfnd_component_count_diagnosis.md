@@ -1,7 +1,7 @@
 ---
 summary: Review the historical dumbbell component-count monotonicity diagnosis.
 issue: uibcdf/topomt#188
-status: open
+status: active
 opened: 2026-11-11
 closed:
 severity: medium
@@ -54,3 +54,20 @@ Provide a reference-scoped disposition of the five domains and revise the test/
 documentation claim accordingly. Any actual defect needs an independently owned
 regression/fix; legitimate fragmentation must not be suppressed. Reconcile the
 finding card/hub/lifecycle/current case and report, preserving historical evidence.
+
+## Joint-review disposition — 2026-11-12
+
+The [six-case review](../../docs/content/benchlab/synthetic/six_case_review.md)
+preserves the independently referenced 1.4/2.2/6 Å cases and explicitly retains
+this separate 2.0 Å question. The misleading guard name is corrected to
+`test_retained_dumbbell_domain_counts_increase_with_probe`; its numerical
+assertion remains unchanged. The module introduction now distinguishes retained
+diagnoses from independently established physical failures. No scientific
+operator or domain-count rule is changed.
+
+The original five-support physical disposition remains pending here. Before
+comparing it with quantity-aware public receiving, inspect the legacy test's
+direct-array/scalar internal-unit convention, numerical epsilon and exact source
+maps; identical display IDs or generator names do not establish matched context.
+The joint review does not make all domains physical or spurious and does not
+close this issue. Finding status remains `needs_review`.

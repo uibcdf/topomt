@@ -1,5 +1,23 @@
 # TopoMT development status
 
+## Joint six-case DFND review — 2026-11-12
+
+The [public disposition](../docs/content/benchlab/synthetic/six_case_review.md)
+receives 19 profiles through the actual public route at `1510e00`, with all
+existing native/public support, partition, coast, depth and parent checks passing.
+The original 355 non-Markdown case/download files remain byte-identical. Full
+observations and source/dependency/native identities are retained under
+`docs/content/benchlab/synthetic/artifacts/six_case_review_v1/`; execution used
+one CPU, 17.02 s and peak 336484 KiB RSS.
+
+The #181 diagnosis now identifies nonlocal blocking for all 30 narrow 2.5 Å
+resident centers and the single wide 5 Å center, with correctly recomputed local
+values. It changes no native operator or promotion and cannot replace complete
+carrier/path proofs. Public qualification is the next #181 decision; budget
+#180, numerical availability #184 and five-domain diagnosis #188 remain open.
+Earlier finite reference/volume resolutions retain their scope. No new case,
+protein/provider phase, installed package or hosted deployment is qualified.
+
 ## Native binding-interface catalogue proposal — 2026-11-12
 
 The maintainer requests the [native catalogue and detailed cross-component plan](binding_interface_native_catalogue_plan.md)

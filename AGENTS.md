@@ -69,6 +69,14 @@ fragment. Preserve earlier source/evidence scopes and all prior artifacts;
 new unit delivery does not resolve those scientific questions or select another
 geometry, original provider/server run or protein phase.
 
+DFND review checkpoint (2026-11-12): the bounded six-case disposition under
+#187 receives 19 actual public profiles and preserves original case evidence.
+Use `docs/content/benchlab/synthetic/six_case_review.md` and the current laboratory
+checkpoint. Next address #181's physical public qualification, retaining local
+operators/supports and the distinction between point checks and complete
+carrier/path proofs. Boundary #180/#184, five-domain diagnosis #188 and broader
+#60/#76/#16 retain their scopes; this review selects no new geometry or protein.
+
 DFND method documentation lives in `docs/content/dfnd/`. Changes to operators,
 query policies, catalog promotion, units or physical interpretation must review
 the corresponding chapters, derivations and worked example in the same delivery.

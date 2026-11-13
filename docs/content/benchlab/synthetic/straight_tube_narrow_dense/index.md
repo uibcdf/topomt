@@ -4,6 +4,11 @@ Can a probe travel through a tube even after its straight axis becomes blocked?
 This many-cell atomic system tests continuous passage, two physical end openings
 and the interpretation of graph-derived channels and paths.
 
+The [joint six-case review](../six_case_review.md#a-concrete-explanation-of-the-tube-candidates)
+adds a source-bound diagnosis: all 30 resident centers at 2.5 Å are blocked by
+nonlocal atoms although their stored four-atom clearances recompute correctly.
+This explains those centers; public physical qualification remains #181.
+
 **Read [the system](system.ipynb) first**, then [DFND observations](dfnd.ipynb).
 Both notebooks run independently in fresh kernels from this directory. They
 replay independent references and run actual public receiving without original

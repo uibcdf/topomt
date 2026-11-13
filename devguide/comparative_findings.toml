@@ -18,12 +18,12 @@ discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncom
 id = "tube-local-candidates-covered-hull"
 kind = "dfnd_limitation"
 status = "needs_review"
-summary = "At narrow 2.5 and wide 5 angstroms, local/public candidates survive independently covered finite hulls; support diagnosis and public qualification remain under review."
-scope = "Frozen 81-argon-ball straight_tube_narrow_dense model at 2.5 angstroms, source b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4. Also 77-ball straight_tube_wide_sparse at 5 angstroms, source 3ad9515019e722c0ccf4ade7a3024de4166e217e. Local three/four-atom operators are not all-atom certificates; positive-control additional candidates need support diagnosis, without a diagnosed solver defect or general failure claim."
+summary = "Pinned tube residence centers are blocked by nonlocal atoms despite correctly recomputed local values; public/all-atom qualification remains open."
+scope = "Frozen 81-argon-ball straight_tube_narrow_dense at 2.5 angstroms, original source b07a20ed0ee1533cc16a0b6e30ace73c2ab09ac4, and 77-ball straight_tube_wide_sparse at 5 angstroms, original source 3ad9515019e722c0ccf4ade7a3024de4166e217e. Source 1510e007d96da8a3c569f626a1b263fb59a54533 re-receives both public profiles and diagnoses all 31 stored resident centers. Point checks are not complete exclusion/path or solver-completeness proofs. Public qualification and positive-profile support interpretation remain open; no general failure claim."
 issue = "uibcdf/topomt#181"
-evidence = ["docs/content/benchlab/synthetic/straight_tube_narrow_dense/index.md", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/native_observations.json", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/reference_v2_verification.json", "devguide/pending_proposals/dfnd_tube_all_atom_receiving.md", "tests/test_tube_study.py", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/index.md", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/native_observations.json", "tests/test_wide_tube_study.py"]
+evidence = ["docs/content/benchlab/synthetic/straight_tube_narrow_dense/index.md", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/native_observations.json", "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/reference_v2_verification.json", "devguide/pending_proposals/dfnd_tube_all_atom_receiving.md", "tests/test_tube_study.py", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/index.md", "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/native_observations.json", "tests/test_wide_tube_study.py", "docs/content/benchlab/synthetic/six_case_review.md", "docs/content/benchlab/synthetic/artifacts/six_case_review_v1/summary.json", "docs/content/benchlab/synthetic/artifacts/six_case_review_v1/receiving.zip", "tests/test_benchlab_residence_witnesses.py"]
 owner = "TopoMT maintainers (LMMV/dprada)"
-reviewed_on = "2026-11-10"
+reviewed_on = "2026-11-12"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19533341"
 
 [[findings]]
@@ -118,12 +118,12 @@ discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncom
 id = "dumbbell-probe-fragmentation-diagnosis"
 kind = "dfnd_limitation"
 status = "needs_review"
-summary = "A probe-dependent native count increase alone does not diagnose a defect; the original five-domain physical interpretation needs review."
+summary = "Historical count-increase failure inference is withdrawn and the guard name corrected; the five-domain physical interpretation remains under review."
 scope = "Historical dumbbell two-versus-five native-domain observation at 1.4/2.0 angstroms. New frozen 94-ball references/source 17a4c9a521c89a64efb12ba339161e15c85d4ce0 establish one real named-anchor fragmentation event at 1.4/2.2, not every component at 2.0. No diagnosed overfragmentation or current paper limitation."
 issue = "uibcdf/topomt#188"
 evidence = ["docs/content/benchlab/synthetic/dumbbell/index.md", "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/reference_verification.json", "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/native_observations.json", "devguide/DFND/pathological_systems.md", "devguide/pending_proposals/dfnd_component_count_diagnosis.md", "tests/test_dfnd_pathological.py"]
 owner = "TopoMT maintainers (LMMV/dprada)"
-reviewed_on = "2026-11-11"
+reviewed_on = "2026-11-12"
 discussion_url = "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19536753"
 
 [[findings]]

@@ -3,6 +3,9 @@
 Can a probe fit inside a gap but fail to pass through its faces? Four equal
 atomic balls separate residence from access as we change only the probe radius.
 
+The [joint six-case review](../six_case_review.md) adds current source receiving
+and keeps physical patches, native links and public feature counts distinct.
+
 **Start here:** [current public study v2](public_topography_v2.ipynb), then use
 [the system](system.ipynb) and [original DFND study](dfnd.ipynb) for their
 frozen predictions and dated observations. The [complete v2 download](../index.md#download-and-run-the-current-reader-stage)
@@ -92,8 +95,9 @@ navigation or biological pocket accuracy. An exterior-link cluster is distinct
 from a collection of independently identified physical mouths. The new
 [boundary-connectivity certificate](boundary_connectivity.md) establishes four
 separate hull patches at 1.2 Å, while the current native result has one face
-cluster and the public `Percolating` has no `Mouth` children. This identifies
-physical-refinement work; it does not change the historical results. Report filtering
+cluster and the public `Percolating` has no `Mouth` children. This motivated
+the separate physical view now delivered under #151;
+compatibility grouping and historical results are preserved. Report filtering
 also changes what is displayed without changing the raw geometry.
 
 ## Inputs, results and reproducibility

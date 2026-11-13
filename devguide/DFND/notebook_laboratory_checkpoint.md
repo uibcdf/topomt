@@ -1,5 +1,24 @@
 # DFND notebook laboratory checkpoint
 
+## Joint review and local-candidate diagnosis — 2026-11-12
+
+The [six-case disposition](../../docs/content/benchlab/synthetic/six_case_review.md)
+now receives 19 actual public profiles at `1510e007d96da8a3c569f626a1b263fb59a54533`.
+All existing public support/partition/relation checks pass; 355 original
+non-Markdown case/download files remain unchanged. Full observations, source
+and dependency/native identities, point diagnosis and resources are retained in
+`docs/content/benchlab/synthetic/artifacts/six_case_review_v1/`.
+
+The narrow 2.5 Å and wide 5 Å stored resident centers recompute locally but are
+blocked by nonlocal atoms. This explains those point observations; complete
+exclusion still comes from independent covers. Public physical qualification
+remains #181, the next scientific implementation decision. Keep #180/#184
+boundary availability, #188 five-domain interpretation and wider #60/#76/#16
+open. The joint review is a bounded disposition, not correction of those gates.
+No native operator/promotion, new geometry/provider, protein phase or installed
+qualification follows. Original references, notebooks and hosted/download
+receipts keep their scopes; current review-source publication is separate.
+
 ## Dumbbell delivered; joint review next — 2026-11-11
 
 Unit establishment #186 is complete. Hosted run 42981097024 serves source

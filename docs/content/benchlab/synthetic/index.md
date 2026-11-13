@@ -34,6 +34,7 @@ shell_with_opening/index
 straight_tube_narrow_dense/index
 straight_tube_wide_sparse/index
 dumbbell/index
+Joint six-case review <six_case_review>
 Public Topography receiving <public_topography>
 Supports and robustness <public_support_and_robustness>
 Comparison disposition <comparison_disposition>
@@ -137,11 +138,14 @@ build. Execution and scientific review are separate checks.
 
 ## Study sequence
 
-Current selection: the [dumbbell](dumbbell/index.md) under #186, explicitly
-chosen before the [joint six-case review](https://github.com/uibcdf/topomt/issues/187).
-This supersedes the earlier scheduling gate to fix the tubes first, while their
-#180/#181/#184/#76 profiles remain open. The new unit preserves all older evidence
-and does not claim complete scientific qualification.
+Current checkpoint (2026-11-12): the [joint six-case review](six_case_review.md)
+receives 19 source-bound public profiles after the dumbbell delivery. Its
+residence-point diagnosis explains nonlocal blocking in the tube exclusion
+controls. The next scientific work is public/all-atom qualification #181,
+then boundary budget #180 and numerical ordering #184; the independent
+five-domain diagnosis #188 and broader #76 remain open. Original evidence and
+all previous downloads are preserved. No further geometry or protein phase is
+selected by this review.
 The [public receiving audit](public_topography.md) follows their native results
 into `Topography`. The [stronger 0.2 Å wall cover](closed_shell/closure_at_0p2.md)
 resolves one earlier reference question. The [finite three-case acceptance](three_case_disposition.md) records delivered

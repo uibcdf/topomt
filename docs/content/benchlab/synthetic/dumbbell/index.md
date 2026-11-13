@@ -4,6 +4,10 @@ When can a probe fit in both chambers yet fail to move between them? This
 94-ball system follows communication and separation into DFND's native graph,
 its provisional hierarchy and the actual public `Topography`.
 
+The [joint six-case review](../six_case_review.md) retains the named-anchor and
+provisional-hierarchy conclusions, with current source receiving and explicit
+follow-up for physical hull availability and the separate five-domain diagnosis.
+
 **Read [the system](system.ipynb) first**, then [DFND observations](dfnd.ipynb).
 Both notebooks run independently in fresh kernels. The website keeps long code
 inputs expandable, with explanations, semantic tables and figures visible.

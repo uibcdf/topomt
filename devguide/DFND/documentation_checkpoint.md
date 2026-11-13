@@ -32,6 +32,18 @@ participant roles; its method example is executed. Current v2 reader/publication
 evidence is linked from the laboratory checkpoint. Wider #76/#60/#61 and installed #16/#58
 remain separate; historical pending statements below are not current findings.
 
+## Six-case receiving and local-capacity explanation — 2026-11-12
+
+The [joint review](../../docs/content/benchlab/synthetic/six_case_review.md)
+records 19 source-bound public profiles at `1510e00`, with original references
+and evidence preserved. The local-capacity chapter now links the all-atom
+stored-center diagnosis: nonlocal atoms block the two tube exclusion profiles'
+31 resident centers despite correctly recomputed four-atom values. Point checks
+do not prove complete carrier exclusion, connectivity or solver completeness;
+the independent covers retain their role. No mathematical operator or public
+promotion changed. #181 owns the next physical-qualification decision;
+#180/#184/#188/#76 and broader public/installed gates remain separate.
+
 ## Audit-driven correction and reader pass — #173
 
 Completion follow-up after `fc45997`: remaining zero-native-wall/fully-permeable

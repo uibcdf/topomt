@@ -175,6 +175,9 @@ a few are handled (see the next section). Pinned in `test_dfnd_pathological.py`.
   supports before reusing this observation as a current limitation; #187 owns
   the joint review and #188 this specific interpretation. Earlier wording
   called the increase intrinsically spurious; that inference is withdrawn.
+  The 2026-11-12 joint review renames the guard to
+  `test_retained_dumbbell_domain_counts_increase_with_probe`, retaining its
+  numerical observation while removing the misleading failure diagnosis.
 
 **Anisotropy / segmentation (more of disease 1)**
 - **Oblate slit void** → splits into 2 voids (ideal 1).

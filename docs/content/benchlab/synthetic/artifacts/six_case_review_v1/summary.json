@@ -1,0 +1,851 @@
+{
+  "schema": "topomt.benchlab.six-case-review-summary/1",
+  "issue": "uibcdf/topomt#187",
+  "source_revision": "1510e007d96da8a3c569f626a1b263fb59a54533",
+  "protocol_sha256": "17b6cab2e8379a66b3450fb35c28a00c92ff99c5dd4a57d9d2d2c9ac29507dc0",
+  "profile_count": 19,
+  "point_scope": "Stored local residence centers only. Blocked centers do not prove a whole carrier empty; clear centers do not certify connectivity or catalog morphology.",
+  "cases": [
+    {
+      "case": "regular_tetrahedron",
+      "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+      "observations_sha256": "9cb001cae5f7700f585b66cf9d9950ae6ac1b05c07c1deac439d02350e5a0700",
+      "profiles": [
+        {
+          "probe_angstroms": 1.2,
+          "source_atom_count": 4,
+          "tetrahedron_inventory": {
+            "wet_nodes": 1,
+            "dry_nodes": 0,
+            "total": 1
+          },
+          "wet_component_count": 1,
+          "resident_center_count": 1,
+          "point_status_counts": {
+            "clear": 1
+          },
+          "public_feature_types": {
+            "percolating": 1
+          },
+          "native_external_links": 1,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 4,
+            "query": {
+              "result_key": "result-e0f12e2fda8296ba7c1751d510843918dc19f18fe549a735fea2d04a31118690",
+              "probe_radius": 0.12,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 1.4,
+          "source_atom_count": 4,
+          "tetrahedron_inventory": {
+            "wet_nodes": 1,
+            "dry_nodes": 0,
+            "total": 1
+          },
+          "wet_component_count": 1,
+          "resident_center_count": 1,
+          "point_status_counts": {
+            "clear": 1
+          },
+          "public_feature_types": {
+            "void": 1
+          },
+          "native_external_links": 0,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 0,
+            "query": {
+              "result_key": "result-d70946c60f693f5eecff21b1995828a9e49d583a8361369c29189b0cab8a6867",
+              "probe_radius": 0.13999999999999999,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 1.7,
+          "source_atom_count": 4,
+          "tetrahedron_inventory": {
+            "wet_nodes": 0,
+            "dry_nodes": 1,
+            "total": 1
+          },
+          "wet_component_count": 0,
+          "resident_center_count": 0,
+          "point_status_counts": {},
+          "public_feature_types": {},
+          "native_external_links": 0,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 0,
+            "query": {
+              "result_key": "result-7f50a97422ba0a155e82d45ac543b4898d6bc2b9ca8e2e643da13f482fa4b32f",
+              "probe_radius": 0.16999999999999998,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": null,
+          "unexamined_connector_components": []
+        }
+      ]
+    },
+    {
+      "case": "closed_shell",
+      "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+      "observations_sha256": "43f30d9668b12bab6bcf4a09b7c81e02a05bd25355ab8d1dc3def1af09bf8b68",
+      "profiles": [
+        {
+          "probe_angstroms": 0.05,
+          "source_atom_count": 72,
+          "tetrahedron_inventory": {
+            "wet_nodes": 129,
+            "dry_nodes": 62,
+            "total": 191
+          },
+          "wet_component_count": 1,
+          "resident_center_count": 128,
+          "point_status_counts": {
+            "clear": 50,
+            "blocked": 78
+          },
+          "public_feature_types": {
+            "channel": 1,
+            "mouth": 10
+          },
+          "native_external_links": 10,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 13,
+            "query": {
+              "result_key": "result-1f476d5dc275746371d1d7240b9bf4db91f855219c277db8348fdeec9bff0e4e",
+              "probe_radius": 0.005,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 0.2,
+          "source_atom_count": 72,
+          "tetrahedron_inventory": {
+            "wet_nodes": 98,
+            "dry_nodes": 93,
+            "total": 191
+          },
+          "wet_component_count": 1,
+          "resident_center_count": 95,
+          "point_status_counts": {
+            "clear": 27,
+            "blocked": 68
+          },
+          "public_feature_types": {
+            "void": 1
+          },
+          "native_external_links": 0,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 0,
+            "query": {
+              "result_key": "result-a4a392d425319f34422ad62adc0fb308b375ef976b21b45d6a27e1caebd654e1",
+              "probe_radius": 0.02,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 1.4,
+          "source_atom_count": 72,
+          "tetrahedron_inventory": {
+            "wet_nodes": 33,
+            "dry_nodes": 158,
+            "total": 191
+          },
+          "wet_component_count": 1,
+          "resident_center_count": 33,
+          "point_status_counts": {
+            "blocked": 22,
+            "clear": 11
+          },
+          "public_feature_types": {
+            "void": 1
+          },
+          "native_external_links": 0,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 0,
+            "query": {
+              "result_key": "result-930bf2ef5c224f8bbdfa9f2ccb016d15021aa20f87052e335d162705d275c7ab",
+              "probe_radius": 0.13999999999999999,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 5.0,
+          "source_atom_count": 72,
+          "tetrahedron_inventory": {
+            "wet_nodes": 0,
+            "dry_nodes": 191,
+            "total": 191
+          },
+          "wet_component_count": 0,
+          "resident_center_count": 0,
+          "point_status_counts": {},
+          "public_feature_types": {},
+          "native_external_links": 0,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 0,
+            "query": {
+              "result_key": "result-bade5741acb748795fd2e8fd5bf19f06d4f9e12faf267eba9a0cd338ba4e79d8",
+              "probe_radius": 0.5,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": null,
+          "unexamined_connector_components": []
+        }
+      ]
+    },
+    {
+      "case": "shell_with_opening",
+      "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+      "observations_sha256": "43cd0d1120d92302a40d2dd0d3f53ffa92e88ee05df3c841e599d9597e80f163",
+      "profiles": [
+        {
+          "probe_angstroms": 1.4,
+          "source_atom_count": 66,
+          "tetrahedron_inventory": {
+            "wet_nodes": 35,
+            "dry_nodes": 138,
+            "total": 173
+          },
+          "wet_component_count": 1,
+          "resident_center_count": 35,
+          "point_status_counts": {
+            "blocked": 19,
+            "clear": 16
+          },
+          "public_feature_types": {
+            "pocket": 1,
+            "mouth": 1
+          },
+          "native_external_links": 1,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 1,
+            "query": {
+              "result_key": "result-ab93e341477c923fb287c33458b08fa08a41c526472f898ae153be8d32690b5e",
+              "probe_radius": 0.13999999999999999,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 3.0,
+          "source_atom_count": 66,
+          "tetrahedron_inventory": {
+            "wet_nodes": 9,
+            "dry_nodes": 164,
+            "total": 173
+          },
+          "wet_component_count": 1,
+          "resident_center_count": 9,
+          "point_status_counts": {
+            "blocked": 5,
+            "clear": 4
+          },
+          "public_feature_types": {
+            "void": 1
+          },
+          "native_external_links": 0,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 0,
+            "query": {
+              "result_key": "result-4bb9e1010898ffe6d2006e2cf39506e436dd7a683a96bdc1ce33c517efdcc1de",
+              "probe_radius": 0.3,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 5.0,
+          "source_atom_count": 66,
+          "tetrahedron_inventory": {
+            "wet_nodes": 0,
+            "dry_nodes": 173,
+            "total": 173
+          },
+          "wet_component_count": 0,
+          "resident_center_count": 0,
+          "point_status_counts": {},
+          "public_feature_types": {},
+          "native_external_links": 0,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 0,
+            "query": {
+              "result_key": "result-5a5111a75df690b0858fe0c3d33ba2e5393a51dfeb27bcb3a3f010417e0fabee",
+              "probe_radius": 0.5,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": null,
+          "unexamined_connector_components": []
+        }
+      ]
+    },
+    {
+      "case": "straight_tube_narrow_dense",
+      "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+      "observations_sha256": "dbac6d3b47861c2e73b80b4816347a3a6a1da1736801c8151de7d4b2adbf79f7",
+      "profiles": [
+        {
+          "probe_angstroms": 1.2,
+          "source_atom_count": 81,
+          "tetrahedron_inventory": {
+            "wet_nodes": 126,
+            "dry_nodes": 319,
+            "total": 445
+          },
+          "wet_component_count": 2,
+          "resident_center_count": 119,
+          "point_status_counts": {
+            "clear": 56,
+            "blocked": 63
+          },
+          "public_feature_types": {
+            "open_concavity": 1,
+            "mouth": 3,
+            "channel": 1
+          },
+          "native_external_links": 3,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "unresolved",
+            "reason": "face 17: arrangement work budget exhausted",
+            "n_patches": null,
+            "query": {
+              "result_key": "result-9164577d59e4c7d34495605244a3d0c3b552b6bc820524c345278f69a050fb28",
+              "probe_radius": 0.12,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 1.4,
+          "source_atom_count": 81,
+          "tetrahedron_inventory": {
+            "wet_nodes": 106,
+            "dry_nodes": 339,
+            "total": 445
+          },
+          "wet_component_count": 2,
+          "resident_center_count": 97,
+          "point_status_counts": {
+            "clear": 41,
+            "blocked": 56
+          },
+          "public_feature_types": {
+            "open_concavity": 1,
+            "mouth": 3,
+            "channel": 1
+          },
+          "native_external_links": 3,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "unresolved",
+            "reason": "face 17: arrangement work budget exhausted",
+            "n_patches": null,
+            "query": {
+              "result_key": "result-77066404a8598fc56b407ea0136da8b1d815ebe41ba8bfa32a7f03a8d4d61131",
+              "probe_radius": 0.13999999999999999,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 2.5,
+          "source_atom_count": 81,
+          "tetrahedron_inventory": {
+            "wet_nodes": 36,
+            "dry_nodes": 409,
+            "total": 445
+          },
+          "wet_component_count": 3,
+          "resident_center_count": 30,
+          "point_status_counts": {
+            "blocked": 30
+          },
+          "public_feature_types": {
+            "open_concavity": 1,
+            "mouth": 2,
+            "groove": 1
+          },
+          "native_external_links": 3,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "unresolved",
+            "reason": "face 17: arrangement work budget exhausted",
+            "n_patches": null,
+            "query": {
+              "result_key": "result-229d48167db416f49527a36c2162b35887b1239e3fa3d057afc416ba23383c07",
+              "probe_radius": 0.25,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": [
+            "WET-3"
+          ]
+        }
+      ]
+    },
+    {
+      "case": "straight_tube_wide_sparse",
+      "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+      "observations_sha256": "07721b7f40f142cdd17e271539f023d79feab1ef3f2518fd0404cc3bb09404da",
+      "profiles": [
+        {
+          "probe_angstroms": 1.4,
+          "source_atom_count": 77,
+          "tetrahedron_inventory": {
+            "wet_nodes": 175,
+            "dry_nodes": 172,
+            "total": 347
+          },
+          "wet_component_count": 6,
+          "resident_center_count": 168,
+          "point_status_counts": {
+            "blocked": 99,
+            "clear": 69
+          },
+          "public_feature_types": {
+            "open_concavity": 4,
+            "mouth": 7,
+            "groove": 1,
+            "channel": 1
+          },
+          "native_external_links": 7,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "resolved",
+            "reason": null,
+            "n_patches": 2,
+            "query": {
+              "result_key": "result-d6f0bf69e4c88aca1e4a378c1a3a51a3f453cb2ecbcb4a830080de1924e73ec6",
+              "probe_radius": 0.13999999999999999,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 2.5,
+          "source_atom_count": 77,
+          "tetrahedron_inventory": {
+            "wet_nodes": 78,
+            "dry_nodes": 269,
+            "total": 347
+          },
+          "wet_component_count": 9,
+          "resident_center_count": 73,
+          "point_status_counts": {
+            "clear": 51,
+            "blocked": 22
+          },
+          "public_feature_types": {
+            "groove": 2,
+            "mouth": 8,
+            "open_concavity": 4,
+            "channel": 1,
+            "percolating": 1
+          },
+          "native_external_links": 10,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "unresolved",
+            "reason": "face 12: critical-section ordering within numerical margin",
+            "n_patches": null,
+            "query": {
+              "result_key": "result-aa35116c386fe87c590423fbc18adcdef97ae6275392437d4c37a0af780ce3d8",
+              "probe_radius": 0.25,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": [
+            "WET-9"
+          ]
+        },
+        {
+          "probe_angstroms": 5.0,
+          "source_atom_count": 77,
+          "tetrahedron_inventory": {
+            "wet_nodes": 1,
+            "dry_nodes": 346,
+            "total": 347
+          },
+          "wet_component_count": 1,
+          "resident_center_count": 1,
+          "point_status_counts": {
+            "blocked": 1
+          },
+          "public_feature_types": {
+            "open_concavity": 1,
+            "mouth": 1
+          },
+          "native_external_links": 1,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "unresolved",
+            "reason": "face 10: arrangement work budget exhausted",
+            "n_patches": null,
+            "query": {
+              "result_key": "result-f79725b41c0127afa61b845c6f05e99dc53647c190e1f51d555f8cfa2c9587c1",
+              "probe_radius": 0.5,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        }
+      ]
+    },
+    {
+      "case": "dumbbell",
+      "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63",
+      "observations_sha256": "e1ec06a0e3112f67f163995be6585b9e731c39fc547ed87bfbbdbca48eafd852",
+      "profiles": [
+        {
+          "probe_angstroms": 1.4,
+          "source_atom_count": 94,
+          "tetrahedron_inventory": {
+            "wet_nodes": 164,
+            "dry_nodes": 198,
+            "total": 362
+          },
+          "wet_component_count": 2,
+          "resident_center_count": 161,
+          "point_status_counts": {
+            "blocked": 129,
+            "clear": 32
+          },
+          "public_feature_types": {
+            "open_concavity": 1,
+            "mouth": 1,
+            "void": 1
+          },
+          "native_external_links": 1,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "unresolved",
+            "reason": "face 98: critical-section ordering within numerical margin",
+            "n_patches": null,
+            "query": {
+              "result_key": "result-c61e0dab8db42756a008ef580f91c77f36187de7b28191fdbcef3a99d3ede0f5",
+              "probe_radius": 0.13999999999999999,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 2.2,
+          "source_atom_count": 94,
+          "tetrahedron_inventory": {
+            "wet_nodes": 90,
+            "dry_nodes": 272,
+            "total": 362
+          },
+          "wet_component_count": 8,
+          "resident_center_count": 85,
+          "point_status_counts": {
+            "blocked": 75,
+            "clear": 10
+          },
+          "public_feature_types": {
+            "groove": 3,
+            "mouth": 6,
+            "open_concavity": 3,
+            "void": 2
+          },
+          "native_external_links": 6,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "unresolved",
+            "reason": "face 86: arrangement work budget exhausted",
+            "n_patches": null,
+            "query": {
+              "result_key": "result-e9248da2faed3086b20057e9937c27f82b695876a018da6c7d235b6ee7e0b446",
+              "probe_radius": 0.22000000000000003,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": 0.0,
+          "unexamined_connector_components": []
+        },
+        {
+          "probe_angstroms": 6.0,
+          "source_atom_count": 94,
+          "tetrahedron_inventory": {
+            "wet_nodes": 0,
+            "dry_nodes": 362,
+            "total": 362
+          },
+          "wet_component_count": 0,
+          "resident_center_count": 0,
+          "point_status_counts": {},
+          "public_feature_types": {},
+          "native_external_links": 0,
+          "physical_boundary": {
+            "schema": "dfnd.physical_boundary.nm.v1",
+            "status": "unresolved",
+            "reason": "face 71: arrangement work budget exhausted",
+            "n_patches": null,
+            "query": {
+              "result_key": "result-f467ceb74d59d1ee6be9d140f65a8760c4d89e82f743450c2ac0eb6ff5e33f47",
+              "probe_radius": 0.6,
+              "strict_inequality": "clearance > probe_radius",
+              "exclusion_scope": "all_selected_atoms",
+              "tolerance": 1e-07,
+              "algorithm": "analytic_circle_sections_v1",
+              "budget": {
+                "atoms": 512,
+                "faces": 512,
+                "events": 100000,
+                "path_tests": 4096,
+                "associations": 4096
+              }
+            }
+          },
+          "maximum_absolute_local_capacity_residual_nm": null,
+          "unexamined_connector_components": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "schema": "topomt.benchlab.six-case-reader-review/1",
+  "issue": "uibcdf/topomt#187",
+  "notebooks": [
+    {
+      "path": "docs/content/benchlab/synthetic/regular_tetrahedron/system.ipynb",
+      "sha256": "defe351edcdb417bcc3cc08672d17857b2f0ad600286134609244ef1425ee732",
+      "executed_code_cells": 5,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/regular_tetrahedron/dfnd.ipynb",
+      "sha256": "7223b7ed0a42b779afaf29047e21afdf61c6b08bf6a42a1a87d68d758e1eefea",
+      "executed_code_cells": 10,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/regular_tetrahedron/public_topography_v2.ipynb",
+      "sha256": "2a46f2b22b66047982d2b75046ce24b6277ad5da3a4b4a3c5d682f68800328e2",
+      "executed_code_cells": 7,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/regular_tetrahedron/comparisons.ipynb",
+      "sha256": "8f0d16359ca729c6aeca939010e04909cdca090959658c27ce0bfc7ca35a9107",
+      "executed_code_cells": 7,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/closed_shell/system.ipynb",
+      "sha256": "988c55ba5a4c21c1246eadab50c29e527f2a8f8814691896089a8375146d79fb",
+      "executed_code_cells": 5,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/closed_shell/dfnd.ipynb",
+      "sha256": "5c7e0fde48039c4b53cfe3a5cdf0630136d3fe0c2daa9c120da0a88fd57c9140",
+      "executed_code_cells": 6,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/closed_shell/public_topography_v2.ipynb",
+      "sha256": "2d7dcb3dfef10551e9b058cbf287feab1119c1c8ff881f9f8437e9c2d1afa2cc",
+      "executed_code_cells": 7,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/shell_with_opening/system.ipynb",
+      "sha256": "70547d7afd9bcbc81323735c234cbbcbfcb057dbf79cd655e836edb2ad32ed02",
+      "executed_code_cells": 5,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/shell_with_opening/dfnd.ipynb",
+      "sha256": "040cc560c51115eab69feff32d73722fadef2d234af68121d3428a96fc740250",
+      "executed_code_cells": 5,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/shell_with_opening/public_topography_v2.ipynb",
+      "sha256": "f761ee78b19b889910bca89c490573c59c85e2faea0bf328cf0f73ccde7bc384",
+      "executed_code_cells": 7,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/system.ipynb",
+      "sha256": "c13a82a07a60e859cb760bf7681b042ad84023d49813e5782eaf51124d2ce9be",
+      "executed_code_cells": 5,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/dfnd.ipynb",
+      "sha256": "45d6b609cfd092f68f7154e05360e48981d47ab863aabda1cb3dd1f94f165c2b",
+      "executed_code_cells": 6,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/system.ipynb",
+      "sha256": "17ed3fb47d7e43f54089cf0d4f1140df69bbb90fac71b16edff8f1c901022f8c",
+      "executed_code_cells": 5,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/dfnd.ipynb",
+      "sha256": "323bf9724ed9e20566cc6853c618b9ef81a80fc3ecdf96e6058192f8af82d35b",
+      "executed_code_cells": 7,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/dumbbell/system.ipynb",
+      "sha256": "782081e40237f7a0ac4a36a4e5f6afcd398b1632d50ec7976363f907c1831b9e",
+      "executed_code_cells": 5,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    },
+    {
+      "path": "docs/content/benchlab/synthetic/dumbbell/dfnd.ipynb",
+      "sha256": "4ed6d31422f0f4389d7a0330c56de99b746f333b98ee5779a35b2d245f90e657",
+      "executed_code_cells": 7,
+      "errors": 0,
+      "scope": "Retained executed outputs and byte identity checked; no fresh kernel execution in this review."
+    }
+  ],
+  "archives": [
+    {
+      "path": "docs/_static/benchlab/three_cases_v2.zip",
+      "sha256": "4edefaf16f31bcad45776408035ddeb06aec65bf79080efd52aff7331e768e8a",
+      "manifest_files_checked": 317,
+      "producer_source": "d75d98363960f17135908b1b6af472827b4086c3",
+      "scope": "Original ZIP manifest and bytes verified, no new package/environment or hosted download receiving."
+    },
+    {
+      "path": "docs/_static/benchlab/straight_tube_narrow_dense_v1.zip",
+      "sha256": "de01c2fc1969fe87dc976d79dc39523cad38463ef515a520dc9221f0109e2636",
+      "manifest_files_checked": 368,
+      "producer_source": "107c291cf8c6fa0663793fa32a96cd975e49589e",
+      "scope": "Original ZIP manifest and bytes verified, no new package/environment or hosted download receiving."
+    },
+    {
+      "path": "docs/_static/benchlab/straight_tube_wide_sparse_v1.zip",
+      "sha256": "271b354aa3ee2efa56073deb0d2b6987977fe35632caa10a19c3280e20576525",
+      "manifest_files_checked": 398,
+      "producer_source": "3ad9515019e722c0ccf4ade7a3024de4166e217e",
+      "scope": "Original ZIP manifest and bytes verified, no new package/environment or hosted download receiving."
+    },
+    {
+      "path": "docs/_static/benchlab/dumbbell_v1.zip",
+      "sha256": "aa50887f8393a63034d937752a025cd9a5e118a9b0b53f2caaee279a1940df84",
+      "manifest_files_checked": 430,
+      "producer_source": "17a4c9a521c89a64efb12ba339161e15c85d4ce0",
+      "scope": "Original ZIP manifest and bytes verified, no new package/environment or hosted download receiving."
+    }
+  ],
+  "wall_seconds": 1.307260020985268,
+  "peak_rss_kib": 44452
+}

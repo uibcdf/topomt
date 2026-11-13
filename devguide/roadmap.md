@@ -99,6 +99,14 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+Current checkpoint (2026-11-12): [the joint six-case review](../docs/content/benchlab/synthetic/six_case_review.md)
+records 19 actual public profiles and a concrete nonlocal-blocking diagnosis.
+Next decide/implement #181's all-atom public qualification, retaining local
+substrate and complete-proof versus point-check distinctions. Then address
+physical boundary budget #180 and numerical ordering #184; original five-domain
+interpretation #188 and broader support/path gates remain separate. This does
+not select another geometry or begin the protein phase.
+
 DFND remains TopoMT's native scientific direction. The user resumed its notebook
 laboratory on 2026-11-07: re-anchor the adopted regular-tetrahedron and closed-shell
 references, then characterize opening, tube, neck and the remaining synthetic

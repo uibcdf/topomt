@@ -1,0 +1,138 @@
+{
+  "schema": "topomt.benchlab.six-case-source-receiving/1",
+  "issue": "uibcdf/topomt#187",
+  "captured_at": "2026-11-13T01:36:37.469672+00:00",
+  "protocol_sha256": "17b6cab2e8379a66b3450fb35c28a00c92ff99c5dd4a57d9d2d2c9ac29507dc0",
+  "source_revision": "1510e007d96da8a3c569f626a1b263fb59a54533",
+  "worktree_status_before": [
+    " M topomt/_version.py"
+  ],
+  "interpreter": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "origins": {
+    "topomt": "/fast_data/home/liliana/repos@uibcdf/topomt/topomt/__init__.py",
+    "molsysmt": "/fast_data/home/liliana/repos@uibcdf/molsysmt/molsysmt/__init__.py",
+    "pyunitwizard": "/fast_data/home/liliana/repos@uibcdf/pyunitwizard/pyunitwizard/__init__.py",
+    "ackredit": "/fast_data/home/liliana/repos@uibcdf/ackredit/ackredit/__init__.py"
+  },
+  "versions": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "numba": "0.68.1",
+    "molsysmt": "0.23.0+904.gff25f1202",
+    "pyunitwizard": "0.29.5+2.gcc51c8e",
+    "ackredit": "0.12.2+2.g0bb26ec"
+  },
+  "affinity": [
+    0
+  ],
+  "thread_environment": {
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "MKL_NUM_THREADS": "1",
+    "NUMBA_NUM_THREADS": "1"
+  },
+  "address_space_limit_bytes": 4294967296,
+  "runtime_files_sha256": {
+    "topomt/_version.py": "d76f39e77bb54929c2d4a02f55ec04d61534ec09df776d2fe89ef731626a88b5",
+    "topomt/dfnd/__init__.py": "080f20aa1791219af56edba925b55f890215592b97134e8a3c185e0d83f82055",
+    "topomt/dfnd/api.py": "0340a54e9175f995e53fdc14d67457e88c047017927c34e90c09068de67483b0",
+    "topomt/dfnd/centerline.py": "78a92da18ebdd4607f6e4733d577ebd87a7051ca5fba458aef688a2c102220dd",
+    "topomt/dfnd/classify.py": "1a8f28328b61ca66e1e764077650775e95dd36350382a7ef3654e2463a0726eb",
+    "topomt/dfnd/components.py": "183edc97991b9ff75fb85eac3a9d871d3c76d0f1f46f5231bb9cb2c87c2daa9a",
+    "topomt/dfnd/config.py": "1cdb75214be1b4450c37879cc81f2893039bcc6ccb2ef875f84f3b53a838aabd",
+    "topomt/dfnd/core/__init__.py": "b8117ecb653e18674370764da29d8a6885a3b3d86c0dcbf4d42518e550e80d1c",
+    "topomt/dfnd/core/clearance.py": "8b0cad428a052e708092b8d8dd7dc99f04376dee8d4ce937e8e1928590b07d1a",
+    "topomt/dfnd/core/permeability.py": "ccaea7e3a5992887e5f1e1fc448062735976219a916c0b900904b58ef9c236a4",
+    "topomt/dfnd/core/physical_arrangement.py": "daa0c07edad7f67c5dbc9e429716b283424b6ef91e4ac71ebae6ae907ac9b818",
+    "topomt/dfnd/core/physical_boundary.py": "99cea98ed6f4c0a229051e1c8ffbfb10d8de9489823e14630d703dd1e0107e74",
+    "topomt/dfnd/core/solvent_volume.py": "1f4b47b10d5b513e313cd5f26319bec60c9f25c010005bff14e7880d10e59df8",
+    "topomt/dfnd/core/utils.py": "0dc4b8954eba004f09627a3a45bfdae4c4b8d707fef96dacb9b406a6377be6cc",
+    "topomt/dfnd/core/volume_precision.py": "826ed9b5a30cfc92709ee24a3a0ab7bb9d68e473ccc6cb07d30a167abb355e3f",
+    "topomt/dfnd/data.py": "253b0d5be5633915c282f51bf5846c3756e8f916d64101b94564b2f7deb562a1",
+    "topomt/dfnd/experimental.py": "e3124fad4f690b4eb20a8665bca65006ec04b2fc43bcdfbf20bb414b16732e0a",
+    "topomt/dfnd/families.py": "c66451c719609ea1c90d8be879cc21f98cb5f43741b15c8a054c0427b12cf6a8",
+    "topomt/dfnd/graph.py": "14aee16ed1a5e6ddfb46d5e04d64052149dc4973b2ada38688ab88b27e76c856",
+    "topomt/dfnd/identity.py": "937cd8ffbc802d0048e3965d80793ae847548f8c2af5bf8c99d862ad311ad808",
+    "topomt/dfnd/interfaces.py": "2957d67e1d88e0c9257c96af05a5f0cf4711e896ced9f4a692c4b356286b8c9f",
+    "topomt/dfnd/lineage.py": "9809d882f828f9764ceac1edc4946d6bf42eb3a9c85d9b3377bfa32cc2b237ce",
+    "topomt/dfnd/output_status.py": "db374966e57ce14e7a0a28bc75f4adfc6c476f83a5adedeafb82f3e9f5c2b47e",
+    "topomt/dfnd/selectors.py": "df076c7d0c4f6590747eab1a15dc054985283ceaf9c0bc98c39ce8ebf4f51316",
+    "topomt/dfnd/synthetic.py": "cf7cc3e33cf741c6a93d56825aa7a7e0512b000f2d1de5fc46b7ad632ff47f18",
+    "devtools/benchlab/audit_tetrahedron_radii.py": "07bfedf8439c7c113ea7e226b659b99765b36a86ad77f84688601204bf94101b",
+    "devtools/benchlab/ball_study.py": "53c5b513cf78d661adc8d68ec9d7a58cf5e3f605277513d360c3b87c04475e5c",
+    "devtools/benchlab/capture_physical.py": "a6c2e22b97fa99601c51a49d88084a4496c0e44f7a8aa223c0474e318588cdee",
+    "devtools/benchlab/capture_public_contract.py": "900a7ddb0886485f5e5cb8186e4b93e884b071c1bd5b06d8d81d57c780dcab16",
+    "devtools/benchlab/capture_six_cases.py": "6747f2378d65b70f55b482d8621ffa7bc0954e7b624787471288f9ec87704bec",
+    "devtools/benchlab/capture_volume.py": "5c5be91dc143767d2943eb24fc18927ee2d561ffd84fbadea40c6f35ef915e2a",
+    "devtools/benchlab/public_contract.py": "846c92df82dd4bac1f6ab23b6a0befb5c44f0d7d7c76a6672599387914e76989",
+    "devtools/benchlab/residence_witnesses.py": "93643a8d9ad380b2f739aead787d7139337b34f904c2ecd01946be7624f58fa8",
+    "devtools/benchlab/run_regular_tetrahedron_comparisons.py": "9e9e090d5339eab734bcab619ed4fda0e194acec3bfadc229c1241b49c53bc7a",
+    "devtools/benchlab/study_bundle.py": "f48603df4ea5a2a0423226996649ba63729c1fb4b3bf005f07e2c5a88cae922c",
+    "devtools/benchlab/study_bundle_v2.py": "a718a8823c83c4c8809aed33f30bc742e03d75ffe862193b5efd39c9b5b1abf4",
+    "devtools/benchlab/tube_study.py": "55342906195e40dad29da7063678d9ad961616c1d5f1a30812372fba6a66ca3a"
+  },
+  "references": "Retained independent certificates reused by verified hash; no fresh reference discovery or checker execution in this capture",
+  "cases": [
+    {
+      "case": "regular_tetrahedron",
+      "observations_sha256": "9cb001cae5f7700f585b66cf9d9950ae6ac1b05c07c1deac439d02350e5a0700",
+      "profiles": 3,
+      "wall_seconds": 0.9849519220297225
+    },
+    {
+      "case": "closed_shell",
+      "observations_sha256": "43f30d9668b12bab6bcf4a09b7c81e02a05bd25355ab8d1dc3def1af09bf8b68",
+      "profiles": 4,
+      "wall_seconds": 3.3350116349756718
+    },
+    {
+      "case": "shell_with_opening",
+      "observations_sha256": "43cd0d1120d92302a40d2dd0d3f53ffa92e88ee05df3c841e599d9597e80f163",
+      "profiles": 3,
+      "wall_seconds": 1.7630915039917454
+    },
+    {
+      "case": "straight_tube_narrow_dense",
+      "observations_sha256": "dbac6d3b47861c2e73b80b4816347a3a6a1da1736801c8151de7d4b2adbf79f7",
+      "profiles": 3,
+      "wall_seconds": 2.916868478001561
+    },
+    {
+      "case": "straight_tube_wide_sparse",
+      "observations_sha256": "07721b7f40f142cdd17e271539f023d79feab1ef3f2518fd0404cc3bb09404da",
+      "profiles": 3,
+      "wall_seconds": 2.8639979199506342
+    },
+    {
+      "case": "dumbbell",
+      "observations_sha256": "e1ec06a0e3112f67f163995be6585b9e731c39fc547ed87bfbbdbca48eafd852",
+      "profiles": 3,
+      "wall_seconds": 3.4901424450217746
+    }
+  ],
+  "scope": "Fresh public receiving and bounded residence-point diagnosis on the frozen 19 profiles; no whole-region/path certification, provider comparison, installed-package or protein claim",
+  "dependency_sources": {
+    "molsysmt": {
+      "revision": "ff25f120243319ca9515009b4971e24a2eb0dc22",
+      "status": []
+    },
+    "pyunitwizard": {
+      "revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+      "status": []
+    },
+    "ackredit": {
+      "revision": "0bb26ecb42edcfc0984469ff20c9ff93f8fd7f56",
+      "status": []
+    }
+  },
+  "frozen_files_unchanged": 355,
+  "loaded_molsysmt_native_modules": {
+    "molsysmt._rust": {
+      "path": "/fast_data/home/liliana/repos@uibcdf/molsysmt/molsysmt/_rust.abi3.so",
+      "sha256": "2dbcf13d148cb3ae13a5908707fcdd61c75a2de5027e50c566ce07de81bdb038"
+    }
+  },
+  "wall_seconds": 17.021844181988854,
+  "peak_rss_kib": 336484
+}

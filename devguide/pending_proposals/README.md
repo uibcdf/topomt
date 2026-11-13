@@ -46,8 +46,9 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 
 <!-- generated: devguide_index -->
 
-### Active (4)
+### Active (5)
 
+- [`dfnd_component_count_diagnosis.md`](dfnd_component_count_diagnosis.md) — [#188](https://github.com/uibcdf/topomt/issues/188) — Review the historical dumbbell component-count monotonicity diagnosis. *(active, inspected)*
 - [`dfnd_tube_all_atom_receiving.md`](dfnd_tube_all_atom_receiving.md) — [#181](https://github.com/uibcdf/topomt/issues/181) — Reconcile local tube candidates with independently empty all-atom carriers. *(active, measured)*
 - [`dfnd_tube_boundary_budget.md`](dfnd_tube_boundary_budget.md) — [#180](https://github.com/uibcdf/topomt/issues/180) — Resolve bounded physical boundary receiving on the frozen straight tubes. *(active, measured)*
 - [`review_python_ecosystem_policy_adoption.md`](review_python_ecosystem_policy_adoption.md) — [#56](https://github.com/uibcdf/topomt/issues/56) — Review TopoMT Python ecosystem policy adoption. *(active, measured)*
@@ -61,13 +62,11 @@ Archive every resolved, withdrawn, or superseded report; never delete one.
 - [`topography_context_and_support.md`](topography_context_and_support.md) — [#60](https://github.com/uibcdf/topomt/issues/60) — Adopt explicit Topography analysis context and spatial support. *(partial, measured)*
 - [`track_python_matrix_evidence.md`](track_python_matrix_evidence.md) — [#16](https://github.com/uibcdf/topomt/issues/16) — Track TopoMT Python matrix evidence before a support or release claim. *(partial, measured)*
 
-### Open (19)
+### Open (17)
 
 - [`annotation_future_import_policy.md`](annotation_future_import_policy.md) — [#57](https://github.com/uibcdf/topomt/issues/57) — Decide TopoMT's future-annotation import rule for Python 3.11–3.13. *(open, inspected)*
-- [`benchlab_six_case_review.md`](benchlab_six_case_review.md) — [#187](https://github.com/uibcdf/topomt/issues/187) — Review the six initial BenchLab units after establishing dumbbell. *(open, asserted)*
 - [`castpfold_pending_jobs.md`](castpfold_pending_jobs.md) — [#168](https://github.com/uibcdf/topomt/issues/168) — Resolve the disposition of retained pending CASTpFold synthetic jobs without resubmitting. *(open, inspected)*
 - [`caver_tetrahedron_applicability.md`](caver_tetrahedron_applicability.md) — [#155](https://github.com/uibcdf/topomt/issues/155) — Investigate the retained CAVER four-atom failure and supported input scope. *(open, inspected)*
-- [`dfnd_component_count_diagnosis.md`](dfnd_component_count_diagnosis.md) — [#188](https://github.com/uibcdf/topomt/issues/188) — Review the historical dumbbell component-count monotonicity diagnosis. *(open, inspected)*
 - [`docs_action_runtime_refresh.md`](docs_action_runtime_refresh.md) — [#177](https://github.com/uibcdf/topomt/issues/177) — Refresh deprecated Action runtimes in the documentation workflow at a grouped checkpoint. *(open, inspected)*
 - [`dogsite_assessment.md`](dogsite_assessment.md) — [#160](https://github.com/uibcdf/topomt/issues/160) — Assess DoGSite3 service access and pocket/subpocket output semantics. *(open, inspected)*
 - [`fpocket_family_review.md`](fpocket_family_review.md) — [#162](https://github.com/uibcdf/topomt/issues/162) — Assess fpocketR, Scipion fpocket and P2C scientific and workflow contributions. *(open, inspected)*

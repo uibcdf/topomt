@@ -1,10 +1,14 @@
-"""Pathological synthetic systems: cases where DFND currently FAILS.
+"""Pathological synthetic observations and diagnostic regression markers.
 
-These are not success benchmarks. Each test pins the *current, wrong* behaviour of
-DFND on a system whose correct answer is known, and documents what the answer
-*should* be. They are regression markers: when DFND is improved (better
-multi-scale segmentation, degeneracy handling, noise filtering), these tests will
-start failing and must be updated to assert the corrected behaviour.
+These are not success benchmarks. Tests retain originally diagnosed behavior
+and intended outcomes, whose independent reference scope must be reviewed before
+making scientific failure claims. They are regression markers for changes in
+segmentation, degeneracy handling and noise filtering. When outputs change,
+reassess the referenced expectations before updating these guards.
+
+The retained dumbbell count increase is explicitly not a failure oracle (#188):
+shrinking physical free sets can fragment. Its individual domains still need
+reference-scoped diagnosis.
 
 See ``devguide/DFND/pathological_systems.md``.
 """
@@ -213,11 +217,12 @@ def test_known_failure_marginal_gate_flickers_under_noise():
     assert len(signatures) >= 3  # unstable (ideal: 1)
 
 
-def test_known_failure_more_features_appear_at_a_larger_probe():
+def test_retained_dumbbell_domain_counts_increase_with_probe():
     # Historical observation, not an independent failure oracle (#188): the
     # native count grows between these probes. Physical free sets can fragment
     # as a probe grows; diagnose the individual supports before calling the
-    # extra domains spurious. The historical test name is retained for now.
+    # extra domains spurious. The six-case review removes that implication
+    # from the test name while preserving the original numerical observation.
     coords, radii = syn.dumbbell(7.0, 12.5, 3.5, jitter=0.1, seed=0)
     n_small = sum(
         1

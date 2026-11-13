@@ -1,5 +1,15 @@
 # Discussion action routing audit
 
+## Six-case receiving and next qualification work — 2026-11-12
+
+The [joint review](../docs/content/benchlab/synthetic/six_case_review.md) receives
+19 profiles, preserves the original evidence and explains nonlocal blocking at
+the two tube exclusion controls. #187 owns the bounded review; #181 retains
+public/all-atom qualification, #180/#184 boundary availability, #188 original
+five-domain interpretation and #60/#76/#16 broader gates. DFND #130, laboratory
+#129 and the two needs_review cards in hub #154 retain these explicit action
+owners. No point diagnosis closes a physical-region or provider comparison gate.
+
 ## Specialist source controls and POVME operational review — 2026-11-11
 
 HOLE #192, POVME #193 and PISA #194 complete their bounded source integration
