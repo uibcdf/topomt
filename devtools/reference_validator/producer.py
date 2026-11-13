@@ -7,8 +7,18 @@ model; it does not import or trust this frontier/search implementation.
 
 from typing import Any
 
-from .model import Model
+from .model import Box, Model, Tetrahedron
 from .verify.geometry import cell_is_covered, cell_is_free, split
+
+
+def _classify(model: Model, cell: Box | Tetrahedron, path: str) -> dict[str, Any]:
+    covering_atom = next(
+        (a.source_id for a in model.atoms if cell_is_covered(model, cell, a.source_id)),
+        None,
+    )
+    if covering_atom is not None:
+        return {'path': path, 'state': 'blocked', 'atom_id': covering_atom}
+    return {'path': path, 'state': 'free' if cell_is_free(model, cell) else 'unknown'}
 
 
 def partition(
@@ -48,18 +58,9 @@ def partition(
     leaves = []
     while stack:
         path, cell = stack.pop()
-        covering_atom = next(
-            (
-                a.source_id
-                for a in model.atoms
-                if cell_is_covered(model, cell, a.source_id)
-            ),
-            None,
-        )
-        if covering_atom is not None:
-            leaves.append({'path': path, 'state': 'blocked', 'atom_id': covering_atom})
-        elif cell_is_free(model, cell):
-            leaves.append({'path': path, 'state': 'free'})
+        leaf = _classify(model, cell, path)
+        if leaf['state'] != 'unknown':
+            leaves.append(leaf)
         elif len(path) < max_depth:
             children = split(cell)
             if leaf_count + len(children) - 1 <= max_leaves:

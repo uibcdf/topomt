@@ -232,6 +232,59 @@ class Model:
         return record_digest(self.to_record())
 
     @classmethod
+    def from_spheres(
+        cls,
+        centers_nm: Sequence[Sequence[int | float | Fraction]],
+        radii_nm: Sequence[int | float | Fraction],
+        probe_nm: int | float | Fraction,
+        *,
+        domain: Box | Tetrahedron,
+    ) -> 'Model':
+        """Freeze the three steric inputs and an explicit reporting domain.
+
+        Parameters
+        ----------
+        centers_nm : sequence of three-coordinate sequences
+            Atomic centers in nm. Input rows become stable source atom IDs.
+        radii_nm : sequence
+            One nonnegative radius in nm for every center.
+        probe_nm : scalar
+            Nonnegative probe radius in nm.
+        domain : Box or Tetrahedron
+            Declared finite observation domain; never inferred from DFND.
+
+        Returns
+        -------
+        Model
+            Detached exact model with a canonical numerical-source digest.
+            That source digest identifies encoded spheres, not a PDB file.
+
+        Raises
+        ------
+        ValueError, TypeError
+            Shapes, values or domain violate the admitted model contract.
+        """
+        if len(centers_nm) != len(radii_nm):
+            raise ValueError('Every center requires exactly one atomic radius')
+        atoms = tuple(
+            Atom(i, point(x), scalar(r))
+            for i, (x, r) in enumerate(zip(centers_nm, radii_nm))
+        )
+        source = {
+            'schema': 'topomt.reference-validator.sphere-input/1',
+            'length_unit': 'nm',
+            'atoms': [
+                {
+                    'source_id': a.source_id,
+                    'center': encode_point(a.center),
+                    'radius': encode_scalar(a.radius),
+                }
+                for a in atoms
+            ],
+        }
+        return cls(atoms, scalar(probe_nm), domain, record_digest(source))
+
+    @classmethod
     def from_record(cls, value: object) -> 'Model':
         """Read a strict model record; reject unknown fields and conventions."""
         data = _record(

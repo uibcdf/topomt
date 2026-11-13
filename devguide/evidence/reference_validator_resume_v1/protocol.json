@@ -1,0 +1,13 @@
+{
+  "schema": "topomt.reference-validator.resume-pilot/1",
+  "issue": "uibcdf/topomt#76",
+  "model": "devguide/evidence/reference_validator_p0_v1/receiving/probe_1p7_depth18.model.json",
+  "model_file_sha256": "e5a01b34538aadc3ea4ff1a586623976d471f804aa09b64a27e771e0f6fd6e02",
+  "model_sha256": "9f894cc7fd38ac0fc28aaa3de3548584679eca9db1b0f03bcdcba363f792d8be",
+  "configuration": {"max_depth": 18, "max_leaves": 1024},
+  "step_split_budgets": [0, 17, 17, 17, 17, 17, 17, 17, 17],
+  "control_split_budget": 4095,
+  "expected_final_components": 0,
+  "scope": "Operational resume qualification of the unchanged exact tetrahedron model at 1.7 angstrom; known negative control, not new geometry or general topology admission.",
+  "acceptance": "Every state must verify; parent links and all prior proved cells must survive; exact bounds must nest; the final certificate must equal a continuous control run."
+}

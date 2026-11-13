@@ -10,27 +10,12 @@ import argparse
 import json
 import sys
 from pathlib import Path
-from typing import Any
 
 from .model import Model
+from .storage import load_bundle, save_bundle
+from .storage import read_record as _read
 from .verify import verify
-
-
-def _unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
-    result: dict[str, Any] = {}
-    for key, value in pairs:
-        if key in result:
-            raise ValueError(f'Duplicate JSON field: {key}')
-        result[key] = value
-    return result
-
-
-def _read(path: Path) -> Any:
-    with path.open('rb') as stream:
-        data = stream.read(16 * 1024**2 + 1)
-    if len(data) > 16 * 1024**2:
-        raise ValueError('Pilot input exceeds 16 MiB limit')
-    return json.loads(data, object_pairs_hook=_unique)
+from .verify.records import verify_run, verify_transition
 
 
 def main() -> int:
@@ -49,6 +34,21 @@ def main() -> int:
     freeze.add_argument('input', type=Path)
     freeze.add_argument('output', type=Path)
     freeze.add_argument('--probe-angstroms', type=float, required=True)
+    start = commands.add_parser('start')
+    start.add_argument('model', type=Path)
+    start.add_argument('output', type=Path)
+    start.add_argument('--max-depth', type=int, default=4)
+    start.add_argument('--max-leaves', type=int, default=4096)
+    start.add_argument('--split-budget', type=int, default=32)
+    resume = commands.add_parser('resume')
+    resume.add_argument('model', type=Path)
+    resume.add_argument('previous', type=Path)
+    resume.add_argument('output', type=Path)
+    resume.add_argument('--split-budget', type=int, default=32)
+    saved = commands.add_parser('verify-run')
+    saved.add_argument('model', type=Path)
+    saved.add_argument('directory', type=Path)
+    saved.add_argument('--parent', type=Path)
     args = parser.parse_args()
     try:
         if args.command == 'freeze-tetrahedron':
@@ -63,6 +63,29 @@ def main() -> int:
         model = Model.from_record(_read(args.model))
         if args.command == 'verify':
             result = verify(model, _read(args.certificate))
+        elif args.command == 'verify-run':
+            cp, run = load_bundle(args.directory, model)
+            if args.parent is None:
+                result = verify_run(model, run, cp)
+            else:
+                parent, _ = load_bundle(args.parent, model)
+                result = verify_transition(model, parent, cp, run)
+        elif args.command in {'start', 'resume'}:
+            from .contracts import Configuration
+            from .runs import resume_run, start_run
+
+            if args.command == 'start':
+                cp, run = start_run(
+                    model,
+                    configuration=Configuration(args.max_depth, args.max_leaves),
+                    split_budget=args.split_budget,
+                )
+                result = verify_run(model, run, cp)
+            else:
+                parent, _ = load_bundle(args.previous, model)
+                cp, run = resume_run(model, parent, split_budget=args.split_budget)
+                result = verify_transition(model, parent, cp, run)
+            save_bundle(args.output, model, cp, run)
         else:
             from .producer import partition
 

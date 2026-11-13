@@ -114,3 +114,21 @@ def test_binary64_provenance_cannot_label_an_unrepresentable_rational():
     record['interpretation'] = 'received_binary64_nm'
     with pytest.raises(ValueError, match='binary64'):
         Model.from_record(record)
+
+
+def test_sphere_arrays_need_no_bonds_types_or_dfnd_results():
+    domain = Box(point((-2, -2, -2)), point((2, 2, 2)))
+    centers, radii = [[0, 0, 0]], [0.1]
+    model = Model.from_spheres(centers, radii, 0.2, domain=domain)
+    assert model.atoms[0].radius == scalar(0.1)
+    assert model.probe == scalar(0.2)
+    assert model.atoms[0].source_id == 0
+    assert Model.from_record(model.to_record()) == model
+    same_source = Model.from_spheres(centers, radii, 0.3, domain=domain)
+    assert same_source.source_sha256 == model.source_sha256
+    assert same_source.digest != model.digest
+    centers[0][0], radii[0] = 10, 5
+    assert model.atoms[0].center == point((0, 0, 0))
+    assert model.atoms[0].radius == scalar(0.1)
+    with pytest.raises(ValueError):
+        Model.from_spheres([[0, 0, 0]], [], 0.2, domain=domain)
