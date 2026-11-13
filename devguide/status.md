@@ -1,5 +1,15 @@
 # TopoMT development status
 
+## Validator execution/resume contracts — 2026-11-13 UTC
+
+The [current validator checkpoint](DFND/reference_validator_checkpoint.md)
+adds direct sphere inputs, checked persistent run/checkpoint records and bounded
+resume at source `997f69b`. Nine tetrahedron states retain all prior facts and
+converge to the same exact exclusion certificate as an uninterrupted control.
+This supersedes the initial absence of operational contracts; exhaustive region
+enumeration, other hulls, high-precision integration and public delivery remain
+separate work under #76. Native #181/#180/#184/#188 dispositions are unchanged.
+
 ## First exact reference-validator source — 2026-11-13 UTC
 
 The [P0 source checkpoint](DFND/reference_validator_checkpoint.md) delivers exact

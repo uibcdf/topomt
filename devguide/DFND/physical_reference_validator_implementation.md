@@ -17,8 +17,9 @@ checks six original models, 19 selected profiles and all 355 previously frozen
 files without changing their bytes. It is an inventory, not execution of the
 new validator. The [first implemented P0 checkpoint](reference_validator_checkpoint.md)
 now delivers exact model/primitive checking, a bounded partition pilot and ten
-retained tetrahedron proofs. P0 remains partial and P1's geometry construction
-is unselected; the checkpoint states the remaining gates explicitly.
+retained tetrahedron proofs. The bounded P0 input/proof/run/checkpoint contracts
+and checked resume are now source-delivered; P1's geometry construction is
+unselected. The checkpoint states the remaining scientific gates explicitly.
 
 ## Scope and acceptance of the first complete validator
 
@@ -271,8 +272,10 @@ pass this gate. No wall-time speed target is part of the scientific acceptance.
 
 ## Planned module boundaries
 
-Initially develop outside the production namespace. The following paths are
-planned, not existing exports or files created by this document:
+Develop outside the production namespace. Model, bounded producer, checker,
+receiving and CLI paths below now exist at the P0 scope documented in the
+checkpoint; comparison and native-backend paths remain proposed. None is a
+supported production export.
 
 | Planned location | Responsibility |
 | --- | --- |
@@ -282,7 +285,7 @@ planned, not existing exports or files created by this document:
 | `devtools/reference_validator/verify/` | Separately runnable parser, exact primitive/domain/coverage checks, topology obligations and volume verification. No import of producer search code. |
 | `devtools/reference_validator/receiving.py` | Read original protocols, freeze the actual validated model and create additive source-bound results. |
 | `devtools/reference_validator/compare.py` | Mapped occupancy/connectivity comparisons; keeps morphology/count semantics distinct. |
-| `devtools/reference_validator/__main__.py` | Developer commands `freeze`, `produce`, `verify`, `resume` and `compare`, with explicit input/output locations. |
+| `devtools/reference_validator/__main__.py` | Implemented developer commands `freeze-tetrahedron`, `produce`, `verify`, `start`, `resume` and `verify-run`; native comparison remains planned. |
 | `devtools/reference_validator/native/` | Optional Rust crate/backend after P1, with exact arithmetic strategy and a bounded standalone process interface. |
 | `tests/test_reference_validator_*.py` | Model, exact arithmetic, certificate rejection, topology, precision, receiving and resource/resume controls. |
 
@@ -493,11 +496,11 @@ arithmetic precision and budgets must remain explicit and bounded.
 
 ## Immediate implementation sequence and definition of progress
 
-The next source tranche is P0: tests for canonical models, exact predicates,
-whole-domain/path certificates and corrupted-record rejection, then the minimal
-implementation to satisfy them. Freeze the new schemas/protocol at that stage.
-P1 follows with the corner/throat fixtures and small real frozen controls,
-before selecting and expanding a native geometry engine.
+The bounded P0 model/proof and operational-record tranches are source-delivered,
+including tests, frozen protocols and retained runs. P1 is next: use the
+corner/throat fixtures and small real frozen controls to choose a complete
+geometry construction before expanding a native engine. Delivery of resumable
+volume enclosures does not pass that scientific geometry gate.
 
 Use scoped test-first changes with repository Ruff/format and applicable local
 type checks; run selected tests under resource limits. Commit and push under

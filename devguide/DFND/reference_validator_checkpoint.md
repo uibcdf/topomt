@@ -1,10 +1,51 @@
 # Exact reference-validator foundation: source checkpoint
 
 Owner [#76](https://github.com/uibcdf/topomt/issues/76); first consumer #181.
-Producer source: `3b75f595eb6f52d9e6ff66a8f02bdcb0efb4633a`.
-This is the first implemented P0 tranche of the
+Initial proof producer: `3b75f595eb6f52d9e6ff66a8f02bdcb0efb4633a`.
+Operational continuation: `997f69b3d496333d7c89e2fc18dcd5a487ab38c1`.
+These are bounded implemented P0 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete connected-region validator or a supported public TopoMT detector.
+
+## Direct inputs and checked resume — 2026-11-13 UTC
+
+The three steric inputs are centers `(N,3)`, radii `(N,)` and the probe radius.
+`Model.from_spheres(centers_nm, radii_nm, probe_nm, domain=...)` now receives
+them directly and creates detached exact values, row IDs and a numerical source
+digest. No bonds, chemical types or DFND results are needed. Units are explicit.
+The extra domain is the finite observation context; the three sphere inputs
+already define the globally excluded set. A hull and an exterior box ask
+different volume/connectivity questions and cannot be silently interchanged.
+
+Run/checkpoint contracts are implemented for the admitted box/tetrahedron
+partition prototype. A run binds the model, fixed depth/leaf ceilings and exact
+code/runtime identity; only per-step split budgets may change. Every unknown
+cell remains in its frontier, including cells at a ceiling. Source changes
+require a new run, while original mathematical certificates remain checkable.
+
+Independent validation checks model/kernel/configuration identity, complete
+coverage, counters, run summaries, parent links, preserved resolved cells and
+nested volume bounds. It imports no producer or run-search module. Storage
+uses exclusive new directories and a checksum manifest written last; incomplete
+or altered bundles are rejected. This is not a universal power-loss durability
+claim or atomic-directory-publication promise.
+
+The [frozen resume protocol](../evidence/reference_validator_resume_v1/protocol.json)
+reuses the original normalized 1.7 Å tetrahedron model. Its
+[retained receipt](../evidence/reference_validator_resume_v1/receiving/receipt.json)
+contains nine saved/read-back states plus an uninterrupted control:
+
+| Step | Cumulative splits | Checked disposition |
+| --- | --- | --- |
+| 0 | 0 | Unresolved root; per-step budget reached. |
+| 1–7 | 17, 34, 51, 68, 85, 102, 119 | Checked refinements with nested exact bounds; unresolved cells remain explicit. |
+| 8 | 120 | 121 covered cells; complete finite-domain exclusion. |
+
+The final mathematical certificate is identical to the uninterrupted control.
+The capture uses one CPU and a 2 GiB address-space ceiling; 2.17 seconds elapsed,
+peak RSS 21,508 KiB. It uses the saved exact model and standard-library checking,
+without reloading quantities, DFND or an external geometric engine. These are
+resource receipts for a small operational control, not competitive benchmarks.
 
 ## Implemented and checked
 
@@ -78,8 +119,9 @@ proved outcomes. Coverage includes sub-float rational gaps, large translations,
 exact contact, nonlocal radii, false endpoint-only paths, schema/model corruption,
 budget ceilings, fresh-process checking without DFND/producer and saved replay.
 
-Repository Ruff/format and scoped mypy on all eight source files pass, with
-Python 3.11 syntax and the actual 3.14 environment. The final bounded selection
+For the initial tranche, repository Ruff/format and scoped mypy on all eight
+source files pass, with Python 3.11 syntax and the actual 3.14 environment.
+That bounded selection
 passes **55 tests**: 38 new model/proof/receiving controls plus 17 existing
 report/finding/original-artifact checks. It takes 4.45 seconds, peak RSS
 90,624 KiB, one CPU and a 2 GiB address-space limit. The original 355 files
@@ -87,8 +129,17 @@ are checked unchanged. Report indexes, offline comparative metadata and 212
 local file links pass. No full-suite or supported-platform matrix is inferred.
 Linux-only capture/resource controls do not qualify a portable distribution.
 
-P0 remains **partial**: general run/checkpoint records, resume, stronger schema
-coverage and complete domain admission are unfinished. P1 still needs the
+The operational continuation passes **79 selected tests**, including 24 new
+direct-input/run/storage/resume controls and all earlier selected checks.
+It takes 14.30 seconds, peak RSS 91,336 KiB, one CPU and a 2 GiB address-space
+limit. Repository Ruff/format and scoped mypy on thirteen source files pass;
+report indexes and offline finding checks pass. The original 355 case files
+remain unchanged. This is source evidence, not a full suite or public/platform
+qualification.
+
+The bounded P0 model/proof and operational run/checkpoint contracts above are
+source-delivered; their initial absence is superseded by the continuation.
+Complete general domain admission remains P1/P2 work. P1 still needs the
 local/global geometry feasibility decision and an exhaustive free-region
 construction. P4 needs volume precision targets and curved/high-order validated
 integration; these broad enclosures do not meet the plan's k=24 target. Other

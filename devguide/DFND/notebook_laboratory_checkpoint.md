@@ -1,5 +1,15 @@
 # DFND notebook laboratory checkpoint
 
+## Validator inputs and operational contracts — 2026-11-13 UTC
+
+Source `997f69b` adds direct sphere-array inputs, checked run/checkpoint records
+and bounded same-kernel resume under #76. The
+[current checkpoint](reference_validator_checkpoint.md) records a nine-state
+tetrahedron chain whose final certificate equals the uninterrupted control,
+with preserved earlier facts and nested exact bounds. The bounded P0 contracts
+are source-delivered; P1 geometry feasibility and P4 precision remain next gates.
+Original case evidence and all native/finding dispositions retain their scope.
+
 ## First exact-validator implementation — 2026-11-13 UTC
 
 Source `3b75f59` implements the first P0 model/checker tranche under #76.

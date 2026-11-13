@@ -99,6 +99,13 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+Operational continuation (2026-11-13 UTC): direct sphere inputs and bounded
+run/checkpoint/resume contracts are delivered in the
+[current P0 checkpoint](DFND/reference_validator_checkpoint.md). Continue with
+P1 geometry feasibility and P1/P2 domain admission; the older run-contract
+pending statement below belongs to the initial source tranche. General
+connected-region and volume-precision qualification remain open under #76.
+
 First validator source (2026-11-13 UTC): the
 [P0 checkpoint](DFND/reference_validator_checkpoint.md) implements exact selected
 proof checking and a bounded tetrahedron pilot. Finish its remaining P0

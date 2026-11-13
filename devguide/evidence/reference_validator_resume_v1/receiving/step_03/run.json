@@ -1,0 +1,39 @@
+{
+  "checkpoint_sha256": "f3680f14101895bd993ce99c49d800f413fc11bf8c98b36c5d1c9e113bd7598d",
+  "run_sha256": "1c1fae9c3f12e720e312d2e3946290815603e51c36d1b5a94c0348a79c885a30",
+  "schema": "topomt.reference-validator.run/1",
+  "verification": {
+    "certificate_sha256": "7784533231fffe19b6437db40c5ab9a5ad40fee558d0029caf2d94d704268f5f",
+    "checkpoint_sha256": "f3680f14101895bd993ce99c49d800f413fc11bf8c98b36c5d1c9e113bd7598d",
+    "frontier_count": 3,
+    "kind": "partition",
+    "model_sha256": "9f894cc7fd38ac0fc28aaa3de3548584679eca9db1b0f03bcdcba363f792d8be",
+    "n_components": null,
+    "precision_status": "not_requested",
+    "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+    "run_sha256": "1c1fae9c3f12e720e312d2e3946290815603e51c36d1b5a94c0348a79c885a30",
+    "schema": "topomt.reference-validator.verification/1",
+    "stop_reason": "step_budget",
+    "topology_complete": false,
+    "topology_status": "unresolved",
+    "total_splits": 51,
+    "trusted_arithmetic": "stdlib-fraction/1",
+    "unresolved_leaves": 3,
+    "verification_status": "accepted",
+    "verifier_files_sha256": {
+      "model.py": "af0ae99a01ada3da6a39b7a3fe254c52b0ffe38d56afa775c11024a862949900",
+      "verify/__init__.py": "635437ac18e0f72b38933a59a7b0f980440d39046c7266f8330e84346b543793",
+      "verify/geometry.py": "cc2d52c1502a5bf6b06ce7a84e04712ea28407c68cb3e9e8862aa058d4cd8258"
+    },
+    "volume_enclosure_status": "resolved",
+    "volume_lower": [
+      "0",
+      "1"
+    ],
+    "volume_unit": "nm**3",
+    "volume_upper": [
+      "2577073045816820758262213321757153842447467486993",
+      "280608314367533360295107487881526339773939048251392"
+    ]
+  }
+}

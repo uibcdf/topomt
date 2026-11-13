@@ -1,6 +1,7 @@
 """Resumable proofs retain the physical model and all earlier established facts."""
 
 import copy
+import hashlib
 import json
 import subprocess
 import sys
@@ -10,7 +11,7 @@ from pathlib import Path
 
 import pytest
 
-from devtools.reference_validator.contracts import Configuration
+from devtools.reference_validator.contracts import Configuration, kernel_identity
 from devtools.reference_validator.model import (
     Atom,
     Box,
@@ -21,6 +22,7 @@ from devtools.reference_validator.model import (
 )
 from devtools.reference_validator.runs import resume_run, start_run
 from devtools.reference_validator.storage import load_bundle, save_bundle
+from devtools.reference_validator.verify import verify
 from devtools.reference_validator.verify.records import (
     make_run_record,
     verify_checkpoint,
@@ -269,3 +271,41 @@ capture(Path(sys.argv[1]), Path(sys.argv[2]))
     assert receipt['steps'][0]['stop_reason'] == 'step_budget'
     assert receipt['steps'][-1]['n_components'] == 0
     assert receipt['steps'][-1]['stop_reason'] == 'no_unknown_cells'
+
+
+def test_retained_resume_chain_preserves_history_and_mathematical_proofs():
+    root = Path(__file__).resolve().parents[1]
+    base = root / 'devguide/evidence/reference_validator_resume_v1'
+    spec = json.loads((base / 'protocol.json').read_text())
+    source = Model.from_record(json.loads((root / spec['model']).read_text()))
+    saved = base / 'receiving'
+    receipt = json.loads((saved / 'receipt.json').read_text())
+    assert (
+        hashlib.sha256((base / 'protocol.json').read_bytes()).hexdigest()
+        == receipt['protocol_sha256']
+    )
+    for name, expected in receipt['files'].items():
+        assert hashlib.sha256((saved / name).read_bytes()).hexdigest() == expected
+    previous = None
+    for row in receipt['steps']:
+        directory = saved / row['directory']
+        cp = json.loads((directory / 'checkpoint.json').read_text())
+        run = json.loads((directory / 'run.json').read_text())
+        assert record_digest(cp) == row['checkpoint_sha256']
+        assert record_digest(run) == row['run_record_sha256']
+        checked = verify(source, cp['certificate'])
+        assert checked['n_components'] == row['n_components']
+        assert checked['volume_lower'] == row['volume_lower']
+        assert checked['volume_upper'] == row['volume_upper']
+        if previous is not None:
+            assert cp['parent_sha256'] == record_digest(previous)
+        if cp['kernel'] == kernel_identity():
+            load_bundle(directory, source)
+            if previous is not None:
+                verify_transition(source, previous, cp, run)
+        else:
+            # New source/runtime may check old mathematical proofs, but may
+            # not silently resume executable work under a different kernel.
+            with pytest.raises(ValueError, match='kernel/runtime'):
+                verify_checkpoint(source, cp)
+        previous = cp

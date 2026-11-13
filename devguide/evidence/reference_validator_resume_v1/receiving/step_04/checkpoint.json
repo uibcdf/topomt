@@ -1,0 +1,388 @@
+{
+  "certificate": {
+    "arithmetic": "rational-exact/1",
+    "kind": "partition",
+    "leaves": [
+      {
+        "atom_id": 3,
+        "path": "00000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "000010000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "0000100010",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "0000100011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "000010010",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "000010011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "00001010000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "00001010001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "0000101001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "000010101",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "00001011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "000011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "000100",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "000101",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "0001100000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "0001100001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "000110001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "00011001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "0001101",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "000111",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "0010",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "00110",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "00111000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "00111001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "00111010",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "001110110",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "001110111",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "001111000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 2,
+        "path": "0011110010",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "0011110011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "00111101",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "0011111",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "01000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "01001000000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "01001000001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "0100100001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "010010001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "01001001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "0100101000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "0100101001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "010010101",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "010010110",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "010010111",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "010011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "010100000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "010100001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "01010001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "01010010",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "010100110",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "010100111",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "0101010000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "0101010001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "010101001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "01010101",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "0101011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "01011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 1,
+        "path": "011",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "10000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "100010",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "10001100000",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 0,
+        "path": "10001100001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 0,
+        "path": "1000110001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 0,
+        "path": "100011001",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 0,
+        "path": "10001101",
+        "state": "blocked"
+      },
+      {
+        "atom_id": 3,
+        "path": "1000111",
+        "state": "blocked"
+      },
+      {
+        "path": "10010",
+        "state": "unknown"
+      },
+      {
+        "path": "10011",
+        "state": "unknown"
+      },
+      {
+        "path": "101",
+        "state": "unknown"
+      },
+      {
+        "path": "11",
+        "state": "unknown"
+      }
+    ],
+    "model_sha256": "9f894cc7fd38ac0fc28aaa3de3548584679eca9db1b0f03bcdcba363f792d8be",
+    "refinement": {
+      "max_depth": 18,
+      "max_leaves": 1024
+    },
+    "schema": "topomt.reference-validator.certificate/1"
+  },
+  "configuration": {
+    "max_depth": 18,
+    "max_leaves": 1024
+  },
+  "frontier": [
+    "10010",
+    "10011",
+    "101",
+    "11"
+  ],
+  "kernel": {
+    "algorithm": "rational-convex-partition/1",
+    "files": {
+      "contracts.py": "58866c341f12d4346d4c683d165c3143c099335b37b12e2263b58236a4069114",
+      "model.py": "af0ae99a01ada3da6a39b7a3fe254c52b0ffe38d56afa775c11024a862949900",
+      "producer.py": "d5b6cc33a6a173829e0276096c45816ae6a0dc0083226ad846ba6ac42bcc8978",
+      "runs.py": "400083bc9752e3ae872bd510b96a34bc589d8de4841354d629f8d88993a19190",
+      "storage.py": "b448f221f85e85ee0657b156512e7316afee6b0fd8957b0eaaf27194cdfa0aa4",
+      "verify/__init__.py": "635437ac18e0f72b38933a59a7b0f980440d39046c7266f8330e84346b543793",
+      "verify/geometry.py": "cc2d52c1502a5bf6b06ce7a84e04712ea28407c68cb3e9e8862aa058d4cd8258",
+      "verify/records.py": "ede328c93db5ca358d87e0e296581409edf7838c69cc0c90b3ca2eebbc2c4211"
+    },
+    "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+    "schema": "topomt.reference-validator.kernel/1"
+  },
+  "model_sha256": "9f894cc7fd38ac0fc28aaa3de3548584679eca9db1b0f03bcdcba363f792d8be",
+  "parent_sha256": "f3680f14101895bd993ce99c49d800f413fc11bf8c98b36c5d1c9e113bd7598d",
+  "performed_splits": 17,
+  "run_sha256": "1c1fae9c3f12e720e312d2e3946290815603e51c36d1b5a94c0348a79c885a30",
+  "schema": "topomt.reference-validator.checkpoint/1",
+  "split_budget": 17,
+  "step_index": 4,
+  "total_splits": 68
+}

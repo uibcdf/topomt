@@ -15,6 +15,18 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Operational validator continuation — 2026-11-13 UTC
+
+Source `997f69b` now delivers direct center/radius/probe inputs plus explicit
+domain context, independent run/checkpoint validation and bounded resume.
+The [updated checkpoint](../DFND/reference_validator_checkpoint.md) retains nine
+same-model states and an identical uninterrupted final certificate. Missing
+frontiers, changed inputs/kernel, weakened prior facts and incomplete storage
+are rejected. P0's bounded contracts are source-delivered; the issue remains
+partial/open for P1/P2 geometry/domain admission, exhaustive regions, P4
+precision and P5/P6 receiving/public delivery. Earlier resume-pending notes
+below describe the initial tranche, not the current operational capability.
+
 ## First exact reference-validator tranche — 2026-11-13 UTC
 
 The [implemented source checkpoint](../DFND/reference_validator_checkpoint.md)
