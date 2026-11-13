@@ -1,6 +1,7 @@
 """Hull equality and exact clipping cannot be inferred from point containment."""
 
 import copy
+import hashlib
 import json
 import subprocess
 import sys
@@ -20,6 +21,7 @@ from devtools.reference_validator.model import (
     decode_point,
     decode_scalar,
     point,
+    record_digest,
 )
 from devtools.reference_validator.verify.center_hull import verify_hull
 
@@ -428,3 +430,74 @@ def test_hull_worker_timeout_is_not_reported_as_a_geometric_empty_result(
     assert row['status'] == 'unresolved'
     assert row['reason'] == 'wall_limit'
     assert 'geometric_volume' not in row
+
+
+def test_capture_cli_rejects_ambiguous_original_selection_before_reading_or_work(
+    tmp_path,
+):
+    result = subprocess.run(
+        [
+            sys.executable,
+            '-m',
+            'devtools.reference_validator.capture_hulls',
+            str(tmp_path / 'absent.json'),
+            str(tmp_path / 'out'),
+            '--all-originals',
+            '--original-case',
+            'regular_tetrahedron',
+        ],
+        text=True,
+        capture_output=True,
+        timeout=10,
+    )
+    assert result.returncode == 2
+    assert 'not allowed with' in result.stderr
+    assert not (tmp_path / 'out').exists()
+
+
+def test_retained_hull_controls_preserve_geometric_proofs_and_unexecuted_scope():
+    base = (
+        Path(__file__).resolve().parents[1]
+        / 'devguide/evidence/reference_validator_hulls_v1'
+    )
+    saved = base / 'receiving'
+    receipt = json.loads((saved / 'receipt.json').read_text())
+    assert (
+        hashlib.sha256((base / 'protocol.json').read_bytes()).hexdigest()
+        == receipt['protocol_sha256']
+    )
+    assert receipt['original_selection'] == []
+    assert receipt['originals'] == {}
+    expected = {
+        f'{category}/{name}/{kind}.json'
+        for category in ['fixtures', 'clips']
+        for name in receipt[category]
+        for kind in ['source', 'certificate', 'verification']
+    }
+    assert set(receipt['files']) == expected
+    for name, digest in receipt['files'].items():
+        assert hashlib.sha256((saved / name).read_bytes()).hexdigest() == digest
+    for category in ['fixtures', 'clips']:
+        for name, row in receipt[category].items():
+            directory = saved / category / name
+            source = CenterSource.from_record(
+                json.loads((directory / 'source.json').read_text())
+            )
+            cert = json.loads((directory / 'certificate.json').read_text())
+            original = json.loads((directory / 'verification.json').read_text())
+            assert record_digest(original) == row['verification_sha256']
+            assert record_digest(cert) == row['certificate_sha256']
+            checked = verify_hull(source, cert)
+            for key in [
+                'vertices',
+                'facets',
+                'geometric_dimension',
+                'geometric_volume',
+                'free_volume_status',
+                'free_topology_status',
+            ]:
+                assert checked[key] == original[key]
+    attempt = json.loads((base / 'scheduler_attempt.json').read_text())
+    assert attempt['execution_started'] is False
+    assert attempt['allocation_status'] == 'not_allocated'
+    assert attempt['queue_readback_after_failure'] == []

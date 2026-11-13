@@ -1,5 +1,17 @@
 # DFND notebook laboratory checkpoint
 
+## Checked hull geometry; original receiving pending — 2026-11-13 UTC
+
+Source `2b6985b` adds [exact hull equality and closed box clipping](reference_validator_hull_checkpoint.md).
+Three retained analytic hulls and six clips preserve empty/lower-dimensional/
+positive-volume distinctions. No probe-free quantity is inferred from them.
+The attempted six-original-source Slurm allocation failed before execution;
+node readback was `tests=inval`, `normal=unk*`, and no queued job remained.
+Retry managed receiving under #76 in a new additive directory when available.
+Do not treat a resource stop as an empty source or change native findings.
+The [current checkpoint](reference_validator_checkpoint.md) retains source and
+scope; all 355 original case files remain unchanged.
+
 ## Certified total-volume precision controls — 2026-11-13 UTC
 
 Source `580f1c0` adds an [analytic precision tranche](reference_validator_precision_feasibility.md)

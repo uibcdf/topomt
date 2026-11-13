@@ -1,7 +1,7 @@
 # Exact reference-validator foundation
 
 Developer tools under TopoMT #76, first consumer #181. This is a bounded P0
-foundation with a scoped P1 analytic construction, not a supported public
+foundation with scoped P1 region, precision and hull-proof routes, not a supported public
 detector or a general multi-ball region enumerator. The [implementation plan](../../devguide/DFND/physical_reference_validator_implementation.md)
 retains the remaining scientific gates.
 

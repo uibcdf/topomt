@@ -6,6 +6,11 @@ under the [implementation plan](physical_reference_validator_implementation.md).
 It is an integration feasibility prototype, not the complete validator or P5
 per-region volume qualification.
 
+The [separate center-hull route](reference_validator_hull_checkpoint.md) now
+checks geometric hull identity and box intersections. It does not extend this
+analytic volume formula to clipped spherical boundaries; the admission below
+still applies. Original-source domain receiving awaits managed resources.
+
 ## Admitted geometry and coverage proof
 
 Every expanded source ball must be **strictly inside** an axis-aligned,

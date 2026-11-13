@@ -15,6 +15,19 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Hull geometry delivered; source batch deferred — 2026-11-13 UTC
+
+The [hull checkpoint](../DFND/reference_validator_hull_checkpoint.md) at `2b6985b`
+implements complete center-hull equality proofs and exact closed box clipping.
+Three analytic hulls and six clips are retained; empty/point/edge/face/positive
+3D states stay distinct. Full steric Model/region integration remains pending.
+The six-original-source receiving did not start: Slurm job 5 could not allocate
+one CPU/2 GiB, with `tests=inval`, `normal=unk*`, and no queued job left. #76 owns
+the managed retry in a new additive directory. Preserve the
+[failed-attempt record](../evidence/reference_validator_hulls_v1/scheduler_attempt.json)
+as history; update the current pending state after successful receiving. This
+is operational availability, not a new scientific limitation or native fix.
+
 ## Actual analytic volume precision — 2026-11-13 UTC
 
 The [precision feasibility tranche](../DFND/reference_validator_precision_feasibility.md)

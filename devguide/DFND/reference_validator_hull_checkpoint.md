@@ -128,6 +128,38 @@ the reported job/partition/CPU/memory identifiers, not the environment; numerica
 certificates do not depend on Slurm. Ordinary local controls retain their own
 external limits and do not reserve resources for a later run.
 
+## Actual receiving and current resource disposition
+
+Source/protocol `2b6985bfb8a3ee8a2b856060435a7c3b93fbab6b` produces the
+[small retained receiving](../evidence/reference_validator_hulls_v1/receiving/receipt.json):
+three analytic hull controls and six clips, 28 JSON files and 70,653 bytes.
+All are saved and independently checked after reading. The bounded ordinary
+control uses one CPU, 2 GiB, 0.25 seconds and peak RSS 23,512 KiB; the receipt
+retains its distinct internal sample. It explicitly selects no original inputs.
+No managed allocation or six-case qualification is inferred from this run.
+
+The [Slurm attempt](../evidence/reference_validator_hulls_v1/scheduler_attempt.json)
+requested one CPU, 2 GiB and five minutes on `tests`, with five-second immediate
+admission. Job 5 failed before execution; queue readback was empty. Node state
+readback showed `tests=inval` and `normal=unk*`, despite a responding controller.
+The allocation failed; its node/configuration cause is not diagnosed. The full batch was not
+run outside Slurm. Its six source-hull qualifications remain pending under #76
+until a usable managed allocation is available. General infrastructure context
+is [uibcdf-infrastructure#1](https://github.com/uibcdf/uibcdf-infrastructure/issues/1).
+
+Use a fresh additive receiving directory for that later batch. Preserve this
+failed-attempt history, and update current checkpoint/report/issue disposition
+when successful receiving supersedes the pending state. Preliminary pre-commit
+probes only informed resource sizing, not the retained source qualification.
+
+The final selection passes 202 tests (prior 161 plus 41 hull controls), including
+the successful bounded tetrahedron worker control and deliberate timeout handling.
+Ruff/format, mypy on 26 source files (3.11 syntax/actual 3.14 dependency target),
+report indexes and offline finding checks pass. The existing `topomt-dev` prefix
+supplies mypy; no environment is changed. Tests use one CPU/2 GiB, 14.19 seconds
+and peak RSS 95,208 KiB. All 355 original case files remain unchanged. This is
+selected Linux source evidence, not a full suite or public/platform qualification.
+
 ## Developer route
 
 ```bash

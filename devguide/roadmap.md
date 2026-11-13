@@ -99,6 +99,14 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+Hull continuation (2026-11-13 UTC): the
+[domain proof tranche](DFND/reference_validator_hull_checkpoint.md) now checks
+source-hull equality and closed box clipping on retained small controls. Retry
+the six-original-source capture under #76 when a managed Slurm allocation is
+usable; the immediate job 5 request did not execute. Integrate checked geometric
+domains into the full steric construction after the remaining admission work.
+This does not compute probe-free regions or alter the original findings.
+
 Precision continuation (2026-11-13 UTC): the
 [analytic feasibility tranche](DFND/reference_validator_precision_feasibility.md)
 now passes total-volume k=8/16/24/32 requests for contained singleton/pair

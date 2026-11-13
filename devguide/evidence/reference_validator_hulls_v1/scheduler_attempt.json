@@ -1,0 +1,49 @@
+{
+  "schema": "topomt.reference-validator.scheduler-attempt/1",
+  "recorded_at_utc": "2026-11-13T07:45:44.551798+00:00",
+  "owner": "uibcdf/topomt#76",
+  "source_revision": "2b6985bfb8a3ee8a2b856060435a7c3b93fbab6b",
+  "requested": {
+    "scheduler": "slurm",
+    "partition": "tests",
+    "ntasks": 1,
+    "cpus_per_task": 1,
+    "memory_mb": 2048,
+    "wall_seconds": 300,
+    "immediate_seconds": 5
+  },
+  "scheduler_job_id": "5",
+  "allocation_status": "not_allocated",
+  "execution_started": false,
+  "submission_exit_code": 1,
+  "submission_messages": [
+    "Required node not available (down, drained or reserved)",
+    "Unable to allocate resources: Requested nodes are busy"
+  ],
+  "queue_readback_after_failure": [],
+  "controller_probe": "UP (read-only query outside sandbox)",
+  "node_state_readback": [
+    {
+      "partition": "tests",
+      "nodes": 1,
+      "state": "inval"
+    },
+    {
+      "partition": "normal",
+      "nodes": 4,
+      "state": "unk*"
+    },
+    {
+      "partition": "prior",
+      "nodes": 1,
+      "state": "inval"
+    },
+    {
+      "partition": "prior",
+      "nodes": 4,
+      "state": "unk*"
+    }
+  ],
+  "interpretation": "No usable managed allocation was obtained. Node health and configuration cause are not diagnosed. Do not interpret unexecuted original-source cases as empty hulls or replace the scheduler with the full unmanaged batch.",
+  "next_action": "Retain small fixture receiving separately; retry the six original sources in a fresh additive receiving directory after a usable managed allocation is available."
+}

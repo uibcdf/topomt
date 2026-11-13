@@ -11,6 +11,11 @@ now meets total-volume targets on its own strictly contained singleton/pair
 cluster scope. It does not add volumes to this topology certificate, qualify
 general clipping or supply the outstanding general multi-ball construction.
 
+The [separate hull-domain tranche](reference_validator_hull_checkpoint.md) now
+proves center-hull equality and closed box clipping on small geometric controls.
+It does not extend this one-ball topology construction or the complete steric
+Model. The original-source domain batch awaits usable managed resources.
+
 ## Question and achieved scope
 
 Can a standalone checker prove a nontrivial exhaustive component inventory,

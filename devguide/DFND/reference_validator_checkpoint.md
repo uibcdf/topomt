@@ -5,9 +5,54 @@ Initial proof producer: `3b75f595eb6f52d9e6ff66a8f02bdcb0efb4633a`.
 Operational continuation: `997f69b3d496333d7c89e2fc18dcd5a487ab38c1`.
 One-ball topology feasibility: `0aac0c04e1ea49f0ca3f8c485f9b508c4d840e9e`.
 Analytic precision feasibility: `580f1c016db48cc7041d9731ddc88501b87fd45a`.
+Center-hull equality and geometric clipping: `2b6985bfb8a3ee8a2b856060435a7c3b93fbab6b`.
 These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete connected-region validator or a supported public TopoMT detector.
+
+## Certified hull identity and closed box clips — 2026-11-13 UTC
+
+The [hull checkpoint](reference_validator_hull_checkpoint.md) implements an
+exact incremental proposal and an independent halfspace checker. Full-dimensional
+source containment, positive normal equilibrium/full rank, exhaustive feasible
+plane intersections and complete source-vertex membership prove equality with
+`conv(all received centers)`. A larger containing polytope is rejected. This
+does not trust a floating hull, sample count or the producer's mesh topology.
+
+Closed hull/box intersection now retains empty, point, edge, face and positive
+3D outcomes, including a `2^-80` sliver. Outward facet cycles and exact geometric
+volumes are recoverable. These are geometric domain quantities, not probe-free
+volumes or connected regions. The separate immutable CenterSource consumes
+only coordinates and preserves row/frame/file/unit identities. Public quantity
+receiving is explicit under a nondefault policy; the earlier full steric Model
+still admits boxes/tetrahedra until the next integration gate.
+
+The [retained small receiving](../evidence/reference_validator_hulls_v1/receiving/receipt.json)
+contains three analytic hulls and six clips: 28 JSON files, 70,653 bytes. They are
+saved, read and independently checked at source `2b6985b`. The bounded ordinary control uses
+one CPU, a 2 GiB address cap, 0.25 seconds and peak RSS 23,512 KiB. It schedules
+no original sources, reports no original qualification, and claims no Slurm
+reservation. Earlier pre-commit original-source probes only sized the requested
+envelope; they are not a retained, source-pinned six-case receiving.
+
+The full original-source batch is **pending**. The
+[managed allocation attempt](../evidence/reference_validator_hulls_v1/scheduler_attempt.json)
+requested one CPU/2 GiB in Slurm `tests` with immediate admission. Job 5 failed
+allocation; execution never started and no queued job remained. The observed
+node states were `inval` for `tests` and `unk*` for `normal`; their cause is not
+diagnosed. The batch was not rerouted to unmanaged computation. Retry in a new
+additive receiving directory when a usable managed allocation is available.
+#76 owns the receiving follow-up; infrastructure context is
+[uibcdf-infrastructure#1](https://github.com/uibcdf/uibcdf-infrastructure/issues/1).
+The failed attempt remains historical evidence, not a permanent infrastructure
+or algorithmic limitation. Reconcile this current pending state after successful
+receiving rather than rewriting the original failed attempt.
+
+The selection passes **202 tests**: prior 161 plus 41 hull/source/clip/worker
+controls. Ruff/format and scoped mypy on 26 source files pass. Tests use one CPU
+and a 2 GiB cap (14.19 seconds, peak RSS 95,208 KiB); all 355 original case files
+remain unchanged. Full-suite/installed/minor/platform evidence remains separate
+under #16. No native/finding disposition or public P6 admission changes.
 
 ## Actual requested volume precision — 2026-11-13 UTC
 
@@ -227,7 +272,9 @@ qualification.
 
 The bounded P0 model/proof and operational run/checkpoint contracts above are
 source-delivered; their initial absence is superseded by the continuation.
-Complete general domain admission remains P1/P2 work. P1 still needs the
+Center-hull geometry/clipping now has its separate checked developer route;
+full steric-domain integration and original-source receiving remain P1/P2 work.
+P1 still needs the
 local/global geometry feasibility decision and a general exhaustive free-region
 construction. P4 needs general clipped/region-assigned precision and validated
 integration; the earlier partition enclosures do not meet k=24, while the
