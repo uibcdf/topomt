@@ -1,6 +1,7 @@
 """Certified analytic controls must meet explicit tolerances or retain bounds."""
 
 import copy
+import hashlib
 import json
 import subprocess
 import sys
@@ -18,6 +19,7 @@ from devtools.reference_validator.model import (
     decode_scalar,
     encode_scalar,
     point,
+    record_digest,
 )
 from devtools.reference_validator.verify import verify
 from devtools.reference_validator.volume_request import VolumeRequest
@@ -449,6 +451,64 @@ def test_frozen_volume_protocol_retains_precision_success_and_explicit_budget_st
     assert receipt['mpfr_crosscheck'] is None
     with pytest.raises(FileExistsError):
         capture(protocol, output)
+
+
+def test_retained_volume_profiles_preserve_original_proofs_and_requested_precision():
+    base = (
+        Path(__file__).resolve().parents[1]
+        / 'devguide/evidence/reference_validator_analytic_volume_v1'
+    )
+    protocol = json.loads((base / 'protocol.json').read_text())
+    saved = base / 'receiving'
+    receipt = json.loads((saved / 'receipt.json').read_text())
+    assert (
+        hashlib.sha256((base / 'protocol.json').read_bytes()).hexdigest()
+        == receipt['protocol_sha256']
+    )
+    expected = {
+        f'{row["name"]}.{suffix}.json'
+        for row in protocol['profiles']
+        for suffix in ['model', 'certificate', 'verification']
+    }
+    assert set(receipt['files']) == expected | {'constant_crosscheck.json'}
+    for name, digest in receipt['files'].items():
+        assert hashlib.sha256((saved / name).read_bytes()).hexdigest() == digest
+    assert len(receipt['profiles']) == len(protocol['profiles']) == 23
+    for row in protocol['profiles']:
+        name = row['name']
+        model = Model.from_record(
+            json.loads((saved / f'{name}.model.json').read_text())
+        )
+        certificate = json.loads((saved / f'{name}.certificate.json').read_text())
+        original = json.loads((saved / f'{name}.verification.json').read_text())
+        bound = receipt['profiles'][name]
+        assert model.to_record() == row['model']
+        assert certificate['request'] == row['request']
+        assert record_digest(certificate) == bound['certificate_sha256']
+        assert record_digest(original) == bound['verification_sha256']
+        checked = verify(model, certificate)
+        assert (
+            checked['precision_status']
+            == row['expected_precision']
+            == original['precision_status']
+        )
+        assert (
+            checked['volume_lower'] == bound['volume_lower'] == original['volume_lower']
+        )
+        assert (
+            checked['volume_upper'] == bound['volume_upper'] == original['volume_upper']
+        )
+        assert not checked['topology_complete']
+        assert checked['n_components'] is None
+    assert receipt['mpfr_crosscheck']['file'] == 'constant_crosscheck.json'
+    audit = json.loads((saved / 'constant_crosscheck.json').read_text())
+    for entry in audit['constants'].values():
+        assert (
+            decode_scalar(entry['rational_lower'])
+            <= decode_scalar(entry['mpfr_lower'])
+            <= decode_scalar(entry['mpfr_upper'])
+            <= decode_scalar(entry['rational_upper'])
+        )
 
 
 def test_optional_capture_audit_preserves_independent_constant_versions():

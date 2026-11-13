@@ -1,0 +1,40 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "kind": "analytic_ball_union_volume",
+  "arithmetic": "rational-exact/1",
+  "model_sha256": "3531acbbc6dc6404c7863e6d963fe1ff460d36097ab28d107929a96848161c21",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "1",
+      "128"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "65536"
+    ]
+  },
+  "clusters": [
+    [
+      0,
+      1
+    ]
+  ],
+  "dominated": [],
+  "volume_lower": [
+    "505864831754009772798193952920941130526388184052851859452787580887431030537997857286869387930558472619590210413109873146171",
+    "1003483436416829669655696693118002844982183476356525927402563030672984142758972933022015140625000000000000000000000000000"
+  ],
+  "volume_upper": [
+    "64725237381758615496196492065746096449627701438780505215318265823159916481356719205832825096933984178592084233616942235716484801",
+    "128395363965105914407302409747877598215665962376723938858734012182219734572797259872659893748907500000000000000000000000000000"
+  ],
+  "refinement": {
+    "atan_terms": 16,
+    "distance_bits": 16,
+    "max_atan_terms": 64,
+    "max_distance_bits": 256
+  }
+}

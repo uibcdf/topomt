@@ -1,5 +1,15 @@
 # DFND notebook laboratory checkpoint
 
+## Certified total-volume precision controls — 2026-11-13 UTC
+
+Source `580f1c0` adds an [analytic precision tranche](reference_validator_precision_feasibility.md)
+for strictly contained singleton/pair ball clusters. Twenty ladder profiles meet
+both absolute/relative k=8/16/24/32 targets; exact empty-obstacle volume and two
+deliberate unresolved controls preserve their distinct outcomes. This does not
+qualify the six-case hulls, per-region precision or native #181. All prior
+artifacts/findings remain unchanged. See the [current validator checkpoint](reference_validator_checkpoint.md)
+for source, resources, actual receiving and the remaining general geometry gate.
+
 ## Exact connected-region controls — 2026-11-13 UTC
 
 Source `0aac0c0` adds a [bounded P1 completeness construction](reference_validator_p1_feasibility.md)

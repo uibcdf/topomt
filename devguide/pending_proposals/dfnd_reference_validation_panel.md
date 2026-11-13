@@ -15,6 +15,18 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Actual analytic volume precision — 2026-11-13 UTC
+
+The [precision feasibility tranche](../DFND/reference_validator_precision_feasibility.md)
+at `580f1c0` supplies exact admitted-ball coverage and certified total-volume
+bounds for contained singleton/pair clusters. The 23-profile receiving has 21
+resolved requests (including all five models at k=24/k=32) and two intentional
+unresolved stops. Source maps, units, tolerances and exact bounds are retained;
+optional MPFR cross-checking is separate from certificate validity. Maximal
+refinement also passes bounded large-integer persistence without global-policy
+changes. #76 remains partial/open for general construction, hull clipping,
+region assignment and later public delivery. No native/finding disposition changes.
+
 ## Nontrivial exact region controls — 2026-11-13 UTC
 
 The [P1 feasibility tranche](../DFND/reference_validator_p1_feasibility.md)

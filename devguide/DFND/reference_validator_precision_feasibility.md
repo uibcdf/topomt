@@ -135,6 +135,31 @@ consumed controls. Explicit context managers preserve the prior policy. The
 capture records actual provider versions. This is secondary evidence, not a
 runtime dependency or the geometric proof; no shared environment is changed.
 
+## Retained receiving and checks
+
+Source/protocol `580f1c016db48cc7041d9731ddc88501b87fd45a` produces the
+[original receipt](../evidence/reference_validator_analytic_volume_v1/receiving/receipt.json).
+Twenty ladder profiles pass both requested tolerances, including all five
+models at k=24 and k=32. Exact empty-obstacle volume passes zero error. The two
+deliberate unresolved profiles preserve their enclosures and requested errors.
+The retained original models/certificates/verification records and optional
+constant audit occupy 71 JSON files, 129,323 bytes, with raw checksums.
+
+The explicit audit uses gmpy2 2.3.2 and MPFR 4.2.2 at 1024 bits. The capture
+uses one CPU and a 2 GiB address ceiling (0.28 seconds as a bounded process,
+peak RSS 27,112 KiB); its receipt retains the distinct internal measurement.
+These are finite resource receipts for small controls, not speed comparisons.
+
+The final selection passes 161 tests: prior 106, 53 new volume controls and two
+codec controls. Both optional MPFR diagnostics actually execute in this source
+receiving. Saved proofs are also checked with all numerical engines blocked.
+Repository Ruff/format, scoped mypy on 21 source files (3.11 syntax, actual 3.14
+dependency target), report indexes and offline finding checks pass. The existing
+`topomt-dev` prefix supplies mypy; no environment is changed. Tests use one CPU,
+2 GiB and 12.64 seconds (peak RSS 95,060 KiB). All 355 original six-case files
+are checked unchanged. This is selected Linux source evidence, not full-suite,
+installed-package, supported-minor or platform qualification.
+
 ## Disposition and next work
 
 This demonstrates validated analytic integration on a precisely admitted

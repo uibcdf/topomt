@@ -23,7 +23,9 @@ unselected. The [one-ball box feasibility tranche](reference_validator_p1_feasib
 now proves nontrivial exhaustive region inventories on its admitted analytic
 scope, including exact throat closure. It does not select the general multi-ball
 construction or pass P1's precision gate. The checkpoint states the remaining
-scientific gates explicitly.
+scientific gates explicitly. The [analytic precision tranche](reference_validator_precision_feasibility.md)
+now passes the frozen k=8/16/24/32 total-volume ladder on contained singleton/pair
+clusters. General construction and clipped/per-region precision remain unqualified.
 
 ## Scope and acceptance of the first complete validator
 
@@ -278,7 +280,10 @@ Current bounded evidence: the [one-ball box tranche](reference_validator_p1_feas
 implements a complete finite monotone-sector cover and independently checked
 incidences for the decisive corner/throat fixtures. Its retained thirteen controls
 do not qualify additional obstacles, general clipping or high-precision volume.
-General candidate selection and the precision prototype remain open under #76.
+General candidate selection and clipped/region-assigned precision remain open
+under #76. The [analytic integration prototype](reference_validator_precision_feasibility.md)
+now supplies checked requests, bounds and actual success/budget-stop evidence
+for a separate contained-ball cluster scope. It does not pass the complete P1 gate.
 
 ## Planned module boundaries
 
@@ -295,8 +300,9 @@ supported production export.
 | `devtools/reference_validator/verify/` | Separately runnable parser, exact primitive/domain/coverage checks, topology obligations and volume verification. No import of producer search code. |
 | `devtools/reference_validator/receiving.py` | Read original protocols, freeze the actual validated model and create additive source-bound results. |
 | `devtools/reference_validator/box_topology.py`, `verify/box_topology.py` | Implemented scoped one-ball/axis-box completeness construction and its standalone sector/incidence checker. This is P1 control evidence, not the selected general engine. |
+| `analytic_volume.py`, `volume_request.py`, `verify/analytic_volume.py`, `verify/_interval.py` under the same developer directory | Implemented contained singleton/pair cluster total-volume proof, explicit precision requests and declared trusted rational interval/constants. General clipping and region assignment remain pending. |
 | `devtools/reference_validator/compare.py` | Mapped occupancy/connectivity comparisons; keeps morphology/count semantics distinct. |
-| `devtools/reference_validator/__main__.py` | Implemented developer commands `freeze-tetrahedron`, `produce`, `box-topology`, `verify`, `start`, `resume` and `verify-run`; native comparison remains planned. |
+| `devtools/reference_validator/__main__.py` | Implemented developer commands `freeze-tetrahedron`, `produce`, `box-topology`, `volume`, `verify`, `start`, `resume` and `verify-run`; native comparison remains planned. |
 | `devtools/reference_validator/native/` | Optional Rust crate/backend after P1, with exact arithmetic strategy and a bounded standalone process interface. |
 | `tests/test_reference_validator_*.py` | Model, exact arithmetic, certificate rejection, topology, precision, receiving and resource/resume controls. |
 

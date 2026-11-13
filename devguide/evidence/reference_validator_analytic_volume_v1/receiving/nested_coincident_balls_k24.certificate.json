@@ -1,0 +1,52 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "kind": "analytic_ball_union_volume",
+  "arithmetic": "rational-exact/1",
+  "model_sha256": "a9444c8a364c0dd74c28ecee1ba5da9a28d385f20d18f212e9382dd8acb7615d",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "1",
+      "32768"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "16777216"
+    ]
+  },
+  "clusters": [
+    [
+      0
+    ]
+  ],
+  "dominated": [
+    {
+      "source_id": 1,
+      "covering_id": 0
+    },
+    {
+      "source_id": 2,
+      "covering_id": 0
+    },
+    {
+      "source_id": 3,
+      "covering_id": 0
+    }
+  ],
+  "volume_lower": [
+    "7867734996982305727220401664",
+    "16442852077759107287109375"
+  ],
+  "volume_upper": [
+    "17976515995266642019163780052352",
+    "37569286141347118693878984375"
+  ],
+  "refinement": {
+    "atan_terms": 4,
+    "distance_bits": 4,
+    "max_atan_terms": 64,
+    "max_distance_bits": 256
+  }
+}

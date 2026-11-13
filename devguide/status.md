@@ -1,5 +1,16 @@
 # TopoMT development status
 
+## Actual certified volume requests — 2026-11-13 UTC
+
+The [analytic precision tranche](DFND/reference_validator_precision_feasibility.md)
+at source `580f1c0` now meets the k=8/16/24/32 total-volume ladder for strictly
+contained singleton/pair ball clusters. Twenty ladder profiles plus one exact
+empty-obstacle control resolve; two deliberate stops retain unresolved precision.
+This admits neither arbitrary overlap clusters nor hull clipping/general
+connected-region inventories. The [current checkpoint](DFND/reference_validator_checkpoint.md)
+retains source/MPFR audit/resources and 161 selected passing tests. All original
+case bytes and native finding dispositions remain unchanged; #76 stays partial.
+
 ## Exact region feasibility controls — 2026-11-13 UTC
 
 The [P1 one-ball box tranche](DFND/reference_validator_p1_feasibility.md) at source

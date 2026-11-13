@@ -6,6 +6,11 @@ Owner [#76](https://github.com/uibcdf/topomt/issues/76); first native consumer
 selection or qualification of a general multi-ball topology engine. Its new
 fixtures are validator controls, not additional BenchLab geometry families.
 
+Current continuation: the [analytic precision tranche](reference_validator_precision_feasibility.md)
+now meets total-volume targets on its own strictly contained singleton/pair
+cluster scope. It does not add volumes to this topology certificate, qualify
+general clipping or supply the outstanding general multi-ball construction.
+
 ## Question and achieved scope
 
 Can a standalone checker prove a nontrivial exhaustive component inventory,
@@ -166,8 +171,9 @@ architecture, reject the global candidate, or replace the outstanding clipping
 construction. No external geometric kernel was compiled or executed.
 
 **P1 remains partial.** The next owning work under #76 is the explicit
-multi-ball construction/coverage and clipping feasibility decision, plus the
-validated curved-integration precision prototype. Qualify actual source,
+multi-ball construction/coverage and clipping feasibility decision, plus
+general clipped/region-assigned integration beyond the analytic controls.
+Qualify actual source,
 license, arithmetic and checker obligations before selecting an external
 backend. Broader P2/P3/P4 admission remains subsequent work; #181 and all
 native comparative-finding dispositions are unchanged.

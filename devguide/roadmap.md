@@ -99,6 +99,14 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+Precision continuation (2026-11-13 UTC): the
+[analytic feasibility tranche](DFND/reference_validator_precision_feasibility.md)
+now passes total-volume k=8/16/24/32 requests for contained singleton/pair
+clusters, with saved independent checking and explicit budget failures.
+Next qualify the general construction/clipping and region-assigned integration
+decision; neither these box controls nor their k=24 success qualify the original
+six hulls/P5 per-region target or change native #181's disposition.
+
 P1 control continuation (2026-11-13 UTC): the
 [one-ball box feasibility tranche](DFND/reference_validator_p1_feasibility.md)
 now certifies exhaustive corner/throat regions with actual saved receiving.

@@ -4,9 +4,55 @@ Owner [#76](https://github.com/uibcdf/topomt/issues/76); first consumer #181.
 Initial proof producer: `3b75f595eb6f52d9e6ff66a8f02bdcb0efb4633a`.
 Operational continuation: `997f69b3d496333d7c89e2fc18dcd5a487ab38c1`.
 One-ball topology feasibility: `0aac0c04e1ea49f0ca3f8c485f9b508c4d840e9e`.
+Analytic precision feasibility: `580f1c016db48cc7041d9731ddc88501b87fd45a`.
 These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete connected-region validator or a supported public TopoMT detector.
+
+## Actual requested volume precision — 2026-11-13 UTC
+
+The [analytic precision tranche](reference_validator_precision_feasibility.md)
+implements exact geometric admission and certified total-volume bounds for balls
+strictly contained in an axis box. After exact containment reduction, positive
+overlap clusters must have size one/two, with disjoint interiors across clusters.
+Every source atom remains mapped. Larger clusters and domain clipping are
+rejected. Sphere/cap formulas, exact interval arithmetic, bounded Machin pi and
+dyadic square-root intervals replace empirical volume convergence on this scope.
+
+The [frozen 23-profile protocol](../evidence/reference_validator_analytic_volume_v1/protocol.json)
+precedes the [retained receiving](../evidence/reference_validator_analytic_volume_v1/receiving/receipt.json).
+All five models pass absolute `V_box*2^-k` and relative `2^-k` at
+`k=8,16,24,32`, including partially overlapping balls at irrational center
+distance. One empty-obstacle control also passes exact zero error. Two
+deliberate stops retain valid enclosures with unresolved precision: a zero-budget
+irrational pair and finite-budget zero error for a positive sphere. Expected
+formulas/dispositions do not drive the numerical solver or checker.
+
+The receiving retains 71 JSON files, 129,323 bytes, including an explicitly
+selected directed-rounding audit with gmpy2 2.3.2 / MPFR 4.2.2 at 1024 bits.
+That audit is secondary; saved certificate validity and producer arithmetic
+need neither provider. The bounded process uses one CPU, a 2 GiB address cap,
+0.28 seconds and peak RSS 27,112 KiB. The receipt separately retains its internal
+timing/resource sample. These are small-control resource receipts, not speed
+comparisons or whole-engine feasibility evidence.
+
+A maximal 512-term/4096-bit regression exposed Python's default integer-string
+limit. A bounded 20,000-digit exact codec now preserves those certificates
+without changing global policy; oversize values are rejected. Earlier canonical
+encodings and all original case artifacts retain their bytes. Invalid CLI
+fractions fail cleanly without creating an output or implying physical results.
+
+The final selection passes **161 tests**: the prior 106 plus 53 volume controls
+and two exact-codec controls. Repository Ruff/format and scoped mypy on 21
+validator files pass. Tests use one CPU and a 2 GiB cap (12.64 seconds, peak RSS
+95,060 KiB); all 355 original case files remain unchanged. Full-suite, installed,
+supported-minor and platform evidence retain their separate gates under #16.
+
+This is total-volume precision for an explicitly admitted decomposition, not
+P5 per-region qualification, an exhaustive multi-ball region inventory, general
+hull clipping or a #181 correction. P1 remains partial for the general
+construction and clipped/region-assigned integration decision. All earlier
+method/finding dispositions remain scoped as before.
 
 ## Exact nontrivial region inventories — 2026-11-13 UTC
 
@@ -183,8 +229,9 @@ The bounded P0 model/proof and operational run/checkpoint contracts above are
 source-delivered; their initial absence is superseded by the continuation.
 Complete general domain admission remains P1/P2 work. P1 still needs the
 local/global geometry feasibility decision and a general exhaustive free-region
-construction. P4 needs volume precision targets and curved/high-order validated
-integration; these broad enclosures do not meet the plan's k=24 target. Other
+construction. P4 needs general clipped/region-assigned precision and validated
+integration; the earlier partition enclosures do not meet k=24, while the
+analytic route above passes it only for its separate total-volume scope. Other
 five-case hulls, all 19 profiles, complete apertures/attachments, biological
 classification and public API/package qualification remain subsequent gates.
 

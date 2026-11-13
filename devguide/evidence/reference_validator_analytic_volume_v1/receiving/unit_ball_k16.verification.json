@@ -1,0 +1,48 @@
+{
+  "schema": "topomt.reference-validator.verification/1",
+  "verification_status": "accepted",
+  "kind": "analytic_ball_union_volume",
+  "model_sha256": "8f136bd1afbcbc90f7597778d38aaddef676797c14a0c692b563efac5d1d50ed",
+  "certificate_sha256": "00cee046d80a3dcd72544a4745d8ba39c56e792e58042baa45c866cbffd54ee6",
+  "trusted_arithmetic": "stdlib-fraction/1",
+  "topology_complete": false,
+  "n_components": null,
+  "topology_status": "not_computed",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "26061a63e906c8da7d2bbbec82b62036c172138fbf3252d3c396d66ff70c6367",
+    "verify/__init__.py": "31f7861f5a1bfcb1b8acf81e76318cea437a992767f70f68d08d548d00427bcc",
+    "verify/geometry.py": "cc2d52c1502a5bf6b06ce7a84e04712ea28407c68cb3e9e8862aa058d4cd8258",
+    "volume_request.py": "c261e4049c3de53c5bdfce7ad0702ab476f2b50133ac6341300709c53381c739",
+    "verify/_interval.py": "65932e679a0d003c6b80606f8ad9b09513aa67da9115e85ec81055e7f4700069",
+    "verify/analytic_volume.py": "82e7b0a5341d0d140b4f003e79073275a7526415969b1b1392df59e15a009dbc"
+  },
+  "volume_lower": [
+    "324965483761184",
+    "639933703125"
+  ],
+  "volume_upper": [
+    "49499742148916304",
+    "97476408149875"
+  ],
+  "volume_unit": "nm**3",
+  "volume_target": "total_probe_center_free_set",
+  "volume_enclosure_status": "resolved",
+  "precision_status": "resolved",
+  "precision_request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "1",
+      "128"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "65536"
+    ]
+  },
+  "stop_reason": "requested_precision",
+  "boundary_incidence_status": "not_computed",
+  "analytic_scope": "strictly-contained-singleton-pair-clusters/1"
+}
