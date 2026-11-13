@@ -17,15 +17,57 @@ DFND, previous observations, finding dispositions or the synthetic-first scope.
 
 Build a reference engine for connected probe-center free space, with checked
 geometric certificates, explicit numerical bounds and a separately executable
-verifier. Adaptive subdivision is the principal spatial representation; it is
-not, by itself, a complete topology algorithm. Full component enumeration also
-needs a qualified geometric construction resolving the free pieces and their
-incidences in cells cut by obstacle surfaces and the reporting boundary.
+verifier. Adaptive subdivision is a candidate spatial representation, not a
+complete topology algorithm or an irrevocable architecture choice. Full
+component enumeration needs a qualified construction proving exhaustive free
+regions and their incidences, including the reporting boundary. Local cut-cell
+geometry and a global geometric decomposition are alternative ways to supply
+that proof; choose through the feasibility gate below.
 
 Use Rust where measured cost justifies it, initially on CPUs. Do not make a
 Rust-only implementation an obstacle to reusing a qualified exact geometry
 library. Resolve the topology construction before describing the whole design
 as an oracle. Monte Carlo and dense grids remain useful secondary checks.
+
+## Second critical review and readiness for detailed planning
+
+Review baseline: the first design at `cd88e5d`, checked against the
+[native component contract](residence_transit_contract.md),
+[physical boundary semantics](../../docs/content/dfnd/exterior_and_boundaries.md)
+and [classification policy](../../docs/content/dfnd/classification.md).
+
+The requirements are sufficiently defined to start detailed implementation
+planning. Another broad review is not a prerequisite. Four refinements prevent
+the plan from committing too early or promising a stronger result than its
+evidence supports:
+
+1. **Move the completeness-construction decision to the beginning.** It was
+   too late in the first delivery sequence. Require a small feasibility study
+   before building an extensive subdivision engine. A path/volume prototype
+   alone does not retire this architectural risk.
+2. **Specify the proof, not a mandatory cut-cell implementation.** Compare
+   local certified arrangements with a global geometric decomposition plus
+   independent volume integration. Either must prove clipped-region coverage,
+   connectivity, labeling and boundary incidence. Global occupied-union Betti
+   numbers alone do not provide these outputs.
+3. **Separate physical and morphological acceptance.** The reference's regions
+   are not automatically DFND components, motifs, native links or public Mouth
+   objects. Compare model/domain/observable and the particular physical claim
+   before diagnosing a false split, merge or count.
+4. **Bound both the initial scientific scope and the trusted checker.** The
+   first complete release targets connected probe-center regions in admitted
+   fixed, nonperiodic convex domains, with volumes and boundary incidence.
+   Full homotopy type, every Betti number, optimal bottlenecks, swept volumes,
+   periodic transport and biological classification are separate capabilities.
+   The checker must state which arithmetic/geometric facts it trusts; a second
+   program repeating the same unverified topology routine is not independent
+   confirmation of that routine.
+
+The detailed plan should now define modules, certificate schemas, dependency
+decisions, test fixtures, resource budgets, stages and observable exit criteria.
+Its first stage must choose a concrete completeness construction or explicitly
+record that decision as unresolved. No additional general audit is needed unless
+that study contradicts the model, proof obligations or intended input scope.
 
 ## Scientific object and admitted model
 
@@ -96,8 +138,8 @@ the stronger new contract.
 | --- | --- | --- | --- |
 | Monte Carlo / randomized search | Simple occupancy/volume estimates and positive witnesses. | Rare components and passages can be missed; no finite unsuccessful search proves absence or separation. | Secondary cross-check and search aid. |
 | Uniform grid / marching cubes | Straightforward debugging and visualization. | Finer spacing alone does not prove topology or exclude hidden subvoxel features. | Small diagnostic baseline. |
-| Adaptive subdivision with rigorous predicates | Checked occupied/free regions, conservative volume bounds, positive paths and some negative decisions. | Mixed cells can conceal components or attachments indefinitely near difficult configurations. | Main spatial engine and certificate producer. |
-| Exact/validated sphere geometry | Can resolve the obstacle boundary and difficult topology without relying on sampled voxel centers. | A concrete construction, domain clipping, degeneracies and component-label recovery must be qualified. | Mandatory topology-completion route; secondary analytic volume check where available. |
+| Adaptive subdivision with rigorous predicates | Checked occupied/free regions, conservative volume bounds, positive paths and some negative decisions. | Mixed cells can conceal components or attachments indefinitely near difficult configurations. | Candidate spatial engine and certificate producer, subject to early feasibility review. |
+| Exact/validated sphere geometry | Can resolve the obstacle boundary and difficult topology without relying on sampled voxel centers. | A concrete construction, domain clipping, degeneracies and component-label recovery must be qualified. | Candidate local/global topology construction; secondary analytic volume check where available. |
 
 These are complementary parts of the proposed validator. More runtime spent
 on an uncertified approximation does not turn it into a proof.
@@ -164,10 +206,10 @@ cavity. Set inclusion also does not order component counts. Per-component
 upper bounds may overlap while their possible merger remains unresolved;
 they must not be summed as volumes of disjoint known components.
 
-### Required topology-completion construction
+### Cut-cell candidate for topology completion
 
-The selected architecture must resolve cut-cell topology using a checked
-decomposition induced by the actual sphere surfaces and domain/cell planes:
+One candidate resolves cut-cell topology using a checked decomposition induced
+by the actual sphere surfaces and domain/cell planes:
 
 1. Enumerate the local free pieces with predicates for the strict inequalities
    `||x-a_i||**2 > (r_i+p)**2` and the declared domain inequalities.
@@ -180,10 +222,17 @@ decomposition induced by the actual sphere surfaces and domain/cell planes:
 
 This is a specification for a construction and its proof/checker obligations,
 not an implemented theorem about our current grid. A local arrangement of
-spheres/planes with exact predicates and algebraic constructions is the main
+spheres/planes with exact predicates and algebraic constructions is one
 candidate. A qualified semialgebraic decomposition with certified incidences is
 an alternative for especially small difficult configurations. Do not substitute
 sign samples or an unqualified arrangement routine for the coverage proof.
+
+Alternatively, a global geometric construction could supply exhaustive
+domain-clipped free components and their labels, while an independent adaptive
+integrator bounds their volumes. It must also certify how integration cells
+and boundary patches map to those regions. This avoids requiring the same
+local arrangement construction in every cut cell; it does not remove any
+completeness, incidence or labeling obligation.
 
 Before the first implementation claims complete component enumeration, choose
 and qualify that concrete construction. Until then, deliver useful certified
@@ -290,24 +339,85 @@ receiving, including failed/unresolved runs. Do not tune the reference to match
 DFND. A valid comparator requires the same model, domain and observable; a
 native motif is not automatically a distinct physical connected component.
 
+## Comparing the reference with DFND
+
+Maintain distinct levels of acceptance:
+
+- **Occupancy:** qualify a claimed probe-center position or available region
+  against the complete obstacle model, using the declared numerical meaning.
+- **Connectivity:** qualify a claimed continuous route, enclosure or separation
+  in the same domain. Allow many-to-many correspondence between native supports
+  and reference regions; an ambiguous correspondence is an unresolved result.
+- **Morphology:** assess Pocket, Channel, Groove, motif or Mouth claims against
+  their own definitions. Physical connectedness alone does not validate or
+  invalidate a morphological subdivision or choose a catalog name.
+
+For example, globally exterior-accessible pockets can communicate through the
+exterior while remaining distinct useful topographic features. The native
+contract removes OCEAN before defining finite graph components. A whole-space
+reference that includes exterior communication cannot score that finite native
+segmentation by requiring equal component counts. Similarly, free hull patches,
+native links and public Mouth children remain distinct observables.
+
+Before reporting a false split/merge or missing region, name the model, domain,
+physical output obligation and mapped supports. Distinguish an unqualified
+local candidate from a result explicitly claiming global physical validation.
+The validator supplies evidence for #181's policy decision; it does not silently
+choose or change that policy. Its own inventory must remain independent of the
+native support selection so that false negatives can also be investigated.
+
+## Early architecture feasibility gate
+
+The detailed implementation plan starts with a bounded comparison of:
+
+| Candidate | Required prototype evidence |
+| --- | --- |
+| Certified subdivision with local sphere/plane arrangements | Complete local free-piece and incidence certificates, conservative joining across cells, domain clipping and an independently checkable completeness argument. |
+| Global validated geometric decomposition with separate integration | Exhaustive clipped free regions and labels, boundary incidence, and a checked map from integration cells to regions. A global cavity count without recoverable regions is insufficient. |
+
+For each candidate, document the concrete algorithm/backend, mathematical
+assumptions, exact/interval arithmetic and trusted checker operations, source
+revision/license/build requirements, degeneracies and failure states. Qualify
+complete inventories first on independently justified analytic primitive
+fixtures. Then attempt selected frozen tetrahedron/tube/dumbbell questions,
+keeping the limited existing anchor/path/exclusion references distinct from
+previously unknown complete inventories. Do not fit counts to DFND.
+
+Measure producer plus verifier time, memory and certificate size in a small
+bounded pilot. Cost is secondary to reliability, but it must be predictable
+enough to execute safely. A shared unverified topology routine in producer
+and checker does not resolve that routine's proof obligation. Record the trusted
+base explicitly and use analytic/corruption controls and independent checks
+where they address that boundary.
+
+Exit with a justified concrete construction and its remaining qualification
+work, or an explicit unresolved design result. Do not lock the Rust/native
+packaging architecture or start a large spatial-engine implementation merely
+because the volume-only prototype works. This pilot belongs to the future
+implementation plan; it has not been executed in this documentary review.
+
 ## Delivery order and completion gates
 
 1. **Contract and trusted predicates.** Freeze model, boundary/contact policy,
    exact input interpretation, certificate schema and analytic controls.
-   Implement checker and predicate tests before production/refinement code.
+   Perform the early architecture feasibility gate and choose the concrete
+   completeness construction before extensive engine implementation. Develop
+   independent checker/predicate tests before production/refinement code.
 2. **Availability and total volume.** Deliver complete domain partitioning,
    rigorous bounds and sufficient full-domain exclusions. Start with the
    tetrahedron and the two tube exclusion controls consuming #181 evidence.
 3. **Anchor connectivity and boundary incidence.** Deliver continuous positive
    paths, conservative separation, enclosure/exterior proofs and recovered
    patch relationships on the same six models.
-4. **Complete component inventory.** Select and qualify the concrete geometric
-   cut-cell/incidence construction; exhaust all component/topology obligations
-   on the admitted panel and bind per-component volume bounds to those regions.
+4. **Complete component inventory.** Implement and qualify the construction
+   selected at the first gate; exhaust the component/incidence obligations on
+   the admitted panel and bind per-component volume bounds to those regions.
    Steps 2–3 alone do not complete the maintainer's requested validator.
 5. **Independent DFND comparison.** Compare full reference regions with native
-   supports for unavailable, missing, split or merged regions. Preserve all
-   previous evidence and reconcile any actual finding change through the
+   supports under the separate occupancy, connectivity and morphology
+   obligations above. Diagnose unavailable, missing, split or merged regions
+   only where the declared physical claim warrants that comparison. Preserve
+   all previous evidence and reconcile any actual finding change through the
    [comparative-finding workflow](../comparative_findings.md). #181 is a first
    consumer, not the owner of every reference capability.
 6. **Measured scaling and later admission.** Optimize qualified CPU execution;
@@ -365,12 +475,17 @@ implementation can provide valuable early decisions without overstating them.
 The complete goal remains an exhaustive, independently checked description of
 the admitted model's connected habitable volumes with controlled error.
 
-## Checks on this review delivery
+## Checks on the initial review delivery
 
-The report-index and comparative-finding offline checks pass. The selected
-reporting/finding checks pass 16 tests with `--noconftest --receptor=llm`;
+At `cd88e5d`, the report-index and comparative-finding offline checks pass.
+The selected reporting/finding checks pass 16 tests with `--noconftest --receptor=llm`;
 the bounded one-CPU execution takes 0.95 seconds and peaks at 51,932 KiB RSS.
 The local file links in this plan and its three navigation/owner documents
 resolve, and the pre-existing human edit to `topomt/_version.py` is preserved.
 These are documentation/governance checks, not validator numerical execution,
 a full test-suite run, a package qualification or hosted documentation delivery.
+
+For the second review, the same offline checks and 16 selected tests pass;
+the bounded one-CPU test execution takes 0.99 seconds and peaks at 52,000 KiB
+RSS. The 37 local file links across the three changed documents resolve.
+No scientific prototype or new topology certificate was executed.

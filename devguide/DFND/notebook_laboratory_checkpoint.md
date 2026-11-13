@@ -6,11 +6,13 @@ The maintainer selects a precision-first assessment of connected probe-habitable
 volume validation before further native qualification. The
 [critical design and implementation gates](physical_reference_validator_plan.md)
 remain owned by #76, with #181 as first consumer and the unchanged six-case
-panel as initial controls. Adaptive subdivision needs rigorous arithmetic,
-independent certificate checking and a qualified cut-cell topology construction
-before claiming exhaustive components; volume bounds and anchor paths alone
-are partial delivery. Rust/CPU execution and later bounded parallelism/GPU
-evaluation are implementation choices, not scientific guarantees.
+panel as initial controls. The bounded second review admits detailed planning
+with an early construction-feasibility gate. Adaptive subdivision needs rigorous
+arithmetic, independent checking and a qualified local/global topology
+construction before claiming exhaustive components; volume bounds and anchor
+paths alone are partial delivery. Compare native morphology and reference
+connected regions under distinct obligations. Rust/CPU execution and later
+bounded parallelism/GPU evaluation are choices, not scientific guarantees.
 
 This is a design review, not new reference receiving or a native fix. Preserve
 the current #180/#181/#184/#188 dispositions, original inputs/evidence and

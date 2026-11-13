@@ -23,7 +23,7 @@ an independent validator of connected probe-habitable volumes. The
 keeps this issue as reference owner and #181 as its first public-qualification
 consumer. It specifies the rigid-ball/probe/domain model, rigorous occupancy
 and volume certificates, continuous paths, separate topology-completeness
-obligations, an independent checker and a geometric cut-cell completion gate.
+obligations, an independent checker and a qualified topology-construction gate.
 An adaptive grid alone, even with tight volume bounds, does not prove complete
 component enumeration. Exact/validated sphere geometry is an implementation
 candidate requiring source/arithmetic/domain qualification, not a newly
@@ -35,6 +35,14 @@ its earlier scope. No new validator execution, native correction, finding
 disposition, protein phase or full-panel completion is claimed. This issue
 remains partial/open; the implementation stages and unresolved construction
 decision are explicitly retained in the linked plan.
+
+The subsequent bounded design review makes the completeness construction an
+early feasibility gate, before extensive engine implementation. Local cut-cell
+and global geometric constructions remain alternatives requiring a checked
+clipped-region inventory. It also separates occupancy, connectivity and
+morphological acceptance; differing physical/native feature counts alone do
+not establish segmentation defects. Detailed implementation planning can begin
+with that gate; no concrete backend or numerical pilot is yet qualified.
 
 ## Current three-case acceptance — 2026-11-10
 
