@@ -1,5 +1,15 @@
 # DFND notebook laboratory checkpoint
 
+## Hull domains in physical point/path checks — 2026-11-13 UTC
+
+The [steric integration](reference_validator_hull_sterics_checkpoint.md) now
+retains a verified original center hull with every atom/radius and probe in
+the physical Model. Exact point and whole-segment proofs preserve strict
+contact; broad whole-domain bounds remain unknown unless a complete sufficient
+proof succeeds. 229 selected tests pass; retained original-profile execution
+of the frozen tetrahedron/narrow-tube pilot follows. General mixed-region
+enumeration and #181's native-carrier qualification remain separate.
+
 ## Checked hull geometry and six-source receiving — 2026-11-13 UTC
 
 Source `2b6985b` adds [exact hull equality and closed box clipping](reference_validator_hull_checkpoint.md).

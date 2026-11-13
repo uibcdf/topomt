@@ -15,6 +15,17 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Proof-backed physical hull Model — 2026-11-13 UTC
+
+The [steric integration](../DFND/reference_validator_hull_sterics_checkpoint.md)
+source-delivers verified hull domains with all-atom point/continuous-path
+checking and sufficient whole-domain proofs. It consumes both coordinate/radius
+quantity records and an explicit probe; interior atoms remain present. General
+hull subdivision, mixed-region enumeration and per-region precision stay open.
+229 selected tests pass; the frozen ten-profile pilot awaits retained execution.
+No #181/#180/#184/#188/native finding disposition changes. This supersedes the
+earlier missing primitive Model integration, not later public admission.
+
 ## Hull geometry and original-source receiving — 2026-11-13 UTC
 
 The [hull checkpoint](../DFND/reference_validator_hull_checkpoint.md) at `2b6985b`

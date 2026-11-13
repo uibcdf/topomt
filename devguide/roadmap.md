@@ -99,6 +99,14 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+Steric-hull continuation (2026-11-13 UTC): the
+[physical integration](DFND/reference_validator_hull_sterics_checkpoint.md)
+source-delivers exact all-atom point/path and sufficient whole-domain proofs
+on independently certified center hulls. Execute its frozen analytic/original
+pilot locally within finite resource limits, then continue complete mixed-region
+construction and certified hull clipping under #76. A physical path in H alone
+does not qualify its support in a particular native carrier under #181.
+
 Hull continuation (2026-11-13 UTC): the
 [domain proof tranche](DFND/reference_validator_hull_checkpoint.md) now checks
 source-hull equality and closed box clipping. Source `9a276cd` completes saved

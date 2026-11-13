@@ -34,6 +34,9 @@ def main() -> int:
     topology = commands.add_parser('box-topology')
     topology.add_argument('model', type=Path)
     topology.add_argument('output', type=Path)
+    domain_proof = commands.add_parser('domain-proof')
+    domain_proof.add_argument('model', type=Path)
+    domain_proof.add_argument('output', type=Path)
     integral = commands.add_parser('volume')
     integral.add_argument('model', type=Path)
     integral.add_argument('output', type=Path)
@@ -45,6 +48,11 @@ def main() -> int:
     freeze.add_argument('input', type=Path)
     freeze.add_argument('output', type=Path)
     freeze.add_argument('--probe-angstroms', type=float, required=True)
+    hull_model = commands.add_parser('freeze-hull-model')
+    hull_model.add_argument('input', type=Path)
+    hull_model.add_argument('output', type=Path)
+    hull_model.add_argument('--probe-angstroms', type=float, required=True)
+    hull_model.add_argument('--hull-certificate', type=Path)
     hull_source = commands.add_parser('freeze-hull-source')
     hull_source.add_argument('input', type=Path)
     hull_source.add_argument('output', type=Path)
@@ -121,10 +129,23 @@ def main() -> int:
                     stream.write('\n')
             print(json.dumps(result, sort_keys=True, allow_nan=False))
             return 0
-        if args.command == 'freeze-tetrahedron':
-            from .receiving import freeze_tetrahedron
+        if args.command in {'freeze-tetrahedron', 'freeze-hull-model'}:
+            if args.command == 'freeze-tetrahedron':
+                from .receiving import freeze_tetrahedron
 
-            model = freeze_tetrahedron(args.input, probe_angstroms=args.probe_angstroms)
+                model = freeze_tetrahedron(
+                    args.input, probe_angstroms=args.probe_angstroms
+                )
+            else:
+                from .receiving import freeze_hull_model
+
+                model = freeze_hull_model(
+                    args.input,
+                    probe_angstroms=args.probe_angstroms,
+                    certificate=None
+                    if args.hull_certificate is None
+                    else _read(args.hull_certificate),
+                )
             with args.output.open('x') as stream:
                 json.dump(model.to_record(), stream, indent=2, allow_nan=False)
                 stream.write('\n')
@@ -171,6 +192,10 @@ def main() -> int:
                     max_atan_terms=args.max_atan_terms,
                     max_distance_bits=args.max_distance_bits,
                 )
+            elif args.command == 'domain-proof':
+                from .producer import domain_certificate
+
+                certificate = domain_certificate(model)
             elif args.command == 'box-topology':
                 from .box_topology import single_ball_box
 

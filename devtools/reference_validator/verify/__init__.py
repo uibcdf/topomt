@@ -9,7 +9,9 @@ from typing import Any
 
 from ..model import (
     Box,
+    HullDomain,
     Model,
+    Tetrahedron,
     _record,
     decode_point,
     encode_scalar,
@@ -41,6 +43,8 @@ class Limits:
 
 
 def _partition(model: Model, cert: dict[str, Any], limits: Limits) -> dict[str, Any]:
+    if not isinstance(model.domain, (Box, Tetrahedron)):
+        raise ValueError('Partition checking requires a box or tetrahedron')
     leaves = cert['leaves']
     if not isinstance(leaves, list) or not 1 <= len(leaves) <= limits.max_leaves:
         raise ValueError('Invalid leaf count or checker leaf budget exceeded')
@@ -129,6 +133,38 @@ def _partition(model: Model, cert: dict[str, Any], limits: Limits) -> dict[str, 
     }
 
 
+def _convex_domain(model: Model, cert: dict[str, Any]) -> dict[str, Any]:
+    claim = cert['claim']
+    if claim == 'blocked':
+        if type(cert['atom_id']) is not int or not cell_is_covered(
+            model, model.domain, cert['atom_id']
+        ):
+            raise ValueError('Whole-domain one-ball cover is false')
+        lower = upper = Fraction()
+        count = 0
+    elif claim == 'free':
+        if not cell_is_free(model, model.domain):
+            raise ValueError('Whole-domain clearance is unproved')
+        lower = upper = volume(model.domain)
+        count = 1
+    elif claim == 'unknown':
+        lower, upper = Fraction(), volume(model.domain)
+        count = None
+    else:
+        raise ValueError('Unsupported convex-domain claim')
+    return {
+        'domain_state': claim,
+        'volume_lower': encode_scalar(lower),
+        'volume_upper': encode_scalar(upper),
+        'volume_unit': 'nm**3',
+        'volume_enclosure_status': 'resolved',
+        'precision_status': 'not_requested',
+        'n_components': count,
+        'topology_complete': count is not None,
+        'topology_status': 'resolved' if count is not None else 'unresolved',
+    }
+
+
 def verify(
     model: Model, certificate: object, *, limits: Limits = Limits()
 ) -> dict[str, Any]:
@@ -178,6 +214,10 @@ def verify(
             'volume_lower',
             'volume_upper',
         }
+    elif kind == 'convex_domain':
+        extra = (
+            {'claim', 'atom_id'} if certificate.get('claim') == 'blocked' else {'claim'}
+        )
     else:
         raise ValueError('Unsupported certificate kind')
     cert = _record(certificate, common | extra)
@@ -205,6 +245,16 @@ def verify(
             for name in ('model.py', 'verify/__init__.py', 'verify/geometry.py')
         },
     }
+    if isinstance(model.domain, HullDomain):
+        for name in (
+            'hull_model.py',
+            'contracts.py',
+            'verify/center_hull.py',
+            'verify/polytope.py',
+        ):
+            result['verifier_files_sha256'][name] = hashlib.sha256(
+                (Path(__file__).parents[1] / name).read_bytes()
+            ).hexdigest()
     if kind == 'analytic_ball_union_volume':
         from .analytic_volume import check as check_volume
 
@@ -225,6 +275,8 @@ def verify(
             (Path(__file__).parents[1] / name).read_bytes()
         ).hexdigest()
         result.update(check(model, cert))
+    elif kind == 'convex_domain':
+        result.update(_convex_domain(model, cert))
     elif kind == 'partition':
         result.update(_partition(model, cert, limits))
     elif kind == 'path':

@@ -10,7 +10,7 @@ from ..contracts import (
     kernel_identity,
     run_identity,
 )
-from ..model import Box, Model, _record, decode_scalar, record_digest
+from ..model import Box, Model, Tetrahedron, _record, decode_scalar, record_digest
 from . import verify
 
 
@@ -21,6 +21,8 @@ def verify_checkpoint(model: Model, checkpoint: object) -> dict[str, Any]:
     at operational ceilings. Limits can stop work but never erase uncertainty.
     No producer or run-orchestration module is imported here.
     """
+    if not isinstance(model.domain, (Box, Tetrahedron)):
+        raise ValueError('Partition checkpoints require a box or tetrahedron')
     cp = _record(
         checkpoint,
         {

@@ -26,10 +26,11 @@ Only the coordinate block is qualified here; radii/probe receiving and equality
 to freshly executed DFND input remain separate work. Historical source bytes
 and embedded case identifiers are preserved.
 
-The earlier steric `Model` still admits boxes/tetrahedra. The new hull proof and
-clipped supports are a separate developer domain route, not a silent mutation
-of that Model's domain. Connecting them to complete sphere-cut partitions and
-their public API remains the next construction/admission work.
+The geometry-only tranche initially left the steric Model unchanged. The
+[subsequent hull/steric integration](reference_validator_hull_sterics_checkpoint.md)
+now admits verified original center hulls for exact point/path/whole-domain
+proofs, explicitly preserving every sphere and source context. Complete
+sphere-cut partitions and public admission remain separate work.
 
 ## Exact proposal and independently checked equality
 

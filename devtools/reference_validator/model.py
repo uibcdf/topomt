@@ -4,10 +4,10 @@ import hashlib
 import json
 import re
 from collections.abc import Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from fractions import Fraction
 from itertools import product
-from typing import Any
+from typing import Any, Optional
 
 
 def scalar(value: int | float | Fraction) -> Fraction:
@@ -187,6 +187,82 @@ class Tetrahedron:
             raise ValueError('Degenerate tetrahedral domain')
 
 
+@dataclass(frozen=True, init=False)
+class HullDomain:
+    """A source-bound center hull whose complete geometry is independently checked.
+
+    Only the original source and proof are serialized. Derived halfspaces,
+    vertices and volume are immutable and recomputed when reading a model.
+
+    Parameters
+    ----------
+    source_record : object
+        Complete center-source record in exact nm, with row/frame/file identity.
+    certificate : object
+        Original center-hull equality proof; clipped substitutes are rejected.
+
+    Raises
+    ------
+    ValueError
+        Source/proof equality, full dimensionality or bounded admission fails.
+    """
+
+    _source_json: str = field(repr=False)
+    _certificate_json: str = field(repr=False)
+    source_digest: str
+    vertices: tuple[tuple[Fraction, Fraction, Fraction], ...]
+    planes: tuple[tuple[int, int, int, int], ...]
+    geometric_volume: Fraction
+
+    def __init__(self, source_record: object, certificate: object) -> None:
+        # Local imports keep the primitive model independently importable. The
+        # saved reader reaches the checker, never the incremental constructor.
+        from .hull_model import CenterSource
+        from .verify.center_hull import verify_hull
+        from .verify.polytope import _decode_plane
+
+        if (
+            not isinstance(certificate, dict)
+            or certificate.get('kind') != 'center_hull'
+        ):
+            raise ValueError('HullDomain requires an original center_hull proof')
+        source = CenterSource.from_record(source_record)
+        encoded = json.dumps(certificate, sort_keys=True, allow_nan=False)
+        checked = verify_hull(source, json.loads(encoded))
+        object.__setattr__(
+            self, '_source_json', json.dumps(source.to_record(), sort_keys=True)
+        )
+        object.__setattr__(self, '_certificate_json', encoded)
+        object.__setattr__(self, 'source_digest', source.digest)
+        object.__setattr__(
+            self, 'vertices', tuple(decode_point(v) for v in checked['vertices'])
+        )
+        object.__setattr__(
+            self,
+            'planes',
+            tuple(_decode_plane(f['coefficients']) for f in checked['facets']),
+        )
+        object.__setattr__(
+            self, 'geometric_volume', decode_scalar(checked['geometric_volume'])
+        )
+
+    def to_record(self) -> dict[str, Any]:
+        """Detach the source and exact equality proof, without trusting cached geometry."""
+        return {
+            'kind': 'center_hull',
+            'source': json.loads(self._source_json),
+            'certificate': json.loads(self._certificate_json),
+        }
+
+    @classmethod
+    def from_record(cls, value: object) -> 'HullDomain':
+        """Recheck complete hull equality before admitting a serialized domain."""
+        data = _record(value, {'kind', 'source', 'certificate'})
+        if data['kind'] != 'center_hull':
+            raise ValueError('Unsupported hull domain kind')
+        return cls(data['source'], data['certificate'])
+
+
 @dataclass(frozen=True)
 class Model:
     """A frozen strict probe-center model, bound to source bytes and a frame.
@@ -198,7 +274,7 @@ class Model:
 
     atoms: tuple[Atom, ...]
     probe: Fraction
-    domain: Box | Tetrahedron
+    domain: Box | Tetrahedron | HullDomain
     source_sha256: str
     frame_index: int = 0
     interpretation: str = 'exact_rational_nm'
@@ -210,7 +286,9 @@ class Model:
             raise ValueError('Invalid atom collection')
         if len({a.source_id for a in self.atoms}) != len(self.atoms):
             raise ValueError('Duplicate source atom IDs')
-        if self.probe < 0 or not isinstance(self.domain, (Box, Tetrahedron)):
+        if self.probe < 0 or not isinstance(
+            self.domain, (Box, Tetrahedron, HullDomain)
+        ):
             raise ValueError('Invalid probe or unsupported domain')
         if not isinstance(self.source_sha256, str) or not re.fullmatch(
             r'[0-9a-f]{64}', self.source_sha256
@@ -229,21 +307,30 @@ class Model:
                 values.extend((*atom.center, atom.radius))
             if not all(_is_binary64(v) for v in values):
                 raise ValueError('Received binary64 inputs must round-trip exactly')
+        if isinstance(self.domain, HullDomain):
+            from .hull_model import CenterSource
+
+            if self.domain.source_digest != CenterSource.from_model(self).digest:
+                raise ValueError(
+                    'Hull domain source differs from the complete atomic source'
+                )
 
     def to_record(self) -> dict[str, Any]:
         """Return a detached portable record with no numerical approximation."""
-        domain = (
-            {
+        domain: dict[str, Any]
+        if isinstance(self.domain, Box):
+            domain = {
                 'kind': 'box',
                 'lower': encode_point(self.domain.lower),
                 'upper': encode_point(self.domain.upper),
             }
-            if isinstance(self.domain, Box)
-            else {
+        elif isinstance(self.domain, Tetrahedron):
+            domain = {
                 'kind': 'tetrahedron',
                 'vertices': [encode_point(v) for v in self.domain.vertices],
             }
-        )
+        else:
+            domain = self.domain.to_record()
         return {
             'schema': 'topomt.reference-validator.model/1',
             'length_unit': 'nm',
@@ -268,6 +355,44 @@ class Model:
         """Bind all encoded geometry and context to a SHA-256 identity."""
         return record_digest(self.to_record())
 
+    def with_center_hull(
+        self, *, certificate: Optional[dict[str, Any]] = None
+    ) -> 'Model':
+        """Explicitly change the observation domain to the hull of all atom centers.
+
+        Parameters
+        ----------
+        certificate : dict, optional
+            Original center-hull equality proof for this source. If omitted,
+            construct a new exact proof within the bounded hull envelope.
+
+        Returns
+        -------
+        Model
+            New model retaining every atom/radius, probe and source context.
+            Its domain and model identity differ from the original model.
+
+        Raises
+        ------
+        ValueError
+            Source equality, full dimensionality or bounded work admission fails.
+        """
+        from .hull_model import CenterSource
+
+        source = CenterSource.from_model(self)
+        if certificate is None:
+            from .center_hull import hull_certificate
+
+            certificate = hull_certificate(source)
+        return Model(
+            self.atoms,
+            self.probe,
+            HullDomain(source.to_record(), certificate),
+            self.source_sha256,
+            self.frame_index,
+            self.interpretation,
+        )
+
     @classmethod
     def from_spheres(
         cls,
@@ -275,7 +400,7 @@ class Model:
         radii_nm: Sequence[int | float | Fraction],
         probe_nm: int | float | Fraction,
         *,
-        domain: Box | Tetrahedron,
+        domain: Box | Tetrahedron | HullDomain,
     ) -> 'Model':
         """Freeze the three steric inputs and an explicit reporting domain.
 
@@ -287,7 +412,7 @@ class Model:
             One nonnegative radius in nm for every center.
         probe_nm : scalar
             Nonnegative probe radius in nm.
-        domain : Box or Tetrahedron
+        domain : Box, Tetrahedron or HullDomain
             Declared finite observation domain; never inferred from DFND.
 
         Returns
@@ -347,7 +472,7 @@ class Model:
         d = data['domain']
         if not isinstance(d, dict):
             raise ValueError('Invalid domain record')
-        domain: Box | Tetrahedron
+        domain: Box | Tetrahedron | HullDomain
         if d.get('kind') == 'box':
             _record(d, {'kind', 'lower', 'upper'})
             domain = Box(decode_point(d['lower']), decode_point(d['upper']))
@@ -356,6 +481,8 @@ class Model:
             if not isinstance(d['vertices'], list):
                 raise ValueError('Invalid tetrahedron vertices')
             domain = Tetrahedron(tuple(decode_point(v) for v in d['vertices']))
+        elif d.get('kind') == 'center_hull':
+            domain = HullDomain.from_record(d)
         else:
             raise ValueError('Unsupported domain kind')
         if not isinstance(data['atoms'], list):

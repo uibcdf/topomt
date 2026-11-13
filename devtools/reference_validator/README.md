@@ -6,7 +6,8 @@ detector or a general multi-ball region enumerator. The [implementation plan](..
 retains the remaining scientific gates.
 
 The model freezes rational nm values, source atom/frame IDs, input SHA-256,
-probe and a box or tetrahedron. Captured floats retain their exact binary value.
+probe and a box, tetrahedron or independently checked center hull. Captured
+floats retain their exact binary value.
 The original tetrahedron reader uses the public PyUnitWizard quantity codec,
 including its integrity checks; it does not infer radii or substitute a box for
 a general atomic-center hull. That route does not claim a fresh match with a
@@ -71,9 +72,9 @@ The finite domain is an observation context, not another obstacle. The three
 sphere inputs define the nonperiodic excluded set globally; a hull or box
 specifies which finite volume and connectivity question is being asked. The
 global exterior volume is unbounded. Units and boundary conditions must be
-declared; this steric prototype admits only nonperiodic boxes/tetrahedra. The
-separate exact center-hull route below constructs certified domains; integrating
-them into steric occupancy/connectivity remains pending.
+declared; the steric prototype admits nonperiodic boxes, tetrahedra and verified
+center hulls. Hull point/path/whole-domain proofs are described below; general
+mixed hull partitions and region enumeration remain pending.
 
 For direct numerical inputs, the developer factory generates row IDs and a
 canonical sphere-source digest automatically:
@@ -215,9 +216,9 @@ empty, point, edge, face and full-dimensional outcomes. Returned geometric
 volume is not probe-accessible volume; physical free topology is not computed.
 
 See the [proof, receiving and scope](../../devguide/DFND/reference_validator_hull_checkpoint.md).
-This separate domain route does not yet extend the earlier box/tetrahedron
-steric Model or its complete partition engine. All original atoms remain in
-the later physical question; this center-hull stage consumes only coordinates.
+The center-only route consumes coordinates. The separate steric integration
+below retains all atoms/radii/probe while using that independently checked hull.
+The complete subdivision engine still admits only boxes/tetrahedra.
 
 Capture the [frozen hull protocol](../../devguide/evidence/reference_validator_hulls_v1/protocol.json)
 under one CPU affinity and external parent limits with
@@ -236,3 +237,48 @@ Slurm for this phase. It takes 90.94 seconds, peak child RSS 56,816 KiB, within
 the limits above. This qualifies source hull geometry only; radii/probe, free
 volumes and connected-region inventories remain separate work. See the
 [execution record](../../devguide/evidence/reference_validator_hulls_v1/local_execution.json).
+
+## Steric checks inside the certified hull
+
+```bash
+python -m devtools.reference_validator freeze-hull-model INPUT.json MODEL.json --probe-angstroms 1.4 --hull-certificate HULL.json
+python -m devtools.reference_validator domain-proof MODEL.json CERTIFICATE.json
+python -m devtools.reference_validator verify MODEL.json CERTIFICATE.json
+```
+
+Omit `--hull-certificate` to construct a bounded exact hull proof. The reader
+consumes coordinates and atomic radii through their public quantity records,
+explicitly converts both and the probe to nm, then verifies hull equality.
+Every atom remains present, including interior atoms. Domain membership checks
+exact halfspaces; continuous paths check every segment against all atoms.
+
+For numerical input, explicitly replace the observation domain:
+
+```python
+hull_model = model.with_center_hull()
+```
+
+This returns a new source-bound Model and digest; it preserves the original.
+Saved reading rechecks hull geometry and needs neither producer nor DFND nor
+quantity libraries. Point/path certificates retain their existing schema.
+Partition/run/resume explicitly reject hull domains until their clipped
+subdivision is qualified; no bounding-box substitution occurs.
+
+`domain-proof` proves whole-domain exclusion by one covering expanded ball,
+or full convex availability by a sufficient distance bound. Otherwise it
+retains `unknown`, `[0,V_hull]` and no component count. It does not prove general
+union coverage, enumerate mixed regions or meet requested volume precision.
+
+The [hull/steric checkpoint](../../devguide/DFND/reference_validator_hull_sterics_checkpoint.md)
+explains guarantees, strict contact, old-record compatibility and remaining
+work. Capture the [frozen protocol](../../devguide/evidence/reference_validator_hull_sterics_v1/protocol.json)
+within external one-CPU/2 GiB/50 CPU-second/60 wall-second limits:
+
+```bash
+python -m devtools.reference_validator.capture_hull_sterics PROTOCOL.json NEW_DIRECTORY --originals
+```
+
+Default capture runs only four small analytic fixtures; `--originals` explicitly
+adds six tetrahedron/narrow-tube profiles. An invalid path candidate is retained
+as such, never as proof of physical disconnection. Original-profile receiving
+remains to be executed at this source checkpoint.

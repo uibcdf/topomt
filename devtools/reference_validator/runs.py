@@ -4,7 +4,7 @@ import copy
 from typing import Any
 
 from .contracts import Configuration, _split_budget, kernel_identity, run_identity
-from .model import Model, record_digest
+from .model import Box, Model, Tetrahedron, record_digest
 from .producer import _classify
 from .verify.geometry import split
 from .verify.records import (
@@ -15,6 +15,8 @@ from .verify.records import (
 
 
 def _advance(model: Model, checkpoint: dict[str, Any], budget: int) -> dict[str, Any]:
+    if not isinstance(model.domain, (Box, Tetrahedron)):
+        raise ValueError('Partition runs require a box or tetrahedron')
     _split_budget(budget)
     cp = copy.deepcopy(checkpoint)
     configuration = Configuration.from_record(cp['configuration'])
@@ -63,6 +65,8 @@ def start_run(
     initial root classification and independent verification are additional
     bounded work. The returned pair is (checkpoint, derived run summary).
     """
+    if not isinstance(model.domain, (Box, Tetrahedron)):
+        raise ValueError('Partition runs require a box or tetrahedron')
     _split_budget(split_budget)
     if len(model.atoms) > 512:
         raise ValueError('Pilot atom ceiling exceeded')

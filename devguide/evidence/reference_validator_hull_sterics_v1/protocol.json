@@ -1,0 +1,2963 @@
+{
+  "schema": "topomt.reference-validator.hull-sterics-pilot/1",
+  "owner": "uibcdf/topomt#76",
+  "scope": "Exact center-hull point/continuous-path checks and sufficient whole-domain proofs; no mixed-region enumeration, aperture incidence or requested volume precision",
+  "length_unit": "nm",
+  "contact_policy": "strict",
+  "fixtures": [
+    {
+      "name": "cube_permeable",
+      "seed": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "d1d0d722a4ce5b919c4c608d90eae0c37259bbf60368be0a1180dee20ce50c34",
+        "frame_index": 0,
+        "probe": [
+          "1",
+          "10"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 4,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 5,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 6,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 7,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          }
+        ]
+      },
+      "queries": [
+        {
+          "name": "center",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "free_hull_boundary",
+          "kind": "point",
+          "point": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "outside_hull",
+          "kind": "point",
+          "point": [
+            [
+              "11",
+              "10"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "outside_domain"
+        },
+        {
+          "name": "center_to_face",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ]
+          ],
+          "expected_acceptance": true
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        }
+      ]
+    },
+    {
+      "name": "cube_interior_obstacle",
+      "seed": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "763342cdd2b1820eaa58f4ca1141d95c936e75e2ceb81f73c256f5c28545a229",
+        "frame_index": 0,
+        "probe": [
+          "1",
+          "10"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 4,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 5,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 6,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 7,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 8,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "3"
+            ]
+          }
+        ]
+      },
+      "queries": [
+        {
+          "name": "interior_atom_center",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "blocked"
+        },
+        {
+          "name": "start",
+          "kind": "point",
+          "point": [
+            [
+              "-4",
+              "5"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "end",
+          "kind": "point",
+          "point": [
+            [
+              "4",
+              "5"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "colliding_straight",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "-4",
+                "5"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "4",
+                "5"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ]
+          ],
+          "expected_acceptance": false
+        },
+        {
+          "name": "bent_clearance",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "-4",
+                "5"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-4",
+                "5"
+              ],
+              [
+                "1",
+                "2"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "4",
+                "5"
+              ],
+              [
+                "1",
+                "2"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "4",
+                "5"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ]
+          ],
+          "expected_acceptance": true
+        },
+        {
+          "name": "below_contact",
+          "kind": "point",
+          "point": [
+            [
+              "7858017827495089635590129",
+              "18133887294219437620592640"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "blocked"
+        },
+        {
+          "name": "exact_contact",
+          "kind": "point",
+          "point": [
+            [
+              "13",
+              "30"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "blocked"
+        },
+        {
+          "name": "above_contact",
+          "kind": "point",
+          "point": [
+            [
+              "7858017827495089635590159",
+              "18133887294219437620592640"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        }
+      ]
+    },
+    {
+      "name": "cube_complete_cover",
+      "seed": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "97b1cfb060463989668d287bf89671a6a7e4c9f3500df89f77a046a8ce76a0b4",
+        "frame_index": 0,
+        "probe": [
+          "1",
+          "10"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 4,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 5,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 6,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          },
+          {
+            "source_id": 7,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "10"
+            ]
+          }
+        ]
+      },
+      "queries": [
+        {
+          "name": "center",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "blocked"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "blocked"
+        }
+      ]
+    },
+    {
+      "name": "tetrahedron_domain",
+      "seed": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "e10dc3394754aefe6663eeeb13e616836d47c75078bb78605d1d86581e5a6f82",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "0",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "0",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "0",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "0",
+              "1"
+            ]
+          }
+        ]
+      },
+      "queries": [
+        {
+          "name": "inside_bbox_outside_hull",
+          "kind": "point",
+          "point": [
+            [
+              "4",
+              "5"
+            ],
+            [
+              "4",
+              "5"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "outside_domain"
+        },
+        {
+          "name": "centroid",
+          "kind": "point",
+          "point": [
+            [
+              "1",
+              "4"
+            ],
+            [
+              "1",
+              "4"
+            ],
+            [
+              "1",
+              "4"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        }
+      ]
+    }
+  ],
+  "originals": [
+    {
+      "name": "regular_tetrahedron_probe_1_2",
+      "case": "regular_tetrahedron",
+      "input": "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json",
+      "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+      "n_atoms": 4,
+      "probe_angstroms": 1.2,
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/regular_tetrahedron/certificate.json",
+      "hull_sha256": "d2b858a03d2873c3acd97f3dc1fa9bdbf01c74da5095f96f365e197c730e4481",
+      "queries": [
+        {
+          "name": "origin",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        }
+      ]
+    },
+    {
+      "name": "regular_tetrahedron_probe_1_4",
+      "case": "regular_tetrahedron",
+      "input": "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json",
+      "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+      "n_atoms": 4,
+      "probe_angstroms": 1.4,
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/regular_tetrahedron/certificate.json",
+      "hull_sha256": "d2b858a03d2873c3acd97f3dc1fa9bdbf01c74da5095f96f365e197c730e4481",
+      "queries": [
+        {
+          "name": "origin",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        }
+      ]
+    },
+    {
+      "name": "regular_tetrahedron_probe_1_7",
+      "case": "regular_tetrahedron",
+      "input": "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json",
+      "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+      "n_atoms": 4,
+      "probe_angstroms": 1.7,
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/regular_tetrahedron/certificate.json",
+      "hull_sha256": "d2b858a03d2873c3acd97f3dc1fa9bdbf01c74da5095f96f365e197c730e4481",
+      "queries": [
+        {
+          "name": "origin",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "blocked"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        }
+      ]
+    },
+    {
+      "name": "straight_tube_narrow_dense_probe_1_2",
+      "case": "straight_tube_narrow_dense",
+      "input": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/input.json",
+      "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+      "n_atoms": 81,
+      "probe_angstroms": 1.2,
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/straight_tube_narrow_dense/certificate.json",
+      "hull_sha256": "ee4d8c484e980b11bfc59d63c7bfac74315c6846e255ed8b5483aee40a7b6e47",
+      "queries": [
+        {
+          "name": "origin",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "free"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        },
+        {
+          "name": "interior_reference_segment",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "7",
+                "8"
+              ]
+            ]
+          ],
+          "expected_acceptance": true
+        },
+        {
+          "name": "unclipped_reference_candidate",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3602879701896397",
+                "2251799813685248"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "3602879701896397",
+                "2251799813685248"
+              ]
+            ]
+          ],
+          "expected_acceptance": false
+        },
+        {
+          "name": "external_reference_endpoint",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "-3602879701896397",
+              "2251799813685248"
+            ]
+          ],
+          "claim": "outside_domain"
+        }
+      ]
+    },
+    {
+      "name": "straight_tube_narrow_dense_probe_1_4",
+      "case": "straight_tube_narrow_dense",
+      "input": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/input.json",
+      "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+      "n_atoms": 81,
+      "probe_angstroms": 1.4,
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/straight_tube_narrow_dense/certificate.json",
+      "hull_sha256": "ee4d8c484e980b11bfc59d63c7bfac74315c6846e255ed8b5483aee40a7b6e47",
+      "queries": [
+        {
+          "name": "origin",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "blocked"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        },
+        {
+          "name": "interior_reference_segment",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "7",
+                "8"
+              ]
+            ]
+          ],
+          "expected_acceptance": true
+        },
+        {
+          "name": "unclipped_reference_candidate",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3602879701896397",
+                "2251799813685248"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "3602879701896397",
+                "2251799813685248"
+              ]
+            ]
+          ],
+          "expected_acceptance": false
+        },
+        {
+          "name": "external_reference_endpoint",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "-3602879701896397",
+              "2251799813685248"
+            ]
+          ],
+          "claim": "outside_domain"
+        }
+      ]
+    },
+    {
+      "name": "straight_tube_narrow_dense_probe_2_5",
+      "case": "straight_tube_narrow_dense",
+      "input": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/input.json",
+      "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+      "n_atoms": 81,
+      "probe_angstroms": 2.5,
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/straight_tube_narrow_dense/certificate.json",
+      "hull_sha256": "ee4d8c484e980b11bfc59d63c7bfac74315c6846e255ed8b5483aee40a7b6e47",
+      "queries": [
+        {
+          "name": "origin",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "claim": "blocked"
+        },
+        {
+          "name": "whole_domain",
+          "kind": "domain",
+          "expected_state": "unknown"
+        },
+        {
+          "name": "interior_reference_segment",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "7",
+                "8"
+              ]
+            ]
+          ],
+          "expected_acceptance": false
+        },
+        {
+          "name": "unclipped_reference_candidate",
+          "kind": "path",
+          "points": [
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3602879701896397",
+                "2251799813685248"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "2"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "5",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "2882303761517117",
+                "288230376151711744"
+              ],
+              [
+                "3",
+                "4"
+              ]
+            ],
+            [
+              [
+                "-4323455642275677",
+                "144115188075855872"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "7",
+                "8"
+              ]
+            ],
+            [
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "-5764607523034235",
+                "288230376151711744"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "3602879701896397",
+                "2251799813685248"
+              ]
+            ]
+          ],
+          "expected_acceptance": false
+        },
+        {
+          "name": "external_reference_endpoint",
+          "kind": "point",
+          "point": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "-3602879701896397",
+              "2251799813685248"
+            ]
+          ],
+          "claim": "outside_domain"
+        }
+      ]
+    }
+  ],
+  "path_reference": {
+    "path": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/reference_v2_certificate.json",
+    "sha256": "dfba30cee007d38cebf3f402b5394673aa1a93f343d3fbc5108f0c81b6d39afb",
+    "received_unit": "angstroms",
+    "target_unit": "nm",
+    "interpretation": "Exact rational values of explicit PyUnitWizard binary64 nm conversion",
+    "positive_interior_slice": [
+      2,
+      -2
+    ],
+    "scope": "Only the 15 retained inner waypoints form the positive finite-hull candidate. Complete original path retains outside tails and is expected to be rejected as a finite-hull path. No boundary attachment or global optimum follows."
+  },
+  "resources": {
+    "cpus": 1,
+    "address_space_limit_bytes": 2147483648,
+    "cpu_seconds": 50,
+    "wall_seconds": 60,
+    "concurrency": 1
+  }
+}

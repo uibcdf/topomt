@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from .model import Box, Model, _record, record_digest
+from .model import Box, Model, Tetrahedron, _record, record_digest
 
 
 @dataclass(frozen=True)
@@ -57,6 +57,9 @@ def kernel_identity() -> dict[str, Any]:
         'verify/_interval.py',
         'verify/analytic_volume.py',
         'verify/records.py',
+        'hull_model.py',
+        'verify/center_hull.py',
+        'verify/polytope.py',
     )
     return {
         'schema': 'topomt.reference-validator.kernel/1',
@@ -94,6 +97,8 @@ def _split_budget(value: int) -> None:
 def _stop_reason(
     model: Model, certificate: dict[str, Any], configuration: Configuration
 ) -> str:
+    if not isinstance(model.domain, (Box, Tetrahedron)):
+        raise ValueError('Partition runs require a box or tetrahedron')
     unknown = [leaf for leaf in certificate['leaves'] if leaf['state'] == 'unknown']
     if not unknown:
         return 'no_unknown_cells'

@@ -7,11 +7,13 @@ model; it does not import or trust this frontier/search implementation.
 
 from typing import Any
 
-from .model import Box, Model, Tetrahedron
+from .model import Box, HullDomain, Model, Tetrahedron
 from .verify.geometry import cell_is_covered, cell_is_free, split
 
 
-def _classify(model: Model, cell: Box | Tetrahedron, path: str) -> dict[str, Any]:
+def _classify(
+    model: Model, cell: Box | Tetrahedron | HullDomain, path: str
+) -> dict[str, Any]:
     covering_atom = next(
         (a.source_id for a in model.atoms if cell_is_covered(model, cell, a.source_id)),
         None,
@@ -19,6 +21,41 @@ def _classify(model: Model, cell: Box | Tetrahedron, path: str) -> dict[str, Any
     if covering_atom is not None:
         return {'path': path, 'state': 'blocked', 'atom_id': covering_atom}
     return {'path': path, 'state': 'free' if cell_is_free(model, cell) else 'unknown'}
+
+
+def domain_certificate(model: Model) -> dict[str, Any]:
+    """Propose a sufficient whole-convex-domain proof or an explicit unknown.
+
+    One expanded ball covering every vertex proves complete exclusion. Exact
+    bounding-box clearance proves complete availability. Other domains retain
+    broad volume bounds and no component count; this enumerates no mixed regions.
+
+    Parameters
+    ----------
+    model : Model
+        Immutable all-atom model on a box, tetrahedron or verified center hull.
+
+    Returns
+    -------
+    dict
+        Proposed certificate to pass to the independent verifier.
+
+    Raises
+    ------
+    ValueError
+        The pilot's finite atom ceiling is exceeded.
+    """
+    if len(model.atoms) > 512:
+        raise ValueError('Pilot atom ceiling exceeded')
+    leaf = _classify(model, model.domain, '')
+    return {
+        'schema': 'topomt.reference-validator.certificate/1',
+        'kind': 'convex_domain',
+        'model_sha256': model.digest,
+        'arithmetic': 'rational-exact/1',
+        'claim': leaf['state'],
+        **({'atom_id': leaf['atom_id']} if leaf['state'] == 'blocked' else {}),
+    }
 
 
 def partition(
@@ -45,6 +82,10 @@ def partition(
     ValueError
         Work limits exceed this pilot's admitted envelope or are invalid.
     """
+    if not isinstance(model.domain, (Box, Tetrahedron)):
+        raise ValueError(
+            'Partition requires a box or tetrahedron; hull partition is not admitted'
+        )
     if (
         type(max_depth) is not int
         or not 0 <= max_depth <= 24

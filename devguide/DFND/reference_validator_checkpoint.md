@@ -10,6 +10,25 @@ These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete connected-region validator or a supported public TopoMT detector.
 
+## Certified hulls in the physical Model — 2026-11-13 UTC
+
+The [hull/steric integration](reference_validator_hull_sterics_checkpoint.md)
+adds immutable proof-backed HullDomain, full coordinate/radius/probe receiving,
+exact point/continuous-path checks and sufficient whole-convex-domain proofs.
+Every source atom remains present. The saved reader rechecks hull equality
+without the constructor or quantity libraries. Box/tetrahedron subdivision and
+run/resume explicitly reject hulls until certified clipping is implemented.
+
+The [frozen pilot](../evidence/reference_validator_hull_sterics_v1/protocol.json)
+contains four analytic fixtures and six original tetrahedron/narrow-tube
+profiles. 229 selected tests pass, in 17.04 seconds with peak RSS 96,324 KiB,
+one CPU and 2 GiB; Ruff/format and scoped mypy on 27 modules pass. Original-profile
+receiving is the next execution, not established by that protocol or source
+tests. All 355 original files and native/finding dispositions remain unchanged.
+General mixed-region construction, boundary incidence and per-region precision
+remain open under #76. Earlier tranche statements below retain their dates and
+source scopes; this integration supersedes the former missing steric-hull API.
+
 ## Certified hull identity and closed box clips — 2026-11-13 UTC
 
 The [hull checkpoint](reference_validator_hull_checkpoint.md) implements an
@@ -294,8 +313,8 @@ qualification.
 The bounded P0 model/proof and operational run/checkpoint contracts above are
 source-delivered; their initial absence is superseded by the continuation.
 Center-hull geometry/clipping now has its separate checked developer route;
-full steric-domain integration remains P1/P2 work; the six original center-only
-hulls now have retained receiving above. P1 still needs the local/global
+full steric-domain primitive integration is now source-delivered above. The six
+original center-only hulls have retained receiving. P1 still needs the local/global
 geometry feasibility decision and a general exhaustive free-region
 construction. P4 needs general clipped/region-assigned precision and validated
 integration; the earlier partition enclosures do not meet k=24, while the

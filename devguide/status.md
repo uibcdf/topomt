@@ -1,5 +1,14 @@
 # TopoMT development status
 
+## Certified hull sterics — 2026-11-13 UTC
+
+The [physical hull integration](DFND/reference_validator_hull_sterics_checkpoint.md)
+adds all-atom point/continuous-path checking and sufficient whole-domain proofs
+on independently verified center hulls. Source tests pass (229 selected),
+Ruff/format and scoped mypy on 27 modules pass. The frozen ten-profile receiving
+is the next execution; mixed regions, per-region precision and native-carrier
+qualification remain pending under #76/#181. No Slurm or environment change.
+
 ## Certified hull/box domains and six original sources — 2026-11-13 UTC
 
 The [hull tranche](DFND/reference_validator_hull_checkpoint.md) at `2b6985b`

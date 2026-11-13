@@ -30,8 +30,10 @@ The [hull domain route](reference_validator_hull_checkpoint.md) now proves exact
 center-hull identity and closed box intersections on retained small controls.
 All six original center hulls now have independently checked saved receiving
 at `9a276cd`, using the maintainer's selected bounded local execution without
-Slurm. Steric Model integration and complete sphere-cut region construction
-remain open.
+Slurm. The [steric integration](reference_validator_hull_sterics_checkpoint.md)
+now source-delivers verified HullDomain, full-sphere receiving and exact
+point/path/whole-convex-domain checking. Original-profile receiving follows;
+complete sphere-cut region construction remains open.
 
 ## Scope and acceptance of the first complete validator
 
@@ -120,8 +122,9 @@ for the reference regions.
 
 Exact boxes/tetrahedra and the separate checked center-hull/box domain route
 are implemented at the [current hull scope](reference_validator_hull_checkpoint.md).
-The full steric Model has not yet received that hull representation. Admit the six finite
-atomic-center hulls only with qualified construction/clipping and a certificate
+The steric Model now receives a verified original center hull for selected
+primitive and whole-domain proofs. Its general clipped subdivision is not yet
+admitted. Receive finite atomic-center hulls only with a certificate
 that represents the declared hull, not just some enclosing polytope. Checking
 that all atoms lie inside candidate facets is insufficient to prove equality
 with their convex hull: missing facets could enlarge it.
@@ -307,11 +310,11 @@ supported production export.
 | `devtools/reference_validator/producer.py` | Selected backend orchestration, partition/frontier, budgets and checkpointing. |
 | `devtools/reference_validator/verify/` | Separately runnable parser, exact primitive/domain/coverage checks, topology obligations and volume verification. No import of producer search code. |
 | `devtools/reference_validator/receiving.py` | Read original protocols, freeze the actual validated model and create additive source-bound results. |
-| `hull_model.py`, `center_hull.py`, `verify/center_hull.py`, `verify/polytope.py` under the developer directory | Separate center-source proof view, exact hull proposal, exhaustive halfspace equality checker and closed geometric clipping. Full steric Model integration remains pending. |
+| `hull_model.py`, `center_hull.py`, `verify/center_hull.py`, `verify/polytope.py` under the developer directory | Exact source hull/equality proof and closed geometric clipping; Model's proof-backed HullDomain admits steric point/path and sufficient whole-domain certificates. General hull subdivision/regions remain pending. |
 | `devtools/reference_validator/box_topology.py`, `verify/box_topology.py` | Implemented scoped one-ball/axis-box completeness construction and its standalone sector/incidence checker. This is P1 control evidence, not the selected general engine. |
 | `analytic_volume.py`, `volume_request.py`, `verify/analytic_volume.py`, `verify/_interval.py` under the same developer directory | Implemented contained singleton/pair cluster total-volume proof, explicit precision requests and declared trusted rational interval/constants. General clipping and region assignment remain pending. |
 | `devtools/reference_validator/compare.py` | Mapped occupancy/connectivity comparisons; keeps morphology/count semantics distinct. |
-| `devtools/reference_validator/__main__.py` | Implemented `freeze-tetrahedron`, `produce`, `box-topology`, `volume`, `verify`, `start`, `resume`, `verify-run`, `freeze-hull-source`, `hull`, `clip-hull`, `verify-hull`; native comparison remains planned. |
+| `devtools/reference_validator/__main__.py` | Implemented `freeze-tetrahedron`, `produce`, `box-topology`, `volume`, `verify`, `start`, `resume`, `verify-run`, `freeze-hull-source`, `hull`, `clip-hull`, `verify-hull`, `freeze-hull-model`, `domain-proof`; native comparison remains planned. |
 | `devtools/reference_validator/native/` | Optional Rust crate/backend after P1, with exact arithmetic strategy and a bounded standalone process interface. |
 | `tests/test_reference_validator_*.py` | Model, exact arithmetic, certificate rejection, topology, precision, receiving and resource/resume controls. |
 

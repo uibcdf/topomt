@@ -1,15 +1,16 @@
-"""Receive a frozen four-ball case through the public quantity codec.
+"""Receive fixed sphere inputs and exact domains through the public quantity codec.
 
 No inferred radius or replacement bounding box is used. General hull admission
 and equality with a newly executed native input remain separate qualifications.
 """
 
-import hashlib
-import json
+from fractions import Fraction
 from pathlib import Path
+from typing import Any, Optional
 
 from .hull_model import CenterSource
-from .model import Atom, Model, Tetrahedron, point, scalar
+from .model import Atom, HullDomain, Model, Tetrahedron, point, scalar
+from .storage import read_record_with_digest
 
 
 def freeze_centers(path: Path) -> CenterSource:
@@ -37,8 +38,6 @@ def freeze_centers(path: Path) -> CenterSource:
     import pyunitwizard as puw
     from pyunitwizard import QuantityRecord
 
-    from .storage import read_record_with_digest
-
     data, digest = read_record_with_digest(path)
     quantity = QuantityRecord.from_dict(data['coordinates']).to_quantity(
         field='coordinates', unit='nm'
@@ -52,38 +51,13 @@ def freeze_centers(path: Path) -> CenterSource:
     )
 
 
-def freeze_tetrahedron(path: Path, *, probe_angstroms: float) -> Model:
-    """Freeze decoded nm binary64 values for an original four-ball input.
-
-    Parameters
-    ----------
-    path : Path
-        Original JSON case with coordinates and explicit atomic-radius qrecs.
-    probe_angstroms : float
-        Explicitly named length convention for this developer receiving route.
-
-    Returns
-    -------
-    Model
-        Exact rational interpretation of the codec's normalized binary64 values;
-        source row IDs, file hash and tetrahedral hull remain recoverable.
-
-    Raises
-    ------
-    ValueError
-        The model is not four-ball or its geometry is degenerate. No general
-        convex hull is substituted.
-    pyunitwizard.record.RecordError
-        The owning codec rejects a corrupted/incompatible quantity record.
-    """
+def _receive_spheres(
+    path: Path, probe_angstroms: float
+) -> tuple[tuple[Atom, ...], Fraction, str]:
     import pyunitwizard as puw
     from pyunitwizard import QuantityRecord
 
-    with path.open('rb') as stream:
-        payload = stream.read(16 * 1024**2 + 1)
-    if len(payload) > 16 * 1024**2:
-        raise ValueError('Pilot input exceeds 16 MiB limit')
-    data = json.loads(payload)
+    data, digest = read_record_with_digest(path)
     positions = QuantityRecord.from_dict(data['coordinates']).to_quantity(
         field='coordinates', unit='nm'
     )
@@ -92,8 +66,8 @@ def freeze_tetrahedron(path: Path, *, probe_angstroms: float) -> Model:
     )
     coords = puw.get_value(positions, to_unit='nm', value_type=list, dtype=float)
     radii_nm = puw.get_value(radii, to_unit='nm', value_type=list, dtype=float)
-    if len(coords) != 4 or len(radii_nm) != 4:
-        raise ValueError('This receiving route requires exactly four atoms')
+    if len(coords) != len(radii_nm):
+        raise ValueError('Every center requires exactly one atomic radius')
     probe = puw.get_value(
         puw.quantity(probe_angstroms, 'angstroms'), to_unit='nm', value_type=float
     )
@@ -101,10 +75,86 @@ def freeze_tetrahedron(path: Path, *, probe_angstroms: float) -> Model:
         Atom(i, point(row), scalar(r))
         for i, (row, r) in enumerate(zip(coords, radii_nm))
     )
+    return atoms, scalar(probe), digest
+
+
+def freeze_tetrahedron(path: Path, *, probe_angstroms: float) -> Model:
+    """Freeze a four-ball case with its original tetrahedral observation domain.
+
+    Parameters
+    ----------
+    path : Path
+        Original JSON case with coordinates and atomic-radius quantity records.
+    probe_angstroms : float
+        Explicit probe length in angstroms, converted through PyUnitWizard.
+
+    Returns
+    -------
+    Model
+        Exact received binary64 nm values, all rows, input hash and tetrahedron.
+
+    Raises
+    ------
+    ValueError
+        The input is not four-ball, or the geometry/values are invalid.
+    pyunitwizard.record.RecordError
+        The owning codec rejects a corrupted or incompatible quantity record.
+    """
+    atoms, probe, digest = _receive_spheres(path, probe_angstroms)
+    if len(atoms) != 4:
+        raise ValueError('This receiving route requires exactly four atoms')
     return Model(
         atoms,
-        scalar(probe),
+        probe,
         Tetrahedron(tuple(a.center for a in atoms)),
-        hashlib.sha256(payload).hexdigest(),
+        digest,
+        interpretation='received_binary64_nm',
+    )
+
+
+def freeze_hull_model(
+    path: Path, *, probe_angstroms: float, certificate: Optional[dict[str, Any]] = None
+) -> Model:
+    """Freeze all spheres and use their independently checked center hull as domain.
+
+    Parameters
+    ----------
+    path : Path
+        Original JSON case containing integrity-bearing coordinate/radius records.
+    probe_angstroms : float
+        Explicit probe length in angstroms, converted through PyUnitWizard.
+    certificate : dict, optional
+        Reusable original hull proof for this exact coordinate/file/frame source.
+        Without it, construct a new proof within the bounded hull envelope.
+
+    Returns
+    -------
+    Model
+        All received atoms/radii and the probe, plus a verified finite center hull.
+        No occupancy, region inventory or fresh native-input equality is inferred.
+
+    Raises
+    ------
+    ValueError
+        Source/proof, full-dimensional geometry or bounded admission fails.
+    pyunitwizard.record.RecordError
+        The owning codec rejects a corrupted or incompatible quantity record.
+    """
+    atoms, probe, digest = _receive_spheres(path, probe_angstroms)
+    source = CenterSource(
+        tuple(a.center for a in atoms),
+        tuple(a.source_id for a in atoms),
+        digest,
+        interpretation='received_binary64_nm',
+    )
+    if certificate is None:
+        from .center_hull import hull_certificate
+
+        certificate = hull_certificate(source)
+    return Model(
+        atoms,
+        probe,
+        HullDomain(source.to_record(), certificate),
+        digest,
         interpretation='received_binary64_nm',
     )
