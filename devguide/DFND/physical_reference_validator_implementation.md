@@ -15,8 +15,10 @@ Planning baseline: `0b68206b0af2210b3f27fc3d70fd5837512148c5`.
 The [input/tool inventory](../evidence/reference_validator_planning_inventory_v1.json)
 checks six original models, 19 selected profiles and all 355 previously frozen
 files without changing their bytes. It is an inventory, not execution of the
-new validator. P0 below is ready to start; P1's geometry construction remains
-unselected. No milestone is completed by writing this plan.
+new validator. The [first implemented P0 checkpoint](reference_validator_checkpoint.md)
+now delivers exact model/primitive checking, a bounded partition pilot and ten
+retained tetrahedron proofs. P0 remains partial and P1's geometry construction
+is unselected; the checkpoint states the remaining gates explicitly.
 
 ## Scope and acceptance of the first complete validator
 

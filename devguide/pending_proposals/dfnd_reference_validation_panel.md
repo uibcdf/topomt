@@ -15,6 +15,16 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## First exact reference-validator tranche — 2026-11-13 UTC
+
+The [implemented source checkpoint](../DFND/reference_validator_checkpoint.md)
+records producer `3b75f59`, strict rational models, selected independent proof
+checking and a bounded partition pilot. Ten retained tetrahedron certificates
+include complete 1.7 Å exclusion, while earlier insufficient refinement and
+positive point/path controls retain their narrower scopes. P0 remains partial;
+general run/checkpoint/domain admission, P1 topology construction and P4 precision
+remain explicit work. This is not completion of this issue or a #181 native fix.
+
 ## Detailed validator implementation plan — 2026-11-12
 
 The [implementation plan](../DFND/physical_reference_validator_implementation.md)

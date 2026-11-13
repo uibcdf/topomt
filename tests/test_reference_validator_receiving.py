@@ -4,6 +4,7 @@ import hashlib
 import json
 import subprocess
 import sys
+from dataclasses import replace
 from pathlib import Path
 
 import pytest
@@ -110,3 +111,48 @@ capture(Path(sys.argv[1]), Path(sys.argv[2]))
         timeout=20,
     )
     assert rerun.returncode != 0
+
+
+def test_retained_p0_proofs_replay_without_recreating_source_models():
+    base = ROOT / 'devguide/evidence/reference_validator_p0_v1'
+    saved = base / 'receiving'
+    receipt = json.loads((saved / 'receipt.json').read_text())
+    assert (
+        hashlib.sha256((base / 'protocol.json').read_bytes()).hexdigest()
+        == receipt['protocol_sha256']
+    )
+    for name, expected in receipt['files'].items():
+        assert hashlib.sha256((saved / name).read_bytes()).hexdigest() == expected
+    for row in receipt['models']:
+        model = Model.from_record(
+            json.loads((saved / f'{row["id"]}.model.json').read_text())
+        )
+        cert = json.loads((saved / f'{row["id"]}.certificate.json').read_text())
+        old = json.loads((saved / f'{row["id"]}.verification.json').read_text())
+        new = verify(model, cert)
+        for field in (
+            'model_sha256',
+            'certificate_sha256',
+            'n_components',
+            'topology_complete',
+            'volume_lower',
+            'volume_upper',
+            'path_validated',
+            'point_state',
+        ):
+            assert new.get(field) == old.get(field)
+
+
+def test_capture_rejects_model_changed_after_protocol_check(tmp_path, monkeypatch):
+    import devtools.reference_validator.capture as receiving
+
+    model = freeze_tetrahedron(INPUT, probe_angstroms=1.7)
+    monkeypatch.setattr(receiving.os, 'sched_getaffinity', lambda _: {0})
+    monkeypatch.setattr(
+        receiving,
+        'freeze_tetrahedron',
+        lambda *args, **kwargs: replace(model, source_sha256='b' * 64),
+    )
+    protocol = ROOT / 'devguide/evidence/reference_validator_p0_v1/protocol.json'
+    with pytest.raises(ValueError, match='frozen input'):
+        receiving.capture(protocol, tmp_path / 'changed')

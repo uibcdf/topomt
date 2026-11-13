@@ -104,3 +104,13 @@ def test_tetrahedron_encoding_and_unknown_fields():
     record['topology_complete'] = True
     with pytest.raises(ValueError):
         Model.from_record(record)
+
+
+def test_binary64_provenance_cannot_label_an_unrepresentable_rational():
+    model = Model(
+        (), Fraction(1, 3), Box(point((-1, -1, -1)), point((1, 1, 1))), 'a' * 64
+    )
+    record = model.to_record()
+    record['interpretation'] = 'received_binary64_nm'
+    with pytest.raises(ValueError, match='binary64'):
+        Model.from_record(record)

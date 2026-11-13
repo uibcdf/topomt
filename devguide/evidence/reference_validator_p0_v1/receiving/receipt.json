@@ -1,0 +1,142 @@
+{
+  "schema": "topomt.reference-validator.p0-receiving/1",
+  "protocol_sha256": "d4389dc8afe6fc7ae34f25b1bbe9273626469a9865d1f6c93e5b234b5baf368d",
+  "source_revision": "3b75f595eb6f52d9e6ff66a8f02bdcb0efb4633a",
+  "producer_files_sha256": {
+    "__init__.py": "b7126b2ca6c61870339613a5e38b6b746da9969bd8d36890cabb53a5b4f4ade0",
+    "__main__.py": "759782c120558ca786c4a7e24ba9f892632731774c39af8a272888cae6424b9c",
+    "capture.py": "2f40f01effb9220a639ff3b59c411d9fd33a15e11b71cb21dbbf8eac8ee37294",
+    "model.py": "9a58f7efd794192381f559cb59d6cfcafe63d3a945c6a3ec8bc2b70149fb5634",
+    "producer.py": "9c67b30f05e351754016605db42d89954338cad8636323dbec3ef75d3eaedaf5",
+    "receiving.py": "66458e0f829676dfdbb5f35048da7ccc5205af8960fbaf532dd3141550b1673a",
+    "verify/__init__.py": "635437ac18e0f72b38933a59a7b0f980440d39046c7266f8330e84346b543793",
+    "verify/geometry.py": "cc2d52c1502a5bf6b06ce7a84e04712ea28407c68cb3e9e8862aa058d4cd8258"
+  },
+  "quantity_codec_source_revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+  "quantity_codec_file_sha256": "c1a1923919508b5010045a57a2101c2bc672cdb35b714f0ba49030b760142f5e",
+  "dependency_versions": {
+    "pyunitwizard": "0.29.5+2.gcc51c8e",
+    "numpy": "2.5.4"
+  },
+  "models": [
+    {
+      "id": "probe_1p2_depth6",
+      "probe_angstroms": 1.2,
+      "model_sha256": "c5e1d2cba75f0f50882ea020689b5b9a57da3c299fd2272ec42c7e950f6ec8ef",
+      "kind": "partition",
+      "n_components": null,
+      "topology_complete": false
+    },
+    {
+      "id": "probe_1p4_depth6",
+      "probe_angstroms": 1.4,
+      "model_sha256": "f3329a9383259946539d60c3679f96c9240b682828aa4df3fd30ca4f7111cc8b",
+      "kind": "partition",
+      "n_components": null,
+      "topology_complete": false
+    },
+    {
+      "id": "probe_1p7_depth10",
+      "probe_angstroms": 1.7,
+      "model_sha256": "9f894cc7fd38ac0fc28aaa3de3548584679eca9db1b0f03bcdcba363f792d8be",
+      "kind": "partition",
+      "n_components": null,
+      "topology_complete": false
+    },
+    {
+      "id": "probe_1p7_depth18",
+      "probe_angstroms": 1.7,
+      "model_sha256": "9f894cc7fd38ac0fc28aaa3de3548584679eca9db1b0f03bcdcba363f792d8be",
+      "kind": "partition",
+      "n_components": 0,
+      "topology_complete": true
+    },
+    {
+      "id": "point_0",
+      "probe_angstroms": 1.2,
+      "model_sha256": "c5e1d2cba75f0f50882ea020689b5b9a57da3c299fd2272ec42c7e950f6ec8ef",
+      "kind": "point",
+      "n_components": null,
+      "topology_complete": false
+    },
+    {
+      "id": "point_1",
+      "probe_angstroms": 1.4,
+      "model_sha256": "f3329a9383259946539d60c3679f96c9240b682828aa4df3fd30ca4f7111cc8b",
+      "kind": "point",
+      "n_components": null,
+      "topology_complete": false
+    },
+    {
+      "id": "face_path_0",
+      "probe_angstroms": 1.2,
+      "model_sha256": "c5e1d2cba75f0f50882ea020689b5b9a57da3c299fd2272ec42c7e950f6ec8ef",
+      "kind": "path",
+      "n_components": null,
+      "topology_complete": false
+    },
+    {
+      "id": "face_path_1",
+      "probe_angstroms": 1.2,
+      "model_sha256": "c5e1d2cba75f0f50882ea020689b5b9a57da3c299fd2272ec42c7e950f6ec8ef",
+      "kind": "path",
+      "n_components": null,
+      "topology_complete": false
+    },
+    {
+      "id": "face_path_2",
+      "probe_angstroms": 1.2,
+      "model_sha256": "c5e1d2cba75f0f50882ea020689b5b9a57da3c299fd2272ec42c7e950f6ec8ef",
+      "kind": "path",
+      "n_components": null,
+      "topology_complete": false
+    },
+    {
+      "id": "face_path_3",
+      "probe_angstroms": 1.2,
+      "model_sha256": "c5e1d2cba75f0f50882ea020689b5b9a57da3c299fd2272ec42c7e950f6ec8ef",
+      "kind": "path",
+      "n_components": null,
+      "topology_complete": false
+    }
+  ],
+  "files": {
+    "face_path_0.certificate.json": "3c7aa3c56f541ad25cc13ba50943a238548b08ef87257bd54aac9c3f72e88a84",
+    "face_path_0.model.json": "cdb0560310cecff07533dae9434ea891ad767f8fa9eb758d9c172faaae9d06f8",
+    "face_path_0.verification.json": "093cd1a990c0124d464d104f01d09532623aeb2d06743bf04cc2492c20faf949",
+    "face_path_1.certificate.json": "33ccf89d61566d81a2fd817f510a781b3f781b8364703175f796f5f4197a904f",
+    "face_path_1.model.json": "cdb0560310cecff07533dae9434ea891ad767f8fa9eb758d9c172faaae9d06f8",
+    "face_path_1.verification.json": "5e8166cdbeb8ac0e234441b81992ff7f07d7589d169624e4c054434f9f432143",
+    "face_path_2.certificate.json": "8756baf2ea088ccfcf003031612c4946db73394d23555e14f4fac21696dd68c5",
+    "face_path_2.model.json": "cdb0560310cecff07533dae9434ea891ad767f8fa9eb758d9c172faaae9d06f8",
+    "face_path_2.verification.json": "24cc6bc200a9dea8d2e32984513a05e0e14a1b2f4014fb54c397ded4c54777ff",
+    "face_path_3.certificate.json": "e60ca332191dbfc36700359471fa928b650cc0eef09e539bf80bda8e82a194f1",
+    "face_path_3.model.json": "cdb0560310cecff07533dae9434ea891ad767f8fa9eb758d9c172faaae9d06f8",
+    "face_path_3.verification.json": "576772788a4cf48304bd343415f486108e03670bd418859167c4a5d27b632d24",
+    "point_0.certificate.json": "f7336c5b8420fe5d2d78242c30f88ebc2aa72f4423258374f0d42ed0b5481fa9",
+    "point_0.model.json": "cdb0560310cecff07533dae9434ea891ad767f8fa9eb758d9c172faaae9d06f8",
+    "point_0.verification.json": "742ee59a49f5d3d14d1e41302d8382b4aadec9eb47a30816eeb27ae01723a484",
+    "point_1.certificate.json": "21e741553315f03f2e220fe73545257f4acdd12b3b644ff1bb096fdd70179a51",
+    "point_1.model.json": "60467d090542356e759059aaf417638d700bdd1b6a02f4c443436695b14ca7b1",
+    "point_1.verification.json": "60dca8ac4fac7c20ed5090210dbbd1bb835b71f4adcaff7982203c6a2d3f4866",
+    "probe_1p2_depth6.certificate.json": "13c8051faa7008145beeb572050c20be903a9d1d68f69385f91d221670bcee0f",
+    "probe_1p2_depth6.model.json": "cdb0560310cecff07533dae9434ea891ad767f8fa9eb758d9c172faaae9d06f8",
+    "probe_1p2_depth6.verification.json": "9af2e22fe58ecece8f7acaa39bc1179e9e43a7852c43e093d2a218871ba0aae1",
+    "probe_1p4_depth6.certificate.json": "20729737401fcdfd5b322f94376104ebae80c9a6e5c0ea2b000673cac1c926c8",
+    "probe_1p4_depth6.model.json": "60467d090542356e759059aaf417638d700bdd1b6a02f4c443436695b14ca7b1",
+    "probe_1p4_depth6.verification.json": "2e51c1becceb7fc3492260c4c7c43fc52bad68d2c731cd83477c83e21b75c462",
+    "probe_1p7_depth10.certificate.json": "ae23e09b3ac261319f3a25cbe328ca63420b8a373aa4dae9301eb586a94229cc",
+    "probe_1p7_depth10.model.json": "e5a01b34538aadc3ea4ff1a586623976d471f804aa09b64a27e771e0f6fd6e02",
+    "probe_1p7_depth10.verification.json": "5b0b215a3082045c069854f6ba83cc2720b4d8668a1c279d7aa020dfb7ce98d8",
+    "probe_1p7_depth18.certificate.json": "139ec11c53c79075fef5af63594be78b55fa3a00f87ce7749ee495115bae446a",
+    "probe_1p7_depth18.model.json": "e5a01b34538aadc3ea4ff1a586623976d471f804aa09b64a27e771e0f6fd6e02",
+    "probe_1p7_depth18.verification.json": "c5721218bde9747513500f3650f38c84015b33dfc6777c8f1ea745c60a95d246"
+  },
+  "elapsed_seconds": 0.7170311690424569,
+  "peak_rss_kib_linux": 51844,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "P0 developer proofs; no general topology, requested volume precision, native receiving, original provider or installed-package qualification"
+}

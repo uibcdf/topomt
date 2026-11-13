@@ -86,7 +86,10 @@ only while preserving the justified guarantees. Follow
 `devguide/DFND/physical_reference_validator_implementation.md` under #76, with
 #181 as first consumer. Start with P0/P1 model/checker and construction
 feasibility; neither a plan nor a volume-only prototype qualifies the complete
-validator. Comparative precision/exactness claims still require evidence.
+validator. The first P0 source/checker tranche and remaining work are recorded in
+`devguide/DFND/reference_validator_checkpoint.md`; selected exact certificates do
+not qualify general region enumeration or requested precision. Comparative
+precision/exactness claims still require evidence.
 
 DFND method documentation lives in `docs/content/dfnd/`. Changes to operators,
 query policies, catalog promotion, units or physical interpretation must review

@@ -70,6 +70,8 @@ def capture(protocol_path: Path, output: Path) -> None:
     ]
     for name, request in requests:
         model = freeze_tetrahedron(source, probe_angstroms=request['probe_angstroms'])
+        if model.source_sha256 != spec['input_sha256']:
+            raise ValueError('Decoded model differs from the frozen input')
         if model.interpretation != spec['interpretation']:
             raise ValueError('Different numerical model interpretation')
         if request.get('kind') in {'point', 'path'}:

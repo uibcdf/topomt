@@ -81,6 +81,13 @@ def _record(value: object, keys: set[str]) -> dict[str, Any]:
     return value
 
 
+def _is_binary64(value: Fraction) -> bool:
+    try:
+        return scalar(float(value)) == value
+    except (OverflowError, ValueError):
+        return False
+
+
 def _determinant(
     a: Sequence[Fraction], b: Sequence[Fraction], c: Sequence[Fraction]
 ) -> Fraction:
@@ -174,8 +181,17 @@ class Model:
             raise ValueError('A source SHA-256 is required')
         if type(self.frame_index) is not int or self.frame_index < 0:
             raise ValueError('Invalid frame index')
-        if self.interpretation not in {'exact_rational_nm', 'received_binary64_nm'}:
+        if not isinstance(self.interpretation, str) or self.interpretation not in {
+            'exact_rational_nm',
+            'received_binary64_nm',
+        }:
             raise ValueError('Unknown numerical model interpretation')
+        if self.interpretation == 'received_binary64_nm':
+            values = [self.probe]
+            for atom in self.atoms:
+                values.extend((*atom.center, atom.radius))
+            if not all(_is_binary64(v) for v in values):
+                raise ValueError('Received binary64 inputs must round-trip exactly')
 
     def to_record(self) -> dict[str, Any]:
         """Return a detached portable record with no numerical approximation."""

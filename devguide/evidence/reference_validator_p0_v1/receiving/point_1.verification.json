@@ -1,0 +1,19 @@
+{
+  "schema": "topomt.reference-validator.verification/1",
+  "verification_status": "accepted",
+  "kind": "point",
+  "model_sha256": "f3329a9383259946539d60c3679f96c9240b682828aa4df3fd30ca4f7111cc8b",
+  "certificate_sha256": "9e943a1fb25ff266fd94cb1dd8cc3c499268461505091fdee51aead11ee0a910",
+  "trusted_arithmetic": "stdlib-fraction/1",
+  "topology_complete": false,
+  "n_components": null,
+  "topology_status": "not_computed",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "9a58f7efd794192381f559cb59d6cfcafe63d3a945c6a3ec8bc2b70149fb5634",
+    "verify/__init__.py": "635437ac18e0f72b38933a59a7b0f980440d39046c7266f8330e84346b543793",
+    "verify/geometry.py": "cc2d52c1502a5bf6b06ce7a84e04712ea28407c68cb3e9e8862aa058d4cd8258"
+  },
+  "point_state": "free",
+  "occupancy_status": "resolved"
+}

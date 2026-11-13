@@ -1,0 +1,174 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "kind": "partition",
+  "model_sha256": "f3329a9383259946539d60c3679f96c9240b682828aa4df3fd30ca4f7111cc8b",
+  "arithmetic": "rational-exact/1",
+  "refinement": {
+    "max_depth": 6,
+    "max_leaves": 1024
+  },
+  "leaves": [
+    {
+      "path": "00000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "000010",
+      "state": "unknown"
+    },
+    {
+      "path": "000011",
+      "state": "unknown"
+    },
+    {
+      "path": "000100",
+      "state": "unknown"
+    },
+    {
+      "path": "000101",
+      "state": "unknown"
+    },
+    {
+      "path": "000110",
+      "state": "unknown"
+    },
+    {
+      "path": "000111",
+      "state": "unknown"
+    },
+    {
+      "path": "0010",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "001100",
+      "state": "unknown"
+    },
+    {
+      "path": "001101",
+      "state": "unknown"
+    },
+    {
+      "path": "001110",
+      "state": "unknown"
+    },
+    {
+      "path": "001111",
+      "state": "unknown"
+    },
+    {
+      "path": "01000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "010010",
+      "state": "unknown"
+    },
+    {
+      "path": "010011",
+      "state": "unknown"
+    },
+    {
+      "path": "010100",
+      "state": "unknown"
+    },
+    {
+      "path": "010101",
+      "state": "unknown"
+    },
+    {
+      "path": "01011",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "011",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "10000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "100010",
+      "state": "unknown"
+    },
+    {
+      "path": "100011",
+      "state": "unknown"
+    },
+    {
+      "path": "100100",
+      "state": "unknown"
+    },
+    {
+      "path": "100101",
+      "state": "unknown"
+    },
+    {
+      "path": "100110",
+      "state": "unknown"
+    },
+    {
+      "path": "100111",
+      "state": "unknown"
+    },
+    {
+      "path": "1010",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "101100",
+      "state": "unknown"
+    },
+    {
+      "path": "101101",
+      "state": "unknown"
+    },
+    {
+      "path": "101110",
+      "state": "unknown"
+    },
+    {
+      "path": "101111",
+      "state": "unknown"
+    },
+    {
+      "path": "11000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "110010",
+      "state": "unknown"
+    },
+    {
+      "path": "110011",
+      "state": "unknown"
+    },
+    {
+      "path": "110100",
+      "state": "unknown"
+    },
+    {
+      "path": "110101",
+      "state": "unknown"
+    },
+    {
+      "path": "11011",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "111",
+      "state": "blocked",
+      "atom_id": 0
+    }
+  ]
+}

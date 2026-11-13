@@ -99,6 +99,13 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+First validator source (2026-11-13 UTC): the
+[P0 checkpoint](DFND/reference_validator_checkpoint.md) implements exact selected
+proof checking and a bounded tetrahedron pilot. Finish its remaining P0
+contracts and P1 geometry feasibility before claiming general connected-region
+validation; requested volume precision remains P4. #181's native policy is
+unchanged by these reference controls.
+
 Selected reference work (2026-11-12): the
 [precision-first validator implementation plan](DFND/physical_reference_validator_implementation.md)
 under #76 starts with P0 model/certificate tests and P1's local/global geometry

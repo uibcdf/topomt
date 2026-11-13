@@ -1,5 +1,16 @@
 # DFND notebook laboratory checkpoint
 
+## First exact-validator implementation — 2026-11-13 UTC
+
+Source `3b75f59` implements the first P0 model/checker tranche under #76.
+The [source checkpoint](reference_validator_checkpoint.md) retains ten actual
+tetrahedron proofs: partial volume enclosures, full 1.7 Å exclusion with 121
+covered cells, two free points and four entire 1.2 Å face-access segments.
+The original case evidence is unchanged. P0 remains partial; general free-region
+enumeration, other hulls and high-precision integration still require P1/P4.
+No native or comparative-finding disposition changes, and #181's tube question
+remains open. Continue through the checkpoint's finite remaining gates.
+
 ## Reference-validator implementation planning — 2026-11-12
 
 The maintainer selects the

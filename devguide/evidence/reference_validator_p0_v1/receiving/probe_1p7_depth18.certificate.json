@@ -1,0 +1,617 @@
+{
+  "schema": "topomt.reference-validator.certificate/1",
+  "kind": "partition",
+  "model_sha256": "9f894cc7fd38ac0fc28aaa3de3548584679eca9db1b0f03bcdcba363f792d8be",
+  "arithmetic": "rational-exact/1",
+  "refinement": {
+    "max_depth": 18,
+    "max_leaves": 1024
+  },
+  "leaves": [
+    {
+      "path": "00000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "000010000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "0000100010",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "0000100011",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "000010010",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "000010011",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "00001010000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "00001010001",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "0000101001",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "000010101",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "00001011",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "000011",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "000100",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "000101",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "0001100000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "0001100001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "000110001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "00011001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "0001101",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "000111",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "0010",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "00110",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "00111000",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "00111001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "00111010",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "001110110",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "001110111",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "001111000",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "0011110010",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "0011110011",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "00111101",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "0011111",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "01000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "01001000000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "01001000001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "0100100001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "010010001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "01001001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "0100101000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "0100101001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "010010101",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "010010110",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "010010111",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "010011",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "010100000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "010100001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "01010001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "01010010",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "010100110",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "010100111",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "0101010000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "0101010001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "010101001",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "01010101",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "0101011",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "01011",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "011",
+      "state": "blocked",
+      "atom_id": 1
+    },
+    {
+      "path": "10000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "100010",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "10001100000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "10001100001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1000110001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "100011001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "10001101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1000111",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "10010000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "100100010",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "100100011",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "10010010",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "100100110",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "100100111",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "1001010000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "1001010001",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "100101001",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "1001010100",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "1001010101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "100101011",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1001011",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "1001100000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "1001100001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "100110001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "10011001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1001101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "100111",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1010",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "10110",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "101110000",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1011100010",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "1011100011",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "10111001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1011101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "10111100",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "10111101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "101111100",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "101111101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "10111111",
+      "state": "blocked",
+      "atom_id": 2
+    },
+    {
+      "path": "11000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "11001000000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "11001000001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1100100001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "110010001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "11001001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "110010100",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "110010101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1100101100",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "1100101101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "110010111",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "110011",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "1101000000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "1101000001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "110100001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "11010001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "1101001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "110101000",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "110101001",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "11010101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "110101100",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "110101101",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "11010111",
+      "state": "blocked",
+      "atom_id": 3
+    },
+    {
+      "path": "11011",
+      "state": "blocked",
+      "atom_id": 0
+    },
+    {
+      "path": "111",
+      "state": "blocked",
+      "atom_id": 0
+    }
+  ]
+}

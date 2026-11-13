@@ -1,0 +1,20 @@
+{
+  "schema": "topomt.reference-validator.verification/1",
+  "verification_status": "accepted",
+  "kind": "path",
+  "model_sha256": "c5e1d2cba75f0f50882ea020689b5b9a57da3c299fd2272ec42c7e950f6ec8ef",
+  "certificate_sha256": "03d867f0122d5cc3acd9732f413eeab9100d7763ce45829f4f0ee495521a162a",
+  "trusted_arithmetic": "stdlib-fraction/1",
+  "topology_complete": false,
+  "n_components": null,
+  "topology_status": "not_computed",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "9a58f7efd794192381f559cb59d6cfcafe63d3a945c6a3ec8bc2b70149fb5634",
+    "verify/__init__.py": "635437ac18e0f72b38933a59a7b0f980440d39046c7266f8330e84346b543793",
+    "verify/geometry.py": "cc2d52c1502a5bf6b06ce7a84e04712ea28407c68cb3e9e8862aa058d4cd8258"
+  },
+  "path_validated": true,
+  "connectivity_status": "resolved",
+  "connected": true
+}

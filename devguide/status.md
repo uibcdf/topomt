@@ -1,5 +1,15 @@
 # TopoMT development status
 
+## First exact reference-validator source — 2026-11-13 UTC
+
+The [P0 source checkpoint](DFND/reference_validator_checkpoint.md) delivers exact
+models, independent selected proof checking and a bounded partition pilot.
+Ten retained tetrahedron proofs include 121-cell full exclusion at 1.7 Å.
+P0 remains partial; complete region enumeration, other hulls, requested volume
+precision and public admission remain pending under #76. No DFND behavior or
+#181/#180/#184/#188 disposition changes. Earlier planning statements below keep
+their dates; they no longer describe this new developer route as absent.
+
 ## Precision-first reference-validator plan — 2026-11-12
 
 The [detailed implementation plan](DFND/physical_reference_validator_implementation.md)
