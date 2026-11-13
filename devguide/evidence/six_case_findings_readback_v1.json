@@ -1,0 +1,86 @@
+{
+  "captured_at": "2026-11-13T02:28:23.553742+00:00",
+  "issues": {
+    "uibcdf/topomt#75": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#147": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#151": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#155": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#156": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#180": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#181": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#184": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#187": {
+      "state": "CLOSED"
+    },
+    "uibcdf/topomt#188": {
+      "state": "OPEN"
+    },
+    "uibcdf/topomt#195": {
+      "state": "OPEN"
+    }
+  },
+  "findings": {
+    "tetrahedron-boundary-patches": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482186"
+    },
+    "dfnd-volume-precision": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482187"
+    },
+    "dfnd-length-argument-admission": {
+      "status": "resolved",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482188"
+    },
+    "mole-four-atom-execution": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482189"
+    },
+    "caver-four-atom-execution": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19482190"
+    },
+    "tube-physical-boundary-budget": {
+      "status": "current",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19533340"
+    },
+    "tube-local-candidates-covered-hull": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19533341"
+    },
+    "wide-tube-boundary-numerical-margin": {
+      "status": "current",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19535683"
+    },
+    "dumbbell-probe-fragmentation-diagnosis": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19536753"
+    },
+    "povme-empty-initial-region": {
+      "status": "needs_review",
+      "discussion_url": "https://github.com/uibcdf/topomt/discussions/154#discussioncomment-19552378"
+    }
+  },
+  "current_ids": [
+    "tube-physical-boundary-budget",
+    "wide-tube-boundary-numerical-margin"
+  ],
+  "raw_evidence": "devguide/evidence/six_case_discussions_after_v1.json",
+  "scope": "All registered linked issues and cards, observed current-view IDs and five exact body readbacks. Scientific finding states are not inferred from issue closure."
+}

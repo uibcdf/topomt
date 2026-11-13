@@ -146,3 +146,23 @@ Raw attempts and HTML are retained in the task-owned
 `/tmp/topomt-six-case-docs-ww_t1rpn` for the next documentation checkpoint (#18).
 New source publication, rendered link/byte receipt and remote reconciliation
 remain separately identified; no remote CI or hosted deployment is inferred.
+
+## Published source and independently received closeout
+
+Source delivery is `06657e5855b9fe117aa11abe57be41a6cf6d470f`; scientific capture
+remains `1510e007d96da8a3c569f626a1b263fb59a54533`. The
+[HTML/byte receipt](../evidence/six_case_documentation_v1.json) checks 114 HTML
+pages, 11164 local links and all four new review downloads. The
+[five Discussion update receipts](../evidence/six_case_discussion_mutations_v1.json)
+and [complete live findings readback](../evidence/six_case_findings_readback_v1.json)
+receive #129/#130/#154 and both interpretation cards; their published bodies
+match the reviewed SHA-256 values. All ten registered cards and linked issues
+pass the live consistency check. The current view remains the two scoped
+boundary-availability findings, not the two needs_review interpretation cards.
+
+[Owner comment readback](../evidence/six_case_owner_comments_v1.json) receives
+the #181/#188 progress and #187 completion posts independently. #187 is closed;
+#181 and #188 remain open, with their qualification/interpretation scope intact.
+All new future actions retain the existing #181/#180/#184/#188/#60/#76/#16
+owners. These records are part of the same source delivery; no hosted deployment,
+remote CI pass or public package qualification follows.
