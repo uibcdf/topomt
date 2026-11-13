@@ -1,5 +1,21 @@
 # DFND notebook laboratory checkpoint
 
+## Independent reference-validator review — 2026-11-12
+
+The maintainer selects a precision-first assessment of connected probe-habitable
+volume validation before further native qualification. The
+[critical design and implementation gates](physical_reference_validator_plan.md)
+remain owned by #76, with #181 as first consumer and the unchanged six-case
+panel as initial controls. Adaptive subdivision needs rigorous arithmetic,
+independent certificate checking and a qualified cut-cell topology construction
+before claiming exhaustive components; volume bounds and anchor paths alone
+are partial delivery. Rust/CPU execution and later bounded parallelism/GPU
+evaluation are implementation choices, not scientific guarantees.
+
+This is a design review, not new reference receiving or a native fix. Preserve
+the current #180/#181/#184/#188 dispositions, original inputs/evidence and
+synthetic-first scope. No new geometry/provider run or protein phase follows.
+
 ## Joint review and local-candidate diagnosis — 2026-11-12
 
 The [six-case disposition](../../docs/content/benchlab/synthetic/six_case_review.md)

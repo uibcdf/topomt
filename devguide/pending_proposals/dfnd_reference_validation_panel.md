@@ -15,6 +15,27 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Reference-validator design review — 2026-11-12
+
+The maintainer prioritizes reliability/precision over detector-like speed for
+an independent validator of connected probe-habitable volumes. The
+[critical evaluation and staged implementation plan](../DFND/physical_reference_validator_plan.md)
+keeps this issue as reference owner and #181 as its first public-qualification
+consumer. It specifies the rigid-ball/probe/domain model, rigorous occupancy
+and volume certificates, continuous paths, separate topology-completeness
+obligations, an independent checker and a geometric cut-cell completion gate.
+An adaptive grid alone, even with tight volume bounds, does not prove complete
+component enumeration. Exact/validated sphere geometry is an implementation
+candidate requiring source/arithmetic/domain qualification, not a newly
+integrated or executed engine.
+
+The [joint six-case review](../../docs/content/benchlab/synthetic/six_case_review.md)
+is the current initial panel; the dated three-case acceptance below retains
+its earlier scope. No new validator execution, native correction, finding
+disposition, protein phase or full-panel completion is claimed. This issue
+remains partial/open; the implementation stages and unresolved construction
+decision are explicitly retained in the linked plan.
+
 ## Current three-case acceptance — 2026-11-10
 
 The [finite case ledger](../../docs/content/benchlab/synthetic/three_case_disposition.md)
