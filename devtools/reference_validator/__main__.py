@@ -30,6 +30,9 @@ def main() -> int:
     produce.add_argument('output', type=Path)
     produce.add_argument('--max-depth', type=int, default=4)
     produce.add_argument('--max-leaves', type=int, default=4096)
+    topology = commands.add_parser('box-topology')
+    topology.add_argument('model', type=Path)
+    topology.add_argument('output', type=Path)
     freeze = commands.add_parser('freeze-tetrahedron')
     freeze.add_argument('input', type=Path)
     freeze.add_argument('output', type=Path)
@@ -87,11 +90,16 @@ def main() -> int:
                 result = verify_transition(model, parent, cp, run)
             save_bundle(args.output, model, cp, run)
         else:
-            from .producer import partition
+            if args.command == 'box-topology':
+                from .box_topology import single_ball_box
 
-            certificate = partition(
-                model, max_depth=args.max_depth, max_leaves=args.max_leaves
-            )
+                certificate = single_ball_box(model)
+            else:
+                from .producer import partition
+
+                certificate = partition(
+                    model, max_depth=args.max_depth, max_leaves=args.max_leaves
+                )
             result = verify(model, certificate)
             with args.output.open('x') as stream:
                 json.dump(certificate, stream, indent=2, allow_nan=False)

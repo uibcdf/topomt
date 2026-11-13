@@ -52,6 +52,7 @@ def kernel_identity() -> dict[str, Any]:
         'storage.py',
         'verify/__init__.py',
         'verify/geometry.py',
+        'verify/box_topology.py',
         'verify/records.py',
     )
     return {

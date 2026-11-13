@@ -139,7 +139,7 @@ def verify(
     model : Model
         Original immutable numerical model in nm.
     certificate : object
-        Portable partition, path or point proof record.
+        Portable partition, path, point or scoped one-ball box topology proof.
     limits : Limits
         Explicit work ceilings. Exceeding them rejects checking; it never
         supplies a negative geometric answer.
@@ -167,6 +167,8 @@ def verify(
         extra = {'points'}
     elif kind == 'point':
         extra = {'point', 'claim'}
+    elif kind == 'single_ball_box_topology':
+        extra = {'pieces', 'joins', 'components'}
     else:
         raise ValueError('Unsupported certificate kind')
     cert = _record(certificate, common | extra)
@@ -194,7 +196,15 @@ def verify(
             for name in ('model.py', 'verify/__init__.py', 'verify/geometry.py')
         },
     }
-    if kind == 'partition':
+    if kind == 'single_ball_box_topology':
+        from .box_topology import check
+
+        name = 'verify/box_topology.py'
+        result['verifier_files_sha256'][name] = hashlib.sha256(
+            (Path(__file__).parents[1] / name).read_bytes()
+        ).hexdigest()
+        result.update(check(model, cert))
+    elif kind == 'partition':
         result.update(_partition(model, cert, limits))
     elif kind == 'path':
         raw_points = cert['points']

@@ -1,8 +1,8 @@
 # Exact reference-validator foundation
 
 Developer tools under TopoMT #76, first consumer #181. This is a bounded P0
-implementation, not a supported public detector or a complete region
-enumerator. The [implementation plan](../../devguide/DFND/physical_reference_validator_implementation.md)
+foundation with a scoped P1 analytic construction, not a supported public
+detector or a general multi-ball region enumerator. The [implementation plan](../../devguide/DFND/physical_reference_validator_implementation.md)
 retains the remaining scientific gates.
 
 The model freezes rational nm values, source atom/frame IDs, input SHA-256,
@@ -27,8 +27,8 @@ The verifier reconstructs the tree independently of producer search and computes
 exact lower/upper probe-center volume bounds. Unknown cells contribute only to
 the upper bound. Those bounds do not imply requested numerical precision.
 
-Only complete exclusion and completely free convex domains receive proved
-component counts (zero/one). A blocked point does not exclude its carrier.
+In the subdivision route, only complete exclusion and completely free convex
+domains receive proved component counts (zero/one). A blocked point does not exclude its carrier.
 Mixed partitions and positive paths do not acquire a general component count,
 enclosure, aperture inventory or morphological label. Exact geometry completion,
 all six hulls, high-precision curved-volume integration and production
@@ -131,3 +131,34 @@ reuses the original frozen 1.7 Å model and compares a nine-step chain with an
 uninterrupted control. Use
 `python -m devtools.reference_validator.capture_resume PROTOCOL.json NEW_DIRECTORY`
 with one CPU affinity and the external memory/deadline envelope.
+
+## Scoped exact connected-region construction
+
+```bash
+python -m devtools.reference_validator box-topology MODEL.json CERTIFICATE.json
+python -m devtools.reference_validator verify MODEL.json CERTIFICATE.json
+```
+
+The new route admits exactly one expanded ball and an axis-aligned box. It
+rejects additional atoms and other domains; it never drops them or substitutes
+a box. A complete monotone-sector cover with every pair intersection proves
+exhaustive regions, including eight tiny corner components and exact throat
+closure. No subdivision resolution or floating epsilon decides this result.
+
+Accepted regions list IDs of their supported free pieces and a representative.
+Each piece means `sector intersect strict free set`; `free_set_state=nonempty`
+does not mean the entire sector is free. The retained certificate/model recover
+the physical regions. Counts and IDs do not imply volume, boundary incidence,
+enclosure or morphology. See the
+[proof and remaining P1 gates](../../devguide/DFND/reference_validator_p1_feasibility.md).
+
+The [frozen topology protocol](../../devguide/evidence/reference_validator_box_topology_v1/protocol.json)
+contains thirteen analytic controls. Capture within one CPU affinity and an
+external memory/deadline envelope:
+
+```bash
+python -m devtools.reference_validator.capture_box_topology PROTOCOL.json NEW_DIRECTORY
+```
+
+The standalone saved checker needs no topology producer, DFND or NumPy. General
+multi-ball regions and requested high-precision integration remain unresolved.

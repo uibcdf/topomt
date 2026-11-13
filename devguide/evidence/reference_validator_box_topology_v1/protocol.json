@@ -1,0 +1,923 @@
+{
+  "schema": "topomt.reference-validator.box-topology-pilot/1",
+  "owner": "uibcdf/topomt#76",
+  "scope": "Bounded P1 one-ball box feasibility controls, not a general multi-ball construction or a new BenchLab family",
+  "units": "nm",
+  "contact_policy": "strict",
+  "cases": [
+    {
+      "name": "empty_box",
+      "method": "partition",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "05a1420ad84d256f130ea4958a85f9cf0f1037780ad848630e5617c3e9e67296",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": []
+      },
+      "expected_components": 1,
+      "independent_reference": "Empty obstacle family; the convex box is free."
+    },
+    {
+      "name": "covered_box",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "f922ee71b5fd978d0930634709d51c574a5255f671773647903cea2e7391af29",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 0,
+      "independent_reference": "All squared distances are at most 3 < 16."
+    },
+    {
+      "name": "internal_unit_ball",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "783e07fd6ac9e323768af95b3148f167de4099844cc6fbe391d754f3a87d6d67",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-2",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ],
+            [
+              "2",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "independent_reference": "Radial outward paths reach the connected free box boundary."
+    },
+    {
+      "name": "eight_corners",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "daf9ede0b8854c84c9cd5bc1d9c1f2a3665fbdca17a48ea5b4f7a30a6d422564",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "3",
+              "2"
+            ]
+          }
+        ]
+      },
+      "expected_components": 8,
+      "independent_reference": "Coordinate planes are covered, all corners free; each orthant retracts outward to its corner."
+    },
+    {
+      "name": "tiny_eight_corners",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "cd30969332b86b68b048838fece3e8aa391d6d5cc43f2af168f7806b55a864bf",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "34641",
+              "20000"
+            ]
+          }
+        ]
+      },
+      "expected_components": 8,
+      "independent_reference": "The rational expanded radius satisfies 2 < R^2 < 3; no size cutoff can discard the eight caps."
+    },
+    {
+      "name": "throat_before",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "f922ee71b5fd978d0930634709d51c574a5255f671773647903cea2e7391af29",
+        "frame_index": 0,
+        "probe": [
+          "1208925819614629174706175",
+          "1208925819614629174706176"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-10",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "10",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "independent_reference": "At R>=5 the entire x=0 section is covered; below 5 a free corner line joins the ends. Each half joins its free end section."
+    },
+    {
+      "name": "throat_contact",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "f922ee71b5fd978d0930634709d51c574a5255f671773647903cea2e7391af29",
+        "frame_index": 0,
+        "probe": [
+          "1",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-10",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "10",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 2,
+      "independent_reference": "At R>=5 the entire x=0 section is covered; below 5 a free corner line joins the ends. Each half joins its free end section."
+    },
+    {
+      "name": "throat_after",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "f922ee71b5fd978d0930634709d51c574a5255f671773647903cea2e7391af29",
+        "frame_index": 0,
+        "probe": [
+          "1208925819614629174706177",
+          "1208925819614629174706176"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-10",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "10",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 2,
+      "independent_reference": "At R>=5 the entire x=0 section is covered; below 5 a free corner line joins the ends. Each half joins its free end section."
+    },
+    {
+      "name": "external_ball",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "13a0a3a9ba4a8e6055184981d5476abe8994b150f688337371be4c70fa7fed32",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "4"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "independent_reference": "The closest point of the box to the center is 2 units away; the whole box is free."
+    },
+    {
+      "name": "center_on_face",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "91d9afc50b7c4f1e7bc35f60ae053355c2922c6c8f2664f07c7ce5d564992a6d",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "8",
+              "5"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "independent_reference": "Moving toward x=-1 increases clearance; that end section has minimum squared distance 4 > 64/25 and is connected."
+    },
+    {
+      "name": "zero_radius",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "8e62adb6558a8aeca6a84eb578dba190c00c414ef2f3ad88455f1c94ea4faa03",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "0",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "independent_reference": "Removing one point from a three-dimensional box leaves a path-connected set."
+    },
+    {
+      "name": "corner_exact_cover",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "4e5ea82a8173473d1ad252b7419a60b4d666a73caaf303c58301ed739b6d7495",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "6",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "7",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 0,
+      "independent_reference": "The unique farthest corner has squared distance 49; strict contact is blocked."
+    },
+    {
+      "name": "corner_positive_sliver",
+      "method": "single_ball_box",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "063fafe40e3eddab594c2e97649b5e257ff01fac93a47e43b9e4738045d240f8",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "6",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "8462480737302404222943231",
+              "1208925819614629174706176"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "independent_reference": "The farthest corner is strictly free; coordinatewise outward paths make every free point connected to it."
+    }
+  ]
+}
