@@ -1,0 +1,21 @@
+{
+  "schema": "topomt.reference-validator.tetrahedron-pilot/1",
+  "issue": "uibcdf/topomt#76",
+  "consumer_issue": "uibcdf/topomt#181",
+  "input": "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json",
+  "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+  "interpretation": "received_binary64_nm",
+  "study_scope": "Retrospective P0 sufficient certificates on the frozen tetrahedron; preliminary budget behavior is known. No blind evaluation or general region enumeration.",
+  "partition_requests": [
+    {"id": "probe_1p2_depth6", "probe_angstroms": 1.2, "max_depth": 6, "max_leaves": 1024, "expected_components": null},
+    {"id": "probe_1p4_depth6", "probe_angstroms": 1.4, "max_depth": 6, "max_leaves": 1024, "expected_components": null},
+    {"id": "probe_1p7_depth10", "probe_angstroms": 1.7, "max_depth": 10, "max_leaves": 1024, "expected_components": null},
+    {"id": "probe_1p7_depth18", "probe_angstroms": 1.7, "max_depth": 18, "max_leaves": 1024, "expected_components": 0}
+  ],
+  "point_probes_angstroms": [1.2, 1.4],
+  "point_definition": "Exact centroid of the four decoded nm rational vertices; expected strict-free. Does not prove enclosure or an exhaustive region count.",
+  "path_probe_angstroms": 1.2,
+  "path_definition": "Four segments from the exact centroid to the exact centroid of each opposite face; expected strict all-atom clearance inside the declared tetrahedron. Does not prove the boundary patch inventory.",
+  "bounds_contract": "Exact lower/upper probe-center volume enclosures in nm**3; no requested precision is claimed.",
+  "topology_scope": "Only full-domain exclusion or full-free convex-domain certificates give complete counts. Positive point/path controls leave general topology not computed."
+}

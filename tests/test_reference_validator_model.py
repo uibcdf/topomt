@@ -1,0 +1,106 @@
+"""Exact model identity is independent of native DFND and decimal appearance."""
+
+import copy
+import json
+from fractions import Fraction
+
+import pytest
+
+from devtools.reference_validator.model import (
+    Atom,
+    Box,
+    Model,
+    Tetrahedron,
+    decode_scalar,
+    point,
+    scalar,
+)
+
+
+def test_float_values_are_not_replaced_by_nearby_decimals():
+    assert scalar(0.1) == Fraction(*(0.1).as_integer_ratio())
+    assert scalar(0.1) != Fraction(1, 10)
+    model = Model(
+        (Atom(7, point((0, 0, 0)), scalar(0.1)),),
+        scalar(0.2),
+        Box(point((-1, -1, -1)), point((1, 1, 1))),
+        'a' * 64,
+    )
+    assert model.atoms[0].radius + model.probe != scalar(0.1 + 0.2)
+    record = json.loads(json.dumps(model.to_record()))
+    restored = Model.from_record(record)
+    assert restored == model
+    assert restored.digest == model.digest
+    for field, value in [
+        ('length_unit', 'angstrom'),
+        ('frame_index', -1),
+        ('contact_policy', 'inclusive'),
+    ]:
+        bad = copy.deepcopy(record)
+        bad[field] = value
+        with pytest.raises(ValueError):
+            Model.from_record(bad)
+
+
+@pytest.mark.parametrize('value', [True, float('nan'), float('inf'), '0.1'])
+def test_invalid_scalar_inputs_are_rejected(value):
+    with pytest.raises((TypeError, ValueError)):
+        scalar(value)
+
+
+@pytest.mark.parametrize(
+    'value', [['2', '4'], ['1', '0'], ['1', '-2'], ['01', '2'], [1, 2], ['0', '2']]
+)
+def test_serialized_rationals_must_be_canonical(value):
+    with pytest.raises(ValueError):
+        decode_scalar(value)
+
+
+def test_model_digest_binds_atoms_probe_frame_domain_and_source():
+    model = Model(
+        (Atom(3, point((0, 0, 0)), scalar(1)),),
+        scalar(0),
+        Box(point((-2, -2, -2)), point((2, 2, 2))),
+        'a' * 64,
+    )
+    for field, value in [
+        ('probe', ['1', '1']),
+        ('frame_index', 1),
+        ('source_sha256', 'b' * 64),
+    ]:
+        record = model.to_record()
+        record[field] = value
+        assert Model.from_record(record).digest != model.digest
+    record = model.to_record()
+    record['atoms'][0]['source_id'] = 4
+    assert Model.from_record(record).digest != model.digest
+    record = model.to_record()
+    record['domain']['upper'][0] = ['3', '1']
+    assert Model.from_record(record).digest != model.digest
+
+
+def test_negative_duplicate_and_degenerate_models_are_rejected():
+    box = Box(point((-1, -1, -1)), point((1, 1, 1)))
+    atom = Atom(0, point((0, 0, 0)), scalar(1))
+    with pytest.raises(ValueError):
+        Atom(0, point((0, 0, 0)), scalar(-1))
+    with pytest.raises(ValueError):
+        Model((atom, atom), scalar(0), box, 'a' * 64)
+    with pytest.raises(ValueError):
+        Model((atom,), scalar(-1), box, 'a' * 64)
+    with pytest.raises(ValueError):
+        Box(point((0, 0, 0)), point((0, 1, 1)))
+    with pytest.raises(ValueError):
+        Tetrahedron(tuple(point((i, 0, 0)) for i in range(4)))
+
+
+def test_tetrahedron_encoding_and_unknown_fields():
+    tet = Tetrahedron(
+        tuple(point(x) for x in ((0, 0, 0), (1, 0, 0), (0, 1, 0), (0, 0, 1)))
+    )
+    model = Model((), scalar(0), tet, 'a' * 64)
+    assert Model.from_record(model.to_record()) == model
+    record = model.to_record()
+    record['topology_complete'] = True
+    with pytest.raises(ValueError):
+        Model.from_record(record)
