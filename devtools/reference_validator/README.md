@@ -287,3 +287,36 @@ local one-CPU/2 GiB capture takes 3.55 seconds, peak RSS 53,576 KiB; all-profile
 saved replay is guarded. See the
 [execution record](../../devguide/evidence/reference_validator_hull_sterics_v1/execution.json)
 for external ceilings and the preserved earlier equivalent capture.
+
+## Measured six-case BenchLab panel
+
+The developer driver `benchlab_panel` applies the existing verifier to the six
+BenchLab systems and their nineteen frozen probes. It adds no topology solver.
+Each case has a fresh sequential worker, explicit CPU/address-space/wall caps
+and host-pressure monitoring. Case wall/CPU measurements include process
+startup and completion; per-phase measurements separate source/hull setup,
+saved-model rechecking and queries. Peak RSS is reported by that worker rather
+than inferred from a parent process's lifetime maximum. These are single samples,
+not competitive benchmark statistics.
+
+```bash
+python -m devtools.reference_validator.benchlab_panel PROTOCOL.json NEW_DIRECTORY --all-cases
+```
+
+Without `--all-cases`, the default is the cheap tetrahedron; repeat `--case NAME`
+for a bounded selection. Use an external one-CPU/2 GiB parent envelope with a
+CPU hard ceiling at least as large as the selected workers' ceiling. Workers
+respect a smaller inherited ceiling and report it. Resource stops stay unresolved.
+No Slurm is used for the currently selected local phase.
+
+The [frozen panel protocol](../../docs/content/benchlab/synthetic/artifacts/reference_validator_panel_v1/protocol.json)
+declares signed-axis candidates ending exactly on H, four additional tetrahedron
+face rays, named dumbbell chamber anchors and the earlier narrow bent-path
+candidate. Candidate counts are not aperture counts. Proofs and exact models
+are persisted and independently checked. Original inputs and references remain
+unchanged; stronger historical findings are not silently adopted as new results.
+
+For exactly four source centers, a fresh partition also runs on the identical
+physical tetrahedral hull, with the same spheres/probe/provenance. Both model
+records and the distinct certificate are retained; this admits no general hull
+subdivision. All other global counts/precision retain their actual availability.

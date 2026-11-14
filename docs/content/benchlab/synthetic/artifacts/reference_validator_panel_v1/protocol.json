@@ -1,0 +1,435 @@
+{
+  "schema": "topomt.reference-validator.benchlab-panel/1",
+  "owner": "uibcdf/topomt#76",
+  "date": "2026-11-13",
+  "scope": "Current exact validator on six BenchLab inputs and all 19 frozen probe profiles; selected facts and resource measurements, not complete P5 topology/precision qualification",
+  "cases": [
+    {
+      "name": "regular_tetrahedron",
+      "input": "docs/content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json",
+      "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+      "n_atoms": 4,
+      "probes_angstroms": [
+        1.2,
+        1.4,
+        1.7
+      ],
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/regular_tetrahedron/certificate.json",
+      "hull_sha256": "d2b858a03d2873c3acd97f3dc1fa9bdbf01c74da5095f96f365e197c730e4481",
+      "named_points": {},
+      "extra_paths": {},
+      "tetrahedron_partition": {
+        "max_depth": 18,
+        "max_leaves": 1024
+      }
+    },
+    {
+      "name": "closed_shell",
+      "input": "docs/content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/input.json",
+      "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+      "n_atoms": 72,
+      "probes_angstroms": [
+        0.05,
+        0.2,
+        1.4,
+        5.0
+      ],
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/closed_shell/certificate.json",
+      "hull_sha256": "2afa6b0adb760f26481d24509fdd6ce8018e6fcf0cd4113c87e839b89f0f513f",
+      "named_points": {},
+      "extra_paths": {},
+      "tetrahedron_partition": null
+    },
+    {
+      "name": "shell_with_opening",
+      "input": "docs/content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/input.json",
+      "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+      "n_atoms": 66,
+      "probes_angstroms": [
+        1.4,
+        3.0,
+        5.0
+      ],
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/shell_with_opening/certificate.json",
+      "hull_sha256": "d793fa97e346ff6bc7295902d844158f04fcd58f6790fd2c365768b2948494bc",
+      "named_points": {},
+      "extra_paths": {},
+      "tetrahedron_partition": null
+    },
+    {
+      "name": "straight_tube_narrow_dense",
+      "input": "docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/input.json",
+      "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+      "n_atoms": 81,
+      "probes_angstroms": [
+        1.2,
+        1.4,
+        2.5
+      ],
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/straight_tube_narrow_dense/certificate.json",
+      "hull_sha256": "ee4d8c484e980b11bfc59d63c7bfac74315c6846e255ed8b5483aee40a7b6e47",
+      "named_points": {},
+      "extra_paths": {
+        "bent_interior_reference": [
+          [
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "-7",
+              "8"
+            ]
+          ],
+          [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "-3",
+              "4"
+            ]
+          ],
+          [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "-5",
+              "8"
+            ]
+          ],
+          [
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "-1",
+              "2"
+            ]
+          ],
+          [
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "-3",
+              "8"
+            ]
+          ],
+          [
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "-1",
+              "4"
+            ]
+          ],
+          [
+            [
+              "-4323455642275677",
+              "144115188075855872"
+            ],
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "-1",
+              "8"
+            ]
+          ],
+          [
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          [
+            [
+              "-4323455642275677",
+              "144115188075855872"
+            ],
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "1",
+              "8"
+            ]
+          ],
+          [
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "1",
+              "4"
+            ]
+          ],
+          [
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "-5764607523034235",
+              "288230376151711744"
+            ],
+            [
+              "3",
+              "8"
+            ]
+          ],
+          [
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "1",
+              "2"
+            ]
+          ],
+          [
+            [
+              "-4323455642275677",
+              "144115188075855872"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "5",
+              "8"
+            ]
+          ],
+          [
+            [
+              "-2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "2882303761517117",
+              "288230376151711744"
+            ],
+            [
+              "3",
+              "4"
+            ]
+          ],
+          [
+            [
+              "-4323455642275677",
+              "144115188075855872"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "7",
+              "8"
+            ]
+          ]
+        ]
+      },
+      "tetrahedron_partition": null
+    },
+    {
+      "name": "straight_tube_wide_sparse",
+      "input": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/input.json",
+      "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+      "n_atoms": 77,
+      "probes_angstroms": [
+        1.4,
+        2.5,
+        5.0
+      ],
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/straight_tube_wide_sparse/certificate.json",
+      "hull_sha256": "1e8c1c37cde109fc347cec64b8f52e550c4e8ab44f8b36caef314edec4b5880c",
+      "named_points": {},
+      "extra_paths": {},
+      "tetrahedron_partition": null
+    },
+    {
+      "name": "dumbbell",
+      "input": "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/input.json",
+      "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63",
+      "n_atoms": 94,
+      "probes_angstroms": [
+        1.4,
+        2.2,
+        6.0
+      ],
+      "hull": "devguide/evidence/reference_validator_hulls_v1/local_receiving/originals/dumbbell/certificate.json",
+      "hull_sha256": "01fd039c6450be1427ee00cee436dd21a838ffbfa4d51dd0cf27b1674ca0b283",
+      "named_points": {
+        "left_chamber": [
+          [
+            "-5",
+            "8"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "right_chamber": [
+          [
+            "5",
+            "8"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      },
+      "extra_paths": {
+        "chamber_axis": [
+          [
+            [
+              "-5",
+              "8"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          [
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          [
+            [
+              "5",
+              "8"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ]
+        ]
+      },
+      "tetrahedron_partition": null
+    }
+  ],
+  "reference_files": {
+    "docs/content/benchlab/synthetic/artifacts/six_case_review_v1/protocol.json": "17b6cab2e8379a66b3450fb35c28a00c92ff99c5dd4a57d9d2d2c9ac29507dc0",
+    "devguide/evidence/reference_validator_hull_sterics_v1/protocol.json": "cb342b54505862e75727103c47b1e2e5a2e8d145e4c951a486d3c6cc921160e0",
+    "docs/content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/protocol.json": "a0305dd7b749a70189b848e7926021bb143e6929533fb807fbdcd69e0844eb8c"
+  },
+  "query_policy": {
+    "length_unit": "nm",
+    "contact_policy": "strict",
+    "common_anchor": [
+      0,
+      0,
+      0
+    ],
+    "axis_rays": "Six fixed signed coordinate rays from the origin to their exact first hull-plane hit; candidate counts are not mouth counts.",
+    "tetrahedron_faces": "Four face-centroid rays in addition to signed axes.",
+    "named_anchors": "Declared dumbbell chamber coordinates decoded through the public quantity codec.",
+    "extra_paths": "Frozen 15-waypoint narrow-tube interior slice and dumbbell chamber-axis polyline; no new path search.",
+    "global_route": "Sufficient convex_domain certificate on H; unknown is preserved.",
+    "tetrahedron_route": "Fresh full partition on the identical four-center tetrahedral hull; bind same spheres, probe, source and exact volume.",
+    "requested_precision": null
+  },
+  "resources": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "concurrency": 1,
+    "address_space_limit_bytes": 2147483648,
+    "per_case_cpu_seconds": 180,
+    "per_case_wall_seconds": 240,
+    "monitor_interval_seconds": 5,
+    "memory_reserve_fraction": 0.2
+  },
+  "timing_policy": {
+    "sample_count": 1,
+    "clock": "time.perf_counter for wall; time.process_time for phase CPU and parent child-rusage deltas for complete worker CPU",
+    "case_isolation": "One fresh sequential subprocess per case; peak RSS is its own Linux ru_maxrss, never a difference of lifetime maxima.",
+    "setup": "Decode all coordinates/radii and verify the existing original hull proof once; rebuilding the hull producer is not timed here.",
+    "per_profile": "Explicit probe conversion, Model persistence, independent full saved-model/hull verification, selected queries and proof persistence; optional tetrahedron partition is separately measured.",
+    "sharing": "The immutable verified hull and sphere arrays are reused across probes in one case; each saved profile is independently read and rechecked.",
+    "not_a_competitive_benchmark": true
+  }
+}
