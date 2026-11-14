@@ -47,6 +47,60 @@ Every target keeps its own full check and named queries. Each sequential worker
 has one CPU/thread, 2 GiB and finite 240 CPU/300 wall-second limits. Actual
 profile completion and nonempty region precision remain separate gates.
 
+### Completed wide receiving
+
+Source `9c79ad797730428bb7ec69b6dc6ccaa33dbe911c` now completes all three
+profiles: **1/1/0 complete free regions and 2/2/0 free hull patches** at
+1.4/2.5/5 Å. Each positive profile has a separately checked 26-point path
+between exact hull-end anchors, assigned to different patches of the same
+region. The 5 Å proof covers every complete convex cell by its owner's
+expanded ball, proving exact zero total free probe-center volume in the hull.
+Nonempty per-region precision is not computed.
+
+The [family summary](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+binds each Model/proof/query/resource record and the earlier face references.
+Their partitions agree by source atom IDs: three free faces per end at 1.4 Å,
+two at 2.5 Å, and no free wall face. Reference/native face ordinals are not
+equated. Native #184's numerical ambiguity is unchanged, as is #181's public
+qualification policy; neither issue nor comparative finding is resolved.
+
+The individual workers take 84.379/138.635/100.525 wall seconds and
+84.307/138.489/97.615 CPU seconds, peak RSS 34,772/36,352/35,228 KiB.
+Summed profile work is 323.540 wall / 320.410 CPU seconds. Including the
+separate initialization above gives 507.079 wall / 498.963 CPU seconds;
+interstage development time is excluded. All four workers are sequential,
+with one CPU/thread and 2 GiB each. The 103 host samples show no measured
+memory pressure and at least 49.68 GiB available RAM. No resources were reserved
+by these observations, and no environment was modified.
+
+Nine of nineteen original profiles now have complete topology: the tetrahedron
+and both tubes. Ten original profiles, nonempty region precision and P5/P6
+remain under #76. The [source qualification snapshot](../evidence/reference_validator_power_cells_wide_v1/source_qualification_reuse.json)
+shows all 32 scientific Python files unchanged from the preceding 310-test
+qualification. New evidence guards additionally check source/protocol/log
+hashes, complete geometry reuse, actual independent positive/negative saved
+checking without the scientific stack, whole-cell negative coverage, resources
+and original face-partition agreement. This reuses bounded source qualification,
+not installed/minor/platform, full-suite, hosted or native-public evidence.
+
+Final validation passes the eight new wide receiving guards across bounded
+selections. The initial seven take 92.07 pytest seconds (92.66 bounded process
+seconds), peak child RSS 64,460 KiB; the eighth's final strengthened assertions
+pass with seventeen reporting/finding/original-artifact guards (18 tests,
+1.06 pytest seconds, peak child RSS 64,816 KiB). The original 355-file
+integrity check passes. The positive and negative saved-proof children each
+retain one CPU, a 2 GiB inherited ceiling and finite CPU/wall limits; no full
+test suite is inferred from these scoped selections.
+
+Repository Ruff/format, report indexes, offline finding consistency and 212
+local Markdown targets pass. A complete one-worker Sphinx HTML build passes
+with warnings treated as errors and notebooks unexecuted (18.41 seconds,
+peak child RSS 290,300 KiB, 2 GiB cap). The report, wide-case landing and DFND
+scope pages are inspected in the generated HTML. The preceding 16.54-second
+build predates the current-coverage introduction; this final build includes it.
+Existing PlantUML/Java are selected explicitly without changing environments.
+No hosted deployment, release, full-suite or native correction is claimed.
+
 ## Remaining narrow profiles: probe-family source continuation — 2026-11-14
 
 The [probe-family continuation](reference_validator_power_cell_construction.md#probe-family-geometry-reuse--2026-11-14)
@@ -84,8 +138,9 @@ The 203.362 wall / 194.109 CPU-second total includes source proof checking and
 target reclassification/verification/queries, not fresh cell construction.
 Forty-one host samples show no measured memory pressure and at least 49.62 GiB
 available RAM. The family summary and per-worker receipts bind all source,
-Model/certificate/query and resource scopes. Six original profiles now have
-complete topology, with thirteen still awaiting this route. Native #181 and
+Model/certificate/query and resource scopes. At that narrow-family checkpoint,
+six original profiles have complete topology, with thirteen awaiting this route.
+Native #181 and
 other finding scopes, nonempty per-region precision and P6 remain open.
 
 Final validation passes **310 selected tests**, including independent actual

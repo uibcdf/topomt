@@ -15,6 +15,23 @@ supersedes: []
 
 # Local candidates in the covered tube
 
+## Independent wide-family reference handoff — 2026-11-14
+
+The [#76 wide-family receiving](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+now receives all three unchanged original wide Models: `1/1/0` complete free
+regions and `2/2/0` free hull patches at 1.4/2.5/5 Å. The negative target's
+complete convex power-cell partition has every vertex within its owner's
+expanded ball; ball convexity covers each cell and the exhaustive partition
+covers the hull. This gives exact zero total free probe-center volume at 5 Å,
+independently agreeing with the older sufficient cover.
+
+This is a complete geometric exclusion, distinct from the one wide native-
+center point check. Positive end-to-end paths and complete physical counts
+do not qualify every native local candidate. Native public objects/promotion,
+the proposed physical-policy guard and this issue's active/`needs_review`
+disposition are unchanged. Select and implement the explicit local-candidate
+versus physical-guarantee reporting policy before claiming a native correction.
+
 ## Independent narrow-family reference handoff — 2026-11-14
 
 Under [#76](dfnd_reference_validation_panel.md), the exact reference validator
@@ -34,8 +51,9 @@ geometric partition and ball convexity; the thirty narrow native-center point
 checks below do not acquire that proof merely by being blocked.
 
 This is stronger reference receiving, not a change to native operators or
-public promotion. The wide 5 Å profile retains its separate earlier reference
-and unresolved public qualification. #181 remains active/`needs_review`: select
+public promotion. At that delivery the wide 5 Å profile retains its separate
+earlier reference and unresolved public qualification. #181 remains
+active/`needs_review`: select
 and implement the local-candidate versus all-atom physical reporting policy,
 with the same original supports, pending targets and method-book review.
 The comparative-finding review changes no lifecycle or inferiority claim;

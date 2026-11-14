@@ -437,10 +437,79 @@ The [structured family summary](../evidence/reference_validator_power_cells_v4/f
 binds the three exact Models, complete certificates, source/target producer
 scopes, query results, phase/resource records and volume enclosures. Source
 geometry, model/frame/input hashes and every original artifact remain unchanged.
-Six of the nineteen original profiles now have complete topology on this route;
-the other thirteen and certified nonempty region integration remain under #76.
+At this narrow-family delivery, six of the nineteen original profiles have
+complete topology; thirteen and certified nonempty region integration remain under #76.
 The narrow reference family is complete; native #181/#180, wide #184 and dumbbell #188
 retain their scopes, with no public morphological promotion or protein phase.
+
+## Complete original wide family — 2026-11-14
+
+The [frozen wide plan](../evidence/reference_validator_power_cells_wide_v1/plan.json)
+selects the same saved 77-atom Models at 1.4/2.5/5 Å, without changing a
+coordinate, radius, domain or frame. All balls have radius 1.88 Å, so the
+probe-family equality criterion above applies. A three-cell feasibility
+preflight precedes full construction; positive global counts are unspecified
+before receiving. Earlier two-patch references and the negative sufficient
+cover remain independent controls, rather than catalog labels as truth.
+
+Source `38f5a86381db9cc83b79d82066cdaf4482eb9aaa` constructs and independently
+checks the complete wide 1.4 Å geometry with an empty query set. Initialization
+uses 183.539 wall / 178.553 CPU seconds, peak RSS 38,160 KiB. The later
+[three-profile protocol](../evidence/reference_validator_power_cells_wide_v1/protocol.json)
+binds its exact Model/certificate file hashes and original geometry producer.
+Source `9c79ad797730428bb7ec69b6dc6ccaa33dbe911c` reads the unchanged 1.4 Å
+proof and independently rechecks/reprobes that geometry at 2.5/5 Å. Every
+target has its own complete topology verification and detached anchor batch.
+
+| Probe | Complete free regions | Free hull patches | Origin | Additional checked result |
+| --- | ---: | ---: | --- | --- |
+| 1.4 Å | 1 | 2 | free | 26-point path between exact lower/upper hull-end anchors. |
+| 2.5 Å | 1 | 2 | free | 26-point path between the same declared hull-end anchors. |
+| 5 Å | 0 | 0 | blocked | Exact zero total probe-center volume in the finite hull. |
+
+Both positive anchors belong to the same complete region and distinct boundary
+patches. Their paths are independently checked against every original ball;
+IDs remain scoped to each Model/certificate. At 5 Å every complete checked
+convex cell has all vertices inside its owner's expanded ball. Ball convexity
+therefore proves the full hull covered. Nonempty per-region precision is not
+computed; these topology and path results do not provide aperture area or an
+optimal bottleneck.
+
+The new free boundary partitions match the previous independent certificates
+**face by face**, using sorted source atom IDs. Each end patch has three free
+faces at 1.4 Å and two at 2.5 Å, with none among the 68 wall faces. At 2.5 Å
+the negative-end faces are `[2,4,8]`, `[2,8,10]`; the positive-end faces are
+`[67,69,75]`, `[69,71,75]`. This recovers the reference pieces without equating
+validator, old-reference and native face ordinals. Native #184's `face 12`
+numerical ambiguity is not diagnosed or fixed by this matching alone.
+
+| Later worker scope | Wall seconds | CPU seconds | Peak RSS KiB |
+| --- | ---: | ---: | ---: |
+| 1.4 Å saved proof/queries | 84.379 | 84.307 | 34,772 |
+| 2.5 Å source check, reprobe, target verification/queries | 138.635 | 138.489 | 36,352 |
+| 5 Å source check, reprobe, target verification/query | 100.525 | 97.615 | 35,228 |
+
+Summed profile worker costs are 323.540 wall / 320.410 CPU seconds. Including
+initialization gives 507.079 wall / 498.963 CPU seconds; interstage development
+and protocol preparation are excluded. All four workers are sequential with
+one CPU/thread and 2 GiB ceilings, initialization at 300 CPU/360 wall seconds
+and profiles at 240 CPU/300 wall seconds. Across 103 host samples, available
+RAM stays at least 49.68 GiB and measured memory pressure is zero. These are
+execution records, not reserved resources or a competitive timing study.
+
+The [family summary](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+binds receipts, Models, proofs, queries, phases, execution costs and the earlier
+face references. All 32 validator Python files retain their previous qualified
+bytes, recorded in the [source snapshot](../evidence/reference_validator_power_cells_wide_v1/source_qualification_reuse.json).
+The new receiving guards additionally check saved positive/negative proofs in
+fresh processes without the producer, DFND or scientific libraries.
+
+Nine of nineteen original profiles now have complete topology: tetrahedron
+and both tubes. Ten profiles and certified nonempty per-region precision
+remain under #76. Native #181 public qualification and #184 numerical handling
+are unchanged; no comparative-finding resolution, new geometry/provider,
+protein phase or public morphological promotion follows. The original frozen
+case artifacts and all earlier source-scoped receiving remain unchanged.
 
 ## Complementary tetrahedral reference proposed by the maintainer
 

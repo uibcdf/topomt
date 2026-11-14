@@ -139,9 +139,21 @@ profiles. The [family summary](../../devguide/evidence/reference_validator_power
 retains complete `1/1/0` region counts and `2/2/0` hull patches at 1.2/1.4/2.5 Å,
 both positive checked paths and exact empty-hull total volume at 2.5 Å. The
 new reprobe/check/query workers cost 123.483 and 79.879 wall seconds; they do
-not rerun the original cell clipping or qualify native/public DFND. Six of
-nineteen original profiles now have complete topology; thirteen and certified
-nonempty per-region precision retain their gates.
+not rerun the original cell clipping or qualify native/public DFND.
+
+The [wide-family receiving](../../devguide/evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+subsequently receives all original 1.4/2.5/5 Å wide Models: `1/1/0` complete
+free regions and `2/2/0` free hull patches, with checked positive hull-end
+paths and exact zero negative total volume. Its new 1.4 Å geometry producer
+is `38f5a86`; `9c79ad7` checks the saved proof or exactly reuses its geometry
+for the other probes. Fresh initialization costs 183.539 wall seconds; the
+three saved/reprobe/query workers total 323.540 wall seconds. All four run
+sequentially on one CPU/thread with 2 GiB ceilings. Boundary face partitions
+match earlier references by source atom IDs; native #184/#181 remain open.
+Nine of nineteen original profiles now have complete topology; ten and
+certified nonempty per-region precision retain their gates. See the
+[BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md)
+for measured costs and the preserved earlier query-run scope.
 
 From the checkout, under external CPU/memory/time limits:
 

@@ -1,0 +1,469 @@
+{
+  "schema": "topomt.reference-validator.wide-family-summary/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-14T22:19:10.042353+00:00",
+  "scope": "All three unchanged original wide-tube probe Models with complete exact topology, explicit finite-hull context and actual original geometry/saved/reprobe execution scopes. No native #184 fix, morphology promotion, nonempty region-volume precision or comparative claim.",
+  "profiles": [
+    {
+      "probe": {
+        "requested": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "model": {
+          "value": [
+            "5044031582654955",
+            "36028797018963968"
+          ],
+          "unit": "nm",
+          "encoding": "rational-exact/1"
+        }
+      },
+      "model_sha256": "3ac4bf8411bde5f2ff01c5a9f3caf211cfebd2ca7c93edf2f1cad9e8b834ec0d",
+      "certificate_sha256": "7962498b2d401b3ab30bfb4fd36b8b9f139eb3a919c1b601858ad134fd187f2e",
+      "source_revision": "9c79ad797730428bb7ec69b6dc6ccaa33dbe911c",
+      "certificate_origin": {
+        "route": "saved_certificate",
+        "path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/certificate.json",
+        "sha256": "d039869f4dc7450d1771960dcc7f92cafab175a940fea1c5650a72dcf7589a0c",
+        "producer_revision": "38f5a86381db9cc83b79d82066cdaf4482eb9aaa"
+      },
+      "sources": {
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_1_4/receiving/receipt.json",
+          "sha256": "3d6dc42fcabc9a5913d6555ed06dcf12f35be766d45e7432cf40ea969e30b6ed"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_1_4/execution.json",
+          "sha256": "322704461ed785e26f7324046f47f243d0128b939aadc72c2f65f011f9d65901"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_1_4/receiving/original_wide_tube_1_4/model.json",
+          "sha256": "94e292f1d409247dfd784ece19431a81e89ad612537e4f53862a6ea4be8417e3"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_1_4/receiving/original_wide_tube_1_4/certificate.json",
+          "sha256": "d039869f4dc7450d1771960dcc7f92cafab175a940fea1c5650a72dcf7589a0c"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_1_4/receiving/original_wide_tube_1_4/verification.json",
+          "sha256": "20e0759882cda21ff68d3ef2c6957182502dd546b22f4e19254fd2e85615c8bd"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_1_4/receiving/original_wide_tube_1_4/anchors.json",
+          "sha256": "a7a8d3e741d66a49dc9742e1523ecd03150ce30a0a019df46152d70ee8b8a373"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_1_4/receiving/original_wide_tube_1_4/phases.json",
+          "sha256": "aad2438ebb39a790c98c5051475feb8d0f9671cfdcfc0ada701db841b24f158b"
+        }
+      },
+      "topology": {
+        "complete": true,
+        "n_components": 1,
+        "n_boundary_patches": 2,
+        "origin_state": "free"
+      },
+      "volume": {
+        "lower": [
+          "0",
+          "1"
+        ],
+        "upper": [
+          "6620533166212162263949896980673976813709886370954005",
+          "2993155353253689176481146537402947624255349848014848"
+        ],
+        "unit": "nm**3",
+        "encoding": "rational-exact/1",
+        "precision_status": "not_requested",
+        "per_region_status": "not_computed",
+        "scope": "Total strict probe-center volume enclosure in the original finite center hull; no certified nonempty per-region precision."
+      },
+      "anchor_pair_connected": true,
+      "path_points": 26,
+      "resources": {
+        "wall_seconds": 84.37923227495048,
+        "cpu_seconds": 84.306521,
+        "peak_rss_kib_linux": 34772,
+        "cpu_count": 1,
+        "address_space_limit_bytes": 2147483648,
+        "scope": "Explicit saved proof or certified geometry reprobe/target checks/queries; original cell construction is a separate initialization."
+      },
+      "phases": {
+        "model_receiving": {
+          "wall_seconds": 3.142245947034098,
+          "cpu_seconds": 3.140291017
+        },
+        "saved_certificate_reading": {
+          "wall_seconds": 0.05018893105443567,
+          "cpu_seconds": 0.04991443699999998
+        },
+        "saved_reading": {
+          "wall_seconds": 3.1409255699254572,
+          "cpu_seconds": 3.1385463820000004
+        },
+        "verification": {
+          "wall_seconds": 38.67235318897292,
+          "cpu_seconds": 38.647368781
+        },
+        "anchor_queries": {
+          "wall_seconds": 39.20267247909214,
+          "cpu_seconds": 39.176889356000004
+        }
+      },
+      "boundary_reference_comparison": {
+        "reference_verification": {
+          "path": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/boundary_1.4A_verification.json",
+          "sha256": "fd540fc3d6aff96b557227805f5d5422e195fc92a855687c1c7d9847c6ff7976"
+        },
+        "reference_certificate": {
+          "path": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/boundary_1.4A_certificate.json",
+          "sha256": "6dcf8dc8833a40e757de8e74554289a24c348016e93e05dff6a41fdcb5d5e479"
+        },
+        "face_identity": "sorted_source_atom_ids; no assertion that reference/validator/native face ordinals are identical",
+        "opening_components_faces_source_ids": [
+          [
+            [
+              2,
+              4,
+              8
+            ],
+            [
+              2,
+              8,
+              10
+            ],
+            [
+              4,
+              6,
+              8
+            ]
+          ],
+          [
+            [
+              67,
+              69,
+              75
+            ],
+            [
+              69,
+              71,
+              75
+            ],
+            [
+              71,
+              74,
+              75
+            ]
+          ]
+        ],
+        "matches_earlier_partition": true,
+        "free_domain_face_count": 6,
+        "free_wall_face_count": 0,
+        "earlier_covered_wall_face_count": 68
+      }
+    },
+    {
+      "probe": {
+        "requested": {
+          "value": 2.5,
+          "unit": "angstrom"
+        },
+        "model": {
+          "value": [
+            "1",
+            "4"
+          ],
+          "unit": "nm",
+          "encoding": "rational-exact/1"
+        }
+      },
+      "model_sha256": "356264c22973bc9bce6f93370b45d1b72fa97005baff6b5c2ddba5e340a310be",
+      "certificate_sha256": "5ca8991ae1bc303569ace1b920d7b55e0ac586dd09afe8a2bc65836e035521cf",
+      "source_revision": "9c79ad797730428bb7ec69b6dc6ccaa33dbe911c",
+      "certificate_origin": {
+        "route": "reprobed_geometry",
+        "geometry_producer_revision": "38f5a86381db9cc83b79d82066cdaf4482eb9aaa",
+        "source_model_path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/model.json",
+        "source_model_file_sha256": "94e292f1d409247dfd784ece19431a81e89ad612537e4f53862a6ea4be8417e3",
+        "source_model_sha256": "3ac4bf8411bde5f2ff01c5a9f3caf211cfebd2ca7c93edf2f1cad9e8b834ec0d",
+        "source_certificate_path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/certificate.json",
+        "source_certificate_file_sha256": "d039869f4dc7450d1771960dcc7f92cafab175a940fea1c5650a72dcf7589a0c"
+      },
+      "sources": {
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_2_5/receiving/receipt.json",
+          "sha256": "b1c16be49a6a4ab0d68dd74d2c35c112a20fb9b1009e3a5df37abbb4ea21b2a7"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_2_5/execution.json",
+          "sha256": "2bad6186932dab937c0982a8088034a6930292d180d46ba71cb616c1c5261304"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_2_5/receiving/original_wide_tube_2_5/model.json",
+          "sha256": "baa6935fc4f9cdf2ab0b38ed99374224dc0472f0ed12929511311e9592f2c688"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_2_5/receiving/original_wide_tube_2_5/certificate.json",
+          "sha256": "b49bc6464e84955848aaf09c1ca48f9e846f2b58bafe4ea5dbe091232ec39c75"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_2_5/receiving/original_wide_tube_2_5/verification.json",
+          "sha256": "73bb34ebe29f8fda41f2d85d824674fdea775ccc9708c90c6bc2644cccb2b0cf"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_2_5/receiving/original_wide_tube_2_5/anchors.json",
+          "sha256": "ae6f23c0ccb4fcfb9418b889f4a948d8531a50d201e4b945550347dd4a309ff1"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_2_5/receiving/original_wide_tube_2_5/phases.json",
+          "sha256": "52a1cd8425ff9a98fedacacebf83bf211f9a0ad5f1cb3e80ed303ff7dc738657"
+        }
+      },
+      "topology": {
+        "complete": true,
+        "n_components": 1,
+        "n_boundary_patches": 2,
+        "origin_state": "free"
+      },
+      "volume": {
+        "lower": [
+          "0",
+          "1"
+        ],
+        "upper": [
+          "6620533166212162263949896980673976813709886370954005",
+          "2993155353253689176481146537402947624255349848014848"
+        ],
+        "unit": "nm**3",
+        "encoding": "rational-exact/1",
+        "precision_status": "not_requested",
+        "per_region_status": "not_computed",
+        "scope": "Total strict probe-center volume enclosure in the original finite center hull; no certified nonempty per-region precision."
+      },
+      "anchor_pair_connected": true,
+      "path_points": 26,
+      "resources": {
+        "wall_seconds": 138.63523624103982,
+        "cpu_seconds": 138.488708,
+        "peak_rss_kib_linux": 36352,
+        "cpu_count": 1,
+        "address_space_limit_bytes": 2147483648,
+        "scope": "Explicit saved proof or certified geometry reprobe/target checks/queries; original cell construction is a separate initialization."
+      },
+      "phases": {
+        "model_receiving": {
+          "wall_seconds": 3.1888350039953366,
+          "cpu_seconds": 3.187027558
+        },
+        "certified_geometry_reprobe": {
+          "wall_seconds": 55.25236613606103,
+          "cpu_seconds": 55.211367689999996
+        },
+        "saved_reading": {
+          "wall_seconds": 3.056231496972032,
+          "cpu_seconds": 3.054822998000006
+        },
+        "verification": {
+          "wall_seconds": 38.034639597986825,
+          "cpu_seconds": 38.006335215
+        },
+        "anchor_queries": {
+          "wall_seconds": 38.90481431502849,
+          "cpu_seconds": 38.87673898599999
+        }
+      },
+      "boundary_reference_comparison": {
+        "reference_verification": {
+          "path": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/boundary_2.5A_verification.json",
+          "sha256": "cb228148ed29ecf1367743974de1dd9c0420c7d9b3f3a6bd152c78d1fc1282e6"
+        },
+        "reference_certificate": {
+          "path": "docs/content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/boundary_2.5A_certificate.json",
+          "sha256": "a24b586c286bca940c0b1a93238547ba035238f4995e558ec65b1030f9b2c4e7"
+        },
+        "face_identity": "sorted_source_atom_ids; no assertion that reference/validator/native face ordinals are identical",
+        "opening_components_faces_source_ids": [
+          [
+            [
+              2,
+              4,
+              8
+            ],
+            [
+              2,
+              8,
+              10
+            ]
+          ],
+          [
+            [
+              67,
+              69,
+              75
+            ],
+            [
+              69,
+              71,
+              75
+            ]
+          ]
+        ],
+        "matches_earlier_partition": true,
+        "free_domain_face_count": 4,
+        "free_wall_face_count": 0,
+        "earlier_covered_wall_face_count": 68
+      }
+    },
+    {
+      "probe": {
+        "requested": {
+          "value": 5.0,
+          "unit": "angstrom"
+        },
+        "model": {
+          "value": [
+            "1",
+            "2"
+          ],
+          "unit": "nm",
+          "encoding": "rational-exact/1"
+        }
+      },
+      "model_sha256": "ffcd86623d3afccc3b17e925ca6366dedf51afb689d1561e66796df0e8b284f5",
+      "certificate_sha256": "75c8b1075b7d6cb35984b6d88a4406c9faaccfebb4054a9da491ec1a68c1703e",
+      "source_revision": "9c79ad797730428bb7ec69b6dc6ccaa33dbe911c",
+      "certificate_origin": {
+        "route": "reprobed_geometry",
+        "geometry_producer_revision": "38f5a86381db9cc83b79d82066cdaf4482eb9aaa",
+        "source_model_path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/model.json",
+        "source_model_file_sha256": "94e292f1d409247dfd784ece19431a81e89ad612537e4f53862a6ea4be8417e3",
+        "source_model_sha256": "3ac4bf8411bde5f2ff01c5a9f3caf211cfebd2ca7c93edf2f1cad9e8b834ec0d",
+        "source_certificate_path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/certificate.json",
+        "source_certificate_file_sha256": "d039869f4dc7450d1771960dcc7f92cafab175a940fea1c5650a72dcf7589a0c"
+      },
+      "sources": {
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_5_0/receiving/receipt.json",
+          "sha256": "796da2319503f512c4b18dae9c66dd9fae22fd106be10e17755c426daacc711e"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_5_0/execution.json",
+          "sha256": "b4d0d96b9600e161b23f81599c35d481cba60e1247aba8ae351ec0d8de19b115"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_5_0/receiving/original_wide_tube_5_0/model.json",
+          "sha256": "2b6474a62cfafda0f38437e70b7a554778d3e1b9f60915d22a21319fdbc33313"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_5_0/receiving/original_wide_tube_5_0/certificate.json",
+          "sha256": "77a41feb1a8870acca525fdeadbb75790c1986b935a42af122f5753c124509a8"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_5_0/receiving/original_wide_tube_5_0/verification.json",
+          "sha256": "32a56a7bc5fb61bc43387b40f1dbd1c614f776a494877b80199ab7041307ee45"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_5_0/receiving/original_wide_tube_5_0/anchors.json",
+          "sha256": "84403f85bc2bd3c11af042e1683108027d21da00dc2526308ee32a36aa8d8b86"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_5_0/receiving/original_wide_tube_5_0/phases.json",
+          "sha256": "1a291197b3a3f7b6c624b8a5700e8e8818d044b5e5865864a7c3a00d89dbbe72"
+        }
+      },
+      "topology": {
+        "complete": true,
+        "n_components": 0,
+        "n_boundary_patches": 0,
+        "origin_state": "blocked"
+      },
+      "volume": {
+        "lower": [
+          "0",
+          "1"
+        ],
+        "upper": [
+          "0",
+          "1"
+        ],
+        "unit": "nm**3",
+        "encoding": "rational-exact/1",
+        "precision_status": "not_requested",
+        "per_region_status": "not_computed",
+        "scope": "Total strict probe-center volume enclosure in the original finite center hull; no certified nonempty per-region precision."
+      },
+      "anchor_pair_connected": null,
+      "path_points": 0,
+      "resources": {
+        "wall_seconds": 100.52545682096388,
+        "cpu_seconds": 97.614623,
+        "peak_rss_kib_linux": 35228,
+        "cpu_count": 1,
+        "address_space_limit_bytes": 2147483648,
+        "scope": "Explicit saved proof or certified geometry reprobe/target checks/queries; original cell construction is a separate initialization."
+      },
+      "phases": {
+        "model_receiving": {
+          "wall_seconds": 3.248006232082844,
+          "cpu_seconds": 3.246443531
+        },
+        "certified_geometry_reprobe": {
+          "wall_seconds": 46.102461944916286,
+          "cpu_seconds": 43.264280029000005
+        },
+        "saved_reading": {
+          "wall_seconds": 3.056746253045276,
+          "cpu_seconds": 3.0538908199999995
+        },
+        "verification": {
+          "wall_seconds": 23.974545806995593,
+          "cpu_seconds": 23.958499168000003
+        },
+        "anchor_queries": {
+          "wall_seconds": 23.95768763194792,
+          "cpu_seconds": 23.94153580599999
+        }
+      },
+      "boundary_reference_comparison": null
+    }
+  ],
+  "initialization": {
+    "sources": {
+      "receipt": {
+        "path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/receipt.json",
+        "sha256": "780c588957146d1183284c2f93d33919677e398afc830827f4ccc7ecd7425f14"
+      },
+      "execution": {
+        "path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/execution.json",
+        "sha256": "53f316ba89028c360eb3975696ba5f33a63cc3e3d5b7ff2caf3b5d23081940f4"
+      },
+      "model": {
+        "path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/model.json",
+        "sha256": "94e292f1d409247dfd784ece19431a81e89ad612537e4f53862a6ea4be8417e3"
+      },
+      "certificate": {
+        "path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/certificate.json",
+        "sha256": "d039869f4dc7450d1771960dcc7f92cafab175a940fea1c5650a72dcf7589a0c"
+      }
+    },
+    "source_revision": "38f5a86381db9cc83b79d82066cdaf4482eb9aaa",
+    "wall_seconds": 183.53866408905014,
+    "cpu_seconds": 178.552888,
+    "peak_rss_kib_linux": 38160,
+    "scope": "Fresh full 1.4 A source geometry construction and complete verification without anchor queries, separate from the three later profile checks."
+  },
+  "profile_totals": {
+    "profile_count": 3,
+    "summed_worker_wall_seconds": 323.5399253369542,
+    "summed_worker_cpu_seconds": 320.409852,
+    "maximum_worker_rss_kib_linux": 36352,
+    "scope": "Three separate sequential profile workers; excludes initialization and interstage development/protocol preparation."
+  },
+  "workflow_totals": {
+    "summed_worker_wall_seconds": 507.0785894260043,
+    "summed_worker_cpu_seconds": 498.96274,
+    "maximum_worker_rss_kib_linux": 38160,
+    "scope": "Four sequential worker costs including initialization; not elapsed wall clock including interstage development/protocol preparation."
+  }
+}

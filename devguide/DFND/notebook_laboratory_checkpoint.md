@@ -1,5 +1,29 @@
 # DFND notebook laboratory checkpoint
 
+## Complete original wide-tube reference family — 2026-11-14
+
+The [exact reference continuation](reference_validator_power_cell_construction.md)
+now receives all three unchanged 77-atom wide-tube Models: **1/1/0 complete
+free regions and 2/2/0 free hull patches** at 1.4/2.5/5 Å. Each positive
+profile has a checked 26-point hull-end path within its single free region;
+the negative proof gives exact zero free volume in the finite hull. End-face
+partitions agree with the earlier independent references by source atom IDs,
+with no free wall faces. This adds a complete region inventory without fixing
+native #184 numerical availability or #181 public physical qualification.
+
+The [family summary](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+separates `38f5a86` fresh geometry/verification (183.539 wall / 178.553 CPU
+seconds) from `9c79ad7` saved-proof/reprobe/query receiving (323.540 summed
+worker wall / 320.410 CPU seconds). All four workers run sequentially, one
+CPU/thread and 2 GiB each, maximum RSS 38,160 KiB; no sampled memory pressure.
+Original artifacts and native implementations remain unchanged.
+
+Nine of nineteen original profiles now have complete topology. Next under
+#76: the remaining ten profiles and certified nonempty per-region precision;
+#181 remains the first native consumer, with #180/#184/#188 unchanged.
+The ordinary-Delaunay grid is still a complementary proposal. No new geometry,
+protein/provider phase or public promotion follows from this receiving.
+
 ## Complete original narrow-tube reference family — 2026-11-14
 
 The [exact reference continuation](reference_validator_power_cell_construction.md)
@@ -18,9 +42,9 @@ The two new sequential workers take 203.362 wall / 194.109 CPU seconds in
 total, maximum RSS 36,020 KiB, one CPU/thread and 2 GiB per worker. Earlier
 cell construction and 1.4 Å replay costs remain separate.
 
-Six of nineteen original profiles now have complete topology on this route.
-Next under #76: the remaining thirteen profiles and certified nonempty
-region-assigned precision. Native/public carrier qualification remains #181,
+At that delivery, six of nineteen original profiles have complete topology.
+Next at that checkpoint under #76: the remaining thirteen profiles and certified
+nonempty region-assigned precision. Native/public carrier qualification remains #181,
 with #180/#184/#188 retaining their scopes. The ordinary-Delaunay grid is
 still a complementary proposal. No protein/provider phase or native promotion.
 

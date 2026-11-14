@@ -57,9 +57,14 @@ certificates and now qualifies the original narrow 1.4 Å profile as one complet
 free region/two free hull patches, with an all-atom checked anchor path. Its
 saved receipt distinguishes the original `fd3eeb7` constructor from `92679fc`
 saved reading. The subsequent `d73477c` geometry-reprobe receiving completes
-the other narrow probes without changing the original cell geometry. Six
-original profiles (all three tetrahedron and all three narrow-tube probes)
-now have complete topology; thirteen await this route's receiving.
+the other narrow probes without changing the original cell geometry. The
+subsequent wide receiving constructs fresh geometry at `38f5a86`, then checks
+all three original 1.4/2.5/5 Å Models at `9c79ad7`: `1/1/0` complete regions,
+`2/2/0` free hull patches and checked positive hull-end paths. Its
+[family summary](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+separates initialization, saved-proof reading and geometry-reprobe costs.
+Nine original profiles (tetrahedron and both tubes) now have complete topology;
+ten await this route's receiving. Native #181/#184 remain unresolved.
 Nonempty per-region integration/precision and the rest of P5/P6 remain open.
 
 ## Scope and acceptance of the first complete validator

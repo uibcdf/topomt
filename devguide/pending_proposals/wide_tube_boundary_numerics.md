@@ -15,6 +15,24 @@ supersedes: []
 
 # Wide-tube boundary numerical margin
 
+## Complete physical reference handoff — 2026-11-14
+
+The [#76 wide-family receiving](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+now supplies a complete physical inventory for each unchanged original Model:
+`1/1/0` free regions and `2/2/0` free hull patches at 1.4/2.5/5 Å. Positive
+hull-end anchors belong to the same region and distinct patches, with checked
+26-point continuous paths. At 2.5 Å the free boundary partitions exactly match
+the earlier independent certificate by **source atom IDs**: negative-end faces
+`[2,4,8]`, `[2,8,10]` and positive-end faces `[67,69,75]`, `[69,71,75]`.
+No wall face is free. At 1.4 Å an additional face per end is free.
+
+The reference, validator and native face ordinals have not been identified
+with one another; in particular this does not diagnose native `face 12` merely
+by looking up a reference index. The new proof strengthens the independent
+inventory; it changes no native numerical handling. The native 2.5 Å strict
+expected failure and this issue's active/`needs_review` disposition remain.
+The separate dumbbell extension below retains its original named-anchor scope.
+
 ## What
 
 At source fdb253cf542e35d7d2b5414b7214677d0a884f24, the 77-ball
@@ -53,7 +71,7 @@ Input SHA-256 77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855,
 tolerances and epsilon/boundary margin 1e-6 Å. The dated extension adds the
 94-ball dumbbell at 1.4 Å, source 17a4c9a, with the explicitly different
 named-anchor reference scope. No scientific fix, original-engine
-comparison, all-atom component-count or installed/platform qualification.
+comparison, native all-atom component-count or installed/platform qualification.
 
 ## Acceptance criteria
 

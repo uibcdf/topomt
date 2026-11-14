@@ -15,6 +15,29 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## All three original wide probes received — 2026-11-14
+
+The original 77-atom wide family now has **1/1/0 complete free regions and
+2/2/0 free hull patches** at 1.4/2.5/5 Å. Fresh geometry and independent
+verification at `38f5a86` are followed by saved-proof reading and exactly
+checked geometry reprobes at `9c79ad7`. Positive hull-end anchors share one
+region and have independently checked 26-point paths; the 5 Å proof gives
+complete hull exclusion and exact zero free volume. Boundary face partitions
+agree with the earlier references by source atom IDs, without free wall faces.
+
+The [family summary](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+binds all source Models/proofs/queries/resources and separates the 183.539 wall /
+178.553 CPU-second initialization from 323.540 wall / 320.410 CPU seconds of
+profile work. Every worker is sequential, one CPU/thread and 2 GiB, maximum
+RSS 38,160 KiB. No resource stop or sampled memory pressure occurs.
+
+Nine of nineteen original profiles now have complete topology; ten await this
+route. Nonempty per-region precision, full P5/P6 and native #181/#184 retain
+their gates. The 32 scientific Python modules are unchanged from the earlier
+310-test source qualification; new evidence guards protect the actual wide
+receiving and standalone checker. Original 355 artifacts remain unchanged.
+This issue remains partial; native findings remain active/`needs_review`.
+
 ## All three original narrow probes received — 2026-11-14
 
 Source `d73477c` completes the remaining 1.2/2.5 Å Models, with original source
@@ -33,8 +56,9 @@ RSS 36,020 KiB, without resource pressure or a stop. All old 355 scientific
 artifacts retain their bytes. Native behavior is unchanged, so #181/#180/#184/
 #188 and the comparative finding lifecycle keep their scopes/dispositions.
 
-Six original profiles now have complete topology, with thirteen still to
-receive. Nonempty per-region precision and P5/P6 remain incomplete under #76;
+At the narrow-family delivery, six original profiles have complete topology,
+with thirteen still to receive. Nonempty per-region precision and P5/P6 remain
+incomplete under #76;
 no issue closure or current DFND/comparator advantage is inferred. The old
 1.4 Å stages below remain their own historical source evidence.
 

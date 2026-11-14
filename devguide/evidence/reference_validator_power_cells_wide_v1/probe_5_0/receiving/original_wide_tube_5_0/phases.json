@@ -1,0 +1,22 @@
+{
+  "model_receiving": {
+    "wall_seconds": 3.248006232082844,
+    "cpu_seconds": 3.246443531
+  },
+  "certified_geometry_reprobe": {
+    "wall_seconds": 46.102461944916286,
+    "cpu_seconds": 43.264280029000005
+  },
+  "saved_reading": {
+    "wall_seconds": 3.056746253045276,
+    "cpu_seconds": 3.0538908199999995
+  },
+  "verification": {
+    "wall_seconds": 23.974545806995593,
+    "cpu_seconds": 23.958499168000003
+  },
+  "anchor_queries": {
+    "wall_seconds": 23.95768763194792,
+    "cpu_seconds": 23.94153580599999
+  }
+}

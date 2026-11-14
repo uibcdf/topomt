@@ -1,0 +1,74 @@
+{
+  "schema": "topomt.reference-validator.power-cell-receiving/1",
+  "protocol_sha256": "d50f9bdd2027d6fe517a2ccb38e6a1fc16dd8c5e96a26ff05df385eac60f4021",
+  "source_revision": "9c79ad797730428bb7ec69b6dc6ccaa33dbe911c",
+  "source_tree_modified": false,
+  "source_files_sha256": {
+    "devtools/reference_validator/__init__.py": "b7126b2ca6c61870339613a5e38b6b746da9969bd8d36890cabb53a5b4f4ade0",
+    "devtools/reference_validator/__main__.py": "37fece6d4543a38a4f22fe0626f06022635b0b23abb11f3f791161ce14d1f1b9",
+    "devtools/reference_validator/analytic_volume.py": "526911999550261bd518c306ddfa54bb2e85af19f37859bf1e0777f98ee1ca35",
+    "devtools/reference_validator/benchlab_panel.py": "83206ba216c4b908a888fc72b60f9f3afdc4dd5aaf69a3aafdd30a75edc4fe34",
+    "devtools/reference_validator/box_topology.py": "06ab6fa75ee587ce06976d9544ed2f40b4db54b1c28b9b48493c75b4b54cf91e",
+    "devtools/reference_validator/capture.py": "6b82217adb9239e60b5b0e3da592ea483ec68124e64af6968fb688a0034725ac",
+    "devtools/reference_validator/capture_box_topology.py": "da77941f9aa6eedb2e6ce77294e43681bf71f905b2e44db50ae0a9339186f6ac",
+    "devtools/reference_validator/capture_hull_sterics.py": "0621d794aac3358664e0d055db306d1f9cb0411d5510dbac24dea60dcb128375",
+    "devtools/reference_validator/capture_hulls.py": "fba7f2d34cec48017013f108b6609b864f3fcef68c038860ecc73af0b9893d7d",
+    "devtools/reference_validator/capture_power_cells.py": "b2f293e0338525251859f7be3fe22048a8507dd3acd1d33a9d24250298342848",
+    "devtools/reference_validator/capture_resume.py": "878371e30856f4bb21767b1c044819b7627c7e587c520c19c944267c361641c3",
+    "devtools/reference_validator/capture_volume.py": "47865960e965b2d974bbf4c0834b5e5049739dc6521e2d80e87fa3104da287fd",
+    "devtools/reference_validator/center_hull.py": "a67575ca843b74e1a24f0e50ca6b791358c28ba272d09996baeda9f82b23ff62",
+    "devtools/reference_validator/contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+    "devtools/reference_validator/hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "devtools/reference_validator/model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+    "devtools/reference_validator/power_cells.py": "cb2379b5d839fc743351cc188b6fe9f72bf336b580596ff4fffb63774a568d92",
+    "devtools/reference_validator/power_contracts.py": "3bac982773c16b298da25e4784f70f534e9e5707395f5ef5f264af371a021af4",
+    "devtools/reference_validator/producer.py": "8c362618b0d69f92882f4c393ca0bddc91bec3a0c8a870f851920eaf6f134873",
+    "devtools/reference_validator/receiving.py": "53a60cc37f7104268e1bfd23d6a80ca84f463d0262cce33d41d489ffb465c4f3",
+    "devtools/reference_validator/runs.py": "b60187a2f3f5ebc07c80ee94c1cea3ab230022a2943f708fc4aafc3bb70d0934",
+    "devtools/reference_validator/storage.py": "b448f221f85e85ee0657b156512e7316afee6b0fd8957b0eaaf27194cdfa0aa4",
+    "devtools/reference_validator/verify/__init__.py": "a257395666db9eadfb6868d146939b90d4b81cdb11da92d3db4148b0c1bf8e51",
+    "devtools/reference_validator/verify/_interval.py": "65932e679a0d003c6b80606f8ad9b09513aa67da9115e85ec81055e7f4700069",
+    "devtools/reference_validator/verify/analytic_volume.py": "82e7b0a5341d0d140b4f003e79073275a7526415969b1b1392df59e15a009dbc",
+    "devtools/reference_validator/verify/box_topology.py": "eefacfdaa9f704588bc57ae993a515d24eb85b631e63c9c1ecaf461ff2ee2067",
+    "devtools/reference_validator/verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+    "devtools/reference_validator/verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+    "devtools/reference_validator/verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04",
+    "devtools/reference_validator/verify/power_cells.py": "1562eae89489a11add673f3573d55b866ae727a816b712ab801260373b779790",
+    "devtools/reference_validator/verify/records.py": "3b612c96112960dad3412e91c62857216f5b7a6310186075f95e9fce2d377491",
+    "devtools/reference_validator/volume_request.py": "c261e4049c3de53c5bdfce7ad0702ab476f2b50133ac6341300709c53381c739"
+  },
+  "files": {
+    "original_wide_tube_1_4/anchors.json": "a7a8d3e741d66a49dc9742e1523ecd03150ce30a0a019df46152d70ee8b8a373",
+    "original_wide_tube_1_4/certificate.json": "d039869f4dc7450d1771960dcc7f92cafab175a940fea1c5650a72dcf7589a0c",
+    "original_wide_tube_1_4/model.json": "94e292f1d409247dfd784ece19431a81e89ad612537e4f53862a6ea4be8417e3",
+    "original_wide_tube_1_4/phases.json": "aad2438ebb39a790c98c5051475feb8d0f9671cfdcfc0ada701db841b24f158b",
+    "original_wide_tube_1_4/verification.json": "20e0759882cda21ff68d3ef2c6957182502dd546b22f4e19254fd2e85615c8bd"
+  },
+  "cases": {
+    "original_wide_tube_1_4": {
+      "model_sha256": "3ac4bf8411bde5f2ff01c5a9f3caf211cfebd2ca7c93edf2f1cad9e8b834ec0d",
+      "certificate_sha256": "7962498b2d401b3ab30bfb4fd36b8b9f139eb3a919c1b601858ad134fd187f2e",
+      "certificate_origin": {
+        "route": "saved_certificate",
+        "path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/certificate.json",
+        "sha256": "d039869f4dc7450d1771960dcc7f92cafab175a940fea1c5650a72dcf7589a0c",
+        "producer_revision": "38f5a86381db9cc83b79d82066cdaf4482eb9aaa"
+      },
+      "n_components": 1,
+      "n_boundary_patches": 2,
+      "per_region_volume_status": "not_computed",
+      "elapsed_seconds": 84.21073768101633,
+      "cpu_seconds": 84.155007696
+    }
+  },
+  "elapsed_seconds": 84.22804778802674,
+  "cpu_seconds": 84.16473232099999,
+  "peak_rss_kib_linux": 34772,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "cpu_limit_seconds": 240,
+  "requested_precision_status": "not_computed",
+  "native_dfnd_qualification": "not_changed"
+}

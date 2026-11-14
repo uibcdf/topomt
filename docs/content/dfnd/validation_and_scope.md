@@ -33,7 +33,7 @@ inputs, independent reasoning, native/public observations and versioned evidence
 | Shell with opening, 1.4 Å | One free hull patch and an origin-to-exterior witness. |
 | Narrow straight tube, 1.2/1.4 Å | One complete free region, two strict-free end patches and a verified bent end-to-end path; the fixed axis is blocked at 1.4 Å. |
 | Narrow straight tube, 2.5 Å | A conservative all-atom bound covers every center position in the finite hull. |
-| Wide straight tube, 1.4/2.5 Å | Clear axis and complete wall/end certificates proving two strict-free hull patches. Native physical count resolves only at 1.4 Å in this study. |
+| Wide straight tube, 1.4/2.5 Å | One complete free region, clear axis and two strict-free hull patches. The native physical boundary count resolves only at 1.4 Å in this study. |
 | Wide straight tube, 5 Å | Every finite-hull point is covered by expanded balls; local/public candidates still require qualification. |
 | Dumbbell, 1.4/2.2 Å | Complete covered nonconvex barrier, connecting-axis witness, and covered neck section prove connected then distinct enclosed named anchors; not every global region. |
 | Dumbbell, 6 Å | A complete tetrahedral cover excludes every strict-free center in the finite native hull; native wet/public results are empty while physical hull counting remains unavailable. |
@@ -50,6 +50,13 @@ and original native observations, and checks every atomic sphere. The negative
 profile has exact zero finite-hull probe-center volume; certified nonempty
 region volumes remain pending. These are independent physical references,
 with native/public candidate qualification still under #181.
+
+The same route now completes the three original wide-tube profiles with
+one/one/zero regions and two/two/zero hull patches at 1.4/2.5/5 Å. Free faces
+and their end-patch grouping match the earlier independent references by
+source atom IDs, beyond agreement in the two-patch count. The 5 Å proof has
+exact zero finite-hull volume. This reference receiving does not correct
+#184's native boundary-ordering availability or #181's promotion policy.
 
 ## Source deliveries and remaining scientific/public boundaries
 

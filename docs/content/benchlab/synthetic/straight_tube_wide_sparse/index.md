@@ -40,8 +40,8 @@ isolated, nonperiodic exterior conditions.
 
 | Probe | Independent reference | Actual native/public observation | Interpretation and owner |
 | --- | --- | --- | --- |
-| 1.4 Å | Clear axial route, covered lateral wall, exactly two free end patches. | Six wet components, seven native links, six other public objects and seven Mouth children. The global physical count is two; the Channel's two contacts resolve. | Selected native interior skeleton is clear. Ten associations for other local candidates remain unknown; wider paths #76 and support diagnosis #181. |
-| 2.5 Å | Same clear route and exactly two end patches. | Nine wet components, ten links, eight other public objects and eight Mouth children. Physical count is unknown: critical-section ordering lies within the numerical margin. | Selected native interior skeleton is clear; boundary availability remains [#184](https://github.com/uibcdf/topomt/issues/184). |
+| 1.4 Å | Clear axial route, one complete free region and exactly two free end patches. | Six wet components, seven native links, six other public objects and seven Mouth children. The native physical boundary count is two; the Channel's two contacts resolve. | Selected native interior skeleton is clear. Ten associations for other local candidates remain unknown; wider paths #76 and support diagnosis #181. |
+| 2.5 Å | Same clear route, one complete free region and exactly two end patches. | Nine wet components, ten links, eight other public objects and eight Mouth children. Native physical boundary count is unknown: critical-section ordering lies within the numerical margin. | Selected native interior skeleton is clear; boundary availability remains [#184](https://github.com/uibcdf/topomt/issues/184). |
 | 5 Å | Every point in the finite hull is covered by expanded balls. | One wet component and an OpenConcavity/Mouth pair; physical arrangement budget exhausted. | Budget [#180](https://github.com/uibcdf/topomt/issues/180); local versus all-atom/public qualification [#181](https://github.com/uibcdf/topomt/issues/181), `needs_review`. |
 
 These are the observed profiles, rather than a claim of complete qualification.
@@ -67,20 +67,38 @@ and the independently certified end-to-infinity axis have different scopes.
 The 1.4 Å Channel also retains checked physical attachment paths and exterior
 rays; the other local candidates do not acquire that qualification automatically.
 
+### Later complete physical reference
+
+The independent exact validator now receives all three unchanged original
+Models: **1/1/0 complete free regions and 2/2/0 free hull patches** at
+1.4/2.5/5 Å. Each positive profile has a separately checked 26-point path
+between exact hull-end anchors. The free boundary faces and their grouping
+match the earlier source-atom-ID references: three free faces per end at
+1.4 Å and two at 2.5 Å, with no free wall faces. The 5 Å proof gives exact
+zero total probe-center volume in the finite hull.
+
+See the [reference-validator report](../reference_validator_report.md) for
+source/Model/proof identities, separate initialization and saved/reprobe costs,
+and resource bounds. This strengthens the physical reference while leaving
+native #184 numerical availability and #181 public qualification open. The
+notebooks, original native observations and downloads retain their source
+scopes and bytes; nonempty region-volume precision remains pending.
+
 ## Compare the two tubes
 
 | Property | Narrow, dense sampling | Wide, sparse sampling |
 | --- | --- | --- |
 | Frozen input | [81 balls](../straight_tube_narrow_dense/index.md), nominal radius 3.5 Å, nominal sampling 2.5 Å | 77 balls, nominal radius 6 Å, nominal sampling 3.5 Å |
-| Shared 1.4 Å probe | Axis blocked; a bent path is certified. Native skeleton collides; physical count unknown. | Axis clear; native interior skeleton clear. Two global physical patches and Channel contacts resolved; other associations unknown. |
-| Shared 2.5 Å probe | Whole finite hull covered; local/public candidates survive. | Clear axis and two independent end patches. Native skeleton clear, physical count numerically unresolved. |
+| Shared 1.4 Å probe | Axis blocked; one complete free region and a bent path are certified. Native skeleton collides; native boundary count unknown. | One complete free region and clear axis; native interior skeleton clear. Two physical patches and Channel contacts resolved; other associations unknown. |
+| Shared 2.5 Å probe | Whole finite hull covered; local/public candidates survive. | One complete free region, clear axis and two independent end patches. Native skeleton clear, native boundary count numerically unresolved. |
 | Larger exclusion control | 2.5 Å, cover margin 0.296420368 Å | 5 Å, cover margin 0.285756991 Å |
 
 This pair exposes different physical regimes at the same probe sizes. **Both
 radius and sampling change**, so it cannot isolate a sampling-density effect.
 A nominally sparse wall can still be completely covered by expanded atomic
-balls. Neither input is an ideal smooth cylinder, and neither study establishes
-all free-volume component counts, exact volume, aperture area or an optimal path.
+balls. Neither input is an ideal smooth cylinder. Later independent receiving
+now establishes all free-region counts for the six selected tube profiles;
+certified nonempty region volumes, aperture area and optimal paths remain open.
 
 ## Download and reproduce
 

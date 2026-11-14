@@ -2,16 +2,22 @@
 
 All six current synthetic BenchLab systems were run with their **19 frozen
 probe profiles**, dated **2026-11-13**, under [#76](https://github.com/uibcdf/topomt/issues/76).
-Every scheduled analysis completed. This report describes the current exact
-validator's answers and measured cost; it is not full qualification of the
-future connected-region validator.
+Every scheduled analysis completed. This report preserves that source's answers
+and measured cost, followed by later complete-topology receiving; it is not
+full qualification of the future connected-region validator.
+
+**Current topology coverage, 2026-11-14:** all three original probes of the
+tetrahedron and each tube now have complete free-region and hull-patch
+inventories: **nine of nineteen profiles**. Ten profiles and certified volumes
+for nonempty regions remain pending. The later results and their separate
+execution costs appear below; original query-run downloads remain unchanged.
 
 The important result is the distinction between a verified local fact and a
 complete global answer. Points and supplied continuous paths are checked against
 every atomic ball. Only the tetrahedron at 1.7 Å receives a complete zero-region
 proof in this run. General component enumeration and per-region precision are
 unavailable on the other profiles **at that source**. The subsequent topology
-receiving below strengthens the tetrahedron and narrow tube; the original measurements and
+receiving below strengthens the tetrahedron and both tubes; the original measurements and
 downloads retain their historical source scope.
 
 ## Subsequent exact topology receiving — 2026-11-14 UTC
@@ -41,8 +47,8 @@ retain the source, complete proofs, supports and anchor checks. A separate first
 narrow-tube attempt at 1.4 Å ends without a certificate after 52.030 s under
 its initial 50 CPU-second ceiling; it retains unknown counts. That execution
 stop is not physical exclusion or separation. Its subsequent result follows
-below. The remaining original profiles have not yet received this complete
-topology route; native qualification and certified region-volume work remain
+below. At that first tetrahedron delivery, the remaining original profiles
+have not received this complete topology route; native qualification and certified region-volume work remain
 under #76/#181.
 
 ### Narrow tube at 1.4 Å: complete topology and checked anchor connection
@@ -131,11 +137,63 @@ retain the new target proofs and raw checksums. Geometry reuse is rejected if
 any nonprobe input or complete power inequality changes, including incompatible
 unequal-radius probe changes. No monotone component-count assumption is used.
 
-Six of the nineteen original profiles now have complete topology on this
+At this stage, six of the nineteen original profiles have complete topology on this
 route: the three tetrahedron probes and all three narrow-tube probes. The
 remaining thirteen profiles, nonempty per-region precision and native/public
 qualification remain under their existing issues. The 2.5 Å reference does
 not correct the native local-candidate discrepancy tracked by #181.
+
+### Complete wide-tube probe family — 2026-11-14
+
+The same reference construction now receives all three **unchanged original
+77-atom wide-tube Models**. Its independent inventory is:
+
+| Probe (Å) | Complete free regions | Free hull patches | Origin | Checked hull-end path |
+| --- | ---: | ---: | --- | --- |
+| 1.4 | 1 | 2 | free | 26-point continuous path. |
+| 2.5 | 1 | 2 | free | 26-point continuous path. |
+| 5 | 0 | 0 | blocked | No free center in the finite hull; exact zero volume. |
+
+The two positive end anchors belong to different boundary patches and the
+same complete free region. Every path segment is checked against all atomic
+balls. At 5 Å, complete convex cells are each covered by their owner's expanded
+ball, yielding an exhaustive hull cover. Nonempty per-region volume precision
+remains pending.
+
+The boundary result also agrees **face by face** with the earlier independent
+certificates, identifying faces by their source atom IDs. At 1.4 Å each end
+patch contains free pieces on three hull faces; at 2.5 Å it contains two.
+All free faces lie at the ends, with none on the 68 wall faces. The numerical
+margin in #184 belongs to the native boundary routine; this later reference
+does not change that implementation or qualify its unresolved 2.5 Å result.
+Reference, validator and native face ordinals are not assumed identical.
+
+| Execution scope | Wall seconds | CPU seconds | Peak RSS MiB |
+| --- | ---: | ---: | ---: |
+| Initial 1.4 Å cell construction and full verification, no anchor queries | 183.539 | 178.553 | 37.27 |
+| 1.4 Å saved-proof checks and anchor queries | 84.379 | 84.307 | 33.96 |
+| 2.5 Å checked geometry reprobe, target checks and queries | 138.635 | 138.489 | 35.50 |
+| 5 Å checked geometry reprobe, target exclusion and query | 100.525 | 97.615 | 34.40 |
+
+The three profile workers total **323.540 wall / 320.410 CPU seconds**.
+Including initialization, summed worker costs are **507.079 wall / 498.963 CPU
+seconds**; time between execution stages is excluded. All four run sequentially
+on one CPU/thread with 2 GiB ceilings. Initialization has 300 CPU/360 wall-
+second limits; later workers have 240 CPU/300 wall-second limits. The 103
+five-second host samples show no measured memory pressure and at least
+49.68 GiB available RAM. These are different execution scopes, not comparable
+fresh-construction timings.
+
+The [wide-family summary](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_power_cells_wide_v1/family_summary.json)
+binds Models, certificates, source identities, per-stage costs, queries and
+the earlier face-partition references. Source `38f5a86` constructs the original
+wide geometry; `9c79ad7` reads that proof or reclassifies its exactly unchanged
+cells for the other probes. Earlier native observations and all original
+scientific artifacts retain their bytes and source scope.
+
+Nine of nineteen original profiles now have complete topology on this route:
+the tetrahedron and both tubes, each with three probes. Ten remain, alongside
+certified nonempty region volumes and native qualification under #181/#184.
 
 ## What was run
 
