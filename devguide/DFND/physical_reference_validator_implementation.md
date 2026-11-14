@@ -36,6 +36,13 @@ point/path/whole-convex-domain checking. Source `833a774` retains all ten select
 analytic/original profiles and forty outcomes with independent saved replay;
 complete sphere-cut region construction remains open.
 
+The [measured six-case panel](reference_validator_six_case_checkpoint.md) at
+`2b21cb2` now executes all nineteen original query profiles with isolated worker
+wall/CPU/RSS and independent saved proof checks. That coverage does not supply
+the still-missing general topology/precision: only the fresh four-center
+tetrahedral 1.7 Å partition has a complete global count in this run. P5 retains
+its full scientific acceptance, beyond execution of finite candidate queries.
+
 ## Scope and acceptance of the first complete validator
 
 Admit fixed, nonperiodic atomic balls with nonnegative radii, a nonnegative

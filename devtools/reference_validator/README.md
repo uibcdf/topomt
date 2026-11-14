@@ -320,3 +320,11 @@ For exactly four source centers, a fresh partition also runs on the identical
 physical tetrahedral hull, with the same spheres/probe/provenance. Both model
 records and the distinct certificate are retained; this admits no general hull
 subdivision. All other global counts/precision retain their actual availability.
+
+Actual source `2b21cb2` receiving completes all six systems / nineteen probes.
+The [BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md)
+and [checkpoint](../../devguide/DFND/reference_validator_six_case_checkpoint.md)
+retain per-case wall/CPU/RSS, per-profile wall/CPU, raw proofs and a standalone checker
+download. The run takes 164.953 wall seconds, maximum worker RSS 56.59 MiB.
+One profile has complete topology; eighteen remain unknown. Executing the panel
+does not complete the planned general-region/precision qualification.

@@ -1,5 +1,17 @@
 # DFND notebook laboratory checkpoint
 
+## Validator observations/resources on all six systems — 2026-11-13 UTC
+
+The [public BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md)
+and [source checkpoint](reference_validator_six_case_checkpoint.md) retain
+all nineteen original probe profiles at producer `2b21cb2`: 164.953 wall seconds,
+164.602 summed worker CPU seconds and maximum worker RSS 56.59 MiB, sequentially
+on one CPU. The archive includes exact models/proofs/checker and measurements.
+One profile has a complete global count (tetrahedron 1.7 Å, zero); eighteen
+remain unknown under the current routes. Fixed-ray counts are not aperture
+counts. Full mixed-region construction/per-region precision and native #181
+remain open; earlier evidence and all 355 original files are preserved.
+
 ## Hull domains in physical point/path checks — 2026-11-13 UTC
 
 The [steric integration](reference_validator_hull_sterics_checkpoint.md) now

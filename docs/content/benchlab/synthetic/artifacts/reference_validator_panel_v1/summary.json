@@ -1,0 +1,924 @@
+{
+  "schema": "topomt.reference-validator.benchlab-panel-summary/1",
+  "owner": "uibcdf/topomt#76",
+  "producer_source_revision": "2b21cb2ee63093734ff71f1f70bd4ede7a53ebbb",
+  "protocol_sha256": "d07653c6b8da8f79a310e2ae3eee3c5024ec14158c3988ba1a75f6347f6d15f5",
+  "case_count": 6,
+  "profile_count": 19,
+  "all_cases_completed": true,
+  "case_completion_means": "All scheduled queries ran and their outcomes were checked; general topology/precision is not implied.",
+  "batch_wall_seconds": 164.95344410208054,
+  "summed_worker_cpu_seconds": 164.601783,
+  "maximum_worker_rss_kib_linux": 57952,
+  "proof_outcomes": {
+    "accepted": 187,
+    "rejected_candidate": 118
+  },
+  "machine": {
+    "architecture": "x86_64",
+    "cpu_model": "Intel(R) Xeon(R) CPU E5-2630 v4 @ 2.20GHz"
+  },
+  "resource_policy": {
+    "cpus": 1,
+    "numerical_threads": 1,
+    "concurrency": 1,
+    "address_space_limit_bytes": 2147483648,
+    "per_case_cpu_seconds": 180,
+    "per_case_wall_seconds": 240,
+    "monitor_interval_seconds": 5,
+    "memory_reserve_fraction": 0.2
+  },
+  "timing_policy": {
+    "sample_count": 1,
+    "clock": "time.perf_counter for wall; time.process_time for phase CPU and parent child-rusage deltas for complete worker CPU",
+    "case_isolation": "One fresh sequential subprocess per case; peak RSS is its own Linux ru_maxrss, never a difference of lifetime maxima.",
+    "setup": "Decode all coordinates/radii and verify the existing original hull proof once; rebuilding the hull producer is not timed here.",
+    "per_profile": "Explicit probe conversion, Model persistence, independent full saved-model/hull verification, selected queries and proof persistence; optional tetrahedron partition is separately measured.",
+    "sharing": "The immutable verified hull and sphere arrays are reused across probes in one case; each saved profile is independently read and rechecked.",
+    "not_a_competitive_benchmark": true
+  },
+  "cases": [
+    {
+      "name": "regular_tetrahedron",
+      "n_atoms": 4,
+      "input_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+      "worker_wall_seconds": 2.468562897061929,
+      "worker_cpu_seconds": 2.448218,
+      "peak_rss_kib_linux": 52660,
+      "setup": {
+        "wall_seconds": 0.42160471493843943,
+        "cpu_seconds": 0.42180405800000004
+      },
+      "geometric_volume_nm3": [
+        "38463776803236130720331542115778415558917425179",
+        "2192252455996354377305527249074424529483898814464"
+      ],
+      "profiles": [
+        {
+          "probe_angstroms": 1.2,
+          "origin_state": "free",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [
+            "tetra_face_0",
+            "tetra_face_1",
+            "tetra_face_2",
+            "tetra_face_3"
+          ],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "four_center_tetrahedron_partition",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "38463776803236130720331542115778415558917425179",
+            "23945242826029513411849172299223580994042798784118784"
+          ],
+          "volume_upper": [
+            "7764490304385261527859726749201609856800866033758835",
+            "574685827824708321884380135181365943857027170818850816"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 0.8989957849262282,
+          "cpu_seconds": 0.8986779799999999,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.0010503659723326564,
+              "cpu_seconds": 0.0009475039999999879
+            },
+            "saved_model_check": {
+              "wall_seconds": 0.003547595930285752,
+              "cpu_seconds": 0.004000098999999979
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.03826597204897553,
+              "cpu_seconds": 0.03798412600000001
+            },
+            "tetrahedron_partition_and_check": {
+              "wall_seconds": 0.8559497259557247,
+              "cpu_seconds": 0.8557462509999999
+            }
+          }
+        },
+        {
+          "probe_angstroms": 1.4,
+          "origin_state": "free",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "four_center_tetrahedron_partition",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "269246437622652915042320794810448908912421976253",
+            "191561942608236107294793378393788647952342390272950272"
+          ],
+          "volume_upper": [
+            "6030850956309802644032943482959245110729339846090947",
+            "574685827824708321884380135181365943857027170818850816"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 0.8388975689886138,
+          "cpu_seconds": 0.8387518169999999,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.0009322098921984434,
+              "cpu_seconds": 0.0010014430000000463
+            },
+            "saved_model_check": {
+              "wall_seconds": 0.0037264080019667745,
+              "cpu_seconds": 0.003999099999999922
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.03799970797263086,
+              "cpu_seconds": 0.03797401700000003
+            },
+            "tetrahedron_partition_and_check": {
+              "wall_seconds": 0.7960637779906392,
+              "cpu_seconds": 0.7957772569999999
+            }
+          }
+        },
+        {
+          "probe_angstroms": 1.7,
+          "origin_state": "blocked",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "four_center_tetrahedron_partition",
+          "n_components": 0,
+          "topology_complete": true,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 0.13706728490069509,
+          "cpu_seconds": 0.13696046800000028,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.0008666709763929248,
+              "cpu_seconds": 0.000988228000000202
+            },
+            "saved_model_check": {
+              "wall_seconds": 0.0034734890796244144,
+              "cpu_seconds": 0.002998633999999889
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.03685671591665596,
+              "cpu_seconds": 0.03700072700000012
+            },
+            "tetrahedron_partition_and_check": {
+              "wall_seconds": 0.0956976399756968,
+              "cpu_seconds": 0.09597287900000007
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "closed_shell",
+      "n_atoms": 72,
+      "input_sha256": "ef19995751b2df58c8b1556011f74fa4774e924b9cd499138b8741988b650157",
+      "worker_wall_seconds": 62.12440688989591,
+      "worker_cpu_seconds": 62.05574200000001,
+      "peak_rss_kib_linux": 57952,
+      "setup": {
+        "wall_seconds": 12.394358830992132,
+        "cpu_seconds": 12.389209683999999
+      },
+      "geometric_volume_nm3": [
+        "30166518936465615693197155390431984229245838347701735",
+        "35917864239044270117773758448835371491064198176178176"
+      ],
+      "profiles": [
+        {
+          "probe_angstroms": 0.05,
+          "origin_state": "free",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "30166518936465615693197155390431984229245838347701735",
+            "35917864239044270117773758448835371491064198176178176"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 12.266086112009361,
+          "cpu_seconds": 12.260518595,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007560811936855316,
+              "cpu_seconds": 0.007997877000001097
+            },
+            "saved_model_check": {
+              "wall_seconds": 12.067024041083641,
+              "cpu_seconds": 12.061607556999999
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.18909933406393975,
+              "cpu_seconds": 0.18891335700000056
+            }
+          }
+        },
+        {
+          "probe_angstroms": 0.2,
+          "origin_state": "free",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "30166518936465615693197155390431984229245838347701735",
+            "35917864239044270117773758448835371491064198176178176"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 12.371338221011683,
+          "cpu_seconds": 12.365253295000002,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007722206995822489,
+              "cpu_seconds": 0.007999550000000966
+            },
+            "saved_model_check": {
+              "wall_seconds": 12.16960555606056,
+              "cpu_seconds": 12.163359669999998
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.19186791591346264,
+              "cpu_seconds": 0.19189281100000244
+            }
+          }
+        },
+        {
+          "probe_angstroms": 1.4,
+          "origin_state": "free",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "30166518936465615693197155390431984229245838347701735",
+            "35917864239044270117773758448835371491064198176178176"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 12.45185319695156,
+          "cpu_seconds": 12.444870721000001,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007834731950424612,
+              "cpu_seconds": 0.007977877999998384
+            },
+            "saved_model_check": {
+              "wall_seconds": 12.253926902893,
+              "cpu_seconds": 12.247108285000003
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.18792598298750818,
+              "cpu_seconds": 0.18679505299999732
+            }
+          }
+        },
+        {
+          "probe_angstroms": 5.0,
+          "origin_state": "blocked",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "30166518936465615693197155390431984229245838347701735",
+            "35917864239044270117773758448835371491064198176178176"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 12.465300663025118,
+          "cpu_seconds": 12.457683095,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.008266846067272127,
+              "cpu_seconds": 0.007995132999994325
+            },
+            "saved_model_check": {
+              "wall_seconds": 12.277300698915496,
+              "cpu_seconds": 12.269754706
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.17767598701175302,
+              "cpu_seconds": 0.17793291800000333
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "shell_with_opening",
+      "n_atoms": 66,
+      "input_sha256": "3a62da60d3812707f254d7a393f61e9f2f241fa103a9a546afa2d12d1d2b4b77",
+      "worker_wall_seconds": 37.97222151700407,
+      "worker_cpu_seconds": 37.937322,
+      "peak_rss_kib_linux": 56972,
+      "setup": {
+        "wall_seconds": 9.621310580987483,
+        "cpu_seconds": 9.616709746000002
+      },
+      "geometric_volume_nm3": [
+        "9732314004506174705096074063151998594527833395968905",
+        "11972621413014756705924586149611790497021399392059392"
+      ],
+      "profiles": [
+        {
+          "probe_angstroms": 1.4,
+          "origin_state": "free",
+          "free_axis_rays": [
+            "axis_y_positive"
+          ],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "9732314004506174705096074063151998594527833395968905",
+            "11972621413014756705924586149611790497021399392059392"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 9.446484741056338,
+          "cpu_seconds": 9.440287822,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007101036026142538,
+              "cpu_seconds": 0.007000404999999432
+            },
+            "saved_model_check": {
+              "wall_seconds": 9.26028105604928,
+              "cpu_seconds": 9.254374263
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.17705932003445923,
+              "cpu_seconds": 0.17691300299999924
+            }
+          }
+        },
+        {
+          "probe_angstroms": 3.0,
+          "origin_state": "free",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "9732314004506174705096074063151998594527833395968905",
+            "11972621413014756705924586149611790497021399392059392"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 9.420173941995017,
+          "cpu_seconds": 9.414671155,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007924968027509749,
+              "cpu_seconds": 0.007999032000000739
+            },
+            "saved_model_check": {
+              "wall_seconds": 9.244267540052533,
+              "cpu_seconds": 9.238915809999998
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.16610268002841622,
+              "cpu_seconds": 0.16675704000000025
+            }
+          }
+        },
+        {
+          "probe_angstroms": 5.0,
+          "origin_state": "blocked",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "9732314004506174705096074063151998594527833395968905",
+            "11972621413014756705924586149611790497021399392059392"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 9.332669701077975,
+          "cpu_seconds": 9.327649975,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.006883383030071855,
+              "cpu_seconds": 0.0069986139999969055
+            },
+            "saved_model_check": {
+              "wall_seconds": 9.161661918042228,
+              "cpu_seconds": 9.156712229
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.16224825102835894,
+              "cpu_seconds": 0.1619384420000003
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "straight_tube_narrow_dense",
+      "n_atoms": 81,
+      "input_sha256": "2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2",
+      "worker_wall_seconds": 2.973187159979716,
+      "worker_cpu_seconds": 2.935946999999995,
+      "peak_rss_kib_linux": 53324,
+      "setup": {
+        "wall_seconds": 0.8722447470063344,
+        "cpu_seconds": 0.870879062
+      },
+      "geometric_volume_nm3": [
+        "6837102936632438928635571155971563018418612823693483",
+        "8979466059761067529443439612208842872766049544044544"
+      ],
+      "profiles": [
+        {
+          "probe_angstroms": 1.2,
+          "origin_state": "free",
+          "free_axis_rays": [
+            "axis_z_negative",
+            "axis_z_positive"
+          ],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {
+            "bent_interior_reference": {
+              "path_validated": true,
+              "verification_status": "accepted"
+            }
+          },
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6837102936632438928635571155971563018418612823693483",
+            "8979466059761067529443439612208842872766049544044544"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 0.689100428018719,
+          "cpu_seconds": 0.679975021,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007457669009454548,
+              "cpu_seconds": 0.007976223000000005
+            },
+            "saved_model_check": {
+              "wall_seconds": 0.4543189980322495,
+              "cpu_seconds": 0.4443674310000001
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.22551720694173127,
+              "cpu_seconds": 0.22563103799999995
+            }
+          }
+        },
+        {
+          "probe_angstroms": 1.4,
+          "origin_state": "blocked",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {
+            "bent_interior_reference": {
+              "path_validated": true,
+              "verification_status": "accepted"
+            }
+          },
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6837102936632438928635571155971563018418612823693483",
+            "8979466059761067529443439612208842872766049544044544"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 0.655940308002755,
+          "cpu_seconds": 0.6543799030000002,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007209878996945918,
+              "cpu_seconds": 0.007000070000000136
+            },
+            "saved_model_check": {
+              "wall_seconds": 0.42557311698328704,
+              "cpu_seconds": 0.42358275999999995
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.22116926999296993,
+              "cpu_seconds": 0.22179609300000003
+            }
+          }
+        },
+        {
+          "probe_angstroms": 2.5,
+          "origin_state": "blocked",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {
+            "bent_interior_reference": {
+              "path_validated": false,
+              "verification_status": "rejected_candidate"
+            }
+          },
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6837102936632438928635571155971563018418612823693483",
+            "8979466059761067529443439612208842872766049544044544"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 0.5999827670166269,
+          "cpu_seconds": 0.5887664849999998,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007697025081142783,
+              "cpu_seconds": 0.006998494999999938
+            },
+            "saved_model_check": {
+              "wall_seconds": 0.43733675603289157,
+              "cpu_seconds": 0.4272596489999998
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.1530820830957964,
+              "cpu_seconds": 0.15250995400000011
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "straight_tube_wide_sparse",
+      "n_atoms": 77,
+      "input_sha256": "77fc6f703dac08084e75398202169c9f8e05fc07e75eec4faf400932a3f2a855",
+      "worker_wall_seconds": 13.421638876898214,
+      "worker_cpu_seconds": 13.338917000000015,
+      "peak_rss_kib_linux": 54660,
+      "setup": {
+        "wall_seconds": 3.4916413130704314,
+        "cpu_seconds": 3.472426137
+      },
+      "geometric_volume_nm3": [
+        "6620533166212162263949896980673976813709886370954005",
+        "2993155353253689176481146537402947624255349848014848"
+      ],
+      "profiles": [
+        {
+          "probe_angstroms": 1.4,
+          "origin_state": "free",
+          "free_axis_rays": [
+            "axis_z_negative",
+            "axis_z_positive"
+          ],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6620533166212162263949896980673976813709886370954005",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 3.3081855960190296,
+          "cpu_seconds": 3.28541689,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.008067613001912832,
+              "cpu_seconds": 0.007998938000000066
+            },
+            "saved_model_check": {
+              "wall_seconds": 3.1276309760287404,
+              "cpu_seconds": 3.10553354
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.17053450900129974,
+              "cpu_seconds": 0.16988469200000011
+            }
+          }
+        },
+        {
+          "probe_angstroms": 2.5,
+          "origin_state": "free",
+          "free_axis_rays": [
+            "axis_z_negative",
+            "axis_z_positive"
+          ],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6620533166212162263949896980673976813709886370954005",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 3.2412596909562126,
+          "cpu_seconds": 3.2392521480000003,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.007923100958578289,
+              "cpu_seconds": 0.007999820000000213
+            },
+            "saved_model_check": {
+              "wall_seconds": 3.0603056739782915,
+              "cpu_seconds": 3.0591241260000004
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.1709751730086282,
+              "cpu_seconds": 0.17012876099999907
+            }
+          }
+        },
+        {
+          "probe_angstroms": 5.0,
+          "origin_state": "blocked",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {},
+          "extra_paths": {},
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "6620533166212162263949896980673976813709886370954005",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 3.1968319109873846,
+          "cpu_seconds": 3.193264525,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.00773211196064949,
+              "cpu_seconds": 0.006986103999999216
+            },
+            "saved_model_check": {
+              "wall_seconds": 3.030422435957007,
+              "cpu_seconds": 3.0274099910000007
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.15672547102440149,
+              "cpu_seconds": 0.15686891999999908
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "dumbbell",
+      "n_atoms": 94,
+      "input_sha256": "2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63",
+      "worker_wall_seconds": 45.92112958000507,
+      "worker_cpu_seconds": 45.885637,
+      "peak_rss_kib_linux": 57052,
+      "setup": {
+        "wall_seconds": 11.657849356997758,
+        "cpu_seconds": 11.64920216
+      },
+      "geometric_volume_nm3": [
+        "859552951996342119360734190240810717792142808751095",
+        "280608314367533360295107487881526339773939048251392"
+      ],
+      "profiles": [
+        {
+          "probe_angstroms": 1.4,
+          "origin_state": "free",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {
+            "left_chamber": "free",
+            "right_chamber": "free"
+          },
+          "extra_paths": {
+            "chamber_axis": {
+              "path_validated": true,
+              "verification_status": "accepted"
+            }
+          },
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "859552951996342119360734190240810717792142808751095",
+            "280608314367533360295107487881526339773939048251392"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 11.365028391010128,
+          "cpu_seconds": 11.358780014,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.009195869090035558,
+              "cpu_seconds": 0.009013952000000103
+            },
+            "saved_model_check": {
+              "wall_seconds": 11.109299717936665,
+              "cpu_seconds": 11.104006590000001
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.24417377496138215,
+              "cpu_seconds": 0.24386472099999779
+            }
+          }
+        },
+        {
+          "probe_angstroms": 2.2,
+          "origin_state": "blocked",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {
+            "left_chamber": "free",
+            "right_chamber": "free"
+          },
+          "extra_paths": {
+            "chamber_axis": {
+              "path_validated": false,
+              "verification_status": "rejected_candidate"
+            }
+          },
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "859552951996342119360734190240810717792142808751095",
+            "280608314367533360295107487881526339773939048251392"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 11.360659979050979,
+          "cpu_seconds": 11.354932516000002,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.00879932101815939,
+              "cpu_seconds": 0.008999432999999613
+            },
+            "saved_model_check": {
+              "wall_seconds": 11.114633742021397,
+              "cpu_seconds": 11.109040738000001
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.23483937000855803,
+              "cpu_seconds": 0.23390588400000212
+            }
+          }
+        },
+        {
+          "probe_angstroms": 6.0,
+          "origin_state": "blocked",
+          "free_axis_rays": [],
+          "free_tetrahedron_face_rays": [],
+          "named_points": {
+            "left_chamber": "blocked",
+            "right_chamber": "blocked"
+          },
+          "extra_paths": {
+            "chamber_axis": {
+              "path_validated": false,
+              "verification_status": "rejected_candidate"
+            }
+          },
+          "global_count_route": "whole_convex_hull_sufficient_test",
+          "n_components": null,
+          "topology_complete": false,
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "859552951996342119360734190240810717792142808751095",
+            "280608314367533360295107487881526339773939048251392"
+          ],
+          "volume_unit": "nm**3",
+          "precision_status": "not_requested",
+          "wall_seconds": 11.387765088002197,
+          "cpu_seconds": 11.381144772999995,
+          "phases": {
+            "probe_and_model_write": {
+              "wall_seconds": 0.008758682990446687,
+              "cpu_seconds": 0.008999120999995114
+            },
+            "saved_model_check": {
+              "wall_seconds": 11.14762618590612,
+              "cpu_seconds": 11.140240257000002
+            },
+            "query_production_and_saved_proof_checks": {
+              "wall_seconds": 0.22887885698582977,
+              "cpu_seconds": 0.22892028000000408
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "full_validator_p5_qualified": false,
+  "general_mixed_region_enumeration": "not_implemented",
+  "boundary_patch_inventory": "not_computed",
+  "requested_per_region_volume_precision": "not_computed"
+}

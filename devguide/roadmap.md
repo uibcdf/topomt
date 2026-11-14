@@ -99,6 +99,15 @@ DepDigest, SMonitor and PyUnitWizard retain their registered contracts.
 
 ## 3. Continue native Topography and DFND at their own gates
 
+Measured panel continuation (2026-11-13 UTC): the
+[six-case validator report](../docs/content/benchlab/synthetic/reference_validator_report.md)
+at `2b21cb2` executes all nineteen current query profiles, retaining wall/CPU/RSS
+and independent saved proof checking. Global topology is complete only for the
+fresh tetrahedron 1.7 Å exclusion. Continue generic hull-clipped construction,
+complete regions/separation/boundary incidence and per-region precision under
+#76 before interpreting full-panel execution as P5 qualification. All original
+case evidence and native qualification findings retain their scopes.
+
 Steric-hull continuation (2026-11-13 UTC): the
 [physical integration](DFND/reference_validator_hull_sterics_checkpoint.md)
 source-delivers exact all-atom point/path and sufficient whole-domain proofs

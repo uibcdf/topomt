@@ -1,5 +1,18 @@
 # TopoMT development status
 
+## Six-case validator report and measured resources — 2026-11-13 UTC
+
+Producer `2b21cb2` completes all nineteen original BenchLab profiles with the
+current exact validator. The [BenchLab report](../docs/content/benchlab/synthetic/reference_validator_report.md)
+and [checkpoint](DFND/reference_validator_six_case_checkpoint.md) retain 305 query
+outcomes, exact models/proofs, per-case CPU/wall/RSS, per-probe timing and a standalone
+checker download. The sequential batch takes 164.953 wall seconds / 164.602
+summed worker CPU seconds, maximum worker RSS 56.59 MiB on one CPU/thread.
+Only tetrahedron 1.7 Å receives a complete global count (zero); the other
+eighteen profiles retain unknown topology. This executes current queries on
+the full panel, not full P5 region/precision qualification. #76/#181 and native
+findings retain their scopes; earlier 355 frozen files remain unchanged.
+
 ## Certified hull sterics — 2026-11-13 UTC
 
 The [physical hull integration](DFND/reference_validator_hull_sterics_checkpoint.md)

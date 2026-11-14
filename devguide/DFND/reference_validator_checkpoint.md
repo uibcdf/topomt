@@ -10,6 +10,26 @@ These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete connected-region validator or a supported public TopoMT detector.
 
+## Measured six-case panel — 2026-11-13 UTC
+
+The [current panel checkpoint](reference_validator_six_case_checkpoint.md) and
+[BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md)
+record actual producer `2b21cb2` execution of all six original systems and all
+nineteen frozen probes. Every case completes locally and sequentially, with
+separate worker wall/CPU/RSS and source/hull/per-probe phases. Batch wall time
+is 164.953 seconds, summed worker CPU 164.602 seconds, maximum worker RSS
+56.59 MiB; one CPU/thread and at most 2 GiB per worker.
+
+The run retains 305 checked outcomes (187 accepted proofs and 118 rejected path
+candidates) with a downloadable exact-model/proof/checker archive. A fresh
+tetrahedral partition supplies a complete zero-region/zero-volume proof at
+1.7 Å on the same four-center physical hull. The other eighteen profiles retain
+unknown complete topology; a finite candidate failure does not prove closure,
+separation or global exclusion. Executing these nineteen query sets does not
+complete P5's exhaustive-region/precision gates. Earlier stronger references
+and all 355 frozen original files retain their scopes/bytes. No native finding
+or public-package qualification changes.
+
 ## Certified hulls in the physical Model — 2026-11-13 UTC
 
 The [hull/steric integration](reference_validator_hull_sterics_checkpoint.md)
@@ -330,7 +350,7 @@ geometry feasibility decision and a general exhaustive free-region
 construction. P4 needs general clipped/region-assigned precision and validated
 integration; the earlier partition enclosures do not meet k=24, while the
 analytic route above passes it only for its separate total-volume scope.
-All 19 steric profiles, complete apertures/attachments, biological
+Full topology/precision qualification of all 19 profiles, complete apertures/attachments, biological
 classification and public API/package qualification remain subsequent gates.
 
 This standalone developer checker retains host/source/model provenance; it adds

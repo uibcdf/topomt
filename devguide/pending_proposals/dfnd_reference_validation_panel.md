@@ -15,6 +15,22 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Measured current validator on six systems / nineteen probes — 2026-11-13 UTC
+
+Producer `2b21cb2` completes the maintainer-requested current-validator execution
+on all six BenchLab systems. The
+[report](../../docs/content/benchlab/synthetic/reference_validator_report.md)
+and [delivery checkpoint](../DFND/reference_validator_six_case_checkpoint.md)
+retain per-case wall/CPU/RSS, per-probe wall/CPU, all raw outcomes and a standalone saved
+checker archive. Total wall time is 164.953 seconds; maximum worker RSS is
+56.59 MiB on one CPU/thread, with no Slurm/environment change or resource stop.
+The 305 query outcomes include one complete global count (tetrahedron 1.7 Å,
+zero); the other eighteen profiles retain unknown complete topology. Counts of
+fixed valid rays are not physical patch counts. All nineteen query sets are
+executed, but general regions/separation/boundary incidence and per-region
+precision remain incomplete P1/P3/P4/P5 work. #76 remains partial/open and native
+#181/#180/#184/#188 dispositions are unchanged. All 355 original files remain.
+
 ## Proof-backed physical hull Model — 2026-11-13 UTC
 
 The [steric integration](../DFND/reference_validator_hull_sterics_checkpoint.md)
@@ -49,7 +65,7 @@ The earlier Slurm job 5 did not execute or leave a queued job. Preserve the
 [failed-attempt record](../evidence/reference_validator_hulls_v1/scheduler_attempt.json)
 as history; it is no longer a blocker or a pending managed-retry action. No
 steric regions or native fix are inferred. This issue stays partial/open for
-full steric Model integration, general connected regions and region-assigned
+general mixed-region Model integration, connected regions and region-assigned
 precision, followed by the later public receiving gates.
 
 ## Actual analytic volume precision — 2026-11-13 UTC
