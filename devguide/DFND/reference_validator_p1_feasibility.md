@@ -12,9 +12,14 @@ cluster scope. It does not add volumes to this topology certificate, qualify
 general clipping or supply the outstanding general multi-ball construction.
 
 The [separate hull-domain tranche](reference_validator_hull_checkpoint.md) now
-proves center-hull equality and closed box clipping on small geometric controls.
-It does not extend this one-ball topology construction or the complete steric
-Model. The original-source domain batch awaits usable managed resources.
+proves center-hull equality and closed box clipping; all six original center
+hulls have retained local receiving. The subsequent
+[steric integration](reference_validator_hull_sterics_checkpoint.md) admits
+verified hull domains for exact point/path and sufficient whole-domain proofs.
+The [measured six-case panel](reference_validator_six_case_checkpoint.md) executes
+all nineteen current probe profiles without Slurm. These deliveries do not
+extend this one-ball topology construction to general multi-ball regions;
+that complete construction and per-region precision remain open under #76.
 
 ## Question and achieved scope
 
