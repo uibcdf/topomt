@@ -15,6 +15,32 @@ supersedes: []
 
 # Local candidates in the covered tube
 
+## Independent narrow-family reference handoff — 2026-11-14
+
+Under [#76](dfnd_reference_validation_panel.md), the exact reference validator
+now receives all three unchanged original narrow-tube Models. Source `d73477c`
+completes 1.2/2.5 Å through independently checked identical cell geometry and
+recomputed target predicates, preserving the earlier 1.4 Å source evidence.
+The [family summary](../evidence/reference_validator_power_cells_v4/family_summary.json)
+binds complete **1/1/0 free regions and 2/2/0 free hull patches**, at
+1.2/1.4/2.5 Å, and the positive checked continuous paths. The 1.4 Å origin is
+blocked while its free region connects the two end patches.
+
+The 2.5 Å target proof is an exhaustive convex-cell cover of the same finite
+hull: each checked cell is entirely within its owner's expanded ball. It
+independently confirms zero free centers/zero probe-center volume, agreeing
+with the older conservative cover. This completeness is supplied by the full
+geometric partition and ball convexity; the thirty narrow native-center point
+checks below do not acquire that proof merely by being blocked.
+
+This is stronger reference receiving, not a change to native operators or
+public promotion. The wide 5 Å profile retains its separate earlier reference
+and unresolved public qualification. #181 remains active/`needs_review`: select
+and implement the local-candidate versus all-atom physical reporting policy,
+with the same original supports, pending targets and method-book review.
+The comparative-finding review changes no lifecycle or inferiority claim;
+the demonstrated native behavior and its unresolved interpretation are unchanged.
+
 ## What
 
 At source b07a20e and probe 2.5 Å the frozen 81-ball tube has three wet graph

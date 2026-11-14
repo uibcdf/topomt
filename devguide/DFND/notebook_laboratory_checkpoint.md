@@ -1,5 +1,29 @@
 # DFND notebook laboratory checkpoint
 
+## Complete original narrow-tube reference family — 2026-11-14
+
+The [exact reference continuation](reference_validator_power_cell_construction.md)
+now receives all three original narrow probes: **1/1/0 complete free regions
+and 2/2/0 free hull patches** at 1.2/1.4/2.5 Å. Each positive profile has a
+checked 28-point path between the original interior anchors; the 1.4 Å origin
+is blocked. The negative proof gives exact zero total probe-center volume in
+the finite hull, independently agreeing with the earlier conservative cover.
+
+`d73477c` checks the original `fd3eeb7` cell geometry and exact equality of all
+power inequalities, then reclassifies and independently checks 1.2/2.5 Å. It
+preserves atoms, source/frame/domain, original scientific artifacts and the
+earlier 1.4 Å receiving. The [structured family summary](../evidence/reference_validator_power_cells_v4/family_summary.json)
+links each Model/proof/query/phase and its actual producer/resource scope.
+The two new sequential workers take 203.362 wall / 194.109 CPU seconds in
+total, maximum RSS 36,020 KiB, one CPU/thread and 2 GiB per worker. Earlier
+cell construction and 1.4 Å replay costs remain separate.
+
+Six of nineteen original profiles now have complete topology on this route.
+Next under #76: the remaining thirteen profiles and certified nonempty
+region-assigned precision. Native/public carrier qualification remains #181,
+with #180/#184/#188 retaining their scopes. The ordinary-Delaunay grid is
+still a complementary proposal. No protein/provider phase or native promotion.
+
 ## Narrow-tube complete physical reference — 2026-11-14
 
 The [exact reference continuation](reference_validator_power_cell_construction.md)
@@ -13,7 +37,7 @@ The earlier repeated-query CPU stop remains separate historical evidence.
 
 The [completed receipt](../evidence/reference_validator_power_cells_v3/receiving/receipt.json)
 binds all saved inputs/proofs/queries and phase/resource evidence. Next under
-#76: the other frozen narrow profiles and wider topology receiving, plus
+#76 at that delivery: the other frozen narrow profiles and wider topology receiving, plus
 certified region-assigned precision. Native #181 and #180/#184/#188 retain their
 scopes; the ordinary-Delaunay grid remains a complementary proposal. No new
 geometry, protein/provider phase, morphological promotion or original artifact

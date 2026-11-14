@@ -79,8 +79,63 @@ bind the exact Model, original certificate, independent verification,
 anchor/path result, phase costs and source. Earlier interrupted attempts
 remain historical evidence. This strengthens only the declared 1.4 Å profile;
 the other two narrow-tube probes, certified nonempty region volumes and
-native/public candidate qualification retain their separate gates. No native
+native/public candidate qualification retain their separate gates at that
+delivery. The later receiving below completes the other two narrow probes.
+No native
 DFND operator, Topography classification or provider result is changed.
+
+### Complete narrow-tube probe family — 2026-11-14
+
+The two remaining **unchanged original** Models now have complete independent
+inventories at source `d73477c`. Their atomic radii are equal, so changing the
+probe leaves every power-cell inequality exactly unchanged. The new route
+checks the old source proof, reuses only its cell geometry, and recomputes all
+target free vertices, whole-edge collisions and region/boundary partitions.
+Each resulting target certificate is independently checked again. No previous
+count or free-state label supplies the target answer.
+
+| Probe (Å) | Complete free regions | Free hull patches | Origin | Checked interior-anchor path |
+| --- | ---: | ---: | --- | --- |
+| 1.2 | 1 | 2 | free | 28-point continuous path. |
+| 1.4 | 1 | 2 | blocked | 28-point continuous path from the earlier receiving. |
+| 2.5 | 0 | 0 | blocked | No free center anywhere in the finite hull. |
+
+At 2.5 Å, the total probe-center volume is **exactly zero** in the declared
+hull, consistent with the earlier independent conservative cover. At the two
+positive probes, the complete inventory does not supply a certified nonempty
+region volume. The exterior outside the finite hull is a separate context.
+
+The negative certificate covers the hull with complete checked convex power
+cells, each entirely covered by its own expanded atomic ball. Squared distances
+at every cell vertex certify that whole-cell cover by convexity. It is an
+exhaustive geometric cover, rather than a negative conclusion from sampling.
+
+| New execution | Wall seconds | CPU seconds | Peak RSS MiB | Actual scope |
+| --- | ---: | ---: | ---: | --- |
+| 1.2 Å | 123.483 | 114.327 | 35.18 | Source-proof check, target reclassification, target checks and queries. |
+| 2.5 Å | 79.879 | 79.782 | 33.86 | Source-proof check, target exclusion and blocked-origin query. |
+
+Both workers run sequentially on one CPU/thread, each bounded by 2 GiB and
+180 CPU/240 wall seconds. Their total cost is **203.362 wall / 194.109 CPU
+seconds**; this excludes the earlier 1.4 Å work and original cell construction.
+The 41 host samples show no measured memory pressure and at least 49.62 GiB
+available RAM. Phase costs distinguish source-geometry checking/reclassification,
+target verification and query checking; these are not fresh constructor timings.
+
+The [structured family summary](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_power_cells_v4/family_summary.json)
+binds all three profile Models, proofs, exact volume enclosures, query outputs,
+execution records and original producer scopes. The
+[1.2 Å receipt](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_power_cells_v4/probe_1_2/receiving/receipt.json)
+and [2.5 Å receipt](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_power_cells_v4/probe_2_5/receiving/receipt.json)
+retain the new target proofs and raw checksums. Geometry reuse is rejected if
+any nonprobe input or complete power inequality changes, including incompatible
+unequal-radius probe changes. No monotone component-count assumption is used.
+
+Six of the nineteen original profiles now have complete topology on this
+route: the three tetrahedron probes and all three narrow-tube probes. The
+remaining thirteen profiles, nonempty per-region precision and native/public
+qualification remain under their existing issues. The 2.5 Å reference does
+not correct the native local-candidate discrepancy tracked by #181.
 
 ## What was run
 

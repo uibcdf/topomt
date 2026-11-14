@@ -1,0 +1,77 @@
+{
+  "schema": "topomt.reference-validator.power-cell-receiving/1",
+  "protocol_sha256": "2acbbeb4f36ace5d3ef62a88d614924a1a9c798e2d16934546fda4f7107a9bdd",
+  "source_revision": "d73477c534c9a23f89d57bced6757e06d73581bc",
+  "source_tree_modified": false,
+  "source_files_sha256": {
+    "devtools/reference_validator/__init__.py": "b7126b2ca6c61870339613a5e38b6b746da9969bd8d36890cabb53a5b4f4ade0",
+    "devtools/reference_validator/__main__.py": "37fece6d4543a38a4f22fe0626f06022635b0b23abb11f3f791161ce14d1f1b9",
+    "devtools/reference_validator/analytic_volume.py": "526911999550261bd518c306ddfa54bb2e85af19f37859bf1e0777f98ee1ca35",
+    "devtools/reference_validator/benchlab_panel.py": "83206ba216c4b908a888fc72b60f9f3afdc4dd5aaf69a3aafdd30a75edc4fe34",
+    "devtools/reference_validator/box_topology.py": "06ab6fa75ee587ce06976d9544ed2f40b4db54b1c28b9b48493c75b4b54cf91e",
+    "devtools/reference_validator/capture.py": "6b82217adb9239e60b5b0e3da592ea483ec68124e64af6968fb688a0034725ac",
+    "devtools/reference_validator/capture_box_topology.py": "da77941f9aa6eedb2e6ce77294e43681bf71f905b2e44db50ae0a9339186f6ac",
+    "devtools/reference_validator/capture_hull_sterics.py": "0621d794aac3358664e0d055db306d1f9cb0411d5510dbac24dea60dcb128375",
+    "devtools/reference_validator/capture_hulls.py": "fba7f2d34cec48017013f108b6609b864f3fcef68c038860ecc73af0b9893d7d",
+    "devtools/reference_validator/capture_power_cells.py": "b2f293e0338525251859f7be3fe22048a8507dd3acd1d33a9d24250298342848",
+    "devtools/reference_validator/capture_resume.py": "878371e30856f4bb21767b1c044819b7627c7e587c520c19c944267c361641c3",
+    "devtools/reference_validator/capture_volume.py": "47865960e965b2d974bbf4c0834b5e5049739dc6521e2d80e87fa3104da287fd",
+    "devtools/reference_validator/center_hull.py": "a67575ca843b74e1a24f0e50ca6b791358c28ba272d09996baeda9f82b23ff62",
+    "devtools/reference_validator/contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+    "devtools/reference_validator/hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "devtools/reference_validator/model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+    "devtools/reference_validator/power_cells.py": "cb2379b5d839fc743351cc188b6fe9f72bf336b580596ff4fffb63774a568d92",
+    "devtools/reference_validator/power_contracts.py": "3bac982773c16b298da25e4784f70f534e9e5707395f5ef5f264af371a021af4",
+    "devtools/reference_validator/producer.py": "8c362618b0d69f92882f4c393ca0bddc91bec3a0c8a870f851920eaf6f134873",
+    "devtools/reference_validator/receiving.py": "53a60cc37f7104268e1bfd23d6a80ca84f463d0262cce33d41d489ffb465c4f3",
+    "devtools/reference_validator/runs.py": "b60187a2f3f5ebc07c80ee94c1cea3ab230022a2943f708fc4aafc3bb70d0934",
+    "devtools/reference_validator/storage.py": "b448f221f85e85ee0657b156512e7316afee6b0fd8957b0eaaf27194cdfa0aa4",
+    "devtools/reference_validator/verify/__init__.py": "a257395666db9eadfb6868d146939b90d4b81cdb11da92d3db4148b0c1bf8e51",
+    "devtools/reference_validator/verify/_interval.py": "65932e679a0d003c6b80606f8ad9b09513aa67da9115e85ec81055e7f4700069",
+    "devtools/reference_validator/verify/analytic_volume.py": "82e7b0a5341d0d140b4f003e79073275a7526415969b1b1392df59e15a009dbc",
+    "devtools/reference_validator/verify/box_topology.py": "eefacfdaa9f704588bc57ae993a515d24eb85b631e63c9c1ecaf461ff2ee2067",
+    "devtools/reference_validator/verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+    "devtools/reference_validator/verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+    "devtools/reference_validator/verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04",
+    "devtools/reference_validator/verify/power_cells.py": "1562eae89489a11add673f3573d55b866ae727a816b712ab801260373b779790",
+    "devtools/reference_validator/verify/records.py": "3b612c96112960dad3412e91c62857216f5b7a6310186075f95e9fce2d377491",
+    "devtools/reference_validator/volume_request.py": "c261e4049c3de53c5bdfce7ad0702ab476f2b50133ac6341300709c53381c739"
+  },
+  "files": {
+    "original_narrow_tube_2_5/anchors.json": "487972a668f68428e65517e8482afd1c1384b33bdf79e85fe80c2c79c42355a4",
+    "original_narrow_tube_2_5/certificate.json": "d7103a79dca47f75fb2daf7a1e71e4028dd75424929febabdf8abd7fac876566",
+    "original_narrow_tube_2_5/model.json": "297774182804e0915cc6be6d264fffe74c4f79c7488b366ea04a41c4edd5eb8c",
+    "original_narrow_tube_2_5/phases.json": "700d5471950b992e884e5a99ae384d22b44525fcf53fad14012bb7463f136dea",
+    "original_narrow_tube_2_5/verification.json": "6b3c712bd88762d4b46573eb908cfac0ead36871eeaeb77deac310ee2d96fad7"
+  },
+  "cases": {
+    "original_narrow_tube_2_5": {
+      "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+      "certificate_sha256": "48b11bcfbdd05d6a9e5ecd05f2fb35015066e673233c698bd7996d2ace58792b",
+      "certificate_origin": {
+        "route": "reprobed_geometry",
+        "geometry_producer_revision": "fd3eeb7e6a5df99ad1781f63c090355fe497eaf1",
+        "source_model_path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/model.json",
+        "source_model_file_sha256": "1a86eb52531c99911a4b1ea5d58ea4bf9a4914bc65f362089fe8930f1bfa5530",
+        "source_model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+        "source_certificate_path": "devguide/evidence/reference_validator_power_cells_v2/receiving/original_narrow_tube_1_4/certificate.json",
+        "source_certificate_file_sha256": "21564404d3b16cf659202040982e9300d10e6b002d5aab157839f05d552311e2"
+      },
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "per_region_volume_status": "not_computed",
+      "elapsed_seconds": 79.68553719203919,
+      "cpu_seconds": 79.628538209
+    }
+  },
+  "elapsed_seconds": 79.70365156710614,
+  "cpu_seconds": 79.639195115,
+  "peak_rss_kib_linux": 34668,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "cpu_limit_seconds": 180,
+  "requested_precision_status": "not_computed",
+  "native_dfnd_qualification": "not_changed"
+}

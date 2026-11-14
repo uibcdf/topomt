@@ -1,0 +1,449 @@
+{
+  "schema": "topomt.reference-validator.bounded-local-execution/2",
+  "recorded_at_utc": "2026-11-14T17:12:16.706969+00:00",
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "-m",
+    "devtools.reference_validator.capture_power_cells",
+    "/fast_data/home/liliana/repos@uibcdf/topomt/devguide/evidence/reference_validator_power_cells_v4/probe_2_5/protocol.json",
+    "/fast_data/home/liliana/repos@uibcdf/topomt/devguide/evidence/reference_validator_power_cells_v4/probe_2_5/receiving"
+  ],
+  "elapsed_seconds": 79.87853678897955,
+  "child_cpu_seconds": 79.781536,
+  "child_peak_rss_kib_linux": 34668,
+  "exit_code": 0,
+  "stop_reason": null,
+  "host_samples": [
+    {
+      "elapsed_seconds": 0,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52808480
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.36865234375,
+          2.18896484375,
+          2.037109375
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 5.001503332983702,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52799620
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.49951171875,
+          2.20263671875,
+          2.04248046875
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 10.001964344992302,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52792496
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.6201171875,
+          2.21630859375,
+          2.0478515625
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 15.002432930050418,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52796148
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.65087890625,
+          2.21240234375,
+          2.04736328125
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 20.00288666295819,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52272512
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.83935546875,
+          2.2421875,
+          2.05810546875
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 25.00333428697195,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52691312
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.0126953125,
+          2.271484375,
+          2.06884765625
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 30.003814100986347,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52748124
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.251953125,
+          2.31689453125,
+          2.0849609375
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 35.004244567942806,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52753836
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.31201171875,
+          2.32861328125,
+          2.09033203125
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 40.004697047988884,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52746736
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.3671875,
+          2.33984375,
+          2.095703125
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 45.005139429005794,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52493128
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.33740234375,
+          2.333984375,
+          2.0947265625
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 50.005544562940486,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52364224
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.390625,
+          2.34521484375,
+          2.099609375
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 55.00596387498081,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52347288
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.439453125,
+          2.3564453125,
+          2.1044921875
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 60.00646939803846,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52339244
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.564453125,
+          2.3837890625,
+          2.11474609375
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 65.00689759501256,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52344340
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.6796875,
+          2.41064453125,
+          2.125
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 70.00732171104755,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52768212
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.86572265625,
+          2.4541015625,
+          2.140625
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    },
+    {
+      "elapsed_seconds": 75.00777504395228,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 52795256
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267441,
+          "pswpout": 486138
+        },
+        "load_average": [
+          2.876953125,
+          2.46337890625,
+          2.1455078125
+        ]
+      },
+      "swap_pages_per_second": 0.0
+    }
+  ],
+  "host_after": {
+    "safe": true,
+    "memory_kib": {
+      "MemTotal": 63455508,
+      "MemAvailable": 52823708
+    },
+    "memory_pressure_avg10": {
+      "some": 0.0,
+      "full": 0.0
+    },
+    "swap_pages": {
+      "pswpin": 267441,
+      "pswpout": 486138
+    },
+    "load_average": [
+      2.7265625,
+      2.43896484375,
+      2.13916015625
+    ]
+  },
+  "cpu_affinity": [
+    0
+  ],
+  "resource_policy": {
+    "cpu_count": 1,
+    "numerical_threads": 1,
+    "address_space_limit_bytes": 2147483648,
+    "cpu_limit_seconds": 180,
+    "wall_limit_seconds": 240,
+    "host_sample_interval_seconds": 5,
+    "minimum_available_fraction": 0.2,
+    "minimum_available_bytes": 4294967296,
+    "reason": "One N81 independent proof check takes about 33 CPU seconds at the prior scope. Reprobe checks the source proof, reclassifies geometry and independently checks target/results. Use separate sequential workers, each with the previous conservative finite envelope; no resource reservation is implied."
+  },
+  "scheduler": "none; maintainer selected local execution",
+  "supervisor_source": "import datetime,hashlib,json,os,resource,subprocess,sys,time\nfrom pathlib import Path\nfrom devtools.reference_validator.benchlab_panel import _host\nroot=Path.cwd();base=root/'devguide/evidence/reference_validator_power_cells_v4/probe_2_5'\npolicy=json.loads((base/'protocol.json').read_text())['resources']\ninitial=_host()\nif not initial['safe']:raise SystemExit('Host resources do not preserve the conservative reserve')\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nresource.setrlimit(resource.RLIMIT_AS,(policy['address_space_limit_bytes'],policy['address_space_limit_bytes']))\nresource.setrlimit(resource.RLIMIT_CPU,(policy['cpu_limit_seconds'],policy['cpu_limit_seconds']))\nfor key in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS','RAYON_NUM_THREADS'):os.environ[key]='1'\ncommand=[sys.executable,'-m','devtools.reference_validator.capture_power_cells',str(base/'protocol.json'),str(base/'receiving')]\nstarted_utc=datetime.datetime.now(datetime.timezone.utc).isoformat();start=time.perf_counter();samples=[{'elapsed_seconds':0,'host':initial}];stop=None\nwith (base/'execution.log').open('x') as log:\n child=subprocess.Popen(command,stdout=log,stderr=subprocess.STDOUT)\n while child.poll() is None:\n  left=policy['wall_limit_seconds']-(time.perf_counter()-start)\n  if left<=0:stop='wall_limit';break\n  try:child.wait(timeout=min(policy['host_sample_interval_seconds'],left))\n  except subprocess.TimeoutExpired:\n   sample=_host();now=time.perf_counter()-start\n   previous=samples[-1]\n   elapsed=now-previous['elapsed_seconds']\n   swap_rate=sum(max(0,sample['swap_pages'][k]-previous['host']['swap_pages'][k]) for k in sample['swap_pages'])/max(elapsed,1e-6)\n   samples.append({'elapsed_seconds':now,'host':sample,'swap_pages_per_second':swap_rate})\n   if not sample['safe'] or swap_rate>1024:stop='host_resource_pressure';break\n if stop:\n  child.terminate()\n  try:child.wait(timeout=5)\n  except subprocess.TimeoutExpired:child.kill();child.wait(timeout=5)\n exit_code=child.returncode\nusage=resource.getrusage(resource.RUSAGE_CHILDREN)\n# This fresh parent has launched exactly one child before collecting usage.\n# Later git provenance calls are deliberately excluded from this measurement.\nrecord={'schema':'topomt.reference-validator.bounded-local-execution/2','recorded_at_utc':started_utc,'command':command,'elapsed_seconds':time.perf_counter()-start,'child_cpu_seconds':usage.ru_utime+usage.ru_stime,'child_peak_rss_kib_linux':usage.ru_maxrss,'exit_code':exit_code,'stop_reason':stop,'host_samples':samples,'host_after':_host(),'cpu_affinity':sorted(os.sched_getaffinity(0)),'resource_policy':policy,'scheduler':'none; maintainer selected local execution','supervisor_source':Path(__file__).read_text(),'source_revision':subprocess.check_output(['git','rev-parse','HEAD'],cwd=root,text=True).strip(),'protocol_sha256':hashlib.sha256((base/'protocol.json').read_bytes()).hexdigest(),'files':{str(p.relative_to(base)):hashlib.sha256(p.read_bytes()).hexdigest() for p in sorted((base/'receiving').rglob('*.json'))},'log_sha256':hashlib.sha256((base/'execution.log').read_bytes()).hexdigest()}\nreceipt=base/'receiving/receipt.json'\nrecord['receiving_status']='completed' if exit_code==0 and receipt.exists() else 'unresolved_execution_stop'\nwith (base/'execution.json').open('x') as stream:json.dump(record,stream,indent=2);stream.write('\\n')\nprint(json.dumps({k:record[k] for k in ['source_revision','receiving_status','elapsed_seconds','child_cpu_seconds','child_peak_rss_kib_linux','exit_code','stop_reason']},indent=2))\nif exit_code:\n print((base/'execution.log').read_text()[-3000:])\n raise SystemExit(1)\n",
+  "source_revision": "d73477c534c9a23f89d57bced6757e06d73581bc",
+  "protocol_sha256": "2acbbeb4f36ace5d3ef62a88d614924a1a9c798e2d16934546fda4f7107a9bdd",
+  "files": {
+    "receiving/original_narrow_tube_2_5/anchors.json": "487972a668f68428e65517e8482afd1c1384b33bdf79e85fe80c2c79c42355a4",
+    "receiving/original_narrow_tube_2_5/certificate.json": "d7103a79dca47f75fb2daf7a1e71e4028dd75424929febabdf8abd7fac876566",
+    "receiving/original_narrow_tube_2_5/model.json": "297774182804e0915cc6be6d264fffe74c4f79c7488b366ea04a41c4edd5eb8c",
+    "receiving/original_narrow_tube_2_5/phases.json": "700d5471950b992e884e5a99ae384d22b44525fcf53fad14012bb7463f136dea",
+    "receiving/original_narrow_tube_2_5/verification.json": "6b3c712bd88762d4b46573eb908cfac0ead36871eeaeb77deac310ee2d96fad7",
+    "receiving/receipt.json": "786d831f4f92fcaa6adbfac73bf371aece9c0e3c82fe74879f8d4238bb111da9"
+  },
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "receiving_status": "completed"
+}

@@ -10,7 +10,7 @@ Current implementation is partial, with its dated evidence in the
 [clipped power-cell construction](reference_validator_power_cell_construction.md)
 selects and implements complete multi-ball regions/boundary incidence; the
 retained receiving qualifies analytic controls, the original tetrahedron and
-the original narrow tube at 1.4 Å. Region-assigned precision and wider
+all three original narrow-tube probes. Region-assigned precision and wider
 qualification remain pending.
 The proposed complete-validator acceptance below retains those requirements.
 

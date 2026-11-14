@@ -31,7 +31,7 @@ inputs, independent reasoning, native/public observations and versioned evidence
 | Regular tetrahedron, 1.7 Å | No free center anywhere in the finite hull. |
 | Closed shell, 0.2 Å | Complete expanded-ball cover of the hull and a free enclosed origin. |
 | Shell with opening, 1.4 Å | One free hull patch and an origin-to-exterior witness. |
-| Narrow straight tube, 1.2/1.4 Å | Complete lateral-wall cover, two strict-free end patches and a verified bent end-to-end path; the fixed axis is blocked at 1.4 Å. |
+| Narrow straight tube, 1.2/1.4 Å | One complete free region, two strict-free end patches and a verified bent end-to-end path; the fixed axis is blocked at 1.4 Å. |
 | Narrow straight tube, 2.5 Å | A conservative all-atom bound covers every center position in the finite hull. |
 | Wide straight tube, 1.4/2.5 Å | Clear axis and complete wall/end certificates proving two strict-free hull patches. Native physical count resolves only at 1.4 Å in this study. |
 | Wide straight tube, 5 Å | Every finite-hull point is covered by expanded balls; local/public candidates still require qualification. |
@@ -42,6 +42,14 @@ The wall is a sampled union of balls, not a continuum sphere with an assumed
 inner radius. A certificate for the origin-containing region does not prescribe
 every cavity or its exact volume. These references were strengthened during
 development and are not a held-out biological detector benchmark.
+
+The later [exact reference-validator receiving](../benchlab/synthetic/reference_validator_report.md)
+completes all three original narrow-tube inventories: one/one/zero free regions
+and two/two/zero free hull patches at 1.2/1.4/2.5 Å. It preserves the same inputs
+and original native observations, and checks every atomic sphere. The negative
+profile has exact zero finite-hull probe-center volume; certified nonempty
+region volumes remain pending. These are independent physical references,
+with native/public candidate qualification still under #181.
 
 ## Source deliveries and remaining scientific/public boundaries
 

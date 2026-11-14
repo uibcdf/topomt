@@ -358,6 +358,12 @@ inequality**. It detaches and independently checks the original source proof
 before reusing its complete cell geometry. Changed atoms, domain, frame,
 source identity, arithmetic convention or power inequalities are rejected.
 
+For coincident centers, the power comparison is constant rather than a plane.
+Its true/false/tie class is checked through the original coincident-radius
+ordering, which is unchanged for fixed nonnegative radii/probes. The exact
+plane-equality condition applies to every nonconstant canonical halfspace;
+no constant infeasibility witness or duplicate cell is dropped.
+
 For the target probe it recomputes every free vertex, every whole-edge
 collision predicate and all global/boundary partitions. The source's topology
 and node inventory are not copied. The proposed target proof still needs its
@@ -384,6 +390,57 @@ limits and five-second host checks. Expected cost includes checking the source
 proof, target reclassification, target proof verification and named queries;
 these are not fresh cell-construction timings. Actual committed-source
 receiving remains separate from the frozen protocol and source controls.
+
+### The original narrow family is received completely
+
+Source `d73477c534c9a23f89d57bced6757e06d73581bc` now receives the original
+1.2/2.5 Å target Models through the declared geometry-reprobe route. The
+source geometry remains the original `fd3eeb7` 1.4 Å construction; no fresh
+cell clipping is claimed. Every source proof is independently rechecked,
+every target availability/incidence is recomputed, and each target proof and
+query batch is independently checked. The scientific source tree is clean.
+
+| Probe | Complete regions | Free hull patches | Origin | Target result |
+| --- | ---: | ---: | --- | --- |
+| 1.2 Å | 1 | 2 | free | A separately checked 28-point path connects the earlier interior anchors. |
+| 1.4 Å | 1 | 2 | blocked | Earlier `92679fc` saved receiving remains unchanged. |
+| 2.5 Å | 0 | 0 | blocked | Complete empty free set and exact `[0,0] nm**3` total volume. |
+
+The positive global count was not set by the new protocol. Earlier independent
+boundary references and the negative conservative cover are met; the new
+complete region count follows from the checked construction. This does not
+qualify native candidates or impose monotone counts on other geometries.
+
+For the 2.5 Å negative profile, each complete checked convex source cell has
+all vertices within its owner's expanded ball. Ball convexity therefore covers
+the entire cell, and the exhaustive cell partition covers the hull. This is a
+whole-hull exclusion proof; the separate 31 native-center point checks do not
+acquire that completeness argument. Strict contact remains excluded.
+
+The [1.2 Å receiving](../evidence/reference_validator_power_cells_v4/probe_1_2/receiving/receipt.json)
+takes **123.483 wall / 114.327 CPU seconds**, peak RSS **36,020 KiB**. Its
+source-proof check/target reclassification takes 48.769 wall seconds, target
+verification 38.245 and anchor queries 35.312. The
+[2.5 Å receiving](../evidence/reference_validator_power_cells_v4/probe_2_5/receiving/receipt.json)
+takes **79.879 wall / 79.782 CPU seconds**, peak RSS **34,668 KiB**; corresponding
+phase costs are 33.899, 22.462 and 22.434 seconds. The latter query checks the
+blocked origin; it does not invent a pair of free connection anchors.
+
+The two sequential one-CPU/thread workers each use the frozen 2 GiB/180 CPU/
+240 wall-second ceilings, with five-second host checks. Total new work is
+203.362 wall / 194.109 CPU seconds. Forty-one host samples have no measured
+memory pressure and preserve at least 49.62 GiB available RAM. These costs
+include source and target checking, not fresh geometry construction. Earlier
+construction, interrupted attempts and 1.4 Å saved-replay costs stay separate.
+
+The [structured family summary](../evidence/reference_validator_power_cells_v4/family_summary.json)
+binds the three exact Models, complete certificates, source/target producer
+scopes, query results, phase/resource records and volume enclosures. Source
+geometry, model/frame/input hashes and every original artifact remain unchanged.
+Six of the nineteen original profiles now have complete topology on this route;
+the other thirteen and certified nonempty region integration remain under #76.
+The narrow reference family is complete; native #181/#180, wide #184 and dumbbell #188
+retain their scopes, with no public morphological promotion or protein phase.
 
 ## Complementary tetrahedral reference proposed by the maintainer
 

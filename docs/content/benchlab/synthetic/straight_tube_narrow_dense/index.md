@@ -71,6 +71,19 @@ case-guided references, not a held-out evaluation panel. Original reference
 attempts and their explicitly refined protocols are retained alongside the
 accepted certificates.
 
+### Later complete physical reference
+
+The independent exact validator now enumerates every free region for these
+same three original probe Models: **1/1/0 regions and 2/2/0 free hull patches**
+at 1.2/1.4/2.5 Å. The two positive profiles have checked continuous interior-
+anchor paths; the 1.4 Å origin is blocked despite the connected free region.
+The 2.5 Å proof supplies exact zero probe-center volume in the finite hull.
+See the [reference-validator report](../reference_validator_report.md) for
+source-bound certificates, original-input identities and separate execution
+costs. Certified nonempty region volumes and native/public qualification remain
+open. The retained notebook observations and original download keep their
+original source scopes and bytes.
+
 ## Current development boundary
 
 This is a useful diagnostic unit, **not a completed tube qualification**. Its physical boundary and all-atom/public questions remain under #180/#181.

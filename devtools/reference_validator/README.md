@@ -134,6 +134,15 @@ freezes the original 1.2/2.5 Å inputs and the separate sequential resource
 envelopes before execution. See the construction record for the algebra,
 control scope and actual qualification.
 
+Actual `d73477c` receiving now completes the original narrow 1.2/2.5 Å
+profiles. The [family summary](../../devguide/evidence/reference_validator_power_cells_v4/family_summary.json)
+retains complete `1/1/0` region counts and `2/2/0` hull patches at 1.2/1.4/2.5 Å,
+both positive checked paths and exact empty-hull total volume at 2.5 Å. The
+new reprobe/check/query workers cost 123.483 and 79.879 wall seconds; they do
+not rerun the original cell clipping or qualify native/public DFND. Six of
+nineteen original profiles now have complete topology; thirteen and certified
+nonempty per-region precision retain their gates.
+
 From the checkout, under external CPU/memory/time limits:
 
 ```bash

@@ -32,6 +32,44 @@ passes after making the sorted-atom typing explicit; no geometry or numerical
 decision changes in that typing adjustment. Full suite, public API/admission
 and installed/minor/platform qualification remain separate under #16/#76.
 
+Actual source `d73477c` receiving now completes both frozen remaining probes.
+The original narrow family has **1/1/0 complete regions and 2/2/0 free hull
+patches** at 1.2/1.4/2.5 Å. Origin states are free/blocked/blocked, and each
+positive profile has a separately checked 28-point interior-anchor path. The
+negative proof has exact zero total probe-center volume in the finite hull;
+positive per-region precision stays uncomputed. The 1.4 Å artifacts remain at
+their earlier producer/receiving sources.
+
+The new 1.2 Å worker takes 123.483 wall / 114.327 CPU seconds, peak RSS
+36,020 KiB; 2.5 Å takes 79.879 wall / 79.782 CPU seconds, peak RSS 34,668 KiB.
+These are separate sequential one-CPU/2 GiB/180 CPU/240 wall-second workers.
+The 203.362 wall / 194.109 CPU-second total includes source proof checking and
+target reclassification/verification/queries, not fresh cell construction.
+Forty-one host samples show no measured memory pressure and at least 49.62 GiB
+available RAM. The family summary and per-worker receipts bind all source,
+Model/certificate/query and resource scopes. Six original profiles now have
+complete topology, with thirteen still awaiting this route. Native #181 and
+other finding scopes, nonempty per-region precision and P6 remain open.
+
+Final validation passes **310 selected tests**, including independent actual
+negative-profile checking in a fresh process without producer/DFND/NumPy/
+PyUnitWizard and the original 355-file integrity guard. The bounded sequential
+selection takes 85.11 seconds, peak child RSS 97,068 KiB, one CPU and 2 GiB
+per process; external test ceilings remain per process, not a machine resource
+reservation. The added three-profile summary checksum/provenance assertions
+pass a focused eighteen-test receiving/governance selection; the explicit
+own-ball convex-cell cover assertion also passes its focused test.
+
+Repository Ruff/format, scoped mypy on 32 validator modules, report indexes,
+offline finding consistency and local Markdown targets pass. A full one-worker
+Sphinx HTML build passes without warnings and with notebook execution disabled
+(16.05 seconds, peak child RSS 290,656 KiB, 2 GiB cap). The report, narrow case
+landing and method-book scope are inspected. The prior 16.19-second rendering
+precedes the explanatory whole-cell cover paragraph; final rendering includes
+it. Existing PlantUML/Java are selected without changing shared environments.
+No full-suite, installed/minor/platform, hosted-deployment or public P6 claim
+follows. #16/#76 retain those gates and #181 retains native qualification.
+
 ## Narrow-tube exact-working-set continuation — 2026-11-14
 
 The [working-plane continuation](reference_validator_power_cell_construction.md#exact-working-plane-continuation--2026-11-14)

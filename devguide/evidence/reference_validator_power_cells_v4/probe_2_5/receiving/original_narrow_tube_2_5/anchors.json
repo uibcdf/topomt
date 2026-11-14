@@ -1,0 +1,46 @@
+{
+  "length_unit": "nm",
+  "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+  "topology_certificate_sha256": "48b11bcfbdd05d6a9e5ecd05f2fb35015066e673233c698bd7996d2ace58792b",
+  "points": {
+    "origin": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ]
+  },
+  "locations": {
+    "origin": {
+      "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+      "topology_certificate_sha256": "48b11bcfbdd05d6a9e5ecd05f2fb35015066e673233c698bd7996d2ace58792b",
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    }
+  },
+  "pairs": []
+}

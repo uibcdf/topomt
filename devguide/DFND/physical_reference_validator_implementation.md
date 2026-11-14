@@ -56,8 +56,10 @@ The later active-plane/batch continuation retains all earlier exact pilot
 certificates and now qualifies the original narrow 1.4 Å profile as one complete
 free region/two free hull patches, with an all-atom checked anchor path. Its
 saved receipt distinguishes the original `fd3eeb7` constructor from `92679fc`
-saved reading. Four original profiles (three tetrahedron probes and this tube
-probe) now have complete topology; fifteen await this route's receiving.
+saved reading. The subsequent `d73477c` geometry-reprobe receiving completes
+the other narrow probes without changing the original cell geometry. Six
+original profiles (all three tetrahedron and all three narrow-tube probes)
+now have complete topology; thirteen await this route's receiving.
 Nonempty per-region integration/precision and the rest of P5/P6 remain open.
 
 ## Scope and acceptance of the first complete validator

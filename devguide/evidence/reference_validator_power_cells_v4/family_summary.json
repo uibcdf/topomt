@@ -1,0 +1,345 @@
+{
+  "schema": "topomt.reference-validator.narrow-family-summary/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-14T17:16:46.414208+00:00",
+  "scope": "Three unchanged original narrow-tube probe Models, complete topology under strict all-atom spherical exclusion and their actual execution scopes. No native correction, protein/provider run, comparative speed claim or general per-region precision qualification.",
+  "profiles": [
+    {
+      "probe": {
+        "requested": {
+          "value": 1.2,
+          "unit": "angstrom"
+        },
+        "model": {
+          "value": [
+            "1080863910568919",
+            "9007199254740992"
+          ],
+          "unit": "nm",
+          "encoding": "rational-exact/1"
+        }
+      },
+      "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+      "source_revision": "d73477c534c9a23f89d57bced6757e06d73581bc",
+      "certificate_sha256": "8ea537b19eb618a76b7fcc8a93a251270048944d300060abd42636a0cd54b026",
+      "certificate_origin": {
+        "route": "reprobed_geometry",
+        "geometry_producer_revision": "fd3eeb7e6a5df99ad1781f63c090355fe497eaf1",
+        "source_model_path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/model.json",
+        "source_model_file_sha256": "1a86eb52531c99911a4b1ea5d58ea4bf9a4914bc65f362089fe8930f1bfa5530",
+        "source_model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+        "source_certificate_path": "devguide/evidence/reference_validator_power_cells_v2/receiving/original_narrow_tube_1_4/certificate.json",
+        "source_certificate_file_sha256": "21564404d3b16cf659202040982e9300d10e6b002d5aab157839f05d552311e2"
+      },
+      "sources": {
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_1_2/receiving/receipt.json",
+          "sha256": "ebfa16552d53047bf458b0b2600b543e441ec36b4012728ee6343af2d329fa88"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_1_2/execution.json",
+          "sha256": "5ec6331763b902ef5e485fa80bb54e902bc31ee674e512504a4bf8778045e85a"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_1_2/receiving/original_narrow_tube_1_2/model.json",
+          "sha256": "68207dea251e6b54eccc3acddb83685a2c3e468c7dd33f8deaf9a21837e1ba09"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_1_2/receiving/original_narrow_tube_1_2/certificate.json",
+          "sha256": "ae4b2fedb2ad3a4822ca860e3ab4a0792af999a5831d9191deafbb658a06c523"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_1_2/receiving/original_narrow_tube_1_2/verification.json",
+          "sha256": "40da4d50b7c1a2cfbc03fbca9ec0e31d0fbed9f67b4211e3d52f9e35e50208a4"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_1_2/receiving/original_narrow_tube_1_2/anchors.json",
+          "sha256": "8e4cf055bf06188bbf1daa5dca65bd61379671b2ffa71511549f27bf710fa995"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_1_2/receiving/original_narrow_tube_1_2/phases.json",
+          "sha256": "eccd8b23dddd1df5a7f7af1ff085581e5b09908065ef9e19e4d348f443a91d7a"
+        }
+      },
+      "topology": {
+        "complete": true,
+        "n_components": 1,
+        "n_boundary_patches": 2,
+        "origin_state": "free"
+      },
+      "volume": {
+        "lower": [
+          "0",
+          "1"
+        ],
+        "upper": [
+          "6837102936632438928635571155971563018418612823693483",
+          "8979466059761067529443439612208842872766049544044544"
+        ],
+        "unit": "nm**3",
+        "encoding": "rational-exact/1",
+        "precision_status": "not_requested",
+        "per_region_status": "not_computed",
+        "scope": "Valid probe-center volume enclosure in the original finite center hull; nonempty requested per-region precision remains uncomputed."
+      },
+      "anchor_pair_connected": true,
+      "path_points": 28,
+      "resources": {
+        "wall_seconds": 123.48346749995835,
+        "cpu_seconds": 114.327342,
+        "peak_rss_kib_linux": 36020,
+        "cpu_count": 1,
+        "address_space_limit_bytes": 2147483648,
+        "scope": "Measured saved replay or certified-geometry reprobe/target checks/queries as identified by certificate_origin; excludes the original geometry construction and preserves earlier attempt costs separately."
+      },
+      "phases": {
+        "model_receiving": {
+          "wall_seconds": 0.47173790191300213,
+          "cpu_seconds": 0.470548546
+        },
+        "certified_geometry_reprobe": {
+          "wall_seconds": 48.769082462997176,
+          "cpu_seconds": 44.446066548000005
+        },
+        "saved_reading": {
+          "wall_seconds": 0.4881093460135162,
+          "cpu_seconds": 0.4421437349999948
+        },
+        "verification": {
+          "wall_seconds": 38.24488736502826,
+          "cpu_seconds": 34.49829996100001
+        },
+        "anchor_queries": {
+          "wall_seconds": 35.31174243800342,
+          "cpu_seconds": 34.31624007799999
+        }
+      }
+    },
+    {
+      "probe": {
+        "requested": {
+          "value": 1.4,
+          "unit": "angstrom"
+        },
+        "model": {
+          "value": [
+            "5044031582654955",
+            "36028797018963968"
+          ],
+          "unit": "nm",
+          "encoding": "rational-exact/1"
+        }
+      },
+      "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+      "source_revision": "92679fc2d97c3d72108f35c79fc1a0c06c3cd471",
+      "certificate_sha256": "571c58a6243f8339211a92afe3153e7a3c2944617050c3032408232c595ed8c7",
+      "certificate_origin": {
+        "route": "saved_certificate",
+        "path": "devguide/evidence/reference_validator_power_cells_v2/receiving/original_narrow_tube_1_4/certificate.json",
+        "sha256": "21564404d3b16cf659202040982e9300d10e6b002d5aab157839f05d552311e2",
+        "producer_revision": "fd3eeb7e6a5df99ad1781f63c090355fe497eaf1"
+      },
+      "sources": {
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_power_cells_v3/receiving/receipt.json",
+          "sha256": "1fa96c5320a66c01e7e6832a3ab446be4665d8bbce28a2131e64129819d06ee9"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_power_cells_v3/execution.json",
+          "sha256": "2be43616463ff66e6296801fbdb413058b4b2b23f36731a064c28e20468d872f"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/model.json",
+          "sha256": "1a86eb52531c99911a4b1ea5d58ea4bf9a4914bc65f362089fe8930f1bfa5530"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/certificate.json",
+          "sha256": "21564404d3b16cf659202040982e9300d10e6b002d5aab157839f05d552311e2"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/verification.json",
+          "sha256": "3ab368b34436bbceacaf3ac0412b540ce0655f4dc6bdd6c58eaab298382e3e97"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/anchors.json",
+          "sha256": "15660510f8fa54398b88e932a6d23ebe19affd2164fe115f35c1f84fc9bd8368"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/phases.json",
+          "sha256": "80b6241655ca0eb422d9e03f14e816017a555086ba29c929870ec2774c39543a"
+        }
+      },
+      "topology": {
+        "complete": true,
+        "n_components": 1,
+        "n_boundary_patches": 2,
+        "origin_state": "blocked"
+      },
+      "volume": {
+        "lower": [
+          "0",
+          "1"
+        ],
+        "upper": [
+          "6837102936632438928635571155971563018418612823693483",
+          "8979466059761067529443439612208842872766049544044544"
+        ],
+        "unit": "nm**3",
+        "encoding": "rational-exact/1",
+        "precision_status": "not_requested",
+        "per_region_status": "not_computed",
+        "scope": "Valid probe-center volume enclosure in the original finite center hull; nonempty requested per-region precision remains uncomputed."
+      },
+      "anchor_pair_connected": true,
+      "path_points": 28,
+      "resources": {
+        "wall_seconds": 68.68299109407235,
+        "cpu_seconds": 66.49657,
+        "peak_rss_kib_linux": 34144,
+        "cpu_count": 1,
+        "address_space_limit_bytes": 2147483648,
+        "scope": "Measured saved replay or certified-geometry reprobe/target checks/queries as identified by certificate_origin; excludes the original geometry construction and preserves earlier attempt costs separately."
+      },
+      "phases": {
+        "model_receiving": {
+          "wall_seconds": 0.5421133929630741,
+          "cpu_seconds": 0.541598585
+        },
+        "saved_certificate_reading": {
+          "wall_seconds": 0.050398508086800575,
+          "cpu_seconds": 0.04997611999999996
+        },
+        "saved_reading": {
+          "wall_seconds": 0.44182854099199176,
+          "cpu_seconds": 0.4417762999999999
+        },
+        "verification": {
+          "wall_seconds": 34.877910177921876,
+          "cpu_seconds": 32.832974812
+        },
+        "anchor_queries": {
+          "wall_seconds": 32.57722634705715,
+          "cpu_seconds": 32.477586695999996
+        }
+      }
+    },
+    {
+      "probe": {
+        "requested": {
+          "value": 2.5,
+          "unit": "angstrom"
+        },
+        "model": {
+          "value": [
+            "1",
+            "4"
+          ],
+          "unit": "nm",
+          "encoding": "rational-exact/1"
+        }
+      },
+      "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+      "source_revision": "d73477c534c9a23f89d57bced6757e06d73581bc",
+      "certificate_sha256": "48b11bcfbdd05d6a9e5ecd05f2fb35015066e673233c698bd7996d2ace58792b",
+      "certificate_origin": {
+        "route": "reprobed_geometry",
+        "geometry_producer_revision": "fd3eeb7e6a5df99ad1781f63c090355fe497eaf1",
+        "source_model_path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/model.json",
+        "source_model_file_sha256": "1a86eb52531c99911a4b1ea5d58ea4bf9a4914bc65f362089fe8930f1bfa5530",
+        "source_model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+        "source_certificate_path": "devguide/evidence/reference_validator_power_cells_v2/receiving/original_narrow_tube_1_4/certificate.json",
+        "source_certificate_file_sha256": "21564404d3b16cf659202040982e9300d10e6b002d5aab157839f05d552311e2"
+      },
+      "sources": {
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_2_5/receiving/receipt.json",
+          "sha256": "786d831f4f92fcaa6adbfac73bf371aece9c0e3c82fe74879f8d4238bb111da9"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_2_5/execution.json",
+          "sha256": "877d867d89976424c6dcb4fa2881c42adb1e0d1eac757f7db6fcd019c0cf686d"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_2_5/receiving/original_narrow_tube_2_5/model.json",
+          "sha256": "297774182804e0915cc6be6d264fffe74c4f79c7488b366ea04a41c4edd5eb8c"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_2_5/receiving/original_narrow_tube_2_5/certificate.json",
+          "sha256": "d7103a79dca47f75fb2daf7a1e71e4028dd75424929febabdf8abd7fac876566"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_2_5/receiving/original_narrow_tube_2_5/verification.json",
+          "sha256": "6b3c712bd88762d4b46573eb908cfac0ead36871eeaeb77deac310ee2d96fad7"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_2_5/receiving/original_narrow_tube_2_5/anchors.json",
+          "sha256": "487972a668f68428e65517e8482afd1c1384b33bdf79e85fe80c2c79c42355a4"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_power_cells_v4/probe_2_5/receiving/original_narrow_tube_2_5/phases.json",
+          "sha256": "700d5471950b992e884e5a99ae384d22b44525fcf53fad14012bb7463f136dea"
+        }
+      },
+      "topology": {
+        "complete": true,
+        "n_components": 0,
+        "n_boundary_patches": 0,
+        "origin_state": "blocked"
+      },
+      "volume": {
+        "lower": [
+          "0",
+          "1"
+        ],
+        "upper": [
+          "0",
+          "1"
+        ],
+        "unit": "nm**3",
+        "encoding": "rational-exact/1",
+        "precision_status": "not_requested",
+        "per_region_status": "not_computed",
+        "scope": "Valid probe-center volume enclosure in the original finite center hull; nonempty requested per-region precision remains uncomputed."
+      },
+      "anchor_pair_connected": null,
+      "path_points": 0,
+      "resources": {
+        "wall_seconds": 79.87853678897955,
+        "cpu_seconds": 79.781536,
+        "peak_rss_kib_linux": 34668,
+        "cpu_count": 1,
+        "address_space_limit_bytes": 2147483648,
+        "scope": "Measured saved replay or certified-geometry reprobe/target checks/queries as identified by certificate_origin; excludes the original geometry construction and preserves earlier attempt costs separately."
+      },
+      "phases": {
+        "model_receiving": {
+          "wall_seconds": 0.444226106046699,
+          "cpu_seconds": 0.443827543
+        },
+        "certified_geometry_reprobe": {
+          "wall_seconds": 33.899264310952276,
+          "cpu_seconds": 33.874724467
+        },
+        "saved_reading": {
+          "wall_seconds": 0.44495045801158994,
+          "cpu_seconds": 0.4447486560000016
+        },
+        "verification": {
+          "wall_seconds": 22.46160746004898,
+          "cpu_seconds": 22.445864844999996
+        },
+        "anchor_queries": {
+          "wall_seconds": 22.43353059492074,
+          "cpu_seconds": 22.417372664
+        }
+      }
+    }
+  ],
+  "new_v4_totals": {
+    "profile_count": 2,
+    "wall_seconds": 203.3620042889379,
+    "cpu_seconds": 194.108878,
+    "maximum_peak_rss_kib_linux": 36020,
+    "scope": "Separate sequential original 1.2/2.5 A workers only; the earlier 1.4 A replay and interrupted construction/query attempts retain their own costs."
+  }
+}

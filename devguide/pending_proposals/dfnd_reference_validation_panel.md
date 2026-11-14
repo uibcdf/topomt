@@ -15,6 +15,29 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## All three original narrow probes received — 2026-11-14
+
+Source `d73477c` completes the remaining 1.2/2.5 Å Models, with original source
+proof checking, exact equality of all power inequalities and independently
+recomputed target occupancy/whole-edge/region/boundary results. It preserves
+the previous 1.4 Å proof and receiving. The family now has **1/1/0 complete
+regions and 2/2/0 free hull patches** at 1.2/1.4/2.5 Å. Positive interior-anchor
+paths are checked continuously against every atom; the negative proof gives
+exact zero probe-center volume in the finite hull.
+
+The [family summary](../evidence/reference_validator_power_cells_v4/family_summary.json)
+binds every input/proof/query/resource record and distinguishes reprobe from
+the earlier saved reading or original cell construction. Two new sequential
+one-CPU/2 GiB workers take 203.362 wall / 194.109 CPU seconds in total, maximum
+RSS 36,020 KiB, without resource pressure or a stop. All old 355 scientific
+artifacts retain their bytes. Native behavior is unchanged, so #181/#180/#184/
+#188 and the comparative finding lifecycle keep their scopes/dispositions.
+
+Six original profiles now have complete topology, with thirteen still to
+receive. Nonempty per-region precision and P5/P6 remain incomplete under #76;
+no issue closure or current DFND/comparator advantage is inferred. The old
+1.4 Å stages below remain their own historical source evidence.
+
 ## Narrow-tube complete topology and receiving continuation — 2026-11-14
 
 Source `fd3eeb7` constructs and independently verifies the original 81-atom

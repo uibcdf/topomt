@@ -13,8 +13,10 @@ query-run results and resource measurements, without retroactive qualification.
 The initial narrow-tube attempt of the new route remains historical. Its later
 `fd3eeb7` complete proof and `92679fc` saved receiving establish one region/two
 free hull patches for the original narrow 1.4 Å Model. The same construction
-now has complete topology for four of the nineteen original profiles; fifteen
-await its receiving. Other original cases and per-region precision retain
+then has complete topology for four original profiles. Later `d73477c` receiving
+completes the original narrow 1.2/2.5 Å probes with exact unchanged cell geometry
+and independently recomputed target predicates. Six of nineteen profiles now
+have complete topology; thirteen await this route's receiving. Other original cases and per-region precision retain
 their later gates. The measured table below remains the original query run.
 
 ## Actual delivery
