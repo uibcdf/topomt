@@ -218,6 +218,8 @@ def verify(
         extra = (
             {'claim', 'atom_id'} if certificate.get('claim') == 'blocked' else {'claim'}
         )
+    elif kind == 'power_cell_topology':
+        extra = {'construction', 'cells', 'nodes', 'components', 'boundary_components'}
     else:
         raise ValueError('Unsupported certificate kind')
     cert = _record(certificate, common | extra)
@@ -275,6 +277,20 @@ def verify(
             (Path(__file__).parents[1] / name).read_bytes()
         ).hexdigest()
         result.update(check(model, cert))
+    elif kind == 'power_cell_topology':
+        from .power_cells import check as check_power_cells
+
+        for name in (
+            'power_contracts.py',
+            'verify/power_cells.py',
+            'verify/polytope.py',
+            'hull_model.py',
+            'contracts.py',
+        ):
+            result['verifier_files_sha256'][name] = hashlib.sha256(
+                (Path(__file__).parents[1] / name).read_bytes()
+            ).hexdigest()
+        result.update(check_power_cells(model, cert))
     elif kind == 'convex_domain':
         result.update(_convex_domain(model, cert))
     elif kind == 'partition':

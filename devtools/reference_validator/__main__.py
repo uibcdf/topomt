@@ -34,6 +34,9 @@ def main() -> int:
     topology = commands.add_parser('box-topology')
     topology.add_argument('model', type=Path)
     topology.add_argument('output', type=Path)
+    power_topology = commands.add_parser('power-topology')
+    power_topology.add_argument('model', type=Path)
+    power_topology.add_argument('output', type=Path)
     domain_proof = commands.add_parser('domain-proof')
     domain_proof.add_argument('model', type=Path)
     domain_proof.add_argument('output', type=Path)
@@ -200,6 +203,10 @@ def main() -> int:
                 from .box_topology import single_ball_box
 
                 certificate = single_ball_box(model)
+            elif args.command == 'power-topology':
+                from .power_cells import topology_certificate
+
+                certificate = topology_certificate(model)
             else:
                 from .producer import partition
 

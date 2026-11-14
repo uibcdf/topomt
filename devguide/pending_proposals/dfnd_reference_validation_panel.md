@@ -15,6 +15,20 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Complete multi-ball topology construction — 2026-11-14 UTC
+
+The [power-cell construction](../DFND/reference_validator_power_cell_construction.md)
+now implements exact complete free regions, finite-domain boundary patches,
+recoverable supports and anchor membership/path/separation. The independent
+checker verifies exhaustive supporting polytopes, all-atom free vertices/whole
+edges and global incidence. Source tests and the frozen twenty-profile protocol
+precede retained committed-source receiving; the
+[validator checkpoint](../DFND/reference_validator_checkpoint.md) owns the actual
+qualification record. Nonempty clipped/per-region precision and full P5 remain
+open, so #76 remains partial. Native #181/#180/#184/#188 retain their dispositions.
+The complementary all-atom tetrahedral grid is documented as proposed work
+under this owner, with explicit coverage obligations, not an implemented engine.
+
 ## Measured current validator on six systems / nineteen probes — 2026-11-13 UTC
 
 Producer `2b21cb2` completes the maintainer-requested current-validator execution

@@ -1,8 +1,9 @@
 # Exact reference-validator foundation
 
 Developer tools under TopoMT #76, first consumer #181. This is a bounded P0
-foundation with scoped P1 region, precision and hull-proof routes, not a supported public
-detector or a general multi-ball region enumerator. The [implementation plan](../../devguide/DFND/physical_reference_validator_implementation.md)
+foundation with exact multi-ball region/boundary construction, scoped volume
+precision and hull-proof routes. It is not a supported public detector or a
+complete per-region precision implementation. The [implementation plan](../../devguide/DFND/physical_reference_validator_implementation.md)
 retains the remaining scientific gates.
 
 The model freezes rational nm values, source atom/frame IDs, input SHA-256,
@@ -31,11 +32,49 @@ the upper bound. Those bounds do not imply requested numerical precision.
 In the subdivision route, only complete exclusion and completely free convex
 domains receive proved component counts (zero/one). A blocked point does not exclude its carrier.
 Mixed partitions and positive paths do not acquire a general component count,
-enclosure, aperture inventory or morphological label. General steric geometry
-completion, clipped/per-region high precision and production
+enclosure, aperture inventory or morphological label. The separate power-cell
+route below supplies complete regions/boundary incidence. Clipped/per-region high precision and production
 attribution/API admission remain pending. Run/checkpoint records and same-kernel
 resumption are now implemented within the admitted partition envelope. No
 original external scientific kernel is used by this rational developer route.
+
+## Exact multi-ball regions and boundary patches
+
+```bash
+python -m devtools.reference_validator power-topology MODEL.json CERTIFICATE.json
+python -m devtools.reference_validator verify MODEL.json CERTIFICATE.json
+```
+
+The fixed-probe power partition clips **every** atomic cell by the original
+convex domain. A convex-cap/skeleton completeness argument recovers all strict
+free regions, their free domain-boundary patches and the incidence between them.
+The independent checker reconstructs the complete polytopes and edges, checks
+every point/whole segment against all source atoms and reassembles the graph.
+Empty, identical and lower-dimensional cells are retained. Exact contact and
+sub-binary64 rational gaps use no geometric epsilon or size cutoff.
+
+`verify.power_cells.locate(model, certificate, point_nm)` assigns an exact
+anchor to a checked region/patch. `path_between(model, certificate, start_nm,
+end_nm)` supplies either a continuous checked path or separation by complete
+region membership. Supports designate strict free subsets of cells/faces,
+classified through checked supporting-root paths; they never declare a whole
+convex cell or face free. IDs are model/certificate-scoped.
+
+See the [derivation, trusted base and scope](../../devguide/DFND/reference_validator_power_cell_construction.md).
+The default work envelope admits at most 128 atoms, 48 supporting planes per
+cell, 128 vertices per cell, 8192 total vertices and 32768 total edges. Exceeding
+a budget fails without a physical answer. This is a developer Python/Fraction
+construction, with no native Rust or public API admission. Nonempty per-region
+volumes and requested precision remain uncomputed. Boundary patches are geometric
+free subsets of the declared finite domain, not automatically biological Mouths.
+
+Capture the [frozen 20-profile protocol](../../devguide/evidence/reference_validator_power_cells_v1/protocol.json)
+with `python -m devtools.reference_validator.capture_power_cells PROTOCOL.json
+NEW_DIRECTORY`, one CPU affinity, finite CPU/address-space limits and an external
+wall deadline. The JSON freeze follows the test-first unit prototypes and
+precedes retained receiving. Seventeen analytic controls and three exact saved
+tetrahedron models are distinct from new molecular/quantity receiving. Earlier
+panel evidence retains its original source and results.
 
 From the checkout, under external CPU/memory/time limits:
 

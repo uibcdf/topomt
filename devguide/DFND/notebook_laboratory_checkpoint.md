@@ -1,5 +1,18 @@
 # DFND notebook laboratory checkpoint
 
+## Exact multi-ball reference construction — 2026-11-14 UTC
+
+The [power-cell reference](reference_validator_power_cell_construction.md)
+implements complete free-region and finite-domain boundary-patch enumeration,
+with all-atom independent checking, recoverable supports and anchor path/
+separation proofs. The [current validator checkpoint](reference_validator_checkpoint.md)
+separates source tests, the frozen small-control protocol and actual retained
+receiving. This is a developer reference route; P1/P4 per-region precision,
+full P5 and native #181 remain open. The maintainer's complementary tetrahedral
+grid proposal is recorded with its all-atom/whole-link/coverage obligations;
+it has not been implemented. Earlier measured panel bytes and results remain
+historical at their original sources, without retroactive qualification.
+
 ## Validator observations/resources on all six systems — 2026-11-13 UTC
 
 The [public BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md)

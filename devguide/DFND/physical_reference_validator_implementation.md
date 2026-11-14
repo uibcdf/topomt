@@ -18,14 +18,13 @@ files without changing their bytes. It is an inventory, not execution of the
 new validator. The [first implemented P0 checkpoint](reference_validator_checkpoint.md)
 now delivers exact model/primitive checking, a bounded partition pilot and ten
 retained tetrahedron proofs. The bounded P0 input/proof/run/checkpoint contracts
-and checked resume are now source-delivered; P1's geometry construction is
-unselected. The [one-ball box feasibility tranche](reference_validator_p1_feasibility.md)
+and checked resume are now source-delivered. The [one-ball box feasibility tranche](reference_validator_p1_feasibility.md)
 now proves nontrivial exhaustive region inventories on its admitted analytic
 scope, including exact throat closure. It does not select the general multi-ball
 construction or pass P1's precision gate. The checkpoint states the remaining
 scientific gates explicitly. The [analytic precision tranche](reference_validator_precision_feasibility.md)
 now passes the frozen k=8/16/24/32 total-volume ladder on contained singleton/pair
-clusters. General construction and clipped/per-region precision remain unqualified.
+clusters. Clipped/per-region precision remains unqualified.
 The [hull domain route](reference_validator_hull_checkpoint.md) now proves exact
 center-hull identity and closed box intersections on retained small controls.
 All six original center hulls now have independently checked saved receiving
@@ -42,6 +41,16 @@ wall/CPU/RSS and independent saved proof checks. That coverage does not supply
 the still-missing general topology/precision: only the fresh four-center
 tetrahedral 1.7 Å partition has a complete global count in this run. P5 retains
 its full scientific acceptance, beyond execution of finite candidate queries.
+
+The subsequent [exact multi-ball construction](reference_validator_power_cell_construction.md)
+selects a clipped power-cell partition and a convex-cap/skeleton completeness
+argument for P1's **topology portion**. It source-delivers complete free regions,
+free domain-boundary patches, their incidence and anchor path/separation checks
+on admitted bounded convex domains. Source tests and the frozen small receiving
+protocol precede its retained receiving; use the current checkpoint for actual
+qualification. Nonempty per-region integration/precision and the complete
+nineteen-profile P5 gate remain pending. Earlier dated runs above do not acquire
+these later capabilities retroactively.
 
 ## Scope and acceptance of the first complete validator
 
@@ -299,8 +308,13 @@ Current bounded evidence: the [one-ball box tranche](reference_validator_p1_feas
 implements a complete finite monotone-sector cover and independently checked
 incidences for the decisive corner/throat fixtures. Its retained thirteen controls
 do not qualify additional obstacles, general clipping or high-precision volume.
-General candidate selection and clipped/region-assigned precision remain open
-under #76. The [analytic integration prototype](reference_validator_precision_feasibility.md)
+This earlier analytic route is followed by the selected
+[clipped power-cell construction](reference_validator_power_cell_construction.md):
+a finite polytopal partition with exact all-atom exclusion, recoverable complete
+regions/patches and an independent supporting-polytope/incidence checker. The
+document supplies its completeness derivation, arithmetic assumptions,
+degeneracies, work envelope and selected control protocol. General clipped/
+region-assigned precision remains open under #76. The [analytic integration prototype](reference_validator_precision_feasibility.md)
 now supplies checked requests, bounds and actual success/budget-stop evidence
 for a separate contained-ball cluster scope. It does not pass the complete P1 gate.
 
@@ -322,7 +336,8 @@ supported production export.
 | `devtools/reference_validator/box_topology.py`, `verify/box_topology.py` | Implemented scoped one-ball/axis-box completeness construction and its standalone sector/incidence checker. This is P1 control evidence, not the selected general engine. |
 | `analytic_volume.py`, `volume_request.py`, `verify/analytic_volume.py`, `verify/_interval.py` under the same developer directory | Implemented contained singleton/pair cluster total-volume proof, explicit precision requests and declared trusted rational interval/constants. General clipping and region assignment remain pending. |
 | `devtools/reference_validator/compare.py` | Mapped occupancy/connectivity comparisons; keeps morphology/count semantics distinct. |
-| `devtools/reference_validator/__main__.py` | Implemented `freeze-tetrahedron`, `produce`, `box-topology`, `volume`, `verify`, `start`, `resume`, `verify-run`, `freeze-hull-source`, `hull`, `clip-hull`, `verify-hull`, `freeze-hull-model`, `domain-proof`; native comparison remains planned. |
+| `devtools/reference_validator/power_cells.py`, `verify/power_cells.py` | Exact complete multi-ball region/boundary construction and independent clipped-polytope/skeleton checker; anchor membership, continuous paths and complete separation. No nonempty-region integration yet. |
+| `devtools/reference_validator/__main__.py` | Implemented `freeze-tetrahedron`, `produce`, `box-topology`, `power-topology`, `volume`, `verify`, `start`, `resume`, `verify-run`, `freeze-hull-source`, `hull`, `clip-hull`, `verify-hull`, `freeze-hull-model`, `domain-proof`; native comparison remains planned. |
 | `devtools/reference_validator/native/` | Optional Rust crate/backend after P1, with exact arithmetic strategy and a bounded standalone process interface. |
 | `tests/test_reference_validator_*.py` | Model, exact arithmetic, certificate rejection, topology, precision, receiving and resource/resume controls. |
 
@@ -538,10 +553,13 @@ arithmetic precision and budgets must remain explicit and bounded.
 ## Immediate implementation sequence and definition of progress
 
 The bounded P0 model/proof and operational-record tranches are source-delivered,
-including tests, frozen protocols and retained runs. P1 is next: use the
-corner/throat fixtures and small real frozen controls to choose a complete
-geometry construction before expanding a native engine. Delivery of resumable
-volume enclosures does not pass that scientific geometry gate.
+including tests, frozen protocols and retained runs. The power-cell construction
+now supplies the topology architecture and its first bounded controls. Continue
+its retained original-source qualification and P1/P4 region-assigned integration
+before expanding a native engine. Delivery of resumable volume enclosures does
+not pass those remaining scientific gates. The maintainer's complementary
+tetrahedral all-atom grid proposal is documented in the construction record;
+sampling alone is not a complete topology certificate.
 
 Use scoped test-first changes with repository Ruff/format and applicable local
 type checks; run selected tests under resource limits. Commit and push under

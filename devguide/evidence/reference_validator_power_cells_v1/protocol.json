@@ -1,0 +1,4627 @@
+{
+  "schema": "topomt.reference-validator.power-cell-pilot/1",
+  "owner": "uibcdf/topomt#76",
+  "date": "2026-11-13",
+  "length_unit": "nm",
+  "contact_policy": "strict",
+  "scope": "17 analytic controls plus three original tetrahedron saved physical models; complete regions/boundary patches, no nonempty per-region volume precision.",
+  "freeze_timing": "Analytic definitions and expected counts were established in test-first controls before the implementation; this JSON protocol is frozen after unit prototypes and before committed-source retained receiving. It is not a blind pre-prototype experiment.",
+  "cases": [
+    {
+      "name": "no_atoms",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "05a1420ad84d256f130ea4958a85f9cf0f1037780ad848630e5617c3e9e67296",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-2",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "2",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ]
+          ]
+        },
+        "atoms": []
+      },
+      "expected_components": 1,
+      "expected_boundary_patches": 1,
+      "anchors": {
+        "origin": [
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "other": [
+          [
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "1"
+          ],
+          [
+            "1",
+            "1"
+          ]
+        ]
+      },
+      "pairs": [
+        [
+          "origin",
+          "other"
+        ]
+      ],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "barriers_before",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "9bd5e31ce33f036605c44a7182cac59a8c783793450805544bfd3d1684f784fd",
+        "frame_index": 0,
+        "probe": [
+          "1208925819614629174706175",
+          "1208925819614629174706176"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-20",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "20",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "expected_boundary_patches": 1,
+      "anchors": {
+        "left": [
+          [
+            "-15",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "middle": [
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "also_left": [
+          [
+            "-14",
+            "1"
+          ],
+          [
+            "1",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      },
+      "pairs": [
+        [
+          "left",
+          "middle"
+        ],
+        [
+          "left",
+          "also_left"
+        ]
+      ],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "barriers_contact",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "9bd5e31ce33f036605c44a7182cac59a8c783793450805544bfd3d1684f784fd",
+        "frame_index": 0,
+        "probe": [
+          "1",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-20",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "20",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 3,
+      "expected_boundary_patches": 3,
+      "anchors": {
+        "left": [
+          [
+            "-15",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "middle": [
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "also_left": [
+          [
+            "-14",
+            "1"
+          ],
+          [
+            "1",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      },
+      "pairs": [
+        [
+          "left",
+          "middle"
+        ],
+        [
+          "left",
+          "also_left"
+        ]
+      ],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "barriers_after",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "9bd5e31ce33f036605c44a7182cac59a8c783793450805544bfd3d1684f784fd",
+        "frame_index": 0,
+        "probe": [
+          "1208925819614629174706177",
+          "1208925819614629174706176"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-20",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "20",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 3,
+      "expected_boundary_patches": 3,
+      "anchors": {
+        "left": [
+          [
+            "-15",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "middle": [
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "also_left": [
+          [
+            "-14",
+            "1"
+          ],
+          [
+            "1",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      },
+      "pairs": [
+        [
+          "left",
+          "middle"
+        ],
+        [
+          "left",
+          "also_left"
+        ]
+      ],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "unequal_barriers",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "b41736ccb5291745de0cc25c8ec1ef6531b37548833caed1af578dfb80f30123",
+        "frame_index": 0,
+        "probe": [
+          "1",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-20",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "20",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 3,
+      "expected_boundary_patches": 3,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "coincident_dominated",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "725c1dec8d5f966da4d84ef53d8aac173fdb6cb96e2fa716fcca03e42f837e43",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 0,
+      "expected_boundary_patches": 0,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "identical_cells",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "f35cdd0f46c853d4b729f16fc4916df6dd8bf5942fe679a42660c7a37376ac32",
+        "frame_index": 0,
+        "probe": [
+          "1",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-20",
+              "1"
+            ],
+            [
+              "-3",
+              "1"
+            ],
+            [
+              "-4",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "20",
+              "1"
+            ],
+            [
+              "3",
+              "1"
+            ],
+            [
+              "4",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-8",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 3,
+      "expected_boundary_patches": 3,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "plane_cell",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "48d8969aac9ea7d4bd371f2dc21a776ac6ac61f758ff40834ef78bc457eed1d4",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-10",
+              "1"
+            ],
+            [
+              "-10",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "10",
+              "1"
+            ],
+            [
+              "10",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "expected_boundary_patches": 1,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "line_cell",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "4fb4fb3ce16652fc0f69fc94c217637da406d5e77fe8636e744f64b9ad5e978b",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-10",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "10",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 4,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 2,
+      "expected_boundary_patches": 2,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "point_cell",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "3a86fc82f0e4b289dcd499e2beffaecbd1d8ce0c568baf489257f314a956d351",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-10",
+              "1"
+            ],
+            [
+              "-10",
+              "1"
+            ],
+            [
+              "-10",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "10",
+              "1"
+            ],
+            [
+              "10",
+              "1"
+            ],
+            [
+              "10",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 4,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "-3",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 5,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "3",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "1"
+            ]
+          },
+          {
+            "source_id": 6,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "4",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "expected_boundary_patches": 1,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "noncoincident_empty_cell",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "f03566b584b732c848e9708cd9ecf620b4766ac982f17fd31982fb042acf5890",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "box",
+          "lower": [
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ],
+            [
+              "-1",
+              "1"
+            ]
+          ],
+          "upper": [
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ],
+            [
+              "1",
+              "1"
+            ]
+          ]
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-3",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "1",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "radius": [
+              "10",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 0,
+      "expected_boundary_patches": 0,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "eight_corners_before",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "49adb477962775e047e5138735eab5bfef5ead6710e4a75fe0a1e6bbb1665d92",
+        "frame_index": 0,
+        "probe": [
+          "1208925819614629174706175",
+          "1208925819614629174706176"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 3
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 4
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 5
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 6
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 7
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "exact_rational_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "49adb477962775e047e5138735eab5bfef5ead6710e4a75fe0a1e6bbb1665d92"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              4
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-1",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "-1",
+                  "0",
+                  "2"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  4
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "-1",
+                  "2"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  4
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "2"
+                ],
+                "source_ids": [
+                  1,
+                  3,
+                  5
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "1",
+                  "0",
+                  "2"
+                ],
+                "source_ids": [
+                  2,
+                  3,
+                  6
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                "source_ids": [
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "063ed36ca4be92627c56c72d0f3a4d5b52104a30dfed8137638650446d53cc26",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 4,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 5,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 6,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 7,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "expected_boundary_patches": 0,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "eight_corners_contact",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "49adb477962775e047e5138735eab5bfef5ead6710e4a75fe0a1e6bbb1665d92",
+        "frame_index": 0,
+        "probe": [
+          "1",
+          "1"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 3
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 4
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 5
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 6
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 7
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "exact_rational_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "49adb477962775e047e5138735eab5bfef5ead6710e4a75fe0a1e6bbb1665d92"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              4
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-1",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "-1",
+                  "0",
+                  "2"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  4
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "-1",
+                  "2"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  4
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "2"
+                ],
+                "source_ids": [
+                  1,
+                  3,
+                  5
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "1",
+                  "0",
+                  "2"
+                ],
+                "source_ids": [
+                  2,
+                  3,
+                  6
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                "source_ids": [
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "063ed36ca4be92627c56c72d0f3a4d5b52104a30dfed8137638650446d53cc26",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 4,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 5,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 6,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 7,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 0,
+      "expected_boundary_patches": 0,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "eight_corners_after",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "49adb477962775e047e5138735eab5bfef5ead6710e4a75fe0a1e6bbb1665d92",
+        "frame_index": 0,
+        "probe": [
+          "1208925819614629174706177",
+          "1208925819614629174706176"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 3
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 4
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 5
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "-2",
+                    "1"
+                  ]
+                ],
+                "source_id": 6
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ],
+                  [
+                    "2",
+                    "1"
+                  ]
+                ],
+                "source_id": 7
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "exact_rational_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "49adb477962775e047e5138735eab5bfef5ead6710e4a75fe0a1e6bbb1665d92"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              4
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-1",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "-1",
+                  "0",
+                  "2"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  4
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "-1",
+                  "2"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  4
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "0",
+                  "1",
+                  "2"
+                ],
+                "source_ids": [
+                  1,
+                  3,
+                  5
+                ]
+              },
+              {
+                "coefficients": [
+                  "0",
+                  "1",
+                  "0",
+                  "2"
+                ],
+                "source_ids": [
+                  2,
+                  3,
+                  6
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                "source_ids": [
+                  4,
+                  5,
+                  6
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "8"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "063ed36ca4be92627c56c72d0f3a4d5b52104a30dfed8137638650446d53cc26",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 4,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 5,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 6,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "-2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          },
+          {
+            "source_id": 7,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ],
+              [
+                "2",
+                "1"
+              ]
+            ],
+            "radius": [
+              "2",
+              "1"
+            ]
+          }
+        ]
+      },
+      "expected_components": 0,
+      "expected_boundary_patches": 0,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "tetra_four_patches",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "e3bbe3a1ee7d2f6aa3d6844c985b0aafdce37141373ec14f894e27e229409a75",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ]
+                ],
+                "source_id": 3
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "exact_rational_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "e3bbe3a1ee7d2f6aa3d6844c985b0aafdce37141373ec14f894e27e229409a75"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-1",
+                  "-1",
+                  "-1",
+                  "1"
+                ],
+                "source_ids": [
+                  1,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "-1",
+                  "1",
+                  "1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "-1",
+                  "1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "1",
+                  "-1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "c4a655c4bd09d80a05efcef2deca1b8d711b3a7a6684f6cbca8a1d48fd55d978",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "3",
+              "2"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "3",
+              "2"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "3",
+              "2"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "3",
+              "2"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "expected_boundary_patches": 4,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "tetra_enclosed",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "c8075f4d5d30bc03acd185befd619bbb81cd86388057f9424afa0337cca828e6",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ]
+                ],
+                "source_id": 3
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "exact_rational_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "c8075f4d5d30bc03acd185befd619bbb81cd86388057f9424afa0337cca828e6"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-1",
+                  "-1",
+                  "-1",
+                  "1"
+                ],
+                "source_ids": [
+                  1,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "-1",
+                  "1",
+                  "1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "-1",
+                  "1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "1",
+                  "-1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "a27d74c54b943ee858f97f5dd88f559d80007ce5e9ad41e58cf2929a96a61a03",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "3"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "3"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "3"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "5",
+              "3"
+            ]
+          }
+        ]
+      },
+      "expected_components": 1,
+      "expected_boundary_patches": 0,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "tetra_covered",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "exact_rational_nm",
+        "source_sha256": "7f2d0dd554f4c9506f8a17fec4a47de064210e8d8841b97aa0cafa5b273f4f3c",
+        "frame_index": 0,
+        "probe": [
+          "0",
+          "1"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "-1",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "1"
+                  ]
+                ],
+                "source_id": 3
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "exact_rational_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "7f2d0dd554f4c9506f8a17fec4a47de064210e8d8841b97aa0cafa5b273f4f3c"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-1",
+                  "-1",
+                  "-1",
+                  "1"
+                ],
+                "source_ids": [
+                  1,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "-1",
+                  "1",
+                  "1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "-1",
+                  "1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "1",
+                  "1",
+                  "-1",
+                  "1"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "a362ca30ac59c2cb393db64795df51f346820b3e9ed66e8263914d309ec3ee19",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "7",
+              "4"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "7",
+              "4"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "7",
+              "4"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "-1",
+                "1"
+              ],
+              [
+                "1",
+                "1"
+              ]
+            ],
+            "radius": [
+              "7",
+              "4"
+            ]
+          }
+        ]
+      },
+      "expected_components": 0,
+      "expected_boundary_patches": 0,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": "Analytic controls stated in tests and the completeness derivation before retained receiving."
+    },
+    {
+      "name": "original_tetra_1_2",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "received_binary64_nm",
+        "source_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+        "frame_index": 0,
+        "probe": [
+          "1080863910568919",
+          "9007199254740992"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 3
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "received_binary64_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-18014398509481984",
+                  "-18014398509481984",
+                  "-18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  1,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "-18014398509481984",
+                  "18014398509481984",
+                  "18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "18014398509481984",
+                  "-18014398509481984",
+                  "18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "18014398509481984",
+                  "18014398509481984",
+                  "-18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "3a082a828c1bd5a3e1a28e1d3ec1f022788a6055aa8b37c62186b7bd23865ac9",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          }
+        ]
+      },
+      "expected_components": null,
+      "expected_boundary_patches": null,
+      "anchors": {
+        "origin": [
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "face_0": [
+          [
+            "3375597386438659",
+            "54043195528445952"
+          ],
+          [
+            "3375597386438659",
+            "54043195528445952"
+          ],
+          [
+            "-3375597386438659",
+            "54043195528445952"
+          ]
+        ],
+        "face_1": [
+          [
+            "3375597386438659",
+            "54043195528445952"
+          ],
+          [
+            "-3375597386438659",
+            "54043195528445952"
+          ],
+          [
+            "3375597386438659",
+            "54043195528445952"
+          ]
+        ],
+        "face_2": [
+          [
+            "-3375597386438659",
+            "54043195528445952"
+          ],
+          [
+            "3375597386438659",
+            "54043195528445952"
+          ],
+          [
+            "3375597386438659",
+            "54043195528445952"
+          ]
+        ],
+        "face_3": [
+          [
+            "-3375597386438659",
+            "54043195528445952"
+          ],
+          [
+            "-3375597386438659",
+            "54043195528445952"
+          ],
+          [
+            "-3375597386438659",
+            "54043195528445952"
+          ]
+        ]
+      },
+      "pairs": [
+        [
+          "origin",
+          "face_0"
+        ],
+        [
+          "origin",
+          "face_1"
+        ],
+        [
+          "origin",
+          "face_2"
+        ],
+        [
+          "origin",
+          "face_3"
+        ]
+      ],
+      "reference_origin": {
+        "source_revision": "2b21cb2ee63093734ff71f1f70bd4ede7a53ebbb",
+        "archive": "docs/content/benchlab/synthetic/artifacts/reference_validator_panel_v1/receiving.zip",
+        "archive_sha256": "5d9aec25b9e190bca3fc27d28387bf5d9b20c246c3d04de083c12363d38f814f",
+        "member": "receiving/cases/regular_tetrahedron/profile_0/model.json",
+        "member_sha256": "22a8bb663ebfb1f0f9f39881b77462fd7a9502356e72c5fa627db6193bd392ec",
+        "scope": "Reuse the exact saved physical model; no fresh molecular/quantity receiving or native DFND execution."
+      }
+    },
+    {
+      "name": "original_tetra_1_4",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "received_binary64_nm",
+        "source_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+        "frame_index": 0,
+        "probe": [
+          "5044031582654955",
+          "36028797018963968"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 3
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "received_binary64_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-18014398509481984",
+                  "-18014398509481984",
+                  "-18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  1,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "-18014398509481984",
+                  "18014398509481984",
+                  "18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "18014398509481984",
+                  "-18014398509481984",
+                  "18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "18014398509481984",
+                  "18014398509481984",
+                  "-18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "3a082a828c1bd5a3e1a28e1d3ec1f022788a6055aa8b37c62186b7bd23865ac9",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          }
+        ]
+      },
+      "expected_components": null,
+      "expected_boundary_patches": null,
+      "anchors": {
+        "origin": [
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ]
+      },
+      "pairs": [],
+      "reference_origin": {
+        "source_revision": "2b21cb2ee63093734ff71f1f70bd4ede7a53ebbb",
+        "archive": "docs/content/benchlab/synthetic/artifacts/reference_validator_panel_v1/receiving.zip",
+        "archive_sha256": "5d9aec25b9e190bca3fc27d28387bf5d9b20c246c3d04de083c12363d38f814f",
+        "member": "receiving/cases/regular_tetrahedron/profile_1/model.json",
+        "member_sha256": "92b9ecf212840a5975aff92b47ad718ec29ff1629be09fbd73d2bee4da013174",
+        "scope": "Reuse the exact saved physical model; no fresh molecular/quantity receiving or native DFND execution."
+      }
+    },
+    {
+      "name": "original_tetra_1_7",
+      "model": {
+        "schema": "topomt.reference-validator.model/1",
+        "length_unit": "nm",
+        "contact_policy": "strict",
+        "interpretation": "received_binary64_nm",
+        "source_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3",
+        "frame_index": 0,
+        "probe": [
+          "3062447746611937",
+          "18014398509481984"
+        ],
+        "domain": {
+          "kind": "center_hull",
+          "source": {
+            "centers": [
+              {
+                "point": [
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 0
+              },
+              {
+                "point": [
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 1
+              },
+              {
+                "point": [
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 2
+              },
+              {
+                "point": [
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "-3375597386438659",
+                    "18014398509481984"
+                  ],
+                  [
+                    "3375597386438659",
+                    "18014398509481984"
+                  ]
+                ],
+                "source_id": 3
+              }
+            ],
+            "frame_index": 0,
+            "interpretation": "received_binary64_nm",
+            "length_unit": "nm",
+            "schema": "topomt.reference-validator.center-source/1",
+            "source_sha256": "8634f70afdaf21cb8388887f5f80ae73dc36ef4f043198a10b525a93ebde5ce3"
+          },
+          "certificate": {
+            "affine_witness": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "facets": [
+              {
+                "coefficients": [
+                  "-18014398509481984",
+                  "-18014398509481984",
+                  "-18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  1,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "-18014398509481984",
+                  "18014398509481984",
+                  "18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  2,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "18014398509481984",
+                  "-18014398509481984",
+                  "18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  3
+                ]
+              },
+              {
+                "coefficients": [
+                  "18014398509481984",
+                  "18014398509481984",
+                  "-18014398509481984",
+                  "3375597386438659"
+                ],
+                "source_ids": [
+                  0,
+                  1,
+                  2
+                ]
+              }
+            ],
+            "kind": "center_hull",
+            "normal_rank_witness": [
+              0,
+              1,
+              2
+            ],
+            "positive_weights": [
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ],
+              [
+                "1",
+                "4"
+              ]
+            ],
+            "schema": "topomt.reference-validator.hull-certificate/1",
+            "source_sha256": "3a082a828c1bd5a3e1a28e1d3ec1f022788a6055aa8b37c62186b7bd23865ac9",
+            "vertex_source_ids": [
+              0,
+              1,
+              2,
+              3
+            ]
+          }
+        },
+        "atoms": [
+          {
+            "source_id": 0,
+            "center": [
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 1,
+            "center": [
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 2,
+            "center": [
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          },
+          {
+            "source_id": 3,
+            "center": [
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "-3375597386438659",
+                "18014398509481984"
+              ],
+              [
+                "3375597386438659",
+                "18014398509481984"
+              ]
+            ],
+            "radius": [
+              "3062447746611937",
+              "18014398509481984"
+            ]
+          }
+        ]
+      },
+      "expected_components": 0,
+      "expected_boundary_patches": 0,
+      "anchors": {},
+      "pairs": [],
+      "reference_origin": {
+        "source_revision": "2b21cb2ee63093734ff71f1f70bd4ede7a53ebbb",
+        "archive": "docs/content/benchlab/synthetic/artifacts/reference_validator_panel_v1/receiving.zip",
+        "archive_sha256": "5d9aec25b9e190bca3fc27d28387bf5d9b20c246c3d04de083c12363d38f814f",
+        "member": "receiving/cases/regular_tetrahedron/profile_2/model.json",
+        "member_sha256": "ed18768a6a63e2006c1cf4d8ca0ab48579f379a32aed6f9c234817b07d93c6ea",
+        "scope": "Reuse the exact saved physical model; no fresh molecular/quantity receiving or native DFND execution."
+      }
+    }
+  ]
+}

@@ -8,7 +8,32 @@ Analytic precision feasibility: `580f1c016db48cc7041d9731ddc88501b87fd45a`.
 Center-hull equality and geometric clipping: `2b6985bfb8a3ee8a2b856060435a7c3b93fbab6b`.
 These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
-complete connected-region validator or a supported public TopoMT detector.
+complete topology-plus-precision validator or a supported public TopoMT detector.
+
+## Exact multi-ball topology continuation — 2026-11-14 UTC
+
+The [power-cell construction](reference_validator_power_cell_construction.md)
+source-delivers a complete clipped polytopal partition and exact strict-free
+region enumeration. Its independent checker re-enumerates cell vertices/edges,
+tests all original spheres and reconstructs global regions and free domain-
+boundary patches. Recoverable cell/face supports and anchor membership supply
+checked continuous paths or separation by complete region identity. Degenerate,
+identical and empty cells remain in the exhaustive source inventory.
+
+This selects the topology portion of P1, with the documented cap/skeleton proof
+and rational arithmetic as its explicit trusted base. A frozen twenty-profile
+protocol covers seventeen analytic controls and three reused exact original
+tetrahedron models. Test-first controls precede the JSON freeze; actual retained
+committed-source receiving follows separately. Nonempty region-assigned volume
+precision, all-nineteen-profile qualification, public P6 and native #181 remain
+open. No Rust engine or complementary tetrahedral-grid implementation is claimed.
+
+The source selection passes 275 validator/report/finding tests; adding the
+original six-case integrity guard is retained for the final selection. Ruff and
+format pass repository-wide; mypy passes all 32 validator modules. The process
+uses one CPU, a 2 GiB cap, 26.68 seconds and peak RSS 83,660 KiB. These are
+bounded source checks, not a full suite, installed package or support matrix.
+The subsequent receiving section will bind actual source/evidence identities.
 
 ## Measured six-case panel — 2026-11-13 UTC
 
@@ -345,9 +370,9 @@ The bounded P0 model/proof and operational run/checkpoint contracts above are
 source-delivered; their initial absence is superseded by the continuation.
 Center-hull geometry/clipping now has its separate checked developer route;
 full steric-domain primitive integration is now source-delivered above. The six
-original center-only hulls have retained receiving. P1 still needs the local/global
-geometry feasibility decision and a general exhaustive free-region
-construction. P4 needs general clipped/region-assigned precision and validated
+original center-only hulls have retained receiving. The power-cell continuation
+above supplies the topology construction; P1/P4 still need general clipped/
+region-assigned precision and validated
 integration; the earlier partition enclosures do not meet k=24, while the
 analytic route above passes it only for its separate total-volume scope.
 Full topology/precision qualification of all 19 profiles, complete apertures/attachments, biological
