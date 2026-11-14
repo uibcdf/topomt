@@ -33,7 +33,35 @@ original six-case integrity guard is retained for the final selection. Ruff and
 format pass repository-wide; mypy passes all 32 validator modules. The process
 uses one CPU, a 2 GiB cap, 26.68 seconds and peak RSS 83,660 KiB. These are
 bounded source checks, not a full suite, installed package or support matrix.
-The subsequent receiving section will bind actual source/evidence identities.
+The retained receiving below binds actual source/evidence identities.
+
+The [retained twenty-profile receiving](reference_validator_power_cell_construction.md#retained-committed-source-receiving--2026-11-14-utc)
+now runs at committed source `bb308baddc52098f73f1fe9e8b5a185dc7aa7c21`, with
+all saved files independently replayed. The original tetrahedron probes
+1.2/1.4/1.7 Å have respectively **1/1/0 complete regions and 4/0/0 free hull
+patches**. All seventeen analytic controls pass. The bounded process takes
+1.764 seconds, peak RSS 23,800 KiB, one CPU/thread and 2 GiB. This supersedes
+the former missing complete inventories only for these models at this source;
+it supplies no nonempty per-region precision or all-profile P5 qualification.
+
+The separately frozen narrow-tube 1.4 Å attempt ends with signal 9 after
+52.030 seconds under its hard 50 CPU-second ceiling (peak RSS 28,908 KiB),
+without a complete certificate. Its recorded disposition is unresolved, not
+empty or disconnected. Profiling and a justified sequential budget/construction
+order remain under #76; no native #181 fix or other case qualification follows.
+
+The final selection passes **281 tests**, including all saved twenty-profile
+checks, a fresh producer/scientific-library-free original-model replay, the
+historical narrow-stop guard and the original 355-file integrity check. The
+bounded test process takes 25.41 seconds, peak RSS 96,324 KiB, one CPU and a
+2 GiB cap. Repository Ruff/format, scoped mypy on 32 modules, report indexes
+and offline finding consistency pass. A complete one-worker Sphinx HTML build
+passes with zero warnings and notebook execution disabled (15.83 seconds,
+peak child RSS 291,596 KiB, 2 GiB cap); the new report section is inspected.
+The existing PlantUML launcher is selected explicitly from `topomt-dev`, with
+bounded Java settings; no shared environment is changed. Full suite, installed
+package, supported-minor/platform and public P6 qualification remain deferred
+under #16/#76. No remote CI/deployment or competitive performance is inferred.
 
 ## Measured six-case panel — 2026-11-13 UTC
 

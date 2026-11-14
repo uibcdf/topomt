@@ -5,6 +5,14 @@ now owns the executable work breakdown, module boundaries, certificate/test
 contracts, precision ladder and delivery gates. This document retains the
 critical scientific requirements and review history.
 
+Current implementation is partial, with its dated evidence in the
+[source checkpoint](reference_validator_checkpoint.md). The later
+[clipped power-cell construction](reference_validator_power_cell_construction.md)
+selects and implements complete multi-ball regions/boundary incidence; the
+first retained receiving qualifies analytic controls and the original
+tetrahedron. Region-assigned precision and wider qualification remain pending.
+The proposed complete-validator acceptance below retains those requirements.
+
 Critical design review: 2026-11-12. Owner:
 [#76](https://github.com/uibcdf/topomt/issues/76); first DFND consumer:
 [#181](https://github.com/uibcdf/topomt/issues/181).

@@ -1,0 +1,18 @@
+{
+  "schema": "topomt.reference-validator.power-cell-attempt-disposition/1",
+  "owner": "uibcdf/topomt#76",
+  "scope": "This exact historical bounded narrow-tube attempt only; not a timeless algorithm limitation or a physical absence claim.",
+  "protocol_sha256": "621e95d8ba8cb0b54c9a78eae432a3abb80ce59c4cd39cf7ee31927d29e569af",
+  "execution_sha256": "4b07c38938346d00cbdbdf9787c7f035f9d53adcc04f168faf0d74b9ac14322c",
+  "source_revision": "bb308baddc52098f73f1fe9e8b5a185dc7aa7c21",
+  "verification_status": "unresolved_execution_stop",
+  "topology_complete": false,
+  "n_components": null,
+  "n_boundary_patches": null,
+  "requested_precision_status": "not_computed",
+  "completed_certificate": false,
+  "observed_exit_code": -9,
+  "observation": "SIGKILL after 52.0304 wall seconds under a hard 50 CPU-second limit. This is consistent with the CPU ceiling; the signal alone is not independent diagnosis of its origin. No complete mathematical certificate or final receiving receipt was emitted.",
+  "measured_child_cpu_seconds": null,
+  "next_action": "Profile the exact construction and select a larger bounded sequential CPU budget or an exactly equivalent clipping order. Preserve all-source inequalities and independent checking; record fresh source/protocol/runtime identity. No native DFND change or second grid implementation follows from this stop."
+}

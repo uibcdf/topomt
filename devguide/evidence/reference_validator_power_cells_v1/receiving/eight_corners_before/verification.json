@@ -1,0 +1,140 @@
+{
+  "schema": "topomt.reference-validator.verification/1",
+  "verification_status": "accepted",
+  "kind": "power_cell_topology",
+  "model_sha256": "acfac2932f248e17ad7b3f6a92c272f8c5064d73cda0413d22659f1baa8db0db",
+  "certificate_sha256": "0f0a0dd8b1ffdb47d38f6700fe086bf597f05212173afb8360aa6ca910c219c0",
+  "trusted_arithmetic": "stdlib-fraction/1",
+  "topology_complete": true,
+  "n_components": 1,
+  "topology_status": "resolved",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+    "verify/__init__.py": "a257395666db9eadfb6868d146939b90d4b81cdb11da92d3db4148b0c1bf8e51",
+    "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+    "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+    "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+    "verify/polytope.py": "453f659169658211d590bdb32210c6d1706155c8bdc7a9ff0a056929d594be04",
+    "power_contracts.py": "3bac982773c16b298da25e4784f70f534e9e5707395f5ef5f264af371a021af4",
+    "verify/power_cells.py": "e3a30606a1a20e0c14fbf84e2d99ada76724e3eeac413654100aaeca79fe214b"
+  },
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "node_ids": [
+        0
+      ],
+      "representative": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "cell_supports": [
+        {
+          "atom_id": 0,
+          "local_free_vertex_ids": [
+            7
+          ]
+        },
+        {
+          "atom_id": 1,
+          "local_free_vertex_ids": [
+            6
+          ]
+        },
+        {
+          "atom_id": 2,
+          "local_free_vertex_ids": [
+            5
+          ]
+        },
+        {
+          "atom_id": 3,
+          "local_free_vertex_ids": [
+            4
+          ]
+        },
+        {
+          "atom_id": 4,
+          "local_free_vertex_ids": [
+            3
+          ]
+        },
+        {
+          "atom_id": 5,
+          "local_free_vertex_ids": [
+            2
+          ]
+        },
+        {
+          "atom_id": 6,
+          "local_free_vertex_ids": [
+            1
+          ]
+        },
+        {
+          "atom_id": 7,
+          "local_free_vertex_ids": [
+            0
+          ]
+        }
+      ],
+      "boundary_patch_ids": [],
+      "touches_domain_boundary": false
+    }
+  ],
+  "n_boundary_patches": 0,
+  "boundary_status": "resolved",
+  "boundary_patches": [],
+  "length_unit": "nm",
+  "nodes": [
+    [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ]
+  ],
+  "edges": [],
+  "support_meaning": "Strict free subsets of source power cells (or their declared domain faces) classified by their supporting-root vertex component; never entire convex cells or faces.",
+  "per_region_volume_status": "not_computed",
+  "volume_lower": [
+    "0",
+    "1"
+  ],
+  "volume_upper": [
+    "32",
+    "1"
+  ],
+  "volume_unit": "nm**3",
+  "volume_enclosure_status": "resolved",
+  "precision_status": "not_requested",
+  "construction": "power-skeleton-caps/1",
+  "power_limits": {
+    "max_atoms": 128,
+    "max_support_planes": 48,
+    "max_vertices_per_cell": 128,
+    "max_total_vertices": 8192,
+    "max_edges": 32768,
+    "max_clip_steps": 50000
+  }
+}

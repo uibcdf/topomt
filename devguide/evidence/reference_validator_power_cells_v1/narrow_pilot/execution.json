@@ -1,0 +1,45 @@
+{
+  "schema": "topomt.reference-validator.bounded-local-execution/1",
+  "recorded_at_utc": "2026-11-14T03:52:21.450789+00:00",
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "-m",
+    "devtools.reference_validator.capture_power_cells",
+    "/fast_data/home/liliana/repos@uibcdf/topomt/devguide/evidence/reference_validator_power_cells_v1/narrow_pilot/protocol.json",
+    "/fast_data/home/liliana/repos@uibcdf/topomt/devguide/evidence/reference_validator_power_cells_v1/narrow_pilot/receiving"
+  ],
+  "source_revision": "bb308baddc52098f73f1fe9e8b5a185dc7aa7c21",
+  "before": {
+    "memory_kib": {
+      "MemTotal": 63455508,
+      "MemAvailable": 53142724,
+      "SwapTotal": 8388604,
+      "SwapFree": 7938096
+    },
+    "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5831535\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5687889\n",
+    "loadavg": "1.73 2.04 1.88 1/1105 6"
+  },
+  "after": {
+    "memory_kib": {
+      "MemTotal": 63455508,
+      "MemAvailable": 51853936,
+      "SwapTotal": 8388604,
+      "SwapFree": 7938096
+    },
+    "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5831535\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5687889\n",
+    "loadavg": "4.80 2.78 2.14 10/1186 8"
+  },
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "cpu_limit_seconds": 50,
+  "wall_limit_seconds": 60,
+  "numerical_threads": 1,
+  "scheduler": "none; maintainer selected bounded local execution",
+  "elapsed_seconds": 52.030395606998354,
+  "child_peak_rss_kib_linux": 28908,
+  "exit_code": -9,
+  "stdout": "",
+  "stderr": ""
+}

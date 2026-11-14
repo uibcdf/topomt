@@ -9,8 +9,40 @@ future connected-region validator.
 The important result is the distinction between a verified local fact and a
 complete global answer. Points and supplied continuous paths are checked against
 every atomic ball. Only the tetrahedron at 1.7 Å receives a complete zero-region
-proof in this run. General component enumeration and per-region precision remain
-unavailable on the other profiles.
+proof in this run. General component enumeration and per-region precision are
+unavailable on the other profiles **at that source**. The subsequent topology
+receiving below strengthens the tetrahedron; the original measurements and
+downloads retain their historical source scope.
+
+## Subsequent exact topology receiving — 2026-11-14 UTC
+
+A separate construction at source `bb308ba` partitions the same fixed-probe
+ball-exclusion problem into clipped power cells. An independent checker
+reconstructs the complete cells and their incidence, checks every source atom
+and certifies all connected free regions and free hull patches. Its first
+receiving reuses the exact saved tetrahedron models from this report:
+
+| Probe (Å) | Complete free regions | Free hull patches | Interpretation |
+| --- | ---: | ---: | --- |
+| 1.2 | 1 | 4 | All four patches connect to the same free region. |
+| 1.4 | 1 | 0 | One enclosed region. |
+| 1.7 | 0 | 0 | No free center in the finite hull. |
+
+These are complete inventories of the declared strict ball model, not counts
+of successful sample rays or native DFND catalog features. Seventeen additional
+analytic controls include exact-contact transitions and tiny regions. The
+twenty-profile process takes **1.764 s**, peak RSS **23.24 MiB**, on one CPU
+with a 2 GiB cap. This small different task is not a speed comparison with the
+six-system query panel. Nonempty per-region volume precision is still pending.
+
+The [derivation and receiving record](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/reference_validator_power_cell_construction.md)
+and [raw receipt](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_power_cells_v1/receiving/receipt.json)
+retain the source, complete proofs, supports and anchor checks. A separate first
+narrow-tube attempt at 1.4 Å ends without a certificate after 52.030 s under
+its initial 50 CPU-second ceiling; it retains unknown counts. That execution
+stop is not physical exclusion or separation. The other original cases have
+not yet received this complete topology route; native qualification and
+certified region-volume work remain under #76/#181.
 
 ## What was run
 

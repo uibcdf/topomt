@@ -13,6 +13,14 @@ grid proposal is recorded with its all-atom/whole-link/coverage obligations;
 it has not been implemented. Earlier measured panel bytes and results remain
 historical at their original sources, without retroactive qualification.
 
+Source `bb308ba` now retains all twenty pilot profiles: seventeen analytic
+controls plus complete original tetrahedron inventories at 1.2/1.4/1.7 Å
+(`1/1/0` regions, `4/0/0` free hull patches). Execution takes 1.764 seconds,
+peak RSS 23,800 KiB, one CPU/thread and 2 GiB. The separate narrow 1.4 Å
+attempt stops under its initial resource envelope without a certificate and
+retains unknown counts. Profile/rebudget that route under #76 before expanding
+the exact topology receiving; per-region precision remains a separate gate.
+
 ## Validator observations/resources on all six systems — 2026-11-13 UTC
 
 The [public BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md)

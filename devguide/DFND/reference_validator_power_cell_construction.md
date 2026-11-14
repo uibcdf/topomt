@@ -165,6 +165,8 @@ For the rational regular tetrahedron with vertices `(1,1,1)`, `(1,-1,-1)`,
 the origin inside the tetrahedron, the nearest-center squared distance is
 `3-2*t*max_i(u*c_i)+t^2*||u||^2`; it decreases up to the hull boundary
 because that boundary lies before the nearest-center radial minimum. Hence
+the inequality `max_i(x*c_i)>=||x||^2`, obtained from a convex combination of
+the vertices representing x, justifies that monotonicity. Thus
 every free point connects toward the origin. Edge midpoint distance `sqrt(2)`,
 face circumradius `sqrt(8/3)` and origin distance `sqrt(3)` independently give
 `(regions,patches)=(1,4),(1,0),(0,0)` at radii `3/2,5/3,7/4`. These statements
@@ -185,6 +187,56 @@ worked tetrahedron were reviewed for interpretation. This independent reference
 construction changes no native operator, public promotion, probe convention or
 Topography classification; no method-book formula needs replacement. The
 previous BenchLab panel remains historical source-scoped evidence.
+
+## Retained committed-source receiving — 2026-11-14 UTC
+
+Source `bb308baddc52098f73f1fe9e8b5a185dc7aa7c21` runs the frozen protocol,
+saves every Model/certificate, reads both again and independently checks them.
+The [receipt](../evidence/reference_validator_power_cells_v1/receiving/receipt.json)
+binds all eighty supporting files and all thirty-two Python source files;
+the [external execution record](../evidence/reference_validator_power_cells_v1/execution.json)
+retains host resources, exact command, limits and receipt digest. The producer
+tree is clean; the separate human `_version.py` edit is not part of this
+developer computation. There is no fresh native/provider/quantity receiving.
+
+| Original tetrahedron probe | Complete regions | Free hull patches | Disposition |
+| --- | ---: | ---: | --- |
+| 1.2 Å | 1 | 4 | All four boundary patches attach to the same complete free region. |
+| 1.4 Å | 1 | 0 | One enclosed region; the origin is assigned to it. |
+| 1.7 Å | 0 | 0 | Exact empty free set, consistent with the earlier tetrahedral cover. |
+
+The seventeen analytic controls also meet their independent expectations,
+including the `1/3/3` and `1/0/0` exact-contact transitions, lower-dimensional
+power cells and separate boundary-patch count. The original tetrahedron's new
+complete inventories strengthen its earlier local statements; they do not
+rewrite the source-scoped earlier report or fix native carrier qualification.
+
+The whole bounded process takes **1.764 s**, peak child RSS **23,800 KiB**,
+one CPU/thread, a 2 GiB address-space ceiling and 50 CPU/60 wall-second limits.
+Internal capture takes 1.651 wall / 1.641 CPU seconds. These tiny controls are
+not competitive measurements. The receiving contains 81 JSON files / 477,164
+bytes; protocol and execution are additional records. Requested nonempty-region
+volume precision remains uncomputed. Source, schema and exact rational
+decisions are preserved; no float approximation discards small features.
+
+### First narrow-tube attempt is unresolved
+
+After that receiving, the
+[separately frozen narrow pilot](../evidence/reference_validator_power_cells_v1/narrow_pilot/protocol.json)
+selects the **same exact saved** 81-atom model at 1.4 Å. Its earlier boundary
+reference supplies two expected free patches; no global component count is
+assumed. The first execution ends with signal 9 after **52.030 s**, peak RSS
+**28,908 KiB**, under the same one-CPU/2 GiB/50 CPU/60 wall-second envelope.
+This is consistent with the hard CPU ceiling, but the signal alone is not an
+independent diagnosis. Neither a completed certificate nor a final receipt is
+emitted. The [disposition](../evidence/reference_validator_power_cells_v1/narrow_pilot/disposition.json)
+therefore retains unknown topology/boundary counts and no physical answer.
+
+Next under #76: profile the exact construction, then justify a larger bounded
+sequential budget or a mathematically equivalent clipping order. Retain every
+all-atom inequality and the independent verification; do not tune geometry or
+expected counts to fit execution time. This dated stop does not qualify the
+tubes, diagnose DFND or establish a permanent limitation of the construction.
 
 ## Complementary tetrahedral reference proposed by the maintainer
 

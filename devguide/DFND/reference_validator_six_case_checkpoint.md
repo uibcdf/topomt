@@ -5,6 +5,14 @@ Producer/protocol: `2b21cb2ee63093734ff71f1f70bd4ede7a53ebbb`.
 Date: 2026-11-13. The maintainer requested current-validator execution and a
 scientific/resource report for every existing synthetic BenchLab system.
 
+Subsequent topology delivery: the
+[power-cell receiving](reference_validator_power_cell_construction.md) at
+`bb308ba` supplies complete original tetrahedron counts `1/1/0` and free hull
+patches `4/0/0`. This checkpoint and its archive retain the earlier `2b21cb2`
+query-run results and resource measurements, without retroactive qualification.
+The initial narrow-tube attempt of the new route remains unresolved; the other
+original cases and per-region precision retain their later gates.
+
 ## Actual delivery
 
 The [BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md)

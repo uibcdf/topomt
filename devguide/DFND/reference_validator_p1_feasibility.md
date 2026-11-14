@@ -1,5 +1,13 @@
 # Reference-validator P1: exact box controls and the remaining construction
 
+Later continuation, 2026-11-14 UTC: the
+[clipped power-cell construction](reference_validator_power_cell_construction.md)
+now supplies the selected multi-ball topology route and first retained
+analytic/original-tetrahedron receiving. This file preserves the earlier
+one-ball tranche and its source-specific remaining work; it is not the current
+status of general topology selection. Clipped/per-region precision and wider
+P5 qualification remain open under #76.
+
 Owner [#76](https://github.com/uibcdf/topomt/issues/76); first native consumer
 #181. This is a bounded feasibility result under the
 [implementation plan](physical_reference_validator_implementation.md), not the

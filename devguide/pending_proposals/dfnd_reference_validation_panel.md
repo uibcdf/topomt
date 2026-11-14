@@ -29,6 +29,16 @@ open, so #76 remains partial. Native #181/#180/#184/#188 retain their dispositio
 The complementary all-atom tetrahedral grid is documented as proposed work
 under this owner, with explicit coverage obligations, not an implemented engine.
 
+Retained source `bb308ba` receiving now checks all twenty profiles. The original
+tetrahedron supplies complete `1/1/0` regions and `4/0/0` boundary patches at
+1.2/1.4/1.7 Å; the other seventeen analytic controls meet their references.
+One CPU/2 GiB bounds the 1.764-second process (peak RSS 23,800 KiB). A separate
+narrow 1.4 Å attempt terminates after 52.030 seconds under its initial hard
+50 CPU-second limit, with unknown counts and no certificate. Preserve that
+attempt; profiling and a justified larger sequential budget/equivalent clipping
+order remain this issue's next topology follow-up. Per-region precision, wider
+P5 and native carrier qualification are still separate incomplete work.
+
 ## Measured current validator on six systems / nineteen probes — 2026-11-13 UTC
 
 Producer `2b21cb2` completes the maintainer-requested current-validator execution

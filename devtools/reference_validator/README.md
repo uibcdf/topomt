@@ -33,8 +33,9 @@ In the subdivision route, only complete exclusion and completely free convex
 domains receive proved component counts (zero/one). A blocked point does not exclude its carrier.
 Mixed partitions and positive paths do not acquire a general component count,
 enclosure, aperture inventory or morphological label. The separate power-cell
-route below supplies complete regions/boundary incidence. Clipped/per-region high precision and production
-attribution/API admission remain pending. Run/checkpoint records and same-kernel
+route below supplies complete regions/boundary incidence. Clipped/per-region
+high precision and production attribution/API admission remain pending.
+Run/checkpoint records and same-kernel
 resumption are now implemented within the admitted partition envelope. No
 original external scientific kernel is used by this rational developer route.
 
@@ -75,6 +76,13 @@ wall deadline. The JSON freeze follows the test-first unit prototypes and
 precedes retained receiving. Seventeen analytic controls and three exact saved
 tetrahedron models are distinct from new molecular/quantity receiving. Earlier
 panel evidence retains its original source and results.
+
+Source `bb308ba` now has [retained receiving](../../devguide/evidence/reference_validator_power_cells_v1/receiving/receipt.json)
+for all twenty profiles. The original tetrahedron's three probes give complete
+region counts `1/1/0` and free hull-patch counts `4/0/0`. The separate first
+narrow 1.4 Å attempt is unresolved after its initial execution envelope, without
+a completed certificate. See the [current construction record](../../devguide/DFND/reference_validator_power_cell_construction.md)
+for measured resources, evidence and the profiling/rebudgeting follow-up under #76.
 
 From the checkout, under external CPU/memory/time limits:
 

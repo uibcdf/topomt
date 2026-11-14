@@ -1,0 +1,57 @@
+{
+  "points": {
+    "origin": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ]
+  },
+  "locations": {
+    "origin": {
+      "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+      "topology_certificate_sha256": "74154c73f490af7fadaaef1cdf21521970c4e8185d4f1616687a7bb28fcb66ff",
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "free",
+      "region_id": "REG-1",
+      "boundary_patch_id": null,
+      "root_point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ]
+    }
+  },
+  "pairs": []
+}
