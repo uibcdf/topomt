@@ -4,17 +4,18 @@ import argparse
 import hashlib
 import json
 import os
+import re
 import resource
 import subprocess
 import time
 from pathlib import Path
 from typing import Any
 
-from .model import Model, decode_point
+from .model import Model, _record, decode_point
 from .power_cells import topology_certificate
 from .storage import read_record, read_record_with_digest
 from .verify import verify
-from .verify.power_cells import locate, path_between
+from .verify.power_cells import query_anchors
 
 
 def _write(path: Path, value: object) -> None:
@@ -81,6 +82,7 @@ def capture(protocol: Path, output: Path) -> None:
     start = time.monotonic()
     cpu_start = time.process_time()
     cases: dict[str, Any] = {}
+    root = Path(__file__).resolve().parents[2]
     for row in spec['cases']:
         name = row['name']
         folder = output / name
@@ -104,9 +106,26 @@ def capture(protocol: Path, output: Path) -> None:
         # must never acquire an empty/disconnected geometric interpretation.
         _write(folder / 'model.json', model.to_record())
         mark_phase('model_receiving')
-        proof = topology_certificate(model)
+        reference = row.get('saved_certificate')
+        if reference is None:
+            proof = topology_certificate(model)
+            origin = {'route': 'constructed_here'}
+        else:
+            _record(reference, {'path', 'sha256', 'producer_revision'})
+            if (
+                not isinstance(reference['path'], str)
+                or not isinstance(reference['producer_revision'], str)
+                or re.fullmatch('[0-9a-f]{40}', reference['producer_revision']) is None
+            ):
+                raise ValueError('Invalid saved-certificate provenance')
+            proof, proof_digest = read_record_with_digest(
+                root / Path(reference['path'])
+            )
+            if proof_digest != reference['sha256']:
+                raise ValueError('Saved-certificate digest differs')
+            origin = {'route': 'saved_certificate', **reference}
         _write(folder / 'certificate.json', proof)
-        mark_phase('construction')
+        mark_phase('construction' if reference is None else 'saved_certificate_reading')
         saved_model = Model.from_record(read_record(folder / 'model.json'))
         saved_proof = read_record(folder / 'certificate.json')
         mark_phase('saved_reading')
@@ -127,14 +146,11 @@ def capture(protocol: Path, output: Path) -> None:
         anchors = row['anchors']
         if not isinstance(anchors, dict) or len(anchors) > 32:
             raise ValueError('Invalid anchor inventory or work budget')
-        locations = {
-            _name(key): locate(saved_model, saved_proof, decode_point(value))
-            for key, value in anchors.items()
-        }
+        points = {_name(key): decode_point(value) for key, value in anchors.items()}
         pairs = row['pairs']
         if not isinstance(pairs, list) or len(pairs) > 32:
             raise ValueError('Invalid anchor-pair inventory or work budget')
-        connections = []
+        connections: list[tuple[str, str]] = []
         for pair in pairs:
             if (
                 not isinstance(pair, list)
@@ -142,27 +158,35 @@ def capture(protocol: Path, output: Path) -> None:
                 or any(k not in anchors for k in pair)
             ):
                 raise ValueError('Invalid named anchor pair')
-            connections.append(
-                path_between(
-                    saved_model, saved_proof, *(decode_point(anchors[k]) for k in pair)
-                )
-            )
+            connections.append((pair[0], pair[1]))
+        queries = (
+            query_anchors(saved_model, saved_proof, anchors=points, pairs=connections)
+            if points or connections
+            else {
+                'length_unit': 'nm',
+                'model_sha256': saved_model.digest,
+                'topology_certificate_sha256': checked['certificate_sha256'],
+                'points': {},
+                'locations': {},
+                'pairs': [],
+            }
+        )
         _write(
             folder / 'anchors.json',
-            {'points': anchors, 'locations': locations, 'pairs': connections},
+            queries,
         )
         mark_phase('anchor_queries')
         _write(folder / 'phases.json', phases)
         cases[name] = {
             'model_sha256': saved_model.digest,
             'certificate_sha256': checked['certificate_sha256'],
+            'certificate_origin': origin,
             'n_components': checked['n_components'],
             'n_boundary_patches': checked['n_boundary_patches'],
             'per_region_volume_status': checked['per_region_volume_status'],
             'elapsed_seconds': time.monotonic() - before,
             'cpu_seconds': time.process_time() - cpu_before,
         }
-    root = Path(__file__).resolve().parents[2]
     receipt = {
         'schema': 'topomt.reference-validator.power-cell-receiving/1',
         'protocol_sha256': digest,

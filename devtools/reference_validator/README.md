@@ -95,6 +95,18 @@ timing files do not establish a physical count. The
 uses a measured, finite larger CPU/wall envelope with the same one-CPU/2 GiB
 limits and unchanged physical model.
 
+The repeat at `fd3eeb7` constructs and independently verifies the original
+narrow 1.4 Å certificate: one complete free region and two free hull patches.
+Its subsequent anchor-query capture reaches the CPU ceiling before the final
+receiving receipt; the complete mathematical proof remains checkable. The
+[saved-reading protocol](../../devguide/evidence/reference_validator_power_cells_v3/protocol.json)
+reuses that exact certificate by raw SHA and original producer revision, without
+claiming a fresh construction. `verify.power_cells.query_anchors` verifies a
+detached certificate once for the whole named-anchor batch, then checks every
+returned continuous path. Nothing is cached between calls or accepted as an
+unchecked supplied verification. The receipt records the actual certificate
+origin and distinguishes saved reading from construction phase costs.
+
 From the checkout, under external CPU/memory/time limits:
 
 ```bash

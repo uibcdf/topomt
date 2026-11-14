@@ -272,6 +272,46 @@ The envelope is a finite ceiling, not a resource reservation. Actual committed-
 source receiving is recorded separately; other original profiles, per-region
 precision and native #181 keep their gates.
 
+### The repeat constructs and verifies the complete narrow-tube topology
+
+At source `fd3eeb7e6a5df99ad1781f63c090355fe497eaf1`, the repeat constructs all
+81 original power cells and saves a complete certificate (1,833 cell vertices,
+at most 31 supporting planes per cell). Its independently saved
+[verification](../evidence/reference_validator_power_cells_v2/receiving/original_narrow_tube_1_4/verification.json)
+establishes **one free region and two free hull patches** at 1.4 Å. Every
+source sphere remains included. This is the first complete global inventory
+for this original profile; the earlier point/path references keep their scope.
+
+The broader capture subsequently stops during repeated anchor checks, after
+190.237 wall / 179.713 CPU seconds under the hard 180 CPU-second ceiling,
+peak child RSS 37,568 KiB. The
+[execution record](../evidence/reference_validator_power_cells_v2/execution.json)
+contains five-second host samples and the exact supervisor source. The
+[disposition](../evidence/reference_validator_power_cells_v2/disposition.json)
+separates a completed mathematical proof/verification from incomplete later
+query/manifest receiving. No final capture receipt or phase summary was emitted.
+An input/partial directory alone is insufficient; the retained complete
+certificate can nevertheless be independently checked on its own.
+
+### Detached query batches and explicit saved-certificate reading
+
+`verify.power_cells.query_anchors` now detaches a complete proof, independently
+checks it once for a bounded batch, then assigns the named anchors and answers
+their pairs from that same checked result. Each positive continuous path is
+still independently checked against every ball. No unchecked result is accepted
+from the caller and no verification cache crosses calls. Unit/model/certificate
+bindings stay in the detached output. Existing individual point/path operations
+retain their checking semantics.
+
+The receiving helper can explicitly reuse a saved certificate by its raw file
+SHA-256 and original producer revision. It still reads the exact Model and
+independently verifies the proof; the receipt distinguishes `saved_certificate`
+from `constructed_here`, and the phase records saved reading rather than a new
+construction. The [saved-reading protocol](../evidence/reference_validator_power_cells_v3/protocol.json)
+freezes that route before actual receiving, preserving all physical inputs,
+the original unspecified expected global count and the finite 180 CPU/240 wall-
+second one-CPU/2 GiB envelope. This does not rerun or credit the constructor.
+
 ## Complementary tetrahedral reference proposed by the maintainer
 
 Any full-dimensional tetrahedron with vertices v0..v3 has coordinates

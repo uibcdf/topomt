@@ -133,3 +133,47 @@ def test_capture_reports_separate_construction_saved_check_and_query_costs(
     assert all(
         p['wall_seconds'] >= 0 and p['cpu_seconds'] >= 0 for p in phases.values()
     )
+
+
+def test_capture_can_recheck_a_saved_certificate_without_claiming_a_new_construction(
+    tmp_path, monkeypatch
+):
+    import hashlib
+
+    import devtools.reference_validator.capture_power_cells as module
+    from devtools.reference_validator.power_cells import topology_certificate
+
+    monkeypatch.setattr(os, 'sched_getaffinity', lambda _: {0})
+    protocol = _protocol(tmp_path)
+    spec = read_record(protocol)
+    cert = tmp_path / 'proof.json'
+    cert.write_text(
+        json.dumps(topology_certificate(Model.from_record(spec['cases'][0]['model'])))
+    )
+    spec['cases'][0]['saved_certificate'] = {
+        'path': str(cert),
+        'sha256': hashlib.sha256(cert.read_bytes()).hexdigest(),
+        'producer_revision': 'a' * 40,
+    }
+    protocol.write_text(json.dumps(spec))
+
+    def no_new_construction(_):
+        raise AssertionError('Saved reading must not run the constructor')
+
+    monkeypatch.setattr(module, 'topology_certificate', no_new_construction)
+    output = tmp_path / 'receiving'
+    module.capture(protocol, output)
+    receipt = read_record(output / 'receipt.json')
+    assert (
+        receipt['cases']['two_barriers']['certificate_origin']['route']
+        == 'saved_certificate'
+    )
+    assert (
+        receipt['cases']['two_barriers']['certificate_origin']['producer_revision']
+        == 'a' * 40
+    )
+    assert 'construction' not in read_record(output / 'two_barriers/phases.json')
+    spec['cases'][0]['saved_certificate']['sha256'] = '0' * 64
+    protocol.write_text(json.dumps(spec))
+    with pytest.raises(ValueError, match='digest'):
+        module.capture(protocol, tmp_path / 'rejected')

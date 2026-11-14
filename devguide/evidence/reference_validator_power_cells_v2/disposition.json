@@ -1,0 +1,20 @@
+{
+  "schema": "topomt.reference-validator.power-cell-attempt-disposition/2",
+  "owner": "uibcdf/topomt#76",
+  "scope": "Historical v2 capture: complete constructed and verified topology proof, but interrupted later anchor-query receiving. Preserved independently of the v3 saved-reading follow-up.",
+  "source_revision": "fd3eeb7e6a5df99ad1781f63c090355fe497eaf1",
+  "protocol_sha256": "67b61e0bde1c1f9629325a670f81f04fa1235cb7a22f54eb7036509cbf1cfa8b",
+  "execution_sha256": "62c7b60b90e5109234b0ed7a22e0f00e5962c0540927a593324155c6d0dd1d94",
+  "verification_sha256": "313c214b149ec544409cbb9e28e2bb78a828d8762341a9c999a231135a19914a",
+  "receiving_status": "partial_anchor_queries_stopped",
+  "topology_certificate_status": "accepted_saved_proof",
+  "topology_complete": true,
+  "n_components": 1,
+  "n_boundary_patches": 2,
+  "requested_precision_status": "not_computed",
+  "follow_up_protocol": {
+    "path": "devguide/evidence/reference_validator_power_cells_v3/protocol.json",
+    "sha256": "5bf6357917fd905cc7c3d1222147f81d904d3af841cfc941beeb4f8cfadf9987"
+  },
+  "interpretation": "A completed mathematical proof can be independently replayed even though the broader capture lacks its final query/manifest receipt. No zero-region inference follows from the CPU stop; no fresh constructor is claimed by saved replay."
+}

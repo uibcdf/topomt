@@ -34,6 +34,18 @@ host checks remain. Actual committed-source receiving is separate from this
 source qualification. Wider profiles, region-assigned precision and native
 #181/#180/#184/#188 retain their scientific scopes.
 
+The actual `fd3eeb7` repeat now constructs and independently verifies a complete
+original narrow-tube 1.4 Å proof: **one free region, two free hull patches**.
+The later per-anchor repeated checks reach the 180 CPU-second ceiling (190.237
+wall seconds, 179.713 child CPU, peak RSS 37,568 KiB), without the final query/
+manifest receipt. The construction record and v2 disposition preserve both
+the accepted mathematical proof and that incomplete broader capture.
+
+The next source continuation supplies a detached anchor batch with one complete
+topology check, plus explicit raw-hash/original-producer saved-certificate
+reading. The v3 protocol freezes reuse of the v2 proof; no new construction or
+physical change is claimed. Actual saved receiving remains a separate gate.
+
 ## Exact multi-ball topology continuation — 2026-11-14 UTC
 
 The [power-cell construction](reference_validator_power_cell_construction.md)

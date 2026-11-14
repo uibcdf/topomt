@@ -17,6 +17,7 @@ from devtools.reference_validator.model import (
     decode_point,
     encode_point,
     point,
+    record_digest,
 )
 from devtools.reference_validator.power_cells import topology_certificate
 from devtools.reference_validator.power_contracts import PowerLimits
@@ -266,6 +267,68 @@ def test_complete_region_assignment_proves_separation_and_returns_continuous_pat
     assert verify(model, connected['path_certificate'])['path_validated'] is True
     assert locate(model, cert, point((-8, 0, 0)))['point_state'] == 'blocked'
     assert locate(model, cert, point((30, 0, 0)))['point_state'] == 'outside_domain'
+
+
+def test_anchor_batch_checks_complete_topology_once_and_detaches_its_evidence(
+    monkeypatch,
+):
+    import devtools.reference_validator.verify as module
+    from devtools.reference_validator.verify.power_cells import query_anchors
+
+    model = _barriers()
+    proof = topology_certificate(model)
+    saved = copy.deepcopy(proof)
+    kinds = []
+    original = module.verify
+
+    def checked(model, cert, **kwargs):
+        kinds.append(cert['kind'])
+        result = original(model, cert, **kwargs)
+        if cert['kind'] == 'power_cell_topology':
+            # The caller's mutable object must not alter the verified batch.
+            proof['nodes'].clear()
+        return result
+
+    monkeypatch.setattr(module, 'verify', checked)
+    result = query_anchors(
+        model,
+        proof,
+        anchors={
+            'left': point((-15, 0, 0)),
+            'same': point((-14, 1, 0)),
+            'middle': point((0, 0, 0)),
+            'blocked': point((-8, 0, 0)),
+        },
+        pairs=[('left', 'same'), ('left', 'middle')],
+    )
+    assert kinds.count('power_cell_topology') == 1
+    assert result['pairs'][0]['connected'] is True
+    assert result['pairs'][1]['connected'] is False
+    assert result['length_unit'] == 'nm'
+    assert result['model_sha256'] == model.digest
+    assert result['locations']['blocked']['point_state'] == 'blocked'
+    assert result['pairs'][0]['topology_certificate_sha256'] == record_digest(saved)
+
+
+def test_anchor_batch_rejects_unknown_pairs_and_blocked_connection_anchors():
+    from devtools.reference_validator.verify.power_cells import query_anchors
+
+    model = _barriers()
+    proof = topology_certificate(model)
+    with pytest.raises(ValueError):
+        query_anchors(
+            model,
+            proof,
+            anchors={'free': point((-15, 0, 0))},
+            pairs=[('free', 'missing')],
+        )
+    with pytest.raises(ValueError, match='both be free'):
+        query_anchors(
+            model,
+            proof,
+            anchors={'free': point((-15, 0, 0)), 'blocked': point((-8, 0, 0))},
+            pairs=[('free', 'blocked')],
+        )
 
 
 def test_missing_cell_false_partition_and_bad_incidence_are_rejected():

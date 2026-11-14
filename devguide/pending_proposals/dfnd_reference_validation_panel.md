@@ -15,6 +15,23 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Narrow-tube complete topology and receiving continuation — 2026-11-14
+
+Source `fd3eeb7` constructs and independently verifies the original 81-atom
+narrow 1.4 Å profile: one complete free region and two free hull patches. Its
+later repeated anchor-query capture reaches the CPU ceiling, without a final
+manifest; the accepted complete mathematical proof is retained separately from
+that operational incompletion. Exact active-plane maintenance preserves all
+twenty earlier certificates. The
+[construction record](../DFND/reference_validator_power_cell_construction.md)
+owns the input/code/resource/proof scopes and v2 disposition.
+
+A detached one-check anchor batch and explicitly hashed saved-certificate route
+now prepare completion of the queries using the original producer's proof.
+The v3 protocol precedes actual saved receiving. This supersedes the former
+missing complete topology only for this original 1.4 Å Model, without native
+#181 correction, nonempty region-volume precision or full P5/P6 qualification.
+
 ## Complete multi-ball topology construction — 2026-11-14 UTC
 
 The [power-cell construction](../DFND/reference_validator_power_cell_construction.md)

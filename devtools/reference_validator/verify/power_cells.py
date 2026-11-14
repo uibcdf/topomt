@@ -4,6 +4,7 @@ Completeness uses the documented convex-cap/polytope-skeleton lemma, not a
 sampled graph heuristic. Producer clipping and graph search are never imported.
 """
 
+from copy import deepcopy
 from fractions import Fraction
 from itertools import combinations
 from math import comb
@@ -525,6 +526,18 @@ def path_between(
         or certificate['kind'] != 'power_cell_topology'
     ):
         raise ValueError('Connectivity requires a complete power-cell certificate')
+    return _path_between_checked(model, certificate, checked, start, end)
+
+
+def _path_between_checked(
+    model: Model,
+    certificate: dict[str, Any],
+    checked: dict[str, Any],
+    start: tuple[Fraction, Fraction, Fraction],
+    end: tuple[Fraction, Fraction, Fraction],
+) -> dict[str, Any]:
+    from . import verify
+
     start, end = point(start), point(end)
     a, b = (_locate(model, certificate, checked, x) for x in [start, end])
     if a['point_state'] != 'free' or b['point_state'] != 'free':
@@ -584,4 +597,77 @@ def path_between(
         'connected': True,
         'region_id': a['region_id'],
         'path_certificate': proof,
+    }
+
+
+def query_anchors(
+    model: Model,
+    certificate: object,
+    *,
+    anchors: dict[str, tuple[Fraction, Fraction, Fraction]],
+    pairs: list[tuple[str, str]],
+) -> dict[str, Any]:
+    """Check one detached topology proof and answer a bounded batch of queries.
+
+    Parameters
+    ----------
+    model : Model
+        Immutable all-atom fixed-probe model and declared convex domain.
+    certificate : object
+        Complete power-cell certificate, detached and independently checked
+        once for this batch. No unchecked caller-supplied result is accepted.
+    anchors : dict
+        At most 32 named exact probe-center positions in nm.
+    pairs : list of tuple of str
+        At most 32 pairs of existing anchor names; both positions must be free.
+
+    Returns
+    -------
+    dict
+        Detached points, checked region/patch memberships and resolved pair
+        answers. Each returned continuous path is independently checked against
+        every source ball. No verification state is cached across calls.
+
+    Raises
+    ------
+    ValueError
+        The proof, named inputs, work budget or connection anchors are invalid.
+    """
+    from . import verify
+
+    if (
+        not isinstance(anchors, dict)
+        or len(anchors) > 32
+        or any(not isinstance(k, str) or not k for k in anchors)
+        or not isinstance(pairs, list)
+        or len(pairs) > 32
+    ):
+        raise ValueError('Invalid anchor batch or work budget')
+    points = {name: point(x) for name, x in anchors.items()}
+    connections = []
+    for pair in pairs:
+        if (
+            not isinstance(pair, (tuple, list))
+            or len(pair) != 2
+            or any(not isinstance(k, str) or k not in points for k in pair)
+        ):
+            raise ValueError('A connection needs two existing named anchors')
+        connections.append((pair[0], pair[1]))
+    detached = deepcopy(certificate)
+    checked = verify(model, detached)
+    if not isinstance(detached, dict) or detached['kind'] != 'power_cell_topology':
+        raise ValueError('Anchor batches require a complete power-cell certificate')
+    locations = {
+        name: _locate(model, detached, checked, x) for name, x in points.items()
+    }
+    return {
+        'length_unit': 'nm',
+        'model_sha256': model.digest,
+        'topology_certificate_sha256': record_digest(detached),
+        'points': {name: encode_point(x) for name, x in points.items()},
+        'locations': locations,
+        'pairs': [
+            _path_between_checked(model, detached, checked, points[a], points[b])
+            for a, b in connections
+        ],
     }
