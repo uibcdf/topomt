@@ -107,6 +107,14 @@ returned continuous path. Nothing is cached between calls or accepted as an
 unchecked supplied verification. The receipt records the actual certificate
 origin and distinguishes saved reading from construction phase costs.
 
+That v3 saved receiving now completes at `92679fc`: one complete region/two
+free hull patches, blocked origin and a checked 28-point path between the
+earlier free anchors. Its 68.683 wall / 66.497 CPU seconds and 34,144 KiB peak
+RSS describe saved replay/queries; the original constructor's earlier capture
+cost remains separate. See the construction record for raw receipts, phase
+costs and both preserved interrupted attempts. Other profiles and nonempty
+per-region precision remain subsequent qualification.
+
 From the checkout, under external CPU/memory/time limits:
 
 ```bash

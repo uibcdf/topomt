@@ -9,8 +9,9 @@ Current implementation is partial, with its dated evidence in the
 [source checkpoint](reference_validator_checkpoint.md). The later
 [clipped power-cell construction](reference_validator_power_cell_construction.md)
 selects and implements complete multi-ball regions/boundary incidence; the
-first retained receiving qualifies analytic controls and the original
-tetrahedron. Region-assigned precision and wider qualification remain pending.
+retained receiving qualifies analytic controls, the original tetrahedron and
+the original narrow tube at 1.4 Å. Region-assigned precision and wider
+qualification remain pending.
 The proposed complete-validator acceptance below retains those requirements.
 
 Critical design review: 2026-11-12. Owner:

@@ -46,6 +46,36 @@ topology check, plus explicit raw-hash/original-producer saved-certificate
 reading. The v3 protocol freezes reuse of the v2 proof; no new construction or
 physical change is claimed. Actual saved receiving remains a separate gate.
 
+Saved receiving now completes at `92679fc2d97c3d72108f35c79fc1a0c06c3cd471`,
+using the original `fd3eeb7` certificate by exact raw SHA. Its final receipt
+binds Model/proof/verification/anchor/path/phase files and records the saved
+origin explicitly. The same narrow 1.4 Å Model has one complete free region,
+two free hull patches and a separately checked 28-point path between the
+earlier lower/upper anchors, despite its blocked origin. The process takes
+68.683 wall / 66.497 CPU seconds, peak RSS 34,144 KiB, one CPU/thread and 2 GiB.
+The fourteen host samples show no memory pressure and at least 49.80 GiB
+available. This is saved replay cost; the earlier construction/repeated-query
+attempt's 190.237 wall seconds remain recorded separately. Both earlier stops
+remain historical; missing complete topology/query receiving is superseded only
+for this exact source/model/probe. Other probes, region-assigned precision and
+native qualification stay open.
+
+Final validation passes **292 selected tests**, including a fresh independent
+original-N81 saved replay without producer/DFND/NumPy/PyUnitWizard, complete
+file/provenance/resource/phase guards and all 355 original artifact checks.
+The bounded process takes 62.93 seconds, peak child RSS 95,700 KiB, one CPU and
+2 GiB; the initial 287-code selection and five new receiving guards retain
+their separate source stages. The added raw-log checksum assertion also passes
+its focused test. Repository Ruff/format, mypy on all 32 validator modules,
+report indexes, offline finding consistency and 168 local Markdown targets
+pass. A full single-worker Sphinx HTML build passes with zero warnings and
+notebooks unexecuted (20.07 seconds, peak child RSS 291,800 KiB, 2 GiB cap),
+including inspection of the new BenchLab result/resource section. The prior
+20.32-second build preceded a conservative available-RAM rounding correction;
+the final build includes it. Existing PlantUML is selected explicitly, without
+changing shared environments. Full suite, installed/minor/platform and P6
+remain deferred under #16/#76; no hosted deployment or release is claimed.
+
 ## Exact multi-ball topology continuation — 2026-11-14 UTC
 
 The [power-cell construction](reference_validator_power_cell_construction.md)

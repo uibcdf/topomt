@@ -10,8 +10,12 @@ Subsequent topology delivery: the
 `bb308ba` supplies complete original tetrahedron counts `1/1/0` and free hull
 patches `4/0/0`. This checkpoint and its archive retain the earlier `2b21cb2`
 query-run results and resource measurements, without retroactive qualification.
-The initial narrow-tube attempt of the new route remains unresolved; the other
-original cases and per-region precision retain their later gates.
+The initial narrow-tube attempt of the new route remains historical. Its later
+`fd3eeb7` complete proof and `92679fc` saved receiving establish one region/two
+free hull patches for the original narrow 1.4 Å Model. The same construction
+now has complete topology for four of the nineteen original profiles; fifteen
+await its receiving. Other original cases and per-region precision retain
+their later gates. The measured table below remains the original query run.
 
 ## Actual delivery
 

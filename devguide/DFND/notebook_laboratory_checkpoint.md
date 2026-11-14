@@ -1,5 +1,24 @@
 # DFND notebook laboratory checkpoint
 
+## Narrow-tube complete physical reference — 2026-11-14
+
+The [exact reference continuation](reference_validator_power_cell_construction.md)
+now receives the original 81-atom narrow tube at 1.4 Å with a complete single
+free region and two free hull patches. A checked 28-point path connects the
+earlier interior anchors despite a blocked origin. `fd3eeb7` constructs and
+verifies the proof; `92679fc` completes explicitly saved-proof reading and one
+detached anchor batch without claiming new construction. The latter costs
+68.683 wall / 66.497 CPU seconds, peak RSS 34,144 KiB, one CPU/thread and 2 GiB.
+The earlier repeated-query CPU stop remains separate historical evidence.
+
+The [completed receipt](../evidence/reference_validator_power_cells_v3/receiving/receipt.json)
+binds all saved inputs/proofs/queries and phase/resource evidence. Next under
+#76: the other frozen narrow profiles and wider topology receiving, plus
+certified region-assigned precision. Native #181 and #180/#184/#188 retain their
+scopes; the ordinary-Delaunay grid remains a complementary proposal. No new
+geometry, protein/provider phase, morphological promotion or original artifact
+change is selected by this receiving.
+
 ## Exact multi-ball reference construction — 2026-11-14 UTC
 
 The [power-cell reference](reference_validator_power_cell_construction.md)

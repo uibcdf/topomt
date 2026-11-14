@@ -312,6 +312,41 @@ freezes that route before actual receiving, preserving all physical inputs,
 the original unspecified expected global count and the finite 180 CPU/240 wall-
 second one-CPU/2 GiB envelope. This does not rerun or credit the constructor.
 
+### Saved narrow receiving completes at source 92679fc
+
+Source `92679fc2d97c3d72108f35c79fc1a0c06c3cd471` completes the v3 saved-reading
+protocol and all named queries. The raw certificate is identical to the v2
+producer's file (`21564404d3b16cf659202040982e9300d10e6b002d5aab157839f05d552311e2`).
+The [receipt](../evidence/reference_validator_power_cells_v3/receiving/receipt.json)
+records `saved_certificate` and original producer `fd3eeb7`, not a new geometry
+construction. Six JSON receiving files total 1,579,275 bytes. The
+[supervised execution](../evidence/reference_validator_power_cells_v3/execution.json)
+binds every saved byte, exact command/source, fourteen host samples and the
+supervisor source. The scientific source tree is clean.
+
+The full saved-reading process takes **68.683 wall / 66.497 CPU seconds**, peak
+RSS **34,144 KiB**, one CPU/thread and a 2 GiB ceiling. Complete verification
+takes 34.878 wall / 32.833 CPU seconds; the detached anchor batch takes
+32.577 wall / 32.478 CPU seconds, including its own complete check. This
+separates one initial saved verification and one batch verification from the
+earlier per-anchor repeats. It does not give a fresh-construction runtime or
+change the proof assumptions. Available memory stays above 49.80 GiB, with
+zero sampled memory pressure and no pressure stop.
+
+The origin is blocked. Lower and upper interior anchors are strict free and
+belong to the single complete region, which meets both free hull patches. A
+recovered **28-point continuous path** is separately checked against every
+source ball and the original hull. The complete count remains one region/two
+patches. Nonempty per-region volumes remain uncomputed; no biological Mouth,
+native Channel promotion or #181 correction follows from reference membership.
+
+This supersedes the former missing complete topology/query receiving for the
+**same original narrow 1.4 Å Model**. Both earlier interrupted runs and their
+own scopes remain unchanged. Next under #76: qualify the other frozen
+narrow-tube probes and the wider six-case topology panel, then complete certified
+clipped/per-region integration. Native carrier/path qualification remains #181;
+the complementary tetrahedral-grid route is still proposed, not implemented.
+
 ## Complementary tetrahedral reference proposed by the maintainer
 
 Any full-dimensional tetrahedron with vertices v0..v3 has coordinates

@@ -11,7 +11,7 @@ complete global answer. Points and supplied continuous paths are checked against
 every atomic ball. Only the tetrahedron at 1.7 Å receives a complete zero-region
 proof in this run. General component enumeration and per-region precision are
 unavailable on the other profiles **at that source**. The subsequent topology
-receiving below strengthens the tetrahedron; the original measurements and
+receiving below strengthens the tetrahedron and narrow tube; the original measurements and
 downloads retain their historical source scope.
 
 ## Subsequent exact topology receiving — 2026-11-14 UTC
@@ -40,9 +40,47 @@ and [raw receipt](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/r
 retain the source, complete proofs, supports and anchor checks. A separate first
 narrow-tube attempt at 1.4 Å ends without a certificate after 52.030 s under
 its initial 50 CPU-second ceiling; it retains unknown counts. That execution
-stop is not physical exclusion or separation. The other original cases have
-not yet received this complete topology route; native qualification and
-certified region-volume work remain under #76/#181.
+stop is not physical exclusion or separation. Its subsequent result follows
+below. The remaining original profiles have not yet received this complete
+topology route; native qualification and certified region-volume work remain
+under #76/#181.
+
+### Narrow tube at 1.4 Å: complete topology and checked anchor connection
+
+Source `fd3eeb7` now constructs and independently verifies the same original
+81-atom narrow-tube Model: **one connected free region and two free hull
+patches**. Both patches attach to that region. The origin is blocked, while
+the earlier lower/upper interior anchors are free and connected. A newly
+recovered 28-point piecewise-linear path is checked against every expanded
+atomic ball and the exact hull. An occupied axis/origin therefore does not
+exclude the connected off-axis space.
+
+The construction/first verification completes before a later repeated-query
+capture reaches its CPU ceiling. The complete proof is preserved. Source
+`92679fc` then independently replays that **saved** certificate and completes
+the anchor queries in one detached batch, preserving its original producer
+identity and raw checksum. It performs no new construction.
+
+| Execution scope | Wall seconds | CPU seconds | Peak RSS MiB | Outcome |
+| --- | ---: | ---: | ---: | --- |
+| Construction, first complete verification and later interrupted repeated queries | 190.237 | 179.713 | 36.69 | Complete topology proof; broader capture incomplete. |
+| Saved-proof replay and completed batch queries | 68.683 | 66.497 | 33.34 | Complete receiving and checked anchor connection. |
+
+The replay spends 34.878 s in the complete verification phase and 32.577 s
+in the query phase, including its separate one-per-batch check. These are
+workflow costs, not the time of a fresh complete constructor. Both attempts
+use one CPU/thread, 2 GiB and finite 180 CPU/240 wall-second ceilings, with
+host checks every five seconds. The replay's fourteen samples retain at least
+49.80 GiB available RAM and no measured memory pressure.
+
+The [completed receipt](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_power_cells_v3/receiving/receipt.json)
+and [execution record](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_power_cells_v3/execution.json)
+bind the exact Model, original certificate, independent verification,
+anchor/path result, phase costs and source. Earlier interrupted attempts
+remain historical evidence. This strengthens only the declared 1.4 Å profile;
+the other two narrow-tube probes, certified nonempty region volumes and
+native/public candidate qualification retain their separate gates. No native
+DFND operator, Topography classification or provider result is changed.
 
 ## What was run
 

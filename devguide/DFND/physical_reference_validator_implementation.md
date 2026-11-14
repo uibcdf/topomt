@@ -52,6 +52,14 @@ qualification. Nonempty per-region integration/precision and the complete
 nineteen-profile P5 gate remain pending. Earlier dated runs above do not acquire
 these later capabilities retroactively.
 
+The later active-plane/batch continuation retains all earlier exact pilot
+certificates and now qualifies the original narrow 1.4 Å profile as one complete
+free region/two free hull patches, with an all-atom checked anchor path. Its
+saved receipt distinguishes the original `fd3eeb7` constructor from `92679fc`
+saved reading. Four original profiles (three tetrahedron probes and this tube
+probe) now have complete topology; fifteen await this route's receiving.
+Nonempty per-region integration/precision and the rest of P5/P6 remain open.
+
 ## Scope and acceptance of the first complete validator
 
 Admit fixed, nonperiodic atomic balls with nonnegative radii, a nonnegative

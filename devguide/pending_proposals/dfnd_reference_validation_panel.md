@@ -32,6 +32,17 @@ The v3 protocol precedes actual saved receiving. This supersedes the former
 missing complete topology only for this original 1.4 Å Model, without native
 #181 correction, nonempty region-volume precision or full P5/P6 qualification.
 
+Actual saved receiving now completes at `92679fc`: the exact original proof
+from `fd3eeb7` is read by raw SHA and independently checked, with one detached
+anchor batch. Complete count is one region/two hull patches; the blocked origin
+coexists with a recovered 28-point all-atom checked path between the earlier
+free anchors. The final v3 receipt binds all files and original producer scope.
+Saved replay takes 68.683 wall / 66.497 CPU seconds, peak RSS 34,144 KiB, one CPU
+and 2 GiB; earlier construction/repeated-query costs stay separate. Both old
+stops remain historical, not a current absence of this profile's reference.
+Next remains the other fixed probes/wider topology receiving and per-region
+precision under #76, with native/public qualification under #181.
+
 ## Complete multi-ball topology construction — 2026-11-14 UTC
 
 The [power-cell construction](../DFND/reference_validator_power_cell_construction.md)
