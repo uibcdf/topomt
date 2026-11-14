@@ -1,0 +1,38 @@
+[
+  {
+    "case": "closed_shell",
+    "samples": [
+      {
+        "source_id": 0,
+        "wall_seconds": 6.469525463995524,
+        "support": 22,
+        "vertices": 26
+      }
+    ],
+    "model_sha256": "a8c2e9cd760a3b7d5eeb62f123668891b23cec7fa194de0adcd2cfc8fe976488"
+  },
+  {
+    "case": "shell_with_opening",
+    "samples": [
+      {
+        "source_id": 0,
+        "wall_seconds": 3.811902367975563,
+        "support": 18,
+        "vertices": 17
+      }
+    ],
+    "model_sha256": "0d3af6fd8ace1d2b6f04d25328d54a802d1f9d3c351558a328e68a91692ed493"
+  },
+  {
+    "case": "dumbbell",
+    "samples": [
+      {
+        "source_id": 0,
+        "wall_seconds": 4.889800325036049,
+        "support": 19,
+        "vertices": 22
+      }
+    ],
+    "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30"
+  }
+]

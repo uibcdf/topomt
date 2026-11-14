@@ -4,6 +4,7 @@ The saved checker independently enumerates the proposed supporting polytopes,
 all their edges and original all-atom predicates. No DFND tessellation is used.
 """
 
+from collections.abc import Callable
 from copy import deepcopy
 from fractions import Fraction
 from itertools import combinations
@@ -41,12 +42,18 @@ def _edges(
 
 
 def _clip(
-    model: Model, planes: tuple[tuple[int, int, int, int], ...], limits: PowerLimits
+    model: Model,
+    planes: tuple[tuple[int, int, int, int], ...],
+    limits: PowerLimits,
+    *,
+    stop_check: Optional[Callable[[], None]] = None,
 ) -> tuple[list[int], tuple[tuple[Fraction, Fraction, Fraction], ...]]:
     enclosure = set(bounding_planes(model))
     seen = tuple(sorted(enclosure))
     vertices = tuple(sorted(bounding_box(model).vertices))
     for cut in planes:
+        if stop_check is not None:
+            stop_check()
         if cut in seen:
             continue
         values = [_evaluate(cut, v) for v in vertices]
@@ -141,6 +148,57 @@ def _availability(
     return free, free_edges
 
 
+def propose_cell(
+    model: Model,
+    atom: Optional[Atom],
+    *,
+    limits: PowerLimits = PowerLimits(),
+    stop_check: Optional[Callable[[], None]] = None,
+) -> dict[str, Any]:
+    """Propose one source cell; no global count follows from this local record.
+
+    Parameters
+    ----------
+    model : Model
+        All-atom fixed-probe model.
+    atom : Atom or None
+        Source owner or the empty-obstacle domain sentinel.
+    limits : PowerLimits
+        Finite cell geometry limits.
+    stop_check : callable or None
+        Callback that may raise InterruptedError.
+
+    Returns
+    -------
+    dict
+        Unverified local geometry proposal.
+
+    Raises
+    ------
+    ValueError
+        Invalid model, proof, work envelope or saved state.
+    """
+    if atom is not None and coincident_dominators(model, atom):
+        return {
+            'atom_id': atom.source_id,
+            'coincident_dominator': coincident_dominators(model, atom)[0],
+        }
+    planes = proposed_planes(model, atom)
+    support, vertices = _clip(model, planes, limits, stop_check=stop_check)
+    if len(vertices) > limits.max_vertices_per_cell:
+        raise ValueError('Power-cell vertex budget exceeded')
+    edges = _edges(vertices, tuple(planes[i] for i in support))
+    free, free_edges = _availability(model, atom, vertices, edges)
+    return {
+        'atom_id': None if atom is None else atom.source_id,
+        'support': support,
+        'vertices': [encode_point(v) for v in vertices],
+        'edges': [list(e) for e in edges],
+        'free_vertices': free,
+        'free_edges': [list(e) for e in free_edges],
+    }
+
+
 def topology_certificate(
     model: Model, *, limits: PowerLimits = PowerLimits()
 ) -> dict[str, Any]:
@@ -173,37 +231,16 @@ def topology_certificate(
     cells: list[dict[str, Any]] = []
     total_vertices = total_edges = steps = 0
     for atom in owners:
-        if atom is not None and coincident_dominators(model, atom):
-            cells.append(
-                {
-                    'atom_id': atom.source_id,
-                    'coincident_dominator': coincident_dominators(model, atom)[0],
-                }
-            )
-            continue
-        planes = proposed_planes(model, atom)
-        steps += len(planes)
+        row = propose_cell(model, atom, limits=limits)
+        if 'coincident_dominator' not in row:
+            steps += len(proposed_planes(model, atom))
         if steps > limits.max_clip_steps:
             raise ValueError('Power-cell clipping-step budget exceeded')
-        support, vertices = _clip(model, planes, limits)
-        if len(vertices) > limits.max_vertices_per_cell:
-            raise ValueError('Power-cell vertex budget exceeded')
-        edges = _edges(vertices, tuple(planes[i] for i in support))
-        total_vertices += len(vertices)
-        total_edges += len(edges)
+        total_vertices += len(row.get('vertices', []))
+        total_edges += len(row.get('edges', []))
         if total_vertices > limits.max_total_vertices or total_edges > limits.max_edges:
             raise ValueError('Power-cell total vertex/edge budget exceeded')
-        free, free_edges = _availability(model, atom, vertices, edges)
-        cells.append(
-            {
-                'atom_id': None if atom is None else atom.source_id,
-                'support': support,
-                'vertices': [encode_point(v) for v in vertices],
-                'edges': [list(e) for e in edges],
-                'free_vertices': free,
-                'free_edges': [list(e) for e in free_edges],
-            }
-        )
+        cells.append(row)
     return _assemble(model, cells)
 
 

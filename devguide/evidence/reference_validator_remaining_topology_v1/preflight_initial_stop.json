@@ -1,0 +1,11 @@
+{
+  "scope": "Initial nine-cell diagnostic, not topology qualification",
+  "status": "incomplete",
+  "exit_code": 137,
+  "cpu_hard_limit_seconds": 60,
+  "wall_timeout_seconds": 75,
+  "diagnosis": "Stopped inside its finite execution envelope; no final preflight receipt. Exit code alone does not identify the exact signal cause.",
+  "physical_result": null,
+  "preserved_outputs": ["closed_shell/initialization/protocol.json", "shell_with_opening/initialization/protocol.json"],
+  "next": "Reduce to one local cell per case and persist each completed diagnostic before continuing."
+}

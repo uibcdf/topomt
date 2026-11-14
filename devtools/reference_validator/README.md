@@ -41,6 +41,17 @@ original external scientific kernel is used by this rational developer route.
 
 ## Exact multi-ball regions and boundary patches
 
+The developer `power_runs` route adds checked source-cell progress under the
+[active workplan](../../devguide/DFND/reference_validator_improvement_workplan.md).
+`start_power_run` and `resume_power_run` accept a finite `cell_budget` and
+optional cooperative stop predicate. `save_power_bundle`/`load_power_bundle`
+write manifest-last immutable bundles and recheck retained geometry/source
+identity. `finish_power_run` requires every source cell and independently
+checks global assembly; a prefix never supplies a global component count.
+The receiving protocol may explicitly select `cell_batch` to retain progress.
+Use these developer operations under the existing external CPU/RAM/time limits;
+they do not add a production API or qualify nonempty per-region precision.
+
 ```bash
 python -m devtools.reference_validator power-topology MODEL.json CERTIFICATE.json
 python -m devtools.reference_validator verify MODEL.json CERTIFICATE.json

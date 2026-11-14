@@ -1,0 +1,78 @@
+{
+  "schema": "topomt.reference-validator.remaining-plan/1",
+  "owner": "uibcdf/topomt#76",
+  "source_baseline": "23655b018025e66876956552e30041a7c2fc6d07",
+  "archive_path": "docs/content/benchlab/synthetic/artifacts/reference_validator_panel_v1/receiving.zip",
+  "archive_sha256": "5d9aec25b9e190bca3fc27d28387bf5d9b20c246c3d04de083c12363d38f814f",
+  "cases": [
+    {
+      "case": "closed_shell",
+      "initial_profile_index": 1,
+      "profiles": [
+        {
+          "probe_angstroms": 0.05,
+          "member": "receiving/cases/closed_shell/profile_0/model.json",
+          "raw_sha256": "b69e52cb62f8c701254c4677d8addb069be76cf380cf4fe6251a62ba19c7c809"
+        },
+        {
+          "probe_angstroms": 0.2,
+          "member": "receiving/cases/closed_shell/profile_1/model.json",
+          "raw_sha256": "c9f2717c9a42bc68d0b05310bffd8831cdfc46aceb5f6b72b371274788c850fe"
+        },
+        {
+          "probe_angstroms": 1.4,
+          "member": "receiving/cases/closed_shell/profile_2/model.json",
+          "raw_sha256": "ac9a560bb25e2f1e9a308b9309c011330f3c420f5777cba8f97140e89ddb8a9f"
+        },
+        {
+          "probe_angstroms": 5,
+          "member": "receiving/cases/closed_shell/profile_3/model.json",
+          "raw_sha256": "3a95df5432fec983f84d38b1223cbe81a7ca09440975d8ec4e229367cc413664"
+        }
+      ]
+    },
+    {
+      "case": "shell_with_opening",
+      "initial_profile_index": 0,
+      "profiles": [
+        {
+          "probe_angstroms": 1.4,
+          "member": "receiving/cases/shell_with_opening/profile_0/model.json",
+          "raw_sha256": "ce1f8627942eaa1b6206b7a72d256221a5c62dc515d04767dbdc23d8b483c97f"
+        },
+        {
+          "probe_angstroms": 3,
+          "member": "receiving/cases/shell_with_opening/profile_1/model.json",
+          "raw_sha256": "cdb4abd0d87e9351a93e1a2336657618992f6b29b739b8b71b0b31da665500e0"
+        },
+        {
+          "probe_angstroms": 5,
+          "member": "receiving/cases/shell_with_opening/profile_2/model.json",
+          "raw_sha256": "d941704bd2af8552a7a20db52fe6d2b782b70061e727e55a125c38c475113f22"
+        }
+      ]
+    },
+    {
+      "case": "dumbbell",
+      "initial_profile_index": 0,
+      "profiles": [
+        {
+          "probe_angstroms": 1.4,
+          "member": "receiving/cases/dumbbell/profile_0/model.json",
+          "raw_sha256": "fcdd3663a107b4bd5ac165ce6e7df18aff8700e9db6d7a785aa71f84c30f20c5"
+        },
+        {
+          "probe_angstroms": 2.2,
+          "member": "receiving/cases/dumbbell/profile_1/model.json",
+          "raw_sha256": "2ef0730ffff501c1b29929537e540453cb779043ef5c515ebb98c803b9cc5e45"
+        },
+        {
+          "probe_angstroms": 6,
+          "member": "receiving/cases/dumbbell/profile_2/model.json",
+          "raw_sha256": "cfa8c8bf17f54d5b27932281b72c33bc0b2320da241eedd911b80465e9db1832"
+        }
+      ]
+    }
+  ],
+  "scope": "Ten unchanged original profiles; positive global counts unspecified before receiving. Target receiving protocols bind actual geometry files after initialization."
+}

@@ -9,6 +9,11 @@ this document.** Scientific correctness, exhaustive justified topology and
 certified volume error take priority over runtime. The current serial exact
 construction and separately executable checker remain the baseline.
 
+Execution update: A's bounded review/controls and B's source-level resumable
+construction are delivered in the linked checkpoint, with 124 selected tests
+and mypy on 34 modules passing. Remaining original receiving and general
+per-region precision retain their separate gates; none is passed by this plan.
+
 This document gives the next implementation order, concrete tasks and acceptance
 gates. The [implementation specification](physical_reference_validator_implementation.md)
 retains the P0--P7 contracts and precision targets; the

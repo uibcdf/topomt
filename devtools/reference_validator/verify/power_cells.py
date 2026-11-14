@@ -4,6 +4,7 @@ Completeness uses the documented convex-cap/polytope-skeleton lemma, not a
 sampled graph heuristic. Producer clipping and graph search are never imported.
 """
 
+from collections.abc import Callable
 from copy import deepcopy
 from fractions import Fraction
 from itertools import combinations
@@ -125,44 +126,64 @@ def _partition(raw: object, expected: list[list[int]], size: int) -> None:
         raise ValueError('Component partition differs from complete checked incidence')
 
 
-def check(
-    model: Model, certificate: object, *, limits: PowerLimits = PowerLimits()
-) -> dict[str, Any]:
-    """Check complete all-atom cells, edges, free regions and boundary incidences."""
-    cert = _record(
-        certificate,
-        {
-            'schema',
-            'kind',
-            'model_sha256',
-            'arithmetic',
-            'construction',
-            'cells',
-            'nodes',
-            'components',
-            'boundary_components',
-        },
-    )
-    if (
-        cert['schema'] != 'topomt.reference-validator.certificate/1'
-        or cert['kind'] != 'power_cell_topology'
-        or cert['arithmetic'] != 'rational-exact/1'
-        or cert['model_sha256'] != model.digest
-        or cert['construction'] != 'power-skeleton-caps/1'
-    ):
-        raise ValueError('Power-cell proof convention or model binding differs')
+def checked_cells(
+    model: Model,
+    rows: object,
+    *,
+    limits: PowerLimits = PowerLimits(),
+    complete: bool = True,
+    offset: int = 0,
+    stop_check: Optional[Callable[[], None]] = None,
+) -> list[dict[str, Any]]:
+    """Reconstruct a complete inventory or an explicitly incomplete prefix.
+
+    Parameters
+    ----------
+    model : Model
+        Frozen all-atom model.
+    rows : object
+        Complete inventory or an explicitly incomplete consecutive slice.
+    limits : PowerLimits
+        Finite checking envelope.
+    complete : bool
+        Require the entire inventory when true.
+    offset : int
+        First source owner of a local slice.
+    stop_check : callable or None
+        Cooperative stop callback.
+
+    Returns
+    -------
+    list of dict
+        Independently reconstructed local cells; slices supply no global count.
+
+    Raises
+    ------
+    ValueError
+        Invalid model, proof, work envelope or saved state.
+    """
     if len(model.atoms) > limits.max_atoms:
         raise ValueError('Power-cell atom budget exceeded')
     sorted_atoms = sorted(model.atoms, key=lambda a: a.source_id)
     owners: list[Optional[Atom]] = list(sorted_atoms)
     if not owners:
         owners.append(None)
-    rows = cert['cells']
-    if not isinstance(rows, list) or len(rows) != len(owners):
+    if (
+        type(offset) is not int
+        or not 0 <= offset < len(owners)
+        or (complete and offset)
+    ):
+        raise ValueError('Invalid local source-cell offset')
+    owners = owners[offset:]
+    if not isinstance(rows, list) or (
+        len(rows) != len(owners) if complete else len(rows) > len(owners)
+    ):
         raise ValueError('Complete source-cell inventory differs')
     cells = []
     total_vertices = total_edges = steps = 0
     for atom, row in zip(owners, rows):
+        if stop_check is not None:
+            stop_check()
         if (
             not isinstance(row, dict)
             or (atom is not None and type(row.get('atom_id')) is not int)
@@ -222,6 +243,7 @@ def check(
                 max_facets=limits.max_support_planes,
                 max_plane_triples=comb(limits.max_support_planes, 3),
             ),
+            stop_check=stop_check,
         )
         if (
             not isinstance(row['vertices'], list)
@@ -270,6 +292,36 @@ def check(
                 'free_edges': free_edges,
             }
         )
+    return cells
+
+
+def check(
+    model: Model, certificate: object, *, limits: PowerLimits = PowerLimits()
+) -> dict[str, Any]:
+    """Check complete all-atom cells, edges, free regions and boundary incidences."""
+    cert = _record(
+        certificate,
+        {
+            'schema',
+            'kind',
+            'model_sha256',
+            'arithmetic',
+            'construction',
+            'cells',
+            'nodes',
+            'components',
+            'boundary_components',
+        },
+    )
+    if (
+        cert['schema'] != 'topomt.reference-validator.certificate/1'
+        or cert['kind'] != 'power_cell_topology'
+        or cert['arithmetic'] != 'rational-exact/1'
+        or cert['model_sha256'] != model.digest
+        or cert['construction'] != 'power-skeleton-caps/1'
+    ):
+        raise ValueError('Power-cell proof convention or model binding differs')
+    cells = checked_cells(model, cert['cells'], limits=limits)
     points = sorted(
         {cell['vertices'][i] for cell in cells for i in cell['free_vertices']}
     )

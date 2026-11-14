@@ -6,10 +6,12 @@ import json
 import os
 import re
 import resource
+import signal
 import subprocess
 import time
+from collections.abc import Callable
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 from .model import Model, _record, decode_point
 from .power_cells import reprobe_certificate, topology_certificate
@@ -35,7 +37,9 @@ def _name(value: object) -> str:
     return value
 
 
-def capture(protocol: Path, output: Path) -> None:
+def capture(
+    protocol: Path, output: Path, *, stop: Optional[Callable[[], bool]] = None
+) -> None:
     """Save, independently read/check and measure a frozen small-control panel.
 
     Parameters
@@ -106,6 +110,7 @@ def capture(protocol: Path, output: Path) -> None:
         # must never acquire an empty/disconnected geometric interpretation.
         _write(folder / 'model.json', model.to_record())
         mark_phase('model_receiving')
+        origin: dict[str, Any]
         reference = row.get('saved_certificate')
         geometry = row.get('saved_geometry')
         if reference is not None and geometry is not None:
@@ -154,8 +159,40 @@ def capture(protocol: Path, output: Path) -> None:
             }
             phase = 'certified_geometry_reprobe'
         elif reference is None:
-            proof = topology_certificate(model)
-            origin = {'route': 'constructed_here'}
+            if 'cell_batch' in row:
+                from .power_runs import (
+                    finish_power_run,
+                    resume_power_run,
+                    save_power_bundle,
+                    start_power_run,
+                )
+
+                progress = start_power_run(
+                    model, cell_budget=row['cell_batch'], stop=stop
+                )
+                index = 0
+                while True:
+                    save_power_bundle(
+                        folder / 'progress' / f'step_{index:04d}', model, progress
+                    )
+                    if progress['stop_reason'] == 'cancelled':
+                        raise InterruptedError(
+                            'Power receiving stopped with saved progress'
+                        )
+                    if not progress['remaining_atom_ids']:
+                        break
+                    progress = resume_power_run(
+                        model, progress, cell_budget=row['cell_batch'], stop=stop
+                    )
+                    index += 1
+                proof = finish_power_run(model, progress)
+                origin = {
+                    'route': 'constructed_with_checkpoints',
+                    'checkpoint_count': index + 1,
+                }
+            else:
+                proof = topology_certificate(model)
+                origin = {'route': 'constructed_here'}
             phase = 'construction'
         else:
             _record(reference, {'path', 'sha256', 'producer_revision'})
@@ -281,4 +318,11 @@ if __name__ == '__main__':
     parser.add_argument('protocol', type=Path)
     parser.add_argument('output', type=Path)
     args = parser.parse_args()
-    capture(args.protocol, args.output)
+    cancelled = [False]
+
+    def request_stop(signum: int, frame: object) -> None:
+        cancelled[0] = True
+
+    signal.signal(signal.SIGTERM, request_stop)
+    signal.signal(signal.SIGXCPU, request_stop)
+    capture(args.protocol, args.output, stop=lambda: cancelled[0])

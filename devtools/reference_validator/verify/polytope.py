@@ -6,10 +6,12 @@ enter these geometric conclusions. Full mathematical assumptions are documented
 in the hull checkpoint.
 """
 
+from collections.abc import Callable
 from fractions import Fraction
 from functools import cmp_to_key
 from itertools import combinations
 from math import comb, gcd, lcm
+from typing import Optional
 
 from ..hull_model import HullLimits
 from ..model import (
@@ -74,7 +76,10 @@ def _evaluate(plane: tuple[int, ...], p: tuple[Fraction, ...]) -> Fraction:
 
 
 def _vertices(
-    planes: tuple[tuple[int, int, int, int], ...], limits: HullLimits
+    planes: tuple[tuple[int, int, int, int], ...],
+    limits: HullLimits,
+    *,
+    stop_check: Optional[Callable[[], None]] = None,
 ) -> tuple[tuple[Fraction, Fraction, Fraction], ...]:
     count = len(planes)
     if count > limits.max_facets or comb(count, 3) > limits.max_plane_triples:
@@ -84,6 +89,8 @@ def _vertices(
     }
     result = set()
     for i, j, k in combinations(range(count), 3):
+        if stop_check is not None:
+            stop_check()
         determinant = _dot(planes[i], crosses[j, k])
         if determinant == 0:
             continue

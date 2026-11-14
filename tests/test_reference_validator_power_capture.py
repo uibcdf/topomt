@@ -65,6 +65,30 @@ def test_capture_saves_checks_and_binds_anchor_connection_and_separation(
         capture(protocol, output)
 
 
+def test_capture_retains_checked_cell_checkpoints_when_selected(tmp_path, monkeypatch):
+    from devtools.reference_validator.capture_power_cells import capture
+    from devtools.reference_validator.power_runs import load_power_bundle
+
+    monkeypatch.setattr(os, 'sched_getaffinity', lambda _: {0})
+    protocol = _protocol(tmp_path)
+    spec = read_record(protocol)
+    spec['cases'][0]['cell_batch'] = 1
+    protocol.write_text(json.dumps(spec))
+    output = tmp_path / 'receiving'
+    capture(protocol, output)
+    folder = output / 'two_barriers'
+    model = Model.from_record(read_record(folder / 'model.json'))
+    first = load_power_bundle(folder / 'progress/step_0000', model)
+    final = load_power_bundle(folder / 'progress/step_0001', model)
+    assert len(first['cells']) == 1 and len(final['cells']) == 2
+    assert (
+        read_record(output / 'receipt.json')['cases']['two_barriers'][
+            'certificate_origin'
+        ]['route']
+        == 'constructed_with_checkpoints'
+    )
+
+
 def test_capture_does_not_replace_failed_expectation_with_a_physical_answer(
     tmp_path, monkeypatch
 ):

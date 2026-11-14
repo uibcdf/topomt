@@ -12,6 +12,42 @@ complete topology-plus-precision validator or a supported public TopoMT detector
 
 ## Selected improvement workplan — 2026-11-14
 
+### Work packages A/B: bounded source delivery
+
+The construction record now maps the completeness obligations to producer,
+checker and shared trusted primitives. Eight new proof-review controls cover
+source ordering, exact contacts, redundant/coincident eight-region geometry
+and geometric proof corruption. No unresolved mathematical obligation was
+identified in this bounded argument review; it is not a formal software proof.
+
+Power-cell progress now supports independently checked local prefixes,
+same-model/source/request resume, manifest-last bundles and cooperative stops
+inside clipping and triple enumeration. Final exhaustive assembly/checking is
+required for global counts. New receiving can select `cell_batch` to retain
+immutable intermediate progress. The old proof schema and pilot geometry are
+preserved. Nine resume controls plus one new capture control are added.
+
+The source selection passes 124 tests (7.45 pytest / 8.13 bounded process
+seconds, peak child RSS 90,472 KiB, one CPU and 2 GiB), including the original
+355-file integrity guard and unchanged twenty-profile certificate equivalence.
+Ruff/format and scoped mypy on 34 validator modules pass; the new typing config
+ignores only unavailable optional gmpy2 stubs. Full-suite, installed/public
+qualification and complete original receiving remain separate gates.
+
+The first nine-cell remaining-family diagnostic stops under its 60 CPU/75
+wall-second envelope, without a final receipt. Its exit 137 is retained as an
+incomplete diagnostic, never a topology/exclusion result. The reduced preflight
+selects one cell per family and persists completed measurements incrementally.
+Actual original-family geometry/profile receiving follows committed source.
+
+The reduced preflight completes in 49.99 wall seconds, peak RSS 31,656 KiB:
+one source cell per original family takes 6.47/3.81/4.89 wall seconds including
+independent local checking. It proves only local construction feasibility.
+The frozen initialization protocols therefore allow 900 soft/1080 hard CPU
+seconds and 1260 wall seconds, still one CPU/thread and 2 GiB, with batches of
+24 cells and host checks. Extra time covers independent prefix/save/resume
+verification; a budget stop remains unresolved with retained progress.
+
 The [reviewed post-tube workplan](reference_validator_improvement_workplan.md)
 uses baseline `242f756` and keeps nine of nineteen original profiles
 topology-complete, with nonempty per-region precision pending. It selects a

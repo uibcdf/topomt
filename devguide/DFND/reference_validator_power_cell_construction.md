@@ -511,6 +511,57 @@ are unchanged; no comparative-finding resolution, new geometry/provider,
 protein phase or public morphological promotion follows. The original frozen
 case artifacts and all earlier source-scoped receiving remain unchanged.
 
+## Proof/trust review — 2026-11-14, work package A
+
+The post-tube review maps every completeness obligation to the implementation.
+This is a review of the stated mathematical argument and bounded controls, not
+a formal proof of Python or qualification of unexecuted input families.
+
+| Obligation | Producer / independent checker | Shared trusted foundation |
+| --- | --- | --- |
+| Exact source partition | `proposed_planes` expands affine power differences; checker `_planes` expands separate polynomial coefficients and also checks direct all-source power inequalities. | Exact Model/scalar decoding, canonical halfspaces and domain planes. |
+| Complete convex cells | Producer clips successively; checker enumerates every feasible supporting-plane triple, proves boundedness and checks all original inequalities. | Rational/integer arithmetic and elementary convex-polyhedral facts. |
+| Whole-edge availability | Producer enumerates vertex-pair active ranks; checker reconstructs edges from independent plane-pair intersections and scans all atomic balls. | Exact squared whole-segment predicates; contact is excluded. |
+| Complete global regions | Producer graph traversal; checker disjoint-set reconstruction and exact partition comparison. | Convex-cap/skeleton lemma, finite closed-cell cover and shared geometric incidences. |
+| Boundary patches and incidence | Only edges sharing a declared domain face glue boundary nodes; checker reconstructs patch supports and region incidence. | Exact domain-face membership; finite-domain interpretation. |
+| Anchor/path claims | Supporting-root association plus complete path checking. | Convex-cap path argument and all-atom segment predicates. |
+
+The cap argument covers point, segment and polygonal cells as well as 3D ones.
+Identical cells glue on identical rational vertices; dominated coincident
+cells retain an algebraic infeasibility witness. Shared-face free components
+contain shared face vertices by the same lemma, so those incidences cannot be
+discarded. Boundary gluing deliberately excludes interior shortcuts. A finite
+relatively closed cover justifies global separation once all local pieces and
+their intersections are exhausted. No unresolved obligation was identified in
+this bounded review; the declared trusted mathematical/arithmetic base remains.
+
+`test_reference_validator_proof_review.py` adds source-order, exact boundary-
+contact, coincident/redundant eight-corner and content-corruption controls.
+Covered coordinate planes separate the eight orthants, while monotone motion
+toward each corner proves each orthant's free part connected. Thus the expected
+eight regions/patches do not come from either graph implementation. Removing
+an edge/free vertex or forging region/boundary gluing is rejected geometrically,
+without depending on a file digest. Existing tiny-gap, unequal-radius,
+lower-dimensional and transformed-model controls remain in the selection.
+
+## Checked power-cell progress — work package B
+
+`power_runs.py` and the separately importable `verify/power_progress.py` add
+source-bound prefix construction and manifest-last saved bundles. Every
+retained cell is reconstructed independently before reuse. The progress record
+binds exact model, source/runtime fingerprints and work policy; changed requests,
+missing/boolean source IDs, corrupted cells and torn bundles are rejected.
+The empty-obstacle inventory uses its explicit single domain-cell sentinel.
+
+Cooperative stopping is checked inside clipping and supporting-plane triple
+enumeration. An interrupted cell is discarded, while completed verified cells
+can be saved. Global counts stay unavailable even for a locally complete
+progress record until `finish_power_run` assembles and independently verifies
+the exhaustive proof. The default certificate schema and earlier exact pilot
+contents remain unchanged. Receiving can explicitly select `cell_batch` to
+retain immutable progress bundles; old protocols keep their original route.
+Saved-check/rechecking costs are part of the measured receiving, not free reuse.
+
 ## Complementary tetrahedral reference proposed by the maintainer
 
 Any full-dimensional tetrahedron with vertices v0..v3 has coordinates
