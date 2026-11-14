@@ -1,0 +1,52 @@
+{
+  "schema": "topomt.reference-validator.wide-family-panel/1",
+  "owner": "uibcdf/topomt#76",
+  "date": "2026-11-14",
+  "scope": "Three unchanged original wide-tube Models; complete exact target topology/queries with separate sequential worker measurements. No inferred monotone counts or native fix.",
+  "plan": {
+    "path": "devguide/evidence/reference_validator_power_cells_wide_v1/plan.json",
+    "sha256": "98f6c7a241e4b64d6391053e8f388330d27ee013eb28a0439dcfe10cd1d7d4da"
+  },
+  "initialization": {
+    "protocol": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/protocol.json",
+    "protocol_sha256": "aedda5979c44d50857a9c29f7affeadf52f29a68c4da01bdadb342613850dbbd",
+    "receipt": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/receipt.json",
+    "receipt_sha256": "780c588957146d1183284c2f93d33919677e398afc830827f4ccc7ecd7425f14",
+    "geometry_producer_revision": "38f5a86381db9cc83b79d82066cdaf4482eb9aaa"
+  },
+  "profiles": [
+    {
+      "probe_angstroms": 1.4,
+      "protocol": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_1_4/protocol.json",
+      "protocol_sha256": "d50f9bdd2027d6fe517a2ccb38e6a1fc16dd8c5e96a26ff05df385eac60f4021"
+    },
+    {
+      "probe_angstroms": 2.5,
+      "protocol": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_2_5/protocol.json",
+      "protocol_sha256": "0a2b180cf9a0338aea85fc2b1586009d05940b31891463607740b7f92fe5c307"
+    },
+    {
+      "probe_angstroms": 5.0,
+      "protocol": "devguide/evidence/reference_validator_power_cells_wide_v1/probe_5_0/protocol.json",
+      "protocol_sha256": "ce75f9864e8141fe64f73e8426bf3080a2868b2b50e207aa80aced0498262a0a"
+    }
+  ],
+  "geometry_source": {
+    "model_path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/model.json",
+    "model_sha256": "94e292f1d409247dfd784ece19431a81e89ad612537e4f53862a6ea4be8417e3",
+    "certificate_path": "devguide/evidence/reference_validator_power_cells_wide_v1/initialization/receiving/wide_geometry_1_4/certificate.json",
+    "certificate_sha256": "d039869f4dc7450d1771960dcc7f92cafab175a940fea1c5650a72dcf7589a0c",
+    "producer_revision": "38f5a86381db9cc83b79d82066cdaf4482eb9aaa"
+  },
+  "resource_policy": {
+    "cpu_count": 1,
+    "numerical_threads": 1,
+    "address_space_limit_bytes": 2147483648,
+    "cpu_limit_seconds": 240,
+    "wall_limit_seconds": 300,
+    "host_sample_interval_seconds": 5,
+    "minimum_available_fraction": 0.2,
+    "minimum_available_bytes": 4294967296,
+    "reason": "Subsequent individual saved/reprobe profile checks include verified geometry/source handling, target checking and one anchor batch; one CPU/thread, 2 GiB and finite conservative time ceilings."
+  }
+}

@@ -32,6 +32,21 @@ profile protocols will bind its actual source geometry hashes and producer
 revision before individual sequential 240 CPU/300 wall-second checks. Source
 implementation and the initial frozen plan do not qualify those executions.
 
+Initialization now completes at `38f5a86381db9cc83b79d82066cdaf4482eb9aaa`:
+one complete free region/two hull patches for the original wide 1.4 Å Model.
+Constructing, saving and independently checking that proof without anchor
+queries takes 183.539 wall / 178.553 CPU seconds, peak RSS 38,160 KiB, one CPU
+and 2 GiB. This is a complete mathematical inventory with an intentionally
+empty query set, not the later family-query receiving. The native #184
+availability result and original observations are unchanged.
+
+The subsequently frozen [wide profile panel](../evidence/reference_validator_power_cells_wide_v1/protocol.json)
+binds the actual original geometry files/producer. It selects unchanged saved-
+certificate reading at 1.4 Å and source-checked geometry reprobes at 2.5/5 Å.
+Every target keeps its own full check and named queries. Each sequential worker
+has one CPU/thread, 2 GiB and finite 240 CPU/300 wall-second limits. Actual
+profile completion and nonempty region precision remain separate gates.
+
 ## Remaining narrow profiles: probe-family source continuation — 2026-11-14
 
 The [probe-family continuation](reference_validator_power_cell_construction.md#probe-family-geometry-reuse--2026-11-14)
