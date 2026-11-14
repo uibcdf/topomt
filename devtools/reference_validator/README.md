@@ -84,6 +84,17 @@ narrow 1.4 Å attempt is unresolved after its initial execution envelope, withou
 a completed certificate. See the [current construction record](../../devguide/DFND/reference_validator_power_cell_construction.md)
 for measured resources, evidence and the profiling/rebudgeting follow-up under #76.
 
+The active-plane continuation preserves all twenty frozen certificates exactly
+and leaves the independent checker unchanged. It removes strictly slack
+planes only from the producer's edge-working set, retaining every source
+inequality in construction and verification. The capture helper saves its
+input Model before construction and completed per-profile phase timings in
+`phases.json`. No final receipt means incomplete receiving; partial input or
+timing files do not establish a physical count. The
+[repeat narrow protocol](../../devguide/evidence/reference_validator_power_cells_v2/protocol.json)
+uses a measured, finite larger CPU/wall envelope with the same one-CPU/2 GiB
+limits and unchanged physical model.
+
 From the checkout, under external CPU/memory/time limits:
 
 ```bash

@@ -86,12 +86,30 @@ def capture(protocol: Path, output: Path) -> None:
         folder = output / name
         folder.mkdir()
         before, cpu_before = time.monotonic(), time.process_time()
+        phase_wall, phase_cpu = before, cpu_before
+        phases: dict[str, dict[str, float]] = {}
+
+        def mark_phase(name: str) -> None:
+            nonlocal phase_wall, phase_cpu
+            wall, cpu = time.monotonic(), time.process_time()
+            phases[name] = {
+                'wall_seconds': wall - phase_wall,
+                'cpu_seconds': cpu - phase_cpu,
+            }
+            phase_wall, phase_cpu = wall, cpu
+
         model = Model.from_record(row['model'])
-        proof = topology_certificate(model)
+        # Preserve the received input even if construction exhausts a budget.
+        # Only the final receipt marks a complete receiving; this input alone
+        # must never acquire an empty/disconnected geometric interpretation.
         _write(folder / 'model.json', model.to_record())
+        mark_phase('model_receiving')
+        proof = topology_certificate(model)
         _write(folder / 'certificate.json', proof)
+        mark_phase('construction')
         saved_model = Model.from_record(read_record(folder / 'model.json'))
         saved_proof = read_record(folder / 'certificate.json')
+        mark_phase('saved_reading')
         checked = verify(saved_model, saved_proof)
         for field, expectation in [
             ('n_components', 'expected_components'),
@@ -105,6 +123,7 @@ def capture(protocol: Path, output: Path) -> None:
                     'Checked power-cell result differs from frozen expectation'
                 )
         _write(folder / 'verification.json', checked)
+        mark_phase('verification')
         anchors = row['anchors']
         if not isinstance(anchors, dict) or len(anchors) > 32:
             raise ValueError('Invalid anchor inventory or work budget')
@@ -132,6 +151,8 @@ def capture(protocol: Path, output: Path) -> None:
             folder / 'anchors.json',
             {'points': anchors, 'locations': locations, 'pairs': connections},
         )
+        mark_phase('anchor_queries')
+        _write(folder / 'phases.json', phases)
         cases[name] = {
             'model_sha256': saved_model.digest,
             'certificate_sha256': checked['certificate_sha256'],

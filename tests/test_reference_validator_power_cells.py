@@ -235,6 +235,23 @@ def test_power_construction_agrees_with_every_saved_complete_one_ball_box_contro
         )
 
 
+def test_producer_preserves_every_frozen_exact_cell_and_complete_partition():
+    base = (
+        Path(__file__).resolve().parents[1]
+        / 'devguide/evidence/reference_validator_power_cells_v1'
+    )
+    spec = json.loads((base / 'protocol.json').read_text())
+    assert len(spec['cases']) == 20
+    for row in spec['cases']:
+        model = Model.from_record(row['model'])
+        old = json.loads(
+            (base / 'receiving' / row['name'] / 'certificate.json').read_text()
+        )
+        # Exact proof equality protects all cells/vertices/edges and the final
+        # incidence, not merely an unchanged count after a producer optimization.
+        assert topology_certificate(model) == old
+
+
 def test_complete_region_assignment_proves_separation_and_returns_continuous_paths():
     model = _barriers()
     cert = topology_certificate(model)

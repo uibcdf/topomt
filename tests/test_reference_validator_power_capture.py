@@ -90,3 +90,46 @@ def test_capture_rejects_unbounded_parallel_envelope_before_creating_output(
     with pytest.raises(ValueError, match='one CPU'):
         capture(_protocol(tmp_path), tmp_path / 'receiving')
     assert not (tmp_path / 'receiving').exists()
+
+
+def test_capture_keeps_the_received_model_when_construction_stops(
+    tmp_path, monkeypatch
+):
+    import devtools.reference_validator.capture_power_cells as module
+
+    monkeypatch.setattr(os, 'sched_getaffinity', lambda _: {0})
+
+    def stop(_):
+        raise ValueError('Deliberate construction stop')
+
+    monkeypatch.setattr(module, 'topology_certificate', stop)
+    protocol = _protocol(tmp_path)
+    output = tmp_path / 'receiving'
+    with pytest.raises(ValueError, match='Deliberate construction stop'):
+        module.capture(protocol, output)
+    assert (
+        read_record(output / 'two_barriers/model.json')
+        == read_record(protocol)['cases'][0]['model']
+    )
+    assert not (output / 'receipt.json').exists()
+
+
+def test_capture_reports_separate_construction_saved_check_and_query_costs(
+    tmp_path, monkeypatch
+):
+    from devtools.reference_validator.capture_power_cells import capture
+
+    monkeypatch.setattr(os, 'sched_getaffinity', lambda _: {0})
+    output = tmp_path / 'receiving'
+    capture(_protocol(tmp_path), output)
+    phases = read_record(output / 'two_barriers/phases.json')
+    assert list(phases) == [
+        'model_receiving',
+        'construction',
+        'saved_reading',
+        'verification',
+        'anchor_queries',
+    ]
+    assert all(
+        p['wall_seconds'] >= 0 and p['cpu_seconds'] >= 0 for p in phases.values()
+    )

@@ -10,6 +10,30 @@ These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete topology-plus-precision validator or a supported public TopoMT detector.
 
+## Narrow-tube exact-working-set continuation — 2026-11-14
+
+The [working-plane continuation](reference_validator_power_cell_construction.md#exact-working-plane-continuation--2026-11-14)
+profiles original atom 0 and removes only strictly slack constraints from the
+producer's edge-working set. Every source inequality and the unchanged exact
+checker retain their roles. All twenty frozen certificates are reproduced
+exactly. The receiving helper saves input before construction and records
+separate construction/saved-check/query costs for completed profiles.
+
+The source selection passes **284 tests**, including those exact-proof
+equivalence and interrupted-input/phase controls; one CPU, 2 GiB, 26.41 seconds
+and peak RSS 97,900 KiB. Repository Ruff/format and scoped mypy on 32 modules
+pass. An initial selection used a 60 CPU-second wrapper, which the older hull
+capture correctly rejects because its contract requires at most 50; repeating
+with the required 50-second cap passes. No scientific input or checker was
+changed to bypass that operational guard.
+
+The separately frozen repeat retains the same narrow 1.4 Å physical Model and
+anchors. Its finite 180 CPU/240 wall-second budget follows the measured earlier
+stop and first-cell profile; one CPU/thread, 2 GiB and conservative five-second
+host checks remain. Actual committed-source receiving is separate from this
+source qualification. Wider profiles, region-assigned precision and native
+#181/#180/#184/#188 retain their scientific scopes.
+
 ## Exact multi-ball topology continuation — 2026-11-14 UTC
 
 The [power-cell construction](reference_validator_power_cell_construction.md)

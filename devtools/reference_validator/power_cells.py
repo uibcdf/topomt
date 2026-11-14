@@ -58,6 +58,11 @@ def _clip(
             if len(kept) > limits.max_support_planes:
                 raise ValueError('Power-cell supporting-plane budget exceeded')
             return sorted(planes.index(p) for p in kept), ()
+        if max(values) < 0:
+            # Strict slack on every vertex stays strict on every later subset.
+            # This plane cannot define an edge or become active after clipping.
+            # It remains in the full source inventory and final checker input.
+            continue
         if max(values) > 0:
             retained = {v for v, value in zip(vertices, values) if value <= 0}
             for i, j in _edges(vertices, seen):
@@ -71,7 +76,19 @@ def _clip(
             vertices = tuple(sorted(retained))
             if len(vertices) > limits.max_vertices_per_cell:
                 raise ValueError('Power-cell vertex budget exceeded')
-        seen = (*seen, cut)
+        # Keep exactly the active working planes plus the fixed enclosure.
+        # A plane with no active vertex cannot support any current edge. No
+        # geometric tolerance or obstacle selection participates in this step.
+        seen = tuple(
+            sorted(
+                enclosure
+                | {
+                    p
+                    for p in (*seen, cut)
+                    if any(_evaluate(p, v) == 0 for v in vertices)
+                }
+            )
+        )
     kept = enclosure | {
         p for p in planes if any(_evaluate(p, v) == 0 for v in vertices)
     }

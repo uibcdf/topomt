@@ -238,6 +238,40 @@ all-atom inequality and the independent verification; do not tune geometry or
 expected counts to fit execution time. This dated stop does not qualify the
 tubes, diagnose DFND or establish a permanent limitation of the construction.
 
+## Exact working-plane continuation — 2026-11-14
+
+The first-cell profile identifies repeated rational evaluation in edge
+reconstruction: 79,305 plane evaluations for original source atom 0. The
+producer now retains active working planes and the fixed enclosing box when
+finding edges. A plane strictly slack at all current vertices is strictly
+slack on their convex hull and every later clipped subset. It cannot support
+an edge or become active later. Equality is retained exactly, including
+lower-dimensional incidences. Every original inequality is still processed,
+included in the final active-support extraction and checked independently.
+There is no cutoff, epsilon or selected-obstacle approximation.
+
+All twenty frozen pilot certificates are reproduced **exactly**, including
+every cell, vertex, edge and final partition. The independent checker is
+unchanged. The same instrumented first cell uses 44,555 plane evaluations and
+retains the same seventeen support planes/seventeen vertices. The
+[diagnostic profile](../evidence/reference_validator_power_cells_v2/profiling.json)
+binds the input, source bytes and raw cProfile output. Its one-run timings
+include profiling overhead; they are not whole-engine or competitive evidence.
+
+The receiving helper now saves the exact Model before construction, retaining
+the input when a run stops. Completed profiles additionally record separate
+model receiving, construction, saved reading, verification and anchor-query
+wall/CPU costs. A partial directory is not a completed receiving or physical
+absence result. The final receipt still binds every saved JSON record.
+
+The [repeat protocol](../evidence/reference_validator_power_cells_v2/protocol.json)
+preserves the previous exact 81-atom Model/probe/anchors and unspecified global
+count. The measured stop/profile justify a first 180 CPU/240 wall-second
+envelope, still one CPU/thread and 2 GiB, with host samples every five seconds.
+The envelope is a finite ceiling, not a resource reservation. Actual committed-
+source receiving is recorded separately; other original profiles, per-region
+precision and native #181 keep their gates.
+
 ## Complementary tetrahedral reference proposed by the maintainer
 
 Any full-dimensional tetrahedron with vertices v0..v3 has coordinates
