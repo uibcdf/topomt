@@ -1,5 +1,16 @@
 # DFND notebook laboratory checkpoint
 
+## Next validator work — 2026-11-14
+
+The [reviewed improvement workplan](reference_validator_improvement_workplan.md)
+now gives the executable sequence under #76: proof/trust controls, verified
+power-cell resume, remaining shell/dumbbell receiving, certified region-volume
+integration/precision and mapped DFND comparison. The first original family
+after the resume gate is `closed_shell`; small integration controls may proceed
+after the proof review, serially. The existing nine complete topology profiles
+and all native finding dispositions are unchanged. This is a work selection,
+not delivery of those improvements, another geometry or a protein/provider run.
+
 ## Complete original wide-tube reference family — 2026-11-14
 
 The [exact reference continuation](reference_validator_power_cell_construction.md)

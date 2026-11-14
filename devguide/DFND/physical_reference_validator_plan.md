@@ -15,6 +15,11 @@ Region-assigned precision and the other ten profiles'
 qualification remain pending.
 The proposed complete-validator acceptance below retains those requirements.
 
+The [post-tube improvement workplan](reference_validator_improvement_workplan.md)
+selects the next executable packages and their test/acceptance gates under #76.
+It retains this model and the detailed specification's precision target;
+planning is separate from implementation and actual saved receiving.
+
 Critical design review: 2026-11-12. Owner:
 [#76](https://github.com/uibcdf/topomt/issues/76); first DFND consumer:
 [#181](https://github.com/uibcdf/topomt/issues/181).

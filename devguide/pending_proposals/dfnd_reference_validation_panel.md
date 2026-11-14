@@ -15,6 +15,25 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Selected improvement workplan — 2026-11-14
+
+The [post-tube implementation workplan](../DFND/reference_validator_improvement_workplan.md)
+reviews the maintainer's improvement direction against source `242f756`.
+It retains the current exact construction/checker and specifies proof/trust
+controls, distinct power-cell checkpoint/resume, the remaining ten topology
+profiles, certified region-volume assignment/integration and mapped DFND
+comparison. Per-region accounting explicitly avoids duplicate coincident-cell
+volume and preserves shared uncertainty. Small precision prototypes may proceed
+after the proof review without waiting for all topology receiving; production
+calculations remain sequential and bounded.
+
+The next executable tranche is proof/falsification controls, checked per-cell
+resume and a bounded closed-shell pilot. The specification's k=24 total/region
+target is unchanged. Proposed tests/modules and acceptance criteria are not
+new source or scientific qualification. All packages remain owned here until
+separately scheduled themes receive linked issues; #181/#180/#184/#188 and
+#16 keep their separate gates. This issue remains partial.
+
 ## All three original wide probes received — 2026-11-14
 
 The original 77-atom wide family now has **1/1/0 complete free regions and

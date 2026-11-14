@@ -10,6 +10,32 @@ These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete topology-plus-precision validator or a supported public TopoMT detector.
 
+## Selected improvement workplan — 2026-11-14
+
+The [reviewed post-tube workplan](reference_validator_improvement_workplan.md)
+uses baseline `242f756` and keeps nine of nineteen original profiles
+topology-complete, with nonempty per-region precision pending. It selects a
+bounded proof/trust review, distinct verified power-cell resume and the
+remaining shell/dumbbell receiving; a small region-volume prototype need not
+wait for all topology receiving. Integration-to-region assignment, coincident
+cell ownership, shared upper-bound uncertainty and the unchanged k=24 target
+have explicit gates. The first executable tranche is review/falsification
+controls, checked per-cell resume and a bounded closed-shell pilot.
+
+This is planning, not new validator execution or a native correction.
+The P0--P7 specification, original inputs and all retained proofs keep their
+authority. #76 remains partial; native #181/#180/#184/#188, public #16 and
+the complementary tetrahedral proposal retain their scopes. Record actual
+implementation/receiving evidence below when the corresponding work executes.
+
+Planning validation passes 17 reporting/finding/original-artifact tests
+(`--noconftest --receptor=llm`, 0.95 pytest / 1.57 bounded process seconds,
+peak child RSS 64,992 KiB, one CPU and 2 GiB). All 245 local Markdown file
+targets in the seven changed guidance documents resolve. Report indexes and
+offline finding consistency pass; all original 355 files retain their hashes.
+These checks validate this documentation delivery, not the proposed algorithms,
+full suite, installed/public admission or any new scientific receiving.
+
 ## Wide-tube reference selection — 2026-11-14
 
 The maintainer's continuation selects the existing 77-atom wide/sparse tube

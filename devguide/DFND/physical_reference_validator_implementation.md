@@ -11,6 +11,13 @@ correctness, justified exact decisions and certified error bounds outrank
 runtime. Runtime/memory measurements plan feasible execution; competitive
 speed is not an acceptance criterion.
 
+The [post-tube improvement workplan](reference_validator_improvement_workplan.md)
+now gives the selected implementation order, proof/trust review, power-cell
+resume, remaining ten-profile receiving and certified region-volume tasks.
+It supplements this specification's P0--P7 contracts and k=24 target; it does
+not replace them or mark planned work implemented. Use the
+[source checkpoint](reference_validator_checkpoint.md) for executed evidence.
+
 Planning baseline: `0b68206b0af2210b3f27fc3d70fd5837512148c5`.
 The [input/tool inventory](../evidence/reference_validator_planning_inventory_v1.json)
 checks six original models, 19 selected profiles and all 355 previously frozen
@@ -105,11 +112,14 @@ this complete delivery. Public API/package qualification has a later gate.
 | P6 — public admission | Supported API, diagnostics, quantities, optional dependencies/attribution, saved readers, docs and packaging qualification. | Qualified scientific route. | Public contracts and applicable installed/Python/platform gates pass at their stated scope. |
 | P7 — controlled scaling | Bounded CPU parallelism and optional GPU experiments with equivalent proof guarantees. | Qualified serial baseline. | Equivalent validated outputs/certificates and measured total resource use; no weaker acceptance for speed. |
 
-P0/P1 are the immediate tranche. Do not build a large Rust spatial engine before
-P1. P4 prototype work can inform P1; complete per-region reporting still depends
-on P3. P7 is an optional improvement, not a prerequisite for scientific use of
-an otherwise qualified serial validator. All stages currently remain under #76;
-split independently closable themes into issues before separately scheduling
+P0/P1 were the initial tranche; the current post-tube work order is in the
+linked improvement workplan. The selected exact construction retains the P1
+precision obligations; do not expand a large Rust spatial engine ahead of
+those scientific gates. Small P4 prototypes need not wait for all remaining
+original receiving; complete per-region reporting depends on accepted P3
+topology at its own scope. P7 is an optional improvement, not a prerequisite
+for scientific use of an otherwise qualified serial validator. All stages
+currently remain under #76; split independently closable themes into issues before separately scheduling
 them. #181, #180/#184, #188 and #16 retain their own acceptance gates.
 
 ## P0: exact model and certificate contracts
@@ -347,7 +357,7 @@ supported production export.
 | `devtools/reference_validator/producer.py` | Selected backend orchestration, partition/frontier, budgets and checkpointing. |
 | `devtools/reference_validator/verify/` | Separately runnable parser, exact primitive/domain/coverage checks, topology obligations and volume verification. No import of producer search code. |
 | `devtools/reference_validator/receiving.py` | Read original protocols, freeze the actual validated model and create additive source-bound results. |
-| `hull_model.py`, `center_hull.py`, `verify/center_hull.py`, `verify/polytope.py` under the developer directory | Exact source hull/equality proof and closed geometric clipping; Model's proof-backed HullDomain admits steric point/path and sufficient whole-domain certificates. General hull subdivision/regions remain pending. |
+| `hull_model.py`, `center_hull.py`, `verify/center_hull.py`, `verify/polytope.py` under the developer directory | Exact source hull/equality proof and closed geometric clipping; Model's proof-backed HullDomain admits steric point/path and sufficient whole-domain certificates. Complete regions use the separate power-cell route; general hull subdivision/integration remains pending. |
 | `devtools/reference_validator/box_topology.py`, `verify/box_topology.py` | Implemented scoped one-ball/axis-box completeness construction and its standalone sector/incidence checker. This is P1 control evidence, not the selected general engine. |
 | `analytic_volume.py`, `volume_request.py`, `verify/analytic_volume.py`, `verify/_interval.py` under the same developer directory | Implemented contained singleton/pair cluster total-volume proof, explicit precision requests and declared trusted rational interval/constants. General clipping and region assignment remain pending. |
 | `devtools/reference_validator/compare.py` | Mapped occupancy/connectivity comparisons; keeps morphology/count semantics distinct. |
@@ -568,13 +578,21 @@ arithmetic precision and budgets must remain explicit and bounded.
 ## Immediate implementation sequence and definition of progress
 
 The bounded P0 model/proof and operational-record tranches are source-delivered,
-including tests, frozen protocols and retained runs. The power-cell construction
-now supplies the topology architecture and its first bounded controls. Continue
-its retained original-source qualification and P1/P4 region-assigned integration
-before expanding a native engine. Delivery of resumable volume enclosures does
-not pass those remaining scientific gates. The maintainer's complementary
-tetrahedral all-atom grid proposal is documented in the construction record;
-sampling alone is not a complete topology certificate.
+including tests, frozen protocols and retained runs. Complete power-cell
+topology now has accepted original receiving for nine of nineteen profiles,
+with nonempty per-region precision still open. Follow the improvement
+workplan's proof/trust controls, distinct power-cell resume and bounded
+closed-shell receiving, while allowing a small region-volume feasibility
+prototype after its proof/assignment contracts are reviewed. The other shell
+and dumbbell follow one family at a time. Small controls do not qualify the
+remaining original inputs or requested precision.
+
+Complete the required original-source receiving and P1/P4 region-assigned
+integration before expanding a native engine. Existing subdivision resume
+does not deliver resumable power-cell construction; a future integration
+checkpoint does not by itself pass the precision gate. The maintainer's
+complementary tetrahedral all-atom grid remains a bounded later cross-check
+proposal; sampling alone is not a complete topology certificate.
 
 Use scoped test-first changes with repository Ruff/format and applicable local
 type checks; run selected tests under resource limits. Commit and push under
