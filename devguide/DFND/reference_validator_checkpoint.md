@@ -10,6 +10,28 @@ These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete topology-plus-precision validator or a supported public TopoMT detector.
 
+## Wide-tube reference selection — 2026-11-14
+
+The maintainer's continuation selects the existing 77-atom wide/sparse tube
+after the complete narrow reference family. The [frozen wide plan](../evidence/reference_validator_power_cells_wide_v1/plan.json)
+preserves all three original saved Models at 1.4/2.5/5 Å, previous two-end and
+negative-cover references and native observations. Positive global counts are
+unspecified. This selects no new geometry, protein/provider execution or native
+DFND change; #184's native 2.5 Å numerical availability remains separate.
+
+The three-cell preflight receives the exact saved 1.4 Å Model (77 atoms, 86
+domain planes): three cells each use 168 full inequalities, 18--24 supporting
+planes and 19--32 vertices. Whole preflight costs 7.972 wall / 7.971 CPU seconds,
+peak RSS 25,120 KiB, one CPU and 2 GiB. It is partial construction feasibility,
+not complete geometry or topology qualification.
+
+The first initialization freezes one CPU/thread, 2 GiB and 300 CPU/360 wall-
+second ceilings with five-second host checks, to construct and independently
+check the complete 1.4 Å proof without repeated anchor queries. Three later
+profile protocols will bind its actual source geometry hashes and producer
+revision before individual sequential 240 CPU/300 wall-second checks. Source
+implementation and the initial frozen plan do not qualify those executions.
+
 ## Remaining narrow profiles: probe-family source continuation — 2026-11-14
 
 The [probe-family continuation](reference_validator_power_cell_construction.md#probe-family-geometry-reuse--2026-11-14)
