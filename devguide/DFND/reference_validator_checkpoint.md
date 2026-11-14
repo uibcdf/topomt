@@ -10,6 +10,28 @@ These are bounded implemented P0/P1 tranches of the
 [implementation plan](physical_reference_validator_implementation.md), not a
 complete topology-plus-precision validator or a supported public TopoMT detector.
 
+## Remaining narrow profiles: probe-family source continuation — 2026-11-14
+
+The [probe-family continuation](reference_validator_power_cell_construction.md#probe-family-geometry-reuse--2026-11-14)
+checks a detached source proof and exact equality of all power inequalities
+before reusing geometry. It permits only a probe change, then recomputes every
+target free vertex/whole edge and all global/boundary partitions. The target
+proof remains independently checked. Common radii in the original narrow tube
+meet the algebraic criterion; general unequal-radius changes are rejected.
+
+The frozen v4 panel selects only the original saved 1.2/2.5 Å profiles, with
+separate sequential one-CPU/2 GiB/180 CPU/240 wall-second envelopes. It leaves
+the positive global count unspecified and preserves all earlier source Models,
+proofs and independent references. Actual receiving is a separate next gate;
+source API/control implementation does not qualify these original profiles.
+
+The source selection passes **305 tests** (61.48 seconds, peak RSS 96,328 KiB,
+one CPU and 2 GiB), with repository Ruff/format and scoped mypy on all 32
+validator modules. The focused 53-test reprobe/old-certificate selection also
+passes after making the sorted-atom typing explicit; no geometry or numerical
+decision changes in that typing adjustment. Full suite, public API/admission
+and installed/minor/platform qualification remain separate under #16/#76.
+
 ## Narrow-tube exact-working-set continuation — 2026-11-14
 
 The [working-plane continuation](reference_validator_power_cell_construction.md#exact-working-plane-continuation--2026-11-14)

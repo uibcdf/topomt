@@ -1,0 +1,36 @@
+{
+  "schema": "topomt.reference-validator.narrow-reprobe-panel/1",
+  "owner": "uibcdf/topomt#76",
+  "date": "2026-11-14",
+  "scope": "Finish the remaining two frozen original narrow-tube probes; separate sequential one-CPU workers. The earlier 1.4 A receiving is preserved. No monotone component-count assumption.",
+  "profiles": [
+    {
+      "probe_angstroms": 1.2,
+      "protocol": "devguide/evidence/reference_validator_power_cells_v4/probe_1_2/protocol.json",
+      "protocol_sha256": "4f08e1d922694b6431b7ad5e8ad9b6c1844dab15ea6827415f662bcf640f5455"
+    },
+    {
+      "probe_angstroms": 2.5,
+      "protocol": "devguide/evidence/reference_validator_power_cells_v4/probe_2_5/protocol.json",
+      "protocol_sha256": "2acbbeb4f36ace5d3ef62a88d614924a1a9c798e2d16934546fda4f7107a9bdd"
+    }
+  ],
+  "geometry_source": {
+    "model_path": "devguide/evidence/reference_validator_power_cells_v3/receiving/original_narrow_tube_1_4/model.json",
+    "model_sha256": "1a86eb52531c99911a4b1ea5d58ea4bf9a4914bc65f362089fe8930f1bfa5530",
+    "certificate_path": "devguide/evidence/reference_validator_power_cells_v2/receiving/original_narrow_tube_1_4/certificate.json",
+    "certificate_sha256": "21564404d3b16cf659202040982e9300d10e6b002d5aab157839f05d552311e2",
+    "producer_revision": "fd3eeb7e6a5df99ad1781f63c090355fe497eaf1"
+  },
+  "resource_policy": {
+    "cpu_count": 1,
+    "numerical_threads": 1,
+    "address_space_limit_bytes": 2147483648,
+    "cpu_limit_seconds": 180,
+    "wall_limit_seconds": 240,
+    "host_sample_interval_seconds": 5,
+    "minimum_available_fraction": 0.2,
+    "minimum_available_bytes": 4294967296,
+    "reason": "One N81 independent proof check takes about 33 CPU seconds at the prior scope. Reprobe checks the source proof, reclassifies geometry and independently checks target/results. Use separate sequential workers, each with the previous conservative finite envelope; no resource reservation is implied."
+  }
+}

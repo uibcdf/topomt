@@ -115,6 +115,25 @@ cost remains separate. See the construction record for raw receipts, phase
 costs and both preserved interrupted attempts. Other profiles and nonempty
 per-region precision remain subsequent qualification.
 
+`power_cells.reprobe_certificate(source_model, source_certificate, target_model)`
+can reuse a fully checked source cell geometry when only the probe changes and
+**every complete power inequality is exactly unchanged**. Common atomic radii
+satisfy that condition; arbitrary unequal radii do not. The method recomputes
+all target occupancy/whole-edge predicates and region/boundary partitions and
+returns an unverified target certificate for independent checking. Source/frame/
+domain/atom changes are rejected. No previous count or free-state label is
+used as a target answer.
+
+Capture protocols may select `saved_geometry` with source model/certificate
+paths and raw file SHA-256 values plus their original producer revision. The
+receipt calls this `reprobed_geometry` and identifies the original geometry
+producer separately from current target classification. It cannot be combined
+with `saved_certificate`. The
+[remaining narrow-profile protocol](../../devguide/evidence/reference_validator_power_cells_v4/protocol.json)
+freezes the original 1.2/2.5 Å inputs and the separate sequential resource
+envelopes before execution. See the construction record for the algebra,
+control scope and actual qualification.
+
 From the checkout, under external CPU/memory/time limits:
 
 ```bash

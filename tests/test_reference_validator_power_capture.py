@@ -177,3 +177,67 @@ def test_capture_can_recheck_a_saved_certificate_without_claiming_a_new_construc
     protocol.write_text(json.dumps(spec))
     with pytest.raises(ValueError, match='digest'):
         module.capture(protocol, tmp_path / 'rejected')
+
+
+def test_capture_reuses_only_checked_geometry_for_a_changed_probe(
+    tmp_path, monkeypatch
+):
+    import hashlib
+    from dataclasses import replace
+    from fractions import Fraction
+
+    import devtools.reference_validator.capture_power_cells as module
+    from devtools.reference_validator.power_cells import topology_certificate
+
+    monkeypatch.setattr(os, 'sched_getaffinity', lambda _: {0})
+    protocol = _protocol(tmp_path)
+    spec = read_record(protocol)
+    source = Model.from_record(spec['cases'][0]['model'])
+    source_path = tmp_path / 'source.json'
+    source_path.write_text(json.dumps(source.to_record()))
+    cert_path = tmp_path / 'proof.json'
+    cert_path.write_text(json.dumps(topology_certificate(source)))
+    row = spec['cases'][0]
+    row['model'] = replace(source, probe=Fraction(1) - Fraction(1, 2**80)).to_record()
+    row['expected_components'] = row['expected_boundary_patches'] = 1
+    row['saved_geometry'] = {
+        'model_path': str(source_path),
+        'model_sha256': hashlib.sha256(source_path.read_bytes()).hexdigest(),
+        'certificate_path': str(cert_path),
+        'certificate_sha256': hashlib.sha256(cert_path.read_bytes()).hexdigest(),
+        'producer_revision': 'a' * 40,
+    }
+    protocol.write_text(json.dumps(spec))
+
+    def no_fresh_construction(_):
+        raise AssertionError('Reuse must not rerun the cell constructor')
+
+    monkeypatch.setattr(module, 'topology_certificate', no_fresh_construction)
+    output = tmp_path / 'receiving'
+    module.capture(protocol, output)
+    checked = read_record(output / 'two_barriers/verification.json')
+    assert checked['n_components'] == checked['n_boundary_patches'] == 1
+    origin = read_record(output / 'receipt.json')['cases']['two_barriers'][
+        'certificate_origin'
+    ]
+    assert origin['route'] == 'reprobed_geometry'
+    assert origin['geometry_producer_revision'] == 'a' * 40
+    assert 'certified_geometry_reprobe' in read_record(
+        output / 'two_barriers/phases.json'
+    )
+    row['saved_geometry']['certificate_sha256'] = '0' * 64
+    protocol.write_text(json.dumps(spec))
+    with pytest.raises(ValueError, match='digest'):
+        module.capture(protocol, tmp_path / 'rejected')
+
+
+def test_capture_rejects_competing_saved_routes(tmp_path, monkeypatch):
+    from devtools.reference_validator.capture_power_cells import capture
+
+    monkeypatch.setattr(os, 'sched_getaffinity', lambda _: {0})
+    protocol = _protocol(tmp_path)
+    spec = read_record(protocol)
+    spec['cases'][0].update(saved_certificate={}, saved_geometry={})
+    protocol.write_text(json.dumps(spec))
+    with pytest.raises(ValueError, match='exclusive'):
+        capture(protocol, tmp_path / 'receiving')

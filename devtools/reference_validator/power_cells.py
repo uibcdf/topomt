@@ -4,11 +4,12 @@ The saved checker independently enumerates the proposed supporting polytopes,
 all their edges and original all-atom predicates. No DFND tessellation is used.
 """
 
+from copy import deepcopy
 from fractions import Fraction
 from itertools import combinations
 from typing import Any, Optional
 
-from .model import Atom, Model, encode_point, point
+from .model import Atom, Model, decode_point, encode_point, point
 from .power_contracts import (
     PowerLimits,
     bounding_box,
@@ -118,6 +119,28 @@ def _groups(nodes: list[int], edges: list[tuple[int, int]]) -> list[list[int]]:
     return result
 
 
+def _availability(
+    model: Model,
+    atom: Optional[Atom],
+    vertices: tuple[tuple[Fraction, Fraction, Fraction], ...],
+    edges: list[tuple[int, int]],
+) -> tuple[list[int], list[tuple[int, int]]]:
+    free = [
+        i
+        for i, v in enumerate(vertices)
+        if atom is None or _squared(v, atom.center) > (atom.radius + model.probe) ** 2
+    ]
+    available = set(free)
+    free_edges = [
+        (i, j)
+        for i, j in edges
+        if i in available
+        and j in available
+        and segment_is_free(model, vertices[i], vertices[j])
+    ]
+    return free, free_edges
+
+
 def topology_certificate(
     model: Model, *, limits: PowerLimits = PowerLimits()
 ) -> dict[str, Any]:
@@ -170,20 +193,7 @@ def topology_certificate(
         total_edges += len(edges)
         if total_vertices > limits.max_total_vertices or total_edges > limits.max_edges:
             raise ValueError('Power-cell total vertex/edge budget exceeded')
-        free = [
-            i
-            for i, v in enumerate(vertices)
-            if atom is None
-            or _squared(v, atom.center) > (atom.radius + model.probe) ** 2
-        ]
-        available = set(free)
-        free_edges = [
-            (i, j)
-            for i, j in edges
-            if i in available
-            and j in available
-            and segment_is_free(model, vertices[i], vertices[j])
-        ]
+        free, free_edges = _availability(model, atom, vertices, edges)
         cells.append(
             {
                 'atom_id': None if atom is None else atom.source_id,
@@ -194,7 +204,10 @@ def topology_certificate(
                 'free_edges': [list(e) for e in free_edges],
             }
         )
-    from .model import decode_point
+    return _assemble(model, cells)
+
+
+def _assemble(model: Model, cells: list[dict[str, Any]]) -> dict[str, Any]:
 
     points = sorted(
         {
@@ -229,3 +242,77 @@ def topology_certificate(
         'components': _groups(list(range(len(points))), global_edges),
         'boundary_components': _groups(boundary_nodes, boundary_edges),
     }
+
+
+def reprobe_certificate(
+    source_model: Model,
+    source_certificate: object,
+    target_model: Model,
+    *,
+    limits: PowerLimits = PowerLimits(),
+) -> dict[str, Any]:
+    """Reuse checked cell geometry for a new probe with identical inequalities.
+
+    Parameters
+    ----------
+    source_model : Model
+        Original immutable model to which the source certificate is bound.
+    source_certificate : object
+        Complete power-cell proof, detached and independently checked here.
+    target_model : Model
+        Same atoms, source/frame/domain and numerical convention; only the
+        probe may differ. Every full source/target power inequality must agree.
+    limits : PowerLimits
+        Finite checking envelope, never a geometric tolerance.
+
+    Returns
+    -------
+    dict
+        Unverified target proof with the same complete cell geometry. Every
+        free vertex, whole-edge predicate and global/boundary partition is
+        computed anew for the target probe. Independently verify before use.
+
+    Raises
+    ------
+    ValueError
+        Any nonprobe input changes, an inequality differs, or the source proof
+        or work envelope is invalid. No partial subset or fallback is used.
+    """
+    from .verify.power_cells import check
+
+    before, after = source_model.to_record(), target_model.to_record()
+    before.pop('probe')
+    after.pop('probe')
+    if before != after:
+        raise ValueError('Geometry reuse may change only the probe')
+    if len(source_model.atoms) > limits.max_atoms:
+        raise ValueError('Power-cell atom budget exceeded')
+    sorted_atoms = sorted(source_model.atoms, key=lambda a: a.source_id)
+    owners: list[Optional[Atom]] = list(sorted_atoms)
+    if not owners:
+        owners.append(None)
+    if any(
+        proposed_planes(source_model, a) != proposed_planes(target_model, a)
+        for a in owners
+    ):
+        raise ValueError('Probe change alters full source power inequalities')
+    detached = deepcopy(source_certificate)
+    check(source_model, detached, limits=limits)
+    if not isinstance(detached, dict):
+        raise ValueError('Source certificate must be a record')
+    cells = []
+    for atom, row in zip(owners, detached['cells']):
+        if 'coincident_dominator' in row:
+            cells.append(dict(row))
+            continue
+        vertices = tuple(decode_point(v) for v in row['vertices'])
+        edges = [(i, j) for i, j in row['edges']]
+        free, free_edges = _availability(target_model, atom, vertices, edges)
+        cells.append(
+            {
+                **{k: row[k] for k in ['atom_id', 'support', 'vertices', 'edges']},
+                'free_vertices': free,
+                'free_edges': [list(e) for e in free_edges],
+            }
+        )
+    return _assemble(target_model, cells)

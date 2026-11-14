@@ -347,6 +347,44 @@ narrow-tube probes and the wider six-case topology panel, then complete certifie
 clipped/per-region integration. Native carrier/path qualification remains #181;
 the complementary tetrahedral-grid route is still proposed, not implemented.
 
+## Probe-family geometry reuse — 2026-11-14
+
+For fixed atoms, changing p to p' changes `q_i-q_j` by
+`-2*(p'-p)*(r_i-r_j)`. Common atomic radii therefore leave the complete power
+partition unchanged. This is not generally true for unequal radii. The
+`reprobe_certificate` producer admits only identical complete model records
+apart from the probe **and exact equality of every canonical source power
+inequality**. It detaches and independently checks the original source proof
+before reusing its complete cell geometry. Changed atoms, domain, frame,
+source identity, arithmetic convention or power inequalities are rejected.
+
+For the target probe it recomputes every free vertex, every whole-edge
+collision predicate and all global/boundary partitions. The source's topology
+and node inventory are not copied. The proposed target proof still needs its
+own independent target verification. Small test-first controls cover the exact
+`1/3/3` transition with `2^-80` gaps, complete exclusion, corrupt source proofs,
+changed nonprobe fields and rejected unequal-radius weight changes. The old
+twenty pilot certificates keep their exact contents after the shared helper
+refactoring. No monotone component-count rule is imposed.
+
+The receiving protocol explicitly distinguishes `reprobed_geometry` from
+fresh cell construction and unchanged saved-certificate reading. Its origin
+retains source Model/certificate raw SHA-256 values and original geometry
+producer revision; the current receipt revision identifies the new target
+classification/proof proposal. A source proof is checked on every reprobe;
+there is no persistent verification cache. Competing saved routes are rejected.
+
+The [frozen remaining-narrow-profile panel](../evidence/reference_validator_power_cells_v4/protocol.json)
+selects the original **saved** 1.2/2.5 Å Models from the nineteen-profile
+archive, with no new quantity receiving. Positive global count is unspecified
+before execution. Earlier independent boundary references and complete empty-
+hull cover supply the respective boundary/negative expectations. Two separate
+sequential workers each retain one CPU/thread, 2 GiB, 180 CPU/240 wall-second
+limits and five-second host checks. Expected cost includes checking the source
+proof, target reclassification, target proof verification and named queries;
+these are not fresh cell-construction timings. Actual committed-source
+receiving remains separate from the frozen protocol and source controls.
+
 ## Complementary tetrahedral reference proposed by the maintainer
 
 Any full-dimensional tetrahedron with vertices v0..v3 has coordinates

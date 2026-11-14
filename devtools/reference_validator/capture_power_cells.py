@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Any
 
 from .model import Model, _record, decode_point
-from .power_cells import topology_certificate
+from .power_cells import reprobe_certificate, topology_certificate
 from .storage import read_record, read_record_with_digest
 from .verify import verify
 from .verify.power_cells import query_anchors
@@ -107,9 +107,56 @@ def capture(protocol: Path, output: Path) -> None:
         _write(folder / 'model.json', model.to_record())
         mark_phase('model_receiving')
         reference = row.get('saved_certificate')
-        if reference is None:
+        geometry = row.get('saved_geometry')
+        if reference is not None and geometry is not None:
+            raise ValueError(
+                'Saved certificate and geometry routes are mutually exclusive'
+            )
+        if geometry is not None:
+            _record(
+                geometry,
+                {
+                    'model_path',
+                    'model_sha256',
+                    'certificate_path',
+                    'certificate_sha256',
+                    'producer_revision',
+                },
+            )
+            if (
+                not isinstance(geometry['model_path'], str)
+                or not isinstance(geometry['certificate_path'], str)
+                or not isinstance(geometry['producer_revision'], str)
+                or re.fullmatch('[0-9a-f]{40}', geometry['producer_revision']) is None
+            ):
+                raise ValueError('Invalid saved-geometry provenance')
+            source_record, model_digest = read_record_with_digest(
+                root / geometry['model_path']
+            )
+            source_proof, proof_digest = read_record_with_digest(
+                root / geometry['certificate_path']
+            )
+            if (
+                model_digest != geometry['model_sha256']
+                or proof_digest != geometry['certificate_sha256']
+            ):
+                raise ValueError('Saved-geometry input digest differs')
+            source_model = Model.from_record(source_record)
+            proof = reprobe_certificate(source_model, source_proof, model)
+            origin = {
+                'route': 'reprobed_geometry',
+                'geometry_producer_revision': geometry['producer_revision'],
+                'source_model_path': geometry['model_path'],
+                'source_model_file_sha256': model_digest,
+                'source_model_sha256': source_model.digest,
+                'source_certificate_path': geometry['certificate_path'],
+                'source_certificate_file_sha256': proof_digest,
+            }
+            phase = 'certified_geometry_reprobe'
+        elif reference is None:
             proof = topology_certificate(model)
             origin = {'route': 'constructed_here'}
+            phase = 'construction'
         else:
             _record(reference, {'path', 'sha256', 'producer_revision'})
             if (
@@ -124,8 +171,9 @@ def capture(protocol: Path, output: Path) -> None:
             if proof_digest != reference['sha256']:
                 raise ValueError('Saved-certificate digest differs')
             origin = {'route': 'saved_certificate', **reference}
+            phase = 'saved_certificate_reading'
         _write(folder / 'certificate.json', proof)
-        mark_phase('construction' if reference is None else 'saved_certificate_reading')
+        mark_phase(phase)
         saved_model = Model.from_record(read_record(folder / 'model.json'))
         saved_proof = read_record(folder / 'certificate.json')
         mark_phase('saved_reading')
