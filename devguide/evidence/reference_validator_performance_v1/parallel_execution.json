@@ -1,0 +1,58 @@
+{
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "/tmp/topomt-validator-parallel-pilot.py"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0,
+    1
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 45,
+  "cpu_hard_seconds": 50,
+  "wall_seconds": 7.583244668086991,
+  "waited_cpu_seconds": 7.637917,
+  "peak_child_rss_kib": 27536,
+  "sampled_group_rss_peak_kib": 43104,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 45871968256,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5898095\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5753891\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0016098450869321823,
+      "host": {
+        "available_bytes": 45871968256,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5898095\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5753891\n",
+        "safe": true
+      },
+      "group_rss_kib": 2456,
+      "group_pids": [
+        4
+      ]
+    },
+    {
+      "seconds": 5.002612725016661,
+      "host": {
+        "available_bytes": 45855092736,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5898120\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5753916\n",
+        "safe": true
+      },
+      "group_rss_kib": 43104,
+      "group_pids": [
+        4,
+        5
+      ]
+    }
+  ]
+}

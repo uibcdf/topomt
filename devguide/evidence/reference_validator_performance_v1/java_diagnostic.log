@@ -1,0 +1,18 @@
+Picked up JAVA_TOOL_OPTIONS: -XX:+UseSerialGC -XX:ActiveProcessorCount=1 -XX:CompressedClassSpaceSize=64m -XX:ReservedCodeCacheSize=32m -Xss512k
+PlantUML version 1.2026.9 / e2f36de [2026-10-17 15:20:54 UTC]
+(GPL source distribution)
+
+Build Version: 1.2026.9
+Git Commit: e2f36de
+Compile Time: 2026-10-17 15:20:54 UTC
+
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+ 
+PLANTUML_LIMIT_SIZE: 4096
+
+Error: Dot executable does not exist
+Error: only sequence diagrams will be generated

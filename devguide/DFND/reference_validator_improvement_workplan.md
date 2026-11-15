@@ -32,12 +32,15 @@ The linked checkpoint and versioned receipts own those distinct scopes.
 1. Keep the box-cover route as a conservative fallback. The original 4096-leaf
    tetrahedron pilot still misses k=24; further uniform budget growth is not
    selected by that result.
-2. Implement checked boundary integration within the original power partition.
-   Start with original `regular_tetrahedron` 1.4 Å. Derive complete oriented
+2. Tighten and qualify the [face-flux prototype](reference_validator_face_flux.md)
+   within the original power partition. Its first `regular_tetrahedron` 1.4 Å
+   pilot still misses k=24. Complete oriented
    facet/cone coverage, sphere/face intersection pieces, zero-dimensional
    contacts, and region assignment before trusting numerical contributions.
    Canonical ownership must count coincident positive-volume cells once.
-   The cube formula supplies a bounded precision control, not that construction.
+   The cube formula supplies a bounded precision control. The conservative face
+   range bounds retain signed contributions but need stronger cut-piece
+   integration to pass the original precision request.
 3. Receive the original tetrahedron requests, then the already selected positive
    families. Keep the asymmetric three-region control, tiny regions, every
    shared uncertainty contribution and all original k=24 requirements. Admit
@@ -434,7 +437,9 @@ The [performance implementation plan](reference_validator_performance_plan.md)
 gives the subsequent S1--S8 sequence: measured cost breakdown, checked-state
 reuse, exact incremental work, the existing general precision gate, optional
 compiled kernels, bounded parallel cells/integration and full receiving.
-It is a planning record, not executed speedup evidence. Bounded serial
+Its [first receiving](../evidence/reference_validator_performance_v1/README.md)
+delivers bounded serial reuse and experimental face/process routes; most stages
+remain partial and original precision is still unmet. Bounded serial
 profiling/reuse may precede completion of D/E; P7 scaling retains the scientific
 gates below and does not replace the next clipped-cell integration task.
 

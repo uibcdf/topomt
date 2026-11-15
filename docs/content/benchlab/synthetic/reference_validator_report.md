@@ -79,6 +79,37 @@ DFND's physical promotion policy. Those gates remain under
 [#76](https://github.com/uibcdf/topomt/issues/76) and
 [#181](https://github.com/uibcdf/topomt/issues/181), respectively.
 
+## Performance continuation and face-integration feasibility — 2026-11-15
+
+The validator now reuses genuinely checked in-process topology and updates
+box-volume totals incrementally. Three matched measurements on the original
+tetrahedron at 1.4 Å preserve exactly the queries, 512-leaf partition and
+numerical bounds. Median query time changes from 0.0338 to 0.0026 seconds,
+and fixed-work integration from 0.6132 to 0.2443 seconds. Independent saved
+checking remains separate. These are small fixed-work observations; the
+volume target is still unresolved, so they establish no general speedup or
+time-to-requested-precision claim.
+
+A second conservative integration construction sums signed flux through the
+oriented faces of the checked power cells. Its certificate reconstructs every
+face subdivision and retains ambiguity in region assignment. At a ceiling of
+4096 triangles, the original tetrahedron uses 4095 and receives the enclosure
+approximately **[0.00002874752, 0.00006295033] nm³**, in 3.714 seconds and about
+27.5 MiB peak RSS on one CPU. **The original k=24 request remains unmet.**
+Outward rounding error stays in the bounds; the displayed decimals abbreviate
+the exact endpoints in the saved proof. This prototype still needs tighter
+certified face integration before original positive-volume precision is qualified.
+
+Two-process construction and integration reproduce the serial certificates
+on this original input. Process startup/communication makes this small example
+slower with two workers; serial remains the routine route. Larger parallel
+receiving and the complete eight-stage performance plan remain open under
+[#76](https://github.com/uibcdf/topomt/issues/76). The
+[versioned evidence and stage disposition](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_performance_v1/README.md)
+retain timings, source identities, failed attempts, resource limits and a fresh
+saved-checker capsule. Earlier Models, findings and evidence below keep their
+original scope; this continuation changes no native DFND classification.
+
 ## Certified region-volume bounds and achieved precision — 2026-11-15 UTC
 
 The new volume panel reuses the **same nineteen original Models** and complete

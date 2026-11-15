@@ -1,0 +1,71 @@
+{
+  "original_protocol": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_1/protocol.json",
+  "original_protocol_sha256": "927a85db825d95560e17fd8fb85bb75c4f2aa719b9d1791d47022e7e14780b07",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "38463776803236130720331542115778415558917425179",
+      "36779892980781332600600328651607420406849738932406452224"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "16777216"
+    ]
+  },
+  "runs": [
+    {
+      "ceiling": 64,
+      "leaves": 63,
+      "wall_seconds": 0.17146533692721277,
+      "cpu_seconds": 0.171725809,
+      "peak_rss_kib": 21452,
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "2974653637903819",
+        "4611686018427387904"
+      ]
+    },
+    {
+      "ceiling": 512,
+      "leaves": 510,
+      "wall_seconds": 0.46958599996287376,
+      "cpu_seconds": 0.46843921399999994,
+      "peak_rss_kib": 22252,
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "71485414134291",
+        "9223372036854775808"
+      ],
+      "volume_upper": [
+        "569075604212847",
+        "4611686018427387904"
+      ]
+    },
+    {
+      "ceiling": 4096,
+      "leaves": 4095,
+      "wall_seconds": 3.713859571958892,
+      "cpu_seconds": 3.7106979740000003,
+      "peak_rss_kib": 28172,
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "265149036769935",
+        "9223372036854775808"
+      ],
+      "volume_upper": [
+        "580614286185539",
+        "9223372036854775808"
+      ]
+    }
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "cpu_affinity": [
+    0
+  ]
+}

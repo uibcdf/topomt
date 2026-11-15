@@ -1,0 +1,32 @@
+bounded timing: tests/test_reference_validator_followup.py::test_extracted_capsule_checks_original_and_tiny_proofs_without_scientific_stack: 32.290s
+receptor: 20% 78/390 39s
+receptor: 40% 156/390 45s
+bounded timing: tests/test_reference_validator_narrow_family.py::test_original_negative_profile_is_empty_under_fresh_independent_checking: 27.961s
+bounded timing: tests/test_reference_validator_narrow_topology.py::test_actual_narrow_certificate_is_independently_checkable_without_scientific_stack: 36.061s
+bounded timing: tests/test_reference_validator_panel.py::test_fresh_case_worker_retains_three_profiles_and_the_stronger_tetrahedron_route: 2.911s
+receptor: 60% 234/390 123s
+bounded timing: tests/test_reference_validator_region_receiving.py::test_original_saved_refinement_retains_lineage_and_nested_bounds: 8.173s
+bounded timing: tests/test_reference_validator_remaining_topology.py::test_global_counts_preserve_extra_dumbbell_regions_and_anchor_scope: 12.923s
+bounded timing: tests/test_reference_validator_runs.py::test_chunked_run_equals_uninterrupted_run_and_bounds_never_worsen: 3.079s
+receptor: 80% 312/390 154s
+bounded timing: tests/test_reference_validator_runs.py::test_resume_pilot_writes_a_replayable_tetrahedron_chain: 2.265s
+bounded timing: tests/test_reference_validator_wide_family.py::test_each_profile_preserves_all_seventy_seven_complete_geometric_cells: 13.499s
+bounded timing: tests/test_reference_validator_wide_family.py::test_profile_region_patch_and_axis_anchor_claims_keep_their_own_scopes: 10.993s
+bounded timing: tests/test_reference_validator_wide_family.py::test_actual_wide_positive_and_negative_proofs_check_without_the_scientific_stack[probe_2_5-original_wide_tube_2_5-True]: 44.509s
+bounded timing: tests/test_reference_validator_wide_family.py::test_actual_wide_positive_and_negative_proofs_check_without_the_scientific_stack[probe_5_0-original_wide_tube_5_0-False]: 28.877s
+receptor: 100% 390/390 257s
+FAIL exit=1 | 2 failed, 388 passed | 256.76s | 2 root causes
+
+[1] ValueError | 1 test | call
+    devtools/reference_validator/capture_hull_sterics.py:128
+    ValueError: Hull-steric pilot requires external 2 GiB/50 CPU-second ceilings
+    frames: tests/test_reference_validator_hull_sterics.py:379 -> devtools/reference_validator/capture_hull_sterics.py:128
+    rerun: pytest tests/test_reference_validator_hull_sterics.py::test_steric_capture_defaults_to_small_controls_and_retains_rejected_candidates -q
+
+[2] AssertionError | 1 test | call
+    tests/test_reference_validator_power_cells.py:304
+    AssertionError: assert 0 == 1
+     +  where 0 = <built-in method count of list object at 0x7048abc91b00>('power_cell_topology')
+     +    where <built-in method count of list object at 0x7048abc91b00> = ['path'].count
+    rerun: pytest tests/test_reference_validator_power_cells.py::test_anchor_batch_checks_complete_topology_once_and_detaches_its_evidence -q
+

@@ -1,0 +1,56 @@
+{
+  "schema": "topomt.reference-validator.verification/1",
+  "verification_status": "accepted",
+  "kind": "power_boundary_volume",
+  "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+  "certificate_sha256": "b11e998f393856bc97f0fbb0595929f648a6b285548a765146218fff4462673e",
+  "trusted_arithmetic": "stdlib-fraction/1",
+  "topology_complete": true,
+  "n_components": 1,
+  "topology_status": "resolved",
+  "python_version": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "verifier_files_sha256": {
+    "model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+    "verify/__init__.py": "16cd7bb8066b1e78e8a6143e49638aa8cf795ac3d70530e29a273d9836d8005a",
+    "verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+    "hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+    "verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+    "verify/polytope.py": "3bc528dcfd1720ca23649e65349362b7efe60e921ff75a2a553b5c8ce2cd63bf",
+    "verify/boundary_volume.py": "2fa0d22699e14f76b4ab3c57794f3f445eb9622a861455bab72c7f250f1d7069",
+    "verify/_interval.py": "67455bb06132cf3f15084da8a13a241c854f1062b64a6420cd29ad8e8685daf0",
+    "verify/power_cells.py": "34b3b050141d248de3497f6a7ee117579b3de8628c6391a52bbaef83ba99619b",
+    "power_contracts.py": "3bac982773c16b298da25e4784f70f534e9e5707395f5ef5f264af371a021af4",
+    "volume_request.py": "c261e4049c3de53c5bdfce7ad0702ab476f2b50133ac6341300709c53381c739"
+  },
+  "volume_lower": [
+    "265149036769935",
+    "9223372036854775808"
+  ],
+  "volume_upper": [
+    "580614286185539",
+    "9223372036854775808"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "lower": [
+        "265149036769935",
+        "9223372036854775808"
+      ],
+      "upper": [
+        "580614286185539",
+        "9223372036854775808"
+      ],
+      "precision_status": "unresolved"
+    }
+  ],
+  "precision_status": "unresolved",
+  "total_precision_status": "unresolved",
+  "volume_enclosure_status": "resolved",
+  "n_boundary_patches": 0,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "method": "power-face-flux/1"
+}

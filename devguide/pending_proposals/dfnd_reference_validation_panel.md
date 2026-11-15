@@ -15,12 +15,24 @@ supersedes: []
 
 # Independent DFND reference panel
 
-## Performance planning follow-up — 2026-11-15
+## Partial performance implementation — 2026-11-15
+
+The [source checkpoint](../DFND/reference_validator_checkpoint.md) and
+[versioned receiving](../evidence/reference_validator_performance_v1/README.md)
+record implemented in-process reuse, incremental volume accounting, conservative
+signed face flux and bounded process prototypes. The original tetrahedron still
+misses k=24 at 4095 face triangles. The eight-stage plan remains partial; broader
+parallel admission cannot replace that scientific gate. Next tighten the face
+integral and qualify tiny/asymmetric cut pieces on the same original input.
+Neither #76 nor a linked native finding is closed by this delivery.
+
+## Initial performance plan (historical) — 2026-11-15
 
 The [performance implementation plan](../DFND/reference_validator_performance_plan.md)
 defines S1--S8 for measured serial reuse, certified integration and later bounded
 local processes. It preserves the current Models/requests and the independent
-checker. No performance stage is yet qualified. Original positive-volume
+checker. No performance stage was qualified by that initial plan; the current
+implementation disposition is recorded above. Original positive-volume
 precision remains the scientific priority; compiled/parallel receiving follows
 the serial gates. #76 owns this follow-up and remains partial.
 

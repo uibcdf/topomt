@@ -12,11 +12,56 @@ complete topology-plus-precision validator or a supported public TopoMT detector
 
 ## Selected improvement workplan — 2026-11-14
 
-### Performance planning follow-up — 2026-11-15
+### Performance implementation receiving — 2026-11-15
+
+The [S1--S8 disposition](../evidence/reference_validator_performance_v1/README.md)
+records checked immutable query contexts, incremental source-cell sessions,
+exact box-volume ledgers, a [signed face-flux construction](reference_validator_face_flux.md)
+and bounded spawned cell/face workers. Raw saved data still receives independent
+checking; trusted in-process objects cannot be pickled or reused in another PID.
+No public export, native operator, attribution hook or external engine is added.
+
+Three matched one-CPU tetrahedron measurements preserve exact queries, the
+512-leaf partition and every numerical bound. Median query time changes from
+0.033788 to 0.002551 seconds; fixed-work integration from 0.613201 to 0.244322.
+Independent checking remains separate. The volume request is unresolved, so
+these timings do not establish a time-to-requested-precision speedup.
+
+The original tetrahedron 1.4 Å face pilot checks 4095 triangles in 3.714 seconds
+with about 27.5 MiB peak RSS, retaining k=24 as unresolved. Outward dyadic
+reduction controls the denominator growth of the retained unrounded prototype;
+rounding error stays in the enclosure and exact terms remain exact. Two-worker
+receiving on two allowed CPUs reproduces serial certificates and is slower on
+this small case. Parallel failure/resume/full-panel qualification remains open.
+
+The broad 390-test run finishes with 388 passing outcomes and two diagnosed
+failures. A dynamic-verifier observation regression is corrected; the strict
+50-second resource test is rerun under its required envelope. The final affected
+selection passes 77 tests (7.52 pytest / 9.527 elapsed seconds; one CPU, 2 GiB,
+peak child RSS 160,684 KiB). Together these scopes cover 390 distinct passing
+outcomes; they are not one fresh green 390-test invocation. The earlier
+170-second incomplete attempt and both failures remain in the evidence.
+
+The plan remains partial. S2 is delivered at its admitted in-process scope;
+S1/S3 have remaining accounting/invariant work; S4 misses original precision;
+Rust stays conditional; S6/S7 are bounded prototypes and S8 lacks the complete
+optimized original panel. Next tighten the certified face integral on the same
+original input, retaining signed/tiny/asymmetric controls and every target.
+#76 remains partial; native/public/package issues retain their own gates.
+Final Ruff/format checks cover 725 files; mypy passes on 44 modules. Strict
+single-worker Sphinx passes without warnings in 19.037 seconds, peak child RSS
+288,668 KiB, with notebooks off and the existing auxiliary PlantUML/Graphviz
+route. A fresh producer-free checker accepts the new capsule; 147 local links
+and all candidate source fingerprints verify. Hosted, installed and remaining
+platform/scientific admission stay pending.
+
+
+### Initial performance plan (historical) — 2026-11-15
 
 The [S1--S8 performance plan](reference_validator_performance_plan.md) records
 the requested stepwise route for one-CPU improvements and later bounded local
-processes. All performance stages remain planned. The first tranche is matched
+processes. At that planning checkpoint all stages were unimplemented; the
+receiving above supersedes that state. The selected first tranche was matched
 phase/call measurements, followed by checked immutable-state reuse and exact
 incremental accounting. General original-profile precision remains the active
 scientific gate; Rust and parallel qualification follow the serial gates.

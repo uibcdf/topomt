@@ -6,6 +6,11 @@ This is a developer construction, not a supported production detector. Source
 controls, retained original receiving and requested precision have separate
 qualification gates in the [checkpoint](reference_validator_checkpoint.md).
 
+The later [face-flux prototype](reference_validator_face_flux.md) supplies a
+second conservative construction within the actual power cells. Its original
+tetrahedron pilot still misses k=24; the box-cover results below retain their
+original definitions and scope.
+
 ## First integration decision
 
 Use a complete rational box partition of an enclosure of the **same declared

@@ -1,0 +1,282 @@
+{
+  "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "38463776803236130720331542115778415558917425179",
+      "36779892980781332600600328651607420406849738932406452224"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "16777216"
+    ]
+  },
+  "runs": [
+    {
+      "repeat": 0,
+      "workers": 1,
+      "operation": "topology",
+      "wall_seconds": 0.08976679795887321,
+      "parent_cpu_seconds": 0.089975643,
+      "resources": {},
+      "same_proof": true
+    },
+    {
+      "repeat": 0,
+      "workers": 1,
+      "operation": "boundary",
+      "wall_seconds": 0.5216010879958048,
+      "parent_cpu_seconds": 0.520825722,
+      "resources": {},
+      "same_proof": true,
+      "precision_status": "unresolved"
+    },
+    {
+      "repeat": 0,
+      "workers": 2,
+      "operation": "topology",
+      "wall_seconds": 0.3583287689834833,
+      "parent_cpu_seconds": 0.08760970000000001,
+      "resources": {
+        "worker_count": 2,
+        "worker_records": [
+          {
+            "pid": 6,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.18461527,
+            "peak_rss_kib": 26736
+          },
+          {
+            "pid": 9,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.146921158,
+            "peak_rss_kib": 26736
+          }
+        ],
+        "worker_affinity": [
+          0,
+          1
+        ],
+        "parent_address_space_bytes": 2147483648,
+        "aggregate_address_space_bound_bytes": 4831838208,
+        "aggregate_bound_includes_spawn_tracker": true,
+        "aggregate_rss_peak_status": "not_measured",
+        "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+      },
+      "same_proof": true
+    },
+    {
+      "repeat": 0,
+      "workers": 2,
+      "operation": "boundary",
+      "wall_seconds": 1.4547919579781592,
+      "parent_cpu_seconds": 0.799730441,
+      "resources": {
+        "worker_count": 2,
+        "worker_records": [
+          {
+            "pid": 10,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.351685222,
+            "peak_rss_kib": 26736
+          },
+          {
+            "pid": 13,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.248229568,
+            "peak_rss_kib": 26736
+          }
+        ],
+        "worker_affinity": [
+          0,
+          1
+        ],
+        "parent_address_space_bytes": 2147483648,
+        "aggregate_address_space_bound_bytes": 4831838208,
+        "aggregate_bound_includes_spawn_tracker": true,
+        "aggregate_rss_peak_status": "not_measured",
+        "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+      },
+      "same_proof": true,
+      "precision_status": "unresolved"
+    },
+    {
+      "repeat": 1,
+      "workers": 1,
+      "operation": "topology",
+      "wall_seconds": 0.07314276497345418,
+      "parent_cpu_seconds": 0.07299973800000004,
+      "resources": {},
+      "same_proof": true
+    },
+    {
+      "repeat": 1,
+      "workers": 1,
+      "operation": "boundary",
+      "wall_seconds": 0.4989779220195487,
+      "parent_cpu_seconds": 0.4989690600000001,
+      "resources": {},
+      "same_proof": true,
+      "precision_status": "unresolved"
+    },
+    {
+      "repeat": 1,
+      "workers": 2,
+      "operation": "topology",
+      "wall_seconds": 0.4437586880521849,
+      "parent_cpu_seconds": 0.07158722000000006,
+      "resources": {
+        "worker_count": 2,
+        "worker_records": [
+          {
+            "pid": 17,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.163540797,
+            "peak_rss_kib": 27536
+          },
+          {
+            "pid": 14,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.166049014,
+            "peak_rss_kib": 27536
+          }
+        ],
+        "worker_affinity": [
+          0,
+          1
+        ],
+        "parent_address_space_bytes": 2147483648,
+        "aggregate_address_space_bound_bytes": 4831838208,
+        "aggregate_bound_includes_spawn_tracker": true,
+        "aggregate_rss_peak_status": "not_measured",
+        "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+      },
+      "same_proof": true
+    },
+    {
+      "repeat": 1,
+      "workers": 2,
+      "operation": "boundary",
+      "wall_seconds": 1.4228393960511312,
+      "parent_cpu_seconds": 0.8007443839999997,
+      "resources": {
+        "worker_count": 2,
+        "worker_records": [
+          {
+            "pid": 18,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.351078054,
+            "peak_rss_kib": 27536
+          },
+          {
+            "pid": 21,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.248167116,
+            "peak_rss_kib": 27536
+          }
+        ],
+        "worker_affinity": [
+          0,
+          1
+        ],
+        "parent_address_space_bytes": 2147483648,
+        "aggregate_address_space_bound_bytes": 4831838208,
+        "aggregate_bound_includes_spawn_tracker": true,
+        "aggregate_rss_peak_status": "not_measured",
+        "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+      },
+      "same_proof": true,
+      "precision_status": "unresolved"
+    },
+    {
+      "repeat": 2,
+      "workers": 1,
+      "operation": "topology",
+      "wall_seconds": 0.07466043694876134,
+      "parent_cpu_seconds": 0.0747354790000001,
+      "resources": {},
+      "same_proof": true
+    },
+    {
+      "repeat": 2,
+      "workers": 1,
+      "operation": "boundary",
+      "wall_seconds": 0.5193349560722709,
+      "parent_cpu_seconds": 0.5186482040000002,
+      "resources": {},
+      "same_proof": true,
+      "precision_status": "unresolved"
+    },
+    {
+      "repeat": 2,
+      "workers": 2,
+      "operation": "topology",
+      "wall_seconds": 0.45927680493332446,
+      "parent_cpu_seconds": 0.07521867599999998,
+      "resources": {
+        "worker_count": 2,
+        "worker_records": [
+          {
+            "pid": 22,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.167788589,
+            "peak_rss_kib": 27536
+          },
+          {
+            "pid": 25,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.165362267,
+            "peak_rss_kib": 27536
+          }
+        ],
+        "worker_affinity": [
+          0,
+          1
+        ],
+        "parent_address_space_bytes": 2147483648,
+        "aggregate_address_space_bound_bytes": 4831838208,
+        "aggregate_bound_includes_spawn_tracker": true,
+        "aggregate_rss_peak_status": "not_measured",
+        "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+      },
+      "same_proof": true
+    },
+    {
+      "repeat": 2,
+      "workers": 2,
+      "operation": "boundary",
+      "wall_seconds": 1.4527387479320168,
+      "parent_cpu_seconds": 0.7981897999999998,
+      "resources": {
+        "worker_count": 2,
+        "worker_records": [
+          {
+            "pid": 26,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.349784131,
+            "peak_rss_kib": 27536
+          },
+          {
+            "pid": 29,
+            "address_space_bytes": 268435456,
+            "cpu_seconds": 0.247860702,
+            "peak_rss_kib": 27536
+          }
+        ],
+        "worker_affinity": [
+          0,
+          1
+        ],
+        "parent_address_space_bytes": 2147483648,
+        "aggregate_address_space_bound_bytes": 4831838208,
+        "aggregate_bound_includes_spawn_tracker": true,
+        "aggregate_rss_peak_status": "not_measured",
+        "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+      },
+      "same_proof": true,
+      "precision_status": "unresolved"
+    }
+  ]
+}

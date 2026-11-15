@@ -5,12 +5,28 @@ First native consumer: [#181](https://github.com/uibcdf/topomt/issues/181).
 Reviewed repository: `c972b13`; executable baseline:
 `86b95d371256c1d54500da9c8a05f6ee642a37ac`.
 
-**Status: planned; no performance stage below is qualified by this document.**
+**Status: partial implementation; the eight-stage plan remains open.**
 The goal is to reduce the time to a checked answer at unchanged scientific
 guarantees, first on one CPU and later with explicitly bounded local processes.
 Correctness, complete topology and certified error retain priority over speed.
 The [A--F workplan](reference_validator_improvement_workplan.md) owns the active
 scientific sequence; this document supplies its detailed performance follow-up.
+
+### Implementation receiving — 2026-11-15
+
+The [versioned evidence](../evidence/reference_validator_performance_v1/README.md)
+records matched measurements, actual checked-state reuse, incremental box-volume
+accounting, a [signed face-flux construction](reference_validator_face_flux.md)
+and bounded local-process prototypes. S2 is delivered for the tested in-process
+query/session receiving scope. S1/S3/S4/S6/S7/S8 remain partial. S5's bounded
+denominator reduction is implemented; optional Rust remains deferred while
+serial precision and a justified compiled hotspot are unqualified.
+
+The original tetrahedron at 1.4 Å still misses k=24 with 4095 face triangles.
+Two-process certificates agree with serial results, but process overhead makes
+this small case slower. Neither a generic multicore speedup nor the original
+positive-volume precision gate is passed. Source prototypes do not override
+the serial scientific prerequisites for complete P7 admission.
 
 ## Starting evidence and scope
 
@@ -39,7 +55,8 @@ requests, artifacts and current admission limits. It selects no new protein,
 geometry, external engine, public API or distributed-machine execution.
 Profiling and bounded serial improvements may precede the remaining precision
 construction. P7 scaling and compiled-backend qualification follow the serial
-scientific gates in the A--F workplan. The first implementation tranche is S1.
+scientific gates in the A--F workplan. The first implementation tranche has delivered bounded S1/S2/S3 receiving;
+the current scientific continuation is S4.
 
 ## Guarantees every stage must preserve
 
@@ -65,16 +82,16 @@ Each stage uses a focused test-first change and an additive measurement record.
 Only an executed acceptance gate changes its status. Optional work can be
 deferred with its measured reason and revisit condition in #76.
 
-| Stage | Deliverable | Depends on | Initial status |
+| Stage | Deliverable | Depends on | Current disposition |
 | --- | --- | --- | --- |
-| S1 | Reproducible cost breakdown and equivalence protocol | Existing serial baseline | Planned |
-| S2 | Checked immutable context and incremental progress reuse | S1 | Planned |
-| S3 | Exact invariant reuse and incremental volume accounting | S1/S2 | Planned |
-| S4 | General certified boundary integration and precision receiving | A--F D/E; S1 measurements | Existing scientific task, incomplete |
-| S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Conditional, planned |
-| S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Planned after serial gates |
-| S7 | Bounded parallel integration with verified ownership | S4/S6 | Planned after serial gates |
-| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Planned |
+| S1 | Reproducible cost breakdown and equivalence protocol | Existing serial baseline | Partial: matched phase/call pilot; full accounting pending |
+| S2 | Checked immutable context and incremental progress reuse | S1 | Delivered for tested in-process query/session scope |
+| S3 | Exact invariant reuse and incremental volume accounting | S1/S2 | Partial: volume ledger delivered; wider invariants pending |
+| S4 | General certified boundary integration and precision receiving | A--F D/E; S1 measurements | Partial: conservative face flux; original precision still unmet |
+| S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Outward denominator control delivered; optional Rust deferred |
+| S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Prototype; full fault/resume/panel qualification pending |
+| S7 | Bounded parallel integration with verified ownership | S4/S6 | Prototype; same partition checked; precision/panel gate open |
+| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: selected receiving, not full optimized original panel |
 
 ### S1 — measure the actual work and freeze comparisons
 
