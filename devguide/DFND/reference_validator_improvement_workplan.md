@@ -246,6 +246,15 @@ proofs do not pass full topology qualification or P5.
 
 ## D — construct certified volumes tied to complete regions
 
+The first implemented conservative baseline is documented in the
+[region-volume construction](reference_validator_region_volume_construction.md).
+It uses a complete box cover of the same verified domain, scanning every
+atomic ball and retaining boundary uncertainty, with labels from the checked
+power partition. This avoids a second unqualified triangulator and integrates
+coincident geometry once. The individual-power-cell candidate below remains
+the higher-precision option; valid baseline bounds do not pass its precision
+gate or the original k=24 target by themselves.
+
 The initial implementation candidate integrates within the **checked** power
 partition. On each cell the minimum-power owner determines exclusion; this
 reduces the local geometry to a convex polytope minus one expanded ball.

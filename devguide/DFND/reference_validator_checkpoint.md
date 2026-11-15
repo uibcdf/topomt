@@ -12,6 +12,56 @@ complete topology-plus-precision validator or a supported public TopoMT detector
 
 ## Selected improvement workplan — 2026-11-14
 
+### Retained original geometry initialization — 2026-11-15 UTC
+
+Source `d9680c23043e42e0a47819e97f07ed38b6954fc6` completes the three original
+family initializations with actual saved cell checkpoints and independent
+whole-proof reading. These runs intentionally have no anchor queries:
+
+| Model | Complete regions / free hull patches | Wall / CPU seconds | Peak RSS KiB |
+| --- | --- | --- | ---: |
+| `closed_shell`, 0.2 Å | 1 / 0 | 742.845 / 720.632 | 40,588 |
+| `shell_with_opening`, 1.4 Å | 1 / 1 | 569.929 / 554.268 | 40,152 |
+| `dumbbell`, 1.4 Å | 3 / 2 | 1046.632 / 1031.571 | 42,312 |
+
+The dumbbell inventory contains one enclosed region supported across all 94
+source cells and two boundary-touching regions, each supported by four cells.
+Earlier named-chamber statements did not count every global region; named
+anchor mapping follows in the frozen target receiving. No physical component
+count is inferred from catalog labels. All ten target protocols now bind the
+actual geometry/source hashes and unchanged original Models, with positive
+global counts unspecified. Actual query/profile receiving remains separate.
+
+Every worker uses one CPU/thread and 2 GiB, 900 soft/1080 hard CPU seconds and
+1260 wall seconds. Dumbbell completion uses the finite soft-limit grace
+interval, remaining below the hard ceiling; its measured CPU must not be
+reported as below 900 seconds. Original raw receipts and execution records
+preserve that distinction. Construction costs include checkpoint/save/resume
+checks and later final assembly, rather than clipping alone.
+
+### Source tranche for D/E/F
+
+The [region-volume construction](reference_validator_region_volume_construction.md)
+now implements conservative complete box coverage, checked region allocation,
+total/per-region uncertainty accounting, source-bound saved refinement and an
+admitted analytic single-region assignment. Spatial comparison matches Models,
+checks point/path supports and can qualify complete source-tetrahedron carrier
+exclusion. No native morphology or algorithm-correction claim is inferred.
+Unresolved precision remains separate from valid bounds; original positive
+profile precision is not qualified by these controls or initial topology runs.
+
+The D/E/F source selection passes **276 tests** (20.43 pytest / 21.11 bounded
+process seconds, peak child RSS 97,084 KiB, one CPU and 2 GiB), with repository
+Ruff/format and scoped mypy on 37 modules passing. Controls cover exact full/
+empty volume, shared upper uncertainty across eight regions, independent
+asymmetric barrier bounds, literal/relative precision, altered units/lineage,
+saved/torn bundles, standalone checking without producers/scientific packages,
+smaller reader work limits and source-contained carrier exclusion, including
+flat supports. Returned carrier supports are detached from caller arrays.
+This is bounded source qualification; the ten-profile query receiving,
+original per-region precision and mapped native evidence still need actual
+retained execution. No full-suite, release or installed/public gate is implied.
+
 ### Work packages A/B: bounded source delivery
 
 The construction record now maps the completeness obligations to producer,

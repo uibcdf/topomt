@@ -218,6 +218,18 @@ def verify(
         extra = (
             {'claim', 'atom_id'} if certificate.get('claim') == 'blocked' else {'claim'}
         )
+    elif kind == 'region_volume':
+        extra = {
+            'method',
+            'topology_certificate',
+            'request',
+            'limits',
+            'step_leaf_ceiling',
+            'leaves',
+            'analytic_certificate',
+            'parent_certificate_sha256',
+            'kernel',
+        }
     elif kind == 'power_cell_topology':
         extra = {'construction', 'cells', 'nodes', 'components', 'boundary_components'}
     else:
@@ -277,6 +289,24 @@ def verify(
             (Path(__file__).parents[1] / name).read_bytes()
         ).hexdigest()
         result.update(check(model, cert))
+    elif kind == 'region_volume':
+        from .region_volume import check_region_volume
+
+        for name in (
+            'verify/region_volume.py',
+            'volume_request.py',
+            'power_contracts.py',
+            'verify/power_cells.py',
+            'verify/polytope.py',
+            'hull_model.py',
+            'contracts.py',
+            'verify/analytic_volume.py',
+            'verify/_interval.py',
+        ):
+            result['verifier_files_sha256'][name] = hashlib.sha256(
+                (Path(__file__).parents[1] / name).read_bytes()
+            ).hexdigest()
+        result.update(check_region_volume(model, cert, max_leaves=limits.max_leaves))
     elif kind == 'power_cell_topology':
         from .power_cells import check as check_power_cells
 

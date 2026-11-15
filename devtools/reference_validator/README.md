@@ -41,6 +41,16 @@ original external scientific kernel is used by this rational developer route.
 
 ## Exact multi-ball regions and boundary patches
 
+The new developer [region-volume route](../../devguide/DFND/reference_validator_region_volume_construction.md)
+provides conservative total/per-region bounds from complete domain-cover
+partitions, or admitted analytic assignment to one independently proved region.
+`region_volume_certificate`, `refine_region_volume`, manifest-last region
+bundles and `verify` keep valid bounds separate from requested precision.
+`compare_reference_claims` matches exact numerical Models and checks recoverable
+point/path and source-tetrahedron supports without inferring native morphology.
+These source routes retain their explicit work/receiving gates under #76;
+they do not add production exports or qualify all original precision targets.
+
 The developer `power_runs` route adds checked source-cell progress under the
 [active workplan](../../devguide/DFND/reference_validator_improvement_workplan.md).
 `start_power_run` and `resume_power_run` accept a finite `cell_budget` and
