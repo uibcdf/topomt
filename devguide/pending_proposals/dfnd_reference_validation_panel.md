@@ -15,6 +15,15 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Performance planning follow-up — 2026-11-15
+
+The [performance implementation plan](../DFND/reference_validator_performance_plan.md)
+defines S1--S8 for measured serial reuse, certified integration and later bounded
+local processes. It preserves the current Models/requests and the independent
+checker. No performance stage is yet qualified. Original positive-volume
+precision remains the scientific priority; compiled/parallel receiving follows
+the serial gates. #76 owns this follow-up and remains partial.
+
 ## Current A--F disposition — 2026-11-15 UTC
 
 The [workplan](../DFND/reference_validator_improvement_workplan.md) records

@@ -430,6 +430,14 @@ notebooks/downloads and linking stronger later evidence.
 
 ## Later admission and controlled scaling
 
+The [performance implementation plan](reference_validator_performance_plan.md)
+gives the subsequent S1--S8 sequence: measured cost breakdown, checked-state
+reuse, exact incremental work, the existing general precision gate, optional
+compiled kernels, bounded parallel cells/integration and full receiving.
+It is a planning record, not executed speedup evidence. Bounded serial
+profiling/reuse may precede completion of D/E; P7 scaling retains the scientific
+gates below and does not replace the next clipped-cell integration task.
+
 After the required synthetic scientific gates, review P6: intuitive supported
 API/report, advanced certificate inspection, explicit quantities/maps, offline
 saved checking, attribution, diagnostics, optional dependencies and installed

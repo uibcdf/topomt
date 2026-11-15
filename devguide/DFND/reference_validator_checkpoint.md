@@ -12,6 +12,24 @@ complete topology-plus-precision validator or a supported public TopoMT detector
 
 ## Selected improvement workplan — 2026-11-14
 
+### Performance planning follow-up — 2026-11-15
+
+The [S1--S8 performance plan](reference_validator_performance_plan.md) records
+the requested stepwise route for one-CPU improvements and later bounded local
+processes. All performance stages remain planned. The first tranche is matched
+phase/call measurements, followed by checked immutable-state reuse and exact
+incremental accounting. General original-profile precision remains the active
+scientific gate; Rust and parallel qualification follow the serial gates.
+No new calculation, backend, worker configuration or speedup is qualified here.
+
+Planning-delivery checks: regenerated report indexes remain current; both
+reporting-protocol tests pass (0.32 pytest seconds; 2.536 bounded process
+seconds, one CPU, 2 GiB, peak child RSS 156,172 KiB). All 96 local links across
+the four affected documents and the referenced existing test modules resolve.
+Executable sources, original evidence and public documentation are unchanged;
+scientific/full-suite, installed and support-matrix evidence is not rerun by
+this prose-only delivery.
+
 ### Current six-package disposition — 2026-11-15 UTC
 
 The additive [portable capsule](../../docs/content/benchlab/synthetic/artifacts/reference_validator_followup_v1/README.md)
