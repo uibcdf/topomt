@@ -1,0 +1,52 @@
+{
+  "schema": "topomt.reference-validator.spatial-comparison/1",
+  "model_sha256": "29f4221f2d78aa6e102f47447bf9f59b826c21e36e556921a91c13a0fd9e738b",
+  "topology_certificate_sha256": "31317228020d51e0863c717ca712a2cbb905b074873bc0adc5b04dbbd63cc50a",
+  "numerical_model_match": "exact",
+  "length_unit": "nm",
+  "reference_region_count": 0,
+  "reference_boundary_patch_count": 0,
+  "reference_boundary_incidence": [],
+  "points": {
+    "resident_115": {
+      "model_sha256": "29f4221f2d78aa6e102f47447bf9f59b826c21e36e556921a91c13a0fd9e738b",
+      "topology_certificate_sha256": "31317228020d51e0863c717ca712a2cbb905b074873bc0adc5b04dbbd63cc50a",
+      "point": [
+        [
+          "289256851754629",
+          "1125899906842624"
+        ],
+        [
+          "5000074443073801",
+          "9007199254740992"
+        ],
+        [
+          "-650934874510677",
+          "2251799813685248"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    }
+  },
+  "paths": {},
+  "carriers": {
+    "WET-1": {
+      "physical_state": "empty",
+      "proof_route": "whole_domain_exclusion",
+      "source_tetrahedra": [
+        [
+          2,
+          45,
+          56,
+          57
+        ]
+      ],
+      "domain_containment": "verified_by_convexity"
+    }
+  },
+  "morphology_status": "not_inferred",
+  "native_algorithm_correctness": "not_inferred_from_local_support_checks"
+}

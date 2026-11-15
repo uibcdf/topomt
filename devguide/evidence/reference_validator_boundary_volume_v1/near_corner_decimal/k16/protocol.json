@@ -1,0 +1,138 @@
+{
+  "schema": "topomt.reference-validator.boundary-volume-protocol/1",
+  "owner": "uibcdf/topomt#76",
+  "name": "near_corner_decimal/k16",
+  "model": {
+    "schema": "topomt.reference-validator.model/1",
+    "length_unit": "nm",
+    "contact_policy": "strict",
+    "interpretation": "exact_rational_nm",
+    "source_sha256": "939c648fc5c3ec38630b98e862e2957aac747510d7a1d17cd44014c576f61a92",
+    "frame_index": 0,
+    "probe": [
+      "0",
+      "1"
+    ],
+    "domain": {
+      "kind": "box",
+      "lower": [
+        [
+          "-1",
+          "1"
+        ],
+        [
+          "-1",
+          "1"
+        ],
+        [
+          "-1",
+          "1"
+        ]
+      ],
+      "upper": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "1"
+        ]
+      ]
+    },
+    "atoms": [
+      {
+        "source_id": 0,
+        "center": [
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ],
+          [
+            "0",
+            "1"
+          ]
+        ],
+        "radius": [
+          "4330127018922193",
+          "2500000000000000"
+        ]
+      }
+    ]
+  },
+  "topology_path": null,
+  "k": 16,
+  "method": "analytic_corner_regions",
+  "step_leaf_ceilings": [
+    1
+  ],
+  "frozen_files": {
+    "devtools/reference_validator/producer.py": "8c362618b0d69f92882f4c393ca0bddc91bec3a0c8a870f851920eaf6f134873",
+    "devtools/reference_validator/power_contracts.py": "3bac982773c16b298da25e4784f70f534e9e5707395f5ef5f264af371a021af4",
+    "devtools/reference_validator/power_cells.py": "b5c069c4c52d3f8c5c5f6eb2dd49c8066db4c42aa74c2f2287e3f07bf7e5e757",
+    "devtools/reference_validator/model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+    "devtools/reference_validator/power_runs.py": "99569d95050c6750c53065b6324ef71c8fccfd1143bbc0830d9832a1a400b3ca",
+    "devtools/reference_validator/capture.py": "6b82217adb9239e60b5b0e3da592ea483ec68124e64af6968fb688a0034725ac",
+    "devtools/reference_validator/hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "devtools/reference_validator/benchlab_panel.py": "83206ba216c4b908a888fc72b60f9f3afdc4dd5aaf69a3aafdd30a75edc4fe34",
+    "devtools/reference_validator/volume_request.py": "c261e4049c3de53c5bdfce7ad0702ab476f2b50133ac6341300709c53381c739",
+    "devtools/reference_validator/capture_box_topology.py": "da77941f9aa6eedb2e6ce77294e43681bf71f905b2e44db50ae0a9339186f6ac",
+    "devtools/reference_validator/analytic_volume.py": "526911999550261bd518c306ddfa54bb2e85af19f37859bf1e0777f98ee1ca35",
+    "devtools/reference_validator/contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+    "devtools/reference_validator/compare.py": "aa7399c9f3827116fe0595d34092c18f300a613f8112df1a87f032617ded5b11",
+    "devtools/reference_validator/capture_resume.py": "878371e30856f4bb21767b1c044819b7627c7e587c520c19c944267c361641c3",
+    "devtools/reference_validator/center_hull.py": "a67575ca843b74e1a24f0e50ca6b791358c28ba272d09996baeda9f82b23ff62",
+    "devtools/reference_validator/__init__.py": "1faa33c5c83901768107c9c7dc3da61b8877c2c540fcf599e699b9cc47866029",
+    "devtools/reference_validator/storage.py": "b448f221f85e85ee0657b156512e7316afee6b0fd8957b0eaaf27194cdfa0aa4",
+    "devtools/reference_validator/capture_power_cells.py": "45c647000720d4076b882ef0208eb7d8fde5e45223f635704d52f67563315d05",
+    "devtools/reference_validator/capture_hull_sterics.py": "0621d794aac3358664e0d055db306d1f9cb0411d5510dbac24dea60dcb128375",
+    "devtools/reference_validator/receiving.py": "53a60cc37f7104268e1bfd23d6a80ca84f463d0262cce33d41d489ffb465c4f3",
+    "devtools/reference_validator/__main__.py": "37fece6d4543a38a4f22fe0626f06022635b0b23abb11f3f791161ce14d1f1b9",
+    "devtools/reference_validator/runs.py": "b60187a2f3f5ebc07c80ee94c1cea3ab230022a2943f708fc4aafc3bb70d0934",
+    "devtools/reference_validator/capture_volume.py": "47865960e965b2d974bbf4c0834b5e5049739dc6521e2d80e87fa3104da287fd",
+    "devtools/reference_validator/region_volume.py": "4f3068c3e7b9441587340ce5075f9732a9ae9c23db29ad358644057d135e0c42",
+    "devtools/reference_validator/capture_hulls.py": "fba7f2d34cec48017013f108b6609b864f3fcef68c038860ecc73af0b9893d7d",
+    "devtools/reference_validator/box_topology.py": "06ab6fa75ee587ce06976d9544ed2f40b4db54b1c28b9b48493c75b4b54cf91e",
+    "devtools/reference_validator/verify/power_cells.py": "70363f9be0d25962cdce45f246794edc2ee063b761ee9c143e93288896fd65f0",
+    "devtools/reference_validator/verify/corner_volume.py": "66e54f381047bda0270d1f048383a106615f0ab9a1f56bdf97b0ad537e638d01",
+    "devtools/reference_validator/verify/polytope.py": "3bc528dcfd1720ca23649e65349362b7efe60e921ff75a2a553b5c8ce2cd63bf",
+    "devtools/reference_validator/verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+    "devtools/reference_validator/verify/records.py": "3b612c96112960dad3412e91c62857216f5b7a6310186075f95e9fce2d377491",
+    "devtools/reference_validator/verify/analytic_volume.py": "82e7b0a5341d0d140b4f003e79073275a7526415969b1b1392df59e15a009dbc",
+    "devtools/reference_validator/verify/_interval.py": "65932e679a0d003c6b80606f8ad9b09513aa67da9115e85ec81055e7f4700069",
+    "devtools/reference_validator/verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+    "devtools/reference_validator/verify/power_progress.py": "f4b0d2659f219d3e77eec0c149f9bffabc60f0b7eb5a972f15098eecd2483982",
+    "devtools/reference_validator/verify/__init__.py": "81cf89c4e7c65a4225f0cef4829c732de88b336f729dd0c0bca79e3f52e5d024",
+    "devtools/reference_validator/verify/region_volume.py": "7429dc7a765c6e2a9d13e84cd67e69e964fd8ec8ce0bc9639b6d6f42aeff2965",
+    "devtools/reference_validator/verify/box_topology.py": "eefacfdaa9f704588bc57ae993a515d24eb85b631e63c9c1ecaf461ff2ee2067"
+  },
+  "worker_source": "import hashlib\nimport json\nimport os\nimport resource\nimport subprocess\nimport sys\nimport time\nfrom datetime import datetime, timezone\nfrom fractions import Fraction as F\nfrom pathlib import Path\n\nfrom devtools.reference_validator.model import Model, record_digest\nfrom devtools.reference_validator.power_cells import topology_certificate\nfrom devtools.reference_validator.region_volume import (\n    load_region_bundle, refine_region_volume, region_volume_certificate, save_region_bundle,\n)\nfrom devtools.reference_validator.verify.geometry import volume\nfrom devtools.reference_validator.verify.region_volume import check_region_volume, check_volume_transition\nfrom devtools.reference_validator.volume_request import VolumeRequest\n\nprotocol_path, output = map(Path, sys.argv[1:])\nspec = json.loads(protocol_path.read_text())\nroot = Path.cwd()\ndef sha(path):\n    return hashlib.sha256(path.read_bytes()).hexdigest()\ndef write(path, value):\n    with path.open('x') as stream:\n        json.dump(value, stream, indent=2, allow_nan=False); stream.write('\\n')\nfor relative, digest in spec['frozen_files'].items():\n    assert sha(root / relative) == digest, relative\nassert len(os.sched_getaffinity(0)) == 1\noutput.mkdir(parents=True, exist_ok=False)\nstart = time.perf_counter()\nmodel = Model.from_record(spec['model'])\nproof = json.loads((root / spec['topology_path']).read_text()) if spec['topology_path'] else topology_certificate(model)\nrequest = VolumeRequest(volume(model.domain) / 2**spec['k'], F(1, 2**spec['k']))\nrows = []\nprevious = None\nfor ceiling in spec['step_leaf_ceilings']:\n    step_start = time.perf_counter()\n    cert = (region_volume_certificate(model, proof, request, max_leaves=ceiling, method=spec['method'])\n            if previous is None else refine_region_volume(model, previous, max_leaves=ceiling))\n    folder = output / f'leaves_{ceiling}'\n    save_region_bundle(folder, model, cert)\n    saved = load_region_bundle(folder, model)\n    result = check_region_volume(model, saved)\n    transition = None if previous is None else check_volume_transition(model, previous, saved)\n    write(folder / 'verification.json', result)\n    if transition is not None:\n        write(folder / 'transition.json', transition)\n    rows.append({'step_leaf_ceiling': ceiling, 'leaf_count': len(cert['leaves']), 'wall_seconds': time.perf_counter()-step_start,\n                 'verification': str((folder / 'verification.json').relative_to(root)), 'certificate_sha256': record_digest(cert),\n                 'total_precision_status': result['total_precision_status'], 'precision_status': result['precision_status'],\n                 'volume_lower': result['volume_lower'], 'volume_upper': result['volume_upper'], 'regions': result['regions'],\n                 'leaf_states': result['leaf_states'], 'exact_shortcut': result['exact_shortcut']})\n    previous = saved\nreceipt = {'schema': 'topomt.reference-validator.region-volume-receiving/1', 'owner': 'uibcdf/topomt#76',\n    'recorded_at_utc': datetime.now(timezone.utc).isoformat(), 'protocol_sha256': sha(protocol_path),\n    'source_revision': subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),\n    'runtime': sys.version, 'executable': sys.executable, 'model_sha256': model.digest,\n    'topology_certificate_sha256': record_digest(proof), 'request': request.to_record(), 'k': spec['k'],\n    'method': spec['method'], 'steps': rows, 'elapsed_seconds': time.perf_counter()-start,\n    'peak_rss_kib_linux': resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,\n    'cpu_affinity': sorted(os.sched_getaffinity(0)), 'address_space_limit_bytes': resource.getrlimit(resource.RLIMIT_AS)[0],\n    'scope': 'Certified total/per-region bounds under the frozen requested tolerance; valid bounds do not imply requested precision.',\n    'files': {str(p.relative_to(output)): sha(p) for p in output.rglob('*.json')}}\nwrite(output / 'receipt.json', receipt)\nprint(json.dumps({k:receipt[k] for k in ['model_sha256','k','elapsed_seconds','peak_rss_kib_linux']}), flush=True)\n",
+  "worker_sha256": "7ac2d601f0b63e4c3c470b6e07e49f36792acc6d2f773b8535c923093874c0fb",
+  "independent_region_bounds_nm3": {
+    "lower": [
+      "8302887450577142536304304925468469488399774751",
+      "11718750000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+    ],
+    "upper": [
+      "8302887450577142536304304925468469488399774751",
+      "11718749999999994304888278551013735075573896124998486226979937369782174170447189183069601351494"
+    ],
+    "derivation": "polynomial availability inequalities and simplex volumes, independent of cap/wedge integration"
+  },
+  "resources": {
+    "cpu_count": 1,
+    "address_space_limit_bytes": 2147483648,
+    "cpu_soft_seconds": 30,
+    "cpu_hard_seconds": 35,
+    "wall_seconds": 45
+  },
+  "scope": "Internal centered-cube clipping control with eight proved regions. All tolerances retained. Original hull precision remains separate."
+}

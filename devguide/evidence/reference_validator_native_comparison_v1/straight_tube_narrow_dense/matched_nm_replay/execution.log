@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "<string>", line 51, in <module>
+    query = DFNDQuery(probe_radius=float(reference.probe),residence_tolerance=0,permeability_tolerance=0,boundary_tolerance=0,transit_policy='with_connectors',gate_intrusion_policy='flag_only',dry_adjacency='face')
+  File "<string>", line 16, in __init__
+  File "/fast_data/home/liliana/repos@uibcdf/topomt/topomt/dfnd/config.py", line 89, in __post_init__
+    raise ValueError('boundary_tolerance must be positive')
+ValueError: boundary_tolerance must be positive

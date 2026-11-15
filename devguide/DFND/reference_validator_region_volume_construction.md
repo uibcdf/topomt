@@ -79,6 +79,16 @@ only when complete same-model topology independently proves exactly one region.
 Its original strict contained-ball/box and error-enclosure admissions remain;
 it does not become an integrator for a clipped hull or several regions.
 
+The separate `analytic_corner_regions` admission implements a
+[cap/wedge boundary integral](reference_validator_boundary_precision.md) for
+one expanded ball centered in a cube with `2*a^2<R^2<3*a^2`. Complete topology
+and an independent orthant/reflection argument assign one eighth of its total
+to every one of its eight regions. A strict scheme/bit record selects bounded
+outward rational interval arithmetic, square roots, Machin pi and atan series
+tails. This high-precision clipped-boundary control leaves the original
+center-hull precision gate separate. Exact contact and rejected asymmetric/
+multi-atom geometry cannot be replaced by the symmetric formula.
+
 `VolumeRequest` preserves explicit nm**3 absolute and dimensionless relative
 constraints. Both enabled constraints must pass for the total and every
 requested region. Valid bounds have `volume_enclosure_status=resolved` even
@@ -125,10 +135,26 @@ one-ball tetrahedral covers can prove exclusion. Otherwise this first route
 retains unresolved carrier qualification; a clear or blocked stored center
 alone does not decide its entire carrier or connectivity.
 
-This is the first #181 consumer. Original saved receiving can be reused with
-its source/input hashes; the comparison is not new native DFND execution,
-public promotion, biological classification or a general solver-error claim.
-Native policies and comparative-finding reconciliation retain their owners.
+This is the first #181 consumer. The comparison function checks supplied
+supports; the receiving harness separately identifies fresh native execution
+or saved reuse. The [qualified native panel](../evidence/reference_validator_native_comparison_v1/qualified_plan.json)
+uses canonical nm coordinates and captures actual MolSysMT vdW radii. Those
+radii differ by one binary64 step from the old provided-radius reference;
+each target therefore has a **distinct exact numerical Model**. Its original
+center hull remains valid, and the old complete partition is proposed only
+as an untrusted candidate. The target checker reconstructs every full
+inequality, cell and availability predicate before comparison. Original Models,
+native observations and unsuccessful matching attempts remain unchanged.
+
+The exact point query gives domain membership priority: 22 new narrow centers
+are blocked inside the hull, eight are outside it, and the single wide center
+is outside. `outside_domain` does not assert absence of atomic collision.
+Native floating support tolerances and the older obstacle-clearance diagnosis
+are separate observations. The complete submitted carrier unions lie in the
+hull by source-vertex convexity and are independently excluded; this conclusion
+does not depend on classifying a stored center as inside its carrier.
+Native promotion/qualification policy, biological morphology and general
+solver-correctness interpretation retain their owning issues.
 
 For a possible later boundary-based integration route, the existing design
 also identifies [SBL's surface/volume package](https://sbl.inria.fr/doc/Union_of_balls_surface_volume_3-user-manual.html).

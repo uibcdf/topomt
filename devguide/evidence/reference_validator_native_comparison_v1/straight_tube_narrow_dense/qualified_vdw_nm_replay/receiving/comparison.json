@@ -1,0 +1,914 @@
+{
+  "schema": "topomt.reference-validator.spatial-comparison/1",
+  "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+  "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+  "numerical_model_match": "exact",
+  "length_unit": "nm",
+  "reference_region_count": 0,
+  "reference_boundary_patch_count": 0,
+  "reference_boundary_incidence": [],
+  "points": {
+    "resident_5": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "5587020643409203",
+          "18014398509481984"
+        ],
+        [
+          "-292090964456497",
+          "2251799813685248"
+        ],
+        [
+          "-4545656796432149",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_16": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "7313702430359385",
+          "36028797018963968"
+        ],
+        [
+          "-2489038809736543",
+          "9007199254740992"
+        ],
+        [
+          "6914917390320069",
+          "18014398509481984"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_17": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "8451394390748105",
+          "144115188075855872"
+        ],
+        [
+          "-6627211716760265",
+          "18014398509481984"
+        ],
+        [
+          "3145936680036171",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_20": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-6127779852231561",
+          "18014398509481984"
+        ],
+        [
+          "126591475949527",
+          "1125899906842624"
+        ],
+        [
+          "1281368772660411",
+          "4503599627370496"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_35": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "2751577010524691",
+          "18014398509481984"
+        ],
+        [
+          "-342572093096819",
+          "1125899906842624"
+        ],
+        [
+          "6760831590216259",
+          "18014398509481984"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_36": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "7156172726621073",
+          "144115188075855872"
+        ],
+        [
+          "-6585744833309231",
+          "18014398509481984"
+        ],
+        [
+          "841313512020991",
+          "2251799813685248"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_47": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-3323109294451531",
+          "36028797018963968"
+        ],
+        [
+          "-5974541734788041",
+          "18014398509481984"
+        ],
+        [
+          "117563335637687",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_50": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-88460761056819",
+          "2251799813685248"
+        ],
+        [
+          "-195871581441067",
+          "562949953421312"
+        ],
+        [
+          "3362671654381325",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_51": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-283204936316371",
+          "9007199254740992"
+        ],
+        [
+          "-3132147394577733",
+          "9007199254740992"
+        ],
+        [
+          "2246571057446969",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_53": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-766198995693431",
+          "36028797018963968"
+        ],
+        [
+          "-1591928162727337",
+          "4503599627370496"
+        ],
+        [
+          "4466931392946379",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_59": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "1255977478001879",
+          "4503599627370496"
+        ],
+        [
+          "3983401310630921",
+          "18014398509481984"
+        ],
+        [
+          "-1566299712598917",
+          "4503599627370496"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_62": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-2509854217840477",
+          "9007199254740992"
+        ],
+        [
+          "3407444589059841",
+          "18014398509481984"
+        ],
+        [
+          "2343244260664953",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_64": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-6276741794416113",
+          "18014398509481984"
+        ],
+        [
+          "697422095556247",
+          "36028797018963968"
+        ],
+        [
+          "-577589425112507",
+          "4503599627370496"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_65": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-6122168900687143",
+          "18014398509481984"
+        ],
+        [
+          "7750606884744509",
+          "72057594037927936"
+        ],
+        [
+          "291280750577389",
+          "1125899906842624"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_81": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-2146072356526687",
+          "9007199254740992"
+        ],
+        [
+          "4358164824622985",
+          "18014398509481984"
+        ],
+        [
+          "2195010321836959",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_129": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-6482811563492529",
+          "36028797018963968"
+        ],
+        [
+          "-5638923451726455",
+          "18014398509481984"
+        ],
+        [
+          "4397523650513267",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_150": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "5405716316709841",
+          "72057594037927936"
+        ],
+        [
+          "6377995554988251",
+          "18014398509481984"
+        ],
+        [
+          "-4282662006606345",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_225": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-6149910873338467",
+          "18014398509481984"
+        ],
+        [
+          "522246212511475",
+          "36028797018963968"
+        ],
+        [
+          "4629333228595759",
+          "18014398509481984"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_228": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-3073926975182903",
+          "9007199254740992"
+        ],
+        [
+          "489613970014955",
+          "4503599627370496"
+        ],
+        [
+          "501185162611491",
+          "4503599627370496"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_230": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-4773420419706203",
+          "18014398509481984"
+        ],
+        [
+          "-983894397472169",
+          "4503599627370496"
+        ],
+        [
+          "4411229559284517",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_231": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-8724499483710737",
+          "36028797018963968"
+        ],
+        [
+          "-4494872680805235",
+          "18014398509481984"
+        ],
+        [
+          "8813613338329153",
+          "18014398509481984"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_232": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "-1384821738785325",
+          "4503599627370496"
+        ],
+        [
+          "-366414432055191",
+          "2251799813685248"
+        ],
+        [
+          "2273214504694653",
+          "4503599627370496"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_245": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "5241783612124315",
+          "18014398509481984"
+        ],
+        [
+          "7946524795241683",
+          "36028797018963968"
+        ],
+        [
+          "4419976627801167",
+          "9007199254740992"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_315": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "8275686552298603",
+          "36028797018963968"
+        ],
+        [
+          "4757730777369821",
+          "18014398509481984"
+        ],
+        [
+          "1665041628615895",
+          "4503599627370496"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_316": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "8775141201111071",
+          "36028797018963968"
+        ],
+        [
+          "2306735835268789",
+          "9007199254740992"
+        ],
+        [
+          "1108224266494009",
+          "2251799813685248"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "outside_domain",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_317": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "5250239582090199",
+          "18014398509481984"
+        ],
+        [
+          "8036865170813933",
+          "36028797018963968"
+        ],
+        [
+          "138120286234891",
+          "281474976710656"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_434": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "6203509830967155",
+          "36028797018963968"
+        ],
+        [
+          "-5234796775457649",
+          "18014398509481984"
+        ],
+        [
+          "4647197171246631",
+          "18014398509481984"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_439": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "4011935654931181",
+          "72057594037927936"
+        ],
+        [
+          "-6561063233485697",
+          "18014398509481984"
+        ],
+        [
+          "5232999361587697",
+          "18014398509481984"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_442": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "5010405972179179",
+          "18014398509481984"
+        ],
+        [
+          "-8111315524293915",
+          "36028797018963968"
+        ],
+        [
+          "-2268367264303919",
+          "4503599627370496"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "resident_444": {
+      "model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "topology_certificate_sha256": "27267c7175d6fea6ea4e83c15f8b2a7676186dc049611fee47e4e7db53b0790a",
+      "point": [
+        [
+          "629637715776603",
+          "2251799813685248"
+        ],
+        [
+          "-4085490931946715",
+          "18014398509481984"
+        ],
+        [
+          "1151303761100681",
+          "4503599627370496"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    }
+  },
+  "paths": {},
+  "carriers": {
+    "WET-1": {
+      "physical_state": "empty",
+      "proof_route": "whole_domain_exclusion",
+      "source_tetrahedra": [
+        [
+          4,
+          23,
+          31,
+          67
+        ],
+        [
+          4,
+          23,
+          67,
+          77
+        ],
+        [
+          4,
+          30,
+          31,
+          66
+        ],
+        [
+          4,
+          31,
+          66,
+          76
+        ],
+        [
+          4,
+          31,
+          67,
+          76
+        ],
+        [
+          4,
+          67,
+          76,
+          77
+        ],
+        [
+          7,
+          8,
+          35,
+          79
+        ],
+        [
+          7,
+          24,
+          25,
+          79
+        ],
+        [
+          7,
+          25,
+          34,
+          79
+        ],
+        [
+          7,
+          34,
+          35,
+          79
+        ],
+        [
+          8,
+          35,
+          44,
+          71
+        ],
+        [
+          8,
+          35,
+          71,
+          80
+        ],
+        [
+          8,
+          35,
+          79,
+          80
+        ],
+        [
+          8,
+          44,
+          45,
+          80
+        ],
+        [
+          8,
+          44,
+          71,
+          80
+        ],
+        [
+          23,
+          33,
+          42,
+          78
+        ],
+        [
+          23,
+          41,
+          42,
+          78
+        ],
+        [
+          23,
+          41,
+          67,
+          77
+        ],
+        [
+          23,
+          41,
+          77,
+          78
+        ],
+        [
+          24,
+          25,
+          34,
+          79
+        ],
+        [
+          24,
+          33,
+          42,
+          78
+        ],
+        [
+          24,
+          34,
+          43,
+          79
+        ],
+        [
+          24,
+          42,
+          60,
+          78
+        ],
+        [
+          24,
+          43,
+          60,
+          79
+        ],
+        [
+          24,
+          60,
+          78,
+          79
+        ],
+        [
+          31,
+          66,
+          67,
+          76
+        ],
+        [
+          34,
+          35,
+          71,
+          79
+        ],
+        [
+          35,
+          71,
+          79,
+          80
+        ]
+      ],
+      "domain_containment": "verified_by_convexity"
+    },
+    "WET-2": {
+      "physical_state": "empty",
+      "proof_route": "whole_domain_exclusion",
+      "source_tetrahedra": [
+        [
+          0,
+          1,
+          45,
+          73
+        ],
+        [
+          1,
+          2,
+          28,
+          73
+        ],
+        [
+          1,
+          19,
+          37,
+          73
+        ],
+        [
+          1,
+          19,
+          45,
+          73
+        ],
+        [
+          1,
+          28,
+          37,
+          73
+        ],
+        [
+          2,
+          28,
+          37,
+          73
+        ],
+        [
+          2,
+          37,
+          56,
+          73
+        ]
+      ],
+      "domain_containment": "verified_by_convexity"
+    },
+    "WET-3": {
+      "physical_state": "empty",
+      "proof_route": "whole_domain_exclusion",
+      "source_tetrahedra": [
+        [
+          2,
+          30,
+          56,
+          74
+        ]
+      ],
+      "domain_containment": "verified_by_convexity"
+    }
+  },
+  "morphology_status": "not_inferred",
+  "native_algorithm_correctness": "not_inferred_from_local_support_checks"
+}

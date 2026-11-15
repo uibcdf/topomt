@@ -1,0 +1,20 @@
+{
+  "owner": "uibcdf/topomt#181",
+  "jobs": [
+    {
+      "name": "straight_tube_narrow_dense",
+      "protocol": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/protocol.json",
+      "sha256": "d282fc10ae0a824e532973a152f56a607be170a75f6c66ff7cfb3fb24e0db1e0"
+    },
+    {
+      "name": "straight_tube_wide_sparse",
+      "protocol": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/protocol.json",
+      "sha256": "0a8ec69b18848e7a2a72c7aa762a743d6154fac39d4fd5daed00ddbdb5e332ff"
+    }
+  ],
+  "supersedes_receiving_plans": [
+    "plan.json",
+    "matched_plan.json"
+  ],
+  "scope": "Exact matched comparisons use separately checked actual-vdW Models; original nineteen reference Models/proofs and older native receiving remain immutable. Prior incomplete routes are retained, not future scheduled runs."
+}

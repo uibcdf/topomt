@@ -1,0 +1,30 @@
+{
+  "schema": "topomt.reference-validator.receiving-difference-receipt/1",
+  "source_revision": "d7abb46a1919b85a74126257cfa59be64238ca40",
+  "protocol_sha256": "485f43611b35d3a013ec806734005b6c82b9945ee81fb94a1250b71da2b03de3",
+  "elapsed_seconds": 2.8927868840983137,
+  "diagnostic": {
+    "schema": "topomt.reference-validator.receiving-difference/1",
+    "reference_model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+    "canonical_nm_equals_reference": true,
+    "native_equals_angstrom_round_trip": true,
+    "changed_coordinate_entries": 136,
+    "max_coordinate_difference_nm": [
+      "1",
+      "4503599627370496"
+    ],
+    "max_radius_difference_nm": [
+      "1",
+      "36028797018963968"
+    ],
+    "probe_difference_nm": [
+      "0",
+      "1"
+    ],
+    "diagnostic_scope": "Numerical receiving difference only; no matched comparison or physical absence inferred."
+  },
+  "files": {
+    "diagnostic.json": "38aa44ec8bdc2082bfd8e4f9d95d68deac48d5b70a5520934234848559aa8852",
+    "actual_spheres.json": "da7d60f41d16261d298eb78f68f584a90af6783e2758b76c9d972a1da230ddf4"
+  }
+}

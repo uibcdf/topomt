@@ -167,3 +167,19 @@ actually used SciPy. Fixed-order/refined quadrature and geometric full/empty
 proofs earn no binomial citation. Structured public measurements retain their
 own detached envelope and reused construction references; legacy scalar/tuple
 returns preserve the application-owned capture contract.
+
+## Independent developer reference validator — 2026-11-15 UTC
+
+The standalone checker under `devtools/reference_validator` retains exact
+Models, proofs and source identities outside TopoMT's supported scientific
+client API. Its rational geometry and cap/wedge control execute no external
+detector or numerical backend. The method derivations state their mathematical
+trusted base; no DFND publication or original SBL execution is invented.
+Public scientific-client attribution and API admission remain the explicitly
+owned P6 work under [#76](pending_proposals/dfnd_reference_validation_panel.md),
+coordinated with #157, rather than an unqualified production boundary.
+
+The matched-native comparison separately retains the real public DFND result's
+`topomt.get_attribution` envelope at its actual completion. Reading/checking
+that retained result adds no new native calculation credit. The independent
+checker remains runnable without Ackredit or the scientific Python stack.

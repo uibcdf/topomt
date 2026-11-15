@@ -14,6 +14,7 @@ from .model import Model, _record, record_digest
 from .power_contracts import bounding_box
 from .storage import read_record_with_digest
 from .verify import verify
+from .verify.corner_volume import corner_bounds
 from .verify.geometry import volume
 from .verify.region_volume import (
     _box_children,
@@ -82,7 +83,9 @@ def region_volume_certificate(
     *,
     max_leaves: int = 4096,
     max_depth: int = 24,
-    method: Literal['adaptive_boxes', 'analytic_single_region'] = 'adaptive_boxes',
+    method: Literal[
+        'adaptive_boxes', 'analytic_single_region', 'analytic_corner_regions'
+    ] = 'adaptive_boxes',
 ) -> dict[str, Any]:
     """Propose certified total/region bounds under a finite integration envelope.
 
@@ -99,7 +102,8 @@ def region_volume_certificate(
     max_depth : int
         Fixed subdivision depth ceiling, at most 24.
     method : str
-        Adaptive box bounds or admitted analytic single-region assignment.
+        Adaptive box bounds, contained-ball single-region assignment, or
+        the admitted symmetric eight-corner boundary integral.
 
     Returns
     -------
@@ -134,6 +138,18 @@ def region_volume_certificate(
         'parent_certificate_sha256': None,
         'kernel': _volume_kernel(),
     }
+    if method == 'analytic_corner_regions':
+        if len(topology['regions']) != 8:
+            raise ValueError('Boundary assignment requires eight complete regions')
+        cert['leaves'] = []
+        for bits in [64, 128, 256, 512, 1024, 2048]:
+            cert['analytic_certificate'] = {'scheme': 'cube-cap-wedge/1', 'bits': bits}
+            bounds = corner_bounds(model, cert['analytic_certificate'])
+            if request.satisfied(bounds.lower, bounds.upper):
+                break
+            if request.absolute_nm3 == 0 or request.relative == 0:
+                break
+        return cert
     if method == 'analytic_single_region':
         if len(topology['regions']) != 1:
             raise ValueError('Analytic assignment needs one complete region')

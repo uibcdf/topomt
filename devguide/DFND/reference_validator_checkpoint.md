@@ -12,6 +12,47 @@ complete topology-plus-precision validator or a supported public TopoMT detector
 
 ## Selected improvement workplan — 2026-11-14
 
+### Actual-input native carrier comparison and boundary source
+
+The [qualified native summary](../evidence/reference_validator_native_comparison_v1/summary.json)
+now completes both fresh public profiles at `d7abb46`: canonical nm coordinates
+and actual MolSysMT vdW radii define **two additional numerical Models**.
+They preserve the original centers/hulls and probes, but not the old supplied
+radius bits. The old complete partitions are untrusted proposals; independent
+target checking reconstructs every cell and availability predicate on the
+actual inputs before exact-model comparison. The nineteen original Models and
+all previous source results remain unchanged.
+
+All three narrow native wet-carrier unions and the single wide union are
+completely excluded. Thirty narrow centers receive exact domain-prioritized
+queries: 22 are blocked in the hull and eight are outside it; the wide center
+is outside. This does not contradict a separately computed obstacle collision
+or imply that native support tolerance is an exact containment proof. Full
+source-tetrahedron carrier exclusion does not rely on the stored center.
+Local operators/public promotion remain unchanged and #181 stays `needs_review`.
+
+The two completed workers take 146.660 wall / 146.473 CPU seconds, peak RSS
+308,760 KiB, one CPU and 2 GiB each. Retained history includes the original
+unmatched narrow attempt, a 3.724-second conversion diagnostic, and a
+2.875-second explicit-nm attempt rejected for invalid zero numerical boundary
+tolerance. The accepted route restores the frozen positive boundary tolerance.
+The diagnostic proves a 136-coordinate Å round trip and one-step radius
+differences; no near-equality tolerance is used to admit a comparison. Canonical
+common-receiver qualification for wider native panels remains under #76/#60.
+
+The [cap/wedge boundary control](reference_validator_boundary_precision.md)
+is now source-admitted for eight equal-volume clipped-cube regions. Its 22
+focused controls include independently derived rational tiny-region bounds,
+near-edge cap/annulus normalization, changed geometry/schemes, strict precision
+and saved checking without scientific packages. The complete relevant selection
+passes **309 tests**, 39.98 pytest / 40.58 bounded process seconds, peak RSS
+95,664 KiB, one CPU and 2 GiB with a 90-second CPU ceiling. Ruff/format and
+mypy on 38 modules pass. Exact source hashes are retained in the
+[qualification record](../evidence/reference_validator_boundary_volume_v1/source_qualification.json).
+Sixteen analytic k=8/16/24/32 protocols are frozen before their retained run.
+This source qualification does not resolve original positive-volume precision,
+full P5, native policy, installed/public or support-matrix gates.
+
 ### Retained original region-volume receiving — 2026-11-15 UTC
 
 The [frozen panel and retained summary](../evidence/reference_validator_region_volume_v1/summary.json)

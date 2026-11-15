@@ -294,6 +294,7 @@ def verify(
 
         for name in (
             'verify/region_volume.py',
+            'verify/corner_volume.py',
             'volume_request.py',
             'power_contracts.py',
             'verify/power_cells.py',

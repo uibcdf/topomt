@@ -22,6 +22,7 @@ from ..model import (
 )
 from ..power_contracts import bounding_box, domain_planes
 from ..volume_request import VolumeRequest
+from .corner_volume import corner_bounds
 from .geometry import cell_is_covered, cell_is_free, split, volume
 from .power_cells import _locate
 
@@ -95,7 +96,15 @@ def _summarize(
     counts = {'free': 0, 'blocked': 0, 'outside': 0, 'unknown': 0}
     exact_shortcut = None
     method = cert['method']
-    if method == 'analytic_single_region':
+    analytic_upper = {}
+    if method == 'analytic_corner_regions':
+        if len(ids) != 8 or cert['leaves'] or cert['analytic_certificate'] is None:
+            raise ValueError('Boundary assignment requires eight complete regions')
+        bounds = corner_bounds(model, cert['analytic_certificate'])
+        lower = {key: bounds.lower / 8 for key in ids}
+        analytic_upper = {key: bounds.upper / 8 for key in ids}
+        total_upper = bounds.upper
+    elif method == 'analytic_single_region':
         if len(ids) != 1 or cert['leaves'] or cert['analytic_certificate'] is None:
             raise ValueError('Analytic assignment requires exactly one proved region')
         analytic = cert['analytic_certificate']
@@ -179,7 +188,9 @@ def _summarize(
     regions = []
     for key in ids:
         upper = (
-            total_upper
+            analytic_upper[key]
+            if method == 'analytic_corner_regions'
+            else total_upper
             if method == 'analytic_single_region'
             else min(lower[key] + unknown, total_upper - (total_lower - lower[key]))
         )
@@ -215,7 +226,11 @@ def _summarize(
         if request.satisfied(total_lower, total_upper)
         else 'unresolved',
         'precision_status': 'resolved' if all_precision else 'unresolved',
-        'stop_reason': None if all_precision else 'integration_envelope',
+        'stop_reason': None
+        if all_precision
+        else 'analytic_precision_envelope'
+        if method == 'analytic_corner_regions'
+        else 'integration_envelope',
         'leaf_states': counts,
         'method': method,
         'exact_shortcut': exact_shortcut,

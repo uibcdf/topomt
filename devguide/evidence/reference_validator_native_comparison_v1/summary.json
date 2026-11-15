@@ -1,0 +1,164 @@
+{
+  "schema": "topomt.reference-validator.native-comparison-summary/1",
+  "owner": "uibcdf/topomt#181",
+  "profiles": [
+    {
+      "case": "straight_tube_narrow_dense",
+      "probe_angstroms": 2.5,
+      "original_reference_model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+      "actual_native_reference_model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+      "numerical_model_match": "exact",
+      "reference_region_count": 0,
+      "n_points": 30,
+      "n_carriers": 3,
+      "carrier_source_tetrahedron_counts": {
+        "WET-1": 28,
+        "WET-2": 7,
+        "WET-3": 1
+      },
+      "point_states": {
+        "resident_5": "blocked",
+        "resident_16": "outside_domain",
+        "resident_17": "outside_domain",
+        "resident_20": "blocked",
+        "resident_35": "blocked",
+        "resident_36": "blocked",
+        "resident_47": "outside_domain",
+        "resident_50": "blocked",
+        "resident_51": "blocked",
+        "resident_53": "blocked",
+        "resident_59": "outside_domain",
+        "resident_62": "blocked",
+        "resident_64": "blocked",
+        "resident_65": "blocked",
+        "resident_81": "blocked",
+        "resident_129": "outside_domain",
+        "resident_150": "blocked",
+        "resident_225": "blocked",
+        "resident_228": "blocked",
+        "resident_230": "blocked",
+        "resident_231": "blocked",
+        "resident_232": "outside_domain",
+        "resident_245": "blocked",
+        "resident_315": "outside_domain",
+        "resident_316": "outside_domain",
+        "resident_317": "blocked",
+        "resident_434": "blocked",
+        "resident_439": "blocked",
+        "resident_442": "blocked",
+        "resident_444": "blocked"
+      },
+      "carrier_states": {
+        "WET-1": "empty",
+        "WET-2": "empty",
+        "WET-3": "empty"
+      },
+      "elapsed_seconds": 67.6786137529416,
+      "cpu_seconds": 67.586956,
+      "peak_rss_kib": 308760,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/protocol.json",
+          "sha256": "d282fc10ae0a824e532973a152f56a607be170a75f6c66ff7cfb3fb24e0db1e0"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/execution.json",
+          "sha256": "3499eaa7b649610d08a02bb0a2359814b0cca4eb3c72f1980f9e754bdca53c92"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/receiving/receipt.json",
+          "sha256": "2dd00e206b9d609091b3cd2094848add64a32bc36f77e25aa5cc1a81efb50e96"
+        },
+        "native_model": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/receiving/native_model.json",
+          "sha256": "229eb6b253d5de6bfe0feb36afdca6b3d57b30eb6e6a80752034d39acd5b6d46"
+        },
+        "native_public": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/receiving/native_public.json",
+          "sha256": "92d1c02230220b181897e34080b5e57e113c28a9ae7298986eaaaa2818027b54"
+        },
+        "reference_certificate": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/receiving/reference_certificate.json",
+          "sha256": "32c66147dd35be04bd68e706a9386ace49d4e27d240e9fe73bca68d724b1aae9"
+        },
+        "reference_verification": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/receiving/reference_verification.json",
+          "sha256": "5892ffb509bb13c8969c9d84e189f2aaa9640671dd9191292998688103e6ca8f"
+        },
+        "comparison": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/qualified_vdw_nm_replay/receiving/comparison.json",
+          "sha256": "d2beb320e3b1d9f2b6aa08fee8f79417d23e548480de8e6e0af2584575321c81"
+        }
+      }
+    },
+    {
+      "case": "straight_tube_wide_sparse",
+      "probe_angstroms": 5,
+      "original_reference_model_sha256": "ffcd86623d3afccc3b17e925ca6366dedf51afb689d1561e66796df0e8b284f5",
+      "actual_native_reference_model_sha256": "29f4221f2d78aa6e102f47447bf9f59b826c21e36e556921a91c13a0fd9e738b",
+      "numerical_model_match": "exact",
+      "reference_region_count": 0,
+      "n_points": 1,
+      "n_carriers": 1,
+      "carrier_source_tetrahedron_counts": {
+        "WET-1": 1
+      },
+      "point_states": {
+        "resident_115": "outside_domain"
+      },
+      "carrier_states": {
+        "WET-1": "empty"
+      },
+      "elapsed_seconds": 78.98133608000353,
+      "cpu_seconds": 78.88588200000001,
+      "peak_rss_kib": 302676,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/protocol.json",
+          "sha256": "0a8ec69b18848e7a2a72c7aa762a743d6154fac39d4fd5daed00ddbdb5e332ff"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/execution.json",
+          "sha256": "a3592f7090a4b127561f0c522a574f50d91611e1c1136e1e3ad9b64a5aa4daa8"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/receiving/receipt.json",
+          "sha256": "9edfaefb55fac03fcb9338f5ec714aff992b544c124c30cb3fd371a87afec10b"
+        },
+        "native_model": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/receiving/native_model.json",
+          "sha256": "c44fe6f1baf0f13a84e07c974589ef5b8a4de2dc0c100a30cbef96f504aa8704"
+        },
+        "native_public": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/receiving/native_public.json",
+          "sha256": "4dfd98fa4d3f51f14d7515c383dc838402510e94e078a0b6042b4e869cfcfcba"
+        },
+        "reference_certificate": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/receiving/reference_certificate.json",
+          "sha256": "c9992a1f387c066990ace4c0127cd21f831c82d0872143557a29265a349c4002"
+        },
+        "reference_verification": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/receiving/reference_verification.json",
+          "sha256": "a44e1c5e9be293ca0ab6f8e615d822fc66919a58de57699033d5e83990f833c0"
+        },
+        "comparison": {
+          "path": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/qualified_vdw_nm_replay/receiving/comparison.json",
+          "sha256": "1578365808ed286f20127e47327290e5a58429ddb93b1f4ed482a4a38aaf8d6c"
+        }
+      }
+    }
+  ],
+  "scope": "Original nineteen Models are immutable. Explicit canonical nm/native-vdW receiving has two additional exact Models; saved partitions are untrusted candidates fully checked on those actual inputs. All compared supports belong to the matching target Model.",
+  "totals": {
+    "wall_seconds": 146.65994983294513,
+    "cpu_seconds": 146.47283800000002,
+    "peak_rss_kib": 308760
+  },
+  "historical_attempts": {
+    "original_narrow": "straight_tube_narrow_dense/execution.json",
+    "invalid_boundary_tolerance": "straight_tube_narrow_dense/matched_nm_replay/execution.json",
+    "numerical_diagnostic": "roundtrip_diagnostic/receiving/diagnostic.json"
+  },
+  "native_policy": "unchanged; source local candidates and public promotion retain #181 needs_review",
+  "next_receiving_action": "Under #76/#60, qualify a canonical-unit common receiver before claiming all nineteen native/reference inputs match. Preserve older captures."
+}

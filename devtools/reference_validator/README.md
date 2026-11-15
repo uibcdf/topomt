@@ -51,6 +51,15 @@ point/path and source-tetrahedron supports without inferring native morphology.
 These source routes retain their explicit work/receiving gates under #76;
 they do not add production exports or qualify all original precision targets.
 
+`region_volume_certificate(..., method='analytic_corner_regions')` selects the
+separate [eight-corner boundary integral](../../devguide/DFND/reference_validator_boundary_precision.md).
+It admits exactly one expanded ball centered in a cube, with squared radius
+strictly between `2*a**2` and `3*a**2`. Checked topology and reflection symmetry
+justify equal volume for all eight regions. Outward rational intervals certify
+the requested total/per-region error, including tiny regions; other geometries
+are rejected. This internal control does not qualify general original-hull
+volume precision or add an installed public API.
+
 The developer `power_runs` route adds checked source-cell progress under the
 [active workplan](../../devguide/DFND/reference_validator_improvement_workplan.md).
 `start_power_run` and `resume_power_run` accept a finite `cell_budget` and

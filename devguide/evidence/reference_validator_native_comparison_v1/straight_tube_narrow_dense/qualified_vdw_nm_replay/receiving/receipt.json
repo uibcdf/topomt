@@ -1,0 +1,50 @@
+{
+  "schema": "topomt.reference-validator.native-spatial-receiving/1",
+  "owner": "uibcdf/topomt#181",
+  "recorded_at_utc": "2026-11-15T02:12:14.570169+00:00",
+  "source_revision": "d7abb46a1919b85a74126257cfa59be64238ca40",
+  "protocol_sha256": "d282fc10ae0a824e532973a152f56a607be170a75f6c66ff7cfb3fb24e0db1e0",
+  "native_execution": "fresh_public_receiving_of_canonical_nm_coordinates_and_native_vdw_radii",
+  "numerical_model_match": "exact",
+  "native_model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+  "reference_model_sha256": "9152031515c9660f4e9cc7f981f908963cd028d164b992b13915915e19714239",
+  "original_reference_model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+  "original_reference_proof_sha256": "48b11bcfbdd05d6a9e5ecd05f2fb35015066e673233c698bd7996d2ace58792b",
+  "reference_origin": "saved_geometry_candidate_independently_checked_on_actual_native_inputs",
+  "target_reference_check_seconds": 20.979077951051295,
+  "native_seconds": 1.5489373080199584,
+  "comparison_seconds": 42.32602929591667,
+  "elapsed_seconds": 66.80330137803685,
+  "peak_rss_kib_linux": 308760,
+  "dependencies": {
+    "molsysmt": {
+      "origin": "/fast_data/home/liliana/repos@uibcdf/molsysmt/molsysmt/__init__.py",
+      "revision": "27ba3d4c8d63a6a40a2d77f0190309ff15f4deef",
+      "status": []
+    },
+    "pyunitwizard": {
+      "origin": "/fast_data/home/liliana/repos@uibcdf/pyunitwizard/pyunitwizard/__init__.py",
+      "revision": "cc51c8e600f78f108bc563edd3221bd8788ead86",
+      "status": []
+    },
+    "ackredit": {
+      "origin": "/fast_data/home/liliana/repos@uibcdf/ackredit/ackredit/__init__.py",
+      "revision": "0bb26ecb42edcfc0984469ff20c9ff93f8fd7f56",
+      "status": []
+    }
+  },
+  "runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "Same exact input/domain/probe; full submitted native carriers proved excluded by complete domain exclusion. Local operators and native promotion policy are not changed.",
+  "files": {
+    "native_public.json": "92d1c02230220b181897e34080b5e57e113c28a9ae7298986eaaaa2818027b54",
+    "reference_certificate.json": "32c66147dd35be04bd68e706a9386ace49d4e27d240e9fe73bca68d724b1aae9",
+    "native_model.json": "229eb6b253d5de6bfe0feb36afdca6b3d57b30eb6e6a80752034d39acd5b6d46",
+    "reference_verification.json": "5892ffb509bb13c8969c9d84e189f2aaa9640671dd9191292998688103e6ca8f",
+    "comparison.json": "d2beb320e3b1d9f2b6aa08fee8f79417d23e548480de8e6e0af2584575321c81"
+  }
+}

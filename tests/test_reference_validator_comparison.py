@@ -1,5 +1,7 @@
 """Reference comparisons match numerical models and qualify explicit supports."""
 
+from fractions import Fraction
+
 import pytest
 
 from devtools.reference_validator.compare import compare_reference_claims
@@ -97,3 +99,31 @@ def test_complete_exclusion_also_covers_lower_dimensional_source_carriers():
         carrier_tetrahedra={'flat': [[0, 1, 2, 3]]},
     )
     assert result['carriers']['flat']['physical_state'] == 'empty'
+
+
+def test_rebound_candidate_proof_rechecks_every_target_radial_predicate():
+    from copy import deepcopy
+    from dataclasses import replace
+
+    from devtools.reference_validator.model import Atom
+    from devtools.reference_validator.verify import verify
+
+    original = Model.from_spheres(
+        [(0, 0, 0)],
+        [3],
+        0,
+        domain=Box(point((-1, -1, -1)), point((1, 1, 1))),
+    )
+    saved = topology_certificate(original)
+    for radius, accepted in [
+        (Fraction(3) - Fraction(1, 2**80), True),
+        (Fraction(1, 2), False),
+    ]:
+        target = replace(original, atoms=(Atom(0, point((0, 0, 0)), radius),))
+        candidate = deepcopy(saved)
+        candidate['model_sha256'] = target.digest
+        if accepted:
+            assert verify(target, candidate)['n_components'] == 0
+        else:
+            with pytest.raises(ValueError):
+                verify(target, candidate)
