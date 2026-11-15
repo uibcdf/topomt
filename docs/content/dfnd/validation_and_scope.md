@@ -27,16 +27,16 @@ inputs, independent reasoning, native/public observations and versioned evidence
 | Case/control | Independently justified statement |
 | --- | --- |
 | Regular tetrahedron, 1.2 Å | Four strict-free hull patches, each connected to the common free centroid and infinity. |
-| Regular tetrahedron, 1.4 Å | Covered hull with an admissible interior centroid. |
+| Regular tetrahedron, 1.4 Å | Covered hull boundary with an admissible interior centroid. |
 | Regular tetrahedron, 1.7 Å | No free center anywhere in the finite hull. |
-| Closed shell, 0.2 Å | Complete expanded-ball cover of the hull and a free enclosed origin. |
+| Closed shell, 0.2 Å | Complete expanded-ball cover of the hull boundary and a free enclosed origin. |
 | Shell with opening, 1.4 Å | One free hull patch and an origin-to-exterior witness. |
 | Narrow straight tube, 1.2/1.4 Å | One complete free region, two strict-free end patches and a verified bent end-to-end path; the fixed axis is blocked at 1.4 Å. |
 | Narrow straight tube, 2.5 Å | A conservative all-atom bound covers every center position in the finite hull. |
 | Wide straight tube, 1.4/2.5 Å | One complete free region, clear axis and two strict-free hull patches. The native physical boundary count resolves only at 1.4 Å in this study. |
 | Wide straight tube, 5 Å | Every finite-hull point is covered by expanded balls; local/public candidates still require qualification. |
 | Dumbbell, 1.4/2.2 Å | Complete covered nonconvex barrier, connecting-axis witness, and covered neck section prove connected then distinct enclosed named anchors; not every global region. |
-| Dumbbell, 6 Å | A complete tetrahedral cover excludes every strict-free center in the finite native hull; native wet/public results are empty while physical hull counting remains unavailable. |
+| Dumbbell, 6 Å | A complete tetrahedral cover excludes every strict-free center in the finite native hull; native wet/public results are empty while native physical-hull counting remains unavailable. |
 
 The wall is a sampled union of balls, not a continuum sphere with an assumed
 inner radius. A certificate for the origin-containing region does not prescribe
@@ -57,6 +57,15 @@ and their end-patch grouping match the earlier independent references by
 source atom IDs, beyond agreement in the two-patch count. The 5 Å proof has
 exact zero finite-hull volume. This reference receiving does not correct
 #184's native boundary-ordering availability or #181's promotion policy.
+
+The continuation dated 2026-11-15 completes **all nineteen original topology
+profiles**, including the shells and dumbbell, without changing native DFND.
+Closed-shell region counts are 1/1/1/0, opening-shell counts 1/1/0 and dumbbell
+counts 3/2/0 at their original probes. At dumbbell 1.4 Å the chamber anchors
+occupy one enclosed region while two additional regions touch the hull. The
+earlier named-anchor statement did not count these regions. Complete inventories,
+boundary incidence and requested region-volume precision have separate
+receipts in the [validator report](../benchlab/synthetic/reference_validator_report.md).
 
 ## Source deliveries and remaining scientific/public boundaries
 

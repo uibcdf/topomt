@@ -1,5 +1,24 @@
 # DFND notebook laboratory checkpoint
 
+## Complete original topology panel — 2026-11-15 UTC
+
+The [active validator checkpoint](reference_validator_checkpoint.md) now records
+complete independent topology for **19/19 original profiles**, with raw Models,
+proofs, queries and resources. The ten remaining shell/dumbbell profiles pass;
+dumbbell 1.4 Å has one enclosed chamber region and two extra boundary-touching
+regions. Original named references, inputs and 355 frozen files remain intact.
+
+The total/per-region panel now retains nineteen valid enclosures, with six
+exact-zero passes and thirteen nonempty original precision targets unresolved.
+Sixteen restricted boundary controls pass through k=32; four native carrier
+unions are excluded on two additional checked actual-vdW Models. The
+[workplan](reference_validator_improvement_workplan.md) selects general clipped-
+cell integration on original tetrahedron 1.4 Å next, with wider common-receiver
+qualification under #76/#60. Topology completion is not precision
+qualification or a #181/#180/#184/#188 fix. No new geometry, protein or provider
+phase is selected. Older dated counts and next steps below retain their
+historical scopes; use the active checkpoint for the current gate.
+
 ## Next validator work — 2026-11-14
 
 The [reviewed improvement workplan](reference_validator_improvement_workplan.md)

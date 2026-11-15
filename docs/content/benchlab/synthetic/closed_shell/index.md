@@ -21,10 +21,15 @@ probe-specific reference statements are retained in the system stage.
 
 ## Current observations
 
+The {ref}`complete reference inventory <complete-topology-across-the-six-original-systems-2026-11-15-utc>`
+now certifies one free region at each of 0.05, 0.2 and 1.4 Å, and none at 5 Å.
+At 0.05 Å all thirteen hull patches attach to that single region; the two
+larger positive profiles are enclosed. Requested volume precision is separate.
+
 | Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
 | --- | --- | --- | --- |
 | Access, 0.05 Å | 13 independently counted hull patches, all reached from the common origin. | 13 resolved physical patches; central `Channel`, ten native links / `Mouth` children. | [Independent and actual-public receiving](small_probe_connectivity.md) agree; ten native clusters have a different meaning. Wider qualification: [#76](https://github.com/uibcdf/topomt/issues/76). |
-| Enclosure, 0.2 / 1.4 Å | Free origin and completely covered hull. | `Void` without exterior links / `Mouth` children. | Later certificate resolves 0.2 Å; [matched volume receiving](../volume_measurements.md) has its own defined support and uncertainty. |
+| Enclosure, 0.2 / 1.4 Å | Exactly one free enclosed region and a completely covered hull boundary. | `Void` without exterior links / `Mouth` children. | Complete reference inventories resolve both probes; [matched native volume receiving](../volume_measurements.md) has its own defined support and uncertainty. |
 | Exclusion, 5 Å | No free center in the finite hull. | No resident wet component or public feature. | Empty resident result; native dry structures remain, [#60](https://github.com/uibcdf/topomt/issues/60). |
 
 The [public support and robustness continuation](../public_support_and_robustness.md)

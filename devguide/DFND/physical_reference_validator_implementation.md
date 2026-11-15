@@ -12,8 +12,9 @@ runtime. Runtime/memory measurements plan feasible execution; competitive
 speed is not an acceptance criterion.
 
 The [post-tube improvement workplan](reference_validator_improvement_workplan.md)
-now gives the selected implementation order, proof/trust review, power-cell
-resume, remaining ten-profile receiving and certified region-volume tasks.
+records the selected implementation order, delivered proof/trust review,
+power-cell resume and completed nineteen-profile topology receiving, followed
+by certified region-volume and native-support tasks.
 It supplements this specification's P0--P7 contracts and k=24 target; it does
 not replace them or mark planned work implemented. Use the
 [source checkpoint](reference_validator_checkpoint.md) for executed evidence.
@@ -579,17 +580,17 @@ arithmetic precision and budgets must remain explicit and bounded.
 
 The bounded P0 model/proof and operational-record tranches are source-delivered,
 including tests, frozen protocols and retained runs. Complete power-cell
-topology now has accepted original receiving for nine of nineteen profiles,
-with nonempty per-region precision still open. Follow the improvement
-workplan's proof/trust controls, distinct power-cell resume and bounded
-closed-shell receiving, while allowing a small region-volume feasibility
-prototype after its proof/assignment contracts are reviewed. The other shell
-and dumbbell follow one family at a time. Small controls do not qualify the
-remaining original inputs or requested precision.
+topology now has accepted original receiving for **all nineteen profiles**.
+The improvement workplan's proof/trust controls and distinct power-cell resume
+are delivered. Conservative complete region-volume bounds have their own
+source route. Nonempty original requested precision remains open: use the
+measured integration pilot and clipped-boundary controls before increasing
+grid work or claiming the P5 target. Small analytic controls qualify their
+specific admission, not general original-hull precision.
 
 Complete the required original-source receiving and P1/P4 region-assigned
-integration before expanding a native engine. Existing subdivision resume
-does not deliver resumable power-cell construction; a future integration
+integration before expanding a native engine. Source-bound power-cell and
+adaptive-volume resume now have separate contracts; an integration
 checkpoint does not by itself pass the precision gate. The maintainer's
 complementary tetrahedral all-atom grid remains a bounded later cross-check
 proposal; sampling alone is not a complete topology certificate.

@@ -1,0 +1,163 @@
+{
+  "schema": "topomt.reference-validator.region-volume-receiving/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T02:20:47.705425+00:00",
+  "protocol_sha256": "4169603faeb74282d52501ab8b91323e384497e12fb25e0014103c6198552b33",
+  "source_revision": "86b95d371256c1d54500da9c8a05f6ee642a37ac",
+  "runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "model_sha256": "b1e4cfb2d2d0980074503a1bf8685e9995e4927dc0d3c318fbd12b56e86447c7",
+  "topology_certificate_sha256": "b06ddeb7288f0cc847492ee424cf0d6b8585504d2fae286e7b0daf9a456b6f9a",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "1",
+      "32"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "256"
+    ]
+  },
+  "k": 8,
+  "method": "analytic_corner_regions",
+  "steps": [
+    {
+      "step_leaf_ceiling": 1,
+      "leaf_count": 0,
+      "wall_seconds": 0.5847687589703128,
+      "verification": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k8/receiving/leaves_1/verification.json",
+      "certificate_sha256": "bc5ee22d1714c0203fe87e31d63ef83aa00148e3e957b9129702eeaf6419062d",
+      "total_precision_status": "resolved",
+      "precision_status": "resolved",
+      "volume_lower": [
+        "656321662023421520238968315869",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639936"
+      ],
+      "volume_upper": [
+        "41020103876463845014935519791",
+        "7237005577332262213973186563042994240829374041602535252466099000494570602496"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 0,
+        "outside": 0,
+        "unknown": 0
+      },
+      "exact_shortcut": null
+    }
+  ],
+  "elapsed_seconds": 0.5926902069477364,
+  "peak_rss_kib_linux": 21984,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "Certified total/per-region bounds under the frozen requested tolerance; valid bounds do not imply requested precision.",
+  "files": {
+    "leaves_1/certificate.json": "1ac1bbae4b5c11d977f0454bad90e686b7aaf33a74952b8b316023f038c22773",
+    "leaves_1/model.json": "3af92c85e6885d49758b9da888b259ab9c5be5382b62540f451a71f6aeaf6757",
+    "leaves_1/MANIFEST.json": "ba351dcfdf1dc4f25ceb001c653b7773acef63017744e249c5496d8cbdc331fb",
+    "leaves_1/verification.json": "9379fb935ecc889f844492fa9bb571d9c3f644198c546cdcf2dce4bccdfbcbb6"
+  }
+}

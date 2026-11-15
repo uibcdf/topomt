@@ -6,6 +6,12 @@ panel. Correctness/completeness outrank speed. No native DFND operator changes.
 Implementation, retained receiving and qualification are recorded separately
 below; this derivation alone is not executed qualification.
 
+Current receiving, 2026-11-15 UTC: all nineteen original profiles have complete
+checked topology. The [current checkpoint](reference_validator_checkpoint.md)
+and [shell/dumbbell family summary](../evidence/reference_validator_remaining_topology_v1/family_summary.json)
+supersede the smaller counts in dated delivery history below. Region-volume
+precision is a separate construction and acceptance gate.
+
 ## Fixed-probe partition
 
 For the frozen expanded radius `R_i=r_i+p`, write
@@ -504,9 +510,12 @@ bytes, recorded in the [source snapshot](../evidence/reference_validator_power_c
 The new receiving guards additionally check saved positive/negative proofs in
 fresh processes without the producer, DFND or scientific libraries.
 
-Nine of nineteen original profiles now have complete topology: tetrahedron
-and both tubes. Ten profiles and certified nonempty per-region precision
-remain under #76. Native #181 public qualification and #184 numerical handling
+At that wide-family delivery, nine of nineteen original profiles have complete
+topology: tetrahedron and both tubes. The subsequent
+[shell/dumbbell receiving](../evidence/reference_validator_remaining_topology_v1/family_summary.json)
+completes all nineteen profiles; the [current checkpoint](reference_validator_checkpoint.md)
+records it with separate resources. Certified requested nonempty per-region
+precision remains under #76. Native #181 public qualification and #184 numerical handling
 are unchanged; no comparative-finding resolution, new geometry/provider,
 protein phase or public morphological promotion follows. The original frozen
 case artifacts and all earlier source-scoped receiving remain unchanged.

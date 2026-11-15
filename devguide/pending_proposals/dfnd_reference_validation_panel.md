@@ -15,6 +15,29 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Current A--F disposition — 2026-11-15 UTC
+
+The [workplan](../DFND/reference_validator_improvement_workplan.md) records
+delivered proof/trust review, exact construction resume, all nineteen complete
+original topologies, certified conservative per-region bounds, a qualified
+eight-region boundary integral and two mapped native-input comparisons.
+The [checkpoint](../DFND/reference_validator_checkpoint.md) binds their sources,
+independent checks and measured resources. All sixteen analytic boundary
+controls pass k=8/16/24/32. The two additional actual-vdW numerical Models
+independently exclude all four submitted native carriers; original inputs and
+captures remain unchanged.
+
+**The issue remains partial:** original k=24 precision passes for six exact-zero
+profiles and remains unresolved for thirteen nonempty profiles/sixteen regions.
+The tetrahedron 4096-leaf pilot retains a broad valid interval. Next implement
+checked general clipped-cell boundary integration on original tetrahedron
+1.4 Å, then receive the existing positive families; qualify common canonical-
+unit native receiving under #76/#60 before wider exact-input claims. Keep
+the original targets, explicit region accounting, source/kernel resume limits
+and all historical evidence. Native public policy stays #181; boundary and
+five-domain questions stay #180/#184/#188; public/installed delivery stays #16.
+No new geometry, protein, provider or scaling phase is selected.
+
 ## A--F continuation: complete topology — 2026-11-15 UTC
 
 The [active checkpoint](../DFND/reference_validator_checkpoint.md) records
@@ -25,8 +48,8 @@ Closed-shell counts are 1/1/1/0, opening-shell counts 1/1/0 and dumbbell counts
 3/2/0. Dumbbell 1.4 Å has one enclosed chamber region and two additional
 boundary-touching regions; its old named-chamber proof did not count all regions.
 
-The original k=24 volume panel and two matched negative native comparisons
-are frozen for sequential execution. Nonempty requested precision, native
+The subsequently completed original volume panel and mapped native comparisons
+are recorded above. Nonempty original requested precision, native
 policy correction and public/package admission remain unqualified. Historical
 sections below retain their dated scopes; their older outstanding topology
 counts are superseded by this continuation. #76 stays partial.

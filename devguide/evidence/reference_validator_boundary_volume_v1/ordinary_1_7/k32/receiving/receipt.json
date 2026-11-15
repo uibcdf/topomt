@@ -1,0 +1,163 @@
+{
+  "schema": "topomt.reference-validator.region-volume-receiving/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T02:20:46.860257+00:00",
+  "protocol_sha256": "b5149840a09eb59443a0c34124d2eb8d3520125007b730748f80b97caa9b0b82",
+  "source_revision": "86b95d371256c1d54500da9c8a05f6ee642a37ac",
+  "runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "model_sha256": "599926c5fd7c5d0873e3d75c064cc34016e6402ee01afe03185b803aac3286b6",
+  "topology_certificate_sha256": "6eed97f24d49675e5098d0bb0a7c0a0966fb788e34420728464eeb18b989eb2e",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "1",
+      "536870912"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "4294967296"
+    ]
+  },
+  "k": 32,
+  "method": "analytic_corner_regions",
+  "steps": [
+    {
+      "step_leaf_ceiling": 1,
+      "leaf_count": 0,
+      "wall_seconds": 0.09446761093568057,
+      "verification": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k32/receiving/leaves_1/verification.json",
+      "certificate_sha256": "3ff07319f177e07904a2c34e76ca2c8534366000ed7c1d1a4576b2ed77833a51",
+      "total_precision_status": "resolved",
+      "precision_status": "resolved",
+      "volume_lower": [
+        "1067178285730615",
+        "4611686018427387904"
+      ],
+      "volume_upper": [
+        "4268713142923331",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 0,
+        "outside": 0,
+        "unknown": 0
+      },
+      "exact_shortcut": null
+    }
+  ],
+  "elapsed_seconds": 0.10173580097034574,
+  "peak_rss_kib_linux": 21808,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "Certified total/per-region bounds under the frozen requested tolerance; valid bounds do not imply requested precision.",
+  "files": {
+    "leaves_1/certificate.json": "dd56dd1158b92fa9e9aa40d3b66e8bafa115edb4e086faab5efe14d44ec66dea",
+    "leaves_1/model.json": "6b6aab9f1eb85485a18fc433bd2f9ec741f6bf913a045a0a9848939948e40300",
+    "leaves_1/MANIFEST.json": "fe9146453bbd958be2d9ed229e4d85057c59028fc550971a6bb827c0a07c42cd",
+    "leaves_1/verification.json": "d816f549aca271c68c19967b0c4c2009699134a755d68c5bf2c28ad546ff561c"
+  }
+}

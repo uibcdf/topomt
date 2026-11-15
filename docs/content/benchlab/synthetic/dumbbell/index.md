@@ -31,6 +31,14 @@ Evidence and replay <artifacts/dumbbell_v1/README>
 
 ## Three controls, with explicit reference scope
 
+**Later complete reference — 2026-11-15:** the
+{ref}`exhaustive finite-hull inventory <complete-topology-across-the-six-original-systems-2026-11-15-utc>`
+certifies **3/2/0 free regions** at 1.4/2.2/6 Å. At 1.4 Å the connected chamber
+anchors occupy one enclosed region; two additional regions each touch one
+hull patch. At 2.2 Å exactly two enclosed regions contain the separate anchors.
+This strengthens the original anchor statements below without resolving native
+boundary availability, public classification or the 2.0 Å five-domain review.
+
 The input contains 94 argon balls of radius 1.88 Å, constructed from nominal
 7 Å lobes whose centers are 12.5 Å apart. Sampling is nominally 3.5 Å, with
 jitter 0.1 Å and seed zero. Full-precision coordinates define the ball model;
@@ -38,14 +46,15 @@ the original rounded PDB supplies topology only.
 
 | Probe | Independent reference | Actual native/public result | Availability and limits |
 | --- | --- | --- | --- |
-| 1.4 Å | Both chamber anchors are free, enclosed and connected by a complete all-atom path. | Both reach one public Void. Its two chamber motifs and one throat have recoverable source support and reach the public parent. An extra OpenConcavity/Mouth is retained separately. | Global physical hull count is numerically unresolved, [#184](https://github.com/uibcdf/topomt/issues/184). Motifs remain provisional. |
-| 2.2 Å | Both anchors remain free and enclosed, but a complete covered neck section separates them. | The anchors reach distinct public Voids, each without an internal chamber/throat hierarchy at this query. Additional surface candidates remain visible. | Global physical hull arrangement exhausts its budget, [#180](https://github.com/uibcdf/topomt/issues/180). The reference establishes at least two enclosed regions, not an exact global count. |
-| 6 Å | Every point in the finite native hull is covered by expanded balls. | No native wet component or public feature remains. | Physical hull count still budget-unresolved (#180), although its independent target is zero. |
+| 1.4 Å | Three free regions: both chamber anchors are enclosed and connected in one; two other regions each reach a hull patch. | Both anchors reach one public Void. Its two chamber motifs and one throat have recoverable source support and reach the public parent. An extra OpenConcavity/Mouth is retained separately. | Native physical-hull count is numerically unresolved, [#184](https://github.com/uibcdf/topomt/issues/184). The independent count does not classify every native candidate; motifs remain provisional. |
+| 2.2 Å | Exactly two enclosed regions, with one chamber anchor in each; the covered neck separates them. | The anchors reach distinct public Voids, each without an internal chamber/throat hierarchy at this query. Additional surface candidates remain visible. | Native physical-hull arrangement exhausts its budget, [#180](https://github.com/uibcdf/topomt/issues/180). The independent complete inventory has two regions and no free hull patch. |
+| 6 Å | Every point in the finite native hull is covered by expanded balls. | No native wet component or public feature remains. | Native physical-hull count is still budget-unresolved (#180); the independent inventory is exactly zero. |
 
-These are observations from scientific/helper source
+The native/public observations are from scientific/helper source
 `17a4c9a521c89a64efb12ba339161e15c85d4ce0`, with source/producer identities
-retained separately for original capture and clean-source readers. No scientific
-operator was retuned to obtain the transition.
+retained separately for original capture and clean-source readers. The complete
+reference inventories are later receiving at `2cd59a0`; original named-anchor
+proofs remain below with their own scope. No scientific operator was retuned.
 
 ## What the geometry proves
 

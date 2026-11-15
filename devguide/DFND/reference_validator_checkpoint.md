@@ -12,6 +12,43 @@ complete topology-plus-precision validator or a supported public TopoMT detector
 
 ## Selected improvement workplan — 2026-11-14
 
+### Current six-package disposition — 2026-11-15 UTC
+
+The additive [portable capsule](../../docs/content/benchlab/synthetic/artifacts/reference_validator_followup_v1/README.md)
+contains the original nineteen Models/topologies/volume proofs, sixteen
+restricted boundary controls, two actual-input native comparisons and a
+standalone checker. It has 184 checksum-bound members, compressed to 11,363,908
+bytes. Fresh extracted checking succeeds with TopoMT, NumPy, SciPy, quantities,
+Ackredit and producer modules blocked, including the tiny eight-region proof
+and the actual wide native-input exclusion proof.
+
+Final evidence qualification passes 29 receiving/report/finding/original-byte
+guards (47.69 pytest / 48.24 bounded process seconds, peak RSS 67,512 KiB,
+one CPU and 2 GiB). Together with the unchanged 309-test source selection,
+this covers **312 distinct selected tests**; it is not a full-suite claim.
+Repository Ruff/format (718 files), mypy on 38 modules and report/finding checks
+pass. Strict single-worker Sphinx completes with zero warnings, 16.025 seconds,
+peak child RSS 288,748 KiB; new report anchors and the copied download ZIP's
+SHA-256 are verified. Original notebooks use retained outputs, and hosted
+publication is unqualified. Two earlier anchor-only documentation failures
+remain in the logs. See the [final validation record](../evidence/reference_validator_followup_v1/validation.json).
+
+A/B review and resume, C's complete original topology, D's conservative region
+bounds and restricted boundary integral, and F's two mapped native comparisons
+are delivered in their declared scopes. **E remains partial:** all nineteen
+original requests have retained outcomes, but the thirteen nonempty profiles
+(sixteen regions) still miss k=24. Six exact-zero profiles pass. The
+[workplan](reference_validator_improvement_workplan.md) now gives the remaining
+general clipped-cell integration and common-receiver tasks. #76 stays partial;
+no native finding is resolved and no new geometry/protein/provider is selected.
+
+The [boundary-control summary](../evidence/reference_validator_boundary_volume_v1/summary.json)
+now completes all sixteen k=8/16/24/32 jobs at `86b95d3`, with total and every
+region passing. Ordinary controls use 64 dyadic bits, near-corner decimal
+256, and the sub-binary64 rational gap 512. The run takes 14.547 wall /
+14.020 CPU seconds, peak RSS 24,024 KiB, one CPU and 2 GiB, with safe sampled
+host reserve. Its restricted admission does not pass original-hull P5 precision.
+
 ### Actual-input native carrier comparison and boundary source
 
 The [qualified native summary](../evidence/reference_validator_native_comparison_v1/summary.json)

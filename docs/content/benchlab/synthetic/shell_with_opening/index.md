@@ -21,6 +21,11 @@ probe-specific reference statements are retained in the system stage.
 
 ## Current observations
 
+The {ref}`complete reference inventory <complete-topology-across-the-six-original-systems-2026-11-15-utc>`
+now certifies exactly one free region at 1.4 Å (one hull patch), one enclosed
+region at 3 Å and none at 5 Å. This adds a global inventory to the original
+named-origin references; requested region-volume precision is separate.
+
 | Question / probe | Independent expectation | Native / public observation | Current conclusion / owner |
 | --- | --- | --- | --- |
 | Access and localization, 1.4 Å | One connected hull patch and an origin-to-exterior ray. | One `Pocket`, one `Mouth` on the certified face. | Count/location qualified; physical support [#151](https://github.com/uibcdf/topomt/issues/151); aperture area and global bottleneck unavailable. |

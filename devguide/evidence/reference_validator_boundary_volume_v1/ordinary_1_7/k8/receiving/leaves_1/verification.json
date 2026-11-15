@@ -1,0 +1,131 @@
+{
+  "model_sha256": "599926c5fd7c5d0873e3d75c064cc34016e6402ee01afe03185b803aac3286b6",
+  "certificate_sha256": "b6a0885fb91b9b9b1028fe0e33c310e3c54a018037410e286ea6d023d3d0c376",
+  "topology_certificate_sha256": "6eed97f24d49675e5098d0bb0a7c0a0966fb788e34420728464eeb18b989eb2e",
+  "topology_complete": true,
+  "topology_status": "resolved",
+  "n_components": 8,
+  "n_boundary_patches": 8,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "volume_lower": [
+    "1067178285730615",
+    "4611686018427387904"
+  ],
+  "volume_upper": [
+    "4268713142923331",
+    "18446744073709551616"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "lower": [
+        "1067178285730615",
+        "36893488147419103232"
+      ],
+      "upper": [
+        "4268713142923331",
+        "147573952589676412928"
+      ],
+      "precision_status": "resolved"
+    },
+    {
+      "region_id": "REG-2",
+      "lower": [
+        "1067178285730615",
+        "36893488147419103232"
+      ],
+      "upper": [
+        "4268713142923331",
+        "147573952589676412928"
+      ],
+      "precision_status": "resolved"
+    },
+    {
+      "region_id": "REG-3",
+      "lower": [
+        "1067178285730615",
+        "36893488147419103232"
+      ],
+      "upper": [
+        "4268713142923331",
+        "147573952589676412928"
+      ],
+      "precision_status": "resolved"
+    },
+    {
+      "region_id": "REG-4",
+      "lower": [
+        "1067178285730615",
+        "36893488147419103232"
+      ],
+      "upper": [
+        "4268713142923331",
+        "147573952589676412928"
+      ],
+      "precision_status": "resolved"
+    },
+    {
+      "region_id": "REG-5",
+      "lower": [
+        "1067178285730615",
+        "36893488147419103232"
+      ],
+      "upper": [
+        "4268713142923331",
+        "147573952589676412928"
+      ],
+      "precision_status": "resolved"
+    },
+    {
+      "region_id": "REG-6",
+      "lower": [
+        "1067178285730615",
+        "36893488147419103232"
+      ],
+      "upper": [
+        "4268713142923331",
+        "147573952589676412928"
+      ],
+      "precision_status": "resolved"
+    },
+    {
+      "region_id": "REG-7",
+      "lower": [
+        "1067178285730615",
+        "36893488147419103232"
+      ],
+      "upper": [
+        "4268713142923331",
+        "147573952589676412928"
+      ],
+      "precision_status": "resolved"
+    },
+    {
+      "region_id": "REG-8",
+      "lower": [
+        "1067178285730615",
+        "36893488147419103232"
+      ],
+      "upper": [
+        "4268713142923331",
+        "147573952589676412928"
+      ],
+      "precision_status": "resolved"
+    }
+  ],
+  "volume_enclosure_status": "resolved",
+  "total_precision_status": "resolved",
+  "precision_status": "resolved",
+  "stop_reason": null,
+  "leaf_states": {
+    "free": 0,
+    "blocked": 0,
+    "outside": 0,
+    "unknown": 0
+  },
+  "method": "analytic_corner_regions",
+  "exact_shortcut": null,
+  "lineage_status": "not_checked"
+}

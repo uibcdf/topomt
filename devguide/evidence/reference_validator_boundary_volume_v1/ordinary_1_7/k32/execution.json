@@ -1,0 +1,79 @@
+{
+  "recorded_at_utc": "2026-11-15T02:20:46.682642+00:00",
+  "source_revision": "86b95d371256c1d54500da9c8a05f6ee642a37ac",
+  "protocol_sha256": "b5149840a09eb59443a0c34124d2eb8d3520125007b730748f80b97caa9b0b82",
+  "worker_sha256": "7ac2d601f0b63e4c3c470b6e07e49f36792acc6d2f773b8535c923093874c0fb",
+  "resource_policy": {
+    "cpu_count": 1,
+    "address_space_limit_bytes": 2147483648,
+    "cpu_soft_seconds": 30,
+    "cpu_hard_seconds": 35,
+    "wall_seconds": 45
+  },
+  "cpu_affinity": [
+    0
+  ],
+  "host_samples": [
+    {
+      "elapsed_seconds": 0,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50079956
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.185546875,
+          1.0400390625,
+          1.048828125
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 0.21665855299215764,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50079740
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.185546875,
+          1.0400390625,
+          1.048828125
+        ]
+      }
+    }
+  ],
+  "supervisor_source": "import hashlib,json,os,resource,signal,subprocess,sys,time\nfrom datetime import datetime,timezone\nfrom pathlib import Path\nfrom devtools.reference_validator.benchlab_panel import _host\n\nroot=Path.cwd();protocol=root/sys.argv[1];base=protocol.parent;spec=json.loads(protocol.read_text());policy=spec['resources']\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nfor name in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS','RAYON_NUM_THREADS','NUMBA_NUM_THREADS']:\n os.environ[name]='1'\nos.environ['NUMBA_CACHE_DIR']='/tmp/topomt-validator-native-cache-v1'\nos.environ['MPLCONFIGDIR']='/tmp/topomt-validator-mpl-v1'\nhost=_host();assert host['safe'],'Insufficient conservative host reserve'\nsource=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()\nassert not subprocess.check_output(['git','status','--porcelain','--','devtools/reference_validator'],text=True).strip()\nassert hashlib.sha256(spec['worker_source'].encode()).hexdigest()==spec['worker_sha256']\ndef limits():\n resource.setrlimit(resource.RLIMIT_AS,(policy['address_space_limit_bytes'],policy['address_space_limit_bytes']))\n resource.setrlimit(resource.RLIMIT_CPU,(policy['cpu_soft_seconds'],policy['cpu_hard_seconds']))\noutput=base/'receiving'\ncommand=[sys.executable,'-c',spec['worker_source'],str(protocol),str(output)]\nrecord={'recorded_at_utc':datetime.now(timezone.utc).isoformat(),'source_revision':source,'protocol_sha256':hashlib.sha256(protocol.read_bytes()).hexdigest(),'worker_sha256':spec['worker_sha256'],'resource_policy':policy,'cpu_affinity':sorted(os.sched_getaffinity(0)),'host_samples':[{'elapsed_seconds':0,'host':host}],'supervisor_source':Path(__file__).read_text()}\nbegin=time.perf_counter();before=resource.getrusage(resource.RUSAGE_CHILDREN);reason=None;termination=None\nwith (base/'execution.log').open('xb') as log:\n p=subprocess.Popen(command,stdout=log,stderr=log,preexec_fn=limits,start_new_session=True)\n while p.poll() is None:\n  try:p.wait(timeout=5)\n  except subprocess.TimeoutExpired:pass\n  elapsed=time.perf_counter()-begin;host=_host();record['host_samples'].append({'elapsed_seconds':elapsed,'host':host})\n  if not termination and (not host['safe'] or elapsed>policy['wall_seconds']):\n   reason='host_pressure' if not host['safe'] else 'wall_limit';p.send_signal(signal.SIGTERM);termination=time.perf_counter()\n  if termination and time.perf_counter()-termination>30 and p.poll() is None:os.killpg(p.pid,signal.SIGKILL)\n end=p.wait()\nafter=resource.getrusage(resource.RUSAGE_CHILDREN)\nrecord.update(exit_code=end,stop_reason=reason,elapsed_seconds=time.perf_counter()-begin,child_cpu_seconds=after.ru_utime+after.ru_stime-before.ru_utime-before.ru_stime,peak_child_rss_kib_linux=after.ru_maxrss,receiving_status='completed' if end==0 and (output/'receipt.json').is_file() else 'incomplete',log_sha256=hashlib.sha256((base/'execution.log').read_bytes()).hexdigest())\nrecord['files']={str(p.relative_to(base)):hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob('*.json')}\nwith (base/'execution.json').open('x') as stream:json.dump(record,stream,indent=2);stream.write('\\n')\nprint(json.dumps({'protocol':str(protocol.relative_to(root)),**{k:v for k,v in record.items() if k not in ['host_samples','supervisor_source','files']}}),flush=True)\nif end:print((base/'execution.log').read_text()[-3000:]);raise SystemExit(end)\n",
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 0.21746739593800157,
+  "child_cpu_seconds": 0.166676,
+  "peak_child_rss_kib_linux": 23872,
+  "receiving_status": "completed",
+  "log_sha256": "d58b86ca2dbdf4e8b3ac4663f8810828ae397e9bb6dba32c3712a5213b1c6ba5",
+  "files": {
+    "receiving/receipt.json": "52ccb3b6d34ce8d86538f21eef9ca656aad4c7bbd959aea057326189a830de39",
+    "receiving/leaves_1/certificate.json": "dd56dd1158b92fa9e9aa40d3b66e8bafa115edb4e086faab5efe14d44ec66dea",
+    "receiving/leaves_1/model.json": "6b6aab9f1eb85485a18fc433bd2f9ec741f6bf913a045a0a9848939948e40300",
+    "receiving/leaves_1/MANIFEST.json": "fe9146453bbd958be2d9ed229e4d85057c59028fc550971a6bb827c0a07c42cd",
+    "receiving/leaves_1/verification.json": "d816f549aca271c68c19967b0c4c2009699134a755d68c5bf2c28ad546ff561c"
+  }
+}

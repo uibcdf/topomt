@@ -1,0 +1,2223 @@
+{
+  "schema": "topomt.reference-validator.boundary-volume-summary/1",
+  "owner": "uibcdf/topomt#76",
+  "source_revision": "86b95d371256c1d54500da9c8a05f6ee642a37ac",
+  "jobs": [
+    {
+      "name": "ordinary_1_5/k8",
+      "k": 8,
+      "bits": 64,
+      "n_components": 8,
+      "volume_lower": [
+        "915682011744420525",
+        "9223372036854775808"
+      ],
+      "volume_upper": [
+        "1831364023488841597",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.21700413594953716,
+      "cpu_seconds": 0.200186,
+      "peak_rss_kib": 23944,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k8/protocol.json",
+          "sha256": "57d9a1773495ff9ab0b30f3f913b05565deb1f84efbf9b9684be9bc00deae47b"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k8/execution.json",
+          "sha256": "baa645a9adefd172e80bf8990703a0918b4218a39ffdc0fb01206368af9b925d"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k8/receiving/receipt.json",
+          "sha256": "4be25cddbd2711a2820834fbaa1783f64fd80c7446265eac4457e27a35079d4f"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k8/receiving/leaves_1/certificate.json",
+          "sha256": "dbdde63bd1e1a591aa965969e15ed4ac79b2a3cac7069ecd2db60dbe231be63d"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k8/receiving/leaves_1/verification.json",
+          "sha256": "bfcae6f84a54e6fffa8ee5207ea5169c168b51084423e67a953e864af34396b9"
+        }
+      }
+    },
+    {
+      "name": "ordinary_1_5/k16",
+      "k": 16,
+      "bits": 64,
+      "n_components": 8,
+      "volume_lower": [
+        "915682011744420525",
+        "9223372036854775808"
+      ],
+      "volume_upper": [
+        "1831364023488841597",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.1676686379360035,
+      "cpu_seconds": 0.15144199999999997,
+      "peak_rss_kib": 23772,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k16/protocol.json",
+          "sha256": "4a605ae7e7e2bc5d094d33adebb949840334e9b3f252d403487f7e38c5bc1a37"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k16/execution.json",
+          "sha256": "5e551e3ee91acda2f29b8876c0ceb86f19806a61b065731900a7343e88b933a8"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k16/receiving/receipt.json",
+          "sha256": "15b296a3adc422d46feb30e45f7d586ed3fda586aad65cb694ebfaa5bec4d559"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k16/receiving/leaves_1/certificate.json",
+          "sha256": "7cf9833b98050d4abe59549cd358b67b7e3992d8c150d168da6482ea31b83457"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k16/receiving/leaves_1/verification.json",
+          "sha256": "07b3acc340f13879dea8ac8ff57b11d358c615327d12f73d25bb8d34a14584d2"
+        }
+      }
+    },
+    {
+      "name": "ordinary_1_5/k24",
+      "k": 24,
+      "bits": 64,
+      "n_components": 8,
+      "volume_lower": [
+        "915682011744420525",
+        "9223372036854775808"
+      ],
+      "volume_upper": [
+        "1831364023488841597",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.1676621389342472,
+      "cpu_seconds": 0.15527200000000002,
+      "peak_rss_kib": 23856,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k24/protocol.json",
+          "sha256": "d2f7c455ed797a83fdd7e02c56a027f3bec76d0edbd712222e29b0a2e57e0d01"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k24/execution.json",
+          "sha256": "a7f9fdb3587566b9e1b44d4acb32d242afbed2b159d024b501367cb95ce92d58"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k24/receiving/receipt.json",
+          "sha256": "c4e2da320b75af713cdcd5be393a18f584a477f0ba4fb531dc3fd0a7d607f0b7"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k24/receiving/leaves_1/certificate.json",
+          "sha256": "5583b928834fd8cf5f8a0bb9e0d5088526aa0c23a8bbf3e66b87f6ad8fa5db5c"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k24/receiving/leaves_1/verification.json",
+          "sha256": "a75df22070f6d5448ac1996cb66f208c59fc7bf644fff2bc1383ac5c0e030ec1"
+        }
+      }
+    },
+    {
+      "name": "ordinary_1_5/k32",
+      "k": 32,
+      "bits": 64,
+      "n_components": 8,
+      "volume_lower": [
+        "915682011744420525",
+        "9223372036854775808"
+      ],
+      "volume_upper": [
+        "1831364023488841597",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "915682011744420525",
+            "73786976294838206464"
+          ],
+          "upper": [
+            "1831364023488841597",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.1675539379939437,
+      "cpu_seconds": 0.156828,
+      "peak_rss_kib": 23848,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k32/protocol.json",
+          "sha256": "c7fcd8d52862c5b89f6e95ca7a0843e6b56c4ec528b8bbb12193a1f17f341550"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k32/execution.json",
+          "sha256": "b871f6cb74332a5929d258af693cd431da13fee60e0ef9db916f6bb736e6c374"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k32/receiving/receipt.json",
+          "sha256": "d2c7c6dc4711afe83b486b7c0de409ce01589e5bfc9ea05c21c1924ba970f146"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k32/receiving/leaves_1/certificate.json",
+          "sha256": "70a7343f4510a1fce4c0b580d13b6995a408a6e7476410750b1e71e1ec6c7bae"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_5/k32/receiving/leaves_1/verification.json",
+          "sha256": "eb743558e8664e90447f9f37d052d9547d837cdb38f05ccaf47fa99e9a210421"
+        }
+      }
+    },
+    {
+      "name": "ordinary_1_7/k8",
+      "k": 8,
+      "bits": 64,
+      "n_components": 8,
+      "volume_lower": [
+        "1067178285730615",
+        "4611686018427387904"
+      ],
+      "volume_upper": [
+        "4268713142923331",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.2176095739705488,
+      "cpu_seconds": 0.169129,
+      "peak_rss_kib": 23876,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k8/protocol.json",
+          "sha256": "0a159dd841dd9d4597696399a37a9483853d8b9e095c2c627c50c7372bc10e4d"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k8/execution.json",
+          "sha256": "9241f92677548b1aa08867dc95b5660f48b4aee2f49ff643d8255e6561372677"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k8/receiving/receipt.json",
+          "sha256": "ffe7050e109e2ee30693cf1ca06ae28d743cd058cfe654f0eb7e4c51a1dcd28e"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k8/receiving/leaves_1/certificate.json",
+          "sha256": "9be7d5d7c57bb27bd1775c4419dbea7bda5c5fbdf283eb1d8c9428daec6e4c03"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k8/receiving/leaves_1/verification.json",
+          "sha256": "32e5bb5833515fb6c89d8a0781f5925ab4af67968266f68620a9fad140593320"
+        }
+      }
+    },
+    {
+      "name": "ordinary_1_7/k16",
+      "k": 16,
+      "bits": 64,
+      "n_components": 8,
+      "volume_lower": [
+        "1067178285730615",
+        "4611686018427387904"
+      ],
+      "volume_upper": [
+        "4268713142923331",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.21744758798740804,
+      "cpu_seconds": 0.164879,
+      "peak_rss_kib": 24008,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k16/protocol.json",
+          "sha256": "846752a14b20c7f0fd864a2a22f9aacbb2c2f4acfa902dc8bc1cea5300516649"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k16/execution.json",
+          "sha256": "179809f92ec8dfcca114c6be38a981674e9a38b56f79e044e85d02a4106a4a30"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k16/receiving/receipt.json",
+          "sha256": "9440a6dc1280299e1772f2f5bc4db62b2543c11817c222c5b8c54fbae99261cf"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k16/receiving/leaves_1/certificate.json",
+          "sha256": "545f3ca1e0d8a425ef26f6a9b9b411a5e57494ee4ffba5d920c2a437218fa97e"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k16/receiving/leaves_1/verification.json",
+          "sha256": "34401707ada25d5d58e978507c61b8e7107503ca37ed3a695889b516f02a7265"
+        }
+      }
+    },
+    {
+      "name": "ordinary_1_7/k24",
+      "k": 24,
+      "bits": 64,
+      "n_components": 8,
+      "volume_lower": [
+        "1067178285730615",
+        "4611686018427387904"
+      ],
+      "volume_upper": [
+        "4268713142923331",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.21755745995324105,
+      "cpu_seconds": 0.17199199999999998,
+      "peak_rss_kib": 23796,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k24/protocol.json",
+          "sha256": "466d0f3344620db50d245b2a782e60becbeacbfa4b7a6191aad0b73a20954ddf"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k24/execution.json",
+          "sha256": "488d39913eb4ce70784fc606d0fd3b23f435f4d6661c3574797ff191039cbe0c"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k24/receiving/receipt.json",
+          "sha256": "085261b44eadaafae15fbba1e2054ec7db157d8df0a012e3fc5995049e78c607"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k24/receiving/leaves_1/certificate.json",
+          "sha256": "d7f34f0cbeae619dd97ee4108c2150e31322c59abfb5082c55148a5b8d46b0fb"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k24/receiving/leaves_1/verification.json",
+          "sha256": "90e33526c76e8291f0ea77b2497c499da13bb1a6d9dc19782feb3eb377199f66"
+        }
+      }
+    },
+    {
+      "name": "ordinary_1_7/k32",
+      "k": 32,
+      "bits": 64,
+      "n_components": 8,
+      "volume_lower": [
+        "1067178285730615",
+        "4611686018427387904"
+      ],
+      "volume_upper": [
+        "4268713142923331",
+        "18446744073709551616"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "1067178285730615",
+            "36893488147419103232"
+          ],
+          "upper": [
+            "4268713142923331",
+            "147573952589676412928"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.21746739593800157,
+      "cpu_seconds": 0.166676,
+      "peak_rss_kib": 23872,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k32/protocol.json",
+          "sha256": "b5149840a09eb59443a0c34124d2eb8d3520125007b730748f80b97caa9b0b82"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k32/execution.json",
+          "sha256": "dae7429a5a216f0733653d0b7d3b01d8a0b207bc4cabe956297ad80ba1e465f6"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k32/receiving/receipt.json",
+          "sha256": "52ccb3b6d34ce8d86538f21eef9ca656aad4c7bbd959aea057326189a830de39"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k32/receiving/leaves_1/certificate.json",
+          "sha256": "dd56dd1158b92fa9e9aa40d3b66e8bafa115edb4e086faab5efe14d44ec66dea"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/ordinary_1_7/k32/receiving/leaves_1/verification.json",
+          "sha256": "d816f549aca271c68c19967b0c4c2009699134a755d68c5bf2c28ad546ff561c"
+        }
+      }
+    },
+    {
+      "name": "near_corner_decimal/k8",
+      "k": 8,
+      "bits": 256,
+      "n_components": 8,
+      "volume_lower": [
+        "656321662023421520238968315869",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639936"
+      ],
+      "volume_upper": [
+        "41020103876463845014935519791",
+        "7237005577332262213973186563042994240829374041602535252466099000494570602496"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.718365661916323,
+      "cpu_seconds": 0.6753759999999999,
+      "peak_rss_kib": 23872,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k8/protocol.json",
+          "sha256": "4169603faeb74282d52501ab8b91323e384497e12fb25e0014103c6198552b33"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k8/execution.json",
+          "sha256": "7454503541447186663e5a503ead56093bfaff73ce069bc324de0c0994b68730"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k8/receiving/receipt.json",
+          "sha256": "aa9bf94a674ba34dacdf373584f6bc0721d06ec8387191bef69a43bce61333c7"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k8/receiving/leaves_1/certificate.json",
+          "sha256": "1ac1bbae4b5c11d977f0454bad90e686b7aaf33a74952b8b316023f038c22773"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k8/receiving/leaves_1/verification.json",
+          "sha256": "9379fb935ecc889f844492fa9bb571d9c3f644198c546cdcf2dce4bccdfbcbb6"
+        }
+      }
+    },
+    {
+      "name": "near_corner_decimal/k16",
+      "k": 16,
+      "bits": 256,
+      "n_components": 8,
+      "volume_lower": [
+        "656321662023421520238968315869",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639936"
+      ],
+      "volume_upper": [
+        "41020103876463845014935519791",
+        "7237005577332262213973186563042994240829374041602535252466099000494570602496"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.7192635319661349,
+      "cpu_seconds": 0.686016,
+      "peak_rss_kib": 23760,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k16/protocol.json",
+          "sha256": "1a09f45c23d7562c0314a672e28fbf0b92960b057204fa6101bb75b3fff18768"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k16/execution.json",
+          "sha256": "64138b3e114f2402b04b467403abe9346b6a691685f811f4254484304d5f2812"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k16/receiving/receipt.json",
+          "sha256": "328acae561427026747c6f09b2aadcc551088cc639d99232ef4418bb213ab04a"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k16/receiving/leaves_1/certificate.json",
+          "sha256": "42d7bc218e70d4e0ded255905160b2c465185814060c7168137e5518df67b728"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k16/receiving/leaves_1/verification.json",
+          "sha256": "33098be0c8a5f147640597685017886ffe2a4d852bca4bb26e8471fb829e0125"
+        }
+      }
+    },
+    {
+      "name": "near_corner_decimal/k24",
+      "k": 24,
+      "bits": 256,
+      "n_components": 8,
+      "volume_lower": [
+        "656321662023421520238968315869",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639936"
+      ],
+      "volume_upper": [
+        "41020103876463845014935519791",
+        "7237005577332262213973186563042994240829374041602535252466099000494570602496"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.7180002189707011,
+      "cpu_seconds": 0.67567,
+      "peak_rss_kib": 23876,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k24/protocol.json",
+          "sha256": "1d4af7bfccbd571ed63b8297ebd1d33c34720b0eb5517c95b30392b09d0fe705"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k24/execution.json",
+          "sha256": "1f1d6b2850a67db9ca4f89d3a07baf0e7fc3f4d99e7b470994861fbb17f711dd"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k24/receiving/receipt.json",
+          "sha256": "008e9959da1c1023861c05f1309f22e741dcd262948d3b0dcf9496a8b3722fa4"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k24/receiving/leaves_1/certificate.json",
+          "sha256": "acf9b16e2c863269bf925a8484a349f5f6570afe03d4ed6741e2a4e9b888c16f"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k24/receiving/leaves_1/verification.json",
+          "sha256": "1391f1d9a7a5e5001fbf51ff762aefb755cceeb8da0d3407b5938aefd618c672"
+        }
+      }
+    },
+    {
+      "name": "near_corner_decimal/k32",
+      "k": 32,
+      "bits": 256,
+      "n_components": 8,
+      "volume_lower": [
+        "656321662023421520238968315869",
+        "115792089237316195423570985008687907853269984665640564039457584007913129639936"
+      ],
+      "volume_upper": [
+        "41020103876463845014935519791",
+        "7237005577332262213973186563042994240829374041602535252466099000494570602496"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "656321662023421520238968315869",
+            "926336713898529563388567880069503262826159877325124512315660672063305037119488"
+          ],
+          "upper": [
+            "41020103876463845014935519791",
+            "57896044618658097711785492504343953926634992332820282019728792003956564819968"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 0.7182196379872039,
+      "cpu_seconds": 0.671606,
+      "peak_rss_kib": 23908,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k32/protocol.json",
+          "sha256": "1679965f318d3ec0039a766be482412ffd5f279dca35ce8217c3fcc878f5c577"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k32/execution.json",
+          "sha256": "db89ff52f7203bd6f029a4848f114ef0230d5b67e108b4dfcdcca73f0fa32b2e"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k32/receiving/receipt.json",
+          "sha256": "edfaf378ca6061f34885645ec0948e7fb9b7c7d63b42d40edd5276db7541397d"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k32/receiving/leaves_1/certificate.json",
+          "sha256": "87e64e0e6ca1aeac94829636efdee2025321033c8d15857e870e7e9c378c07d3"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_decimal/k32/receiving/leaves_1/verification.json",
+          "sha256": "2c8432a70126c98978f9be15a2f4430c6fdee27b0e717b14c03b534084ab0a7a"
+        }
+      }
+    },
+    {
+      "name": "near_corner_rational/k8",
+      "k": 8,
+      "bits": 512,
+      "n_components": 8,
+      "volume_lower": [
+        "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+        "418993997810706159361688281193932691483730181893512293053861295116305125939798343025058571817715732115313495568327689089179808837873330310826051531440128"
+      ],
+      "volume_upper": [
+        "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+        "13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 2.5200591270113364,
+      "cpu_seconds": 2.5042340000000003,
+      "peak_rss_kib": 23896,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k8/protocol.json",
+          "sha256": "23c2d31d27508bbfcbd87696a6614fc85f8eb5ac551ba2fec5c10341b0dbe800"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k8/execution.json",
+          "sha256": "f07dffe957b280a1e1c48289d2a1dcf2ed1dd2942afbf8e70d1dfff66df487f4"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k8/receiving/receipt.json",
+          "sha256": "df18a5f10ae3e0102f0fd21a83051cac54926770636ed64f81ba962680365a27"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k8/receiving/leaves_1/certificate.json",
+          "sha256": "8ddfafec8354ca978001259738a523c229b478d8ecf79e8d9a3c0b7b0470a70f"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k8/receiving/leaves_1/verification.json",
+          "sha256": "19f0c7921c2be788c3f337f4bbcc6fe93a75a4100c19af7533cdf215df3987f3"
+        }
+      }
+    },
+    {
+      "name": "near_corner_rational/k16",
+      "k": 16,
+      "bits": 512,
+      "n_components": 8,
+      "volume_lower": [
+        "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+        "418993997810706159361688281193932691483730181893512293053861295116305125939798343025058571817715732115313495568327689089179808837873330310826051531440128"
+      ],
+      "volume_upper": [
+        "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+        "13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 2.521437024930492,
+      "cpu_seconds": 2.486666,
+      "peak_rss_kib": 23912,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k16/protocol.json",
+          "sha256": "9770471d33e356fd3ac4ae4fb636c10e2ee21b324f91390478ba9be844c886a7"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k16/execution.json",
+          "sha256": "1d1d515cfa0147fd8019235ede453930d16abfd4e668109c785146996b99db13"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k16/receiving/receipt.json",
+          "sha256": "e308ec6f6e43c3ffa1658bc6386ad75c0d311bc25f841f3d8e9cf539c07cd823"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k16/receiving/leaves_1/certificate.json",
+          "sha256": "4c57cb3fb3f26a2cf49e2e601d0325004555bbfb8b1a281f18e1020a0cdc2905"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k16/receiving/leaves_1/verification.json",
+          "sha256": "c5b18c2e6fb67604417e1d9a75f7af7b8e79b1b097f61844568ad133b5794bbb"
+        }
+      }
+    },
+    {
+      "name": "near_corner_rational/k24",
+      "k": 24,
+      "bits": 512,
+      "n_components": 8,
+      "volume_lower": [
+        "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+        "418993997810706159361688281193932691483730181893512293053861295116305125939798343025058571817715732115313495568327689089179808837873330310826051531440128"
+      ],
+      "volume_upper": [
+        "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+        "13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 2.520419071894139,
+      "cpu_seconds": 2.502119,
+      "peak_rss_kib": 24024,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k24/protocol.json",
+          "sha256": "b1cc554c40c3d327d3445585d548c49981e8a80ef4a41297ca9000f824361aaa"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k24/execution.json",
+          "sha256": "9dae505b2055f918afe540e7185faff7ce455a826e0226dc3e9a1fa85de53142"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k24/receiving/receipt.json",
+          "sha256": "153ca64bc0116f860472680e6b1fc44a8d4c258b221976a3ad81a5cef8eee9c5"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k24/receiving/leaves_1/certificate.json",
+          "sha256": "79d93ddfbb3fe67bf86bd8304a1ea7d63e9c5fa15ea7f2aa1687f3371f55b0c2"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k24/receiving/leaves_1/verification.json",
+          "sha256": "4c1aed1b0fe637a492ea8ac62487305f6dc8fe4668da49cff30668f4db608cf5"
+        }
+      }
+    },
+    {
+      "name": "near_corner_rational/k32",
+      "k": 32,
+      "bits": 512,
+      "n_components": 8,
+      "volume_lower": [
+        "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+        "418993997810706159361688281193932691483730181893512293053861295116305125939798343025058571817715732115313495568327689089179808837873330310826051531440128"
+      ],
+      "volume_upper": [
+        "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+        "13407807929942597099574024998205846127479365820592393377723561443721764030073546976801874298166903427690031858186486050853753882811946569946433649006084096"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "9187675913209766153824926951624994543550034092612870027780131624205221380660087",
+            "3351951982485649274893506249551461531869841455148098344430890360930441007518386744200468574541725856922507964546621512713438470702986642486608412251521024"
+          ],
+          "upper": [
+            "294005629222712516922397662451999825393601090963611840888964211974567084181123691",
+            "107262463439540776796592199985646769019834926564739147021788491549774112240588375814414994385335227421520254865491888406830031062495572559571469192048672768"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "elapsed_seconds": 2.520914154010825,
+      "cpu_seconds": 2.481881,
+      "peak_rss_kib": 23940,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k32/protocol.json",
+          "sha256": "613d4ca39f45218f471fe3837905f117014001014469469ef0e2e350cfd28889"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k32/execution.json",
+          "sha256": "c24ab259e86e1776d11cbcbdd8e9abfeecec411166567833fb92992f290bdf5d"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k32/receiving/receipt.json",
+          "sha256": "d92c45737abbcd3b59e59463bf0e2c0b938718f3206df363db2a94a49344d09c"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k32/receiving/leaves_1/certificate.json",
+          "sha256": "8f4364ed9f7faf3cc9d8c4d434133b4a7369acaf7683956d96d99766f9e57a93"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_boundary_volume_v1/near_corner_rational/k32/receiving/leaves_1/verification.json",
+          "sha256": "253ad0499631bc7a94fcde75586d3f03c616088346a98d1dd1ea4369dc912b27"
+        }
+      }
+    }
+  ],
+  "totals": {
+    "count": 16,
+    "wall_seconds": 14.546649297350086,
+    "cpu_seconds": 14.019972000000001,
+    "peak_rss_kib": 24024,
+    "precision_passes": 16
+  },
+  "scope": "All 16 clipped-cube controls pass total/per-region k=8/16/24/32. No original-hull precision qualification. Ordinary 64-bit, near-decimal 256-bit and near-rational 512-bit work is selected without a volume cutoff."
+}

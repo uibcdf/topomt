@@ -20,9 +20,11 @@ and independently recomputed target predicates. Later wide receiving at
 and `2/2/0` free hull patches at 1.4/2.5/5 Å. Its
 [family summary](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)
 retains fresh initialization, saved-proof/reprobe checks and actual resource
-costs separately. Nine of nineteen profiles now have complete topology; ten
-await this route's receiving. Other original cases and per-region precision
-retain their later gates. The measured table below remains the original query run.
+costs separately. The subsequent shell/dumbbell receiving at `2cd59a0` now
+completes **all nineteen original topology profiles**, with its own
+[summary](../evidence/reference_validator_remaining_topology_v1/family_summary.json).
+Requested nonempty per-region precision retains its separate gate. The measured
+table below remains the original query run, not the later topology execution.
 
 ## Actual delivery
 

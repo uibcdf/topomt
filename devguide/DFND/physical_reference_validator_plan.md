@@ -9,14 +9,13 @@ Current implementation is partial, with its dated evidence in the
 [source checkpoint](reference_validator_checkpoint.md). The later
 [clipped power-cell construction](reference_validator_power_cell_construction.md)
 selects and implements complete multi-ball regions/boundary incidence; the
-retained receiving qualifies analytic controls, the original tetrahedron and
-all three original probes for each tube: nine of nineteen frozen profiles.
-Region-assigned precision and the other ten profiles'
-qualification remain pending.
+retained receiving now qualifies complete topology for **all nineteen original
+profiles**. Conservative total/per-region volume construction is implemented;
+requested precision for nonempty original regions retains its own open gate.
 The proposed complete-validator acceptance below retains those requirements.
 
 The [post-tube improvement workplan](reference_validator_improvement_workplan.md)
-selects the next executable packages and their test/acceptance gates under #76.
+records the selected packages and their test/acceptance gates under #76.
 It retains this model and the detailed specification's precision target;
 planning is separate from implementation and actual saved receiving.
 

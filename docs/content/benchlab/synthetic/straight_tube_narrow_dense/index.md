@@ -1,5 +1,11 @@
 # Straight tube: narrow, dense sampling
 
+The later {ref}`exact-model comparison <exact-model-native-carrier-comparisons-2026-11-15-utc>`
+fully excludes the three submitted native carrier unions at 2.5 Å on separately
+checked actual-vdW inputs. Canonical nm receiving, radius-bit differences and
+exact domain checks are explicit; earlier case observations remain unchanged.
+The physical public-reporting decision stays under #181.
+
 Can a probe travel through a tube even after its straight axis becomes blocked?
 This many-cell atomic system tests continuous passage, two physical end openings
 and the interpretation of graph-derived channels and paths.

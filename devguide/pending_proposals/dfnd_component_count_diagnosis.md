@@ -15,6 +15,19 @@ supersedes: []
 
 # Component count and physical fragmentation
 
+## Additional exact inventory — 2026-11-15 UTC
+
+The [#76 family receiving](../evidence/reference_validator_remaining_topology_v1/family_summary.json)
+now proves 3/2/0 free regions and 2/0/0 free hull patches at original
+1.4/2.2/6 Å. At 1.4 Å the two chamber anchors belong to one enclosed region;
+two additional regions each touch a hull patch. At 2.2 Å exactly two enclosed
+regions contain the separate anchors. The original named-anchor proofs remain
+correct at their scope. This global inventory does not select 2.0 Å or map
+the five legacy native domains, whose units/epsilon/source receiving retain
+their own review. #188 remains active/`needs_review`; no native fix or
+paper-ready overfragmentation claim follows. Current case prose and the
+comparative card link this stronger, separately scoped evidence.
+
 ## What
 
 The historical pathology test/document treats an increase in native feature
@@ -45,7 +58,7 @@ feature valid. Neither blanket failure nor blanket validation is justified.
 ## Scope and exclusions
 
 The historical monotonicity diagnosis and its supporting tests/docs. No native
-operator retuning, exact global region-count proof, original comparator or
+operator retuning, exact legacy 2.0 Å global region-count proof, original comparator or
 installed qualification. The original numerical observations remain history.
 
 ## Acceptance criteria

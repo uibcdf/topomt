@@ -1,0 +1,62 @@
+{
+  "schema": "topomt.reference-validator.documentation-validation/1",
+  "source_revision": "86b95d371256c1d54500da9c8a05f6ee642a37ac",
+  "command": [
+    "make",
+    "html",
+    "SPHINXOPTS=-j 1 -W --keep-going -D nb_execution_mode=off -D plantuml=/fast_data/home/liliana/miniconda3/envs/topomt-dev/bin/plantuml",
+    "BUILDDIR=/tmp/topomt-followup-html-uh0rxu3u"
+  ],
+  "notebooks": "execution off; original frozen outputs retained",
+  "status": "passed",
+  "elapsed_seconds": 16.02493208600208,
+  "peak_child_rss_kib_linux": 288748,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "host_before": {
+    "safe": true,
+    "memory_kib": {
+      "MemTotal": 63455508,
+      "MemAvailable": 50016516
+    },
+    "memory_pressure_avg10": {
+      "some": 0.0,
+      "full": 0.0
+    },
+    "swap_pages": {
+      "pswpin": 267461,
+      "pswpout": 486138
+    },
+    "load_average": [
+      1.45751953125,
+      0.99169921875,
+      0.89404296875
+    ]
+  },
+  "host_after": {
+    "safe": true,
+    "memory_kib": {
+      "MemTotal": 63455508,
+      "MemAvailable": 49728700
+    },
+    "memory_pressure_avg10": {
+      "some": 0.0,
+      "full": 0.0
+    },
+    "swap_pages": {
+      "pswpin": 267461,
+      "pswpout": 486138
+    },
+    "load_average": [
+      1.89208984375,
+      1.10791015625,
+      0.93408203125
+    ]
+  },
+  "new_report_anchors": "verified",
+  "download_bytes": "verified against ZIP SHA-256",
+  "hosted_publication": "not_claimed",
+  "log_sha256": "bf5f90df35cb577b1c533a17efd4d1813707cf11b03d478797bdffe713a10c74"
+}

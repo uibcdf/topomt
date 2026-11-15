@@ -6,11 +6,10 @@ Every scheduled analysis completed. This report preserves that source's answers
 and measured cost, followed by later complete-topology receiving; it is not
 full qualification of the future connected-region validator.
 
-**Current topology coverage, 2026-11-14:** all three original probes of the
-tetrahedron and each tube now have complete free-region and hull-patch
-inventories: **nine of nineteen profiles**. Ten profiles and certified volumes
-for nonempty regions remain pending. The later results and their separate
-execution costs appear below; original query-run downloads remain unchanged.
+**Current topology coverage, 2026-11-15:** **all nineteen original profiles**
+have complete free-region and hull-patch inventories. The new shell/dumbbell
+results follow immediately below. Certified requested precision for nonempty
+volumes remains a separate gate; original query-run downloads remain unchanged.
 
 The important result is the distinction between a verified local fact and a
 complete global answer. Points and supplied continuous paths are checked against
@@ -19,6 +18,187 @@ proof in this run. General component enumeration and per-region precision are
 unavailable on the other profiles **at that source**. The subsequent topology
 receiving below strengthens the tetrahedron and both tubes; the original measurements and
 downloads retain their historical source scope.
+
+(complete-topology-across-the-six-original-systems-2026-11-15-utc)=
+
+## Complete topology across the six original systems — 2026-11-15 UTC
+
+The exact construction now covers every original profile. These counts concern
+strictly free **probe-center positions inside the closed atomic-center hull**.
+They are distinct from native graph components, public morphology and space
+outside the hull.
+
+| System | Probes (Å) | Complete free regions | Free hull patches |
+| --- | --- | --- | --- |
+| Regular tetrahedron | 1.2, 1.4, 1.7 | 1, 1, 0 | 4, 0, 0 |
+| Narrow dense straight tube | 1.2, 1.4, 2.5 | 1, 1, 0 | 2, 2, 0 |
+| Wide sparse straight tube | 1.4, 2.5, 5 | 1, 1, 0 | 2, 2, 0 |
+| Closed shell | 0.05, 0.2, 1.4, 5 | 1, 1, 1, 0 | 13, 0, 0, 0 |
+| Shell with an opening | 1.4, 3, 5 | 1, 1, 0 | 1, 0, 0 |
+| Dumbbell | 1.4, 2.2, 6 | **3**, 2, 0 | 2, 0, 0 |
+
+The small-probe closed shell has thirteen boundary patches attached to **one**
+free region. At 0.2 and 1.4 Å its single region is enclosed. The opening shell
+has one boundary-touching region at 1.4 Å, an enclosed region at 3 Å and none
+at 5 Å. All original point-availability references are replayed on the exact
+saved numerical Models.
+
+The dumbbell illustrates why named anchors and a global inventory answer
+different questions. At 1.4 Å both chamber anchors and the origin lie in one
+enclosed region. **Two additional regions each touch a separate hull patch.**
+The earlier chamber-connection proof remains correct; it never excluded these
+extra regions. At 2.2 Å there are exactly two enclosed regions, with one chamber
+anchor in each and a blocked origin. At 6 Å the hull contains no free center.
+This does not settle the separate historical five-domain observation at 2.0 Å
+under [#188](https://github.com/uibcdf/topomt/issues/188), nor imply that the
+two hull patches are mouths to infinity.
+
+The three new family geometries are built, checkpointed and checked once at
+`d9680c2`. Source `2cd59a0` then reads or reprobes those proofs only after
+checking identical full power inequalities. It independently checks each
+target and its named queries. Positive global counts were unknown in the
+frozen protocols. The [structured receiving](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_remaining_topology_v1/family_summary.json)
+retains all raw proof, query, source and resource links.
+
+| New receiving | Wall seconds | CPU seconds | Peak RSS MiB |
+| --- | ---: | ---: | ---: |
+| Three geometry initializations, including checkpoint checks | 2359.405 | 2306.471 | 41.32 |
+| Ten saved-geometry target checks and queries | 1364.182 | 1362.163 | 37.92 |
+| Sum of those completed workers | 3723.587 | 3668.633 | 41.32 |
+
+All workers are sequential with one CPU/thread and a 2 GiB address-space cap.
+The dumbbell initialization uses the recorded grace between its 900-second
+soft CPU threshold and 1080-second hard ceiling; its measured CPU is 1031.571 s.
+Every target finishes within its separate 480 soft/600 hard CPU-second and
+720 wall-second envelope, without sampled host-memory pressure. Totals exclude
+development and the separately retained diagnostic preflight. These are
+resource receipts for rigorous checking, not performance comparisons.
+
+Complete topology does not supply precise region volumes or qualify native
+DFND's physical promotion policy. Those gates remain under
+[#76](https://github.com/uibcdf/topomt/issues/76) and
+[#181](https://github.com/uibcdf/topomt/issues/181), respectively.
+
+## Certified region-volume bounds and achieved precision — 2026-11-15 UTC
+
+The new volume panel reuses the **same nineteen original Models** and complete
+power proofs. At source `4573dbe`, a checked all-atom box cover supplies total
+and per-region lower/upper bounds, retaining every unknown contribution.
+The request is absolute `V(hull)*2^-24` and relative `2^-24`, both required
+for the total and each region. With the finite 512-leaf panel, **six excluded
+profiles certify exact zero and pass; thirteen positive profiles, containing
+sixteen regions, retain unresolved requested precision**. Their bounds are
+valid; a zero coarse lower bound does not remove a known nonempty region.
+
+Displayed lower endpoints are rounded down and upper endpoints up to ten
+places. The saved rational proofs retain full endpoints and per-region states.
+These are probe-center volumes in the declared hull, separate from native
+local volume proxies or swept solvent volume.
+
+| System / probe (Å) | Regions | Total volume enclosure (nm³) | k=24 | Wall / CPU s | Peak RSS MiB |
+| --- | ---: | --- | --- | ---: | ---: |
+| `regular_tetrahedron`, 1.2 | 1 | [0.0000128505, 0.0067465536] | unresolved | 1.319 / 1.287 | 23.27 |
+| `regular_tetrahedron`, 1.4 | 1 | [0, 0.0024930122] | unresolved | 1.220 / 1.205 | 23.29 |
+| `regular_tetrahedron`, 1.7 | 0 | [0, 0] | resolved | 0.268 / 0.221 | 23.31 |
+| `straight_tube_narrow_dense`, 1.2 | 1 | [0, 0.3379134563] | unresolved | 142.385 / 142.252 | 32.70 |
+| `straight_tube_narrow_dense`, 1.4 | 1 | [0, 0.2176348099] | unresolved | 134.037 / 133.914 | 32.34 |
+| `straight_tube_narrow_dense`, 2.5 | 0 | [0, 0] | resolved | 83.931 / 83.837 | 31.31 |
+| `straight_tube_wide_sparse`, 1.4 | 1 | [0.1389825586, 1.6504178846] | unresolved | 172.938 / 172.793 | 33.08 |
+| `straight_tube_wide_sparse`, 2.5 | 1 | [0.0021716024, 0.639898864] | unresolved | 163.237 / 162.404 | 32.96 |
+| `straight_tube_wide_sparse`, 5 | 0 | [0, 0] | resolved | 93.931 / 93.823 | 31.64 |
+| `closed_shell`, 0.05 | 1 | [0.1337751612, 0.8398750755] | unresolved | 196.140 / 195.966 | 31.92 |
+| `closed_shell`, 0.2 | 1 | [0.113708887, 0.8398750755] | unresolved | 183.040 / 180.388 | 31.84 |
+| `closed_shell`, 1.4 | 1 | [0.0267550322, 0.3319296189] | unresolved | 169.588 / 169.460 | 31.68 |
+| `closed_shell`, 5 | 0 | [0, 0] | resolved | 96.878 / 96.789 | 30.57 |
+| `shell_with_opening`, 1.4 | 1 | [0.0306944786, 0.3564396335] | unresolved | 149.088 / 145.598 | 30.97 |
+| `shell_with_opening`, 3 | 1 | [0.0036929294, 0.0220616566] | unresolved | 144.788 / 144.631 | 30.66 |
+| `shell_with_opening`, 5 | 0 | [0, 0] | resolved | 81.778 / 81.692 | 29.96 |
+| `dumbbell`, 1.4 | 3 | [0.0472397041, 3.0631770621] | unresolved | 254.749 / 254.516 | 35.50 |
+| `dumbbell`, 2.2 | 2 | [0, 1.2376802482] | unresolved | 247.395 / 247.184 | 34.72 |
+| `dumbbell`, 6 | 0 | [0, 0] | resolved | 146.133 / 145.996 | 33.71 |
+
+The nineteen original workers take **2462.845 wall / 2453.956 CPU seconds**,
+peak RSS **35.50 MiB**, one CPU and 2 GiB each. Repeated independent checks,
+serialization and saved reading are included. Nine separate controls take
+5.765 wall / 5.395 CPU seconds, and the saved tetrahedron refinement pilot
+16.121 wall / 16.039 CPU seconds. The [structured volume summary](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_region_volume_v1/summary.json)
+retains each request, proof, transition and resource receipt, including the
+separate incomplete harness attempt.
+
+For the original tetrahedron at 1.4 Å, checked refinement from ceilings
+1/8/64/512 to 4096 leaves narrows the total enclosure from approximately
+`[0, 0.0175453228]` to `[0.0000186232, 0.0001226076]` nm³. Every saved transition
+has nested bounds; the target still fails. This measured boundary convergence
+selects a more accurate integration construction before further grid growth.
+General original positive-volume precision remains open under
+[#76](https://github.com/uibcdf/topomt/issues/76).
+
+### A restricted boundary integral passes the full control ladder
+
+A separate cap/wedge integral now certifies a single ball cutting a centered
+cube into **eight** free corner regions. Complete topology and reflection
+symmetry justify the per-region assignment. Outward rational intervals bound
+square roots, pi, atan and their series tails. Independently derived simplex
+bounds check tiny regions; a cap/annulus enclosure checks the edge transition.
+
+All **sixteen retained controls**, four radii at k=8/16/24/32, pass both total
+and every region's requested precision at source `86b95d3`. The most demanding
+rational radius approaches the corner at sub-binary64 separation and uses
+512-bit dyadic work; no region is discarded for its size. The controls take
+14.547 wall / 14.020 CPU seconds, peak RSS 23.46 MiB, on one CPU with 2 GiB.
+The [derivation](https://github.com/uibcdf/topomt/blob/main/devguide/DFND/reference_validator_boundary_precision.md)
+and [retained receiving](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_boundary_volume_v1/summary.json)
+state this symmetric admission explicitly. It supplies a precision control for
+future general clipped-cell integration; the original thirteen positive hull
+profiles remain unqualified at k=24.
+
+(exact-model-native-carrier-comparisons-2026-11-15-utc)=
+
+## Exact-model native carrier comparisons — 2026-11-15 UTC
+
+A strict input check first rejects numerical equality between the older
+molecular receiving route and the reference Model. The narrow diagnostic
+finds 136 coordinate entries changed by an Å round trip, at most `2^-52` nm;
+assigned vdW radii differ by one binary64 step. The failed attempts and exact
+arrays remain in the [receiving record](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_native_comparison_v1/summary.json).
+
+The accepted fresh public route uses canonical nm coordinates and **actual
+MolSysMT vdW radii**. These define two additional exact numerical Models,
+separate from the nineteen originals. Their center hulls are unchanged. The
+old partitions are submitted as untrusted candidates and independently checked
+against every new inequality and radial predicate. Each actual native input
+then matches its newly checked reference Model exactly. No tolerance-based
+match or replacement of an original Model is used.
+
+| Actual-input profile | Stored centers: blocked inside / outside hull | Complete submitted native carriers | Source tetrahedra | Public objects retained |
+| --- | --- | --- | ---: | ---: |
+| Narrow tube, 2.5 Å | 22 / 8 | All three carrier unions excluded | 36 | 4 |
+| Wide tube, 5 Å | 0 / 1 | Its carrier union excluded | 1 | 2 |
+
+The point query checks the declared domain first. `outside_domain` does not
+assert absence of atomic collision. Floating support tolerances and the earlier
+obstacle-clearance diagnosis remain separate evidence. Full carrier exclusion
+follows from exact source-vertex containment in the completely excluded hull,
+including the connector-only bank; it does not depend on a stored center.
+
+The two completed workers take 146.660 wall / 146.473 CPU seconds, peak RSS
+301.52 MiB, one CPU and 2 GiB. Source `d7abb46` records native inputs, quantities,
+source supports, public observations, actual attribution and independent target
+checks. The local capacity definitions, wet banks and public promotion are
+unchanged. [#181](https://github.com/uibcdf/topomt/issues/181) still owns the
+physical qualification/reporting policy; #180/#184/#188 keep their separate
+native questions. Wider common-receiver qualification remains #76/#60.
+
+## Download the additive follow-up evidence
+
+- {download}`Models, complete topology, volume proofs, controls and standalone checker <artifacts/reference_validator_followup_v1/receiving.zip>`
+- {download}`Capsule integrity manifest <artifacts/reference_validator_followup_v1/bundle_manifest.json>`
+- [Reading instructions](artifacts/reference_validator_followup_v1/README.md)
+
+The capsule checks saved proofs with Python's standard library. All original
+notebooks/downloads retain their bytes. Source qualification, supported public
+API, installed-package/platform matrix and hosted publication keep their
+separate gates.
 
 ## Subsequent exact topology receiving — 2026-11-14 UTC
 
@@ -191,7 +371,7 @@ wide geometry; `9c79ad7` reads that proof or reclassifies its exactly unchanged
 cells for the other probes. Earlier native observations and all original
 scientific artifacts retain their bytes and source scope.
 
-Nine of nineteen original profiles now have complete topology on this route:
+At that wide-family delivery, nine of nineteen original profiles have complete topology on this route:
 the tetrahedron and both tubes, each with three probes. Ten remain, alongside
 certified nonempty region volumes and native qualification under #181/#184.
 

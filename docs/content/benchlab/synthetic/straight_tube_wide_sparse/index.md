@@ -1,5 +1,11 @@
 # Straight tube: wide, sparse sampling
 
+The later {ref}`exact-model comparison <exact-model-native-carrier-comparisons-2026-11-15-utc>`
+fully excludes the submitted native carrier at 5 Å on separately checked
+actual-vdW inputs. Its stored center is outside the exact hull; full carrier
+exclusion follows independently from source-vertex containment and the complete
+hull proof. Earlier observations and native #181/#184 questions remain scoped.
+
 Can a wall made from separate atomic balls enclose a clear passage without
 leaking through its sides? This wider companion to the narrow tube lets us
 separate a successful channel observation from incomplete physical-boundary

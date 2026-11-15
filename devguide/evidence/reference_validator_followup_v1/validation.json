@@ -1,0 +1,46 @@
+{
+  "schema": "topomt.reference-validator.followup-validation/1",
+  "source_revision": "86b95d371256c1d54500da9c8a05f6ee642a37ac",
+  "source_prefix_sha256": "unchanged from boundary source_qualification.json",
+  "source_test_batch": {
+    "passed": 309,
+    "pytest_seconds": 39.98,
+    "wall_seconds": 40.57783699897118,
+    "peak_rss_kib": 95664
+  },
+  "final_evidence_batch": {
+    "passed": 29,
+    "new_capsule_receiving_guards": 3,
+    "pytest_seconds": 47.69,
+    "wall_seconds": 48.23868535493966,
+    "peak_rss_kib": 67512
+  },
+  "distinct_selected_tests": 312,
+  "selection_scope": "Source controls, actual receiving, capsule extraction/standalone proof checks, reporting/findings and original 355-file integrity; no full suite claim",
+  "ruff_check": "passed repository-wide",
+  "ruff_format_files": 718,
+  "mypy_files": 38,
+  "python_syntax_target": "3.11",
+  "runtime_python": "3.14",
+  "original_frozen_files_unchanged": 355,
+  "preserved_human_version_sha256": "d76f39e77bb54929c2d4a02f55ec04d61534ec09df776d2fe89ef731626a88b5",
+  "documentation": "documentation.json",
+  "stage_disposition": {
+    "A": "delivered_bounded_review",
+    "B": "delivered",
+    "C": "19_of_19_original_topologies_complete",
+    "D": "conservative_bounds_and_restricted_boundary_integral_delivered",
+    "E": "partial_13_nonempty_original_profiles_16_regions_unresolved_at_k24",
+    "F": "two_explicit_actual_input_models_four_native_carriers_checked"
+  },
+  "remaining_owners": [
+    "uibcdf/topomt#76",
+    "uibcdf/topomt#181",
+    "uibcdf/topomt#180",
+    "uibcdf/topomt#184",
+    "uibcdf/topomt#188",
+    "uibcdf/topomt#60",
+    "uibcdf/topomt#16"
+  ],
+  "remote_ci": "Commits use [skip ci]; source checks do not qualify remote CI, installed distributions or a support matrix."
+}

@@ -4,16 +4,52 @@ Date: 2026-11-14. Owner: [TopoMT #76](https://github.com/uibcdf/topomt/issues/76
 First native consumer: [#181](https://github.com/uibcdf/topomt/issues/181).
 Reviewed source/evidence baseline: `242f756712c3ee12b50c565459e75744542af6a9`.
 
-**Status: A/B source delivery and C's ten original topology profiles are
-completed; D's conservative source baseline is implemented; E/F retained
-receiving is frozen and pending.** Scientific correctness, exhaustive justified topology and
+**Status: A/B/C delivered; D implemented with conservative general bounds and
+a qualified restricted boundary integral; E partial; F delivered for two
+explicitly mapped native-input Models. The original nonempty k=24 precision
+gate remains open.** Scientific correctness, exhaustive justified topology and
 certified volume error take priority over runtime. The current serial exact
 construction and separately executable checker remain the baseline.
 
-Execution update: the linked checkpoint records the actual A--D source checks
-and all nineteen complete original topology profiles. The original-volume and
-mapped-native protocols are frozen before execution. General per-region
-precision retains its own gate; neither this plan nor complete topology passes it.
+Execution update: all nineteen original topology profiles and their volume
+enclosures have retained checked receiving. Six excluded profiles meet k=24
+exactly; thirteen nonempty profiles, containing sixteen regions, retain unmet
+precision. All sixteen symmetric clipped-cube controls pass k=8/16/24/32.
+Two additional actual-vdW Models have checked native carrier comparisons.
+The linked checkpoint and versioned receipts own those distinct scopes.
+
+| Package | Disposition after execution |
+| --- | --- |
+| A | Bounded proof/trust review and falsification controls delivered. |
+| B | Checked source-cell progress, same-kernel resume and final exhaustive assembly delivered. |
+| C | All ten remaining targets complete; original topology coverage is 19/19. |
+| D | Complete conservative volume accounting and saved refinement delivered. A cap/wedge construction qualifies clipped-cube eight-region precision, including tiny components. General clipped-cell integration remains the next construction. |
+| E | **Partial:** all original requests have dispositions; six exact-zero profiles pass, thirteen nonempty profiles remain unresolved. Restricted analytic controls pass their ladder. Full P5 is open. |
+| F | Whole-carrier exclusions checked on two fresh, exactly matched actual-vdW reference/native Models. The original molecular round-trip mismatch is preserved; wider receiving and native policy keep their owners. |
+
+### Next executable work under #76
+
+1. Keep the box-cover route as a conservative fallback. The original 4096-leaf
+   tetrahedron pilot still misses k=24; further uniform budget growth is not
+   selected by that result.
+2. Implement checked boundary integration within the original power partition.
+   Start with original `regular_tetrahedron` 1.4 Å. Derive complete oriented
+   facet/cone coverage, sphere/face intersection pieces, zero-dimensional
+   contacts, and region assignment before trusting numerical contributions.
+   Canonical ownership must count coincident positive-volume cells once.
+   The cube formula supplies a bounded precision control, not that construction.
+3. Receive the original tetrahedron requests, then the already selected positive
+   families. Keep the asymmetric three-region control, tiny regions, every
+   shared uncertainty contribution and all original k=24 requirements. Admit
+   geometry and precision separately; preserve failures and finite resources.
+4. Under #76/#60, qualify common native receiving in canonical units before
+   asserting equality across all nineteen native/reference inputs. Actual
+   assigned radii need their own captured Model and full proof when their bits
+   differ from supplied-radius records. Preserve older public results.
+5. Hand the retained whole-carrier supports to #181's explicit physical
+   qualification/public reporting decision. Positive carrier/path restrictions,
+   broader support and native boundary/morphology questions retain #60/#180/
+   #184/#188. No new geometry, protein, provider or scaling phase is selected.
 
 This document gives the next implementation order, concrete tasks and acceptance
 gates. The [implementation specification](physical_reference_validator_implementation.md)
@@ -49,7 +85,7 @@ The five proposed improvements are appropriate, with these refinements:
 These refinements organize the existing #76 work rather than restart the
 architecture study or select another geometry/backend.
 
-## Baseline and exact scope
+## Historical baseline and exact scope
 
 At the historical reviewed source, the power-cell route implemented complete regions,
 free finite-domain boundary patches, their incidence, anchor assignment and
@@ -99,15 +135,14 @@ existing issues. No new provider/server run or protein phase is selected.
 | E — precision qualification | Frozen total/per-region requests, verified refinement/resume and original-profile precision receiving. | D; requested levels pass or remain explicitly unresolved. Full P5 requires the required levels. |
 | F — mapped DFND comparison | Recoverable spatial comparisons and scoped BenchLab interpretation. | Accepted outputs of C/D/E at the compared scope; native correction retains its own gate. |
 
-Start with A, then B and the closed-shell receiving in C. A small D prototype
-can follow A without waiting for all of C. Use its results to guide D/E before
-allocating large integration runs. Continue C with `shell_with_opening`, then
-`dumbbell`; integrate precision receiving as each family's construction is
-qualified. This is a dependency order, not authorization for parallel workers.
+The original dependency order starts with A/B and then the shell/dumbbell
+receiving in C; those packages are delivered. Current continuation follows
+the explicit next-work list above. Production receiving remains sequential.
 Public admission and controlled scaling follow the later gates below.
 
-Implementation locations below are proposals for the corresponding package,
-not modules or tests delivered by this plan. Create them only with behavior:
+Implementation locations below preserve the original proposed boundaries.
+Use the checkpoint and linked construction records for actual delivered modules
+and evidence; a path listed here alone is not an implementation:
 
 | Package | Existing code to extend / proposed focused additions |
 | --- | --- |
@@ -446,13 +481,13 @@ engine is not a prerequisite for the current synthetic delivery.
   and retain deferred full-suite/installed/matrix evidence under its owners.
   Completing one package does not close #76 or a linked native finding.
 
-## First executable tranche and completion rule
+## Original first tranche and completion rule
 
-The next tranche is A's proof/trust map and focused falsification tests, followed
-by B's checked per-cell resume and a bounded closed-shell pilot. Freeze that
-pilot's Models, anchors, reference obligations and resources before retained
-execution. A small D integration feasibility control may proceed after A,
-serially, without claiming general per-region precision.
+The original first tranche, now delivered, was A's proof/trust map and focused
+falsification controls, B's checked per-cell resume and a bounded closed-shell
+pilot. C subsequently completes every original topology profile. D/E use the
+frozen integration controls and original requests, with the general requested
+precision gate kept separate from valid bounds and small analytic controls.
 
 For every package retain: test-first failure where applicable, source/checker
 identity, executed controls/limits, saved proof readback, achieved guarantees,

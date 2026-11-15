@@ -15,6 +15,37 @@ supersedes: []
 
 # Local candidates in the covered tube
 
+## Current whole-carrier receiving — 2026-11-15 UTC
+
+The [qualified native panel](../evidence/reference_validator_native_comparison_v1/summary.json)
+now retains exact source-tetrahedron unions for all three narrow banks
+(28/7/1 tetrahedra) and the single wide bank (one tetrahedron). Full input-
+matched independent proofs exclude **all four carriers**, including the
+connector-only narrow bank. Exact point queries classify 22 narrow centers
+blocked inside the hull, eight outside it and the wide center outside.
+Domain membership and obstacle collision are distinct; the point query checks
+the domain first. Numerical native support tolerance is not exact containment.
+
+The accepted public receiving uses canonical nm coordinates and actual native
+vdW radii, at source `d7abb46`. Assigned radius bits differ from the original
+provided-radius Models, so the panel retains two **additional** Models and
+full target checks. Old partitions are untrusted candidate proofs until every
+target inequality and availability predicate is reconstructed. No old Model,
+case observation, native operator or promotion policy changes. Failed original
+matching, the exact round-trip diagnostic and the rejected zero-boundary-
+tolerance attempt remain visible separately. See the
+[construction](../DFND/reference_validator_region_volume_construction.md) and
+[BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md).
+
+Both workers complete in 146.660 wall / 146.473 CPU seconds, peak RSS
+308,760 KiB, one CPU and 2 GiB each. Guards in
+`tests/test_reference_validator_native_receiving.py` protect actual input bits,
+new/old Model distinctions, source supports, retained public results and
+complete target proofs. This delivers the bounded spatial exclusion consumer;
+the explicit physical qualification/public reporting decision remains **active /
+needs_review** here. Wider receiver qualification remains #76/#60. No general
+solver failure, current paper limitation or comparative advantage is established.
+
 ## Independent wide-family reference handoff — 2026-11-14
 
 The [#76 wide-family receiving](../evidence/reference_validator_power_cells_wide_v1/family_summary.json)

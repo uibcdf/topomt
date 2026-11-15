@@ -1,10 +1,18 @@
 # Boundary integration: an eight-region precision control
 
 Owner: [#76](https://github.com/uibcdf/topomt/issues/76). Date: 2026-11-15 UTC.
-Status: source admission and 22 focused test-first controls pass; the sixteen
-frozen k=8/16/24/32 receiving protocols await retained execution.
+Status: source admission and 22 focused test-first controls pass; all sixteen
+frozen k=8/16/24/32 receiving controls complete at `86b95d3`.
 This is D/E's small clipped-boundary feasibility control, not a new BenchLab
 system or a general original-hull integrator.
+
+The [retained summary](../evidence/reference_validator_boundary_volume_v1/summary.json)
+binds every protocol, saved/read-back proof, requested/achieved bound and
+resource record. All totals and all eight regions meet both enabled constraints.
+The four radii use 64/64/256/512 dyadic bits at k=32; no volume cutoff removes
+a tiny region. Sixteen sequential workers take 14.547 wall / 14.020 CPU seconds,
+peak RSS 24,024 KiB, one CPU and 2 GiB each. These small internal controls do
+not qualify the original positive hulls or comparative runtime.
 
 ## Exact admission and region assignment
 
