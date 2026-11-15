@@ -1,0 +1,22 @@
+{
+  "observed_session_exit_code": 143,
+  "completed_resume_receipt_present": false,
+  "outer_execution_record_present": false,
+  "last_durable_cells": 6,
+  "cause": "Unknown external execution-session termination; no exact cause or child signal established.",
+  "recovery": "Retain checkpoint/log bytes in this archive. Repeat resume from the original two-cell handoff for a matched successful one/two-worker workflow. Exclude the interrupted attempt from timing comparisons; its total resource cost is unknown. Each subsequent phase gets its own bounded execution session.",
+  "archive_sha256": "5ac1615989bf083cddcbb4b47c486e7242b37febf5078a8b43d39d8533b0910d",
+  "members": {
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0022/progress.json": "54932e4be98ad89c2cfb66b688dd09eecf3231d05064c49f00b952bf1564db3f",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0022/MANIFEST.json": "4f144b24561565b79728520be2d3d580c3614a88a9259c88b17fd592ef877c9f",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0006/progress.json": "c8eadcba958618479d14ab28143aaac5481da5c47779f4a5207e92c5ceac407c",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0006/MANIFEST.json": "1e8e2115cb8dee5d030f2452bf1594c78f1b5e4814afb5fed295515d48d0b661",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0014/progress.json": "f446022df1ef59822b7336af8dc61a2b4d0215b6e8e5ffb8692119ab582b8938",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0014/MANIFEST.json": "9b2f4ec804afbcfdce9fc2f13c6b74bf00b84884e41de3dc52b30115b6cc0a14",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0010/progress.json": "2c6e35a9175084d8104efea43087a866df667577d58a59c7713a573c2dba7d60",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0010/MANIFEST.json": "d18480ae822abf5f544c19efe688112b340493cf51e64ebac89128d761ff24f4",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0018/progress.json": "0bf5352d7448872bd26b0b809be37eee04d78dd26bab6832da3cfc8988ac4719",
+    "dumbbell/workers_1_retry/receiving/chunks/cells_0018/MANIFEST.json": "4b5209e7fab77ec339fce7eb8da71ca87f82555795d5539bc19506c6ad774278",
+    "dumbbell/workers_1_retry/resume_execution.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}

@@ -32,14 +32,25 @@ The generic saved `verify` command handles its `power_boundary_volume` kind
 without producer imports. This conservative prototype still misses the original
 tetrahedron k=24 request; it does not replace the qualified analytic controls.
 
+The [resumable process route](../../devguide/DFND/reference_validator_parallel_resume.md)
+adds `parallel_runs.ParallelPowerSession`. It retains independently checked
+source tasks in any completion order, saves exclusive manifest-last bundles and
+rechecks every saved task on loading. A partial inventory has no global count;
+`finish()` assembles all cells canonically and runs the full serial checker.
+Pool failure preserves accepted work and propagates the error. Use small
+explicit cell budgets and durable checkpoints for longer inputs: child CPU
+ceilings apply over a pool's lifetime. One worker remains the default.
+
 The opt-in developer `parallel` module bounds source-cell/face workers, queue
 sizes and child resources. Its Linux caller must supply affinity of at most
 four CPUs, parent AS at most 2 GiB, a finite CPU budget at most 300 seconds and
 an external wall deadline. Worker CPU budget is divided across the pool;
 stricter inherited limits are preserved. The reserve check includes parent,
 workers and spawn tracker. One/two-process certificates agree on the original
-tetrahedron; this small workload is slower with two workers. Durable partial
-parallel resume, full failure/panel qualification and four workers remain open.
+tetrahedron; this small workload is slower with two workers. The newer resumable route qualifies retained partial work, failure controls
+and selected original one/two-worker receiving. Four workers and the full
+parallel panel remain open. The older boundary-range route does not acquire
+these capabilities or qualify S7 analytic parallel integration.
 Use the [receiving record](../../devguide/evidence/reference_validator_performance_v1/README.md)
 for exact commands, timing scope and partial-stage disposition. Serial remains
 the routine route; source prototypes qualify no public or installed backend.

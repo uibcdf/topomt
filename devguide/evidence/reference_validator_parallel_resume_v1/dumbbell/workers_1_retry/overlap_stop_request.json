@@ -1,0 +1,11 @@
+{
+  "last_observed_checkpoint": 74,
+  "markers": [
+    "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/receiving/chunks/cells_0078",
+    "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/receiving/chunks/cells_0082",
+    "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/receiving/chunks/cells_0086",
+    "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/receiving/chunks/cells_0090",
+    "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/receiving/chunks/cells_0094"
+  ],
+  "cause": "The outer batch launcher exited 143 while its detached child continued. A retry reused the directory and correctly rejected a duplicate checkpoint; do not use those timings as matched performance evidence. Stop only this owned calculation by refusing its next exclusive checkpoint. Preserve all actual checkpoint evidence."
+}

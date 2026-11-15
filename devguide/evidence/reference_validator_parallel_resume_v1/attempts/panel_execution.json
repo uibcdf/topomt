@@ -1,0 +1,9 @@
+[
+  {
+    "case": "regular_tetrahedron",
+    "workers": 1,
+    "mode": "partial",
+    "exit_code": 1,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/regular_tetrahedron/workers_1/partial_execution.json"
+  }
+]

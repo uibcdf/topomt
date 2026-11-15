@@ -1,0 +1,6 @@
+{
+  "caller_returncode": 143,
+  "child_and_descendant_ceased": true,
+  "stop_reason": "caller_signal_15",
+  "scope": "Task launcher only: SIGTERM forwarded to the owned command process group, including its descendant. No unrelated processes addressed."
+}

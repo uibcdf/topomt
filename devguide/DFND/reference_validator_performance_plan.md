@@ -12,6 +12,26 @@ Correctness, complete topology and certified error retain priority over speed.
 The [A--F workplan](reference_validator_improvement_workplan.md) owns the active
 scientific sequence; this document supplies its detailed performance follow-up.
 
+### Resumable source-cell receiving — 2026-11-15
+
+The [local source-work route](reference_validator_parallel_resume.md) adds exact
+per-task binding, bounded completion-order collection, cooperative stopping,
+manifest-last checkpoints and independent reconstruction on resume. The
+[versioned receiving](../evidence/reference_validator_parallel_resume_v1/README.md)
+compares one/two-worker checkpoint/resume workflows on original tetrahedron,
+closed-shell and dumbbell 1.4 Å Models. Final canonical proofs match the original
+certificates and receive a further producer-free serial read. Unit controls
+inject child failure, malformed/duplicate tasks, storage corruption and nesting.
+
+An initial unchunked shell pool fails near its worker CPU ceiling; its observed
+`BrokenProcessPool` and raw resource evidence remain retained without inventing
+an exit signal. Longer receiving uses four-cell pools and checkpoints between
+them. Worker CPU ceilings are retained; the external phase deadline is finite.
+These are scoped observations, not full nineteen-profile or four-worker admission.
+S1 retains fuller cost/repeatability work; S7 analytic parallel integration and
+broader S8 remain open. Source allocation, completion, precision and operational
+failure remain separate outcomes.
+
 ### Current serial precision receiving — 2026-11-15
 
 S4 is **delivered for the selected nineteen original profiles and controls**.
@@ -110,7 +130,7 @@ deferred with its measured reason and revisit condition in #76.
 | S3 | Exact invariant reuse and incremental volume accounting | S1/S2 | Partial: volume ledger delivered; wider invariants pending |
 | S4 | General certified boundary integration and precision receiving | A--F D/E; S1 measurements | Delivered: all 19 original total/per-region requests and selected controls; wider admission separate |
 | S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Partial: denominator control and measured integer dyadic atan; optional Rust deferred |
-| S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Prototype; full fault/resume/panel qualification pending |
+| S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Delivered for controlled failures/resume and three original one/two-worker Models; full parallel panel/four workers separate |
 | S7 | Bounded parallel integration with verified ownership | S4/S6 | Earlier range prototype only; analytic-route parallel/failure/resume qualification open |
 | S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: original serial precision panel delivered; broader optimized/parallel/public receiving open |
 
@@ -335,7 +355,7 @@ added after their contracts are specified; the table does not create exports.
 | S3 | `power_cells.py`, `region_volume.py`, `verify/region_volume.py` | `test_reference_validator_reprobe.py`, `test_reference_validator_region_volume.py` |
 | S4 | `edge_volume.py`, `verify/edge_volume.py`, `verify/edge_math.py`; retain earlier region/corner routes | `test_reference_validator_edge_volume.py`, `test_reference_validator_edge_receiving.py`, region/corner controls |
 | S5 | `verify/polytope.py`, `verify/geometry.py`, measured `verify/edge_math.py`; optional producer accelerator | Exact geometry controls and integer dyadic/independent Fraction atan tests in `test_reference_validator_edge_volume.py` |
-| S6 | `power_runs.py`, `capture_power_cells.py`; bounded orchestration | `test_reference_validator_power_resume.py`, `test_reference_validator_power_capture.py`; add focused process/failure tests |
+| S6 | `parallel.py`, `parallel_runs.py`, `verify/parallel_progress.py`; retain serial power runs | `test_reference_validator_parallel_resume.py`, `test_reference_validator_parallel_receiving.py` and original power controls |
 | S7 | `region_volume.py` and saved region bundles | `test_reference_validator_region_volume.py`, `test_reference_validator_region_receiving.py`; add partition/process tests |
 | S8 | Additive evidence, active checkpoint and BenchLab report | `test_reference_validator_followup.py`, existing per-family receiving and reporting guards |
 
@@ -374,3 +394,19 @@ commands, budgets, outcome, remaining work and next stage in the active checkpoi
 and #76. Keep full-suite/minor/platform evidence pending under its owning gate.
 Archive completed planning records through the reporting protocol when their
 whole scope is resolved; retain the dated evidence and deferral reasons.
+
+### Measured next serial hotspot after S6 — 2026-11-15
+
+The separate one-cell source profile in
+[the S6 evidence](../evidence/reference_validator_parallel_resume_v1/one_cell_cost_profile.json)
+checks an original closed-shell proposal against its saved source cell. Profiling
+adds overhead: `_clip` accounts for 14.203 of 14.729 profiled seconds, `_edges`
+is called 129 times, and exact `_evaluate` 315,540 times. These are inclusive
+call measurements, not additive phases or an end-to-end speedup denominator.
+
+Under #76/S3/S5, first measure reuse of exact active-plane/vertex incidence and
+other unchanged clipping invariants before selecting a compiled kernel. Retain
+every source inequality and the independent complete checker. An optimization
+needs a geometric reuse argument, corruption/degeneracy controls, identical
+canonical proofs and matched successful end-to-end measurements. The profile
+alone delivers no cache or Rust acceleration; S3/S5 keep their remaining gates.

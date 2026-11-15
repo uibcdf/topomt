@@ -1,0 +1,72 @@
+[
+  {
+    "function": "<built-in method math.gcd>",
+    "calls": 3532461,
+    "recursive_calls": 0,
+    "exclusive_seconds": 2.3826644100000003,
+    "inclusive_seconds": 2.3826644100000003
+  },
+  {
+    "function": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/fractions.py:826:_mul",
+    "calls": 980446,
+    "recursive_calls": 0,
+    "exclusive_seconds": 1.4119276550000002,
+    "inclusive_seconds": 3.361169507
+  },
+  {
+    "function": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/fractions.py:361:_from_coprime_ints",
+    "calls": 2288818,
+    "recursive_calls": 0,
+    "exclusive_seconds": 1.1927135210000002,
+    "inclusive_seconds": 1.606662712
+  },
+  {
+    "function": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/fractions.py:711:reverse",
+    "calls": 965873,
+    "recursive_calls": 0,
+    "exclusive_seconds": 1.1361948940000002,
+    "inclusive_seconds": 6.1694564430000005
+  },
+  {
+    "function": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/fractions.py:697:forward",
+    "calls": 1317816,
+    "recursive_calls": 0,
+    "exclusive_seconds": 1.116244371,
+    "inclusive_seconds": 5.506978784
+  },
+  {
+    "function": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/fractions.py:206:__new__",
+    "calls": 1604261,
+    "recursive_calls": 0,
+    "exclusive_seconds": 1.107534795,
+    "inclusive_seconds": 1.3926555310000002
+  },
+  {
+    "function": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/fractions.py:794:_add",
+    "calls": 975464,
+    "recursive_calls": 0,
+    "exclusive_seconds": 1.083318124,
+    "inclusive_seconds": 2.7924551390000003
+  },
+  {
+    "function": "<built-in method builtins.isinstance>",
+    "calls": 2709470,
+    "recursive_calls": 0,
+    "exclusive_seconds": 0.784075045,
+    "inclusive_seconds": 1.581287015
+  },
+  {
+    "function": "<built-in method builtins.sum>",
+    "calls": 322863,
+    "recursive_calls": 0,
+    "exclusive_seconds": 0.748194511,
+    "inclusive_seconds": 11.120800164
+  },
+  {
+    "function": "<built-in method __new__ of type object at 0x61e95b717200>",
+    "calls": 3893079,
+    "recursive_calls": 0,
+    "exclusive_seconds": 0.696380636,
+    "inclusive_seconds": 0.696380636
+  }
+]

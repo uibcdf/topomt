@@ -1,0 +1,22 @@
+{
+  "owner": "uibcdf/topomt#76",
+  "reason": "Initial complete shell continuation exhausted a worker CPU ceiling. Preserve it; bound each subsequent pool to four remaining cells and save accepted work between pools. Whole phase wall deadline remains finite at 720 seconds, parent CPU 300/330, child pool allowance 120 CPU seconds. No geometry/request/source changes.",
+  "jobs": [
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_1_retry/protocol.json",
+      "protocol_sha256": "621fa782bc2c0c53408fbf39bb63359e1926b90fa342d424adf4d4c0ed5f39ae"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_2_retry/protocol.json",
+      "protocol_sha256": "e9c3bacacdc0aa4f8365c43625c619471dc77bf9584a1880d9ef439ecbeecc45"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/protocol.json",
+      "protocol_sha256": "50499d5f18e7f7f9b4c38c637601395a98b7b69cfb4a5f3689b43fc516472c1a"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_2_retry/protocol.json",
+      "protocol_sha256": "58480e98b59cf3fc86b042caf573803dcf8e81edae7c6d6c121968146dc1080a"
+    }
+  ]
+}

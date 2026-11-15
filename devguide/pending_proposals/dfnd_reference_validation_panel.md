@@ -15,6 +15,22 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Current continuation: resumable local source work — 2026-11-15
+
+The [S6 route](../DFND/reference_validator_parallel_resume.md) and
+[receiving](../evidence/reference_validator_parallel_resume_v1/README.md) add
+stable checked source tasks, durable out-of-order progress, failure/cancellation
+controls and fresh-process resume. One/two-worker workflows on three original
+1.4 Å Models preserve the exact canonical topology certificates and pass an
+additional producer-free saved read. An initial pool failure and its finite
+four-cell continuation are retained; no failed task implies an empty cell.
+
+S6 is qualified at that controlled/three-Model scope. #76 remains partial/open
+for the full parallel panel, S7 analytic integration, other performance gates,
+canonical native receiving #60 and broader public/installed admission. The
+nineteen-profile serial precision result below is unchanged. Native
+#181/#180/#184/#188 are not resolved by this operational delivery.
+
 ## Current disposition: original precision completed — 2026-11-15
 
 The [analytic edge derivation](../DFND/reference_validator_edge_integration.md)

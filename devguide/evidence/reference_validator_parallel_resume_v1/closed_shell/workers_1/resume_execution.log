@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "/tmp/topomt-power-parallel-worker.py", line 43, in <module>
+    resumed=measure.run('remaining_source_work',lambda:session.advance(cell_budget=128,policy=policy))
+  File "/fast_data/home/liliana/repos@uibcdf/topomt/devtools/reference_validator/performance.py", line 57, in run
+    result = operation()
+  File "/tmp/topomt-power-parallel-worker.py", line 43, in <lambda>
+    resumed=measure.run('remaining_source_work',lambda:session.advance(cell_budget=128,policy=policy))
+                                                       ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/fast_data/home/liliana/repos@uibcdf/topomt/devtools/reference_validator/parallel_runs.py", line 191, in advance
+    for i, cell in pool.iter_map(
+                   ~~~~~~~~~~~~~^
+        [('cell_proposal', i, None) for i in indices]
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ):
+    ^
+  File "/fast_data/home/liliana/repos@uibcdf/topomt/devtools/reference_validator/parallel.py", line 189, in iter_map
+    raise failure
+  File "/fast_data/home/liliana/repos@uibcdf/topomt/devtools/reference_validator/parallel.py", line 180, in iter_map
+    identity, result, record = future.result()
+                               ~~~~~~~~~~~~~^^
+  File "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/concurrent/futures/_base.py", line 447, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/concurrent/futures/_base.py", line 396, in __get_result
+    raise self._exception
+concurrent.futures.process.BrokenProcessPool: A process in the process pool was terminated abruptly while the future was running or pending.

@@ -1,0 +1,30 @@
+{
+  "owner": "uibcdf/topomt#76",
+  "jobs": [
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/regular_tetrahedron/workers_1/protocol.json",
+      "protocol_sha256": "5c258d9fd3757acc7d0c07458eac9bc353b6ec07c013165422b114bc763287f4"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/regular_tetrahedron/workers_2/protocol.json",
+      "protocol_sha256": "3973cb92802da79a8f0737e35bdfe4f5efb6509b518e63e6bcc42ba602e3bddc"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_1_retry/protocol.json",
+      "protocol_sha256": "621fa782bc2c0c53408fbf39bb63359e1926b90fa342d424adf4d4c0ed5f39ae"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_2_retry/protocol.json",
+      "protocol_sha256": "e9c3bacacdc0aa4f8365c43625c619471dc77bf9584a1880d9ef439ecbeecc45"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_final/protocol.json",
+      "protocol_sha256": "f2a00ee18b1951f3fc91c6e32ca8530c7eda40034865c8ec05590a0963228ad2"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_2_final/protocol.json",
+      "protocol_sha256": "ee461e5baf315216eb93ca5dc9805ef134b848c4c7e21a68099f18f0e088579f"
+    }
+  ],
+  "scope": "Two original tetrahedron runs, two completed shell runs, and new isolated dumbbell runs. Earlier overlapping dumbbell attempts are excluded from matched timing and retained with uncertain event-to-record attribution. No original data or scientific code changed."
+}

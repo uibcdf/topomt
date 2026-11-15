@@ -341,3 +341,42 @@ assert result['n_components'] is None and result['topology_complete'] is False
         timeout=15,
     )
     assert result.returncode == 0, result.stdout + result.stderr
+
+
+def test_owned_parallel_session_rejects_pickle_pid_and_kernel_changes(monkeypatch):
+    import os
+    import pickle
+
+    from devtools.reference_validator import parallel_runs
+
+    session = parallel_runs.ParallelPowerSession(model())
+    with pytest.raises(TypeError, match='serialized'):
+        pickle.dumps(session)
+    pid = os.getpid()
+    with monkeypatch.context() as patch:
+        patch.setattr(parallel_runs.os, 'getpid', lambda: pid + 1)
+        with pytest.raises(ValueError, match='process or executable'):
+            _ = session.snapshot
+    with monkeypatch.context() as patch:
+        patch.setattr(
+            parallel_runs, 'kernel_identity', lambda: {'algorithm': 'foreign'}
+        )
+        with pytest.raises(ValueError, match='process or executable'):
+            _ = session.snapshot
+
+
+def test_malformed_worker_geometry_never_reaches_a_checkpoint(
+    tmp_path, fake_pool, monkeypatch
+):
+    from devtools.reference_validator.parallel_runs import ParallelPowerSession
+
+    def foreign_owner(self, tasks):
+        yield 0, propose_cell(self.model, self.model.atoms[1])
+
+    monkeypatch.setattr(fake_pool, 'iter_map', foreign_owner)
+    session = ParallelPowerSession(model())
+    with pytest.raises(ValueError, match='source identity'):
+        session.advance(cell_budget=1, checkpoint_root=tmp_path)
+    assert session.snapshot['cells'] == []
+    assert session.snapshot['stop_reason'] == 'worker_failure'
+    assert not list(tmp_path.glob('cells_*'))

@@ -1,0 +1,43 @@
+{
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "/tmp/topomt-power-parallel-signal-stub.py"
+  ],
+  "exit_code": 1,
+  "stop_reason": "caller_signal_15",
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 45,
+  "cpu_hard_seconds": 50,
+  "wall_seconds": 3.17663037404418,
+  "waited_cpu_seconds": 0.14048899999999998,
+  "peak_child_rss_kib": 17380,
+  "sampled_group_rss_peak_kib": 2416,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 48015712256,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5926296\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5782078\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.002315902034752071,
+      "host": {
+        "available_bytes": 48015712256,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5926296\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5782078\n",
+        "safe": true
+      },
+      "group_rss_kib": 2416,
+      "group_pids": [
+        7
+      ]
+    }
+  ]
+}

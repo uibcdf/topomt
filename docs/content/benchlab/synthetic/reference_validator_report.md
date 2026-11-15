@@ -146,6 +146,36 @@ The sections below preserve earlier methods and source-scoped outcomes. Their
 unmet positive-volume targets describe those earlier receiving records, rather
 than the current analytic edge route.
 
+(reference-validator-resume)=
+
+## Saving and resuming reference construction — 2026-11-15
+
+The developer reference route now retains checked source cells when a calculation
+is interrupted. Partial work has no global region count. Resuming reconstructs
+all saved cells independently; completing the calculation still requires the
+full topology check. The final saved reader needs neither the generator nor a
+process pool.
+
+The original tetrahedron, closed shell and dumbbell at 1.4 Å are received with
+one and two explicit local workers. Each workflow stops after two accepted
+cells, resumes in a new process, produces the **same original mathematical
+certificate**, and passes a further independent saved read. The volume results
+above and native DFND observations are unchanged.
+
+For the closed shell, this complete workflow takes **516.744 seconds with one
+worker and 335.944 with two** on the observed shared host. These are single
+observations for the same checkpoint/resume protocol, including final checking
+and a further saved read. They do not compare the direct serial constructor or
+establish general scaling. The corresponding dumbbell workflow takes 553.134
+and 395.293 seconds, respectively. One worker remains the default.
+Failed/interrupted attempts are retained with their operational scope and excluded
+from these successful-run comparisons.
+
+[Source, timing/resource records and portable receiving](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_parallel_resume_v1/README.md)
+retain the tested scope and operational failures. Broader parallel-panel and
+analytic-integration qualification remain under #76; this is developer reference
+execution, not admission of a supported public detector or a native DFND fix.
+
 ## Earlier range-based face-integration feasibility — 2026-11-15
 
 The validator now reuses genuinely checked in-process topology and updates

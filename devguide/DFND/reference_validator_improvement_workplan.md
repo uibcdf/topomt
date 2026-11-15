@@ -26,6 +26,11 @@ their original, sometimes unresolved, precision. No native behavior changes.
 | E | All original k=24 total AND per-region requests pass; selected serial precision receiving delivered. Full public/native P5/P6 admission remains separate. |
 | F | Four whole-carrier exclusions checked on two fresh exactly matched actual-vdW Models. Common canonical-unit receiving across the original panel remains #76/#60. |
 
+The subsequent [resumable source route](reference_validator_parallel_resume.md)
+qualifies S6's controlled task/failure/recovery contract on three original
+one/two-worker Models. It preserves original canonical topology proofs and serial
+volume results. Full parallel panel and S7/S8 admission remain separate.
+
 ### Next executable work under #76
 
 1. Qualify common native receiving in canonical units under #76/#60 before

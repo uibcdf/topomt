@@ -1,5 +1,18 @@
 # DFND notebook laboratory checkpoint
 
+## Resumable reference construction — 2026-11-15 UTC
+
+The [source-work receiving](../evidence/reference_validator_parallel_resume_v1/README.md)
+adds bounded one/two-worker interruption, checked task persistence and independent
+fresh-process resume on three existing original 1.4 Å Models. Complete final
+proofs match the original topology certificates and pass the separate saved
+reader. Partial work has no global region count. Four workers, the complete
+parallel panel and S7 analytic integration remain unqualified. This changes
+execution/recovery, not the original geometry, nineteen-profile serial volume
+results or native DFND/public policy. Use the
+[performance plan](reference_validator_performance_plan.md) and active validator
+checkpoint for current scope; #76/#60/#181 retain their scientific owners.
+
 ## Original topology and requested volume precision — 2026-11-15 UTC
 
 The [active validator checkpoint](reference_validator_checkpoint.md) records

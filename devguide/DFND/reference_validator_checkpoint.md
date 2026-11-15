@@ -11,6 +11,25 @@ These identify early P0/P1 tranches of the
 section below records nineteen topology-plus-precision synthetic profiles;
 broader admission and a supported public TopoMT detector remain separate.
 
+## Resumable local source work — 2026-11-15
+
+The [S6 source route](reference_validator_parallel_resume.md) now preserves
+independently checked, source-bound cells across completion-order differences,
+cooperative stop, child failure and durable resume. No partial inventory claims
+global topology. Final exhaustive serial checking remains mandatory; the
+ordinary saved reader is unchanged. Default execution uses one worker.
+
+The [new receiving](../evidence/reference_validator_parallel_resume_v1/README.md)
+retains one/two-worker interrupted workflows on the original tetrahedron,
+closed-shell and dumbbell 1.4 Å Models. All final mathematical proofs match their
+original certificates and pass a new producer-free saved read. An earlier pool
+failure and the finite-resource/chunking correction are preserved. Source/kernel
+identity, all constraints and original evidence stay explicit. This S6 scope
+is separate from full parallel nineteen-profile admission, S7 analytic integration,
+S1/S3/S5 follow-up and broader P6/P7. Original serial volume precision remains
+qualified by the separate receiving below. Native #181/#180/#184/#188 and
+canonical native receiving #76/#60 retain their own gates.
+
 ## Original total and region precision completed — 2026-11-15
 
 The [analytic edge construction](reference_validator_edge_integration.md)

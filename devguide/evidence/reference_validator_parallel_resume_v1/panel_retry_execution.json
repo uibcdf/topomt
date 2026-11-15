@@ -1,0 +1,58 @@
+[
+  {
+    "case": "closed_shell",
+    "workers": 1,
+    "mode": "partial",
+    "exit_code": 0,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_1_retry/partial_execution.json"
+  },
+  {
+    "case": "closed_shell",
+    "workers": 1,
+    "mode": "resume",
+    "exit_code": 0,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_1_retry/resume_execution.json"
+  },
+  {
+    "case": "closed_shell",
+    "workers": 1,
+    "mode": "verify",
+    "exit_code": 0,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_1_retry/verify_execution.json"
+  },
+  {
+    "case": "closed_shell",
+    "workers": 2,
+    "mode": "partial",
+    "exit_code": 0,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_2_retry/partial_execution.json"
+  },
+  {
+    "case": "closed_shell",
+    "workers": 2,
+    "mode": "resume",
+    "exit_code": 0,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_2_retry/resume_execution.json"
+  },
+  {
+    "case": "closed_shell",
+    "workers": 2,
+    "mode": "verify",
+    "exit_code": 0,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/closed_shell/workers_2_retry/verify_execution.json"
+  },
+  {
+    "case": "dumbbell",
+    "workers": 1,
+    "mode": "partial",
+    "exit_code": 0,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/partial_execution.json"
+  },
+  {
+    "case": "dumbbell",
+    "workers": 1,
+    "mode": "resume",
+    "exit_code": 120,
+    "execution": "devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/resume_execution.json"
+  }
+]

@@ -1,0 +1,19 @@
+Traceback (most recent call last):
+  File "/tmp/topomt-power-parallel-worker.py", line 51, in <module>
+    measure.run(f'save_progress_{before:04d}',lambda:session.save(output/'chunks'/f'cells_{len(resumed["cells"]):04d}'))
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/fast_data/home/liliana/repos@uibcdf/topomt/devtools/reference_validator/performance.py", line 57, in run
+    result = operation()
+  File "/tmp/topomt-power-parallel-worker.py", line 51, in <lambda>
+    measure.run(f'save_progress_{before:04d}',lambda:session.save(output/'chunks'/f'cells_{len(resumed["cells"]):04d}'))
+                                                     ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/fast_data/home/liliana/repos@uibcdf/topomt/devtools/reference_validator/parallel_runs.py", line 237, in save
+    _write_bundle(directory, self.snapshot)
+    ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/fast_data/home/liliana/repos@uibcdf/topomt/devtools/reference_validator/parallel_runs.py", line 27, in _write_bundle
+    directory.mkdir(parents=True, exist_ok=False)
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/pathlib/__init__.py", line 1011, in mkdir
+    os.mkdir(self, mode)
+    ~~~~~~~~^^^^^^^^^^^^
+FileExistsError: [Errno 17] File exists: 'devguide/evidence/reference_validator_parallel_resume_v1/dumbbell/workers_1_retry/receiving/chunks/cells_0026'

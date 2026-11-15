@@ -1,0 +1,20 @@
+[
+  {
+    "case": "closed_shell",
+    "bounded_elapsed_ratio_T1_over_T2": 1.5381858825155061,
+    "capacity_efficiency_T1_over_2T2": 0.7690929412577531,
+    "scope": "Same checkpoint/resume/final-check/fresh-read workflow; one observation per configuration. One worker uses a spawned pool, not the direct serial constructor. No repeatable/general scaling claim."
+  },
+  {
+    "case": "dumbbell",
+    "bounded_elapsed_ratio_T1_over_T2": 1.3993001561665037,
+    "capacity_efficiency_T1_over_2T2": 0.6996500780832519,
+    "scope": "Same checkpoint/resume/final-check/fresh-read workflow; one observation per configuration. One worker uses a spawned pool, not the direct serial constructor. No repeatable/general scaling claim."
+  },
+  {
+    "case": "regular_tetrahedron",
+    "bounded_elapsed_ratio_T1_over_T2": 1.0918454828038902,
+    "capacity_efficiency_T1_over_2T2": 0.5459227414019451,
+    "scope": "Same checkpoint/resume/final-check/fresh-read workflow; one observation per configuration. One worker uses a spawned pool, not the direct serial constructor. No repeatable/general scaling claim."
+  }
+]

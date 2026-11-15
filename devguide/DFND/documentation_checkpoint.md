@@ -16,6 +16,16 @@ closed [#173](https://github.com/uibcdf/topomt/issues/173), as recorded in the
 and reader checks below remain valid within their scope; they did not exercise
 every described policy and are not exhaustive semantic qualification.
 
+## Reference construction recovery — 2026-11-15
+
+The [BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md#reference-validator-resume)
+now explains the scoped one/two-worker checkpoint/resume receiving and retains
+its source/resource evidence. Complete proofs match the original serial inputs;
+no DFND operator, query, promotion, measurement or worked-example input changes.
+The method book's nineteen-profile serial precision and native/public scope
+remain unchanged. Full parallel-panel, S7 analytic integration, #181/#180/#184/
+#188 and installed #16 retain their separate gates.
+
 ## Independent original-volume precision — 2026-11-15
 
 The validation chapter now links the [new validator receiving](../../docs/content/benchlab/synthetic/reference_validator_report.md#reference-validator-edge-volumes):
