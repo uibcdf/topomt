@@ -1,0 +1,47 @@
+{
+  "model_sha256": "0d3af6fd8ace1d2b6f04d25328d54a802d1f9d3c351558a328e68a91692ed493",
+  "certificate_sha256": "d903f3b7546396cdda8aa2444880d5a933aba31696c2c1a73196b58985cbca73",
+  "topology_certificate_sha256": "5e17465f4ad5f40f671fba3898bed9c408cf892f671e57ba7c01b8e5b8272902",
+  "topology_complete": true,
+  "topology_status": "resolved",
+  "n_components": 1,
+  "n_boundary_patches": 1,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "volume_lower": [
+    "2871041972833127716472923425146484308147612061825",
+    "93536104789177786765035829293842113257979682750464"
+  ],
+  "volume_upper": [
+    "533439598552395129720669172392216784453826321087085",
+    "1496577676626844588240573268701473812127674924007424"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "lower": [
+        "2871041972833127716472923425146484308147612061825",
+        "93536104789177786765035829293842113257979682750464"
+      ],
+      "upper": [
+        "533439598552395129720669172392216784453826321087085",
+        "1496577676626844588240573268701473812127674924007424"
+      ],
+      "precision_status": "unresolved"
+    }
+  ],
+  "volume_enclosure_status": "resolved",
+  "total_precision_status": "unresolved",
+  "precision_status": "unresolved",
+  "stop_reason": "integration_envelope",
+  "leaf_states": {
+    "free": 10,
+    "blocked": 307,
+    "outside": 88,
+    "unknown": 107
+  },
+  "method": "adaptive_boxes",
+  "exact_shortcut": null,
+  "lineage_status": "not_checked"
+}

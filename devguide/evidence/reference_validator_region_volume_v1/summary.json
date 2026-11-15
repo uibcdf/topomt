@@ -1,0 +1,3529 @@
+{
+  "schema": "topomt.reference-validator.region-volume-summary/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T02:00:41.012865+00:00",
+  "jobs": [
+    {
+      "name": "controls/contained_ball_k8",
+      "category": "control",
+      "k": 8,
+      "model_sha256": "ad6df77dfb83edb9f4846b9780dd95ce96e04b536c0f935ff9f28476b080beda",
+      "method": "analytic_single_region",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "4"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "256"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 1,
+      "volume_lower": [
+        "36710067232",
+        "614336355"
+      ],
+      "volume_upper": [
+        "16082096",
+        "268875"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "36710067232",
+            "614336355"
+          ],
+          "upper": [
+            "16082096",
+            "268875"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 1,
+          "leaf_count": 0,
+          "wall_seconds": 0.04070982208941132,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k8/receiving/leaves_1/verification.json",
+          "certificate_sha256": "1853f234514a1937294171f75ec05a4fecca76718e9eb83dc3d775444d747b88",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "36710067232",
+            "614336355"
+          ],
+          "volume_upper": [
+            "16082096",
+            "268875"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "36710067232",
+                "614336355"
+              ],
+              "upper": [
+                "16082096",
+                "268875"
+              ],
+              "precision_status": "resolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 0.16772615199442953,
+      "cpu_seconds": 0.158819,
+      "peak_rss_kib": 23732,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k8/protocol.json",
+          "sha256": "a9885995bcb6512891a96c704270001f13392623c4165374e3d2e7ce63932dac"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k8/execution.json",
+          "sha256": "efa3bb40e5e420a7c52bc84d81024a1b4323404729dde0133e600cfe3afae967"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k8/receiving/receipt.json",
+          "sha256": "b196b61b109f435d6aa6f7cda039308fe1de38b6d7c52c028ba63dcafbf8c682"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k8/receiving/leaves_1/verification.json",
+          "sha256": "9d5472852d42769e1b1750c3947f0bdeb3af119bf864f17c7b647691095c11bb"
+        }
+      }
+    },
+    {
+      "name": "controls/contained_ball_k16",
+      "category": "control",
+      "k": 16,
+      "model_sha256": "ad6df77dfb83edb9f4846b9780dd95ce96e04b536c0f935ff9f28476b080beda",
+      "method": "analytic_single_region",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "1024"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "65536"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 1,
+      "volume_lower": [
+        "983466874622788215902550208",
+        "16442852077759107287109375"
+      ],
+      "volume_upper": [
+        "2247064499408330252395472506544",
+        "37569286141347118693878984375"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "983466874622788215902550208",
+            "16442852077759107287109375"
+          ],
+          "upper": [
+            "2247064499408330252395472506544",
+            "37569286141347118693878984375"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 1,
+          "leaf_count": 0,
+          "wall_seconds": 0.03548910201061517,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k16/receiving/leaves_1/verification.json",
+          "certificate_sha256": "432a89581d7f1249a91f42119e733d78df2c881da38b9b28d868ccb2c94927bd",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "983466874622788215902550208",
+            "16442852077759107287109375"
+          ],
+          "volume_upper": [
+            "2247064499408330252395472506544",
+            "37569286141347118693878984375"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "983466874622788215902550208",
+                "16442852077759107287109375"
+              ],
+              "upper": [
+                "2247064499408330252395472506544",
+                "37569286141347118693878984375"
+              ],
+              "precision_status": "resolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 0.16705304302740842,
+      "cpu_seconds": 0.130393,
+      "peak_rss_kib": 23944,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k16/protocol.json",
+          "sha256": "9439479f1e95dc7d9483b4861df412323749ff14f15edaca8ffc499d33562a1e"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k16/execution.json",
+          "sha256": "0d3739b9b8b8aabbdfb3377c6d33bf95ee6c16ae629dcc4aaa3e0bd0d5d25db5"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k16/receiving/receipt.json",
+          "sha256": "6fbc66a32077c3e3fc9ac6b878d5ff5db71a39d43eed80a9bf1a4f5b49dedff6"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k16/receiving/leaves_1/verification.json",
+          "sha256": "f8df5b710c7ccecef6cea55a6412ab2ac86196685786ebb09bfa357cd76e6c25"
+        }
+      }
+    },
+    {
+      "name": "controls/contained_ball_k24",
+      "category": "control",
+      "k": 24,
+      "model_sha256": "ad6df77dfb83edb9f4846b9780dd95ce96e04b536c0f935ff9f28476b080beda",
+      "method": "analytic_single_region",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "262144"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 1,
+      "volume_lower": [
+        "983466874622788215902550208",
+        "16442852077759107287109375"
+      ],
+      "volume_upper": [
+        "2247064499408330252395472506544",
+        "37569286141347118693878984375"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "983466874622788215902550208",
+            "16442852077759107287109375"
+          ],
+          "upper": [
+            "2247064499408330252395472506544",
+            "37569286141347118693878984375"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 1,
+          "leaf_count": 0,
+          "wall_seconds": 0.03427846194244921,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k24/receiving/leaves_1/verification.json",
+          "certificate_sha256": "87c84ddfe9699ce31d6bda6793473768a4c895c091d69cc73ca80888a18ce97e",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "983466874622788215902550208",
+            "16442852077759107287109375"
+          ],
+          "volume_upper": [
+            "2247064499408330252395472506544",
+            "37569286141347118693878984375"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "983466874622788215902550208",
+                "16442852077759107287109375"
+              ],
+              "upper": [
+                "2247064499408330252395472506544",
+                "37569286141347118693878984375"
+              ],
+              "precision_status": "resolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 0.1677981890970841,
+      "cpu_seconds": 0.125799,
+      "peak_rss_kib": 23820,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k24/protocol.json",
+          "sha256": "7587a4be55fd99bd94447c32998a9420e368930f4ca766ebd86d49be8a271760"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k24/execution.json",
+          "sha256": "e1f5583f960f58268de12f625d3189d3a95a28a1c01641f3c296752bdff59eb2"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k24/receiving/receipt.json",
+          "sha256": "e72dd120de176d5751639d5c3bcb4c51096e4f80de026d9fe2375466eb76c97e"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k24/receiving/leaves_1/verification.json",
+          "sha256": "d61d38a10f151126d703b9e3e65321e7a049c70b850411d0fe96efdfe62ea70f"
+        }
+      }
+    },
+    {
+      "name": "controls/contained_ball_k32",
+      "category": "control",
+      "k": 32,
+      "model_sha256": "ad6df77dfb83edb9f4846b9780dd95ce96e04b536c0f935ff9f28476b080beda",
+      "method": "analytic_single_region",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "67108864"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "4294967296"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 1,
+      "volume_lower": [
+        "3314108199013827813622440602843541309870737051961175552",
+        "55409482776906519125004356653546000681798553466796875"
+      ],
+      "volume_upper": [
+        "37861034887174812897497583536511832830776138356575342279152",
+        "633009013139935455787874771281440220989003034515380859375"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "3314108199013827813622440602843541309870737051961175552",
+            "55409482776906519125004356653546000681798553466796875"
+          ],
+          "upper": [
+            "37861034887174812897497583536511832830776138356575342279152",
+            "633009013139935455787874771281440220989003034515380859375"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 1,
+          "leaf_count": 0,
+          "wall_seconds": 0.03523859102278948,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k32/receiving/leaves_1/verification.json",
+          "certificate_sha256": "3d86e80e1898d0a8305c2feaca2d2c10d508a4336566b36c7c84aba38f1e7edc",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "3314108199013827813622440602843541309870737051961175552",
+            "55409482776906519125004356653546000681798553466796875"
+          ],
+          "volume_upper": [
+            "37861034887174812897497583536511832830776138356575342279152",
+            "633009013139935455787874771281440220989003034515380859375"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "3314108199013827813622440602843541309870737051961175552",
+                "55409482776906519125004356653546000681798553466796875"
+              ],
+              "upper": [
+                "37861034887174812897497583536511832830776138356575342279152",
+                "633009013139935455787874771281440220989003034515380859375"
+              ],
+              "precision_status": "resolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 0.1675289460690692,
+      "cpu_seconds": 0.122948,
+      "peak_rss_kib": 23780,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k32/protocol.json",
+          "sha256": "71f58fcb9de27c803734b6be3552ba18eb153f1bfb14601c2e25c3754ce3e643"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k32/execution.json",
+          "sha256": "0c9fdcd9e2b8792339573588362cbbb517d8688b7272a54a6bbd1604cf910340"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k32/receiving/receipt.json",
+          "sha256": "242b81e77bb67955fbcac3256a362c57523414801b47ab45b70e6a6006bd7241"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/contained_ball_k32/receiving/leaves_1/verification.json",
+          "sha256": "dd20abf667e706293774f5c180a0e276aa10212d7433061200375071bce2e5ec"
+        }
+      }
+    },
+    {
+      "name": "controls/empty",
+      "category": "control",
+      "k": 24,
+      "model_sha256": "1637573d87b8dfa468f051a46034ae3fd47c7c2718397a85038d7c6c54f2c419",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "2097152"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 0,
+          "wall_seconds": 0.024237376055680215,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/empty/receiving/leaves_512/verification.json",
+          "certificate_sha256": "010226ec1e2b82138620fc92116ba4a4b9aa6893b4083e998b0e1523bc8e7990",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "regions": [],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": "complete_empty_topology"
+        }
+      ],
+      "elapsed_seconds": 0.16758034890517592,
+      "cpu_seconds": 0.11397299999999999,
+      "peak_rss_kib": 23840,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/empty/protocol.json",
+          "sha256": "2a132b9509df94e3abc6fdf275d8d32e8f4d6b947f4faf0265a586fa951ae5a6"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/empty/execution.json",
+          "sha256": "0f019b2f9d2e53cb084102091e05a838a543d34edd3a5a52d57ead8a4969685a"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/empty/receiving/receipt.json",
+          "sha256": "8c2e560b35bb68e2e6fc08587a6a95fd8140eb70a361344b2f29e636e814af93"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/empty/receiving/leaves_512/verification.json",
+          "sha256": "2093f5449265754fd2a56e755e9a2d19675704dbd9d21d0cfd8368c97457efc8"
+        }
+      }
+    },
+    {
+      "name": "controls/free",
+      "category": "control",
+      "k": 24,
+      "model_sha256": "12d5f2aeb4d2bb73e4593cd7842b103b1d4152f74e5d2e03b352ac4880234116",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "2097152"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 1,
+      "volume_lower": [
+        "8",
+        "1"
+      ],
+      "volume_upper": [
+        "8",
+        "1"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "8",
+            "1"
+          ],
+          "upper": [
+            "8",
+            "1"
+          ],
+          "precision_status": "resolved"
+        }
+      ],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 1,
+          "wall_seconds": 0.03490472806151956,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/free/receiving/leaves_512/verification.json",
+          "certificate_sha256": "6cd3dd9884672d6fd9fa6d54167f56a71cf906eda4e231eae0b8f6b753297928",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "8",
+            "1"
+          ],
+          "volume_upper": [
+            "8",
+            "1"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "8",
+                "1"
+              ],
+              "upper": [
+                "8",
+                "1"
+              ],
+              "precision_status": "resolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 1,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": "whole_domain_free"
+        }
+      ],
+      "elapsed_seconds": 0.16779944603331387,
+      "cpu_seconds": 0.128713,
+      "peak_rss_kib": 23812,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/free/protocol.json",
+          "sha256": "4be3776ea824da34ced4c582c9c0a8c9bd796e906dcdf545426f1dbf60162c88"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/free/execution.json",
+          "sha256": "97a6e49aa1b2c6f7ca33ca985a4a0503eed4f802a57568a95cb9b2c2f12425c3"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/free/receiving/receipt.json",
+          "sha256": "efedab53faf759a3f522cb0a0ded67c16c74d888b77b13f32bfeccb795567ff0"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/free/receiving/leaves_512/verification.json",
+          "sha256": "dd7c5019daa7a9ab59122295928ed12f96905f9e1d28287d141769a0862b7ab5"
+        }
+      }
+    },
+    {
+      "name": "controls/eight_corners",
+      "category": "control",
+      "k": 24,
+      "model_sha256": "00cb86115bc66558632f4b42e7a7d2bc15031a5bc38a96a865a726a3e42fbda1",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "2097152"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 8,
+      "n_boundary_patches": 8,
+      "volume_lower": [
+        "5",
+        "256"
+      ],
+      "volume_upper": [
+        "597",
+        "2048"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "5",
+            "1024"
+          ],
+          "upper": [
+            "567",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "3",
+            "1024"
+          ],
+          "upper": [
+            "563",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 1.2931798440404236,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/eight_corners/receiving/leaves_512/verification.json",
+          "certificate_sha256": "89b311f1ff7a4754bfc24ba270ab212860c6466ec2e840ea40b6e564cc67c977",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "5",
+            "256"
+          ],
+          "volume_upper": [
+            "597",
+            "2048"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "5",
+                "1024"
+              ],
+              "upper": [
+                "567",
+                "2048"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-2",
+              "lower": [
+                "1",
+                "512"
+              ],
+              "upper": [
+                "561",
+                "2048"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-3",
+              "lower": [
+                "1",
+                "512"
+              ],
+              "upper": [
+                "561",
+                "2048"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-4",
+              "lower": [
+                "1",
+                "512"
+              ],
+              "upper": [
+                "561",
+                "2048"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-5",
+              "lower": [
+                "3",
+                "1024"
+              ],
+              "upper": [
+                "563",
+                "2048"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-6",
+              "lower": [
+                "1",
+                "512"
+              ],
+              "upper": [
+                "561",
+                "2048"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-7",
+              "lower": [
+                "1",
+                "512"
+              ],
+              "upper": [
+                "561",
+                "2048"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-8",
+              "lower": [
+                "1",
+                "512"
+              ],
+              "upper": [
+                "561",
+                "2048"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 24,
+            "blocked": 270,
+            "outside": 0,
+            "unknown": 218
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 1.4194046610500664,
+      "cpu_seconds": 1.382403,
+      "peak_rss_kib": 23820,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/eight_corners/protocol.json",
+          "sha256": "b237920c935762c22d4e3df02e82bd40916a10229bcf13df7c09f458901599f8"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/eight_corners/execution.json",
+          "sha256": "c0ae682c142485075cd2f5331790790478be12288d6e3e1dbe6967a7fd8b2b59"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/eight_corners/receiving/receipt.json",
+          "sha256": "db4abab158521fa2f81ba9fed78efed04c361bd23dc001849710a40f230ed796"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/eight_corners/receiving/leaves_512/verification.json",
+          "sha256": "08edf165ad5672cf52b62f6f70cbb9dac4fda7625473c0135202233a279217c7"
+        }
+      }
+    },
+    {
+      "name": "controls/tiny_eight_corners",
+      "category": "control",
+      "k": 24,
+      "model_sha256": "b1e4cfb2d2d0980074503a1bf8685e9995e4927dc0d3c318fbd12b56e86447c7",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "1",
+          "2097152"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 8,
+      "n_boundary_patches": 8,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "1",
+        "16777216"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1",
+            "16777216"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1",
+            "16777216"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1",
+            "16777216"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1",
+            "16777216"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1",
+            "16777216"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1",
+            "16777216"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1",
+            "16777216"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1",
+            "16777216"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 1.020601294003427,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/tiny_eight_corners/receiving/leaves_512/verification.json",
+          "certificate_sha256": "32e1e1fb491685af2e95656042e94850a6578af6ad6b49801bf46cf0b3df97fd",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "1",
+            "16777216"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1",
+                "16777216"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-2",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1",
+                "16777216"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-3",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1",
+                "16777216"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-4",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1",
+                "16777216"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-5",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1",
+                "16777216"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-6",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1",
+                "16777216"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-7",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1",
+                "16777216"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-8",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1",
+                "16777216"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 504,
+            "outside": 0,
+            "unknown": 8
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 1.1690939899999648,
+      "cpu_seconds": 1.1167719999999999,
+      "peak_rss_kib": 23920,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/tiny_eight_corners/protocol.json",
+          "sha256": "64313159b1105b05bf62b1ec80f93aa939e08d733be3849cd3e9b91d2b14d545"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/tiny_eight_corners/execution.json",
+          "sha256": "be41a859f690277466cb3d1688a0b7f2cbf6c052bb5917a7d07a96e36496f248"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/tiny_eight_corners/receiving/receipt.json",
+          "sha256": "56c788d0ee2b67c4a34900cbc4c943c8542196e154891f845a724146c0ace865"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/tiny_eight_corners/receiving/leaves_512/verification.json",
+          "sha256": "4235b617413afe226b9a53f6fbc4893761b072a3574bfa88010830fa52df068f"
+        }
+      }
+    },
+    {
+      "name": "controls/asymmetric_three_regions",
+      "category": "control",
+      "k": 24,
+      "model_sha256": "43247a1bf4d66c70c78ae04c4cd55f018b9f596c931dbad6283a4ee6c0b7df7f",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "15",
+          "131072"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 3,
+      "n_boundary_patches": 3,
+      "volume_lower": [
+        "480",
+        "1"
+      ],
+      "volume_upper": [
+        "1515",
+        "1"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "240",
+            "1"
+          ],
+          "upper": [
+            "1275",
+            "1"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1035",
+            "1"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "240",
+            "1"
+          ],
+          "upper": [
+            "1275",
+            "1"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 2.0195491310441867,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/asymmetric_three_regions/receiving/leaves_512/verification.json",
+          "certificate_sha256": "e8b046ba46f1bc8690481647236ec28c51a35c1d6a2ac5fe608feaf80b6fb778",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "480",
+            "1"
+          ],
+          "volume_upper": [
+            "1515",
+            "1"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "240",
+                "1"
+              ],
+              "upper": [
+                "1275",
+                "1"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-2",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1035",
+                "1"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-3",
+              "lower": [
+                "240",
+                "1"
+              ],
+              "upper": [
+                "1275",
+                "1"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 128,
+            "blocked": 108,
+            "outside": 0,
+            "unknown": 276
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 2.171204245998524,
+      "cpu_seconds": 2.114699,
+      "peak_rss_kib": 23812,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/asymmetric_three_regions/protocol.json",
+          "sha256": "29f0d44f67e909e93fa009e8410c7c58e54b7969dd58286cd5412461c7aaf7b0"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/asymmetric_three_regions/execution.json",
+          "sha256": "34e013f69b9f889cde412fa18a1bbaa270cb17a6996d21a2724ab9d7ed5f67b3"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/asymmetric_three_regions/receiving/receipt.json",
+          "sha256": "b01374c9425ebbeb5ed0285e30fc0d9237f7d6c00fd6cb33c8bd8c0297bd47a7"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/controls/asymmetric_three_regions/receiving/leaves_512/verification.json",
+          "sha256": "eb49d4da37cc9366955d34512b14f8d77c2b837068b18f140bca4f1ca242ad26"
+        }
+      }
+    },
+    {
+      "name": "original/regular_tetrahedron/profile_0",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "c09bf42d90f1609887a54fa4790d3074c39f7161a0e00028ad0ba1665429452e",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "38463776803236130720331542115778415558917425179",
+          "36779892980781332600600328651607420406849738932406452224"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 4,
+      "volume_lower": [
+        "38463776803236130720331542115778415558917425179",
+        "2993155353253689176481146537402947624255349848014848"
+      ],
+      "volume_upper": [
+        "20193482821698968628174059610783668168431648218975",
+        "2993155353253689176481146537402947624255349848014848"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "38463776803236130720331542115778415558917425179",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "upper": [
+            "20193482821698968628174059610783668168431648218975",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 1.1919048799900338,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_0/receiving/leaves_512/verification.json",
+          "certificate_sha256": "2e6817522f7d1e61d7647a27614c3d745420f85857bb2071a36048ff50db8c99",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "38463776803236130720331542115778415558917425179",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "volume_upper": [
+            "20193482821698968628174059610783668168431648218975",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "38463776803236130720331542115778415558917425179",
+                "2993155353253689176481146537402947624255349848014848"
+              ],
+              "upper": [
+                "20193482821698968628174059610783668168431648218975",
+                "2993155353253689176481146537402947624255349848014848"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 1,
+            "blocked": 217,
+            "outside": 134,
+            "unknown": 160
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 1.3190669380128384,
+      "cpu_seconds": 1.286519,
+      "peak_rss_kib": 23824,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_0/protocol.json",
+          "sha256": "e0154b18465fefe82d25afc2dfba8f802766750cc37837c0355b3dc0186f2b3f"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_0/execution.json",
+          "sha256": "432e4e5295002bd8461ea4ed7cc16929dd131081dfbaa0a83c90695b0b7df52e"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_0/receiving/receipt.json",
+          "sha256": "9146bd18929f1c35fa679ded1ecfc8272248c9442343af35a30b0b3ed85fa70b"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_0/receiving/leaves_512/verification.json",
+          "sha256": "db6dad7936b9b8c5b601953d67f169941dfe4c278ea489021da56387cb24e7df"
+        }
+      }
+    },
+    {
+      "name": "original/regular_tetrahedron/profile_1",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "38463776803236130720331542115778415558917425179",
+          "36779892980781332600600328651607420406849738932406452224"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "3730986349913904679872159585230506309214990242363",
+        "1496577676626844588240573268701473812127674924007424"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "3730986349913904679872159585230506309214990242363",
+            "1496577676626844588240573268701473812127674924007424"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 1.113986905082129,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_1/receiving/leaves_512/verification.json",
+          "certificate_sha256": "4b03c9c61638adafca58d5d6ad64925d95ae7757d903df63f2cec5fe4c78a6ca",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "3730986349913904679872159585230506309214990242363",
+            "1496577676626844588240573268701473812127674924007424"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "3730986349913904679872159585230506309214990242363",
+                "1496577676626844588240573268701473812127674924007424"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 278,
+            "outside": 152,
+            "unknown": 82
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 1.22007326700259,
+      "cpu_seconds": 1.2048540000000003,
+      "peak_rss_kib": 23852,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_1/protocol.json",
+          "sha256": "927a85db825d95560e17fd8fb85bb75c4f2aa719b9d1791d47022e7e14780b07"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_1/execution.json",
+          "sha256": "1ff7f2ecd80ddc71953f53e095e42a80bc13e6a71fb893bbc64f37ef1f858712"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_1/receiving/receipt.json",
+          "sha256": "a29a261e4cf098a400a0be8518ea86e3c24ae534ee145b72642764a0d6ab72c6"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_1/receiving/leaves_512/verification.json",
+          "sha256": "1a3781b6b92bd5897679f6974b38fa082e53c82bb1224f2be28eff0f9c7ecff1"
+        }
+      }
+    },
+    {
+      "name": "original/regular_tetrahedron/profile_2",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "d4f7a65441c38620ba281234c8faafd6d8d135122e5d487d6e2e0d60c68251f5",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "38463776803236130720331542115778415558917425179",
+          "36779892980781332600600328651607420406849738932406452224"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 0,
+          "wall_seconds": 0.1302561640040949,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_2/receiving/leaves_512/verification.json",
+          "certificate_sha256": "01ccb3465cfd63392f056bb7aca7bbf2cba5372cda019265016829fe7242310f",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "regions": [],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": "complete_empty_topology"
+        }
+      ],
+      "elapsed_seconds": 0.2682818219764158,
+      "cpu_seconds": 0.22050499999999998,
+      "peak_rss_kib": 23872,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_2/protocol.json",
+          "sha256": "49d0d7db416e2193da1b1ed3d172de76c88ba0114742a88cf3bebe839ea90d94"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_2/execution.json",
+          "sha256": "14a62d6664d5fb89043a7f2c3f299725d8c3c875ccbc2956368c4eb29481bc38"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_2/receiving/receipt.json",
+          "sha256": "7f81c94068b539b9bdf5cf15a8e10082fae107a60912f713de774a2c7ef772b6"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_2/receiving/leaves_512/verification.json",
+          "sha256": "33a2c203de9267b3fabbe9534a82ec72ccbfdd1e62982a4e5fb1ae7968aeb711"
+        }
+      }
+    },
+    {
+      "name": "original/straight_tube_narrow_dense/profile_0",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "171989f66671eec4fcf4031417a728da48f84fa5f1159b4af0f69f8034f9ee88",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "6837102936632438928635571155971563018418612823693483",
+          "150650441649280338332058946156983993986456530667136828309504"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 2,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "63214216901176217842881926314402377942524858829525",
+        "187072209578355573530071658587684226515959365500928"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "63214216901176217842881926314402377942524858829525",
+            "187072209578355573530071658587684226515959365500928"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 141.80651474592742,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_0/receiving/leaves_512/verification.json",
+          "certificate_sha256": "12630b7303e7bb6827b08877da1b67c731ddda3223ecc22720ba0210f0257df1",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "63214216901176217842881926314402377942524858829525",
+            "187072209578355573530071658587684226515959365500928"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "63214216901176217842881926314402377942524858829525",
+                "187072209578355573530071658587684226515959365500928"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 320,
+            "outside": 28,
+            "unknown": 164
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 142.38542817195412,
+      "cpu_seconds": 142.252205,
+      "peak_rss_kib": 33480,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_0/protocol.json",
+          "sha256": "0bad08f50ef6b0a5f7c7ae9050b4b73c8b7700a2e35b2b65d983e112d4227b43"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_0/execution.json",
+          "sha256": "118815fbad73b3f3d01610ce02c9647e1d935e19839596a3b120e5a53256ed57"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_0/receiving/receipt.json",
+          "sha256": "37d17004948ca96beeed9294d77ca117297b5ac88531ba80609a97aad4c64aa0"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_0/receiving/leaves_512/verification.json",
+          "sha256": "dde09e67b686dc91b3fddb16f668679969fc3e32e22a5dd8f4339caa588d75d1"
+        }
+      }
+    },
+    {
+      "name": "original/straight_tube_narrow_dense/profile_1",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "d1c3902ceaaf11531990a659cee7c8bf3cd9a594782cdec37ea452da662ee16d",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "6837102936632438928635571155971563018418612823693483",
+          "150650441649280338332058946156983993986456530667136828309504"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 2,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "1302829592231558636030127505748049008815451358803625",
+        "5986310706507378352962293074805895248510699696029696"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "1302829592231558636030127505748049008815451358803625",
+            "5986310706507378352962293074805895248510699696029696"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 133.4700602539815,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_1/receiving/leaves_512/verification.json",
+          "certificate_sha256": "b4f75b7664267785680a1cd1cd7fc78596b3a122d175311168efb6add0b0413b",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "1302829592231558636030127505748049008815451358803625",
+            "5986310706507378352962293074805895248510699696029696"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "1302829592231558636030127505748049008815451358803625",
+                "5986310706507378352962293074805895248510699696029696"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 374,
+            "outside": 14,
+            "unknown": 124
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 134.03744329197798,
+      "cpu_seconds": 133.914341,
+      "peak_rss_kib": 33116,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_1/protocol.json",
+          "sha256": "fa1bf74fad0c209c29a21704265371504b427597f16c886a0a0e9648af2c26d5"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_1/execution.json",
+          "sha256": "df7333619b39958a9f4dcd8d831868dcdd59197f6fcc2353405d9619165bd843"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_1/receiving/receipt.json",
+          "sha256": "8df930a1d3c2676b05714e21bd53c19648205ef6829d7656dddcbc5b6ff807b8"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_1/receiving/leaves_512/verification.json",
+          "sha256": "13a4365f1f98cd88e205a38cdd5a8bd4202f81aae9c9fe5dd60d002cfeeff17d"
+        }
+      }
+    },
+    {
+      "name": "original/straight_tube_narrow_dense/profile_2",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "6837102936632438928635571155971563018418612823693483",
+          "150650441649280338332058946156983993986456530667136828309504"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 0,
+          "wall_seconds": 83.36081054899842,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_2/receiving/leaves_512/verification.json",
+          "certificate_sha256": "49df6ec7bf308247b08ce08d9f72088c84a992abf51e688911d9e31f4442be40",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "regions": [],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": "complete_empty_topology"
+        }
+      ],
+      "elapsed_seconds": 83.93148155498784,
+      "cpu_seconds": 83.837399,
+      "peak_rss_kib": 32064,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_2/protocol.json",
+          "sha256": "f889de41d01f7899927a3467dbb60c198dd0352539b5a4676636421b3e8fed1d"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_2/execution.json",
+          "sha256": "ba0f368c5830f4617e9b163796168c38303c6a1636f882e031aa68979b0028e1"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_2/receiving/receipt.json",
+          "sha256": "019cb23c9c897eeb8b28697694cd9e11113de330d0f0dce33f1e4071361b0d59"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_2/receiving/leaves_512/verification.json",
+          "sha256": "791efad4b84bcceb1b5858ed1cd39b4da4e05cf60c490bc66a40e940a317c496"
+        }
+      }
+    },
+    {
+      "name": "original/straight_tube_wide_sparse/profile_0",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "3ac4bf8411bde5f2ff01c5a9f3caf211cfebd2ca7c93edf2f1cad9e8b834ec0d",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "6620533166212162263949896980673976813709886370954005",
+          "50216813883093446110686315385661331328818843555712276103168"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 2,
+      "volume_lower": [
+        "812492948378746962340159026923967907549297249155",
+        "5846006549323611672814739330865132078623730171904"
+      ],
+      "volume_upper": [
+        "77186830095980961422315107557776951217183238669725",
+        "46768052394588893382517914646921056628989841375232"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "812492948378746962340159026923967907549297249155",
+            "5846006549323611672814739330865132078623730171904"
+          ],
+          "upper": [
+            "77186830095980961422315107557776951217183238669725",
+            "46768052394588893382517914646921056628989841375232"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 169.80123591900337,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_0/receiving/leaves_512/verification.json",
+          "certificate_sha256": "91921a0962084c8610770b6562911378f550b85d00c749fa924a5229648bf0a6",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "812492948378746962340159026923967907549297249155",
+            "5846006549323611672814739330865132078623730171904"
+          ],
+          "volume_upper": [
+            "77186830095980961422315107557776951217183238669725",
+            "46768052394588893382517914646921056628989841375232"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "812492948378746962340159026923967907549297249155",
+                "5846006549323611672814739330865132078623730171904"
+              ],
+              "upper": [
+                "77186830095980961422315107557776951217183238669725",
+                "46768052394588893382517914646921056628989841375232"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 24,
+            "blocked": 195,
+            "outside": 32,
+            "unknown": 261
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 172.93781690194737,
+      "cpu_seconds": 172.79319700000002,
+      "peak_rss_kib": 33872,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_0/protocol.json",
+          "sha256": "85fdcc4f1f563523151dae56031d500c1730c2055d856975412551a9cf826ccf"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_0/execution.json",
+          "sha256": "777d38392b8768e741c6f85d75b762b0d5818c71da9ff55b900dc36d53d44419"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_0/receiving/receipt.json",
+          "sha256": "fd9fb645a1d1ccaf3c502ef92aae3e06a213f1dc63db57ccebb5baadc5b5123e"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_0/receiving/leaves_512/verification.json",
+          "sha256": "f3bd914fa07a6e8b1a69304e28661bd23b8dac88d5624967caf52ad9351e6ff6"
+        }
+      }
+    },
+    {
+      "name": "original/straight_tube_wide_sparse/profile_1",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "356264c22973bc9bce6f93370b45d1b72fa97005baff6b5c2ddba5e340a310be",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "6620533166212162263949896980673976813709886370954005",
+          "50216813883093446110686315385661331328818843555712276103168"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 2,
+      "volume_lower": [
+        "812492948378746962340159026923967907549297249155",
+        "374144419156711147060143317175368453031918731001856"
+      ],
+      "volume_upper": [
+        "59853647197234359559058381650065635856131564021085",
+        "93536104789177786765035829293842113257979682750464"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "812492948378746962340159026923967907549297249155",
+            "374144419156711147060143317175368453031918731001856"
+          ],
+          "upper": [
+            "59853647197234359559058381650065635856131564021085",
+            "93536104789177786765035829293842113257979682750464"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 160.07292916392908,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_1/receiving/leaves_512/verification.json",
+          "certificate_sha256": "d9242c32cd33d7234f1746b1d404bc6e5b298d4dba9cb0f17743f56c0463c91b",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "812492948378746962340159026923967907549297249155",
+            "374144419156711147060143317175368453031918731001856"
+          ],
+          "volume_upper": [
+            "59853647197234359559058381650065635856131564021085",
+            "93536104789177786765035829293842113257979682750464"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "812492948378746962340159026923967907549297249155",
+                "374144419156711147060143317175368453031918731001856"
+              ],
+              "upper": [
+                "59853647197234359559058381650065635856131564021085",
+                "93536104789177786765035829293842113257979682750464"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 3,
+            "blocked": 357,
+            "outside": 20,
+            "unknown": 132
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 163.23714820400346,
+      "cpu_seconds": 162.40352199999998,
+      "peak_rss_kib": 33748,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_1/protocol.json",
+          "sha256": "7ecee1e36d3f0c2911cb1e0f98c481b9c51a54cfd958947de400ba75feea9e02"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_1/execution.json",
+          "sha256": "a85690c4a3bd95da635181208f4fd9ca0a0575d91db21c4be340a200023caed5"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_1/receiving/receipt.json",
+          "sha256": "0ff91e4544b8f095152cf2dfc2f9d911e5c94510f1c1a97eeb967c8c70f3b74b"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_1/receiving/leaves_512/verification.json",
+          "sha256": "31d716d6055f34003371b0536ebac85e3da690ad93be0342f08568f6c81b0a28"
+        }
+      }
+    },
+    {
+      "name": "original/straight_tube_wide_sparse/profile_2",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "ffcd86623d3afccc3b17e925ca6366dedf51afb689d1561e66796df0e8b284f5",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "6620533166212162263949896980673976813709886370954005",
+          "50216813883093446110686315385661331328818843555712276103168"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 0,
+          "wall_seconds": 90.78360895102378,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_2/receiving/leaves_512/verification.json",
+          "certificate_sha256": "c093101072e871f15ebd677ea0219646a0b41835e51f168a8a41bedd3187e194",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "regions": [],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": "complete_empty_topology"
+        }
+      ],
+      "elapsed_seconds": 93.93131769692991,
+      "cpu_seconds": 93.82301999999999,
+      "peak_rss_kib": 32396,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_2/protocol.json",
+          "sha256": "a63d2c25a63a5f43e4c3b4907dc70c250d8e739b244d8fcd11a872adecc4c4ab"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_2/execution.json",
+          "sha256": "f455e821f4e1059dc869bfdc9b438d2d4012d925ebc1088da8c717088d81891e"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_2/receiving/receipt.json",
+          "sha256": "85f7b5cc3339beb311be32c0f6d74fcfdcc3b926556d6ba2ec2a40c697558137"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_2/receiving/leaves_512/verification.json",
+          "sha256": "ba622ee830d20a2a402092444113fc6d7e42237def4654463de35694a57bef1f"
+        }
+      }
+    },
+    {
+      "name": "original/closed_shell/profile_0",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "3c37acab6497774b75afd03041ad332b030d9e3ac9368494eb911cf5c70abcf8",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "30166518936465615693197155390431984229245838347701735",
+          "602601766597121353328235784627935975945826122668547313238016"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 13,
+      "volume_lower": [
+        "391025234418692474653099606466906329606088613525",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "volume_upper": [
+        "30166518936465615693197155390431984229245838347701735",
+        "35917864239044270117773758448835371491064198176178176"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "391025234418692474653099606466906329606088613525",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "upper": [
+            "30166518936465615693197155390431984229245838347701735",
+            "35917864239044270117773758448835371491064198176178176"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 183.92875475704204,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_0/receiving/leaves_512/verification.json",
+          "certificate_sha256": "47098fa4ac2a0fb48ba5a0043ea0afeb0901efb26cdb8a806af837b83102ad40",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "391025234418692474653099606466906329606088613525",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "volume_upper": [
+            "30166518936465615693197155390431984229245838347701735",
+            "35917864239044270117773758448835371491064198176178176"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "391025234418692474653099606466906329606088613525",
+                "2923003274661805836407369665432566039311865085952"
+              ],
+              "upper": [
+                "30166518936465615693197155390431984229245838347701735",
+                "35917864239044270117773758448835371491064198176178176"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 40,
+            "blocked": 11,
+            "outside": 104,
+            "unknown": 357
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 196.13974862603936,
+      "cpu_seconds": 195.966057,
+      "peak_rss_kib": 32684,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_0/protocol.json",
+          "sha256": "f9be6cec209c9409f466d6adf018be6d18d1dd86b050f833511b0face306f4c8"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_0/execution.json",
+          "sha256": "f1baacf129cb5e27b14f6e5f87f640669cdeb0a8f8e6c3c720d69f786c92c8f4"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_0/receiving/receipt.json",
+          "sha256": "18fa0e964a6833d2afc1d34cbafb9b76887dc662cad8435cef10e00dde00ad8d"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_0/receiving/leaves_512/verification.json",
+          "sha256": "3a872c3d6f07e9f1b0be9aa1d81741a2ba7012314e05aa17a19053e9713b59b0"
+        }
+      }
+    },
+    {
+      "name": "original/closed_shell/profile_1",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "a8c2e9cd760a3b7d5eeb62f123668891b23cec7fa194de0adcd2cfc8fe976488",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "30166518936465615693197155390431984229245838347701735",
+          "602601766597121353328235784627935975945826122668547313238016"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "1329485797023554413820538661987481520660701285985",
+        "11692013098647223345629478661730264157247460343808"
+      ],
+      "volume_upper": [
+        "30166518936465615693197155390431984229245838347701735",
+        "35917864239044270117773758448835371491064198176178176"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "1329485797023554413820538661987481520660701285985",
+            "11692013098647223345629478661730264157247460343808"
+          ],
+          "upper": [
+            "30166518936465615693197155390431984229245838347701735",
+            "35917864239044270117773758448835371491064198176178176"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 170.7432143149199,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_1/receiving/leaves_512/verification.json",
+          "certificate_sha256": "c662a5f8603ddee53a95b3f07f8b659885e11dc41202fa3035599707a2dae4df",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "1329485797023554413820538661987481520660701285985",
+            "11692013098647223345629478661730264157247460343808"
+          ],
+          "volume_upper": [
+            "30166518936465615693197155390431984229245838347701735",
+            "35917864239044270117773758448835371491064198176178176"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "1329485797023554413820538661987481520660701285985",
+                "11692013098647223345629478661730264157247460343808"
+              ],
+              "upper": [
+                "30166518936465615693197155390431984229245838347701735",
+                "35917864239044270117773758448835371491064198176178176"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 34,
+            "blocked": 25,
+            "outside": 104,
+            "unknown": 349
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 183.0400945909787,
+      "cpu_seconds": 180.388438,
+      "peak_rss_kib": 32604,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_1/protocol.json",
+          "sha256": "a0c01853721ba702657a20d513a0d47523acf56762dbbaa6095dd4d9db6bafae"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_1/execution.json",
+          "sha256": "d09f05144b66d0c36185e3861d157c71a8d42ee4edb2d5d98ae71ab0aa076700"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_1/receiving/receipt.json",
+          "sha256": "fab73b92db1db6b68d23420a91db76b2afa79fedf34ab8dcb7c98511be914653"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_1/receiving/leaves_512/verification.json",
+          "sha256": "7b28c4c6ac38b1185c3cb0a90d091a5e328d75d148c2dfe0e9bc37cf1271db49"
+        }
+      }
+    },
+    {
+      "name": "original/closed_shell/profile_2",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "e5af397289bda4fb93d034ec8ff7d48930d1ca0518751fdbd46b4789e9a88fed",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "30166518936465615693197155390431984229245838347701735",
+          "602601766597121353328235784627935975945826122668547313238016"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "78205046883738494930619921293381265921217722705",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "volume_upper": [
+        "31047403612844182487456108753472362570723435913885",
+        "93536104789177786765035829293842113257979682750464"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "78205046883738494930619921293381265921217722705",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "upper": [
+            "31047403612844182487456108753472362570723435913885",
+            "93536104789177786765035829293842113257979682750464"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 157.41098060295917,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_2/receiving/leaves_512/verification.json",
+          "certificate_sha256": "84cc5f5c6322927410be6ac3aa247240081c530bf10055b0e60b2cee762772ab",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "78205046883738494930619921293381265921217722705",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "volume_upper": [
+            "31047403612844182487456108753472362570723435913885",
+            "93536104789177786765035829293842113257979682750464"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "78205046883738494930619921293381265921217722705",
+                "2923003274661805836407369665432566039311865085952"
+              ],
+              "upper": [
+                "31047403612844182487456108753472362570723435913885",
+                "93536104789177786765035829293842113257979682750464"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 8,
+            "blocked": 309,
+            "outside": 102,
+            "unknown": 93
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 169.58802242204547,
+      "cpu_seconds": 169.46044600000002,
+      "peak_rss_kib": 32444,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_2/protocol.json",
+          "sha256": "1f8493d056fba886b9ad9d879f672f51fd926db39704f166cfd1cb3ce96e64d7"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_2/execution.json",
+          "sha256": "64b6b8c23cf55853c13281b532c87c3d605dccdbc01890ec9c3c1a30c5acf4c1"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_2/receiving/receipt.json",
+          "sha256": "71eb10da1387625270907d78e4d82547783c0f292d6812331b7f82a71992efe1"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_2/receiving/leaves_512/verification.json",
+          "sha256": "d6cd2b1b0822100bfbdd66a1a42495ade063f302dccd959e6fd6f162c6c6d6da"
+        }
+      }
+    },
+    {
+      "name": "original/closed_shell/profile_3",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "ae9928dde59adc7533d964b5e9dc4bdc7dc114edeab5f6fce1fe0856dfe3f7f2",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "30166518936465615693197155390431984229245838347701735",
+          "602601766597121353328235784627935975945826122668547313238016"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 0,
+          "wall_seconds": 84.72115045995452,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_3/receiving/leaves_512/verification.json",
+          "certificate_sha256": "f61ea2e9c41e1339122cba7252b815212c0ab02fedc1d6c0d9dadc24d8bd5207",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "regions": [],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": "complete_empty_topology"
+        }
+      ],
+      "elapsed_seconds": 96.87819530698471,
+      "cpu_seconds": 96.788527,
+      "peak_rss_kib": 31300,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_3/protocol.json",
+          "sha256": "ad6f013a9e2cb85aad8c6dcec5bb4da4822fd183e986b29ad1da0b7dfe2fedaf"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_3/execution.json",
+          "sha256": "6a5d2b07ca19bd9a3bcdbfaace464b8fb2f575d299c01637377dff4b5e1dfb31"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_3/receiving/receipt.json",
+          "sha256": "225a7171d0b10e589096b0f4eae77aabd1b57c4b0ecf4c2a005d36d81d75fa86"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/closed_shell/profile_3/receiving/leaves_512/verification.json",
+          "sha256": "33c42f7caf405e209da859280ef85a41634a4576a4385805f3df939b2ac31249"
+        }
+      }
+    },
+    {
+      "name": "original/shell_with_opening/profile_0",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "0d3af6fd8ace1d2b6f04d25328d54a802d1f9d3c351558a328e68a91692ed493",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "9732314004506174705096074063151998594527833395968905",
+          "200867255532373784442745261542645325315275374222849104412672"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 1,
+      "volume_lower": [
+        "2871041972833127716472923425146484308147612061825",
+        "93536104789177786765035829293842113257979682750464"
+      ],
+      "volume_upper": [
+        "533439598552395129720669172392216784453826321087085",
+        "1496577676626844588240573268701473812127674924007424"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "2871041972833127716472923425146484308147612061825",
+            "93536104789177786765035829293842113257979682750464"
+          ],
+          "upper": [
+            "533439598552395129720669172392216784453826321087085",
+            "1496577676626844588240573268701473812127674924007424"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 139.5995844739955,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_0/receiving/leaves_512/verification.json",
+          "certificate_sha256": "d903f3b7546396cdda8aa2444880d5a933aba31696c2c1a73196b58985cbca73",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "2871041972833127716472923425146484308147612061825",
+            "93536104789177786765035829293842113257979682750464"
+          ],
+          "volume_upper": [
+            "533439598552395129720669172392216784453826321087085",
+            "1496577676626844588240573268701473812127674924007424"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "2871041972833127716472923425146484308147612061825",
+                "93536104789177786765035829293842113257979682750464"
+              ],
+              "upper": [
+                "533439598552395129720669172392216784453826321087085",
+                "1496577676626844588240573268701473812127674924007424"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 10,
+            "blocked": 307,
+            "outside": 88,
+            "unknown": 107
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 149.08791339909658,
+      "cpu_seconds": 145.598168,
+      "peak_rss_kib": 31712,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_0/protocol.json",
+          "sha256": "bffb22d21597259919a2d4c231696ec1da0baa63114ea0af42f70877c696e56f"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_0/execution.json",
+          "sha256": "559f304fd0e8833a375d5a665b59859af3063c6f928fd2222b42023d2b17a47b"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_0/receiving/receipt.json",
+          "sha256": "25380bdf906b7b32fcfa1f48864a9516cdcd5af86db055f47fa72f0a057f1679"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_0/receiving/leaves_512/verification.json",
+          "sha256": "2b0a1cee298895473d01d8209a9a76947d6684e0bc60d1e555b700afaec5d85a"
+        }
+      }
+    },
+    {
+      "name": "original/shell_with_opening/profile_1",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "534865be30e699a663ba37886b269e3885b745fed96d799decf5bd3c51758a82",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "9732314004506174705096074063151998594527833395968905",
+          "200867255532373784442745261542645325315275374222849104412672"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "44214046381630166833683020747255858345473225752105",
+        "11972621413014756705924586149611790497021399392059392"
+      ],
+      "volume_upper": [
+        "66033965375161937478877238778369139087395077421975",
+        "2993155353253689176481146537402947624255349848014848"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "44214046381630166833683020747255858345473225752105",
+            "11972621413014756705924586149611790497021399392059392"
+          ],
+          "upper": [
+            "66033965375161937478877238778369139087395077421975",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 135.3131789029576,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_1/receiving/leaves_512/verification.json",
+          "certificate_sha256": "80ee2efe0c12545459ad9e564c8acec8a2a743083695c4e50ceaa8234630da85",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "44214046381630166833683020747255858345473225752105",
+            "11972621413014756705924586149611790497021399392059392"
+          ],
+          "volume_upper": [
+            "66033965375161937478877238778369139087395077421975",
+            "2993155353253689176481146537402947624255349848014848"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "44214046381630166833683020747255858345473225752105",
+                "11972621413014756705924586149611790497021399392059392"
+              ],
+              "upper": [
+                "66033965375161937478877238778369139087395077421975",
+                "2993155353253689176481146537402947624255349848014848"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 35,
+            "blocked": 297,
+            "outside": 0,
+            "unknown": 180
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 144.78763567702845,
+      "cpu_seconds": 144.63113700000002,
+      "peak_rss_kib": 31400,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_1/protocol.json",
+          "sha256": "9c943d0f6913a99da91413a5596f9e5ea6a53f5ec9369372d7a5b449f569a485"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_1/execution.json",
+          "sha256": "c46a9ede6cfcd462d69bddcf30451c79bde526d09e89ef041e005fbf4602eeca"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_1/receiving/receipt.json",
+          "sha256": "8d3eeae83c2b385a815fec2b18f503238db9a0c6ee69d6baac7d425bcad69f12"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_1/receiving/leaves_512/verification.json",
+          "sha256": "140e77fa0c74aacd5c137a76255f41fff1af10680c8e6a7c546df5d101560fd5"
+        }
+      }
+    },
+    {
+      "name": "original/shell_with_opening/profile_2",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "502067b32fb31972e7b0510a3044dce12a48745f7a432c2b6037a1f209d06f4f",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "9732314004506174705096074063151998594527833395968905",
+          "200867255532373784442745261542645325315275374222849104412672"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 0,
+          "wall_seconds": 72.34491317206994,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_2/receiving/leaves_512/verification.json",
+          "certificate_sha256": "215b5f142f95bcc9c48530ee4aa09db5e4bc8227592707427019a2ff84a60b36",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "regions": [],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": "complete_empty_topology"
+        }
+      ],
+      "elapsed_seconds": 81.77789622393902,
+      "cpu_seconds": 81.69172,
+      "peak_rss_kib": 30684,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_2/protocol.json",
+          "sha256": "c7365d0e6fba8d343e67a8311f45575c66ae1dc2c3570279e81b85e3aabfaf2d"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_2/execution.json",
+          "sha256": "2755049f2e3e33e038855fbd71523a8e4080b07f811e80618d4e9f44f912c374"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_2/receiving/receipt.json",
+          "sha256": "e27f3e15f108c5d3f5c72486acdee471c34cdb842955fcb84f843d08743aae45"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_2/receiving/leaves_512/verification.json",
+          "sha256": "68167651a4d8432047c179f0d93db1a612c4aaa374f06f31cf1817831fc0f03f"
+        }
+      }
+    },
+    {
+      "name": "original/dumbbell/profile_0",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "859552951996342119360734190240810717792142808751095",
+          "4707826301540010572876842067405749812076766583348025884672"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 3,
+      "n_boundary_patches": 2,
+      "volume_lower": [
+        "138081809865290365167139298418149323303624859895",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "volume_upper": [
+        "859552951996342119360734190240810717792142808751095",
+        "280608314367533360295107487881526339773939048251392"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "138081809865290365167139298418149323303624859895",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "upper": [
+            "859552951996342119360734190240810717792142808751095",
+            "280608314367533360295107487881526339773939048251392"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "846297098249274244304688817592668382754994822201175",
+            "280608314367533360295107487881526339773939048251392"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "846297098249274244304688817592668382754994822201175",
+            "280608314367533360295107487881526339773939048251392"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 243.38091722596437,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_0/receiving/leaves_512/verification.json",
+          "certificate_sha256": "4827639322d511cb7ab8bd6b6c622e27fee52592f86df8680226968598eb9d8f",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "138081809865290365167139298418149323303624859895",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "volume_upper": [
+            "859552951996342119360734190240810717792142808751095",
+            "280608314367533360295107487881526339773939048251392"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "138081809865290365167139298418149323303624859895",
+                "2923003274661805836407369665432566039311865085952"
+              ],
+              "upper": [
+                "859552951996342119360734190240810717792142808751095",
+                "280608314367533360295107487881526339773939048251392"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-2",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "846297098249274244304688817592668382754994822201175",
+                "280608314367533360295107487881526339773939048251392"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-3",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "846297098249274244304688817592668382754994822201175",
+                "280608314367533360295107487881526339773939048251392"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 5,
+            "blocked": 118,
+            "outside": 48,
+            "unknown": 341
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 254.74940931098536,
+      "cpu_seconds": 254.516005,
+      "peak_rss_kib": 36352,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_0/protocol.json",
+          "sha256": "67e4b4eede5264dc6c71c6b1dc103df89a312711df36d4c35ca9e57dc31e43c7"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_0/execution.json",
+          "sha256": "cca42c9026a84f7e0930629128f9220c31d3bbcd01a10ca2f6084b4f6b57f19a"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_0/receiving/receipt.json",
+          "sha256": "179423da59dc9ecb008907a60a7e8a28599c2588ef5bc84c1f441ccd2b69ec52"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_0/receiving/leaves_512/verification.json",
+          "sha256": "b69a4666fac3db6009e2fb62fd30925a88aa8bab29fe278ad5bcf6aa051ffd37"
+        }
+      }
+    },
+    {
+      "name": "original/dumbbell/profile_1",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "dcb43b8b4deed59402599f559f244e6510b399606ed93b23c711e8bb1666161e",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "859552951996342119360734190240810717792142808751095",
+          "4707826301540010572876842067405749812076766583348025884672"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 2,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "3617743418470607567379049618555512270554971329249",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "3617743418470607567379049618555512270554971329249",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "3617743418470607567379049618555512270554971329249",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 236.08401073003188,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_1/receiving/leaves_512/verification.json",
+          "certificate_sha256": "58f9a70f641c096baf6037ee23e5dd44664aaab138df54671db3adaafc2699c6",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "3617743418470607567379049618555512270554971329249",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "3617743418470607567379049618555512270554971329249",
+                "2923003274661805836407369665432566039311865085952"
+              ],
+              "precision_status": "unresolved"
+            },
+            {
+              "region_id": "REG-2",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "3617743418470607567379049618555512270554971329249",
+                "2923003274661805836407369665432566039311865085952"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 333,
+            "outside": 48,
+            "unknown": 131
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 247.395355907036,
+      "cpu_seconds": 247.18364,
+      "peak_rss_kib": 35556,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_1/protocol.json",
+          "sha256": "4e6c76ea813c152134dea661796155f0f510d7f462b57fb41662b89d316386f9"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_1/execution.json",
+          "sha256": "02d004f174f99ed5cd9f0ba20470367d7abad1abd007e6729b7b879dd3fc1cb4"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_1/receiving/receipt.json",
+          "sha256": "29330573102ad4cb463c915f7a99b0638e056e486e252f4eb4d15ea183194d56"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_1/receiving/leaves_512/verification.json",
+          "sha256": "23daf0963512f8567189b6f208a151062684943817bc00973a82b7d083989888"
+        }
+      }
+    },
+    {
+      "name": "original/dumbbell/profile_2",
+      "category": "original",
+      "k": 24,
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "859552951996342119360734190240810717792142808751095",
+          "4707826301540010572876842067405749812076766583348025884672"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "precision_status": "resolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 0,
+          "wall_seconds": 134.67053457407746,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_2/receiving/leaves_512/verification.json",
+          "certificate_sha256": "e58ff264a7020e3c914453679eca2be5a716d77e8881628509e14cf6ef909754",
+          "total_precision_status": "resolved",
+          "precision_status": "resolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "0",
+            "1"
+          ],
+          "regions": [],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 0
+          },
+          "exact_shortcut": "complete_empty_topology"
+        }
+      ],
+      "elapsed_seconds": 146.13302544807084,
+      "cpu_seconds": 145.99600300000003,
+      "peak_rss_kib": 34524,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_2/protocol.json",
+          "sha256": "e1017d12fd9234690b35420dd12a49ab624b20d91f1b27a0124758669ab884b6"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_2/execution.json",
+          "sha256": "d51ea4f3bfa114ee9b49d6b1138fd33993d7f3655f4c4a1f8d4fc4f9f44df43c"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_2/receiving/receipt.json",
+          "sha256": "e2a2b329d210a32e27aff4667ac81122cc618aea10bbef779ece0c6c2e8242ab"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_2/receiving/leaves_512/verification.json",
+          "sha256": "5983872cea72e357cdfdb95241c968bac7c3f378bb17bf241998a0bf844253ce"
+        }
+      }
+    },
+    {
+      "name": "refinement/regular_tetrahedron_1_4",
+      "category": "refinement",
+      "k": 24,
+      "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+      "method": "adaptive_boxes",
+      "request": {
+        "schema": "topomt.reference-validator.volume-request/1",
+        "volume_unit": "nm**3",
+        "absolute_tolerance": [
+          "38463776803236130720331542115778415558917425179",
+          "36779892980781332600600328651607420406849738932406452224"
+        ],
+        "relative_unit": "dimensionless",
+        "relative_tolerance": [
+          "1",
+          "16777216"
+        ]
+      },
+      "n_components": 1,
+      "n_boundary_patches": 0,
+      "volume_lower": [
+        "14270061194000604497243002124953792172358364741409",
+        "766247770432944429179173513575154591809369561091801088"
+      ],
+      "volume_upper": [
+        "187895549683808498568819583235577560005311621999415",
+        "1532495540865888858358347027150309183618739122183602176"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "14270061194000604497243002124953792172358364741409",
+            "766247770432944429179173513575154591809369561091801088"
+          ],
+          "upper": [
+            "187895549683808498568819583235577560005311621999415",
+            "1532495540865888858358347027150309183618739122183602176"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "precision_status": "unresolved",
+      "steps": [
+        {
+          "step_leaf_ceiling": 1,
+          "leaf_count": 1,
+          "wall_seconds": 0.13155624095816165,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_1/verification.json",
+          "certificate_sha256": "35fd90390a20f9c19b1ba35081d53e95a431889c9a793013920b5a7d391ea6f7",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "38463776803236130720331542115778415558917425179",
+                "2192252455996354377305527249074424529483898814464"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 1
+          },
+          "exact_shortcut": null
+        },
+        {
+          "step_leaf_ceiling": 8,
+          "leaf_count": 8,
+          "wall_seconds": 0.24560920207295567,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_8/verification.json",
+          "certificate_sha256": "ed6da929a50e518995eb6fea9d05bd8691c9b0dda8f900b0650e2db2600a9f03",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "38463776803236130720331542115778415558917425179",
+                "2192252455996354377305527249074424529483898814464"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 0,
+            "outside": 0,
+            "unknown": 8
+          },
+          "exact_shortcut": null
+        },
+        {
+          "step_leaf_ceiling": 64,
+          "leaf_count": 64,
+          "wall_seconds": 0.37235602806322277,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_64/verification.json",
+          "certificate_sha256": "cab4a826d3aa633b561590a1bb21b10461e6b96503f07fca92081aa409b96439",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "38463776803236130720331542115778415558917425179",
+                "2192252455996354377305527249074424529483898814464"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 28,
+            "outside": 4,
+            "unknown": 32
+          },
+          "exact_shortcut": null
+        },
+        {
+          "step_leaf_ceiling": 512,
+          "leaf_count": 512,
+          "wall_seconds": 1.3310775610152632,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_512/verification.json",
+          "certificate_sha256": "a0dd968efe7d4c6ec92cd395bb442f9088c8e770ab58aaedb7346c197c303c75",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "0",
+            "1"
+          ],
+          "volume_upper": [
+            "3730986349913904679872159585230506309214990242363",
+            "1496577676626844588240573268701473812127674924007424"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "0",
+                "1"
+              ],
+              "upper": [
+                "3730986349913904679872159585230506309214990242363",
+                "1496577676626844588240573268701473812127674924007424"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 0,
+            "blocked": 278,
+            "outside": 152,
+            "unknown": 82
+          },
+          "exact_shortcut": null
+        },
+        {
+          "step_leaf_ceiling": 4096,
+          "leaf_count": 4096,
+          "wall_seconds": 13.898160699056461,
+          "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_4096/verification.json",
+          "certificate_sha256": "b5ae5752560cd485fd1407da5b46368b0151ba33aa29d4320d4b151595aeba58",
+          "total_precision_status": "unresolved",
+          "precision_status": "unresolved",
+          "volume_lower": [
+            "14270061194000604497243002124953792172358364741409",
+            "766247770432944429179173513575154591809369561091801088"
+          ],
+          "volume_upper": [
+            "187895549683808498568819583235577560005311621999415",
+            "1532495540865888858358347027150309183618739122183602176"
+          ],
+          "regions": [
+            {
+              "region_id": "REG-1",
+              "lower": [
+                "14270061194000604497243002124953792172358364741409",
+                "766247770432944429179173513575154591809369561091801088"
+              ],
+              "upper": [
+                "187895549683808498568819583235577560005311621999415",
+                "1532495540865888858358347027150309183618739122183602176"
+              ],
+              "precision_status": "unresolved"
+            }
+          ],
+          "leaf_states": {
+            "free": 182,
+            "blocked": 2507,
+            "outside": 288,
+            "unknown": 1119
+          },
+          "exact_shortcut": null
+        }
+      ],
+      "elapsed_seconds": 16.120979266008362,
+      "cpu_seconds": 16.038575,
+      "peak_rss_kib": 26008,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/protocol.json",
+          "sha256": "5cc6d03510bd6957d21d84b0b72b2b29833952f1553cc071b42b23ea12bd548f"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/execution.json",
+          "sha256": "b45c72a84be5d15f065da28628f20fced3231951a81389a30c5fef05c02b767c"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/receipt.json",
+          "sha256": "39635dffed56375fa55c276091703cea87993653fc6e9791609d3d8ebe12a9f7"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_4096/verification.json",
+          "sha256": "4eeb3d8a4a4a15255bfacb6d9be7f31abf22d086bfd57729aee73754dd5d5966"
+        }
+      }
+    }
+  ],
+  "scope": "Certified total/per-region enclosures for all original Models; requested k=24 remains separately resolved or unresolved. No positive region is removed for a zero coarse lower bound.",
+  "control_totals": {
+    "count": 9,
+    "wall_seconds": 5.765189022175036,
+    "cpu_seconds": 5.394519,
+    "peak_rss_kib": 23944,
+    "precision_passes": 6
+  },
+  "original_totals": {
+    "count": 19,
+    "wall_seconds": 2462.845354760997,
+    "cpu_seconds": 2453.955703,
+    "peak_rss_kib": 36352,
+    "precision_passes": 6
+  },
+  "refinement_totals": {
+    "count": 1,
+    "wall_seconds": 16.120979266008362,
+    "cpu_seconds": 16.038575,
+    "peak_rss_kib": 26008,
+    "precision_passes": 0
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schema": "topomt.reference-validator.region-volume-receiving/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T01:56:01.462126+00:00",
+  "protocol_sha256": "4e6c76ea813c152134dea661796155f0f510d7f462b57fb41662b89d316386f9",
+  "source_revision": "4573dbe0000b0cfb80c08f086852a5d9c6a15c88",
+  "runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "model_sha256": "dcb43b8b4deed59402599f559f244e6510b399606ed93b23c711e8bb1666161e",
+  "topology_certificate_sha256": "ffd1e6e5cae2b2354e25aeff7b3d2fab8d67ec50c23fe2ee75706139cbb09684",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "859552951996342119360734190240810717792142808751095",
+      "4707826301540010572876842067405749812076766583348025884672"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "16777216"
+    ]
+  },
+  "k": 24,
+  "method": "adaptive_boxes",
+  "steps": [
+    {
+      "step_leaf_ceiling": 512,
+      "leaf_count": 512,
+      "wall_seconds": 236.08401073003188,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_1/receiving/leaves_512/verification.json",
+      "certificate_sha256": "58f9a70f641c096baf6037ee23e5dd44664aaab138df54671db3adaafc2699c6",
+      "total_precision_status": "unresolved",
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "3617743418470607567379049618555512270554971329249",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "3617743418470607567379049618555512270554971329249",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "3617743418470607567379049618555512270554971329249",
+            "2923003274661805836407369665432566039311865085952"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 333,
+        "outside": 48,
+        "unknown": 131
+      },
+      "exact_shortcut": null
+    }
+  ],
+  "elapsed_seconds": 247.243767293985,
+  "peak_rss_kib_linux": 35556,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "Certified total/per-region bounds under the frozen requested tolerance; valid bounds do not imply requested precision.",
+  "files": {
+    "leaves_512/certificate.json": "8801572d0c002436657819112ec75456f9ce36057d690f6d9c01d5ee2b2df7f1",
+    "leaves_512/model.json": "dab53eb2ad12d7c44fa0d510d169f3aff9a1e860e72984e8b3e255f4db7b2f7a",
+    "leaves_512/MANIFEST.json": "6f429e6a27718dfd43dfb2a471abb20e0b5ce829f1e34e4d4cc56852ee9898f4",
+    "leaves_512/verification.json": "23daf0963512f8567189b6f208a151062684943817bc00973a82b7d083989888"
+  }
+}

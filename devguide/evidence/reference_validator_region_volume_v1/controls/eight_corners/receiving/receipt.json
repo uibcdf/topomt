@@ -1,0 +1,163 @@
+{
+  "schema": "topomt.reference-validator.region-volume-receiving/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T01:17:18.228041+00:00",
+  "protocol_sha256": "b237920c935762c22d4e3df02e82bd40916a10229bcf13df7c09f458901599f8",
+  "source_revision": "4573dbe0000b0cfb80c08f086852a5d9c6a15c88",
+  "runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "model_sha256": "00cb86115bc66558632f4b42e7a7d2bc15031a5bc38a96a865a726a3e42fbda1",
+  "topology_certificate_sha256": "61756e5746d8da4fefff6be5f66deea53931880545632731c06d9c14e1d53200",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "1",
+      "2097152"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "16777216"
+    ]
+  },
+  "k": 24,
+  "method": "adaptive_boxes",
+  "steps": [
+    {
+      "step_leaf_ceiling": 512,
+      "leaf_count": 512,
+      "wall_seconds": 1.2931798440404236,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/eight_corners/receiving/leaves_512/verification.json",
+      "certificate_sha256": "89b311f1ff7a4754bfc24ba270ab212860c6466ec2e840ea40b6e564cc67c977",
+      "total_precision_status": "unresolved",
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "5",
+        "256"
+      ],
+      "volume_upper": [
+        "597",
+        "2048"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "5",
+            "1024"
+          ],
+          "upper": [
+            "567",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-2",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-3",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-4",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-5",
+          "lower": [
+            "3",
+            "1024"
+          ],
+          "upper": [
+            "563",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-6",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-7",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        },
+        {
+          "region_id": "REG-8",
+          "lower": [
+            "1",
+            "512"
+          ],
+          "upper": [
+            "561",
+            "2048"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 24,
+        "blocked": 270,
+        "outside": 0,
+        "unknown": 218
+      },
+      "exact_shortcut": null
+    }
+  ],
+  "elapsed_seconds": 1.300706391921267,
+  "peak_rss_kib_linux": 22028,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "Certified total/per-region bounds under the frozen requested tolerance; valid bounds do not imply requested precision.",
+  "files": {
+    "leaves_512/certificate.json": "38be018631df3dc09d208f602bad16d333505312333643bc6b166e3bcaaa3995",
+    "leaves_512/model.json": "d7cb2f57897daab274925fdafb2eb3ae0aa8e1e822e0247ea3ba2580edcfd7b5",
+    "leaves_512/MANIFEST.json": "d16e714332baecf563a54af6c817552885ab58cd9b0061ce5a7a656b93a8381b",
+    "leaves_512/verification.json": "08edf165ad5672cf52b62f6f70cbb9dac4fda7625473c0135202233a279217c7"
+  }
+}

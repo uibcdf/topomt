@@ -1,0 +1,168 @@
+{
+  "recorded_at_utc": "2026-11-15T01:58:28.028939+00:00",
+  "source_revision": "4573dbe0000b0cfb80c08f086852a5d9c6a15c88",
+  "protocol_sha256": "5cc6d03510bd6957d21d84b0b72b2b29833952f1553cc071b42b23ea12bd548f",
+  "worker_sha256": "7ac2d601f0b63e4c3c470b6e07e49f36792acc6d2f773b8535c923093874c0fb",
+  "resource_policy": {
+    "cpu_count": 1,
+    "address_space_limit_bytes": 2147483648,
+    "cpu_soft_seconds": 420,
+    "cpu_hard_seconds": 450,
+    "wall_seconds": 540
+  },
+  "cpu_affinity": [
+    0
+  ],
+  "host_samples": [
+    {
+      "elapsed_seconds": 0,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50110876
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.46630859375,
+          1.4375,
+          1.4638671875
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 5.003785946988501,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50099656
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.50927734375,
+          1.447265625,
+          1.466796875
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 10.004463567980565,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50098260
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.46826171875,
+          1.439453125,
+          1.4638671875
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 15.0049630360445,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50096328
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.4306640625,
+          1.43212890625,
+          1.4609375
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 16.120242528035305,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50110348
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.4306640625,
+          1.43212890625,
+          1.4609375
+        ]
+      }
+    }
+  ],
+  "supervisor_source": "import hashlib,json,os,resource,signal,subprocess,sys,time\nfrom datetime import datetime,timezone\nfrom pathlib import Path\nfrom devtools.reference_validator.benchlab_panel import _host\n\nroot=Path.cwd();protocol=root/sys.argv[1];base=protocol.parent;spec=json.loads(protocol.read_text());policy=spec['resources']\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nfor name in ['OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS','RAYON_NUM_THREADS','NUMBA_NUM_THREADS']:\n os.environ[name]='1'\nos.environ['NUMBA_CACHE_DIR']='/tmp/topomt-validator-native-cache-v1'\nos.environ['MPLCONFIGDIR']='/tmp/topomt-validator-mpl-v1'\nhost=_host();assert host['safe'],'Insufficient conservative host reserve'\nsource=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()\nassert not subprocess.check_output(['git','status','--porcelain','--','devtools/reference_validator'],text=True).strip()\nassert hashlib.sha256(spec['worker_source'].encode()).hexdigest()==spec['worker_sha256']\ndef limits():\n resource.setrlimit(resource.RLIMIT_AS,(policy['address_space_limit_bytes'],policy['address_space_limit_bytes']))\n resource.setrlimit(resource.RLIMIT_CPU,(policy['cpu_soft_seconds'],policy['cpu_hard_seconds']))\noutput=base/'receiving'\ncommand=[sys.executable,'-c',spec['worker_source'],str(protocol),str(output)]\nrecord={'recorded_at_utc':datetime.now(timezone.utc).isoformat(),'source_revision':source,'protocol_sha256':hashlib.sha256(protocol.read_bytes()).hexdigest(),'worker_sha256':spec['worker_sha256'],'resource_policy':policy,'cpu_affinity':sorted(os.sched_getaffinity(0)),'host_samples':[{'elapsed_seconds':0,'host':host}],'supervisor_source':Path(__file__).read_text()}\nbegin=time.perf_counter();before=resource.getrusage(resource.RUSAGE_CHILDREN);reason=None;termination=None\nwith (base/'execution.log').open('xb') as log:\n p=subprocess.Popen(command,stdout=log,stderr=log,preexec_fn=limits,start_new_session=True)\n while p.poll() is None:\n  try:p.wait(timeout=5)\n  except subprocess.TimeoutExpired:pass\n  elapsed=time.perf_counter()-begin;host=_host();record['host_samples'].append({'elapsed_seconds':elapsed,'host':host})\n  if not termination and (not host['safe'] or elapsed>policy['wall_seconds']):\n   reason='host_pressure' if not host['safe'] else 'wall_limit';p.send_signal(signal.SIGTERM);termination=time.perf_counter()\n  if termination and time.perf_counter()-termination>30 and p.poll() is None:os.killpg(p.pid,signal.SIGKILL)\n end=p.wait()\nafter=resource.getrusage(resource.RUSAGE_CHILDREN)\nrecord.update(exit_code=end,stop_reason=reason,elapsed_seconds=time.perf_counter()-begin,child_cpu_seconds=after.ru_utime+after.ru_stime-before.ru_utime-before.ru_stime,peak_child_rss_kib_linux=after.ru_maxrss,receiving_status='completed' if end==0 and (output/'receipt.json').is_file() else 'incomplete',log_sha256=hashlib.sha256((base/'execution.log').read_bytes()).hexdigest())\nrecord['files']={str(p.relative_to(base)):hashlib.sha256(p.read_bytes()).hexdigest() for p in output.rglob('*.json')}\nwith (base/'execution.json').open('x') as stream:json.dump(record,stream,indent=2);stream.write('\\n')\nprint(json.dumps({'protocol':str(protocol.relative_to(root)),**{k:v for k,v in record.items() if k not in ['host_samples','supervisor_source','files']}}),flush=True)\nif end:print((base/'execution.log').read_text()[-3000:]);raise SystemExit(end)\n",
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 16.120979266008362,
+  "child_cpu_seconds": 16.038575,
+  "peak_child_rss_kib_linux": 26008,
+  "receiving_status": "completed",
+  "log_sha256": "6f10eb14fb1c6dfa5ed1a576611fda371b8de038f61fff32a1124c5ac04c5780",
+  "files": {
+    "receiving/receipt.json": "39635dffed56375fa55c276091703cea87993653fc6e9791609d3d8ebe12a9f7",
+    "receiving/leaves_512/certificate.json": "883cb261bf67dab913114951649dbb37543d635ccd20d9b96876a972fc467e5b",
+    "receiving/leaves_512/transition.json": "2bce6382c5a535451577c51d3b4f86c68d0f32e8effd814243d821a2d26b3f19",
+    "receiving/leaves_512/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "receiving/leaves_512/MANIFEST.json": "90f1be69f408ae96ac9024fb2da5fd7308e3007b16273d964e8c0864ec59059b",
+    "receiving/leaves_512/verification.json": "692c1e57bf8f88ab70aaf5032ef7b251747225d70d8b22cefc03e2a7353a36a3",
+    "receiving/leaves_1/certificate.json": "58c5b966e6bc579834842f9380240a46ab26100bc6fa935f2787fad54ace6dd8",
+    "receiving/leaves_1/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "receiving/leaves_1/MANIFEST.json": "2825fc6862a0958638fc6e6a049aff78a6ead20e19fea0fcd679b2e825418996",
+    "receiving/leaves_1/verification.json": "e99ec8dbf592cd5a31a15182e1c5bfd870f4df55ffc7983475943284386a4eb6",
+    "receiving/leaves_4096/certificate.json": "f1ec1913705c8438b294d03f6cf9721f0edac76b076a644f71936d922d69b81b",
+    "receiving/leaves_4096/transition.json": "a45c6e026079ae7aef47d960fb28fe0e7cb698784489980eef13e111ac400efb",
+    "receiving/leaves_4096/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "receiving/leaves_4096/MANIFEST.json": "971472853d690bb55fefeed086018d4ab7e0f5e64c939db73ecba238c20b9dda",
+    "receiving/leaves_4096/verification.json": "4eeb3d8a4a4a15255bfacb6d9be7f31abf22d086bfd57729aee73754dd5d5966",
+    "receiving/leaves_8/certificate.json": "d6bb8b5f1221c5addb9713415b1320291f9e62eeaf511df547cb4df5d4c3cae6",
+    "receiving/leaves_8/transition.json": "00710b2097511834ddbd13f5267b60e200a9af206badc5014ce3a1dcf6710bbd",
+    "receiving/leaves_8/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "receiving/leaves_8/MANIFEST.json": "855d90fff3cf23b420d8d2d0d560d267f9157feb1a785793cce5b0b2376b2ba8",
+    "receiving/leaves_8/verification.json": "e2e8a636f0d391246c210494c2bb0d8a1ef963b83b9469ace98927f0631d60f8",
+    "receiving/leaves_64/certificate.json": "ad67f0d3824197b71febc63d5ef9c038300b89ee3dae038512e774e746643ff4",
+    "receiving/leaves_64/transition.json": "09b57150ef9b43183d82df6b4b7f219a1e25dbbae2a6408224abbd7549601d45",
+    "receiving/leaves_64/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "receiving/leaves_64/MANIFEST.json": "7d6fa581d7a656144a793a3e5ca80435105f94e6543ef13cfa5489e8dc454b88",
+    "receiving/leaves_64/verification.json": "49a2acef93e5e4edf1d348c59a827533d2b75986f1a6e8a61942aeb5bedca6ce"
+  }
+}

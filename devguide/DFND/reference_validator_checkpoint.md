@@ -12,6 +12,51 @@ complete topology-plus-precision validator or a supported public TopoMT detector
 
 ## Selected improvement workplan — 2026-11-14
 
+### Retained original region-volume receiving — 2026-11-15 UTC
+
+The [frozen panel and retained summary](../evidence/reference_validator_region_volume_v1/summary.json)
+now complete all 29 jobs at `4573dbe0000b0cfb80c08f086852a5d9c6a15c88`:
+nine controls, nineteen original profiles and a five-state saved refinement
+pilot. Every original profile has independently checked total/per-region
+enclosures. The six excluded profiles certify exactly zero and meet k=24;
+**all thirteen nonempty profiles, containing sixteen regions, retain unresolved
+requested precision**. The original request remains absolute `V(D)*2^-24` and
+relative `2^-24`, both required for the total and each region.
+
+The analytic contained-ball control passes k=8/16/24/32 with its independently
+proved single-region assignment. Exact full/empty controls pass. Conservative
+eight-corner, tiny-corner and asymmetric three-region controls retain all
+components and valid bounds, with precision unresolved. The original tetrahedron
+1.4 Å pilot saves/reloads/checks transitions at ceilings 1/8/64/512/4096;
+verified bounds nest, but the final target still fails. This measured slow
+boundary convergence motivates the separate clipped-boundary feasibility
+control, without increasing the original grid indiscriminately or weakening
+the target. General original-hull precision and P5 remain open under #76.
+
+Original volume workers take 2462.845 wall / 2453.956 CPU seconds, peak RSS
+36,352 KiB; controls take 5.765 wall / 5.395 CPU seconds, peak RSS 23,944 KiB;
+the saved pilot takes 16.121 wall / 16.039 CPU seconds, peak RSS 26,008 KiB.
+Every completed worker uses one CPU and 2 GiB with finite 420 soft/450 hard
+CPU-second and 540 wall-second ceilings, and sampled host reserve remains safe.
+The separate first 0.167-second contained-control attempt fails in harness
+relative-path recording, after saving a valid bundle. Its raw incomplete
+attempt is retained under `failed_relative_path_attempt`; invoking the unchanged
+frozen worker with absolute paths completes the new attempt. It is not a
+scientific failure, physical result or precision pass.
+
+### Native matching gate: distinct receiving paths
+
+The first fresh molecular narrow-tube receiving does not match the frozen
+reference coordinates exactly and is retained as an incomplete comparison.
+No tolerance is substituted. A frozen diagnostic will retain the actual
+spheres and identify the numerical conversion route. The
+[explicit-nm replay protocols](../evidence/reference_validator_native_comparison_v1/matched_plan.json)
+then receive the original canonical nm QuantityRecord through the public
+molecular entry point. Only exact equality of the actual native arrays, radii,
+probe, source IDs and reference Model admits comparison. This is a new receiving
+route; original public observations and its failed matching attempt remain
+separate history. Native operators/promotion policy are unchanged.
+
 ### Complete remaining topology receiving — 2026-11-15 UTC
 
 All ten frozen targets complete at `2cd59a0c30c8e001a7ce748825bb528d5f5bcf61`.

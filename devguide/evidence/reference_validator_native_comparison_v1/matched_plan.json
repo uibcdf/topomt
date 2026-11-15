@@ -1,0 +1,17 @@
+{
+  "owner": "uibcdf/topomt#181",
+  "jobs": [
+    {
+      "name": "straight_tube_narrow_dense",
+      "protocol": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/matched_nm_replay/protocol.json",
+      "sha256": "0c4ba15c8a472ea605348e63ef083f89dd1eab35c3ccdd29acadf5dab7f6bfcd"
+    },
+    {
+      "name": "straight_tube_wide_sparse",
+      "protocol": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/matched_nm_replay/protocol.json",
+      "sha256": "631770010928a8c50e9e75db729e6c7b0545ed99b522b85ed85dacbda7886e88"
+    }
+  ],
+  "original_plan": "plan.json",
+  "scope": "Fresh exact normalized-model public receiving, separate from the older case molecular receiving. No near-equality tolerance or modified reference."
+}

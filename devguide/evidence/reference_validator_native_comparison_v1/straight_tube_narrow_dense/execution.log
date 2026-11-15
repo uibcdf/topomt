@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "<string>", line 43, in <module>
+    assert [a.center for a in atoms] == [a.center for a in reference.atoms]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

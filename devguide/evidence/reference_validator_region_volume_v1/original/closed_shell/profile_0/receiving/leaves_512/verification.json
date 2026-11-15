@@ -1,0 +1,47 @@
+{
+  "model_sha256": "3c37acab6497774b75afd03041ad332b030d9e3ac9368494eb911cf5c70abcf8",
+  "certificate_sha256": "47098fa4ac2a0fb48ba5a0043ea0afeb0901efb26cdb8a806af837b83102ad40",
+  "topology_certificate_sha256": "9006be234f52adcd06d1fa47e00f54438b30c0f504d0376bb23b561b69dff6a0",
+  "topology_complete": true,
+  "topology_status": "resolved",
+  "n_components": 1,
+  "n_boundary_patches": 13,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "volume_lower": [
+    "391025234418692474653099606466906329606088613525",
+    "2923003274661805836407369665432566039311865085952"
+  ],
+  "volume_upper": [
+    "30166518936465615693197155390431984229245838347701735",
+    "35917864239044270117773758448835371491064198176178176"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "lower": [
+        "391025234418692474653099606466906329606088613525",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "upper": [
+        "30166518936465615693197155390431984229245838347701735",
+        "35917864239044270117773758448835371491064198176178176"
+      ],
+      "precision_status": "unresolved"
+    }
+  ],
+  "volume_enclosure_status": "resolved",
+  "total_precision_status": "unresolved",
+  "precision_status": "unresolved",
+  "stop_reason": "integration_envelope",
+  "leaf_states": {
+    "free": 40,
+    "blocked": 11,
+    "outside": 104,
+    "unknown": 357
+  },
+  "method": "adaptive_boxes",
+  "exact_shortcut": null,
+  "lineage_status": "not_checked"
+}

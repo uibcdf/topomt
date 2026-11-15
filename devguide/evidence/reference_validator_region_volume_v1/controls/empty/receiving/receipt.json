@@ -1,0 +1,66 @@
+{
+  "schema": "topomt.reference-validator.region-volume-receiving/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T01:17:16.327238+00:00",
+  "protocol_sha256": "2a132b9509df94e3abc6fdf275d8d32e8f4d6b947f4faf0265a586fa951ae5a6",
+  "source_revision": "4573dbe0000b0cfb80c08f086852a5d9c6a15c88",
+  "runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "model_sha256": "1637573d87b8dfa468f051a46034ae3fd47c7c2718397a85038d7c6c54f2c419",
+  "topology_certificate_sha256": "b63b340add3a866b1df6086cf92eb5a681b5311293ac1f353fd91df30bced333",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "1",
+      "2097152"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "16777216"
+    ]
+  },
+  "k": 24,
+  "method": "adaptive_boxes",
+  "steps": [
+    {
+      "step_leaf_ceiling": 512,
+      "leaf_count": 0,
+      "wall_seconds": 0.024237376055680215,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/controls/empty/receiving/leaves_512/verification.json",
+      "certificate_sha256": "010226ec1e2b82138620fc92116ba4a4b9aa6893b4083e998b0e1523bc8e7990",
+      "total_precision_status": "resolved",
+      "precision_status": "resolved",
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 0,
+        "outside": 0,
+        "unknown": 0
+      },
+      "exact_shortcut": "complete_empty_topology"
+    }
+  ],
+  "elapsed_seconds": 0.030572638963349164,
+  "peak_rss_kib_linux": 21708,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "Certified total/per-region bounds under the frozen requested tolerance; valid bounds do not imply requested precision.",
+  "files": {
+    "leaves_512/certificate.json": "d322d285403563caef9c7a702aebf76805fec1322223264e97c300df527b0f9b",
+    "leaves_512/model.json": "d6b4d1d02f578edf06ac6ed17f007ecb8cd034c09c1197d4a45af2a688b9d0f8",
+    "leaves_512/MANIFEST.json": "31e253317ddfff9adbedbef588c4539380519be02dd0938c23275d920d8a0129",
+    "leaves_512/verification.json": "2093f5449265754fd2a56e755e9a2d19675704dbd9d21d0cfd8368c97457efc8"
+  }
+}

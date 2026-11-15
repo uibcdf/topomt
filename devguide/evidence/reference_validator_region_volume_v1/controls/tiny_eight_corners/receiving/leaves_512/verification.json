@@ -1,0 +1,131 @@
+{
+  "model_sha256": "b1e4cfb2d2d0980074503a1bf8685e9995e4927dc0d3c318fbd12b56e86447c7",
+  "certificate_sha256": "32e1e1fb491685af2e95656042e94850a6578af6ad6b49801bf46cf0b3df97fd",
+  "topology_certificate_sha256": "b06ddeb7288f0cc847492ee424cf0d6b8585504d2fae286e7b0daf9a456b6f9a",
+  "topology_complete": true,
+  "topology_status": "resolved",
+  "n_components": 8,
+  "n_boundary_patches": 8,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "volume_lower": [
+    "0",
+    "1"
+  ],
+  "volume_upper": [
+    "1",
+    "16777216"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "1",
+        "16777216"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-2",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "1",
+        "16777216"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-3",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "1",
+        "16777216"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-4",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "1",
+        "16777216"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-5",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "1",
+        "16777216"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-6",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "1",
+        "16777216"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-7",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "1",
+        "16777216"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-8",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "1",
+        "16777216"
+      ],
+      "precision_status": "unresolved"
+    }
+  ],
+  "volume_enclosure_status": "resolved",
+  "total_precision_status": "unresolved",
+  "precision_status": "unresolved",
+  "stop_reason": "integration_envelope",
+  "leaf_states": {
+    "free": 0,
+    "blocked": 504,
+    "outside": 0,
+    "unknown": 8
+  },
+  "method": "adaptive_boxes",
+  "exact_shortcut": null,
+  "lineage_status": "not_checked"
+}

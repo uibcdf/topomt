@@ -1,0 +1,66 @@
+{
+  "schema": "topomt.reference-validator.region-volume-receiving/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T01:23:25.932975+00:00",
+  "protocol_sha256": "f889de41d01f7899927a3467dbb60c198dd0352539b5a4676636421b3e8fed1d",
+  "source_revision": "4573dbe0000b0cfb80c08f086852a5d9c6a15c88",
+  "runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "model_sha256": "fe099dc976d866f81ab0f4e2814f1dd4ad9e70abd83d18fa2b13a836abead3b7",
+  "topology_certificate_sha256": "48b11bcfbdd05d6a9e5ecd05f2fb35015066e673233c698bd7996d2ace58792b",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "6837102936632438928635571155971563018418612823693483",
+      "150650441649280338332058946156983993986456530667136828309504"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "16777216"
+    ]
+  },
+  "k": 24,
+  "method": "adaptive_boxes",
+  "steps": [
+    {
+      "step_leaf_ceiling": 512,
+      "leaf_count": 0,
+      "wall_seconds": 83.36081054899842,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_narrow_dense/profile_2/receiving/leaves_512/verification.json",
+      "certificate_sha256": "49df6ec7bf308247b08ce08d9f72088c84a992abf51e688911d9e31f4442be40",
+      "total_precision_status": "resolved",
+      "precision_status": "resolved",
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "0",
+        "1"
+      ],
+      "regions": [],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 0,
+        "outside": 0,
+        "unknown": 0
+      },
+      "exact_shortcut": "complete_empty_topology"
+    }
+  ],
+  "elapsed_seconds": 83.79883858701214,
+  "peak_rss_kib_linux": 32064,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "Certified total/per-region bounds under the frozen requested tolerance; valid bounds do not imply requested precision.",
+  "files": {
+    "leaves_512/certificate.json": "ef329d40504fb65c2ca162f480d10c6362654692f833af33b33081925aa6cc6b",
+    "leaves_512/model.json": "2f5d818258adb319c73403011efe7acdb477d97c10e3582f00c75c79ab5aa99f",
+    "leaves_512/MANIFEST.json": "08461a618add0183b73485faf7c1133179e783f13676db39a6cfbab2ad538b72",
+    "leaves_512/verification.json": "791efad4b84bcceb1b5858ed1cd39b4da4e05cf60c490bc66a40e940a317c496"
+  }
+}

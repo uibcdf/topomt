@@ -1,0 +1,47 @@
+{
+  "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+  "certificate_sha256": "a0dd968efe7d4c6ec92cd395bb442f9088c8e770ab58aaedb7346c197c303c75",
+  "topology_certificate_sha256": "74154c73f490af7fadaaef1cdf21521970c4e8185d4f1616687a7bb28fcb66ff",
+  "topology_complete": true,
+  "topology_status": "resolved",
+  "n_components": 1,
+  "n_boundary_patches": 0,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "volume_lower": [
+    "0",
+    "1"
+  ],
+  "volume_upper": [
+    "3730986349913904679872159585230506309214990242363",
+    "1496577676626844588240573268701473812127674924007424"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "3730986349913904679872159585230506309214990242363",
+        "1496577676626844588240573268701473812127674924007424"
+      ],
+      "precision_status": "unresolved"
+    }
+  ],
+  "volume_enclosure_status": "resolved",
+  "total_precision_status": "unresolved",
+  "precision_status": "unresolved",
+  "stop_reason": "integration_envelope",
+  "leaf_states": {
+    "free": 0,
+    "blocked": 278,
+    "outside": 152,
+    "unknown": 82
+  },
+  "method": "adaptive_boxes",
+  "exact_shortcut": null,
+  "lineage_status": "checked"
+}

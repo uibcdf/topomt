@@ -1,0 +1,5 @@
+{
+  "status": "capture_harness_failure",
+  "reason": "The frozen worker was invoked with a relative output path, but its manifest recorder requires an absolute path. The unchanged worker/protocol will be invoked with absolute paths. Existing checked bundle is retained; this incomplete run is not precision receiving.",
+  "scientific_source_changed": false
+}

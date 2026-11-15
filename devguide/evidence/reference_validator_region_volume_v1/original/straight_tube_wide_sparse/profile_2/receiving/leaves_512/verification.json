@@ -1,0 +1,34 @@
+{
+  "model_sha256": "ffcd86623d3afccc3b17e925ca6366dedf51afb689d1561e66796df0e8b284f5",
+  "certificate_sha256": "c093101072e871f15ebd677ea0219646a0b41835e51f168a8a41bedd3187e194",
+  "topology_certificate_sha256": "75c8b1075b7d6cb35984b6d88a4406c9faaccfebb4054a9da491ec1a68c1703e",
+  "topology_complete": true,
+  "topology_status": "resolved",
+  "n_components": 0,
+  "n_boundary_patches": 0,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "volume_lower": [
+    "0",
+    "1"
+  ],
+  "volume_upper": [
+    "0",
+    "1"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [],
+  "volume_enclosure_status": "resolved",
+  "total_precision_status": "resolved",
+  "precision_status": "resolved",
+  "stop_reason": null,
+  "leaf_states": {
+    "free": 0,
+    "blocked": 0,
+    "outside": 0,
+    "unknown": 0
+  },
+  "method": "adaptive_boxes",
+  "exact_shortcut": "complete_empty_topology",
+  "lineage_status": "not_checked"
+}

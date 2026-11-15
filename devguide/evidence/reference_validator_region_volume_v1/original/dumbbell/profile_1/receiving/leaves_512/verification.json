@@ -1,0 +1,59 @@
+{
+  "model_sha256": "dcb43b8b4deed59402599f559f244e6510b399606ed93b23c711e8bb1666161e",
+  "certificate_sha256": "58f9a70f641c096baf6037ee23e5dd44664aaab138df54671db3adaafc2699c6",
+  "topology_certificate_sha256": "ffd1e6e5cae2b2354e25aeff7b3d2fab8d67ec50c23fe2ee75706139cbb09684",
+  "topology_complete": true,
+  "topology_status": "resolved",
+  "n_components": 2,
+  "n_boundary_patches": 0,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "volume_lower": [
+    "0",
+    "1"
+  ],
+  "volume_upper": [
+    "3617743418470607567379049618555512270554971329249",
+    "2923003274661805836407369665432566039311865085952"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "3617743418470607567379049618555512270554971329249",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-2",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "3617743418470607567379049618555512270554971329249",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "precision_status": "unresolved"
+    }
+  ],
+  "volume_enclosure_status": "resolved",
+  "total_precision_status": "unresolved",
+  "precision_status": "unresolved",
+  "stop_reason": "integration_envelope",
+  "leaf_states": {
+    "free": 0,
+    "blocked": 333,
+    "outside": 48,
+    "unknown": 131
+  },
+  "method": "adaptive_boxes",
+  "exact_shortcut": null,
+  "lineage_status": "not_checked"
+}

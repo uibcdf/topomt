@@ -1,0 +1,71 @@
+{
+  "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30",
+  "certificate_sha256": "4827639322d511cb7ab8bd6b6c622e27fee52592f86df8680226968598eb9d8f",
+  "topology_certificate_sha256": "ef1fe276ddd27f6876666d7a1d28bca26922324deb19fc49f3dfe1564ddce70b",
+  "topology_complete": true,
+  "topology_status": "resolved",
+  "n_components": 3,
+  "n_boundary_patches": 2,
+  "boundary_status": "resolved",
+  "per_region_volume_status": "resolved",
+  "volume_lower": [
+    "138081809865290365167139298418149323303624859895",
+    "2923003274661805836407369665432566039311865085952"
+  ],
+  "volume_upper": [
+    "859552951996342119360734190240810717792142808751095",
+    "280608314367533360295107487881526339773939048251392"
+  ],
+  "volume_unit": "nm**3",
+  "regions": [
+    {
+      "region_id": "REG-1",
+      "lower": [
+        "138081809865290365167139298418149323303624859895",
+        "2923003274661805836407369665432566039311865085952"
+      ],
+      "upper": [
+        "859552951996342119360734190240810717792142808751095",
+        "280608314367533360295107487881526339773939048251392"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-2",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "846297098249274244304688817592668382754994822201175",
+        "280608314367533360295107487881526339773939048251392"
+      ],
+      "precision_status": "unresolved"
+    },
+    {
+      "region_id": "REG-3",
+      "lower": [
+        "0",
+        "1"
+      ],
+      "upper": [
+        "846297098249274244304688817592668382754994822201175",
+        "280608314367533360295107487881526339773939048251392"
+      ],
+      "precision_status": "unresolved"
+    }
+  ],
+  "volume_enclosure_status": "resolved",
+  "total_precision_status": "unresolved",
+  "precision_status": "unresolved",
+  "stop_reason": "integration_envelope",
+  "leaf_states": {
+    "free": 5,
+    "blocked": 118,
+    "outside": 48,
+    "unknown": 341
+  },
+  "method": "adaptive_boxes",
+  "exact_shortcut": null,
+  "lineage_status": "not_checked"
+}

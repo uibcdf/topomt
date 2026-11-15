@@ -1,0 +1,251 @@
+{
+  "schema": "topomt.reference-validator.region-volume-receiving/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T01:58:44.093833+00:00",
+  "protocol_sha256": "5cc6d03510bd6957d21d84b0b72b2b29833952f1553cc071b42b23ea12bd548f",
+  "source_revision": "4573dbe0000b0cfb80c08f086852a5d9c6a15c88",
+  "runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "executable": "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+  "model_sha256": "471cda6236f2047e0e39125d4d7153d3ac8ef39091df89546b79b65837a56ab3",
+  "topology_certificate_sha256": "74154c73f490af7fadaaef1cdf21521970c4e8185d4f1616687a7bb28fcb66ff",
+  "request": {
+    "schema": "topomt.reference-validator.volume-request/1",
+    "volume_unit": "nm**3",
+    "absolute_tolerance": [
+      "38463776803236130720331542115778415558917425179",
+      "36779892980781332600600328651607420406849738932406452224"
+    ],
+    "relative_unit": "dimensionless",
+    "relative_tolerance": [
+      "1",
+      "16777216"
+    ]
+  },
+  "k": 24,
+  "method": "adaptive_boxes",
+  "steps": [
+    {
+      "step_leaf_ceiling": 1,
+      "leaf_count": 1,
+      "wall_seconds": 0.13155624095816165,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_1/verification.json",
+      "certificate_sha256": "35fd90390a20f9c19b1ba35081d53e95a431889c9a793013920b5a7d391ea6f7",
+      "total_precision_status": "unresolved",
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "38463776803236130720331542115778415558917425179",
+        "2192252455996354377305527249074424529483898814464"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 0,
+        "outside": 0,
+        "unknown": 1
+      },
+      "exact_shortcut": null
+    },
+    {
+      "step_leaf_ceiling": 8,
+      "leaf_count": 8,
+      "wall_seconds": 0.24560920207295567,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_8/verification.json",
+      "certificate_sha256": "ed6da929a50e518995eb6fea9d05bd8691c9b0dda8f900b0650e2db2600a9f03",
+      "total_precision_status": "unresolved",
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "38463776803236130720331542115778415558917425179",
+        "2192252455996354377305527249074424529483898814464"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 0,
+        "outside": 0,
+        "unknown": 8
+      },
+      "exact_shortcut": null
+    },
+    {
+      "step_leaf_ceiling": 64,
+      "leaf_count": 64,
+      "wall_seconds": 0.37235602806322277,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_64/verification.json",
+      "certificate_sha256": "cab4a826d3aa633b561590a1bb21b10461e6b96503f07fca92081aa409b96439",
+      "total_precision_status": "unresolved",
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "38463776803236130720331542115778415558917425179",
+        "2192252455996354377305527249074424529483898814464"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "38463776803236130720331542115778415558917425179",
+            "2192252455996354377305527249074424529483898814464"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 28,
+        "outside": 4,
+        "unknown": 32
+      },
+      "exact_shortcut": null
+    },
+    {
+      "step_leaf_ceiling": 512,
+      "leaf_count": 512,
+      "wall_seconds": 1.3310775610152632,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_512/verification.json",
+      "certificate_sha256": "a0dd968efe7d4c6ec92cd395bb442f9088c8e770ab58aaedb7346c197c303c75",
+      "total_precision_status": "unresolved",
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "0",
+        "1"
+      ],
+      "volume_upper": [
+        "3730986349913904679872159585230506309214990242363",
+        "1496577676626844588240573268701473812127674924007424"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "0",
+            "1"
+          ],
+          "upper": [
+            "3730986349913904679872159585230506309214990242363",
+            "1496577676626844588240573268701473812127674924007424"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 0,
+        "blocked": 278,
+        "outside": 152,
+        "unknown": 82
+      },
+      "exact_shortcut": null
+    },
+    {
+      "step_leaf_ceiling": 4096,
+      "leaf_count": 4096,
+      "wall_seconds": 13.898160699056461,
+      "verification": "devguide/evidence/reference_validator_region_volume_v1/refinement/regular_tetrahedron_1_4/receiving/leaves_4096/verification.json",
+      "certificate_sha256": "b5ae5752560cd485fd1407da5b46368b0151ba33aa29d4320d4b151595aeba58",
+      "total_precision_status": "unresolved",
+      "precision_status": "unresolved",
+      "volume_lower": [
+        "14270061194000604497243002124953792172358364741409",
+        "766247770432944429179173513575154591809369561091801088"
+      ],
+      "volume_upper": [
+        "187895549683808498568819583235577560005311621999415",
+        "1532495540865888858358347027150309183618739122183602176"
+      ],
+      "regions": [
+        {
+          "region_id": "REG-1",
+          "lower": [
+            "14270061194000604497243002124953792172358364741409",
+            "766247770432944429179173513575154591809369561091801088"
+          ],
+          "upper": [
+            "187895549683808498568819583235577560005311621999415",
+            "1532495540865888858358347027150309183618739122183602176"
+          ],
+          "precision_status": "unresolved"
+        }
+      ],
+      "leaf_states": {
+        "free": 182,
+        "blocked": 2507,
+        "outside": 288,
+        "unknown": 1119
+      },
+      "exact_shortcut": null
+    }
+  ],
+  "elapsed_seconds": 15.989175650989637,
+  "peak_rss_kib_linux": 26008,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_limit_bytes": 2147483648,
+  "scope": "Certified total/per-region bounds under the frozen requested tolerance; valid bounds do not imply requested precision.",
+  "files": {
+    "leaves_512/certificate.json": "883cb261bf67dab913114951649dbb37543d635ccd20d9b96876a972fc467e5b",
+    "leaves_512/transition.json": "2bce6382c5a535451577c51d3b4f86c68d0f32e8effd814243d821a2d26b3f19",
+    "leaves_512/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "leaves_512/MANIFEST.json": "90f1be69f408ae96ac9024fb2da5fd7308e3007b16273d964e8c0864ec59059b",
+    "leaves_512/verification.json": "692c1e57bf8f88ab70aaf5032ef7b251747225d70d8b22cefc03e2a7353a36a3",
+    "leaves_1/certificate.json": "58c5b966e6bc579834842f9380240a46ab26100bc6fa935f2787fad54ace6dd8",
+    "leaves_1/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "leaves_1/MANIFEST.json": "2825fc6862a0958638fc6e6a049aff78a6ead20e19fea0fcd679b2e825418996",
+    "leaves_1/verification.json": "e99ec8dbf592cd5a31a15182e1c5bfd870f4df55ffc7983475943284386a4eb6",
+    "leaves_4096/certificate.json": "f1ec1913705c8438b294d03f6cf9721f0edac76b076a644f71936d922d69b81b",
+    "leaves_4096/transition.json": "a45c6e026079ae7aef47d960fb28fe0e7cb698784489980eef13e111ac400efb",
+    "leaves_4096/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "leaves_4096/MANIFEST.json": "971472853d690bb55fefeed086018d4ab7e0f5e64c939db73ecba238c20b9dda",
+    "leaves_4096/verification.json": "4eeb3d8a4a4a15255bfacb6d9be7f31abf22d086bfd57729aee73754dd5d5966",
+    "leaves_8/certificate.json": "d6bb8b5f1221c5addb9713415b1320291f9e62eeaf511df547cb4df5d4c3cae6",
+    "leaves_8/transition.json": "00710b2097511834ddbd13f5267b60e200a9af206badc5014ce3a1dcf6710bbd",
+    "leaves_8/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "leaves_8/MANIFEST.json": "855d90fff3cf23b420d8d2d0d560d267f9157feb1a785793cce5b0b2376b2ba8",
+    "leaves_8/verification.json": "e2e8a636f0d391246c210494c2bb0d8a1ef963b83b9469ace98927f0631d60f8",
+    "leaves_64/certificate.json": "ad67f0d3824197b71febc63d5ef9c038300b89ee3dae038512e774e746643ff4",
+    "leaves_64/transition.json": "09b57150ef9b43183d82df6b4b7f219a1e25dbbae2a6408224abbd7549601d45",
+    "leaves_64/model.json": "e9bedd3a4f81a94680c06c85993004fac28fbaa1c8c6aedd307f66c010fc9147",
+    "leaves_64/MANIFEST.json": "7d6fa581d7a656144a793a3e5ca80435105f94e6543ef13cfa5489e8dc454b88",
+    "leaves_64/verification.json": "49a2acef93e5e4edf1d348c59a827533d2b75986f1a6e8a61942aeb5bedca6ce"
+  }
+}
