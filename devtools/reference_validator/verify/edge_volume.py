@@ -5,9 +5,10 @@ outward intervals. No spatial sampling or uncertain region allocation enters
 this route; complete region labels come from certified free-vertex roots.
 """
 
+from copy import deepcopy
 from fractions import Fraction
 from functools import lru_cache
-from typing import Any
+from typing import Any, Optional
 
 from ..model import Model, _record, decode_point, point
 from ..volume_request import VolumeRequest
@@ -263,14 +264,13 @@ def assigned_faces(
     return pieces
 
 
-def evaluate(
+def exact_result(
     model: Model,
-    proof: dict[str, Any],
     checked: dict[str, Any],
     request: VolumeRequest,
     bits: int,
-) -> dict[str, Any]:
-    """Integrate every reconstructed regional face piece and keep all errors."""
+) -> Optional[dict[str, Any]]:
+    """Return only independently justified empty/whole-free shortcuts."""
     if not checked['regions']:
         result = aggregate(model, checked, request, [])
         result.update(
@@ -294,20 +294,45 @@ def evaluate(
             exact_shortcut='whole_domain_free',
         )
         return result
+    return None
+
+
+def reduce_bounds(
+    model: Model,
+    checked: dict[str, Any],
+    request: VolumeRequest,
+    bits: int,
+    bounds: list[tuple],
+) -> dict[str, Any]:
+    """Reduce the complete canonical signed frontier with all error retained."""
+    result = aggregate(model, checked, request, bounds)
+    result['method'] = SCHEME
+    result['face_piece_count'] = len(bounds)
+    result['bits'] = bits
+    return result
+
+
+def evaluate(
+    model: Model,
+    proof: dict[str, Any],
+    checked: dict[str, Any],
+    request: VolumeRequest,
+    bits: int,
+) -> dict[str, Any]:
+    """Integrate every reconstructed regional face piece and keep all errors."""
+    shortcut = exact_result(model, checked, request, bits)
+    if shortcut is not None:
+        return shortcut
     pieces = assigned_faces(model, proof, checked)
     bounds = [
         (triangle_flux(center, radius, tri, bits), region)
         for center, radius, tri, region in pieces
     ]
-    result = aggregate(model, checked, request, bounds)
-    result['method'] = SCHEME
-    result['face_piece_count'] = len(pieces)
-    result['bits'] = bits
-    return result
+    return reduce_bounds(model, checked, request, bits, bounds)
 
 
-def check(model: Model, certificate: object) -> dict[str, Any]:
-    """Reconstruct source faces and analytic cuts independently of the producer.
+def prepare(model: Model, certificate: object) -> tuple[dict, dict, VolumeRequest]:
+    """Admit symbolic headers and complete topology without evaluating volume.
 
     Parameters
     ----------
@@ -318,8 +343,8 @@ def check(model: Model, certificate: object) -> dict[str, Any]:
 
     Returns
     -------
-    dict
-        Certified total/per-region enclosures and independent precision states.
+    tuple
+        Detached admitted certificate, independently checked topology and request.
 
     Raises
     ------
@@ -329,7 +354,7 @@ def check(model: Model, certificate: object) -> dict[str, Any]:
     from . import verify
 
     cert = _record(
-        certificate,
+        deepcopy(certificate),
         {
             'schema',
             'kind',
@@ -342,7 +367,11 @@ def check(model: Model, certificate: object) -> dict[str, Any]:
         },
     )
     if (
-        cert['scheme'] != SCHEME
+        cert['schema'] != 'topomt.reference-validator.certificate/1'
+        or cert['kind'] != 'power_edge_volume'
+        or cert['model_sha256'] != model.digest
+        or cert['arithmetic'] != 'rational-exact/1'
+        or cert['scheme'] != SCHEME
         or type(cert['bits']) is not int
         or cert['bits'] not in BITS
     ):
@@ -351,6 +380,30 @@ def check(model: Model, certificate: object) -> dict[str, Any]:
     topology = verify(model, cert['topology_certificate'])
     if topology['kind'] != 'power_cell_topology':
         raise ValueError('Complete power-cell topology is required')
+    return cert, topology, request
+
+
+def check(model: Model, certificate: object) -> dict[str, Any]:
+    """Check the complete analytic integral independently of its producer.
+
+    Parameters
+    ----------
+    model : Model
+        Exact all-atom numerical model.
+    certificate : object
+        Untrusted symbolic topology, unchanged request, scheme and precision.
+
+    Returns
+    -------
+    dict
+        Certified total/per-region bounds and their independently checked errors.
+
+    Raises
+    ------
+    ValueError, ArithmeticError
+        Invalid input/proof or insufficient admitted numerical envelope.
+    """
+    cert, topology, request = prepare(model, certificate)
     return evaluate(
         model, cert['topology_certificate'], topology, request, cert['bits']
     )

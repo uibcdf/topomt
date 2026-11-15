@@ -165,6 +165,40 @@ def _convex_domain(model: Model, cert: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def _receipt(model: Model, cert: dict[str, Any]) -> dict[str, Any]:
+    """Build provenance only after the caller independently admits its input."""
+    kind = cert['kind']
+    result: dict[str, Any] = {
+        'schema': 'topomt.reference-validator.verification/1',
+        'verification_status': 'accepted',
+        'kind': kind,
+        'model_sha256': model.digest,
+        'certificate_sha256': record_digest(cert),
+        'trusted_arithmetic': 'stdlib-fraction/1',
+        'topology_complete': False,
+        'n_components': None,
+        'topology_status': 'not_computed',
+        'python_version': sys.version,
+        'verifier_files_sha256': {
+            name: hashlib.sha256(
+                (Path(__file__).parents[1] / name).read_bytes()
+            ).hexdigest()
+            for name in ('model.py', 'verify/__init__.py', 'verify/geometry.py')
+        },
+    }
+    if isinstance(model.domain, HullDomain):
+        for name in (
+            'hull_model.py',
+            'contracts.py',
+            'verify/center_hull.py',
+            'verify/polytope.py',
+        ):
+            result['verifier_files_sha256'][name] = hashlib.sha256(
+                (Path(__file__).parents[1] / name).read_bytes()
+            ).hexdigest()
+    return result
+
+
 def verify(
     model: Model, certificate: object, *, limits: Limits = Limits()
 ) -> dict[str, Any]:
@@ -245,34 +279,7 @@ def verify(
         or cert['model_sha256'] != model.digest
     ):
         raise ValueError('Certificate schema, arithmetic or model binding differs')
-    result: dict[str, Any] = {
-        'schema': 'topomt.reference-validator.verification/1',
-        'verification_status': 'accepted',
-        'kind': kind,
-        'model_sha256': model.digest,
-        'certificate_sha256': record_digest(cert),
-        'trusted_arithmetic': 'stdlib-fraction/1',
-        'topology_complete': False,
-        'n_components': None,
-        'topology_status': 'not_computed',
-        'python_version': sys.version,
-        'verifier_files_sha256': {
-            name: hashlib.sha256(
-                (Path(__file__).parents[1] / name).read_bytes()
-            ).hexdigest()
-            for name in ('model.py', 'verify/__init__.py', 'verify/geometry.py')
-        },
-    }
-    if isinstance(model.domain, HullDomain):
-        for name in (
-            'hull_model.py',
-            'contracts.py',
-            'verify/center_hull.py',
-            'verify/polytope.py',
-        ):
-            result['verifier_files_sha256'][name] = hashlib.sha256(
-                (Path(__file__).parents[1] / name).read_bytes()
-            ).hexdigest()
+    result = _receipt(model, cert)
     if kind == 'analytic_ball_union_volume':
         from .analytic_volume import check as check_volume
 

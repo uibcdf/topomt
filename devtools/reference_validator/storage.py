@@ -43,6 +43,74 @@ def read_record_with_digest(path: Path) -> tuple[Any, str]:
     return json.loads(data, object_pairs_hook=_unique), hashlib.sha256(data).hexdigest()
 
 
+def write_progress_bundle(directory: Path, progress: object, *, schema: str) -> None:
+    """Exclusively store untrusted proof data with its commit manifest last.
+
+    Parameters
+    ----------
+    directory : Path
+        New destination; existing directories are never replaced.
+    progress : object
+        JSON proof data. This storage operation makes no geometric claim.
+    schema : str
+        Consumer-owned bundle schema to bind explicitly.
+
+    Raises
+    ------
+    ValueError, FileExistsError
+        Non-JSON/excessive input or an occupied destination.
+    """
+    payload = (
+        json.dumps(progress, sort_keys=True, indent=2, allow_nan=False) + '\n'
+    ).encode()
+    if len(payload) > 16 * 1024**2:
+        raise ValueError('Progress exceeds the bounded 16 MiB reader envelope')
+    directory.mkdir(parents=True, exist_ok=False)
+    with (directory / 'progress.json').open('xb') as stream:
+        stream.write(payload)
+        stream.flush()
+        os.fsync(stream.fileno())
+    with (directory / 'MANIFEST.json').open('x') as stream:
+        json.dump(
+            {'schema': schema, 'progress_sha256': hashlib.sha256(payload).hexdigest()},
+            stream,
+        )
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def read_progress_bundle(directory: Path, *, schema: str) -> Any:
+    """Read the exact checksum-bound bytes without accepting geometric claims.
+
+    Parameters
+    ----------
+    directory : Path
+        Complete manifest-last bundle.
+    schema : str
+        Exact consumer-owned schema expected by the caller.
+
+    Returns
+    -------
+    object
+        Untrusted JSON proof data; the scientific consumer must check it.
+
+    Raises
+    ------
+    ValueError
+        Missing/changed data, wrong schema or malformed/duplicate JSON fields.
+    """
+    try:
+        manifest = _record(
+            read_record(directory / 'MANIFEST.json'), {'schema', 'progress_sha256'}
+        )
+        record, digest = read_record_with_digest(directory / 'progress.json')
+        if manifest['schema'] != schema or manifest['progress_sha256'] != digest:
+            raise ValueError('Progress bundle schema or digest differs')
+        return record
+    except OSError as exc:
+        raise ValueError('Incomplete progress bundle') from exc
+
+
 def save_bundle(directory: Path, model: Model, checkpoint: object, run: object) -> None:
     """Verify and exclusively create a new checkpoint/run bundle.
 

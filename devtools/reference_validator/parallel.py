@@ -124,6 +124,10 @@ def _task(task: tuple) -> tuple:
 
         center, radius, triangle, bits = payload
         result = leaf_bound(model, proof, checked, center, radius, triangle, bits)
+    elif kind == 'analytic_edge':
+        from .verify.edge_volume import triangle_flux
+
+        result = triangle_flux(*payload)
     else:
         raise ValueError('Unknown exact source task')
     return (
