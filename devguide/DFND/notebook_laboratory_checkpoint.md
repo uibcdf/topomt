@@ -1,5 +1,17 @@
 # DFND notebook laboratory checkpoint
 
+## Analytic integration with bounded workers — 2026-11-15 UTC
+
+The [S7 receiving](../evidence/reference_validator_parallel_edge_v1/README.md)
+compares direct serial/two-worker canonical analytic verification on 25 controls
+and the original tetrahedron, closed shell and dumbbell at 1.4 Å. Paused work is
+reconstructed in a fresh process; final results equal the original mathematical
+receipts and a further serial read. The domain, atoms/probe, source inputs,
+region assignment and requested precision are unchanged. Partial arithmetic has
+no global enclosure. Full parallel-panel/four-worker and broader admission remain
+open under #76; native/public #60/#181/#180/#184/#188 and installed #16 keep their
+separate scopes. No new geometry/protein/provider phase is selected.
+
 ## Resumable reference construction — 2026-11-15 UTC
 
 The [source-work receiving](../evidence/reference_validator_parallel_resume_v1/README.md)

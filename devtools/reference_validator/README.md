@@ -32,6 +32,16 @@ The generic saved `verify` command handles its `power_boundary_volume` kind
 without producer imports. This conservative prototype still misses the original
 tetrahedron k=24 request; it does not replace the qualified analytic controls.
 
+The [analytic task route](../../devguide/DFND/reference_validator_parallel_edge.md)
+adds `edge_tasks.EdgeVerificationSession`. It admits complete geometry/regions,
+freezes the original signed frontier and executes the same interval arithmetic.
+Direct serial is the default; an explicit `LocalPolicy` opts into bounded local
+processes. Missing/duplicate work cannot produce a total. Manifest-last snapshots
+bind source/Model/request/frontier and every saved bound is recomputed on loading.
+Completed mathematical output equals the ordinary serial reader; the original
+symbolic certificate remains portable. This is a developer verification route,
+with source/resource qualification separate from production API admission.
+
 The [resumable process route](../../devguide/DFND/reference_validator_parallel_resume.md)
 adds `parallel_runs.ParallelPowerSession`. It retains independently checked
 source tasks in any completion order, saves exclusive manifest-last bundles and

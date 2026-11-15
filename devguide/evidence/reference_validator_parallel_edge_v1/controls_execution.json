@@ -1,0 +1,72 @@
+{
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "/tmp/topomt-edge-tasks-controls.py"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0,
+    1
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 300,
+  "cpu_hard_seconds": 330,
+  "wall_seconds": 13.62734715710394,
+  "waited_cpu_seconds": 13.990504999999999,
+  "peak_child_rss_kib": 27672,
+  "sampled_group_rss_peak_kib": 42696,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 46067261440,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5933480\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5789227\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0032877170015126467,
+      "host": {
+        "available_bytes": 46066515968,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5933480\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5789227\n",
+        "safe": true
+      },
+      "group_rss_kib": 2464,
+      "group_pids": [
+        6
+      ]
+    },
+    {
+      "seconds": 5.004363384097815,
+      "host": {
+        "available_bytes": 46024683520,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5933480\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5789227\n",
+        "safe": true
+      },
+      "group_rss_kib": 42608,
+      "group_pids": [
+        6,
+        7
+      ]
+    },
+    {
+      "seconds": 10.00542600103654,
+      "host": {
+        "available_bytes": 46062350336,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5933480\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5789227\n",
+        "safe": true
+      },
+      "group_rss_kib": 42696,
+      "group_pids": [
+        6,
+        7
+      ]
+    }
+  ]
+}

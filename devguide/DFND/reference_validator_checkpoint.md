@@ -11,6 +11,24 @@ These identify early P0/P1 tranches of the
 section below records nineteen topology-plus-precision synthetic profiles;
 broader admission and a supported public TopoMT detector remain separate.
 
+## Canonical analytic checker tasks — 2026-11-15
+
+The [S7 construction](reference_validator_parallel_edge.md) freezes the exact
+signed frontier after complete independent topology/region assignment, then
+executes the same certified triangle arithmetic serially or with two explicit
+local workers. Every piece contributes once to the total and its checked region;
+all original errors/requests remain. Saved arithmetic is untrusted and fully
+recomputed on loading; incomplete work has no global volume enclosure.
+
+The [new receiving](../evidence/reference_validator_parallel_edge_v1/README.md)
+qualifies 25 analytic controls in both modes and three original 1.4 Å profiles
+with pause, fresh-process recovery and a further independent serial read.
+Mathematical fields equal the original serial receipts. Sources, requests,
+resource/failure scopes and timing phases are retained. This is scoped S7
+qualification, not the full parallel panel, four workers, broader S8/P6/P7 or a
+native #181/#180/#184/#188 fix. S1/S3/S5 and canonical native #76/#60 remain open;
+earlier source-bound checkpoints retain their recorded source/runtime.
+
 ## Resumable local source work — 2026-11-15
 
 The [S6 source route](reference_validator_parallel_resume.md) now preserves

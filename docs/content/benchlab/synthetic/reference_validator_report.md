@@ -176,6 +176,41 @@ retain the tested scope and operational failures. Broader parallel-panel and
 analytic-integration qualification remain under #76; this is developer reference
 execution, not admission of a supported public detector or a native DFND fix.
 
+(reference-validator-parallel-analytic)=
+
+## Analytic verification with two bounded workers — 2026-11-15
+
+The same certified analytic arithmetic can now run on a fixed set of oriented
+face pieces after complete topology and region assignment. Each signed
+contribution is counted once; every stored bound is recomputed when work is
+recovered. Partial arithmetic has no whole-domain volume enclosure. The ordinary
+symbolic certificate and independent serial reader retain their meaning.
+
+Twenty-five analytic controls pass in direct serial and two-worker modes,
+including very small eight-region and asymmetric three-region systems. The
+original tetrahedron, closed shell and dumbbell at 1.4 Å also pass a two-piece
+pause, recovery in a new process, completion, and another independent serial
+read. **All mathematical fields, intervals and precision states equal the
+original results.** No atom, radius, probe, domain or request changes.
+
+| Original Model | Remaining numerical tasks, serial → two workers (s) | Complete workflow, serial → two workers (s) |
+| --- | ---: | ---: |
+| Regular tetrahedron | 0.034 → 0.383 | 0.807 → 1.458 |
+| Closed shell | 34.368 → 23.458 | 257.367 → 237.898 |
+| Dumbbell | 46.655 → 31.561 | 343.681 → 335.794 |
+
+The numerical phase includes task/pool scheduling. The complete workflow also
+includes initial geometry/admission, a pause/checkpoint, fresh-process recovery,
+storage/reduction and a further serial read. Each configuration is one
+shared-host observation, so the ratios establish neither repeatable nor causal
+scaling. Geometry and independent checking dominate the total; a small system
+can be slower with processes. **Direct serial remains the default.**
+
+[Exact inputs, source, work snapshots, resources and portable receiving](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_parallel_edge_v1/README.md)
+retain the executed scope. The full parallel nineteen-profile/four-worker panel
+and broader admission remain under #76. Native DFND/public qualification and
+biological validation keep their separate gates.
+
 ## Earlier range-based face-integration feasibility — 2026-11-15
 
 The validator now reuses genuinely checked in-process topology and updates

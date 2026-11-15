@@ -1,0 +1,46 @@
+{
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "/tmp/topomt-edge-tasks-worker.py",
+    "partial",
+    "devguide/evidence/reference_validator_parallel_edge_v1/original/regular_tetrahedron/serial/protocol.json",
+    "devguide/evidence/reference_validator_parallel_edge_v1/original/regular_tetrahedron/serial/receiving"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 300,
+  "cpu_hard_seconds": 330,
+  "wall_seconds": 0.2676307399524376,
+  "waited_cpu_seconds": 0.248719,
+  "peak_child_rss_kib": 24832,
+  "sampled_group_rss_peak_kib": 2432,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 45805760512,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5933535\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5789270\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.002570579992607236,
+      "host": {
+        "available_bytes": 45806051328,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5933535\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5789270\n",
+        "safe": true
+      },
+      "group_rss_kib": 2432,
+      "group_pids": [
+        5
+      ]
+    }
+  ]
+}

@@ -1,0 +1,384 @@
+{
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "/tmp/topomt-edge-tasks-worker.py",
+    "resume",
+    "devguide/evidence/reference_validator_parallel_edge_v1/original/dumbbell/serial/protocol.json",
+    "devguide/evidence/reference_validator_parallel_edge_v1/original/dumbbell/serial/receiving"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 300,
+  "cpu_hard_seconds": 330,
+  "wall_seconds": 131.04222091194242,
+  "waited_cpu_seconds": 130.842238,
+  "peak_child_rss_kib": 59128,
+  "sampled_group_rss_peak_kib": 52592,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 46957572096,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0018100939923897386,
+      "host": {
+        "available_bytes": 46957572096,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 2352,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 5.002750760992058,
+      "host": {
+        "available_bytes": 46967353344,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 25164,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 10.003703776979819,
+      "host": {
+        "available_bytes": 46951800832,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 25180,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 15.004616164951585,
+      "host": {
+        "available_bytes": 46940594176,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 35960,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 20.005553092923947,
+      "host": {
+        "available_bytes": 46956969984,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 36016,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 25.00649086397607,
+      "host": {
+        "available_bytes": 46964637696,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 36236,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 30.00735998293385,
+      "host": {
+        "available_bytes": 46943453184,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 36276,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 35.00824918190483,
+      "host": {
+        "available_bytes": 46919544832,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 36420,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 40.00914333795663,
+      "host": {
+        "available_bytes": 46928150528,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 36548,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 45.010095992009155,
+      "host": {
+        "available_bytes": 46921891840,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 36744,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 50.01101342192851,
+      "host": {
+        "available_bytes": 46929772544,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 36824,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 55.01190952700563,
+      "host": {
+        "available_bytes": 46935048192,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 36936,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 60.01276776799932,
+      "host": {
+        "available_bytes": 46937071616,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 37044,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 65.01364955096506,
+      "host": {
+        "available_bytes": 46936096768,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 37204,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 70.01462087291293,
+      "host": {
+        "available_bytes": 46938832896,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 37376,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 75.01557957893237,
+      "host": {
+        "available_bytes": 46930710528,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 37392,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 80.01647013798356,
+      "host": {
+        "available_bytes": 46920093696,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 37692,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 85.01738772599492,
+      "host": {
+        "available_bytes": 46910771200,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 42092,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 90.01830939995125,
+      "host": {
+        "available_bytes": 46933757952,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 42092,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 95.01918588590343,
+      "host": {
+        "available_bytes": 46923251712,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 45580,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 100.0200991819147,
+      "host": {
+        "available_bytes": 46936965120,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 49016,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 105.02100507298019,
+      "host": {
+        "available_bytes": 46941511680,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 49016,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 110.02191035891883,
+      "host": {
+        "available_bytes": 46816505856,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 50728,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 115.02290625090245,
+      "host": {
+        "available_bytes": 46480134144,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 50728,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 120.02387246198487,
+      "host": {
+        "available_bytes": 46583304192,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934376\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790110\n",
+        "safe": true
+      },
+      "group_rss_kib": 52168,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 125.02486717596184,
+      "host": {
+        "available_bytes": 46493515776,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934459\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790193\n",
+        "safe": true
+      },
+      "group_rss_kib": 52592,
+      "group_pids": [
+        7
+      ]
+    },
+    {
+      "seconds": 130.02577161497902,
+      "host": {
+        "available_bytes": 46592925696,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5934459\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5790193\n",
+        "safe": true
+      },
+      "group_rss_kib": 52592,
+      "group_pids": [
+        7
+      ]
+    }
+  ]
+}

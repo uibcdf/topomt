@@ -15,6 +15,21 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## Current continuation: canonical analytic checker tasks — 2026-11-15
+
+The [S7 route](../DFND/reference_validator_parallel_edge.md) and
+[receiving](../evidence/reference_validator_parallel_edge_v1/README.md) distribute
+certified arithmetic over the same complete signed frontier, after independent
+geometry/region assignment. Twenty-five analytic controls and three original
+1.4 Å Models pass in direct serial/two-worker modes; original mathematical
+outputs and further independent serial reads agree exactly. Recovery recomputes
+saved bounds, and partial arithmetic never acquires a whole-domain volume claim.
+
+S7 is delivered at this selected fixed-frontier scope. #76 remains partial/open
+for the full parallel panel/four workers, remaining performance work, canonical
+native receiving #60 and broader S8/P6/P7/installed #16. Native #181/#180/#184/#188
+and all frozen original scientific evidence are unchanged.
+
 ## Current continuation: resumable local source work — 2026-11-15
 
 The [S6 route](../DFND/reference_validator_parallel_resume.md) and

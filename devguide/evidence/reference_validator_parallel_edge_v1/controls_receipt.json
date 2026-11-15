@@ -1,0 +1,3558 @@
+[
+  {
+    "name": "controls/boundary/ordinary_1_5/k8",
+    "configuration": "serial",
+    "protocol_sha256": "8db8509380a9c66c7351192da8e7df9042345b837c21ec92430955596c3e3e17",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.10684124508406967,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0006805900484323502,
+          "cpu_seconds": 0.0010011330000000151,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.018818838987499475,
+          "cpu_seconds": 0.018998355999999994,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.034107985091395676,
+          "cpu_seconds": 0.03397081399999999,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0024132769322022796,
+          "cpu_seconds": 0.002000498000000017,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.04260269401129335,
+          "cpu_seconds": 0.042978616,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0072065130807459354,
+          "cpu_seconds": 0.003047005999999991,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_5/k8",
+    "configuration": "parallel2",
+    "protocol_sha256": "1b739a72ebb75a98b64293b1efc4a609d37cb7f26f738017b088dda616d7d6da",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.32632573798764497,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002594110555946827,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01515302702318877,
+          "cpu_seconds": 0.014976508,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.2541928089922294,
+          "cpu_seconds": 0.04277719899999999,
+          "waited_children_cpu_seconds": 0.32818600000000003,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002760136965662241,
+          "cpu_seconds": 0.002930525999999989,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.04648781893774867,
+          "cpu_seconds": 0.045934268,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006459733005613089,
+          "cpu_seconds": 0.00338550700000001,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 8,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.156182249,
+          "peak_rss_kib": 26524
+        },
+        {
+          "pid": 11,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.134189621,
+          "peak_rss_kib": 26684
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_5/k16",
+    "configuration": "serial",
+    "protocol_sha256": "4ec47c50b1c33c8d9bd1bd33a5c84e7c1b4eecf908af3e9339f7c9af3e86a563",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.11171764798928052,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0003007170744240284,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.017294653924182057,
+          "cpu_seconds": 0.018013139999999983,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.036773300962522626,
+          "cpu_seconds": 0.03599542,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0029432709561660886,
+          "cpu_seconds": 0.0029643970000000075,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.046515282010659575,
+          "cpu_seconds": 0.04697764300000001,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006731641944497824,
+          "cpu_seconds": 0.002980818999999968,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_5/k16",
+    "configuration": "parallel2",
+    "protocol_sha256": "7bff9b162ef7f41796c12a86a15221d8dbc89526362143b175d997945df15d5f",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.4434138140641153,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00023880298249423504,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01661346689797938,
+          "cpu_seconds": 0.01700029599999997,
+          "waited_children_cpu_seconds": 2.0816681711721685e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.36773247295059264,
+          "cpu_seconds": 0.032056951,
+          "waited_children_cpu_seconds": 0.3332159999999999,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002501299954019487,
+          "cpu_seconds": 0.001999572000000005,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.04714427690487355,
+          "cpu_seconds": 0.046940282,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007408543955534697,
+          "cpu_seconds": 0.0030167249999999424,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 12,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.147821773,
+          "peak_rss_kib": 27032
+        },
+        {
+          "pid": 15,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.146545872,
+          "peak_rss_kib": 27032
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_5/k24",
+    "configuration": "serial",
+    "protocol_sha256": "398fd337e939818a0df546204026d9a1b8489cc8ceada5ac17051f91206c5252",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.13727081508841366,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0005277649033814669,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.03500321798492223,
+          "cpu_seconds": 0.03499839700000007,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.04702214803546667,
+          "cpu_seconds": 0.04699861299999997,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0025538430782034993,
+          "cpu_seconds": 0.0019997760000000087,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.0438642610097304,
+          "cpu_seconds": 0.04397472499999999,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007043726043775678,
+          "cpu_seconds": 0.00313335299999995,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_5/k24",
+    "configuration": "parallel2",
+    "protocol_sha256": "ea3a5d73ed8985e3edafeb0ac10634223f494de2b46c666f64320c17532d8d00",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.43817345099523664,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002445999998599291,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.014748879009857774,
+          "cpu_seconds": 0.013998941999999959,
+          "waited_children_cpu_seconds": -4.163336342344337e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.3671761959558353,
+          "cpu_seconds": 0.032636180000000015,
+          "waited_children_cpu_seconds": 0.3323,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002596528036519885,
+          "cpu_seconds": 0.0019482349999999649,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.045578205958008766,
+          "cpu_seconds": 0.045946381000000036,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006798865040764213,
+          "cpu_seconds": 0.0028816160000000313,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 19,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.145532443,
+          "peak_rss_kib": 27192
+        },
+        {
+          "pid": 16,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.147234398,
+          "peak_rss_kib": 27192
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_5/k32",
+    "configuration": "serial",
+    "protocol_sha256": "fdf321c998eb876d5eebb40c9c35615746d742a74f55423a9d731d1519f26761",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.104681522003375,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002704990329220891,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015540130902081728,
+          "cpu_seconds": 0.01600524999999997,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.03502344898879528,
+          "cpu_seconds": 0.034970439000000075,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0023849400458857417,
+          "cpu_seconds": 0.0019999689999999903,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.04393526795320213,
+          "cpu_seconds": 0.04397182799999999,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006522174924612045,
+          "cpu_seconds": 0.003183201999999996,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_5/k32",
+    "configuration": "parallel2",
+    "protocol_sha256": "8f016f66257a373d64236bc1df9bec330bdb2fd73465880c8b86273d6cd77030",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.4410602250136435,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00029068393632769585,
+          "cpu_seconds": 0.00100087900000001,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01680683298036456,
+          "cpu_seconds": 0.016999656999999946,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.3670035949908197,
+          "cpu_seconds": 0.03093692700000006,
+          "waited_children_cpu_seconds": 0.3324919999999999,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0024143370101228356,
+          "cpu_seconds": 0.0019904269999999613,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.046468756976537406,
+          "cpu_seconds": 0.046947002000000015,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007089426042512059,
+          "cpu_seconds": 0.0028630299999998776,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 20,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.15023874,
+          "peak_rss_kib": 27192
+        },
+        {
+          "pid": 23,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.143483778,
+          "peak_rss_kib": 27192
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_7/k8",
+    "configuration": "serial",
+    "protocol_sha256": "e1fffe7eff6a362a497b8a8af9b81a6b802b488cb9ac253994e624de205054e4",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.11457804008387029,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002576559782028198,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015124420984648168,
+          "cpu_seconds": 0.01600040800000002,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.04099045495968312,
+          "cpu_seconds": 0.04099988499999996,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002482675015926361,
+          "cpu_seconds": 0.0019999870000000364,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.04827609902713448,
+          "cpu_seconds": 0.04799879000000007,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006452993024140596,
+          "cpu_seconds": 0.0034448069999999387,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_7/k8",
+    "configuration": "parallel2",
+    "protocol_sha256": "f906c0bee8a04bab9bb12007eaa6a669256f67860a842fefa162c5675812b94c",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.451260105939582,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00024049391504377127,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015089057967998087,
+          "cpu_seconds": 0.015000232000000002,
+          "waited_children_cpu_seconds": -8.326672684688674e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.3736664750613272,
+          "cpu_seconds": 0.033277208999999974,
+          "waited_children_cpu_seconds": 0.340523,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0023878999054431915,
+          "cpu_seconds": 0.002003691999999946,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.05150148808024824,
+          "cpu_seconds": 0.05189014199999997,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007302174926735461,
+          "cpu_seconds": 0.0031608000000000747,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 24,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.153060428,
+          "peak_rss_kib": 27192
+        },
+        {
+          "pid": 27,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.149688292,
+          "peak_rss_kib": 27192
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_7/k16",
+    "configuration": "serial",
+    "protocol_sha256": "b972b2c1e75fc63207409b1d9dccf398143958fff7f3682c1d2959fb0b7b05fc",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.10939523810520768,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.000272357021458447,
+          "cpu_seconds": 0.0010010209999999908,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015242846915498376,
+          "cpu_seconds": 0.014999148000000018,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.03804931801278144,
+          "cpu_seconds": 0.0379997299999999,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002461545984260738,
+          "cpu_seconds": 0.003000049000000171,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.04588822403457016,
+          "cpu_seconds": 0.045999203999999905,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.00649960502050817,
+          "cpu_seconds": 0.0024642360000000085,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_7/k16",
+    "configuration": "parallel2",
+    "protocol_sha256": "9b8fe135251ec46314b6f0131427679f70d4b1bc60524a6f7e4995f5f8078d6b",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.3270568379666656,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00023792299907654524,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015230958932079375,
+          "cpu_seconds": 0.014989800999999803,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.2524840870173648,
+          "cpu_seconds": 0.03129091100000014,
+          "waited_children_cpu_seconds": 0.33388,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0026860429206863046,
+          "cpu_seconds": 0.0029997550000000484,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.0490421709837392,
+          "cpu_seconds": 0.048922543999999846,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0063586849719285965,
+          "cpu_seconds": 0.002531862000000107,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 28,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.152196618,
+          "peak_rss_kib": 27192
+        },
+        {
+          "pid": 31,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.14318183,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_7/k24",
+    "configuration": "serial",
+    "protocol_sha256": "60a80d95f6e37f506616c5c5c50026ff5b0f345ae082e065d8d0aef58d284dea",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.11441468598786741,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002178950235247612,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.016030916944146156,
+          "cpu_seconds": 0.016000227000000145,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.04087345697917044,
+          "cpu_seconds": 0.04097710700000001,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0025495829759165645,
+          "cpu_seconds": 0.002999980999999874,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.047298526973463595,
+          "cpu_seconds": 0.04696197099999999,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006477079004980624,
+          "cpu_seconds": 0.003105526000000136,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_7/k24",
+    "configuration": "parallel2",
+    "protocol_sha256": "7f8af12ec6474a3b28a8d08a6d055e434ab869adf44a4a8ad9951d3b5fe9af9f",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.4468714279355481,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0003650560975074768,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01504763902630657,
+          "cpu_seconds": 0.015000334000000004,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.3697028880706057,
+          "cpu_seconds": 0.03300056699999998,
+          "waited_children_cpu_seconds": 0.3352129999999998,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002500951988622546,
+          "cpu_seconds": 0.002970665999999955,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.05134903802536428,
+          "cpu_seconds": 0.050964271000000005,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006888534058816731,
+          "cpu_seconds": 0.003083463000000064,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 32,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.152115663,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 35,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.144947583,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_7/k32",
+    "configuration": "serial",
+    "protocol_sha256": "a303a23c6a1974369a5e877504f7bbb5da136a9234127d4b8e12c45bbe3606ee",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.11025846702978015,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00025323405861854553,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015831202967092395,
+          "cpu_seconds": 0.016000479999999984,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.0376397930085659,
+          "cpu_seconds": 0.03799968499999995,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0025198080111294985,
+          "cpu_seconds": 0.0020002980000000115,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.04707170196343213,
+          "cpu_seconds": 0.046998692000000064,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.005946590914390981,
+          "cpu_seconds": 0.0032391929999999736,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/ordinary_1_7/k32",
+    "configuration": "parallel2",
+    "protocol_sha256": "4e27c5ba2052741dcf79e9f9fab40bfd74d1c3f9c986823480bea715c367682c",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.3166052559390664,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00024657591711729765,
+          "cpu_seconds": 0.0010008770000000666,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015373634989373386,
+          "cpu_seconds": 0.015006733999999966,
+          "waited_children_cpu_seconds": -1.6653345369377348e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.2419714480638504,
+          "cpu_seconds": 0.03204178899999999,
+          "waited_children_cpu_seconds": 0.3346940000000001,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002890656003728509,
+          "cpu_seconds": 0.0025918949999998997,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.048588017001748085,
+          "cpu_seconds": 0.04894703500000008,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006548926001414657,
+          "cpu_seconds": 0.002595995999999934,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 36,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.15291932,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 39,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.142577296,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_decimal/k8",
+    "configuration": "serial",
+    "protocol_sha256": "601a7b113ab3749729ee2db22fad9d26be2d88390446f5c18ebd0aaf88328918",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.14089460100512952,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002288329415023327,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01590883603785187,
+          "cpu_seconds": 0.01600016900000001,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.05868123995605856,
+          "cpu_seconds": 0.05897783499999987,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0027024029986932874,
+          "cpu_seconds": 0.0029999060000001077,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.055912149022333324,
+          "cpu_seconds": 0.05597946099999973,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006479406030848622,
+          "cpu_seconds": 0.0030056800000002326,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_decimal/k8",
+    "configuration": "parallel2",
+    "protocol_sha256": "03d26013b368666b460c9ec69cf6ac0dbe6fe75fc0cc833c39825e505bc85c64",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.5018168650567532,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002369369613006711,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015689861960709095,
+          "cpu_seconds": 0.016000147000000187,
+          "waited_children_cpu_seconds": 5.551115123125783e-17,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.4072679110104218,
+          "cpu_seconds": 0.03233273599999986,
+          "waited_children_cpu_seconds": 0.37250299999999964,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0029562009731307626,
+          "cpu_seconds": 0.002975741999999837,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.0679619750007987,
+          "cpu_seconds": 0.06791338800000002,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006733279093168676,
+          "cpu_seconds": 0.0036355300000003865,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 43,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.167500846,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 40,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.16201011,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_decimal/k16",
+    "configuration": "serial",
+    "protocol_sha256": "ff689aca3cf1b705b12013664d2fc5397a8fac5a4171e66c8cf3572bcf2055de",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.1428784109884873,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00023102806881070137,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01618474198039621,
+          "cpu_seconds": 0.015999600999999863,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.05629885394591838,
+          "cpu_seconds": 0.05492092200000043,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0028740899870172143,
+          "cpu_seconds": 0.0029995089999999003,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.058917514979839325,
+          "cpu_seconds": 0.05894349399999976,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0072496270295232534,
+          "cpu_seconds": 0.003748360999999978,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_decimal/k16",
+    "configuration": "parallel2",
+    "protocol_sha256": "e86b6a009f119358fb8f65b0788fccd7855e2b553970acd2b9650516f79e9ca7",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.5110644439700991,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00031453894916921854,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.016256573027931154,
+          "cpu_seconds": 0.01599968300000043,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.4128952119499445,
+          "cpu_seconds": 0.031383297999999726,
+          "waited_children_cpu_seconds": 0.37526599999999977,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002785232034511864,
+          "cpu_seconds": 0.0029997980000002755,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.06967741902917624,
+          "cpu_seconds": 0.06995149499999975,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.008042028057388961,
+          "cpu_seconds": 0.0035315539999998258,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 47,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.168179076,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 44,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.168242105,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_decimal/k24",
+    "configuration": "serial",
+    "protocol_sha256": "67a64e4de8fd9b82d4b19d78bf013a92fc634851d8ae6791462870212d1fb01f",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.13898851803969592,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00031872803810983896,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01605677790939808,
+          "cpu_seconds": 0.015999170000000174,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.05581492406781763,
+          "cpu_seconds": 0.05597384000000005,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002575211925432086,
+          "cpu_seconds": 0.002000031999999763,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.05621905601583421,
+          "cpu_seconds": 0.05596628699999995,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006933234049938619,
+          "cpu_seconds": 0.00381056500000021,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_decimal/k24",
+    "configuration": "parallel2",
+    "protocol_sha256": "a7477a57f54128635355c116597e07de802371c4f82cb774f383926e31d3ae72",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.3311268739635125,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00025234499480575323,
+          "cpu_seconds": 0.0010009749999997375,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015042782062664628,
+          "cpu_seconds": 0.01499928900000036,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.23808096698485315,
+          "cpu_seconds": 0.03282332599999993,
+          "waited_children_cpu_seconds": 0.3624330000000001,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002664335072040558,
+          "cpu_seconds": 0.003030926999999739,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.0666793140117079,
+          "cpu_seconds": 0.06591862100000023,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007403767085634172,
+          "cpu_seconds": 0.003841823000000133,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 48,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.164308591,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 51,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.159849555,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_decimal/k32",
+    "configuration": "serial",
+    "protocol_sha256": "e0bd9a1da812582fd7f580062bbeef3fd7d403a1bafa8b6036ad3a383c9aa2ee",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.14176239597145468,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00025398004800081253,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.016353714046999812,
+          "cpu_seconds": 0.01700022499999987,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.05779130291193724,
+          "cpu_seconds": 0.05692464500000005,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0027738839853554964,
+          "cpu_seconds": 0.0019999760000000144,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.05651247897185385,
+          "cpu_seconds": 0.056972385999999986,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0069923310074955225,
+          "cpu_seconds": 0.003338732000000011,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_decimal/k32",
+    "configuration": "parallel2",
+    "protocol_sha256": "40ad6d5b87f0cbc6b77eb3a53b02ef16b423a1e5f0f450a5a32f6bc41104a86f",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.4906756660202518,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.000275092083029449,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015898405923508108,
+          "cpu_seconds": 0.01600030299999977,
+          "waited_children_cpu_seconds": -1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.3962188570294529,
+          "cpu_seconds": 0.0323388290000004,
+          "waited_children_cpu_seconds": 0.36314100000000005,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0030368639854714274,
+          "cpu_seconds": 0.002975831999999734,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.06712481600698084,
+          "cpu_seconds": 0.06792285300000023,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007112917955964804,
+          "cpu_seconds": 0.003127447999999866,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 52,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.164767153,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 55,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.157837618,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_rational/k8",
+    "configuration": "serial",
+    "protocol_sha256": "240e010430e61365b41d1a25a79b8dc1b761947967767b0e30452b91ca9cbe70",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.19643551600165665,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00038340804167091846,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01645275403279811,
+          "cpu_seconds": 0.015965755000000303,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.09218041494023055,
+          "cpu_seconds": 0.09193076699999958,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0037318579852581024,
+          "cpu_seconds": 0.003999575000000366,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.0745722969295457,
+          "cpu_seconds": 0.0749479449999999,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.008045354043133557,
+          "cpu_seconds": 0.0039471930000001265,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_rational/k8",
+    "configuration": "parallel2",
+    "protocol_sha256": "dc943aa2c5ea854421b1bedb360c2719905a26e5a12a02e5eedac4c8c95c1ef6",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.5859712769743055,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00028054590802639723,
+          "cpu_seconds": 0.0010006229999999228,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015600185026414692,
+          "cpu_seconds": 0.015950753000000262,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.4545132979983464,
+          "cpu_seconds": 0.033569583999999875,
+          "waited_children_cpu_seconds": 0.419771,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.004062445019371808,
+          "cpu_seconds": 0.003988101000000022,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.10248558304738253,
+          "cpu_seconds": 0.10260422599999997,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0080083969514817,
+          "cpu_seconds": 0.004209032999999973,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 56,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.192083629,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 59,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.187435619,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_rational/k16",
+    "configuration": "serial",
+    "protocol_sha256": "47c2a9461d3438642272a0101796ea59a7f946995a4243e125171018a4f0c026",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.1961816739058122,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002751570427790284,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01612628099974245,
+          "cpu_seconds": 0.016000462999999687,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.09454677090980113,
+          "cpu_seconds": 0.09493728400000023,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.003639215021394193,
+          "cpu_seconds": 0.004001193999999764,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.07280604809056967,
+          "cpu_seconds": 0.07191319800000029,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0077714619692415,
+          "cpu_seconds": 0.004685940999999971,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_rational/k16",
+    "configuration": "parallel2",
+    "protocol_sha256": "a7cb1e4cc88e3c94566648163f78c2c76a32d76a0f69837d5d0e05ff1ecfb662",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.5879943560576066,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002771550789475441,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.016085573937743902,
+          "cpu_seconds": 0.01599929099999997,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.456574241979979,
+          "cpu_seconds": 0.03452580100000002,
+          "waited_children_cpu_seconds": 0.4208550000000004,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0034432950196787715,
+          "cpu_seconds": 0.003976205999999927,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.10281523794401437,
+          "cpu_seconds": 0.10288909099999977,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007633278029970825,
+          "cpu_seconds": 0.003982799000000092,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 63,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.187034351,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 60,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.195305413,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_rational/k24",
+    "configuration": "serial",
+    "protocol_sha256": "91966fdbf502aff04fe041cc6a97a6cd1c831464a6804c856fb40f674a390009",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.19719853403512388,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0003204809036105871,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01550231094006449,
+          "cpu_seconds": 0.015999670999999882,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.09703212499152869,
+          "cpu_seconds": 0.09696571700000023,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.003603319055400789,
+          "cpu_seconds": 0.0030000879999998453,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.07202759990468621,
+          "cpu_seconds": 0.07173334099999984,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007712006918154657,
+          "cpu_seconds": 0.004508901999999981,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_rational/k24",
+    "configuration": "parallel2",
+    "protocol_sha256": "712a5e78026a413907137b2158c006ab7395b896324f355c64abb05c77ae5c40",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.6178492798935622,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002787420526146889,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015557584003545344,
+          "cpu_seconds": 0.014999196999999853,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.4654392779339105,
+          "cpu_seconds": 0.03575571799999988,
+          "waited_children_cpu_seconds": 0.4269129999999992,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0034569751005619764,
+          "cpu_seconds": 0.002945953000000223,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.10575209301896393,
+          "cpu_seconds": 0.10585750999999988,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.026144518982619047,
+          "cpu_seconds": 0.004153385000000398,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 64,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.197655851,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 67,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.189828355,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_rational/k32",
+    "configuration": "serial",
+    "protocol_sha256": "4a48be5d47270529cb95ae9a9dd0eab93f9e74e0adbf0a52387b5945c94dca19",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.19459909503348172,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00029976596124470234,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.016069318051449955,
+          "cpu_seconds": 0.015999450999999887,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.09371429297607392,
+          "cpu_seconds": 0.09395035300000032,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.003260814002715051,
+          "cpu_seconds": 0.003000146999999842,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.07256812497507781,
+          "cpu_seconds": 0.07290167599999986,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007629578001797199,
+          "cpu_seconds": 0.0038634760000002544,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/boundary/near_corner_rational/k32",
+    "configuration": "parallel2",
+    "protocol_sha256": "264d65490fecb7fad9412881a95f47d8b2c0c92f450c6d2e6f330f0e72f5b03c",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.6138522810069844,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002317789476364851,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.016928658937104046,
+          "cpu_seconds": 0.016999900000000068,
+          "waited_children_cpu_seconds": -3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.4790983028942719,
+          "cpu_seconds": 0.03237860800000014,
+          "waited_children_cpu_seconds": 0.4427540000000004,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0035649529891088605,
+          "cpu_seconds": 0.0029738239999996807,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.10456304904073477,
+          "cpu_seconds": 0.1049453739999997,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.008260881993919611,
+          "cpu_seconds": 0.004290204000000131,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 68,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.204137834,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 71,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.199793401,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/region/contained_ball_k8",
+    "configuration": "serial",
+    "protocol_sha256": "a8450475dd883db4ef091b87865cd219aee2072a3be0514c1a35d8ba22cf5cc9",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.05985541199333966,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00026439293287694454,
+          "cpu_seconds": 0.0010009489999998067,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.010224404046311975,
+          "cpu_seconds": 0.009999375000000477,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.017504799063317478,
+          "cpu_seconds": 0.018000594000000092,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0019487120443955064,
+          "cpu_seconds": 0.0019997299999996443,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.022860607015900314,
+          "cpu_seconds": 0.021998778000000385,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006218489957973361,
+          "cpu_seconds": 0.0020991329999997532,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/contained_ball_k8",
+    "configuration": "parallel2",
+    "protocol_sha256": "09ebd0d9e2fa20748487aed123f958c3f06bdb7ea1533adf7a81c00777ee152f",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.3660959890112281,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002575669204816222,
+          "cpu_seconds": 0.0010006819999999195,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01043158897664398,
+          "cpu_seconds": 0.00999992199999955,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.32040036004036665,
+          "cpu_seconds": 0.012943619999999711,
+          "waited_children_cpu_seconds": 0.3079390000000003,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0020026329439133406,
+          "cpu_seconds": 0.001999957000000663,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.025941460044123232,
+          "cpu_seconds": 0.02595344999999938,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006236598012037575,
+          "cpu_seconds": 0.002470764999999986,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 72,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.134262349,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 75,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.133491786,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/region/contained_ball_k16",
+    "configuration": "serial",
+    "protocol_sha256": "2ce242f95b7205bbc6097d9c5d0b4104dae10016871cccd301ed6b9bcc75e747",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.05830868403427303,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00026237498968839645,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.010534973000176251,
+          "cpu_seconds": 0.011000025999999608,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.017036667093634605,
+          "cpu_seconds": 0.01699994500000024,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0018077569548040628,
+          "cpu_seconds": 0.0020006009999997687,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.021972052985802293,
+          "cpu_seconds": 0.02199861099999989,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0059440560871735215,
+          "cpu_seconds": 0.002208079000000751,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/contained_ball_k16",
+    "configuration": "parallel2",
+    "protocol_sha256": "52da5ed6a64bdeee2286443bab195fbcb3fcfac6076252a58687572a80c9b697",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.3570522890659049,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00025436992291361094,
+          "cpu_seconds": 0.0010007800000000344,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.009973787935450673,
+          "cpu_seconds": 0.009999501999999438,
+          "waited_children_cpu_seconds": 2.220446049250313e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.31451291497796774,
+          "cpu_seconds": 0.010907288000000293,
+          "waited_children_cpu_seconds": 0.3002199999999997,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.001857060007750988,
+          "cpu_seconds": 0.001999286000000211,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.023588365991599858,
+          "cpu_seconds": 0.023966211999999487,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006112650968134403,
+          "cpu_seconds": 0.002288184000000193,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 79,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.131710344,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 76,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.130498514,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/region/contained_ball_k24",
+    "configuration": "serial",
+    "protocol_sha256": "7fa486cdeb7bc753dfcbb7b6293928bffd8d5aaddc5fb81015aaaaeb383ece78",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.05818129901308566,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00022762606386095285,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.010069019976072013,
+          "cpu_seconds": 0.010000368000000037,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.01659023598767817,
+          "cpu_seconds": 0.016999766000000527,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0017926699947565794,
+          "cpu_seconds": 0.0020003229999998595,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.022892910987138748,
+          "cpu_seconds": 0.02195702099999952,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.005828161025419831,
+          "cpu_seconds": 0.0029719860000003706,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/contained_ball_k24",
+    "configuration": "parallel2",
+    "protocol_sha256": "a35d901b27908536ce4cdf76c9983da8024b07fca2834ef32ca190f61978f79e",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.3536906080553308,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002676610602065921,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.010935639031231403,
+          "cpu_seconds": 0.010999746000000421,
+          "waited_children_cpu_seconds": 1.1102230246251565e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.308676072047092,
+          "cpu_seconds": 0.011981824999999446,
+          "waited_children_cpu_seconds": 0.29666200000000054,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.001929810969159007,
+          "cpu_seconds": 0.0020049090000000547,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.025067697977647185,
+          "cpu_seconds": 0.02492752200000048,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.005941602983511984,
+          "cpu_seconds": 0.00299329399999948,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 83,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.130013335,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 80,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.128900048,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/region/contained_ball_k32",
+    "configuration": "serial",
+    "protocol_sha256": "b78f548f5c8ff014ae0a8fb5383b8523051025406f066d0bef5288b944a66c10",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.06426140700932592,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002954859519377351,
+          "cpu_seconds": 0.0010003119999995036,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.011212516925297678,
+          "cpu_seconds": 0.010999759000000608,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.019282499910332263,
+          "cpu_seconds": 0.01897227999999984,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002136180060915649,
+          "cpu_seconds": 0.00200002800000032,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.02424070006236434,
+          "cpu_seconds": 0.023998843000000214,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006255461019463837,
+          "cpu_seconds": 0.002637084999999928,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/contained_ball_k32",
+    "configuration": "parallel2",
+    "protocol_sha256": "9e5002a3fd7c3b08eb224ec7214a2a7305082f379ef51daf4876ec93bdf61e59",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.3575393910286948,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002459560055285692,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01030809001531452,
+          "cpu_seconds": 0.010973158999999733,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.31287253089249134,
+          "cpu_seconds": 0.010560245000000634,
+          "waited_children_cpu_seconds": 0.2981579999999999,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.001996017061173916,
+          "cpu_seconds": 0.0010000069999991368,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.024588445900008082,
+          "cpu_seconds": 0.0239696459999994,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006518068024888635,
+          "cpu_seconds": 0.002917339000000574,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 87,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.130919425,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 84,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.130897886,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/region/empty",
+    "configuration": "serial",
+    "protocol_sha256": "6e5512cf3ab8c0006e85b2bc473cb77c67675b21b3be2ff8b895e12f2d9747a1",
+    "n_regions": 0,
+    "precision_status": "resolved",
+    "wall_seconds": 0.023324526962824166,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0003423490561544895,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.006937352009117603,
+          "cpu_seconds": 0.0069988630000006324,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.003016674076206982,
+          "cpu_seconds": 0.002999273999999552,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0020331769483163953,
+          "cpu_seconds": 0.0020003740000005266,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.0049757149536162615,
+          "cpu_seconds": 0.0049989459999997266,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0051698589231818914,
+          "cpu_seconds": 0.0018312109999998327,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/empty",
+    "configuration": "parallel2",
+    "protocol_sha256": "0b095aafeb93187217a81a2306f03220cd28eea9a94181b47425d11cf55fbf6b",
+    "n_regions": 0,
+    "precision_status": "resolved",
+    "wall_seconds": 0.01937226194422692,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002655170392245054,
+          "cpu_seconds": 0.0010044899999996915,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.004823298077099025,
+          "cpu_seconds": 0.004995788000000445,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.002261976944282651,
+          "cpu_seconds": 0.001999844000000195,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.001574955997057259,
+          "cpu_seconds": 0.00200028200000002,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.004530900972895324,
+          "cpu_seconds": 0.003999399999999653,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0051660260651260614,
+          "cpu_seconds": 0.00244465699999985,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/free",
+    "configuration": "serial",
+    "protocol_sha256": "478cd7c6ad1d92505b204878225fdcdcfe1efb61ca00067525dd77d8bc9e63ff",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.022097761975601315,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0001942310482263565,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.006333549041301012,
+          "cpu_seconds": 0.0070003899999999675,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.002234493033029139,
+          "cpu_seconds": 0.001999737999999418,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0015760509995743632,
+          "cpu_seconds": 0.0020003050000001465,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.005675219930708408,
+          "cpu_seconds": 0.004999483999999832,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.005310393986292183,
+          "cpu_seconds": 0.0024572460000005236,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/free",
+    "configuration": "parallel2",
+    "protocol_sha256": "4e318065c7443684f4dffb6231fbbfe03d58610d2351a639ecbb65a60fce92db",
+    "n_regions": 1,
+    "precision_status": "resolved",
+    "wall_seconds": 0.022812995011918247,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00018721597734838724,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.006283749011345208,
+          "cpu_seconds": 0.005953508000000163,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.0021943190367892385,
+          "cpu_seconds": 0.0020001599999996955,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0016180779784917831,
+          "cpu_seconds": 0.002000129999999878,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.005738765932619572,
+          "cpu_seconds": 0.0049996280000002,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.0059456819435581565,
+          "cpu_seconds": 0.0027039019999994807,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/eight_corners",
+    "configuration": "serial",
+    "protocol_sha256": "d91564555e579943d60a0cefdc57432b1494ef2ccea9f64de0e38deab49e556b",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.10190133401192725,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.00021451700013130903,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015473096049390733,
+          "cpu_seconds": 0.016000127999999947,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.033453725976869464,
+          "cpu_seconds": 0.03297325700000009,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002565233036875725,
+          "cpu_seconds": 0.0030003309999999672,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.04277543805073947,
+          "cpu_seconds": 0.04297803099999964,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006484106997959316,
+          "cpu_seconds": 0.0027360870000006088,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/eight_corners",
+    "configuration": "parallel2",
+    "protocol_sha256": "f137c50c67ae12a33885b6af282b85fe32d180fb664309a63d75ed366f4d43e8",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.3034676220268011,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002547709736973047,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015641117934137583,
+          "cpu_seconds": 0.014999343000000387,
+          "waited_children_cpu_seconds": 3.3306690738754696e-16,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.2305645371088758,
+          "cpu_seconds": 0.03221491299999979,
+          "waited_children_cpu_seconds": 0.31814,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0025205729762092233,
+          "cpu_seconds": 0.0020036020000002708,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.047201665001921356,
+          "cpu_seconds": 0.04790813899999957,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.00626994005870074,
+          "cpu_seconds": 0.0026237949999998733,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 91,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.143287519,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 88,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.140037675,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/region/tiny_eight_corners",
+    "configuration": "serial",
+    "protocol_sha256": "ca577cd105642b0541e1d53111e697ce298ad76b06780b57ffd1f7b040d4d391",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.13686561794020236,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002469029277563095,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.01548619195818901,
+          "cpu_seconds": 0.016000386999999172,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.054028242942877114,
+          "cpu_seconds": 0.05399976400000028,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.002768088015727699,
+          "cpu_seconds": 0.003000111000000416,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.05679243605118245,
+          "cpu_seconds": 0.0559989759999997,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.006513177999295294,
+          "cpu_seconds": 0.003624692999999901,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/tiny_eight_corners",
+    "configuration": "parallel2",
+    "protocol_sha256": "d5146058686f337e6d8106943888d57664a6a0d3b451408c1e11aa93e654f0f4",
+    "n_regions": 8,
+    "precision_status": "resolved",
+    "wall_seconds": 0.5034382600570098,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.000274449004791677,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.015719054033979774,
+          "cpu_seconds": 0.016000392000000474,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.4057079899357632,
+          "cpu_seconds": 0.03423777899999969,
+          "waited_children_cpu_seconds": 0.37025800000000064,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0029717059805989265,
+          "cpu_seconds": 0.002979611999999854,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.0703313141129911,
+          "cpu_seconds": 0.06992892099999981,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007389339967630804,
+          "cpu_seconds": 0.0037342300000000606,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 92,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.168840392,
+          "peak_rss_kib": 27352
+        },
+        {
+          "pid": 95,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.155940265,
+          "peak_rss_kib": 27352
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  },
+  {
+    "name": "controls/region/asymmetric_three_regions",
+    "configuration": "serial",
+    "protocol_sha256": "e6db4be4b2abece91aa9352b2d4c70cd68e58e6f52aa6addbee2a2e40fe07681",
+    "n_regions": 3,
+    "precision_status": "resolved",
+    "wall_seconds": 0.18352351908106357,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0003293290501460433,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.028588328044861555,
+          "cpu_seconds": 0.02896387199999939,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.07870700501371175,
+          "cpu_seconds": 0.07896932600000017,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0028775850078091025,
+          "cpu_seconds": 0.0029996340000000288,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.06566444807685912,
+          "cpu_seconds": 0.06496984600000033,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.00647291203495115,
+          "cpu_seconds": 0.0035325109999995163,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "mode": "serial",
+      "worker_count": 0
+    }
+  },
+  {
+    "name": "controls/region/asymmetric_three_regions",
+    "configuration": "parallel2",
+    "protocol_sha256": "28df5f09e25a818d17ec0c1f4ea9c62b5d2c8d06a6b82c77455f7dbd35fe96d2",
+    "n_regions": 3,
+    "precision_status": "resolved",
+    "wall_seconds": 0.5789878970244899,
+    "measurements": {
+      "schema": "topomt.reference-validator.measurements/1",
+      "profiled": false,
+      "child_cpu_scope": "terminated-and-waited children only",
+      "phases": {
+        "read_model": {
+          "wall_seconds": 0.0002939460100606084,
+          "cpu_seconds": 0.0,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "admit_topology_frontier": {
+          "wall_seconds": 0.025507727055810392,
+          "cpu_seconds": 0.026000479000000354,
+          "waited_children_cpu_seconds": 0.0,
+          "failed": false,
+          "calls": []
+        },
+        "integrate_complete_frontier": {
+          "wall_seconds": 0.446086679934524,
+          "cpu_seconds": 0.038352513999999616,
+          "waited_children_cpu_seconds": 0.40826299999999893,
+          "failed": false,
+          "calls": []
+        },
+        "reduce_and_request_check": {
+          "wall_seconds": 0.0027090180665254593,
+          "cpu_seconds": 0.0029753489999997385,
+          "waited_children_cpu_seconds": -6.661338147750939e-16,
+          "failed": false,
+          "calls": []
+        },
+        "independent_serial_recompute": {
+          "wall_seconds": 0.09605982096400112,
+          "cpu_seconds": 0.09573319900000055,
+          "waited_children_cpu_seconds": -6.661338147750939e-16,
+          "failed": false,
+          "calls": []
+        },
+        "save_complete_work": {
+          "wall_seconds": 0.007335133035667241,
+          "cpu_seconds": 0.002974372999999808,
+          "waited_children_cpu_seconds": -6.661338147750939e-16,
+          "failed": false,
+          "calls": []
+        }
+      }
+    },
+    "execution": {
+      "worker_count": 2,
+      "worker_records": [
+        {
+          "pid": 96,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.185369434,
+          "peak_rss_kib": 27512
+        },
+        {
+          "pid": 99,
+          "address_space_bytes": 268435456,
+          "cpu_seconds": 0.180120376,
+          "peak_rss_kib": 27512
+        }
+      ],
+      "worker_affinity": [
+        0,
+        1
+      ],
+      "parent_address_space_bytes": 2147483648,
+      "aggregate_address_space_bound_bytes": 4831838208,
+      "aggregate_bound_includes_spawn_tracker": true,
+      "aggregate_rss_peak_status": "not_measured",
+      "worker_cpu_scope": "pool budget divided across workers; external command deadline also required"
+    }
+  }
+]

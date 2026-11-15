@@ -79,6 +79,14 @@ DFND measurements and public feature qualification are unchanged. Broader
 molecular validation and public-validator admission remain separate work.
 
 
+The same reference arithmetic now has
+{ref}`bounded two-worker receiving <reference-validator-parallel-analytic>`
+on the three original 1.4 Å Models and
+25 analytic controls. Mathematical intervals and requests are unchanged; saved
+work is independently reconstructed on recovery. This qualifies an execution
+route, without adding a physical interpretation or fixing native DFND policy.
+Direct serial remains the default and broader parallel admission stays separate.
+
 ## Source deliveries and remaining scientific/public boundaries
 
 Keep completed bounded deliveries distinct from their broader follow-up:

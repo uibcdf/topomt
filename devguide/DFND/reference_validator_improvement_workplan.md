@@ -29,7 +29,9 @@ their original, sometimes unresolved, precision. No native behavior changes.
 The subsequent [resumable source route](reference_validator_parallel_resume.md)
 qualifies S6's controlled task/failure/recovery contract on three original
 one/two-worker Models. It preserves original canonical topology proofs and serial
-volume results. Full parallel panel and S7/S8 admission remain separate.
+volume results. The later [canonical analytic checker](reference_validator_parallel_edge.md)
+qualifies selected S7 serial/two-worker arithmetic with checked recovery. Full
+parallel-panel and broader S8 admission remain separate.
 
 ### Next executable work under #76
 
@@ -43,7 +45,8 @@ volume results. Full parallel panel and S7/S8 admission remain separate.
 3. Continue the [performance stages](reference_validator_performance_plan.md)
    from the qualified serial baseline: complete cost accounting/invariant
    review, then explicit bounded process failure/resume/equivalence admission.
-   The analytic edge route has no qualified parallel backend yet. Rust is
+   The analytic edge checker now has selected fixed-frontier serial/two-worker
+   qualification; the full parallel panel remains open. Rust is
    optional and requires a measured justified hotspot; no speed target replaces
    correctness. Keep the prior conservative routes as independently readable
    fallback evidence. No new geometry, protein or provider phase is selected.

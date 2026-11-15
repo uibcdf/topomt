@@ -12,6 +12,26 @@ Correctness, complete topology and certified error retain priority over speed.
 The [A--F workplan](reference_validator_improvement_workplan.md) owns the active
 scientific sequence; this document supplies its detailed performance follow-up.
 
+### Certified analytic task execution — 2026-11-15
+
+The [S7 checker route](reference_validator_parallel_edge.md) distributes the
+same canonical signed face pieces to bounded exact arithmetic workers. Complete
+topology/assignment precedes scheduling. Direct serial remains the default;
+partial work supplies no whole-domain enclosure. Source-bound snapshots are
+reconstructed geometrically and numerically on loading. The ordinary symbolic
+certificate and independent serial reader remain unchanged in mathematical
+meaning, with actual checker provenance retained.
+
+The [versioned receiving](../evidence/reference_validator_parallel_edge_v1/README.md)
+qualifies serial/two-worker execution of sixteen boundary and nine region
+controls, plus paused/fresh-process recovered original tetrahedron, closed-shell
+and dumbbell 1.4 Å profiles. Mathematical output equals the original fixed-bit
+receipts and a further new serial read. Unit controls cover signed cancellation,
+tiny/asymmetric regions, changed bits/requests/units, forged saved arithmetic,
+missing/duplicate tasks, failure and cancellation. S7 is delivered at this fixed-
+frontier scope; full parallel nineteen-profile/four-worker and broader S8 remain
+open. This route does not replace remaining S1/S3/S5 work or qualify native DFND.
+
 ### Resumable source-cell receiving — 2026-11-15
 
 The [local source-work route](reference_validator_parallel_resume.md) adds exact
@@ -28,8 +48,9 @@ An initial unchunked shell pool fails near its worker CPU ceiling; its observed
 an exit signal. Longer receiving uses four-cell pools and checkpoints between
 them. Worker CPU ceilings are retained; the external phase deadline is finite.
 These are scoped observations, not full nineteen-profile or four-worker admission.
-S1 retains fuller cost/repeatability work; S7 analytic parallel integration and
-broader S8 remain open. Source allocation, completion, precision and operational
+S1 retains fuller cost/repeatability work. At that source checkpoint S7 analytic
+parallel integration and broader S8 were still open; the later selected S7
+delivery is recorded above. Source allocation, completion, precision and operational
 failure remain separate outcomes.
 
 ### Current serial precision receiving — 2026-11-15
@@ -131,7 +152,7 @@ deferred with its measured reason and revisit condition in #76.
 | S4 | General certified boundary integration and precision receiving | A--F D/E; S1 measurements | Delivered: all 19 original total/per-region requests and selected controls; wider admission separate |
 | S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Partial: denominator control and measured integer dyadic atan; optional Rust deferred |
 | S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Delivered for controlled failures/resume and three original one/two-worker Models; full parallel panel/four workers separate |
-| S7 | Bounded parallel integration with verified ownership | S4/S6 | Earlier range prototype only; analytic-route parallel/failure/resume qualification open |
+| S7 | Bounded parallel integration with verified ownership | S4/S6 | Delivered: canonical analytic frontier, failure/resume controls, 25 analytic controls and three original serial/two-worker profiles; broader panel separate |
 | S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: original serial precision panel delivered; broader optimized/parallel/public receiving open |
 
 ### S1 — measure the actual work and freeze comparisons
@@ -356,7 +377,7 @@ added after their contracts are specified; the table does not create exports.
 | S4 | `edge_volume.py`, `verify/edge_volume.py`, `verify/edge_math.py`; retain earlier region/corner routes | `test_reference_validator_edge_volume.py`, `test_reference_validator_edge_receiving.py`, region/corner controls |
 | S5 | `verify/polytope.py`, `verify/geometry.py`, measured `verify/edge_math.py`; optional producer accelerator | Exact geometry controls and integer dyadic/independent Fraction atan tests in `test_reference_validator_edge_volume.py` |
 | S6 | `parallel.py`, `parallel_runs.py`, `verify/parallel_progress.py`; retain serial power runs | `test_reference_validator_parallel_resume.py`, `test_reference_validator_parallel_receiving.py` and original power controls |
-| S7 | `region_volume.py` and saved region bundles | `test_reference_validator_region_volume.py`, `test_reference_validator_region_receiving.py`; add partition/process tests |
+| S7 | `edge_tasks.py`, `verify/edge_progress.py`, `verify/edge_volume.py`, bounded pool and generic progress storage | `test_reference_validator_edge_tasks.py`, `test_reference_validator_edge_task_receiving.py`; preserve serial edge/corner and S6 controls |
 | S8 | Additive evidence, active checkpoint and BenchLab report | `test_reference_validator_followup.py`, existing per-family receiving and reporting guards |
 
 ## Resource controls and implementation closeout
@@ -410,3 +431,13 @@ every source inequality and the independent complete checker. An optimization
 needs a geometric reuse argument, corruption/degeneracy controls, identical
 canonical proofs and matched successful end-to-end measurements. The profile
 alone delivers no cache or Rust acceleration; S3/S5 keep their remaining gates.
+
+### Persistence follow-up retained under #76
+
+Source inspection during S7 finds that older custom power-progress writers
+allow records up to 128 MiB while the shared bounded reader admits 16 MiB.
+The selected original receiving records are below that reader cap. The new S7
+generic progress writer/reader agree at 16 MiB; this does not silently qualify
+or correct the older routes. Under #76/S2/S6, reconcile their write/read limits
+and add an informative bounded-serialization regression before broader record-
+size admission. Preserve existing source snapshots and readable saved proofs.

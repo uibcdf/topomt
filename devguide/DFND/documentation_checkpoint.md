@@ -16,6 +16,17 @@ closed [#173](https://github.com/uibcdf/topomt/issues/173), as recorded in the
 and reader checks below remain valid within their scope; they did not exercise
 every described policy and are not exhaustive semantic qualification.
 
+## Canonical analytic task execution — 2026-11-15
+
+The [validation chapter](../../docs/content/dfnd/validation_and_scope.md) and
+[BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md#reference-validator-parallel-analytic)
+now describe the scoped S7 serial/two-worker receiving, explicit recovery trust
+boundary and separate arithmetic/full-workflow timing. Twenty-five analytic
+controls and three original 1.4 Å Models preserve every mathematical field of
+the earlier exact result. No DFND operator, query, catalog promotion, units,
+physical interpretation or worked-example input changes. Full parallel-panel,
+native #181/#180/#184/#188 and public/installed #16 retain their own gates.
+
 ## Reference construction recovery — 2026-11-15
 
 The [BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md#reference-validator-resume)

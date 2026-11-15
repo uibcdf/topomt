@@ -1,0 +1,20 @@
+[
+  {
+    "name": "original/closed_shell",
+    "full_elapsed_ratio": 1.081838550865992,
+    "numerical_phase_ratio": 1.465056883484446,
+    "scope": "Matched fixed mathematical frontier and precision; direct serial default vs two checker workers. One observation per configuration, independent serial recheck included, no general scaling/novelty claim."
+  },
+  {
+    "name": "original/dumbbell",
+    "full_elapsed_ratio": 1.0234856546231976,
+    "numerical_phase_ratio": 1.478237644195161,
+    "scope": "Matched fixed mathematical frontier and precision; direct serial default vs two checker workers. One observation per configuration, independent serial recheck included, no general scaling/novelty claim."
+  },
+  {
+    "name": "original/regular_tetrahedron",
+    "full_elapsed_ratio": 0.5531132728219844,
+    "numerical_phase_ratio": 0.08866779750692737,
+    "scope": "Matched fixed mathematical frontier and precision; direct serial default vs two checker workers. One observation per configuration, independent serial recheck included, no general scaling/novelty claim."
+  }
+]
