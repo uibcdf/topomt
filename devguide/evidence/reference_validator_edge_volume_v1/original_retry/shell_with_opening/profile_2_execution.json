@@ -1,0 +1,136 @@
+{
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "/tmp/topomt-edge-original-worker.py",
+    "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_2/protocol.json",
+    "devguide/evidence/reference_validator_edge_volume_v1/original_retry/shell_with_opening/profile_2"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 300,
+  "cpu_hard_seconds": 330,
+  "wall_seconds": 38.67870676598977,
+  "waited_cpu_seconds": 38.62082,
+  "peak_child_rss_kib": 29900,
+  "sampled_group_rss_peak_kib": 28796,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 49017036800,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.002330800984054804,
+      "host": {
+        "available_bytes": 49017036800,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      },
+      "group_rss_kib": 2476,
+      "group_pids": [
+        33
+      ]
+    },
+    {
+      "seconds": 5.00332644500304,
+      "host": {
+        "available_bytes": 49002749952,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      },
+      "group_rss_kib": 24948,
+      "group_pids": [
+        33
+      ]
+    },
+    {
+      "seconds": 10.004287376999855,
+      "host": {
+        "available_bytes": 49004269568,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      },
+      "group_rss_kib": 27364,
+      "group_pids": [
+        33
+      ]
+    },
+    {
+      "seconds": 15.005204486078583,
+      "host": {
+        "available_bytes": 48938749952,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      },
+      "group_rss_kib": 27376,
+      "group_pids": [
+        33
+      ]
+    },
+    {
+      "seconds": 20.006119666039012,
+      "host": {
+        "available_bytes": 48746270720,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      },
+      "group_rss_kib": 28276,
+      "group_pids": [
+        33
+      ]
+    },
+    {
+      "seconds": 25.00720390607603,
+      "host": {
+        "available_bytes": 48689061888,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      },
+      "group_rss_kib": 28404,
+      "group_pids": [
+        33
+      ]
+    },
+    {
+      "seconds": 30.008175101014785,
+      "host": {
+        "available_bytes": 48682430464,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      },
+      "group_rss_kib": 28584,
+      "group_pids": [
+        33
+      ]
+    },
+    {
+      "seconds": 35.00910580903292,
+      "host": {
+        "available_bytes": 48775753728,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=5915601\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5771384\n",
+        "safe": true
+      },
+      "group_rss_kib": 28796,
+      "group_pids": [
+        33
+      ]
+    }
+  ]
+}

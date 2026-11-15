@@ -4,55 +4,44 @@ Date: 2026-11-14. Owner: [TopoMT #76](https://github.com/uibcdf/topomt/issues/76
 First native consumer: [#181](https://github.com/uibcdf/topomt/issues/181).
 Reviewed source/evidence baseline: `242f756712c3ee12b50c565459e75744542af6a9`.
 
-**Status: A/B/C delivered; D implemented with conservative general bounds and
-a qualified restricted boundary integral; E partial; F delivered for two
-explicitly mapped native-input Models. The original nonempty k=24 precision
-gate remains open.** Scientific correctness, exhaustive justified topology and
-certified volume error take priority over runtime. The current serial exact
-construction and separately executable checker remain the baseline.
+**Status: A/B/C delivered; D/E delivered for complete topology and original
+k=24 total/per-region precision on the selected nineteen-profile synthetic
+panel; F delivered for two explicitly mapped native-input Models. Broader
+native receiving and public qualification remain open.** Correctness,
+exhaustive justified topology and certified volume error take priority over
+runtime. The serial exact construction and independent reader remain the baseline.
 
-Execution update: all nineteen original topology profiles and their volume
-enclosures have retained checked receiving. Six excluded profiles meet k=24
-exactly; thirteen nonempty profiles, containing sixteen regions, retain unmet
-precision. All sixteen symmetric clipped-cube controls pass k=8/16/24/32.
-Two additional actual-vdW Models have checked native carrier comparisons.
-The linked checkpoint and versioned receipts own those distinct scopes.
+The [analytic edge receiving](../evidence/reference_validator_edge_volume_v1/README.md)
+passes all nineteen unchanged requests: thirteen positive profiles/sixteen
+regions and six exact zeros. All sixteen clipped-boundary ladder controls and
+nine earlier region controls pass. Historical box/range bounds remain valid at
+their original, sometimes unresolved, precision. No native behavior changes.
 
-| Package | Disposition after execution |
+| Package | Current disposition |
 | --- | --- |
 | A | Bounded proof/trust review and falsification controls delivered. |
 | B | Checked source-cell progress, same-kernel resume and final exhaustive assembly delivered. |
-| C | All ten remaining targets complete; original topology coverage is 19/19. |
-| D | Complete conservative volume accounting and saved refinement delivered. A cap/wedge construction qualifies clipped-cube eight-region precision, including tiny components. General clipped-cell integration remains the next construction. |
-| E | **Partial:** all original requests have dispositions; six exact-zero profiles pass, thirteen nonempty profiles remain unresolved. Restricted analytic controls pass their ladder. Full P5 is open. |
-| F | Whole-carrier exclusions checked on two fresh, exactly matched actual-vdW reference/native Models. The original molecular round-trip mismatch is preserved; wider receiving and native policy keep their owners. |
+| C | Original topology coverage is 19/19. |
+| D | Complete conservative accounting and exact-cut analytic edge integration delivered, including signed faces, tiny/asymmetric regions and independently checked region assignment. |
+| E | All original k=24 total AND per-region requests pass; selected serial precision receiving delivered. Full public/native P5/P6 admission remains separate. |
+| F | Four whole-carrier exclusions checked on two fresh exactly matched actual-vdW Models. Common canonical-unit receiving across the original panel remains #76/#60. |
 
 ### Next executable work under #76
 
-1. Keep the box-cover route as a conservative fallback. The original 4096-leaf
-   tetrahedron pilot still misses k=24; further uniform budget growth is not
-   selected by that result.
-2. Tighten and qualify the [face-flux prototype](reference_validator_face_flux.md)
-   within the original power partition. Its first `regular_tetrahedron` 1.4 Å
-   pilot still misses k=24. Complete oriented
-   facet/cone coverage, sphere/face intersection pieces, zero-dimensional
-   contacts, and region assignment before trusting numerical contributions.
-   Canonical ownership must count coincident positive-volume cells once.
-   The cube formula supplies a bounded precision control. The conservative face
-   range bounds retain signed contributions but need stronger cut-piece
-   integration to pass the original precision request.
-3. Receive the original tetrahedron requests, then the already selected positive
-   families. Keep the asymmetric three-region control, tiny regions, every
-   shared uncertainty contribution and all original k=24 requirements. Admit
-   geometry and precision separately; preserve failures and finite resources.
-4. Under #76/#60, qualify common native receiving in canonical units before
+1. Qualify common native receiving in canonical units under #76/#60 before
    asserting equality across all nineteen native/reference inputs. Actual
-   assigned radii need their own captured Model and full proof when their bits
-   differ from supplied-radius records. Preserve older public results.
-5. Hand the retained whole-carrier supports to #181's explicit physical
-   qualification/public reporting decision. Positive carrier/path restrictions,
-   broader support and native boundary/morphology questions retain #60/#180/
-   #184/#188. No new geometry, protein, provider or scaling phase is selected.
+   assigned radii need a distinct captured Model and full proof when their
+   bits differ from supplied-radius records. Preserve original public results.
+2. Hand retained whole-carrier supports to #181's physical qualification/public
+   reporting decision. Point checks and whole-carrier exclusions do not prove
+   a positive carrier/path. Wider support and morphology retain #60/#180/#184/#188.
+3. Continue the [performance stages](reference_validator_performance_plan.md)
+   from the qualified serial baseline: complete cost accounting/invariant
+   review, then explicit bounded process failure/resume/equivalence admission.
+   The analytic edge route has no qualified parallel backend yet. Rust is
+   optional and requires a measured justified hotspot; no speed target replaces
+   correctness. Keep the prior conservative routes as independently readable
+   fallback evidence. No new geometry, protein or provider phase is selected.
 
 This document gives the next implementation order, concrete tasks and acceptance
 gates. The [implementation specification](physical_reference_validator_implementation.md)

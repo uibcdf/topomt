@@ -1,0 +1,12 @@
+{
+  "original_protocol": "devguide/evidence/reference_validator_region_volume_v1/original/dumbbell/profile_2/protocol.json",
+  "original_protocol_sha256": "e1017d12fd9234690b35420dd12a49ab624b20d91f1b27a0124758669ab884b6",
+  "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+  "bits": 128,
+  "n_components": 0,
+  "face_piece_count": 0,
+  "precision_status": "resolved",
+  "wall_seconds": 59.09582770301495,
+  "cpu_seconds": 59.046847349000004,
+  "old_bounds_overlap": true
+}

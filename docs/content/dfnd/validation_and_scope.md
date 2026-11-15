@@ -47,9 +47,10 @@ The later [exact reference-validator receiving](../benchlab/synthetic/reference_
 completes all three original narrow-tube inventories: one/one/zero free regions
 and two/two/zero free hull patches at 1.2/1.4/2.5 Å. It preserves the same inputs
 and original native observations, and checks every atomic sphere. The negative
-profile has exact zero finite-hull probe-center volume; certified nonempty
-region volumes remain pending. These are independent physical references,
-with native/public candidate qualification still under #181.
+profile has exact zero finite-hull probe-center volume. The later analytic
+edge receiving described below also certifies the requested nonempty region
+volumes. These are independent physical references, with native/public
+candidate qualification still under #181.
 
 The same route now completes the three original wide-tube profiles with
 one/one/zero regions and two/two/zero hull patches at 1.4/2.5/5 Å. Free faces
@@ -66,6 +67,17 @@ occupy one enclosed region while two additional regions touch the hull. The
 earlier named-anchor statement did not count these regions. Complete inventories,
 boundary incidence and requested region-volume precision have separate
 receipts in the [validator report](../benchlab/synthetic/reference_validator_report.md).
+
+The later {ref}`analytic edge receiving <reference-validator-edge-volumes>`
+meets **all nineteen original volume requests**, for the total and every region.
+Both the absolute requirement `V(domain) × 2⁻²⁴` and relative requirement `2⁻²⁴`
+are satisfied, including sixteen positive regions and six exact-zero profiles.
+Analytic integration uses certified outward rational error bounds rather than
+sampling uncertainty. These bounds concern the fixed numerical atom/probe/domain
+model; they do not quantify uncertainty in atomic radii or coordinates. Native
+DFND measurements and public feature qualification are unchanged. Broader
+molecular validation and public-validator admission remain separate work.
+
 
 ## Source deliveries and remaining scientific/public boundaries
 

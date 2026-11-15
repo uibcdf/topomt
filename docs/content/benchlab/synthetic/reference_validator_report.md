@@ -3,13 +3,15 @@
 All six current synthetic BenchLab systems were run with their **19 frozen
 probe profiles**, dated **2026-11-13**, under [#76](https://github.com/uibcdf/topomt/issues/76).
 Every scheduled analysis completed. This report preserves that source's answers
-and measured cost, followed by later complete-topology receiving; it is not
+and measured cost, followed by later complete-topology and volume receiving; it is not
 full qualification of the future connected-region validator.
 
-**Current topology coverage, 2026-11-15:** **all nineteen original profiles**
-have complete free-region and hull-patch inventories. The new shell/dumbbell
-results follow immediately below. Certified requested precision for nonempty
-volumes remains a separate gate; original query-run downloads remain unchanged.
+**Current coverage, 2026-11-15:** **all nineteen original profiles** have complete
+free-region/hull-patch inventories and meet their original k=24 volume requests,
+for the total and every region. The topology results follow immediately below;
+{ref}`certified volume precision <reference-validator-edge-volumes>` has its own
+table, resources and downloadable proofs. Original query-run downloads remain
+unchanged. Native DFND qualification and public-validator admission remain open.
 
 The important result is the distinction between a verified local fact and a
 complete global answer. Points and supplied continuous paths are checked against
@@ -74,12 +76,77 @@ Every target finishes within its separate 480 soft/600 hard CPU-second and
 development and the separately retained diagnostic preflight. These are
 resource receipts for rigorous checking, not performance comparisons.
 
-Complete topology does not supply precise region volumes or qualify native
-DFND's physical promotion policy. Those gates remain under
-[#76](https://github.com/uibcdf/topomt/issues/76) and
-[#181](https://github.com/uibcdf/topomt/issues/181), respectively.
+Topology alone does not supply precise region volumes. The separate integration
+receiving below now supplies them at the original requested precision. Neither
+result qualifies native DFND's physical promotion policy, which remains under
+[#181](https://github.com/uibcdf/topomt/issues/181).
 
-## Performance continuation and face-integration feasibility — 2026-11-15
+(reference-validator-edge-volumes)=
+
+## Certified volume precision for all six original systems — 2026-11-15
+
+The independent validator now meets the original **k=24 absolute and relative
+volume requirements for all nineteen profiles**, for the total and every region.
+This resolves the requested precision of the thirteen positive profiles and
+their sixteen regions. Six excluded profiles retain exact zero volume.
+
+The new construction integrates signed flux over the exact power-cell faces,
+then reduces each face to analytic edge integrals with exact sphere-cut decisions
+and outward numerical bounds. Region assignment is reconstructed from the
+complete checked topology. The original Models, probes, radii, inputs and native
+DFND observations are unchanged. This certifies probe-center volume in each
+finite domain; native public qualification remains a separate task.
+
+| Original case | Probe (Å) | Regions | Volume (nm³, approx.) | Relative width (approx.) | Worker seconds | Peak RSS (MiB) |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `closed_shell` | 0.05 | 1 | 0.391781717 | 3.50e-33 | 113.659 | 41.02 |
+| `closed_shell` | 0.2 | 1 | 0.343932389 | 6.93e-34 | 108.708 | 40.85 |
+| `closed_shell` | 1.4 | 1 | 0.113003533 | 8.39e-33 | 106.245 | 40.49 |
+| `closed_shell` | 5 | 0 | 0 | exact zero | 47.140 | 30.84 |
+| `dumbbell` | 1.4 | 3 | 0.506127414 | 3.05e-33 | 148.083 | 43.73 |
+| `dumbbell` | 2.2 | 2 | 0.232003479 | 1.25e-32 | 141.403 | 43.64 |
+| `dumbbell` | 6 | 0 | 0 | exact zero | 59.096 | 34.39 |
+| `regular_tetrahedron` | 1.2 | 1 | 0.000918450981 | 2.69e-34 | 0.110 | 20.56 |
+| `regular_tetrahedron` | 1.4 | 1 | 5.0841273e-05 | 5.55e-33 | 0.091 | 20.64 |
+| `regular_tetrahedron` | 1.7 | 0 | 0 | exact zero | 0.041 | 20.43 |
+| `shell_with_opening` | 1.4 | 1 | 0.119933998 | 6.48e-33 | 90.085 | 38.80 |
+| `shell_with_opening` | 3 | 1 | 0.00982842986 | 2.51e-31 | 87.950 | 38.44 |
+| `shell_with_opening` | 5 | 0 | 0 | exact zero | 38.558 | 29.20 |
+| `straight_tube_narrow_dense` | 1.2 | 1 | 0.0153698025 | 1.51e-31 | 90.405 | 41.63 |
+| `straight_tube_narrow_dense` | 1.4 | 1 | 0.00466733155 | 5.80e-31 | 80.867 | 40.90 |
+| `straight_tube_narrow_dense` | 2.5 | 0 | 0 | exact zero | 22.390 | 31.69 |
+| `straight_tube_wide_sparse` | 1.4 | 1 | 0.549362246 | 2.16e-33 | 97.330 | 41.94 |
+| `straight_tube_wide_sparse` | 2.5 | 1 | 0.194638391 | 1.39e-32 | 92.989 | 41.60 |
+| `straight_tube_wide_sparse` | 5 | 0 | 0 | exact zero | 29.688 | 32.20 |
+
+
+Volumes are rounded midpoints; relative widths are approximate summaries of
+exact rational intervals. They describe numerical error for the fixed input
+Model, not biological or experimental uncertainty. Every individual region
+also passes the original absolute AND relative requirements.
+
+The nineteen analyses run sequentially on one CPU with a 2 GiB address-space
+limit: 1354.837 worker elapsed / 1353.655 CPU seconds in total, peak worker RSS
+43.73 MiB. This includes independent saved checking. All monitored host samples
+preserve the shared-machine reserve. Sixteen boundary precision controls and
+nine earlier region-volume controls also pass; the tiny-region and asymmetric
+assignments are retained.
+
+[Download the standalone receiving capsule](artifacts/reference_validator_edge_v1/README.md).
+It contains the exact Models, certificates, checker source and mathematical
+derivation. Fresh reading needs no producer, DFND, scientific floating package,
+process pool or cached accepted state. Full records, attempted budgets and
+remaining gates live in the [versioned evidence](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_edge_volume_v1/README.md).
+The performance plan and public/molecular admission remain open under
+[#76](https://github.com/uibcdf/topomt/issues/76) and
+[#16](https://github.com/uibcdf/topomt/issues/16). This reference delivery does
+not fix native #181/#180/#184/#188.
+
+The sections below preserve earlier methods and source-scoped outcomes. Their
+unmet positive-volume targets describe those earlier receiving records, rather
+than the current analytic edge route.
+
+## Earlier range-based face-integration feasibility — 2026-11-15
 
 The validator now reuses genuinely checked in-process topology and updates
 box-volume totals incrementally. Three matched measurements on the original

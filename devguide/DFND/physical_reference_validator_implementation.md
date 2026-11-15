@@ -19,6 +19,23 @@ It supplements this specification's P0--P7 contracts and k=24 target; it does
 not replace them or mark planned work implemented. Use the
 [source checkpoint](reference_validator_checkpoint.md) for executed evidence.
 
+## Current selected scientific receiving — 2026-11-15
+
+The [analytic edge construction](reference_validator_edge_integration.md) now
+qualifies complete original topology plus k=24 total AND per-region volume
+precision on all nineteen profiles: thirteen positive profiles/sixteen regions
+and six exact zeros. The [receiving](../evidence/reference_validator_edge_volume_v1/README.md)
+retains independent saved checking, exact requests, sixteen boundary and nine
+region controls, source snapshots and bounded one-CPU resources. This completes
+the selected serial precision gate. Common canonical native receiving (#76/#60),
+#181's native policy and broader P6/P7/public/installed admission remain open.
+No specification, native behavior or frozen evidence is weakened or replaced.
+
+## Historical implementation tranches
+
+The following dated/source-bound outcomes preserve their original limitations;
+the current section above supersedes their outstanding original precision gate.
+
 Planning baseline: `0b68206b0af2210b3f27fc3d70fd5837512148c5`.
 The [input/tool inventory](../evidence/reference_validator_planning_inventory_v1.json)
 checks six original models, 19 selected profiles and all 355 previously frozen
@@ -583,13 +600,12 @@ including tests, frozen protocols and retained runs. Complete power-cell
 topology now has accepted original receiving for **all nineteen profiles**.
 The improvement workplan's proof/trust controls and distinct power-cell resume
 are delivered. Conservative complete region-volume bounds have their own
-source route. Nonempty original requested precision remains open: use the
-measured integration pilot and clipped-boundary controls before increasing
-grid work or claiming the P5 target. Small analytic controls qualify their
-specific admission, not general original-hull precision.
+source route. The later analytic edge construction meets every original
+k=24 total/per-region request; its exact-cut derivation, independent controls
+and nineteen-profile receiving qualify that selected synthetic scope.
 
-Complete the required original-source receiving and P1/P4 region-assigned
-integration before expanding a native engine. Source-bound power-cell and
+Next qualify common canonical native receiving under #76/#60 before broader
+native-input equivalence claims or changing #181's public policy. Source-bound power-cell and
 adaptive-volume resume now have separate contracts; an integration
 checkpoint does not by itself pass the precision gate. The maintainer's
 complementary tetrahedral all-atom grid remains a bounded later cross-check

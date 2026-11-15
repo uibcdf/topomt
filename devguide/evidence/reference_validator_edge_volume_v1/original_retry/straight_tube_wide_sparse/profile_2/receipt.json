@@ -1,0 +1,12 @@
+{
+  "original_protocol": "devguide/evidence/reference_validator_region_volume_v1/original/straight_tube_wide_sparse/profile_2/protocol.json",
+  "original_protocol_sha256": "a63d2c25a63a5f43e4c3b4907dc70c250d8e739b244d8fcd11a872adecc4c4ab",
+  "model_sha256": "ffcd86623d3afccc3b17e925ca6366dedf51afb689d1561e66796df0e8b284f5",
+  "bits": 128,
+  "n_components": 0,
+  "face_piece_count": 0,
+  "precision_status": "resolved",
+  "wall_seconds": 29.68837866501417,
+  "cpu_seconds": 29.664551075000002,
+  "old_bounds_overlap": true
+}

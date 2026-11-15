@@ -6,10 +6,14 @@ This is a developer construction, not a supported production detector. Source
 controls, retained original receiving and requested precision have separate
 qualification gates in the [checkpoint](reference_validator_checkpoint.md).
 
-The later [face-flux prototype](reference_validator_face_flux.md) supplies a
-second conservative construction within the actual power cells. Its original
-tetrahedron pilot still misses k=24; the box-cover results below retain their
-original definitions and scope.
+The [face-flux prototype](reference_validator_face_flux.md) supplies a second
+conservative construction within the actual power cells; its range-based
+original tetrahedron pilot misses k=24. The later
+[analytic edge construction](reference_validator_edge_integration.md) qualifies
+all nineteen original total/per-region requests and selected tiny/asymmetric
+controls. The box-cover results below retain their original definitions and
+precision scope; they are a conservative baseline, not the latest precision
+limit of the validator.
 
 ## First integration decision
 

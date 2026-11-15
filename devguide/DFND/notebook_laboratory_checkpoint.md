@@ -1,23 +1,29 @@
 # DFND notebook laboratory checkpoint
 
-## Complete original topology panel — 2026-11-15 UTC
+## Original topology and requested volume precision — 2026-11-15 UTC
 
-The [active validator checkpoint](reference_validator_checkpoint.md) now records
-complete independent topology for **19/19 original profiles**, with raw Models,
-proofs, queries and resources. The ten remaining shell/dumbbell profiles pass;
-dumbbell 1.4 Å has one enclosed chamber region and two extra boundary-touching
-regions. Original named references, inputs and 355 frozen files remain intact.
+The [active validator checkpoint](reference_validator_checkpoint.md) records
+**19/19 original profiles with complete topology and satisfied k=24 volume
+requests**: thirteen positive profiles/sixteen regions and six exact-zero
+profiles. Total and every region meet the unchanged absolute AND relative
+requirements. Exact-cut analytic edge integration replaces the unresolved
+precision disposition of the earlier box/range constructions, whose raw
+certificates and results remain historical evidence.
 
-The total/per-region panel now retains nineteen valid enclosures, with six
-exact-zero passes and thirteen nonempty original precision targets unresolved.
-Sixteen restricted boundary controls pass through k=32; four native carrier
-unions are excluded on two additional checked actual-vdW Models. The
-[workplan](reference_validator_improvement_workplan.md) selects general clipped-
-cell integration on original tetrahedron 1.4 Å next, with wider common-receiver
-qualification under #76/#60. Topology completion is not precision
-qualification or a #181/#180/#184/#188 fix. No new geometry, protein or provider
-phase is selected. Older dated counts and next steps below retain their
-historical scopes; use the active checkpoint for the current gate.
+The [receiving](../evidence/reference_validator_edge_volume_v1/README.md)
+retains independent checking, a portable capsule, sixteen boundary controls
+through k=32, nine region controls and one-CPU resource measurements. Dumbbell
+still has 3/2/0 regions: its small boundary regions are counted and integrated.
+All original named references, inputs and 355 frozen files remain intact.
+
+Next under #76/#60: qualify common canonical-unit native receiving and hand
+whole-carrier evidence to #181's physical qualification/public decision.
+Two additional actual-vdW Models already exclude four submitted native carriers;
+that receiving does not assert exact equality for all original/native inputs.
+The eight-stage performance plan, broader P6/P7 and public/installed #16 remain
+partial. Native #181/#180/#184/#188 are unchanged. No new geometry, protein or
+provider phase is selected. Older counts and next steps below are historical;
+use this section and the active checkpoint for the current gate.
 
 ## Next validator work — 2026-11-14
 

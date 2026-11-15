@@ -15,7 +15,30 @@ supersedes: []
 
 # Independent DFND reference panel
 
-## Partial performance implementation — 2026-11-15
+## Current disposition: original precision completed — 2026-11-15
+
+The [analytic edge derivation](../DFND/reference_validator_edge_integration.md)
+and [new evidence](../evidence/reference_validator_edge_volume_v1/README.md)
+qualify **19/19 original k=24 requests**, total and every region, at unchanged
+absolute AND relative thresholds. Thirteen positive profiles contain sixteen
+positive regions; six excluded profiles are exactly zero. Complete topology and
+all original inputs are preserved. Sixteen clipped-boundary k=8/16/24/32 controls
+and nine region controls pass, including tiny and asymmetric region inventories.
+
+All original workers execute sequentially on one CPU, with finite deadlines and
+2 GiB address-space ceilings; summed worker wall/CPU is 1354.837/1353.655 seconds,
+peak RSS 43.73 MiB. A portable capsule retains exact Models, requests, proofs,
+reader source and receipts. Earlier failed/resource-limited attempts are retained.
+S4 and original precision D/E are delivered for this selected synthetic scope.
+
+**#76 remains partial/open.** Next qualify common canonical-unit native receiving
+under #76/#60 and hand retained supports to #181. Broader P6/public/installed #16,
+P7 and performance-plan admission remain unqualified. Native #181/#180/#184/#188
+are unchanged. No new family, protein or provider run is selected. Earlier
+unmet-precision statements below retain their historical method/source scope
+and must not be reused as the current disposition of the analytic edge route.
+
+## Earlier range-based performance implementation — 2026-11-15
 
 The [source checkpoint](../DFND/reference_validator_checkpoint.md) and
 [versioned receiving](../evidence/reference_validator_performance_v1/README.md)
@@ -36,7 +59,7 @@ implementation disposition is recorded above. Original positive-volume
 precision remains the scientific priority; compiled/parallel receiving follows
 the serial gates. #76 owns this follow-up and remains partial.
 
-## Current A--F disposition — 2026-11-15 UTC
+## Earlier A--F volume-bound disposition — 2026-11-15 UTC
 
 The [workplan](../DFND/reference_validator_improvement_workplan.md) records
 delivered proof/trust review, exact construction resume, all nineteen complete
@@ -334,7 +357,7 @@ morphological acceptance; differing physical/native feature counts alone do
 not establish segmentation defects. Detailed implementation planning can begin
 with that gate; no concrete backend or numerical pilot is yet qualified.
 
-## Current three-case acceptance — 2026-11-10
+## Historical three-case acceptance — 2026-11-10
 
 The [finite case ledger](../../docs/content/benchlab/synthetic/three_case_disposition.md)
 records the completed selected questions on the tetrahedron and two shells.

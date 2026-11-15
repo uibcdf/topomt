@@ -16,6 +16,17 @@ closed [#173](https://github.com/uibcdf/topomt/issues/173), as recorded in the
 and reader checks below remain valid within their scope; they did not exercise
 every described policy and are not exhaustive semantic qualification.
 
+## Independent original-volume precision — 2026-11-15
+
+The validation chapter now links the [new validator receiving](../../docs/content/benchlab/synthetic/reference_validator_report.md#reference-validator-edge-volumes):
+all nineteen original k=24 total/per-region requests pass, including sixteen
+positive regions and six exact zeros. The text distinguishes numerical error
+bounds on the frozen Model from input/model uncertainty. Earlier failed range/
+box integrals retain their own method/source scope. No native DFND operator,
+query, promotion, measurement or worked-example input changes. #181/#180/#184/
+#188, broader native receiving and public/installed admission remain separate.
+
+
 ## Later runtime deliveries — 2026-11-10
 
 The original sections below retain their dated source scope. Bounded physical

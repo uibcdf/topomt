@@ -2,8 +2,9 @@
 
 Developer tools under TopoMT #76, first consumer #181. This is a bounded P0
 foundation with exact multi-ball region/boundary construction, scoped volume
-precision and hull-proof routes. It is not a supported public detector or a
-complete per-region precision implementation. The [implementation plan](../../devguide/DFND/physical_reference_validator_implementation.md)
+precision and hull-proof routes. The selected nineteen original profiles now
+have complete topology and satisfied k=24 total/per-region requests. This is
+not a supported public detector or universal per-region admission. The [implementation plan](../../devguide/DFND/physical_reference_validator_implementation.md)
 retains the remaining scientific gates.
 
 The [performance continuation](../../devguide/DFND/reference_validator_performance_plan.md)
@@ -12,6 +13,18 @@ and `power_runs.PowerSession` for incrementally checked source cells. Both
 reject serialization/cross-process reuse; save proof data and use the raw
 independent readers in a fresh process. Original raw-record operations retain
 checking. The receiving harness uses these contexts without public API changes.
+
+`edge_volume.edge_volume_proposal` prepares a detached unverified symbolic
+job, with no result or precision credit. The independent saved `verify` command
+reconstructs every face, region assignment and exact-cut analytic integral for
+its `power_edge_volume` kind. `edge_volume_certificate` offers adaptive arithmetic
+selection when desired. Both preserve the same request and all geometric
+constraints. See the [derivation](../../devguide/DFND/reference_validator_edge_integration.md)
+and [original receiving](../../devguide/evidence/reference_validator_edge_volume_v1/README.md):
+all nineteen originals plus sixteen boundary and nine region controls pass.
+The exact reader needs no producer/scientific dependency. Serial is the default;
+parallel admission of the analytic route is pending.
+
 
 `boundary_volume.boundary_volume_certificate` proposes a complete oriented
 face partition for the [signed flux construction](../../devguide/DFND/reference_validator_face_flux.md).
@@ -58,8 +71,8 @@ In the subdivision route, only complete exclusion and completely free convex
 domains receive proved component counts (zero/one). A blocked point does not exclude its carrier.
 Mixed partitions and positive paths do not acquire a general component count,
 enclosure, aperture inventory or morphological label. The separate power-cell
-route below supplies complete regions/boundary incidence. Clipped/per-region
-high precision and production attribution/API admission remain pending.
+route below supplies complete regions/boundary incidence. The analytic edge route supplies original clipped/per-region precision;
+production attribution/API and broader admission remain pending.
 Run/checkpoint records and same-kernel
 resumption are now implemented within the admitted partition envelope. No
 original external scientific kernel is used by this rational developer route.
@@ -74,7 +87,8 @@ bundles and `verify` keep valid bounds separate from requested precision.
 `compare_reference_claims` matches exact numerical Models and checks recoverable
 point/path and source-tetrahedron supports without inferring native morphology.
 These source routes retain their explicit work/receiving gates under #76;
-they do not add production exports or qualify all original precision targets.
+they do not add production exports. The separate analytic edge receiving
+qualifies all original precision targets at its stated synthetic scope.
 
 `region_volume_certificate(..., method='analytic_corner_regions')` selects the
 separate [eight-corner boundary integral](../../devguide/DFND/reference_validator_boundary_precision.md).
@@ -120,8 +134,9 @@ See the [derivation, trusted base and scope](../../devguide/DFND/reference_valid
 The default work envelope admits at most 128 atoms, 48 supporting planes per
 cell, 128 vertices per cell, 8192 total vertices and 32768 total edges. Exceeding
 a budget fails without a physical answer. This is a developer Python/Fraction
-construction, with no native Rust or public API admission. Nonempty per-region
-volumes and requested precision remain uncomputed. Boundary patches are geometric
+construction, with no native Rust or public API admission. This topology operation
+does not compute volumes; the separate analytic edge route qualifies the original
+total/per-region requests. Boundary patches are geometric
 free subsets of the declared finite domain, not automatically biological Mouths.
 
 Capture the [frozen 20-profile protocol](../../devguide/evidence/reference_validator_power_cells_v1/protocol.json)
@@ -246,8 +261,9 @@ sphere inputs define the nonperiodic excluded set globally; a hull or box
 specifies which finite volume and connectivity question is being asked. The
 global exterior volume is unbounded. Units and boundary conditions must be
 declared; the steric prototype admits nonperiodic boxes, tetrahedra and verified
-center hulls. Hull point/path/whole-domain proofs are described below; general
-mixed hull partitions and region enumeration remain pending.
+center hulls. Hull point/path/whole-domain proofs are described below. Complete
+region enumeration and original volume precision use the power-cell/analytic
+edge routes above; the older subdivision route retains its bounded scope.
 
 For direct numerical inputs, the developer factory generates row IDs and a
 canonical sphere-source digest automatically:
@@ -335,8 +351,10 @@ external memory/deadline envelope:
 python -m devtools.reference_validator.capture_box_topology PROTOCOL.json NEW_DIRECTORY
 ```
 
-The standalone saved checker needs no topology producer, DFND or NumPy. General
-multi-ball regions and clipped per-region high precision remain unresolved.
+The standalone saved checker needs no topology producer, DFND or NumPy. This
+one-ball route does not enumerate general multi-ball regions or supply clipped
+per-region high precision; the later power-cell/edge routes above do so within
+their admitted and tested scope.
 
 ## Scoped certified volume integration
 
@@ -400,8 +418,9 @@ The default schedules only small controls. `--original-case NAME` or
 `--all-originals` selects original inputs, always sequentially. Each worker has
 30 CPU seconds, a 40-second wall deadline and a 2 GiB address cap. A stop remains
 unresolved; no geometric empty result is inferred. The pilot limits source count
-to 128, facets to 192 and plane triples to 1,200,000 per enumeration. General
-many-atom free regions and region-assigned precision remain pending.
+to 128, facets to 192 and plane triples to 1,200,000 per enumeration. This
+center-only operation supplies neither steric regions nor their volumes; those
+use the complete power-cell/analytic edge routes above.
 
 The [retained local batch](../../devguide/evidence/reference_validator_hulls_v1/local_receiving/receipt.json)
 at source `9a276cd` accepts all six original center hulls with independent

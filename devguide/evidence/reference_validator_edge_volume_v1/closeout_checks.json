@@ -1,0 +1,12 @@
+{
+  "schema": "topomt.reference-validator.edge-closeout/1",
+  "owner": "uibcdf/topomt#76",
+  "source_files_unchanged_since_original_receiving": 47,
+  "original_frozen_files_unchanged": 355,
+  "human_version_change_preserved": true,
+  "strict_sphinx_success": true,
+  "rendered_report_anchor_and_method_book_link": true,
+  "rendered_download_sha256": "6b6a9761b8adcd6711a94465091a51fd1654abfa3a537bddb6a12f1972fa1b49",
+  "local_markdown_link_targets_checked": 265,
+  "hosted_site_deployment_qualified": false
+}

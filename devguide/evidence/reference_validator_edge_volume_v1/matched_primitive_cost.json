@@ -1,0 +1,51 @@
+{
+  "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30",
+  "scope": "32 identical original dumbbell face integrals; metrics only; full topology admission excluded",
+  "endpoint_caches_reset_each_repeat": true,
+  "constant_pi_cache_may_persist": true,
+  "results_enclosures_compatible": true,
+  "runs": [
+    {
+      "repeat": 0,
+      "route": "fraction_reference",
+      "piece_count": 32,
+      "wall_seconds": 3.004599455045536,
+      "cpu_seconds": 3.000668637000004
+    },
+    {
+      "repeat": 0,
+      "route": "integer_dyadic",
+      "piece_count": 32,
+      "wall_seconds": 0.2994208550080657,
+      "cpu_seconds": 0.2998721509999953
+    },
+    {
+      "repeat": 1,
+      "route": "fraction_reference",
+      "piece_count": 32,
+      "wall_seconds": 2.9127987049287185,
+      "cpu_seconds": 2.9101533310000036
+    },
+    {
+      "repeat": 1,
+      "route": "integer_dyadic",
+      "piece_count": 32,
+      "wall_seconds": 0.32483922503888607,
+      "cpu_seconds": 0.324618166999997
+    },
+    {
+      "repeat": 2,
+      "route": "fraction_reference",
+      "piece_count": 32,
+      "wall_seconds": 2.8748213310027495,
+      "cpu_seconds": 2.873167364000004
+    },
+    {
+      "repeat": 2,
+      "route": "integer_dyadic",
+      "piece_count": 32,
+      "wall_seconds": 0.2967240200378001,
+      "cpu_seconds": 0.2967099489999967
+    }
+  ]
+}

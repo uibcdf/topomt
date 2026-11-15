@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/tmp/topomt-edge-extra-controls.py", line 13, in <module>
+    path=Path(job['protocol']);assert hashlib.sha256(path.read_bytes()).hexdigest()==job['sha256'];spec=json.loads(path.read_text());model=Model.from_record(spec['model']);topology=json.loads(Path(spec['topology_path']).read_text())
+                                                                                                                                                                                                ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/lib/python3.14/pathlib/__init__.py", line 150, in __init__
+    raise TypeError(
+    ...<2 lines>...
+        f"not {type(path).__name__!r}")
+TypeError: argument should be a str or an os.PathLike object where __fspath__ returns a str, not 'NoneType'

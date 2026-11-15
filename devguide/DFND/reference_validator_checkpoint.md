@@ -6,9 +6,43 @@ Operational continuation: `997f69b3d496333d7c89e2fc18dcd5a487ab38c1`.
 One-ball topology feasibility: `0aac0c04e1ea49f0ca3f8c485f9b508c4d840e9e`.
 Analytic precision feasibility: `580f1c016db48cc7041d9731ddc88501b87fd45a`.
 Center-hull equality and geometric clipping: `2b6985bfb8a3ee8a2b856060435a7c3b93fbab6b`.
-These are bounded implemented P0/P1 tranches of the
-[implementation plan](physical_reference_validator_implementation.md), not a
-complete topology-plus-precision validator or a supported public TopoMT detector.
+These identify early P0/P1 tranches of the
+[implementation plan](physical_reference_validator_implementation.md). The latest
+section below records nineteen topology-plus-precision synthetic profiles;
+broader admission and a supported public TopoMT detector remain separate.
+
+## Original total and region precision completed — 2026-11-15
+
+The [analytic edge construction](reference_validator_edge_integration.md)
+reduces signed power-cell face flux to exact-cut edge primitives. The independent
+reader reconstructs source facets, all region assignments and outward rational
+sqrt/atan intervals. It imports no producer or scientific library; a declarative
+proposal supplies no accepted result. The exact model/contact/domain contracts
+and original requests are unchanged.
+
+The [new receiving](../evidence/reference_validator_edge_volume_v1/README.md)
+qualifies **19/19 original k=24 profiles**: thirteen positive profiles and their
+sixteen regions meet both absolute and relative requests; six excluded profiles
+have exact zero volume. All new intervals are inside their previous conservative
+bounds. All sixteen original clipped-boundary k=8/16/24/32 controls and nine
+earlier region controls pass, including tiny eight-region and asymmetric
+three-region Models. The capsule retains all 47 source files and exact receipts;
+no previously frozen input or evidence file is changed.
+
+Sequential execution uses one CPU/thread, 2 GiB address-space ceilings and finite
+CPU/wall deadlines. Summed original worker wall/CPU is 1354.837/1353.655 seconds,
+peak RSS 43.73 MiB. A failed earlier 180 CPU-second dumbbell attempt is retained.
+Matched primitive timings justify integer dyadic atan; they do not establish a
+full-analysis speedup over that incomplete attempt.
+
+S4 and the original precision portion of D/E are delivered for this selected
+synthetic scope. The eight-stage plan and #76 remain partial: common canonical-
+unit native receiving (#76/#60), broader P6/public/installed admission and
+qualified parallel/scaling work remain. #181/#180/#184/#188 retain their native
+scopes; no DFND behavior or finding is fixed. The
+[BenchLab report](../../docs/content/benchlab/synthetic/reference_validator_report.md#reference-validator-edge-volumes)
+provides the per-system table and portable download. Earlier unmet-precision
+statements below describe their retained methods/sources, not this current result.
 
 ## Selected improvement workplan — 2026-11-14
 

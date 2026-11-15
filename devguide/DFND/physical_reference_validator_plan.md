@@ -10,9 +10,12 @@ Current implementation is partial, with its dated evidence in the
 [clipped power-cell construction](reference_validator_power_cell_construction.md)
 selects and implements complete multi-ball regions/boundary incidence; the
 retained receiving now qualifies complete topology for **all nineteen original
-profiles**. Conservative total/per-region volume construction is implemented;
-requested precision for nonempty original regions retains its own open gate.
-The proposed complete-validator acceptance below retains those requirements.
+profiles**. The later [analytic edge route](reference_validator_edge_integration.md)
+meets the unchanged k=24 absolute AND relative volume request for the total and
+every region in all nineteen originals. The selected serial scientific gate is
+delivered; common native receiving and broader public/installed/parallel
+admission remain open. Earlier unmet-precision evidence retains its own source.
+The complete-validator acceptance below retains its broader requirements.
 
 The [post-tube improvement workplan](reference_validator_improvement_workplan.md)
 records the selected packages and their test/acceptance gates under #76.
@@ -23,7 +26,8 @@ Critical design review: 2026-11-12. Owner:
 [#76](https://github.com/uibcdf/topomt/issues/76); first DFND consumer:
 [#181](https://github.com/uibcdf/topomt/issues/181).
 
-**Status: proposed implementation and acceptance plan, not a delivered validator.**
+**Historical design baseline:** the proposal below predates the bounded source
+deliveries summarized above. It does not qualify the complete public validator.
 Source inspection baseline: `bc69b608dfbd7f6a5c40b0773e7f3570563ec5e8`,
 the current #76/#181 records and the retained six-case protocols.
 The maintainer prioritizes correctness, justified exact geometric/topological

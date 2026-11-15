@@ -1,9 +1,13 @@
-# Certified face flux: construction and remaining precision gate
+# Certified face flux: original range-based construction
 
 Owner [#76](https://github.com/uibcdf/topomt/issues/76), performance stage S4.
 This developer prototype supplies conservative bounds on a reconstructed power
-partition. The original k=24 request remains unmet. It is not public API or a
-qualification of native DFND, general molecular performance or the entire plan.
+partition. Its range-based original k=24 pilot remains unmet at its recorded
+budget. The later [analytic edge reduction](reference_validator_edge_integration.md)
+uses the same field and complete power partition and passes all nineteen original
+requests, total and per region. Keep these method-specific receipts distinct.
+Neither route is public API or qualification of native DFND, general molecular
+performance or the entire plan.
 
 ## Reduction to one expanded ball in each exact cell
 

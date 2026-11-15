@@ -1,0 +1,12 @@
+{
+  "original_protocol": "devguide/evidence/reference_validator_region_volume_v1/original/regular_tetrahedron/profile_2/protocol.json",
+  "original_protocol_sha256": "49d0d7db416e2193da1b1ed3d172de76c88ba0114742a88cf3bebe839ea90d94",
+  "model_sha256": "d4f7a65441c38620ba281234c8faafd6d8d135122e5d487d6e2e0d60c68251f5",
+  "bits": 128,
+  "n_components": 0,
+  "face_piece_count": 0,
+  "precision_status": "resolved",
+  "wall_seconds": 0.041425630915910006,
+  "cpu_seconds": 0.041951486999999996,
+  "old_bounds_overlap": true
+}

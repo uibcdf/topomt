@@ -12,7 +12,28 @@ Correctness, complete topology and certified error retain priority over speed.
 The [A--F workplan](reference_validator_improvement_workplan.md) owns the active
 scientific sequence; this document supplies its detailed performance follow-up.
 
-### Implementation receiving — 2026-11-15
+### Current serial precision receiving — 2026-11-15
+
+S4 is **delivered for the selected nineteen original profiles and controls**.
+The [analytic edge route](reference_validator_edge_integration.md) and
+[receiving](../evidence/reference_validator_edge_volume_v1/README.md) meet every
+unchanged k=24 total/per-region request, including sixteen positive regions.
+The sixteen clipped-boundary ladder and nine region controls also pass. Original
+workers run sequentially on one CPU (1354.837 wall seconds; 43.73 MiB peak RSS).
+Fresh checking needs no producer or scientific dependency.
+
+A measured Fraction-atan hotspot led to certified integer dyadic arithmetic;
+matched 32-piece primitive medians are 2.912799 versus 0.299421 seconds. This is
+not a full-analysis speedup over the retained incomplete dumbbell attempt.
+Declarative proposals avoid evaluating the full integral twice while earning
+no completion credit. Optional Rust remains deferred pending an additional
+justified hotspot and its independent qualification. S1/S3/S5/S6/S7/S8 retain
+unexecuted parts. The former unmet-precision statements below describe the
+earlier range-based method; parallel prototypes do not qualify this analytic
+route. The current scientific continuation is common canonical native receiving
+under #76/#60 and #181, with broader public/installed gates separate.
+
+### Earlier range-based implementation receiving — 2026-11-15
 
 The [versioned evidence](../evidence/reference_validator_performance_v1/README.md)
 records matched measurements, actual checked-state reuse, incremental box-volume
@@ -28,7 +49,7 @@ this small case slower. Neither a generic multicore speedup nor the original
 positive-volume precision gate is passed. Source prototypes do not override
 the serial scientific prerequisites for complete P7 admission.
 
-## Starting evidence and scope
+## Historical starting evidence and preserved scope
 
 All nineteen original profiles have complete checked topology and conservative
 total/per-region volume bounds. Six exact-zero profiles pass their k=24 request;
@@ -56,7 +77,7 @@ geometry, external engine, public API or distributed-machine execution.
 Profiling and bounded serial improvements may precede the remaining precision
 construction. P7 scaling and compiled-backend qualification follow the serial
 scientific gates in the A--F workplan. The first implementation tranche has delivered bounded S1/S2/S3 receiving;
-the current scientific continuation is S4.
+S4 was the scientific continuation selected at that baseline.
 
 ## Guarantees every stage must preserve
 
@@ -87,11 +108,11 @@ deferred with its measured reason and revisit condition in #76.
 | S1 | Reproducible cost breakdown and equivalence protocol | Existing serial baseline | Partial: matched phase/call pilot; full accounting pending |
 | S2 | Checked immutable context and incremental progress reuse | S1 | Delivered for tested in-process query/session scope |
 | S3 | Exact invariant reuse and incremental volume accounting | S1/S2 | Partial: volume ledger delivered; wider invariants pending |
-| S4 | General certified boundary integration and precision receiving | A--F D/E; S1 measurements | Partial: conservative face flux; original precision still unmet |
-| S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Outward denominator control delivered; optional Rust deferred |
+| S4 | General certified boundary integration and precision receiving | A--F D/E; S1 measurements | Delivered: all 19 original total/per-region requests and selected controls; wider admission separate |
+| S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Partial: denominator control and measured integer dyadic atan; optional Rust deferred |
 | S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Prototype; full fault/resume/panel qualification pending |
-| S7 | Bounded parallel integration with verified ownership | S4/S6 | Prototype; same partition checked; precision/panel gate open |
-| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: selected receiving, not full optimized original panel |
+| S7 | Bounded parallel integration with verified ownership | S4/S6 | Earlier range prototype only; analytic-route parallel/failure/resume qualification open |
+| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: original serial precision panel delivered; broader optimized/parallel/public receiving open |
 
 ### S1 — measure the actual work and freeze comparisons
 
@@ -312,8 +333,8 @@ added after their contracts are specified; the table does not create exports.
 | S1 | `capture_power_cells.py`, `capture_volume.py`, `receiving.py`; retain the versioned region-volume receiving protocol | `test_reference_validator_power_capture.py`, `test_reference_validator_receiving.py`, `test_reference_validator_region_receiving.py` |
 | S2 | `verify/power_cells.py`, `power_runs.py`, `verify/power_progress.py` | `test_reference_validator_power_cells.py`, `test_reference_validator_power_resume.py` |
 | S3 | `power_cells.py`, `region_volume.py`, `verify/region_volume.py` | `test_reference_validator_reprobe.py`, `test_reference_validator_region_volume.py` |
-| S4 | General integration beside `region_volume.py` and `verify/`; preserve `verify/corner_volume.py`'s restricted scope | `test_reference_validator_region_volume.py`, `test_reference_validator_corner_volume.py`, `test_reference_validator_region_receiving.py` |
-| S5 | `verify/polytope.py`, `verify/geometry.py` as reference primitives; optional producer accelerator | `test_reference_validator_predicates.py`, `test_reference_validator_hulls.py`, `test_reference_validator_topology_controls.py` |
+| S4 | `edge_volume.py`, `verify/edge_volume.py`, `verify/edge_math.py`; retain earlier region/corner routes | `test_reference_validator_edge_volume.py`, `test_reference_validator_edge_receiving.py`, region/corner controls |
+| S5 | `verify/polytope.py`, `verify/geometry.py`, measured `verify/edge_math.py`; optional producer accelerator | Exact geometry controls and integer dyadic/independent Fraction atan tests in `test_reference_validator_edge_volume.py` |
 | S6 | `power_runs.py`, `capture_power_cells.py`; bounded orchestration | `test_reference_validator_power_resume.py`, `test_reference_validator_power_capture.py`; add focused process/failure tests |
 | S7 | `region_volume.py` and saved region bundles | `test_reference_validator_region_volume.py`, `test_reference_validator_region_receiving.py`; add partition/process tests |
 | S8 | Additive evidence, active checkpoint and BenchLab report | `test_reference_validator_followup.py`, existing per-family receiving and reporting guards |

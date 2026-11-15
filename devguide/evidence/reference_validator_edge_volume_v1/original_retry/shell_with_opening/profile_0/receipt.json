@@ -1,0 +1,12 @@
+{
+  "original_protocol": "devguide/evidence/reference_validator_region_volume_v1/original/shell_with_opening/profile_0/protocol.json",
+  "original_protocol_sha256": "bffb22d21597259919a2d4c231696ec1da0baa63114ea0af42f70877c696e56f",
+  "model_sha256": "0d3af6fd8ace1d2b6f04d25328d54a802d1f9d3c351558a328e68a91692ed493",
+  "bits": 128,
+  "n_components": 1,
+  "face_piece_count": 1962,
+  "precision_status": "resolved",
+  "wall_seconds": 90.08509347494692,
+  "cpu_seconds": 90.011176055,
+  "old_bounds_overlap": true
+}
