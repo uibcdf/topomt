@@ -5,7 +5,6 @@ sampled graph heuristic. Producer clipping and graph search are never imported.
 """
 
 from collections.abc import Callable
-from copy import deepcopy
 from fractions import Fraction
 from itertools import combinations
 from math import comb
@@ -685,7 +684,22 @@ def query_anchors(
     ValueError
         The proof, named inputs, work budget or connection anchors are invalid.
     """
-    from . import verify
+    from .context import CheckedTopology
+
+    return CheckedTopology(model, certificate).query_anchors(
+        anchors=anchors, pairs=pairs
+    )
+
+
+def _query_checked(
+    model: Model,
+    detached: dict[str, Any],
+    checked: dict[str, Any],
+    *,
+    anchors: dict[str, tuple[Fraction, Fraction, Fraction]],
+    pairs: list[tuple[str, str]],
+) -> dict[str, Any]:
+    """Private continuation; callers supply detached genuinely checked state."""
 
     if (
         not isinstance(anchors, dict)
@@ -705,10 +719,6 @@ def query_anchors(
         ):
             raise ValueError('A connection needs two existing named anchors')
         connections.append((pair[0], pair[1]))
-    detached = deepcopy(certificate)
-    checked = verify(model, detached)
-    if not isinstance(detached, dict) or detached['kind'] != 'power_cell_topology':
-        raise ValueError('Anchor batches require a complete power-cell certificate')
     locations = {
         name: _locate(model, detached, checked, x) for name, x in points.items()
     }

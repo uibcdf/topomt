@@ -50,6 +50,16 @@ def _exact(value: Fraction | int) -> _Interval:
     return _Interval(value, value)
 
 
+def _outward(value: _Interval, bits: int) -> _Interval:
+    """Round endpoints outward to a common dyadic grid before long reductions."""
+    if type(bits) is not int or not 1 <= bits <= 2048:
+        raise ValueError('Outward rounding requires 1..2048 dyadic bits')
+    scale = 1 << bits
+    lower = (value.lower.numerator * scale) // value.lower.denominator
+    upper = -((-value.upper.numerator * scale) // value.upper.denominator)
+    return _Interval(Fraction(lower, scale), Fraction(upper, scale))
+
+
 def _sqrt(value: Fraction, bits: int) -> _Interval:
     numerator = isqrt((value.numerator << (2 * bits)) // value.denominator)
     lower = Fraction(numerator, 1 << bits)

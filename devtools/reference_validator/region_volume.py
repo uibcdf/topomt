@@ -15,11 +15,10 @@ from .power_contracts import bounding_box
 from .storage import read_record_with_digest
 from .verify import verify
 from .verify.corner_volume import corner_bounds
-from .verify.geometry import volume
+from .verify.geometry import cell_is_free, volume
 from .verify.region_volume import (
     _box_children,
     _leaf_state,
-    _summarize,
     _volume_kernel,
     check_region_volume,
 )
@@ -50,26 +49,55 @@ def _refine(
     for p, b in boxes.items():
         if states[p][0] == 'unknown' and len(p) < cert['limits']['max_depth']:
             heappush(candidates, (-volume(b), p))
-    # Search uses local bounds; the independent reader reconstructs the tree.
-    # Precision is checked at geometric batch sizes to keep repeated checking
-    # separate from the refinement work, without weakening final acceptance.
+    # This ledger guides producer search only. The independent reader still
+    # reconstructs coverage, classifications and all region allocations.
+    request = VolumeRequest.from_record(cert['request'])
+    lower = {r['region_id']: Fraction() for r in topology['regions']}
+    unknown = Fraction()
+    domain_volume = volume(model.domain)
+    whole_free = len(lower) == 1 and cell_is_free(model, model.domain)
+
+    def update(box, state, sign):
+        nonlocal unknown
+        kind, region = state
+        if kind == 'free':
+            if region not in lower:
+                raise ValueError('Invalid producer region assignment')
+            lower[region] += sign * volume(box)
+        elif kind == 'unknown':
+            unknown += sign * volume(box)
+
+    for path, box in boxes.items():
+        update(box, states[path], 1)
+
+    def satisfied():
+        if whole_free:
+            return request.satisfied(domain_volume, domain_volume)
+        total_lower = sum(lower.values(), Fraction())
+        total_upper = min(domain_volume, total_lower + unknown)
+        return request.satisfied(total_lower, total_upper) and all(
+            request.satisfied(
+                value, min(value + unknown, total_upper - (total_lower - value))
+            )
+            for value in lower.values()
+        )
+
     next_check = len(boxes)
     while True:
         if len(boxes) >= next_check:
-            cert['leaves'] = sorted(boxes)
-            checked = _summarize(model, cert, topology)
-            if checked['precision_status'] == 'resolved':
+            if satisfied():
                 break
             next_check = max(next_check + 1, 2 * next_check)
         if not candidates or len(boxes) + 7 > ceiling:
             break
         _, path = heappop(candidates)
         box = boxes.pop(path)
-        states.pop(path)
+        update(box, states.pop(path), -1)
         for i, b in enumerate(_box_children(box)):
             key = path + str(i)
             boxes[key] = b
             states[key] = _leaf_state(model, cert['topology_certificate'], topology, b)
+            update(b, states[key], 1)
             if states[key][0] == 'unknown' and len(key) < cert['limits']['max_depth']:
                 heappush(candidates, (-volume(b), key))
     cert['leaves'] = sorted(boxes)

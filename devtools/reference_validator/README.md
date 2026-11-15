@@ -6,6 +6,31 @@ precision and hull-proof routes. It is not a supported public detector or a
 complete per-region precision implementation. The [implementation plan](../../devguide/DFND/physical_reference_validator_implementation.md)
 retains the remaining scientific gates.
 
+The [performance continuation](../../devguide/DFND/reference_validator_performance_plan.md)
+now includes `verify.context.CheckedTopology` for immutable in-process queries
+and `power_runs.PowerSession` for incrementally checked source cells. Both
+reject serialization/cross-process reuse; save proof data and use the raw
+independent readers in a fresh process. Original raw-record operations retain
+checking. The receiving harness uses these contexts without public API changes.
+
+`boundary_volume.boundary_volume_certificate` proposes a complete oriented
+face partition for the [signed flux construction](../../devguide/DFND/reference_validator_face_flux.md).
+The generic saved `verify` command handles its `power_boundary_volume` kind
+without producer imports. This conservative prototype still misses the original
+tetrahedron k=24 request; it does not replace the qualified analytic controls.
+
+The opt-in developer `parallel` module bounds source-cell/face workers, queue
+sizes and child resources. Its Linux caller must supply affinity of at most
+four CPUs, parent AS at most 2 GiB, a finite CPU budget at most 300 seconds and
+an external wall deadline. Worker CPU budget is divided across the pool;
+stricter inherited limits are preserved. The reserve check includes parent,
+workers and spawn tracker. One/two-process certificates agree on the original
+tetrahedron; this small workload is slower with two workers. Durable partial
+parallel resume, full failure/panel qualification and four workers remain open.
+Use the [receiving record](../../devguide/evidence/reference_validator_performance_v1/README.md)
+for exact commands, timing scope and partial-stage disposition. Serial remains
+the routine route; source prototypes qualify no public or installed backend.
+
 The model freezes rational nm values, source atom/frame IDs, input SHA-256,
 probe and a box, tetrahedron or independently checked center hull. Captured
 floats retain their exact binary value.

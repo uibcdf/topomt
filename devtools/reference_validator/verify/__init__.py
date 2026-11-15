@@ -218,6 +218,8 @@ def verify(
         extra = (
             {'claim', 'atom_id'} if certificate.get('claim') == 'blocked' else {'claim'}
         )
+    elif kind == 'power_boundary_volume':
+        extra = {'topology_certificate', 'request', 'bits', 'leaves'}
     elif kind == 'region_volume':
         extra = {
             'method',
@@ -289,6 +291,28 @@ def verify(
             (Path(__file__).parents[1] / name).read_bytes()
         ).hexdigest()
         result.update(check(model, cert))
+    elif kind == 'power_boundary_volume':
+        from .boundary_volume import check as check_boundary
+
+        if (
+            not isinstance(cert['leaves'], list)
+            or len(cert['leaves']) > limits.max_leaves
+        ):
+            raise ValueError('Boundary checker leaf budget exceeded')
+        for name in (
+            'verify/boundary_volume.py',
+            'verify/_interval.py',
+            'verify/power_cells.py',
+            'verify/polytope.py',
+            'power_contracts.py',
+            'volume_request.py',
+            'hull_model.py',
+            'contracts.py',
+        ):
+            result['verifier_files_sha256'][name] = hashlib.sha256(
+                (Path(__file__).parents[1] / name).read_bytes()
+            ).hexdigest()
+        result.update(check_boundary(model, cert))
     elif kind == 'region_volume':
         from .region_volume import check_region_volume
 

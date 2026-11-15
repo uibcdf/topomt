@@ -6,7 +6,7 @@ import os
 from collections.abc import Callable
 from copy import deepcopy
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any, Optional, SupportsIndex
 
 from .model import Atom, Model, _record, record_digest
 from .power_cells import _assemble, propose_cell
@@ -60,7 +60,6 @@ def _advance(
     ]
     if not result['remaining_atom_ids']:
         result['stop_reason'] = 'cells_complete'
-    check_progress(model, result)
     return result
 
 
@@ -94,6 +93,10 @@ def start_power_run(
     ValueError
         Invalid model, proof, work envelope or saved state.
     """
+    return _advance(model, _initial_state(model, limits), cell_budget, stop)
+
+
+def _initial_state(model: Model, limits: PowerLimits) -> dict[str, Any]:
     owners: list[Optional[int]] = []
     owners.extend(sorted(a.source_id for a in model.atoms))
     if not owners:
@@ -111,7 +114,7 @@ def start_power_run(
         {k: state[k] for k in ['model_sha256', 'kernel', 'limits']}
     )
     check_progress(model, state)
-    return _advance(model, state, cell_budget, stop)
+    return state
 
 
 def resume_power_run(
@@ -203,6 +206,11 @@ def save_power_bundle(directory: Path, model: Model, progress: object) -> None:
         Invalid model, proof, work envelope or saved state.
     """
     check_progress(model, progress)
+    _write_power_bundle(directory, progress)
+
+
+def _write_power_bundle(directory: Path, progress: object) -> None:
+    """Private manifest-last writer; its caller owns actual validation."""
     directory.mkdir(parents=True, exist_ok=False)
     payload = (
         json.dumps(progress, sort_keys=True, indent=2, allow_nan=False) + '\n'
@@ -256,3 +264,115 @@ def load_power_bundle(directory: Path, model: Model) -> dict[str, Any]:
         return state
     except OSError as exc:
         raise ValueError('Incomplete power bundle') from exc
+
+
+class PowerSession:
+    """Own checked progress within one process, without trusting saved flags.
+
+    Parameters
+    ----------
+    model : Model
+        Immutable original model.
+    progress : object or None
+        Optional untrusted saved prefix; fully checked on entry.
+    limits : PowerLimits
+        Finite limits for a new construction; saved limits must match.
+
+    Raises
+    ------
+    ValueError
+        Input, saved prefix or executable identity differs.
+    """
+
+    def __init__(
+        self,
+        model: Model,
+        *,
+        progress: object = None,
+        limits: PowerLimits = PowerLimits(),
+    ) -> None:
+        self._model = model
+        self._pid = os.getpid()
+        state = (
+            _initial_state(model, limits) if progress is None else deepcopy(progress)
+        )
+        check_progress(model, state)
+        if not isinstance(state, dict):
+            raise ValueError('Progress must be a record')
+        if state['limits'] != limits.to_record():
+            raise ValueError('Session work limits differ')
+        self._payload = json.dumps(state, sort_keys=True)
+        self._kernel = kernel_identity()
+
+    def __reduce_ex__(self, protocol: SupportsIndex) -> Any:
+        raise TypeError('Save proof data; checked sessions cannot be serialized')
+
+    @property
+    def snapshot(self) -> dict[str, Any]:
+        """Detach proof data; fresh consumers must check this untrusted record."""
+        if os.getpid() != self._pid:
+            raise ValueError('Power session belongs to another process')
+        if kernel_identity() != self._kernel:
+            raise ValueError('Power session executable changed')
+        return json.loads(self._payload)
+
+    def advance(
+        self, *, cell_budget: int = 1, stop: Optional[Callable[[], bool]] = None
+    ) -> dict[str, Any]:
+        """Check only newly constructed cells and preserve the verified prefix.
+
+        Parameters
+        ----------
+        cell_budget : int
+            Maximum additional cells, in 1..128.
+        stop : callable or None
+            Cooperative cancellation predicate.
+
+        Returns
+        -------
+        dict
+            Detached progress; an incomplete prefix has no global count.
+
+        Raises
+        ------
+        ValueError
+            Invalid work limit or executable identity changed.
+        """
+        state = _advance(self._model, self.snapshot, cell_budget, stop)
+        self._payload = json.dumps(state, sort_keys=True)
+        return self.snapshot
+
+    def save(self, directory: Path) -> None:
+        """Save the owned checked prefix without reconstructing unchanged cells.
+
+        Parameters
+        ----------
+        directory : Path
+            Exclusive manifest-last destination. Fresh loading always checks it.
+
+        Raises
+        ------
+        ValueError, FileExistsError
+            Changed kernel, record size excess or occupied destination.
+        """
+        _write_power_bundle(directory, self.snapshot)
+
+    def finish(self) -> dict[str, Any]:
+        """Assemble complete cells and independently check the entire proof.
+
+        Returns
+        -------
+        dict
+            Complete independently verified topology certificate.
+
+        Raises
+        ------
+        ValueError
+            Any source cell is missing or final checking fails.
+        """
+        state = self.snapshot
+        if state['remaining_atom_ids']:
+            raise ValueError('Power construction is incomplete')
+        proof = _assemble(self._model, state['cells'])
+        verify(self._model, proof)
+        return proof

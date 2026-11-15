@@ -16,8 +16,7 @@ from typing import Any, Optional
 from .model import Model, _record, decode_point
 from .power_cells import reprobe_certificate, topology_certificate
 from .storage import read_record, read_record_with_digest
-from .verify import verify
-from .verify.power_cells import query_anchors
+from .verify.context import CheckedTopology
 
 
 def _write(path: Path, value: object) -> None:
@@ -160,32 +159,22 @@ def capture(
             phase = 'certified_geometry_reprobe'
         elif reference is None:
             if 'cell_batch' in row:
-                from .power_runs import (
-                    finish_power_run,
-                    resume_power_run,
-                    save_power_bundle,
-                    start_power_run,
-                )
+                from .power_runs import PowerSession
 
-                progress = start_power_run(
-                    model, cell_budget=row['cell_batch'], stop=stop
-                )
+                session = PowerSession(model)
+                progress = session.advance(cell_budget=row['cell_batch'], stop=stop)
                 index = 0
                 while True:
-                    save_power_bundle(
-                        folder / 'progress' / f'step_{index:04d}', model, progress
-                    )
+                    session.save(folder / 'progress' / f'step_{index:04d}')
                     if progress['stop_reason'] == 'cancelled':
                         raise InterruptedError(
                             'Power receiving stopped with saved progress'
                         )
                     if not progress['remaining_atom_ids']:
                         break
-                    progress = resume_power_run(
-                        model, progress, cell_budget=row['cell_batch'], stop=stop
-                    )
+                    progress = session.advance(cell_budget=row['cell_batch'], stop=stop)
                     index += 1
-                proof = finish_power_run(model, progress)
+                proof = session.finish()
                 origin = {
                     'route': 'constructed_with_checkpoints',
                     'checkpoint_count': index + 1,
@@ -214,7 +203,8 @@ def capture(
         saved_model = Model.from_record(read_record(folder / 'model.json'))
         saved_proof = read_record(folder / 'certificate.json')
         mark_phase('saved_reading')
-        checked = verify(saved_model, saved_proof)
+        context = CheckedTopology(saved_model, saved_proof)
+        checked = context.result
         for field, expectation in [
             ('n_components', 'expected_components'),
             ('n_boundary_patches', 'expected_boundary_patches'),
@@ -245,7 +235,7 @@ def capture(
                 raise ValueError('Invalid named anchor pair')
             connections.append((pair[0], pair[1]))
         queries = (
-            query_anchors(saved_model, saved_proof, anchors=points, pairs=connections)
+            context.query_anchors(anchors=points, pairs=connections)
             if points or connections
             else {
                 'length_unit': 'nm',

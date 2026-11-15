@@ -24,6 +24,7 @@ def kernel_identity() -> dict[str, Any]:
         'verify/__init__.py',
         'verify/power_cells.py',
         'verify/power_progress.py',
+        'verify/context.py',
         'verify/polytope.py',
         'verify/geometry.py',
         'verify/center_hull.py',
