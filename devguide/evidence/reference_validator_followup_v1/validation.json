@@ -42,5 +42,8 @@
     "uibcdf/topomt#60",
     "uibcdf/topomt#16"
   ],
-  "remote_ci": "Commits use [skip ci]; source checks do not qualify remote CI, installed distributions or a support matrix."
+  "remote_ci": "Commits use [skip ci]; source checks do not qualify remote CI, installed distributions or a support matrix.",
+  "git_diff_check": "All code/prose/proof records pass. Three raw Sphinx stdout logs are excluded from trailing-whitespace lint to preserve their exact bytes and saved digests.",
+  "remote_reconciliation": "All ten registered card states, linked issue states and current hub index verified live; affected two card/hub bodies and four issue comments matched exactly. No finding or issue closed.",
+  "snapshot_note": "The initial affected-card-only snapshot was insufficient for the repository checker; the final snapshot includes the complete registered lifecycle inventory."
 }

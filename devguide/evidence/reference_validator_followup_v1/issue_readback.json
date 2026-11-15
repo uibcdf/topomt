@@ -1,0 +1,127 @@
+{
+  "scope": "Actual readback of the four owning issues after body/comment updates; all remain open. Comment body equality was verified separately.",
+  "issues": {
+    "16": {
+      "url": "https://github.com/uibcdf/topomt/issues/16",
+      "title": "Track TopoMT Python matrix evidence before release",
+      "issue_number": 16,
+      "body": "Recorded source checkpoint \u2014 Adopt the required Python 3.11\u20133.14 contract under uibcdf/molsyssuite#51. Current published checkpoint `3fddc2234008ddc8fd6661886443f7dd49818f0c` declares `>=3.11,<3.15` and calls immutable `policy-v1.5.3`. Source/full-CI, contributor guidance, applicable recipes and installed-candidate gates are aligned; the measured source snapshot used routine Python 3.13.\n\nHow \u2014 Source [CI 37105640084](https://github.com/uibcdf/topomt/actions/runs/37105640084) at `e1d2fee16f1666e8c2b673b229243d8bf422eae0` provides the recorded evidence. Python 3.14 ordinary installation/import and interpreter/architecture checks pass on both platforms. Linux full tests at e1d2fee report 2,003 passes, seven failures, 85 skips and five xfails: four DFND hash mismatches, two fpocket parity failures (missing binary and nested ImportError keyword-argument error), and one packaging assertion. The packaging guard is corrected and locally verified at 3fddc22 using the public requirement parser. Scientific failures remain with the component team; no passing matrix or public 3.14 qualification is claimed. Older cells are not certified by those 3.14 results.\n\nWhy \u2014 Requirement, tested source and public delivery are different claims. Scientific feasibility remains pending, so TopoMT is not promoted in the suite qualification table. The badge stays unchanged. Existing scientific assertions and older-minor dependency routes are preserved; the new 3.14 lanes use reviewed exact MolSysSuite providers rather than bypassing Requires-Python.\n\nPR/recovery controls \u2014 Main retains strict protection with 10 checks including the new 3.14 route; previous checks and administrator direct-push bypass are preserved. Historical three-minor matrices cannot clear four-minor debt. Brief [probe 37109925282](https://github.com/uibcdf/topomt/actions/runs/37109925282) passes, retains 57 historical skipped commits without a passing four-minor watermark and decides full recovery is due. Heavy jobs were intentionally omitted by probe mode; this is not an executed recovery-suite claim.\n\nRecord \u2014 devguide/pending_proposals/track_python_matrix_evidence.md; central machine receipts are `devguide/rollouts/python314_remaining_source_adoption.json` in uibcdf/molsyssuite.\n\nAcceptance still open \u2014 Resolve or explicitly track component-owned qualification blockers, produce applicable immutable public artifacts and independent public clean-install evidence, and align support claims before admission. No public upload is performed by this governance change. MolSysMT/MolSysViewer code and scientific suites are not changed or launched; they are dependency source consumers in the new lane.\n\nCurrent policy deployment \u2014 Published commit `a0b8eb5cd3115cb7d134ce368583db5fb5b7d3ad` adopts immutable `policy-v1.5.4` and the synchronized guide. [Policy 37122891754](https://github.com/uibcdf/topomt/actions/runs/37122891754) passes on exact source `a0b8eb5cd3115cb7d134ce368583db5fb5b7d3ad` with Python 3.14. Routine development is now 3.14; full matrices retain every supported minor. Central receipts: `devguide/rollouts/policy154_routine_adoption.json` under uibcdf/molsyssuite#39. The earlier 1.5.3 scientific source evidence above remains scoped to its recorded commits and closures; public delivery and remaining scientific qualification stay open.\n",
+      "state": "open",
+      "user": {
+        "login": "LMMV",
+        "name": "LMMV",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/36432062?v=4",
+        "id": 36432062
+      },
+      "assignees": null,
+      "labels": [
+        {
+          "name": "enhancement",
+          "color": "a2eeef",
+          "description": "New feature or request"
+        },
+        {
+          "name": "partial",
+          "color": "D4C5F9",
+          "description": "Partially resolved; remaining acceptance criteria are tracked."
+        },
+        {
+          "name": "component:molsysmt",
+          "color": "1d76db",
+          "description": "Cross-component relationship with uibcdf/molsysmt"
+        },
+        {
+          "name": "component:molsysviewer",
+          "color": "1d76db",
+          "description": "Cross-component relationship with uibcdf/molsysviewer"
+        },
+        {
+          "name": "component:opencastp",
+          "color": "1d76db",
+          "description": "Cross-component relationship with uibcdf/opencastp"
+        }
+      ],
+      "milestone": null,
+      "state_reason": null,
+      "comments": 25,
+      "created_at": "2026-09-08T10:07:32Z",
+      "updated_at": "2026-11-15T02:47:55Z",
+      "closed_at": null,
+      "display_url": "https://github.com/uibcdf/topomt/issues/16",
+      "display_title": "Track TopoMT Python matrix evidence before release"
+    },
+    "76": {
+      "url": "https://github.com/uibcdf/topomt/issues/76",
+      "title": "Audit DFND reference assumptions and freeze an independent validation panel",
+      "issue_number": 76,
+      "body": "<!-- topomt-validator-current-2026-11-15 -->\n**Current A\u2013F disposition \u2014 2026-11-15 UTC:** Complete topology and checked volume enclosures for all 19 original profiles; 13 nonempty original k=24 targets remain unresolved. Restricted clipped-cube precision controls and two additional exact-input native carrier comparisons are delivered. [Current workplan](https://github.com/uibcdf/topomt/blob/a32f16281a9577fb1d26464e22b5562b0462b30d/devguide/DFND/reference_validator_improvement_workplan.md) and [source/resource checkpoint](https://github.com/uibcdf/topomt/blob/a32f16281a9577fb1d26464e22b5562b0462b30d/devguide/DFND/reference_validator_checkpoint.md). #76 remains open/partial.\n\n<!-- /topomt-validator-current-2026-11-15 -->\n\n## What\n\nAudit the physical reference assumptions in the DFND synthetic/pathological tests and publish a small versioned validation panel before changing segmentation or calibrating morphological names.\n\n## Why\n\nAt source `7bd47faba6179a6e02444331e442acd251572564`, the focused DFND/Topography selector passes 312 tests with two skips. Its pathological tests deliberately assert current problematic behaviors. Several asserted ideal behaviors need justification under the actual atomic-ball model:\n\n- Changing atom density at fixed radius changes the union of balls; it does not necessarily preserve a continuous closed wall.\n- Changing radii changes the physical geometry even at fixed coordinates.\n- Increasing a probe can split a connected accessible set, so component count need not decrease. Test nested primitive/node/edge availability under fixed policy instead of imposing monotone counts.\n- A spherical shell of discrete balls is not automatically a solid continuum shell with inner radius `R-r_atom`.\n- Multi-body concavities require interface criteria and a reporting context; two convex participants alone do not imply zero assembly topographic findings.\n- An unsuccessful fixture search is not a proof of impossibility of a diagnostic state.\n\nThese are audit findings about reference validity, not a claim that every observed segmentation failure is physically correct.\n\n## Bounded delivery and acceptance\n\n- Inventory each pathological case as a confirmed algorithm defect, model/input sensitivity, valid topology change, reporting question or unresolved reference assumption, retaining the evidence and history.\n- Establish independent accessible-space/connectivity and analytic-volume references for a small decisive subset. Specify the atom-ball/probe model and precision; separate that reference from the tested DFND solver.\n- Freeze fixture inputs, preprocessing, radii, probe/query policy, expected observables and numeric tolerances before tuning algorithms or thresholds.\n- Include closed/open negative controls, a narrow long passage, a known void, and an annotated pocket in the evidence design. Confirm availability and annotations of any real structures before admitting them.\n- Provide a reproducible structured report with explicit unresolved cases. Do not close the theme with prose alone or change the kernel to fit a comparator.\n- Keep external fpocket/CASTp comparisons descriptive and definition-aware. Biological generalization and a full detector benchmark are later work.\n\nAudit record: `devguide/pending_proposals/dfnd_reference_validation_panel.md` (created after this issue). This complements #60's public context/support work and #16's separate installed-package/matrix evidence.\n",
+      "state": "open",
+      "user": {
+        "login": "dprada",
+        "name": "dprada",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/531231?v=4",
+        "id": 531231
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": null,
+      "comments": 35,
+      "created_at": "2026-10-01T07:48:32Z",
+      "updated_at": "2026-11-15T02:47:33Z",
+      "closed_at": null,
+      "display_url": "https://github.com/uibcdf/topomt/issues/76",
+      "display_title": "Audit DFND reference assumptions and freeze an independent validation panel"
+    },
+    "181": {
+      "url": "https://github.com/uibcdf/topomt/issues/181",
+      "title": "Reconcile tube local DFND candidates with an independently empty all-atom carrier",
+      "issue_number": 181,
+      "body": "<!-- topomt-validator-current-2026-11-15 -->\n**Current disposition \u2014 2026-11-15 UTC:** Four complete native carrier unions are independently excluded on two additional, exactly matched actual-vdW Models. Original inputs and source observations are preserved. Physical public qualification/reporting policy remains open, lifecycle `needs_review`. [Updated source report](https://github.com/uibcdf/topomt/blob/a32f16281a9577fb1d26464e22b5562b0462b30d/devguide/pending_proposals/dfnd_tube_all_atom_receiving.md).\n\n<!-- /topomt-validator-current-2026-11-15 -->\n\n**Previous disposition \u2014 2026-11-12:** the [19-profile review](https://github.com/uibcdf/topomt/blob/06657e5855b9fe117aa11abe57be41a6cf6d470f/docs/content/benchlab/synthetic/six_case_review.md) diagnoses nonlocal blocking at all 31 excluded-tube resident centers while preserving correctly recomputed local values. Point checks are not complete carrier/path proofs. Physical public qualification remains open under this issue; lifecycle `needs_review`. [Updated source report](https://github.com/uibcdf/topomt/blob/06657e5855b9fe117aa11abe57be41a6cf6d470f/devguide/pending_proposals/dfnd_tube_all_atom_receiving.md).\n\n## What\n\nAt source `b07a20e`, the frozen #178 straight tube with a 2.5 \u00c5 probe has three native wet components and four public objects (`OpenConcavity`, `Mouth`, `Groove`, `Mouth`). An independent conservative ball-cover bound proves that no strict all-atom free probe center exists anywhere in its finite convex hull: every hull point is within 4.083579632239034 \u00c5 of an actual atom center, below the expanded radius 4.38 \u00c5 by 0.296420367760966 \u00c5.\n\n## Interpretation and scope\n\nThis is a demonstrated disagreement between local-candidate reporting and the all-atom free-set reference, **not yet a diagnosed local capacity solver error**. Current residence/gate definitions use four/three local atom obstacles; a successful candidate is explicitly not an all-atom certificate. Determine which geometric supports/witnesses and public promotion/qualification produce these observations before changing any operator or interpreting them as physical voids/channels. Keep finite-carrier support, free-center volume and globally accessible space distinct.\n\nInput SHA-256 `2c389178d86bc2eb3cbbfd97e12aa14d70a71acb8759c1cb3061c2ef1a67a4b2`; 81 argon balls with full-precision \u00c5 coordinates/radii, `flag_only`, `with_connectors`, zero physical tolerances, epsilon 1e-6 \u00c5. Evidence: `docs/content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/{input.json,protocol.json,reference_v2_certificate.json,reference_v2_verification.json,native_protocol.json,native_observations.json}`. No comparator/protein run or global optimal-path claim.\n\n## Acceptance\n\nRetain the actual-public negative-control target in `tests/test_tube_study.py` and the original observations. Diagnose responsible tetrahedra/capacities, nonlocal exclusions, degenerate-cell behavior and public supports; state an explicit policy decision separating declared local candidates from physical/all-atom qualified features. Any algorithm/API correction must be test-first, unit/map/reuse safe, reviewed in the matching DFND book chapters, and verified on the same frozen controls without weakening references. Reconcile card/hub/lifecycle, case and report before closing. Keep #60/#76 broader work separate.\n\nOwning report: `devguide/pending_proposals/dfnd_tube_all_atom_receiving.md`. Until diagnosis/qualification, this is a `needs_review` finding and cannot support a general DFND failure or paper claim.\n\nNaming maintenance (#182, 2026-11-10): the current independently referenced input is `straight_tube_narrow_dense`; its wider catalog counterpart is `straight_tube_wide_sparse`. Current links use descriptive paths. Original scientific input/reference/native bytes and source scopes are unchanged; #180/#181 remain open. This changes no scientific finding state.",
+      "state": "open",
+      "user": {
+        "login": "LMMV",
+        "name": "LMMV",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/36432062?v=4",
+        "id": 36432062
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": null,
+      "comments": 7,
+      "created_at": "2026-11-11T02:04:55Z",
+      "updated_at": "2026-11-15T02:47:41Z",
+      "closed_at": null,
+      "display_url": "https://github.com/uibcdf/topomt/issues/181",
+      "display_title": "Reconcile tube local DFND candidates with an independently empty all-atom carrier"
+    },
+    "188": {
+      "url": "https://github.com/uibcdf/topomt/issues/188",
+      "title": "Review the dumbbell component-count monotonicity diagnosis against physical fragmentation",
+      "issue_number": 188,
+      "body": "<!-- topomt-validator-current-2026-11-15 -->\n**Current reference handoff \u2014 2026-11-15 UTC:** Exact reference counts are now 3/2/0 regions at original 1.4/2.2/6 \u00c5, with two extra boundary-touching regions at 1.4 \u00c5 alongside the enclosed chamber region. The legacy 2.0 \u00c5 five-domain diagnosis remains open and separately scoped, lifecycle `needs_review`. [Updated source report](https://github.com/uibcdf/topomt/blob/a32f16281a9577fb1d26464e22b5562b0462b30d/devguide/pending_proposals/dfnd_component_count_diagnosis.md).\n\n<!-- /topomt-validator-current-2026-11-15 -->\n\n**Previous disposition \u2014 2026-11-12:** the [joint review](https://github.com/uibcdf/topomt/blob/06657e5855b9fe117aa11abe57be41a6cf6d470f/docs/content/benchlab/synthetic/six_case_review.md) corrects the misleading guard name while retaining the numeric observation. Five-domain physical interpretation remains open here, including exact legacy units/epsilon/source supports; lifecycle `needs_review`. [Updated source report](https://github.com/uibcdf/topomt/blob/06657e5855b9fe117aa11abe57be41a6cf6d470f/devguide/pending_proposals/dfnd_component_count_diagnosis.md).\n\n## Observation from #186\n\n`tests/test_dfnd_pathological.py::test_known_failure_more_features_appear_at_a_larger_probe` and `devguide/DFND/pathological_systems.md` treat an increase from two significant native domains at 1.4 \u00c5 to five at 2.0 \u00c5 as inherently spurious because larger probes supposedly cannot find more features. That implication is not valid for connected-component counts: nested shrinking free sets can fragment.\n\nThe newly frozen independent dumbbell reference (input SHA-256 `2c53c3ecadc0077fd2a709f51d9193fdeb22854d6e703b4f73611eb758732f63`) proves one enclosed region connecting two named chamber anchors at 1.4 \u00c5, and distinct enclosed regions containing those anchors at 2.2 \u00c5, using a complete all-atom wall cover, continuous path and covered separator. Source `17a4c9a521c89a64efb12ba339161e15c85d4ce0` maps those anchors to one public Void and then two. This supports physical fragmentation, but does **not** establish whether all five domains at 2.0 \u00c5 are physical or spurious.\n\n## Follow-up\n\nDuring the six-case review #187, separate free-set inclusion from component/catalog counts, identify the original five domains/supports and use independent references before diagnosing overfragmentation. Correct misleading test/doc formulations without erasing original observations or changing scientific operators to impose count monotonicity. Mark the historical diagnosis needs_review now; do not reuse it as a current paper limitation.\n\nLocal report: `devguide/pending_proposals/dfnd_component_count_diagnosis.md`. No general native scientific fix or exact legacy 2.0 \u00c5 global component count is claimed.",
+      "state": "open",
+      "user": {
+        "login": "LMMV",
+        "name": "LMMV",
+        "email": null,
+        "avatar_url": "https://avatars.githubusercontent.com/u/36432062?v=4",
+        "id": 36432062
+      },
+      "assignees": null,
+      "labels": null,
+      "milestone": null,
+      "state_reason": null,
+      "comments": 2,
+      "created_at": "2026-11-11T07:03:45Z",
+      "updated_at": "2026-11-15T02:47:51Z",
+      "closed_at": null,
+      "display_url": "https://github.com/uibcdf/topomt/issues/188",
+      "display_title": "Review the dumbbell component-count monotonicity diagnosis against physical fragmentation"
+    }
+  }
+}
