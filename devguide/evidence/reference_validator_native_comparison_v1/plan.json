@@ -1,0 +1,16 @@
+{
+  "owner": "uibcdf/topomt#181",
+  "jobs": [
+    {
+      "name": "straight_tube_narrow_dense",
+      "protocol": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_narrow_dense/protocol.json",
+      "sha256": "a8e00210d9f64b19049d73343008fa4a3aaca3ff66c40983d84736bf220d1ad1"
+    },
+    {
+      "name": "straight_tube_wide_sparse",
+      "protocol": "devguide/evidence/reference_validator_native_comparison_v1/straight_tube_wide_sparse/protocol.json",
+      "sha256": "3d25a91dd0ccae35cc4d36f146d9be87e8b7386ae004bd50ef7266331c52e2ed"
+    }
+  ],
+  "execution_order": "After the sequential region-volume panel, one local CPU, no Slurm. Original negative inputs only."
+}

@@ -1,0 +1,523 @@
+{
+  "recorded_at_utc": "2026-11-15T00:47:27.146036+00:00",
+  "source_revision": "2cd59a0c30c8e001a7ce748825bb528d5f5bcf61",
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "-m",
+    "devtools.reference_validator.capture_power_cells",
+    "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/protocol.json",
+    "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/receiving"
+  ],
+  "resource_policy": {
+    "cpu_count": 1,
+    "address_space_limit_bytes": 2147483648,
+    "cpu_soft_seconds": 480,
+    "cpu_hard_seconds": 600,
+    "wall_seconds": 720,
+    "reason": "Original geometry initialization verifies at about 38 CPU s; target work checks source/target/anchors and original hulls separately. Keep conservative finite margin without changing geometry or expectations."
+  },
+  "cpu_affinity": [
+    0
+  ],
+  "host_samples": [
+    {
+      "elapsed_seconds": 0,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50092768
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.40576171875,
+          1.86669921875,
+          2.22802734375
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 5.0027645219815895,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50081036
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.373046875,
+          1.85205078125,
+          2.22119140625
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 10.003341819043271,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50081132
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.3427734375,
+          1.837890625,
+          2.21435546875
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 15.003780688974075,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50081640
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.31494140625,
+          1.82373046875,
+          2.20751953125
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 20.004231075989082,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50081304
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.28955078125,
+          1.8095703125,
+          2.20068359375
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 25.00467130902689,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50081476
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.26611328125,
+          1.7958984375,
+          2.19384765625
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 30.00509399699513,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50081924
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.5654296875,
+          1.84912109375,
+          2.208984375
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 35.00551180297043,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50081960
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.52001953125,
+          1.8349609375,
+          2.2021484375
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 40.00599751598202,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50082468
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.47802734375,
+          1.82080078125,
+          2.1953125
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 45.00642568501644,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50082592
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.439453125,
+          1.80712890625,
+          2.1884765625
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 50.00689084699843,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50080532
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.64453125,
+          1.84375,
+          2.1982421875
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 55.00731874804478,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50080284
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.5927734375,
+          1.82958984375,
+          2.19140625
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 60.007886601029895,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50077600
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.544921875,
+          1.8154296875,
+          2.1845703125
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 65.00837607402354,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50077252
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.74169921875,
+          1.85205078125,
+          2.1943359375
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 70.0088185040513,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50076868
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.7626953125,
+          1.85498046875,
+          2.19287109375
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 75.00924962805584,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50076900
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.701171875,
+          1.84033203125,
+          2.18603515625
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 80.00969647197053,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50060620
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.64501953125,
+          1.826171875,
+          2.17919921875
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 85.01011871406808,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50065884
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.59326171875,
+          1.81201171875,
+          2.1728515625
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 90.0105634490028,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50072868
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.54541015625,
+          1.79833984375,
+          2.16650390625
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 95.01102155901026,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50075588
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.50146484375,
+          1.78466796875,
+          2.16015625
+        ]
+      }
+    },
+    {
+      "elapsed_seconds": 95.2251329299761,
+      "host": {
+        "safe": true,
+        "memory_kib": {
+          "MemTotal": 63455508,
+          "MemAvailable": 50094152
+        },
+        "memory_pressure_avg10": {
+          "some": 0.0,
+          "full": 0.0
+        },
+        "swap_pages": {
+          "pswpin": 267461,
+          "pswpout": 486138
+        },
+        "load_average": [
+          1.50146484375,
+          1.78466796875,
+          2.16015625
+        ]
+      }
+    }
+  ],
+  "supervisor_source": "import hashlib,json,os,resource,signal,subprocess,sys,time\nfrom datetime import datetime,timezone\nfrom pathlib import Path\nfrom devtools.reference_validator.benchlab_panel import _host\n\nroot=Path.cwd();base=root/'devguide/evidence/reference_validator_remaining_topology_v1'/sys.argv[1]\nprotocol=base/'protocol.json';spec=json.loads(protocol.read_text());policy=spec['resources']\nos.sched_setaffinity(0,{min(os.sched_getaffinity(0))})\nfor key in ('OMP_NUM_THREADS','OPENBLAS_NUM_THREADS','MKL_NUM_THREADS','NUMEXPR_NUM_THREADS','RAYON_NUM_THREADS'):os.environ[key]='1'\nhost=_host();assert host['safe'],'Insufficient conservative host reserve'\nsource=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip()\nassert not subprocess.check_output(['git','status','--porcelain','--','devtools/reference_validator'],text=True).strip()\ndef limits():\n resource.setrlimit(resource.RLIMIT_AS,(2*1024**3,2*1024**3))\n resource.setrlimit(resource.RLIMIT_CPU,(policy['cpu_soft_seconds'],policy['cpu_hard_seconds']))\ncommand=[sys.executable,'-m','devtools.reference_validator.capture_power_cells',str(protocol.relative_to(root)),str((base/'receiving').relative_to(root))]\nrecord={'recorded_at_utc':datetime.now(timezone.utc).isoformat(),'source_revision':source,'command':command,'resource_policy':policy,'cpu_affinity':sorted(os.sched_getaffinity(0)),'host_samples':[{'elapsed_seconds':0,'host':host}],'supervisor_source':Path(__file__).read_text()}\nbegin=time.perf_counter();before=resource.getrusage(resource.RUSAGE_CHILDREN);stop_reason=None;termination=None\nwith (base/'execution.log').open('xb') as log:\n p=subprocess.Popen(command,stdout=log,stderr=log,preexec_fn=limits,start_new_session=True)\n while p.poll() is None:\n  try:p.wait(timeout=5)\n  except subprocess.TimeoutExpired:pass\n  elapsed=time.perf_counter()-begin;host=_host();record['host_samples'].append({'elapsed_seconds':elapsed,'host':host})\n  if not termination and (not host['safe'] or elapsed>policy['wall_seconds']):\n   stop_reason='host_pressure' if not host['safe'] else 'wall_limit';p.send_signal(signal.SIGTERM);termination=time.perf_counter()\n  if termination and time.perf_counter()-termination>120 and p.poll() is None:\n   os.killpg(p.pid,signal.SIGKILL)\n end=p.wait()\nafter=resource.getrusage(resource.RUSAGE_CHILDREN)\nrecord.update(exit_code=end,stop_reason=stop_reason,elapsed_seconds=time.perf_counter()-begin,child_cpu_seconds=after.ru_utime+after.ru_stime-before.ru_utime-before.ru_stime,peak_child_rss_kib_linux=after.ru_maxrss,receiving_status='completed' if end==0 and (base/'receiving/receipt.json').is_file() else 'incomplete',log_sha256=hashlib.sha256((base/'execution.log').read_bytes()).hexdigest())\nrecord['files']={str(p.relative_to(base)):hashlib.sha256(p.read_bytes()).hexdigest() for p in (base/'receiving').rglob('*.json')}\n(base/'execution.json').write_text(json.dumps(record,indent=2)+'\\n')\nprint(json.dumps({k:v for k,v in record.items() if k not in ['host_samples','supervisor_source','files','command']}),flush=True)\nif end:print((base/'execution.log').read_text()[-3000:]);raise SystemExit(end)\n",
+  "exit_code": 0,
+  "stop_reason": null,
+  "elapsed_seconds": 95.22587444400415,
+  "child_cpu_seconds": 95.13264099999999,
+  "peak_child_rss_kib_linux": 33628,
+  "receiving_status": "completed",
+  "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "files": {
+    "receiving/receipt.json": "352766d7f484d348a903afaff0dd3c4914617e115e2df4dc12c35df51c866a1a",
+    "receiving/shell_with_opening_profile_2/certificate.json": "48be0cab494400aefd6b8578b068cd2e4555ced24942f24a34459e7f739177bc",
+    "receiving/shell_with_opening_profile_2/phases.json": "2eee1ccc21c7c3978d9321f663f61fbd7e77bd6baadc8fd8ae0564c3228a5d4b",
+    "receiving/shell_with_opening_profile_2/anchors.json": "00f632b5d1229fff6d321faf4c2859b41dbaa46d8aa6cac4ce818e52a1f85bdb",
+    "receiving/shell_with_opening_profile_2/model.json": "d941704bd2af8552a7a20db52fe6d2b782b70061e727e55a125c38c475113f22",
+    "receiving/shell_with_opening_profile_2/verification.json": "27278802b8daea8631b13c51ddc5e4fed5e91b89f458f1197c886ac98753df6c"
+  }
+}

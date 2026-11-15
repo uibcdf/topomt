@@ -264,3 +264,21 @@ def test_asymmetric_barriers_keep_three_independently_named_regions():
             decode_scalar(bounds[anchors['locations'][name]['region_id']]['lower']) > 0
         )
     assert result['precision_status'] == 'unresolved'
+
+
+def test_tiny_positive_components_are_retained_even_without_volume_resolution():
+    radius = F(17320508075688772, 10**16)
+    assert 2 < radius**2 < 3
+    model = _model([radius])
+    cert = region_volume_certificate(
+        model,
+        topology_certificate(model),
+        VolumeRequest(F(8, 2**24), F(1, 2**24)),
+        max_leaves=64,
+    )
+    result = check_region_volume(model, cert)
+    # Blocked coordinate planes separate the eight nonempty corner regions.
+    # A zero lower bound from coarse integration must not delete any of them.
+    assert len(result['regions']) == 8
+    assert all(decode_scalar(r['upper']) > 0 for r in result['regions'])
+    assert result['precision_status'] == 'unresolved'

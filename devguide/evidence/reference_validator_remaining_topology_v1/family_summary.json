@@ -1,0 +1,1520 @@
+{
+  "schema": "topomt.reference-validator.remaining-topology-summary/1",
+  "owner": "uibcdf/topomt#76",
+  "recorded_at_utc": "2026-11-15T01:10:15.517574+00:00",
+  "scope": "Ten complete original finite-hull topology profiles; all original point states replayed. No nonempty precision or native morphology inferred.",
+  "profiles": [
+    {
+      "case": "closed_shell",
+      "probe_angstroms": 0.05,
+      "model_sha256": "3c37acab6497774b75afd03041ad332b030d9e3ac9368494eb911cf5c70abcf8",
+      "n_components": 1,
+      "n_boundary_patches": 13,
+      "region_boundary_incidence": [
+        {
+          "region_id": "REG-1",
+          "boundary_patch_ids": [
+            "PATCH-1",
+            "PATCH-2",
+            "PATCH-3",
+            "PATCH-4",
+            "PATCH-5",
+            "PATCH-6",
+            "PATCH-7",
+            "PATCH-8",
+            "PATCH-9",
+            "PATCH-10",
+            "PATCH-11",
+            "PATCH-12",
+            "PATCH-13"
+          ]
+        }
+      ],
+      "locations": {
+        "origin": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "origin": "free"
+      },
+      "elapsed_seconds": 173.93873324303422,
+      "cpu_seconds": 173.76387199999996,
+      "peak_rss_kib": 36472,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_0/protocol.json",
+          "sha256": "e85b0c98f29d5629c9871db12b7f0bb4031be7c038b50250c7ebf3fae1476731"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_0/execution.json",
+          "sha256": "a041b9c759a0a373410673740f82ef010d2ddfcd41318311fbd1f89fa4604392"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_0/receiving/receipt.json",
+          "sha256": "d76a50284421533391f703501a66b4c28840bccf593000da1981c4f09dfd3a59"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_0/receiving/closed_shell_profile_0/model.json",
+          "sha256": "b69e52cb62f8c701254c4677d8addb069be76cf380cf4fe6251a62ba19c7c809"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_0/receiving/closed_shell_profile_0/certificate.json",
+          "sha256": "20bfedf26e8b8c0375c2c22aa4c6bfac53f6b2d5ee6a6b6219a7e759a5ea8f99"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_0/receiving/closed_shell_profile_0/verification.json",
+          "sha256": "ad8d0b9a42e65593c82d2ce42bcf847d34038ad6adb4d37be4d760c232466114"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_0/receiving/closed_shell_profile_0/anchors.json",
+          "sha256": "4d0e955a5141acc1a73649b9f4cdc1287aefd3ab458d07bfae0f6543cc792d26"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_0/receiving/closed_shell_profile_0/phases.json",
+          "sha256": "a5cf6596b27ab8eae20f0f1e2e2f5ca1f2743c2abe2b33a20a4977f6adbbf1c6"
+        }
+      }
+    },
+    {
+      "case": "closed_shell",
+      "probe_angstroms": 0.2,
+      "model_sha256": "a8c2e9cd760a3b7d5eeb62f123668891b23cec7fa194de0adcd2cfc8fe976488",
+      "n_components": 1,
+      "n_boundary_patches": 0,
+      "region_boundary_incidence": [
+        {
+          "region_id": "REG-1",
+          "boundary_patch_ids": []
+        }
+      ],
+      "locations": {
+        "origin": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "origin": "free"
+      },
+      "elapsed_seconds": 99.33298047701828,
+      "cpu_seconds": 99.230177,
+      "peak_rss_kib": 33396,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_1/protocol.json",
+          "sha256": "eb04aada9ec955b8d4ea3267d2ce8be63e7d436123e613ec3d90eaf24e6f1fc2"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_1/execution.json",
+          "sha256": "90fc86425147b6203040e0ebb6812389b70c0fbfe0c7e9cfd1f2ed2be63805e0"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_1/receiving/receipt.json",
+          "sha256": "a3c2595db12d6c8ae491cf690562b272a30d5050b9228d1c2463fe9bf3e24a95"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_1/receiving/closed_shell_profile_1/model.json",
+          "sha256": "c9f2717c9a42bc68d0b05310bffd8831cdfc46aceb5f6b72b371274788c850fe"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_1/receiving/closed_shell_profile_1/certificate.json",
+          "sha256": "c9fc5b1bd7f0d2ab9cd23679799b2f65b229dcd20e9e80c3348962f4e1bdb884"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_1/receiving/closed_shell_profile_1/verification.json",
+          "sha256": "216d42b6056f79f00290414479cd3c57e50a0d94bb0ae36e00bba881af2492bf"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_1/receiving/closed_shell_profile_1/anchors.json",
+          "sha256": "efe37aaa2cd3469b009948903c09361ac1587e460c23ab91e44f782ce06e2ef7"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_1/receiving/closed_shell_profile_1/phases.json",
+          "sha256": "2849f66a510c06a158b22cd6cf408fa67d6a2be7badc8068a616a97b262838db"
+        }
+      }
+    },
+    {
+      "case": "closed_shell",
+      "probe_angstroms": 1.4,
+      "model_sha256": "e5af397289bda4fb93d034ec8ff7d48930d1ca0518751fdbd46b4789e9a88fed",
+      "n_components": 1,
+      "n_boundary_patches": 0,
+      "region_boundary_incidence": [
+        {
+          "region_id": "REG-1",
+          "boundary_patch_ids": []
+        }
+      ],
+      "locations": {
+        "origin": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "origin": "free"
+      },
+      "elapsed_seconds": 161.33716864103917,
+      "cpu_seconds": 160.32375399999998,
+      "peak_rss_kib": 35260,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_2/protocol.json",
+          "sha256": "190e14f6c5bccc194730afe3a0c960a8f7509223ce25dc83b9fe2cdd8115f69c"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_2/execution.json",
+          "sha256": "74a2501f4809599672525c6234e99d7716f806ff376bc9839d5a89ebc0e0fdbd"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_2/receiving/receipt.json",
+          "sha256": "82771b63d5d612419dc493969e4f85c4a1695a80817466df50869b2cd705180f"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_2/receiving/closed_shell_profile_2/model.json",
+          "sha256": "ac9a560bb25e2f1e9a308b9309c011330f3c420f5777cba8f97140e89ddb8a9f"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_2/receiving/closed_shell_profile_2/certificate.json",
+          "sha256": "c01eef21e97d1a162018798f01e1f8e4b760b12edaf38d6e41e21b4a8688e653"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_2/receiving/closed_shell_profile_2/verification.json",
+          "sha256": "d0c69f334665043fd45c50645077d5c07ebe400395d54af4ca623b1ac5f5cbd1"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_2/receiving/closed_shell_profile_2/anchors.json",
+          "sha256": "d143978a21a6290f350c6ebfe11b2be810cc036389116d16d21394708a845f2b"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_2/receiving/closed_shell_profile_2/phases.json",
+          "sha256": "a9845b11bca8127a7d40c4f8243ded9ff338f5b352ee900868461f9bb81ccd42"
+        }
+      }
+    },
+    {
+      "case": "closed_shell",
+      "probe_angstroms": 5,
+      "model_sha256": "ae9928dde59adc7533d964b5e9dc4bdc7dc114edeab5f6fce1fe0856dfe3f7f2",
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "region_boundary_incidence": [],
+      "locations": {
+        "origin": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "origin": "blocked"
+      },
+      "elapsed_seconds": 118.68423526303377,
+      "cpu_seconds": 118.57849100000001,
+      "peak_rss_kib": 34868,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_3/protocol.json",
+          "sha256": "395143593d9f12a7b8859da4f7ad2113e6c920ab24aca79f3ec069dda45b3f0d"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_3/execution.json",
+          "sha256": "87d35ade5a56e0b0c4982dbefd901ad0bd65c7642f95ea3439780f4f18c11506"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_3/receiving/receipt.json",
+          "sha256": "1d17ed8795e656fbd2d9bff06e99df59f17fbe7be0eb58626f2a4d956266e836"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_3/receiving/closed_shell_profile_3/model.json",
+          "sha256": "3a95df5432fec983f84d38b1223cbe81a7ca09440975d8ec4e229367cc413664"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_3/receiving/closed_shell_profile_3/certificate.json",
+          "sha256": "38bff5e392b3645a781951bca25a855928bd607749ee0a8d9083b0084ae29b59"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_3/receiving/closed_shell_profile_3/verification.json",
+          "sha256": "0960340d9d2364d6416b5a3ed27076289b630f46404618f09ac06037a4e88337"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_3/receiving/closed_shell_profile_3/anchors.json",
+          "sha256": "3b753d0f3d8be9f7af3586e294fa9552d51364c8ec15a1d385eaf576fbea9267"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/profile_3/receiving/closed_shell_profile_3/phases.json",
+          "sha256": "3a0efec5fc9807080448bee19de287cb627bcaca6f81109ef1b7b5492e4cde59"
+        }
+      }
+    },
+    {
+      "case": "shell_with_opening",
+      "probe_angstroms": 1.4,
+      "model_sha256": "0d3af6fd8ace1d2b6f04d25328d54a802d1f9d3c351558a328e68a91692ed493",
+      "n_components": 1,
+      "n_boundary_patches": 1,
+      "region_boundary_incidence": [
+        {
+          "region_id": "REG-1",
+          "boundary_patch_ids": [
+            "PATCH-1"
+          ]
+        }
+      ],
+      "locations": {
+        "origin": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": "PATCH-1"
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "free",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "origin": "free"
+      },
+      "elapsed_seconds": 80.2254710230045,
+      "cpu_seconds": 80.16113800000001,
+      "peak_rss_kib": 32744,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_0/protocol.json",
+          "sha256": "26edd68c0c520afc2b1d4df65532d5d9f2d3b9df72e17b9b0710897b63a6d151"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_0/execution.json",
+          "sha256": "9ee440f84150564b3143bbaa64173413505e8070f479155ca68a3236364bf28b"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_0/receiving/receipt.json",
+          "sha256": "70f7201c8f7e6ac52899e4a9073c1a913710115796b1997782bfe29bbd7f15ac"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_0/receiving/shell_with_opening_profile_0/model.json",
+          "sha256": "ce1f8627942eaa1b6206b7a72d256221a5c62dc515d04767dbdc23d8b483c97f"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_0/receiving/shell_with_opening_profile_0/certificate.json",
+          "sha256": "9e7b298c0844c43cdb6f3b5904d165525a7af67961f13b454696e6f523b29aa1"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_0/receiving/shell_with_opening_profile_0/verification.json",
+          "sha256": "6340333e65b7b56c976169aa799bd3bebd7fdc987735b87b29b527e72ff04503"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_0/receiving/shell_with_opening_profile_0/anchors.json",
+          "sha256": "bd162a86a1dfd8d950fcbcb1b3d2cac6cb74b78598a8104389ff8d6a4090e778"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_0/receiving/shell_with_opening_profile_0/phases.json",
+          "sha256": "956cb72906827295377cae4ea04dd6aba2674a8fc2ecdd904f98507499fb0678"
+        }
+      }
+    },
+    {
+      "case": "shell_with_opening",
+      "probe_angstroms": 3,
+      "model_sha256": "534865be30e699a663ba37886b269e3885b745fed96d799decf5bd3c51758a82",
+      "n_components": 1,
+      "n_boundary_patches": 0,
+      "region_boundary_incidence": [
+        {
+          "region_id": "REG-1",
+          "boundary_patch_ids": []
+        }
+      ],
+      "locations": {
+        "origin": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "origin": "free"
+      },
+      "elapsed_seconds": 125.1796999820508,
+      "cpu_seconds": 125.091504,
+      "peak_rss_kib": 34320,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_1/protocol.json",
+          "sha256": "f80639bcf6f6c70dbcae85f630394a4b2a4e9b9b1cb541f17d2ba3cd44c15c11"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_1/execution.json",
+          "sha256": "f453d62f3a1b717d5d987487135a0b26274cf0121381930c2c8201b429c21c06"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_1/receiving/receipt.json",
+          "sha256": "3ada903bd88debd80701bdf99c0bc52e2291c24509153e5db140281d2d4e3a79"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_1/receiving/shell_with_opening_profile_1/model.json",
+          "sha256": "cdb4abd0d87e9351a93e1a2336657618992f6b29b739b8b71b0b31da665500e0"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_1/receiving/shell_with_opening_profile_1/certificate.json",
+          "sha256": "1de0f015bf35adc92465100277ac581d61af9372d3d93e8541a97121cdef6f35"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_1/receiving/shell_with_opening_profile_1/verification.json",
+          "sha256": "ffa33a96807d3f5f22907e0c69f4ac13065d0c3dafab5d0568acb3d6f87faba7"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_1/receiving/shell_with_opening_profile_1/anchors.json",
+          "sha256": "55580da700973f5e7954489ac304c38879dd06b657326b17f7170d6510b8b6c4"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_1/receiving/shell_with_opening_profile_1/phases.json",
+          "sha256": "1ca6948008ddae04fb0ca37e77750f109e9ff245ba11f897fd01a2d8f4fad40c"
+        }
+      }
+    },
+    {
+      "case": "shell_with_opening",
+      "probe_angstroms": 5,
+      "model_sha256": "502067b32fb31972e7b0510a3044dce12a48745f7a432c2b6037a1f209d06f4f",
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "region_boundary_incidence": [],
+      "locations": {
+        "origin": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "origin": "blocked"
+      },
+      "elapsed_seconds": 95.22587444400415,
+      "cpu_seconds": 95.13264099999999,
+      "peak_rss_kib": 33628,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/protocol.json",
+          "sha256": "8caa6bcbed357c438eab27aed4172ac642ec36f36365095ed56657ed8bcd5d07"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/execution.json",
+          "sha256": "a2440775219f1cd82e4cb3edd4c18d7b77d800311a79d79d27f6d7b31e71e00c"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/receiving/receipt.json",
+          "sha256": "352766d7f484d348a903afaff0dd3c4914617e115e2df4dc12c35df51c866a1a"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/receiving/shell_with_opening_profile_2/model.json",
+          "sha256": "d941704bd2af8552a7a20db52fe6d2b782b70061e727e55a125c38c475113f22"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/receiving/shell_with_opening_profile_2/certificate.json",
+          "sha256": "48be0cab494400aefd6b8578b068cd2e4555ced24942f24a34459e7f739177bc"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/receiving/shell_with_opening_profile_2/verification.json",
+          "sha256": "27278802b8daea8631b13c51ddc5e4fed5e91b89f458f1197c886ac98753df6c"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/receiving/shell_with_opening_profile_2/anchors.json",
+          "sha256": "00f632b5d1229fff6d321faf4c2859b41dbaa46d8aa6cac4ce818e52a1f85bdb"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/profile_2/receiving/shell_with_opening_profile_2/phases.json",
+          "sha256": "2eee1ccc21c7c3978d9321f663f61fbd7e77bd6baadc8fd8ae0564c3228a5d4b"
+        }
+      }
+    },
+    {
+      "case": "dumbbell",
+      "probe_angstroms": 1.4,
+      "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30",
+      "n_components": 3,
+      "n_boundary_patches": 2,
+      "region_boundary_incidence": [
+        {
+          "region_id": "REG-1",
+          "boundary_patch_ids": []
+        },
+        {
+          "region_id": "REG-2",
+          "boundary_patch_ids": [
+            "PATCH-1"
+          ]
+        },
+        {
+          "region_id": "REG-3",
+          "boundary_patch_ids": [
+            "PATCH-2"
+          ]
+        }
+      ],
+      "locations": {
+        "origin": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "left_chamber": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "right_chamber": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "chamber_left": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "chamber_right": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [
+        {
+          "connectivity_status": "resolved",
+          "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30",
+          "topology_certificate_sha256": "ef1fe276ddd27f6876666d7a1d28bca26922324deb19fc49f3dfe1564ddce70b",
+          "start": [
+            [
+              "-5",
+              "8"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "end": [
+            [
+              "5",
+              "8"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "length_unit": "nm",
+          "start_membership": {
+            "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30",
+            "topology_certificate_sha256": "ef1fe276ddd27f6876666d7a1d28bca26922324deb19fc49f3dfe1564ddce70b",
+            "point": [
+              [
+                "-5",
+                "8"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "length_unit": "nm",
+            "point_state": "free",
+            "region_id": "REG-1",
+            "boundary_patch_id": null,
+            "root_point": [
+              [
+                "-529051828695705226396997568485299023313830641231712711869092864691",
+                "848833382564290748318539771546100679871935599498115701129032499200"
+              ],
+              [
+                "789169537999337593622470159385568107381690914613057358578647269",
+                "424416691282145374159269885773050339935967799749057850564516249600"
+              ],
+              [
+                "1176301343812061750344091236058437071174683207884228443743519299",
+                "424416691282145374159269885773050339935967799749057850564516249600"
+              ]
+            ]
+          },
+          "end_membership": {
+            "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30",
+            "topology_certificate_sha256": "ef1fe276ddd27f6876666d7a1d28bca26922324deb19fc49f3dfe1564ddce70b",
+            "point": [
+              [
+                "5",
+                "8"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "length_unit": "nm",
+            "point_state": "free",
+            "region_id": "REG-1",
+            "boundary_patch_id": null,
+            "root_point": [
+              [
+                "1979077598619542267515590769925443285970129847736105972102153752875",
+                "3202091370683777500878214178846139396951612856177097598326284484608"
+              ],
+              [
+                "3550082432343304517790312659149328152209096800276557964608294119",
+                "1601045685341888750439107089423069698475806428088548799163142242304"
+              ],
+              [
+                "432263321061633594436852299581651488649878767757748419433030495",
+                "50032677666934023451222096544470928077368950877767149973848195072"
+              ]
+            ]
+          },
+          "connected": true,
+          "region_id": "REG-1",
+          "path_certificate": {
+            "schema": "topomt.reference-validator.certificate/1",
+            "kind": "path",
+            "model_sha256": "e329cdc630bd7133cd48092e04285ef8565e82a9e720bf1035d87d8e8d0d7c30",
+            "arithmetic": "rational-exact/1",
+            "points": [
+              [
+                [
+                  "-5",
+                  "8"
+                ],
+                [
+                  "0",
+                  "1"
+                ],
+                [
+                  "0",
+                  "1"
+                ]
+              ],
+              [
+                [
+                  "-529051828695705226396997568485299023313830641231712711869092864691",
+                  "848833382564290748318539771546100679871935599498115701129032499200"
+                ],
+                [
+                  "789169537999337593622470159385568107381690914613057358578647269",
+                  "424416691282145374159269885773050339935967799749057850564516249600"
+                ],
+                [
+                  "1176301343812061750344091236058437071174683207884228443743519299",
+                  "424416691282145374159269885773050339935967799749057850564516249600"
+                ]
+              ],
+              [
+                [
+                  "-3582718803345457063453451703577522544353695181991366990684658552035",
+                  "5749870237749763417422988324982307855947271064923637096853283012608"
+                ],
+                [
+                  "5304090337924072220181256785685918777558655886924632888612393433",
+                  "2874935118874881708711494162491153927973635532461818548426641506304"
+                ],
+                [
+                  "8212320693107100320019369638633047781607822565094269424186336857",
+                  "2874935118874881708711494162491153927973635532461818548426641506304"
+                ]
+              ],
+              [
+                [
+                  "-1648331684270417587280240436714876126622859082668005488153894656981",
+                  "2659065892183128723896628967528461097202783698704852469300491976704"
+                ],
+                [
+                  "6294557073094819804309707404830056017698745050905526531413472383",
+                  "1772710594788752482597752645018974064801855799136568312866994651136"
+                ],
+                [
+                  "14040901233642966519322672818726416310639199384867425708546398069",
+                  "10636263568732514895586515870113844388811134794819409877201967906816"
+                ]
+              ],
+              [
+                [
+                  "-11621597891201535150687240648507439632477913475106109487695646541953",
+                  "24024169354406641584646393075573182786438305199780681270425500516352"
+                ],
+                [
+                  "-4060708012654455048254062620165845257204975580981306874805215224383",
+                  "384386709670506265354342289209170924583012883196490900326808008261632"
+                ],
+                [
+                  "-5424501897808278742342099266310984707494731286880493692381135405715",
+                  "192193354835253132677171144604585462291506441598245450163404004130816"
+                ]
+              ],
+              [
+                [
+                  "-1398844384959710518128898593485289853872437700120570309445904128151",
+                  "5121067991015984177662565880509400280363710294226232194973195829248"
+                ],
+                [
+                  "-6554321941888201893772011683090588348703335171617748439949082754515",
+                  "163874175712511493685202108176300808971638729415239430239142266535936"
+                ],
+                [
+                  "-9060083803319738077541559706156328211782157220557138601410917653709",
+                  "81937087856255746842601054088150404485819364707619715119571133267968"
+                ]
+              ],
+              [
+                [
+                  "-106451343916039856713868675942496525993491944613854888333026758941813",
+                  "681320548408111916365003782238027074958607787700646011700432873717760"
+                ],
+                [
+                  "-10393770407449118472509112019125702674878343297843118475784455792591",
+                  "272528219363244766546001512895210829983443115080258404680173149487104"
+                ],
+                [
+                  "-55403014858422084951013514330721777177833694777006365228908780417867",
+                  "340660274204055958182501891119013537479303893850323005850216436858880"
+                ]
+              ],
+              [
+                [
+                  "27702492206331889994752379630389710518399804520369463297372276271683",
+                  "75967254164878416858909746210670104334324165083288809961762989277184"
+                ],
+                [
+                  "60450413549918630028388526228816730957694922183424408666249355135",
+                  "75967254164878416858909746210670104334324165083288809961762989277184"
+                ],
+                [
+                  "-27493308727738481547735051004569299245622888701415831077473240470233",
+                  "455803524989270501153458477264020626005944990499732859770577935663104"
+                ]
+              ],
+              [
+                [
+                  "223903656189797780668807703701359169054215456570843086107179678969",
+                  "384149444986295952923269156251973269187598819506448511087167930368"
+                ],
+                [
+                  "-4619992967090524759291344774174016266207742691659522007374259961",
+                  "384149444986295952923269156251973269187598819506448511087167930368"
+                ],
+                [
+                  "-22007788687507794818079106662305858248435105173041815439792458863",
+                  "768298889972591905846538312503946538375197639012897022174335860736"
+                ]
+              ],
+              [
+                [
+                  "1195885443703080149102032186987296506191702254976222946122602343219",
+                  "2003142907940851281425418089514124158145837601563315900569484263424"
+                ],
+                [
+                  "-10711511699630521283974350140967416570687799098334340385369833557",
+                  "1001571453970425640712709044757062079072918800781657950284742131712"
+                ],
+                [
+                  "-2597306715521993879475977761754889471545000270407183201892621605",
+                  "62598215873151602544544315297316379942057425048853621892796383232"
+                ]
+              ],
+              [
+                [
+                  "1953859771865474510823953515497135800794959911763091514991744435931",
+                  "3136298213448095387201834721123969458491229214459966358537493282816"
+                ],
+                [
+                  "2124958725476093851611031852592942055448416149324823615417319507",
+                  "1568149106724047693600917360561984729245614607229983179268746641408"
+                ],
+                [
+                  "-414767469594058002373608819855699730768638427317961543266491125",
+                  "98009319170252980850057335035124045577850912951873948704296665088"
+                ]
+              ],
+              [
+                [
+                  "1979077598619542267515590769925443285970129847736105972102153752875",
+                  "3202091370683777500878214178846139396951612856177097598326284484608"
+                ],
+                [
+                  "3550082432343304517790312659149328152209096800276557964608294119",
+                  "1601045685341888750439107089423069698475806428088548799163142242304"
+                ],
+                [
+                  "432263321061633594436852299581651488649878767757748419433030495",
+                  "50032677666934023451222096544470928077368950877767149973848195072"
+                ]
+              ],
+              [
+                [
+                  "5",
+                  "8"
+                ],
+                [
+                  "0",
+                  "1"
+                ],
+                [
+                  "0",
+                  "1"
+                ]
+              ]
+            ]
+          }
+        }
+      ],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "left_chamber": "free",
+        "origin": "free",
+        "right_chamber": "free"
+      },
+      "elapsed_seconds": 135.6314619720215,
+      "cpu_seconds": 135.511214,
+      "peak_rss_kib": 36608,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_0/protocol.json",
+          "sha256": "84f403fbe5bacd62ae09e3ecc3e18b2d32201aaf53bc8f0b416c6c86a2d70cd8"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_0/execution.json",
+          "sha256": "98cbb60ed199d7da8b8f3299a5381a005b5e126e3f1bcca82d23a08b4ab98a9d"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_0/receiving/receipt.json",
+          "sha256": "f027d7964d3e6a10be603c39c9aa21870f90ed0785325b56dbbd7d9814cb47fa"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_0/receiving/dumbbell_profile_0/model.json",
+          "sha256": "fcdd3663a107b4bd5ac165ce6e7df18aff8700e9db6d7a785aa71f84c30f20c5"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_0/receiving/dumbbell_profile_0/certificate.json",
+          "sha256": "d3d35df6393258f931e15a9dc8d4f35479a163e05a97c30fb18b8a6060572858"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_0/receiving/dumbbell_profile_0/verification.json",
+          "sha256": "3a4ed219f30bc6278c361d45457a482b58047814eb235a80d0a12c3fdc19c82d"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_0/receiving/dumbbell_profile_0/anchors.json",
+          "sha256": "57310423cf0b2ec165ef4134900602f3d2c47389b971964bebdd815c3854edc1"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_0/receiving/dumbbell_profile_0/phases.json",
+          "sha256": "187d7ee6a37339cf65473a1ee62dab530c044cc500ffe7c2bede504235e2b01a"
+        }
+      }
+    },
+    {
+      "case": "dumbbell",
+      "probe_angstroms": 2.2,
+      "model_sha256": "dcb43b8b4deed59402599f559f244e6510b399606ed93b23c711e8bb1666161e",
+      "n_components": 2,
+      "n_boundary_patches": 0,
+      "region_boundary_incidence": [
+        {
+          "region_id": "REG-1",
+          "boundary_patch_ids": []
+        },
+        {
+          "region_id": "REG-2",
+          "boundary_patch_ids": []
+        }
+      ],
+      "locations": {
+        "origin": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "left_chamber": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "right_chamber": {
+          "point_state": "free",
+          "region_id": "REG-2",
+          "boundary_patch_id": null
+        },
+        "chamber_left": {
+          "point_state": "free",
+          "region_id": "REG-1",
+          "boundary_patch_id": null
+        },
+        "chamber_right": {
+          "point_state": "free",
+          "region_id": "REG-2",
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [
+        {
+          "connectivity_status": "resolved",
+          "model_sha256": "dcb43b8b4deed59402599f559f244e6510b399606ed93b23c711e8bb1666161e",
+          "topology_certificate_sha256": "ffd1e6e5cae2b2354e25aeff7b3d2fab8d67ec50c23fe2ee75706139cbb09684",
+          "start": [
+            [
+              "-5",
+              "8"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "end": [
+            [
+              "5",
+              "8"
+            ],
+            [
+              "0",
+              "1"
+            ],
+            [
+              "0",
+              "1"
+            ]
+          ],
+          "length_unit": "nm",
+          "start_membership": {
+            "model_sha256": "dcb43b8b4deed59402599f559f244e6510b399606ed93b23c711e8bb1666161e",
+            "topology_certificate_sha256": "ffd1e6e5cae2b2354e25aeff7b3d2fab8d67ec50c23fe2ee75706139cbb09684",
+            "point": [
+              [
+                "-5",
+                "8"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "length_unit": "nm",
+            "point_state": "free",
+            "region_id": "REG-1",
+            "boundary_patch_id": null,
+            "root_point": [
+              [
+                "-529051828695705226396997568485299023313830641231712711869092864691",
+                "848833382564290748318539771546100679871935599498115701129032499200"
+              ],
+              [
+                "789169537999337593622470159385568107381690914613057358578647269",
+                "424416691282145374159269885773050339935967799749057850564516249600"
+              ],
+              [
+                "1176301343812061750344091236058437071174683207884228443743519299",
+                "424416691282145374159269885773050339935967799749057850564516249600"
+              ]
+            ]
+          },
+          "end_membership": {
+            "model_sha256": "dcb43b8b4deed59402599f559f244e6510b399606ed93b23c711e8bb1666161e",
+            "topology_certificate_sha256": "ffd1e6e5cae2b2354e25aeff7b3d2fab8d67ec50c23fe2ee75706139cbb09684",
+            "point": [
+              [
+                "5",
+                "8"
+              ],
+              [
+                "0",
+                "1"
+              ],
+              [
+                "0",
+                "1"
+              ]
+            ],
+            "length_unit": "nm",
+            "point_state": "free",
+            "region_id": "REG-2",
+            "boundary_patch_id": null,
+            "root_point": [
+              [
+                "1979077598619542267515590769925443285970129847736105972102153752875",
+                "3202091370683777500878214178846139396951612856177097598326284484608"
+              ],
+              [
+                "3550082432343304517790312659149328152209096800276557964608294119",
+                "1601045685341888750439107089423069698475806428088548799163142242304"
+              ],
+              [
+                "432263321061633594436852299581651488649878767757748419433030495",
+                "50032677666934023451222096544470928077368950877767149973848195072"
+              ]
+            ]
+          },
+          "connected": false,
+          "start_region_id": "REG-1",
+          "end_region_id": "REG-2"
+        }
+      ],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "left_chamber": "free",
+        "origin": "blocked",
+        "right_chamber": "free"
+      },
+      "elapsed_seconds": 216.9394847120857,
+      "cpu_seconds": 216.791975,
+      "peak_rss_kib": 38832,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_1/protocol.json",
+          "sha256": "5ace715d0a7573273b4b6d87efdc95d7358bba1f8419ef47935b018fee478cfb"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_1/execution.json",
+          "sha256": "b7401e3685a25e67d814d1292bd96111b934edd12d0bfc557d0bb42c09962d34"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_1/receiving/receipt.json",
+          "sha256": "984b17f58385e649dd73cc5873b7fe14ad875b6e8022977bb640cf87fa1c7579"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_1/receiving/dumbbell_profile_1/model.json",
+          "sha256": "2ef0730ffff501c1b29929537e540453cb779043ef5c515ebb98c803b9cc5e45"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_1/receiving/dumbbell_profile_1/certificate.json",
+          "sha256": "3a2d3b5b0ed5c56f6ad0127c3be3c75363f4c5d7bd05b33f478a85f774be8ae3"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_1/receiving/dumbbell_profile_1/verification.json",
+          "sha256": "4c367f237fa129ead91ff09b6b20c4d1e35ca30fd923bd23b62be360d4856c3e"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_1/receiving/dumbbell_profile_1/anchors.json",
+          "sha256": "2883bff3e1e4d31626a8cae358f547665462b0421e8a506bf2259841001fdb66"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_1/receiving/dumbbell_profile_1/phases.json",
+          "sha256": "ffb0543e8cca36da1aa708ffc30b24934ebe3b83e81387c3c63ed9ffcf0fa6ed"
+        }
+      }
+    },
+    {
+      "case": "dumbbell",
+      "probe_angstroms": 6,
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "n_components": 0,
+      "n_boundary_patches": 0,
+      "region_boundary_incidence": [],
+      "locations": {
+        "origin": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_x_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_y_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_negative_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "axis_z_positive_target": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "left_chamber": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        },
+        "right_chamber": {
+          "point_state": "blocked",
+          "region_id": null,
+          "boundary_patch_id": null
+        }
+      },
+      "pair_relations": [],
+      "original_point_states_rechecked": {
+        "axis_x_negative_target": "blocked",
+        "axis_x_positive_target": "blocked",
+        "axis_y_negative_target": "blocked",
+        "axis_y_positive_target": "blocked",
+        "axis_z_negative_target": "blocked",
+        "axis_z_positive_target": "blocked",
+        "left_chamber": "blocked",
+        "origin": "blocked",
+        "right_chamber": "blocked"
+      },
+      "elapsed_seconds": 157.68647286493797,
+      "cpu_seconds": 157.577846,
+      "peak_rss_kib": 37636,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_2/protocol.json",
+          "sha256": "709f503195803a6533e39485430f61a192019801c6fdb93136a53b035b844334"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_2/execution.json",
+          "sha256": "dbaf05af89a4994d9387bc78840c3e1743fe2a2d99946b00b14ba8c122621cc0"
+        },
+        "receipt": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_2/receiving/receipt.json",
+          "sha256": "32b86b7564847cb506b223d8a5fe9a9d6734ecfe7c56f6b3433758f4213cfa79"
+        },
+        "model": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_2/receiving/dumbbell_profile_2/model.json",
+          "sha256": "cfa8c8bf17f54d5b27932281b72c33bc0b2320da241eedd911b80465e9db1832"
+        },
+        "certificate": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_2/receiving/dumbbell_profile_2/certificate.json",
+          "sha256": "9a3a7ec484c96c61f71b64cda0a28dc54d97f973fc7c76fcf7b5c9f58a4b9d95"
+        },
+        "verification": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_2/receiving/dumbbell_profile_2/verification.json",
+          "sha256": "5778445233b29edd7dda862d90b3cb555d8764e9e40ffc81ee51f41aa7a36e20"
+        },
+        "anchors": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_2/receiving/dumbbell_profile_2/anchors.json",
+          "sha256": "1e50ecc7221ac1d61bc8b912486b577934207fd74c977efd3245175eb4ac016e"
+        },
+        "phases": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/profile_2/receiving/dumbbell_profile_2/phases.json",
+          "sha256": "2b335cf6ec7a3c143dac1380ddb0ea560c7e95b96d4cd0499d84bb0b3b4852b6"
+        }
+      }
+    }
+  ],
+  "initializations": [
+    {
+      "case": "closed_shell",
+      "elapsed_seconds": 742.8447116360767,
+      "cpu_seconds": 720.631827,
+      "peak_rss_kib": 40588,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/initialization/protocol.json",
+          "sha256": "73a97d653cfb7d5c0cddf619cd12bf88add1c6870a68880a28bbebe6dc5df9c8"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/closed_shell/initialization/execution.json",
+          "sha256": "a10f8c444906943b4d924282f3b7546fef00ccfe709b7728cde4b92fe4b567cc"
+        }
+      }
+    },
+    {
+      "case": "shell_with_opening",
+      "elapsed_seconds": 569.9291425449774,
+      "cpu_seconds": 554.267833,
+      "peak_rss_kib": 40152,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/initialization/protocol.json",
+          "sha256": "5d4df5f19dda7572d55ce05701a001de1def1c9b241dbd22d0c13f5e1f5bb25d"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/shell_with_opening/initialization/execution.json",
+          "sha256": "506ed4d921424c0957aabad8a0d3e9337594072e6b889a549acf643d70de14d7"
+        }
+      }
+    },
+    {
+      "case": "dumbbell",
+      "elapsed_seconds": 1046.6315556900809,
+      "cpu_seconds": 1031.57122,
+      "peak_rss_kib": 42312,
+      "sources": {
+        "protocol": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/initialization/protocol.json",
+          "sha256": "4d1e733e551ad584e9633d16d3c27128d97b4f84c6ecfd29b88d4cbe41b64446"
+        },
+        "execution": {
+          "path": "devguide/evidence/reference_validator_remaining_topology_v1/dumbbell/initialization/execution.json",
+          "sha256": "61d6160d2620a0ecb171c8fd1c825a0336509698f49078aeb0c97cf14ca5d1a0"
+        }
+      }
+    }
+  ],
+  "profile_totals": {
+    "wall_seconds": 1364.18158262223,
+    "cpu_seconds": 1362.1626119999999,
+    "peak_rss_kib": 38832
+  },
+  "initialization_totals": {
+    "wall_seconds": 2359.405409871135,
+    "cpu_seconds": 2306.47088,
+    "peak_rss_kib": 42312
+  }
+}

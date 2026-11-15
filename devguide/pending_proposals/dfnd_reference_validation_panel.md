@@ -15,6 +15,22 @@ supersedes: []
 
 # Independent DFND reference panel
 
+## A--F continuation: complete topology — 2026-11-15 UTC
+
+The [active checkpoint](../DFND/reference_validator_checkpoint.md) records
+implemented proof/trust controls, checked power-cell resume and conservative
+region-volume/comparison APIs. The ten remaining original profiles now have
+complete checked inventories; the original panel is **19/19 topology-complete**.
+Closed-shell counts are 1/1/1/0, opening-shell counts 1/1/0 and dumbbell counts
+3/2/0. Dumbbell 1.4 Å has one enclosed chamber region and two additional
+boundary-touching regions; its old named-chamber proof did not count all regions.
+
+The original k=24 volume panel and two matched negative native comparisons
+are frozen for sequential execution. Nonempty requested precision, native
+policy correction and public/package admission remain unqualified. Historical
+sections below retain their dated scopes; their older outstanding topology
+counts are superseded by this continuation. #76 stays partial.
+
 ## Selected improvement workplan — 2026-11-14
 
 The [post-tube implementation workplan](../DFND/reference_validator_improvement_workplan.md)

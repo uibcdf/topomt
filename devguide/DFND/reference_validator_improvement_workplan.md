@@ -4,15 +4,16 @@ Date: 2026-11-14. Owner: [TopoMT #76](https://github.com/uibcdf/topomt/issues/76
 First native consumer: [#181](https://github.com/uibcdf/topomt/issues/181).
 Reviewed source/evidence baseline: `242f756712c3ee12b50c565459e75744542af6a9`.
 
-**Status: selected workplan; the improvements below are not implemented by
-this document.** Scientific correctness, exhaustive justified topology and
+**Status: A/B source delivery and C's ten original topology profiles are
+completed; D's conservative source baseline is implemented; E/F retained
+receiving is frozen and pending.** Scientific correctness, exhaustive justified topology and
 certified volume error take priority over runtime. The current serial exact
 construction and separately executable checker remain the baseline.
 
-Execution update: A's bounded review/controls and B's source-level resumable
-construction are delivered in the linked checkpoint, with 124 selected tests
-and mypy on 34 modules passing. Remaining original receiving and general
-per-region precision retain their separate gates; none is passed by this plan.
+Execution update: the linked checkpoint records the actual A--D source checks
+and all nineteen complete original topology profiles. The original-volume and
+mapped-native protocols are frozen before execution. General per-region
+precision retains its own gate; neither this plan nor complete topology passes it.
 
 This document gives the next implementation order, concrete tasks and acceptance
 gates. The [implementation specification](physical_reference_validator_implementation.md)
@@ -50,7 +51,7 @@ architecture study or select another geometry/backend.
 
 ## Baseline and exact scope
 
-At the reviewed source, the power-cell route implements complete regions,
+At the historical reviewed source, the power-cell route implemented complete regions,
 free finite-domain boundary patches, their incidence, anchor assignment and
 checked continuous paths on its admitted models. The retained topology coverage
 is **nine of nineteen original profiles**:

@@ -12,6 +12,43 @@ complete topology-plus-precision validator or a supported public TopoMT detector
 
 ## Selected improvement workplan — 2026-11-14
 
+### Complete remaining topology receiving — 2026-11-15 UTC
+
+All ten frozen targets complete at `2cd59a0c30c8e001a7ce748825bb528d5f5bcf61`.
+The [retained family summary](../evidence/reference_validator_remaining_topology_v1/family_summary.json)
+binds Models, protocols, proofs, independent verification, named queries and
+resources. Every original point state is replayed successfully. Together with
+the earlier tetrahedron/tube families, **all nineteen original profiles now
+have complete finite-domain region and boundary-patch inventories**.
+
+| Case | Probes (Å) | Complete regions / free hull patches |
+| --- | --- | --- |
+| `closed_shell` | 0.05, 0.2, 1.4, 5 | 1/13, 1/0, 1/0, 0/0 |
+| `shell_with_opening` | 1.4, 3, 5 | 1/1, 1/0, 0/0 |
+| `dumbbell` | 1.4, 2.2, 6 | 3/2, 2/0, 0/0 |
+
+At dumbbell 1.4 Å both named chamber anchors and the origin belong to the
+enclosed region; the two additional regions each meet one hull patch. At
+2.2 Å the chambers are in distinct enclosed regions and the origin is blocked.
+This strengthens the global inventory without changing the original named
+anchor references, interpreting hull patches as infinity, or resolving #188.
+
+The ten sequential target workers use 1364.182 wall / 1362.163 CPU seconds,
+peak RSS 38,832 KiB. The separate three initializations use 2359.405 wall /
+2306.471 CPU seconds, peak RSS 42,312 KiB. Their sum excludes development and
+diagnostic preflight time. Targets use one CPU, 2 GiB, 480 soft/600 hard CPU
+seconds and a 720-second wall ceiling; every target completes without a stop.
+Earlier initialization limits/grace are recorded below, not conflated with
+target limits.
+
+The [region-volume panel](../evidence/reference_validator_region_volume_v1/plan.json)
+now freezes controls, all nineteen original k=24 requests and a saved
+tetrahedron refinement pilot. The [native comparison panel](../evidence/reference_validator_native_comparison_v1/plan.json)
+freezes fresh public receiving of the two original whole-hull negative tubes,
+because the older public JSON does not retain normalized atomic arrays needed
+for bit-exact Model matching. These protocols select no new geometry, provider
+or protein and qualify no execution until retained receipts are available.
+
 ### Retained original geometry initialization — 2026-11-15 UTC
 
 Source `d9680c23043e42e0a47819e97f07ed38b6954fc6` completes the three original

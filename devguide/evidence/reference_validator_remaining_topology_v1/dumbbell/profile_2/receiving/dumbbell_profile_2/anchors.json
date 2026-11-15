@@ -1,0 +1,334 @@
+{
+  "length_unit": "nm",
+  "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+  "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+  "points": {
+    "origin": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "axis_x_negative_target": [
+      [
+        "-872100229785529378147672189037417537009661474759",
+        "674093546943799792776468307108649220959302057984"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "axis_x_positive_target": [
+      [
+        "111045543939384837243871582936194082589632024809",
+        "86054857716430610411969964961033525238807134208"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "axis_y_negative_target": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "-105070572952724483181223513969050985607635204783",
+        "156476700799782043086974421875668367995148697600"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "axis_y_positive_target": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "6382425638360448387351062841477733510609615533673",
+        "9305697850985857927480258360454579205326896103424"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "axis_z_negative_target": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "-50251651808666234792531672857952319131903425975",
+        "74624276589002835948414246219966439262892589056"
+      ]
+    ],
+    "axis_z_positive_target": [
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "206364673002862116666245545281130566049695084299",
+        "309525689890804189792144461454891708885151776768"
+      ]
+    ],
+    "left_chamber": [
+      [
+        "-5",
+        "8"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ],
+    "right_chamber": [
+      [
+        "5",
+        "8"
+      ],
+      [
+        "0",
+        "1"
+      ],
+      [
+        "0",
+        "1"
+      ]
+    ]
+  },
+  "locations": {
+    "origin": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "axis_x_negative_target": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "-872100229785529378147672189037417537009661474759",
+          "674093546943799792776468307108649220959302057984"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "axis_x_positive_target": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "111045543939384837243871582936194082589632024809",
+          "86054857716430610411969964961033525238807134208"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "axis_y_negative_target": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "-105070572952724483181223513969050985607635204783",
+          "156476700799782043086974421875668367995148697600"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "axis_y_positive_target": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "6382425638360448387351062841477733510609615533673",
+          "9305697850985857927480258360454579205326896103424"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "axis_z_negative_target": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "-50251651808666234792531672857952319131903425975",
+          "74624276589002835948414246219966439262892589056"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "axis_z_positive_target": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "206364673002862116666245545281130566049695084299",
+          "309525689890804189792144461454891708885151776768"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "left_chamber": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "-5",
+          "8"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    },
+    "right_chamber": {
+      "model_sha256": "a557e3c7618e3416cf5c54397dba57ad42e5d6876353a074b19c5fbe831fbe2c",
+      "topology_certificate_sha256": "8ba93126dafa61a0494e0e9f1d6b837f1fdc6ca3cdc12a256ea16e779a629a03",
+      "point": [
+        [
+          "5",
+          "8"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "length_unit": "nm",
+      "point_state": "blocked",
+      "region_id": null,
+      "boundary_patch_id": null
+    }
+  },
+  "pairs": []
+}
