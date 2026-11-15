@@ -9,7 +9,8 @@ import multiprocessing
 import os
 import resource
 import time
-from concurrent.futures import ProcessPoolExecutor, TimeoutError
+from collections.abc import Iterator
+from concurrent.futures import FIRST_COMPLETED, ProcessPoolExecutor, wait
 from copy import deepcopy
 from dataclasses import dataclass
 from pathlib import Path
@@ -107,15 +108,16 @@ def _task(task: tuple) -> tuple:
     model, proof, checked = _state
     kind, identity, payload = task
     result: Any
-    if kind == 'cell':
+    if kind in {'cell', 'cell_proposal'}:
         from .power_cells import propose_cell
         from .verify.power_cells import checked_cells
 
         atoms = sorted(model.atoms, key=lambda a: a.source_id) or [None]
         row = propose_cell(model, atoms[identity])
-        checked_cells(
-            model, [row], limits=PowerLimits(), complete=False, offset=identity
-        )
+        if kind == 'cell':
+            checked_cells(
+                model, [row], limits=PowerLimits(), complete=False, offset=identity
+            )
         result = row
     elif kind == 'face':
         from .verify.boundary_volume import leaf_bound
@@ -140,6 +142,8 @@ class _Pool:
     def __init__(
         self, model: Model, proof: object, checked: object, policy: LocalPolicy
     ):
+        if multiprocessing.current_process().name != 'MainProcess':
+            raise ValueError('Nested local process pools are not admitted')
         _reserve(policy)
         self.policy = policy
         self.records: dict[int, dict] = {}
@@ -151,26 +155,42 @@ class _Pool:
             initargs=(model, proof, checked, policy, self.cpus),
         )
 
-    def map(self, tasks: list[tuple]) -> list:
-        results = []
+    def iter_map(self, tasks: list[tuple]) -> Iterator[tuple[int, Any]]:
+        """Yield bounded task results once, retaining successful work on failure.
+
+        Finish the current finite batch before propagating a child failure so
+        its other successful tasks can be checkpointed. No subsequent batch is
+        submitted after failure. Identities are unique within each invocation;
+        order of completion is not mathematical contribution order.
+        """
+        ids = [task[1] for task in tasks]
+        if any(type(i) is not int or i < 0 for i in ids) or len(set(ids)) != len(ids):
+            raise ValueError('Task identities must be distinct nonnegative integers')
         for start in range(0, len(tasks), self.policy.workers):
             _reserve(self.policy)
             batch = tasks[start : start + self.policy.workers]
-            futures = [self.executor.submit(_task, task) for task in batch]
-            for task, future in zip(batch, futures):
-                while True:
+            pending = {self.executor.submit(_task, task): task for task in batch}
+            failure = None
+            while pending:
+                done, _ = wait(pending, timeout=5, return_when=FIRST_COMPLETED)
+                _reserve(self.policy)
+                for future in sorted(done, key=lambda f: pending[f][1]):
+                    task = pending.pop(future)
                     try:
-                        identity, result, record = future.result(timeout=5)
-                        break
-                    except TimeoutError:
-                        if future.done():
-                            raise
-                        _reserve(self.policy)
-                if identity != task[1]:
-                    raise ValueError('Worker task identity differs')
-                self.records[record['pid']] = record
-                results.append(result)
-        return results
+                        identity, result, record = future.result()
+                        if type(identity) is not int or identity != task[1]:
+                            raise ValueError('Worker task identity differs')
+                    except Exception as exc:
+                        failure = exc if failure is None else failure
+                        continue
+                    self.records[record['pid']] = record
+                    yield identity, result
+            if failure is not None:
+                raise failure
+
+    def map(self, tasks: list[tuple]) -> list:
+        results = dict(self.iter_map(tasks))
+        return [results[task[1]] for task in tasks]
 
     def close(self) -> None:
         self.executor.shutdown(wait=True, cancel_futures=True)
