@@ -11,7 +11,7 @@ from fractions import Fraction
 from functools import cmp_to_key
 from itertools import combinations
 from math import comb, gcd, lcm
-from typing import Optional
+from typing import Optional, overload
 
 from ..hull_model import HullLimits
 from ..model import (
@@ -24,7 +24,19 @@ from ..model import (
 )
 
 
-def _cross(a: tuple[int, ...], b: tuple[int, ...]) -> tuple[int, int, int]:
+@overload
+def _cross(a: tuple[int, ...], b: tuple[int, ...]) -> tuple[int, int, int]: ...
+
+
+@overload
+def _cross(
+    a: tuple[Fraction, ...], b: tuple[Fraction, ...]
+) -> tuple[Fraction, Fraction, Fraction]: ...
+
+
+def _cross(
+    a: tuple[int | Fraction, ...], b: tuple[int | Fraction, ...]
+) -> tuple[int | Fraction, int | Fraction, int | Fraction]:
     return (
         a[1] * b[2] - a[2] * b[1],
         a[2] * b[0] - a[0] * b[2],
@@ -32,7 +44,17 @@ def _cross(a: tuple[int, ...], b: tuple[int, ...]) -> tuple[int, int, int]:
     )
 
 
-def _dot(a: tuple[int, ...], b: tuple[int, ...]) -> int:
+@overload
+def _dot(a: tuple[int, ...], b: tuple[int, ...]) -> int: ...
+
+
+@overload
+def _dot(a: tuple[Fraction, ...], b: tuple[Fraction, ...]) -> Fraction: ...
+
+
+def _dot(
+    a: tuple[int | Fraction, ...], b: tuple[int | Fraction, ...]
+) -> int | Fraction:
     return sum(x * y for x, y in zip(a[:3], b[:3]))
 
 

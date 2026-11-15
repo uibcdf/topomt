@@ -218,6 +218,8 @@ def verify(
         extra = (
             {'claim', 'atom_id'} if certificate.get('claim') == 'blocked' else {'claim'}
         )
+    elif kind == 'power_edge_volume':
+        extra = {'topology_certificate', 'request', 'scheme', 'bits'}
     elif kind == 'power_boundary_volume':
         extra = {'topology_certificate', 'request', 'bits', 'leaves'}
     elif kind == 'region_volume':
@@ -291,6 +293,26 @@ def verify(
             (Path(__file__).parents[1] / name).read_bytes()
         ).hexdigest()
         result.update(check(model, cert))
+    elif kind == 'power_edge_volume':
+        from .edge_volume import check as check_edge
+
+        for name in (
+            'verify/edge_volume.py',
+            'verify/edge_math.py',
+            'verify/boundary_volume.py',
+            'verify/corner_volume.py',
+            'verify/_interval.py',
+            'verify/power_cells.py',
+            'verify/polytope.py',
+            'power_contracts.py',
+            'volume_request.py',
+            'hull_model.py',
+            'contracts.py',
+        ):
+            result['verifier_files_sha256'][name] = hashlib.sha256(
+                (Path(__file__).parents[1] / name).read_bytes()
+            ).hexdigest()
+        result.update(check_edge(model, cert))
     elif kind == 'power_boundary_volume':
         from .boundary_volume import check as check_boundary
 
