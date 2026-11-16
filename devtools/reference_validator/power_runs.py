@@ -1,6 +1,5 @@
 """Bounded resumable exact source-cell construction with independent checking."""
 
-import hashlib
 import json
 import os
 from collections.abc import Callable
@@ -11,7 +10,7 @@ from typing import Any, Optional, SupportsIndex
 from .model import Atom, Model, _record, record_digest
 from .power_cells import _assemble, propose_cell
 from .power_contracts import PowerLimits
-from .storage import read_record_with_digest
+from .storage import read_record_with_digest, write_progress_bundle
 from .verify import verify
 from .verify.power_cells import checked_cells
 from .verify.power_progress import check_progress, kernel_identity
@@ -211,24 +210,9 @@ def save_power_bundle(directory: Path, model: Model, progress: object) -> None:
 
 def _write_power_bundle(directory: Path, progress: object) -> None:
     """Private manifest-last writer; its caller owns actual validation."""
-    directory.mkdir(parents=True, exist_ok=False)
-    payload = (
-        json.dumps(progress, sort_keys=True, indent=2, allow_nan=False) + '\n'
-    ).encode()
-    if len(payload) > 16 * 1024**2:
-        raise ValueError('Power progress exceeds the 16 MiB record envelope')
-    with (directory / 'progress.json').open('xb') as stream:
-        stream.write(payload)
-        stream.flush()
-        os.fsync(stream.fileno())
-    manifest = {
-        'schema': 'topomt.reference-validator.power-bundle/1',
-        'progress_sha256': hashlib.sha256(payload).hexdigest(),
-    }
-    with (directory / 'MANIFEST.json').open('x') as stream:
-        json.dump(manifest, stream)
-        stream.flush()
-        os.fsync(stream.fileno())
+    write_progress_bundle(
+        directory, progress, schema='topomt.reference-validator.power-bundle/1'
+    )
 
 
 def load_power_bundle(directory: Path, model: Model) -> dict[str, Any]:

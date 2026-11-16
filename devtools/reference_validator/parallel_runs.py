@@ -1,6 +1,5 @@
 """Resumable bounded source-cell proposals; accepted cells remain exact proofs."""
 
-import hashlib
 import json
 import os
 from collections.abc import Callable
@@ -12,33 +11,16 @@ from .model import Model, _record
 from .parallel import LocalPolicy, _Pool
 from .power_cells import _assemble
 from .power_contracts import PowerLimits
-from .storage import read_record_with_digest
+from .storage import read_record_with_digest, write_progress_bundle
 from .verify import verify
 from .verify.parallel_progress import check_progress, kernel_identity, task_identity
 from .verify.power_cells import checked_cells
 
 
 def _write_bundle(directory: Path, state: dict) -> None:
-    payload = (
-        json.dumps(state, sort_keys=True, indent=2, allow_nan=False) + '\n'
-    ).encode()
-    if len(payload) > 128 * 1024**2:
-        raise ValueError('Parallel progress exceeds bounded record size')
-    directory.mkdir(parents=True, exist_ok=False)
-    with (directory / 'progress.json').open('xb') as stream:
-        stream.write(payload)
-        stream.flush()
-        os.fsync(stream.fileno())
-    with (directory / 'MANIFEST.json').open('x') as stream:
-        json.dump(
-            {
-                'schema': 'topomt.reference-validator.parallel-power-bundle/1',
-                'progress_sha256': hashlib.sha256(payload).hexdigest(),
-            },
-            stream,
-        )
-        stream.flush()
-        os.fsync(stream.fileno())
+    write_progress_bundle(
+        directory, state, schema='topomt.reference-validator.parallel-power-bundle/1'
+    )
 
 
 def load_parallel_power_bundle(directory: Path, model: Model) -> dict[str, Any]:

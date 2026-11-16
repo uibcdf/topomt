@@ -1,7 +1,6 @@
 """Produce bounded certified region volumes, with explicit unmet precision."""
 
 import hashlib
-import json
 import os
 from copy import deepcopy
 from fractions import Fraction
@@ -12,7 +11,7 @@ from typing import Any, Literal
 from .analytic_volume import volume_certificate
 from .model import Model, _record, record_digest
 from .power_contracts import bounding_box
-from .storage import read_record_with_digest
+from .storage import _encode_record, read_record_with_digest
 from .verify import verify
 from .verify.corner_volume import corner_bounds
 from .verify.geometry import cell_is_free, volume
@@ -252,24 +251,25 @@ def save_region_bundle(directory: Path, model: Model, certificate: object) -> No
     """
     saved = deepcopy(certificate)
     check_region_volume(model, saved)
+    payloads = {
+        name: _encode_record(value)
+        for name, value in [
+            ('model.json', model.to_record()),
+            ('certificate.json', saved),
+        ]
+    }
+    files = {n: hashlib.sha256(p).hexdigest() for n, p in payloads.items()}
+    manifest = _encode_record(
+        {'schema': 'topomt.reference-validator.region-bundle/1', 'files': files}
+    )
     directory.mkdir(parents=True, exist_ok=False)
-    files = {}
-    for name, value in [('model.json', model.to_record()), ('certificate.json', saved)]:
-        payload = (
-            json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + '\n'
-        ).encode()
-        if len(payload) > 16 * 1024**2:
-            raise ValueError('Region bundle exceeds its per-record envelope')
+    for name, payload in payloads.items():
         with (directory / name).open('xb') as stream:
             stream.write(payload)
             stream.flush()
             os.fsync(stream.fileno())
-        files[name] = hashlib.sha256(payload).hexdigest()
-    with (directory / 'MANIFEST.json').open('x') as stream:
-        json.dump(
-            {'schema': 'topomt.reference-validator.region-bundle/1', 'files': files},
-            stream,
-        )
+    with (directory / 'MANIFEST.json').open('xb') as stream:
+        stream.write(manifest)
         stream.flush()
         os.fsync(stream.fileno())
 

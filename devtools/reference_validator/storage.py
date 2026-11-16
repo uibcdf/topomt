@@ -14,6 +14,27 @@ from typing import Any
 from .model import Model, _record
 from .verify.records import verify_run
 
+_MAX_RECORD_BYTES = 16 * 1024**2
+
+
+def _encode_record(value: object) -> bytes:
+    """Bound encoded JSON, including escapes, indentation and final newline.
+
+    Incremental encoding avoids first materializing the complete output text.
+    This is a serialized-record ceiling, not a bound on the caller's input or
+    every individual encoder chunk. The external process memory limit remains
+    necessary. Preflight all data/manifest records before creating a directory.
+    """
+    payload = bytearray()
+    encoder = json.JSONEncoder(sort_keys=True, indent=2, allow_nan=False)
+    for chunk in encoder.iterencode(value):
+        encoded = chunk.encode()
+        if len(payload) + len(encoded) + 1 > _MAX_RECORD_BYTES:
+            raise ValueError('Record exceeds the bounded 16 MiB reader envelope')
+        payload.extend(encoded)
+    payload.extend(b'\n')
+    return bytes(payload)
+
 
 def _unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     result: dict[str, Any] = {}
@@ -26,8 +47,8 @@ def _unique(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 def _payload(path: Path) -> bytes:
     with path.open('rb') as stream:
-        data = stream.read(16 * 1024**2 + 1)
-    if len(data) > 16 * 1024**2:
+        data = stream.read(_MAX_RECORD_BYTES + 1)
+    if len(data) > _MAX_RECORD_BYTES:
         raise ValueError('Pilot input exceeds 16 MiB limit')
     return data
 
@@ -60,21 +81,17 @@ def write_progress_bundle(directory: Path, progress: object, *, schema: str) -> 
     ValueError, FileExistsError
         Non-JSON/excessive input or an occupied destination.
     """
-    payload = (
-        json.dumps(progress, sort_keys=True, indent=2, allow_nan=False) + '\n'
-    ).encode()
-    if len(payload) > 16 * 1024**2:
-        raise ValueError('Progress exceeds the bounded 16 MiB reader envelope')
+    payload = _encode_record(progress)
+    manifest = _encode_record(
+        {'schema': schema, 'progress_sha256': hashlib.sha256(payload).hexdigest()}
+    )
     directory.mkdir(parents=True, exist_ok=False)
     with (directory / 'progress.json').open('xb') as stream:
         stream.write(payload)
         stream.flush()
         os.fsync(stream.fileno())
-    with (directory / 'MANIFEST.json').open('x') as stream:
-        json.dump(
-            {'schema': schema, 'progress_sha256': hashlib.sha256(payload).hexdigest()},
-            stream,
-        )
+    with (directory / 'MANIFEST.json').open('xb') as stream:
+        stream.write(manifest)
         stream.flush()
         os.fsync(stream.fileno())
 
@@ -119,21 +136,22 @@ def save_bundle(directory: Path, model: Model, checkpoint: object, run: object) 
     Existing directories, even empty ones, are not overwritten.
     """
     verify_run(model, run, checkpoint)
+    payloads = {
+        name: _encode_record(value)
+        for name, value in (('checkpoint.json', checkpoint), ('run.json', run))
+    }
+    files = {n: hashlib.sha256(p).hexdigest() for n, p in payloads.items()}
+    manifest = _encode_record(
+        {'schema': 'topomt.reference-validator.bundle/1', 'files': files}
+    )
     directory.mkdir(parents=True, exist_ok=False)
-    files = {}
-    for name, value in (('checkpoint.json', checkpoint), ('run.json', run)):
-        payload = (
-            json.dumps(value, sort_keys=True, indent=2, allow_nan=False) + '\n'
-        ).encode()
+    for name, payload in payloads.items():
         with (directory / name).open('xb') as stream:
             stream.write(payload)
             stream.flush()
             os.fsync(stream.fileno())
-        files[name] = hashlib.sha256(payload).hexdigest()
-    manifest = {'schema': 'topomt.reference-validator.bundle/1', 'files': files}
-    with (directory / 'MANIFEST.json').open('x') as stream:
-        json.dump(manifest, stream, sort_keys=True, indent=2, allow_nan=False)
-        stream.write('\n')
+    with (directory / 'MANIFEST.json').open('xb') as stream:
+        stream.write(manifest)
         stream.flush()
         os.fsync(stream.fileno())
 
