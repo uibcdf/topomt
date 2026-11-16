@@ -1,5 +1,17 @@
 # DFND notebook laboratory checkpoint
 
+## Checkpoint-size reliability — 2026-11-15
+
+The [storage contract](reference_validator_storage.md) and
+[receiving](../evidence/reference_validator_storage_v1/README.md) resolve the
+S2/S6 size/preflight follow-up through six saved routes. All data and manifest
+records now fit the same 16 MiB reader limit before a directory is created.
+Boundary/excess controls preserve the last checkpoint; fresh readers check the
+retained bundles without producers/scientific packages. Source-bound resume
+still requires the recorded executable/runtime. Historical nineteen-profile
+precision and S6/S7 evidence retain their scopes. No native finding, full parallel
+panel, S8/P6/P7 or installed/platform gate is resolved by this persistence repair.
+
 ## Analytic integration with bounded workers — 2026-11-15 UTC
 
 The [S7 receiving](../evidence/reference_validator_parallel_edge_v1/README.md)

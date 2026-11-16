@@ -153,7 +153,7 @@ deferred with its measured reason and revisit condition in #76.
 | S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Partial: denominator control and measured integer dyadic atan; optional Rust deferred |
 | S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Delivered for controlled failures/resume and three original one/two-worker Models; full parallel panel/four workers separate |
 | S7 | Bounded parallel integration with verified ownership | S4/S6 | Delivered: canonical analytic frontier, failure/resume controls, 25 analytic controls and three original serial/two-worker profiles; broader panel separate |
-| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: original serial precision panel delivered; broader optimized/parallel/public receiving open |
+| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: original serial precision and six-route storage reliability delivered; broader optimized/parallel/public receiving open |
 
 ### S1 — measure the actual work and freeze comparisons
 
@@ -432,12 +432,19 @@ needs a geometric reuse argument, corruption/degeneracy controls, identical
 canonical proofs and matched successful end-to-end measurements. The profile
 alone delivers no cache or Rust acceleration; S3/S5 keep their remaining gates.
 
-### Persistence follow-up retained under #76
+### Persistence follow-up resolved at selected scope — 2026-11-15
 
-Source inspection during S7 finds that older custom power-progress writers
-allow records up to 128 MiB while the shared bounded reader admits 16 MiB.
-The selected original receiving records are below that reader cap. The new S7
-generic progress writer/reader agree at 16 MiB; this does not silently qualify
-or correct the older routes. Under #76/S2/S6, reconcile their write/read limits
-and add an informative bounded-serialization regression before broader record-
-size admission. Preserve existing source snapshots and readable saved proofs.
+The [storage contract](reference_validator_storage.md) and
+[receiving](../evidence/reference_validator_storage_v1/README.md) correct the
+parallel power writer's 128 MiB/reader 16 MiB mismatch. The earlier description
+of multiple 128 MiB writers was too broad: serial power and region data already
+had 16 MiB checks. They now preflight before directory creation; subdivision
+data and every route's manifest are also bounded. All routes use one 16 MiB
+encoded-record limit, with no changes to mathematical proof or precision.
+
+Actual ceiling/one-byte-excess controls, scaled byte-boundary controls through
+six routes, preserved previous checkpoints and fresh independent readers qualify
+this repair. It is no longer an unresolved size-mismatch limitation at this
+source. Historical snapshots retain their actual source identities/behavior.
+Chunked storage or a larger admitted envelope would require a separate protocol;
+neither is selected. Wider S8/public/native qualification remains open.

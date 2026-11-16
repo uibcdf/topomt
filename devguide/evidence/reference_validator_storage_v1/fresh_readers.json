@@ -1,0 +1,47 @@
+{
+  "source_runtime": "3.14.10 | packaged by conda-forge | (main, Oct 26 2026, 11:35:38) [GCC 15.3.0]",
+  "readers": [
+    {
+      "name": "raw",
+      "exit_code": 0,
+      "output": "raw independently checked\n",
+      "site_packages": false,
+      "producer_scientific_imports": "blocked"
+    },
+    {
+      "name": "power",
+      "exit_code": 0,
+      "output": "power independently checked\n",
+      "site_packages": false,
+      "producer_scientific_imports": "blocked"
+    },
+    {
+      "name": "parallel",
+      "exit_code": 0,
+      "output": "parallel independently checked\n",
+      "site_packages": false,
+      "producer_scientific_imports": "blocked"
+    },
+    {
+      "name": "partition",
+      "exit_code": 0,
+      "output": "partition independently checked\n",
+      "site_packages": false,
+      "producer_scientific_imports": "blocked"
+    },
+    {
+      "name": "region",
+      "exit_code": 0,
+      "output": "region independently checked\n",
+      "site_packages": false,
+      "producer_scientific_imports": "blocked"
+    },
+    {
+      "name": "edge",
+      "exit_code": 0,
+      "output": "edge independently checked\n",
+      "site_packages": false,
+      "producer_scientific_imports": "blocked"
+    }
+  ]
+}

@@ -331,3 +331,12 @@ an old example remains dated history rather than an independently maintained
 current-limit list. This book is a curated scientific explanation; accepted
 developer contracts retain their authority, and adopting a new algorithm still
 requires its own scientific decision/evidence.
+
+## Checkpoint storage review — 2026-11-15
+
+The [storage repair](reference_validator_storage.md) changes neither DFND's
+operators, units, morphology nor reference arithmetic. The BenchLab report notes
+the operational boundary without claiming new scientific admission. Method
+chapters/derivations remain applicable; the executable worked-example regression
+is included in the selected receiving checks. Local strict rendering remains
+separate from hosted publication and installed qualification.

@@ -211,6 +211,17 @@ retain the executed scope. The full parallel nineteen-profile/four-worker panel
 and broader admission remain under #76. Native DFND/public qualification and
 biological validation keep their separate gates.
 
+## Checkpoint storage reliability — 2026-11-15
+
+All six reference storage routes now check that every record fits the reader's
+size limit before publishing a new checkpoint. Tests at the actual byte ceiling
+and one byte beyond it preserve the last valid checkpoint; fresh independent
+readers accept the retained controls. Exceeding a storage limit is an operational
+interruption, never evidence of empty space or a completed physical analysis.
+The [source, controls and recovery scope](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_storage_v1/README.md)
+are retained separately. This repair changes no earlier scientific result and
+provides no new full-panel, native or public qualification.
+
 ## Earlier range-based face-integration feasibility — 2026-11-15
 
 The validator now reuses genuinely checked in-process topology and updates

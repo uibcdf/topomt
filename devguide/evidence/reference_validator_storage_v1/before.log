@@ -1,0 +1,12 @@
+FAIL exit=1 | 2 failed | 0.45s | 2 root causes
+
+[1] Failed | 1 test | call
+    tests/test_reference_validator_storage.py:146
+    Failed: DID NOT RAISE ValueError
+    rerun: pytest tests/test_reference_validator_storage.py::test_real_parallel_writer_cannot_publish_a_record_its_reader_rejects -q
+
+[2] Failed | 1 test | call
+    tests/test_reference_validator_storage.py:170
+    Failed: DID NOT RAISE ValueError
+    rerun: pytest tests/test_reference_validator_storage.py::test_oversized_commit_manifest_cannot_publish_an_unreadable_bundle -q
+

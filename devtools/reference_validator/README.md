@@ -23,7 +23,8 @@ constraints. See the [derivation](../../devguide/DFND/reference_validator_edge_i
 and [original receiving](../../devguide/evidence/reference_validator_edge_volume_v1/README.md):
 all nineteen originals plus sixteen boundary and nine region controls pass.
 The exact reader needs no producer/scientific dependency. Serial is the default;
-parallel admission of the analytic route is pending.
+the analytic task route below has selected serial/two-worker receiving, with
+broader parallel admission still separate.
 
 
 `boundary_volume.boundary_volume_certificate` proposes a complete oriented
@@ -50,6 +51,15 @@ rechecks every saved task on loading. A partial inventory has no global count;
 Pool failure preserves accepted work and propagates the error. Use small
 explicit cell budgets and durable checkpoints for longer inputs: child CPU
 ceilings apply over a pool's lifetime. One worker remains the default.
+
+All saved-bundle routes now share the
+[bounded storage contract](../../devguide/DFND/reference_validator_storage.md):
+each JSON data/manifest record fits the same 16 MiB reader envelope, with all
+records checked before creating the exclusive destination. An oversized record
+leaves the earlier checkpoint intact and supplies no physical result. Source-
+bound resume still requires the exact recorded executable/runtime; old portable
+proofs and source capsules are retained. This is a persistence repair, not an
+expanded scientific envelope or full S8/public admission.
 
 The opt-in developer `parallel` module bounds source-cell/face workers, queue
 sizes and child resources. Its Linux caller must supply affinity of at most

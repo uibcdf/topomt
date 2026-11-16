@@ -33,6 +33,10 @@ volume results. The later [canonical analytic checker](reference_validator_paral
 qualifies selected S7 serial/two-worker arithmetic with checked recovery. Full
 parallel-panel and broader S8 admission remain separate.
 
+The later [storage repair](reference_validator_storage.md) closes paired-size and
+preflight-before-publication follow-up across all six saved routes. Broader
+scientific/parallel receiving and native/public qualification remain separate.
+
 ### Next executable work under #76
 
 1. Qualify common native receiving in canonical units under #76/#60 before

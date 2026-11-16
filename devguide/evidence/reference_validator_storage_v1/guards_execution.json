@@ -1,0 +1,46 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "--receptor=llm",
+    "tests/test_reference_validator_storage_receiving.py"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 45,
+  "cpu_hard_seconds": 50,
+  "wall_seconds": 2.1213748620357364,
+  "waited_cpu_seconds": 2.140156,
+  "peak_child_rss_kib": 157620,
+  "sampled_group_rss_peak_kib": 24,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 40371937280,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6073568\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5928817\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0009605679661035538,
+      "host": {
+        "available_bytes": 40371937280,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6073568\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5928817\n",
+        "safe": true
+      },
+      "group_rss_kib": 24,
+      "group_pids": [
+        37
+      ]
+    }
+  ]
+}
