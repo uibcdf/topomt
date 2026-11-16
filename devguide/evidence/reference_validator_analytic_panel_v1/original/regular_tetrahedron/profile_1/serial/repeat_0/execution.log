@@ -1,0 +1,2 @@
+{"name": "original/regular_tetrahedron/profile_1", "mode": "serial", "completed_pieces": 24}
+{"name": "original/regular_tetrahedron/profile_1", "stage": "solve", "mode": "serial", "wall_seconds": 0.16153512801975012, "precision_status": "resolved"}

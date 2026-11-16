@@ -340,3 +340,13 @@ the operational boundary without claiming new scientific admission. Method
 chapters/derivations remain applicable; the executable worked-example regression
 is included in the selected receiving checks. Local strict rendering remains
 separate from hosted publication and installed qualification.
+
+## Expanded analytic verification review — 2026-11-16 UTC
+
+The [complete original saved-proof panel](../evidence/reference_validator_analytic_panel_v1/README.md)
+checks all nineteen numerical profiles and 25 controls in serial/two-worker
+modes, with fresh producer-free reading. The validation chapter/report separate
+that scope from source construction, paused recovery, larger-case repeatability
+and public/installed qualification. DFND operators, units, interpretation and
+derivations are unchanged; the worked-example regression remains applicable.
+Local strict rendering is separate from hosted publication.

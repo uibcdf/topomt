@@ -1,0 +1,2 @@
+{"name": "controls/region/eight_corners", "mode": "parallel2", "completed_pieces": 48}
+{"name": "controls/region/eight_corners", "stage": "solve", "mode": "parallel2", "wall_seconds": 0.3414205251028761, "precision_status": "resolved"}

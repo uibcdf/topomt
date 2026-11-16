@@ -37,6 +37,23 @@ The later [storage repair](reference_validator_storage.md) closes paired-size an
 preflight-before-publication follow-up across all six saved routes. Broader
 scientific/parallel receiving and native/public qualification remain separate.
 
+## Expanded original verification panel — 2026-11-16 UTC
+
+The [new receiving](../evidence/reference_validator_analytic_panel_v1/README.md)
+qualifies complete saved-proof verification for all nineteen original numerical
+profiles and twenty-five analytic controls in direct serial/two-worker modes.
+Every mathematical field and original total/per-region precision request is
+preserved. Each profile receives a further fresh producer-free serial read
+shared by all its configurations; all 136 commands pass. The small tetrahedron
+1.4 Å profile has three fresh repetitions per mode; larger profiles have one
+observation per mode and acquire no general/repeatable scaling claim.
+
+This extends analytic verification, not proposal generation or nineteen-profile
+source-construction/resume admission. S6/S7 pause/recovery retain their earlier
+three-Model source scopes. Four workers, remaining S1/S3/S5, broader S8/P6/P7,
+canonical native #76/#60 and installed/platform #16 keep their gates. Native
+#181/#180/#184/#188 and all older evidence are unchanged. Serial is the default.
+
 ### Next executable work under #76
 
 1. Qualify common native receiving in canonical units under #76/#60 before
@@ -49,8 +66,8 @@ scientific/parallel receiving and native/public qualification remain separate.
 3. Continue the [performance stages](reference_validator_performance_plan.md)
    from the qualified serial baseline: complete cost accounting/invariant
    review, then explicit bounded process failure/resume/equivalence admission.
-   The analytic edge checker now has selected fixed-frontier serial/two-worker
-   qualification; the full parallel panel remains open. Rust is
+   The analytic checker now has full original saved-proof serial/two-worker
+   receiving; broader source-construction/resume and four workers remain open. Rust is
    optional and requires a measured justified hotspot; no speed target replaces
    correctness. Keep the prior conservative routes as independently readable
    fallback evidence. No new geometry, protein or provider phase is selected.

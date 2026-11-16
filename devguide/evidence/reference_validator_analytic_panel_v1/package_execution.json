@@ -1,0 +1,69 @@
+{
+  "command": [
+    "python",
+    "/tmp/topomt-analytic-panel-package.py"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 45,
+  "cpu_hard_seconds": 50,
+  "wall_seconds": 11.47283134306781,
+  "waited_cpu_seconds": 11.530054,
+  "peak_child_rss_kib": 66788,
+  "sampled_group_rss_peak_kib": 36476,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 40713265152,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6117273\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5971498\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.002283168025314808,
+      "host": {
+        "available_bytes": 40713265152,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6117273\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5971498\n",
+        "safe": true
+      },
+      "group_rss_kib": 1632,
+      "group_pids": [
+        5
+      ]
+    },
+    {
+      "seconds": 5.004272173042409,
+      "host": {
+        "available_bytes": 40700477440,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6117273\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5971498\n",
+        "safe": true
+      },
+      "group_rss_kib": 33140,
+      "group_pids": [
+        5
+      ]
+    },
+    {
+      "seconds": 10.005270057008602,
+      "host": {
+        "available_bytes": 40696750080,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6117273\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5971498\n",
+        "safe": true
+      },
+      "group_rss_kib": 36476,
+      "group_pids": [
+        5
+      ]
+    }
+  ]
+}

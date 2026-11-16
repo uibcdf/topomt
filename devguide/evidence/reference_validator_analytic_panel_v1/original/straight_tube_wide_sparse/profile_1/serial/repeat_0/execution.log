@@ -1,0 +1,6 @@
+{"name": "original/straight_tube_wide_sparse/profile_1", "mode": "serial", "completed_pieces": 512}
+{"name": "original/straight_tube_wide_sparse/profile_1", "mode": "serial", "completed_pieces": 1024}
+{"name": "original/straight_tube_wide_sparse/profile_1", "mode": "serial", "completed_pieces": 1536}
+{"name": "original/straight_tube_wide_sparse/profile_1", "mode": "serial", "completed_pieces": 2048}
+{"name": "original/straight_tube_wide_sparse/profile_1", "mode": "serial", "completed_pieces": 2425}
+{"name": "original/straight_tube_wide_sparse/profile_1", "stage": "solve", "mode": "serial", "wall_seconds": 92.10041629802436, "precision_status": "resolved"}

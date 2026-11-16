@@ -12,6 +12,23 @@ Correctness, complete topology and certified error retain priority over speed.
 The [A--F workplan](reference_validator_improvement_workplan.md) owns the active
 scientific sequence; this document supplies its detailed performance follow-up.
 
+### Expanded original verification panel — 2026-11-16 UTC
+
+The [new receiving](../evidence/reference_validator_analytic_panel_v1/README.md)
+qualifies complete saved-proof verification for all nineteen original numerical
+profiles and twenty-five analytic controls in direct serial/two-worker modes.
+Every mathematical field and original total/per-region precision request is
+preserved. Each profile receives a further fresh producer-free serial read
+shared by all its configurations; all 136 commands pass. The small tetrahedron
+1.4 Å profile has three fresh repetitions per mode; larger profiles have one
+observation per mode and acquire no general/repeatable scaling claim.
+
+This extends analytic verification, not proposal generation or nineteen-profile
+source-construction/resume admission. S6/S7 pause/recovery retain their earlier
+three-Model source scopes. Four workers, remaining S1/S3/S5, broader S8/P6/P7,
+canonical native #76/#60 and installed/platform #16 keep their gates. Native
+#181/#180/#184/#188 and all older evidence are unchanged. Serial is the default.
+
 ### Certified analytic task execution — 2026-11-15
 
 The [S7 checker route](reference_validator_parallel_edge.md) distributes the
@@ -29,8 +46,8 @@ and dumbbell 1.4 Å profiles. Mathematical output equals the original fixed-bit
 receipts and a further new serial read. Unit controls cover signed cancellation,
 tiny/asymmetric regions, changed bits/requests/units, forged saved arithmetic,
 missing/duplicate tasks, failure and cancellation. S7 is delivered at this fixed-
-frontier scope; full parallel nineteen-profile/four-worker and broader S8 remain
-open. This route does not replace remaining S1/S3/S5 work or qualify native DFND.
+frontier scope. The later S8 record above expands saved-proof verification to
+all nineteen; source-construction/resume, four workers and broader S8 stay open. This route does not replace remaining S1/S3/S5 work or qualify native DFND.
 
 ### Resumable source-cell receiving — 2026-11-15
 
@@ -152,8 +169,8 @@ deferred with its measured reason and revisit condition in #76.
 | S4 | General certified boundary integration and precision receiving | A--F D/E; S1 measurements | Delivered: all 19 original total/per-region requests and selected controls; wider admission separate |
 | S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Partial: denominator control and measured integer dyadic atan; optional Rust deferred |
 | S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Delivered for controlled failures/resume and three original one/two-worker Models; full parallel panel/four workers separate |
-| S7 | Bounded parallel integration with verified ownership | S4/S6 | Delivered: canonical analytic frontier, failure/resume controls, 25 analytic controls and three original serial/two-worker profiles; broader panel separate |
-| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: original serial precision and six-route storage reliability delivered; broader optimized/parallel/public receiving open |
+| S7 | Bounded parallel integration with verified ownership | S4/S6 | Delivered: canonical analytic frontier and selected failure/resume controls; later saved-proof verification covers 19 originals/25 controls in serial/two-worker modes; wider construction/resume separate |
+| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: all 19 original saved proofs/25 controls in serial/two-worker modes, fresh shared reading and storage reliability delivered; broader construction/resume, repeatability and public gates open |
 
 ### S1 — measure the actual work and freeze comparisons
 
@@ -448,3 +465,24 @@ this repair. It is no longer an unresolved size-mismatch limitation at this
 source. Historical snapshots retain their actual source identities/behavior.
 Chunked storage or a larger admitted envelope would require a separate protocol;
 neither is selected. Wider S8/public/native qualification remains open.
+
+### Resource headroom review — 2026-11-16 UTC
+
+After this panel, the local snapshot has 20 allowed logical CPUs, about 39 GiB
+available RAM, about 92% CPU idle and no observed active swapping or memory
+pressure. These are observations, not reservations or a guarantee for another
+user's workload. The panel's longest command is 148.659 seconds and its sampled
+group RSS peaks at 106.79 MiB, so higher memory/time ceilings are unnecessary for
+these completed profiles. The packaging-only 45-second failure is corrected by
+avoiding redundant geometry, not by repeating the scientific panel.
+
+An explicitly bounded four-worker pilot is a candidate under the existing
+S6/S7/P7 gate, after a fresh host check and an aggregate-envelope estimate. Run
+one task at a time, consider lower scheduling priority, measure whole-workflow
+benefit and return to two/one workers if contention or pressure appears. The
+observed larger-case two-worker solve ratios are only 1.113–1.181, with one
+observation per configuration; serial geometry/checking limits the likely gain.
+No four-worker run is qualified by this record. Runtime safety controls retain
+the 20%/minimum RAM reserve. Raising an external ceiling alone cannot bypass the
+executor's explicit current <=300 CPU-second/<=2 GiB parent contract; changing
+that contract requires its own tests and receiving.

@@ -1,0 +1,2 @@
+{"name": "controls/region/tiny_eight_corners", "mode": "serial", "completed_pieces": 48}
+{"name": "controls/region/tiny_eight_corners", "stage": "solve", "mode": "serial", "wall_seconds": 0.1767325159162283, "precision_status": "resolved"}

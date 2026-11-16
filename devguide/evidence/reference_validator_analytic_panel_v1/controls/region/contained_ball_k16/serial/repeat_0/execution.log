@@ -1,0 +1,2 @@
+{"name": "controls/region/contained_ball_k16", "mode": "serial", "completed_pieces": 12}
+{"name": "controls/region/contained_ball_k16", "stage": "solve", "mode": "serial", "wall_seconds": 0.09309832600411028, "precision_status": "resolved"}

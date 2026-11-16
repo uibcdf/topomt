@@ -1,0 +1,5 @@
+{"name": "original/shell_with_opening/profile_1", "mode": "serial", "completed_pieces": 512}
+{"name": "original/shell_with_opening/profile_1", "mode": "serial", "completed_pieces": 1024}
+{"name": "original/shell_with_opening/profile_1", "mode": "serial", "completed_pieces": 1536}
+{"name": "original/shell_with_opening/profile_1", "mode": "serial", "completed_pieces": 1888}
+{"name": "original/shell_with_opening/profile_1", "stage": "solve", "mode": "serial", "wall_seconds": 80.68910279904958, "precision_status": "resolved"}

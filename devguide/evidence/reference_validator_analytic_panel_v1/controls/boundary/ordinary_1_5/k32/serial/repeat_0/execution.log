@@ -1,0 +1,2 @@
+{"name": "controls/boundary/ordinary_1_5/k32", "mode": "serial", "completed_pieces": 48}
+{"name": "controls/boundary/ordinary_1_5/k32", "stage": "solve", "mode": "serial", "wall_seconds": 0.12070630304515362, "precision_status": "resolved"}

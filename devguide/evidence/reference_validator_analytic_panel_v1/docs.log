@@ -1,0 +1,474 @@
+Running Sphinx v9.2.0
+version 0.5.0, release 0.5.0
+loading translations [en]... done
+making output directory... done
+Converting `source_suffix = ['.rst', '.md', '.ipynb']` to `source_suffix = {'.rst': 'restructuredtext', '.md': 'restructuredtext', '.ipynb': 'restructuredtext'}`.
+[autosummary] generating autosummary for: api/developers/api_developers.rst, api/index.md, api/users/api_users.rst, content/about/citation.md, content/about/index.md, content/about/installation.md, content/about/what.md, content/about/who.md, content/ai_assistants.md, content/benchlab/index.md, ..., content/user/hole.md, content/user/id_index.md, content/user/index.md, content/user/molovol.md, content/user/original_local_providers.md, content/user/pisa.md, content/user/povme.md, content/user/scientific_attribution.md, content/user/third_party_engines.md, index.md
+checking bibtex cache... out of date
+parsing bibtex file /fast_data/home/liliana/repos@uibcdf/topomt/docs/bibliography.bib... parsed 6 entries
+myst v5.1.0: MdParserConfig(commonmark_only=False, gfm_only=False, enable_extensions={'colon_fence', 'deflist', 'dollarmath', 'amsmath'}, disable_syntax=[], all_links_external=False, links_external_new_tab=False, url_schemes=('http', 'https', 'mailto', 'ftp'), ref_domains=None, fence_as_directive=set(), number_code_blocks=[], title_to_header=False, heading_anchors=3, heading_slug_func=None, html_meta={}, footnote_sort=True, footnote_transition=True, words_per_minute=200, substitutions={}, linkify_fuzzy_links=True, dmath_allow_labels=True, dmath_allow_space=True, dmath_allow_digits=True, dmath_double_inline=False, update_mathjax=True, mathjax_classes='tex2jax_process|mathjax_process|math|output_area', enable_checkboxes=False, strikethrough_single_tilde=False, colon_fence_exact_match=False, suppress_warnings=[], highlight_code_blocks=True)
+myst-nb v1.4.0: NbParserConfig(custom_formats={}, metadata_key='mystnb', cell_metadata_key='mystnb', kernel_rgx_aliases={}, eval_name_regex='^[a-zA-Z_][a-zA-Z0-9_]*$', execution_mode='off', execution_cache_path='', execution_excludepatterns=(), execution_timeout=30, execution_in_temp=False, execution_allow_errors=False, execution_raise_on_error=False, execution_show_tb=False, merge_streams=False, render_plugin='default', remove_code_source=False, remove_code_outputs=False, scroll_outputs=False, code_prompt_show='Show code cell {type}', code_prompt_hide='Hide code cell {type}', number_source_lines=False, output_stderr='show', render_text_lexer='myst-ansi', render_error_lexer='ipythontb', render_image_options={}, render_figure_options={}, render_markdown_format='commonmark', output_folder='build', append_css=True, metadata_to_fm=False)
+Using jupyter-cache at: /tmp/.jupyter_cache
+building [mo]: targets for 0 po files that are out of date
+writing output... 
+building [html]: targets for 115 source files that are out of date
+updating environment: [new config] 115 added, 0 changed, 0 removed
+reading sources... [  1%] api/developers/api_developers
+reading sources... [  2%] api/index
+reading sources... [  3%] api/users/api_users
+reading sources... [  3%] content/about/citation
+reading sources... [  4%] content/about/index
+reading sources... [  5%] content/about/installation
+reading sources... [  6%] content/about/what
+reading sources... [  7%] content/about/who
+reading sources... [  8%] content/ai_assistants
+reading sources... [  9%] content/benchlab/index
+reading sources... [ 10%] content/benchlab/molecular/index
+reading sources... [ 10%] content/benchlab/synthetic/artifacts/reference_validator_edge_v1/README
+reading sources... [ 11%] content/benchlab/synthetic/artifacts/reference_validator_followup_v1/README
+reading sources... [ 12%] content/benchlab/synthetic/artifacts/six_case_review_v1/README
+reading sources... [ 13%] content/benchlab/synthetic/closed_shell/closure_at_0p2
+reading sources... [ 14%] content/benchlab/synthetic/closed_shell/dfnd
+reading sources... [ 15%] content/benchlab/synthetic/closed_shell/historical
+reading sources... [ 16%] content/benchlab/synthetic/closed_shell/index
+reading sources... [ 17%] content/benchlab/synthetic/closed_shell/public_topography
+reading sources... [ 17%] content/benchlab/synthetic/closed_shell/public_topography_v2
+reading sources... [ 18%] content/benchlab/synthetic/closed_shell/small_probe_connectivity
+reading sources... [ 19%] content/benchlab/synthetic/closed_shell/system
+reading sources... [ 20%] content/benchlab/synthetic/closed_shell/topography
+reading sources... [ 21%] content/benchlab/synthetic/comparison_disposition
+reading sources... [ 22%] content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/README
+reading sources... [ 23%] content/benchlab/synthetic/cylinder_tube/dfnd
+reading sources... [ 23%] content/benchlab/synthetic/cylinder_tube/index
+reading sources... [ 24%] content/benchlab/synthetic/cylinder_tube/system
+reading sources... [ 25%] content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/README
+reading sources... [ 26%] content/benchlab/synthetic/dumbbell/dfnd
+reading sources... [ 27%] content/benchlab/synthetic/dumbbell/index
+reading sources... [ 28%] content/benchlab/synthetic/dumbbell/system
+reading sources... [ 29%] content/benchlab/synthetic/index
+reading sources... [ 30%] content/benchlab/synthetic/origin_access_brackets
+reading sources... [ 30%] content/benchlab/synthetic/public_support_and_robustness
+reading sources... [ 31%] content/benchlab/synthetic/public_topography
+reading sources... [ 32%] content/benchlab/synthetic/reference_validator_report
+reading sources... [ 33%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/README
+reading sources... [ 34%] content/benchlab/synthetic/regular_tetrahedron/atomic_models
+reading sources... [ 35%] content/benchlab/synthetic/regular_tetrahedron/boundary_connectivity
+reading sources... [ 36%] content/benchlab/synthetic/regular_tetrahedron/comparisons
+reading sources... [ 37%] content/benchlab/synthetic/regular_tetrahedron/dfnd
+reading sources... [ 37%] content/benchlab/synthetic/regular_tetrahedron/historical
+reading sources... [ 38%] content/benchlab/synthetic/regular_tetrahedron/index
+reading sources... [ 39%] content/benchlab/synthetic/regular_tetrahedron/public_topography
+reading sources... [ 40%] content/benchlab/synthetic/regular_tetrahedron/public_topography_v2
+reading sources... [ 41%] content/benchlab/synthetic/regular_tetrahedron/system
+reading sources... [ 42%] content/benchlab/synthetic/regular_tetrahedron/topography
+reading sources... [ 43%] content/benchlab/synthetic/shell_with_opening/dfnd
+reading sources... [ 43%] content/benchlab/synthetic/shell_with_opening/index
+reading sources... [ 44%] content/benchlab/synthetic/shell_with_opening/opening_connectivity
+reading sources... [ 45%] content/benchlab/synthetic/shell_with_opening/public_topography
+reading sources... [ 46%] content/benchlab/synthetic/shell_with_opening/public_topography_v2
+reading sources... [ 47%] content/benchlab/synthetic/shell_with_opening/system
+reading sources... [ 48%] content/benchlab/synthetic/shell_with_opening/topography
+reading sources... [ 49%] content/benchlab/synthetic/six_case_review
+reading sources... [ 50%] content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/README
+reading sources... [ 50%] content/benchlab/synthetic/straight_tube_narrow_dense/dfnd
+reading sources... [ 51%] content/benchlab/synthetic/straight_tube_narrow_dense/index
+reading sources... [ 52%] content/benchlab/synthetic/straight_tube_narrow_dense/system
+reading sources... [ 53%] content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/README
+reading sources... [ 54%] content/benchlab/synthetic/straight_tube_wide_sparse/dfnd
+reading sources... [ 55%] content/benchlab/synthetic/straight_tube_wide_sparse/index
+reading sources... [ 56%] content/benchlab/synthetic/straight_tube_wide_sparse/system
+reading sources... [ 57%] content/benchlab/synthetic/three_case_disposition
+reading sources... [ 57%] content/benchlab/synthetic/volume_measurements
+reading sources... [ 58%] content/developer/architecture
+reading sources... [ 59%] content/developer/codebase_map
+reading sources... [ 60%] content/developer/ecosystem_integration
+reading sources... [ 61%] content/developer/future/feature_attributes_catalog
+reading sources... [ 62%] content/developer/future/features_catalog
+reading sources... [ 63%] content/developer/future/index
+reading sources... [ 63%] content/developer/index
+reading sources... [ 64%] content/developer/packaging
+reading sources... [ 65%] content/developer/status
+reading sources... [ 66%] content/developer/string_style
+reading sources... [ 67%] content/developer/testing
+reading sources... [ 68%] content/developer/type_annotations_guidelines
+reading sources... [ 69%] content/dfnd/appendices/algorithm
+reading sources... [ 70%] content/dfnd/appendices/clearance_derivations
+reading sources... [ 70%] content/dfnd/appendices/mathematical_properties
+reading sources... [ 71%] content/dfnd/appendices/notation
+reading sources... [ 72%] content/dfnd/classification
+reading sources... [ 73%] content/dfnd/dry_topography
+reading sources... [ 74%] content/dfnd/exterior_and_boundaries
+reading sources... [ 75%] content/dfnd/geometry_and_probe
+reading sources... [ 76%] content/dfnd/hierarchy_and_paths
+reading sources... [ 77%] content/dfnd/index
+reading sources... [ 77%] content/dfnd/interfaces
+reading sources... [ 78%] content/dfnd/local_capacities
+reading sources... [ 79%] content/dfnd/measurements
+reading sources... [ 80%] content/dfnd/network_and_decomposition
+reading sources... [ 81%] content/dfnd/numerics_and_reproducibility
+reading sources... [ 82%] content/dfnd/overview
+reading sources... [ 83%] content/dfnd/references
+reading sources... [ 83%] content/dfnd/results_and_provenance
+reading sources... [ 84%] content/dfnd/scale_and_dynamics
+reading sources... [ 85%] content/dfnd/validation_and_scope
+reading sources... [ 86%] content/dfnd/worked_tetrahedron
+reading sources... [ 87%] content/showcase/dfnd/closed_shell
+reading sources... [ 88%] content/showcase/dfnd/index
+reading sources... [ 89%] content/showcase/dfnd/regular_tetrahedron
+reading sources... [ 90%] content/showcase/index
+reading sources... [ 90%] content/user/dfnd_geometry
+reading sources... [ 91%] content/user/feature_hierarchy_doc
+reading sources... [ 92%] content/user/hole
+reading sources... [ 93%] content/user/id_index
+reading sources... [ 94%] content/user/index
+reading sources... [ 95%] content/user/molovol
+reading sources... [ 96%] content/user/original_local_providers
+reading sources... [ 97%] content/user/pisa
+reading sources... [ 97%] content/user/povme
+reading sources... [ 98%] content/user/scientific_attribution
+reading sources... [ 99%] content/user/third_party_engines
+reading sources... [100%] index
+
+looking for now-outdated files... none found
+pickling environment... done
+checking consistency... done
+preparing documents... done
+copying assets... 
+copying downloadable files... [  1%] content/benchlab/synthetic/artifacts/reference_validator_edge_v1/receiving.zip
+copying downloadable files... [  1%] content/benchlab/synthetic/artifacts/six_case_review_v1/protocol.json
+copying downloadable files... [  2%] content/benchlab/synthetic/artifacts/six_case_review_v1/summary.json
+copying downloadable files... [  3%] content/benchlab/synthetic/artifacts/six_case_review_v1/receiving_receipt.json
+copying downloadable files... [  3%] content/benchlab/synthetic/artifacts/six_case_review_v1/receiving.zip
+copying downloadable files... [  4%] content/benchlab/synthetic/closed_shell/artifacts/wall_certificate_v1/protocol.json
+copying downloadable files... [  4%] content/benchlab/synthetic/closed_shell/artifacts/wall_certificate_v1/certificate.json
+copying downloadable files... [  5%] content/benchlab/synthetic/closed_shell/artifacts/wall_certificate_v1/verification.json
+copying downloadable files... [  6%] content/benchlab/synthetic/closed_shell/artifacts/wall_certificate_v1/wall_cover.png
+copying downloadable files... [  6%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/input.json
+copying downloadable files... [  7%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/input.pdb
+copying downloadable files... [  8%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/input_atom.pdb
+copying downloadable files... [  8%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/report.json
+copying downloadable files... [  9%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/pocketeer_original.zip
+copying downloadable files... [  9%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/alphaspace2_original.zip
+copying downloadable files... [ 10%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/castp3_observation.json
+copying downloadable files... [ 11%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/castpfold_observation.json
+copying downloadable files... [ 11%] content/benchlab/synthetic/closed_shell/artifacts/closed_shell_v1/input_castp.pdb
+copying downloadable files... [ 12%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/protocol.json
+copying downloadable files... [ 13%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/system_reference.json
+copying downloadable files... [ 13%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/dfnd_observations.json
+copying downloadable files... [ 14%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/execution_receipt.json
+copying downloadable files... [ 15%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/system_geometry.png
+copying downloadable files... [ 15%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/system_certificates.png
+copying downloadable files... [ 16%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/dfnd_probes.png
+copying downloadable files... [ 16%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/dfnd_sweep.png
+copying downloadable files... [ 17%] content/benchlab/synthetic/closed_shell/artifacts/physical_refinement_v1/protocol.json
+copying downloadable files... [ 18%] content/benchlab/synthetic/closed_shell/artifacts/physical_refinement_v1/observations.json
+copying downloadable files... [ 18%] content/benchlab/synthetic/closed_shell/artifacts/small_probe_boundary_v2/protocol.json
+copying downloadable files... [ 19%] content/benchlab/synthetic/closed_shell/artifacts/small_probe_boundary_v2/certificate.json
+copying downloadable files... [ 20%] content/benchlab/synthetic/closed_shell/artifacts/small_probe_boundary_v2/verification.json
+copying downloadable files... [ 20%] content/benchlab/synthetic/closed_shell/artifacts/small_probe_boundary_v2/capture_receipt.json
+copying downloadable files... [ 21%] content/benchlab/synthetic/closed_shell/artifacts/small_probe_boundary_v2/native_receiving_protocol.json
+copying downloadable files... [ 22%] content/benchlab/synthetic/closed_shell/artifacts/small_probe_boundary_v2/native_receiving.json
+copying downloadable files... [ 22%] content/benchlab/synthetic/closed_shell/artifacts/small_probe_boundary_v1/unsupported_receipt.json
+copying downloadable files... [ 23%] content/benchlab/synthetic/closed_shell/artifacts/public_topography_v1/protocol.json
+copying downloadable files... [ 23%] content/benchlab/synthetic/closed_shell/artifacts/public_topography_v1/report.json
+copying downloadable files... [ 24%] _static/benchlab/dumbbell_v1.zip
+copying downloadable files... [ 25%] _static/benchlab/three_cases_v2.zip
+copying downloadable files... [ 25%] _static/benchlab/three_cases_v1.zip
+copying downloadable files... [ 26%] content/benchlab/synthetic/closed_shell/artifacts/access_bracket_v1/protocol.json
+copying downloadable files... [ 27%] content/benchlab/synthetic/closed_shell/artifacts/access_bracket_v1/certificate.json
+copying downloadable files... [ 27%] content/benchlab/synthetic/closed_shell/artifacts/access_bracket_v1/verification.json
+copying downloadable files... [ 28%] content/benchlab/synthetic/closed_shell/artifacts/access_bracket_v1/native_receiving.json
+copying downloadable files... [ 28%] content/benchlab/synthetic/shell_with_opening/artifacts/access_bracket_v2/protocol.json
+copying downloadable files... [ 29%] content/benchlab/synthetic/shell_with_opening/artifacts/access_bracket_v2/certificate.json
+copying downloadable files... [ 30%] content/benchlab/synthetic/shell_with_opening/artifacts/access_bracket_v2/verification.json
+copying downloadable files... [ 30%] content/benchlab/synthetic/shell_with_opening/artifacts/access_bracket_v2/native_receiving.json
+copying downloadable files... [ 31%] content/benchlab/synthetic/regular_tetrahedron/artifacts/public_contract_v1/observations.json
+copying downloadable files... [ 32%] content/benchlab/synthetic/closed_shell/artifacts/public_contract_v1/observations.json
+copying downloadable files... [ 32%] content/benchlab/synthetic/shell_with_opening/artifacts/public_contract_v1/observations.json
+copying downloadable files... [ 33%] content/benchlab/synthetic/artifacts/reference_validator_followup_v1/receiving.zip
+copying downloadable files... [ 34%] content/benchlab/synthetic/artifacts/reference_validator_followup_v1/bundle_manifest.json
+copying downloadable files... [ 34%] content/benchlab/synthetic/artifacts/reference_validator_panel_v1/summary.json
+copying downloadable files... [ 35%] content/benchlab/synthetic/artifacts/reference_validator_panel_v1/protocol.json
+copying downloadable files... [ 35%] content/benchlab/synthetic/artifacts/reference_validator_panel_v1/receiving_receipt.json
+copying downloadable files... [ 36%] content/benchlab/synthetic/artifacts/reference_validator_panel_v1/receiving.zip
+copying downloadable files... [ 37%] content/benchlab/synthetic/artifacts/reference_validator_panel_v1/bundle_manifest.json
+copying downloadable files... [ 37%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/observations.json
+copying downloadable files... [ 38%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/observations.json
+copying downloadable files... [ 39%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/observations.json
+copying downloadable files... [ 39%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-standard/original.zip
+copying downloadable files... [ 40%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p2/failed.zip
+copying downloadable files... [ 41%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p4/failed.zip
+copying downloadable files... [ 41%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/pykvfinder-probe-1p7/failed.zip
+copying downloadable files... [ 42%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-standard/original.zip
+copying downloadable files... [ 42%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p2/original.zip
+copying downloadable files... [ 43%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p4/original.zip
+copying downloadable files... [ 44%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/ghecom-probe-1p7/original.zip
+copying downloadable files... [ 44%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/caver-standard/failed.zip
+copying downloadable files... [ 45%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_observations/mole-standard/failed.zip
+copying downloadable files... [ 46%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p2/original.zip
+copying downloadable files... [ 46%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p4/original.zip
+copying downloadable files... [ 47%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_observations/pykvfinder-one-voxel-1p7/original.zip
+copying downloadable files... [ 47%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/pykvfinder-standard/original.zip
+copying downloadable files... [ 48%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/pykvfinder-probe-1p2/failed.zip
+copying downloadable files... [ 49%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-standard/original.zip
+copying downloadable files... [ 49%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p2/original.zip
+copying downloadable files... [ 50%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p4/original.zip
+copying downloadable files... [ 51%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/ghecom-probe-1p7/original.zip
+copying downloadable files... [ 51%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/caver-standard/failed.zip
+copying downloadable files... [ 52%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/initial_attempt/mole-standard/failed.zip
+copying downloadable files... [ 53%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/atomic_models.png
+copying downloadable files... [ 53%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/original_grid_regions.png
+copying downloadable files... [ 54%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/protocol.json
+copying downloadable files... [ 54%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/report.json
+copying downloadable files... [ 55%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/receipt.json
+copying downloadable files... [ 56%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-original/reader.zip
+copying downloadable files... [ 56%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/ghecom-aligned/reader.zip
+copying downloadable files... [ 57%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/caver-original/reader.zip
+copying downloadable files... [ 58%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/original_readers/caver-aligned/reader.zip
+copying downloadable files... [ 58%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/input_aligned.pdb
+copying downloadable files... [ 59%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/initial_reader_attempt/ghecom_input_model.zip
+copying downloadable files... [ 59%] content/benchlab/synthetic/regular_tetrahedron/artifacts/radius_audit_v1/initial_reader_attempt/attempt_record.json
+copying downloadable files... [ 60%] content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/protocol.json
+copying downloadable files... [ 61%] content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/certificate.json
+copying downloadable files... [ 61%] content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/verification.json
+copying downloadable files... [ 62%] content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/native_correspondence.json
+copying downloadable files... [ 63%] content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/execution_receipt.json
+copying downloadable files... [ 63%] content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/boundary_patches.png
+copying downloadable files... [ 64%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/model_audit.json
+copying downloadable files... [ 65%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/protocol.json
+copying downloadable files... [ 65%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/positive_cutoff_protocol.json
+copying downloadable files... [ 66%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/evidence_receipt.json
+copying downloadable files... [ 66%] content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/dfnd_observations.json
+copying downloadable files... [ 67%] content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/system_reference.json
+copying downloadable files... [ 68%] content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.json
+copying downloadable files... [ 68%] content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input.pdb
+copying downloadable files... [ 69%] content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/report.json
+copying downloadable files... [ 70%] content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/pocketeer_original.zip
+copying downloadable files... [ 70%] content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/castp3_observation.json
+copying downloadable files... [ 71%] content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/castpfold_observation.json
+copying downloadable files... [ 72%] content/benchlab/synthetic/regular_tetrahedron/artifacts/regular_tetrahedron_v1/input_castp.pdb
+copying downloadable files... [ 72%] content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/system_geometry.png
+copying downloadable files... [ 73%] content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/system_thresholds.png
+copying downloadable files... [ 73%] content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/dfnd_probes.png
+copying downloadable files... [ 74%] content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/dfnd_sweep.png
+copying downloadable files... [ 75%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/comparison_report.json
+copying downloadable files... [ 75%] content/benchlab/synthetic/regular_tetrahedron/artifacts/physical_refinement_v1/protocol.json
+copying downloadable files... [ 76%] content/benchlab/synthetic/regular_tetrahedron/artifacts/physical_refinement_v1/observations.json
+copying downloadable files... [ 77%] content/benchlab/synthetic/regular_tetrahedron/artifacts/public_topography_v1/protocol.json
+copying downloadable files... [ 77%] content/benchlab/synthetic/regular_tetrahedron/artifacts/public_topography_v1/report.json
+copying downloadable files... [ 78%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/input.json
+copying downloadable files... [ 78%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/input.pdb
+copying downloadable files... [ 79%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/protocol.json
+copying downloadable files... [ 80%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/system_reference.json
+copying downloadable files... [ 80%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/dfnd_observations.json
+copying downloadable files... [ 81%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/execution_receipt.json
+copying downloadable files... [ 82%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/system_geometry.png
+copying downloadable files... [ 82%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/system_certificates.png
+copying downloadable files... [ 83%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/dfnd_contacts.png
+copying downloadable files... [ 84%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/dfnd_sweep.png
+copying downloadable files... [ 84%] content/benchlab/synthetic/shell_with_opening/artifacts/physical_refinement_v1/protocol.json
+copying downloadable files... [ 85%] content/benchlab/synthetic/shell_with_opening/artifacts/physical_refinement_v1/observations.json
+copying downloadable files... [ 85%] content/benchlab/synthetic/shell_with_opening/artifacts/opening_connectivity_v1/protocol.json
+copying downloadable files... [ 86%] content/benchlab/synthetic/shell_with_opening/artifacts/opening_connectivity_v1/certificate.json
+copying downloadable files... [ 87%] content/benchlab/synthetic/shell_with_opening/artifacts/opening_connectivity_v1/verification.json
+copying downloadable files... [ 87%] content/benchlab/synthetic/shell_with_opening/artifacts/opening_connectivity_v1/native_correspondence.json
+copying downloadable files... [ 88%] content/benchlab/synthetic/shell_with_opening/artifacts/opening_connectivity_v1/execution_receipt.json
+copying downloadable files... [ 89%] content/benchlab/synthetic/shell_with_opening/artifacts/opening_connectivity_v1/opening_patch.png
+copying downloadable files... [ 89%] content/benchlab/synthetic/shell_with_opening/artifacts/public_topography_v1/protocol.json
+copying downloadable files... [ 90%] content/benchlab/synthetic/shell_with_opening/artifacts/public_topography_v1/report.json
+copying downloadable files... [ 91%] _static/benchlab/straight_tube_narrow_dense_v1.zip
+copying downloadable files... [ 91%] _static/benchlab/straight_tube_wide_sparse_v1.zip
+copying downloadable files... [ 92%] content/benchlab/synthetic/regular_tetrahedron/artifacts/volume_study_v1/protocol.json
+copying downloadable files... [ 92%] content/benchlab/synthetic/regular_tetrahedron/artifacts/volume_study_v1/independent_reference.json
+copying downloadable files... [ 93%] content/benchlab/synthetic/regular_tetrahedron/artifacts/volume_study_v1/native_receiving.json
+copying downloadable files... [ 94%] content/benchlab/synthetic/closed_shell/artifacts/volume_study_v1/protocol.json
+copying downloadable files... [ 94%] content/benchlab/synthetic/closed_shell/artifacts/volume_study_v1/independent_reference.json
+copying downloadable files... [ 95%] content/benchlab/synthetic/closed_shell/artifacts/volume_study_v1/native_receiving.json
+copying downloadable files... [ 96%] content/benchlab/synthetic/shell_with_opening/artifacts/volume_study_v1/protocol.json
+copying downloadable files... [ 96%] content/benchlab/synthetic/shell_with_opening/artifacts/volume_study_v1/independent_reference.json
+copying downloadable files... [ 97%] content/benchlab/synthetic/shell_with_opening/artifacts/volume_study_v1/native_receiving.json
+copying downloadable files... [ 97%] content/benchlab/synthetic/shell_with_opening/artifacts/volume_study_v1/common_parent_protocol.json
+copying downloadable files... [ 98%] content/benchlab/synthetic/shell_with_opening/artifacts/volume_study_v1/common_parent_reference.json
+copying downloadable files... [ 99%] ../../devguide/evidence/volume_precision_sampling_v1.json
+copying downloadable files... [ 99%] content/dfnd/examples/closed_shell.py
+copying downloadable files... [100%] content/dfnd/examples/tetrahedron.py
+
+copying static files... 
+Writing evaluated template result to /tmp/topomt-analytic-panel-docs-html/_static/language_data.js
+Writing evaluated template result to /tmp/topomt-analytic-panel-docs-html/_static/documentation_options.js
+Writing evaluated template result to /tmp/topomt-analytic-panel-docs-html/_static/basic.css
+Writing evaluated template result to /tmp/topomt-analytic-panel-docs-html/_static/copybutton.js
+copying static files: done
+copying extra files... 
+copying extra files: done
+copying assets: done
+writing output... [  1%] api/developers/api_developers
+writing output... [  2%] api/index
+writing output... [  3%] api/users/api_users
+writing output... [  3%] content/about/citation
+writing output... [  4%] content/about/index
+writing output... [  5%] content/about/installation
+writing output... [  6%] content/about/what
+writing output... [  7%] content/about/who
+writing output... [  8%] content/ai_assistants
+writing output... [  9%] content/benchlab/index
+writing output... [ 10%] content/benchlab/molecular/index
+writing output... [ 10%] content/benchlab/synthetic/artifacts/reference_validator_edge_v1/README
+writing output... [ 11%] content/benchlab/synthetic/artifacts/reference_validator_followup_v1/README
+writing output... [ 12%] content/benchlab/synthetic/artifacts/six_case_review_v1/README
+writing output... [ 13%] content/benchlab/synthetic/closed_shell/closure_at_0p2
+writing output... [ 14%] content/benchlab/synthetic/closed_shell/dfnd
+writing output... [ 15%] content/benchlab/synthetic/closed_shell/historical
+writing output... [ 16%] content/benchlab/synthetic/closed_shell/index
+writing output... [ 17%] content/benchlab/synthetic/closed_shell/public_topography
+writing output... [ 17%] content/benchlab/synthetic/closed_shell/public_topography_v2
+writing output... [ 18%] content/benchlab/synthetic/closed_shell/small_probe_connectivity
+writing output... [ 19%] content/benchlab/synthetic/closed_shell/system
+writing output... [ 20%] content/benchlab/synthetic/closed_shell/topography
+writing output... [ 21%] content/benchlab/synthetic/comparison_disposition
+writing output... [ 22%] content/benchlab/synthetic/cylinder_tube/artifacts/cylinder_tube_v1/README
+writing output... [ 23%] content/benchlab/synthetic/cylinder_tube/dfnd
+writing output... [ 23%] content/benchlab/synthetic/cylinder_tube/index
+writing output... [ 24%] content/benchlab/synthetic/cylinder_tube/system
+writing output... [ 25%] content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/README
+writing output... [ 26%] content/benchlab/synthetic/dumbbell/dfnd
+writing output... [ 27%] content/benchlab/synthetic/dumbbell/index
+writing output... [ 28%] content/benchlab/synthetic/dumbbell/system
+writing output... [ 29%] content/benchlab/synthetic/index
+writing output... [ 30%] content/benchlab/synthetic/origin_access_brackets
+writing output... [ 30%] content/benchlab/synthetic/public_support_and_robustness
+writing output... [ 31%] content/benchlab/synthetic/public_topography
+writing output... [ 32%] content/benchlab/synthetic/reference_validator_report
+writing output... [ 33%] content/benchlab/synthetic/regular_tetrahedron/artifacts/comparisons_v1/README
+writing output... [ 34%] content/benchlab/synthetic/regular_tetrahedron/atomic_models
+writing output... [ 35%] content/benchlab/synthetic/regular_tetrahedron/boundary_connectivity
+writing output... [ 36%] content/benchlab/synthetic/regular_tetrahedron/comparisons
+writing output... [ 37%] content/benchlab/synthetic/regular_tetrahedron/dfnd
+writing output... [ 37%] content/benchlab/synthetic/regular_tetrahedron/historical
+writing output... [ 38%] content/benchlab/synthetic/regular_tetrahedron/index
+writing output... [ 39%] content/benchlab/synthetic/regular_tetrahedron/public_topography
+writing output... [ 40%] content/benchlab/synthetic/regular_tetrahedron/public_topography_v2
+writing output... [ 41%] content/benchlab/synthetic/regular_tetrahedron/system
+writing output... [ 42%] content/benchlab/synthetic/regular_tetrahedron/topography
+writing output... [ 43%] content/benchlab/synthetic/shell_with_opening/dfnd
+writing output... [ 43%] content/benchlab/synthetic/shell_with_opening/index
+writing output... [ 44%] content/benchlab/synthetic/shell_with_opening/opening_connectivity
+writing output... [ 45%] content/benchlab/synthetic/shell_with_opening/public_topography
+writing output... [ 46%] content/benchlab/synthetic/shell_with_opening/public_topography_v2
+writing output... [ 47%] content/benchlab/synthetic/shell_with_opening/system
+writing output... [ 48%] content/benchlab/synthetic/shell_with_opening/topography
+writing output... [ 49%] content/benchlab/synthetic/six_case_review
+writing output... [ 50%] content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/README
+writing output... [ 50%] content/benchlab/synthetic/straight_tube_narrow_dense/dfnd
+writing output... [ 51%] content/benchlab/synthetic/straight_tube_narrow_dense/index
+writing output... [ 52%] content/benchlab/synthetic/straight_tube_narrow_dense/system
+writing output... [ 53%] content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/README
+writing output... [ 54%] content/benchlab/synthetic/straight_tube_wide_sparse/dfnd
+writing output... [ 55%] content/benchlab/synthetic/straight_tube_wide_sparse/index
+writing output... [ 56%] content/benchlab/synthetic/straight_tube_wide_sparse/system
+writing output... [ 57%] content/benchlab/synthetic/three_case_disposition
+writing output... [ 57%] content/benchlab/synthetic/volume_measurements
+writing output... [ 58%] content/developer/architecture
+writing output... [ 59%] content/developer/codebase_map
+writing output... [ 60%] content/developer/ecosystem_integration
+writing output... [ 61%] content/developer/future/feature_attributes_catalog
+writing output... [ 62%] content/developer/future/features_catalog
+writing output... [ 63%] content/developer/future/index
+writing output... [ 63%] content/developer/index
+writing output... [ 64%] content/developer/packaging
+writing output... [ 65%] content/developer/status
+writing output... [ 66%] content/developer/string_style
+writing output... [ 67%] content/developer/testing
+writing output... [ 68%] content/developer/type_annotations_guidelines
+writing output... [ 69%] content/dfnd/appendices/algorithm
+writing output... [ 70%] content/dfnd/appendices/clearance_derivations
+writing output... [ 70%] content/dfnd/appendices/mathematical_properties
+writing output... [ 71%] content/dfnd/appendices/notation
+writing output... [ 72%] content/dfnd/classification
+writing output... [ 73%] content/dfnd/dry_topography
+writing output... [ 74%] content/dfnd/exterior_and_boundaries
+writing output... [ 75%] content/dfnd/geometry_and_probe
+writing output... [ 76%] content/dfnd/hierarchy_and_paths
+writing output... [ 77%] content/dfnd/index
+writing output... [ 77%] content/dfnd/interfaces
+writing output... [ 78%] content/dfnd/local_capacities
+writing output... [ 79%] content/dfnd/measurements
+writing output... [ 80%] content/dfnd/network_and_decomposition
+writing output... [ 81%] content/dfnd/numerics_and_reproducibility
+writing output... [ 82%] content/dfnd/overview
+writing output... [ 83%] content/dfnd/references
+writing output... [ 83%] content/dfnd/results_and_provenance
+writing output... [ 84%] content/dfnd/scale_and_dynamics
+writing output... [ 85%] content/dfnd/validation_and_scope
+writing output... [ 86%] content/dfnd/worked_tetrahedron
+writing output... [ 87%] content/showcase/dfnd/closed_shell
+writing output... [ 88%] content/showcase/dfnd/index
+writing output... [ 89%] content/showcase/dfnd/regular_tetrahedron
+writing output... [ 90%] content/showcase/index
+writing output... [ 90%] content/user/dfnd_geometry
+writing output... [ 91%] content/user/feature_hierarchy_doc
+writing output... [ 92%] content/user/hole
+writing output... [ 93%] content/user/id_index
+writing output... [ 94%] content/user/index
+writing output... [ 95%] content/user/molovol
+writing output... [ 96%] content/user/original_local_providers
+writing output... [ 97%] content/user/pisa
+writing output... [ 97%] content/user/povme
+writing output... [ 98%] content/user/scientific_attribution
+writing output... [ 99%] content/user/third_party_engines
+writing output... [100%] index
+
+generating indices... genindex done
+highlighting module code... 
+writing additional pages... search done
+copying images... [  2%] _static/logo.svg
+copying images... [  4%] _static/LogoUIBCDF_vertical.png
+copying images... [  7%] _static/LogotipoIxtlilton.png
+copying images... [  9%] content/benchlab/synthetic/closed_shell/artifacts/wall_certificate_v1/wall_cover.png
+copying images... [ 11%] ../../../../../../tmp/jupyter_execute/78c8af6e9b3a46e0ad76930d50b8c09f19c76515dad59d479befaf4e3413353f.png
+copying images... [ 13%] ../../../../../../tmp/jupyter_execute/58ad6855901a003e72d73f401303c6bbe2ac552bfd9f903c9a8c13bc6ce91112.png
+copying images... [ 16%] ../../../../../../tmp/jupyter_execute/ea86798794531e7200fd55047877de7e99251fe967ca25ee07d9788e6bd6ba2a.png
+copying images... [ 18%] ../../../../../../tmp/jupyter_execute/0401376d93c6a0018295714aa9b9fad5ade656ff1770be8ac6ccab3db7d64290.png
+copying images... [ 20%] ../../../../../../tmp/jupyter_execute/28e4b142b40b83b052a7f361bb57e2eed937f957546dc2ec20d085a4998b3003.png
+copying images... [ 22%] content/benchlab/synthetic/closed_shell/artifacts/native_study_v1/system_geometry.png
+copying images... [ 24%] ../../../../../../tmp/jupyter_execute/659048bbd160c31e96b2fa4021d0e3969a28fd8a517d72c86b923a3ea15d3156.png
+copying images... [ 27%] content/benchlab/synthetic/figures/volume_definitions_v1.png
+copying images... [ 29%] content/benchlab/synthetic/closed_shell/artifacts/small_probe_boundary_v2/two_face_regions.png
+copying images... [ 31%] ../../../../../../tmp/jupyter_execute/b31fc77cc032f70d13f3bc0ba4c626e5192b92460765a56512a9fad9486fcf6c.png
+copying images... [ 33%] ../../../../../../tmp/jupyter_execute/baf628f5a7a6ebbe20179b6550da6f972e2d9d6d53d6d04676d0cd7caef2d600.png
+copying images... [ 36%] content/benchlab/synthetic/dumbbell/artifacts/dumbbell_v1/system_study.png
+copying images... [ 38%] ../../../../../../tmp/jupyter_execute/6be07be77449cdd163bff1b379132c33c5490ef40c929336804ef0c91b479cac.png
+copying images... [ 40%] content/benchlab/synthetic/regular_tetrahedron/artifacts/boundary_connectivity_v1/boundary_patches.png
+copying images... [ 42%] ../../../../../../tmp/jupyter_execute/0c4572dd6f5675c3790c81913e12dddf050c07d0990911ee4883e39f1f145b8c.png
+copying images... [ 44%] ../../../../../../tmp/jupyter_execute/61a3fe0d6caf5d67cfb7475f33a6455b3031507d8b2e7c4fffb4af9268f400e0.png
+copying images... [ 47%] ../../../../../../tmp/jupyter_execute/80028ea86c94bbdc81161cb58a8fb3277183e5dae9a7035ffff74983c1b0b7b3.png
+copying images... [ 49%] ../../../../../../tmp/jupyter_execute/d13cd6a39be0c7e583a7c8451e7d047500cbe38627574da48796e2d164f5c426.png
+copying images... [ 51%] ../../../../../../tmp/jupyter_execute/487c64a673f4eb2c5ba067c6fd22d577d3512a67fd727fe72d3dec5a18c7e7e8.png
+copying images... [ 53%] ../../../../../../tmp/jupyter_execute/a8cd034345871b39c4a9e378096d12103137ac801207ba0c87b4553361843407.png
+copying images... [ 56%] content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/system_geometry.png
+copying images... [ 58%] ../../../../../../tmp/jupyter_execute/abcf8570575da8151ffa2d8a957b52c6219a98034778838877f3c12fa76f0891.png
+copying images... [ 60%] ../../../../../../tmp/jupyter_execute/7d0343c13f144229b0dcda406494ea2b1b08ac06b07204286113ca63e623838e.png
+copying images... [ 62%] ../../../../../../tmp/jupyter_execute/87738eb7daba39803a94bf533793a0c426e1d28b356c9eef741d94e6470f96d6.png
+copying images... [ 64%] ../../../../../../tmp/jupyter_execute/d1b499aaa5dff88a7e5985c5c55747248e728224ad923b5eeda61824f352e4cc.png
+copying images... [ 67%] content/benchlab/synthetic/shell_with_opening/artifacts/shell_with_opening_v1/system_geometry.png
+copying images... [ 69%] content/benchlab/synthetic/shell_with_opening/artifacts/opening_connectivity_v1/opening_patch.png
+copying images... [ 71%] content/benchlab/synthetic/shell_with_opening/artifacts/reader_route_v1/contacts.png
+copying images... [ 73%] ../../../../../../tmp/jupyter_execute/3ebb60ef726a38d7f672a09d2bb506b6b9cb88378275661e008e347725aca7a2.png
+copying images... [ 76%] ../../../../../../tmp/jupyter_execute/ce7c7ac30b56ee672a16697404a786048fc131044903dc76703b2ae27da4e267.png
+copying images... [ 78%] ../../../../../../tmp/jupyter_execute/be935212842504c86c3f59b2572ea1531cf175e8377e9fc78d90f5159ea7df33.png
+copying images... [ 80%] content/benchlab/synthetic/straight_tube_narrow_dense/artifacts/straight_tube_narrow_dense_v1/system_study.png
+copying images... [ 82%] ../../../../../../tmp/jupyter_execute/97f3ddd686dc602449d425ef84a39fdd4a1de0428f7178a97d0ba44ca7855172.png
+copying images... [ 84%] ../../../../../../tmp/jupyter_execute/24d7f923eac2285f7fc0f71c355d67119db8bbf59b9bfe8d57eea3c2fc05d95d.png
+copying images... [ 87%] content/benchlab/synthetic/straight_tube_wide_sparse/artifacts/straight_tube_wide_sparse_v1/system_study.png
+copying images... [ 89%] ../../../../../../tmp/jupyter_execute/44157ac2e3a9da5a3cab3b54629aaf9f94e756d2c19dbca6a04ef0f9a0b01fe4.png
+copying images... [ 91%] content/dfnd/figures/probe_geometry.svg
+copying images... [ 93%] content/dfnd/figures/persistence_axes.svg
+copying images... [ 96%] content/dfnd/figures/finite_decomposition.svg
+copying images... [ 98%] content/dfnd/figures/method_pipeline.svg
+copying images... [100%] content/benchlab/synthetic/regular_tetrahedron/artifacts/native_study_v1/dfnd_probes.png
+
+dumping search index in English (code: en)... done
+dumping object inventory... done
+build succeeded.
+
+The HTML pages are in ../../../../../tmp/topomt-analytic-panel-docs-html.

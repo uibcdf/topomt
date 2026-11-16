@@ -1,0 +1,2 @@
+{"name": "controls/boundary/near_corner_rational/k16", "mode": "parallel2", "completed_pieces": 48}
+{"name": "controls/boundary/near_corner_rational/k16", "stage": "solve", "mode": "parallel2", "wall_seconds": 0.4453201339347288, "precision_status": "resolved"}

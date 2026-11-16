@@ -1,0 +1,2 @@
+{"name": "original/regular_tetrahedron/profile_0", "mode": "parallel2", "completed_pieces": 24}
+{"name": "original/regular_tetrahedron/profile_0", "stage": "solve", "mode": "parallel2", "wall_seconds": 0.40254433103837073, "precision_status": "resolved"}

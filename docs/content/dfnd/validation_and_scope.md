@@ -80,12 +80,14 @@ molecular validation and public-validator admission remain separate work.
 
 
 The same reference arithmetic now has
-{ref}`bounded two-worker receiving <reference-validator-parallel-analytic>`
-on the three original 1.4 Å Models and
-25 analytic controls. Mathematical intervals and requests are unchanged; saved
-work is independently reconstructed on recovery. This qualifies an execution
-route, without adding a physical interpretation or fixing native DFND policy.
-Direct serial remains the default and broader parallel admission stays separate.
+{ref}`expanded serial/two-worker verification <reference-validator-expanded-analytic>`
+on all nineteen original numerical profiles and 25 analytic controls. Complete
+independent reconstruction, integration and fresh saved reading preserve every
+mathematical field and request. The earlier
+{ref}`pause/recovery receiving <reference-validator-parallel-analytic>` retains
+its three-Model scope. These qualify execution routes without changing physical
+interpretation or native DFND policy. Direct serial remains the default; broader
+source-construction/resume and public admission stay separate.
 
 ## Source deliveries and remaining scientific/public boundaries
 

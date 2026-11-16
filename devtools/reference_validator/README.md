@@ -43,6 +43,14 @@ Completed mathematical output equals the ordinary serial reader; the original
 symbolic certificate remains portable. This is a developer verification route,
 with source/resource qualification separate from production API admission.
 
+The later [expanded verification panel](../../devguide/evidence/reference_validator_analytic_panel_v1/README.md)
+receives all nineteen original numerical profiles and 25 analytic controls in
+fresh serial/two-worker processes, plus one shared further serial read per
+profile. All mathematical fields/requests are unchanged. This extends saved-proof
+verification; generation/resume, four-worker, repeatability and public admission
+retain their separate scopes. Use its exact source/capsule/drivers; repository
+code need not match an older source-bound checkpoint.
+
 The [resumable process route](../../devguide/DFND/reference_validator_parallel_resume.md)
 adds `parallel_runs.ParallelPowerSession`. It retains independently checked
 source tasks in any completion order, saves exclusive manifest-last bundles and

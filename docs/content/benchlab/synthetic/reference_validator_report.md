@@ -207,8 +207,9 @@ scaling. Geometry and independent checking dominate the total; a small system
 can be slower with processes. **Direct serial remains the default.**
 
 [Exact inputs, source, work snapshots, resources and portable receiving](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_parallel_edge_v1/README.md)
-retain the executed scope. The full parallel nineteen-profile/four-worker panel
-and broader admission remain under #76. Native DFND/public qualification and
+retain that executed scope. The later expanded verification below covers all
+nineteen saved original proofs; broader source-construction/resume, four-worker
+and public admission remain under #76. Native DFND/public qualification and
 biological validation keep their separate gates.
 
 ## Checkpoint storage reliability — 2026-11-15
@@ -221,6 +222,62 @@ interruption, never evidence of empty space or a completed physical analysis.
 The [source, controls and recovery scope](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_storage_v1/README.md)
 are retained separately. This repair changes no earlier scientific result and
 provides no new full-panel, native or public qualification.
+
+(reference-validator-expanded-analytic)=
+
+## Complete original verification panel — 2026-11-16 UTC
+
+All **nineteen original numerical profiles** and **25 analytic controls** pass
+complete independent saved-proof verification in direct serial and explicit
+two-worker modes. Exact Model/proof reading, full topology/frontier
+reconstruction, certified integration and saving preserve **every mathematical
+field and every original total/per-region precision request**. A further fresh
+serial read independently recomputes each profile and checks both configurations.
+Thirteen original profiles contain sixteen positive regions; six are exact zeros.
+
+| Original case | Probe Å | Regions | Serial cold solve s | Two-worker cold solve s | Shared further serial read s |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| `regular_tetrahedron` | 1.2 | 1 | 0.317 | 0.520 | 0.217 |
+| `regular_tetrahedron` | 1.4 | 1 | 0.268 | 0.521 | 0.217 |
+| `regular_tetrahedron` | 1.7 | 0 | 0.218 | 0.217 | 0.167 |
+| `closed_shell` | 0.05 | 1 | 108.594 | 92.756 | 98.942 |
+| `closed_shell` | 0.2 | 1 | 96.240 | 86.458 | 98.692 |
+| `closed_shell` | 1.4 | 1 | 95.185 | 85.248 | 95.336 |
+| `closed_shell` | 5 | 0 | 35.624 | 35.384 | 35.524 |
+| `shell_with_opening` | 1.4 | 1 | 82.286 | 73.770 | 81.386 |
+| `shell_with_opening` | 3 | 1 | 80.836 | 70.645 | 87.290 |
+| `shell_with_opening` | 5 | 0 | 30.475 | 29.837 | 29.230 |
+| `straight_tube_narrow_dense` | 1.2 | 1 | 87.888 | 74.411 | 86.486 |
+| `straight_tube_narrow_dense` | 1.4 | 1 | 80.690 | 68.705 | 79.287 |
+| `straight_tube_narrow_dense` | 2.5 | 0 | 22.474 | 22.680 | 22.574 |
+| `straight_tube_wide_sparse` | 1.4 | 1 | 95.837 | 83.058 | 95.021 |
+| `straight_tube_wide_sparse` | 2.5 | 1 | 92.238 | 80.548 | 92.338 |
+| `straight_tube_wide_sparse` | 5 | 0 | 27.474 | 27.286 | 26.924 |
+| `dumbbell` | 1.4 | 3 | 139.051 | 124.178 | 147.352 |
+| `dumbbell` | 2.2 | 2 | 148.659 | 128.312 | 141.352 |
+| `dumbbell` | 6 | 0 | 51.933 | 48.543 | 49.134 |
+
+Times cover the complete checked solve and saving, including bounded launcher
+overhead. The further independent read is shared and executed **once per
+profile**, not counted twice. Tetrahedron 1.4 Å has three fresh runs per mode
+(table: medians); all larger entries are single shared-host observations.
+They establish neither repeatable nor general scaling. Small positive runs are
+slower with processes; exact exclusions need no numerical workers even when
+configured for two. **Direct serial remains the default.**
+
+The 92 solve configurations and 44 shared reads take **3700.203 bounded wall /
+3870.938 waited CPU seconds** in total, including controls. Peak sampled group
+RSS is **106.79 MiB**; peak individual-process RSS is **53.66 MiB**. Five-second
+group samples can miss peaks/double-count shared pages and cannot resolve the
+short tetrahedron pool lifetime. Per-process limits, child/parent accounting,
+host samples and phase times remain in the
+[versioned evidence](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_analytic_panel_v1/README.md).
+
+This qualifies the saved-proof verification panel. Proposal generation and
+paused source construction retain their earlier source scopes; the full
+construction/resume panel, four workers, larger-case repeatability, native DFND
+qualification and public/installed admission keep their gates. Original Models,
+requests, earlier artifacts and native behavior are unchanged.
 
 ## Earlier range-based face-integration feasibility — 2026-11-15
 

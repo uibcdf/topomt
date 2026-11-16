@@ -11,6 +11,23 @@ These identify early P0/P1 tranches of the
 section below records nineteen topology-plus-precision synthetic profiles;
 broader admission and a supported public TopoMT detector remain separate.
 
+## Expanded original verification panel — 2026-11-16 UTC
+
+The [new receiving](../evidence/reference_validator_analytic_panel_v1/README.md)
+qualifies complete saved-proof verification for all nineteen original numerical
+profiles and twenty-five analytic controls in direct serial/two-worker modes.
+Every mathematical field and original total/per-region precision request is
+preserved. Each profile receives a further fresh producer-free serial read
+shared by all its configurations; all 136 commands pass. The small tetrahedron
+1.4 Å profile has three fresh repetitions per mode; larger profiles have one
+observation per mode and acquire no general/repeatable scaling claim.
+
+This extends analytic verification, not proposal generation or nineteen-profile
+source-construction/resume admission. S6/S7 pause/recovery retain their earlier
+three-Model source scopes. Four workers, remaining S1/S3/S5, broader S8/P6/P7,
+canonical native #76/#60 and installed/platform #16 keep their gates. Native
+#181/#180/#184/#188 and all older evidence are unchanged. Serial is the default.
+
 ## Checkpoint-size reliability — 2026-11-15
 
 The [storage contract](reference_validator_storage.md) and

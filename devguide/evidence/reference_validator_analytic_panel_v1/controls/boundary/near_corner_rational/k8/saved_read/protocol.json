@@ -1,0 +1,97 @@
+{
+  "schema": "topomt.reference-validator.analytic-panel-read/1",
+  "owner": "uibcdf/topomt#76",
+  "name": "controls/boundary/near_corner_rational/k8",
+  "mode": "shared_serial_saved_read",
+  "cpus": 1,
+  "inputs": {
+    "model": {
+      "path": "devguide/evidence/reference_validator_analytic_panel_v1/inputs/controls/boundary/near_corner_rational/k8/model.json",
+      "sha256": "f218d9d99f27f129278d42d229a112087529941219db1f21996fab1a7d44132e",
+      "original_capsule_member": "controls/boundary/near_corner_rational/k8/model.json"
+    },
+    "certificate": {
+      "path": "devguide/evidence/reference_validator_analytic_panel_v1/inputs/controls/boundary/near_corner_rational/k8/certificate.json",
+      "sha256": "33ce332e2d498e14726a52f4c3dc2e69b3902156c95d4d2b806fbfd1468fe911",
+      "original_capsule_member": "controls/boundary/near_corner_rational/k8/certificate.json"
+    },
+    "reference": {
+      "path": "devguide/evidence/reference_validator_analytic_panel_v1/inputs/controls/boundary/near_corner_rational/k8/reference.json",
+      "sha256": "3253cbe86d5f0d1ed14bf4b845ed1356a7cc485bedd70476c899ea927ee5a8bd",
+      "original_capsule_member": "controls/boundary/near_corner_rational/k8/verification.json"
+    }
+  },
+  "model_sha256": "5953e0b47f79216b3c39aa6b8fcb7bf150210b6af7746129a429b663390db830",
+  "worker_sha256": "aae0563b3c92c3bc1ddee5613d0cbadf162c601ea5fee576c89b3ec3974eb5f4",
+  "source_files": {
+    "devtools/reference_validator/__init__.py": "1faa33c5c83901768107c9c7dc3da61b8877c2c540fcf599e699b9cc47866029",
+    "devtools/reference_validator/__main__.py": "37fece6d4543a38a4f22fe0626f06022635b0b23abb11f3f791161ce14d1f1b9",
+    "devtools/reference_validator/analytic_volume.py": "526911999550261bd518c306ddfa54bb2e85af19f37859bf1e0777f98ee1ca35",
+    "devtools/reference_validator/benchlab_panel.py": "83206ba216c4b908a888fc72b60f9f3afdc4dd5aaf69a3aafdd30a75edc4fe34",
+    "devtools/reference_validator/boundary_volume.py": "d30c93a55446e0211529fda94a37ebf3fd66932e3f47350235ce4e67c621595e",
+    "devtools/reference_validator/box_topology.py": "06ab6fa75ee587ce06976d9544ed2f40b4db54b1c28b9b48493c75b4b54cf91e",
+    "devtools/reference_validator/capture.py": "6b82217adb9239e60b5b0e3da592ea483ec68124e64af6968fb688a0034725ac",
+    "devtools/reference_validator/capture_box_topology.py": "da77941f9aa6eedb2e6ce77294e43681bf71f905b2e44db50ae0a9339186f6ac",
+    "devtools/reference_validator/capture_hull_sterics.py": "0621d794aac3358664e0d055db306d1f9cb0411d5510dbac24dea60dcb128375",
+    "devtools/reference_validator/capture_hulls.py": "fba7f2d34cec48017013f108b6609b864f3fcef68c038860ecc73af0b9893d7d",
+    "devtools/reference_validator/capture_power_cells.py": "2ba762dac5afe7510dd4e68fa7a73a878603b81d5bb1aa790e90dad7045c8a0c",
+    "devtools/reference_validator/capture_resume.py": "878371e30856f4bb21767b1c044819b7627c7e587c520c19c944267c361641c3",
+    "devtools/reference_validator/capture_volume.py": "47865960e965b2d974bbf4c0834b5e5049739dc6521e2d80e87fa3104da287fd",
+    "devtools/reference_validator/center_hull.py": "a67575ca843b74e1a24f0e50ca6b791358c28ba272d09996baeda9f82b23ff62",
+    "devtools/reference_validator/compare.py": "aa7399c9f3827116fe0595d34092c18f300a613f8112df1a87f032617ded5b11",
+    "devtools/reference_validator/contracts.py": "0130410ad41f1fb061b2ed61c988cff3faa4c5a299527867c7e4afdc522f8566",
+    "devtools/reference_validator/edge_tasks.py": "9c555bf84237dd4db4e46a6c3d3b2a39b4623f0221006f916aa4dd36cddf98de",
+    "devtools/reference_validator/edge_volume.py": "effdbaf061dbe85a9816682137eebd455a0395423b8fb2dde1532c106878e247",
+    "devtools/reference_validator/hull_model.py": "3a28e184f4903eab786ed60a9dd5857592b230b670e55b56dafc2ec1eb292aba",
+    "devtools/reference_validator/model.py": "2f6eca8144a8a947216583c83534e86ee210bb2466864844afff766d024e74d0",
+    "devtools/reference_validator/parallel.py": "cce1af7307d5e5cd1b55a342900671f1b8a5a215d19f78f0331afdc0cbc5ba58",
+    "devtools/reference_validator/parallel_runs.py": "14d3296c0031b15ac695adfb3e1ef87a8d4ab69d967f2f824ef6278857e1d626",
+    "devtools/reference_validator/performance.py": "6ab57dba13d915379293c32300d9251cda8cf564f1acd2272ab8ce3df4910cb5",
+    "devtools/reference_validator/performance_receiving.py": "24d590640329ab5b5964662d66b5cd9b5cbe6998f3fddbadaa0e24daf2f6c1f0",
+    "devtools/reference_validator/power_cells.py": "b5c069c4c52d3f8c5c5f6eb2dd49c8066db4c42aa74c2f2287e3f07bf7e5e757",
+    "devtools/reference_validator/power_contracts.py": "3bac982773c16b298da25e4784f70f534e9e5707395f5ef5f264af371a021af4",
+    "devtools/reference_validator/power_runs.py": "416bf17e91607d91f2eaf1e419764354a7fbbdd7f8cc847ffff0fe72301c4638",
+    "devtools/reference_validator/producer.py": "8c362618b0d69f92882f4c393ca0bddc91bec3a0c8a870f851920eaf6f134873",
+    "devtools/reference_validator/receiving.py": "53a60cc37f7104268e1bfd23d6a80ca84f463d0262cce33d41d489ffb465c4f3",
+    "devtools/reference_validator/region_volume.py": "0645cc6fd5169c2898598b6aa49301f1e1ab0de8935b50101a1c1f208de20d5d",
+    "devtools/reference_validator/runs.py": "b60187a2f3f5ebc07c80ee94c1cea3ab230022a2943f708fc4aafc3bb70d0934",
+    "devtools/reference_validator/storage.py": "e46ba8bc48041d2b12202098bdce2e2ff660911f7754868e087104142e60e7c1",
+    "devtools/reference_validator/verify/__init__.py": "6e26f3d19aaa65c392505b7033a667807bdef433a1f165884ebe55b3992e0cde",
+    "devtools/reference_validator/verify/_interval.py": "67455bb06132cf3f15084da8a13a241c854f1062b64a6420cd29ad8e8685daf0",
+    "devtools/reference_validator/verify/analytic_volume.py": "82e7b0a5341d0d140b4f003e79073275a7526415969b1b1392df59e15a009dbc",
+    "devtools/reference_validator/verify/boundary_volume.py": "00eca76095962c3441cd53fa5531615351ba82e628f0e7b8574b277ba9fd9957",
+    "devtools/reference_validator/verify/box_topology.py": "eefacfdaa9f704588bc57ae993a515d24eb85b631e63c9c1ecaf461ff2ee2067",
+    "devtools/reference_validator/verify/center_hull.py": "d8de02cb42b0e69e9eff92680066210db18daf45ed910ede656e49af84002d72",
+    "devtools/reference_validator/verify/context.py": "fb9e7db5dc7a0dc49f8e4a6bd94154068e805bfafbf7690120f818ed906c7be2",
+    "devtools/reference_validator/verify/corner_volume.py": "66e54f381047bda0270d1f048383a106615f0ab9a1f56bdf97b0ad537e638d01",
+    "devtools/reference_validator/verify/edge_math.py": "32f0ae20d3e9dce9bb315cbd989e3b350a79ab4b6666051006016813a9ec92b4",
+    "devtools/reference_validator/verify/edge_progress.py": "279a294900ebabad92852df4602138507cb4bfb938763fa1b220ac47b150d4c0",
+    "devtools/reference_validator/verify/edge_volume.py": "1fea261224d73e31db2909a71c59609afef567733d818e2d8b72f649f51e7ca0",
+    "devtools/reference_validator/verify/geometry.py": "3421e466af59299de7cb88bc15322f06f5b191f9a1d655985b5b8a62c145275f",
+    "devtools/reference_validator/verify/parallel_progress.py": "70c2ad44d8f8f459a233574fbd5f1e42789d1f9499c80b4c1f08f43de99dfb6c",
+    "devtools/reference_validator/verify/polytope.py": "44315369f818ee1cbeb39091785107982cb965f23498c6a4ef7eef7389036c9d",
+    "devtools/reference_validator/verify/power_cells.py": "34b3b050141d248de3497f6a7ee117579b3de8628c6391a52bbaef83ba99619b",
+    "devtools/reference_validator/verify/power_progress.py": "a78720d582b58228344bdc40c9e97850a0c8506dd3bb3342bbc1031955ae263a",
+    "devtools/reference_validator/verify/records.py": "3b612c96112960dad3412e91c62857216f5b7a6310186075f95e9fce2d377491",
+    "devtools/reference_validator/verify/region_volume.py": "7429dc7a765c6e2a9d13e84cd67e69e964fd8ec8ce0bc9639b6d6f42aeff2965",
+    "devtools/reference_validator/volume_request.py": "c261e4049c3de53c5bdfce7ad0702ab476f2b50133ac6341300709c53381c739"
+  },
+  "configurations": [
+    {
+      "protocol": "devguide/evidence/reference_validator_analytic_panel_v1/controls/boundary/near_corner_rational/k8/serial/repeat_0/protocol.json",
+      "sha256": "9b4d33568d85bd7b14837d27ebdc3c04c742440fb2e73ee976fb5b8730e05399",
+      "name": "controls/boundary/near_corner_rational/k8",
+      "mode": "serial",
+      "repeat": 0,
+      "category": "controls"
+    },
+    {
+      "protocol": "devguide/evidence/reference_validator_analytic_panel_v1/controls/boundary/near_corner_rational/k8/parallel2/repeat_0/protocol.json",
+      "sha256": "39df16e5d72adaa62db1af0604ec081551571458fb09ef80c049fb392066b15b",
+      "name": "controls/boundary/near_corner_rational/k8",
+      "mode": "parallel2",
+      "repeat": 0,
+      "category": "controls"
+    }
+  ]
+}

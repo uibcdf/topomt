@@ -143,8 +143,11 @@ system. A faster arithmetic phase does not establish an equal full-workflow
 speedup, and a spawned one-worker workflow is a different baseline from the
 new direct serial default. Report the actual source and all timing scopes.
 
-Four workers, the full parallel nineteen-profile panel, broader S8/P6/P7 and
-remaining S1/S3/S5 work retain their gates. Original S6 receiving and the earlier
+The [later S8 receiving](../evidence/reference_validator_analytic_panel_v1/README.md)
+now covers complete saved-proof verification for all nineteen originals and
+25 controls in serial/two-worker modes, with fresh shared serial reading.
+Source-construction/resume over all nineteen, four workers, broader S8/P6/P7
+and remaining S1/S3/S5 work retain their gates. Original S6 receiving and the earlier
 nineteen-profile serial precision retain their own source snapshots; old source-
 bound checkpoints require their recorded source/runtime. Native #181/#180/#184/
 #188, canonical native receiving #76/#60 and installed/public/platform #16 are

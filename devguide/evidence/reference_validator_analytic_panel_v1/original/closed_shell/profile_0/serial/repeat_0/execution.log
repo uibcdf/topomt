@@ -1,0 +1,6 @@
+{"name": "original/closed_shell/profile_0", "mode": "serial", "completed_pieces": 512}
+{"name": "original/closed_shell/profile_0", "mode": "serial", "completed_pieces": 1024}
+{"name": "original/closed_shell/profile_0", "mode": "serial", "completed_pieces": 1536}
+{"name": "original/closed_shell/profile_0", "mode": "serial", "completed_pieces": 2048}
+{"name": "original/closed_shell/profile_0", "mode": "serial", "completed_pieces": 2189}
+{"name": "original/closed_shell/profile_0", "stage": "solve", "mode": "serial", "wall_seconds": 108.45896969398018, "precision_status": "resolved"}
