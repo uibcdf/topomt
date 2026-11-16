@@ -1,0 +1,95 @@
+{
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "-m",
+    "sphinx",
+    "-b",
+    "html",
+    "-W",
+    "--keep-going",
+    "-j",
+    "1",
+    "-D",
+    "plantuml=/fast_data/home/liliana/miniconda3/envs/topomt-dev/bin/plantuml",
+    "docs",
+    "/tmp/topomt-four-worker-docs-html"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 45,
+  "cpu_hard_seconds": 50,
+  "wall_seconds": 17.027981134015135,
+  "waited_cpu_seconds": 16.994969,
+  "peak_child_rss_kib": 290376,
+  "sampled_group_rss_peak_kib": 386968,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 41644118016,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0019891089759767056,
+      "host": {
+        "available_bytes": 41643859968,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      },
+      "group_rss_kib": 1576,
+      "group_pids": [
+        4
+      ]
+    },
+    {
+      "seconds": 5.003119991044514,
+      "host": {
+        "available_bytes": 41381249024,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      },
+      "group_rss_kib": 269608,
+      "group_pids": [
+        4
+      ]
+    },
+    {
+      "seconds": 10.004066649940796,
+      "host": {
+        "available_bytes": 41235730432,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      },
+      "group_rss_kib": 288728,
+      "group_pids": [
+        4
+      ]
+    },
+    {
+      "seconds": 15.00511742697563,
+      "host": {
+        "available_bytes": 41146757120,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      },
+      "group_rss_kib": 386968,
+      "group_pids": [
+        4,
+        28,
+        30
+      ]
+    }
+  ]
+}

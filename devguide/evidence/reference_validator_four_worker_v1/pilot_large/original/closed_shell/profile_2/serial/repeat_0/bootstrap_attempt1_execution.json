@@ -1,0 +1,52 @@
+{
+  "command": [
+    "python",
+    "-S",
+    "/tmp/topomt-four-worker-worker.py",
+    "solve",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/serial/repeat_0/protocol.json",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/serial/repeat_0/receiving"
+  ],
+  "exit_code": 1,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 300,
+  "cpu_hard_seconds": 330,
+  "wall_seconds": 0.11735332000534981,
+  "waited_cpu_seconds": 0.089899,
+  "peak_child_rss_kib": 19360,
+  "sampled_group_rss_peak_kib": 1936,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 41114460160,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6142400\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5996316\n",
+        "loadavg": "3.83 2.14 1.96 4/1206 3",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0024024840677157044,
+      "host": {
+        "available_bytes": 41114460160,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6142400\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5996316\n",
+        "loadavg": "3.83 2.14 1.96 4/1207 4",
+        "safe": true
+      },
+      "group_rss_kib": 1936,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    }
+  ]
+}

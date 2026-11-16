@@ -51,6 +51,14 @@ verification; generation/resume, four-worker, repeatability and public admission
 retain their separate scopes. Use its exact source/capsule/drivers; repository
 code need not match an older source-bound checkpoint.
 
+The [four-worker pilot](../../devguide/evidence/reference_validator_four_worker_v1/README.md)
+now qualifies selected repeated analytic verification on three original 1.4 Å
+Models and 25 existing controls. Its launcher uses lower scheduling priority,
+explicit one/two/four CPU limits and unchanged memory/time ceilings. Scientific
+results and requests are identical. Four workers remain opt-in at this tested
+scope; tiny inputs are faster in serial. Full construction/resume and the
+nineteen-profile four-worker panel remain separate.
+
 The [resumable process route](../../devguide/DFND/reference_validator_parallel_resume.md)
 adds `parallel_runs.ParallelPowerSession`. It retains independently checked
 source tasks in any completion order, saves exclusive manifest-last bundles and

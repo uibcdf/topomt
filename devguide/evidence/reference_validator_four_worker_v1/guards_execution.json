@@ -1,0 +1,78 @@
+{
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "--receptor=llm",
+    "tests/test_reference_validator_four_worker.py",
+    "tests/test_reference_validator_analytic_panel.py",
+    "tests/test_reference_validator_edge_receiving.py",
+    "tests/test_reference_validator_edge_task_receiving.py",
+    "tests/test_reference_validator_storage_receiving.py",
+    "tests/test_reporting_protocol.py",
+    "tests/test_dfnd_documentation.py"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 45,
+  "cpu_hard_seconds": 50,
+  "wall_seconds": 14.62758113606833,
+  "waited_cpu_seconds": 14.529086,
+  "peak_child_rss_kib": 342016,
+  "sampled_group_rss_peak_kib": 177224,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 41438384128,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0023546910379081964,
+      "host": {
+        "available_bytes": 41438154752,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      },
+      "group_rss_kib": 1828,
+      "group_pids": [
+        4
+      ]
+    },
+    {
+      "seconds": 5.003443674067967,
+      "host": {
+        "available_bytes": 41269645312,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      },
+      "group_rss_kib": 171900,
+      "group_pids": [
+        4
+      ]
+    },
+    {
+      "seconds": 10.004314662073739,
+      "host": {
+        "available_bytes": 41179181056,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143587\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997490\n",
+        "safe": true
+      },
+      "group_rss_kib": 177224,
+      "group_pids": [
+        4
+      ]
+    }
+  ]
+}

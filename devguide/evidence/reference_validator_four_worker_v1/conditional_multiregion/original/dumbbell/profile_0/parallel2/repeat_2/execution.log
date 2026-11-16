@@ -1,0 +1,7 @@
+{"name": "original/dumbbell/profile_0", "mode": "parallel2", "completed_pieces": 512}
+{"name": "original/dumbbell/profile_0", "mode": "parallel2", "completed_pieces": 1024}
+{"name": "original/dumbbell/profile_0", "mode": "parallel2", "completed_pieces": 1536}
+{"name": "original/dumbbell/profile_0", "mode": "parallel2", "completed_pieces": 2048}
+{"name": "original/dumbbell/profile_0", "mode": "parallel2", "completed_pieces": 2560}
+{"name": "original/dumbbell/profile_0", "mode": "parallel2", "completed_pieces": 2962}
+{"name": "original/dumbbell/profile_0", "stage": "solve", "mode": "parallel2", "wall_seconds": 118.88816993194632, "precision_status": "resolved"}

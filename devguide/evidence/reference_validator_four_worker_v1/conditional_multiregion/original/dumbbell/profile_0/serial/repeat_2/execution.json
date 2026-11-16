@@ -1,0 +1,494 @@
+{
+  "command": [
+    "python",
+    "-S",
+    "/tmp/topomt-four-worker-worker.py",
+    "solve",
+    "devguide/evidence/reference_validator_four_worker_v1/conditional_multiregion/original/dumbbell/profile_0/serial/repeat_2/protocol.json",
+    "devguide/evidence/reference_validator_four_worker_v1/conditional_multiregion/original/dumbbell/profile_0/serial/repeat_2/receiving"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 300,
+  "cpu_hard_seconds": 330,
+  "wall_seconds": 130.99418127909303,
+  "waited_cpu_seconds": 130.866658,
+  "peak_child_rss_kib": 54640,
+  "sampled_group_rss_peak_kib": 48288,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 41908609024,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "2.19 2.31 2.48 1/1158 3",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0026293391129001975,
+      "host": {
+        "available_bytes": 41908609024,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "2.19 2.31 2.48 2/1159 4",
+        "safe": true
+      },
+      "group_rss_kib": 4308,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 5.0035048821009696,
+      "host": {
+        "available_bytes": 41908281344,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "2.17 2.30 2.48 2/1150 4",
+        "safe": true
+      },
+      "group_rss_kib": 24724,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 10.004455059068277,
+      "host": {
+        "available_bytes": 41915146240,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "2.16 2.29 2.48 2/1153 4",
+        "safe": true
+      },
+      "group_rss_kib": 24748,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 15.005440814071335,
+      "host": {
+        "available_bytes": 41912512512,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "2.15 2.29 2.47 2/1151 4",
+        "safe": true
+      },
+      "group_rss_kib": 32564,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 20.006359718041494,
+      "host": {
+        "available_bytes": 41912725504,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "2.05 2.27 2.47 2/1151 4",
+        "safe": true
+      },
+      "group_rss_kib": 32616,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 25.007266138098203,
+      "host": {
+        "available_bytes": 41915723776,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.97 2.25 2.46 4/1148 4",
+        "safe": true
+      },
+      "group_rss_kib": 32828,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 30.008340216008946,
+      "host": {
+        "available_bytes": 41907204096,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.89 2.22 2.45 3/1148 4",
+        "safe": true
+      },
+      "group_rss_kib": 32872,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 35.00933796504978,
+      "host": {
+        "available_bytes": 41915031552,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.90 2.22 2.45 3/1147 4",
+        "safe": true
+      },
+      "group_rss_kib": 33020,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 40.01026665302925,
+      "host": {
+        "available_bytes": 41918832640,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.83 2.20 2.44 3/1152 4",
+        "safe": true
+      },
+      "group_rss_kib": 33144,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 45.01121968810912,
+      "host": {
+        "available_bytes": 41918439424,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.84 2.20 2.44 2/1155 4",
+        "safe": true
+      },
+      "group_rss_kib": 33332,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 50.012238520081155,
+      "host": {
+        "available_bytes": 41907126272,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.77 2.18 2.43 3/1157 4",
+        "safe": true
+      },
+      "group_rss_kib": 33412,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 55.013206772040576,
+      "host": {
+        "available_bytes": 41912328192,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.71 2.16 2.42 2/1142 4",
+        "safe": true
+      },
+      "group_rss_kib": 33516,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 60.014267506077886,
+      "host": {
+        "available_bytes": 41909116928,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.65 2.14 2.41 3/1142 4",
+        "safe": true
+      },
+      "group_rss_kib": 33632,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 65.01529820705764,
+      "host": {
+        "available_bytes": 41910960128,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.60 2.12 2.41 3/1147 4",
+        "safe": true
+      },
+      "group_rss_kib": 33780,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 70.01630321610719,
+      "host": {
+        "available_bytes": 41913729024,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.55 2.10 2.40 4/1149 4",
+        "safe": true
+      },
+      "group_rss_kib": 33912,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 75.0172901020851,
+      "host": {
+        "available_bytes": 41913802752,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.67 2.11 2.40 4/1147 4",
+        "safe": true
+      },
+      "group_rss_kib": 33928,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 80.01826549007092,
+      "host": {
+        "available_bytes": 41913417728,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.70 2.11 2.40 2/1146 4",
+        "safe": true
+      },
+      "group_rss_kib": 34200,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 85.01961405505426,
+      "host": {
+        "available_bytes": 41623588864,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.88 2.14 2.41 6/1175 4",
+        "safe": true
+      },
+      "group_rss_kib": 38340,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 90.02060930803418,
+      "host": {
+        "available_bytes": 41802534912,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.89 2.14 2.41 2/1150 4",
+        "safe": true
+      },
+      "group_rss_kib": 38340,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 95.02156148804352,
+      "host": {
+        "available_bytes": 41860231168,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.98 2.16 2.41 2/1157 4",
+        "safe": true
+      },
+      "group_rss_kib": 40608,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 100.02249117405154,
+      "host": {
+        "available_bytes": 41886621696,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.98 2.15 2.41 2/1159 4",
+        "safe": true
+      },
+      "group_rss_kib": 40612,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 105.02349185803905,
+      "host": {
+        "available_bytes": 41896480768,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.90 2.13 2.40 2/1156 4",
+        "safe": true
+      },
+      "group_rss_kib": 44964,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 110.02445712103508,
+      "host": {
+        "available_bytes": 41897656320,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.83 2.12 2.39 3/1152 4",
+        "safe": true
+      },
+      "group_rss_kib": 45976,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 115.02543307410087,
+      "host": {
+        "available_bytes": 41886470144,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.76 2.10 2.38 4/1152 4",
+        "safe": true
+      },
+      "group_rss_kib": 45976,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 120.0263922510203,
+      "host": {
+        "available_bytes": 41895260160,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.70 2.08 2.38 3/1149 4",
+        "safe": true
+      },
+      "group_rss_kib": 45988,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 125.02743506804109,
+      "host": {
+        "available_bytes": 41896263680,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.64 2.06 2.37 2/1151 4",
+        "safe": true
+      },
+      "group_rss_kib": 47008,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    },
+    {
+      "seconds": 130.02839770307764,
+      "host": {
+        "available_bytes": 41894805504,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "1.59 2.04 2.36 2/1152 4",
+        "safe": true
+      },
+      "group_rss_kib": 48288,
+      "group_pids": [
+        4
+      ],
+      "process_niceness": {
+        "4": 10
+      }
+    }
+  ]
+}

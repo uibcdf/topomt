@@ -54,6 +54,29 @@ three-Model source scopes. Four workers, remaining S1/S3/S5, broader S8/P6/P7,
 canonical native #76/#60 and installed/platform #16 keep their gates. Native
 #181/#180/#184/#188 and all older evidence are unchanged. Serial is the default.
 
+## Four-worker analytic assessment — 2026-11-16 UTC
+
+The [bounded pilot](../evidence/reference_validator_four_worker_v1/README.md)
+compares three fresh repetitions per mode on the original tetrahedron,
+closed-shell and dumbbell 1.4 Å Models, in rotated serial/two/four-worker order.
+Twenty-five existing controls also pass with four workers. All 80 scientific
+commands preserve every mathematical field and total/per-region precision
+request, including fresh shared serial reading. Actual large-case task workers
+and sampled niceness 10 are retained; earlier inputs/evidence are unchanged.
+
+The preregistered closed-shell expansion gate passes: four-worker median
+82.919 s vs two-worker 87.453 s (5.18% less elapsed), with separated observed
+ranges. The selected dumbbell extension gives 107.771 vs 119.029 s (9.46%).
+The small tetrahedron is fastest in direct serial. These are three repetitions
+on two larger fixed inputs at lower scheduling priority, not universal scaling
+or proof of zero impact on other users. Serial remains the default; four
+workers are an explicit option at this tested analytic scope after host checks.
+
+This qualifies selected analytic verification, not a full nineteen-profile
+four-worker run, source construction, four-worker failure/resume, native
+#181/#180/#184/#188 correction or broader S8/P6/P7/public/installed admission.
+S1/S3/S5, canonical #76/#60 and full-suite/platform #16 retain their gates.
+
 ### Next executable work under #76
 
 1. Qualify common native receiving in canonical units under #76/#60 before
@@ -67,7 +90,8 @@ canonical native #76/#60 and installed/platform #16 keep their gates. Native
    from the qualified serial baseline: complete cost accounting/invariant
    review, then explicit bounded process failure/resume/equivalence admission.
    The analytic checker now has full original saved-proof serial/two-worker
-   receiving; broader source-construction/resume and four workers remain open. Rust is
+   receiving and selected repeated four-worker analytic controls; broader
+   construction/resume and full four-worker panel remain open. Rust is
    optional and requires a measured justified hotspot; no speed target replaces
    correctness. Keep the prior conservative routes as independently readable
    fallback evidence. No new geometry, protein or provider phase is selected.

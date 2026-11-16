@@ -1,0 +1,36 @@
+[
+  {
+    "aggregate_address_space_bound_bytes": 5368709120,
+    "aggregate_bound_includes_spawn_tracker": true,
+    "aggregate_rss_peak_status": "not_measured",
+    "parent_address_space_bytes": 2147483648,
+    "worker_affinity": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "worker_count": 4,
+    "worker_cpu_scope": "pool budget divided across workers; external command deadline also required",
+    "worker_records": [
+      {
+        "address_space_bytes": 268435456,
+        "cpu_seconds": 0.149255966,
+        "peak_rss_kib": 28000,
+        "pid": 36
+      },
+      {
+        "address_space_bytes": 268435456,
+        "cpu_seconds": 0.154255451,
+        "peak_rss_kib": 28000,
+        "pid": 38
+      },
+      {
+        "address_space_bytes": 268435456,
+        "cpu_seconds": 0.164566772,
+        "peak_rss_kib": 27840,
+        "pid": 33
+      }
+    ]
+  }
+]

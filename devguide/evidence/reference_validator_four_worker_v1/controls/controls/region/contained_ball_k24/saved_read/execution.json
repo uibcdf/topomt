@@ -1,0 +1,52 @@
+{
+  "command": [
+    "/fast_data/home/liliana/miniconda3/envs/molsyssuite@uibcdf_3.14/bin/python",
+    "-S",
+    "/tmp/topomt-four-worker-worker.py",
+    "read",
+    "devguide/evidence/reference_validator_four_worker_v1/controls/controls/region/contained_ball_k24/saved_read/protocol.json",
+    "devguide/evidence/reference_validator_four_worker_v1/controls/controls/region/contained_ball_k24/saved_read/receiving"
+  ],
+  "exit_code": 0,
+  "stop_reason": null,
+  "cpu_affinity": [
+    0
+  ],
+  "address_space_bytes": 2147483648,
+  "cpu_soft_seconds": 300,
+  "cpu_hard_seconds": 330,
+  "wall_seconds": 0.11707192403264344,
+  "waited_cpu_seconds": 0.10173199999999999,
+  "peak_child_rss_kib": 20740,
+  "sampled_group_rss_peak_kib": 4144,
+  "rss_sampling_scope": "5-second process-group samples; summed RSS can double-count shared pages and miss short peaks",
+  "samples": [
+    {
+      "seconds": 0,
+      "host": {
+        "available_bytes": 41762480128,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "2.11 2.09 2.29 1/1176 212",
+        "safe": true
+      }
+    },
+    {
+      "seconds": 0.0025716490345075727,
+      "host": {
+        "available_bytes": 41762480128,
+        "physical_bytes": 64978440192,
+        "pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=6143538\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=5997441\n",
+        "loadavg": "2.11 2.09 2.29 2/1177 213",
+        "safe": true
+      },
+      "group_rss_kib": 4144,
+      "group_pids": [
+        213
+      ],
+      "process_niceness": {
+        "213": 10
+      }
+    }
+  ]
+}

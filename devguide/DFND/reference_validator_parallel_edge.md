@@ -146,8 +146,14 @@ new direct serial default. Report the actual source and all timing scopes.
 The [later S8 receiving](../evidence/reference_validator_analytic_panel_v1/README.md)
 now covers complete saved-proof verification for all nineteen originals and
 25 controls in serial/two-worker modes, with fresh shared serial reading.
-Source-construction/resume over all nineteen, four workers, broader S8/P6/P7
-and remaining S1/S3/S5 work retain their gates. Original S6 receiving and the earlier
+The [subsequent four-worker assessment](../evidence/reference_validator_four_worker_v1/README.md)
+adds three fresh serial/two/four-worker repetitions on tetrahedron, closed-shell
+and dumbbell 1.4 Å Models, plus four-worker receiving of 25 existing controls.
+The pilot launcher uses niceness at least 10, unchanged memory/time ceilings
+and explicit host reserve checks. The repeated larger-case observations support
+only a scoped optional four-worker route; tiny inputs remain faster in serial.
+Full nineteen-profile four-worker receiving, source construction, four-worker
+failure/resume, broader S8/P6/P7 and remaining S1/S3/S5 retain their gates. Original S6 receiving and the earlier
 nineteen-profile serial precision retain their own source snapshots; old source-
 bound checkpoints require their recorded source/runtime. Native #181/#180/#184/
 #188, canonical native receiving #76/#60 and installed/public/platform #16 are

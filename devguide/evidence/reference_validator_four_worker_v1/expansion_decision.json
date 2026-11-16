@@ -1,0 +1,64 @@
+{
+  "owner": "uibcdf/topomt#76",
+  "phase": "pilot_large",
+  "frozen_criterion": {
+    "owner": "uibcdf/topomt#76",
+    "gate_input": "pilot_large",
+    "destination": "conditional_multiregion",
+    "all_mathematical_fields_unchanged": true,
+    "all_requested_precisions_met": true,
+    "median_elapsed_reduction_4_vs_2_minimum": 0.05,
+    "range_separation": "max(T4) < min(T2)",
+    "host_reserve_and_operational_success_required": true,
+    "actual_four_task_workers_on_large_batches_required": true,
+    "otherwise": "Do not execute the conditional multiregion block; retain a negative/inconclusive result, finish controls and report the bounded scope. No full nineteen-profile expansion or new default."
+  },
+  "all_completed_scientific_resource_checks_pass": true,
+  "actual_worker_counts_at_largest_pools": [
+    4,
+    4,
+    4
+  ],
+  "sampled_task_worker_niceness_range": [
+    10,
+    10
+  ],
+  "niceness_gate_pass": true,
+  "bounded_elapsed_seconds": {
+    "serial": [
+      98.44155116402544,
+      95.68631542299408,
+      96.28753123502247
+    ],
+    "parallel2": [
+      89.92061738704797,
+      87.45274282200262,
+      85.90221432701219
+    ],
+    "parallel4": [
+      82.91904653899837,
+      83.19063470989931,
+      78.51214206707664
+    ]
+  },
+  "medians_seconds": {
+    "serial": 96.28753123502247,
+    "parallel2": 87.45274282200262,
+    "parallel4": 82.91904653899837
+  },
+  "elapsed_reduction_4_vs_2": 0.05184167056065847,
+  "max_four_less_than_min_two": true,
+  "execute_conditional_multiregion": true,
+  "input_receipts_sha256": {
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/serial/repeat_0/receiving/receipt.json": "e09589ba8bc565259e7117e29620b041f282ce82e1ba27c9330b8f23c8d2deac",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/parallel2/repeat_0/receiving/receipt.json": "a8428c89a616c02a9601612548d0feaf19fb387b64559792a5b646486441a695",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/parallel4/repeat_0/receiving/receipt.json": "dba8d4dec21a2b45bdfa5d7b89c7bb81c2c2485fafdf609bc7bb9057eedc7ece",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/parallel2/repeat_1/receiving/receipt.json": "d9cda04fbdf69c896be92053831739afcafdf1d5946e9eea5524074de74ab6fc",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/parallel4/repeat_1/receiving/receipt.json": "3199f6e1b75ca553eabfb1724b80740a52207bbb84216827477b19f1023e6194",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/serial/repeat_1/receiving/receipt.json": "560be16749d4a85315c864e4d66cf4cf87bb4548023b7546faad2c9411f249a5",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/parallel4/repeat_2/receiving/receipt.json": "888e4362c300fdaca7dfb6e9d3bb6a9c3d46ccdf2322bed57994310665d664c5",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/serial/repeat_2/receiving/receipt.json": "17569ad7bee23abe34e8f2ddac242666f275636647bdce3e783efc0d1ed26db0",
+    "devguide/evidence/reference_validator_four_worker_v1/pilot_large/original/closed_shell/profile_2/parallel2/repeat_2/receiving/receipt.json": "f5803bfd10de5a98c1b3b71009d3ac6bfa6511e049b3306dcdb982b8d2d0f51b"
+  },
+  "scope": "Three repetitions per mode on one fixed Model, rotating order at lower scheduling priority. Practical expansion gate, not a statistical significance/general scaling claim. A pre-calculation source-path bootstrap failure is retained separately, excluded from successful scientific durations."
+}

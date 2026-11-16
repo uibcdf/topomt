@@ -1,0 +1,7 @@
+{"name": "original/dumbbell/profile_0", "mode": "serial", "completed_pieces": 512}
+{"name": "original/dumbbell/profile_0", "mode": "serial", "completed_pieces": 1024}
+{"name": "original/dumbbell/profile_0", "mode": "serial", "completed_pieces": 1536}
+{"name": "original/dumbbell/profile_0", "mode": "serial", "completed_pieces": 2048}
+{"name": "original/dumbbell/profile_0", "mode": "serial", "completed_pieces": 2560}
+{"name": "original/dumbbell/profile_0", "mode": "serial", "completed_pieces": 2962}
+{"name": "original/dumbbell/profile_0", "stage": "solve", "mode": "serial", "wall_seconds": 130.88570585800335, "precision_status": "resolved"}

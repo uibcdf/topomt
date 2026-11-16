@@ -279,6 +279,50 @@ construction/resume panel, four workers, larger-case repeatability, native DFND
 qualification and public/installed admission keep their gates. Original Models,
 requests, earlier artifacts and native behavior are unchanged.
 
+(reference-validator-four-worker-pilot)=
+
+## Four-worker assessment at unchanged precision — 2026-11-16 UTC
+
+The original tetrahedron, closed shell and dumbbell at 1.4 Å each receive three
+fresh serial/two/four-worker runs, rotating the mode order. Twenty-five existing
+analytic controls also pass with four workers. All **80 scientific commands**
+preserve every mathematical field and original total/per-region request,
+including a further independent serial read per numerical profile.
+
+| Original 1.4 Å profile | Regions | Serial median s (range) | Two-worker median s (range) | Four-worker median s (range) | Four vs two elapsed reduction | Shared further serial read s |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| `regular_tetrahedron` | 1 | 0.268 (0.267–0.317) | 0.518 (0.471–0.523) | 0.468 (0.467–0.517) | 9.62% | 0.217 |
+| `closed_shell` | 1 | 96.288 (95.686–98.442) | 87.453 (85.902–89.921) | 82.919 (78.512–83.191) | 5.18% | 95.838 |
+| `dumbbell` | 3 | 131.596 (130.994–136.045) | 119.029 (118.470–120.812) | 107.771 (105.608–108.927) | 9.46% | 130.793 |
+
+The fixed expansion criterion is decided before the runs: at least 5% less
+median solve time with four than two workers, separated observed ranges and
+unchanged scientific/resource checks on the closed-shell pilot. It passes,
+justifying the selected three-region dumbbell extension. This is an operating
+decision from three repetitions per mode, not a statistical significance test
+or general scaling claim. In the tiny tetrahedron direct serial is faster.
+The further serial read is shared once per profile and is outside solve medians.
+
+All commands run one at a time at lower scheduling priority (niceness at least
+10), with the same 2 GiB parent AS, 300/330 CPU-second and 420 wall-second
+ceilings. Four workers retain 256 MiB each and divide the same 120 CPU-second
+pool budget. Actual large-case four-task-worker execution and sampled niceness
+10 are retained. The 80 commands take **2122.669 bounded wall / 2431.147 waited
+CPU seconds**; peak sampled group RSS is **160.33 MiB**. Five-second samples can
+miss peaks/double-count pages and cannot resolve all tiny-case worker lifetimes.
+Observed headroom is not a reservation or a zero-impact guarantee for others.
+
+On the two larger profiles, median waited CPU is approximately 3.5–4.8% higher
+with four workers than with two. The elapsed reduction and CPU cost describe
+these fixed inputs at the recorded priority, not a general efficiency claim.
+
+The [exact source, gate, observations and capsule](https://github.com/uibcdf/topomt/blob/main/devguide/evidence/reference_validator_four_worker_v1/README.md)
+support an **explicit four-worker option at this tested analytic scope**.
+Serial remains the default. Full nineteen-profile four-worker verification,
+source construction, four-worker failure/resume, broader S8/P6/P7 and native
+DFND/public qualification keep their gates. No input, request, earlier artifact
+or native scientific behavior changes.
+
 ## Earlier range-based face-integration feasibility — 2026-11-15
 
 The validator now reuses genuinely checked in-process topology and updates

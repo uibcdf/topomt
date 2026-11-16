@@ -11,6 +11,29 @@ These identify early P0/P1 tranches of the
 section below records nineteen topology-plus-precision synthetic profiles;
 broader admission and a supported public TopoMT detector remain separate.
 
+## Four-worker analytic assessment — 2026-11-16 UTC
+
+The [bounded pilot](../evidence/reference_validator_four_worker_v1/README.md)
+compares three fresh repetitions per mode on the original tetrahedron,
+closed-shell and dumbbell 1.4 Å Models, in rotated serial/two/four-worker order.
+Twenty-five existing controls also pass with four workers. All 80 scientific
+commands preserve every mathematical field and total/per-region precision
+request, including fresh shared serial reading. Actual large-case task workers
+and sampled niceness 10 are retained; earlier inputs/evidence are unchanged.
+
+The preregistered closed-shell expansion gate passes: four-worker median
+82.919 s vs two-worker 87.453 s (5.18% less elapsed), with separated observed
+ranges. The selected dumbbell extension gives 107.771 vs 119.029 s (9.46%).
+The small tetrahedron is fastest in direct serial. These are three repetitions
+on two larger fixed inputs at lower scheduling priority, not universal scaling
+or proof of zero impact on other users. Serial remains the default; four
+workers are an explicit option at this tested analytic scope after host checks.
+
+This qualifies selected analytic verification, not a full nineteen-profile
+four-worker run, source construction, four-worker failure/resume, native
+#181/#180/#184/#188 correction or broader S8/P6/P7/public/installed admission.
+S1/S3/S5, canonical #76/#60 and full-suite/platform #16 retain their gates.
+
 ## Expanded original verification panel — 2026-11-16 UTC
 
 The [new receiving](../evidence/reference_validator_analytic_panel_v1/README.md)

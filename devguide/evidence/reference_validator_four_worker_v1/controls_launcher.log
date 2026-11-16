@@ -1,0 +1,150 @@
+START controls/boundary/ordinary_1_5/k8 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.46847822796553373, "waited_cpu_seconds": 0.972642, "peak_child_rss_kib": 26512, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_5/k8", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.46847822796553373, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_5/k8 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.1678181269671768, "waited_cpu_seconds": 0.161181, "peak_child_rss_kib": 21096, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_5/k8", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.1678181269671768, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_5/k16 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4678889289498329, "waited_cpu_seconds": 0.9052319999999999, "peak_child_rss_kib": 26528, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_5/k16", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4678889289498329, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_5/k16 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16744499001652002, "waited_cpu_seconds": 0.12207599999999999, "peak_child_rss_kib": 20864, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_5/k16", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16744499001652002, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_5/k24 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.46776277909521013, "waited_cpu_seconds": 0.9154559999999999, "peak_child_rss_kib": 26628, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_5/k24", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.46776277909521013, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_5/k24 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16759971005376428, "waited_cpu_seconds": 0.125306, "peak_child_rss_kib": 20852, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_5/k24", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16759971005376428, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_5/k32 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4175856770016253, "waited_cpu_seconds": 0.883874, "peak_child_rss_kib": 26440, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_5/k32", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4175856770016253, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_5/k32 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.1675065690651536, "waited_cpu_seconds": 0.12246699999999999, "peak_child_rss_kib": 20920, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_5/k32", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.1675065690651536, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_7/k8 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4212186150252819, "waited_cpu_seconds": 0.8428859999999999, "peak_child_rss_kib": 26516, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_7/k8", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4212186150252819, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_7/k8 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16681031102780253, "waited_cpu_seconds": 0.13111699999999998, "peak_child_rss_kib": 20872, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_7/k8", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16681031102780253, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_7/k16 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4178075350355357, "waited_cpu_seconds": 0.850776, "peak_child_rss_kib": 26384, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_7/k16", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4178075350355357, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_7/k16 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16674596909433603, "waited_cpu_seconds": 0.1232, "peak_child_rss_kib": 20844, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_7/k16", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16674596909433603, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_7/k24 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4199195660185069, "waited_cpu_seconds": 0.796402, "peak_child_rss_kib": 26652, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_7/k24", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4199195660185069, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_7/k24 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16748969710897654, "waited_cpu_seconds": 0.13024999999999998, "peak_child_rss_kib": 20876, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_7/k24", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16748969710897654, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_7/k32 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4169265719829127, "waited_cpu_seconds": 0.819081, "peak_child_rss_kib": 26368, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_7/k32", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4169265719829127, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/ordinary_1_7/k32 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16729258396662772, "waited_cpu_seconds": 0.127821, "peak_child_rss_kib": 20788, "stop_reason": null}
+{"name": "controls/boundary/ordinary_1_7/k32", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16729258396662772, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_decimal/k8 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.41800184396561235, "waited_cpu_seconds": 0.8586039999999999, "peak_child_rss_kib": 26848, "stop_reason": null}
+{"name": "controls/boundary/near_corner_decimal/k8", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.41800184396561235, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_decimal/k8 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16706814104691148, "waited_cpu_seconds": 0.14369500000000002, "peak_child_rss_kib": 21004, "stop_reason": null}
+{"name": "controls/boundary/near_corner_decimal/k8", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16706814104691148, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_decimal/k16 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4182733600027859, "waited_cpu_seconds": 0.8663289999999999, "peak_child_rss_kib": 26536, "stop_reason": null}
+{"name": "controls/boundary/near_corner_decimal/k16", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4182733600027859, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_decimal/k16 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16752686793915927, "waited_cpu_seconds": 0.145552, "peak_child_rss_kib": 20836, "stop_reason": null}
+{"name": "controls/boundary/near_corner_decimal/k16", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16752686793915927, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_decimal/k24 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4178221670445055, "waited_cpu_seconds": 0.84987, "peak_child_rss_kib": 26580, "stop_reason": null}
+{"name": "controls/boundary/near_corner_decimal/k24", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4178221670445055, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_decimal/k24 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16743451298680156, "waited_cpu_seconds": 0.13915199999999997, "peak_child_rss_kib": 20836, "stop_reason": null}
+{"name": "controls/boundary/near_corner_decimal/k24", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16743451298680156, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_decimal/k32 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.42025480000302196, "waited_cpu_seconds": 0.8453949999999999, "peak_child_rss_kib": 26572, "stop_reason": null}
+{"name": "controls/boundary/near_corner_decimal/k32", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.42025480000302196, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_decimal/k32 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16723179596010596, "waited_cpu_seconds": 0.143683, "peak_child_rss_kib": 20844, "stop_reason": null}
+{"name": "controls/boundary/near_corner_decimal/k32", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16723179596010596, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_rational/k8 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.46705496998038143, "waited_cpu_seconds": 0.9784019999999999, "peak_child_rss_kib": 26576, "stop_reason": null}
+{"name": "controls/boundary/near_corner_rational/k8", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.46705496998038143, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_rational/k8 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.216492693987675, "waited_cpu_seconds": 0.17435299999999998, "peak_child_rss_kib": 21084, "stop_reason": null}
+{"name": "controls/boundary/near_corner_rational/k8", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.216492693987675, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_rational/k16 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4702677179593593, "waited_cpu_seconds": 0.971617, "peak_child_rss_kib": 26636, "stop_reason": null}
+{"name": "controls/boundary/near_corner_rational/k16", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4702677179593593, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_rational/k16 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.21754825196694583, "waited_cpu_seconds": 0.175862, "peak_child_rss_kib": 21092, "stop_reason": null}
+{"name": "controls/boundary/near_corner_rational/k16", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.21754825196694583, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_rational/k24 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.5215099110500887, "waited_cpu_seconds": 1.004366, "peak_child_rss_kib": 26356, "stop_reason": null}
+{"name": "controls/boundary/near_corner_rational/k24", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.5215099110500887, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_rational/k24 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.21750472695566714, "waited_cpu_seconds": 0.174334, "peak_child_rss_kib": 21056, "stop_reason": null}
+{"name": "controls/boundary/near_corner_rational/k24", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.21750472695566714, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_rational/k32 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.47217516996897757, "waited_cpu_seconds": 0.9511339999999999, "peak_child_rss_kib": 26472, "stop_reason": null}
+{"name": "controls/boundary/near_corner_rational/k32", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.47217516996897757, "precision_status": "resolved", "niceness": 10}
+START controls/boundary/near_corner_rational/k32 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.21702207997441292, "waited_cpu_seconds": 0.17435399999999998, "peak_child_rss_kib": 20784, "stop_reason": null}
+{"name": "controls/boundary/near_corner_rational/k32", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.21702207997441292, "precision_status": "resolved", "niceness": 10}
+START controls/region/contained_ball_k8 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4171287469798699, "waited_cpu_seconds": 0.770825, "peak_child_rss_kib": 26440, "stop_reason": null}
+{"name": "controls/region/contained_ball_k8", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4171287469798699, "precision_status": "resolved", "niceness": 10}
+START controls/region/contained_ball_k8 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.11665211303625256, "waited_cpu_seconds": 0.10452299999999999, "peak_child_rss_kib": 20932, "stop_reason": null}
+{"name": "controls/region/contained_ball_k8", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.11665211303625256, "precision_status": "resolved", "niceness": 10}
+START controls/region/contained_ball_k16 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.41789108607918024, "waited_cpu_seconds": 0.7775839999999999, "peak_child_rss_kib": 26608, "stop_reason": null}
+{"name": "controls/region/contained_ball_k16", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.41789108607918024, "precision_status": "resolved", "niceness": 10}
+START controls/region/contained_ball_k16 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.11668739700689912, "waited_cpu_seconds": 0.103696, "peak_child_rss_kib": 20780, "stop_reason": null}
+{"name": "controls/region/contained_ball_k16", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.11668739700689912, "precision_status": "resolved", "niceness": 10}
+START controls/region/contained_ball_k24 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.37254916003439575, "waited_cpu_seconds": 0.768558, "peak_child_rss_kib": 26100, "stop_reason": null}
+{"name": "controls/region/contained_ball_k24", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.37254916003439575, "precision_status": "resolved", "niceness": 10}
+START controls/region/contained_ball_k24 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.11707192403264344, "waited_cpu_seconds": 0.10173199999999999, "peak_child_rss_kib": 20740, "stop_reason": null}
+{"name": "controls/region/contained_ball_k24", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.11707192403264344, "precision_status": "resolved", "niceness": 10}
+START controls/region/contained_ball_k32 parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.36741148098371923, "waited_cpu_seconds": 0.750783, "peak_child_rss_kib": 26348, "stop_reason": null}
+{"name": "controls/region/contained_ball_k32", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.36741148098371923, "precision_status": "resolved", "niceness": 10}
+START controls/region/contained_ball_k32 shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.11675828008446842, "waited_cpu_seconds": 0.101781, "peak_child_rss_kib": 20976, "stop_reason": null}
+{"name": "controls/region/contained_ball_k32", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.11675828008446842, "precision_status": "resolved", "niceness": 10}
+START controls/region/empty parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.16665780008770525, "waited_cpu_seconds": 0.129896, "peak_child_rss_kib": 24356, "stop_reason": null}
+{"name": "controls/region/empty", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.16665780008770525, "precision_status": "resolved", "niceness": 10}
+START controls/region/empty shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.11655337910633534, "waited_cpu_seconds": 0.082854, "peak_child_rss_kib": 20832, "stop_reason": null}
+{"name": "controls/region/empty", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.11655337910633534, "precision_status": "resolved", "niceness": 10}
+START controls/region/free parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.16591757198330015, "waited_cpu_seconds": 0.129203, "peak_child_rss_kib": 24436, "stop_reason": null}
+{"name": "controls/region/free", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.16591757198330015, "precision_status": "resolved", "niceness": 10}
+START controls/region/free shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.1171789049403742, "waited_cpu_seconds": 0.08452899999999999, "peak_child_rss_kib": 20788, "stop_reason": null}
+{"name": "controls/region/free", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.1171789049403742, "precision_status": "resolved", "niceness": 10}
+START controls/region/eight_corners parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4167517010355368, "waited_cpu_seconds": 0.8139029999999999, "peak_child_rss_kib": 26436, "stop_reason": null}
+{"name": "controls/region/eight_corners", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4167517010355368, "precision_status": "resolved", "niceness": 10}
+START controls/region/eight_corners shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16713044804055244, "waited_cpu_seconds": 0.12578999999999999, "peak_child_rss_kib": 20972, "stop_reason": null}
+{"name": "controls/region/eight_corners", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16713044804055244, "precision_status": "resolved", "niceness": 10}
+START controls/region/tiny_eight_corners parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.4173252710606903, "waited_cpu_seconds": 0.88725, "peak_child_rss_kib": 26364, "stop_reason": null}
+{"name": "controls/region/tiny_eight_corners", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.4173252710606903, "precision_status": "resolved", "niceness": 10}
+START controls/region/tiny_eight_corners shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.16689426300581545, "waited_cpu_seconds": 0.14406599999999997, "peak_child_rss_kib": 21032, "stop_reason": null}
+{"name": "controls/region/tiny_eight_corners", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.16689426300581545, "precision_status": "resolved", "niceness": 10}
+START controls/region/asymmetric_three_regions parallel4 0 solve
+{"exit_code": 0, "wall_seconds": 0.46745738689787686, "waited_cpu_seconds": 0.91015, "peak_child_rss_kib": 26600, "stop_reason": null}
+{"name": "controls/region/asymmetric_three_regions", "mode": "parallel4", "repeat": 0, "stage": "solve", "wall_seconds": 0.46745738689787686, "precision_status": "resolved", "niceness": 10}
+START controls/region/asymmetric_three_regions shared_serial_saved_read None read
+{"exit_code": 0, "wall_seconds": 0.21721027803141624, "waited_cpu_seconds": 0.162772, "peak_child_rss_kib": 21008, "stop_reason": null}
+{"name": "controls/region/asymmetric_three_regions", "mode": "shared_serial_saved_read", "repeat": null, "stage": "read", "wall_seconds": 0.21721027803141624, "precision_status": "resolved", "niceness": 10}

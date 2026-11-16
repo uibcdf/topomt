@@ -1,0 +1,2 @@
+{"name": "controls/region/asymmetric_three_regions", "mode": "parallel4", "completed_pieces": 56}
+{"name": "controls/region/asymmetric_three_regions", "stage": "solve", "mode": "parallel4", "wall_seconds": 0.331555565004237, "precision_status": "resolved"}

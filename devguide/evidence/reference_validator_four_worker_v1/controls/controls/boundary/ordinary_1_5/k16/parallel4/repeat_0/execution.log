@@ -1,0 +1,2 @@
+{"name": "controls/boundary/ordinary_1_5/k16", "mode": "parallel4", "completed_pieces": 48}
+{"name": "controls/boundary/ordinary_1_5/k16", "stage": "solve", "mode": "parallel4", "wall_seconds": 0.31929010699968785, "precision_status": "resolved"}

@@ -1,0 +1,6 @@
+{"name": "original/closed_shell/profile_2", "mode": "parallel4", "completed_pieces": 512}
+{"name": "original/closed_shell/profile_2", "mode": "parallel4", "completed_pieces": 1024}
+{"name": "original/closed_shell/profile_2", "mode": "parallel4", "completed_pieces": 1536}
+{"name": "original/closed_shell/profile_2", "mode": "parallel4", "completed_pieces": 2048}
+{"name": "original/closed_shell/profile_2", "mode": "parallel4", "completed_pieces": 2144}
+{"name": "original/closed_shell/profile_2", "stage": "solve", "mode": "parallel4", "wall_seconds": 78.35490340203978, "precision_status": "resolved"}

@@ -1,0 +1,2 @@
+{"name": "controls/boundary/near_corner_decimal/k8", "mode": "parallel4", "completed_pieces": 48}
+{"name": "controls/boundary/near_corner_decimal/k8", "stage": "solve", "mode": "parallel4", "wall_seconds": 0.2951342751039192, "precision_status": "resolved"}

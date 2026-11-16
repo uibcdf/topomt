@@ -12,6 +12,29 @@ Correctness, complete topology and certified error retain priority over speed.
 The [A--F workplan](reference_validator_improvement_workplan.md) owns the active
 scientific sequence; this document supplies its detailed performance follow-up.
 
+### Four-worker analytic assessment — 2026-11-16 UTC
+
+The [bounded pilot](../evidence/reference_validator_four_worker_v1/README.md)
+compares three fresh repetitions per mode on the original tetrahedron,
+closed-shell and dumbbell 1.4 Å Models, in rotated serial/two/four-worker order.
+Twenty-five existing controls also pass with four workers. All 80 scientific
+commands preserve every mathematical field and total/per-region precision
+request, including fresh shared serial reading. Actual large-case task workers
+and sampled niceness 10 are retained; earlier inputs/evidence are unchanged.
+
+The preregistered closed-shell expansion gate passes: four-worker median
+82.919 s vs two-worker 87.453 s (5.18% less elapsed), with separated observed
+ranges. The selected dumbbell extension gives 107.771 vs 119.029 s (9.46%).
+The small tetrahedron is fastest in direct serial. These are three repetitions
+on two larger fixed inputs at lower scheduling priority, not universal scaling
+or proof of zero impact on other users. Serial remains the default; four
+workers are an explicit option at this tested analytic scope after host checks.
+
+This qualifies selected analytic verification, not a full nineteen-profile
+four-worker run, source construction, four-worker failure/resume, native
+#181/#180/#184/#188 correction or broader S8/P6/P7/public/installed admission.
+S1/S3/S5, canonical #76/#60 and full-suite/platform #16 retain their gates.
+
 ### Expanded original verification panel — 2026-11-16 UTC
 
 The [new receiving](../evidence/reference_validator_analytic_panel_v1/README.md)
@@ -25,7 +48,8 @@ observation per mode and acquire no general/repeatable scaling claim.
 
 This extends analytic verification, not proposal generation or nineteen-profile
 source-construction/resume admission. S6/S7 pause/recovery retain their earlier
-three-Model source scopes. Four workers, remaining S1/S3/S5, broader S8/P6/P7,
+three-Model source scopes. The later four-worker pilot above keeps its selected
+analytic scope; full four-worker receiving, remaining S1/S3/S5, broader S8/P6/P7,
 canonical native #76/#60 and installed/platform #16 keep their gates. Native
 #181/#180/#184/#188 and all older evidence are unchanged. Serial is the default.
 
@@ -170,7 +194,7 @@ deferred with its measured reason and revisit condition in #76.
 | S5 | Measured exact geometry acceleration, optionally Rust | S1--S4 serial gates | Partial: denominator control and measured integer dyadic atan; optional Rust deferred |
 | S6 | Bounded parallel power-cell construction/checking | Qualified serial route; S1/S2 | Delivered for controlled failures/resume and three original one/two-worker Models; full parallel panel/four workers separate |
 | S7 | Bounded parallel integration with verified ownership | S4/S6 | Delivered: canonical analytic frontier and selected failure/resume controls; later saved-proof verification covers 19 originals/25 controls in serial/two-worker modes; wider construction/resume separate |
-| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: all 19 original saved proofs/25 controls in serial/two-worker modes, fresh shared reading and storage reliability delivered; broader construction/resume, repeatability and public gates open |
+| S8 | End-to-end qualification, evidence and operating guide | Selected preceding stages | Partial: 19 original saved proofs in serial/two-worker modes; selected repeated four-worker analytic pilot/controls, fresh reading and storage reliability delivered; broader construction/resume/panel and public gates open |
 
 ### S1 — measure the actual work and freeze comparisons
 
@@ -482,7 +506,9 @@ one task at a time, consider lower scheduling priority, measure whole-workflow
 benefit and return to two/one workers if contention or pressure appears. The
 observed larger-case two-worker solve ratios are only 1.113–1.181, with one
 observation per configuration; serial geometry/checking limits the likely gain.
-No four-worker run is qualified by this record. Runtime safety controls retain
+At that checkpoint no four-worker run was qualified. The later bounded analytic
+pilot above now qualifies its selected inputs, leaving construction/resume and
+full nineteen-profile four-worker receiving separate. Runtime controls retain
 the 20%/minimum RAM reserve. Raising an external ceiling alone cannot bypass the
 executor's explicit current <=300 CPU-second/<=2 GiB parent contract; changing
 that contract requires its own tests and receiving.

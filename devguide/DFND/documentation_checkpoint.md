@@ -350,3 +350,14 @@ that scope from source construction, paused recovery, larger-case repeatability
 and public/installed qualification. DFND operators, units, interpretation and
 derivations are unchanged; the worked-example regression remains applicable.
 Local strict rendering is separate from hosted publication.
+
+## Four-worker pilot review — 2026-11-16 UTC
+
+The [bounded analytic assessment](../evidence/reference_validator_four_worker_v1/README.md)
+adds actual repeated serial/two/four-worker observations and lower-priority
+resource receiving. The validation chapter/report distinguish optional measured
+benefit on two larger profiles from tiny-case overhead, general scaling and
+full construction/resume/public admission. DFND operators, physical units,
+derivations and interpretation are unchanged; the worked-example regression
+remains in the selected tests. Rendering is checked locally, separately from
+hosted publication.

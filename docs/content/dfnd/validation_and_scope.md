@@ -89,6 +89,14 @@ its three-Model scope. These qualify execution routes without changing physical
 interpretation or native DFND policy. Direct serial remains the default; broader
 source-construction/resume and public admission stay separate.
 
+A later {ref}`four-worker pilot <reference-validator-four-worker-pilot>` repeats
+three original 1.4 Å profiles in serial/two/four-worker modes and receives
+25 existing controls with four workers. All intervals and requests are
+unchanged. The larger profiles show a modest measured benefit; the tiny
+tetrahedron remains faster in serial. This is an explicit bounded developer
+option after host checks, not a new default, physical interpretation or full
+four-worker molecular/public qualification.
+
 ## Source deliveries and remaining scientific/public boundaries
 
 Keep completed bounded deliveries distinct from their broader follow-up:

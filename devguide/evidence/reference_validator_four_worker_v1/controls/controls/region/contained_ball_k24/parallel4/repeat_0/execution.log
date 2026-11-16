@@ -1,0 +1,2 @@
+{"name": "controls/region/contained_ball_k24", "mode": "parallel4", "completed_pieces": 12}
+{"name": "controls/region/contained_ball_k24", "stage": "solve", "mode": "parallel4", "wall_seconds": 0.26047478697728366, "precision_status": "resolved"}
