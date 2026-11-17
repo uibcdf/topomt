@@ -9,12 +9,8 @@ and any nested `AGENTS.md`. Local instructions may refine them; deviations
 require the documented policy exception process.
 
 The synchronized guide is owned by `uibcdf/molsyssuite`. It includes the
-[reusable-tool ownership rules](MOLSYSSUITE_GUIDE.md#modular-reusable-tools).
-
-## Durable working instructions
-
-Follow the common
-[working-instruction rules](MOLSYSSUITE_GUIDE.md#durable-working-instructions).
+[reusable-tool ownership rules](MOLSYSSUITE_GUIDE.md#modular-reusable-tools)
+and [working-instruction rules](MOLSYSSUITE_GUIDE.md#durable-working-instructions).
 For work under `devguide/`, also read `devguide/AGENTS.md` and its local
 reporting protocol. Keep repository-specific instructions below.
 

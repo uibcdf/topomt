@@ -266,8 +266,8 @@ protocol.
 
 Agents must obtain prior explicit permission from **Diego Prada Gracia** or
 **Liliana Marisol Moreno Vargas** before creating or publishing issues or pull
-requests outside MolI's scope or in repositories not owned by us, in particular
-outside `github.com/uibcdf`. A remote draft PR is also an external write.
+requests in third-party repositories outside `github.com/uibcdf`.
+A remote draft PR is also an external write.
 Prepare a reviewable local/internal report or patch identifying the destination,
 action and material to disclose; without permission, retain it internally and
 hand it to the human. Read-only research and local preparation remain possible.
@@ -276,9 +276,9 @@ Generic bug-reporting duties, autonomy, credentials, principal-maintainer
 supervision and internal direct-push permission do not grant external publication
 authority. Existing explicit permission remains valid for the same repository,
 action and content scope; an expansion needs permission. Do not bypass the rule
-through a fork, another agent, account, tool or automation. Internal UIBCDF work
-retains its normal ownership and authorization rules; namespace membership alone
-is not blanket write authority.
+through a fork, another agent, account, tool or automation. Internal UIBCDF
+issues and PRs within the authorized task do not require this extra publication
+approval; owner review and normal contribution rules still apply.
 
 Follow the [external-publication authorization rule](https://github.com/uibcdf/molsyssuite/blob/main/devguide/cross_component_feedback.md#agents-external-publication-authorization),
 adopted for members in [MolSysSuite #159](https://github.com/uibcdf/molsyssuite/issues/159)
@@ -334,14 +334,15 @@ own triage and priority, while the discovering contributor owns a clear evidence
 A local workaround may unblock work, but it must name the provider issue and its removal
 condition. Do not silently fork sibling functionality.
 
-For a fix in another owner's repository, use its issue for a nonurgent need
-without a ready fix, or submit a concrete fix as a linked pull request for owner
-review. For urgent work by or directly supervised by Diego (`dprada`) or Liliana
-(`LMMV`), ask which route to use; direct commit and push require their explicit
-authorization. Authorization already given for the same work remains valid
-within its scope; do not request it again for every commit. Other contributors
-do not inherit it. Owner-local development and the accepted internal-maintainer
-direct-push/CI routes retain their own rules. Follow the
+In the repository currently owning the work, use its normal internal-maintainer
+direct-push and CI route. For changes to another UIBCDF repository, open or
+update its owning issue when there is no ready fix, or submit a concrete fix as
+a linked PR for owner review. Do not add a publication-permission question for
+that ordinary internal issue/PR route or pause to request a direct-push exception.
+Mandatory prior explicit permission applies to third-party issue/PR publication
+outside `github.com/uibcdf`. Existing scoped authorization, confidentiality and
+owner review retain their authority; this grants no cross-owner merge permission.
+Follow the
 [cross-repository contribution route](https://github.com/uibcdf/molsyssuite/blob/main/devguide/cross_component_feedback.md#contributing-a-fix-to-another-repository)
 for applicability and bounded exceptions.
 
